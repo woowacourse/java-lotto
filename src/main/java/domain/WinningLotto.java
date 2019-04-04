@@ -9,6 +9,7 @@ import java.util.Objects;
  */
 public class WinningLotto {
     private final Lotto lotto;
+<<<<<<< HEAD
     private final Number bonusNumber;
 
     private WinningLotto(Lotto lotto, Number bonusNumber) {
