@@ -5,11 +5,12 @@ import java.util.List;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
-    List<LottoNumber> lotto;
 
-    public Lotto(List<LottoNumber> lotto) {
-        validLotto(lotto);
-        this.lotto = lotto;
+    private List<LottoNumber> lottoNumbers;
+
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validLotto(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     private void validLotto(List<LottoNumber> lotto) {
@@ -27,5 +28,9 @@ public class Lotto {
         if (lotto.size() != new HashSet<>(lotto).size()){
             throw new InvalidLottoException("로또에 중복되는 숫자가 있습니다.");
         }
+    }
+
+    public boolean match(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 }
