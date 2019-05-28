@@ -28,6 +28,10 @@ public class PurchaseLotto {
         return (price % ONE_LOTTO_PRICE == 0) && (price >= ONE_LOTTO_PRICE);
     }
 
+    public int numberOfLottos() {
+        return lottos.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
