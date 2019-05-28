@@ -15,4 +15,9 @@ public class MoneyTest {
     void 구매_개수_확인() {
         assertThat(10).isEqualTo(Money.from(10000).getCountOfPurchase());
     }
+
+    @Test
+    void 천원_이하_입력() {
+        assertThrows(IllegalArgumentException.class, () -> Money.from(0));
+    }
 }

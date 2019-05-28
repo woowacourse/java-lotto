@@ -19,7 +19,7 @@ public class Money {
     }
 
     private static void validate(final long money) {
-        if (money % PRICE_PER_LOTTO != 0) {
+        if (money % PRICE_PER_LOTTO != 0 || money < PRICE_PER_LOTTO) {
             throw new IllegalArgumentException("로또 구입 금액은" + PRICE_PER_LOTTO + "단위만 입력 가능합니다.");
         }
     }
