@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class LottoMaker {
     private static final int START = 0;
@@ -21,10 +20,10 @@ public class LottoMaker {
 
     public static List<Integer> generator() {
         mixNumbers();
-        return numbers.subList(START, LOTTO_SIZE - 1);
+        return new ArrayList<>(numbers.subList(START, LOTTO_SIZE));
     }
 
     private static void mixNumbers() {
-        Collections.shuffle(numbers, new Random());
+        Collections.shuffle(numbers);
     }
 }
