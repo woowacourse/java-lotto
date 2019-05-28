@@ -1,16 +1,27 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class Lotto {
     private List<Integer> lottoNumbers;
 
     private Lotto(List<Integer> lottoNumbers) {
+        checkLottoNumberCount(lottoNumbers);
+        checkDuplicateNumber(lottoNumbers);
         sortAscending(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void checkDuplicateNumber(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
+            throw new IllegalArgumentException("중복 되는 번호가 존재합니다.");
+        }
+    }
+
+    private void checkLottoNumberCount(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호가 6개가 아닙니다.");
+        }
     }
 
     private void sortAscending(List<Integer> lottoNumbers) {
