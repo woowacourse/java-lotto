@@ -39,7 +39,10 @@ public class ConsoleInputView {
         try {
             Scanner scanner = new Scanner(System.in);
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            return new WinningLotto(new HashSet<>(InputUtil.splitByComma(scanner.nextLine())));
+            String winningNumberStr = scanner.nextLine();
+            System.out.println("보너스 볼을 입력해 주세요.");
+            String bonusStr = scanner.nextLine();
+            return new WinningLotto(new HashSet<>(InputUtil.splitByComma(winningNumberStr)), Integer.valueOf(bonusStr));
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력입니다.");
             return null;

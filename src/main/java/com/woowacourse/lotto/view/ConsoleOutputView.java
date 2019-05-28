@@ -26,12 +26,16 @@ public class ConsoleOutputView {
         printAggregationItem(aggregator, LottoResult.FIFTH);
         printAggregationItem(aggregator, LottoResult.FOURTH);
         printAggregationItem(aggregator, LottoResult.THIRD);
+        printAggregationItem(aggregator, LottoResult.SECOND);
         printAggregationItem(aggregator, LottoResult.FIRST);
         System.out.println(String.format("총 수익률은 %.0f%%입니다.", aggregator.calculateEarningRate(Lotto.UNIT_PRICE) * 100));
     }
 
     private static void printAggregationItem(WinningAggregator aggregator, LottoResult resultToPrint) {
-        System.out.println(String.format("%d개 일치 (%d원)- %d개",
-            resultToPrint.getMatchCount(), resultToPrint.getPrizeMoney(), aggregator.getResultCount(resultToPrint)));
+        System.out.println(String.format("%d개 일치%s(%d원)- %d개",
+            resultToPrint.getMatchCount(),
+            resultToPrint.isUseBonus() ? ", 보너스 볼 일치" : " ",
+            resultToPrint.getPrizeMoney(),
+            aggregator.getResultCount(resultToPrint)));
     }
 }

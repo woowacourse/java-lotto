@@ -33,7 +33,7 @@ public class LottoTest {
 
     @Test
     void createWithOutOfRange() {
-        Set<Integer> nums = new HashSet<>(Arrays.asList(-1, 2 , 25, 32, 44, 42));
+        Set<Integer> nums = new HashSet<>(Arrays.asList(-1, 2, 25, 32, 44, 42));
         assertThrows(IllegalArgumentException.class, () -> new Lotto(nums));
     }
 

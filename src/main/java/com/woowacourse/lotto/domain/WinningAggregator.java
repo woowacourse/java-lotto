@@ -23,7 +23,7 @@ public class WinningAggregator {
             .mapToInt(k -> k.getPrizeMoney() * results.get(k))
             .sum();
 
-        return prizeMoneySum / (double)(totalLottoCount * unitPrice);
+        return prizeMoneySum / (double) (totalLottoCount * unitPrice);
     }
 
     public int getResultCount(LottoResult result) {
