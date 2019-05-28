@@ -27,7 +27,7 @@
 - winning numbers, bonus ball, lottos -> winning statistics
     - ~~class WinningLotto~~
         - ~~validate bonus ball is not in lotto numbers~~
-    - **enum Rank**
+    - ~~enum Rank~~
     - class WinningStatistics
 - create a user defined lotto
 
