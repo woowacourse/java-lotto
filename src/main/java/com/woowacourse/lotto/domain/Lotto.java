@@ -1,9 +1,11 @@
 package com.woowacourse.lotto.domain;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    public static final int UNIT_PRICE = 1000;
     public static final int LOTTO_NUMS = 6;
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
@@ -27,6 +29,10 @@ public class Lotto {
 
     public boolean contains(int n) {
         return nums.contains(n);
+    }
+
+    public void forEachNums(Consumer<Integer> consumer) {
+        nums.forEach(consumer);
     }
 
     @Override
