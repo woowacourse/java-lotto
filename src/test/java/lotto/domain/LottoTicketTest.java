@@ -34,18 +34,4 @@ public class LottoTicketTest {
             LottoTicket.create(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         });
     }
-
-    @Test
-    void 로또번호_범위_벗어남1() {
-        assertThrows(InvalidLottoTicketException.class, () -> {
-            LottoTicket.create(Arrays.asList(0, 2, 3, 4, 5, 6));
-        });
-    }
-
-    @Test
-    void 로또번호_범위_벗어남2() {
-        assertThrows(InvalidLottoTicketException.class, () -> {
-            LottoTicket.create(Arrays.asList(1, 2, 3, 4, 5, 46));
-        });
-    }
 }

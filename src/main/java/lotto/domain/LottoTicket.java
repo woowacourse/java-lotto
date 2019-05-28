@@ -1,41 +1,37 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final int LOTTO_SIZE = 6;
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
 
-    private final Set<Integer> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> numbers) {
-        checkRange(numbers);
+    public LottoTicket(List<LottoNumber> numbers) {
         lottoNumbers = Collections.unmodifiableSet(new HashSet<>(numbers));
         checkDuplicate(numbers, lottoNumbers);
         checkLottoSize(lottoNumbers);
     }
 
-    private void checkRange(List<Integer> numbers) {
-        if (numbers.stream().filter(x -> x < MIN_LOTTO_NUMBER || x > MAX_LOTTO_NUMBER).count() != 0) {
-            throw new InvalidLottoTicketException("로또 번호의 범위에 벗어납니다.");
-        }
-    }
-
-    private void checkDuplicate(List<Integer> numbers, Set<Integer> lottoNumbers) {
+    private void checkDuplicate(List<LottoNumber> numbers, Set<LottoNumber> lottoNumbers) {
         if (numbers.size() != lottoNumbers.size()) {
             throw new InvalidLottoTicketException("로또 번호는 중복이 불가능합니다.");
         }
     }
 
-    private void checkLottoSize(Set<Integer> lottoNumbers) {
+    private void checkLottoSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new InvalidLottoTicketException("로또는 6개의 숫자로 구성되어야합니다.");
         }
     }
 
     public static LottoTicket create(List<Integer> numbers) {
-        return new LottoTicket(numbers);
+        return new LottoTicket(
+                numbers.stream()
+                .map(x -> new LottoNumber(x))
+                .collect(Collectors.toList())
+        );
     }
 
     @Override
