@@ -21,7 +21,9 @@
         - ~~is multiple of~~
         - ~~divide by~~
     - **class LottoVendingMachine**
-        - **money % LOTTO_PRICE == 0**
+        - ~~money % LOTTO_PRICE == 0~~
+        - ~~get random lottos given money~~
+        - **get custom lottos given numbers**
 - winning numbers, lottos -> winning statistics
 - winning numbers, bonus ball, lottos -> winning statistics
 - create a user defined lotto
