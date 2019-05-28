@@ -1,2 +1,11 @@
 # java-lotto
-로또 미션 진행을 위한 저장소
+## Step 1. Automatically Generate Lotto Games
+### Function Requirements
+1. get purchase amount from User and generate Lotto Games
+
+### TODO
+1. get purchase amount from User [View]
+    - purchase amount should be 1000 won per a Lotto
+2. generate Lotto Games [Domain]
+3. get last week winning number [View]
+4. show winning statics [View]
