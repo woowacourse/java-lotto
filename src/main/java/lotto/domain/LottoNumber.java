@@ -1,0 +1,52 @@
+package lotto.domain;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+public class LottoNumber {
+    private static final int MIN_BOUNDARY = 1;
+    private static final int MAX_BOUNDARY = 45;
+
+    private static final Map<Integer, LottoNumber> creators = new HashMap<>();
+
+    static {
+        for (int i = MIN_BOUNDARY; i <= MAX_BOUNDARY; i++) {
+            creators.put(i, new LottoNumber(i));
+        }
+    }
+
+    private int number;
+
+    private LottoNumber(int number) {
+        checkLottoNumber(number);
+        this.number = number;
+    }
+
+    private void checkLottoNumber(int number) {
+        if (number < MIN_BOUNDARY || number > MAX_BOUNDARY) {
+            throw new IllegalArgumentException("범위를 벗어났습니다.");
+        }
+    }
+
+    public static LottoNumber getNumber(int number) {
+        if (Objects.isNull(creators.get(number))) {
+            throw new NullPointerException();
+        }
+
+        return creators.get(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+}
