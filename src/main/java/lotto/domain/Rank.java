@@ -7,6 +7,7 @@ public enum Rank {
     THIRD(5, 1_500_000),
     FIRST(6, 2_000_000_000);
 
+    private static final String INVALID_RANGE = "는 유효하지 않은 값입니다.";
     private static final int WINNING_MIN_COUNT = 3;
 
     private int matchCount;
@@ -36,7 +37,7 @@ public enum Rank {
             }
         }
 
-        throw new IllegalArgumentException(matchCount + "는 유효하지 않은 값입니다.");
+        throw new IllegalArgumentException(matchCount + INVALID_RANGE);
     }
 
     private boolean matchCount(int matchCount) {

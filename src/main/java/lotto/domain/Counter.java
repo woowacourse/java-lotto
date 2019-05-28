@@ -1,10 +1,12 @@
 package lotto.domain;
 
 public class Counter {
+    private static final int INIT_STATE = 0;
+
     private int counter;
 
     private Counter() {
-        this(0);
+        this(INIT_STATE);
     }
 
     private Counter(int counter) {

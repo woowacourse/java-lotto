@@ -9,7 +9,9 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoApplication {
-    public static void main(String[] args){
+    private static final String NUMBER_FORMAT_EXCEPTION = "숫자로 입력해주세요";
+
+    public static void main(String[] args) {
         GameCounts gameCounts = getGameCounts();
         LottoGames lottoGames = getLottoGames(gameCounts);
         OutputView.lottoList(lottoGames);
@@ -24,7 +26,7 @@ public class LottoApplication {
             System.out.println(e.getMessage());
             return getGameCounts();
         } catch (NumberFormatException e) {
-            System.out.println("숫자로 입력해주세요");
+            System.out.println(NUMBER_FORMAT_EXCEPTION);
             return getGameCounts();
         }
     }

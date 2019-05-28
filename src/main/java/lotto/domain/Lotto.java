@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto implements Iterable<LottoNumber> {
+    private static final CharSequence JOINING_DELIMITER = ", ";
+
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
@@ -18,7 +20,7 @@ public class Lotto implements Iterable<LottoNumber> {
     public String getLotto() {
         return lotto.stream()
                 .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(JOINING_DELIMITER));
     }
 
     @Override
