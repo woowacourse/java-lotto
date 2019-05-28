@@ -19,8 +19,8 @@ public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         Money money = Money.from(inputView.inputMoney());
         int countOfManual = inputView.inputCountOfManual();
+        validateCountOfManual(money, countOfManual);
         List<Lotto> userLottos = inputManualLotto(countOfManual);
-
         addAutoLotto(money, countOfManual, userLottos);
         outputView.printLottos(userLottos, countOfManual, money.getCountOfPurchase());
 
@@ -29,7 +29,12 @@ public class ConsoleUILottoApplication {
 
         outputView.printResult(winPrize);
         outputView.printRateOfProfit(money, winPrize);
+    }
 
+    private static void validateCountOfManual(final Money money, final int countOfManual) {
+        if (countOfManual>money.getCountOfPurchase()){
+            throw new IllegalArgumentException("구입 금액 초과");
+        }
     }
 
     private static List<Lotto> inputManualLotto(final int countOfManual) {

@@ -14,7 +14,8 @@ public class OutputConsoleView implements OutputView {
     @Override
     public void printLottos(final List<Lotto> lottos, int countOfManual, long countOfPurchase) {
         StringBuilder sb = new StringBuilder();
-        sb.append("수동으로 " + countOfManual + "장, 자동으로 " + countOfPurchase + "개를 구매했습니다.").append(NEW_LINE);
+        long countOfAuto = countOfPurchase - countOfManual;
+        sb.append("수동으로 " + countOfManual + "장, 자동으로 " + countOfAuto + "개를 구매했습니다.").append(NEW_LINE);
         for (Lotto lotto : lottos) {
             sb.append(lotto).append(NEW_LINE);
         }
