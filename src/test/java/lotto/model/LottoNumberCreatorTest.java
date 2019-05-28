@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class PurchasedLottoNumberCreatorTest {
+public class LottoNumberCreatorTest {
         @Test
         void 로또_숫자_범위_검사_0() {
                 assertThrows(InvalidLottoNumberException.class, () -> {
