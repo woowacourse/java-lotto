@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class Counter {
-    private final int counter;
+    private int counter;
 
     private Counter() {
         this(0);
@@ -15,7 +15,12 @@ public class Counter {
         return new Counter();
     }
 
-    public static Counter increase(Counter counter) {
-        return new Counter(counter.counter + 1);
+    public Counter increase() {
+        return new Counter(this.counter + 1);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(counter);
     }
 }

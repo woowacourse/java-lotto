@@ -14,7 +14,7 @@ public class LottoApplication {
         LottoGames lottoGames = getLottoGames(gameCounts);
         OutputView.lottoList(lottoGames);
         WinLotto winLotto = getWinLotto();
-        OutputView.winList(lottoGames);
+        OutputView.winList(lottoGames, winLotto);
     }
 
     private static GameCounts getGameCounts() {

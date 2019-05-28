@@ -16,7 +16,16 @@ public class LottoResult {
         lottoResult.put(FIFTH, Counter.create());
     }
 
-    public static void increase(Rank rank) {
-        lottoResult.put(rank, Counter.increase(lottoResult.get(rank)));
+    public static Map<Rank, Counter> create(LottoGames lottoGames, WinLotto winLotto) {
+        for (Lotto lotto : lottoGames) {
+            increase(winLotto.getRank(lotto));
+        }
+        return lottoResult;
+    }
+
+    private static void increase(Rank rank) {
+        if (!rank.equals(MISS)) {
+            lottoResult.put(rank, lottoResult.get(rank).increase());
+        }
     }
 }
