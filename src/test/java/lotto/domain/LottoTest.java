@@ -14,7 +14,7 @@ public class LottoTest {
     @Test
     void 번호가_6개가_아닌경우() {
         List<LottoNo> lottoNos = LottoNoCollection.createLottoNos();
-        assertThrows(IllegalArgumentException.class, () -> Lotto.of(lottoNos));
+        assertThrows(IllegalArgumentException.class, () -> Lotto.of(lottoNos.subList(0, 7)));
     }
 
     @Test
