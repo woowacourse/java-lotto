@@ -27,6 +27,7 @@
 - winning numbers, bonus ball, lottos -> winning statistics
     - ~~class WinningLotto~~
         - ~~validate bonus ball is not in lotto numbers~~
+        - ~~return count of matches between two lottos~~
         - **match lotto to winning lotto and return rank**
     - ~~enum Rank~~
     - class WinningStatistics

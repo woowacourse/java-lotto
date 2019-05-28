@@ -54,4 +54,12 @@ public class Lotto {
                 "lottoNumbers=" + lottoNumbers +
                 '}';
     }
+
+    public int countMatches(Lotto another) {
+        int count = 0;
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            count += another.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+        }
+        return count;
+    }
 }
