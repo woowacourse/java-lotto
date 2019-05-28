@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber get(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
-            throw new InvalidLottoNumber("로또 번호는 1 이상 45 이하여야 합니다.");
+            throw new InvalidLottoNumberException("로또 번호는 1 이상 45 이하여야 합니다.");
         }
         return numbers.get(lottoNumber - 1);
     }

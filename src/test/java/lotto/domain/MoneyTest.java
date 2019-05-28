@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class MoneyTest {
     @Test
     void validateMoneyBiggerThanZero() {
-        assertThrows(InvalidMoney.class, () -> new Money(0));
+        assertThrows(InvalidMoneyException.class, () -> new Money(0));
     }
 
     @Test

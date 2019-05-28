@@ -21,11 +21,11 @@ public class LottoTest {
     @Test
     void validateNoDuplication() {
         List<Integer> duplicatedNumbers = Arrays.asList(1, 1, 3, 4, 5, 6);
-        assertThrows(DuplicatedNumbersInLotto.class, () -> new Lotto(duplicatedNumbers));
+        assertThrows(DuplicatedLottoNumbersException.class, () -> new Lotto(duplicatedNumbers));
     }
 
     @Test
     void validateNumOfLottoNumbers() {
-        assertThrows(InvalidSizeOfLottoNumbers.class, () -> new Lotto(Arrays.asList(1,2,3,4,5)));
+        assertThrows(InvalidSizeOfLottoNumbersException.class, () -> new Lotto(Arrays.asList(1,2,3,4,5)));
     }
 }

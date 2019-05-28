@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LottoNumberTest {
     @Test
     void validateNumberLowerThanMinimum() {
-        assertThrows(InvalidLottoNumber.class, () -> LottoNumber.get(0));
+        assertThrows(InvalidLottoNumberException.class, () -> LottoNumber.get(0));
     }
 
     @Test
     void validateNumberBiggerThanMaximum() {
-        assertThrows(InvalidLottoNumber.class, () -> LottoNumber.get(46));
+        assertThrows(InvalidLottoNumberException.class, () -> LottoNumber.get(46));
     }
 
     @Test

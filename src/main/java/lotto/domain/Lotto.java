@@ -30,10 +30,10 @@ public class Lotto {
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (hasDuplication(lottoNumbers)) {
-            throw new DuplicatedNumbersInLotto("로또 번호가 중복되면 안 됩니다.");
+            throw new DuplicatedLottoNumbersException("로또 번호가 중복되면 안 됩니다.");
         }
         if (lottoNumbers.size() != SIZE_OF_LOTTO_NUMBERS) {
-            throw new InvalidSizeOfLottoNumbers("로또 번호는 6개여야 합니다.");
+            throw new InvalidSizeOfLottoNumbersException("로또 번호는 6개여야 합니다.");
         }
     }
 
