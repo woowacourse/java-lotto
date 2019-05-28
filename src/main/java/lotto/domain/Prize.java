@@ -7,7 +7,7 @@ public enum Prize {
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
-    NONE(2, 0);
+    NONE(0, 0);
 
     private final int countOfNumber;
     private final int winningAmount;
@@ -15,6 +15,10 @@ public enum Prize {
     Prize(final int countOfNumber, final int winningAmount) {
         this.countOfNumber = countOfNumber;
         this.winningAmount = winningAmount;
+    }
+
+    public int getWinningAmount() {
+        return winningAmount;
     }
 
     public static Prize valueOf(int countOfNumber) {
