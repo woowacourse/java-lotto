@@ -15,13 +15,17 @@ public class LottoTest {
 
     @Test
     void validateNotContainingNull() {
-        assertThrows(NullArgumentException.class, () -> new Lotto(Arrays.asList(LottoNumber.get(1), null)));
+        assertThrows(NullArgumentException.class, () -> new Lotto(Arrays.asList(1, null)));
     }
 
     @Test
     void validateNoDuplication() {
-        List<LottoNumber> duplicatedNumbers = Arrays.asList(LottoNumber.get(1), LottoNumber.get(1)
-                , LottoNumber.get(3), LottoNumber.get(4), LottoNumber.get(5), LottoNumber.get(6));
+        List<Integer> duplicatedNumbers = Arrays.asList(1, 1, 3, 4, 5, 6);
         assertThrows(DuplicatedNumbersInLotto.class, () -> new Lotto(duplicatedNumbers));
+    }
+
+    @Test
+    void validateNumOfLottoNumbers() {
+        assertThrows(InvalidSizeOfLottoNumbers.class, () -> new Lotto(Arrays.asList(1,2,3,4,5)));
     }
 }
