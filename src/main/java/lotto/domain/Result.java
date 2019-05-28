@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Map;
 
 public class Result {
+    private static final double ONE_HUNDRED_PERCENT = 100.0;
     private static final int MIN_PRIZE_NUMBER = 3;
     private static final int MAX_PRIZE_NUMBER = 6;
     private final Map<Prize, Integer> result;
@@ -18,7 +19,7 @@ public class Result {
             Prize prize = Prize.valueOf(i);
             sum += prize.getWinningAmount() * getCountOfPrize(prize);
         }
-        return (double) sum / buyPrice * 100.0;
+        return (double) sum / buyPrice * ONE_HUNDRED_PERCENT;
     }
 
     private int getCountOfPrize(Prize prize) {
