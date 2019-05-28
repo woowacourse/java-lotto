@@ -9,6 +9,7 @@
     - ~~class LottoNumber~~
         - ~~validate lotto number (1 ~ 45)~~
         - ~~create lotto numbers in advance~~
+        - ~~compareTo()~~
     - ~~class Lotto~~
         - ~~validate not null~~
         - ~~validate no duplication in lotto numbers~~

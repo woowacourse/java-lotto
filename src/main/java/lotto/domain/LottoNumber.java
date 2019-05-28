@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
@@ -25,5 +25,10 @@ public class LottoNumber {
             throw new InvalidLottoNumber("로또 번호는 1 이상 45 이하여야 합니다.");
         }
         return numbers.get(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber another) {
+        return Integer.compare(number, another.number);
     }
 }

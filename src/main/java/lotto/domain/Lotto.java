@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ public class Lotto {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(number -> LottoNumber.get(number)).collect(Collectors.toList());
         validateLottoNumbers(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
