@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoNumbersTest {
@@ -45,5 +46,25 @@ public class LottoNumbersTest {
                 new LottoNumber(7));
 
         assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(numbers));
+    }
+
+    @Test
+    void 숫자_4개가_겹치는_경우() {
+        List<LottoNumber> numbers1 = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6));
+        List<LottoNumber> numbers2 = Arrays.asList(
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6),
+                new LottoNumber(7),
+                new LottoNumber(8));
+
+        assertThat(new LottoNumbers(numbers1).match(new LottoNumbers(numbers2))).isEqualTo(4);
     }
 }
