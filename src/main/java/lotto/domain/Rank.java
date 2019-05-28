@@ -39,4 +39,8 @@ public enum Rank {
     private boolean isMatchCount(final int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }
+
+    public int getPrize() {
+        return prize;
+    }
 }
