@@ -12,7 +12,7 @@ public class Lottos {
 
     private void generate(Money money) {
         for (int i = 0; i < money.purchaseCount(); i++) {
-            lottos.add(new Lotto(LottoMaker.generator()));
+            lottos.add(Lotto.of(LottoMaker.generator()));
         }
     }
 
