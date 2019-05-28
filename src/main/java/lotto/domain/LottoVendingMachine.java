@@ -18,7 +18,13 @@ public class LottoVendingMachine {
         return lottos;
     }
 
-
+    public static List<Lotto> getCustomLottos(List<List<Integer>> lottoNumbers) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (List<Integer> numbers : lottoNumbers) {
+            lottos.add(new Lotto(numbers));
+        }
+        return lottos;
+    }
 }
 
 
