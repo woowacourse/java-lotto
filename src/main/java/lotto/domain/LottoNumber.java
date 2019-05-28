@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Iterator;
 import java.util.Objects;
 
 import lotto.exceptions.InvalidLottoNumberException;
