@@ -21,4 +21,9 @@ public class LottoTest {
             new Lotto(Arrays.asList(-1, 2, 3, 4, 5, 6));
         });
     }
+
+    @Test
+    void 랜덤_로또_생성() {
+        new Lotto(new RandomNumberGenerator().generate());
+    }
 }
