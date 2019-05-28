@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.model.exception.LottoNumberDuplicationException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class PurchasedLottoTest {
+public class LottoTest {
         @Test
         void 로또숫자_중복_검사() {
                 assertThrows(LottoNumberDuplicationException.class, () -> {
@@ -18,7 +19,7 @@ public class PurchasedLottoTest {
                         lottoNumbers.add(LottoNumberCreator.create(35));
                         lottoNumbers.add(LottoNumberCreator.create(3));
 
-                        new PurchasedLotto(lottoNumbers);
+                        new Lotto(lottoNumbers);
                 });
         }
 }

@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.exception.InvalidLottoNumberException;
+
 public class LottoNumberCreator {
         public static LottoNumber create(int number) {
                 checkValidLottoNumber(number);

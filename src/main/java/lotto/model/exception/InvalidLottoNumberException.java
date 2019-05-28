@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.exception;
 
 public class InvalidLottoNumberException extends RuntimeException {
         public InvalidLottoNumberException() {

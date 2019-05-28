@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.exception;
 
 public class PaymentNotNaturalNumberException extends RuntimeException {
         public PaymentNotNaturalNumberException() {

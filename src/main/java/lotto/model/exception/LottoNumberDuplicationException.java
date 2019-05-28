@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.exception;
 
 public class LottoNumberDuplicationException extends RuntimeException {
         public LottoNumberDuplicationException() {

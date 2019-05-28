@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.model.WinnerNumbersInputFormException;
+import lotto.model.exception.WinnerNumbersInputFormException;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;

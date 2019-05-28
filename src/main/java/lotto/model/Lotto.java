@@ -1,11 +1,13 @@
 package lotto.model;
 
+import lotto.model.exception.LottoNumberDuplicationException;
+
 import java.util.List;
 
-public class PurchasedLotto {
+public class Lotto {
         private final List<LottoNumber> lottoNumbers;
 
-        public PurchasedLotto(List<LottoNumber> lottoNumbers) {
+        public Lotto(List<LottoNumber> lottoNumbers) {
                 checkLottoNumbersDuplication(lottoNumbers);
                 this.lottoNumbers = lottoNumbers;
         }

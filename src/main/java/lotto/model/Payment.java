@@ -1,5 +1,8 @@
 package lotto.model;
 
+import lotto.model.exception.PaymentNotMultipleOfThousandException;
+import lotto.model.exception.PaymentNotNaturalNumberException;
+
 public class Payment {
         private static final int LOTTO_PRICE = 1000;
 
