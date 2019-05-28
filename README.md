@@ -18,8 +18,8 @@
 - 14000 -> 14 random lottos
     - class Money
         - ~~money > 0~~
-        - **is multiple of**
-        - divide by
+        - ~~is multiple of~~
+        - **divide by**
     - class LottoVendingMachine
         - money % 1000 == 0
 - winning numbers, lottos -> winning statistics

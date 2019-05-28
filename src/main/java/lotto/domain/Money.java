@@ -10,4 +10,8 @@ public class Money {
         }
         this.money = money;
     }
+
+    public boolean isMultipleOf(Money another) {
+        return money % another.money == 0;
+    }
 }
