@@ -3,24 +3,32 @@ package lotto.domain;
 import java.util.*;
 
 public class Lotto {
+    private static final int MAX_LOTTO_SIZE = 6;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
+
     private final List<Integer> numbers;
 
     public Lotto() {
-        this.numbers = createAutoNumber();
+        this.numbers = createAutoNumbers();
     }
 
-    public static List<Integer> createAutoNumber() {
+    public static List<Integer> createAutoNumbers() {
         Set<Integer> numbers = new HashSet<>();
-        while (numbers.size() < 6) {
+        while (numbers.size() < MAX_LOTTO_SIZE) {
             numbers.add(createRandomNumber());
         }
-        List<Integer> resultNumbers = new ArrayList<>(numbers);
-        Collections.sort(resultNumbers);
-        return resultNumbers;
+        return convertLottoNumbers(numbers);
+    }
+
+    private static List<Integer> convertLottoNumbers(Set<Integer> numbers) {
+        List<Integer> convertNumbers = new ArrayList<>(numbers);
+        Collections.sort(convertNumbers);
+        return convertNumbers;
     }
 
     private static int createRandomNumber() {
-        return (int) (Math.random() * 45) + 1;
+        return (int) (Math.random() * MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER;
     }
 
     @Override
