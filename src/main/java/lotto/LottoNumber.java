@@ -4,14 +4,23 @@ import java.util.Objects;
 
 import lotto.exceptions.InvalidLottoNumberException;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
+    private LottoNumber(int lottoNumber) {
         if (lottoNumber < 0) {
             throw new InvalidLottoNumberException("로또 번호의 범위는 1-45 입니다.");
         }
         this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber of(int number) {
+        return new LottoNumber(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.lottoNumber, o.lottoNumber);
     }
 
     @Override

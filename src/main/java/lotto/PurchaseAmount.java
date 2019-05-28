@@ -11,9 +11,6 @@ public class PurchaseAmount {
         if (purchaseAmount < 1000) {
             throw new InvalidPurchaseAmountException("구매 금액은 1000원 이상입니다.");
         }
-        if (purchaseAmount % 1000 != 0) {
-            throw new InvalidPurchaseAmountException("구매 금액은 1000원 단위로 입력하세요.");
-        }
         this.purchaseAmount = purchaseAmount;
     }
 
@@ -21,8 +18,8 @@ public class PurchaseAmount {
         return new PurchaseAmount(purchaseAmount);
     }
 
-    public int getGameCounts() {
-        return purchaseAmount / 1000;
+    public GameCounts getGameCounts() {
+        return new GameCounts(purchaseAmount);
     }
 
     @Override
