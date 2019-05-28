@@ -1,6 +1,8 @@
 package lotto.domain;
 
 public class Money {
+
+    private static final int LOTTO_PRICE = 1000;
     private final int money;
 
     public Money(int money) {
@@ -9,12 +11,12 @@ public class Money {
     }
 
     private void checkMinimumMoney() {
-        if (money < 1000) {
+        if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException("로또의 최소 가격은 1,000원 입니다. 그 이상을 입력해주세요!");
         }
     }
 
     public int getNumberOfLotto() {
-        return money / 1000;
+        return money / LOTTO_PRICE;
     }
 }
