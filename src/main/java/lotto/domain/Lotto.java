@@ -1,19 +1,29 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
     private final List<Integer> numbers;
 
-    public Lotto() {
-        this.numbers = new ArrayList<>(LottoNumbers.getNumbers());
-    }
-
     public Lotto(final List<Integer> numbers) {
+        validate(numbers);
         this.numbers = numbers;
     }
+
+    private void validate(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException();
+        }
+
+        if (new HashSet<Integer>(numbers).size() != numbers.size()) {
+            throw new IllegalArgumentException();
+        }
+
+        if (Collections.min(numbers) < 1 || Collections.max(numbers) > 45) {
+            throw new IllegalArgumentException();
+        }
+    }
+
 
     public List<Integer> numbers() {
         return this.numbers;
