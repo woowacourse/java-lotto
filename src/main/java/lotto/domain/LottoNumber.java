@@ -27,8 +27,19 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return numbers.get(lottoNumber);
     }
 
+    public static List<LottoNumber> getAll() {
+        return new ArrayList<>(numbers);
+    }
+
     @Override
     public int compareTo(LottoNumber another) {
         return Integer.compare(number, another.number);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
     }
 }

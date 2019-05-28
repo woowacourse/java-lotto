@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +9,14 @@ import java.util.stream.Collectors;
 public class Lotto {
     private static final int SIZE_OF_LOTTO_NUMBERS = 6;
     private final List<LottoNumber> lottoNumbers;
+
+    public Lotto() {
+        List<LottoNumber> lottoNumbers = LottoNumber.getAll();
+        Collections.shuffle(lottoNumbers);
+        lottoNumbers = lottoNumbers.subList(0, SIZE_OF_LOTTO_NUMBERS + 1);
+        Collections.sort(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
 
     public Lotto(List<Integer> numbers) {
         if (numbers == null || hasNull(numbers)) {
@@ -38,5 +47,12 @@ public class Lotto {
 
     private boolean hasNull(List lottoNumbers) {
         return lottoNumbers.contains(null);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }
