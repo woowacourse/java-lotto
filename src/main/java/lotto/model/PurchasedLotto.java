@@ -2,10 +2,10 @@ package lotto.model;
 
 import java.util.List;
 
-public class Lotto {
+public class PurchasedLotto {
         private final List<LottoNumber> lottoNumbers;
 
-        public Lotto(List<LottoNumber> lottoNumbers) {
+        public PurchasedLotto(List<LottoNumber> lottoNumbers) {
                 checkLottoNumbersDuplication(lottoNumbers);
                 this.lottoNumbers = lottoNumbers;
         }

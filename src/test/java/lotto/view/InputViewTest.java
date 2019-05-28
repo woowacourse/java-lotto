@@ -19,7 +19,7 @@ public class InputViewTest {
 
         @Test
         void 구매_금액_정수_검사() {
-                assertThrows(NumberFormatException.class, ()->{
+                assertThrows(NumberFormatException.class, () -> {
                         ByteArrayInputStream input = new ByteArrayInputStream("15,000".getBytes());
                         System.setIn(input);
                         InputView.inputPayment();

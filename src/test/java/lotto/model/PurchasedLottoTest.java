@@ -7,10 +7,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class LottoTest {
+public class PurchasedLottoTest {
         @Test
         void 로또숫자_중복_검사() {
-                assertThrows(LottoNumberDuplicationException.class, ()->{
+                assertThrows(LottoNumberDuplicationException.class, () -> {
                         List<LottoNumber> lottoNumbers = new ArrayList<>();
                         lottoNumbers.add(LottoNumberCreator.create(5));
                         lottoNumbers.add(LottoNumberCreator.create(3));
@@ -18,7 +18,7 @@ public class LottoTest {
                         lottoNumbers.add(LottoNumberCreator.create(35));
                         lottoNumbers.add(LottoNumberCreator.create(3));
 
-                        new Lotto(lottoNumbers);
+                        new PurchasedLotto(lottoNumbers);
                 });
         }
 }
