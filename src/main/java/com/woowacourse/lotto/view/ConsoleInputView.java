@@ -1,10 +1,11 @@
 package com.woowacourse.lotto.view;
 
-import com.woowacourse.lotto.domain.BuyingMoney;
-import com.woowacourse.lotto.domain.WinningLotto;
+import com.woowacourse.lotto.domain.*;
 import com.woowacourse.lotto.util.InputUtil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleInputView {
@@ -44,8 +45,60 @@ public class ConsoleInputView {
             String bonusStr = scanner.nextLine();
             return new WinningLotto(new HashSet<>(InputUtil.splitByComma(winningNumberStr)), Integer.valueOf(bonusStr));
         } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 입력입니다.");
+            System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    public static LottoQuantity promptManualLottoQuantity() {
+        LottoQuantity manualLottoQuantity = tryPromptManualLottoQuantity();
+        while (manualLottoQuantity == null) {
+            manualLottoQuantity = tryPromptManualLottoQuantity();
+        }
+
+        return manualLottoQuantity;
+    }
+
+    private static LottoQuantity tryPromptManualLottoQuantity() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+            return LottoQuantity.of(scanner.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public static List<Lotto> promptManualLottoNumbers(LottoQuantity manualLottoQuantity) {
+        List<Lotto> lottos = tryCreateManualLotto(manualLottoQuantity);
+
+        while (lottos == null) {
+            lottos = tryCreateManualLotto(manualLottoQuantity);
+        }
+
+        return lottos;
+    }
+
+    private static List<Lotto> tryCreateManualLotto(LottoQuantity manualLottoQuantity) {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+            return promptManualLotto(scanner, manualLottoQuantity);
+        } catch (NumberFormatException e) {
+            System.out.println("숫자로 변환할 수 없는 문자열이 있습니다.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private static List<Lotto> promptManualLotto(Scanner scanner, LottoQuantity quantity) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < quantity.toInt(); i++) {
+            lottos.add(LottoFactory.createLotto(new HashSet<>(InputUtil.splitByComma(scanner.nextLine()))));
+        }
+
+        return lottos;
     }
 }

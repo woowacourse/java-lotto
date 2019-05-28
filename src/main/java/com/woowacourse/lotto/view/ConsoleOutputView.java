@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ConsoleOutputView {
-    public static void printLottos(List<Lotto> lottos) {
-        System.out.println(String.format("%d장을 구매했습니다.", lottos.size()));
+    public static void printLottos(List<Lotto> lottos, int numOfManuals) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+            numOfManuals, lottos.size() - numOfManuals));
         lottos.forEach(l -> System.out.println(getLottoString(l)));
     }
 
@@ -37,5 +38,9 @@ public class ConsoleOutputView {
             resultToPrint.isUseBonus() ? ", 보너스 볼 일치" : " ",
             resultToPrint.getPrizeMoney(),
             aggregator.getResultCount(resultToPrint)));
+    }
+
+    public static void printError(String errorMessage) {
+        System.out.println(errorMessage);
     }
 }

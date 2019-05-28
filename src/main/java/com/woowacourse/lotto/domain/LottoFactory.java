@@ -12,4 +12,8 @@ public class LottoFactory {
         }
         return new Lotto(nums);
     }
+
+    public static Lotto createLotto(Set<Integer> nums) {
+        return new Lotto(nums);
+    }
 }

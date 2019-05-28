@@ -15,4 +15,11 @@ public class LottoFactoryTest {
         Lotto l = LottoFactory.createLotto(new TestNumberGenerator(nums));
         assertThat(l).isEqualTo(new Lotto(new HashSet<>(nums)));
     }
+
+    @Test
+    void createWithSet() {
+        List<Integer> nums = Arrays.asList(25, 4, 15, 42, 32, 22);
+        Lotto l = LottoFactory.createLotto(new HashSet<>(nums));
+        assertThat(l).isEqualTo(new Lotto(new HashSet<>(nums)));
+    }
 }

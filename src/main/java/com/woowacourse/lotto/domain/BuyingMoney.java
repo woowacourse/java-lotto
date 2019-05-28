@@ -17,8 +17,8 @@ public class BuyingMoney {
         }
     }
 
-    public int getQuantity() {
-        return buyingMoney / Lotto.UNIT_PRICE;
+    public LottoQuantity getQuantity() {
+        return LottoQuantity.of(buyingMoney / Lotto.UNIT_PRICE);
     }
 
     @Override
