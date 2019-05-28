@@ -23,6 +23,18 @@ public class Lotto {
         return new Lotto(lottoNos);
     }
 
+    public boolean isMatch(final LottoNo lottoNo) {
+        return lottoNos.contains(lottoNo);
+    }
+
+    public int countOfMatch(final Lotto anotherLotto) {
+        int countOfMatch = 0;
+        for (final LottoNo lottoNo : lottoNos) {
+            countOfMatch += anotherLotto.isMatch(lottoNo) ? 1 : 0;
+        }
+        return countOfMatch;
+    }
+
     @Override
     public String toString() {
         return lottoNos.toString();
