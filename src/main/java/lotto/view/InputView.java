@@ -18,4 +18,10 @@ public class InputView {
                         throw new WinnerNumbersInputFormException("당첨 번호 입력형식이 틀립니다.");
                 }
         }
+
+        public static int inputPayment() {
+                System.out.println("구입금액을 입력해 주세요.");
+                String input = new Scanner(System.in).nextLine();
+                return Integer.parseInt(input);
+        }
 }
