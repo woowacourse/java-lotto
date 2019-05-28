@@ -12,9 +12,9 @@ public class OutputConsoleView implements OutputView {
     private static final String NEW_LINE = "\n";
 
     @Override
-    public void printLottos(final List<Lotto> lottos, int countOfManual, long countOfPurchase) {
+    public void printLottos(final List<Lotto> lottos, int countOfManual, int countOfPurchase) {
         StringBuilder sb = new StringBuilder();
-        long countOfAuto = countOfPurchase - countOfManual;
+        int countOfAuto = countOfPurchase - countOfManual;
         sb.append("수동으로 " + countOfManual + "장, 자동으로 " + countOfAuto + "개를 구매했습니다.").append(NEW_LINE);
         for (Lotto lotto : lottos) {
             sb.append(lotto).append(NEW_LINE);

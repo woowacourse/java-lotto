@@ -12,5 +12,5 @@ public interface OutputView {
 
     void printRateOfProfit(final Money money, final WinPrize winPrize);
 
-    void printLottos(List<Lotto> userLottos, int countOfManual, long countOfPurchase);
+    void printLottos(List<Lotto> userLottos, int countOfManual, int countOfPurchase);
 }

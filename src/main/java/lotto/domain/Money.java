@@ -28,7 +28,7 @@ public class Money {
         return money;
     }
 
-    public long getCountOfPurchase() {
-        return money / PRICE_PER_LOTTO;
+    public int getCountOfPurchase() {
+        return (int) money / PRICE_PER_LOTTO;
     }
 }
