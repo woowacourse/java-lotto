@@ -2,7 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.GameCounts;
 import lotto.exceptions.InvalidPurchaseAmountException;
 
 import static org.junit.jupiter.api.Assertions.*;
