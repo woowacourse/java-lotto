@@ -1,26 +1,26 @@
 package lotto.utils;
 
-import lotto.domain.LottoBall;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoNoGenerator {
-    private static final int COUNT_OF_NO = 6;
     private static final int BASE_INDEX = 0;
-    private static final List<LottoBall> lottoNoContainer = new ArrayList<>();
+    private static final List<LottoNo> lottoNoContainer = new ArrayList<>();
 
     static {
-        for (int i = LottoBall.MIN_NO; i <= LottoBall.MAX_NO; i++) {
-            lottoNoContainer.add(new LottoBall(i));
+        for (int i = LottoNo.MIN_NO; i <= LottoNo.MAX_NO; i++) {
+            lottoNoContainer.add(new LottoNo(i));
         }
     }
 
-    public static List<LottoBall> generate() {
+    public static List<LottoNo> generate() {
         Collections.shuffle(lottoNoContainer);
-        List<LottoBall> lotto = lottoNoContainer.subList(BASE_INDEX, COUNT_OF_NO);
-        lotto.sort(LottoBall::compareTo);
+        List<LottoNo> lotto = lottoNoContainer.subList(BASE_INDEX, Lotto.COUNT_OF_NO);
+        lotto.sort(LottoNo::compareTo);
         return lotto;
     }
 }
