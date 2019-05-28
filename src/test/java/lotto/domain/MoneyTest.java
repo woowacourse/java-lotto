@@ -16,4 +16,9 @@ public class MoneyTest {
         assertThat((new Money(1000)).isMultipleOf(new Money(1000))).isTrue();
         assertThat((new Money(1000)).isMultipleOf(new Money(300))).isFalse();
     }
+
+    @Test
+    void divideTest() {
+        assertThat((new Money(5000)).divideBy(new Money(1000))).isEqualTo(5);
+    }
 }

@@ -14,4 +14,8 @@ public class Money {
     public boolean isMultipleOf(Money another) {
         return money % another.money == 0;
     }
+
+    public int divideBy(Money another) {
+        return money / another.money;
+    }
 }
