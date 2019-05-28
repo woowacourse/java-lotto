@@ -16,12 +16,20 @@ public class InputParser {
 
     public static List<LottoNumber> parse(String input) {
         valid(input);
-        String[] tokens = StringUtils.deleteWhitespace(input).split(DELIMITER);
+        String[] tokens = split(input);
         List<LottoNumber> result = new ArrayList<>();
         for (String token : tokens) {
             result.add(LottoNumber.of(Integer.parseInt(token)));
         }
         Collections.sort(result);
+        return result;
+    }
+
+    private static String[] split(String input) {
+        String[] result = StringUtils.deleteWhitespace(input).split(DELIMITER);
+        if (result.length != 6) {
+            throw new IllegalInputFormatException("당첨 번호는 6개 입니다.");
+        }
         return result;
     }
 

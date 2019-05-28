@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class InputView {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int getPurchaseAmount() {
+    public static String getPurchaseAmount() {
         OutputView.start();
-        return Integer.parseInt(scanner.nextLine());
+        return scanner.nextLine();
     }
 
     public static String getWinnerLotto() {

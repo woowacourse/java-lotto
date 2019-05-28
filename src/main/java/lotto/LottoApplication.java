@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.GameCounts;
 import lotto.domain.LottoGames;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.WinLotto;
 import lotto.exceptions.IllegalInputFormatException;
 import lotto.exceptions.InvalidPurchaseAmountException;
@@ -12,22 +13,33 @@ public class LottoApplication {
     private static final String NUMBER_FORMAT_EXCEPTION = "숫자로 입력해주세요";
 
     public static void main(String[] args) {
-        GameCounts gameCounts = getGameCounts();
+        PurchaseAmount purchaseAmount = getPurchaseAmount();
+        GameCounts gameCounts = getGameCounts(purchaseAmount);
         LottoGames lottoGames = getLottoGames(gameCounts);
         OutputView.lottoList(lottoGames);
         WinLotto winLotto = getWinLotto();
         OutputView.winList(lottoGames, winLotto);
+        OutputView.rateOfReturn(purchaseAmount);
     }
 
-    private static GameCounts getGameCounts() {
+    private static PurchaseAmount getPurchaseAmount() {
         try {
-            return new GameCounts(InputView.getPurchaseAmount());
+            return PurchaseAmount.of(InputView.getPurchaseAmount());
         } catch (InvalidPurchaseAmountException e) {
             System.out.println(e.getMessage());
-            return getGameCounts();
+            return getPurchaseAmount();
         } catch (NumberFormatException e) {
             System.out.println(NUMBER_FORMAT_EXCEPTION);
-            return getGameCounts();
+            return getPurchaseAmount();
+        }
+    }
+
+    private static GameCounts getGameCounts(PurchaseAmount purchaseAmount) {
+        try {
+            return new GameCounts(purchaseAmount);
+        } catch (InvalidPurchaseAmountException e) {
+            System.out.println(e.getMessage());
+            return getGameCounts(purchaseAmount);
         }
     }
 
@@ -44,7 +56,6 @@ public class LottoApplication {
         try {
             return new WinLotto(InputView.getWinnerLotto());
         } catch (IllegalInputFormatException e) {
-            e.printStackTrace();
             System.out.println(e.getMessage());
             return getWinLotto();
         }

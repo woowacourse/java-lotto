@@ -14,6 +14,7 @@ public class LottoResult {
         lottoResult.put(THIRD, Counter.create());
         lottoResult.put(FOURTH, Counter.create());
         lottoResult.put(FIFTH, Counter.create());
+        lottoResult.put(MISS, Counter.create());
     }
 
     public static Map<Rank, Counter> create(LottoGames lottoGames, WinLotto winLotto) {
@@ -24,8 +25,14 @@ public class LottoResult {
     }
 
     private static void increase(Rank rank) {
-        if (!rank.equals(MISS)) {
-            lottoResult.put(rank, lottoResult.get(rank).increase());
+        lottoResult.put(rank, lottoResult.get(rank).increase());
+    }
+
+    public static double getRateOfReturn(PurchaseAmount amount) {
+        int prize = 0;
+        for (Rank rank : Rank.values()) {
+            prize += lottoResult.get(rank).totalAmount(rank);
         }
+        return amount.rateOf(prize);
     }
 }

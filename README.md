@@ -9,3 +9,7 @@
 2. generate Lotto Games [Domain]
 3. get last week winning number [View]
 4. show winning statics [View]
+
+## Step 2. Bonus Ball
+### Function Requirements
+1.

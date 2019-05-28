@@ -6,6 +6,7 @@ import lotto.domain.Counter;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoResult;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.Rank;
 import lotto.domain.WinLotto;
 
@@ -48,5 +49,9 @@ public class OutputView {
         if (!rank.equals(Rank.MISS)) {
             System.out.println(String.format(RANK_RESULT_FORMAT, rank.getMatchCount(), rank.getPrize(), lottoResult.get(rank)));
         }
+    }
+
+    public static void rateOfReturn(PurchaseAmount purchaseAmount) {
+        System.out.println("총 수익률은 " + LottoResult.getRateOfReturn(purchaseAmount) + "%입니다.");
     }
 }
