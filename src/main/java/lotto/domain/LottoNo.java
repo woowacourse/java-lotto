@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoNo {
-    private static final int MAX_NUMBER = 45;
-    private static final int MIN_NUMBER = 1;
+    static final int MAX_NUMBER = 45;
+    static final int MIN_NUMBER = 1;
 
     private static final Map<Integer, LottoNo> map = new HashMap();
 
