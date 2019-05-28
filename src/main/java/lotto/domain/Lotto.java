@@ -4,16 +4,23 @@ import lotto.domain.exception.LottoSizeException;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto(final List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new LottoSizeException("로또 숫자는 6개여야 합니다.");
         }
 
-        this.numbers = numbers;
+        this.numbers = makeLottoNumbers(numbers);
+    }
+
+    private List<LottoNumber> makeLottoNumbers(final List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
     }
 
     public int hasNumber(final int number) {
