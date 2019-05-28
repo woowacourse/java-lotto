@@ -8,4 +8,8 @@ public class LottoContainer {
     public LottoContainer(List<Lotto> lottoContainer) {
         this.lottoContainer = lottoContainer;
     }
+
+    public int getSize(){
+        return lottoContainer.size();
+    }
 }

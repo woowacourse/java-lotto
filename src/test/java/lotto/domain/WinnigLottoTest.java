@@ -2,9 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-public class LottoFactoryTest {
+public class WinnigLottoTest {
     @Test
-    void 로또_생성() {
-
+    void 당첨번호() {
     }
 }
