@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private static final List<Lotto> lottos = new ArrayList<>();
+    private static List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(Money money) {
-        generate(money);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    private void generate(Money money) {
+    public static Lottos generate(Money money) {
         for (int i = 0; i < money.purchaseCount(); i++) {
             lottos.add(Lotto.of(LottoMaker.generator()));
         }
+        return of(lottos);
+    }
+
+    private static Lottos of(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
     public List<Lotto> getLottos() {
