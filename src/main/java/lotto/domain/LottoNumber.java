@@ -19,7 +19,7 @@ public class LottoNumber {
     }
 
     private LottoNumber(final int number) {
-        if (number < 1 || number > 45) {
+        if (number < LOTTO_START_NUMBER || number > LOTTO_LAST_NUMBER) {
             throw new InvalidLottoNumberException(number + "는 유효한 범위가 아닙니다. 로또 번호는 1부터 45 사이여야합니다.");
         }
         this.number = number;
