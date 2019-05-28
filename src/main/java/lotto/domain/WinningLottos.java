@@ -2,17 +2,17 @@ package lotto.domain;
 
 import java.util.List;
 
-public class WinnigLotto {
-    private final List<Integer> winngLottos;
+public class WinningLottos {
+    private final List<Integer> winningLottos;
 
-    public WinnigLotto(List<Integer> lottoNumbers) {
-        winngLottos = lottoNumbers;
+    public WinningLottos(List<Integer> lottoNumbers) {
+        winningLottos = lottoNumbers;
     }
 
     public int match(Lotto lotto) {
         int result = 0;
         for (Integer number : lotto.numbers()) {
-            if (winngLottos.contains(number)) {
+            if (winningLottos.contains(number)) {
                 result++;
             }
         }

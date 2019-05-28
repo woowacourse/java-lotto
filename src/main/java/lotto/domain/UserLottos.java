@@ -10,20 +10,27 @@ public class UserLottos {
         this.lottos = lottos;
     }
 
-    public UserLottos(int number) {
+    public UserLottos(String inputMoney) {
+        int lottoCount = Integer.parseInt(inputMoney) / 1000;
         lottos = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottos.add(LottoGenerator.lotto());
         }
     }
 
-    public int match(Lotto another) {
-        int matches = 0;
+    public double match(Lotto another) {
+        int money = 0;
         for (Lotto lotto : lottos) {
-            for (Integer number : another.numbers()) {
-                if (lotto.numbers().contains(number)) {
-                    matches++;
-                }
+            money += Reward.valueOf(getMatches(another, lotto)).money();
+        }
+        return money / (lottos.size() * 1000);
+    }
+
+    private int getMatches(Lotto another, Lotto lotto) {
+        int matches = 0;
+        for (Integer number : another.numbers()) {
+            if (lotto.numbers().contains(number)) {
+                matches++;
             }
         }
         return matches;

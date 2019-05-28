@@ -25,7 +25,7 @@ class UserLottosTest {
 
     @Test
     void 로또_개수() {
-        UserLottos userLottos = new UserLottos(3);
+        UserLottos userLottos = new UserLottos("3290");
         assertEquals(3, userLottos.size());
     }
 }
