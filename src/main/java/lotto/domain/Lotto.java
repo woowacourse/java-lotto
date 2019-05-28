@@ -30,7 +30,13 @@ public class Lotto {
         }
     }
 
-    public boolean match(LottoNumber number) {
+    boolean matchNumber(LottoNumber number) {
         return lottoNumbers.contains(number);
+    }
+
+    int matchNumbers(Lotto lotto){
+        return (int) lottoNumbers.stream()
+                .filter(lotto::matchNumber)
+                .count();
     }
 }

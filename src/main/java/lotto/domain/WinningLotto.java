@@ -1,8 +1,8 @@
 package lotto.domain;
 
 public class WinningLotto {
-    Lotto winningLotto;
-    LottoNumber bonusNumber;
+    private Lotto winningLotto;
+    private LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         validWinningLotto(winningLotto, bonusNumber);
@@ -11,8 +11,12 @@ public class WinningLotto {
     }
 
     private void validWinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
-        if (winningLotto.match(bonusNumber)) {
+        if (winningLotto.matchNumber(bonusNumber)) {
             throw new InvalidWinningLottoException("로또와 보너스 넘버는 중복될 수 없습니다.");
         }
+    }
+
+    Rank match(Lotto lotto) {
+        return Rank.valueOf(winningLotto.matchNumbers(lotto), lotto.matchNumber(bonusNumber));
     }
 }
