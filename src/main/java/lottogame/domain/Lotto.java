@@ -1,6 +1,7 @@
 package lottogame.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -11,6 +12,7 @@ public class Lotto {
         while (lotto.size() < LOTTO_SIZE) {
             addRandomLottoNumber();
         }
+        Collections.sort(lotto);
     }
 
     private void addRandomLottoNumber() {

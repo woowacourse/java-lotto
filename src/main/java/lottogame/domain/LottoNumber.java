@@ -4,10 +4,9 @@ import lottogame.utils.InvalidLottoNumberException;
 
 import java.util.*;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int DUMMY_LOTTO_INDEX = 1;
 
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
@@ -55,5 +54,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.lottoNumber - o.lottoNumber;
     }
 }
