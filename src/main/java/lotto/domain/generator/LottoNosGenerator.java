@@ -1,8 +1,10 @@
 package lotto.domain.generator;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
+
+import java.util.List;
 
 @FunctionalInterface
 public interface LottoNosGenerator {
-    Lotto generate();
+    List<LottoNo> generate();
 }

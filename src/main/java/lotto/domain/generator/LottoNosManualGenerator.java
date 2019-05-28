@@ -5,7 +5,7 @@ import lotto.domain.LottoNo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoNosManualGenerator {
+public class LottoNosManualGenerator implements LottoNosGenerator {
     private static final String DELIMITER = ",";
 
     private final String input;
@@ -14,6 +14,7 @@ public class LottoNosManualGenerator {
         this.input = input;
     }
 
+    @Override
     public List<LottoNo> generate() {
         List<LottoNo> lottoNos = new ArrayList<>(6);
         for (final String in : input.split(DELIMITER)) {
