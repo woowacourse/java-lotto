@@ -15,7 +15,7 @@
         - ~~validate no duplication in lotto numbers~~
         - ~~validate size of 6~~
     - ~~create random lotto~~
-- 14000 -> 14 random lottos
+- ~~14000 -> 14 random lottos~~
     - ~~class Money~~
         - ~~money > 0~~
         - ~~is multiple of~~
@@ -28,9 +28,9 @@
     - ~~class WinningLotto~~
         - ~~validate bonus ball is not in lotto numbers~~
         - ~~return count of matches between two lottos~~
-        - **match lotto to winning lotto and return rank**
+        - ~~match lotto to winning lotto and return rank~~
     - ~~enum Rank~~
-    - class WinningStatistics
+    - **class WinningStatistics**
 - create a user defined lotto
 
 #### View

@@ -48,18 +48,22 @@ public class Lotto {
         return lottoNumbers.contains(null);
     }
 
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                "lottoNumbers=" + lottoNumbers +
-                '}';
-    }
-
     public int countMatches(Lotto another) {
         int count = 0;
         for (LottoNumber lottoNumber : this.lottoNumbers) {
             count += another.lottoNumbers.contains(lottoNumber) ? 1 : 0;
         }
         return count;
+    }
+
+    public boolean contains(LottoNumber another) {
+        return lottoNumbers.contains(another);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }

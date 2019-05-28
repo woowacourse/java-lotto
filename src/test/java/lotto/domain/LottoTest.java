@@ -33,8 +33,8 @@ public class LottoTest {
 
     @Test
     void countMatchesTest() {
-        Lotto lotto1 = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        Lotto lotto2 = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        assertThat(lotto1.countMatches(lotto2)).isEqualTo(6);
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        assertThat(lotto.countMatches(new Lotto(Arrays.asList(1,2,3,4,5,6)))).isEqualTo(6);
+        assertThat(lotto.countMatches(new Lotto(Arrays.asList(1,2,3,4,5,7)))).isEqualTo(5);
     }
 }

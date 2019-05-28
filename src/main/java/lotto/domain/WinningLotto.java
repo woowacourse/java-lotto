@@ -12,4 +12,8 @@ public class WinningLotto extends Lotto {
         }
         this.bonusBall = LottoNumber.get(bonus);
     }
+
+    public Rank match(Lotto lotto) {
+        return Rank.valueOf(countMatches(lotto), lotto.contains(bonusBall));
+    }
 }
