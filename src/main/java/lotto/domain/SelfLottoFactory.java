@@ -1,12 +1,21 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SelfLottoFactory {
+    public static List<Lotto> generateSelfLottos(List<String> selfInputs){
+        List<Lotto> selfLottos = new ArrayList<>();
+        for(String self : selfInputs) {
+            selfLottos.add(generateSelfLotto(self));
+        }
+        return selfLottos;
+    }
 
-    public static Lotto generateSelfLotto(List<String> selfInputs){
-        List<Integer> selfNumbers = convertSelfLotto(selfInputs);
+    private static Lotto generateSelfLotto(String selfInput){
+        List<Integer> selfNumbers = convertSelfLotto(Arrays.asList(selfInput.split(",")));
         return new Lotto(selfNumbers);
     }
 
