@@ -13,4 +13,8 @@ public class Money {
             throw new IllegalArgumentException("로또의 최소 가격은 1,000원 입니다. 그 이상을 입력해주세요!");
         }
     }
+
+    public int getNumberOfLotto() {
+        return money / 1000;
+    }
 }
