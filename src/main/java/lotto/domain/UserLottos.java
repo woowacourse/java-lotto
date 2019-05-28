@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserLottos {
@@ -7,6 +8,13 @@ public class UserLottos {
 
     public UserLottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public UserLottos(int number) {
+        lottos = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            lottos.add(LottoGenerator.lotto());
+        }
     }
 
     public int match(Lotto another) {

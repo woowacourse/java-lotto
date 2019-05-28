@@ -23,5 +23,9 @@ class UserLottosTest {
         assertEquals(2, userLottos.match(lotto1));
     }
 
-
+    @Test
+    void 로또_개수() {
+        UserLottos userLottos = new UserLottos(3);
+        assertEquals(3, userLottos.size());
+    }
 }
