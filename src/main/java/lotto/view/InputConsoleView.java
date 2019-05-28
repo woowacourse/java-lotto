@@ -3,6 +3,8 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputConsoleView implements InputView {
+    private static Scanner scanner = new Scanner(System.in);
+
     @Override
     public long inputMoney() {
         System.out.println("구입 금액을 입력해주세요.");
@@ -22,7 +24,7 @@ public class InputConsoleView implements InputView {
 
     @Override
     public String inputManual() {
-        return new Scanner(System.in).nextLine();
+        return scanner.nextLine();
     }
 
     @Override
