@@ -24,9 +24,11 @@
         - ~~money % LOTTO_PRICE == 0~~
         - ~~get random lottos given money~~
         - ~~get custom lottos given numbers~~
-    - **class Lottos**
-- winning numbers, lottos -> winning statistics
 - winning numbers, bonus ball, lottos -> winning statistics
+    - ~~class WinningLotto~~
+        - ~~validate bonus ball is not in lotto numbers~~
+    - **enum Rank**
+    - class WinningStatistics
 - create a user defined lotto
 
 #### View
