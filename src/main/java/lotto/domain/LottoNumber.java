@@ -19,12 +19,6 @@ public class LottoNumber {
     }
 
     private boolean isValidLottoNumber(int lottoNumber) {
-//        List<Integer> lottoNumbers=new ArrayList<>();
-//        for (int i = 1; i <=46 ; i++) {
-//            lottoNumbers.add(i);
-//        }
-//        Collections.shuffle(lottoNumbers);
-//        List<Integer> lotto=lottoNumbers.subList(0,6);
         return lottoNumber >= MIN_LOTTO_NUMBER && lottoNumber <= MAX_LOTTO_NUMBER;
     }
 }
