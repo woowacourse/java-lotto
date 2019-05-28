@@ -6,6 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumberTest {
+
     @Test
     void 숫자_생성_테스트() {
         LottoNumber lottoNumber = new LottoNumber("3");
