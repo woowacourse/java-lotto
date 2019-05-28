@@ -14,6 +14,10 @@ public class GameCounts {
         this.gameCounts = purchaseAmount / 1000;
     }
 
+    public int getGameCounts() {
+        return gameCounts;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
