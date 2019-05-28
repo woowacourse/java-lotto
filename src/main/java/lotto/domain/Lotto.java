@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Lotto {
-    private static final int LOTTO_NO_SIZE = 6;
+    public static final int LOTTO_NO_SIZE = 6;
     private final Set<LottoNo> lottoNos;
 
     private Lotto(final List<LottoNo> lottoNos) {
