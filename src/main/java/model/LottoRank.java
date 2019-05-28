@@ -10,29 +10,29 @@ public enum LottoRank {
     SECOND(5, new Money(30000000)),
     FIRST(6, new Money(2000000000));
 
-    private final int matchingNumbers;
+    private final int numberOfMatches;
     private final Money prize;
 
-    LottoRank(int matchingNumbers, Money prize) {
-        this.matchingNumbers = matchingNumbers;
+    LottoRank(int numberOfMatches, Money prize) {
+        this.numberOfMatches = numberOfMatches;
         this.prize = prize;
     }
 
     public static LottoRank get(int numberOfMatches, boolean containsBonusNumber) {
-        if (numberOfMatches == 5 && containsBonusNumber) {
+        if (numberOfMatches == SECOND.numberOfMatches && containsBonusNumber) {
             return SECOND;
         }
-        if (numberOfMatches >= 3) {
+        if (numberOfMatches >= FIFTH.numberOfMatches) {
             return Stream.of(LottoRank.values())
-                    .filter(rank -> rank.matchingNumbers == numberOfMatches)
+                    .filter(rank -> rank.numberOfMatches == numberOfMatches)
                     .findFirst()
                     .get();
         }
         return NONE;
     }
 
-    public int getMatchingNumbers() {
-        return matchingNumbers;
+    public int getNumberOfMatches() {
+        return numberOfMatches;
     }
 
     public Money getPrize() {

@@ -17,7 +17,7 @@ public class OutputView {
         System.out.println("\n당첨 통계\n---------");
         result.forEach(x -> {
             System.out.println(
-                    x.getKey().getMatchingNumbers()
+                    x.getKey().getNumberOfMatches()
                     + ((x.getKey().equals(LottoRank.SECOND)) ? "개 일치, 보너스 볼 일치 (" : "개 일치 (")
                     + x.getKey().getPrize()
                     + "원)- "
