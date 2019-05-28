@@ -2,9 +2,9 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import static lotto.domain.LottoRule.*;
+
 public class LottoNumber {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
     private final int number;
 
     public LottoNumber(int number) {
@@ -13,7 +13,7 @@ public class LottoNumber {
     }
 
     private void checkValidRange() {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+        if (number < MIN_LOTTO_NUMBER.get() || number > MAX_LOTTO_NUMBER.get()) {
             throw new IllegalArgumentException("유효한 로또 번호가 아닙니다.");
         }
     }
