@@ -25,7 +25,6 @@ public class Counter {
         return rank.getPrize() * counter;
     }
 
-
     @Override
     public String toString() {
         return String.valueOf(counter);

@@ -13,10 +13,6 @@ public class Lotto implements Iterable<LottoNumber> {
         this.lotto = lotto;
     }
 
-    public int size() {
-        return lotto.size();
-    }
-
     public String getLotto() {
         return lotto.stream()
                 .map(LottoNumber::getLottoNumber)
