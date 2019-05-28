@@ -2,10 +2,12 @@ package lotto.domain;
 
 import java.util.List;
 
-public class WinnerLotto {
+import lotto.utils.InputParser;
+
+public class WinLotto {
     private final List<LottoNumber> winnerLotto;
 
-    public WinnerLotto(String input) {
+    public WinLotto(String input) {
         this.winnerLotto = InputParser.parse(input);
     }
 

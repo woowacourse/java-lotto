@@ -7,6 +7,12 @@ public class InputView {
 
     public static int getPurchaseAmount() {
         OutputView.start();
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
+
+    public static String getWinnerLotto() {
+        OutputView.win();
+        return scanner.nextLine();
+    }
+
 }

@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinnerLottoTest {
+class WinLottoTest {
     @Test
     void winner_number_check() {
         Lotto lotto = new Lotto(Arrays.asList(
@@ -17,6 +17,6 @@ class WinnerLottoTest {
                 LottoNumber.of(5),
                 LottoNumber.of(6)
         ));
-        assertThat(new WinnerLotto("1, 2, 3, 4, 5, 6").getRank(lotto)).isEqualTo(Rank.FIRST);
+        assertThat(new WinLotto("1, 2, 3, 4, 5, 6").getRank(lotto)).isEqualTo(Rank.FIRST);
     }
 }
