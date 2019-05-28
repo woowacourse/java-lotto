@@ -7,10 +7,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> numbers;
 
     public Lotto(final List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new LottoSizeException("로또 숫자는 6개여야 합니다.");
         }
 
@@ -23,7 +24,7 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public int hasNumber(final int number) {
+    public int hasNumber(final LottoNumber number) {
         if (numbers.contains(number)) {
             return 1;
         }
