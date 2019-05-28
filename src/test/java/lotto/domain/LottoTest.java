@@ -23,6 +23,6 @@ public class LottoTest {
     @Test
     void lotto안에_5가_있는지_여부_테스트() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.hasNumber(5)).isEqualTo(1);
+        assertThat(lotto.hasNumber(LottoNumber.getLottoNumber(5))).isEqualTo(1);
     }
 }
