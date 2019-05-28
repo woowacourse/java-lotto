@@ -25,7 +25,7 @@ public class LottoNumber {
 
     public static LottoNumber getLottoNumber(int lottoNumber) {
         validateLottoNumber(lottoNumber);
-        return lottoNumbers.get(lottoNumber - DUMMY_LOTTO_INDEX);
+        return lottoNumbers.get(lottoNumber);
     }
 
     private static void validateLottoNumber(int lottoNumber) {
