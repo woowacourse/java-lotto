@@ -11,5 +11,8 @@
         * [x] Money > 1000
     * 금액은 1000원 단위이다.
         * [x] Money % 1000 == 0
+4. WinningLotto
+    * 당첨 번호와 보너스 넘버는 중복되지 않는다.
+        * winningLotte.contains(bonusNumber) == false
 4. LottoPaper
 5. LottoVendingMachine
