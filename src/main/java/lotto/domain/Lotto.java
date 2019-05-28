@@ -22,6 +22,10 @@ public class Lotto {
         }
     }
 
+    public boolean isContain(Number bonusBall) {
+        return lotto.contains(bonusBall);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
