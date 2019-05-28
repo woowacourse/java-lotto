@@ -25,6 +25,10 @@ public class Lotto {
         return LOTTO_MIN <= n && n <= LOTTO_MAX;
     }
 
+    public boolean contains(int n) {
+        return nums.contains(n);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
