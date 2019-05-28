@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +45,7 @@ public class LottoTicketTest {
     @Test
     void 로또번호_범위_벗어남2() {
         assertThrows(InvalidLottoTicketException.class, () -> {
-            LottoTicket.create(Arrays.asList(1, 2, 3, 4, 5, 7));
+            LottoTicket.create(Arrays.asList(1, 2, 3, 4, 5, 46));
         });
     }
 }
