@@ -24,7 +24,11 @@ public class Money {
         }
     }
 
-    public long getPurchaseCount() {
+    public long value() {
+        return money;
+    }
+
+    public long getCountOfPurchase() {
         return money / PRICE_PER_LOTTO;
     }
 }

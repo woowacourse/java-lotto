@@ -13,6 +13,6 @@ public class MoneyTest {
 
     @Test
     void 구매_개수_확인() {
-        assertThat(10).isEqualTo(Money.from(10000).getPurchaseCount());
+        assertThat(10).isEqualTo(Money.from(10000).getCountOfPurchase());
     }
 }
