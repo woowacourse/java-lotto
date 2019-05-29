@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.GameCounts;
 import lotto.domain.LottoGames;
 import lotto.domain.PurchaseAmount;
@@ -18,6 +19,7 @@ public class LottoApplication {
         LottoGames lottoGames = getLottoGames(gameCounts);
         OutputView.lottoList(lottoGames);
         WinningLotto winningLotto = getWinLotto();
+        BonusNumber bonusNumber = getBonusNumber(winningLotto);
         OutputView.winList(lottoGames, winningLotto);
         OutputView.rateOfReturn(purchaseAmount);
     }
@@ -58,6 +60,15 @@ public class LottoApplication {
         } catch (IllegalFormatException e) {
             System.out.println(e.getMessage());
             return getWinLotto();
+        }
+    }
+
+    private static BonusNumber getBonusNumber(WinningLotto winningLotto) {
+        try {
+            return BonusNumber.of(InputView.getBonusNumber(), winningLotto);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getBonusNumber(winningLotto);
         }
     }
 }

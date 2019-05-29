@@ -36,6 +36,10 @@ public class OutputView {
         System.out.println(INPUT_WIN);
     }
 
+    static void bonus() {
+        System.out.println("보너스 볼을 입력해주세요.");
+    }
+
     public static void winList(LottoGames lottoGames, WinningLotto winningLotto) {
         System.out.println(WIN_TITLE);
         System.out.println(WIN_CONTOUR);
@@ -52,6 +56,6 @@ public class OutputView {
     }
 
     public static void rateOfReturn(PurchaseAmount purchaseAmount) {
-        System.out.println("총 수익률은 " + LottoResult.getRateOfReturn(purchaseAmount) + "%입니다.");
+        System.out.println("총 수익률은 " + Math.round(LottoResult.getRateOfReturn(purchaseAmount)) + "%입니다.");
     }
 }

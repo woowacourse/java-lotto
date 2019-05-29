@@ -41,7 +41,6 @@ public class PurchaseAmount {
     }
 
     public double rateOf(double prizeAmount) {
-        // TODO: 이거 이상함.. 수익률 구하는 계산식을 수정해야 합니다.
         return (prizeAmount / purchaseAmount) * PERCENT;
     }
 

@@ -16,8 +16,8 @@ public class InputParser {
     private static final String ILLEGAL_INPUT_FORMAT = "입력 형식이 올바르지 않습니다.";
     private static final String DELIMITER = ",";
 
-    public static List<LottoNumber> parse(String input) {
-        valid(input);
+    public static List<LottoNumber> parseLotto(String input) {
+        validLottoFormat(input);
         String[] tokens = split(input);
         Set<LottoNumber> inputNumbers = getInputNumbers(tokens);
         List<LottoNumber> lottoNumbers = validLottoNumbers(inputNumbers);
@@ -25,10 +25,16 @@ public class InputParser {
         return lottoNumbers;
     }
 
+    private static void validLottoFormat(String input) {
+        if (!input.matches(INPUT_FORM_REGEX)) {
+            throw new IllegalFormatException(ILLEGAL_INPUT_FORMAT);
+        }
+    }
+
     private static Set<LottoNumber> getInputNumbers(String[] tokens) {
         Set<LottoNumber> temp = new HashSet<>();
         for (String token : tokens) {
-            temp.add(LottoNumber.is(Integer.parseInt(token)));
+            temp.add(LottoNumber.of(Integer.parseInt(token)));
         }
         return temp;
     }
@@ -48,9 +54,14 @@ public class InputParser {
         return result;
     }
 
-    private static void valid(String input) {
-        if (!input.matches(INPUT_FORM_REGEX)) {
-            throw new IllegalFormatException(ILLEGAL_INPUT_FORMAT);
+    public static int parseBonus(String input) {
+        validBonusFormat(input);
+        return Integer.parseInt(input);
+    }
+
+    private static void validBonusFormat(String input) {
+        if (!input.matches("[0-9]{1,2}")) {
+            throw new IllegalArgumentException(ILLEGAL_INPUT_FORMAT);
         }
     }
 }

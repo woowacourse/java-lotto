@@ -14,4 +14,9 @@ public class InputView {
         OutputView.win();
         return scanner.nextLine();
     }
+
+    public static String getBonusNumber() {
+        OutputView.bonus();
+        return scanner.nextLine();
+    }
 }
