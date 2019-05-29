@@ -17,6 +17,10 @@ public enum Prize {
         this.winningAmount = winningAmount;
     }
 
+    public int getCountOfNumber() {
+        return countOfNumber;
+    }
+
     public int getWinningAmount() {
         return winningAmount;
     }
