@@ -41,7 +41,7 @@ public class PurchaseAmount {
     }
 
     public double rateOf(double prizeAmount) {
-        return (prizeAmount / purchaseAmount) * PERCENT;
+        return ((prizeAmount - purchaseAmount) / purchaseAmount) * PERCENT;
     }
 
     public int getCount() {

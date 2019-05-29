@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.GameCounts;
+import lotto.domain.TotalCount;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseAmount;
@@ -16,8 +16,8 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        GameCounts gameCounts = getGameCounts(purchaseAmount);
-        LottoGames lottoGames = getLottoGames(gameCounts);
+        TotalCount totalCounts = getGameCounts(purchaseAmount);
+        LottoGames lottoGames = getLottoGames(totalCounts);
         OutputView.lottoList(lottoGames);
         WinningNumbers winningNumber = getWinLotto();
         WinningLotto winningLotto = getWinningLotto(winningNumber);
@@ -50,21 +50,21 @@ public class LottoApplication {
         }
     }
 
-    private static GameCounts getGameCounts(PurchaseAmount purchaseAmount) {
+    private static TotalCount getGameCounts(PurchaseAmount purchaseAmount) {
         try {
-            return new GameCounts(purchaseAmount);
+            return new TotalCount(purchaseAmount);
         } catch (PurchaseAmountException e) {
             System.out.println(e.getMessage());
             return getGameCounts(purchaseAmount);
         }
     }
 
-    private static LottoGames getLottoGames(GameCounts gameCounts) {
+    private static LottoGames getLottoGames(TotalCount totalCounts) {
         try {
-            return new LottoGames(gameCounts);
+            return new LottoGames(totalCounts);
         } catch (PurchaseAmountException e) {
             System.out.println(e.getMessage());
-            return getLottoGames(gameCounts);
+            return getLottoGames(totalCounts);
         }
     }
 

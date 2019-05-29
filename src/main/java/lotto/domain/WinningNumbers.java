@@ -11,7 +11,7 @@ public class WinningNumbers {
         this.winningNumbers = InputParser.parseLotto(input);
     }
 
-    public boolean contains(Number number) {
-        return winningNumbers.contains(number.toLottoNumber());
+    public boolean contains(LottoNumber number) {
+        return winningNumbers.contains(number);
     }
 }

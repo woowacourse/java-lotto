@@ -9,9 +9,9 @@ public class LottoGames implements Iterable<Lotto> {
 
     private final List<Lotto> lottoGames;
 
-    public LottoGames(GameCounts gameCounts) {
+    public LottoGames(TotalCount totalCounts) {
         this.lottoGames = new ArrayList<>();
-        for (int i = FIRST_LOTTO; i < gameCounts.getGameCounts(); i++) {
+        for (int i = FIRST_LOTTO; i < totalCounts.getTotalCount(); i++) {
             addLotto();
         }
     }

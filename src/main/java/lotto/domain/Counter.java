@@ -21,12 +21,13 @@ public class Counter {
         return new Counter(this.counter + 1);
     }
 
-    public int totalAmount(Rank rank) {
-        return rank.getPrize() * counter;
+    public int multiply(int prize) {
+        return prize * counter;
     }
 
     @Override
     public String toString() {
         return String.valueOf(counter);
     }
+
 }

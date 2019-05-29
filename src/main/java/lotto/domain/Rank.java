@@ -45,6 +45,10 @@ public enum Rank {
         throw new IllegalArgumentException(matchCount + INVALID_RANGE);
     }
 
+    public int totalAmount(Counter counter) {
+        return counter.multiply(this.getPrize());
+    }
+
     private boolean matchCount(int matchCount) {
         return this.matchCount == matchCount;
     }

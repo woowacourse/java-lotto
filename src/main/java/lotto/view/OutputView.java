@@ -19,9 +19,11 @@ public class OutputView {
     private static final String INPUT_BONUS = "보너스 볼을 입력해주세요.";
     private static final String WIN_TITLE = "\n당첨 통계";
     private static final String WIN_CONTOUR = "---------";
-    private static final String RANK_RESULT_FORMAT = "%d개 일치 (%d원) - %s개";
+    private static final String RANK_RESULT_FORMAT = "%d개 일치%s (%d원) - %s개";
     private static final String RETURN_HEADER = "총 수익률은 ";
     private static final String RETURN_FOOTER = "%입니다.";
+    private static final String SECOND_ADDITIONAL = ", 보너스볼 일치";
+    private static final String NO_ADDITIONAL = "";
 
     static void start() {
         System.out.println(INPUT_PURCHASE_AMOUNT);
@@ -54,8 +56,16 @@ public class OutputView {
 
     private static void rankResult(Map<Rank, Counter> lottoResult, Rank rank) {
         if (!rank.equals(Rank.MISS)) {
-            System.out.println(String.format(RANK_RESULT_FORMAT, rank.getMatchCount(), rank.getPrize(), lottoResult.get(rank)));
+            System.out.println(getRankResult(lottoResult, rank));
         }
+    }
+
+    private static String getRankResult(Map<Rank, Counter> lottoResult, Rank rank) {
+        return String.format(RANK_RESULT_FORMAT, rank.getMatchCount(), rankAdditional(rank), rank.getPrize(), lottoResult.get(rank));
+    }
+
+    private static String rankAdditional(Rank rank) {
+        return rank.equals(Rank.SECOND) ? SECOND_ADDITIONAL : NO_ADDITIONAL;
     }
 
     public static void rateOfReturn(PurchaseAmount purchaseAmount) {

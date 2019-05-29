@@ -32,7 +32,7 @@ public class LottoResult {
     public static double getRateOfReturn(PurchaseAmount amount) {
         int prize = 0;
         for (Rank rank : Rank.values()) {
-            prize += lottoResult.get(rank).totalAmount(rank);
+            prize += rank.totalAmount(lottoResult.get(rank));
         }
         return amount.rateOf(prize);
     }
