@@ -1,17 +1,17 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class LottoTicket {
     private static final int LOTTO_NUMBERS = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new TreeSet<>(lottoNumbers);
+    public LottoTicket(List<Integer> lottoNumbers) {
+        this.lottoNumbers = new TreeSet<>();
+        lottoNumbers.forEach(lottoNumber -> {
+            this.lottoNumbers.add(LottoNumber.valueOf(lottoNumber));
+        });
         validateLotto();
     }
 
@@ -31,10 +31,22 @@ public class LottoTicket {
     }
 
     private int checkNumber(LottoNumber lottoNumber) {
-        System.out.println(lottoNumber);
         if (lottoNumbers.contains(lottoNumber)) {
             return 1;
         }
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

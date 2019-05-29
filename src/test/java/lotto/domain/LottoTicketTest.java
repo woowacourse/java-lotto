@@ -10,12 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoTicketTest {
     @Test
     void 번호_갯수_오류() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5)
+        List<Integer> lottoNumbers = Arrays.asList(
+                1,2,3,4,5
         );
         assertThrows(IllegalArgumentException.class, () -> {
             LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -24,22 +20,12 @@ class LottoTicketTest {
 
     @Test
     void 같은번호_갯수() {
-        List<LottoNumber> lottoNumbersFirst = Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(6)
+        List<Integer> lottoNumbersFirst = Arrays.asList(
+                1,2,3,4,5,6
         );
 
-        List<LottoNumber> lottoNumbersSecond = Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(7)
+        List<Integer> lottoNumbersSecond = Arrays.asList(
+                1,2,3,4,5,7
         );
 
         LottoTicket lottoTicket1 = new LottoTicket(lottoNumbersFirst);
