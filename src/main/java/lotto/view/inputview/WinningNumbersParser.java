@@ -1,13 +1,14 @@
 package lotto.view.inputview;
 
+import lotto.utils.InputUtils;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WinningNumbersParser {
-    private static final String ERROR_NULL_OR_NO_INPUT = "입력이 없습니다.";
+public class WinningNumbersParser extends AbstractParser{
     private static final String ERROR_INVALID_NUMBERS_COUNT = "유효한 번호의 개수가 6개가 아닙니다.";
     private static final String ERROR_HAS_DUPLICATED_NUMBER = "중복된 번호가 존재합니다.";
     private static final int LIMIT_MINIMUM_NUMBER = 1;
@@ -27,21 +28,11 @@ public class WinningNumbersParser {
         return getSeparatedNumbers(inputNumbers);
     }
 
-    private static void checkNullEmpty(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new NullPointerException(ERROR_NULL_OR_NO_INPUT);
-        }
-    }
-
     private static List<Integer> getSeparatedNumbers(String input) {
-        return Arrays.stream(input.trim().split(","))
+        return Arrays.stream(InputUtils.split(input))
                 .map(Integer::parseInt)
-                .filter(WinningNumbersParser::isValidRange)
+                .filter(number -> InputUtils.isValidRange(number, LIMIT_MINIMUM_NUMBER, LIMIT_MAXIMUM_NUMBER))
                 .collect(Collectors.toList());
-    }
-
-    private static boolean isValidRange(Integer number) {
-        return LIMIT_MINIMUM_NUMBER <= number && number <= LIMIT_MAXIMUM_NUMBER;
     }
 
     private static void verifyValidWinningNumbers(List<Integer> winningNumbers) {
@@ -50,16 +41,24 @@ public class WinningNumbersParser {
     }
 
     private static void checkNumbersCount(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != LOTTO_NUMBER_COUNT) {
+        if (isInsufficientNumbers(winningNumbers)) {
             throw new IllegalArgumentException(ERROR_INVALID_NUMBERS_COUNT);
         }
     }
 
-    private static void checkDuplicateNumber(List<Integer> winningNumbers) {
-        Set<Integer> copyWinningNumbers = new HashSet<>(winningNumbers);
+    private static boolean isInsufficientNumbers(List<Integer> winningNumbers) {
+        return winningNumbers.size() != LOTTO_NUMBER_COUNT;
+    }
 
-        if (winningNumbers.size() != copyWinningNumbers.size()) {
+    private static void checkDuplicateNumber(List<Integer> winningNumbers) {
+        if (hasDuplicatedNumber(winningNumbers)) {
             throw new IllegalArgumentException(ERROR_HAS_DUPLICATED_NUMBER);
         }
+    }
+
+    private static boolean hasDuplicatedNumber(List<Integer> winningNumbers) {
+        Set<Integer> copyWinningNumbers = new HashSet<>(winningNumbers);
+
+        return winningNumbers.size() != copyWinningNumbers.size();
     }
 }
