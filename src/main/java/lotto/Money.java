@@ -10,4 +10,10 @@ public class Money {
         }
         this.money = Integer.parseInt(input);
     }
+
+
+    public double calculatePercentage(double sum) {
+        return sum/money;
+
+    }
 }
