@@ -3,9 +3,9 @@ package lotto;
 import lotto.domain.GameCounts;
 import lotto.domain.LottoGames;
 import lotto.domain.PurchaseAmount;
-import lotto.domain.WinLotto;
-import lotto.exceptions.IllegalInputFormatException;
-import lotto.exceptions.InvalidPurchaseAmountException;
+import lotto.domain.WinningLotto;
+import lotto.exceptions.IllegalFormatException;
+import lotto.exceptions.PurchaseAmountException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,15 +17,15 @@ public class LottoApplication {
         GameCounts gameCounts = getGameCounts(purchaseAmount);
         LottoGames lottoGames = getLottoGames(gameCounts);
         OutputView.lottoList(lottoGames);
-        WinLotto winLotto = getWinLotto();
-        OutputView.winList(lottoGames, winLotto);
+        WinningLotto winningLotto = getWinLotto();
+        OutputView.winList(lottoGames, winningLotto);
         OutputView.rateOfReturn(purchaseAmount);
     }
 
     private static PurchaseAmount getPurchaseAmount() {
         try {
             return PurchaseAmount.of(InputView.getPurchaseAmount());
-        } catch (InvalidPurchaseAmountException e) {
+        } catch (PurchaseAmountException e) {
             System.out.println(e.getMessage());
             return getPurchaseAmount();
         } catch (NumberFormatException e) {
@@ -37,7 +37,7 @@ public class LottoApplication {
     private static GameCounts getGameCounts(PurchaseAmount purchaseAmount) {
         try {
             return new GameCounts(purchaseAmount);
-        } catch (InvalidPurchaseAmountException e) {
+        } catch (PurchaseAmountException e) {
             System.out.println(e.getMessage());
             return getGameCounts(purchaseAmount);
         }
@@ -46,16 +46,16 @@ public class LottoApplication {
     private static LottoGames getLottoGames(GameCounts gameCounts) {
         try {
             return new LottoGames(gameCounts);
-        } catch (InvalidPurchaseAmountException e) {
+        } catch (PurchaseAmountException e) {
             System.out.println(e.getMessage());
             return getLottoGames(gameCounts);
         }
     }
 
-    private static WinLotto getWinLotto() {
+    private static WinningLotto getWinLotto() {
         try {
-            return new WinLotto(InputView.getWinnerLotto());
-        } catch (IllegalInputFormatException e) {
+            return new WinningLotto(InputView.getWinnerLotto());
+        } catch (IllegalFormatException e) {
             System.out.println(e.getMessage());
             return getWinLotto();
         }

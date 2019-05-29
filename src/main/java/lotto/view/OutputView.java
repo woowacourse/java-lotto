@@ -8,7 +8,7 @@ import lotto.domain.LottoGames;
 import lotto.domain.LottoResult;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.Rank;
-import lotto.domain.WinLotto;
+import lotto.domain.WinningLotto;
 
 public class OutputView {
     private static final String START = "구매금액을 입력해주세요.";
@@ -36,10 +36,10 @@ public class OutputView {
         System.out.println(INPUT_WIN);
     }
 
-    public static void winList(LottoGames lottoGames, WinLotto winLotto) {
+    public static void winList(LottoGames lottoGames, WinningLotto winningLotto) {
         System.out.println(WIN_TITLE);
         System.out.println(WIN_CONTOUR);
-        Map<Rank, Counter> lottoResult = LottoResult.create(lottoGames, winLotto);
+        Map<Rank, Counter> lottoResult = LottoResult.create(lottoGames, winningLotto);
         for (Rank rank : Rank.values()) {
             rankResult(lottoResult, rank);
         }

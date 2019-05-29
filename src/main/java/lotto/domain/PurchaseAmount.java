@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import lotto.exceptions.InvalidPurchaseAmountException;
+import lotto.exceptions.PurchaseAmountException;
 
 public class PurchaseAmount {
     private static final String INVALID_PURCHASE_AMOUNT = "구매 금액은 1000원 이상입니다.";
@@ -26,13 +26,13 @@ public class PurchaseAmount {
 
     private void validAmount(int purchaseAmount) {
         if (purchaseAmount < PURCHASE_AMOUNT_UNIT) {
-            throw new InvalidPurchaseAmountException(INVALID_PURCHASE_AMOUNT);
+            throw new PurchaseAmountException(INVALID_PURCHASE_AMOUNT);
         }
     }
 
     private void validUnit(int purchaseAmount) {
         if (!isProperUnit(purchaseAmount)) {
-            throw new InvalidPurchaseAmountException(INVALID_PURCHASE_UNIT);
+            throw new PurchaseAmountException(INVALID_PURCHASE_UNIT);
         }
     }
 
@@ -40,8 +40,9 @@ public class PurchaseAmount {
         return purchaseAmount % PURCHASE_AMOUNT_UNIT == PROPER_REMINDER;
     }
 
-    public double rateOf(int prizeAmount) {
-        return (double) (prizeAmount / purchaseAmount) * PERCENT;
+    public double rateOf(double prizeAmount) {
+        // TODO: 이거 이상함.. 수익률 구하는 계산식을 수정해야 합니다.
+        return (prizeAmount / purchaseAmount) * PERCENT;
     }
 
     public int getCount() {

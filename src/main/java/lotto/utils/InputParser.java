@@ -4,10 +4,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lotto.domain.LottoNumber;
-import lotto.exceptions.IllegalInputFormatException;
+import lotto.exceptions.IllegalFormatException;
 
 public class InputParser {
     private static final String INPUT_FORM_REGEX = "([^,]+)([, ][^,]+)*";
@@ -17,25 +19,38 @@ public class InputParser {
     public static List<LottoNumber> parse(String input) {
         valid(input);
         String[] tokens = split(input);
-        List<LottoNumber> result = new ArrayList<>();
+        Set<LottoNumber> inputNumbers = getInputNumbers(tokens);
+        List<LottoNumber> lottoNumbers = validLottoNumbers(inputNumbers);
+        Collections.sort(lottoNumbers);
+        return lottoNumbers;
+    }
+
+    private static Set<LottoNumber> getInputNumbers(String[] tokens) {
+        Set<LottoNumber> temp = new HashSet<>();
         for (String token : tokens) {
-            result.add(LottoNumber.of(Integer.parseInt(token)));
+            temp.add(LottoNumber.is(Integer.parseInt(token)));
         }
-        Collections.sort(result);
-        return result;
+        return temp;
+    }
+
+    private static List<LottoNumber> validLottoNumbers(Set<LottoNumber> temp) {
+        if (temp.size() != 6) {
+            throw new IllegalFormatException("당첨 번호는 총 6개 입니다.");
+        }
+        return new ArrayList<>(temp);
     }
 
     private static String[] split(String input) {
         String[] result = StringUtils.deleteWhitespace(input).split(DELIMITER);
         if (result.length != 6) {
-            throw new IllegalInputFormatException("당첨 번호는 6개 입니다.");
+            throw new IllegalFormatException("당첨 번호는 6개 입니다.");
         }
         return result;
     }
 
     private static void valid(String input) {
         if (!input.matches(INPUT_FORM_REGEX)) {
-            throw new IllegalInputFormatException(ILLEGAL_INPUT_FORMAT);
+            throw new IllegalFormatException(ILLEGAL_INPUT_FORMAT);
         }
     }
 }

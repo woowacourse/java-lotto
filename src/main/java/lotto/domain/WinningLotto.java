@@ -4,19 +4,19 @@ import java.util.List;
 
 import lotto.utils.InputParser;
 
-public class WinLotto {
+public class WinningLotto {
     private static final int COUNT_INITIALIZE = 0;
 
     private final List<LottoNumber> winnerLotto;
 
-    public WinLotto(String input) {
+    public WinningLotto(String input) {
         this.winnerLotto = InputParser.parse(input);
     }
 
     public Rank getRank(Lotto lotto) {
         int matchCount = COUNT_INITIALIZE;
-        for (LottoNumber lottoNumber : lotto) {
-            matchCount = countAdder(matchCount, lottoNumber);
+        for (LottoNumber number : lotto) {
+            matchCount = countAdder(matchCount, number);
         }
         return Rank.valueOf(matchCount);
     }
