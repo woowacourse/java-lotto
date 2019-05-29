@@ -24,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber valueOf(final int number) {
         if (number >= LOTTO_MIN_NUMBER && number <= LOTTO_MAX_NUMBER) {
-            return LottoNumberCache.cache.get(number);
+            return LottoNumberCache.cache.get(number-1);
         }
         return new LottoNumber(number);
     }
