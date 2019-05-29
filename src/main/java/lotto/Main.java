@@ -19,8 +19,7 @@ public class Main {
 
     private static Money createMoney() {
         try {
-            Money money = new Money(InputView.inputMoney());
-            return money;
+            return new Money(InputView.inputMoney());
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createMoney();
@@ -29,8 +28,7 @@ public class Main {
 
     private static WinningLotto createWinningLotto() {
         try {
-            WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.inputWinningLotto()));
-            return winningLotto;
+            return new WinningLotto(new Lotto(InputView.inputWinningLotto()));
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createWinningLotto();

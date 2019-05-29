@@ -7,10 +7,14 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public static String inputMoney() {
+    public static int inputMoney() {
         System.out.println("구입 금액을 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        try {
+            return scanner.nextInt();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("숫자가 아닙니다. 금액은 숫자를 입력해야 합니다.");
+        }
     }
 
     public static List<Integer> inputWinningLotto() {
