@@ -39,4 +39,8 @@ public enum Rank {
     public String toString() {
         return numberOfMatch + "개 일치 (" + prize + "원) - ";
     }
+
+    public long sumPrizeOf(Integer numberOfMatch) {
+        return prize * numberOfMatch;
+    }
 }

@@ -1,6 +1,8 @@
 package lottogame;
 
-import lottogame.domain.PurchaseLotto;
+import lottogame.domain.LottoResult;
+import lottogame.domain.LottoResultGenerator;
+import lottogame.domain.LottoTickets;
 import lottogame.domain.WinningLotto;
 import lottogame.utils.InvalidLottoNumberException;
 import lottogame.utils.InvalidLottoPriceException;
@@ -10,17 +12,19 @@ import lottogame.view.OutputView;
 
 public class LottoGameMain {
     public static void main(String[] args) {
-        PurchaseLotto purchaseLotto = createLottos();
-        OutputView.printPurchaseResult(purchaseLotto);
+        LottoTickets lottoTickets = createLottoTickets();
+        OutputView.printPurchaseResult(lottoTickets);
         WinningLotto winningLotto = createWinningLotto();
+        LottoResult lottoResult = LottoResultGenerator.create(lottoTickets, winningLotto);
+        OutputView.printLottoResult(lottoResult, lottoTickets.price());
     }
 
-    private static PurchaseLotto createLottos() {
+    private static LottoTickets createLottoTickets() {
         try {
-            return new PurchaseLotto(Integer.parseInt(InputView.getPrice()));
+            return new LottoTickets(Integer.parseInt(InputView.getPrice()));
         } catch (NumberFormatException | InvalidLottoPriceException e) {
             System.out.println(e.getMessage());
-            return createLottos();
+            return createLottoTickets();
         }
     }
 

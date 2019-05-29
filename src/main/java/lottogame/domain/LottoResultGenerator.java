@@ -1,6 +1,5 @@
 package lottogame.domain;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +13,8 @@ public class LottoResultGenerator {
         }
     }
 
-    public LottoResult create(PurchaseLotto purchaseLotto, WinningLotto winningLotto) {
-        List<Rank> matchResults = purchaseLotto.getMatchResultEachLottos(winningLotto);
+    public static LottoResult create(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        List<Rank> matchResults = lottoTickets.getMatchResultEachLottos(winningLotto);
         for (Rank rank : matchResults) {
             result.put(rank, result.get(rank) + 1);
         }

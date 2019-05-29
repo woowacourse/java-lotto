@@ -5,12 +5,12 @@ import lottogame.utils.InvalidLottoPriceException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseLotto {
+public class LottoTickets {
     private static final int ONE_LOTTO_PRICE = 1000;
 
     private List<Lotto> lottos = new ArrayList<>();
 
-    public PurchaseLotto(int price) {
+    public LottoTickets(int price) {
         int numberOfLotto = getNumberOfLotto(price);
         while (lottos.size() < numberOfLotto) {
             lottos.add(new Lotto());
@@ -26,6 +26,10 @@ public class PurchaseLotto {
 
     private boolean isValidatePrice(int price) {
         return (price % ONE_LOTTO_PRICE == 0) && (price >= ONE_LOTTO_PRICE);
+    }
+
+    public int price() {
+        return numberOfLottos() * ONE_LOTTO_PRICE;
     }
 
     public int numberOfLottos() {
