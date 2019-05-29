@@ -35,6 +35,6 @@ class LottoTest {
                 , new LottoNo(2), new LottoNo(3)
                 , new LottoNo(15), new LottoNo(22)
                 , new LottoNo(25)));
-        assertThat(lotto1.getCountOfMatchNo(lotto2)).isEqualTo(3);
+        assertThat(lotto1.findCountOfMatchNo(lotto2)).isEqualTo(3);
     }
 }

@@ -44,7 +44,7 @@ public class Lotto {
         return lottoNo.contains(lotto);
     }
 
-    int getCountOfMatchNo(Lotto lotto) {
+    int findCountOfMatchNo(Lotto lotto) {
         return lottoNo.stream().filter(lotto::matchNo).collect(Collectors.toList()).size();
     }
 

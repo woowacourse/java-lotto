@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Budget;
-import lotto.domain.Lotto;
-import lotto.domain.LottoBuyer;
-import lotto.domain.LottoNo;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -20,7 +17,10 @@ public class LottoApplication {
         }
         OutputView.printContainingLottos(person);
 
-        Lotto WinningLotto = makeWinningLotto();
+        Lotto winningLotto = makeWinningLotto();
+
+        WinningResult winningResult = person.checkWinningLotto(winningLotto);
+        OutputView.printResult(winningResult);
     }
 
     private static LottoBuyer makePerson() {

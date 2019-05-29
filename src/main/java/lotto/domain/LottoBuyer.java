@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class LottoBuyer {
@@ -27,5 +28,14 @@ public class LottoBuyer {
 
     public List<String> showLottos() {
         return lottos.showLottos();
+    }
+
+    public WinningResult checkWinningLotto(Lotto winningLotto) {
+        WinningResult result = new WinningResult();
+        Iterator<Lotto> iter = lottos.iterator();
+        while (iter.hasNext()) {
+            result.count(iter.next(), winningLotto);
+        }
+        return result;
     }
 }
