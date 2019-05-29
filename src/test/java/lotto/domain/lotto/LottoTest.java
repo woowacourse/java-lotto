@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.InvalidLottoException;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +37,7 @@ public class LottoTest {
         for (int i = 1; i < 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        assertThrows(IllegalArgumentException.class, ()->{
+        assertThrows(InvalidLottoException.class, ()->{
             new Lotto(lottoNumbers);
         });
     }
@@ -44,7 +47,7 @@ public class LottoTest {
         for (int i = 1; i < 8; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        assertThrows(IllegalArgumentException.class, ()->{
+        assertThrows(InvalidLottoException.class, ()->{
             new Lotto(lottoNumbers);
         });
     }

@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import lotto.domain.InvalidLottoException;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +15,7 @@ public class Lotto {
 
     private List<LottoNumber> invalidNumberOfLotto(List<LottoNumber> lottoNumbers){
         if(lottoNumbers.size() != 6){
-            throw new IllegalArgumentException("로또 범위는 6개여야 합니다.");
+            throw new InvalidLottoException("로또 범위는 6개여야 합니다.");
         }
         return lottoNumbers;
     }
