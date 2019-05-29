@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.exceptions.IllegalFormatException;
+import lotto.domain.lotto.Number;
 
 import static org.junit.jupiter.api.Assertions.*;
 

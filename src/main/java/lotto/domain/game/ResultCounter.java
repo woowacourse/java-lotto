@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.game;
 
 public class ResultCounter {
     private static final int INIT_STATE = 0;

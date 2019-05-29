@@ -1,16 +1,18 @@
-package lotto.domain;
+package lotto.domain.game;
 
 import java.util.Objects;
 
+import lotto.domain.PurchaseAmount;
+
 public class TotalCount {
-    private final int totalCount;
+    private final int count;
 
     public TotalCount(PurchaseAmount purchaseAmount) {
-        this.totalCount = purchaseAmount.getCount();
+        this.count = purchaseAmount.getCount();
     }
 
-    public int getTotalCount() {
-        return totalCount;
+    public int getCount() {
+        return count;
     }
 
     @Override
@@ -18,11 +20,11 @@ public class TotalCount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TotalCount that = (TotalCount) o;
-        return totalCount == that.totalCount;
+        return count == that.count;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalCount);
+        return Objects.hash(count);
     }
 }

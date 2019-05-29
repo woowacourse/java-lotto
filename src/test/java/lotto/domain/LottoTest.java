@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Number;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 

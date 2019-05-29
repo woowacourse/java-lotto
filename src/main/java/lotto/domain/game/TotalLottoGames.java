@@ -1,13 +1,16 @@
-package lotto.domain;
+package lotto.domain.game;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoGames {
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Number;
+
+public class TotalLottoGames {
     private ManualLottoGames manualLottoGames;
     private AutoLottoGames autoLottoGames;
 
-    public LottoGames(AutoCount autoCount) {
+    public TotalLottoGames(AutoCount autoCount) {
         this.manualLottoGames = new ManualLottoGames();
         this.autoLottoGames = new AutoLottoGames(autoCount);
     }

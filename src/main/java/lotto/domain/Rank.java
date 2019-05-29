@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.game.ResultCounter;
+
 public enum Rank {
     MISS(0, 0),
     FIFTH(3, 5_000),

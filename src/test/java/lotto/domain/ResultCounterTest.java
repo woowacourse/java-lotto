@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.game.ResultCounter;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultCounterTest {

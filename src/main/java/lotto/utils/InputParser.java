@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lotto.domain.Number;
+import lotto.domain.lotto.Number;
 import lotto.domain.exceptions.IllegalFormatException;
 
 public class InputParser {

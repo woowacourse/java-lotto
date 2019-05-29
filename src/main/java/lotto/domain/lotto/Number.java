@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ public class Number implements Comparable<Number> {
 
     private final int number;
 
-    protected Number(int number) {
+    public Number(int number) {
         valid(number);
         this.number = number;
     }

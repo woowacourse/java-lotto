@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.domain.exceptions.BonusNumberException;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Number;
 
 public class WinningLotto {
     private static final int COUNT_INITIALIZE = 0;

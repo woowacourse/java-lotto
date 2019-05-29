@@ -1,7 +1,12 @@
-package lotto.domain;
+package lotto.domain.game;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import lotto.domain.PurchaseAmount;
+import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
+import lotto.domain.lotto.Lotto;
 
 import static lotto.domain.Rank.*;
 
@@ -18,8 +23,8 @@ public class LottoResult {
         lottoResult.put(MISS, ResultCounter.create());
     }
 
-    public static Map<Rank, ResultCounter> create(LottoGames lottoGames, WinningLotto winningLotto) {
-        for (Lotto lotto : lottoGames.getAll()) {
+    public static Map<Rank, ResultCounter> create(TotalLottoGames totalLottoGames, WinningLotto winningLotto) {
+        for (Lotto lotto : totalLottoGames.getAll()) {
             increase(winningLotto.getRank(lotto));
         }
         return lottoResult;

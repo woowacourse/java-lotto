@@ -3,6 +3,9 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.exceptions.ManualCountBoundException;
+import lotto.domain.game.AutoCount;
+import lotto.domain.game.ManualCount;
+import lotto.domain.game.TotalCount;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;

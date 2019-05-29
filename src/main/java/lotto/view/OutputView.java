@@ -2,11 +2,11 @@ package lotto.view;
 
 import java.util.Map;
 
-import lotto.domain.LottoGames;
-import lotto.domain.ManualCount;
-import lotto.domain.ResultCounter;
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
+import lotto.domain.game.TotalLottoGames;
+import lotto.domain.game.ManualCount;
+import lotto.domain.game.ResultCounter;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.game.LottoResult;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
@@ -36,23 +36,23 @@ public class OutputView {
         System.out.println(INPUT_PURCHASE_AMOUNT);
     }
 
-    public static void lottoList(LottoGames lottoGames) {
-        System.out.println(getListMessage(lottoGames));
-        for (Lotto lotto : lottoGames.getAll()) {
+    public static void lottoList(TotalLottoGames totalLottoGames) {
+        System.out.println(getListMessage(totalLottoGames));
+        for (Lotto lotto : totalLottoGames.getAll()) {
             System.out.println(OPEN_SQUARE_BUCKET + lotto.getLotto() + CLOSE_SQUARE_BUCKET);
         }
         System.out.println();
     }
 
-    private static String getListMessage(LottoGames lottoGames) {
-        if (lottoGames.manualSize() != 0 && lottoGames.autoSize() == 0) {
-            return MANUAL_HEADER + lottoGames.manualSize() + LIST_MESSAGE_FOOTER;
+    private static String getListMessage(TotalLottoGames totalLottoGames) {
+        if (totalLottoGames.manualSize() != 0 && totalLottoGames.autoSize() == 0) {
+            return MANUAL_HEADER + totalLottoGames.manualSize() + LIST_MESSAGE_FOOTER;
         }
-        if (lottoGames.manualSize() == 0 && lottoGames.autoSize() != 0) {
-            return AUTO_HEADER + lottoGames.autoSize() + LIST_MESSAGE_FOOTER;
+        if (totalLottoGames.manualSize() == 0 && totalLottoGames.autoSize() != 0) {
+            return AUTO_HEADER + totalLottoGames.autoSize() + LIST_MESSAGE_FOOTER;
         }
-        return MANUAL_HEADER + lottoGames.manualSize() + JOINER
-                + AUTO_HEADER + lottoGames.autoSize() + LIST_MESSAGE_FOOTER;
+        return MANUAL_HEADER + totalLottoGames.manualSize() + JOINER
+                + AUTO_HEADER + totalLottoGames.autoSize() + LIST_MESSAGE_FOOTER;
     }
 
     static void win() {
@@ -63,10 +63,10 @@ public class OutputView {
         System.out.println(INPUT_BONUS);
     }
 
-    public static void winList(LottoGames lottoGames, WinningLotto winningLotto) {
+    public static void winList(TotalLottoGames totalLottoGames, WinningLotto winningLotto) {
         System.out.println(WIN_TITLE);
         System.out.println(WIN_CONTOUR);
-        Map<Rank, ResultCounter> lottoResult = LottoResult.create(lottoGames, winningLotto);
+        Map<Rank, ResultCounter> lottoResult = LottoResult.create(totalLottoGames, winningLotto);
         for (Rank rank : Rank.values()) {
             rankResult(lottoResult, rank);
         }

@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.exceptions.PurchaseAmountException;
+import lotto.domain.game.TotalCount;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class TotalCountTest {
     @Test
     void how_many_games_created() {
-        assertThat(new TotalCount(PurchaseAmount.is("5000")).getTotalCount()).isEqualTo(5);
+        assertThat(new TotalCount(PurchaseAmount.is("5000")).getCount()).isEqualTo(5);
     }
 
     @Test

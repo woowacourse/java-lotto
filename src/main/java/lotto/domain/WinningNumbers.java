@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
+import lotto.domain.lotto.Number;
 import lotto.utils.InputParser;
 
 public class WinningNumbers {

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.game;
 
 import lotto.domain.exceptions.ManualCountBoundException;
 
@@ -17,7 +17,7 @@ public class ManualCount {
     }
 
     private void validBound(int count, TotalCount totalCount) {
-        if (totalCount.getTotalCount() < count) {
+        if (totalCount.getCount() < count) {
             throw new ManualCountBoundException(MANUAL_COUNT_BOUND);
         }
     }
@@ -27,7 +27,7 @@ public class ManualCount {
     }
 
     public AutoCount getAutoCount(TotalCount totalCount) {
-        return new AutoCount(totalCount.getTotalCount() - this.count);
+        return new AutoCount(totalCount.getCount() - this.count);
     }
 
     public boolean isZero() {

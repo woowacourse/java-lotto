@@ -2,10 +2,10 @@ package lotto;
 
 import java.util.List;
 
-import lotto.domain.LottoGames;
-import lotto.domain.ManualCount;
-import lotto.domain.TotalCount;
-import lotto.domain.Number;
+import lotto.domain.game.TotalLottoGames;
+import lotto.domain.game.ManualCount;
+import lotto.domain.game.TotalCount;
+import lotto.domain.lotto.Number;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningNumbers;
@@ -24,16 +24,16 @@ public class LottoApplication {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         TotalCount totalCounts = getGameCounts(purchaseAmount);
         ManualCount manualCount = getManualCount(totalCounts);
-        LottoGames lottoGames = new LottoGames(manualCount.getAutoCount(totalCounts));
+        TotalLottoGames totalLottoGames = new TotalLottoGames(manualCount.getAutoCount(totalCounts));
         OutputView.manualNumbers(manualCount);
         for (int i = 0; i < manualCount.getCount(); i++) {
             List<Number> lottoNumbers = getManualNumbers(i);
-            lottoGames.addManual(lottoNumbers);
+            totalLottoGames.addManual(lottoNumbers);
         }
-        OutputView.lottoList(lottoGames);
+        OutputView.lottoList(totalLottoGames);
         WinningNumbers winningNumber = getWinLotto();
         WinningLotto winningLotto = getWinningLotto(winningNumber);
-        OutputView.winList(lottoGames, winningLotto);
+        OutputView.winList(totalLottoGames, winningLotto);
         OutputView.rateOfReturn(purchaseAmount);
     }
 
