@@ -15,8 +15,12 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public void add(LottoNumbers lottoNumbers) {
+    public void add(final LottoNumbers lottoNumbers) {
         lottos.add(new Lotto(lottoNumbers));
+    }
+
+    public int size() {
+        return lottos.size();
     }
 
     @Override
