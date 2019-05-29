@@ -19,7 +19,11 @@ public class WinningLotto {
     }
 
     public WinningType matchLotto(Lotto lotto) {
-        return WinningType.valueOf(countMatchNum(lotto));
+        return WinningType.valueOf(countMatchNum(lotto), isMatchBonus(lotto));
+    }
+
+    private boolean isMatchBonus(Lotto lotto) {
+        return lotto.isContain(bonusNum);
     }
 
     private int countMatchNum(Lotto lotto) {

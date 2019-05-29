@@ -2,9 +2,10 @@ package lotto.domain;
 
 public enum WinningType {
 
-    FOURTH(3, 5_000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
     private final int matchNum;
@@ -15,8 +16,12 @@ public enum WinningType {
         this.reward = reward;
     }
 
-    public static WinningType valueOf(final int matchNum) {
+    public static WinningType valueOf(final int matchNum, boolean hasBonus) {
         for (WinningType value : WinningType.values()) {
+            if (hasBonus && SECOND.matchNum == matchNum) {
+                return SECOND;
+            }
+
             if (value.getMatchNum() == matchNum) {
                 return value;
             }
