@@ -9,7 +9,7 @@ import java.util.List;
 public class RewardTicketFactory {
     private static final String DELIMITER = ",";
 
-    public static LottoTicket create(String input) {
+    public static LottoTicket create(final String input) {
         List<String> list = Arrays.asList(input.split(DELIMITER));
         List<Integer> temp = new ArrayList<>();
         for (String s : list) {

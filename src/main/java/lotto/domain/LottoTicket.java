@@ -9,7 +9,7 @@ public class LottoTicket {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    public LottoTicket(final List<Integer> lottoNumbers) {
         this.lottoNumbers = new TreeSet<>();
         lottoNumbers.forEach(lottoNumber -> {
             this.lottoNumbers.add(LottoNumber.valueOf(lottoNumber));
@@ -24,7 +24,7 @@ public class LottoTicket {
     }
 
     //TODO 갈끔하게 수정해보자
-    public int getSameCount(LottoTicket otherLottoTicket) {
+    public int getSameCount(final LottoTicket otherLottoTicket) {
         int sameCount = 0;
         for (LottoNumber lottoNumber : otherLottoTicket.lottoNumbers) {
             sameCount += checkNumber(lottoNumber);
@@ -32,7 +32,7 @@ public class LottoTicket {
         return sameCount;
     }
 
-    private int checkNumber(LottoNumber lottoNumber) {
+    private int checkNumber(final LottoNumber lottoNumber) {
         if (lottoNumbers.contains(lottoNumber)) {
             return 1;
         }

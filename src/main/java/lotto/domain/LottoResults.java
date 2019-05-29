@@ -9,7 +9,7 @@ public class LottoResults {
     private final Map<LottoRewards, Integer> lottoRewards;
     private final LottoMoney lottoMoney;
 
-    public LottoResults(LottoTickets lottoTickets, LottoTicket rewardTicket, LottoMoney lottoMoney) {
+    public LottoResults(final LottoTickets lottoTickets, final LottoTicket rewardTicket, final LottoMoney lottoMoney) {
         lottoRewards = initRewards();
         this.lottoMoney = lottoMoney;
         List<Integer> results = lottoTickets.getRewards(rewardTicket);

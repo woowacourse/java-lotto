@@ -5,7 +5,7 @@ public class LottoMoney {
 
     private final int money;
 
-    public LottoMoney(int money) {
+    public LottoMoney(final int money) {
         this.money = money;
         validateMoney();
     }

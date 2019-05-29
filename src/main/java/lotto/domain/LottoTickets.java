@@ -6,11 +6,11 @@ import java.util.List;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
+    public LottoTickets(final List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<Integer> getRewards(LottoTicket rewardTicket) {
+    public List<Integer> getRewards(final LottoTicket rewardTicket) {
         List<Integer> rewards = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
             rewards.add(lottoTicket.getSameCount(rewardTicket));

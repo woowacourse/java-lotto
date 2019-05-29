@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketsFactory {
-    public static LottoTickets create(LottoMoney lottoMoney) {
+    public static LottoTickets create(final LottoMoney lottoMoney) {
         int amount = lottoMoney.getAmount();
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < amount; i++) {

@@ -12,7 +12,7 @@ public enum LottoRewards {
     private int countOfMatch;
     private int rewardMoney;
 
-    LottoRewards(int countOfMatch, int rewardMoney) {
+    LottoRewards(final int countOfMatch, final int rewardMoney) {
         this.countOfMatch = countOfMatch;
         this.rewardMoney = rewardMoney;
     }
@@ -25,7 +25,7 @@ public enum LottoRewards {
         return rewardMoney;
     }
 
-    public static LottoRewards valueOf(int countOfMatch) {
+    public static LottoRewards valueOf(final int countOfMatch) {
         if (countOfMatch < WINNING_CONDITION) {
             return MISS;
         }

@@ -11,18 +11,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int lottoNumber;
 
-    private LottoNumber(Integer number) {
+    private LottoNumber(final Integer number) {
         validateLottoNumber(number);
         this.lottoNumber = number;
     }
 
-    private void validateLottoNumber(Integer number) {
+    private void validateLottoNumber(final Integer number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 이상 45 이하 입니다.");
         }
     }
 
-    public static LottoNumber valueOf(int number) {
+    public static LottoNumber valueOf(final int number) {
         if (number >= LOTTO_MIN_NUMBER && number <= LOTTO_MAX_NUMBER) {
             return LottoNumberCache.cache.get(number);
         }
