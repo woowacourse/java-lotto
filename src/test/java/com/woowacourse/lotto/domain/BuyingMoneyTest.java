@@ -18,7 +18,7 @@ public class BuyingMoneyTest {
 
     @Test
     void quantity() {
-        assertThat(new BuyingMoney(3500).getQuantity()).isEqualTo(3);
-        assertThat(new BuyingMoney(3000).getQuantity()).isEqualTo(3);
+        assertThat(new BuyingMoney(3500).getQuantity()).isEqualTo(LottoQuantity.of(3));
+        assertThat(new BuyingMoney(3000).getQuantity()).isEqualTo(LottoQuantity.of(3));
     }
 }

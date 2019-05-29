@@ -1,13 +1,12 @@
 package com.woowacourse.lotto.domain;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class WinningLotto {
-    private final Set<Integer> winningNums;
+    private final LottoNumber winningNums;
     private final int bonus;
 
-    public WinningLotto(Set<Integer> winningNums, int bonus) {
+    public WinningLotto(LottoNumber winningNums, int bonus) {
         this.winningNums = winningNums;
         this.bonus = bonus;
         if (winningNums.contains(bonus)) {
@@ -16,9 +15,7 @@ public class WinningLotto {
     }
 
     public LottoResult match(Lotto lotto) {
-        return LottoResult.valueOf((int) winningNums.stream()
-            .filter(lotto::contains)
-            .count(), lotto.contains(bonus));
+        return LottoResult.valueOf(lotto.countMatch(winningNums), lotto.contains(bonus));
     }
 
     @Override

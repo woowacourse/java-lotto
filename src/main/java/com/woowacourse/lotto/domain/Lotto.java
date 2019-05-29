@@ -1,33 +1,19 @@
 package com.woowacourse.lotto.domain;
 
 import java.util.Objects;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int UNIT_PRICE = 1000;
-    public static final int LOTTO_NUMS = 6;
-    public static final int LOTTO_MIN = 1;
-    public static final int LOTTO_MAX = 45;
 
-    private SortedSet<Integer> nums;
+    private LottoNumber nums;
 
-    public Lotto(Set<Integer> nums) {
-        this.nums = new TreeSet<>(nums);
-
-        if (nums.size() != LOTTO_NUMS) {
-            throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
-        }
-        if (!nums.stream().allMatch(this::isValidRange)) {
-            throw new IllegalArgumentException("올바르지 않은 범위의 숫자가 있습니다.");
-        }
+    public Lotto(LottoNumber nums) {
+        this.nums = nums;
     }
 
-    private boolean isValidRange(int n) {
-        return LOTTO_MIN <= n && n <= LOTTO_MAX;
+    public int countMatch(LottoNumber otherNumber) {
+        return nums.countMatch(otherNumber);
     }
 
     public boolean contains(int n) {
@@ -35,7 +21,7 @@ public class Lotto {
     }
 
     public void forEachNums(Consumer<Integer> consumer) {
-        nums.forEach(consumer);
+        nums.forEachNumbers(consumer);
     }
 
     @Override
@@ -53,9 +39,9 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return new StringBuilder("Lotto [ ")
-            .append(nums.stream().map(String::valueOf).collect(Collectors.joining(", ")))
-            .append(" ]")
+        return new StringBuilder("Lotto { nums: ")
+            .append(nums)
+            .append(" }")
             .toString();
     }
 }

@@ -49,4 +49,9 @@ public class LottoQuantity {
     public int hashCode() {
         return Objects.hash(quantity);
     }
+
+    @Override
+    public String toString() {
+        return String.format("LottoQuantity { quantity: %d }", quantity);
+    }
 }

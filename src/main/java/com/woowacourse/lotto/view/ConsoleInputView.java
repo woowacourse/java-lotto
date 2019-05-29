@@ -4,7 +4,6 @@ import com.woowacourse.lotto.domain.*;
 import com.woowacourse.lotto.util.InputUtil;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,7 +42,7 @@ public class ConsoleInputView {
             String winningNumberStr = scanner.nextLine();
             System.out.println("보너스 볼을 입력해 주세요.");
             String bonusStr = scanner.nextLine();
-            return new WinningLotto(new HashSet<>(InputUtil.splitByComma(winningNumberStr)), Integer.valueOf(bonusStr));
+            return new WinningLotto(LottoNumber.of(InputUtil.splitByComma(winningNumberStr)), Integer.valueOf(bonusStr));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return null;
@@ -96,7 +95,7 @@ public class ConsoleInputView {
     private static List<Lotto> promptManualLotto(Scanner scanner, LottoQuantity quantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity.toInt(); i++) {
-            lottos.add(LottoFactory.createLotto(new HashSet<>(InputUtil.splitByComma(scanner.nextLine()))));
+            lottos.add(LottoFactory.createLotto(LottoNumber.of(InputUtil.splitByComma(scanner.nextLine()))));
         }
 
         return lottos;
