@@ -6,26 +6,29 @@ public class LottoResults {
     private static final int BASE_AMOUNT = 0;
     private static final int PERCENT = 100;
 
-    private final Map<LottoRewards, Integer> lottoRewards;
+    private final Map<LottoRank, Integer> lottoRewards;
     private final LottoMoney lottoMoney;
 
-    public LottoResults(final LottoTickets lottoTickets, final LottoTicket rewardTicket, final LottoMoney lottoMoney) {
+    public LottoResults(final List<LottoTicket> lottoTickets, final WinningLotto winningLotto, final LottoMoney lottoMoney) {
         lottoRewards = initRewards();
         this.lottoMoney = lottoMoney;
-        List<Integer> results = lottoTickets.getRewards(rewardTicket);
-
-        for (Integer result : results) {
-            lottoRewards.put(LottoRewards.valueOf(result), lottoRewards.getOrDefault(LottoRewards.valueOf(result), 0) + 1);
-        }
+        getRewards(lottoTickets, winningLotto);
     }
 
-    private Map<LottoRewards, Integer> initRewards() {
-        Map<LottoRewards, Integer> lottoRewards;
+    private Map<LottoRank, Integer> initRewards() {
+        Map<LottoRank, Integer> lottoRewards;
         lottoRewards = new TreeMap<>();
-        for (LottoRewards lottoReward : LottoRewards.values()) {
+        for (LottoRank lottoReward : LottoRank.values()) {
             lottoRewards.put(lottoReward, BASE_AMOUNT);
         }
         return lottoRewards;
+    }
+
+    private void getRewards(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
+        for (LottoTicket lottoTicket : lottoTickets) {
+            LottoRank lottoRank = winningLotto.getRank(lottoTicket);
+            lottoRewards.put(lottoRank, lottoRewards.get(lottoRank) + 1);
+        }
     }
 
     public double getYield() {
@@ -34,13 +37,13 @@ public class LottoResults {
 
     private long getRewardMoney() {
         long money = 0;
-        for (Map.Entry<LottoRewards, Integer> entry : lottoRewards.entrySet()) {
+        for (Map.Entry<LottoRank, Integer> entry : lottoRewards.entrySet()) {
             money += entry.getKey().getRewardMoney() * entry.getValue();
         }
         return money;
     }
 
-    public Map<LottoRewards, Integer> getLottoRewards() {
+    public Map<LottoRank, Integer> getLottoRewards() {
         return lottoRewards;
     }
 }

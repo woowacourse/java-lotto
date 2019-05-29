@@ -1,10 +1,11 @@
 package lotto.domain;
 
-public enum LottoRewards {
+public enum LottoRank {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 5_000),
-    FOURTH(3, 500),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 5_000),
+    FIFTH(3, 500),
     MISS(0, 0);
 
     private static final int WINNING_CONDITION = 3;
@@ -12,7 +13,7 @@ public enum LottoRewards {
     private int countOfMatch;
     private int rewardMoney;
 
-    LottoRewards(final int countOfMatch, final int rewardMoney) {
+    LottoRank(final int countOfMatch, final int rewardMoney) {
         this.countOfMatch = countOfMatch;
         this.rewardMoney = rewardMoney;
     }
@@ -25,13 +26,16 @@ public enum LottoRewards {
         return rewardMoney;
     }
 
-    public static LottoRewards valueOf(final int countOfMatch) {
+    public static LottoRank valueOf(final int countOfMatch, final boolean hasBonusBall) {
         if (countOfMatch < WINNING_CONDITION) {
             return MISS;
         }
-        for (LottoRewards lottoRewards : values()) {
-            if (lottoRewards.countOfMatch == countOfMatch) {
-                return lottoRewards;
+        if (countOfMatch == 5 && !hasBonusBall) {
+            return THIRD;
+        }
+        for (LottoRank lottoRank : values()) {
+            if (lottoRank.countOfMatch == countOfMatch) {
+                return lottoRank;
             }
         }
         throw new IllegalArgumentException("유효하지 않은 값입니다.");

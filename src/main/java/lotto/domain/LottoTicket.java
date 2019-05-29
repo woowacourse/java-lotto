@@ -38,6 +38,10 @@ public class LottoTicket {
         return 0;
     }
 
+    public boolean hasBonusBall(final LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
