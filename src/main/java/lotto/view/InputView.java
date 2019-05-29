@@ -1,7 +1,13 @@
 package lotto.view;
 
-import java.math.BigInteger;
+import lotto.domain.Lotto;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author heebg
@@ -16,6 +22,7 @@ public class InputView {
     private static final int ONE_LOTTO_PRICE = MIN_USER_PRICE_RANGE;
 
     private static final Scanner SCANNER = new Scanner(System.in);
+    public static final String EX_LOTTO_FORMAT_LANGE = "1~45 사이의 숫자를 입력해주세요";
 
     public static long generateInvalidUserPrice() {
         try {
@@ -55,6 +62,28 @@ public class InputView {
         if (manualCount * ONE_LOTTO_PRICE > userPrice) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public static Lotto generateInvalidLotto() {
+        try {
+            List<Integer> lottoNumbers = generateLottoNumbers(inputByUser());
+            return Lotto.generate(lottoNumbers);
+        } catch (NumberFormatException e) {
+            System.out.println(EX_LOTTO_FORMAT_LANGE);
+            return generateInvalidLotto();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return generateInvalidLotto();
+        }
+    }
+
+    private static List<Integer> generateLottoNumbers(String inputByUser) {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        List<String> lottos = Arrays.asList(inputByUser.replaceAll(" ","").split(","));
+        for (String lotto : lottos) {
+            lottoNumbers.add(Integer.parseInt(lotto));
+        }
+        return lottoNumbers;
     }
 
 }
