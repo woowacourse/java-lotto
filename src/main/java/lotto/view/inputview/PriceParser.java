@@ -21,6 +21,6 @@ public class PriceParser {
             throw new IllegalArgumentException("구매 금액은 1,000원 단위 입니다.");
         }
 
-        return lottoAmount;
+        return lottoAmount / 1000;
     }
 }

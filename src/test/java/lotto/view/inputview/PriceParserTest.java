@@ -47,5 +47,6 @@ class priceParserTest {
 
     @Test
     void 생성될_로또_개수() {
+        assertThat(PriceParser.getLottoAmount("1000")).isEqualTo(1);
     }
 }
