@@ -7,9 +7,12 @@
 1. get purchase amount from User [View]
     - purchase amount should be 1000 won per a Lotto
 2. generate Lotto Games [Domain]
+    - {Exception} each numbers must be not duplicated
 3. get last week winning number [View]
 4. show winning statics [View]
 
 ## Step 2. Bonus Ball
 ### Function Requirements
-1.
+1. get bonus number [domain]
+    - {Exception} bonus number must not contained WinningLotto
+2. show winning statics with bonus number
