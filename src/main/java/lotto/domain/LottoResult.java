@@ -20,4 +20,17 @@ public class LottoResult {
         }
         return ranks;
     }
+
+    public int getEarningsRate() {
+        return getEarning() / (lottos.getSize() * 1000) * 100;
+    }
+
+    private int getEarning() {
+        int earning = 0;
+        List<Rank> ranks = getRank();
+        for (Rank rank : ranks) {
+            earning += rank.getWinningMoney();
+        }
+        return earning;
+    }
 }

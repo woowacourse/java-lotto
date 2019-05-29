@@ -30,4 +30,10 @@ public class LottoResultTest {
         List<Rank> ranks = Arrays.asList(Rank.FIRST, Rank.THIRD, Rank.FOURTH, Rank.FOURTH, Rank.FIFTH);
         assertThat(ranks).isEqualTo(lottoResult.getRank());
     }
+
+    @Test
+    void 총_수익률_계산() {
+        LottoResult lottoResult = new LottoResult(winningLotto, lottos);
+        assertThat(40032100).isEqualTo(lottoResult.getEarningsRate());
+    }
 }
