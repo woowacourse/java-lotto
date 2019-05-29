@@ -6,12 +6,20 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    public static final int LOTTO_NUMBER_SIZE = 6;
     private List<Number> lotto = new ArrayList<>();
 
-    public Lotto(List<Integer> lotto) {
+    Lotto(List<Integer> lotto) {
+        checkLottoSize(lotto);
         checkDuplicate(lotto);
         for(Integer number : lotto) {
             this.lotto.add(Number.of(number.intValue()));
+        }
+    }
+
+    private void checkLottoSize(List<Integer> lotto) {
+        if(lotto.size() != LOTTO_NUMBER_SIZE){
+            throw new IllegalArgumentException("6개의 번호를 입력해주세요.");
         }
     }
 
@@ -22,7 +30,7 @@ public class Lotto {
         }
     }
 
-    public boolean isContain(Number bonusBall) {
+    boolean isContain(Number bonusBall) {
         return lotto.contains(bonusBall);
     }
 
