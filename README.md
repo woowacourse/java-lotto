@@ -31,8 +31,12 @@
         - ~~match lotto to winning lotto and return rank~~
     - ~~enum Rank~~
     - ~~class WinningStatistics~~
-
+- ~~class Lottos~~
+    - ~~match(WinningLotto): List\<Rank\>~~
+    
 #### View
-
+- InputView
+    - **get lotto buying money from user**
+    
 #### Controller
 - **class LottoController**

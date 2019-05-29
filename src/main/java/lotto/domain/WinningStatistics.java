@@ -30,6 +30,6 @@ public class WinningStatistics {
         for (Map.Entry<Rank, Integer> entry : statistics.entrySet()) {
             money = money.add(new Money(entry.getKey().getWinningMoney() * entry.getValue()));
         }
-        return money.divideBy(new Money(LOTTO_PRICE));
+        return money.divideBy(new Money(LOTTO_PRICE)) / 100;
     }
 }

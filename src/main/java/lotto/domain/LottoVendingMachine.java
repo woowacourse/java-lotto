@@ -12,8 +12,8 @@ public class LottoVendingMachine {
         if (money % LOTTO_PRICE != 0) {
             throw new InvalidLottoBuyingMoneyException("로또 금액(" + LOTTO_PRICE + ") 의 배수에 해당하는 돈을 입력하셔야 합니다.");
         }
-        if (money / LOTTO_PRICE < numOfCustomLottos) {
-            throw new InvalidNumOfCustomLottosException("수동으로 구매할 로또 수는 구매 가능한 로또 수보다 클 수 없습니다.");
+        if (money / LOTTO_PRICE < numOfCustomLottos || numOfCustomLottos < 0) {
+            throw new InvalidNumOfCustomLottosException("수동으로 구매할 로또 수는 구매 가능한 로또 수보다 클 수 없고 0보다 작을 수 없습니다.");
         }
         this.numOfRandomLottos = (money / LOTTO_PRICE) - numOfCustomLottos;
         this.numOfCustomLottos = numOfCustomLottos;

@@ -60,6 +60,10 @@ public class Lotto {
         return lottoNumbers.contains(another);
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public String toString() {
         return "Lotto{" +
