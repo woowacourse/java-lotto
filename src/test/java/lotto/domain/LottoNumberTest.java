@@ -9,6 +9,7 @@ public class LottoNumberTest {
     @Test
     public void 로또_번호_생성_테스트() {
         assertThat(LottoNumber.get(3)).isEqualTo(LottoNumber.get(3));
+        assertThat(LottoNumber.get(45)).isEqualTo(LottoNumber.get(45));
     }
 
     @Test
