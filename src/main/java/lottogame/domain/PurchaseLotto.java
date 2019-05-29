@@ -32,6 +32,16 @@ public class PurchaseLotto {
         return lottos.size();
     }
 
+    List<Rank> getMatchResultEachLottos(WinningLotto winningLotto) {
+        List<Rank> matchResults = new ArrayList<>();
+
+        for (Lotto lotto : lottos) {
+            matchResults.add(lotto.getMatchResult(winningLotto));
+        }
+
+        return matchResults;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

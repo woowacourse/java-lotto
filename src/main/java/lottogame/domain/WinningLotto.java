@@ -26,4 +26,8 @@ public class WinningLotto {
 
         winningLotto.add(LottoNumber.getLottoNumber(lottoNumber));
     }
+
+    public boolean isContain(LottoNumber lottoNumber) {
+        return winningLotto.contains(lottoNumber);
+    }
 }

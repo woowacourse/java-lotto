@@ -26,6 +26,13 @@ public class Lotto {
         return lotto.size();
     }
 
+    public Rank getMatchResult(WinningLotto winningLotto) {
+        int numberOfMatch = (int) lotto.stream()
+                .filter(winningLotto::isContain)
+                .count();
+        return Rank.valueOf(numberOfMatch);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
