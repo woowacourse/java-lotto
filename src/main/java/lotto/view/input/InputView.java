@@ -1,5 +1,7 @@
 package lotto.view.input;
 
+import lotto.utils.InputUtils;
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +24,7 @@ public class InputView {
         try {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             String text = scanner.next();
-            return InputCheck.parseIntegerList(text);
+            return InputUtils.parseIntegerList(text);
         } catch (NumberFormatException e) {
             System.out.println("숫자를 입력해주세요.");
             return inputWinningLotto();
