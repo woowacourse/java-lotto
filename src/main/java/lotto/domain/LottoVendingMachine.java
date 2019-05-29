@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoVendingMachine {
-    private static final int LOTTO_PRICE = 1000;
+    static final int LOTTO_PRICE = 1000;
 
     public static List<Lotto> getRandomLottos(int money) {
         List<Lotto> lottos = new ArrayList<>();
