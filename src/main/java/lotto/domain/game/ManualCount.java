@@ -1,10 +1,9 @@
 package lotto.domain.game;
 
 import lotto.domain.exceptions.ManualCountBoundException;
-import lotto.utils.InputParser;
 
 public class ManualCount {
-    private static final String MANUAL_COUNT_BOUND = "구매 금액을 초과한 수동 구매는 불가능 합니다.";
+    private static final String MANUAL_COUNT_RANGE = "수동 구매 가능 범위를 벗어났습니다.";
 
     private final int count;
 
@@ -18,9 +17,13 @@ public class ManualCount {
     }
 
     private void validBound(int manualCount, Count totalCount) {
-        if (0 > manualCount || totalCount.getCount() < manualCount) {
-            throw new ManualCountBoundException(MANUAL_COUNT_BOUND);
+        if (!isValidRange(manualCount, totalCount)) {
+            throw new ManualCountBoundException(MANUAL_COUNT_RANGE);
         }
+    }
+
+    private boolean isValidRange(int manualCount, Count totalCount) {
+        return 0 <= manualCount && manualCount <= totalCount.getCount() ;
     }
 
     public int getCount() {

@@ -14,7 +14,6 @@ public class PurchaseAmount {
     private final int purchaseAmount;
 
     private PurchaseAmount(int purchaseAmount) {
-//        int purchaseAmount = Integer.valueOf(input);
         validAmount(purchaseAmount);
         validUnit(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
