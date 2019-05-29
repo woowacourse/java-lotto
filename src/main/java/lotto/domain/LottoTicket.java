@@ -4,6 +4,7 @@ import java.util.*;
 
 public class LottoTicket {
     static final int LOTTO_SIZE = 6;
+    static final int PRICE = 1000;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -33,12 +34,11 @@ public class LottoTicket {
         return new LottoTicket(LottoNumbersGenerator.create(lottoNumbers));
     }
 
-    public int countOfMatch(LottoTicket user) {
-        return (int) user.lottoNumbers.stream()
+    public int countOfMatch(LottoTicket lottoTicket) {
+        return (int) lottoTicket.lottoNumbers.stream()
                 .filter(x -> this.lottoNumbers.contains(x))
                 .count();
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,4 +51,5 @@ public class LottoTicket {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
 }
