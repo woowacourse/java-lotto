@@ -1,5 +1,6 @@
-package lotto.model;
+package lotto.model.creator;
 
+import lotto.model.object.LottoNumber;
 import lotto.model.exception.InvalidLottoNumberException;
 
 public class LottoNumberCreator {

@@ -1,6 +1,6 @@
 package lotto.controller;
 
-public class Main {
+public class ConsoleUILottoApplication {
         public static void main(String[] args) {
 
         }

@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.object;
 
 import lotto.model.exception.PaymentNotMultipleOfThousandException;
 import lotto.model.exception.PaymentNotNaturalNumberException;

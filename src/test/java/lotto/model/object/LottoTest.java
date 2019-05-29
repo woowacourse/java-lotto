@@ -1,5 +1,6 @@
-package lotto.model;
+package lotto.model.object;
 
+import lotto.model.creator.LottoNumberCreator;
 import lotto.model.exception.LottoNumberDuplicationException;
 import org.junit.jupiter.api.Test;
 

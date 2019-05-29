@@ -1,5 +1,11 @@
-package lotto.model;
+package lotto.model.object;
 
+import lotto.model.LottoRank;
+import lotto.model.creator.LottoNumberCreator;
+import lotto.model.creator.WinStatsCreator;
+import lotto.model.creator.WinnerLottoCreator;
+import lotto.model.object.Lotto;
+import lotto.model.object.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -31,7 +37,7 @@ public class WinStatsTest {
                 List<Lotto> purchasedLottos = new ArrayList<>();
                 purchasedLottos.add(purchasedLotto1);
                 purchasedLottos.add(purchasedLotto2);
-                Lotto winnerLotto = WinnerLottoCreator.create(new String[]{"1","2","3","4","5","6"});
+                Lotto winnerLotto = WinnerLottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
                 assertThat(WinStatsCreator.create(purchasedLottos, winnerLotto).getMappingStats().get(LottoRank.FIRST)).isEqualTo(1);
         }
 }

@@ -1,4 +1,8 @@
-package lotto.model;
+package lotto.model.creator;
+
+import lotto.model.object.Lotto;
+import lotto.model.LottoRank;
+import lotto.model.object.WinStats;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +22,7 @@ public class WinStatsCreator {
         }
 
         private static Map<LottoRank, Integer> createMappingStats(List<Lotto> purchasedLottos, Lotto winnerLotto, Map<LottoRank, Integer> mappingStats) {
-                for(Lotto purchaseLotto : purchasedLottos){
+                for (Lotto purchaseLotto : purchasedLottos) {
                         int matchNumber = purchaseLotto.getMatchNumber(winnerLotto);
                         LottoRank lottoRank = LottoRank.getLottoRank(matchNumber);
                         mappingStats.computeIfPresent(lottoRank, (LottoRank key, Integer value) -> ++value);

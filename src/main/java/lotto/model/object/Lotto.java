@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.object;
 
 import lotto.model.exception.LottoNumberDuplicationException;
 
@@ -15,19 +15,14 @@ public class Lotto {
         }
 
         private void checkLottoNumbersDuplication(List<LottoNumber> lottoNumbers) {
-                for (int index = 0 ; index < NUMBER_OF_LOTTO_NUMBERS ; index++ ) {
-                        CheckOneLottoNumberDuplication(lottoNumbers, index);
+                for (int index = 0; index < NUMBER_OF_LOTTO_NUMBERS; index++) {
+                        checkEachIndexLottoNumberDuplication(lottoNumbers, index);
                 }
         }
 
-        private void CheckOneLottoNumberDuplication(List<LottoNumber> lottoNumbers, int index) {
-                for (int i = index + 1 ; i < NUMBER_OF_LOTTO_NUMBERS ; i++){
-                        checkContainLottoNumber(lottoNumbers, index, i);
-                }
-        }
-
-        private void checkContainLottoNumber(List<LottoNumber> lottoNumbers, int index, int i) {
-                if(lottoNumbers.get(index).equals(lottoNumbers.get(i))){
+        private void checkEachIndexLottoNumberDuplication(List<LottoNumber> lottoNumbers, int index) {
+                List<LottoNumber> remainder = lottoNumbers.subList(index + 1, NUMBER_OF_LOTTO_NUMBERS-1);
+                if(remainder.contains(lottoNumbers.get(index))){
                         throw new LottoNumberDuplicationException("로또 숫자가 중복되었습니다.");
                 }
         }
@@ -38,7 +33,7 @@ public class Lotto {
 
         private int compareLottoNumbers(List<LottoNumber> lottoNumbers) {
                 int count = 0;
-                for(LottoNumber lottoNumber : lottoNumbers){
+                for (LottoNumber lottoNumber : lottoNumbers) {
                         count = this.lottoNumbers.contains(lottoNumber) ? count + 1 : count;
                 }
                 return count;

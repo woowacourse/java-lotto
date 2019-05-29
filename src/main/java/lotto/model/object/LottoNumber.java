@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.object;
 
 import java.util.HashMap;
 import java.util.Map;
