@@ -9,5 +9,6 @@ import lotto.view.InputView;
 public class LottoApplication {
     public static void main(String[] args) {
         double userPrice = InputView.generateInvalidUserPrice();
+        double manualCount = InputView.generateInvalidManualCount(userPrice);
     }
 }
