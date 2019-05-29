@@ -3,7 +3,6 @@ package lotto.model.creator;
 import lotto.model.object.Lotto;
 import lotto.model.object.LottoNumber;
 import lotto.model.object.Payment;
-import lotto.model.object.WinStats;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -36,9 +35,9 @@ public class YieldCreatorTest {
                 List<Lotto> purchasedLottos = new ArrayList<>();
                 purchasedLottos.add(purchasedLotto1);
                 purchasedLottos.add(purchasedLotto2);
-                Lotto winnerLotto = WinnerLottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
+                Lotto winningLotto = WinningLottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
 
                 Payment payment = new Payment(5000);
-                assertThat(YieldCreator.create(payment, WinStatsCreator.create(purchasedLottos, winnerLotto)).getNumber()).isEqualTo(400_001, offset(0.0001));
+                assertThat(YieldCreator.create(payment, WinStatsCreator.create(purchasedLottos, winningLotto)).getNumber()).isEqualTo(400_001, offset(0.0001));
         }
 }

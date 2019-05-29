@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.model.exception.WinnerNumbersInputFormException;
+import lotto.model.exception.WinningNumbersInputFormException;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -20,10 +20,10 @@ public class InputViewTest {
 
         @Test
         void 당첨_번호_입력형식_검사() {
-                assertThrows(WinnerNumbersInputFormException.class, () -> {
+                assertThrows(WinningNumbersInputFormException.class, () -> {
                         ByteArrayInputStream input = new ByteArrayInputStream("1, 2, 3, 4, 5, 6,".getBytes());
                         System.setIn(input);
-                        InputView.inputWinnerNumbers();
+                        InputView.inputWinningNumbers();
                 });
         }
 

@@ -27,8 +27,8 @@ public class Lotto {
                 }
         }
 
-        public int getMatchNumber(Lotto winnerLotto) {
-                return winnerLotto.compareLottoNumbers(this.lottoNumbers);
+        public int getMatchNumber(Lotto winningLotto) {
+                return winningLotto.compareLottoNumbers(this.lottoNumbers);
         }
 
         private int compareLottoNumbers(List<LottoNumber> lottoNumbers) {

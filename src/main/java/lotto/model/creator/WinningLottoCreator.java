@@ -6,7 +6,7 @@ import lotto.model.object.LottoNumber;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WinnerLottoCreator {
+public class WinningLottoCreator {
         public static Lotto create(String[] inputs) {
                 List<LottoNumber> lottoNumbers = new ArrayList<>();
                 for (String input : inputs) {

@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 public class WinStatsCreator {
-        public static WinStats create(List<Lotto> purchasedLottos, Lotto winnerLotto) {
+        public static WinStats create(List<Lotto> purchasedLottos, Lotto winningLotto) {
                 Map<LottoRank, Integer> mappingStats = new HashMap<>();
                 {
                         mappingStats.put(LottoRank.FIRST, 0);
@@ -18,12 +18,12 @@ public class WinStatsCreator {
                         mappingStats.put(LottoRank.THIRD, 0);
                         mappingStats.put(LottoRank.FOURTH, 0);
                 }
-                return new WinStats(createMappingStats(purchasedLottos, winnerLotto, mappingStats));
+                return new WinStats(createMappingStats(purchasedLottos, winningLotto, mappingStats));
         }
 
-        private static Map<LottoRank, Integer> createMappingStats(List<Lotto> purchasedLottos, Lotto winnerLotto, Map<LottoRank, Integer> mappingStats) {
+        private static Map<LottoRank, Integer> createMappingStats(List<Lotto> purchasedLottos, Lotto winningLotto, Map<LottoRank, Integer> mappingStats) {
                 for (Lotto purchaseLotto : purchasedLottos) {
-                        int matchNumber = purchaseLotto.getMatchNumber(winnerLotto);
+                        int matchNumber = purchaseLotto.getMatchNumber(winningLotto);
                         LottoRank lottoRank = LottoRank.getLottoRank(matchNumber);
                         mappingStats.computeIfPresent(lottoRank, (LottoRank key, Integer value) -> ++value);
                 }

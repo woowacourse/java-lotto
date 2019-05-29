@@ -1,6 +1,7 @@
 package lotto.model.creator;
 
 import lotto.model.LottoRank;
+import lotto.model.object.BonusBall;
 import lotto.model.object.Lotto;
 import lotto.model.object.LottoNumber;
 import org.junit.jupiter.api.Test;
@@ -26,16 +27,20 @@ public class WinStatsCreatorTest {
                 List<LottoNumber> lottoNumbers2 = new ArrayList<>();
                 lottoNumbers2.add(LottoNumberCreator.create(10));
                 lottoNumbers2.add(LottoNumberCreator.create(2));
-                lottoNumbers2.add(LottoNumberCreator.create(20));
+                lottoNumbers2.add(LottoNumberCreator.create(3));
                 lottoNumbers2.add(LottoNumberCreator.create(4));
-                lottoNumbers2.add(LottoNumberCreator.create(30));
+                lottoNumbers2.add(LottoNumberCreator.create(5));
                 lottoNumbers2.add(LottoNumberCreator.create(6));
                 Lotto purchasedLotto2 = new Lotto(lottoNumbers2);
 
                 List<Lotto> purchasedLottos = new ArrayList<>();
                 purchasedLottos.add(purchasedLotto1);
                 purchasedLottos.add(purchasedLotto2);
-                Lotto winnerLotto = WinnerLottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
-                assertThat(WinStatsCreator.create(purchasedLottos, winnerLotto).getMappingStats().get(LottoRank.FIRST)).isEqualTo(1);
+                Lotto winningLotto = WinningLottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
+
+                BonusBall bonusBall = BonusBallCreator.create(10);
+                WinningInfo winningInfo = WinningInfoCreator.create(winningLotto, bonusBall);
+
+                assertThat(WinStatsCreator.create(purchasedLottos, winningInfo).getMappingStats().get(LottoRank.SECOND)).isEqualTo(1);
         }
 }
