@@ -1,11 +1,7 @@
 package lotto.domain;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MAX_LOTTO_NUMBER = 46;
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -20,5 +16,26 @@ public class LottoNumber {
 
     private boolean isValidLottoNumber(int lottoNumber) {
         return lottoNumber >= MIN_LOTTO_NUMBER && lottoNumber <= MAX_LOTTO_NUMBER;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.lottoNumber - o.lottoNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LottoNumber that = (LottoNumber) o;
+
+        return lottoNumber == that.lottoNumber;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return lottoNumber;
     }
 }
