@@ -27,7 +27,7 @@ public class LottoResultTest {
     @Test
     void 번호_일치_결과() {
         LottoResult lottoResult = new LottoResult(winningLotto, lottos);
-        List<Rank> ranks = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.FOURTH, Rank.FOURTH, Rank.FIFTH);
+        List<Rank> ranks = Arrays.asList(Rank.FIRST, Rank.THIRD, Rank.FOURTH, Rank.FOURTH, Rank.FIFTH);
         assertThat(ranks).isEqualTo(lottoResult.getRank());
     }
 }
