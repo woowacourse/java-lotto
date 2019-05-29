@@ -9,6 +9,7 @@ import lotto.view.OutputView;
 public class CUILottoApp {
     public static void main(String[] args) {
         Money money = InputView.createMoney();
+        int manualSize = InputView.inputManualSize(money);
         List<Lotto> lottos = LottoFactory.createLottos(money.getLottoSize(), new AutoLottoCreator());
         OutputView.printLottos(lottos);
 

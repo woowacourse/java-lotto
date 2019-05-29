@@ -16,6 +16,12 @@ public class Money {
         }
     }
 
+    public void checkManualSize(int manualSize) {
+        if (manualSize > getLottoSize() && manualSize < 0) {
+            throw new IllegalArgumentException("수동 구매 장수는 0 이상" + getLottoSize() + "이하 입니다.");
+        }
+    }
+
     public int getLottoSize() {
         return money / LOTTO_PRICE;
     }

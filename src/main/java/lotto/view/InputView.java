@@ -76,6 +76,19 @@ public class InputView {
             System.out.println(e.getMessage());
             return createWinningLotto(lotto);
         }
+    }
 
+    public static int inputManualSize(Money money) {
+        try {
+            int manualSize = Integer.parseInt(scanner.nextLine());
+            money.checkManualSize(manualSize);
+            return manualSize;
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력하세요");
+            return inputManualSize(money);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputManualSize(money);
+        }
     }
 }
