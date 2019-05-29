@@ -11,17 +11,13 @@ public class LottoTickets {
 
     private List<Lotto> lottoTickets;
 
-    public LottoTickets(int payment, LottoGeneratingStrategy strategy) {
+    public LottoTickets(Payment payment, LottoGeneratingStrategy strategy) {
         lottoTickets = new ArrayList<>();
-        int numberOfTickets = calculateNumberOfTickets(payment);
+        int numberOfTickets = payment.calculateNumberOfTickets(LOTTO_PRICE);
 
         for (int i = 0; i < numberOfTickets; i++) {
             lottoTickets.add(LottoGenerator.create(strategy));
         }
-    }
-
-    private int calculateNumberOfTickets(int payment) {
-        return payment / LOTTO_PRICE;
     }
 
     public int size() {
