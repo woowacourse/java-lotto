@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleOutputView {
-    public static void printAmount(Money money) {
-        System.out.println(money.ticketAmount() + "개 구입했습니다.");
+    public static void printAmount(LottoMoney lottoMoney) {
+        System.out.println(lottoMoney.getAmount() + "개 구입했습니다.");
     }
 
     public static void printTickets(LottoTickets lottoTickets) {

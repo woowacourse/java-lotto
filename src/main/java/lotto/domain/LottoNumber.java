@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
 
     private final int lottoNumber;
 
@@ -17,13 +17,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateLottoNumber(Integer number) {
-        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 이상 45 이하 입니다.");
         }
     }
 
     public static LottoNumber valueOf(int number) {
-        if (number >= MIN_NUMBER && number <= MAX_NUMBER) {
+        if (number >= LOTTO_MIN_NUMBER && number <= LOTTO_MAX_NUMBER) {
             return LottoNumberCache.cache.get(number);
         }
         return new LottoNumber(number);
@@ -34,19 +34,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
         private static final List<LottoNumber> cache = new ArrayList<>();
 
         static {
-            IntStream.range(MIN_NUMBER, MAX_NUMBER + 1)
+            IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                     .boxed()
                     .forEach(number -> cache.add(new LottoNumber(number)));
         }
 
         private LottoNumberCache() {
         }
-
-
-    }
-
-    public int getLottoNumber() {
-        return lottoNumber;
     }
 
     @Override
@@ -70,7 +64,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public String toString() {
-        return lottoNumber+"";
+        return lottoNumber + "";
     }
 
     @Override

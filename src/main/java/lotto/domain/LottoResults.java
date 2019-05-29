@@ -7,12 +7,11 @@ public class LottoResults {
     private static final int PERCENT = 100;
 
     private final Map<LottoRewards, Integer> lottoRewards;
-    private final Money money;
+    private final LottoMoney lottoMoney;
 
-    public LottoResults(LottoTickets lottoTickets, LottoTicket rewardTicket, Money money) {
+    public LottoResults(LottoTickets lottoTickets, LottoTicket rewardTicket, LottoMoney lottoMoney) {
         lottoRewards = initRewards();
-        this.money = money;
-
+        this.lottoMoney = lottoMoney;
         List<Integer> results = lottoTickets.getRewards(rewardTicket);
 
         for (Integer result : results) {
@@ -30,7 +29,7 @@ public class LottoResults {
     }
 
     public double getYield() {
-        return (double) getRewardMoney() / money.getMoney() * PERCENT;
+        return (double) getRewardMoney() / lottoMoney.getMoney() * PERCENT;
     }
 
     private long getRewardMoney() {

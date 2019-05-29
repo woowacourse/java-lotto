@@ -3,9 +3,11 @@ package lotto.domain;
 public enum LottoRewards {
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
-    THRID(4, 5_000),
+    THIRD(4, 5_000),
     FOURTH(3, 500),
     MISS(0, 0);
+
+    private static final int WINNING_CONDITION = 3;
 
     private int countOfMatch;
     private int rewardMoney;
@@ -24,7 +26,7 @@ public enum LottoRewards {
     }
 
     public static LottoRewards valueOf(int countOfMatch) {
-        if (countOfMatch < 3) {
+        if (countOfMatch < WINNING_CONDITION) {
             return MISS;
         }
         for (LottoRewards lottoRewards : values()) {

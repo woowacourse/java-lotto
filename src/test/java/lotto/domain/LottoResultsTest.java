@@ -25,7 +25,7 @@ class LottoResultsTest {
                 Arrays.asList(1, 2, 3, 6, 7, 8)
         );
 
-        LottoResults lottoResults = new LottoResults(lottoTickets, rewardTicket,new Money(2000));
+        LottoResults lottoResults = new LottoResults(lottoTickets, rewardTicket,new LottoMoney(2000));
 
         assertThat(lottoResults.getYield()).isEqualTo(500);
     }

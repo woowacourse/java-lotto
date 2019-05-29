@@ -1,5 +1,6 @@
 package lotto.domain.factory;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class LottoTicketFactory {
     }
 
     private static List<Integer> getRandomNumbers() {
-        List<Integer> temp = IntStream.range(1, 45)
+        List<Integer> temp = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(temp);
