@@ -25,3 +25,18 @@
 - 당첨 통계 출력
 - 수익률 확인
 - 수익률 출력
+
+
+
+* LottoNumber
+  * 1 ~ 45 사이만 가능
+* LottoShuffleBase
+  * 1 ~ 45 List<LottoNumber> 가지고 있는 객체 + static (셔플시 여기서 가지고옴)
+* Lotto
+  * new Lotto(List<LottoNumber>)
+  * new Lotto(List<Integer>)
+
+
+
+# DONE
+
