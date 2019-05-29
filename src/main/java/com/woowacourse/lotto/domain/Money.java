@@ -35,4 +35,9 @@ public class Money {
 	public int hashCode() {
 		return Objects.hash(money);
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%d", money);
+	}
 }
