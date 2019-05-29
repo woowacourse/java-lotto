@@ -14,6 +14,10 @@ public class Lotto {
         return this.lottoNumbers.match(lottoNumbers);
     }
 
+    public boolean match(final LottoNumber lottoNumber) {
+        return lottoNumbers.match(lottoNumber);
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.getLottoNumbers();
     }

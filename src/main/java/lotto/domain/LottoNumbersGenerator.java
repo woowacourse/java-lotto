@@ -20,6 +20,10 @@ public class LottoNumbersGenerator {
         }
     }
 
+    public static LottoNumber getLottoNumber(int bonusBall) {
+        return fixedTotalLottoNumbers.get(bonusBall);
+    }
+
     public static LottoNumbers getLottoNumbers() {
         Collections.shuffle(totalLottoNumbers, new Random());
         List<LottoNumber> lottoNumbers = new ArrayList<>(

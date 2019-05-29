@@ -41,10 +41,7 @@ public class LottoResult {
     public StringBuilder getResultMessage() {
         StringBuilder message = new StringBuilder();
         for (Rank rank : Rank.winningValues()) {
-            message.append(rank.getCountOfMatch())
-                    .append("개 일치 (")
-                    .append(rank.getWinningMoney())
-                    .append("원)- ")
+            message.append(rank.getMessage())
                     .append(result.get(rank))
                     .append("개\n");
         }

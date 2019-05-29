@@ -34,6 +34,10 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
+    public boolean match(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public int match(LottoNumbers lottoNumbers) {
         int result = 0;
         for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers) {

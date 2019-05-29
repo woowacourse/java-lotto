@@ -16,7 +16,7 @@ public class LottoGameTest {
                 new LottoNumber(4),
                 new LottoNumber(5),
                 new LottoNumber(6)));
-        WinningInformation winningInformation = new WinningInformation(winningLottoNumbers);
+        WinningInformation winningInformation = new WinningInformation(winningLottoNumbers, new LottoNumber(10));
         LottoGame lottoGame = new LottoGame(winningInformation);
 
         LottoNumbers lottoFirst = new LottoNumbers(Arrays.asList(

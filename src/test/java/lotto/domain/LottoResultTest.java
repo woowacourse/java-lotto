@@ -20,6 +20,7 @@ public class LottoResultTest {
 
         Map<Rank, Integer> result = new HashMap<>();
         result.put(Rank.FIRST, 2);
+        result.put(Rank.SECOND, 0);
         result.put(Rank.THIRD, 1);
         result.put(Rank.FOURTH, 1);
         result.put(Rank.FIFTH, 1);

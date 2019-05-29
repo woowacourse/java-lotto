@@ -11,7 +11,8 @@ public class ConsoleApplication {
         OutputView.outputLottos(lottos);
 
         LottoNumbers winningNumbers = LottoNumbersGenerator.getLottoNumbers(InputView.inputWinningNumbers());
-        WinningInformation winningInformation = new WinningInformation(winningNumbers);
+        LottoNumber bonusNumber = LottoNumbersGenerator.getLottoNumber(InputView.inputBonusBall());
+        WinningInformation winningInformation = new WinningInformation(winningNumbers, bonusNumber);
         LottoGame lottoGame = new LottoGame(winningInformation);
 
         LottoResult lottoResult = lottoGame.confirmWinningLottos(lottos);
