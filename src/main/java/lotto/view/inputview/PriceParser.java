@@ -1,5 +1,9 @@
 package lotto.view.inputview;
 
+import java.nio.file.Path;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class PriceParser {
 
     private static final String ERROR_NULL_OR_NO_INPUT = "입력이 없습니다.";
@@ -9,6 +13,12 @@ public class PriceParser {
 
         if(input == null || input.isEmpty()){
             throw new NullPointerException(ERROR_NULL_OR_NO_INPUT);
+        }
+
+        Pattern pattern = Pattern.compile("^([0-9]*)원$");
+        Matcher matcher = pattern.matcher(input);
+        if(matcher.find()){
+            input = matcher.group(1);
         }
 
         int lottoAmount = Integer.parseInt(input);

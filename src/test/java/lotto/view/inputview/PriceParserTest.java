@@ -56,4 +56,10 @@ class priceParserTest {
     void 생성될_로또_개수() {
         assertThat(PriceParser.getLottoAmount("1000")).isEqualTo(1);
     }
+
+    @Test
+    void 금액_마지막_원_허용() {
+        int answer = PriceParser.getLottoAmount("1000");
+        assertThat(answer).isEqualTo(PriceParser.getLottoAmount("1000원"));
+    }
 }
