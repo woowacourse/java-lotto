@@ -5,10 +5,12 @@ import lotto.NumberValidException;
 import java.util.Objects;
 
 public class Number {
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
     private int number;
 
     private Number(int number) {
-        if (number >= 45 || number < 1) {
+        if (number >= MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER) {
             throw new NumberValidException("로또번호에 해당되지 않는 숫자입니다.");
         }
         this.number = number;
