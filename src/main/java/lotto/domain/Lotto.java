@@ -10,8 +10,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int match(final Lotto lotto) {
-        return lottoNumbers.match(lotto.lottoNumbers);
+    public int match(final LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.match(lottoNumbers);
     }
 
     public List<Integer> getLottoNumbers() {

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class OutputView {
     private static final String START_BRACE = "[";
-    private static final String END_BRACE = "[";
+    private static final String END_BRACE = "]";
     private static final String JOINER = ", ";
 
     public static void outputLottos(Lottos lottos) {
