@@ -60,8 +60,8 @@ public class LottoApplication {
     private static TotalLottoGames getTotalLottoGames(Count totalCount, ManualCount manualCount) {
         TotalLottoGames totalLottoGames = new TotalLottoGames(manualCount.getAutoCount(totalCount));
         OutputView.manualNumbers(manualCount);
-        for (int i = 0; i < manualCount.getCount(); i++) {
-            List<Number> lottoNumbers = getManualNumbers(i);
+        for (int indicator = 1; indicator <= manualCount.getCount(); indicator++) {
+            List<Number> lottoNumbers = getManualNumbers(indicator);
             totalLottoGames.addManual(lottoNumbers);
         }
         return totalLottoGames;
@@ -70,7 +70,7 @@ public class LottoApplication {
     private static List<Number> getManualNumbers(int indicator) {
         try {
             OutputView.indicator(indicator);
-            return InputParser.parseLotto(InputView.getManualLotto());
+            return InputView.getManualLotto();
         } catch (LottoNumberException | IllegalFormatException e) {
             System.out.println(e.getMessage());
             return getManualNumbers(indicator);
@@ -79,7 +79,7 @@ public class LottoApplication {
 
     private static Lotto getWinLotto() {
         try {
-            return new Lotto(InputParser.parseLotto(InputView.getWinnerLotto()));
+            return new Lotto(InputView.getWinnerLotto());
         } catch (IllegalFormatException e) {
             System.out.println(e.getMessage());
             return getWinLotto();

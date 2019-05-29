@@ -39,6 +39,7 @@ public class InputParser {
     private static Set<Number> getInputNumbers(String[] tokens) {
         Set<Number> result = new HashSet<>();
         for (String token : tokens) {
+            validNumeric(token);
             result.add(Number.of(Integer.parseInt(token)));
         }
         validSize(result);

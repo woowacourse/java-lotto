@@ -101,6 +101,6 @@ public class OutputView {
     }
 
     public static void indicator(int i) {
-        System.out.print(i + 1 + INDICATOR_DELIMITER);
+        System.out.print(i + INDICATOR_DELIMITER);
     }
 }

@@ -1,8 +1,10 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import lotto.utils.InputParser;
+import lotto.domain.lotto.Number;
 
 public class InputView {
     private static Scanner scanner = new Scanner(System.in);
@@ -17,9 +19,9 @@ public class InputView {
         return InputParser.parseNumber(scanner.nextLine());
     }
 
-    public static String getWinnerLotto() {
+    public static List<Number> getWinnerLotto() {
         OutputView.win();
-        return scanner.nextLine();
+        return InputParser.parseLotto(scanner.nextLine());
     }
 
     public static int getBonusNumber() {
@@ -27,7 +29,7 @@ public class InputView {
         return InputParser.parseNumber(scanner.nextLine());
     }
 
-    public static String getManualLotto() {
-        return scanner.nextLine();
+    public static List<Number> getManualLotto() {
+        return InputParser.parseLotto(scanner.nextLine());
     }
 }
