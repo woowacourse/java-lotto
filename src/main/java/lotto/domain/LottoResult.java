@@ -15,10 +15,11 @@ public class LottoResult {
         Map<WinningType, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottos) {
-            int matchNum = winningLotto.countMatchNum(lotto);
-            result.put(WinningType.valueOf(matchNum), result.getOrDefault(WinningType.valueOf(matchNum), 0) + 1);
+            WinningType winningType = winningLotto.macthLotto(lotto);
+            if (winningType != null) {
+                result.put(winningType, result.getOrDefault(winningType, 0) + 1);
+            }
         }
-
         return result;
     }
 

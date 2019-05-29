@@ -37,7 +37,7 @@ public class InputView {
         try {
             String[] lottoString = userInput.replaceAll(REPLACE_STRING, REPLACE_DELIMITER).split(SPLIT_DELIMITER);
             for (String string : lottoString) {
-                lotto.add(Number.getInstance(Integer.parseInt(string)));
+                lotto.add(Number.valueOf(Integer.parseInt(string)));
             }
             return new WinningLotto(new Lotto(lotto));
         } catch (NumberFormatException e) {

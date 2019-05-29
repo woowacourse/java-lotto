@@ -18,6 +18,7 @@ public class OutputView {
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -30,7 +31,7 @@ public class OutputView {
     }
 
     public static void printLottoYield(LottoResult lottoResult, Money money) {
-        double result = ( (double) lottoResult.getRewardAll() / money.getMoney() ) * 100;
+        double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
         System.out.println("총 수익률은 " + result + "%입니다.");
     }
 }

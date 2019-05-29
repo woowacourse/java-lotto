@@ -12,7 +12,7 @@ public class AutoLottoCreator implements LottoCreator {
         List<Integer> numbers = shuffleNumber();
 
         for (Integer integer : numbers.subList(0, 6)) {
-            lotto.add(Number.getInstance(integer));
+            lotto.add(Number.valueOf(integer));
         }
 
         return new Lotto(lotto);

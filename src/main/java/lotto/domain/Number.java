@@ -21,7 +21,7 @@ public class Number implements Comparable<Number> {
         }
     }
 
-    public static Number getInstance(int num){
+    public static Number valueOf(int num){
         if (!NUMBER_MAP.containsKey(num)) {
             NUMBER_MAP.put(num, new Number(num));
         }

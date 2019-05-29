@@ -9,7 +9,11 @@ public class WinningLotto {
         this.lotto = lotto;
     }
 
-    public int countMatchNum(Lotto lotto) {
+    public WinningType macthLotto(Lotto lotto) {
+        return WinningType.valueOf(countMatchNum(lotto));
+    }
+
+    private int countMatchNum(Lotto lotto) {
         List<Number> winningLotto = this.lotto.getLotto();
         winningLotto.retainAll(lotto.getLotto());
         return winningLotto.size();
