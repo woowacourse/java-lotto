@@ -15,6 +15,10 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     public void add(final LottoNumbers lottoNumbers) {
         lottos.add(new Lotto(lottoNumbers));
     }

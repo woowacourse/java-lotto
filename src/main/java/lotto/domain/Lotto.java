@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
@@ -11,6 +12,10 @@ public class Lotto {
 
     public int match(final Lotto lotto) {
         return lottoNumbers.match(lotto.lottoNumbers);
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.getLottoNumbers();
     }
 
     @Override

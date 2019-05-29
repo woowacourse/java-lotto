@@ -26,6 +26,14 @@ public class LottoNumbers {
         }
     }
 
+    public List<Integer> getLottoNumbers() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            lottoNumbers.add(lottoNumber.getNumber());
+        }
+        return lottoNumbers;
+    }
+
     public int match(LottoNumbers lottoNumbers) {
         int result = 0;
         for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers) {
