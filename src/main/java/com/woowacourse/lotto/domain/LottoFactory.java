@@ -3,8 +3,6 @@ package com.woowacourse.lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.woowacourse.lotto.exception.InvalidNumberException;
-
 public class LottoFactory {
 	private final int numberOfLotto;
 
