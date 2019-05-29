@@ -1,24 +1,24 @@
 package lotto.domain;
 
-public class Counter {
+public class ResultCounter {
     private static final int INIT_STATE = 0;
 
     private int counter;
 
-    private Counter() {
+    private ResultCounter() {
         this(INIT_STATE);
     }
 
-    private Counter(int counter) {
+    private ResultCounter(int counter) {
         this.counter = counter;
     }
 
-    public static Counter create() {
-        return new Counter();
+    public static ResultCounter create() {
+        return new ResultCounter();
     }
 
-    public Counter increase() {
-        return new Counter(this.counter + 1);
+    public ResultCounter increase() {
+        return new ResultCounter(this.counter + 1);
     }
 
     public int multiply(int prize) {

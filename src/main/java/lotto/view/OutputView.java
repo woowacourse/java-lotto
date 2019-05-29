@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.Map;
 
-import lotto.domain.Counter;
+import lotto.domain.ResultCounter;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoResult;
@@ -48,19 +48,19 @@ public class OutputView {
     public static void winList(LottoGames lottoGames, WinningLotto winningLotto) {
         System.out.println(WIN_TITLE);
         System.out.println(WIN_CONTOUR);
-        Map<Rank, Counter> lottoResult = LottoResult.create(lottoGames, winningLotto);
+        Map<Rank, ResultCounter> lottoResult = LottoResult.create(lottoGames, winningLotto);
         for (Rank rank : Rank.values()) {
             rankResult(lottoResult, rank);
         }
     }
 
-    private static void rankResult(Map<Rank, Counter> lottoResult, Rank rank) {
+    private static void rankResult(Map<Rank, ResultCounter> lottoResult, Rank rank) {
         if (!rank.equals(Rank.MISS)) {
             System.out.println(getRankResult(lottoResult, rank));
         }
     }
 
-    private static String getRankResult(Map<Rank, Counter> lottoResult, Rank rank) {
+    private static String getRankResult(Map<Rank, ResultCounter> lottoResult, Rank rank) {
         return String.format(RANK_RESULT_FORMAT, rank.getMatchCount(), rankAdditional(rank), rank.getPrize(), lottoResult.get(rank));
     }
 
@@ -70,5 +70,9 @@ public class OutputView {
 
     public static void rateOfReturn(PurchaseAmount purchaseAmount) {
         System.out.println(RETURN_HEADER + Math.round(LottoResult.getRateOfReturn(purchaseAmount)) + RETURN_FOOTER);
+    }
+
+    static void manual() {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요");
     }
 }

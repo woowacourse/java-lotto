@@ -10,6 +10,11 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public static String getManualCount() {
+        OutputView.manual();
+        return scanner.nextLine();
+    }
+
     public static String getWinnerLotto() {
         OutputView.win();
         return scanner.nextLine();

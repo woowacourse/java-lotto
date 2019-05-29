@@ -6,19 +6,19 @@ import java.util.Map;
 import static lotto.domain.Rank.*;
 
 public class LottoResult {
-    private static final Map<Rank, Counter> lottoResult;
+    private static final Map<Rank, ResultCounter> lottoResult;
 
     static {
         lottoResult = new HashMap<>();
-        lottoResult.put(FIRST, Counter.create());
-        lottoResult.put(SECOND, Counter.create());
-        lottoResult.put(THIRD, Counter.create());
-        lottoResult.put(FOURTH, Counter.create());
-        lottoResult.put(FIFTH, Counter.create());
-        lottoResult.put(MISS, Counter.create());
+        lottoResult.put(FIRST, ResultCounter.create());
+        lottoResult.put(SECOND, ResultCounter.create());
+        lottoResult.put(THIRD, ResultCounter.create());
+        lottoResult.put(FOURTH, ResultCounter.create());
+        lottoResult.put(FIFTH, ResultCounter.create());
+        lottoResult.put(MISS, ResultCounter.create());
     }
 
-    public static Map<Rank, Counter> create(LottoGames lottoGames, WinningLotto winningLotto) {
+    public static Map<Rank, ResultCounter> create(LottoGames lottoGames, WinningLotto winningLotto) {
         for (Lotto lotto : lottoGames) {
             increase(winningLotto.getRank(lotto));
         }

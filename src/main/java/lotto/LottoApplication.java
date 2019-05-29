@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.AutoCount;
+import lotto.domain.ManualCount;
 import lotto.domain.TotalCount;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoNumber;
@@ -17,6 +19,8 @@ public class LottoApplication {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         TotalCount totalCounts = getGameCounts(purchaseAmount);
+        ManualCount manualCount = ManualCount.is(InputView.getManualCount(), totalCounts);
+        AutoCount autoCount = manualCount.getAutoCount(totalCounts);
         LottoGames lottoGames = getLottoGames(totalCounts);
         OutputView.lottoList(lottoGames);
         WinningNumbers winningNumber = getWinLotto();
