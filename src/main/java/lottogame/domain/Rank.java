@@ -7,6 +7,7 @@ public enum Rank {
     FIFTH(3, 5000),
     FOURTH(4, 50000),
     THIRD(5, 1500000),
+    SECOND(5, 30000000),
     FIRST(6, 2000000000);
 
     private static final int MIN_MATCH_NUMBER = 0;
@@ -20,11 +21,13 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank valueOf(int numberOfMatch) {
+    public static Rank valueOf(int numberOfMatch, boolean bonusBallMatch) {
         if (numberOfMatch < MIN_MATCH_NUMBER || numberOfMatch > MAX_MATCH_NUMBER) {
             throw new IllegalArgumentException("올바른 매칭 개수가 아닙니다.");
         }
-
+        if (numberOfMatch == SECOND.numberOfMatch && bonusBallMatch) {
+            return SECOND;
+        }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isMatch(numberOfMatch))
                 .findAny()
@@ -35,12 +38,15 @@ public enum Rank {
         return this.numberOfMatch == numberOfMatch;
     }
 
-    @Override
-    public String toString() {
-        return numberOfMatch + "개 일치 (" + prize + "원) - ";
-    }
-
     public long sumPrizeOf(Integer numberOfMatch) {
         return prize * numberOfMatch;
+    }
+
+    @Override
+    public String toString() {
+        if (this == SECOND) {
+            return numberOfMatch + "개 일치, 보너스 볼 일치(" + prize + "원) - ";
+        }
+        return numberOfMatch + "개 일치 (" + prize + "원) - ";
     }
 }

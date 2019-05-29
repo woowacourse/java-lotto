@@ -14,7 +14,7 @@ public class LottoResultGenerator {
     }
 
     public static LottoResult create(LottoTickets lottoTickets, WinningLotto winningLotto) {
-        List<Rank> matchResults = lottoTickets.getMatchResultEachLottos(winningLotto);
+        List<Rank> matchResults = lottoTickets.getMatchResultEachLotto(winningLotto);
         for (Rank rank : matchResults) {
             result.put(rank, result.get(rank) + 1);
         }

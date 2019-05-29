@@ -39,4 +39,8 @@ public class WinningLotto {
     public boolean isContain(LottoNumber lottoNumber) {
         return winningLotto.contains(lottoNumber);
     }
+
+    public boolean isBonusBallMatch(LottoNumber lottoNumber) {
+        return bonusNumber == lottoNumber;
+    }
 }

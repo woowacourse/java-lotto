@@ -30,7 +30,9 @@ public class Lotto {
         int numberOfMatch = (int) lotto.stream()
                 .filter(winningLotto::isContain)
                 .count();
-        return Rank.valueOf(numberOfMatch);
+        boolean bonusBallMatch = lotto.stream()
+                .anyMatch(winningLotto::isBonusBallMatch);
+        return Rank.valueOf(numberOfMatch, bonusBallMatch);
     }
 
     @Override

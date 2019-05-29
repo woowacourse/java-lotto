@@ -36,7 +36,7 @@ public class LottoTickets {
         return lottos.size();
     }
 
-    List<Rank> getMatchResultEachLottos(WinningLotto winningLotto) {
+    List<Rank> getMatchResultEachLotto(WinningLotto winningLotto) {
         List<Rank> matchResults = new ArrayList<>();
 
         for (Lotto lotto : lottos) {
