@@ -1,0 +1,43 @@
+package lotto.domain;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+public class LottoResult {
+    private final Map<Rank, Integer> result;
+    private int totalLottos = 0;
+
+    public LottoResult() {
+        result = new HashMap<>();
+        for (Rank rank : Rank.values()){
+            result.put(rank,0);
+        }
+    }
+
+    public LottoResult(final Map<Rank, Integer> result) {
+        this.result = new HashMap<>(result);
+        for (int count : result.values()) {
+            totalLottos += count;
+        }
+    }
+
+    public void add(Rank rank) {
+        totalLottos++;
+        result.put(rank, result.get(rank) + 1);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult that = (LottoResult) o;
+        return totalLottos == that.totalLottos &&
+                Objects.equals(result, that.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(result, totalLottos);
+    }
+}
