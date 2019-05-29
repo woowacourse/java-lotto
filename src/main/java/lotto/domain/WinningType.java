@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public enum  WinnerType {
+public enum WinningType {
 
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
@@ -11,13 +11,13 @@ public enum  WinnerType {
     private final int matchNum;
     private final int reward;
 
-    private WinnerType(final int matchNum, final int reward) {
+    private WinningType(final int matchNum, final int reward) {
         this.matchNum = matchNum;
         this.reward = reward;
     }
 
-    public static WinnerType valueOf(final int matchNum) {
-        for (WinnerType value : WinnerType.values()) {
+    public static WinningType valueOf(final int matchNum) {
+        for (WinningType value : WinningType.values()) {
             if (value.getMatchNum() == matchNum) {
                 return value;
             }

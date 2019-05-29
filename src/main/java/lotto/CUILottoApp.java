@@ -15,9 +15,7 @@ public class CUILottoApp {
         WinningLotto winningLotto = InputView.createWinningLotto();
         LottoResult lottoResult = new LottoResult(lottos, winningLotto);
 
-        for (WinnerType value : WinnerType.values()) {
-            System.out.println(lottoResult.getWinnerTypeValue(value));
-        }
-
+        OutputView.printLottoResult(lottoResult);
+        OutputView.printLottoYield();
     }
 }
