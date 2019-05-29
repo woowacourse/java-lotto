@@ -15,5 +15,6 @@ public class ConsoleApplication {
         LottoGame lottoGame = new LottoGame(winningInformation);
 
         LottoResult lottoResult = lottoGame.confirmWinningLottos(lottos);
+        OutputView.outputResult(lottoResult);
     }
 }

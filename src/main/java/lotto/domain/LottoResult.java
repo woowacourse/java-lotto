@@ -10,8 +10,8 @@ public class LottoResult {
 
     public LottoResult() {
         result = new HashMap<>();
-        for (Rank rank : Rank.values()){
-            result.put(rank,0);
+        for (Rank rank : Rank.values()) {
+            result.put(rank, 0);
         }
     }
 
@@ -25,6 +25,19 @@ public class LottoResult {
     public void add(Rank rank) {
         totalLottos++;
         result.put(rank, result.get(rank) + 1);
+    }
+
+    public StringBuilder getResultMessage() {
+        StringBuilder message = new StringBuilder();
+        for (Rank rank : Rank.winningValues()) {
+            message.append(rank.getCountOfMatch())
+                    .append("개 일치 (")
+                    .append(rank.getWinningMoney())
+                    .append("원)- ")
+                    .append(result.get(rank))
+                    .append("개\n");
+        }
+        return message;
     }
 
     @Override
