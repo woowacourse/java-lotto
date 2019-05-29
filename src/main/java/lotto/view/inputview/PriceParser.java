@@ -5,24 +5,24 @@ import java.util.regex.Pattern;
 
 public class PriceParser {
     private static final String ERROR_NULL_OR_NO_INPUT = "입력이 없습니다.";
-    private static final String ERROR_MINIMUM_LIMIT_PRICE = "구매 금액은 1000원 이상입니다.";
+    private static final String ERROR_LIMIT_MINIMUM_PRICE = "구매 금액은 1000원 이상입니다.";
     private static final String ERROR_PRICE_UNIT = "구매 금액은 1,000원 단위 입니다.";
     private static final String PATTERN_ALLOWED_LAST_CHARACTER = "^([0-9]*)원$";
     private static final int REMOVED_INPUT_LAST_CHARACTER = 1;
-    private static final int MINIMUM_LIMIT_PRICE = 1000;
+    private static final int LIMIT_MINIMUM_PRICE = 1000;
     private static final int PRICE_UNIT = 1000;
     private static final int DIVISIBLE = 0;
 
-    public static int getLottoAmount(String input) {
-        int price = toInts(getValidInput(input));
-        checkValidPrice(price);
+    public static int getLottoAmount(String inputPrice) {
+        int price = toInts(getValidInputPrice(inputPrice));
+        verifyValidPrice(price);
 
         return calculateAmount(price);
     }
 
-    private static String getValidInput(String input) {
-        checkNullEmpty(input);
-        return getCheckedPatternInput(input);
+    private static String getValidInputPrice(String inputPrice) {
+        checkNullEmpty(inputPrice);
+        return getCheckedPatternInput(inputPrice);
     }
 
     private static void checkNullEmpty(String input) {
@@ -46,14 +46,14 @@ public class PriceParser {
         return Integer.parseInt(input);
     }
 
-    private static void checkValidPrice(int price) {
+    private static void verifyValidPrice(int price) {
         checkMinimumLimit(price);
         checkDivisiblePriceUnit(price);
     }
 
     private static void checkMinimumLimit(int price) {
-        if (price < MINIMUM_LIMIT_PRICE) {
-            throw new IllegalArgumentException(ERROR_MINIMUM_LIMIT_PRICE);
+        if (price < LIMIT_MINIMUM_PRICE) {
+            throw new IllegalArgumentException(ERROR_LIMIT_MINIMUM_PRICE);
         }
     }
 
