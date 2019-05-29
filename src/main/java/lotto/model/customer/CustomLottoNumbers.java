@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.customer;
 
 import java.util.List;
 import java.util.stream.Stream;

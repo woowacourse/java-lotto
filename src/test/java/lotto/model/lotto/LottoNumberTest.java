@@ -1,5 +1,7 @@
-package lotto.model;
+package lotto.model.lotto;
 
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -14,7 +16,7 @@ public class LottoNumberTest {
 
     @Test
     void 로또_번호_범위를_벗어날_때_예외_발생() {
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumber(0));
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumber(46));
+        assertThrows(InvalidLottoNumberException.class, () -> new LottoNumber(0));
+        assertThrows(InvalidLottoNumberException.class, () -> new LottoNumber(46));
     }
 }
