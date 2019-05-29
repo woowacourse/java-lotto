@@ -17,7 +17,7 @@ class AutoLottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    Lotto makeAutoLotto() {
+    Lotto makeLotto() {
         Collections.shuffle(lottoNumbers);
         return new Lotto(lottoNumbers.stream()
                 .limit(6)

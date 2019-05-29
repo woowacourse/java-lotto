@@ -23,15 +23,15 @@ public class Main {
 
     private static LottoPaper createLottoPaper(Money money, int countOfCustomLottos) {
         try {
-            CustomLottoPaper customLottoPaper = new CustomLottoPaper();
+            LottoOMRCard lottoOMRCard = new LottoOMRCard();
 
             for (int i = 0; i < countOfCustomLottos; i++) {
-                customLottoPaper.addCustomLotto(InputView.inputCustomLotto());
+                lottoOMRCard.addCustomLotto(InputView.inputCustomLotto());
             }
 
             LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
 
-            return lottoVendingMachine.buyLotto(money, customLottoPaper.getPaper());
+            return lottoVendingMachine.buyLotto(money, lottoOMRCard.getPaper());
         } catch (Exception e) {
             return createLottoPaper(money, countOfCustomLottos);
         }

@@ -22,6 +22,6 @@ public class LottoVendingMachine {
     }
 
     private Lotto automaticLotto() {
-        return autoLottoGenerator.makeAutoLotto();
+        return autoLottoGenerator.makeLotto();
     }
 }

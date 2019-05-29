@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomLottoPaper {
+public class LottoOMRCard {
     private List<Lotto> lottos;
 
-    public CustomLottoPaper() {
+    public LottoOMRCard() {
         lottos = new ArrayList<>();
     }
 
