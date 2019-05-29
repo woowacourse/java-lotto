@@ -1,7 +1,9 @@
 package com.woowacourse.lotto.exception;
 
+import com.woowacourse.lotto.domain.ExceptionOutput;
+
 public class InvalidMoneyException extends RuntimeException {
 	public InvalidMoneyException() {
-		super("잘못된 구매 금액입니다. 금액을 1000원 단위로 입력해주세요.");
+		super(ExceptionOutput.VIOLATE_MONEY.getExceptionMessage());
 	}
 }

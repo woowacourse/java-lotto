@@ -14,7 +14,7 @@ public class LottoNumber {
 
 	public static Integer getLottoNumber(int index) {
 		if(index < MIN_NUMBER_OF_LOTTO - 1 || index > MAX_NUMBER_OF_LOTTO - 1) { // index 범위는 0이상 44이하
-			throw new IllegalArgumentException("잘못된 인덱스 접근입니다.");
+			throw new IllegalArgumentException(ExceptionOutput.VIOLATE_INDEX.getExceptionMessage());
 		}
 		return lottoNumbers.get(index);
 	}

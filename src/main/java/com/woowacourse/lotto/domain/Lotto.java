@@ -17,7 +17,7 @@ public class Lotto {
 
 	private void validateRange(List<Integer> numbers) {
 		if(numbers.stream().anyMatch(number -> MIN_NUMBER_OF_LOTTO > number || MAX_NUMBER_OF_LOTTO < number)) {
-			throw new InvalidNumberException("잘못된 로또 넘버입니다.");
+			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
 	}
 
