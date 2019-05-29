@@ -8,7 +8,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class LottoNumberTest {
     @Test
     void 생성자_생성() {
-        assertThat(LottoNumber.getNumber(0)).isEqualTo(LottoNumber.getNumber(0));
+        assertThat(LottoNumber.getNumber(1)).isEqualTo(LottoNumber.getNumber(1));
     }
 
     @Test
