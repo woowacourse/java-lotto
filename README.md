@@ -16,3 +16,12 @@
 1. get bonus number [domain]
     - {Exception} bonus number must not contained WinningLotto
 2. show winning statics with bonus number
+
+## Step 3. User Picked Lotto Numbers
+### Function Requirements
+1. get how many **not automatically generated** lottos
+    - {Exception} must over 0
+    - {Exception} must under ``GameCounts`` instance
+2. get user picked lotto numbers
+    - {Exception} input format
+    - {Exception} duplicated number
