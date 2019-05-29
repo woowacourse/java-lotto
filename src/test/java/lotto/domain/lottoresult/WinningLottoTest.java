@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.lottoresult;
 
+import lotto.domain.lotto.LottoTicket;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

@@ -1,22 +1,22 @@
-package lotto.domain;
+package lotto.domain.lottoresult;
+
+import lotto.domain.lotto.LottoTicket;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private final WinningLotto winningLotto;
     private final Map<LottoRank, Integer> rankStatistic = new LinkedHashMap<>();
 
-    LottoResult(WinningLotto winningLotto) {
-        this.winningLotto = winningLotto;
+    LottoResult(WinningLotto winningLotto, LottoTicketGroup lottoTickets) {
         Arrays.stream(LottoRank.values())
                 .forEach(rank -> rankStatistic.put(rank, 0));
-    }
 
-    void update(LottoTicket userLotto) {
-        LottoRank rank = winningLotto.checkLottoRank(userLotto);
-        rankStatistic.replace(rank, rankStatistic.get(rank) + 1);
+        for (LottoTicket lottoTicket : lottoTickets) {
+            LottoRank rank = winningLotto.checkLottoRank(lottoTicket);
+            rankStatistic.replace(rank, rankStatistic.get(rank) + 1);
+        }
     }
 
     int countOfRank(LottoRank lottoRank) {
@@ -25,8 +25,7 @@ public class LottoResult {
 
     double earningRate() {
         double expense =  LottoTicket.PRICE * rankStatistic.values().stream()
-                .mapToInt(Integer::intValue)
-                .sum();
+                .reduce(0, Integer::sum);
         double rewards = rankStatistic.keySet().stream()
                 .mapToInt(x -> x.getReward() * rankStatistic.get(x))
                 .sum();

@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.purchaseamount;
+
+import lotto.domain.lotto.LottoTicket;
 
 public class PurchaseAmount {
     private int money;

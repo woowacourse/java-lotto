@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.purchaseamount;
 
+import lotto.domain.purchaseamount.PurchaseAmount;
+import lotto.domain.purchaseamount.PurchaseAmountException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;

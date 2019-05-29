@@ -1,10 +1,10 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.*;
 
 public class LottoTicket {
+    public static final int PRICE = 1000;
     static final int LOTTO_SIZE = 6;
-    static final int PRICE = 1000;
 
     private final Set<LottoNumber> lottoNumbers;
 
