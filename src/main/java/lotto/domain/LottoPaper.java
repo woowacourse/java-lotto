@@ -20,10 +20,6 @@ public class LottoPaper {
         return result;
     }
 
-    int countOfLotto() {
-        return lottos.size();
-    }
-
     LottoPaper addLotto(List<Lotto> lottos) {
         this.lottos.addAll(lottos);
         return this;

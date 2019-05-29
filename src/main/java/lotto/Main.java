@@ -31,7 +31,7 @@ public class Main {
 
             LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
 
-            return lottoVendingMachine.buyLotto(money, lottoOMRCard.getPaper());
+            return lottoVendingMachine.buyLotto(money, lottoOMRCard);
         } catch (Exception e) {
             return createLottoPaper(money, countOfCustomLottos);
         }

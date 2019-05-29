@@ -17,4 +17,8 @@ public class LottoOMRCard {
     public LottoPaper getPaper() {
         return new LottoPaper(lottos);
     }
+
+    int countOfLotto() {
+        return lottos.size();
+    }
 }

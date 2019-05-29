@@ -5,15 +5,15 @@ import java.util.List;
 
 public class LottoVendingMachine {
 
-    public LottoPaper buyLotto(Money insertMoney, LottoPaper userLottoPaper) {
+    public LottoPaper buyLotto(Money insertMoney, LottoOMRCard lottoOMRCard) {
         List<Lotto> lottos = new ArrayList<>();
-        int totalLottoCount = insertMoney.howManyLotto() - userLottoPaper.countOfLotto();
+        int totalLottoCount = insertMoney.howManyLotto() - lottoOMRCard.countOfLotto();
 
         for (int i = 0; i < totalLottoCount; i++) {
             lottos.add(automaticLotto());
         }
 
-        return userLottoPaper.addLotto(lottos);
+        return lottoOMRCard.getPaper().addLotto(lottos);
     }
 
     private Lotto automaticLotto() {
