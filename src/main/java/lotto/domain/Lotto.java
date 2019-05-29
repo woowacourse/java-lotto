@@ -13,7 +13,7 @@ public class Lotto {
 
     private List<LottoNo> lottoNo;
 
-    static Lotto of(List<LottoNo> lottoNo) {
+    public static Lotto of(List<LottoNo> lottoNo) {
         lottoNo.sort(LottoNo::compareTo);
         return new Lotto(lottoNo);
     }
