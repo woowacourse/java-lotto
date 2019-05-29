@@ -2,9 +2,9 @@ package lotto.domain;
 
 import java.util.Map;
 
+import static lotto.domain.Prize.*;
+
 public class Result {
-    public static final int MIN_PRIZE_NUMBER = 3;
-    public static final int MAX_PRIZE_NUMBER = 6;
     private static final double ONE_HUNDRED_PERCENT = 100.0;
     private final Map<Prize, Integer> result;
 
@@ -15,7 +15,7 @@ public class Result {
     public double calculateRateOfReturn(final int buyPrice) {
         int sum = 0;
         for (int i = MIN_PRIZE_NUMBER; i <= MAX_PRIZE_NUMBER; i++) {
-            Prize prize = Prize.valueOf(i);
+            Prize prize = valueOf(i);
             sum += prize.getWinningAmount() * getCountOfPrize(prize);
         }
         return (double) sum / buyPrice * ONE_HUNDRED_PERCENT;

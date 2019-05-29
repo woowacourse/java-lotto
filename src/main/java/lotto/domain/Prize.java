@@ -9,6 +9,8 @@ public enum Prize {
     FOURTH(3, 5_000),
     NONE(0, 0);
 
+    public static final int MIN_PRIZE_NUMBER = 3;
+    public static final int MAX_PRIZE_NUMBER = 6;
     private final int countOfNumber;
     private final int winningAmount;
 
@@ -26,7 +28,7 @@ public enum Prize {
     }
 
     public static Prize valueOf(int countOfNumber) {
-        if (0 <= countOfNumber && countOfNumber <= 2) {
+        if (countOfNumber < MIN_PRIZE_NUMBER) {
             return Prize.NONE;
         }
         for (Prize prize : Prize.values()) {

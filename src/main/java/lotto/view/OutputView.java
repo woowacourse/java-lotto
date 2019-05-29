@@ -34,7 +34,7 @@ public class OutputView {
 
     public static void printLottoResult(Result result, int buyPrice) {
         System.out.println("당첨 통계");
-        for (int i = Result.MIN_PRIZE_NUMBER; i <= Result.MAX_PRIZE_NUMBER; i++) {
+        for (int i = Prize.MIN_PRIZE_NUMBER; i <= Prize.MAX_PRIZE_NUMBER; i++) {
             Prize prize = Prize.valueOf(i);
             printPrizedata(prize, result.getCountOfPrize(prize));
         }

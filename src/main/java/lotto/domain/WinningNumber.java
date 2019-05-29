@@ -18,7 +18,9 @@ public class WinningNumber {
     }
 
     private List<LottoNumber> makeWinningNumbers(final List<Integer> winningNumbers) {
-        return winningNumbers.stream().map(LottoNumber::getLottoNumber).collect(Collectors.toList());
+        return winningNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
     }
 
     public Prize prize(final Lotto lotto) {
