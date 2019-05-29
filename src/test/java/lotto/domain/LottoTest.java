@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
@@ -75,11 +75,17 @@ class LottoTest {
     }
 
     @Test
-    public void 로또_숫자가_범위를_초과할때_예외발생하는지_검사() {
+    public void 로또_숫자가_범위를_벗어날때_예외발생하는지_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 46, 7);
 
         assertThatExceptionOfType(LottoNumberCreateException.class).isThrownBy(() -> {
             getLottoNumbers(numbers);
+        });
+
+        List<Integer> numbers2 = Arrays.asList(1, 2, 3, 4, 0, 7);
+
+        assertThatExceptionOfType(LottoNumberCreateException.class).isThrownBy(() -> {
+            getLottoNumbers(numbers2);
         });
     }
 
