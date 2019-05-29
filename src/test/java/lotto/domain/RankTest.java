@@ -2,6 +2,9 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -34,5 +37,14 @@ class RankTest {
     @Test
     void Rank_확인_음수() {
         assertThatThrownBy(() -> Rank.valueOf(-1)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void calculateTotalWinningMoney() {
+        Map<Rank, Integer> map = new HashMap<>();
+        map.put(Rank.SECOND, 1);
+        map.put(Rank.FOURTH, 2);
+
+        assertThat(Rank.calculateTotalWinningMoney(map)).isEqualTo(1_510_000);
     }
 }

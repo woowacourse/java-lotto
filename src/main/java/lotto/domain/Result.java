@@ -19,4 +19,13 @@ public class Result {
         }
         return result.get(rank);
     }
+
+    public double calculateEarningsRate(Payment payment) {
+        if (Objects.isNull(payment)) {
+            throw new NullPointerException();
+        }
+
+        long totalWinningMoney = Rank.calculateTotalWinningMoney(result);
+        return payment.calculateEarningsRate(totalWinningMoney);
+    }
 }

@@ -5,13 +5,17 @@ public class Payment {
     private int payment;
 
     public Payment(int payment) {
-        if (payment < ZERO) {
-            throw new IllegalArgumentException("지불 금액은 음수가 될 수 없습니다");
+        if (payment <= ZERO) {
+            throw new IllegalArgumentException("금액을 지불해주시기 바랍니다");
         }
         this.payment = payment;
     }
 
     public int calculateNumberOfTickets(int lottoPrice) {
         return payment / lottoPrice;
+    }
+
+    public double calculateEarningsRate(long totalWinningMoney) {
+        return (double) totalWinningMoney / payment;
     }
 }

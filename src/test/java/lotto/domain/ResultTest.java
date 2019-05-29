@@ -27,4 +27,13 @@ public class ResultTest {
         assertThat(result.get(Rank.FOURTH)).isEqualTo(0);
         assertThat(result.get(Rank.MISS)).isEqualTo(0);
     }
+
+    @Test
+    void 수익률_계산() {
+        Map<Rank, Integer> map = new HashMap<>();
+        map.put(Rank.FOURTH, 1);
+        Result result = new Result(map);
+
+        assertThat(result.calculateEarningsRate(new Payment(10_000))).isEqualTo(0.5);
+    }
 }
