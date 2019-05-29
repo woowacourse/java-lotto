@@ -4,7 +4,7 @@ import java.util.Map;
 
 import lotto.domain.ResultCounter;
 import lotto.domain.Lotto;
-import lotto.domain.LottoGames;
+import lotto.domain.AutoLottoGames;
 import lotto.domain.LottoResult;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.Rank;
@@ -29,9 +29,9 @@ public class OutputView {
         System.out.println(INPUT_PURCHASE_AMOUNT);
     }
 
-    public static void lottoList(LottoGames lottoGames) {
-        System.out.println(lottoGames.size() + PURCHASED_GAME);
-        for (Lotto lotto : lottoGames) {
+    public static void lottoList(AutoLottoGames autoLottoGames) {
+        System.out.println(autoLottoGames.size() + PURCHASED_GAME);
+        for (Lotto lotto : autoLottoGames) {
             System.out.println(OPEN_SQUARE_BUCKET + lotto.getLotto() + CLOSE_SQUARE_BUCKET);
         }
         System.out.println();
@@ -45,10 +45,10 @@ public class OutputView {
         System.out.println(INPUT_BONUS);
     }
 
-    public static void winList(LottoGames lottoGames, WinningLotto winningLotto) {
+    public static void winList(AutoLottoGames autoLottoGames, WinningLotto winningLotto) {
         System.out.println(WIN_TITLE);
         System.out.println(WIN_CONTOUR);
-        Map<Rank, ResultCounter> lottoResult = LottoResult.create(lottoGames, winningLotto);
+        Map<Rank, ResultCounter> lottoResult = LottoResult.create(autoLottoGames, winningLotto);
         for (Rank rank : Rank.values()) {
             rankResult(lottoResult, rank);
         }

@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.AutoCount;
 import lotto.domain.ManualCount;
 import lotto.domain.TotalCount;
-import lotto.domain.LottoGames;
+import lotto.domain.AutoLottoGames;
 import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
@@ -21,11 +21,11 @@ public class LottoApplication {
         TotalCount totalCounts = getGameCounts(purchaseAmount);
         ManualCount manualCount = ManualCount.is(InputView.getManualCount(), totalCounts);
         AutoCount autoCount = manualCount.getAutoCount(totalCounts);
-        LottoGames lottoGames = getLottoGames(totalCounts);
-        OutputView.lottoList(lottoGames);
+        AutoLottoGames autoLottoGames = getLottoGames(totalCounts);
+        OutputView.lottoList(autoLottoGames);
         WinningNumbers winningNumber = getWinLotto();
         WinningLotto winningLotto = getWinningLotto(winningNumber);
-        OutputView.winList(lottoGames, winningLotto);
+        OutputView.winList(autoLottoGames, winningLotto);
         OutputView.rateOfReturn(purchaseAmount);
     }
 
@@ -63,9 +63,9 @@ public class LottoApplication {
         }
     }
 
-    private static LottoGames getLottoGames(TotalCount totalCounts) {
+    private static AutoLottoGames getLottoGames(TotalCount totalCounts) {
         try {
-            return new LottoGames(totalCounts);
+            return new AutoLottoGames(totalCounts);
         } catch (PurchaseAmountException e) {
             System.out.println(e.getMessage());
             return getLottoGames(totalCounts);

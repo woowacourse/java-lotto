@@ -23,4 +23,8 @@ public class LottoGenerator {
         Collections.sort(result);
         return new Lotto(result);
     }
+
+    public static Lotto generate(List<Number> numbers) {
+        return new Lotto(numbers);
+    }
 }

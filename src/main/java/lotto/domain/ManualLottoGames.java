@@ -1,23 +1,19 @@
 package lotto.domain;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class LottoGames implements Iterable<Lotto> {
-    private static final int FIRST_LOTTO = 0;
-
+public class ManualLottoGames implements Iterable<Lotto> {
     private final List<Lotto> lottoGames;
 
-    public LottoGames(TotalCount totalCounts) {
+    public ManualLottoGames(TotalCount totalCounts) {
         this.lottoGames = new ArrayList<>();
-        for (int i = FIRST_LOTTO; i < totalCounts.getTotalCount(); i++) {
-            addLotto();
-        }
     }
 
-    private void addLotto() {
-        lottoGames.add(new LottoGenerator().generate());
+    private void addLotto(List<Number> lottoNumbers) {
+        lottoGames.add(LottoGenerator.generate(lottoNumbers));
     }
 
     public int size() {
