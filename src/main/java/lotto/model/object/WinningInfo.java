@@ -9,4 +9,12 @@ public class WinningInfo {
                 this.winningLotto = winningLotto;
                 this.bonusBall = bonusBall;
         }
+
+        public Lotto getWinningLotto() {
+                return winningLotto;
+        }
+
+        public BonusBall getBonusBall() {
+                return bonusBall;
+        }
 }

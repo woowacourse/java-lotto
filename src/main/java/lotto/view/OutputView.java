@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OutputView {
-        private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
         private static final int LOTTO_PRICE = 1000;
         private static final int MIN_WIN_MATCH_NUMBER = 3;
+        private static final int MATCH_NUMBER_FIVE = 5;
+        private static final int MATCH_NUMBER_SIX = 6;
+        private static final String PRINT_STATS_FORMAT = "%d개 일치 (%d원)- %d개\n";
+        private static final String PRINT_STATS_FORMAT_SECOND = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
 
         public static void printPurchaseNumber(Payment payment) {
                 System.out.println(payment.getNumber() / LOTTO_PRICE + "개를 구매했습니다.");
@@ -23,8 +26,8 @@ public class OutputView {
         }
 
         private static void printEachLotto(Lotto lotto) {
-                List<Integer> lottonumbers =  new ArrayList<>();
-                for(LottoNumber lottoNumber : lotto.getLottoNumbers()){
+                List<Integer> lottonumbers = new ArrayList<>();
+                for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
                         lottonumbers.add(lottoNumber.getNumber());
                 }
                 System.out.println(lottonumbers.toString());
@@ -33,14 +36,17 @@ public class OutputView {
         public static void printWinStats(WinStats winStats) {
                 System.out.println("\n당첨 통계");
                 System.out.println("---------");
-                for (int matchNumber = MIN_WIN_MATCH_NUMBER; matchNumber <= NUMBER_OF_LOTTO_NUMBERS; matchNumber++){
-                        System.out.println(matchNumber + "개 일치 " + "("
-                                        + LottoRank.getPrizes(matchNumber)
-                                        + "원)- " + winStats.getMappingStats().get(LottoRank.getLottoRank(matchNumber)) + "개");
+                for (int matchNumber = MIN_WIN_MATCH_NUMBER; matchNumber <= MATCH_NUMBER_FIVE; matchNumber++) {
+                        System.out.printf(PRINT_STATS_FORMAT, matchNumber, LottoRank.getPrizes(matchNumber, false),
+                            winStats.getMappingStats().get(LottoRank.getLottoRank(matchNumber, false)));
                 }
+                System.out.printf(PRINT_STATS_FORMAT_SECOND, MATCH_NUMBER_FIVE, LottoRank.getPrizes(MATCH_NUMBER_FIVE, true),
+                    winStats.getMappingStats().get(LottoRank.getLottoRank(MATCH_NUMBER_FIVE, true)));
+                System.out.printf(PRINT_STATS_FORMAT, MATCH_NUMBER_SIX, LottoRank.getPrizes(MATCH_NUMBER_SIX, false),
+                    winStats.getMappingStats().get(LottoRank.getLottoRank(MATCH_NUMBER_SIX, false)));
         }
 
         public static void printYield(Yield yield) {
-                System.out.println("총 수익률은 " + yield.getNumber() + "%입니다.");
+                System.out.println("총 수익률은 " + yield.getNumber() *100  + "%입니다.");
         }
 }

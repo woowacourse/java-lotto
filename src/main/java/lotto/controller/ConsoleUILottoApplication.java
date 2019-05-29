@@ -18,15 +18,23 @@ public class ConsoleUILottoApplication {
                 List<Lotto> purchasedLottos = createPurchasedLottos(payment);
                 OutputView.printPurchaseLottos(purchasedLottos);
 
-                Lotto winningLotto = createWinningLotto();
-
-                WinStats winStats = WinStatsCreator.create(purchasedLottos, winningLotto);
+                WinStats winStats = createWinStats(purchasedLottos);
                 OutputView.printWinStats(winStats);
 
                 Yield yield = YieldCreator.create(payment, winStats);
                 OutputView.printYield(yield);
+        }
 
-                BonusBall bonusBall = createBonusBall();
+        private static WinStats createWinStats(List<Lotto> purchasedLottos) {
+                try {
+                        Lotto winningLotto = createWinningLotto();
+                        BonusBall bonusBall = createBonusBall();
+                        WinningInfo winningInfo = WinningInfoCreator.create(winningLotto, bonusBall);
+                        return WinStatsCreator.create(purchasedLottos, winningInfo);
+                } catch (RuntimeException e){
+                        System.err.println(e.getMessage());
+                        return createWinStats(purchasedLottos);
+                }
         }
 
         private static Payment createPayment() {

@@ -42,4 +42,11 @@ public class Lotto {
         public List<LottoNumber> getLottoNumbers() {
                 return lottoNumbers;
         }
+
+        public boolean hasBonusBall(BonusBall bonusBall) {
+                if(lottoNumbers.contains(bonusBall.getLottoNumber())){
+                        return true;
+                }
+                return false;
+        }
 }
