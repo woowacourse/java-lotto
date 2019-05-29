@@ -4,9 +4,18 @@ import java.util.List;
 
 public class WinningLotto {
     private final Lotto lotto;
+    private final Number bonusNum;
 
-    public WinningLotto(Lotto lotto) {
+    public WinningLotto(Lotto lotto, Number number) {
+        validate(lotto, number);
         this.lotto = lotto;
+        this.bonusNum = number;
+    }
+
+    private void validate(Lotto lotto, Number number) {
+        if (lotto.isContain(number)) {
+            throw new IllegalArgumentException("로또 번호화 중복된 숫자입니다.");
+        }
     }
 
     public WinningType matchLotto(Lotto lotto) {

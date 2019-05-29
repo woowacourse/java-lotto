@@ -12,7 +12,7 @@ public class CUILottoApp {
         List<Lotto> lottos = LottoFactory.createLottos(money.getLottoSize(), new AutoLottoCreator());
         OutputView.printLottos(lottos);
 
-        WinningLotto winningLotto = InputView.createWinningLotto();
+        WinningLotto winningLotto = InputView.createWinningLotto(InputView.createLotto());
         LottoResult lottoResult = new LottoResult(lottos, winningLotto);
 
         OutputView.printLottoResult(lottoResult);

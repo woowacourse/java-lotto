@@ -27,4 +27,8 @@ public class Lotto {
     public String toString() {
         return lotto.toString();
     }
+
+    public boolean isContain(Number number) {
+        return lotto.contains(number);
+    }
 }
