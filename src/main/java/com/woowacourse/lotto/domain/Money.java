@@ -19,6 +19,10 @@ public class Money {
 		}
 	}
 
+	public int getCountOfLotto() {
+		return money / MINIMUM_MONEY_FOR_PURCHASE;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
