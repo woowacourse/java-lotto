@@ -6,4 +6,8 @@ public class AutoCount {
     public AutoCount(int autoCount) {
         this.autoCount = autoCount;
     }
+
+    public int getAutoCount() {
+        return autoCount;
+    }
 }

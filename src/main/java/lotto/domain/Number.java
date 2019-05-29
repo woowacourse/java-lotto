@@ -14,6 +14,10 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
+    public static Number of(int lottoNumber) {
+        return new Number(lottoNumber);
+    }
+
     private void valid(int lottoNumber) {
         if (lottoNumber < 0 || lottoNumber > 45) {
             throw new LottoNumberException(INVALID_LOTTO_NUMBER);

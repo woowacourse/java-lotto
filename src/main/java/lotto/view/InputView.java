@@ -24,4 +24,8 @@ public class InputView {
         OutputView.bonus();
         return scanner.nextLine();
     }
+
+    public static String getManualLotto() {
+        return scanner.nextLine();
+    }
 }

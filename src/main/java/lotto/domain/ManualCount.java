@@ -5,16 +5,19 @@ import lotto.exceptions.ManualCountBoundException;
 public class ManualCount {
     private int manualCount;
 
-    private ManualCount(String input, TotalCount totalCount) {
-        int manualCount = Integer.parseInt(input);
+    private ManualCount(int manualCount, TotalCount totalCount) {
         if (totalCount.getTotalCount() < manualCount) {
             throw new ManualCountBoundException("구매 금액을 초과한 수동 구매는 불가능 합니다.");
         }
         this.manualCount = manualCount;
     }
 
-    public static ManualCount is(String input, TotalCount totalCount) {
-        return new ManualCount(input, totalCount);
+    public static ManualCount is(int manualCount, TotalCount totalCount) {
+        return new ManualCount(manualCount, totalCount);
+    }
+
+    public int getManualCount() {
+        return manualCount;
     }
 
     public AutoCount getAutoCount(TotalCount totalCount) {

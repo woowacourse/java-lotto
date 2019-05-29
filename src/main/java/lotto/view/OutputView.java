@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.Map;
 
+import lotto.domain.LottoGames;
 import lotto.domain.ResultCounter;
 import lotto.domain.Lotto;
 import lotto.domain.AutoLottoGames;
@@ -29,9 +30,10 @@ public class OutputView {
         System.out.println(INPUT_PURCHASE_AMOUNT);
     }
 
-    public static void lottoList(AutoLottoGames autoLottoGames) {
-        System.out.println(autoLottoGames.size() + PURCHASED_GAME);
-        for (Lotto lotto : autoLottoGames) {
+    public static void lottoList(LottoGames lottoGames) {
+//        System.out.println(autoLottoGames.size() + PURCHASED_GAME);
+        System.out.println("수동으로 " + lottoGames.manualSize() + "장, 자동으로 " + lottoGames.autoSize() + "장을 구매했습니다.");
+        for (Lotto lotto : lottoGames.getAll()) {
             System.out.println(OPEN_SQUARE_BUCKET + lotto.getLotto() + CLOSE_SQUARE_BUCKET);
         }
         System.out.println();
@@ -45,10 +47,10 @@ public class OutputView {
         System.out.println(INPUT_BONUS);
     }
 
-    public static void winList(AutoLottoGames autoLottoGames, WinningLotto winningLotto) {
+    public static void winList(LottoGames lottoGames, WinningLotto winningLotto) {
         System.out.println(WIN_TITLE);
         System.out.println(WIN_CONTOUR);
-        Map<Rank, ResultCounter> lottoResult = LottoResult.create(autoLottoGames, winningLotto);
+        Map<Rank, ResultCounter> lottoResult = LottoResult.create(lottoGames, winningLotto);
         for (Rank rank : Rank.values()) {
             rankResult(lottoResult, rank);
         }
@@ -74,5 +76,13 @@ public class OutputView {
 
     static void manual() {
         System.out.println("수동으로 구매할 로또 수를 입력해주세요");
+    }
+
+    public static void manualNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void indicator(int i) {
+        System.out.print(i + 1 + " - ");
     }
 }

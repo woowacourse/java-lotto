@@ -18,8 +18,8 @@ public class LottoResult {
         lottoResult.put(MISS, ResultCounter.create());
     }
 
-    public static Map<Rank, ResultCounter> create(AutoLottoGames autoLottoGames, WinningLotto winningLotto) {
-        for (Lotto lotto : autoLottoGames) {
+    public static Map<Rank, ResultCounter> create(LottoGames lottoGames, WinningLotto winningLotto) {
+        for (Lotto lotto : lottoGames.getAll()) {
             increase(winningLotto.getRank(lotto));
         }
         return lottoResult;

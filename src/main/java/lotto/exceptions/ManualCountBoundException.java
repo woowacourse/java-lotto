@@ -1,6 +1,6 @@
 package lotto.exceptions;
 
-public class ManualCountBoundException extends RuntimeException {
+public class ManualCountBoundException extends IllegalArgumentException {
     public ManualCountBoundException() {
         super();
     }
@@ -15,9 +15,5 @@ public class ManualCountBoundException extends RuntimeException {
 
     public ManualCountBoundException(Throwable cause) {
         super(cause);
-    }
-
-    protected ManualCountBoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

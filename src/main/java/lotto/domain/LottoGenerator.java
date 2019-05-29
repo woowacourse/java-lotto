@@ -13,7 +13,7 @@ public class LottoGenerator {
     public LottoGenerator() {
         numberList = new ArrayList<>();
         for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
-            numberList.add(LottoNumber.of(i));
+            numberList.add(Number.of(i));
         }
     }
 

@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.Number;
 import lotto.exceptions.IllegalFormatException;
 
 public class InputParser {
@@ -17,11 +17,11 @@ public class InputParser {
     private static final String ILLEGAL_NUMBER_COUNT = "당첨 번호는 6개 입니다.";
     private static final String DELIMITER = ",";
 
-    public static List<LottoNumber> parseLotto(String input) {
+    public static List<Number> parseLotto(String input) {
         validLottoFormat(input);
         String[] tokens = split(input);
-        Set<LottoNumber> inputNumbers = getInputNumbers(tokens);
-        List<LottoNumber> lottoNumbers = new ArrayList<>(inputNumbers);
+        Set<Number> inputNumbers = getInputNumbers(tokens);
+        List<Number> lottoNumbers = new ArrayList<>(inputNumbers);
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
@@ -40,10 +40,10 @@ public class InputParser {
         return result;
     }
 
-    private static Set<LottoNumber> getInputNumbers(String[] tokens) {
-        Set<LottoNumber> temp = new HashSet<>();
+    private static Set<Number> getInputNumbers(String[] tokens) {
+        Set<Number> temp = new HashSet<>();
         for (String token : tokens) {
-            temp.add(LottoNumber.of(Integer.parseInt(token)));
+            temp.add(Number.of(Integer.parseInt(token)));
         }
         return temp;
     }
