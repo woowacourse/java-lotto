@@ -18,9 +18,9 @@ class UserLottosTest {
     @Test
     void 비교() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto1 = new Lotto(Arrays.asList(3, 5, 7, 9, 11, 13));
+        WinningLotto lotto1 = new WinningLotto(Arrays.asList(3, 5, 7, 9, 11, 13));
         UserLottos userLottos = new UserLottos(Arrays.asList(lotto));
-        assertEquals(2, userLottos.match(lotto1));
+        assertEquals(0, userLottos.match(lotto1));
     }
 
     @Test

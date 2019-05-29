@@ -18,22 +18,12 @@ public class UserLottos {
         }
     }
 
-    public double match(Lotto another) {
+    public int match(WinningLotto winningLotto) {
         int money = 0;
         for (Lotto lotto : lottos) {
-            money += Reward.valueOf(getMatches(another, lotto)).money();
+            money += winningLotto.match(lotto);
         }
         return money / (lottos.size() * 1000);
-    }
-
-    private int getMatches(Lotto another, Lotto lotto) {
-        int matches = 0;
-        for (Integer number : another.numbers()) {
-            if (lotto.numbers().contains(number)) {
-                matches++;
-            }
-        }
-        return matches;
     }
 
     public int size() {
