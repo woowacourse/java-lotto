@@ -3,20 +3,20 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoNumbers {
+public class NumberSet {
     private static final String LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE = "로또 번호는 1부터 45까지입니다.";
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
-    public static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    public static final Map<Integer, Number> lottoNumbers = new HashMap<>();
 
     static {
         for (int i = 1; i <= 45; i++) {
-            lottoNumbers.put(i, new LottoNumber(i));
+            lottoNumbers.put(i, new Number(i));
         }
     }
 
-    public static LottoNumber of(int lottoNumber) {
+    public static Number of(int lottoNumber) {
         checkLottoNumberRange(lottoNumber);
         return lottoNumbers.get(lottoNumber);
     }
