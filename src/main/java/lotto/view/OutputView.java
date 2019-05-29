@@ -1,15 +1,14 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-
-import java.util.List;
+import lotto.domain.Lottos;
 
 public class OutputView {
 
-    public static void outputLotto(int numberOfLotto, List<Lotto> lottos) {
+    public static void outputLotto(int numberOfLotto, Lottos lottos) {
         System.out.println(numberOfLotto + "개를 구매했습니다.");
         StringBuilder stringBuilder = new StringBuilder();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getList()) {
             stringBuilder.append("[");
             stringBuilder.append(String.join(",", lotto.convertStringList()));
             stringBuilder.append("]\n");
