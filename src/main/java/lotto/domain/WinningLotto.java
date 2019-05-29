@@ -8,7 +8,7 @@ public class WinningLotto {
         this.winningLotto = winningLotto;
     }
 
-    public int getWinning(Lotto lotto) {
-        return winningLotto.calculateCountOfMatch(lotto);
+    public Rank getWinning(Lotto lotto) {
+        return Rank.valueOf(winningLotto.calculateCountOfMatch(lotto));
     }
 }
