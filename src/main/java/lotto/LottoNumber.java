@@ -9,7 +9,7 @@ public class LottoNumber {
 
     static {
         for (int i = 1; i < MAXIMUM_LOTTO_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(""+i));
+            lottoNumbers.add(new LottoNumber(i));
         }
     }
 
@@ -21,8 +21,7 @@ public class LottoNumber {
         return returnSet;
     }
 
-    public LottoNumber(String input) throws IllegalLottoNumberException {
-        int number = Integer.parseInt(input);
+    public LottoNumber(int number) throws IllegalLottoNumberException {
         if (number < 1 || number > 45) {
             throw new IllegalLottoNumberException();
         }

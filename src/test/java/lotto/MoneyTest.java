@@ -14,6 +14,6 @@ public class MoneyTest {
 
     @Test
     void 천원단위_아닐때() {
-        assertThrows(IllegalMoneyException.class, () -> new Money("999"));
+        assertThrows(IllegalMoneyException.class, () -> new Money("-999"));
     }
 }

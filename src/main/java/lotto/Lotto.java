@@ -17,6 +17,10 @@ public class Lotto {
         this.numbers = LottoNumber.generateLottoNumbers(tokens);
     }
 
+    public Lotto(Set<LottoNumber> numbers) {
+        this.numbers = numbers;
+    }
+
     private void checkDuplication(List<String> tokens) {
         Set<String> tokensWithoutDuplicates = new HashSet<>(tokens);
         if(tokens.size() != tokensWithoutDuplicates.size()) {
