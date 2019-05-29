@@ -9,6 +9,7 @@ public class WinningLotto {
     private static final int NUMBER_OF_WINNING_NUMBER = 6;
 
     private List<LottoNumber> winningLotto = new ArrayList<>();
+    private LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> winningLotto) {
         if (winningLotto.size() != NUMBER_OF_WINNING_NUMBER) {
@@ -17,6 +18,14 @@ public class WinningLotto {
         for (Integer lottoNumber : winningLotto) {
             addWinningLottoNumber(lottoNumber);
         }
+    }
+
+    public void addBonusNumber(int bonusNumber) {
+        if (!winningLotto.contains(LottoNumber.getLottoNumber(bonusNumber))) {
+            this.bonusNumber = LottoNumber.getLottoNumber(bonusNumber);
+            return;
+        }
+        throw new InvalidLottoNumberException("당첨 번호와 중복되지 않는 숫자를 입력해 주세요.");
     }
 
     private void addWinningLottoNumber(Integer lottoNumber) {

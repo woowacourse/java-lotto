@@ -15,6 +15,7 @@ public class LottoGameMain {
         LottoTickets lottoTickets = createLottoTickets();
         OutputView.printPurchaseResult(lottoTickets);
         WinningLotto winningLotto = createWinningLotto();
+        addBonusNumber(winningLotto);
         LottoResult lottoResult = LottoResultGenerator.create(lottoTickets, winningLotto);
         OutputView.printLottoResult(lottoResult, lottoTickets.price());
     }
@@ -34,6 +35,15 @@ public class LottoGameMain {
         } catch (NumberFormatException | InvalidLottoNumberException e) {
             System.out.println(e.getMessage());
             return createWinningLotto();
+        }
+    }
+
+    private static void addBonusNumber(WinningLotto winningLotto) {
+        try {
+            winningLotto.addBonusNumber(Integer.parseInt(InputView.getBonusNumber()));
+        } catch (NumberFormatException | InvalidLottoNumberException e) {
+            System.out.println(e.getMessage());
+            addBonusNumber(winningLotto);
         }
     }
 }
