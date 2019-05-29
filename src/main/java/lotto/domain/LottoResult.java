@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoResult {
+    private static final int LOTTO_PRICE = 1000;
+
     private final Map<Rank, Integer> result;
     private int totalLottos = 0;
 
@@ -25,6 +27,14 @@ public class LottoResult {
     public void add(Rank rank) {
         totalLottos++;
         result.put(rank, result.get(rank) + 1);
+    }
+
+    public double calculateYield() {
+        double yield = 0;
+        for (Rank rank : result.keySet()) {
+            yield += rank.getWinningMoney() * ((result.get(rank)) / (double) totalLottos) / LOTTO_PRICE;
+        }
+        return yield;
     }
 
     public StringBuilder getResultMessage() {

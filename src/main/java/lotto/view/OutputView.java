@@ -35,6 +35,9 @@ public class OutputView {
         StringBuilder builder = new StringBuilder();
         builder.append(STATISTICS_MESSAGE);
         builder.append(lottoResult.getResultMessage());
+        builder.append("총 수익률은 ");
+        builder.append(lottoResult.calculateYield() * 100);
+        builder.append("%입니다.");
         System.out.println(builder);
     }
 }

@@ -27,4 +27,16 @@ public class LottoResultTest {
 
         assertThat(lottoResult).isEqualTo(new LottoResult(result));
     }
+
+    @Test
+    void 수익률이_제대로_계산되는지_확인() {
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.add(Rank.FIFTH);
+        lottoResult.add(Rank.MISS);
+        lottoResult.add(Rank.MISS);
+        lottoResult.add(Rank.MISS);
+        lottoResult.add(Rank.MISS);
+
+        assertThat(lottoResult.calculateYield()).isEqualTo(1);
+    }
 }
