@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.utils;
 
+import lotto.domain.Number;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ManualLottoGeneratorTest {
 
     List<Integer> inputNumber = new ArrayList<>();
-    List<LottoNumber> manuallyGeneratedLottoNumbers = new ArrayList<>();
+    List<Number> manuallyGeneratedLottoNumbers = new ArrayList<>();
 
     @Before
     public void setUp() {
@@ -31,8 +32,8 @@ public class ManualLottoGeneratorTest {
 
     @Test
     public void auto_로또_번호_중복_유무_확인() {
-        Set<LottoNumber> lottoNumberSet = new HashSet<>();
-        for (LottoNumber lottoNumber : manuallyGeneratedLottoNumbers) {
+        Set<Number> lottoNumberSet = new HashSet<>();
+        for (Number lottoNumber : manuallyGeneratedLottoNumbers) {
             lottoNumberSet.add(lottoNumber);
         }
         assertThat(lottoNumberSet.size()).isEqualTo(6);

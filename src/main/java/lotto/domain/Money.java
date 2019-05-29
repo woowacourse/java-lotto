@@ -5,10 +5,10 @@ import java.util.Objects;
 public class Money {
 
     private static final String MONEY_LIMIT_EXCEPTOIN_MESSAGE = "1,000원 이상 100,000원 미만의 금액을 입력해주세요.";
+    private static final String MONEY_EXCHANGE_EXCEPTION_MESSAGE = "1,000원 단위로 입력해주세요.";
     private static final int MAX_PURCHASE_PRICE = 100000;
     private static final int MIN_PURCHASE_PRICE = 1000;
     private static final int LOTTO_PRICE = 1000;
-    public static final String MONEY_EXCHANGE_EXCEPTION_MESSAGE = "1,000원 단위로 입력해주세요.";
     private int money;
 
     public Money(int inputMoney) {
