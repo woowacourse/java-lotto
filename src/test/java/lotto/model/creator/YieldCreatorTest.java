@@ -1,21 +1,20 @@
-package lotto.model.object;
+package lotto.model.creator;
 
-import lotto.model.LottoRank;
-import lotto.model.creator.LottoNumberCreator;
-import lotto.model.creator.WinStatsCreator;
-import lotto.model.creator.WinnerLottoCreator;
 import lotto.model.object.Lotto;
 import lotto.model.object.LottoNumber;
+import lotto.model.object.Payment;
+import lotto.model.object.WinStats;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
 
-public class WinStatsTest {
+public class YieldCreatorTest {
         @Test
-        void 당첨_통계_생성_검사() {
+        void 수익률_생성_검사() {
                 List<LottoNumber> lottoNumbers1 = new ArrayList<>();
                 lottoNumbers1.add(LottoNumberCreator.create(1));
                 lottoNumbers1.add(LottoNumberCreator.create(2));
@@ -38,6 +37,8 @@ public class WinStatsTest {
                 purchasedLottos.add(purchasedLotto1);
                 purchasedLottos.add(purchasedLotto2);
                 Lotto winnerLotto = WinnerLottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
-                assertThat(WinStatsCreator.create(purchasedLottos, winnerLotto).getMappingStats().get(LottoRank.FIRST)).isEqualTo(1);
+
+                Payment payment = new Payment(5000);
+                assertThat(YieldCreator.create(payment, WinStatsCreator.create(purchasedLottos, winnerLotto)).getNumber()).isEqualTo(400_001, offset(0.0001));
         }
 }

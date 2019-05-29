@@ -15,14 +15,14 @@ public class Lotto {
         }
 
         private void checkLottoNumbersDuplication(List<LottoNumber> lottoNumbers) {
-                for (int index = 0; index < NUMBER_OF_LOTTO_NUMBERS; index++) {
+                for (int index = 0; index < NUMBER_OF_LOTTO_NUMBERS - 1; index++) {
                         checkEachIndexLottoNumberDuplication(lottoNumbers, index);
                 }
         }
 
         private void checkEachIndexLottoNumberDuplication(List<LottoNumber> lottoNumbers, int index) {
-                List<LottoNumber> remainder = lottoNumbers.subList(index + 1, NUMBER_OF_LOTTO_NUMBERS-1);
-                if(remainder.contains(lottoNumbers.get(index))){
+                List<LottoNumber> remainder = lottoNumbers.subList(index + 1, NUMBER_OF_LOTTO_NUMBERS - 1);
+                if (remainder.contains(lottoNumbers.get(index))) {
                         throw new LottoNumberDuplicationException("로또 숫자가 중복되었습니다.");
                 }
         }
@@ -37,5 +37,9 @@ public class Lotto {
                         count = this.lottoNumbers.contains(lottoNumber) ? count + 1 : count;
                 }
                 return count;
+        }
+
+        public List<LottoNumber> getLottoNumbers() {
+                return lottoNumbers;
         }
 }

@@ -29,4 +29,8 @@ public class Payment {
         public int getNumber() {
                 return number;
         }
+
+        public double calculateYield(int totalRevenue) {
+                return (double)totalRevenue/number;
+        }
 }
