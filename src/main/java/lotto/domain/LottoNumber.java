@@ -34,7 +34,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         private static final List<LottoNumber> cache = new ArrayList<>();
 
         static {
-            IntStream.range(MIN_NUMBER, MAX_NUMBER)
+            IntStream.range(MIN_NUMBER, MAX_NUMBER + 1)
                     .boxed()
                     .forEach(number -> cache.add(new LottoNumber(number)));
         }
@@ -42,6 +42,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
         private LottoNumberCache() {
         }
 
+
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
@@ -61,6 +66,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
         return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumber+"";
     }
 
     @Override

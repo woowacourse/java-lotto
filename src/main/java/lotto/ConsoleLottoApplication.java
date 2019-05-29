@@ -1,32 +1,25 @@
 package lotto;
 
-import lotto.domain.UserLottoTicket;
-import lotto.domain.LottoTicketFactory;
+import lotto.domain.LottoResults;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.factory.LottoTicketsFactory;
+import lotto.domain.factory.RewardTicketFactory;
 import lotto.view.ConsoleInputView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import lotto.view.ConsoleOutputView;
 
 public class ConsoleLottoApplication {
     public static void main(String[] args) {
-        int money = ConsoleInputView.inputMoney();
-        Money myMoney = new Money(money);
-        int amount = myMoney.ticketAmount();
+        Money money = new Money(ConsoleInputView.inputMoney());
+        ConsoleOutputView.printAmount(money);
 
-        List<UserLottoTicket> userLottoTickets = new ArrayList<>();
+        LottoTickets lottoTickets = LottoTicketsFactory.create(money);
+        ConsoleOutputView.printTickets(lottoTickets);
 
-        for (int i = 0; i < amount; i++) {
-            userLottoTickets.add(LottoTicketFactory.create());
-        }
+        LottoTicket rewardTicket = RewardTicketFactory.create(ConsoleInputView.inputRewardTicket());
 
-        List<Integer> rewardNumbers = Arrays.asList(
-                1, 2, 3, 4, 5, 6
-        );
-
-        for (UserLottoTicket userLottoTicket : userLottoTickets) {
-            System.out.println(userLottoTicket.getSameCount(new UserLottoTicket(rewardNumbers)));
-        }
+        LottoResults lottoResults = new LottoResults(lottoTickets, rewardTicket, money);
+        ConsoleOutputView.printResults(lottoResults);
     }
 }

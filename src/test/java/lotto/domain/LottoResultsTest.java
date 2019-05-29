@@ -18,14 +18,14 @@ class LottoResultsTest {
                 1, 2, 3, 4, 5, 7
         );
         LottoTickets lottoTickets = new LottoTickets(
-                Arrays.asList(new UserLottoTicket(lottoNumbersFirst), new UserLottoTicket(lottoNumbersSecond))
+                Arrays.asList(new LottoTicket(lottoNumbersFirst), new LottoTicket(lottoNumbersSecond))
         );
 
-        UserLottoTicket rewardTicket = new UserLottoTicket(
+        LottoTicket rewardTicket = new LottoTicket(
                 Arrays.asList(1, 2, 3, 6, 7, 8)
         );
 
-        LottoResults lottoResults = new LottoResults(lottoTickets, rewardTicket);
+        LottoResults lottoResults = new LottoResults(lottoTickets, rewardTicket,new Money(2000));
 
         assertThat(lottoResults.getYield()).isEqualTo(500);
     }

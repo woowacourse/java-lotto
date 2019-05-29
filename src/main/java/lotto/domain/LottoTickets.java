@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
-    private final List<UserLottoTicket> userLottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<UserLottoTicket> userLottoTickets) {
-        this.userLottoTickets = userLottoTickets;
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
-    public List<Integer> getRewards(UserLottoTicket rewardTicket) {
+    public List<Integer> getRewards(LottoTicket rewardTicket) {
         List<Integer> rewards = new ArrayList<>();
-        for (UserLottoTicket userLottoTicket : userLottoTickets) {
-            rewards.add(userLottoTicket.getSameCount(rewardTicket));
+        for (LottoTicket lottoTicket : lottoTickets) {
+            rewards.add(lottoTicket.getSameCount(rewardTicket));
         }
         return rewards;
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 }

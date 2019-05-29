@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UserLottoTicketsTest {
+class LottoTicketsTest {
     @Test
     void 당첨_갯수_확인() {
         List<Integer> lottoNumbersFirst = Arrays.asList(
@@ -18,10 +18,10 @@ class UserLottoTicketsTest {
                 1, 2, 3, 4, 5, 7
         );
         LottoTickets lottoTickets = new LottoTickets(
-                Arrays.asList(new UserLottoTicket(lottoNumbersFirst), new UserLottoTicket(lottoNumbersSecond))
+                Arrays.asList(new LottoTicket(lottoNumbersFirst), new LottoTicket(lottoNumbersSecond))
         );
 
-        UserLottoTicket rewardTicket = new UserLottoTicket(
+        LottoTicket rewardTicket = new LottoTicket(
                 Arrays.asList(1, 2, 3, 6, 7, 8)
         );
 

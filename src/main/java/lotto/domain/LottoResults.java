@@ -1,45 +1,47 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LottoResults {
+    private static final int BASE_AMOUNT = 0;
     private static final int PERCENT = 100;
 
-    private final List<LottoRewards> lottoRewards;
+    private final Map<LottoRewards, Integer> lottoRewards;
+    private final Money money;
 
-//    public LottoResults(List<Integer> results) {
-//        lottoRewards = new ArrayList<>();
-//        for (Integer result : results) {
-//            lottoRewards.add(LottoRewards.valueOf(result));
-//        }
-//    }
+    public LottoResults(LottoTickets lottoTickets, LottoTicket rewardTicket, Money money) {
+        lottoRewards = initRewards();
+        this.money = money;
 
-    public LottoResults(LottoTickets lottoTickets, UserLottoTicket rewardTicket) {
-        lottoRewards = new ArrayList<>();
         List<Integer> results = lottoTickets.getRewards(rewardTicket);
+
         for (Integer result : results) {
-            lottoRewards.add(LottoRewards.valueOf(result));
+            lottoRewards.put(LottoRewards.valueOf(result), lottoRewards.getOrDefault(LottoRewards.valueOf(result), 0) + 1);
         }
     }
 
-    public double getYield() {
-        return (double) getRewardMoney() / getBuyMoney() * PERCENT;
+    private Map<LottoRewards, Integer> initRewards() {
+        Map<LottoRewards, Integer> lottoRewards;
+        lottoRewards = new TreeMap<>();
+        for (LottoRewards lottoReward : LottoRewards.values()) {
+            lottoRewards.put(lottoReward, BASE_AMOUNT);
+        }
+        return lottoRewards;
     }
 
-    private int getRewardMoney() {
-        int money = 0;
-        for (LottoRewards lottoReward : lottoRewards) {
-            money += lottoReward.getRewardMoney();
+    public double getYield() {
+        return (double) getRewardMoney() / money.getMoney() * PERCENT;
+    }
+
+    private long getRewardMoney() {
+        long money = 0;
+        for (Map.Entry<LottoRewards, Integer> entry : lottoRewards.entrySet()) {
+            money += entry.getKey().getRewardMoney() * entry.getValue();
         }
         return money;
     }
 
-    private int getBuyMoney() {
-        return lottoRewards.size() * 1000;
-    }
-
-    public List<LottoRewards> getLottoRewards() {
+    public Map<LottoRewards, Integer> getLottoRewards() {
         return lottoRewards;
     }
 }

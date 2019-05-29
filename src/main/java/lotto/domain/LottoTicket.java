@@ -37,6 +37,10 @@ public class LottoTicket {
         return 0;
     }
 
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

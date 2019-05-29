@@ -7,14 +7,14 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserLottoTicketTest {
+class LottoTicketTest {
     @Test
     void 번호_갯수_오류() {
         List<Integer> lottoNumbers = Arrays.asList(
                 1,2,3,4,5
         );
         assertThrows(IllegalArgumentException.class, () -> {
-            UserLottoTicket userLottoTicket = new UserLottoTicket(lottoNumbers);
+            LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         });
     }
 
@@ -28,8 +28,8 @@ class UserLottoTicketTest {
                 1,2,3,4,5,7
         );
 
-        UserLottoTicket userLottoTicket1 = new UserLottoTicket(lottoNumbersFirst);
-        UserLottoTicket userLottoTicket2 = new UserLottoTicket(lottoNumbersSecond);
-        assertThat(userLottoTicket1.getSameCount(userLottoTicket2)).isEqualTo(5);
+        LottoTicket lottoTicket1 = new LottoTicket(lottoNumbersFirst);
+        LottoTicket lottoTicket2 = new LottoTicket(lottoNumbersSecond);
+        assertThat(lottoTicket1.getSameCount(lottoTicket2)).isEqualTo(5);
     }
 }
