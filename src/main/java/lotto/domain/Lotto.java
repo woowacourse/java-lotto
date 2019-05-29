@@ -10,18 +10,12 @@ public class Lotto {
     static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> numbers;
 
-    public Lotto(final List<Integer> numbers) {
+    public Lotto(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new LottoSizeException("로또 숫자는 6개여야 합니다.");
         }
 
-        this.numbers = makeLottoNumbers(numbers);
-    }
-
-    private List<LottoNumber> makeLottoNumbers(final List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList());
+        this.numbers = numbers;
     }
 
     public int hasNumber(final LottoNumber number) {

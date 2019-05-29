@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LottoNumberTest {
     @Test
     void 번호_10번이_10을_가지고_있는지_테스트() {
-        assertThat(LottoNumber.of(10)).isEqualTo(LottoNumber.getLottoNumber(10));
+        assertThat(LottoNumber.getLottoNumber(10)).isEqualTo(LottoNumber.getLottoNumber(10));
     }
 
     @Test
