@@ -32,6 +32,21 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
+    public int sameNumberCount(Lotto lotto) {
+        int count = 0;
+        for (Integer lottoNumber : lottoNumbers) {
+            count += containNumber(lotto, lottoNumber);
+        }
+        return count;
+    }
+
+    private int containNumber(Lotto lotto, Integer lottoNumber) {
+        if (lotto.lottoNumbers.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

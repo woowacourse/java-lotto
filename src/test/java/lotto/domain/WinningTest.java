@@ -11,7 +11,7 @@ public class WinningTest {
     @Test
     void 생성() {
         List<Integer> lottos = Arrays.asList(1,2,3,4,5,6);
-        Winning winning = Winning.of(Lotto.of(lottos));
-        assertThat(winning).isEqualTo(Winning.of(Lotto.of(lottos)));
+        Winning winning = Winning.of(lottos);
+        assertThat(winning).isEqualTo(Winning.of(lottos));
     }
 }

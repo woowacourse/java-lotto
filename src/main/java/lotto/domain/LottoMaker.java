@@ -18,12 +18,19 @@ public class LottoMaker {
         }
     }
 
-    public static List<Integer> generator() {
-        mixNumbers();
-        return new ArrayList<>(numbers.subList(START, LOTTO_SIZE));
+    public static Lotto generator() {
+        List<Integer> autoNumbers = new ArrayList<>(numbers);
+        mixNumbers(autoNumbers);
+        return Lotto.of(autoNumbers.subList(START, LOTTO_SIZE));
     }
 
-    private static void mixNumbers() {
+    // 수동
+    public static Lotto generator(List<Integer> numbers) {
+        mixNumbers(numbers);
+        return Lotto.of(numbers.subList(START, LOTTO_SIZE));
+    }
+
+    private static void mixNumbers(List<Integer> numbers) {
         Collections.shuffle(numbers);
     }
 }
