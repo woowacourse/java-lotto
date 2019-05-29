@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoFactory {
-    private static final int LOTTO_SIZE = 6;
+    public static Lotto createLottoAutomatically() {
+        return new Lotto(LottoNumber.getShuffledNumber());
+    }
 
-    public static List<LottoNumber> create() {
+    public static Lotto createLottoManually(List<Integer> userNumbers) {
         List<LottoNumber> numbers = new ArrayList<>();
-        while (numbers.size() < LOTTO_SIZE) {
-            numbers.add(LottoNumber.getShuffledNumber());
+        for (Integer userNumber : userNumbers) {
+            numbers.add(LottoNumber.get(userNumber));
         }
-        return numbers;
+        return new Lotto(numbers);
     }
 }

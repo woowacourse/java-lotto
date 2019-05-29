@@ -16,6 +16,18 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public int countMatchedNumber(Lotto winningLotto) {
+        int count = 0;
+        for (LottoNumber number : numbers) {
+            count += winningLotto.contain(number) ? 1 : 0;
+        }
+        return count;
+    }
+
+    private boolean contain(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

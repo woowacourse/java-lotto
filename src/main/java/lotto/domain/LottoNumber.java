@@ -10,13 +10,14 @@ public class LottoNumber {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int FIRST_INDEX_AFTER_SHUFFLED = 0;
+    private static final int LAST_INDEX_AFTER_SHUFFLED = 6;
 
     private final int number;
     private static final List<LottoNumber> numbers;
 
     static {
         numbers = new ArrayList<>();
-        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .forEach(i -> numbers.add(new LottoNumber(i)));
     }
 
@@ -25,15 +26,17 @@ public class LottoNumber {
     }
 
     public static LottoNumber get(int number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45사이입니다.");
+        for (LottoNumber lottoNumber : numbers) {
+            if (lottoNumber.number == number) {
+                return lottoNumber;
+            }
         }
-        return numbers.get(number - 1);
+        throw new IllegalArgumentException("로또 번호는 1부터 45사이입니다.");
     }
 
-    public static LottoNumber getShuffledNumber() {
+    static List<LottoNumber> getShuffledNumber() {
         Collections.shuffle(numbers);
-        return numbers.get(FIRST_INDEX_AFTER_SHUFFLED);
+        return numbers.subList(FIRST_INDEX_AFTER_SHUFFLED, LAST_INDEX_AFTER_SHUFFLED);
     }
 
     @Override
