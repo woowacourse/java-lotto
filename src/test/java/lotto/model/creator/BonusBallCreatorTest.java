@@ -15,8 +15,8 @@ public class BonusBallCreatorTest {
 
         @Test
         void 보너스볼_범위_검사() {
-                assertThrows(InvalidLottoNumberException.class, ()->{
+                assertThrows(InvalidLottoNumberException.class, () -> {
                         BonusBallCreator.create(55);
-                } );
+                });
         }
 }

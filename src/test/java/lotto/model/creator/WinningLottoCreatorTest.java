@@ -31,6 +31,5 @@ public class WinningLottoCreatorTest {
                 assertThat(winningLotto.getLottoNumbers().get(3)).isEqualTo(LottoNumberCreator.create(4));
                 assertThat(winningLotto.getLottoNumbers().get(4)).isEqualTo(LottoNumberCreator.create(5));
                 assertThat(winningLotto.getLottoNumbers().get(5)).isEqualTo(LottoNumberCreator.create(6));
-
         }
 }

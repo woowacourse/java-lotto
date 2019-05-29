@@ -44,7 +44,7 @@ public class Lotto {
         }
 
         public boolean hasBonusBall(BonusBall bonusBall) {
-                if(lottoNumbers.contains(bonusBall.getLottoNumber())){
+                if (lottoNumbers.contains(bonusBall.getLottoNumber())) {
                         return true;
                 }
                 return false;

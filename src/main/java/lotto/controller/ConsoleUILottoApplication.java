@@ -31,7 +31,7 @@ public class ConsoleUILottoApplication {
                         BonusBall bonusBall = createBonusBall();
                         WinningInfo winningInfo = WinningInfoCreator.create(winningLotto, bonusBall);
                         return WinStatsCreator.create(purchasedLottos, winningInfo);
-                } catch (RuntimeException e){
+                } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
                         return createWinStats(purchasedLottos);
                 }

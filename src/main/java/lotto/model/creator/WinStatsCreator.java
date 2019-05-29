@@ -1,7 +1,7 @@
 package lotto.model.creator;
 
-import lotto.model.object.Lotto;
 import lotto.model.LottoRank;
+import lotto.model.object.Lotto;
 import lotto.model.object.WinStats;
 import lotto.model.object.WinningInfo;
 

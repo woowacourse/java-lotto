@@ -15,7 +15,7 @@ public class WinningInfoCreator {
         }
 
         private static void checkWinningLottoBonusBallDuplication(List<LottoNumber> lottoNumbers, LottoNumber lottoNumber) {
-                if(lottoNumbers.contains(lottoNumber)){
+                if (lottoNumbers.contains(lottoNumber)) {
                         throw new WinningLottoBonusBallDuplicationException("당첨 번호와 보너스볼이 중복됩니다.");
                 }
         }

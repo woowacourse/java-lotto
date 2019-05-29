@@ -32,7 +32,7 @@ public class InputViewTest {
                 assertThrows(NumberFormatException.class, () -> {
                         ByteArrayInputStream input = new ByteArrayInputStream("1, 2, 3, 4, 5, 6".getBytes());
                         System.setIn(input);
-                        assertThat(InputView.inputPayment()).isEqualTo(new String[]{"1","2","3","4","5","6"});
+                        assertThat(InputView.inputPayment()).isEqualTo(new String[]{"1", "2", "3", "4", "5", "6"});
                 });
         }
 
@@ -44,7 +44,6 @@ public class InputViewTest {
                         InputView.inputBonusBall();
                 });
         }
-
 
 
 }

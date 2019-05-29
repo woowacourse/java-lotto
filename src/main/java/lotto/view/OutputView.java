@@ -47,6 +47,6 @@ public class OutputView {
         }
 
         public static void printYield(Yield yield) {
-                System.out.println("총 수익률은 " + yield.getNumber() *100  + "%입니다.");
+                System.out.println("총 수익률은 " + yield.getNumber() * 100 + "%입니다.");
         }
 }

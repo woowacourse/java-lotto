@@ -31,6 +31,6 @@ public class Payment {
         }
 
         public double calculateYield(int totalRevenue) {
-                return (double)totalRevenue/number;
+                return (double) totalRevenue / number;
         }
 }

@@ -16,7 +16,7 @@ public enum LottoRank {
         }
 
         public static LottoRank getLottoRank(int matchNumber, boolean hasBonusBall) {
-                if(matchNumber == 5 && hasBonusBall){
+                if (matchNumber == 5 && hasBonusBall) {
                         return SECOND;
                 }
                 LottoRank matchLottoRank = null;
@@ -27,7 +27,7 @@ public enum LottoRank {
         }
 
         public static int getPrizes(int matchNumber, boolean hasBonusBall) {
-                if(matchNumber == 5 && hasBonusBall){
+                if (matchNumber == 5 && hasBonusBall) {
                         return SECOND.getPrizes();
                 }
                 int prizes = 0;
