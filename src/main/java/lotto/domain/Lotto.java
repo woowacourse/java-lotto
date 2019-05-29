@@ -9,6 +9,15 @@ public class Lotto {
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        checkLottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    private void checkLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if (Objects.isNull(lottoNumbers) || lottoNumbers.isEmpty()) {
+            throw new NullPointerException();
+        }
+
         if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("중복되는 숫자가 있습니다");
         }
@@ -16,8 +25,6 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호의 개수가 올바르지 않습니다.");
         }
-
-        this.lottoNumbers = lottoNumbers;
     }
 
     public int match(Lotto lotto) {

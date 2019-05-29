@@ -17,14 +17,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private int number;
 
     private LottoNumber(int number) {
-        checkLottoNumber(number);
-        this.number = number;
-    }
-
-    private void checkLottoNumber(int number) {
         if (number < MIN_BOUNDARY || number > MAX_BOUNDARY) {
             throw new IllegalArgumentException("범위를 벗어났습니다.");
         }
+        this.number = number;
     }
 
     public static LottoNumber getNumber(int number) {
