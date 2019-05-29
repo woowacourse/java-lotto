@@ -25,4 +25,9 @@ public class InputView {
                         throw new WinnerNumbersInputFormException("당첨 번호 입력형식이 틀립니다.");
                 }
         }
+
+        public static int inputBonusBall() {
+                System.out.println("보너스 볼을 입력해 주세요.");
+                return new Scanner(System.in).nextInt();
+        }
 }

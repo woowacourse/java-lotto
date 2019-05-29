@@ -25,6 +25,8 @@ public class ConsoleUILottoApplication {
 
                 Yield yield = YieldCreator.create(payment, winStats);
                 OutputView.printYield(yield);
+
+                BonusBall bonusBall = createBonusBall();
         }
 
         private static Payment createPayment() {
@@ -41,7 +43,7 @@ public class ConsoleUILottoApplication {
                         List<Lotto> purchasedLottos = new ArrayList<>();
                         addPurchasedLotto(payment, purchasedLottos);
                         return purchasedLottos;
-                }catch(RuntimeException e){
+                } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
                         return createPurchasedLottos(payment);
                 }
@@ -61,6 +63,15 @@ public class ConsoleUILottoApplication {
                 } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
                         return createWinnerLotto();
+                }
+        }
+
+        private static BonusBall createBonusBall() {
+                try {
+                        return BonusBallCreator.create(InputView.inputBonusBall());
+                } catch (RuntimeException e) {
+                        System.err.println(e.getMessage());
+                        return createBonusBall();
                 }
         }
 }
