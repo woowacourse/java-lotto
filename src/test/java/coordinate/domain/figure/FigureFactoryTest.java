@@ -2,6 +2,7 @@ package coordinate.domain.figure;
 
 import coordinate.domain.Point;
 import coordinate.domain.figure.*;
+import coordinate.exception.InvalidFigureException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -9,10 +10,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FigureFactoryTest {
     @Test
-    public void line() {
+    public void line() throws InvalidFigureException {
         List<Point> points = Arrays.asList(
                 Point.of(1, 2),
                 Point.of(2, 3));
@@ -23,7 +25,7 @@ public class FigureFactoryTest {
     }
 
     @Test
-    public void triangle() {
+    public void triangle() throws InvalidFigureException {
         List<Point> points = Arrays.asList(
                 Point.of(1, 1),
                 Point.of(4, 1),
@@ -35,7 +37,7 @@ public class FigureFactoryTest {
     }
 
     @Test
-    public void rectangle() {
+    public void rectangle() throws InvalidFigureException {
         List<Point> points = Arrays.asList(
                 Point.of(1, 1),
                 Point.of(4, 1),
@@ -50,8 +52,6 @@ public class FigureFactoryTest {
     @Test
     public void invalid_figure() {
         List<Point> points = Arrays.asList(Point.of(1, 2));
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            FigureFactory.getFigure(points);
-        });
+        assertThrows(InvalidFigureException.class, ()-> FigureFactory.getFigure(points));
     }
 }
