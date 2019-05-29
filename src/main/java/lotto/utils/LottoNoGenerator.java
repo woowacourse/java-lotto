@@ -18,8 +18,9 @@ public class LottoNoGenerator {
     }
 
     public static List<LottoNo> generate() {
-        Collections.shuffle(lottoNoContainer);
-        List<LottoNo> lotto = lottoNoContainer.subList(BASE_INDEX, Lotto.COUNT_OF_NO);
+        ArrayList<LottoNo> copy = new ArrayList<>(lottoNoContainer);
+        Collections.shuffle(copy);
+        List<LottoNo> lotto = copy.subList(BASE_INDEX, Lotto.COUNT_OF_NO);
         lotto.sort(LottoNo::compareTo);
         return lotto;
     }
