@@ -5,7 +5,7 @@ import java.util.List;
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
-    List<Number> lotto;
+    private final List<Number> lotto;
 
     public Lotto(List<Number> lotto) {
         validate(lotto);
