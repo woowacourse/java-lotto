@@ -13,12 +13,12 @@ public class LottoNumber {
         }
     }
 
-    public static Set<LottoNumber> generateLottoNumbers(List<String> tokens) {
-        Set<LottoNumber> returnSet = new HashSet<>();
-        for (int i = 0, n = tokens.size(); i < n ; i++) {
-            returnSet.add(lottoNumbers.get(Integer.parseInt(tokens.get(i))));
+    public static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> returnList = new ArrayList<>();
+        for (int i = 0, n = numbers.size(); i < n ; i++) {
+            returnList.add(lottoNumbers.get(numbers.get(i)));
         }
-        return returnSet;
+        return returnList;
     }
 
     public LottoNumber(int number) throws IllegalLottoNumberException {
