@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import java.util.Map;
+import java.util.List;
 
 public class LottoFactory {
-    public static Lotto generateLotto(Map<Integer, LottoNumber> lottoNumbers){
-
+    public static Lotto generateAutoLotto(){
+        List<LottoNumber> autoLottoNumbers = LottoNumbers.getAutoLottoNumbers();
+        return new Lotto(autoLottoNumbers);
     }
 }
