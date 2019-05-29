@@ -24,4 +24,12 @@ public class Lotto {
         }
         return countOfMatch;
     }
+
+    public List<String> convertStringList() {
+        List<String> numbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            numbers.add(lottoNumber.getNumber().toString());
+        }
+        return numbers;
+    }
 }

@@ -15,7 +15,7 @@ public class RandomNumberGenerator {
         }
     }
 
-    public List<Integer> generate() {
+    public static List<Integer> generate() {
         Collections.shuffle(allLottoNumbers);
         return allLottoNumbers.subList(START, LOTTO_SIZE.get());
     }
