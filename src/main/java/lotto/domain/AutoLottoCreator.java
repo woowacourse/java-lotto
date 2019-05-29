@@ -14,7 +14,7 @@ public class AutoLottoCreator implements LottoCreator {
             numbers.add(new Number(i));
         }
         Collections.shuffle(numbers);
-
+        Collections.sort(numbers.subList(0, 6));
         return new Lotto(numbers.subList(0, 6));
     }
 }
