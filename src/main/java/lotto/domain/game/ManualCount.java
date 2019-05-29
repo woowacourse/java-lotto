@@ -7,16 +7,16 @@ public class ManualCount {
 
     private final int count;
 
-    private ManualCount(int count, TotalCount totalCount) {
+    private ManualCount(int count, Count totalCount) {
         validBound(count, totalCount);
         this.count = count;
     }
 
-    public static ManualCount is(int count, TotalCount totalCount) {
+    public static ManualCount is(int count, Count totalCount) {
         return new ManualCount(count, totalCount);
     }
 
-    private void validBound(int count, TotalCount totalCount) {
+    private void validBound(int count, Count totalCount) {
         if (totalCount.getCount() < count) {
             throw new ManualCountBoundException(MANUAL_COUNT_BOUND);
         }
@@ -26,8 +26,8 @@ public class ManualCount {
         return count;
     }
 
-    public AutoCount getAutoCount(TotalCount totalCount) {
-        return new AutoCount(totalCount.getCount() - this.count);
+    public Count getAutoCount(Count count) {
+        return new Count(count.getCount() - this.count);
     }
 
     public boolean isZero() {

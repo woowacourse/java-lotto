@@ -4,7 +4,7 @@ import java.util.List;
 
 import lotto.domain.game.TotalLottoGames;
 import lotto.domain.game.ManualCount;
-import lotto.domain.game.TotalCount;
+import lotto.domain.game.Count;
 import lotto.domain.lotto.Number;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
@@ -22,9 +22,9 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        TotalCount totalCounts = getGameCounts(purchaseAmount);
-        ManualCount manualCount = getManualCount(totalCounts);
-        TotalLottoGames totalLottoGames = new TotalLottoGames(manualCount.getAutoCount(totalCounts));
+        Count counts = getGameCounts(purchaseAmount);
+        ManualCount manualCount = getManualCount(counts);
+        TotalLottoGames totalLottoGames = new TotalLottoGames(manualCount.getAutoCount(counts));
         OutputView.manualNumbers(manualCount);
         for (int i = 0; i < manualCount.getCount(); i++) {
             List<Number> lottoNumbers = getManualNumbers(i);
@@ -50,16 +50,16 @@ public class LottoApplication {
         }
     }
 
-    private static ManualCount getManualCount(TotalCount totalCounts) {
+    private static ManualCount getManualCount(Count counts) {
         try {
             int manualCount = Integer.parseInt(InputView.getManualCount());
-            return ManualCount.is(manualCount, totalCounts);
+            return ManualCount.is(manualCount, counts);
         } catch (NumberFormatException e) {
             System.out.println(NUMBER_FORMAT_EXCEPTION);
-            return getManualCount(totalCounts);
+            return getManualCount(counts);
         } catch (ManualCountBoundException e) {
             System.out.println(e.getMessage());
-            return getManualCount(totalCounts);
+            return getManualCount(counts);
         }
     }
 
@@ -88,9 +88,9 @@ public class LottoApplication {
         }
     }
 
-    private static TotalCount getGameCounts(PurchaseAmount purchaseAmount) {
+    private static Count getGameCounts(PurchaseAmount purchaseAmount) {
         try {
-            return new TotalCount(purchaseAmount);
+            return new Count(purchaseAmount);
         } catch (PurchaseAmountException e) {
             System.out.println(e.getMessage());
             return getGameCounts(purchaseAmount);

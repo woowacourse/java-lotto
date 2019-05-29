@@ -6,7 +6,6 @@ import java.util.List;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Number;
-import lotto.domain.util.LottoGenerator;
 
 public abstract class LottoGames implements LottoGenerator, Iterable<Lotto> {
     private final List<Lotto> lottoGames;

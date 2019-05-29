@@ -10,7 +10,7 @@ public class TotalLottoGames {
     private ManualLottoGames manualLottoGames;
     private AutoLottoGames autoLottoGames;
 
-    public TotalLottoGames(AutoCount autoCount) {
+    public TotalLottoGames(Count autoCount) {
         this.manualLottoGames = new ManualLottoGames();
         this.autoLottoGames = new AutoLottoGames(autoCount);
     }

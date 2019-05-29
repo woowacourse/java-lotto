@@ -2,14 +2,20 @@ package lotto.domain.game;
 
 import java.util.Objects;
 
-public class AutoCount {
+import lotto.domain.PurchaseAmount;
+
+public class Count {
     private final int count;
 
-    public AutoCount(int count) {
+    public Count(int count) {
         this.count = count;
     }
 
-    int getCount() {
+    public Count(PurchaseAmount purchaseAmount) {
+        this(purchaseAmount.getCount());
+    }
+
+    public int getCount() {
         return count;
     }
 
@@ -17,8 +23,8 @@ public class AutoCount {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AutoCount autoCount = (AutoCount) o;
-        return count == autoCount.count;
+        Count that = (Count) o;
+        return count == that.count;
     }
 
     @Override

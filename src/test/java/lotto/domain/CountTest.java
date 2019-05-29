@@ -3,21 +3,21 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.exceptions.PurchaseAmountException;
-import lotto.domain.game.TotalCount;
+import lotto.domain.game.Count;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class TotalCountTest {
+class CountTest {
     @Test
     void how_many_games_created() {
-        assertThat(new TotalCount(PurchaseAmount.is("5000")).getCount()).isEqualTo(5);
+        assertThat(new Count(PurchaseAmount.is("5000")).getCount()).isEqualTo(5);
     }
 
     @Test
     void game_counts_constructor_argument_must_be_divisible_by_1000() {
         assertThrows(PurchaseAmountException.class, () -> {
-            new TotalCount(PurchaseAmount.is("1002"));
+            new Count(PurchaseAmount.is("1002"));
         });
     }
 }

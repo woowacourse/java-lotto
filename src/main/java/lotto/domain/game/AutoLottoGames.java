@@ -8,7 +8,7 @@ import lotto.domain.lotto.Number;
 public class AutoLottoGames extends LottoGames {
     private static final int FIRST_LOTTO = 0;
 
-    AutoLottoGames(AutoCount autoCount) {
+    AutoLottoGames(Count autoCount) {
         super();
         for (int i = FIRST_LOTTO; i < autoCount.getCount(); i++) {
             List<Number> randomNumbers = RandomNumbersGenerator.create();
