@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -8,6 +9,7 @@ import java.util.stream.IntStream;
 public class LottoNumber {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int FIRST_INDEX_AFTER_SHUFFLED = 0;
 
     private final int number;
     private static final List<LottoNumber> numbers;
@@ -28,6 +30,12 @@ public class LottoNumber {
         }
         return numbers.get(number - 1);
     }
+
+    public static LottoNumber getShuffledNumber() {
+        Collections.shuffle(numbers);
+        return numbers.get(FIRST_INDEX_AFTER_SHUFFLED);
+    }
+
 
     @Override
     public boolean equals(Object o) {
