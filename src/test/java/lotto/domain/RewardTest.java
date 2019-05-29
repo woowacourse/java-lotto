@@ -12,7 +12,7 @@ class RewardTest {
 
     @BeforeEach
     void setUp() {
-        winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
     }
 
     @Test

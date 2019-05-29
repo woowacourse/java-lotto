@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -10,8 +12,13 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputWinningLotto() {
+    public static List<String> inputWinningLotto() {
+        List<String> inputs = new ArrayList<>();
         System.out.println("당첨번호");
-        return scanner.nextLine();
+        inputs.add(scanner.nextLine());
+        System.out.println("보너스");
+        inputs.add(scanner.nextLine());
+
+        return inputs;
     }
 }

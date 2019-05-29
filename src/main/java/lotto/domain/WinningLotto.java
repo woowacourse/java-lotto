@@ -6,14 +6,32 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final List<Integer> winningLotto;
+    private final int bonus;
 
-    public WinningLotto(List<Integer> lottoNumbers) {
+    public WinningLotto(List<Integer> lottoNumbers, int bonus) {
         winningLotto = lottoNumbers;
+        this.bonus = bonus;
     }
 
-    public WinningLotto(String inputNumbers) {
+    public WinningLotto(List<String> inputs) {
+        winningLotto = splitNumbers(inputs.get(0));
         try {
-            winningLotto = Arrays.stream(inputNumbers.split(","))
+            bonus = Integer.parseInt(inputs.get(1));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+        if (winningLotto.size() != 6) {
+            throw new IllegalArgumentException();
+        }
+
+        if (winningLotto.contains(bonus)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private List<Integer> splitNumbers(String numbers) {
+        try {
+            return Arrays.stream(numbers.split(","))
                     .map(number -> Integer.parseInt(number))
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
