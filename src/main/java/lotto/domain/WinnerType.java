@@ -20,6 +20,4 @@ public enum WinnerType {
         }
         throw new IllegalArgumentException("당첨 조건을 찾을 수 없습니다.");
     }
-
-
 }

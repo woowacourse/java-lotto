@@ -14,4 +14,13 @@ public class WinnersTest {
         System.out.println(winners.toString() + "\n" + testWinners.toString());
         assertThat(winners.toString()).isEqualTo(testWinners.toString());
     }
+
+    @Test
+    void 전체_상금_구하는_테스트() {
+        Winners winners = new Winners();
+        winners.addWinner(3);
+        winners.addWinner(4);
+        winners.addWinner(6);
+        assertThat(winners.totalRewardMoney()).isEqualTo(5000 + 50000 + 2000000000);
+    }
 }

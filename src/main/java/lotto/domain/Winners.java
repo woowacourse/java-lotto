@@ -27,6 +27,14 @@ public class Winners {
         winners.get(winnerType).addWinner();
     }
 
+    public long totalRewardMoney() {
+        long totalRewardMoney = 0;
+        for (AbstractWinners winners : winners.values()) {
+            totalRewardMoney += winners.rewardMoney();
+        }
+        return totalRewardMoney;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -12,3 +12,4 @@
 * WinningLotto와 구매한 lotto 번호를 비교하여 몇개가 같은지 확인하기
 * Winners 각 등수에 맞는 당첨자 추가하기
 * Winners 추상화 및 인터페이스 적용하기
+* Winners 전체 상금 구하기

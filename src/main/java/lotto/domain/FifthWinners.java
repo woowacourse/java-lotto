@@ -16,6 +16,10 @@ public class FifthWinners extends AbstractWinners {
         winnersNumber++;
     }
 
+    public long rewardMoney() {
+        return super.rewardMoney(this.reward, this.winnersNumber);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
