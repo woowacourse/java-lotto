@@ -26,4 +26,11 @@ public class LottoResult {
         return lottoResult.getOrDefault(winnerType, 0);
     }
 
+    public long getRewardAll() {
+        long result = 0;
+        for (WinningType value : WinningType.values()) {
+            result += lottoResult.getOrDefault(value, 0) * value.getReward();
+        }
+        return result;
+    }
 }

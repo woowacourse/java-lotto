@@ -19,4 +19,8 @@ public class Money {
     public int getLottoSize() {
         return money / LOTTO_PRICE;
     }
+
+    public int getMoney() {
+        return money;
+    }
 }

@@ -16,6 +16,6 @@ public class CUILottoApp {
         LottoResult lottoResult = new LottoResult(lottos, winningLotto);
 
         OutputView.printLottoResult(lottoResult);
-        OutputView.printLottoYield();
+        OutputView.printLottoYield(lottoResult, money);
     }
 }

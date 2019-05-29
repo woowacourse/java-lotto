@@ -1,8 +1,10 @@
 package lotto.view;
 
 import java.util.List;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
+import lotto.domain.Money;
 import lotto.domain.WinningType;
 
 public class OutputView {
@@ -27,6 +29,8 @@ public class OutputView {
 
     }
 
-    public static void printLottoYield() {
+    public static void printLottoYield(LottoResult lottoResult, Money money) {
+        double result = ( (double) lottoResult.getRewardAll() / money.getMoney() ) * 100;
+        System.out.println("총 수익률은 " + result + "%입니다.");
     }
 }
