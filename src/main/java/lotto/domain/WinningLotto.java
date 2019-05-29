@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.domainexception.InvalidWinningLottoException;
+
 public class WinningLotto {
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
@@ -17,6 +19,6 @@ public class WinningLotto {
     }
 
     Rank match(Lotto lotto) {
-        return Rank.valueOf(winningLotto.matchNumbers(lotto), lotto.matchNumber(bonusNumber));
+        return Rank.valueOf(lotto.matchNumbers(winningLotto), lotto.matchNumber(bonusNumber));
     }
 }

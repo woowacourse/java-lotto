@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.domainexception.InvalidMoneyException;
+
 public class Money {
     private static final int LOTTO_PRICE = 1000;
 
@@ -25,5 +27,9 @@ public class Money {
         if (insertMoney % LOTTO_PRICE != 0) {
             throw new InvalidMoneyException("금액이 " + LOTTO_PRICE + "원 단위가 아닙니다.");
         }
+    }
+
+    public int howManyLotto(){
+        return money / LOTTO_PRICE;
     }
 }

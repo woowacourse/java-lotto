@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.domainexception.InvalidRankException;
+
 public enum Rank {
     FIRST(6, 2_000_000_000), // 1등
     SECOND(5, 30_000_000), // 2등
@@ -11,23 +13,37 @@ public enum Rank {
     private static final int MINIMUM_MATCH_COUNT = 3;
 
     private int countOfMatch;
+
     private int reward;
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getReward() {
+        return reward;
+    }
 
     Rank(int countOfMatch, int reward) {
         this.countOfMatch = countOfMatch;
         this.reward = reward;
     }
 
-    public Rank valueOf(int countOfMatch, boolean matchBonusNumber) {
+    public static Rank valueOf(int countOfMatch, boolean matchBonusNumber) {
         if (countOfMatch < MINIMUM_MATCH_COUNT) {
             return MISS;
         }
+
         if (countOfMatch == 5 && matchBonusNumber) {
             return SECOND;
         }
 
+        if (countOfMatch == 5 && !matchBonusNumber) {
+            return THIRD;
+        }
+
         for (Rank rank : values()) {
-            if (rank.countOfMatch == countOfMatch && !matchBonusNumber) {
+            if (rank.countOfMatch == countOfMatch) {
                 return rank;
             }
         }
