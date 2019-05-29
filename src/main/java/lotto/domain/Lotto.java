@@ -10,8 +10,9 @@ class Lotto {
     private Lotto(final List<LottoNumber> numbers) {
         final Optional<List<LottoNumber>> optNumbers = Optional.ofNullable(numbers);
         validate(optNumbers.orElseThrow(IllegalArgumentException::new));
-        // TODO IllegalArgumentMessage
-        this.numbers = new ArrayList<>(optNumbers.orElseThrow(() -> new LottoCreateArgumentException("입력이 null입니다")));
+        this.numbers = new ArrayList<>(optNumbers.orElseThrow(() ->
+                new LottoCreateArgumentException("입력이 null입니다"))
+        );
     }
 
     private void validate(final List<LottoNumber> numbers) {
@@ -28,7 +29,6 @@ class Lotto {
     private void checkDuplication(final List<LottoNumber> numbers) {
         final Set<LottoNumber> semiParameter = new HashSet<>(numbers);
         if (numbers.size() != semiParameter.size()) {
-            // TODO 중복된 숫자에 관련된 Exception 추가
             throw new LottoCreateArgumentException("중복된 숫자로 로또 생성");
         }
     }

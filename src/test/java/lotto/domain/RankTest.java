@@ -21,7 +21,7 @@ class RankTest {
     @Test
     public void 등수_1등() {
         lotto = Lotto.of(getLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(Rank.valueOf(lotto.matchCount(lotto), false)).isEqualTo(Rank.FIRST);
+        assertThat(Rank.valueOf(lotto.matchCount(lotto), true)).isEqualTo(Rank.FIRST);
     }
 
     @Test
