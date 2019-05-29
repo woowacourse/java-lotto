@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MoneyTest {
+class MoneyTest {
     @Test
     void 최소_금액보다_작은_금액_테스트() {
         assertThrows(InvalidMoneyException.class, () -> new Money(999));

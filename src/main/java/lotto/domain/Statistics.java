@@ -4,8 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.domain.domainconstants.DomainConstants.LOTTO_PRICE;
+
 public class Statistics {
-    private static final int LOTTO_PRICE = 1000;
     private static final int DEFAULT_MONEY = 0;
 
     private List<Rank> ranks;

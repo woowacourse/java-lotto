@@ -2,9 +2,9 @@ package lotto.domain;
 
 import lotto.domain.domainexception.InvalidMoneyException;
 
-public class Money {
-    private static final int LOTTO_PRICE = 1000;
+import static lotto.domain.domainconstants.DomainConstants.LOTTO_PRICE;
 
+public class Money {
     private final int money;
 
     public Money(int insertMoney) {

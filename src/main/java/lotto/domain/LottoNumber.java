@@ -4,10 +4,10 @@ import lotto.domain.domainexception.InvalidLottoNumberException;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+import static lotto.domain.domainconstants.DomainConstants.MINIMUM_LOTTO_NUMBER;
+import static lotto.domain.domainconstants.DomainConstants.MAXIMUM_LOTTO_NUMBER;
 
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {

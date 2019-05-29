@@ -10,6 +10,8 @@ public class OutputView {
     private static final String STATISTICS_MESSAGE = "당첨 통계\n----------";
     private static final String RESULT_MESSAGE = "%d개 일치 (%d원) - %d개\n";
     private static final String RESULT_SECOND_MESSAGE = "%d개 일치, 보너스볼 일치 (%d원) - %d개\n";
+    private static final String PERCENT_FORMAT = "%d%%";
+    private static final int PERCENT = 100;
 
     public static void printPurchase(Money money, int countOfCustomLottos) {
         System.out.printf(PURCHASE_MESSAGE, countOfCustomLottos, money.howManyLotto() - countOfCustomLottos);
@@ -32,6 +34,6 @@ public class OutputView {
 
                 });
 
-        System.out.println(String.format("%d%%", ((int) (statistics.returnOfRate() * 100))));
+        System.out.println(String.format(PERCENT_FORMAT, ((int) (statistics.returnOfRate() * PERCENT))));
     }
 }
