@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.LottoCreateArgumentException;
+
 import java.util.*;
 
 class Lotto {

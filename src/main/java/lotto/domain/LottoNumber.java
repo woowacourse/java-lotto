@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.LottoNumberCreateException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

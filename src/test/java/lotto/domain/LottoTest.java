@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.LottoCreateArgumentException;
+import lotto.domain.exception.LottoNumberCreateException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

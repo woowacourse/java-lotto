@@ -37,4 +37,6 @@ public class LottoGameResult {
         }
         return totalMoney / (numOfLotto * lottoCost);
     }
+
+
 }

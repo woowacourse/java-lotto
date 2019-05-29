@@ -1,7 +1,7 @@
-package lotto.domain;
+package lotto.domain.exception;
 
 public class LottoNumberCreateException extends RuntimeException {
-    LottoNumberCreateException(final String message) {
+    public LottoNumberCreateException(final String message) {
         super(message);
     }
 }
