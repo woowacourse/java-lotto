@@ -3,7 +3,6 @@ package lotto.domain;
 public class Money {
     private static final int MONEY_MIN_CONDITION = 0;
 
-
     private final int money;
 
     public Money(int money) {
