@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class LottoResult {
     private static final int LOTTO_PRICE = 1000;
+    private static final int PERCENT_CONVERSION = 100;
 
     private final Map<Rank, Integer> result;
     private int totalLottos = 0;
@@ -34,7 +35,7 @@ public class LottoResult {
         for (Rank rank : result.keySet()) {
             yield += rank.getWinningMoney() * ((result.get(rank)) / (double) totalLottos) / LOTTO_PRICE;
         }
-        return yield;
+        return yield * PERCENT_CONVERSION;
     }
 
     public StringBuilder getResultMessage() {

@@ -13,6 +13,7 @@ public class OutputView {
     private static final String JOINER = ", ";
     private static final String NEW_LINE = "\n";
     private static final String STATISTICS_MESSAGE = "\n당첨 통계\n---------\n";
+    private static final String YIELD_FORMAT = "총 수익률은 %.1f%% 입니다.";
 
     public static void outputLottos(Lottos lottos) {
         System.out.println(lottos.size() + "개 구매했습니다.");
@@ -35,9 +36,7 @@ public class OutputView {
         StringBuilder builder = new StringBuilder();
         builder.append(STATISTICS_MESSAGE);
         builder.append(lottoResult.getResultMessage());
-        builder.append("총 수익률은 ");
-        builder.append(lottoResult.calculateYield() * 100);
-        builder.append("%입니다.");
         System.out.println(builder);
+        System.out.println(String.format(YIELD_FORMAT, lottoResult.calculateYield()));
     }
 }
