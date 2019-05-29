@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class InputView {
+public class InputConsole {
 
     public static int inputMoney() {
         System.out.println("구입 금액을 입력해주세요.");

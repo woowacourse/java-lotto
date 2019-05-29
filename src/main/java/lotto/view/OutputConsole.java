@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
-public class OutputView {
+public class OutputConsole {
 
     public static void outputLotto(int numberOfLotto, Lottos lottos) {
         System.out.println(numberOfLotto + "개를 구매했습니다.");

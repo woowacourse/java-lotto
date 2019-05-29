@@ -4,8 +4,8 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.view.InputConsole;
+import lotto.view.OutputConsole;
 
 public class Main {
 
@@ -13,13 +13,13 @@ public class Main {
         Money money = createMoney();
         int numberOfLotto = money.getNumberOfLotto();
         Lottos lottos = new Lottos(numberOfLotto);
-        OutputView.outputLotto(numberOfLotto, lottos);
+        OutputConsole.outputLotto(numberOfLotto, lottos);
         WinningLotto winningLotto = createWinningLotto();
     }
 
     private static Money createMoney() {
         try {
-            return new Money(InputView.inputMoney());
+            return new Money(InputConsole.inputMoney());
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createMoney();
@@ -28,7 +28,7 @@ public class Main {
 
     private static WinningLotto createWinningLotto() {
         try {
-            return new WinningLotto(new Lotto(InputView.inputWinningLotto()));
+            return new WinningLotto(new Lotto(InputConsole.inputWinningLotto()));
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createWinningLotto();
