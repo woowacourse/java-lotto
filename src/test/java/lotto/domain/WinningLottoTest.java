@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import lotto.domain.exceptions.BonusNumberException;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Number;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class WinningLottoTest {
     private Lotto winningNumbers;
@@ -101,5 +103,12 @@ class WinningLottoTest {
                 Number.of(9)
         ));
         assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.MISS);
+    }
+
+    @Test
+    void bonus_number_cannot_be_duplicated_with_winning_numbers() {
+        assertThrows(BonusNumberException.class, () -> {
+            new WinningLotto(winningNumbers, new Number(1));
+        });
     }
 }

@@ -9,14 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class NumberTest {
     @Test
-    void lotto_number_must_be_over_0() {
+    void lotto_number_check_range_0() {
         assertThrows(LottoNumberException.class, () -> {
             Number.of(0);
         });
     }
 
     @Test
-    void lotto_number_must_be_under_46() {
+    void lotto_number_check_range_46() {
         assertThrows(LottoNumberException.class, () -> {
             Number.of(46);
         });

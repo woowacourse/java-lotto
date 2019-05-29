@@ -13,4 +13,11 @@ public class PurchaseAmountTest {
             PurchaseAmount.is(999);
         });
     }
+
+    @Test
+    void purchase_amount_not_divisible_price_unit_1000() {
+        assertThrows(PurchaseAmountException.class, () -> {
+            PurchaseAmount.is(1002);
+        });
+    }
 }
