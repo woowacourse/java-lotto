@@ -20,11 +20,11 @@ public class WinningLotto {
         throw new InvalidLottoNumberException("당첨 번호와 중복되지 않는 숫자를 입력해 주세요.");
     }
 
-    public boolean isContain(LottoNumber lottoNumber) {
+    boolean isContain(LottoNumber lottoNumber) {
         return winningLotto.contains(lottoNumber);
     }
 
-    public boolean isBonusBallMatch(LottoNumber lottoNumber) {
+    boolean isBonusBallMatch(LottoNumber lottoNumber) {
         return bonusNumber == lottoNumber;
     }
 }

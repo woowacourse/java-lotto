@@ -8,7 +8,7 @@ public class LottoResult {
 
     LottoResult(Map<Rank, Integer> result) {
         this.result = result;
-        result.remove(Rank.MISS);
+        this.result.remove(Rank.MISS);
     }
 
     public long getRateOfLotto(int price) {

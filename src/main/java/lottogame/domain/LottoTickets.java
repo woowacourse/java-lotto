@@ -13,7 +13,7 @@ public class LottoTickets {
     public LottoTickets(int price) {
         int numberOfLotto = getNumberOfLotto(price);
         while (lottos.size() < numberOfLotto) {
-            lottos.add(new Lotto());
+            lottos.add(RandomLottoGenerator.create());
         }
     }
 
