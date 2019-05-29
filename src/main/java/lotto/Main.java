@@ -15,6 +15,7 @@ public class Main {
         Lottos lottos = new Lottos(numberOfLotto);
         OutputConsole.outputLotto(numberOfLotto, lottos);
         WinningLotto winningLotto = createWinningLotto();
+        OutputConsole.outputResult(winningLotto, lottos);
     }
 
     private static Money createMoney() {
