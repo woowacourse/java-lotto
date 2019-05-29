@@ -9,7 +9,7 @@ public class WinningLotto {
         this.lotto = lotto;
     }
 
-    public WinningType macthLotto(Lotto lotto) {
+    public WinningType matchLotto(Lotto lotto) {
         return WinningType.valueOf(countMatchNum(lotto));
     }
 
