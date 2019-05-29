@@ -16,11 +16,11 @@
         * [x] winningLotte.contains(bonusNumber) == false
 5. Rank
     * 매치수와 로또 당첨금을 가지고 있는다.
-4. LottoPaper
+6. LottoPaper
     * 사용자의 로또들을 가지고 있는다.
-5. LottoVendingMachine
+7. LottoVendingMachine
     * 사용자가 커스텀하는 로또를 제외한 금액만큼의 로또를 자동 생성한다.
-6. CustomLottoPaper
-7. AutoLottoGenerator
+8. CustomLottoPaper
+9. AutoLottoGenerator
     * 1~45의 번호를 가지고 있다.
     * 필요할때 셔플후 앞 6개를 로또로 발급한다.
