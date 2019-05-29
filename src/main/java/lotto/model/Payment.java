@@ -25,4 +25,8 @@ public class Payment {
                         throw new PaymentNotNaturalNumberException("구입 금액은 0보다 커야합니다.");
                 }
         }
+
+        public int getNumber() {
+                return number;
+        }
 }
