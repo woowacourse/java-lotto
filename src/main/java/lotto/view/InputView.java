@@ -2,17 +2,19 @@ package lotto.view;
 
 import java.util.Scanner;
 
+import lotto.utils.InputParser;
+
 public class InputView {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static String getPurchaseAmount() {
+    public static int getPurchaseAmount() {
         OutputView.start();
-        return scanner.nextLine();
+        return InputParser.parseNumber(scanner.nextLine());
     }
 
-    public static String getManualCount() {
+    public static int getManualCount() {
         OutputView.manualCount();
-        return scanner.nextLine();
+        return InputParser.parseNumber(scanner.nextLine());
     }
 
     public static String getWinnerLotto() {
@@ -20,9 +22,9 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String getBonusNumber() {
+    public static int getBonusNumber() {
         OutputView.bonus();
-        return scanner.nextLine();
+        return InputParser.parseNumber(scanner.nextLine());
     }
 
     public static String getManualLotto() {

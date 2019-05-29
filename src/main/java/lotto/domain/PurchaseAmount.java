@@ -13,14 +13,14 @@ public class PurchaseAmount {
 
     private final int purchaseAmount;
 
-    private PurchaseAmount(String input) {
-        int purchaseAmount = Integer.valueOf(input);
+    private PurchaseAmount(int purchaseAmount) {
+//        int purchaseAmount = Integer.valueOf(input);
         validAmount(purchaseAmount);
         validUnit(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
     }
 
-    public static PurchaseAmount is(String purchaseAmount) {
+    public static PurchaseAmount is(int purchaseAmount) {
         return new PurchaseAmount(purchaseAmount);
     }
 

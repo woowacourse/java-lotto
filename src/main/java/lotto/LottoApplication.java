@@ -5,10 +5,10 @@ import java.util.List;
 import lotto.domain.game.TotalLottoGames;
 import lotto.domain.game.ManualCount;
 import lotto.domain.game.Count;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Number;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
-import lotto.domain.WinningNumbers;
 import lotto.domain.exceptions.IllegalFormatException;
 import lotto.domain.exceptions.LottoNumberException;
 import lotto.domain.exceptions.ManualCountBoundException;
@@ -18,23 +18,53 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoApplication {
-    private static final String NUMBER_FORMAT_EXCEPTION = "숫자 형식 오류";
-
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        Count counts = getGameCounts(purchaseAmount);
-        ManualCount manualCount = getManualCount(counts);
-        TotalLottoGames totalLottoGames = new TotalLottoGames(manualCount.getAutoCount(counts));
+        Count totalCount = getCount(purchaseAmount);
+        ManualCount manualCount = getManualCount(totalCount);
+        TotalLottoGames totalLottoGames = getTotalLottoGames(totalCount, manualCount);
+        OutputView.lottoList(totalLottoGames);
+        Lotto winningNumber = getWinLotto();
+        WinningLotto winningLotto = getWinningLotto(winningNumber);
+        OutputView.winList(totalLottoGames, winningLotto);
+        OutputView.rateOfReturn(purchaseAmount);
+    }
+
+    private static PurchaseAmount getPurchaseAmount() {
+        try {
+            return PurchaseAmount.is(InputView.getPurchaseAmount());
+        } catch (PurchaseAmountException | IllegalFormatException e) {
+            System.out.println(e.getMessage());
+            return getPurchaseAmount();
+        }
+    }
+
+    private static Count getCount(PurchaseAmount purchaseAmount) {
+        try {
+            return new Count(purchaseAmount);
+        } catch (PurchaseAmountException e) {
+            System.out.println(e.getMessage());
+            return getCount(purchaseAmount);
+        }
+    }
+
+    private static ManualCount getManualCount(Count totalCount) {
+        try {
+            return ManualCount.is(InputView.getManualCount(), totalCount);
+        } catch (ManualCountBoundException | IllegalFormatException e) {
+            System.out.println(e.getMessage());
+            return getManualCount(totalCount);
+        }
+    }
+
+    private static TotalLottoGames getTotalLottoGames(Count totalCount, ManualCount manualCount) {
+        TotalLottoGames totalLottoGames = new TotalLottoGames(manualCount.getAutoCount(totalCount));
         OutputView.manualNumbers(manualCount);
         for (int i = 0; i < manualCount.getCount(); i++) {
             List<Number> lottoNumbers = getManualNumbers(i);
             totalLottoGames.addManual(lottoNumbers);
         }
-        OutputView.lottoList(totalLottoGames);
-        WinningNumbers winningNumber = getWinLotto();
-        WinningLotto winningLotto = getWinningLotto(winningNumber);
-        OutputView.winList(totalLottoGames, winningLotto);
-        OutputView.rateOfReturn(purchaseAmount);
+        return totalLottoGames;
     }
 
     private static List<Number> getManualNumbers(int indicator) {
@@ -44,65 +74,24 @@ public class LottoApplication {
         } catch (LottoNumberException | IllegalFormatException e) {
             System.out.println(e.getMessage());
             return getManualNumbers(indicator);
-        } catch (NumberFormatException e) {
-            System.out.println(NUMBER_FORMAT_EXCEPTION);
-            return getManualNumbers(indicator);
         }
     }
 
-    private static ManualCount getManualCount(Count counts) {
+    private static Lotto getWinLotto() {
         try {
-            int manualCount = Integer.parseInt(InputView.getManualCount());
-            return ManualCount.is(manualCount, counts);
-        } catch (NumberFormatException e) {
-            System.out.println(NUMBER_FORMAT_EXCEPTION);
-            return getManualCount(counts);
-        } catch (ManualCountBoundException e) {
-            System.out.println(e.getMessage());
-            return getManualCount(counts);
-        }
-    }
-
-    private static WinningLotto getWinningLotto(WinningNumbers winningNumbers) {
-        try {
-            int number = Integer.parseInt(InputView.getBonusNumber());
-            return new WinningLotto(winningNumbers, Number.of(number));
-        } catch (NumberFormatException e) {
-            System.out.println(NUMBER_FORMAT_EXCEPTION);
-            return getWinningLotto(winningNumbers);
-        } catch (LottoNumberException | IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return getWinningLotto(winningNumbers);
-        }
-    }
-
-    private static PurchaseAmount getPurchaseAmount() {
-        try {
-            return PurchaseAmount.is(InputView.getPurchaseAmount());
-        } catch (PurchaseAmountException e) {
-            System.out.println(e.getMessage());
-            return getPurchaseAmount();
-        } catch (NumberFormatException e) {
-            System.out.println(NUMBER_FORMAT_EXCEPTION);
-            return getPurchaseAmount();
-        }
-    }
-
-    private static Count getGameCounts(PurchaseAmount purchaseAmount) {
-        try {
-            return new Count(purchaseAmount);
-        } catch (PurchaseAmountException e) {
-            System.out.println(e.getMessage());
-            return getGameCounts(purchaseAmount);
-        }
-    }
-
-    private static WinningNumbers getWinLotto() {
-        try {
-            return new WinningNumbers(InputView.getWinnerLotto());
+            return new Lotto(InputParser.parseLotto(InputView.getWinnerLotto()));
         } catch (IllegalFormatException e) {
             System.out.println(e.getMessage());
             return getWinLotto();
+        }
+    }
+
+    private static WinningLotto getWinningLotto(Lotto winningNumbers) {
+        try {
+            return new WinningLotto(winningNumbers, Number.of(InputView.getBonusNumber()));
+        } catch (IllegalFormatException | LottoNumberException | IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getWinningLotto(winningNumbers);
         }
     }
 }

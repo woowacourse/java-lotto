@@ -10,7 +10,7 @@ public class PurchaseAmountTest {
     @Test
     void purchase_amount_lower_bound() {
         assertThrows(PurchaseAmountException.class, () -> {
-            PurchaseAmount.is("999");
+            PurchaseAmount.is(999);
         });
     }
 }

@@ -13,4 +13,11 @@ class InputParserTest {
             InputParser.parseLotto("1, 2, 3, 4, 5, 6");
         });
     }
+
+    @Test
+    void check_valid_a_number_input() {
+        assertThrows(IllegalFormatException.class, () -> {
+            InputParser.parseNumber("d");
+        });
+    }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,6 +11,19 @@ import lotto.domain.lotto.Number;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottoTest {
+    private Lotto winningNumbers;
+    @BeforeEach
+    void setUp() {
+        winningNumbers = new Lotto(Arrays.asList(
+                Number.of(1),
+                Number.of(2),
+                Number.of(3),
+                Number.of(4),
+                Number.of(5),
+                Number.of(6)
+        ));
+    }
+
     @Test
     void winner_number_match_all() {
         Lotto lotto = new Lotto(Arrays.asList(
@@ -20,7 +34,7 @@ class WinningLottoTest {
                 Number.of(5),
                 Number.of(6)
         ));
-        assertThat(new WinningLotto(new WinningNumbers("1, 2, 3, 4, 5, 6"), new Number(7)).getRank(lotto)).isEqualTo(Rank.FIRST);
+        assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -33,7 +47,7 @@ class WinningLottoTest {
                 Number.of(5),
                 Number.of(7)
         ));
-        assertThat(new WinningLotto(new WinningNumbers("1, 2, 3, 4, 5, 6"), new Number(7)).getRank(lotto)).isEqualTo(Rank.SECOND);
+        assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.SECOND);
     }
 
     @Test
@@ -46,7 +60,7 @@ class WinningLottoTest {
                 Number.of(5),
                 Number.of(7)
         ));
-        assertThat(new WinningLotto(new WinningNumbers("1, 2, 3, 4, 5, 6"), new Number(8)).getRank(lotto)).isEqualTo(Rank.THIRD);
+        assertThat(new WinningLotto(winningNumbers, new Number(8)).getRank(lotto)).isEqualTo(Rank.THIRD);
     }
 
 
@@ -60,7 +74,7 @@ class WinningLottoTest {
                 Number.of(7),
                 Number.of(8)
         ));
-        assertThat(new WinningLotto(new WinningNumbers("1, 2, 3, 4, 5, 6"), new Number(7)).getRank(lotto)).isEqualTo(Rank.FOURTH);
+        assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.FOURTH);
     }
 
     @Test
@@ -73,7 +87,7 @@ class WinningLottoTest {
                 Number.of(8),
                 Number.of(9)
         ));
-        assertThat(new WinningLotto(new WinningNumbers("1, 2, 3, 4, 5, 6"), new Number(7)).getRank(lotto)).isEqualTo(Rank.FIFTH);
+        assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.FIFTH);
     }
 
     @Test
@@ -86,6 +100,6 @@ class WinningLottoTest {
                 Number.of(8),
                 Number.of(9)
         ));
-        assertThat(new WinningLotto(new WinningNumbers("1, 2, 3, 4, 5, 6"), new Number(7)).getRank(lotto)).isEqualTo(Rank.MISS);
+        assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.MISS);
     }
 }

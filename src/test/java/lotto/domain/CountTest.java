@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CountTest {
     @Test
     void how_many_games_created() {
-        assertThat(new Count(PurchaseAmount.is("5000")).getCount()).isEqualTo(5);
+        assertThat(new Count(PurchaseAmount.is(5000)).getCount()).isEqualTo(5);
     }
 
     @Test
     void game_counts_constructor_argument_must_be_divisible_by_1000() {
         assertThrows(PurchaseAmountException.class, () -> {
-            new Count(PurchaseAmount.is("1002"));
+            new Count(PurchaseAmount.is(1002));
         });
     }
 }
