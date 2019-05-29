@@ -22,10 +22,16 @@ class priceParserTest {
 
     @Test
     void 숫자가_아닐_경우() {
+        assertThrows(NumberFormatException.class, () -> {
+            PriceParser.getLottoAmount("a");
+        });
     }
 
     @Test
     void 음수일_경우() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            PriceParser.getLottoAmount("-1");
+        });
     }
 
     @Test
