@@ -49,7 +49,7 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
 
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(LottoCreateArgumentException.class).isThrownBy(() -> {
             Lotto.of(lottoNumbers);
         });
     }
@@ -59,7 +59,7 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
         
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(LottoCreateArgumentException.class).isThrownBy(() -> {
             Lotto.of(lottoNumbers);
         });
     }
@@ -69,7 +69,7 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
 
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(LottoCreateArgumentException.class).isThrownBy(() -> {
             Lotto.of(lottoNumbers);
         });
     }

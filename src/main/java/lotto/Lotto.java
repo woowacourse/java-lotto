@@ -11,7 +11,7 @@ class Lotto {
         final Optional<List<LottoNumber>> optNumbers = Optional.ofNullable(numbers);
         validate(optNumbers.orElseThrow(IllegalArgumentException::new));
         // TODO IllegalArgumentMessage
-        this.numbers = new ArrayList<>(optNumbers.orElseThrow(() -> new IllegalArgumentException()));
+        this.numbers = new ArrayList<>(optNumbers.orElseThrow(() -> new LottoCreateArgumentException("입력이 null입니다")));
     }
 
     private void validate(final List<LottoNumber> numbers) {
@@ -21,8 +21,7 @@ class Lotto {
 
     private void checkValidSize(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            //TODO
-            throw new IllegalArgumentException(LOTTO_SIZE + "개 초과 생성");
+            throw new LottoCreateArgumentException(LOTTO_SIZE + "개 초과 생성");
         }
     }
 
@@ -30,7 +29,7 @@ class Lotto {
         final Set<LottoNumber> semiParameter = new HashSet<>(numbers);
         if (numbers.size() != semiParameter.size()) {
             // TODO 중복된 숫자에 관련된 Exception 추가
-            throw new IllegalArgumentException("중복된 숫자로 로또 생성");
+            throw new LottoCreateArgumentException("중복된 숫자로 로또 생성");
         }
     }
 
