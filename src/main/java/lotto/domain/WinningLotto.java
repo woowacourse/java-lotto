@@ -18,12 +18,6 @@ public class WinningLotto {
         }
     }
 
-//    public static WinningLotto generateWinningLotto(String winning,String bonus){
-//        Lotto winningNumbers = SelfLottoFactory.generateSelfLotto(winning);
-//        Number bonusBall = Number.of(Integer.parseInt(bonus));
-//        return new WinningLotto(winningNumbers,bonusBall);
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
