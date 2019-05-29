@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-    public static final String WINNING_NUMBER_DELIMITER = ", ";
+    private static final String WINNING_NUMBER_DELIMITER = ", ";
     private static Scanner scanner = new Scanner(System.in);
 
     public static int inputBuyPrice() {
