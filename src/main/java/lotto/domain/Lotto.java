@@ -41,4 +41,11 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(this.numbers);
     }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
+    }
 }

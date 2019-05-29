@@ -9,4 +9,9 @@ public class InputView {
         System.out.println("금액을 입력");
         return scanner.nextLine();
     }
+
+    public static String inputWinningLotto() {
+        System.out.println("당첨번호");
+        return scanner.nextLine();
+    }
 }
