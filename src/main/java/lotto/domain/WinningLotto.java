@@ -8,7 +8,7 @@ public class WinningLotto {
     private final List<Integer> winningNumbers;
 
     public WinningLotto(List<Integer> winningNumbers) {
-        if(winningNumbers.size() != Lotto.MAX_LOTTO_SIZE) {
+        if (winningNumbers.size() != Lotto.MAX_LOTTO_SIZE) {
             throw new IllegalArgumentException("당첨 번호의 개수는 6개 입니다.");
         }
         this.winningNumbers = winningNumbers;
