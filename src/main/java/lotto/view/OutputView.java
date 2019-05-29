@@ -1,9 +1,11 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.BoughtLottos;
+import lotto.domain.Lotto;
+import lotto.domain.Prize;
+import lotto.domain.Result;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
