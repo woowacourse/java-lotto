@@ -15,6 +15,9 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_SIZE.get()) {
             throw new IllegalArgumentException("중복된 로또 번호가 존재합니다.");
         }
+        if (lottoNumbers.size() < 6) {
+            throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
+        }
     }
 
     public int calculateCountOfMatch(Lotto anotherLotto) {
