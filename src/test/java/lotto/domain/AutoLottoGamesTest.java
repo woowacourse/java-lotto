@@ -7,6 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AutoLottoGamesTest {
     @Test
     void is_contain_proper_game_counts() {
-        assertThat(new AutoLottoGames(new TotalCount(PurchaseAmount.of("3000"))).size()).isEqualTo(3);
+        assertThat(new AutoLottoGames(new AutoCount(3000)).size()).isEqualTo(3);
     }
 }

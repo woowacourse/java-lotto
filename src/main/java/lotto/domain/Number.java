@@ -6,6 +6,8 @@ import lotto.domain.exceptions.LottoNumberException;
 
 public class Number implements Comparable<Number> {
     private static final String INVALID_LOTTO_NUMBER = "로또 번호의 범위는 1-45 입니다.";
+    private static final int NUMBER_LOWER_BOUND = 1;
+    private static final int NUMBER_UPPER_BOUND = 45;
 
     private final int number;
 
@@ -14,17 +16,21 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
-    public static Number of(int lottoNumber) {
-        return new Number(lottoNumber);
+    public static Number of(int number) {
+        return new Number(number);
     }
 
-    private void valid(int lottoNumber) {
-        if (lottoNumber < 0 || lottoNumber > 45) {
+    private void valid(int number) {
+        if (!isRange(number)) {
             throw new LottoNumberException(INVALID_LOTTO_NUMBER);
         }
     }
 
-    public String getBonusNumber() {
+    private boolean isRange(int number) {
+        return NUMBER_LOWER_BOUND <= number && number <= NUMBER_UPPER_BOUND;
+    }
+
+    public String getNumber() {
         return String.valueOf(number);
     }
 

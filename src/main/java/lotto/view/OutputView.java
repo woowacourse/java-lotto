@@ -3,9 +3,9 @@ package lotto.view;
 import java.util.Map;
 
 import lotto.domain.LottoGames;
+import lotto.domain.ManualCount;
 import lotto.domain.ResultCounter;
 import lotto.domain.Lotto;
-import lotto.domain.AutoLottoGames;
 import lotto.domain.LottoResult;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.Rank;
@@ -13,7 +13,6 @@ import lotto.domain.WinningLotto;
 
 public class OutputView {
     private static final String INPUT_PURCHASE_AMOUNT = "구매금액을 입력해주세요.";
-    private static final String PURCHASED_GAME = "개 구매했습니다.";
     private static final String OPEN_SQUARE_BUCKET = "[";
     private static final String CLOSE_SQUARE_BUCKET = "]";
     private static final String INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
@@ -24,19 +23,36 @@ public class OutputView {
     private static final String RETURN_HEADER = "총 수익률은 ";
     private static final String RETURN_FOOTER = "%입니다.";
     private static final String SECOND_ADDITIONAL = ", 보너스볼 일치";
-    private static final String NO_ADDITIONAL = "";
+    private static final String EMPTY_STRING = "";
+    private static final String INDICATOR_DELIMITER = " - ";
+    private static final String INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
+    private static final String INPUT_MANUAL_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String LIST_MESSAGE_FOOTER = "장을 구매하셨습니다.";
+    private static final String MANUAL_HEADER = "수동으로 ";
+    private static final String AUTO_HEADER = "자동으로 ";
+    private static final String JOINER = "장, ";
 
     static void start() {
         System.out.println(INPUT_PURCHASE_AMOUNT);
     }
 
     public static void lottoList(LottoGames lottoGames) {
-//        System.out.println(autoLottoGames.size() + PURCHASED_GAME);
-        System.out.println("수동으로 " + lottoGames.manualSize() + "장, 자동으로 " + lottoGames.autoSize() + "장을 구매했습니다.");
+        System.out.println(getListMessage(lottoGames));
         for (Lotto lotto : lottoGames.getAll()) {
             System.out.println(OPEN_SQUARE_BUCKET + lotto.getLotto() + CLOSE_SQUARE_BUCKET);
         }
         System.out.println();
+    }
+
+    private static String getListMessage(LottoGames lottoGames) {
+        if (lottoGames.manualSize() != 0 && lottoGames.autoSize() == 0) {
+            return MANUAL_HEADER + lottoGames.manualSize() + LIST_MESSAGE_FOOTER;
+        }
+        if (lottoGames.manualSize() == 0 && lottoGames.autoSize() != 0) {
+            return AUTO_HEADER + lottoGames.autoSize() + LIST_MESSAGE_FOOTER;
+        }
+        return MANUAL_HEADER + lottoGames.manualSize() + JOINER
+                + AUTO_HEADER + lottoGames.autoSize() + LIST_MESSAGE_FOOTER;
     }
 
     static void win() {
@@ -67,22 +83,24 @@ public class OutputView {
     }
 
     private static String rankAdditional(Rank rank) {
-        return rank.equals(Rank.SECOND) ? SECOND_ADDITIONAL : NO_ADDITIONAL;
+        return rank.equals(Rank.SECOND) ? SECOND_ADDITIONAL : EMPTY_STRING;
     }
 
     public static void rateOfReturn(PurchaseAmount purchaseAmount) {
         System.out.println(RETURN_HEADER + Math.round(LottoResult.getRateOfReturn(purchaseAmount)) + RETURN_FOOTER);
     }
 
-    static void manual() {
-        System.out.println("수동으로 구매할 로또 수를 입력해주세요");
+    static void manualCount() {
+        System.out.println(INPUT_MANUAL_COUNT);
     }
 
-    public static void manualNumbers() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    public static void manualNumbers(ManualCount manualCount) {
+        if (!manualCount.isZero()) {
+            System.out.println(INPUT_MANUAL_NUMBERS);
+        }
     }
 
     public static void indicator(int i) {
-        System.out.print(i + 1 + " - ");
+        System.out.print(i + 1 + INDICATOR_DELIMITER);
     }
 }

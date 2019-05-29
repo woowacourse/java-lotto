@@ -33,18 +33,21 @@ public class InputParser {
     }
 
     private static String[] split(String input) {
-        String[] result = StringUtils.deleteWhitespace(input).split(DELIMITER);
-        if (result.length != 6) {
-            throw new IllegalFormatException(ILLEGAL_NUMBER_COUNT);
-        }
-        return result;
+        return StringUtils.deleteWhitespace(input).split(DELIMITER);
     }
 
     private static Set<Number> getInputNumbers(String[] tokens) {
-        Set<Number> temp = new HashSet<>();
+        Set<Number> result = new HashSet<>();
         for (String token : tokens) {
-            temp.add(Number.of(Integer.parseInt(token)));
+            result.add(Number.of(Integer.parseInt(token)));
         }
-        return temp;
+        validSize(result);
+        return result;
+    }
+
+    private static void validSize(Set<Number> result) {
+        if (result.size() != 6) {
+            throw new IllegalFormatException(ILLEGAL_NUMBER_COUNT);
+        }
     }
 }

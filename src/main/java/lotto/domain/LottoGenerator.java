@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
@@ -12,9 +13,8 @@ public class LottoGenerator {
 
     public LottoGenerator() {
         numberList = new ArrayList<>();
-        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
-            numberList.add(Number.of(i));
-        }
+        IntStream.range(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
+                .forEach(i -> numberList.add(new Number(i)));
     }
 
     public Lotto generate() {

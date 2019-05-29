@@ -11,7 +11,7 @@ public class InputView {
     }
 
     public static String getManualCount() {
-        OutputView.manual();
+        OutputView.manualCount();
         return scanner.nextLine();
     }
 

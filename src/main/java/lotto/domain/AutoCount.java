@@ -1,13 +1,28 @@
 package lotto.domain;
 
-public class AutoCount {
-    private final int autoCount;
+import java.util.Objects;
 
-    public AutoCount(int autoCount) {
-        this.autoCount = autoCount;
+public class AutoCount {
+    private final int count;
+
+    public AutoCount(int count) {
+        this.count = count;
     }
 
-    public int getAutoCount() {
-        return autoCount;
+    public int getCount() {
+        return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AutoCount autoCount = (AutoCount) o;
+        return count == autoCount.count;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(count);
     }
 }

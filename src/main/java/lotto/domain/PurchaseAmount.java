@@ -20,7 +20,7 @@ public class PurchaseAmount {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public static PurchaseAmount of(String purchaseAmount) {
+    public static PurchaseAmount is(String purchaseAmount) {
         return new PurchaseAmount(purchaseAmount);
     }
 

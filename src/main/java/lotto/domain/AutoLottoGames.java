@@ -11,7 +11,7 @@ public class AutoLottoGames implements Iterable<Lotto> {
 
     public AutoLottoGames(AutoCount autoCount) {
         this.lottoGames = new ArrayList<>();
-        for (int i = FIRST_LOTTO; i < autoCount.getAutoCount(); i++) {
+        for (int i = FIRST_LOTTO; i < autoCount.getCount(); i++) {
             addLotto();
         }
     }

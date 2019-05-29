@@ -15,7 +15,7 @@ public class Lotto implements Iterable<Number> {
 
     public String getLotto() {
         return lotto.stream()
-                .map(Number::getBonusNumber)
+                .map(Number::getNumber)
                 .collect(Collectors.joining(JOINING_DELIMITER));
     }
 
