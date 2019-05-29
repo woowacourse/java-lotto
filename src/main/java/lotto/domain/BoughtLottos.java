@@ -27,6 +27,10 @@ public class BoughtLottos {
         return Collections.unmodifiableList(lottos);
     }
 
+    public int countOfBoughtLottos() {
+        return lottos.size();
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
