@@ -10,12 +10,12 @@ class WinningLottoTest {
     @Test
     void winner_number_match_all() {
         Lotto lotto = new Lotto(Arrays.asList(
-                LottoNumber.is(1),
-                LottoNumber.is(2),
-                LottoNumber.is(3),
-                LottoNumber.is(4),
-                LottoNumber.is(5),
-                LottoNumber.is(6)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
         ));
         assertThat(new WinningLotto("1, 2, 3, 4, 5, 6").getRank(lotto)).isEqualTo(Rank.FIRST);
     }
@@ -23,12 +23,12 @@ class WinningLottoTest {
     @Test
     void winner_number_match_five() {
         Lotto lotto = new Lotto(Arrays.asList(
-                LottoNumber.is(1),
-                LottoNumber.is(2),
-                LottoNumber.is(3),
-                LottoNumber.is(4),
-                LottoNumber.is(5),
-                LottoNumber.is(7)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(7)
         ));
         assertThat(new WinningLotto("1, 2, 3, 4, 5, 6").getRank(lotto)).isEqualTo(Rank.THIRD);
     }
@@ -36,12 +36,12 @@ class WinningLottoTest {
     @Test
     void winner_number_match_four() {
         Lotto lotto = new Lotto(Arrays.asList(
-                LottoNumber.is(1),
-                LottoNumber.is(2),
-                LottoNumber.is(3),
-                LottoNumber.is(4),
-                LottoNumber.is(7),
-                LottoNumber.is(8)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(7),
+                LottoNumber.of(8)
         ));
         assertThat(new WinningLotto("1, 2, 3, 4, 5, 6").getRank(lotto)).isEqualTo(Rank.FOURTH);
     }
@@ -49,12 +49,12 @@ class WinningLottoTest {
     @Test
     void winner_number_match_three() {
         Lotto lotto = new Lotto(Arrays.asList(
-                LottoNumber.is(1),
-                LottoNumber.is(2),
-                LottoNumber.is(3),
-                LottoNumber.is(7),
-                LottoNumber.is(8),
-                LottoNumber.is(9)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(7),
+                LottoNumber.of(8),
+                LottoNumber.of(9)
         ));
         assertThat(new WinningLotto("1, 2, 3, 4, 5, 6").getRank(lotto)).isEqualTo(Rank.FIFTH);
     }
@@ -62,12 +62,12 @@ class WinningLottoTest {
     @Test
     void winner_number_match_miss() {
         Lotto lotto = new Lotto(Arrays.asList(
-                LottoNumber.is(1),
-                LottoNumber.is(2),
-                LottoNumber.is(10),
-                LottoNumber.is(7),
-                LottoNumber.is(8),
-                LottoNumber.is(9)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(10),
+                LottoNumber.of(7),
+                LottoNumber.of(8),
+                LottoNumber.of(9)
         ));
         assertThat(new WinningLotto("1, 2, 3, 4, 5, 6").getRank(lotto)).isEqualTo(Rank.MISS);
     }

@@ -10,7 +10,7 @@ public class WinningLotto {
     private final List<LottoNumber> winnerLotto;
 
     public WinningLotto(String input) {
-        this.winnerLotto = InputParser.parse(input);
+        this.winnerLotto = InputParser.parseLotto(input);
     }
 
     public Rank getRank(Lotto lotto) {
@@ -19,6 +19,10 @@ public class WinningLotto {
             matchCount = countAdder(matchCount, number);
         }
         return Rank.valueOf(matchCount);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return winnerLotto.contains(lottoNumber);
     }
 
     private int countAdder(int matchCount, LottoNumber lottoNumber) {

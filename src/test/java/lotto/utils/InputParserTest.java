@@ -10,7 +10,7 @@ class InputParserTest {
     @Test
     void check_valid_input() {
         assertThrows(IllegalFormatException.class, () -> {
-            InputParser.parse("1, 2, 3, 4, 5, 6");
+            InputParser.parseLotto("1, 2, 3, 4, 5, 6");
         });
     }
 }
