@@ -1,8 +1,5 @@
 # 요구 사항 정리
 
-- 구매금액 설정
-  - 정수만 가능
-  - 1000원 이상 가능
 - 수동구매액 설정
   - 정수만 가능
   - 수동구매액*1000이 구입금액액보다 작아야함
@@ -28,15 +25,31 @@
 
 
 
-* LottoNumber
-  * 1 ~ 45 사이만 가능
-* LottoShuffleBase
-  * 1 ~ 45 List<LottoNumber> 가지고 있는 객체 + static (셔플시 여기서 가지고옴)
-* Lotto
-  * new Lotto(List<LottoNumber>)
-  * new Lotto(List<Integer>)
+* Lottos
+  * LottoFactoryMethod
 
 
 
 # DONE
+
+구매금액 설정
+
+- 정수만 가능
+- 1000원 이상 가능
+
+
+
+LottoNumber
+
+- 1 ~ 45 사이만 가능
+
+LottoShuffleBase
+
+- 1 ~ 45 List<LottoNumber> 가지고 있는 객체 + static (셔플시 여기서 가지고옴)
+
+- Lotto
+  - Lotto.generate(List<Integer>)
+  - Lotto.create(List<LottoNumber>)
+  - 6개 아니면 예외
+  - FactoryMethod로 만들어버림...
 
