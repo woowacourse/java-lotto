@@ -13,8 +13,8 @@ class LottoTest {
 
     private List<LottoNumber> getLottoNumbers(final List<Integer> numbers) {
         return numbers.stream()
-                    .map(number -> LottoNumber.of(number))
-                    .collect(Collectors.toList());
+                .map(number -> LottoNumber.of(number))
+                .collect(Collectors.toList());
     }
 
     @Test
@@ -58,7 +58,7 @@ class LottoTest {
     public void 숫자_리스트의_크기가_6초과일때_예외발생_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
-        
+
         assertThatExceptionOfType(LottoCreateArgumentException.class).isThrownBy(() -> {
             Lotto.of(lottoNumbers);
         });
@@ -78,7 +78,7 @@ class LottoTest {
     public void 로또_숫자가_범위를_초과할때_예외발생하는지_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 46, 7);
 
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(LottoNumberCreateException.class).isThrownBy(() -> {
             getLottoNumbers(numbers);
         });
     }
@@ -104,7 +104,7 @@ class LottoTest {
 
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
         List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-        
+
         Lotto lotto = Lotto.of(lottoNumbers);
         Lotto another = Lotto.of(anotherLottoNumbers);
 
@@ -118,7 +118,7 @@ class LottoTest {
 
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
         List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-        
+
         Lotto lotto = Lotto.of(lottoNumbers);
         Lotto another = Lotto.of(anotherLottoNumbers);
 
@@ -129,10 +129,10 @@ class LottoTest {
     public void 로또_숫자가_3개_같을때() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> anotherNumbers = Arrays.asList(12, 13, 4, 5, 6, 15);
-        
+
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
         List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-        
+
         Lotto lotto = Lotto.of(lottoNumbers);
         Lotto another = Lotto.of(anotherLottoNumbers);
 
@@ -146,7 +146,7 @@ class LottoTest {
 
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
         List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-        
+
         Lotto lotto = Lotto.of(lottoNumbers);
         Lotto another = Lotto.of(anotherLottoNumbers);
 
@@ -160,7 +160,7 @@ class LottoTest {
 
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
         List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-        
+
         Lotto lotto = Lotto.of(lottoNumbers);
         Lotto another = Lotto.of(anotherLottoNumbers);
 
@@ -174,7 +174,7 @@ class LottoTest {
 
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
         List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-        
+
         Lotto lotto = Lotto.of(lottoNumbers);
         Lotto another = Lotto.of(anotherLottoNumbers);
 

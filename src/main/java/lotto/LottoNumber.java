@@ -25,7 +25,9 @@ class LottoNumber implements Comparable<LottoNumber> {
 
     static LottoNumber of(final int lottoNumber) {
         Optional<LottoNumber> optLottoNumber = Optional.ofNullable(LOTTO_NUMBERS.get(lottoNumber));
-        return optLottoNumber.orElseThrow(IllegalArgumentException::new);
+        return optLottoNumber.orElseThrow(() ->
+                new LottoNumberCreateException(MIN_NUMBER + "~" + MAX_NUMBER + " 사이의 숫자를 입력하세요")
+        );
     }
 
     @Override

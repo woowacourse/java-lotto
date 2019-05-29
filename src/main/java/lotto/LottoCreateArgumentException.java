@@ -2,7 +2,7 @@ package lotto;
 
 class LottoCreateArgumentException extends RuntimeException {
 
-    LottoCreateArgumentException(String message) {
+    LottoCreateArgumentException(final String message) {
         super(message);
     }
 }
