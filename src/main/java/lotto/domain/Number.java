@@ -1,8 +1,8 @@
 package lotto.domain;
 
 public class Number {
-    private static final int MAX_NUMBER = 45;
-    private static final int MIN_NUMBER = 0;
+    static final int MAX_NUMBER = 45;
+    static final int MIN_NUMBER = 1;
 
     private final int num;
 

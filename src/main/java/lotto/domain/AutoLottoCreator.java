@@ -5,11 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class AutoLottoCreator implements LottoCreator {
+
     @Override
     public Lotto create() {
         List<Number> numbers = new ArrayList<>();
 
-        for (int i = 0; i < 46; i++) {
+        for (int i = Number.MIN_NUMBER; i <= Number.MAX_NUMBER; i++) {
             numbers.add(new Number(i));
         }
         Collections.shuffle(numbers);
