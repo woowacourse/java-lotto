@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import lotto.exceptions.PurchaseAmountException;
+import lotto.domain.exceptions.PurchaseAmountException;
 
 public class PurchaseAmount {
     private static final String INVALID_PURCHASE_AMOUNT = "구매 금액은 1000원 이상입니다.";

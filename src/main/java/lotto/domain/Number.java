@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import lotto.exceptions.LottoNumberException;
+import lotto.domain.exceptions.LottoNumberException;
 
 public class Number implements Comparable<Number> {
     private static final String INVALID_LOTTO_NUMBER = "로또 번호의 범위는 1-45 입니다.";

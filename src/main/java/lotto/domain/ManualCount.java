@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.ManualCountBoundException;
+import lotto.domain.exceptions.ManualCountBoundException;
 
 public class ManualCount {
     private int manualCount;

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import lotto.domain.Number;
-import lotto.exceptions.IllegalFormatException;
+import lotto.domain.exceptions.IllegalFormatException;
 
 public class InputParser {
     private static final String INPUT_FORM_REGEX = "([^,]+)([, ][^,]+)*";

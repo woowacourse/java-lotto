@@ -1,4 +1,4 @@
-package lotto.exceptions;
+package lotto.domain.exceptions;
 
 public class LottoNumberException extends RuntimeException {
     public LottoNumberException() {

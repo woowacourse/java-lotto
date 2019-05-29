@@ -1,4 +1,4 @@
-package lotto.exceptions;
+package lotto.domain.exceptions;
 
 public class IllegalFormatException extends RuntimeException {
     public IllegalFormatException() {

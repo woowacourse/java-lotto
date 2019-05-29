@@ -2,7 +2,7 @@ package lotto.utils;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.exceptions.IllegalFormatException;
+import lotto.domain.exceptions.IllegalFormatException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

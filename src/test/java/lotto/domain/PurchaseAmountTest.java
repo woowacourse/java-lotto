@@ -2,7 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.exceptions.PurchaseAmountException;
+import lotto.domain.exceptions.PurchaseAmountException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
