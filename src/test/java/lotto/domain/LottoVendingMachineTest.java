@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LottoVendingMachineTest {
     @Test
     void validateLottoBuyingMoney() {
-        assertThrows(InvalidLottoBuyingMoneyException.class, () -> LottoVendingMachine.getRandomLottos(1023));
+        assertThrows(InvalidLottoBuyingMoneyException.class, () ->
+                new LottoVendingMachine(1023, 1));
     }
 }
