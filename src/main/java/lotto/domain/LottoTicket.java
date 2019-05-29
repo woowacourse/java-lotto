@@ -1,14 +1,13 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private static final int LOTTO_SIZE = 6;
+    static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> numbers) {
+    private LottoTicket(List<LottoNumber> numbers) {
         lottoNumbers = Collections.unmodifiableSet(new HashSet<>(numbers));
         checkDuplicate(numbers, lottoNumbers);
         checkLottoSize(lottoNumbers);
@@ -26,12 +25,12 @@ public class LottoTicket {
         }
     }
 
-    public static LottoTicket create(List<Integer> numbers) {
-        return new LottoTicket(
-                numbers.stream()
-                .map(x -> new LottoNumber(x))
-                .collect(Collectors.toList())
-        );
+    public static LottoTicket create() {
+        return new LottoTicket(LottoNumbersGenerator.create());
+    }
+
+    public static LottoTicket create(List<Integer> lottoNumbers) {
+        return new LottoTicket(LottoNumbersGenerator.create(lottoNumbers));
     }
 
     @Override
