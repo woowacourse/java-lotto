@@ -16,12 +16,11 @@ public class Main {
         Winning winning = createWinningLotto();
         LottoResult lottoResult = LottoResult.of(winning, lottos);
         OutputView.outputResult(lottoResult);
-
     }
 
     private static Winning createWinningLotto() {
         try {
-            return Winning.of(InputView.inputWinningLotto());
+            return Winning.of(InputView.inputWinningLotto(), InputView.inputBonusNum());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return createWinningLotto();

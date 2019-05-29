@@ -32,6 +32,10 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
+    public boolean containNumber(int value) {
+        return lottoNumbers.contains(value);
+    }
+
     public int sameNumberCount(Lotto lotto) {
         int count = 0;
         for (Integer lottoNumber : lottoNumbers) {
@@ -41,7 +45,7 @@ public class Lotto {
     }
 
     private int containNumber(Lotto lotto, Integer lottoNumber) {
-        if (lotto.lottoNumbers.contains(lottoNumber)) {
+        if (lotto.containNumber(lottoNumber)) {
             return 1;
         }
         return 0;
