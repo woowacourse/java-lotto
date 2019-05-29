@@ -2,9 +2,9 @@ package lotto.domain;
 
 import lotto.domain.exception.LottoSizeException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lotto {
     static final int LOTTO_SIZE = 6;
@@ -23,6 +23,10 @@ public class Lotto {
             return 1;
         }
         return 0;
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override
