@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,7 +9,7 @@ import java.util.Objects;
  * @author heebg
  * @version 1.0 2019-05-29
  */
-public class Lotteries {
+public class Lotteries implements Iterable<Lotto> {
     private final List<Lotto> lotteries;
 
     public Lotteries() {
@@ -22,6 +23,11 @@ public class Lotteries {
     public Lotteries add(Lotto lotto) {
         this.lotteries.add(lotto);
         return new Lotteries(this.lotteries);
+    }
+
+    @Override
+    public Iterator<Lotto> iterator() {
+        return lotteries.iterator();
     }
 
     @Override
