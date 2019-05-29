@@ -10,7 +10,7 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        if(new HashSet<>(numbers).size() != LOTTO_SIZE ){
+        if (new HashSet<>(numbers).size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("중복된 숫자가 있습니다. 다시 확인해주세요.");
         }
         this.numbers = numbers;

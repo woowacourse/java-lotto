@@ -36,7 +36,6 @@ public class LottoNumber {
         return numbers.get(FIRST_INDEX_AFTER_SHUFFLED);
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
