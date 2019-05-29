@@ -46,6 +46,10 @@ class Lotto {
         return LOTTO_SIZE - (semiSet.size() - LOTTO_SIZE);
     }
 
+    boolean contains(LottoNumber other) {
+        return this.numbers.contains(other);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
