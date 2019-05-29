@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import static lotto.domain.LottoRule.*;
+import static lotto.domain.Rank.*;
 
 public class LottoResult {
 
@@ -12,17 +13,32 @@ public class LottoResult {
     private final WinningLotto winningLotto;
     private final Lottos lottos;
 
+    private Map<Rank, Integer> rankResult = new HashMap<>();
+
     public LottoResult(WinningLotto winningLotto, Lottos lottos) {
         this.winningLotto = winningLotto;
         this.lottos = lottos;
+        setMap();
+        countRank();
     }
 
-    public List<Rank> getRank() {
-        List<Rank> ranks = new ArrayList<>();
+    private void setMap() {
+        rankResult.put(FIRST, 0);
+        rankResult.put(THIRD, 0);
+        rankResult.put(FOURTH, 0);
+        rankResult.put(FIFTH, 0);
+        rankResult.put(MISS, 0);
+    }
+
+    private void countRank() {
         for (Lotto lotto : lottos.getList()) {
-            ranks.add(winningLotto.getWinning(lotto));
+            Rank key = winningLotto.getWinning(lotto);
+            rankResult.put(key, rankResult.get(key) + 1);
         }
-        return ranks;
+    }
+
+    public Integer getCountOfRank(Rank rank){
+        return rankResult.get(rank);
     }
 
     public int getEarningsRate() {
@@ -31,9 +47,9 @@ public class LottoResult {
 
     private int getEarning() {
         int earning = 0;
-        List<Rank> ranks = getRank();
-        for (Rank rank : ranks) {
-            earning += rank.getWinningMoney();
+        for (Map.Entry<Rank, Integer> entry : rankResult.entrySet()) {
+            earning += entry.getKey().getWinningMoney() * entry.getValue();
+
         }
         return earning;
     }
