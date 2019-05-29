@@ -3,7 +3,11 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.domain.LottoRule.*;
+
 public class LottoResult {
+
+    private static final int RATE = 100;
 
     private final WinningLotto winningLotto;
     private final Lottos lottos;
@@ -22,7 +26,7 @@ public class LottoResult {
     }
 
     public int getEarningsRate() {
-        return getEarning() / (lottos.getSize() * 1000) * 100;
+        return getEarning() / (lottos.getSize() * MONEY_PER_LOTTO.get()) * RATE;
     }
 
     private int getEarning() {
