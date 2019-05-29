@@ -6,7 +6,7 @@ enum Rank {
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
-    OTHER(0, 0);
+    MISS(0, 0);
 
     private final int matchCount;
     private final int money;
@@ -26,10 +26,10 @@ enum Rank {
                 return value;
             }
         }
-        return Rank.OTHER;
+        return Rank.MISS;
     }
 
-    double prize(final double count) {
-        return (money * count);
+    double prize(final int count) {
+        return (this.money * count);
     }
 }

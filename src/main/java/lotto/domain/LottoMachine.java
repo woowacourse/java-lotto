@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-    private static final int LOTTO_MONEY = 1000;
+    public static final int LOTTO_MONEY = 1000;
 
     private int remainMoney;
 
@@ -31,5 +31,9 @@ public class LottoMachine {
 
     double remainBuyCount() {
         return (this.remainMoney / LOTTO_MONEY);
+    }
+
+    boolean isRemainMoney() {
+        return (this.remainMoney >= LOTTO_MONEY);
     }
 }

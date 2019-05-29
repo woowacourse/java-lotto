@@ -72,7 +72,7 @@ class RankTest {
         List<Integer> anotherNumbers = Arrays.asList(12, 6, 10, 5, 8, 7);
         anotherLotto = Lotto.of(getLottoNumbers(anotherNumbers));
 
-        assertThat(Rank.valueOf(lotto.matchCount(anotherLotto), false)).isEqualTo(Rank.OTHER);
+        assertThat(Rank.valueOf(lotto.matchCount(anotherLotto), false)).isEqualTo(Rank.MISS);
     }
 
     @Test

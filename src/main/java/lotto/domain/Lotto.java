@@ -10,6 +10,7 @@ class Lotto {
     private Lotto(final List<LottoNumber> numbers) {
         final Optional<List<LottoNumber>> optNumbers = Optional.ofNullable(numbers);
         validate(optNumbers.orElseThrow(IllegalArgumentException::new));
+
         this.numbers = new ArrayList<>(optNumbers.orElseThrow(() ->
                 new LottoCreateArgumentException("입력이 null입니다"))
         );
