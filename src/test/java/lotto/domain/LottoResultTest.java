@@ -38,6 +38,6 @@ public class LottoResultTest {
         lottoResult.add(Rank.MISS);
         lottoResult.add(Rank.MISS);
 
-        assertThat(lottoResult.calculateYield()).isEqualTo(1);
+        assertThat(lottoResult.calculateYield()).isEqualTo(100);
     }
 }
