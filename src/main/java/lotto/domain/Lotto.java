@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -16,6 +17,10 @@ public class Lotto {
         if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또는 6자리 입니다.");
         }
+    }
+
+    public List<Number> getLotto() {
+        return new ArrayList<>(lotto);
     }
 
     @Override
