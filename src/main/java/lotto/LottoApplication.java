@@ -1,18 +1,24 @@
 package lotto;
 
 import lotto.domain.Budget;
-import lotto.domain.Person;
+import lotto.domain.LottoBuyer;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        Person peson = makePerson();
+        LottoBuyer person = makePerson();
+        try {
+            person.buyLotto();
+            OutputView.printContainingLottos(person);
+        } catch (Exception e) {
+            OutputView.printErrorMsg(e);
+        }
     }
 
-    private static Person makePerson() {
+    private static LottoBuyer makePerson() {
         try {
-            return new Person(new Budget(InputView.inputBudget()));
+            return new LottoBuyer(new Budget(InputView.inputBudget()));
         } catch (Exception e) {
             OutputView.printErrorMsg(e);
             return makePerson();

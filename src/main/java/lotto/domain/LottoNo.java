@@ -23,6 +23,10 @@ public class LottoNo {
         return Integer.compare(no, lottoBall.no);
     }
 
+    int getNo() {
+        return no;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

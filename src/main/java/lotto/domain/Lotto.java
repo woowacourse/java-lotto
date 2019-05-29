@@ -5,6 +5,7 @@ import lotto.utils.LottoNoGenerator;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -45,5 +46,14 @@ public class Lotto {
 
     int getCountOfMatchNo(Lotto lotto) {
         return lottoNo.stream().filter(lotto::matchNo).collect(Collectors.toList()).size();
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner sj = new StringJoiner(",", "[", "]");
+        for (LottoNo no : lottoNo) {
+            sj.add(String.valueOf(no.getNo()));
+        }
+        return sj.toString();
     }
 }
