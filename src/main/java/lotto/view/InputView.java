@@ -14,6 +14,7 @@ public class InputView {
     public static int inputBuyPrice() {
         String input = "";
         do {
+            System.out.println("구입금액을 입력해주세요.");
             input = scanner.nextLine();
         } while (!InputValidator.inputValidateBuyPrice(input));
         return Integer.parseInt(input);
@@ -22,6 +23,7 @@ public class InputView {
     public static List<Integer> inputWinningNumber() {
         String input = "";
         do {
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             input = scanner.nextLine();
         } while (!InputValidator.inputValidateWinningNumber(input));
         return Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
