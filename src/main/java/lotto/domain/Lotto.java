@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author heebg
@@ -45,6 +42,17 @@ public class Lotto {
         if (lottoNumbers.size() != new ArrayList<>(new HashSet<>(lottoNumbers)).size()) {
             throw new IllegalArgumentException(EX_LOTTO_DUPLICATE_MESSAGE);
         }
+    }
+
+    public String toStringWithFormat(String startSymbol, String endSymbol, String separator) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(startSymbol);
+        StringJoiner stringJoiner = new StringJoiner(separator);
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            stringJoiner.add(lottoNumber.toString());
+        }
+        stringBuilder.append(stringJoiner).append(endSymbol);
+        return stringBuilder.toString();
     }
 
     @Override

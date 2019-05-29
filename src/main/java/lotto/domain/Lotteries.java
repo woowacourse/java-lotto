@@ -16,13 +16,8 @@ public class Lotteries implements Iterable<Lotto> {
         this.lotteries = new ArrayList<>();
     }
 
-    public Lotteries(List<Lotto> lotteries) {
-        this.lotteries = lotteries;
-    }
-
-    public Lotteries add(Lotto lotto) {
+    public void add(Lotto lotto) {
         this.lotteries.add(lotto);
-        return new Lotteries(this.lotteries);
     }
 
     @Override

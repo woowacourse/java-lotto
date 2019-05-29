@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.domain.Lotteries;
+import lotto.domain.Lotto;
+
 /**
  * @author heebg
  * @version 1.0 2019-05-29
@@ -14,5 +17,11 @@ public class OutputView {
 
     public static void titleInputAutoLotto() {
         System.out.println(TITLE_INPUT_AUTO_LOTTO);
+    }
+
+    public static void outputAutoLotteries(Lotteries autoLotteries) {
+        for (Lotto lotto : autoLotteries) {
+            System.out.println(lotto.toStringWithFormat("[","]",","));
+        }
     }
 }

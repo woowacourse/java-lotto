@@ -24,6 +24,8 @@ class LotteriesTest {
 
     @Test
     void create_생성() {
-        assertThat(lotteries).isEqualTo(new Lotteries().add(lotto));
+        Lotteries lotteries2 = new Lotteries();
+        lotteries2.add(lotto);
+        assertThat(lotteries).isEqualTo(lotteries2);
     }
 }

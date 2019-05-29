@@ -3,10 +3,13 @@ package lotto;
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerateBase;
+import lotto.domain.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author heebg
@@ -21,6 +24,7 @@ public class LottoApplication {
         OutputView.titleInputAutoLotto();
         Lotteries manualLotteries = generateManualLotteries(manualCount);
         Lotteries autoLotteries = generateAutoLotteries(autoCount);
+        OutputView.outputAutoLotteries(autoLotteries);
     }
 
     private static long calculateAutoLottoCount(long userPrice, long manualCount) {
@@ -38,13 +42,17 @@ public class LottoApplication {
     private static Lotteries generateAutoLotteries(long autoCount) {
         Lotteries lotteries = new Lotteries();
         for (int i = 0; i < autoCount; i++) {
-            lotteries.add(generateLotteries());
+            lotteries.add(generateLotto());
         }
         return lotteries;
     }
 
-    private static Lotto generateLotteries() {
+    private static Lotto generateLotto() {
+        List<LottoNumber> lotto = new ArrayList<>();
         Collections.shuffle(LottoGenerateBase.lottoGenerateBase);
-        return Lotto.create(LottoGenerateBase.lottoGenerateBase.subList(0,6));
+        for (int i = 0; i < 6; i++) {
+            lotto.add(LottoGenerateBase.lottoGenerateBase.get(i));
+        }
+        return Lotto.create(lotto);
     }
 }
