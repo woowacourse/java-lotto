@@ -33,7 +33,7 @@ public class LottoTicket {
         return new LottoTicket(LottoNumbersGenerator.create(lottoNumbers));
     }
 
-    public int match(LottoTicket user) {
+    public int countOfMatch(LottoTicket user) {
         return (int) user.lottoNumbers.stream()
                 .filter(x -> this.lottoNumbers.contains(x))
                 .count();
