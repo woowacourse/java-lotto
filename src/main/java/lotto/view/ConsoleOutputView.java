@@ -27,11 +27,17 @@ public class ConsoleOutputView {
 
     private static void printStatistics(LottoResults lottoResults) {
         lottoResults.getLottoRewards().forEach((k, v) -> {
-            System.out.println(k.getCountOfMatch() + " 개 일치 " + k.getRewardMoney() + "  - " + v + "개");
+            if (k != LottoRank.MISS) {
+                System.out.println(k.getCountOfMatch() + " 개 일치 " + k.getRewardMoney() + "  - " + v + "개");
+            }
         });
     }
 
     private static void printYield(LottoResults lottoResults) {
         System.out.println("총 수익률은 : " + lottoResults.getYield() + "% 입니다.");
+    }
+
+    public static void printAmounts(int manualAmount, LottoMoney lottoMoney) {
+        System.out.println("수동으로 : " + manualAmount + "개 자동으로 : " + (lottoMoney.getAmount() - manualAmount) + "개 구입하셨습니다.");
     }
 }

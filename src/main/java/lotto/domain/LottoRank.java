@@ -1,12 +1,12 @@
 package lotto.domain;
 
 public enum LottoRank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 5_000),
+    MISS(0, 0),
     FIFTH(3, 500),
-    MISS(0, 0);
+    FOURTH(4, 5_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private static final int WINNING_CONDITION = 3;
 
@@ -30,8 +30,8 @@ public enum LottoRank {
         if (countOfMatch < WINNING_CONDITION) {
             return MISS;
         }
-        if (countOfMatch == 5 && !hasBonusBall) {
-            return THIRD;
+        if (countOfMatch == 5 && hasBonusBall) {
+            return SECOND;
         }
         for (LottoRank lottoRank : values()) {
             if (lottoRank.countOfMatch == countOfMatch) {
