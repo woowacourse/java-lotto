@@ -49,4 +49,13 @@ public class LottoTest {
     void create_다른_생성자_생성() {
         assertThat(Lotto.generate(lottoNumbersInt)).isEqualTo(lotto);
     }
+
+    @Test
+    void create_로또_중복_확인() {
+        lottoNumbers.remove(0);
+        lottoNumbers.add(new LottoNumber(6));
+        assertThrows(Exception.class, () -> {
+            Lotto.create(lottoNumbers);
+        });
+    }
 }

@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author heebg
@@ -20,9 +18,10 @@ public class InputView {
     private static final String EX_MANUAL_COUNT_RANGE_MESSAGE = "구입 금액을 초과하지 않는 숫자를 입력해주세요(로또는 한장에 1000원입니다.)";
     private static final int MIN_USER_PRICE_RANGE = 1000;
     private static final int ONE_LOTTO_PRICE = MIN_USER_PRICE_RANGE;
+    private static final String EX_LOTTO_FORMAT_RANGE_MESSAGE = "1~45 사이의 숫자를 입력해주세요";
+    private static final String EX_LOTTO_RE_INPUT_MESSAGE = " 다시 입력해주세요";
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    public static final String EX_LOTTO_FORMAT_LANGE = "1~45 사이의 숫자를 입력해주세요";
 
     public static long generateInvalidUserPrice() {
         try {
@@ -69,18 +68,18 @@ public class InputView {
             List<Integer> lottoNumbers = generateLottoNumbers(inputByUser());
             return Lotto.generate(lottoNumbers);
         } catch (NumberFormatException e) {
-            System.out.println(EX_LOTTO_FORMAT_LANGE);
+            System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
             return generateInvalidLotto();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + EX_LOTTO_RE_INPUT_MESSAGE);
             return generateInvalidLotto();
         }
     }
 
     private static List<Integer> generateLottoNumbers(String inputByUser) {
         List<Integer> lottoNumbers = new ArrayList<>();
-        List<String> lottos = Arrays.asList(inputByUser.replaceAll(" ","").split(","));
-        for (String lotto : lottos) {
+        List<String> lotteries = Arrays.asList(inputByUser.replaceAll(" ", "").split(","));
+        for (String lotto : lotteries) {
             lottoNumbers.add(Integer.parseInt(lotto));
         }
         return lottoNumbers;
