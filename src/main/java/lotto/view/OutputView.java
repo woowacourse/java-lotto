@@ -11,17 +11,20 @@ import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 
 public class OutputView {
-    private static final String START = "구매금액을 입력해주세요.";
+    private static final String INPUT_PURCHASE_AMOUNT = "구매금액을 입력해주세요.";
     private static final String PURCHASED_GAME = "개 구매했습니다.";
     private static final String OPEN_SQUARE_BUCKET = "[";
     private static final String CLOSE_SQUARE_BUCKET = "]";
-    private static final String INPUT_WIN = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS = "보너스 볼을 입력해주세요.";
     private static final String WIN_TITLE = "\n당첨 통계";
     private static final String WIN_CONTOUR = "---------";
     private static final String RANK_RESULT_FORMAT = "%d개 일치 (%d원) - %s개";
+    private static final String RETURN_HEADER = "총 수익률은 ";
+    private static final String RETURN_FOOTER = "%입니다.";
 
     static void start() {
-        System.out.println(START);
+        System.out.println(INPUT_PURCHASE_AMOUNT);
     }
 
     public static void lottoList(LottoGames lottoGames) {
@@ -33,11 +36,11 @@ public class OutputView {
     }
 
     static void win() {
-        System.out.println(INPUT_WIN);
+        System.out.println(INPUT_WINNING_NUMBERS);
     }
 
     static void bonus() {
-        System.out.println("보너스 볼을 입력해주세요.");
+        System.out.println(INPUT_BONUS);
     }
 
     public static void winList(LottoGames lottoGames, WinningLotto winningLotto) {
@@ -56,6 +59,6 @@ public class OutputView {
     }
 
     public static void rateOfReturn(PurchaseAmount purchaseAmount) {
-        System.out.println("총 수익률은 " + Math.round(LottoResult.getRateOfReturn(purchaseAmount)) + "%입니다.");
+        System.out.println(RETURN_HEADER + Math.round(LottoResult.getRateOfReturn(purchaseAmount)) + RETURN_FOOTER);
     }
 }

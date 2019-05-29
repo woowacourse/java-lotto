@@ -4,6 +4,7 @@ import lotto.exceptions.BonusNumberException;
 
 public class WinningLotto {
     private static final int COUNT_INITIALIZE = 0;
+    private static final String BONUS_NUMBER_EXCEPTION = "당첨 번호와 중복될 수 없습니다.";
 
     private final WinningNumbers winningNumbers;
     private final LottoNumber bonusNumber;
@@ -11,7 +12,7 @@ public class WinningLotto {
     public WinningLotto(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         if (winningNumbers.contains(bonusNumber)) {
-            throw new BonusNumberException("당첨 번호와 중복될 수 없습니다.");
+            throw new BonusNumberException(BONUS_NUMBER_EXCEPTION);
         }
         this.bonusNumber = bonusNumber;
     }
