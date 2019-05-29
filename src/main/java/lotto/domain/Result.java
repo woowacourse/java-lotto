@@ -10,7 +10,6 @@ public class Result {
 
     public Result(final Map<Prize, Integer> result) {
         this.result = result;
-
     }
 
     public double calculateRateOfReturn(final int buyPrice) {
