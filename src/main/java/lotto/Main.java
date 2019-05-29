@@ -14,7 +14,7 @@ public class Main {
         int numberOfLotto = money.getNumberOfLotto();
         Lottos lottos = new Lottos(numberOfLotto);
         OutputView.outputLotto(numberOfLotto, lottos);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.inputWinningLotto()));
+        WinningLotto winningLotto = createWinningLotto();
     }
 
     private static Money createMoney() {
@@ -24,6 +24,16 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createMoney();
+        }
+    }
+
+    private static WinningLotto createWinningLotto() {
+        try {
+            WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.inputWinningLotto()));
+            return winningLotto;
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            return createWinningLotto();
         }
     }
 }
