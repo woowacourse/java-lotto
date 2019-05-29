@@ -1,18 +1,22 @@
-package lotto.domain;
+package lotto.domain.lottogenerator;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoGenerator {
-    public static Lotto create() {
+public class RandomLottoGeneratingStrategy implements LottoGeneratingStrategy {
+
+    @Override
+    public List<LottoNumber> generate() {
         List<LottoNumber> allLottoNumbers = LottoNumber.getLottoNumbers();
         Collections.shuffle(allLottoNumbers);
 
         List<LottoNumber> lottoNumbers = createLottoNumbers(allLottoNumbers);
         Collections.sort(lottoNumbers);
-
-        return new Lotto(lottoNumbers);
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     private static List<LottoNumber> createLottoNumbers(List<LottoNumber> allLottoNumbers) {
