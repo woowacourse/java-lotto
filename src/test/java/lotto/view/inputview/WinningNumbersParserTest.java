@@ -54,5 +54,8 @@ class WinningNumbersParserTest {
 
     @Test
     void 중복된_번호() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            WinningNumbersParser.getWinningNumbers("1,2,3,4,5,5");
+        });
     }
 }

@@ -1,7 +1,9 @@
 package lotto.view.inputview;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningNumbersParser {
@@ -20,6 +22,11 @@ public class WinningNumbersParser {
 
         if(winningNumbers.size() != 6){
             throw new IllegalArgumentException("유효한 번호의 개수가 6개가 아닙니다.");
+        }
+
+        Set<Integer> copyWinningNumbers = new HashSet<>(winningNumbers);
+        if(winningNumbers.size() != copyWinningNumbers.size()){
+            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
         }
 
         return winningNumbers;
