@@ -40,4 +40,9 @@ public enum Reward {
     public int money() {
         return money;
     }
+
+    @Override
+    public String toString() {
+        return count + "개 일치 " + "(" + money + ")";
+    }
 }
