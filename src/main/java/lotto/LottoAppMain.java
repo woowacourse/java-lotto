@@ -12,6 +12,7 @@ public class LottoAppMain {
 		LottoFactory lottoFactory = new LottoFactory(money);
 		OutputView.printNumberOfLotto(money);
 		OutputView.printLotto(lottoFactory.generateLotto());
+		InputView.inputWinningLotto();
 	}
 
 	public static Money getMoneyForPurchaseOfLotto() {

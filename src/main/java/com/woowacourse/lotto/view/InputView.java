@@ -7,6 +7,13 @@ public class InputView {
 
 	public static int inputMoneyForPurchaseOfLotto() {
 		System.out.println(UserOutput.DEMAND_MONEY_FOR_PURCHASE_LOTTO.getUserOutputMessage());
-		return scanner.nextInt();
+		int money = scanner.nextInt();
+		scanner.nextLine();
+		return money;
+	}
+
+	public static String inputWinningLotto() {
+		System.out.println(UserOutput.DEMAND_WINNING_LOTTO.getUserOutputMessage());
+		return scanner.nextLine();
 	}
 }
