@@ -4,6 +4,7 @@ import lotto.model.LottoRank;
 import lotto.model.object.BonusBall;
 import lotto.model.object.Lotto;
 import lotto.model.object.LottoNumber;
+import lotto.model.object.WinningInfo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class WinStatsCreatorTest {
                 Lotto winningLotto = WinningLottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
 
                 BonusBall bonusBall = BonusBallCreator.create(10);
+
                 WinningInfo winningInfo = WinningInfoCreator.create(winningLotto, bonusBall);
 
                 assertThat(WinStatsCreator.create(purchasedLottos, winningInfo).getMappingStats().get(LottoRank.SECOND)).isEqualTo(1);
