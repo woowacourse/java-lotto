@@ -33,6 +33,12 @@ public class LottoTicket {
         return new LottoTicket(LottoNumbersGenerator.create(lottoNumbers));
     }
 
+    public int match(LottoTicket user) {
+        return (int) user.lottoNumbers.stream()
+                .filter(x -> this.lottoNumbers.contains(x))
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
