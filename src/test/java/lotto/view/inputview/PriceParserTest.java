@@ -46,6 +46,13 @@ class priceParserTest {
     }
 
     @Test
+    void 최소_1000원이상() {
+        assertThrows(IllegalArgumentException.class, () -> {
+           PriceParser.getLottoAmount("0");
+        });
+    }
+
+    @Test
     void 생성될_로또_개수() {
         assertThat(PriceParser.getLottoAmount("1000")).isEqualTo(1);
     }
