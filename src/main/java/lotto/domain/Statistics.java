@@ -1,0 +1,38 @@
+package lotto.domain;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Statistics {
+    private static final int LOTTO_PRICE = 1000;
+    private static final int DEFAULT_MONEY = 0;
+
+    private List<Rank> ranks;
+
+    public Statistics(List<Rank> ranks) {
+        this.ranks = ranks;
+    }
+
+    public Map<Rank, Long> ranksStatistics() {
+        Map<Rank, Long> rankResult = new HashMap<>();
+
+        for (Rank value : Rank.values()) {
+            rankResult.put(value, ranks.stream().filter(rank -> rank == value).count());
+        }
+
+        return rankResult;
+    }
+
+    public double returnOfRate() {
+        Map<Rank, Long> rankResult = ranksStatistics();
+        double totalMoney = rankResult.values().stream().mapToInt(Long::intValue).sum() * LOTTO_PRICE;
+        double returnMoney = DEFAULT_MONEY;
+
+        for (Rank rank : Rank.values()) {
+            returnMoney += rank.getReward() * rankResult.get(rank);
+        }
+
+        return returnMoney / totalMoney;
+    }
+}
