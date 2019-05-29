@@ -7,7 +7,7 @@ public enum WinnerType {
     private final int matchNumber;
     private final boolean bonus;
 
-    private WinnerType(int matchNumber, boolean bonus) {
+    WinnerType(int matchNumber, boolean bonus) {
         this.matchNumber = matchNumber;
         this.bonus = bonus;
     }

@@ -11,6 +11,7 @@ public class WinnersTest {
         Winners testWinners = new Winners();
         winners.addWinner(3);
         testWinners.addWinner(3);
-        assertThat(winners).isEqualTo(testWinners);
+        System.out.println(winners.toString() + "\n" + testWinners.toString());
+        assertThat(winners.toString()).isEqualTo(testWinners.toString());
     }
 }

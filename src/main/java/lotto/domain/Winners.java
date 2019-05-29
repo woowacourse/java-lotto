@@ -1,30 +1,30 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class Winners {
-    private static final int ZERO = 0;
-    private Map<WinnerType, Integer> winners;
+    public static final int ZERO = 0;
+    private Map<WinnerType, AbstractWinners> winners;
 
     public Winners() {
         this.winners = initWinners();
     }
 
-    private Map<WinnerType, Integer> initWinners() {
-        Map<WinnerType, Integer> winners = new HashMap<>();
-        winners.put(WinnerType.FIRST, ZERO);
-        winners.put(WinnerType.SECOND, ZERO);
-        winners.put(WinnerType.THIRD, ZERO);
-        winners.put(WinnerType.FOURTH, ZERO);
-        winners.put(WinnerType.FIFTH, ZERO);
+    private Map<WinnerType, AbstractWinners> initWinners() {
+        Map<WinnerType, AbstractWinners> winners = new LinkedHashMap<>();
+        winners.put(WinnerType.FIFTH, new FifthWinners());
+        winners.put(WinnerType.FOURTH, new FourthWinners());
+        winners.put(WinnerType.THIRD, new ThirdWinners());
+        winners.put(WinnerType.SECOND, new SecondWinners());
+        winners.put(WinnerType.FIRST, new FirstWinners());
         return winners;
     }
 
     public void addWinner(int matchNumber) {
-        WinnerType winner = WinnerType.valueOf(matchNumber);
-        winners.put(winner, winners.get(winner) + 1);
+        WinnerType winnerType = WinnerType.valueOf(matchNumber);
+        winners.get(winnerType).addWinner();
     }
 
     @Override
@@ -38,5 +38,16 @@ public class Winners {
     @Override
     public int hashCode() {
         return Objects.hash(winners);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("당첨 통계\n")
+                .append("---------\n");
+        for (AbstractWinners value : winners.values()) {
+            stringBuilder.append(value.toString());
+        }
+        return stringBuilder.toString();
     }
 }
