@@ -1,18 +1,25 @@
 package lotto.controller;
 
-import lotto.model.CustomLottoNumbers;
-import lotto.model.LottoStore;
-import lotto.model.LottoTickets;
-import lotto.model.PurchaseAmount;
+import lotto.model.customer.CustomLottoNumbers;
+import lotto.model.customer.PurchaseAmount;
+import lotto.model.lotto.LottoTickets;
+import lotto.model.lottostore.LottoStore;
+import lotto.model.winninglotto.WinningLotto;
+import lotto.model.winninglotto.WinningStatistics;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class MainController {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = InputView.inputPurchaseAmount();
-        CustomLottoNumbers customLottoNumbers = InputView.inputCustomLottoNumbers(InputView.inputPurchaseQuantity());
 
-        LottoTickets lottoTickets = LottoStore.makeLottoTickets(customLottoNumbers, purchaseAmount);
+        int manualPurchaseQuantity = InputView.inputManualPurchaseQuantity();
+        CustomLottoNumbers customLottoNumbers = InputView.inputCustomLottoNumbers(manualPurchaseQuantity);
 
-        System.out.println(lottoTickets);
+        LottoTickets lottoTickets = LottoStore.makeLottoTickets(purchaseAmount, customLottoNumbers);
+        OutputView.printLottoTickets(lottoTickets, manualPurchaseQuantity);
+
+        WinningLotto winningLotto = InputView.inputWinningLotto();
+        OutputView.printWinningStatistics(new WinningStatistics(lottoTickets, winningLotto));
     }
 }
