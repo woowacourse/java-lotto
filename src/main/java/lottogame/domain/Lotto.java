@@ -18,6 +18,10 @@ public class Lotto {
         return Rank.valueOf(numberOfMatch, bonusBallMatch);
     }
 
+    boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
