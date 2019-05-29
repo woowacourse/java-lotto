@@ -24,14 +24,12 @@ class LottoServiceTest {
 
         LottoService service = new LottoService(2000);
 
-        service.buyLotto(fifthNumbers);
+        service.buy(fifthNumbers);
         while (service.canBuy()) {
-            service.buyLotto(numbers6);
+            service.buy(numbers6);
         }
 
-        Lotto winner = Lotto.of(convertNumbersToLottoNumbers(winningNumbers));
-        WinningLotto winningLotto = WinningLotto.of(winner, LottoNumber.of(7));
-        LottoGameResult gameResult = service.result(winningLotto);
+        LottoGameResult gameResult = service.result(winningNumbers, LottoNumber.of(11));
         assertThat(gameResult.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(2.5);
     }
 }

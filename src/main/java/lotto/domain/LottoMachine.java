@@ -6,13 +6,14 @@ import java.util.stream.Collectors;
 public class LottoMachine {
     public static final int LOTTO_MONEY = 1000;
 
+    private RandomNumbersGenerator generator;
     private int remainMoney;
 
-    LottoMachine() {
-        this(0);
-    }
-
     LottoMachine(final int money) {
+        if (money < LOTTO_MONEY) {
+            throw new LottoCreateArgumentException("1000원 이상 구매하세요");
+        }
+        generator = RandomNumbersGenerator.of(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER, Lotto.LOTTO_SIZE);
         remainMoney = money;
     }
 
@@ -23,14 +24,6 @@ public class LottoMachine {
                 .collect(Collectors.toList());
 
         return Lotto.of(lottoNumbers);
-    }
-
-    void insertMoney(final int money) {
-        this.remainMoney += money;
-    }
-
-    double remainBuyCount() {
-        return (this.remainMoney / LOTTO_MONEY);
     }
 
     boolean isRemainMoney() {

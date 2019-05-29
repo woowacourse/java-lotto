@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.*;
 
 class Lotto {
-    private static final int LOTTO_SIZE = 6;
+    static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> numbers;
 

@@ -26,7 +26,7 @@ public class LottoGameResult {
         return new LottoGameResult(lottos, winningLotto);
     }
 
-    double profit(final int lottoCost) {
+    public double profit(final int lottoCost) {
         double numOfLotto = 0;
         double totalMoney = 0;
 

@@ -15,7 +15,7 @@ public class LottoMachineBuyTest {
 
     @BeforeEach
     public void setUp() {
-        machine = new LottoMachine(0);
+        machine = new LottoMachine(5500);
     }
 
     private List<LottoNumber> getLottoNumbers(final List<Integer> numbers) {
@@ -29,7 +29,6 @@ public class LottoMachineBuyTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
 
-        machine.insertMoney(5500);
         Lotto lotto = machine.buy(numbers);
         assertThat(lotto.equals(Lotto.of(lottoNumbers))).isTrue();
     }
@@ -39,7 +38,6 @@ public class LottoMachineBuyTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
 
-        machine.insertMoney(5500);
         Lotto lotto = machine.buy(numbers);
         assertThat(lotto.equals(Lotto.of(lottoNumbers))).isTrue();
     }
@@ -48,10 +46,9 @@ public class LottoMachineBuyTest {
     public void 남은_로또_횟수_확인() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        machine.insertMoney(5500);
         machine.buy(numbers);
         machine.buy(numbers);
         machine.buy(numbers);
-        assertThat(machine.remainBuyCount()).isEqualTo(2);
+        assertThat(machine.isRemainMoney()).isTrue();
     }
 }

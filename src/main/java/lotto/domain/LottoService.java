@@ -3,24 +3,32 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-class LottoService {
+public class LottoService {
+    private RandomNumbersGenerator generator;
     private LottoMachine lottoMachine;
     private final List<Lotto> lottos;
 
-    LottoService(final int money) {
+    public LottoService(final int money) {
+        generator = RandomNumbersGenerator.of(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER, Lotto.LOTTO_SIZE);
         lottoMachine = new LottoMachine(money);
         lottos = new ArrayList<>();
     }
 
-    void buyLotto(final List<Integer> numbers) {
+    public void buyRandom() {
+        final List<Integer> numbers = generator.generate();
         lottos.add(lottoMachine.buy(numbers));
     }
 
-    boolean canBuy() {
+    public void buy(final List<Integer> numbers) {
+        lottos.add(lottoMachine.buy(numbers));
+    }
+
+    public boolean canBuy() {
         return lottoMachine.isRemainMoney();
     }
 
-    LottoGameResult result(final WinningLotto winningLotto) {
+    public LottoGameResult result(final List<Integer> winningLottoNumbers, final LottoNumber bonusNum) {
+        WinningLotto winningLotto = WinningLotto.of(lottoMachine.buy(winningLottoNumbers), bonusNum);
         return LottoGameResult.of(lottos, winningLotto);
     }
 }
