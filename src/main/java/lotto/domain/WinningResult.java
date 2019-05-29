@@ -6,23 +6,23 @@ import java.util.Map;
 
 public class WinningResult {
     private static final Map<Rank, Integer> countIndexMapper = new HashMap<>();
-    private int[] rankCounter = new int[5];
-
     static {
-        countIndexMapper.put(Rank.FIRST, 4);
-//        countIndexMapper.put(Rank.SECOND, 3);
+        countIndexMapper.put(Rank.FIRST, 5);
+        countIndexMapper.put(Rank.SECOND, 4);
         countIndexMapper.put(Rank.THIRD, 3);
         countIndexMapper.put(Rank.FOURTH, 2);
         countIndexMapper.put(Rank.FIFTH, 1);
         countIndexMapper.put(Rank.MISS, 0);
     }
 
-    public WinningResult() {
+    private int[] rankCounter = new int[6];
+
+    WinningResult() {
         Arrays.fill(rankCounter, 0);
     }
 
-    public void count(Lotto targetLotto, Lotto winningLotto) {
-        rankCounter[countIndexMapper.get(Rank.valueOf(winningLotto.findCountOfMatchNo(targetLotto)))]++;
+    void count(Lotto targetLotto, WinningLotto winningLotto) {
+        rankCounter[countIndexMapper.get(Rank.valueOf(winningLotto.findCountOfMatchNo(targetLotto), winningLotto.checkBonusNoIn(targetLotto)))]++;
     }
 
     public int[] getRankCounter() {

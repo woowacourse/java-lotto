@@ -40,7 +40,7 @@ public class Lotto {
         }
     }
 
-    private boolean matchNo(LottoNo lotto) {
+    boolean matchNo(LottoNo lotto) {
         return lottoNo.contains(lotto);
     }
 

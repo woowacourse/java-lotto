@@ -24,10 +24,21 @@ public class InputView {
     public static List<Integer> inputWinningLotto() {
         try {
             System.out.println("당첨 번호를 입력해주세요.");
-            return Arrays.stream(sc.nextLine().split(SPLITTER)).map(Integer::parseInt).collect(Collectors.toList());
+            return Arrays.stream(sc.nextLine().replaceAll(" ", "").split(SPLITTER))
+                    .map(Integer::parseInt).collect(Collectors.toList());
         } catch (NumberFormatException nfe) {
             System.out.println("정수가 아닙니다. 다시 입력해주세요." + NEW_LINE);
             return inputWinningLotto();
+        }
+    }
+
+    public static int inputBonusNo() {
+        try {
+            System.out.println(NEW_LINE + "보너스 번호를 입력해주세요.");
+            return Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException nfe) {
+            System.out.println("정수가 아닙니다. 다시 입력해주세요." + NEW_LINE);
+            return inputBonusNo();
         }
     }
 }

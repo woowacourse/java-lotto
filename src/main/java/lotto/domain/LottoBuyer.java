@@ -30,7 +30,7 @@ public class LottoBuyer {
         return lottos.showLottos();
     }
 
-    public WinningResult checkWinningLotto(Lotto winningLotto) {
+    public WinningResult checkWinningLotto(WinningLotto winningLotto) {
         WinningResult result = new WinningResult();
         Iterator<Lotto> iter = lottos.iterator();
         while (iter.hasNext()) {

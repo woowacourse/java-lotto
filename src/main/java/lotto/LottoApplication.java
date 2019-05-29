@@ -17,7 +17,7 @@ public class LottoApplication {
         }
         OutputView.printContainingLottos(person);
 
-        Lotto winningLotto = makeWinningLotto();
+        WinningLotto winningLotto = makeWinningLotto();
 
         WinningResult winningResult = person.checkWinningLotto(winningLotto);
         OutputView.printResult(winningResult);
@@ -32,9 +32,10 @@ public class LottoApplication {
         }
     }
 
-    private static Lotto makeWinningLotto() {
+    private static WinningLotto makeWinningLotto() {
         try {
-            return Lotto.of(InputView.inputWinningLotto().stream().map(LottoNo::new).collect(Collectors.toList()));
+            Lotto winningLottoNo = Lotto.of(InputView.inputWinningLotto().stream().map(LottoNo::new).collect(Collectors.toList()));
+            return WinningLotto.of(winningLottoNo, new LottoNo(InputView.inputBonusNo()));
         } catch (Exception e) {
             OutputView.printErrorMsg(e);
             return makeWinningLotto();
