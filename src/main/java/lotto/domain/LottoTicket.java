@@ -4,8 +4,7 @@ import java.util.*;
 
 public class LottoTicket {
     public static final int PRICE = 1000;
-
-    private static final int LOTTO_NUMBERS = 6;
+    public static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -18,7 +17,7 @@ public class LottoTicket {
     }
 
     private void validateLotto() {
-        if (lottoNumbers.size() != LOTTO_NUMBERS) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 중복없는 6개 숫자만 가능합니다.");
         }
     }

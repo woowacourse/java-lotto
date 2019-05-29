@@ -11,19 +11,19 @@ import java.util.stream.IntStream;
 
 public class LottoTicketFactory {
     public static LottoTicket create() {
-        List<Integer> temp = getRandomNumbers();
+        List<Integer> randomNumbers = getRandomNumbers();
         List<Integer> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            lottoNumbers.add(temp.get(i));
+        for (int i = 0; i < LottoTicket.LOTTO_SIZE; i++) {
+            lottoNumbers.add(randomNumbers.get(i));
         }
         return new LottoTicket(lottoNumbers);
     }
 
     private static List<Integer> getRandomNumbers() {
-        List<Integer> temp = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
+        List<Integer> randomNumbers = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
-        Collections.shuffle(temp);
-        return temp;
+        Collections.shuffle(randomNumbers);
+        return randomNumbers;
     }
 }
