@@ -36,6 +36,13 @@ class priceParserTest {
 
     @Test
     void 판매_단위가_아닌경우() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            PriceParser.getLottoAmount("1001");
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            PriceParser.getLottoAmount("10010");
+        });
     }
 
     @Test
