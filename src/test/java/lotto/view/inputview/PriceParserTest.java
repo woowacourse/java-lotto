@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class priceParserTest {
+class PriceParserTest {
     @Test
     void 입력이_없을_경우() {
         assertThrows(NullPointerException.class, () -> {

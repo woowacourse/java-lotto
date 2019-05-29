@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PriceParser {
-
     private static final String ERROR_NULL_OR_NO_INPUT = "입력이 없습니다.";
     private static final String ERROR_MINIMUM_LIMIT_PRICE = "구매 금액은 1000원 이상입니다.";
     private static final String ERROR_PRICE_UNIT = "구매 금액은 1,000원 단위 입니다.";
