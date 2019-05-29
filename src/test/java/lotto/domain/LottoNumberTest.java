@@ -14,6 +14,5 @@ public class LottoNumberTest {
     @Test
     void 생성자_오류_범위를_벗어남() {
         assertThatThrownBy(() -> LottoNumber.getNumber(0)).isInstanceOf(NullPointerException.class);
-        // 김재윤 010 4633 5850
     }
 }

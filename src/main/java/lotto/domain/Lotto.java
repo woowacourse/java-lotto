@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int LOTTO_NUMBER_SIZE = 6;
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -24,5 +24,4 @@ public class Lotto {
                 .filter(lottoNumber -> lottoNumbers.contains(lottoNumber))
                 .count();
     }
-
 }
