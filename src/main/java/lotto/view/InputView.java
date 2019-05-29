@@ -17,10 +17,10 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static double generateInvalidUserPrice() {
+    public static long generateInvalidUserPrice() {
         try {
             System.out.println(INPUT_PRICE);
-            double price = Double.parseDouble(inputByUser());
+            long price = Long.parseLong(inputByUser());
             checkUserPrice(price);
             return price;
         } catch (Exception e) {
@@ -39,10 +39,10 @@ public class InputView {
         return SCANNER.nextLine().trim();
     }
 
-    public static double generateInvalidManualCount(double userPrice) {
+    public static long generateInvalidManualCount(double userPrice) {
         try {
             System.out.println(INPUT_MANUAL);
-            double manualCount = Double.parseDouble(inputByUser());
+            long manualCount = Long.parseLong(inputByUser());
             checkManualCount(manualCount, userPrice);
             return manualCount;
         } catch (Exception e) {
