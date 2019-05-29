@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoVendingMachine {
-    private AutoLottoGenerator autoLottoGenerator;
-
-    public LottoVendingMachine(){
-        autoLottoGenerator = new AutoLottoGenerator();
-    }
 
     public LottoPaper buyLotto(Money insertMoney, LottoPaper userLottoPaper) {
         List<Lotto> lottos = new ArrayList<>();
@@ -22,6 +17,6 @@ public class LottoVendingMachine {
     }
 
     private Lotto automaticLotto() {
-        return autoLottoGenerator.makeLotto();
+        return AutoLottoGenerator.makeLotto();
     }
 }
