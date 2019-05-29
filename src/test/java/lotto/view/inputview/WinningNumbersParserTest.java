@@ -39,11 +39,17 @@ class WinningNumbersParserTest {
 
     @Test
     void 유효한_범위_번호() {
+        assertThat(actual).isEqualTo(WinningNumbersParser.getWinningNumbers("0,1,2,3,4,5,6,46"));
     }
 
     @Test
     void 번호_개수() {
-
+        assertThrows(IllegalArgumentException.class, () -> {
+            WinningNumbersParser.getWinningNumbers("1,2,3,4,5");
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            WinningNumbersParser.getWinningNumbers("1,2,3,4,5,6,7");
+        });
     }
 
     @Test

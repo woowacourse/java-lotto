@@ -13,8 +13,15 @@ public class WinningNumbersParser {
             throw new NullPointerException(ERROR_NULL_OR_NO_INPUT);
         }
 
-        return Arrays.stream(input.trim().split(","))
+        List<Integer> winningNumbers = Arrays.stream(input.trim().split(","))
                 .map(Integer::parseInt)
+                .filter(number -> 1 <= number && number <= 45)
                 .collect(Collectors.toList());
+
+        if(winningNumbers.size() != 6){
+            throw new IllegalArgumentException("유효한 번호의 개수가 6개가 아닙니다.");
+        }
+
+        return winningNumbers;
     }
 }
