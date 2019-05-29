@@ -5,18 +5,25 @@ import java.util.*;
 import static lotto.domain.LottoRule.*;
 
 public class Lotto {
-    private Set<LottoNumber> lottoNumbers = new HashSet<>();
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE.get()) {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
         }
-
         for (Integer number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
+        checkDuplication();
+        Collections.sort(lottoNumbers);
+    }
 
-        if (lottoNumbers.size() != LOTTO_SIZE.get()) {
+    void checkDuplication() {
+        Set<Integer> checker = new HashSet<>();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            checker.add(lottoNumber.getNumber());
+        }
+        if (checker.size() != LOTTO_SIZE.get()) {
             throw new IllegalArgumentException("중복된 로또 번호가 존재합니다.");
         }
     }

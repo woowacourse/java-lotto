@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static lotto.domain.LottoRule.*;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
@@ -33,5 +33,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        return this.number - lottoNumber.number;
     }
 }
