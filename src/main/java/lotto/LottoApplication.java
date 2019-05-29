@@ -21,8 +21,8 @@ public class LottoApplication {
         long manualCount = InputView.generateInvalidManualCount(userPrice);
         long autoCount = calculateAutoLottoCount(userPrice, manualCount);
         OutputView.outputUserBuyLottoCount(manualCount, autoCount);
-        OutputView.titleInputAutoLotto();
         Lotteries manualLotteries = generateManualLotteries(manualCount);
+
         Lotteries autoLotteries = generateAutoLotteries(autoCount);
         OutputView.outputAutoLotteries(autoLotteries);
     }
@@ -33,6 +33,9 @@ public class LottoApplication {
 
     private static Lotteries generateManualLotteries(long manualCount) {
         Lotteries lotteries = new Lotteries();
+        if (manualCount != 0) {
+            OutputView.titleInputAutoLotto();
+        }
         for (int i = 0; i < manualCount; i++) {
             lotteries.add(InputView.generateInvalidLotto());
         }
