@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.model.Lotto;
-import lotto.model.LottoNumber;
 import lotto.model.Payment;
 
 import java.util.List;

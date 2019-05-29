@@ -31,4 +31,16 @@ public class Lotto {
                         throw new LottoNumberDuplicationException("로또 숫자가 중복되었습니다.");
                 }
         }
+
+        public int getMatchNumber(Lotto winnerLotto) {
+                return winnerLotto.compareLottoNumbers(this.lottoNumbers);
+        }
+
+        private int compareLottoNumbers(List<LottoNumber> lottoNumbers) {
+                int count = 0;
+                for(LottoNumber lottoNumber : lottoNumbers){
+                        count = this.lottoNumbers.contains(lottoNumber) ? count + 1 : count;
+                }
+                return count;
+        }
 }
