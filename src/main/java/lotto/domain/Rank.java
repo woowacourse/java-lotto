@@ -5,6 +5,7 @@ public enum Rank {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
     private static final String INVALID_RANGE = "는 유효하지 않은 값입니다.";
@@ -26,9 +27,13 @@ public enum Rank {
         return prize;
     }
 
-    public static Rank valueOf(int matchCount) {
+    public static Rank valueOf(int matchCount, boolean bonusMatch) {
         if (matchCount < WINNING_MIN_COUNT) {
             return MISS;
+        }
+
+        if (SECOND.matchCount(matchCount) && bonusMatch) {
+            return SECOND;
         }
 
         for (Rank rank : values()) {

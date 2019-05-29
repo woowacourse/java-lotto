@@ -11,6 +11,7 @@ public class LottoResult {
     static {
         lottoResult = new HashMap<>();
         lottoResult.put(FIRST, Counter.create());
+        lottoResult.put(SECOND, Counter.create());
         lottoResult.put(THIRD, Counter.create());
         lottoResult.put(FOURTH, Counter.create());
         lottoResult.put(FIFTH, Counter.create());

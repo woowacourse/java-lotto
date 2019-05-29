@@ -1,10 +1,11 @@
 package lotto;
 
-import lotto.domain.BonusNumber;
 import lotto.domain.GameCounts;
 import lotto.domain.LottoGames;
+import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
+import lotto.domain.WinningNumbers;
 import lotto.exceptions.IllegalFormatException;
 import lotto.exceptions.PurchaseAmountException;
 import lotto.view.InputView;
@@ -18,10 +19,23 @@ public class LottoApplication {
         GameCounts gameCounts = getGameCounts(purchaseAmount);
         LottoGames lottoGames = getLottoGames(gameCounts);
         OutputView.lottoList(lottoGames);
-        WinningLotto winningLotto = getWinLotto();
-        BonusNumber bonusNumber = getBonusNumber(winningLotto);
+        WinningNumbers winningNumber = getWinLotto();
+        WinningLotto winningLotto = getWinningLotto(winningNumber);
         OutputView.winList(lottoGames, winningLotto);
         OutputView.rateOfReturn(purchaseAmount);
+    }
+
+    private static WinningLotto getWinningLotto(WinningNumbers winningNumbers) {
+        try {
+            int number = Integer.parseInt(InputView.getBonusNumber());
+            return new WinningLotto(winningNumbers, LottoNumber.of(number));
+        } catch (NumberFormatException e) {
+            System.out.println("숫자 형식 오류");
+            return getWinningLotto(winningNumbers);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getWinningLotto(winningNumbers);
+        }
     }
 
     private static PurchaseAmount getPurchaseAmount() {
@@ -54,21 +68,12 @@ public class LottoApplication {
         }
     }
 
-    private static WinningLotto getWinLotto() {
+    private static WinningNumbers getWinLotto() {
         try {
-            return new WinningLotto(InputView.getWinnerLotto());
+            return new WinningNumbers(InputView.getWinnerLotto());
         } catch (IllegalFormatException e) {
             System.out.println(e.getMessage());
             return getWinLotto();
-        }
-    }
-
-    private static BonusNumber getBonusNumber(WinningLotto winningLotto) {
-        try {
-            return BonusNumber.of(InputView.getBonusNumber(), winningLotto);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return getBonusNumber(winningLotto);
         }
     }
 }

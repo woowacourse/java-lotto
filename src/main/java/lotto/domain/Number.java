@@ -20,7 +20,11 @@ public class Number implements Comparable<Number> {
         }
     }
 
-    public String getNumber() {
+    public LottoNumber toLottoNumber() {
+        return LottoNumber.of(this.number);
+    }
+
+    public String getBonusNumber() {
         return String.valueOf(number);
     }
 
@@ -33,12 +37,17 @@ public class Number implements Comparable<Number> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Number that = (Number) o;
-        return number == that.number;
+        Number number1 = (Number) o;
+        return number == number1.number;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }
