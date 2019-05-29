@@ -8,12 +8,12 @@ public class LottoNo {
 
     private int no;
 
-    public LottoNo(int no) throws InvalidNumberException {
+    public LottoNo(int no) {
         validateRange(no);
         this.no = no;
     }
 
-    private void validateRange(int no) throws InvalidNumberException {
+    private void validateRange(int no) {
         if (no < MIN_NO || no > MAX_NO) {
             throw new InvalidNumberException("잘못된 범위의 번호입니다.");
         }
