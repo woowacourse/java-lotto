@@ -13,4 +13,8 @@ public class Price {
 
         this.price = price;
     }
+
+    public int getSize(){
+        return this.price / PRICE_OFFSET;
+    }
 }

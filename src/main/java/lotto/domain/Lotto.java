@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -8,4 +10,12 @@ public class Lotto {
     public Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
+
+
 }
