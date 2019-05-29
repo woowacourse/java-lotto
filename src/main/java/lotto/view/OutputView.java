@@ -1,0 +1,14 @@
+package lotto.view;
+
+import lotto.domain.UserLottos;
+
+public class OutputView {
+
+    public static void printLottos(UserLottos userLottos) {
+        System.out.println(userLottos.toString());
+    }
+
+    public static void printResult(UserLottos userLottos) {
+        System.out.println(userLottos.money());
+    }
+}
