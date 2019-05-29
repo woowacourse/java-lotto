@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +15,7 @@ public class Statistics {
     }
 
     public Map<Rank, Long> ranksStatistics() {
-        Map<Rank, Long> rankResult = new HashMap<>();
+        Map<Rank, Long> rankResult = new LinkedHashMap<>();
 
         for (Rank value : Rank.values()) {
             rankResult.put(value, ranks.stream().filter(rank -> rank == value).count());

@@ -16,6 +16,7 @@ public class LottoPaper {
     public List<Rank> matchLotto(WinningLotto winningLotto) {
         List<Rank> result = new ArrayList<>();
         lottos.forEach(lotto -> result.add(winningLotto.match(lotto)));
+
         return result;
     }
 
