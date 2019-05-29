@@ -37,7 +37,7 @@ public class LottoResult {
         }
     }
 
-    public Integer getCountOfRank(Rank rank){
+    public Integer getCountOfRank(Rank rank) {
         return rankResult.get(rank);
     }
 

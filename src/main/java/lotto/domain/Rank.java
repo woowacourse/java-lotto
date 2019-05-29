@@ -27,7 +27,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
-        if(countOfMatch < WINNING_MIN_COUNT) {
+        if (countOfMatch < WINNING_MIN_COUNT) {
             return MISS;
         }
 
