@@ -12,20 +12,22 @@ public class Lotto {
     public static final int COUNT_OF_NO = 6;
 
     private List<LottoNo> lottoNo;
+    private LottoType lottoType;
 
-    public static Lotto of(List<LottoNo> lottoNo) {
-        lottoNo.sort(LottoNo::compareTo);
-        return new Lotto(lottoNo);
-    }
-
-    static Lotto of() {
-        return new Lotto(LottoNoGenerator.generate());
-    }
-
-    private Lotto(List<LottoNo> lottoNo) {
+    private Lotto(List<LottoNo> lottoNo, LottoType lottoType) {
         validateCountOfNo(lottoNo);
         validateDuplicatedNo(lottoNo);
         this.lottoNo = Collections.unmodifiableList(lottoNo);
+        this.lottoType = lottoType;
+    }
+
+    public static Lotto of(List<LottoNo> lottoNo) {
+        lottoNo.sort(LottoNo::compareTo);
+        return new Lotto(lottoNo, LottoType.MANUAL);
+    }
+
+    static Lotto of() {
+        return new Lotto(LottoNoGenerator.generate(), LottoType.AUTOMATIC);
     }
 
     private void validateDuplicatedNo(List<LottoNo> lottoNo) {
@@ -46,6 +48,10 @@ public class Lotto {
 
     int findCountOfMatchNo(Lotto lotto) {
         return lottoNo.stream().filter(lotto::matchNo).collect(Collectors.toList()).size();
+    }
+
+    boolean matchType(LottoType type) {
+        return type.equals(lottoType);
     }
 
     @Override

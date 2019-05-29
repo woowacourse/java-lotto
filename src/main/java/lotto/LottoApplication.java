@@ -4,22 +4,23 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        LottoBuyer person = makePerson();
+        LottoBuyer buyer = makePerson();
         try {
-            person.buyLotto();
+            buyer.buyLotto(makeLottoManually(buyer));
         } catch (Exception e) {
             OutputView.printErrorMsg(e);
             System.exit(0);
         }
-        OutputView.printContainingLottos(person);
+        OutputView.printContainingLottos(buyer);
 
         WinningLotto winningLotto = makeWinningLotto();
 
-        WinningResult winningResult = person.checkWinningLotto(winningLotto);
+        WinningResult winningResult = buyer.checkWinningLotto(winningLotto);
         OutputView.printResult(winningResult);
     }
 
@@ -29,6 +30,24 @@ public class LottoApplication {
         } catch (Exception e) {
             OutputView.printErrorMsg(e);
             return makePerson();
+        }
+    }
+
+    private static List<Lotto> makeLottoManually(LottoBuyer buyer) {
+        try {
+            int countOfManualLotto = InputView.inputCountOfManualLotto();
+            validatePositive(countOfManualLotto);
+            buyer.validateAffordability(countOfManualLotto);
+            return InputView.inputManualLottos(countOfManualLotto);
+        } catch (Exception e) {
+            OutputView.printErrorMsg(e);
+            return makeLottoManually(buyer);
+        }
+    }
+
+    private static void validatePositive(int countOfManualLotto) {
+        if (countOfManualLotto < 0) {
+            throw new InvalidNumberException("음수를 입력할 수 없습니다.");
         }
     }
 

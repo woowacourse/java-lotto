@@ -1,8 +1,10 @@
 package lotto.view;
 
 import lotto.domain.LottoBuyer;
+import lotto.domain.LottoType;
 import lotto.domain.WinningResult;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public class OutputView {
@@ -12,9 +14,10 @@ public class OutputView {
         System.out.println(e.getMessage() + NEW_LINE);
     }
 
-    public static void printContainingLottos(LottoBuyer person) {
-        List<String> lottos = person.showLottos();
-        System.out.println(NEW_LINE + lottos.size() + "개를 구매하셨습니다.");
+    public static void printContainingLottos(LottoBuyer buyer) {
+        List<String> lottos = buyer.showLottos();
+        System.out.println(NEW_LINE + "수동으로 " + buyer.getCountOfLottoMatch(LottoType.MANUAL) + "개, "
+                + "자동으로 " + buyer.getCountOfLottoMatch(LottoType.AUTOMATIC) + "개를 구매하셨습니다.");
         for (String lotto : lottos) {
             System.out.println(lotto);
         }
@@ -30,7 +33,8 @@ public class OutputView {
         System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + rankCount[4] + "개");
         System.out.println("6개 일치 (2000000000원) - " + rankCount[5] + "개");
         System.out.println("총 수익률은 "
-                + ((long) winningResult.getWinningMoney() * 100 / winningResult.getSpendMoney())
+                + BigInteger.valueOf(winningResult.getWinningMoney()).multiply(BigInteger.valueOf(100))
+                .divide(BigInteger.valueOf(winningResult.getSpendMoney()))
                 + "% 입니다.");
     }
 }

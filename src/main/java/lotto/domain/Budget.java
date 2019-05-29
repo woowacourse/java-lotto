@@ -18,7 +18,15 @@ public class Budget {
         return budget >= LottoSeller.LOTTO_PRICE;
     }
 
+    boolean canBuyLotto(int countOfManualLotto) {
+        return budget >= LottoSeller.LOTTO_PRICE * countOfManualLotto;
+    }
+
     void pay() {
         budget -= LottoSeller.LOTTO_PRICE;
+    }
+
+    void pay(int countOfManualLotto) {
+        budget -= LottoSeller.LOTTO_PRICE * countOfManualLotto;
     }
 }
