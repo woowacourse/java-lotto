@@ -2,7 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.exceptions.InvalidPurchaseAmountException;
+import lotto.exceptions.PurchaseAmountException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,7 +15,7 @@ class GameCountsTest {
 
     @Test
     void game_counts_constructor_argument_must_be_divisible_by_1000() {
-        assertThrows(InvalidPurchaseAmountException.class, () -> {
+        assertThrows(PurchaseAmountException.class, () -> {
             new GameCounts(PurchaseAmount.of("1002"));
         });
     }
