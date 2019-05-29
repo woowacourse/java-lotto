@@ -8,17 +8,17 @@ public class LottoNumbers {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
-    public static final Map<Integer, LottoNumber> allLottoNumbers = new HashMap<>();
+    public static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     static {
         for (int i = 1; i <= 45; i++) {
-            allLottoNumbers.put(i, new LottoNumber(i));
+            lottoNumbers.put(i, new LottoNumber(i));
         }
     }
 
     public static LottoNumber of(int lottoNumber) {
         checkLottoNumberRange(lottoNumber);
-        return allLottoNumbers.get(lottoNumber);
+        return lottoNumbers.get(lottoNumber);
     }
 
     private static void checkLottoNumberRange(int lottoNumber) {
