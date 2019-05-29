@@ -2,10 +2,7 @@ package lotto;
 
 import java.util.List;
 
-import lotto.domain.AutoLottoCreator;
-import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,7 +12,12 @@ public class CUILottoApp {
         List<Lotto> lottos = LottoFactory.createLottos(money.getLottoSize(), new AutoLottoCreator());
         OutputView.printLottos(lottos);
 
-        Lotto winnerLotto = InputView.createWinnerLotto();
+        WinningLotto winningLotto = InputView.createWinningLotto();
+        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
+
+        for (WinnerType value : WinnerType.values()) {
+            System.out.println(lottoResult.getWinnerTypeValue(value));
+        }
 
     }
 }
