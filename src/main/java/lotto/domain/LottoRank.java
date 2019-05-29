@@ -28,4 +28,8 @@ public enum LottoRank {
                 .findAny()
                 .get();
     }
+
+    public int getReward() {
+        return reward;
+    }
 }

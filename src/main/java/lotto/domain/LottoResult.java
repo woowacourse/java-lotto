@@ -22,4 +22,14 @@ public class LottoResult {
     int countOfRank(LottoRank lottoRank) {
         return rankStatistic.get(lottoRank);
     }
+
+    double earningRate() {
+        double expense =  LottoTicket.PRICE * rankStatistic.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        double rewards = rankStatistic.keySet().stream()
+                .mapToInt(x -> x.getReward() * rankStatistic.get(x))
+                .sum();
+        return rewards / expense * 100;
+    }
 }
