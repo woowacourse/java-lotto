@@ -34,13 +34,12 @@ public class PriceParser {
     private static String getCheckedPatternInput(String input) {
         Pattern pattern = Pattern.compile(PATTERN_ALLOWED_LAST_CHARACTER);
         Matcher matcher = pattern.matcher(input);
-        String checkedInput = input;
 
         if (matcher.find()) {
-            checkedInput = matcher.group(REMOVED_INPUT_LAST_CHARACTER);
+            return matcher.group(REMOVED_INPUT_LAST_CHARACTER);
         }
 
-        return checkedInput;
+        return input;
     }
 
     private static int toInts(String input) {
