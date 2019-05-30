@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WinningNumbersParser extends AbstractParser{
+public class WinningNumbersParser {
+    private static final String ERROR_NULL_OR_NO_INPUT = "입력이 없습니다.";
     private static final String ERROR_INVALID_NUMBERS_COUNT = "유효한 번호의 개수가 6개가 아닙니다.";
     private static final String ERROR_HAS_DUPLICATED_NUMBER = "중복된 번호가 존재합니다.";
     private static final int LIMIT_MINIMUM_NUMBER = 1;
@@ -26,6 +27,12 @@ public class WinningNumbersParser extends AbstractParser{
         checkNullEmpty(inputNumbers);
 
         return getSeparatedNumbers(inputNumbers);
+    }
+
+    private static void checkNullEmpty(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new NullPointerException(ERROR_NULL_OR_NO_INPUT);
+        }
     }
 
     private static List<Integer> getSeparatedNumbers(String input) {

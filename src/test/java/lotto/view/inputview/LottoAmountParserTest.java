@@ -1,11 +1,12 @@
 package lotto.view.inputview;
 
+import lotto.domain.LottoAmount;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class PriceParserTest {
+class LottoAmountParserTest {
     @Test
     void 입력이_없을_경우() {
         assertThrows(NullPointerException.class, () -> {
@@ -54,12 +55,12 @@ class PriceParserTest {
 
     @Test
     void 생성될_로또_개수() {
-        assertThat(PriceParser.getLottoAmount("1000")).isEqualTo(1);
+        assertThat(PriceParser.getLottoAmount("1000").isEqualsAmount(1)).isTrue();
     }
 
     @Test
     void 금액_마지막_원_허용() {
-        int answer = PriceParser.getLottoAmount("1000");
+        LottoAmount answer = PriceParser.getLottoAmount("1000");
         assertThat(answer).isEqualTo(PriceParser.getLottoAmount("1000원"));
     }
 }
