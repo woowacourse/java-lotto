@@ -6,23 +6,11 @@ public class PurchaseAmount {
     public static final int LOTTO_PRICE = 1000;
 
     private final int price;
-    private final int manualCount;
 
-    private PurchaseAmount(int price, int manualCount) {
+    private PurchaseAmount(int price) {
         checkMinimumAmount(price);
         checkChange(price);
-        checkManualPrice(price, manualCount);
         this.price = price;
-        this.manualCount = manualCount;
-    }
-
-    private void checkManualPrice(int price, int manualCount) {
-        if (price < manualCount * LOTTO_PRICE) {
-            throw new IllegalArgumentException("금액 이상의 수량을 입력하였습니다.");
-        }
-        if (manualCount < 0) {
-            throw new IllegalArgumentException("수량은 음수일 수 없습니다.");
-        }
     }
 
     private void checkMinimumAmount(int price) {
@@ -37,16 +25,12 @@ public class PurchaseAmount {
         }
     }
 
-    public static PurchaseAmount of(int price, int manualCount) {
-        return new PurchaseAmount(price, manualCount);
+    public static PurchaseAmount of(int price) {
+        return new PurchaseAmount(price);
     }
 
-    public int purchaseAutoCount() {
-        return (price - manualCount) / LOTTO_PRICE;
-    }
-
-    public int purchaseManualCount() {
-        return manualCount;
+     public int purchaseTotalQuantity() {
+        return price / LOTTO_PRICE;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package lotto.view.input;
 
+import lotto.domain.PurchaseCount;
 import lotto.utils.InputUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,6 +37,16 @@ public class InputView {
         } catch (NumberFormatException e) {
             System.out.println("숫자를 입력해주세요.");
             return inputBonusNum();
+        }
+    }
+
+    public static int inputManualCount() {
+        try {
+            System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+            return InputCheck.parseInteger(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해주세요.");
+            return inputManualCount();
         }
     }
 }
