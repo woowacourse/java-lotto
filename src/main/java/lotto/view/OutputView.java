@@ -36,7 +36,7 @@ public class OutputView {
         System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + rankCount[4] + "개");
         System.out.println("6개 일치 (2000000000원) - " + rankCount[5] + "개");
         System.out.println("총 수익률은 "
-                + BigInteger.valueOf(winningResult.getWinningMoney()).multiply(BigInteger.valueOf(100))
+                + winningResult.getWinningMoney().multiply(BigInteger.valueOf(100))
                 .divide(BigInteger.valueOf(winningResult.getSpendMoney()))
                 + "% 입니다.");
     }

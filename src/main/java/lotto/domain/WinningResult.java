@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class WinningResult {
     private static final Map<Rank, Integer> countIndexMapper = new HashMap<>();
+
     static {
         countIndexMapper.put(Rank.FIRST, 5);
         countIndexMapper.put(Rank.SECOND, 4);
@@ -33,10 +35,11 @@ public class WinningResult {
         return Arrays.stream(rankCounter).sum() * LottoSeller.LOTTO_PRICE;
     }
 
-    public int getWinningMoney() {
-        int winningMoney = 0;
+    public BigInteger getWinningMoney() {
+        BigInteger winningMoney = BigInteger.valueOf(0);
         for (Rank rank : countIndexMapper.keySet()) {
-            winningMoney += (rank.getWinningMoney() * rankCounter[countIndexMapper.get(rank)]);
+            winningMoney = winningMoney.add(BigInteger.valueOf(rank.getWinningMoney())
+                    .multiply(BigInteger.valueOf(rankCounter[countIndexMapper.get(rank)])));
         }
         return winningMoney;
     }
