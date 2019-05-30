@@ -30,7 +30,7 @@ public class OutputView {
 	}
 
 	public static void printCountOfPurchasedLotto(int countOfAllLotto, int countOfManualLotto) {
-		System.out.printf(UserOutput.PRINT_COUNT_OF_PURCHASED_LOTTO.getUserOutputMessage(), countOfAllLotto - countOfManualLotto, countOfManualLotto);
+		System.out.printf(UserOutput.PRINT_COUNT_OF_PURCHASED_LOTTO.getUserOutputMessage(), countOfManualLotto, countOfAllLotto - countOfManualLotto);
 	}
 
 	public static void printExceptionMessage(String exceptionMessage) {
