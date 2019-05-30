@@ -5,10 +5,10 @@ import java.util.Objects;
 
 public class ManualLotto {
 
-    private final List<Integer> lottoNumbers;
+    private final LottoTicket lottoTicket;
 
     public ManualLotto(List<Integer> inputNumbers) {
-        this.lottoNumbers = inputNumbers;
+        this.lottoTicket = WinningLotto.addManualLottoNumbers(inputNumbers);
     }
 
     @Override
@@ -16,11 +16,11 @@ public class ManualLotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ManualLotto that = (ManualLotto) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
+        return Objects.equals(lottoTicket, that.lottoTicket);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lottoTicket);
     }
 }

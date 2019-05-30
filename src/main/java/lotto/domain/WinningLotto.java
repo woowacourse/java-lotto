@@ -1,22 +1,30 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class WinningLotto {
-    private final List<Integer> winningNumbers;
+    private static final int SUM_OF_USER_WINNING = 12;
+    private final LottoTicket winningLotto;
 
     public WinningLotto(List<Integer> winningNumbers) {
         if (winningNumbers.size() != AutoLotto.MAX_LOTTO_SIZE) {
             throw new IllegalArgumentException("당첨 번호의 개수는 6개 입니다.");
         }
-        this.winningNumbers = winningNumbers;
+        this.winningLotto = addManualLottoNumbers(winningNumbers);
     }
 
-    public int matchNumbersOfLotto(List<Integer> userNumbers) {
-        Set<Integer> checkLottoNumbers = new HashSet<>(winningNumbers);
+    public static LottoTicket addManualLottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Collections.sort(numbers);
+        for (Integer number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public int matchNumbersOfLotto(List<LottoNumber> userNumbers) {
+        Set<LottoNumber> checkLottoNumbers = new HashSet<>(winningLotto.getLottoNumbers());
         checkLottoNumbers.addAll(userNumbers);
-        return winningNumbers.size() + userNumbers.size() - checkLottoNumbers.size();
+        return SUM_OF_USER_WINNING - checkLottoNumbers.size();
     }
 }

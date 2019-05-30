@@ -5,7 +5,6 @@
 * [예외] 로또 번호가 중복은 없는지 체크하기
 * [예외] 당첨 조건에 해당하지 않을 경우 체크하기
 
-
 ### Done
 * Lotto 자동 생성하기
 * Money 구매 가능한 로또 개수 판별하기
@@ -18,3 +17,8 @@
 * 자동 로또, 수동 로또 분리하기
 * LottoNumber 생성하기
 * [예외] 로또 번호가 1부터 45까지 범위에 적합한지 체크하기
+* LottoTicket 생성
+* AutoLotto LottTicket 적용
+* WinningLotto LottTicket 적용
+* ManualLotto LottTicket 적용
+

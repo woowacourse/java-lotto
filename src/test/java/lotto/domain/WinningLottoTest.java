@@ -1,23 +1,35 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class WinningLottoTest {
+    List<LottoNumber> lottoNumbers;
+
+    @BeforeEach
+    void setUp() {
+        lottoNumbers = Arrays.asList(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9),
+                new LottoNumber(10), new LottoNumber(11), new LottoNumber(12));
+    }
+
     @Test
-    void 일치하는_번호_개수가_4개인_경우_테스트() {
+    void 일치하는_번호_개수가_2개인_경우_테스트() {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(winningLotto.matchNumbersOfLotto(Arrays.asList(1, 2, 3, 4, 10, 11))).isEqualTo(4);
+        lottoNumbers.set(0, new LottoNumber(1));
+        lottoNumbers.set(1, new LottoNumber(2));
+        assertThat(winningLotto.matchNumbersOfLotto(lottoNumbers)).isEqualTo(2);
     }
 
     @Test
     void 일치하는_번호_개수가_0개인_경우_테스트() {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(winningLotto.matchNumbersOfLotto(Arrays.asList(7, 8, 9, 10, 11, 12))).isEqualTo(0);
+        assertThat(winningLotto.matchNumbersOfLotto(lottoNumbers)).isEqualTo(0);
     }
 
     @Test
