@@ -3,6 +3,7 @@ package com.woowacourse.lotto.domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.woowacourse.lotto.exception.InvalidNumberException;
@@ -11,29 +12,31 @@ import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 
 public class WinningLotto {
-	private List<Integer> numbers;
+	private static final String REGEX_OF_NUMBER = "[1-3][0-9]|4[0-5]";
+	private static final Pattern PATTERN_OF_LOTTO_NUMBER = Pattern.compile(REGEX_OF_NUMBER);
+	private Lotto numbers;
 
 	public WinningLotto(List<String> numbers) {
-		this.numbers = numbers.stream().map(Integer::new).collect(Collectors.toList());
-		validateDuplicateNumber();
-		validateSize();
-		validateNumber();
+		this.numbers = new Lotto(numbers.stream().map(Integer::new).collect(Collectors.toList()));
+		validateDuplicateNumber(numbers);
+		validateSize(numbers);
+		validateNumber(numbers);
 	}
 
-	private void validateDuplicateNumber() {
+	private void validateDuplicateNumber(List<String> numbers) {
 		if (numbers.size() != new HashSet<>(numbers).size()) {
 			throw new InvalidNumberException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
 		}
 	}
 
-	private void validateSize() {
+	private void validateSize(List<String> numbers) {
 		if (numbers.size() != NUMBER_OF_LOTTO) {
 			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
 	}
 
-	private void validateNumber() {
-		if (numbers.stream().anyMatch(number -> number < MIN_NUMBER_OF_LOTTO || number > MAX_NUMBER_OF_LOTTO)) {
+	private void validateNumber(List<String> numbers) {
+		if (numbers.stream().anyMatch(number -> PATTERN_OF_LOTTO_NUMBER.matcher(number).matches())) {
 			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
 	}
