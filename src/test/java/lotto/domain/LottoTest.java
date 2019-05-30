@@ -11,10 +11,10 @@ public class LottoTest {
     void 로또번호_6자리_체크() {
         assertThrows(IllegalArgumentException.class, () -> {
             new Lotto(Arrays.asList(
-                    new Number(1),
-                    new Number(2),
-                    new Number(3),
-                    new Number(4)
+                    Number.valueOf(1),
+                    Number.valueOf(2),
+                    Number.valueOf(3),
+                    Number.valueOf(4)
             ));
         });
     }

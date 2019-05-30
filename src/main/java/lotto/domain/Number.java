@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Number implements Comparable<Number> {
@@ -23,13 +22,14 @@ public class Number implements Comparable<Number> {
         this.num = num;
     }
 
-    private void validate(final int num) {
+    private static void validate(final int num) {
         if (num < MIN_NUMBER || num > MAX_NUMBER) {
             throw new IllegalArgumentException("유효한 번호가 아닙니다.");
         }
     }
 
     public static Number valueOf(int num){
+        validate(num);
         return NUMBER_LIST.get(num);
     }
 

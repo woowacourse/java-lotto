@@ -6,10 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class NumberTest {
     @Test
-    void Number_생성_테스트() {
+    void Number_생성_테스트_MIN() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Number(-1);
-            new Number(46);
+            Number.valueOf(-1);
+        });
+    }
+
+    @Test
+    void Number_생성_테스트_MAX() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Number.valueOf(46);
         });
     }
 }
