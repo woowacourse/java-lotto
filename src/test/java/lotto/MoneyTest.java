@@ -3,6 +3,7 @@ package lotto;
 import lotto.exception.InvalidPaymentException;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -35,5 +36,11 @@ public class MoneyTest {
     @Test
     void 십만원_초과의_값을_입력받은_경우_예외_발생() {
         assertThrows(InvalidPaymentException.class, () -> new Money("100001"));
+    }
+
+    @Test
+    void 구매_가능한_로또_개수_반환() {
+        Money money = new Money("4999");
+        assertThat(money.getBuyableLottoNumber()).isEqualTo(4);
     }
 }

@@ -4,6 +4,9 @@ import lotto.exception.InvalidPaymentException;
 import org.apache.commons.lang3.StringUtils;
 
 public class Money {
+    private static final int ONE_LOTTO_PRICE = 1000;
+    private static final int MAX_BUYABLE_LOTTO_PRICE = 100000;
+
     private final int money;
 
     public Money(String input) {
@@ -28,11 +31,15 @@ public class Money {
     }
 
     private void checkBuyableMoney(int money) {
-        if (money < 1000) {
+        if (money < ONE_LOTTO_PRICE) {
             throw new InvalidPaymentException("1개 이상의 로또 구입을 위해서는 1000원 이상 필요합니다.");
         }
-        if (money > 100000) {
+        if (money > MAX_BUYABLE_LOTTO_PRICE) {
             throw new InvalidPaymentException("1인당 최대 10만원까지 구입 가능합니다.");
         }
+    }
+
+    public int getBuyableLottoNumber() {
+        return money / ONE_LOTTO_PRICE;
     }
 }
