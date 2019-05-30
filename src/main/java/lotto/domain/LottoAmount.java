@@ -73,4 +73,8 @@ public class LottoAmount {
     public int hashCode() {
         return Objects.hash(lottoAmount);
     }
+
+    public Integer getLottoAmount() {
+        return lottoAmount;
+    }
 }
