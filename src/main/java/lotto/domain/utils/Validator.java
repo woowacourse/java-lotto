@@ -1,7 +1,9 @@
 package lotto.domain.utils;
 
+import lotto.domain.model.Lotto;
 import lotto.domain.model.Money;
 import lotto.domain.model.Number;
+import lotto.domain.model.NumberSet;
 
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +14,7 @@ public class Validator {
     private static final String MONEY_EXCHANGE_EXCEPTION_MESSAGE = "1,000원 단위로 입력해주세요.";
     private static final String DUPLICATION_EXCEPTION_MESSAGE = "중복된 번호가 존재합니다.";
     private static final String AVAILABLE_PURCHASE_SIZE_EXCEPTION_MESSAGE = "구입 가능 매수를 초과하였습니다.";
+    private static final String DUPLICATED_NUMBER_EXCEPTION_MESSAGE = "지난 주 당첨번호와 중복되지 않는 번호를 입력해주세요.";
     private static final int MAX_PURCHASE_PRICE = 100000;
     private static final int MIN_PURCHASE_PRICE = 1000;
     private static final int LOTTO_PRICE = 1000;
@@ -44,6 +47,12 @@ public class Validator {
         Set<Number> lottoSetforCheckingDuplication = new HashSet<>(lottoNumber);
         if (lottoSetforCheckingDuplication.size() != MAX_LOTTO_SIZE) {
             throw new IllegalArgumentException(DUPLICATION_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public static void checkBonusNumberDuplication(Lotto winningLotto, int bonusNumber) {
+        if (winningLotto.isContained(NumberSet.of(bonusNumber))) {
+            throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 }
