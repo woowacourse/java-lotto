@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
@@ -25,6 +22,7 @@ public class LottoNumber {
         this.number = number;
     }
 
+    // TODO depth check
     public static LottoNumber get(int number) {
         for (LottoNumber lottoNumber : numbers) {
             if (lottoNumber.number == number) {
@@ -34,9 +32,9 @@ public class LottoNumber {
         throw new IllegalArgumentException("로또 번호는 1부터 45사이입니다.");
     }
 
-    static List<LottoNumber> getShuffledNumber() {
+    static Set<LottoNumber> getShuffledNumber() {
         Collections.shuffle(numbers);
-        return numbers.subList(FIRST_INDEX_AFTER_SHUFFLED, LAST_INDEX_AFTER_SHUFFLED);
+        return new HashSet<>(numbers.subList(FIRST_INDEX_AFTER_SHUFFLED, LAST_INDEX_AFTER_SHUFFLED));
     }
 
     @Override
@@ -50,5 +48,11 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    // TODO String 형변환
+    @Override
+    public String toString() {
+        return number+"";
     }
 }

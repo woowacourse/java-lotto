@@ -4,7 +4,8 @@ public enum LottoRank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
-    FOURTH(3, 5_000);
+    FOURTH(3, 5_000),
+    MISS(0, 0);
 
     private int countOfMatch;
     private int winningAmount;
@@ -22,7 +23,12 @@ public enum LottoRank {
         return winningAmount;
     }
 
+    // TODO depth check
     public static LottoRank valueOf(int countOfMatch) {
+        if(countOfMatch < 3) {
+            return MISS;
+        }
+
         for (LottoRank rank : LottoRank.values()) {
             if (rank.countOfMatch == countOfMatch) {
                 return rank;
