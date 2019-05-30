@@ -7,25 +7,20 @@
         > Lottos의 역할
         * 구매 가능한 개수만큼 로또 객체 생성 & List에 저장
         
-        > NumberGenerator의 역할
-        * 1~45 사이의 숫자를 랜덤하게 생성
+        > LottoNumbers의 역할
+        * 가능한 LottoNumber 객체를 모두 가짐
+        * LottoNumber를 shuffle 하여 랜덤하게 6개 LottoNumber List 반환
         
-        > LottoNumber의 역할
-        * 값이 숫자가 아니면 예외 반환
-        * 값이 1~45 사이의 숫자가 아니면 예외 반환
-        
-        > LottoGame의 역할
-        * 중복없는 6개의 LottoNumber 생성
-        
-        > Lotto의 역할
-        * 입력받은 값 중 숫자가 아닌 값이 있으면 예외 반환
-        * 입력받은 값 중 중복이 있으면 예외 반환
-    
     * 지난주 당첨 번호를 입력받아야 한다.
         > Lotto의 역할
-        * 입력받은 값이 blank(null, "", " ")이면 예외 반환 
         * 입력받은 Lotto(winning)와 몇개의 숫자가 일치하는지 반환
         * 일치 갯수에 맞는 랭킹 enum 객체 반환
+        
+        > LottoNumbers의 역할
+        * 입력받은 값에 맞는 LottoNumber를 List 반환
+        * 입력받은 값이 blank(null, "", " ")이면 예외 반환 
+        * 입력받은 값에 해당하는 LottoNumber가 없으면 예외 반환
+        * 입력받은 값이 6개가 아니면 예외 반환
         
         > Lottos의 역할
         * 구매한 로또들의 결과 Map으로 저장
