@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int FIRST_INDEX_AFTER_SHUFFLED = 0;
@@ -34,7 +34,7 @@ public class LottoNumber {
 
     static Set<LottoNumber> getShuffledNumber() {
         Collections.shuffle(numbers);
-        return new HashSet<>(numbers.subList(FIRST_INDEX_AFTER_SHUFFLED, LAST_INDEX_AFTER_SHUFFLED));
+        return new TreeSet<>(numbers.subList(FIRST_INDEX_AFTER_SHUFFLED, LAST_INDEX_AFTER_SHUFFLED));
     }
 
     @Override
@@ -53,6 +53,11 @@ public class LottoNumber {
     // TODO String 형변환
     @Override
     public String toString() {
-        return number+"";
+        return number + "";
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.number, o.number);
     }
 }

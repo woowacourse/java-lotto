@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LottoFactory {
     // TODO depth check
@@ -24,7 +21,7 @@ public class LottoFactory {
     }
 
     public static Lotto createLottoManually(List<Integer> userNumbers) {
-        Set<LottoNumber> numbers = new HashSet<>();
+        Set<LottoNumber> numbers = new TreeSet<>();
         for (Integer userNumber : userNumbers) {
             numbers.add(LottoNumber.get(userNumber));
         }
