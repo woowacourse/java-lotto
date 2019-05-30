@@ -27,21 +27,27 @@ public class OutputView {
 
     private static void printLottoNumbers(final Lotto lotto) {
         String lottoStatus = lotto.getNumbers().stream()
-                .map(lottoNumber -> lottoNumber.getNumber() + "")
+                .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
         System.out.println(LOTTO_NUMBER_OPEN_BRACKET + lottoStatus + LOTTO_NUMBER_CLOSE_BRACKET);
     }
 
     public static void printLottoResult(Result result, int buyPrice) {
         System.out.println("당첨 통계");
-        for (int i = Prize.MIN_PRIZE_NUMBER; i <= Prize.MAX_PRIZE_NUMBER; i++) {
-            Prize prize = Prize.valueOf(i);
+        for (Prize prize : Prize.values()) {
             printPrizedata(prize, result.getCountOfPrize(prize));
         }
         System.out.printf("총 수익률은 %.0f%% 입니다.", result.calculateRateOfReturn(buyPrice));
     }
 
     private static void printPrizedata(Prize prize, int prizeCount) {
+        if (Prize.NONE == prize) {
+            return;
+        }
+        if (Prize.SECOND == prize) {
+            System.out.println(prize.getCountOfNumber() + "개 일치, 보너스 볼 일치(" + prize.getWinningAmount() + "원) - " + prizeCount + "개");
+            return;
+        }
         System.out.println(prize.getCountOfNumber() + "개 일치 (" + prize.getWinningAmount() + "원) - " + prizeCount + "개");
     }
 }
