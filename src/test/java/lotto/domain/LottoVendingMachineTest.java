@@ -8,6 +8,6 @@ public class LottoVendingMachineTest {
     @Test
     void validateLottoBuyingMoney() {
         assertThrows(InvalidLottoBuyingMoneyException.class, () ->
-                new LottoVendingMachine(1023, 1));
+                new LottoVendingMachine(new Money(1023)));
     }
 }

@@ -4,18 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.LottoVendingMachine.LOTTO_PRICE;
-
 public class WinningStatistics {
     private final Map<Rank, Integer> statistics = new HashMap<>();
 
-    {
+    public WinningStatistics(List<Rank> ranks) {
         for (Rank rank : Rank.values()) {
             statistics.put(rank, 0);
         }
-    }
-
-    public WinningStatistics(List<Rank> ranks) {
         for (Rank rank : ranks) {
             statistics.put(rank, statistics.get(rank) + 1);
         }
@@ -25,11 +20,13 @@ public class WinningStatistics {
         return statistics;
     }
 
-    public int getInterestRate() {
+    public long getInterestRate(Money inputMoney) {
         Money money = new Money(0);
         for (Map.Entry<Rank, Integer> entry : statistics.entrySet()) {
-            money = money.add(new Money(entry.getKey().getWinningMoney() * entry.getValue()));
+            Rank rank = entry.getKey();
+            int num = entry.getValue();
+            money = money.add(new Money(rank.getWinningMoney() * num));
         }
-        return money.divideBy(new Money(LOTTO_PRICE)) / 100;
+        return ((long)money.getValue() * 100) / (inputMoney.getValue());
     }
 }

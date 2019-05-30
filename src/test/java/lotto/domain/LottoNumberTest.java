@@ -20,4 +20,9 @@ public class LottoNumberTest {
     void checkTwoSameLottoNumberHasSameReference() {
         assertThat(LottoNumber.get(1) == LottoNumber.get(1)).isTrue();
     }
+
+    @Test
+    void equalTest() {
+        assertThat(LottoNumber.get(1).getNumber()).isEqualTo(1);
+    }
 }

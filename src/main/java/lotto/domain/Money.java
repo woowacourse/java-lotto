@@ -11,18 +11,26 @@ public class Money {
         this.money = money;
     }
 
-    public boolean isMultipleOf(Money another) {
-        return money % another.money == 0;
+    public boolean isMultipleOf(int value) {
+        return money % value == 0;
     }
 
-    public int divideBy(Money another) {
-        if (another.money == 0) {
+    public int divideBy(int value) {
+        if (value == 0) {
             throw new ArithmeticException("0 으로 나눌 수 없습니다.");
         }
-        return money / another.money;
+        return money / value;
     }
 
     public Money add(Money another) {
         return new Money(money + another.money);
+    }
+
+    public int getValue() {
+        return money;
+    }
+
+    public int mod(int value) {
+        return money % value;
     }
 }

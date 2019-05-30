@@ -28,4 +28,10 @@ public class Lottos {
     public int size() {
         return lottos.size();
     }
+
+    public Lottos add(Lottos another) {
+        List<Lotto> copiedLottos = new ArrayList<>(lottos);
+        copiedLottos.addAll(another.lottos);
+        return new Lottos(copiedLottos);
+    }
 }

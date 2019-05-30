@@ -2,9 +2,6 @@
 
 ## To-do-list
 
-### 1st Level
-
-####  Domain
 - ~~create a random lotto~~
     - ~~class LottoNumber~~
         - ~~validate lotto number (1 ~ 45)~~
@@ -33,10 +30,11 @@
     - ~~class WinningStatistics~~
 - ~~class Lottos~~
     - ~~match(WinningLotto): List\<Rank\>~~
-    
-#### View
-- InputView
-    - **get lotto buying money from user**
-    
-#### Controller
-- **class LottoController**
+
+
+## Refactoring List
+
+- ~~create LottoFactory class~~
+- add more tests
+- divide packages
+- use interface to separate declaration & implementation

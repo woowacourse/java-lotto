@@ -9,14 +9,6 @@ public class Lotto {
     private static final int SIZE_OF_LOTTO_NUMBERS = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        List<LottoNumber> lottoNumbers = LottoNumber.getAll();
-        Collections.shuffle(lottoNumbers);
-        lottoNumbers = lottoNumbers.subList(0, SIZE_OF_LOTTO_NUMBERS + 1);
-        Collections.sort(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-    }
-
     public Lotto(List<Integer> numbers) {
         if (numbers == null || hasNull(numbers)) {
             throw new NullArgumentException("생성자의 인자로 null 을 넘길 수 없습니다.");
@@ -54,6 +46,10 @@ public class Lotto {
             count += another.lottoNumbers.contains(lottoNumber) ? 1 : 0;
         }
         return count;
+    }
+
+    public static int getSizeOfLottoNumbers() {
+        return SIZE_OF_LOTTO_NUMBERS;
     }
 
     public boolean contains(LottoNumber another) {

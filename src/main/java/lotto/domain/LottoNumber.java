@@ -27,12 +27,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return numbers.get(lottoNumber - 1);
     }
 
-    public static List<LottoNumber> getAll() {
-        return new ArrayList<>(numbers);
-    }
-
     public int getNumber() {
         return number;
+    }
+
+    public static int getMaxLottoNumber() {
+        return MAX_LOTTO_NUMBER;
+    }
+
+    public static int getMinLottoNumber() {
+        return MIN_LOTTO_NUMBER;
     }
 
     @Override
