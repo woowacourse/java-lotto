@@ -1,6 +1,7 @@
 package lotto.domain.lottoresult;
 
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTicketGroup;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -9,7 +10,7 @@ import java.util.Map;
 public class LottoResult {
     private final Map<LottoRank, Integer> rankStatistic = new LinkedHashMap<>();
 
-    LottoResult(WinningLotto winningLotto, LottoTicketGroup lottoTickets) {
+    public LottoResult(WinningLotto winningLotto, LottoTicketGroup lottoTickets) {
         Arrays.stream(LottoRank.values())
                 .forEach(rank -> rankStatistic.put(rank, 0));
 
@@ -19,11 +20,11 @@ public class LottoResult {
         }
     }
 
-    int countOfRank(LottoRank lottoRank) {
+    public int countOfRank(LottoRank lottoRank) {
         return rankStatistic.get(lottoRank);
     }
 
-    double earningRate() {
+    public double earningRate() {
         double expense =  LottoTicket.PRICE * rankStatistic.values().stream()
                 .reduce(0, Integer::sum);
         double rewards = rankStatistic.keySet().stream()

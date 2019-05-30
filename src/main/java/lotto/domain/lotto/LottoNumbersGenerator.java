@@ -1,8 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoTicket;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +16,7 @@ public class LottoNumbersGenerator {
 
     static List<LottoNumber> create() {
         Collections.shuffle(indexes);
-        return create(indexes.subList(0, LottoTicket.LOTTO_SIZE - 1));
+        return create(indexes.subList(0, LottoTicket.LOTTO_SIZE));
     }
 
     static List<LottoNumber> create(List<Integer> indexes) {
