@@ -8,6 +8,7 @@ import lotto.model.lotto.LottoTicket;
 import lotto.model.lotto.LottoTickets;
 
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 
@@ -24,7 +25,7 @@ public class LottoStore {
         List<LottoTicket> lottoTickets = customLottoNumbers.stream()
                 .map(numbers -> numbers.stream()
                         .map(LottoNumber::new)
-                        .collect(Collectors.toList()))
+                        .collect(Collectors.toCollection(TreeSet::new)))
                 .map(LottoTicket::new)
                 .collect(Collectors.toList());
 

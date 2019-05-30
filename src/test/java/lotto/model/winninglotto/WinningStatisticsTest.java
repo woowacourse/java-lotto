@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +23,7 @@ public class WinningStatisticsTest {
     @Test
     void 수익률_계산_5등() {
 
-        WinningLotto winningLotto = new WinningLotto(new LottoTicket(lottoNumbers), new BonusNumber(45));
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(new TreeSet<>(lottoNumbers)), new BonusNumber(45));
 
         List<LottoNumber> lottoNumber = Arrays.asList(new LottoNumber(1)
                 , new LottoNumber(2)
@@ -30,7 +31,7 @@ public class WinningStatisticsTest {
                 , new LottoNumber(7)
                 , new LottoNumber(8)
                 , new LottoNumber(9));
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(lottoNumber)));
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new TreeSet<>(lottoNumber))));
 
         assertThat(new WinningStatistics(lottoTickets, winningLotto).calculateROI()).isEqualTo(500);
     }
@@ -38,7 +39,7 @@ public class WinningStatisticsTest {
     @Test
     void 수익률_계산_4등() {
 
-        WinningLotto winningLotto = new WinningLotto(new LottoTicket(lottoNumbers), new BonusNumber(45));
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(new TreeSet<>(lottoNumbers)), new BonusNumber(45));
 
         List<LottoNumber> lottoNumber = Arrays.asList(new LottoNumber(1)
                 , new LottoNumber(2)
@@ -46,7 +47,7 @@ public class WinningStatisticsTest {
                 , new LottoNumber(4)
                 , new LottoNumber(8)
                 , new LottoNumber(9));
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(lottoNumber)));
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new TreeSet<>(lottoNumber))));
 
         assertThat(new WinningStatistics(lottoTickets, winningLotto).calculateROI()).isEqualTo(5000);
     }
@@ -54,7 +55,7 @@ public class WinningStatisticsTest {
     @Test
     void 수익률_계산_3등() {
 
-        WinningLotto winningLotto = new WinningLotto(new LottoTicket(lottoNumbers), new BonusNumber(45));
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(new TreeSet<>(lottoNumbers)), new BonusNumber(45));
 
         List<LottoNumber> lottoNumber = Arrays.asList(new LottoNumber(1)
                 , new LottoNumber(2)
@@ -62,7 +63,7 @@ public class WinningStatisticsTest {
                 , new LottoNumber(4)
                 , new LottoNumber(5)
                 , new LottoNumber(9));
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(lottoNumber)));
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new TreeSet<>(lottoNumber))));
 
         assertThat(new WinningStatistics(lottoTickets, winningLotto).calculateROI()).isEqualTo(150000);
     }
@@ -70,7 +71,7 @@ public class WinningStatisticsTest {
     @Test
     void 수익률_계산_2등() {
 
-        WinningLotto winningLotto = new WinningLotto(new LottoTicket(lottoNumbers), new BonusNumber(45));
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(new TreeSet<>(lottoNumbers)), new BonusNumber(45));
 
         List<LottoNumber> lottoNumber = Arrays.asList(new LottoNumber(1)
                 , new LottoNumber(2)
@@ -78,7 +79,7 @@ public class WinningStatisticsTest {
                 , new LottoNumber(4)
                 , new LottoNumber(5)
                 , new LottoNumber(45));
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(lottoNumber)));
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new TreeSet<>(lottoNumber))));
 
         assertThat(new WinningStatistics(lottoTickets, winningLotto).calculateROI()).isEqualTo(Long.valueOf(3000000L));
     }
@@ -86,7 +87,7 @@ public class WinningStatisticsTest {
     @Test
     void 수익률_계산_1등() {
 
-        WinningLotto winningLotto = new WinningLotto(new LottoTicket(lottoNumbers), new BonusNumber(45));
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(new TreeSet<>(lottoNumbers)), new BonusNumber(45));
 
         List<LottoNumber> lottoNumber = Arrays.asList(new LottoNumber(1)
                 , new LottoNumber(2)
@@ -94,7 +95,7 @@ public class WinningStatisticsTest {
                 , new LottoNumber(4)
                 , new LottoNumber(5)
                 , new LottoNumber(6));
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(lottoNumber)));
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new TreeSet<>(lottoNumber))));
 
         assertThat(new WinningStatistics(lottoTickets, winningLotto).calculateROI()).isEqualTo(200000000L);
     }

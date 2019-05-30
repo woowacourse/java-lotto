@@ -4,6 +4,7 @@ import lotto.model.customer.PurchaseQuantity;
 import lotto.model.lotto.LottoNumber;
 import lotto.model.lotto.LottoTicket;
 import lotto.model.lotto.LottoTickets;
+import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,11 +30,10 @@ public class RandomLottoTicketsGenerator {
 
     private static LottoTicket generateRandomLottoTicket() {
         Collections.shuffle(allLottoNumbers);
-        List<LottoNumber> lottoNumbers = allLottoNumbers.stream()
+        TreeSet<LottoNumber> lottoNumbers = allLottoNumbers.stream()
                 .limit(COUNT_OF_LOTTO_NUMBERS_IN_ONE_TICKET)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(TreeSet::new));
 
-        Collections.sort(lottoNumbers);
         return new LottoTicket(lottoNumbers);
     }
 }

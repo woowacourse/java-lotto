@@ -4,17 +4,17 @@ import lotto.model.lotto.exception.InvalidLottoTicketException;
 import lotto.model.lottorank.LottoRank;
 import lotto.model.winninglotto.WinningLotto;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 public class LottoTicket {
     private static final int COUNT_OF_LOTTO_NUMBERS_IN_ONE_TICKET = 6;
-    private final List<LottoNumber> lottoTicket;
+    private final Set<LottoNumber> lottoTicket;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
         checkValidLottoNumbers(lottoNumbers);
-        this.lottoTicket = lottoNumbers;
+        this.lottoTicket = new TreeSet<>(lottoNumbers);
     }
 
     public LottoRank convertToLottoRank(WinningLotto winningLotto) {
@@ -25,21 +25,14 @@ public class LottoTicket {
         return lottoTicket.contains(lottoNumber);
     }
 
-    private void checkValidLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (isDuplicatedNumbers(lottoNumbers)) {
-            throw new InvalidLottoTicketException("중복된 번호가 있습니다.");
-        }
+    private void checkValidLottoNumbers(Set<LottoNumber> lottoNumbers) {
         if (!isLottoNumberSize(lottoNumbers)) {
             throw new InvalidLottoTicketException("번호의 개수가 6개가 아닙니다.");
         }
     }
 
-    private boolean isLottoNumberSize(List<LottoNumber> lottoNumbers) {
+    private boolean isLottoNumberSize(Set<LottoNumber> lottoNumbers) {
         return lottoNumbers.size() == COUNT_OF_LOTTO_NUMBERS_IN_ONE_TICKET;
-    }
-
-    private boolean isDuplicatedNumbers(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.size() != new HashSet<>(lottoNumbers).size();
     }
 
     public Stream<LottoNumber> stream() {

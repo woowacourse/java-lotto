@@ -8,10 +8,7 @@ import lotto.model.lotto.LottoTicket;
 import lotto.model.winninglotto.WinningLotto;
 import lotto.utils.StringUtility;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -40,10 +37,10 @@ public class InputView {
     public static WinningLotto inputWinningLotto() {
         try {
             System.out.println("지난 주 당첨 번호를 입력해주세요.");
-            List<LottoNumber> winningLotto = StringUtility.parseIntList(SCANNER.nextLine(), ",")
+            Set<LottoNumber> winningLotto = StringUtility.parseIntList(SCANNER.nextLine(), ",")
                     .stream()
                     .map(LottoNumber::new)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toCollection(TreeSet::new));
             return new WinningLotto(new LottoTicket(winningLotto), inputBonusNumber());
         } catch (NumberFormatException e) {
             System.out.println("잘못된 번호입니다.");

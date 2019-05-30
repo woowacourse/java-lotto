@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -20,6 +21,6 @@ public class WinningLottoTest {
                 , new LottoNumber(4)
                 , new LottoNumber(5)
                 , new LottoNumber(45));
-        assertThrows(InvalidWinningLottoException.class, () -> new WinningLotto(new LottoTicket(lottoNumbers), new BonusNumber(45)));
+        assertThrows(InvalidWinningLottoException.class, () -> new WinningLotto(new LottoTicket(new TreeSet<>(lottoNumbers)), new BonusNumber(45)));
     }
 }

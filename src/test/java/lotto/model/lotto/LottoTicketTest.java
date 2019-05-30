@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -18,7 +19,7 @@ public class LottoTicketTest {
                 , new LottoNumber(4)
                 , new LottoNumber(5)
                 , new LottoNumber(6));
-        assertDoesNotThrow(() -> new LottoTicket(lottoNumbers));
+        assertDoesNotThrow(() -> new LottoTicket(new TreeSet<>(lottoNumbers)));
     }
 
     @Test
@@ -29,7 +30,7 @@ public class LottoTicketTest {
                 , new LottoNumber(4)
                 , new LottoNumber(5)
                 , new LottoNumber(45));
-        assertThrows(InvalidLottoTicketException.class, () -> new LottoTicket(lottoNumbers));
+        assertThrows(InvalidLottoTicketException.class, () -> new LottoTicket(new TreeSet<>(lottoNumbers)));
     }
 
     @Test
@@ -39,6 +40,6 @@ public class LottoTicketTest {
                 , new LottoNumber(3)
                 , new LottoNumber(4)
                 , new LottoNumber(45));
-        assertThrows(InvalidLottoTicketException.class, () -> new LottoTicket(lottoNumbers));
+        assertThrows(InvalidLottoTicketException.class, () -> new LottoTicket(new TreeSet<>(lottoNumbers)));
     }
 }
