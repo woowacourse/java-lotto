@@ -1,11 +1,13 @@
 package lottogame.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
     private List<LottoNumber> lotto;
 
     Lotto(List<LottoNumber> lotto) {
+        Collections.sort(lotto);
         this.lotto = lotto;
     }
 

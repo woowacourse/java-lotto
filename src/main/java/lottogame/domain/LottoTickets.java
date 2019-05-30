@@ -1,35 +1,37 @@
 package lottogame.domain;
 
-import lottogame.utils.InvalidLottoPriceException;
+import lottogame.utils.InvalidLottoNumberException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
-    private static final int ONE_LOTTO_PRICE = 1000;
-
     private List<Lotto> lottos = new ArrayList<>();
+    private final int numberOfManualTicket;
 
-    public LottoTickets(int price) {
-        int numberOfLotto = getNumberOfLotto(price);
-        while (lottos.size() < numberOfLotto) {
-            lottos.add(RandomLottoGenerator.create());
+    public LottoTickets(int numberOfManualTicket, Money money) {
+        if (!money.isValidateNumber(numberOfManualTicket)) {
+            throw new InvalidLottoNumberException("수동 구매 수는 " + money.getNumberOfTicket() + "개 이하여야 합니다.");
         }
+        this.numberOfManualTicket = numberOfManualTicket;
     }
 
-    private int getNumberOfLotto(int price) {
-        if (isValidatePrice(price)) {
-            return price / ONE_LOTTO_PRICE;
-        }
-        throw new InvalidLottoPriceException("구입금액을 다시 입력해 주세요.");
+    public void addManualLotto(List<Integer> manualLotto) {
+        lottos.add(ManualLottoGenerator.create(manualLotto));
     }
 
-    private boolean isValidatePrice(int price) {
-        return (price % ONE_LOTTO_PRICE == 0) && (price >= ONE_LOTTO_PRICE);
+    public boolean isManualLottoFill() {
+        return lottos.size() == numberOfManualTicket;
     }
 
-    public int price() {
-        return numberOfLottos() * ONE_LOTTO_PRICE;
+    public void addAutoLotto(int numberOfTicket) {
+        do {
+            lottos.add(AutoLottoGenerator.create());
+        } while (!isLottoCreateAll(numberOfTicket));
+    }
+
+    private boolean isLottoCreateAll(int numberOfTicket) {
+        return lottos.size() == numberOfTicket;
     }
 
     public int numberOfLottos() {

@@ -16,7 +16,7 @@ public class ManualLottoGenerator {
             lottoNumbers.add(LottoNumber.Of(index));
         }
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new InvalidLottoNumberException("6개의 숫자를 입력해주세요.");
+            throw new InvalidLottoNumberException("6개의 중복되지 않는 숫자를 입력해주세요.");
         }
 
         return new Lotto(new ArrayList<>(lottoNumbers));

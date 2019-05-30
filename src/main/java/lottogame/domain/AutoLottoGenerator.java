@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-class RandomLottoGenerator {
+class AutoLottoGenerator {
     private static final int LOTTO_SIZE = 6;
 
     static Lotto create() {
