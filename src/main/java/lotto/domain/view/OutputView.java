@@ -9,11 +9,11 @@ import java.util.Map;
 
 public class OutputView {
 
-    private static final String NEW_LINE ="\n";
+    private static final String NEW_LINE = "\n";
 
     public static void printPurchasedLottoResult(PurchasedLottos purchasedLottos, int manualLottoSize) {
         System.out.println(NEW_LINE + "수동으로" + manualLottoSize + "장, 자동으로 " + (purchasedLottos.size() - manualLottoSize) + "개를 구매했습니다.");
-        for (Lotto lotto: purchasedLottos.getLottos()) {
+        for (Lotto lotto : purchasedLottos.getLottos()) {
             System.out.println(lotto.toString());
         }
     }
@@ -31,7 +31,7 @@ public class OutputView {
     }
 
     private static void printProfitRate(Money money, double prizeSum) {
-        double profitRate = prizeSum / (double) money.getMoney() ;
+        double profitRate = prizeSum / (double) money.getMoney();
         System.out.println("총 수익률은 " + Math.round(profitRate * 1000) / 1000.0 + "입니다.");
     }
 }

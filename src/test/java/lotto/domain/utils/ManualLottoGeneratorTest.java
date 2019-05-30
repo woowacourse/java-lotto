@@ -20,7 +20,7 @@ public class ManualLottoGeneratorTest {
 
     @Before
     public void setUp() {
-        for (int i = 1; i <= 6; i++ ) {
+        for (int i = 1; i <= 6; i++) {
             inputLottoNumbers.add(NumberSet.of(i));
         }
         lotto = ManualLottoGenerator.makeLotto(inputLottoNumbers);

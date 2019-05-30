@@ -1,13 +1,16 @@
 package lotto.domain;
 
-import lotto.domain.model.*;
 import lotto.domain.model.Number;
+import lotto.domain.model.*;
 import lotto.domain.utils.AutoLottoGenerator;
 import lotto.domain.utils.ManualLottoGenerator;
 import lotto.domain.view.InputView;
 import lotto.domain.view.OutputView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -72,7 +75,7 @@ public class Main {
     private static List<Rank> judgeRank(PurchasedLottos purchasedLottos, WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
 
-        for (Lotto lotto: purchasedLottos.getLottos()) {
+        for (Lotto lotto : purchasedLottos.getLottos()) {
             ranks.add(Rank.valueOf(winningLotto.matchCount(lotto), winningLotto.matchBonusNumber(lotto)));
         }
         return ranks;

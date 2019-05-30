@@ -40,7 +40,7 @@ public class Lotto {
             lottoString += (lotto.get(i).getNumber() + ", ");
         }
 
-        lottoString += (lotto.get(5).getNumber() +"]");
+        lottoString += (lotto.get(5).getNumber() + "]");
         return lottoString;
     }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoLottoGenerator{
+public class AutoLottoGenerator {
 
     private static final int LOTTO_SIZE = 6;
 

@@ -1,13 +1,18 @@
 package lotto.domain.view;
 
-import lotto.domain.model.*;
+import lotto.domain.model.Lotto;
+import lotto.domain.model.Money;
 import lotto.domain.model.Number;
+import lotto.domain.model.NumberSet;
 import lotto.domain.utils.Validator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
 public class InputView {
-    private static final String NEW_LINE ="\n";
+    private static final String NEW_LINE = "\n";
     private static final String MANUAL_LOTTO_SIZE_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String PURCHASE_MONEY_MESSAGE = "구입 금액을 입력해 주세요.";
     private static final String MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해주세요.";
@@ -16,7 +21,7 @@ public class InputView {
     private static final Scanner sc = new Scanner(System.in);
 
     /**
-     *  구입 금액 입력
+     * 구입 금액 입력
      */
     public static int inputMoney() {
         int money;
@@ -31,7 +36,7 @@ public class InputView {
     }
 
     /**
-     *  수동 로또 구입 매수 입력
+     * 수동 로또 구입 매수 입력
      */
     public static int inputManualLottoSize(Money money) {
         int manualLottoSize;
@@ -49,14 +54,14 @@ public class InputView {
         return manualLottoSize;
     }
 
-    public static void printInputManualLottoMessage( ) {
+    public static void printInputManualLottoMessage() {
         System.out.println(NEW_LINE + MANUAL_LOTTO_NUMBER_MESSAGE);
     }
 
     /**
-     *  로또 번호 입력
-     *  LottoNumber 리스트에 값이 없을 경우 수동 구매 로또 번호
-     *  LottoNumber 리스트에 값이 있을 경우 지난 주 당첨 번호
+     * 로또 번호 입력
+     * LottoNumber 리스트에 값이 없을 경우 수동 구매 로또 번호
+     * LottoNumber 리스트에 값이 있을 경우 지난 주 당첨 번호
      */
     public static List<Number> inputLottoNumber() {
         List<Number> lottoNumber = new ArrayList<>();
@@ -69,19 +74,19 @@ public class InputView {
         return lottoNumber;
     }
 
-    private static  List<Number> makeLottoNumber(String numbers, List<Number> lottoNumber) {
-        for (String number: numbers.split(",")) {
+    private static List<Number> makeLottoNumber(String numbers, List<Number> lottoNumber) {
+        for (String number : numbers.split(",")) {
             lottoNumber.add(NumberSet.of(Integer.parseInt(number)));
         }
         return lottoNumber;
     }
 
-    public static void printInputWinningLottoMessage( ) {
+    public static void printInputWinningLottoMessage() {
         System.out.println(NEW_LINE + LAST_WEEK_WINNING_NUMBER_MESSAGE);
     }
 
     /**
-     *  보너스 볼 입력
+     * 보너스 볼 입력
      */
     public static Number inputBonusNumber(Lotto winningLotto) {
         int bonusNumber;

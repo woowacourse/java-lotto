@@ -15,7 +15,7 @@ public class AutoLottoGeneratorTest {
     Lotto lotto;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         lotto = AutoLottoGenerator.makeLotto();
     }
 

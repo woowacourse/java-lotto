@@ -1,8 +1,5 @@
 package lotto.domain.model;
 
-import lotto.domain.model.Lotto;
-import lotto.domain.model.Number;
-import lotto.domain.model.NumberSet;
 import lotto.domain.utils.ManualLottoGenerator;
 import org.junit.Before;
 import org.junit.Test;
