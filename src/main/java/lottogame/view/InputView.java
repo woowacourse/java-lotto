@@ -26,7 +26,6 @@ public class InputView {
     }
 
     public static String getManualLottoNumber() {
-        System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
         return SCANNER.nextLine();
     }
 }

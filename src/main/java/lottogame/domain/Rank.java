@@ -14,7 +14,7 @@ public enum Rank {
     private static final int MAX_MATCH_NUMBER = 6;
 
     private int numberOfMatch;
-    private int prize;
+    private long prize;
 
     Rank(int numberOfMatch, int prize) {
         this.numberOfMatch = numberOfMatch;

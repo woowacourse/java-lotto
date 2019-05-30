@@ -11,29 +11,16 @@ public class LottoGameMain {
     public static void main(String[] args) {
         Money money = getMoney();
         LottoTickets lottoTickets = createLottoTickets(money);
-        createLotto(lottoTickets, money);
-        OutputView.printPurchaseResult(lottoTickets);
+        createLottos(lottoTickets, money);
+        OutputView.printPurchaseResult(lottoTickets, money);
+
         WinningLotto winningLotto = createWinningLotto();
         addBonusNumber(winningLotto);
+
         LottoResult lottoResult = LottoResultGenerator.create(lottoTickets, winningLotto);
-        OutputView.printLottoResult(lottoResult, 10000);
+        OutputView.printLottoResult(lottoResult, money);
     }
 
-    private static void createLotto(LottoTickets lottoTickets, Money money) {
-        do {
-            createManualLotto(lottoTickets);
-        } while (!lottoTickets.isManualLottoFill());
-        lottoTickets.addAutoLotto(money.getNumberOfTicket());
-    }
-
-    private static void createManualLotto(LottoTickets lottoTickets) {
-        try {
-            lottoTickets.addManualLotto(LottoNumbersParser.parse(InputView.getManualLottoNumber()));
-        } catch (NumberFormatException | InvalidLottoNumberException e) {
-            System.out.println(e.getMessage());
-            createManualLotto(lottoTickets);
-        }
-    }
 
     private static Money getMoney() {
         try {
@@ -50,6 +37,25 @@ public class LottoGameMain {
         } catch (NumberFormatException | InvalidLottoNumberException e) {
             System.out.println(e.getMessage());
             return createLottoTickets(money);
+        }
+    }
+
+    private static void createLottos(LottoTickets lottoTickets, Money money) {
+        if(!lottoTickets.isManualLottoFill()){
+            OutputView.printRequestOfManualLottoNumber();
+        }
+        while (!lottoTickets.isManualLottoFill()) {
+            createManualLotto(lottoTickets);
+        }
+        lottoTickets.createAutoLottos(money.getNumberOfTicket());
+    }
+
+    private static void createManualLotto(LottoTickets lottoTickets) {
+        try {
+            lottoTickets.addManualLotto(LottoNumbersParser.parse(InputView.getManualLottoNumber()));
+        } catch (NumberFormatException | InvalidLottoNumberException e) {
+            System.out.println(e.getMessage());
+            createManualLotto(lottoTickets);
         }
     }
 

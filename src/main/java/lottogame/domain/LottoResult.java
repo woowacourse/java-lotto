@@ -3,7 +3,6 @@ package lottogame.domain;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int PERCENTAGE = 100;
     private Map<Rank, Integer> result;
 
     LottoResult(Map<Rank, Integer> result) {
@@ -11,14 +10,14 @@ public class LottoResult {
         this.result.remove(Rank.MISS);
     }
 
-    public long getRateOfLotto(int price) {
-        long profits = 0;
+    public long getRateOfLotto(Money money) {
+        double profits = 0;
 
         for (Rank rank : result.keySet()) {
             profits += rank.sumPrizeOf(result.get(rank));
         }
 
-        return (long) (((double) profits / price) * PERCENTAGE);
+        return money.rateOf(profits);
     }
 
     @Override

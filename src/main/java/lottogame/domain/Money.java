@@ -4,6 +4,7 @@ import lottogame.utils.InvalidLottoPriceException;
 
 public class Money {
     private static final int MIN_NUMBER_OF_MANUAL_TICKET = 0;
+    private static final int PERCENTAGE = 100;
     private static final int ONE_LOTTO_PRICE = 1000;
 
     private final int price;
@@ -24,7 +25,11 @@ public class Money {
         return price / ONE_LOTTO_PRICE;
     }
 
-    public boolean isValidateNumber(int numberOfManualTicket) {
+    boolean isValidateNumber(int numberOfManualTicket) {
         return (MIN_NUMBER_OF_MANUAL_TICKET <= numberOfManualTicket) && (numberOfManualTicket <= getNumberOfTicket());
+    }
+
+    long rateOf(double profits) {
+        return (long) (profits / price) * PERCENTAGE;
     }
 }

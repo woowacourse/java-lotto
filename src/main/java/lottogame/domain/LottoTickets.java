@@ -16,6 +16,10 @@ public class LottoTickets {
         this.numberOfManualTicket = numberOfManualTicket;
     }
 
+    public int getNumberOfManualTicket() {
+        return numberOfManualTicket;
+    }
+
     public void addManualLotto(List<Integer> manualLotto) {
         lottos.add(ManualLottoGenerator.create(manualLotto));
     }
@@ -24,7 +28,7 @@ public class LottoTickets {
         return lottos.size() == numberOfManualTicket;
     }
 
-    public void addAutoLotto(int numberOfTicket) {
+    public void createAutoLottos(int numberOfTicket) {
         do {
             lottos.add(AutoLottoGenerator.create());
         } while (!isLottoCreateAll(numberOfTicket));

@@ -10,7 +10,7 @@ import java.util.Set;
 public class ManualLottoGenerator {
     private static final int LOTTO_SIZE = 6;
 
-    public static Lotto create(List<Integer> lotto) {
+    static Lotto create(List<Integer> lotto) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer index : lotto) {
             lottoNumbers.add(LottoNumber.Of(index));
