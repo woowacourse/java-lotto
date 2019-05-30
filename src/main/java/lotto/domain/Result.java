@@ -14,8 +14,7 @@ public class Result {
 
     public double calculateRateOfReturn(final int buyPrice) {
         int sum = 0;
-        for (int i = MIN_PRIZE_NUMBER; i <= MAX_PRIZE_NUMBER; i++) {
-            Prize prize = valueOf(i);
+        for (Prize prize : Prize.values()) {
             sum += prize.getWinningAmount() * getCountOfPrize(prize);
         }
         return (double) sum / buyPrice * ONE_HUNDRED_PERCENT;
