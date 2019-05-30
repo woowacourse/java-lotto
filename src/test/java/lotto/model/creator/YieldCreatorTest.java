@@ -9,7 +9,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Java6Assertions.offset;
 
-
 public class YieldCreatorTest {
         @Test
         void 수익률_생성_검사() {

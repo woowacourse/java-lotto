@@ -1,11 +1,12 @@
 package lotto.view;
 
 import lotto.model.exception.WinningNumbersInputFormException;
+import lotto.model.object.Payment;
 
 import java.util.Scanner;
 
 public class InputView {
-        public static final String WINNING_NUMBERS_INPUT_FORM = "(([0-9]+)(,)( )){5}([0-9]+)";
+        private static final String WINNING_NUMBERS_INPUT_FORM = "(([0-9]+)(,)( )){5}([0-9]+)";
 
         public static int inputPayment() {
                 System.out.println("구입금액을 입력해 주세요.");
@@ -28,6 +29,12 @@ public class InputView {
 
         public static int inputBonusBall() {
                 System.out.println("보너스 볼을 입력해 주세요.");
+                String input = new Scanner(System.in).nextLine();
+                return Integer.parseInt(input);
+        }
+
+        public static int inputManualPaymentNumber(Payment payment) {
+                System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
                 String input = new Scanner(System.in).nextLine();
                 return Integer.parseInt(input);
         }

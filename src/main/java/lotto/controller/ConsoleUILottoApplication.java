@@ -15,6 +15,8 @@ public class ConsoleUILottoApplication {
                 Payment payment = createPayment();
                 OutputView.printPurchaseNumber(payment);
 
+
+
                 List<Lotto> purchasedLottos = createPurchasedLottos(payment);
                 OutputView.printPurchaseLottos(purchasedLottos);
 
@@ -39,7 +41,7 @@ public class ConsoleUILottoApplication {
 
         private static Payment createPayment() {
                 try {
-                        return new Payment(InputView.inputPayment());
+                        return PaymentCreator.create(InputView.inputPayment());
                 } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
                         return createPayment();

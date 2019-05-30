@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.model.creator.PaymentCreator;
+import lotto.model.exception.InvalidManualPaymentNumberException;
 import lotto.model.exception.WinningNumbersInputFormException;
 import org.junit.jupiter.api.Test;
 
@@ -45,5 +47,12 @@ public class InputViewTest {
                 });
         }
 
-
+        @Test
+        void 수동_구매_개수_입력_형식_검사() {
+                assertThrows(NumberFormatException.class, ()->{
+                        ByteArrayInputStream input = new ByteArrayInputStream("1 5".getBytes());
+                        System.setIn(input);
+                        InputView.inputManualPaymentNumber(PaymentCreator.create(15000));
+                });
+        }
 }
