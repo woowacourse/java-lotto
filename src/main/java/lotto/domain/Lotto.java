@@ -9,7 +9,7 @@ public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
     private List<Number> lotto = new ArrayList<>();
 
-    Lotto(List<Integer> lotto) {
+    public Lotto(List<Integer> lotto) {
         checkLottoSize(lotto);
         checkDuplicate(lotto);
         for(Integer number : lotto) {
@@ -30,9 +30,10 @@ public class Lotto {
         }
     }
 
-    boolean isContain(Number bonusBall) {
-        return lotto.contains(bonusBall);
+    boolean isContain(Number number) {
+        return lotto.contains(number);
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -45,5 +46,16 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lotto);
+    }
+
+    @Override
+    public String toString() {
+        return ""+lotto;
+    }
+//인자는 사용자 로또
+    public int matchNumber(Lotto lotto) {
+        List<Number> matchNumbers = new ArrayList<>(this.lotto);
+        matchNumbers.retainAll(lotto.lotto);
+        return matchNumbers.size();
     }
 }

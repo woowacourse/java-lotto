@@ -31,4 +31,10 @@ public class WinningLotto {
     public int hashCode() {
         return Objects.hash(winningLotto, bonusBall);
     }
+
+    public Rank matchLotto(Lotto lotto) {
+        int countOfMatch = winningLotto.matchNumber(lotto);
+        boolean matchBonus = lotto.isContain(bonusBall);
+        return Rank.valueOf(countOfMatch,matchBonus);
+    }
 }

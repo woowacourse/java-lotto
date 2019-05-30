@@ -16,4 +16,8 @@ public class Price {
     public int getCountOfLotto() {
         return price / lottoPerPrice;
     }
+
+    public int getPrice() {
+        return price;
+    }
 }

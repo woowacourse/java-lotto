@@ -13,13 +13,21 @@ import static lotto.domain.Number.MIN_LOTTO_NUMBER;
 public class AutoLottoFactory {
     private static List<Integer> lottoNumbers = generateLottoNumber();
 
+    public static List<Lotto> generateLottos(int tryNo) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < tryNo; i++) {
+            lottos.add(generateLotto());
+        }
+        return lottos;
+    }
+
     public static Lotto generateLotto() {
         Collections.shuffle(lottoNumbers);
-        return new Lotto(lottoNumbers.subList(0,LOTTO_NUMBER_SIZE));
+        return new Lotto(lottoNumbers.subList(0, LOTTO_NUMBER_SIZE));
     }
 
     static List<Integer> generateLottoNumber() {
-        IntStream stream = IntStream.range(MIN_LOTTO_NUMBER,MAX_LOTTO_NUMBER);
+        IntStream stream = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
         return stream.boxed().collect(Collectors.toList());
     }
 

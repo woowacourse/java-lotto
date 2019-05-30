@@ -1,11 +1,11 @@
 package lotto.domain;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
     FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000),
     MISS(0, 0);
 
     private static final int WINNING_MIN_COUNT = 3;
@@ -48,4 +48,11 @@ public enum Rank {
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }
+
+    public String getResultMessage() {
+        if(this == SECOND) {
+            return "5개 일치, 보너스 볼 일치(30000000원) -";
+        }
+        return this.countOfMatch + "개 일치" + "(" + this.winningMoney + "원) - ";
     }
+}

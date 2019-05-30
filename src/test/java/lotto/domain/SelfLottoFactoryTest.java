@@ -16,6 +16,13 @@ public class SelfLottoFactoryTest {
     }
 
     @Test
+    void 횟수가_로또개수를_넘을때() {
+        assertThrows(IllegalArgumentException.class,() ->{
+            new SelfLottoFactory(11,10);
+        });
+    }
+
+    @Test
     void 수동_로또_확인() {
         SelfLottoFactory selfLottoFactory = new SelfLottoFactory(1,4);
         assertThat(selfLottoFactory.generateSelfLotto("1,2,3,4,5,6")).isEqualTo(new Lotto(Arrays.asList(1,2,3,4,5,6)));

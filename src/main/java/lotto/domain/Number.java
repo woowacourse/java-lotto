@@ -2,11 +2,14 @@ package lotto.domain;
 
 import lotto.NumberValidException;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Number {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
+    private static Map<Integer,Number> numbers = new HashMap<>();
     private int number;
 
     private Number(int number) {
@@ -17,7 +20,10 @@ public class Number {
     }
 
     public static Number of(int number) {
-        return new Number(number);
+        if(!numbers.containsKey(number)) {
+            numbers.put(number,new Number(number));
+        }
+        return numbers.get(number);
     }
 
     @Override
@@ -31,5 +37,10 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return ""+number;
     }
 }
