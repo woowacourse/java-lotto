@@ -40,6 +40,10 @@ public enum Rank {
         return this.countOfMatch == countOfMatch;
     }
 
+    public boolean isMiss() {
+        return this == Rank.MISS;
+    }
+
     public static long calculateTotalWinningMoney(Map<Rank, Integer> lottoScore) {
         if (Objects.isNull(lottoScore) || lottoScore.isEmpty()) {
             throw new NullPointerException();
@@ -48,5 +52,13 @@ public enum Rank {
         return lottoScore.keySet().stream()
                 .mapToLong(rank -> lottoScore.get(rank) * rank.winningMoney)
                 .sum();
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 }
