@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.woowacourse.lotto.domain.*;
@@ -34,20 +33,16 @@ public class LottoAppMain {
 		}
 	}
 
-	private static int getCountOfManualLotto() {
-		return InputView.inputCountOfManualLotto();
-	}
-
 	private static List<String> inputManualLotto(int count) {
 		return InputView.inputManualLottoNumber(count);
 	}
 
-	private static int inputCountOfManualLotto() {
+	private static int getCountOfManualLotto() {
 		try {
 			return InputView.inputCountOfManualLotto();
 		} catch (Exception e) {
 			OutputView.printExceptionMessage(e.getMessage());
-			return inputCountOfManualLotto();
+			return getCountOfManualLotto();
 		}
 	}
 
