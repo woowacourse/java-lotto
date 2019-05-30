@@ -53,7 +53,7 @@ public class ConsoleApplication {
 
     private static LottoNumbers makeLottoNumbers() {
         try {
-            List<Integer> inputNumbers = NumbersSplitter.splitNumbers(InputView.inputLottosNumbers());
+            List<Integer> inputNumbers = NumbersSplitter.splitNumbers(InputView.inputLottoNumbers());
             return LottoNumbersGenerator.getLottoNumbers(inputNumbers);
         } catch (Exception e) {
             System.out.println(e.getMessage());

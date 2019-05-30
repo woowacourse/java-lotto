@@ -20,7 +20,7 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static String inputLottosNumbers() {
+    public static String inputLottoNumbers() {
         return SCANNER.nextLine();
     }
 
