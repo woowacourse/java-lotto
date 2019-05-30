@@ -9,8 +9,8 @@ public class User {
     private final Money money;
     private final int countOfLotto;
 
-    public User(int money) {
-        this.money = new Money(money);
+    public User(Money money) {
+        this.money = money;
         this.countOfLotto = this.money.countOfLotto();
         generateUserLottos();
     }

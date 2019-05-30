@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -35,5 +36,14 @@ public class Lotto {
 
     public LottoNumber getLottoNumberByIndex(int index) {
         return this.lottoNumbers.get(index);
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder=new StringBuilder("[");
+        stringBuilder.append(this.lottoNumbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", ")));
+        return stringBuilder.append("]").toString();
     }
 }
