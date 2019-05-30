@@ -1,8 +1,8 @@
 package view;
 
-import model.LottoRank;
-import model.LottoResult;
-import model.Lottos;
+import model.*;
+
+import java.util.List;
 
 public class OutputView {
     public static void printPurchaseAmount(int manual, int auto) {
@@ -14,6 +14,7 @@ public class OutputView {
     }
 
     public static void printResult(LottoResult result) {
+        printWinningNumbers(result);
         System.out.println("\n당첨 통계\n---------");
         result.forEach(x -> {
             System.out.println(
@@ -26,5 +27,15 @@ public class OutputView {
             );
         });
         System.out.format("총 수익률은 %d%%입니다.", Math.round(result.getEarningRate()));
+    }
+
+    private static void printWinningNumbers(LottoResult result) {
+        System.out.println(
+                "\n금주의 당첨 번호 : "
+                + result.getWinningNumbers().subList(0, Lotto.NUMBER_OF_NUMBERS)
+                + " + "
+                + result.getWinningNumbers().get(Lotto.NUMBER_OF_NUMBERS)
+        );
+
     }
 }

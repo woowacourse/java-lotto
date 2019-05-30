@@ -13,6 +13,7 @@ public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
     private static final String NANUM_LOTTERY_URL = "https://m.dhlottery.co.kr/gameResult.do?method=byWin";
 
     private final Map<LottoRank, Integer> rankings;
+    private final List<LottoNumber> winningNumbers;
     private final double earningRate;
 
     /*
@@ -23,9 +24,9 @@ public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
     */
 
     protected LottoResult(List<Lotto> lottos) {
-        List<LottoNumber> currentWinningNumbers = getCurrentWinningNumbers();
-        Set<LottoNumber> winningNumbers = new HashSet<>(currentWinningNumbers.subList(0, Lotto.NUMBER_OF_NUMBERS));
-        LottoNumber bonusNumber = currentWinningNumbers.get(Lotto.NUMBER_OF_NUMBERS);
+        this.winningNumbers = requestCurrentWinningNumbers();
+        Set<LottoNumber> winningNumbers = new HashSet<>(this.winningNumbers.subList(0, Lotto.NUMBER_OF_NUMBERS));
+        LottoNumber bonusNumber = this.winningNumbers.get(Lotto.NUMBER_OF_NUMBERS);
         this.rankings = processResult(lottos, winningNumbers, bonusNumber);
         this.earningRate = getTotalEarnings().getEarningRate(new Money(Lotto.PRICE * lottos.size()));
     }
@@ -42,7 +43,7 @@ public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
         return Collections.unmodifiableMap(result);
     }
 
-    private List<LottoNumber> getCurrentWinningNumbers() {
+    private List<LottoNumber> requestCurrentWinningNumbers() {
         try {
             List<LottoNumber> result = new ArrayList<>();
             Matcher matcher = Pattern.compile(">[0-9]+<").matcher(httpWinningNumbersRequest());
@@ -52,7 +53,7 @@ public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
             }
             return result;
         } catch (Exception e) {
-            return getCurrentWinningNumbers();
+            return requestCurrentWinningNumbers();
         }
     }
 
@@ -74,6 +75,10 @@ public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
                 .map(x -> x.getKey().getPrize().getAmount() * x.getValue())
                 .reduce(0, Integer::sum)
         );
+    }
+
+    public List<LottoNumber> getWinningNumbers() {
+        return winningNumbers;
     }
 
     public double getEarningRate() {
