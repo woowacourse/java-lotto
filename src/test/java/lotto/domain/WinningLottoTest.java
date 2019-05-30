@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Test;
+        import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+        import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static lotto.domain.Rank.*;
+        import static org.assertj.core.api.Assertions.assertThat;
+        import static lotto.domain.Rank.*;
 
 public class WinningLottoTest {
 

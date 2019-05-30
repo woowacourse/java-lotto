@@ -9,7 +9,7 @@ public class LottoNumberTest {
     @Test
     void 숫자_범위를_넘어선_예외() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new LottoNumber(0);
+            LottoNumber.get(0);
         });
     }
 }

@@ -12,7 +12,7 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
         }
         for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumber.get(number));
         }
         checkDuplication();
         Collections.sort(lottoNumbers);

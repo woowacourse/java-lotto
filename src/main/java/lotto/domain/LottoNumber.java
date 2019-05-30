@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static lotto.domain.LottoRule.*;
@@ -7,12 +9,24 @@ import static lotto.domain.LottoRule.*;
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
-    public LottoNumber(int number) {
-        this.number = number;
-        checkValidRange();
+    private static Map<Integer, LottoNumber> bucket = new HashMap<>();
+
+    static {
+        for (int i = MIN_LOTTO_NUMBER.get(); i <= MAX_LOTTO_NUMBER.get(); ++i) {
+            bucket.put(i, new LottoNumber(i));
+        }
     }
 
-    private void checkValidRange() {
+    private LottoNumber(int number) {
+        this.number = number;
+    }
+
+    public static LottoNumber get(int number) {
+        checkValidRange(number);
+        return bucket.get(number);
+    }
+
+    private static void checkValidRange(int number) {
         if (number < MIN_LOTTO_NUMBER.get() || number > MAX_LOTTO_NUMBER.get()) {
             throw new IllegalArgumentException("유효한 로또 번호가 아닙니다.");
         }
