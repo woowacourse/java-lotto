@@ -39,7 +39,7 @@ public class Money {
         }
     }
 
-    public int getBuyableLottoNumber() {
+    public int getBuyableLottoQuantity() {
         return money / ONE_LOTTO_PRICE;
     }
 }

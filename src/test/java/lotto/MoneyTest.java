@@ -41,6 +41,6 @@ public class MoneyTest {
     @Test
     void 구매_가능한_로또_개수_반환() {
         Money money = new Money("4999");
-        assertThat(money.getBuyableLottoNumber()).isEqualTo(4);
+        assertThat(money.getBuyableLottoQuantity()).isEqualTo(4);
     }
 }
