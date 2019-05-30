@@ -2,7 +2,7 @@ package com.woowacourse.lotto.domain;
 
 import java.util.*;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
 	public static final int NUMBER_OF_LOTTO = 6;
 	public static final int MIN_NUMBER_OF_LOTTO = 1;
 	public static final int MAX_NUMBER_OF_LOTTO = 45;
