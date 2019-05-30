@@ -10,9 +10,19 @@ package lotto.domain;
 public class WinningLottoTest {
 
     @Test
-    void 로또_등수_계산() {
+    void 로또_등수_계산_보너스_번호_추가() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(lotto);
+        LottoNumber bonus = LottoNumber.get(7);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonus);
         assertThat(FIRST).isEqualTo(winningLotto.getWinning(lotto));
+    }
+
+    @Test
+    void 로또_등수_계산_보너스_번호_추가_2등() {
+        Lotto currentLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10));
+        Lotto beforeWinningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 9));
+        LottoNumber bonus = LottoNumber.get(10);
+        WinningLotto winningLotto = new WinningLotto(beforeWinningLotto, bonus);
+        assertThat(SECOND).isEqualTo(winningLotto.getWinning(currentLotto));
     }
 }

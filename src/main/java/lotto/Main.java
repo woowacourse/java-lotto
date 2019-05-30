@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.InputConsole;
 import lotto.view.OutputConsole;
 
@@ -29,7 +26,7 @@ public class Main {
 
     private static WinningLotto createWinningLotto() {
         try {
-            return new WinningLotto(new Lotto(InputConsole.inputWinningLotto()));
+            return new WinningLotto(new Lotto(InputConsole.inputWinningLotto()), LottoNumber.get(1));
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createWinningLotto();

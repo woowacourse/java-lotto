@@ -24,7 +24,7 @@ public class LottoResultTest {
                 new Lotto(Arrays.asList(1, 2, 3, 4, 8, 7)),
                 new Lotto(Arrays.asList(1, 2, 3, 9, 8, 7))
         ));
-        winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.get(10));
     }
 
     @Test
