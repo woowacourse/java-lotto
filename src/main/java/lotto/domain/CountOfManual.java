@@ -8,7 +8,7 @@ public class CountOfManual {
         this.countOfManual = countOfManual;
     }
 
-    public static CountOfManual from(final int countOfManual, final int countOfPurchase) {
+    public static CountOfManual of(final int countOfManual, final int countOfPurchase) {
         return new CountOfManual(countOfManual, countOfPurchase);
     }
 
