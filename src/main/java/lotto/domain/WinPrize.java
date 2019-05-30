@@ -4,17 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinPrize {
+    private static final int INIT_COUNT = 0;
+    private static final int PERCENT = 100;
+    private static final int COUNT = 1;
+
     private Map<Rank, Integer> ranks;
 
     public WinPrize() {
         ranks = new HashMap<>();
         for (Rank rank : Rank.values()) {
-            ranks.put(rank, 0);
+            ranks.put(rank, INIT_COUNT);
         }
     }
 
     public void addWinCount(final Rank rank) {
-        ranks.put(rank, ranks.get(rank) + 1);
+        ranks.put(rank, ranks.get(rank) + COUNT);
     }
 
     public Integer getWinCount(Rank rank) {
@@ -22,7 +26,7 @@ public class WinPrize {
     }
 
     public long getRateOfProfit(long purchasedAmount) {
-        return getTotalPrize() / purchasedAmount * 100;
+        return getTotalPrize() / purchasedAmount * PERCENT;
     }
 
     private long getTotalPrize() {
