@@ -14,7 +14,7 @@ public class WinningAggregatorTest {
         aggregator.addResult(LottoResult.NONE);
         aggregator.addResult(LottoResult.NONE);
         aggregator.addResult(LottoResult.NONE);
-        assertThat(aggregator.calculateEarningRate(1000)).isEqualTo(10.0);
+        assertThat(aggregator.calculateEarningRate(1000)).isEqualTo(9.0);
     }
 
     @Test

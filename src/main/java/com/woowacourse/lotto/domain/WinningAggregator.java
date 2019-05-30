@@ -22,8 +22,8 @@ public class WinningAggregator {
         long prizeMoneySum = results.keySet().stream()
             .mapToInt(k -> k.getPrizeMoney() * results.get(k))
             .sum();
-
-        return prizeMoneySum / (double) (totalLottoCount * unitPrice);
+        long balanceDelta = prizeMoneySum - totalLottoCount * unitPrice;
+        return balanceDelta / (double) (totalLottoCount * unitPrice);
     }
 
     public int getResultCount(LottoResult result) {
