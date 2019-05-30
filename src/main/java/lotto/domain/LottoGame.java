@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class LottoGame {
     }
 
     private Map<LottoRank, Integer> initializeResult() {
-        Map<LottoRank, Integer> result = new HashMap<>();
+        Map<LottoRank, Integer> result = new LinkedHashMap<>();
         for (LottoRank lottoRank : LottoRank.values()) {
             result.put(lottoRank, 0);
         }
