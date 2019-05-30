@@ -9,9 +9,7 @@ public class InputView {
 
 	public static int inputMoneyForPurchaseOfLotto() {
 		System.out.println(UserOutput.DEMAND_MONEY_FOR_PURCHASE_LOTTO.getUserOutputMessage());
-		int money = scanner.nextInt();
-		scanner.nextLine();
-		return money;
+		return Integer.parseInt(scanner.nextLine());
 	}
 
 	public static String inputWinningLotto() {
@@ -21,24 +19,20 @@ public class InputView {
 
 	public static int inputBonusBall() {
 		System.out.println(UserOutput.DEMAND_BONUS_BALL.getUserOutputMessage());
-		int bonusBall = scanner.nextInt();
-		scanner.nextLine();
-		return bonusBall;
+		return Integer.parseInt(scanner.nextLine());
 	}
 
 	public static int inputCountOfManualLotto() {
 		System.out.println(UserOutput.DEMAND_COUNT_OF_MANUALLY_LOTTO.getUserOutputMessage());
-		int count = scanner.nextInt();
-		scanner.nextLine();
-		return count;
+		return Integer.parseInt(scanner.nextLine());
 	}
 
 	public static List<String> inputManualLottoNumber(int count) {
 		System.out.println(UserOutput.DEMAND_MANUAL_LOTTO.getUserOutputMessage());
 		List<String> manualLottoNumber = new ArrayList<>();
-
-		while (count-- > 0) {
-			manualLottoNumber.add(scanner.nextLine());
+		while (count -- > 0) {
+			String s = scanner.nextLine();
+			manualLottoNumber.add(s.replaceAll("\\s", ""));
 		}
 		return manualLottoNumber;
 	}
