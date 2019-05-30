@@ -4,8 +4,8 @@ import lotto.model.customer.exception.InvalidPurchaseAmountException;
 import lotto.model.lottostore.Price;
 
 public class PurchaseAmount {
-    private final int purchaseAmount;
     private static final int ZERO = 0;
+    private final int purchaseAmount;
 
     public PurchaseAmount(int purchaseAmount) {
         checkValidPurchaseAmount(purchaseAmount);
