@@ -31,4 +31,16 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lotto);
     }
+
+    @Override
+    public String toString() {
+        String lottoString = "[";
+
+        for (int i = 0; i < 5; i++) {
+            lottoString += (lotto.get(i).getNumber() + ", ");
+        }
+
+        lottoString += (lotto.get(5).getNumber() +"]");
+        return lottoString;
+    }
 }
