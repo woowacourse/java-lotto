@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class LottoGameResult {
     private static final int PERCENT = 100;
+
     private final Map<Rank, Integer> lottoStat;
 
     private LottoGameResult(final List<Lotto> lottos, final WinningLotto winningLotto) {

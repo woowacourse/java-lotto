@@ -8,44 +8,44 @@ import java.util.List;
 
 public class ConsoleApplication {
     public static void main(String[] args) {
-        LottoService service = new LottoService(InputView.inputBuyMoney());
+        LottoBuyer buyer = new LottoBuyer(InputView.inputBuyMoney());
 
-        int manualPurchaseCount = assignManualPurchaseCount(service);
-        int autoPurchaseCount = assignAutoPurchaseCount(service);
+        int manualPurchaseCount = assignManualPurchaseCount(buyer);
+        int autoPurchaseCount = assignAutoPurchaseCount(buyer);
         OutputView.showBuyCounts(manualPurchaseCount, autoPurchaseCount);
 
-        OutputView.showLottos(service);
-        LottoGameResult gameResult = assignGameResult(service);
+        OutputView.showLottos(buyer);
+        LottoGameResult gameResult = assignGameResult(buyer);
         OutputView.showGameResult(gameResult);
     }
 
-    private static int assignManualPurchaseCount(LottoService service) {
+    private static int assignManualPurchaseCount(LottoBuyer buyer) {
         int manualPurchaseCount = InputView.inputManualPurchaseCount();
         int retCount = 0;
-        for (; retCount < manualPurchaseCount && service.canBuy(); retCount++) {
+        for (; retCount < manualPurchaseCount && buyer.canBuy(); retCount++) {
             List<Integer> numbers = InputView.inputManualNumbers();
-            service.buy(numbers);
+            buyer.buy(numbers);
         }
         return retCount;
     }
 
-    private static int assignAutoPurchaseCount(LottoService service) {
+    private static int assignAutoPurchaseCount(LottoBuyer buyer) {
         int autoPurchaseCount = 0;
-        while (service.canBuy()) {
-            service.buyRandom();
+        while (buyer.canBuy()) {
+            buyer.buyRandom();
             autoPurchaseCount++;
         }
         return autoPurchaseCount;
     }
 
-    private static LottoGameResult assignGameResult(LottoService service) {
+    private static LottoGameResult assignGameResult(LottoBuyer buyer) {
         Lotto winningLotto = InputView.inputWinningLotto();
         LottoNumber bonusNum = InputView.inputBonusLottoNumber();
         try {
-            return service.resultOf(winningLotto, bonusNum);
+            return buyer.resultOf(winningLotto, bonusNum);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
-            return assignGameResult(service);
+            return assignGameResult(buyer);
         }
     }
 }

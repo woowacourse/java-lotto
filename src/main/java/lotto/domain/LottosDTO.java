@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LottosDTO {
     private final List<Lotto> copyLottos;
+
     private Iterator<Lotto> iterator;
 
     private LottosDTO(final List<Lotto> lottos) {

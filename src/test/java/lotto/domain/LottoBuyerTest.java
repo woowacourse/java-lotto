@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoServiceTest {
+class LottoBuyerTest {
     private LottoFactory lottoFactory;
 
     @BeforeEach
@@ -22,7 +22,7 @@ class LottoServiceTest {
         List<Integer> fifthNumbers = Arrays.asList(42, 2, 3, 4, 10, 11);  //FIFTH
         List<Integer> missNumbers = Arrays.asList(1, 2, 17, 18, 19, 20);  //MISS
 
-        LottoService service = new LottoService(2000);
+        LottoBuyer service = new LottoBuyer(2000);
 
         service.buy(fifthNumbers);
         while (service.canBuy()) {

@@ -26,7 +26,7 @@ public class OutputView {
         System.out.printf("총 수익률은 %.1f 퍼센트입니다.", gameResult.profit(LottoMachine.LOTTO_MONEY));
     }
 
-    public static void showLottos(final LottoService service) {
+    public static void showLottos(final LottoBuyer service) {
         LottosDTO lottos = service.getLottos();
         while (lottos.hasNext()) {
             System.out.println(lottos.next());

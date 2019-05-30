@@ -9,8 +9,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
-    private static String DELIMITER = ",";
-    private static String BLANK = "";
+    private static final String DELIMITER = ",";
+    private static final String BLANK = "";
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
