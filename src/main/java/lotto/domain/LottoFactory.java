@@ -11,8 +11,10 @@ public class LottoFactory {
             lottos.add(new ManualLottoCreator(manual).create());
         }
 
+        LottoCreator lottoCreator = new AutoLottoCreator(Number.getNumberList());
+
         for (int i = 0; i < money.getLottoSize() - manuals.size(); i++) {
-            lottos.add(new AutoLottoCreator(Number.getNumberList()).create());
+            lottos.add(lottoCreator.create());
         }
 
         return lottos;

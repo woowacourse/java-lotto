@@ -3,10 +3,7 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.domain.Lotto;
-import lotto.domain.Money;
 import lotto.domain.Number;
-import lotto.domain.WinningLotto;
 import lotto.util.StringUtil;
 
 import java.util.Scanner;
@@ -63,16 +60,5 @@ public class InputView {
             return createBonusNumber();
         }
     }
-
-    public static WinningLotto createWinningLotto(Lotto lotto) {
-        try {
-            return new WinningLotto(lotto, InputView.createBonusNumber());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return createWinningLotto(lotto);
-        }
-    }
-
-
 
 }

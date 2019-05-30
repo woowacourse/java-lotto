@@ -38,7 +38,7 @@ public class Number implements Comparable<Number> {
     }
 
     public static List<Number> getNumberList() {
-        return NUMBER_LIST;
+        return new ArrayList<>(NUMBER_LIST);
     }
 
     @Override
