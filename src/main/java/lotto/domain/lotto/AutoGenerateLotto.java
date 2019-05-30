@@ -9,7 +9,7 @@ public class AutoGenerateLotto {
 
     private final Lotto lotto;
 
-    public AutoGenerateLotto(){
+    public AutoGenerateLotto(int price){
         this.lotto = makeAutoLotto(createNumber());
     }
 
@@ -29,4 +29,5 @@ public class AutoGenerateLotto {
     public Lotto getAutoLotto() {
         return lotto;
     }
+    
 }
