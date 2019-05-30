@@ -16,4 +16,9 @@ public class InputView {
 		System.out.println(UserOutput.DEMAND_WINNING_LOTTO.getUserOutputMessage());
 		return scanner.nextLine();
 	}
+
+	public static int inputBonusBall() {
+		System.out.println(UserOutput.DEMAND_BONUS_BALL.getUserOutputMessage());
+		return scanner.nextInt();
+	}
 }

@@ -17,6 +17,7 @@ public class LottoAppMain {
 		LottoResult lottoResult = new LottoResult(winningLotto, lottos);
 		OutputView.printLottoMatchResult(lottoResult.matchLotto());
 		OutputView.printEarningsRate(lottoResult);
+		InputView.inputBonusBall();
 	}
 
 	public static Money getMoneyForPurchaseOfLotto() {
