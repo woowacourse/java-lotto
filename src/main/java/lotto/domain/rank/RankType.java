@@ -1,21 +1,21 @@
-package lotto.domain;
+package lotto.domain.rank;
 
-public enum WinnerType {
+public enum RankType {
     FIRST(6, false), SECOND(5, true), THIRD(5, false),
     FOURTH(4, false), FIFTH(3, false);
 
     private final int matchNumber;
     private final boolean bonus;
 
-    WinnerType(int matchNumber, boolean bonus) {
+    RankType(int matchNumber, boolean bonus) {
         this.matchNumber = matchNumber;
         this.bonus = bonus;
     }
 
-    public static WinnerType valueOf(int matchNumber) {
-        for (WinnerType value : values()) {
-            if (value.matchNumber == matchNumber) {
-                return value;
+    public static RankType valueOf(int matchNumber) {
+        for (RankType rank : values()) {
+            if (rank.matchNumber == matchNumber) {
+                return rank;
             }
         }
         throw new IllegalArgumentException("당첨 조건을 찾을 수 없습니다.");

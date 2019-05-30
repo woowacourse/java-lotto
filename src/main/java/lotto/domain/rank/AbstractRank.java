@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.domain.rank;
 
-abstract class AbstractWinners implements WinnersImpl {
+abstract class AbstractRank implements RankImpl {
     public long rewardMoney(int reward, int winnersNumber) {
         return (long) reward * winnersNumber;
     }

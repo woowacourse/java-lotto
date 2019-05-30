@@ -1,15 +1,15 @@
-package lotto.domain;
+package lotto.domain.rank;
 
-public class FirstWinners extends AbstractWinners {
-    private static final String FIRST_WINNER_REWARD = "2,000,000,000";
+public class FifthRank extends AbstractRank {
+    private static final String FIFTH_WINNER_REWARD = "5,000";
 
     private final int reward;
     private int winnersNumber;
 
-    public FirstWinners() {
-        this.reward = Integer.parseInt(FIRST_WINNER_REWARD
+    public FifthRank() {
+        this.reward = Integer.parseInt(FIFTH_WINNER_REWARD
                 .replaceAll(",", ""));
-        this.winnersNumber = Winners.ZERO;
+        this.winnersNumber = Rank.ZERO;
     }
 
     public void addWinner() {
@@ -17,13 +17,13 @@ public class FirstWinners extends AbstractWinners {
     }
 
     public long rewardMoney() {
-        return super.rewardMoney(reward, winnersNumber);
+        return super.rewardMoney(this.reward, this.winnersNumber);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("6개 일치, (")
+        stringBuilder.append("3개 일치, (")
                 .append(reward)
                 .append("원) - ")
                 .append(winnersNumber)

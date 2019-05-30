@@ -1,15 +1,15 @@
-package lotto.domain;
+package lotto.domain.rank;
 
-public class ThirdWinners extends AbstractWinners {
+public class ThirdRank extends AbstractRank {
     private static final String THIRD_WINNER_REWARD = "1,500,000";
 
     private final int reward;
     private int winnersNumber;
 
-    public ThirdWinners() {
+    public ThirdRank() {
         this.reward = Integer.parseInt(THIRD_WINNER_REWARD
                 .replaceAll(",", ""));
-        this.winnersNumber = Winners.ZERO;
+        this.winnersNumber = Rank.ZERO;
     }
 
     public void addWinner() {

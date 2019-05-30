@@ -1,37 +1,37 @@
-package lotto.domain;
+package lotto.domain.rank;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Winners {
+public class Rank {
     public static final int ZERO = 0;
     private static final int PERCENT = 100;
-    private Map<WinnerType, AbstractWinners> winners;
+    private Map<RankType, AbstractRank> winners;
 
-    public Winners() {
+    public Rank() {
         this.winners = initWinners();
     }
 
-    private Map<WinnerType, AbstractWinners> initWinners() {
-        Map<WinnerType, AbstractWinners> winners = new LinkedHashMap<>();
-        winners.put(WinnerType.FIFTH, new FifthWinners());
-        winners.put(WinnerType.FOURTH, new FourthWinners());
-        winners.put(WinnerType.THIRD, new ThirdWinners());
-        winners.put(WinnerType.SECOND, new SecondWinners());
-        winners.put(WinnerType.FIRST, new FirstWinners());
+    private Map<RankType, AbstractRank> initWinners() {
+        Map<RankType, AbstractRank> winners = new LinkedHashMap<>();
+        winners.put(RankType.FIFTH, new FifthRank());
+        winners.put(RankType.FOURTH, new FourthRank());
+        winners.put(RankType.THIRD, new ThirdRank());
+        winners.put(RankType.SECOND, new SecondRank());
+        winners.put(RankType.FIRST, new FirstRank());
         return winners;
     }
 
     public void addWinner(int matchNumber) {
-        WinnerType winnerType = WinnerType.valueOf(matchNumber);
+        RankType winnerType = RankType.valueOf(matchNumber);
         winners.get(winnerType).addWinner();
     }
 
     public long totalRewardMoney() {
         long totalRewardMoney = 0;
-        for (AbstractWinners winners : winners.values()) {
-            totalRewardMoney += winners.rewardMoney();
+        for (AbstractRank rank : winners.values()) {
+            totalRewardMoney += rank.rewardMoney();
         }
         return totalRewardMoney;
     }
@@ -45,7 +45,7 @@ public class Winners {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Winners winners1 = (Winners) o;
+        Rank winners1 = (Rank) o;
         return Objects.equals(winners, winners1.winners);
     }
 
@@ -59,8 +59,8 @@ public class Winners {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계\n")
                 .append("---------\n");
-        for (AbstractWinners value : winners.values()) {
-            stringBuilder.append(value.toString());
+        for (AbstractRank rank : winners.values()) {
+            stringBuilder.append(rank.toString());
         }
         return stringBuilder.toString();
     }
