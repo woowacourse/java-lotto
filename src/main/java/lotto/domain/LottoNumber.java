@@ -8,14 +8,14 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(final int number) {
+    LottoNumber(final int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("없는 로또 번호입니다.");
         }
         this.number = number;
     }
 
-    public int getNumber() {
+    int getNumber() {
         return number;
     }
 

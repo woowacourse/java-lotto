@@ -12,7 +12,7 @@ public class WinningInformation {
         this.bonusBall = bonusBall;
     }
 
-    public Rank match(final Lotto lotto) {
+    Rank match(final Lotto lotto) {
         return Rank.valueOf(lotto.match(winningLottoNumbers), lotto.match(bonusBall));
     }
 }

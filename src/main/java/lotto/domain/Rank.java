@@ -22,11 +22,7 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
-    public int getWinningMoney() {
+    int getWinningMoney() {
         return winningMoney;
     }
 
@@ -43,7 +39,7 @@ public enum Rank {
         return message;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+    static Rank valueOf(int countOfMatch, boolean matchBonus) {
         if (countOfMatch < WINNING_MIN_COUNT) {
             return MISS;
         }
@@ -65,7 +61,7 @@ public enum Rank {
         return this.countOfMatch == countOfMatch;
     }
 
-    public static List<Rank> winningValues() {
+    static List<Rank> winningValues() {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.MISS)
                 .collect(Collectors.toList());

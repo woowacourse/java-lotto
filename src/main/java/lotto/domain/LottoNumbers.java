@@ -7,7 +7,7 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(final List<LottoNumber> lottoNumbers) {
+    LottoNumbers(final List<LottoNumber> lottoNumbers) {
         checkDuplicate(lottoNumbers);
         checkNumberOfLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
@@ -26,7 +26,7 @@ public class LottoNumbers {
         }
     }
 
-    public List<Integer> getLottoNumbers() {
+    List<Integer> getLottoNumbers() {
         List<Integer> lottoNumbers = new ArrayList<>();
         for (LottoNumber lottoNumber : this.lottoNumbers) {
             lottoNumbers.add(lottoNumber.getNumber());
@@ -34,11 +34,11 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public boolean match(LottoNumber lottoNumber) {
+    boolean match(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public int match(LottoNumbers lottoNumbers) {
+    int match(LottoNumbers lottoNumbers) {
         int result = 0;
         for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers) {
             result += contains(lottoNumber);

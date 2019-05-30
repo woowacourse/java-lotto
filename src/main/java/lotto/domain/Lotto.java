@@ -6,15 +6,15 @@ import java.util.Objects;
 public class Lotto {
     private final LottoNumbers lottoNumbers;
 
-    public Lotto(final LottoNumbers lottoNumbers) {
+    Lotto(final LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int match(final LottoNumbers lottoNumbers) {
+    int match(final LottoNumbers lottoNumbers) {
         return this.lottoNumbers.match(lottoNumbers);
     }
 
-    public boolean match(final LottoNumber lottoNumber) {
+    boolean match(final LottoNumber lottoNumber) {
         return lottoNumbers.match(lottoNumber);
     }
 

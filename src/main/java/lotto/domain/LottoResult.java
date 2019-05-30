@@ -25,7 +25,7 @@ public class LottoResult {
         }
     }
 
-    public void add(Rank rank) {
+    void add(Rank rank) {
         totalLottos++;
         result.put(rank, result.get(rank) + 1);
     }
