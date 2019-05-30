@@ -22,7 +22,7 @@ public class InputView {
         int money;
         try {
             System.out.println(PURCHASE_MONEY_MESSAGE);
-            money = sc.nextInt();
+            money = Validator.stringToInt(sc.nextLine());
             Validator.checkInputMoney(money);
         } catch (IllegalArgumentException e) {
             return inputMoney();
@@ -37,9 +37,13 @@ public class InputView {
         int manualLottoSize;
         try {
             System.out.println(NEW_LINE + MANUAL_LOTTO_SIZE_MESSAGE);
-            manualLottoSize = sc.nextInt();
+            manualLottoSize = Validator.stringToInt(sc.nextLine());
             Validator.checkManualLottoSize(manualLottoSize, money);
         } catch (IllegalArgumentException e) {
+            System.out.println(money.availablePurchseTicketCount() + "장 이상 구입하실 수 없습니다.");
+            return inputManualLottoSize(money);
+        } catch (InputMismatchException e) {
+            System.out.println("숫자를 입력해주세요.");
             return inputManualLottoSize(money);
         }
         return manualLottoSize;
@@ -83,7 +87,7 @@ public class InputView {
         int bonusNumber;
         try {
             System.out.println(BONUS_NUMBER_MESSAGE);
-            bonusNumber = sc.nextInt();
+            bonusNumber = Validator.stringToInt(sc.nextLine());
             Validator.checkBonusNumberDuplication(winningLotto, bonusNumber);
             return NumberSet.of(bonusNumber);
         } catch (IllegalArgumentException e) {
