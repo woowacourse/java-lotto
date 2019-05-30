@@ -23,13 +23,13 @@ class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumber1 = LottoNumber.getNumber(1);
-        lottoNumber2 = LottoNumber.getNumber(2);
-        lottoNumber3 = LottoNumber.getNumber(3);
-        lottoNumber4 = LottoNumber.getNumber(4);
-        lottoNumber5 = LottoNumber.getNumber(5);
-        lottoNumber6 = LottoNumber.getNumber(6);
-        lottoNumber7 = LottoNumber.getNumber(7);
+        lottoNumber1 = LottoNumber.generateNumber(1);
+        lottoNumber2 = LottoNumber.generateNumber(2);
+        lottoNumber3 = LottoNumber.generateNumber(3);
+        lottoNumber4 = LottoNumber.generateNumber(4);
+        lottoNumber5 = LottoNumber.generateNumber(5);
+        lottoNumber6 = LottoNumber.generateNumber(6);
+        lottoNumber7 = LottoNumber.generateNumber(7);
         lotto = CustomLottoGenerator.makeLotto("1,2,3,4,5,6,".split(","));
     }
 

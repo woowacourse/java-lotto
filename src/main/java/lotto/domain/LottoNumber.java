@@ -9,14 +9,16 @@ import java.util.stream.IntStream;
 import static lotto.domain.domainconstants.DomainConstants.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>();
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS;
     private static final List<LottoNumber> LOTTO_NUMBERS_VALUES;
 
     private final int number;
 
     static {
+        LOTTO_NUMBERS = new HashMap<>();
         IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .forEachOrdered(value -> LOTTO_NUMBERS.put(value, new LottoNumber(value)));
+
         LOTTO_NUMBERS_VALUES = new ArrayList<>(LOTTO_NUMBERS.values());
     }
 
@@ -31,12 +33,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public static LottoNumber getNumber(int lottoNumber) {
+    public static LottoNumber generateNumber(int lottoNumber) {
         validLottoNumber(lottoNumber);
         return LOTTO_NUMBERS.get(lottoNumber);
     }
 
-    static Set<LottoNumber> getRandomLottoNumbers() {
+    static Set<LottoNumber> generateRandomLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBERS_VALUES);
         return LOTTO_NUMBERS_VALUES.stream()
                 .limit(LOTTO_SIZE)
