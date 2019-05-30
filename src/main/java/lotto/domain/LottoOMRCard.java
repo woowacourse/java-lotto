@@ -14,7 +14,7 @@ public class LottoOMRCard {
         lottos.add(CustomLottoGenerator.makeLotto(userNumbers));
     }
 
-    public LottoPaper getPaper() {
+    LottoPaper getPaper() {
         return new LottoPaper(lottos);
     }
 

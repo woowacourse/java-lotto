@@ -18,6 +18,6 @@ class AutoLottoGenerator {
         Collections.shuffle(lottoNumbers);
         return new Lotto(lottoNumbers.stream()
                 .limit(6)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 }
