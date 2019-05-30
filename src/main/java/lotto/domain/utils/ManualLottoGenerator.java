@@ -1,7 +1,7 @@
 package lotto.domain.utils;
 
-import lotto.domain.Lotto;
-import lotto.domain.Number;
+import lotto.domain.model.Lotto;
+import lotto.domain.model.Number;
 import java.util.List;
 
 public class ManualLottoGenerator {

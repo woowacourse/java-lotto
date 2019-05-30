@@ -1,8 +1,8 @@
 package lotto.domain.view;
 
-import lotto.domain.Money;
-import lotto.domain.Number;
-import lotto.domain.NumberSet;
+import lotto.domain.model.Money;
+import lotto.domain.model.Number;
+import lotto.domain.model.NumberSet;
 import lotto.domain.utils.Validator;
 
 import java.util.*;

@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.model;
 
+import lotto.domain.model.Money;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

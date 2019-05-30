@@ -1,8 +1,8 @@
 package lotto.domain.utils;
 
-import lotto.domain.Lotto;
-import lotto.domain.Number;
-import lotto.domain.NumberSet;
+import lotto.domain.model.Lotto;
+import lotto.domain.model.Number;
+import lotto.domain.model.NumberSet;
 import org.junit.Before;
 import org.junit.Test;
 

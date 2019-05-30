@@ -1,7 +1,7 @@
 package lotto.domain.utils;
 
-import lotto.domain.Money;
-import lotto.domain.Number;
+import lotto.domain.model.Money;
+import lotto.domain.model.Number;
 
 import java.util.HashSet;
 import java.util.List;
