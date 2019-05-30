@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
+
     public static void main(String[] args) {
         int countOfPurchase = setPurchaseAmount() / 1000;
         OutputView.outputCountOfPurchase(countOfPurchase);
