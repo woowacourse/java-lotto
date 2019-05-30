@@ -34,6 +34,6 @@ public class ResultTest {
         map.put(Rank.FOURTH, 1);
         Result result = new Result(map);
 
-        assertThat(result.calculateEarningsRate(new Payment(10_000))).isEqualTo(0.5);
+        assertThat(result.calculateEarningsRate(new Payment(10_000))).isEqualTo(5.0);
     }
 }

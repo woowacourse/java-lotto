@@ -28,4 +28,17 @@ public class Result {
         long totalWinningMoney = Rank.calculateTotalWinningMoney(lottoScore);
         return payment.calculateEarningsRate(totalWinningMoney);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Result result = (Result) o;
+        return Objects.equals(lottoScore, result.lottoScore);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoScore);
+    }
 }
