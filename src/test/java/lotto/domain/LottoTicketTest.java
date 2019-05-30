@@ -27,4 +27,10 @@ class LottoTicketTest {
         });
     }
 
+    @Test
+    void 번호_개수_6개_아닌경우() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            LottoTicket.createLottoTicket(lottoNumbers);
+        });
+    }
 }
