@@ -9,7 +9,7 @@ public class Money {
 
     public Money(int amount) {
         if (amount < MIN_MONEY) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("잘못된 입력입니다. 0 이상의 수로 다시 입력해주세요.");
         }
         this.amount = amount;
     }

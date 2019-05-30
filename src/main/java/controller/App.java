@@ -1,13 +1,11 @@
 package controller;
 
 import model.Lotto;
-import model.LottoNumber;
 import model.Lottos;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
-import java.util.Set;
 
 public class App {
     public static void main(String[] argc) {

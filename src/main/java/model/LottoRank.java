@@ -1,9 +1,9 @@
 package model;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-    NONE(0, new Money(0)),
     FIFTH(3, new Money(5000)),
     FOURTH(4, new Money(50000)),
     THIRD(5, new Money(1500000)),
@@ -18,17 +18,16 @@ public enum LottoRank {
         this.prize = prize;
     }
 
-    public static LottoRank get(int numberOfMatches, boolean containsBonusNumber) {
+    public static Optional<LottoRank> get(int numberOfMatches, boolean containsBonusNumber) {
         if (numberOfMatches == SECOND.numberOfMatches && containsBonusNumber) {
-            return SECOND;
+            return Optional.of(SECOND);
         }
         if (numberOfMatches >= FIFTH.numberOfMatches) {
             return Stream.of(LottoRank.values())
                     .filter(rank -> rank.numberOfMatches == numberOfMatches)
-                    .findFirst()
-                    .get();
+                    .findFirst();
         }
-        return NONE;
+        return Optional.empty();
     }
 
     public int getNumberOfMatches() {

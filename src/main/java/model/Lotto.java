@@ -8,16 +8,15 @@ import java.util.stream.Stream;
 public class Lotto {
     public static final int PRICE = 1000;
     public static final int NUMBER_OF_NUMBERS = 6;
-    private static final List<LottoNumber> NUMBERS = IntStream
-            .rangeClosed(LottoNumber.MIN, LottoNumber.MAX).boxed()
-            .map(i -> LottoNumber.of(i))
-            .collect(Collectors.toList());
+    private static final List<LottoNumber> BALLS = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX).boxed()
+                                                                .map(i -> LottoNumber.of(i))
+                                                                .collect(Collectors.toList());
 
     private final List<LottoNumber> numbers;
 
     public static Lotto autoGenerate() {
-        Collections.shuffle(NUMBERS);
-        return new Lotto(new HashSet<>(NUMBERS.subList(0, NUMBER_OF_NUMBERS)));
+        Collections.shuffle(BALLS);
+        return new Lotto(new HashSet<>(BALLS.subList(0, NUMBER_OF_NUMBERS)));
     }
 
     public Lotto(Set<LottoNumber> numbers) {
@@ -39,15 +38,8 @@ public class Lotto {
         );
     }
 
-    public LottoRank match(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        if (winningNumbers.size() != NUMBER_OF_NUMBERS) {
-            throw new IllegalArgumentException();
-        }
-        Set<LottoNumber> test = new HashSet<>();
-        test.addAll(numbers);
-        test.removeAll(winningNumbers);
-        return LottoRank.get(NUMBER_OF_NUMBERS - test.size(), test.contains(bonusNumber));
-
+    public Optional<LottoRank> match(WinningNumbers winningNumbers) {
+        return winningNumbers.match(numbers);
     }
 
     @Override
