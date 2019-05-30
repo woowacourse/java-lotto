@@ -15,7 +15,6 @@ class LottoTest {
 
     private LottoFactory lottoFactory;
 
-
     @BeforeEach
     public void setUp() {
         lottoFactory = new LottoFactory();
