@@ -1,6 +1,6 @@
-package lotto.domain.ShuffleRule;
+package lotto.domain.shufflerule;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.lottofactory.LottoNumber;
 
 import java.util.List;
 

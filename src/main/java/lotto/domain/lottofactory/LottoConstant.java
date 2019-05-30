@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lottofactory;
 
 public class LottoConstant {
     public static final int LIMIT_MINIMUM_NUMBER = 1;

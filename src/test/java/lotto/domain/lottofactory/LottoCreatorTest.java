@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.domain.lottofactory;
 
-import lotto.domain.ShuffleRule.FixShuffle;
+import lotto.domain.shufflerule.FixShuffle;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class LottoFactoryTest {
+class LottoCreatorTest {
     private static List<LottoNumber> actual;
 
     @BeforeEach
@@ -23,12 +24,12 @@ class LottoFactoryTest {
     @Test
     void null_check() {
         assertThrows(NullPointerException.class, () -> {
-            LottoFactory.getLottoTicket(null);
+            LottoCreator.getLottoTicket(null);
         });
     }
 
     @Test
     void 로또_티켓_생성() {
-        assertThat(LottoTicket.createLottoTicket(actual)).isEqualTo(LottoFactory.getLottoTicket(new FixShuffle()));
+        Assertions.assertThat(LottoTicket.createLottoTicket(actual)).isEqualTo(LottoCreator.getLottoTicket(new FixShuffle()));
     }
 }

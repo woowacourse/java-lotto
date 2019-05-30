@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoAmount;
+import lotto.domain.lottofactory.LottoAmount;
 import lotto.view.inputview.InputView;
 import lotto.view.inputview.PriceParser;
 import lotto.view.outputview.OutputView;

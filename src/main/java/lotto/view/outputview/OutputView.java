@@ -1,6 +1,6 @@
 package lotto.view.outputview;
 
-import lotto.domain.LottoAmount;
+import lotto.domain.lottofactory.LottoAmount;
 
 public class OutputView {
     public static void printAmount(LottoAmount lottoAmount) {

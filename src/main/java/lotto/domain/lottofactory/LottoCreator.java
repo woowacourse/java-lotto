@@ -1,12 +1,12 @@
-package lotto.domain;
+package lotto.domain.lottofactory;
 
-import lotto.domain.ShuffleRule.Shuffle;
+import lotto.domain.shufflerule.Shuffle;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoFactory {
+public class LottoCreator {
     private static List<LottoNumber> lottoNumbers;
 
     static {

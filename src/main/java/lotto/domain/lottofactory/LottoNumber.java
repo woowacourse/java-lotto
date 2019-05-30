@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lottofactory;
 
 import lotto.utils.NullCheckUtil;
 

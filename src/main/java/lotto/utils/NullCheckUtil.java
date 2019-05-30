@@ -1,6 +1,6 @@
 package lotto.utils;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.lottofactory.LottoNumber;
 
 import java.util.List;
 
