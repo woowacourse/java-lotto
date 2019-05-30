@@ -14,42 +14,37 @@ import java.util.Scanner;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static Money createMoney() {
+    public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-
         try {
-            return new Money(Integer.parseInt(scanner.nextLine()));
+            return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             System.out.println("숫자를 입력하세요");
-            return createMoney();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return createMoney();
+            return inputMoney();
         }
     }
 
-    public static Lotto createLotto() {
+    public static int inputManualSize() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         try {
-            return new Lotto(getNumbers());
+            int manualSize = Integer.parseInt(scanner.nextLine());
+            return manualSize;
         } catch (NumberFormatException e) {
             System.out.println("숫자를 입력하세요");
-            return createLotto();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return createLotto();
+            return inputManualSize();
         }
     }
 
-    private static List<Number> getNumbers() {
-        List<Number> lotto = new ArrayList<>();
-        String[] lottoString = inputUserString();
-        for (String num : lottoString) {
-            lotto.add(Number.valueOf(Integer.parseInt(num)));
+    public static List<String[]> createManualLottos(int manualSize) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<String[]> result = new ArrayList<>();
+        for (int i = 0; i < manualSize; i++) {
+            result.add(StringUtil.parseString(scanner.nextLine()));
         }
-        return lotto;
+        return result;
     }
 
-    private static String[] inputUserString() {
+    public static String[] inputUserString() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return StringUtil.parseString(scanner.nextLine());
     }
@@ -78,17 +73,6 @@ public class InputView {
         }
     }
 
-    public static int inputManualSize(Money money) {
-        try {
-            int manualSize = Integer.parseInt(scanner.nextLine());
-            money.checkManualSize(manualSize);
-            return manualSize;
-        } catch (NumberFormatException e) {
-            System.out.println("숫자를 입력하세요");
-            return inputManualSize(money);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputManualSize(money);
-        }
-    }
+
+
 }

@@ -1,13 +1,21 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Number implements Comparable<Number> {
     static final int MAX_NUMBER = 45;
     static final int MIN_NUMBER = 1;
 
-    private static final Map<Integer, Number> NUMBER_MAP = new HashMap<>();
+    private static final List<Number> NUMBER_LIST = new ArrayList<>();
+
+    static {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            NUMBER_LIST.add(new Number(i));
+        }
+    }
+
     private final int num;
 
     private Number(final int num) {
@@ -22,14 +30,15 @@ public class Number implements Comparable<Number> {
     }
 
     public static Number valueOf(int num){
-        if (!NUMBER_MAP.containsKey(num)) {
-            NUMBER_MAP.put(num, new Number(num));
-        }
-        return NUMBER_MAP.get(num);
+        return NUMBER_LIST.get(num);
     }
 
     public int getNum() {
         return num;
+    }
+
+    public static List<Number> getNumberList() {
+        return NUMBER_LIST;
     }
 
     @Override

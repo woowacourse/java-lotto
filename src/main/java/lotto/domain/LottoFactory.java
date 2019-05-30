@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoFactory {
-    public static List<Lotto> createLottos(int num, LottoCreator lottoCreator) {
+    public static List<Lotto> createLottos(List<String[]> manuals, Money money) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < num; i++) {
-            lottos.add(lottoCreator.create());
+        for (String[] manual : manuals) {
+            lottos.add(new ManualLottoCreator(manual).create());
         }
+
+        for (int i = 0; i < money.getLottoSize() - manuals.size(); i++) {
+            lottos.add(new AutoLottoCreator(Number.getNumberList()).create());
+        }
+
         return lottos;
     }
 }
