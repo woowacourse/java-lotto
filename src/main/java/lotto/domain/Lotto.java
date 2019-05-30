@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Lotto {
         if (!isValidSize(lottoNumbers)) {
             throw new InvalidLottoException("로또 수는 6개 이어야 합니다.");
         }
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
         Collections.sort(this.lottoNumbers);
     }
 

@@ -1,0 +1,34 @@
+package lotto.domain;
+
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class UserTest {
+
+
+    @Test
+    void 음의_금액을_입력_검사(){
+        assertThrows(InvalidMoneyException.class, () -> new User(-1000));
+    }
+
+    @Test
+    void 천원_단위_아닌_금액_입력_검사(){
+        assertThrows(InvalidMoneyException.class, ()-> new User(1));
+    }
+
+    @Test
+    void 사용자의_돈만큼_로또_생성_확인(){
+        int money=5000;
+        assertThat(new User(money).getUserLottos().size()).isEqualTo(5);
+        User user=new User(money);
+        for (Lotto lotto:user.getUserLottos()) {
+            for(LottoNumber lottoNumber:lotto.getLottoNumbers()){
+                System.out.print(lottoNumber.getLottoNumber()+"  ");
+            }
+            System.out.println();
+        }
+    }
+
+}
