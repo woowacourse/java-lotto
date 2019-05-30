@@ -3,53 +3,48 @@ package lotto.domain.generator;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
-import lotto.view.InputView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottosGenerator {
-    private final int countOfManual;
+    private final List<String> lottoNoStrings;
     private final int countOfPurchase;
-    private final InputView inputView;
 
-    private LottosGenerator(final int countOfManual, final int countOfPurchase, InputView inputView) {
-        validate(countOfManual, countOfPurchase);
-        this.countOfManual = countOfManual;
+    private LottosGenerator(final List<String> lottoNoStrings, final int countOfPurchase) {
+        this.lottoNoStrings = new ArrayList<>(lottoNoStrings);
         this.countOfPurchase = countOfPurchase;
-        this.inputView = inputView;
+        validate(lottoNoStrings.size(), countOfPurchase);
     }
 
     private void validate(final int countOfManual, final int countOfPurchase) {
         if (countOfManual > countOfPurchase) {
-            throw new IllegalArgumentException("구입 금액 초과");
+            throw new IllegalArgumentException("수동은 총 구매 횟수를 넘으면 안됩니다.");
         }
     }
 
-    public static LottosGenerator of(final int countOfManual, final int countOfPurchase, InputView inputView) {
-        return new LottosGenerator(countOfManual, countOfPurchase, inputView);
+    public static LottosGenerator of(final List<String> lottoNos, final int countOfPurchase) {
+        return new LottosGenerator(lottoNos, countOfPurchase);
     }
 
     public List<Lotto> generate() {
-        List<Lotto> lottos = inputManualLotto();
+        List<Lotto> lottos = new ArrayList<>();
+        addManualLotto(lottos);
         addAutoLotto(lottos);
         return lottos;
     }
 
-    private List<Lotto> inputManualLotto() {
-        inputView.printInputManual();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < countOfManual; i++) {
-            String inputLottoNos = inputView.inputManual();
-            List<LottoNo> lottoNos = new LottoNosManualGenerator(inputLottoNos).generate();
+    private void addManualLotto(final List<Lotto> lottos) {
+        for (final String lottoNo : lottoNoStrings) {
+            List<LottoNo> lottoNos = new LottoNosManualGenerator(lottoNo).generate();
             lottos.add(Lotto.of(lottoNos));
         }
-        return lottos;
     }
 
     private void addAutoLotto(final List<Lotto> lottos) {
         LottoNosGenerator lottoNosGenerator = new LottoNosAutoGenerator();
-        for (int i = 0; i < countOfPurchase - countOfManual; i++) {
+        int countOfAuto = countOfPurchase - lottos.size();
+        for (int i = 0; i < countOfAuto; i++) {
             List<LottoNo> lottoNos = lottoNosGenerator.generate();
             lottos.add(Lotto.of(lottoNos));
         }
