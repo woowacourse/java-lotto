@@ -1,30 +1,50 @@
 package lotto.controller;
 
 import lotto.InputValidator;
-import lotto.domain.LottoFactory;
-import lotto.domain.Lottoes;
-import lotto.domain.Price;
-import lotto.domain.PriceFactory;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import static lotto.domain.LottoFactory.generateLottoes;
+import java.util.List;
 
 public class Controller {
     public static void main(String[] args) {
         String priceInput = InputView.promptPrice();
-        Price price = generatePrice(priceInput);
-        Lottoes lottoes = LottoFactory.generateLottoes(price.getSize());
+
+        Money money = createMoney(priceInput);
+        Lottoes lottoes = LottoFactory.createAutoLottoes(money.getSize());
         OutputView.printLottoes(lottoes);
+
+        List<String> winningNumberInput = InputView.promptWinningNumber();
+        Lotto winnigLottoNumbers = createWinningLottoNumbers(winningNumberInput);
+        String bonusBall = InputView.promptBonusBall();
+        WinningLotto winningLotto = createWinningLotto(winnigLottoNumbers,bonusBall);
+        OutputView.printLotto(winningLotto);
+
+
+    }
+
+    private static WinningLotto createWinningLotto(Lotto winnigLottoNumbers, String bonusBall) {
+        while(InputValidator.isNotValidWinningLotto(winnigLottoNumbers,bonusBall)){
+            bonusBall = InputView.promptBonusBall();
+        }
+        return LottoFactory.createWinningLotto(winnigLottoNumbers,Integer.parseInt(bonusBall));
+    }
+
+    private static Lotto createWinningLottoNumbers(List<String> winningNumberInput) {
+        while(InputValidator.isNotValidLotto(winningNumberInput)){
+            winningNumberInput = InputView.promptWinningNumber();
+        }
+        return LottoFactory.createLotto(winningNumberInput);
     }
 
 
-    private static Price generatePrice(String priceInput) {
-        while(InputValidator.isNotValidPrice(priceInput)){
-            priceInput = InputView.promptPrice();
+    private static Money createMoney(String moneyInput) {
+        while(InputValidator.isNotValidPrice(moneyInput)){
+            moneyInput = InputView.promptPrice();
         }
-        Price price = PriceFactory.generatePrice(Integer.parseInt(priceInput));
-        return price;
+        Money money = MoneyFactory.createMoney(Integer.parseInt(moneyInput));
+        return money;
     }
 
 

@@ -8,6 +8,7 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
+
         this.numbers = numbers;
     }
 
@@ -17,5 +18,7 @@ public class Lotto {
     }
 
 
-
+    public boolean isContain(int bonusBall) {
+        return numbers.contains(LottoNumber.getLottoNumber(bonusBall));
+    }
 }

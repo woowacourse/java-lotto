@@ -1,11 +1,9 @@
 package lotto.domain;
 
-import lotto.Exception.InvalidLottoNumberException;
-
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber>{
-    private static final int LOTTO_SIZE = 6;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -18,21 +16,32 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     private LottoNumber(int number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new InvalidLottoNumberException();
-        }
         this.number = number;
     }
 
     public static List<LottoNumber> getAutoLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        List<LottoNumber> autoLottoNumbers = new ArrayList<>();
-
-        for (int i = 0; i < LOTTO_SIZE; i++) {
-            autoLottoNumbers.add(lottoNumbers.get(i));
-        }
+        List<LottoNumber> autoLottoNumbers = lottoNumbers.stream()
+                .collect(Collectors.toList())
+                .subList(0,6);
         Collections.sort(autoLottoNumbers);
         return autoLottoNumbers;
+    }
+
+    public static boolean isNotValidLottoNumber(int number) {
+         return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
+    }
+
+    public static List<LottoNumber> getLotto(List<Integer> collect) {
+        List<LottoNumber> lotto =lottoNumbers.stream()
+                .filter(n -> collect.contains(n.number))
+                .collect(Collectors.toList());
+        Collections.sort(lotto);
+        return lotto;
+    }
+
+    public static LottoNumber getLottoNumber(int lottoNumber){
+        return new LottoNumber(lottoNumber);
     }
 
     @Override

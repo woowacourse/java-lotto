@@ -9,7 +9,7 @@ public class LottoNumberFactoryTest {
     @Test
     void 숫자가1이상45이하인지() {
         assertThrows(InvalidLottoNumberException.class, () -> {
-            LottoNumberFactory.generateLottoNumbers();
+          //  LottoNumberFactory.generateLottoNumbers();
         });
     }
 }
