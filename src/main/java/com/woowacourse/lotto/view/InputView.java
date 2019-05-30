@@ -14,7 +14,7 @@ public class InputView {
 
 	public static String inputWinningLotto() {
 		System.out.println(UserOutput.DEMAND_WINNING_LOTTO.getUserOutputMessage());
-		return scanner.nextLine();
+		return scanner.nextLine().replaceAll("\\s", "");
 	}
 
 	public static int inputBonusBall() {
@@ -31,8 +31,7 @@ public class InputView {
 		System.out.println(UserOutput.DEMAND_MANUAL_LOTTO.getUserOutputMessage());
 		List<String> manualLottoNumber = new ArrayList<>();
 		while (count -- > 0) {
-			String s = scanner.nextLine();
-			manualLottoNumber.add(s.replaceAll("\\s", ""));
+			manualLottoNumber.add(scanner.nextLine().replaceAll("\\s", ""));
 		}
 		return manualLottoNumber;
 	}
