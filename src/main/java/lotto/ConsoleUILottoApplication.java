@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.lotto.InvalidLottoTicketException;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.lottoresult.InvalidWinningLottoException;
@@ -20,7 +21,8 @@ public class ConsoleUILottoApplication {
         OutputView.printChange(purchaseAmount);
         OutputView.printLottoTicketGroup(lottos);
 
-        LottoResult lottoResult = new LottoResult(createWinningLotto(), lottos);
+        WinningLotto winningLotto = createWinningLotto(createWinningLottoTicket());
+        LottoResult lottoResult = new LottoResult(winningLotto, lottos);
         OutputView.printLottoResult(lottoResult);
     }
 
@@ -30,15 +32,6 @@ public class ConsoleUILottoApplication {
         } catch (PurchaseAmountException e) {
             OutputView.printErrorMessage(e.getMessage());
             return createPurchaseAmount();
-        }
-    }
-
-    private static WinningLotto createWinningLotto() {
-        try {
-            return WinningLotto.create(InputView.inputWinningNumbers());
-        } catch (InvalidWinningLottoException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return createWinningLotto();
         }
     }
 
@@ -52,5 +45,23 @@ public class ConsoleUILottoApplication {
         }
 
         return lottoTickets;
+    }
+
+    private static LottoTicket createWinningLottoTicket() {
+        try {
+            return LottoTicket.create(InputView.inputWinningNumbers());
+        } catch (InvalidLottoTicketException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return createWinningLottoTicket();
+        }
+    }
+
+    private static WinningLotto createWinningLotto(LottoTicket winningTicket) {
+        try {
+            return WinningLotto.create(winningTicket, InputView.inputBonusNumber());
+        } catch (InvalidWinningLottoException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return createWinningLotto(winningTicket);
+        }
     }
 }

@@ -36,6 +36,13 @@ public class LottoTicketTest {
     }
 
     @Test
+    void 번호범위_벗어남() {
+        assertThrows(InvalidLottoNumberException.class, () -> {
+            LottoTicket.create("46, 1, 2, 3, 4, 5");
+        });
+    }
+
+    @Test
     void 번호_일치_개수_확인() {
         LottoTicket winning = LottoTicket.create(Arrays.asList(1,2,3,4,5,6));
         LottoTicket user = LottoTicket.create(Arrays.asList(1,2,3,8,9,10));

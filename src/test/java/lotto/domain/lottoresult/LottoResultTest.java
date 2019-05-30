@@ -21,19 +21,19 @@ public class LottoResultTest {
                 LottoTicket.create(Arrays.asList(7, 8, 9, 1, 2, 3))
                 ));
         lottoResult = new LottoResult(
-                WinningLotto.create(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                WinningLotto.create(LottoTicket.create("1, 2, 3, 4, 5, 6"), "15"),
                 lottoTickets
         );
     }
 
     @Test
     void 통계정보_확인1() {
-        assertThat(lottoResult.countOfRank(LottoRank.rankOf(3))).isEqualTo(2);
+        assertThat(lottoResult.countOfRank(LottoRank.rankOf(3, false))).isEqualTo(2);
     }
 
     @Test
     void 통계정보_확인2() {
-        assertThat(lottoResult.countOfRank(LottoRank.rankOf(2))).isEqualTo(0);
+        assertThat(lottoResult.countOfRank(LottoRank.rankOf(2, false))).isEqualTo(0);
     }
 
     @Test

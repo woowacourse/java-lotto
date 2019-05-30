@@ -11,8 +11,8 @@ public class PurchaseAmount {
     }
 
     private void validatePurchaseAmount() {
-        if (money <= LottoTicket.PRICE) {
-            throw new PurchaseAmountException("최소 구입 금액은 " + LottoTicket.PRICE + "입니다.");
+        if (money < LottoTicket.getPrice()) {
+            throw new PurchaseAmountException("최소 구입 금액은 " + LottoTicket.getPrice() + "입니다.");
         }
     }
 
@@ -25,10 +25,10 @@ public class PurchaseAmount {
     }
 
     public boolean buy(LottoTicket lottoTicket) {
-        if (lottoTicket.PRICE > money) {
+        if (lottoTicket.getPrice() > money) {
             return false;
         }
-        money -= lottoTicket.PRICE;
+        money -= lottoTicket.getPrice();
         return true;
     }
 

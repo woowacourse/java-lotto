@@ -36,6 +36,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return LOTTO_NUMBER_POOL.get(number - 1);
     }
 
+    public static LottoNumber of(String numberText) {
+        try {
+            return of(Integer.parseInt(numberText));
+        } catch (NumberFormatException e) {
+            throw new InvalidLottoNumberException("로또 번호는 숫자만 가능합니다.");
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

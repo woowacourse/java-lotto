@@ -1,9 +1,11 @@
 package lotto.domain.lotto;
 
+import lotto.util.StringConverter;
+
 import java.util.*;
 
 public class LottoTicket {
-    public static final int PRICE = 1000;
+    private static final int PRICE = 1000;
     static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
@@ -26,18 +28,30 @@ public class LottoTicket {
         }
     }
 
-    public static LottoTicket create() {
-        return new LottoTicket(LottoNumbersGenerator.create());
+    public static LottoTicket create(String lottoNumbersText) {
+        return create(StringConverter.toNumbers(lottoNumbersText));
     }
 
     public static LottoTicket create(List<Integer> lottoNumbers) {
         return new LottoTicket(LottoNumbersGenerator.create(lottoNumbers));
     }
 
+    public static LottoTicket create() {
+        return new LottoTicket(LottoNumbersGenerator.create());
+    }
+
     public int countOfMatch(LottoTicket lottoTicket) {
         return (int) lottoTicket.lottoNumbers.stream()
                 .filter(x -> this.lottoNumbers.contains(x))
                 .count();
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+    public static int getPrice() {
+        return PRICE;
     }
 
     @Override
