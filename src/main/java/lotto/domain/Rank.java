@@ -2,9 +2,10 @@ package lotto.domain;
 
 public enum Rank {
     FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
     MISS(0, 0);
 
     private static final int WINNING_MIN_COUNT = 3;
@@ -17,13 +18,17 @@ public enum Rank {
         this.money = money;
     }
 
-    public static Rank valueOf(int count) {
+    public static Rank valueOf(int count, boolean isBonusNum) {
         if (count < WINNING_MIN_COUNT) {
             return MISS;
         }
 
+        if (SECOND.matchCount(count) && isBonusNum) {
+            return SECOND;
+        }
+
         for (Rank rank : values()) {
-            if (rank.matchCount(count)) {
+            if (rank.matchCount(count) && !rank.equals(SECOND)) {
                 return rank;
             }
         }

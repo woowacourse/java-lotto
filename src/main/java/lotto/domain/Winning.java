@@ -31,7 +31,11 @@ public class Winning {
     }
 
     public Rank checkWinner(Lotto lotto) {
-        return Rank.valueOf(this.lotto.sameNumberCount(lotto));
+        return Rank.valueOf(this.lotto.sameNumberCount(lotto), isBonusNum(lotto));
+    }
+
+    public boolean isBonusNum(Lotto lotto) {
+        return lotto.containNumber(bonusNum);
     }
 
     @Override

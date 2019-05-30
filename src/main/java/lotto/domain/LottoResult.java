@@ -16,7 +16,7 @@ public class LottoResult {
 
     public int yield() {
         int purchaseAmount = map.values().stream()
-                .reduce(0, Integer::sum) * 1000
+                .reduce(0, Integer::sum) * PurchaseAmount.LOTTO_PRICE
                 ;
         int result = map.keySet().stream()
                 .mapToInt(x -> x.getMoney() * map.get(x))
