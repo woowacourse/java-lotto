@@ -16,7 +16,7 @@ public class LottoLauncher {
 
         OutputView.printLottos(manualLottos, automaticLottos);
 
-        WinningLotto winningLotto = new WinningLotto(generateWinningLotto(), InputView.askBonusNumber());
+        WinningLotto winningLotto = new WinningLotto(generateWinningLotto(), generateBonusNumber());
 
         Lottos totalLottos = manualLottos.append(automaticLottos);
         LottoResult lottoResult = new LottoResult(money, totalLottos.getPrizes(winningLotto));
