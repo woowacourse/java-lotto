@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -31,10 +32,10 @@ class LottoTest {
                 , new LottoNo(2), new LottoNo(3)
                 , new LottoNo(4), new LottoNo(5)
                 , new LottoNo(6)));
-        Lotto lotto2 = Lotto.of(Arrays.asList(new LottoNo(1)
+        List<LottoNo> lotto2 = Arrays.asList(new LottoNo(1)
                 , new LottoNo(2), new LottoNo(3)
                 , new LottoNo(15), new LottoNo(22)
-                , new LottoNo(25)));
+                , new LottoNo(25));
         assertThat(lotto1.findCountOfMatchNo(lotto2)).isEqualTo(3);
     }
 }

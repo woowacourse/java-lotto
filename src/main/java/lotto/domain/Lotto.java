@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 public class Lotto {
     public static final int COUNT_OF_NO = 6;
 
-    private List<LottoNo> lottoNo;
+    List<LottoNo> lottoNo;
     private LottoType lottoType;
 
-    private Lotto(List<LottoNo> lottoNo, LottoType lottoType) {
+    Lotto(List<LottoNo> lottoNo, LottoType lottoType) {
         validateCountOfNo(lottoNo);
         validateDuplicatedNo(lottoNo);
         this.lottoNo = Collections.unmodifiableList(lottoNo);
@@ -46,8 +46,8 @@ public class Lotto {
         return lottoNo.contains(lotto);
     }
 
-    int findCountOfMatchNo(Lotto lotto) {
-        return lottoNo.stream().filter(lotto::matchNo).collect(Collectors.toList()).size();
+    int findCountOfMatchNo(List<LottoNo> lotto) {
+        return lotto.stream().filter(lottoNo::contains).collect(Collectors.toList()).size();
     }
 
     boolean matchType(LottoType type) {

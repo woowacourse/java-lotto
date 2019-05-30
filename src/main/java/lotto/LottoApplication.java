@@ -75,7 +75,7 @@ public class LottoApplication {
 
     private static WinningLotto makeWinningLotto() {
         try {
-            Lotto winningLottoNo = Lotto.of(LottoNoParser.parseToLottoNos(InputView.inputWinningLotto()));
+            List<LottoNo> winningLottoNo = LottoNoParser.parseToLottoNos(InputView.inputWinningLotto());
             return WinningLotto.of(winningLottoNo, new LottoNo(InputView.inputBonusNo()));
         } catch (Exception e) {
             OutputView.printErrorMsg(e);
