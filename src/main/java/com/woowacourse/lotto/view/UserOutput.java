@@ -6,6 +6,7 @@ public enum UserOutput {
 	DEMAND_BONUS_BALL("보너스 볼을 입력해 주세요."),
 	PRINT_NUMBER_OF_LOTTO("%d개를 구매했습니다.\n"),
 	PRINT_EARNINGS_RATE("총 수익률은 %d%%" + " 입니다.\n"),
+	PRINT_LOTTO_MATCH_SECOND("%d개 일치, 보너스 볼 일치(%d원)- %d개\n"),
 	PRINT_LOTTO_MATCH_RESULT("%d개 일치 (%d원)- %d개\n");
 
 	String userOutputMessage;

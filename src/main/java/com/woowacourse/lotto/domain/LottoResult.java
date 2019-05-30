@@ -23,7 +23,7 @@ public class LottoResult {
 
 		for (Lotto lotto : lottos.getLottos()) {
 			int count = winningLotto.matchLotto(lotto);
-			LottoRank lottoRank = LottoRank.valueOf(count);
+			LottoRank lottoRank = LottoRank.valueOf(count, winningLotto.matchBonusBall(lotto));
 			rankResult.put(lottoRank, rankResult.get(lottoRank) + 1);
 		}
 

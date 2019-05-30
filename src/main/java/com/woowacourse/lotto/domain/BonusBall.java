@@ -3,7 +3,6 @@ package com.woowacourse.lotto.domain;
 import java.util.Objects;
 
 import com.woowacourse.lotto.exception.InvalidNumberException;
-import com.woowacourse.lotto.view.UserOutput;
 
 import static com.woowacourse.lotto.domain.LottoNumber.MAX_NUMBER_OF_LOTTO;
 import static com.woowacourse.lotto.domain.LottoNumber.MIN_NUMBER_OF_LOTTO;
@@ -18,7 +17,7 @@ public class BonusBall {
 		this.number = number;
 	}
 
-	public int getBonusBall() {
+	public int getBonusBallNumber() {
 		return this.number;
 	}
 

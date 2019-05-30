@@ -20,7 +20,7 @@ public class Lotto {
 		}
 	}
 
-	public int duplicateNumber(Lotto lotto) {
+	public int getCountOfMatchedNumber(Lotto lotto) {
 		Set<Integer> set = new TreeSet<>(this.numbers);
 		set.removeAll(lotto.numbers);
 		return NUMBER_OF_LOTTO - set.size();

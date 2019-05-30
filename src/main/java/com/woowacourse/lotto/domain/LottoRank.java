@@ -27,7 +27,10 @@ public enum LottoRank {
 		return this.count;
 	}
 
-	public static LottoRank valueOf(int count) {
+	public static LottoRank valueOf(int count, boolean bonusBall) {
+		if(count == SECOND.count && bonusBall) {
+			return LottoRank.SECOND;
+		}
 		return Arrays.stream(values()).filter(rank -> rank.count == count).findAny().orElse(ZERO);
 	}
 }

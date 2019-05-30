@@ -26,7 +26,7 @@ public class WinningLotto {
 	}
 
 	private void validateDuplicateBonusBall() {
-		if(numbers.contains(bonusBall.getBonusBall())) {
+		if(numbers.contains(bonusBall.getBonusBallNumber())) {
 			throw new IllegalArgumentException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
 		}
 	}
@@ -50,7 +50,11 @@ public class WinningLotto {
 	}
 
 	public int matchLotto(Lotto lotto) {
-		return numbers.duplicateNumber(lotto);
+		return numbers.getCountOfMatchedNumber(lotto);
+	}
+
+	public boolean matchBonusBall(Lotto lotto) {
+		return lotto.contains(bonusBall.getBonusBallNumber());
 	}
 
 	@Override

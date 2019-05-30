@@ -5,6 +5,7 @@ import java.util.Map;
 import com.woowacourse.lotto.domain.*;
 
 import static com.woowacourse.lotto.view.UserOutput.PRINT_LOTTO_MATCH_RESULT;
+import static com.woowacourse.lotto.view.UserOutput.PRINT_LOTTO_MATCH_SECOND;
 
 public class OutputView {
 	public static void printLotto(Lottos generateLotto) {
@@ -21,9 +22,11 @@ public class OutputView {
 		StringBuffer stringBuffer = new StringBuffer();
 		lottoMatchResult.keySet().stream()
 				.filter(lottoRank -> lottoRank != LottoRank.ZERO)
-				.forEach(lottoRank -> stringBuffer.append(String.format(PRINT_LOTTO_MATCH_RESULT.getUserOutputMessage(), lottoRank.getCount(), lottoRank.getPrice(), lottoMatchResult.get(lottoRank))))
+				.forEach(lottoRank -> stringBuffer.append((lottoRank == LottoRank.SECOND)?
+						String.format(PRINT_LOTTO_MATCH_SECOND.getUserOutputMessage(), lottoRank.getCount(), lottoRank.getPrice(), lottoMatchResult.get(lottoRank)) :
+						String.format(PRINT_LOTTO_MATCH_RESULT.getUserOutputMessage(), lottoRank.getCount(), lottoRank.getPrice(), lottoMatchResult.get(lottoRank))))
 		;
-		System.out.println(stringBuffer.toString());
+		System.out.print(stringBuffer.toString());
 	}
 
 	public static void printEarningsRate(LottoResult lottoResult) {
