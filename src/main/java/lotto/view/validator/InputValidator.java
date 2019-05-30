@@ -13,4 +13,8 @@ public class InputValidator {
     public static boolean inputValidateWinningNumber(final String winningNumbers) {
         return WINNING_NUMBER_REGEX.matcher(winningNumbers).matches();
     }
+
+    public static boolean inputValidateBonusBall(final int bonusBall) {
+        return 0 < bonusBall && bonusBall < 46;
+    }
 }
