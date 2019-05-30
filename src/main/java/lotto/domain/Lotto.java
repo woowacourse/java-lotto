@@ -12,7 +12,7 @@ public class Lotto {
     public static final int COUNT_OF_NO = 6;
 
     List<LottoNo> lottoNo;
-    private LottoType lottoType;
+    private final LottoType lottoType;
 
     Lotto(List<LottoNo> lottoNo, LottoType lottoType) {
         validateCountOfNo(lottoNo);
@@ -32,13 +32,13 @@ public class Lotto {
 
     private void validateDuplicatedNo(List<LottoNo> lottoNo) {
         if (new HashSet<>(lottoNo).size() != COUNT_OF_NO) {
-            throw new InvalidNumberException("로또 번호에 중복된 번호가 있습니다.");
+            throw new DuplicatedNumberException("로또 번호에 중복된 번호가 있습니다.");
         }
     }
 
     private void validateCountOfNo(List<LottoNo> lottoNo) {
         if (lottoNo.size() != COUNT_OF_NO) {
-            throw new InvalidNumberException("로또 번호의 갯수가 " + COUNT_OF_NO + "개가 아닙니다.");
+            throw new InvalidSizeException("로또 번호의 갯수가 " + COUNT_OF_NO + "개가 아닙니다.");
         }
     }
 

@@ -46,7 +46,7 @@ public class LottoBuyer {
 
     public void validateAffordability(int countOfManualLotto) {
         if (!budget.canBuyLotto(countOfManualLotto)) {
-            throw new InvalidNumberException("구입 금액으로 " + countOfManualLotto + "장의 로또를 살 수 없습니다.");
+            throw new NoMoneyException("구입 금액으로 " + countOfManualLotto + "장의 로또를 살 수 없습니다.");
         }
     }
 }

@@ -17,7 +17,7 @@ public class Budget {
 
     private void validateNotNegative(int budget) {
         if (budget < 0) {
-            throw new InvalidNumberException("잘못된 구입 금액입니다. 양수를 입력해주세요.");
+            throw new InputNegativeException("잘못된 구입 금액입니다. 양수를 입력해주세요.");
         }
     }
 

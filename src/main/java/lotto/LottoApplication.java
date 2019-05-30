@@ -44,15 +44,15 @@ public class LottoApplication {
             validatePositive(countOfManualLotto);
             buyer.validateAffordability(countOfManualLotto);
             return countOfManualLotto;
-        } catch (InvalidNumberException ine) {
-            OutputView.printErrorMsg(ine);
+        } catch (Exception e) {
+            OutputView.printErrorMsg(e);
             return getCountOfManualLotto(buyer);
         }
     }
 
     private static void validatePositive(int countOfManualLotto) {
         if (countOfManualLotto < 0) {
-            throw new InvalidNumberException("음수를 입력할 수 없습니다.");
+            throw new InputNegativeException("음수를 입력할 수 없습니다.");
         }
     }
 

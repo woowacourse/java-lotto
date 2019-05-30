@@ -12,8 +12,7 @@ public class InputView {
             System.out.println(NEW_LINE + "구입 금액을 입력해주세요.");
             return Integer.parseInt(sc.nextLine());
         } catch (NumberFormatException nfe) {
-            System.out.println("정수가 아닙니다. 다시 입력해주세요.");
-            return inputBudget();
+            throw new NumberFormatException("정수가 아닌 문자가 있습니다. 다시 입력해주세요.");
         }
     }
 
@@ -22,8 +21,7 @@ public class InputView {
             System.out.println(NEW_LINE + "수동으로 구매할 로또 수를 입력해 주세요.");
             return Integer.parseInt(sc.nextLine());
         } catch (NumberFormatException nfe) {
-            System.out.println("정수가 아닙니다. 다시 입력해주세요.");
-            return inputCountOfManualLotto();
+            throw new NumberFormatException("정수가 아닌 문자가 있습니다. 다시 입력해주세요.");
         }
     }
 
@@ -41,8 +39,7 @@ public class InputView {
             System.out.println(NEW_LINE + "보너스 번호를 입력해주세요.");
             return Integer.parseInt(sc.nextLine());
         } catch (NumberFormatException nfe) {
-            System.out.println("정수가 아닙니다. 다시 입력해주세요.");
-            return inputBonusNo();
+            throw new NumberFormatException("정수가 아닌 문자가 있습니다. 다시 입력해주세요.");
         }
     }
 }

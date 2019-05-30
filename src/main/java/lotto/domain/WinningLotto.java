@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 public class WinningLotto extends Lotto {
-    private LottoNo bonusNo;
+    private final LottoNo bonusNo;
 
     private WinningLotto(List<LottoNo> lottoNo, LottoNo bonusNo) {
         super(lottoNo, LottoType.WINNING);
@@ -17,7 +17,7 @@ public class WinningLotto extends Lotto {
 
     private void validateLottoNotContainBonusNo(List<LottoNo> winningLottoNo, LottoNo bonusNo) {
         if (winningLottoNo.contains(bonusNo)) {
-            throw new InvalidNumberException("당첨 번호는 보너스 볼의 번호와 달라야 합니다.");
+            throw new DuplicatedNumberException("당첨 번호는 보너스 볼의 번호와 달라야 합니다.");
         }
     }
 

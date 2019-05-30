@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class BudgetTest {
     @Test
     void 음수를_입력했을경우() {
-        assertThrows(InvalidNumberException.class, () -> new Budget(-1));
+        assertThrows(InputNegativeException.class, () -> new Budget(-1));
     }
 
     @Test
