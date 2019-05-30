@@ -1,9 +1,6 @@
 package lotto.contoller;
 
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
-import lotto.domain.PurchaseAmount;
-import lotto.domain.Winning;
+import lotto.domain.*;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
@@ -11,19 +8,30 @@ public class Main {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = createMoney();
         Lottos lottos = Lottos.generate(purchaseAmount);
+
         OutputView.outputLottoCount(purchaseAmount);
         OutputView.outputLottos(lottos);
-        Winning winning = createWinningLotto();
-        LottoResult lottoResult = LottoResult.of(winning, lottos);
-        OutputView.outputResult(lottoResult);
+
+        Winning winning = createWinningLotto(createLotto());
+
+        OutputView.outputResult(LottoResult.of(winning, lottos));
     }
 
-    private static Winning createWinningLotto() {
+    private static Lotto createLotto() {
         try {
-            return Winning.of(InputView.inputWinningLotto(), InputView.inputBonusNum());
+            return Lotto.of(InputView.inputWinningLotto());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return createWinningLotto();
+            return createLotto();
+        }
+    }
+
+    private static Winning createWinningLotto(Lotto lotto) {
+        try {
+            return Winning.of(lotto, InputView.inputBonusNum());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createWinningLotto(lotto);
         }
     }
 

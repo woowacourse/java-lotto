@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Winning {
     private final Lotto lotto;
     private final int bonusNum;
 
-    private Winning(List<Integer> numbers, int bonusNum) {
-        this.lotto = Lotto.of(numbers);
+    private Winning(Lotto lotto, int bonusNum) {
+        this.lotto = lotto;
         checkBonusNum(bonusNum);
         checkContainNum(bonusNum);
         this.bonusNum = bonusNum;
@@ -26,15 +25,15 @@ public class Winning {
         }
     }
 
-    public static Winning of(List<Integer> numbers, int bonusNum) {
-        return new Winning(numbers, bonusNum);
+    public static Winning of(Lotto lotto, int bonusNum) {
+        return new Winning(lotto, bonusNum);
     }
 
     public Rank checkWinner(Lotto lotto) {
         return Rank.valueOf(this.lotto.sameNumberCount(lotto), isBonusNum(lotto));
     }
 
-    public boolean isBonusNum(Lotto lotto) {
+    private boolean isBonusNum(Lotto lotto) {
         return lotto.containNumber(bonusNum);
     }
 

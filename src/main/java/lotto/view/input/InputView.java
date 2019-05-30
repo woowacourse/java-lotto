@@ -21,8 +21,7 @@ public class InputView {
     public static List<Integer> inputWinningLotto() {
         try {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            String text = scanner.nextLine();
-            return InputUtils.parseIntegerList(text);
+            return InputUtils.parseIntegerList(scanner.nextLine());
         } catch (NumberFormatException e) {
             System.out.println("숫자를 입력해주세요.");
             return inputWinningLotto();
@@ -31,6 +30,7 @@ public class InputView {
 
     public static int inputBonusNum() {
         try {
+            System.out.println("보너스 번호를 입력해주세요.");
             return InputCheck.parseInteger(scanner.nextLine());
         } catch (NumberFormatException e) {
             System.out.println("숫자를 입력해주세요.");
