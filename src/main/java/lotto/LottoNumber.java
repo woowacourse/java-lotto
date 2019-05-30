@@ -16,7 +16,7 @@ public class LottoNumber {
     public static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> returnList = new ArrayList<>();
         for (int i = 0, n = numbers.size(); i < n ; i++) {
-            returnList.add(lottoNumbers.get(numbers.get(i)));
+            returnList.add(lottoNumbers.get(numbers.get(i)-1));
         }
         return returnList;
     }
@@ -40,4 +40,9 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+}
 }

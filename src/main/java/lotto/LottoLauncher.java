@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,11 +13,15 @@ public class LottoLauncher {
         Money money = generateMoney();
         Lottos manualLottos = generateManualLottos(money);
         Lottos automaticLottos = LottoMachine.generateLottos(money.getLottoCount() - manualLottos.size());
-        //OutputView.printLottos(manualLottos, automaticLottos);
+
+        OutputView.printLottos(manualLottos, automaticLottos);
+
         WinningLotto winningLotto = new WinningLotto(generateWinningLotto(), InputView.askBonusNumber());
 
         Lottos totalLottos = manualLottos.append(automaticLottos);
         LottoResult lottoResult = new LottoResult(money, totalLottos.getPrizes(winningLotto));
+
+        OutputView.printStatistics(lottoResult);
     }
 
     private static List<Integer> generateWinningLotto() {
@@ -48,16 +53,20 @@ public class LottoLauncher {
     }
 
     private static Lottos generateManualLottos(Money money) {
-        List<Lotto> manualLottos = new ArrayList<>();
-        int count = InputView.askManualLottoCount();
-        if (count <= 0 || count >= money.getLottoCount()) {
-            throw new IllegalCountException();
+        try {
+            List<Lotto> manualLottos = new ArrayList<>();
+            int count = InputView.askManualLottoCount();
+            if (count < 0 || count > money.getLottoCount()) {
+                throw new IllegalCountException();
+            }
+            for (int i = 0; i < count; i++) {
+                manualLottos.add(new Lotto(InputView.askManualLottoNumbers()));
+            }
+            return LottoMachine.generateLottos(manualLottos);
+        } catch (Exception e) {
+            return generateManualLottos(money);
         }
 
-        for (int i = 0; i < count; i++) {
-            manualLottos.add(new Lotto(InputView.askManualLottoNumbers()));
-        }
-        return LottoMachine.generateLottos(manualLottos);
     }
 
 }

@@ -21,4 +21,8 @@ public class LottoResult {
         }
         return money.calculatePercentage(sum);
     }
+
+    public int getCount(Prize prize) {
+        return prizeInfo.get(prize);
+    }
 }

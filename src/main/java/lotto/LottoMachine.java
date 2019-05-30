@@ -20,19 +20,19 @@ public class LottoMachine {
     }
 
     private static Lotto generateLotto() {
-        return new Lotto(generateRandomLottoNumbers());
+        return new Lotto(generateRandomLottoNumberIndexes());
     }
 
-    private static List<Integer> generateRandomLottoNumbers() {
+    private static List<Integer> generateRandomLottoNumberIndexes() {
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size() < LOTTO_NUMBER_COUNT) {
-            numbers.add(generateRandomLottoNumber());
+            numbers.add(generateRandomLottoNumberIndex());
         }
         return new ArrayList<>(numbers);
     }
 
-    private static int generateRandomLottoNumber() {
-        return (int)(Math.random() * (MAX_NUM  - MIN_NUM + 1) + MIN_NUM);
+    private static int generateRandomLottoNumberIndex() {
+        return (int)(Math.random() * (MAX_NUM) + MIN_NUM);
     }
 
 }

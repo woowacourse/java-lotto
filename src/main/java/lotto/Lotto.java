@@ -36,4 +36,9 @@ public class Lotto {
     public boolean containsNumber(LottoNumber number) {
         return numbers.contains(number);
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }
