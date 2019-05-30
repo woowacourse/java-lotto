@@ -23,4 +23,11 @@ public class WinnersTest {
         winners.addWinner(6);
         assertThat(winners.totalRewardMoney()).isEqualTo(5000 + 50000 + 2000000000);
     }
+
+    @Test
+    void 수익률_구하는_테스트() {
+        Winners winners = new Winners();
+        winners.addWinner(3);
+        assertThat((int) winners.rateOfReturn(14000)).isEqualTo(35);
+    }
 }

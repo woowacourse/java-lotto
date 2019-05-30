@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Winners {
     public static final int ZERO = 0;
+    private static final int PERCENT = 100;
     private Map<WinnerType, AbstractWinners> winners;
 
     public Winners() {
@@ -33,6 +34,11 @@ public class Winners {
             totalRewardMoney += winners.rewardMoney();
         }
         return totalRewardMoney;
+    }
+
+    public double rateOfReturn(int userMoney) {
+        long totalRewardMoney = totalRewardMoney();
+        return ((double) totalRewardMoney / userMoney) * PERCENT;
     }
 
     @Override
