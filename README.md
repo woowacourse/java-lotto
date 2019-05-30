@@ -50,8 +50,18 @@
 - 보너스 볼 (BonusBall)
     1. 로또 번호와 마찬가지로 1~45 범위
         * 범위를 벗어나면 Exception
-    2. 이미 생성된 Lotto의 번호와 중복되는 지 여부
+    2. ~~이미 생성된 Lotto의 번호와 중복되는 지 여부~~
         * 중복이 있다면 Exception
+        > 보너스 볼에서 Lotto의 번호와 중복 여부를 판단하기 보다 WinningNumber에서 처리하는 것이 적절하다고 판단.
+    3. Lotto 번호 중에서 보너스 볼과 일치하는 지 여부 판단
+        > 위 로직도 WinningNumber가 수행하는 것이 옳다고 판단.
+        >
+        > 따라서, LottoNumber 하나를 입력받고 해당 번호가 BonusBall의 번호와 일치하는지 여부 판단으로 변경
+        
+- 당첨 번호 (WinningNumber)
+    1. 보너스 볼이 Lotto 번호와 중복되는 경우
+        * 중복이 있다면 Exception
+    2. Lotto 번호 중에서 보너스 볼과 일치하는 지 여부 판단
 
 - 당첨 (Prize)
     1. 2등 추가
