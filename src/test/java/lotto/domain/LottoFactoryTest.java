@@ -26,7 +26,7 @@ public class LottoFactoryTest {
                         LottoNumber.get(6)
                 ));
 
-        assertThat(LottoFactory.createLottoManually("1, 2, 3, 4, 5, 6"))
+        assertThat(LottoFactory.createLottoManually("1,2,3,4,5,6"))
                 .isEqualTo(new Lotto(numbers));
     }
 }
