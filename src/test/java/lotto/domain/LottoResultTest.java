@@ -17,7 +17,7 @@ public class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        winning = Winning.of(Arrays.asList(1,2,3,4,5,6), 7);
+        winning = Winning.of(Lotto.of(Arrays.asList(1,2,3,4,5,6)), 7);
     }
 
     @Test

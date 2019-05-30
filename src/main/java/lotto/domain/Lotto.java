@@ -8,7 +8,6 @@ public class Lotto {
     private Lotto(List<Integer> lottoNumbers) {
         checkLottoNumberCount(lottoNumbers);
         checkDuplicateNumber(lottoNumbers);
-        sortAscending(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -22,10 +21,6 @@ public class Lotto {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호가 6개가 아닙니다.");
         }
-    }
-
-    private void sortAscending(List<Integer> lottoNumbers) {
-        Collections.sort(lottoNumbers);
     }
 
     public static Lotto of(List<Integer> lottoNumbers) {

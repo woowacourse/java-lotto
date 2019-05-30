@@ -49,4 +49,18 @@ public class InputView {
             return inputManualCount();
         }
     }
+
+    public static List<List<Integer>> inputLottos(PurchaseCount purchaseCount) {
+        try {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+            List<List<Integer>> lottos = new ArrayList<>();
+            for (int i = 0; i < purchaseCount.calculateManualCount(); i++) {
+                lottos.add(InputUtils.parseIntegerList(scanner.nextLine()));
+            }
+            return lottos;
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해주세요.");
+            return inputLottos(purchaseCount);
+        }
+    }
 }
