@@ -11,7 +11,6 @@ public enum Prize {
     FIRST(6, 2_000_000_000);
 
     public static final int MIN_PRIZE_NUMBER = 3;
-    public static final int MAX_PRIZE_NUMBER = 6;
     private final int countOfNumber;
     private final int winningAmount;
 
