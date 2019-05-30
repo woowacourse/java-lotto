@@ -10,11 +10,10 @@ public class Money {
     private final int price;
 
     public Money(int price) {
-        if (isValidatePrice(price)) {
-            this.price = price;
-            return;
+        if (!isValidatePrice(price)) {
+            throw new InvalidLottoPriceException("구입금액을 다시 입력해 주세요.");
         }
-        throw new InvalidLottoPriceException("구입금액을 다시 입력해 주세요.");
+        this.price = price;
     }
 
     private boolean isValidatePrice(int price) {
@@ -25,7 +24,7 @@ public class Money {
         return price / ONE_LOTTO_PRICE;
     }
 
-    boolean isValidateNumber(int numberOfManualTicket) {
+    boolean isValidateAmount(int numberOfManualTicket) {
         return (MIN_NUMBER_OF_MANUAL_TICKET <= numberOfManualTicket) && (numberOfManualTicket <= getNumberOfTicket());
     }
 

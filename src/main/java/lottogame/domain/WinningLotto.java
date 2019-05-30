@@ -10,6 +10,7 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> winningLotto) {
         this.winningLotto = ManualLottoGenerator.create(winningLotto);
+        this.bonusNumber = null;
     }
 
     public void addBonusNumber(int bonusNumber) {
@@ -26,5 +27,9 @@ public class WinningLotto {
 
     boolean isBonusBallMatch(LottoNumber lottoNumber) {
         return bonusNumber == lottoNumber;
+    }
+
+    public boolean isBonusNumberNull() {
+        return bonusNumber == null;
     }
 }

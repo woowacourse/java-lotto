@@ -10,7 +10,7 @@ public class LottoTickets {
     private final int numberOfManualTicket;
 
     public LottoTickets(int numberOfManualTicket, Money money) {
-        if (!money.isValidateNumber(numberOfManualTicket)) {
+        if (!money.isValidateAmount(numberOfManualTicket)) {
             throw new InvalidLottoNumberException("수동 구매 수는 " + money.getNumberOfTicket() + "개 이하여야 합니다.");
         }
         this.numberOfManualTicket = numberOfManualTicket;
@@ -24,17 +24,15 @@ public class LottoTickets {
         lottos.add(ManualLottoGenerator.create(manualLotto));
     }
 
-    public boolean isManualLottoFill() {
+    public boolean isCreatedNumberOfManualLotto() {
         return lottos.size() == numberOfManualTicket;
     }
 
-    public void createAutoLottos(int numberOfTicket) {
-        do {
-            lottos.add(AutoLottoGenerator.create());
-        } while (!isLottoCreateAll(numberOfTicket));
+    public void createAutoLottos() {
+        lottos.add(AutoLottoGenerator.create());
     }
 
-    private boolean isLottoCreateAll(int numberOfTicket) {
+    public boolean isCreatedNumberOf(int numberOfTicket) {
         return lottos.size() == numberOfTicket;
     }
 

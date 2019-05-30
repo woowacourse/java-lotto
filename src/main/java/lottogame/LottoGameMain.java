@@ -12,7 +12,7 @@ public class LottoGameMain {
         Money money = getMoney();
         LottoTickets lottoTickets = createLottoTickets(money);
         createLottos(lottoTickets, money);
-        OutputView.printPurchaseResult(lottoTickets, money);
+        OutputView.printPurchaseResult(lottoTickets);
 
         WinningLotto winningLotto = createWinningLotto();
         addBonusNumber(winningLotto);
@@ -20,7 +20,6 @@ public class LottoGameMain {
         LottoResult lottoResult = LottoResultGenerator.create(lottoTickets, winningLotto);
         OutputView.printLottoResult(lottoResult, money);
     }
-
 
     private static Money getMoney() {
         try {
@@ -34,46 +33,61 @@ public class LottoGameMain {
     private static LottoTickets createLottoTickets(Money money) {
         try {
             return new LottoTickets(Integer.parseInt(InputView.getNumberOfMannualTicket()), money);
-        } catch (NumberFormatException | InvalidLottoNumberException e) {
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해 주세요");
+        } catch (InvalidLottoNumberException e) {
             System.out.println(e.getMessage());
-            return createLottoTickets(money);
         }
+        return createLottoTickets(money);
     }
 
     private static void createLottos(LottoTickets lottoTickets, Money money) {
-        if(!lottoTickets.isManualLottoFill()){
+        if (!lottoTickets.isCreatedNumberOfManualLotto()) {
             OutputView.printRequestOfManualLottoNumber();
         }
-        while (!lottoTickets.isManualLottoFill()) {
+        while (!lottoTickets.isCreatedNumberOfManualLotto()) {
             createManualLotto(lottoTickets);
         }
-        lottoTickets.createAutoLottos(money.getNumberOfTicket());
+        while (!lottoTickets.isCreatedNumberOf(money.getNumberOfTicket())) {
+            lottoTickets.createAutoLottos();
+        }
     }
 
     private static void createManualLotto(LottoTickets lottoTickets) {
         try {
             lottoTickets.addManualLotto(LottoNumbersParser.parse(InputView.getManualLottoNumber()));
-        } catch (NumberFormatException | InvalidLottoNumberException e) {
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해 주세요");
+        } catch (InvalidLottoNumberException e) {
             System.out.println(e.getMessage());
-            createManualLotto(lottoTickets);
         }
     }
 
     private static WinningLotto createWinningLotto() {
         try {
             return new WinningLotto(LottoNumbersParser.parse(InputView.getWinningLotto()));
-        } catch (NumberFormatException | InvalidLottoNumberException e) {
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해 주세요");
+            return createWinningLotto();
+        } catch (InvalidLottoNumberException e) {
             System.out.println(e.getMessage());
             return createWinningLotto();
         }
     }
 
     private static void addBonusNumber(WinningLotto winningLotto) {
+        while(winningLotto.isBonusNumberNull()){
+            setBonusNumber(winningLotto);
+        }
+    }
+
+    private static void setBonusNumber(WinningLotto winningLotto) {
         try {
             winningLotto.addBonusNumber(Integer.parseInt(InputView.getBonusNumber()));
-        } catch (NumberFormatException | InvalidLottoNumberException e) {
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해 주세요");
+        } catch (InvalidLottoNumberException e) {
             System.out.println(e.getMessage());
-            addBonusNumber(winningLotto);
         }
     }
 }
