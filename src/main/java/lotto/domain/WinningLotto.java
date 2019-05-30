@@ -4,13 +4,18 @@ import java.util.Objects;
 
 public class WinningLotto {
     private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto winningLotto) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         this.winningLotto = winningLotto;
+        this.bonusNumber = bonusNumber;
     }
 
     public LottoRank calculateRank(Lotto lotto) {
-        return LottoRank.valueOf(lotto.countMatchedNumber(winningLotto));
+        return LottoRank.valueOf(
+                lotto.countMatchedNumber(winningLotto),
+                lotto.contain(bonusNumber)
+        );
     }
 
     @Override

@@ -31,7 +31,8 @@ public class WinningResult {
         for (LottoRank lottoRank : result.keySet()) {
             sb.append(lottoRank.getCountOfMatch());
             sb.append("개 일치 ");
-            sb.append("(" + lottoRank.getWinningAmount() + "원) - ");
+            String second = lottoRank.equals(LottoRank.SECOND) ? ", 보너스볼 일" : "";
+            sb.append(second + "(" + lottoRank.getWinningAmount() + "원) - ");
             sb.append(result.get(lottoRank) + "개\n");
         }
         return sb.toString();
