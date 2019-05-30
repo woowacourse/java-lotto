@@ -23,9 +23,11 @@ public class OutputView {
         System.out.println("---------");
 
         for (WinningType value : WinningType.values()) {
-            System.out.print(value.getMatchNum() + "개 일치 (");
-            System.out.print(value.getReward() + "원)- ");
-            System.out.println(lottoResult.getWinnerTypeValue(value) + "개");
+            if (value == WinningType.SECOND) {
+                System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개.%n", value.getMatchNum(), value.getReward(), lottoResult.getWinnerTypeValue(value));
+                continue;
+            }
+            System.out.printf("%d개 일치 (%d원)- %d개.%n", value.getMatchNum(), value.getReward(), lottoResult.getWinnerTypeValue(value));
         }
 
     }
