@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class WinningNumber {
-    private final List<LottoNumber> winningNumbers;
+    private final WinningLotto winningLotto;
     private final BonusBall bonusBall;
 
     public WinningNumber(final List<Integer> winningNumbers, int bonusNumber) {
@@ -15,23 +15,19 @@ public class WinningNumber {
             throw new LottoSizeException("로또 당첨 번호는 6개여야 합니다.");
         }
 
-        this.winningNumbers = makeWinningNumbers(winningNumbers);
+        this.winningLotto = new WinningLotto(makeWinningNumbers(winningNumbers));
         this.bonusBall = new BonusBall(bonusNumber);
     }
 
-    private List<LottoNumber> makeWinningNumbers(final List<Integer> winningNumbers) {
-        return winningNumbers.stream()
+    private Lotto makeWinningNumbers(final List<Integer> winningNumbers) {
+        return new Lotto(winningNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public Prize prize(final Lotto lotto) {
-        int matchCount = 0;
-        boolean hasBonus = false;
-        for (LottoNumber lottoNumber : lotto.getNumbers()) {
-            matchCount += winningNumbers.contains(lottoNumber) ? 1 : 0;
-            hasBonus |= bonusBall.isMatch(lottoNumber);
-        }
+        int matchCount = winningLotto.countOfMatchLottoNumber(lotto);
+        boolean hasBonus = lotto.hasBonusBall(bonusBall);
         return Prize.valueOf(matchCount, hasBonus);
     }
 
@@ -40,11 +36,11 @@ public class WinningNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final WinningNumber that = (WinningNumber) o;
-        return Objects.equals(winningNumbers, that.winningNumbers);
+        return Objects.equals(winningLotto, that.winningLotto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningNumbers);
+        return Objects.hash(winningLotto);
     }
 }

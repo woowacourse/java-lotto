@@ -25,6 +25,11 @@ public class Lotto {
         return 0;
     }
 
+    boolean hasBonusBall(BonusBall bonusBall) {
+        return numbers.stream()
+                .anyMatch(bonusBall::isMatch);
+    }
+
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
