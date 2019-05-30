@@ -25,7 +25,7 @@ public class LottoMachine {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         LottoTicket lottoTicket = LottoTicket.create();
 
-        while(purchaseAmount.buy(lottoTicket)) {
+        while (purchaseAmount.buy(lottoTicket)) {
             lottoTickets.add(lottoTicket);
             lottoTicket = LottoTicket.create();
         }

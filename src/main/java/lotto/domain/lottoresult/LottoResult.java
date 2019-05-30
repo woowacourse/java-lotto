@@ -25,7 +25,7 @@ public class LottoResult {
     }
 
     public double earningRate() {
-        double expense =  LottoTicket.getPrice() * rankStatistic.values().stream()
+        double expense = LottoTicket.getPrice() * rankStatistic.values().stream()
                 .reduce(0, Integer::sum);
         double rewards = rankStatistic.keySet().stream()
                 .mapToInt(x -> x.getReward() * rankStatistic.get(x))

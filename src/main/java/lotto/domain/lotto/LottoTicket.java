@@ -5,8 +5,8 @@ import lotto.util.StringConverter;
 import java.util.*;
 
 public class LottoTicket {
-    private static final int PRICE = 1000;
     static final int LOTTO_SIZE = 6;
+    private static final int PRICE = 1000;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -14,18 +14,6 @@ public class LottoTicket {
         lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
         checkDuplicate(numbers, lottoNumbers);
         checkLottoSize(lottoNumbers);
-    }
-
-    private void checkDuplicate(List<LottoNumber> numbers, Set<LottoNumber> lottoNumbers) {
-        if (numbers.size() != lottoNumbers.size()) {
-            throw new InvalidLottoTicketException("로또 번호는 중복이 불가능합니다.");
-        }
-    }
-
-    private void checkLottoSize(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new InvalidLottoTicketException("로또는 6개의 숫자로 구성되어야합니다.");
-        }
     }
 
     public static LottoTicket create(String lottoNumbersText) {
@@ -40,6 +28,22 @@ public class LottoTicket {
         return new LottoTicket(LottoNumbersGenerator.create());
     }
 
+    public static int getPrice() {
+        return PRICE;
+    }
+
+    private void checkDuplicate(List<LottoNumber> numbers, Set<LottoNumber> lottoNumbers) {
+        if (numbers.size() != lottoNumbers.size()) {
+            throw new InvalidLottoTicketException("로또 번호는 중복이 불가능합니다.");
+        }
+    }
+
+    private void checkLottoSize(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new InvalidLottoTicketException("로또는 6개의 숫자로 구성되어야합니다.");
+        }
+    }
+
     public int countOfMatch(LottoTicket lottoTicket) {
         return (int) lottoTicket.lottoNumbers.stream()
                 .filter(x -> this.lottoNumbers.contains(x))
@@ -48,10 +52,6 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
-    }
-
-    public static int getPrice() {
-        return PRICE;
     }
 
     @Override

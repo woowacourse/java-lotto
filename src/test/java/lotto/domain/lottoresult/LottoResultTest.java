@@ -19,7 +19,7 @@ public class LottoResultTest {
         lottoTickets = new LottoTicketGroup(Arrays.asList(
                 LottoTicket.create(Arrays.asList(1, 2, 3, 8, 9, 10)),
                 LottoTicket.create(Arrays.asList(7, 8, 9, 1, 2, 3))
-                ));
+        ));
         lottoResult = new LottoResult(
                 WinningLotto.create(LottoTicket.create("1, 2, 3, 4, 5, 6"), "15"),
                 lottoTickets

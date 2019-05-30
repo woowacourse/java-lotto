@@ -1,9 +1,9 @@
 package lotto.view;
 
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.lottoresult.LottoRank;
 import lotto.domain.lottoresult.LottoResult;
-import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.purchaseamount.PurchaseAmount;
 
 import java.util.Arrays;
@@ -36,8 +36,7 @@ public class OutputView {
 
         List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
         Collections.reverse(lottoRanks);
-        lottoRanks.stream()
-                .forEach(x -> drawRank(x, lottoResult.countOfRank(x)));
+        lottoRanks.forEach(x -> drawRank(x, lottoResult.countOfRank(x)));
 
         System.out.println("총 수익률은 " + lottoResult.earningRate() + "%입니다.");
     }
@@ -47,15 +46,15 @@ public class OutputView {
             return;
         }
         drawRankInfo(lottoRank);
-        System.out.println("- " + countOfRank+"개");
+        System.out.println("- " + countOfRank + "개");
     }
 
     private static void drawRankInfo(LottoRank lottoRank) {
-        System.out.print(lottoRank.getCountOfMatch()+"개 일치");
+        System.out.print(lottoRank.getCountOfMatch() + "개 일치");
         if (lottoRank.equals(LottoRank.SECOND)) {
             System.out.print(", 보너스 볼 일치");
         }
-        System.out.print(" (" + lottoRank.getReward() +"원)");
+        System.out.print(" (" + lottoRank.getReward() + "원)");
     }
 
     public static void printErrorMessage(String message) {

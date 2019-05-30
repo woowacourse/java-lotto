@@ -3,7 +3,7 @@ package lotto.domain.lottoresult;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 
-public class WinningLotto{
+public class WinningLotto {
     private final LottoTicket winningLotto;
     private final LottoNumber bonusNumber;
 

@@ -25,7 +25,7 @@ public class PurchaseAmount {
     }
 
     public boolean buy(LottoTicket lottoTicket) {
-        if (canBuy(lottoTicket.getPrice())) {
+        if (!canBuy(lottoTicket.getPrice())) {
             return false;
         }
         money -= lottoTicket.getPrice();

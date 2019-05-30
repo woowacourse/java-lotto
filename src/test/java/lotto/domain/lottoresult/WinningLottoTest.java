@@ -36,7 +36,7 @@ public class WinningLottoTest {
     @Test
     void 두개_이하_일치_로또() {
         WinningLotto winningLotto = WinningLotto.create(winningTicket, "12");
-        LottoTicket lotto = LottoTicket.create(Arrays.asList(11,2,3,8,9,10));
+        LottoTicket lotto = LottoTicket.create(Arrays.asList(11, 2, 3, 8, 9, 10));
         assertThat(winningLotto.checkLottoRank(lotto))
                 .isEqualTo(LottoRank.FAIL);
     }
@@ -44,7 +44,7 @@ public class WinningLottoTest {
     @Test
     void 세개_일치_로또() {
         WinningLotto winningLotto = WinningLotto.create(winningTicket, "12");
-        LottoTicket lotto = LottoTicket.create(Arrays.asList(1,2,3,8,9,10));
+        LottoTicket lotto = LottoTicket.create(Arrays.asList(1, 2, 3, 8, 9, 10));
         assertThat(winningLotto.checkLottoRank(lotto))
                 .isEqualTo(LottoRank.FIFTH);
     }
