@@ -11,7 +11,7 @@ public class Main {
         int numberOfLotto = money.getNumberOfLotto();
         Lottos lottos = new Lottos(numberOfLotto);
         OutputConsole.outputLotto(numberOfLotto, lottos);
-        WinningLotto winningLotto = createWinningLotto();
+        WinningLotto winningLotto = createWinningLotto(createLastWinningLotto());
         OutputConsole.outputResult(winningLotto, lottos);
     }
 
@@ -24,12 +24,21 @@ public class Main {
         }
     }
 
-    private static WinningLotto createWinningLotto() {
+    private static WinningLotto createWinningLotto(Lotto lastWinningLotto) {
         try {
-            return new WinningLotto(new Lotto(InputConsole.inputWinningLotto()), LottoNumber.get(1));
+            return new WinningLotto(lastWinningLotto, LottoNumber.get(InputConsole.inputBonusNumber()));
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            return createWinningLotto();
+            return createWinningLotto(lastWinningLotto);
+        }
+    }
+
+    private static Lotto createLastWinningLotto() {
+        try {
+            return new Lotto(InputConsole.inputWinningLotto());
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            return createLastWinningLotto();
         }
     }
 }

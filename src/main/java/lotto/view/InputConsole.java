@@ -32,5 +32,13 @@ public class InputConsole {
         return lottoNumbers;
     }
 
-
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        try {
+            return scanner.nextInt();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("숫자가 아닙니다. 금액은 숫자를 입력해야 합니다.");
+        }
+    }
 }
