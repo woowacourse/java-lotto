@@ -2,8 +2,6 @@ package lotto.domain;
 
 import java.util.Map;
 
-import static lotto.domain.Prize.*;
-
 public class Result {
     private static final double ONE_HUNDRED_PERCENT = 100.0;
     private final Map<Prize, Integer> result;

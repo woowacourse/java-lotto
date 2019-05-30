@@ -6,7 +6,7 @@ import lotto.domain.LottoNumber;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumber.*;
+import static lotto.domain.LottoNumber.getAllLottoNumbers;
 
 public class LottoGenerator {
     private static final String WINNING_NUMBER_DELIMITER = ", ";
@@ -14,7 +14,7 @@ public class LottoGenerator {
     public static Lotto generateAutoLotto() {
         List<LottoNumber> allLottoNumbers = getAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
-        List<LottoNumber> numbers = allLottoNumbers.subList(0,6);
+        List<LottoNumber> numbers = allLottoNumbers.subList(0, 6);
         numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
         return new Lotto(numbers);
     }

@@ -2,7 +2,8 @@ package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoNumberException;
 
-import static lotto.domain.LottoNumber.*;
+import static lotto.domain.LottoNumber.LOTTO_LAST_NUMBER;
+import static lotto.domain.LottoNumber.LOTTO_START_NUMBER;
 
 public class BonusBall {
     private final LottoNumber number;
