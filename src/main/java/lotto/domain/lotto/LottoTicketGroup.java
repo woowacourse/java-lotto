@@ -19,4 +19,9 @@ public class LottoTicketGroup implements Iterable<LottoTicket> {
     public int size() {
         return lottoTickets.size();
     }
+
+    public LottoTicketGroup combine(LottoTicketGroup lottos) {
+        lottoTickets.addAll(lottos.lottoTickets);
+        return this;
+    }
 }

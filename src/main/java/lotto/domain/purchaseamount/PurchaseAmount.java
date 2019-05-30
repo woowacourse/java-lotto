@@ -25,11 +25,15 @@ public class PurchaseAmount {
     }
 
     public boolean buy(LottoTicket lottoTicket) {
-        if (lottoTicket.getPrice() > money) {
+        if (canBuy(lottoTicket.getPrice())) {
             return false;
         }
         money -= lottoTicket.getPrice();
         return true;
+    }
+
+    public boolean canBuy(int price) {
+        return price <= money;
     }
 
     public int available() {

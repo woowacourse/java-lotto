@@ -18,12 +18,17 @@ public class OutputView {
         }
     }
 
-    public static void printLottoTicketGroup(LottoTicketGroup lottoTickets) {
-        System.out.println("\n" + lottoTickets.size() + "개를 구매했습니다.");
+    public static void printLottoTicketGroup(LottoTicketGroup manualLottos, LottoTicketGroup autoLottos) {
+        System.out.println("\n수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
+        drawLottoTickets(manualLottos);
+        drawLottoTickets(autoLottos);
+        System.out.println();
+    }
+
+    private static void drawLottoTickets(LottoTicketGroup lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket);
         }
-        System.out.println();
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
@@ -31,7 +36,8 @@ public class OutputView {
 
         List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
         Collections.reverse(lottoRanks);
-        lottoRanks.stream().forEach(x -> drawRank(x, lottoResult.countOfRank(x)));
+        lottoRanks.stream()
+                .forEach(x -> drawRank(x, lottoResult.countOfRank(x)));
 
         System.out.println("총 수익률은 " + lottoResult.earningRate() + "%입니다.");
     }
