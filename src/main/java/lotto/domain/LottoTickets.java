@@ -6,6 +6,9 @@ import lotto.domain.lottogenerator.LottoGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTickets {
     private static final int LOTTO_PRICE = 1_000;
@@ -17,11 +20,12 @@ public class LottoTickets {
             throw new NullPointerException();
         }
 
-        lottoTickets = new ArrayList<>();
         int numberOfTickets = payment.calculateNumberOfTickets(LOTTO_PRICE);
-        for (int i = 0; i < numberOfTickets; i++) {
-            lottoTickets.add(LottoGenerator.create(strategy));
-        }
+
+        //TODO mapToObj에서 i 제거
+        lottoTickets = IntStream.range(0, numberOfTickets)
+                .mapToObj(i -> LottoGenerator.create(strategy))
+                .collect(Collectors.toList());
     }
 
     public int size() {

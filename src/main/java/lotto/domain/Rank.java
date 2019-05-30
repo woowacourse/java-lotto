@@ -33,16 +33,13 @@ public enum Rank {
         return this.countOfMatch == countOfMatch;
     }
 
-    public static long calculateTotalWinningMoney(Map<Rank, Integer> map) {
-        if (Objects.isNull(map) || map.isEmpty()) {
+    public static long calculateTotalWinningMoney(Map<Rank, Integer> lottoScore) {
+        if (Objects.isNull(lottoScore) || lottoScore.isEmpty()) {
             throw new NullPointerException();
         }
 
-        long sum = 0;
-        for (Rank rank : map.keySet()) {
-            sum += (long) rank.winningMoney * map.get(rank);
-        }
-
-        return sum;
+        return lottoScore.keySet().stream()
+                .mapToLong(rank -> lottoScore.get(rank) * rank.winningMoney)
+                .sum();
     }
 }

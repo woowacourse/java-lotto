@@ -1,17 +1,20 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_BOUNDARY = 1;
     private static final int MAX_BOUNDARY = 45;
 
-    private static final Map<Integer, LottoNumber> creators = new HashMap<>();
+    private static final Map<Integer, LottoNumber> creators;
 
     static {
-        for (int i = MIN_BOUNDARY; i <= MAX_BOUNDARY; i++) {
-            creators.put(i, new LottoNumber(i));
-        }
+        creators = IntStream.rangeClosed(MIN_BOUNDARY, MAX_BOUNDARY)
+                .boxed()
+                .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
     }
 
     private int number;
