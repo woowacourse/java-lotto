@@ -6,8 +6,9 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import static lotto.domain.domainconstants.DomainConstants.LOTTO_SIZE;
+
 public class Lotto {
-    private static final int LOTTO_SIZE = 6;
     private static final String DELIMITER = ", ";
     private static final String OPEN_BRACKET = "[";
     private static final String CLOSE_BRACKET = "]";
@@ -15,12 +16,8 @@ public class Lotto {
     private Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
-        validLotto(lottoNumbers);
+        checkLottoSize(lottoNumbers);
         this.lottoNumbers = new TreeSet<>(lottoNumbers);
-    }
-
-    private void validLotto(Set<LottoNumber> lotto) {
-        checkLottoSize(lotto);
     }
 
     private void checkLottoSize(Set<LottoNumber> lotto) {
