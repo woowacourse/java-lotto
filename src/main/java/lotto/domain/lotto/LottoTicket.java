@@ -39,6 +39,7 @@ public class LottoTicket {
                 .filter(x -> this.lottoNumbers.contains(x))
                 .count();
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,4 +53,8 @@ public class LottoTicket {
         return Objects.hash(lottoNumbers);
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
