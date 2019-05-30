@@ -6,9 +6,10 @@ import java.util.Objects;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     private final int countOfMatch;
@@ -19,12 +20,18 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch) {
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         if (countOfMatch == 1 || countOfMatch == 2) {
             return MISS;
         }
+
+        if (SECOND.match(countOfMatch) && matchBonus) {
+            return SECOND;
+        }
+
         return Arrays.stream(values())
                 .filter(rank -> rank.match(countOfMatch))
+                .filter(rank -> rank != SECOND)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("존재하는 Rank가 없습니다"));
     }
