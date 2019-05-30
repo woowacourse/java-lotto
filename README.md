@@ -74,3 +74,6 @@
     
     > 위 부분을 상속을 통해 공통로직 중복 제거를 생각해볼 수 있을 것 같음
     
+- OutputView에서 printPrizeData 메서드 내부의 if가 많음
+    
+    >  interface를 통해 위 if문을 줄일 수 있을지 고려
