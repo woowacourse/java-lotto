@@ -18,17 +18,17 @@ public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         Money money = Money.from(inputView.inputMoney());
         CountOfManual countOfManual = CountOfManual.from(inputView.inputCountOfManual(), money.getCountOfPurchase());
-        List<Lotto> userLottos = gerateLottos(countOfManual, money);
+        List<Lotto> userLottos = generateLottos(countOfManual, money);
         outputView.printLottos(userLottos, countOfManual.value(), money.getCountOfPurchase());
 
         WinningLotto winningLotto = generateWinningLotto();
-        WinPrize winPrize = getWinPrize(userLottos, winningLotto);
+        WinPrize winPrize = generateWinPrize(userLottos, winningLotto);
 
         outputView.printResult(winPrize);
         outputView.printRateOfProfit(money, winPrize);
     }
 
-    private static List<Lotto> gerateLottos(final CountOfManual countOfManual, final Money money) {
+    private static List<Lotto> generateLottos(final CountOfManual countOfManual, final Money money) {
         List<String> lottoNoStrings = new ArrayList<>();
         inputView.printInputManual();
         for (int i = 0; i < countOfManual.value(); i++) {
@@ -44,7 +44,7 @@ public class ConsoleUILottoApplication {
         return new WinningLotto(winLotto, bonusNo);
     }
 
-    private static WinPrize getWinPrize(final List<Lotto> userLottos, final WinningLotto winningLotto) {
+    private static WinPrize generateWinPrize(final List<Lotto> userLottos, final WinningLotto winningLotto) {
         WinPrize winPrize = new WinPrize();
         for (final Lotto userLotto : userLottos) {
             winPrize.addWinCount(winningLotto.match(userLotto));
