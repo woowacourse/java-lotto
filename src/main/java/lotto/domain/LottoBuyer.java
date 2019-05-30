@@ -13,11 +13,8 @@ public class LottoBuyer {
         lottos = new LottoContainer(Collections.EMPTY_LIST);
     }
 
-    public void buyLotto(List<Lotto> lottos) throws NoMoneyException {
+    public void buyLotto(List<Lotto> lottos) {
         budget.pay(lottos.size());
-        if (lottos.size() == 0 && !budget.canBuyLotto()) {
-            throw new NoMoneyException("로또를 살 돈이 부족합니다.");
-        }
         while (budget.canBuyLotto()) {
             budget.pay();
             lottos.add(LottoSeller.createLotto());

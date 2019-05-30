@@ -11,7 +11,11 @@ public class OutputView {
     private static final String NEW_LINE = System.getProperty("line.separator");
 
     public static void printErrorMsg(Exception e) {
-        System.out.println(e.getMessage() + NEW_LINE);
+        System.out.println(e.getMessage());
+    }
+
+    public static void printManualInputMsg() {
+        System.out.println(NEW_LINE + "수동으로 구매할 번호를 입력해 주세요.");
     }
 
     public static void printContainingLottos(LottoBuyer buyer) {
@@ -21,7 +25,6 @@ public class OutputView {
         for (String lotto : lottos) {
             System.out.println(lotto);
         }
-        System.out.print(NEW_LINE);
     }
 
     public static void printResult(WinningResult winningResult) {

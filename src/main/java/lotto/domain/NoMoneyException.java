@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class NoMoneyException extends Exception {
+public class NoMoneyException extends RuntimeException {
     public NoMoneyException() {
     }
 

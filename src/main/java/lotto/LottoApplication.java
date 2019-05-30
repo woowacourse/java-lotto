@@ -1,21 +1,22 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.utils.LottoNoParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        LottoBuyer buyer = makePerson();
-        try {
-            buyer.buyLotto(makeLottoManually(buyer));
-        } catch (Exception e) {
-            OutputView.printErrorMsg(e);
-            System.exit(0);
+        LottoBuyer buyer = makeBuyer();
+
+        int countOfManualLotto = getCountOfManualLotto(buyer);
+        if (countOfManualLotto != 0) {
+            OutputView.printManualInputMsg();
         }
+        buyer.buyLotto(makeManualLottos(countOfManualLotto));
         OutputView.printContainingLottos(buyer);
 
         WinningLotto winningLotto = makeWinningLotto();
@@ -24,24 +25,28 @@ public class LottoApplication {
         OutputView.printResult(winningResult);
     }
 
-    private static LottoBuyer makePerson() {
+    private static LottoBuyer makeBuyer() {
         try {
             return new LottoBuyer(new Budget(InputView.inputBudget()));
+        } catch (NoMoneyException nme) {
+            OutputView.printErrorMsg(nme);
+            System.exit(0);
+            return null;
         } catch (Exception e) {
             OutputView.printErrorMsg(e);
-            return makePerson();
+            return makeBuyer();
         }
     }
 
-    private static List<Lotto> makeLottoManually(LottoBuyer buyer) {
+    private static int getCountOfManualLotto(LottoBuyer buyer) {
         try {
             int countOfManualLotto = InputView.inputCountOfManualLotto();
             validatePositive(countOfManualLotto);
             buyer.validateAffordability(countOfManualLotto);
-            return InputView.inputManualLottos(countOfManualLotto);
-        } catch (Exception e) {
-            OutputView.printErrorMsg(e);
-            return makeLottoManually(buyer);
+            return countOfManualLotto;
+        } catch (InvalidNumberException ine) {
+            OutputView.printErrorMsg(ine);
+            return getCountOfManualLotto(buyer);
         }
     }
 
@@ -51,9 +56,26 @@ public class LottoApplication {
         }
     }
 
+    private static List<Lotto> makeManualLottos(int countOfManualLotto) {
+        List<Lotto> lottos = new ArrayList<>();
+        while (lottos.size() < countOfManualLotto) {
+            addManualLotto(lottos);
+        }
+        return lottos;
+    }
+
+    private static void addManualLotto(List<Lotto> lottos) {
+        try {
+            lottos.add(Lotto.of(LottoNoParser.parseToLottoNos(InputView.inputManualLotto())));
+        } catch (Exception e) {
+            OutputView.printErrorMsg(e);
+            addManualLotto(lottos);
+        }
+    }
+
     private static WinningLotto makeWinningLotto() {
         try {
-            Lotto winningLottoNo = Lotto.of(InputView.inputWinningLotto().stream().map(LottoNo::new).collect(Collectors.toList()));
+            Lotto winningLottoNo = Lotto.of(LottoNoParser.parseToLottoNos(InputView.inputWinningLotto()));
             return WinningLotto.of(winningLottoNo, new LottoNo(InputView.inputBonusNo()));
         } catch (Exception e) {
             OutputView.printErrorMsg(e);
