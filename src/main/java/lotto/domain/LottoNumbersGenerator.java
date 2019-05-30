@@ -8,7 +8,6 @@ public class LottoNumbersGenerator {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int SUBLIST_LOWER_BOUND = 0;
     private static final int SUBLIST_UPPER_BOUND = 6;
-    private static final String SPLIT_REGEX = ",";
     private static final List<LottoNumber> totalLottoNumbers = new ArrayList<>();
     private static final List<LottoNumber> fixedTotalLottoNumbers = new ArrayList<>();
 
@@ -20,8 +19,9 @@ public class LottoNumbersGenerator {
         }
     }
 
-    public static LottoNumber getLottoNumber(int bonusBall) {
-        return fixedTotalLottoNumbers.get(bonusBall);
+    public static LottoNumber getLottoNumber(int number) {
+        checkValidLottoNumber(number);
+        return fixedTotalLottoNumbers.get(number - 1);
     }
 
     public static LottoNumbers getLottoNumbers() {
@@ -33,15 +33,15 @@ public class LottoNumbersGenerator {
 
     public static LottoNumbers getLottoNumbers(String numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : makeNumbers(numbers)) {
-            lottoNumbers.add(fixedTotalLottoNumbers.get(number - 1));
+        for (int number : numbers) {
+            lottoNumbers.add(getLottoNumber(number));
         }
         return new LottoNumbers(lottoNumbers);
     }
 
-    private static List<Integer> makeNumbers(String numbers) {
-        return Arrays.stream(numbers.split(SPLIT_REGEX))
-                .map(number -> Integer.parseInt(number.trim()))
-                .collect(Collectors.toList());
+    private static void checkValidLottoNumber(int number) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 숫자의 범위에서 벗어났습니다.");
+        }
     }
 }
