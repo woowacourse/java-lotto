@@ -25,15 +25,16 @@ public class WinPrize {
         return ranks.get(rank);
     }
 
-    public long getRateOfProfit(long purchasedAmount) {
+    public double getRateOfProfit(long purchasedAmount) {
         return getTotalPrize() / purchasedAmount * PERCENT;
     }
 
-    private long getTotalPrize() {
-        long totalPrize = 0;
+    private double getTotalPrize() {
+        double totalPrize = 0;
         for (Rank rank : ranks.keySet()) {
             totalPrize += rank.getPrize() * ranks.get(rank);
         }
+        System.out.println(totalPrize+"원");
         return totalPrize;
     }
 }

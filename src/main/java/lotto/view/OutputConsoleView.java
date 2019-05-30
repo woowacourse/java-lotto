@@ -44,6 +44,7 @@ public class OutputConsoleView implements OutputView {
 
     @Override
     public void printRateOfProfit(final Money money, final WinPrize winPrize) {
-        System.out.println("총 수익률은 " + winPrize.getRateOfProfit(money.value()) + "%입니다.");
+        double m = winPrize.getRateOfProfit(money.value());
+        System.out.println("총 수익률은 " + m + "%입니다.");
     }
 }
