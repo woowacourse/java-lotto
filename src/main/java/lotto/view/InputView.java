@@ -48,7 +48,7 @@ public class InputView {
     }
 
     public static List<Integer> inputManualNumbers() {
-        System.out.println("수동으로 구매할 번호들을 입력해 주세요.");
+        System.out.println("수동으로 구매할 번호를 입력해 주세요. ex) 1, 2, 3, 4, 5, 6");
         return inputNumbers();
     }
 
