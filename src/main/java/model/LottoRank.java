@@ -22,12 +22,9 @@ public enum LottoRank {
         if (numberOfMatches == SECOND.numberOfMatches && containsBonusNumber) {
             return Optional.of(SECOND);
         }
-        if (numberOfMatches >= FIFTH.numberOfMatches) {
-            return Stream.of(LottoRank.values())
-                    .filter(rank -> rank.numberOfMatches == numberOfMatches)
-                    .findFirst();
-        }
-        return Optional.empty();
+        return Stream.of(LottoRank.values())
+                .filter(rank -> rank.numberOfMatches == numberOfMatches)
+                .findFirst();
     }
 
     public int getNumberOfMatches() {
