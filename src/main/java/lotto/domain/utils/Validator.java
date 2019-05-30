@@ -6,6 +6,7 @@ import lotto.domain.model.Number;
 import lotto.domain.model.NumberSet;
 
 import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Set;
 
@@ -54,5 +55,9 @@ public class Validator {
         if (winningLotto.isContained(NumberSet.of(bonusNumber))) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION_MESSAGE);
         }
+    }
+
+    public static int stringToInt(String input) throws InputMismatchException {
+        return Integer.parseInt(input.replace(" ", ""));
     }
 }
