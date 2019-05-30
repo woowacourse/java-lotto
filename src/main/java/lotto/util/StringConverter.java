@@ -10,6 +10,7 @@ public class StringConverter {
 
     public static List<Integer> toNumbers(String originText) {
         List<Integer> numbers = parse(originText).stream()
+                .filter(x -> !x.isEmpty())
                 .map(x -> Integer.parseInt(x.trim()))
                 .collect(Collectors.toList());
         return Collections.unmodifiableList(numbers);

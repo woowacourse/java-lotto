@@ -9,7 +9,7 @@ public class LottoTicket {
     private final Set<LottoNumber> lottoNumbers;
 
     private LottoTicket(List<LottoNumber> numbers) {
-        lottoNumbers = Collections.unmodifiableSet(new HashSet<>(numbers));
+        lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
         checkDuplicate(numbers, lottoNumbers);
         checkLottoSize(lottoNumbers);
     }

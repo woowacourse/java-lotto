@@ -32,7 +32,7 @@ public class PurchaseAmount {
         return true;
     }
 
-    int available() {
+    public int available() {
         return money;
     }
 
