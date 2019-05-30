@@ -7,7 +7,7 @@ public class WinningLotto {
     private final int bonusBall;
 
     public WinningLotto(Lotto lotto, int bonusBall) {
-        if(lotto.isContain(bonusBall)){
+        if(lotto.isContainLottoNumber(LottoNumber.getLottoNumber(bonusBall))){
             throw new duplicateBonusBallException();
         }
         this.lotto = lotto;
@@ -17,5 +17,13 @@ public class WinningLotto {
     @Override
     public String toString() {
         return lotto.toString()+"\n"+"보너스볼 : "+bonusBall;
+    }
+
+    public int getMatchCount(Lotto lotto) {
+        return this.lotto.getMatchCount(lotto);
+    }
+
+    public boolean isMatchBonus(Lotto lotto) {
+        return lotto.isContainLottoNumber(LottoNumber.getLottoNumber(bonusBall));
     }
 }

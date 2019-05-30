@@ -1,14 +1,12 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-
         this.numbers = numbers;
     }
 
@@ -18,7 +16,14 @@ public class Lotto {
     }
 
 
-    public boolean isContain(int bonusBall) {
-        return numbers.contains(LottoNumber.getLottoNumber(bonusBall));
+    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
+
+    public int getMatchCount(Lotto lotto) {
+        return numbers.stream()
+                .filter( l -> lotto.isContainLottoNumber(l))
+                .collect(Collectors.toList()).size();
+    }
+
 }

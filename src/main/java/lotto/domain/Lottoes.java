@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,5 +20,13 @@ public class Lottoes {
         return lottoes.stream()
                 .map(l -> l.toString())
                 .collect(Collectors.joining("\n"));
+    }
+
+    public List<Rank> getRanks(WinningLotto winningLotto) {
+        return lottoes.stream()
+                .map(l -> {
+                 return Rank.valueOf(winningLotto.getMatchCount(l),winningLotto.isMatchBonus(l));
+                })
+                .collect(Collectors.toList());
     }
 }

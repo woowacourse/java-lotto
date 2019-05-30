@@ -18,21 +18,22 @@ public class Controller {
         List<String> winningNumberInput = InputView.promptWinningNumber();
         Lotto winnigLottoNumbers = createWinningLottoNumbers(winningNumberInput);
         String bonusBall = InputView.promptBonusBall();
-        WinningLotto winningLotto = createWinningLotto(winnigLottoNumbers,bonusBall);
-        OutputView.printLotto(winningLotto);
+        WinningLotto winningLotto = createWinningLotto(winnigLottoNumbers, bonusBall);
 
-
+        Statistics statistics = StatisticsFactory.createStatistics();
+        statistics.calculateResult(lottoes,winningLotto);
+        OutputView.printStatistics(statistics);
     }
 
     private static WinningLotto createWinningLotto(Lotto winnigLottoNumbers, String bonusBall) {
-        while(InputValidator.isNotValidWinningLotto(winnigLottoNumbers,bonusBall)){
+        while (InputValidator.isNotValidWinningLotto(winnigLottoNumbers, bonusBall)) {
             bonusBall = InputView.promptBonusBall();
         }
-        return LottoFactory.createWinningLotto(winnigLottoNumbers,Integer.parseInt(bonusBall));
+        return LottoFactory.createWinningLotto(winnigLottoNumbers, Integer.parseInt(bonusBall));
     }
 
     private static Lotto createWinningLottoNumbers(List<String> winningNumberInput) {
-        while(InputValidator.isNotValidLotto(winningNumberInput)){
+        while (InputValidator.isNotValidLotto(winningNumberInput)) {
             winningNumberInput = InputView.promptWinningNumber();
         }
         return LottoFactory.createLotto(winningNumberInput);
@@ -40,7 +41,7 @@ public class Controller {
 
 
     private static Money createMoney(String moneyInput) {
-        while(InputValidator.isNotValidPrice(moneyInput)){
+        while (InputValidator.isNotValidPrice(moneyInput)) {
             moneyInput = InputView.promptPrice();
         }
         Money money = MoneyFactory.createMoney(Integer.parseInt(moneyInput));
