@@ -23,9 +23,11 @@ public class Rank {
         return winners;
     }
 
-    public void addWinner(int matchNumber) {
-        RankType winnerType = RankType.valueOf(matchNumber);
-        winners.get(winnerType).addWinner();
+    public void addWinner(int matchNumber, boolean bonus) {
+        RankType winnerType = RankType.valueOf(matchNumber, bonus);
+        if (winnerType != RankType.MISS) {
+            winners.get(winnerType).addWinner();
+        }
     }
 
     public long totalRewardMoney() {
