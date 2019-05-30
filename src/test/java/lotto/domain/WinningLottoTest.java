@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.exception.WinningLottoCreateException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class WinningLottoTest {
 
@@ -36,5 +38,15 @@ public class WinningLottoTest {
         Lotto anotherLotto = Lotto.of(convertNumbersToLottoNumbers(anotherNumbers));
 
         assertThat(winningLotto.match(anotherLotto)).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    public void 보너스_번호가_당첨로또_번호에_속할때_예외발생_검사() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = Lotto.of(convertNumbersToLottoNumbers(numbers));
+
+        assertThatExceptionOfType(WinningLottoCreateException.class).isThrownBy(() -> {
+            WinningLotto.of(lotto, LottoNumber.of(3));
+        });
     }
 }

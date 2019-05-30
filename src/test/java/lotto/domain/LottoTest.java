@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exception.LottoCreateArgumentException;
+import lotto.domain.exception.LottoCreateException;
 import lotto.domain.exception.LottoNumberCreateException;
 import org.junit.jupiter.api.Test;
 
@@ -51,7 +51,7 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
 
-        assertThatExceptionOfType(LottoCreateArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(LottoCreateException.class).isThrownBy(() -> {
             Lotto.of(lottoNumbers);
         });
     }
@@ -61,7 +61,7 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
 
-        assertThatExceptionOfType(LottoCreateArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(LottoCreateException.class).isThrownBy(() -> {
             Lotto.of(lottoNumbers);
         });
     }
@@ -71,7 +71,7 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
         List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
 
-        assertThatExceptionOfType(LottoCreateArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(LottoCreateException.class).isThrownBy(() -> {
             Lotto.of(lottoNumbers);
         });
     }
