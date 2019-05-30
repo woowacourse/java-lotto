@@ -35,12 +35,12 @@ public class OutputView {
     public static void printLottoResult(Result result, int buyPrice) {
         System.out.println("당첨 통계");
         for (Prize prize : Prize.values()) {
-            printPrizedata(prize, result.getCountOfPrize(prize));
+            printPrizeData(prize, result.getCountOfPrize(prize));
         }
         System.out.printf("총 수익률은 %.0f%% 입니다.", result.calculateRateOfReturn(buyPrice));
     }
 
-    private static void printPrizedata(Prize prize, int prizeCount) {
+    private static void printPrizeData(Prize prize, int prizeCount) {
         if (Prize.NONE == prize) {
             return;
         }
