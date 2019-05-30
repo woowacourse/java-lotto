@@ -1,28 +1,14 @@
 package lotto.domain;
 
-import lotto.domain.exception.LottoSizeException;
-
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class WinningNumber {
     private final WinningLotto winningLotto;
     private final BonusBall bonusBall;
 
-    public WinningNumber(final List<Integer> winningNumbers, int bonusNumber) {
-        if (winningNumbers.size() != Lotto.LOTTO_SIZE) {
-            throw new LottoSizeException("로또 당첨 번호는 6개여야 합니다.");
-        }
-
-        this.winningLotto = new WinningLotto(makeWinningNumbers(winningNumbers));
+    public WinningNumber(final Lotto winningLotto, int bonusNumber) {
+        this.winningLotto = new WinningLotto(winningLotto);
         this.bonusBall = new BonusBall(bonusNumber);
-    }
-
-    private Lotto makeWinningNumbers(final List<Integer> winningNumbers) {
-        return new Lotto(winningNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList()));
     }
 
     public Prize prize(final Lotto lotto) {

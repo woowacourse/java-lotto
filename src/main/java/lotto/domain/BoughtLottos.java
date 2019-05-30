@@ -8,27 +8,33 @@ import java.util.List;
 import java.util.Objects;
 
 public class BoughtLottos {
-
     private final List<Lotto> lottos;
+    private final int countOfBoughtManual;
 
-    public BoughtLottos(final List<Lotto> lottos) {
+    public BoughtLottos(final List<Lotto> lottos, final int countOfBoughtManual) {
         this.lottos = lottos;
+        this.countOfBoughtManual = countOfBoughtManual;
     }
 
-    public static BoughtLottos buyLottos(final int price) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < price / 1000; i++) {
-            lottos.add(LottoGenerator.generateLotto());
+    public static BoughtLottos buyLottos(final int price, List<Lotto> manualLottos) {
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        int countOfBoughtManual = manualLottos.size();
+        for (int i = 0; i < price / 1000 - countOfBoughtManual; i++) {
+            lottos.add(LottoGenerator.generateAutoLotto());
         }
-        return new BoughtLottos(lottos);
+        return new BoughtLottos(lottos, countOfBoughtManual);
     }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int countOfBoughtLottos() {
-        return lottos.size();
+    public int countOfBoughtManualLotto() {
+        return countOfBoughtManual;
+    }
+
+    public int countOfBoughtAutoLotto() {
+        return lottos.size() - countOfBoughtManual;
     }
 
     @Override

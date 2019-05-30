@@ -20,7 +20,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    static LottoNumber getLottoNumber(final int number) {
+    public static LottoNumber getLottoNumber(final int number) {
         if (number <= LOTTO_START_NUMBER || number > LOTTO_LAST_NUMBER) {
             throw new InvalidLottoNumberException(number + "는 유효한 범위가 아닙니다. 로또 번호는 1부터 45 사이여야합니다.");
         }

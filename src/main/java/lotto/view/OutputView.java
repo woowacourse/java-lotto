@@ -12,6 +12,7 @@ public class OutputView {
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final String LOTTO_NUMBER_OPEN_BRACKET = "[";
     private static final String LOTTO_NUMBER_CLOSE_BRACKET = "]";
+    private static final String NEW_LINE = "\n";
 
     public static void printBoughtLottos(final BoughtLottos boughtLottos) {
         printNumberOfBoughtLotto(boughtLottos);
@@ -22,7 +23,8 @@ public class OutputView {
     }
 
     private static void printNumberOfBoughtLotto(BoughtLottos boughtLottos) {
-        System.out.println(boughtLottos.countOfBoughtLottos() + "개를 구매했습니다.");
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다." + NEW_LINE,
+                boughtLottos.countOfBoughtManualLotto(), boughtLottos.countOfBoughtAutoLotto());
     }
 
     private static void printLottoNumbers(final Lotto lotto) {
