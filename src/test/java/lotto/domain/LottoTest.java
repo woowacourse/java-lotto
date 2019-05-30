@@ -2,30 +2,31 @@ package lotto.domain;
 
 import lotto.domain.exception.LottoCreateException;
 import lotto.domain.exception.LottoNumberCreateException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTest {
 
-    private List<LottoNumber> getLottoNumbers(final List<Integer> numbers) {
-        return numbers.stream()
-                .map(number -> LottoNumber.of(number))
-                .collect(Collectors.toList());
+    private LottoFactory lottoFactory;
+
+
+    @BeforeEach
+    public void setUp() {
+        lottoFactory = new LottoFactory();
     }
 
     @Test
     public void testEquals() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
-        Lotto lotto = Lotto.of(lottoNumbers);
-        Lotto another = Lotto.of(lottoNumbers);
-        Lotto other = Lotto.of(lottoNumbers);
+        Lotto lotto = lottoFactory.create(numbers);
+        Lotto another = lottoFactory.create(numbers);
+        Lotto other = lottoFactory.create(numbers);
 
         assertThat(lotto.equals(another)).isTrue();
 
@@ -40,39 +41,29 @@ class LottoTest {
     }
 
     @Test
-    public void null로_생성할때_예외발생_검사() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            Lotto.of(null);
-        });
-    }
-
-    @Test
     public void 중복된_숫자_리스트가_입력됬을때_예외발생_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
 
         assertThatExceptionOfType(LottoCreateException.class).isThrownBy(() -> {
-            Lotto.of(lottoNumbers);
+            lottoFactory.create(numbers);
         });
     }
 
     @Test
     public void 숫자_리스트의_크기가_6초과일때_예외발생_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
 
         assertThatExceptionOfType(LottoCreateException.class).isThrownBy(() -> {
-            Lotto.of(lottoNumbers);
+            lottoFactory.create(numbers);
         });
     }
 
     @Test
     public void 숫자_리스트의_크기가_6미만일때_예외발생_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
 
         assertThatExceptionOfType(LottoCreateException.class).isThrownBy(() -> {
-            Lotto.of(lottoNumbers);
+            lottoFactory.create(numbers);
         });
     }
 
@@ -81,13 +72,13 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 46, 7);
 
         assertThatExceptionOfType(LottoNumberCreateException.class).isThrownBy(() -> {
-            getLottoNumbers(numbers);
+            lottoFactory.create(numbers);
         });
 
         List<Integer> numbers2 = Arrays.asList(1, 2, 3, 4, 0, 7);
 
         assertThatExceptionOfType(LottoNumberCreateException.class).isThrownBy(() -> {
-            getLottoNumbers(numbers2);
+            lottoFactory.create(numbers2);
         });
     }
 
@@ -96,11 +87,8 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> anotherNumbers = Arrays.asList(2, 3, 4, 5, 6, 1);
 
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
-        List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-
-        Lotto lotto = Lotto.of(lottoNumbers);
-        Lotto another = Lotto.of(anotherLottoNumbers);
+        Lotto lotto = lottoFactory.create(numbers);
+        Lotto another = lottoFactory.create(anotherNumbers);
 
         assertThat(lotto.matchCount(another)).isEqualTo(6);
     }
@@ -110,11 +98,8 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> anotherNumbers = Arrays.asList(2, 3, 4, 5, 6, 7);
 
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
-        List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-
-        Lotto lotto = Lotto.of(lottoNumbers);
-        Lotto another = Lotto.of(anotherLottoNumbers);
+        Lotto lotto = lottoFactory.create(numbers);
+        Lotto another = lottoFactory.create(anotherNumbers);
 
         assertThat(lotto.matchCount(another)).isEqualTo(5);
     }
@@ -124,11 +109,8 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> anotherNumbers = Arrays.asList(2, 3, 4, 5, 8, 7);
 
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
-        List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-
-        Lotto lotto = Lotto.of(lottoNumbers);
-        Lotto another = Lotto.of(anotherLottoNumbers);
+        Lotto lotto = lottoFactory.create(numbers);
+        Lotto another = lottoFactory.create(anotherNumbers);
 
         assertThat(lotto.matchCount(another)).isEqualTo(4);
     }
@@ -138,11 +120,8 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> anotherNumbers = Arrays.asList(12, 13, 4, 5, 6, 15);
 
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
-        List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-
-        Lotto lotto = Lotto.of(lottoNumbers);
-        Lotto another = Lotto.of(anotherLottoNumbers);
+        Lotto lotto = lottoFactory.create(numbers);
+        Lotto another = lottoFactory.create(anotherNumbers);
 
         assertThat(lotto.matchCount(another)).isEqualTo(3);
     }
@@ -152,11 +131,8 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> anotherNumbers = Arrays.asList(12, 13, 4, 5, 16, 15);
 
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
-        List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-
-        Lotto lotto = Lotto.of(lottoNumbers);
-        Lotto another = Lotto.of(anotherLottoNumbers);
+        Lotto lotto = lottoFactory.create(numbers);
+        Lotto another = lottoFactory.create(anotherNumbers);
 
         assertThat(lotto.matchCount(another)).isEqualTo(2);
     }
@@ -166,11 +142,8 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> anotherNumbers = Arrays.asList(12, 23, 4, 14, 25, 15);
 
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
-        List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-
-        Lotto lotto = Lotto.of(lottoNumbers);
-        Lotto another = Lotto.of(anotherLottoNumbers);
+        Lotto lotto = lottoFactory.create(numbers);
+        Lotto another = lottoFactory.create(anotherNumbers);
 
         assertThat(lotto.matchCount(another)).isEqualTo(1);
     }
@@ -180,11 +153,8 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> anotherNumbers = Arrays.asList(12, 23, 14, 25, 16, 15);
 
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
-        List<LottoNumber> anotherLottoNumbers = getLottoNumbers(anotherNumbers);
-
-        Lotto lotto = Lotto.of(lottoNumbers);
-        Lotto another = Lotto.of(anotherLottoNumbers);
+        Lotto lotto = lottoFactory.create(numbers);
+        Lotto another = lottoFactory.create(anotherNumbers);
 
         assertThat(lotto.matchCount(another)).isEqualTo(0);
     }
