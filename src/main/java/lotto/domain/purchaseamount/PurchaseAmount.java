@@ -16,9 +16,11 @@ public class PurchaseAmount {
         }
     }
 
-    void buy(int cost) {
-        if (cost > money) {
-            throw new PurchaseAmountException("금액이 부족합니다.");
+    public static PurchaseAmount create(String moneyText) {
+        try {
+            return new PurchaseAmount(Integer.parseInt(moneyText.trim()));
+        } catch (NumberFormatException e) {
+            throw new PurchaseAmountException("금액은 숫자로 구성하세요.");
         }
     }
 

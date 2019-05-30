@@ -1,7 +1,6 @@
 package lotto.domain.purchaseamount;
 
-import lotto.domain.purchaseamount.PurchaseAmount;
-import lotto.domain.purchaseamount.PurchaseAmountException;
+import lotto.domain.lotto.LottoTicket;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -11,15 +10,14 @@ class PurchaseAmountTest {
     @Test
     void 금액_생성_실패() {
         assertThrows(PurchaseAmountException.class, () -> {
-            new PurchaseAmount(999);
+            PurchaseAmount.create("999");
         });
     }
 
     @Test
     void 거스름돈_확인() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(1300);
-        purchaseAmount.buy(1000);
+        PurchaseAmount purchaseAmount = PurchaseAmount.create("1300");
+        purchaseAmount.buy(LottoTicket.create());
         assertThat(purchaseAmount.available()).isEqualTo(300);
     }
-
 }
