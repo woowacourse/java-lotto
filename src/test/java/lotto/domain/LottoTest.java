@@ -5,9 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoTest {
 
@@ -22,29 +23,29 @@ class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumber1 = new LottoNumber(1);
-        lottoNumber2 = new LottoNumber(2);
-        lottoNumber3 = new LottoNumber(3);
-        lottoNumber4 = new LottoNumber(4);
-        lottoNumber5 = new LottoNumber(5);
-        lottoNumber6 = new LottoNumber(6);
-        lottoNumber7 = new LottoNumber(7);
-        lotto = new Lotto(Arrays.asList(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5, lottoNumber6));
+        lottoNumber1 = LottoNumber.getNumber(1);
+        lottoNumber2 = LottoNumber.getNumber(2);
+        lottoNumber3 = LottoNumber.getNumber(3);
+        lottoNumber4 = LottoNumber.getNumber(4);
+        lottoNumber5 = LottoNumber.getNumber(5);
+        lottoNumber6 = LottoNumber.getNumber(6);
+        lottoNumber7 = LottoNumber.getNumber(7);
+        lotto = CustomLottoGenerator.makeLotto("1,2,3,4,5,6,".split(","));
     }
 
     @Test
     void 생성_오류_5개의_LottoNumber를_가질때_테스트() {
-        assertThrows(InvalidLottoException.class, () -> new Lotto(Arrays.asList(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5)));
+        assertThrows(InvalidLottoException.class, () -> new Lotto(new HashSet<>(Arrays.asList(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5))));
     }
 
     @Test
     void 생성_오류_7개의_LottoNumber를_가질때_테스트() {
-        assertThrows(InvalidLottoException.class, () -> new Lotto(Arrays.asList(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5, lottoNumber6, lottoNumber7)));
+        assertThrows(InvalidLottoException.class, () -> new Lotto(new HashSet<>(Arrays.asList(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5, lottoNumber6, lottoNumber7))));
     }
 
     @Test
     void 생성_오류_중복된_숫자를_가질때_테스트() {
-        assertThrows(InvalidLottoException.class, () -> new Lotto(Arrays.asList(lottoNumber1, lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5)));
+        assertThrows(InvalidLottoException.class, () -> new Lotto(new HashSet<>(Arrays.asList(lottoNumber1, lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5))));
     }
 
     @Test
@@ -54,7 +55,7 @@ class LottoTest {
 
     @Test
     void 로또_매칭_테스트() {
-        Lotto testLotto = new Lotto(Arrays.asList(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5, lottoNumber7));
+        Lotto testLotto = CustomLottoGenerator.makeLotto("1,2,3,4,5,7".split(","));
         assertThat(lotto.matchNumbers(testLotto)).isEqualTo(5);
     }
 

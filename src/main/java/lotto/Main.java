@@ -40,7 +40,7 @@ public class Main {
     private static WinningLotto insertWinningLotto() {
         try {
             Lotto Lotto = CustomLottoGenerator.makeLotto(InputView.inputWinningLotto());
-            LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+            LottoNumber bonusNumber = LottoNumber.getNumber(InputView.inputBonusNumber());
 
             return new WinningLotto(Lotto, bonusNumber);
         } catch (Exception e) {
