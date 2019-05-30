@@ -2,7 +2,7 @@ package lotto.domain.model;
 
 import java.util.Objects;
 
-public class Number {
+public class Number implements Comparable<Number> {
 
     private static final String LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE = "로또 번호는 1부터 45까지입니다.";
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -35,5 +35,10 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(Number o) {
+        return this.lottoNumber - o.lottoNumber;
     }
 }
