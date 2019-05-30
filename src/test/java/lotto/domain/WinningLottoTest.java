@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class WinningLottoTest {
     @Test
@@ -16,5 +17,15 @@ class WinningLottoTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new WinningLotto(lottoTicket, bonusBall);
         });
+    }
+
+    @Test
+    void 일등_테스트() {
+        LottoTicket lottoTicket = new LottoTicket(
+                Arrays.asList(1, 2, 3, 4, 5, 6)
+        );
+        int bonusBall = 7;
+        WinningLotto winningLotto = new WinningLotto(lottoTicket, bonusBall);
+        assertThat(winningLotto.getRank(lottoTicket)).isEqualTo(LottoRank.FIRST);
     }
 }
