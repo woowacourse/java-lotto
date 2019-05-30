@@ -11,9 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoFactoryTest {
     @Test
     public void 로또_6자리_번호_리스트_자동_생성_테스트() {
-        for (Lotto lotto : LottoFactory.createLottosAutomatically(10)) {
-            System.out.println(lotto);
-        }
+        System.out.println(LottoFactory.createLottoAutomatically());
     }
 
     @Test
@@ -28,7 +26,7 @@ public class LottoFactoryTest {
                         LottoNumber.get(6)
                 ));
 
-        assertThat(LottoFactory.createLottoManually(Arrays.asList(1, 2, 3, 4, 5, 6)))
+        assertThat(LottoFactory.createLottoManually("1, 2, 3, 4, 5, 6"))
                 .isEqualTo(new Lotto(numbers));
     }
 }
