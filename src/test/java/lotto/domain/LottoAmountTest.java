@@ -8,6 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoAmountTest {
 
     @Test
+    void null_check() {
+        assertThrows(NullPointerException.class, () -> {
+           LottoAmount.createLottoAmount(null);
+        });
+    }
+
+    @Test
     void 음수일_경우() {
         assertThrows(IllegalArgumentException.class, () -> {
             LottoAmount.createLottoAmount(-1);

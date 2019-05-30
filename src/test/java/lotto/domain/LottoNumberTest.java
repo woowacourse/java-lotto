@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoNumberTest {
     @Test
-    void 번호_null() {
+    void null_check() {
         assertThrows(NullPointerException.class, () -> {
             LottoNumber.createLottoNumber(null);
         });

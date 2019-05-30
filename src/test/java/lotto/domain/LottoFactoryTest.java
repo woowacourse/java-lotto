@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoFactoryTest {
     private static List<LottoNumber> actual;
@@ -18,6 +19,12 @@ class LottoFactoryTest {
         actual = IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::createLottoNumber)
                 .collect(Collectors.toList());
+    }
+    @Test
+    void null_check() {
+        assertThrows(NullPointerException.class, () -> {
+            LottoFactory.getLottoTicket(null);
+        });
     }
 
     @Test
