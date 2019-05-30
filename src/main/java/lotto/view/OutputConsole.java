@@ -9,8 +9,9 @@ import static lotto.domain.Rank.*;
 
 public class OutputConsole {
 
-    public static void outputLotto(int numberOfLotto, Lottos lottos) {
-        System.out.println(numberOfLotto + "개를 구매했습니다.");
+    public static void outputLotto(Lottos lottos, int numberOfManualLotto, int numberOfAutoLotto) {
+        System.out.println("수동으로 " + numberOfManualLotto + "장, " +
+                "자동으로 " + numberOfAutoLotto + "장을 구매했습니다.");
         StringBuilder stringBuilder = new StringBuilder();
         for (Lotto lotto : lottos.getList()) {
             stringBuilder.append("[");

@@ -5,10 +5,11 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
 
-    public Lottos(int numberOfLotto) {
-        for (int i = 0; i < numberOfLotto; i++) {
+    public Lottos(List<Lotto> manualLottos, int numberOfAutoLotto) {
+        lottos = new ArrayList<>(manualLottos);
+        for (int i = 0; i < numberOfAutoLotto; i++) {
             lottos.add(new Lotto(RandomNumberGenerator.generate()));
         }
     }
