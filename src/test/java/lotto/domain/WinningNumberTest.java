@@ -14,13 +14,17 @@ public class WinningNumberTest {
 
     @BeforeEach
     void setUp() {
-        winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        winningNumber = new WinningNumber(new Lotto(Arrays.asList(
+                getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),
+                getLottoNumber(4), getLottoNumber(5), getLottoNumber(6))), 7);
     }
 
     @Test
     void init() {
         assertThat(winningNumber)
-                .isEqualTo(new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+                .isEqualTo(new WinningNumber(new Lotto(Arrays.asList(
+                        getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),
+                        getLottoNumber(4), getLottoNumber(5), getLottoNumber(6))), 7));
     }
 
     @Test

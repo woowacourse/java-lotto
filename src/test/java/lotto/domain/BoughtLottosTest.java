@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static lotto.domain.LottoNumber.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +22,7 @@ public class BoughtLottosTest {
                         getLottoNumber(14), getLottoNumber(25), getLottoNumber(42))),
                 new Lotto(Arrays.asList(getLottoNumber(11), getLottoNumber(23), getLottoNumber(25),
                         getLottoNumber(29), getLottoNumber(33), getLottoNumber(15)))
-        ));
+        ), 0);
     }
 
     @Test
@@ -34,11 +35,11 @@ public class BoughtLottosTest {
                             getLottoNumber(14), getLottoNumber(25), getLottoNumber(42))),
                     new Lotto(Arrays.asList(getLottoNumber(11), getLottoNumber(23), getLottoNumber(25),
                             getLottoNumber(29), getLottoNumber(33), getLottoNumber(15)))
-                )));
+                ), 0));
     }
 
     @Test
     void 금액_14000원인_경우_14개의_로또가_생성되는지_테스트() {
-        assertThat(BoughtLottos.buyLottos(14000).getLottos().size()).isEqualTo(14);
+        assertThat(BoughtLottos.buyLottos(14000, Collections.EMPTY_LIST).getLottos().size()).isEqualTo(14);
     }
 }

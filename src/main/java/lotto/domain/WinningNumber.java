@@ -22,11 +22,12 @@ public class WinningNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final WinningNumber that = (WinningNumber) o;
-        return Objects.equals(winningLotto, that.winningLotto);
+        return Objects.equals(winningLotto, that.winningLotto) &&
+                Objects.equals(bonusBall, that.bonusBall);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningLotto);
+        return Objects.hash(winningLotto, bonusBall);
     }
 }
