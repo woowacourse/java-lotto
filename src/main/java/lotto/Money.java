@@ -14,6 +14,9 @@ public class Money {
 
     public double calculatePercentage(double sum) {
         return sum/money;
+    }
 
+    public int getLottoCount() {
+        return this.money/1000;
     }
 }

@@ -1,9 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -18,5 +15,16 @@ public class Lottos {
             prizes.add(winningLotto.prizeOf(lotto));
         }
         return prizes;
+    }
+
+    public Lottos append(Lottos otherLottos) {
+        List<Lotto> appendedLottos = new ArrayList<>(lottos);
+        appendedLottos.addAll(otherLottos.lottos);
+
+        return new Lottos(appendedLottos);
+    }
+
+    public int size() {
+        return lottos.size();
     }
 }

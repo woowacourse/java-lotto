@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 public enum Prize {
     FIRST(6, 2000000000),
     SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    THIRD(5, 50000),
+    FOURTH(4, 5000),
     MISS(0, 0);
 
     private int matchCount;
@@ -18,8 +18,11 @@ public enum Prize {
         this.prizeMoney = prizeMoney;
     }
 
-    public static Prize getPrizeRank(int matchCount) {
+    public static Prize getPrizeRank(int matchCount, boolean hasBonusNumber) {
         try {
+            if (matchCount == THIRD.matchCount && !hasBonusNumber) {
+                return THIRD;
+            }
             return Arrays.stream(values()).filter(prize -> prize.matchCount == matchCount).findAny().get();
         } catch (NoSuchElementException e) {
             return MISS;

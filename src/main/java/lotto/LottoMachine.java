@@ -15,6 +15,10 @@ public class LottoMachine {
         return new Lottos(lottos);
     }
 
+    public static Lottos generateLottos(List<Lotto> manualLottos) {
+        return new Lottos(manualLottos);
+    }
+
     private static Lotto generateLotto() {
         return new Lotto(generateRandomLottoNumbers());
     }
