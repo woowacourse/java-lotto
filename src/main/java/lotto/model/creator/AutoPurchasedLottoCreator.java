@@ -6,7 +6,7 @@ import lotto.model.object.LottoNumber;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchasedLottoCreator {
+public class AutoPurchasedLottoCreator {
         private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
         public static Lotto create(List<Integer> number) {

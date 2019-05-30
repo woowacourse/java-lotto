@@ -8,10 +8,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PurchasedLottoCreatorTest {
+class AutoPurchasedLottoCreatorTest {
 
         @Test
-        void 구매_로또_생성_검사() {
+        void 자동_구매_로또_생성_검사() {
                 List<Integer> lottoNumbers = new ArrayList<>();
                 lottoNumbers.add(1);
                 lottoNumbers.add(2);
@@ -20,7 +20,7 @@ class PurchasedLottoCreatorTest {
                 lottoNumbers.add(5);
                 lottoNumbers.add(6);
                 
-                Lotto purchasedLotto = PurchasedLottoCreator.create(lottoNumbers);
+                Lotto purchasedLotto = AutoPurchasedLottoCreator.create(lottoNumbers);
 
                 assertThat(purchasedLotto.getLottoNumbers().get(0)).isEqualTo(LottoNumberCreator.create(1));
                 assertThat(purchasedLotto.getLottoNumbers().get(1)).isEqualTo(LottoNumberCreator.create(2));

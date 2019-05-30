@@ -14,7 +14,7 @@ public class ManualPaymentNumberCreator {
 
         private static void checkValidManualPaymentNumber(int input, Payment payment) {
                 if (input < 0 || input > payment.getNumber() / LOTTO_PRICE) {
-                        throw new InvalidManualPaymentNumberException();
+                        throw new InvalidManualPaymentNumberException("수동으로 구매할 로또 수는 0이상, 총 구매 수 이하입니다.");
                 }
         }
 }

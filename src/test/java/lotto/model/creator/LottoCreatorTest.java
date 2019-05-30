@@ -2,28 +2,22 @@ package lotto.model.creator;
 
 import lotto.model.exception.LottoNumberDuplicationException;
 import lotto.model.object.Lotto;
-import lotto.model.object.LottoNumber;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class WinningLottoCreatorTest {
+public class LottoCreatorTest {
         @Test
-        void 당첨_로또_생성_및_중복_검사() {
-                List<LottoNumber> lottoNumbers = new ArrayList<LottoNumber>();
+        void 로또_생성_및_중복_검사() {
                 assertThrows(LottoNumberDuplicationException.class, () -> {
-                        WinningLottoCreator.create(new String[]{"1", "2", "3", "4", "5", "1"});
+                        LottoCreator.create(new String[]{"1", "2", "3", "4", "5", "1"});
                 });
         }
 
         @Test
-        void 당첨_로또_생성_검사() {
-                List<LottoNumber> lottoNumbers = new ArrayList<LottoNumber>();
-                Lotto winningLotto = WinningLottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
+        void 로또_생성_검사() {
+                Lotto winningLotto = LottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
 
                 assertThat(winningLotto.getLottoNumbers().get(0)).isEqualTo(LottoNumberCreator.create(1));
                 assertThat(winningLotto.getLottoNumbers().get(1)).isEqualTo(LottoNumberCreator.create(2));

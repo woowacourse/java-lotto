@@ -37,7 +37,7 @@ public class WinStatsCreatorTest {
                 List<Lotto> purchasedLottos = new ArrayList<>();
                 purchasedLottos.add(purchasedLotto1);
                 purchasedLottos.add(purchasedLotto2);
-                Lotto winningLotto = WinningLottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
+                Lotto winningLotto = LottoCreator.create(new String[]{"1", "2", "3", "4", "5", "6"});
 
                 BonusBall bonusBall = BonusBallCreator.create(10);
 

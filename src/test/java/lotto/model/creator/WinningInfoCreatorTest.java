@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class WinningInfoCreatorTest {
         @Test
         void 당첨_로또_보너스볼_중복_검사() {
-                Lotto winningLotto = WinningLottoCreator.create(new String[]{"1","2","3","4","5","6"});
+                Lotto winningLotto = LottoCreator.create(new String[]{"1","2","3","4","5","6"});
                 BonusBall bonusBall = BonusBallCreator.create(3);
 
                 assertThrows(WinningLottoBonusBallDuplicationException.class, ()->{
