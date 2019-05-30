@@ -10,18 +10,13 @@
     * 빈칸 없애기
 * 수동 로또 입력값을 split하고 리스트로 던지기
 #### domain
-* LottoTickets
-    * 로또 리스트
-    * 수동 로또 수를 갖고 있어야 함
+* LottoTickets: 로또 리스트, 구매할 수동 로또 수
 * LottoTicket: 로또 한 장
     * 당첨 번호 로또(WinningLotto)에 번호 하나하나 묻기
-* LottoTicketsFactory
+* LottoTicketFactory
     * 수동 로또
-        * 중복값 확인
-        * 숫자만 있는지 확인
-        * 입력한 로또 티켓의 매수가 구매할 수동 로또 수와 같은지 검증하기
     * 
-* 수동 로또 클래스(CustomLotto)가 리스트를 받아서
+* 수동 로또 클래스(ManualLotto)가 리스트를 받아서
 * LottoNumber
     * 요청한 로또 번호에 대한 객체 리턴
         * LottoNumber.getNumber(3) -> new LottoNumber(3)
@@ -56,7 +51,8 @@
 ## Done
 #### view
 #### domain
-* LottoTickets
+* LottoTickets: 로또 리스트, 구매할 수동 로또 수
+    * 구매할 수동 로또 수만큼 리스트에 갖고 있는지 응답하기
 * LottoTicket: 로또 한 장
     * String으로 로또 번호 6개가 입력되면 LottoNumber 리스트에 저장하기
         * "1,2,3,4,5,6" -> [1,2,3,4,5,6]
