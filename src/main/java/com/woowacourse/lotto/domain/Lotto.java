@@ -12,7 +12,7 @@ public class Lotto {
 	public Lotto(final List<LottoNumber> numbers) {
 		this.numbers = new TreeSet<>(numbers);
 		if(this.numbers.size() != numbers.size()) {
-			throw new InvalidNumberException("중복된 숫자 입력입니다.");
+			throw new InvalidNumberException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
 		}
 	}
 
