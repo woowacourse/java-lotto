@@ -14,13 +14,13 @@ public class WinningNumberTest {
 
     @BeforeEach
     void setUp() {
-        winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
     }
 
     @Test
     void init() {
-        assertThat(new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6)))
-                .isEqualTo(new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(winningNumber)
+                .isEqualTo(new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class WinningNumberTest {
     }
 
     @Test
-    void 번호_5개_일치하는_경우_테스트() {
+    void 번호_5개_및_보너스볼_일치하는_경우_테스트() {
         assertThat(winningNumber.prize(new Lotto(Arrays.asList(
                 getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),
                 getLottoNumber(4), getLottoNumber(5), getLottoNumber(7)))))
@@ -40,11 +40,19 @@ public class WinningNumberTest {
     }
 
     @Test
+    void 번호_5개_일치하는_경우_테스트() {
+        assertThat(winningNumber.prize(new Lotto(Arrays.asList(
+                getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),
+                getLottoNumber(4), getLottoNumber(5), getLottoNumber(8)))))
+                .isEqualTo(Prize.THIRD);
+    }
+
+    @Test
     void 번호_4개_일치하는_경우_테스트() {
         assertThat(winningNumber.prize(new Lotto(Arrays.asList(
                 getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),
                 getLottoNumber(4), getLottoNumber(7), getLottoNumber(8)))))
-                .isEqualTo(Prize.THIRD);
+                .isEqualTo(Prize.FOURTH);
     }
 
     @Test
@@ -52,7 +60,7 @@ public class WinningNumberTest {
         assertThat(winningNumber.prize(new Lotto(Arrays.asList(
                 getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),
                 getLottoNumber(7), getLottoNumber(8), getLottoNumber(9)))))
-                .isEqualTo(Prize.FOURTH);
+                .isEqualTo(Prize.FIFTH);
     }
 
     @Test

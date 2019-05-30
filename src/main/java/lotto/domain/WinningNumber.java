@@ -8,13 +8,15 @@ import java.util.stream.Collectors;
 
 public class WinningNumber {
     private final List<LottoNumber> winningNumbers;
+    private final BonusBall bonusBall;
 
-    public WinningNumber(final List<Integer> winningNumbers) {
+    public WinningNumber(final List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.size() != Lotto.LOTTO_SIZE) {
             throw new LottoSizeException("로또 당첨 번호는 6개여야 합니다.");
         }
 
         this.winningNumbers = makeWinningNumbers(winningNumbers);
+        this.bonusBall = new BonusBall(bonusNumber);
     }
 
     private List<LottoNumber> makeWinningNumbers(final List<Integer> winningNumbers) {
@@ -25,10 +27,12 @@ public class WinningNumber {
 
     public Prize prize(final Lotto lotto) {
         int matchCount = 0;
-        for (LottoNumber winningNumber : winningNumbers) {
-            matchCount += lotto.hasNumber(winningNumber);
+        boolean hasBonus = false;
+        for (LottoNumber lottoNumber : lotto.getNumbers()) {
+            matchCount += winningNumbers.contains(lottoNumber) ? 1 : 0;
+            hasBonus |= bonusBall.isMatch(lottoNumber);
         }
-        return Prize.valueOf(matchCount);
+        return Prize.valueOf(matchCount, hasBonus);
     }
 
     @Override
