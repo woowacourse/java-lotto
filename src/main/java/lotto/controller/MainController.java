@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.model.customer.CustomLottoNumbers;
 import lotto.model.customer.PurchaseAmount;
 import lotto.model.lotto.LottoTickets;
 import lotto.model.lottostore.LottoStore;
@@ -14,9 +13,9 @@ public class MainController {
         PurchaseAmount purchaseAmount = InputView.inputPurchaseAmount();
 
         int manualPurchaseQuantity = InputView.inputManualPurchaseQuantity();
-        CustomLottoNumbers customLottoNumbers = InputView.inputCustomLottoNumbers(manualPurchaseQuantity);
+        LottoTickets customLottoTickets = InputView.inputCustomLottoTickets(manualPurchaseQuantity);
 
-        LottoTickets lottoTickets = LottoStore.makeLottoTickets(purchaseAmount, customLottoNumbers);
+        LottoTickets lottoTickets = LottoStore.buyLottoTickets(purchaseAmount, customLottoTickets);
         OutputView.printLottoTickets(lottoTickets, manualPurchaseQuantity);
 
         WinningLotto winningLotto = InputView.inputWinningLotto();

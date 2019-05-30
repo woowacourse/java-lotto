@@ -1,10 +1,10 @@
 package lotto.view;
 
-import lotto.model.customer.CustomLottoNumbers;
 import lotto.model.customer.PurchaseAmount;
 import lotto.model.lotto.BonusNumber;
 import lotto.model.lotto.LottoNumber;
 import lotto.model.lotto.LottoTicket;
+import lotto.model.lotto.LottoTickets;
 import lotto.model.winninglotto.WinningLotto;
 import lotto.utils.StringUtility;
 
@@ -58,30 +58,31 @@ public class InputView {
         }
     }
 
-    public static CustomLottoNumbers inputCustomLottoNumbers(int purchaseQuantity) {
+    public static LottoTickets inputCustomLottoTickets(int purchaseQuantity) {
         if (purchaseQuantity > 0) {
             System.out.println("수동으로 구매할 번호를 입력해주세요.");
         }
         try {
-            return new CustomLottoNumbers(addCustomLottoNumbers(purchaseQuantity));
+            return new LottoTickets(addCustomLottoTickets(purchaseQuantity));
         } catch (NumberFormatException e) {
             System.out.println("잘못된 번호입니다.");
-            return inputCustomLottoNumbers(purchaseQuantity);
+            return inputCustomLottoTickets(purchaseQuantity);
         }
     }
 
-    private static List<List<Integer>> addCustomLottoNumbers(int purchaseQuantity) {
-        List<List<Integer>> customLottoNumbers = new ArrayList<>();
+    private static List<LottoTicket> addCustomLottoTickets(int purchaseQuantity) {
+        List<LottoTicket> CustomLottoTickets = new ArrayList<>();
         for (int i = 0; i < purchaseQuantity; i++) {
-            customLottoNumbers.add(inputCustomLottoNumber());
+            CustomLottoTickets.add(new LottoTicket(inputCustomLottoTicket()));
         }
-        return customLottoNumbers;
+        return CustomLottoTickets;
     }
 
-    private static List<Integer> inputCustomLottoNumber() {
-        List<Integer> customLottoNumber = StringUtility.parseIntList(SCANNER.nextLine(), ",");
+    private static Set<LottoNumber> inputCustomLottoTicket() {
+        List<Integer> CustomLottoTicket = StringUtility.parseIntList(SCANNER.nextLine(), ",");
 
-        Collections.sort(customLottoNumber);
-        return customLottoNumber;
+        return CustomLottoTicket.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }

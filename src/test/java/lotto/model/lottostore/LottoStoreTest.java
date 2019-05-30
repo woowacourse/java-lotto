@@ -1,6 +1,6 @@
 package lotto.model.lottostore;
 
-import lotto.model.customer.CustomLottoNumbers;
+import lotto.model.customer.CustomLottoTickets;
 import lotto.model.customer.PurchaseAmount;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,9 +24,9 @@ public class LottoStoreTest {
 
     @Test
     void _5000원_수동_0개일_때_로또개수_확인() {
-        CustomLottoNumbers customLottoNumber = new CustomLottoNumbers(customLottoNumbers);
+        CustomLottoTickets customLottoNumber = new CustomLottoTickets(customLottoNumbers);
 
-        assertThat(LottoStore.makeLottoTickets(purchaseAmount, customLottoNumber).size()).isEqualTo(5);
+        assertThat(LottoStore.buyLottoTickets(purchaseAmount, customLottoNumber).size()).isEqualTo(5);
     }
 
     @Test
@@ -34,9 +34,9 @@ public class LottoStoreTest {
         for (int i = 0; i < 3; i++) {
             customLottoNumbers.add(lottoNumber);
         }
-        CustomLottoNumbers customLottoNumber = new CustomLottoNumbers(customLottoNumbers);
+        CustomLottoTickets customLottoNumber = new CustomLottoTickets(customLottoNumbers);
 
-        assertThat(LottoStore.makeLottoTickets(purchaseAmount, customLottoNumber).size()).isEqualTo(5);
+        assertThat(LottoStore.buyLottoTickets(purchaseAmount, customLottoNumber).size()).isEqualTo(5);
     }
 
     @Test
@@ -44,9 +44,9 @@ public class LottoStoreTest {
         for (int i = 0; i < 5; i++) {
             customLottoNumbers.add(lottoNumber);
         }
-        CustomLottoNumbers customLottoNumber = new CustomLottoNumbers(customLottoNumbers);
+        CustomLottoTickets customLottoNumber = new CustomLottoTickets(customLottoNumbers);
 
-        assertThat(LottoStore.makeLottoTickets(purchaseAmount, customLottoNumber).size()).isEqualTo(5);
+        assertThat(LottoStore.buyLottoTickets(purchaseAmount, customLottoNumber).size()).isEqualTo(5);
     }
 
     @AfterEach
