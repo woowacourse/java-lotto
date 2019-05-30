@@ -14,9 +14,11 @@ public class Lottos implements Iterable<Lotto> {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
+    /*
     public LottoResult getResult(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         return new LottoResult(lottos, winningNumbers, bonusNumber);
     }
+    */
 
     public LottoResult getResult() {
         return new LottoResult(lottos);

@@ -15,10 +15,12 @@ public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
     private final Map<LottoRank, Integer> rankings;
     private final double earningRate;
 
+    /*
     protected LottoResult(List<Lotto> lottos, Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         this.rankings = processResult(lottos, winningNumbers, bonusNumber);
         this.earningRate = getTotalEarnings().getEarningRate(new Money(Lotto.PRICE * lottos.size()));
     }
+    */
 
     protected LottoResult(List<Lotto> lottos) {
         List<LottoNumber> currentWinningNumbers = getCurrentWinningNumbers();
@@ -42,16 +44,15 @@ public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
 
     private List<LottoNumber> getCurrentWinningNumbers() {
         try {
-            List<LottoNumber> numbers = new ArrayList<>();
+            List<LottoNumber> result = new ArrayList<>();
             Matcher matcher = Pattern.compile(">[0-9]+<").matcher(httpWinningNumbersRequest());
             while (matcher.find()) {
                 String token = matcher.group();
-                numbers.add(LottoNumber.of(token.substring(1, token.indexOf("<"))));
+                result.add(LottoNumber.of(token.substring(1, token.indexOf("<"))));
             }
-            return numbers;
+            return result;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new ArrayList<>();
+            return getCurrentWinningNumbers();
         }
     }
 
