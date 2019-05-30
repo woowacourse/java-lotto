@@ -11,6 +11,10 @@ public class Lottos {
 		this.lottos = new ArrayList<>(lottos);
 	}
 
+	public int getSize() {
+		return lottos.size();
+	}
+
 	public List<Lotto> getLottos() {
 		return Collections.unmodifiableList(lottos);
 	}

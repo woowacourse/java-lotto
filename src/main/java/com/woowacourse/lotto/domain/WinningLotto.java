@@ -12,7 +12,7 @@ import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 
 public class WinningLotto {
-	private static final String REGEX_OF_NUMBER = "[1-3][0-9]|4[0-5]";
+	private static final String REGEX_OF_NUMBER = "[1-9]|[1-3][0-9]|[4][0-5]";
 	private static final Pattern PATTERN_OF_LOTTO_NUMBER = Pattern.compile(REGEX_OF_NUMBER);
 	private Lotto numbers;
 
@@ -36,9 +36,13 @@ public class WinningLotto {
 	}
 
 	private void validateNumber(List<String> numbers) {
-		if (numbers.stream().anyMatch(number -> PATTERN_OF_LOTTO_NUMBER.matcher(number).matches())) {
+		if (!numbers.stream().allMatch(number -> PATTERN_OF_LOTTO_NUMBER.matcher(number).matches())) {
 			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
+	}
+
+	public int matchLotto(Lotto lotto) {
+		return numbers.duplicateNumber(lotto);
 	}
 
 	@Override

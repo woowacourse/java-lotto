@@ -13,7 +13,7 @@ public class LottoNumber {
 			.collect(Collectors.toList());
 
 	public static Integer getLottoNumber(int index) {
-		if(index < MIN_NUMBER_OF_LOTTO - 1 || index > MAX_NUMBER_OF_LOTTO - 1) { // index 범위는 0이상 44이하
+		if (index < MIN_NUMBER_OF_LOTTO - 1 || index > MAX_NUMBER_OF_LOTTO - 1) { // index 범위는 0이상 44이하
 			throw new IllegalArgumentException(ExceptionOutput.VIOLATE_INDEX.getExceptionMessage());
 		}
 		return lottoNumbers.get(index);

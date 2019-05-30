@@ -1,8 +1,6 @@
 package lotto;
 
-import com.woowacourse.lotto.domain.LottoFactory;
-import com.woowacourse.lotto.domain.Money;
-import com.woowacourse.lotto.domain.WinningLotto;
+import com.woowacourse.lotto.domain.*;
 import com.woowacourse.lotto.exception.InvalidMoneyException;
 import com.woowacourse.lotto.utils.StringSeparator;
 import com.woowacourse.lotto.view.InputView;
@@ -13,8 +11,12 @@ public class LottoAppMain {
 		Money money = getMoneyForPurchaseOfLotto();
 		LottoFactory lottoFactory = new LottoFactory(money);
 		OutputView.printNumberOfLotto(money);
-		OutputView.printLotto(lottoFactory.generateLotto());
+		Lottos lottos = lottoFactory.generateLotto();
+		OutputView.printLotto(lottos);
 		WinningLotto winningLotto = getWinningLotto();
+		LottoResult lottoResult = new LottoResult(winningLotto, lottos);
+		OutputView.printLottoMatchResult(lottoResult.matchLotto());
+		OutputView.printEarningsRate(lottoResult);
 	}
 
 	public static Money getMoneyForPurchaseOfLotto() {

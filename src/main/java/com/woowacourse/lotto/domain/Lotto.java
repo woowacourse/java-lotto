@@ -4,8 +4,7 @@ import java.util.*;
 
 import com.woowacourse.lotto.exception.InvalidNumberException;
 
-import static com.woowacourse.lotto.domain.LottoNumber.MAX_NUMBER_OF_LOTTO;
-import static com.woowacourse.lotto.domain.LottoNumber.MIN_NUMBER_OF_LOTTO;
+import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 public class Lotto {
 	private final Set<Integer> numbers;
@@ -16,9 +15,15 @@ public class Lotto {
 	}
 
 	private void validateRange(List<Integer> numbers) {
-		if(numbers.stream().anyMatch(number -> MIN_NUMBER_OF_LOTTO > number || MAX_NUMBER_OF_LOTTO < number)) {
+		if (!numbers.stream().allMatch(number -> (MIN_NUMBER_OF_LOTTO <= number || MAX_NUMBER_OF_LOTTO >= number))) {
 			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
+	}
+
+	public int duplicateNumber(Lotto lotto) {
+		Set<Integer> set = new TreeSet<>(this.numbers);
+		set.removeAll(lotto.numbers);
+		return NUMBER_OF_LOTTO - set.size();
 	}
 
 	@Override
@@ -42,7 +47,7 @@ public class Lotto {
 	public String toString() {
 		StringJoiner stringJoiner = new StringJoiner(",", "[", "]");
 
-		for(int i : numbers) {
+		for (int i : numbers) {
 			stringJoiner.add(String.valueOf(i));
 		}
 

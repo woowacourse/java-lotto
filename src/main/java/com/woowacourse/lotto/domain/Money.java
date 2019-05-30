@@ -5,7 +5,7 @@ import java.util.Objects;
 import com.woowacourse.lotto.exception.InvalidMoneyException;
 
 public class Money {
-	private static final int MINIMUM_MONEY_FOR_PURCHASE = 1000;
+	public static final int MINIMUM_MONEY_FOR_PURCHASE = 1000;
 	private final int money;
 
 	public Money(int money) {
