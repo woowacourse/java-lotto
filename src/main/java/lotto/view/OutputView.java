@@ -44,10 +44,9 @@ public class OutputView {
         if (Prize.NONE == prize) {
             return;
         }
-        if (Prize.SECOND == prize) {
-            System.out.println(prize.getCountOfNumber() + "개 일치, 보너스 볼 일치(" + prize.getWinningAmount() + "원) - " + prizeCount + "개");
-            return;
-        }
-        System.out.println(prize.getCountOfNumber() + "개 일치 (" + prize.getWinningAmount() + "원) - " + prizeCount + "개");
+        System.out.println(prize.getCountOfNumber() + "개 일치"
+                + (Prize.SECOND == prize ? ", 보너스 볼 일치 " : " ")
+                + "(" + prize.getWinningAmount() + "원) - "
+                + prizeCount + "개");
     }
 }

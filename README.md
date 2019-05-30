@@ -70,10 +70,17 @@
 
 - 중복된 부분이 많음
     1. LottoNumber과 BonusBall의 구현 로직이 비슷함
+        LottoNumber가 팩토리 메서드 패턴을 사용하므로 BonusBall에 상속되기에는 부적절
     2. Lotto와 WinningNumber의 인자인 winningNumbers와 공통점이 있어보임
     
     > 위 부분을 상속을 통해 공통로직 중복 제거를 생각해볼 수 있을 것 같음
     
-- OutputView에서 printPrizeData 메서드 내부의 if가 많음
+    상속은 부적절하다고 판단, 위임 방식을 적용하려고 시도 (`WinningLotto`)
+    [참고](https://wjun.tistory.com/66) 
     
+- OutputView에서 printPrizeData 메서드 내부의 if가 많음
     >  interface를 통해 위 if문을 줄일 수 있을지 고려
+    
+    interface와 Map 자료구조의 조합으로 해결해보려고 했으나 Prize.SECOND, Prize.NONE을 제외하고는
+    모두 같은 구조의 메세지를 띔. 기존의 코드에서 Prize.SECOND 부분만 삼항연산자를 통해 해결함
+
