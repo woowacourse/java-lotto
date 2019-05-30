@@ -1,8 +1,15 @@
-package lotto.domain;
+package lotto.domain.result;
+
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.purchase.PurchaseAmount;
 
 import java.util.*;
 
 public class LottoResult {
+    private static final int INIT_VALUE = 0;
+    private static final int PERCENTAGE = 100;
+
     private static Map<Rank, Integer> map = new LinkedHashMap<>();
     private final Winning winning;
     private final Lottos lottos;
@@ -17,7 +24,7 @@ public class LottoResult {
         return new LottoResult(winning, lottos);
     }
 
-    public Map<Rank, Integer> matchWinningLotto() {
+    private Map<Rank, Integer> matchWinningLotto() {
         Map<Rank, Integer> map = new LinkedHashMap<>();
         init(map);
         addLottoResult(map);
@@ -28,7 +35,7 @@ public class LottoResult {
         List<Rank> ranks = Arrays.asList(Rank.values());
         Collections.reverse(ranks);
         for (Rank rank : ranks) {
-            map.put(rank, 0);
+            map.put(rank, INIT_VALUE);
         }
     }
 
@@ -41,14 +48,14 @@ public class LottoResult {
 
     public int yield() {
         int purchaseAmount = map.values().stream()
-                .reduce(0, Integer::sum) * PurchaseAmount.LOTTO_PRICE
+                .reduce(INIT_VALUE, Integer::sum) * PurchaseAmount.LOTTO_PRICE
                 ;
         int result = map.keySet().stream()
                 .mapToInt(x -> x.getMoney() * map.get(x))
                 .sum()
                 ;
 
-        return (result / purchaseAmount) * 100;
+        return (result / purchaseAmount) * PERCENTAGE;
     }
 
     public Map<Rank, Integer> getMap() {

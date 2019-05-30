@@ -1,8 +1,13 @@
-package lotto.domain;
+package lotto.domain.result;
+
+import lotto.domain.lotto.Lotto;
 
 import java.util.Objects;
 
 public class Winning {
+    private static final String INCLUDE_ERROR = "보너스 번호가 당첨 번호에 포함 될 수 없습니다.";
+    private static final String NOT_INCLUDE_ERROR = "보너스 번호가 범위를 벗어났습니다.";
+
     private final Lotto lotto;
     private final int bonusNum;
 
@@ -15,13 +20,13 @@ public class Winning {
 
     private void checkContainNum(int bonusNum) {
         if (lotto.containNumber(bonusNum)) {
-            throw new IllegalArgumentException("보너스 번호가 당첨 번호에 포함될 수 없습니다.");
+            throw new InvalidWinning(INCLUDE_ERROR);
         }
     }
 
     private void checkBonusNum(int bonusNum) {
         if (bonusNum < 0 || bonusNum > 45) {
-            throw new IllegalArgumentException("보너스 번호가 범위를 벗어났습니다.");
+            throw new InvalidWinning(NOT_INCLUDE_ERROR);
         }
     }
 

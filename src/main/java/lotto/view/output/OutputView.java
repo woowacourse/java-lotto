@@ -1,6 +1,10 @@
 package lotto.view.output;
 
-import lotto.domain.*;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.purchase.PurchaseCount;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.Rank;
 
 import java.util.Map;
 

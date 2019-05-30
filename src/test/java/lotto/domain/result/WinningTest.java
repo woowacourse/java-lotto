@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.result;
 
+import lotto.domain.lotto.Lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,12 +27,12 @@ public class WinningTest {
 
     @Test
     void 보너스번호_범위_확인() {
-        assertThrows(IllegalArgumentException.class, () -> Winning.of(lotto, 46));
-        assertThrows(IllegalArgumentException.class, () -> Winning.of(lotto, -1));
+        assertThrows(InvalidWinning.class, () -> Winning.of(lotto, 46));
+        assertThrows(InvalidWinning.class, () -> Winning.of(lotto, -1));
     }
 
     @Test
     void 보너스번호가_당첨번호에_포함되는지() {
-        assertThrows(IllegalArgumentException.class, () -> Winning.of(lotto, 5));
+        assertThrows(InvalidWinning.class, () -> Winning.of(lotto, 5));
     }
 }

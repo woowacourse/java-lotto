@@ -1,6 +1,16 @@
 package lotto.contoller;
 
-import lotto.domain.*;
+import lotto.domain.lotto.InvalidLotto;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.LottosGenerator;
+import lotto.domain.purchase.InvalidPurchaseAmount;
+import lotto.domain.purchase.InvalidPurchaseCount;
+import lotto.domain.purchase.PurchaseAmount;
+import lotto.domain.purchase.PurchaseCount;
+import lotto.domain.result.InvalidWinning;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.Winning;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
@@ -22,7 +32,7 @@ public class Main {
     private static Lottos createLottos(PurchaseCount purchaseCount) {
         try {
             return LottosGenerator.generate(purchaseCount, createManualLottos(purchaseCount));
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidLotto e) {
             System.out.println(e.getMessage());
             return createLottos(purchaseCount);
         }
@@ -35,7 +45,7 @@ public class Main {
     private static PurchaseCount createManualCount(PurchaseAmount purchaseAmount) {
         try {
             return PurchaseCount.of(purchaseAmount, InputView.inputManualCount());
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidPurchaseCount e) {
             System.out.println(e.getMessage());
             return createManualCount(purchaseAmount);
         }
@@ -44,7 +54,7 @@ public class Main {
     private static PurchaseAmount createPurchaseAmount() {
         try {
             return PurchaseAmount.of(InputView.inputMoney());
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidPurchaseAmount e) {
             System.out.println(e.getMessage());
             return createPurchaseAmount();
         }
@@ -53,7 +63,7 @@ public class Main {
     private static Lotto createLotto() {
         try {
             return Lotto.of(InputView.inputWinningLotto());
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidLotto e) {
             System.out.println(e.getMessage());
             return createLotto();
         }
@@ -62,7 +72,7 @@ public class Main {
     private static Winning createWinningLotto(Lotto lotto) {
         try {
             return Winning.of(lotto, InputView.inputBonusNum());
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidWinning e) {
             System.out.println(e.getMessage());
             return createWinningLotto(lotto);
         }

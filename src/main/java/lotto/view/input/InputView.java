@@ -1,6 +1,6 @@
 package lotto.view.input;
 
-import lotto.domain.PurchaseCount;
+import lotto.domain.purchase.PurchaseCount;
 import lotto.utils.InputUtils;
 
 import java.util.ArrayList;

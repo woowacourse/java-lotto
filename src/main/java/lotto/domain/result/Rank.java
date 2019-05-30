@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.result;
 
 public enum Rank {
     FIRST(6, 2000000000),
@@ -9,6 +9,7 @@ public enum Rank {
     MISS(0, 0);
 
     private static final int WINNING_MIN_COUNT = 3;
+    private static final String INVALID_COUNT_ERROR = "는 유효하지 않은 값입니다.";
 
     private final int rank;
     private final int money;
@@ -33,7 +34,7 @@ public enum Rank {
             }
         }
 
-        throw new IllegalArgumentException(count + "는 유효하지 않은 값입니다.");
+        throw new InvalidRankCount(count + INVALID_COUNT_ERROR);
     }
 
     private boolean matchCount(int count) {

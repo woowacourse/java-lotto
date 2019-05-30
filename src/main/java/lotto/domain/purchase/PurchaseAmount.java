@@ -1,9 +1,11 @@
-package lotto.domain;
+package lotto.domain.purchase;
 
 import java.util.Objects;
 
 public class PurchaseAmount {
     public static final int LOTTO_PRICE = 1000;
+    private static final String MINIMUM_PRICE_ERROR = "최소 금액보다 적은 금액입니다.";
+    private static final String CHANGE_PRICE_ERROR = "거스름돈이 존재합니다.";
 
     private final int price;
 
@@ -15,13 +17,13 @@ public class PurchaseAmount {
 
     private void checkMinimumAmount(int price) {
         if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException("최소 금액보다 적은 금액입니다.");
+            throw new InvalidPurchaseAmount(MINIMUM_PRICE_ERROR);
         }
     }
 
     private void checkChange(int price) {
         if (price % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("거스름돈이 존재합니다.");
+            throw new InvalidPurchaseAmount(CHANGE_PRICE_ERROR);
         }
     }
 

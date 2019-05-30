@@ -1,8 +1,17 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Lotto {
+    private static final String DUPLICATED_NUMBER_ERROR = "중복 되는 번호가 존재합니다.";
+    private static final String LOTTO_NUMBER_SIZE_ERROR = "로또 번호가 6개가 아닙니다.";
+    private static final String DELIMITER = ",";
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
+
     private List<Integer> lottoNumbers;
 
     private Lotto(List<Integer> lottoNumbers) {
@@ -13,13 +22,13 @@ public class Lotto {
 
     private void checkDuplicateNumber(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
-            throw new IllegalArgumentException("중복 되는 번호가 존재합니다.");
+            throw new InvalidLotto(DUPLICATED_NUMBER_ERROR);
         }
     }
 
     private void checkLottoNumberCount(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호가 6개가 아닙니다.");
+            throw new InvalidLotto(LOTTO_NUMBER_SIZE_ERROR);
         }
     }
 
@@ -39,7 +48,7 @@ public class Lotto {
         return count;
     }
 
-    private int containNumber(Lotto lotto, Integer lottoNumber) {
+    private int containNumber(Lotto lotto, int lottoNumber) {
         if (lotto.containNumber(lottoNumber)) {
             return 1;
         }
@@ -61,7 +70,7 @@ public class Lotto {
 
     @Override
     public String toString() {
-        StringJoiner stringJoiner = new StringJoiner(", ", "[", "]");
+        StringJoiner stringJoiner = new StringJoiner(DELIMITER, PREFIX, SUFFIX);
         for (Integer lottoNumber : lottoNumbers) {
             stringJoiner.add(String.valueOf(lottoNumber));
         }

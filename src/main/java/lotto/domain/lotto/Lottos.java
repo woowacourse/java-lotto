@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import java.util.*;
+import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos;

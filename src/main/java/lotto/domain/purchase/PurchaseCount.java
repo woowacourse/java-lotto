@@ -1,8 +1,12 @@
-package lotto.domain;
+package lotto.domain.purchase;
 
 import java.util.Objects;
 
 public class PurchaseCount {
+    private static final int MINIMUM_COUNT = 0;
+    private static final String TILDE = "~";
+    private static final String MSG_PURCHASE = "사이로 구매 할 수 있습니다.";
+
     private final PurchaseAmount purchaseAmount;
     private final int manualCount;
 
@@ -14,8 +18,8 @@ public class PurchaseCount {
 
     private void checkManualCount(PurchaseAmount purchaseAmount, int manualCount) {
         if (manualCount < 0 || manualCount > purchaseAmount.purchaseTotalQuantity()) {
-            throw new IllegalArgumentException(0 + " ~ " +
-                    purchaseAmount.purchaseTotalQuantity() + "사이로 구매 할 수 있습니다.");
+            throw new InvalidPurchaseCount(MINIMUM_COUNT + TILDE +
+                    purchaseAmount.purchaseTotalQuantity() + MSG_PURCHASE);
         }
     }
 

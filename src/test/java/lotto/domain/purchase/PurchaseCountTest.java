@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.purchase;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,11 +16,11 @@ public class PurchaseCountTest {
 
     @Test
     void 수동으로_구매할_수_없는_경우() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(InvalidPurchaseCount.class, () -> {
             PurchaseCount.of(PurchaseAmount.of(PURCHASE_AMOUNT), 2);
         });
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(InvalidPurchaseCount.class, () -> {
             PurchaseCount.of(PurchaseAmount.of(PURCHASE_AMOUNT), -1);
         });
     }
