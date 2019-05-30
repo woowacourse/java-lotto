@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.*;
 
-public class Lotto {
+public class AutoLotto {
     public static final int MAX_LOTTO_SIZE = 6;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
 
     private final List<Integer> numbers;
 
-    public Lotto() {
+    public AutoLotto() {
         this.numbers = createAutoNumbers();
     }
 
