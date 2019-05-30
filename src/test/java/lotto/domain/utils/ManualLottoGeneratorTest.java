@@ -1,6 +1,8 @@
 package lotto.domain.utils;
 
+import lotto.domain.Lotto;
 import lotto.domain.Number;
+import lotto.domain.NumberSet;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,29 +15,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ManualLottoGeneratorTest {
 
-    List<Integer> inputNumber = new ArrayList<>();
-    List<Number> manuallyGeneratedLottoNumbers = new ArrayList<>();
+    List<Number> inputLottoNumbers = new ArrayList<>();
+    Lotto lotto;
 
     @Before
     public void setUp() {
         for (int i = 1; i <= 6; i++ ) {
-            inputNumber.add(i);
+            inputLottoNumbers.add(NumberSet.of(i));
         }
-        manuallyGeneratedLottoNumbers = ManualLottoGenerator.makeLotto(inputNumber);
+        lotto = ManualLottoGenerator.makeLotto(inputLottoNumbers);
     }
 
     @Test
     public void auto_로또_번호_생성_확인() {
-        int lottoNumberSize = manuallyGeneratedLottoNumbers.size();
+        int lottoNumberSize = lotto.getLotto().size();
         assertThat(lottoNumberSize).isEqualTo(6);
     }
 
     @Test
     public void auto_로또_번호_중복_유무_확인() {
-        Set<Number> lottoNumberSet = new HashSet<>();
-        for (Number lottoNumber : manuallyGeneratedLottoNumbers) {
-            lottoNumberSet.add(lottoNumber);
-        }
+        Set<Number> lottoNumberSet = new HashSet<>(lotto.getLotto());
         assertThat(lottoNumberSet.size()).isEqualTo(6);
     }
 }
