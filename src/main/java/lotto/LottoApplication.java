@@ -8,20 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
+    private static final int LOTTO_PRICE = 1000;
 
     public static void main(String[] args) {
-        int countOfPurchase = setPurchaseAmount() / 1000;
-        OutputView.outputCountOfPurchase(countOfPurchase);
-        Lottos lottos = new Lottos(setManualLottoNumbers(setManualPurchaseCount(countOfPurchase)), countOfPurchase);
+        int purchaseAmount = setPurchaseAmount();
+        OutputView.outputCountOfPurchase(purchaseAmount / LOTTO_PRICE);
+        Lottos lottos = new Lottos(
+                setManualLottoNumbers(setManualPurchaseCount(purchaseAmount / LOTTO_PRICE)),
+                purchaseAmount / LOTTO_PRICE);
         OutputView.outputLottos(lottos);
         WinningResult winningResult = lottos.match(setWinningLotto());
         OutputView.outputWinningResult(winningResult);
-        OutputView.outputRevenueRate(winningResult.calculateRevenueRate(countOfPurchase));
+        OutputView.outputRevenueRate(winningResult.calculateRevenueRate(purchaseAmount));
     }
 
     private static int setPurchaseAmount() {
         try {
-            return InputView.inputPurchaseAmount();
+            int purchaseAmount = InputView.inputPurchaseAmount();
+            if (purchaseAmount < LOTTO_PRICE) {
+                throw new IllegalArgumentException("1000원 이상 입력하세요.");
+            }
+            return purchaseAmount;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return setPurchaseAmount();
@@ -31,8 +38,8 @@ public class LottoApplication {
     private static int setManualPurchaseCount(int countOfPurchase) {
         try {
             int manualPurchaseCount = InputView.inputManualPurchaseCount();
-            if (manualPurchaseCount > countOfPurchase) {
-                throw new IllegalArgumentException("구매 횟수보다 많습니다.");
+            if (manualPurchaseCount > countOfPurchase || manualPurchaseCount < 0) {
+                throw new IllegalArgumentException("구매 횟수보다 적은 0 이상의 정수를 입력해주세요.");
             }
             return manualPurchaseCount;
         } catch (IllegalArgumentException e) {

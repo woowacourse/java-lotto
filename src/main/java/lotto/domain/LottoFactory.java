@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class LottoFactory {
     public static Lotto createLottoAutomatically() {
-        return new Lotto(LottoNumber.getShuffledNumber());
+        return new Lotto(LottoNumber.getShuffledNumbers());
     }
 
     public static Lotto createLottoManually(String manualNumbers) {

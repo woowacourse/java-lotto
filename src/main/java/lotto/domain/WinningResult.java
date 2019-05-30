@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Map;
 
 public class WinningResult {
+    private static final int HUNDRED = 100;
+
     private final Map<LottoRank, Integer> result;
 
     public WinningResult(Map<LottoRank, Integer> result) {
@@ -10,17 +12,14 @@ public class WinningResult {
     }
 
     public double calculateRevenueRate(int purchaseAmount) {
-        return (sumTotalWinningAmount() / purchaseAmount) * 100;
+        return (sumTotalWinningAmount() / purchaseAmount) * HUNDRED;
     }
 
-    // TODO depth check
     int sumTotalWinningAmount() {
         int totalWinningAmount = 0;
 
         for (LottoRank lottoRank : result.keySet()) {
-            if (result.get(lottoRank) != 0) {
-                totalWinningAmount += lottoRank.getWinningAmount() * result.get(lottoRank);
-            }
+            totalWinningAmount += lottoRank.getWinningAmount() * result.get(lottoRank);
         }
         return totalWinningAmount;
     }

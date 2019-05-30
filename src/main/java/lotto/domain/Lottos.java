@@ -24,10 +24,7 @@ public class Lottos {
 
     private void createLottosAutomatically(int countAutoLottos) {
         while (lottos.size() < countAutoLottos) {
-            Lotto lotto = LottoFactory.createLottoAutomatically();
-            if (!lottos.contains(lotto)) {
-                lottos.add(lotto);
-            }
+            lottos.add(LottoFactory.createLottoAutomatically());
         }
     }
 

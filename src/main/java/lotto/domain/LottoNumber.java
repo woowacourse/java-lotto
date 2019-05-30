@@ -32,9 +32,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         throw new IllegalArgumentException("로또 번호는 1부터 45사이입니다.");
     }
 
-    static Set<LottoNumber> getShuffledNumber() {
+    static Set<LottoNumber> getShuffledNumbers() {
         Collections.shuffle(numbers);
         return new TreeSet<>(numbers.subList(FIRST_INDEX_AFTER_SHUFFLED, LAST_INDEX_AFTER_SHUFFLED));
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.number, o.number);
     }
 
     @Override
@@ -50,14 +55,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Objects.hash(number);
     }
 
-    // TODO String 형변환
     @Override
     public String toString() {
-        return number + "";
-    }
-
-    @Override
-    public int compareTo(LottoNumber o) {
-        return Integer.compare(this.number, o.number);
+        return Integer.toString(number);
     }
 }

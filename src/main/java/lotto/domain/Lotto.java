@@ -10,7 +10,7 @@ public class Lotto {
 
     public Lotto(Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("중복된 숫자가 있습니다. 다시 확인해주세요.");
+            throw new IllegalArgumentException("중복된 숫자가 있거나 6자리가 아닙니다. 다시 확인해주세요.");
         }
         this.numbers = numbers;
     }
