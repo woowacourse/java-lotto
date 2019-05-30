@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.woowacourse.lotto.domain.ExceptionOutput;
 import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.LottoNumber;
 import com.woowacourse.lotto.domain.Lottos;
@@ -23,7 +24,7 @@ public class ManualLottoFactory extends LottoFactory {
 
 	private void validateLottoNumbers(List<String> numbers) {
 		if (!numbers.stream().allMatch(s -> StringSeparator.splitString(s).size() == NUMBER_OF_LOTTO)) {
-			throw new InvalidCountOfManualLottoException("로또의 숫자는 6개입니다. 다시 입력해주세요.");
+			throw new InvalidCountOfManualLottoException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
 	}
 
