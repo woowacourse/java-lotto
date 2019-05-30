@@ -15,8 +15,18 @@ public class InputView {
         return SCANNER.nextLine().replaceAll(" ", "");
     }
 
-    public static int inputBonusNumber(){
+    public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해주세요.");
         return Integer.parseInt(SCANNER.nextLine().replaceAll(" ", ""));
+    }
+
+    public static int inputManualPurchaseCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(SCANNER.nextLine().replaceAll(" ", ""));
+    }
+
+    public static String inputManualLottoNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return SCANNER.nextLine().replaceAll(" ", "");
     }
 }
