@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
     private Set<LottoNumber> numbers;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     public void setUp() {
@@ -23,16 +24,17 @@ public class WinningLottoTest {
                 LottoNumber.get(5),
                 LottoNumber.get(6)
         ));
+        bonusNumber = LottoNumber.get(7);
     }
 
     @Test
     public void 당첨_번호_로또_생성_테스트() {
-        assertThat(new WinningLotto(new Lotto(numbers))).isEqualTo(new WinningLotto(new Lotto(numbers)));
+        assertThat(new WinningLotto(new Lotto(numbers), bonusNumber)).isEqualTo(new WinningLotto(new Lotto(numbers), bonusNumber));
     }
 
     @Test
     public void 로또_당첨_결과_계산_테스트() {
-        assertThat(new WinningLotto(new Lotto(numbers)).calculateRank(new Lotto(numbers)))
+        assertThat(new WinningLotto(new Lotto(numbers), bonusNumber).calculateRank(new Lotto(numbers)))
                 .isEqualTo(LottoRank.FIRST);
     }
 

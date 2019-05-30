@@ -31,7 +31,8 @@ public class WinningResultTest {
     public void 당첨_금액_총합_테스트() {
         WinningLotto winningLotto =
                 new WinningLotto(LottoFactory.createLottoManually(
-                        Arrays.asList(1, 2, 3, 4, 5, 6))    // 1등 : 1개, 4등 : 2개
+                        Arrays.asList(1, 2, 3, 4, 5, 6)),       // 1등 : 1개, 4등 : 2개
+                        LottoNumber.get(7)
                 );
         LottoGame lottoGame = new LottoGame(winningLotto, lottos);
         WinningResult winningResult = lottoGame.play();
@@ -42,7 +43,8 @@ public class WinningResultTest {
     public void 당첨_금액_수익률_테스트() {
         WinningLotto winningLotto =
                 new WinningLotto(LottoFactory.createLottoManually(
-                        Arrays.asList(1, 2, 3, 7, 39, 17))      // 4등 : 3개
+                        Arrays.asList(1, 2, 3, 7, 39, 17)),      // 4등 : 3개
+                        LottoNumber.get(30)
                 );
         LottoGame lottoGame = new LottoGame(winningLotto, lottos);
         WinningResult winningResult = lottoGame.play();
