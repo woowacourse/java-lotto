@@ -15,10 +15,9 @@ public class WinningLotto {
 
     public void addBonusNumber(int bonusNumber) {
         if (!winningLotto.contains(LottoNumber.Of(bonusNumber))) {
-            this.bonusNumber = LottoNumber.Of(bonusNumber);
-            return;
+            throw new InvalidLottoNumberException("당첨 번호와 중복되지 않는 숫자를 입력해 주세요.");
         }
-        throw new InvalidLottoNumberException("당첨 번호와 중복되지 않는 숫자를 입력해 주세요.");
+        this.bonusNumber = LottoNumber.Of(bonusNumber);
     }
 
     boolean isContain(LottoNumber lottoNumber) {
