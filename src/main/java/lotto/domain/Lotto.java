@@ -7,12 +7,16 @@ public class Lotto {
 
     private List<Number> lotto;
 
-    public Lotto(List<Number> lotto) {
-        this.lotto = lotto;
+    public Lotto(List<Number> lottoNumbers) {
+        this.lotto = lottoNumbers;
     }
 
     public boolean isContained(Number lottoNumber) {
         return lotto.contains(lottoNumber);
+    }
+
+    public List<Number> getLotto() {
+        return lotto;
     }
 
     @Override

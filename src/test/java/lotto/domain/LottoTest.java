@@ -11,17 +11,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-    List<Integer> inputNumbers = new ArrayList<>();
-    List<Number> lottoNumbers;
+    List<Number> lottoNumbers = new ArrayList<>();
     Lotto lotto;
 
     @Before
     public void setUp() {
         for (int i = 1; i <= 6; i++) {
-            inputNumbers.add(i);
+            lottoNumbers.add(NumberSet.of(i));
         }
-        lottoNumbers = ManualLottoGenerator.makeLotto(inputNumbers);
-        lotto = new Lotto(lottoNumbers);
+        lotto = ManualLottoGenerator.makeLotto(lottoNumbers);
     }
 
     @Test
