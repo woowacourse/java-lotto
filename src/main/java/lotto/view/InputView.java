@@ -5,14 +5,12 @@ import lotto.domain.LottoFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.exception.LottoNumberCreateException;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
     private static String DELIMITER = ",";
+    private static String BLANK = "";
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
@@ -39,9 +37,10 @@ public class InputView {
             return inputBonusLottoNumber();
         }
     }
+
     private static int inputNumber() {
         try {
-            return Integer.parseInt(SCANNER.nextLine());
+            return Integer.parseInt(input());
         } catch (NumberFormatException e) {
             System.out.println("숫자를 입력하세요");
             return inputNumber();
@@ -61,11 +60,16 @@ public class InputView {
     }
 
     private static List<Integer> inputNumbers() {
-        String input = SCANNER.nextLine();
+        String input = input();
         List<String> strings = Arrays.asList(input.split(DELIMITER));
         return strings.stream()
                 .map(String::trim)
                 .map(Integer::new)
                 .collect(Collectors.toList());
+    }
+
+    private static String input() {
+        Optional<String> optInput = Optional.ofNullable(SCANNER.nextLine());
+        return optInput.orElse(BLANK);
     }
 }
