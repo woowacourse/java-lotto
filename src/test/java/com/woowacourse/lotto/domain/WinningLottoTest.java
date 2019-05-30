@@ -23,12 +23,6 @@ public class WinningLottoTest {
 	}
 
 	@Test
-	void validateNumber() {
-		assertThrows(InvalidNumberException.class, () -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "5", "46"), new BonusBall(7)));
-		assertThrows(InvalidNumberException.class, () -> new WinningLotto(Arrays.asList("0", "2", "3", "4", "5", "45"), new BonusBall(7)));
-	}
-
-	@Test
 	void validateSize() {
 		assertThrows(InvalidNumberException.class, () -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "5"), new BonusBall(7)));
 	}

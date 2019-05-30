@@ -2,31 +2,22 @@ package com.woowacourse.lotto.domain;
 
 import java.util.*;
 
-import com.woowacourse.lotto.exception.InvalidNumberException;
-
 import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 public class Lotto {
-	private final Set<Integer> numbers;
+	private final Set<LottoNumber> numbers;
 
-	public Lotto(final List<Integer> numbers) {
-		validateRange(numbers);
+	public Lotto(final List<LottoNumber> numbers) {
 		this.numbers = new TreeSet<>(numbers);
 	}
 
-	private void validateRange(List<Integer> numbers) {
-		if (!numbers.stream().allMatch(number -> (MIN_NUMBER_OF_LOTTO <= number && MAX_NUMBER_OF_LOTTO >= number))) {
-			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
-		}
-	}
-
 	public int getCountOfMatchedNumber(Lotto lotto) {
-		Set<Integer> set = new TreeSet<>(this.numbers);
+		Set<LottoNumber> set = new TreeSet<>(this.numbers);
 		set.removeAll(lotto.numbers);
 		return NUMBER_OF_LOTTO - set.size();
 	}
 
-	public boolean contains(int bonusBall) {
+	public boolean contains(LottoNumber bonusBall) {
 		return numbers.contains(bonusBall);
 	}
 
@@ -51,8 +42,8 @@ public class Lotto {
 	public String toString() {
 		StringJoiner stringJoiner = new StringJoiner(",", "[", "]");
 
-		for (int i : numbers) {
-			stringJoiner.add(String.valueOf(i));
+		for (LottoNumber lottoNumber : numbers) {
+			stringJoiner.add(String.valueOf(lottoNumber.getName()));
 		}
 
 		return stringJoiner.toString();

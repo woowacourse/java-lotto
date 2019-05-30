@@ -8,16 +8,16 @@ import static com.woowacourse.lotto.domain.LottoNumber.MAX_NUMBER_OF_LOTTO;
 import static com.woowacourse.lotto.domain.LottoNumber.MIN_NUMBER_OF_LOTTO;
 
 public class BonusBall {
-	private final int number;
+	private final LottoNumber number;
 
 	public BonusBall(int number) {
 		if(number < MIN_NUMBER_OF_LOTTO || number > MAX_NUMBER_OF_LOTTO) {
 			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
-		this.number = number;
+		this.number = LottoNumber.getLottoNumber(number);
 	}
 
-	public int getBonusBallNumber() {
+	public LottoNumber getBonusBallNumber() {
 		return this.number;
 	}
 
