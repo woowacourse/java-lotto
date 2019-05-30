@@ -26,6 +26,7 @@ class LottoResultTest {
 			lottoMatchResult2.put(LottoRank.SECOND, 0);
 			lottoMatchResult2.put(LottoRank.THIRD, 0);
 			lottoMatchResult2.put(LottoRank.FOURTH, 0);
+			lottoMatchResult2.put(LottoRank.FIFTH, 0);
 			lottoMatchResult2.put(LottoRank.ZERO, 1);
 		}
 		assertThat(lottoResult.matchLotto()).isEqualTo(lottoMatchResult2);
@@ -34,6 +35,6 @@ class LottoResultTest {
 	@Test
 	void checkEarningsRate() {
 		lottoResult.matchLotto();
-		assertThat(lottoResult.getEarningsRate()).isEqualTo(100000000);
+		assertThat(lottoResult.getEarningsRate()).isEqualTo(100_000_000);
 	}
 }
