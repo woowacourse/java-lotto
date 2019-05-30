@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.List;
 
+import lotto.creator.LottosFactory;
+import lotto.creator.ManualLottoCreator;
 import lotto.domain.*;
 import lotto.domain.Number;
 import lotto.view.InputView;
