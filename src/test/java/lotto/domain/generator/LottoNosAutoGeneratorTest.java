@@ -16,4 +16,11 @@ class LottoNosAutoGeneratorTest {
         List<LottoNo> lottoNos = lottoNosAutoGenerator.generate();
         assertThat(Lotto.LOTTO_NO_SIZE).isEqualTo(lottoNos.size());
     }
+
+    @Test
+    void 제대로_리턴하는지_확인() {
+        List<LottoNo> actual = new LottoNosManualGenerator("1,2,3,4,5,6").generate();
+        List<LottoNo> expected = new LottoNosAutoGenerator((lottoNos) -> actual).generate();
+        assertThat(actual).isEqualTo(expected);
+    }
 }
