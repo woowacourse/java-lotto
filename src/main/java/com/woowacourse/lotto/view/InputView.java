@@ -1,5 +1,7 @@
 package com.woowacourse.lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -31,8 +33,13 @@ public class InputView {
 		return count;
 	}
 
-	public static String inputManualLottoNumber() {
+	public static List<String> inputManualLottoNumber(int count) {
 		System.out.println(UserOutput.DEMAND_MANUAL_LOTTO.getUserOutputMessage());
-		return scanner.nextLine();
+		List<String> manualLottoNumber = new ArrayList<>();
+
+		while (count-- > 0) {
+			manualLottoNumber.add(scanner.nextLine());
+		}
+		return manualLottoNumber;
 	}
 }

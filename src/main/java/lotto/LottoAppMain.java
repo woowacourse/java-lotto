@@ -13,9 +13,10 @@ import com.woowacourse.lotto.view.OutputView;
 public class LottoAppMain {
 	public static void main(String[] args) {
 		Money money = getMoneyForPurchaseOfLotto();
-		Lottos lottos = getLottos(money);
+		int countOfManualLotto = getCountOfManualLotto();
+		Lottos lottos = getLottos(money, countOfManualLotto);
 
-		OutputView.printNumberOfLotto(money);
+		OutputView.printCountOfPurchasedLotto(money.getCountOfLotto(), countOfManualLotto);
 		OutputView.printLotto(lottos);
 
 		LottoResult lottoResult = new LottoResult(getWinningLotto(), lottos);
@@ -24,22 +25,21 @@ public class LottoAppMain {
 		OutputView.printEarningsRate(lottoResult);
 	}
 
-	private static Lottos getLottos(Money money) {
-		int countOfManualLotto = inputCountOfManualLotto();
+	private static Lottos getLottos(Money money, int countOfManualLotto) {
 		try {
 			return new LottoFactoryController(money, countOfManualLotto).generateLotto(inputManualLotto(countOfManualLotto));
 		} catch (Exception e) {
 			OutputView.printExceptionMessage(e.getMessage());
-			return getLottos(money);
+			return getLottos(money, getCountOfManualLotto());
 		}
 	}
 
+	private static int getCountOfManualLotto() {
+		return InputView.inputCountOfManualLotto();
+	}
+
 	private static List<String> inputManualLotto(int count) {
-		List<String> manualLotto = new ArrayList<>();
-		while (count-- > 0) {
-			manualLotto.add(InputView.inputManualLottoNumber());
-		}
-		return manualLotto;
+		return InputView.inputManualLottoNumber(count);
 	}
 
 	private static int inputCountOfManualLotto() {

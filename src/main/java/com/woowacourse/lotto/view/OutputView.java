@@ -14,10 +14,6 @@ public class OutputView {
 		}
 	}
 
-	public static void printNumberOfLotto(Money money) {
-		System.out.printf(UserOutput.PRINT_NUMBER_OF_LOTTO.getUserOutputMessage(), money.getCountOfLotto());
-	}
-
 	public static void printLottoMatchResult(Map<LottoRank, Integer> lottoMatchResult) {
 		StringBuffer stringBuffer = new StringBuffer();
 		lottoMatchResult.keySet().stream()
@@ -31,6 +27,10 @@ public class OutputView {
 
 	public static void printEarningsRate(LottoResult lottoResult) {
 		System.out.printf(UserOutput.PRINT_EARNINGS_RATE.getUserOutputMessage(), (int) lottoResult.getEarningsRate());
+	}
+
+	public static void printCountOfPurchasedLotto(int countOfAllLotto, int countOfManualLotto) {
+		System.out.printf(UserOutput.PRINT_COUNT_OF_PURCHASED_LOTTO.getUserOutputMessage(), countOfAllLotto - countOfManualLotto, countOfManualLotto);
 	}
 
 	public static void printExceptionMessage(String exceptionMessage) {
