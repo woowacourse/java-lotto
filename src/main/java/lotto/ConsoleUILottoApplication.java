@@ -14,7 +14,7 @@ public class ConsoleUILottoApplication {
         int buyPrice = cuttingThousandPiece(InputView.inputBuyPrice());
         BoughtLottos boughtLottos = BoughtLottos.buyLottos(buyPrice);
         OutputView.printBoughtLottos(boughtLottos);
-        WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber());
+        WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber(), InputView.inputBonusBall());
         Result result = ResultGenerator.generateResult(boughtLottos, winningNumber);
         OutputView.printLottoResult(result, buyPrice);
     }
