@@ -23,4 +23,16 @@ public class InputView {
 		scanner.nextLine();
 		return bonusBall;
 	}
+
+	public static int inputCountOfManualLotto() {
+		System.out.println(UserOutput.DEMAND_COUNT_OF_MANUALLY_LOTTO.getUserOutputMessage());
+		int count = scanner.nextInt();
+		scanner.nextLine();
+		return count;
+	}
+
+	public static String inputManualLottoNumber() {
+		System.out.println(UserOutput.DEMAND_MANUAL_LOTTO.getUserOutputMessage());
+		return scanner.nextLine();
+	}
 }

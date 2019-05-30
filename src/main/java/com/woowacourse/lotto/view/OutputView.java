@@ -22,7 +22,7 @@ public class OutputView {
 		StringBuffer stringBuffer = new StringBuffer();
 		lottoMatchResult.keySet().stream()
 				.filter(lottoRank -> lottoRank != LottoRank.ZERO)
-				.forEach(lottoRank -> stringBuffer.append((lottoRank == LottoRank.SECOND)?
+				.forEach(lottoRank -> stringBuffer.append((lottoRank == LottoRank.SECOND) ?
 						String.format(PRINT_LOTTO_MATCH_SECOND.getUserOutputMessage(), lottoRank.getCount(), lottoRank.getPrice(), lottoMatchResult.get(lottoRank)) :
 						String.format(PRINT_LOTTO_MATCH_RESULT.getUserOutputMessage(), lottoRank.getCount(), lottoRank.getPrice(), lottoMatchResult.get(lottoRank))))
 		;
@@ -31,5 +31,9 @@ public class OutputView {
 
 	public static void printEarningsRate(LottoResult lottoResult) {
 		System.out.printf(UserOutput.PRINT_EARNINGS_RATE.getUserOutputMessage(), (int) lottoResult.getEarningsRate());
+	}
+
+	public static void printExceptionMessage(String exceptionMessage) {
+		System.out.println(exceptionMessage);
 	}
 }
