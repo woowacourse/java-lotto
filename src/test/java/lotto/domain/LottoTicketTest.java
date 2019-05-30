@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -13,10 +15,9 @@ class LottoTicketTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
-            lottoNumbers.add(LottoNumber.createLottoNumber(i));
-        }
+        lottoNumbers = IntStream.rangeClosed(1, 5)
+                .mapToObj(LottoNumber::createLottoNumber)
+                .collect(Collectors.toList());
     }
 
     @Test

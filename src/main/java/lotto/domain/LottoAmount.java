@@ -20,7 +20,7 @@ public class LottoAmount {
         this.lottoAmount = calculateLottoAmount(purchasePrice);
     }
 
-    public static LottoAmount createLottoAmount(Integer purchasePrice){
+    public static LottoAmount createLottoAmount(Integer purchasePrice) {
         return new LottoAmount(purchasePrice);
     }
 
@@ -53,7 +53,7 @@ public class LottoAmount {
         return purchasePrice % PRICE_UNIT != DIVISIBLE;
     }
 
-    private Integer calculateLottoAmount(Integer purchasePrice) {
+    private int calculateLottoAmount(Integer purchasePrice) {
         return purchasePrice / PRICE_UNIT;
     }
 

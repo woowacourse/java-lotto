@@ -5,30 +5,32 @@ import lotto.utils.NullCheckUtil;
 import java.util.Objects;
 
 public class LottoNumber {
-    private static final int LIMIT_MINIMUM_NUMBER = 1;
-    private static final int LIMIT_MAXIMUM_NUMBER = 45;
     private static final String ERROR_OUT_RANGE = "1부터 45사이의 수가 아닙니다.";
 
     private Integer lottoNumber;
 
     private LottoNumber(Integer number) {
-        NullCheckUtil.checkNull(number);
-        checkValidRange(number);
+        checkValidLottoNumber(number);
         this.lottoNumber = number;
+    }
+
+    private void checkValidLottoNumber(Integer number) {
+        NullCheckUtil.checkNull(number);
+        checkOutRange(number);
     }
 
     public static LottoNumber createLottoNumber(Integer number) {
         return new LottoNumber(number);
     }
 
-    private void checkValidRange(Integer number) {
-        if(isOutRangeNumber(number)){
+    private void checkOutRange(Integer number) {
+        if (isOutRangeNumber(number)) {
             throw new IllegalArgumentException(ERROR_OUT_RANGE);
         }
     }
 
     private boolean isOutRangeNumber(Integer number) {
-        return LIMIT_MINIMUM_NUMBER > number || LIMIT_MAXIMUM_NUMBER < number;
+        return LottoConstant.LIMIT_MINIMUM_NUMBER > number || LottoConstant.LIMIT_MAXIMUM_NUMBER < number;
     }
 
     @Override

@@ -5,7 +5,7 @@ import lotto.domain.LottoNumber;
 import java.util.List;
 
 public class NullCheckUtil {
-    private static final String ERROR_NULL = "입력이 null 입니다.";
+    private static final String ERROR_NULL = "null error";
 
     public static void checkNull(String input) {
         if (input == null) {
