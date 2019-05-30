@@ -15,7 +15,7 @@ public class Lotto {
 	}
 
 	private void validateRange(List<Integer> numbers) {
-		if (!numbers.stream().allMatch(number -> (MIN_NUMBER_OF_LOTTO <= number || MAX_NUMBER_OF_LOTTO >= number))) {
+		if (!numbers.stream().allMatch(number -> (MIN_NUMBER_OF_LOTTO <= number && MAX_NUMBER_OF_LOTTO >= number))) {
 			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
 	}
