@@ -3,7 +3,7 @@ package lotto.domain;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int MAX_LOTTO_NUMBER = 46;
+    private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private final int lottoNumber;
 
@@ -16,6 +16,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private boolean isValidLottoNumber(int lottoNumber) {
         return lottoNumber >= MIN_LOTTO_NUMBER && lottoNumber <= MAX_LOTTO_NUMBER;
+    }
+
+    public int getLottoNumber(){
+        return lottoNumber;
     }
 
     @Override

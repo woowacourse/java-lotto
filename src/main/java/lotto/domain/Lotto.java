@@ -13,7 +13,7 @@ public class Lotto {
         if (isDuplicated(lottoNumbers)) {
             throw new InvalidLottoException("중복된 수가 있습니다.");
         }
-        if (lottoNumbers.size() != LOTTO_SIZE) {
+        if (!isValidSize(lottoNumbers)) {
             throw new InvalidLottoException("로또 수는 6개 이어야 합니다.");
         }
         this.lottoNumbers = lottoNumbers;
@@ -22,6 +22,10 @@ public class Lotto {
 
     private boolean isDuplicated(List<LottoNumber> scannedNumbers) {
         return scannedNumbers.size() != new HashSet<>(scannedNumbers).size();
+    }
+
+    private boolean isValidSize(List<LottoNumber> scannedNumbers){
+        return scannedNumbers.size() == LOTTO_SIZE;
     }
 
     public List<LottoNumber> getLottoNumbers() {
