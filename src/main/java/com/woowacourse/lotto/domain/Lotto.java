@@ -2,6 +2,8 @@ package com.woowacourse.lotto.domain;
 
 import java.util.*;
 
+import com.woowacourse.lotto.exception.InvalidNumberException;
+
 import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 public class Lotto {
@@ -9,6 +11,9 @@ public class Lotto {
 
 	public Lotto(final List<LottoNumber> numbers) {
 		this.numbers = new TreeSet<>(numbers);
+		if(this.numbers.size() != numbers.size()) {
+			throw new InvalidNumberException("중복된 숫자 입력입니다.");
+		}
 	}
 
 	public int getCountOfMatchedNumber(Lotto lotto) {
