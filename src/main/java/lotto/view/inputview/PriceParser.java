@@ -12,16 +12,16 @@ public class PriceParser {
     private static final int REMOVED_INPUT_LAST_CHARACTER = 1;
 
     public static LottoAmount getLottoAmount(String inputPrice) {
-        return new LottoAmount(InputUtils.toInts(getValidInputPrice(inputPrice)));
+        return LottoAmount.createLottoAmount(InputUtils.toInts(getValidInputPrice(inputPrice)));
     }
 
     private static String getValidInputPrice(String inputPrice) {
-        checkNullEmpty(inputPrice);
+        checkNullString(inputPrice);
 
         return getCheckedPatternInput(inputPrice);
     }
 
-    private static void checkNullEmpty(String input) {
+    private static void checkNullString(String input) {
         if (input == null || input.isEmpty()) {
             throw new NullPointerException(ERROR_NULL_OR_NO_INPUT);
         }

@@ -24,12 +24,12 @@ public class WinningNumbersParser {
     }
 
     private static List<Integer> getValidInputNumbers(String inputNumbers) {
-        checkNullEmpty(inputNumbers);
+        checkNullString(inputNumbers);
 
         return getSeparatedNumbers(inputNumbers);
     }
 
-    private static void checkNullEmpty(String input) {
+    private static void checkNullString(String input) {
         if (input == null || input.isEmpty()) {
             throw new NullPointerException(ERROR_NULL_OR_NO_INPUT);
         }
