@@ -65,3 +65,12 @@
 
 - 당첨 (Prize)
     1. 2등 추가
+    
+## 리펙토링 (2단계까지 수행 후)
+
+- 중복된 부분이 많음
+    1. LottoNumber과 BonusBall의 구현 로직이 비슷함
+    2. Lotto와 WinningNumber의 인자인 winningNumbers와 공통점이 있어보임
+    
+    > 위 부분을 상속을 통해 공통로직 중복 제거를 생각해볼 수 있을 것 같음
+    

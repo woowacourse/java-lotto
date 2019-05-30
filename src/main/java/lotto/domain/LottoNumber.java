@@ -5,8 +5,8 @@ import lotto.domain.exception.InvalidLottoNumberException;
 import java.util.*;
 
 public class LottoNumber {
-    static final int LOTTO_START_NUMBER = 0;
-    static final int LOTTO_LAST_NUMBER = 45;
+    public static final int LOTTO_START_NUMBER = 0;
+    public static final int LOTTO_LAST_NUMBER = 45;
     private static final List<LottoNumber> numbers = new ArrayList<>();
     private final int number;
 
