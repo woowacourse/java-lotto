@@ -26,6 +26,7 @@ public class OutputConsole {
         System.out.println("3개 일치 (5,000원) - " + lottoResult.getCountOfRank(FIFTH) + "개");
         System.out.println("4개 일치 (50,000원) - " + lottoResult.getCountOfRank(FOURTH) + "개");
         System.out.println("5개 일치 (1,500,000원) - " + lottoResult.getCountOfRank(THIRD) + "개");
+        System.out.println("5개 일치,보너스 볼 일치 (30,000,000원) - " + lottoResult.getCountOfRank(SECOND) + "개");
         System.out.println("6개 일치 (2,000,000,000원) - " + lottoResult.getCountOfRank(FIRST) + "개");
         System.out.println("총 수익률은 " + lottoResult.getEarningsRate() + "% 입니다.");
     }

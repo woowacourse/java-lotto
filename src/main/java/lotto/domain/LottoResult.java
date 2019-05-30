@@ -12,7 +12,6 @@ public class LottoResult {
 
     private final WinningLotto winningLotto;
     private final Lottos lottos;
-
     private Map<Rank, Integer> rankResult = new HashMap<>();
 
     public LottoResult(WinningLotto winningLotto, Lottos lottos) {
@@ -24,6 +23,7 @@ public class LottoResult {
 
     private void setMap() {
         rankResult.put(FIRST, 0);
+        rankResult.put(SECOND, 0);
         rankResult.put(THIRD, 0);
         rankResult.put(FOURTH, 0);
         rankResult.put(FIFTH, 0);
@@ -49,7 +49,6 @@ public class LottoResult {
         int earning = 0;
         for (Map.Entry<Rank, Integer> entry : rankResult.entrySet()) {
             earning += entry.getKey().getWinningMoney() * entry.getValue();
-
         }
         return earning;
     }
