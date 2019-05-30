@@ -23,8 +23,8 @@ public class Lottos {
         lottos.add(new Lotto(lottoNumbers));
     }
 
-    public int size() {
-        return lottos.size();
+    public void addAll(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
     }
 
     @Override

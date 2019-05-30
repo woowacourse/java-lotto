@@ -1,14 +1,20 @@
 package lotto.domain;
 
-public class LottoMachine {
-    private static final int LOTTO_PRICE = 1000;
+import java.util.List;
+import java.util.stream.Collectors;
 
-    public static Lottos buyLottos(final Money money) {
+public class LottoMachine {
+    public static Lottos buyAutoLottos(final int numberOfLottos) {
         Lottos lottos = new Lottos();
-        int numberOfPurchases = money.calculateNumberOfPurchases(LOTTO_PRICE);
-        for (int i = 0; i < numberOfPurchases; i++) {
+        for (int i = 0; i < numberOfLottos; i++) {
             lottos.add(LottoNumbersGenerator.getLottoNumbers());
         }
         return lottos;
+    }
+
+    public static Lottos buyManualLotto(final List<LottoNumbers> lottosNumbers) {
+        return new Lottos(lottosNumbers.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList()));
     }
 }

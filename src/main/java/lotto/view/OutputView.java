@@ -15,8 +15,19 @@ public class OutputView {
     private static final String STATISTICS_MESSAGE = "\n당첨 통계\n---------\n";
     private static final String YIELD_FORMAT = "총 수익률은 %.1f%% 입니다.";
 
+    public static void outputLottosMessage(int manualLottosSize, int autoLottosSize) {
+        System.out.println("수동으로 " + manualLottosSize + "장, 자동으로" + autoLottosSize + "장 구매했습니다.");
+    }
+
+    public static void outputManualLottosMessage() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void outputWinningNumbersMessage() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    }
+
     public static void outputLottos(Lottos lottos) {
-        System.out.println(lottos.size() + "개 구매했습니다.");
         StringBuilder builder = new StringBuilder();
         for (Lotto lotto : lottos.getLottos()) {
             builder.append(makeNumbersView(lotto.getLottoNumbers()));
@@ -36,7 +47,7 @@ public class OutputView {
         StringBuilder builder = new StringBuilder();
         builder.append(STATISTICS_MESSAGE);
         builder.append(lottoResult.getResultMessage());
+        builder.append(String.format(YIELD_FORMAT, lottoResult.calculateYield()));
         System.out.println(builder);
-        System.out.println(String.format(YIELD_FORMAT, lottoResult.calculateYield()));
     }
 }

@@ -50,6 +50,6 @@ public class LottoGameTest {
         lottoResult.add(Rank.FIFTH);
         lottoResult.add(Rank.MISS);
 
-        assertThat(lottoGame.confirmWinningLottos(lottos)).isEqualTo(lottoResult);
+        assertThat(lottoGame.play(lottos)).isEqualTo(lottoResult);
     }
 }

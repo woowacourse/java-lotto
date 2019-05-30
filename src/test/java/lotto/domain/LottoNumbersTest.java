@@ -67,4 +67,30 @@ public class LottoNumbersTest {
 
         assertThat(new LottoNumbers(numbers1).match(new LottoNumbers(numbers2))).isEqualTo(4);
     }
+
+    @Test
+    void 해당_숫자가_있는_경우() {
+        List<LottoNumber> numbers = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6));
+
+        assertThat(new LottoNumbers(numbers).match(new LottoNumber(1))).isTrue();
+    }
+
+    @Test
+    void 해당_숫자가_없는_경우() {
+        List<LottoNumber> numbers = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6));
+
+        assertThat(new LottoNumbers(numbers).match(new LottoNumber(7))).isFalse();
+    }
 }

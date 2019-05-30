@@ -7,7 +7,7 @@ public class LottoGame {
         this.winningInformation = winningInformation;
     }
 
-    public LottoResult confirmWinningLottos(Lottos lottos) {
+    public LottoResult play(Lottos lottos) {
         LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottos.getLottos()) {
             lottoResult.add(winningInformation.match(lotto));

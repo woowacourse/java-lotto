@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoNumbersGenerator {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -31,7 +30,7 @@ public class LottoNumbersGenerator {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public static LottoNumbers getLottoNumbers(String numbers) {
+    public static LottoNumbers getLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
             lottoNumbers.add(getLottoNumber(number));
