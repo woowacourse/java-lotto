@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.NullCheckUtil;
+
 import java.util.Objects;
 
 public class LottoAmount {
@@ -23,6 +25,7 @@ public class LottoAmount {
     }
 
     private void checkValidPurchasePrice(Integer purchasePrice) {
+        NullCheckUtil.checkNull(purchasePrice);
         checkNegative(purchasePrice);
         checkMinimumLimit(purchasePrice);
         checkDivisiblePriceUnit(purchasePrice);

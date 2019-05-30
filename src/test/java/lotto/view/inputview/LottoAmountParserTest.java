@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class LottoAmountParserTest {
     @Test
     void 입력이_없을_경우() {
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             PriceParser.getLottoAmount("");
         });
     }
