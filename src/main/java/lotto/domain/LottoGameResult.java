@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoGameResult {
-    private Map<Rank, Integer> lottoStat;
+    private static final int PERCENT = 100;
+    private final Map<Rank, Integer> lottoStat;
 
     private LottoGameResult(final List<Lotto> lottos, final WinningLotto winningLotto) {
         this.lottoStat = new HashMap<>();
@@ -26,6 +27,10 @@ public class LottoGameResult {
         return new LottoGameResult(lottos, winningLotto);
     }
 
+    public int getRankCount(final Rank rank) {
+        return lottoStat.get(rank);
+    }
+
     public double profit(final int lottoCost) {
         double numOfLotto = 0;
         double totalMoney = 0;
@@ -35,8 +40,6 @@ public class LottoGameResult {
             numOfLotto += tempNum;
             totalMoney += rank.prize(tempNum);
         }
-        return totalMoney / (numOfLotto * lottoCost);
+        return totalMoney / (numOfLotto * lottoCost) * PERCENT;
     }
-
-
 }

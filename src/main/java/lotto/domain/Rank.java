@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -7,6 +11,8 @@ public enum Rank {
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
     MISS(0, 0);
+
+    private static final int WINNING_MIN_COUNT = 3;
 
     private final int matchCount;
     private final int money;
@@ -17,19 +23,35 @@ public enum Rank {
     }
 
     static Rank valueOf(final int matchCount, boolean existBonus) {
+        if (matchCount < WINNING_MIN_COUNT) {
+            return MISS;
+        }
         if (existBonus && (matchCount == SECOND.matchCount)) {
             return SECOND;
         }
-
         for (Rank value : values()) {
             if (value != SECOND && (value.matchCount == matchCount)) {
                 return value;
             }
         }
-        return Rank.MISS;
+        throw new IllegalArgumentException(matchCount + "에 맞는 등수가 존재하지 않습니다");
     }
 
     double prize(final int count) {
         return (this.money * count);
+    }
+
+    public static List<Rank> reverseValues() {
+        List<Rank> ranks = Arrays.asList(values());
+        List<Rank> ranksWithoutMiss = ranks.subList(0, ranks.size() - 1);
+        Collections.reverse(ranksWithoutMiss);
+        return ranksWithoutMiss;
+    }
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }

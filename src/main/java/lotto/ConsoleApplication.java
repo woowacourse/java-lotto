@@ -1,25 +1,32 @@
 package lotto;
 
-import lotto.domain.LottoGameResult;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoService;
-import lotto.domain.exception.LottoNumberCreateException;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
 
 public class ConsoleApplication {
-
     public static void main(String[] args) {
-        LottoService service = assignService();
+        LottoService service = new LottoService(InputView.inputBuyMoney());
 
         int manualPurchaseCount = assignManualPurchaseCount(service);
         int autoPurchaseCount = assignAutoPurchaseCount(service);
+        OutputView.showBuyCounts(manualPurchaseCount, autoPurchaseCount);
 
-        OutputView.showBuyCounts(manualPurchaseCount, autoPurchaseCount);   // 수동으로, 자동으로 출력
+        OutputView.showLottos(service);
         LottoGameResult gameResult = assignGameResult(service);
         OutputView.showGameResult(gameResult);
+    }
+
+    private static int assignManualPurchaseCount(LottoService service) {
+        int manualPurchaseCount = InputView.inputManualPurchaseCount();
+        int retCount = 0;
+        for (; retCount < manualPurchaseCount && service.canBuy(); retCount++) {
+            List<Integer> numbers = InputView.inputManualNumbers();
+            service.buy(numbers);
+        }
+        return retCount;
     }
 
     private static int assignAutoPurchaseCount(LottoService service) {
@@ -31,48 +38,14 @@ public class ConsoleApplication {
         return autoPurchaseCount;
     }
 
-    private static LottoService assignService() {
-        int money = InputView.inputBuyMoney();
-        try {
-            return new LottoService(money);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-            return assignService();
-        }
-    }
-
-    private static int assignManualPurchaseCount(LottoService service) {
-        int manualPurchaseCount = InputView.inputManualPurchaseCount();
-        int i = 0;
-        for (; i < manualPurchaseCount && service.canBuy(); i++) {
-            List<Integer> numbers = InputView.inputManualNumbers();
-            service.buy(numbers);
-        }
-        return i;
-    }
-
     private static LottoGameResult assignGameResult(LottoService service) {
-        List<Integer> winningNumbers = assignWinningNumbers();
-        LottoNumber bonusNum = assignBonusNum();
+        Lotto winningLotto = InputView.inputWinningLotto();
+        LottoNumber bonusNum = InputView.inputBonusLottoNumber();
         try {
-            return service.result(winningNumbers, bonusNum);
+            return service.resultOf(winningLotto, bonusNum);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             return assignGameResult(service);
         }
-    }
-
-    private static LottoNumber assignBonusNum() {
-        int bonusNum = InputView.inputBonusNumber();
-        try {
-            return LottoNumber.of(bonusNum);
-        } catch (LottoNumberCreateException e) {
-            System.out.println(e.getMessage());
-            return assignBonusNum();
-        }
-    }
-
-    private static List<Integer> assignWinningNumbers() {
-        return InputView.inputWinningNumbers();
     }
 }

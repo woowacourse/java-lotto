@@ -14,21 +14,26 @@ public class LottoService {
         lottos = new ArrayList<>();
     }
 
-    public void buyRandom() {
-        final List<Integer> numbers = generator.generate();
-        lottos.add(lottoMachine.buy(numbers));
+    public void buy(final List<Integer> numbers) {
+        Lotto lotto = lottoMachine.buy(numbers);
+        lottos.add(lotto);
     }
 
-    public void buy(final List<Integer> numbers) {
-        lottos.add(lottoMachine.buy(numbers));
+    public void buyRandom() {
+        final List<Integer> randomNumbers = generator.generate();
+        buy(randomNumbers);
     }
 
     public boolean canBuy() {
         return lottoMachine.isRemainMoney();
     }
 
-    public LottoGameResult result(final List<Integer> winningLottoNumbers, final LottoNumber bonusNum) {
-        WinningLotto winningLotto = WinningLotto.of(lottoMachine.buy(winningLottoNumbers), bonusNum);
+    public LottoGameResult resultOf(final Lotto lotto, final LottoNumber bonusNum) {
+        WinningLotto winningLotto = WinningLotto.of(lotto, bonusNum);
         return LottoGameResult.of(lottos, winningLotto);
+    }
+
+    public LottosDTO getLottos() {
+        return LottosDTO.of(lottos);
     }
 }

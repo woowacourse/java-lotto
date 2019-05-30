@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoGameResult;
-import lotto.domain.LottoMachine;
-import lotto.domain.Rank;
+import lotto.domain.*;
 
 public class OutputView {
     private OutputView() {
@@ -17,9 +15,21 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : Rank.values()) {
-
+        for (Rank rank : Rank.reverseValues()) {
+            System.out.print(rank.getMatchCount() + "개 일치");
+            if (rank == Rank.SECOND) {
+                System.out.print(", 보너스 볼 일치");
+            }
+            System.out.print("(" + rank.getMoney() + ")- ");
+            System.out.println(gameResult.getRankCount(rank) + "개");
         }
-        System.out.printf("총 수익률은 %f 입니다.", gameResult.profit(LottoMachine.LOTTO_MONEY));
+        System.out.printf("총 수익률은 %.1f 퍼센트입니다.", gameResult.profit(LottoMachine.LOTTO_MONEY));
+    }
+
+    public static void showLottos(final LottoService service) {
+        LottosDTO lottos = service.getLottos();
+        while (lottos.hasNext()) {
+            System.out.println(lottos.next());
+        }
     }
 }

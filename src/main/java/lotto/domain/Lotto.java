@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import lotto.domain.exception.LottoCreateArgumentException;
+import lotto.domain.exception.LottoCreateException;
 
 import java.util.*;
 
-class Lotto {
+public class Lotto {
     static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> numbers;
@@ -14,7 +14,7 @@ class Lotto {
         validate(optNumbers.orElseThrow(IllegalArgumentException::new));
 
         this.numbers = new ArrayList<>(optNumbers.orElseThrow(() ->
-                new LottoCreateArgumentException("입력이 null입니다"))
+                new LottoCreateException("null값을 입력했습니다"))
         );
     }
 
@@ -25,18 +25,18 @@ class Lotto {
 
     private void checkValidSize(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new LottoCreateArgumentException(LOTTO_SIZE + "개 초과 생성");
+            throw new LottoCreateException(LOTTO_SIZE + "개를 입력해주세요");
         }
     }
 
     private void checkDuplication(final List<LottoNumber> numbers) {
         final Set<LottoNumber> semiParameter = new HashSet<>(numbers);
         if (numbers.size() != semiParameter.size()) {
-            throw new LottoCreateArgumentException("중복된 숫자로 로또 생성");
+            throw new LottoCreateException("중복된 숫자로 로또 생성");
         }
     }
 
-    static Lotto of(final List<LottoNumber> numbers) {
+    public static Lotto of(final List<LottoNumber> numbers) {
         return new Lotto(numbers);
     }
 
@@ -64,5 +64,10 @@ class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }

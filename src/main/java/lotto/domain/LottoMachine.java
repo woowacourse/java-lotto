@@ -1,29 +1,27 @@
 package lotto.domain;
 
-import lotto.domain.exception.LottoCreateArgumentException;
+import lotto.domain.exception.LottoCreateException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoMachine {
     public static final int LOTTO_MONEY = 1000;
 
+    private LottoFactory lottoFactory;
     private int remainMoney;
 
     LottoMachine(final int money) {
         if (money < LOTTO_MONEY) {
-            throw new LottoCreateArgumentException("1000원 이상 구매하세요");
+            throw new LottoCreateException("1000원 이상 구매하세요");
         }
+        lottoFactory = new LottoFactory();
         remainMoney = money;
     }
 
-    Lotto buy(final List<Integer> numbers) {
+    Lotto buy(final List<Integer> lottoNumbers) {
         this.remainMoney -= LOTTO_MONEY;
-        List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(number -> LottoNumber.of(number))
-                .collect(Collectors.toList());
 
-        return Lotto.of(lottoNumbers);
+        return lottoFactory.create(lottoNumbers);
     }
 
     boolean isRemainMoney() {
