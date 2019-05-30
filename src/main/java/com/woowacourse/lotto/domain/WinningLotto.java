@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.woowacourse.lotto.exception.InvalidNumberException;
-
 import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 
@@ -15,12 +14,21 @@ public class WinningLotto {
 	private static final String REGEX_OF_NUMBER = "[1-9]|[1-3][0-9]|[4][0-5]";
 	private static final Pattern PATTERN_OF_LOTTO_NUMBER = Pattern.compile(REGEX_OF_NUMBER);
 	private Lotto numbers;
+	private BonusBall bonusBall;
 
-	public WinningLotto(List<String> numbers) {
+	public WinningLotto(List<String> numbers, BonusBall bonusBall) {
 		this.numbers = new Lotto(numbers.stream().map(Integer::new).collect(Collectors.toList()));
+		this.bonusBall = bonusBall;
+		validateDuplicateBonusBall();
 		validateDuplicateNumber(numbers);
 		validateSize(numbers);
 		validateNumber(numbers);
+	}
+
+	private void validateDuplicateBonusBall() {
+		if(numbers.contains(bonusBall.getBonusBall())) {
+			throw new IllegalArgumentException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
+		}
 	}
 
 	private void validateDuplicateNumber(List<String> numbers) {

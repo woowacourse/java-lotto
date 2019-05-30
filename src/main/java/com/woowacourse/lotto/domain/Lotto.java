@@ -26,6 +26,10 @@ public class Lotto {
 		return NUMBER_OF_LOTTO - set.size();
 	}
 
+	public boolean contains(int bonusBall) {
+		return numbers.contains(bonusBall);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

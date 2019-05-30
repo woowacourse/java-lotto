@@ -17,7 +17,6 @@ public class LottoAppMain {
 		LottoResult lottoResult = new LottoResult(winningLotto, lottos);
 		OutputView.printLottoMatchResult(lottoResult.matchLotto());
 		OutputView.printEarningsRate(lottoResult);
-		InputView.inputBonusBall();
 	}
 
 	public static Money getMoneyForPurchaseOfLotto() {
@@ -31,10 +30,18 @@ public class LottoAppMain {
 
 	public static WinningLotto getWinningLotto() {
 		try {
-			return new WinningLotto(StringSeparator.splitString(InputView.inputWinningLotto()));
+			return new WinningLotto(StringSeparator.splitString(InputView.inputWinningLotto()), getBonusBall());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return getWinningLotto();
+		}
+	}
+
+	public static BonusBall getBonusBall() {
+		try {
+			return new BonusBall(InputView.inputBonusBall());
+		} catch (Exception e) {
+			return getBonusBall();
 		}
 	}
 }

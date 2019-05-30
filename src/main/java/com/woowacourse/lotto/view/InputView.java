@@ -19,6 +19,8 @@ public class InputView {
 
 	public static int inputBonusBall() {
 		System.out.println(UserOutput.DEMAND_BONUS_BALL.getUserOutputMessage());
-		return scanner.nextInt();
+		int bonusBall = scanner.nextInt();
+		scanner.nextLine();
+		return bonusBall;
 	}
 }

@@ -12,7 +12,7 @@ class LottoResultTest {
 
 	@BeforeEach
 	void init() {
-		WinningLotto winningLotto = new WinningLotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+		WinningLotto winningLotto = new WinningLotto(Arrays.asList("1", "2", "3", "4", "5", "6"), new BonusBall(7));
 		List<Lotto> lotto = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12, 13)));
 		Lottos lottos = new Lottos(lotto);
 		lottoResult = new LottoResult(winningLotto, lottos);
