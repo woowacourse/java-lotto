@@ -2,7 +2,6 @@
 로또 미션 진행을 위한 저장소
 
 ### Todo
-* [예외] 로또 번호가 중복은 없는지 체크하기
 * [예외] 당첨 조건에 해당하지 않을 경우 체크하기
 
 ### Done
@@ -16,9 +15,12 @@
 * 보너스볼 추가
 * 자동 로또, 수동 로또 분리하기
 * LottoNumber 생성하기
-* [예외] 로또 번호가 1부터 45까지 범위에 적합한지 체크하기
 * LottoTicket 생성
 * AutoLotto LottTicket 적용
 * WinningLotto LottTicket 적용
 * ManualLotto LottTicket 적용
+    * [예외] Money 1장도 못사는 경우 체크하기
+    * [예외] LottoNumber 로또 번호가 1부터 45까지 범위에 적합한지 체크하기
+    * [예외] LottoTicket 로또 번호가 6개가 맞는지 체크하기
+    * [예외] LottoTicket 로또 번호가 중복은 없는지 체크하기
 

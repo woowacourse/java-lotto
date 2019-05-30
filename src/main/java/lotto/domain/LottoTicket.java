@@ -1,14 +1,23 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != AutoLotto.MAX_LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호의 개수가 6개가 아닙니다.");
+        }
+        if (isOverlap(lottoNumbers)) {
+            throw new IllegalArgumentException("중복되는 로또 번호가 있습니다.");
+        }
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private boolean isOverlap(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> checkLottoNumbers = new HashSet<>(lottoNumbers);
+        return checkLottoNumbers.size() != AutoLotto.MAX_LOTTO_SIZE;
     }
 
     public List<LottoNumber> getLottoNumbers() {
