@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.model.exception.LottoNumberInputFormException;
-import lotto.model.object.ManualPaymentNumber;
+import lotto.model.object.ManualPurchaseNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +34,10 @@ public class InputView {
                 }
         }
 
-        public static List<String[]> inputManualPaymentLottosNumber(ManualPaymentNumber manualPaymentNumber) {
+        public static List<String[]> inputManualPaymentLottosNumber(ManualPurchaseNumber manualPurchaseNumber) {
                 List<String[]> inputs = new ArrayList<>();
                 System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-                for (int index = 0; index < manualPaymentNumber.getNumber(); index++) {
+                for (int index = 0; index < manualPurchaseNumber.getNumber(); index++) {
                         String input = inputLottoNumber();
                         inputs.add(input.split(", "));
                 }

@@ -10,11 +10,11 @@ import java.util.List;
 public class LottoCreator {
         private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
-        public static Lotto create(String[] inputs) {
+        public static Lotto create(final String[] lottoNumberInputs) {
                 List<LottoNumber> lottoNumbers = new ArrayList<>();
-                for (String input : inputs) {
-                        int number = Integer.parseInt(input);
-                        lottoNumbers.add(LottoNumberCreator.create(number));
+                for (String lottoNumberInput : lottoNumberInputs) {
+                        int lottoNumber = Integer.parseInt(lottoNumberInput);
+                        lottoNumbers.add(LottoNumberCreator.create(lottoNumber));
                 }
                 checkLottoNumbersDuplication(lottoNumbers);
                 return new Lotto(lottoNumbers);

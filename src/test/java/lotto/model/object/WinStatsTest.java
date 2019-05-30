@@ -1,10 +1,7 @@
-package lotto.model.creator;
+package lotto.model.object;
 
 import lotto.model.LottoRank;
-import lotto.model.object.BonusBall;
-import lotto.model.object.Lotto;
-import lotto.model.object.LottoNumber;
-import lotto.model.object.WinningInfo;
+import lotto.model.creator.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,10 +9,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinStatsCreatorTest {
-        
+class WinStatsTest {
         @Test
-        void 당첨_통계_생성_검사() {
+        void 당첨_통계_해당_개수_추출_검사() {
                 List<LottoNumber> lottoNumbers1 = new ArrayList<>();
                 lottoNumbers1.add(LottoNumberCreator.create(1));
                 lottoNumbers1.add(LottoNumberCreator.create(2));
@@ -43,6 +39,6 @@ public class WinStatsCreatorTest {
 
                 WinningInfo winningInfo = WinningInfoCreator.create(winningLotto, bonusBall);
 
-                assertThat(WinStatsCreator.create(purchasedLottos, winningInfo).getMappingStats().get(LottoRank.SECOND)).isEqualTo(1);
+                assertThat(WinStatsCreator.create(purchasedLottos, winningInfo).getCount(LottoRank.SECOND)).isEqualTo(1);
         }
 }

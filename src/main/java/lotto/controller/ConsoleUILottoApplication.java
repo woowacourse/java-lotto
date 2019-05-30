@@ -14,14 +14,11 @@ public class ConsoleUILottoApplication {
         public static void main(String[] args) {
                 Payment payment = createPayment();
 
-                ManualPaymentNumber manualPaymentNumber = createManualPaymentNumber(payment);
+                ManualPurchaseNumber manualPurchaseNumber = createManualPaymentNumber(payment);
 
-                List<Lotto> manualPaymentLottos = createManualPaymentLottos(manualPaymentNumber);
-                List<Lotto> autoPurchasedLottos = createPurchasedLottos(payment, manualPaymentNumber);
-                List<Lotto> totalLottos = new ArrayList<>(manualPaymentLottos);
-                totalLottos.addAll(autoPurchasedLottos);
+                List<Lotto> totalLottos = createTotalPurchasedLottos(payment, manualPurchaseNumber);
 
-                OutputView.printPurchaseHistory(payment, manualPaymentNumber);
+                OutputView.printPurchaseHistory(payment, manualPurchaseNumber);
                 OutputView.printPurchaseLottos(totalLottos);
 
                 WinStats winStats = createWinStats(totalLottos);
@@ -29,6 +26,14 @@ public class ConsoleUILottoApplication {
 
                 Yield yield = YieldCreator.create(payment, winStats);
                 OutputView.printYield(yield);
+        }
+
+        private static List<Lotto> createTotalPurchasedLottos(Payment payment, ManualPurchaseNumber manualPurchaseNumber) {
+                List<Lotto> manualPaymentLottos = createManualPaymentLottos(manualPurchaseNumber);
+                List<Lotto> autoPurchasedLottos = createPurchasedLottos(payment, manualPurchaseNumber);
+                List<Lotto> totalLottos = new ArrayList<>(manualPaymentLottos);
+                totalLottos.addAll(autoPurchasedLottos);
+                return totalLottos;
         }
 
         private static Payment createPayment() {
@@ -40,26 +45,26 @@ public class ConsoleUILottoApplication {
                 }
         }
 
-        private static ManualPaymentNumber createManualPaymentNumber(Payment payment) {
+        private static ManualPurchaseNumber createManualPaymentNumber(Payment payment) {
                 try {
-                        return ManualPaymentNumberCreator.create(InputView.inputManualPaymentNumber(), payment);
+                        return ManualPurchaseNumberCreator.create(InputView.inputManualPaymentNumber(), payment);
                 } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
                         return createManualPaymentNumber(payment);
                 }
         }
 
-        private static List<Lotto> createManualPaymentLottos(ManualPaymentNumber manualPaymentNumber) {
+        private static List<Lotto> createManualPaymentLottos(ManualPurchaseNumber manualPurchaseNumber) {
                 try {
                         List<Lotto> manualPaymentLottos = new ArrayList<>();
-                        List<String[]> inputs = InputView.inputManualPaymentLottosNumber(manualPaymentNumber);
+                        List<String[]> inputs = InputView.inputManualPaymentLottosNumber(manualPurchaseNumber);
                         for (String[] input : inputs) {
                                 manualPaymentLottos.add(LottoCreator.create(input));
                         }
                         return manualPaymentLottos;
                 } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
-                        return createManualPaymentLottos(manualPaymentNumber);
+                        return createManualPaymentLottos(manualPurchaseNumber);
                 }
         }
 
@@ -76,22 +81,22 @@ public class ConsoleUILottoApplication {
         }
 
 
-        private static List<Lotto> createPurchasedLottos(Payment payment, ManualPaymentNumber manualPaymentNumber) {
+        private static List<Lotto> createPurchasedLottos(Payment payment, ManualPurchaseNumber manualPurchaseNumber) {
                 try {
                         List<Lotto> purchasedLottos = new ArrayList<>();
-                        addPurchasedLotto(payment, manualPaymentNumber, purchasedLottos);
+                        addPurchasedLotto(payment, manualPurchaseNumber, purchasedLottos);
                         return purchasedLottos;
                 } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
-                        return createPurchasedLottos(payment, manualPaymentNumber);
+                        return createPurchasedLottos(payment, manualPurchaseNumber);
                 }
         }
 
-        private static void addPurchasedLotto(Payment payment, ManualPaymentNumber manualPaymentNumber, List<Lotto> purchasedLottos) {
+        private static void addPurchasedLotto(Payment payment, ManualPurchaseNumber manualPurchaseNumber, List<Lotto> purchasedLottos) {
                 List<Integer> autoCreatedLottoNumbers;
-                int paymentNumber = payment.getNumber() / LOTTO_PRICE;
-                for (int i = 0; i < paymentNumber - manualPaymentNumber.getNumber(); i++) {
-                        autoCreatedLottoNumbers = AutoLottoNumberCreator.create();
+                int paymentNumber = payment.getAmount() / LOTTO_PRICE;
+                for (int i = 0; i < paymentNumber - manualPurchaseNumber.getNumber(); i++) {
+                        autoCreatedLottoNumbers = AutoLottoNumbersCreator.create();
                         purchasedLottos.add(AutoPurchasedLottoCreator.create(autoCreatedLottoNumbers));
                 }
         }

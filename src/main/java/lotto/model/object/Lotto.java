@@ -6,15 +6,19 @@ public class Lotto {
 
         private final List<LottoNumber> lottoNumbers;
 
-        public Lotto(List<LottoNumber> lottoNumbers) {
+        public Lotto(final List<LottoNumber> lottoNumbers) {
                 this.lottoNumbers = lottoNumbers;
         }
 
-        public int getMatchNumber(Lotto winningLotto) {
+        public List<LottoNumber> getLottoNumbers() {
+                return lottoNumbers;
+        }
+
+        public int getMatchNumber(final Lotto winningLotto) {
                 return winningLotto.compareLottoNumbers(this.lottoNumbers);
         }
 
-        private int compareLottoNumbers(List<LottoNumber> lottoNumbers) {
+        private int compareLottoNumbers(final List<LottoNumber> lottoNumbers) {
                 int count = 0;
                 for (LottoNumber lottoNumber : lottoNumbers) {
                         count = this.lottoNumbers.contains(lottoNumber) ? count + 1 : count;
@@ -22,14 +26,11 @@ public class Lotto {
                 return count;
         }
 
-        public List<LottoNumber> getLottoNumbers() {
-                return lottoNumbers;
-        }
-
-        public boolean hasBonusBall(BonusBall bonusBall) {
-                if (lottoNumbers.contains(bonusBall.getLottoNumber())) {
-                        return true;
+        public boolean hasBonusBall(final BonusBall bonusBall) {
+                boolean has = false;
+                for(LottoNumber lottoNumber : lottoNumbers){
+                        has = bonusBall.compareToLottoNumber(lottoNumber) ? true : has;
                 }
-                return false;
+                return has;
         }
 }

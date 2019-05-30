@@ -9,9 +9,9 @@ import java.util.List;
 public class AutoPurchasedLottoCreator {
         private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
-        public static Lotto create(List<Integer> number) {
+        public static Lotto create(final List<Integer> numbers) {
                 List<LottoNumber> lottoNumbers = new ArrayList<>();
-                List<Integer> autoCreatedNumbers = number;
+                List<Integer> autoCreatedNumbers = numbers;
                 for (int index = 0; index < NUMBER_OF_LOTTO_NUMBERS; index++) {
                         lottoNumbers.add(LottoNumberCreator.create(autoCreatedNumbers.get(index)));
                 }

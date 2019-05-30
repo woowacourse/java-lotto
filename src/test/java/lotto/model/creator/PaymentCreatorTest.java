@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class PaymentCreatorTest {
         @Test
         void 지불_금액_생성_검사() {
-                assertThat(PaymentCreator.create(1000).getNumber()).isEqualTo(1000);
+                assertThat(PaymentCreator.create(1000).getAmount()).isEqualTo(1000);
         }
 
         @Test

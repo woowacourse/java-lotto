@@ -44,11 +44,11 @@ public class OutputView {
         }
 
         public static void printYield(Yield yield) {
-                System.out.println("총 수익률은 " + yield.getNumber() * 100 + "%입니다.");
+                System.out.println("총 수익률은 " + yield.getRate() * 100 + "%입니다.");
         }
 
-        public static void printPurchaseHistory(Payment payment, ManualPaymentNumber manualPaymentNumber) {
-                int autoPaymentNumber = (payment.getNumber() / LOTTO_PRICE) - manualPaymentNumber.getNumber();
-                System.out.println("\n수동으로 " + manualPaymentNumber.getNumber() + "장, " + "자동으로 " + autoPaymentNumber + "개를 구매했습니다.");
+        public static void printPurchaseHistory(Payment payment, ManualPurchaseNumber manualPurchaseNumber) {
+                int autoPaymentNumber = (payment.getAmount() / LOTTO_PRICE) - manualPurchaseNumber.getNumber();
+                System.out.println("\n수동으로 " + manualPurchaseNumber.getNumber() + "장, " + "자동으로 " + autoPaymentNumber + "개를 구매했습니다.");
         }
 }

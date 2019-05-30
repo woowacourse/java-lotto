@@ -6,10 +6,10 @@ import lotto.model.object.WinStats;
 import lotto.model.object.Yield;
 
 public class YieldCreator {
-        public static Yield create(Payment payment, WinStats winStats) {
+        public static Yield create(final Payment payment, final WinStats winStats) {
                 int totalRevenue = 0;
                 for (LottoRank lottoRank : LottoRank.values()) {
-                        totalRevenue += lottoRank.getPrizes() * winStats.getMappingStats().get(lottoRank);
+                        totalRevenue += lottoRank.getPrizes() * winStats.getCount(lottoRank);
                 }
                 return new Yield(payment.calculateYield(totalRevenue));
         }

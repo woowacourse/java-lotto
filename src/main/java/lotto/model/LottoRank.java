@@ -15,6 +15,10 @@ public enum LottoRank {
                 this.prizes = prizes;
         }
 
+        public int getPrizes() {
+                return prizes;
+        }
+
         public static LottoRank getLottoRank(int matchNumber, boolean hasBonusBall) {
                 if (matchNumber == 5 && hasBonusBall) {
                         return SECOND;
@@ -34,10 +38,6 @@ public enum LottoRank {
                 for (LottoRank lottoRank : values()) {
                         prizes = (lottoRank != SECOND && lottoRank.matchNumber == matchNumber) ? lottoRank.prizes : prizes;
                 }
-                return prizes;
-        }
-
-        public int getPrizes() {
                 return prizes;
         }
 }

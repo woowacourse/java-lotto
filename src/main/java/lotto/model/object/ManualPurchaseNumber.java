@@ -1,9 +1,9 @@
 package lotto.model.object;
 
-public class ManualPaymentNumber {
+public class ManualPurchaseNumber {
         private final int number;
 
-        public ManualPaymentNumber(int number) {
+        public ManualPurchaseNumber(final int number) {
                 this.number = number;
         }
 

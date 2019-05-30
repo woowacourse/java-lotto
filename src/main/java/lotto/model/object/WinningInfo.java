@@ -5,16 +5,16 @@ public class WinningInfo {
         private BonusBall bonusBall;
 
 
-        public WinningInfo(Lotto winningLotto, BonusBall bonusBall) {
+        public WinningInfo(final Lotto winningLotto, final BonusBall bonusBall) {
                 this.winningLotto = winningLotto;
                 this.bonusBall = bonusBall;
         }
 
-        public Lotto getWinningLotto() {
-                return winningLotto;
+        public int getMatchNumber(final Lotto purchasedLotto) {
+                return purchasedLotto.getMatchNumber(winningLotto);
         }
 
-        public BonusBall getBonusBall() {
-                return bonusBall;
+        public boolean hasBonusBallIn(final Lotto purchasedLotto) {
+                return purchasedLotto.hasBonusBall(bonusBall);
         }
 }

@@ -1,13 +1,13 @@
 package lotto.model.object;
 
 public class BonusBall {
-        private LottoNumber lottoNumber;
+        private final LottoNumber lottoNumber;
 
-        public BonusBall(LottoNumber lottoNumber) {
+        public BonusBall(final LottoNumber lottoNumber) {
                 this.lottoNumber = lottoNumber;
         }
 
-        public LottoNumber getLottoNumber() {
-                return lottoNumber;
+        public boolean compareToLottoNumber(final LottoNumber lottoNumber){
+                return this.lottoNumber == lottoNumber;
         }
 }

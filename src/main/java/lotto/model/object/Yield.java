@@ -1,13 +1,13 @@
 package lotto.model.object;
 
 public class Yield {
-        private double number;
+        private double rate;
 
-        public Yield(double number) {
-                this.number = number;
+        public Yield(double rate) {
+                this.rate = rate;
         }
 
-        public double getNumber() {
-                return number;
+        public double getRate() {
+                return rate;
         }
 }

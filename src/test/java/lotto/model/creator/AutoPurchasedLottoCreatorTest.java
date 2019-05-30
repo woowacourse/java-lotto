@@ -9,18 +9,17 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AutoPurchasedLottoCreatorTest {
-
         @Test
         void 자동_구매_로또_생성_검사() {
-                List<Integer> lottoNumbers = new ArrayList<>();
-                lottoNumbers.add(1);
-                lottoNumbers.add(2);
-                lottoNumbers.add(3);
-                lottoNumbers.add(4);
-                lottoNumbers.add(5);
-                lottoNumbers.add(6);
+                List<Integer> numbers = new ArrayList<>();
+                numbers.add(1);
+                numbers.add(2);
+                numbers.add(3);
+                numbers.add(4);
+                numbers.add(5);
+                numbers.add(6);
                 
-                Lotto purchasedLotto = AutoPurchasedLottoCreator.create(lottoNumbers);
+                Lotto purchasedLotto = AutoPurchasedLottoCreator.create(numbers);
 
                 assertThat(purchasedLotto.getLottoNumbers().get(0)).isEqualTo(LottoNumberCreator.create(1));
                 assertThat(purchasedLotto.getLottoNumbers().get(1)).isEqualTo(LottoNumberCreator.create(2));
@@ -28,7 +27,5 @@ class AutoPurchasedLottoCreatorTest {
                 assertThat(purchasedLotto.getLottoNumbers().get(3)).isEqualTo(LottoNumberCreator.create(4));
                 assertThat(purchasedLotto.getLottoNumbers().get(4)).isEqualTo(LottoNumberCreator.create(5));
                 assertThat(purchasedLotto.getLottoNumbers().get(5)).isEqualTo(LottoNumberCreator.create(6));
-
         }
-
 }

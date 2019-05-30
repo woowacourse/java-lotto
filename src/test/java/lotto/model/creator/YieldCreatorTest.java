@@ -45,6 +45,6 @@ public class YieldCreatorTest {
 
                 Yield yield = YieldCreator.create(payment, winStats);
 
-                assertThat(yield.getNumber()).isEqualTo(406000, offset(0.001));
+                assertThat(yield.getRate()).isEqualTo(406000, offset(0.001));
         }
 }

@@ -1,18 +1,23 @@
 package lotto.model.object;
 
 public class Payment {
+        private static final int LOTTO_PRICE = 1000;
 
-        private final int number;
+        private final int amount;
 
-        public Payment(int number) {
-                this.number = number;
+        public Payment(final int amount) {
+                this.amount = amount;
         }
 
-        public int getNumber() {
-                return number;
+        public int getAmount() {
+                return amount;
         }
 
-        public double calculateYield(int totalRevenue) {
-                return (double) totalRevenue / number;
+        public double calculateYield(final int totalRevenue) {
+                return (double) totalRevenue / amount;
+        }
+
+        public boolean isPurchasable(final int manualPurchaseNumber) {
+                return amount / LOTTO_PRICE >= manualPurchaseNumber;
         }
 }

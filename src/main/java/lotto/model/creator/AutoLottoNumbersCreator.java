@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoLottoNumberCreator {
+public class AutoLottoNumbersCreator {
         private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
         public static List<Integer> create() {
