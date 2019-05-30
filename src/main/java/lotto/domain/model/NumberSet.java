@@ -11,7 +11,7 @@ public class NumberSet {
     public static final Map<Integer, Number> lottoNumbers = new HashMap<>();
 
     static {
-        for (int i = 1; i <= 45; i++) {
+        for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
             lottoNumbers.put(i, new Number(i));
         }
     }
