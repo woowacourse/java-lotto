@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.*;
@@ -10,21 +9,26 @@ import lotto.view.OutputView;
 
 public class CUILottoApp {
     public static void main(String[] args) {
-        Money money = new Money(InputView.inputMoney());
-        List<String[]> manuals = createManuals(money);
-        List<Lotto> lottos = LottoFactory.createLottos(manuals, money);
+        try {
+            Money money = new Money(InputView.inputMoney());
+            List<String[]> manuals = createManuals(money);
+            List<Lotto> lottos = LottosFactory.create(manuals, money);
 
-        OutputView.printLottos(manuals.size(), lottos);
+            OutputView.printLottos(manuals.size(), lottos);
 
-        WinningLotto winningLotto = createWinningLotto();
-        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
+            WinningLotto winningLotto = createWinningLotto();
+            LottoResult lottoResult = new LottoResult(lottos, winningLotto);
 
-        OutputView.printLottoResult(lottoResult);
-        OutputView.printLottoYield(lottoResult, money);
+            OutputView.printLottoResult(lottoResult);
+            OutputView.printLottoYield(lottoResult, money);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static WinningLotto createWinningLotto() {
-        Lotto lotto = new ManualLottoCreator(InputView.inputUserString()).create();
+        ManualLottoCreator manualLottoCreator = new ManualLottoCreator(null);
+        Lotto lotto = manualLottoCreator.createLotto(InputView.inputLottoString());
         Number number = InputView.createBonusNumber();
         return new WinningLotto(lotto, number);
     }

@@ -5,15 +5,23 @@ import java.util.Collections;
 import java.util.List;
 
 public class AutoLottoCreator implements LottoCreator {
+    private final int lottosSize;
 
-    private final List<Number> numbers;
-
-    public AutoLottoCreator(List<Number> numbers) {
-        this.numbers = numbers;
+    public AutoLottoCreator(final int lottosSize) {
+        this.lottosSize = lottosSize;
     }
 
     @Override
-    public Lotto create() {
+    public List<Lotto> create() {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottosSize; i++ ) {
+            lottos.add(createLotto());
+        }
+        return lottos;
+    }
+
+    private Lotto createLotto() {
+        List<Number> numbers = Number.getNumberList();
         Collections.shuffle(numbers);
         return new Lotto(new ArrayList<>(numbers.subList(0, 6)));
     }

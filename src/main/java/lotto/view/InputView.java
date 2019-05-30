@@ -41,7 +41,7 @@ public class InputView {
         return result;
     }
 
-    public static String[] inputUserString() {
+    public static String[] inputLottoString() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return StringUtil.parseString(scanner.nextLine());
     }

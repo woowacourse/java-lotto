@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public interface LottoCreator {
-    Lotto create();
+    List<Lotto> create();
 }
