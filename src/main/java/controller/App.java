@@ -18,8 +18,11 @@ public class App {
         OutputView.printPurchaseAmount(manualPurchaseAmount, autoPurchaseAmount);
         final Lottos lottos = new Lottos(manualLottos, autoPurchaseAmount);
         OutputView.printLottos(lottos);
+        /*
         final Set<LottoNumber> winningNumbers = InputView.inputWinningNumbers();
         final LottoNumber bonusNumber = InputView.inputBonusNumber(winningNumbers);
         OutputView.printResult(lottos.getResult(winningNumbers, bonusNumber));
+        */
+        OutputView.printResult(lottos.getResult());
     }
 }

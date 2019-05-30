@@ -18,6 +18,10 @@ public class Lottos implements Iterable<Lotto> {
         return new LottoResult(lottos, winningNumbers, bonusNumber);
     }
 
+    public LottoResult getResult() {
+        return new LottoResult(lottos);
+    }
+
     public Iterator<Lotto> iterator() {
         return lottos.iterator();
     }
