@@ -9,10 +9,10 @@ public class WinningLotto {
     private final List<LottoNumber> winningLotto;
 
     public WinningLotto(List<LottoNumber> winningLotto) {
-        if(!isValidSize(winningLotto)){
+        if (!isValidSize(winningLotto)) {
             throw new InvalidLottoException("로또의 개수가 잘못되었습니다.");
         }
-        if(isDuplicated(winningLotto)){
+        if (isDuplicated(winningLotto)) {
             throw new InvalidLottoException("중복된 번호가 있습니다.");
         }
         this.winningLotto = winningLotto;
@@ -22,8 +22,12 @@ public class WinningLotto {
         return scannedNumbers.size() != new HashSet<>(scannedNumbers).size();
     }
 
-    private boolean isValidSize(List<LottoNumber> scannedNumbers){
+    private boolean isValidSize(List<LottoNumber> scannedNumbers) {
         return scannedNumbers.size() == LOTTO_SIZE;
     }
-    
+
+    public LottoNumber getWinningLottoNumberByIndex(int index) {
+        return this.winningLotto.get(index);
+    }
+
 }

@@ -9,7 +9,7 @@ public class LottoNumberTest {
 
     @Test
     void 올바른_로또_최대_숫자_검증() {
-        assertDoesNotThrow(() -> new LottoNumber(46));
+        assertDoesNotThrow(() -> new LottoNumber(45));
     }
 
     @Test
@@ -19,7 +19,7 @@ public class LottoNumberTest {
 
     @Test
     void 올바르지_않은_로또_숫자_검증() {
-        assertThrows(InvalidLottoNumberException.class, () -> new LottoNumber(47));
+        assertThrows(InvalidLottoNumberException.class, () -> new LottoNumber(46));
     }
 
     @Test

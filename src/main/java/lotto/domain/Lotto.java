@@ -25,7 +25,7 @@ public class Lotto {
         return scannedNumbers.size() != new HashSet<>(scannedNumbers).size();
     }
 
-    private boolean isValidSize(List<LottoNumber> scannedNumbers){
+    private boolean isValidSize(List<LottoNumber> scannedNumbers) {
         return scannedNumbers.size() == LOTTO_SIZE;
     }
 

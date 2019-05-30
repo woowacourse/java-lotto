@@ -22,13 +22,6 @@ public class UserTest {
     void 사용자의_돈만큼_로또_생성_확인(){
         int money=5000;
         assertThat(new User(money).getUserLottos().size()).isEqualTo(5);
-        User user=new User(money);
-        for (Lotto lotto:user.getUserLottos()) {
-            for(LottoNumber lottoNumber:lotto.getLottoNumbers()){
-                System.out.print(lottoNumber.getLottoNumber()+"  ");
-            }
-            System.out.println();
-        }
     }
 
 }

@@ -12,6 +12,10 @@ public class Money {
         this.money = money;
     }
 
+    public int getMoney(){
+        return this.money;
+    }
+
     private boolean isValidMoney(int money) {
         return (money > 0) && (money % 1000 == 0);
     }
