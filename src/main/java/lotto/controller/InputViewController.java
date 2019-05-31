@@ -12,4 +12,8 @@ public class InputViewController {
     public int inputMoney() {
         return inputView.inputMoney();
     }
+
+    public String inputWinnerNumbers() {
+        return inputView.inputWinnerNumber();
+    }
 }

@@ -6,6 +6,7 @@ import lotto.controller.MoneyController;
 import lotto.controller.OutputViewController;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.WinnerNumber;
 import lotto.view.InputView;
 
 public class Main {
@@ -21,6 +22,8 @@ public class Main {
 
         OutputViewController outputViewController = new OutputViewController();
         outputViewController.printLottos(myLotto);
+
+        WinnerNumber winnerNumber = WinnerNumber.create(inputController.inputWinnerNumbers());
     }
 }
 
