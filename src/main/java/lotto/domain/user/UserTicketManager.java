@@ -5,9 +5,8 @@ import lotto.domain.lottofactory.LottoTicket;
 import lotto.domain.lottofactory.shufflerule.Shuffle;
 import lotto.utils.NullCheckUtil;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class UserTicketManager {
     private List<LottoTicket> userLottoTickets;
@@ -19,9 +18,15 @@ public class UserTicketManager {
     }
 
     private List<LottoTicket> getCreatedLottoTickets(PurchaseAmount purchaseAmount, Shuffle shuffle) {
-        return Stream.generate(() -> LottoCreator.getLottoTicket(shuffle))
-                    .limit(purchaseAmount.getLottoAmount())
-                    .collect(Collectors.toList());
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        int count = 0;
+        while (!purchaseAmount.isEqualsAmount(count)) {
+            lottoTickets.add(LottoCreator.getLottoTicket(shuffle));
+            count++;
+        }
+
+        return lottoTickets;
     }
 
     public List<LottoTicket> getUserLottoTickets() {
