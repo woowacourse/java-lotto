@@ -1,13 +1,9 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.LottoNumber;
-import lotto.utils.Converter;
+import lotto.domain.generate.LottosFactory;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConsoleUILottoApplication {
     private static final int MIN_SELF_LOTTO_COUNT = 0;
@@ -15,10 +11,10 @@ public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         Price price = new Price(InputView.inputPrice());
         int selfCount = getSelfCount(price, InputView.inputSelfCount());
-        Lottos lottos = getLottos(price, selfCount);
+        Lottos lottos = LottosFactory.generateLottos(price,InputView.inputSelfNumbers(selfCount));
         OutputView.printLottos(lottos.getLottos(), selfCount);
-        WinningLotto winningLotto = getWinningLotto();
-        LottoResult lottoResult = getLottoResult(lottos, winningLotto);
+        WinningLotto winningLotto = WinningLotto.generateWinningLotto();
+        LottoResult lottoResult = LottoResult.generateLottoResult(lottos, winningLotto);
         OutputView.printStatistic(lottoResult.getResults());
         OutputView.printYield(lottoResult.findYield(price.getPrice()));
     }
@@ -28,31 +24,6 @@ public class ConsoleUILottoApplication {
             throw new IllegalArgumentException("올바르지 않은 횟수입니다.");
         }
         return inputSelfCount;
-    }
-
-    private static LottoResult getLottoResult(Lottos lottos, WinningLotto winningLotto) {
-        List<Rank> ranks = lottos.match(winningLotto);
-        return new LottoResult(ranks);
-    }
-
-    private static WinningLotto getWinningLotto() {
-        Lotto lotto = new Lotto(Converter.convertNumbers(InputView.inputWinningNumber()));
-        return new WinningLotto(lotto, LottoNumber.of(InputView.inputBonusBall()));
-    }
-
-    private static Lottos getLottos(Price price, int selfSize) {
-        List<Lotto> lottos = AutoLottoFactory.generateAutoLottos(price.getCountOfLotto() - selfSize);
-        lottos.addAll(getSelfLottos(selfSize));
-        return new Lottos(lottos);
-    }
-
-    private static List<Lotto> getSelfLottos(int selfSize) {
-        List<Lotto> selfLottos = new ArrayList<>();
-        List<String> self = InputView.inputSelfNumbers(selfSize);
-        for (String input : self) {
-            selfLottos.add(new Lotto(Converter.convertNumbers(input)));
-        }
-        return selfLottos;
     }
 
 }

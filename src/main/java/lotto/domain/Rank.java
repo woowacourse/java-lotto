@@ -44,7 +44,6 @@ public enum Rank {
         throw new IllegalArgumentException("결과를 구할 수 없습니다.");
     }
 
-
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }

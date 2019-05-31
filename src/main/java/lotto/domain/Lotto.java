@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int LOTTO_NUMBER_SIZE = 6;
+
     private List<LottoNumber> lotto = new ArrayList<>();
 
     public Lotto(List<Integer> lotto) {

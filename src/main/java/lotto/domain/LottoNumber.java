@@ -7,8 +7,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
-    static final int MIN_LOTTO_NUMBER = 1;
-    static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
+
     private static Map<Integer, LottoNumber> numbers = new HashMap<>();
     private int number;
 
@@ -19,7 +20,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
+    static LottoNumber of(int number) {
         if (!numbers.containsKey(number)) {
             numbers.put(number, new LottoNumber(number));
         }

@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.exception.BonusBallValidException;
+import lotto.utils.Converter;
+import lotto.view.InputView;
 
 import java.util.Objects;
 
@@ -8,7 +10,7 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusBall;
 
-    public WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
+    private WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
         checkWinningLotto(winningLotto, bonusBall);
         this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
@@ -18,6 +20,11 @@ public class WinningLotto {
         if (winningLotto.isContain(bonusBall)) {
             throw new BonusBallValidException("보너스볼은 당첨 번호에 없어야 합니다.");
         }
+    }
+
+    public static WinningLotto generateWinningLotto() {
+        Lotto lotto = new Lotto(Converter.convertNumbers(InputView.inputWinningNumber()));
+        return new WinningLotto(lotto, LottoNumber.of(InputView.inputBonusBall()));
     }
 
     Rank matchLotto(Lotto lotto) {

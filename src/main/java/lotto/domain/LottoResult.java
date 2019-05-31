@@ -4,17 +4,19 @@ import java.util.*;
 
 public class LottoResult {
     private static final int PERCENT = 100;
+
     private Map<Rank, Integer> results = new TreeMap<>();
 
-    public LottoResult(List<Rank> ranks) {
+    LottoResult(List<Rank> ranks) {
         for (Rank rank : Rank.values()) {
             results.put(rank, 0);
         }
         generateResult(ranks);
     }
 
-    public Map<Rank, Integer> getResults() {
-        return Collections.unmodifiableMap(this.results);
+    public static LottoResult generateLottoResult(Lottos lottos, WinningLotto winningLotto) {
+        List<Rank> ranks = lottos.match(winningLotto);
+        return new LottoResult(ranks);
     }
 
     private void generateResult(List<Rank> ranks) {
@@ -23,14 +25,17 @@ public class LottoResult {
         }
     }
 
+    public Map<Rank, Integer> getResults() {
+        return Collections.unmodifiableMap(this.results);
+    }
+
     public double findYield(int price) {
         return findWinningMoney() / price * PERCENT;
     }
 
     private double findWinningMoney() {
         long winningMoney = 0;
-        Set<Rank> ranks = results.keySet();
-        for (Rank rank : ranks) {
+        for (Rank rank : Rank.values()) {
             winningMoney += (rank.getWinningMoney()) * results.get(rank);
         }
         return winningMoney;
