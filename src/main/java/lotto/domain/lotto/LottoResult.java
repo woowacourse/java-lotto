@@ -11,9 +11,13 @@ public class LottoResult {
     private PrizeInfo prizeInfo;
 
 
-    public LottoResult(Money money, List<Prize> prizes) {
+    private LottoResult(Money money, List<Prize> prizes) {
         prizeInfo = new PrizeInfo(prizes);
         this.money = money;
+    }
+
+    public static LottoResult create(Money money, List<Prize> prizes) {
+        return new LottoResult(money, prizes);
     }
 
     public double getPercentage() {

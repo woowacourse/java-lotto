@@ -7,23 +7,21 @@ import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class LottoLauncher {
 
     public static void main(String[] args) {
         Money money = Money.create(InputView.askMoney());
-
         Lottos manualLottos = getManualLottos(money);
         Lottos automaticLottos = LottoMachine.generateLottos(money.getLottoCount() - manualLottos.size());
-
         OutputView.printLottos(manualLottos, automaticLottos);
 
-        WinningLotto winningLotto = new WinningLotto(InputView.askWinningLottoNumbers(),
+        WinningLotto winningLotto = WinningLotto.create(InputView.askWinningLottoNumbers(),
                 InputView.askBonusNumber());
 
         Lottos totalLottos = manualLottos.append(automaticLottos);
-        LottoResult lottoResult = new LottoResult(money, totalLottos.getPrizes(winningLotto));
-
+        LottoResult lottoResult = LottoResult.create(money, totalLottos.getPrizes(winningLotto));
         OutputView.printStatistics(lottoResult);
     }
 

@@ -16,7 +16,7 @@ public class WinningLottoTest {
     @Test
     public void 숫자_0개_일치() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(10, 11, 12, 7, 8, 9), 1);
+        WinningLotto winningLotto = WinningLotto.create(Arrays.asList(10, 11, 12, 7, 8, 9), 1);
 
         assertThat(winningLotto.prizeOf(lotto)).isEqualTo(Prize.MISS);
     }
@@ -24,7 +24,7 @@ public class WinningLottoTest {
     @Test
     public void 숫자_한개_일치() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(6, 11, 12, 7, 8, 9), 10);
+        WinningLotto winningLotto = WinningLotto.create(Arrays.asList(6, 11, 12, 7, 8, 9), 10);
 
         assertThat(winningLotto.prizeOf(lotto)).isEqualTo(Prize.MISS);
     }
@@ -32,7 +32,7 @@ public class WinningLottoTest {
     @Test
     public void 숫자_두개_일치() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 11, 5, 7, 8, 9), 10);
+        WinningLotto winningLotto = WinningLotto.create(Arrays.asList(3, 11, 5, 7, 8, 9), 10);
 
         assertThat(winningLotto.prizeOf(lotto)).isEqualTo(Prize.MISS);
     }
@@ -40,14 +40,14 @@ public class WinningLottoTest {
     @Test
     public void 숫자_세개_일치() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 4, 5, 7, 8, 9), 10);
+        WinningLotto winningLotto = WinningLotto.create(Arrays.asList(3, 4, 5, 7, 8, 9), 10);
         assertThat(winningLotto.prizeOf(lotto)).isEqualTo(Prize.FIFTH);
     }
 
     @Test
     public void 숫자_네개_일치() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 4, 5, 6, 8, 9), 10);
+        WinningLotto winningLotto = WinningLotto.create(Arrays.asList(3, 4, 5, 6, 8, 9), 10);
 
         assertThat(winningLotto.prizeOf(lotto)).isEqualTo(Prize.FOURTH);
     }
@@ -55,7 +55,7 @@ public class WinningLottoTest {
     @Test
     public void 숫자_다섯개_일치_보너스_불일치() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 7), 8);
+        WinningLotto winningLotto = WinningLotto.create(Arrays.asList(1, 2, 3, 4, 5, 7), 8);
 
         assertThat(winningLotto.prizeOf(lotto)).isEqualTo(Prize.THIRD);
     }
@@ -63,7 +63,7 @@ public class WinningLottoTest {
     @Test
     public void 숫자_다섯개_일치_보너스_일치() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
+        WinningLotto winningLotto = WinningLotto.create(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
 
         assertThat(winningLotto.prizeOf(lotto)).isEqualTo(Prize.SECOND);
     }
@@ -71,7 +71,7 @@ public class WinningLottoTest {
     @Test
     public void 숫자_여섯개_일치() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningLotto = WinningLotto.create(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         assertThat(winningLotto.prizeOf(lotto)).isEqualTo(Prize.FIRST);
     }
@@ -79,7 +79,7 @@ public class WinningLottoTest {
     @Test
     void 보너스_로또_중복_테스트() {
         assertThrows(IllegalNumberCombinationException.class, () -> {
-            new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
+            WinningLotto.create(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
         });
     }
 
