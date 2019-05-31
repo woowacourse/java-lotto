@@ -45,11 +45,15 @@ public enum Rank {
     }
 
     public String toString() {
-        String rankInfo = this.matchCount + "개 일치,";
+        StringBuilder rankInfo = new StringBuilder();
+        rankInfo.append(this.matchCount);
+        rankInfo.append("개 일치,");
         if (this.prize == SECOND.prize) {
-            rankInfo += "보너스 볼 일치";
+            rankInfo.append("보너스 볼 일치");
         }
-        rankInfo += "(" + this.prize + "원)- ";
-        return rankInfo;
+        rankInfo.append("(");
+        rankInfo.append(this.prize);
+        rankInfo.append("원)- ");
+        return rankInfo.toString();
     }
 }
