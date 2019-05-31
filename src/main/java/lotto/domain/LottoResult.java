@@ -5,24 +5,21 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoResult {
+    private static final int ZERO = 0;
     private static final int LOTTO_PRICE = 1000;
     private static final int PERCENT_CONVERSION = 100;
 
     private final Map<Rank, Integer> result;
-    private int totalLottos = 0;
 
     public LottoResult() {
         result = new HashMap<>();
         for (Rank rank : Rank.values()) {
-            result.put(rank, 0);
+            result.put(rank, ZERO);
         }
     }
 
     public LottoResult(final Map<Rank, Integer> result) {
         this.result = new HashMap<>(result);
-        for (int count : result.values()) {
-            totalLottos += count;
-        }
     }
 
     public int getRankCount(Rank rank) {
@@ -30,16 +27,23 @@ public class LottoResult {
     }
 
     void add(Rank rank) {
-        totalLottos++;
         result.put(rank, result.get(rank) + 1);
     }
 
     public double calculateYield() {
-        double yield = 0;
+        double yield = ZERO;
+        int totalLottos = calculateTotalLottos();
         for (Rank rank : result.keySet()) {
-            yield += rank.getWinningMoney() * ((result.get(rank)) / (double) totalLottos) / LOTTO_PRICE;
+            yield += rank.getWinningMoney() * ((result.get(rank)) / (double) totalLottos);
         }
+        yield /= LOTTO_PRICE;
         return yield * PERCENT_CONVERSION;
+    }
+
+    private int calculateTotalLottos(){
+        return result.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     @Override
@@ -47,12 +51,11 @@ public class LottoResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResult that = (LottoResult) o;
-        return totalLottos == that.totalLottos &&
-                Objects.equals(result, that.result);
+        return Objects.equals(result, that.result);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(result, totalLottos);
+        return Objects.hash(result);
     }
 }
