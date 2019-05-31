@@ -13,10 +13,10 @@ public class WinningLotto {
         this.bonus = bonus;
     }
 
-    public WinningLotto(List<String> inputs) {
-        winningLotto = splitNumbers(inputs.get(0));
+    public WinningLotto(WinningLottoDto dto) {
+        winningLotto = splitNumbers(dto.numbers());
         try {
-            bonus = Integer.parseInt(inputs.get(1));
+            bonus = Integer.parseInt(dto.bonus());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
@@ -41,11 +41,15 @@ public class WinningLotto {
 
     public int match(Lotto lotto) {
         int result = 0;
+        boolean bonus = false;
+        if (lotto.numbers().contains(bonus)) {
+            bonus = true;
+        }
         for (Integer number : lotto.numbers()) {
             if (winningLotto.contains(number)) {
                 result++;
             }
         }
-        return Reward.valueOf(result).money();
+        return Reward.valueOf(result, bonus).money();
     }
 }

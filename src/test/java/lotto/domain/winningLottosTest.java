@@ -13,7 +13,7 @@ class winningLottosTest {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertEquals(6, winningLotto.match(lotto));
+        assertEquals(2000000000, winningLotto.match(lotto));
     }
 
     @Test

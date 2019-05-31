@@ -24,7 +24,6 @@ public class Lotto {
         }
     }
 
-
     public List<Integer> numbers() {
         return this.numbers;
     }
@@ -44,8 +43,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
+        return "numbers=" + numbers;
     }
 }

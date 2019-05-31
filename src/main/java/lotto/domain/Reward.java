@@ -23,25 +23,15 @@ public enum Reward {
         this.money = money;
     }
 
-    public static Reward valueOf(int matchNumber) {
-        List<Reward> matches = Arrays.stream(values())
-                .filter(reward -> reward.match(matchNumber))
-                .collect(Collectors.toList());
-        if (matches.size() == 0) {
-            return LOSE;
-        }
-        if (matches.size() != 1) {
-            throw new IllegalArgumentException();
-        }
-        return matches.get(0);
-    }
-
     public static Reward valueOf(int matchNumber, boolean bonus) {
-        return SECOND;
+        return Arrays.stream(values())
+                .filter(reward -> reward.match(matchNumber, bonus))
+                .findFirst()
+                .orElse(valueOf("LOSE"));
     }
 
-    private boolean match(int count) {
-        return this.count == count;
+    private boolean match(int count, boolean bonus) {
+        return this.count == count && this.bonus == bonus;
     }
 
 

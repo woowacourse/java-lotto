@@ -1,7 +1,7 @@
 package lotto.view;
 
-import java.util.ArrayList;
-import java.util.List;
+import lotto.domain.WinningLottoDto;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -12,13 +12,13 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static List<String> inputWinningLotto() {
-        List<String> inputs = new ArrayList<>();
+    public static WinningLottoDto inputWinningLotto() {
+        String numbers, bonus;
         System.out.println("당첨번호");
-        inputs.add(scanner.nextLine());
+        numbers = scanner.nextLine();
         System.out.println("보너스");
-        inputs.add(scanner.nextLine());
+        bonus = scanner.nextLine();
 
-        return inputs;
+        return new WinningLottoDto(numbers, bonus);
     }
 }
