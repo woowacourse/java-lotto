@@ -10,4 +10,10 @@ public class PurchaseInformationTest {
         assertThrows(IllegalArgumentException.class, () ->
                 new PurchaseInformation(new Money(1000), 2));
     }
+
+    @Test
+    void 영미만의_수동_구매_로또_개수() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new PurchaseInformation(new Money(1000), -1));
+    }
 }

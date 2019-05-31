@@ -22,4 +22,22 @@ public class LottosTest {
 
         assertThat(lottos).isEqualTo(lottos1);
     }
+
+    @Test
+    void 다른_Lottos를_추가() {
+        LottoNumbers numbers = LottoNumbersGenerator.getLottoNumbers();
+        LottoNumbers numbers1 = LottoNumbersGenerator.getLottoNumbers();
+        Lotto lotto = new Lotto(numbers);
+        Lotto lotto1 = new Lotto(numbers1);
+
+        Lottos lottos = new Lottos();
+        lottos.add(numbers);
+        Lottos lottos1 = new Lottos();
+        lottos1.add(numbers1);
+        lottos.addAll(lottos1);
+
+        Lottos totalLottos = new Lottos(Arrays.asList(lotto, lotto1));
+
+        assertThat(lottos).isEqualTo(totalLottos);
+    }
 }
