@@ -9,7 +9,6 @@ import com.woowacourse.lotto.exception.InvalidMoneyException;
 import com.woowacourse.lotto.utils.StringSeparator;
 import com.woowacourse.lotto.view.InputView;
 import com.woowacourse.lotto.view.OutputView;
-import jdk.internal.util.xml.impl.Input;
 
 public class LottoAppMain {
 	public static void main(String[] args) {
@@ -38,7 +37,7 @@ public class LottoAppMain {
 	private static List<String> inputManualLotto(int count) {
 		List<String> manualLotto = new ArrayList<>();
 		InputView.printDemandManualLotto();
-		while(count --> 0) {
+		while (count-- > 0) {
 			manualLotto.add(InputView.inputManualLottoNumber());
 		}
 		return manualLotto;

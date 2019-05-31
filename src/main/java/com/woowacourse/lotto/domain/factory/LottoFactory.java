@@ -1,6 +1,8 @@
 package com.woowacourse.lotto.domain.factory;
 
-import com.woowacourse.lotto.domain.Lottos;
+import java.util.List;
+
+import com.woowacourse.lotto.domain.Lotto;
 
 public abstract class LottoFactory {
 	protected final int numberOfLotto;
@@ -9,5 +11,5 @@ public abstract class LottoFactory {
 		this.numberOfLotto = numberOfLottos;
 	}
 
-	abstract Lottos generateLotto();
+	abstract List<Lotto> generateLotto();
 }

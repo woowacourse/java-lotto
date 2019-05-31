@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import com.woowacourse.lotto.domain.ExceptionOutput;
 import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.LottoNumber;
-import com.woowacourse.lotto.domain.Lottos;
 import com.woowacourse.lotto.exception.InvalidCountOfManualLottoException;
 import com.woowacourse.lotto.utils.StringSeparator;
 
@@ -29,7 +28,7 @@ public class ManualLottoFactory extends LottoFactory {
 	}
 
 	@Override
-	public Lottos generateLotto() {
+	public List<Lotto> generateLotto() {
 		List<Lotto> lotto = new ArrayList<>();
 		for (String s : numbers) {
 			lotto.add(new Lotto(StringSeparator.splitString(s).stream()
@@ -37,6 +36,6 @@ public class ManualLottoFactory extends LottoFactory {
 					.collect(Collectors.toList())))
 			;
 		}
-		return new Lottos(lotto);
+		return lotto;
 	}
 }

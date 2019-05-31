@@ -3,6 +3,7 @@ package com.woowacourse.lotto.domain.factory;
 import java.util.List;
 
 import com.woowacourse.lotto.domain.ExceptionOutput;
+import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.Lottos;
 import com.woowacourse.lotto.domain.Money;
 import com.woowacourse.lotto.exception.InvalidCountOfManualLottoException;
@@ -21,7 +22,8 @@ public class LottosFactory {
 	}
 
 	public Lottos generateLotto(List<String> numbers) {
-		return new ManualLottoFactory(countOfManualLotto, numbers).generateLotto()
-				.addLottos(new AutomaticLottoFactory(countOfAllLotto - countOfManualLotto).generateLotto());
+		List<Lotto> lotto = new ManualLottoFactory(countOfAllLotto, numbers).generateLotto();
+		lotto.addAll(new AutomaticLottoFactory(countOfAllLotto - countOfManualLotto).generateLotto());
+		return new Lottos(lotto);
 	}
 }
