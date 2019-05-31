@@ -18,8 +18,8 @@ public class ManualLottoFactory extends LottoFactory {
 
 	public ManualLottoFactory(int numberOfLotto, final List<String> numbers) {
 		super(numberOfLotto);
+		this.numbers = new ArrayList<>(numbers);
 		validateLottoNumbers(numbers);
-		this.numbers = numbers;
 	}
 
 	private void validateLottoNumbers(List<String> numbers) {

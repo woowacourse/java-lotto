@@ -12,30 +12,30 @@ import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 
 public class WinningLotto {
-	private static final String REGEX_OF_NUMBER = "[1-9]|[1-3][0-9]|[4][0-5]";
+	private static final String REGEX_OF_NUMBER = "[1-9]|[1-3][0-9]|4[0-5]";
 	private static final Pattern PATTERN_OF_LOTTO_NUMBER = Pattern.compile(REGEX_OF_NUMBER);
-	private Lotto numbers;
+	private Lotto winningLotto;
 	private BonusBall bonusBall;
 
-	public WinningLotto(List<String> numbers, BonusBall bonusBall) {
-		this.numbers = new Lotto(numbers.stream()
+	public WinningLotto(final List<String> numbers, BonusBall bonusBall) {
+		this.winningLotto = new Lotto(numbers.stream()
 				.map(number -> LottoNumber.getLottoNumber(Integer.valueOf(number)))
 				.collect(Collectors.toList()))
 		;
 		this.bonusBall = bonusBall;
 		validateDuplicateBonusBall();
-		validateDuplicateNumber(numbers);
+		validateDuplicatedNumber(numbers);
 		validateSize(numbers);
-		validateNumber(numbers);
+		validateDuplicatedNumbers(numbers);
 	}
 
 	private void validateDuplicateBonusBall() {
-		if (numbers.contains(bonusBall.getBonusBallNumber())) {
+		if (winningLotto.contains(bonusBall.getBonusBallNumber())) {
 			throw new IllegalArgumentException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
 		}
 	}
 
-	private void validateDuplicateNumber(List<String> numbers) {
+	private void validateDuplicatedNumber(List<String> numbers) {
 		if (numbers.size() != new HashSet<>(numbers).size()) {
 			throw new InvalidNumberException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
 		}
@@ -47,14 +47,14 @@ public class WinningLotto {
 		}
 	}
 
-	private void validateNumber(List<String> numbers) {
+	private void validateDuplicatedNumbers(List<String> numbers) {
 		if (!numbers.stream().allMatch(number -> PATTERN_OF_LOTTO_NUMBER.matcher(number).matches())) {
 			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
 	}
 
 	public int matchLotto(Lotto lotto) {
-		return numbers.getCountOfMatchedNumber(lotto);
+		return winningLotto.getCountOfMatchedNumber(lotto);
 	}
 
 	public boolean matchBonusBall(Lotto lotto) {
@@ -70,11 +70,11 @@ public class WinningLotto {
 			return false;
 		}
 		final WinningLotto that = (WinningLotto) o;
-		return Objects.equals(numbers, that.numbers);
+		return Objects.equals(winningLotto, that.winningLotto);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(numbers);
+		return Objects.hash(winningLotto);
 	}
 }

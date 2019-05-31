@@ -2,6 +2,7 @@ package com.woowacourse.lotto.domain.factory;
 
 import java.util.List;
 
+import com.woowacourse.lotto.domain.ExceptionOutput;
 import com.woowacourse.lotto.domain.Lottos;
 import com.woowacourse.lotto.domain.Money;
 import com.woowacourse.lotto.exception.InvalidCountOfManualLottoException;
@@ -15,7 +16,7 @@ public class LottoFactoryController {
 		this.countOfManualLotto = countOfManualLotto;
 
 		if (countOfAllLotto < countOfManualLotto) {
-			throw new InvalidCountOfManualLottoException("구입 금액보다 로또의 개수가 더 큽니다. 다시 입력해주세요.");
+			throw new InvalidCountOfManualLottoException(ExceptionOutput.VIOLATE_PURCHASED_LOTTO.getExceptionMessage());
 		}
 	}
 

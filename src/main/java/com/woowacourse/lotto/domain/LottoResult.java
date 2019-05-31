@@ -9,7 +9,7 @@ public class LottoResult {
 	private final Lottos lottos;
 	private Map<LottoRank, Integer> rankResult;
 
-	public LottoResult(WinningLotto winningLotto, Lottos lottos) {
+	public LottoResult(final WinningLotto winningLotto, Lottos lottos) {
 		this.winningLotto = winningLotto;
 		this.lottos = lottos;
 	}

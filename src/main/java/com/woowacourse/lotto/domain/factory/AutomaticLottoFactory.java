@@ -8,8 +8,8 @@ import com.woowacourse.lotto.domain.LottoNumber;
 import com.woowacourse.lotto.domain.Lottos;
 
 public class AutomaticLottoFactory extends LottoFactory {
-	public AutomaticLottoFactory(int numberOfLotto) {
-		super(numberOfLotto);
+	public AutomaticLottoFactory(int countOfPurchasedLotto) {
+		super(countOfPurchasedLotto);
 	}
 
 	@Override
@@ -17,7 +17,7 @@ public class AutomaticLottoFactory extends LottoFactory {
 		List<Lotto> lottos = new ArrayList<>();
 
 		for (int i = 0; i < numberOfLotto; i++) {
-			lottos.add(new Lotto(LottoNumber.getLottos()));
+			lottos.add(new Lotto(LottoNumber.getLotto()));
 		}
 
 		return new Lottos(lottos);

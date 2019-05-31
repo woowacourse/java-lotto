@@ -11,7 +11,7 @@ public class Lotto {
 
 	public Lotto(final List<LottoNumber> numbers) {
 		this.numbers = new TreeSet<>(numbers);
-		if(this.numbers.size() != numbers.size()) {
+		if (this.numbers.size() != numbers.size()) {
 			throw new InvalidNumberException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
 		}
 	}
