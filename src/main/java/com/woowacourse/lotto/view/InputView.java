@@ -28,12 +28,11 @@ public class InputView {
 		return Integer.parseInt(scanner.nextLine());
 	}
 
-	public static List<String> inputManualLottoNumber(int count) {
+	public static void printDemandManualLotto() {
 		System.out.println(UserOutput.DEMAND_MANUAL_LOTTO.getUserOutputMessage());
-		List<String> manualLottoNumber = new ArrayList<>();
-		while (count-- > 0) {
-			manualLottoNumber.add(scanner.nextLine().replaceAll(REPLACE_WHITE_SPACE, ""));
-		}
-		return manualLottoNumber;
+	}
+
+	public static String inputManualLottoNumber() {
+		return scanner.nextLine();
 	}
 }
