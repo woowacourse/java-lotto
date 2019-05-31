@@ -1,6 +1,5 @@
-package lotto.view;
+package lotto.view.inputview;
 
-import lotto.view.inputview.PriceParser;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

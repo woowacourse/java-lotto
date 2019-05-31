@@ -24,7 +24,7 @@ class LottoCreatorTest {
     @Test
     void null_check() {
         assertThrows(NullPointerException.class, () -> {
-            LottoCreator.getLottoTicket(null);
+            LottoCreator.getLottoTicket(new FixShuffle());
         });
     }
 

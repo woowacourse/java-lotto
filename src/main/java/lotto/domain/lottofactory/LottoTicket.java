@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-    private static final String ERROR_DUPLICATED = "중복된 로또 티켓이 존재합니다.";
+    private static final String ERROR_DUPLICATED = "중복된 로또 번호가 존재합니다.";
     private static final String ERROR_LOTTO_NUMBER_COUNT = "번호가 6개가 아닙니다.";
 
     private List<LottoNumber> lottoTicket;

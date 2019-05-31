@@ -20,13 +20,15 @@ public class UserTicketManager {
     private List<LottoTicket> getCreatedLottoTickets(PurchaseAmount purchaseAmount, Shuffle shuffle) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        int count = 0;
-        while (!purchaseAmount.isEqualsAmount(count)) {
+        while (!isSufficientTickets(purchaseAmount, lottoTickets)) {
             lottoTickets.add(LottoCreator.getLottoTicket(shuffle));
-            count++;
         }
 
         return lottoTickets;
+    }
+
+    private boolean isSufficientTickets(PurchaseAmount purchaseAmount, List<LottoTicket> lottoTickets) {
+        return purchaseAmount.isEqualsAmount(lottoTickets.size());
     }
 
     public List<LottoTicket> getUserLottoTickets() {
