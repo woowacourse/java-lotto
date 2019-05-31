@@ -45,6 +45,7 @@ public class ConsoleLottoApplication {
             machine.validateNumOfCustomLottos(numOfCustomLottos);
             return numOfCustomLottos;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return getNumOfCustomLottos(machine);
         }
     }

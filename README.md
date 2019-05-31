@@ -35,6 +35,7 @@
 ## Refactoring List
 
 - ~~create LottoFactory class~~
-- add more tests
+- ~~use StringUtils to verify lotto numbers~~
+- **add more tests**
 - divide packages
 - use interface to separate declaration & implementation

@@ -1,5 +1,7 @@
 package lotto.view;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,13 +39,14 @@ public class InputView {
     private static List<Integer> getIntegers() {
         try {
             String input = SCANNER.nextLine();
-            Pattern.compile("\\d(\\d)?(, \\d(\\d)?)*").matcher(input);
-            return Arrays.asList(input.split(", "))
+            Pattern.compile("\\d(\\d)?(,\\d(\\d)?)*").matcher(StringUtils.deleteWhitespace(input));
+            return Arrays.asList(input
+                    .split(","))
                     .stream()
                     .map(n -> Integer.parseInt(n))
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            System.out.println("정수를 콤마와 공백을 이용하여 구분해 입력해 주세요. (e.g., \"1, 2, 3, 4, 5, 6\")");
+            System.out.println("정수를 콤마를 이용하여 구분해 입력해 주세요. (e.g., \"1, 2, 3, 4, 5, 6\")");
             return getIntegers();
         }
     }
