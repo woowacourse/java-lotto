@@ -3,7 +3,7 @@ package lotto;
 import java.util.List;
 
 import com.woowacourse.lotto.domain.*;
-import com.woowacourse.lotto.domain.factory.LottoFactoryController;
+import com.woowacourse.lotto.domain.factory.LottosFactory;
 import com.woowacourse.lotto.exception.InvalidMoneyException;
 import com.woowacourse.lotto.utils.StringSeparator;
 import com.woowacourse.lotto.view.InputView;
@@ -26,7 +26,7 @@ public class LottoAppMain {
 
 	private static Lottos getLottos(Money money, int countOfManualLotto) {
 		try {
-			return new LottoFactoryController(money, countOfManualLotto).generateLotto(inputManualLotto(countOfManualLotto));
+			return new LottosFactory(money, countOfManualLotto).generateLotto(inputManualLotto(countOfManualLotto));
 		} catch (Exception e) {
 			OutputView.printExceptionMessage(e.getMessage());
 			return getLottos(money, getCountOfManualLotto());

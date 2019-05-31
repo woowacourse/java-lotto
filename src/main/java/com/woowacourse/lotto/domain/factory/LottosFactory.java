@@ -7,11 +7,11 @@ import com.woowacourse.lotto.domain.Lottos;
 import com.woowacourse.lotto.domain.Money;
 import com.woowacourse.lotto.exception.InvalidCountOfManualLottoException;
 
-public class LottoFactoryController {
+public class LottosFactory {
 	private int countOfAllLotto;
 	private int countOfManualLotto;
 
-	public LottoFactoryController(Money money, int countOfManualLotto) {
+	public LottosFactory(Money money, int countOfManualLotto) {
 		this.countOfAllLotto = money.getCountOfLotto();
 		this.countOfManualLotto = countOfManualLotto;
 
