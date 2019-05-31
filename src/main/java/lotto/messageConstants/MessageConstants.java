@@ -9,4 +9,7 @@ public class MessageConstants {
     public static final String ERROR_WINNER_NUMBER = "잘못된 입력입니다. 다시 입력해주세요";
 
     public static final String BUYLOTTONUMBER = "개를 구매했습니다.";
+    public static final String RESULT = "\n당첨 통계";
+    public static final String BASIC_BAR = "--------";
+    public static final String RETURNRATE = "총 수입률은 %.0f%%입니다.";
 }

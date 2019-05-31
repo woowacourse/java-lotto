@@ -8,7 +8,7 @@ public class WinnerNumber {
 
     private final Lotto winnerLotto;
 
-    public WinnerNumber(String input) {
+    private WinnerNumber(String input) {
         List<Number> numbers = new ArrayList<>();
         String[] inputNumber = input.split(SPLIT_COMMA);
 
@@ -24,6 +24,23 @@ public class WinnerNumber {
 
     public static WinnerNumber create(String input) {
         return new WinnerNumber(input);
+    }
+
+    public int getCount(Lotto lotto) {
+        int count = 0;
+
+        for (int i = 0; i < lotto.getSize(); i++) {
+            count = addCount(lotto, count, i);
+        }
+
+        return count;
+    }
+
+    private int addCount(Lotto lotto, int count, int i) {
+        if (winnerLotto.isContains(lotto.IndexByNumber(i))) {
+            count++;
+        }
+        return count;
     }
 
     private boolean validDuplicate(String[] str) {
