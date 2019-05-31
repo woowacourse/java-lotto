@@ -9,9 +9,9 @@ public class InputView {
     private static Scanner reader = new Scanner(System.in);
     private static final String SEPERATOR = ",";
 
-    public static String askMoney() {
+    public static int askMoney() {
         System.out.println("구입 금액을 입력해 주세요!");
-        return reader.nextLine();
+        return Integer.parseInt(reader.nextLine());
     }
 
     public static List<Integer> askWinningLottoNumbers() {

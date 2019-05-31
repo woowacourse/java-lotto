@@ -7,12 +7,15 @@ import java.util.Objects;
 public class Money {
     private final int money;
 
-    public Money(String input) {
-        int currentMoney = Integer.parseInt(input);
-        if (currentMoney < Lotto.PRICE || currentMoney % Lotto.PRICE != 0) {
+    public Money(int money) {
+        this.money = money;
+    }
+
+    public static Money create(int money) {
+        if (money < Lotto.PRICE || money % Lotto.PRICE != 0) {
             throw new IllegalMoneyException();
         }
-        this.money = Integer.parseInt(input);
+        return new Money(money);
     }
 
 
