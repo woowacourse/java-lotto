@@ -22,7 +22,8 @@ public class ConsoleApplication {
 
     private static PurchaseInformation setUpPurchaseInformation() {
         try {
-            return new PurchaseInformation(InputView.inputMoney(), InputView.inputNumberOfManualLottos());
+            Money money = new Money(InputView.inputMoney());
+            return new PurchaseInformation(money, InputView.inputNumberOfManualLottos());
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return setUpPurchaseInformation();
