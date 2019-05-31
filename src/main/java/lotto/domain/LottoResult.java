@@ -40,7 +40,7 @@ public class LottoResult {
         return yield * PERCENT_CONVERSION;
     }
 
-    private int calculateTotalLottos(){
+    private int calculateTotalLottos() {
         return result.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();

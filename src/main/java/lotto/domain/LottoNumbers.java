@@ -48,6 +48,7 @@ public class LottoNumbers {
 
     /**
      * lottoNumber가 포함되어 있는지 판단하는 메서드
+     *
      * @param lottoNumber 포함되어있는지 확인하려는 로또 번호
      * @return 포함되어있으면 1, 없으면 0을 반환
      */

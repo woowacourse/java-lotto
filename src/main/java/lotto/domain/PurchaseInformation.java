@@ -13,7 +13,7 @@ public class PurchaseInformation {
         this.numberOfManualLottos = numberOfManualLottos;
         this.numberOfAutoLottos = maxNumberOfPurchase - numberOfManualLottos;
     }
-    
+
     private void checkInvalidNumberOfManualLottos(final int maxNumberOfPurchase, final int numberOfManualLottos) {
         if (numberOfManualLottos < MIN_PURCHASE_AMOUNT) {
             throw new IllegalArgumentException(MIN_PURCHASE_AMOUNT + "이상의 개수를 입력해주세요.");
