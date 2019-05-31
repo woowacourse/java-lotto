@@ -1,10 +1,12 @@
-package lotto;
+package lotto.controller;
 
+import lotto.domain.lotto.*;
+import lotto.domain.money.IllegalCountException;
+import lotto.domain.money.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoLauncher {
@@ -16,7 +18,7 @@ public class LottoLauncher {
 
         OutputView.printLottos(manualLottos, automaticLottos);
 
-        WinningLotto winningLotto = new WinningLotto(generateWinningLotto(), InputView.askBonusNumber());
+        WinningLotto winningLotto = new WinningLotto(generateWinningLotto(), generateBonusNumber());
 
         Lottos totalLottos = manualLottos.append(automaticLottos);
         LottoResult lottoResult = new LottoResult(money, totalLottos.getPrizes(winningLotto));

@@ -1,6 +1,9 @@
-package lotto;
+package lotto.domain.lotto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class LottoMachine {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -32,7 +35,7 @@ public class LottoMachine {
     }
 
     private static int generateRandomLottoNumberIndex() {
-        return (int)(Math.random() * (MAX_NUM) + MIN_NUM);
+        return (int) (Math.random() * (MAX_NUM) + MIN_NUM);
     }
 
 }

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain.money;
 
 public class IllegalMoneyException extends RuntimeException {
 }

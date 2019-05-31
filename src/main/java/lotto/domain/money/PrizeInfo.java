@@ -1,7 +1,6 @@
-package lotto;
+package lotto.domain.money;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ public class PrizeInfo {
 
     public PrizeInfo(List<Prize> prizes) {
         for (Prize prize : prizes) {
-            prizeInfo.put(prize, prizeInfo.get(prize)+ 1);
+            prizeInfo.put(prize, prizeInfo.get(prize) + 1);
         }
 
     }

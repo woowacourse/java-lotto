@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain.money;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;

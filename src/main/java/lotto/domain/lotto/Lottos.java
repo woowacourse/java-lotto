@@ -1,6 +1,10 @@
-package lotto;
+package lotto.domain.lotto;
 
-import java.util.*;
+import lotto.domain.money.Prize;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Lottos {
     private List<Lotto> lottos;

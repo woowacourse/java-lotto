@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain.lotto;
 
 public class IllegalLottoNumberException extends RuntimeException {
     private static String message = "로또 넘버는 1이상 45이하 입니다!";

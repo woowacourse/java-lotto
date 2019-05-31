@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain.lotto;
+
+import lotto.domain.money.Prize;
 
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class WinningLotto {
 
 
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        if ( numbers.contains(bonusNumber)) {
+        if (numbers.contains(bonusNumber)) {
             throw new IllegalNumberCombinationException();
         }
         lotto = new Lotto(numbers);

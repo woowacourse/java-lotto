@@ -1,8 +1,10 @@
-package lotto;
+package lotto.domain.lotto;
 
-import java.util.HashMap;
+import lotto.domain.money.Money;
+import lotto.domain.money.Prize;
+import lotto.domain.money.PrizeInfo;
+
 import java.util.List;
-import java.util.Map;
 
 public class LottoResult {
     private Money money;

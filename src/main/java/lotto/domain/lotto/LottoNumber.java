@@ -1,6 +1,8 @@
-package lotto;
+package lotto.domain.lotto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
     private static final int MAXIMUM_LOTTO_NUMBER = 46;
@@ -15,8 +17,8 @@ public class LottoNumber {
 
     public static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> returnList = new ArrayList<>();
-        for (int i = 0, n = numbers.size(); i < n ; i++) {
-            returnList.add(lottoNumbers.get(numbers.get(i)-1));
+        for (int i = 0, n = numbers.size(); i < n; i++) {
+            returnList.add(lottoNumbers.get(numbers.get(i) - 1));
         }
         return returnList;
     }
@@ -44,5 +46,5 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
-}
+    }
 }
