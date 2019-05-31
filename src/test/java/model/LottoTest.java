@@ -13,7 +13,6 @@ class LottoTest {
 
     @Test
     void matchingTest() {
-        assertThat(new Lotto("4,8 , 18 ,25,,27    ,42").match(new WinningNumbers()).get()).isEqualTo(LottoRank.SECOND);
+        assertThat(new Lotto("4,8 , 18 ,25,,27    ,42").match()).get().isEqualTo(LottoRank.SECOND);
     }
-
 }

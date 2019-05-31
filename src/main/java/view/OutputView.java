@@ -12,7 +12,7 @@ public class OutputView {
     }
 
     public static void printResult(LottoResult result) {
-        printWinningNumbers(result);
+        printWinningNumbers();
         System.out.println("\n당첨 통계\n---------");
         result.forEach(x -> {
             System.out.println(
@@ -27,7 +27,12 @@ public class OutputView {
         System.out.format("총 수익률은 %d%%입니다.", Math.round(result.getEarningRate()));
     }
 
-    private static void printWinningNumbers(LottoResult result) {
-        System.out.println("\n금주의 당첨 번호 : " + result.getWinningNumbers() + " + 보너스 번호 " + result.getBonusNumber());
+    private static void printWinningNumbers() {
+        System.out.println(
+                "\n금주의 당첨 번호 : "
+                + WinningNumbers.getWinningNumbers()
+                + " + 보너스 번호 "
+                + WinningNumbers.getBonusNumber()
+        );
     }
 }

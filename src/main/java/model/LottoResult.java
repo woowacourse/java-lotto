@@ -4,12 +4,10 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
-    private final WinningNumbers winningNumbers;
     private final Map<LottoRank, Integer> rankings;
     private final double earningRate;
 
     protected LottoResult(List<Lotto> lottos) {
-        this.winningNumbers = new WinningNumbers();
         this.rankings = processResult(lottos);
         this.earningRate = getTotalEarnings().getEarningRate(new Money(Lotto.PRICE * lottos.size()));
     }
@@ -18,7 +16,7 @@ public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
         Map<LottoRank, Integer> result = new LinkedHashMap<LottoRank, Integer>() {{
             Stream.of(LottoRank.values()).forEach(rank -> put(rank, 0));
         }};
-        lottos.forEach(lotto -> lotto.match(winningNumbers).map(x -> result.put(x, result.get(x) + 1)));
+        lottos.forEach(lotto -> lotto.match().map(x -> result.put(x, result.get(x) + 1)));
         return Collections.unmodifiableMap(result);
     }
 
@@ -29,12 +27,6 @@ public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
                 .sum()
         );
     }
-
-    public List<LottoNumber> getWinningNumbers() {
-        return winningNumbers.getWinningNumbers();
-    }
-
-    public LottoNumber getBonusNumber() { return winningNumbers.getBonusNumber(); }
 
     public double getEarningRate() {
         return earningRate;

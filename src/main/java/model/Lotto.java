@@ -38,8 +38,11 @@ public class Lotto {
         );
     }
 
-    public Optional<LottoRank> match(WinningNumbers winningNumbers) {
-        return winningNumbers.match(numbers);
+    public Optional<LottoRank> match() {
+        Set<LottoNumber> test = new HashSet<>();
+        test.addAll(numbers);
+        test.removeAll(WinningNumbers.getWinningNumbers());
+        return LottoRank.get(Lotto.NUMBER_OF_NUMBERS - test.size(), test.contains(WinningNumbers.getBonusNumber()));
     }
 
     @Override

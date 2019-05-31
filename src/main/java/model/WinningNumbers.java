@@ -5,59 +5,63 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WinningNumbers {
     private static final String NANUM_LOTTERY_URL = "https://m.dhlottery.co.kr/gameResult.do?method=byWin";
 
-    private final List<LottoNumber> winningNumbers;
-    private final LottoNumber bonusNumber;
+    private static Future<List<LottoNumber>> winningNumbers = init();
 
-    public WinningNumbers() {
-        List<LottoNumber> numbers = parseWinningNumbers();
-        winningNumbers = Collections.unmodifiableList(numbers.subList(0, Lotto.NUMBER_OF_NUMBERS));
-        bonusNumber = numbers.get(Lotto.NUMBER_OF_NUMBERS);
+    private static Future<List<LottoNumber>> init() {
+        return Executors.newSingleThreadExecutor().submit(() -> fetchAndParseWinningNumbers());
     }
 
-    private List<LottoNumber> parseWinningNumbers() {
+    private static List<LottoNumber> fetchAndParseWinningNumbers() {
         try {
-            List<LottoNumber> result = new ArrayList<>();
+            List<LottoNumber> numbers = new ArrayList<>();
             Matcher matcher = Pattern.compile(">[0-9]+<").matcher(httpWinningNumbersRequest());
             while (matcher.find()) {
                 String token = matcher.group();
-                result.add(LottoNumber.of(token.substring(1, token.indexOf("<"))));
+                numbers.add(LottoNumber.of(token.substring(1, token.indexOf("<"))));
             }
-            return result;
+            return numbers;
         } catch (Exception e) {
-            return parseWinningNumbers();
+            return fetchAndParseWinningNumbers();
         }
     }
 
-    private String httpWinningNumbersRequest() throws Exception {
-        StringBuilder result = new StringBuilder();
+    private static String httpWinningNumbersRequest() throws Exception {
+        StringBuilder html = new StringBuilder();
         HttpURLConnection con = (HttpURLConnection) new URL(NANUM_LOTTERY_URL).openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         for (String inputLine = ""; inputLine != null; inputLine = in.readLine()) {
-            result.append(inputLine);
+            html.append(inputLine);
         }
         in.close();
         con.disconnect();
-        return result.toString();
+        return html.toString();
     }
 
-    public Optional<LottoRank> match(List<LottoNumber> numbers) {
-        Set<LottoNumber> test = new HashSet<>();
-        test.addAll(numbers);
-        test.removeAll(winningNumbers);
-        return LottoRank.get(Lotto.NUMBER_OF_NUMBERS - test.size(), test.contains(bonusNumber));
+    public static List<LottoNumber> getWinningNumbers() {
+        try {
+            return winningNumbers.get().subList(0, Lotto.NUMBER_OF_NUMBERS);
+        } catch (Exception e) {
+            return getWinningNumbers();
+        }
     }
 
-    public List<LottoNumber> getWinningNumbers() {
-        return winningNumbers;
+    public static LottoNumber getBonusNumber() {
+        try {
+            return winningNumbers.get().get(Lotto.NUMBER_OF_NUMBERS);
+        } catch (Exception e) {
+            return getBonusNumber();
+        }
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public static void refresh() {
+        winningNumbers = init();
     }
 }
