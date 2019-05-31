@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static lotto.domain.Rank.*;
@@ -22,5 +23,11 @@ class WinningStatisticsTest {
         WinningStatistics winStat = new WinningStatistics(ranks);
         assertThat(winStat.getStatistics().get(FIRST)).isEqualTo(1);
         assertThat(winStat.getStatistics().get(SECOND)).isEqualTo(0);
+    }
+
+    @Test
+    void getInterestRateTest() {
+        WinningStatistics winStat = new WinningStatistics(Arrays.asList(Rank.FIFTH));
+        assertThat(winStat.getInterestRate(new Money(1000))).isEqualTo((long) 500);
     }
 }

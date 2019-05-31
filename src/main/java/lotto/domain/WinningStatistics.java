@@ -27,6 +27,6 @@ public class WinningStatistics {
             int num = entry.getValue();
             money = money.add(new Money(rank.getWinningMoney() * num));
         }
-        return ((long)money.getValue() * 100) / (inputMoney.getValue());
+        return ((long) money.getValue() * 100) / (inputMoney.getValue());
     }
 }

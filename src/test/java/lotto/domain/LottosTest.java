@@ -11,10 +11,10 @@ public class LottosTest {
     @Test
     void matchTest() {
         Lottos lottos = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1,2,3,4,5,6)),
-                new Lotto(Arrays.asList(1,2,3,4,5,7))
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7))
         ));
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6), 7);
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         List<Rank> ranks = lottos.match(winningLotto);
 

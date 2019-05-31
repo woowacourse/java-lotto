@@ -36,6 +36,4 @@
 
 - ~~create LottoFactory class~~
 - ~~use StringUtils to verify lotto numbers~~
-- **add more tests**
-- divide packages
-- use interface to separate declaration & implementation
+- ~~add more tests~~
