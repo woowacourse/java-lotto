@@ -8,8 +8,8 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     LottoNumbers(final List<LottoNumber> lottoNumbers) {
-        checkDuplicate(lottoNumbers);
         checkNumberOfLottoNumbers(lottoNumbers);
+        checkDuplicate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 

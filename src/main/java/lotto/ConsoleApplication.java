@@ -10,8 +10,7 @@ import java.util.List;
 
 public class ConsoleApplication {
     public static void main(String[] args) {
-        PurchaseInformation purchaseInformation =
-                new PurchaseInformation(InputView.inputMoney(), InputView.inputNumberOfManualLottos());
+        PurchaseInformation purchaseInformation = setUpPurchaseInformation();
 
         Lottos lottos = purchaseLottos(purchaseInformation);
 
@@ -19,6 +18,15 @@ public class ConsoleApplication {
 
         LottoResult lottoResult = lottoGame.play(lottos);
         OutputView.outputResult(lottoResult);
+    }
+
+    private static PurchaseInformation setUpPurchaseInformation() {
+        try {
+            return new PurchaseInformation(InputView.inputMoney(), InputView.inputNumberOfManualLottos());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return setUpPurchaseInformation();
+        }
     }
 
     private static Lottos purchaseLottos(PurchaseInformation purchaseInformation) {
@@ -44,19 +52,27 @@ public class ConsoleApplication {
 
     private static LottoGame setUpLottoGame() {
         OutputView.requestWinningNumbersMessage();
-        LottoNumbers winningNumbers = makeLottoNumbers();
-        LottoNumber bonusNumber = LottoNumbersGenerator.getLottoNumber(InputView.inputBonusBall());
 
-        WinningInformation winningInformation = new WinningInformation(winningNumbers, bonusNumber);
-        return new LottoGame(winningInformation);
+        try {
+            LottoNumbers winningNumbers = makeLottoNumbers();
+            LottoNumber bonusNumber = LottoNumbersGenerator.getLottoNumber(InputView.inputBonusBall());
+            WinningInformation winningInformation = new WinningInformation(winningNumbers, bonusNumber);
+            return new LottoGame(winningInformation);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return setUpLottoGame();
+        }
     }
 
     private static LottoNumbers makeLottoNumbers() {
         try {
             List<Integer> inputNumbers = NumbersSplitter.splitNumbers(InputView.inputLottoNumbers());
             return LottoNumbersGenerator.getLottoNumbers(inputNumbers);
+        } catch (NumberFormatException e) {
+            System.err.println("올바른 수를 입력해 주세요.");
+            return makeLottoNumbers();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
             return makeLottoNumbers();
         }
     }
