@@ -34,7 +34,7 @@ class LottoTest {
 	}
 
 	@Test
-	void duplicateLottoNumber() {
+	void checkDuplicatedLottoNumber() {
 		numbers = Arrays.asList(LottoNumber.getLottoNumber(1), LottoNumber.getLottoNumber(2), LottoNumber.getLottoNumber(3),
 				LottoNumber.getLottoNumber(4), LottoNumber.getLottoNumber(6), LottoNumber.getLottoNumber(6));
 		assertThrows(InvalidNumberException.class, () -> new Lotto(numbers));

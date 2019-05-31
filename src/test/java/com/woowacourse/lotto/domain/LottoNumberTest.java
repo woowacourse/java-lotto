@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoNumberTest {
 	@Test
 	void invalidIndex() {
-		assertThrows(IllegalArgumentException.class, () -> LottoNumber.getLottoNumber(-1));
+		assertThrows(IllegalArgumentException.class, () -> LottoNumber.getLottoNumber(0));
 		assertThrows(IllegalArgumentException.class, () -> LottoNumber.getLottoNumber(46));
 	}
 

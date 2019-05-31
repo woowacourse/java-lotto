@@ -28,7 +28,7 @@ public class WinningLottoTest {
 	}
 
 	@Test
-	void duplicateBonusBall() {
+	void validateDuplicatedBonusBall() {
 		assertThrows(IllegalArgumentException.class, () -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "5"), new BonusBall(5)));
 	}
 }
