@@ -23,12 +23,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber get(int number) {
-        for (LottoNumber lottoNumber : numbers) {
-            if (lottoNumber.number == number) {
-                return lottoNumber;
-            }
-        }
-        throw new IllegalArgumentException("로또 번호는 1부터 45사이입니다.");
+        return numbers.stream()
+                .filter(lottoNumber -> lottoNumber.number == number)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("로또 번호는 1부터 45사이입니다."));
     }
 
     static Set<LottoNumber> getShuffledNumbers() {
