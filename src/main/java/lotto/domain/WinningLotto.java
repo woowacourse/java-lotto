@@ -10,8 +10,9 @@ import java.util.stream.Collectors;
 public class WinningLotto {
     public static WinningLotto WINNING_LOTTO = null;
 
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+
     private WinningLotto(String winningLotto) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
         List<String> inputNumbers = Arrays.asList(winningLotto.split(","));
 
         for (String inputNumber : inputNumbers) {
@@ -27,6 +28,10 @@ public class WinningLotto {
         }
 
         return WINNING_LOTTO;
+    }
+
+    public boolean hasEqualNumber(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     private static void validateNumeric(String number) {

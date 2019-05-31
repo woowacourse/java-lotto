@@ -32,9 +32,7 @@
             * purchaseAutoNumbers() -> return List<LottoNumber>
             * **[예외]** 중복되는 번호가 있는지 확인
 * LottoNumbersFactory
-
 * WinningLotto: 싱글톤 클래스
-    * 받은 번호와 일치하는 당첨 번호가 있는지 boolean 리턴하기 
 * 당첨 시 집계하기
 * 수익률 계산하기
 * 예외 클래스 생성하기
@@ -75,3 +73,4 @@
         * "1,2,3,4,5" -> error!
         * **[예외]** 입력된 값에 자연수 외에 다른 값이 있는지 확인
         * **[예외]** 중복된 숫자가 있는지 확인
+    * 받은 번호와 일치하는 당첨 번호가 있는지 boolean 리턴하기 
