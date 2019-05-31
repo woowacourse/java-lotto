@@ -1,5 +1,7 @@
 package lotto.domain.money;
 
+import lotto.domain.lotto.Lotto;
+
 import java.util.Objects;
 
 public class Money {
@@ -7,7 +9,7 @@ public class Money {
 
     public Money(String input) {
         int currentMoney = Integer.parseInt(input);
-        if (currentMoney < 1000 || currentMoney % 1000 != 0) {
+        if (currentMoney < Lotto.PRICE || currentMoney % Lotto.PRICE != 0) {
             throw new IllegalMoneyException();
         }
         this.money = Integer.parseInt(input);
@@ -19,7 +21,7 @@ public class Money {
     }
 
     public int getLottoCount() {
-        return this.money / 1000;
+        return this.money / Lotto.PRICE;
     }
 
     @Override

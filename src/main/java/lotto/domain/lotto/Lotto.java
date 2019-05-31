@@ -3,7 +3,8 @@ package lotto.domain.lotto;
 import java.util.List;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_LENGTH = 6;
+    public static final int NUMBER_LENGTH = 6;
+    public static final int PRICE = 1000;
     List<LottoNumber> numbers;
 
 
@@ -20,7 +21,7 @@ public class Lotto {
     }
 
     private void checkLottoLength(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_LENGTH) {
+        if (numbers.size() != NUMBER_LENGTH) {
             throw new IllegalNumberCombinationException();
         }
     }

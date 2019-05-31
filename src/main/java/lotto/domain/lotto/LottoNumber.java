@@ -3,13 +3,13 @@ package lotto.domain.lotto;
 import java.util.*;
 
 public class LottoNumber {
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
+    public static final int MAXIMUM_NUMBER = 45;
+    public static final int MINIMUM_NUMBER = 1;
     private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private int number;
 
     static {
-        for (int i = 1; i <= MAXIMUM_LOTTO_NUMBER; i++) {
+        for (int i = 1; i <= MAXIMUM_NUMBER; i++) {
             lottoNumbers.put(i, new LottoNumber(i));
         }
     }
@@ -23,7 +23,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(int number) throws IllegalLottoNumberException {
-        if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
+        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
             throw new IllegalLottoNumberException();
         }
         this.number = number;
