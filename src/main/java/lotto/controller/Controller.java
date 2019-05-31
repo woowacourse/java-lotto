@@ -22,7 +22,7 @@ public class Controller {
 
         Statistics statistics = StatisticsFactory.createStatistics();
         statistics.calculateResult(lottoes,winningLotto);
-        OutputView.printStatistics(statistics);
+        OutputView.printStatistics(statistics, money);
     }
 
     private static WinningLotto createWinningLotto(Lotto winnigLottoNumbers, String bonusBall) {
