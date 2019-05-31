@@ -51,7 +51,7 @@ public enum Rank {
 
     public String getResultMessage() {
         if(this == SECOND) {
-            return "5개 일치, 보너스 볼 일치(30000000원) -";
+            return "5개 일치, 보너스 볼 일치(30000000원) - ";
         }
         return this.countOfMatch + "개 일치" + "(" + this.winningMoney + "원) - ";
     }

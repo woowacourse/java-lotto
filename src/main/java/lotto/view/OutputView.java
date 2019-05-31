@@ -1,10 +1,9 @@
 package lotto.view;
 
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.Lotto;
 import lotto.domain.Rank;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static lotto.domain.Rank.MISS;
@@ -12,20 +11,33 @@ import static lotto.domain.Rank.SECOND;
 
 public class OutputView {
 
-    public static void printLottos(Lottos lottos) {
-        System.out.println(lottos.getLottosSize() + "개를 구매했습니다.");
-        for (int i = 0; i < lottos.getLottosSize(); i++) {
-            System.out.println(lottos.getLotto(i));
-        }
+    public static void printLottos(List<Lotto> lottos , int selfSize) {
+        System.out.println("수동으로 " + selfSize + "장, 자동으로 " +(lottos.size() - selfSize) + "개를 구매했습니다.");
+        lottos.stream().forEach(lotto -> System.out.println(lotto));
     }
 
     public static void printStatistic(Map<Rank,Integer> results) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        results.keySet().stream().filter( rank -> rank != SECOND).forEach(rank -> System.out.println(rank.getResultMessage() + results.get(rank) + "개"));
+        for(Rank rank : results.keySet()) {
+            printResult(rank , results);
+        }
     }
 
-    public static void printYeild(double yield) {
+    private static void printResult(Rank rank, Map<Rank,Integer> results) {
+        if(rank == MISS)return;
+
+        if(rank == SECOND){
+            System.out.printf("%d개 일치, 보너스 볼 일치(%l원) - %d개",rank.getCountOfMatch(),rank.getWinningMoney(),results.get(rank));
+            return;
+        }
+        System.out.printf("%d개 일치(%l원) - %d개",rank.getCountOfMatch(),rank.getWinningMoney(),results.get(rank));
+
+    }
+
+
+    public static void printYield(double yield) {
         System.out.printf("총 수익룰은 %.1f %%입니다.",yield);
     }
+
 }

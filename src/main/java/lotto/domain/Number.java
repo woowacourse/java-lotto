@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Number {
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
+    static final int MIN_LOTTO_NUMBER = 1;
+    static final int MAX_LOTTO_NUMBER = 45;
     private static Map<Integer,Number> numbers = new HashMap<>();
     private int number;
 

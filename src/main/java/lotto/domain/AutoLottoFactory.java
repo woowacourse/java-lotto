@@ -13,7 +13,7 @@ import static lotto.domain.Number.MIN_LOTTO_NUMBER;
 public class AutoLottoFactory {
     private static List<Integer> lottoNumbers = generateLottoNumber();
 
-    public static List<Lotto> generateLottos(int tryNo) {
+    public static List<Lotto> generateAutoLottos(int tryNo) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < tryNo; i++) {
             lottos.add(generateLotto());
@@ -21,7 +21,7 @@ public class AutoLottoFactory {
         return lottos;
     }
 
-    public static Lotto generateLotto() {
+    private static Lotto generateLotto() {
         Collections.shuffle(lottoNumbers);
         return new Lotto(lottoNumbers.subList(0, LOTTO_NUMBER_SIZE));
     }

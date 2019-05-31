@@ -7,7 +7,6 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WinningLottoTest {
-
     @Test
     void 보너스볼_중복_예외() {
         assertThrows(IllegalArgumentException.class,() ->{

@@ -6,26 +6,26 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    public static final int LOTTO_NUMBER_SIZE = 6;
+    static final int LOTTO_NUMBER_SIZE = 6;
     private List<Number> lotto = new ArrayList<>();
 
     public Lotto(List<Integer> lotto) {
         checkLottoSize(lotto);
         checkDuplicate(lotto);
-        for(Integer number : lotto) {
+        for (Integer number : lotto) {
             this.lotto.add(Number.of(number.intValue()));
         }
     }
 
     private void checkLottoSize(List<Integer> lotto) {
-        if(lotto.size() != LOTTO_NUMBER_SIZE){
+        if (lotto.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("6개의 번호를 입력해주세요.");
         }
     }
 
     private void checkDuplicate(List<Integer> lotto) {
         HashSet<Integer> set = new HashSet(lotto);
-        if(lotto.size() != set.size()) {
+        if (lotto.size() != set.size()) {
             throw new IllegalArgumentException("중복이 아닌 번호들로만 입력하세요.");
         }
     }
@@ -50,9 +50,10 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return ""+lotto;
+        return "" + lotto;
     }
-//인자는 사용자 로또
+
+    //인자는 사용자 로또
     public int matchNumber(Lotto lotto) {
         List<Number> matchNumbers = new ArrayList<>(this.lotto);
         matchNumbers.retainAll(lotto.lotto);

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Number;
+import lotto.domain.Price;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +20,11 @@ public class InputView {
     }
 
 
-    public static int inputSelfCount() {
+    public static int inputSelfCount(Price price) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return Integer.parseInt(sc.nextLine());
     }
+
 
     public static List<String> inputSelfNumbers(int selfCount) {
         List<String> selfLottos = new ArrayList<>();

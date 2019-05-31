@@ -3,10 +3,10 @@ package lotto.domain;
 import lotto.PriceValidException;
 
 public class Price {
-    private int price;
-    private int lottoPerPrice = 1000;
+    private final int price;
+    private final int lottoPerPrice = 1000;
 
-    public Price(int price) {
+    public Price(final int price) {
         if (price < lottoPerPrice) {
             throw new PriceValidException("금액이 너무 적습니다.");
         }

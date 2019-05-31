@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class PriceTest {
 
     @Test
-    void 금액예외() {
+    void 금액이_천원_미만() {
         assertThrows(PriceValidException.class,() -> {
-            new Price(100);
+            new Price(999);
         });
     }
 
