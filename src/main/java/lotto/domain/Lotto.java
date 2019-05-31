@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoValidException;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -7,33 +9,43 @@ import java.util.Objects;
 
 public class Lotto {
     static final int LOTTO_NUMBER_SIZE = 6;
-    private List<Number> lotto = new ArrayList<>();
+    private List<LottoNumber> lotto = new ArrayList<>();
 
     public Lotto(List<Integer> lotto) {
         checkLottoSize(lotto);
         checkDuplicate(lotto);
         for (Integer number : lotto) {
-            this.lotto.add(Number.of(number.intValue()));
+            this.lotto.add(LottoNumber.of(number.intValue()));
         }
     }
 
     private void checkLottoSize(List<Integer> lotto) {
         if (lotto.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("6개의 번호를 입력해주세요.");
+            throw new LottoValidException("6개의 번호를 입력해주세요.");
         }
     }
 
     private void checkDuplicate(List<Integer> lotto) {
         HashSet<Integer> set = new HashSet(lotto);
         if (lotto.size() != set.size()) {
-            throw new IllegalArgumentException("중복이 아닌 번호들로만 입력하세요.");
+            throw new LottoValidException("중복이 아닌 번호들로만 입력하세요.");
         }
     }
 
-    boolean isContain(Number number) {
-        return lotto.contains(number);
+    boolean isContain(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
 
+    int matchNumber(Lotto lotto) {
+        List<LottoNumber> matchLottoNumbers = new ArrayList<>(this.lotto);
+        matchLottoNumbers.retainAll(lotto.lotto);
+        return matchLottoNumbers.size();
+    }
+
+    @Override
+    public String toString() {
+        return "" + lotto;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -48,15 +60,4 @@ public class Lotto {
         return Objects.hash(lotto);
     }
 
-    @Override
-    public String toString() {
-        return "" + lotto;
-    }
-
-    //인자는 사용자 로또
-    public int matchNumber(Lotto lotto) {
-        List<Number> matchNumbers = new ArrayList<>(this.lotto);
-        matchNumbers.retainAll(lotto.lotto);
-        return matchNumbers.size();
-    }
 }

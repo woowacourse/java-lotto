@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.PriceValidException;
+import lotto.exception.PriceValidException;
 
 public class Price {
     private final int price;

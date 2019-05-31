@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LottoResultTest {
     @Test
     void 총이익률_확인() {
-        List<Rank> ranks = Arrays.asList(FOURTH,FOURTH);
+        List<Rank> ranks = Arrays.asList(FOURTH, FOURTH);
         LottoResult lottoResult = new LottoResult(ranks);
-        assertEquals(lottoResult.findYield(10000),10);
+        assertEquals(lottoResult.findYield(10000), 10);
     }
 }

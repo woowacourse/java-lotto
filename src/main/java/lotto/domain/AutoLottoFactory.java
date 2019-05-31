@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static lotto.domain.Lotto.LOTTO_NUMBER_SIZE;
-import static lotto.domain.Number.MAX_LOTTO_NUMBER;
-import static lotto.domain.Number.MIN_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
 
 public class AutoLottoFactory {
     private static List<Integer> lottoNumbers = generateLottoNumber();
@@ -26,7 +26,7 @@ public class AutoLottoFactory {
         return new Lotto(lottoNumbers.subList(0, LOTTO_NUMBER_SIZE));
     }
 
-    static List<Integer> generateLottoNumber() {
+    private static List<Integer> generateLottoNumber() {
         IntStream stream = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
         return stream.boxed().collect(Collectors.toList());
     }

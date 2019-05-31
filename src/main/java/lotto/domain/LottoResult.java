@@ -1,11 +1,9 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 public class LottoResult {
+    private static final int PERCENT = 100;
     private Map<Rank, Integer> results = new TreeMap<>();
 
     public LottoResult(List<Rank> ranks) {
@@ -15,6 +13,10 @@ public class LottoResult {
         generateResult(ranks);
     }
 
+    public Map<Rank, Integer> getResults() {
+        return Collections.unmodifiableMap(this.results);
+    }
+
     private void generateResult(List<Rank> ranks) {
         for (Rank rank : ranks) {
             results.put(rank, results.get(rank) + 1);
@@ -22,7 +24,7 @@ public class LottoResult {
     }
 
     public double findYield(int price) {
-        return findWinningMoney() / price * 100;
+        return findWinningMoney() / price * PERCENT;
     }
 
     private double findWinningMoney() {
@@ -32,10 +34,6 @@ public class LottoResult {
             winningMoney += (rank.getWinningMoney()) * results.get(rank);
         }
         return winningMoney;
-    }
-
-    public Map<Rank, Integer> getResults() {
-        return new TreeMap<>(results);
     }
 
 }

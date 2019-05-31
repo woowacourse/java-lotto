@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.Number;
+import lotto.domain.LottoNumber;
 import lotto.utils.Converter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -11,9 +11,10 @@ import java.util.List;
 
 public class ConsoleUILottoApplication {
     private static final int MIN_SELF_LOTTO_COUNT = 0;
+
     public static void main(String[] args) {
         Price price = new Price(InputView.inputPrice());
-        int selfCount = getSelfCount(price,InputView.inputSelfCount(price));
+        int selfCount = getSelfCount(price, InputView.inputSelfCount());
         Lottos lottos = getLottos(price, selfCount);
         OutputView.printLottos(lottos.getLottos(), selfCount);
         WinningLotto winningLotto = getWinningLotto();
@@ -36,16 +37,16 @@ public class ConsoleUILottoApplication {
 
     private static WinningLotto getWinningLotto() {
         Lotto lotto = new Lotto(Converter.convertNumbers(InputView.inputWinningNumber()));
-        return new WinningLotto(lotto, Number.of(InputView.inputBonusBall()));
+        return new WinningLotto(lotto, LottoNumber.of(InputView.inputBonusBall()));
     }
 
     private static Lottos getLottos(Price price, int selfSize) {
         List<Lotto> lottos = AutoLottoFactory.generateAutoLottos(price.getCountOfLotto() - selfSize);
-        lottos.addAll(getSelfLotto(selfSize));
+        lottos.addAll(getSelfLottos(selfSize));
         return new Lottos(lottos);
     }
 
-    private static List<Lotto> getSelfLotto(int selfSize) {
+    private static List<Lotto> getSelfLottos(int selfSize) {
         List<Lotto> selfLottos = new ArrayList<>();
         List<String> self = InputView.inputSelfNumbers(selfSize);
         for (String input : self) {

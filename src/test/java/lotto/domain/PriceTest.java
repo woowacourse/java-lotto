@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.PriceValidException;
+import lotto.exception.PriceValidException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,7 +10,7 @@ public class PriceTest {
 
     @Test
     void 금액이_천원_미만() {
-        assertThrows(PriceValidException.class,() -> {
+        assertThrows(PriceValidException.class, () -> {
             new Price(999);
         });
     }
