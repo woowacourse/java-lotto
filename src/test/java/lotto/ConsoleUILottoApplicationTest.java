@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ConsoleUILottoApplicationTest {
 
     @Test
-    void 수동_횟수_예외() {
+    void 수동_횟수_음수() {
         assertThrows(IllegalArgumentException.class, () -> {
             ConsoleUILottoApplication.getSelfCount(new Price(10000), -1);
         });

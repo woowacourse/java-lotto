@@ -16,6 +16,13 @@ public class PriceTest {
     }
 
     @Test
+    void 금액이_음수() {
+        assertThrows(PriceValidException.class, () -> {
+            new Price(-1);
+        });
+    }
+
+    @Test
     void 로또구입개수() {
         Price price = new Price(13000);
         assertThat(price.getCountOfLotto()).isEqualTo(13);

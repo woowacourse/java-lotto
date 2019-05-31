@@ -41,4 +41,16 @@ public class LottoResult {
         return winningMoney;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(results, that.results);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(results);
+    }
 }

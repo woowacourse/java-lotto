@@ -10,7 +10,7 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusBall;
 
-    private WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
+    WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
         checkWinningLotto(winningLotto, bonusBall);
         this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
@@ -22,9 +22,9 @@ public class WinningLotto {
         }
     }
 
-    public static WinningLotto generateWinningLotto() {
-        Lotto lotto = new Lotto(Converter.convertNumbers(InputView.inputWinningNumber()));
-        return new WinningLotto(lotto, LottoNumber.of(InputView.inputBonusBall()));
+    public static WinningLotto generateWinningLotto(String winningInput, int bonusInput) {
+        Lotto lotto = new Lotto(Converter.convertNumbers(winningInput));
+        return new WinningLotto(lotto, LottoNumber.of(bonusInput));
     }
 
     Rank matchLotto(Lotto lotto) {

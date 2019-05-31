@@ -17,6 +17,13 @@ public class LottoTest {
     }
 
     @Test
+    void 번호가_많을때_확인() {
+        assertThrows(LottoValidException.class, () -> {
+            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        });
+    }
+
+    @Test
     void 중복확인() {
         assertThrows(LottoValidException.class, () -> {
             new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5));

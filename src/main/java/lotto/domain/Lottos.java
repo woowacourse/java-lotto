@@ -11,8 +11,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-
-
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(this.lottos);
     }

@@ -11,9 +11,9 @@ public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         Price price = new Price(InputView.inputPrice());
         int selfCount = getSelfCount(price, InputView.inputSelfCount());
-        Lottos lottos = LottosFactory.generateLottos(price,InputView.inputSelfNumbers(selfCount));
+        Lottos lottos = LottosFactory.generateLottos(price, InputView.inputSelfNumbers(selfCount));
         OutputView.printLottos(lottos.getLottos(), selfCount);
-        WinningLotto winningLotto = WinningLotto.generateWinningLotto();
+        WinningLotto winningLotto = WinningLotto.generateWinningLotto(InputView.inputWinningNumber(), InputView.inputBonusBall());
         LottoResult lottoResult = LottoResult.generateLottoResult(lottos, winningLotto);
         OutputView.printStatistic(lottoResult.getResults());
         OutputView.printYield(lottoResult.findYield(price.getPrice()));
