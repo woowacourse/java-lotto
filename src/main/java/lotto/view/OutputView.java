@@ -4,8 +4,11 @@ import com.google.common.base.Joiner;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
 
 import java.util.List;
+
+import static lotto.domain.Rank.SECOND;
 
 public class OutputView {
     private static final String START_BRACE = "[";
@@ -46,8 +49,25 @@ public class OutputView {
     public static void outputResult(LottoResult lottoResult) {
         StringBuilder builder = new StringBuilder();
         builder.append(STATISTICS_MESSAGE);
-        builder.append(lottoResult.getResultMessage());
+        for (Rank rank : Rank.winningValues()) {
+            builder.append(makeRankMessage(rank));
+            builder.append(lottoResult.getRankCount(rank));
+            builder.append("개\n");
+        }
         builder.append(String.format(YIELD_FORMAT, lottoResult.calculateYield()));
         System.out.println(builder);
+    }
+
+    private static StringBuilder makeRankMessage(Rank rank) {
+        StringBuilder message = new StringBuilder();
+        message.append(rank.getCountOfMatch());
+        message.append("개 일치");
+        if (rank == SECOND) {
+            message.append(", 보너스 볼 일치");
+        }
+        message.append("(");
+        message.append(rank.getWinningMoney());
+        message.append("원)- ");
+        return message;
     }
 }

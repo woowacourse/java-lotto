@@ -25,6 +25,10 @@ public class LottoResult {
         }
     }
 
+    public int getRankCount(Rank rank) {
+        return result.get(rank);
+    }
+
     void add(Rank rank) {
         totalLottos++;
         result.put(rank, result.get(rank) + 1);
@@ -36,16 +40,6 @@ public class LottoResult {
             yield += rank.getWinningMoney() * ((result.get(rank)) / (double) totalLottos) / LOTTO_PRICE;
         }
         return yield * PERCENT_CONVERSION;
-    }
-
-    public StringBuilder getResultMessage() {
-        StringBuilder message = new StringBuilder();
-        for (Rank rank : Rank.winningValues()) {
-            message.append(rank.getMessage())
-                    .append(result.get(rank))
-                    .append("개\n");
-        }
-        return message;
     }
 
     @Override

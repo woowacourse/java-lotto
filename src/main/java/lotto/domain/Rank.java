@@ -22,21 +22,12 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    int getWinningMoney() {
-        return winningMoney;
+    public int getCountOfMatch() {
+        return this.countOfMatch;
     }
 
-    public StringBuilder getMessage() {
-        StringBuilder message = new StringBuilder();
-        message.append(countOfMatch);
-        message.append("개 일치");
-        if (this == SECOND) {
-            message.append(", 보너스 볼 일치");
-        }
-        message.append("(");
-        message.append(winningMoney);
-        message.append("원)- ");
-        return message;
+    public int getWinningMoney() {
+        return this.winningMoney;
     }
 
     static Rank valueOf(int countOfMatch, boolean matchBonus) {
@@ -61,7 +52,7 @@ public enum Rank {
         return this.countOfMatch == countOfMatch;
     }
 
-    static List<Rank> winningValues() {
+    public static List<Rank> winningValues() {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.MISS)
                 .collect(Collectors.toList());
