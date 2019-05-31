@@ -13,13 +13,9 @@ public class LottoTicketFactory {
 
         for (String inputNumber : inputNumbers) {
             validateNumeric(inputNumber);
-
-            int number = Integer.parseInt(inputNumber);
-
-            lottoNumbers.add(LottoNumber.getNumber(number));
-
-            validateDistinctNumber(lottoNumbers);
+            lottoNumbers.add(LottoNumber.getNumber(Integer.parseInt(inputNumber)));
         }
+        validateDistinctNumber(lottoNumbers);
 
         return new LottoTicket(lottoNumbers);
     }
