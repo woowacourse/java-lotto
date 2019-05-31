@@ -68,7 +68,6 @@ public class LottoLauncher {
         } catch (Exception e) {
             return generateManualLottos(money);
         }
-
     }
 
 }

@@ -1,30 +1,29 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber {
-    private static final int MAXIMUM_LOTTO_NUMBER = 46;
-    private static List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    private static final int MINIMUM_LOTTO_NUMBER = 1;
+    private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private int number;
 
     static {
-        for (int i = 1; i < MAXIMUM_LOTTO_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+        for (int i = 1; i <= MAXIMUM_LOTTO_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
         }
     }
 
     public static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> returnList = new ArrayList<>();
         for (int i = 0, n = numbers.size(); i < n; i++) {
-            returnList.add(lottoNumbers.get(numbers.get(i) - 1));
+            returnList.add(lottoNumbers.get(numbers.get(i)));
         }
         return returnList;
     }
 
     public LottoNumber(int number) throws IllegalLottoNumberException {
-        if (number < 1 || number > 45) {
+        if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalLottoNumberException();
         }
         this.number = number;

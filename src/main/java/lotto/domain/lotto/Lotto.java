@@ -3,8 +3,7 @@ package lotto.domain.lotto;
 import java.util.List;
 
 public class Lotto {
-    private static final String SEPERATOR = ",";
-    private static final int LOTTO_NUMBER_LENGHT = 6;
+    private static final int LOTTO_NUMBER_LENGTH = 6;
     List<LottoNumber> numbers;
 
 
@@ -21,7 +20,7 @@ public class Lotto {
     }
 
     private void checkLottoLength(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_LENGHT) {
+        if (numbers.size() != LOTTO_NUMBER_LENGTH) {
             throw new IllegalNumberCombinationException();
         }
     }
