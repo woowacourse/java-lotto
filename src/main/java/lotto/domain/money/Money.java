@@ -20,7 +20,7 @@ public class Money {
 
 
     public double calculatePercentage(double sum) {
-        return sum / money;
+        return sum / money * 100;
     }
 
     public int getLottoCount() {

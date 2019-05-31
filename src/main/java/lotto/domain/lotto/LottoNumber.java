@@ -14,7 +14,7 @@ public class LottoNumber {
         }
     }
 
-    public static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
+    public static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> returnList = new ArrayList<>();
         for (int i = 0, n = numbers.size(); i < n; i++) {
             returnList.add(lottoNumbers.get(numbers.get(i)));

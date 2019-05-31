@@ -20,8 +20,8 @@ public class LottoResult {
         return new LottoResult(money, prizes);
     }
 
-    public double getPercentage() {
-        int sum = 0;
+    public double getProfitRate() {
+        double sum = 0;
         for (Prize prize : Prize.values()) {
             sum += prize.getPrizeMoney() * prizeInfo.get(prize);
         }

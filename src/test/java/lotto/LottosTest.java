@@ -26,11 +26,11 @@ public class LottosTest {
 
         Money money = Money.create(3000);
         LottoResult lottoResult = LottoResult.create(money, lottosCollection.getPrizes(winningLotto));
-        assertThat(lottoResult.getPercentage()).isEqualTo(0);
+        assertThat(lottoResult.getProfitRate()).isEqualTo(0);
     }
 
     @Test
-    void 수익률_25프로() {
+    void 수익률_125프로() {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
@@ -42,7 +42,7 @@ public class LottosTest {
         Money money = Money.create(4000);
 
         LottoResult lottoResult = LottoResult.create(money, lottosCollection.getPrizes(winningLotto));
-        assertThat(lottoResult.getPercentage()).isEqualTo(1.25, offset(0.009));
+        assertThat(lottoResult.getProfitRate()).isEqualTo(125, offset(0.009));
     }
 
 

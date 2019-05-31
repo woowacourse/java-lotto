@@ -11,7 +11,7 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         checkDuplication(numbers);
         checkLottoLength(numbers);
-        this.numbers = LottoNumber.convertNumbersToLottoNumbers(numbers);
+        this.numbers = LottoNumber.convertToLottoNumbers(numbers);
     }
 
     private void checkDuplication(List<Integer> numbers) {

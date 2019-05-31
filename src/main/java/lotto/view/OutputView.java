@@ -28,8 +28,8 @@ public class OutputView {
         System.out.println("당첨통계");
         System.out.println("---------");
         for (Prize prize : Prize.values()) {
-            System.out.println(prize.getMatchCount() + "개 일치" + "(" + prize.getPrizeMoney() + ")" + " - " + lottoResult.getCount(prize) + "개");
+            System.out.println(prize.getMatchCount() + "개 일치" + "(" + prize.getPrizeMoney() + "원)" + " - " + lottoResult.getCount(prize) + "개");
         }
-        System.out.println("총 수익률은 " + lottoResult.getPercentage() + "입니다");
+        System.out.printf("총 수익률은 %.2f%%입니다", lottoResult.getProfitRate());
     }
 }
