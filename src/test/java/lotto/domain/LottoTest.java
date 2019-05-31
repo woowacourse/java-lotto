@@ -25,7 +25,7 @@ public class LottoTest {
                 new LottoNumber(5),
                 new LottoNumber(6)));
 
-        assertThat(lotto.match(winningLottoNumbers)).isEqualTo(6);
+        assertThat(lotto.hasLottoNumber(winningLottoNumbers)).isEqualTo(6);
     }
 
     @Test
@@ -46,6 +46,6 @@ public class LottoTest {
                 new LottoNumber(15),
                 new LottoNumber(16)));
 
-        assertThat(lotto.match(winningLottoNumbers)).isEqualTo(0);
+        assertThat(lotto.hasLottoNumber(winningLottoNumbers)).isEqualTo(0);
     }
 }

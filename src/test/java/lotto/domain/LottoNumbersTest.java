@@ -65,7 +65,7 @@ public class LottoNumbersTest {
                 new LottoNumber(7),
                 new LottoNumber(8));
 
-        assertThat(new LottoNumbers(numbers1).match(new LottoNumbers(numbers2))).isEqualTo(4);
+        assertThat(new LottoNumbers(numbers1).hasLottoNumber(new LottoNumbers(numbers2))).isEqualTo(4);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class LottoNumbersTest {
                 new LottoNumber(5),
                 new LottoNumber(6));
 
-        assertThat(new LottoNumbers(numbers).match(new LottoNumber(1))).isTrue();
+        assertThat(new LottoNumbers(numbers).hasLottoNumber(new LottoNumber(1))).isTrue();
     }
 
     @Test
@@ -91,6 +91,6 @@ public class LottoNumbersTest {
                 new LottoNumber(5),
                 new LottoNumber(6));
 
-        assertThat(new LottoNumbers(numbers).match(new LottoNumber(7))).isFalse();
+        assertThat(new LottoNumbers(numbers).hasLottoNumber(new LottoNumber(7))).isFalse();
     }
 }

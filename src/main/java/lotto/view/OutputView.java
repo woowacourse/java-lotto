@@ -15,15 +15,15 @@ public class OutputView {
     private static final String STATISTICS_MESSAGE = "\n당첨 통계\n---------\n";
     private static final String YIELD_FORMAT = "총 수익률은 %.1f%% 입니다.";
 
-    public static void outputManualLottosMessage() {
+    public static void requestManualLottosMessage() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public static void outputWinningNumbersMessage() {
+    public static void requestWinningNumbersMessage() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void outputLottosMessage(int manualLottosSize, int autoLottosSize) {
+    public static void outputLottosPurchaseMessage(int manualLottosSize, int autoLottosSize) {
         System.out.println("수동으로 " + manualLottosSize + "장, 자동으로" + autoLottosSize + "장 구매했습니다.");
     }
 

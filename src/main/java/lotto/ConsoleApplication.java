@@ -28,13 +28,13 @@ public class ConsoleApplication {
         Lottos lottos = LottoMachine.buyManualLotto(makeManualLottosNumbers(numberOfManualLottos));
         lottos.addAll(LottoMachine.buyAutoLottos(numberOfAutoLottos));
 
-        OutputView.outputLottosMessage(numberOfManualLottos, numberOfAutoLottos);
+        OutputView.outputLottosPurchaseMessage(numberOfManualLottos, numberOfAutoLottos);
         OutputView.outputLottos(lottos);
         return lottos;
     }
 
     private static List<LottoNumbers> makeManualLottosNumbers(int numberOfManualLottos) {
-        OutputView.outputManualLottosMessage();
+        OutputView.requestManualLottosMessage();
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < numberOfManualLottos; i++) {
             lottoNumbers.add(makeLottoNumbers());
@@ -43,7 +43,7 @@ public class ConsoleApplication {
     }
 
     private static LottoGame setUpLottoGame() {
-        OutputView.outputWinningNumbersMessage();
+        OutputView.requestWinningNumbersMessage();
         LottoNumbers winningNumbers = makeLottoNumbers();
         LottoNumber bonusNumber = LottoNumbersGenerator.getLottoNumber(InputView.inputBonusBall());
 

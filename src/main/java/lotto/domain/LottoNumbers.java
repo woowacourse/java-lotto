@@ -34,11 +34,11 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    boolean match(LottoNumber lottoNumber) {
+    boolean hasLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    int match(LottoNumbers lottoNumbers) {
+    int hasLottoNumber(LottoNumbers lottoNumbers) {
         int result = 0;
         for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers) {
             result += contains(lottoNumber);
