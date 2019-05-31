@@ -4,7 +4,7 @@ import lotto.utils.NullCheckUtil;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable {
     private static final String ERROR_OUT_RANGE = "1부터 45사이의 수가 아닙니다.";
 
     private Integer lottoNumber;
@@ -49,5 +49,11 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        final LottoNumber that = (LottoNumber) o;
+        return this.lottoNumber.compareTo(that.lottoNumber);
     }
 }

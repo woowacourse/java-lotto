@@ -3,6 +3,7 @@ package lotto.domain.lottofactory;
 import lotto.domain.lottofactory.shufflerule.Shuffle;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -19,7 +20,7 @@ public class LottoCreator {
     public static LottoTicket getLottoTicket(Shuffle shuffle) {
         shuffle.shuffleLottoNumbers(possibleNumbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>(getPossibleNumbers());
-        //sort
+        Collections.sort(lottoNumbers);
 
         return LottoTicket.createLottoTicket(lottoNumbers);
     }
