@@ -18,6 +18,10 @@ public class LottoNumbersGenerator {
         }
     }
 
+    private LottoNumbersGenerator() {
+        throw new AssertionError();
+    }
+
     public static LottoNumber getLottoNumber(int number) {
         checkValidLottoNumber(number);
         return fixedTotalLottoNumbers.get(number - 1);
