@@ -22,7 +22,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    // TODO depth check
     public static LottoNumber get(int number) {
         for (LottoNumber lottoNumber : numbers) {
             if (lottoNumber.number == number) {

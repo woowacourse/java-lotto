@@ -26,7 +26,6 @@ public enum LottoRank {
         return winningAmount;
     }
 
-    // TODO depth check
     public static LottoRank valueOf(int countOfMatch, boolean bonusMatch) {
         if (countOfMatch < WINNING_MIN_COUNT) {
             return MISS;

@@ -23,23 +23,22 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해주세요.");
-        try{
+        try {
             return Integer.parseInt(SCANNER.nextLine().replaceAll(" ", ""));
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new NumberException();
         }
     }
 
     public static int inputManualPurchaseCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        try{
+        try {
             return Integer.parseInt(SCANNER.nextLine().replaceAll(" ", ""));
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new NumberException();
         }
     }
 
-    // TODO 여러줄 한번에 입력받는 형식을 생각해볼 것
     public static String inputManualLottoNumbers() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         return SCANNER.nextLine().replaceAll(" ", "");
