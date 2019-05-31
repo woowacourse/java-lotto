@@ -1,6 +1,5 @@
 package lotto.view.inputview;
 
-import lotto.utils.InputUtils;
 import lotto.utils.NullCheckUtil;
 
 import java.util.regex.Matcher;
@@ -12,11 +11,11 @@ public class PriceParser {
     private static final String ERROR_NO_INPUT = "입력이 없습니다.";
 
     public static Integer getPurchasePrice(String inputPrice) {
-        return InputUtils.toInts(getValidInputPrice(inputPrice));
+        return toInts(getValidInputPrice(inputPrice));
     }
 
     private static String getValidInputPrice(String inputPrice) {
-        NullCheckUtil.checkNull(inputPrice);
+        NullCheckUtil.checkNullInput(inputPrice);
         checkNoInput(inputPrice);
 
         return getCheckedPatternInput(inputPrice);
@@ -37,5 +36,9 @@ public class PriceParser {
         }
 
         return input;
+    }
+
+    private static int toInts(String input) {
+        return Integer.parseInt(input);
     }
 }

@@ -1,6 +1,6 @@
 package lotto.domain.lottofactory;
 
-import lotto.domain.shufflerule.FixShuffle;
+import lotto.domain.lottofactory.shufflerule.FixShuffle;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

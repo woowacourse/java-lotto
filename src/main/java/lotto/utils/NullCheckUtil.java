@@ -1,34 +1,46 @@
 package lotto.utils;
 
 import lotto.domain.lottofactory.LottoNumber;
+import lotto.domain.lottofactory.LottoTicket;
 
 import java.util.List;
 
 public class NullCheckUtil {
     private static final String ERROR_NULL = "null error";
 
-    public static void checkNull(String input) {
+    public static void checkNullInput(String input) {
         if (input == null) {
             throw new NullPointerException(ERROR_NULL);
         }
     }
 
-    public static void checkNull(Integer number) {
+    public static void checkNullInteger(Integer number) {
         if (number == null) {
             throw new NullPointerException(ERROR_NULL);
         }
     }
 
-    private static void checkNull(LottoNumber number) {
+    private static void checkNullLottoNumber(LottoNumber number) {
         if (number == null) {
             throw new NullPointerException(ERROR_NULL);
         }
     }
 
-    public static void checkNull(List<LottoNumber> lottoNumbers) {
+    private static void checkNullLottoTicket(LottoTicket ticket) {
+        if (ticket == null) {
+            throw new NullPointerException(ERROR_NULL);
+        }
+    }
+
+    public static void checkNullLottoNumbers(List<LottoNumber> lottoNumbers) {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            checkNull(lottoNumber);
+            checkNullLottoNumber(lottoNumber);
         }
     }
 
+    public static void checkNullLottoTickets(List<LottoTicket> lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets) {
+            checkNullLottoTicket(lottoTicket);
+        }
+    }
 }

@@ -1,10 +1,10 @@
-package lotto.domain.lottofactory;
+package lotto.domain.user;
 
 import lotto.utils.NullCheckUtil;
 
 import java.util.Objects;
 
-public class LottoAmount {
+public class PurchaseAmount {
     private static final int MINIMUM_MONEY = 0;
     private static final int LIMIT_MINIMUM_PRICE = 1000;
     private static final int PRICE_UNIT = 1000;
@@ -15,17 +15,17 @@ public class LottoAmount {
 
     private final Integer lottoAmount;
 
-    private LottoAmount(Integer purchasePrice) {
+    private PurchaseAmount(Integer purchasePrice) {
         checkValidPurchasePrice(purchasePrice);
         this.lottoAmount = calculateLottoAmount(purchasePrice);
     }
 
-    public static LottoAmount createLottoAmount(Integer purchasePrice) {
-        return new LottoAmount(purchasePrice);
+    public static PurchaseAmount createLottoAmount(Integer purchasePrice) {
+        return new PurchaseAmount(purchasePrice);
     }
 
     private void checkValidPurchasePrice(Integer purchasePrice) {
-        NullCheckUtil.checkNull(purchasePrice);
+        NullCheckUtil.checkNullInteger(purchasePrice);
         checkNegative(purchasePrice);
         checkMinimumLimit(purchasePrice);
         checkDivisiblePriceUnit(purchasePrice);
@@ -65,7 +65,7 @@ public class LottoAmount {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        final LottoAmount that = (LottoAmount) o;
+        final PurchaseAmount that = (PurchaseAmount) o;
         return Objects.equals(lottoAmount, that.lottoAmount);
     }
 

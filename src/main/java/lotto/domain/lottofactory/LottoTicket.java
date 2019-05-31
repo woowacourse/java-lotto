@@ -17,13 +17,9 @@ public class LottoTicket {
     }
 
     private void checkValidLottoNumbers(List<LottoNumber> lottoNumbers) {
-        NullCheckUtil.checkNull(lottoNumbers);
+        NullCheckUtil.checkNullLottoNumbers(lottoNumbers);
         checkDuplicatedLottoNumbers(lottoNumbers);
         checkLottoNumberCount(lottoNumbers);
-    }
-
-    public static LottoTicket createLottoTicket(List<LottoNumber> lottoNumbers) {
-        return new LottoTicket(lottoNumbers);
     }
 
     private void checkDuplicatedLottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -45,7 +41,15 @@ public class LottoTicket {
     }
 
     private boolean isInsufficientNumberCount(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.size() != LottoConstant.LOTTO_NUMBER_SIZE;
+        return lottoNumbers.size() != LottoConstant.LOTTO_NUM_SIZE;
+    }
+
+    public static LottoTicket createLottoTicket(List<LottoNumber> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
+    }
+    
+    public List<LottoNumber> getLottoTicket() {
+        return lottoTicket;
     }
 
     @Override

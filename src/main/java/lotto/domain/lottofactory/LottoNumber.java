@@ -15,7 +15,7 @@ public class LottoNumber {
     }
 
     private void checkValidLottoNumber(Integer number) {
-        NullCheckUtil.checkNull(number);
+        NullCheckUtil.checkNullInteger(number);
         checkOutRange(number);
     }
 
@@ -30,7 +30,7 @@ public class LottoNumber {
     }
 
     private boolean isOutRangeNumber(Integer number) {
-        return LottoConstant.LIMIT_MINIMUM_NUMBER > number || LottoConstant.LIMIT_MAXIMUM_NUMBER < number;
+        return LottoConstant.LIMIT_MIN_NUM > number || LottoConstant.LIMIT_MAX_NUM < number;
     }
 
     @Override
@@ -44,5 +44,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
     }
 }
