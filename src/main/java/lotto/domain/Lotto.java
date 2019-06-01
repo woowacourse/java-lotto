@@ -11,11 +11,13 @@ public class Lotto {
         if (numbers.size() != LOTTO_SIZE.get()) {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
         }
+
         for (Integer number : numbers) {
             lottoNumbers.add(LottoNumber.getInstance(number));
         }
+
         checkDuplication();
-        Collections.sort(lottoNumbers);
+        Collections.sort(this.lottoNumbers);
     }
 
     void checkDuplication() {
