@@ -11,7 +11,8 @@ public class ConsoleOutputView {
         System.out.println(lottoMoney.getAmount() + "개 구입했습니다.");
     }
 
-    public static void printTickets(List<LottoTicket> lottoTickets) {
+    public static void printTickets(LottoTickets tickets) {
+        List<LottoTicket> lottoTickets = tickets.getTickets();
         StringBuilder result = new StringBuilder();
         for (LottoTicket lottoTicket : lottoTickets) {
             List<LottoNumber> lottoNumbers = new ArrayList<>(lottoTicket.getLottoNumbers());

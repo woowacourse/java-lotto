@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResults;
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.WinningLotto;
 import lotto.domain.factory.LottoTicketsFactory;
 import lotto.domain.factory.WinningLottoFactory;
@@ -18,7 +18,7 @@ public class ConsoleLottoApplication {
 
         int manualAmount = ConsoleInputView.inputNumberOfManual();
         List<String> manualLottoNumbers = ConsoleInputView.intputManualLottoNumbers(manualAmount);
-        List<LottoTicket> lottoTickets = LottoTicketsFactory.create(manualAmount, manualLottoNumbers, lottoMoney);
+        LottoTickets lottoTickets = LottoTicketsFactory.create(manualAmount, manualLottoNumbers, lottoMoney);
         ConsoleOutputView.printAmounts(manualAmount, lottoMoney);
         ConsoleOutputView.printTickets(lottoTickets);
 

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,7 +10,7 @@ public class LottoResults {
     private final Map<LottoRank, Integer> lottoRewards;
     private final LottoMoney lottoMoney;
 
-    public LottoResults(final List<LottoTicket> lottoTickets, final WinningLotto winningLotto, final LottoMoney lottoMoney) {
+    public LottoResults(final LottoTickets lottoTickets, final WinningLotto winningLotto, final LottoMoney lottoMoney) {
         lottoRewards = initRewards();
         this.lottoMoney = lottoMoney;
         getRewards(lottoTickets, winningLotto);
@@ -26,11 +25,10 @@ public class LottoResults {
         return lottoRewards;
     }
 
-    private void getRewards(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        for (LottoTicket lottoTicket : lottoTickets) {
-            LottoRank lottoRank = winningLotto.getRank(lottoTicket);
-            lottoRewards.put(lottoRank, lottoRewards.get(lottoRank) + 1);
-        }
+    private void getRewards(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        lottoTickets.getRewards(winningLotto).forEach((reward, countOfReward) -> {
+            lottoRewards.put(reward, countOfReward);
+        });
     }
 
     public double getYield() {
