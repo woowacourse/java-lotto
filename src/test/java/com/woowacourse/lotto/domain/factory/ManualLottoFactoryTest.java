@@ -25,7 +25,13 @@ class ManualLottoFactoryTest {
 	}
 
 	@Test
-	void invalidLottoSize() {
+	void invalidNumberOfLotto() {
+		assertThrows(InvalidNumberException.class, () -> new ManualLottoFactory(1, Arrays.asList("0,1,2,3,4,5")).generateLotto());
+		assertThrows(InvalidNumberException.class, () -> new ManualLottoFactory(1, Arrays.asList("1,2,3,4,5,46")).generateLotto());
+	}
+
+	@Test
+	void invalidSizeOfLotto() {
 		assertThrows(InvalidCountOfManualLottoException.class, ()
 				-> new ManualLottoFactory(1, Arrays.asList("1,2,3,4,5")).generateLotto());
 	}
