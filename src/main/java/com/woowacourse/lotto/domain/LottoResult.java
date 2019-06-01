@@ -7,47 +7,44 @@ import static com.woowacourse.lotto.domain.Money.MINIMUM_MONEY_FOR_PURCHASE;
 public class LottoResult {
 	private final WinningLotto winningLotto;
 	private final Lottos lottos;
-	private static Map<LottoRank, Integer> rankResult = new TreeMap<>();
-
-	static {
-		rankResult.put(LottoRank.ZERO, 0);
-		rankResult.put(LottoRank.FIFTH, 0);
-		rankResult.put(LottoRank.FOURTH, 0);
-		rankResult.put(LottoRank.THIRD, 0);
-		rankResult.put(LottoRank.SECOND, 0);
-		rankResult.put(LottoRank.FIRST, 0);
-	}
+	private Map<LottoRank, Integer> rankResult = new TreeMap<>();
 
 	public LottoResult(final WinningLotto winningLotto, Lottos lottos) {
 		this.winningLotto = winningLotto;
 		this.lottos = lottos;
+		initializeRankResultMap();
 		matchLotto();
+	}
+
+	private void initializeRankResultMap() {
+		for(LottoRank lottoRank : LottoRank.values()) {
+			rankResult.put(lottoRank, 0);
+		}
 	}
 
 	private Map<LottoRank, Integer> matchLotto() {
 		for (Lotto lotto : lottos.getLottos()) {
 			LottoRank lottoRank = LottoRank.valueOf(winningLotto.matchLotto(lotto), winningLotto.matchBonusBall(lotto));
-			rankResult.put(lottoRank, rankResult.getOrDefault(lottoRank, 0) + 1);
+			rankResult.put(lottoRank, rankResult.get(lottoRank) + 1);
 		}
 		return rankResult;
 	}
 
-	private int getAllPrice() {
-		int sum = 0;
+	private long getAllPrice() {
+		long sum = 0;
 
 		for (LottoRank rank : rankResult.keySet()) {
-			sum += (rank.getPrice() * rankResult.get(rank));
+			sum += (long)(rank.getPrice() * rankResult.get(rank));
 		}
-
 		return sum;
 	}
 
-	public double getEarningsRate() {
-		return ((double) getAllPrice() / (double) (lottos.getSize() * MINIMUM_MONEY_FOR_PURCHASE)) * 100;
+	public long getEarningsRate() {
+		return (getAllPrice() / (lottos.getSize() * MINIMUM_MONEY_FOR_PURCHASE)) * 100;
 	}
 
 	public Map<LottoRank, Integer> getLottoResult() {
-		return rankResult;
+		return new TreeMap<>(rankResult);
 	}
 
 	@Override
@@ -66,5 +63,10 @@ public class LottoResult {
 	@Override
 	public int hashCode() {
 		return Objects.hash(winningLotto, lottos);
+	}
+
+	public static void main(String[] args) {
+		long sum = 2_000_000_000;
+		System.out.println(sum);
 	}
 }
