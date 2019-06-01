@@ -7,6 +7,7 @@ import java.util.*;
 public abstract class Lotto {
     public static final int MAX_LOTTO_SIZE = 6;
     private static final int SUM_OF_USER_WINNING = 12;
+    private static final String NEW_LINE = "\n";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -54,6 +55,6 @@ public abstract class Lotto {
         for (LottoNumber number : lottoNumbers) {
             stringJoiner.add(number.toString());
         }
-        return stringJoiner.toString();
+        return stringJoiner.toString() + NEW_LINE;
     }
 }

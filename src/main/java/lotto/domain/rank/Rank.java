@@ -35,7 +35,7 @@ public class Rank {
         return ((double) totalRewardMoney / userMoney) * PERCENT;
     }
 
-    private long totalRewardMoney() {
+    public long totalRewardMoney() {
         long totalRewardMoney = ZERO;
         for (AbstractRank rank : winners.values()) {
             totalRewardMoney += rank.rewardMoney();

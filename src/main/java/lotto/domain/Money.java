@@ -14,4 +14,15 @@ public class Money {
     public int countOfLotto() {
         return money / LOTTO_PRICE;
     }
+
+    public int checkPurchaseLotto(int count) {
+        if (countOfLotto() < count) {
+            throw new IllegalArgumentException("금액이 부족하여 구입하지 못합니다.");
+        }
+        return count;
+    }
+
+    public int getAutoLottoNumber(int manualLottoNumber) {
+        return (money - (manualLottoNumber * LOTTO_PRICE)) / LOTTO_PRICE;
+    }
 }

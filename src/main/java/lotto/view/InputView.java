@@ -22,18 +22,6 @@ public class InputView {
         return convertNumber(price);
     }
 
-    public static List<Integer> winningLotto() {
-        System.out.println(INPUT_WINNING_LOTTO);
-        String winningLottoNumbers = scanner.nextLine();
-        return convertLottoNumbers(winningLottoNumbers);
-    }
-
-    public static Integer bonusNumber() {
-        System.out.println(INPUT_BONUS_NUMBER);
-        String bonusNumber = scanner.nextLine();
-        return convertNumber(bonusNumber);
-    }
-
     public static Integer purchaseManualLotto() {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT);
         String purchaseLotto = scanner.nextLine();
@@ -50,13 +38,24 @@ public class InputView {
         return convertLottoNumbers;
     }
 
-    private static List<Integer> convertLottoNumbers(String lottoNumbers) {
-        lottoNumbers.replaceAll(" ", "");
+    public static List<Integer> winningLotto() {
+        System.out.println(INPUT_WINNING_LOTTO);
+        String winningLottoNumbers = scanner.nextLine();
+        return convertLottoNumbers(winningLottoNumbers);
+    }
+
+    public static Integer bonusNumber() {
+        System.out.println(INPUT_BONUS_NUMBER);
+        String bonusNumber = scanner.nextLine();
+        return convertNumber(bonusNumber);
+    }
+
+    private static List<Integer> convertLottoNumbers(String userNumbers) {
+        String lottoNumbers = userNumbers.replaceAll(" ", "");
         List<String> splitLottoNumbers = Arrays.asList(lottoNumbers.split(","));
         List<Integer> convertLottoNumbers = new ArrayList<>();
-        for (String number : splitLottoNumbers) {
-            convertLottoNumbers.add(convertNumber(number));
-        }
+        splitLottoNumbers.stream()
+                .forEach(number -> convertLottoNumbers.add(convertNumber(number)));
         return convertLottoNumbers;
     }
 
