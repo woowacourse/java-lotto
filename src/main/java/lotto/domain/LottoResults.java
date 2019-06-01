@@ -35,7 +35,7 @@ public class LottoResults {
 
     public double getYield() {
         LottoMoney rewardMoney = new LottoMoney((int) getRewardMoney());
-        return (double) getRewardMoney() / lottoMoney.getMoney() * PERCENT;
+        return rewardMoney.divideMoney(lottoMoney) * PERCENT;
     }
 
     private long getRewardMoney() {

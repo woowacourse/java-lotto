@@ -15,8 +15,8 @@ public class LottoMoney {
         validateChange();
     }
 
-    public long getAmount() {
-        return money / LottoTicket.PRICE;
+    public int getAmount() {
+        return (int) money / LottoTicket.PRICE;
     }
 
     private void validateChange() {
@@ -31,7 +31,7 @@ public class LottoMoney {
         }
     }
 
-    public long getMoney() {
-        return money;
+    public double divideMoney(LottoMoney lottoMoney) {
+        return (double) money / lottoMoney.money;
     }
 }
