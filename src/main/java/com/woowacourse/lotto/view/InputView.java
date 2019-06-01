@@ -1,7 +1,5 @@
 package com.woowacourse.lotto.view;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -33,6 +31,6 @@ public class InputView {
 	}
 
 	public static String inputManualLottoNumber() {
-		return scanner.nextLine();
+		return scanner.nextLine().replaceAll(REPLACE_WHITE_SPACE, "");
 	}
 }
