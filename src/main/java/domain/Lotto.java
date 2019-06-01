@@ -24,13 +24,13 @@ public class Lotto {
 
     private static void validate(List<Number> numbers) {
         if (numbers.size() != NUM_CNT) {
-            throw new LottoExceedSizeException(String.format("로또는 %d개의 숫자로 이루어져야합니다.", NUM_CNT));
+            throw new IllegalArgumentException(String.format("로또는 %d개의 숫자로 이루어져야합니다.", NUM_CNT));
         }
         if (hasDuplication(numbers)) {
-            throw new LottoDuplicationException("중복된 숫자가 존재합니다.");
+            throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
         }
         if (!Comparators.isInOrder(numbers, Number::compareTo)) {
-            throw new LottoNotSortedException("정렬되지 않은 숫자입니다.");
+            throw new IllegalArgumentException("정렬되지 않은 숫자입니다.");
         }
     }
 

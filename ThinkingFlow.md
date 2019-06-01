@@ -92,6 +92,7 @@ RankAnalysisBuilder
     - 수동생성 (nonRandom)
 
 
+
 구입금액을 입력해 주세요.
 14000
 14개를 구매했습니다.
