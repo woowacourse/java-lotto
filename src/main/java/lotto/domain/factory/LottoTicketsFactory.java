@@ -15,8 +15,9 @@ public class LottoTicketsFactory {
         int randomAmount = totalAmount - manualAmount;
         validateAmount(totalAmount, manualAmount);
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        getManualTickets(manualLottoNumbers, lottoTickets);
-        getRandomTickets(randomAmount, lottoTickets);
+
+        generateManualTickets(manualLottoNumbers, lottoTickets);
+        generateRandomTickets(randomAmount, lottoTickets);
         return new LottoTickets(lottoTickets);
     }
 
@@ -26,13 +27,13 @@ public class LottoTicketsFactory {
         }
     }
 
-    private static void getManualTickets(List<String> manualLottoNumbers, List<LottoTicket> lottoTickets) {
+    private static void generateManualTickets(List<String> manualLottoNumbers, List<LottoTicket> lottoTickets) {
         for (String manualLottoNumber : manualLottoNumbers) {
             lottoTickets.add(new ManualTicketFactory(manualLottoNumber).create());
         }
     }
 
-    private static void getRandomTickets(int randomAmount, List<LottoTicket> lottoTickets) {
+    private static void generateRandomTickets(int randomAmount, List<LottoTicket> lottoTickets) {
         for (int i = 0; i < randomAmount; i++) {
             lottoTickets.add(new RandomTicketFactory().create());
         }
