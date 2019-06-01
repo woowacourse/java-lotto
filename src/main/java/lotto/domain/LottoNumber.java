@@ -3,9 +3,11 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int LOTTO_NUMBER_START_INDEX = 0;
+    private static final int LOTTO_NUMBER_END_INDEX = 6;
     private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
     private final int number;
 
@@ -23,30 +25,30 @@ public class LottoNumber implements Comparable<LottoNumber>{
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> autoLottoNumbers = lottoNumbers.stream()
                 .collect(Collectors.toList())
-                .subList(0,6);
+                .subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX);
         Collections.sort(autoLottoNumbers);
         return autoLottoNumbers;
     }
 
     public static boolean isNotValidLottoNumber(int number) {
-         return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
+        return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
     }
 
     public static List<LottoNumber> getLotto(List<Integer> collect) {
-        List<LottoNumber> lotto =lottoNumbers.stream()
+        List<LottoNumber> lotto = lottoNumbers.stream()
                 .filter(n -> collect.contains(n.number))
                 .collect(Collectors.toList());
         Collections.sort(lotto);
         return lotto;
     }
 
-    public static LottoNumber getLottoNumber(int lottoNumber){
+    public static LottoNumber getLottoNumber(int lottoNumber) {
         return new LottoNumber(lottoNumber);
     }
 
     @Override
     public int compareTo(LottoNumber o) {
-        return number-o.number;
+        return number - o.number;
     }
 
     @Override

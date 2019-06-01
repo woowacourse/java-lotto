@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Lotto {
     private final List<LottoNumber> numbers;
 
-    public Lotto(List<LottoNumber> numbers) {
+    public Lotto(final List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
@@ -14,7 +14,6 @@ public class Lotto {
     public String toString() {
         return numbers.toString();
     }
-
 
     public boolean isContainLottoNumber(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);

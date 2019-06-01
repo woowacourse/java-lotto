@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,10 +8,6 @@ public class Lottoes {
 
     public Lottoes(List<Lotto> lottoes) {
         this.lottoes = lottoes;
-    }
-
-    public int getLottoesSize(){
-        return lottoes.size();
     }
 
     @Override
@@ -28,5 +23,9 @@ public class Lottoes {
                  return Rank.valueOf(winningLotto.getMatchCount(l),winningLotto.isMatchBonus(l));
                 })
                 .collect(Collectors.toList());
+    }
+
+    public int getSize() {
+        return lottoes.size();
     }
 }
