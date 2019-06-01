@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class LottoResults {
     private static final int BASE_AMOUNT = 0;
@@ -32,6 +34,7 @@ public class LottoResults {
     }
 
     public double getYield() {
+        LottoMoney rewardMoney = new LottoMoney((int) getRewardMoney());
         return (double) getRewardMoney() / lottoMoney.getMoney() * PERCENT;
     }
 
