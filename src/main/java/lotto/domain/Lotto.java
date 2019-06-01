@@ -31,7 +31,7 @@ public class Lotto {
     public int calculateCountOfMatch(Lotto anotherLotto) {
         int countOfMatch = 0;
         for (LottoNumber lottoNumber : this.lottoNumbers) {
-            countOfMatch += anotherLotto.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+            countOfMatch += anotherLotto.isContain(lottoNumber) ? 1 : 0;
         }
         return countOfMatch;
     }
