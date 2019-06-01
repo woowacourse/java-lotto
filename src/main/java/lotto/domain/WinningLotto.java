@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinningLotto {
+    private static final String DUPLICATE_MESSAGE = "보너스 볼이 중복 됩니다.";
     private static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> winningLotto;
     private final LottoNumber bonusBall;
@@ -20,7 +21,7 @@ public class WinningLotto {
 
     private void checkDuplicate(LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 볼이 중복 됩니다.");
+            throw new IllegalArgumentException(DUPLICATE_MESSAGE);
         }
     }
 

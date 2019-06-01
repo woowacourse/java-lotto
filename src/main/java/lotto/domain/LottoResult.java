@@ -58,7 +58,6 @@ public class LottoResult {
         return Objects.hash(winners, yield);
     }
 
-
     @Override
     public String toString() {
         winners.remove(Rank.MISS);
@@ -71,5 +70,4 @@ public class LottoResult {
         }
         return sb.toString();
     }
-
 }

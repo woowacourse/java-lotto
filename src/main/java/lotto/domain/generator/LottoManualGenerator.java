@@ -6,6 +6,8 @@ import lotto.domain.LottoNumber;
 import java.util.*;
 
 public class LottoManualGenerator implements LottoNumberGenerator {
+    private static final String DUPLICATE_MESSAGE = "중복된 숫자가 입력되었습니다.";
+    private static final String INVALID_LENGTH_MESSAGE = "로또 숫자는 6개여야 합니다.";
     private static final int LOTTO_NUMBER_COUNT = 6;
     private String input;
 
@@ -27,13 +29,13 @@ public class LottoManualGenerator implements LottoNumberGenerator {
     private void checkDuplicate(List<Integer> parsedInput) {
         Set<Integer> unduplicated = new HashSet<>(parsedInput);
         if (unduplicated.size() != parsedInput.size()) {
-            throw new IllegalArgumentException("중복된 숫자가 입력되었습니다.");
+            throw new IllegalArgumentException(DUPLICATE_MESSAGE);
         }
     }
 
     private void checkLottoLength(List<Integer> parsedInput) {
         if (parsedInput.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
+            throw new IllegalArgumentException(INVALID_LENGTH_MESSAGE);
         }
     }
 

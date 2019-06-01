@@ -1,6 +1,8 @@
 package lotto.domain;
 
 public class LottoMoney {
+    private static final String LOWER_PRICE_MESSAGE = "티켓 가격보다 적은 입력입니다.";
+    private static final String UPPER_PRICE_MESSAGE = "원 이상은 구매할 수 없습니다.";
     private static final int MAX_PURCHASE_PRICE = 100000;
     static final int LOTTO_PRICE = 1000;
 
@@ -13,10 +15,10 @@ public class LottoMoney {
 
     private void validate(int input) {
         if (input < LOTTO_PRICE) {
-            throw new IllegalArgumentException("티켓 가격보다 적은 입력입니다.");
+            throw new IllegalArgumentException(LOWER_PRICE_MESSAGE);
         }
         if (input > MAX_PURCHASE_PRICE) {
-            throw new IllegalArgumentException(MAX_PURCHASE_PRICE + "원 이상은 구매할 수 없습니다.");
+            throw new IllegalArgumentException(MAX_PURCHASE_PRICE + UPPER_PRICE_MESSAGE);
         }
     }
 

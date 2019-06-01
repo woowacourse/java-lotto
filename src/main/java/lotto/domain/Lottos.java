@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lottos {
+    private static final String VALID_COUNT_MESSAGE = "수동 구매 개수는 전체 구매 개수보다 작아야 합니다.";
     private final List<Lotto> totalLottos;
 
     public Lottos(List<String> manualInputLottos, int totalLottoCount) {
@@ -19,7 +20,7 @@ public class Lottos {
 
     private void checkValidManualCount(int totalLottoCount, int manualLottoCount) {
         if (totalLottoCount < manualLottoCount) {
-            throw new IllegalArgumentException("수동 구매 개수는 전체 구매 개수보다 작아야 합니다.");
+            throw new IllegalArgumentException(VALID_COUNT_MESSAGE);
         }
     }
 
