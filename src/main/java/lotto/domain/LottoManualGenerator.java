@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LottoManualGenerator implements LottoNumberGenerator {
-    public static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_COUNT = 6;
     private String input;
 
     public LottoManualGenerator(String input) {
@@ -28,13 +28,13 @@ public class LottoManualGenerator implements LottoNumberGenerator {
         }
     }
     @Override
-    public List<LottoNumber> generate() {
+    public Lotto generate() {
         List<LottoNumber> lottoNumbers = LottoContainer.createLottoNumbers();
         List<Integer> parsedInput = splitInput();
         List<LottoNumber> retNumbers = new ArrayList<>();
         for (Integer index : parsedInput) {
             retNumbers.add(lottoNumbers.get(index - 1));
         }
-        return retNumbers;
+        return new Lotto(retNumbers);
     }
 }
