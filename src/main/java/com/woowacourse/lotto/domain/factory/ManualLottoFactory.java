@@ -15,8 +15,8 @@ import static com.woowacourse.lotto.domain.LottoNumber.NUMBER_OF_LOTTO;
 public class ManualLottoFactory extends LottoFactory {
 	private final List<String> numbers;
 
-	public ManualLottoFactory(int numberOfLotto, final List<String> numbers) {
-		super(numberOfLotto);
+	public ManualLottoFactory(int countOfPurchasedLotto, final List<String> numbers) {
+		super(countOfPurchasedLotto);
 		this.numbers = new ArrayList<>(numbers);
 		validateSizeOfLotto(numbers);
 	}
