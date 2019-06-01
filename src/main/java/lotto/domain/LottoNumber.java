@@ -21,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber get(int number) {
+    public static LottoNumber getInstance(int number) {
         checkValidRange(number);
         return bucket.get(number);
     }

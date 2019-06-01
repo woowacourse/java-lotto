@@ -49,7 +49,7 @@ public class Main {
 
     private static WinningLotto createWinningLotto(Lotto lastWinningLotto) {
         try {
-            return new WinningLotto(lastWinningLotto, LottoNumber.get(InputConsole.inputBonusNumber()));
+            return new WinningLotto(lastWinningLotto, LottoNumber.getInstance(InputConsole.inputBonusNumber()));
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createWinningLotto(lastWinningLotto);
