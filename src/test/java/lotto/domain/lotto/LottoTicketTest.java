@@ -37,7 +37,7 @@ public class LottoTicketTest {
 
     @Test
     void 번호범위_벗어남() {
-        assertThrows(InvalidLottoNumberException.class, () -> {
+        assertThrows(InvalidLottoTicketException.class, () -> {
             LottoTicket.create("46, 1, 2, 3, 4, 5");
         });
     }
