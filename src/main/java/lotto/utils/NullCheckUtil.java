@@ -26,7 +26,7 @@ public class NullCheckUtil {
         }
     }
 
-    private static void checkNullLottoTicket(LottoTicket ticket) {
+    public static void checkNullLottoTicket(LottoTicket ticket) {
         if (ticket == null) {
             throw new NullPointerException(ERROR_NULL);
         }
@@ -41,6 +41,12 @@ public class NullCheckUtil {
     public static void checkNullLottoTickets(List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
             checkNullLottoTicket(lottoTicket);
+        }
+    }
+
+    public static void checkNullWinningNumbers(List<Integer> winningNumbers) {
+        for (Integer number : winningNumbers) {
+            checkNullInteger(number);
         }
     }
 }
