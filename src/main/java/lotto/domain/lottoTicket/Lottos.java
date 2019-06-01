@@ -1,5 +1,7 @@
 package lotto.domain.lottoTicket;
 
+import lotto.domain.rank.Rank;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,15 @@ public class Lottos {
             autoLottos.add(new AutoLotto());
         }
         return autoLottos;
+    }
+
+    public Rank matchLottoRank(WinningLotto winningLotto) {
+        Rank rank = new Rank();
+        manualLottos.stream()
+                .forEach(manual -> rank.addWinner(manual.matchLottoNumbers(winningLotto), winningLotto.isContainBonus(manual)));
+        autoLottos.stream()
+                .forEach(auto -> rank.addWinner(auto.matchLottoNumbers(winningLotto), winningLotto.isContainBonus(auto)));
+        return rank;
     }
 
     @Override

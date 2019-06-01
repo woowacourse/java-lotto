@@ -23,6 +23,8 @@
 * Lottos 수동 로또 생성
 * Lottos 남은 금액으로 자동 로또 생성하기
 * OutputView 모든 로또 출력하기
+* Lottos와 WinningLotto를 비교하여 랭크 상태 변경하기
+* OutputView Rank 상태 출력하기
     * [예외] InputView 당첨 번호에 숫자가 아닌 경우
     * [예외] Money 1장도 못사는 경우 체크하기
     * [예외] LottoNumber 로또 번호가 1부터 45까지 범위에 적합한지 체크하기
