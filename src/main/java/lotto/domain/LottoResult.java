@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 public class LottoResult {
     private final Map<Rank, Integer> winners;
@@ -25,7 +26,7 @@ public class LottoResult {
     }
 
     private Map<Rank, Integer> initWinners() {
-        Map<Rank, Integer> winners = new HashMap<>();
+        Map<Rank, Integer> winners = new TreeMap<>();
         for (Rank value : Rank.values()) {
             winners.put(value, 0);
         }
@@ -58,12 +59,15 @@ public class LottoResult {
         return Objects.hash(winners, yield);
     }
 
+
     @Override
     public String toString() {
         winners.remove(Rank.MISS);
         StringBuilder sb = new StringBuilder();
         for (Rank rank : winners.keySet()) {
-            sb.append(rank.getCountOfMatch()).append("개 일치(").append(rank.getWinningMoney()).append(")- ");
+            sb.append(rank.getCountOfMatch()).append("개 일치");
+            String second = (rank == Rank.SECOND) ? ", 보너스 볼 일치" : "";
+            sb.append(second).append("(").append(rank.getWinningMoney()).append(")- ");
             sb.append(winners.get(rank)).append("개\n");
         }
         return sb.toString();
