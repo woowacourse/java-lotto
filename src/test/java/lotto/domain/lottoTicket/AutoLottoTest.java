@@ -1,7 +1,6 @@
-package lotto.domain;
+package lotto.domain.lottoTicket;
 
 import org.junit.jupiter.api.Test;
-
 
 public class AutoLottoTest {
     @Test

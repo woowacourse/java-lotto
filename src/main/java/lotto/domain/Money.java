@@ -11,7 +11,7 @@ public class Money {
         this.money = money;
     }
 
-    public int purchaseLotto() {
+    public int countOfLotto() {
         return money / LOTTO_PRICE;
     }
 }

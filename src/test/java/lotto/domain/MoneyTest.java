@@ -9,7 +9,7 @@ public class MoneyTest {
     @Test
     void 구매가능한_로또_개수_판별하는_테스트() {
         Money money = new Money(14000);
-        assertThat(money.purchaseLotto()).isEqualTo(14);
+        assertThat(money.countOfLotto()).isEqualTo(14);
     }
 
     @Test

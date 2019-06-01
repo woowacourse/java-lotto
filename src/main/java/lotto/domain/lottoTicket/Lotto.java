@@ -1,13 +1,18 @@
-package lotto.domain;
+package lotto.domain.lottoTicket;
+
+import lotto.domain.LottoNumber;
 
 import java.util.*;
 
-public class LottoTicket {
+public abstract class Lotto {
+    public static final int MAX_LOTTO_SIZE = 6;
+    private static final int SUM_OF_USER_WINNING = 12;
+
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != AutoLotto.MAX_LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호의 개수가 6개가 아닙니다.");
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != MAX_LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호의 개수는 6개 입니다.");
         }
         if (isOverlap(lottoNumbers)) {
             throw new IllegalArgumentException("중복되는 로또 번호가 있습니다.");
@@ -15,20 +20,26 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private boolean isOverlap(List<LottoNumber> lottoNumbers) {
+    private static boolean isOverlap(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> checkLottoNumbers = new HashSet<>(lottoNumbers);
-        return checkLottoNumbers.size() != AutoLotto.MAX_LOTTO_SIZE;
+        return checkLottoNumbers.size() != MAX_LOTTO_SIZE;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public int matchLottoNumbers(Lotto lotto) {
+        Set<LottoNumber> checkLottoNumbers = new HashSet<>(lottoNumbers);
+        checkLottoNumbers.addAll(lotto.lottoNumbers);
+        return SUM_OF_USER_WINNING - checkLottoNumbers.size();
+    }
+
+    public boolean isContainNumber(LottoNumber bonus) {
+        return lottoNumbers.contains(bonus);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoTicket that = (LottoTicket) o;
+        Lotto that = (Lotto) o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
