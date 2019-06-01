@@ -23,6 +23,9 @@ public class OutputView {
         System.out.println("---------");
 
         for (WinningType value : WinningType.values()) {
+            if (value == WinningType.MISS) {
+                continue;
+            }
             if (value == WinningType.SECOND) {
                 System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개.%n", value.getMatchNum(), value.getReward(), lottoResult.getWinnerTypeValue(value));
                 continue;

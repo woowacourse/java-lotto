@@ -18,9 +18,7 @@ public class LottoResult {
 
         for (Lotto lotto : lottos) {
             WinningType winningType = winningLotto.matchLotto(lotto);
-            if (winningType != null) {
-                result.put(winningType, result.getOrDefault(winningType, DEFAULT_WINNING_TYPE_VALUE) + 1);
-            }
+            result.put(winningType, result.getOrDefault(winningType, DEFAULT_WINNING_TYPE_VALUE) + 1);
         }
         return result;
     }
