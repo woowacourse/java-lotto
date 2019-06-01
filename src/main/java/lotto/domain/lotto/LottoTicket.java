@@ -21,7 +21,11 @@ public class LottoTicket {
     }
 
     public static LottoTicket create(List<Integer> lottoNumbers) {
-        return new LottoTicket(LottoNumbersGenerator.create(lottoNumbers));
+        try {
+            return new LottoTicket(LottoNumbersGenerator.create(lottoNumbers));
+        } catch (InvalidLottoNumberException e) {
+            throw new InvalidLottoTicketException(e.getMessage());
+        }
     }
 
     public static LottoTicket create() {
@@ -40,7 +44,7 @@ public class LottoTicket {
 
     private void checkLottoSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new InvalidLottoTicketException("로또는 6개의 숫자로 구성되어야합니다.");
+            throw new InvalidLottoTicketException("로또 번호는 6개의 숫자로 구성되어야합니다.");
         }
     }
 
