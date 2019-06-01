@@ -11,7 +11,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public boolean isContainNumber(LottoNumber lottoNumber) {
+    boolean isContainNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

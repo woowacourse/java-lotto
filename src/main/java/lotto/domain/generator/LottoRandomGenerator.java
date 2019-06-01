@@ -1,4 +1,9 @@
-package lotto.domain;
+package lotto.domain.generator;
+
+import lotto.domain.LottoContainer;
+import lotto.domain.LottoNumber;
+import lotto.domain.NumberRandomShuffle;
+import lotto.domain.generator.LottoNumberGenerator;
 
 import java.util.List;
 

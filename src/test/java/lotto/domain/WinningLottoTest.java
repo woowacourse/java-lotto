@@ -11,6 +11,7 @@ public class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
         assertThat(winningLotto).isEqualTo(new WinningLotto("1,2,3,4,5,6", 7));
     }
+
     @Test
     void 중복숫자_생성() {
         assertThrows(IllegalArgumentException.class, () -> new WinningLotto("1,2,3,4,5,5", 7));

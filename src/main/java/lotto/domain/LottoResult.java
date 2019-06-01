@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -38,7 +37,7 @@ public class LottoResult {
         for (Rank rank : winners.keySet()) {
             totalWinningMoney += rank.getWinningMoney() * winners.get(rank);
         }
-        return (double)totalWinningMoney / (lottos.getLottoCount() * LottoMoney.LOTTO_PRICE);
+        return (double) totalWinningMoney / (lottos.getLottoCount() * LottoMoney.LOTTO_PRICE);
     }
 
     public double getYield() {

@@ -20,7 +20,7 @@ public class ConsoleUILottoApplication {
             Lottos totalLottos = new Lottos(manualLottos, lottoMoney.getCountOfTicket());
             OutputView.printLottos(totalLottos, manualLottos.size());
 
-            String winningLottoInput =  InputView.receiveWinning();
+            String winningLottoInput = InputView.receiveWinning();
             int bonusBall = InputView.receiveBonus();
             WinningLotto winningLotto = new WinningLotto(winningLottoInput, bonusBall);
 

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.generator.LottoManualGenerator;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -35,7 +37,7 @@ public class WinningLotto {
         return Objects.hash(winningLotto);
     }
 
-    public Rank getCountOfMatch(Lotto lotto) {
+    Rank getCountOfMatch(Lotto lotto) {
         int count = 0;
         for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
             count += lotto.isContainNumber(this.winningLotto.get(i)) ? 1 : 0;

@@ -1,8 +1,8 @@
 package lotto.domain;
 
 public class LottoMoney {
-    static final int LOTTO_PRICE = 1000;
     private static final int MAX_PURCHASE_PRICE = 100000;
+    static final int LOTTO_PRICE = 1000;
 
     private final int purchasePrice;
 

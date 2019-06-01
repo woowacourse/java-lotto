@@ -27,13 +27,13 @@ public class LottoNumber implements Comparable {
         return new LottoNumber(lottoNumber);
     }
 
-    public static void checkValidNumber(int lottoNumber) {
+    private static void checkValidNumber(int lottoNumber) {
         if (lottoNumber < LOTTO_LOWER_BOUND || lottoNumber > LOTTO_UPPER_BOUND) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_LOWER_BOUND + "부터 " + LOTTO_UPPER_BOUND + "까지 가능합니다.");
         }
     }
 
-    public int getValue() {
+    private int getValue() {
         return this.lottoNumber;
     }
 
@@ -52,7 +52,7 @@ public class LottoNumber implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return Integer.compare(this.lottoNumber, ((LottoNumber)o).getValue());
+        return Integer.compare(this.lottoNumber, ((LottoNumber) o).getValue());
     }
 
     @Override
