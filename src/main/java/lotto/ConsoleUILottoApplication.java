@@ -1,8 +1,9 @@
 package lotto;
 
+import lotto.domain.InvalidLottoQuantityException;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoQuantity;
 import lotto.domain.lotto.InvalidLottoTicketException;
-import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.lottoresult.InvalidWinningLottoException;
 import lotto.domain.lottoresult.LottoResult;
@@ -17,14 +18,15 @@ import java.util.List;
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = createPurchaseAmount();
-        LottoTicketGroup manualLottos = LottoMachine
-                .createManualLottos(createManualLottoNumbers(purchaseAmount), purchaseAmount);
-        LottoTicketGroup autoLottos = LottoMachine.createAutoLottos(purchaseAmount);
+
+        LottoTicketGroup manualLottos = createManualLottos(purchaseAmount);
+        LottoTicketGroup autoLottos = LottoMachine.generateLottos(purchaseAmount);
+
         OutputView.printChange(purchaseAmount);
         OutputView.printLottoTicketGroup(manualLottos, autoLottos);
 
-        WinningLotto winningLotto = createWinningLotto(createWinningLottoTicket());
-        LottoResult lottoResult = new LottoResult(winningLotto, manualLottos.combine(autoLottos));
+        LottoTicketGroup lottos = manualLottos.combine(autoLottos);
+        LottoResult lottoResult = new LottoResult(createWinningLotto(), lottos);
         OutputView.printLottoResult(lottoResult);
     }
 
@@ -37,44 +39,33 @@ public class ConsoleUILottoApplication {
         }
     }
 
-    private static List<String> createManualLottoNumbers(PurchaseAmount purchaseAmount) {
-        return InputView.inputManualLottoNumbers(createManualLottoQuantity(purchaseAmount));
-    }
-
-    private static int createManualLottoQuantity(PurchaseAmount purchaseAmount) {
+    private static LottoTicketGroup createManualLottos(PurchaseAmount purchaseAmount) {
+        List<String> manualLottosText = InputView.inputManualLottoNumbers(createManualLottoQuantity(purchaseAmount));
         try {
-            int manualLottoQuantity = Integer.parseInt(InputView.inputManualLottoQuantity());
-            validateManualLottoQuantity(purchaseAmount, manualLottoQuantity);
-            return manualLottoQuantity;
-        } catch (NumberFormatException e) {
-            OutputView.printErrorMessage("숫자를 입력하세요");
-        } catch (IllegalArgumentException e) {
-            OutputView.printErrorMessage(e.getMessage());
-        }
-        return createManualLottoQuantity(purchaseAmount);
-    }
-
-    private static void validateManualLottoQuantity(PurchaseAmount purchaseAmount, int manualLottoQuantity) {
-        if (!purchaseAmount.canBuy(manualLottoQuantity * LottoTicket.getPrice())) {
-            throw new IllegalArgumentException("구입 금액으로는 구매 불가한 개수입니다.");
-        }
-    }
-
-    private static LottoTicket createWinningLottoTicket() {
-        try {
-            return LottoTicket.create(InputView.inputWinningNumbers());
+            return LottoMachine.generateLottos(manualLottosText, purchaseAmount);
         } catch (InvalidLottoTicketException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return createWinningLottoTicket();
+            return createManualLottos(purchaseAmount);
         }
     }
 
-    private static WinningLotto createWinningLotto(LottoTicket winningTicket) {
+    private static LottoQuantity createManualLottoQuantity(PurchaseAmount purchaseAmount) {
         try {
-            return WinningLotto.create(winningTicket, InputView.inputBonusNumber());
+            LottoQuantity manualLottoQuantity = LottoQuantity.create(InputView.inputManualLottoQuantity());
+            manualLottoQuantity.validateAvailable(purchaseAmount);
+            return manualLottoQuantity;
+        } catch (InvalidLottoQuantityException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return createManualLottoQuantity(purchaseAmount);
+        }
+    }
+
+    private static WinningLotto createWinningLotto() {
+        try {
+            return WinningLotto.create(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         } catch (InvalidWinningLottoException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return createWinningLotto(winningTicket);
+            return createWinningLotto();
         }
     }
 }

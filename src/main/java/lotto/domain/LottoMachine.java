@@ -6,22 +6,10 @@ import lotto.domain.purchaseamount.PurchaseAmount;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
-    public static LottoTicketGroup createManualLottos(List<String> manualNumbersText, PurchaseAmount purchaseAmount) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        LottoTicket lottoTicket;
-
-        for (String manualNumberText : manualNumbersText) {
-            lottoTicket = LottoTicket.create(manualNumberText);
-            purchaseAmount.buy(lottoTicket);
-            lottoTickets.add(LottoTicket.create(manualNumberText));
-        }
-
-        return new LottoTicketGroup(lottoTickets);
-    }
-
-    public static LottoTicketGroup createAutoLottos(PurchaseAmount purchaseAmount) {
+    public static LottoTicketGroup generateLottos(PurchaseAmount purchaseAmount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         LottoTicket lottoTicket = LottoTicket.create();
 
@@ -29,6 +17,16 @@ public class LottoMachine {
             lottoTickets.add(lottoTicket);
             lottoTicket = LottoTicket.create();
         }
+
+        return new LottoTicketGroup(lottoTickets);
+    }
+
+    public static LottoTicketGroup generateLottos(List<String> lottosText, PurchaseAmount purchaseAmount) {
+        List<LottoTicket> lottoTickets = lottosText.stream()
+                .map(x -> LottoTicket.create(x))
+                .collect(Collectors.toList());
+
+        lottoTickets.forEach(x -> purchaseAmount.buy(x));
 
         return new LottoTicketGroup(lottoTickets);
     }
