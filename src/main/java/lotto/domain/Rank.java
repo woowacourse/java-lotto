@@ -1,25 +1,23 @@
 package lotto.domain;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0);
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    MISS(0, 0, false);
 
     private int countOfMatch;
     private int winningMoney;
+    private boolean matchedBonus;
 
     private static final int WINNING_MIN_COUNT = 3;
 
-    Rank(int countOfMatch, int winningMoney) {
+    Rank(int countOfMatch, int winningMoney, boolean matchedBonus) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
-    }
-
-    public int getCountOfMatch() {
-        return this.countOfMatch;
+        this.matchedBonus = matchedBonus;
     }
 
     public int getWinningMoney() {
@@ -31,12 +29,8 @@ public enum Rank {
             return MISS;
         }
 
-        if (SECOND.matchCount(countOfMatch) && matchBonus) {
-            return SECOND;
-        }
-
         for (Rank rank : values()) {
-            if (rank != SECOND && rank.matchCount(countOfMatch)) {
+            if (rank.matchCount(countOfMatch) && rank.isMatchedBonus(matchBonus)) {
                 return rank;
             }
         }
@@ -46,6 +40,10 @@ public enum Rank {
 
     private boolean matchCount(int countOfMatch) {
         return (this.countOfMatch == countOfMatch);
+    }
+
+    private boolean isMatchedBonus(boolean matchedBonus) {
+        return (this.matchedBonus == matchedBonus);
     }
 
 }
