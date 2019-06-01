@@ -24,7 +24,7 @@ public class ManualLottoCreator implements LottoCreator {
     }
 
     public Lotto createLotto(String[] numbers) {
-        List<Number> lotto = new ArrayList();
+        List<Number> lotto = new ArrayList<>();
         for (String number : numbers) {
             lotto.add(Number.valueOf(Integer.parseInt(number)));
         }

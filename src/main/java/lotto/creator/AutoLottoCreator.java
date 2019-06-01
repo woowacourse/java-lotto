@@ -26,7 +26,7 @@ public class AutoLottoCreator implements LottoCreator {
     private Lotto createLotto() {
         List<Number> numbers = Number.getNumberList();
         Collections.shuffle(numbers);
-        return new Lotto(new ArrayList<>(numbers.subList(0, 6)));
+        return new Lotto(new ArrayList<>(numbers.subList(0, Lotto.LOTTO_SIZE)));
     }
 
 }
