@@ -2,6 +2,7 @@ package lotto.domain;
 
 public class LottoMoney {
     private static final int MONEY_MIN_CONDITION = 0;
+    private static final int CHANGE_MONEY = 0;
 
     private final long money;
 
@@ -20,7 +21,7 @@ public class LottoMoney {
     }
 
     private void validateChange() {
-        if (money % LottoTicket.PRICE != 0) {
+        if (money % LottoTicket.PRICE != CHANGE_MONEY) {
             throw new IllegalArgumentException("금액은 1000원 단위로 입력해주세요.");
         }
     }
