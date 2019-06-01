@@ -5,6 +5,7 @@ import java.util.*;
 import static com.woowacourse.lotto.domain.Money.MINIMUM_MONEY_FOR_PURCHASE;
 
 public class LottoResult {
+	private static final int PERCENT = 100;
 	private final WinningLotto winningLotto;
 	private final Lottos lottos;
 	private Map<LottoRank, Integer> rankResult = new TreeMap<>();
@@ -39,7 +40,7 @@ public class LottoResult {
 	}
 
 	public long getEarningsRate() {
-		return (getAllPrice() / (lottos.size() * MINIMUM_MONEY_FOR_PURCHASE)) * 100;
+		return (getAllPrice() / (lottos.size() * MINIMUM_MONEY_FOR_PURCHASE)) * PERCENT;
 	}
 
 	public Map<LottoRank, Integer> getLottoResult() {
@@ -62,10 +63,5 @@ public class LottoResult {
 	@Override
 	public int hashCode() {
 		return Objects.hash(winningLotto, lottos);
-	}
-
-	public static void main(String[] args) {
-		long sum = 2_000_000_000;
-		System.out.println(sum);
 	}
 }
