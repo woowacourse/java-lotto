@@ -86,7 +86,7 @@ public class WinningLottoTest {
     @Test
     void 보너스_로또_중복_테스트() {
         Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = new LottoNumber(6);
         assertThrows(IllegalNumberCombinationException.class, ()->
                 new WinningLotto(lotto, bonusNumber));
     }
