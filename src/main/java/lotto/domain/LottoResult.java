@@ -57,4 +57,16 @@ public class LottoResult {
     public int hashCode() {
         return Objects.hash(winners, yield);
     }
+
+    @Override
+    public String toString() {
+        winners.remove(Rank.MISS);
+        StringBuilder sb = new StringBuilder();
+        for (Rank rank : winners.keySet()) {
+            sb.append(rank.getCountOfMatch()).append("개 일치(").append(rank.getWinningMoney()).append(")- ");
+            sb.append(winners.get(rank)).append("개\n");
+        }
+        return sb.toString();
+    }
+
 }

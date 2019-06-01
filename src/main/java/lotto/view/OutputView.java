@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
 public class OutputView {
@@ -9,5 +10,12 @@ public class OutputView {
         for (int i = 0; i < totalLottos.getLottoCount(); i++) {
             System.out.println(totalLottos.getLottoByIndex(i));
         }
+    }
+
+    public static void printLottoResult(LottoResult lottoResult) {
+        System.out.println("당첨 통계\n" +
+                "---------");
+        System.out.println(lottoResult);
+        System.out.println("총 수익률은 " + lottoResult.getYield() * 100 + "% 입니다.");
     }
 }

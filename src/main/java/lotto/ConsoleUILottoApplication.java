@@ -1,7 +1,9 @@
 package lotto;
 
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,5 +18,13 @@ public class ConsoleUILottoApplication {
 
         Lottos totalLottos = new Lottos(manualLottos, lottoMoney.getCountOfTicket());
         OutputView.printLottos(totalLottos, manualLottos.size());
+
+        String winningLottoInput =  InputView.receiveWinning();
+        int bonusBall = InputView.receiveBonus();
+        WinningLotto winningLotto = new WinningLotto(winningLottoInput, bonusBall);
+
+
+        LottoResult lottoResult = new LottoResult(totalLottos, winningLotto);
+        OutputView.printLottoResult(lottoResult);
     }
 }
