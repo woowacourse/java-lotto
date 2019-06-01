@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -16,17 +15,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = number;
     }
 
+    public static LottoNumber valueOf(final int number) {
+        if (number >= LOTTO_MIN_NUMBER && number <= LOTTO_MAX_NUMBER) {
+            return LottoNumberCache.cache.get(number - 1);
+        }
+        return new LottoNumber(number);
+    }
+
     private void validateLottoNumber(final Integer number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 이상 45 이하 입니다.");
         }
-    }
-
-    public static LottoNumber valueOf(final int number) {
-        if (number >= LOTTO_MIN_NUMBER && number <= LOTTO_MAX_NUMBER) {
-            return LottoNumberCache.cache.get(number-1);
-        }
-        return new LottoNumber(number);
     }
 
     private static class LottoNumberCache {
