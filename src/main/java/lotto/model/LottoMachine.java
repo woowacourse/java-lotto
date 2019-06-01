@@ -1,4 +1,7 @@
-package lotto;
+package lotto.model;
+
+import lotto.LottoLauncher;
+import lotto.view.InputView;
 
 import java.util.*;
 
@@ -15,7 +18,13 @@ public class LottoMachine {
         return new Lottos(lottos);
     }
 
-    public static Lottos generateLottos(List<Lotto> manualLottos) {
+    public static Lottos generateLottos(ManualLottoCount manualLottoCount) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        int currentCount = 0;
+        while (manualLottoCount.isCountFinished(currentCount)) {
+            manualLottos.add(new Lotto(LottoLauncher.getManualLottoNumbers()));
+            currentCount++;
+        }
         return new Lottos(manualLottos);
     }
 

@@ -1,17 +1,22 @@
 package lotto;
 
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoLauncher {
 
     public static void main(String[] args) {
+        //1
         Money money = generateMoney();
-        Lottos manualLottos = generateManualLottos(money);
+        //2
+        ManualLottoCount manualLottoCount = generateManualLottoCount(money);
+        //3
+        Lottos manualLottos = generateManualLottos(manualLottoCount);
+        //4
         Lottos automaticLottos = LottoMachine.generateLottos(money.getLottoCount() - manualLottos.size());
 
         OutputView.printLottos(manualLottos, automaticLottos);
@@ -22,6 +27,15 @@ public class LottoLauncher {
         LottoResult lottoResult = new LottoResult(money, totalLottos.getPrizes(winningLotto));
 
         OutputView.printStatistics(lottoResult);
+    }
+
+    private static ManualLottoCount generateManualLottoCount(Money money) {
+        try {
+            int input = InputView.askManualLottoCount();
+            return new ManualLottoCount(input, money);
+        } catch (Exception e) {
+            return generateManualLottoCount(money);
+        }
     }
 
     private static List<Integer> generateWinningLotto() {
@@ -52,21 +66,16 @@ public class LottoLauncher {
         }
     }
 
-    private static Lottos generateManualLottos(Money money) {
+    private static Lottos generateManualLottos(ManualLottoCount manualLottoCount) {
         try {
-            List<Lotto> manualLottos = new ArrayList<>();
-            int count = InputView.askManualLottoCount();
-            if (count < 0 || count > money.getLottoCount()) {
-                throw new IllegalCountException();
-            }
-            for (int i = 0; i < count; i++) {
-                manualLottos.add(new Lotto(InputView.askManualLottoNumbers()));
-            }
-            return LottoMachine.generateLottos(manualLottos);
+            return LottoMachine.generateLottos(manualLottoCount);
         } catch (Exception e) {
-            return generateManualLottos(money);
+            return generateManualLottos(manualLottoCount);
         }
+    }
 
+    public static List<Integer> getManualLottoNumbers() {
+        return InputView.askManualLottoNumbers();
     }
 
 }

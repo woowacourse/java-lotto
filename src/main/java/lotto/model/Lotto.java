@@ -1,10 +1,11 @@
-package lotto;
+package lotto.model;
 
 import java.util.List;
 
 public class Lotto {
     private static final String SEPERATOR = ",";
     private static final int LOTTO_NUMBER_LENGHT = 6;
+
     List<LottoNumber> numbers;
 
 

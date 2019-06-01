@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.Lotto;
-import lotto.LottoResult;
-import lotto.Lottos;
-import lotto.Prize;
+import lotto.model.Lotto;
+import lotto.model.LottoResult;
+import lotto.model.Lottos;
+import lotto.model.Prize;
 
 public class OutputView {
 

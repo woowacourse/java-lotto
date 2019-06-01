@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import java.util.*;
 
@@ -22,6 +22,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(int number) throws IllegalLottoNumberException {
+        //todo 상수
         if (number < 1 || number > 45) {
             throw new IllegalLottoNumberException();
         }

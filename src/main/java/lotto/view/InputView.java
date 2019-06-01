@@ -1,12 +1,9 @@
 package lotto.view;
 
-import lotto.LottoNumber;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class InputView {
     private static Scanner reader = new Scanner(System.in);
@@ -19,6 +16,7 @@ public class InputView {
 
     public static List<Integer> askWinningLottoNumbers() {
         System.out.println("우승 당첨 번호를 입력하세요");
+
         List<String> inputs = Arrays.asList(reader.nextLine().split(SEPERATOR));
         List<Integer> lottoNumbers = new ArrayList<>();
 

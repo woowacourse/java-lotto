@@ -2,6 +2,8 @@ package lotto;
 
 
 
+import lotto.model.IllegalNumberCombinationException;
+import lotto.model.Lotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
