@@ -3,9 +3,9 @@ package lotto.domain;
 public class LottoMoney {
     private static final int MONEY_MIN_CONDITION = 0;
 
-    private final int money;
+    private final long money;
 
-    public LottoMoney(final int money) {
+    public LottoMoney(final long money) {
         this.money = money;
         validateMoney();
     }
@@ -15,7 +15,7 @@ public class LottoMoney {
         validateChange();
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return money / LottoTicket.PRICE;
     }
 
@@ -31,7 +31,7 @@ public class LottoMoney {
         }
     }
 
-    public int getMoney() {
+    public long getMoney() {
         return money;
     }
 }
