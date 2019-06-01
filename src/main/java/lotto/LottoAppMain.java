@@ -74,6 +74,7 @@ public class LottoAppMain {
 		try {
 			return InputView.inputBonusBall();
 		} catch (Exception e) {
+			OutputView.printExceptionMessage(e.getMessage());
 			return getBonusBall();
 		}
 	}
