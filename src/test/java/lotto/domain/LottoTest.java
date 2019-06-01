@@ -11,14 +11,28 @@ public class LottoTest {
     @Test
     void 로또_중복_번호() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Lotto(Arrays.asList(1, 2, 3, 4, 6, 6));
+            new Lotto(Arrays.asList(
+                    LottoNumber.getInstance(1),
+                    LottoNumber.getInstance(2),
+                    LottoNumber.getInstance(3),
+                    LottoNumber.getInstance(4),
+                    LottoNumber.getInstance(6),
+                    LottoNumber.getInstance(6)
+                    ));
         });
     }
 
     @Test
     void 유효하지_않은_번호를_갖는_로또_예외() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Lotto(Arrays.asList(-1, 2, 3, 4, 5, 6));
+            new Lotto(Arrays.asList(
+                    LottoNumber.getInstance(-1),
+                    LottoNumber.getInstance(2),
+                    LottoNumber.getInstance(3),
+                    LottoNumber.getInstance(4),
+                    LottoNumber.getInstance(5),
+                    LottoNumber.getInstance(6)
+            ));
         });
     }
 

@@ -5,16 +5,14 @@ import java.util.*;
 import static lotto.domain.LottoRule.*;
 
 public class Lotto {
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE.get()) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE.get()) {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
         }
 
-        for (Integer number : numbers) {
-            lottoNumbers.add(LottoNumber.getInstance(number));
-        }
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
 
         checkDuplication();
         Collections.sort(this.lottoNumbers);

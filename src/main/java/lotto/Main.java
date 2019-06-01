@@ -22,17 +22,6 @@ public class Main {
         OutputConsole.outputResult(new LottoResult(winningLotto, lottos));
     }
 
-    private static void createLottos(int numberOfManualLotto, int numberOfAutoLotto) {
-        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        try {
-            createManualLotto(numberOfManualLotto);
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-            createLottos(numberOfManualLotto, numberOfAutoLotto);
-        }
-        createAutoLotto(numberOfAutoLotto);
-    }
-
     private static Money createMoney() {
         try {
             return new Money(InputConsole.inputMoney());
@@ -49,6 +38,17 @@ public class Main {
             System.err.println(e.getMessage());
             return createNumberOfManualLotto();
         }
+    }
+
+    private static void createLottos(int numberOfManualLotto, int numberOfAutoLotto) {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        try {
+            createManualLotto(numberOfManualLotto);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            createLottos(numberOfManualLotto, numberOfAutoLotto);
+        }
+        createAutoLotto(numberOfAutoLotto);
     }
 
     private static void createManualLotto(int numberOfManualLotto) {

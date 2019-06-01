@@ -15,13 +15,57 @@ public class LottoResultTest {
     @BeforeEach
     void lottoSet() {
         lottos = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 8, 7)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 8, 7)),
-                new Lotto(Arrays.asList(1, 2, 3, 9, 8, 7))
+                new Lotto(Arrays.asList(
+                        LottoNumber.getInstance(1),
+                        LottoNumber.getInstance(2),
+                        LottoNumber.getInstance(3),
+                        LottoNumber.getInstance(4),
+                        LottoNumber.getInstance(5),
+                        LottoNumber.getInstance(6)
+                )),
+                new Lotto(Arrays.asList(
+                        LottoNumber.getInstance(1),
+                        LottoNumber.getInstance(2),
+                        LottoNumber.getInstance(3),
+                        LottoNumber.getInstance(4),
+                        LottoNumber.getInstance(5),
+                        LottoNumber.getInstance(7)
+                )),
+                new Lotto(Arrays.asList(
+                        LottoNumber.getInstance(1),
+                        LottoNumber.getInstance(2),
+                        LottoNumber.getInstance(3),
+                        LottoNumber.getInstance(4),
+                        LottoNumber.getInstance(8),
+                        LottoNumber.getInstance(7)
+                )),
+                new Lotto(Arrays.asList
+                        (LottoNumber.getInstance(1),
+                        LottoNumber.getInstance(2),
+                        LottoNumber.getInstance(3),
+                        LottoNumber.getInstance(4),
+                        LottoNumber.getInstance(8),
+                        LottoNumber.getInstance(7)
+                )),
+                new Lotto(Arrays.asList(
+                        LottoNumber.getInstance(1),
+                        LottoNumber.getInstance(2),
+                        LottoNumber.getInstance(3),
+                        LottoNumber.getInstance(9),
+                        LottoNumber.getInstance(8),
+                        LottoNumber.getInstance(7)
+                ))
         ));
-        winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.getInstance(10));
+        winningLotto = new WinningLotto(
+                new Lotto(Arrays.asList(
+                        LottoNumber.getInstance(1),
+                        LottoNumber.getInstance(2),
+                        LottoNumber.getInstance(3),
+                        LottoNumber.getInstance(4),
+                        LottoNumber.getInstance(5),
+                        LottoNumber.getInstance(6)
+                )),
+                LottoNumber.getInstance(10));
     }
 
     @Test

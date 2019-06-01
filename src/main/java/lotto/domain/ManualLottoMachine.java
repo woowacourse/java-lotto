@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottoMachine implements LottoMachine {
@@ -12,6 +13,14 @@ public class ManualLottoMachine implements LottoMachine {
 
     @Override
     public Lotto generateLotto() {
-        return new Lotto(numbers);
+        return new Lotto(convertLottoNumber(numbers));
+    }
+
+    private List<LottoNumber> convertLottoNumber(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            lottoNumbers.add(LottoNumber.getInstance(number));
+        }
+        return lottoNumbers;
     }
 }
