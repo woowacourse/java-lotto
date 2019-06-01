@@ -1,27 +1,23 @@
 package lotto.domain.factory;
 
 import lotto.domain.LottoMoney;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTicketsFactory {
     private static final String DELIMITER = ",";
 
-    public static List<LottoTicket> create(final int manualAmount, List<String> manualLottoNumbers, final LottoMoney lottoMoney) {
+    public static LottoTickets create(final int manualAmount, List<String> manualLottoNumbers, final LottoMoney lottoMoney) {
         int totalAmount = lottoMoney.getAmount();
         int randomAmount = totalAmount - manualAmount;
         validateAmount(totalAmount, manualAmount);
         List<LottoTicket> lottoTickets = new ArrayList<>();
         getManualTickets(manualLottoNumbers, lottoTickets);
         getRandomTickets(randomAmount, lottoTickets);
-        return lottoTickets;
+        return new LottoTickets(lottoTickets);
     }
 
     private static void validateAmount(int totalAmount, int manualAmount) {
@@ -32,37 +28,13 @@ public class LottoTicketsFactory {
 
     private static void getManualTickets(List<String> manualLottoNumbers, List<LottoTicket> lottoTickets) {
         for (String manualLottoNumber : manualLottoNumbers) {
-            lottoTickets.add(generateManual(manualLottoNumber));
+            lottoTickets.add(new ManualTicketFactory(manualLottoNumber).create());
         }
-    }
-
-    private static LottoTicket generateManual(String manualLottoNumber) {
-        List<String> list = Arrays.asList(manualLottoNumber.split(DELIMITER));
-        return new LottoTicket(list.stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
     }
 
     private static void getRandomTickets(int randomAmount, List<LottoTicket> lottoTickets) {
         for (int i = 0; i < randomAmount; i++) {
-            lottoTickets.add(generateRandom());
+            lottoTickets.add(new RandomTicketFactory().create());
         }
-    }
-
-    private static LottoTicket generateRandom() {
-        List<Integer> randomNumbers = getRandomNumbers();
-        List<Integer> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < LottoTicket.LOTTO_SIZE; i++) {
-            lottoNumbers.add(randomNumbers.get(i));
-        }
-        return new LottoTicket(lottoNumbers);
-    }
-
-    private static List<Integer> getRandomNumbers() {
-        List<Integer> randomNumbers = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-        Collections.shuffle(randomNumbers);
-        return randomNumbers;
     }
 }
