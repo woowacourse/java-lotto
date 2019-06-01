@@ -8,7 +8,14 @@ public class Count {
     private final int count;
 
     public Count(int count) {
+        validCount(count);
         this.count = count;
+    }
+
+    private void validCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("유효하지 않습니다.");
+        }
     }
 
     public Count(PurchaseAmount purchaseAmount) {
