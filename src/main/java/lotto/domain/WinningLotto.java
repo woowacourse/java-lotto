@@ -40,7 +40,7 @@ public class WinningLotto {
         for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
             count += lotto.isContainNumber(this.winningLotto.get(i)) ? 1 : 0;
         }
-        Rank rank = Rank.valueOf(count, false);
+        Rank rank = Rank.valueOf(count, lotto.isContainNumber(bonusBall));
         return rank;
     }
 
