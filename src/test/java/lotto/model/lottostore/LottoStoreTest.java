@@ -1,7 +1,10 @@
 package lotto.model.lottostore;
 
-import lotto.model.customer.CustomLottoTickets;
 import lotto.model.customer.PurchaseAmount;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoNumberRepository;
+import lotto.model.lotto.LottoTicket;
+import lotto.model.lotto.LottoTickets;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,48 +12,51 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoStoreTest {
-    PurchaseAmount purchaseAmount = new PurchaseAmount(5000);
-    List<List<Integer>> customLottoNumbers = new ArrayList<>();
-    List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+    PurchaseAmount purchaseAmount = PurchaseAmount.from(5000);
+    List<LottoTicket> lottoTickets;
+    List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumberRepository.fromNumber(1)
+            , LottoNumberRepository.fromNumber(2)
+            , LottoNumberRepository.fromNumber(3)
+            , LottoNumberRepository.fromNumber(4)
+            , LottoNumberRepository.fromNumber(5)
+            , LottoNumberRepository.fromNumber(45));
 
     @BeforeEach
     void setup() {
-        customLottoNumbers = new ArrayList<>();
+        lottoTickets = new ArrayList<>();
     }
 
     @Test
     void _5000원_수동_0개일_때_로또개수_확인() {
-        CustomLottoTickets customLottoNumber = new CustomLottoTickets(customLottoNumbers);
-
-        assertThat(LottoStore.buyLottoTickets(purchaseAmount, customLottoNumber).size()).isEqualTo(5);
+        assertThat(LottoStore.buyLottoTickets(purchaseAmount, LottoTickets.from(lottoTickets)).size()).isEqualTo(5);
     }
 
     @Test
     void _5000원_수동_3개일_때_로또개수_확인() {
         for (int i = 0; i < 3; i++) {
-            customLottoNumbers.add(lottoNumber);
+            lottoTickets.add(LottoTicket.from(new TreeSet<>(lottoNumbers)));
         }
-        CustomLottoTickets customLottoNumber = new CustomLottoTickets(customLottoNumbers);
 
-        assertThat(LottoStore.buyLottoTickets(purchaseAmount, customLottoNumber).size()).isEqualTo(5);
+        assertThat(LottoStore.buyLottoTickets(purchaseAmount, LottoTickets.from(lottoTickets)).size()).isEqualTo(5);
     }
 
     @Test
     void _5000원_수동_5개일_때_로또개수_확인() {
         for (int i = 0; i < 5; i++) {
-            customLottoNumbers.add(lottoNumber);
+            System.out.println(new TreeSet<>(lottoNumbers));
+            lottoTickets.add(LottoTicket.from(new TreeSet<>(lottoNumbers)));
         }
-        CustomLottoTickets customLottoNumber = new CustomLottoTickets(customLottoNumbers);
 
-        assertThat(LottoStore.buyLottoTickets(purchaseAmount, customLottoNumber).size()).isEqualTo(5);
+        assertThat(LottoStore.buyLottoTickets(purchaseAmount, LottoTickets.from(lottoTickets)).size()).isEqualTo(5);
     }
 
     @AfterEach
     void tearDown() {
-        customLottoNumbers = null;
+        lottoTickets = null;
     }
 }

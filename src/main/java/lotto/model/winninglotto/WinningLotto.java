@@ -9,10 +9,14 @@ public class WinningLotto {
     private final LottoTicket winningLotto;
     private final BonusNumber bonusNumber;
 
-    public WinningLotto(LottoTicket winningLotto, BonusNumber bonusNumber) {
+    private WinningLotto(LottoTicket winningLotto, BonusNumber bonusNumber) {
         checkValidWinningLotto(winningLotto, bonusNumber);
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
+    }
+
+    public static WinningLotto of(LottoTicket winningLotto, BonusNumber bonusNumber) {
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
     private void checkValidWinningLotto(LottoTicket winningLotto, BonusNumber bonusNumber) {

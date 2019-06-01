@@ -5,13 +5,18 @@ import lotto.model.lotto.exception.InvalidLottoNumberException;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    static final int MIN_LOTTO_NUMBER = 1;
+    static final int MAX_LOTTO_NUMBER = 45;
+
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
+    LottoNumber(int lottoNumber) {
         checkValidLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
+    }
+
+    static LottoNumber from(int lottoNumber) {
+        return new LottoNumber(lottoNumber);
     }
 
     private void checkValidLottoNumber(int lottoNumber) {

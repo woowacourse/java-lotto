@@ -1,7 +1,6 @@
 package lotto.model.lotto;
 
 import lotto.model.lotto.exception.InvalidLottoTicketException;
-import lotto.model.lottorank.LottoRank;
 import lotto.model.winninglotto.WinningLotto;
 
 import java.util.Set;
@@ -10,11 +9,16 @@ import java.util.stream.Stream;
 
 public class LottoTicket {
     private static final int COUNT_OF_LOTTO_NUMBERS_IN_ONE_TICKET = 6;
+
     private final Set<LottoNumber> lottoTicket;
 
-    public LottoTicket(Set<LottoNumber> lottoNumbers) {
+    private LottoTicket(Set<LottoNumber> lottoNumbers) {
         checkValidLottoNumbers(lottoNumbers);
         this.lottoTicket = new TreeSet<>(lottoNumbers);
+    }
+
+    public static LottoTicket from(Set<LottoNumber> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
     }
 
     public LottoRank convertToLottoRank(WinningLotto winningLotto) {

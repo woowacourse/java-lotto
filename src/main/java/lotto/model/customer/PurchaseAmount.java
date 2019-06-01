@@ -5,18 +5,23 @@ import lotto.model.lottostore.Price;
 
 public class PurchaseAmount {
     private static final int ZERO = 0;
+
     private final int purchaseAmount;
 
-    public PurchaseAmount(int purchaseAmount) {
+    private PurchaseAmount(int purchaseAmount) {
         checkValidPurchaseAmount(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
+    }
+
+    public static PurchaseAmount from(int purchaseAmount) {
+        return new PurchaseAmount(purchaseAmount);
     }
 
     public PurchaseQuantity calculatePurchaseQuantity(Price price, int countOfCustomLotto) {
         try {
             int purchaseQuantity = (this.purchaseAmount / price.getPrice() - countOfCustomLotto);
 
-            return new PurchaseQuantity(purchaseQuantity);
+            return PurchaseQuantity.from(purchaseQuantity);
         } catch (ArithmeticException e) {
             throw new InvalidPurchaseAmountException("잘못된 가격입니다.");
         }

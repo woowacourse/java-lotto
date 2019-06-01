@@ -1,23 +1,28 @@
 package lotto.model.winninglotto;
 
 import lotto.model.lotto.LottoTickets;
-import lotto.model.lottorank.LottoRank;
+import lotto.model.lotto.LottoRank;
 import lotto.model.lottostore.Price;
 
 import java.util.EnumMap;
 
 public class WinningStatistics {
-    private EnumMap<LottoRank, Long> rankCountMap;
     private static final String WINNING_MONEY_PRINT_FORMAT = "(%d원)";
-    private static final String COUNT_OF_WIN_PRINT_FORMAT = "- %d개";
+    private static final String COUNT_OF_WIN_PRINT_FORMAT = " - %d개";
     private static final String ROI_PRINT_FORMAT = "총 수익률은 %d％입니다.";
     private static final String NEW_LINE = System.getProperty("line.separator");
     private static final int PERCENTAGE = 100;
     private static final long UNKNOWN_VALUE = 0L;
     private static final long DEFAULT_VALUE = 1L;
 
-    public WinningStatistics(LottoTickets lottoTickets, WinningLotto winningLotto) {
+    private EnumMap<LottoRank, Long> rankCountMap;
+
+    private WinningStatistics(LottoTickets lottoTickets, WinningLotto winningLotto) {
         rankCountMap = mapTickets(lottoTickets, winningLotto);
+    }
+
+    public static WinningStatistics of(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        return new WinningStatistics(lottoTickets, winningLotto);
     }
 
     private EnumMap<LottoRank, Long> mapTickets(LottoTickets lottoTickets, WinningLotto winningLotto) {
@@ -33,9 +38,9 @@ public class WinningStatistics {
         long countSum = 0;
 
         for (LottoRank lottoRank : LottoRank.values()) {
-            long countOfLottoRank = rankCountMap.getOrDefault(lottoRank, UNKNOWN_VALUE);
-            roi += lottoRank.getWinningMoney() * countOfLottoRank;
-            countSum += countOfLottoRank;
+            long countOfMatchingLotto = rankCountMap.getOrDefault(lottoRank, UNKNOWN_VALUE);
+            roi += lottoRank.calculateWinningMoney(countOfMatchingLotto);
+            countSum += countOfMatchingLotto;
         }
         return (roi * PERCENTAGE) / (countSum * Price.LOTTO_TICKET_PRICE.getPrice());
     }
@@ -44,8 +49,8 @@ public class WinningStatistics {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (LottoRank lottoRank : LottoRank.values()) {
-            stringBuilder.append(lottoRank.getNumberMatchType())
-                    .append(String.format(WINNING_MONEY_PRINT_FORMAT, lottoRank.getWinningMoney()))
+            stringBuilder.append(lottoRank)
+                    .append(String.format(WINNING_MONEY_PRINT_FORMAT, lottoRank.calculateWinningMoney(DEFAULT_VALUE)))
                     .append(String.format(COUNT_OF_WIN_PRINT_FORMAT, rankCountMap.getOrDefault(lottoRank, UNKNOWN_VALUE)))
                     .append(NEW_LINE);
         }

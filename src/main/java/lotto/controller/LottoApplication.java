@@ -8,7 +8,7 @@ import lotto.model.winninglotto.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class MainController {
+public class LottoApplication {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = InputView.inputPurchaseAmount();
 
@@ -19,6 +19,6 @@ public class MainController {
         OutputView.printLottoTickets(lottoTickets, manualPurchaseQuantity);
 
         WinningLotto winningLotto = InputView.inputWinningLotto();
-        OutputView.printWinningStatistics(new WinningStatistics(lottoTickets, winningLotto));
+        OutputView.printWinningStatistics(WinningStatistics.of(lottoTickets, winningLotto));
     }
 }

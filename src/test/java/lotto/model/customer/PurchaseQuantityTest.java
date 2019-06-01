@@ -9,6 +9,6 @@ public class PurchaseQuantityTest {
 
     @Test
     void 구입_개수가_음수일_때_예외_발생() {
-        assertThrows(InvalidPurchaseQuantityException.class, () -> new PurchaseQuantity(-1));
+        assertThrows(InvalidPurchaseQuantityException.class, () -> PurchaseQuantity.from(-1));
     }
 }

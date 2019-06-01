@@ -4,11 +4,16 @@ import lotto.model.customer.exception.InvalidPurchaseQuantityException;
 
 public class PurchaseQuantity {
     private static final int ZERO = 0;
+
     private int purchaseQuantity;
 
-    public PurchaseQuantity(int purchaseQuantity) {
+    private PurchaseQuantity(int purchaseQuantity) {
         checkValidPurchaseQuantity(purchaseQuantity);
         this.purchaseQuantity = purchaseQuantity;
+    }
+
+    public static PurchaseQuantity from(int purchaseQuantity) {
+        return new PurchaseQuantity(purchaseQuantity);
     }
 
     public boolean isLessThanPurchaseQuantity(int count) {
