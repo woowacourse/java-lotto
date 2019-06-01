@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LottoNumberTest {
     @Test
     void create() {
-        assertThat(LottoNumber.of(15)).isEqualTo(LottoNumber.of(15));
+        assertThat(LottoNumber.from(15)).isEqualTo(LottoNumber.from(15));
     }
 
     @Test
     void 범위를_벗어난_숫자() {
-        assertThrows(IllegalArgumentException.class, () -> LottoNumber.of(49));
+        assertThrows(IllegalArgumentException.class, () -> LottoNumber.from(49));
     }
 }
