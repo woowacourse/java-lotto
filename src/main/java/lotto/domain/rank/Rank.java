@@ -30,17 +30,17 @@ public class Rank {
         }
     }
 
-    public long totalRewardMoney() {
-        long totalRewardMoney = 0;
+    public double rateOfReturn(int userMoney) {
+        long totalRewardMoney = totalRewardMoney();
+        return ((double) totalRewardMoney / userMoney) * PERCENT;
+    }
+
+    private long totalRewardMoney() {
+        long totalRewardMoney = ZERO;
         for (AbstractRank rank : winners.values()) {
             totalRewardMoney += rank.rewardMoney();
         }
         return totalRewardMoney;
-    }
-
-    public double rateOfReturn(int userMoney) {
-        long totalRewardMoney = totalRewardMoney();
-        return ((double) totalRewardMoney / userMoney) * PERCENT;
     }
 
     @Override

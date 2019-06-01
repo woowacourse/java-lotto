@@ -19,6 +19,8 @@
 * WinningLotto LottTicket 적용
 * ManualLotto LottTicket 적용
 * Lotto 추상화
+* InputView 생성
+    * [예외] InputView 당첨 번호에 숫자가 아닌 경우
     * [예외] Money 1장도 못사는 경우 체크하기
     * [예외] LottoNumber 로또 번호가 1부터 45까지 범위에 적합한지 체크하기
     * [예외] LottoTicket 로또 번호가 6개가 맞는지 체크하기
