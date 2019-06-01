@@ -25,4 +25,8 @@ public class LottoMoney {
     public int getCountOfTicket() {
         return purchasePrice / LOTTO_PRICE;
     }
+
+    public int getRemainMoney() {
+        return (this.purchasePrice % 1000);
+    }
 }

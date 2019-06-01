@@ -14,6 +14,7 @@ public class ConsoleUILottoApplication {
         try {
             int inputMoney = InputView.receiveLottoMoney();
             LottoMoney lottoMoney = new LottoMoney(inputMoney);
+            OutputView.printRemainMoney(lottoMoney.getRemainMoney());
 
             List<String> manualLottos = InputView.receiveManualLotto();
 

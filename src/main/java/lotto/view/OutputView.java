@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
@@ -17,5 +18,11 @@ public class OutputView {
                 "---------");
         System.out.println(lottoResult);
         System.out.println("총 수익률은 " + lottoResult.getYield() * 100 + "% 입니다.");
+    }
+
+    public static void printRemainMoney(int remainMoney) {
+        if (remainMoney != 0) {
+            System.out.println("거스름돈 " + remainMoney + "원 입니다.");
+        }
     }
 }
