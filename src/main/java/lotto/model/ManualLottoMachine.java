@@ -6,20 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottoMachine implements LottoMachine {
-    private ManualLottoCount manualLottoCount;
+    private List<Lotto> manualLottos;
 
-    public ManualLottoMachine(ManualLottoCount manualLottoCount) {
-        this.manualLottoCount = manualLottoCount;
+    public ManualLottoMachine(List<Lotto> manualLottos) {
+        this.manualLottos = manualLottos;
     }
 
     @Override
     public Lottos generateLottos() {
-        List<Lotto> manualLottos = new ArrayList<>();
-        int currentCount = 0;
-        while (manualLottoCount.isCountFinished(currentCount)) {
-            manualLottos.add(new Lotto(LottoLauncher.getManualLottoNumbers()));
-            currentCount++;
-        }
-        return new Lottos(manualLottos);
+        List<Lotto> newManualLottos = new ArrayList<>(manualLottos);
+        return new Lottos(newManualLottos);
     }
 }

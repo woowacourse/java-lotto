@@ -17,9 +17,9 @@ public class LottoLauncher {
         ManualLottoCount manualLottoCount = generateManualLottoCount(money);
 
         //3
-        LottoMachine manualLottoMachine = new ManualLottoMachine(manualLottoCount);
-        Lottos manualLottos = generateLottos(manualLottoMachine);
+        LottoMachine manualLottoMachine = generateManualLottoMachine(manualLottoCount);
         LottoMachine automaticLottoMachine = new AutomaticLottoMachine(money, manualLottoCount);
+        Lottos manualLottos = generateLottos(manualLottoMachine);
         Lottos automaticLottos = generateLottos(automaticLottoMachine);
 
         //4
@@ -32,6 +32,25 @@ public class LottoLauncher {
         LottoResult lottoResult = new LottoResult(money, totalLottos.getPrizes(winningLotto));
 
         OutputView.printStatistics(lottoResult);
+    }
+
+    private static LottoMachine generateManualLottoMachine(ManualLottoCount manualLottoCount) {
+        try {
+            List<Lotto> manualLottos = prepareManualLottos(manualLottoCount);
+            return new ManualLottoMachine(manualLottos);
+        } catch (Exception e) {
+            System.out.println("잘못된 입력입니다");
+            return generateManualLottoMachine(manualLottoCount);
+        }
+    }
+
+    private static List<Lotto> prepareManualLottos(ManualLottoCount manualLottoCount) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        int count = manualLottoCount.getCount();
+        for (int i = 0; i < count; i++) {
+            manualLottos.add(new Lotto(InputView.askManualLottoNumbers()));
+        }
+        return manualLottos;
     }
 
     private static WinningLotto generateWinningLotto() {
@@ -71,10 +90,6 @@ public class LottoLauncher {
             System.out.println("잘못된 구입 금액입니다");
             return generateMoney();
         }
-    }
-
-    public static List<Integer> getManualLottoNumbers() {
-        return InputView.askManualLottoNumbers();
     }
 
 }
