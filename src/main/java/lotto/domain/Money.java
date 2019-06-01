@@ -25,4 +25,8 @@ public class Money {
     public int getAutoLottoNumber(int manualLottoNumber) {
         return (money - (manualLottoNumber * LOTTO_PRICE)) / LOTTO_PRICE;
     }
+
+    public int getMoney() {
+        return money;
+    }
 }

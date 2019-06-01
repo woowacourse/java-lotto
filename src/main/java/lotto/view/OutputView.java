@@ -11,4 +11,8 @@ public class OutputView {
     public static void printRankState(Rank rank) {
         System.out.println(rank.toString());
     }
+
+    public static void printRateOfReturn(double rateOfReturn) {
+        System.out.println("총 수익률은 " + (int) rateOfReturn + "%입니다.");
+    }
 }

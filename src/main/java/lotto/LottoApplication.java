@@ -21,5 +21,6 @@ public class LottoApplication {
         WinningLotto winningLotto = new WinningLotto(InputView.winningLotto(), InputView.bonusNumber());
         Rank rank = lottos.matchLottoRank(winningLotto);
         OutputView.printRankState(rank);
+        OutputView.printRateOfReturn(rank.rateOfReturn(money.getMoney()));
     }
 }
