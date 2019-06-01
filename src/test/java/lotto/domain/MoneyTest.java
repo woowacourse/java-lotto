@@ -15,13 +15,13 @@ public class MoneyTest {
     }
 
     @Test
-    void 구매할_수_있는_로또_개수_계산() {
+    void 정확히_나누어_떨어지는_금액_입력() {
         Money money = new Money(14000);
         assertThat(14).isEqualTo(money.getNumberOfLotto());
     }
 
     @Test
-    void 구매할_수_있는_로또_개수_계산2() {
+    void 정확히_나누어_떨어지지_않는_금액_입력() {
         Money money = new Money(14200);
         assertThat(14).isEqualTo(money.getNumberOfLotto());
     }
