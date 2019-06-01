@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.NumberValidException;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoNumberTest {
@@ -18,5 +19,10 @@ public class LottoNumberTest {
         assertThrows(NumberValidException.class, () -> {
             LottoNumber.of(0);
         });
+    }
+
+    @Test
+    void 로또_번호_생성() {
+        assertThat(LottoNumber.of(19)).isEqualTo(new LottoNumber(19));
     }
 }

@@ -13,7 +13,7 @@ public class LottoNumber {
     private static Map<Integer, LottoNumber> numbers = new HashMap<>();
     private int number;
 
-    private LottoNumber(int number) {
+    LottoNumber(int number) {
         if (number >= MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER) {
             throw new NumberValidException("로또번호에 해당되지 않는 숫자입니다.");
         }
