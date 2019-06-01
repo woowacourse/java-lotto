@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.List;
 
 public class WinningLotto {
-    private final Lotto lotto;
+    private final Lotto winningLotto;
     private final Number bonusNum;
 
     public WinningLotto(Lotto lotto, Number number) {
         validate(lotto, number);
-        this.lotto = lotto;
+        this.winningLotto = lotto;
         this.bonusNum = number;
     }
 
@@ -27,7 +27,7 @@ public class WinningLotto {
     }
 
     private int countMatchNum(Lotto lotto) {
-        List<Number> winningLotto = this.lotto.getLotto();
+        List<Number> winningLotto = this.winningLotto.getLotto();
         winningLotto.retainAll(lotto.getLotto());
         return winningLotto.size();
     }
