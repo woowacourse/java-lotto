@@ -19,7 +19,7 @@ public class PurchasePrice {
             throw new IllegalArgumentException(MAX_PURCHASE_PRICE + "원 이상은 구매할 수 없습니다.");
         }
     }
-    
+
     public int getCountOfTicket() {
         return purchasePrice / TICKET_PRICE;
     }

@@ -26,4 +26,10 @@ public class LottoManualGeneratorTest {
         LottoManualGenerator lottoManualGenerator = new LottoManualGenerator("1,2,3,4,,,5");
         assertThrows(IllegalArgumentException.class, () -> lottoManualGenerator.generate());
     }
+
+    @Test
+    void 중복된_입력() {
+        LottoManualGenerator lottoManualGenerator = new LottoManualGenerator("1,2,3,4,5,5");
+        assertThrows(IllegalArgumentException.class, () -> lottoManualGenerator.generate());
+    }
 }
