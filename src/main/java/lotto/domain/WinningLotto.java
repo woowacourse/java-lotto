@@ -6,10 +6,20 @@ import java.util.Objects;
 public class WinningLotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> winningLotto;
+    private final LottoNumber bonusBall;
 
-    public WinningLotto(String input) {
+    public WinningLotto(String input, int userInputBonusNum) {
         LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(input);
         this.winningLotto = lottoManualGenerator.generate();
+        LottoNumber bonusNumber = LottoNumber.from(userInputBonusNum);
+        checkDuplicate(bonusNumber);
+        this.bonusBall = bonusNumber;
+    }
+
+    private void checkDuplicate(LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 볼이 중복 됩니다.");
+        }
     }
 
     @Override
