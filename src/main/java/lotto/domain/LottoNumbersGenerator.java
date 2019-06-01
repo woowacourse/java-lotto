@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbersGenerator {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -11,8 +12,7 @@ public class LottoNumbersGenerator {
 
     static {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            LottoNumber lottoNumber = LottoNumber.valueOf(i);
-            totalLottoNumbers.add(lottoNumber);
+            totalLottoNumbers.add(LottoNumber.valueOf(i));
         }
     }
 
@@ -26,16 +26,12 @@ public class LottoNumbersGenerator {
 
     public static LottoNumbers getLottoNumbers() {
         Collections.shuffle(totalLottoNumbers, new Random());
-        List<LottoNumber> lottoNumbers = new ArrayList<>(
-                totalLottoNumbers.subList(SUBLIST_LOWER_BOUND, SUBLIST_UPPER_BOUND));
-        return new LottoNumbers(lottoNumbers);
+        return new LottoNumbers(totalLottoNumbers.subList(SUBLIST_LOWER_BOUND, SUBLIST_UPPER_BOUND));
     }
 
     public static LottoNumbers getLottoNumbers(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : numbers) {
-            lottoNumbers.add(getLottoNumber(number));
-        }
-        return new LottoNumbers(lottoNumbers);
+        return new LottoNumbers(numbers.stream()
+                .map(LottoNumbersGenerator::getLottoNumber)
+                .collect(Collectors.toList()));
     }
 }
