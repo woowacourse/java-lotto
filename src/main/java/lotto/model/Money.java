@@ -15,7 +15,7 @@ public class Money {
     }
 
 
-    public double calculatePercentage(double sum) {
+    public double calculateProfitRate(double sum) {
         return sum/money;
     }
 

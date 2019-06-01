@@ -17,7 +17,7 @@ public class LottoResult {
         for (Prize prize : Prize.values()) {
             sum += prize.getPrizeMoney() * prizeInfo.get(prize);
         }
-        return money.calculatePercentage(sum);
+        return money.calculateProfitRate(sum);
     }
 
     public int getCount(Prize prize) {
