@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class LottoNoTest {
     @Test
     void 로또_번호_생성() {
-        assertThat(LottNo.of(1)).isEqualTo(LottNo.of(1));
+        assertThat(LottoNo.of(1)).isEqualTo(LottoNo.of(1));
     }
 
     @ParameterizedTest
