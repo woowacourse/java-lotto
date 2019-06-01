@@ -10,28 +10,33 @@ import java.util.stream.Collectors;
 public class WinningLotto {
     public static WinningLotto WINNING_LOTTO = null;
 
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final LottoNumber bonusBall;
 
-    private WinningLotto(String winningLotto) {
+    private WinningLotto(final String winningLotto, final int bonusBall) {
         List<String> inputNumbers = Arrays.asList(winningLotto.split(","));
 
         for (String inputNumber : inputNumbers) {
             validateNumeric(inputNumber);
+            validateDistinctNumber(Integer.parseInt(inputNumber));
+
             lottoNumbers.add(LottoNumber.getNumber(Integer.parseInt(inputNumber)));
         }
-        validateDistinctNumber(lottoNumbers);
+
+        validateDistinctNumber(bonusBall);
+        this.bonusBall = LottoNumber.getNumber(bonusBall);
     }
 
-    public static WinningLotto getInstance(String manualLotto) {
+    public static WinningLotto of(final String winningLotto, final int bonusBall) {
         if (WINNING_LOTTO == null) {
-            WINNING_LOTTO = new WinningLotto(manualLotto);
+            WINNING_LOTTO = new WinningLotto(winningLotto, bonusBall);
         }
 
         return WINNING_LOTTO;
     }
 
     public boolean hasEqualNumber(LottoNumber number) {
-        return lottoNumbers.contains(number);
+        return lottoNumbers.contains(number);// || lottoNumbers.contains(bonusBall);
     }
 
     private static void validateNumeric(String number) {
@@ -40,10 +45,15 @@ public class WinningLotto {
         }
     }
 
-    private static void validateDistinctNumber(List<LottoNumber> lottoNumbers) {
-        boolean isDistinct = lottoNumbers.stream().distinct().collect(Collectors.toList()).size() != lottoNumbers.size();
+    private void validateDistinctNumber(int lottoNumber) {
+        boolean isDistinct = lottoNumbers.contains(LottoNumber.getNumber(lottoNumber));
+
         if (isDistinct) {
             throw new UnmatchedLottoTicketAmountException("중복된 번호는 입력할 수 없습니다.");
         }
+    }
+
+    static void makeObjectNull() {
+        WINNING_LOTTO = null;
     }
 }
