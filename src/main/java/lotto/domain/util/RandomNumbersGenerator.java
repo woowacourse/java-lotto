@@ -24,6 +24,7 @@ public class RandomNumbersGenerator {
         List<Number> result = numberList.subList(0, 6);
         Collections.sort(result);
         return result;
+        // return numberList.stream().limit(6).collect(Collectors.toList());
     }
 
     public static List<Number> create() {
