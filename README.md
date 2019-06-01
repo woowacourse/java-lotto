@@ -21,8 +21,6 @@
 * Money
 * LottoTickets: 로또 리스트, 구매할 수동 로또 수
 * LottoTicket: 로또 한 장
-    * 당첨 번호와 일치하는 수 카운트해서 리턴하기
-    * 보너스 볼과 일치하는 수가 있는지 확인해서 boolean 리턴하기
 * LottoTicketFactory
     * 수동 로또인지 자동 로또인지 구분해서 객체 생성하기
     * **자동 로또의 경우**
@@ -55,8 +53,8 @@
 * LottoTickets: 로또 리스트, 구매할 수동 로또 수
     * 구매할 수동 로또 수만큼 리스트에 갖고 있는지 응답하기
 * LottoTicket: 로또 한 장
-    * 갖고 있는 번호 중에 당첨 번호가 있는지 확인하기
-        * 일반 번호만 확인
+    * 당첨 번호와 일치하는 수 카운트해서 리턴하기
+    * 보너스 볼과 일치하는 수가 있는지 확인해서 boolean 리턴하기
 * LottoTicketsFactory
     * **수동 로또의 경우**
         * String으로 로또 번호 6개가 입력되면 LottoNumber 리스트에 저장하기
@@ -80,3 +78,8 @@
     * 파라미터로 전달받은 번호가 당첨번호와 일치하는지 boolean으로 리턴
         * 일반 번호 확인
         * 보너스 볼 확인
+* RankType: Enum
+    * 일치하는 번호 수에 따라 다르게 객체 리턴하기
+        * valueOf(5, true) -> RankType.SECOND
+        * valueOf(6, false) -> RankType.FIRST
+    * 일치하는 번호 수 리턴하기 
