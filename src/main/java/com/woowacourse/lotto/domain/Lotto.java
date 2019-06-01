@@ -46,11 +46,9 @@ public class Lotto {
 	@Override
 	public String toString() {
 		StringJoiner stringJoiner = new StringJoiner(",", "[", "]");
-
 		for (LottoNumber lottoNumber : numbers) {
 			stringJoiner.add(String.valueOf(lottoNumber.getName()));
 		}
-
 		return stringJoiner.toString();
 	}
 }

@@ -3,7 +3,6 @@ package com.woowacourse.lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-
 	ZERO(0, 0),
 	FIFTH(3, 5_000),
 	FOURTH(4, 50_000),

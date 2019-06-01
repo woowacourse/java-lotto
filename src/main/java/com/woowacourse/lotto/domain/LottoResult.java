@@ -18,7 +18,7 @@ public class LottoResult {
 	}
 
 	private void initializeRankResultMap() {
-		for(LottoRank lottoRank : LottoRank.values()) {
+		for (LottoRank lottoRank : LottoRank.values()) {
 			rankResult.put(lottoRank, 0);
 		}
 	}
@@ -34,7 +34,7 @@ public class LottoResult {
 	private long getAllPrice() {
 		long sum = 0;
 		for (LottoRank rank : rankResult.keySet()) {
-			sum += (long)(rank.getPrice() * rankResult.get(rank));
+			sum += (long) (rank.getPrice() * rankResult.get(rank));
 		}
 		return sum;
 	}
