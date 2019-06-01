@@ -32,7 +32,6 @@ public class LottoResult {
 
 	private long getAllPrice() {
 		long sum = 0;
-
 		for (LottoRank rank : rankResult.keySet()) {
 			sum += (long)(rank.getPrice() * rankResult.get(rank));
 		}
@@ -40,7 +39,7 @@ public class LottoResult {
 	}
 
 	public long getEarningsRate() {
-		return (getAllPrice() / (lottos.getSize() * MINIMUM_MONEY_FOR_PURCHASE)) * 100;
+		return (getAllPrice() / (lottos.size() * MINIMUM_MONEY_FOR_PURCHASE)) * 100;
 	}
 
 	public Map<LottoRank, Integer> getLottoResult() {

@@ -12,7 +12,7 @@ public class Lottos {
 		this.lottos = new ArrayList<>(lottos);
 	}
 
-	public int getSize() {
+	public int size() {
 		return lottos.size();
 	}
 
