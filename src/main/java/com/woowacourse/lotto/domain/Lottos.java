@@ -16,12 +16,6 @@ public class Lottos {
 		return lottos.size();
 	}
 
-	public Lottos addLottos(Lottos lottos) {
-		List<Lotto> addResultLottos = new ArrayList<>(this.lottos);
-		addResultLottos.addAll(new ArrayList<>(lottos.getLottos()));
-		return new Lottos(addResultLottos);
-	}
-
 	public List<Lotto> getLottos() {
 		return Collections.unmodifiableList(lottos);
 	}
