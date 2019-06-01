@@ -12,7 +12,7 @@ public class LottoResult {
         this.money = money;
     }
 
-    public double getPercentage() {
+    public double calculateProfitRate() {
         int sum = 0;
         for (Prize prize : Prize.values()) {
             sum += prize.getPrizeMoney() * prizeInfo.get(prize);

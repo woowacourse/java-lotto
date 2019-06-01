@@ -63,15 +63,6 @@ public class LottoLauncher {
         }
     }
 
-    private static int generateBonusNumber() {
-        try {
-            return InputView.askBonusNumber();
-        } catch (Exception e) {
-            System.out.println("잘못된 보너스 번호입니다");
-            return generateBonusNumber();
-        }
-    }
-
     private static Money generateMoney() {
         try {
             String userInput = InputView.askMoney();
