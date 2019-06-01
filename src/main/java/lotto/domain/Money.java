@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.OutOfLottoPurchaseAmountBoundException;
+
 public class Money {
     private static final int LOTTO_PRICE = 1000;
     private static final int MAX_LOTTO_PRICE = 1_000_000_000;
@@ -17,7 +19,7 @@ public class Money {
 
     private void checkInvalidMoney(final int money) {
         if (money < LOTTO_PRICE || money > MAX_LOTTO_PRICE) {
-            throw new IllegalArgumentException("로또 구입 가능 금액의 범위를 벗어났습니다.");
+            throw new OutOfLottoPurchaseAmountBoundException();
         }
     }
 }

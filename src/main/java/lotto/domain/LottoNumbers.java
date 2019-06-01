@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.InvalidLottoCountException;
+
 import java.util.*;
 
 public class LottoNumbers {
@@ -16,13 +19,13 @@ public class LottoNumbers {
     private void checkDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> set = new HashSet<>(lottoNumbers);
         if (set.size() != lottoNumbers.size()) {
-            throw new IllegalArgumentException("중복된 수로 로또를 생성할 수 없습니다.");
+            throw new DuplicateLottoNumberException();
         }
     }
 
     private void checkNumberOfLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBERS) {
-            throw new IllegalArgumentException("6개의 숫자로만 로또를 생성할 수 있습니다.");
+            throw new InvalidLottoCountException();
         }
     }
 

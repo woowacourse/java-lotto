@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.OutOfLottoNumberBoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("없는 로또 번호입니다.");
+            throw new OutOfLottoNumberBoundException();
         }
         return totalLottoNumbers.get(number - 1);
     }

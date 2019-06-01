@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.OutOfLottoNumberBoundException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -32,13 +33,13 @@ public class LottoNumbersGeneratorTest {
 
     @Test
     void 입력한_번호가_1미만인_경우() {
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(OutOfLottoNumberBoundException.class, () ->
                 LottoNumbersGenerator.getLottoNumbers(Arrays.asList(0, 2, 3, 4, 5, 45)));
     }
 
     @Test
     void 입력한_번호가_45초과인_경우() {
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(OutOfLottoNumberBoundException.class, () ->
                 LottoNumbersGenerator.getLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 46)));
     }
 }

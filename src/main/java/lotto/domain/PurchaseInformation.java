@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InvalidPurchaseInformationException;
+
 public class PurchaseInformation {
     private static final int MIN_PURCHASE_AMOUNT = 0;
 
@@ -16,10 +18,10 @@ public class PurchaseInformation {
 
     private void checkInvalidNumberOfManualLottos(final int maxNumberOfPurchase, final int numberOfManualLottos) {
         if (numberOfManualLottos < MIN_PURCHASE_AMOUNT) {
-            throw new IllegalArgumentException(MIN_PURCHASE_AMOUNT + "이상의 개수를 입력해주세요.");
+            throw new InvalidPurchaseInformationException(MIN_PURCHASE_AMOUNT + "이상의 개수를 입력해주세요.");
         }
         if (maxNumberOfPurchase < numberOfManualLottos) {
-            throw new IllegalArgumentException("구입금액이 부족합니다.");
+            throw new InvalidPurchaseInformationException("구입금액이 부족합니다.");
         }
     }
 

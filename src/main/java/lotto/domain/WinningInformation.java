@@ -1,12 +1,14 @@
 package lotto.domain;
 
+import lotto.exception.DuplicateBonusBallException;
+
 public class WinningInformation {
     private final LottoNumbers winningLottoNumbers;
     private final LottoNumber bonusBall;
 
     public WinningInformation(final LottoNumbers lottoNumbers, final LottoNumber bonusBall) {
         if (lottoNumbers.hasLottoNumber(bonusBall)) {
-            throw new IllegalArgumentException("보너스 볼과 당첨번호는 겹치면 안됩니다.");
+            throw new DuplicateBonusBallException();
         }
         this.winningLottoNumbers = lottoNumbers;
         this.bonusBall = bonusBall;
