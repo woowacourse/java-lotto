@@ -5,15 +5,19 @@ package domain;
  */
 public class WinningLotto {
     private final Lotto lotto;
-    private final int bonusNo;
+    private final Number bonusNumber;
 
-    public WinningLotto(Lotto lotto, int bonusNo) {
+    private WinningLotto(Lotto lotto, Number bonusNumber) {
         this.lotto = lotto;
-        this.bonusNo = bonusNo;
+        this.bonusNumber = bonusNumber;
+    }
+
+    public static WinningLotto of(Lotto lotto, Number bonusNumber) {
+        return new WinningLotto(lotto, bonusNumber);
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int countOfMatch = lotto.countEqualNumbers(userLotto);
+        return Rank.valueOf(countOfMatch, false);
     }
 }
