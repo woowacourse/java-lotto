@@ -10,20 +10,20 @@ public class LottoTest {
     @Test
     void 여섯개_일치() {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6))));
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6))));
 
         LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
 
         assertThat(lotto.hasLottoNumber(winningLottoNumbers)).isEqualTo(6);
     }
@@ -31,20 +31,20 @@ public class LottoTest {
     @Test
     void 세개_일치() {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6))));
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6))));
 
         LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(
-                new LottoNumber(11),
-                new LottoNumber(2),
-                new LottoNumber(13),
-                new LottoNumber(4),
-                new LottoNumber(15),
-                new LottoNumber(6)));
+                LottoNumber.valueOf(11),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(13),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(15),
+                LottoNumber.valueOf(6)));
 
         assertThat(lotto.hasLottoNumber(winningLottoNumbers)).isEqualTo(3);
     }
@@ -52,20 +52,20 @@ public class LottoTest {
     @Test
     void 불일치() {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6))));
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6))));
 
         LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(
-                new LottoNumber(11),
-                new LottoNumber(12),
-                new LottoNumber(13),
-                new LottoNumber(14),
-                new LottoNumber(15),
-                new LottoNumber(16)));
+                LottoNumber.valueOf(11),
+                LottoNumber.valueOf(12),
+                LottoNumber.valueOf(13),
+                LottoNumber.valueOf(14),
+                LottoNumber.valueOf(15),
+                LottoNumber.valueOf(16)));
 
         assertThat(lotto.hasLottoNumber(winningLottoNumbers)).isEqualTo(0);
     }

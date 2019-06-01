@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.Utils.NumbersSplitter;
 import lotto.domain.*;
+import lotto.domain.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

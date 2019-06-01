@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LottoNumbersGeneratorTest {
     @Test
     void 숫자_하나를_제대로_가져오는지_확인() {
-        assertThat(LottoNumbersGenerator.getLottoNumber(1)).isEqualTo(new LottoNumber(1));
+        assertThat(LottoNumbersGenerator.getLottoNumber(1)).isEqualTo(LottoNumber.valueOf(1));
     }
 
     @Test
@@ -25,12 +25,12 @@ public class LottoNumbersGeneratorTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
 
         assertThat(LottoNumbersGenerator.getLottoNumbers(numbers)).isEqualTo(lottoNumbers);
     }
