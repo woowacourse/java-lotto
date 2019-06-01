@@ -10,6 +10,16 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public int getMatchingCount(WinningLotto winningLotto) {
+        int count = 0;
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            count += winningLotto.hasEqualNumber(lottoNumber) ? 1 : 0;
+        }
+
+        return count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

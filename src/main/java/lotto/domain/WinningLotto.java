@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
-    public static WinningLotto WINNING_LOTTO = null;
+    private static WinningLotto WINNING_LOTTO = null;
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
     private final LottoNumber bonusBall;
