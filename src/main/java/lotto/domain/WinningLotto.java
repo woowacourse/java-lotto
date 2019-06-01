@@ -39,6 +39,10 @@ public class WinningLotto {
         return lottoNumbers.contains(number);// || lottoNumbers.contains(bonusBall);
     }
 
+    public boolean hasEqualBonusBall(LottoNumber number) {
+        return bonusBall == number;
+    }
+
     private static void validateNumeric(String number) {
         if (!number.matches("(\\d+)?")) {
             throw new ArithmeticException("로또 번호가 유효하지 않습니다.");

@@ -18,21 +18,23 @@ public class WinningLottoTest {
     }
 
     @Test
-    void 요청한_번호와_일치하는_당첨번호_boolean_리턴() {
+    void 전달받은번호와_당첨번호를_비교하기_테스트() {
         String winningNumbers = "1,2,3,4,5,6";
         int bonusBall = 7;
         WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusBall);
 
         assertThat(winningLotto.hasEqualNumber(LottoNumber.getNumber(4))).isTrue();
+        assertThat(winningLotto.hasEqualNumber(LottoNumber.getNumber(9))).isFalse();
     }
 
     @Test
-    void 요청한_번호와_일치하지_않는_당첨번호_boolean_리턴() {
+    void 전달받은번호와_보너스볼을_비교하기_테스트() {
         String winningNumbers = "1,2,3,4,5,6";
         int bonusBall = 7;
         WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusBall);
 
-        assertThat(winningLotto.hasEqualNumber(LottoNumber.getNumber(9))).isFalse();
+        assertThat(winningLotto.hasEqualBonusBall(LottoNumber.getNumber(7))).isTrue();
+        assertThat(winningLotto.hasEqualBonusBall(LottoNumber.getNumber(6))).isFalse();
     }
 
     @Test

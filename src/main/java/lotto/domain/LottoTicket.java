@@ -20,6 +20,16 @@ public class LottoTicket {
         return count;
     }
 
+    public boolean matchesBonusBall(WinningLotto winningLotto) {
+        boolean matchingResult = false;
+
+        for (int i = 0; i < lottoNumbers.size() && !matchingResult; i++) {
+            matchingResult = winningLotto.hasEqualBonusBall(lottoNumbers.get(i));
+        }
+
+        return matchingResult;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
