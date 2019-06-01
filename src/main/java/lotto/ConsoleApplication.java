@@ -57,7 +57,7 @@ public class ConsoleApplication {
 
         try {
             LottoNumbers winningNumbers = makeLottoNumbers();
-            LottoNumber bonusNumber = LottoNumbersGenerator.getLottoNumber(InputView.inputBonusBall());
+            LottoNumber bonusNumber = LottoNumber.valueOf(InputView.inputBonusBall());
             WinningInformation winningInformation = new WinningInformation(winningNumbers, bonusNumber);
             return new LottoGame(winningInformation);
         } catch (Exception e) {

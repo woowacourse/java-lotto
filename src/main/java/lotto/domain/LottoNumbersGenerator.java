@@ -20,18 +20,15 @@ public class LottoNumbersGenerator {
         throw new AssertionError();
     }
 
-    public static LottoNumber getLottoNumber(int number) {
-        return LottoNumber.valueOf(number);
-    }
-
     public static LottoNumbers getLottoNumbers() {
         Collections.shuffle(totalLottoNumbers, new Random());
-        return new LottoNumbers(totalLottoNumbers.subList(SUBLIST_LOWER_BOUND, SUBLIST_UPPER_BOUND));
+        return new LottoNumbers(new ArrayList<>(
+                totalLottoNumbers.subList(SUBLIST_LOWER_BOUND, SUBLIST_UPPER_BOUND)));
     }
 
     public static LottoNumbers getLottoNumbers(List<Integer> numbers) {
         return new LottoNumbers(numbers.stream()
-                .map(LottoNumbersGenerator::getLottoNumber)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList()));
     }
 }

@@ -22,7 +22,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    static LottoNumber valueOf(int number) {
+    public static LottoNumber valueOf(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("없는 로또 번호입니다.");
         }
