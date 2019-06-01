@@ -18,6 +18,6 @@ class LottoNoTest {
     void 로또_번호_생성_예외(int no) {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             LottoNo.of(no);
-        }).withMessage("로또 번호는 1 ~ 45 범위 입니다.");
+        }).withMessage("로또 번호 범위는 1 ~ 45 입니다.");
     }
 }
