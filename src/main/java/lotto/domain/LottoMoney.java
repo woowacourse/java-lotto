@@ -1,18 +1,18 @@
 package lotto.domain;
 
-public class PurchasePrice {
-    private static final int TICKET_PRICE = 1000;
+public class LottoMoney {
+    static final int LOTTO_PRICE = 1000;
     private static final int MAX_PURCHASE_PRICE = 100000;
 
     private final int purchasePrice;
 
-    public PurchasePrice(int input) {
+    public LottoMoney(int input) {
         validate(input);
         this.purchasePrice = input;
     }
 
     private void validate(int input) {
-        if (input < TICKET_PRICE) {
+        if (input < LOTTO_PRICE) {
             throw new IllegalArgumentException("티켓 가격보다 적은 입력입니다.");
         }
         if (input > MAX_PURCHASE_PRICE) {
@@ -21,6 +21,6 @@ public class PurchasePrice {
     }
 
     public int getCountOfTicket() {
-        return purchasePrice / TICKET_PRICE;
+        return purchasePrice / LOTTO_PRICE;
     }
 }

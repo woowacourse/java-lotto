@@ -6,9 +6,9 @@ public class LottoRandomGenerator implements LottoNumberGenerator {
     private static final NumberRandomShuffle numberRandomShuffle = new NumberRandomShuffle();
 
     @Override
-    public Lotto generate() {
+    public List<LottoNumber> generate() {
         List<LottoNumber> lottoNumbers = LottoContainer.createLottoNumbers();
         List<LottoNumber> shuffledNumbers = numberRandomShuffle.shuffle(lottoNumbers);
-        return new Lotto(shuffledNumbers.subList(LOTTO_FROM_INDEX, LOTTO_TO_INDEX));
+        return shuffledNumbers.subList(LOTTO_FROM_INDEX, LOTTO_TO_INDEX);
     }
 }

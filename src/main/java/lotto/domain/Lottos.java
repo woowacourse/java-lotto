@@ -10,8 +10,8 @@ public class Lottos {
     public Lottos(List<String> manualInputLottos, int totalLottoCount) {
         checkValidManualCount(totalLottoCount, manualInputLottos.size());
         this.totalLottos = new ArrayList<>();
-        generateManualLotto(manualInputLottos);
-        generateRandomLotto(totalLottoCount - manualInputLottos.size());
+        generateManualLottos(manualInputLottos);
+        generateRandomLottos(totalLottoCount - manualInputLottos.size());
     }
 
     private void checkValidManualCount(int totalLottoCount, int manualLottoCount) {
@@ -20,22 +20,34 @@ public class Lottos {
         }
     }
 
-    private void generateManualLotto(List<String> manualInputLottos) {
+    private void generateManualLottos(List<String> manualInputLottos) {
         for (String manualInputLotto : manualInputLottos) {
-            LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(manualInputLotto);
-            totalLottos.add(lottoManualGenerator.generate());
+            totalLottos.add(generateManualLotto(manualInputLotto));
         }
     }
 
-    private void generateRandomLotto(int randomLottoCount) {
+    private Lotto generateManualLotto(String manualInputLotto) {
+        LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(manualInputLotto);
+        return new Lotto(lottoManualGenerator.generate());
+    }
+
+    private void generateRandomLottos(int randomLottoCount) {
         for (int i = 0; i < randomLottoCount; i++) {
-            LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
-            totalLottos.add(lottoRandomGenerator.generate());
+            totalLottos.add(generateRandomLotto());
         }
     }
-    
+
+    private Lotto generateRandomLotto() {
+        LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
+        return new Lotto(lottoRandomGenerator.generate());
+    }
+
     public int getLottoCount() {
         return this.totalLottos.size();
+    }
+
+    public Lotto getLottoByIndex(int index) {
+        return totalLottos.get(index);
     }
 
     @Override

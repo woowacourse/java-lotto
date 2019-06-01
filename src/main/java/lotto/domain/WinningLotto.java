@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class WinningLotto {
-    private final Lotto winningLotto;
+    private static final int LOTTO_NUMBER_COUNT = 6;
+    private final List<LottoNumber> winningLotto;
 
     public WinningLotto(String input) {
         LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(input);
@@ -22,4 +24,14 @@ public class WinningLotto {
     public int hashCode() {
         return Objects.hash(winningLotto);
     }
+
+    public Rank getCountOfMatch(Lotto lotto) {
+        int count = 0;
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+            count += lotto.isContainNumber(this.winningLotto.get(i)) ? 1 : 0;
+        }
+        Rank rank = Rank.valueOf(count, false);
+        return rank;
+    }
+
 }

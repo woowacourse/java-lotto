@@ -35,13 +35,13 @@ public class LottoManualGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public Lotto generate() {
+    public List<LottoNumber> generate() {
         List<LottoNumber> lottoNumbers = LottoContainer.createLottoNumbers();
         List<Integer> parsedInput = splitInput();
         List<LottoNumber> retNumbers = new ArrayList<>();
         for (Integer index : parsedInput) {
             retNumbers.add(lottoNumbers.get(index - 1));
         }
-        return new Lotto(retNumbers);
+        return retNumbers;
     }
 }
