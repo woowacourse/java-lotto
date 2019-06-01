@@ -18,7 +18,7 @@ public class WinningLottoTest {
 	}
 
 	@Test
-	void validateDuplicateNumber() {
+	void validateDuplicatedNumber() {
 		assertThrows(InvalidNumberException.class, () -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "5", "1"), 7));
 	}
 

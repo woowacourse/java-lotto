@@ -18,10 +18,10 @@ public class ManualLottoFactory extends LottoFactory {
 	public ManualLottoFactory(int numberOfLotto, final List<String> numbers) {
 		super(numberOfLotto);
 		this.numbers = new ArrayList<>(numbers);
-		validateLottoNumbers(numbers);
+		validateSizeOfLotto(numbers);
 	}
 
-	private void validateLottoNumbers(List<String> numbers) {
+	private void validateSizeOfLotto(List<String> numbers) {
 		if (!numbers.stream().allMatch(s -> StringSeparator.splitString(s).size() == NUMBER_OF_LOTTO)) {
 			throw new InvalidCountOfManualLottoException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
