@@ -15,14 +15,14 @@ public class WinningLotto {
 	private static final String REGEX_OF_NUMBER = "[1-9]|[1-3][0-9]|4[0-5]";
 	private static final Pattern PATTERN_OF_LOTTO_NUMBER = Pattern.compile(REGEX_OF_NUMBER);
 	private Lotto winningLotto;
-	private BonusBall bonusBall;
+	private LottoNumber bonusBall;
 
-	public WinningLotto(final List<String> numbers, BonusBall bonusBall) {
+	public WinningLotto(final List<String> numbers, int bonusBall) {
 		this.winningLotto = new Lotto(numbers.stream()
 				.map(number -> LottoNumber.getLottoNumber(Integer.valueOf(number)))
 				.collect(Collectors.toList()))
 		;
-		this.bonusBall = bonusBall;
+		this.bonusBall = LottoNumber.getLottoNumber(bonusBall);
 		validateDuplicateBonusBall();
 		validateDuplicatedNumber(numbers);
 		validateSize(numbers);
@@ -30,7 +30,7 @@ public class WinningLotto {
 	}
 
 	private void validateDuplicateBonusBall() {
-		if (winningLotto.contains(bonusBall.getBonusBallNumber())) {
+		if (winningLotto.contains(bonusBall)) {
 			throw new IllegalArgumentException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
 		}
 	}
@@ -58,7 +58,7 @@ public class WinningLotto {
 	}
 
 	public boolean matchBonusBall(Lotto lotto) {
-		return lotto.contains(bonusBall.getBonusBallNumber());
+		return lotto.contains(bonusBall);
 	}
 
 	@Override

@@ -70,9 +70,9 @@ public class LottoAppMain {
 		}
 	}
 
-	public static BonusBall getBonusBall() {
+	public static int getBonusBall() {
 		try {
-			return new BonusBall(InputView.inputBonusBall());
+			return InputView.inputBonusBall();
 		} catch (Exception e) {
 			return getBonusBall();
 		}

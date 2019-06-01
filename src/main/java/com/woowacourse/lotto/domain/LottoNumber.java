@@ -41,4 +41,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	public int compareTo(LottoNumber lottoNumber) {
 		return this.number - lottoNumber.number;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof LottoNumber)) {
+			return false;
+		}
+		final LottoNumber that = (LottoNumber) o;
+		return number == that.number;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(number);
+	}
 }
