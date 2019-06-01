@@ -18,7 +18,7 @@ public class Main {
         OutputConsole.outputLotto(lottos, numberOfManualLotto, numberOfAutoLotto);
         System.out.println("\n지난 주 당첨 번호를 입력해주세요.");
         WinningLotto winningLotto = createWinningLotto(createLotto());
-        OutputConsole.outputResult(winningLotto, lottos);
+        OutputConsole.outputResult(new LottoResult(winningLotto, lottos));
     }
 
     private static Money createMoney() {

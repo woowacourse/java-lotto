@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
-import lotto.domain.WinningLotto;
 
 import static lotto.domain.Rank.*;
 
@@ -21,9 +20,8 @@ public class OutputConsole {
         System.out.println(stringBuilder.toString());
     }
 
-    public static void outputResult(WinningLotto winningLotto, Lottos lottos) {
+    public static void outputResult(LottoResult lottoResult) {
         System.out.println("\n당첨 통계\n----------");
-        LottoResult lottoResult = new LottoResult(winningLotto, lottos);
         System.out.println("3개 일치 (5,000원) - " + lottoResult.getCountOfRank(FIFTH) + "개");
         System.out.println("4개 일치 (50,000원) - " + lottoResult.getCountOfRank(FOURTH) + "개");
         System.out.println("5개 일치 (1,500,000원) - " + lottoResult.getCountOfRank(THIRD) + "개");
