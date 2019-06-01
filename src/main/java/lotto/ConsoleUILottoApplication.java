@@ -27,8 +27,10 @@ public class ConsoleUILottoApplication {
 
             LottoResult lottoResult = new LottoResult(totalLottos, winningLotto);
             OutputView.printLottoResult(lottoResult);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        } catch (NumberFormatException e1) {
+            System.out.println("숫자만 입력해주세요.");
+        } catch (IllegalArgumentException e2) {
+            System.out.println(e2.getMessage());
         }
 
     }
