@@ -36,7 +36,7 @@ class WinningLottoTest {
                 Number.of(5),
                 Number.of(6)
         ));
-        assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.FIRST);
+        assertThat(new WinningLotto(winningNumbers, Number.of(7)).resultOf(lotto)).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -49,7 +49,7 @@ class WinningLottoTest {
                 Number.of(5),
                 Number.of(7)
         ));
-        assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.SECOND);
+        assertThat(new WinningLotto(winningNumbers, Number.of(7)).resultOf(lotto)).isEqualTo(Rank.SECOND);
     }
 
     @Test
@@ -62,7 +62,7 @@ class WinningLottoTest {
                 Number.of(5),
                 Number.of(7)
         ));
-        assertThat(new WinningLotto(winningNumbers, new Number(8)).getRank(lotto)).isEqualTo(Rank.THIRD);
+        assertThat(new WinningLotto(winningNumbers, Number.of(8)).resultOf(lotto)).isEqualTo(Rank.THIRD);
     }
 
 
@@ -76,7 +76,7 @@ class WinningLottoTest {
                 Number.of(7),
                 Number.of(8)
         ));
-        assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.FOURTH);
+        assertThat(new WinningLotto(winningNumbers, Number.of(7)).resultOf(lotto)).isEqualTo(Rank.FOURTH);
     }
 
     @Test
@@ -89,7 +89,7 @@ class WinningLottoTest {
                 Number.of(8),
                 Number.of(9)
         ));
-        assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.FIFTH);
+        assertThat(new WinningLotto(winningNumbers, Number.of(7)).resultOf(lotto)).isEqualTo(Rank.FIFTH);
     }
 
     @Test
@@ -102,13 +102,13 @@ class WinningLottoTest {
                 Number.of(8),
                 Number.of(9)
         ));
-        assertThat(new WinningLotto(winningNumbers, new Number(7)).getRank(lotto)).isEqualTo(Rank.MISS);
+        assertThat(new WinningLotto(winningNumbers, Number.of(7)).resultOf(lotto)).isEqualTo(Rank.MISS);
     }
 
     @Test
     void bonus_number_cannot_be_duplicated_with_winning_numbers() {
         assertThrows(BonusNumberException.class, () -> {
-            new WinningLotto(winningNumbers, new Number(1));
+            new WinningLotto(winningNumbers, Number.of(1));
         });
     }
 }

@@ -19,7 +19,7 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public Rank getRank(Lotto lotto) {
+    public Rank resultOf(Lotto lotto) {
         int matchCount = COUNT_INITIALIZE;
         boolean bonusMatch = lotto.contains(bonusNumber);
         for (Number number : lotto) {

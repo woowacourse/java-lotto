@@ -16,7 +16,7 @@ public class RandomNumbersGenerator {
     private RandomNumbersGenerator() {
         numberList = new ArrayList<>();
         IntStream.range(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
-                .forEach(i -> numberList.add(new Number(i)));
+                .forEach(i -> numberList.add(Number.of(i)));
     }
 
     private List<Number> generateRandomNumbers() {
