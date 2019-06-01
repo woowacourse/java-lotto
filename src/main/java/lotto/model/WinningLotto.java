@@ -3,21 +3,20 @@ package lotto.model;
 import java.util.List;
 
 public class WinningLotto {
-    private Lotto lotto;
+    private Lotto winningLotto;
     private LottoNumber bonusNumber;
 
 
-    public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        if ( numbers.contains(bonusNumber)) {
+    public WinningLotto(Lotto winningLottoTicket, LottoNumber bonusNumber) {
+        if ( winningLottoTicket.contains(bonusNumber)) {
             throw new IllegalNumberCombinationException();
         }
-        lotto = new Lotto(numbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
-
+        this.winningLotto = winningLottoTicket;
+        this.bonusNumber = bonusNumber;
     }
 
     public Prize prizeOf(Lotto lotto) {
-        int matchCount = lotto.countMatchLottoNumber(this.lotto);
+        int matchCount = lotto.countMatchLottoNumber(this.winningLotto);
         Prize prize = Prize.getPrizeRank(matchCount, lotto.containsNumber(bonusNumber));
         return prize;
     }

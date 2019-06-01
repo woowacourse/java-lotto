@@ -9,10 +9,13 @@ public class ManualLottoCount {
             throw new IllegalCountException();
         }
         this.count = count;
-        money.deduct(count);
     }
 
     public boolean isCountFinished(int currentCount) {
         return currentCount != this.count;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

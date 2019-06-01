@@ -12,21 +12,46 @@ public class LottoLauncher {
     public static void main(String[] args) {
         //1
         Money money = generateMoney();
+
         //2
         ManualLottoCount manualLottoCount = generateManualLottoCount(money);
-        //3
-        Lottos manualLottos = generateManualLottos(manualLottoCount);
-        //4
-        Lottos automaticLottos = LottoMachine.generateLottos(money.getLottoCount() - manualLottos.size());
 
+        //3
+        LottoMachine manualLottoMachine = new ManualLottoMachine(manualLottoCount);
+        Lottos manualLottos = generateLottos(manualLottoMachine);
+        LottoMachine automaticLottoMachine = new AutomaticLottoMachine(money, manualLottoCount);
+        Lottos automaticLottos = generateLottos(automaticLottoMachine);
+
+        //4
         OutputView.printLottos(manualLottos, automaticLottos);
 
-        WinningLotto winningLotto = new WinningLotto(generateWinningLotto(), generateBonusNumber());
+        //5
+        WinningLotto winningLotto = generateWinningLotto();
 
         Lottos totalLottos = manualLottos.append(automaticLottos);
         LottoResult lottoResult = new LottoResult(money, totalLottos.getPrizes(winningLotto));
 
         OutputView.printStatistics(lottoResult);
+    }
+
+    private static WinningLotto generateWinningLotto() {
+        try {
+            Lotto winningLottoTicket = new Lotto(InputView.askWinningLottoNumbers());
+            LottoNumber bonusNumber = new LottoNumber(InputView.askBonusNumber());
+            return new WinningLotto(winningLottoTicket, bonusNumber);
+        } catch (Exception e) {
+            System.out.println("잘못된 번호 입력이 있습니다!");
+            return generateWinningLotto();
+        }
+    }
+
+    private static Lottos generateLottos(LottoMachine machine) {
+        try {
+            return machine.generateLottos();
+        } catch (Exception e) {
+            System.out.println("잘못된 입력이 있습니다 처음부터 다시 입력하세요!");
+            return generateLottos(machine);
+        }
     }
 
     private static ManualLottoCount generateManualLottoCount(Money money) {
@@ -35,15 +60,6 @@ public class LottoLauncher {
             return new ManualLottoCount(input, money);
         } catch (Exception e) {
             return generateManualLottoCount(money);
-        }
-    }
-
-    private static List<Integer> generateWinningLotto() {
-        try {
-            return InputView.askWinningLottoNumbers();
-        } catch (Exception e) {
-            System.out.println("잘못된 당첨 번호입니다");
-            return generateWinningLotto();
         }
     }
 
@@ -63,14 +79,6 @@ public class LottoLauncher {
         } catch (Exception e) {
             System.out.println("잘못된 구입 금액입니다");
             return generateMoney();
-        }
-    }
-
-    private static Lottos generateManualLottos(ManualLottoCount manualLottoCount) {
-        try {
-            return LottoMachine.generateLottos(manualLottoCount);
-        } catch (Exception e) {
-            return generateManualLottos(manualLottoCount);
         }
     }
 

@@ -3,7 +3,7 @@ package lotto.model;
 public class Money {
     private static final int PRICE_OF_LOTTO = 1000;
 
-    private int money;
+    private final int money;
 
     public Money(String input) {
         int currentMoney = Integer.parseInt(input);
@@ -11,7 +11,7 @@ public class Money {
         if (currentMoney < PRICE_OF_LOTTO || currentMoney % PRICE_OF_LOTTO != 0) {
             throw new IllegalMoneyException();
         }
-        this.money = Integer.parseInt(input);
+        this.money = currentMoney;
     }
 
 
@@ -24,10 +24,11 @@ public class Money {
     }
 
     public boolean isInputBiggerThanMoney(int input) {
-        return input > money;
+        int comparison = input*PRICE_OF_LOTTO;
+        return (comparison) > this.money;
     }
 
-    public void deduct(int count) {
-        money = money - (count*PRICE_OF_LOTTO);
+    public int calculateAutomatiLottoCount(int count) {
+        return (money - (count*PRICE_OF_LOTTO))/PRICE_OF_LOTTO;
     }
 }
