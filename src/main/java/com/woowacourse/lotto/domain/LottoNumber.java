@@ -2,6 +2,8 @@ package com.woowacourse.lotto.domain;
 
 import java.util.*;
 
+import com.woowacourse.lotto.exception.InvalidNumberException;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 	public static final int NUMBER_OF_LOTTO = 6;
 	public static final int MIN_NUMBER_OF_LOTTO = 1;
@@ -22,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	public static LottoNumber getLottoNumber(int value) {
 		if (value < MIN_NUMBER_OF_LOTTO || value > MAX_NUMBER_OF_LOTTO) {
-			throw new IllegalArgumentException(ExceptionOutput.VIOLATE_INDEX.getExceptionMessage());
+			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
 		return lottoNumbers.get(value - 1);
 	}

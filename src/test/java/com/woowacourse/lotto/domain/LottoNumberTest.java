@@ -1,5 +1,6 @@
 package com.woowacourse.lotto.domain;
 
+import com.woowacourse.lotto.exception.InvalidNumberException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoNumberTest {
 	@Test
 	void invalidIndex() {
-		assertThrows(IllegalArgumentException.class, () -> LottoNumber.getLottoNumber(0));
-		assertThrows(IllegalArgumentException.class, () -> LottoNumber.getLottoNumber(46));
+		assertThrows(InvalidNumberException.class, () -> LottoNumber.getLottoNumber(0));
+		assertThrows(InvalidNumberException.class, () -> LottoNumber.getLottoNumber(46));
 	}
 
 	@Test
