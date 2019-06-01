@@ -9,21 +9,21 @@ import lotto.view.OutputView;
 
 import java.util.List;
 
-public class Controller {
+public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         String priceInput = InputView.promptPrice();
-        Money money = createMoney(priceInput); // Controller -> createMoney
+        Money money = createMoney(priceInput); // ConsoleUILottoApplication -> createMoney
         String customLottoCountInput = InputView.promptCoustomLottoCount();
-        CustomLottoCount customLottoCount = createCustomLottoCount(customLottoCountInput, money); // Controller -> createCustomLottoCount
+        CustomLottoCount customLottoCount = createCustomLottoCount(customLottoCountInput, money); // ConsoleUILottoApplication -> createCustomLottoCount
         String[] customLottoNumbersInput = InputView.promptCustomLotto(customLottoCount);
-        Lottoes lottoes = createLottoes(customLottoCount,customLottoNumbersInput,money); // Controller -> createLottoes
+        Lottoes lottoes = createLottoes(customLottoCount,customLottoNumbersInput,money); // ConsoleUILottoApplication -> createLottoes
 
         OutputView.printLottoes(lottoes,customLottoCount);
 
         List<String> winningNumberInput = InputView.promptWinningNumber();
-        Lotto winnigLottoNumbers = createWinningLottoNumbers(winningNumberInput); // Controller -> createWinningLottoNumbers
+        Lotto winnigLottoNumbers = createWinningLottoNumbers(winningNumberInput); // ConsoleUILottoApplication -> createWinningLottoNumbers
         String bonusBall = InputView.promptBonusBall();
-        WinningLotto winningLotto = createWinningLotto(winnigLottoNumbers, bonusBall);// Controller -> createWinningLotto
+        WinningLotto winningLotto = createWinningLotto(winnigLottoNumbers, bonusBall);// ConsoleUILottoApplication -> createWinningLotto
         Result result = ResultFactory.createResult();
         result.calculateResult(lottoes, winningLotto);
 

@@ -22,8 +22,4 @@ public class CustomLottoCount {
     public int getCustomLottoCount() {
         return customLottoCount;
     }
-/*
-    public boolean isNotMatchCount(String[] customLottoNumbersInput) {
-        return customLottoNumbersInput.length != customLottoCount;
-    }*/
 }
