@@ -54,6 +54,13 @@ RankAnalysisBuilder
 
 
 
+#### 테스트가 중복되는 건 아닐까??
+- ex. LottoFactoryTest, LottoTest 
+    - 위임(delegate) 이 잘되는지를 확인하려면 중복이 있어야할까?
+    - 한편으로는 다른 구현으로 LottoFactory 가 만들어 질 수도 있으니.. 중복이 있어야할까?
+    - Lotto 의 역할을 침범하는 것도 같고
+
+
 
 ### Todo 
 - [ ] 돈입력

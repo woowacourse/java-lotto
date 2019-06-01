@@ -1,11 +1,11 @@
 package domain;
 
 import com.google.common.collect.Comparators;
+import exception.LottoDuplicationException;
+import exception.LottoExceedSizeException;
+import exception.LottoNotSortedException;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -24,13 +24,13 @@ public class Lotto {
 
     private static void validate(List<Number> numbers) {
         if (numbers.size() != NUM_CNT) {
-            throw new IllegalArgumentException(String.format("로또는 %d개의 숫자로 이루어져야합니다.", NUM_CNT));
+            throw new LottoExceedSizeException(String.format("로또는 %d개의 숫자로 이루어져야합니다.", NUM_CNT));
         }
         if (hasDuplication(numbers)) {
-            throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
+            throw new LottoDuplicationException("중복된 숫자가 존재합니다.");
         }
         if (!Comparators.isInOrder(numbers, Number::compareTo)) {
-            throw new IllegalArgumentException("정렬되지 않은 숫자입니다.");
+            throw new LottoNotSortedException("정렬되지 않은 숫자입니다.");
         }
     }
 
@@ -52,5 +52,18 @@ public class Lotto {
     @Override
     public String toString() {
         return Arrays.toString(numbers.toArray());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

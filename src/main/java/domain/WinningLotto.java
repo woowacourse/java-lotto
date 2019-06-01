@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -19,5 +21,24 @@ public class WinningLotto {
     public Rank match(Lotto userLotto) {
         int countOfMatch = lotto.countEqualNumbers(userLotto);
         return Rank.valueOf(countOfMatch, false);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningLotto that = (WinningLotto) o;
+        return Objects.equals(lotto, that.lotto) &&
+                Objects.equals(bonusNumber, that.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto, bonusNumber);
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString() + " + " + bonusNumber.toString();
     }
 }

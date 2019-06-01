@@ -1,5 +1,8 @@
 package domain;
 
+import exception.LottoDuplicationException;
+import exception.LottoExceedSizeException;
+import exception.LottoNotSortedException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -13,17 +16,17 @@ class LottoTest {
 
     @Test
     void 생성자_6개초과한_숫자들입력() {
-        assertThrows(IllegalArgumentException.class, () -> createLotto(Arrays.asList(1, 2, 3, 4, 5, Lotto.NUM_CNT, Lotto.NUM_CNT + 1)));
+        assertThrows(LottoExceedSizeException.class, () -> createLotto(Arrays.asList(1, 2, 3, 4, 5, Lotto.NUM_CNT, Lotto.NUM_CNT + 1)));
     }
 
     @Test
     void 생성자_중복된입력() {
-        assertThrows(IllegalArgumentException.class, () -> createLotto(Arrays.asList(1, 1, 3, 4, 5, 6)));
+        assertThrows(LottoDuplicationException.class, () -> createLotto(Arrays.asList(1, 1, 3, 4, 5, 6)));
     }
 
     @Test
     void 생성자_정렬안된입력() {
-        assertThrows(IllegalArgumentException.class, () -> createLotto(Arrays.asList(6, 5, 4, 3, 2, 1)));
+        assertThrows(LottoNotSortedException.class, () -> createLotto(Arrays.asList(6, 5, 4, 3, 2, 1)));
     }
 
     @Test

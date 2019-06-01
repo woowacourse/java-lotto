@@ -1,6 +1,9 @@
 package domain;
 
+import exception.NumberOutOfRangeException;
+
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -17,7 +20,7 @@ public class Number implements Comparable<Number> {
 
     public static Number from(int number) {
         if (!NumberCache.contains(number)) {
-            throw new IllegalArgumentException(
+            throw new NumberOutOfRangeException(
                     String.format("가능한 로또 번호가 아닙니다. 가능한 범위 [%d, %d]",
                             NUMBER_FROM, NUMBER_TO));
         }
@@ -62,5 +65,18 @@ public class Number implements Comparable<Number> {
     @Override
     public String toString() {
         return Integer.toString(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Number number1 = (Number) o;
+        return number == number1.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

@@ -1,6 +1,7 @@
 package domain;
 
 
+import exception.NumberOutOfRangeException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -28,12 +29,12 @@ public class NumberTest {
 
     @Test
     public void from_시작범위초과_예외발생() {
-        assertThrows(IllegalArgumentException.class, () -> Number.from(NUMBER_FROM - 1));
+        assertThrows(NumberOutOfRangeException.class, () -> Number.from(NUMBER_FROM - 1));
     }
 
     @Test
     public void from_끝범위초과_예외발생() {
-        assertThrows(IllegalArgumentException.class, () -> Number.from(NUMBER_TO + 1));
+        assertThrows(NumberOutOfRangeException.class, () -> Number.from(NUMBER_TO + 1));
     }
 
     @Test
