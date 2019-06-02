@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,14 +42,18 @@ public class LottoResult {
         return rankResult.get(rank);
     }
 
-    public int getEarningsRate() {
-        return getEarning() / (lottos.getSize() * MONEY_PER_LOTTO.get()) * RATE;
+    public BigInteger getEarningsRate() {
+        return getEarning()
+                .divide(BigInteger.valueOf(lottos.getSize() * MONEY_PER_LOTTO.get()))
+                .multiply(BigInteger.valueOf(RATE));
     }
 
-    private int getEarning() {
-        int earning = 0;
+    private BigInteger getEarning() {
+        BigInteger earning = BigInteger.ZERO;
         for (Map.Entry<Rank, Integer> entry : rankResult.entrySet()) {
-            earning += entry.getKey().getWinningMoney() * entry.getValue();
+            BigInteger temp = BigInteger.valueOf(entry.getKey().getWinningMoney());
+            temp = temp.multiply(BigInteger.valueOf(entry.getValue()));
+            earning = earning.add(temp);
         }
         return earning;
     }

@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -83,6 +84,6 @@ public class LottoResultTest {
     @Test
     void 총_수익률_계산() {
         LottoResult lottoResult = new LottoResult(winningLotto, lottos);
-        assertThat(40032100).isEqualTo(lottoResult.getEarningsRate());
+        assertThat(BigInteger.valueOf(40032100)).isEqualTo(lottoResult.getEarningsRate());
     }
 }
