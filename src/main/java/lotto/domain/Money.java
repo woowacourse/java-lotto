@@ -20,4 +20,8 @@ public class Money {
     public int getNumberOfLotto() {
         return money / MONEY_PER_LOTTO.get();
     }
+
+    public boolean isOverTotalNumberOfLotto(int numberOfLotto) {
+        return (getNumberOfLotto() < numberOfLotto);
+    }
 }
