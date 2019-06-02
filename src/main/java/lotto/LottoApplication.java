@@ -1,15 +1,25 @@
 package lotto;
 
-import lotto.domain.machine.Money;
-import lotto.domain.machine.PurchaseInformation;
+import lotto.domain.machine.MoneyProcessor;
 import lotto.domain.machine.VendingMachine;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoApplication {
-    public void main(String[] args) {
-        VendingMachine vendingMachine = new VendingMachine(getMoney(Money.of(InputView.getInsertedMoney()));
+    public static void main(String[] args) {
+        VendingMachine vendingMachine = new VendingMachine(createMoneyProcessor());
 
     }
 
-    public Money
+    public static MoneyProcessor createMoneyProcessor() {
+        try {
+            MoneyProcessor moneyProcessor = MoneyProcessor.of(InputView.getInsertedMoney());
+            OutputView.printInsertedMoneyInformation(moneyProcessor.getWholeTicketQuantity(),moneyProcessor.getRest());
+            return moneyProcessor;
+        } catch (Exception e) {
+            System.out.println();
+            return createMoneyProcessor();
+        }
+    }
+
 }
