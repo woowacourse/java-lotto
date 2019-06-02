@@ -23,7 +23,7 @@ public class ManualCount {
     }
 
     private boolean isValidRange(int manualCount, Count totalCount) {
-        return 0 <= manualCount && manualCount <= totalCount.getCount() ;
+        return 0 <= manualCount && 0 <= totalCount.compareTo(manualCount);
     }
 
     public int getCount() {
@@ -31,7 +31,7 @@ public class ManualCount {
     }
 
     public Count getAutoCount(Count count) {
-        return new Count(count.getCount() - this.count);
+        return new Count(count.subtract(this.count));
     }
 
     public boolean isZero() {

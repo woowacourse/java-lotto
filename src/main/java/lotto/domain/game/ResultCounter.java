@@ -5,7 +5,7 @@ public class ResultCounter {
 
     private int counter;
 
-    private ResultCounter() {
+    ResultCounter() {
         this(INIT_STATE);
     }
 
@@ -13,12 +13,8 @@ public class ResultCounter {
         this.counter = counter;
     }
 
-    public static ResultCounter create() {
-        return new ResultCounter();
-    }
-
-    public ResultCounter increase() {
-        return new ResultCounter(this.counter + 1);
+    void increase() {
+        this.counter += 1;
     }
 
     public int multiply(int prize) {
@@ -29,5 +25,4 @@ public class ResultCounter {
     public String toString() {
         return String.valueOf(counter);
     }
-
 }

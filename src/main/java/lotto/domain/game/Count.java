@@ -26,6 +26,10 @@ public class Count {
         return count;
     }
 
+    public int subtract(int count) {
+        return this.count - count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,5 +41,9 @@ public class Count {
     @Override
     public int hashCode() {
         return Objects.hash(count);
+    }
+
+    public int compareTo(int manualCount) {
+        return Integer.compare(count, manualCount);
     }
 }
