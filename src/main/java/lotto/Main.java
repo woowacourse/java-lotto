@@ -39,7 +39,7 @@ public class Main {
 
     private static List<Lotto> createLottos(int numberOfManualLotto, int numberOfAutoLotto) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lottos;
         try {
             lottos = new ArrayList<>(createManualLotto(numberOfManualLotto));
         } catch (IllegalArgumentException e) {
