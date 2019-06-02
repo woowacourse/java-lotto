@@ -1,6 +1,7 @@
 package lotto.domain.game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class LottoGames implements LottoGenerator, Iterable<Lotto> {
 
     @Override
     public Lotto generate(List<Number> numbers) {
+        Collections.sort(numbers);
         return new Lotto(numbers);
     }
 
