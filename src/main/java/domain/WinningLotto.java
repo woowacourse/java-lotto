@@ -1,5 +1,7 @@
 package domain;
 
+import exception.BonusBallDuplicationException;
+
 import java.util.Objects;
 
 /**
@@ -10,6 +12,9 @@ public class WinningLotto {
     private final Number bonusNumber;
 
     private WinningLotto(Lotto lotto, Number bonusNumber) {
+        if (lotto.contains(bonusNumber)) {
+            throw new BonusBallDuplicationException("보너스 볼은 로또에 있는 번호들과 겹쳐선 안됩니다.");
+        }
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;
     }
@@ -20,7 +25,7 @@ public class WinningLotto {
 
     public Rank match(Lotto userLotto) {
         int countOfMatch = lotto.countEqualNumbers(userLotto);
-        return Rank.valueOf(countOfMatch, false);
+        return Rank.valueOf(countOfMatch, userLotto.contains(bonusNumber));
     }
 
     @Override

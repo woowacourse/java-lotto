@@ -9,6 +9,7 @@ public class RankAnalysis {
             Rank.FIFTH,
             Rank.FOURTH,
             Rank.THIRD,
+            Rank.SECOND,
             Rank.FIRST);
 
     private final Counter<Rank> counter;
@@ -29,10 +30,10 @@ public class RankAnalysis {
 
     public double getEarningRate() {
         long totalWinningMoney = 0;
-        int totalUsedCnt = 0;
+        long totalUsedCnt = 0;
         for (Rank rank : counter.keySet()) {
             int cnt = count(rank);
-            totalWinningMoney += cnt * rank.getWinningMoney();
+            totalWinningMoney += cnt * (long) rank.getWinningMoney();
             totalUsedCnt += cnt;
         }
 

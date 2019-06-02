@@ -17,8 +17,9 @@ public class OutputView {
         System.out.println("당첨 통계\n");
         System.out.println("----------");
         for (Rank rank : RankAnalysis.ANALYZED_RANKS) {
-            System.out.printf("%d개 일치 (%d 원)- %d 개\n",
+            System.out.printf("%d개 일치%s (%d 원)- %d 개\n",
                     rank.getCountOfMatch(),
+                    rank.hasBonus() ? ", 보너스 볼 일치" : "",
                     rank.getWinningMoney(),
                     analysis.count(rank));
         }
