@@ -4,6 +4,7 @@ import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
@@ -16,6 +17,10 @@ public class ConsoleUILottoApplication {
         while(lottoTickets.needMoreCustomLottoTicket()) {
             lottoTickets.putCustomLottoTicket(InputView.inputLottoNumbers());
         }
+
+
+
+        OutputView.printLottoTickets(amountOfCustoms, money.getTicketCount(), lottoTickets.getLottoTickets());
 
         InputView.printWinningLottoNumbersMessage();
         String winningLottoNumbers = InputView.inputLottoNumbers();

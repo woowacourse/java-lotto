@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
@@ -41,5 +42,20 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder
+                .append("[")
+                .append(lottoNumbers
+                        .stream()
+                        .map(n -> n.toString())
+                        .collect(Collectors.joining(", ")).toString())
+                .append("]");
+
+        return stringBuilder.toString();
     }
 }

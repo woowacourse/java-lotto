@@ -20,6 +20,10 @@ public class LottoTickets {
         lottoTickets.add(LottoTicketFactory.create(inputCustomNumber));
     }
 
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
