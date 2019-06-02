@@ -26,7 +26,7 @@ public class LottoMachine {
     private static Lottos buyAutoLottos(final int numberOfLottos) {
         Lottos lottos = new Lottos();
         for (int i = 0; i < numberOfLottos; i++) {
-            lottos.add(LottoNumbersGenerator.getLottoNumbers());
+            lottos.add(new Lotto(LottoNumbersGenerator.getLottoNumbers()));
         }
         return lottos;
     }

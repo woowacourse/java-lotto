@@ -20,11 +20,11 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public void add(final LottoNumbers lottoNumbers) {
-        lottos.add(new Lotto(lottoNumbers));
+    public void add(final Lotto lotto) {
+        lottos.add(lotto);
     }
 
-    public void addAll(Lottos lottos) {
+    public void addAll(final Lottos lottos) {
         this.lottos.addAll(lottos.lottos);
     }
 

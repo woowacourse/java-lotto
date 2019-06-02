@@ -41,9 +41,9 @@ public class LottoGameTest {
                 LottoNumber.valueOf(15),
                 LottoNumber.valueOf(16)));
         Lottos lottos = new Lottos();
-        lottos.add(lottoFirst);
-        lottos.add(lottoFifth);
-        lottos.add(lottoMiss);
+        lottos.add(new Lotto(lottoFirst));
+        lottos.add(new Lotto(lottoFifth));
+        lottos.add(new Lotto(lottoMiss));
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.add(Rank.FIRST);
