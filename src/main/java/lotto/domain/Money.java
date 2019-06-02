@@ -7,27 +7,21 @@ import java.util.Objects;
 public class Money {
     // TODO 이름 바꿔...
     private static final int DIVIDING_STANDARD = 1000;
-    private static final int PERCENT = 100;
 
-    private final int price;
-    private int profit = 0;
+    private final int money;
 
-    public Money(final int price) {
-        this.price = price;
+    public Money(final int money) {
+        this.money = money;
 
-        validateMinimumMoneyInput(this.price);
+        validateMinimumMoneyInput(this.money);
+    }
+
+    public int getMoney() {
+        return money;
     }
 
     public int getTicketCount() {
-        return price / DIVIDING_STANDARD;
-    }
-
-    public void addProfit(RankType rankType) {
-        this.profit += rankType.getPrize();
-    }
-
-    public double getProfitRate() {
-        return (double) this.profit / this.price * PERCENT;
+        return money / DIVIDING_STANDARD;
     }
 
     private void validateMinimumMoneyInput(int money) {
@@ -40,13 +34,12 @@ public class Money {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Money money1 = (Money) o;
-        return price == money1.price &&
-                profit == money1.profit;
+        Money money = (Money) o;
+        return this.money == money.money;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price, profit);
+        return Objects.hash(money);
     }
 }

@@ -28,5 +28,6 @@ public class ConsoleUILottoApplication {
 
         WinStatistics winStatistics = new WinStatistics(lottoTickets.getLottoTickets(), winningLotto);
         OutputView.printResult(winStatistics.getCountOfResult());
+        OutputView.printProfitRate(winStatistics, money.getMoney());
     }
 }

@@ -23,7 +23,7 @@ public enum RankType {
             return SECOND;
         }
 
-        if (matchingCount >= 5) {
+        if (matchingCount >= 3) {
             return Arrays.stream(values())
                     .filter(rankType -> rankType.matchingCount == matchingCount)
                     .findFirst().get();
@@ -33,7 +33,7 @@ public enum RankType {
     }
 
     public int getMatchingCount() {
-        return matchingCount;
+        return this.matchingCount;
     }
 
     public int getPrize() {

@@ -6,13 +6,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTypeTest {
     @Test
-    void 보너스볼이_포함된_5개숫자_일치하는_경우() {
+    void _1등() {
+        assertThat(RankType.valueOf(6, false)).isEqualTo(RankType.FIRST);
+    }
+
+    @Test
+    void _2등() {
         assertThat(RankType.valueOf(5, true)).isEqualTo(RankType.SECOND);
     }
 
     @Test
-    void 보너스볼이_포함되지_않는_5개숫자_일치하는_경우() {
+    void _3등() {
         assertThat(RankType.valueOf(5, false)).isEqualTo(RankType.THIRD);
+    }
+
+    @Test
+    void _4등() {
+        assertThat(RankType.valueOf(4, false)).isEqualTo(RankType.FOURTH);
+    }
+
+    @Test
+    void _5등() {
+        assertThat(RankType.valueOf(3, false)).isEqualTo(RankType.FIFTH);
     }
 
     @Test

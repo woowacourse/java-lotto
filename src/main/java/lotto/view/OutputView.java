@@ -1,12 +1,12 @@
 package lotto.view;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.domain.RankType;
+import lotto.domain.WinStatistics;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class OutputView {
     public static void printLottoTickets(final int amountOfCustoms, final int amountOfLottoTickets, final List<LottoTicket> lottoTickets) {
@@ -20,6 +20,14 @@ public class OutputView {
     public static void printResult(Map<RankType, Integer> countOfResult) {
         System.out.println("당첨 통계\n" + "---------");
 
+        printEachRank(countOfResult);
+    }
+
+    public static void printProfitRate(WinStatistics winStatistics, int money) {
+        System.out.printf("총 수익률은 %.2f%%입니다.\n", winStatistics.calculateProfitRate(money));
+    }
+
+    private static void printEachRank(Map<RankType, Integer> countOfResult) {
         for (RankType rankType : RankType.values()) {
             int matchingCount = rankType.getMatchingCount();
             int prize = rankType.getPrize();
