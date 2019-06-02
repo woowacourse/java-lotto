@@ -21,8 +21,9 @@
 * LottoNumbersFactory
 * WinningLotto: 싱글톤 클래스
 * RankType: Enum
-* 당첨 시 집계하기
-* 수익률 계산하기
+* WinStatistics
+    * 당첨 시 집계하기
+    * 수익률 계산하기
 * 예외 클래스 생성하기
 
 ---

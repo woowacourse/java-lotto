@@ -14,11 +14,9 @@ public class ConsoleUILottoApplication {
         int amountOfCustoms = InputView.inputAmountOfCustom();
         LottoTickets lottoTickets = new LottoTickets(amountOfCustoms);
         InputView.printCustomLottoNumbersMessage();
-        while(lottoTickets.needMoreCustomLottoTicket()) {
+        while (lottoTickets.needMoreCustomLottoTicket()) {
             lottoTickets.putCustomLottoTicket(InputView.inputLottoNumbers());
         }
-
-
 
         OutputView.printLottoTickets(amountOfCustoms, money.getTicketCount(), lottoTickets.getLottoTickets());
 
