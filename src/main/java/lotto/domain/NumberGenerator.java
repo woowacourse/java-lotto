@@ -15,11 +15,14 @@ public class NumberGenerator {
     private NumberGenerator() {
         this.generator = new ArrayList<>();
 
+        addNumbers();
+        Collections.shuffle(generator);
+    }
+
+    private void addNumbers() {
         for (int i = MIN; i <= MAX; i++) {
             generator.add(new Number(i));
         }
-
-        Collections.shuffle(generator);
     }
 
     public static NumberGenerator create() {
@@ -29,7 +32,7 @@ public class NumberGenerator {
     public List<Number> getNumbers() {
         List<Number> numbers = generator.subList(START_POINT, NUMBER_BOUND);
         Collections.sort(numbers);
-        
+
         return numbers;
     }
 }
