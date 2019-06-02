@@ -38,9 +38,13 @@ public class Main {
     }
 
     private static WinningLotto readWinningLotto(String notifyingMessage) {
-        String input = InputView.readWinningLotto(notifyingMessage);
+        List<String> inputs = InputView.readWinningLotto(notifyingMessage);
         try {
-            return WinningLottoParser.parse(input);
+            return WinningLottoParser.parse(inputs.get(0), inputs.get(1));
+        } catch (BonusBallDuplicationException e) {
+            return readWinningLotto(e.getMessage());
+        } catch (LottoException e) {
+            return readWinningLotto(e.getMessage());
         } catch (IllegalArgumentException e) {
             return readWinningLotto(e.getMessage());
         }

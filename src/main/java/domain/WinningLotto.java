@@ -45,24 +45,5 @@ public class WinningLotto {
     @Override
     public String toString() {
         return lotto.toString() + " + " + bonusNumber.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WinningLotto that = (WinningLotto) o;
-        return Objects.equals(lotto, that.lotto) &&
-                Objects.equals(bonusNumber, that.bonusNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lotto, bonusNumber);
-    }
-
-    @Override
-    public String toString() {
-        return lotto.toString() + " + " + bonusNumber.toString();
-    }
+	}
 }
