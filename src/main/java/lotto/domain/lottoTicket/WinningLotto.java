@@ -1,6 +1,7 @@
 package lotto.domain.lottoTicket;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.exception.OverlapLottoBonusNumberException;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class WinningLotto extends Lotto {
     public WinningLotto(List<Integer> winningNumbers, int bonus) {
         super(ManualLotto.convertLottoNumbers(winningNumbers));
         if (winningNumbers.contains(bonus)) {
-            throw new IllegalArgumentException("당첨 번호와 중복된 번호 입니다.");
+            throw new OverlapLottoBonusNumberException("당첨 번호와 중복된 번호 입니다.");
         }
         this.bonus = new LottoNumber(bonus);
     }

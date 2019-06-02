@@ -1,6 +1,8 @@
 package lotto.domain.lottoTicket;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.exception.LottoNumberSizeException;
+import lotto.domain.exception.OverlapLottoNumberException;
 
 import java.util.*;
 
@@ -13,10 +15,10 @@ public abstract class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != MAX_LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개 입니다.");
+            throw new LottoNumberSizeException("로또 번호의 개수는 6개 입니다.");
         }
         if (isOverlap(lottoNumbers)) {
-            throw new IllegalArgumentException("중복되는 로또 번호가 있습니다.");
+            throw new OverlapLottoNumberException("중복되는 로또 번호가 있습니다.");
         }
         this.lottoNumbers = lottoNumbers;
     }

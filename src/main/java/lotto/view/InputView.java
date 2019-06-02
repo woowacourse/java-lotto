@@ -63,7 +63,7 @@ public class InputView {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자만 입력이 가능합니다.");
+            throw new NumberFormatException("숫자만 입력이 가능합니다.");
         }
     }
 }
