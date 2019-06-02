@@ -24,7 +24,7 @@ public class LottoResult {
     }
 
     public static Map<Rank, ResultCounter> create(TotalLottoGames totalLottoGames, WinningLotto winningLotto) {
-        for (Lotto lotto : totalLottoGames.getAll()) {
+        for (Lotto lotto : totalLottoGames.getAllGames()) {
             increase(winningLotto.resultOf(lotto));
         }
         return lottoResult;

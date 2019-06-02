@@ -38,7 +38,7 @@ public class OutputView {
 
     public static void lottoList(TotalLottoGames totalLottoGames) {
         System.out.println(getListMessage(totalLottoGames));
-        for (Lotto lotto : totalLottoGames.getAll()) {
+        for (Lotto lotto : totalLottoGames.getAllGames()) {
             System.out.println(OPEN_SQUARE_BUCKET + lotto.getLotto() + CLOSE_SQUARE_BUCKET);
         }
         System.out.println();

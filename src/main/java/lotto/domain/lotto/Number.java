@@ -30,10 +30,6 @@ public class Number implements Comparable<Number> {
         return NUMBER_LOWER_BOUND <= number && number <= NUMBER_UPPER_BOUND;
     }
 
-    public String getNumber() {
-        return String.valueOf(number);
-    }
-
     @Override
     public int compareTo(Number o) {
         return Integer.compare(this.number, o.number);
@@ -50,5 +46,10 @@ public class Number implements Comparable<Number> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }

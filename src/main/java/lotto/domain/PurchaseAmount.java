@@ -43,7 +43,7 @@ public class PurchaseAmount {
         return ((prizeAmount - purchaseAmount) / purchaseAmount) * PERCENT;
     }
 
-    public int getCount() {
+    public int ofCount() {
         return this.purchaseAmount / PURCHASE_AMOUNT_UNIT;
     }
 

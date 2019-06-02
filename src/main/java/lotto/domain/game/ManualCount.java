@@ -37,4 +37,8 @@ public class ManualCount {
     public boolean isZero() {
         return count == 0;
     }
+
+    public boolean isUnder(int indicator) {
+        return indicator <= count;
+    }
 }

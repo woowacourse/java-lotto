@@ -15,16 +15,18 @@ public class LottoGames implements LottoGenerator, Iterable<Lotto> {
         this.lottoGames = new ArrayList<>();
     }
 
-    List<Lotto> getLottoGames() {
-        return lottoGames;
-    }
-
     void addLotto(List<Number> numbers) {
         lottoGames.add(generate(numbers));
     }
 
     int size() {
         return lottoGames.size();
+    }
+
+    public List<Lotto> combine(LottoGames lottoGames) {
+        List<Lotto> result = new ArrayList<>(this.lottoGames);
+        result.addAll(lottoGames.lottoGames);
+        return result;
     }
 
     @Override

@@ -11,7 +11,7 @@ public class AutoLottoGames extends LottoGames {
     }
 
     private void addLottoGames(Count autoCount) {
-        for (int i = FIRST_LOTTO; i < autoCount.getCount(); i++) {
+        for (int i = FIRST_LOTTO; autoCount.isUnder(i); i++) {
             addLotto(RandomNumbersGenerator.create());
         }
     }

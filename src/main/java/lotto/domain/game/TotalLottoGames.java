@@ -1,6 +1,5 @@
 package lotto.domain.game;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.lotto.Lotto;
@@ -27,10 +26,7 @@ public class TotalLottoGames {
         return manualLottoGames.size();
     }
 
-    public List<Lotto> getAll() {
-        List<Lotto> lottoGames = new ArrayList<>();
-        lottoGames.addAll(manualLottoGames.getLottoGames());
-        lottoGames.addAll(autoLottoGames.getLottoGames());
-        return lottoGames;
+    public List<Lotto> getAllGames() {
+        return manualLottoGames.combine(autoLottoGames);
     }
 }

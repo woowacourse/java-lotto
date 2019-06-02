@@ -60,7 +60,7 @@ public class InputView {
     public static TotalLottoGames getTotalLottoGames(Count totalCount, ManualCount manualCount) {
         TotalLottoGames totalLottoGames = new TotalLottoGames(manualCount.getAutoCount(totalCount));
         OutputView.manualNumbers(manualCount);
-        for (int indicator = 1; indicator <= manualCount.getCount(); indicator++) {
+        for (int indicator = 1; manualCount.isUnder(indicator)/*indicator <= manualCount.getCount()*/; indicator++) {
             List<Number> lottoNumbers = getManualNumbers(indicator);
             totalLottoGames.addManual(lottoNumbers);
         }
@@ -91,8 +91,13 @@ public class InputView {
     }
 
     private static List<Number> winLotto() {
-        OutputView.win();
-        return InputParser.parseLotto(scanner.nextLine());
+        try {
+            OutputView.win();
+            return InputParser.parseLotto(scanner.nextLine());
+        } catch (LottoNumberException e) {
+            System.out.println(e.getMessage());
+            return winLotto();
+        }
     }
 
     public static WinningLotto getWinningLotto(Lotto winningNumbers) {

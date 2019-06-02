@@ -19,11 +19,7 @@ public class Count {
     }
 
     public Count(PurchaseAmount purchaseAmount) {
-        this(purchaseAmount.getCount());
-    }
-
-    public int getCount() {
-        return count;
+        this(purchaseAmount.ofCount());
     }
 
     public int subtract(int count) {
@@ -45,5 +41,9 @@ public class Count {
 
     public int compareTo(int manualCount) {
         return Integer.compare(count, manualCount);
+    }
+
+    public boolean isUnder(int i) {
+        return i < count;
     }
 }
