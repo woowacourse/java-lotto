@@ -4,12 +4,14 @@ import lotto.domain.InvalidLottoNumberException;
 
 import java.util.*;
 
+import static lotto.domain.lotto.Lotto.*;
+
 public class LottoNumber {
 
     private final int number;
 
     public LottoNumber(int number) {
-        if(number < 1 || number > 45){
+        if(number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER){
             throw new InvalidLottoNumberException("1부터 45까지의 수가 아닙니다.");
         }
         this.number = number;

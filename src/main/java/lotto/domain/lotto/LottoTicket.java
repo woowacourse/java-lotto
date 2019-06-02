@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
+    private static final String ENTER = "\n";
+
     private int numberOfLotto;
     private List<Lotto> lottos;
 
@@ -18,9 +20,13 @@ public class LottoTicket {
         return new AutoGenerateLotto(numberOfLotto, lottos);
     }
 
+    public int getNumberOfLotto() {
+        return numberOfLotto;
+    }
+
     @Override
     public String toString() {
-        return lottos.stream().map(Lotto::toString).collect(Collectors.joining("\n"));
+        return lottos.stream().map(Lotto::toString).collect(Collectors.joining(ENTER));
     }
 
 }

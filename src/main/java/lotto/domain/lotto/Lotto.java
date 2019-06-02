@@ -9,6 +9,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto{
+    static final int NUMBER_OF_LOTTO_NUMBER = 6;
+    static final int MIN_LOTTO_NUMBER = 1;
+    static final int MAX_LOTTO_NUMBER = 45;
 
     private List<LottoNumber> lottoNumbers;
 
@@ -18,7 +21,7 @@ public class Lotto{
     }
 
     private List<LottoNumber> invalidNumberOfLotto(List<LottoNumber> lottoNumbers){
-        if(lottoNumbers.size() != 6){
+        if(lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER){
             throw new InvalidLottoException("로또 범위는 6개여야 합니다.");
         }
         return lottoNumbers;
