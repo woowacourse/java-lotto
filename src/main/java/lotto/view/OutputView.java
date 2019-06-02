@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoSeller;
+import lotto.domain.LottoTickets;
 
 public class OutputView {
     private static final String OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE = "장을 구매했습니다.";
@@ -22,5 +23,11 @@ public class OutputView {
                     .append(OUTPUT_CHANGE_MESSAGE_BACK);
         }
         return stringBuilder.toString();
+    }
+
+    public static void showAllOf(LottoTickets lottoTickets) {
+        for (int index = 0; index < lottoTickets.size(); index++) {
+            System.out.println(lottoTickets.getTicket(index));
+        }
     }
 }
