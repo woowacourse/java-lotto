@@ -22,4 +22,16 @@ public class MoneyTest {
     void 구입금액이_1000원_미만일때() {
         assertThrows(IllegalNumberBoundException.class, () -> new Money(500));
     }
+
+    @Test
+    void 수익률_계산하기() {
+        Money money = new Money(4000);
+        money.addProfit(RankType.FIFTH);
+        money.addProfit(RankType.NOTHING);
+        money.addProfit(RankType.NOTHING);
+        money.addProfit(RankType.NOTHING);
+        money.addProfit(RankType.NOTHING);
+
+        assertThat(money.getProfitRate()).isEqualTo(125);
+    }
 }

@@ -7,8 +7,10 @@ import java.util.Objects;
 public class Money {
     // TODO 이름 바꿔...
     private static final int DIVIDING_STANDARD = 1000;
+    private static final int PERCENT = 100;
 
     private final int money;
+    private int profit = 0;
 
     public Money(final int money) {
         this.money = money;
@@ -18,6 +20,14 @@ public class Money {
 
     public int getTicketCount() {
         return money / DIVIDING_STANDARD;
+    }
+
+    public void addProfit(RankType rankType) {
+        this.profit += rankType.getPrize();
+    }
+
+    public double getProfitRate() {
+        return (double) this.profit / this.money * PERCENT;
     }
 
     private void validateMinimumMoneyInput(int money) {
@@ -31,11 +41,12 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money1 = (Money) o;
-        return money == money1.money;
+        return money == money1.money &&
+                profit == money1.profit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money);
+        return Objects.hash(money, profit);
     }
 }
