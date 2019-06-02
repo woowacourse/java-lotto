@@ -4,14 +4,20 @@ import lotto.domain.Lotto;
 import lotto.domain.Number;
 import lotto.util.StringUtil;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class ManualLottoCreator implements LottoCreator {
 
     private final List<String> manuals;
 
-    public ManualLottoCreator(List<String> manuals) {
+    public ManualLottoCreator() {
+        this(new ArrayList<>());
+    }
+
+    public ManualLottoCreator(final List<String> manuals) {
         this.manuals = manuals;
     }
 

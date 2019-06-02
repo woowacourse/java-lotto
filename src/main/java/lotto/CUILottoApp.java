@@ -29,7 +29,7 @@ public class CUILottoApp {
     }
 
     private static WinningLotto createWinningLotto() {
-        ManualLottoCreator manualLottoCreator = new ManualLottoCreator(null);
+        ManualLottoCreator manualLottoCreator = new ManualLottoCreator();
         Lotto lotto = manualLottoCreator.createLotto(InputView.inputLottoString());
         Number number = InputView.createBonusNumber();
         return new WinningLotto(lotto, number);
