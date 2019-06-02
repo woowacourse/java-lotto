@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.creator.ManualLottoCreator;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -47,5 +48,10 @@ class LottoResultTest {
     @Test
     void 우승상금_확인() {
         assertThat(lottoResult.getRewardAll()).isEqualTo(2030000000);
+    }
+
+    @AfterEach
+    void tearDown() {
+        lottoResult = null;
     }
 }
