@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.Lotteries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +22,14 @@ public class InputView {
     private static final String EX_LOTTO_RE_INPUT_MESSAGE = " 다시 입력해주세요";
 
     private static final Scanner SCANNER = new Scanner(System.in);
+    public static final String REGEX_BLANK = " ";
+    public static final String REPLACEMENT_EMPTY = "";
+    public static final String REGEX_COMMA = ",";
+    private static Lotteries lotteries;
+
+    public void setLotteries(Lotteries lotteries) {
+        this.lotteries = lotteries;
+    }
 
     public static long generateInvalidUserPrice() {
         try {
@@ -35,14 +43,14 @@ public class InputView {
         }
     }
 
+    private static String inputByUser() {
+        return SCANNER.nextLine().trim();
+    }
+
     private static void checkUserPrice(double price) {
         if (price < MIN_USER_PRICE_RANGE) {
             throw new IllegalArgumentException();
         }
-    }
-
-    private static String inputByUser() {
-        return SCANNER.nextLine().trim();
     }
 
     public static long generateInvalidManualCount(double userPrice) {
@@ -63,22 +71,22 @@ public class InputView {
         }
     }
 
-    public static Lotto generateInvalidLotto() {
+    public static void generateInvalidLotto() {
         try {
             List<Integer> lottoNumbers = generateLottoNumbers(inputByUser());
-            return Lotto.generate(lottoNumbers);
+            lotteries.addNoFormedLotto(lottoNumbers);
         } catch (NumberFormatException e) {
             System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
-            return generateInvalidLotto();
+            generateInvalidLotto();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage() + EX_LOTTO_RE_INPUT_MESSAGE);
-            return generateInvalidLotto();
+            generateInvalidLotto();
         }
     }
 
     private static List<Integer> generateLottoNumbers(String inputByUser) {
         List<Integer> lottoNumbers = new ArrayList<>();
-        List<String> lotteries = Arrays.asList(inputByUser.replaceAll(" ", "").split(","));
+        List<String> lotteries = Arrays.asList(inputByUser.replaceAll(REGEX_BLANK, REPLACEMENT_EMPTY).split(REGEX_COMMA));
         for (String lotto : lotteries) {
             lottoNumbers.add(Integer.parseInt(lotto));
         }

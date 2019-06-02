@@ -11,27 +11,36 @@ public class Lotto {
     private static final String EX_LOTTO_SIZE_MESSAGE = "로또 숫자는 6개여야 합니다.";
     private static final String EX_LOTTO_DUPLICATE_MESSAGE = "중복된 숫자는 사용할 수 없습니다";
     private final List<LottoNumber> lottoNumbers;
-
+    private CustomLotto customLotto;
+    private CreateLotto createLotto;
 
     private Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         checkLottoNumberCondition();
     }
 
-    public static Lotto create(List<LottoNumber> lottoNumbers) {
+    public Lotto() {
+        this.lottoNumbers = new ArrayList<>();
+    }
+
+    public void setCustomLotto(CustomLotto customLotto) {
+        this.customLotto = customLotto;
+    }
+
+    public void setCreateLotto(CreateLotto createLotto) {
+        this.createLotto = createLotto;
+    }
+
+    public Lotto customLotto(List<Integer> noFormedLotto) {
+        return new Lotto(customLotto.custom(noFormedLotto));
+    }
+
+    public Lotto createLotto() {
+        return new Lotto(createLotto.create());
+    }
+
+    public Lotto createLotto(List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
-    }
-
-    public static Lotto generate(List<Integer> lottoNumbers) {
-        return new Lotto(generateLottoNumbers(lottoNumbers));
-    }
-
-    private static List<LottoNumber> generateLottoNumbers(List<Integer> lottoNumbers) {
-        List<LottoNumber> generateLottoNumbers = new ArrayList<>();
-        for (Integer lottoNumber : lottoNumbers) {
-            generateLottoNumbers.add(new LottoNumber(lottoNumber));
-        }
-        return generateLottoNumbers;
     }
 
     private void checkLottoNumberCondition() {

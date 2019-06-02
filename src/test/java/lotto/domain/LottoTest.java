@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.customlotto.DefaultCustomLotto;
+import lotto.domain.makeuplotto.MockCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,11 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class LottoTest {
     Lotto lotto;
+    Lotto lotto2;
+    CustomLotto customLotto;
+    CreateLotto createLotto;
     List<LottoNumber> lottoNumbers;
     List<Integer> lottoNumbersInt;
 
     @BeforeEach
     void setUp() {
+        customLotto = new DefaultCustomLotto();
+        createLotto = new MockCreateLotto();
+
         lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumber(1));
         lottoNumbers.add(new LottoNumber(2));
@@ -28,26 +36,31 @@ public class LottoTest {
         lottoNumbers.add(new LottoNumber(4));
         lottoNumbers.add(new LottoNumber(5));
         lottoNumbers.add(new LottoNumber(6));
-        lotto = Lotto.create(lottoNumbers);
+
+        lotto = new Lotto();
+        lotto.setCustomLotto(customLotto);
+        lotto.setCreateLotto(createLotto);
+        lotto.createLotto();
+
+        lotto2 = new Lotto();
+        lotto2.setCustomLotto(customLotto);
+        lotto2.setCreateLotto(createLotto);
+        lotto2.createLotto(lottoNumbers);
+
         lottoNumbersInt = Arrays.asList(1,2,3,4,5,6);
     }
 
     @Test
     void create_생성() {
-        assertThat(lotto).isEqualTo(Lotto.create(lottoNumbers));
+        assertThat(lotto).isEqualTo(lotto2);
     }
 
     @Test
     void create_리스트_개수_예외() {
         lottoNumbers.add(new LottoNumber(7));
         assertThrows(Exception.class, () -> {
-            Lotto.create(lottoNumbers);
+            lotto2.createLotto(lottoNumbers);
         });
-    }
-
-    @Test
-    void create_다른_생성자_생성() {
-        assertThat(Lotto.generate(lottoNumbersInt)).isEqualTo(lotto);
     }
 
     @Test
@@ -55,7 +68,7 @@ public class LottoTest {
         lottoNumbers.remove(0);
         lottoNumbers.add(new LottoNumber(6));
         assertThrows(Exception.class, () -> {
-            Lotto.create(lottoNumbers);
+            lotto2.createLotto(lottoNumbers);
         });
     }
 }
