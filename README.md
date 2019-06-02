@@ -15,9 +15,6 @@
 * LottoNumber
     * **수동 로또의 경우**
     * **자동 로또의 경우**
-        * subList해서 6개 전달하는 함수 만들기
-            * purchaseAutoNumbers() -> return List<LottoNumber>
-            * **[예외]** 중복되는 번호가 있는지 확인
 * LottoNumbersFactory
 * WinningLotto: 싱글톤 클래스
 * RankType: Enum
@@ -65,10 +62,13 @@
 * LottoTickets: 로또 리스트, 구매할 수동 로또 수
     * 입력한 수동 로또 개수만큼 번호가 입력됐는지 boolean
 * LottoNumber
-    * **수동 로또의 경우**
     * 요청한 로또 번호에 대한 객체 리턴
         * LottoNumber.getNumber(3) -> new LottoNumber(3)
         * **[예외]** 요청한 로또 번호가 1~45가 아닐 경우
+    * **수동 로또의 경우**
+    * **자동 로또의 경우**
+        * subList해서 6개 전달하는 함수 만들기
+            * getRandomNumbers() -> return List<LottoNumber>
 * WinningLotto
     * String으로 로또 번호 6개가 입력되면 LottoNumber 리스트에 저장하기
         * "1,2,3,4,5,6" -> [1,2,3,4,5,6]

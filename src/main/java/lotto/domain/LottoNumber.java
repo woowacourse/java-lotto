@@ -2,8 +2,7 @@ package lotto.domain;
 
 import lotto.exception.IllegalNumberBoundException;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class LottoNumber {
     private static final int FIRST_BOUND_OF_LOTTO_NUMBER = 1;
@@ -26,6 +25,13 @@ public class LottoNumber {
         validateNumberBound(key);
 
         return numbers.get(key);
+    }
+
+    public static List<LottoNumber> getRandomNumbers() {
+        List<LottoNumber> randomNumbers = new ArrayList<>(numbers.values());
+        Collections.shuffle(randomNumbers);
+
+        return randomNumbers.subList(0, 6);
     }
 
     private static void validateNumberBound(int key) {

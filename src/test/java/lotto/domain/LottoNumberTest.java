@@ -21,4 +21,9 @@ public class LottoNumberTest {
     void 다른_숫자일때_메모리주소_테스트() {
         assertThat(LottoNumber.getNumber(1) == LottoNumber.getNumber(2)).isFalse();
     }
+
+    @Test
+    void 랜덤으로_6개_뽑히는지_테스트() {
+        assertThat(LottoNumber.getRandomNumbers().size()).isEqualTo(6);
+    }
 }
