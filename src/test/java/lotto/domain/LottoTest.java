@@ -11,9 +11,9 @@ public class LottoTest {
     @Test
     void 중복이_있을때() {
         List<Number> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new Number("1"));
-        lottoNumbers.add(new Number("2"));
-        lottoNumbers.add(new Number("2"));
+        lottoNumbers.add(new Number(1));
+        lottoNumbers.add(new Number(2));
+        lottoNumbers.add(new Number(2));
 
         assertThrows(IllegalArgumentException.class, () -> {
             Lotto lotto = new Lotto(lottoNumbers);
@@ -25,7 +25,7 @@ public class LottoTest {
         List<Number> lottoNumbers = new ArrayList<>();
 
         for (int i = 1; i <= 7; i++) {
-            lottoNumbers.add(new Number(i + ""));
+            lottoNumbers.add(new Number(i));
         }
 
         assertThrows(IllegalArgumentException.class, () -> {

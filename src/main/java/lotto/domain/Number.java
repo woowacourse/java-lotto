@@ -1,30 +1,31 @@
 package lotto.domain;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class Number {
-    private static final Pattern INPUT_PATTERN = Pattern.compile("^[0-9]{1,}$");
-    private static final String ERROR_MESSAGE = "잘못된 입력입니다. 다시 입력해주세요.";
+public class Number implements Comparable<Number> {
+    private static final String ERROR_MESSAGE = "숫자의 범위는 1-45입니다.";
     private static final int MIN = 1;
     private static final int MAX = 45;
+
     private final int number;
 
-    public Number(String number) {
-        if (validInputString(number) || validOverBound(number)) {
+    public Number(int number) {
+        validOverBound(number);
+        this.number = number;
+    }
+
+    private void validOverBound(int input) {
+        if (input < MIN || input > MAX) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
-
-        this.number = Integer.parseInt(number);
     }
 
-    private boolean validOverBound(String input) {
-        int number = Integer.parseInt(input);
-        return number < MIN || number > MAX;
-    }
-
-    private boolean validInputString(String input) {
-        Matcher matcher = INPUT_PATTERN.matcher(input);
-        return !matcher.find();
+    @Override
+    public int compareTo(Number differentNumber) {
+        if (this.number < differentNumber.number) {
+            return -1;
+        }
+        if (this.number > differentNumber.number) {
+            return 0;
+        }
+        return 1;
     }
 }

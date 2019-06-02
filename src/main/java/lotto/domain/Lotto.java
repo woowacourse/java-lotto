@@ -5,23 +5,32 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private static final String ERROR_MESSAGE = "중복이 있거나 6개가 입력되지 않았습니다.";
+    private static final String ERROR_DUPLICATE_MESSAGE = "중복된 수가 있습니다.";
+    private static final String ERROR_LOTTO_SIZE = "가질수 있는 로또의 수는 6개 입니다.";
     private static final int LOTTO_SIZE = 6;
     private final List<Number> lotto;
 
     public Lotto(List<Number> lotto) {
-        if (validDulicate(lotto) || validSize(lotto)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE);
-        }
+        validCheck();
         this.lotto = lotto;
     }
 
-    private boolean validDulicate(List<Number> lotto) {
-        Set<Number> cheked = new HashSet<>(lotto);
-        return cheked.size() != lotto.size();
+    private void validCheck() {
+        validDulicate(lotto);
+        validSize(lotto);
     }
 
-    private boolean validSize(List<Number> lotto) {
-        return lotto.size() != LOTTO_SIZE;
+    private void validDulicate(List<Number> lotto) {
+        Set<Number> cheked = new HashSet<>(lotto);
+
+        if (cheked.size() != lotto.size()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validSize(List<Number> lotto) {
+        if (lotto.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
+        }
     }
 }
