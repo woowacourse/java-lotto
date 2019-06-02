@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.InvalidLottoNumberException;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -13,6 +15,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (isOutOfScope(number)) {
             throw new InvalidLottoNumberException(SCOPE_ERROR_MESSAGE);
         }
+
         this.number = number;
     }
 

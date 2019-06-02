@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.InvalidLottoTicketException;
+
 import java.util.*;
 
 public class LottoTicket {
