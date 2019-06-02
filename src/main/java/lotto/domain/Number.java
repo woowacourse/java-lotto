@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Number {
-    private static final Pattern INPUTPATTENR = Pattern.compile("^[0-9]{1,}$");
+    private static final Pattern INPUT_PATTERN = Pattern.compile("^[0-9]{1,}$");
     private static final String ERROR_MESSAGE = "잘못된 입력입니다. 다시 입력해주세요.";
     private static final int MIN = 1;
     private static final int MAX = 45;
@@ -24,7 +24,7 @@ public class Number {
     }
 
     private boolean validInputString(String input) {
-        Matcher matcher = INPUTPATTENR.matcher(input);
+        Matcher matcher = INPUT_PATTERN.matcher(input);
         return !matcher.find();
     }
 }
