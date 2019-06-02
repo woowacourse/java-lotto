@@ -1,2 +1,27 @@
 # java-lotto
-로또 미션 진행을 위한 저장소
+## Step 1. Automatically Generate Lotto Games
+### Function Requirements
+1. get purchase amount from User and generate Lotto Games
+
+### TODO
+1. get purchase amount from User [View]
+    - purchase amount should be 1000 won per a Lotto
+2. generate Lotto Games [Domain]
+    - {Exception} each numbers must be not duplicated
+3. get last week winning number [View]
+4. show winning statics [View]
+
+## Step 2. Bonus Ball
+### Function Requirements
+1. get bonus number [domain]
+    - {Exception} bonus number must not contained WinningLotto
+2. show winning statics with bonus number
+
+## Step 3. User Picked Lotto Numbers
+### Function Requirements
+1. get how many **not automatically generated** lottos
+    - {Exception} must over 0
+    - {Exception} must under ``GameCounts`` instance
+2. get user picked lotto numbers
+    - {Exception} input format
+    - {Exception} duplicated number
