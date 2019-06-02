@@ -3,7 +3,6 @@
 
 ### Todo
 
-
 ### Done
 * Lotto 자동 생성하기
 * Money 구매 가능한 로또 개수 판별하기

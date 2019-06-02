@@ -59,8 +59,6 @@ public class Rank {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("당첨 통계\n")
-                .append("---------\n");
         for (AbstractRank rank : winners.values()) {
             stringBuilder.append(rank.toString());
         }

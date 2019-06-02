@@ -9,6 +9,8 @@ public class OutputView {
     }
 
     public static void printRankState(Rank rank) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
         System.out.println(rank.toString());
     }
 
