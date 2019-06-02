@@ -35,7 +35,7 @@ public class LottoResult {
         lottoResult.get(rank).increase();
     }
 
-    public static double getRateOfReturn(PurchaseAmount amount) {
+    public static double rateOfReturn(PurchaseAmount amount) {
         int prize = INIT_PRIZE;
         for (Rank rank : Rank.values()) {
             prize += rank.totalAmount(lottoResult.get(rank));

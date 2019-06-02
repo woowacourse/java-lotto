@@ -1,7 +1,6 @@
 package lotto.domain.game;
 
 import lotto.exceptions.CountRangeException;
-import lotto.exceptions.ManualCountBoundException;
 
 public class ManualCount {
     private static final int COUNT_LOWER_BOUND = 0;

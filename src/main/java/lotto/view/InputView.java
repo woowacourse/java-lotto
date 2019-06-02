@@ -81,8 +81,7 @@ public class InputView {
         } catch (IllegalFormatException | NumberFormatException e) {
             ErrorView.numberFormat();
             return getManualNumbers(indicator);
-        }
-        catch (NumberCountException e) {
+        } catch (NumberCountException e) {
             ErrorView.numberCount();
             return getManualNumbers(indicator);
         } catch (LottoNumberException e) {
