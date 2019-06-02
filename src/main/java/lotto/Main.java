@@ -9,13 +9,11 @@ import java.util.List;
 
 public class Main {
 
-    private static List<Lotto> inputLottos = new ArrayList<>();
-
     public static void main(String[] args) {
         Money money = createMoney();
         int numberOfManualLotto = createNumberOfManualLotto();
         int numberOfAutoLotto = money.getNumberOfLotto() - numberOfManualLotto;
-        createLottos(numberOfManualLotto, numberOfAutoLotto);
+        List<Lotto> inputLottos = createLottos(numberOfManualLotto, numberOfAutoLotto);
         Lottos lottos = new Lottos(inputLottos);
         OutputConsole.outputLotto(lottos, numberOfManualLotto, numberOfAutoLotto);
         WinningLotto winningLotto = createWinningLotto(createLastWinningLotto());
@@ -40,28 +38,32 @@ public class Main {
         }
     }
 
-    private static void createLottos(int numberOfManualLotto, int numberOfAutoLotto) {
+    private static List<Lotto> createLottos(int numberOfManualLotto, int numberOfAutoLotto) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        List<Lotto> lottos = new ArrayList<>();
         try {
-            createManualLotto(numberOfManualLotto);
+            lottos = new ArrayList<>(createManualLotto(numberOfManualLotto));
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            createLottos(numberOfManualLotto, numberOfAutoLotto);
+            return createLottos(numberOfManualLotto, numberOfAutoLotto);
         }
-        createAutoLotto(numberOfAutoLotto);
+        createAutoLotto(numberOfAutoLotto, lottos);
+        return lottos;
     }
 
-    private static void createManualLotto(int numberOfManualLotto) {
+    private static List<Lotto> createManualLotto(int numberOfManualLotto) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < numberOfManualLotto; i++) {
             LottoMachine lottoMachine = new ManualLottoMachine(InputConsole.inputLotto());
-            inputLottos.add(lottoMachine.generateLotto());
+            lottos.add(lottoMachine.generateLotto());
         }
+        return lottos;
     }
 
-    private static void createAutoLotto(int numberOfAutoLotto) {
+    private static void createAutoLotto(int numberOfAutoLotto, List<Lotto> lottos) {
         LottoMachine lottoMachine = new AutoLottoMachine();
         for (int i = 0; i < numberOfAutoLotto; i++) {
-            inputLottos.add(lottoMachine.generateLotto());
+            lottos.add(lottoMachine.generateLotto());
         }
     }
 
