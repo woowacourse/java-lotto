@@ -15,12 +15,12 @@ public class LottoResult {
 
     static {
         lottoResult = new HashMap<>();
-        lottoResult.put(FIRST, ResultCounter.create());
-        lottoResult.put(SECOND, ResultCounter.create());
-        lottoResult.put(THIRD, ResultCounter.create());
-        lottoResult.put(FOURTH, ResultCounter.create());
-        lottoResult.put(FIFTH, ResultCounter.create());
-        lottoResult.put(MISS, ResultCounter.create());
+        lottoResult.put(FIRST, new ResultCounter());
+        lottoResult.put(SECOND, new ResultCounter());
+        lottoResult.put(THIRD, new ResultCounter());
+        lottoResult.put(FOURTH, new ResultCounter());
+        lottoResult.put(FIFTH, new ResultCounter());
+        lottoResult.put(MISS, new ResultCounter());
     }
 
     public static Map<Rank, ResultCounter> create(TotalLottoGames totalLottoGames, WinningLotto winningLotto) {
@@ -31,7 +31,7 @@ public class LottoResult {
     }
 
     private static void increase(Rank rank) {
-        lottoResult.put(rank, lottoResult.get(rank).increase());
+        lottoResult.get(rank).increase();
     }
 
     public static double getRateOfReturn(PurchaseAmount amount) {
