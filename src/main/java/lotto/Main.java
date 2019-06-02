@@ -11,11 +11,10 @@ public class Main {
 
     public static void main(String[] args) {
         Money money = createMoney();
-        int numberOfManualLotto = createNumberOfManualLotto();
-        int numberOfAutoLotto = money.getNumberOfLotto() - numberOfManualLotto;
-        List<Lotto> inputLottos = createLottos(numberOfManualLotto, numberOfAutoLotto);
+        LottoCount lottoCount = createLottoCount(money);
+        List<Lotto> inputLottos = createLottos(lottoCount.getManualCount(), lottoCount.getAutoCount());
         Lottos lottos = new Lottos(inputLottos);
-        OutputConsole.outputLotto(lottos, numberOfManualLotto, numberOfAutoLotto);
+        OutputConsole.outputLotto(lottos, lottoCount.getManualCount(), lottoCount.getAutoCount());
         WinningLotto winningLotto = createWinningLotto(createLastWinningLotto());
         OutputConsole.outputResult(new LottoResult(winningLotto, lottos));
     }
@@ -29,12 +28,12 @@ public class Main {
         }
     }
 
-    private static int createNumberOfManualLotto() {
+    private static LottoCount createLottoCount(Money money) {
         try {
-            return InputConsole.inputNumberOfManualLotto();
+            return new LottoCount(money, InputConsole.inputNumberOfManualLotto());
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            return createNumberOfManualLotto();
+            return createLottoCount(money);
         }
     }
 
