@@ -24,7 +24,7 @@ public class LottoResult {
     }
 
     public int getWinnerTypeValue(WinningType winnerType) {
-        return lottoResult.getOrDefault(winnerType, 0);
+        return lottoResult.getOrDefault(winnerType, DEFAULT_WINNING_TYPE_VALUE);
     }
 
     public long getRewardAll() {

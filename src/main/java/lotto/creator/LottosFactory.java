@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottosFactory {
-    public static List<Lotto> create(List<String[]> manuals, Money money) {
+    public static List<Lotto> create(List<String> manuals, Money money) {
         List<Lotto> lottos = new ArrayList<>();
 
         LottoCreator lottoCreator = new ManualLottoCreator(manuals);

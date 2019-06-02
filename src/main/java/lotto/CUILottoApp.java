@@ -13,7 +13,7 @@ public class CUILottoApp {
     public static void main(String[] args) {
         try {
             Money money = new Money(InputView.inputMoney());
-            List<String[]> manuals = createManuals(money);
+            List<String> manuals = createManuals(money);
             List<Lotto> lottos = LottosFactory.create(manuals, money);
 
             OutputView.printLottos(manuals.size(), lottos);
@@ -35,7 +35,7 @@ public class CUILottoApp {
         return new WinningLotto(lotto, number);
     }
 
-    private static List<String[]> createManuals(Money money) {
+    private static List<String> createManuals(Money money) {
         int manualSize = InputView.inputManualSize();
         money.checkManualSize(manualSize);
         return InputView.createManualLottos(manualSize);
