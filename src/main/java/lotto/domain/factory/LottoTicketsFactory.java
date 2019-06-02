@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketsFactory {
-    private static final String DELIMITER = ",";
-
     public static LottoTickets create(final int manualAmount, List<String> manualLottoNumbers, final LottoMoney lottoMoney) {
         int totalAmount = lottoMoney.getAmount();
         int randomAmount = totalAmount - manualAmount;
