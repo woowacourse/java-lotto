@@ -6,7 +6,7 @@ import java.util.*;
  * @author heebg
  * @version 1.0 2019-05-29
  */
-public class Lotto {
+public class Lotto implements Iterable<LottoNumber> {
     private static final int LOTTO_SIZE = 6;
     private static final String EX_LOTTO_SIZE_MESSAGE = "로또 숫자는 6개여야 합니다.";
     private static final String EX_LOTTO_DUPLICATE_MESSAGE = "중복된 숫자는 사용할 수 없습니다";
@@ -39,7 +39,7 @@ public class Lotto {
         return new Lotto(createLotto.create());
     }
 
-    public Lotto createLotto(List<LottoNumber> lottoNumbers) {
+    public static Lotto createLotto(List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
@@ -53,6 +53,20 @@ public class Lotto {
         }
     }
 
+    public int matchCount(Lotto lotto) {
+        int match = 0;
+        for (LottoNumber lottoNumber : lotto) {
+            if (contains(lottoNumber)) {
+                match += 1;
+            }
+        }
+        return match;
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public String toStringWithFormat(String startSymbol, String endSymbol, String separator) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(startSymbol);
@@ -62,6 +76,11 @@ public class Lotto {
         }
         stringBuilder.append(stringJoiner).append(endSymbol);
         return stringBuilder.toString();
+    }
+
+    @Override
+    public Iterator iterator() {
+        return lottoNumbers.iterator();
     }
 
     @Override

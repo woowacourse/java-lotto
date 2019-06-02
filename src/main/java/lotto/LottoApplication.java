@@ -12,6 +12,7 @@ import lotto.view.OutputView;
  */
 public class LottoApplication {
     private static Lotteries lotteries;
+    private static Winner winner;
     private static final InputView inputView = new InputView();
     private static final OutputView outputView = new OutputView();
 
@@ -26,6 +27,9 @@ public class LottoApplication {
         lotteries.addNewLotteries(autoCount);
 
         outputView.outputAutoLotteries();
+        inputView.generateInvalidWinLotto();
+        winner = inputView.generateInvalidWinBonus();
+
     }
 
     private static void assembler() {
@@ -34,8 +38,11 @@ public class LottoApplication {
         lotto.setCreateLotto(new DefaultCreateLotto());
 
         lotteries = new Lotteries(lotto);
+        winner = new Winner();
+        winner.setCustomLotto(new DefaultCustomLotto());
 
         inputView.setLotteries(lotteries);
+        inputView.setWinner(winner);
         outputView.setLotteries(lotteries);
     }
 

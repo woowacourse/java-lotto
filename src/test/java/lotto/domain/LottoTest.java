@@ -40,12 +40,12 @@ public class LottoTest {
         lotto = new Lotto();
         lotto.setCustomLotto(customLotto);
         lotto.setCreateLotto(createLotto);
-        lotto.createLotto();
+        lotto = lotto.createLotto();
 
         lotto2 = new Lotto();
         lotto2.setCustomLotto(customLotto);
         lotto2.setCreateLotto(createLotto);
-        lotto2.createLotto(lottoNumbers);
+        lotto2 = lotto2.createLotto(lottoNumbers);
 
         lottoNumbersInt = Arrays.asList(1,2,3,4,5,6);
     }
@@ -70,5 +70,10 @@ public class LottoTest {
         assertThrows(Exception.class, () -> {
             lotto2.createLotto(lottoNumbers);
         });
+    }
+
+    @Test
+    void match_확인() {
+        assertThat(lotto.matchCount(lotto2)).isEqualTo(6);
     }
 }

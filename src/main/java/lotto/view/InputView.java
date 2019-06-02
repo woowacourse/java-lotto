@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotteries;
+import lotto.domain.Winner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,9 +27,14 @@ public class InputView {
     public static final String REPLACEMENT_EMPTY = "";
     public static final String REGEX_COMMA = ",";
     private static Lotteries lotteries;
+    private static Winner winner;
 
     public void setLotteries(Lotteries lotteries) {
         this.lotteries = lotteries;
+    }
+
+    public void setWinner(Winner winner) {
+        this.winner = winner;
     }
 
     public static long generateInvalidUserPrice() {
@@ -93,4 +99,30 @@ public class InputView {
         return lottoNumbers;
     }
 
+    public static void generateInvalidWinLotto() {
+        try {
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            winner.customWinLotto(generateLottoNumbers(inputByUser()));
+        } catch (NumberFormatException e) {
+            System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
+            generateInvalidLotto();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            generateInvalidWinLotto();
+        }
+    }
+
+    public Winner generateInvalidWinBonus() {
+        try {
+            System.out.println("보너스 번호를 입력해 주세요.");
+            winner.customWinBonus(Integer.parseInt(inputByUser()));
+            return winner;
+        } catch (NumberFormatException e) {
+            System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
+            return generateInvalidWinBonus();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return generateInvalidWinBonus();
+        }
+    }
 }
