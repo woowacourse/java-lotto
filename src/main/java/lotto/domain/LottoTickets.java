@@ -1,26 +1,23 @@
 package lotto.domain;
 
-import lotto.exception.UnmatchedLottoTicketAmountException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets = new ArrayList<>();
     private final int amountOfCustom;
 
-    public LottoTickets(final String[] customLottoInputs, final int amountOfCustom) {
-        validateAmountOfCustomLotto(customLottoInputs, amountOfCustom);
-
-        this.lottoTickets = LottoTicketsFactory.create(customLottoInputs);
+    public LottoTickets(final int amountOfCustom) {
         this.amountOfCustom = amountOfCustom;
     }
 
-    private void validateAmountOfCustomLotto(String[] customLottoInputs, int amountOfCustom) {
-        if (customLottoInputs.length != amountOfCustom) {
-            throw new UnmatchedLottoTicketAmountException("구매할 수동로또의 개수만큼 로또 번호를 입력해야 합니다.");
-        }
+    public boolean needMoreCustomLottoTicket() {
+        return lottoTickets.size() < amountOfCustom;
+    }
+
+    public void putCustomLottoTicket(final String inputCustomNumber) {
+        lottoTickets.add(LottoTicketFactory.create(inputCustomNumber));
     }
 
     @Override

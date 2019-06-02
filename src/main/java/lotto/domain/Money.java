@@ -9,17 +9,17 @@ public class Money {
     private static final int DIVIDING_STANDARD = 1000;
     private static final int PERCENT = 100;
 
-    private final int money;
+    private final int price;
     private int profit = 0;
 
-    public Money(final int money) {
-        this.money = money;
+    public Money(final int price) {
+        this.price = price;
 
-        validateMinimumMoneyInput(money);
+        validateMinimumMoneyInput(this.price);
     }
 
     public int getTicketCount() {
-        return money / DIVIDING_STANDARD;
+        return price / DIVIDING_STANDARD;
     }
 
     public void addProfit(RankType rankType) {
@@ -27,7 +27,7 @@ public class Money {
     }
 
     public double getProfitRate() {
-        return (double) this.profit / this.money * PERCENT;
+        return (double) this.profit / this.price * PERCENT;
     }
 
     private void validateMinimumMoneyInput(int money) {
@@ -41,12 +41,12 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money1 = (Money) o;
-        return money == money1.money &&
+        return price == money1.price &&
                 profit == money1.profit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money, profit);
+        return Objects.hash(price, profit);
     }
 }
