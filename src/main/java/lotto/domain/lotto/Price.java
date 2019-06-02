@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 public class Price {
     private static final String MONEY_PATTERN = "^[0-9]*$";
+    private static final int LOTTO_PRICE = 1000;
     private int money;
 
     public Price(String money){
@@ -26,6 +27,10 @@ public class Price {
             throw new InvalidLottoPrice("음수가 나오면 안됩니다.");
         }
         return Integer.parseInt(money);
+    }
+
+    public int getNumberOfLotto(){
+        return money/LOTTO_PRICE;
     }
 
     @Override
