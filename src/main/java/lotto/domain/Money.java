@@ -7,15 +7,15 @@ public class Money {
     private final int money;
 
     public Money(int money) {
-        validMoneyUnit(money);
         this.money = money;
+        validMoneyUnit();
     }
 
     public int getRound() {
         return money / MONEY_UNIT;
     }
 
-    private void validMoneyUnit(int money) {
+    private void validMoneyUnit() {
         if (money % MONEY_UNIT != 0) {
             throw new IllegalArgumentException(ERROR_MONEY_UNIT);
         }

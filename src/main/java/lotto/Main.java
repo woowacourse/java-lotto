@@ -1,9 +1,7 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.Money;
-import lotto.domain.MyLotto;
-import lotto.domain.NumberGenerator;
+import lotto.domain.*;
+import lotto.domain.Number;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,6 +14,11 @@ public class Main {
         MyLotto myLotto = new MyLotto(getMyLotto(round));
         OutputView.printMyLotto(myLotto);
 
+        WinningLotto winningLotto = new WinningLotto(getWinningLotto(InputView.inputWinnerNumber()), InputView.inputBonusBall());
+
+        System.out.println(winningLotto.toString());
+
+
     }
 
     private static List<Lotto> getMyLotto(int round) {
@@ -26,6 +29,17 @@ public class Main {
         }
 
         return myLotto;
+    }
+
+    private static Lotto getWinningLotto(String numbers) {
+        List<Number> lotts = new ArrayList<>();
+        String[] winnerNummber = numbers.split(",");
+
+        for (String s : winnerNummber) {
+            lotts.add(new Number(Integer.parseInt(s)));
+        }
+
+        return new Lotto(lotts);
     }
 }
 

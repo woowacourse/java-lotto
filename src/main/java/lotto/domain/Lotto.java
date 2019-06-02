@@ -16,12 +16,16 @@ public class Lotto {
         validCheck();
     }
 
-    private void validCheck() {
-        validDulicate(lotto);
-        validSize(lotto);
+    public boolean isContains(Number number) {
+        return lotto.contains(number);
     }
 
-    private void validDulicate(List<Number> lotto) {
+    private void validCheck() {
+        validDulicate();
+        validSize();
+    }
+
+    private void validDulicate() {
         Set<Number> cheked = new HashSet<>(lotto);
 
         if (cheked.size() != lotto.size()) {
@@ -29,7 +33,7 @@ public class Lotto {
         }
     }
 
-    private void validSize(List<Number> lotto) {
+    private void validSize() {
         if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
         }
