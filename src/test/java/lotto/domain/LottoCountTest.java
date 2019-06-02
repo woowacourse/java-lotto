@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoCountTest {
@@ -11,5 +12,11 @@ public class LottoCountTest {
         assertThrows(IllegalArgumentException.class, () -> {
            new LottoCount(new Money(5_000), 6);
         });
+    }
+
+    @Test
+    void 수동_로또_개수() {
+        LottoCount lottoCount = new LottoCount(new Money(10_000), 5);
+        assertThat(5).isEqualTo(lottoCount.getManualCount());
     }
 }
