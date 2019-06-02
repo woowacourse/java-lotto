@@ -1,10 +1,7 @@
 package lotto.view;
 
 import com.google.common.base.Joiner;
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
+import lotto.domain.*;
 
 import java.util.List;
 
@@ -26,8 +23,9 @@ public class OutputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void outputLottosPurchaseMessage(int manualLottosSize, int autoLottosSize) {
-        System.out.println("수동으로 " + manualLottosSize + "장, 자동으로" + autoLottosSize + "장 구매했습니다.");
+    public static void outputLottosPurchaseMessage(PurchaseInformation purchaseInformation) {
+        System.out.println("수동으로 " + purchaseInformation.getManualLottoCount()
+                + "장, 자동으로" + purchaseInformation.getAutoLottoCount()+ "장 구매했습니다.");
     }
 
     public static void outputLottos(Lottos lottos) {

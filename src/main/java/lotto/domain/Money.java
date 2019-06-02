@@ -17,6 +17,10 @@ public class Money {
         return money / LOTTO_PRICE;
     }
 
+    boolean canBuy(int count) {
+        return count * LOTTO_PRICE <= money;
+    }
+
     private void checkInvalidMoney(final int money) {
         if (money < LOTTO_PRICE || money > MAX_LOTTO_PRICE) {
             throw new OutOfLottoPurchaseAmountBoundException();

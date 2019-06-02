@@ -1,20 +1,27 @@
 package lotto.domain;
 
-import lotto.exception.InvalidPurchaseInformationException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PurchaseInformationTest {
     @Test
-    void 최대_구매가능한_로또_개수보다_수동_구매_로또의_개수가_많은_경우() {
-        assertThrows(InvalidPurchaseInformationException.class, () ->
-                new PurchaseInformation(new Money(1000), 2));
+    void 수동_로또의_개수보다_번호가_적게_입력된_경우() {
+        PurchaseInformation purchaseInformation =
+                new PurchaseInformation(new LottoCount(2, new Money(5000)));
+        purchaseInformation.addManualLottoNumbers(LottoNumbersGenerator.getLottoNumbers());
+
+        assertThat(purchaseInformation.isValidPurchaseInformation()).isFalse();
     }
 
     @Test
-    void 영미만의_수동_구매_로또_개수() {
-        assertThrows(InvalidPurchaseInformationException.class, () ->
-                new PurchaseInformation(new Money(1000), -1));
+    void 수동_로또의_개수보다_번호가_많이_입력된_경우() {
+        PurchaseInformation purchaseInformation =
+                new PurchaseInformation(new LottoCount(2, new Money(5000)));
+        purchaseInformation.addManualLottoNumbers(LottoNumbersGenerator.getLottoNumbers());
+        purchaseInformation.addManualLottoNumbers(LottoNumbersGenerator.getLottoNumbers());
+        purchaseInformation.addManualLottoNumbers(LottoNumbersGenerator.getLottoNumbers());
+
+        assertThat(purchaseInformation.isValidPurchaseInformation()).isFalse();
     }
 }

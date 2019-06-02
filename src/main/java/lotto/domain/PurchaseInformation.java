@@ -1,35 +1,38 @@
 package lotto.domain;
 
-import lotto.exception.InvalidPurchaseInformationException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PurchaseInformation {
-    private static final int MIN_PURCHASE_AMOUNT = 0;
+    private final LottoCount lottoCount;
+    private final List<LottoNumbers> manualLottosNumbers;
 
-    private final int numberOfManualLottos;
-    private final int numberOfAutoLottos;
-
-    public PurchaseInformation(final Money money, final int numberOfManualLottos) {
-        int maxNumberOfPurchase = money.calculateMaxNumberOfPurchase();
-        checkInvalidNumberOfManualLottos(maxNumberOfPurchase, numberOfManualLottos);
-
-        this.numberOfManualLottos = numberOfManualLottos;
-        this.numberOfAutoLottos = maxNumberOfPurchase - numberOfManualLottos;
+    public PurchaseInformation(final LottoCount lottoCount) {
+        this.lottoCount = lottoCount;
+        this.manualLottosNumbers = new ArrayList<>();
     }
 
-    private void checkInvalidNumberOfManualLottos(final int maxNumberOfPurchase, final int numberOfManualLottos) {
-        if (numberOfManualLottos < MIN_PURCHASE_AMOUNT) {
-            throw new InvalidPurchaseInformationException(MIN_PURCHASE_AMOUNT + "이상의 개수를 입력해주세요.");
-        }
-        if (maxNumberOfPurchase < numberOfManualLottos) {
-            throw new InvalidPurchaseInformationException("구입금액이 부족합니다.");
-        }
+    public int getAutoLottoCount() {
+        return lottoCount.getAutoLottoCount();
     }
 
-    public int getNumberOfManualLottos() {
-        return numberOfManualLottos;
+    public int getManualLottoCount() {
+        return lottoCount.getManualLottoCount();
     }
 
-    public int getNumberOfAutoLottos() {
-        return numberOfAutoLottos;
+    public List<LottoNumbers> getManualLottosNumbers() {
+        return manualLottosNumbers;
+    }
+
+    public void addManualLottoNumbers(final LottoNumbers lottoNumbers) {
+        manualLottosNumbers.add(lottoNumbers);
+    }
+
+    public boolean hasManualLottos() {
+        return lottoCount.hasManualLottos();
+    }
+
+    public boolean isValidPurchaseInformation() {
+        return lottoCount.isEqualManualLottoCount(manualLottosNumbers.size());
     }
 }

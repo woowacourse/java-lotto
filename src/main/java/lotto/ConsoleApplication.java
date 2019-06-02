@@ -6,7 +6,6 @@ import lotto.domain.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleApplication {
@@ -24,32 +23,32 @@ public class ConsoleApplication {
     private static PurchaseInformation setUpPurchaseInformation() {
         try {
             Money money = new Money(InputView.inputMoney());
-            return new PurchaseInformation(money, InputView.inputNumberOfManualLottos());
+            LottoCount lottoCount =
+                    new LottoCount(InputView.inputNumberOfManualLottos(), money);
+            PurchaseInformation purchaseInformation = new PurchaseInformation(lottoCount);
+            if (purchaseInformation.hasManualLottos()) {
+                registerManualLottosNumbers(purchaseInformation);
+            }
+            return purchaseInformation;
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return setUpPurchaseInformation();
         }
     }
 
-    private static Lottos purchaseLottos(PurchaseInformation purchaseInformation) {
-        int numberOfManualLottos = purchaseInformation.getNumberOfManualLottos();
-        int numberOfAutoLottos = purchaseInformation.getNumberOfAutoLottos();
-
-        Lottos lottos = LottoMachine.buyManualLotto(makeManualLottosNumbers(numberOfManualLottos));
-        lottos.addAll(LottoMachine.buyAutoLottos(numberOfAutoLottos));
-
-        OutputView.outputLottosPurchaseMessage(numberOfManualLottos, numberOfAutoLottos);
-        OutputView.outputLottos(lottos);
-        return lottos;
+    private static void registerManualLottosNumbers(PurchaseInformation purchaseInformation) {
+        OutputView.requestManualLottosMessage();
+        for (int i = 0; i < purchaseInformation.getManualLottoCount(); i++) {
+            purchaseInformation.addManualLottoNumbers(makeLottoNumbers());
+        }
     }
 
-    private static List<LottoNumbers> makeManualLottosNumbers(int numberOfManualLottos) {
-        OutputView.requestManualLottosMessage();
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < numberOfManualLottos; i++) {
-            lottoNumbers.add(makeLottoNumbers());
-        }
-        return lottoNumbers;
+    private static Lottos purchaseLottos(PurchaseInformation purchaseInformation) {
+        Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
+
+        OutputView.outputLottosPurchaseMessage(purchaseInformation);
+        OutputView.outputLottos(lottos);
+        return lottos;
     }
 
     private static LottoGame setUpLottoGame() {
