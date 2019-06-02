@@ -1,4 +1,4 @@
-package lotto.domain.exceptions;
+package lotto.exceptions;
 
 public class PurchaseAmountException extends RuntimeException {
     public PurchaseAmountException() {

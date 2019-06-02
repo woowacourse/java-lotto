@@ -31,7 +31,6 @@ public class OutputView {
     private static final String MANUAL_HEADER = "수동으로 ";
     private static final String AUTO_HEADER = "자동으로 ";
     private static final String JOINER = "장, ";
-    private static final int EMPTY = 0;
 
     static void start() {
         System.out.println(INPUT_PURCHASE_AMOUNT);

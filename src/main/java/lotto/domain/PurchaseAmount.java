@@ -2,11 +2,10 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import lotto.domain.exceptions.PurchaseAmountException;
+import lotto.exceptions.PurchaseAmountException;
+import lotto.exceptions.PurchaseUnitException;
 
 public class PurchaseAmount {
-    private static final String INVALID_PURCHASE_AMOUNT = "구매 금액은 1000원 이상입니다.";
-    private static final String INVALID_PURCHASE_UNIT = "구매 단위는 1000원입니다.";
     private static final int PURCHASE_AMOUNT_UNIT = 1000;
     private static final int PROPER_REMINDER = 0;
     private static final int PERCENT = 100;
@@ -25,13 +24,13 @@ public class PurchaseAmount {
 
     private void validAmount(int purchaseAmount) {
         if (purchaseAmount < PURCHASE_AMOUNT_UNIT) {
-            throw new PurchaseAmountException(INVALID_PURCHASE_AMOUNT);
+            throw new PurchaseAmountException();
         }
     }
 
     private void validUnit(int purchaseAmount) {
         if (!isProperUnit(purchaseAmount)) {
-            throw new PurchaseAmountException(INVALID_PURCHASE_UNIT);
+            throw new PurchaseUnitException();
         }
     }
 

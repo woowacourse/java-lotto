@@ -3,6 +3,7 @@ package lotto.domain.game;
 import java.util.Objects;
 
 import lotto.domain.PurchaseAmount;
+import lotto.exceptions.CountRangeException;
 
 public class Count {
     private static final int COUNT_LOWER_BOUND = 0;
@@ -16,7 +17,7 @@ public class Count {
 
     private void validCount(int count) {
         if (count < COUNT_LOWER_BOUND) {
-            throw new IllegalArgumentException("유효하지 않습니다.");
+            throw new CountRangeException();
         }
     }
 

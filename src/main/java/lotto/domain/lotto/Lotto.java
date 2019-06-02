@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import lotto.domain.exceptions.IllegalFormatException;
+import lotto.exceptions.NumberCountException;
 
 public class Lotto implements Iterable<Number> {
     private static final int LOTTO_SIZE = 6;
     private static final CharSequence JOINING_DELIMITER = ", ";
-    private static final String LOTTO_SIZE_EXCEPTION = "로또 번호는 6개 입니다.";
 
     private final List<Number> lotto;
 
@@ -22,7 +21,7 @@ public class Lotto implements Iterable<Number> {
     private void validFormat(List<Number> lotto) {
         TreeSet<Number> lottoSet = new TreeSet<>(lotto);
         if (lottoSet.size() != LOTTO_SIZE) {
-            throw new IllegalFormatException(LOTTO_SIZE_EXCEPTION);
+            throw new NumberCountException();
         }
     }
 

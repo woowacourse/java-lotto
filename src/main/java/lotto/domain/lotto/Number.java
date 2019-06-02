@@ -2,10 +2,9 @@ package lotto.domain.lotto;
 
 import java.util.Objects;
 
-import lotto.domain.exceptions.LottoNumberException;
+import lotto.exceptions.LottoNumberException;
 
 public class Number implements Comparable<Number> {
-    private static final String INVALID_LOTTO_NUMBER = "로또 번호의 범위는 1-45 입니다.";
     private static final int NUMBER_LOWER_BOUND = 1;
     private static final int NUMBER_UPPER_BOUND = 45;
 
@@ -22,7 +21,7 @@ public class Number implements Comparable<Number> {
 
     private void valid(int number) {
         if (!isRange(number)) {
-            throw new LottoNumberException(INVALID_LOTTO_NUMBER);
+            throw new LottoNumberException();
         }
     }
 

@@ -1,11 +1,11 @@
 package lotto.domain.game;
 
-import lotto.domain.exceptions.ManualCountBoundException;
+import lotto.exceptions.CountRangeException;
+import lotto.exceptions.ManualCountBoundException;
 
 public class ManualCount {
     private static final int COUNT_LOWER_BOUND = 0;
     private static final int EQUAL_OR_UNDER = 0;
-    private static final String MANUAL_COUNT_RANGE = "수동 구매 가능 범위를 벗어났습니다.";
 
     private final int count;
 
@@ -20,7 +20,7 @@ public class ManualCount {
 
     private void validBound(int manualCount, Count totalCount) {
         if (!isValidRange(manualCount, totalCount)) {
-            throw new ManualCountBoundException(MANUAL_COUNT_RANGE);
+            throw new CountRangeException();
         }
     }
 

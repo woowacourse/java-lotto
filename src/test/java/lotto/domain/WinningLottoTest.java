@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import lotto.domain.exceptions.BonusNumberException;
+import lotto.exceptions.BonusNumberException;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Number;
 

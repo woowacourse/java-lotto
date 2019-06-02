@@ -2,7 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.exceptions.ManualCountBoundException;
+import lotto.exceptions.ManualCountBoundException;
 import lotto.domain.game.ManualCount;
 import lotto.domain.game.Count;
 

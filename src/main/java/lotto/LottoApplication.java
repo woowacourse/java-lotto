@@ -12,7 +12,7 @@ import lotto.view.OutputView;
 public class LottoApplication {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = InputView.getPurchaseAmount();
-        Count totalCount = InputView.getCount(purchaseAmount);
+        Count totalCount = InputView.countFrom(purchaseAmount);
         ManualCount manualCount = InputView.getManualCount(totalCount);
         TotalLottoGames totalLottoGames = InputView.getTotalLottoGames(totalCount, manualCount);
         OutputView.lottoList(totalLottoGames);

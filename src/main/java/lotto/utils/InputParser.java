@@ -8,14 +8,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lotto.exceptions.NumberCountException;
 import lotto.domain.lotto.Number;
-import lotto.domain.exceptions.IllegalFormatException;
+import lotto.exceptions.IllegalFormatException;
 
 public class InputParser {
     private static final String INPUT_FORM_REGEX = "([^,]+)([, ][^,]+)*";
-    private static final String ILLEGAL_INPUT_FORMAT = "입력 형식이 올바르지 않습니다.";
-    private static final String ILLEGAL_NUMBER_COUNT = "당첨 번호는 6개 입니다.";
-    private static final String NUMBER_FORMAT = "숫자 형식 오류";
     private static final String DELIMITER = ",";
     private static final int LOTTO_SIZE = 6;
 
@@ -29,7 +27,7 @@ public class InputParser {
 
     private static void validLottoFormat(String input) {
         if (!input.matches(INPUT_FORM_REGEX)) {
-            throw new IllegalFormatException(ILLEGAL_INPUT_FORMAT);
+            throw new IllegalFormatException();
         }
     }
 
@@ -49,7 +47,7 @@ public class InputParser {
 
     private static void validSize(Set<Number> result) {
         if (result.size() != LOTTO_SIZE) {
-            throw new IllegalFormatException(ILLEGAL_NUMBER_COUNT);
+            throw new NumberCountException();
         }
     }
 
@@ -60,7 +58,7 @@ public class InputParser {
 
     private static void validNumeric(String input) {
         if (!isNumeric(input)) {
-            throw new IllegalFormatException(NUMBER_FORMAT);
+            throw new NumberFormatException();
         }
     }
 
