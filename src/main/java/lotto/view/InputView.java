@@ -34,7 +34,11 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public static String inputCustomLottoNumbers() {
+    public static void printWinningLottoNumbersMessage() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    }
+
+    public static String inputLottoNumbers() {
         try {
             String input = SCANNER.nextLine();
 
@@ -43,7 +47,19 @@ public class InputView {
 
             return input.replaceAll(" ", "");
         } catch (NullPointerException e) {
-            return inputCustomLottoNumbers();
+            return inputLottoNumbers();
+        }
+    }
+
+    public static int inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        try {
+            String input = SCANNER.nextLine();
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println(INPUT_FORMAT_EXCEPTION_MESSAGE);
+            return inputAmountOfCustom();
         }
     }
 

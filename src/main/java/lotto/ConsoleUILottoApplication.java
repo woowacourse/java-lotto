@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 
 public class ConsoleUILottoApplication {
@@ -13,8 +14,12 @@ public class ConsoleUILottoApplication {
         LottoTickets lottoTickets = new LottoTickets(amountOfCustoms);
         InputView.printCustomLottoNumbersMessage();
         while(lottoTickets.needMoreCustomLottoTicket()) {
-            lottoTickets.putCustomLottoTicket(InputView.inputCustomLottoNumbers());
+            lottoTickets.putCustomLottoTicket(InputView.inputLottoNumbers());
         }
 
+        InputView.printWinningLottoNumbersMessage();
+        String winningLottoNumbers = InputView.inputLottoNumbers();
+        int bonusBall = InputView.inputBonusBall();
+        WinningLotto winningLotto = WinningLotto.of(winningLottoNumbers, bonusBall);
     }
 }
