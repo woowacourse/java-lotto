@@ -20,11 +20,11 @@ public enum WinningType {
     }
 
     public static WinningType valueOf(final int matchNum, boolean hasBonus) {
-        for (WinningType value : WinningType.values()) {
-            if (hasBonus && SECOND.matchNum == matchNum) {
-                return SECOND;
-            }
+        if ( (hasBonus == SECOND.bonus) && SECOND.matchNum == matchNum) {
+            return SECOND;
+        }
 
+        for (WinningType value : WinningType.values()) {
             if (value.getMatchNum() == matchNum) {
                 return value;
             }
