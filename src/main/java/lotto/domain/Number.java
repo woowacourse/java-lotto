@@ -1,53 +1,30 @@
 package lotto.domain;
 
-import lotto.messageConstants.MessageConstants;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import java.util.Objects;
-
-public class Number implements Comparable<Number> {
-    private static final int MIN = 0;
+public class Number {
+    private static final Pattern INPUTPATTENR = Pattern.compile("^[0-9]{1,}$");
+    private static final String ERROR_MESSAGE = "잘못된 입력입니다. 다시 입력해주세요.";
+    private static final int MIN = 1;
     private static final int MAX = 45;
-
     private final int number;
 
-    private Number(int number) {
-        if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException(MessageConstants.ERROR_BOUND);
+    public Number(String number) {
+        if (validInputString(number) || validOverBound(number)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE);
         }
 
-        this.number = number;
+        this.number = Integer.parseInt(number);
     }
 
-    public static Number create(int number) {
-        return new Number(number);
+    private boolean validOverBound(String input) {
+        int number = Integer.parseInt(input);
+        return number < MIN || number > MAX;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(number);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Number number1 = (Number) o;
-        return number == number1.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
-    }
-
-    @Override
-    public int compareTo(Number differentNumber) {
-        if (this.number < differentNumber.number) {
-            return -1;
-        }
-        if (this.number > differentNumber.number) {
-            return 0;
-        }
-        return 1;
+    private boolean validInputString(String input) {
+        Matcher matcher = INPUTPATTENR.matcher(input);
+        return !matcher.find();
     }
 }
