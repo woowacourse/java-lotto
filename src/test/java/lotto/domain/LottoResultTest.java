@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.creator.ManualLottoCreator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -12,8 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoResultTest {
-    @Test
-    void 로또_결과_확인() {
+    LottoResult lottoResult;
+
+    @BeforeEach
+    void setUp() {
         WinningLotto winningLotto = new WinningLotto(
                 new Lotto(Arrays.asList(
                         Number.valueOf(1),
@@ -31,10 +34,18 @@ class LottoResultTest {
         ));
         List<Lotto> lottos = lottoCreator.create();
 
-        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
+        lottoResult = new LottoResult(lottos, winningLotto);
+    }
 
+    @Test
+    void 로또_결과_확인() {
         assertThat(lottoResult.getWinnerTypeValue(WinningType.FIRST)).isEqualTo(1);
         assertThat(lottoResult.getWinnerTypeValue(WinningType.SECOND)).isEqualTo(1);
         assertThat(lottoResult.getWinnerTypeValue(WinningType.MISS)).isEqualTo(1);
+    }
+
+    @Test
+    void 우승상금_확인() {
+        assertThat(lottoResult.getRewardAll()).isEqualTo(2030000000);
     }
 }
