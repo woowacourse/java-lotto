@@ -10,13 +10,13 @@ public class LottoTicket {
     private int numberOfLotto;
     private List<Lotto> lottos;
 
-    public LottoTicket(String money){
+    public LottoTicket(String money) {
         this.numberOfLotto = new Price(money).getNumberOfLotto();
         this.lottos = new ArrayList<>();
         createAutoLottoNumbers();
     }
 
-    public AutoGenerateLotto createAutoLottoNumbers(){
+    public AutoGenerateLotto createAutoLottoNumbers() {
         return new AutoGenerateLotto(numberOfLotto, lottos);
     }
 

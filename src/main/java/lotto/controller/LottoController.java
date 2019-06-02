@@ -6,11 +6,10 @@ import lotto.view.OutPutView;
 
 public class LottoController {
 
-    public void run(){
+    public void run() {
         String price = InputView.InputPrice();
         OutPutView.showLottoTicket(new LottoTicket(price));
 
-        String winNumber = InputView.InputWinLottoNumber();
-        
+        String[] winNumber = InputView.InputWinLottoNumber();
     }
 }
