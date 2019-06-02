@@ -8,7 +8,7 @@ import java.util.*;
 
 public abstract class Lotto {
     public static final int MAX_LOTTO_SIZE = 6;
-    private static final int SUM_OF_USER_WINNING = 12;
+    private static final int ORIGINAL_SIZE = 12;
     private static final String NEW_LINE = "\n";
 
     private final List<LottoNumber> lottoNumbers;
@@ -28,10 +28,10 @@ public abstract class Lotto {
         return checkLottoNumbers.size() != MAX_LOTTO_SIZE;
     }
 
-    public int matchLottoNumbers(Lotto lotto) {
+    public int matchLottoNumbers(Lotto winningLotto) {
         Set<LottoNumber> checkLottoNumbers = new HashSet<>(lottoNumbers);
-        checkLottoNumbers.addAll(lotto.lottoNumbers);
-        return SUM_OF_USER_WINNING - checkLottoNumbers.size();
+        checkLottoNumbers.addAll(winningLotto.lottoNumbers);
+        return ORIGINAL_SIZE - checkLottoNumbers.size();
     }
 
     public boolean isContainNumber(LottoNumber bonus) {

@@ -1,5 +1,7 @@
 package lotto.domain.lottoTicket;
 
+import lotto.domain.exception.LottoNumberSizeException;
+import lotto.domain.exception.OverlapLottoNumberException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -19,7 +21,7 @@ public class ManualLottoTest {
 
     @Test
     void 로또가_6개가_아닌_경우_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(LottoNumberSizeException.class, () -> {
             List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5);
             new ManualLotto(lottoNumbers);
         });
@@ -27,7 +29,7 @@ public class ManualLottoTest {
 
     @Test
     void 중복된_번호가_있는_경우_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(OverlapLottoNumberException.class, () -> {
             List<Integer> lottoNumbers = Arrays.asList(45, 1, 2, 3, 45, 4);
             new ManualLotto(lottoNumbers);
         });

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.AmountDeficientException;
+import lotto.domain.exception.LottoNotBuyException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +16,7 @@ public class MoneyTest {
 
     @Test
     void 한장도_구매하지_못하는_경우_테스트() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(AmountDeficientException.class).isThrownBy(() -> {
             new Money(999);
         }).withMessage("로또 1장의 가격은 1,000원 입니다.");
     }

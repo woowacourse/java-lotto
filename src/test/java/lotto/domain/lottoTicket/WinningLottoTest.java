@@ -1,5 +1,7 @@
 package lotto.domain.lottoTicket;
 
+import lotto.domain.exception.LottoNumberSizeException;
+import lotto.domain.exception.OverlapLottoBonusNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,15 +38,15 @@ public class WinningLottoTest {
     }
 
     @Test
-    void 잘못된_당첨번호가_들어온_경우_테스트() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+    void 당첨번호_개수가_다른_경우_테스트() {
+        assertThatExceptionOfType(LottoNumberSizeException.class).isThrownBy(() -> {
             new WinningLotto(Arrays.asList(1, 2, 3, 4, 5), bonus);
         }).withMessage("로또 번호의 개수는 6개 입니다.");
     }
 
     @Test
     void 보너스_번호가_당첨번호에_포함되어_있는_경우_테스트() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(OverlapLottoBonusNumberException.class).isThrownBy(() -> {
             new WinningLotto(lottoNumbers, 7);
         }).withMessage("당첨 번호와 중복된 번호 입니다.");
     }

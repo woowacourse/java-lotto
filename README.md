@@ -2,7 +2,7 @@
 로또 미션 진행을 위한 저장소
 
 ### Todo
-* 예외처리 custom
+
 
 ### Done
 * Lotto 자동 생성하기
@@ -27,6 +27,8 @@
 * Lottos와 WinningLotto를 비교하여 랭크 상태 변경하기
 * OutputView Rank 상태 출력하기
 * OutputView 수익률 출력하기
+* 예외처리 custom
+* Controller 적용하기
     * [예외] InputView 당첨 번호에 숫자가 아닌 경우
     * [예외] Money 1장도 못사는 경우 체크하기
     * [예외] LottoNumber 로또 번호가 1부터 45까지 범위에 적합한지 체크하기
