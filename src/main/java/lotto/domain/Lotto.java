@@ -12,8 +12,8 @@ public class Lotto {
     private final List<Number> lotto;
 
     public Lotto(List<Number> lotto) {
-        validCheck();
         this.lotto = lotto;
+        validCheck();
     }
 
     private void validCheck() {
@@ -33,5 +33,10 @@ public class Lotto {
         if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
         }
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString();
     }
 }

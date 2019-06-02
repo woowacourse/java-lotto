@@ -8,4 +8,12 @@ public class MyLotto {
     public MyLotto(List<Lotto> myLotto) {
         this.myLotto = myLotto;
     }
+
+    public int getSize() {
+        return myLotto.size();
+    }
+
+    public Lotto getIndexByLotto(int index) {
+        return myLotto.get(index);
+    }
 }

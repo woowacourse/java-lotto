@@ -19,12 +19,6 @@ public class NumberGenerator {
         Collections.shuffle(generator);
     }
 
-    private void addNumbers() {
-        for (int i = MIN; i <= MAX; i++) {
-            generator.add(new Number(i));
-        }
-    }
-
     public static NumberGenerator create() {
         return new NumberGenerator();
     }
@@ -34,5 +28,11 @@ public class NumberGenerator {
         Collections.sort(numbers);
 
         return numbers;
+    }
+
+    private void addNumbers() {
+        for (int i = MIN; i <= MAX; i++) {
+            generator.add(new Number(i));
+        }
     }
 }
