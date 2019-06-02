@@ -4,12 +4,12 @@ import java.util.List;
 
 public enum LottoType implements LottoTypeInterface {
     MANUAL {
-        public List<LottoNumber> generate(List<Integer> manualNumbers) {
-            return new ManualGenaratingStarategy(manualNumbers).generateNumber();
+        public List<LottoTicket> generate(int nums, List<List<Integer>> manualNumbers) {
+            return new ManualGenaratingStarategy(nums, manualNumbers).generateTickets();
         }
     }, AUTOMATIC {
-        public List<LottoNumber> generate() {
-            return new AutomaticGenaratingStarategy().generateNumber();
+        public List<LottoTicket> generate(int nums) {
+            return new AutomaticGenaratingStarategy(nums).generateTickets();
         }
     };
 
@@ -19,11 +19,11 @@ public enum LottoType implements LottoTypeInterface {
 }
 
 interface LottoTypeInterface {
-    default List<LottoNumber> generate() {
+    default List<LottoTicket> generate(int nums, List<List<Integer>> manualNumbers) {
         return null;
     }
 
-    default List<LottoNumber> generate(List<Integer> manualNumbers) {
+    default List<LottoTicket> generate(int nums) {
         return null;
     }
 }
