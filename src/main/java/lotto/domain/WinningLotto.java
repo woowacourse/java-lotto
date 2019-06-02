@@ -19,10 +19,8 @@ public class WinningLotto {
         for (String inputNumber : inputNumbers) {
             validateNumeric(inputNumber);
             validateDistinctNumber(Integer.parseInt(inputNumber));
-
             lottoNumbers.add(LottoNumber.getNumber(Integer.parseInt(inputNumber)));
         }
-
         validateDistinctNumber(bonusBall);
         this.bonusBall = LottoNumber.getNumber(bonusBall);
     }

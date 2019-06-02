@@ -11,6 +11,7 @@ public class LottoTicketFactory {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         List<String> inputNumbers = Arrays.asList(manualLotto.split(","));
 
+        // TODO 이부분 WinningLotto와 겹치는데 하나로 묶어버리기
         for (String inputNumber : inputNumbers) {
             validateNumeric(inputNumber);
             lottoNumbers.add(LottoNumber.getNumber(Integer.parseInt(inputNumber)));

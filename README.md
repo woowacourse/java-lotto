@@ -19,11 +19,13 @@
     * 빈칸 없애기
 #### domain
 * Money
-* LottoTickets: 로또 리스트, 구매할 수동 로또 수
-* LottoTicket: 로또 한 장
 * LottoTicketFactory
     * 수동 로또인지 자동 로또인지 구분해서 객체 생성하기
     * **자동 로또의 경우**
+* LottoTicket: 로또 한 장
+    * **수동 로또의 경우**
+* LottoTicketsFactory
+* LottoTickets: 로또 리스트, 구매할 수동 로또 수
 * LottoNumber
     * **수동 로또의 경우**
     * **자동 로또의 경우**
@@ -50,12 +52,7 @@
     * 로또 게임 횟수 리턴하기1
         * 1000 -> 1
         * 14000 -> 14
-* LottoTickets: 로또 리스트, 구매할 수동 로또 수
-    * 구매할 수동 로또 수만큼 리스트에 갖고 있는지 응답하기
-* LottoTicket: 로또 한 장
-    * 당첨 번호와 일치하는 수 카운트해서 리턴하기
-    * 보너스 볼과 일치하는 수가 있는지 확인해서 boolean 리턴하기
-* LottoTicketsFactory
+* LottoTicketFactory
     * **수동 로또의 경우**
         * String으로 로또 번호 6개가 입력되면 LottoNumber 리스트에 저장하기
             * "1,2,3,4,5,6" -> [1,2,3,4,5,6]
@@ -63,6 +60,13 @@
             * "1,2,3,4,5" -> error!
             * **[예외]** 입력된 값에 자연수 외에 다른 값이 있는지 확인
             * **[예외]** 중복된 숫자가 있는지 확인
+* LottoTicket: 로또 한 장
+    * 당첨 번호와 일치하는 수 카운트해서 리턴하기
+    * 보너스 볼과 일치하는 수가 있는지 확인해서 boolean 리턴하기
+* LottoTicketsFactory
+    * String 배열로 받아온 번호들을 LottoNumber 리스트로 변환해서 리턴하기
+* LottoTickets: 로또 리스트, 구매할 수동 로또 수
+    * 입력한 수동 로또의 수량과 실제 입력값이 동일한지 확인
 * LottoNumber
     * **수동 로또의 경우**
     * 요청한 로또 번호에 대한 객체 리턴

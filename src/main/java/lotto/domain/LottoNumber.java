@@ -29,7 +29,7 @@ public class LottoNumber {
     }
 
     private static void validateNumberBound(int key) {
-        if (key < FIRST_BOUND_OF_LOTTO_NUMBER || key >= LAST_BOUND_OF_LOTTO_NUMBER) {
+        if (key < FIRST_BOUND_OF_LOTTO_NUMBER || key > LAST_BOUND_OF_LOTTO_NUMBER) {
             throw new IllegalNumberBoundException("로또 번호의 범위에 벗어납니다.");
         }
     }
