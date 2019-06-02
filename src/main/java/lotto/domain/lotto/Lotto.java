@@ -1,16 +1,20 @@
 package lotto.domain.lotto;
 
 import lotto.domain.InvalidLottoException;
+import lotto.util.AscendingNumber;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-public class Lotto {
+public class Lotto{
 
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = invalidNumberOfLotto(lottoNumbers);
+        Collections.sort(lottoNumbers, new AscendingNumber());
     }
 
     private List<LottoNumber> invalidNumberOfLotto(List<LottoNumber> lottoNumbers){
@@ -32,4 +36,10 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+    @Override
+    public String toString() {
+        return "["+lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(","))+"]";
+    }
+
 }

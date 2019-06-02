@@ -7,10 +7,10 @@ import java.util.stream.IntStream;
 
 public class AutoGenerateLotto {
 
-    private final Lotto lotto;
-
-    public AutoGenerateLotto(int price){
-        this.lotto = makeAutoLotto(createNumber());
+    public AutoGenerateLotto(int numberOfPrice, List<Lotto> lottos){
+        for (int i = 0; i < numberOfPrice; i++) {
+            lottos.add(makeAutoLotto(createNumber()));
+        }
     }
 
     private Lotto makeAutoLotto(List<LottoNumber> createNumber){
@@ -25,9 +25,4 @@ public class AutoGenerateLotto {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
-
-    public Lotto getAutoLotto() {
-        return lotto;
-    }
-    
 }
