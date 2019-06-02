@@ -8,8 +8,9 @@ public class LottoController {
 
     public void run(){
         String price = InputView.InputPrice();
+        OutPutView.showLottoTicket(new LottoTicket(price));
 
-        LottoTicket lottoTicket = new LottoTicket(price);
-        OutPutView.showLottoTicket(lottoTicket);
+        String winNumber = InputView.InputWinLottoNumber();
+        
     }
 }
