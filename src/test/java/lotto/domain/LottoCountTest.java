@@ -19,4 +19,10 @@ public class LottoCountTest {
         LottoCount lottoCount = new LottoCount(new Money(10_000), 5);
         assertThat(5).isEqualTo(lottoCount.getManualCount());
     }
+
+    @Test
+    void 자동_로또_개수() {
+        LottoCount lottoCount = new LottoCount(new Money(10_000), 4);
+        assertThat(6).isEqualTo(lottoCount.getAutoCount());
+    }
 }

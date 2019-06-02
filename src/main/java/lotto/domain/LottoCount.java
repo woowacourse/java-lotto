@@ -16,4 +16,8 @@ public class LottoCount {
     public int getManualCount() {
         return this.numberOfManualLotto;
     }
+
+    public int getAutoCount() {
+        return money.getNumberOfLotto() - this.numberOfManualLotto;
+    }
 }
