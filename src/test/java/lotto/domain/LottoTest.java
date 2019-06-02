@@ -14,7 +14,7 @@ class LottoTest {
     @Test
     void getLotto() {
         Lotto lotto = new Lotto(InputParser.parseLotto("1, 2, 3, 4, 5, 6"));
-        assertThat(lotto.getLotto()).isEqualTo("1, 2, 3, 4, 5, 6");
+        assertThat(lotto.toString()).isEqualTo("1, 2, 3, 4, 5, 6");
     }
 
     @Test

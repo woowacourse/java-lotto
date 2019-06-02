@@ -17,6 +17,7 @@ public class InputParser {
     private static final String ILLEGAL_NUMBER_COUNT = "당첨 번호는 6개 입니다.";
     private static final String NUMBER_FORMAT = "숫자 형식 오류";
     private static final String DELIMITER = ",";
+    private static final int LOTTO_SIZE = 6;
 
     public static List<Number> parseLotto(String input) {
         validLottoFormat(input);
@@ -47,7 +48,7 @@ public class InputParser {
     }
 
     private static void validSize(Set<Number> result) {
-        if (result.size() != 6) {
+        if (result.size() != LOTTO_SIZE) {
             throw new IllegalFormatException(ILLEGAL_NUMBER_COUNT);
         }
     }

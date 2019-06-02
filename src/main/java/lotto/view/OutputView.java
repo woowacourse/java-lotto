@@ -31,6 +31,7 @@ public class OutputView {
     private static final String MANUAL_HEADER = "수동으로 ";
     private static final String AUTO_HEADER = "자동으로 ";
     private static final String JOINER = "장, ";
+    private static final int EMPTY = 0;
 
     static void start() {
         System.out.println(INPUT_PURCHASE_AMOUNT);
@@ -39,16 +40,16 @@ public class OutputView {
     public static void lottoList(TotalLottoGames totalLottoGames) {
         System.out.println(getListMessage(totalLottoGames));
         for (Lotto lotto : totalLottoGames.getAllGames()) {
-            System.out.println(OPEN_SQUARE_BUCKET + lotto.getLotto() + CLOSE_SQUARE_BUCKET);
+            System.out.println(OPEN_SQUARE_BUCKET + lotto.toString() + CLOSE_SQUARE_BUCKET);
         }
         System.out.println();
     }
 
     private static String getListMessage(TotalLottoGames totalLottoGames) {
-        if (totalLottoGames.manualSize() != 0 && totalLottoGames.autoSize() == 0) {
+        if (!totalLottoGames.isManualEmpty() && totalLottoGames.isAutoEmpty()) {
             return MANUAL_HEADER + totalLottoGames.manualSize() + LIST_MESSAGE_FOOTER;
         }
-        if (totalLottoGames.manualSize() == 0 && totalLottoGames.autoSize() != 0) {
+        if (totalLottoGames.isManualEmpty() && !totalLottoGames.isAutoEmpty()) {
             return AUTO_HEADER + totalLottoGames.autoSize() + LIST_MESSAGE_FOOTER;
         }
         return MANUAL_HEADER + totalLottoGames.manualSize() + JOINER

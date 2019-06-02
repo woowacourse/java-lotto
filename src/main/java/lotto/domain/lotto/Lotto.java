@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 import lotto.domain.exceptions.IllegalFormatException;
 
 public class Lotto implements Iterable<Number> {
+    private static final int LOTTO_SIZE = 6;
     private static final CharSequence JOINING_DELIMITER = ", ";
+    private static final String LOTTO_SIZE_EXCEPTION = "로또 번호는 6개 입니다.";
 
     private final List<Number> lotto;
 
@@ -19,19 +21,20 @@ public class Lotto implements Iterable<Number> {
 
     private void validFormat(List<Number> lotto) {
         TreeSet<Number> lottoSet = new TreeSet<>(lotto);
-        if (lottoSet.size() != 6) {
-            throw new IllegalFormatException("로또 번호는 6개 입니다.");
+        if (lottoSet.size() != LOTTO_SIZE) {
+            throw new IllegalFormatException(LOTTO_SIZE_EXCEPTION);
         }
-    }
-
-    public String getLotto() {
-        return lotto.stream()
-                .map(Number::toString)
-                .collect(Collectors.joining(JOINING_DELIMITER));
     }
 
     public boolean contains(Number number) {
         return lotto.contains(number);
+    }
+
+    @Override
+    public String toString() {
+        return lotto.stream()
+                .map(Number::toString)
+                .collect(Collectors.joining(JOINING_DELIMITER));
     }
 
     @Override

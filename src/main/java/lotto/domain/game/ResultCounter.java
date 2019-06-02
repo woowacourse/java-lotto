@@ -2,6 +2,7 @@ package lotto.domain.game;
 
 public class ResultCounter {
     private static final int INIT_STATE = 0;
+    private static final int RESULT_COUNT_UNIT = 1;
 
     private int counter;
 
@@ -14,7 +15,7 @@ public class ResultCounter {
     }
 
     public ResultCounter increase() {
-        return new ResultCounter(this.counter + 1);
+        return new ResultCounter(this.counter + RESULT_COUNT_UNIT);
     }
 
     public int multiply(int prize) {

@@ -12,6 +12,7 @@ import static lotto.domain.Rank.*;
 
 public class LottoResult {
     private static final Map<Rank, ResultCounter> lottoResult;
+    private static final int INIT_PRIZE = 0;
 
     static {
         lottoResult = new HashMap<>();
@@ -35,7 +36,7 @@ public class LottoResult {
     }
 
     public static double getRateOfReturn(PurchaseAmount amount) {
-        int prize = 0;
+        int prize = INIT_PRIZE;
         for (Rank rank : Rank.values()) {
             prize += rank.totalAmount(lottoResult.get(rank));
         }

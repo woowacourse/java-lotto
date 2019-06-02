@@ -22,8 +22,16 @@ public class TotalLottoGames {
         return autoLottoGames.size();
     }
 
+    public boolean isAutoEmpty() {
+        return autoLottoGames.isEmpty();
+    }
+
     public int manualSize() {
         return manualLottoGames.size();
+    }
+
+    public boolean isManualEmpty() {
+        return manualLottoGames.isEmpty();
     }
 
     public List<Lotto> getAllGames() {

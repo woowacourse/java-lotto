@@ -22,7 +22,7 @@ public class RandomNumbersGenerator {
 
     private static List<Number> generateRandomNumbers() {
         Collections.shuffle(numberList);
-         return numberList.stream().limit(6).collect(Collectors.toList());
+        return numberList.stream().limit(6).collect(Collectors.toList());
     }
 
     public static List<Number> create() {

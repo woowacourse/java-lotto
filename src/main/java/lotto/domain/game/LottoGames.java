@@ -28,6 +28,9 @@ public class LottoGames implements LottoGenerator, Iterable<Lotto> {
         result.addAll(lottoGames.lottoGames);
         return result;
     }
+    public boolean isEmpty() {
+        return lottoGames.isEmpty();
+    }
 
     @Override
     public Lotto generate(List<Number> numbers) {
@@ -39,4 +42,5 @@ public class LottoGames implements LottoGenerator, Iterable<Lotto> {
     public Iterator<Lotto> iterator() {
         return lottoGames.iterator();
     }
+
 }
