@@ -20,6 +20,7 @@
     - LottoNumbers 입력받으면 해당 번호로 로또를 생성해 추가
     - 다른 Lottos와 결합가능(자동 + 수동)
 6. LottoMachine
+    - 구매 정보(PurchaseInformation)에 해당하는 Lottos 반환
     - 받은 자동 로또의 개수 만큼 랜덤한 Lottos 반환
     - 받은 수동 로또 번호들로 Lottos 반환  
 7. WinningInformation
@@ -38,15 +39,22 @@
     - 구입 금액 저장
     - 최대 구매가능 금액 계산
     - 최대 구매가능 금액과 최소 구매가능 금액 판단
-12. PurchaseInformation
-    - 수동 구매 개수와 자동 구매 개수를 저장
-    - 구입 금액과 수동 구매 개수로 자동 구매 개수 계산
+12. LottoCount
+    - 자동 로또와 수동 로또의 개수를 저장
+13. PurchaseInformation
+    - 로또의 개수 저장
+    - 수동 로또 번호들 저장
+    - 수동 로또 번호 등록
+    - 수동 로또의 개수와 수동 로또 번호들의 수가 같은지 판단
 
 ### Input
 - 구입 금액
+- 수동 로또 개수
+- 수동 로또 번호들
 - 당첨 번호
+- 보너스볼
 
-### output
+### Output
 - 구입한 로또 개수 및 로또 번호들
 - 당첨 통계
 - 총 수익률
