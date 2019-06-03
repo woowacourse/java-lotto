@@ -61,11 +61,32 @@ public class ConsoleUILottoApplication {
     }
 
     private static WinningLotto createWinningLotto() {
+        LottoTicket winningLotto = createWinningLottoTicket();
+        LottoNumber bonusNumber = createBonusNumber();
+
         try {
-            return WinningLotto.create(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+            return new WinningLotto(winningLotto, bonusNumber);
         } catch (InvalidWinningLottoException e) {
             OutputView.printErrorMessage(e.getMessage());
             return createWinningLotto();
+        }
+    }
+
+    private static LottoTicket createWinningLottoTicket() {
+        try {
+            return LottoTicket.create(InputView.inputWinningNumbers());
+        } catch (InvalidLottoTicketException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return createWinningLottoTicket();
+        }
+    }
+
+    private static LottoNumber createBonusNumber() {
+        try {
+            return LottoNumber.of(InputView.inputBonusNumber());
+        } catch (InvalidLottoNumberException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return createBonusNumber();
         }
     }
 }
