@@ -34,7 +34,6 @@ public class WinPrize {
         for (Rank rank : ranks.keySet()) {
             totalPrize += rank.getPrize() * ranks.get(rank);
         }
-        System.out.println(totalPrize+"원");
         return totalPrize;
     }
 }
