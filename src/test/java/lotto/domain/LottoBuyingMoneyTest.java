@@ -7,18 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoBuyingMoneyTest {
     @Test
-    void validateMoneyTest() {
-        assertThrows(InvalidMoneyException.class, () -> new LottoBuyingMoney(-1));
+    void lowerThanLottoPriceTest() {
+        assertThrows(InvalidLottoBuyingMoneyException.class, () -> new LottoBuyingMoney(500));
     }
 
     @Test
-    void isMultipleOfTest() {
-        assertThat((new LottoBuyingMoney(1000)).isMultipleOf(1000)).isTrue();
-        assertThat((new LottoBuyingMoney(1000)).isMultipleOf(300)).isFalse();
+    void modNotZeroTest() {
+        assertThrows(InvalidLottoBuyingMoneyException.class, () -> new LottoBuyingMoney(1024));
     }
 
     @Test
-    void divideTest() {
-        assertThat((new LottoBuyingMoney(5000)).divideBy(1000)).isEqualTo(5);
+    void getNumOfLottosTest() {
+        assertThat((new LottoBuyingMoney(1000)).numOfLottos()).isEqualTo(1);
     }
 }
