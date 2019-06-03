@@ -6,7 +6,7 @@ import java.util.*;
 
 public class LottoTicket {
     static final int LOTTO_SIZE = 6;
-    private static final int PRICE = 1000;
+    public static final int PRICE = 1000;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -34,10 +34,6 @@ public class LottoTicket {
 
     public static LottoTicket create() {
         return new LottoTicket(LottoNumbersGenerator.create());
-    }
-
-    public static int getPrice() {
-        return PRICE;
     }
 
     private void checkDuplicate(List<LottoNumber> numbers, Set<LottoNumber> lottoNumbers) {
