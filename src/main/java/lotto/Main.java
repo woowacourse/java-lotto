@@ -2,10 +2,7 @@ package lotto;
 
 import lotto.View.InputView;
 import lotto.View.OutputView;
-import lotto.domain.Money;
-import lotto.domain.User;
-import lotto.domain.WinningLotto;
-import lotto.domain.WinningLottoParser;
+import lotto.domain.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,6 +16,8 @@ public class Main {
         String[] scannedWinningLotto = InputView.inputWinningLotto();
         WinningLotto winningLotto = new WinningLotto(WinningLottoParser.parseLottoNumberList(scannedWinningLotto));
 
-
+        LottoGame lottoGame=new LottoGame(user,winningLotto);
+        OutputView.printCountOfRank(lottoGame.getCountOfRank());
+        OutputView.printRateOfReturn(lottoGame.calculateRateOfReturn());
     }
 }

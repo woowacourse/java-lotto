@@ -7,13 +7,12 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class LottoTest {
-
+public class UserLottoTest {
 
     @Test
     void 올바른_로또_생성() {
         assertDoesNotThrow(() ->
-                new Lotto(Arrays.asList(new LottoNumber(1),
+                new UserLotto(Arrays.asList(new LottoNumber(1),
                         new LottoNumber(2),
                         new LottoNumber(3),
                         new LottoNumber(4),
@@ -24,7 +23,7 @@ public class LottoTest {
     @Test
     void 갯수가_유효하지_않은_로또_생성_검증() {
         assertThrows(InvalidLottoException.class,
-                () -> new Lotto(Arrays.asList(
+                () -> new UserLotto(Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),
                         new LottoNumber(3),
@@ -35,7 +34,7 @@ public class LottoTest {
     @Test
     void 중복된_수가_있는_로또_생성_검증() {
         assertThrows(InvalidLottoException.class, () ->
-                new Lotto(Arrays.asList(new LottoNumber(1),
+                new UserLotto(Arrays.asList(new LottoNumber(1),
                         new LottoNumber(2),
                         new LottoNumber(3),
                         new LottoNumber(4),

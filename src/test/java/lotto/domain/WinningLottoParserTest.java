@@ -14,9 +14,9 @@ public class WinningLottoParserTest {
     void 올바른_당첨로또_입력_검증() {
         String[] scannedWinningNumbers = "1, 2, 3, 4, 5, 6".split(",");
         List<LottoNumber> lottoNumbers = WinningLottoParser.parseLottoNumberList(scannedWinningNumbers);
-        WinningLotto winningLotto = new WinningLotto(lottoNumbers);
+        Lotto winningLotto = new WinningLotto(lottoNumbers);
         for (int i = 0; i < 6; i++) {
-            assertThat(winningLotto.getWinningLottoNumberByIndex(i).getLottoNumber()).isEqualTo(i + 1);
+            assertThat(winningLotto.getLottoNumberByIndex(i).getLottoNumber()).isEqualTo(i + 1);
         }
     }
 

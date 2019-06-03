@@ -14,12 +14,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
-    private boolean isValidLottoNumber(int lottoNumber) {
-        return lottoNumber >= MIN_LOTTO_NUMBER && lottoNumber <= MAX_LOTTO_NUMBER;
+    public int getLottoNumber() {
+        return this.lottoNumber;
     }
 
-    public int getLottoNumber(){
-        return lottoNumber;
+    private boolean isValidLottoNumber(int lottoNumber) {
+        return lottoNumber >= MIN_LOTTO_NUMBER && lottoNumber <= MAX_LOTTO_NUMBER;
     }
 
     @Override
@@ -35,7 +35,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         LottoNumber that = (LottoNumber) o;
 
         return lottoNumber == that.lottoNumber;
-
     }
 
     @Override
@@ -44,7 +43,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.valueOf(lottoNumber);
     }
 }

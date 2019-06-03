@@ -44,6 +44,10 @@ public enum Rank {
         throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
     }
 
+    public long calculatePrizeOfThisRank(int countOfLotto) {
+        return winningMoney * countOfLotto;
+    }
+
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }

@@ -10,18 +10,17 @@ public class UserTest {
 
     @Test
     void 음의_금액을_입력_검사(){
-        assertThrows(InvalidMoneyException.class, () -> new User(-1000));
+        assertThrows(InvalidMoneyException.class, () -> new User(new Money(-1000)));
     }
 
     @Test
     void 천원_단위_아닌_금액_입력_검사(){
-        assertThrows(InvalidMoneyException.class, ()-> new User(1));
+        assertThrows(InvalidMoneyException.class, ()-> new User(new Money(1)));
     }
 
     @Test
     void 사용자의_돈만큼_로또_생성_확인(){
-        int money=5000;
-        assertThat(new User(money).getUserLottos().size()).isEqualTo(5);
+        assertThat(new User(new Money(5000)).getUserLottos().size()).isEqualTo(5);
     }
 
 }

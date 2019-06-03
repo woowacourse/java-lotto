@@ -23,7 +23,6 @@ public class LottoAutoGenerator {
     public static List<LottoNumber> generateAutoLotto() {
         Collections.shuffle(allLottoNumbers);
         List<LottoNumber> generatedLotto = allLottoNumbers.subList(FIRST_LOTTO_INDEX, LAST_LOTTO_INDEX + ONE);
-        Collections.sort(generatedLotto);
         return generatedLotto;
     }
 }

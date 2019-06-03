@@ -4,31 +4,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class Lotto {
+public abstract class Lotto {
 
-    private static final int LOTTO_SIZE = 6;
-    private final List<LottoNumber> lottoNumbers;
+    public List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         if (isDuplicated(lottoNumbers)) {
             throw new InvalidLottoException("중복된 수가 있습니다.");
         }
-        if (!isValidSize(lottoNumbers)) {
-            throw new InvalidLottoException("로또 수는 6개 이어야 합니다.");
-        }
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
         Collections.sort(this.lottoNumbers);
     }
 
-    private boolean isDuplicated(List<LottoNumber> scannedNumbers) {
+    boolean isDuplicated(List<LottoNumber> scannedNumbers) {
         return scannedNumbers.size() != new HashSet<>(scannedNumbers).size();
     }
 
-    private boolean isValidSize(List<LottoNumber> scannedNumbers) {
-        return scannedNumbers.size() == LOTTO_SIZE;
-    }
+    abstract boolean isValidSize(List<LottoNumber> scannedNumbers);
 
     public List<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
@@ -38,12 +31,7 @@ public class Lotto {
         return this.lottoNumbers.get(index);
     }
 
-    @Override
-    public String toString(){
-        StringBuilder stringBuilder=new StringBuilder("[");
-        stringBuilder.append(this.lottoNumbers.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(", ")));
-        return stringBuilder.append("]").toString();
+    public int calculateCountOfMatch(Lotto anotherLotto) {
+        return (int) lottoNumbers.stream().filter(anotherLotto.lottoNumbers::contains).count();
     }
 }
