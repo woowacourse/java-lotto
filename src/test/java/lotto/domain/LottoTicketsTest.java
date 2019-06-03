@@ -41,6 +41,16 @@ class LottoTicketsTest {
         assertThat(new LottoTickets(tickets).getTicket(1)).isEqualTo(new LottoTicket(lottoNumbers2));
     }
 
+    @Test
+    void winningLotto로_lottoResult_생성하기() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
+                , new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
+        LottoTicket winningLotto = new LottoTicket(lottoNumbers);
+        LottoResult lottoResult = new LottoTickets(tickets).makeResultWith(winningLotto);
+
+        assertThat(lottoResult.getCountsBy(Rank.FIFTH)).isEqualTo(2);
+    }
+
     @AfterEach
     void tearDown() {
         tickets = null;

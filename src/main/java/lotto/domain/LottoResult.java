@@ -6,14 +6,8 @@ import java.util.Map;
 public class LottoResult {
     private Map<Rank, Integer> results = new EnumMap<>(Rank.class);
 
-    public LottoResult(LottoTickets lottoTickets, LottoTicket winningLotto) {
+    public LottoResult() {
         initResults();
-
-        for (int index = 0; index < lottoTickets.size(); index++) {
-            LottoTicket lottoTicket = lottoTickets.getTicket(index);
-            Rank rank = calculateRankWith(lottoTicket, winningLotto);
-            results.put(rank, results.get(rank) + 1);
-        }
     }
 
     private void initResults() {
@@ -22,8 +16,11 @@ public class LottoResult {
         }
     }
 
-    private Rank calculateRankWith(LottoTicket lottoTicket, LottoTicket winningLotto) {
-        int numOfMatching = lottoTicket.match(winningLotto);
-        return Rank.valueOf(numOfMatching);
+    public Integer increaseOneCountBy(Rank key) {
+        return results.put(key, results.get(key) + 1);
+    }
+
+    public Integer getCountsBy(Rank key) {
+        return results.get(key);
     }
 }
