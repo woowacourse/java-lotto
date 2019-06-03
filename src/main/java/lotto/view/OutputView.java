@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoQuantity;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.lottoresult.LottoRank;
@@ -18,10 +19,9 @@ public class OutputView {
         }
     }
 
-    public static void printLottoTicketGroup(LottoTicketGroup manualLottos, LottoTicketGroup autoLottos) {
-        System.out.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottos.size(), autoLottos.size());
-        drawLottoTickets(manualLottos);
-        drawLottoTickets(autoLottos);
+    public static void printLottoTickets(LottoTicketGroup lottos, LottoQuantity manualLottoQuantity, LottoQuantity autoLottoQuantity) {
+        System.out.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoQuantity.getQuantity(), autoLottoQuantity.getQuantity());
+        drawLottoTickets(lottos);
         System.out.println();
     }
 
@@ -46,15 +46,15 @@ public class OutputView {
             return;
         }
         drawRankInfo(lottoRank);
-        System.out.println("- " + countOfRank + "개");
+        System.out.format("- %d개\n", countOfRank);
     }
 
     private static void drawRankInfo(LottoRank lottoRank) {
-        System.out.print(lottoRank.getCountOfMatch() + "개 일치");
-        if (lottoRank.equals(LottoRank.SECOND)) {
+        System.out.format("%d개 일치", lottoRank.getCountOfMatch());
+        if (lottoRank.isBonusMatch()) {
             System.out.print(", 보너스 볼 일치");
         }
-        System.out.print(" (" + lottoRank.getReward() + "원)");
+        System.out.format(" (%d원)", lottoRank.getReward());
     }
 
     public static void printErrorMessage(String message) {

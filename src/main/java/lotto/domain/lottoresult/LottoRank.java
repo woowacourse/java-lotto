@@ -50,4 +50,8 @@ public enum LottoRank {
     public int getCountOfMatch() {
         return countOfMatch;
     }
+
+    public boolean isBonusMatch() {
+        return this.equals(LottoRank.SECOND);
+    }
 }
