@@ -23,24 +23,19 @@ public class LottoResult {
 		}
 	}
 
-	private Map<LottoRank, Integer> matchLotto() {
+	private void matchLotto() {
 		for (Lotto lotto : lottos.getLottos()) {
 			LottoRank lottoRank = LottoRank.valueOf(winningLotto.matchLotto(lotto), winningLotto.matchBonusBall(lotto));
 			rankResult.put(lottoRank, rankResult.get(lottoRank) + 1);
 		}
-		return rankResult;
 	}
 
-	private long getAllPrice() {
-		long sum = 0;
-		for (LottoRank rank : rankResult.keySet()) {
-			sum += (long) (rank.getPrice() * rankResult.get(rank));
-		}
-		return sum;
+	private long sum() {
+		return rankResult.keySet().stream().mapToLong(rank -> (long) (rank.getPrice() * rankResult.get(rank))).sum();
 	}
 
 	public long getEarningsRate() {
-		return (getAllPrice() / (lottos.size() * MINIMUM_MONEY_FOR_PURCHASE)) * PERCENT;
+		return (sum() / (lottos.size() * MINIMUM_MONEY_FOR_PURCHASE)) * PERCENT;
 	}
 
 	public Map<LottoRank, Integer> getLottoResult() {
