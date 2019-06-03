@@ -1,13 +1,13 @@
 package lotto.domain;
 
 import lotto.domain.generator.AutoLottoNumbersGenerator;
+import lotto.domain.generator.LottoNumbersGenerator;
 import lotto.domain.generator.ManualLottoNumbersGenerator;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
-
-
     private LottoMachine() {
         throw new AssertionError();
     }
@@ -21,17 +21,17 @@ public class LottoMachine {
     }
 
     private static Lottos buyManualLotto(final List<String> lottosNumbers) {
-        ManualLottoNumbersGenerator manualLottoNumbersGenerator = ManualLottoNumbersGenerator.getInstance();
-        Lottos lottos = new Lottos();
-        for (String numbers : lottosNumbers) {
-            manualLottoNumbersGenerator.register(numbers);
-            lottos.add(new Lotto(manualLottoNumbersGenerator.generate()));
-        }
-        return lottos;
+        return new Lottos(lottosNumbers.stream()
+                .map(LottoMachine::generateManualLotto)
+                .collect(Collectors.toList()));
+    }
+
+    private static Lotto generateManualLotto(String numbers) {
+        return new Lotto(ManualLottoNumbersGenerator.getInstance(numbers).generate());
     }
 
     private static Lottos buyAutoLottos(final int count) {
-        AutoLottoNumbersGenerator autoLottoNumbersGenerator = AutoLottoNumbersGenerator.getInstance();
+        LottoNumbersGenerator autoLottoNumbersGenerator = AutoLottoNumbersGenerator.getInstance();
         Lottos lottos = new Lottos();
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(autoLottoNumbersGenerator.generate()));

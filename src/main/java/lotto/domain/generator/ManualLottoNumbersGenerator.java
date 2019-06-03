@@ -17,27 +17,20 @@ public class ManualLottoNumbersGenerator implements LottoNumbersGenerator {
         clear();
     }
 
-    public static ManualLottoNumbersGenerator getInstance() {
-        return INSTANCE;
-    }
-
-    public void register(String numbers) {
+    public static ManualLottoNumbersGenerator getInstance(String numbers) {
+        if (numbers == null) {
+            throw new NotRegisteredNumbersException();
+        }
         INSTANCE.numbers = numbers;
+        return INSTANCE;
     }
 
     private void clear() {
         numbers = null;
     }
 
-    private void checkReisterNumbers() {
-        if (numbers == null) {
-            throw new NotRegisteredNumbersException();
-        }
-    }
-
     @Override
     public LottoNumbers generate() {
-        checkReisterNumbers();
         try {
             return new LottoNumbers(Arrays.stream(numbers.split(SPLIT_REGEX))
                     .map(number -> Integer.parseInt(number.trim()))
