@@ -7,12 +7,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
     @Test
-    void initTest() {
+    void overflowTest() {
         assertThatThrownBy(() -> new Lotto("1,3,7,10,15,99"));
     }
 
     @Test
+    void underflowTest() {
+        assertThatThrownBy(() -> new Lotto("1,3,7,10,15,-1"));
+    }
+
+    @Test
     void matchingTest() {
-        assertThat(new Lotto("4,8 , 18 ,25,,27    ,42").match()).get().isEqualTo(LottoRank.SECOND);
+        assertThat(new Lotto("11,17 , 19 ,21,,22    ,24").match(new WinningNumbers())).get().isEqualTo(LottoRank.SECOND);
     }
 }

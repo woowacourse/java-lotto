@@ -9,7 +9,7 @@ public class Money {
 
     public Money(int amount) {
         if (amount < MIN_MONEY) {
-            throw new IllegalArgumentException("잘못된 입력입니다. 0 이상의 수로 다시 입력해주세요.");
+            throw new IllegalArgumentException();
         }
         this.amount = amount;
     }
@@ -18,21 +18,21 @@ public class Money {
         this(Integer.parseInt(input.trim()));
     }
 
-    public int getLottoPurchaseAmount() {
-        return amount / Lotto.PRICE;
+    public int lottoPurchaseAmount() {
+        return this.amount / Lotto.PRICE;
     }
 
-    public double getEarningRate(Money investment) {
-        return ((double) amount / investment.getAmount() - 1.0) * 100.0;
+    public double earningRate(Money investment) {
+        return ((double) this.amount / investment.amount() - 1.0) * 100.0;
     }
 
-    public int getAmount() {
-        return amount;
+    public int amount() {
+        return this.amount;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(amount);
+        return String.valueOf(this.amount);
     }
 
     @Override
@@ -44,11 +44,11 @@ public class Money {
             return false;
         }
         Money money = (Money) o;
-        return amount == money.amount;
+        return this.amount == money.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount);
+        return Objects.hash(this.amount);
     }
 }

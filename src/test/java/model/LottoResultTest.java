@@ -10,12 +10,12 @@ import static org.assertj.core.api.Assertions.offset;
 class LottoResultTest {
     @Test
     void earningRateTest() {
-        Lotto a = new Lotto("4, 8, 18, 25, 27, 42");
-        Lotto b = new Lotto("4, 8, 18, 14, 5, 16");
+        Lotto a = new Lotto("11, 17, 19, 21, 22, 24");
+        Lotto b = new Lotto("11, 17, 19, 30, 31, 32");
         Lotto c = new Lotto("10, 20, 30, 40, 44, 45");
-        LottoResult result = new LottoResult(Arrays.asList(a, b, c));
-        assertThat(result.getEarningRate()).isCloseTo(
-                (((LottoRank.SECOND.getPrize().getAmount() + LottoRank.FIFTH.getPrize().getAmount()) / 3000.0) - 1.0) * 100.0,
+        LottoResult result = new LottoResult(Arrays.asList(a, b, c), new WinningNumbers());
+        assertThat(result.earningRate()).isCloseTo(
+                (((LottoRank.SECOND.prize().amount() + LottoRank.FIFTH.prize().amount()) / 3000.0) - 1.0) * 100.0,
                 offset(0.0000001)
         );
     }

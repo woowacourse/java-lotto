@@ -1,23 +1,22 @@
 package controller;
 
-import model.Lotto;
-import model.Lottos;
-import model.WinningNumbers;
-import view.InputView;
-import view.OutputView;
+import model.*;
 
 import java.util.List;
 
+import static view.InputView.*;
+import static view.OutputView.*;
+
+
 public class App {
     public static void main(String[] argc) {
-        new WinningNumbers();
-        final int totalPurchaseAmount = InputView.inputAmountOfMoney().getLottoPurchaseAmount();
-        final int manualPurchaseAmount = InputView.inputAmountOfManualPicks(totalPurchaseAmount);
-        final int autoPurchaseAmount = totalPurchaseAmount - manualPurchaseAmount;
-        final List<Lotto> manualLottos = InputView.inputManualLottoNumbers(manualPurchaseAmount);
-        OutputView.printPurchaseAmount(manualPurchaseAmount, autoPurchaseAmount);
-        final Lottos lottos = new Lottos(manualLottos, autoPurchaseAmount);
-        OutputView.printLottos(lottos);
-        OutputView.printResult(lottos.getResult());
+        final WinningNumbers winningNumbers = new WinningNumbers();
+        final LottoPurchaseAmount purchaseAmount = inputAmountOfManualPicks(inputAmountOfMoney());
+        final List<Lotto> manualLottos = inputManualLottoNumbers(purchaseAmount);
+        printPurchaseAmount(purchaseAmount);
+        final Lottos lottos = new Lottos(manualLottos, purchaseAmount);
+        printLottos(lottos);
+        printWinningNumbers(winningNumbers);
+        printResult(lottos.getResult(winningNumbers));
     }
 }

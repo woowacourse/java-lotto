@@ -1,6 +1,7 @@
 package view;
 
 import model.Lotto;
+import model.LottoPurchaseAmount;
 import model.Money;
 
 import java.util.*;
@@ -15,28 +16,21 @@ public class InputView {
         return new TryUntilSuccess<>(() -> new Money(input.nextLine())).get();
     }
 
-    public static int inputAmountOfManualPicks(int maxAmount) {
+    public static LottoPurchaseAmount inputAmountOfManualPicks(Money investment) {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         return new TryUntilSuccess<>(() -> {
             final int amount = Integer.parseInt(input.nextLine());
-            validateRange(amount, 0, maxAmount);
-            return amount;
+            return new LottoPurchaseAmount(investment, amount);
         }).get();
     }
 
-    private static void validateRange(int target, int min, int max) {
-        if (target < min || target > max) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public static List<Lotto> inputManualLottoNumbers(int manualPurchaseAmount) {
-        if (manualPurchaseAmount == 0) {
+    public static List<Lotto> inputManualLottoNumbers(LottoPurchaseAmount purchaseAmount) {
+        if (purchaseAmount.manual() == 0) {
             return new ArrayList<>();
         }
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요(쉼표로 구분).");
         return Collections.unmodifiableList(
-                IntStream.range(0, manualPurchaseAmount).boxed()
+                IntStream.range(0, purchaseAmount.manual()).boxed()
                         .map(i -> new TryUntilSuccess<>(() -> new Lotto(input.nextLine())).get())
                         .collect(Collectors.toList())
         );

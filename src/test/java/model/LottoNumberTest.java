@@ -6,12 +6,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
     @Test
-    void initTestA() {
+    void overflowTest() {
         assertThatThrownBy(() -> LottoNumber.of(355));
     }
 
     @Test
-    void initTestB() {
+    void underflowTest() {
         assertThatThrownBy(() -> LottoNumber.of(-2));
     }
 }
