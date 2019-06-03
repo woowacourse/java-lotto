@@ -51,6 +51,6 @@ class LottoTicketTest {
         List<LottoNumber> numbers2 = new ArrayList<>(lottoNumbers);
         numbers2.add(LottoNumber.createLottoNumber(7));
         assertThat(LottoTicket.createLottoTicket(numbers1)
-                .matchLottoNumberCount(LottoTicket.createLottoTicket(numbers2))).isEqualTo(5);
+                .getMatchedNumbersCount(LottoTicket.createLottoTicket(numbers2))).isEqualTo(5);
     }
 }

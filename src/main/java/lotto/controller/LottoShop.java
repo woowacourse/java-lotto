@@ -23,5 +23,6 @@ public class LottoShop {
         OutputView.printUserLottoTickets(userLottoTickets);
 
         WinningLotto winningLotto = WinningLotto.createWinningLotto(WinningNumParser.getWinningNum(InputView.inputWinningNum()));
+        userTicketManager.getMatchOfCounts(winningLotto);
     }
 }

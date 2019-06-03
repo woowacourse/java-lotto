@@ -53,12 +53,12 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottoTicket);
     }
 
-    public Integer matchLottoNumberCount(LottoTicket userTicket){
+    public Integer getMatchedNumbersCount(LottoTicket userTicket){
         List<LottoNumber> joinedTicketNumbers = Stream.concat(this.lottoTicket.stream()
                 , userTicket.lottoTicket.stream()).collect(Collectors.toList());
-        Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(joinedTicketNumbers);
+        Set<LottoNumber> uniqueJoinedTicketNumbers = new HashSet<>(joinedTicketNumbers);
 
-        return joinedTicketNumbers.size() - uniqueLottoNumbers.size();
+        return joinedTicketNumbers.size() - uniqueJoinedTicketNumbers.size();
     }
 
     @Override
