@@ -1,5 +1,6 @@
 package lotto.model.object;
 
+import lotto.model.LottoRank;
 import lotto.model.exception.WinningLottoBonusBallDuplicationException;
 
 public class WinningInfo {
@@ -24,5 +25,11 @@ public class WinningInfo {
 
         public boolean hasBonusBallIn(final Lotto purchasedLotto) {
                 return purchasedLotto.hasBonusBall(bonusBall);
+        }
+
+        public LottoRank getMatchRank(Lotto purchasedLotto) {
+                int matchNumber = purchasedLotto.getMatchNumber(winningLotto);
+                boolean hasBonusBall = purchasedLotto.hasBonusBall(bonusBall);
+                return LottoRank.getLottoRank(matchNumber, hasBonusBall);
         }
 }

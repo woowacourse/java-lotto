@@ -25,9 +25,7 @@ public class WinStatsCreator {
 
         private static Map<LottoRank, Integer> createMappingStats(final List<Lotto> purchasedLottos, final WinningInfo winningInfo, Map<LottoRank, Integer> mappingStats) {
                 for (Lotto purchasedLotto : purchasedLottos) {
-                        int matchNumber = winningInfo.getMatchNumber(purchasedLotto);
-                        boolean hasBonusBall = winningInfo.hasBonusBallIn(purchasedLotto);
-                        LottoRank lottoRank = LottoRank.getLottoRank(matchNumber, hasBonusBall);
+                        LottoRank lottoRank = winningInfo.getMatchRank(purchasedLotto);
                         mappingStats.computeIfPresent(lottoRank, (LottoRank key, Integer value) -> ++value);
                 }
                 return mappingStats;
