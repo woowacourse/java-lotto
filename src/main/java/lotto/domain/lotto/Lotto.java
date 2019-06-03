@@ -34,15 +34,19 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int numberOfMatch(Lotto winningLotto){
+    public int numberOfMatch(Lotto winningLotto) {
         return (int) lottoNumbers.stream()
                 .filter(number -> {
-                    if(winningLotto.getLottoNumbers().contains(number)){
+                    if (winningLotto.getLottoNumbers().contains(number)) {
                         return true;
                     }
                     return false;
                 })
                 .count();
+    }
+
+    public boolean bonusOfMatch(BonusBall ball) {
+        return lottoNumbers.contains(ball.getBonus());
     }
 
     public List<LottoNumber> getLottoNumbers() {

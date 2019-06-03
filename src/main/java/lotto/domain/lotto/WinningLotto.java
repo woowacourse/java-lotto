@@ -31,6 +31,10 @@ public class WinningLotto {
         return winningLotto;
     }
 
+    public BonusBall getBonusBall() {
+        return bonusBall;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

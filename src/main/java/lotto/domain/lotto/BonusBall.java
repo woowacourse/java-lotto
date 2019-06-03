@@ -8,21 +8,26 @@ import java.util.regex.Pattern;
 
 public class BonusBall {
     private static final String BONUS_PATTERN = "^[0-9]*$";
-    private int bonus;
 
-    public BonusBall(Lotto winningLotto, String bonus){
+    private LottoNumber bonus;
+
+    public BonusBall(Lotto winningLotto, String bonus) {
         this.bonus = invalidBonusBall(winningLotto, bonus);
     }
 
-    private int invalidBonusBall(Lotto winningLotto, String bonus){
+    private LottoNumber invalidBonusBall(Lotto winningLotto, String bonus) {
         Matcher matcher = Pattern.compile(BONUS_PATTERN).matcher(bonus);
-        if(!matcher.find()){
+        if (!matcher.find()) {
             throw new InvalidBounusBall("옳바르지 않은 입력입니다.");
         }
-        if(winningLotto.getLottoNumbers().contains(new LottoNumber(Integer.parseInt(bonus)))){
+        if (winningLotto.getLottoNumbers().contains(new LottoNumber(Integer.parseInt(bonus)))) {
             throw new InvalidBounusBall("당첨번호와 중복된 정수가 있습니다.");
         }
-        return Integer.parseInt(bonus);
+        return new LottoNumber(Integer.parseInt(bonus));
+    }
+
+    public LottoNumber getBonus() {
+        return bonus;
     }
 
     @Override

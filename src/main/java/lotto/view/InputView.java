@@ -16,4 +16,9 @@ public class InputView {
         return scanner.nextLine().split(SPLIT_REGEX);
     }
 
+    public static String InputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
 }

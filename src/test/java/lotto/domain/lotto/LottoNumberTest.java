@@ -16,14 +16,14 @@ public class LottoNumberTest {
 
     @Test
     void Lotto_번호가_1미만인_경우() {
-        assertThrows(InvalidLottoNumberException.class, ()->{
+        assertThrows(InvalidLottoNumberException.class, () -> {
             new LottoNumber(0);
         });
     }
 
     @Test
     void Lotto_번호가_45초과인_경우() {
-        assertThrows(InvalidLottoNumberException.class, ()->{
+        assertThrows(InvalidLottoNumberException.class, () -> {
             new LottoNumber(46);
         });
     }

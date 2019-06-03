@@ -10,7 +10,7 @@ import static lotto.domain.lotto.Lotto.*;
 public class AutoGenerateLotto {
     private static final List<LottoNumber> DEFAULT_LOTTO_NUMBERS;
 
-    static{
+    static {
         DEFAULT_LOTTO_NUMBERS = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());

@@ -10,15 +10,18 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoTest {
 
     private Lotto lotto;
     private List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> winningLottoNumbers;
 
     @BeforeEach
     void setUp() {
         lottoNumbers = new ArrayList<>();
+        winningLottoNumbers = new ArrayList<>();
     }
 
     @Test
@@ -35,7 +38,7 @@ public class LottoTest {
         for (int i = 1; i < 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        assertThrows(InvalidLottoException.class, ()->{
+        assertThrows(InvalidLottoException.class, () -> {
             new Lotto(lottoNumbers);
         });
     }
@@ -45,15 +48,13 @@ public class LottoTest {
         for (int i = 1; i < 8; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        assertThrows(InvalidLottoException.class, ()->{
+        assertThrows(InvalidLottoException.class, () -> {
             new Lotto(lottoNumbers);
         });
     }
 
     @Test
     void 매칭_시스템에서_개수가_잘나오는지() {
-        List<LottoNumber> winningLottoNumbers = new ArrayList<>();
-
         for (int i = 1; i < 7; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
@@ -64,6 +65,21 @@ public class LottoTest {
         assertThat(new Lotto(lottoNumbers)
                 .numberOfMatch(new Lotto(winningLottoNumbers)))
                 .isEqualTo(6);
+    }
+
+    @Test
+    void 매칭_시스템에서_보너스볼의_값이_잘나오는지() {
+        for (int i = 1; i < 7; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+
+        for (int i = 2; i < 8; i++) {
+            winningLottoNumbers.add(new LottoNumber(i));
+        }
+
+        assertTrue(new Lotto(lottoNumbers)
+                .bonusOfMatch(new BonusBall(
+                        new Lotto(winningLottoNumbers), "1")));
     }
 
     @AfterEach

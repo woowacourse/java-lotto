@@ -17,7 +17,7 @@ public class OutPutView {
         System.out.println("--------------------");
 
         for (Rank result : lottoResult.getResult().keySet()) {
-            if(result.equals(Rank.MISS)){
+            if (result.equals(Rank.MISS)) {
                 continue;
             }
             System.out.println(result.getCountOfMatch()

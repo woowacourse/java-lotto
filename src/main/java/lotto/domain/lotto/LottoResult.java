@@ -10,7 +10,7 @@ public class LottoResult {
 
     private LottoTicket lottoTicket;
 
-    public LottoResult(LottoTicket lottoTicket, Lotto winningLotto) {
+    public LottoResult(LottoTicket lottoTicket, WinningLotto winningLotto) {
         this.lottoTicket = lottoTicket;
         initRankResult();
         lottoTicket.matchLotto(winningLotto)
@@ -28,7 +28,7 @@ public class LottoResult {
         result.put(rank, result.get(rank) + 1);
     }
 
-    public Map<Rank, Integer> getResult(){
+    public Map<Rank, Integer> getResult() {
         return result;
     }
 
@@ -36,9 +36,9 @@ public class LottoResult {
         return this.result.get(result);
     }
 
-    public double dividendRate(){
+    public double dividendRate() {
         double rateResult = 0;
-        for(Rank rank : result.keySet()){
+        for (Rank rank : result.keySet()) {
             rateResult += rank.getWinningMoney() * result.get(rank);
         }
 

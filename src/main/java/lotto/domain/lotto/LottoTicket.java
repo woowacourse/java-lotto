@@ -26,16 +26,17 @@ public class LottoTicket {
         return numberOfLotto;
     }
 
-    public List<Rank> matchLotto(Lotto winningLotto){
+    public List<Rank> matchLotto(WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         lottos.stream().forEach(lotto -> {
-            ranks.add(Rank.valueOf(lotto.numberOfMatch(winningLotto)));
+            ranks.add(Rank.valueOf(lotto.numberOfMatch(winningLotto.getWinningLotto())
+                    , lotto.bonusOfMatch(winningLotto.getBonusBall())));
         });
 
         return ranks;
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return numberOfLotto * LOTTO_PRICE;
     }
 
