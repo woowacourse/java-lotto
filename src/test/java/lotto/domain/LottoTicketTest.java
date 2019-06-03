@@ -43,6 +43,23 @@ class LottoTicketTest {
         });
     }
 
+    @Test
+    void 로또_숫자_하나가_Ticket_안에_있는지_체크() {
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        assertThat(lottoTicket.match(new LottoNumber(1))).isTrue();
+        assertThat(lottoTicket.match(new LottoNumber(7))).isFalse();
+    }
+
+    @Test
+    void 파라미터로_입력된_lottoTicket과_비교하여_일치_개수를_반환() {
+        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
+                , new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
+
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket winningLotto = new LottoTicket(numbers);
+        assertThat(lottoTicket.match(winningLotto)).isEqualTo(3);
+    }
+
     @AfterEach
     void tearDown() {
         lottoNumbers = null;

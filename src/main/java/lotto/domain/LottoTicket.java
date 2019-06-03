@@ -35,6 +35,14 @@ public class LottoTicket {
         Collections.sort(lottoNumbers);
     }
 
+    public boolean match(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public int match(LottoTicket winningLotto) {
+        return (int) lottoNumbers.stream().filter(winningLotto::match).count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
