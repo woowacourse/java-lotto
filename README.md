@@ -2,15 +2,14 @@
 1. LottoNumber
     - 로또 번호 하나를 저장 (int)
     - 1 ~ 45의 사이의 정수
+    - 1 ~ 45까지의 로또 번호를 미리 저장해 놓고 재사용
 2. LottoNumbers
     - 6개의 로또 번호만 입력 가능
     - 중복 불가능
     - 다른 로또 번호들과 비교해서 일치 개수 반환
 3. LottoNumbersGenerator
-    - 1 ~ 45까지의 로또 번호를 미리 저장해 놓고 재사용
-    - 받은 번호의 LottoNumber 반환
-    - 받은 번호들로 이루어진 LottoNumbers 반환
-    - Shuffle을 활용해서 List의 앞에서부터 6개의 랜덤한 로또 번호로 LottoNumbers를 만들어 반환
+    - Auto : Shuffle을 활용해서 List의 앞에서부터 6개의 랜덤한 로또 번호로 LottoNumbers를 만들어 반환
+    - Manual : 받은 String 형태의 번호들을 분리해서 LottoNumbers로 만들어 반환
 4. Lotto
     - LottoNumbers 저장
     - 받은 번호가 로또에 있는지 확인
