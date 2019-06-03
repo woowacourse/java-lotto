@@ -1,15 +1,21 @@
 package lotto.domain;
 
-public enum Rank {
-    FIRST(6),
-    THIRD(5),
-    FOURTH(4),
-    FIFTH(3),
-    MISS(0);
-    private int numOfMatching;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-    Rank(int numOfMatching) {
+public enum Rank {
+    MISS(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    FIRST(6, 2_000_000_000);
+    private final int numOfMatching;
+    private final long prize;
+
+    Rank(int numOfMatching, long prize) {
         this.numOfMatching = numOfMatching;
+        this.prize = prize;
     }
 
     public static Rank valueOf(int numOfMatching) {
@@ -19,5 +25,19 @@ public enum Rank {
             }
         }
         return MISS;
+    }
+
+    public static List<Rank> valuesWithoutMISS() {
+        List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
+        ranks.remove(Rank.MISS);
+        return ranks;
+    }
+
+    public int getNumOfMatching() {
+        return numOfMatching;
+    }
+
+    public Long getPrize() {
+        return prize;
     }
 }

@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
@@ -13,5 +15,21 @@ class RankTest {
         assertThat(Rank.valueOf(4)).isEqualByComparingTo(Rank.FOURTH);
         assertThat(Rank.valueOf(5)).isEqualByComparingTo(Rank.THIRD);
         assertThat(Rank.valueOf(6)).isEqualByComparingTo(Rank.FIRST);
+    }
+
+    @Test
+    void MISS를_제외한_Rank의_list_반환() {
+        List<Rank> ranks = Rank.valuesWithoutMISS();
+        assertThat(ranks.contains(Rank.MISS)).isFalse();
+    }
+
+    @Test
+    void numOfMatching_반환() {
+        assertThat(Rank.FIFTH.getNumOfMatching()).isEqualTo(3);
+    }
+
+    @Test
+    void prize_반환() {
+        assertThat(Rank.FIFTH.getPrize()).isEqualTo(5_000);
     }
 }
