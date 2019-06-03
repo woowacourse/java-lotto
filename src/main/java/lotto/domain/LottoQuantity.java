@@ -3,8 +3,11 @@ package lotto.domain;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.purchaseamount.PurchaseAmount;
 
+import java.util.Objects;
+
 public class LottoQuantity {
     private static final int MIN_QUANTITY = 0;
+    public static final LottoQuantity ZERO = new LottoQuantity(0);
 
     private int quantity;
 
@@ -25,6 +28,10 @@ public class LottoQuantity {
         }
     }
 
+    public static LottoQuantity create(PurchaseAmount purchaseAmount) {
+        return new LottoQuantity(purchaseAmount.maxQuantity(LottoTicket.getPrice()));
+    }
+
     private void validateQuantity() {
         if (quantity < MIN_QUANTITY) {
             throw new InvalidLottoQuantityException(MIN_QUANTITY + "이상으로 설정 가능합니다.");
@@ -40,4 +47,18 @@ public class LottoQuantity {
     public boolean biggerThan(int size) {
         return quantity > size;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoQuantity that = (LottoQuantity) o;
+        return quantity == that.quantity;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(quantity);
+    }
+
 }

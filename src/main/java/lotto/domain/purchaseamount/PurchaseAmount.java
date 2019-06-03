@@ -1,8 +1,7 @@
 package lotto.domain.purchaseamount;
 
-import lotto.domain.lotto.LottoTicket;
-
 public class PurchaseAmount {
+    private static final int MIN_MONEY = 1;
     private int money;
 
     private PurchaseAmount(int money) {
@@ -24,11 +23,15 @@ public class PurchaseAmount {
         }
     }
 
-    public boolean buy(LottoTicket lottoTicket) {
-        if (!canBuy(lottoTicket.getPrice())) {
+    public int maxQuantity(int price) {
+        return money / price;
+    }
+
+    public boolean buy(int price) {
+        if (!canBuy(price)) {
             return false;
         }
-        money -= lottoTicket.getPrice();
+        money -= price;
         return true;
     }
 
