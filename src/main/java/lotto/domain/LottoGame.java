@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Map;
 
 public class LottoGame {
+
     private final User user;
     private final Map<Rank, Integer> countOfRank;
 
@@ -24,5 +25,4 @@ public class LottoGame {
     public double calculateRateOfReturn() {
         return user.calculateRateOfReturn(calculatePrize());
     }
-
 }

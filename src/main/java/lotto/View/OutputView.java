@@ -5,10 +5,8 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.domain.Rank;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class OutputView {
 
@@ -16,12 +14,12 @@ public class OutputView {
         System.out.println(money.calculateCountOfLotto() + "개를 구매 했습니다.");
     }
 
-    public static void printLotto(List<LottoNumber> lottoNumbers) {
-        System.out.println(lottoNumbers.toString());
-    }
-
     public static void printUserLottos(List<Lotto> userLottos) {
         userLottos.forEach(lotto -> printLotto(lotto.getLottoNumbers()));
+    }
+
+    private static void printLotto(List<LottoNumber> lottoNumbers) {
+        System.out.println(lottoNumbers);
     }
 
     public static void printCountOfRank(Map<Rank, Integer> countOfRank) {

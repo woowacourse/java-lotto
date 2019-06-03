@@ -4,17 +4,17 @@ import java.util.List;
 
 public class WinningLotto extends Lotto {
 
-    private static final int LOTTO_SIZE = 6;
+    private final LottoNumber bonusBall;
 
-    public WinningLotto(List<LottoNumber> winningLotto) {
+    public WinningLotto(List<LottoNumber> winningLotto, LottoNumber bonusBall) {
         super(winningLotto);
-        if (!isValidSize(winningLotto)) {
-            throw new InvalidLottoException("로또의 개수가 잘못되었습니다.");
+        if (winningLotto.contains(bonusBall)) {
+            throw new InvalidBonusBallException("보너스 볼이 당첨 번호와 중복입니다.");
         }
+        this.bonusBall = bonusBall;
     }
 
-    @Override
-    boolean isValidSize(List<LottoNumber> scannedNumbers) {
-        return scannedNumbers.size() == LOTTO_SIZE;
+    public boolean isBonusContain(Lotto userLotto) {
+        return userLotto.isContains(bonusBall);
     }
 }

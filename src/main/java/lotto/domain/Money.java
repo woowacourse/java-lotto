@@ -3,6 +3,7 @@ package lotto.domain;
 public class Money {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final int ZERO = 0;
     private final long money;
 
     public Money(long money) {
@@ -12,16 +13,19 @@ public class Money {
         this.money = money;
     }
 
-    public long getMoney(){
+    public long getMoney() {
         return this.money;
     }
 
     private boolean isValidMoney(long money) {
-        return (money > 0) && (money % 1000 == 0);
+        return (money > ZERO) && (money % LOTTO_PRICE == 0);
     }
 
     public int calculateCountOfLotto() {
         return (int) (this.money / LOTTO_PRICE);
     }
 
+    public double prizeDivideMoney(long prize) {
+        return prize / money;
+    }
 }

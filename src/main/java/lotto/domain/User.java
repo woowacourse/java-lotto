@@ -4,6 +4,9 @@ import java.util.*;
 
 public class User {
 
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+    private static final int MUL_NUM_FOR_PERCENT = 100;
     private final Money money;
     private final int countOfLotto;
     private List<Lotto> userLottos = new ArrayList<>();
@@ -25,19 +28,20 @@ public class User {
     }
 
     public Map<Rank, Integer> calculateCountOfRank(WinningLotto winningLotto) {
-        Map<Rank, Integer> countOfRank = new TreeMap<>();
-        Arrays.stream(Rank.values()).forEach(rank -> countOfRank.put(rank, 0));
+        Map<Rank, Integer> countOfRank = new TreeMap<>(Collections.reverseOrder());
+        Arrays.stream(Rank.values()).forEach(rank -> countOfRank.put(rank, ZERO));
         for (Lotto userLotto : userLottos) {
             int countOfMatch = userLotto.calculateCountOfMatch(winningLotto);
-            Rank thisRank = Rank.valueOf(countOfMatch, false);
+            boolean matchBonus = winningLotto.isBonusContain(userLotto);
+            Rank thisRank = Rank.valueOf(countOfMatch, matchBonus);
             int countOfThisRank = countOfRank.get(thisRank);
-            countOfRank.put(thisRank, countOfThisRank + 1);
+
+            countOfRank.put(thisRank, countOfThisRank + ONE);
         }
         return countOfRank;
     }
 
     public double calculateRateOfReturn(Prize calculatePrize) {
-        return calculatePrize.divideByMoney(money) * 100;
+        return calculatePrize.divideByMoney(money) * MUL_NUM_FOR_PERCENT;
     }
-
 }

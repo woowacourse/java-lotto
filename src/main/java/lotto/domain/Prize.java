@@ -12,7 +12,7 @@ public class Prize {
     }
 
     public double divideByMoney(Money money) {
-        return prize / money.getMoney();
+        return money.prizeDivideMoney(prize);
     }
 
 }
