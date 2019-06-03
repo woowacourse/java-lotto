@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class InputView {
 	private static final String REPLACE_WHITE_SPACE = "\\s";
-	private static Scanner scanner = new Scanner(System.in);
+	private static final Scanner scanner = new Scanner(System.in);
 
 	public static int inputMoneyForPurchaseOfLotto() {
 		System.out.println(UserOutput.DEMAND_MONEY_FOR_LOTTO_PURCHASE.getUserOutputMessage());
