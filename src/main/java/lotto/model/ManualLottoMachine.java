@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.LottoLauncher;
 
 import java.util.ArrayList;
 import java.util.List;

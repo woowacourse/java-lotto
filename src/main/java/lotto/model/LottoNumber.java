@@ -3,20 +3,20 @@ package lotto.model;
 import java.util.*;
 
 public class LottoNumber {
-    private static final int MAXIMUM_LOTTO_NUMBER = 46;
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static List<LottoNumber> lottoNumbers = new ArrayList<>();
     private int number;
 
     static {
-        for (int i = 1; i < MAXIMUM_LOTTO_NUMBER; i++) {
+        for (int i = 1; i < MAXIMUM_LOTTO_NUMBER + 1; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
     }
 
     public static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> returnList = new ArrayList<>();
-        for (int i = 0, n = numbers.size(); i < n ; i++) {
-            returnList.add(lottoNumbers.get(numbers.get(i)-1));
+        for (int i = 0, n = numbers.size(); i < n; i++) {
+            returnList.add(lottoNumbers.get(numbers.get(i) - 1));
         }
         return returnList;
     }
@@ -45,5 +45,5 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
-}
+    }
 }

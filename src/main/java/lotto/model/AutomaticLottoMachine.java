@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AutomaticLottoMachine implements LottoMachine{
+public class AutomaticLottoMachine implements LottoMachine {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int MAX_NUM = 45;
@@ -16,6 +16,7 @@ public class AutomaticLottoMachine implements LottoMachine{
     public AutomaticLottoMachine(Money money, int manualLottoCount) {
         this.automaticLottoCount = money.calculateAutomatiLottoCount(manualLottoCount);
     }
+
     @Override
     public Lottos generateLottos() {
         List<Lotto> lottos = new ArrayList<>();
@@ -34,7 +35,7 @@ public class AutomaticLottoMachine implements LottoMachine{
     }
 
     private static int generateRandomLottoNumberIndex() {
-        return (int)(Math.random() * (MAX_NUM) + MIN_NUM);
+        return (int) (Math.random() * (MAX_NUM) + MIN_NUM);
     }
 
 }

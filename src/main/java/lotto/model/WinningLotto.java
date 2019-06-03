@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.List;
 
 public class WinningLotto {
     private Lotto winningLotto;
@@ -8,7 +7,7 @@ public class WinningLotto {
 
 
     public WinningLotto(Lotto winningLottoTicket, LottoNumber bonusNumber) {
-        if ( winningLottoTicket.contains(bonusNumber)) {
+        if (winningLottoTicket.contains(bonusNumber)) {
             throw new IllegalNumberCombinationException();
         }
         this.winningLotto = winningLottoTicket;

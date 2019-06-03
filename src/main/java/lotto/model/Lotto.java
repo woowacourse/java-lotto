@@ -3,7 +3,6 @@ package lotto.model;
 import java.util.List;
 
 public class Lotto {
-    private static final String SEPERATOR = ",";
     private static final int LOTTO_NUMBER_LENGHT = 6;
 
     private List<LottoNumber> numbers;
@@ -29,7 +28,7 @@ public class Lotto {
 
 
     public int countMatchLottoNumber(Lotto lotto) {
-        return (int)numbers.stream()
+        return (int) numbers.stream()
                 .filter(number -> lotto.containsNumber(number))
                 .count();
     }

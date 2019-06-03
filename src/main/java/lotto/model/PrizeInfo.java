@@ -15,7 +15,7 @@ public class PrizeInfo {
 
     public PrizeInfo(List<Prize> prizes) {
         for (Prize prize : prizes) {
-            prizeInfo.put(prize, prizeInfo.get(prize)+ 1);
+            prizeInfo.put(prize, prizeInfo.get(prize) + 1);
         }
 
     }

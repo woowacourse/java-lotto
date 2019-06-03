@@ -16,19 +16,16 @@ public class Money {
 
 
     public double calculateProfitRate(double sum) {
-        return sum/money;
+        return sum / money;
     }
 
-    public int getLottoCount() {
-        return this.money/PRICE_OF_LOTTO;
-    }
 
     public boolean isInputBiggerThanMoney(int input) {
-        int comparison = input*PRICE_OF_LOTTO;
+        int comparison = input * PRICE_OF_LOTTO;
         return (comparison) > this.money;
     }
 
     public int calculateAutomatiLottoCount(int count) {
-        return (money - (count*PRICE_OF_LOTTO))/PRICE_OF_LOTTO;
+        return (money - (count * PRICE_OF_LOTTO)) / PRICE_OF_LOTTO;
     }
 }

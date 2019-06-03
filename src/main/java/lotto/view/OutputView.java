@@ -20,8 +20,8 @@ public class OutputView {
     public static void printStatistics(LottoResult lottoResult) {
         System.out.println("당첨통계");
         System.out.println("---------");
-        for (Prize prize: Prize.values() ) {
-            System.out.println(prize.getMatchCount() + "개 일치" + "(" + prize.getPrizeMoney() + ")" + " - " + lottoResult.getCount(prize)+ "개");
+        for (Prize prize : Prize.values()) {
+            System.out.println(prize.getMatchCount() + "개 일치" + "(" + prize.getPrizeMoney() + ")" + " - " + lottoResult.getCount(prize) + "개");
         }
         System.out.println("총 수익률은 " + lottoResult.calculateProfitRate() + "입니다");
     }
