@@ -13,7 +13,7 @@ public class LottoLauncher {
     public static void main(String[] args) {
         Money money = generateMoney();
         ManualLottoCount manualLottoCount = generateManualLottoCount(money);
-        Lottos lottos = Wallet.buyLottos(money, prepareManualLottos(manualLottoCount));
+        Lottos lottos = LottoService.produceLottos(money, prepareManualLottos(manualLottoCount));
 
         OutputView.printLottos(money, manualLottoCount, lottos);
 

@@ -2,17 +2,17 @@ package lotto.model;
 
 import java.util.List;
 
-public class Wallet {
+public class LottoService {
 
-    public static Lottos buyLottos(Money money, List<Lotto> manualLottos) {
+    public static Lottos produceLottos(Money money, List<Lotto> manualLottos) {
         LottoMachine manualLottoMachine = new ManualLottoMachine(manualLottos);
         LottoMachine automaticLottoMachine = new AutomaticLottoMachine(money, manualLottos.size());
-        Lottos manualLottosOrganized = purchaseLottos(manualLottoMachine);
-        Lottos automaticLottos = purchaseLottos(automaticLottoMachine);
+        Lottos manualLottosOrganized = createLottos(manualLottoMachine);
+        Lottos automaticLottos = createLottos(automaticLottoMachine);
         return manualLottosOrganized.append(automaticLottos);
     }
 
-    private static Lottos purchaseLottos(LottoMachine machine) {
+    private static Lottos createLottos(LottoMachine machine) {
         return machine.generateLottos();
     }
 }

@@ -28,7 +28,6 @@ public class Lotto {
         }
     }
 
-
     public int countMatchLottoNumber(Lotto lotto) {
         return (int) numbers.stream()
                 .filter(number -> lotto.containsNumber(number))
