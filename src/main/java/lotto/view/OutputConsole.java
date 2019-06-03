@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
@@ -8,9 +9,9 @@ import static lotto.domain.Rank.*;
 
 public class OutputConsole {
 
-    public static void outputLotto(Lottos lottos, int numberOfManualLotto, int numberOfAutoLotto) {
-        System.out.println("수동으로 " + numberOfManualLotto + "장, " +
-                "자동으로 " + numberOfAutoLotto + "장을 구매했습니다.");
+    public static void outputLotto(Lottos lottos, LottoCount lottoCount) {
+        System.out.println("\n수동으로 " + lottoCount.getManualCount() + "장, " +
+                "자동으로 " + lottoCount.getAutoCount() + "장을 구매했습니다.");
         StringBuilder stringBuilder = new StringBuilder();
         for (Lotto lotto : lottos.getList()) {
             stringBuilder.append("[");

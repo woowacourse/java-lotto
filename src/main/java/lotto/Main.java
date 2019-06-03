@@ -11,9 +11,12 @@ public class Main {
 
     public static void main(String[] args) {
         Money money = createMoney();
+
         LottoCount lottoCount = createLottoCount(money);
         Lottos lottos = createLottos(lottoCount);
-        OutputConsole.outputLotto(lottos, lottoCount.getManualCount(), lottoCount.getAutoCount());
+
+        OutputConsole.outputLotto(lottos, lottoCount);
+
         WinningLotto winningLotto = createWinningLotto(createLastWinningLotto());
         OutputConsole.outputResult(new LottoResult(winningLotto, lottos));
     }
@@ -38,7 +41,9 @@ public class Main {
 
     private static Lottos createLottos(LottoCount lottoCount) {
         try {
-            LottosFactory lottosFactory = new LottosFactory(createManualLottoNumbers(lottoCount.getManualCount()), lottoCount);
+            LottosFactory lottosFactory = new LottosFactory(
+                    createManualLottoNumbers(lottoCount.getManualCount()),
+                    lottoCount);
             return lottosFactory.createLottos();
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
@@ -58,7 +63,9 @@ public class Main {
 
     private static WinningLotto createWinningLotto(Lotto lastWinningLotto) {
         try {
-            return new WinningLotto(lastWinningLotto, LottoNumber.getInstance(InputConsole.inputBonusNumber()));
+            return new WinningLotto(
+                    lastWinningLotto,
+                    LottoNumber.getInstance(InputConsole.inputBonusNumber()));
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createWinningLotto(lastWinningLotto);
@@ -66,7 +73,7 @@ public class Main {
     }
 
     private static Lotto createLastWinningLotto() {
-        System.out.println("\n지난 주 당첨 번호를 입력해주세요.");
+        System.out.println("지난 주 당첨 번호를 입력해주세요.");
         try {
             LottoMachine lottoMachine = new ManualLottoMachine(InputConsole.inputLotto());
             return lottoMachine.generateLotto();
