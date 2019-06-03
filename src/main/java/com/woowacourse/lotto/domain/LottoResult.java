@@ -34,7 +34,7 @@ public class LottoResult {
 		return rankResult.keySet().stream().mapToDouble(rank -> (double) (rank.getPrice() * rankResult.get(rank))).sum();
 	}
 
-	public long getEarningsRate() {
+	public long calculateEarningsRate() {
 		return (long) ((sum() / (lottos.size() * MINIMUM_MONEY_FOR_PURCHASE)) * PERCENT);
 	}
 
