@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class BoughtLottos {
+    private static final int BUY_PRICE = 1000;
     private final List<Lotto> lottos;
     private final int countOfBoughtManual;
 
@@ -19,9 +20,12 @@ public class BoughtLottos {
     public static BoughtLottos buyLottos(final int price, List<Lotto> manualLottos) {
         List<Lotto> lottos = new ArrayList<>(manualLottos);
         int countOfBoughtManual = manualLottos.size();
-        for (int i = 0; i < price / 1000 - countOfBoughtManual; i++) {
+        int amountOfAutoGenerateLotto = price / BUY_PRICE - countOfBoughtManual;
+
+        for (int i = 0; i < amountOfAutoGenerateLotto; i++) {
             lottos.add(LottoGenerator.generateAutoLotto());
         }
+
         return new BoughtLottos(lottos, countOfBoughtManual);
     }
 
