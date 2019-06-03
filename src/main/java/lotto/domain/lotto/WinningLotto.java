@@ -7,15 +7,17 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     private Lotto winningLotto;
+    private BonusBall bonusBall;
 
-    public WinningLotto(String[] inputWinLottoNumber) {
+    public WinningLotto(String[] inputWinLottoNumber, String bonusBall) {
         this.winningLotto = invalidWinLottoNumber(inputWinLottoNumber);
+        this.bonusBall = new BonusBall(this.winningLotto, bonusBall);
     }
 
-    private Lotto invalidWinLottoNumber(String[] winLotto) {
+    private Lotto invalidWinLottoNumber(String[] winningLotto) {
         try {
             return new Lotto(
-                    Arrays.stream(winLotto)
+                    Arrays.stream(winningLotto)
                             .map(String::trim)
                             .map(Integer::parseInt)
                             .map(LottoNumber::new)

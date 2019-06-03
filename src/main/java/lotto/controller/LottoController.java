@@ -14,6 +14,6 @@ public class LottoController {
         OutPutView.showLottoTicket(lottoTicket);
 
         String[] winNumber = InputView.InputWinLottoNumber();
-        OutPutView.showLottoResult(new LottoResult(lottoTicket, new WinningLotto(winNumber).getWinningLotto()));
+//        OutPutView.showLottoResult(new LottoResult(lottoTicket, new WinningLotto(winNumber).getWinningLotto()));
     }
 }
