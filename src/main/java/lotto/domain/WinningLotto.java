@@ -27,7 +27,7 @@ public class WinningLotto {
         return new WinningLotto(LottoTicket.createLottoTicket(convertedLottoNumbers));
     }
 
-    public Integer getMatchedWinningNumbersCount(LottoTicket lottoTicket){
+    public Integer getMatchedNumbersCount(LottoTicket lottoTicket) {
         return winningLotto.getMatchedNumbersCount(lottoTicket);
     }
 }

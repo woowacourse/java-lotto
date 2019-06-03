@@ -48,14 +48,16 @@ public class LottoTicket {
     public static LottoTicket createLottoTicket(List<LottoNumber> lottoNumbers) {
         return new LottoTicket(lottoNumbers);
     }
-    
+
     public List<LottoNumber> getLottoTicket() {
         return Collections.unmodifiableList(lottoTicket);
     }
 
-    public Integer getMatchedNumbersCount(LottoTicket userTicket){
-        List<LottoNumber> joinedTicketNumbers = Stream.concat(this.lottoTicket.stream()
-                , userTicket.lottoTicket.stream()).collect(Collectors.toList());
+    public Integer getMatchedNumbersCount(LottoTicket userTicket) {
+        List<LottoNumber> joinedTicketNumbers
+                = Stream.concat(this.lottoTicket.stream(), userTicket.lottoTicket.stream())
+                .collect(Collectors.toList());
+
         Set<LottoNumber> uniqueJoinedTicketNumbers = new HashSet<>(joinedTicketNumbers);
 
         return joinedTicketNumbers.size() - uniqueJoinedTicketNumbers.size();
