@@ -37,8 +37,7 @@ public class LottoQuantity {
         }
     }
 
-    public boolean decrease() {
-        quantity--;
-        return quantity >= 0;
+    public boolean biggerThan(int size) {
+        return quantity > size;
     }
 }

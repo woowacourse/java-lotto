@@ -14,12 +14,12 @@ public class OutputView {
     public static void printChange(PurchaseAmount purchaseAmount) {
         int change = purchaseAmount.available();
         if (change != 0) {
-            System.out.println("거스름 돈은 " + change + "원 입니다.");
+            System.out.format("\n거스름 돈은 %d원 입니다.\n", change);
         }
     }
 
     public static void printLottoTicketGroup(LottoTicketGroup manualLottos, LottoTicketGroup autoLottos) {
-        System.out.println("\n수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
+        System.out.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottos.size(), autoLottos.size());
         drawLottoTickets(manualLottos);
         drawLottoTickets(autoLottos);
         System.out.println();
@@ -38,7 +38,7 @@ public class OutputView {
         Collections.reverse(lottoRanks);
         lottoRanks.forEach(x -> drawRank(x, lottoResult.countOfRank(x)));
 
-        System.out.println("총 수익률은 " + lottoResult.earningRate() + "%입니다.");
+        System.out.format("총 수익률은 %.6f%%입니다.%n", lottoResult.earningRate());
     }
 
     private static void drawRank(LottoRank lottoRank, int countOfRank) {
