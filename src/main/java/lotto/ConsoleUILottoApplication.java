@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.InvalidLottoQuantityException;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoQuantity;
 import lotto.domain.lotto.*;
@@ -17,24 +16,19 @@ import java.util.List;
 
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
-        PurchaseAmount lottoPurchaseAmount = createLottoPurchaseAmount();
+        PurchaseAmount lottoPurchaseAmount = createPurchaseAmount();
 
-        LottoTicketGroup lottos = createLottos(lottoPurchaseAmount);
+        LottoQuantity autoLottoQuantity = lottoPurchaseAmount.maxLottoQuantity();
+        LottoQuantity manualLottoQuantity = createManualLottoQuantity(autoLottoQuantity);
+
+        LottoTicketGroup lottos = createLottos(manualLottoQuantity, autoLottoQuantity);
+        OutputView.printLottoTickets(lottos, manualLottoQuantity, autoLottoQuantity);
+
+        lottoPurchaseAmount.buy(lottos.price());
         OutputView.printChange(lottoPurchaseAmount);
 
         LottoResult lottoResult = new LottoResult(createWinningLotto(), lottos);
         OutputView.printLottoResult(lottoResult);
-    }
-
-    private static PurchaseAmount createLottoPurchaseAmount() {
-        PurchaseAmount lottoPurchaseAmount = createPurchaseAmount();
-
-        if (lottoPurchaseAmount.canBuy(LottoTicket.getPrice())) {
-            return lottoPurchaseAmount;
-        }
-
-        OutputView.printErrorMessage("로또를 구매할 수 없는 금액입니다.");
-        return createLottoPurchaseAmount();
     }
 
     private static PurchaseAmount createPurchaseAmount() {
@@ -46,35 +40,27 @@ public class ConsoleUILottoApplication {
         }
     }
 
-    private static LottoTicketGroup createLottos(PurchaseAmount purchaseAmount) {
-        LottoTicketGroup manualLottos = createManualLottos(createManualLottoQuantity(purchaseAmount));
-        purchaseAmount.buy(manualLottos.price());
+    private static LottoQuantity createManualLottoQuantity(LottoQuantity autoLottoQuantity) {
+        LottoQuantity manualLottoQuantity = LottoQuantity.create(InputView.inputManualLottoQuantity());
 
-        LottoTicketGroup autoLottos = LottoMachine.generateLottos(LottoQuantity.create(purchaseAmount));
-        purchaseAmount.buy(autoLottos.price());
-
-        OutputView.printLottoTicketGroup(manualLottos, autoLottos);
-
-        return manualLottos.combine(autoLottos);
-    }
-
-    private static LottoQuantity createManualLottoQuantity(PurchaseAmount purchaseAmount) {
-        try {
-            LottoQuantity manualLottoQuantity = LottoQuantity.create(InputView.inputManualLottoQuantity());
-            manualLottoQuantity.validateAvailable(purchaseAmount);
-            return manualLottoQuantity;
-        } catch (InvalidLottoQuantityException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return createManualLottoQuantity(purchaseAmount);
+        if (manualLottoQuantity.biggerThan(autoLottoQuantity)) {
+            OutputView.printErrorMessage("생성 가능 로또 개수보다 큽니다.");
+            return createManualLottoQuantity(autoLottoQuantity);
         }
+
+        autoLottoQuantity.subtract(manualLottoQuantity);
+        return manualLottoQuantity;
     }
 
-    private static LottoTicketGroup createManualLottos(LottoQuantity manualLottoQuantity) {
+    private static LottoTicketGroup createLottos(LottoQuantity manualLottoQuantity, LottoQuantity autoLottoQuantity) {
         try {
-            return LottoMachine.generateLottos(getManualLottosText(manualLottoQuantity));
+            LottoTicketGroup manualLottos = LottoMachine.generateLottos(getManualLottosText(manualLottoQuantity));
+            LottoTicketGroup autoLottos = LottoMachine.generateLottos(autoLottoQuantity);
+
+            return manualLottos.combine(autoLottos);
         } catch (InvalidLottoTicketException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return createManualLottos(manualLottoQuantity);
+            return createLottos(manualLottoQuantity, autoLottoQuantity);
         }
     }
 
