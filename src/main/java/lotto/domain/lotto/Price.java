@@ -13,26 +13,24 @@ public class Price {
 
     private int money;
 
-    public Price(String money){
+    public Price(String money) {
         this.money = checkValidatePrice(money);
     }
 
-    private int checkValidatePrice(String money){
+    private int checkValidatePrice(String money) {
         Matcher matcher = Pattern.compile(MONEY_PATTERN).matcher(money);
-        if(!matcher.find()){
+        if (!matcher.find()) {
             throw new InvalidLottoPrice("제대로 된 금액이 아닙니다.");
         }
-        if(Integer.parseInt(money) % LOTTO_PRICE != MIN_PRICE){
+        if (Integer.parseInt(money) % LOTTO_PRICE != MIN_PRICE) {
             throw new InvalidLottoPrice("1000원 단위로 입력해주세요.");
         }
-        if(Integer.parseInt(money) < MIN_PRICE){
-            throw new InvalidLottoPrice("음수가 나오면 안됩니다.");
-        }
+
         return Integer.parseInt(money);
     }
 
-    public int getNumberOfLotto(){
-        return money/LOTTO_PRICE;
+    public int getNumberOfLotto() {
+        return money / LOTTO_PRICE;
     }
 
     @Override

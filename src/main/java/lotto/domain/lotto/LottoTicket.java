@@ -12,9 +12,9 @@ public class LottoTicket {
     private int numberOfAutoLotto;
     private List<Lotto> lottos;
 
-    public LottoTicket(String money, List<String[]> customLottos) {
+    public LottoTicket(Price price, List<String[]> customLottos) {
         this.numberOfCustomLotto = customLottos.size();
-        this.numberOfAutoLotto = new Price(money).getNumberOfLotto() - this.numberOfCustomLotto;
+        this.numberOfAutoLotto = price.getNumberOfLotto() - this.numberOfCustomLotto;
         this.lottos = new ArrayList<>();
 
         createCustomLottoNumbers(customLottos);

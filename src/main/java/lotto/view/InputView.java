@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static lotto.view.OutPutView.ENTER;
@@ -13,14 +15,20 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String InputNumberOfCustomLotto(){
+    public static String InputNumberOfCustomLotto() {
         System.out.println(ENTER + "수동으로 구매할 로또 수를 입력해 주세요.");
         return scanner.nextLine();
     }
 
-    public static String[] InputCustomLottoNumber(){
+    public static List<String[]> InputCustomLottoNumber(int numberOfCustomLotto) {
         System.out.println(ENTER + "수동으로 구매할 번호를 입력해 주세요.");
-        return scanner.nextLine().split(SPLIT_REGEX);
+        List<String[]> customLottos = new ArrayList<>();
+
+        for (int i = 0; i < numberOfCustomLotto; i++) {
+            customLottos.add(scanner.nextLine().split(SPLIT_REGEX));
+        }
+
+        return customLottos;
     }
 
     public static String[] InputWinLottoNumber() {

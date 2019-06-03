@@ -19,12 +19,14 @@ public abstract class Lotto {
 
     protected List<LottoNumber> invalidNumberOfLotto(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> checkValidateNumber = new HashSet<>(lottoNumbers);
+
         if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER) {
             throw new InvalidLottoException("로또 범위는 6개여야 합니다.");
         }
         if (checkValidateNumber.size() != lottoNumbers.size()) {
             throw new InvalidWinnigLotto("중복된 숫자가 있습니다.");
         }
+
         return lottoNumbers;
     }
 

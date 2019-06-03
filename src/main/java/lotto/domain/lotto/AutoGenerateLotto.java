@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.util.AscendingNumber;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +18,7 @@ public class AutoGenerateLotto extends Lotto {
 
     public AutoGenerateLotto() {
         this.lottoNumbers = invalidNumberOfLotto(makeAutoLotto());
+        Collections.sort(lottoNumbers, new AscendingNumber());
     }
 
     private List<LottoNumber> makeAutoLotto() {

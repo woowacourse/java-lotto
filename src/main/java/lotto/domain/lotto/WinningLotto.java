@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.InvalidWinnigLotto;
+import lotto.util.AscendingNumber;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,16 +12,17 @@ public class WinningLotto extends Lotto {
 
     public WinningLotto(String[] inputWinLottoNumber, String bonusBall) {
         this.lottoNumbers = invalidWinLottoNumber(inputWinLottoNumber);
+        Collections.sort(lottoNumbers, new AscendingNumber());
         this.bonusBall = new BonusBall(this.lottoNumbers, bonusBall);
     }
 
     private List<LottoNumber> invalidWinLottoNumber(String[] winningLotto) {
         try {
             return invalidNumberOfLotto(Arrays.stream(winningLotto)
-                            .map(String::trim)
-                            .map(Integer::parseInt)
-                            .map(LottoNumber::new)
-                            .collect(Collectors.toList()));
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toList()));
         } catch (NumberFormatException e) {
             throw new InvalidWinnigLotto("정수외의 문자가 입력되었습니다.");
         } catch (InputMismatchException e) {
