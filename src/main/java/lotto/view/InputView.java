@@ -18,8 +18,6 @@ public class InputView {
     private static final String INPUT_MANUAL = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String EX_USER_PRICE_FORMAT_MESSAGE = "1000 이상의 숫자만 입력해주세요.";
     private static final String EX_MANUAL_COUNT_RANGE_MESSAGE = "0 이상의 구입 금액을 초과하지 않는 숫자를 입력해주세요(로또는 한장에 1000원입니다.)";
-    private static final int MIN_USER_PRICE_RANGE = 1000;
-    private static final int ONE_LOTTO_PRICE = MIN_USER_PRICE_RANGE;
     private static final String EX_LOTTO_FORMAT_RANGE_MESSAGE = "1~45 사이의 숫자를 입력해주세요";
     private static final String EX_LOTTO_RE_INPUT_MESSAGE = " 다시 입력해주세요";
 
@@ -27,16 +25,6 @@ public class InputView {
     public static final String REGEX_BLANK = " ";
     public static final String REPLACEMENT_EMPTY = "";
     public static final String REGEX_COMMA = ",";
-    private static Lotteries lotteries;
-    private static Winner winner;
-
-    public void setLotteries(Lotteries lotteries) {
-        this.lotteries = lotteries;
-    }
-
-    public void setWinner(Winner winner) {
-        this.winner = winner;
-    }
 
     public static Money generateInvalidUserPrice() {
         try {
@@ -65,26 +53,21 @@ public class InputView {
         }
     }
 
-    private static void checkManualCount(double manualCount, double userPrice) {
-        if (manualCount * ONE_LOTTO_PRICE > userPrice || manualCount < 0) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public static void generateInvalidLotto() {
+    public static Lotteries generateInvalidLotto(Lotteries lotteries) {
         try {
-            List<Integer> lottoNumbers = generateLottoNumbers(inputByUser());
+            List<Integer> lottoNumbers = generateNoFormatLottoNumbers(inputByUser());
             lotteries.addNoFormedLotto(lottoNumbers);
+            return lotteries;
         } catch (NumberFormatException e) {
             System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
-            generateInvalidLotto();
+            return generateInvalidLotto(lotteries);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage() + EX_LOTTO_RE_INPUT_MESSAGE);
-            generateInvalidLotto();
+            return generateInvalidLotto(lotteries);
         }
     }
 
-    private static List<Integer> generateLottoNumbers(String inputByUser) {
+    private static List<Integer> generateNoFormatLottoNumbers(String inputByUser) {
         List<Integer> lottoNumbers = new ArrayList<>();
         List<String> lotteries = Arrays.asList(inputByUser.replaceAll(REGEX_BLANK, REPLACEMENT_EMPTY).split(REGEX_COMMA));
         for (String lotto : lotteries) {
@@ -93,30 +76,31 @@ public class InputView {
         return lottoNumbers;
     }
 
-    public static void generateInvalidWinLotto() {
+    public static Winner generateInvalidWinLotto(Winner winner) {
         try {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            winner.customWinLotto(generateLottoNumbers(inputByUser()));
+            winner.customWinLotto(generateNoFormatLottoNumbers(inputByUser()));
+            return winner;
         } catch (NumberFormatException e) {
             System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
-            generateInvalidLotto();
+            return generateInvalidWinLotto(winner);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            generateInvalidWinLotto();
+            return generateInvalidWinLotto(winner);
         }
     }
 
-    public Winner generateInvalidWinBonus() {
+    public static Winner generateInvalidWinBonus(Winner winner) {
         try {
             System.out.println("보너스 번호를 입력해 주세요.");
             winner.customWinBonus(Integer.parseInt(inputByUser()));
             return winner;
         } catch (NumberFormatException e) {
             System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
-            return generateInvalidWinBonus();
+            return generateInvalidWinBonus(winner);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return generateInvalidWinBonus();
+            return generateInvalidWinBonus(winner);
         }
     }
 }

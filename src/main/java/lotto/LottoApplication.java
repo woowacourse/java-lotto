@@ -14,32 +14,12 @@ public class LottoApplication {
     private static Lotteries lotteries;
     private static Winner winner;
     private static Money money;
-    private static final InputView inputView = new InputView();
-    private static final OutputView outputView = new OutputView();
 
     public static void main(String[] args) {
         assembler();
 
         generateLotteries();
         generateRank();
-    }
-
-    private static void generateLotteries() {
-        money = inputView.generateInvalidUserPrice();
-        long manualCount = inputView.generateInvalidManualCount(money);
-        generateManualLotto(manualCount);
-        long autoCount = money.calculateAutoCount(manualCount);
-        outputView.outputUserBuyLottoCount(manualCount, autoCount);
-        lotteries.addNewLotteries(autoCount);
-    }
-
-    private static void generateRank() {
-        outputView.outputAutoLotteries();
-        inputView.generateInvalidWinLotto();
-        winner = inputView.generateInvalidWinBonus();
-        RankResult rankResult = new RankResult(lotteries, winner, money);
-        outputView.outputLotteriesResult(rankResult.getRankResult());
-        outputView.outputLotteriesRate(rankResult.getRate());
     }
 
     private static void assembler() {
@@ -49,10 +29,24 @@ public class LottoApplication {
         lotteries = new Lotteries(lottoType);
         winner = new Winner();
         winner.setCustomLotto(new DefaultCustomLotto());
+    }
 
-        inputView.setLotteries(lotteries);
-        inputView.setWinner(winner);
-        outputView.setLotteries(lotteries);
+    private static void generateLotteries() {
+        money = InputView.generateInvalidUserPrice();
+        long manualCount = InputView.generateInvalidManualCount(money);
+        generateManualLotto(manualCount);
+        long autoCount = money.calculateAutoCount(manualCount);
+        OutputView.outputUserBuyLottoCount(manualCount, autoCount);
+        lotteries.addNewLotteries(autoCount);
+    }
+
+    private static void generateRank() {
+        OutputView.outputAutoLotteries(lotteries);
+        winner = InputView.generateInvalidWinLotto(winner);
+        winner = InputView.generateInvalidWinBonus(winner);
+        RankResult rankResult = new RankResult(lotteries, winner, money);
+        OutputView.outputLotteriesResult(rankResult.getRankResult());
+        OutputView.outputLotteriesRate(rankResult.getRate());
     }
 
     private static void generateManualLotto(long manualCount) {
@@ -62,9 +56,9 @@ public class LottoApplication {
     }
 
     private static void generateInvalidManualLotto(long manualCount) {
-        outputView.titleInputAutoLotto();
+        OutputView.titleInputAutoLotto();
         for (int i = 0; i < manualCount; i++) {
-            inputView.generateInvalidLotto();
+            lotteries = InputView.generateInvalidLotto(lotteries);
         }
     }
 }

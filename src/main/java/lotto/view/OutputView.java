@@ -4,6 +4,7 @@ import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -16,11 +17,6 @@ public class OutputView {
     public static final String START_SYMBOL = "[";
     public static final String END_SYMBOL = "]";
     public static final String SEPARATOR = ",";
-    private static Lotteries lotteries;
-
-    public void setLotteries(Lotteries lotteries) {
-        this.lotteries = lotteries;
-    }
 
     public static void outputUserBuyLottoCount(long manualCount, long autoCount) {
         System.out.printf(OUTPUT_BUY_LOTTO_COUNT, manualCount, autoCount);
@@ -30,34 +26,31 @@ public class OutputView {
         System.out.println(TITLE_INPUT_AUTO_LOTTO);
     }
 
-    public static void outputAutoLotteries() {
+    public static void outputAutoLotteries(Lotteries lotteries) {
         for (Lotto lotto : lotteries) {
             System.out.println(lotto.toStringWithFormat(START_SYMBOL, END_SYMBOL, SEPARATOR));
         }
     }
 
-    public void outputLotteriesResult(Map<Rank, Integer> rankResult) {
+    public static void outputLotteriesResult(Map<Rank, Integer> rankResult) {
         System.out.println("\n당첨 통계\n---------");
         for (Map.Entry<Rank, Integer> rankIntegerEntry : rankResult.entrySet()) {
             generateResultSentence(rankIntegerEntry.getKey(), rankIntegerEntry.getValue());
         }
     }
 
-    private void generateResultSentence(Rank rank, int matchCount) {
+    private static void generateResultSentence(Rank rank, int matchCount) {
         if (rank.equals(Rank.MISS)) {
             return;
         }
         if (rank.equals(Rank.SECOND)) {
             System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개", rank.getCountOfMatch(), rank.getWinningMoney(), matchCount));
+            return;
         }
         System.out.println(String.format("%d개 일치 (%d)- %d개", rank.getCountOfMatch(), rank.getWinningMoney(), matchCount));
     }
 
     public static void outputLotteriesRate(float rate) {
         System.out.println(String.format("총 수익률은 %.3f입니다.", rate));
-    }
-
-    public static void main(String[] args) {
-        outputLotteriesRate(15.3235f);
     }
 }
