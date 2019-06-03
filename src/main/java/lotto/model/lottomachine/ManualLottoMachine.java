@@ -1,5 +1,8 @@
-package lotto.model;
+package lotto.model.lottomachine;
 
+
+import lotto.model.Lotto;
+import lotto.model.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;

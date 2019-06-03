@@ -1,5 +1,9 @@
 package lotto.model;
 
+import lotto.model.lottomachine.AutomaticLottoMachine;
+import lotto.model.lottomachine.LottoMachine;
+import lotto.model.lottomachine.ManualLottoMachine;
+
 import java.util.List;
 
 public class LottoService {
