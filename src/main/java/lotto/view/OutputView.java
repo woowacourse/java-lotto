@@ -1,17 +1,14 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.LottoResult;
-import lotto.model.Lottos;
-import lotto.model.Prize;
+import lotto.model.*;
 
 public class OutputView {
 
 
-    public static void printLottos(Lottos manualLottos, Lottos automaticLottos) {
-        System.out.println("수동으로 " + manualLottos.size() + " 자동으로 " + automaticLottos.size() + " 를 구매했습니다!");
-        printLottos(manualLottos);
-        printLottos(automaticLottos);
+    public static void printLottos(Money money, ManualLottoCount manualLottoCount, Lottos lottos) {
+        int manualCount = manualLottoCount.getCount();
+        System.out.println("수동으로 " + manualCount + " 자동으로 " + money.calculateAutomatiLottoCount(manualCount) + " 를 구매했습니다!");
+        printLottos(lottos);
     }
 
     private static void printLottos(Lottos lottos) {

@@ -10,26 +10,14 @@ import java.util.List;
 public class LottoLauncher {
 
     public static void main(String[] args) {
-        //1
         Money money = generateMoney();
-
-        //2
         ManualLottoCount manualLottoCount = generateManualLottoCount(money);
+        Lottos lottos = Wallet.buyLottos(money, prepareManualLottos(manualLottoCount));
 
-        //3
-        LottoMachine manualLottoMachine = generateManualLottoMachine(manualLottoCount);
-        LottoMachine automaticLottoMachine = new AutomaticLottoMachine(money, manualLottoCount);
-        Lottos manualLottos = generateLottos(manualLottoMachine);
-        Lottos automaticLottos = generateLottos(automaticLottoMachine);
+        OutputView.printLottos(money, manualLottoCount, lottos);
 
-        //4
-        OutputView.printLottos(manualLottos, automaticLottos);
-
-        //5
         WinningLotto winningLotto = generateWinningLotto();
-
-        Lottos totalLottos = manualLottos.append(automaticLottos);
-        LottoResult lottoResult = new LottoResult(money, totalLottos.getPrizes(winningLotto));
+        LottoResult lottoResult = new LottoResult(money, lottos.getPrizes(winningLotto));
 
         OutputView.printStatistics(lottoResult);
     }
@@ -45,12 +33,18 @@ public class LottoLauncher {
     }
 
     private static List<Lotto> prepareManualLottos(ManualLottoCount manualLottoCount) {
-        List<Lotto> manualLottos = new ArrayList<>();
-        int count = manualLottoCount.getCount();
-        for (int i = 0; i < count; i++) {
-            manualLottos.add(new Lotto(InputView.askManualLottoNumbers()));
+        try {
+            List<Lotto> manualLottos = new ArrayList<>();
+            int count = manualLottoCount.getCount();
+            for (int i = 0; i < count; i++) {
+                manualLottos.add(new Lotto(InputView.askManualLottoNumbers()));
+            }
+            return manualLottos;
+        } catch (Exception e) {
+            System.out.println("수동로또 입력값중 잘못된 부분이 있습니다!");
+            return prepareManualLottos(manualLottoCount);
         }
-        return manualLottos;
+
     }
 
     private static WinningLotto generateWinningLotto() {

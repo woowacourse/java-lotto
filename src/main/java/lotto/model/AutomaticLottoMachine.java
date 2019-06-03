@@ -13,8 +13,8 @@ public class AutomaticLottoMachine implements LottoMachine{
 
     private final int automaticLottoCount;
 
-    public AutomaticLottoMachine(Money money, ManualLottoCount manualLottoCount) {
-        this.automaticLottoCount = money.calculateAutomatiLottoCount(manualLottoCount.getCount());
+    public AutomaticLottoMachine(Money money, int manualLottoCount) {
+        this.automaticLottoCount = money.calculateAutomatiLottoCount(manualLottoCount);
     }
     @Override
     public Lottos generateLottos() {
