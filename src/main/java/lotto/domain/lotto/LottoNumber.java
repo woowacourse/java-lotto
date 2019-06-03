@@ -14,19 +14,20 @@ public class LottoNumber {
         }
     }
 
-    public static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        List<LottoNumber> returnList = new ArrayList<>();
-        for (int i = 0, n = numbers.size(); i < n; i++) {
-            returnList.add(lottoNumbers.get(numbers.get(i)));
-        }
-        return returnList;
-    }
-
     public LottoNumber(int number) throws IllegalLottoNumberException {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
             throw new IllegalLottoNumberException();
         }
         this.number = number;
+    }
+
+    public static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> returnList = new ArrayList<>();
+        for (int number : numbers
+             ) {
+            returnList.add(lottoNumbers.get(number));
+        }
+        return returnList;
     }
 
     @Override
