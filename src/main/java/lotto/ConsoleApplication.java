@@ -1,12 +1,10 @@
 package lotto;
 
-import lotto.Utils.NumbersSplitter;
 import lotto.domain.*;
 import lotto.domain.LottoNumber;
+import lotto.domain.generator.ManualLottoNumbersGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.List;
 
 public class ConsoleApplication {
     public static void main(String[] args) {
@@ -39,7 +37,7 @@ public class ConsoleApplication {
     private static void registerManualLottosNumbers(PurchaseInformation purchaseInformation) {
         OutputView.requestManualLottosMessage();
         for (int i = 0; i < purchaseInformation.getManualLottoCount(); i++) {
-            purchaseInformation.addManualLottoNumbers(makeLottoNumbers());
+            purchaseInformation.addManualLottoNumbers(InputView.inputLottoNumbers());
         }
     }
 
@@ -53,28 +51,16 @@ public class ConsoleApplication {
 
     private static LottoGame setUpLottoGame() {
         OutputView.requestWinningNumbersMessage();
-
         try {
-            LottoNumbers winningNumbers = makeLottoNumbers();
+            ManualLottoNumbersGenerator manualLottoNumbersGenerator = ManualLottoNumbersGenerator.getInstance();
+            manualLottoNumbersGenerator.register(InputView.inputLottoNumbers());
+            LottoNumbers winningNumbers = manualLottoNumbersGenerator.generate();
             LottoNumber bonusNumber = LottoNumber.valueOf(InputView.inputBonusBall());
             WinningInformation winningInformation = new WinningInformation(winningNumbers, bonusNumber);
             return new LottoGame(winningInformation);
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return setUpLottoGame();
-        }
-    }
-
-    private static LottoNumbers makeLottoNumbers() {
-        try {
-            List<Integer> inputNumbers = NumbersSplitter.splitNumbers(InputView.inputLottoNumbers());
-            return LottoNumbersGenerator.getLottoNumbers(inputNumbers);
-        } catch (NumberFormatException e) {
-            System.err.println("올바른 수를 입력해 주세요.");
-            return makeLottoNumbers();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return makeLottoNumbers();
         }
     }
 }

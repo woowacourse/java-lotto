@@ -1,9 +1,12 @@
-package lotto.domain;
+package lotto.domain.generator;
+
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class LottoNumbersGenerator {
+public class AutoLottoNumbersGenerator implements LottoNumbersGenerator {
+    private static final AutoLottoNumbersGenerator INSTANCE = new AutoLottoNumbersGenerator();
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int SUBLIST_LOWER_BOUND = 0;
@@ -16,19 +19,17 @@ public class LottoNumbersGenerator {
         }
     }
 
-    private LottoNumbersGenerator() {
-        throw new AssertionError();
+    private AutoLottoNumbersGenerator() {
     }
 
-    public static LottoNumbers getLottoNumbers() {
+    public static AutoLottoNumbersGenerator getInstance() {
+        return INSTANCE;
+    }
+
+    @Override
+    public LottoNumbers generate() {
         Collections.shuffle(totalLottoNumbers, new Random());
         return new LottoNumbers(new ArrayList<>(
                 totalLottoNumbers.subList(SUBLIST_LOWER_BOUND, SUBLIST_UPPER_BOUND)));
-    }
-
-    public static LottoNumbers getLottoNumbers(List<Integer> numbers) {
-        return new LottoNumbers(numbers.stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList()));
     }
 }

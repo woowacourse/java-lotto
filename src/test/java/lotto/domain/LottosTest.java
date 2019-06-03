@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.generator.AutoLottoNumbersGenerator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -7,10 +9,17 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
+    AutoLottoNumbersGenerator autoLottoNumbersGenerator;
+
+    @BeforeEach
+    void setUp() {
+        autoLottoNumbersGenerator = AutoLottoNumbersGenerator.getInstance();
+    }
+
     @Test
     void 추가() {
-        Lotto lotto = new Lotto(LottoNumbersGenerator.getLottoNumbers());
-        Lotto lotto1 = new Lotto(LottoNumbersGenerator.getLottoNumbers());
+        Lotto lotto = new Lotto(autoLottoNumbersGenerator.generate());
+        Lotto lotto1 = new Lotto(autoLottoNumbersGenerator.generate());
 
         Lottos lottos = new Lottos();
         lottos.add(lotto);
@@ -21,8 +30,8 @@ public class LottosTest {
 
     @Test
     void 다른_Lottos를_추가() {
-        Lotto lotto = new Lotto(LottoNumbersGenerator.getLottoNumbers());
-        Lotto lotto1 = new Lotto(LottoNumbersGenerator.getLottoNumbers());
+        Lotto lotto = new Lotto(autoLottoNumbersGenerator.generate());
+        Lotto lotto1 = new Lotto(autoLottoNumbersGenerator.generate());
 
         Lottos lottos = new Lottos();
         lottos.add(lotto);

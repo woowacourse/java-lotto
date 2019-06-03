@@ -1,12 +1,14 @@
 package lotto.domain;
 
+import lotto.exception.InvalidPurchaseInformationException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class PurchaseInformation {
     private final LottoCount lottoCount;
-    private final List<LottoNumbers> manualLottosNumbers;
+    private final List<String> manualLottosNumbers;
 
     public PurchaseInformation(final LottoCount lottoCount) {
         this.lottoCount = lottoCount;
@@ -21,11 +23,11 @@ public class PurchaseInformation {
         return lottoCount.getManualLottoCount();
     }
 
-    public List<LottoNumbers> getManualLottosNumbers() {
+    public List<String> getManualLottosNumbers() {
         return Collections.unmodifiableList(manualLottosNumbers);
     }
 
-    public void addManualLottoNumbers(final LottoNumbers lottoNumbers) {
+    public void addManualLottoNumbers(final String lottoNumbers) {
         manualLottosNumbers.add(lottoNumbers);
     }
 
@@ -33,7 +35,9 @@ public class PurchaseInformation {
         return lottoCount.hasManualLottos();
     }
 
-    public boolean isValidPurchaseInformation() {
-        return lottoCount.isEqualManualLottoCount(manualLottosNumbers.size());
+    public void checkValidPurchaseInformation() {
+        if (!lottoCount.isEqualManualLottoCount(manualLottosNumbers.size())) {
+            throw new InvalidPurchaseInformationException("수동 로또 정보가 올바르지 않습니다.");
+        }
     }
 }

@@ -10,7 +10,7 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
-    LottoNumbers(final List<LottoNumber> lottoNumbers) {
+    public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         checkNumberOfLottoNumbers(lottoNumbers);
         checkDuplicate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
