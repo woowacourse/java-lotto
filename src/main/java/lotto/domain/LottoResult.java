@@ -25,8 +25,8 @@ public class LottoResult {
         }
     }
 
-    public Map<Rank, Integer> getResults() {
-        return Collections.unmodifiableMap(this.results);
+    public int getCountOfRanker(Rank rank) {
+        return results.get(rank);
     }
 
     public double findYield(int price) {
@@ -34,11 +34,9 @@ public class LottoResult {
     }
 
     private double findWinningMoney() {
-        long winningMoney = 0;
-        for (Rank rank : Rank.values()) {
-            winningMoney += (rank.getWinningMoney()) * results.get(rank);
-        }
-        return winningMoney;
+        return Arrays.stream(Rank.values())
+                .mapToLong(rank -> rank.getWinningMoney() * results.get(rank))
+                .sum();
     }
 
     @Override
@@ -53,4 +51,6 @@ public class LottoResult {
     public int hashCode() {
         return Objects.hash(results);
     }
+
+
 }

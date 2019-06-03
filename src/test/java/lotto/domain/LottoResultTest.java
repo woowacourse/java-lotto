@@ -10,16 +10,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoResultTest {
-    Lotto lotto;
-    Lottos lottos;
-    WinningLotto winningLotto;
-    LottoResult lottoResult;
+    private Lotto lotto;
+    private Lottos lottos;
+    private WinningLotto winningLotto;
+    private LottoResult lottoResult;
 
     @BeforeEach
     void setUp() {
         lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottos = new Lottos(Arrays.asList(lotto));
-        winningLotto = new WinningLotto(lotto, LottoNumber.of(7));
+        winningLotto = new WinningLotto(lotto, LottoNumber.valueOf(7));
         lottoResult = LottoResult.generateLottoResult(lottos, winningLotto);
     }
 

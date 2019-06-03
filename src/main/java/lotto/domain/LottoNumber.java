@@ -2,29 +2,37 @@ package lotto.domain;
 
 import lotto.exception.NumberValidException;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
-    private static Map<Integer, LottoNumber> numbers = new HashMap<>();
-    private int number;
+    private final int number;
 
-    LottoNumber(int number) {
-        if (number >= MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER) {
+    private LottoNumber(final int number) {
+        if (number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER) {
             throw new NumberValidException("로또번호에 해당되지 않는 숫자입니다.");
         }
         this.number = number;
     }
 
-    static LottoNumber of(int number) {
-        if (!numbers.containsKey(number)) {
-            numbers.put(number, new LottoNumber(number));
+    static LottoNumber valueOf(int number) {
+        return LottoNumbers.lottoNumbers.get(number - 1);
+    }
+
+    private static class LottoNumbers {
+        private static List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        static {
+            IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                    .boxed()
+                    .forEach(number -> lottoNumbers.add(new LottoNumber(number)));
         }
-        return numbers.get(number);
+
     }
 
     @Override
@@ -36,14 +44,14 @@ public class LottoNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber lottoNumber1 = (LottoNumber) o;
-        return number == lottoNumber1.number;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(number);
     }
-
-
 }
+
+

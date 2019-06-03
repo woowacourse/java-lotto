@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.exception.BonusBallValidException;
 import lotto.utils.Converter;
-import lotto.view.InputView;
 
 import java.util.Objects;
 
@@ -24,7 +23,7 @@ public class WinningLotto {
 
     public static WinningLotto generateWinningLotto(String winningInput, int bonusInput) {
         Lotto lotto = new Lotto(Converter.convertNumbers(winningInput));
-        return new WinningLotto(lotto, LottoNumber.of(bonusInput));
+        return new WinningLotto(lotto, LottoNumber.valueOf(bonusInput));
     }
 
     Rank matchLotto(Lotto lotto) {

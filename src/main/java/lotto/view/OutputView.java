@@ -1,37 +1,37 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
 import java.util.List;
-import java.util.Map;
 
 import static lotto.domain.Rank.MISS;
 import static lotto.domain.Rank.SECOND;
 
 public class OutputView {
 
-    public static void printLottos(List<Lotto> lottos, int selfSize) {
-        System.out.println("수동으로 " + selfSize + "장, 자동으로 " + (lottos.size() - selfSize) + "개를 구매했습니다.");
+    public static void printLottos(List<Lotto> lottos, int countOfSelf) {
+        System.out.println("수동으로 " + countOfSelf + "장, 자동으로 " + (lottos.size() - countOfSelf) + "개를 구매했습니다.");
         lottos.stream().forEach(lotto -> System.out.println(lotto));
     }
 
-    public static void printStatistic(Map<Rank, Integer> results) {
+    public static void printStatistic(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        for (Rank rank : results.keySet()) {
-            printResult(rank, results);
+        for (Rank rank : Rank.values()) {
+            System.out.printf(printResult(rank), rank.getCountOfMatch(), rank.getWinningMoney(), lottoResult.getCountOfRanker(rank));
         }
     }
 
-    private static void printResult(Rank rank, Map<Rank, Integer> results) {
-        if (rank == MISS) return;
-
-        if (rank == SECOND) {
-            System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(), results.get(rank));
-            return;
+    private static String printResult(Rank rank) {
+        if (rank == MISS) {
+            return "";
         }
-        System.out.printf("%d개 일치(%d원) - %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(), results.get(rank));
+        if (rank == SECOND) {
+            return "%d개 일치, 보너스 볼 일치(%d원) - %d개\n";
+        }
+        return "%d개 일치(%d원) - %d개\n";
 
     }
 

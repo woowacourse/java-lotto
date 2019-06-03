@@ -1,4 +1,4 @@
-# java-lotto
+# java-lottoNumbers
 
 # 기능 구현목록
 - 사용자는 로또구입금액을 입력한다. -> InputView

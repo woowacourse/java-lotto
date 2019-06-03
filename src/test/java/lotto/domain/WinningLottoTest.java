@@ -18,7 +18,7 @@ public class WinningLottoTest {
     @BeforeEach
     void setUp() {
         winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        winningLotto = new WinningLotto(winningNumbers, LottoNumber.of(7));
+        winningLotto = new WinningLotto(winningNumbers, LottoNumber.valueOf(7));
     }
 
     @Test
@@ -29,7 +29,7 @@ public class WinningLottoTest {
     @Test
     void 보너스볼_중복_예외() {
         assertThrows(BonusBallValidException.class, () -> {
-            new WinningLotto(winningNumbers, LottoNumber.of(6));
+            new WinningLotto(winningNumbers, LottoNumber.valueOf(6));
         });
     }
 
