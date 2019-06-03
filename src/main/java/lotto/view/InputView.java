@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotteries;
+import lotto.domain.Money;
 import lotto.domain.Winner;
 
 import java.util.ArrayList;
@@ -37,12 +38,11 @@ public class InputView {
         this.winner = winner;
     }
 
-    public static long generateInvalidUserPrice() {
+    public static Money generateInvalidUserPrice() {
         try {
             System.out.println(INPUT_PRICE);
             long price = Long.parseLong(inputByUser());
-            checkUserPrice(price);
-            return price;
+            return new Money(price);
         } catch (Exception e) {
             System.out.println(EX_USER_PRICE_FORMAT_MESSAGE);
             return generateInvalidUserPrice();
@@ -53,21 +53,15 @@ public class InputView {
         return SCANNER.nextLine().trim();
     }
 
-    private static void checkUserPrice(double price) {
-        if (price < MIN_USER_PRICE_RANGE) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public static long generateInvalidManualCount(double userPrice) {
+    public static long generateInvalidManualCount(Money money) {
         try {
             System.out.println(INPUT_MANUAL);
             long manualCount = Long.parseLong(inputByUser());
-            checkManualCount(manualCount, userPrice);
+            money.checkManualCount(manualCount);
             return manualCount;
         } catch (Exception e) {
             System.out.println(EX_MANUAL_COUNT_RANGE_MESSAGE);
-            return generateInvalidManualCount(userPrice);
+            return generateInvalidManualCount(money);
         }
     }
 

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author heebg
@@ -36,5 +37,26 @@ public class Winner {
 
     public boolean matchBonus(Lotto lotto) {
         return lotto.contains(winBonus);
+    }
+
+    public Rank generateRank(Lotto lotto) {
+        return Rank.valueOf(matchLottoCount(lotto), matchBonus(lotto));
+    }
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Winner winner = (Winner) o;
+        return Objects.equals(customLotto, winner.customLotto) &&
+                Objects.equals(winLotto, winner.winLotto) &&
+                Objects.equals(winBonus, winner.winBonus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winLotto, winBonus);
     }
 }
