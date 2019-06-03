@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.generator.AutoLottoNumbersGenerator;
 import lotto.domain.generator.LottoNumbersGenerator;
 import lotto.domain.generator.ManualLottoNumbersGenerator;
+import lotto.utils.NumbersSplitter;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class LottoMachine {
     }
 
     private static Lotto generateManualLotto(String numbers) {
-        return new Lotto(ManualLottoNumbersGenerator.getInstance(numbers).generate());
+        return new Lotto(ManualLottoNumbersGenerator.getInstance(NumbersSplitter.split(numbers)).generate());
     }
 
     private static Lottos buyAutoLottos(final int count) {

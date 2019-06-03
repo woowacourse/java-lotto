@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.domain.LottoNumber;
 import lotto.domain.generator.LottoNumbersGenerator;
 import lotto.domain.generator.ManualLottoNumbersGenerator;
+import lotto.utils.NumbersSplitter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -56,7 +57,7 @@ public class ConsoleApplication {
         OutputView.requestWinningNumbersMessage();
 
         LottoNumbersGenerator manualLottoNumbersGenerator =
-                ManualLottoNumbersGenerator.getInstance(InputView.inputLottoNumbers());
+                ManualLottoNumbersGenerator.getInstance(NumbersSplitter.split(InputView.inputLottoNumbers()));
         LottoNumbers winningNumbers = manualLottoNumbersGenerator.generate();
 
         LottoNumber bonusNumber = LottoNumber.valueOf(InputView.inputBonusBall());

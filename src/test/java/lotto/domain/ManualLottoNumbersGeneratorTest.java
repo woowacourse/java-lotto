@@ -23,7 +23,7 @@ public class ManualLottoNumbersGeneratorTest {
                 LottoNumber.valueOf(5),
                 LottoNumber.valueOf(6)));
         LottoNumbersGenerator manualLottoNumbersGenerator =
-                ManualLottoNumbersGenerator.getInstance("1,2,3,4,5,6");
+                ManualLottoNumbersGenerator.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(manualLottoNumbersGenerator.generate()).isEqualTo(lottoNumbers);
     }
@@ -31,7 +31,7 @@ public class ManualLottoNumbersGeneratorTest {
     @Test
     void 입력한_번호가_1미만인_경우() {
         LottoNumbersGenerator manualLottoNumbersGenerator =
-                ManualLottoNumbersGenerator.getInstance("0, 2, 3, 4, 5, 45");
+                ManualLottoNumbersGenerator.getInstance(Arrays.asList(0, 2, 3, 4, 5, 45));
         assertThrows(OutOfLottoNumberBoundException.class, () ->
                 manualLottoNumbersGenerator.generate());
     }
@@ -39,16 +39,8 @@ public class ManualLottoNumbersGeneratorTest {
     @Test
     void 입력한_번호가_45초과인_경우() {
         LottoNumbersGenerator manualLottoNumbersGenerator =
-                ManualLottoNumbersGenerator.getInstance("1, 2, 3, 4, 5, 46");
+                ManualLottoNumbersGenerator.getInstance(Arrays.asList(1, 2, 3, 4, 5, 46));
         assertThrows(OutOfLottoNumberBoundException.class, () ->
-                manualLottoNumbersGenerator.generate());
-    }
-
-    @Test
-    void 입력한_번호가_숫자가_아닌_경우() {
-        LottoNumbersGenerator manualLottoNumbersGenerator =
-                ManualLottoNumbersGenerator.getInstance("a, 2, 3, 4, 5, 45");
-        assertThrows(NumberFormatException.class, () ->
                 manualLottoNumbersGenerator.generate());
     }
 
