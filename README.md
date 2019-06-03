@@ -39,4 +39,5 @@
 - ~~add more tests~~
 - ~~validate money in LottoBuyingMoney class~~
 - ~~create Money class and make LottoBuyingMoney extends it~~
-- create LottoCount class
+- ~~create LottoCount class~~
+- add more tests for new classes
