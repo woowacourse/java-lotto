@@ -30,7 +30,7 @@ public class LottosGenerator {
     public List<Lotto> generate() {
         List<Lotto> lottos = new ArrayList<>();
         addManualLotto(lottos);
-        addAutoLotto(lottos);
+        addAutoLotto(lottos, countOfAuto(lottos));
         return lottos;
     }
 
@@ -41,12 +41,15 @@ public class LottosGenerator {
         }
     }
 
-    private void addAutoLotto(final List<Lotto> lottos) {
+    private void addAutoLotto(final List<Lotto> lottos, int countOfAuto) {
         LottoNosGenerator lottoNosGenerator = new LottoNosAutoGenerator();
-        int countOfAuto = countOfPurchase - lottos.size();
         for (int i = 0; i < countOfAuto; i++) {
             List<LottoNo> lottoNos = lottoNosGenerator.generate();
             lottos.add(Lotto.of(lottoNos));
         }
+    }
+
+    private int countOfAuto(final List<Lotto> lottos) {
+        return countOfPurchase - lottos.size();
     }
 }
