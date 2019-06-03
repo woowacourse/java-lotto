@@ -49,6 +49,13 @@ public class ManualLottoNumbersGeneratorTest {
     }
 
     @Test
+    void 입력한_번호가_숫자가_아닌_경우() {
+        manualLottoNumbersGenerator.register("a, 2, 3, 4, 5, 46");
+        assertThrows(NumberFormatException.class, () ->
+                manualLottoNumbersGenerator.generate());
+    }
+
+    @Test
     void 번호가_등록되지_않은_상태에서_생성하려는_경우() {
         assertThrows(NotRegisteredNumbersException.class, () ->
                 manualLottoNumbersGenerator.generate());

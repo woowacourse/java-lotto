@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import lotto.exception.DuplicateBonusBallException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WinningInformationTest {
     @Test
@@ -137,5 +139,20 @@ public class WinningInformationTest {
                 LottoNumber.valueOf(10));
 
         assertThat(winningInformation.match(lotto)).isEqualTo(Rank.MISS);
+    }
+
+    @Test
+    void 보너스_볼과_당첨번호가_겹치는_경우() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
+        LottoNumber bonusBall = LottoNumber.valueOf(3);
+
+        assertThrows(DuplicateBonusBallException.class, () ->
+                new WinningInformation(lottoNumbers, bonusBall));
     }
 }
