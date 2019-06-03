@@ -22,12 +22,12 @@ public class LottoTickets {
     }
 
     public Map<Rank, Integer> countRanksWith(LottoTicket winningLotto) {
-        Map<Rank, Integer> countedRanks = Rank.getInitializedCounts();
+        Map<Rank, Integer> rankCounts = Rank.getInitializedCounts();
         for (LottoTicket ticket : tickets) {
             Rank rank = ticket.match(winningLotto);
-            countedRanks.put(rank, countedRanks.get(rank) + 1);
+            rankCounts.put(rank, rankCounts.get(rank) + 1);
         }
-        return countedRanks;
+        return rankCounts;
     }
 
     @Override

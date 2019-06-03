@@ -1,9 +1,9 @@
 package lotto.view;
 
 import lotto.domain.LottoResult;
+import lotto.domain.Rank;
 import lotto.domain.lottoseller.LottoSeller;
 import lotto.domain.lottoticket.LottoTickets;
-import lotto.domain.Rank;
 
 public class OutputView {
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");

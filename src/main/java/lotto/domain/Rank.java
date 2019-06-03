@@ -32,11 +32,11 @@ public enum Rank {
     }
 
     public static Map<Rank, Integer> getInitializedCounts() {
-        Map<Rank, Integer> results = new EnumMap<>(Rank.class);
+        Map<Rank, Integer> rankCounts = new EnumMap<>(Rank.class);
         for (Rank rank : values()) {
-            results.put(rank, 0);
+            rankCounts.put(rank, 0);
         }
-        return results;
+        return rankCounts;
     }
 
     public long calculatePrize(int countOfMatching) {

@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.lottoticket.InvalidLottoTicketException;
 import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottoticket.InvalidLottoTicketException;
 import lotto.domain.lottoticket.LottoTicket;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,7 +53,7 @@ class LottoTicketTest {
     }
 
     @Test
-    void 파라미터로_입력된_lottoTicket과_비교하여_일치_개수를_반환() {
+    void 파라미터로_입력된_lottoTicket과_비교하여_해당_Rank를_반환() {
         List<LottoNumber> numbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
                 , new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
 

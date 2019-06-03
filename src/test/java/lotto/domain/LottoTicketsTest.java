@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,13 +46,14 @@ class LottoTicketsTest {
     }
 
     @Test
-    void winningLotto로_lottoResult_생성하기() {
+    void winningLotto로_rankCounts_map_생성하기() {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
                 , new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
         LottoTicket winningLotto = new LottoTicket(lottoNumbers);
-        LottoResult lottoResult = LottoResult.of(new LottoTickets(tickets), winningLotto);
+        LottoTickets lottoTickets = new LottoTickets(tickets);
+        Map<Rank, Integer> rankCounts = lottoTickets.countRanksWith(winningLotto);
 
-        assertThat(lottoResult.getCountsBy(Rank.FIFTH)).isEqualTo(2);
+        assertThat(rankCounts.get(Rank.FIFTH)).isEqualTo(2);
     }
 
     @AfterEach

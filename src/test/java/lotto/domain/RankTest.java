@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,6 +27,14 @@ class RankTest {
     @Test
     void 파라미터의_횟수를_기준으로_해당_Rank의_상금을_계산해서_반환() {
         assertThat(Rank.FIFTH.calculatePrize(3)).isEqualTo(15_000);
+    }
+
+    @Test
+    void 초기화_상태의_Rank_count_map_반환하기() {
+        Map<Rank, Integer> rankCounts = Rank.getInitializedCounts();
+        for (Rank rank : Rank.values()) {
+            assertThat(rankCounts.get(rank)).isEqualTo(0);
+        }
     }
 
     @Test
