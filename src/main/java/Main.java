@@ -1,29 +1,31 @@
-import domain.LottoSimulationResult;
-import domain.LottoSimulator;
-import domain.Money;
-import domain.WinningLotto;
+import domain.*;
 import exception.BonusBallDuplicationException;
 import exception.LottoException;
+import exception.NumberOutOfRangeException;
+import util.LottoParser;
 import util.MoneyParser;
+import util.NonNegativeIntegerParse;
 import util.WinningLottoParser;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     private static final String EMPTY = "";
 
     public static void main(String[] args) {
         Money money = readMoney(EMPTY);
+
+        int numLottos = readNumNonRandomLottos(money, EMPTY);
+        LottoGroup lottoGroup = LottoSimulator.purchase(readNonRandomLottos(numLottos), money);
+        OutputView.printLottoGroup(lottoGroup);
+
         WinningLotto winningLotto = readWinningLotto(EMPTY);
-
-        LottoSimulator simulator = new LottoSimulator(winningLotto);
-
-        LottoSimulationResult result = simulator.play(money);
-
-        OutputView.printLottoGroup(result.lottoGroup);
-        OutputView.printRankAnalysis(result.rankAnalysis);
+        RankAnalysis rankAnalysis = LottoSimulator.analyze(winningLotto, lottoGroup);
+        OutputView.printRankAnalysis(rankAnalysis);
     }
 
     private static Money readMoney(String notifyingMessage) {
@@ -45,6 +47,45 @@ public class Main {
             return readWinningLotto(e.getMessage());
         } catch (IllegalArgumentException e) {
             return readWinningLotto(e.getMessage());
+        }
+    }
+
+    private static int readNumNonRandomLottos(Money money, String notifyingMessage) {
+        String input = InputView.readNumNonRandomLottos(notifyingMessage);
+        try {
+            int numLotto = NonNegativeIntegerParse.parse(input);
+            validateCanBuy(money, numLotto);
+            return numLotto;
+        } catch (IllegalArgumentException e) {
+            return readNumNonRandomLottos(money, e.getMessage());
+        }
+    }
+
+    private static void validateCanBuy(Money money, int numLotto) {
+        Money totalPrice = (Lotto.PRICE.times(numLotto));
+        if (money.lessThan(totalPrice)) {
+            throw new IllegalArgumentException(
+                    String.format("로또를 구매하기에 돈이 부족합니다. (%d 원 보유중)", money.toInt()));
+        }
+    }
+
+    private static List<Lotto> readNonRandomLottos(int numLottos) {
+        InputView.readNonRandomLottos();
+        return Stream.generate(() -> readNonRandomLotto(EMPTY))
+                .limit(numLottos)
+                .collect(Collectors.toList());
+    }
+
+    private static Lotto readNonRandomLotto(String notifyingMessage) {
+        String input = InputView.readNonRandomLotto(notifyingMessage);
+        try {
+            return LottoParser.parse(input);
+        } catch (LottoException e) {
+            return readNonRandomLotto(e.getMessage());
+        } catch (NumberOutOfRangeException e) {
+            return readNonRandomLotto(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            return readNonRandomLotto(e.getMessage());
         }
     }
 }

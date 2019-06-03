@@ -4,25 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoSimulator {
-    private final WinningLotto winningLotto;
+    public static LottoGroup purchase(List<Lotto> nonRandomLottos, Money money) {
+        money = money.minus(Lotto.PRICE.times(nonRandomLottos.size()));
 
-    public LottoSimulator(WinningLotto winningLotto) {
-        this.winningLotto = winningLotto;
-    }
-
-    public LottoSimulationResult play(Money money) {
-        List<Lotto> lottos = new ArrayList<>();
-        RankAnalysisBuilder builder = new RankAnalysisBuilder(winningLotto);
-
-        while(Lotto.PRICE.lessThan(money) || Lotto.PRICE.equals(money)) {
+        List<Lotto> randomLottos = new ArrayList<>();
+        while (canBuy(money)) {
             money = money.minus(Lotto.PRICE);
 
-            Lotto lotto = LottoFactory.createRandomLotto();
-
-            builder.add(lotto);
-            lottos.add(lotto);
+            randomLottos.add(LottoFactory.createRandomLotto());
         }
+        return LottoGroup.of(nonRandomLottos, randomLottos);
+    }
 
-        return LottoSimulationResult.of(builder.toRankAnalysis(), LottoGroup.from(lottos));
+    private static boolean canBuy(Money money) {
+        return Lotto.PRICE.lessThan(money) || Lotto.PRICE.equals(money);
+    }
+
+    public static RankAnalysis analyze(WinningLotto winningLotto, LottoGroup lottoGroup) {
+        RankAnalysisBuilder analysisBuilder = new RankAnalysisBuilder(winningLotto);
+        for (Lotto lotto : lottoGroup) {
+            analysisBuilder.add(lotto);
+        }
+        return analysisBuilder.toRankAnalysis();
     }
 }

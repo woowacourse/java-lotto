@@ -28,6 +28,10 @@ public class Money {
         return Money.from(money - m.money);
     }
 
+    public Money times(int n) {
+        return Money.from(n * money);
+    }
+
     public int toInt() {
         return money;
     }

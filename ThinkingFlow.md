@@ -72,8 +72,24 @@ RankAnalysisBuilder
         - [x] 로또가 가진 수가 6개가 아닌 경우
         - [x] 중복있는 입력, [1, 1, 3, 4, 5, 6]
        
-        
+#### 수동구매 추가
+- 기존의 흐름에서 달라지는 부분이 있음
+- 어디부터 공략할까? 
+    - 흐름
+    - 내부에서 사용되는 친구
 
+일단 흐름을 생각해보자 (사용자역할을 하는 객체에서 어떻게 바라볼지)        
+- 기존의 simulator 는 WinningLotto와 돈을 가지고.. lottoGroup과 RankAnalysis 를 생성했었음
+- 이젠... lottoGroup이 먼저 생성되어야 할듯..
+    - RankAnalysis <- [winningLotto, lottoGroup]
+- 먼가.. 이런 흐름?
+    - purchase (money, 수동으로 구매할 번호들) -> LottoGroup (구매한 것들) 
+    - analyze (lottoGroup) -> RankAnalysis
+
+무엇이 필요한가?
+- LottoGroup 내부
+    - 자동생성 (random)
+    - 수동생성 (nonRandom)
 
 
 구입금액을 입력해 주세요.

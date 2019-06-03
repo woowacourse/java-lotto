@@ -7,7 +7,7 @@ import domain.RankAnalysis;
 
 public class OutputView {
     public static void printLottoGroup(LottoGroup lottoGroup) {
-        System.out.printf("%d 개를 구매했습니다.\n", lottoGroup.totalSize());
+        System.out.printf("수동으로 %d 개, 자동으로 %d 개를 구매했습니다.\n", lottoGroup.nonRandomSize(), lottoGroup.randomSize());
         for (Lotto lotto : lottoGroup) {
             System.out.println(lotto.toString());
         }

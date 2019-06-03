@@ -24,4 +24,12 @@ class MoneyTest {
 
         assertThat(money1.minus(money2)).isEqualTo(Money.from(price1 - price2));
     }
+
+    @Test
+    void times() {
+        int price = 3;
+        int n = 100;
+
+        assertThat(Money.from(price).times(100)).isEqualTo(Money.from(n * price));
+    }
 }
