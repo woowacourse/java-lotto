@@ -24,7 +24,7 @@ public class InputView {
 
     public static LottoSeller makeLottoSeller(String input) {
         try {
-            Cash purchasePrice = new Cash(Integer.parseInt(input));
+            Cash purchasePrice = new Cash(Long.parseLong(input));
             return new LottoSeller(purchasePrice);
         } catch (NumberFormatException e) {
             System.out.println(NOT_INTEGER_ERROR_MESSAGE);

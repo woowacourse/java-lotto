@@ -14,7 +14,7 @@ public class LottoController {
 
         LottoTicket winningLotto = InputView.makeWinningLotto();
 
-        LottoResult lottoResult = lottoTickets.makeResultWith(winningLotto);
+        LottoResult lottoResult = LottoResult.of(lottoTickets, winningLotto);
         OutputView.showStatisticsOf(lottoResult);
     }
 }

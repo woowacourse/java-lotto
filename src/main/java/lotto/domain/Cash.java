@@ -7,9 +7,9 @@ import java.util.Objects;
 public class Cash {
     private static final String LOWER_CASH_ERROR_MESSAGE = "금액은 양의 정수입니다.";
     private static final int LOWER_BOUND_OF_CASH = 0;
-    private final int money;
+    private final long money;
 
-    public Cash(int money) {
+    public Cash(long money) {
         if (money <= LOWER_BOUND_OF_CASH) {
             throw new InvalidLottoPriceException(LOWER_CASH_ERROR_MESSAGE);
         }
@@ -17,15 +17,15 @@ public class Cash {
         this.money = money;
     }
 
-    public boolean isLittleThan(int money) {
+    public boolean isLittleThan(long money) {
         return this.money < money;
     }
 
-    public int calculateQuotient(int money) {
+    public long calculateQuotient(long money) {
         return this.money / money;
     }
 
-    public int calculateRemainder(int money) {
+    public long calculateRemainder(long money) {
         return this.money % money;
     }
 

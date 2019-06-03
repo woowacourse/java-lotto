@@ -39,8 +39,9 @@ public class LottoTicket {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public int match(LottoTicket winningLotto) {
-        return (int) lottoNumbers.stream().filter(winningLotto::match).count();
+    public Rank match(LottoTicket winningLotto) {
+        int numOfMatching = (int) lottoNumbers.stream().filter(winningLotto::match).count();
+        return Rank.valueOf(numOfMatching);
     }
 
     @Override

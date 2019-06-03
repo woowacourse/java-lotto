@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicketingMachine {
-    public static LottoTickets generateLottoTickets(int numOfTickets) {
+    public static LottoTickets generateLottoTickets(long numOfTickets) {
         List<Integer> candidates = initCandidates();
 
         List<LottoTicket> tickets = new ArrayList<>();

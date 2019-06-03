@@ -24,6 +24,11 @@ class RankTest {
     }
 
     @Test
+    void 파라미터의_횟수를_기준으로_해당_Rank의_상금을_계산해서_반환() {
+        assertThat(Rank.FIFTH.calculatePrize(3)).isEqualTo(15_000);
+    }
+
+    @Test
     void numOfMatching_반환() {
         assertThat(Rank.FIFTH.getNumOfMatching()).isEqualTo(3);
     }

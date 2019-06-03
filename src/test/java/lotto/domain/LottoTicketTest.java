@@ -57,7 +57,7 @@ class LottoTicketTest {
 
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         LottoTicket winningLotto = new LottoTicket(numbers);
-        assertThat(lottoTicket.match(winningLotto)).isEqualTo(3);
+        assertThat(lottoTicket.match(winningLotto)).isEqualTo(Rank.FIFTH);
     }
 
     @AfterEach

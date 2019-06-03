@@ -46,7 +46,7 @@ class LottoTicketsTest {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
                 , new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
         LottoTicket winningLotto = new LottoTicket(lottoNumbers);
-        LottoResult lottoResult = new LottoTickets(tickets).makeResultWith(winningLotto);
+        LottoResult lottoResult = LottoResult.of(new LottoTickets(tickets), winningLotto);
 
         assertThat(lottoResult.getCountsBy(Rank.FIFTH)).isEqualTo(2);
     }

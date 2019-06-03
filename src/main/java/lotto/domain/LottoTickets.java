@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoTickets {
@@ -18,18 +19,13 @@ public class LottoTickets {
         return tickets.get(index);
     }
 
-    public LottoResult makeResultWith(LottoTicket winningLotto) {
-        LottoResult lottoResult = new LottoResult();
+    public Map<Rank, Integer> countRanksWith(LottoTicket winningLotto) {
+        Map<Rank, Integer> countedRanks = Rank.getInitializedCounts();
         for (LottoTicket ticket : tickets) {
-            Rank rank = calculateRankWith(ticket, winningLotto);
-            lottoResult.increaseOneCountBy(rank);
+            Rank rank = ticket.match(winningLotto);
+            countedRanks.put(rank, countedRanks.get(rank) + 1);
         }
-        return lottoResult;
-    }
-
-    private Rank calculateRankWith(LottoTicket lottoTicket, LottoTicket winningLotto) {
-        int numOfMatching = lottoTicket.match(winningLotto);
-        return Rank.valueOf(numOfMatching);
+        return countedRanks;
     }
 
     @Override
