@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -15,11 +16,24 @@ public class Lottos {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public List<Rank> match(WinningLotto winningLotto) {
+    List<Rank> match(WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
             ranks.add(winningLotto.matchLotto(lotto));
         }
         return ranks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 }
