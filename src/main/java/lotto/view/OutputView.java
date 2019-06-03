@@ -14,6 +14,8 @@ public class OutputView {
     private static final String OUTPUT_RANK_RESULT_MESSAGE_1 = "개 일치 (";
     private static final String OUTPUT_RANK_RESULT_MESSAGE_2 = "원) - ";
     private static final String OUTPUT_RANK_RESULT_MESSAGE_3 = "개";
+    private static final String OUTPUT_PROFIT_RATIO_MESSAGE_FRONT = "총 수익률은 ";
+    private static final String OUTPUT_PROFIT_RATIO_MESSAGE_BACK = "%입니다.";
 
     public static void showNumOfTicketsFrom(LottoSeller lottoSeller) {
         System.out.println(makeNumOfTicketsMessage(lottoSeller));
@@ -43,6 +45,9 @@ public class OutputView {
         System.out.print(LINE_SEPARATOR);
         System.out.println(OUTPUT_RESULT_STATISTICS_MESSAGE);
         showAllOf(lottoResult);
+        System.out.println(OUTPUT_PROFIT_RATIO_MESSAGE_FRONT
+                + convertToPercent(lottoResult.getProfitRatio())
+                + OUTPUT_PROFIT_RATIO_MESSAGE_BACK);
     }
 
     private static void showAllOf(LottoResult lottoResult) {
@@ -61,5 +66,9 @@ public class OutputView {
                 .append(OUTPUT_RANK_RESULT_MESSAGE_3)
                 .append(LINE_SEPARATOR);
         return stringBuilder.toString();
+    }
+
+    private static String convertToPercent(double ratio) {
+        return String.format("%.2f", (ratio * 100));
     }
 }
