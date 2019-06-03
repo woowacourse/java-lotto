@@ -13,17 +13,30 @@ public class WinningLotto {
         checkDuplicate();
     }
 
+    public boolean matchBonus(Lotto lotto) {
+        return lotto.isContains(bonus);
+    }
+
+    public int getCount(Lotto lotto) {
+        int count = 0;
+
+        for (int i = 0; i < lotto.getSize(); i++) {
+            count = addCount(lotto, count, i);
+        }
+
+        return count;
+    }
+
+    private int addCount(Lotto lotto, int count, int i) {
+        if (winnerLotto.isContains(lotto.getLottoByIndex(i))) {
+            count++;
+        }
+        return count;
+    }
+
     private void checkDuplicate() {
         if (winnerLotto.isContains(bonus)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "WinningLotto{" +
-                "winnerLotto=" + winnerLotto +
-                ", bonus=" + bonus +
-                '}';
     }
 }

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
@@ -20,12 +21,20 @@ public class Lotto {
         return lotto.contains(number);
     }
 
+    public int getSize() {
+        return lotto.size();
+    }
+
+    public Number getLottoByIndex(int index) {
+        return lotto.get(index);
+    }
+
     private void validCheck() {
-        validDulicate();
+        validDuplication();
         validSize();
     }
 
-    private void validDulicate() {
+    private void validDuplication() {
         Set<Number> cheked = new HashSet<>(lotto);
 
         if (cheked.size() != lotto.size()) {
@@ -39,8 +48,25 @@ public class Lotto {
         }
     }
 
+    public List<Number> getLotto() {
+        return lotto;
+    }
+
     @Override
     public String toString() {
         return lotto.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
     }
 }
