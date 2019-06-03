@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.util.ConvertLottoNumber;
 import lotto.view.InputConsole;
 import lotto.view.OutputConsole;
 
@@ -73,8 +74,7 @@ public class Main {
     private static Lotto createLastWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         try {
-            LottoMachine lottoMachine = new ManualLottoMachine(InputConsole.inputLotto());
-            return lottoMachine.generateLotto();
+            return new Lotto(ConvertLottoNumber.run(InputConsole.inputLotto()));
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createLastWinningLotto();

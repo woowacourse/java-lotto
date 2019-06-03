@@ -1,26 +1,24 @@
 package lotto.domain;
 
+import lotto.util.ConvertLottoNumber;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottoMachine implements LottoMachine {
 
-    private final List<Integer> numbers;
+    private final List<List<Integer>> lottoNumbersList;
 
-    public ManualLottoMachine(List<Integer> numbers) {
-        this.numbers = numbers;
+    public ManualLottoMachine(List<List<Integer>> numbersList) {
+        this.lottoNumbersList = new ArrayList<>(numbersList);
     }
 
     @Override
-    public Lotto generateLotto() {
-        return new Lotto(convertLottoNumber(numbers));
-    }
-
-    private List<LottoNumber> convertLottoNumber(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
-            lottoNumbers.add(LottoNumber.getInstance(number));
+    public List<Lotto> generateLottos() {
+        List<Lotto> lottos = new ArrayList<>();
+        for (List<Integer> lottoNumbers : lottoNumbersList) {
+            lottos.add(new Lotto(ConvertLottoNumber.run(lottoNumbers)));
         }
-        return lottoNumbers;
+        return lottos;
     }
 }

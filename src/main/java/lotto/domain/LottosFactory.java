@@ -20,16 +20,18 @@ public class LottosFactory {
     }
 
     private void getManualLottos() {
-        for (int i = 0; i < lottoCount.getManualCount(); i++) {
-            ManualLottoMachine lottoMachine = new ManualLottoMachine(manualLottoNumbers.get(i));
-            lottosList.add(lottoMachine.generateLotto());
+        ManualLottoMachine manualLottoMachine = new ManualLottoMachine(manualLottoNumbers);
+        List<Lotto> manualLottos = new ArrayList<>(manualLottoMachine.generateLottos());
+        for (Lotto manualLotto : manualLottos) {
+            lottosList.add(manualLotto);
         }
     }
 
     private void getAutoLottos() {
-        AutoLottoMachine lottoMachine = new AutoLottoMachine();
-        for (int i = 0; i < lottoCount.getAutoCount(); i++) {
-            lottosList.add(lottoMachine.generateLotto());
+        AutoLottoMachine autoLottoMachine = new AutoLottoMachine(lottoCount.getAutoCount());
+        List<Lotto> autoLottos = new ArrayList<>(autoLottoMachine.generateLottos());
+        for (Lotto autoLotto : autoLottos) {
+            lottosList.add(autoLotto);
         }
     }
 }
