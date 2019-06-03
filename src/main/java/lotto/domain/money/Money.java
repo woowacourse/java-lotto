@@ -5,6 +5,8 @@ import lotto.domain.lotto.Lotto;
 import java.util.Objects;
 
 public class Money {
+    private static final int ZERO = 0;
+    private static final int HUNDRED = 100;
     private final int money;
 
     private Money(int money) {
@@ -12,7 +14,7 @@ public class Money {
     }
 
     public static Money create(int money) {
-        if (money < Lotto.PRICE || money % Lotto.PRICE != 0) {
+        if (money < Lotto.PRICE || money % Lotto.PRICE != ZERO) {
             throw new IllegalMoneyException();
         }
         return new Money(money);
@@ -20,7 +22,7 @@ public class Money {
 
 
     public double calculatePercentage(double sum) {
-        return sum / money * 100;
+        return sum / money * HUNDRED;
     }
 
     public int getLottoCount() {
