@@ -11,8 +11,6 @@ public class Lotto implements Iterable<LottoNumber> {
     private static final String EX_LOTTO_SIZE_MESSAGE = "로또 숫자는 6개여야 합니다.";
     private static final String EX_LOTTO_DUPLICATE_MESSAGE = "중복된 숫자는 사용할 수 없습니다";
     private final List<LottoNumber> lottoNumbers;
-    private CustomLotto customLotto;
-    private CreateLotto createLotto;
 
     private Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -23,20 +21,12 @@ public class Lotto implements Iterable<LottoNumber> {
         this.lottoNumbers = new ArrayList<>();
     }
 
-    public void setCustomLotto(CustomLotto customLotto) {
-        this.customLotto = customLotto;
-    }
-
-    public void setCreateLotto(CreateLotto createLotto) {
-        this.createLotto = createLotto;
-    }
-
-    public Lotto customLotto(List<Integer> noFormedLotto) {
+    public static Lotto customLotto(List<Integer> noFormedLotto, CustomLotto customLotto) {
         return new Lotto(customLotto.custom(noFormedLotto));
     }
 
-    public Lotto createLotto() {
-        return new Lotto(createLotto.create());
+    public static Lotto createLotto(AutoCreateLotto autoCreateLotto) {
+        return new Lotto(autoCreateLotto.autoCreate());
     }
 
     public static Lotto createLotto(List<LottoNumber> lottoNumbers) {

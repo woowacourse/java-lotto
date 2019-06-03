@@ -1,8 +1,10 @@
 package lotto.view;
 
+import lotto.domain.CustomLotto;
 import lotto.domain.Lotteries;
 import lotto.domain.Money;
 import lotto.domain.Winner;
+import lotto.domain.customlotto.DefaultCustomLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,17 +55,17 @@ public class InputView {
         }
     }
 
-    public static Lotteries generateInvalidLotto(Lotteries lotteries) {
+    public static Lotteries generateInvalidLotto(Lotteries lotteries, CustomLotto customLotto) {
         try {
             List<Integer> lottoNumbers = generateNoFormatLottoNumbers(inputByUser());
-            lotteries.addNoFormedLotto(lottoNumbers);
+            lotteries.addCustomLotto(lottoNumbers, customLotto);
             return lotteries;
         } catch (NumberFormatException e) {
             System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
-            return generateInvalidLotto(lotteries);
+            return generateInvalidLotto(lotteries, customLotto);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage() + EX_LOTTO_RE_INPUT_MESSAGE);
-            return generateInvalidLotto(lotteries);
+            return generateInvalidLotto(lotteries, customLotto);
         }
     }
 

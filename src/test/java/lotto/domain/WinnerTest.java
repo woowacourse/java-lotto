@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.customlotto.DefaultCustomLotto;
-import lotto.domain.makeuplotto.MockCreateLotto;
+import lotto.domain.autocreatelotto.MockAutoCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +22,7 @@ public class WinnerTest {
     void setUp() {
         winner = new Winner();
         winner.setCustomLotto(new DefaultCustomLotto());
-        lotto = new Lotto();
-        lotto.setCreateLotto(new MockCreateLotto());
-        lotto = lotto.createLotto();
+        lotto = Lotto.createLotto(new MockAutoCreateLotto());
         winner.customWinLotto(Arrays.asList(1,2,3,4,5,8));
     }
 

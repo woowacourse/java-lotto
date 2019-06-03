@@ -1,14 +1,13 @@
 package lotto.domain;
 
 import lotto.domain.customlotto.DefaultCustomLotto;
-import lotto.domain.makeuplotto.MockCreateLotto;
+import lotto.domain.autocreatelotto.MockAutoCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author heebg
@@ -17,15 +16,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class RankResultTest {
     RankResult rankResult;
     Lotteries lotteries;
-    Lotto lotto = new Lotto();
     Winner winner = new Winner();
 
     @BeforeEach
     void setUp() {
-        lotto.setCreateLotto(new MockCreateLotto());
-        lotto.createLotto();
-        lotteries = new Lotteries(lotto);
-        lotteries.addNewLotteries(1);
+        lotteries = new Lotteries();
+        lotteries.addAutoLotteries(1, new MockAutoCreateLotto());
         winner.setCustomLotto(new DefaultCustomLotto());
         winner.customWinLotto(Arrays.asList(1,2,3,9,8,7));
         winner.customWinBonus(4);

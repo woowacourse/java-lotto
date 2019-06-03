@@ -6,6 +6,6 @@ import java.util.List;
  * @author heebg
  * @version 1.0 2019-05-31
  */
-public interface CreateLotto {
-    List<LottoNumber> create();
+public interface AutoCreateLotto {
+    List<LottoNumber> autoCreate();
 }

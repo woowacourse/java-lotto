@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.domain.customlotto.DefaultCustomLotto;
-import lotto.domain.makeuplotto.DefaultCreateLotto;
+import lotto.domain.autocreatelotto.DefaultAutoCreateLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -23,10 +23,7 @@ public class LottoApplication {
     }
 
     private static void assembler() {
-        Lotto lottoType = new Lotto();
-        lottoType.setCustomLotto(new DefaultCustomLotto());
-        lottoType.setCreateLotto(new DefaultCreateLotto());
-        lotteries = new Lotteries(lottoType);
+        lotteries = new Lotteries();
         winner = new Winner();
         winner.setCustomLotto(new DefaultCustomLotto());
     }
@@ -34,10 +31,10 @@ public class LottoApplication {
     private static void generateLotteries() {
         money = InputView.generateInvalidUserPrice();
         long manualCount = InputView.generateInvalidManualCount(money);
-        generateManualLotto(manualCount);
+        generateManualLotto(manualCount, new DefaultCustomLotto());
         long autoCount = money.calculateAutoCount(manualCount);
         OutputView.outputUserBuyLottoCount(manualCount, autoCount);
-        lotteries.addNewLotteries(autoCount);
+        lotteries.addAutoLotteries(autoCount, new DefaultAutoCreateLotto());
     }
 
     private static void generateRank() {
@@ -49,16 +46,16 @@ public class LottoApplication {
         OutputView.outputLotteriesRate(rankResult.getRate());
     }
 
-    private static void generateManualLotto(long manualCount) {
+    private static void generateManualLotto(long manualCount, CustomLotto customLotto) {
         if (manualCount != 0) {
-            generateInvalidManualLotto(manualCount);
+            generateInvalidManualLotto(manualCount, customLotto);
         }
     }
 
-    private static void generateInvalidManualLotto(long manualCount) {
+    private static void generateInvalidManualLotto(long manualCount, CustomLotto customLotto) {
         OutputView.titleInputAutoLotto();
         for (int i = 0; i < manualCount; i++) {
-            lotteries = InputView.generateInvalidLotto(lotteries);
+            lotteries = InputView.generateInvalidLotto(lotteries, customLotto);
         }
     }
 }

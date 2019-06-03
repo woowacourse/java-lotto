@@ -11,20 +11,18 @@ import java.util.Objects;
  */
 public class Lotteries implements Iterable<Lotto> {
     private final List<Lotto> lotteries;
-    private final Lotto lotto;
 
-    public Lotteries(Lotto lotto) {
+    public Lotteries() {
         this.lotteries = new ArrayList<>();
-        this.lotto = lotto;
     }
 
-    public void addNoFormedLotto(List<Integer> noFormedLotto) {
-        this.lotteries.add(lotto.customLotto(noFormedLotto));
+    public void addCustomLotto(List<Integer> noFormedLotto, CustomLotto customLotto) {
+        this.lotteries.add(Lotto.customLotto(noFormedLotto, customLotto));
     }
 
-    public void addNewLotteries(long count) {
+    public void addAutoLotteries(long count, AutoCreateLotto autoCreateLotto) {
         for (int i = 0; i < count; i++) {
-            this.lotteries.add(lotto.createLotto());
+            this.lotteries.add(Lotto.createLotto(autoCreateLotto));
         }
     }
 
