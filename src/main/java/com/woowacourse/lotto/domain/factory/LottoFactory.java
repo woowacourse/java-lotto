@@ -11,7 +11,7 @@ public abstract class LottoFactory {
 		this.countOfPurchasedLotto = numberOfLottos;
 	}
 
-	public int getCountOfPurchasedLotto() {
+	   public int getCountOfPurchasedLotto() {
 		return countOfPurchasedLotto;
 	}
 

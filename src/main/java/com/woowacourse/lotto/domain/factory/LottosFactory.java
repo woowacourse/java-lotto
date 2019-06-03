@@ -8,12 +8,12 @@ import com.woowacourse.lotto.domain.Money;
 import com.woowacourse.lotto.exception.InvalidCountOfManualLottoException;
 
 public class LottosFactory {
-	public static final String VIOLATE_PURCHASED_LOTTO = "구입 금액보다 로또의 개수가 더 큽니다. 다시 입력해주세요.";
+	private static final String VIOLATE_PURCHASED_LOTTO = "구매할 로또 수를 잘못 입력하셨습니다.";
 	private int countOfAllLotto;
 	private int countOfManualLotto;
 
 	public LottosFactory(Money money, int countOfManualLotto) {
-		if (money.getCountOfLotto() < countOfManualLotto) {
+		if(countOfManualLotto < 0 || money.getCountOfLotto() < countOfManualLotto) {
 			throw new InvalidCountOfManualLottoException(VIOLATE_PURCHASED_LOTTO);
 		}
 		this.countOfAllLotto = money.getCountOfLotto();

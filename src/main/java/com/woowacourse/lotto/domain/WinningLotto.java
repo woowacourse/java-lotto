@@ -13,6 +13,7 @@ import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 
 public class WinningLotto {
+	private static final String VIOLATE_SIZE_OF_LOTTO = "로또 숫자의 개수는 6개입니다. 당첨 번호를 다시 입력해주세요.";
 	private Lotto winningLotto;
 	private LottoNumber bonusBall;
 
@@ -43,7 +44,7 @@ public class WinningLotto {
 
 	private void validateSize(List<String> numbers) {
 		if (numbers.size() != NUMBER_OF_LOTTO) {
-			throw new InvalidNumberException(VIOLATE_LOTTO_NUMBER_RANGE);
+			throw new InvalidNumberException(VIOLATE_SIZE_OF_LOTTO);
 		}
 	}
 
