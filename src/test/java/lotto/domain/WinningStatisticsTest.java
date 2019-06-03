@@ -28,6 +28,6 @@ class WinningStatisticsTest {
     @Test
     void getInterestRateTest() {
         WinningStatistics winStat = new WinningStatistics(Arrays.asList(Rank.FIFTH));
-        assertThat(winStat.getInterestRate(new Money(1000))).isEqualTo((long) 500);
+        assertThat(winStat.getInterestRate(new LottoBuyingMoney(1000))).isEqualTo((long) 500);
     }
 }

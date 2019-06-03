@@ -14,12 +14,12 @@
     - ~~create random lotto~~
 - ~~14000 -> 14 random lottos~~
     - ~~class Money~~
-        - ~~money > 0~~
+        - ~~lottoBuyingMoney > 0~~
         - ~~is multiple of~~
         - ~~divide by~~
     - ~~class LottoVendingMachine~~
-        - ~~money % LOTTO_PRICE == 0~~
-        - ~~get random lottos given money~~
+        - ~~lottoBuyingMoney % LOTTO_PRICE == 0~~
+        - ~~get random lottos given lottoBuyingMoney~~
         - ~~get custom lottos given numbers~~
 - ~~winning numbers, bonus ball, lottos -> winning statistics~~
     - ~~class WinningLotto~~
@@ -37,3 +37,5 @@
 - ~~create LottoFactory class~~
 - ~~use StringUtils to verify lotto numbers~~
 - ~~add more tests~~
+- ~~validate LottoBuyingMoney in Money class~~
+- create Money class and make LottoBuyingMoney extends it

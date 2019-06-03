@@ -20,13 +20,13 @@ public class WinningStatistics {
         return statistics;
     }
 
-    public long getInterestRate(Money inputMoney) {
-        Money money = new Money(0);
+    public long getInterestRate(LottoBuyingMoney inputLottoBuyingMoney) {
+        LottoBuyingMoney lottoBuyingMoney = new LottoBuyingMoney(0);
         for (Map.Entry<Rank, Integer> entry : statistics.entrySet()) {
             Rank rank = entry.getKey();
             int num = entry.getValue();
-            money = money.add(new Money(rank.getWinningMoney() * num));
+            lottoBuyingMoney = lottoBuyingMoney.add(new LottoBuyingMoney(rank.getWinningMoney() * num));
         }
-        return ((long) money.getValue() * 100) / (inputMoney.getValue());
+        return ((long) lottoBuyingMoney.getValue() * 100) / (inputLottoBuyingMoney.getValue());
     }
 }

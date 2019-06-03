@@ -6,7 +6,7 @@ import lotto.view.OutputView;
 
 public class ConsoleLottoApplication {
     public static void main(String[] args) {
-        Money lottoBuyingMoney = getLottoBuyingMoney();
+        LottoBuyingMoney lottoBuyingMoney = getLottoBuyingMoney();
         LottoVendingMachine machine = getLottoVendingMachine(lottoBuyingMoney);
 
         int numOfCustomLottos = getNumOfCustomLottos(machine);
@@ -19,10 +19,9 @@ public class ConsoleLottoApplication {
         OutputView.printInterestRate(winStat.getInterestRate(lottoBuyingMoney));
     }
 
-    private static Money getLottoBuyingMoney() {
+    private static LottoBuyingMoney getLottoBuyingMoney() {
         try {
-            Money lottoBuyingMoney = new Money(InputView.getLottoBuyingMoney());
-            LottoVendingMachine.validateMoney(lottoBuyingMoney);
+            LottoBuyingMoney lottoBuyingMoney = new LottoBuyingMoney(InputView.getLottoBuyingMoney());
             return lottoBuyingMoney;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -30,23 +29,12 @@ public class ConsoleLottoApplication {
         }
     }
 
-    private static LottoVendingMachine getLottoVendingMachine(Money money) {
+    private static LottoVendingMachine getLottoVendingMachine(LottoBuyingMoney lottoBuyingMoney) {
         try {
-            return new LottoVendingMachine(money);
+            return new LottoVendingMachine(lottoBuyingMoney, InputView.getNumOfCustomLottos());
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return getLottoVendingMachine(money);
-        }
-    }
-
-    private static int getNumOfCustomLottos(LottoVendingMachine machine) {
-        try {
-            int numOfCustomLottos = InputView.getNumOfCustomLottos();
-            machine.validateNumOfCustomLottos(numOfCustomLottos);
-            return numOfCustomLottos;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return getNumOfCustomLottos(machine);
+            return getLottoVendingMachine(lottoBuyingMoney);
         }
     }
 
