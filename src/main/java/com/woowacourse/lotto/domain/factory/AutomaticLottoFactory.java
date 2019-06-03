@@ -16,7 +16,7 @@ public class AutomaticLottoFactory extends LottoFactory {
 		List<Lotto> lotto = new ArrayList<>();
 
 		for (int i = 0; i < super.getCountOfPurchasedLotto(); i++) {
-			lotto.add(new Lotto(LottoNumber.getLotto()));
+			lotto.add(new Lotto(LottoNumber.generateLotto()));
 		}
 
 		return lotto;

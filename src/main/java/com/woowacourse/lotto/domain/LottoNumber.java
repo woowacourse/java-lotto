@@ -29,7 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return lottoNumbers.get(value - 1);
 	}
 
-	public static List<LottoNumber> getLotto() {
+	public static List<LottoNumber> generateLotto() {
 		List<LottoNumber> shuffleLottoNumbers = new ArrayList<>(lottoNumbers);
 		Collections.shuffle(shuffleLottoNumbers);
 		return Collections.unmodifiableList(shuffleLottoNumbers.subList(0, NUMBER_OF_LOTTO));
