@@ -13,7 +13,7 @@ public class LottosFactory {
 	private int countOfManualLotto;
 
 	public LottosFactory(Money money, int countOfManualLotto) {
-		if (countOfAllLotto < countOfManualLotto) {
+		if (money.getCountOfLotto() < countOfManualLotto) {
 			throw new InvalidCountOfManualLottoException(ExceptionOutput.VIOLATE_PURCHASED_LOTTO.getExceptionMessage());
 		}
 		this.countOfAllLotto = money.getCountOfLotto();
