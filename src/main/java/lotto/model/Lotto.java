@@ -6,7 +6,7 @@ public class Lotto {
     private static final String SEPERATOR = ",";
     private static final int LOTTO_NUMBER_LENGHT = 6;
 
-    List<LottoNumber> numbers;
+    private List<LottoNumber> numbers;
 
 
     public Lotto(List<Integer> numbers) {
