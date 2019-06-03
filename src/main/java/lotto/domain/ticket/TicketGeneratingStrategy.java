@@ -3,6 +3,7 @@ package lotto.domain.ticket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 interface TicketGeneratingStrategy {
     List<LottoTicket> generateTickets();
@@ -40,6 +41,11 @@ class ManualGenaratingStarategy implements TicketGeneratingStrategy {
 
 class AutomaticGenaratingStarategy implements TicketGeneratingStrategy {
     private int nums;
+    private static List<LottoNumber> randomLottoNumberPull;
+    static{
+        randomLottoNumberPull = new ArrayList<>();
+        randomLottoNumberPull.addAll(LottoNumber.getLottoNumberPool());
+    }
 
     public AutomaticGenaratingStarategy(int nums) {
         this.nums = nums;
@@ -58,11 +64,7 @@ class AutomaticGenaratingStarategy implements TicketGeneratingStrategy {
     }
 
     private List<LottoNumber> generateNumber() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.addAll(LottoNumber.getLottoNumberPool());
-        Collections.shuffle(lottoNumbers);
-        lottoNumbers = lottoNumbers.subList(0, LottoTicket.MAX_LOTTO_TICKET_NUMBER);
-        return lottoNumbers;
+        Collections.shuffle(randomLottoNumberPull,new Random());
+        return randomLottoNumberPull.subList(0, LottoTicket.MAX_LOTTO_TICKET_NUMBER);
     }
-
 }

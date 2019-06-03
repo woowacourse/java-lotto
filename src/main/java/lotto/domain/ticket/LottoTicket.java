@@ -1,24 +1,24 @@
 package lotto.domain.ticket;
 
+import com.google.common.base.Joiner;
 import lotto.domain.ticket.exception.InvalidDuplicatedNumberException;
 import lotto.domain.ticket.exception.InvalidNumberCountException;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
-    public static final int MAX_LOTTO_TICKET_NUMBER = 6;
-    private final SortedSet<LottoNumber> lottoNumbers;
+    static final int MAX_LOTTO_TICKET_NUMBER = 6;
 
-    private LottoTicket(SortedSet<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+
+    private final SortedSet<LottoNumber> lottoNumbers;
+    public LottoTicket(List<LottoNumber> numbers) {
+        this.lottoNumbers = Collections.unmodifiableSortedSet(createSortedSet(numbers));
     }
 
     public static LottoTicket of(List<LottoNumber> numbers) {
         validLength(numbers);
-        return new LottoTicket(createSortedSet(numbers));
+        return new LottoTicket(numbers);
     }
 
     private static SortedSet<LottoNumber> createSortedSet(final List<LottoNumber> numbers) {
@@ -38,6 +38,23 @@ public class LottoTicket {
         }
     }
 
+    public int countSameNumber(SortedSet<LottoNumber> winningNumbers) {
+        return winningNumbers.stream().filter(x -> lottoNumbers.contains(x)).collect(Collectors.toList()).size();
+    }
+
+    public boolean hasSameNumber(final LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+    public SortedSet<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    @Override
+    public String toString() {
+        return Joiner.on(", ").join(lottoNumbers);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -50,4 +67,6 @@ public class LottoTicket {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+
 }

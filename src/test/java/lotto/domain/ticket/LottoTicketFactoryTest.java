@@ -18,8 +18,8 @@ class LottoTicketFactoryTest {
         autoManualNumsInformation.put(LottoType.AUTOMATIC, 0);
         autoManualNumsInformation.put(LottoType.MANUAL, 2);
         List<List<Integer>> manualNumbers = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6));
-        PurchaseInformation purchaseInformation = new PurchaseInformation(autoManualNumsInformation, manualNumbers);
-        assertThat(LottoTicketFactory.getLottoTickets(purchaseInformation).getIdxLottoTicket(0))
+        PurchaseInformation purchaseInformation = PurchaseInformation.of(autoManualNumsInformation, manualNumbers);
+        assertThat(LottoTicketFactory.of(purchaseInformation).getIdxLottoTicket(0))
                 .isEqualTo(LottoTicket.of(manualNumbers.get(0).stream().map(LottoNumber::of).collect(Collectors.toList())));
     }
 
@@ -29,7 +29,7 @@ class LottoTicketFactoryTest {
         autoManualNumsInformation.put(LottoType.AUTOMATIC, 5);
         autoManualNumsInformation.put(LottoType.MANUAL, 0);
         List<List<Integer>> manualNumbers = Arrays.asList();
-        PurchaseInformation purchaseInformation = new PurchaseInformation(autoManualNumsInformation, manualNumbers);
-        assertThat(LottoTicketFactory.getLottoTickets(purchaseInformation).lottoTicketsSize()).isEqualTo(5);
+        PurchaseInformation purchaseInformation = PurchaseInformation.of(autoManualNumsInformation, manualNumbers);
+        assertThat(LottoTicketFactory.of(purchaseInformation).lottoTicketsSize()).isEqualTo(5);
     }
 }
