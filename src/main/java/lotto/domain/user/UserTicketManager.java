@@ -6,6 +6,7 @@ import lotto.domain.lottofactory.shufflerule.Shuffle;
 import lotto.utils.NullCheckUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserTicketManager {
@@ -32,6 +33,6 @@ public class UserTicketManager {
     }
 
     public List<LottoTicket> getUserLottoTickets() {
-        return userLottoTickets;
+        return Collections.unmodifiableList(userLottoTickets);
     }
 }

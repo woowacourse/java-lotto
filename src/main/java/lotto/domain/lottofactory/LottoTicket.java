@@ -2,8 +2,9 @@ package lotto.domain.lottofactory;
 
 import lotto.utils.NullCheckUtil;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTicket {
     private static final String ERROR_DUPLICATED = "중복된 로또 번호가 존재합니다.";
@@ -49,7 +50,15 @@ public class LottoTicket {
     }
     
     public List<LottoNumber> getLottoTicket() {
-        return lottoTicket;
+        return Collections.unmodifiableList(lottoTicket);
+    }
+
+    public Integer matchLottoNumberCount(LottoTicket userTicket){
+        List<LottoNumber> joinedTicketNumbers = Stream.concat(this.lottoTicket.stream()
+                , userTicket.lottoTicket.stream()).collect(Collectors.toList());
+        Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(joinedTicketNumbers);
+
+        return joinedTicketNumbers.size() - uniqueLottoNumbers.size();
     }
 
     @Override

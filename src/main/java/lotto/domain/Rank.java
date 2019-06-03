@@ -10,7 +10,7 @@ public enum Rank {
     LOSE(0, 0);
 
     private static final int LOSING_LOTTO_MINIMUM_MATCH_COUNT = 3;
-    
+
     private int countOfMatch;
     private int winningMoney;
 
