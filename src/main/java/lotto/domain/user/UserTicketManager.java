@@ -1,5 +1,6 @@
 package lotto.domain.user;
 
+import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.domain.lottofactory.LottoCreator;
 import lotto.domain.lottofactory.LottoTicket;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -46,25 +46,27 @@ public class UserTicketManager {
 
     /**
      * matchedCountsToCount
-     * key : 맞은 개수 (0개 ~ 6개)
-     * value : user의 로또들과 정답로또와 비교하여 맞은 개수의 개수
-     *
+     * key : rank(등수) (0개 ~ 6개)
+     * value : user의 로또딀의 해당 등수의 개수
      */
-    public Map<Integer, Integer> getMatchOfCounts(WinningLotto winningLotto) {
-        Map<Integer, Integer> matchedCountsToCount = initializeMatchedCountsToCount();
+    public Map<Rank, Integer> getMatchedRankCount(WinningLotto winningLotto) {
+        Map<Rank, Integer> matchedRankCount = initializeMatchedRankCount();
+        fillMatchedRankCount(winningLotto, matchedRankCount);
 
-        for (LottoTicket userTicket : userLottoTickets) {
-            Integer matchedCount = winningLotto.getMatchedWinningNumbersCount(userTicket);
-            Integer value = matchedCountsToCount.get(matchedCount);
-            matchedCountsToCount.put(matchedCount, value + PLUS_COUNT);
-        }
-
-        return matchedCountsToCount;
+        return matchedRankCount;
     }
 
-    private Map<Integer, Integer> initializeMatchedCountsToCount() {
+    private Map<Rank, Integer> initializeMatchedRankCount() {
         return IntStream.rangeClosed(MINIMUM_MATCHING_COUNT, MAXIMUM_MATCHING_COUNT)
                 .boxed()
-                .collect(Collectors.toMap(Function.identity(), i -> 0));
+                .collect(Collectors.toMap(Rank::valueOf, i -> 0, (p1, p2) -> p1));
+    }
+
+    private void fillMatchedRankCount(WinningLotto winningLotto, Map<Rank, Integer> matchedRankCount) {
+        for (LottoTicket userTicket : userLottoTickets) {
+            Rank matchedRank = Rank.valueOf(winningLotto.getMatchedWinningNumbersCount(userTicket));
+            Integer value = matchedRankCount.get(matchedRank);
+            matchedRankCount.put(matchedRank, value + PLUS_COUNT);
+        }
     }
 }

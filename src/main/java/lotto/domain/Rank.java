@@ -19,7 +19,7 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public Rank valueOf(final int countOfMatch) {
+    public static Rank valueOf(final int countOfMatch) {
         if (countOfMatch <= LOSING_LOTTO_MINIMUM_MATCH_COUNT) {
             return LOSE;
         }
@@ -32,5 +32,9 @@ public enum Rank {
 
     private boolean isMatchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
+    }
+
+    public int getTotalRankWinningMoney(int countOfRank) {
+        return countOfRank * winningMoney;
     }
 }

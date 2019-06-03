@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.WinningLotto;
+import lotto.domain.WinningResult;
 import lotto.domain.lottofactory.LottoTicket;
 import lotto.domain.lottofactory.shufflerule.RandomShuffle;
 import lotto.domain.user.PurchaseAmount;
@@ -23,6 +24,6 @@ public class LottoShop {
         OutputView.printUserLottoTickets(userLottoTickets);
 
         WinningLotto winningLotto = WinningLotto.createWinningLotto(WinningNumParser.getWinningNum(InputView.inputWinningNum()));
-        userTicketManager.getMatchOfCounts(winningLotto);
+        System.out.println(WinningResult.getTotalYield(userTicketManager.getMatchedRankCount(winningLotto), purchasePrice));
     }
 }
