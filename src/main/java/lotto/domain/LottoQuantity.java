@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoQuantity {
-    private static final int MIN_QUANTITY = 0;
     public static final LottoQuantity ZERO = new LottoQuantity(0);
+    private static final int MIN_QUANTITY = 0;
 
     private int quantity;
 

@@ -5,8 +5,8 @@ import lotto.util.StringConverter;
 import java.util.*;
 
 public class LottoTicket {
-    static final int LOTTO_SIZE = 6;
     public static final int PRICE = 1000;
+    static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
