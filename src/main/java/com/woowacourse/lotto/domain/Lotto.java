@@ -22,8 +22,8 @@ public class Lotto {
 		return NUMBER_OF_LOTTO - set.size();
 	}
 
-	public boolean contains(LottoNumber bonusBall) {
-		return numbers.contains(bonusBall);
+	public boolean contains(LottoNumber lottoNumber) {
+		return numbers.contains(lottoNumber);
 	}
 
 	@Override
