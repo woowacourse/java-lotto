@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.*;
-import lotto.domain.customlotto.DefaultCustomLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
