@@ -51,6 +51,6 @@ public class OutputView {
     }
 
     public static void outputLotteriesRate(float rate) {
-        System.out.println(String.format("총 수익률은 %.3f입니다.", rate));
+        System.out.println(String.format("총 수익률은 %.0f%s입니다.", rate, "%"));
     }
 }

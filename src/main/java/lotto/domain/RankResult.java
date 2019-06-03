@@ -44,7 +44,7 @@ public class RankResult {
 
     public float calculateRateOfJackpot(Money money) {
         long jackpot = calculateJackpot();
-        return money.calculateRate(jackpot);
+        return money.calculateRate(jackpot) * 100;
     }
 
     private long calculateJackpot() {
