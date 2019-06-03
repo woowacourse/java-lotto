@@ -31,10 +31,11 @@ public class ManualLottoFactory extends LottoFactory {
 	public List<Lotto> generateLotto() {
 		List<Lotto> lotto = new ArrayList<>();
 		for (String s : numbers) {
-			lotto.add(new Lotto(StringSeparator.splitString(s).stream()
+			List<LottoNumber> lottoNumbers = StringSeparator.splitString(s).stream()
 					.map(number -> LottoNumber.getLottoNumber(Integer.valueOf(number)))
-					.collect(Collectors.toList())))
-			;
+					.collect(Collectors.toList());
+			Lotto newLotto = new Lotto(lottoNumbers);
+			lotto.add(newLotto);
 		}
 		return lotto;
 	}

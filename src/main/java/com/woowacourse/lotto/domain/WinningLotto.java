@@ -13,8 +13,6 @@ import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 
 public class WinningLotto {
-	//private static final String REGEX_OF_NUMBER = "[1-9]|[1-3][0-9]|4[0-5]";
-	//private static final Pattern PATTERN_OF_LOTTO_NUMBER = Pattern.compile(REGEX_OF_NUMBER);
 	private Lotto winningLotto;
 	private LottoNumber bonusBall;
 
