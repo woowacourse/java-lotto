@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.woowacourse.lotto.domain.ExceptionOutput;
 import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.LottoNumber;
 import com.woowacourse.lotto.exception.InvalidCountOfManualLottoException;
 import com.woowacourse.lotto.utils.StringSeparator;
 
 import static com.woowacourse.lotto.domain.LottoNumber.NUMBER_OF_LOTTO;
+import static com.woowacourse.lotto.domain.LottoNumber.VIOLATE_LOTTO_NUMBER_RANGE;
 
 public class ManualLottoFactory extends LottoFactory {
 	private final List<String> numbers;
@@ -23,7 +23,7 @@ public class ManualLottoFactory extends LottoFactory {
 
 	private void validateSizeOfLotto(List<String> numbers) {
 		if (!numbers.stream().allMatch(s -> StringSeparator.splitString(s).size() == NUMBER_OF_LOTTO)) {
-			throw new InvalidCountOfManualLottoException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
+			throw new InvalidCountOfManualLottoException(VIOLATE_LOTTO_NUMBER_RANGE);
 		}
 	}
 

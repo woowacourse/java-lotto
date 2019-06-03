@@ -3,12 +3,12 @@ package com.woowacourse.lotto.domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.woowacourse.lotto.exception.InvalidNumberException;
 import org.apache.commons.lang3.StringUtils;
 
+import static com.woowacourse.lotto.domain.Lotto.DUPLICATE_LOTTO_NUMBER;
 import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 
@@ -31,25 +31,25 @@ public class WinningLotto {
 
 	private void validateDuplicateBonusBall(int bonusBall) {
 		if (winningLotto.contains(LottoNumber.getLottoNumber(bonusBall))) {
-			throw new IllegalArgumentException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
+			throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER);
 		}
 	}
 
 	private void validateDuplicatedNumber(List<String> numbers) {
 		if (numbers.size() != new HashSet<>(numbers).size()) {
-			throw new InvalidNumberException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
+			throw new InvalidNumberException(DUPLICATE_LOTTO_NUMBER);
 		}
 	}
 
 	private void validateSize(List<String> numbers) {
 		if (numbers.size() != NUMBER_OF_LOTTO) {
-			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
+			throw new InvalidNumberException(VIOLATE_LOTTO_NUMBER_RANGE);
 		}
 	}
 
 	private void validateRangeOfNumbers(List<String> numbers) {
 		if(!numbers.stream().allMatch(number -> checkRangeOfNumber(Integer.parseInt(number)))) {
-			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
+			throw new InvalidNumberException(VIOLATE_LOTTO_NUMBER_RANGE);
 		}
 	}
 
@@ -59,7 +59,7 @@ public class WinningLotto {
 
 	private void validateTypeOfNumbers(List<String> numbers) {
 		if(!numbers.stream().allMatch(number -> StringUtils.isNumeric(number))) {
-			throw new IllegalArgumentException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
+			throw new IllegalArgumentException(VIOLATE_LOTTO_NUMBER_RANGE);
 		}
 	}
 
