@@ -1,8 +1,6 @@
 package lotto.domain.lotto;
 
 import lotto.domain.InvalidLottoException;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,6 +48,22 @@ public class LottoTest {
         assertThrows(InvalidLottoException.class, ()->{
             new Lotto(lottoNumbers);
         });
+    }
+
+    @Test
+    void 매칭_시스템에서_개수가_잘나오는지() {
+        List<LottoNumber> winningLottoNumbers = new ArrayList<>();
+
+        for (int i = 1; i < 7; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+        for (int i = 1; i < 7; i++) {
+            winningLottoNumbers.add(new LottoNumber(i));
+        }
+
+        assertThat(new Lotto(lottoNumbers)
+                .numberOfMatch(new Lotto(winningLottoNumbers)))
+                .isEqualTo(6);
     }
 
     @AfterEach

@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 public class Price {
     private static final String MONEY_PATTERN = "^[0-9]*$";
-    private static final int LOTTO_PRICE = 1000;
     private static final int MIN_PRICE = 0;
+    static final int LOTTO_PRICE = 1000;
 
     private int money;
 

@@ -34,6 +34,21 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public int numberOfMatch(Lotto winningLotto){
+        return (int) lottoNumbers.stream()
+                .filter(number -> {
+                    if(winningLotto.getLottoNumbers().contains(number)){
+                        return true;
+                    }
+                    return false;
+                })
+                .count();
+    }
+
+    private List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

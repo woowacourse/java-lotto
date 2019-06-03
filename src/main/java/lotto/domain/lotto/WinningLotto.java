@@ -5,11 +5,11 @@ import lotto.domain.InvalidWinLotto;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class WinLotto {
-    private Lotto winLotto;
+public class WinningLotto {
+    private Lotto winningLotto;
 
-    public WinLotto(String[] inputWinLottoNumber) {
-        this.winLotto = invalidWinLottoNumber(inputWinLottoNumber);
+    public WinningLotto(String[] inputWinLottoNumber) {
+        this.winningLotto = invalidWinLottoNumber(inputWinLottoNumber);
     }
 
     private Lotto invalidWinLottoNumber(String[] winLotto) {
@@ -25,20 +25,20 @@ public class WinLotto {
         }
     }
 
-    public Lotto getWinLotto() {
-        return winLotto;
+    public Lotto getWinningLotto() {
+        return winningLotto;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WinLotto winLotto1 = (WinLotto) o;
-        return Objects.equals(winLotto, winLotto1.winLotto);
+        WinningLotto winningLotto1 = (WinningLotto) o;
+        return Objects.equals(winningLotto, winningLotto1.winningLotto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winLotto);
+        return Objects.hash(winningLotto);
     }
 }
