@@ -11,12 +11,10 @@ public class Main {
 
     public static void main(String[] args) {
         Money money = createMoney();
-
         LottoCount lottoCount = createLottoCount(money);
         Lottos lottos = createLottos(lottoCount);
 
         OutputConsole.outputLotto(lottos, lottoCount);
-
         WinningLotto winningLotto = createWinningLotto(createLastWinningLotto());
         OutputConsole.outputResult(new LottoResult(winningLotto, lottos));
     }
