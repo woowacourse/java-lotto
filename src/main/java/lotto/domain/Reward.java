@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum Reward {
     FIRST(6, false, 2000000000),
@@ -44,6 +42,6 @@ public enum Reward {
         if (bonus) {
             return count + "개 일치, 보너스 볼 일치(" + money + ") ";
         }
-        return count + "개 일치 " + "(" + money + ")";
+        return count + "개 일치 " + "(" + money + ") ";
     }
 }

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoResult;
 import lotto.domain.UserLottos;
 
 public class OutputView {
@@ -8,7 +9,7 @@ public class OutputView {
         System.out.println(userLottos.toString());
     }
 
-    public static void printResult(UserLottos userLottos) {
-        System.out.println(userLottos.money());
+    public static void printResult(LottoResult lottoResult) {
+        System.out.println(lottoResult);
     }
 }

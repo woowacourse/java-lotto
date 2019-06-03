@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoResult;
 import lotto.domain.UserLottos;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -10,7 +11,7 @@ public class LottoMain {
         UserLottos userLottos = new UserLottos(InputView.inputLottoMoney());
         OutputView.printLottos(userLottos);
         WinningLotto winningLotto = new WinningLotto(InputView.inputWinningLotto());
-        userLottos.match(winningLotto);
-        OutputView.printResult(userLottos);
+        LottoResult result = userLottos.match(winningLotto);
+        OutputView.printResult(result);
     }
 }

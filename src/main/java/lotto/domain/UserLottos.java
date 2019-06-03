@@ -1,11 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class UserLottos {
     private final List<Lotto> lottos;
-    private int money;
 
     public UserLottos(List<Lotto> lottos) {
         this.lottos = lottos;
@@ -19,19 +17,16 @@ public class UserLottos {
         }
     }
 
-    public int match(WinningLotto winningLotto) {
+    public LottoResult match(WinningLotto winningLotto) {
+        LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottos) {
-            money += winningLotto.match(lotto);
+            lottoResult.plus(winningLotto.match(lotto));
         }
-        return money / (lottos.size() * 1000);
+        return lottoResult;
     }
 
     public int size() {
         return lottos.size();
-    }
-
-    public int money() {
-        return money;
     }
 
     @Override

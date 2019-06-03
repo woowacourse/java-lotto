@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
@@ -32,24 +31,24 @@ public class WinningLotto {
     private List<Integer> splitNumbers(String numbers) {
         try {
             return Arrays.stream(numbers.split(","))
-                    .map(number -> Integer.parseInt(number))
+                    .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
     }
 
-    public int match(Lotto lotto) {
-        int result = 0;
-        boolean bonus = false;
-        if (lotto.numbers().contains(bonus)) {
-            bonus = true;
+    public Reward match(Lotto lotto) {
+        boolean hasBonusNumber = false;
+        if (lotto.numbers().contains(this.bonus)) {
+            hasBonusNumber = true;
         }
-        for (Integer number : lotto.numbers()) {
-            if (winningLotto.contains(number)) {
-                result++;
-            }
-        }
-        return Reward.valueOf(result, bonus).money();
+        return Reward.valueOf(matchCount(lotto), hasBonusNumber);
+    }
+
+    private int matchCount(Lotto lotto) {
+        Set<Integer> lottoNumberSet = new HashSet<>(winningLotto);
+        lottoNumberSet.addAll(lotto.numbers());
+        return 12 - lottoNumberSet.size();
     }
 }
