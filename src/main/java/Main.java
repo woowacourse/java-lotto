@@ -18,14 +18,14 @@ public class Main {
 
     public static void main(String[] args) {
         Money money = readMoney(EMPTY);
+
+        int numLottos = readNumNonRandomLottos(money, EMPTY);
+        LottoGroup lottoGroup = LottoSimulator.purchase(readNonRandomLottos(numLottos), money);
+        OutputView.printLottoGroup(lottoGroup);
+
         WinningLotto winningLotto = readWinningLotto(EMPTY);
-
-        LottoSimulator simulator = new LottoSimulator(winningLotto);
-
-        LottoSimulationResult result = simulator.play(money);
-
-        OutputView.printLottoGroup(result.lottoGroup);
-        OutputView.printRankAnalysis(result.rankAnalysis);
+        RankAnalysis rankAnalysis = LottoSimulator.analyze(winningLotto, lottoGroup);
+        OutputView.printRankAnalysis(rankAnalysis);
     }
 
     private static Money readMoney(String notifyingMessage) {
