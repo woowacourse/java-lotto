@@ -20,33 +20,29 @@ public class WinnerTest {
 
     @BeforeEach
     void setUp() {
-        winner = new Winner();
-        winner.setCustomLotto(new DefaultCustomLotto());
+        winner = new Winner(Lotto.createLotto(new MockAutoCreateLotto()), new LottoNumber(8));
         lotto = Lotto.createLotto(new MockAutoCreateLotto());
-        winner.customWinLotto(Arrays.asList(1,2,3,4,5,8));
     }
 
     @Test
     void customWinLotto_확인() {
-        assertThat(winner.matchLottoCount(lotto)).isEqualTo(5);
+        assertThat(winner.matchLottoCount(lotto)).isEqualTo(6);
     }
 
     @Test
     void customWinBonus_확인() {
-        winner.customWinBonus(6);
-        assertTrue(winner.matchBonus(lotto));
+        assertTrue(winner.matchBonus(Lotto.customLotto(Arrays.asList(1,2,3,4,5,8), new DefaultCustomLotto())));
     }
 
     @Test
     void customWinBonus_확인_false() {
-        winner.customWinBonus(21);
         assertFalse(winner.matchBonus(lotto));
     }
 
     @Test
     void customWinBonus_예외_확인() {
         assertThrows(IllegalArgumentException.class, () -> {
-            winner.customWinBonus(1);
+            new Winner(Lotto.createLotto(new MockAutoCreateLotto()), new LottoNumber(6));
         });
     }
 }

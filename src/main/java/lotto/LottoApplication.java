@@ -11,19 +11,7 @@ import lotto.view.OutputView;
  * @version 1.0 2019-05-29
  */
 public class LottoApplication {
-    private static Winner winner;
-
     public static void main(String[] args) {
-        assembler();
-        generateLotteries();
-    }
-
-    private static void assembler() {
-        winner = new Winner();
-        winner.setCustomLotto(new DefaultCustomLotto());
-    }
-
-    private static void generateLotteries() {
         Money money = InputView.generateInvalidUserPrice();
         long manualCount = InputView.generateInvalidManualCount(money);
         Lotteries lotteries = generateManualLotto(manualCount, new DefaultCustomLotto());
@@ -32,8 +20,7 @@ public class LottoApplication {
         OutputView.outputUserBuyLottoCount(manualCount, money.calculateAutoCount(manualCount));
         OutputView.outputAutoLotteries(lotteries);
 
-        winner = InputView.generateInvalidWinLotto(winner);
-        winner = InputView.generateInvalidWinBonus(winner);
+        Winner winner = InputView.generateWinner(new DefaultCustomLotto());
         RankResult rankResult = new RankResult(lotteries, winner, money);
         OutputView.outputLotteriesResult(rankResult);
     }

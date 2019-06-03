@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.autocreatelotto.DefaultAutoCreateLotto;
 import lotto.domain.customlotto.DefaultCustomLotto;
 import lotto.domain.autocreatelotto.MockAutoCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,24 +17,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RankResultTest {
     RankResult rankResult;
     Lotteries lotteries;
-    Winner winner = new Winner();
+    Winner winner;
 
     @BeforeEach
     void setUp() {
+        winner = new Winner(Lotto.createLotto(new MockAutoCreateLotto()), new LottoNumber(8));
         lotteries = new Lotteries();
         lotteries.addAutoLotteries(1, new MockAutoCreateLotto());
-        winner.setCustomLotto(new DefaultCustomLotto());
-        winner.customWinLotto(Arrays.asList(1,2,3,9,8,7));
-        winner.customWinBonus(4);
         rankResult = new RankResult(lotteries, winner, new Money(1000));
     }
 
     @Test
     void addRank() {
-        assertThat(rankResult.matchRankCount(Rank.FIFTH)).isEqualTo(1);
-    }
-
-    @Test
-    void toString1() {
+        assertThat(rankResult.matchRankCount(Rank.FIRST)).isEqualTo(1);
     }
 }

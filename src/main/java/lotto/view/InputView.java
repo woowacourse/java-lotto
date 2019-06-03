@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.CustomLotto;
-import lotto.domain.Lotteries;
-import lotto.domain.Money;
-import lotto.domain.Winner;
+import lotto.domain.*;
 import lotto.domain.customlotto.DefaultCustomLotto;
 
 import java.util.ArrayList;
@@ -78,31 +75,35 @@ public class InputView {
         return lottoNumbers;
     }
 
-    public static Winner generateInvalidWinLotto(Winner winner) {
+    public static Winner generateWinner(CustomLotto customLotto) {
+        Lotto lotto = generateInvalidWinLotto(customLotto);
+        return generateInvalidWinBonus(lotto);
+    }
+
+    public static Lotto generateInvalidWinLotto(CustomLotto customLotto) {
         try {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            winner.customWinLotto(generateNoFormatLottoNumbers(inputByUser()));
-            return winner;
+            return Lotto.customLotto(generateNoFormatLottoNumbers(inputByUser()), customLotto);
         } catch (NumberFormatException e) {
             System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
-            return generateInvalidWinLotto(winner);
+            return generateInvalidWinLotto(customLotto);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return generateInvalidWinLotto(winner);
+            return generateInvalidWinLotto(customLotto);
         }
     }
 
-    public static Winner generateInvalidWinBonus(Winner winner) {
+    public static Winner generateInvalidWinBonus(Lotto lotto) {
         try {
             System.out.println("보너스 번호를 입력해 주세요.");
-            winner.customWinBonus(Integer.parseInt(inputByUser()));
-            return winner;
+            LottoNumber lottoNumber = new LottoNumber(Integer.parseInt(inputByUser()));
+            return new Winner(lotto, lottoNumber);
         } catch (NumberFormatException e) {
             System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
-            return generateInvalidWinBonus(winner);
+            return generateInvalidWinBonus(lotto);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return generateInvalidWinBonus(winner);
+            return generateInvalidWinBonus(lotto);
         }
     }
 }

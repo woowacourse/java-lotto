@@ -17,10 +17,6 @@ public class Lotto implements Iterable<LottoNumber> {
         checkLottoNumberCondition();
     }
 
-    public Lotto() {
-        this.lottoNumbers = new ArrayList<>();
-    }
-
     public static Lotto customLotto(List<Integer> noFormedLotto, CustomLotto customLotto) {
         return new Lotto(customLotto.custom(noFormedLotto));
     }
