@@ -37,5 +37,6 @@
 - ~~create LottoFactory class~~
 - ~~use StringUtils to verify lotto numbers~~
 - ~~add more tests~~
-- ~~validate LottoBuyingMoney in Money class~~
-- create Money class and make LottoBuyingMoney extends it
+- ~~validate money in LottoBuyingMoney class~~
+- ~~create Money class and make LottoBuyingMoney extends it~~
+- create LottoCount class

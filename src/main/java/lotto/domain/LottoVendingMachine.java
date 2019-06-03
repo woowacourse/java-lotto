@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
-public class LottoVendingMachine {
+public class LottoVendingMachine extends Money {
     private int numOfRandomLottos;
     private int numOfCustomLottos;
 

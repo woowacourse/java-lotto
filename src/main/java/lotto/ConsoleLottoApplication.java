@@ -19,6 +19,13 @@ public class ConsoleLottoApplication {
         OutputView.printInterestRate(winStat.getInterestRate(lottoBuyingMoney));
     }
 
+    private static int getNumOfCustomLottos(LottoBuyingMoney money) {
+        int numOfCustomLottos = 0;
+        do {
+            numOfCustomLottos = InputView.getNumOfCustomLottos();
+        } while(numOfCustomLottos < 0 || numOfCustomLottos > money.numOfLottos());
+    }
+
     private static LottoBuyingMoney getLottoBuyingMoney() {
         try {
             LottoBuyingMoney lottoBuyingMoney = new LottoBuyingMoney(InputView.getLottoBuyingMoney());
