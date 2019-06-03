@@ -30,12 +30,12 @@ public class LottoResult {
 		}
 	}
 
-	private long sum() {
-		return rankResult.keySet().stream().mapToLong(rank -> (long) (rank.getPrice() * rankResult.get(rank))).sum();
+	private double sum() {
+		return rankResult.keySet().stream().mapToDouble(rank -> (double) (rank.getPrice() * rankResult.get(rank))).sum();
 	}
 
 	public long getEarningsRate() {
-		return (sum() / (lottos.size() * MINIMUM_MONEY_FOR_PURCHASE)) * PERCENT;
+		return (long) ((sum() / (lottos.size() * MINIMUM_MONEY_FOR_PURCHASE)) * PERCENT);
 	}
 
 	public Map<LottoRank, Integer> getLottoResult() {

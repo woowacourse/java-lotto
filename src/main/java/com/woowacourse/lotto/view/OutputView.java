@@ -28,7 +28,7 @@ public class OutputView {
 	}
 
 	public static void printEarningsRate(LottoResult lottoResult) {
-		System.out.printf(PRINT_EARNINGS_RATE, (int) lottoResult.getEarningsRate());
+		System.out.printf(PRINT_EARNINGS_RATE, lottoResult.getEarningsRate());
 	}
 
 	public static void printCountOfPurchasedLotto(int countOfAllLotto, int countOfManualLotto) {

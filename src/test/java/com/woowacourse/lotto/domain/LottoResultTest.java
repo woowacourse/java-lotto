@@ -8,34 +8,50 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
-	private LottoResult lottoResult;
+	private LottoResult actualLottoResult;
 
 	@BeforeEach
 	void init() {
 		WinningLotto winningLotto = new WinningLotto(Arrays.asList("1", "2", "3", "4", "5", "6"), 7);
-		List<Lotto> lotto = Arrays.asList(new Lotto(Arrays.asList(LottoNumber.getLottoNumber(1), LottoNumber.getLottoNumber(2), LottoNumber.getLottoNumber(3),
-				LottoNumber.getLottoNumber(4), LottoNumber.getLottoNumber(5), LottoNumber.getLottoNumber(6))),
-				new Lotto(Arrays.asList(LottoNumber.getLottoNumber(7), LottoNumber.getLottoNumber(8), LottoNumber.getLottoNumber(9),
-						LottoNumber.getLottoNumber(10), LottoNumber.getLottoNumber(11), LottoNumber.getLottoNumber(12))));
-		lottoResult = new LottoResult(winningLotto, new Lottos(lotto));
+		List<LottoNumber> numbers = new ArrayList<>();
+		for (int i = 1; i <= 6; ++i) {
+			numbers.add(LottoNumber.getLottoNumber(i));
+		}
+		Lotto FirstLotto = new Lotto(numbers);
+
+		numbers = new ArrayList<>();
+		for (int i = 7; i <= 12; ++i) {
+			numbers.add(LottoNumber.getLottoNumber(i));
+		}
+		Lotto SecondLotto = new Lotto(numbers);
+
+		numbers = new ArrayList<>();
+		for (int i = 2; i <= 7; ++i) {
+			numbers.add(LottoNumber.getLottoNumber(i));
+		}
+		Lotto ThirdLotto = new Lotto(numbers);
+
+
+		Lottos lottos = new Lottos(Arrays.asList(FirstLotto, SecondLotto, ThirdLotto));
+		actualLottoResult = new LottoResult(winningLotto, lottos);
 	}
 
 	@Test
 	void checkMatchResult() {
-		Map<LottoRank, Integer> lottoMatchResult2 = new TreeMap<>();
+		Map<LottoRank, Integer> expectedLottoMatchResult = new TreeMap<>();
 		{
-			lottoMatchResult2.put(LottoRank.ZERO, 1);
-			lottoMatchResult2.put(LottoRank.FIFTH, 0);
-			lottoMatchResult2.put(LottoRank.FOURTH, 0);
-			lottoMatchResult2.put(LottoRank.THIRD, 0);
-			lottoMatchResult2.put(LottoRank.SECOND, 0);
-			lottoMatchResult2.put(LottoRank.FIRST, 1);
+			expectedLottoMatchResult.put(LottoRank.ZERO, 1);
+			expectedLottoMatchResult.put(LottoRank.FIFTH, 0);
+			expectedLottoMatchResult.put(LottoRank.FOURTH, 0);
+			expectedLottoMatchResult.put(LottoRank.THIRD, 0);
+			expectedLottoMatchResult.put(LottoRank.SECOND, 1);
+			expectedLottoMatchResult.put(LottoRank.FIRST, 1);
 		}
-		assertThat(lottoResult.getLottoResult()).isEqualTo(lottoMatchResult2);
+		assertThat(actualLottoResult.getLottoResult()).isEqualTo(expectedLottoMatchResult);
 	}
 
 	@Test
 	void checkEarningsRate() {
-		assertThat(lottoResult.getEarningsRate()).isEqualTo((long) 100_000_000);
+		assertThat(actualLottoResult.getEarningsRate()).isEqualTo((long) 67_666_666);
 	}
 }
