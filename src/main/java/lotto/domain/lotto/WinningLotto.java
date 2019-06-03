@@ -5,11 +5,11 @@ import lotto.domain.money.Prize;
 import java.util.List;
 
 public class WinningLotto {
-    private Lotto lotto;
+    private Lotto winningLotto;
     private LottoNumber bonusNumber;
 
     private WinningLotto(List<Integer> numbers, int bonusNumber) {
-        this.lotto = new Lotto(numbers);
+        this.winningLotto = new Lotto(numbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
@@ -21,7 +21,7 @@ public class WinningLotto {
     }
 
     public Prize prizeOf(Lotto lotto) {
-        int matchCount = lotto.countMatchLottoNumber(this.lotto);
+        int matchCount = lotto.countMatchLottoNumber(this.winningLotto);
         Prize prize = Prize.getPrizeRank(matchCount, lotto.containsNumber(bonusNumber));
         return prize;
     }
