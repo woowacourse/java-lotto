@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lotto.exception.IllegalNumberCombinationException;
 import lotto.domain.money.Prize;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package lotto.domain.money;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.money.exception.IllegalMoneyException;
 
 import java.util.Objects;
 

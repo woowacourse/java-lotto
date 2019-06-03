@@ -1,4 +1,4 @@
-package lotto.domain.money;
+package lotto.domain.money.exception;
 
 public class IllegalCountException extends RuntimeException {
     public IllegalCountException(String message) {
