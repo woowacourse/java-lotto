@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.lottoseller.LottoSeller;
+import lotto.domain.lottoticket.LottoTicket;
+import lotto.domain.lottoticket.LottoTickets;
+
 import java.util.Map;
 
 public class LottoResult {

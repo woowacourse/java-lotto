@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.domain.Cash;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoSeller;
-import lotto.domain.LottoTicket;
+import lotto.domain.lottoseller.Cash;
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottoseller.LottoSeller;
+import lotto.domain.lottoticket.LottoTicket;
 
 import java.util.Arrays;
 import java.util.List;

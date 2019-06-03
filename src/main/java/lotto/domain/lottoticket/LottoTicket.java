@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.domain.lottoticket;
 
-import lotto.domain.exception.InvalidLottoTicketException;
+import lotto.domain.Rank;
+import lotto.domain.lottonumber.LottoNumber;
 
 import java.util.*;
 

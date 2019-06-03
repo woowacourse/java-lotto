@@ -1,12 +1,10 @@
-package lotto.domain;
-
-import lotto.domain.exception.InvalidLottoNumberException;
+package lotto.domain.lottonumber;
 
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    static final int FIRST_NUMBER = 1;
-    static final int LAST_NUMBER = 45;
+    public static final int FIRST_NUMBER = 1;
+    public static final int LAST_NUMBER = 45;
     private static final String SCOPE_ERROR_MESSAGE
             = "로또 숫자의 범위는 " + FIRST_NUMBER + "부터 " + LAST_NUMBER + " 사이입니다.";
     private final int number;

@@ -1,4 +1,4 @@
-package lotto.domain.exception;
+package lotto.domain.lottoticket;
 
 public class InvalidLottoTicketException extends IllegalArgumentException {
     public InvalidLottoTicketException(String s) {

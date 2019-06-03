@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.exception.InvalidLottoPriceException;
+import lotto.domain.lottoseller.Cash;
+import lotto.domain.lottoseller.InvalidLottoPriceException;
+import lotto.domain.lottoseller.LottoSeller;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

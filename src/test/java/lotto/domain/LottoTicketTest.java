@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.exception.InvalidLottoTicketException;
+import lotto.domain.lottoticket.InvalidLottoTicketException;
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottoticket.LottoTicket;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
