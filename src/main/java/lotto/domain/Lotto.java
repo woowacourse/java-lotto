@@ -18,7 +18,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int hasNumber(final LottoNumber number) {
+    public int checkNumber(final LottoNumber number) {
         if (numbers.contains(number)) {
             return 1;
         }

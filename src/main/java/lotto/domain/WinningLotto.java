@@ -12,7 +12,7 @@ public class WinningLotto {
     int countOfMatchLottoNumber(Lotto lotto) {
         int countOfMatch = 0;
         for (LottoNumber lottoNumber : lotto.getNumbers()) {
-            countOfMatch += winningLotto.hasNumber(lottoNumber);
+            countOfMatch += winningLotto.checkNumber(lottoNumber);
         }
 
         return countOfMatch;
