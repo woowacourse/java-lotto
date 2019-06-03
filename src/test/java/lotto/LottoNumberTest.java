@@ -20,5 +20,8 @@ class LottoNumberTest {
         assertThrows(IllegalLottoNumberException.class, () -> new LottoNumber(46));
     }
 
-
+    @Test
+    void 숫자가_범위_도달하지_못할_때_테스트() {
+        assertThrows(IllegalLottoNumberException.class, () -> new LottoNumber(0));
+    }
 }

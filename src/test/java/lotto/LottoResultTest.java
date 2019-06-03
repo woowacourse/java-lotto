@@ -14,7 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.offset;
 
-public class LottosTest {
+public class LottoResultTest {
     @Test
     void 수익률_0프로() {
         List<Lotto> lottos = new ArrayList<>();
