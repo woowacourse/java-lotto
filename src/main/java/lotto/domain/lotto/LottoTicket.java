@@ -5,25 +5,40 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.domain.lotto.Price.LOTTO_PRICE;
+import static lotto.view.OutPutView.ENTER;
 
 public class LottoTicket {
-    private static final String ENTER = "\n";
-
-    private int numberOfLotto;
+    private int numberOfCustomLotto;
+    private int numberOfAutoLotto;
     private List<Lotto> lottos;
 
-    public LottoTicket(String money) {
-        this.numberOfLotto = new Price(money).getNumberOfLotto();
+    public LottoTicket(String money, List<String[]> customLottos) {
+        this.numberOfCustomLotto = customLottos.size();
+        this.numberOfAutoLotto = new Price(money).getNumberOfLotto() - this.numberOfCustomLotto;
         this.lottos = new ArrayList<>();
+
+        createCustomLottoNumbers(customLottos);
         createAutoLottoNumbers();
     }
 
-    public AutoGenerateLotto createAutoLottoNumbers() {
-        return new AutoGenerateLotto(numberOfLotto, lottos);
+    private void createCustomLottoNumbers(List<String[]> customLottos) {
+        for (int i = 0; i < numberOfCustomLotto; i++) {
+            lottos.add(new CustomGenerateLotto(customLottos.get(i)));
+        }
     }
 
-    public int getNumberOfLotto() {
-        return numberOfLotto;
+    private void createAutoLottoNumbers() {
+        for (int i = 0; i < numberOfAutoLotto; i++) {
+            lottos.add(new AutoGenerateLotto());
+        }
+    }
+
+    public int getNumberOfAutoLotto() {
+        return numberOfAutoLotto;
+    }
+
+    public int getNumberOfCustomLotto() {
+        return numberOfCustomLotto;
     }
 
     public List<Rank> matchLotto(WinningLotto winningLotto) {
@@ -37,7 +52,7 @@ public class LottoTicket {
     }
 
     public int getPrice() {
-        return numberOfLotto * LOTTO_PRICE;
+        return (this.numberOfAutoLotto + this.numberOfCustomLotto) * LOTTO_PRICE;
     }
 
     @Override

@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.lotto.Lotto.*;
-
-public class AutoGenerateLotto {
+public class AutoGenerateLotto extends Lotto {
     private static final List<LottoNumber> DEFAULT_LOTTO_NUMBERS;
 
     static {
@@ -16,16 +14,15 @@ public class AutoGenerateLotto {
                 .collect(Collectors.toList());
     }
 
-    public AutoGenerateLotto(int numberOfPrice, List<Lotto> lottos) {
-        for (int i = 0; i < numberOfPrice; i++) {
-            lottos.add(makeAutoLotto());
-        }
+    public AutoGenerateLotto() {
+        this.lottoNumbers = invalidNumberOfLotto(makeAutoLotto());
     }
 
-    private Lotto makeAutoLotto() {
+    private List<LottoNumber> makeAutoLotto() {
         Collections.shuffle(DEFAULT_LOTTO_NUMBERS);
-        return new Lotto(DEFAULT_LOTTO_NUMBERS.stream()
+        return DEFAULT_LOTTO_NUMBERS.stream()
                 .limit(NUMBER_OF_LOTTO_NUMBER)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
+
 }

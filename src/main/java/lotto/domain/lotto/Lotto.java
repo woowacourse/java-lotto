@@ -1,13 +1,12 @@
 package lotto.domain.lotto;
 
 import lotto.domain.InvalidLottoException;
-import lotto.domain.InvalidWinLotto;
-import lotto.util.AscendingNumber;
+import lotto.domain.InvalidWinnigLotto;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Lotto {
+public abstract class Lotto {
     private static final String START_BRACKET = "[";
     private static final String END_BRACKET = "]";
     private static final String DELIMITER = ",";
@@ -16,28 +15,23 @@ public class Lotto {
     static final int MIN_LOTTO_NUMBER = 1;
     static final int MAX_LOTTO_NUMBER = 45;
 
-    private List<LottoNumber> lottoNumbers;
+    protected List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = invalidNumberOfLotto(lottoNumbers);
-        Collections.sort(lottoNumbers, new AscendingNumber());
-    }
-
-    private List<LottoNumber> invalidNumberOfLotto(List<LottoNumber> lottoNumbers) {
+    protected List<LottoNumber> invalidNumberOfLotto(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> checkValidateNumber = new HashSet<>(lottoNumbers);
         if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER) {
             throw new InvalidLottoException("로또 범위는 6개여야 합니다.");
         }
         if (checkValidateNumber.size() != lottoNumbers.size()) {
-            throw new InvalidWinLotto("중복된 숫자가 있습니다.");
+            throw new InvalidWinnigLotto("중복된 숫자가 있습니다.");
         }
         return lottoNumbers;
     }
 
-    public int numberOfMatch(Lotto winningLotto) {
+    protected int numberOfMatch(List<LottoNumber> winningLotto) {
         return (int) lottoNumbers.stream()
                 .filter(number -> {
-                    if (winningLotto.getLottoNumbers().contains(number)) {
+                    if (winningLotto.contains(number)) {
                         return true;
                     }
                     return false;
@@ -45,12 +39,8 @@ public class Lotto {
                 .count();
     }
 
-    public boolean bonusOfMatch(BonusBall ball) {
+    protected boolean bonusOfMatch(BonusBall ball) {
         return lottoNumbers.contains(ball.getBonus());
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
     }
 
     @Override

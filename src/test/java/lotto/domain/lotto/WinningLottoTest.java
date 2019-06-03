@@ -2,37 +2,20 @@ package lotto.domain.lotto;
 
 import lotto.domain.InvalidLottoException;
 import lotto.domain.InvalidLottoNumberException;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import lotto.domain.InvalidWinnigLotto;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WinningLottoTest {
 
-    private List<LottoNumber> lotto;
-
-    @BeforeEach
-    void setUp() {
-        lotto = new ArrayList<>();
-        lotto.add(new LottoNumber(1));
-        lotto.add(new LottoNumber(2));
-        lotto.add(new LottoNumber(3));
-        lotto.add(new LottoNumber(4));
-        lotto.add(new LottoNumber(5));
-        lotto.add(new LottoNumber(6));
-    }
-
     @Test
     void 당첨번호_로또_객체에_잘들어가는지_테스트() {
         String[] numbers = {"1", "2", "3", "4", "5", "6"};
-        WinningLotto winningLotto = new WinningLotto(numbers, "7");
-        assertThat(winningLotto.getWinningLotto()).isEqualTo(new Lotto(lotto));
+        assertDoesNotThrow(() -> new WinningLotto(numbers, "7"));
     }
 
     @Test
@@ -46,7 +29,7 @@ public class WinningLottoTest {
     @Test
     void 당첨번호가_중복일때() {
         String[] numbers = {"1", "2", "3", "4", "5", "4"};
-        assertThrows(InvalidLottoException.class, () -> {
+        assertThrows(InvalidWinnigLotto.class, () -> {
             new WinningLotto(numbers, "7");
         });
     }
@@ -54,7 +37,15 @@ public class WinningLottoTest {
     @Test
     void 당첨번호에_문자를_입력할때() {
         String[] numbers = {"a", "2", "3", "4", "5", "6"};
-        assertThrows(InputMismatchException.class, () -> {
+        assertThrows(InvalidWinnigLotto.class, () -> {
+            new WinningLotto(numbers, "7");
+        });
+    }
+
+    @Test
+    void 당첨번호에_실수를_입력할때() {
+        String[] numbers = {"1.1", "2", "3", "4", "5", "6"};
+        assertThrows(InvalidWinnigLotto.class, () -> {
             new WinningLotto(numbers, "7");
         });
     }
@@ -65,10 +56,5 @@ public class WinningLottoTest {
         assertThrows(InvalidLottoNumberException.class, () -> {
             new WinningLotto(numbers, "7");
         });
-    }
-
-    @AfterEach
-    void tearDown() {
-        lotto = null;
     }
 }
