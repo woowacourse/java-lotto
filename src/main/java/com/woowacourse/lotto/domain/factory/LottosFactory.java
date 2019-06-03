@@ -21,7 +21,7 @@ public class LottosFactory {
 	}
 
 	public Lottos generateLotto(List<String> numbers) {
-		List<Lotto> lotto = new ManualLottoFactory(countOfAllLotto, numbers).generateLotto();
+		List<Lotto> lotto = new ManualLottoFactory(numbers).generateLotto();
 		lotto.addAll(new AutomaticLottoFactory(countOfAllLotto - countOfManualLotto).generateLotto());
 		return new Lottos(lotto);
 	}

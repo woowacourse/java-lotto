@@ -12,11 +12,10 @@ import com.woowacourse.lotto.utils.StringSeparator;
 import static com.woowacourse.lotto.domain.LottoNumber.NUMBER_OF_LOTTO;
 import static com.woowacourse.lotto.domain.LottoNumber.VIOLATE_LOTTO_NUMBER_RANGE;
 
-public class ManualLottoFactory extends LottoFactory {
+public class ManualLottoFactory implements LottoFactory {
 	private final List<String> numbers;
 
-	public ManualLottoFactory(int countOfPurchasedLotto, final List<String> numbers) {
-		super(countOfPurchasedLotto);
+	public ManualLottoFactory(final List<String> numbers) {
 		this.numbers = new ArrayList<>(numbers);
 		validateSizeOfLotto(numbers);
 	}

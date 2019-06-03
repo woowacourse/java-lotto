@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ManualLottoFactoryTest {
 	@Test
 	void generateManualLotto() {
-		List<Lotto> lotto = new ManualLottoFactory(2, Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12")).generateLotto();
+		List<Lotto> lotto = new ManualLottoFactory(Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12")).generateLotto();
 		List<LottoNumber> numbers = new ArrayList<>();
 		for(int i=1; i<=6; ++i) {
 			numbers.add(LottoNumber.getLottoNumber(i));
@@ -35,20 +35,20 @@ class ManualLottoFactoryTest {
 
 	@Test
 	void invalidNumberOfLotto() {
-		assertThrows(InvalidNumberException.class, () -> new ManualLottoFactory(1, Arrays.asList("0,1,2,3,4,5")).generateLotto());
-		assertThrows(InvalidNumberException.class, () -> new ManualLottoFactory(1, Arrays.asList("1,2,3,4,5,46")).generateLotto());
+		assertThrows(InvalidNumberException.class, () -> new ManualLottoFactory(Arrays.asList("0,1,2,3,4,5")).generateLotto());
+		assertThrows(InvalidNumberException.class, () -> new ManualLottoFactory(Arrays.asList("1,2,3,4,5,46")).generateLotto());
 	}
 
 	@Test
 	void invalidSizeOfLotto() {
 		assertThrows(InvalidCountOfManualLottoException.class, ()
-				-> new ManualLottoFactory(1, Arrays.asList("1,2,3,4,5")).generateLotto());
+				-> new ManualLottoFactory(Arrays.asList("1,2,3,4,5")).generateLotto());
 	}
 
 	@Test
 	void duplicatedNumber() {
 		assertThrows(InvalidNumberException.class, ()
-				-> new ManualLottoFactory(1, Arrays.asList("1,2,3,4,5,5")).generateLotto());
+				-> new ManualLottoFactory(Arrays.asList("1,2,3,4,5,5")).generateLotto());
 
 	}
 }
