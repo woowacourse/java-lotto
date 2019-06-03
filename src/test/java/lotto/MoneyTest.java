@@ -15,7 +15,12 @@ public class MoneyTest {
     }
 
     @Test
-    void 천원단위_아닐때() {
-        assertThrows(IllegalMoneyException.class, () -> Money.create(-999));
+    void 음수_액수() {
+        assertThrows(IllegalMoneyException.class, () -> Money.create(-500));
+    }
+
+    @Test
+    void 천원_단위가_아닌_액수() {
+        assertThrows(IllegalMoneyException.class, () -> Money.create(999));
     }
 }
