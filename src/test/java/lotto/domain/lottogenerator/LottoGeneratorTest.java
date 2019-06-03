@@ -20,7 +20,7 @@ class LottoGeneratorTest {
                 LottoNumber.getNumber(5),
                 LottoNumber.getNumber(6));
 
-        assertThat(LottoGenerator.create(new MockLottoGeneratingStrategy()))
+        assertThat(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))))
                 .isEqualTo(new Lotto(lottoNumbers));
     }
 }

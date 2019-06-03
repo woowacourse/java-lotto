@@ -19,7 +19,7 @@ public class RandomLottoGeneratingStrategy implements LottoGeneratingStrategy {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    private static List<LottoNumber> createLottoNumbers(List<LottoNumber> allLottoNumbers) {
+    private List<LottoNumber> createLottoNumbers(List<LottoNumber> allLottoNumbers) {
         return allLottoNumbers
                 .stream()
                 .limit(Lotto.LOTTO_NUMBER_SIZE)
