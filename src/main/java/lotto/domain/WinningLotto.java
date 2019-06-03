@@ -4,6 +4,7 @@ import lotto.domain.lottofactory.LottoNumber;
 import lotto.domain.lottofactory.LottoTicket;
 import lotto.utils.NullCheckUtil;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ public class WinningLotto {
 
     public static WinningLotto createWinningLotto(List<Integer> winningNumbers) {
         NullCheckUtil.checkNullWinningNumbers(winningNumbers);
+        Collections.sort(winningNumbers);
 
         List<LottoNumber> convertedLottoNumbers = winningNumbers.stream()
                 .map(LottoNumber::createLottoNumber)

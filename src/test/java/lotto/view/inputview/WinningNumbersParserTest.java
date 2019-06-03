@@ -14,26 +14,26 @@ class WinningNumbersParserTest {
     @Test
     void 입력이_없을_경우() {
         assertThrows(IllegalArgumentException.class, () -> {
-            WinningNumbersParser.getWinningNumbers("");
+            WinningNumParser.getWinningNum("");
         });
     }
 
     @Test
     void null_입력() {
         assertThrows(NullPointerException.class, () -> {
-            WinningNumbersParser.getWinningNumbers(null);
+            WinningNumParser.getWinningNum(null);
         });
     }
 
     @Test
     void slicing() {
         String input = "1,2,3,4,5,6";
-        assertThat(actual).isEqualTo(WinningNumbersParser.getWinningNumbers(input));
+        assertThat(actual).isEqualTo(WinningNumParser.getWinningNum(input));
     }
 
     @Test
     void 공백() {
         String input = "1, 2, 3 , 4, 5 ,  6 ";
-        assertThat(actual).isEqualTo(WinningNumbersParser.getWinningNumbers(input));
+        assertThat(actual).isEqualTo(WinningNumParser.getWinningNum(input));
     }
 }

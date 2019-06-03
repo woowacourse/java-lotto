@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningNumbersParser {
+public class WinningNumParser {
     private static final String ERROR_NO_INPUT = "입력이 없습니다.";
 
-    public static List<Integer> getWinningNumbers(String inputNumbers) {
+    public static List<Integer> getWinningNum(String inputNumbers) {
         NullCheckUtil.checkNullInput(inputNumbers);
         checkNoInput(inputNumbers);
 
