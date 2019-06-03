@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
-        PurchaseAmount purchaseAmount = createPurchaseAmount();
+        PurchaseAmount lottoPurchaseAmount = createLottoPurchaseAmount();
 
         LottoTicketGroup manualLottos = createManualLottos(purchaseAmount);
         LottoTicketGroup autoLottos = LottoMachine.generateLottos(purchaseAmount);
@@ -28,6 +28,17 @@ public class ConsoleUILottoApplication {
         LottoTicketGroup lottos = manualLottos.combine(autoLottos);
         LottoResult lottoResult = new LottoResult(createWinningLotto(), lottos);
         OutputView.printLottoResult(lottoResult);
+    }
+
+    private static PurchaseAmount createLottoPurchaseAmount() {
+        PurchaseAmount lottoPurchaseAmount = createPurchaseAmount();
+
+        if (lottoPurchaseAmount.canBuy(LottoTicket.getPrice())) {
+            return lottoPurchaseAmount;
+        }
+
+        OutputView.printErrorMessage("로또를 구매할 수 없는 금액입니다.");
+        return createLottoPurchaseAmount();
     }
 
     private static PurchaseAmount createPurchaseAmount() {

@@ -19,8 +19,8 @@ public class PurchaseAmount {
     }
 
     private void validatePurchaseAmount() {
-        if (money < LottoTicket.getPrice()) {
-            throw new PurchaseAmountException("최소 구입 금액은 " + LottoTicket.getPrice() + "입니다.");
+        if (money < MIN_MONEY) {
+            throw new PurchaseAmountException("구입 금액은 양수로 설정 가능합니다.");
         }
     }
 
