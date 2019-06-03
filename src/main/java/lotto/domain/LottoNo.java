@@ -8,14 +8,6 @@ public class LottoNo implements Comparable<LottoNo> {
     static final int MAX_NUMBER = 45;
     static final int MIN_NUMBER = 1;
 
-    private static final Map<Integer, LottoNo> map = new HashMap();
-
-    static {
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            map.put(i, new LottoNo(i));
-        }
-    }
-
     private final int number;
 
     private LottoNo(final int number) {
@@ -24,7 +16,7 @@ public class LottoNo implements Comparable<LottoNo> {
 
     public static LottoNo from(final int number) {
         validate(number);
-        return map.get(number);
+        return new LottoNo(number);
     }
 
     private static void validate(final int number) {
