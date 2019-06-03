@@ -17,7 +17,11 @@ public class LottoTicket {
     }
 
     public static LottoTicket create(String lottoNumbersText) {
-        return create(StringConverter.toNumbers(lottoNumbersText));
+        try {
+            return create(StringConverter.toNumbers(lottoNumbersText));
+        } catch (NumberFormatException e) {
+            throw new InvalidLottoTicketException("로또 번호는 숫자로 입력하세요");
+        }
     }
 
     public static LottoTicket create(List<Integer> lottoNumbers) {
