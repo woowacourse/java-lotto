@@ -12,8 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Money money = createMoney();
         LottoCount lottoCount = createLottoCount(money);
-        List<Lotto> inputLottos = createLottos(lottoCount.getManualCount(), lottoCount.getAutoCount());
-        Lottos lottos = new Lottos(inputLottos);
+        Lottos lottos = createLottos(lottoCount);
         OutputConsole.outputLotto(lottos, lottoCount.getManualCount(), lottoCount.getAutoCount());
         WinningLotto winningLotto = createWinningLotto(createLastWinningLotto());
         OutputConsole.outputResult(new LottoResult(winningLotto, lottos));
@@ -37,33 +36,24 @@ public class Main {
         }
     }
 
-    private static List<Lotto> createLottos(int numberOfManualLotto, int numberOfAutoLotto) {
-        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> lottos;
+    private static Lottos createLottos(LottoCount lottoCount) {
         try {
-            lottos = new ArrayList<>(createManualLotto(numberOfManualLotto));
+            LottosFactory lottosFactory = new LottosFactory(createManualLottoNumbers(lottoCount.getManualCount()), lottoCount);
+            return lottosFactory.createLottos();
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            return createLottos(numberOfManualLotto, numberOfAutoLotto);
+            return createLottos(lottoCount);
         }
-        createAutoLotto(numberOfAutoLotto, lottos);
-        return lottos;
     }
 
-    private static List<Lotto> createManualLotto(int numberOfManualLotto) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < numberOfManualLotto; i++) {
-            LottoMachine lottoMachine = new ManualLottoMachine(InputConsole.inputLotto());
-            lottos.add(lottoMachine.generateLotto());
+    private static List<List<Integer>> createManualLottoNumbers(int manualCount)
+            throws IllegalArgumentException {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> numbersList = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            numbersList.add(InputConsole.inputLotto());
         }
-        return lottos;
-    }
-
-    private static void createAutoLotto(int numberOfAutoLotto, List<Lotto> lottos) {
-        LottoMachine lottoMachine = new AutoLottoMachine();
-        for (int i = 0; i < numberOfAutoLotto; i++) {
-            lottos.add(lottoMachine.generateLotto());
-        }
+        return numbersList;
     }
 
     private static WinningLotto createWinningLotto(Lotto lastWinningLotto) {

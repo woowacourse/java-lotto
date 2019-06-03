@@ -34,7 +34,7 @@ public enum Rank {
         }
 
         for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch)) {
+            if (rank != SECOND && rank.matchCount(countOfMatch)) {
                 return rank;
             }
         }
