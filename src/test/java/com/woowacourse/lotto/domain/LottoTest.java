@@ -1,5 +1,6 @@
 package com.woowacourse.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,12 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
-	private List<LottoNumber> numbers;
+	private List<LottoNumber> numbers = new ArrayList<>();
 
 	@BeforeEach
 	void init() {
-		numbers = Arrays.asList(LottoNumber.getLottoNumber(1), LottoNumber.getLottoNumber(2), LottoNumber.getLottoNumber(3),
-				LottoNumber.getLottoNumber(4), LottoNumber.getLottoNumber(5), LottoNumber.getLottoNumber(6));
+		for(int i=1; i<=6; ++i) {
+			numbers.add(LottoNumber.getLottoNumber(i));
+		}
 	}
 
 	@Test
@@ -27,10 +29,19 @@ class LottoTest {
 
 	@Test
 	void checkCountOfMatchedLottoNumber() {
-		assertThat(new Lotto(numbers).getCountOfMatchedNumber(new Lotto(Arrays.asList(LottoNumber.getLottoNumber(1), LottoNumber.getLottoNumber(2), LottoNumber.getLottoNumber(3),
-				LottoNumber.getLottoNumber(4), LottoNumber.getLottoNumber(5), LottoNumber.getLottoNumber(6))))).isEqualTo(6);
-		assertThat(new Lotto(numbers).getCountOfMatchedNumber(new Lotto(Arrays.asList(LottoNumber.getLottoNumber(12), LottoNumber.getLottoNumber(11), LottoNumber.getLottoNumber(10),
-				LottoNumber.getLottoNumber(9), LottoNumber.getLottoNumber(8), LottoNumber.getLottoNumber(7))))).isEqualTo(0);
+		List<LottoNumber> allMatchedNumbers = new ArrayList<>();
+		List<LottoNumber> zeroMatchedNumbers = new ArrayList<>();
+
+		for(int i=1; i<=6; ++i) {
+			allMatchedNumbers.add(LottoNumber.getLottoNumber(i));
+		}
+
+		for(int i=7; i<=12; ++i) {
+			zeroMatchedNumbers.add(LottoNumber.getLottoNumber(i));
+		}
+
+		assertThat(new Lotto(numbers).getCountOfMatchedNumber(new Lotto(allMatchedNumbers))).isEqualTo(6);
+		assertThat(new Lotto(numbers).getCountOfMatchedNumber(new Lotto(zeroMatchedNumbers))).isEqualTo(0);
 	}
 
 	@Test

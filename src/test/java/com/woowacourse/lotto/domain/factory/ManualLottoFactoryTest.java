@@ -1,5 +1,6 @@
 package com.woowacourse.lotto.domain.factory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,11 +18,19 @@ class ManualLottoFactoryTest {
 	@Test
 	void generateManualLotto() {
 		List<Lotto> lotto = new ManualLottoFactory(2, Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12")).generateLotto();
-		Lotto lotto1 = new Lotto(Arrays.asList(LottoNumber.getLottoNumber(1), LottoNumber.getLottoNumber(2), LottoNumber.getLottoNumber(3),
-				LottoNumber.getLottoNumber(4), LottoNumber.getLottoNumber(5), LottoNumber.getLottoNumber(6)));
-		Lotto lotto2 = new Lotto(Arrays.asList(LottoNumber.getLottoNumber(7), LottoNumber.getLottoNumber(8), LottoNumber.getLottoNumber(9),
-				LottoNumber.getLottoNumber(10), LottoNumber.getLottoNumber(11), LottoNumber.getLottoNumber(12)));
-		assertThat(new Lottos(lotto)).isEqualTo(new Lottos(Arrays.asList(lotto1, lotto2)));
+		List<LottoNumber> numbers = new ArrayList<>();
+		for(int i=1; i<=6; ++i) {
+			numbers.add(LottoNumber.getLottoNumber(i));
+		}
+		Lotto FirstLotto = new Lotto(numbers);
+
+		numbers = new ArrayList<>();
+		for(int i=7; i<=12; ++i) {
+			numbers.add(LottoNumber.getLottoNumber(i));
+		}
+		Lotto SecondLotto = new Lotto(numbers);
+
+		assertThat(new Lottos(lotto)).isEqualTo(new Lottos(Arrays.asList(FirstLotto, SecondLotto)));
 	}
 
 	@Test
