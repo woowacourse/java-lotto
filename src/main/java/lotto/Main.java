@@ -18,12 +18,10 @@ public class Main {
         String[] number = InputView.inputHandleNumber(manualRound);
         MyLotto myLotto = new MyLotto(getHandLottos(number));
         myLotto.addLottos(getMyLotto(round));
-
         OutputView.printMyLotto(myLotto, round);
 
         WinningLotto winningLotto = new WinningLotto(getWinningLotto(InputView.inputWinnerNumber()), InputView.inputBonusBall());
         List<Rank> ranks = getResult(myLotto, winningLotto);
-
         OutputView.printResultStatus(ranks, getReturnRate(ranks, round));
     }
 

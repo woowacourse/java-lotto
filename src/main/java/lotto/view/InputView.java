@@ -60,9 +60,14 @@ public class InputView {
 
     public static String[] inputHandleNumber(int round) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<String> handNumbers = new ArrayList<>();
         String[] numbers = new String[round];
 
+        inputNumbers(round, numbers);
+
+        return numbers;
+    }
+
+    private static void inputNumbers(int round, String[] numbers) {
         try {
             for (int i = 0; i < round; i++) {
                 numbers[i] = SCAN.nextLine();
@@ -70,13 +75,7 @@ public class InputView {
 
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-
-            for (int i = 0; i < round; i++) {
-                numbers[i] = SCAN.nextLine();
-            }
         }
-
-        return numbers;
     }
 
     private static String getCheckString(String input) {
