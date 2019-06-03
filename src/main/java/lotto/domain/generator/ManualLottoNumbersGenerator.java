@@ -38,13 +38,13 @@ public class ManualLottoNumbersGenerator implements LottoNumbersGenerator {
     @Override
     public LottoNumbers generate() {
         checkReisterNumbers();
-
-        LottoNumbers lottoNumbers = new LottoNumbers(
-                Arrays.stream(numbers.split(SPLIT_REGEX))
-                .map(number -> Integer.parseInt(number.trim()))
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList()));
-        clear();
-        return lottoNumbers;
+        try {
+            return new LottoNumbers(Arrays.stream(numbers.split(SPLIT_REGEX))
+                    .map(number -> Integer.parseInt(number.trim()))
+                    .map(LottoNumber::valueOf)
+                    .collect(Collectors.toList()));
+        } finally {
+            clear();
+        }
     }
 }
