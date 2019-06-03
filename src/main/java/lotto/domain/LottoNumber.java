@@ -5,14 +5,14 @@ import lotto.domain.exception.InvalidLottoNumberException;
 import java.util.*;
 
 public class LottoNumber {
-    public static final int LOTTO_START_NUMBER = 0;
+    public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_LAST_NUMBER = 45;
     private static final List<LottoNumber> numbers = new ArrayList<>();
     private final int number;
 
     static {
-        for (int i = LOTTO_START_NUMBER; i < LOTTO_LAST_NUMBER; i++) {
-            numbers.add(new LottoNumber(i + 1));
+        for (int i = LOTTO_START_NUMBER; i <= LOTTO_LAST_NUMBER; i++) {
+            numbers.add(new LottoNumber(i));
         }
     }
 
@@ -21,7 +21,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber getLottoNumber(final int number) {
-        if (number <= LOTTO_START_NUMBER || number > LOTTO_LAST_NUMBER) {
+        if (number < LOTTO_START_NUMBER || number > LOTTO_LAST_NUMBER) {
             throw new InvalidLottoNumberException(number + "는 유효한 범위가 아닙니다. 로또 번호는 1부터 45 사이여야합니다.");
         }
 

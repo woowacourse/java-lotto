@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoNumber.getAllLottoNumbers;
 
 public class LottoGenerator {
-    private static final String WINNING_NUMBER_DELIMITER = ", ";
+    public static final String WINNING_NUMBER_DELIMITER = ", ";
 
     public static Lotto generateAutoLotto() {
         List<LottoNumber> allLottoNumbers = getAllLottoNumbers();

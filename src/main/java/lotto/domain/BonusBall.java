@@ -11,7 +11,7 @@ public class BonusBall {
     private final LottoNumber number;
 
     public BonusBall(final int number) {
-        if (number <= LOTTO_START_NUMBER || number > LOTTO_LAST_NUMBER) {
+        if (number < LOTTO_START_NUMBER || LOTTO_LAST_NUMBER < number) {
             throw new InvalidLottoNumberException("보너스 볼의 범위는 1 ~ 45 입니다.");
         }
 
