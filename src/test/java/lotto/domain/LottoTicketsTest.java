@@ -1,13 +1,18 @@
 package lotto.domain;
 
-import lotto.domain.lottogenerator.MockLottoGeneratingStrategy;
+import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
     @Test
-    void 로또구입금액_만큼_로또가_생성되었는지_확인() {
-        assertThat(new LottoTickets(new Payment(13_000), new MockLottoGeneratingStrategy()).size()).isEqualTo(13);
+    void 생성자_확인() {
+        LottoRepository lottoRepository = new LottoRepository();
+        lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1,2,3,4,5,6)));
+
+        assertThat(lottoRepository.getLottos()).isEqualTo(new LottoTickets(lottoRepository).getLottoTickets());
     }
 }
