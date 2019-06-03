@@ -2,6 +2,7 @@ package lotto;
 
 
 import lotto.model.*;
+import lotto.model.exceptions.IllegalNumberCombinationException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

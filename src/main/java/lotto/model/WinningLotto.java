@@ -1,6 +1,8 @@
 package lotto.model;
 
 
+import lotto.model.exceptions.IllegalNumberCombinationException;
+
 public class WinningLotto {
     private Lotto winningLotto;
     private LottoNumber bonusNumber;

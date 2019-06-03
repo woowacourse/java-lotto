@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.exceptions.IllegalNumberCombinationException;
+
 import java.util.List;
 
 public class Lotto {

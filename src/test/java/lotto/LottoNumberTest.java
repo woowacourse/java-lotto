@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.model.IllegalLottoNumberException;
+import lotto.model.exceptions.IllegalLottoNumberException;
 import lotto.model.LottoNumber;
 import org.junit.jupiter.api.Test;
 

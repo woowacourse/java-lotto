@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.exceptions.IllegalMoneyException;
+
 public class Money {
     private static final int PRICE_OF_LOTTO = 1000;
 

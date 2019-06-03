@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.exceptions.IllegalCountException;
+
 public class ManualLottoCount {
 
     private int count;

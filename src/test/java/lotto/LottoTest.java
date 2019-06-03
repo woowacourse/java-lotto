@@ -2,7 +2,7 @@ package lotto;
 
 
 
-import lotto.model.IllegalNumberCombinationException;
+import lotto.model.exceptions.IllegalNumberCombinationException;
 import lotto.model.Lotto;
 import org.junit.jupiter.api.Test;
 
