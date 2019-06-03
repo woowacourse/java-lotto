@@ -16,4 +16,8 @@ public class MyLotto {
     public Lotto getIndexByLotto(int index) {
         return myLotto.get(index);
     }
+
+    public void addLottos(List<Lotto> otherLottos) {
+        myLotto.addAll(otherLottos);
+    }
 }

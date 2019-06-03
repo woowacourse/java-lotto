@@ -14,9 +14,12 @@ public class Main {
 
     public static void main(String[] args) {
         int round = new Money(InputView.inputMoney()).getRound();
-        MyLotto myLotto = new MyLotto(getMyLotto(round));
+        int manualRound = InputView.inputHandNumber();
+        String[] number = InputView.inputHandleNumber(manualRound);
+        MyLotto myLotto = new MyLotto(getHandLottos(number));
+        myLotto.addLottos(getMyLotto(round));
 
-        OutputView.printMyLotto(myLotto);
+        OutputView.printMyLotto(myLotto, round);
 
         WinningLotto winningLotto = new WinningLotto(getWinningLotto(InputView.inputWinnerNumber()), InputView.inputBonusBall());
         List<Rank> ranks = getResult(myLotto, winningLotto);
@@ -40,9 +43,9 @@ public class Main {
 
     private static Lotto getWinningLotto(String numbers) {
         List<Number> lottos = new ArrayList<>();
-        String[] winnerNummber = numbers.split(",");
+        String[] winnerNumbers = numbers.split(",");
 
-        for (String s : winnerNummber) {
+        for (String s : winnerNumbers) {
             lottos.add(new Number(Integer.parseInt(s)));
         }
 
@@ -75,9 +78,26 @@ public class Main {
     }
 
     private static double calculateResultRate(int inputMoney, double sum) {
-        return sum / (inputMoney * MONEY_UNIT) * PERCENT;
+        return (sum / (inputMoney * MONEY_UNIT)) * PERCENT;
+    }
+
+    private static List<Lotto> getHandLottos(String[] handleNumbers) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < handleNumbers.length; i++) {
+            String[] oneNumbers = handleNumbers[i].split(",");
+            lottos.add(new Lotto(addLottoNumbers(i, oneNumbers)));
+        }
+
+        return lottos;
+    }
+
+    private static List<Number> addLottoNumbers(int i, String[] oneNumbers) {
+        List<Number> numbers = new ArrayList<>();
+
+        for (String oneNumber : oneNumbers) {
+            numbers.add(new Number(Integer.parseInt(oneNumber)));
+        }
+        return numbers;
     }
 }
-
-
-

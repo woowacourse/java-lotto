@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.Number;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,7 +33,7 @@ public class InputView {
 
         try {
             winnerNumber = SCAN.nextLine();
-            validWinnerNumber(winnerNumber);
+            validNumbers(winnerNumber);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
@@ -47,14 +49,44 @@ public class InputView {
         return new Number(Integer.parseInt(bonusBall));
     }
 
+    public static int inputHandNumber() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String number = INITIALIZATION;
+
+        number = getCheckString(number);
+
+        return Integer.parseInt(number);
+    }
+
+    public static String[] inputHandleNumber(int round) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<String> handNumbers = new ArrayList<>();
+        String[] numbers = new String[round];
+
+        try {
+            for (int i = 0; i < round; i++) {
+                numbers[i] = SCAN.nextLine();
+            }
+
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+
+            for (int i = 0; i < round; i++) {
+                numbers[i] = SCAN.nextLine();
+            }
+        }
+
+        return numbers;
+    }
+
     private static String getCheckString(String input) {
         try {
             input = SCAN.nextLine();
             validInputNumber(input);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
+            input = SCAN.nextLine();
         }
-
         return input;
     }
 
@@ -66,7 +98,7 @@ public class InputView {
         }
     }
 
-    private static void validWinnerNumber(String input) {
+    private static void validNumbers(String input) {
         Matcher matcher = WINNER_NUMBER_PATTERN.matcher(input);
 
         if (!matcher.find()) {
