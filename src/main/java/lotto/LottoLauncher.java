@@ -22,16 +22,6 @@ public class LottoLauncher {
         OutputView.printStatistics(lottoResult);
     }
 
-    private static LottoMachine generateManualLottoMachine(ManualLottoCount manualLottoCount) {
-        try {
-            List<Lotto> manualLottos = prepareManualLottos(manualLottoCount);
-            return new ManualLottoMachine(manualLottos);
-        } catch (Exception e) {
-            System.out.println("잘못된 입력입니다");
-            return generateManualLottoMachine(manualLottoCount);
-        }
-    }
-
     private static List<Lotto> prepareManualLottos(ManualLottoCount manualLottoCount) {
         try {
             List<Lotto> manualLottos = new ArrayList<>();
@@ -55,15 +45,6 @@ public class LottoLauncher {
         } catch (Exception e) {
             System.out.println("잘못된 번호 입력이 있습니다!");
             return generateWinningLotto();
-        }
-    }
-
-    private static Lottos generateLottos(LottoMachine machine) {
-        try {
-            return machine.generateLottos();
-        } catch (Exception e) {
-            System.out.println("잘못된 입력이 있습니다 처음부터 다시 입력하세요!");
-            return generateLottos(machine);
         }
     }
 
