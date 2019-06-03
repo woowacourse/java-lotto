@@ -33,7 +33,7 @@ public class LottoBuyer {
         return LottoGameResult.of(lottos, winningLotto);
     }
 
-    public LottosDTO getLottos() {
-        return LottosDTO.of(lottos);
+    public LottosDto getLottos() {
+        return LottosDto.of(lottos);
     }
 }

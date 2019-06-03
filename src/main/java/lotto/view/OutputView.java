@@ -16,18 +16,22 @@ public class OutputView {
         System.out.println("---------");
 
         for (Rank rank : Rank.reverseValues()) {
-            System.out.print(rank.getMatchCount() + "개 일치");
-            if (rank == Rank.SECOND) {
-                System.out.print(", 보너스 볼 일치");
-            }
-            System.out.print("(" + rank.getMoney() + ")- ");
+            showRank(rank);
             System.out.println(gameResult.getRankCount(rank) + "개");
         }
         System.out.printf("총 수익률은 %.1f 퍼센트입니다.", gameResult.profit(LottoMachine.LOTTO_MONEY));
     }
 
+    private static void showRank(Rank rank) {
+        System.out.print(rank.getMatchCount() + "개 일치");
+        if (rank == Rank.SECOND) {
+            System.out.print(", 보너스 볼 일치");
+        }
+        System.out.print("(" + rank.getMoney() + ")- ");
+    }
+
     public static void showLottos(final LottoBuyer service) {
-        LottosDTO lottos = service.getLottos();
+        LottosDto lottos = service.getLottos();
         while (lottos.hasNext()) {
             System.out.println(lottos.next());
         }

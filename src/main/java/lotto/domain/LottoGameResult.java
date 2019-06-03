@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoGameResult {
+    private static final int INIT_NUMBER = 0;
     private static final int PERCENT = 100;
 
     private final Map<Rank, Integer> lottoStat;
@@ -20,7 +21,7 @@ public class LottoGameResult {
 
     private void init() {
         for (Rank value : Rank.values()) {
-            this.lottoStat.put(value, 0);
+            this.lottoStat.put(value, INIT_NUMBER);
         }
     }
 

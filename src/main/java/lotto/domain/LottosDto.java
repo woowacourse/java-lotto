@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class LottosDTO {
+public class LottosDto {
     private final List<Lotto> copyLottos;
 
     private Iterator<Lotto> iterator;
 
-    private LottosDTO(final List<Lotto> lottos) {
+    private LottosDto(final List<Lotto> lottos) {
         this.copyLottos = new ArrayList<>(lottos);
         iterator = copyLottos.iterator();
     }
 
-    public static LottosDTO of(final List<Lotto> lottos) {
-        return new LottosDTO(lottos);
+    public static LottosDto of(final List<Lotto> lottos) {
+        return new LottosDto(lottos);
     }
 
     public boolean hasNext() {

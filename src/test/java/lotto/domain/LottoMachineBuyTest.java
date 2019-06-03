@@ -34,16 +34,7 @@ public class LottoMachineBuyTest {
     }
 
     @Test
-    public void 랜덤한_로또를_반환() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        List<LottoNumber> lottoNumbers = getLottoNumbers(numbers);
-
-        Lotto lotto = machine.buy(numbers);
-        assertThat(lotto.equals(Lotto.of(lottoNumbers))).isTrue();
-    }
-
-    @Test
-    public void 남은_로또_횟수_확인() {
+    public void 로또_구매_금액이_남았는지_확인() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         machine.buy(numbers);

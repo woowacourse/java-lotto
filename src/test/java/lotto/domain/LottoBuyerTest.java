@@ -22,14 +22,16 @@ class LottoBuyerTest {
         List<Integer> fifthNumbers = Arrays.asList(42, 2, 3, 4, 10, 11);  //FIFTH
         List<Integer> missNumbers = Arrays.asList(1, 2, 17, 18, 19, 20);  //MISS
 
-        LottoBuyer service = new LottoBuyer(2000);
+        final int money = 2000;
+        LottoBuyer buyer = new LottoBuyer(money);
 
-        service.buy(fifthNumbers);
-        while (service.canBuy()) {
-            service.buy(missNumbers);
+        buyer.buy(fifthNumbers);
+        while (buyer.canBuy()) {
+            buyer.buy(missNumbers);
         }
 
-        LottoGameResult gameResult = service.resultOf(lottoFactory.create(winningNumbers), LottoNumber.of(11));
+        int bonusNumber = 11;
+        LottoGameResult gameResult = buyer.resultOf(lottoFactory.create(winningNumbers), LottoNumber.of(bonusNumber));
         assertThat(gameResult.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(250);
     }
 }

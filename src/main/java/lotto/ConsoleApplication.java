@@ -19,7 +19,7 @@ public class ConsoleApplication {
         OutputView.showGameResult(gameResult);
     }
 
-    private static int assignManualPurchaseCount(LottoBuyer buyer) {
+    private static int assignManualPurchaseCount(final LottoBuyer buyer) {
         int manualPurchaseCount = InputView.inputManualPurchaseCount();
         int retCount = 0;
         for (; retCount < manualPurchaseCount && buyer.canBuy(); retCount++) {
@@ -29,7 +29,7 @@ public class ConsoleApplication {
         return retCount;
     }
 
-    private static int assignAutoPurchaseCount(LottoBuyer buyer) {
+    private static int assignAutoPurchaseCount(final LottoBuyer buyer) {
         int autoPurchaseCount = 0;
         while (buyer.canBuy()) {
             buyer.buyRandom();
@@ -38,7 +38,7 @@ public class ConsoleApplication {
         return autoPurchaseCount;
     }
 
-    private static LottoGameResult assignGameResult(LottoBuyer buyer) {
+    private static LottoGameResult assignGameResult(final LottoBuyer buyer) {
         Lotto winningLotto = InputView.inputWinningLotto();
         LottoNumber bonusNum = InputView.inputBonusLottoNumber();
         try {

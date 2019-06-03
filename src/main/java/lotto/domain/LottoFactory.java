@@ -6,9 +6,8 @@ import java.util.stream.Collectors;
 public class LottoFactory {
 
     public Lotto create(final List<Integer> lottoNumbers) {
-        List<LottoNumber> temp = lottoNumbers.stream()
+        return Lotto.of(lottoNumbers.stream()
                 .map(number -> LottoNumber.of(number))
-                .collect(Collectors.toList());
-        return Lotto.of(temp);
+                .collect(Collectors.toList()));
     }
 }

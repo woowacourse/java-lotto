@@ -21,20 +21,40 @@ class LottoTest {
     }
 
     @Test
-    public void testEquals() {
+    public void equals_재귀적인지_확인() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = lottoFactory.create(numbers);
+        assertThat(lotto.equals(lotto)).isTrue();
+
+        assertThat(lotto.equals(null)).isFalse();
+    }
+
+    @Test
+    public void equals_대칭적인지_확인() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = lottoFactory.create(numbers);
+        Lotto another = lottoFactory.create(numbers);
+
+        assertThat(lotto.equals(another)).isTrue();
+        assertThat(another.equals(lotto)).isTrue();
+    }
+
+    @Test
+    public void equals_이행적인지_확인() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto = lottoFactory.create(numbers);
         Lotto another = lottoFactory.create(numbers);
         Lotto other = lottoFactory.create(numbers);
 
         assertThat(lotto.equals(another)).isTrue();
-
-        assertThat(lotto.equals(other)).isTrue();
-        assertThat(other.equals(lotto)).isTrue();
-
-        assertThat(lotto.equals(another)).isTrue();
         assertThat(another.equals(other)).isTrue();
         assertThat(lotto.equals(other)).isTrue();
+    }
+
+    @Test
+    public void equals_null과_비교했을때_false반환하는지_확인() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = lottoFactory.create(numbers);
 
         assertThat(lotto.equals(null)).isFalse();
     }
@@ -73,16 +93,10 @@ class LottoTest {
         assertThatExceptionOfType(LottoNumberCreateException.class).isThrownBy(() -> {
             lottoFactory.create(numbers);
         });
-
-        List<Integer> numbers2 = Arrays.asList(1, 2, 3, 4, 0, 7);
-
-        assertThatExceptionOfType(LottoNumberCreateException.class).isThrownBy(() -> {
-            lottoFactory.create(numbers2);
-        });
     }
 
     @Test
-    public void 로또_숫자가_모두_같을때() {
+    public void 로또_숫자가_모두_같을때_확인() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> anotherNumbers = Arrays.asList(2, 3, 4, 5, 6, 1);
 

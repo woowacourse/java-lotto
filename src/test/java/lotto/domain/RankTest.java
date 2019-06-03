@@ -16,18 +16,16 @@ class RankTest {
     @BeforeEach
     public void setUp() {
         lottoFactory = new LottoFactory();
+        lotto = lottoFactory.create(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     public void 등수_1등() {
-        lotto = lottoFactory.create(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(Rank.valueOf(lotto.matchCount(lotto), true)).isEqualTo(Rank.FIRST);
     }
 
     @Test
     public void 등수_2등() {
-        lotto = lottoFactory.create(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         List<Integer> anotherNumbers = Arrays.asList(4, 2, 5, 1, 3, 7);
         anotherLotto = lottoFactory.create(anotherNumbers);
 
@@ -37,8 +35,6 @@ class RankTest {
 
     @Test
     public void 등수_3등() {
-        lotto = lottoFactory.create(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         List<Integer> anotherNumbers = Arrays.asList(4, 2, 5, 1, 3, 7);
         anotherLotto = lottoFactory.create(anotherNumbers);
 
@@ -47,8 +43,6 @@ class RankTest {
 
     @Test
     public void 등수_4등() {
-        lotto = lottoFactory.create(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         List<Integer> anotherNumbers = Arrays.asList(4, 2, 5, 1, 8, 7);
         anotherLotto = lottoFactory.create(anotherNumbers);
 
@@ -57,8 +51,6 @@ class RankTest {
 
     @Test
     public void 등수_5등() {
-        lotto = lottoFactory.create(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         List<Integer> anotherNumbers = Arrays.asList(4, 9, 5, 1, 8, 7);
         anotherLotto = lottoFactory.create(anotherNumbers);
 
@@ -67,8 +59,6 @@ class RankTest {
 
     @Test
     public void 당첨안됬을때() {
-        lotto = lottoFactory.create(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         List<Integer> anotherNumbers = Arrays.asList(12, 6, 10, 5, 8, 7);
         anotherLotto = lottoFactory.create(anotherNumbers);
 
@@ -77,8 +67,6 @@ class RankTest {
 
     @Test
     public void 당첨금_계산_테스트() {
-        lotto = lottoFactory.create(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         List<Integer> anotherNumbers = Arrays.asList(4, 9, 5, 1, 8, 7);
         anotherLotto = lottoFactory.create(anotherNumbers);
 
