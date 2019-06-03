@@ -19,7 +19,7 @@ class LottosGeneratorTest {
     }
 
     @Test
-    void 유효성_에러_확인() {
+    void 수동_입력이_총구매_횟수보다_많을_경우() {
         assertThrows(IllegalArgumentException.class,
                 () -> LottosGenerator.of(lottoNostrings, 1));
     }
