@@ -13,7 +13,7 @@ public class LottosFactory {
         this.lottoCount = lottoCount;
     }
 
-    public Lottos createLottos() {
+    public Lottos getLottos() {
         getManualLottos();
         getAutoLottos();
         return new Lottos(lottosList);

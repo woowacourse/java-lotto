@@ -44,7 +44,7 @@ public class Main {
             LottosFactory lottosFactory = new LottosFactory(
                     createManualLottoNumbers(lottoCount.getManualCount()),
                     lottoCount);
-            return lottosFactory.createLottos();
+            return lottosFactory.getLottos();
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createLottos(lottoCount);
