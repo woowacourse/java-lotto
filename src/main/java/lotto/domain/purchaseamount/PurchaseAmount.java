@@ -25,8 +25,8 @@ public class PurchaseAmount {
         }
     }
 
-    public int maxQuantity(int price) {
-        return money / price;
+    public LottoQuantity maxLottoQuantity() {
+        return LottoQuantity.create(money / LottoTicket.PRICE);
     }
 
     public boolean buy(int price) {
