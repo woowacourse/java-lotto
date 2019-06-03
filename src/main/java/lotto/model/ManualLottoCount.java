@@ -4,10 +4,12 @@ import lotto.model.exceptions.IllegalCountException;
 
 public class ManualLottoCount {
 
+    private static final int MINIMUM_LOTTO_COUNT = 0;
+
     private int count;
 
     public ManualLottoCount(int count, Money money) {
-        if (money.isInputBiggerThanMoney(count) || count < 0) {
+        if (money.isInputBiggerThanMoney(count) || count < MINIMUM_LOTTO_COUNT) {
             throw new IllegalCountException();
         }
         this.count = count;

@@ -9,7 +9,7 @@ public class WinningLotto {
 
 
     public WinningLotto(Lotto winningLottoTicket, LottoNumber bonusNumber) {
-        if (winningLottoTicket.contains(bonusNumber)) {
+        if (winningLottoTicket.containsNumber(bonusNumber)) {
             throw new IllegalNumberCombinationException();
         }
         this.winningLotto = winningLottoTicket;
@@ -17,8 +17,7 @@ public class WinningLotto {
     }
 
     public Prize prizeOf(Lotto lotto) {
-        int matchCount = lotto.countMatchLottoNumber(this.winningLotto);
-        Prize prize = Prize.getPrizeRank(matchCount, lotto.containsNumber(bonusNumber));
+        Prize prize = lotto.getRank(winningLotto, bonusNumber);
         return prize;
     }
 }

@@ -17,7 +17,7 @@ class LottoNumberTest {
 
     @Test
     void 숫자_범위_넘을때_테스트() {
-        assertThrows(IllegalLottoNumberException.class, ()-> new LottoNumber(46));
+        assertThrows(IllegalLottoNumberException.class, () -> new LottoNumber(46));
     }
 
 

@@ -5,11 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AutomaticLottoMachine implements LottoMachine {
+import static lotto.model.Lotto.LOTTO_NUMBER_LENGTH;
+import static lotto.model.LottoNumber.MAXIMUM_LOTTO_NUMBER;
+import static lotto.model.LottoNumber.MINMUM_LOTTO_NUMBERS;
 
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int MAX_NUM = 45;
-    private static final int MIN_NUM = 1;
+public class AutomaticLottoMachine implements LottoMachine {
 
     private final int automaticLottoCount;
 
@@ -28,14 +28,14 @@ public class AutomaticLottoMachine implements LottoMachine {
 
     private static List<Integer> generateRandomLottoNumbers() {
         Set<Integer> numbers = new HashSet<>();
-        while (numbers.size() < LOTTO_NUMBER_COUNT) {
+        while (numbers.size() < LOTTO_NUMBER_LENGTH) {
             numbers.add(generateRandomLottoNumberIndex());
         }
         return new ArrayList<>(numbers);
     }
 
     private static int generateRandomLottoNumberIndex() {
-        return (int) (Math.random() * (MAX_NUM) + MIN_NUM);
+        return (int) (Math.random() * (MAXIMUM_LOTTO_NUMBER) + MINMUM_LOTTO_NUMBERS);
     }
 
 }

@@ -5,7 +5,7 @@ import lotto.model.exceptions.IllegalNumberCombinationException;
 import java.util.List;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_LENGHT = 6;
+    public static final int LOTTO_NUMBER_LENGTH = 6;
 
     private List<LottoNumber> numbers;
 
@@ -23,7 +23,7 @@ public class Lotto {
     }
 
     private void checkLottoLength(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_LENGHT) {
+        if (numbers.size() != LOTTO_NUMBER_LENGTH) {
             throw new IllegalNumberCombinationException();
         }
     }
@@ -39,8 +39,9 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
+
+    public Prize getRank(Lotto winningLotto, LottoNumber bonusNumber) {
+        return Prize.getPrizeRank(countMatchLottoNumber(winningLotto), containsNumber(bonusNumber));
     }
 
     @Override

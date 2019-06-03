@@ -5,8 +5,10 @@ import lotto.model.exceptions.IllegalLottoNumberException;
 import java.util.*;
 
 public class LottoNumber {
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    public static final int MAXIMUM_LOTTO_NUMBER = 45;
+    public static final int MINMUM_LOTTO_NUMBERS = 1;
     private static List<LottoNumber> lottoNumbers = new ArrayList<>();
+
     private int number;
 
     static {
@@ -25,7 +27,7 @@ public class LottoNumber {
 
     public LottoNumber(int number) throws IllegalLottoNumberException {
         //todo 상수
-        if (number < 1 || number > 45) {
+        if (number < MINMUM_LOTTO_NUMBERS || number > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalLottoNumberException();
         }
         this.number = number;

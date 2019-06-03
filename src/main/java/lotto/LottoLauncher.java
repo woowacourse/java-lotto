@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoLauncher {
+    private static final int STARTING_COUNT = 0;
 
     public static void main(String[] args) {
         Money money = generateMoney();
@@ -25,9 +26,10 @@ public class LottoLauncher {
     private static List<Lotto> prepareManualLottos(ManualLottoCount manualLottoCount) {
         try {
             List<Lotto> manualLottos = new ArrayList<>();
-            int count = manualLottoCount.getCount();
-            for (int i = 0; i < count; i++) {
+            int currentCount = STARTING_COUNT;
+            while (manualLottoCount.isCountFinished(currentCount)) {
                 manualLottos.add(new Lotto(InputView.askManualLottoNumbers()));
+                currentCount++;
             }
             return manualLottos;
         } catch (Exception e) {
