@@ -8,46 +8,36 @@ import lotto.view.OutputView;
 
 public class ConsoleApplication {
     public static void main(String[] args) {
-        PurchaseInformation purchaseInformation = setUpPurchaseInformation();
+        try {
+            PurchaseInformation purchaseInformation = setUpPurchaseInformation();
 
-        Lottos lottos = purchaseLottos(purchaseInformation);
+            Lottos lottos = purchaseLottos(purchaseInformation);
 
-        LottoGame lottoGame = setUpLottoGame();
+            LottoGame lottoGame = setUpLottoGame();
 
-        LottoResult lottoResult = lottoGame.play(lottos);
-        OutputView.outputResult(lottoResult);
+            LottoResult lottoResult = lottoGame.play(lottos);
+            OutputView.outputResult(lottoResult);
+        } catch (NumberFormatException e) {
+            System.err.println("잘못된 수가 입력되었습니다.");
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private static PurchaseInformation setUpPurchaseInformation() {
-        try {
-            Money money = new Money(InputView.inputMoney());
-            LottoCount lottoCount = new LottoCount(InputView.inputNumberOfManualLottos(), money);
-            return new PurchaseInformation(lottoCount);
-        } catch (NumberFormatException e) {
-            System.err.println("잘못된 입력입니다.");
-            return setUpPurchaseInformation();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return setUpPurchaseInformation();
-        }
+        Money money = new Money(InputView.inputMoney());
+        LottoCount lottoCount = new LottoCount(InputView.inputNumberOfManualLottos(), money);
+        return new PurchaseInformation(lottoCount);
     }
 
     private static Lottos purchaseLottos(PurchaseInformation purchaseInformation) {
-        try {
-            registerManualLottosNumbers(purchaseInformation);
+        registerManualLottosNumbers(purchaseInformation);
 
-            Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
+        Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
 
-            OutputView.outputLottosPurchaseMessage(purchaseInformation);
-            OutputView.outputLottos(lottos);
-            return lottos;
-        } catch (NumberFormatException e) {
-            System.err.println("잘못된 입력입니다.");
-            return purchaseLottos(purchaseInformation);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return purchaseLottos(purchaseInformation);
-        }
+        OutputView.outputLottosPurchaseMessage(purchaseInformation);
+        OutputView.outputLottos(lottos);
+        return lottos;
     }
 
     private static void registerManualLottosNumbers(PurchaseInformation purchaseInformation) {
@@ -62,20 +52,15 @@ public class ConsoleApplication {
     }
 
     private static LottoGame setUpLottoGame() {
-        try {
-            OutputView.requestWinningNumbersMessage();
+        OutputView.requestWinningNumbersMessage();
 
-            ManualLottoNumbersGenerator manualLottoNumbersGenerator = ManualLottoNumbersGenerator.getInstance();
-            manualLottoNumbersGenerator.register(InputView.inputLottoNumbers());
-            LottoNumbers winningNumbers = manualLottoNumbersGenerator.generate();
+        ManualLottoNumbersGenerator manualLottoNumbersGenerator = ManualLottoNumbersGenerator.getInstance();
+        manualLottoNumbersGenerator.register(InputView.inputLottoNumbers());
+        LottoNumbers winningNumbers = manualLottoNumbersGenerator.generate();
 
-            LottoNumber bonusNumber = LottoNumber.valueOf(InputView.inputBonusBall());
+        LottoNumber bonusNumber = LottoNumber.valueOf(InputView.inputBonusBall());
 
-            WinningInformation winningInformation = new WinningInformation(winningNumbers, bonusNumber);
-            return new LottoGame(winningInformation);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return setUpLottoGame();
-        }
+        WinningInformation winningInformation = new WinningInformation(winningNumbers, bonusNumber);
+        return new LottoGame(winningInformation);
     }
 }
