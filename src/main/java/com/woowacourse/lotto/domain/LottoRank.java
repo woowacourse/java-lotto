@@ -30,6 +30,10 @@ public enum LottoRank {
 		if (count == SECOND.count && bonusBall) {
 			return LottoRank.SECOND;
 		}
-		return Arrays.stream(values()).filter(rank -> rank.count == count).findAny().orElse(ZERO);
+		return Arrays.stream(values())
+				.filter(rank -> rank.count == count)
+				.findAny()
+				.orElse(ZERO)
+				;
 	}
 }
