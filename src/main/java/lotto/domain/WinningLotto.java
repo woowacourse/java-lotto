@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningLotto {
-    private Lotto lotto;
+    private Lotto winningLotto;
     private BonusNumber bonusNumber;
 
-    public WinningLotto(Lotto lotto, BonusNumber bonusNumber) {
-        if (lotto.contains(bonusNumber)) {
+    public WinningLotto(Lotto winningLotto, BonusNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException("로또숫자와 보너스숫자가 중복으로 입력되었습니다");
         }
 
-        this.lotto = lotto;
+        this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
@@ -29,7 +29,7 @@ public class WinningLotto {
     }
 
     private void produceResultForEachTicket(Map<Rank, Integer> map, Lotto ticket) {
-        Rank rank = Rank.valueOf(ticket.match(lotto), lotto.contains(bonusNumber));
+        Rank rank = Rank.valueOf(ticket.match(winningLotto), ticket.contains(bonusNumber));
         if (map.containsKey(rank)) {
             map.put(rank, map.get(rank) + 1);
             return;

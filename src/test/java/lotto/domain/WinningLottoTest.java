@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.lottogenerator.MockLottoGeneratingStrategy;
+import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,10 +41,13 @@ class WinningLottoTest {
 
     @Test
     void 당첨로또_결과를_잘_생성하는지_확인() {
-        Map<Rank, Integer> lottoScore = new HashMap<>();
+        LottoRepository lottoRepository = new LottoRepository();
+        lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        LottoTickets lottoTickets = new LottoTickets(new Payment(2_000), new MockLottoGeneratingStrategy());
-        lottoScore.put(Rank.FIRST, 2);
+        LottoTickets lottoTickets = new LottoTickets(lottoRepository);
+
+        Map<Rank, Integer> lottoScore = new HashMap<>();
+        lottoScore.put(Rank.FIRST, 1);
 
         WinningLotto winningLotto = new WinningLotto(lotto, new BonusNumber(7));
 
