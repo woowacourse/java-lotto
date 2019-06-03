@@ -31,4 +31,15 @@ public class WinningLottoTest {
 	void validateDuplicatedBonusBall() {
 		assertThrows(IllegalArgumentException.class, () -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "5"), 5));
 	}
+
+	@Test
+	void validateRangeOfNumbers() {
+		assertThrows(InvalidNumberException.class, () -> new WinningLotto(Arrays.asList("0", "2", "3", "4", "5"), 6));
+		assertThrows(InvalidNumberException.class, () -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "46"), 6));
+	}
+
+	@Test
+	void validateTypeOfNumbers() {
+		assertThrows(NumberFormatException.class, () -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "a"), 6));
+	}
 }

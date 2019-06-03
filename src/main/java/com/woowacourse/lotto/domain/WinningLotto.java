@@ -7,30 +7,32 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.woowacourse.lotto.exception.InvalidNumberException;
+import org.apache.commons.lang3.StringUtils;
 
 import static com.woowacourse.lotto.domain.LottoNumber.*;
 
 
 public class WinningLotto {
-	private static final String REGEX_OF_NUMBER = "[1-9]|[1-3][0-9]|4[0-5]";
-	private static final Pattern PATTERN_OF_LOTTO_NUMBER = Pattern.compile(REGEX_OF_NUMBER);
+	//private static final String REGEX_OF_NUMBER = "[1-9]|[1-3][0-9]|4[0-5]";
+	//private static final Pattern PATTERN_OF_LOTTO_NUMBER = Pattern.compile(REGEX_OF_NUMBER);
 	private Lotto winningLotto;
 	private LottoNumber bonusBall;
 
 	public WinningLotto(final List<String> numbers, int bonusBall) {
-		this.winningLotto = new Lotto(numbers.stream()
-				.map(number -> LottoNumber.getLottoNumber(Integer.valueOf(number)))
-				.collect(Collectors.toList()))
-		;
+		List<LottoNumber> lottoNumbers = numbers.stream()
+				.map(number -> getLottoNumber(Integer.valueOf(number)))
+				.collect(Collectors.toList());
+		this.winningLotto = new Lotto(lottoNumbers);
+		validateDuplicateBonusBall(bonusBall);
 		this.bonusBall = LottoNumber.getLottoNumber(bonusBall);
-		validateDuplicateBonusBall();
 		validateDuplicatedNumber(numbers);
 		validateSize(numbers);
-		validateDuplicatedNumbers(numbers);
+		validateRangeOfNumbers(numbers);
+		validateTypeOfNumbers(numbers);
 	}
 
-	private void validateDuplicateBonusBall() {
-		if (winningLotto.contains(bonusBall)) {
+	private void validateDuplicateBonusBall(int bonusBall) {
+		if (winningLotto.contains(LottoNumber.getLottoNumber(bonusBall))) {
 			throw new IllegalArgumentException(ExceptionOutput.DUPLICATE_LOTTO_NUMBER.getExceptionMessage());
 		}
 	}
@@ -47,9 +49,19 @@ public class WinningLotto {
 		}
 	}
 
-	private void validateDuplicatedNumbers(List<String> numbers) {
-		if (!numbers.stream().allMatch(number -> PATTERN_OF_LOTTO_NUMBER.matcher(number).matches())) {
+	private void validateRangeOfNumbers(List<String> numbers) {
+		if(!numbers.stream().allMatch(number -> checkRangeOfNumber(Integer.parseInt(number)))) {
 			throw new InvalidNumberException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
+		}
+	}
+
+	private boolean checkRangeOfNumber(int number) {
+		return (MIN_NUMBER_OF_LOTTO <= number && number <= MAX_NUMBER_OF_LOTTO);
+	}
+
+	private void validateTypeOfNumbers(List<String> numbers) {
+		if(!numbers.stream().allMatch(number -> StringUtils.isNumeric(number))) {
+			throw new IllegalArgumentException(ExceptionOutput.VIOLATE_LOTTO_NUMBER_RANGE.getExceptionMessage());
 		}
 	}
 
