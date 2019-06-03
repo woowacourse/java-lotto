@@ -13,12 +13,11 @@ public class LottosFactory {
 	private int countOfManualLotto;
 
 	public LottosFactory(Money money, int countOfManualLotto) {
-		this.countOfAllLotto = money.getCountOfLotto();
-		this.countOfManualLotto = countOfManualLotto;
-
 		if (countOfAllLotto < countOfManualLotto) {
 			throw new InvalidCountOfManualLottoException(ExceptionOutput.VIOLATE_PURCHASED_LOTTO.getExceptionMessage());
 		}
+		this.countOfAllLotto = money.getCountOfLotto();
+		this.countOfManualLotto = countOfManualLotto;
 	}
 
 	public Lottos generateLotto(List<String> numbers) {
