@@ -16,13 +16,13 @@ public class Lotto {
 
     private void checkDuplication(List<Integer> numbers) {
         if (numbers.stream().distinct().count() != numbers.size()) {
-            throw new IllegalNumberCombinationException();
+            throw new IllegalNumberCombinationException("중복되는 숫자가 있습니다.");
         }
     }
 
     private void checkLottoLength(List<Integer> numbers) {
         if (numbers.size() != NUMBER_LENGTH) {
-            throw new IllegalNumberCombinationException();
+            throw new IllegalNumberCombinationException("로또 수의 개수는 6개여야 합니다.");
         }
     }
 

@@ -12,7 +12,7 @@ public class LottoCount {
 
     public static LottoCount create(int count, Money money) {
         if (count < 0 || count > money.getLottoCount()) {
-            throw new IllegalCountException();
+            throw new IllegalCountException("수동 로또 개수는 0 이상 입력한 금액으로 살 수 있는 개수 이하여야 합니다.");
         }
         return new LottoCount(count);
     }

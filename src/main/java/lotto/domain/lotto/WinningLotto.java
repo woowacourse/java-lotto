@@ -15,7 +15,7 @@ public class WinningLotto {
 
     public static WinningLotto create(List<Integer> numbers, int bonusNumber) {
         if (numbers.contains(bonusNumber)) {
-            throw new IllegalNumberCombinationException();
+            throw new IllegalNumberCombinationException("보너스 숫자가 로또 숫자들과 중복됩니다.");
         }
         return new WinningLotto(numbers, bonusNumber);
     }

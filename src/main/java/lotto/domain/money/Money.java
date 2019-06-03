@@ -15,7 +15,7 @@ public class Money {
 
     public static Money create(int money) {
         if (money < Lotto.PRICE || money % Lotto.PRICE != ZERO) {
-            throw new IllegalMoneyException();
+            throw new IllegalMoneyException("금액은 1000원 이상, 1000원 단위의 금액이여야 합니다.");
         }
         return new Money(money);
     }

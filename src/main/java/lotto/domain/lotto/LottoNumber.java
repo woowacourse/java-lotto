@@ -16,7 +16,7 @@ public class LottoNumber {
 
     public LottoNumber(int number) throws IllegalLottoNumberException {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalLottoNumberException();
+            throw new IllegalLottoNumberException("로또 숫자는 1이상 45이하여야 합니다.");
         }
         this.number = number;
     }
