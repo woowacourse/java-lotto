@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
+import lotto.domain.RankResult;
 
 import java.util.Map;
 
@@ -35,11 +36,21 @@ public class OutputView {
         }
     }
 
-    public static void outputLotteriesResult(Map<Rank, Integer> rankResult) {
+    public static void outputLotteriesResult(RankResult rankResult) {
+        outputLotteriesRank(rankResult.getRankResult());
+        outputLotteriesRate(rankResult.getRate());
+
+    }
+
+    private static void outputLotteriesRank(Map<Rank, Integer> rankResult) {
         System.out.println(TITLE_RATE_OF_JACKPOT);
         for (Map.Entry<Rank, Integer> rankIntegerEntry : rankResult.entrySet()) {
             generateResultSentence(rankIntegerEntry.getKey(), rankIntegerEntry.getValue());
         }
+    }
+
+    private static void outputLotteriesRate(float rate) {
+        System.out.println(String.format(OUTPUT_RATE, rate, "%"));
     }
 
     private static void generateResultSentence(Rank rank, int matchCount) {
@@ -51,9 +62,5 @@ public class OutputView {
             return;
         }
         System.out.println(String.format(OUTPUT_DEFALUT_RANK, rank.getCountOfMatch(), rank.getWinningMoney(), matchCount));
-    }
-
-    public static void outputLotteriesRate(float rate) {
-        System.out.println(String.format(OUTPUT_RATE, rate, "%"));
     }
 }
