@@ -27,8 +27,8 @@ public class LottoService {
         return lottoMachine.isRemainMoney();
     }
 
-    public LottoGameResult gameResultOf(final WinningLotto winningLotto) {
-        return LottoGameResult.of(lottos.getLottos(), winningLotto);
+    public LottoGameResult gameResult() {
+        return LottoGameResult.of(lottos.getLottos());
     }
 
     public List<Lotto> getLottos() {

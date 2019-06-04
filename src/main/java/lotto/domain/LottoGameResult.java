@@ -8,25 +8,26 @@ public class LottoGameResult {
     private static final int INIT_NUMBER = 0;
     private static final int PERCENT = 100;
 
+    private final List<Lotto> lottos;
     private final Map<Rank, Integer> lottoStat;
 
-    private LottoGameResult(final List<Lotto> lottos, final WinningLotto winningLotto) {
+    private LottoGameResult(final List<Lotto> lottos) {
+        this.lottos = lottos;
         this.lottoStat = new HashMap<>();
-        init();
-        for (final Lotto lotto : lottos) {
-            final Rank rank = winningLotto.match(lotto);
-            lottoStat.put(rank, lottoStat.get(rank) + 1);
-        }
-    }
-
-    private void init() {
         for (Rank value : Rank.values()) {
             this.lottoStat.put(value, INIT_NUMBER);
         }
     }
 
-    static LottoGameResult of(final List<Lotto> lottos, final WinningLotto winningLotto) {
-        return new LottoGameResult(lottos, winningLotto);
+    static LottoGameResult of(final List<Lotto> lottos) {
+        return new LottoGameResult(lottos);
+    }
+
+    public void match(final WinningLotto winningLotto) {
+        for (final Lotto lotto : lottos) {
+            final Rank rank = winningLotto.match(lotto);
+            lottoStat.put(rank, lottoStat.get(rank) + 1);
+        }
     }
 
     public int getRankCount(final Rank rank) {

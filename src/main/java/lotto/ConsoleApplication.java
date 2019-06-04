@@ -2,28 +2,25 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.view.InputView;
+import lotto.view.LottosDto;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-// TODO Exception
-// TODO depth 1
-// TODO Dto 부분 완료
 public class ConsoleApplication {
     private static final int START_COUNT = 0;
 
     public static void main(String[] args) {
-        LottoService buyer = new LottoService(InputView.inputBuyMoney());
+        LottoService service = new LottoService(InputView.inputBuyMoney());
 
-        int manualPurchaseCount = assignManualPurchaseCount(buyer);
-        int autoPurchaseCount = assignAutoPurchaseCount(buyer);
+        int manualPurchaseCount = assignManualPurchaseCount(service);
+        int autoPurchaseCount = assignAutoPurchaseCount(service);
         OutputView.showBuyCounts(manualPurchaseCount, autoPurchaseCount);
 
-        OutputView.showLottos(createLottosDto(buyer.getLottos()));
-        WinningLotto winningLotto = assignGameResult();
-        LottoGameResult gameResult = buyer.gameResultOf(winningLotto);
+        OutputView.showLottos(createLottosDto(service.getLottos()));
+        WinningLotto winningLotto = assignWinningLotto();
+        LottoGameResult gameResult = service.gameResult();
+        gameResult.match(winningLotto);
         OutputView.showGameResult(gameResult);
     }
 
@@ -46,26 +43,19 @@ public class ConsoleApplication {
         return autoPurchaseCount;
     }
 
-    private static WinningLotto assignGameResult() {
+    private static WinningLotto assignWinningLotto() {
         Lotto lotto = InputView.inputWinningLotto();
         LottoNumber bonusNum = InputView.inputBonusLottoNumber();
         try {
             return WinningLotto.of(lotto, bonusNum);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
-            return assignGameResult();
+            return assignWinningLotto();
         }
     }
 
     private static LottosDto createLottosDto(final List<Lotto> lottos) {
-        List<LottoDto> semiLottos = new ArrayList<>();
-        for (final Lotto lotto : lottos) {
-            LottoDto lottoDto = new LottoDto();
-            lottoDto.setNumbers(lotto.getLottoNumbers().stream()
-                    .map(lottoNumber -> lottoNumber.toString())
-                    .collect(Collectors.toList()));
-            semiLottos.add(lottoDto);
-        }
-        return LottosDto.of(semiLottos);
+        DtoConverter converter = new DtoConverter();
+        return converter.convertLottosToDto(lottos);
     }
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 public class OutputView {
     private static final String DELIMITER = ", ";
+    private static final String LEFT_BRACKET = "[";
+    private static final String RIGHT_BRACKET = "]";
 
     private OutputView() {
 
@@ -26,7 +28,7 @@ public class OutputView {
         System.out.printf("총 수익률은 %.1f 퍼센트입니다.", gameResult.profit(LottoMachine.LOTTO_MONEY));
     }
 
-    private static void showRank(Rank rank) {
+    private static void showRank(final Rank rank) {
         System.out.print(rank.getMatchCount() + "개 일치");
         if (rank == Rank.SECOND) {
             System.out.print(", 보너스 볼 일치");
@@ -43,8 +45,8 @@ public class OutputView {
     }
 
     private static void showLotto(LottoDto lotto) {
-        System.out.print("[");
+        System.out.print(LEFT_BRACKET);
         System.out.print(String.join(DELIMITER, lotto.getNumbers()));
-        System.out.print("]");
+        System.out.print(RIGHT_BRACKET);
     }
 }

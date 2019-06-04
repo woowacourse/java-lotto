@@ -9,31 +9,33 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoServiceTest {
+    private static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
+    private static final List<Integer> FIFTH_NUMBERS = Arrays.asList(42, 2, 3, 4, 10, 11);
+    private static final List<Integer> MISS_NUMBERS = Arrays.asList(1, 2, 17, 18, 19, 20);
+    private static final int MONEY = 2000;
+    private static final int BONUS_NUM = 11;
+    private static final int ANSWER = 250;
+
     private LottoFactory lottoFactory;
+    private LottoService buyer;
 
     @BeforeEach
     public void setUp() {
         lottoFactory = new LottoFactory();
+        buyer = new LottoService(MONEY);
+
+        buyer.buy(FIFTH_NUMBERS);
+        while (buyer.canBuy()) {
+            buyer.buy(MISS_NUMBERS);
+        }
     }
 
     @Test
     public void 구매를_제대로하고_당첨로또에_따른_결과를_제대로_반환해주는지() {
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);   // BUY
-        List<Integer> fifthNumbers = Arrays.asList(42, 2, 3, 4, 10, 11);  //FIFTH
-        List<Integer> missNumbers = Arrays.asList(1, 2, 17, 18, 19, 20);  //MISS
+        Lotto lotto = lottoFactory.create(WINNING_NUMBERS);
 
-        final int money = 2000;
-        LottoService buyer = new LottoService(money);
-
-        buyer.buy(fifthNumbers);
-        while (buyer.canBuy()) {
-            buyer.buy(missNumbers);
-        }
-
-        int bonusNumber = 11;
-        Lotto lotto = lottoFactory.create(winningNumbers);
-
-        LottoGameResult gameResult = buyer.gameResultOf(WinningLotto.of(lotto, LottoNumber.of(bonusNumber)));
-        assertThat(gameResult.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(250);
+        LottoGameResult gameResult = buyer.gameResult();
+        gameResult.match(WinningLotto.of(lotto, LottoNumber.of(BONUS_NUM)));
+        assertThat(gameResult.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(ANSWER);
     }
 }
