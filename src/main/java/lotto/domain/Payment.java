@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.PaymentOutOfBoundsException;
+
 import java.util.Objects;
 
 public class Payment {
@@ -9,7 +11,7 @@ public class Payment {
 
     public Payment(int payment) {
         if (payment < LOTTO_PRICE) {
-            throw new IllegalArgumentException(String.format("로또가격(%d)보다 높은 금액을 입력하세요", LOTTO_PRICE));
+            throw new PaymentOutOfBoundsException(String.format("로또가격(%d)보다 높은 금액을 입력하세요", LOTTO_PRICE));
         }
         this.payment = payment;
     }

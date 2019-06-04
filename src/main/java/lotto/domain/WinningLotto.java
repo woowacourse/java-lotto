@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
+import lotto.exception.DuplicateLottoNumberException;
+
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ public class WinningLotto {
 
     public WinningLotto(Lotto winningLotto, BonusNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException("로또숫자와 보너스숫자가 중복으로 입력되었습니다");
+            throw new DuplicateLottoNumberException("로또숫자와 보너스숫자가 중복으로 입력되었습니다");
         }
 
         this.winningLotto = winningLotto;

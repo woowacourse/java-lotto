@@ -31,9 +31,9 @@ public enum Rank {
 
         return Arrays.stream(values())
                 .filter(rank -> rank.match(countOfMatch))
-                .filter(rank -> rank != SECOND)
+                .filter(Rank::isNotSecond)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("존재하는 Rank가 없습니다"));
+                .orElseThrow(NullPointerException::new);
     }
 
     private boolean match(int countOfMatch) {
@@ -41,7 +41,11 @@ public enum Rank {
     }
 
     public boolean isMiss() {
-        return this == Rank.MISS;
+        return this == MISS;
+    }
+
+    public boolean isNotSecond() {
+        return this != SECOND;
     }
 
     public static long calculateTotalWinningMoney(Map<Rank, Integer> lottoScore) {

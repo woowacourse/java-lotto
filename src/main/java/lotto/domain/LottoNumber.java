@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumberOutOfBoundsException;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -21,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private LottoNumber(int number) {
         if (number < MIN_BOUNDARY || number > MAX_BOUNDARY) {
-            throw new IllegalArgumentException("범위를 벗어났습니다.");
+            throw new LottoNumberOutOfBoundsException("범위를 벗어났습니다.");
         }
         this.number = number;
     }

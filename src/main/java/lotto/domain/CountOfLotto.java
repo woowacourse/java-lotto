@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.NaturalNumberException;
+import lotto.exception.PaymentOutOfBoundsException;
+
 public class CountOfLotto {
     private static final int ZERO = 0;
     private final int countOfManualLotto;
@@ -9,11 +12,11 @@ public class CountOfLotto {
         int totalLotto = payment.calculateCountOfLotto();
 
         if (totalLotto < countOfManualLotto) {
-            throw new IllegalArgumentException("입력한 로또 개수가 지불한 금액을 초과합니다");
+            throw new PaymentOutOfBoundsException("입력한 로또 개수가 지불한 금액을 초과합니다");
         }
 
         if (countOfManualLotto < ZERO) {
-            throw new IllegalArgumentException("음수를 넣을 수 없습니다");
+            throw new NaturalNumberException("음수를 넣을 수 없습니다");
         }
         this.countOfManualLotto = countOfManualLotto;
         this.countOfRandomLotto = totalLotto - countOfManualLotto;

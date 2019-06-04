@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.InvalidCountOfLottoNumberException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -19,11 +22,11 @@ public class Lotto {
         }
 
         if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
-            throw new IllegalArgumentException("중복되는 숫자가 있습니다");
+            throw new DuplicateLottoNumberException("중복되는 숫자가 있습니다");
         }
 
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또 번호의 개수가 올바르지 않습니다.");
+            throw new InvalidCountOfLottoNumberException("로또 번호의 개수가 올바르지 않습니다.");
         }
     }
 
