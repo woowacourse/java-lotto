@@ -8,7 +8,7 @@ import lotto.view.OutputView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        UserLottos userLottos = new UserLottos(InputView.inputLottoMoney());
+        UserLottos userLottos = new UserLottos(InputView.inputUserLotto());
         OutputView.printLottos(userLottos);
         WinningLotto winningLotto = new WinningLotto(InputView.inputWinningLotto());
         LottoResult result = userLottos.match(winningLotto);

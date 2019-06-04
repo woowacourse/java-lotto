@@ -23,6 +23,12 @@ public class LottoResult {
         }
     }
 
+    private String status(Map.Entry<Reward, Integer> entry) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(entry.getKey()).append(" - ").append(entry.getValue()).append("\n");
+        return stringBuilder.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -33,11 +39,5 @@ public class LottoResult {
         return "당첨통계\n" +
                 "--------\n" +
                 stringBuilder.toString();
-    }
-
-    private String status(Map.Entry<Reward, Integer> entry) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(entry.getKey()).append(" - ").append(entry.getValue()).append("\n");
-        return stringBuilder.toString();
     }
 }

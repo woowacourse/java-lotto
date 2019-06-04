@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class UserLottos {
     private final List<Lotto> lottos;
@@ -9,11 +10,29 @@ public class UserLottos {
         this.lottos = lottos;
     }
 
-    public UserLottos(String inputMoney) {
-        int lottoCount = Integer.parseInt(inputMoney) / 1000;
-        lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+    public UserLottos(UserLottoDto dto) {
+        int lottoCount = Integer.parseInt(dto.getInputLottoMoney()) / 1000;
+        lottos = new ArrayList<>(manualLottos(dto.getManualLottoNumber()));
+        while (lottos.size() != lottoCount) {
             lottos.add(LottoGenerator.lotto());
+        }
+    }
+
+    private List<Lotto> manualLottos(List<String> numbers) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String number : numbers) {
+            lottos.add(new Lotto(splitNumbers(number)));
+        }
+        return lottos;
+    }
+
+    private List<Integer> splitNumbers(String numbers) {
+        try {
+            return Arrays.stream(numbers.split(","))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
         }
     }
 

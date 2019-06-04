@@ -27,7 +27,7 @@
 ## TODO
 - TDD
 
-- UserLottos와 WinningLotto.. 응집인지 의존인지?
+- UserLottos와 WinningLotto, Reward.. 응집인지 의존인지?
 
 - 결과 출력을 위해 어떻게 할 것인지?
     - Map?
