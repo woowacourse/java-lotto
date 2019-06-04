@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
     private Lotto winningLotto;
@@ -18,23 +20,9 @@ public class WinningLotto {
     }
 
     public Result produceResult(LottoTickets lottoTickets) {
-        Map<Rank, Integer> map = new HashMap<>();
-        List<Lotto> tickets = lottoTickets.getLottoTickets();
-
-        for (Lotto ticket : tickets) {
-            produceResultForEachTicket(map, ticket);
-        }
-
+        Map<Rank, Integer> map = lottoTickets.stream()
+                .map(ticket -> Rank.valueOf(ticket.match(winningLotto), ticket.contains(bonusNumber)))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(rank -> 1)));
         return new Result(map);
-    }
-
-    private void produceResultForEachTicket(Map<Rank, Integer> map, Lotto ticket) {
-        Rank rank = Rank.valueOf(ticket.match(winningLotto), ticket.contains(bonusNumber));
-        if (map.containsKey(rank)) {
-            map.put(rank, map.get(rank) + 1);
-            return;
-        }
-
-        map.put(rank, 1);
     }
 }

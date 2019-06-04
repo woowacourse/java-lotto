@@ -43,11 +43,15 @@ class WinningLottoTest {
     void 당첨로또_결과를_잘_생성하는지_확인() {
         LottoRepository lottoRepository = new LottoRepository();
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 9)));
 
         LottoTickets lottoTickets = new LottoTickets(lottoRepository);
 
         Map<Rank, Integer> lottoScore = new HashMap<>();
         lottoScore.put(Rank.FIRST, 1);
+        lottoScore.put(Rank.SECOND, 1);
+        lottoScore.put(Rank.THIRD, 1);
 
         WinningLotto winningLotto = new WinningLotto(lotto, new BonusNumber(7));
 

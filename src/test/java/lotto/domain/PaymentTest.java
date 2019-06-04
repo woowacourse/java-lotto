@@ -25,8 +25,8 @@ public class PaymentTest {
     }
 
     @Test
-    void calculateNumberOfTickets() {
-        assertThat(payment.calculateNumberOfTickets(1_000)).isEqualTo(1);
+    void calculateCountOfLotto() {
+        assertThat(payment.calculateCountOfLotto()).isEqualTo(1);
     }
 
     @Test

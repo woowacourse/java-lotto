@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class LottoTickets {
     private List<Lotto> lottoTickets;
@@ -14,8 +15,8 @@ public class LottoTickets {
         this.lottoTickets = lottoRepository.getLottos();
     }
 
-    public int size() {
-        return lottoTickets.size();
+    public Stream<Lotto> stream() {
+        return lottoTickets.stream();
     }
 
     public List<Lotto> getLottoTickets() {

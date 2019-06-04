@@ -3,18 +3,19 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Payment {
-    private static final int ZERO = 0;
+    private static final int LOTTO_PRICE = 1_000;
+
     private int payment;
 
     public Payment(int payment) {
-        if (payment <= ZERO) {
-            throw new IllegalArgumentException("금액을 지불해주시기 바랍니다");
+        if (payment < LOTTO_PRICE) {
+            throw new IllegalArgumentException(String.format("로또가격(%d)보다 높은 금액을 입력하세요", LOTTO_PRICE));
         }
         this.payment = payment;
     }
 
-    public int calculateNumberOfTickets(int lottoPrice) {
-        return payment / lottoPrice;
+    public int calculateCountOfLotto() {
+        return payment / LOTTO_PRICE;
     }
 
     public double calculateEarningsRate(long totalWinningMoney) {

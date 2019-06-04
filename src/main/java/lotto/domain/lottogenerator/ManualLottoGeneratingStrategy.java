@@ -16,6 +16,7 @@ public class ManualLottoGeneratingStrategy implements LottoGeneratingStrategy {
     @Override
     public List<LottoNumber> generate() {
         List<LottoNumber> lottoNumbers = inputLottoNumbers.stream()
+                .sorted()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
 
