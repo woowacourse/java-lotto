@@ -40,4 +40,6 @@
 - ~~validate money in LottoBuyingMoney class~~
 - ~~create Money class and make LottoBuyingMoney extends it~~
 - ~~create LottoCount class~~
-- add more tests for new classes
+- ~~add more tests for new classes~~
+- ~~use generic for list parameters of methods~~
+- separate random functionality from logic using interface

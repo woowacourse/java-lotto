@@ -36,7 +36,7 @@ public class Lotto {
         return false;
     }
 
-    private boolean hasNull(List lottoNumbers) {
+    private boolean hasNull(List<Integer> lottoNumbers) {
         return lottoNumbers.contains(null);
     }
 
