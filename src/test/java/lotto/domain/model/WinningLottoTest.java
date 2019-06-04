@@ -1,6 +1,5 @@
 package lotto.domain.model;
 
-import lotto.domain.utils.ManualLottoGenerator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,9 +26,9 @@ public class WinningLottoTest {
             purchasedLottoNumber.add(NumberSet.of(i));
         }
 
-        myLotto = ManualLottoGenerator.makeLotto(purchasedLottoNumber);
+        myLotto = new Lotto(purchasedLottoNumber);
         bonusNumber = NumberSet.of(7);
-        winningLotto = new WinningLotto(ManualLottoGenerator.makeLotto(inputWinningLottoNumber), bonusNumber);
+        winningLotto = new WinningLotto(new Lotto(inputWinningLottoNumber), bonusNumber);
     }
 
     @Test

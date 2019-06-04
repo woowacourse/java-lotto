@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.domain.model.Number;
 import lotto.domain.model.*;
 import lotto.domain.utils.AutoLottoGenerator;
-import lotto.domain.utils.ManualLottoGenerator;
 import lotto.domain.view.InputView;
 import lotto.domain.view.OutputView;
 
@@ -47,7 +46,7 @@ public class Main {
         Lotto lotto;
 
         for (int i = 1; i <= manualLottoSize; i++) {
-            lotto = ManualLottoGenerator.makeLotto(InputView.inputLottoNumber());
+            lotto = new Lotto(InputView.inputLottoNumber());
             manualLottos.add(lotto);
         }
         return manualLottos;
@@ -55,7 +54,7 @@ public class Main {
 
     private static WinningLotto makeWinningLotto() {
         InputView.printInputWinningLottoMessage();
-        Lotto winLotto = ManualLottoGenerator.makeLotto(InputView.inputLottoNumber());
+        Lotto winLotto = new Lotto(InputView.inputLottoNumber());
         Number bonusNumber = InputView.inputBonusNumber(winLotto);
         return new WinningLotto(winLotto, bonusNumber);
     }
