@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 /**
  * 로또 등수를 의미하는 enum
  */
@@ -38,13 +40,12 @@ public enum Rank {
             return SECOND;
         }
 
-        for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch) && rank != SECOND) {
-                return rank;
-            }
-        }
 
-        throw new InvalidRankException(countOfMatch + "는 유효하지 않은 값입니다.");
+        return Arrays.asList(values())
+                .stream()
+                .filter(rank -> rank.matchCount(countOfMatch) && rank != SECOND)
+                .findAny()
+                .orElseThrow(() -> new InvalidRankException(countOfMatch + "는 유효하지 않은 값입니다."));
     }
 
     private boolean matchCount(int countOfMatch) {
