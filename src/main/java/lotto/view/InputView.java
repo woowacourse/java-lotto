@@ -20,9 +20,9 @@ public class InputView {
     private static final String EX_LOTTO_RE_INPUT_MESSAGE = " 다시 입력해주세요";
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    public static final String REGEX_BLANK = " ";
-    public static final String REPLACEMENT_EMPTY = "";
-    public static final String REGEX_COMMA = ",";
+    private static final String REGEX_BLANK = " ";
+    private static final String REPLACEMENT_EMPTY = "";
+    private static final String REGEX_COMMA = ",";
 
     public static Money generateInvalidUserPrice() {
         try {

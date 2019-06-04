@@ -19,7 +19,7 @@ public class OutputView {
     private static final String SEPARATOR = ",";
     private static final String TITLE_RATE_OF_JACKPOT = "\n당첨 통계\n---------";
     private static final String OUTPUT_SECOND_RANK = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
-    private static final String OUTPUT_DEFALUT_RANK = "%d개 일치 (%d)- %d개";
+    private static final String OUTPUT_DEFAULT_RANK = "%d개 일치 (%d)- %d개";
     private static final String OUTPUT_RATE = "총 수익률은 %.0f%s입니다.";
 
     public static void outputUserBuyLottoCount(long manualCount, long autoCount) {
@@ -61,6 +61,6 @@ public class OutputView {
             System.out.println(String.format(OUTPUT_SECOND_RANK, rank.getCountOfMatch(), rank.getWinningMoney(), matchCount));
             return;
         }
-        System.out.println(String.format(OUTPUT_DEFALUT_RANK, rank.getCountOfMatch(), rank.getWinningMoney(), matchCount));
+        System.out.println(String.format(OUTPUT_DEFAULT_RANK, rank.getCountOfMatch(), rank.getWinningMoney(), matchCount));
     }
 }
