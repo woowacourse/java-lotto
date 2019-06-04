@@ -7,7 +7,8 @@ import lotto.domain.lottoticket.LottoTickets;
 
 public class OutputView {
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-    private static final String OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE = "장을 구매했습니다.";
+    private static final String OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_1 = "수동으로 ";
+    private static final String OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_2 = "장, 자동으로 ";
     private static final String OUTPUT_CHANGE_MESSAGE_FRONT = " 잔돈은 ";
     private static final String OUTPUT_CHANGE_MESSAGE_BACK = "원입니다.";
     private static final String OUTPUT_RESULT_STATISTICS_MESSAGE = "당첨 통계" + LINE_SEPARATOR + "----------";
@@ -17,15 +18,19 @@ public class OutputView {
     private static final String OUTPUT_RANK_RESULT_MESSAGE_3 = "개";
     private static final String OUTPUT_PROFIT_RATIO_MESSAGE_FRONT = "총 수익률은 ";
     private static final String OUTPUT_PROFIT_RATIO_MESSAGE_BACK = "%입니다.";
+    public static final String OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_3 = "장을 구매했습니다.";
 
-    public static void showNumOfTicketsFrom(LottoSeller lottoSeller) {
-        System.out.println(makeNumOfTicketsMessage(lottoSeller));
+    public static void showNumOfTicketsFrom(LottoSeller lottoSeller, long numOfManualTickets) {
+        System.out.println(makeNumOfPurchasedTicketsMessage(lottoSeller, numOfManualTickets));
     }
 
-    private static String makeNumOfTicketsMessage(LottoSeller lottoSeller) {
+    private static String makeNumOfPurchasedTicketsMessage(LottoSeller lottoSeller, long numOfManualTickets) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(lottoSeller.getNumOfLotto())
-                .append(OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE);
+        stringBuilder.append(OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_1)
+                .append(numOfManualTickets)
+                .append(OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_2)
+                .append(lottoSeller.getNumOfLotto() - numOfManualTickets)
+                .append(OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_3);
 
         if (lottoSeller.hasChange()) {
             stringBuilder.append(OUTPUT_CHANGE_MESSAGE_FRONT)

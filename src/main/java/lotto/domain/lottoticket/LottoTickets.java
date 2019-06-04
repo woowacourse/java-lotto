@@ -19,6 +19,21 @@ public class LottoTickets {
         this.tickets = new ArrayList<>(tickets);
     }
 
+    public static LottoTickets join(LottoTickets lastLottoTickets, LottoTickets newLottoTickets) {
+        return lastLottoTickets.join(newLottoTickets);
+    }
+
+    private LottoTickets join(LottoTickets lottoTickets) {
+        return lottoTickets.join(this.tickets);
+    }
+
+    private LottoTickets join(List<LottoTicket> tickets) {
+        List<LottoTicket> ticketsToReturn = new ArrayList<>();
+        ticketsToReturn.addAll(this.tickets);
+        ticketsToReturn.addAll(tickets);
+        return new LottoTickets(ticketsToReturn);
+    }
+
     public void add(LottoTicket ticket) {
         tickets.add(ticket);
     }

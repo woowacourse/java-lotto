@@ -34,8 +34,18 @@ class LottoTicketsTest {
     }
 
     @Test
-    void 로또_티켓의_장_수_체크() {
-        assertThat(new LottoTickets(tickets).size()).isEqualTo(3);
+    void 두_티켓_묶음을_static_메서드로_합치기() {
+        List<LottoNumber> lottoNumbers4 = Arrays.asList(new LottoNumber(19), new LottoNumber(20), new LottoNumber(21)
+                , new LottoNumber(22), new LottoNumber(23), new LottoNumber(24));
+        List<LottoNumber> lottoNumbers5 = Arrays.asList(new LottoNumber(25), new LottoNumber(26), new LottoNumber(27)
+                , new LottoNumber(28), new LottoNumber(29), new LottoNumber(30));
+        List<LottoTicket> tickets2 = Arrays.asList(new LottoTicket(lottoNumbers4)
+                , new LottoTicket(lottoNumbers5));
+
+        LottoTickets lottoTickets1 = new LottoTickets(tickets);
+        LottoTickets lottoTickets2 = new LottoTickets(tickets2);
+
+        assertThat(LottoTickets.join(lottoTickets1, lottoTickets2).size()).isEqualTo(5);
     }
 
     @Test
@@ -48,6 +58,11 @@ class LottoTicketsTest {
         lottoTickets.add(newTicket);
 
         assertThat(lottoTickets.size()).isEqualTo(4);
+    }
+
+    @Test
+    void 로또_티켓의_장_수_체크() {
+        assertThat(new LottoTickets(tickets).size()).isEqualTo(3);
     }
 
     @Test

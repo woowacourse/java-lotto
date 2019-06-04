@@ -20,13 +20,15 @@ public class LottoController {
         long numOfAutomaticTickets = numOfPurchasedTickets - numOfManualTickets;
         LottoTickets automaticTickets = LottoTicketingMachine.generateLottoTickets(numOfAutomaticTickets);
 
-        OutputView.showNumOfTicketsFrom(lottoSeller);
-        OutputView.showAllOf(automaticTickets);
+        LottoTickets purchasedTickets = LottoTickets.join(manualTickets, automaticTickets);
+
+        OutputView.showNumOfTicketsFrom(lottoSeller, numOfManualTickets);
+        OutputView.showAllOf(purchasedTickets);
 
         LottoTicket winningLotto = InputView.makeWinningLotto();
         LottoNumber bonusBall = InputView.makeBonusBall(winningLotto);
 
-        LottoResult lottoResult = LottoResult.of(automaticTickets, winningLotto, bonusBall);
+        LottoResult lottoResult = LottoResult.of(purchasedTickets, winningLotto, bonusBall);
         OutputView.showStatisticsOf(lottoResult);
     }
 }
