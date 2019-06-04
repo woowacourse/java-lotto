@@ -14,12 +14,12 @@ public class CUILottoApp {
         try {
             Money money = new Money(InputView.inputMoney());
             List<String> manuals = createManuals(money);
-            List<Lotto> lottos = LottosFactory.create(manuals, money);
+            Lottos lottos = LottosFactory.create(manuals, money);
 
-            OutputView.printLottos(manuals.size(), lottos);
+            OutputView.printLottos(manuals.size(), lottos.getLottos());
 
             WinningLotto winningLotto = createWinningLotto();
-            LottoResult lottoResult = new LottoResult(lottos, winningLotto);
+            LottoResult lottoResult = new LottoResult(lottos.getLottos(), winningLotto);
 
             OutputView.printLottoResult(lottoResult);
             OutputView.printLottoYield(lottoResult, money);
