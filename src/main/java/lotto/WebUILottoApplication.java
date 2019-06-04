@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static spark.Spark.get;
+import static spark.Spark.port;
 
 public class WebUILottoApplication {
     public static void main(String[] args) {
