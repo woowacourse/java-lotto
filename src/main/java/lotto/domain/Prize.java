@@ -14,5 +14,4 @@ public class Prize {
     public double divideByMoney(Money money) {
         return money.prizeDivideMoney(prize);
     }
-
 }

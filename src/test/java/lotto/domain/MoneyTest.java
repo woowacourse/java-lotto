@@ -8,18 +8,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class MoneyTest {
 
     @Test
-    void 올바른_돈_검증(){
+    void 올바른_돈_검증() {
         assertThat(new Money(1000).getMoney()).isEqualTo(1000);
     }
 
     @Test
-    void 음의_돈_검증(){
-        assertThrows(InvalidMoneyException.class,()-> new Money(-1000));
+    void 음의_돈_검증() {
+        assertThrows(InvalidMoneyException.class, () -> new Money(-1000));
     }
 
     @Test
-    void 천원_단위가_아닌_돈_검증(){
-        assertThrows(InvalidMoneyException.class,()-> new Money(1));
+    void 천원_단위가_아닌_돈_검증() {
+        assertThrows(InvalidMoneyException.class, () -> new Money(1));
     }
 
 

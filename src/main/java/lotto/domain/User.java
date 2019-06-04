@@ -8,26 +8,30 @@ public class User {
     private static final int ONE = 1;
     private static final int MUL_NUM_FOR_PERCENT = 100;
     private final Money money;
-    private final int countOfAutoLotto;
+    private final int countOfLotto;
     private final int countOfManualLotto;
     private List<Lotto> userLottos = new ArrayList<>();
 
     public User(Money money, int countOfManualLotto) {
         this.money = money;
-        this.countOfAutoLotto = money.calculateCountOfLotto() - countOfManualLotto;
-        if (countOfManualLotto > countOfAutoLotto) {
+        this.countOfLotto = money.calculateCountOfLotto();
+        this.countOfManualLotto = countOfManualLotto;
+        if (countOfManualLotto > countOfLotto) {
             throw new InvalidCountOfManualLottoException("구입금액보다 수동으로 구매할 로또비용이 더 큽니다.");
         }
-        this.countOfManualLotto = countOfManualLotto;
-        generateUserLottos();
+        generateAutoLottos();
     }
 
-    private void generateUserLottos() {
+    private void generateAutoLottos() {
+        int countOfAutoLotto = countOfLotto - countOfManualLotto;
         for (int i = 0; i < countOfAutoLotto; i++) {
             userLottos.add(new UserLotto(LottoAutoGenerator.generateAutoLotto()));
         }
     }
 
+    public void addManualLottos(List<Lotto> manualLottos) {
+        userLottos.addAll(manualLottos);
+    }
 
     public List<Lotto> getUserLottos() {
         return this.userLottos;

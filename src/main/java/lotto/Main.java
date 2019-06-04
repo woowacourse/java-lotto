@@ -9,12 +9,16 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Money money = new Money(Integer.parseInt(InputView.inputMoney()));
-        OutputView.printCountOfLotto(money);
+        int countOfManualLotto = InputView.inputCountOfManualLotto();
 
-        int countOfManualLotto=InputView.inputCountOfManualLotto();
+        User user = new User(money, countOfManualLotto);
 
+        if (countOfManualLotto != 0) {
+            List<Lotto> manualLottos = ManualLottoParser.parseManualLottoNumbers(InputView.inputManualLotto(countOfManualLotto));
+            user.addManualLottos(manualLottos);
+        }
 
-        User user = new User(money);
+        OutputView.printCountOfLotto(money, countOfManualLotto);
         OutputView.printUserLottos(user.getUserLottos());
 
         List<LottoNumber> winningLottoNumbers = WinningLottoParser.parseLottoNumbers(InputView.inputWinningLotto());

@@ -14,10 +14,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
-    public int getLottoNumber() {
-        return this.lottoNumber;
-    }
-
     private boolean isValidLottoNumber(int lottoNumber) {
         return lottoNumber >= MIN_LOTTO_NUMBER && lottoNumber <= MAX_LOTTO_NUMBER;
     }

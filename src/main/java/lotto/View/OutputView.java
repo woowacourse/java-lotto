@@ -10,8 +10,9 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static void printCountOfLotto(Money money) {
-        System.out.println(money.calculateCountOfLotto() + "개를 구매 했습니다.");
+    public static void printCountOfLotto(Money money, int countOfManualLotto) {
+        int countOfAutoLotto = money.calculateCountOfLotto() - countOfManualLotto;
+        System.out.println("수동으로 " + countOfManualLotto + "장, 자동으로 " + countOfAutoLotto + "개를 구매했습니다.");
     }
 
     public static void printUserLottos(List<Lotto> userLottos) {

@@ -37,10 +37,6 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public LottoNumber getLottoNumberByIndex(int index) {
-        return this.lottoNumbers.get(index);
-    }
-
     public int calculateCountOfMatch(Lotto anotherLotto) {
         return (int) lottoNumbers.stream().filter(anotherLotto.lottoNumbers::contains).count();
     }

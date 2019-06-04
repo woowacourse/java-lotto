@@ -18,7 +18,7 @@ public class Money {
     }
 
     private boolean isValidMoney(long money) {
-        return (money > ZERO) && (money % LOTTO_PRICE == 0);
+        return (money > ZERO) && (money % LOTTO_PRICE == ZERO);
     }
 
     public int calculateCountOfLotto() {
