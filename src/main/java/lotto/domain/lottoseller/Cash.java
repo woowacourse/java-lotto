@@ -3,13 +3,13 @@ package lotto.domain.lottoseller;
 import java.util.Objects;
 
 public class Cash {
-    private static final String LOWER_CASH_ERROR_MESSAGE = "금액은 양의 정수입니다.";
+    private static final String ERROR_LOWER_CASH_MESSAGE = "금액은 양의 정수입니다.";
     private static final int LOWER_BOUND_OF_CASH = 0;
     private final long money;
 
     public Cash(long money) {
         if (money <= LOWER_BOUND_OF_CASH) {
-            throw new InvalidLottoPriceException(LOWER_CASH_ERROR_MESSAGE);
+            throw new InvalidLottoPriceException(ERROR_LOWER_CASH_MESSAGE);
         }
 
         this.money = money;
