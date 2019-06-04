@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.domain.model.Number;
 import lotto.domain.model.*;
-import lotto.domain.utils.AutoLottoGenerator;
+import lotto.domain.utils.ShuffledNumberGenerator;
 import lotto.domain.view.InputView;
 import lotto.domain.view.OutputView;
 
@@ -34,7 +34,7 @@ public class Main {
         int autoLottoSize = money.availablePurchseTicketCount() - manualLottoSize;
 
         for (int i = 1; i <= autoLottoSize; i++) {
-            autoLottos.add(AutoLottoGenerator.makeLotto());
+            autoLottos.add(new Lotto(ShuffledNumberGenerator.getShuffledNumbers()));
         }
         return autoLottos;
     }

@@ -14,7 +14,7 @@ public class Number implements Comparable<Number> {
         this.lottoNumber = lottoNumber;
     }
 
-    private void checkLottoNumberRange(int lottoNumber) {
+    public static void checkLottoNumberRange(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
