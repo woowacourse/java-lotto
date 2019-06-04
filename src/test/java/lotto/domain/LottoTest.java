@@ -2,7 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,7 +55,6 @@ public class LottoTest {
                 LottoNumber.getNumber(8),
                 LottoNumber.getNumber(9));
 
-
-        assertThat(lotto.match(new Lotto(lottoNumbers1))).isEqualTo(3);
+        assertThat(lotto.countMatchedLottoNumber(new Lotto(lottoNumbers1))).isEqualTo(3);
     }
 }
