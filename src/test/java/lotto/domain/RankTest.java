@@ -42,9 +42,9 @@ class RankTest {
 
     @Test
     void calculateTotalWinningMoney() {
-        Map<Rank, Integer> map = new HashMap<>();
-        map.put(Rank.SECOND, 1);
-        map.put(Rank.FOURTH, 2);
+        Map<Rank, Long> map = new HashMap<>();
+        map.put(Rank.SECOND, 1L);
+        map.put(Rank.FOURTH, 2L);
 
         assertThat(Rank.calculateTotalWinningMoney(map)).isEqualTo(30_100_000);
     }

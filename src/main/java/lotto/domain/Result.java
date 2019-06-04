@@ -6,19 +6,19 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Result {
-    private final Map<Rank, Integer> lottoScore;
+    private final Map<Rank, Long> lottoScore;
 
     public Result(WinningLotto winningLotto, LottoTickets lottoTickets) {
         this.lottoScore = calculateLottoResult(winningLotto, lottoTickets);
     }
 
-    private Map<Rank, Integer> calculateLottoResult(WinningLotto winningLotto, LottoTickets lottoTickets) {
+    private Map<Rank, Long> calculateLottoResult(WinningLotto winningLotto, LottoTickets lottoTickets) {
         return lottoTickets.stream()
                 .map(ticket -> Rank.valueOf(winningLotto.countMatchedLottoNumber(ticket), winningLotto.contains(ticket)))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(rank -> 1)));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
-    public int get(Rank rank) {
+    public long get(Rank rank) {
         if (!lottoScore.containsKey(rank)) {
             return 0;
         }

@@ -50,7 +50,7 @@ public enum Rank {
         return this != SECOND;
     }
 
-    public static long calculateTotalWinningMoney(Map<Rank, Integer> lottoScore) {
+    public static long calculateTotalWinningMoney(Map<Rank, Long> lottoScore) {
         if (Objects.isNull(lottoScore) || lottoScore.isEmpty()) {
             throw new NullPointerException();
         }
