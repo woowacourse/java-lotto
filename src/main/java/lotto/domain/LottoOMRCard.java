@@ -11,11 +11,12 @@ public class LottoOMRCard {
     }
 
     public void addCustomLotto(String[] userNumbers) {
-        lottos.add(CustomLottoGenerator.makeLotto(userNumbers));
+        lottos.add(new CustomLottoGenerator(userNumbers).makeLotto());
     }
 
-    LottoPaper getPaper() {
-        return new LottoPaper(lottos);
+    LottoPaper generatePaper(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
+        return new LottoPaper(this.lottos);
     }
 
     int countOfLotto() {

@@ -4,19 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoVendingMachine {
-
     public LottoPaper buyLotto(Money insertMoney, LottoOMRCard lottoOMRCard) {
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> autoLottos = new ArrayList<>();
         int totalLottoCount = insertMoney.howManyLotto() - lottoOMRCard.countOfLotto();
 
         for (int i = 0; i < totalLottoCount; i++) {
-            lottos.add(automaticLotto());
+            autoLottos.add(new AutoLottoGenerator().makeLotto());
         }
 
-        return lottoOMRCard.getPaper().addLotto(lottos);
-    }
-
-    private Lotto automaticLotto() {
-        return AutoLottoGenerator.makeLotto();
+        return lottoOMRCard.generatePaper(autoLottos);
     }
 }

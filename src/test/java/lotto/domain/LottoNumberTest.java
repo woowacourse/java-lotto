@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import lotto.domain.domainexception.InvalidLottoNumberException;
+import lotto.domain.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoNumberTest {
@@ -14,5 +15,19 @@ class LottoNumberTest {
     @Test
     void 숫자_오류_46_테스트() {
         assertThrows(InvalidLottoNumberException.class, () -> LottoNumber.generateNumber(46));
+    }
+
+    @Test
+    void 숫자_1_테스트() {
+        assertThatCode(() -> {
+            LottoNumber.generateNumber(1);
+        }).doesNotThrowAnyException();
+    }
+
+    @Test
+    void 숫자_45_테스트() {
+        assertThatCode(() -> {
+            LottoNumber.generateNumber(45);
+        }).doesNotThrowAnyException();
     }
 }

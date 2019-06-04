@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.domainconstants.DomainConstants.LOTTO_PRICE;
+import static lotto.domain.Money.LOTTO_PRICE;
 
 public class Statistics {
     private static final int DEFAULT_MONEY = 0;

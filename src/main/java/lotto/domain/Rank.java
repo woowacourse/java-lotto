@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.domainexception.InvalidRankException;
+import lotto.domain.exception.InvalidRankException;
 
 public enum Rank {
     FIRST(6, 2_000_000_000), // 1등
@@ -38,7 +38,7 @@ public enum Rank {
             return SECOND;
         }
 
-        if (countOfMatch == 5 && !matchBonusNumber) {
+        if (countOfMatch == 5) {
             return THIRD;
         }
 

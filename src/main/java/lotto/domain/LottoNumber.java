@@ -1,16 +1,17 @@
 package lotto.domain;
 
-import lotto.domain.domainexception.InvalidLottoNumberException;
+import lotto.domain.exception.InvalidLottoNumberException;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.IntStream;
 
-import static lotto.domain.domainconstants.DomainConstants.*;
-
 public class LottoNumber implements Comparable<LottoNumber> {
+    static final int LOTTO_SIZE = 6;
+    static final int MINIMUM_LOTTO_NUMBER = 1;
+    static final int MAXIMUM_LOTTO_NUMBER = 45;
+
     private static final Map<Integer, LottoNumber> LOTTO_NUMBERS;
-    private static final List<LottoNumber> LOTTO_NUMBERS_VALUES;
 
     private final int number;
 
@@ -18,8 +19,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         LOTTO_NUMBERS = new HashMap<>();
         IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .forEachOrdered(value -> LOTTO_NUMBERS.put(value, new LottoNumber(value)));
-
-        LOTTO_NUMBERS_VALUES = new ArrayList<>(LOTTO_NUMBERS.values());
     }
 
     private LottoNumber(int number) {
@@ -36,13 +35,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static LottoNumber generateNumber(int lottoNumber) {
         validLottoNumber(lottoNumber);
         return LOTTO_NUMBERS.get(lottoNumber);
-    }
-
-    static Set<LottoNumber> generateRandomLottoNumbers() {
-        Collections.shuffle(LOTTO_NUMBERS_VALUES);
-        return LOTTO_NUMBERS_VALUES.stream()
-                .limit(LOTTO_SIZE)
-                .collect(Collectors.toSet());
     }
 
     @Override

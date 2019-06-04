@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoPaper;
-import lotto.domain.Money;
-import lotto.domain.Rank;
-import lotto.domain.Statistics;
+import lotto.domain.*;
 
 public class OutputView {
     private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d장 구매했습니다.\n";
@@ -13,8 +10,8 @@ public class OutputView {
     private static final String PERCENT_FORMAT = "%d%%";
     private static final int PERCENT = 100;
 
-    public static void printPurchase(Money money, int countOfCustomLottos) {
-        System.out.printf(PURCHASE_MESSAGE, countOfCustomLottos, money.howManyLotto() - countOfCustomLottos);
+    public static void printPurchase(Money money, CustomLottoCount customLottoCount) {
+        System.out.printf(PURCHASE_MESSAGE, customLottoCount.getCount(), money.howManyLotto() - customLottoCount.getCount());
     }
 
     public static void printLottoPaper(LottoPaper lottoPaper) {
@@ -23,17 +20,13 @@ public class OutputView {
 
     public static void printStatistics(Statistics statistics) {
         System.out.println(STATISTICS_MESSAGE);
-        statistics.ranksStatistics()
-                .forEach((rank, reward) -> {
-                    if (rank == Rank.SECOND) {
-                        System.out.printf(RESULT_SECOND_MESSAGE, rank.getCountOfMatch(), rank.getReward(), reward);
-                    }
-                    if (rank != Rank.SECOND) {
-                        System.out.printf(RESULT_MESSAGE, rank.getCountOfMatch(), rank.getReward(), reward);
-                    }
 
-                });
-
+        statistics.ranksStatistics().forEach(OutputView::printRankStatistics);
         System.out.println(String.format(PERCENT_FORMAT, ((int) (statistics.returnOfRate() * PERCENT))));
     }
+
+    private static void printRankStatistics(Rank rank, Long count) {
+        System.out.printf(rank != Rank.SECOND ? RESULT_MESSAGE : RESULT_SECOND_MESSAGE, rank.getCountOfMatch(), rank.getReward(), count);
+    }
+
 }

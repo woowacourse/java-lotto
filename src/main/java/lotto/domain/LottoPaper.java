@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoPaper {
-    private static final String NEW_LINE = "\n";
-
     private List<Lotto> lottos;
 
     LottoPaper(List<Lotto> lottos) {
@@ -20,13 +18,10 @@ public class LottoPaper {
         return result;
     }
 
-    LottoPaper addLotto(List<Lotto> lottos) {
-        this.lottos.addAll(lottos);
-        return this;
-    }
-
     @Override
     public String toString() {
-        return lottos.stream().map(Lotto::toString).collect(Collectors.joining(NEW_LINE));
+        return lottos.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
     }
 }

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.domainexception.InvalidWinningLottoException;
+import lotto.domain.exception.InvalidWinningLottoException;
 
 public class WinningLotto {
     private Lotto winningLotto;

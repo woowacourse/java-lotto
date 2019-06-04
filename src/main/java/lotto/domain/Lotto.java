@@ -1,18 +1,14 @@
 package lotto.domain;
 
-import lotto.domain.domainexception.InvalidLottoException;
+import lotto.domain.exception.InvalidLottoException;
 
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import static lotto.domain.domainconstants.DomainConstants.LOTTO_SIZE;
+import static lotto.domain.LottoNumber.LOTTO_SIZE;
 
 public class Lotto {
-    private static final String DELIMITER = ", ";
-    private static final String OPEN_BRACKET = "[";
-    private static final String CLOSE_BRACKET = "]";
-
     private Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
@@ -38,6 +34,9 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return OPEN_BRACKET + lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(DELIMITER)) + CLOSE_BRACKET;
+        final String numbers = lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", "));
+        return "[" + numbers + "]";
     }
 }

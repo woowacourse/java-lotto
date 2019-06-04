@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import lotto.domain.domainexception.InvalidMoneyException;
-
-import static lotto.domain.domainconstants.DomainConstants.LOTTO_PRICE;
+import lotto.domain.exception.InvalidMoneyException;
 
 public class Money {
+    static final int LOTTO_PRICE = 1000;
+
     private final int money;
 
     public Money(int insertMoney) {
