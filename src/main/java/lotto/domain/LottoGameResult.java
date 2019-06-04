@@ -8,6 +8,7 @@ public class LottoGameResult {
     private static final int INIT_NUMBER = 0;
     private static final int INIT_SUM = 0;
     private static final int INIT_COUNT = 0;
+    private static final int PLUS_COUNT = 1;
     private static final int PERCENT = 100;
 
     private final List<Lotto> lottos;
@@ -29,7 +30,7 @@ public class LottoGameResult {
     public void match(final WinningLotto winningLotto) {
         for (final Lotto lotto : lottos) {
             final Rank rank = winningLotto.match(lotto);
-            lottoStat.put(rank, lottoStat.get(rank) + 1);
+            lottoStat.put(rank, lottoStat.get(rank) + PLUS_COUNT);
         }
     }
 
