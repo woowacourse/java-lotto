@@ -1,5 +1,8 @@
 package lotto.domain.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WinningLotto {
 
     private Lotto winningLotto;
@@ -11,8 +14,10 @@ public class WinningLotto {
     }
 
     public int matchCount(Lotto purchasedLotto) {
-        purchasedLotto.getLotto().retainAll(winningLotto.getLotto());
-        return purchasedLotto.getLotto().size();
+        List<Number> myLotto = new ArrayList<>(purchasedLotto.getLotto());
+        List<Number> winLotto = new ArrayList<>(winningLotto.getLotto());
+        myLotto.retainAll(winLotto);
+        return myLotto.size();
     }
 
     public boolean matchBonusNumber(Lotto purchasedLotto) {
