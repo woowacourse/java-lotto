@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LottoResult {
+    private static final int LOTTO_PRICE = 1000;
     private final Map<Reward, Integer> results;
 
     public LottoResult() {
@@ -32,7 +33,7 @@ public class LottoResult {
             totalIncome += entry.getKey().money() * entry.getValue();
             totalLottoCount += entry.getValue();
         }
-        return totalIncome / totalLottoCount / 1000;
+        return totalIncome / totalLottoCount / LOTTO_PRICE;
     }
 
     @Override
