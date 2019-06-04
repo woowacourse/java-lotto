@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.lottofactory.LottoNumber;
-import lotto.domain.lottofactory.LottoTicket;
+import lotto.domain.lottomanager.LottoNumber;
+import lotto.domain.lottomanager.LottoTicket;
 import lotto.utils.NullCheckUtil;
 
 import java.util.Collections;
@@ -27,7 +27,11 @@ public class WinningLotto {
         return new WinningLotto(LottoTicket.createLottoTicket(convertedLottoNumbers));
     }
 
-    public Integer getMatchedNumbersCount(LottoTicket lottoTicket) {
+    public Integer getMatchedWinningNumbersCount(LottoTicket lottoTicket) {
         return winningLotto.getMatchedNumbersCount(lottoTicket);
+    }
+
+    public boolean isContainedWinningNumbers(LottoNumber bonusBall) {
+        return winningLotto.isContainedNumbers(bonusBall);
     }
 }
