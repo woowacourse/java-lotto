@@ -2,10 +2,6 @@ package lotto.domain;
 
 import lotto.exception.DuplicateLottoNumberException;
 
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 public class WinningLotto {
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
@@ -18,8 +14,8 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public int match(Lotto lotto) {
-        return lotto.match(winningLotto);
+    public int countMatchedLottoNumber(Lotto lotto) {
+        return lotto.countMatchedLottoNumber(winningLotto);
     }
 
     public boolean contains(Lotto lotto) {
