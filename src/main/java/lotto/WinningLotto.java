@@ -13,9 +13,7 @@ public class WinningLotto {
     public WinningLotto(String input) {
         checkIsBlank(input);
         List<Integer> numbers = toInt(Arrays.asList(input.split(",")));
-
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        Lotto lotto = new Lotto(lottoNumbers.getLottoNumbers(numbers));
+        Lotto lotto = new Lotto(LottoNumber.getLottoNumbers(numbers));
         this.lotto = lotto;
     }
 
