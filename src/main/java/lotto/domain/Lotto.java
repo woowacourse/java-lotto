@@ -1,8 +1,14 @@
 package lotto.domain;
 
+import lotto.domain.Exceptions.LottoNumberDuplicateException;
+import lotto.domain.Exceptions.LottoNumberException;
+
 import java.util.*;
 
 public class Lotto {
+    public static final int NUMBER_COUNT = 6;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
     private final List<Integer> numbers;
 
     public Lotto(final List<Integer> numbers) {
@@ -11,16 +17,16 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException();
+        if (numbers.size() != NUMBER_COUNT) {
+            throw new LottoNumberException();
         }
 
         if (new HashSet<Integer>(numbers).size() != numbers.size()) {
-            throw new IllegalArgumentException();
+            throw new LottoNumberDuplicateException();
         }
 
-        if (Collections.min(numbers) < 1 || Collections.max(numbers) > 45) {
-            throw new IllegalArgumentException();
+        if (Collections.min(numbers) < MIN_NUMBER || Collections.max(numbers) > MAX_NUMBER) {
+            throw new LottoNumberException();
         }
     }
 
@@ -43,6 +49,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "numbers=" + numbers;
+        return numbers.toString();
     }
 }

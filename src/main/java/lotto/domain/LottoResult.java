@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LottoResult {
     private final Map<Reward, Integer> results;
-    
+
     public LottoResult() {
         results = new LinkedHashMap<>();
         for (Reward reward : Reward.values()) {
@@ -32,7 +32,6 @@ public class LottoResult {
             totalIncome += entry.getKey().money() * entry.getValue();
             totalLottoCount += entry.getValue();
         }
-
         return totalIncome / totalLottoCount / 1000;
     }
 

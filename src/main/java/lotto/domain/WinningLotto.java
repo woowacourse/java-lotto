@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
+    private static final String DELIMETER = ",";
     private final List<Integer> winningLotto;
     private final int bonus;
 
@@ -19,7 +20,7 @@ public class WinningLotto {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
-        if (winningLotto.size() != 6) {
+        if (winningLotto.size() != Lotto.NUMBER_COUNT) {
             throw new IllegalArgumentException();
         }
 
@@ -30,7 +31,7 @@ public class WinningLotto {
 
     private List<Integer> splitNumbers(String numbers) {
         try {
-            return Arrays.stream(numbers.split(","))
+            return Arrays.stream(numbers.split(DELIMETER))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {

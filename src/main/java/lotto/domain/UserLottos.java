@@ -1,9 +1,13 @@
 package lotto.domain;
 
+import lotto.domain.Exceptions.LottoNumberException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class UserLottos {
+    private static final int LOTTO_PRICE = 1000;
+    private static final String DELIMETER = ",";
     private final List<Lotto> lottos;
 
     public UserLottos(List<Lotto> lottos) {
@@ -11,7 +15,7 @@ public class UserLottos {
     }
 
     public UserLottos(UserLottoDto dto) {
-        int lottoCount = Integer.parseInt(dto.getInputLottoMoney()) / 1000;
+        int lottoCount = Integer.parseInt(dto.getInputLottoMoney()) / LOTTO_PRICE;
         lottos = new ArrayList<>(manualLottos(dto.getManualLottoNumber()));
         while (lottos.size() != lottoCount) {
             lottos.add(LottoGenerator.lotto());
@@ -28,11 +32,11 @@ public class UserLottos {
 
     private List<Integer> splitNumbers(String numbers) {
         try {
-            return Arrays.stream(numbers.split(","))
+            return Arrays.stream(numbers.split(DELIMETER))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new LottoNumberException();
         }
     }
 
