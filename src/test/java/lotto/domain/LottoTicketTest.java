@@ -54,12 +54,15 @@ class LottoTicketTest {
 
     @Test
     void 파라미터로_입력된_lottoTicket과_비교하여_해당_Rank를_반환() {
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
         List<LottoNumber> numbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
                 , new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
-
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         LottoTicket winningLotto = new LottoTicket(numbers);
-        assertThat(lottoTicket.match(winningLotto)).isEqualTo(Rank.FIFTH);
+
+        LottoNumber bonusBall = new LottoNumber(4);
+
+        assertThat(lottoTicket.match(winningLotto, bonusBall)).isEqualTo(Rank.FIFTH);
     }
 
     @AfterEach

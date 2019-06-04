@@ -20,7 +20,7 @@ public class LottoController {
         LottoTicket winningLotto = InputView.makeWinningLotto();
         LottoNumber bonusBall = InputView.makeBonusBall(winningLotto);
 
-        LottoResult lottoResult = LottoResult.of(lottoTickets, winningLotto);
+        LottoResult lottoResult = LottoResult.of(lottoTickets, winningLotto, bonusBall);
         OutputView.showStatisticsOf(lottoResult);
     }
 }

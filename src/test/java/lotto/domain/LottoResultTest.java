@@ -31,7 +31,9 @@ class LottoResultTest {
                 , new LottoNumber(10), new LottoNumber(11), new LottoNumber(12));
         LottoTicket winningLotto = new LottoTicket(winningLottoNumbers);
 
-        lottoResult = LottoResult.of(new LottoTickets(tickets), winningLotto);
+        LottoNumber bonusBall = new LottoNumber(4);
+
+        lottoResult = LottoResult.of(new LottoTickets(tickets), winningLotto, bonusBall);
     }
 
     @Test

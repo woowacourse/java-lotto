@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottoseller.LottoSeller;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
@@ -10,8 +11,8 @@ public class LottoResult {
     private Map<Rank, Integer> results;
     private double profitRatio;
 
-    private LottoResult(LottoTickets lottoTickets, LottoTicket winningLotto) {
-        results = lottoTickets.countRanksWith(winningLotto);
+    private LottoResult(LottoTickets lottoTickets, LottoTicket winningLotto, LottoNumber bonusBall) {
+        results = lottoTickets.countRanksWith(winningLotto, bonusBall);
         profitRatio = calculateProfitRatio(lottoTickets.size());
     }
 
@@ -27,8 +28,8 @@ public class LottoResult {
         return sumOfPrize;
     }
 
-    public static LottoResult of(LottoTickets lottoTickets, LottoTicket winningLotto) {
-        return new LottoResult(lottoTickets, winningLotto);
+    public static LottoResult of(LottoTickets lottoTickets, LottoTicket winningLotto, LottoNumber bonusBall) {
+        return new LottoResult(lottoTickets, winningLotto, bonusBall);
     }
 
     public Integer getCountsBy(Rank key) {

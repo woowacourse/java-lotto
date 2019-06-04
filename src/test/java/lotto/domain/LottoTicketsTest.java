@@ -47,11 +47,15 @@ class LottoTicketsTest {
 
     @Test
     void winningLotto로_rankCounts_map_생성하기() {
+        LottoTickets lottoTickets = new LottoTickets(tickets);
+
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
                 , new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
         LottoTicket winningLotto = new LottoTicket(lottoNumbers);
-        LottoTickets lottoTickets = new LottoTickets(tickets);
-        Map<Rank, Integer> rankCounts = lottoTickets.countRanksWith(winningLotto);
+
+        LottoNumber bonusBall = new LottoNumber(4);
+
+        Map<Rank, Integer> rankCounts = lottoTickets.countRanksWith(winningLotto, bonusBall);
 
         assertThat(rankCounts.get(Rank.FIFTH)).isEqualTo(2);
     }

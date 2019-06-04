@@ -7,6 +7,7 @@ public enum Rank {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
     private final int numOfMatching;
     private final long prize;
@@ -16,13 +17,21 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank valueOf(int numOfMatching) {
+    public static Rank valueOf(int numOfMatching, boolean bonus) {
+        if (isSECOND(numOfMatching, bonus)) {
+            return SECOND;
+        }
+
         for (Rank value : values()) {
             if (value.numOfMatching == numOfMatching) {
                 return value;
             }
         }
         return MISS;
+    }
+
+    private static boolean isSECOND(int numOfMatching, boolean bonus) {
+        return SECOND.numOfMatching == numOfMatching && bonus;
     }
 
     public static List<Rank> valuesWithoutMISS() {
