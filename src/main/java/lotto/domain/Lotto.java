@@ -15,6 +15,10 @@ public class Lotto {
         this.numbers = new ArrayList<>(numbers);
     }
 
+    public static Lotto of(final List<LottoNumber> numbers) {
+        return new Lotto(numbers);
+    }
+
     private void validate(final List<LottoNumber> numbers) {
         checkValidSize(numbers);
         checkDuplication(numbers);
@@ -31,10 +35,6 @@ public class Lotto {
         if (numbers.size() != semiParameter.size()) {
             throw new NumberDuplicationException("중복된 숫자로 로또 생성");
         }
-    }
-
-    public static Lotto of(final List<LottoNumber> numbers) {
-        return new Lotto(numbers);
     }
 
     int matchCount(final Lotto another) {

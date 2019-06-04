@@ -11,16 +11,17 @@ public class LottoGameResult {
     private final List<Lotto> lottos;
     private final Map<Rank, Integer> lottoStat;
 
+
+    static LottoGameResult of(final List<Lotto> lottos) {
+        return new LottoGameResult(lottos);
+    }
+
     private LottoGameResult(final List<Lotto> lottos) {
         this.lottos = lottos;
         this.lottoStat = new HashMap<>();
         for (Rank value : Rank.values()) {
             this.lottoStat.put(value, INIT_NUMBER);
         }
-    }
-
-    static LottoGameResult of(final List<Lotto> lottos) {
-        return new LottoGameResult(lottos);
     }
 
     public void match(final WinningLotto winningLotto) {

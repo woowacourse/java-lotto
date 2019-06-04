@@ -5,6 +5,7 @@ import lotto.domain.exception.RankNotExistException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -31,12 +32,14 @@ public enum Rank {
         if (existBonus && (matchCount == SECOND.matchCount)) {
             return SECOND;
         }
-        for (Rank value : values()) {
-            if (value != SECOND && (value.matchCount == matchCount)) {
-                return value;
-            }
-        }
-        throw new RankNotExistException(matchCount + "에 맞는 등수가 존재하지 않습니다");
+        return getRankWithoutSecond(matchCount);
+    }
+
+    private static Rank getRankWithoutSecond(int matchCount) {
+        return Arrays.asList(values()).stream()
+                .filter(value -> (value != SECOND) && (value.matchCount == matchCount))
+                .findFirst()
+                .orElseThrow(() -> new RankNotExistException(matchCount + "에 맞는 등수가 존재하지 않습니다"));
     }
 
     double prize(final int count) {
@@ -49,6 +52,7 @@ public enum Rank {
         Collections.reverse(ranksWithoutMiss);
         return ranksWithoutMiss;
     }
+
     public int getMatchCount() {
         return matchCount;
     }
