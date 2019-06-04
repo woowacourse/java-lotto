@@ -4,7 +4,7 @@ import lotto.exception.NaturalNumberException;
 import lotto.exception.PaymentOutOfBoundsException;
 
 public class CountOfLotto {
-    private static final int ZERO = 0;
+    private static final int MIN_COUNT_OF_LOTTO = 0;
     private final int countOfManualLotto;
     private final int countOfRandomLotto;
 
@@ -15,7 +15,7 @@ public class CountOfLotto {
             throw new PaymentOutOfBoundsException("입력한 로또 개수가 지불한 금액을 초과합니다");
         }
 
-        if (countOfManualLotto < ZERO) {
+        if (countOfManualLotto < MIN_COUNT_OF_LOTTO) {
             throw new NaturalNumberException("음수를 넣을 수 없습니다");
         }
         this.countOfManualLotto = countOfManualLotto;
