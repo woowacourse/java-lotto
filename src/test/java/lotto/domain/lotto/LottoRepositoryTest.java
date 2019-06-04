@@ -1,8 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.domain.lottogenerator.RandomLottoGeneratingStrategy;
 import org.junit.jupiter.api.Test;
