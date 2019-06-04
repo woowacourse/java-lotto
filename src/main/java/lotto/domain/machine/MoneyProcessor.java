@@ -3,6 +3,8 @@ package lotto.domain.machine;
 import lotto.domain.machine.exeption.InvalidMinimumMoneyException;
 
 public class MoneyProcessor {
+
+
     private static final int LOTTO_PRICE = 1000;
     private final int insertedMoney;
 
@@ -19,6 +21,10 @@ public class MoneyProcessor {
         if (money < LOTTO_PRICE) {
             throw new InvalidMinimumMoneyException("1장 이상 구입 가능한 금액을 넣어주세요.");
         }
+    }
+
+    public static int getLottoPrice() {
+        return LOTTO_PRICE;
     }
 
     public int getWholeTicketQuantity() {

@@ -30,7 +30,6 @@ public class VendingMachine {
         }
     }
 
-
     public LottoTickets createLotto(PurchaseInformation purchaseInformation) {
         return LottoTicketFactory.of(purchaseInformation);
     }

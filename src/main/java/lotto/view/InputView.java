@@ -16,6 +16,9 @@ public class InputView {
     private static final String REQUIRE_MANUAL_NUMBER_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String NOT_CORRECT_INPUT = "올바르지 않은 로또 번호 형식입니다.";
     private static final String REQUIRE_MANUAL_NUMBER_LIST__MESSAGE = "수동으로 구매할 로또 번호를 입력해 주세요.";
+    private static final String REQUIRE_WINNING_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.";
+    private static final String REQUIRE_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요";
+
     public static int getInsertedMoney() {
         System.out.println(DEMAND_MONEY_MESSAGE);
         return getInterger();
@@ -61,4 +64,13 @@ public class InputView {
     }
 
 
+    public static List<Integer> getWinningNumbers() {
+        System.out.println(REQUIRE_WINNING_NUMBER_MESSAGE);
+        return getMultipleInteger();
+    }
+
+    public static int getBonusNumber() {
+        System.out.println(REQUIRE_BONUS_NUMBER_MESSAGE);
+        return getInterger();
+    }
 }

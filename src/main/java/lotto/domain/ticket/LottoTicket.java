@@ -13,11 +13,11 @@ public class LottoTicket {
 
     private final SortedSet<LottoNumber> lottoNumbers;
     public LottoTicket(List<LottoNumber> numbers) {
+        validLength(numbers);
         this.lottoNumbers = Collections.unmodifiableSortedSet(createSortedSet(numbers));
     }
 
     public static LottoTicket of(List<LottoNumber> numbers) {
-        validLength(numbers);
         return new LottoTicket(numbers);
     }
 

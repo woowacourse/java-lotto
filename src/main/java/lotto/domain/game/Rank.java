@@ -13,17 +13,9 @@ public enum Rank {
     private int countOfMatch;
     private int winningMoney;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
-    }
-
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
-    public int getWinningMoney() {
-        return winningMoney;
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
@@ -42,6 +34,14 @@ public enum Rank {
         }
 
         throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 
     private boolean matchCount(int countOfMatch) {

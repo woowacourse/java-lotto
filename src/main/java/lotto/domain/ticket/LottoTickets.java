@@ -1,10 +1,13 @@
 package lotto.domain.ticket;
 
+import lotto.domain.game.Rank;
+import lotto.domain.game.WinningLotto;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-    List<LottoTicket>lottoTickets;
+    private List<LottoTicket>lottoTickets;
     public LottoTickets(final List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
@@ -16,7 +19,10 @@ public class LottoTickets {
     public int lottoTicketsSize(){
         return lottoTickets.size();
     }
-
+    public List<Rank> getTicketsRank(WinningLotto winningLotto){
+        List<Rank> ranks = lottoTickets.stream().map(x->winningLotto.getRank(x)).collect(Collectors.toList());
+        return ranks;
+    }
     @Override
     public String toString() {
         return lottoTickets.stream().map(x -> x.toString()).collect(Collectors.joining("\n"));

@@ -24,12 +24,17 @@ public class WinningLotto extends LottoTicket {
         }
     }
 
-    boolean isMatchedBonus(LottoTicket lottoTicket) {
+    public Rank getRank(LottoTicket lottoTicket) {
+        return Rank.valueOf(countMatchedNumber(lottoTicket), isMatchedBonus(lottoTicket));
+    }
+
+    protected boolean isMatchedBonus(LottoTicket lottoTicket) {
         return lottoTicket.hasSameNumber(bonusNumber);
     }
 
-    int countMatchedNumber(LottoTicket lottoTicket) {
+    protected int countMatchedNumber(LottoTicket lottoTicket) {
         return lottoTicket.countSameNumber(this.getLottoNumbers());
     }
+
 
 }

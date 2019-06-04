@@ -40,12 +40,16 @@ class ManualGenaratingStarategy implements TicketGeneratingStrategy {
 }
 
 class AutomaticGenaratingStarategy implements TicketGeneratingStrategy {
-    private int nums;
     private static List<LottoNumber> randomLottoNumberPull;
-    static{
+
+    static {
         randomLottoNumberPull = new ArrayList<>();
         randomLottoNumberPull.addAll(LottoNumber.getLottoNumberPool());
     }
+
+    private final int INIT_INDEX = 0;
+    private int nums;
+
 
     public AutomaticGenaratingStarategy(int nums) {
         this.nums = nums;
@@ -64,7 +68,7 @@ class AutomaticGenaratingStarategy implements TicketGeneratingStrategy {
     }
 
     private List<LottoNumber> generateNumber() {
-        Collections.shuffle(randomLottoNumberPull,new Random());
-        return randomLottoNumberPull.subList(0, LottoTicket.MAX_LOTTO_TICKET_NUMBER);
+        Collections.shuffle(randomLottoNumberPull, new Random());
+        return randomLottoNumberPull.subList(INIT_INDEX, LottoTicket.MAX_LOTTO_TICKET_NUMBER);
     }
 }
