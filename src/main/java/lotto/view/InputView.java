@@ -13,10 +13,11 @@ public class InputView {
     public static UserLottoDto inputUserLotto() {
         String lottoMoney;
         List<String> manualNumber = new ArrayList<>();
-        System.out.println("금액을 입력");
+        System.out.println(ConsoleMessages.BUY_MONEY.message());
         lottoMoney = scanner.nextLine();
-        System.out.println("수동몇장?");
+        System.out.println(ConsoleMessages.MANUAL_COUNT.message());
         int iter = Integer.parseInt(scanner.nextLine());
+        System.out.println(ConsoleMessages.MANUAL_NUMBER.message());
         for (int i = 0; i < iter; i++) {
             manualNumber.add(scanner.nextLine());
         }
@@ -25,9 +26,9 @@ public class InputView {
 
     public static WinningLottoDto inputWinningLotto() {
         String numbers, bonus;
-        System.out.println("당첨번호");
+        System.out.println(ConsoleMessages.WINNING_NUMBER.message());
         numbers = scanner.nextLine();
-        System.out.println("보너스");
+        System.out.println(ConsoleMessages.WINNING_BONUS.message());
         bonus = scanner.nextLine();
 
         return new WinningLottoDto(numbers, bonus);
