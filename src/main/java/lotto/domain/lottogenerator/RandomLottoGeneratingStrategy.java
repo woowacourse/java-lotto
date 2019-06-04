@@ -14,15 +14,14 @@ public class RandomLottoGeneratingStrategy implements LottoGeneratingStrategy {
         List<LottoNumber> allLottoNumbers = LottoNumber.getLottoNumbers();
         Collections.shuffle(allLottoNumbers);
 
-        List<LottoNumber> lottoNumbers = createLottoNumbers(allLottoNumbers);
-        Collections.sort(lottoNumbers);
-        return Collections.unmodifiableList(lottoNumbers);
+        return Collections.unmodifiableList(createLottoNumbers(allLottoNumbers));
     }
 
     private List<LottoNumber> createLottoNumbers(List<LottoNumber> allLottoNumbers) {
         return allLottoNumbers
                 .stream()
                 .limit(Lotto.LOTTO_NUMBER_SIZE)
+                .sorted()
                 .collect(Collectors.toList());
     }
 }
