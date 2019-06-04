@@ -6,18 +6,13 @@ import lotto.domain.lotto.Lottos;
 import lotto.domain.money.Prize;
 
 public class OutputView {
+    public static void printLottos(Lottos lottos, int manualLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "자동으로 "
+                + (lottos.size() - manualLottoCount) + " 를 구매했습니다!");
 
-
-    public static void printLottos(Lottos manualLottos, Lottos automaticLottos) {
-        System.out.println("수동으로 " + manualLottos.size() + "자동으로 " + automaticLottos.size() + " 를 구매했습니다!");
-
-        for (Lotto lotto : manualLottos.getLottos()) {
+        for (Lotto lotto : lottos.getLottos()) {
             printLotto(lotto);
         }
-        for (Lotto lotto : automaticLottos.getLottos()) {
-            printLotto(lotto);
-        }
-
     }
 
     private static void printLotto(Lotto lotto) {

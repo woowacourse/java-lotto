@@ -15,7 +15,7 @@ public class LottoNumber {
         }
     }
 
-    private int number;
+    private final int number;
 
     public LottoNumber(int number) throws IllegalLottoNumberException {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {

@@ -36,12 +36,20 @@ public class InputView {
         return Integer.parseInt(userInput);
     }
 
-    public static List<Integer> askManualLottoNumbers() {
+    public static List<Integer> askManualLotto() {
         System.out.println("수동구매 로또 번호를 입력하세요");
         List<String> inputs = Arrays.asList(reader.nextLine().split(SEPERATOR));
         List<Integer> lottoNumbers = new ArrayList<>();
 
         inputs.forEach(input -> lottoNumbers.add(Integer.parseInt(input)));
         return lottoNumbers;
+    }
+
+    public static List<List<Integer>> askManualLottos(int manualLottoNumber) {
+        List<List<Integer>> manualLottonNumbers = new ArrayList<>();
+        for (int i = 0; i < manualLottoNumber; i++) {
+            manualLottonNumbers.add(askManualLotto());
+        }
+        return manualLottonNumbers;
     }
 }

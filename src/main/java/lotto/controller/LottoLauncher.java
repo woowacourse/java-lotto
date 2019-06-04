@@ -12,30 +12,15 @@ public class LottoLauncher {
 
     public static void main(String[] args) {
         Money money = Money.create(InputView.askMoney());
+        LottoCount manualLottoCount = LottoCount.create(InputView.askManualLottoCount(), money);
+        List<List<Integer>> manualLottos = InputView.askManualLottos(manualLottoCount.size());
 
-        Lottos manualLottos = askManualLottos(money);
-        Lottos automaticLottos = LottoMachine.generateLottos(money.getLottoCount() - manualLottos.size());
-        OutputView.printLottos(manualLottos, automaticLottos);
+        Lottos lottos = LottoMachine.generateLottos(manualLottos, money);
 
+        OutputView.printLottos(lottos, manualLottoCount.size());
         WinningLotto winningLotto = WinningLotto.create(InputView.askWinningLottoNumbers(),
                 InputView.askBonusNumber());
-
-        Lottos totalLottos = manualLottos.append(automaticLottos);
-        LottoResult lottoResult = LottoResult.create(money, totalLottos.getPrizes(winningLotto));
+        LottoResult lottoResult = LottoResult.create(money, lottos.getPrizes(winningLotto));
         OutputView.printStatistics(lottoResult);
-    }
-
-    private static Lottos askManualLottos(Money money) {
-        List<Lotto> manualLottos = new ArrayList<>();
-        LottoCount lottoCount = LottoCount.create(InputView.askManualLottoCount(), money);
-
-        askManualLotto(lottoCount, manualLottos);
-        return LottoMachine.generateLottos(manualLottos);
-    }
-
-    private static void askManualLotto(LottoCount lottoCount, List<Lotto> manualLottos) {
-        for (int i = 0; i < lottoCount.size(); i++) {
-            manualLottos.add(new Lotto(InputView.askManualLottoNumbers()));
-        }
     }
 }
