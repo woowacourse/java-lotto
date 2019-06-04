@@ -60,4 +60,12 @@ public class LottoTest {
 
         assertThat(lotto.contains(new LottoNumber(1))).isTrue();
     }
+
+    @Test
+    public void compareTo_테스트() {
+        lottoNumbers.add(new LottoNumber(6));
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        assertThat(lotto.compareTo(lotto)).isEqualTo(6);
+    }
 }

@@ -26,9 +26,12 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
+    int compareTo(Lotto lotto) {
+        int countOfMatch = 0;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            countOfMatch += (lotto.contains(lottoNumber))? 1 : 0;
+        }
+        return countOfMatch;
     }
 
     @Override
@@ -42,5 +45,10 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }

@@ -8,25 +8,20 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    LottoNumber(int number) {
+    public LottoNumber(int number) {
         validateLottoNumber(number);
         this.number = number;
     }
 
     private void validateLottoNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("로또 숫자는 1~45만 가능합니다.");
+            throw new IllegalArgumentException("로또 숫자는 1 ~ 45만 가능합니다.");
         }
     }
 
     @Override
     public int compareTo(LottoNumber lottoNumber) {
         return Integer.compare(this.number, lottoNumber.number);
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(number);
     }
 
     @Override
@@ -40,5 +35,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }
