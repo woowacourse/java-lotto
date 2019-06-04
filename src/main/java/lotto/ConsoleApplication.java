@@ -6,6 +6,9 @@ import lotto.view.OutputView;
 
 import java.util.List;
 
+// TODO Exception
+// TODO depth 1
+// TODO Dto
 public class ConsoleApplication {
     public static void main(String[] args) {
         LottoBuyer buyer = new LottoBuyer(InputView.inputBuyMoney());
