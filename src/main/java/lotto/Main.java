@@ -11,6 +11,9 @@ public class Main {
         Money money = new Money(Integer.parseInt(InputView.inputMoney()));
         OutputView.printCountOfLotto(money);
 
+        int countOfManualLotto=InputView.inputCountOfManualLotto();
+
+
         User user = new User(money);
         OutputView.printUserLottos(user.getUserLottos());
 
