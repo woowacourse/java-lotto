@@ -8,13 +8,14 @@ public class LottoNumber {
     public static final int MAXIMUM_NUMBER = 45;
     public static final int MINIMUM_NUMBER = 1;
     private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
-    private int number;
 
     static {
         for (int i = 1; i <= MAXIMUM_NUMBER; i++) {
             lottoNumbers.put(i, new LottoNumber(i));
         }
     }
+
+    private int number;
 
     public LottoNumber(int number) throws IllegalLottoNumberException {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
@@ -25,8 +26,7 @@ public class LottoNumber {
 
     public static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> returnList = new ArrayList<>();
-        for (int number : numbers
-             ) {
+        for (int number : numbers) {
             returnList.add(lottoNumbers.get(number));
         }
         return returnList;

@@ -1,7 +1,6 @@
 package lotto.domain.money;
 
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 public enum Prize {
     FIRST(6, 2000000000, false),
@@ -28,7 +27,7 @@ public enum Prize {
         }
 
         if (matchCount == THIRD.matchCount && !hasBonusNumber) {
-                return THIRD;
+            return THIRD;
         }
         return Arrays.stream(values()).filter(prize -> prize.matchCount == matchCount).findAny().get();
 

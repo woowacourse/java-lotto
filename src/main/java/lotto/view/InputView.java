@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private static Scanner reader = new Scanner(System.in);
     private static final String SEPERATOR = ",";
+    private static Scanner reader = new Scanner(System.in);
 
     public static int askMoney() {
         System.out.println("구입 금액을 입력해 주세요!");

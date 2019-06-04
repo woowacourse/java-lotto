@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
-import lotto.domain.money.exception.IllegalCountException;
 import lotto.domain.money.Money;
+import lotto.domain.money.exception.IllegalCountException;
 
 public class LottoCount {
     private int count;
