@@ -28,20 +28,20 @@
                         <label for="input-winning-0">당첨 번호</label>
                         <div class="winning-input-group">
                             <input type="number" name="winning_0" id="input-winning-0"
-                                class="form-control lotto-number-input">
-                            <input type="number" na lotto-number-inputme="winning_1" id="input-winning-1"
-                                class="form-control lotto-number-input">
-                            <input type="number" na lotto-number-inputme="winning_2" id="input-winning-2"
-                                class="form-control lotto-number-input">
-                            <input type="number" na lotto-number-inputme="winning_3" id="input-winning-3"
-                                class="form-control lotto-number-input">
-                            <input type="number" na lotto-number-inputme="winning_4" id="input-winning-4"
-                                class="form-control lotto-number-input">
-                            <input type="number" na lotto-number-inputme="winning_5" id="input-winning-5"
-                                class="form-control lotto-number-input">
+                                class="form-control lotto-number-input winning-number">
+                            <input type="number" name="winning_1" id="input-winning-1"
+                                class="form-control lotto-number-input winning-number">
+                            <input type="number" name="winning_2" id="input-winning-2"
+                                class="form-control lotto-number-input winning-number">
+                            <input type="number" name="winning_3" id="input-winning-3"
+                                class="form-control lotto-number-input winning-number">
+                            <input type="number" name="winning_4" id="input-winning-4"
+                                class="form-control lotto-number-input winning-number">
+                            <input type="number" name="winning_5" id="input-winning-5"
+                                class="form-control lotto-number-input winning-number">
                             <label for="input-winni lotto-number-inputng-bonus">보너스 볼</label>
-                            <input type="number" na lotto-number-inputme="winning_bonus" id="input-winning-bonus"
-                                class="form-control lotto-number-input">
+                            <input type="number" name="winning_bonus" id="input-winning-bonus"
+                                class="form-control lotto-number-input winning-bonus-number">
                         </div>
                         <div class="alert alert-danger d-none">올바르지 않은 입력값이 있습니다.</div>
                     </div>
@@ -56,8 +56,49 @@
 
                         <button type="button" class="btn btn-outline-success btn-add-manual-number">수동 번호 추가</button>
                     </div>
-                    <button type="submit" class="btn btn-primary">구입</button>
-                    <button type="reset" class="btn btn-info">다시하기</button>
+
+                    <div class="result-table-wrapper d-none">
+                        <table class="table">
+                            <thead>
+                                <th>등수</th>
+                                <th>당첨된 로또 개수</th>
+                            </thead>
+                            <tbody>
+                                <tr class="result-row-first">
+                                    <th>1등</th>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="result-row-second">
+                                    <th>2등</th>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="result-row-third">
+                                    <th>3등</th>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="result-row-fourth">
+                                    <th>4등</th>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="result-row-fifth">
+                                    <th>5등</th>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="result-row-none">
+                                    <th>꽝</th>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="result-row-earning-rate">
+                                    <th>수익률</th>
+                                    <td>0</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-buy">구입</button>
+                    <button type="reset" class="btn btn-info btn-reset">다시하기</button>
                 </form>
             </fieldset>
         </div>

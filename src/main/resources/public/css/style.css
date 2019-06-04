@@ -71,6 +71,7 @@ h1 {
 .winning-input-group input[type=number] {
     width: 3rem;
     margin-right: 2rem;
+    text-align: center;
 }
 
 .winning-input-group label {
@@ -104,6 +105,7 @@ h1 {
 .input-group-lottonumber input[type=number] {
     width: 3rem;
     margin-right: 2rem;
+    text-align: center;
 }
 
 .input-group-lottonumber button {
