@@ -14,7 +14,7 @@ public class Lotto {
             throw new NullArgumentException("생성자의 인자로 null 을 넘길 수 없습니다.");
         }
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(number -> LottoNumber.get(number)).collect(Collectors.toList());
+                .map(number -> LottoNumber.from(number)).collect(Collectors.toList());
         validateLottoNumbers(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
