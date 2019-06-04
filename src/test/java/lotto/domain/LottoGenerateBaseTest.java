@@ -25,7 +25,7 @@ class LottoGenerateBaseTest {
     @Test
     void shuffle_확인() {
         Collections.shuffle(LottoGenerateBase.lottoGenerateBase);
-        List<LottoNumber> lotto = LottoGenerateBase.lottoGenerateBase.subList(0,6);
+        List<LottoNumber> lotto = LottoGenerateBase.lottoGenerateBase.subList(0, 6);
         assertThat(lotto.size()).isEqualTo(6);
     }
 }

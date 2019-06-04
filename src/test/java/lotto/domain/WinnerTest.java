@@ -31,7 +31,7 @@ public class WinnerTest {
 
     @Test
     void customWinBonus_확인() {
-        assertTrue(winner.matchBonus(Lotto.customLotto(Arrays.asList(1,2,3,4,5,8), new DefaultCustomLotto())));
+        assertTrue(winner.matchBonus(Lotto.customLotto(Arrays.asList(1, 2, 3, 4, 5, 8), new DefaultCustomLotto())));
     }
 
     @Test

@@ -1,12 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.autocreatelotto.DefaultAutoCreateLotto;
-import lotto.domain.customlotto.DefaultCustomLotto;
 import lotto.domain.autocreatelotto.MockAutoCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

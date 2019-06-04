@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.customlotto.DefaultCustomLotto;
-import lotto.domain.autocreatelotto.MockAutoCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +19,13 @@ class LotteriesTest {
     void setUp() {
 
         lotteries = new Lotteries();
-        lotteries.addCustomLotto(Arrays.asList(1,2,3,4,5,6), new DefaultCustomLotto());
+        lotteries.addCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6), new DefaultCustomLotto());
     }
 
     @Test
     void create_생성() {
         Lotteries lotteries2 = new Lotteries();
-        lotteries2.addCustomLotto(Arrays.asList(1,2,3,4,5,6), new DefaultCustomLotto());
+        lotteries2.addCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6), new DefaultCustomLotto());
         assertThat(lotteries).isEqualTo(lotteries2);
     }
 }

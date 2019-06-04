@@ -37,7 +37,7 @@ public class LottoTest {
 
         lotto2 = Lotto.createLotto(lottoNumbers);
 
-        lottoNumbersInt = Arrays.asList(1,2,3,4,5,6);
+        lottoNumbersInt = Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
     @Test
