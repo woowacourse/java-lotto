@@ -1,8 +1,8 @@
 package lotto;
 
 
-import lotto.domain.lotto.exception.IllegalNumberCombinationException;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.exception.IllegalNumberCombinationException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

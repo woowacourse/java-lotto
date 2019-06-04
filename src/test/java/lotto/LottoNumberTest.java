@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.lotto.exception.IllegalLottoNumberException;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.exception.IllegalLottoNumberException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

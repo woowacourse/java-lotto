@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.money.exception.IllegalMoneyException;
 import lotto.domain.money.Money;
+import lotto.domain.money.exception.IllegalMoneyException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
