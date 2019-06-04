@@ -15,18 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version 1.0 2019-06-02
  */
 public class WinnerTest {
-    Winner winner;
-    Lotto lotto;
-
-    @BeforeEach
-    void setUp() {
-        winner = new Winner(Lotto.createLotto(new MockAutoCreateLotto()), new LottoNumber(8));
-        lotto = Lotto.createLotto(new MockAutoCreateLotto());
-    }
+    public static final Winner winner = new Winner(LottoTest.createLotto, new LottoNumber(8));
 
     @Test
     void customWinLotto_확인() {
-        assertThat(winner.matchLottoCount(lotto)).isEqualTo(6);
+        assertThat(winner.matchLottoCount(LottoTest.createLotto)).isEqualTo(6);
     }
 
     @Test
@@ -36,13 +29,13 @@ public class WinnerTest {
 
     @Test
     void customWinBonus_확인_false() {
-        assertFalse(winner.matchBonus(lotto));
+        assertFalse(winner.matchBonus(LottoTest.createLotto));
     }
 
     @Test
     void customWinBonus_예외_확인() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Winner(Lotto.createLotto(new MockAutoCreateLotto()), new LottoNumber(6));
+            new Winner(LottoTest.createLotto, new LottoNumber(6));
         });
     }
 }

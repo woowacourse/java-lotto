@@ -11,16 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @version 1.0 2019-06-02
  */
 class RankResultTest {
-    RankResult rankResult;
-    Lotteries lotteries;
-    Winner winner;
+    private RankResult rankResult;
+    private Lotteries lotteries;
 
     @BeforeEach
     void setUp() {
-        winner = new Winner(Lotto.createLotto(new MockAutoCreateLotto()), new LottoNumber(8));
         lotteries = new Lotteries();
         lotteries.addAutoLotteries(1, new MockAutoCreateLotto());
-        rankResult = new RankResult(lotteries, winner, new Money(1000));
+        rankResult = new RankResult(lotteries, WinnerTest.winner, new Money(1000));
     }
 
     @Test

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * @version 1.0 2019-05-29
  */
 public class LottoNumberTest {
-    LottoNumber lottoNumber;
+    private LottoNumber lottoNumber;
 
     @BeforeEach
     void setUp() {

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.customlotto.DefaultCustomLotto;
 import lotto.domain.autocreatelotto.MockAutoCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * @version 1.0 2019-05-29
  */
 public class LottoTest {
-    Lotto lotto;
-    Lotto lotto2;
-    List<LottoNumber> lottoNumbers;
-    List<Integer> lottoNumbersInt;
+    public static final Lotto createLotto = Lotto.createLotto(new MockAutoCreateLotto());
+    private Lotto lotto2;
+    private List<LottoNumber> lottoNumbers;
+    private List<Integer> lottoNumbersInt;
 
     @BeforeEach
     void setUp() {
@@ -33,8 +32,6 @@ public class LottoTest {
         lottoNumbers.add(new LottoNumber(5));
         lottoNumbers.add(new LottoNumber(6));
 
-        lotto = Lotto.createLotto(new MockAutoCreateLotto());
-
         lotto2 = Lotto.createLotto(lottoNumbers);
 
         lottoNumbersInt = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -42,7 +39,7 @@ public class LottoTest {
 
     @Test
     void create_생성() {
-        assertThat(lotto).isEqualTo(lotto2);
+        assertThat(createLotto).isEqualTo(lotto2);
     }
 
     @Test
@@ -64,6 +61,6 @@ public class LottoTest {
 
     @Test
     void match_확인() {
-        assertThat(lotto.matchCount(lotto2)).isEqualTo(6);
+        assertThat(createLotto.matchCount(lotto2)).isEqualTo(6);
     }
 }
