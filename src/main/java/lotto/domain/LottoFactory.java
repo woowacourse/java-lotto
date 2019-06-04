@@ -1,28 +1,27 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoFactory {
     public static Lottos createRandomLottos(int numOfLottos) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < numOfLottos; i++) {
-            List<Integer> numbers = possibleLottoNumbers();
-            Collections.shuffle(numbers);
-            numbers = numbers.subList(0, Lotto.getSizeOfLottoNumbers());
-            Collections.sort(numbers);
-            lottos.add(new Lotto(numbers));
+            lottos.add(new Lotto(createRandomLottoNumbers()));
         }
         return new Lottos(lottos);
     }
 
-    private static List<Integer> possibleLottoNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int j = LottoNumber.getMinLottoNumber(); j <= LottoNumber.getMaxLottoNumber(); j++) {
-            numbers.add(j);
+    private static List<Integer> createRandomLottoNumbers() {
+        Set<Integer> lottoNumbers = new TreeSet<>();
+        while (lottoNumbers.size() < Lotto.getSizeOfLottoNumbers()) {
+            lottoNumbers.add(getRandomIntBetween(LottoNumber.getMinLottoNumber(),
+                    LottoNumber.getMaxLottoNumber()));
         }
-        return numbers;
+        return new ArrayList<>(lottoNumbers);
+    }
+
+    private static int getRandomIntBetween(int min, int max) {
+        return (int)(Math.random() * (max - min)) + min + 1;
     }
 
     public static Lottos createCustomLottos(List<List<Integer>> numbers) {
