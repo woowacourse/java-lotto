@@ -38,7 +38,6 @@ public class InputView {
         return getInterger();
     }
 
-
     public static List<List<Integer>> getManualNumbers(int manualNum) {
         List<List<Integer>> manualNumbers = new ArrayList<>();
         System.out.println(REQUIRE_MANUAL_NUMBER_LIST__MESSAGE);

@@ -3,8 +3,6 @@ package lotto.domain.machine;
 import lotto.domain.machine.exeption.InvalidMinimumMoneyException;
 
 public class MoneyProcessor {
-
-
     private static final int LOTTO_PRICE = 1000;
     private final int insertedMoney;
 

@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 public class LottoTicket {
     static final int MAX_LOTTO_TICKET_NUMBER = 6;
 
-
     private final SortedSet<LottoNumber> lottoNumbers;
+
     public LottoTicket(List<LottoNumber> numbers) {
         validLength(numbers);
         this.lottoNumbers = Collections.unmodifiableSortedSet(createSortedSet(numbers));

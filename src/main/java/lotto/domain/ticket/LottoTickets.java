@@ -7,22 +7,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-    private List<LottoTicket>lottoTickets;
+    private List<LottoTicket> lottoTickets;
+
     public LottoTickets(final List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoTicket getIdxLottoTicket(int order){
+    public LottoTicket getIdxLottoTicket(int order) {
         return lottoTickets.get(order);
     }
 
-    public int lottoTicketsSize(){
+    public int lottoTicketsSize() {
         return lottoTickets.size();
     }
-    public List<Rank> getTicketsRank(WinningLotto winningLotto){
-        List<Rank> ranks = lottoTickets.stream().map(x->winningLotto.getRank(x)).collect(Collectors.toList());
+
+    public List<Rank> getTicketsRank(WinningLotto winningLotto) {
+        List<Rank> ranks = lottoTickets.stream().map(x -> winningLotto.getRank(x)).collect(Collectors.toList());
         return ranks;
     }
+
     @Override
     public String toString() {
         return lottoTickets.stream().map(x -> x.toString()).collect(Collectors.joining("\n"));

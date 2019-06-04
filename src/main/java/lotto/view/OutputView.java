@@ -17,14 +17,14 @@ public class OutputView {
         System.out.println("\n번호 리스트");
         System.out.println(lottoTickets.toString());
     }
-s
+
 
     public static void printGameResult(final Map<Rank, Integer> rankInformation, double winningRate) {
         System.out.println("당첨통계\n------");
         for (Rank rank : rankInformation.keySet()) {
             printRankEach(rank, rankInformation.get(rank));
         }
-        System.out.println(new BigDecimal(winningRate).setScale(3, RoundingMode.HALF_EVEN);)
+        System.out.println(new BigDecimal(winningRate).setScale(3, RoundingMode.HALF_EVEN)+"%");
     }
 
     public static void printRankEach(Rank rank, int nums) {

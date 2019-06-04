@@ -35,6 +35,4 @@ public class WinningLotto extends LottoTicket {
     protected int countMatchedNumber(LottoTicket lottoTicket) {
         return lottoTicket.countSameNumber(this.getLottoNumbers());
     }
-
-
 }
