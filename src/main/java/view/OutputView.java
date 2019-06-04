@@ -26,11 +26,11 @@ public class OutputView {
         System.out.println("\n당첨 통계\n---------");
         result.forEach(x -> {
             System.out.println(
-                    x.getKey().numberOfMatches()
-                    + ((x.getKey().equals(LottoRank.SECOND)) ? "개 일치, 보너스 볼 일치 (" : "개 일치 (")
-                    + x.getKey().prize()
+                    x.rank().numberOfMatches()
+                    + ((x.rank().equals(LottoRank.SECOND)) ? "개 일치, 보너스 볼 일치 (" : "개 일치 (")
+                    + x.rank().prize()
                     + "원)- "
-                    + x.getValue()
+                    + x.number()
                     + "개"
             );
         });
