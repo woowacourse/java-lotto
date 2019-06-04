@@ -12,6 +12,7 @@ public class OutputView {
     private static final String OUTPUT_CHANGE_MESSAGE_BACK = "원입니다.";
     private static final String OUTPUT_RESULT_STATISTICS_MESSAGE = "당첨 통계" + LINE_SEPARATOR + "----------";
     private static final String OUTPUT_RANK_RESULT_MESSAGE_1 = "개 일치 (";
+    private static final String OUTPUT_RANK_RESULT_BONUS_BALL_MESSAGE = "개 일치, 보너스 볼 일치 (";
     private static final String OUTPUT_RANK_RESULT_MESSAGE_2 = "원) - ";
     private static final String OUTPUT_RANK_RESULT_MESSAGE_3 = "개";
     private static final String OUTPUT_PROFIT_RATIO_MESSAGE_FRONT = "총 수익률은 ";
@@ -59,13 +60,20 @@ public class OutputView {
     private static String generateResultMessage(Rank rank, int countOfRankResult) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(rank.getNumOfMatching())
-                .append(OUTPUT_RANK_RESULT_MESSAGE_1)
+                .append(generateNumOfMatchingMessage(rank))
                 .append(rank.getPrize())
                 .append(OUTPUT_RANK_RESULT_MESSAGE_2)
                 .append(countOfRankResult)
                 .append(OUTPUT_RANK_RESULT_MESSAGE_3)
                 .append(LINE_SEPARATOR);
         return stringBuilder.toString();
+    }
+
+    private static String generateNumOfMatchingMessage(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return OUTPUT_RANK_RESULT_BONUS_BALL_MESSAGE;
+        }
+        return OUTPUT_RANK_RESULT_MESSAGE_1;
     }
 
     private static String convertToPercent(double ratio) {
