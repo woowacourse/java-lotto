@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class LottoGameResult {
     private static final int INIT_NUMBER = 0;
+    private static final int INIT_SUM = 0;
+    private static final int INIT_COUNT = 0;
     private static final int PERCENT = 100;
 
     private final List<Lotto> lottos;
@@ -36,14 +38,14 @@ public class LottoGameResult {
     }
 
     public double profit(final int lottoCost) {
-        double numOfLotto = 0;
-        double totalMoney = 0;
+        double numOfLotto = INIT_COUNT;
+        double totalMoney = INIT_SUM;
 
         for (Rank rank : lottoStat.keySet()) {
             final int tempNum = lottoStat.get(rank);
             numOfLotto += tempNum;
             totalMoney += rank.prize(tempNum);
         }
-        return totalMoney / (numOfLotto * lottoCost) * PERCENT;
+        return (totalMoney / (numOfLotto * lottoCost)) * PERCENT;
     }
 }
