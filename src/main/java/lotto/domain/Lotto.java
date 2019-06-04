@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import lotto.domain.exception.LottoCreateException;
+import lotto.domain.exception.CountOfNumberException;
+import lotto.domain.exception.NumberDuplicationException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
     static final int LOTTO_SIZE = 6;
@@ -22,14 +22,14 @@ public class Lotto {
 
     private void checkValidSize(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new LottoCreateException(LOTTO_SIZE + "개를 입력해주세요");
+            throw new CountOfNumberException(LOTTO_SIZE + "개를 입력해주세요");
         }
     }
 
     private void checkDuplication(final List<LottoNumber> numbers) {
         final Set<LottoNumber> semiParameter = new HashSet<>(numbers);
         if (numbers.size() != semiParameter.size()) {
-            throw new LottoCreateException("중복된 숫자로 로또 생성");
+            throw new NumberDuplicationException("중복된 숫자로 로또 생성");
         }
     }
 

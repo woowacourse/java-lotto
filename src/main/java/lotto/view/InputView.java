@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoNumber;
-import lotto.domain.exception.LottoNumberCreateException;
+import lotto.domain.exception.NumberBoundException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,7 +32,7 @@ public class InputView {
         int bonusNum = inputNumber();
         try {
             return LottoNumber.of(bonusNum);
-        } catch (LottoNumberCreateException e) {
+        } catch (NumberBoundException e) {
             System.out.println(e.getMessage());
             return inputBonusLottoNumber();
         }

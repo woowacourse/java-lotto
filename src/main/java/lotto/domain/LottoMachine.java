@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exception.LottoCreateException;
+import lotto.domain.exception.LackOfMoneyException;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class LottoMachine {
 
     LottoMachine(final int money) {
         if (money < LOTTO_MONEY) {
-            throw new LottoCreateException("1000원 이상 구매하세요");
+            throw new LackOfMoneyException("1000원 이상 구매하세요");
         }
         lottoFactory = new LottoFactory();
         remainMoney = money;

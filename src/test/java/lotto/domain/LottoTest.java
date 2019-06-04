@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.exception.LottoCreateException;
-import lotto.domain.exception.LottoNumberCreateException;
+import lotto.domain.exception.CountOfNumberException;
+import lotto.domain.exception.NumberBoundException;
+import lotto.domain.exception.NumberDuplicationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +64,7 @@ class LottoTest {
     public void 중복된_숫자_리스트가_입력됬을때_예외발생_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
 
-        assertThatExceptionOfType(LottoCreateException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(NumberDuplicationException.class).isThrownBy(() -> {
             lottoFactory.create(numbers);
         });
     }
@@ -72,7 +73,7 @@ class LottoTest {
     public void 숫자_리스트의_크기가_6초과일때_예외발생_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 
-        assertThatExceptionOfType(LottoCreateException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(CountOfNumberException.class).isThrownBy(() -> {
             lottoFactory.create(numbers);
         });
     }
@@ -81,7 +82,7 @@ class LottoTest {
     public void 숫자_리스트의_크기가_6미만일때_예외발생_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
-        assertThatExceptionOfType(LottoCreateException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(CountOfNumberException.class).isThrownBy(() -> {
             lottoFactory.create(numbers);
         });
     }
@@ -90,7 +91,7 @@ class LottoTest {
     public void 로또_숫자가_범위를_벗어날때_예외발생하는지_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 46, 7);
 
-        assertThatExceptionOfType(LottoNumberCreateException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(NumberBoundException.class).isThrownBy(() -> {
             lottoFactory.create(numbers);
         });
     }

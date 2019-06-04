@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 // TODO Exception
 // TODO depth 1
-// TODO Dto
+// TODO Dto 부분 완료
 public class ConsoleApplication {
     private static final int START_COUNT = 0;
 
@@ -25,18 +25,6 @@ public class ConsoleApplication {
         WinningLotto winningLotto = assignGameResult();
         LottoGameResult gameResult = buyer.gameResultOf(winningLotto);
         OutputView.showGameResult(gameResult);
-    }
-
-    private static LottosDto createLottosDto(final List<Lotto> lottos) {
-        List<LottoDto> semiLottos = new ArrayList<>();
-        for (final Lotto lotto : lottos) {
-            LottoDto lottoDto = new LottoDto();
-            lottoDto.setNumbers(lotto.getLottoNumbers().stream()
-                    .map(lottoNumber -> lottoNumber.toString())
-                    .collect(Collectors.toList()));
-            semiLottos.add(lottoDto);
-        }
-        return LottosDto.of(semiLottos);
     }
 
     private static int assignManualPurchaseCount(final LottoService buyer) {
@@ -67,5 +55,17 @@ public class ConsoleApplication {
             System.out.println(e.getMessage());
             return assignGameResult();
         }
+    }
+
+    private static LottosDto createLottosDto(final List<Lotto> lottos) {
+        List<LottoDto> semiLottos = new ArrayList<>();
+        for (final Lotto lotto : lottos) {
+            LottoDto lottoDto = new LottoDto();
+            lottoDto.setNumbers(lotto.getLottoNumbers().stream()
+                    .map(lottoNumber -> lottoNumber.toString())
+                    .collect(Collectors.toList()));
+            semiLottos.add(lottoDto);
+        }
+        return LottosDto.of(semiLottos);
     }
 }

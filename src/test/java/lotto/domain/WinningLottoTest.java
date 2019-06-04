@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exception.WinningLottoCreateException;
+import lotto.domain.exception.WinningLottoHasBonusException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -45,7 +45,7 @@ public class WinningLottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto = Lotto.of(convertNumbersToLottoNumbers(numbers));
 
-        assertThatExceptionOfType(WinningLottoCreateException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(WinningLottoHasBonusException.class).isThrownBy(() -> {
             WinningLotto.of(lotto, LottoNumber.of(3));
         });
     }

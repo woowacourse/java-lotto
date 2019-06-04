@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.RankNotExistException;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -34,7 +36,7 @@ public enum Rank {
                 return value;
             }
         }
-        throw new IllegalArgumentException(matchCount + "에 맞는 등수가 존재하지 않습니다");
+        throw new RankNotExistException(matchCount + "에 맞는 등수가 존재하지 않습니다");
     }
 
     double prize(final int count) {
