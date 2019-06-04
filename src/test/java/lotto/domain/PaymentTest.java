@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.PaymentOutOfBoundsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,17 +21,17 @@ public class PaymentTest {
     }
 
     @Test
-    void 생성자_확인_0을_입력했을_때() {
-        assertThatThrownBy(() -> new Payment(0)).isInstanceOf(IllegalArgumentException.class);
+    void 생성자_확인_로또가격보다_적은_금액을_입력했을_때() {
+        assertThatThrownBy(() -> new Payment(999)).isInstanceOf(PaymentOutOfBoundsException.class);
     }
 
     @Test
-    void calculateCountOfLotto() {
+    void 총_로또개수_확인() {
         assertThat(payment.calculateCountOfLotto()).isEqualTo(1);
     }
 
     @Test
-    void calculateEarningsRate() {
+    void 수익률_계산_확인() {
         assertThat(payment.calculateEarningsRate(10_000)).isEqualTo(10.0);
     }
 }

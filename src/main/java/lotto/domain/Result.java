@@ -1,17 +1,42 @@
 package lotto.domain;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoTickets;
+import lotto.domain.lotto.WinningLotto;
+
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Result {
     private final Map<Rank, Integer> lottoScore;
 
     public Result(WinningLotto winningLotto, LottoTickets lottoTickets) {
-        this.lottoScore = lottoTickets.stream()
-                .map(ticket -> Rank.valueOf(winningLotto.match(ticket), winningLotto.contains(ticket)))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(rank -> 1)));
+        if (Objects.isNull(winningLotto) || Objects.isNull(lottoTickets)) {
+            throw new NullPointerException();
+        }
+        lottoScore = new HashMap<>();
+        produceMatchResult(winningLotto, lottoTickets);
+    }
+
+    private void produceMatchResult(WinningLotto winningLotto, LottoTickets lottoTickets) {
+        List<Lotto> tickets = lottoTickets.getLottoTickets();
+
+        for (Lotto ticket : tickets) {
+            calculateCountOfMatch(winningLotto, ticket);
+        }
+    }
+
+    private void calculateCountOfMatch(WinningLotto winningLotto, Lotto ticket) {
+        Rank rank = Rank.valueOf(winningLotto.match(ticket), winningLotto.contains(ticket));
+
+        if (lottoScore.containsKey(rank)) {
+            lottoScore.put(rank, lottoScore.get(rank) + 1);
+            return;
+        }
+
+        lottoScore.put(rank, 1);
     }
 
     public int get(Rank rank) {

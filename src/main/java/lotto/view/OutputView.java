@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.domain.lotto.LottoTickets;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
