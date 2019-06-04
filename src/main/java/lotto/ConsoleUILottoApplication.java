@@ -26,7 +26,7 @@ public class ConsoleUILottoApplication {
         OutputView.printResult(result, payment);
     }
 
-    public static Payment inputPayment() {
+    private static Payment inputPayment() {
         try {
             String input = InputView.inputPayment();
             return new Payment(Integer.parseInt(input));
@@ -36,7 +36,7 @@ public class ConsoleUILottoApplication {
         }
     }
 
-    public static CountOfLotto inputCountOfManualLotto(Payment payment) {
+    private static CountOfLotto inputCountOfManualLotto(Payment payment) {
         try {
             String input = InputView.inputCountOfManualLotto();
             return new CountOfLotto(payment, Integer.parseInt(input));
@@ -58,7 +58,7 @@ public class ConsoleUILottoApplication {
         return lottoRepository;
     }
 
-    public static void inputLottoNumber(LottoRepository lottoRepository) {
+    private static void inputLottoNumber(LottoRepository lottoRepository) {
         try {
             String input = InputView.inputLottoNumber();
             List<Integer> list = splitInputLottoNumbers(input);
@@ -70,7 +70,7 @@ public class ConsoleUILottoApplication {
         }
     }
 
-    public static WinningLotto inputWinningLotto() {
+    private static WinningLotto inputWinningLotto() {
         try {
             String inputLotto = InputView.inputWinningLottoNumber();
             List<Integer> list = splitInputLottoNumbers(inputLotto);
