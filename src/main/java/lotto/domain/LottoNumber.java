@@ -32,7 +32,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (Objects.isNull(creators.get(number))) {
             throw new NullPointerException();
         }
-
         return creators.get(number);
     }
 

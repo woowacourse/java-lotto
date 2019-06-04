@@ -46,7 +46,7 @@ public enum Rank {
         return this == MISS;
     }
 
-    public boolean isNotSecond() {
+    private boolean isNotSecond() {
         return this != SECOND;
     }
 
