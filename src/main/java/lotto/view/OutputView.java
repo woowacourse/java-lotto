@@ -2,7 +2,11 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.List;
+
 public class OutputView {
+    private static final String DELIMITER = ", ";
+
     private OutputView() {
 
     }
@@ -30,10 +34,17 @@ public class OutputView {
         System.out.print("(" + rank.getMoney() + ")- ");
     }
 
-    public static void showLottos(final LottoBuyer service) {
-        LottosDto lottos = service.getLottos();
-        while (lottos.hasNext()) {
-            System.out.println(lottos.next());
+    public static void showLottos(final LottosDto lottos) {
+        List<LottoDto> lottoDtos = lottos.getLottos();
+        for (final LottoDto lotto : lottoDtos) {
+            showLotto(lotto);
+            System.out.println();
         }
+    }
+
+    private static void showLotto(LottoDto lotto) {
+        System.out.print("[");
+        System.out.print(String.join(DELIMITER, lotto.getNumbers()));
+        System.out.print("]");
     }
 }

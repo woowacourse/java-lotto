@@ -1,28 +1,20 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class LottosDto {
-    private final List<Lotto> copyLottos;
+    private final List<LottoDto> lottos;
 
-    private Iterator<Lotto> iterator;
-
-    private LottosDto(final List<Lotto> lottos) {
-        this.copyLottos = new ArrayList<>(lottos);
-        iterator = copyLottos.iterator();
+    private LottosDto(final List<LottoDto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
 
-    public static LottosDto of(final List<Lotto> lottos) {
+    public static LottosDto of(final List<LottoDto> lottos) {
         return new LottosDto(lottos);
     }
 
-    public boolean hasNext() {
-        return iterator.hasNext();
-    }
-
-    public Lotto next() {
-        return iterator.next();
+    public List<LottoDto> getLottos() {
+        return new ArrayList<>(lottos);
     }
 }

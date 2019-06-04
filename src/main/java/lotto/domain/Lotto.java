@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.exception.LottoCreateException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     static final int LOTTO_SIZE = 6;
@@ -47,6 +48,10 @@ public class Lotto {
 
     boolean contains(LottoNumber other) {
         return this.numbers.contains(other);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return new ArrayList<>(this.numbers);
     }
 
     @Override

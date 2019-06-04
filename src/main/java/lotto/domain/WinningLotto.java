@@ -18,7 +18,7 @@ public class WinningLotto {
         }
     }
 
-    static WinningLotto of(final Lotto winningLotto, final LottoNumber bonus) {
+    public static WinningLotto of(final Lotto winningLotto, final LottoNumber bonus) {
         return new WinningLotto(winningLotto, bonus);
     }
 

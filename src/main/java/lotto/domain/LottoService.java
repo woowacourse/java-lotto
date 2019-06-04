@@ -2,12 +2,12 @@ package lotto.domain;
 
 import java.util.List;
 
-public class LottoBuyer {
+public class LottoService {
     private final RandomNumbersGenerator generator;
     private final LottoMachine lottoMachine;
     private final Lottos lottos;
 
-    public LottoBuyer(final int money) {
+    public LottoService(final int money) {
         generator = RandomNumbersGenerator.of(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER, Lotto.LOTTO_SIZE);
         lottoMachine = new LottoMachine(money);
         lottos = new Lottos();
@@ -27,12 +27,11 @@ public class LottoBuyer {
         return lottoMachine.isRemainMoney();
     }
 
-    public LottoGameResult resultOf(final Lotto lotto, final LottoNumber bonusNum) {
-        WinningLotto winningLotto = WinningLotto.of(lotto, bonusNum);
-        return LottoGameResult.of(lottos.getContents(), winningLotto);
+    public LottoGameResult gameResultOf(final WinningLotto winningLotto) {
+        return LottoGameResult.of(lottos.getLottos(), winningLotto);
     }
 
-    public LottosDto getLottos() {
-        return LottosDto.of(lottos.getContents());
+    public List<Lotto> getLottos() {
+        return lottos.getLottos();
     }
 }
