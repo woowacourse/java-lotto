@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.InvalidCountOfLottoNumberException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -19,7 +21,7 @@ public class LottoTest {
                 LottoNumber.getNumber(4),
                 LottoNumber.getNumber(5));
 
-        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(InvalidCountOfLottoNumberException.class);
     }
 
     @Test
@@ -32,7 +34,7 @@ public class LottoTest {
                 LottoNumber.getNumber(5),
                 LottoNumber.getNumber(5));
 
-        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(DuplicateLottoNumberException.class);
     }
 
     @Test
