@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LottoTicketTest {
+class LottoTest {
     @Test
     void 생성() {
         final Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));

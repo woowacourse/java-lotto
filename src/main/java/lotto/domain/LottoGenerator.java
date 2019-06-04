@@ -22,7 +22,7 @@ public class LottoGenerator {
         return new ArrayList<>(lottoNumbers.subList(0, Lotto.NUMBER_COUNT));
     }
 
-    public static Lotto create() {
+    public static Lotto lotto() {
         return new Lotto(getLottoNumbers());
     }
 

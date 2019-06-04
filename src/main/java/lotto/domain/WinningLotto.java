@@ -39,7 +39,7 @@ public class WinningLotto {
         }
     }
 
-    public Reward match(LottoTicket lotto) {
+    public Reward match(Lotto lotto) {
         boolean hasBonusNumber = false;
         if (lotto.numbers().contains(this.bonus)) {
             hasBonusNumber = true;
@@ -47,7 +47,7 @@ public class WinningLotto {
         return Reward.valueOf(matchCount(lotto), hasBonusNumber);
     }
 
-    private int matchCount(LottoTicket lotto) {
+    private int matchCount(Lotto lotto) {
         Set<Integer> lottoNumberSet = new HashSet<>(winningLotto);
         lottoNumberSet.addAll(lotto.numbers());
         return 12 - lottoNumberSet.size();
