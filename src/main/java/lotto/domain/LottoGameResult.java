@@ -47,6 +47,6 @@ public class LottoGameResult {
             numOfLotto += tempNum;
             totalMoney += rank.prize(tempNum);
         }
-        return totalMoney / ((numOfLotto * lottoCost) * PERCENT);
+        return totalMoney / (numOfLotto * lottoCost) * PERCENT;
     }
 }
