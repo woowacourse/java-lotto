@@ -24,13 +24,13 @@ public class OutputView {
 
     public static void printResult(LottoResult result) {
         System.out.println("\n당첨 통계\n---------");
-        result.forEach((rank, number) -> {
+        result.forEach(x -> {
             System.out.println(
-                    rank.numberOfMatches()
-                    + ((rank.equals(LottoRank.SECOND)) ? "개 일치, 보너스 볼 일치 (" : "개 일치 (")
-                    + rank.prize()
+                    x.getKey().numberOfMatches()
+                    + ((x.getKey().equals(LottoRank.SECOND)) ? "개 일치, 보너스 볼 일치 (" : "개 일치 (")
+                    + x.getKey().prize()
                     + "원)- "
-                    + number
+                    + x.getValue()
                     + "개"
             );
         });

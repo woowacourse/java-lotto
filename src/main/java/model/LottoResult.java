@@ -1,26 +1,22 @@
 package model;
 
 import java.util.*;
-import java.util.stream.Stream;
 
-public class LottoResult extends LinkedHashMap<LottoRank, Integer> {
+public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>> {
+    private final LottoResultTable table;
     private final double earningRate;
 
     protected LottoResult(List<Lotto> lottos, WinningNumbers winningNumbers) {
-        Stream.of(LottoRank.values()).forEach(rank -> this.put(rank, 0));
-        lottos.forEach(lotto -> lotto.match(winningNumbers).map(x -> this.put(x, this.get(x) + 1)));
-        this.earningRate = totalEarnings().earningRate(new Money(Lotto.PRICE * lottos.size()));
-    }
-
-    private Money totalEarnings() {
-        return new Money(
-                this.entrySet().stream()
-                    .mapToInt(x -> x.getKey().prize().amount() * x.getValue())
-                    .sum()
-        );
+        this.table = new LottoResultTable(lottos, winningNumbers);
+        this.earningRate = this.table.totalEarnings().earningRate(new Money(Lotto.PRICE * lottos.size()));
     }
 
     public double earningRate() {
         return this.earningRate;
+    }
+
+    @Override
+    public Iterator<Map.Entry<LottoRank, Integer>> iterator() {
+        return table.iterator();
     }
 }

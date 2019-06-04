@@ -15,11 +15,6 @@ class MoneyTest {
     }
 
     @Test
-    void lottoAmountTest() {
-        assertThat(new Money(65535).lottoPurchaseAmount()).isEqualTo(65);
-    }
-
-    @Test
     void earningRateTest() {
         assertThat(new Money(30000).earningRate(new Money(100))).isCloseTo(29900.0, offset(0.0000001));
     }

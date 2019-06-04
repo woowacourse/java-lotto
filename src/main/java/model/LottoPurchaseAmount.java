@@ -5,7 +5,7 @@ public class LottoPurchaseAmount {
     private final int manual;
 
     public LottoPurchaseAmount(int totalPurchaseAmount, int manualPurchaseAmount) {
-        if ((totalPurchaseAmount < manualPurchaseAmount) || totalPurchaseAmount + manualPurchaseAmount < 0) {
+        if ((totalPurchaseAmount < manualPurchaseAmount) || (totalPurchaseAmount + manualPurchaseAmount < 0)) {
             throw new IllegalArgumentException();
         }
         this.auto = totalPurchaseAmount - manualPurchaseAmount;
@@ -13,7 +13,7 @@ public class LottoPurchaseAmount {
     }
 
     public LottoPurchaseAmount(Money investment, int manualPurchaseAmount) {
-        this(investment.lottoPurchaseAmount(), manualPurchaseAmount);
+        this(investment.amount() / Lotto.PRICE, manualPurchaseAmount);
     }
 
     public int auto() {

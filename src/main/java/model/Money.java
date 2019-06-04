@@ -18,10 +18,6 @@ public class Money {
         this(Integer.parseInt(input.trim()));
     }
 
-    public int lottoPurchaseAmount() {
-        return this.amount / Lotto.PRICE;
-    }
-
     public double earningRate(Money investment) {
         return ((double) this.amount / investment.amount() - 1.0) * 100.0;
     }

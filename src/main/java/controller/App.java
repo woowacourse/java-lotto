@@ -10,7 +10,7 @@ import static view.OutputView.*;
 
 public class App {
     public static void main(String[] argc) {
-        final WinningNumbers winningNumbers = new WinningNumbers();
+        final WinningNumbers winningNumbers = new AutoWinningNumbers();
         final LottoPurchaseAmount purchaseAmount = inputAmountOfManualPicks(inputAmountOfMoney());
         final List<Lotto> manualLottos = inputManualLottoNumbers(purchaseAmount);
         printPurchaseAmount(purchaseAmount);
