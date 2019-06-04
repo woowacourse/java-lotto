@@ -39,4 +39,14 @@ public class WinningLotto {
             throw new InvalidLottoNumbersException("숫자자 아닌 값이 포함되어 있습니다.");
         }
     }
+
+    public Rank matchRank(Lotto lotto) {
+        List<LottoNumber> winningNumbers = this.lotto.getNumbers();
+        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+
+        lottoNumbers.retainAll(winningNumbers);
+
+        int countOfMatch = lottoNumbers.size();
+        return Rank.valueOf(countOfMatch);
+    }
 }

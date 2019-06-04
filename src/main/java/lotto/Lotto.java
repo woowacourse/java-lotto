@@ -2,9 +2,7 @@ package lotto;
 
 import lotto.exception.InvalidLottoNumbersException;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     private static final int NUMBER_OF_NUMBERS_IN_LOTTO = 6;
@@ -22,5 +20,9 @@ public class Lotto {
             throw new InvalidLottoNumbersException(
                     String.format("숫자를 %d개 입력하셨습니다. %d개의 숫자를 입력해주세요", numbers.size(), NUMBER_OF_NUMBERS_IN_LOTTO));
        }
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return new ArrayList<>(numbers);
     }
 }
