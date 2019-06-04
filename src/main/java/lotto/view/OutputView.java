@@ -10,6 +10,6 @@ public class OutputView {
     }
 
     public static void printResult(LottoResult lottoResult) {
-        System.out.println(lottoResult);
+        System.out.println(lottoResult.toString());
     }
 }
