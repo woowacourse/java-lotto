@@ -36,8 +36,8 @@ public class Lotto {
                 .count();
     }
 
-    public boolean contains(BonusNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber.getNumber());
+    public boolean contains(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override

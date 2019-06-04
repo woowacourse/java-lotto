@@ -2,15 +2,16 @@ package lotto.domain;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Result {
     private final Map<Rank, Integer> lottoScore;
 
-    public Result(Map<Rank, Integer> lottoScore) {
-        if (Objects.isNull(lottoScore) || lottoScore.isEmpty()) {
-            throw new NullPointerException();
-        }
-        this.lottoScore = lottoScore;
+    public Result(WinningLotto winningLotto, LottoTickets lottoTickets) {
+        this.lottoScore = lottoTickets.stream()
+                .map(ticket -> Rank.valueOf(winningLotto.match(ticket), winningLotto.contains(ticket)))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(rank -> 1)));
     }
 
     public int get(Rank rank) {

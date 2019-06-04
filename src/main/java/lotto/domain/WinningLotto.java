@@ -8,21 +8,21 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     private Lotto winningLotto;
-    private BonusNumber bonusNumber;
+    private LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto winningLotto, BonusNumber bonusNumber) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
             throw new DuplicateLottoNumberException("로또숫자와 보너스숫자가 중복으로 입력되었습니다");
         }
-
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    public Result produceResult(LottoTickets lottoTickets) {
-        Map<Rank, Integer> map = lottoTickets.stream()
-                .map(ticket -> Rank.valueOf(ticket.match(winningLotto), ticket.contains(bonusNumber)))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(rank -> 1)));
-        return new Result(map);
+    public int match(Lotto lotto) {
+        return lotto.match(winningLotto);
+    }
+
+    public boolean contains(Lotto lotto) {
+        return lotto.contains(bonusNumber);
     }
 }

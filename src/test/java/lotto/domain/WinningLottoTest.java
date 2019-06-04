@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
+import lotto.exception.DuplicateLottoNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,16 +28,14 @@ class WinningLottoTest {
 
     @Test
     void 생성자_확인() {
-        BonusNumber bonusNumber = new BonusNumber(7);
-        assertThat(new WinningLotto(lotto, bonusNumber))
+        assertThat(new WinningLotto(lotto, LottoNumber.getNumber(7)))
                 .isExactlyInstanceOf((WinningLotto.class));
     }
 
     @Test
     void 생성자_확인_보너스_숫자와_이미_입력된_로또숫자가_중복되는지_확인() {
-        BonusNumber bonusNumber = new BonusNumber(1);
-        assertThatThrownBy(() -> new WinningLotto(lotto, bonusNumber))
-                .isExactlyInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new WinningLotto(lotto, LottoNumber.getNumber(1)))
+                .isExactlyInstanceOf(DuplicateLottoNumberException.class);
     }
 
     @Test
@@ -47,14 +46,14 @@ class WinningLottoTest {
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 9)));
 
         LottoTickets lottoTickets = new LottoTickets(lottoRepository);
+        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.getNumber(7));
+        Result result = new Result(winningLotto, lottoTickets);
 
-        Map<Rank, Integer> lottoScore = new HashMap<>();
-        lottoScore.put(Rank.FIRST, 1);
-        lottoScore.put(Rank.SECOND, 1);
-        lottoScore.put(Rank.THIRD, 1);
-
-        WinningLotto winningLotto = new WinningLotto(lotto, new BonusNumber(7));
-
-        assertThat(new Result(lottoScore)).isEqualTo(winningLotto.produceResult(lottoTickets));
+        assertThat(result.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(result.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(result.get(Rank.THIRD)).isEqualTo(1);
+        assertThat(result.get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(result.get(Rank.FIFTH)).isEqualTo(0);
+        assertThat(result.get(Rank.MISS)).isEqualTo(0);
     }
 }
