@@ -12,6 +12,8 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
+    private static final int ZERO = 0;
+
     private final int countOfMatch;
     private final long winningMoney;
 
@@ -21,7 +23,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == 1 || countOfMatch == 2) {
+        if (countOfMatch < FIFTH.countOfMatch && countOfMatch >= ZERO) {
             return MISS;
         }
 

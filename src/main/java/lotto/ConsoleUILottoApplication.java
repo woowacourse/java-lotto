@@ -30,7 +30,7 @@ public class ConsoleUILottoApplication {
 
         WinningLotto winningLotto = inputWinningLotto();
 
-        Result result = winningLotto.produceResult(lottoTickets);
+        Result result = new Result(winningLotto, lottoTickets);
         OutputView.printResult(result, payment);
     }
 
@@ -57,9 +57,7 @@ public class ConsoleUILottoApplication {
     public static void inputLottoNumber(LottoRepository lottoRepository) {
         try {
             String input = InputView.inputLottoNumber();
-            List<Integer> list = Arrays.stream(input.split(", "))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+            List<Integer> list = splitInputLottoNumbers(input);
             lottoRepository.register(new ManualLottoGeneratingStrategy(list));
 
         } catch (Exception e) {
@@ -71,17 +69,20 @@ public class ConsoleUILottoApplication {
     public static WinningLotto inputWinningLotto() {
         try {
             String inputLotto = InputView.inputWinningLottoNumber();
-            List<Integer> list = Arrays.stream(inputLotto.split(", "))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+            List<Integer> list = splitInputLottoNumbers(inputLotto);
             Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(list));
 
             String inputBonusBall = InputView.inputBonusBall();
-            return new WinningLotto(lotto, new BonusNumber(Integer.parseInt(inputBonusBall)));
+            return new WinningLotto(lotto, LottoNumber.getNumber(Integer.parseInt(inputBonusBall)));
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return inputWinningLotto();
         }
+    }
 
+    private static List<Integer> splitInputLottoNumbers(String input) {
+        return Arrays.stream(input.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
