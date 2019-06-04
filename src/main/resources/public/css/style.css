@@ -1,0 +1,115 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+h1 {
+    color: blueviolet;
+}
+
+.wrap {
+    margin: 0 auto;
+    max-width: 890px;
+}
+
+.money-input-group {
+    align-items: center;
+    display: flex;
+}
+
+.money-input {
+    margin-right: .5rem;
+    width: 5rem;
+}
+
+.qty-input {
+    display: inline-block;
+    font-size: .8rem;
+    margin-right: .5rem;
+    width: 3rem;
+}
+
+.qty-input-group {
+    display: inline-block;
+}
+
+.winning-input-group {
+    align-items: center;
+    display: flex;
+}
+
+.winning-input-group input[type=number] {
+    width: 3rem;
+    margin-right: 2rem;
+}
+
+.winning-input-group label {
+    margin-right: 2rem;
+}
+
+.winning-number-group .alert {
+    margin-top: 16px;
+}
+
+.btn-add-manual-number {
+    margin: 12px 0;
+    padding: 4px 8px;
+    width: 100%;
+}
+
+.btn-add-manual-number img {
+    width: 1.5rem;
+}
+
+.manual-numbers {
+    margin-top: 16px;
+}
+
+.input-group-lottonumber {
+    align-items: center;
+    display: flex;
+    margin: 12px 0;
+}
+
+.input-group-lottonumber input[type=number] {
+    width: 3rem;
+    margin-right: 2rem;
+}
+
+.input-group-lottonumber button {
+    padding: 4px 8px;
+}
+
+.input-group-lottonumber button img {
+    width: 1.5rem;
+}
