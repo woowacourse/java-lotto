@@ -13,7 +13,6 @@ import java.util.List;
  * @version 1.0 2019-05-31
  */
 public class DefaultAutoCreateLotto implements AutoCreateLotto {
-
     private static final int MAX_LOTTO_SIZE = 6;
 
     @Override
