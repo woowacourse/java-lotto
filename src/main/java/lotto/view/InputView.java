@@ -18,6 +18,8 @@ public class InputView {
     private static final String LOTTO_NUMBER_DELIMITER = ",";
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INVALID_BONUS_BALL_ERROR_MESSAGE = "보너스 볼은 지난 주 당첨 번호와 중복될 수 없습니다.";
+    public static final String INPUT_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String OUT_OF_SCOPE_MANUAL_LOTTO_ERROR_MESSAGE = "수동으로 구매할 로또 개수는 입력한 구입 금액의 한도 내에서 입력해 주세요.";
     private static Scanner scanner = new Scanner(System.in);
 
     public static LottoSeller makeLottoSeller() {
@@ -36,6 +38,31 @@ public class InputView {
             System.out.println(e.getMessage());
             return makeLottoSeller();
         }
+    }
+
+    public static long makeNumOfManualTickets(long numOfPurchasedTickets) {
+        System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
+        return makeNumOfManualTickets(scanner.nextLine().trim(), numOfPurchasedTickets);
+    }
+
+    public static long makeNumOfManualTickets(String input, long numOfPurchasedTickets) {
+        try {
+            long numOfManualTickets = Long.parseLong(input);
+            if (isOutOfScope(numOfManualTickets, numOfPurchasedTickets)) {
+                throw new IllegalArgumentException(OUT_OF_SCOPE_MANUAL_LOTTO_ERROR_MESSAGE);
+            }
+            return numOfManualTickets;
+        } catch (NumberFormatException e) {
+            System.out.println(NOT_INTEGER_ERROR_MESSAGE);
+            return makeNumOfManualTickets(numOfPurchasedTickets);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return makeNumOfManualTickets(numOfPurchasedTickets);
+        }
+    }
+
+    private static boolean isOutOfScope(long numOfManualTickets, long numOfPurchasedTickets) {
+        return numOfManualTickets < 0 || numOfManualTickets > numOfPurchasedTickets;
     }
 
     public static LottoTicket makeWinningLotto() {

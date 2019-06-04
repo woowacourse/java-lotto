@@ -14,6 +14,11 @@ class InputViewTest {
     }
 
     @Test
+    void 수동으로_구매할_로또의_수를_입력받는_메소드() {
+        assertThat(InputView.makeNumOfManualTickets("3", 14)).isInstanceOf(Long.class);
+    }
+
+    @Test
     void 당첨_번호를_입력하면_LottoTicket을_반환하는_메소드() {
         assertThat(InputView.makeWinningLotto("1, 2, 3, 4, 5, 6")).isInstanceOf(LottoTicket.class);
     }

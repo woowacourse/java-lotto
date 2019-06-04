@@ -12,7 +12,11 @@ import lotto.view.OutputView;
 public class LottoController {
     public void run() {
         LottoSeller lottoSeller = InputView.makeLottoSeller();
-        LottoTickets lottoTickets = LottoTicketingMachine.generateLottoTickets(lottoSeller.getNumOfLotto());
+        long numOfPurchasedTickets = lottoSeller.getNumOfLotto();
+        long numOfManualTickets = InputView.makeNumOfManualTickets(numOfPurchasedTickets);
+        
+        long numOfAutomaticTickets = numOfPurchasedTickets - numOfManualTickets;
+        LottoTickets lottoTickets = LottoTicketingMachine.generateLottoTickets(numOfAutomaticTickets);
 
         OutputView.showNumOfTicketsFrom(lottoSeller);
         OutputView.showAllOf(lottoTickets);
