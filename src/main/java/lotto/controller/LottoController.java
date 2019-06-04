@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoResult;
+import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottoseller.LottoSeller;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTicketingMachine;
@@ -17,6 +18,7 @@ public class LottoController {
         OutputView.showAllOf(lottoTickets);
 
         LottoTicket winningLotto = InputView.makeWinningLotto();
+        LottoNumber bonusBall = InputView.makeBonusBall(winningLotto);
 
         LottoResult lottoResult = LottoResult.of(lottoTickets, winningLotto);
         OutputView.showStatisticsOf(lottoResult);

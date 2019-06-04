@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottoseller.LottoSeller;
 import lotto.domain.lottoticket.LottoTicket;
 import org.junit.jupiter.api.Test;
@@ -15,5 +16,11 @@ class InputViewTest {
     @Test
     void 당첨_번호를_입력하면_LottoTicket을_반환하는_메소드() {
         assertThat(InputView.makeWinningLotto("1, 2, 3, 4, 5, 6")).isInstanceOf(LottoTicket.class);
+    }
+
+    @Test
+    void 보너스_볼을_입력하면_LottoNumber를_반환하는_메소드() {
+        LottoTicket winningLotto = InputView.makeWinningLotto("1, 2, 3, 4, 5, 6");
+        assertThat(InputView.makeBonusBall("7", winningLotto)).isInstanceOf(LottoNumber.class);
     }
 }

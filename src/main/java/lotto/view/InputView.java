@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.lottonumber.InvalidLottoNumberException;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottoseller.Cash;
 import lotto.domain.lottoseller.LottoSeller;
@@ -15,6 +16,8 @@ public class InputView {
     private static final String INPUT_WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String NOT_INTEGER_ERROR_MESSAGE = "정수로 입력해 주세요.";
     private static final String LOTTO_NUMBER_DELIMITER = ",";
+    private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String INVALID_BONUS_BALL_ERROR_MESSAGE = "보너스 볼은 지난 주 당첨 번호와 중복될 수 없습니다.";
     private static Scanner scanner = new Scanner(System.in);
 
     public static LottoSeller makeLottoSeller() {
@@ -60,5 +63,30 @@ public class InputView {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoNumber makeBonusBall(LottoTicket winningLotto) {
+        System.out.println(INPUT_BONUS_BALL_MESSAGE);
+        return makeBonusBall(scanner.nextLine().trim(), winningLotto);
+    }
+
+    public static LottoNumber makeBonusBall(String input, LottoTicket winningLotto) {
+        try {
+            LottoNumber bonusBall = new LottoNumber(Integer.parseInt(input));
+            checkDuplicationOf(bonusBall, winningLotto);
+            return bonusBall;
+        } catch (NumberFormatException e) {
+            System.out.println(NOT_INTEGER_ERROR_MESSAGE);
+            return makeBonusBall(winningLotto);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return makeBonusBall(winningLotto);
+        }
+    }
+
+    private static void checkDuplicationOf(LottoNumber bonusBall, LottoTicket winningLotto) {
+        if (winningLotto.match(bonusBall)) {
+            throw new InvalidLottoNumberException(INVALID_BONUS_BALL_ERROR_MESSAGE);
+        }
     }
 }
