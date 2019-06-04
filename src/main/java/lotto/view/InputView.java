@@ -5,6 +5,7 @@ import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottoseller.Cash;
 import lotto.domain.lottoseller.LottoSeller;
 import lotto.domain.lottoticket.LottoTicket;
+import lotto.domain.lottoticket.LottoTickets;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,14 +13,15 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-    private static final String INPUT_PURCHASE_PRICE_MESSAGE = "구입 금액을 입력해 주세요.";
-    private static final String INPUT_WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String NOT_INTEGER_ERROR_MESSAGE = "정수로 입력해 주세요.";
     private static final String LOTTO_NUMBER_DELIMITER = ",";
+    private static final String INPUT_PURCHASE_PRICE_MESSAGE = "구입 금액을 입력해 주세요.";
+    private static final String ERROR_NOT_INTEGER_MESSAGE = "정수로 입력해 주세요.";
+    private static final String INPUT_NUM_OF_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_TICKET_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String ERROR_OUT_OF_SCOPE_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 로또 개수는 입력한 구입 금액의 한도 내에서 입력해 주세요.";
+    private static final String INPUT_WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String INVALID_BONUS_BALL_ERROR_MESSAGE = "보너스 볼은 지난 주 당첨 번호와 중복될 수 없습니다.";
-    public static final String INPUT_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
-    public static final String OUT_OF_SCOPE_MANUAL_LOTTO_ERROR_MESSAGE = "수동으로 구매할 로또 개수는 입력한 구입 금액의 한도 내에서 입력해 주세요.";
+    private static final String ERROR_INVALID_BONUS_BALL_MESSAGE = "보너스 볼은 지난 주 당첨 번호와 중복될 수 없습니다.";
     private static Scanner scanner = new Scanner(System.in);
 
     public static LottoSeller makeLottoSeller() {
@@ -32,7 +34,7 @@ public class InputView {
             Cash purchasePrice = new Cash(Long.parseLong(input));
             return new LottoSeller(purchasePrice);
         } catch (NumberFormatException e) {
-            System.out.println(NOT_INTEGER_ERROR_MESSAGE);
+            System.out.println(ERROR_NOT_INTEGER_MESSAGE);
             return makeLottoSeller();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -41,7 +43,7 @@ public class InputView {
     }
 
     public static long makeNumOfManualTickets(long numOfPurchasedTickets) {
-        System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
+        System.out.println(INPUT_NUM_OF_MANUAL_LOTTO_MESSAGE);
         return makeNumOfManualTickets(scanner.nextLine().trim(), numOfPurchasedTickets);
     }
 
@@ -49,11 +51,11 @@ public class InputView {
         try {
             long numOfManualTickets = Long.parseLong(input);
             if (isOutOfScope(numOfManualTickets, numOfPurchasedTickets)) {
-                throw new IllegalArgumentException(OUT_OF_SCOPE_MANUAL_LOTTO_ERROR_MESSAGE);
+                throw new IllegalArgumentException(ERROR_OUT_OF_SCOPE_MANUAL_LOTTO_MESSAGE);
             }
             return numOfManualTickets;
         } catch (NumberFormatException e) {
-            System.out.println(NOT_INTEGER_ERROR_MESSAGE);
+            System.out.println(ERROR_NOT_INTEGER_MESSAGE);
             return makeNumOfManualTickets(numOfPurchasedTickets);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -67,20 +69,30 @@ public class InputView {
 
     public static LottoTicket makeWinningLotto() {
         System.out.println(INPUT_WINNING_LOTTO_MESSAGE);
-        return makeWinningLotto(scanner.nextLine());
+        return makeLottoTicket(scanner.nextLine());
     }
 
-    public static LottoTicket makeWinningLotto(String input) {
+    public static LottoTicket makeLottoTicket(String input) {
         try {
             String[] inputs = input.split(LOTTO_NUMBER_DELIMITER);
             return generateLottoTicketFrom(inputs);
         } catch (NumberFormatException e) {
-            System.out.println(NOT_INTEGER_ERROR_MESSAGE);
-            return makeWinningLotto();
+            System.out.println(ERROR_NOT_INTEGER_MESSAGE);
+            return makeLottoTicket(scanner.nextLine());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return makeWinningLotto();
+            return makeLottoTicket(scanner.nextLine());
         }
+    }
+
+    public static LottoTickets makeManualTickets(long numOfManualTickets) {
+        System.out.println(INPUT_MANUAL_LOTTO_TICKET_MESSAGE);
+
+        LottoTickets manualTickets = new LottoTickets();
+        for (int i = 0; i < numOfManualTickets; i++) {
+            manualTickets.add(InputView.makeLottoTicket(scanner.nextLine()));
+        }
+        return manualTickets;
     }
 
     private static LottoTicket generateLottoTicketFrom(String[] inputs) {
@@ -103,7 +115,7 @@ public class InputView {
             checkDuplicationOf(bonusBall, winningLotto);
             return bonusBall;
         } catch (NumberFormatException e) {
-            System.out.println(NOT_INTEGER_ERROR_MESSAGE);
+            System.out.println(ERROR_NOT_INTEGER_MESSAGE);
             return makeBonusBall(winningLotto);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -113,7 +125,7 @@ public class InputView {
 
     private static void checkDuplicationOf(LottoNumber bonusBall, LottoTicket winningLotto) {
         if (winningLotto.match(bonusBall)) {
-            throw new InvalidLottoNumberException(INVALID_BONUS_BALL_ERROR_MESSAGE);
+            throw new InvalidLottoNumberException(ERROR_INVALID_BONUS_BALL_MESSAGE);
         }
     }
 }

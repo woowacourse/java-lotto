@@ -13,18 +13,20 @@ public class LottoController {
     public void run() {
         LottoSeller lottoSeller = InputView.makeLottoSeller();
         long numOfPurchasedTickets = lottoSeller.getNumOfLotto();
+
         long numOfManualTickets = InputView.makeNumOfManualTickets(numOfPurchasedTickets);
-        
+        LottoTickets manualTickets = InputView.makeManualTickets(numOfManualTickets);
+
         long numOfAutomaticTickets = numOfPurchasedTickets - numOfManualTickets;
-        LottoTickets lottoTickets = LottoTicketingMachine.generateLottoTickets(numOfAutomaticTickets);
+        LottoTickets automaticTickets = LottoTicketingMachine.generateLottoTickets(numOfAutomaticTickets);
 
         OutputView.showNumOfTicketsFrom(lottoSeller);
-        OutputView.showAllOf(lottoTickets);
+        OutputView.showAllOf(automaticTickets);
 
         LottoTicket winningLotto = InputView.makeWinningLotto();
         LottoNumber bonusBall = InputView.makeBonusBall(winningLotto);
 
-        LottoResult lottoResult = LottoResult.of(lottoTickets, winningLotto, bonusBall);
+        LottoResult lottoResult = LottoResult.of(automaticTickets, winningLotto, bonusBall);
         OutputView.showStatisticsOf(lottoResult);
     }
 }

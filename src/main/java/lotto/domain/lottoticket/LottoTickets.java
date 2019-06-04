@@ -3,6 +3,7 @@ package lotto.domain.lottoticket;
 import lotto.domain.Rank;
 import lotto.domain.lottonumber.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -10,8 +11,16 @@ import java.util.Objects;
 public class LottoTickets {
     private final List<LottoTicket> tickets;
 
+    public LottoTickets() {
+        this.tickets = new ArrayList<>();
+    }
+
     public LottoTickets(List<LottoTicket> tickets) {
-        this.tickets = tickets;
+        this.tickets = new ArrayList<>(tickets);
+    }
+
+    public void add(LottoTicket ticket) {
+        tickets.add(ticket);
     }
 
     public int size() {

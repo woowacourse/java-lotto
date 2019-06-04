@@ -39,6 +39,18 @@ class LottoTicketsTest {
     }
 
     @Test
+    void 로또_티켓_한_장_추가하기() {
+        List<LottoNumber> lottoNumbers4 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
+                , new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
+        LottoTicket newTicket = new LottoTicket(lottoNumbers4);
+
+        LottoTickets lottoTickets = new LottoTickets(tickets);
+        lottoTickets.add(newTicket);
+
+        assertThat(lottoTickets.size()).isEqualTo(4);
+    }
+
+    @Test
     void index로_ticket_꺼내기() {
         List<LottoNumber> lottoNumbers2 = Arrays.asList(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)
                 , new LottoNumber(10), new LottoNumber(11), new LottoNumber(12));
