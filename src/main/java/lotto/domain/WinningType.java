@@ -25,7 +25,7 @@ public enum WinningType {
         }
 
         for (WinningType value : WinningType.values()) {
-            if (value.getMatchNum() == matchNum) {
+            if (value.matchNum == matchNum) {
                 return value;
             }
         }
