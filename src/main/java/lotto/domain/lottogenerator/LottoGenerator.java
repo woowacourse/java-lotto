@@ -4,7 +4,7 @@ import lotto.domain.Lotto;
 
 import java.util.Objects;
 
-public abstract class LottoGenerator {
+public class LottoGenerator {
     private LottoGenerator() {
         throw new AssertionError();
     }
