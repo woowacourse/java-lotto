@@ -9,8 +9,12 @@ public class Result {
     private final Map<Rank, Integer> lottoScore;
 
     public Result(WinningLotto winningLotto, LottoTickets lottoTickets) {
-        this.lottoScore = lottoTickets.stream()
-                .map(ticket -> Rank.valueOf(winningLotto.match(ticket), winningLotto.contains(ticket)))
+        this.lottoScore = calculateLottoResult(winningLotto, lottoTickets);
+    }
+
+    private Map<Rank, Integer> calculateLottoResult(WinningLotto winningLotto, LottoTickets lottoTickets) {
+        return lottoTickets.stream()
+                .map(ticket -> Rank.valueOf(winningLotto.countMatchedLottoNumber(ticket), winningLotto.contains(ticket)))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(rank -> 1)));
     }
 

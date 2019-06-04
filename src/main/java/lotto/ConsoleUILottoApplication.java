@@ -16,15 +16,7 @@ public class ConsoleUILottoApplication {
         Payment payment = inputPayment();
         CountOfLotto countOfLotto = inputCountOfManualLotto(payment);
 
-        LottoRepository lottoRepository = new LottoRepository();
-        for (int i = 0; i < countOfLotto.getCountOfManualLotto(); i++) {
-            inputLottoNumber(lottoRepository);
-        }
-
-        for (int i = 0; i < countOfLotto.getCountOfRandomLotto(); i++) {
-            lottoRepository.register(new RandomLottoGeneratingStrategy());
-        }
-
+        LottoRepository lottoRepository = purchaseLotto(countOfLotto);
         LottoTickets lottoTickets = new LottoTickets(lottoRepository);
         OutputView.printLotto(countOfLotto, lottoTickets);
 
@@ -52,6 +44,18 @@ public class ConsoleUILottoApplication {
             System.err.println(e.getMessage());
             return inputCountOfManualLotto(payment);
         }
+    }
+
+    private static LottoRepository purchaseLotto(CountOfLotto countOfLotto) {
+        LottoRepository lottoRepository = new LottoRepository();
+        for (int i = 0; i < countOfLotto.getCountOfManualLotto(); i++) {
+            inputLottoNumber(lottoRepository);
+        }
+
+        for (int i = 0; i < countOfLotto.getCountOfRandomLotto(); i++) {
+            lottoRepository.register(new RandomLottoGeneratingStrategy());
+        }
+        return lottoRepository;
     }
 
     public static void inputLottoNumber(LottoRepository lottoRepository) {
