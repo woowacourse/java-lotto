@@ -2,9 +2,9 @@ package lotto.domain.user;
 
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
-import lotto.domain.lottofactory.LottoCreator;
-import lotto.domain.lottofactory.LottoTicket;
-import lotto.domain.lottofactory.shufflerule.Shuffle;
+import lotto.domain.lottomanager.LottoCreator;
+import lotto.domain.lottomanager.LottoTicket;
+import lotto.domain.lottomanager.shufflerule.Shuffle;
 import lotto.utils.NullCheckUtil;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class UserTickets {
 
     public List<Rank> getMatchedRanks(WinningLotto winningLotto) {
         return userLottoTickets.stream()
-                .map(winningLotto::getMatchedNumbersCount)
+                .map(winningLotto::getMatchedWinningNumbersCount)
                 .map(Rank::valueOf)
                 .collect(Collectors.toList());
     }

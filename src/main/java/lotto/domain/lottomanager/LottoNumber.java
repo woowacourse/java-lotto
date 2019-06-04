@@ -1,4 +1,4 @@
-package lotto.domain.lottofactory;
+package lotto.domain.lottomanager;
 
 import lotto.utils.NullCheckUtil;
 
@@ -19,10 +19,6 @@ public class LottoNumber implements Comparable {
         checkOutRange(number);
     }
 
-    public static LottoNumber createLottoNumber(Integer number) {
-        return new LottoNumber(number);
-    }
-
     private void checkOutRange(Integer number) {
         if (isOutRangeNumber(number)) {
             throw new IllegalArgumentException(ERROR_OUT_RANGE);
@@ -31,6 +27,10 @@ public class LottoNumber implements Comparable {
 
     private boolean isOutRangeNumber(Integer number) {
         return LottoConstant.LIMIT_MIN_NUM > number || LottoConstant.LIMIT_MAX_NUM < number;
+    }
+
+    public static LottoNumber createLottoNumber(Integer number) {
+        return new LottoNumber(number);
     }
 
     @Override

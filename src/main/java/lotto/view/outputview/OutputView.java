@@ -2,7 +2,7 @@ package lotto.view.outputview;
 
 import lotto.domain.Rank;
 import lotto.domain.WinningResult;
-import lotto.domain.lottofactory.LottoTicket;
+import lotto.domain.lottomanager.LottoTicket;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;
 
@@ -26,7 +26,7 @@ public class OutputView {
     public static void printUserLottoTickets(UserTickets userTickets) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for(LottoTicket lottoTicket : userTickets.getUserLottoTickets()){
+        for (LottoTicket lottoTicket : userTickets.getUserLottoTickets()) {
             stringBuilder.append(lottoTicket.getLottoTicket())
                     .append(NEXT_LINE);
         }
@@ -41,7 +41,7 @@ public class OutputView {
                 .mapToObj(Rank::valueOf)
                 .collect(Collectors.toList());
 
-        for (Rank rank : ranks){
+        for (Rank rank : ranks) {
             stringBuilder.append(String.format(RANK_STATISTICS_FORMAT, rank.getCountOfMatch()
                     , rank.getWinningMoney(), winningResult.getMatchedRankCountValue(rank)));
         }

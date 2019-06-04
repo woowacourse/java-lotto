@@ -1,4 +1,4 @@
-package lotto.domain.lottofactory;
+package lotto.domain.lottomanager;
 
 import lotto.domain.user.PurchaseAmount;
 import org.junit.jupiter.api.Test;

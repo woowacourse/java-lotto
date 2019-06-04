@@ -1,4 +1,4 @@
-package lotto.domain.lottofactory;
+package lotto.domain.lottomanager;
 
 import lotto.utils.NullCheckUtil;
 
@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTicket {
-    private static final String ERROR_DUPLICATED = "중복된 로또 번호가 존재합니다.";
+    private static final String ERROR_OVERLAPPED = "중복된 로또 번호가 존재합니다.";
     private static final String ERROR_LOTTO_NUMBER_COUNT = "번호가 6개가 아닙니다.";
 
     private List<LottoNumber> lottoTicket;
@@ -19,17 +19,17 @@ public class LottoTicket {
 
     private void checkValidLottoNumbers(List<LottoNumber> lottoNumbers) {
         NullCheckUtil.checkNullLottoNumbers(lottoNumbers);
-        checkDuplicatedLottoNumbers(lottoNumbers);
+        checkOverlappedLottoNumbers(lottoNumbers);
         checkLottoNumberCount(lottoNumbers);
     }
 
-    private void checkDuplicatedLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (isDuplicatedLottoTicket(lottoNumbers)) {
-            throw new IllegalArgumentException(ERROR_DUPLICATED);
+    private void checkOverlappedLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if (isOverlappedLottoTicket(lottoNumbers)) {
+            throw new IllegalArgumentException(ERROR_OVERLAPPED);
         }
     }
 
-    private boolean isDuplicatedLottoTicket(List<LottoNumber> lottoNumbers) {
+    private boolean isOverlappedLottoTicket(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
                 .distinct()
                 .count() != lottoNumbers.size();
@@ -61,6 +61,10 @@ public class LottoTicket {
         Set<LottoNumber> uniqueJoinedTicketNumbers = new HashSet<>(joinedTicketNumbers);
 
         return joinedTicketNumbers.size() - uniqueJoinedTicketNumbers.size();
+    }
+
+    public Boolean isContainedNumbers(LottoNumber lottoNumber) {
+        return this.lottoTicket.contains(lottoNumber);
     }
 
     @Override
