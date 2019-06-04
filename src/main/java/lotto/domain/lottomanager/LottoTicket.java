@@ -67,6 +67,10 @@ public class LottoTicket {
         return this.lottoTicket.contains(lottoNumber);
     }
 
+    public Boolean isContainedNumbers(BonusBall bonusBall) {
+        return bonusBall.isContainNumbers(Collections.unmodifiableList(lottoTicket));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

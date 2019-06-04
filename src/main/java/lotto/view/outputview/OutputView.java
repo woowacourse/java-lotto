@@ -1,30 +1,37 @@
 package lotto.view.outputview;
 
+import com.google.common.collect.Lists;
 import lotto.domain.Rank;
 import lotto.domain.WinningResult;
 import lotto.domain.lottomanager.LottoTicket;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class OutputView {
 
-    private static final int MINIMUM_WIN_COUNT = 3;
-    private static final int MAXIMUM_WIN_COUNT = 6;
     private static final String NEXT_LINE = "\n";
     private static final String PURCHASE_AMOUNT_MESSAGE = "개를 구매했습니다.";
-    private static final String RANK_STATISTICS_FORMAT = "%d개 일치 (%d원) - %d개\n";
+    private static final String STATISTICS_MESSAGE_FORMAT_START = "%d개 일치";
+    private static final String STATISTICS_MESSAGE_FORMAT_MIDDLE = " (%d원)";
+    private static final String STATISTICS_MESSAGE_FORMAT_END = " - %d개\n";
+    private static final String STATISTICS_MESSAGE_FORMAT_SECOND = ", 보너스 볼 일치";
     private static final String TOTAL_REVENUE_FORMAT = "총 수익률은 %.2f%% 입니다.";
+    private static final String RESULT_STATISTICS_MESSAGE = "당첨 통계\n";
+    private static final int LOSE = 0;
+    private static final String EMPTY = "";
+
+    private static StringBuilder stringBuilder;
 
     public static void printAmount(PurchaseAmount purchaseAmount) {
         System.out.println(purchaseAmount.getLottoAmount() + PURCHASE_AMOUNT_MESSAGE);
     }
 
     public static void printUserLottoTickets(UserTickets userTickets) {
-        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder = new StringBuilder();
 
         for (LottoTicket lottoTicket : userTickets.getUserLottoTickets()) {
             stringBuilder.append(lottoTicket.getLottoTicket())
@@ -35,18 +42,48 @@ public class OutputView {
     }
 
     public static void printWinningStatistics(WinningResult winningResult, Integer purchasePrice) {
-        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder = new StringBuilder();
+        stringBuilder.append(RESULT_STATISTICS_MESSAGE);
 
-        List<Rank> ranks = IntStream.rangeClosed(MINIMUM_WIN_COUNT, MAXIMUM_WIN_COUNT)
-                .mapToObj(Rank::valueOf)
-                .collect(Collectors.toList());
+        writeRankStatistics(winningResult);
+        writeTotalYield(winningResult, purchasePrice);
+
+        System.out.println(stringBuilder.toString());
+    }
+
+    private static void writeRankStatistics(WinningResult winningResult) {
+        List<Rank> ranks = Lists.reverse(Arrays.stream(Rank.values()).collect(Collectors.toList()));
+        ranks.remove(LOSE);
 
         for (Rank rank : ranks) {
-            stringBuilder.append(String.format(RANK_STATISTICS_FORMAT, rank.getCountOfMatch()
-                    , rank.getWinningMoney(), winningResult.getMatchedRankCountValue(rank)));
+            stringBuilder.append(getStartRankStatistics(rank));
+            stringBuilder.append(getMessageIfSecondRank(rank));
+            stringBuilder.append(getMiddleRankStatistics(rank));
+            stringBuilder.append(getEndRankStatistics(winningResult, rank));
         }
+    }
 
+    private static String getMessageIfSecondRank(Rank rank) {
+        if (rank.equals(Rank.SECOND)) {
+            return STATISTICS_MESSAGE_FORMAT_SECOND;
+        }
+        return EMPTY;
+    }
+
+    private static String getStartRankStatistics(Rank rank) {
+        return String.format(STATISTICS_MESSAGE_FORMAT_START, rank.getCountOfMatch());
+    }
+
+    private static String getMiddleRankStatistics(Rank rank) {
+        return String.format(STATISTICS_MESSAGE_FORMAT_MIDDLE, rank.getWinningMoney());
+    }
+
+
+    private static String getEndRankStatistics(WinningResult winningResult, Rank rank) {
+        return String.format(STATISTICS_MESSAGE_FORMAT_END, winningResult.getMatchedRankCountValue(rank));
+    }
+
+    private static void writeTotalYield(WinningResult winningResult, Integer purchasePrice) {
         stringBuilder.append(String.format(TOTAL_REVENUE_FORMAT, winningResult.getTotalYield(purchasePrice)));
-        System.out.println(stringBuilder.toString());
     }
 }

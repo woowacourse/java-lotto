@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
+import lotto.domain.lottomanager.BonusBall;
 import lotto.domain.lottomanager.shufflerule.RandomShuffle;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;
@@ -20,7 +21,9 @@ public class LottoShop {
         OutputView.printUserLottoTickets(userTickets);
 
         WinningLotto winningLotto = getWinningLotto();
-        WinningResult winningResult = getWinningResult(userTickets, winningLotto);
+        BonusBall bonusBall = getBonusBall(winningLotto);
+
+        WinningResult winningResult = getWinningResult(userTickets, winningLotto, bonusBall);
         OutputView.printWinningStatistics(winningResult, purchasePrice);
     }
 
@@ -36,7 +39,11 @@ public class LottoShop {
         return WinningLotto.createWinningLotto(WinningNumParser.getWinningNum(InputView.inputWinningNum()));
     }
 
-    private WinningResult getWinningResult(UserTickets userTickets, WinningLotto winningLotto) {
-        return WinningResult.createWinningResult(userTickets, winningLotto);
+    private BonusBall getBonusBall(WinningLotto winningLotto) {
+        return BonusBall.createBonusBall(InputView.inputBonusBall(), winningLotto);
+    }
+
+    private WinningResult getWinningResult(UserTickets userTickets, WinningLotto winningLotto, BonusBall bonusBall) {
+        return WinningResult.createWinningResult(userTickets, winningLotto, bonusBall);
     }
 }
