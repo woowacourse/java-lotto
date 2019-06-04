@@ -28,10 +28,12 @@ public class WinningLotto {
     }
 
     public Integer getMatchedWinningNumbersCount(LottoTicket lottoTicket) {
+        NullCheckUtil.checkNullLottoTicket(lottoTicket);
         return winningLotto.getMatchedNumbersCount(lottoTicket);
     }
 
     public boolean isContainedWinningNumbers(LottoNumber bonusBall) {
+        NullCheckUtil.checkNullLottoNumber(bonusBall);
         return winningLotto.isContainedNumbers(bonusBall);
     }
 }

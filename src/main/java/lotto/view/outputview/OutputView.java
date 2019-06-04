@@ -6,6 +6,7 @@ import lotto.domain.WinningResult;
 import lotto.domain.lottomanager.LottoTicket;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;
+import lotto.utils.NullCheckUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,10 +28,17 @@ public class OutputView {
     private static StringBuilder stringBuilder;
 
     public static void printAmount(PurchaseAmount purchaseAmount) {
-        System.out.println(purchaseAmount.getLottoAmount() + PURCHASE_AMOUNT_MESSAGE);
+        NullCheckUtil.checkNullPurchaseAmount(purchaseAmount);
+        
+        stringBuilder = new StringBuilder();
+        stringBuilder.append(purchaseAmount.getLottoAmount())
+                .append(PURCHASE_AMOUNT_MESSAGE);
+
+        System.out.println(stringBuilder.toString());
     }
 
     public static void printUserLottoTickets(UserTickets userTickets) {
+        NullCheckUtil.checkNullUserTickets(userTickets);
         stringBuilder = new StringBuilder();
 
         for (LottoTicket lottoTicket : userTickets.getUserLottoTickets()) {
@@ -42,6 +50,9 @@ public class OutputView {
     }
 
     public static void printWinningStatistics(WinningResult winningResult, Integer purchasePrice) {
+        NullCheckUtil.checkNullWinningResult(winningResult);
+        NullCheckUtil.checkNullInteger(purchasePrice);
+
         stringBuilder = new StringBuilder();
         stringBuilder.append(RESULT_STATISTICS_MESSAGE);
 
@@ -67,6 +78,7 @@ public class OutputView {
         if (rank.equals(Rank.SECOND)) {
             return STATISTICS_MESSAGE_FORMAT_SECOND;
         }
+
         return EMPTY;
     }
 

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.lottomanager.BonusBall;
 import lotto.domain.user.UserTickets;
+import lotto.utils.NullCheckUtil;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -17,17 +18,13 @@ public class WinningResult {
 
     private Map<Rank, Integer> matchedRankCount;
 
-    private WinningResult(UserTickets userTickets, WinningLotto winningLotto, BonusBall bonusBall) {
-        this.matchedRankCount = makeMatchedRankCount(userTickets, winningLotto, bonusBall);
+    private WinningResult(UserTickets tickets, WinningLotto winningLotto, BonusBall bonus) {
+        this.matchedRankCount = makeMatchedRankCount(tickets, winningLotto, bonus);
     }
 
-    public static WinningResult createWinningResult(UserTickets userTickets, WinningLotto winningLotto, BonusBall bonusBall) {
-        return new WinningResult(userTickets, winningLotto, bonusBall);
-    }
-
-    private Map<Rank, Integer> makeMatchedRankCount(UserTickets userTickets, WinningLotto winningLotto, BonusBall bonusBall) {
+    private Map<Rank, Integer> makeMatchedRankCount(UserTickets tickets, WinningLotto winningLotto, BonusBall bonus) {
         matchedRankCount = initializeMatchedRankCount();
-        fillMatchedRankCount(userTickets, winningLotto, bonusBall);
+        fillMatchedRankCount(tickets, winningLotto, bonus);
 
         return matchedRankCount;
     }
@@ -37,8 +34,8 @@ public class WinningResult {
                 .collect(Collectors.toMap(Function.identity(), value -> INITIAL_VALUE_ZERO, (p1, p2) -> p1));
     }
 
-    private void fillMatchedRankCount(UserTickets userTickets, WinningLotto winningLotto, BonusBall bonusBall) {
-        for (Rank rank : userTickets.getMatchedRanks(winningLotto, bonusBall)) {
+    private void fillMatchedRankCount(UserTickets tickets, WinningLotto winningLotto, BonusBall bonus) {
+        for (Rank rank : tickets.getMatchedRanks(winningLotto, bonus)) {
             matchedRankCount.put(rank, plusMatchedCount(rank));
         }
     }
@@ -47,11 +44,20 @@ public class WinningResult {
         return matchedRankCount.get(rank) + PLUS_AMOUNT;
     }
 
+    public static WinningResult createWinningResult(UserTickets tickets, WinningLotto winningLotto, BonusBall bonus) {
+        NullCheckUtil.checkNullUserTickets(tickets);
+        NullCheckUtil.checkNullWinningLotto(winningLotto);
+        NullCheckUtil.checkNullBonusBall(bonus);
+        return new WinningResult(tickets, winningLotto, bonus);
+    }
+
     public Integer getMatchedRankCountValue(Rank rank) {
+        NullCheckUtil.checkNullRank(rank);
         return matchedRankCount.get(rank);
     }
 
     public Double getTotalYield(Integer purchasePrice) {
+        NullCheckUtil.checkNullInteger(purchasePrice);
         checkPurchasePrice(purchasePrice);
         return getTotalRevenue() / Double.valueOf(purchasePrice);
     }

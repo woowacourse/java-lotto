@@ -6,6 +6,7 @@ import lotto.domain.lottomanager.BonusBall;
 import lotto.domain.lottomanager.shufflerule.RandomShuffle;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;
+import lotto.utils.NullCheckUtil;
 import lotto.view.inputview.InputView;
 import lotto.view.inputview.PriceParser;
 import lotto.view.inputview.WinningNumParser;
@@ -17,7 +18,7 @@ public class LottoShop {
         PurchaseAmount purchaseAmount = getPurchaseAmount(purchasePrice);
         OutputView.printAmount(purchaseAmount);
 
-        UserTickets userTickets = new UserTickets(purchaseAmount, new RandomShuffle());
+        UserTickets userTickets = getUserTickets(purchaseAmount);
         OutputView.printUserLottoTickets(userTickets);
 
         WinningLotto winningLotto = getWinningLotto();
@@ -33,6 +34,10 @@ public class LottoShop {
 
     private PurchaseAmount getPurchaseAmount(Integer purchasePrice) {
         return PurchaseAmount.createLottoAmount(purchasePrice);
+    }
+
+    private UserTickets getUserTickets(PurchaseAmount purchaseAmount) {
+        return UserTickets.createUserTickets(purchaseAmount, new RandomShuffle());
     }
 
     private WinningLotto getWinningLotto() {

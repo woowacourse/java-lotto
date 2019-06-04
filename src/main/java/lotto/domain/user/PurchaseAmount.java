@@ -20,12 +20,7 @@ public class PurchaseAmount {
         this.lottoAmount = calculateLottoAmount(purchasePrice);
     }
 
-    public static PurchaseAmount createLottoAmount(Integer purchasePrice) {
-        return new PurchaseAmount(purchasePrice);
-    }
-
     private void checkValidPurchasePrice(Integer purchasePrice) {
-        NullCheckUtil.checkNullInteger(purchasePrice);
         checkNegative(purchasePrice);
         checkMinimumLimit(purchasePrice);
         checkDivisiblePriceUnit(purchasePrice);
@@ -49,6 +44,11 @@ public class PurchaseAmount {
         }
     }
 
+    public static PurchaseAmount createLottoAmount(Integer purchasePrice) {
+        NullCheckUtil.checkNullInteger(purchasePrice);
+        return new PurchaseAmount(purchasePrice);
+    }
+
     private boolean isIndivisiblePriceUnit(Integer purchasePrice) {
         return purchasePrice % PRICE_UNIT != DIVISIBLE;
     }
@@ -58,6 +58,7 @@ public class PurchaseAmount {
     }
 
     public boolean isEqualsAmount(Integer number) {
+        NullCheckUtil.checkNullInteger(number);
         return this.lottoAmount.equals(number);
     }
 

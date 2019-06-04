@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoCreatorTest {
@@ -24,12 +23,13 @@ class LottoCreatorTest {
     @Test
     void null_check() {
         assertThrows(NullPointerException.class, () -> {
-            LottoCreator.getLottoTicket(new FixShuffle());
+            LottoCreator.getLottoTicket(null);
         });
     }
 
     @Test
     void 로또_티켓_생성() {
-        Assertions.assertThat(LottoTicket.createLottoTicket(actual)).isEqualTo(LottoCreator.getLottoTicket(new FixShuffle()));
+        Assertions.assertThat(LottoTicket.createLottoTicket(actual))
+                .isEqualTo(LottoCreator.getLottoTicket(new FixShuffle()));
     }
 }

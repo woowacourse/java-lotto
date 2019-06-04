@@ -1,6 +1,7 @@
 package lotto.domain.lottomanager;
 
 import lotto.domain.lottomanager.shufflerule.Shuffle;
+import lotto.utils.NullCheckUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +19,10 @@ public class LottoCreator {
     }
 
     public static LottoTicket getLottoTicket(Shuffle shuffle) {
+        NullCheckUtil.checkNullShuffle(shuffle);
+
         shuffle.shuffleLottoNumbers(possibleNumbers);
+
         List<LottoNumber> lottoNumbers = new ArrayList<>(getPossibleNumbers());
         Collections.sort(lottoNumbers);
 

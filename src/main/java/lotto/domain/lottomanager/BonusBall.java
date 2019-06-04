@@ -10,7 +10,7 @@ public class BonusBall {
 
     private LottoNumber bonusBall;
 
-    public BonusBall(LottoNumber bonusBall, WinningLotto winningLotto) {
+    private BonusBall(LottoNumber bonusBall, WinningLotto winningLotto) {
         checkOverlapWithWinningNumbers(bonusBall, winningLotto);
         this.bonusBall = bonusBall;
     }
@@ -26,7 +26,7 @@ public class BonusBall {
         return new BonusBall(LottoNumber.createLottoNumber(bonusBall), winningLotto);
     }
 
-    public Boolean isContainNumbers(List<LottoNumber> lottoNumbers) {
+    Boolean isContainNumbers(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.contains(bonusBall);
     }
 }

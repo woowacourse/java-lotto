@@ -2,9 +2,9 @@ package lotto.domain.lottomanager;
 
 import lotto.utils.NullCheckUtil;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoTicket {
     private static final String ERROR_OVERLAPPED = "중복된 로또 번호가 존재합니다.";
@@ -18,7 +18,6 @@ public class LottoTicket {
     }
 
     private void checkValidLottoNumbers(List<LottoNumber> lottoNumbers) {
-        NullCheckUtil.checkNullLottoNumbers(lottoNumbers);
         checkOverlappedLottoNumbers(lottoNumbers);
         checkLottoNumberCount(lottoNumbers);
     }
@@ -46,6 +45,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket createLottoTicket(List<LottoNumber> lottoNumbers) {
+        NullCheckUtil.checkNullLottoNumbers(lottoNumbers);
         return new LottoTicket(lottoNumbers);
     }
 
@@ -54,20 +54,19 @@ public class LottoTicket {
     }
 
     public Integer getMatchedNumbersCount(LottoTicket userTicket) {
-        List<LottoNumber> joinedTicketNumbers
-                = Stream.concat(this.lottoTicket.stream(), userTicket.lottoTicket.stream())
-                .collect(Collectors.toList());
-
-        Set<LottoNumber> uniqueJoinedTicketNumbers = new HashSet<>(joinedTicketNumbers);
-
-        return joinedTicketNumbers.size() - uniqueJoinedTicketNumbers.size();
+        NullCheckUtil.checkNullLottoTicket(userTicket);
+        return (int) this.lottoTicket.stream()
+                .filter(userTicket.lottoTicket::contains)
+                .count();
     }
 
     public Boolean isContainedNumbers(LottoNumber lottoNumber) {
+        NullCheckUtil.checkNullLottoNumber(lottoNumber);
         return this.lottoTicket.contains(lottoNumber);
     }
 
     public Boolean isContainedNumbers(BonusBall bonusBall) {
+        NullCheckUtil.checkNullBonusBall(bonusBall);
         return bonusBall.isContainNumbers(Collections.unmodifiableList(lottoTicket));
     }
 

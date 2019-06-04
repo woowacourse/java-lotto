@@ -15,7 +15,6 @@ public class LottoNumber implements Comparable {
     }
 
     private void checkValidLottoNumber(Integer number) {
-        NullCheckUtil.checkNullInteger(number);
         checkOutRange(number);
     }
 
@@ -30,6 +29,7 @@ public class LottoNumber implements Comparable {
     }
 
     public static LottoNumber createLottoNumber(Integer number) {
+        NullCheckUtil.checkNullInteger(number);
         return new LottoNumber(number);
     }
 
