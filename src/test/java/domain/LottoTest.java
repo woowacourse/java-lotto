@@ -10,11 +10,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoTest {
-    LottoNumber one;
-    LottoNumber two;
-    LottoNumber three;
-    LottoNumber four;
-    LottoNumber five;
+    private LottoNumber one;
+    private LottoNumber two;
+    private LottoNumber three;
+    private LottoNumber four;
+    private LottoNumber five;
 
     @BeforeEach
     void setUp() {
