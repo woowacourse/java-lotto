@@ -25,3 +25,7 @@
 2. get user picked lotto numbers
     - {Exception} input format
     - {Exception} duplicated number
+
+## Step 4. Web UI Application
+### Function Requirements
+1. 콘솔 UI 로 구현되어 있는 로또를 웹 UI로 동작하도록 구현
