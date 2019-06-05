@@ -1,9 +1,11 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.lotto.*;
 import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.domain.lottogenerator.RandomLottoGeneratingStrategy;
+import lotto.domain.paymentinfo.CountOfLotto;
+import lotto.domain.paymentinfo.Payment;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

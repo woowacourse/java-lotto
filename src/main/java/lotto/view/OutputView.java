@@ -1,6 +1,10 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.lotto.LottoTickets;
+import lotto.domain.lotto.Rank;
+import lotto.domain.lotto.Result;
+import lotto.domain.paymentinfo.CountOfLotto;
+import lotto.domain.paymentinfo.Payment;
 
 import java.text.NumberFormat;
 import java.util.Arrays;

@@ -1,6 +1,8 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.lotto.*;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
+import lotto.domain.paymentinfo.Payment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.paymentinfo;
 
 import lotto.exception.PaymentOutOfBoundsException;
 

@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import lotto.domain.paymentinfo.Payment;
 
 import java.util.Map;
 import java.util.Objects;
