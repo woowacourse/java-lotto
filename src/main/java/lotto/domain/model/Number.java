@@ -6,12 +6,16 @@ public class Number implements Comparable<Number> {
 
     private static final String LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE = "로또 번호는 1부터 45까지입니다.";
     private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MAX_LOTTO_NUMBER = 45;
     private int lottoNumber;
 
-    public Number(int lottoNumber) {
+    private Number(int lottoNumber) {
         checkLottoNumberRange(lottoNumber);
         this.lottoNumber = lottoNumber;
+    }
+
+    protected static Number from(int lottoNumber){
+        return new Number(lottoNumber);
     }
 
     public static void checkLottoNumberRange(int lottoNumber) {
