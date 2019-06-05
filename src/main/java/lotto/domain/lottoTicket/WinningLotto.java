@@ -4,16 +4,16 @@ import lotto.domain.LottoNumber;
 import lotto.domain.exception.OverlapLottoBonusNumberException;
 
 import java.util.List;
-import java.util.Set;
 
-public class WinningLotto extends Lotto {
+public class WinningLotto {
+    private final Lotto winningLotto;
     private final LottoNumber bonus;
 
     public WinningLotto(List<Integer> winningNumbers, int bonus) {
-        super(convertLottoNumbers(winningNumbers));
         if (winningNumbers.contains(bonus)) {
             throw new OverlapLottoBonusNumberException("당첨 번호와 중복된 번호 입니다.");
         }
+        this.winningLotto = new Lotto(winningNumbers);
         this.bonus = new LottoNumber(bonus);
     }
 
@@ -21,7 +21,7 @@ public class WinningLotto extends Lotto {
         return lotto.isContainNumber(bonus);
     }
 
-    private static Set<LottoNumber> convertLottoNumbers(List<Integer> winningNumbers) {
-        return ManualLotto.convertLottoNumbers(winningNumbers);
+    public int matchLottoNumbers(Lotto lotto) {
+        return lotto.matchLottoNumbers(winningLotto);
     }
 }

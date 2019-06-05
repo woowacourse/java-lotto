@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.lottoTicket.Lotto;
-import lotto.domain.lottoTicket.ManualLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +32,7 @@ public class InputView {
         List<Lotto> convertLottoNumbers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             List<Integer> userNumbers = convertLottoNumbers(scanner.nextLine());
-            convertLottoNumbers.add(new ManualLotto(userNumbers));
+            convertLottoNumbers.add(new Lotto(userNumbers));
         }
         return convertLottoNumbers;
     }

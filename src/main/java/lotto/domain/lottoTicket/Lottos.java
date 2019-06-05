@@ -25,9 +25,9 @@ public class Lottos {
     public Rank matchLottoRank(WinningLotto winningLotto) {
         Rank rank = new Rank();
         manualLottos.stream()
-                .forEach(manual -> rank.addWinner(manual.matchLottoNumbers(winningLotto), winningLotto.isContainBonus(manual)));
+                .forEach(manual -> rank.addWinner(winningLotto.matchLottoNumbers(manual), winningLotto.isContainBonus(manual)));
         autoLottos.stream()
-                .forEach(auto -> rank.addWinner(auto.matchLottoNumbers(winningLotto), winningLotto.isContainBonus(auto)));
+                .forEach(auto -> rank.addWinner(winningLotto.matchLottoNumbers(auto), winningLotto.isContainBonus(auto)));
         return rank;
     }
 

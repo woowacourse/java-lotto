@@ -26,14 +26,14 @@ public class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonus);
         lottoNumbers.set(0, 1);
         lottoNumbers.set(1, 2);
-        Lotto lotto = new ManualLotto(lottoNumbers);
+        Lotto lotto = new Lotto(lottoNumbers);
         assertThat(winningLotto.matchLottoNumbers(lotto)).isEqualTo(2);
     }
 
     @Test
     void 일치하는_번호_개수가_0개인_경우_테스트() {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonus);
-        Lotto lotto = new ManualLotto(lottoNumbers);
+        Lotto lotto = new Lotto(lottoNumbers);
         assertThat(winningLotto.matchLottoNumbers(lotto)).isEqualTo(0);
     }
 

@@ -16,7 +16,7 @@ public class LottosTest {
     void setUp() {
         List<Integer> firstLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> secondLottoNumbers = Arrays.asList(7, 8, 9, 10, 11, 12);
-        List<Lotto> manualLottos = Arrays.asList(new ManualLotto(firstLottoNumbers), new ManualLotto(secondLottoNumbers));
+        List<Lotto> manualLottos = Arrays.asList(new Lotto(firstLottoNumbers), new Lotto(secondLottoNumbers));
         lottos = new Lottos(manualLottos, 0);
     }
 
@@ -31,7 +31,7 @@ public class LottosTest {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 7), 8);
         Rank rank = lottos.matchLottoRank(winningLotto);
 
-        List<Lotto> testManualLotto = Arrays.asList(new ManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        List<Lotto> testManualLotto = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Lottos testLottos = new Lottos(testManualLotto, 0);
         assertThat(rank.toString()).isEqualTo(testLottos.matchLottoRank(winningLotto).toString());
     }
@@ -41,7 +41,7 @@ public class LottosTest {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
         Rank rank = lottos.matchLottoRank(winningLotto);
 
-        List<Lotto> testManualLotto = Arrays.asList(new ManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        List<Lotto> testManualLotto = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Lottos testLottos = new Lottos(testManualLotto, 0);
         assertThat(rank.toString()).isEqualTo(testLottos.matchLottoRank(winningLotto).toString());
     }
