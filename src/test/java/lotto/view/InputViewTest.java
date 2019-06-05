@@ -25,7 +25,7 @@ class InputViewTest {
 
     @Test
     void 보너스_볼을_입력하면_LottoNumber를_반환하는_메소드() {
-        LottoTicket winningLotto = InputView.makeLottoTicket("1, 2, 3, 4, 5, 6");
-        assertThat(InputView.makeBonusBall("7", winningLotto)).isInstanceOf(LottoNumber.class);
+        LottoTicket winningTicket = InputView.makeLottoTicket("1, 2, 3, 4, 5, 6");
+        assertThat(InputView.makeBonusBall("7", winningTicket)).isInstanceOf(LottoNumber.class);
     }
 }

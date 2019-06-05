@@ -1,7 +1,5 @@
-package lotto.domain;
+package lotto.domain.lottomoney;
 
-import lotto.domain.lottomoney.Cash;
-import lotto.domain.lottomoney.InvalidLottoPriceException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

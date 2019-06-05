@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 import lotto.domain.lottomoney.MoneyForLotto;
+import lotto.domain.lottoresult.LottoStatistics;
 import lotto.domain.lottoticket.LottoTickets;
 
 public class OutputView {
@@ -47,18 +47,18 @@ public class OutputView {
         System.out.print(LINE_SEPARATOR);
     }
 
-    public static void showStatisticsOf(LottoResult lottoResult) {
+    public static void showStatisticsOf(LottoStatistics lottoStatistics) {
         System.out.print(LINE_SEPARATOR);
         System.out.println(OUTPUT_RESULT_STATISTICS_MESSAGE);
-        showAllOf(lottoResult);
+        showAllOf(lottoStatistics);
         System.out.println(OUTPUT_PROFIT_RATIO_MESSAGE_FRONT
-                + convertToPercent(lottoResult.getProfitRatio())
+                + convertToPercent(lottoStatistics.getProfitRatio())
                 + OUTPUT_PROFIT_RATIO_MESSAGE_BACK);
     }
 
-    private static void showAllOf(LottoResult lottoResult) {
+    private static void showAllOf(LottoStatistics lottoStatistics) {
         for (Rank rank : Rank.valuesWithoutMiss()) {
-            System.out.print(generateResultMessage(rank, lottoResult.getCountsBy(rank)));
+            System.out.print(generateResultMessage(rank, lottoStatistics.getCountsBy(rank)));
         }
     }
 

@@ -1,11 +1,11 @@
 package lotto.domain.lottoticket;
 
 import lotto.domain.Rank;
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottoresult.LottoResult;
+import lotto.domain.lottoresult.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class LottoTickets {
@@ -34,6 +34,15 @@ public class LottoTickets {
         return new LottoTickets(ticketsToReturn);
     }
 
+    public LottoResult countRanksWith(WinningLotto winningLotto, LottoResult lottoResult) {
+        for (LottoTicket ticket : tickets) {
+            Rank rank = ticket.match(winningLotto);
+            lottoResult.increaseOneCountOn(rank);
+        }
+
+        return lottoResult;
+    }
+
     public void add(LottoTicket ticket) {
         tickets.add(ticket);
     }
@@ -44,15 +53,6 @@ public class LottoTickets {
 
     public LottoTicket getTicket(int index) {
         return tickets.get(index);
-    }
-
-    public Map<Rank, Integer> countRanksWith(LottoTicket winningLotto, LottoNumber bonusBall) {
-        Map<Rank, Integer> rankCounts = Rank.getInitializedCounts();
-        for (LottoTicket ticket : tickets) {
-            Rank rank = ticket.match(winningLotto, bonusBall);
-            rankCounts.put(rank, rankCounts.get(rank) + 1);
-        }
-        return rankCounts;
     }
 
     @Override

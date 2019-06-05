@@ -1,7 +1,5 @@
-package lotto.domain;
+package lotto.domain.lottonumber;
 
-import lotto.domain.lottonumber.InvalidLottoNumberException;
-import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

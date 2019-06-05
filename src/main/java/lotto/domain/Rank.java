@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
     MISS(0, 0),
@@ -40,14 +42,6 @@ public enum Rank {
         List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
         ranks.remove(Rank.MISS);
         return ranks;
-    }
-
-    public static Map<Rank, Integer> getInitializedCounts() {
-        Map<Rank, Integer> rankCounts = new EnumMap<>(Rank.class);
-        for (Rank rank : values()) {
-            rankCounts.put(rank, 0);
-        }
-        return rankCounts;
     }
 
     public long calculatePrize(int countOfMatching) {

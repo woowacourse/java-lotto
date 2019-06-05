@@ -2,6 +2,7 @@ package lotto.domain.lottoticket;
 
 import lotto.domain.Rank;
 import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottoresult.WinningLotto;
 
 import java.util.*;
 
@@ -40,9 +41,9 @@ public class LottoTicket {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public Rank match(LottoTicket winningLotto, LottoNumber bonusBall) {
-        int numOfMatching = (int) lottoNumbers.stream().filter(winningLotto::match).count();
-        return Rank.valueOf(numOfMatching, lottoNumbers.contains(bonusBall));
+    public Rank match(WinningLotto winningLotto) {
+        int numOfMatching = (int) lottoNumbers.stream().filter(winningLotto::matchWinningTicket).count();
+        return Rank.valueOf(numOfMatching, winningLotto.isBonusBallIn(lottoNumbers));
     }
 
     @Override

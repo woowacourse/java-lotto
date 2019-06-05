@@ -1,9 +1,9 @@
-package lotto.domain;
+package lotto.domain.lottoticket;
 
+import lotto.domain.Rank;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberPool;
-import lotto.domain.lottoticket.InvalidLottoTicketException;
-import lotto.domain.lottoticket.LottoTicket;
+import lotto.domain.lottoresult.WinningLotto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,11 +62,11 @@ class LottoTicketTest {
         List<LottoNumber> numbers = Arrays.asList(LottoNumberPool.valueOf(1), LottoNumberPool.valueOf(2)
                 , LottoNumberPool.valueOf(3), LottoNumberPool.valueOf(7), LottoNumberPool.valueOf(8)
                 , LottoNumberPool.valueOf(9));
-        LottoTicket winningLotto = new LottoTicket(numbers);
-
+        LottoTicket winningTicket = new LottoTicket(numbers);
         LottoNumber bonusBall = LottoNumberPool.valueOf(4);
+        WinningLotto winningLotto = WinningLotto.of(winningTicket, bonusBall);
 
-        assertThat(lottoTicket.match(winningLotto, bonusBall)).isEqualTo(Rank.FIFTH);
+        assertThat(lottoTicket.match(winningLotto)).isEqualTo(Rank.FIFTH);
     }
 
     @AfterEach

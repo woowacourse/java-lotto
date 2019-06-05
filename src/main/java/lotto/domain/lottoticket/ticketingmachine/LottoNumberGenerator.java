@@ -1,4 +1,4 @@
-package lotto.domain.ticketingmachine;
+package lotto.domain.lottoticket.ticketingmachine;
 
 import java.util.List;
 

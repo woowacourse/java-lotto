@@ -68,7 +68,7 @@ public class InputView {
         return numOfManualTickets < 0 || numOfManualTickets > numOfPurchasedTickets;
     }
 
-    public static LottoTicket makeWinningLotto() {
+    public static LottoTicket makeWinningTicket() {
         System.out.println(INPUT_WINNING_LOTTO_MESSAGE);
         return makeLottoTicket(scanner.nextLine());
     }
@@ -109,27 +109,27 @@ public class InputView {
         return new LottoTicket(lottoNumbers);
     }
 
-    public static LottoNumber makeBonusBall(LottoTicket winningLotto) {
+    public static LottoNumber makeBonusBall(LottoTicket winningTicket) {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
-        return makeBonusBall(scanner.nextLine().trim(), winningLotto);
+        return makeBonusBall(scanner.nextLine().trim(), winningTicket);
     }
 
-    public static LottoNumber makeBonusBall(String input, LottoTicket winningLotto) {
+    public static LottoNumber makeBonusBall(String input, LottoTicket winningTicket) {
         try {
             LottoNumber bonusBall = LottoNumberPool.valueOf(Integer.parseInt(input));
-            checkDuplicationOf(bonusBall, winningLotto);
+            checkDuplicationOf(bonusBall, winningTicket);
             return bonusBall;
         } catch (NumberFormatException e) {
             System.out.println(ERROR_NOT_INTEGER_MESSAGE);
-            return makeBonusBall(winningLotto);
+            return makeBonusBall(winningTicket);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return makeBonusBall(winningLotto);
+            return makeBonusBall(winningTicket);
         }
     }
 
-    private static void checkDuplicationOf(LottoNumber bonusBall, LottoTicket winningLotto) {
-        if (winningLotto.match(bonusBall)) {
+    private static void checkDuplicationOf(LottoNumber bonusBall, LottoTicket winningTicket) {
+        if (winningTicket.match(bonusBall)) {
             throw new InvalidLottoNumberException(ERROR_INVALID_BONUS_BALL_MESSAGE);
         }
     }

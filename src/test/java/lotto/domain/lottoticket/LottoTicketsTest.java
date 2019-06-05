@@ -1,16 +1,16 @@
-package lotto.domain;
+package lotto.domain.lottoticket;
 
+import lotto.domain.Rank;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberPool;
-import lotto.domain.lottoticket.LottoTicket;
-import lotto.domain.lottoticket.LottoTickets;
+import lotto.domain.lottoresult.LottoResult;
+import lotto.domain.lottoresult.WinningLotto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -81,19 +81,20 @@ class LottoTicketsTest {
     }
 
     @Test
-    void winningLotto로_rankCounts_map_생성하기() {
+    void winningLotto로_LottoResult_생성하기() {
         LottoTickets lottoTickets = new LottoTickets(tickets);
 
         List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumberPool.valueOf(1), LottoNumberPool.valueOf(2)
                 , LottoNumberPool.valueOf(3), LottoNumberPool.valueOf(7), LottoNumberPool.valueOf(8)
                 , LottoNumberPool.valueOf(9));
-        LottoTicket winningLotto = new LottoTicket(lottoNumbers);
-
+        LottoTicket winningTicket = new LottoTicket(lottoNumbers);
         LottoNumber bonusBall = LottoNumberPool.valueOf(4);
 
-        Map<Rank, Integer> rankCounts = lottoTickets.countRanksWith(winningLotto, bonusBall);
+        WinningLotto winningLotto = WinningLotto.of(winningTicket, bonusBall);
 
-        assertThat(rankCounts.get(Rank.FIFTH)).isEqualTo(2);
+        LottoResult lottoResult = lottoTickets.countRanksWith(winningLotto, LottoResult.getInitialInstance());
+
+        assertThat(lottoResult.getCountsBy(Rank.FIFTH)).isEqualTo(2);
     }
 
     @AfterEach
