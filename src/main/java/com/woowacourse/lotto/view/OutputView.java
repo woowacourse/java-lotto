@@ -17,15 +17,12 @@ public class OutputView {
 		}
 	}
 
-	public static void printLottoResult(Map<LottoRank, Integer> lottoMatchResult) {
+	public static void printLottoResult(LottoResult lottoResult) {
 		System.out.println(PRINT_RESULT_MESSAGE);
-		lottoMatchResult.keySet().forEach(rank -> printRank(rank, lottoMatchResult.get(rank)));
+		lottoResult.getRanks().forEach(rank -> printRank(rank, lottoResult.valueOf(rank)));
 	}
 
-	private static void printRank(LottoRank lottoRank, Integer count) {
-		if (lottoRank == LottoRank.ZERO) {
-			return;
-		}
+	private static void printRank(LottoRank lottoRank, int count) {
 		System.out.printf(lottoRank == LottoRank.SECOND ? PRINT_SECOND_OF_LOTTO : PRINT_RESULT_OF_LOTTO, lottoRank.getCount(), lottoRank.getPrice(), count);
 	}
 

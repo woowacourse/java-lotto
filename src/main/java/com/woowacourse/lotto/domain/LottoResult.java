@@ -2,6 +2,8 @@ package com.woowacourse.lotto.domain;
 
 import java.util.*;
 
+import static com.woowacourse.lotto.domain.LottoRank.ZERO;
+
 public class LottoResult {
 	private Map<LottoRank, Integer> rankResult = new TreeMap<>();
 
@@ -32,5 +34,15 @@ public class LottoResult {
 
 	public Map<LottoRank, Integer> getLottoResult() {
 		return new TreeMap<>(rankResult);
+	}
+
+	public List<LottoRank> getRanks() {
+		Set<LottoRank> ranks = rankResult.keySet();
+		ranks.remove(ZERO);
+		return new LinkedList<>(ranks);
+	}
+
+	public int valueOf(LottoRank rank) {
+		return rankResult.get(rank);
 	}
 }
