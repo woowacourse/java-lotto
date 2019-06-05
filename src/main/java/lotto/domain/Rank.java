@@ -22,16 +22,18 @@ public enum Rank {
             return SECOND;
         }
 
-        for (Rank value : values()) {
-            if (value.numOfMatching == numOfMatching) {
-                return value;
-            }
-        }
-        return MISS;
+        return Arrays.stream(values())
+                .filter(value -> value.hasSame(numOfMatching))
+                .findFirst()
+                .orElse(MISS);
     }
 
     private static boolean isSecond(int numOfMatching, boolean bonus) {
         return SECOND.numOfMatching == numOfMatching && bonus;
+    }
+
+    private boolean hasSame(int numOfMatching) {
+        return this.numOfMatching == numOfMatching;
     }
 
     public static List<Rank> valuesWithoutMiss() {
