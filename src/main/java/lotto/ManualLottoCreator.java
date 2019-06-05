@@ -28,7 +28,7 @@ public class ManualLottoCreator implements LottoCreator {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new ;
+            throw new InvalidLottoNumbersException("로또 번호들을 숫자로 입력해주세요.");
         }
     }
 
