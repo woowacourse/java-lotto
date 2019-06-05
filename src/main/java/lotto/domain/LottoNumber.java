@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import lotto.exception.InvalidLottoNumbersException;
 
 import java.util.*;
 
-import static lotto.Lotto.NUMBER_OF_NUMBERS_IN_LOTTO;
+import static lotto.domain.Lotto.NUMBER_OF_NUMBERS_IN_LOTTO;
 
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;

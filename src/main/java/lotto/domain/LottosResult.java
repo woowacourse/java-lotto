@@ -1,8 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import java.util.EnumMap;
 
-import static lotto.Money.ONE_LOTTO_PRICE;
+import static lotto.domain.Money.ONE_LOTTO_PRICE;
 
 public class LottosResult {
     private static final int INITIAL_NUMBER = 0;
@@ -25,15 +25,18 @@ public class LottosResult {
     }
 
     public double getROI() {
-        int numberOfLotto = INITIAL_NUMBER;
+        long totalWinnigMoney = getWinningMoney();
+        int numberOfLotto = lottosResult.values().stream().reduce(INITIAL_NUMBER, Integer::sum);
+
+        return (double) totalWinnigMoney / (numberOfLotto * ONE_LOTTO_PRICE);
+    }
+
+    private long getWinningMoney() {
         long totalWinnigMoney = INITIAL_NUMBER;
 
         for (Rank rank : Rank.values()) {
-            int numberOfRank = lottosResult.get(rank);
-
-            numberOfLotto += numberOfRank;
-            totalWinnigMoney += rank.getWinningMoney() * numberOfRank;
+            totalWinnigMoney += rank.getWinningMoney() * lottosResult.get(rank);
         }
-        return (double) totalWinnigMoney / (numberOfLotto * ONE_LOTTO_PRICE);
+        return totalWinnigMoney;
     }
 }

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.exception.InvalidLottoNumbersException;
 
@@ -10,7 +10,7 @@ public class Lotto {
     private final Set<LottoNumber> numbers;
 
     public Lotto (List<LottoNumber> numbers) {
-        Set<LottoNumber> numberSet = new TreeSet<>(numbers);
+        Set<LottoNumber> numberSet = new HashSet<>(numbers);
         checkNumberOfNumbers(numberSet);
         this.numbers = numberSet;
     }

@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.Money;
-import lotto.WinningLotto;
+import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.exception.InvalidLottoNumbersException;
 import lotto.exception.InvalidPaymentException;
 

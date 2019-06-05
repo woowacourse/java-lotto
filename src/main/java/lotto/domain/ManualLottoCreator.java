@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.exception.InvalidLottoNumbersException;
 
@@ -26,7 +26,7 @@ public class ManualLottoCreator implements LottoCreator {
 
     private int parseInt(String input) {
         try {
-            return Integer.parseInt(input);
+            return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
             throw new InvalidLottoNumbersException("로또 번호들을 숫자로 입력해주세요.");
         }

@@ -1,7 +1,6 @@
-package lotto;
+package lotto.domain;
 
 import lotto.exception.InvalidLottoNumbersException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

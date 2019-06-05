@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.exception.InvalidPaymentException;
 import org.apache.commons.lang3.StringUtils;

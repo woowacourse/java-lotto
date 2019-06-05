@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.exception.InvalidLottoNumbersException;
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +34,7 @@ public class WinningLotto {
 
     private int parseInt(String input) {
         try {
-            return Integer.parseInt(input);
+            return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
             throw new InvalidLottoNumbersException("숫자자 아닌 값이 포함되어 있습니다.");
         }
