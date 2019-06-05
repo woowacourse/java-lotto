@@ -2,8 +2,8 @@ package lotto.view;
 
 import lotto.domain.lottonumber.InvalidLottoNumberException;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottoseller.Cash;
-import lotto.domain.lottoseller.LottoSeller;
+import lotto.domain.lottomoney.Cash;
+import lotto.domain.lottomoney.MoneyForLotto;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
 
@@ -24,21 +24,21 @@ public class InputView {
     private static final String ERROR_INVALID_BONUS_BALL_MESSAGE = "보너스 볼은 지난 주 당첨 번호와 중복될 수 없습니다.";
     private static Scanner scanner = new Scanner(System.in);
 
-    public static LottoSeller makeLottoSeller() {
+    public static MoneyForLotto makeMoneyForLotto() {
         System.out.println(INPUT_PURCHASE_PRICE_MESSAGE);
-        return makeLottoSeller(scanner.nextLine().trim());
+        return makeMoneyForLotto(scanner.nextLine().trim());
     }
 
-    public static LottoSeller makeLottoSeller(String input) {
+    public static MoneyForLotto makeMoneyForLotto(String input) {
         try {
             Cash purchasePrice = new Cash(Long.parseLong(input));
-            return new LottoSeller(purchasePrice);
+            return new MoneyForLotto(purchasePrice);
         } catch (NumberFormatException e) {
             System.out.println(ERROR_NOT_INTEGER_MESSAGE);
-            return makeLottoSeller();
+            return makeMoneyForLotto();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return makeLottoSeller();
+            return makeMoneyForLotto();
         }
     }
 

@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottoseller.LottoSeller;
+import lotto.domain.lottomoney.MoneyForLotto;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
 
@@ -17,7 +17,7 @@ public class LottoResult {
     }
 
     private double calculateProfitRatio(long numOfTickets) {
-        return (double) sumAllPrize() / (numOfTickets * LottoSeller.MIN_PRICE_OF_LOTTO);
+        return (double) sumAllPrize() / (numOfTickets * MoneyForLotto.MIN_PRICE_OF_LOTTO);
     }
 
     private long sumAllPrize() {

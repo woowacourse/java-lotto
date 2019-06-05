@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoResult;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottoseller.LottoSeller;
+import lotto.domain.lottomoney.MoneyForLotto;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTicketingMachine;
 import lotto.domain.lottoticket.LottoTickets;
@@ -11,8 +11,8 @@ import lotto.view.OutputView;
 
 public class LottoController {
     public void run() {
-        LottoSeller lottoSeller = InputView.makeLottoSeller();
-        long numOfPurchasedTickets = lottoSeller.getNumOfLotto();
+        MoneyForLotto moneyForLotto = InputView.makeMoneyForLotto();
+        long numOfPurchasedTickets = moneyForLotto.getNumOfLotto();
 
         long numOfManualTickets = InputView.makeNumOfManualTickets(numOfPurchasedTickets);
         LottoTickets manualTickets = InputView.makeManualTickets(numOfManualTickets);
@@ -22,7 +22,7 @@ public class LottoController {
 
         LottoTickets purchasedTickets = LottoTickets.join(manualTickets, automaticTickets);
 
-        OutputView.showNumOfTicketsFrom(lottoSeller, numOfManualTickets);
+        OutputView.showNumOfTicketsFrom(moneyForLotto, numOfManualTickets);
         OutputView.showAllOf(purchasedTickets);
 
         LottoTicket winningLotto = InputView.makeWinningLotto();

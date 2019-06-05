@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
-import lotto.domain.lottoseller.LottoSeller;
+import lotto.domain.lottomoney.MoneyForLotto;
 import lotto.domain.lottoticket.LottoTickets;
 
 public class OutputView {
@@ -20,21 +20,21 @@ public class OutputView {
     private static final String OUTPUT_PROFIT_RATIO_MESSAGE_BACK = "%입니다.";
     public static final String OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_3 = "장을 구매했습니다.";
 
-    public static void showNumOfTicketsFrom(LottoSeller lottoSeller, long numOfManualTickets) {
-        System.out.println(makeNumOfPurchasedTicketsMessage(lottoSeller, numOfManualTickets));
+    public static void showNumOfTicketsFrom(MoneyForLotto moneyForLotto, long numOfManualTickets) {
+        System.out.println(makeNumOfPurchasedTicketsMessage(moneyForLotto, numOfManualTickets));
     }
 
-    private static String makeNumOfPurchasedTicketsMessage(LottoSeller lottoSeller, long numOfManualTickets) {
+    private static String makeNumOfPurchasedTicketsMessage(MoneyForLotto moneyForLotto, long numOfManualTickets) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_1)
                 .append(numOfManualTickets)
                 .append(OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_2)
-                .append(lottoSeller.getNumOfLotto() - numOfManualTickets)
+                .append(moneyForLotto.getNumOfLotto() - numOfManualTickets)
                 .append(OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_3);
 
-        if (lottoSeller.hasChange()) {
+        if (moneyForLotto.hasChange()) {
             stringBuilder.append(OUTPUT_CHANGE_MESSAGE_FRONT)
-                    .append(lottoSeller.getChange())
+                    .append(moneyForLotto.getChange())
                     .append(OUTPUT_CHANGE_MESSAGE_BACK);
         }
         return stringBuilder.toString();
