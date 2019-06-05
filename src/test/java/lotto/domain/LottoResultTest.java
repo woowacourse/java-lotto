@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
 import org.junit.jupiter.api.AfterEach;
@@ -18,20 +19,24 @@ class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        List<LottoNumber> lottoNumbers1 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
-                , new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        List<LottoNumber> lottoNumbers2 = Arrays.asList(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)
-                , new LottoNumber(10), new LottoNumber(11), new LottoNumber(12));
-        List<LottoNumber> lottoNumbers3 = Arrays.asList(new LottoNumber(13), new LottoNumber(14), new LottoNumber(15)
-                , new LottoNumber(16), new LottoNumber(17), new LottoNumber(18));
+        List<LottoNumber> lottoNumbers1 = Arrays.asList(LottoNumberPool.valueOf(1), LottoNumberPool.valueOf(2)
+                , LottoNumberPool.valueOf(3), LottoNumberPool.valueOf(4), LottoNumberPool.valueOf(5)
+                , LottoNumberPool.valueOf(6));
+        List<LottoNumber> lottoNumbers2 = Arrays.asList(LottoNumberPool.valueOf(7), LottoNumberPool.valueOf(8)
+                , LottoNumberPool.valueOf(9), LottoNumberPool.valueOf(10), LottoNumberPool.valueOf(11)
+                , LottoNumberPool.valueOf(12));
+        List<LottoNumber> lottoNumbers3 = Arrays.asList(LottoNumberPool.valueOf(13), LottoNumberPool.valueOf(14)
+                , LottoNumberPool.valueOf(15), LottoNumberPool.valueOf(16), LottoNumberPool.valueOf(17)
+                , LottoNumberPool.valueOf(18));
         List<LottoTicket> tickets = Arrays.asList(new LottoTicket(lottoNumbers1)
                 , new LottoTicket(lottoNumbers2), new LottoTicket(lottoNumbers3));
 
-        List<LottoNumber> winningLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
-                , new LottoNumber(10), new LottoNumber(11), new LottoNumber(12));
+        List<LottoNumber> winningLottoNumbers = Arrays.asList(LottoNumberPool.valueOf(1), LottoNumberPool.valueOf(2)
+                , LottoNumberPool.valueOf(3), LottoNumberPool.valueOf(10), LottoNumberPool.valueOf(11)
+                , LottoNumberPool.valueOf(12));
         LottoTicket winningLotto = new LottoTicket(winningLottoNumbers);
 
-        LottoNumber bonusBall = new LottoNumber(4);
+        LottoNumber bonusBall = LottoNumberPool.valueOf(4);
 
         lottoResult = LottoResult.of(new LottoTickets(tickets), winningLotto, bonusBall);
     }

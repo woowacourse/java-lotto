@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoticket.InvalidLottoTicketException;
 import lotto.domain.lottoticket.LottoTicket;
 import org.junit.jupiter.api.AfterEach;
@@ -18,8 +19,9 @@ class LottoTicketTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = Arrays.asList(new LottoNumber(6), new LottoNumber(5), new LottoNumber(3)
-                , new LottoNumber(4), new LottoNumber(1), new LottoNumber(2));
+        lottoNumbers = Arrays.asList(LottoNumberPool.valueOf(6), LottoNumberPool.valueOf(5)
+                , LottoNumberPool.valueOf(3), LottoNumberPool.valueOf(4), LottoNumberPool.valueOf(1)
+                , LottoNumberPool.valueOf(2));
     }
 
     @Test
@@ -29,8 +31,8 @@ class LottoTicketTest {
 
     @Test
     void 로또_숫자가_6개인지_체크() {
-        lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
-                , new LottoNumber(4), new LottoNumber(5));
+        lottoNumbers = Arrays.asList(LottoNumberPool.valueOf(1), LottoNumberPool.valueOf(2)
+                , LottoNumberPool.valueOf(3), LottoNumberPool.valueOf(4), LottoNumberPool.valueOf(5));
         assertThrows(InvalidLottoTicketException.class, () -> {
             new LottoTicket(lottoNumbers);
         });
@@ -38,8 +40,9 @@ class LottoTicketTest {
 
     @Test
     void 중복된_로또_숫자_체크() {
-        lottoNumbers = Arrays.asList(new LottoNumber(2), new LottoNumber(2), new LottoNumber(3)
-                , new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        lottoNumbers = Arrays.asList(LottoNumberPool.valueOf(2), LottoNumberPool.valueOf(2)
+                , LottoNumberPool.valueOf(3), LottoNumberPool.valueOf(4), LottoNumberPool.valueOf(5)
+                , LottoNumberPool.valueOf(6));
         assertThrows(InvalidLottoTicketException.class, () -> {
             new LottoTicket(lottoNumbers);
         });
@@ -48,19 +51,20 @@ class LottoTicketTest {
     @Test
     void 로또_숫자_하나가_Ticket_안에_있는지_체크() {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        assertThat(lottoTicket.match(new LottoNumber(1))).isTrue();
-        assertThat(lottoTicket.match(new LottoNumber(7))).isFalse();
+        assertThat(lottoTicket.match(LottoNumberPool.valueOf(1))).isTrue();
+        assertThat(lottoTicket.match(LottoNumberPool.valueOf(7))).isFalse();
     }
 
     @Test
     void 파라미터로_입력된_lottoTicket과_비교하여_해당_Rank를_반환() {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
-        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
-                , new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
+        List<LottoNumber> numbers = Arrays.asList(LottoNumberPool.valueOf(1), LottoNumberPool.valueOf(2)
+                , LottoNumberPool.valueOf(3), LottoNumberPool.valueOf(7), LottoNumberPool.valueOf(8)
+                , LottoNumberPool.valueOf(9));
         LottoTicket winningLotto = new LottoTicket(numbers);
 
-        LottoNumber bonusBall = new LottoNumber(4);
+        LottoNumber bonusBall = LottoNumberPool.valueOf(4);
 
         assertThat(lottoTicket.match(winningLotto, bonusBall)).isEqualTo(Rank.FIFTH);
     }

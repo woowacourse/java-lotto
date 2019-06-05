@@ -18,7 +18,7 @@ public class OutputView {
     private static final String OUTPUT_RANK_RESULT_MESSAGE_3 = "개";
     private static final String OUTPUT_PROFIT_RATIO_MESSAGE_FRONT = "총 수익률은 ";
     private static final String OUTPUT_PROFIT_RATIO_MESSAGE_BACK = "%입니다.";
-    public static final String OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_3 = "장을 구매했습니다.";
+    private static final String OUTPUT_NUM_OF_PURCHASED_TICKETS_MESSAGE_3 = "장을 구매했습니다.";
 
     public static void showNumOfTicketsFrom(MoneyForLotto moneyForLotto, long numOfManualTickets) {
         System.out.println(makeNumOfPurchasedTicketsMessage(moneyForLotto, numOfManualTickets));

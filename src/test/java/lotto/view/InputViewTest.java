@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottomoney.MoneyForLotto;
+import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottoticket.LottoTicket;
 import org.junit.jupiter.api.Test;
 

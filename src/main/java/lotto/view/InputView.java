@@ -1,9 +1,10 @@
 package lotto.view;
 
-import lotto.domain.lottonumber.InvalidLottoNumberException;
-import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottomoney.Cash;
 import lotto.domain.lottomoney.MoneyForLotto;
+import lotto.domain.lottonumber.InvalidLottoNumberException;
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
 
@@ -103,7 +104,7 @@ public class InputView {
         List<LottoNumber> lottoNumbers = Arrays.stream(inputs)
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumberPool::valueOf)
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
     }
@@ -115,7 +116,7 @@ public class InputView {
 
     public static LottoNumber makeBonusBall(String input, LottoTicket winningLotto) {
         try {
-            LottoNumber bonusBall = new LottoNumber(Integer.parseInt(input));
+            LottoNumber bonusBall = LottoNumberPool.valueOf(Integer.parseInt(input));
             checkDuplicationOf(bonusBall, winningLotto);
             return bonusBall;
         } catch (NumberFormatException e) {

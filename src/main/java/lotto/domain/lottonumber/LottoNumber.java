@@ -9,15 +9,19 @@ public class LottoNumber implements Comparable<LottoNumber> {
             = "로또 숫자의 범위는 " + FIRST_NUMBER + "부터 " + LAST_NUMBER + " 사이입니다.";
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
+        this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
         if (isOutOfScope(number)) {
             throw new InvalidLottoNumberException(ERROR_OUT_OF_SCOPE_MESSAGE);
         }
 
-        this.number = number;
+        return new LottoNumber(number);
     }
 
-    private boolean isOutOfScope(int number) {
+    private static boolean isOutOfScope(int number) {
         return number < FIRST_NUMBER || number > LAST_NUMBER;
     }
 

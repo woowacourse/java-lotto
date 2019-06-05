@@ -1,6 +1,7 @@
 package lotto.domain.lottoticket;
 
 import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumberPool;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,8 +31,9 @@ public class LottoTicketingMachine {
 
     private static LottoTicket generateLottoTicket(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .map(LottoNumberPool::valueOf)
+                .collect(Collectors.toList())
+                ;
 
         return new LottoTicket(lottoNumbers);
     }
