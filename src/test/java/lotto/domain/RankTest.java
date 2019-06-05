@@ -21,7 +21,7 @@ class RankTest {
 
     @Test
     void MISS를_제외한_Rank의_list_반환() {
-        List<Rank> ranks = Rank.valuesWithoutMISS();
+        List<Rank> ranks = Rank.valuesWithoutMiss();
         assertThat(ranks.contains(Rank.MISS)).isFalse();
     }
 

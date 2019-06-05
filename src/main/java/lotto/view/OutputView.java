@@ -57,7 +57,7 @@ public class OutputView {
     }
 
     private static void showAllOf(LottoResult lottoResult) {
-        for (Rank rank : Rank.valuesWithoutMISS()) {
+        for (Rank rank : Rank.valuesWithoutMiss()) {
             System.out.print(generateResultMessage(rank, lottoResult.getCountsBy(rank)));
         }
     }

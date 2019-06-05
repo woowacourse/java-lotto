@@ -18,7 +18,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int numOfMatching, boolean bonus) {
-        if (isSECOND(numOfMatching, bonus)) {
+        if (isSecond(numOfMatching, bonus)) {
             return SECOND;
         }
 
@@ -30,11 +30,11 @@ public enum Rank {
         return MISS;
     }
 
-    private static boolean isSECOND(int numOfMatching, boolean bonus) {
+    private static boolean isSecond(int numOfMatching, boolean bonus) {
         return SECOND.numOfMatching == numOfMatching && bonus;
     }
 
-    public static List<Rank> valuesWithoutMISS() {
+    public static List<Rank> valuesWithoutMiss() {
         List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
         ranks.remove(Rank.MISS);
         return ranks;
