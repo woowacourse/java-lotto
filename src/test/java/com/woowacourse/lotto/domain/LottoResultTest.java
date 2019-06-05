@@ -5,6 +5,7 @@ import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.woowacourse.lotto.domain.LottoRank.ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
@@ -37,21 +38,25 @@ class LottoResultTest {
 	}
 
 	@Test
-	void checkMatchResult() {
-		Map<LottoRank, Integer> expectedLottoMatchResult = new TreeMap<>();
-		{
-			expectedLottoMatchResult.put(LottoRank.ZERO, 1);
-			expectedLottoMatchResult.put(LottoRank.FIFTH, 0);
-			expectedLottoMatchResult.put(LottoRank.FOURTH, 0);
-			expectedLottoMatchResult.put(LottoRank.THIRD, 0);
-			expectedLottoMatchResult.put(LottoRank.SECOND, 1);
-			expectedLottoMatchResult.put(LottoRank.FIRST, 1);
-		}
-		assertThat(actualLottoResult.getLottoResult()).isEqualTo(expectedLottoMatchResult);
+	void checkSum() {
+		assertThat(actualLottoResult.sum()).isEqualTo(2_030_000_000);
 	}
 
 	@Test
-	void checkSum() {
-		assertThat(actualLottoResult.sum()).isEqualTo(2_030_000_000);
+	void getRanks() {
+		List<LottoRank> ranks = new LinkedList<>(Arrays.asList(LottoRank.values()));
+		ranks.remove(ZERO);
+		assertThat(actualLottoResult.getRanks()).isEqualTo(ranks);
+	}
+
+	@Test
+	void checkValueOf() {
+		assertThat(actualLottoResult.valueOf(LottoRank.FIRST)).isEqualTo(1);
+		assertThat(actualLottoResult.valueOf(LottoRank.SECOND)).isEqualTo(1);
+		assertThat(actualLottoResult.valueOf(LottoRank.THIRD)).isEqualTo(0);
+		assertThat(actualLottoResult.valueOf(LottoRank.FOURTH)).isEqualTo(0);
+		assertThat(actualLottoResult.valueOf(LottoRank.FIFTH)).isEqualTo(0);
+		assertThat(actualLottoResult.valueOf(ZERO)).isEqualTo(1);
+
 	}
 }

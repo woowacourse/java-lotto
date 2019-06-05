@@ -32,10 +32,6 @@ public class LottoResult {
 				;
 	}
 
-	public Map<LottoRank, Integer> getLottoResult() {
-		return new TreeMap<>(rankResult);
-	}
-
 	public List<LottoRank> getRanks() {
 		Set<LottoRank> ranks = rankResult.keySet();
 		ranks.remove(ZERO);
