@@ -1,11 +1,8 @@
 package lotto.domain.lottogenerator;
 
-import lotto.domain.lotto.LottoNumber;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class ManualLottoGeneratingStrategy implements LottoGeneratingStrategy {
     private final List<Integer> inputLottoNumbers;
@@ -18,12 +15,9 @@ public class ManualLottoGeneratingStrategy implements LottoGeneratingStrategy {
     }
 
     @Override
-    public List<LottoNumber> generate() {
-        List<LottoNumber> lottoNumbers = inputLottoNumbers.stream()
-                .sorted()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+    public List<Integer> generate() {
+        Collections.sort(inputLottoNumbers);
 
-        return Collections.unmodifiableList(lottoNumbers);
+        return Collections.unmodifiableList(inputLottoNumbers);
     }
 }

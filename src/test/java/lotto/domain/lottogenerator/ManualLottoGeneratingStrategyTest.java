@@ -1,6 +1,5 @@
 package lotto.domain.lottogenerator;
 
-import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -27,14 +26,7 @@ public class ManualLottoGeneratingStrategyTest {
     void 수동으로_로또번호_생성되는지_확인() {
         ManualLottoGeneratingStrategy strategy
                 = new ManualLottoGeneratingStrategy(Arrays.asList(6, 5, 4, 3, 2, 1));
-
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                LottoNumber.getNumber(1),
-                LottoNumber.getNumber(2),
-                LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4),
-                LottoNumber.getNumber(5),
-                LottoNumber.getNumber(6));
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         assertThat(strategy.generate()).isEqualTo(lottoNumbers);
     }

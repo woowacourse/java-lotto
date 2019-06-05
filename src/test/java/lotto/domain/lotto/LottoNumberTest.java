@@ -2,21 +2,15 @@ package lotto.domain.lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoNumberTest {
     @Test
     void 생성자_생성() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            lottoNumbers.add(LottoNumber.getNumber(i));
+        for (int i = LottoNumber.MIN_BOUNDARY; i <= LottoNumber.MAX_BOUNDARY; i++) {
+            assertThat(LottoNumber.getNumber(i).toString()).isEqualTo(String.valueOf(i));
         }
-
-        assertThat(LottoNumber.getLottoNumbers()).isEqualTo(lottoNumbers);
     }
 
     @Test

@@ -22,12 +22,12 @@ public class PaymentTest {
 
     @Test
     void 생성자_확인_빈_문자열을_입력했을_때() {
-        assertThatThrownBy(()->new Payment("")).isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> new Payment("")).isInstanceOf(NullPointerException.class);
     }
 
     @Test
     void 생성자_확인_숫자가_아닌_문자열을_입력했을_때() {
-        assertThatThrownBy(()-> new Payment("a1000")).isInstanceOf(NaturalNumberException.class);
+        assertThatThrownBy(() -> new Payment("a1000")).isInstanceOf(NaturalNumberException.class);
     }
 
     @Test

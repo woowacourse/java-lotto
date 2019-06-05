@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lotto.*;
+import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,14 +25,7 @@ public class ResultTest {
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 7, 8, 9, 10)));
 
         lottoTickets = new LottoTickets(lottoRepository);
-
-        Lotto lotto = new Lotto(Arrays.asList(
-                LottoNumber.getNumber(1),
-                LottoNumber.getNumber(2),
-                LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4),
-                LottoNumber.getNumber(5),
-                LottoNumber.getNumber(6)));
+        Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         winningLotto = new WinningLotto(lotto, LottoNumber.getNumber(7));
     }

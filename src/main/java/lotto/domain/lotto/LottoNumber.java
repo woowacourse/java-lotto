@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MIN_BOUNDARY = 1;
-    private static final int MAX_BOUNDARY = 45;
+    public static final int MIN_BOUNDARY = 1;
+    public static final int MAX_BOUNDARY = 45;
 
     private static final Map<Integer, LottoNumber> creators;
 
@@ -34,10 +34,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
 
         return creators.get(number);
-    }
-
-    public static List<LottoNumber> getLottoNumbers() {
-        return new ArrayList<>(creators.values());
     }
 
     @Override
