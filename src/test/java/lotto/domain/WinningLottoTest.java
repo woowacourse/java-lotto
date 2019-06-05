@@ -37,4 +37,12 @@ public class WinningLottoTest {
             new WinningLotto(lotto, bonusBall);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    public void match_테스트() {
+        LottoNumber bonusBall = new LottoNumber(7);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
+
+        assertThat(winningLotto.match(lotto)).isEqualTo(Rank.FIRST);
+    }
 }
