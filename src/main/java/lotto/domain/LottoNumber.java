@@ -2,7 +2,9 @@ package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoNumberException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
     public static final int LOTTO_START_NUMBER = 1;
