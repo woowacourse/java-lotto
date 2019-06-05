@@ -31,4 +31,15 @@ class MatchingStatistics {
 
         return countOfRank.getCount();
     }
+
+    double calculateEarningRatesOf(Purchasement purchasement) {
+        int winningMoneyOfRank;
+        int totalWinningMoney = 0;
+
+        for (Rank rank : countsOfRanks.keySet()) {
+            winningMoneyOfRank = rank.getWinningMoney();
+            totalWinningMoney += countsOfRanks.get(rank).getCount() * winningMoneyOfRank;
+        }
+        return totalWinningMoney / (double) purchasement.getPurchaseAmount();
+    }
 }

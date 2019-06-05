@@ -3,16 +3,18 @@ package domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6),
-    THIRD(5),
-    FOURTH(4),
-    FIFTH(3),
-    MISS(0);
+    FIRST(6, 2000000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
+    MISS(0, 0);
 
     private int numberOfMatching;
+    private int winningMoney;
 
-    Rank (int numberOfMathcin) {
+    Rank (int numberOfMathcin, int winningMoney) {
         this.numberOfMatching = numberOfMathcin;
+        this.winningMoney = winningMoney;
     }
 
     public static Rank of(int numberOfMatching) {
@@ -24,5 +26,9 @@ public enum Rank {
 
     private boolean hasSame(int numberOfMatching) {
         return this.numberOfMatching == numberOfMatching;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 }
