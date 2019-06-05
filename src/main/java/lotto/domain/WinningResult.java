@@ -32,7 +32,7 @@ public class WinningResult {
     }
 
     public int getSpendMoney() {
-        return Arrays.stream(rankCounter).sum() * LottoSeller.LOTTO_PRICE;
+        return Arrays.stream(rankCounter).sum() * Lotto.LOTTO_PRICE;
     }
 
     public BigInteger getWinningMoney() {

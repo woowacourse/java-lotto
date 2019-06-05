@@ -10,7 +10,7 @@ public class Budget {
     }
 
     private void validateAffordability(int budget) throws NoMoneyException {
-        if (budget < LottoSeller.LOTTO_PRICE) {
+        if (budget < Lotto.LOTTO_PRICE) {
             throw new NoMoneyException("돈이 부족해서 로또를 구입 할 수 없습니다.");
         }
     }
@@ -22,18 +22,18 @@ public class Budget {
     }
 
     boolean canBuyLotto() {
-        return budget >= LottoSeller.LOTTO_PRICE;
+        return budget >= Lotto.LOTTO_PRICE;
     }
 
     boolean canBuyLotto(int countOfManualLotto) {
-        return budget >= LottoSeller.LOTTO_PRICE * countOfManualLotto;
+        return budget >= Lotto.LOTTO_PRICE * countOfManualLotto;
     }
 
     void pay() {
-        budget -= LottoSeller.LOTTO_PRICE;
+        budget -= Lotto.LOTTO_PRICE;
     }
 
     void pay(int countOfManualLotto) {
-        budget -= LottoSeller.LOTTO_PRICE * countOfManualLotto;
+        budget -= Lotto.LOTTO_PRICE * countOfManualLotto;
     }
 }

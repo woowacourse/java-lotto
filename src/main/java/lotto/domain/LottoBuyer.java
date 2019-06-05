@@ -17,7 +17,7 @@ public class LottoBuyer {
         budget.pay(lottos.size());
         while (budget.canBuyLotto()) {
             budget.pay();
-            lottos.add(LottoSeller.createLotto());
+            lottos.add(Lotto.of());
         }
         this.lottos = new LottoContainer(lottos);
     }
