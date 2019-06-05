@@ -48,7 +48,10 @@ public class Lotto {
     }
 
     int findCountOfMatchNo(List<LottoNo> lotto) {
-        return lotto.stream().filter(lottoNo::contains).collect(Collectors.toList()).size();
+        return lotto.stream()
+                .filter(lottoNo::contains)
+                .collect(Collectors.toList())
+                .size();
     }
 
     boolean matchType(LottoType type) {
