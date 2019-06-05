@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.BoughtLottos;
-import lotto.domain.Lotto;
-import lotto.domain.Result;
-import lotto.domain.WinningNumber;
+import lotto.domain.*;
 import lotto.domain.generator.LottosManualGenerator;
 import lotto.domain.generator.ResultGenerator;
 import lotto.view.OutputView;
@@ -15,7 +12,9 @@ import static lotto.view.InputView.*;
 
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
-        int buyPrice = cuttingThousandPiece(inputBuyPrice());
+        Money money = new Money(inputBuyPrice());
+        int buyPrice = money.getBuyPrice();
+
         int countOfManualBuyLotto = inputManualBuyLottoCount(buyPrice);
         List<Lotto> manualBoughtLottos = new LottosManualGenerator(
                 inputManualLottos(countOfManualBuyLotto))
@@ -29,9 +28,5 @@ public class ConsoleUILottoApplication {
 
         Result result = ResultGenerator.generateResult(boughtLottos, winningNumber);
         OutputView.printLottoResult(result, buyPrice);
-    }
-
-    private static int cuttingThousandPiece(int buyPrice) {
-        return buyPrice - (buyPrice % BoughtLottos.BUY_PRICE);
     }
 }
