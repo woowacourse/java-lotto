@@ -35,6 +35,8 @@ public class RoundDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DBUtils.close(conn, ps, rs);
         }
         return -1;
     }
