@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.*;
 
 public class LottoResult {
-    private static final int PERCENT = 100;
 
     private Map<Rank, Integer> results = new TreeMap<>();
 
@@ -30,7 +29,7 @@ public class LottoResult {
     }
 
     public double findYield(int price) {
-        return findWinningMoney() / price * PERCENT;
+        return findWinningMoney() / price * 100;
     }
 
     private double findWinningMoney() {
@@ -51,6 +50,5 @@ public class LottoResult {
     public int hashCode() {
         return Objects.hash(results);
     }
-
-
+    
 }
