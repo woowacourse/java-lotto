@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.PaymentOutOfBoundsException;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
@@ -9,11 +10,19 @@ public class Payment {
 
     private int payment;
 
-    public Payment(int payment) {
-        if (payment < LOTTO_PRICE) {
+    public Payment(String payment) {
+        if (StringUtils.isBlank(payment)) {
+            throw new NullPointerException();
+        }
+
+        if (!StringUtils.isNumeric(payment)) {
+            throw new ClassCastException("구입금액은 숫자를 입력해야합니다");
+        }
+
+        if (Integer.parseInt(payment) < LOTTO_PRICE) {
             throw new PaymentOutOfBoundsException(String.format("로또가격(%d)보다 높은 금액을 입력하세요", LOTTO_PRICE));
         }
-        this.payment = payment;
+        this.payment = Integer.parseInt(payment);
     }
 
     public int calculateCountOfLotto() {

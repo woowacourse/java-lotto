@@ -2,24 +2,30 @@ package lotto.domain;
 
 import lotto.exception.NaturalNumberException;
 import lotto.exception.PaymentOutOfBoundsException;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
 
 public class CountOfLotto {
-    private static final int MIN_COUNT_OF_LOTTO = 0;
     private final int countOfManualLotto;
     private final int countOfRandomLotto;
 
-    public CountOfLotto(Payment payment, int countOfManualLotto) {
+    public CountOfLotto(Payment payment, String countOfManualLotto) {
+        if (Objects.isNull(payment) || StringUtils.isBlank(countOfManualLotto)) {
+            throw new NullPointerException();
+        }
+
+        if (!StringUtils.isNumeric(countOfManualLotto)) {
+            throw new NaturalNumberException("수동생성할 로또 개수는 0이상 정수만 가능합니다");
+        }
+
         int totalLotto = payment.calculateCountOfLotto();
 
-        if (totalLotto < countOfManualLotto) {
+        if (totalLotto < Integer.parseInt(countOfManualLotto)) {
             throw new PaymentOutOfBoundsException("입력한 로또 개수가 지불한 금액을 초과합니다");
         }
-
-        if (countOfManualLotto < MIN_COUNT_OF_LOTTO) {
-            throw new NaturalNumberException("음수를 넣을 수 없습니다");
-        }
-        this.countOfManualLotto = countOfManualLotto;
-        this.countOfRandomLotto = totalLotto - countOfManualLotto;
+        this.countOfManualLotto = Integer.parseInt(countOfManualLotto);
+        this.countOfRandomLotto = totalLotto - this.countOfManualLotto;
     }
 
     public int getCountOfManualLotto() {

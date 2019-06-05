@@ -12,17 +12,17 @@ public class PaymentTest {
 
     @BeforeEach
     void setUp() {
-        payment = new Payment(1_000);
+        payment = new Payment("1000");
     }
 
     @Test
     void 생성자_확인() {
-        assertThat(payment).isEqualTo(new Payment(1_000));
+        assertThat(payment).isEqualTo(new Payment("1000"));
     }
 
     @Test
     void 생성자_확인_로또가격보다_적은_금액을_입력했을_때() {
-        assertThatThrownBy(() -> new Payment(999)).isInstanceOf(PaymentOutOfBoundsException.class);
+        assertThatThrownBy(() -> new Payment("999")).isInstanceOf(PaymentOutOfBoundsException.class);
     }
 
     @Test

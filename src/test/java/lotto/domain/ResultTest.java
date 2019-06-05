@@ -65,7 +65,7 @@ public class ResultTest {
     void 수익률_계산() {
         Result result = new Result(winningLotto, lottoTickets);
 
-        assertThat(result.calculateEarningsRate(new Payment(5_000))).isEqualTo(406_301);
+        assertThat(result.calculateEarningsRate(new Payment("5000"))).isEqualTo(406_301);
     }
 
     @Test
