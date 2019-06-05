@@ -51,7 +51,7 @@ class LottoResultTest {
 	}
 
 	@Test
-	void checkEarningsRate() {
-		assertThat(actualLottoResult.calculateEarningsRate()).isEqualTo((long) 67_666_666);
+	void checkSum() {
+		assertThat(actualLottoResult.sum()).isEqualTo(2_030_000_000);
 	}
 }

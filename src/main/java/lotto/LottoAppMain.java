@@ -22,7 +22,7 @@ public class LottoAppMain {
 		LottoResult lottoResult = new LottoResult(InputView.inputWinningLotto(), lottos);
 
 		OutputView.printLottoMatchResult(lottoResult.getLottoResult());
-		OutputView.printEarningsRate(lottoResult);
+		OutputView.printEarningsRate(money, lottoResult);
 	}
 
 	private static List<String> inputManualLotto(int count) {

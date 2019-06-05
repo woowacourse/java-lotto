@@ -5,6 +5,7 @@ import java.util.Objects;
 import com.woowacourse.lotto.exception.InvalidMoneyException;
 
 public class Money {
+	private static final int PERCENT = 100;
 	public static final int MINIMUM_MONEY_FOR_PURCHASE = 1000;
 	private final int money;
 
@@ -21,6 +22,10 @@ public class Money {
 
 	public int getCountOfLotto() {
 		return money / MINIMUM_MONEY_FOR_PURCHASE;
+	}
+
+	public long calculateEarningsRate(double winningAmount) {
+		return (long) ((winningAmount / money) * PERCENT);
 	}
 
 	@Override

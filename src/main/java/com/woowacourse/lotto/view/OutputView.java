@@ -27,15 +27,11 @@ public class OutputView {
 		System.out.print(stringBuffer.toString());
 	}
 
-	public static void printEarningsRate(LottoResult lottoResult) {
-		System.out.printf(PRINT_EARNINGS_RATE, lottoResult.calculateEarningsRate());
+	public static void printEarningsRate(Money money, LottoResult lottoResult) {
+		System.out.printf(PRINT_EARNINGS_RATE, (money.calculateEarningsRate(lottoResult.sum())));
 	}
 
 	public static void printCountOfPurchasedLotto(int countOfAllLotto, int countOfManualLotto) {
 		System.out.printf(PRINT_COUNT_OF_PURCHASED_LOTTO, countOfManualLotto, countOfAllLotto - countOfManualLotto);
-	}
-
-	public static void printExceptionMessage(String exceptionMessage) {
-		System.out.println(exceptionMessage);
 	}
 }
