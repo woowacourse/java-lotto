@@ -3,6 +3,7 @@ package domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 class Lotto {
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
@@ -29,4 +30,16 @@ class Lotto {
         }
     }
 
+    Rank matchUpLottoNumbersWith(Lotto winningLotto) {
+        int countOfMatchingNumbers = lottoNumbers.stream()
+                .filter(winningLotto::contains)
+                .collect(Collectors.toList())
+                .size();
+
+        return Rank.of(countOfMatchingNumbers);
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
