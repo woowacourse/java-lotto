@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public class LottoTickets {
-    private List<Lotto> lottoTickets;
+    private final List<Lotto> lottoTickets;
 
     public LottoTickets(LottoRepository lottoRepository) {
         if (Objects.isNull(lottoRepository)) {

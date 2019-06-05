@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         checkLottoNumbers(lottoNumbers);
@@ -32,11 +32,11 @@ public class Lotto {
 
     public int countMatchedLottoNumber(Lotto lotto) {
         return (int) lotto.lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumbers.contains(lottoNumber))
+                .filter(lottoNumbers::contains)
                 .count();
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
+    boolean contains(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 

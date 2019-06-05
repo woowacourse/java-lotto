@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Payment {
     private static final int LOTTO_PRICE = 1_000;
 
-    private int payment;
+    private final int payment;
 
     public Payment(int payment) {
         if (payment < LOTTO_PRICE) {

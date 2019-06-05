@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoRepository {
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public LottoRepository() {
         this.lottos = new ArrayList<>();

@@ -3,8 +3,8 @@ package lotto.domain;
 import lotto.exception.DuplicateLottoNumberException;
 
 public class WinningLotto {
-    private Lotto winningLotto;
-    private LottoNumber bonusNumber;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
