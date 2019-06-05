@@ -26,7 +26,7 @@ public class BoughtLottosTest {
     }
 
     @Test
-    void init() {
+    void 생성() {
         assertThat(boughtLottos).isEqualTo(
                 new BoughtLottos(Arrays.asList(
                     new Lotto(Arrays.asList(getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),

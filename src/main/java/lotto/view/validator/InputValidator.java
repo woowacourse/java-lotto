@@ -2,6 +2,7 @@ package lotto.view.validator;
 
 import lotto.domain.BoughtLottos;
 import lotto.domain.exception.InvalidLottoNumberException;
+import lotto.domain.generator.LottoNumbersGenerator;
 import lotto.view.exception.InputBuyPriceException;
 import lotto.view.exception.InputDuplicateException;
 import lotto.view.exception.InputLottoFormatException;
@@ -15,7 +16,6 @@ import java.util.stream.Collectors;
 
 import static lotto.domain.LottoNumber.LOTTO_LAST_NUMBER;
 import static lotto.domain.LottoNumber.LOTTO_START_NUMBER;
-import static lotto.domain.generator.LottoGenerator.WINNING_NUMBER_DELIMITER;
 
 public class InputValidator {
     private static final Pattern BUY_PRICE_REGEX = Pattern.compile("^[1-9][0-9]{3,}$");
@@ -31,7 +31,7 @@ public class InputValidator {
         if (!WINNING_NUMBER_REGEX.matcher(inputLottoNumber).matches()) {
             throw new InputLottoFormatException("로또 번호 포멧에 맞지 않습니다.");
         }
-        List<Integer> lottoNumbers = Arrays.stream(inputLottoNumber.split(WINNING_NUMBER_DELIMITER))
+        List<Integer> lottoNumbers = Arrays.stream(inputLottoNumber.split(LottoNumbersGenerator.INPUT_LOTTO_DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         validateDuplicate(lottoNumbers);

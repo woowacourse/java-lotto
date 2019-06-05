@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.generator.LottoGenerator;
+import lotto.domain.generator.LottosAutoGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,9 +22,7 @@ public class BoughtLottos {
         int countOfBoughtManual = manualLottos.size();
         int amountOfAutoGenerateLotto = price / BUY_PRICE - countOfBoughtManual;
 
-        for (int i = 0; i < amountOfAutoGenerateLotto; i++) {
-            lottos.add(LottoGenerator.generateAutoLotto());
-        }
+        lottos.addAll(new LottosAutoGenerator(amountOfAutoGenerateLotto).generate());
 
         return new BoughtLottos(lottos, countOfBoughtManual);
     }
