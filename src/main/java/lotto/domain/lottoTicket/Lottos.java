@@ -14,7 +14,7 @@ public class Lottos {
         this.autoLottos = createAutoLottos(autoLottoNumber);
     }
 
-    private static List<Lotto> createAutoLottos(int autoLottoNumber) {
+    public static List<Lotto> createAutoLottos(int autoLottoNumber) {
         List<Lotto> autoLottos = new ArrayList<>();
         for (int i = 0; i < autoLottoNumber; i++) {
             autoLottos.add(new AutoLotto());

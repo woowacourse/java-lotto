@@ -11,21 +11,13 @@ public abstract class Lotto {
     private static final int ORIGINAL_SIZE = 12;
     private static final String NEW_LINE = "\n";
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != MAX_LOTTO_SIZE) {
             throw new LottoNumberSizeException("로또 번호의 개수는 6개 입니다.");
         }
-        if (isOverlap(lottoNumbers)) {
-            throw new OverlapLottoNumberException("중복되는 로또 번호가 있습니다.");
-        }
         this.lottoNumbers = lottoNumbers;
-    }
-
-    private static boolean isOverlap(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> checkLottoNumbers = new HashSet<>(lottoNumbers);
-        return checkLottoNumbers.size() != MAX_LOTTO_SIZE;
     }
 
     public int matchLottoNumbers(Lotto winningLotto) {

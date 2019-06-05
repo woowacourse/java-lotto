@@ -4,6 +4,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.exception.OverlapLottoBonusNumberException;
 
 import java.util.List;
+import java.util.Set;
 
 public class WinningLotto extends Lotto {
     private final LottoNumber bonus;
@@ -20,7 +21,7 @@ public class WinningLotto extends Lotto {
         return lotto.isContainNumber(bonus);
     }
 
-    private static List<LottoNumber> convertLottoNumbers(List<Integer> winningNumbers) {
+    private static Set<LottoNumber> convertLottoNumbers(List<Integer> winningNumbers) {
         return ManualLotto.convertLottoNumbers(winningNumbers);
     }
 }

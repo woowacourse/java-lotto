@@ -47,8 +47,8 @@ public class Rank {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Rank winners1 = (Rank) o;
-        return Objects.equals(winners, winners1.winners);
+        Rank rank = (Rank) o;
+        return Objects.equals(winners, rank.winners);
     }
 
     @Override
