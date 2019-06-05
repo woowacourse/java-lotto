@@ -3,6 +3,7 @@ package lotto.dao;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
 import lotto.domain.generator.LottoNosManualGenerator;
+import lotto.utils.ConverterToLottoNos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,7 +48,7 @@ public class LottoDao {
             ps.setInt(1, round);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Lotto lotto = Lotto.of(convertToLottoNos(rs.getString("numbers")));
+                Lotto lotto = Lotto.of(ConverterToLottoNos.convert(rs.getString("numbers")));
                 lottos.add(lotto);
             }
         } catch (SQLException e) {
@@ -56,10 +57,5 @@ public class LottoDao {
             DBUtils.close(conn, ps, rs);
         }
         return lottos;
-    }
-
-    private List<LottoNo> convertToLottoNos(final String numbers) {
-        List<LottoNo> lottoNos = new LottoNosManualGenerator(numbers.substring(1, numbers.length() - 1)).generate();
-        return lottoNos;
     }
 }
