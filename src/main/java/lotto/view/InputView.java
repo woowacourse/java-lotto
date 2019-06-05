@@ -21,12 +21,24 @@ public class InputView {
     }
 
     public static WinningLotto inputWinningLotto() {
-        System.out.println("지난주 당첨 번호를 입력해 주세요.");
+        String lottoNumbers = inputWinningLottoNumbers();
+        String bonusNumber = inputWinningLottoBonusNumber();
+
         try {
-            return new WinningLotto(SCANNER.nextLine());
+            return new WinningLotto(lottoNumbers, bonusNumber);
         } catch (InvalidLottoNumbersException e) {
             System.out.println(e.getMessage());
             return inputWinningLotto();
         }
+    }
+
+    private static String inputWinningLottoNumbers() {
+        System.out.println("지난주 당첨 번호를 입력해 주세요.");
+        return SCANNER.nextLine();
+    }
+
+    private static String inputWinningLottoBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return SCANNER.nextLine();
     }
 }

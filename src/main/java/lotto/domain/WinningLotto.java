@@ -8,13 +8,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WinningLotto {
-    private Lotto lotto;
+    private final Lotto lotto;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(String input) {
-        checkIsBlank(input);
-        List<Integer> numbers = toInt(Arrays.asList(input.split(",")));
-        Lotto lotto = new Lotto(LottoNumber.getLottoNumbers(numbers));
-        this.lotto = lotto;
+    public WinningLotto(String inputLottoNumbers, String inputBonusNumber) {
+        checkIsBlank(inputLottoNumbers);
+        checkIsBlank(inputBonusNumber);
+
+        List<Integer> lottoNumbers = toInt(Arrays.asList(inputLottoNumbers.split(",")));
+        int bonusNumber = parseInt(inputBonusNumber);
+
+        this.lotto = new Lotto(LottoNumber.getLottoNumbers(lottoNumbers));
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
     private void checkIsBlank(String input) {
