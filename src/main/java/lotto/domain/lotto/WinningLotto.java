@@ -1,14 +1,12 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 import lotto.exception.DuplicateLottoNumberException;
 
 import java.util.Objects;
 
 public class WinningLotto {
-    private Lotto winningLotto;
-    private LottoNumber bonusNumber;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         if (Objects.isNull(winningLotto) || Objects.isNull(bonusNumber)) {

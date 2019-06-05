@@ -1,11 +1,11 @@
 package lotto.domain;
 
+import lotto.exception.NaturalNumberException;
 import lotto.exception.PaymentOutOfBoundsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class PaymentTest {
     private Payment payment;
@@ -18,6 +18,16 @@ public class PaymentTest {
     @Test
     void 생성자_확인() {
         assertThat(payment).isEqualTo(new Payment("1000"));
+    }
+
+    @Test
+    void 생성자_확인_빈_문자열을_입력했을_때() {
+        assertThatThrownBy(()->new Payment("")).isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    void 생성자_확인_숫자가_아닌_문자열을_입력했을_때() {
+        assertThatThrownBy(()-> new Payment("a1000")).isInstanceOf(NaturalNumberException.class);
     }
 
     @Test

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTickets {
-    private List<Lotto> lottoTickets;
+    private final List<Lotto> lottoTickets;
 
     public LottoTickets(LottoRepository lottoRepository) {
         if (Objects.isNull(lottoRepository)) {

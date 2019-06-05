@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         checkLottoNumbers(lottoNumbers);

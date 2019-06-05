@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ManualLottoGeneratingStrategy implements LottoGeneratingStrategy {
-    private List<Integer> inputLottoNumbers;
+    private final List<Integer> inputLottoNumbers;
 
     public ManualLottoGeneratingStrategy(List<Integer> inputLottoNumbers) {
         if (Objects.isNull(inputLottoNumbers) || inputLottoNumbers.isEmpty()) {

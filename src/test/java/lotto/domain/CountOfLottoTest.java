@@ -16,6 +16,18 @@ public class CountOfLottoTest {
     }
 
     @Test
+    void 생성자_오류_로또_구입금액이_null일_경우() {
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> new CountOfLotto(null, "1"));
+    }
+
+    @Test
+    void 생성자_오류_입력받은_수동으로_생성할_로또_개수가_null일_경우() {
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> new CountOfLotto(payment, null));
+    }
+
+    @Test
     void 생성자_오류_수동으로_생성할_로또_개수가_총_로또개수보다_많을_경우() {
         assertThatExceptionOfType(PaymentOutOfBoundsException.class)
                 .isThrownBy(() -> new CountOfLotto(payment, "2"));

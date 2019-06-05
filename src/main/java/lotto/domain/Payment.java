@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.NaturalNumberException;
 import lotto.exception.PaymentOutOfBoundsException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -8,7 +9,7 @@ import java.util.Objects;
 public class Payment {
     private static final int LOTTO_PRICE = 1_000;
 
-    private int payment;
+    private final int payment;
 
     public Payment(String payment) {
         if (StringUtils.isBlank(payment)) {
@@ -16,7 +17,7 @@ public class Payment {
         }
 
         if (!StringUtils.isNumeric(payment)) {
-            throw new ClassCastException("구입금액은 숫자를 입력해야합니다");
+            throw new NaturalNumberException("구입금액은 숫자를 입력해야합니다");
         }
 
         if (Integer.parseInt(payment) < LOTTO_PRICE) {
