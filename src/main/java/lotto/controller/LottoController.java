@@ -4,8 +4,9 @@ import lotto.domain.LottoResult;
 import lotto.domain.lottomoney.MoneyForLotto;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottoticket.LottoTicket;
-import lotto.domain.lottoticket.LottoTicketingMachine;
 import lotto.domain.lottoticket.LottoTickets;
+import lotto.domain.ticketingmachine.LottoTicketingMachine;
+import lotto.domain.ticketingmachine.RandomLottoNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,7 +19,8 @@ public class LottoController {
         LottoTickets manualTickets = InputView.makeManualTickets(numOfManualTickets);
 
         long numOfAutomaticTickets = numOfPurchasedTickets - numOfManualTickets;
-        LottoTickets automaticTickets = LottoTicketingMachine.generateLottoTickets(numOfAutomaticTickets);
+        LottoTickets automaticTickets = LottoTicketingMachine.generateLottoTickets(numOfAutomaticTickets
+                , new RandomLottoNumberGenerator());
 
         LottoTickets purchasedTickets = LottoTickets.join(manualTickets, automaticTickets);
 

@@ -95,7 +95,7 @@ public class InputView {
         System.out.println(INPUT_MANUAL_LOTTO_TICKET_MESSAGE);
 
         for (int i = 0; i < numOfManualTickets; i++) {
-            manualTickets.add(InputView.makeLottoTicket(scanner.nextLine()));
+            manualTickets.add(makeLottoTicket(scanner.nextLine()));
         }
         return manualTickets;
     }
