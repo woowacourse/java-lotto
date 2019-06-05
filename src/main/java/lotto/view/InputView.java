@@ -86,9 +86,13 @@ public class InputView {
     }
 
     public static LottoTickets makeManualTickets(long numOfManualTickets) {
+        LottoTickets manualTickets = new LottoTickets();
+        if (numOfManualTickets == 0) {
+            return manualTickets;
+        }
+
         System.out.println(INPUT_MANUAL_LOTTO_TICKET_MESSAGE);
 
-        LottoTickets manualTickets = new LottoTickets();
         for (int i = 0; i < numOfManualTickets; i++) {
             manualTickets.add(InputView.makeLottoTicket(scanner.nextLine()));
         }
