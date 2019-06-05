@@ -19,7 +19,7 @@ public class Lotto {
         }
     }
 
-    static Lotto of(final List<LottoNo> lottoNos) {
+    public static Lotto of(final List<LottoNo> lottoNos) {
         return new Lotto(lottoNos);
     }
 

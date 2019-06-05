@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class LottoNo implements Comparable<LottoNo> {
@@ -14,7 +12,7 @@ public class LottoNo implements Comparable<LottoNo> {
         this.number = number;
     }
 
-    public static LottoNo from(final int number) {
+    static LottoNo from(final int number) {
         validate(number);
         return new LottoNo(number);
     }
