@@ -54,7 +54,7 @@ public class Main {
         List<Rank> rankResults = new ArrayList<>();
 
         for (int i = 0; i < myLotto.getSize(); i++) {
-            rankResults.add(Rank.valueOf(winningLotto.getCount(myLotto.getIndexByLotto(i))
+            rankResults.add(Rank.valueOf(winningLotto.match(myLotto.getIndexByLotto(i))
                     , winningLotto.matchBonus(myLotto.getIndexByLotto(i))));
         }
 

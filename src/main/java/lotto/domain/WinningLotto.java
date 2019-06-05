@@ -17,7 +17,7 @@ public class WinningLotto {
         return lotto.isContains(bonus);
     }
 
-    public int getCount(Lotto lotto) {
+    public int match(Lotto lotto) {
         int count = 0;
 
         for (int i = 0; i < lotto.getSize(); i++) {
