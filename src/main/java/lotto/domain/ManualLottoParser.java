@@ -10,9 +10,9 @@ public class ManualLottoParser {
         List<Lotto> manualLottos = new ArrayList<>();
 
         for (String[] scannedManualLottoNumber : scannedManualLottoNumbers) {
-            List<LottoNumber> manualLotto = new ArrayList<>();
+            List<Integer> manualLotto = new ArrayList<>();
             Arrays.stream(scannedManualLottoNumber)
-                    .forEach(number -> manualLotto.add(new LottoNumber(Integer.parseInt(number.trim()))));
+                    .forEach(number -> manualLotto.add((Integer.parseInt(number.trim()))));
 
             manualLottos.add(new UserLotto(manualLotto));
         }

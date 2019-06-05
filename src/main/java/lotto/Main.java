@@ -21,10 +21,9 @@ public class Main {
         OutputView.printCountOfLotto(money, countOfManualLotto);
         OutputView.printUserLottos(user.getUserLottos());
 
-        List<LottoNumber> winningLottoNumbers = WinningLottoParser.parseLottoNumbers(InputView.inputWinningLotto());
-        LottoNumber bonusBall = WinningLottoParser.parseBonusBall(InputView.inputBonusNumber());
-
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
+        String[] scannedWinningLotto = InputView.inputWinningLotto();
+        String scannedBonusBall = InputView.inputBonusNumber();
+        WinningLotto winningLotto = WinningLottoParser.parseWinningLotto(scannedWinningLotto, scannedBonusBall);
 
         LottoGame lottoGame = new LottoGame(user, winningLotto);
         OutputView.printCountOfRank(lottoGame.getCountOfRank());

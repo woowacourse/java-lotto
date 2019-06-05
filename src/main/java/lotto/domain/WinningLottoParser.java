@@ -6,11 +6,8 @@ import java.util.List;
 
 public class WinningLottoParser {
 
-    public static List<LottoNumber> parseLottoNumbers(String[] scannedLotto) {
-        List<LottoNumber> winningLottoNumbers = new ArrayList<>();
-        Arrays.stream(scannedLotto)
-                .forEach(number -> winningLottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim()))));
-        return winningLottoNumbers;
+    public static WinningLotto parseWinningLotto(String[] scannedLotto, String scannedBonusBall) {
+        return new WinningLotto(LottoParser.parseLottoNumbers(scannedLotto), parseBonusBall(scannedBonusBall));
     }
 
     public static LottoNumber parseBonusBall(String scannedBonusBall) {

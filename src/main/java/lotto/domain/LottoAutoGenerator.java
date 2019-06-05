@@ -12,17 +12,16 @@ public class LottoAutoGenerator {
     private static final int ONE = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
-    private static final List<LottoNumber> allLottoNumbers = new ArrayList<>();
+    private static final List<Integer> allLottoNumbers = new ArrayList<>();
 
     static {
         IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .mapToObj(LottoNumber::new)
                 .forEach(allLottoNumbers::add);
     }
 
-    public static List<LottoNumber> generateAutoLotto() {
+    public static List<Integer> generateAutoLotto() {
         Collections.shuffle(allLottoNumbers);
-        List<LottoNumber> generatedLotto = allLottoNumbers.subList(FIRST_LOTTO_INDEX, LAST_LOTTO_INDEX + ONE);
+        List<Integer> generatedLotto = allLottoNumbers.subList(FIRST_LOTTO_INDEX, LAST_LOTTO_INDEX + ONE);
         return generatedLotto;
     }
 }
