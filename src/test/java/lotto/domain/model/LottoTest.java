@@ -28,13 +28,13 @@ public class LottoTest {
 
     @Test
     public void Lotto_중복_확인() {
-        boolean isDuplicated = lotto.isContained(new Number(6));
+        boolean isDuplicated = lotto.isContained(NumberSet.of(6));
         assertThat(isDuplicated).isEqualTo(true);
     }
 
     @Test
     public void Lotto_미중복_확인() {
-        boolean isDuplicated = lotto.isContained(new Number(7));
+        boolean isDuplicated = lotto.isContained(NumberSet.of(7));
         assertThat(isDuplicated).isEqualTo(false);
     }
 }

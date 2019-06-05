@@ -9,7 +9,7 @@ public class NumbersTest {
 
     @Test
     void AllLottoNumbers_생성_확인() {
-        assertThat(new Number(1).getNumber()).isEqualTo(NumberSet.of(1).getNumber());
+        assertThat(NumberSet.of(1).getNumber()).isEqualTo(NumberSet.of(1).getNumber());
     }
 
     @Test

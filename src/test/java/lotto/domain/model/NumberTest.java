@@ -11,21 +11,21 @@ public class NumberTest {
 
     @Test
     void LottoNumber_생성_확인() {
-        lottoNumber = new Number(33);
+        lottoNumber = Number.from(33);
         assertThat(lottoNumber.getNumber()).isEqualTo(33);
     }
 
     @Test
     void LottoNumber_번호_범위_45_초과_생성_확인() {
         assertThrows(IllegalArgumentException.class, () -> {
-            lottoNumber = new Number(46);
+            lottoNumber = Number.from(46);
         });
     }
 
     @Test
     void LottoNumber_번호_범위_1_미만_생성_확인() {
         assertThrows(IllegalArgumentException.class, () -> {
-            lottoNumber = new Number(0);
+            lottoNumber = Number.from(0);
         });
     }
 }

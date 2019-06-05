@@ -1,5 +1,7 @@
 package lotto.domain.model;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -27,13 +29,10 @@ public enum Rank {
             return SECOND;
         }
 
-        for (Rank rank : values()) {
-            if (rank.matchCount(matchCount) && rank != SECOND) {
-                return rank;
-            }
-        }
-
-        throw new IllegalArgumentException(matchCount + "는 유효하지 않은 값입니다.");
+        return Arrays.stream(values()).
+                filter( rank -> rank.matchCount(matchCount) && rank != Rank.SECOND)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(matchCount + "는 유효하지 않은 값입니다."));
     }
 
     private boolean matchCount(int matchCount) {
