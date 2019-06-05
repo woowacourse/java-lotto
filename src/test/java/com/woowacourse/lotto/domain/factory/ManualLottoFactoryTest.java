@@ -19,13 +19,13 @@ class ManualLottoFactoryTest {
 	void generateManualLotto() {
 		List<Lotto> lotto = new ManualLottoFactory(Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12")).generateLotto();
 		List<LottoNumber> numbers = new ArrayList<>();
-		for(int i=1; i<=6; ++i) {
+		for (int i = 1; i <= 6; ++i) {
 			numbers.add(LottoNumber.getLottoNumber(i));
 		}
 		Lotto FirstLotto = new Lotto(numbers);
 
 		numbers = new ArrayList<>();
-		for(int i=7; i<=12; ++i) {
+		for (int i = 7; i <= 12; ++i) {
 			numbers.add(LottoNumber.getLottoNumber(i));
 		}
 		Lotto SecondLotto = new Lotto(numbers);

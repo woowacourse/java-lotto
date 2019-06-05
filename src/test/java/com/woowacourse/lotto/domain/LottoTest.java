@@ -16,7 +16,7 @@ class LottoTest {
 
 	@BeforeEach
 	void init() {
-		for(int i=1; i<=6; ++i) {
+		for (int i = 1; i <= 6; ++i) {
 			numbers.add(LottoNumber.getLottoNumber(i));
 		}
 	}
@@ -32,11 +32,11 @@ class LottoTest {
 		List<LottoNumber> allMatchedNumbers = new ArrayList<>();
 		List<LottoNumber> zeroMatchedNumbers = new ArrayList<>();
 
-		for(int i=1; i<=6; ++i) {
+		for (int i = 1; i <= 6; ++i) {
 			allMatchedNumbers.add(LottoNumber.getLottoNumber(i));
 		}
 
-		for(int i=7; i<=12; ++i) {
+		for (int i = 7; i <= 12; ++i) {
 			zeroMatchedNumbers.add(LottoNumber.getLottoNumber(i));
 		}
 

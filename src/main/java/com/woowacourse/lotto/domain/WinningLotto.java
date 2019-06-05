@@ -49,7 +49,7 @@ public class WinningLotto {
 	}
 
 	private void validateRangeOfNumbers(List<String> numbers) {
-		if(!numbers.stream().allMatch(number -> checkRangeOfNumber(Integer.parseInt(number)))) {
+		if (!numbers.stream().allMatch(number -> checkRangeOfNumber(Integer.parseInt(number)))) {
 			throw new InvalidNumberException(VIOLATE_LOTTO_NUMBER_RANGE);
 		}
 	}
@@ -59,7 +59,7 @@ public class WinningLotto {
 	}
 
 	private void validateTypeOfNumbers(List<String> numbers) {
-		if(!numbers.stream().allMatch(number -> StringUtils.isNumeric(number))) {
+		if (!numbers.stream().allMatch(number -> StringUtils.isNumeric(number))) {
 			throw new IllegalArgumentException(VIOLATE_LOTTO_NUMBER_RANGE);
 		}
 	}
