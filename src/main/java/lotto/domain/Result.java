@@ -29,7 +29,7 @@ public class Result {
     }
 
     private void calculateCountOfMatch(WinningLotto winningLotto, Lotto ticket) {
-        Rank rank = Rank.valueOf(winningLotto.match(ticket), winningLotto.contains(ticket));
+        Rank rank = winningLotto.match(ticket);
 
         if (lottoScore.containsKey(rank)) {
             lottoScore.put(rank, lottoScore.get(rank) + 1);
@@ -50,9 +50,15 @@ public class Result {
         if (Objects.isNull(payment)) {
             throw new NullPointerException();
         }
+        long totalWinningMoney = calculateTotalWinningMoney();
 
-        long totalWinningMoney = Rank.calculateTotalWinningMoney(lottoScore);
         return payment.calculateEarningsRate(totalWinningMoney);
+    }
+
+    private long calculateTotalWinningMoney() {
+        return lottoScore.keySet().stream()
+                .mapToLong(rank -> lottoScore.get(rank) * rank.getWinningMoney())
+                .sum();
     }
 
     @Override

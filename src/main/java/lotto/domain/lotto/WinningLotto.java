@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.Rank;
 import lotto.exception.DuplicateLottoNumberException;
 
 import java.util.Objects;
@@ -20,11 +21,7 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public int match(Lotto lotto) {
-        return lotto.match(winningLotto);
-    }
-
-    public boolean contains(Lotto lotto) {
-        return lotto.contains(bonusNumber);
+    public Rank match(Lotto lotto) {
+        return Rank.valueOf(lotto.match(winningLotto), lotto.contains(bonusNumber));
     }
 }

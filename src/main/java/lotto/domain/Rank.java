@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Map;
-import java.util.Objects;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -42,22 +40,12 @@ public enum Rank {
         return this.countOfMatch == countOfMatch;
     }
 
-    public boolean isMiss() {
-        return this == MISS;
-    }
-
-    public boolean isNotSecond() {
+    private boolean isNotSecond() {
         return this != SECOND;
     }
 
-    public static long calculateTotalWinningMoney(Map<Rank, Integer> lottoScore) {
-        if (Objects.isNull(lottoScore) || lottoScore.isEmpty()) {
-            throw new NullPointerException();
-        }
-
-        return lottoScore.keySet().stream()
-                .mapToLong(rank -> lottoScore.get(rank) * rank.winningMoney)
-                .sum();
+    public boolean isMiss() {
+        return this == MISS;
     }
 
     public int getCountOfMatch() {

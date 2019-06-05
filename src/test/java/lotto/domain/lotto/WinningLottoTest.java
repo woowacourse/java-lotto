@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.Rank;
 import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.exception.DuplicateLottoNumberException;
@@ -48,22 +49,6 @@ class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.getNumber(7));
         Lotto lottoToCompare = LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        assertThat(winningLotto.match(lottoToCompare)).isEqualTo(6);
-    }
-
-    @Test
-    void 보너스번호와_일치하는_로또번호가_없는지_확인() {
-        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.getNumber(7));
-        Lotto lottoToCompare = LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
-
-        assertThat(winningLotto.contains(lottoToCompare)).isFalse();
-    }
-
-    @Test
-    void 보너스번호와_일치하는_로또번호가_있는지_확인() {
-        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.getNumber(7));
-        Lotto lottoToCompare = LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 7)));
-
-        assertThat(winningLotto.contains(lottoToCompare)).isTrue();
+        assertThat(winningLotto.match(lottoToCompare)).isEqualTo(Rank.FIRST);
     }
 }
