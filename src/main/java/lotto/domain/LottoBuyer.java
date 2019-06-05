@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,16 +9,19 @@ public class LottoBuyer {
 
     public LottoBuyer(Budget budget) {
         this.budget = budget;
-        lottos = new LottoContainer(Collections.EMPTY_LIST);
+        lottos = new LottoContainer();
     }
 
-    public void buyLotto(List<Lotto> lottos) {
+    public void buyManualLotto(List<Lotto> lottos) {
         budget.pay(lottos.size());
+        this.lottos.addLotto(lottos);
+    }
+
+    public void buyAutoLotto() {
         while (budget.canBuyLotto()) {
             budget.pay();
-            lottos.add(Lotto.of());
+            lottos.addLotto(Lotto.of());
         }
-        this.lottos = new LottoContainer(lottos);
     }
 
     public List<String> showLottos() {

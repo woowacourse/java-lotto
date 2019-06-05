@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,8 +8,16 @@ import java.util.stream.Collectors;
 class LottoContainer {
     private List<Lotto> lottos;
 
-    LottoContainer(List<Lotto> lottos) {
-        this.lottos = lottos;
+    LottoContainer() {
+        lottos = new ArrayList<>();
+    }
+
+    void addLotto(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
+    }
+
+    void addLotto(Lotto lotto) {
+        this.lottos.add(lotto);
     }
 
     List<String> showLottos() {

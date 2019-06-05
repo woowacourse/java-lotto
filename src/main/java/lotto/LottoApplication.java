@@ -16,7 +16,8 @@ public class LottoApplication {
         if (countOfManualLotto != 0) {
             OutputView.printManualInputMsg();
         }
-        buyer.buyLotto(makeManualLottos(countOfManualLotto));
+        buyer.buyManualLotto(makeManualLottos(countOfManualLotto));
+        buyer.buyAutoLotto();
         OutputView.printContainingLottos(buyer);
 
         WinningLotto winningLotto = makeWinningLotto();
