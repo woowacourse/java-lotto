@@ -4,10 +4,11 @@ import lotto.exception.InvalidLottoNumbersException;
 
 import java.util.*;
 
+import static lotto.Lotto.NUMBER_OF_NUMBERS_IN_LOTTO;
+
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int NUMBER_OF_NUMBERS_IN_LOTTO = 6;
 
     private static final Map<Integer, LottoNumber> numbers = new HashMap<>();
 

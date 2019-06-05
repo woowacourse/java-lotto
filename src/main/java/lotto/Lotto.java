@@ -5,12 +5,12 @@ import lotto.exception.InvalidLottoNumbersException;
 import java.util.*;
 
 public class Lotto {
-    private static final int NUMBER_OF_NUMBERS_IN_LOTTO = 6;
+    public static final int NUMBER_OF_NUMBERS_IN_LOTTO = 6;
 
     private final Set<LottoNumber> numbers;
 
     public Lotto (List<LottoNumber> numbers) {
-        Set<LottoNumber> numberSet = new HashSet<>(numbers);
+        Set<LottoNumber> numberSet = new TreeSet<>(numbers);
         checkNumberOfNumbers(numberSet);
         this.numbers = numberSet;
     }

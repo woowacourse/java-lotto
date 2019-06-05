@@ -4,7 +4,7 @@ import lotto.exception.InvalidPaymentException;
 import org.apache.commons.lang3.StringUtils;
 
 public class Money {
-    private static final int ONE_LOTTO_PRICE = 1000;
+    public static final int ONE_LOTTO_PRICE = 1000;
     private static final int MAX_BUYABLE_LOTTO_PRICE = 100000;
 
     private final int money;
