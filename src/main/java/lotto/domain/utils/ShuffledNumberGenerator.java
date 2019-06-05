@@ -1,6 +1,5 @@
 package lotto.domain.utils;
 
-import lotto.domain.model.Lotto;
 import lotto.domain.model.Number;
 import lotto.domain.model.NumberSet;
 
