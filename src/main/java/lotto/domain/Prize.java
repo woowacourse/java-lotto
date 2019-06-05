@@ -3,20 +3,22 @@ package lotto.domain;
 import lotto.domain.exception.NotMatchLottoPrizeException;
 
 public enum Prize {
-    NONE(0, 0),
-    FIFTH(3, 5_000),
-    FOURTH(4, 50_000),
-    THIRD(5, 1_500_000),
-    SECOND(5, 30_000_000),
-    FIRST(6, 2_000_000_000);
+    NONE(0, 0, false),
+    FIFTH(3, 5_000, false),
+    FOURTH(4, 50_000, false),
+    THIRD(5, 1_500_000, false),
+    SECOND(5, 30_000_000, true),
+    FIRST(6, 2_000_000_000, false);
 
     public static final int MIN_PRIZE_NUMBER = 3;
     private final int countOfNumber;
     private final int winningAmount;
+    private final boolean requiredBonus;
 
-    Prize(final int countOfNumber, final int winningAmount) {
+    Prize(final int countOfNumber, final int winningAmount, final boolean requiredBonus) {
         this.countOfNumber = countOfNumber;
         this.winningAmount = winningAmount;
+        this.requiredBonus = requiredBonus;
     }
 
     public int getCountOfNumber() {
@@ -32,7 +34,7 @@ public enum Prize {
             return NONE;
         }
 
-        if (SECOND.matchCount(countOfNumber) && hasBonus) {
+        if (SECOND.requiredBonus == hasBonus && SECOND.matchCount(countOfNumber)) {
             return SECOND;
         }
 
