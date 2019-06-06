@@ -6,10 +6,7 @@ import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -34,7 +31,7 @@ public class ResultTest {
 
     @Test
     void 생성자_확인() {
-        Map<Rank, Integer> lottoScore = new HashMap<>();
+        Map<Rank, Integer> lottoScore = new EnumMap<>(Rank.class);
         lottoScore.put(Rank.FIRST, 1);
         lottoScore.put(Rank.SECOND, 1);
         lottoScore.put(Rank.THIRD, 1);

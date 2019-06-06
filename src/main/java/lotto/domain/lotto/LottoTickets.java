@@ -26,7 +26,7 @@ public class LottoTickets {
     }
 
     private Map<Rank, Integer> createMatchScore(WinningLotto winningLotto) {
-        Map<Rank, Integer> lottoScore = new HashMap<>();
+        Map<Rank, Integer> lottoScore = new EnumMap<>(Rank.class);
 
         initializeMatchScore(lottoScore);
         calculateMatchScore(winningLotto, lottoScore);
