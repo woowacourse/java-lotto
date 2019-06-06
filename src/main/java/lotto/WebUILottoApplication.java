@@ -2,9 +2,6 @@ package lotto;
 
 import com.google.gson.Gson;
 import com.woowacourse.lotto.controller.LottoWebController;
-import com.woowacourse.lotto.domain.*;
-
-import java.util.*;
 
 import static spark.Spark.*;
 
@@ -16,5 +13,6 @@ public class WebUILottoApplication {
 
         get("/", LottoWebController::index);
         post("/buy", LottoWebController::buyLotto, gson::toJson);
+        post("/api/buy-auto", LottoWebController::buyAutoLotto, gson::toJson);
     }
 }
