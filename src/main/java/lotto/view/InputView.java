@@ -12,9 +12,9 @@ public class InputView {
     private static final String WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
-    public static int receiveLottoMoney() {
+    public static long receiveLottoMoney() {
         System.out.println(PURCHASE_MESSAGE);
-        return Integer.parseInt(SCANNER.nextLine());
+        return Long.parseLong(SCANNER.nextLine());
     }
 
     public static List<String> receiveManualLotto() {

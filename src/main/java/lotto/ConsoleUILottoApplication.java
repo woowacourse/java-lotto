@@ -12,7 +12,7 @@ import java.util.List;
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         try {
-            int inputMoney = InputView.receiveLottoMoney();
+            long inputMoney = InputView.receiveLottoMoney();
             LottoMoney lottoMoney = new LottoMoney(inputMoney);
             OutputView.printRemainMoney(lottoMoney.getRemainMoney());
 
@@ -28,10 +28,10 @@ public class ConsoleUILottoApplication {
 
             LottoResult lottoResult = new LottoResult(totalLottos, winningLotto);
             OutputView.printLottoResult(lottoResult);
-        } catch (NumberFormatException e1) {
-            System.out.println("숫자만 입력해주세요.");
-        } catch (IllegalArgumentException e2) {
-            System.out.println(e2.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("잘못된 입력입니다.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
 
     }
