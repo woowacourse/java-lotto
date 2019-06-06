@@ -25,5 +25,14 @@ public class LottoFactory {
         Collections.shuffle(lottoNumberPool);
         return new TreeSet<>(lottoNumberPool.subList(0, 6));
     }
+
+    public static Lotto issueWinningLotto(List<Integer> inputNumbers) {
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
+
+        for (Integer number : inputNumbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        return new Lotto(lottoNumbers);
+    }
 }
 
