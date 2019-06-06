@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static lotto.domain.Rank.MISS;
@@ -19,20 +20,13 @@ public class OutputView {
     public static void printStatistic(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        for (Rank rank : Rank.values()) {
+        Arrays.stream(Rank.values()).filter(rank -> rank != MISS).forEach(rank -> {
             System.out.printf(printResult(rank), rank.getCountOfMatch(), rank.getWinningMoney(), lottoResult.getCountOfRanker(rank));
-        }
+        });
     }
 
     private static String printResult(Rank rank) {
-        if (rank == MISS) {
-            return "";
-        }
-        if (rank == SECOND) {
-            return "%d개 일치, 보너스 볼 일치(%d원) - %d개\n";
-        }
-        return "%d개 일치(%d원) - %d개\n";
-
+        return rank == SECOND ? "%d개 일치, 보너스 볼 일치(%d원) - %d개\n" : "%d개 일치(%d원) - %d개\n";
     }
 
     public static void printYield(double yield) {

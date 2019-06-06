@@ -50,5 +50,5 @@ public class LottoResult {
     public int hashCode() {
         return Objects.hash(results);
     }
-    
+
 }
