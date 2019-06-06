@@ -100,6 +100,7 @@ h1 {
     align-items: center;
     display: flex;
     margin: 12px 0;
+    animation: fadein 0.75s;
 }
 
 .input-group-lottonumber input[type=number] {
@@ -114,4 +115,13 @@ h1 {
 
 .input-group-lottonumber button img {
     width: 1.5rem;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

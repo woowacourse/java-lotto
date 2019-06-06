@@ -38,6 +38,7 @@ public class AggregationDaoTest {
         TEMP_WINNING_LOTTO.setWinningNumber5(6);
         TEMP_WINNING_LOTTO.setWinningBonusNumber(7);
         TEMP_AGGREGATION = new AggregationDto();
+        TEMP_AGGREGATION.setLottoRound(999);
         TEMP_AGGREGATION.setCntFirst(0);
         TEMP_AGGREGATION.setCntSecond(0);
         TEMP_AGGREGATION.setCntThird(0);
@@ -92,6 +93,11 @@ public class AggregationDaoTest {
         assertThat(found.getCntFifth()).isEqualTo(TEMP_AGGREGATION.getCntFifth());
         assertThat(found.getCntNone()).isEqualTo(TEMP_AGGREGATION.getCntNone());
         assertThat(found.getPrizeMoneySum()).isEqualTo(TEMP_AGGREGATION.getPrizeMoneySum());
+    }
+
+    @Test
+    void findLatestRound() throws Exception {
+        assertThat(aggregationDao.findLatestRound()).isEqualTo(999);
     }
 
     @Test

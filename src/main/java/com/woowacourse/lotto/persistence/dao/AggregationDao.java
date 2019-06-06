@@ -63,6 +63,16 @@ public class AggregationDao {
         }
     }
 
+    public int findLatestRound() throws SQLException {
+        PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_MAX_ROUND);
+        try (ResultSet result = query.executeQuery()) {
+            if (!result.next()) {
+                return 0;
+            }
+            return result.getInt(1);
+        }
+    }
+
     private Optional<AggregationDto> mapResult(ResultSet rs) throws SQLException {
         if (!rs.next()) {
             return Optional.empty();
@@ -96,6 +106,7 @@ public class AggregationDao {
         private static final String INSERT_AGGREGATED_WINNING_LOTTO = "INSERT INTO winning_lotto_aggregated(winning_lotto_id, aggregation_id) VALUES(?, ?)";
         private static final String SELECT_BY_ID = "SELECT id, lotto_round, cnt_first, cnt_second, cnt_third, cnt_fourth, cnt_fifth, cnt_none, prize_money_sum, reg_date " +
             "FROM aggregation WHERE id=?";
+        private static final String SELECT_MAX_ROUND = "SELECT MAX(lotto_round) FROM aggregation";
         private static final String DELETE_BY_ID = "DELETE FROM aggregation WHERE id=?";
     }
 }

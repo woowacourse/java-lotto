@@ -17,7 +17,7 @@ public class ConsoleUILottoApplication {
 
     private static List<Lotto> getLottos() {
         LottoQuantity quantity = ConsoleInputView.promptBuyingMoney().getQuantity();
-        NumberGenerator numberGenerator = new RandomNumberGenerator(LottoNumber.LOTTO_NUMBER_MIN, LottoNumber.LOTTO_NUMBER_MAX);
+        NumberGenerator numberGenerator = new RandomNumberGenerator(LottoNumberGroup.LOTTO_NUMBER_MIN, LottoNumberGroup.LOTTO_NUMBER_MAX);
         List<Lotto> lottos = getManualLottos(quantity);
         final int numOfManuals = lottos.size();
         for (int i = 0; i < quantity.toInt() - numOfManuals; i++) {

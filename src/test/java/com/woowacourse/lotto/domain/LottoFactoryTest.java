@@ -12,13 +12,13 @@ public class LottoFactoryTest {
     void createLotto() {
         List<Integer> nums = Arrays.asList(25, 4, 15, 42, 32, 22);
         Lotto l = LottoFactory.createLotto(new TestNumberGenerator(nums));
-        assertThat(l).isEqualTo(new Lotto(LottoNumber.of(nums)));
+        assertThat(l).isEqualTo(new Lotto(LottoNumberGroup.of(nums)));
     }
 
     @Test
     void createWithSet() {
         List<Integer> nums = Arrays.asList(25, 4, 15, 42, 32, 22);
-        Lotto l = LottoFactory.createLotto(LottoNumber.of(nums));
-        assertThat(l).isEqualTo(new Lotto(LottoNumber.of(nums)));
+        Lotto l = LottoFactory.createLotto(LottoNumberGroup.of(nums));
+        assertThat(l).isEqualTo(new Lotto(LottoNumberGroup.of(nums)));
     }
 }

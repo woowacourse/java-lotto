@@ -84,7 +84,6 @@ const ctx = {
             ctx.view.updateNumOfManual();
             elm.querySelector("button").addEventListener("click", () =>
             {
-                console.log("제거");
                 document.querySelector(".manual-numbers").removeChild(elm);
                 ctx.state.numOfManualLottos--;
                 ctx.view.updateNumOfManual();

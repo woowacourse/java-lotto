@@ -1,24 +1,35 @@
 package com.woowacourse.lotto.service;
 
 import com.woowacourse.lotto.domain.Lotto;
+import com.woowacourse.lotto.domain.WinningAggregator;
+import com.woowacourse.lotto.domain.WinningLotto;
+import com.woowacourse.lotto.persistence.dao.AggregationDao;
 import com.woowacourse.lotto.persistence.dao.ConnectionFactory;
 import com.woowacourse.lotto.persistence.dao.LottoDao;
+import com.woowacourse.lotto.persistence.dao.WinningLottoDao;
+import com.woowacourse.lotto.persistence.dto.AggregationDto;
 import com.woowacourse.lotto.persistence.dto.LottoDto;
+import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
 
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
     private LottoDao lottoDao;
+    private WinningLottoDao winningLottoDao;
+    private AggregationDao aggregationDao;
 
     public LottoService() {
-        lottoDao = new LottoDao(ConnectionFactory.getConnection());
+        Connection conn = ConnectionFactory.getConnection();
+        lottoDao = new LottoDao(conn);
+        winningLottoDao = new WinningLottoDao(conn);
+        aggregationDao = new AggregationDao(conn);
     }
 
     public LottoDto addLotto(Lotto lotto) {
         try {
-            LottoDto dto = convertLottoToDto(lotto);
+            LottoDto dto = lotto.toDto();
             long id = lottoDao.addLotto(dto);
             return lottoDao.findById(id).get();
         } catch (SQLException e) {
@@ -27,17 +38,36 @@ public class LottoService {
         return null;
     }
 
-    private LottoDto convertLottoToDto(Lotto lotto) {
-        LottoDto dto = new LottoDto();
-        List<Integer> numList = new ArrayList<>();
-        lotto.forEachNums(numList::add);
-        dto.setNumber0(numList.get(0));
-        dto.setNumber1(numList.get(1));
-        dto.setNumber2(numList.get(2));
-        dto.setNumber3(numList.get(3));
-        dto.setNumber4(numList.get(4));
-        dto.setNumber5(numList.get(5));
-        dto.setPrice(Lotto.UNIT_PRICE);
-        return dto;
+    public LottoDto findLottoById(long lottoId) {
+        try {
+            return lottoDao.findById(lottoId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 로또 id입니다."));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private WinningLottoDto addWinningLotto(WinningLotto winningLotto) {
+        try {
+            WinningLottoDto dto = winningLotto.toDto();
+            long id = winningLottoDao.addWinningLotto(dto);
+            return winningLottoDao.findById(id).get();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public AggregationDto addAggregation(WinningAggregator aggregator, WinningLotto winningLotto, List<Long> lottoIds) {
+        try {
+            AggregationDto dto = aggregator.toDto();
+            dto.setLottoRound(aggregationDao.findLatestRound() + 1);
+            long id = aggregationDao.addAggregation(dto, addWinningLotto(winningLotto).getId(), lottoIds);
+            return aggregationDao.findById(id).get();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

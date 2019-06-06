@@ -7,14 +7,14 @@ import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class LottoNumber {
+public class LottoNumberGroup {
     public static final int LOTTO_NUMBER_SIZE = 6;
     public static final int LOTTO_NUMBER_MIN = 1;
     public static final int LOTTO_NUMBER_MAX = 45;
 
     private final SortedSet<Integer> nums;
 
-    private LottoNumber(Collection<Integer> nums) {
+    private LottoNumberGroup(Collection<Integer> nums) {
         this.nums = new TreeSet<>(nums);
         if (this.nums.size() != 6) {
             throw new IllegalArgumentException("로또 숫자는 중복되지 않는 숫자로 6개여야 합니다.");
@@ -30,8 +30,8 @@ public class LottoNumber {
         return n < 1 || n > 45;
     }
 
-    public static LottoNumber of(Collection<Integer> nums) {
-        return new LottoNumber(nums);
+    public static LottoNumberGroup of(Collection<Integer> nums) {
+        return new LottoNumberGroup(nums);
     }
 
     public boolean contains(int n) {
@@ -42,7 +42,7 @@ public class LottoNumber {
         this.nums.forEach(consumer);
     }
 
-    public int countMatch(LottoNumber other) {
+    public int countMatch(LottoNumberGroup other) {
         return (int) this.nums.stream()
             .filter(other::contains)
             .count();
@@ -52,7 +52,7 @@ public class LottoNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        LottoNumberGroup that = (LottoNumberGroup) o;
         return Objects.equals(nums, that.nums);
     }
 
@@ -63,7 +63,7 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return String.format("LottoNumber [%s]",
+        return String.format("LottoNumberGroup [%s]",
             nums.stream().map(String::valueOf).collect(Collectors.joining(", ")));
     }
 }

@@ -1,5 +1,8 @@
 package com.woowacourse.lotto.domain;
 
+import com.woowacourse.lotto.persistence.dto.AggregationDto;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,5 +31,19 @@ public class WinningAggregator {
 
     public int getResultCount(LottoResult result) {
         return results.getOrDefault(result, 0);
+    }
+
+    public AggregationDto toDto() {
+        AggregationDto dto = new AggregationDto();
+        dto.setCntFirst(getResultCount(LottoResult.FIRST));
+        dto.setCntSecond(getResultCount(LottoResult.SECOND));
+        dto.setCntThird(getResultCount(LottoResult.THIRD));
+        dto.setCntFourth(getResultCount(LottoResult.FOURTH));
+        dto.setCntFifth(getResultCount(LottoResult.FIFTH));
+        dto.setCntNone(getResultCount(LottoResult.NONE));
+        dto.setPrizeMoneySum(Arrays.stream(LottoResult.values())
+            .mapToLong(i -> getResultCount(i) * i.getPrizeMoney())
+            .sum());
+        return dto;
     }
 }
