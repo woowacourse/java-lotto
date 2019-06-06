@@ -22,4 +22,14 @@ public class LottoGameLauncher {
             return getPurchaseAmount();
         }
     }
+
+    private static Lotto getWinningLotto() {
+        try {
+            List<Integer> inputNumbers = InputView.inputWinningNumbers();
+            return LottoFactory.issueWinningLotto(inputNumbers);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getWinningLotto();
+        }
+    }
 }

@@ -20,10 +20,10 @@ class LottoFactoryTest {
 
     @Test
     void 당첨_로또를_제대로_발행해주는지_테스트() {
-        Set<LottoNumber> lottoNumbers = new TreeSet<>(Arrays.asList(new LottoNumber(1),
+        Set<LottoNumber> winningNumbers = new TreeSet<>(Arrays.asList(new LottoNumber(1),
                 new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
                 new LottoNumber(5), new LottoNumber(6)));
-        Lotto expectedWinningLotto = new Lotto(lottoNumbers);
+        Lotto expectedWinningLotto = new Lotto(winningNumbers);
 
         assertThat(LottoFactory.issueWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)))
                 .isEqualTo(expectedWinningLotto);
