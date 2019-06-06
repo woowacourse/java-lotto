@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.Factory.LottoTicketFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +19,7 @@ public class LottoTickets {
     }
 
     public void putCustomLottoTicket(final String inputCustomNumber) {
-        lottoTickets.add(LottoTicketFactory.create(inputCustomNumber));
+        lottoTickets.add(new LottoTicketFactory().create(inputCustomNumber));
     }
 
     public List<LottoTicket> getLottoTickets() {
