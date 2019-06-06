@@ -18,7 +18,7 @@ CREATE TABLE winning_lotto (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE result (
+CREATE TABLE win_prize (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     round INT NOT NULL,
     first INT DEFAULT 0,
@@ -30,10 +30,4 @@ CREATE TABLE result (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE win_prize (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    round INT NOT NULL,
-    total_prize BIGINT NOT NULL,
-    rate_of_profit FLOAT NOT NULL,
-    PRIMARY KEY (id)
-);
+INSERT INTO round () VALUES();
