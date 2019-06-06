@@ -1,6 +1,6 @@
 package domain;
 
-class PurchaseAmount {
+public class PurchaseAmount {
     private static final int PRICE_PER_LOTTO = 1000;
     private static final int FIT_AMOUNT = 0;
 
@@ -10,7 +10,7 @@ class PurchaseAmount {
         this.amountOfMoney = amountOfMoney;
     }
 
-    static PurchaseAmount of(int amountOfMoney) {
+    public static PurchaseAmount of(int amountOfMoney) {
         validateAmountOfMoney(amountOfMoney);
         validateIfMultipleOfPricePerLotto(amountOfMoney);
 
