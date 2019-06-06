@@ -1,10 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>로또</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
 </head>
+
+<style>
+    .section {
+        margin: 8px;
+    }
+
+    .number {
+        margin: 8px;
+        cursor: pointer;
+        width: 30px;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .selItem {
+        margin: 8px;
+        cursor: pointer;
+        width: 30px;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .black {
+        border: 3px solid black;
+    }
+
+    .red {
+        background-color: red;
+        border: 3px solid red;
+    }
+
+    .inputForm {
+        margin: 8px;
+        width: 100px;
+        display: inline-block;
+    }
+</style>
+
 <body>
-Hello World!!
+
+<h1>로또 구매</h1>
+<div class="section">
+    <span>구입 금액 : </span><input class="form-control inputForm" id="money" type="number">
+    <button id="inputMoney">입력</button>
+</div>
+
+<div class="section">수동 입력</div>
+<div class="section" id="item">
+
+</div>
+
+<button class="section" id="addAutoItem">나머지 자동 구매</button>
+
+<div id="lottoList">
+    <div class="section">수동 구매 리스트</div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        initNumber();
+
+        $(document).on("click", ".number", function () {
+            if ($('.red').length < 6 || $(this).hasClass('red')) {
+                if ($(this).hasClass('red')) {
+                    $(this).removeClass('red');
+                    $(this).addClass('black');
+                } else {
+                    $(this).removeClass('black');
+                    $(this).addClass('red');
+                }
+            } else {
+                alert("로또 번호는 6자리!");
+            }
+        });
+
+        $('#inputMoney').click(function () {
+            $('#money').attr("readonly", "readonly");
+        });
+
+        $(document).on("click", "#addItem", function () {
+            if (!$('#money').is("[readonly]")) {
+                alert("금액을 입력하세요");
+                return;
+            }
+
+            if ($('.red').length != 6) {
+                alert("로또 번호는 6자리!");
+                return;
+            }
+
+            var itemLength = $('#lottoList').find('.lottoItem').length;
+            var maxItem = Math.floor($('#money').val() / 1000);
+            console.log(itemLength + " : " + maxItem);
+            if (itemLength < maxItem) {
+                $('#lottoList').append('<div class="lottoItem" data_no="' + itemLength + '">');
+
+                $('.red').each(function (index, item) {
+                    var chlid = '<div class="black selItem">' + item.innerHTML + '</div>';
+                    $('#lottoList').find('.lottoItem[data_no=' + itemLength + ']').append(chlid);
+                });
+            } else {
+                alert("수동 최대!!!");
+            }
+
+            $('#item').empty();
+            initNumber();
+
+        });
+
+        $('#addAutoItem').click(function () {
+            var lottoItems = new Array();
+
+            $('.lottoItem').each(function (index) {
+                var arrNumber = new Array();
+                for (var i = 0; i < 6; i++) {
+                    arrNumber[i] = this.children[i].innerHTML;
+                }
+                lottoItems[index] = arrNumber.join();
+            });
+
+            var money = $('#money').val();
+
+            var data = {
+                'money': money,
+                'lottoItems': lottoItems
+            };
+
+
+            console.log(data);
+            $.ajax({
+                method: 'POST',
+                data: data,
+                url: '/lotto',
+                success: function (data) {
+                    $('#result').text(data);
+                }
+            });
+
+        });
+
+        function initNumber() {
+            for (var i = 1; i < 46; i++) {
+                var chlid = '<div class=" number black">' + i + '</div>';
+                if (i % 6 == 0) {
+                    chlid = '<div class="number black">' + i + '</div> <br/>';
+                }
+                $('#item').append(chlid);
+            }
+            chlid = '<button class="section" id="addItem">수동 구매</button>'
+            $('#item').append(chlid);
+        }
+
+    });
+
+</script>
 </body>
+
 </html>
