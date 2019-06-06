@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>로또</title>
-</head>
-<body>
-Hello World!!
-</body>
-</html>
+<htmlm lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>로또</title>
+    </head>
+    <body>
+
+    <h1>{{round}} 회 로또</h1>
+
+    <form method="POST" id="lotto" action="/buyLotto">
+        구입금액을 입력해 주세요.
+        <p><input type="number" id="money" name="money">원</p>
+
+        <h2>수동 로또</h2>
+        <div>
+            한 라인에 숫자 6개씩 입력 해주세요. <br>
+            ex)<br>
+            1,2,3,4,5,6<br>
+            5,6,7,8,9,10
+        </div>
+        <div><textarea name="manualLottos" placeholder="1,2,3,4,5,6" rows="10"></textarea></div>
+        <input type="submit" value="전송">
+        <input type="reset" value="취소">
+    </form>
+
+    </body>
+</htmlm>
