@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.UnmatchedLottoTicketAmountException;
+import lotto.exception.DuplicatedInputException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +50,7 @@ public class WinningLotto {
         boolean isDistinct = lottoNumbers.contains(LottoNumber.getNumber(lottoNumber));
 
         if (isDistinct) {
-            throw new UnmatchedLottoTicketAmountException("중복된 번호는 입력할 수 없습니다.");
+            throw new DuplicatedInputException("중복된 번호는 입력할 수 없습니다.");
         }
     }
 

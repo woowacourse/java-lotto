@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.IllegalNumberBoundException;
+import lotto.exception.UnexpectedInputRangeException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LottoNumberTest {
     @Test
     void 범위밖의_로또_번호에_대한_예외() {
-        assertThrows(IllegalNumberBoundException.class, () -> { LottoNumber.getNumber(0); });
+        assertThrows(UnexpectedInputRangeException.class, () -> { LottoNumber.getNumber(0); });
     }
 
     @Test

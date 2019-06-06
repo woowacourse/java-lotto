@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.IllegalNumberBoundException;
+import lotto.exception.UnexpectedInputRangeException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,6 +20,6 @@ public class MoneyTest {
 
     @Test
     void 구입금액이_1000원_미만일때() {
-        assertThrows(IllegalNumberBoundException.class, () -> new Money(500));
+        assertThrows(UnexpectedInputRangeException.class, () -> new Money(500));
     }
 }

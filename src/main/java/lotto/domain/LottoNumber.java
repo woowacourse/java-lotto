@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.IllegalNumberBoundException;
+import lotto.exception.UnexpectedInputRangeException;
 
 import java.util.*;
 
@@ -23,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber getNumber(int key) throws IllegalNumberBoundException {
+    public static LottoNumber getNumber(int key) throws UnexpectedInputRangeException {
         validateNumberBound(key);
 
         return numbers.get(key);
@@ -38,7 +38,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void validateNumberBound(int key) {
         if (key < FIRST_BOUND_OF_LOTTO_NUMBER || key > LAST_BOUND_OF_LOTTO_NUMBER) {
-            throw new IllegalNumberBoundException("로또 번호의 범위에 벗어납니다.");
+            throw new UnexpectedInputRangeException("로또 번호의 범위에 벗어납니다.");
         }
     }
 

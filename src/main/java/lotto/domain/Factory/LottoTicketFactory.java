@@ -2,7 +2,9 @@ package lotto.domain.Factory;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.exception.UnmatchedLottoTicketAmountException;
+import lotto.exception.UnexpectedInputException;
+import lotto.exception.DuplicatedInputException;
+import lotto.exception.UnexpectedInputRangeException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -51,12 +53,15 @@ public class LottoTicketFactory {
             if (!number.matches("(\\d+)?")) {
                 throw new ArithmeticException("로또 번호가 유효하지 않습니다.");
             }
+            if (number.equals("0")) {
+                throw new UnexpectedInputRangeException("로또 번호가 유효하지 않습니다.");
+            }
         }
 
         private void validateDistinctNumber(List<LottoNumber> lottoNumbers) {
             boolean isDistinct = lottoNumbers.stream().distinct().collect(Collectors.toList()).size() != lottoNumbers.size();
             if (isDistinct) {
-                throw new UnmatchedLottoTicketAmountException("중복된 번호는 입력할 수 없습니다.");
+                throw new DuplicatedInputException("중복된 번호는 입력할 수 없습니다.");
             }
         }
     }

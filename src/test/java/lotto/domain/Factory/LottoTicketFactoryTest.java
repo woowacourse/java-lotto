@@ -1,8 +1,8 @@
 package lotto.domain.Factory;
 
 import lotto.domain.LottoTicket;
-import lotto.exception.IllegalNumberBoundException;
-import lotto.exception.UnmatchedLottoTicketAmountException;
+import lotto.exception.DuplicatedInputException;
+import lotto.exception.UnexpectedInputRangeException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -34,12 +34,12 @@ class LottoTicketFactoryTest {
     @Test
     void 범위밖의_로또번호_예외처리() {
         String numbers = "1,2,3,4,5,0";
-        assertThrows(IllegalNumberBoundException.class, () -> new LottoTicketFactory().create(numbers));
+        assertThrows(UnexpectedInputRangeException.class, () -> new LottoTicketFactory().create(numbers));
     }
 
     @Test
     void 중복된_로또번호_예외() {
         String numbers = "1,2,3,4,5,5";
-        assertThrows(UnmatchedLottoTicketAmountException.class, () -> new LottoTicketFactory().create(numbers));
+        assertThrows(DuplicatedInputException.class, () -> new LottoTicketFactory().create(numbers));
     }
 }

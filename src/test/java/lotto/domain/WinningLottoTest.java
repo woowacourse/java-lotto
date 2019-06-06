@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import lotto.exception.UnmatchedLottoTicketAmountException;
+import lotto.exception.DuplicatedInputException;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,7 +49,7 @@ public class WinningLottoTest {
         String winningNumbers = "1,2,3,4,5,5";
         int bonusBall = 7;
 
-        assertThrows(UnmatchedLottoTicketAmountException.class, () -> WinningLotto.of(winningNumbers, bonusBall));
+        assertThrows(DuplicatedInputException.class, () -> WinningLotto.of(winningNumbers, bonusBall));
     }
 
     @AfterEach
