@@ -39,13 +39,4 @@ class RankTest {
         assertThatThrownBy(() -> Rank.valueOf(-1, false))
                 .isInstanceOf(NullPointerException.class);
     }
-
-    @Test
-    void calculateTotalWinningMoney() {
-        Map<Rank, Long> map = new HashMap<>();
-        map.put(Rank.SECOND, 1L);
-        map.put(Rank.FOURTH, 2L);
-
-        assertThat(Rank.calculateTotalWinningMoney(map)).isEqualTo(30_100_000);
-    }
 }

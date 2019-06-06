@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,7 +52,12 @@ public class ResultTest {
     @Test
     void 수익률_계산() {
         Result result = new Result(winningLotto, lottoTickets);
-
         assertThat(result.calculateEarningsRate(new Payment(10_000))).isEqualTo(200_000);
+    }
+
+    @Test
+    void calculateTotalWinningMoney() {
+        Result result = new Result(winningLotto, lottoTickets);
+        assertThat(result.calculateEarningsRate(new Payment(5_000))).isEqualTo(400_000);
     }
 }

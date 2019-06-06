@@ -32,9 +32,13 @@ public class Result {
         if (Objects.isNull(payment)) {
             throw new NullPointerException();
         }
+        return payment.calculateEarningsRate(calculateTotalWinningMoney());
+    }
 
-        long totalWinningMoney = Rank.calculateTotalWinningMoney(lottoScore);
-        return payment.calculateEarningsRate(totalWinningMoney);
+    private long calculateTotalWinningMoney() {
+        return lottoScore.keySet().stream()
+                .mapToLong(rank -> rank.calculateWinningMoney(lottoScore.get(rank)))
+                .sum();
     }
 
     @Override
