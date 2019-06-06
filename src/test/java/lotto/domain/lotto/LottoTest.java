@@ -37,11 +37,25 @@ public class LottoTest {
     }
 
     @Test
-    void 당첨번호와_일치하는_로또번호의_개수() {
+    void 비교하는_로또가_null인_경우() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThatThrownBy(() -> lotto.match(null)).isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    void 비교하는_로또와_일치하는_로또번호의_개수() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
 
         assertThat(lotto.match(new Lotto(lottoNumbers))).isEqualTo(5);
+    }
+
+    @Test
+    void 보너스숫자가_null인_경우() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThatThrownBy(() -> lotto.contains(null)).isInstanceOf(NullPointerException.class);
     }
 
     @Test
