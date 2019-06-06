@@ -22,12 +22,12 @@ class Statistics {
         }
     }
 
-    void add(Rank matchingResult) {
-        countsOfRanks.get(matchingResult).countUp();
+    void add(Rank rank) {
+        countsOfRanks.get(rank).countUp();
     }
 
-    int countsOf(Rank matchingResult) {
-        CountOfRank countOfRank = countsOfRanks.get(matchingResult);
+    int countsOf(Rank rank) {
+        CountOfRank countOfRank = countsOfRanks.get(rank);
 
         return countOfRank.getCount();
     }
