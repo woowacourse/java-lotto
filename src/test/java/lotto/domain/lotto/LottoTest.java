@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 import lotto.exception.DuplicateLottoNumberException;
 import lotto.exception.InvalidCountOfLottoNumberException;
 import org.junit.jupiter.api.Test;

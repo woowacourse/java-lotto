@@ -1,7 +1,5 @@
 package lotto.domain.paymentinfo;
 
-import lotto.domain.paymentinfo.CountOfLotto;
-import lotto.domain.paymentinfo.Payment;
 import lotto.exception.NaturalNumberException;
 import lotto.exception.PaymentOutOfBoundsException;
 import org.junit.jupiter.api.BeforeEach;

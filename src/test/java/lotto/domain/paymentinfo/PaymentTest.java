@@ -1,6 +1,5 @@
 package lotto.domain.paymentinfo;
 
-import lotto.domain.paymentinfo.Payment;
 import lotto.exception.PaymentOutOfBoundsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

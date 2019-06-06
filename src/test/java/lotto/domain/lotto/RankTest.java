@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
