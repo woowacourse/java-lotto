@@ -2,7 +2,7 @@ package domain;
 
 import java.util.*;
 
-class LottoFactory {
+public class LottoFactory {
     private static final List<LottoNumber> lottoNumberPool = new ArrayList<>();
 
     static {
@@ -11,10 +11,7 @@ class LottoFactory {
         }
     }
 
-    private LottoFactory() {
-    }
-
-    static List<Lotto> issueLottoWorthOf(PurchaseAmount purchaseAmount) {
+    public static List<Lotto> issueLottoWorthOf(PurchaseAmount purchaseAmount) {
         int numberOfLottoToIssue = purchaseAmount.getPurchaseAmount() / Lotto.PRICE;
         List<Lotto> issuedLottos = new ArrayList<>();
 
@@ -29,3 +26,4 @@ class LottoFactory {
         return new TreeSet<>(lottoNumberPool.subList(0, 6));
     }
 }
+

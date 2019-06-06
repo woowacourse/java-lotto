@@ -3,8 +3,8 @@ package domain;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-class Lotto {
-    public static final int PRICE = 1000;
+public class Lotto {
+    static final int PRICE = 1000;
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private Set<LottoNumber> lottoNumbers;
@@ -31,5 +31,10 @@ class Lotto {
 
     private boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }
