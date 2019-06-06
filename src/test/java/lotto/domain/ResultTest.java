@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class ResultTest {
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 7, 8, 9)));
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 7, 8, 9, 10)));
 
-        lottoTickets = new LottoTickets(lottoRepository);
+        lottoTickets = lottoRepository.createLottoTickets();
         Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
         winningLotto = new WinningLotto(lotto, LottoNumber.getNumber(7));
     }
@@ -50,6 +51,12 @@ public class ResultTest {
     }
 
     @Test
+    void 생성자_확인_당첨결과_정보가_비어있는_경우() {
+        assertThatThrownBy(() -> new Result(Collections.emptyMap()))
+                .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
     void Rank에_따른_당첨_개수_확인() {
         Result result = lottoTickets.match(winningLotto);
         assertThat(result.get(Rank.FIRST)).isEqualTo(1);
@@ -67,6 +74,13 @@ public class ResultTest {
         Result result = lottoTickets.match(winningLotto);
 
         assertThat(result.calculateEarningsRate(new Payment("5000"))).isEqualTo(406_301);
+    }
+
+    @Test
+    void 수익률_계산_오류확인_지불금액이_null인_경우() {
+        Result result = lottoTickets.match(winningLotto);
+
+        assertThatThrownBy(() -> result.calculateEarningsRate(null)).isInstanceOf(NullPointerException.class);
     }
 
     @Test

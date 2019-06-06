@@ -26,7 +26,7 @@ public class ConsoleUILottoApplication {
             lottoRepository.register(new RandomLottoGeneratingStrategy());
         }
 
-        LottoTickets lottoTickets = new LottoTickets(lottoRepository);
+        LottoTickets lottoTickets = lottoRepository.createLottoTickets();
         OutputView.printLotto(countOfLotto, lottoTickets);
 
         WinningLotto winningLotto = inputWinningLotto();

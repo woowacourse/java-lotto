@@ -7,6 +7,7 @@ import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,7 +18,10 @@ public class LottoTicketsTest {
         LottoRepository lottoRepository = new LottoRepository();
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        assertThat(lottoRepository.getLottos()).isEqualTo(new LottoTickets(lottoRepository).getLottoTickets());
+        assertThat(lottoRepository.createLottoTickets())
+                .isEqualTo(new LottoTickets(
+                        Arrays.asList(LottoGenerator.create(
+                                new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))))));
     }
 
     @Test
@@ -26,10 +30,15 @@ public class LottoTicketsTest {
     }
 
     @Test
+    void 생성자_확인_비어있는_로또들이_들어왔을_경우() {
+        assertThatThrownBy(() -> new LottoTickets(Collections.emptyList())).isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
     void 로또번호와_당첨번호_비교할_때_오류_확인_당첨번호가_null인_경우() {
         LottoRepository lottoRepository = new LottoRepository();
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoTickets lottoTickets = new LottoTickets(lottoRepository);
+        LottoTickets lottoTickets = lottoRepository.createLottoTickets();
 
         assertThatThrownBy(() -> lottoTickets.match(null))
                 .isInstanceOf(NullPointerException.class);
@@ -43,7 +52,7 @@ public class LottoTicketsTest {
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 8)));
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 7, 8, 9)));
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 7, 8, 9, 10)));
-        LottoTickets lottoTickets = new LottoTickets(lottoRepository);
+        LottoTickets lottoTickets = lottoRepository.createLottoTickets();
 
         Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.getNumber(7));

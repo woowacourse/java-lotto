@@ -8,11 +8,11 @@ import java.util.*;
 public class LottoTickets {
     private final List<Lotto> lottoTickets;
 
-    public LottoTickets(LottoRepository lottoRepository) {
-        if (Objects.isNull(lottoRepository)) {
+    public LottoTickets(List<Lotto> lottos) {
+        if (Objects.isNull(lottos) || lottos.isEmpty()) {
             throw new NullPointerException();
         }
-        this.lottoTickets = lottoRepository.getLottos();
+        this.lottoTickets = lottos;
     }
 
     public Result match(WinningLotto winningLotto) {
@@ -46,5 +46,18 @@ public class LottoTickets {
 
     public List<Lotto> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTickets that = (LottoTickets) o;
+        return Objects.equals(lottoTickets, that.lottoTickets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoTickets);
     }
 }
