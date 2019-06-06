@@ -8,12 +8,10 @@ import lotto.domain.generator.LottoNumberGenerator;
 import java.util.List;
 
 public class LottoRandomGenerator implements LottoNumberGenerator {
-    private static final NumberRandomShuffle numberRandomShuffle = new NumberRandomShuffle();
-
     @Override
     public List<LottoNumber> generate() {
         List<LottoNumber> lottoNumbers = LottoContainer.createLottoNumbers();
-        List<LottoNumber> shuffledNumbers = numberRandomShuffle.shuffle(lottoNumbers);
+        List<LottoNumber> shuffledNumbers = NumberRandomShuffle.shuffle(lottoNumbers);
         return shuffledNumbers.subList(LOTTO_FROM_INDEX, LOTTO_TO_INDEX);
     }
 }
