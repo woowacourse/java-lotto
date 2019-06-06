@@ -44,4 +44,8 @@ public class WinPrize {
         }
         return totalPrize;
     }
+
+    public void put(final Rank rank, final int count) {
+        ranks.put(rank, count);
+    }
 }
