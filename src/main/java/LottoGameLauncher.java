@@ -1,6 +1,4 @@
-import domain.Lotto;
-import domain.LottoFactory;
-import domain.PurchaseAmount;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
@@ -11,6 +9,11 @@ public class LottoGameLauncher {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         List<Lotto> autoIssuedLottos = LottoFactory.issueLottoWorthOf(purchaseAmount);
         OutputView.showIssuedLottos(autoIssuedLottos);
+
+        Lotto winningLotto = getWinningLotto();
+        Statistics statistics = LottoGame.startLottery(autoIssuedLottos, winningLotto);
+
+        OutputView.showAnalysisOf(statistics);
     }
 
     private static PurchaseAmount getPurchaseAmount() {

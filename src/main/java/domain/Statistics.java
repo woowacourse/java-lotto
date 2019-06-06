@@ -2,11 +2,15 @@ package domain;
 
 import java.util.EnumMap;
 
-class Statistics {
+public class Statistics {
+    private static final int INITIAL_PURCHASED_AMOUNT = 0;
+
     private EnumMap<Rank, CountOfRank> countsOfRanks;
+    private int purchasedAmount;
 
     private Statistics(EnumMap<Rank, CountOfRank> countsOfRanks) {
         this.countsOfRanks = countsOfRanks;
+        purchasedAmount = INITIAL_PURCHASED_AMOUNT;
     }
 
     static Statistics of(Rank[] values) {
@@ -24,15 +28,16 @@ class Statistics {
 
     void add(Rank rank) {
         countsOfRanks.get(rank).countUp();
+        purchasedAmount += Lotto.PRICE;
     }
 
-    int countsOf(Rank rank) {
+    public int countsOf(Rank rank) {
         CountOfRank countOfRank = countsOfRanks.get(rank);
 
         return countOfRank.getCount();
     }
 
-    double calculateEarningRatesOf(PurchaseAmount purchaseAmount) {
+    public double calculateEarningRates() {
         int winningMoneyOfRank;
         int totalWinningMoney = 0;
 
@@ -40,6 +45,6 @@ class Statistics {
             winningMoneyOfRank = rank.getWinningMoney();
             totalWinningMoney += countsOf(rank) * winningMoneyOfRank;
         }
-        return totalWinningMoney / (double) purchaseAmount.getPurchaseAmount();
+        return totalWinningMoney / (double) purchasedAmount;
     }
 }

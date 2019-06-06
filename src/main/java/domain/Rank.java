@@ -31,4 +31,13 @@ public enum Rank {
     public int getWinningMoney() {
         return winningMoney;
     }
+
+    public String getRankExplanation() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(Integer.toString(numberOfMatching));
+        sb.append("개 일치 ");
+        sb.append("(" + Integer.toString(winningMoney) + "원)");
+        return sb.toString();
+    }
 }

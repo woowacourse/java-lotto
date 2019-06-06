@@ -29,9 +29,7 @@ public class StatisticsTest {
 
     @Test
     void 총_수익률을_제대로_계산하는지_테스트() {
-        PurchaseAmount purchaseAmount = PurchaseAmount.of(1000);
-
         statistics.add(Rank.FIFTH);
-        assertThat(statistics.calculateEarningRatesOf(purchaseAmount)).isEqualTo(5, offset(0.00099));
+        assertThat(statistics.calculateEarningRates()).isEqualTo(5, offset(0.00099));
     }
 }
