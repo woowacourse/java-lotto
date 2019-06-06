@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -26,45 +28,50 @@ public class ResultTest {
 
         lottoTickets = new LottoTickets(lottoRepository);
         Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
-
         winningLotto = new WinningLotto(lotto, LottoNumber.getNumber(7));
     }
 
     @Test
-    void 생성자_확인_당첨번호_로또가_null인_경우() {
-        assertThatThrownBy(() -> new Result(null, lottoTickets))
-                .isInstanceOf(NullPointerException.class);
+    void 생성자_확인() {
+        Map<Rank, Integer> lottoScore = new HashMap<>();
+        lottoScore.put(Rank.FIRST, 1);
+        lottoScore.put(Rank.SECOND, 1);
+        lottoScore.put(Rank.THIRD, 1);
+        lottoScore.put(Rank.FIFTH, 1);
+        lottoScore.put(Rank.MISS, 1);
+
+        assertThat(lottoTickets.match(winningLotto)).isEqualTo(new Result(lottoScore));
     }
 
     @Test
-    void 생성자_확인_로또_티켓이_null인_경우() {
-        assertThatThrownBy(() -> new Result(winningLotto, null))
+    void 생성자_확인_당첨결과_정보가_null인_경우() {
+        assertThatThrownBy(() -> new Result(null))
                 .isInstanceOf(NullPointerException.class);
     }
 
     @Test
     void Rank에_따른_당첨_개수_확인() {
-        Result result = new Result(winningLotto, lottoTickets);
+        Result result = lottoTickets.match(winningLotto);
         assertThat(result.get(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
     void 해당_Rank가_당첨되지_않은_경우() {
-        Result result = new Result(winningLotto, lottoTickets);
+        Result result = lottoTickets.match(winningLotto);
 
         assertThat(result.get(Rank.FOURTH)).isEqualTo(0);
     }
 
     @Test
     void 수익률_계산() {
-        Result result = new Result(winningLotto, lottoTickets);
+        Result result = lottoTickets.match(winningLotto);
 
         assertThat(result.calculateEarningsRate(new Payment("5000"))).isEqualTo(406_301);
     }
 
     @Test
     void 당첨로또_결과를_잘_생성하는지_확인() {
-        Result result = new Result(winningLotto, lottoTickets);
+        Result result = lottoTickets.match(winningLotto);
 
         assertThat(result.get(Rank.FIRST)).isEqualTo(1);
         assertThat(result.get(Rank.SECOND)).isEqualTo(1);

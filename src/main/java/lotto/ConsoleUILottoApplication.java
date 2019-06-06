@@ -30,8 +30,7 @@ public class ConsoleUILottoApplication {
         OutputView.printLotto(countOfLotto, lottoTickets);
 
         WinningLotto winningLotto = inputWinningLotto();
-
-        Result result = new Result(winningLotto, lottoTickets);
+        Result result = lottoTickets.match(winningLotto);
         OutputView.printResult(result, payment);
     }
 
@@ -71,7 +70,6 @@ public class ConsoleUILottoApplication {
             String inputLotto = InputView.inputWinningLottoNumber();
             List<Integer> list = splitInputLottoNumbers(inputLotto);
             Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(list));
-
             String inputBonusBall = InputView.inputBonusBall();
             return new WinningLotto(lotto, LottoNumber.getNumber(Integer.parseInt(inputBonusBall)));
         } catch (Exception e) {

@@ -1,42 +1,16 @@
 package lotto.domain;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoTickets;
-import lotto.domain.lotto.WinningLotto;
-
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class Result {
     private final Map<Rank, Integer> lottoScore;
 
-    public Result(WinningLotto winningLotto, LottoTickets lottoTickets) {
-        if (Objects.isNull(winningLotto) || Objects.isNull(lottoTickets)) {
+    public Result(Map<Rank, Integer> lottoScore) {
+        if (Objects.isNull(lottoScore) || lottoScore.isEmpty()) {
             throw new NullPointerException();
         }
-        lottoScore = new HashMap<>();
-        produceMatchResult(winningLotto, lottoTickets);
-    }
-
-    private void produceMatchResult(WinningLotto winningLotto, LottoTickets lottoTickets) {
-        List<Lotto> tickets = lottoTickets.getLottoTickets();
-
-        for (Lotto ticket : tickets) {
-            calculateCountOfMatch(winningLotto, ticket);
-        }
-    }
-
-    private void calculateCountOfMatch(WinningLotto winningLotto, Lotto ticket) {
-        Rank rank = winningLotto.match(ticket);
-
-        if (lottoScore.containsKey(rank)) {
-            lottoScore.put(rank, lottoScore.get(rank) + 1);
-            return;
-        }
-
-        lottoScore.put(rank, 1);
+        this.lottoScore = lottoScore;
     }
 
     public int get(Rank rank) {
