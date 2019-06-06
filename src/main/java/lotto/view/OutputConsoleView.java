@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.WinPrize;
 
@@ -27,19 +26,8 @@ public class OutputConsoleView implements OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Rank rank : Rank.values()) {
-            printWinPrice(rank, winPrize);
+            System.out.println(ResultFormat.format(rank, winPrize));
         }
-    }
-
-    private void printWinPrice(final Rank rank, final WinPrize winPrize) {
-        if (rank == Rank.MISS)
-            return;
-
-        System.out.println(String.format("%d개 일치%s(%d원)- %d개",
-                rank.getCountOfMatch(),
-                rank.equals(Rank.SECOND) ? ", 보너스 볼 일치" : " ",
-                rank.getPrize(),
-                winPrize.getWinCount(rank)));
     }
 
     @Override
