@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.Money;
 import lotto.domain.RankType;
 import lotto.domain.WinStatistics;
 
@@ -25,6 +24,10 @@ public class OutputView {
 
     public static void printProfitRate(WinStatistics winStatistics, int money) {
         System.out.printf("총 수익률은 %.2f%%입니다.\n", winStatistics.calculateProfitRate(money));
+    }
+
+    public static void printNewLine() {
+        System.out.println();
     }
 
     private static void printEachRank(Map<RankType, Integer> countOfResult) {

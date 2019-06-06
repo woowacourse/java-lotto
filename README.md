@@ -1,29 +1,6 @@
 # java-lotto
 로또 미션 진행을 위한 저장소
 
-
-## TODO
-#### view
-#### domain
-* Money
-* LottoTicketFactory
-    * 수동 로또인지 자동 로또인지 구분해서 객체 생성하기
-    * **자동 로또의 경우**
-* LottoTicket: 로또 한 장
-    * **수동 로또의 경우**
-* LottoTickets: 로또 리스트, 구매할 수동 로또 수
-* LottoNumber
-    * **수동 로또의 경우**
-    * **자동 로또의 경우**
-* LottoNumbersFactory
-* WinningLotto: 싱글톤 클래스
-* RankType: Enum
-* WinStatistics
-    * 당첨 시 집계하기
-    * 수익률 계산하기
-* 예외 클래스 생성하기
-
----
 ## Done
 #### view
 * 구입 금액 입력 받았을 때,
@@ -49,6 +26,7 @@
         * 2000 -> 7000
     * 수익률 계산하기
 * LottoTicketFactory
+    * 수동 로또인지 자동 로또인지 구분해서 객체 생성하기
     * **수동 로또의 경우**
         * String으로 로또 번호 6개가 입력되면 LottoNumber 리스트에 저장하기
             * "1,2,3,4,5,6" -> [1,2,3,4,5,6]
@@ -84,3 +62,6 @@
         * valueOf(5, true) -> RankType.SECOND
         * valueOf(6, false) -> RankType.FIRST
     * 일치하는 번호 수 리턴하기 
+* WinStatistics
+    * 당첨 시 집계하기
+    * 수익률 계산하기

@@ -5,8 +5,7 @@ import lotto.exception.IllegalNumberBoundException;
 import java.util.Objects;
 
 public class Money {
-    // TODO 이름 바꿔...
-    private static final int DIVIDING_STANDARD = 1000;
+    private static final int DIVISION_OFFSET = 1000;
 
     private final int money;
 
@@ -21,11 +20,11 @@ public class Money {
     }
 
     public int getTicketCount() {
-        return money / DIVIDING_STANDARD;
+        return money / DIVISION_OFFSET;
     }
 
     private void validateMinimumMoneyInput(int money) {
-        if (money < DIVIDING_STANDARD) {
+        if (money < DIVISION_OFFSET) {
             throw new IllegalNumberBoundException("최소 로또 구매 금액은 1000원입니다.");
         }
     }

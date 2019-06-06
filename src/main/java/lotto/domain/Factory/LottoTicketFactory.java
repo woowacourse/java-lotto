@@ -26,9 +26,9 @@ public class LottoTicketFactory {
     }
 
     private class CustomLottoFactory implements LottoTicketFactoryStrategy {
-        private String input;
+        private final String input;
 
-        public CustomLottoFactory(String input) {
+        public CustomLottoFactory(final String input) {
             this.input = input;
         }
 

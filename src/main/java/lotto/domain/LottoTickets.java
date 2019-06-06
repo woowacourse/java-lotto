@@ -18,8 +18,8 @@ public class LottoTickets {
         return lottoTickets.size() < amountOfCustom;
     }
 
-    public void putCustomLottoTicket(final String inputCustomNumber) {
-        lottoTickets.add(new LottoTicketFactory().create(inputCustomNumber));
+    public void putLottoTicket(final String inputOfLottoNumber) {
+        lottoTickets.add(new LottoTicketFactory().create(inputOfLottoNumber));
     }
 
     public List<LottoTicket> getLottoTickets() {
