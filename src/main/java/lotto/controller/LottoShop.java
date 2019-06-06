@@ -3,22 +3,27 @@ package lotto.controller;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
 import lotto.domain.lottomanager.BonusBall;
+import lotto.domain.lottomanager.LottoCreator;
+import lotto.domain.lottomanager.LottoTicket;
 import lotto.domain.lottomanager.shufflerule.RandomShuffle;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;
-import lotto.utils.NullCheckUtil;
 import lotto.view.inputview.InputView;
 import lotto.view.inputview.PriceParser;
-import lotto.view.inputview.WinningNumParser;
+import lotto.view.inputview.LottoNumParser;
 import lotto.view.outputview.OutputView;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoShop {
     public void operate() {
         Integer purchasePrice = getPurchasePrice();
         PurchaseAmount purchaseAmount = getPurchaseAmount(purchasePrice);
-        OutputView.printAmount(purchaseAmount);
+        List<LottoTicket> manualLottoTickets = getManualTickets();
+        OutputView.printAmount(purchaseAmount, manualLottoTickets.size());
 
-        UserTickets userTickets = getUserTickets(purchaseAmount);
+        UserTickets userTickets = getUserTickets(manualLottoTickets, purchaseAmount);
         OutputView.printUserLottoTickets(userTickets);
 
         WinningLotto winningLotto = getWinningLotto();
@@ -36,12 +41,20 @@ public class LottoShop {
         return PurchaseAmount.createLottoAmount(purchasePrice);
     }
 
-    private UserTickets getUserTickets(PurchaseAmount purchaseAmount) {
-        return UserTickets.createUserTickets(purchaseAmount, new RandomShuffle());
+    private List<LottoTicket> getManualTickets() {
+        return InputView.inputManualLottoTickets(InputView.inputManualLottoAmount())
+                .stream()
+                .map(LottoNumParser::getLottoNum)
+                .map(LottoCreator::createManualTickets)
+                .collect(Collectors.toList());
+    }
+
+    private UserTickets getUserTickets(List<LottoTicket> manualTickets, PurchaseAmount purchaseAmount) {
+        return UserTickets.createUserTickets(manualTickets, purchaseAmount, new RandomShuffle());
     }
 
     private WinningLotto getWinningLotto() {
-        return WinningLotto.createWinningLotto(WinningNumParser.getWinningNum(InputView.inputWinningNum()));
+        return WinningLotto.createWinningLotto(LottoNumParser.getLottoNum(InputView.inputWinningNum()));
     }
 
     private BonusBall getBonusBall(WinningLotto winningLotto) {

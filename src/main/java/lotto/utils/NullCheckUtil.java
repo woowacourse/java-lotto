@@ -55,8 +55,8 @@ public class NullCheckUtil {
         }
     }
 
-    public static void checkNullWinningNumbers(List<Integer> winningNumbers) {
-        for (Integer number : winningNumbers) {
+    public static void checkNullIntegerNumbers(List<Integer> numbers) {
+        for (Integer number : numbers) {
             checkNullInteger(number);
         }
     }

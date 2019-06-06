@@ -23,13 +23,13 @@ class LottoCreatorTest {
     @Test
     void null_check() {
         assertThrows(NullPointerException.class, () -> {
-            LottoCreator.getLottoTicket(null);
+            LottoCreator.createManualTickets(null);
         });
     }
 
     @Test
     void 로또_티켓_생성() {
         Assertions.assertThat(LottoTicket.createLottoTicket(actual))
-                .isEqualTo(LottoCreator.getLottoTicket(new FixShuffle()));
+                .isEqualTo(LottoCreator.createAutoTickets(new FixShuffle()));
     }
 }

@@ -2,11 +2,10 @@ package lotto.domain;
 
 import lotto.domain.lottomanager.LottoNumber;
 import lotto.domain.lottomanager.LottoTicket;
+import lotto.domain.lottomanager.LottoCreator;
 import lotto.utils.NullCheckUtil;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
     private LottoTicket winningLotto;
@@ -17,14 +16,8 @@ public class WinningLotto {
     }
 
     public static WinningLotto createWinningLotto(List<Integer> winningNumbers) {
-        NullCheckUtil.checkNullWinningNumbers(winningNumbers);
-        Collections.sort(winningNumbers);
-
-        List<LottoNumber> convertedLottoNumbers = winningNumbers.stream()
-                .map(LottoNumber::createLottoNumber)
-                .collect(Collectors.toList());
-
-        return new WinningLotto(LottoTicket.createLottoTicket(convertedLottoNumbers));
+        NullCheckUtil.checkNullIntegerNumbers(winningNumbers);
+        return new WinningLotto(LottoCreator.createManualTickets(winningNumbers));
     }
 
     public Integer getMatchedWinningNumbersCount(LottoTicket lottoTicket) {

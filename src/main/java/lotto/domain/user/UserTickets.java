@@ -11,35 +11,34 @@ import lotto.utils.NullCheckUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserTickets {
     private List<LottoTicket> userLottoTickets;
 
-    private UserTickets(PurchaseAmount purchaseAmount, Shuffle shuffle) {
-        List<LottoTicket> lottoTickets = getCreatedLottoTickets(purchaseAmount, shuffle);
-        NullCheckUtil.checkNullLottoTickets(lottoTickets);
-        this.userLottoTickets = lottoTickets;
+    private UserTickets(List<LottoTicket> manualTickets, PurchaseAmount purchaseAmount, Shuffle shuffle) {
+        List<LottoTicket> userLottoTickets = new ArrayList<>(manualTickets);
+        this.userLottoTickets = getCreatedLottoTickets(userLottoTickets, purchaseAmount, shuffle);
     }
 
-    private List<LottoTicket> getCreatedLottoTickets(PurchaseAmount purchaseAmount, Shuffle shuffle) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-
-        while (!isSufficientTickets(purchaseAmount, lottoTickets)) {
-            lottoTickets.add(LottoCreator.getLottoTicket(shuffle));
+    private List<LottoTicket> getCreatedLottoTickets(List<LottoTicket> userLottoTickets, PurchaseAmount purchaseAmount, Shuffle shuffle) {
+        while (!isSufficientTickets(purchaseAmount, userLottoTickets)) {
+            userLottoTickets.add(LottoCreator.createAutoTickets(shuffle));
         }
 
-        return lottoTickets;
+        return userLottoTickets;
     }
 
-    private boolean isSufficientTickets(PurchaseAmount purchaseAmount, List<LottoTicket> lottoTickets) {
-        return purchaseAmount.isEqualsAmount(lottoTickets.size());
+    private boolean isSufficientTickets(PurchaseAmount purchaseAmount, List<LottoTicket> userLottoTickets) {
+        return purchaseAmount.isEqualsAmount(userLottoTickets.size());
     }
 
-    public static UserTickets createUserTickets(PurchaseAmount purchaseAmount, Shuffle shuffle){
+    public static UserTickets createUserTickets(List<LottoTicket> manualTickets, PurchaseAmount purchaseAmount, Shuffle shuffle) {
+        NullCheckUtil.checkNullLottoTickets(manualTickets);
         NullCheckUtil.checkNullPurchaseAmount(purchaseAmount);
         NullCheckUtil.checkNullShuffle(shuffle);
 
-        return new UserTickets(purchaseAmount, shuffle);
+        return new UserTickets(manualTickets, purchaseAmount, shuffle);
     }
 
     public List<LottoTicket> getUserLottoTickets() {
@@ -54,12 +53,9 @@ public class UserTickets {
     }
 
     private List<Rank> getFilledRanks(WinningLotto winningLotto, BonusBall bonusBall) {
-        List<Rank> matchedRanks = new ArrayList<>();
-
-        for (LottoTicket userTicket : userLottoTickets){
-            matchedRanks.add(getRank(winningLotto, bonusBall, userTicket));
-        }
-        return matchedRanks;
+        return userLottoTickets.stream()
+                .map(userTicket -> getRank(winningLotto, bonusBall, userTicket))
+                .collect(Collectors.toList());
     }
 
     private Rank getRank(WinningLotto winningLotto, BonusBall bonusBall, LottoTicket userTicket) {

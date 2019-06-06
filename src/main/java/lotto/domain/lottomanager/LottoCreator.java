@@ -18,7 +18,7 @@ public class LottoCreator {
                 .collect(Collectors.toList());
     }
 
-    public static LottoTicket getLottoTicket(Shuffle shuffle) {
+    public static LottoTicket createAutoTickets(Shuffle shuffle) {
         NullCheckUtil.checkNullShuffle(shuffle);
 
         shuffle.shuffleLottoNumbers(possibleNumbers);
@@ -31,5 +31,16 @@ public class LottoCreator {
 
     private static List<LottoNumber> getPossibleNumbers() {
         return possibleNumbers.subList(LottoConstant.SUBLIST_FIRST_INDEX, LottoConstant.LOTTO_NUM_SIZE);
+    }
+
+    public static LottoTicket createManualTickets(List<Integer> lottoNumbers) {
+        NullCheckUtil.checkNullIntegerNumbers(lottoNumbers);
+        Collections.sort(lottoNumbers);
+
+        List<LottoNumber> convertedLottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::createLottoNumber)
+                .collect(Collectors.toList());
+
+        return LottoTicket.createLottoTicket(convertedLottoNumbers);
     }
 }

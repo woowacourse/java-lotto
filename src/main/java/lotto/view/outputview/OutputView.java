@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class OutputView {
 
     private static final String NEXT_LINE = "\n";
-    private static final String PURCHASE_AMOUNT_MESSAGE = "개를 구매했습니다.";
     private static final String STATISTICS_MESSAGE_FORMAT_START = "%d개 일치";
     private static final String STATISTICS_MESSAGE_FORMAT_MIDDLE = " (%d원)";
     private static final String STATISTICS_MESSAGE_FORMAT_END = " - %d개\n";
@@ -24,15 +23,18 @@ public class OutputView {
     private static final String RESULT_STATISTICS_MESSAGE = "당첨 통계\n";
     private static final int LOSE = 0;
     private static final String EMPTY = "";
+    private static final String MANUAL_LOTTO_MESSAGE = "수동으로 %d장,";
+    private static final String AUTO_LOTTO_MESSAGE = " 자동으로 %d장을 구매했습니다.";
 
     private static StringBuilder stringBuilder;
 
-    public static void printAmount(PurchaseAmount purchaseAmount) {
+    public static void printAmount(PurchaseAmount purchaseAmount, Integer manualLottoTickets) {
         NullCheckUtil.checkNullPurchaseAmount(purchaseAmount);
-        
+        NullCheckUtil.checkNullInteger(manualLottoTickets);
+
         stringBuilder = new StringBuilder();
-        stringBuilder.append(purchaseAmount.getLottoAmount())
-                .append(PURCHASE_AMOUNT_MESSAGE);
+        stringBuilder.append(String.format(MANUAL_LOTTO_MESSAGE, manualLottoTickets))
+                .append(String.format(AUTO_LOTTO_MESSAGE, purchaseAmount.getAutoLottoAmount() - manualLottoTickets));
 
         System.out.println(stringBuilder.toString());
     }
@@ -58,7 +60,6 @@ public class OutputView {
 
         writeRankStatistics(winningResult);
         writeTotalYield(winningResult, purchasePrice);
-
         System.out.println(stringBuilder.toString());
     }
 

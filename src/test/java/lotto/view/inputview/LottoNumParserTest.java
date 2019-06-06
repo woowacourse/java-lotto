@@ -8,32 +8,32 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class WinningNumbersParserTest {
+class LottoNumParserTest {
     List<Integer> actual = Arrays.asList(1,2,3,4,5,6);
 
     @Test
     void 입력이_없을_경우() {
         assertThrows(IllegalArgumentException.class, () -> {
-            WinningNumParser.getWinningNum("");
+            LottoNumParser.getLottoNum("");
         });
     }
 
     @Test
     void null_입력() {
         assertThrows(NullPointerException.class, () -> {
-            WinningNumParser.getWinningNum(null);
+            LottoNumParser.getLottoNum(null);
         });
     }
 
     @Test
     void slicing() {
         String input = "1,2,3,4,5,6";
-        assertThat(actual).isEqualTo(WinningNumParser.getWinningNum(input));
+        assertThat(actual).isEqualTo(LottoNumParser.getLottoNum(input));
     }
 
     @Test
     void 공백() {
         String input = "1, 2, 3 , 4, 5 ,  6 ";
-        assertThat(actual).isEqualTo(WinningNumParser.getWinningNum(input));
+        assertThat(actual).isEqualTo(LottoNumParser.getLottoNum(input));
     }
 }
