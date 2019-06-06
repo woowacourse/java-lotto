@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class Money {
-    private static final int PRICE_PER_LOTTO = 1000;
+    static final int PRICE_PER_LOTTO = 1000;
 
     private final long money;
 

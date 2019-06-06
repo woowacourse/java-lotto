@@ -10,7 +10,7 @@ public interface OutputView {
 
     void printResult(final WinPrize winPrize);
 
-    void printRateOfProfit(final Money money, final WinPrize winPrize);
+    void printRateOfProfit(final WinPrize winPrize);
 
     void printLottos(List<Lotto> userLottos, int countOfManual, int countOfPurchase);
 }

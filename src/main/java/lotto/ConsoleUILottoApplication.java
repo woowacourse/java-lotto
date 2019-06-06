@@ -24,7 +24,7 @@ public class ConsoleUILottoApplication {
         WinningLotto winningLotto = LottoService.generateWinningLotto(inputView.inputWinningLotto(), inputView.inputBonusNo());
         WinPrize winPrize = LottoService.generateWinPrize(userLottos, winningLotto);
         outputView.printResult(winPrize);
-        outputView.printRateOfProfit(money, winPrize);
+        outputView.printRateOfProfit(winPrize);
     }
 
     private static List<String> inputManualLottos(final CountOfManual countOfManual) {
