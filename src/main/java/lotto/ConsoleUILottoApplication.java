@@ -79,7 +79,7 @@ public class ConsoleUILottoApplication {
             Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(list));
 
             String inputBonusBall = InputView.inputBonusBall();
-            return new WinningLotto(lotto, LottoNumber.getNumber(Integer.parseInt(inputBonusBall)));
+            return new WinningLotto(lotto, Integer.parseInt(inputBonusBall));
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return inputWinningLotto();

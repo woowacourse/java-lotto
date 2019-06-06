@@ -15,24 +15,18 @@ class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto(Arrays.asList(
-                LottoNumber.getNumber(1),
-                LottoNumber.getNumber(2),
-                LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4),
-                LottoNumber.getNumber(5),
-                LottoNumber.getNumber(6)));
+        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     void 생성자_확인() {
-        assertThat(new WinningLotto(lotto, LottoNumber.getNumber(7)))
+        assertThat(new WinningLotto(lotto, 7))
                 .isExactlyInstanceOf((WinningLotto.class));
     }
 
     @Test
     void 생성자_확인_보너스_숫자와_이미_입력된_로또숫자가_중복되는지_확인() {
-        assertThatThrownBy(() -> new WinningLotto(lotto, LottoNumber.getNumber(1)))
+        assertThatThrownBy(() -> new WinningLotto(lotto, 1))
                 .isExactlyInstanceOf(DuplicateLottoNumberException.class);
     }
 
@@ -44,7 +38,7 @@ class WinningLottoTest {
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 9)));
 
         LottoTickets lottoTickets = new LottoTickets(lottoRepository);
-        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.getNumber(7));
+        WinningLotto winningLotto = new WinningLotto(lotto, 7);
         Result result = new Result(winningLotto, lottoTickets);
 
         assertThat(result.get(Rank.FIRST)).isEqualTo(1);

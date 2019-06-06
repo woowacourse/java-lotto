@@ -6,17 +6,20 @@ import lotto.exception.InvalidCountOfLottoNumberException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers) {
         checkLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 
-    private void checkLottoNumbers(List<LottoNumber> lottoNumbers) {
+    private void checkLottoNumbers(List<Integer> lottoNumbers) {
         if (Objects.isNull(lottoNumbers) || lottoNumbers.isEmpty()) {
             throw new NullPointerException();
         }

@@ -15,13 +15,7 @@ class LottoRepositoryTest {
         LottoRepository lottoRepository = new LottoRepository();
         lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                LottoNumber.getNumber(1),
-                LottoNumber.getNumber(2),
-                LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4),
-                LottoNumber.getNumber(5),
-                LottoNumber.getNumber(6));
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         assertThat(lottoRepository.getLottos()).isEqualTo(Arrays.asList(new Lotto(lottoNumbers)));
     }

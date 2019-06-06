@@ -14,48 +14,23 @@ public class LottoTest {
 
     @Test
     void 생성자_확인_길이가_6개_인지() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                LottoNumber.getNumber(1),
-                LottoNumber.getNumber(2),
-                LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4),
-                LottoNumber.getNumber(5));
-
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5);
         assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(InvalidCountOfLottoNumberException.class);
     }
 
     @Test
     void 생성자_확인_중복되는_숫자가_있는_경우() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                LottoNumber.getNumber(1),
-                LottoNumber.getNumber(2),
-                LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4),
-                LottoNumber.getNumber(5),
-                LottoNumber.getNumber(5));
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
 
         assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(DuplicateLottoNumberException.class);
     }
 
     @Test
     void 당첨번호와_일치하는_로또번호의_개수() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                LottoNumber.getNumber(1),
-                LottoNumber.getNumber(2),
-                LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4),
-                LottoNumber.getNumber(5),
-                LottoNumber.getNumber(6));
-
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumbers);
 
-        List<LottoNumber> lottoNumbers1 = Arrays.asList(
-                LottoNumber.getNumber(1),
-                LottoNumber.getNumber(2),
-                LottoNumber.getNumber(3),
-                LottoNumber.getNumber(7),
-                LottoNumber.getNumber(8),
-                LottoNumber.getNumber(9));
+        List<Integer> lottoNumbers1 = Arrays.asList(1, 2, 3, 7, 8, 9);
 
         assertThat(lotto.countMatchedLottoNumber(new Lotto(lottoNumbers1))).isEqualTo(3);
     }

@@ -2,7 +2,9 @@ package lotto.domain.lotto;
 
 import lotto.exception.LottoNumberOutOfBoundsException;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -35,8 +37,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return creators.get(number);
     }
 
-    public static List<LottoNumber> getLottoNumbers() {
-        return new ArrayList<>(creators.values());
+    public static List<Integer> getLottoNumbers() {
+        return IntStream.rangeClosed(MIN_BOUNDARY, MAX_BOUNDARY)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     @Override
