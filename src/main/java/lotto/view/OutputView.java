@@ -26,10 +26,6 @@ public class OutputView {
         System.out.printf("총 수익률은 %.2f%%입니다.\n", winStatistics.calculateProfitRate(money));
     }
 
-    public static void printNewLine() {
-        System.out.println();
-    }
-
     private static void printEachRank(Map<RankType, Integer> countOfResult) {
         for (RankType rankType : RankType.values()) {
             int matchingCount = rankType.getMatchingCount();

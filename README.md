@@ -13,7 +13,7 @@
     * isEmpty 확인
     * 빈칸 없애기
 #### domain
-* Money
+* **Money**
     * 구입 금액 저장하기
     * 구입 금액이 해당 조건에 부합하는지 확인하기
         * **[예외]** 입력값이 1000미만일 경우
@@ -25,7 +25,7 @@
         * 5000 -> 5000
         * 2000 -> 7000
     * 수익률 계산하기
-* LottoTicketFactory
+* **LottoTicketFactory**
     * 수동 로또인지 자동 로또인지 구분해서 객체 생성하기
     * **수동 로또의 경우**
         * String으로 로또 번호 6개가 입력되면 LottoNumber 리스트에 저장하기
@@ -34,12 +34,12 @@
             * **[예외]** 입력된 값에 자연수 외에 다른 값이 있는지 확인
             * **[예외]** 중복된 숫자가 있는지 확인
                 * "1,2,3,4,5,5" -> error!
-* LottoTicket: 로또 한 장
+* **LottoTicket**: 로또 한 장
     * 당첨 번호와 일치하는 수 카운트해서 리턴하기
     * 보너스 볼과 일치하는 수가 있는지 확인해서 boolean 리턴하기
-* LottoTickets: 로또 리스트, 구매할 수동 로또 수
+* **LottoTickets**: 로또 리스트, 구매할 수동 로또 수
     * 입력한 수동 로또 개수만큼 번호가 입력됐는지 boolean
-* LottoNumber
+* **LottoNumber**
     * 요청한 로또 번호에 대한 객체 리턴
         * LottoNumber.getNumber(3) -> new LottoNumber(3)
         * **[예외]** 요청한 로또 번호가 1~45가 아닐 경우
@@ -47,7 +47,7 @@
     * **자동 로또의 경우**
         * subList해서 6개 전달하는 함수 만들기
             * getRandomNumbers() -> return List<LottoNumber>
-* WinningLotto
+* **WinningLotto**
     * String으로 로또 번호 6개가 입력되면 LottoNumber 리스트에 저장하기
         * "1,2,3,4,5,6" -> [1,2,3,4,5,6]
         * "1,2,3,4,5,5" -> error!
@@ -57,11 +57,11 @@
     * 파라미터로 전달받은 번호가 당첨번호와 일치하는지 boolean으로 리턴
         * 일반 번호 확인
         * 보너스 볼 확인
-* RankType: Enum
+* **RankType**: Enum
     * 일치하는 번호 수에 따라 다르게 객체 리턴하기
         * valueOf(5, true) -> RankType.SECOND
         * valueOf(6, false) -> RankType.FIRST
     * 일치하는 번호 수 리턴하기 
-* WinStatistics
+* **WinStatistics**
     * 당첨 시 집계하기
     * 수익률 계산하기
