@@ -24,7 +24,7 @@ public class InputView {
 
     public static PurchaseAmount getPurchaseAmount() {
         try {
-            return PurchaseAmount.is(purchaseAmount());
+            return PurchaseAmount.of(purchaseAmount());
         } catch (PurchaseAmountException e) {
             ErrorView.purchaseAmount();
             return getPurchaseAmount();

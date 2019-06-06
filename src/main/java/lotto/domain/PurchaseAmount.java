@@ -18,7 +18,7 @@ public class PurchaseAmount {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public static PurchaseAmount is(int purchaseAmount) {
+    public static PurchaseAmount of(int purchaseAmount) {
         return new PurchaseAmount(purchaseAmount);
     }
 
@@ -30,7 +30,7 @@ public class PurchaseAmount {
 
     private void validUnit(int purchaseAmount) {
         if (!isProperUnit(purchaseAmount)) {
-            throw new PurchaseUnitException();
+            throw new   PurchaseUnitException();
         }
     }
 

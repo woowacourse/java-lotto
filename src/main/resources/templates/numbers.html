@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 구매하기</title>
+</head>
+<body>
+<h1>수동 구매 수량 입력</h1>
+    <form action="/numbers">
+        총 구매 수량 : {{ count }}
+        <br>
+        <br>
+        수동 구매 수량 : {{ manual }}
+        <br>
+        <br>
+        <input type="text" name="lottonumbers"/>
+        <input type="submit" value="수동 번호 입력"/>
+    </form>
+</body>
+</html>

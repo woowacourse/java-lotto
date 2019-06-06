@@ -14,13 +14,13 @@ class ManualCountTest {
     @Test
     void factory_method_throw_exception() {
         assertThrows(ManualCountBoundException.class, () -> {
-            ManualCount.is(5, new Count(PurchaseAmount.is(1000)));
+            ManualCount.is(5, new Count(PurchaseAmount.of(1000)));
         });
     }
 
     @Test
     void getAutoCount() {
-        Count count = new Count(PurchaseAmount.is(7000));
+        Count count = new Count(PurchaseAmount.of(7000));
         assertThat(ManualCount.is(5, count).getAutoCount(count)).isEqualTo(new Count(2));
     }
 }

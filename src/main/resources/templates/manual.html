@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 구매하기</title>
+</head>
+<body>
+    <h1>수동 구매 수량 입력</h1>
+    <form action="/manual" method="post">
+        총 구매 수량 : {{ count }}
+        <br>
+        <br>
+        수동 구매 수량 : <input type="text" name="manual"/>
+        <br>
+        <br>
+        <input type="submit" value="수동 구매 수량 입력"/>
+    </form>
+</body>
+</html>

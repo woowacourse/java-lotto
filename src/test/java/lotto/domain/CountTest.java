@@ -12,7 +12,7 @@ class CountTest {
     @Test
     void game_counts_constructor_argument_must_be_divisible_by_1000() {
         assertThrows(PurchaseAmountException.class, () -> {
-            new Count(PurchaseAmount.is(1002));
+            new Count(PurchaseAmount.of(1002));
         });
     }
 }
