@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import lotto.domain.paymentinfo.Payment;
 
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -17,7 +18,7 @@ public class Result {
     private Map<Rank, Long> calculateLottoResult(WinningLotto winningLotto, LottoTickets lottoTickets) {
         return lottoTickets.stream()
                 .map(ticket -> Rank.valueOf(winningLotto.countMatchedLottoNumber(ticket), winningLotto.contains(ticket)))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), () -> new EnumMap<>(Rank.class), Collectors.counting()));
     }
 
     public long get(Rank rank) {
