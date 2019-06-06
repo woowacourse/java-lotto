@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 
-public class MatchingStatisticsTest {
-    private MatchingStatistics statistics;
+public class StatisticsTest {
+    private Statistics statistics;
 
     @BeforeEach
     void setUp() {
-        statistics = MatchingStatistics.of(Rank.values());
+        statistics = Statistics.of(Rank.values());
     }
 
     @Test

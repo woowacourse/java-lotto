@@ -2,18 +2,18 @@ package domain;
 
 import java.util.EnumMap;
 
-class MatchingStatistics {
+class Statistics {
     private EnumMap<Rank, CountOfRank> countsOfRanks;
 
-    private MatchingStatistics(EnumMap<Rank, CountOfRank> countsOfRanks) {
+    private Statistics(EnumMap<Rank, CountOfRank> countsOfRanks) {
         this.countsOfRanks = countsOfRanks;
     }
 
-    static MatchingStatistics of(Rank[] values) {
+    static Statistics of(Rank[] values) {
         EnumMap<Rank, CountOfRank> countsOfRanks = new EnumMap<>(Rank.class);
 
         initialize(countsOfRanks, values);
-        return new MatchingStatistics(countsOfRanks);
+        return new Statistics(countsOfRanks);
     }
 
     private static void initialize(EnumMap<Rank, CountOfRank> countsOfRanks, Rank[] values) {
@@ -38,7 +38,7 @@ class MatchingStatistics {
 
         for (Rank rank : countsOfRanks.keySet()) {
             winningMoneyOfRank = rank.getWinningMoney();
-            totalWinningMoney += countsOfRanks.get(rank).getCount() * winningMoneyOfRank;
+            totalWinningMoney += countsOf(rank) * winningMoneyOfRank;
         }
         return totalWinningMoney / (double) purchasement.getPurchaseAmount();
     }
