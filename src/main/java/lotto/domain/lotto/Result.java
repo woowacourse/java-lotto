@@ -17,8 +17,10 @@ public class Result {
 
     private Map<Rank, Long> calculateLottoResult(WinningLotto winningLotto, LottoTickets lottoTickets) {
         return lottoTickets.stream()
-                .map(ticket -> Rank.valueOf(winningLotto.countMatchedLottoNumber(ticket), winningLotto.contains(ticket)))
-                .collect(Collectors.groupingBy(Function.identity(), () -> new EnumMap<>(Rank.class), Collectors.counting()));
+                .map(winningLotto::match)
+                .collect(Collectors.groupingBy(Function.identity(),
+                        () -> new EnumMap<>(Rank.class),
+                        Collectors.counting()));
     }
 
     public long get(Rank rank) {

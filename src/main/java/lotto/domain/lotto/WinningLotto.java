@@ -14,6 +14,10 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
+    public Rank match(Lotto lotto) {
+        return Rank.valueOf(countMatchedLottoNumber(lotto), contains(lotto));
+    }
+
     public int countMatchedLottoNumber(Lotto lotto) {
         return lotto.countMatchedLottoNumber(winningLotto);
     }
