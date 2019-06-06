@@ -32,7 +32,7 @@ class Statistics {
         return countOfRank.getCount();
     }
 
-    double calculateEarningRatesOf(Purchasement purchasement) {
+    double calculateEarningRatesOf(PurchaseAmount purchaseAmount) {
         int winningMoneyOfRank;
         int totalWinningMoney = 0;
 
@@ -40,6 +40,6 @@ class Statistics {
             winningMoneyOfRank = rank.getWinningMoney();
             totalWinningMoney += countsOf(rank) * winningMoneyOfRank;
         }
-        return totalWinningMoney / (double) purchasement.getPurchaseAmount();
+        return totalWinningMoney / (double) purchaseAmount.getPurchaseAmount();
     }
 }
