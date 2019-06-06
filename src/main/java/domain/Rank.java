@@ -12,8 +12,8 @@ public enum Rank {
     private int numberOfMatching;
     private int winningMoney;
 
-    Rank (int numberOfMathcin, int winningMoney) {
-        this.numberOfMatching = numberOfMathcin;
+    Rank (int numberOfMatching, int winningMoney) {
+        this.numberOfMatching = numberOfMatching;
         this.winningMoney = winningMoney;
     }
 
