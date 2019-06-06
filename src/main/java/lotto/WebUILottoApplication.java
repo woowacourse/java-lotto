@@ -26,10 +26,10 @@ public class WebUILottoApplication {
 
         externalStaticFileLocation("src/main/resources/templates");
 
-        get("/index", (req, res) -> {
+        get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("round", getRound() + 1);
-            return render(model, "index.html");
+            return render(model, "start.html");
         });
 
         post("/buyLotto", (req, res) -> {
