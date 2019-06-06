@@ -1,4 +1,4 @@
-package com.woowacourse.lotto.domain.dto;
+package com.woowacourse.lotto.persistence.dto;
 
 import java.time.LocalDateTime;
 

@@ -1,6 +1,6 @@
-package com.woowacourse.lotto.domain.dao;
+package com.woowacourse.lotto.persistence.dao;
 
-import com.woowacourse.lotto.domain.dto.LottoDto;
+import com.woowacourse.lotto.persistence.dto.LottoDto;
 
 import java.sql.*;
 import java.util.Optional;

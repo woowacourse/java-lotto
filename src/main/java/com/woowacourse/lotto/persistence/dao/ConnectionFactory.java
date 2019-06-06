@@ -1,4 +1,4 @@
-package com.woowacourse.lotto.domain.dao;
+package com.woowacourse.lotto.persistence.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,8 +6,8 @@ import java.sql.DriverManager;
 public class ConnectionFactory {
     private static final String DB_HOST = "localhost";
     private static final String DB_NAME = "wtc_lotto_db";
-    private static final String DB_USER = "wtc_admin";
-    private static final String DB_PASSWORD = "p@ssW0rd";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "root";
 
     public static Connection getConnection() {
         Connection conn = null;

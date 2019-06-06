@@ -1,9 +1,10 @@
-package com.woowacourse.lotto.domain.dto;
+package com.woowacourse.lotto.persistence.dto;
 
 import java.time.LocalDateTime;
 
 public class AggregationDto {
     private long id;
+    private int lottoRound;
     private int cntFirst;
     private int cntSecond;
     private int cntThird;
@@ -19,6 +20,14 @@ public class AggregationDto {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getLottoRound() {
+        return lottoRound;
+    }
+
+    public void setLottoRound(int lottoRound) {
+        this.lottoRound = lottoRound;
     }
 
     public int getCntFirst() {

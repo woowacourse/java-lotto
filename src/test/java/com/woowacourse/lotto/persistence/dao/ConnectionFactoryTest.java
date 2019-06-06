@@ -1,4 +1,4 @@
-package com.woowacourse.lotto.domain.dao;
+package com.woowacourse.lotto.persistence.dao;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
-package com.woowacourse.lotto.domain.dao;
+package com.woowacourse.lotto.persistence.dao;
 
 import com.woowacourse.lotto.domain.Lotto;
-import com.woowacourse.lotto.domain.dto.LottoDto;
+import com.woowacourse.lotto.persistence.dto.LottoDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
