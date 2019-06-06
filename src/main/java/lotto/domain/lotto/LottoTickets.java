@@ -15,7 +15,7 @@ public class LottoTickets {
         this.lottoTickets = lottoRepository.getLottos();
     }
 
-    public Stream<Lotto> stream() {
+    Stream<Lotto> stream() {
         return lottoTickets.stream();
     }
 

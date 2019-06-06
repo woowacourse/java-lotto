@@ -2,7 +2,6 @@ package lotto.domain.lotto;
 
 import lotto.exception.LottoNumberOutOfBoundsException;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -10,8 +9,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MIN_BOUNDARY = 1;
-    private static final int MAX_BOUNDARY = 45;
+    public static final int MIN_BOUNDARY = 1;
+    public static final int MAX_BOUNDARY = 45;
 
     private static final Map<Integer, LottoNumber> creators;
 
@@ -35,12 +34,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new NullPointerException();
         }
         return creators.get(number);
-    }
-
-    public static List<Integer> getLottoNumbers() {
-        return IntStream.rangeClosed(MIN_BOUNDARY, MAX_BOUNDARY)
-                .boxed()
-                .collect(Collectors.toList());
     }
 
     @Override
