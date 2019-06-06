@@ -38,6 +38,7 @@ public class ResultTest {
         lottoScore.put(Rank.FIRST, 1);
         lottoScore.put(Rank.SECOND, 1);
         lottoScore.put(Rank.THIRD, 1);
+        lottoScore.put(Rank.FOURTH, 0);
         lottoScore.put(Rank.FIFTH, 1);
         lottoScore.put(Rank.MISS, 1);
 

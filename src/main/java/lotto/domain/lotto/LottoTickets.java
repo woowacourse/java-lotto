@@ -6,6 +6,8 @@ import lotto.domain.Result;
 import java.util.*;
 
 public class LottoTickets {
+    private static final int MIN_MATCH_SCORE = 0;
+
     private final List<Lotto> lottoTickets;
 
     public LottoTickets(List<Lotto> lottos) {
@@ -26,22 +28,23 @@ public class LottoTickets {
     private Map<Rank, Integer> createMatchScore(WinningLotto winningLotto) {
         Map<Rank, Integer> lottoScore = new HashMap<>();
 
-        for (Lotto ticket : lottoTickets) {
-            calculateCountOfMatch(winningLotto, lottoScore, ticket);
-        }
+        initializeMatchScore(lottoScore);
+        calculateMatchScore(winningLotto, lottoScore);
 
         return lottoScore;
     }
 
-    private void calculateCountOfMatch(WinningLotto winningLotto, Map<Rank, Integer> lottoScore, Lotto ticket) {
-        Rank rank = winningLotto.match(ticket);
-
-        if (lottoScore.containsKey(rank)) {
-            lottoScore.put(rank, lottoScore.get(rank) + 1);
-            return;
+    private void initializeMatchScore(Map<Rank, Integer> lottoScore) {
+        for (Rank value : Rank.values()) {
+            lottoScore.put(value, MIN_MATCH_SCORE);
         }
+    }
 
-        lottoScore.put(rank, 1);
+    private void calculateMatchScore(WinningLotto winningLotto, Map<Rank, Integer> lottoScore) {
+        for (Lotto ticket : lottoTickets) {
+            Rank rank = winningLotto.match(ticket);
+            lottoScore.put(rank, lottoScore.get(rank) + 1);
+        }
     }
 
     public List<Lotto> getLottoTickets() {
