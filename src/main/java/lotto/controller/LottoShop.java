@@ -1,16 +1,15 @@
 package lotto.controller;
 
-import lotto.domain.WinningLotto;
-import lotto.domain.WinningResult;
-import lotto.domain.lottomanager.BonusBall;
+import lotto.domain.winning.WinningLotto;
+import lotto.domain.result.WinningResult;
+import lotto.domain.winning.BonusBall;
 import lotto.domain.lottomanager.LottoCreator;
 import lotto.domain.lottomanager.LottoTicket;
 import lotto.domain.lottomanager.shufflerule.RandomShuffle;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;
 import lotto.view.inputview.InputView;
-import lotto.view.inputview.PriceParser;
-import lotto.view.inputview.LottoNumParser;
+import lotto.view.inputview.InputParser;
 import lotto.view.outputview.OutputView;
 
 import java.util.List;
@@ -34,7 +33,7 @@ public class LottoShop {
     }
 
     private Integer getPurchasePrice() {
-        return PriceParser.getPurchasePrice(InputView.inputPrice());
+        return InputParser.getPurchasePrice(InputView.inputPrice());
     }
 
     private PurchaseAmount getPurchaseAmount(Integer purchasePrice) {
@@ -44,7 +43,7 @@ public class LottoShop {
     private List<LottoTicket> getManualTickets() {
         return InputView.inputManualLottoTickets(InputView.inputManualLottoAmount())
                 .stream()
-                .map(LottoNumParser::getLottoNum)
+                .map(InputParser::getLottoNum)
                 .map(LottoCreator::createManualTickets)
                 .collect(Collectors.toList());
     }
@@ -54,7 +53,7 @@ public class LottoShop {
     }
 
     private WinningLotto getWinningLotto() {
-        return WinningLotto.createWinningLotto(LottoNumParser.getLottoNum(InputView.inputWinningNum()));
+        return WinningLotto.createWinningLotto(InputParser.getLottoNum(InputView.inputWinningNum()));
     }
 
     private BonusBall getBonusBall(WinningLotto winningLotto) {

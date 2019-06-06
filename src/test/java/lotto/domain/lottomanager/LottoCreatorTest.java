@@ -20,6 +20,7 @@ class LottoCreatorTest {
                 .mapToObj(LottoNumber::createLottoNumber)
                 .collect(Collectors.toList());
     }
+
     @Test
     void null_check() {
         assertThrows(NullPointerException.class, () -> {

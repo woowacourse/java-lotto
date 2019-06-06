@@ -1,9 +1,9 @@
 package lotto.utils;
 
-import lotto.domain.Rank;
-import lotto.domain.WinningLotto;
-import lotto.domain.WinningResult;
-import lotto.domain.lottomanager.BonusBall;
+import lotto.domain.result.Rank;
+import lotto.domain.winning.WinningLotto;
+import lotto.domain.result.WinningResult;
+import lotto.domain.winning.BonusBall;
 import lotto.domain.lottomanager.LottoNumber;
 import lotto.domain.lottomanager.LottoTicket;
 import lotto.domain.lottomanager.shufflerule.Shuffle;

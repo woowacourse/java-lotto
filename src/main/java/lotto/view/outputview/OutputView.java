@@ -1,8 +1,8 @@
 package lotto.view.outputview;
 
 import com.google.common.collect.Lists;
-import lotto.domain.Rank;
-import lotto.domain.WinningResult;
+import lotto.domain.result.Rank;
+import lotto.domain.result.WinningResult;
 import lotto.domain.lottomanager.LottoTicket;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;

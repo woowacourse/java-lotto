@@ -1,6 +1,6 @@
-package lotto.domain.lottomanager;
+package lotto.domain.winning;
 
-import lotto.domain.WinningLotto;
+import lotto.domain.lottomanager.LottoNumber;
 import lotto.utils.NullCheckUtil;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class BonusBall {
         return new BonusBall(LottoNumber.createLottoNumber(bonusBall), winningLotto);
     }
 
-    Boolean isContainNumbers(List<LottoNumber> lottoNumbers) {
+    public Boolean isContainNumbers(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.contains(bonusBall);
     }
 }

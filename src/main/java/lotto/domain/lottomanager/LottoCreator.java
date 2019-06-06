@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoCreator {
+    private static final int SUBLIST_FIRST_INDEX = 0;
+
     private static List<LottoNumber> possibleNumbers;
 
     static {
@@ -30,7 +32,7 @@ public class LottoCreator {
     }
 
     private static List<LottoNumber> getPossibleNumbers() {
-        return possibleNumbers.subList(LottoConstant.SUBLIST_FIRST_INDEX, LottoConstant.LOTTO_NUM_SIZE);
+        return possibleNumbers.subList(SUBLIST_FIRST_INDEX, LottoConstant.LOTTO_NUM_SIZE);
     }
 
     public static LottoTicket createManualTickets(List<Integer> lottoNumbers) {

@@ -1,6 +1,5 @@
-package lotto.domain.lottomanager;
+package lotto.domain.winning;
 
-import lotto.domain.WinningLottoTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

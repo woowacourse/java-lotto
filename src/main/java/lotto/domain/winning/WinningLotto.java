@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.winning;
 
 import lotto.domain.lottomanager.LottoNumber;
 import lotto.domain.lottomanager.LottoTicket;
@@ -25,7 +25,7 @@ public class WinningLotto {
         return winningLotto.getMatchedNumbersCount(lottoTicket);
     }
 
-    public boolean isContainedWinningNumbers(LottoNumber bonusBall) {
+    boolean isContainedWinningNumbers(LottoNumber bonusBall) {
         NullCheckUtil.checkNullLottoNumber(bonusBall);
         return winningLotto.isContainedNumbers(bonusBall);
     }

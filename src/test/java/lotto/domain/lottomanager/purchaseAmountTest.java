@@ -11,7 +11,7 @@ class purchaseAmountTest {
     @Test
     void null_check() {
         assertThrows(NullPointerException.class, () -> {
-           PurchaseAmount.createLottoAmount(null);
+            PurchaseAmount.createLottoAmount(null);
         });
     }
 

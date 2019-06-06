@@ -1,7 +1,8 @@
-package lotto.domain;
+package lotto.domain.result;
 
-import lotto.domain.lottomanager.BonusBall;
 import lotto.domain.user.UserTickets;
+import lotto.domain.winning.BonusBall;
+import lotto.domain.winning.WinningLotto;
 import lotto.utils.NullCheckUtil;
 
 import java.util.ArrayList;
@@ -25,28 +26,16 @@ public class WinningResult {
     }
 
     private Map<Rank, Integer> makeMatchedRankCount(UserTickets tickets, WinningLotto winningLotto, BonusBall bonus) {
-        Map<Rank, Integer> temp = Arrays.stream(Rank.values())
+        Map<Rank, Integer> matchedRankCount = Arrays.stream(Rank.values())
                 .collect(Collectors.toMap(Function.identity(), value -> INITIAL_VALUE_ZERO));
-        List<Rank> ranks = new ArrayList<>(tickets.getMatchedRanks(winningLotto, bonus));
-        for(Rank rank : ranks){
-            temp.put(rank, temp.get(rank) + 1);
-        }
 
-        return temp;
+        List<Rank> matchedRanks = new ArrayList<>(tickets.getMatchedRanks(winningLotto, bonus));
+        matchedRanks.forEach(rank -> matchedRankCount.put(rank, plusMatchedCount(matchedRankCount, rank)));
+
+        return matchedRankCount;
     }
 
-    private Map<Rank, Integer> initializeMatchedRankCount() {
-        return Arrays.stream(Rank.values())
-                .collect(Collectors.toMap(Function.identity(), value -> INITIAL_VALUE_ZERO));
-    }
-
-    private Map<Rank, Integer> fillMatchedRankCount(UserTickets tickets, WinningLotto winningLotto, BonusBall bonus) {
-        return tickets.getMatchedRanks(winningLotto, bonus)
-                .stream()
-                .collect(Collectors.toMap(Function.identity(), this::plusMatchedCount));
-    }
-
-    private Integer plusMatchedCount(Rank rank) {
+    private Integer plusMatchedCount(Map<Rank, Integer> matchedRankCount, Rank rank) {
         return matchedRankCount.get(rank) + PLUS_AMOUNT;
     }
 

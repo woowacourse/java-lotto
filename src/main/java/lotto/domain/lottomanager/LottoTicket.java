@@ -1,5 +1,6 @@
 package lotto.domain.lottomanager;
 
+import lotto.domain.winning.BonusBall;
 import lotto.utils.NullCheckUtil;
 
 import java.util.Collections;

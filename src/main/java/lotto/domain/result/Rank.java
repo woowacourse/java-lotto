@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.result;
 
 import java.util.Arrays;
 
@@ -26,7 +26,7 @@ public enum Rank {
             return LOSE;
         }
 
-        if(SECOND.isMatchCount(countOfMatch) && matchBonus){
+        if (SECOND.isMatchCount(countOfMatch) && matchBonus) {
             return SECOND;
         }
 
