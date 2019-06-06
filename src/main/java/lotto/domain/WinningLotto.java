@@ -12,8 +12,7 @@ public class WinningLotto {
     private final LottoNumber bonusBall;
 
     public WinningLotto(String input, int userInputBonusNum) {
-        LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(input);
-        this.winningLotto = lottoManualGenerator.generate();
+        this.winningLotto = LottoManualGenerator.generate(input);
         LottoNumber bonusNumber = LottoNumber.from(userInputBonusNum);
         checkDuplicate(bonusNumber);
         this.bonusBall = bonusNumber;
