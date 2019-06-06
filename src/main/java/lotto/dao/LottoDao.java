@@ -1,8 +1,6 @@
 package lotto.dao;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNo;
-import lotto.domain.generator.LottoNosManualGenerator;
 import lotto.utils.ConverterToLottoNos;
 
 import java.sql.Connection;

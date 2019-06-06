@@ -2,7 +2,6 @@ package lotto.dao;
 
 import lotto.domain.Rank;
 import lotto.domain.WinPrize;
-import lotto.domain.WinningLotto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

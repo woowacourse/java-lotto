@@ -1,6 +1,9 @@
 package lotto.dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RoundDao {
 
@@ -26,16 +29,16 @@ public class RoundDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        try{
+        try {
             String sql = "SELECT * FROM round ORDER BY id DESC LIMIT 1";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getInt("id");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             DBUtils.close(conn, ps, rs);
         }
         return -1;

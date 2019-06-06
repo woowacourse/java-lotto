@@ -19,7 +19,6 @@ class WinningLottoDaoTest {
         assertThat(1).isEqualTo(new WinningLottoDao().add(winningLotto, 0));
     }
 
-
     @Test
     void findByRound() {
         assertThat(new WinningLottoDao().findByRound(0)).isNotNull();
