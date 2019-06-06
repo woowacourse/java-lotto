@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.DuplicatedInputException;
+import lotto.exception.IllegalAmountOfNumberException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

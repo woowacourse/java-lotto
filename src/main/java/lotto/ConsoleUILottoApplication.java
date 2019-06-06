@@ -4,13 +4,16 @@ import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinStatistics;
 import lotto.domain.WinningLotto;
+import lotto.exception.DuplicatedInputException;
+import lotto.exception.IllegalAmountOfNumberException;
+import lotto.exception.UnexpectedInputRangeException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         Money money = getMoney();
-        int amountOfCustoms = getAmountOfCustoms();
+        int amountOfCustoms = getAmountOfCustoms(money.getTicketCount());
         LottoTickets lottoTickets = getLottoTickets(money, amountOfCustoms);
         printAllLottoTickets(money, amountOfCustoms, lottoTickets);
         WinningLotto winningLotto = getWinningLotto();
@@ -31,14 +34,25 @@ public class ConsoleUILottoApplication {
         InputView.printWinningLottoNumbersMessage();
         String winningLottoNumbers = InputView.inputLottoNumbers();
         int bonusBall = InputView.inputBonusBall();
-        return WinningLotto.of(winningLottoNumbers, bonusBall);
+
+        try {
+            return WinningLotto.of(winningLottoNumbers, bonusBall);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getWinningLotto();
+        }
     }
 
     private static LottoTickets getLottoTickets(Money money, int amountOfCustoms) {
         LottoTickets lottoTickets = new LottoTickets(amountOfCustoms);
 
         InputView.printCustomLottoNumbersMessage();
-        purchaseCustomLottoTickets(lottoTickets);
+        try {
+            purchaseCustomLottoTickets(lottoTickets);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            purchaseCustomLottoTickets(lottoTickets);
+        }
         purchaseAutoLottoTickets(money, amountOfCustoms, lottoTickets);
 
         return lottoTickets;
@@ -57,12 +71,17 @@ public class ConsoleUILottoApplication {
         }
     }
 
-    private static int getAmountOfCustoms() {
-        return InputView.inputAmountOfCustom();
+    private static int getAmountOfCustoms(int maxCount) {
+        return InputView.inputAmountOfCustom(maxCount);
     }
 
     private static Money getMoney() {
-        int price = InputView.inputMoney();
-        return new Money(price);
+        try {
+            int price = InputView.inputMoney();
+            return new Money(price);
+        } catch (UnexpectedInputRangeException e) {
+            System.out.println(e.getMessage());
+            return getMoney();
+        }
     }
 }

@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.exception.IllegalAmountOfNumberException;
+import lotto.exception.UnexpectedInputRangeException;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -18,15 +21,19 @@ public class InputView {
         }
     }
 
-    public static int inputAmountOfCustom() {
+    public static int inputAmountOfCustom(int maxCount) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 
         try {
-            String input = SCANNER.nextLine();
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
+            int input = Integer.parseInt(SCANNER.nextLine());
+            validateAmountOfCustomsException(input, maxCount);
+            return input;
+        } catch (ArithmeticException e) {
             System.out.println(INPUT_FORMAT_EXCEPTION_MESSAGE);
-            return inputAmountOfCustom();
+            return inputAmountOfCustom(maxCount);
+        } catch (IllegalAmountOfNumberException e) {
+            System.out.println(INPUT_FORMAT_EXCEPTION_MESSAGE);
+            return inputAmountOfCustom(maxCount);
         }
     }
 
@@ -44,9 +51,11 @@ public class InputView {
 
             validateNullInputException(input);
             validateEmptyInputException(input);
+            validateAmountOfNumber(input);
 
             return input.replaceAll(" ", "");
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return inputLottoNumbers();
         }
     }
@@ -59,7 +68,19 @@ public class InputView {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             System.out.println(INPUT_FORMAT_EXCEPTION_MESSAGE);
-            return inputAmountOfCustom();
+            return inputBonusBall();
+        }
+    }
+
+    private static void validateAmountOfNumber(String input) {
+        if (input.split(",").length != 6) {
+            throw new IllegalAmountOfNumberException("로또 번호의 개수가 적합하지 않습니다.");
+        }
+    }
+
+    private static void validateAmountOfCustomsException(int input, int maxCount) {
+        if (input < 1 || input > maxCount) {
+            throw new UnexpectedInputRangeException(INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 

@@ -8,6 +8,8 @@
 * 수동 로또 입력값을 받았을 때,
     * 자연수인지 확인하기
     * 빈칸 없애기
+    * **[예외]** 로또 번호가 6개인지 확인 -> IllegalAmountOfNumberException
+    * **[예외]** 최대로 구입 가능한 개수보다 많이 입력됐을 경우 -> UnexpectedInputRangeException
 * 당첨 번호를 입력했을 때,
     * null인지 확인
     * isEmpty 확인
