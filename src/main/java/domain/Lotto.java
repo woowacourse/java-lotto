@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 class Lotto {
+    public static final int PRICE = 1000;
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private Set<LottoNumber> lottoNumbers;
