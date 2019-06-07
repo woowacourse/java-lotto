@@ -2,7 +2,7 @@ package lotto.domain.view;
 
 import lotto.domain.model.Lotto;
 import lotto.domain.model.Money;
-import lotto.domain.model.PurchasedLottos;
+import lotto.domain.model.PurchasedLotto;
 import lotto.domain.model.Rank;
 
 import java.util.Map;
@@ -11,9 +11,9 @@ public class OutputView {
 
     private static final String NEW_LINE = "\n";
 
-    public static void printPurchasedLottoResult(PurchasedLottos purchasedLottos, int manualLottoSize) {
-        System.out.println(NEW_LINE + "수동으로" + manualLottoSize + "장, 자동으로 " + (purchasedLottos.size() - manualLottoSize) + "개를 구매했습니다.");
-        for (Lotto lotto : purchasedLottos.getLottos()) {
+    public static void printPurchasedLottoResult(PurchasedLotto purchasedLotto, int manualLottoSize) {
+        System.out.println(NEW_LINE + "수동으로" + manualLottoSize + "장, 자동으로 " + (purchasedLotto.size() - manualLottoSize) + "개를 구매했습니다.");
+        for (Lotto lotto : purchasedLotto.getLotto()) {
             System.out.println(lotto.toString());
         }
     }
