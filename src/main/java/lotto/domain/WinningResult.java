@@ -3,6 +3,7 @@ package lotto.domain;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class WinningResult {
@@ -19,11 +20,15 @@ public class WinningResult {
 
     private int[] rankCounter = new int[6];
 
-    WinningResult() {
+    WinningResult(Iterator<Lotto> lottoIterator, WinningLotto winningLotto) {
         Arrays.fill(rankCounter, 0);
+
+        while (lottoIterator.hasNext()) {
+            count(lottoIterator.next(), winningLotto);
+        }
     }
 
-    void count(Lotto targetLotto, WinningLotto winningLotto) {
+    private void count(Lotto targetLotto, WinningLotto winningLotto) {
         rankCounter[countIndexMapper.get(Rank.valueOf(winningLotto.findCountOfMatchNo(targetLotto), winningLotto.checkBonusNoIn(targetLotto)))]++;
     }
 

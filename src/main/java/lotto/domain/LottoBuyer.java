@@ -29,12 +29,7 @@ public class LottoBuyer {
     }
 
     public WinningResult checkWinningLotto(WinningLotto winningLotto) {
-        WinningResult result = new WinningResult();
-        Iterator<Lotto> iter = lottos.iterator();
-        while (iter.hasNext()) {
-            result.count(iter.next(), winningLotto);
-        }
-        return result;
+        return new WinningResult(lottos.iterator(), winningLotto);
     }
 
     public int getCountOfLottoMatch(LottoType type) {
