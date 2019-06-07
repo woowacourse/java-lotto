@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import lotto.util.StringConverter;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int PRICE = 1000;
@@ -74,5 +75,13 @@ public class LottoTicket {
     @Override
     public String toString() {
         return lottoNumbers.toString();
+    }
+
+    @Override
+    public LottoTicket clone() {
+        return new LottoTicket(
+                lottoNumbers.stream()
+                .collect(Collectors.toList())
+        );
     }
 }

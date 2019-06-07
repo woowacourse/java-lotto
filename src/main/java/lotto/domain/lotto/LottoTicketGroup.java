@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicketGroup implements Iterable<LottoTicket> {
     private final List<LottoTicket> lottoTickets;
 
     public LottoTicketGroup(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = Collections.unmodifiableList(lottoTickets);
+        this.lottoTickets = Collections.unmodifiableList(
+                lottoTickets.stream()
+                .map(LottoTicket::clone)
+                .collect(Collectors.toList())
+        );
     }
 
     public int size() {
