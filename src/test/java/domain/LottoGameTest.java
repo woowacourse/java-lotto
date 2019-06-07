@@ -25,7 +25,7 @@ class LottoGameTest {
                 LottoNumberPool.pickLottoNumber(6)));
         LottoNumber bonusNumber = LottoNumberPool.pickLottoNumber(7);
 
-        List<IssuedLotto> issuedLottos = Arrays.asList(new IssuedLotto(lottoNumbers));
+        IssuedLottos issuedLottos = IssuedLottos.of(Arrays.asList(new IssuedLotto(lottoNumbers)));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         /* When: */

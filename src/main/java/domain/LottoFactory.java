@@ -6,14 +6,14 @@ import domain.lottonumber.LottoNumberPool;
 import java.util.*;
 
 public class LottoFactory {
-    public static List<IssuedLotto> autoIssueLottoWorthOf(PurchaseAmount purchaseAmount) {
+    public static IssuedLottos autoIssueLottoWorthOf(PurchaseAmount purchaseAmount) {
         int numberOfLottoToIssue = purchaseAmount.getPurchaseAmount() / IssuedLotto.PRICE;
-        List<IssuedLotto> issuedLottos = new ArrayList<>();
+        List<IssuedLotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < numberOfLottoToIssue; i++) {
-            issuedLottos.add(autoIssueLotto());
+            lottos.add(autoIssueLotto());
         }
-        return issuedLottos;
+        return IssuedLottos.of(lottos);
     }
 
     private static IssuedLotto autoIssueLotto() {

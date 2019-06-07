@@ -8,13 +8,19 @@ import java.util.List;
 public class LottoGameLauncher {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        List<IssuedLotto> autoIssuedLottos = LottoFactory.issueLottoWorthOf(purchaseAmount);
+
+        IssuedLottos manualIssuedLottos = getManualIssuedLottos();
+        IssuedLottos autoIssuedLottos = LottoFactory.autoIssueLottoWorthOf(purchaseAmount);
         OutputView.showIssuedLottos(autoIssuedLottos);
 
         WinningLotto winningLotto = getWinningLotto();
         Statistics statistics = LottoGame.startLottery(autoIssuedLottos, winningLotto);
 
         OutputView.showAnalysisOf(statistics);
+    }
+
+    private static IssuedLottos getManualIssuedLottos() {
+        return null;
     }
 
     private static PurchaseAmount getPurchaseAmount() {

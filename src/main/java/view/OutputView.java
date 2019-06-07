@@ -1,14 +1,13 @@
 package view;
 
 import domain.IssuedLotto;
+import domain.IssuedLottos;
 import domain.Rank;
 import domain.Statistics;
 
-import java.util.List;
-
 public class OutputView {
-    public static void showIssuedLottos(List<IssuedLotto> autoIssuedLottos) {
-        for (IssuedLotto issuedLotto : autoIssuedLottos) {
+    public static void showIssuedLottos(IssuedLottos autoIssuedLottos) {
+        for (IssuedLotto issuedLotto : autoIssuedLottos.getLottos()) {
             System.out.println(issuedLotto);
        }
     }
