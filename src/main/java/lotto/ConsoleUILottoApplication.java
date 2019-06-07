@@ -18,8 +18,9 @@ public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         PurchaseAmount lottoPurchaseAmount = createPurchaseAmount();
 
-        LottoQuantity autoLottoQuantity = lottoPurchaseAmount.maxLottoQuantity();
-        LottoQuantity manualLottoQuantity = createManualLottoQuantity(autoLottoQuantity);
+        LottoQuantity totalLottoQuantity = lottoPurchaseAmount.maxLottoQuantity();
+        LottoQuantity manualLottoQuantity = createManualLottoQuantity(totalLottoQuantity);
+        LottoQuantity autoLottoQuantity = totalLottoQuantity.subtract(manualLottoQuantity);
 
         LottoTicketGroup lottos = createLottos(manualLottoQuantity, autoLottoQuantity);
         OutputView.printLottoTickets(lottos, manualLottoQuantity, autoLottoQuantity);
@@ -40,15 +41,14 @@ public class ConsoleUILottoApplication {
         }
     }
 
-    private static LottoQuantity createManualLottoQuantity(LottoQuantity autoLottoQuantity) {
+    private static LottoQuantity createManualLottoQuantity(LottoQuantity totalLottoQuantity) {
         LottoQuantity manualLottoQuantity = LottoQuantity.create(InputView.inputManualLottoQuantity());
 
-        if (manualLottoQuantity.biggerThan(autoLottoQuantity)) {
+        if (manualLottoQuantity.biggerThan(totalLottoQuantity)) {
             OutputView.printErrorMessage("생성 가능 로또 개수보다 큽니다.");
-            return createManualLottoQuantity(autoLottoQuantity);
+            return createManualLottoQuantity(totalLottoQuantity);
         }
 
-        autoLottoQuantity.subtract(manualLottoQuantity);
         return manualLottoQuantity;
     }
 

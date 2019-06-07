@@ -39,8 +39,8 @@ public class LottoQuantity {
         return biggerThan(lottoQuantity.quantity);
     }
 
-    public void subtract(LottoQuantity lottoQuantity) {
-        quantity -= lottoQuantity.quantity;
+    public LottoQuantity subtract(LottoQuantity lottoQuantity) {
+        return new LottoQuantity(this.quantity - lottoQuantity.quantity);
     }
 
     public int getQuantity() {
