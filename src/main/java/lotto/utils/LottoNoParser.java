@@ -1,7 +1,7 @@
 package lotto.utils;
 
 import lotto.domain.InvalidFormatException;
-import lotto.domain.LottoNo;
+import lotto.domain.lotto.LottoNo;
 
 import java.util.Arrays;
 import java.util.List;

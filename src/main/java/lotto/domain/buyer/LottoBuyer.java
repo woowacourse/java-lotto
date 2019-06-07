@@ -1,4 +1,9 @@
-package lotto.domain;
+package lotto.domain.buyer;
+
+import lotto.domain.WinningResult;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoType;
+import lotto.domain.lotto.WinningLotto;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,6 +1,13 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.InputNegativeException;
+import lotto.domain.WinningResult;
+import lotto.domain.buyer.Budget;
+import lotto.domain.buyer.LottoBuyer;
+import lotto.domain.buyer.NoMoneyException;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNo;
+import lotto.domain.lotto.WinningLotto;
 import lotto.utils.LottoNoParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;

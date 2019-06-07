@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoBuyer;
-import lotto.domain.LottoType;
 import lotto.domain.WinningResult;
+import lotto.domain.buyer.LottoBuyer;
+import lotto.domain.lotto.LottoType;
 
 import java.math.BigInteger;
 import java.util.List;

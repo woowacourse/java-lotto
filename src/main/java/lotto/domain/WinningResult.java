@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.WinningLotto;
+
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,7 +23,7 @@ public class WinningResult {
 
     private int[] rankCounter = new int[6];
 
-    WinningResult(Iterator<Lotto> lottoIterator, WinningLotto winningLotto) {
+    public WinningResult(Iterator<Lotto> lottoIterator, WinningLotto winningLotto) {
         Arrays.fill(rankCounter, 0);
 
         while (lottoIterator.hasNext()) {

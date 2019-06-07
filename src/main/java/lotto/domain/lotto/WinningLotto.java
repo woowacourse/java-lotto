@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.List;
 
@@ -21,11 +21,11 @@ public class WinningLotto extends Lotto {
         }
     }
 
-    int findCountOfMatchNo(Lotto targetLotto) {
+    public int findCountOfMatchNo(Lotto targetLotto) {
         return targetLotto.findCountOfMatchNo(lottoNo);
     }
 
-    boolean checkBonusNoIn(Lotto targetLotto) {
+    public boolean checkBonusNoIn(Lotto targetLotto) {
         return targetLotto.matchNo(bonusNo);
     }
 }

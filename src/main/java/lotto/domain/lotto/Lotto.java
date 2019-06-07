@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import lotto.utils.LottoNoGenerator;
 
@@ -9,7 +9,7 @@ import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    static final int LOTTO_PRICE = 1_000;
+    public static final int LOTTO_PRICE = 1_000;
     public static final int COUNT_OF_NO = 6;
 
     List<LottoNo> lottoNo;
@@ -27,7 +27,7 @@ public class Lotto {
         return new Lotto(lottoNo, LottoType.MANUAL);
     }
 
-    static Lotto of() {
+    public static Lotto of() {
         return new Lotto(LottoNoGenerator.generate(), LottoType.AUTOMATIC);
     }
 
@@ -54,7 +54,7 @@ public class Lotto {
                 .size();
     }
 
-    boolean matchType(LottoType type) {
+    public boolean matchType(LottoType type) {
         return type.equals(lottoType);
     }
 

@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.buyer;
+
+import lotto.domain.InputNegativeException;
+import lotto.domain.lotto.Lotto;
 
 public class Budget {
     private int budget;
