@@ -23,16 +23,10 @@ public class LottoFactory {
         for (String manualNumber : manualLottoNumbers) {
             lottos.add(LottoFactory.createLottoManually(Arrays.asList(manualNumber.split(DELIMITER))));
         }
-        while (lottos.size() < getCountAutoLottos(manualLottoNumbers.size(), countOfPurchase)) {
+        while (lottos.size() < countOfPurchase) {
             lottos.add(LottoFactory.createLottoAutomatically());
         }
 
         return new Lottos(lottos);
-    }
-
-    private static int getCountAutoLottos(int countOfManualLottos, int countOfPurchase) {
-        return (countOfPurchase - countOfManualLottos) > 0
-                ? (countOfPurchase - countOfManualLottos)
-                : 0;
     }
 }
