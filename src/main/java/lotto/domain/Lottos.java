@@ -3,28 +3,10 @@ package lotto.domain;
 import java.util.*;
 
 public class Lottos {
-    private static final String DILIMETER = ",";
+    private List<Lotto> lottos;
 
-    private List<Lotto> lottos = new ArrayList<>();
-
-    public Lottos(List<String> manualNumbers, int countOfPurchase) {
-        createLottosManually(manualNumbers);
-        createLottosAutomatically(
-                (countOfPurchase - manualNumbers.size()) > 0
-                        ? (countOfPurchase - manualNumbers.size())
-                        : 0);
-    }
-
-    private void createLottosManually(List<String> manualNumbers) {
-        for (String manualNumber : manualNumbers) {
-            lottos.add(LottoFactory.createLottoManually(Arrays.asList(manualNumber.split(DILIMETER))));
-        }
-    }
-
-    private void createLottosAutomatically(int countAutoLottos) {
-        while (lottos.size() < countAutoLottos) {
-            lottos.add(LottoFactory.createLottoAutomatically());
-        }
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public WinningResult match(WinningLotto winningLotto) {

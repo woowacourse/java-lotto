@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class LottoFactory {
+    private static final String DELIMITER = ",";
+
     public static Lotto createLottoAutomatically() {
         return new Lotto(LottoNumber.getShuffledNumbers());
     }
@@ -15,5 +15,24 @@ public class LottoFactory {
             numbers.add(LottoNumber.get(Integer.parseInt(manualNumber)));
         }
         return new Lotto(numbers);
+    }
+
+    public static Lottos createLottos(List<String> manualLottoNumbers, int countOfPurchase) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (String manualNumber : manualLottoNumbers) {
+            lottos.add(LottoFactory.createLottoManually(Arrays.asList(manualNumber.split(DELIMITER))));
+        }
+        while (lottos.size() < getCountAutoLottos(manualLottoNumbers.size(), countOfPurchase)) {
+            lottos.add(LottoFactory.createLottoAutomatically());
+        }
+
+        return new Lottos(lottos);
+    }
+
+    private static int getCountAutoLottos(int countOfManualLottos, int countOfPurchase) {
+        return (countOfPurchase - countOfManualLottos) > 0
+                ? (countOfPurchase - countOfManualLottos)
+                : 0;
     }
 }
