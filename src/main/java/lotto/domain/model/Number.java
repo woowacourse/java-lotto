@@ -45,4 +45,9 @@ public class Number implements Comparable<Number> {
     public int compareTo(Number o) {
         return this.lottoNumber - o.lottoNumber;
     }
+
+    @Override
+    public String toString() {
+        return " " + lottoNumber + " ";
+    }
 }
