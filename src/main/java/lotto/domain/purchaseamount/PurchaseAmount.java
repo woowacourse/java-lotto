@@ -4,6 +4,8 @@ import lotto.domain.LottoQuantity;
 import lotto.domain.lotto.LottoTicket;
 
 public class PurchaseAmount {
+    private static final int MIN_MONEY = 0;
+
     private int money;
 
     private PurchaseAmount(int money) {
@@ -20,8 +22,8 @@ public class PurchaseAmount {
     }
 
     private void validatePurchaseAmount(int money) {
-        if (money < LottoTicket.PRICE) {
-            throw new PurchaseAmountException("로또 한 장은 " + LottoTicket.PRICE + "원 입니다.");
+        if (money < MIN_MONEY) {
+            throw new PurchaseAmountException("구입금액은 음수로 설정할 수 없습니다.");
         }
     }
 
