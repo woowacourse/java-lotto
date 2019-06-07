@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
@@ -18,7 +15,7 @@ public class Lottos {
 
     private void createLottosManually(List<String> manualNumbers) {
         for (String manualNumber : manualNumbers) {
-            lottos.add(LottoFactory.createLottoManually(manualNumber));
+            lottos.add(LottoFactory.createLottoManually(Arrays.asList(manualNumber.split(","))));
         }
     }
 

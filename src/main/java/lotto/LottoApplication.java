@@ -5,6 +5,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoApplication {
@@ -58,7 +59,8 @@ public class LottoApplication {
 
     private static WinningLotto setWinningLotto() {
         try {
-            Lotto winningLotto = LottoFactory.createLottoManually(InputView.inputWinningLotto());
+            List<String> winningLottoNumber = Arrays.asList(InputView.inputWinningLotto().split(","));
+            Lotto winningLotto = LottoFactory.createLottoManually(winningLottoNumber);
             return new WinningLotto(winningLotto, setBonusNumber(winningLotto));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

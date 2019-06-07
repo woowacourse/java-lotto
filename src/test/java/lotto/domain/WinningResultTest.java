@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,7 +29,7 @@ public class WinningResultTest {
     public void 당첨_금액_총합_테스트() {
         WinningLotto winningLotto =
                 new WinningLotto(
-                        LottoFactory.createLottoManually("1,2,3,4,5,6"),
+                        LottoFactory.createLottoManually(Arrays.asList("1","2","3","4","5","6")),
                         LottoNumber.get(7)
                 );
         Lottos lottos = new Lottos(manualLottoNumbers, purchaseAmount / LOTTO_PRICE);
@@ -40,7 +41,7 @@ public class WinningResultTest {
     public void 당첨_금액_수익률_테스트() {
         WinningLotto winningLotto =
                 new WinningLotto(
-                        LottoFactory.createLottoManually("1,2,3,7,39,17"),
+                        LottoFactory.createLottoManually(Arrays.asList("1","2","3","7","39","17")),
                         LottoNumber.get(30)
                 );
         Lottos lottos = new Lottos(manualLottoNumbers, purchaseAmount / LOTTO_PRICE);
