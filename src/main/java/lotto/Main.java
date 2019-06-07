@@ -16,8 +16,7 @@ public class Main {
         int round = new Money(InputView.inputMoney()).getRound();
         int manualRound = InputView.inputHandNumber();
         String[] number = InputView.inputHandleNumber(manualRound);
-        MyLotto myLotto = new MyLotto(getHandLottos(number));
-        myLotto.addLottos(getMyLotto(round));
+        MyLotto myLotto = MyLotto.create(number, round);
         OutputView.printMyLotto(myLotto, round);
 
         WinningLotto winningLotto = new WinningLotto(getWinningLotto(InputView.inputWinnerNumber()), InputView.inputBonusBall());
@@ -27,16 +26,6 @@ public class Main {
 
     private static double getReturnRate(List<Rank> ranks, int inputMoney) {
         return calculateResultRate(inputMoney, getSum(ranks));
-    }
-
-    private static List<Lotto> getMyLotto(int round) {
-        List<Lotto> myLotto = new ArrayList<>();
-
-        for (int i = 0; i < round; i++) {
-            myLotto.add(new Lotto(NumberGenerator.create().getNumbers()));
-        }
-
-        return myLotto;
     }
 
     private static Lotto getWinningLotto(String numbers) {
@@ -77,25 +66,5 @@ public class Main {
 
     private static double calculateResultRate(int inputMoney, double sum) {
         return (sum / (inputMoney * MONEY_UNIT)) * PERCENT;
-    }
-
-    private static List<Lotto> getHandLottos(String[] handleNumbers) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < handleNumbers.length; i++) {
-            String[] oneNumbers = handleNumbers[i].split(",");
-            lottos.add(new Lotto(addLottoNumbers(i, oneNumbers)));
-        }
-
-        return lottos;
-    }
-
-    private static List<Number> addLottoNumbers(int i, String[] oneNumbers) {
-        List<Number> numbers = new ArrayList<>();
-
-        for (String oneNumber : oneNumbers) {
-            numbers.add(new Number(Integer.parseInt(oneNumber)));
-        }
-        return numbers;
     }
 }
