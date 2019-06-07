@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
@@ -11,7 +12,6 @@ public enum Rank {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    private static final String ERROR_VALUE = "유효하지 않은 값입니다.";
     private static final int MIN = 3;
     private static final int COUNT_FIVE = 5;
 
@@ -32,13 +32,9 @@ public enum Rank {
             return SECOND;
         }
 
-        for (Rank rank : Rank.values()) {
-            if (rank.count == count && rank != SECOND) {
-                return rank;
-            }
-        }
-
-        throw new IllegalArgumentException(ERROR_VALUE);
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.count == count && rank != SECOND)
+                .findAny().orElseThrow(IllegalArgumentException::new);
     }
 
     public int getCount() {

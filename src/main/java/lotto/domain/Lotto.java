@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     private static final String ERROR_DUPLICATE_MESSAGE = "중복된 수가 있습니다.";
@@ -49,7 +46,7 @@ public class Lotto {
     }
 
     public List<Number> getLotto() {
-        return lotto;
+        return Collections.unmodifiableList(lotto);
     }
 
     @Override
