@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyLotto {
+    private static final String DELIMITER = ",";
     private final List<Lotto> myLotto;
 
-    MyLotto(String[] numbers, int round) {
+    private MyLotto(String[] numbers, int round) {
         this.myLotto = getHandLottos(numbers);
         addMyLotto(round);
     }
@@ -27,7 +28,7 @@ public class MyLotto {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < handleNumbers.length; i++) {
-            String[] oneNumbers = handleNumbers[i].split(",");
+            String[] oneNumbers = handleNumbers[i].split(DELIMITER);
             lottos.add(new Lotto(addLottoNumbers(i, oneNumbers)));
         }
 

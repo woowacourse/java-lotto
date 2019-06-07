@@ -25,12 +25,14 @@ public class MyLottoTest {
         lottos.add(new Lotto(lottoNumbers));
         lottos.add(new Lotto(lottoNumbers));
 
-        myLotto = new MyLotto(lottos);
+        String[] numbers = {"1,2,3,4,5,6"};
+
+        myLotto = MyLotto.create(numbers, 4);
     }
 
     @Test
     void 내가_구매한_로또_사이즈() {
-        assertThat(myLotto.getSize()).isEqualTo(2);
+        assertThat(myLotto.getSize()).isEqualTo(5);
     }
 
     @Test
