@@ -1,5 +1,6 @@
 package lotto.domain.lottoresult;
 
+import lotto.domain.lotto.LottoStrategy.ManualLottoStrategy;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,14 +12,14 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoResultTest {
-    LottoTicketGroup lottoTickets;
-    LottoResult lottoResult;
+    private LottoTicketGroup lottoTickets;
+    private LottoResult lottoResult;
 
     @BeforeEach
     void setup() {
         lottoTickets = new LottoTicketGroup(Arrays.asList(
-                LottoTicket.create("1, 2, 3, 8, 9, 10"),
-                LottoTicket.create("7, 8, 9, 1, 2, 3")
+                LottoTicket.create(new ManualLottoStrategy("1, 2, 3, 8, 9, 10")),
+                LottoTicket.create(new ManualLottoStrategy("7, 8, 9, 1, 2, 3"))
         ));
         lottoResult = new LottoResult(
                 WinningLotto.create("1, 2, 3, 4, 5, 6", "15"),

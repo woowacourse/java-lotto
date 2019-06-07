@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lotto.LottoStrategy.LottoStrategy;
+
 import java.util.*;
 
 public class LottoTicket {
@@ -11,12 +13,8 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoTicket create(String lottoNumbersText) {
-        return new LottoTicket(LottoNumberGroup.create(lottoNumbersText));
-    }
-
-    public static LottoTicket create() {
-        return new LottoTicket(LottoNumberGroup.create());
+    public static LottoTicket create(LottoStrategy strategy) {
+        return new LottoTicket(LottoNumberGroup.create(strategy));
     }
 
     public int countOfMatch(LottoNumberGroup lottoNumbers) {

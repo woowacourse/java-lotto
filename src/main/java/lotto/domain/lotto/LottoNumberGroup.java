@@ -1,12 +1,12 @@
 package lotto.domain.lotto;
 
-import lotto.util.StringConverter;
+import lotto.domain.lotto.LottoStrategy.LottoStrategy;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumberGroup {
-    static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> numbers;
 
@@ -28,24 +28,17 @@ public class LottoNumberGroup {
         }
     }
 
-    public static LottoNumberGroup create(String numbersText) {
+    public static LottoNumberGroup create(LottoStrategy strategy) {
         try {
-            return create(StringConverter.toNumbers(numbersText));
+            return new LottoNumberGroup(strategy.generate().stream()
+                    .map(LottoNumber::of)
+                    .collect(Collectors.toList())
+            );
         } catch (NumberFormatException e) {
-            throw new InvalidLottoNumberGroupException("로또 번호는 숫자로 입력하세요");
-        }
-    }
-
-    private static LottoNumberGroup create(List<Integer> lottoNumbers) {
-        try {
-            return new LottoNumberGroup(LottoNumbersGenerator.generate(lottoNumbers));
+            throw new InvalidLottoNumberGroupException("로또 번호는 숫자만 가능합니다.");
         } catch (InvalidLottoNumberException e) {
             throw new InvalidLottoNumberGroupException(e.getMessage());
         }
-    }
-
-    public static LottoNumberGroup create() {
-        return new LottoNumberGroup(LottoNumbersGenerator.generate());
     }
 
     public int countOfMatch(LottoNumberGroup lottoNumbers) {

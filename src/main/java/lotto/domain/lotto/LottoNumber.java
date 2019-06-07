@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    static final int MIN_LOTTO_NUMBER = 1;
-    static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
     private static final List<LottoNumber> LOTTO_NUMBER_POOL;
 
     static {

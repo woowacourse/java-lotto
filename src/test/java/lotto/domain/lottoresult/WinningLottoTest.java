@@ -1,6 +1,7 @@
 package lotto.domain.lottoresult;
 
 import lotto.domain.lotto.InvalidLottoNumberException;
+import lotto.domain.lotto.LottoStrategy.ManualLottoStrategy;
 import lotto.domain.lotto.LottoTicket;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +33,7 @@ public class WinningLottoTest {
     @Test
     void 두개_이하_일치_로또() {
         WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", "12");
-        LottoTicket lotto = LottoTicket.create("11, 2, 3, 8, 9, 10");
+        LottoTicket lotto = LottoTicket.create(new ManualLottoStrategy("11, 2, 3, 8, 9, 10"));
         assertThat(winningLotto.checkLottoRank(lotto))
                 .isEqualTo(LottoRank.FAIL);
     }
@@ -40,7 +41,7 @@ public class WinningLottoTest {
     @Test
     void 세개_일치_로또() {
         WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", "12");
-        LottoTicket lotto = LottoTicket.create("1, 2, 3, 8, 9, 10");
+        LottoTicket lotto = LottoTicket.create(new ManualLottoStrategy("1, 2, 3, 8, 9, 10"));
         assertThat(winningLotto.checkLottoRank(lotto))
                 .isEqualTo(LottoRank.FIFTH);
     }

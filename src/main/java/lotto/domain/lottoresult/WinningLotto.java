@@ -1,12 +1,13 @@
 package lotto.domain.lottoresult;
 
 import lotto.domain.lotto.*;
+import lotto.domain.lotto.LottoStrategy.ManualLottoStrategy;
 
 public class WinningLotto {
     private final LottoNumberGroup winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(LottoNumberGroup winningNumbers, LottoNumber bonusNumber) {
+    private WinningLotto(LottoNumberGroup winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
         validateBonusNumber();
@@ -15,7 +16,8 @@ public class WinningLotto {
     public static WinningLotto create(String winningNumbersText, String bonusNumberText) {
         try {
             return new WinningLotto(
-                    LottoNumberGroup.create(winningNumbersText), LottoNumber.of(bonusNumberText)
+                    LottoNumberGroup.create(new ManualLottoStrategy(winningNumbersText)),
+                    LottoNumber.of(bonusNumberText)
             );
         } catch (InvalidLottoNumberGroupException e) {
             throw new InvalidWinningLottoException(e.getMessage());

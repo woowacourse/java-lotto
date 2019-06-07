@@ -15,7 +15,7 @@ public class OutputView {
     public static void printChange(PurchaseAmount purchaseAmount) {
         int change = purchaseAmount.available();
         if (change != 0) {
-            System.out.format("\n거스름 돈은 %d원 입니다.\n", change);
+            System.out.format("거스름 돈은 %d원 입니다.\n\n", change);
         }
     }
 
