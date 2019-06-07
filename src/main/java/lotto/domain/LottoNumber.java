@@ -23,9 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static List<LottoNumber> getAutoLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        List<LottoNumber> autoLottoNumbers = lottoNumbers.stream()
-                .collect(Collectors.toList())
-                .subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX);
+        List<LottoNumber> autoLottoNumbers = lottoNumbers.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX);
         Collections.sort(autoLottoNumbers);
         return autoLottoNumbers;
     }
@@ -35,11 +33,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static List<LottoNumber> getLotto(List<Integer> collect) {
-        List<LottoNumber> lotto = lottoNumbers.stream()
+        return lottoNumbers.stream()
                 .filter(n -> collect.contains(n.number))
+                .sorted()
                 .collect(Collectors.toList());
-        Collections.sort(lotto);
-        return lotto;
     }
 
     public static LottoNumber getLottoNumber(int lottoNumber) {

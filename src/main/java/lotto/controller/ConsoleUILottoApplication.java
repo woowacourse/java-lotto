@@ -14,16 +14,20 @@ public class ConsoleUILottoApplication {
         String priceInput = InputView.promptPrice();
         Money money = createMoney(priceInput); // ConsoleUILottoApplication -> createMoney
         String customLottoCountInput = InputView.promptCoustomLottoCount();
-        CustomLottoCount customLottoCount = createCustomLottoCount(customLottoCountInput, money); // ConsoleUILottoApplication -> createCustomLottoCount
+        CustomLottoCount customLottoCount = createCustomLottoCount(customLottoCountInput, money); //
+        // ConsoleUILottoApplication -> createCustomLottoCount
         String[] customLottoNumbersInput = InputView.promptCustomLotto(customLottoCount);
-        Lottoes lottoes = createLottoes(customLottoCount,customLottoNumbersInput,money); // ConsoleUILottoApplication -> createLottoes
+        Lottoes lottoes = createLottoes(customLottoCount, customLottoNumbersInput, money); //
+        // ConsoleUILottoApplication -> createLottoes
 
-        OutputView.printLottoes(lottoes,customLottoCount);
+        OutputView.printLottoes(lottoes, customLottoCount);
 
         List<String> winningNumberInput = InputView.promptWinningNumber();
-        Lotto winnigLottoNumbers = createWinningLottoNumbers(winningNumberInput); // ConsoleUILottoApplication -> createWinningLottoNumbers
+        Lotto winnigLottoNumbers = createWinningLottoNumbers(winningNumberInput); // ConsoleUILottoApplication ->
+        // createWinningLottoNumbers
         String bonusBall = InputView.promptBonusBall();
-        WinningLotto winningLotto = createWinningLotto(winnigLottoNumbers, bonusBall);// ConsoleUILottoApplication -> createWinningLotto
+        WinningLotto winningLotto = createWinningLotto(winnigLottoNumbers, bonusBall);// ConsoleUILottoApplication ->
+        // createWinningLotto
         Result result = ResultFactory.createResult();
         result.calculateResult(lottoes, winningLotto);
 
@@ -47,12 +51,13 @@ public class ConsoleUILottoApplication {
         return CustomLottoCountFactory.createCustomLottoCount(Integer.parseInt(customLottoCountInput), money);
     }
 
-    private static Lottoes createLottoes(CustomLottoCount customLottoCount, String[] customLottoNumbersInput,Money money) {
-        while(InputValidator.isNotValidCustomLottoes(customLottoNumbersInput)){
+    private static Lottoes createLottoes(CustomLottoCount customLottoCount, String[] customLottoNumbersInput,
+                                         Money money) {
+        while (InputValidator.isNotValidCustomLottoes(customLottoNumbersInput)) {
             System.out.println("올바른 로또의 숫자를 입력해주세요(공백불가, 1~45범위의 로또숫자)");
             customLottoNumbersInput = InputView.promptCustomLotto(customLottoCount);
         }
-        return LottoFactory.createLottoes(customLottoNumbersInput,money);
+        return LottoFactory.createLottoes(customLottoNumbersInput, money);
 
     }
 

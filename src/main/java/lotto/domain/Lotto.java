@@ -20,9 +20,9 @@ public class Lotto {
     }
 
     public int getMatchCount(Lotto lotto) {
-        return numbers.stream()
+        return (int) numbers.stream()
                 .filter( l -> lotto.isContainLottoNumber(l))
-                .collect(Collectors.toList()).size();
+                .count();
     }
 
 }

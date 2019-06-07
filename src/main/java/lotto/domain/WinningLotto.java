@@ -16,7 +16,7 @@ public class WinningLotto {
 
     @Override
     public String toString() {
-        return lotto.toString()+"\n"+"보너스볼 : "+bonusBall;
+        return lotto.toString()+"\n"+bonusBall;
     }
 
     public int getMatchCount(Lotto lotto) {
