@@ -39,6 +39,7 @@ public class OutputView {
 
         if (Rank.SECOND.equals(rank)) {
             System.out.println(String.format(RESULT_BONUS_FORMAT, rank.getCount(), rank.getPrize(), rank.getMatchingCount(ranks)));
+            return;
         }
 
         System.out.println(String.format(RESULT_FORMAT, rank.getCount(), rank.getPrize(), rank.getMatchingCount(ranks)));
