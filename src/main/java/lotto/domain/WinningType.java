@@ -39,4 +39,8 @@ public enum WinningType {
     public int getReward() {
         return reward;
     }
+
+    public boolean isBonus() {
+        return bonus;
+    }
 }

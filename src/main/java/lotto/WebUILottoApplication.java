@@ -64,8 +64,6 @@ public class WebUILottoApplication {
             return json;
         });
 
-
-
     }
 
     private static String render(Map<String, Object> model, String templatePath) {

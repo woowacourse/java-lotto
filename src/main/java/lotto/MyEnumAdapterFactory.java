@@ -37,6 +37,8 @@ public class MyEnumAdapterFactory implements TypeAdapterFactory {
             out.value(status.getMatchNum());
             out.name("reward");
             out.value(status.getReward());
+            out.name("bonus");
+            out.value(status.isBonus());
             out.endObject();
         }
 
