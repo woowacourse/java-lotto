@@ -1,6 +1,6 @@
 package lotto.domain.lottoTicket;
 
-import lotto.domain.rank.Rank;
+import lotto.domain.rank.RankResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +29,7 @@ public class LottosTest {
     @Test
     void 로또_상태_알아내기_테스트() {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 7), 8);
-        Rank rank = lottos.matchLottoRank(winningLotto);
+        RankResult rank = lottos.matchLottoRank(winningLotto);
 
         List<Lotto> testManualLotto = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Lottos testLottos = new Lottos(testManualLotto, 0);
@@ -39,7 +39,7 @@ public class LottosTest {
     @Test
     void 로또_상태_2등_알아내기_테스트() {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
-        Rank rank = lottos.matchLottoRank(winningLotto);
+        RankResult rank = lottos.matchLottoRank(winningLotto);
 
         List<Lotto> testManualLotto = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Lottos testLottos = new Lottos(testManualLotto, 0);

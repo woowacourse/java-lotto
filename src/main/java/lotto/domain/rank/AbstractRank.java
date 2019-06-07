@@ -1,7 +1,9 @@
 package lotto.domain.rank;
 
-abstract class AbstractRank implements RankImpl {
-    public long rewardMoney(int reward, int winnersNumber) {
-        return (long) reward * winnersNumber;
+ abstract class AbstractRank implements Rank {
+    protected int winnersNumber;
+
+    public void addWinner() {
+        winnersNumber++;
     }
 }

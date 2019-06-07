@@ -1,30 +1,17 @@
 package lotto.domain.rank;
 
 public class ThirdRank extends AbstractRank {
-    private static final String THIRD_WINNER_REWARD = "1,500,000";
-
-    private final int reward;
-    private int winnersNumber;
-
-    public ThirdRank() {
-        this.reward = Integer.parseInt(THIRD_WINNER_REWARD
-                .replaceAll(",", ""));
-        this.winnersNumber = Rank.ZERO;
-    }
-
-    public void addWinner() {
-        winnersNumber++;
-    }
+    private static final int THIRD_WINNER_REWARD = 1_500_000;
 
     public long rewardMoney() {
-        return super.rewardMoney(reward, winnersNumber);
+        return (long) THIRD_WINNER_REWARD * winnersNumber;
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("5개 일치, (")
-                .append(reward)
+                .append(THIRD_WINNER_REWARD)
                 .append("원) - ")
                 .append(winnersNumber)
                 .append("개\n")

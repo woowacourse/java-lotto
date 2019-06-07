@@ -14,6 +14,12 @@ public class LottoNumberTest {
     }
 
     @Test
+    void 주소값이_같은지_확인하는_테스트() {
+        LottoNumber lottoNumber = new LottoNumber(45);
+        assertThat(lottoNumber.hashCode()).isEqualTo(new LottoNumber(45).hashCode());
+    }
+
+    @Test
     void 로또번호가_45_보다_큰_경우_테스트() {
         assertThrows(LottoNumberOfOverRangeException.class, () -> {
             new LottoNumber(46);

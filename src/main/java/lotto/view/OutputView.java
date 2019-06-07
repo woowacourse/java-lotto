@@ -1,14 +1,14 @@
 package lotto.view;
 
 import lotto.domain.lottoTicket.Lottos;
-import lotto.domain.rank.Rank;
+import lotto.domain.rank.RankResult;
 
 public class OutputView {
     public static void printLottos(Lottos lottos) {
         System.out.println(lottos.toString());
     }
 
-    public static void printRankState(Rank rank) {
+    public static void printRankState(RankResult rank) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println(rank.toString());

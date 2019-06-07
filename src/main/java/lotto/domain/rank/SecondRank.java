@@ -1,30 +1,17 @@
 package lotto.domain.rank;
 
 public class SecondRank extends AbstractRank {
-    private static final String SECOND_WINNER_REWARD = "30,000,000";
-
-    private final int reward;
-    private int winnersNumber;
-
-    public SecondRank() {
-        this.reward = Integer.parseInt(SECOND_WINNER_REWARD
-                .replaceAll(",", ""));
-        this.winnersNumber = Rank.ZERO;
-    }
-
-    public void addWinner() {
-        winnersNumber++;
-    }
+    private static final int SECOND_WINNER_REWARD = 30_000_000;
 
     public long rewardMoney() {
-        return super.rewardMoney(reward, winnersNumber);
+        return (long) SECOND_WINNER_REWARD * winnersNumber;
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("5개 일치, 보너스 볼 일치(")
-                .append(reward)
+                .append(SECOND_WINNER_REWARD)
                 .append("원) - ")
                 .append(winnersNumber)
                 .append("개\n")

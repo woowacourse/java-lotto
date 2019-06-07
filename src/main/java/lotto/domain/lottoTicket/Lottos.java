@@ -1,6 +1,6 @@
 package lotto.domain.lottoTicket;
 
-import lotto.domain.rank.Rank;
+import lotto.domain.rank.RankResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +22,8 @@ public class Lottos {
         return autoLottos;
     }
 
-    public Rank matchLottoRank(WinningLotto winningLotto) {
-        Rank rank = new Rank();
+    public RankResult matchLottoRank(WinningLotto winningLotto) {
+        RankResult rank = new RankResult();
         manualLottos.stream()
                 .forEach(manual -> rank.addWinner(winningLotto.matchLottoNumbers(manual), winningLotto.isContainBonus(manual)));
         autoLottos.stream()
