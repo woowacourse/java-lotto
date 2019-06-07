@@ -51,6 +51,10 @@
         font-size: 4px;
     }
 
+    .result {
+        font-size: 35px;
+    }
+
     .black {
         border: 3px solid black;
     }
@@ -120,8 +124,8 @@
     </div>
 
     <hr />
-
-    <div id="result">
+    <h2>당첨 통계</h2>
+    <div id="result" class="section">
 
     </div>
 
@@ -156,36 +160,30 @@
             });
 
             $(document).on("click", ".winningNumber", function () {
-                if ($('.yellow').length < 6 || $(this).hasClass('yellow')) {
-                    if ($(this).hasClass('yellow')) {
-                        $(this).removeClass('yellow');
-                        $(this).removeClass('blue');
-                        $(this).addClass('black');
-                    } else {
-                        $(this).removeClass('black');
-                        $(this).removeClass('blue');
-                        $(this).addClass('yellow');
-                    }
+                if ($(this).hasClass('yellow')) {
+                    $(this).removeClass('yellow');
+                    $(this).removeClass('blue');
+                    $(this).addClass('black');
                 } else {
-                    alert("로또 번호는 6자리!");
+                    $(this).removeClass('black');
+                    $(this).removeClass('blue');
+                    $(this).addClass('yellow');
                 }
+
             });
 
             $(document).on("contextmenu", ".winningNumber", function (event) {
                 event.preventDefault();
-                if ($('.blue').length < 1 || $(this).hasClass('blue')) {
-                    if ($(this).hasClass('blue')) {
-                        $(this).removeClass('yellow');
-                        $(this).removeClass('blue');
-                        $(this).addClass('black');
-                    } else {
-                        $(this).removeClass('black');
-                        $(this).removeClass('yellow');
-                        $(this).addClass('blue');
-                    }
+                if ($(this).hasClass('blue')) {
+                    $(this).removeClass('yellow');
+                    $(this).removeClass('blue');
+                    $(this).addClass('black');
                 } else {
-                    alert("보너스 번호는 1자리!");
+                    $(this).removeClass('black');
+                    $(this).removeClass('yellow');
+                    $(this).addClass('blue');
                 }
+
             });
 
             $('#inputMoney').click(function () {
@@ -304,20 +302,8 @@
                     data: data,
                     url: '/lottoResult',
                     success: function (data) {
-
-                        $.ajax({
-                            method: 'get',
-                            url: '/lottoResult',
-                            success: function (data) {
-                                var json_obj = $.parseJSON(data);
-                                console.log(json_obj);
-                            }
-                        });
-
                         var json_obj = $.parseJSON(data);
-                        console.log(json_obj);
-                        $('#result').empty();
-                        $('#result').append(data);
+                        printResult(json_obj);
                     }
                 });
 
@@ -347,7 +333,31 @@
                     }
                     $('#' + type).append(chlid);
                 }
-                $('#' + type).append(chlid);
+            }
+
+            function printResult(result) {
+                $.ajax({
+                    method: 'get',
+                    url: '/lottoResult',
+                    success: function (data) {
+                        var json_obj = $.parseJSON(data);
+                        console.log(json_obj);
+                        $('#result').empty();
+                        for (var i = 0 in json_obj) {
+                            if (json_obj[i].value == "MISS") {
+                                continue;
+                            }
+                            if (json_obj[i].value == "SECOND") {
+                                child = '<div class="result">' + json_obj[i].matchNum + "개 일치, 보너스 볼 일치(" + json_obj[i].reward + "원) - " + result.SECOND + "개" + '</div>';
+                                $('#result').append(child);
+                                continue;
+                            }
+                            child = '<div class="result">' + json_obj[i].matchNum + "개 일치 (" + json_obj[i].reward + "원) - " + result[json_obj[i].value] + "개" + '</div>';
+                            $('#result').append(child);
+                        }
+
+                    }
+                });
             }
 
         });
