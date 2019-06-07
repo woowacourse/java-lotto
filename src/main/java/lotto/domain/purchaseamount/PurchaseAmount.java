@@ -29,12 +29,11 @@ public class PurchaseAmount {
         return LottoQuantity.create(money / LottoTicket.PRICE);
     }
 
-    public boolean buy(int price) {
-        if (!canBuy(price)) {
-            return false;
+    public PurchaseAmount buy(int price) {
+        if (canBuy(price)) {
+            return new PurchaseAmount(money - price);
         }
-        money -= price;
-        return true;
+        return this;
     }
 
     public boolean canBuy(int price) {

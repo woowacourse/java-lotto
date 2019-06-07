@@ -17,7 +17,7 @@ class PurchaseAmountTest {
     @Test
     void 거스름돈_확인() {
         PurchaseAmount purchaseAmount = PurchaseAmount.create("1300");
-        purchaseAmount.buy(LottoTicket.create());
+        purchaseAmount.buy(LottoTicket.PRICE);
         assertThat(purchaseAmount.available()).isEqualTo(300);
     }
 }
