@@ -67,7 +67,6 @@ public class InputView {
             manualLottoSize = stringToInt(sc.nextLine());
             checkManualLottoSize(manualLottoSize, money);
         } catch (IllegalArgumentException e) {
-            System.out.println(money.availablePurchseTicketCount() + "장 이상 구입하실 수 없습니다.");
             return inputManualLottoSize(money);
         } catch (InputMismatchException e) {
             System.out.println("숫자를 입력해주세요.");
@@ -77,19 +76,20 @@ public class InputView {
     }
 
     private static void checkManualLottoSize(int manualLottoSize, Money money) {
-        if (manualLottoSize > money.availablePurchseTicketCount()) {
+        if (manualLottoSize > money.availablePurchaseCount() || manualLottoSize < 0) {
+            System.out.println("0장 이상, " + money.availablePurchaseCount() + "장 이하로 구입하실 수 있습니다.");
             throw new IllegalArgumentException(AVAILABLE_PURCHASE_SIZE_EXCEPTION_MESSAGE);
         }
     }
 
-    public static void printInputManualLottoMessage() {
-        System.out.println(NEW_LINE + MANUAL_LOTTO_NUMBER_MESSAGE);
+    public static void printInputManualLottoMessage(int manualLottoSize) {
+        if (manualLottoSize > 0) {
+            System.out.println(NEW_LINE + MANUAL_LOTTO_NUMBER_MESSAGE);
+        }
     }
 
     /**
      * 로또 번호 입력
-     * LottoNumber 리스트에 값이 없을 경우 수동 구매 로또 번호
-     * LottoNumber 리스트에 값이 있을 경우 지난 주 당첨 번호
      */
     public static List<Number> inputLottoNumber() {
         List<Number> lottoNumber = new ArrayList<>();
