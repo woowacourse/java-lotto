@@ -34,7 +34,7 @@ public class Money {
         }
     }
 
-    public int availablePurchseTicketCount() {
+    public int availablePurchaseCount() {
         return money / LOTTO_PRICE;
     }
 
