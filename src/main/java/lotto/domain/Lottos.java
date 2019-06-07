@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.*;
 
 public class Lottos {
+    private static final String DILIMETER = ",";
+
     private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(List<String> manualNumbers, int countOfPurchase) {
@@ -15,7 +17,7 @@ public class Lottos {
 
     private void createLottosManually(List<String> manualNumbers) {
         for (String manualNumber : manualNumbers) {
-            lottos.add(LottoFactory.createLottoManually(Arrays.asList(manualNumber.split(","))));
+            lottos.add(LottoFactory.createLottoManually(Arrays.asList(manualNumber.split(DILIMETER))));
         }
     }
 
