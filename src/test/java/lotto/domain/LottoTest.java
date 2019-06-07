@@ -55,6 +55,22 @@ public class LottoTest {
     }
 
     @Test
+    public void 로또_생성시_중복에_대한_예외처리_테스트() {
+        Set<LottoNumber> duplicatedNumbers = new HashSet<>(
+                Arrays.asList(
+                        LottoNumber.get(1),
+                        LottoNumber.get(2),
+                        LottoNumber.get(3),
+                        LottoNumber.get(4),
+                        LottoNumber.get(5),
+                        LottoNumber.get(5)
+                ));
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Lotto(duplicatedNumbers);
+        });
+    }
+
+    @Test
     public void 로또_한장과_당첨_번호의_일치_개수_테스트() {
         Set<LottoNumber> winningNumbers = new HashSet<>(
                 Arrays.asList(
