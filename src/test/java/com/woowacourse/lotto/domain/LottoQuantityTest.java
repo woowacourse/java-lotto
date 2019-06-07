@@ -22,13 +22,6 @@ public class LottoQuantityTest {
     }
 
     @Test
-    void compareWithInt() {
-        assertThat(LottoQuantity.of(14).compareTo(15)).isEqualTo(-1);
-        assertThat(LottoQuantity.of(14).compareTo(14)).isEqualTo(0);
-        assertThat(LottoQuantity.of(14).compareTo(13)).isEqualTo(1);
-    }
-
-    @Test
     void compareWithQuantity() {
         assertThat(LottoQuantity.of(14).compareTo(LottoQuantity.of(15))).isEqualTo(-1);
     }

@@ -15,7 +15,7 @@ public class WinningAggregator {
 
     public void addResult(LottoResult result) {
         results.putIfAbsent(result, 0);
-        results.put(result, results.get(result) + 1);
+        results.compute(result, (key, count) -> count + 1 );
     }
 
     public double calculateEarningRate(int unitPrice) {
@@ -25,8 +25,9 @@ public class WinningAggregator {
         long prizeMoneySum = results.keySet().stream()
             .mapToInt(k -> k.getPrizeMoney() * results.get(k))
             .sum();
-        long balanceDelta = prizeMoneySum - totalLottoCount * unitPrice;
-        return balanceDelta / (double) (totalLottoCount * unitPrice);
+        // 로또 구입 비용을 제외하고 얻은 수익금
+        long earnedMoney = prizeMoneySum - totalLottoCount * unitPrice;
+        return earnedMoney / (double) (totalLottoCount * unitPrice);
     }
 
     public int getResultCount(LottoResult result) {

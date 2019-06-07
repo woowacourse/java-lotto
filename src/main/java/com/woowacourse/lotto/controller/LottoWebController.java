@@ -88,7 +88,7 @@ public class LottoWebController {
 
     private static Map<String, Object> handleAutoBuyingRequest(AutoLottoBuyingRequestDto request) {
         LottoQuantity quantity = LottoQuantity.of(request.getQuantity());
-        NumberGenerator numberGenerator = new RandomNumberGenerator(LottoNumberGroup.LOTTO_NUMBER_MIN, LottoNumberGroup.LOTTO_NUMBER_MAX);
+        NumberGenerator numberGenerator = new RandomNumberGenerator(LottoNumber.LOTTO_NUMBER_MIN, LottoNumber.LOTTO_NUMBER_MAX);
 
         Map<String, Object> resMap = createResMapWithResult(ResultState.OK);
         resMap.put("lottos", IntStream.of(quantity.toInt())
@@ -182,7 +182,7 @@ public class LottoWebController {
 
     private static Map<String, Object> handleLottoDrawingRequest(LottoDrawingRequestDto request) {
         assertLottoIdsAreExist(request.getLottos());
-        WinningLotto winningLotto = new WinningLotto(LottoNumberGroup.of(request.getWinningNumbers()), request.getWinningBonusNumber());
+        WinningLotto winningLotto = new WinningLotto(LottoNumberGroup.of(request.getWinningNumbers()), LottoNumber.of(request.getWinningBonusNumber()));
         WinningAggregator aggregator = new WinningAggregator();
         request.getLottos().stream()
             .map(lottoService::findLottoById)

@@ -20,19 +20,6 @@ public class LottoTest {
     }
 
     @Test
-    void createWithLottoDto() {
-        LottoDto dto = new LottoDto();
-        dto.setNumber0(1);
-        dto.setNumber1(2);
-        dto.setNumber2(3);
-        dto.setNumber3(4);
-        dto.setNumber4(5);
-        dto.setNumber5(6);
-        Lotto lotto = Lotto.from(dto);
-        assertThat(lotto).isEqualTo(LottoFactory.createLotto(LottoNumberGroup.of(Arrays.asList(1, 2, 3, 4, 5, 6))));
-    }
-
-    @Test
     void equalsNotCareOrder() {
         Set<Integer> nums1 = new HashSet<>(Arrays.asList(2, 13, 32, 36, 39, 41));
         Set<Integer> nums2 = new HashSet<>(Arrays.asList(2, 32, 13, 36, 39, 41));

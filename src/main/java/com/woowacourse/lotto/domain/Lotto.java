@@ -21,24 +21,24 @@ public class Lotto {
         return nums.countMatch(otherNumber);
     }
 
-    public boolean contains(int n) {
+    public boolean contains(LottoNumber n) {
         return nums.contains(n);
     }
 
-    public void forEachNums(Consumer<Integer> consumer) {
+    public void forEachNums(Consumer<LottoNumber> consumer) {
         nums.forEachNumbers(consumer);
     }
 
     public LottoDto toDto() {
         LottoDto dto = new LottoDto();
-        List<Integer> numList = new ArrayList<>();
+        List<LottoNumber> numList = new ArrayList<>();
         nums.forEachNumbers(numList::add);
-        dto.setNumber0(numList.get(0));
-        dto.setNumber1(numList.get(1));
-        dto.setNumber2(numList.get(2));
-        dto.setNumber3(numList.get(3));
-        dto.setNumber4(numList.get(4));
-        dto.setNumber5(numList.get(5));
+        dto.setNumber0(numList.get(0).toInt());
+        dto.setNumber1(numList.get(1).toInt());
+        dto.setNumber2(numList.get(2).toInt());
+        dto.setNumber3(numList.get(3).toInt());
+        dto.setNumber4(numList.get(4).toInt());
+        dto.setNumber5(numList.get(5).toInt());
         dto.setPrice(Lotto.UNIT_PRICE);
         return dto;
     }

@@ -38,8 +38,8 @@ public class LottoNumberGroupTest {
     @Test
     void contains() {
         LottoNumberGroup lottoNumberGroup = LottoNumberGroup.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottoNumberGroup.contains(5)).isTrue();
-        assertThat(lottoNumberGroup.contains(45)).isFalse();
+        assertThat(lottoNumberGroup.contains(LottoNumber.of(5))).isTrue();
+        assertThat(lottoNumberGroup.contains(LottoNumber.of(45))).isFalse();
     }
 
     @Test
