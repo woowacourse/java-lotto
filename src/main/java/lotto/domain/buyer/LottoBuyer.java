@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class LottoBuyer {
+    private static final String NO_MONEY_ERROR_MSG = "구입 금액으로 원하는 장 수의 로또를 살 수 없습니다.";
+
     private Budget budget;
     private LottoContainer lottos;
 
@@ -48,7 +50,7 @@ public class LottoBuyer {
 
     public void validateAffordability(int countOfManualLotto) {
         if (!budget.canBuyLotto(countOfManualLotto)) {
-            throw new NoMoneyException("구입 금액으로 " + countOfManualLotto + "장의 로또를 살 수 없습니다.");
+            throw new NoMoneyException(NO_MONEY_ERROR_MSG);
         }
     }
 }

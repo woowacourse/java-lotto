@@ -8,6 +8,8 @@ public class LottoNo {
     public static final int MAX_NO = 45;
     public static final int MIN_NO = 1;
 
+    private static final String INVALID_RANGE_ERROR_MSG = "잘못된 범위의 번호입니다.";
+
     private final int no;
 
     public LottoNo(int no) {
@@ -17,7 +19,7 @@ public class LottoNo {
 
     private void validateRange(int no) {
         if (no < MIN_NO || no > MAX_NO) {
-            throw new InvalidRangeException("잘못된 범위의 번호입니다.");
+            throw new InvalidRangeException(INVALID_RANGE_ERROR_MSG);
         }
     }
 

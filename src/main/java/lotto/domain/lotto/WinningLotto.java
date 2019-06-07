@@ -3,6 +3,8 @@ package lotto.domain.lotto;
 import java.util.List;
 
 public class WinningLotto extends Lotto {
+    private static final String DUPLICATED_NUM_ERROR_MSG = "당첨 번호는 보너스 볼의 번호와 달라야 합니다.";
+
     private final LottoNo bonusNo;
 
     private WinningLotto(List<LottoNo> lottoNo, LottoNo bonusNo) {
@@ -17,7 +19,7 @@ public class WinningLotto extends Lotto {
 
     private void validateLottoNotContainBonusNo(List<LottoNo> winningLottoNo, LottoNo bonusNo) {
         if (winningLottoNo.contains(bonusNo)) {
-            throw new DuplicatedNumberException("당첨 번호는 보너스 볼의 번호와 달라야 합니다.");
+            throw new DuplicatedNumberException(DUPLICATED_NUM_ERROR_MSG);
         }
     }
 

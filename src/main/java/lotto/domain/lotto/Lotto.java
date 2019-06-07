@@ -12,6 +12,9 @@ public class Lotto {
     public static final int LOTTO_PRICE = 1_000;
     public static final int COUNT_OF_NO = 6;
 
+    private static final String DUPLICATED_NUM_ERROR_MSG = "로또 번호에 중복된 번호가 있습니다.";
+    private static final String INVALID_SIZE_ERROR_MSG = "로또 번호의 갯수가 " + COUNT_OF_NO + "개가 아닙니다.";
+
     List<LottoNo> lottoNo;
     private final LottoType lottoType;
 
@@ -33,13 +36,13 @@ public class Lotto {
 
     private void validateDuplicatedNo(List<LottoNo> lottoNo) {
         if (new HashSet<>(lottoNo).size() != COUNT_OF_NO) {
-            throw new DuplicatedNumberException("로또 번호에 중복된 번호가 있습니다.");
+            throw new DuplicatedNumberException(DUPLICATED_NUM_ERROR_MSG);
         }
     }
 
     private void validateCountOfNo(List<LottoNo> lottoNo) {
         if (lottoNo.size() != COUNT_OF_NO) {
-            throw new InvalidSizeException("로또 번호의 갯수가 " + COUNT_OF_NO + "개가 아닙니다.");
+            throw new InvalidSizeException(INVALID_SIZE_ERROR_MSG);
         }
     }
 
