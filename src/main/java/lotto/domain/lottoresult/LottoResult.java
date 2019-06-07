@@ -6,11 +6,11 @@ import lotto.domain.lotto.LottoTicketGroup;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<LottoRank, Integer> rankStatistic = new LinkedHashMap<>();
+    private final Map<LottoRank, Integer> rankStatistic = new EnumMap<>(LottoRank.class);
 
     public LottoResult(WinningLotto winningLotto, LottoTicketGroup lottoTickets) {
         Arrays.stream(LottoRank.values())
@@ -18,7 +18,7 @@ public class LottoResult {
 
         for (LottoTicket lottoTicket : lottoTickets) {
             LottoRank rank = winningLotto.checkLottoRank(lottoTicket);
-            rankStatistic.replace(rank, rankStatistic.get(rank) + 1);
+            rankStatistic.compute(rank, (LottoRank key, Integer value) -> ++value);
         }
     }
 
