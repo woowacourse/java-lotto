@@ -1,7 +1,5 @@
 package com.woowacourse.lotto.view;
 
-import java.util.Map;
-
 import com.woowacourse.lotto.domain.*;
 
 public class OutputView {
@@ -26,8 +24,8 @@ public class OutputView {
 		System.out.printf(lottoRank == LottoRank.SECOND ? PRINT_SECOND_OF_LOTTO : PRINT_RESULT_OF_LOTTO, lottoRank.getCount(), lottoRank.getPrice(), count);
 	}
 
-	public static void printEarningsRate(Money money, LottoResult lottoResult) {
-		System.out.printf(PRINT_EARNINGS_RATE, (money.calculateEarningsRate(lottoResult.sum())));
+	public static void printEarningsRate(LottoMoney lottoMoney, LottoResult lottoResult) {
+		System.out.printf(PRINT_EARNINGS_RATE, (lottoMoney.calculateEarningsRate(lottoResult.sum())));
 	}
 
 	public static void printCountOfPurchasedLotto(int countOfAllLotto, int countOfManualLotto) {

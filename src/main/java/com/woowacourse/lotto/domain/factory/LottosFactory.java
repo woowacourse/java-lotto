@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.Lottos;
-import com.woowacourse.lotto.domain.Money;
+import com.woowacourse.lotto.domain.LottoMoney;
 import com.woowacourse.lotto.exception.InvalidCountOfManualLottoException;
 
 public class LottosFactory {
@@ -12,11 +12,11 @@ public class LottosFactory {
 	private int countOfAllLotto;
 	private int countOfManualLotto;
 
-	public LottosFactory(Money money, int countOfManualLotto) {
-		if (countOfManualLotto < 0 || money.getCountOfLotto() < countOfManualLotto) {
+	public LottosFactory(LottoMoney lottoMoney, int countOfManualLotto) {
+		if (countOfManualLotto < 0 || lottoMoney.getCountOfLotto() < countOfManualLotto) {
 			throw new InvalidCountOfManualLottoException(VIOLATE_PURCHASED_LOTTO);
 		}
-		this.countOfAllLotto = money.getCountOfLotto();
+		this.countOfAllLotto = lottoMoney.getCountOfLotto();
 		this.countOfManualLotto = countOfManualLotto;
 	}
 
