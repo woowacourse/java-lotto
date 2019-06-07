@@ -25,10 +25,6 @@ public class LottoQuantity {
         }
     }
 
-    public int compareTo(int n) {
-        return Integer.compare(quantity, n);
-    }
-
     public int compareTo(LottoQuantity q) {
         return Integer.compare(this.quantity, q.quantity);
     }

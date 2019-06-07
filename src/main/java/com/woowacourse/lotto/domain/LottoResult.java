@@ -38,7 +38,8 @@ public enum LottoResult {
         }
 
         return Arrays.stream(values())
-            .filter(r -> r.matchCount == matchCount && !r.useBonus)
+            .filter(result -> result.matchCount == matchCount)
+            .filter(result -> !result.useBonus)
             .findFirst()
             .orElse(NONE);
     }

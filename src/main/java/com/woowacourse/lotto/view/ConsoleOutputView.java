@@ -1,6 +1,7 @@
 package com.woowacourse.lotto.view;
 
 import com.woowacourse.lotto.domain.Lotto;
+import com.woowacourse.lotto.domain.LottoNumber;
 import com.woowacourse.lotto.domain.LottoResult;
 import com.woowacourse.lotto.domain.WinningAggregator;
 
@@ -16,28 +17,29 @@ public class ConsoleOutputView {
     }
 
     private static String getLottoString(Lotto l) {
-        List<Integer> nums = new ArrayList<>();
+        List<LottoNumber> nums = new ArrayList<>();
         l.forEachNums(nums::add);
-        return "[" + nums.stream().map(String::valueOf).collect(Collectors.joining(", ")) + "]";
+        return "[" + nums.stream()
+            .map(LottoNumber::toInt)
+            .map(String::valueOf)
+            .collect(Collectors.joining(", ")) + "]";
     }
 
-    public static void printAggregation(WinningAggregator aggregator) {
+    public static void printResultTitle() {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        printAggregationItem(aggregator, LottoResult.FIFTH);
-        printAggregationItem(aggregator, LottoResult.FOURTH);
-        printAggregationItem(aggregator, LottoResult.THIRD);
-        printAggregationItem(aggregator, LottoResult.SECOND);
-        printAggregationItem(aggregator, LottoResult.FIRST);
-        System.out.println(String.format("총 수익률은 %.0f%%입니다.", aggregator.calculateEarningRate(Lotto.UNIT_PRICE) * 100));
     }
 
-    private static void printAggregationItem(WinningAggregator aggregator, LottoResult resultToPrint) {
+    public static void printEarningRate(double earningRate) {
+        System.out.println(String.format("총 수익률은 %.0f%%입니다.", earningRate * 100));
+    }
+
+    public static void printAggregationItem(LottoResult resultToPrint, int matchCount) {
         System.out.println(String.format("%d개 일치%s(%d원)- %d개",
             resultToPrint.getMatchCount(),
             resultToPrint.isUseBonus() ? ", 보너스 볼 일치" : " ",
             resultToPrint.getPrizeMoney(),
-            aggregator.getResultCount(resultToPrint)));
+            matchCount));
     }
 
     public static void printError(String errorMessage) {

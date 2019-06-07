@@ -6,21 +6,21 @@ import java.util.function.Consumer;
 public class Lotto {
     public static final int UNIT_PRICE = 1000;
 
-    private LottoNumber nums;
+    private LottoNumberGroup nums;
 
-    public Lotto(LottoNumber nums) {
+    public Lotto(LottoNumberGroup nums) {
         this.nums = nums;
     }
 
-    public int countMatch(LottoNumber otherNumber) {
+    public int countMatch(LottoNumberGroup otherNumber) {
         return nums.countMatch(otherNumber);
     }
 
-    public boolean contains(int n) {
+    public boolean contains(LottoNumber n) {
         return nums.contains(n);
     }
 
-    public void forEachNums(Consumer<Integer> consumer) {
+    public void forEachNums(Consumer<LottoNumber> consumer) {
         nums.forEachNumbers(consumer);
     }
 

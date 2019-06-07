@@ -3,10 +3,10 @@ package com.woowacourse.lotto.domain;
 import java.util.Objects;
 
 public class WinningLotto {
-    private final LottoNumber winningNums;
-    private final int bonus;
+    private final LottoNumberGroup winningNums;
+    private final LottoNumber bonus;
 
-    public WinningLotto(LottoNumber winningNums, int bonus) {
+    public WinningLotto(LottoNumberGroup winningNums, LottoNumber bonus) {
         this.winningNums = winningNums;
         this.bonus = bonus;
         if (winningNums.contains(bonus)) {
@@ -23,12 +23,23 @@ public class WinningLotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
-        return bonus == that.bonus &&
-            Objects.equals(winningNums, that.winningNums);
+        return Objects.equals(winningNums, that.winningNums) &&
+            Objects.equals(bonus, that.bonus);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(winningNums, bonus);
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+            .append("WinningLotto { winningNums: ")
+            .append(winningNums)
+            .append("bonus: ")
+            .append(bonus)
+            .toString();
+
     }
 }

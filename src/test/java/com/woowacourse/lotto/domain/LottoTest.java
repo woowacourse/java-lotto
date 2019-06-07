@@ -15,31 +15,31 @@ public class LottoTest {
     @Test
     void create() {
         Set<Integer> nums = new HashSet<>(Arrays.asList(2, 5, 13, 25, 42, 44));
-        Assertions.assertThat(new Lotto(LottoNumber.of(nums))).isEqualTo(new Lotto(LottoNumber.of(nums)));
+        Assertions.assertThat(new Lotto(LottoNumberGroup.of(nums))).isEqualTo(new Lotto(LottoNumberGroup.of(nums)));
     }
 
     @Test
     void equalsNotCareOrder() {
         Set<Integer> nums1 = new HashSet<>(Arrays.asList(2, 13, 32, 36, 39, 41));
         Set<Integer> nums2 = new HashSet<>(Arrays.asList(2, 32, 13, 36, 39, 41));
-        assertThat(new Lotto(LottoNumber.of(nums1))).isEqualTo(new Lotto(LottoNumber.of(nums2)));
+        assertThat(new Lotto(LottoNumberGroup.of(nums1))).isEqualTo(new Lotto(LottoNumberGroup.of(nums2)));
     }
 
     @Test
     void createWithNumsOfInvalidSize() {
         Set<Integer> nums = new HashSet<>(Arrays.asList(2, 5, 13, 25, 42));
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(LottoNumber.of(nums)));
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(LottoNumberGroup.of(nums)));
     }
 
     @Test
     void createWithOutOfRange() {
         Set<Integer> nums = new HashSet<>(Arrays.asList(-1, 2, 25, 32, 44, 42));
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(LottoNumber.of(nums)));
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(LottoNumberGroup.of(nums)));
     }
 
     @Test
     void createWithDuplicateNums() {
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(LottoNumber.of(Arrays.asList(1, 2, 2, 15, 22, 32))));
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(LottoNumberGroup.of(Arrays.asList(1, 2, 2, 15, 22, 32))));
 
     }
 }
