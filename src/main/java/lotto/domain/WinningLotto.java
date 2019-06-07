@@ -5,6 +5,7 @@ import java.util.List;
 
 public class WinningLotto {
     private static final String ERROR_DUPLICATE = "당첨 번호와 중복되었습니다.";
+    private static final String DELIMITER = ",";
 
     private final Lotto winnerLotto;
     private final Number bonus;
@@ -36,7 +37,7 @@ public class WinningLotto {
 
     private Lotto getWinningLotto(String numbers) {
         List<Number> lottos = new ArrayList<>();
-        String[] winnerNumbers = numbers.split(",");
+        String[] winnerNumbers = numbers.split(DELIMITER);
 
         for (String s : winnerNumbers) {
             lottos.add(new Number(Integer.parseInt(s)));

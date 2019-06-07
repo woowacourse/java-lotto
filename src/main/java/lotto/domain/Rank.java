@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public enum Rank {
@@ -10,8 +11,6 @@ public enum Rank {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    private static final String RESULT_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
-    private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String ERROR_VALUE = "유효하지 않은 값입니다.";
     private static final int MIN = 3;
     private static final int COUNT_FIVE = 5;
@@ -42,39 +41,36 @@ public enum Rank {
         throw new IllegalArgumentException(ERROR_VALUE);
     }
 
-    public String getMatchString(List<Rank> ranks) {
+    public int getCount() {
+        return count;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public int getMatchingCount(List<Rank> ranks) {
         int matchCount = 0;
 
         for (Rank rank : ranks) {
             matchCount = plusCount(matchCount, rank);
         }
 
-        if (SECOND.equals(this)) {
-            return String.format(RESULT_BONUS_FORMAT, this.count, this.prize, matchCount);
-        }
-
-        return String.format(RESULT_FORMAT, this.count, this.prize, matchCount);
+        return matchCount;
     }
 
-    public int getPrize(List<Rank> ranks) {
-        int sum = 0;
+    public static List<Integer> providePrizeResult(List<Rank> ranks) {
+        List<Integer> prizes = new ArrayList<>();
 
         for (Rank rank : ranks) {
-            sum = getSum(sum, rank);
+            prizes.add(rank.prize);
         }
 
-        return sum;
+        return prizes;
     }
 
-    private int getSum(int sum, Rank rank) {
-        if (this.equals(rank)) {
-            sum += rank.prize;
-        }
-        return sum;
-    }
-
-    private int plusCount(int matchCount, Rank rank) {
-        if (this.equals(rank)) {
+    private int plusCount(int matchCount, Rank ranks) {
+        if (this.equals(ranks)) {
             matchCount++;
         }
         return matchCount;

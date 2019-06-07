@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Winners {
@@ -7,34 +8,40 @@ public class Winners {
     private static final int PERCENT = 100;
 
     private final List<Rank> rankResult;
-    private final int returnRate;
 
-    public Winners(List<Rank> rankResult, int returnRate) {
-        this.rankResult = rankResult;
-        this.returnRate = returnRate;
+    private Winners(MyLotto myLotto, WinningLotto winningLotto) {
+        this.rankResult = new ArrayList<>();
+        getResult(myLotto, winningLotto);
     }
 
-    private static double calculateResultRate(int inputMoney, double sum) {
-        return (sum / (inputMoney * MONEY_UNIT)) * PERCENT;
+    public static Winners create(MyLotto myLotto, WinningLotto winningLotto) {
+        return new Winners(myLotto, winningLotto);
     }
 
-    private static double getReturnRate(List<Rank> ranks, int inputMoney) {
-        return calculateResultRate(inputMoney, getSum(ranks));
+    public List<Rank> getRankResult() {
+        return rankResult;
     }
 
+    public double calculateResultRate(int inputMoney) {
+        double prizeSum = getSum();
+        return (prizeSum / (inputMoney * MONEY_UNIT)) * PERCENT;
+    }
 
-    private static double getSum(List<Rank> ranks) {
+    private void getResult(MyLotto myLotto, WinningLotto winningLotto) {
+        for (int i = 0; i < myLotto.getSize(); i++) {
+            rankResult.add(Rank.valueOf(winningLotto.match(myLotto.getIndexByLotto(i))
+                    , winningLotto.matchBonus(myLotto.getIndexByLotto(i))));
+        }
+    }
+
+    private double getSum() {
         double sum = 0;
+        List<Integer> prizes = Rank.providePrizeResult(rankResult);
 
-        for (Rank rank : Rank.values()) {
-            sum += rank.getPrize(ranks);
+        for (Integer prize : prizes) {
+            sum += prize;
         }
 
-        if (sum == 0) {
-            return 0;
-        }
         return sum;
     }
-
-
 }

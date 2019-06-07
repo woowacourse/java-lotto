@@ -10,6 +10,8 @@ public class OutputView {
     private static final String RESULT = "\n당첨 통계";
     private static final String BASIC_BAR = "--------";
     private static final String RETURN_RATE = "총 수입률은 %.0f%%입니다.";
+    private static final String RESULT_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+    private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
 
     public static void printMyLotto(MyLotto myLotto, int round) {
         System.out.println(String.format(MESSAGE_BUY_LOTTO, myLotto.getSize() - round, round));
@@ -34,6 +36,11 @@ public class OutputView {
         if (Rank.MISS.equals(rank)) {
             return;
         }
-        System.out.println(rank.getMatchString(ranks));
+
+        if (Rank.SECOND.equals(rank)) {
+            System.out.println(String.format(RESULT_BONUS_FORMAT, rank.getCount(), rank.getPrize(), rank.getMatchingCount(ranks)));
+        }
+
+        System.out.println(String.format(RESULT_FORMAT, rank.getCount(), rank.getPrize(), rank.getMatchingCount(ranks)));
     }
 }
