@@ -3,8 +3,11 @@ package lotto;
 import java.util.*;
 
 import lotto.creator.LottosFactory;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.creator.ManualLottoCreator;
+import lotto.domain.*;
+import lotto.domain.Number;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.json.simple.JSONArray;
@@ -17,6 +20,8 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 
 public class WebUILottoApplication {
+    private static Lottos lottos;
+
     public static void main(String[] args) {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -29,13 +34,25 @@ public class WebUILottoApplication {
             Money money = getMoney(pairs);
             List<String> manuals = getLottos(pairs);
 
-            Lottos lottos = LottosFactory.create(manuals, money);
-
+            lottos = LottosFactory.create(manuals, money);
+            System.out.println(lottos.getLottos());
             try {
                 return lottos.getLottos();
             } catch (Exception e) {
                 return "Error: " + e.getMessage();
             }
+        });
+
+        post("/lottoResult", (req, res) -> {
+            List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
+
+            WinningLotto winningLotto = createWinningLotto(pairs);
+
+            LottoResult lottoResult  = new LottoResult(lottos.getLottos(), winningLotto);
+
+            OutputView.printLottoResult(lottoResult);
+
+            return null;
         });
 
     }
@@ -60,6 +77,14 @@ public class WebUILottoApplication {
         pairs.remove(0);
 
         return money;
+    }
+
+    private static WinningLotto createWinningLotto(List<NameValuePair> pairs) {
+        ManualLottoCreator manualLottoCreator = new ManualLottoCreator();
+        Lotto lotto = manualLottoCreator.createLotto(pairs.get(1).getValue());
+        String bonus = pairs.get(0).getValue();
+        Number number = Number.valueOf(Integer.parseInt(bonus));
+        return new WinningLotto(lotto, number);
     }
 
 }
