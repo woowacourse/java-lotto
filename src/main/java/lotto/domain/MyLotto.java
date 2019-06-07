@@ -7,7 +7,8 @@ public class MyLotto {
     private final List<Lotto> myLotto;
 
     MyLotto(String[] numbers, int round) {
-        this.myLotto = provideMyLotto(numbers, round);
+        this.myLotto = getHandLottos(numbers);
+        addMyLotto(round);
     }
 
     public static MyLotto create(String[] numbers, int round) {
@@ -20,12 +21,6 @@ public class MyLotto {
 
     public Lotto getIndexByLotto(int index) {
         return myLotto.get(index);
-    }
-
-    private List<Lotto> provideMyLotto(String[] numbers, int round) {
-        List<Lotto> myLottos = getHandLottos(numbers);
-        myLottos.addAll(getMyLotto(round));
-        return myLottos;
     }
 
     private static List<Lotto> getHandLottos(String[] handleNumbers) {
@@ -48,13 +43,12 @@ public class MyLotto {
         return numbers;
     }
 
-    private List<Lotto> getMyLotto(int round) {
-        List<Lotto> myLotto = new ArrayList<>();
+    private void addMyLotto(int round) {
+        NumberGenerator numberGenerator = NumberGenerator.create();
 
         for (int i = 0; i < round; i++) {
-            myLotto.add(new Lotto(NumberGenerator.create().getNumbers()));
+            List<Number> list = numberGenerator.getNumbers();
+            myLotto.add(new Lotto(list));
         }
-
-        return myLotto;
     }
 }

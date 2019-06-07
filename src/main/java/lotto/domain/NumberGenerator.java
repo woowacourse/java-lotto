@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,9 +16,7 @@ public class NumberGenerator {
 
     private NumberGenerator() {
         this.generator = new ArrayList<>();
-
         addNumbers();
-        Collections.shuffle(generator);
     }
 
     public static NumberGenerator create() {
@@ -24,7 +24,8 @@ public class NumberGenerator {
     }
 
     public List<Number> getNumbers() {
-        List<Number> numbers = generator.subList(START_POINT, NUMBER_BOUND);
+        Collections.shuffle(generator);
+        List<Number> numbers = Lists.newCopyOnWriteArrayList(generator.subList(START_POINT, NUMBER_BOUND));
         Collections.sort(numbers);
 
         return numbers;
