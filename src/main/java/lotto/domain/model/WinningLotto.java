@@ -26,10 +26,10 @@ public class WinningLotto {
         return purchasedLotto.getLotto().contains(bonusNumber);
     }
 
-    public List<Rank> match(PurchasedLottos purchasedLottos) {
+    public List<Rank> match(PurchasedLotto purchasedLottos) {
         List<Rank> ranks = new ArrayList<>();
 
-        for (Lotto lotto : purchasedLottos.getLottos()) {
+        for (Lotto lotto : purchasedLottos.getLotto()) {
             ranks.add(Rank.valueOf(matchCount(lotto), matchBonusNumber(lotto)));
         }
         return ranks;
