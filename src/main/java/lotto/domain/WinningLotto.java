@@ -1,16 +1,23 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WinningLotto {
     private static final String ERROR_DUPLICATE = "당첨 번호와 중복되었습니다.";
 
     private final Lotto winnerLotto;
     private final Number bonus;
 
-    public WinningLotto(Lotto winnerLotto, Number bonus) {
-        this.winnerLotto = winnerLotto;
+    WinningLotto(String numbers, Number bonus) {
+        this.winnerLotto = getWinningLotto(numbers);
         this.bonus = bonus;
 
         checkDuplicate();
+    }
+
+    public static WinningLotto create(String numbers, Number bonus) {
+        return new WinningLotto(numbers, bonus);
     }
 
     public boolean matchBonus(Lotto lotto) {
@@ -25,6 +32,17 @@ public class WinningLotto {
         }
 
         return count;
+    }
+
+    private Lotto getWinningLotto(String numbers) {
+        List<Number> lottos = new ArrayList<>();
+        String[] winnerNumbers = numbers.split(",");
+
+        for (String s : winnerNumbers) {
+            lottos.add(new Number(Integer.parseInt(s)));
+        }
+
+        return new Lotto(lottos);
     }
 
     private int addCount(Lotto lotto, int count, int i) {

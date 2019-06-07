@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.Number;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -19,25 +18,11 @@ public class Main {
         MyLotto myLotto = MyLotto.create(number, round);
         OutputView.printMyLotto(myLotto, round);
 
-        WinningLotto winningLotto = new WinningLotto(getWinningLotto(InputView.inputWinnerNumber()), InputView.inputBonusBall());
+        WinningLotto winningLotto = WinningLotto.create(InputView.inputWinnerNumber(), InputView.inputBonusBall());
         List<Rank> ranks = getResult(myLotto, winningLotto);
         OutputView.printResultStatus(ranks, getReturnRate(ranks, round));
     }
 
-    private static double getReturnRate(List<Rank> ranks, int inputMoney) {
-        return calculateResultRate(inputMoney, getSum(ranks));
-    }
-
-    private static Lotto getWinningLotto(String numbers) {
-        List<Number> lottos = new ArrayList<>();
-        String[] winnerNumbers = numbers.split(",");
-
-        for (String s : winnerNumbers) {
-            lottos.add(new Number(Integer.parseInt(s)));
-        }
-
-        return new Lotto(lottos);
-    }
 
     private static List<Rank> getResult(MyLotto myLotto, WinningLotto winningLotto) {
         List<Rank> rankResults = new ArrayList<>();
@@ -50,6 +35,9 @@ public class Main {
         return rankResults;
     }
 
+    private static double getReturnRate(List<Rank> ranks, int inputMoney) {
+        return calculateResultRate(inputMoney, getSum(ranks));
+    }
 
     private static double getSum(List<Rank> ranks) {
         double sum = 0;
