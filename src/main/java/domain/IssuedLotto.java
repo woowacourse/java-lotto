@@ -1,6 +1,7 @@
 package domain;
 
-import java.util.Objects;
+import domain.lottonumber.LottoNumber;
+
 import java.util.Set;
 
 public class IssuedLotto extends Lotto{

@@ -1,5 +1,7 @@
 package domain;
 
+import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumberPool;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,16 +17,14 @@ public class LottoTest {
     private LottoNumber three;
     private LottoNumber four;
     private LottoNumber five;
-    private LottoNumber six;
 
     @BeforeEach
     void setUp() {
-        one = new LottoNumber(1);
-        two = new LottoNumber(2);
-        three = new LottoNumber(3);
-        four = new LottoNumber(4);
-        five = new LottoNumber(5);
-        six = new LottoNumber(6);
+        one = LottoNumberPool.pickLottoNumber(1);
+        two = LottoNumberPool.pickLottoNumber(2);
+        three = LottoNumberPool.pickLottoNumber(3);
+        four = LottoNumberPool.pickLottoNumber(4);
+        five = LottoNumberPool.pickLottoNumber(5);
     }
 
     @Test
@@ -33,5 +33,4 @@ public class LottoTest {
 
         assertThrows(IllegalArgumentException.class, () -> new Lotto(fiveLottoNumbers));
     }
-
 }

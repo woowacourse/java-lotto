@@ -1,5 +1,7 @@
 package domain;
 
+import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumberPool;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -13,13 +15,15 @@ class LottoGameTest {
     @Test
     void 로또_추첨_결과에_따른_통계를_제대로_만들어내는지_테스트() {
         /* Given : */
-        Set<LottoNumber> lottoNumbers = new TreeSet<>(Arrays.asList(new LottoNumber(1),
-                new LottoNumber(2), new LottoNumber(3), new LottoNumber(7),
-                new LottoNumber(8), new LottoNumber(9)));
-        Set<LottoNumber> winningNumbers = new TreeSet<>(Arrays.asList(new LottoNumber(1),
-                new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        Set<LottoNumber> lottoNumbers = new TreeSet<>(Arrays.asList(LottoNumberPool.pickLottoNumber(1),
+                LottoNumberPool.pickLottoNumber(2), LottoNumberPool.pickLottoNumber(3),
+                LottoNumberPool.pickLottoNumber(7), LottoNumberPool.pickLottoNumber(8),
+                LottoNumberPool.pickLottoNumber(9)));
+        Set<LottoNumber> winningNumbers = new TreeSet<>(Arrays.asList(LottoNumberPool.pickLottoNumber(1),
+                LottoNumberPool.pickLottoNumber(2), LottoNumberPool.pickLottoNumber(3),
+                LottoNumberPool.pickLottoNumber(4), LottoNumberPool.pickLottoNumber(5),
+                LottoNumberPool.pickLottoNumber(6)));
+        LottoNumber bonusNumber = LottoNumberPool.pickLottoNumber(7);
 
         List<IssuedLotto> issuedLottos = Arrays.asList(new IssuedLotto(lottoNumbers));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);

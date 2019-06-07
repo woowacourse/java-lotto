@@ -1,5 +1,7 @@
 package domain;
 
+import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumberPool;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -20,10 +22,11 @@ class LottoFactoryTest {
 
     @Test
     void 당첨_로또를_제대로_발행해주는지_테스트() {
-        Set<LottoNumber> winningNumbers = new TreeSet<>(Arrays.asList(new LottoNumber(1),
-                new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        Set<LottoNumber> winningNumbers = new TreeSet<>(Arrays.asList(LottoNumberPool.pickLottoNumber(1),
+                LottoNumberPool.pickLottoNumber(2), LottoNumberPool.pickLottoNumber(3),
+                LottoNumberPool.pickLottoNumber(4), LottoNumberPool.pickLottoNumber(5),
+                LottoNumberPool.pickLottoNumber(6)));
+        LottoNumber bonusNumber = LottoNumberPool.pickLottoNumber(7);
         WinningLotto expectedWinningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         assertThat(LottoFactory.issueWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber))

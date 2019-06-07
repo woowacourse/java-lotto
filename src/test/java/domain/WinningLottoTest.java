@@ -1,5 +1,7 @@
 package domain;
 
+import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumberPool;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,13 +23,13 @@ class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        one = new LottoNumber(1);
-        two = new LottoNumber(2);
-        three = new LottoNumber(3);
-        four = new LottoNumber(4);
-        five = new LottoNumber(5);
-        six = new LottoNumber(6);
-        bonusNumber = new LottoNumber(7);
+        one = LottoNumberPool.pickLottoNumber(1);
+        two = LottoNumberPool.pickLottoNumber(2);
+        three = LottoNumberPool.pickLottoNumber(3);
+        four = LottoNumberPool.pickLottoNumber(4);
+        five = LottoNumberPool.pickLottoNumber(5);
+        six = LottoNumberPool.pickLottoNumber(6);
+        bonusNumber = LottoNumberPool.pickLottoNumber(7);
     }
 
     @Test
@@ -40,9 +42,9 @@ class WinningLottoTest {
     @Test
     void 당첨_로또와_맞춰본_결과를_제대로_알려주는지_테스트() {
         Set<LottoNumber> sixWinningNumbers = new TreeSet<>(Arrays.asList(one, two, three, four, five, six));
-        Set<LottoNumber> sixIssuedNumbers = new TreeSet<>(Arrays.asList(one, two, three, four, five, new LottoNumber(7)));
-
         WinningLotto winningLotto = new WinningLotto(sixWinningNumbers, bonusNumber);
+
+        Set<LottoNumber> sixIssuedNumbers = new TreeSet<>(Arrays.asList(one, two, three, four, five, bonusNumber));
         IssuedLotto issuedLotto = new IssuedLotto(sixIssuedNumbers);
 
         assertThat(winningLotto.matchUpLottoNumbersOf(issuedLotto)).isEqualTo(Rank.SECOND);

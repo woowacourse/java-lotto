@@ -1,8 +1,8 @@
-package domain;
+package domain.lottonumber;
 
 import java.util.*;
 
-class LottoNumberPool {
+public class LottoNumberPool {
     private static final int BASE_SEED = 0;
     private static final List<LottoNumber> pool = new ArrayList<>();
 
@@ -12,7 +12,7 @@ class LottoNumberPool {
         }
     }
 
-    static LottoNumber pickLottoNumber(int number) {
+    public static LottoNumber pickLottoNumber(int number) {
         return pool.stream()
                 .filter(lottonumber -> lottonumber.isOf(number))
                 .findFirst()

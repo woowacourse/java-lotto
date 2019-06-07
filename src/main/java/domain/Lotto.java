@@ -1,5 +1,7 @@
 package domain;
 
+import domain.lottonumber.LottoNumber;
+
 import java.util.Set;
 
 class Lotto {

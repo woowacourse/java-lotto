@@ -1,5 +1,8 @@
 package domain;
 
+import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumberPool;
+
 import java.util.*;
 
 public class LottoFactory {
@@ -22,7 +25,7 @@ public class LottoFactory {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
 
         for (Integer number : inputNumbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumberPool.pickLottoNumber(number));
         }
         return new WinningLotto(lottoNumbers, bonusNumber);
     }

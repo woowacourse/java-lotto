@@ -1,4 +1,5 @@
 import domain.*;
+import domain.lottonumber.LottoNumberPool;
 import view.InputView;
 import view.OutputView;
 
@@ -30,7 +31,7 @@ public class LottoGameLauncher {
         try {
             List<Integer> inputNumbers = InputView.inputWinningNumbers();
             int bonusNumber = InputView.inputBonusNumber();
-            return LottoFactory.issueWinningLotto(inputNumbers, LottoNumber.of(bonusNumber));
+            return LottoFactory.issueWinningLotto(inputNumbers, LottoNumberPool.pickLottoNumber(bonusNumber));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getWinningLotto();

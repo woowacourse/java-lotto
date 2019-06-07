@@ -1,5 +1,7 @@
 package domain;
 
+import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumberPool;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -8,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LottoNumberPoolTest {
     @Test
     void 입력받은_숫자에_해당하는_LottoNumber를_제대로_되돌려주는지_테스트() {
-        LottoNumber expectedLottoNumber = new LottoNumber(5);
+        LottoNumber expectedLottoNumber = LottoNumberPool.pickLottoNumber(5);
 
         assertThat(LottoNumberPool.pickLottoNumber(5)).isEqualTo(expectedLottoNumber);
     }

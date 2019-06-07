@@ -1,4 +1,4 @@
-package domain;
+package domain.lottonumber;
 
 import java.util.Objects;
 
@@ -8,7 +8,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    LottoNumber(int number) {
+    private LottoNumber(int number) {
         validateNumberRange(number);
         this.number = number;
     }
