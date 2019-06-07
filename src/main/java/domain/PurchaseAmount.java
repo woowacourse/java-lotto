@@ -17,14 +17,14 @@ public class PurchaseAmount {
     }
 
     private static void validateAmountOfMoney(int amountOfMoney) {
-        if (amountOfMoney < Lotto.PRICE) {
+        if (amountOfMoney < IssuedLotto.PRICE) {
             throw new IllegalArgumentException("고작 그정도 돈으로는 로또를 살 수 없습니다");
         }
     }
 
     private static void validateIfMultipleOfPricePerLotto(int amountOfMoney) {
-        if (amountOfMoney % Lotto.PRICE != FIT_AMOUNT) {
-            throw new IllegalArgumentException(Lotto.PRICE + "원의 배수만 입력할 수 있습니다.");
+        if (amountOfMoney % IssuedLotto.PRICE != FIT_AMOUNT) {
+            throw new IllegalArgumentException(IssuedLotto.PRICE + "원의 배수만 입력할 수 있습니다.");
         }
     }
 

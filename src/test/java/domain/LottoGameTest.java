@@ -19,12 +19,13 @@ class LottoGameTest {
         Set<LottoNumber> winningNumbers = new TreeSet<>(Arrays.asList(new LottoNumber(1),
                 new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
                 new LottoNumber(5), new LottoNumber(6)));
+        LottoNumber bonusNumber = new LottoNumber(7);
 
-        List<Lotto> lottos = Arrays.asList(new Lotto(lottoNumbers));
-        Lotto winningLotto = new Lotto(winningNumbers);
+        List<IssuedLotto> issuedLottos = Arrays.asList(new IssuedLotto(lottoNumbers));
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         /* When: */
-        Statistics statistics = LottoGame.startLottery(lottos, winningLotto);
+        Statistics statistics = LottoGame.startLottery(issuedLottos, winningLotto);
 
         /* Then: */
         assertThat(statistics.countsOf(Rank.FIFTH)).isEqualTo(1);

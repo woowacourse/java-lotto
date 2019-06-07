@@ -28,7 +28,7 @@ public class Statistics {
 
     void add(Rank rank) {
         countsOfRanks.get(rank).countUp();
-        purchasedAmount += Lotto.PRICE;
+        purchasedAmount += IssuedLotto.PRICE;
     }
 
     public int countsOf(Rank rank) {

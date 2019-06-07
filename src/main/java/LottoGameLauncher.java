@@ -7,10 +7,10 @@ import java.util.List;
 public class LottoGameLauncher {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        List<Lotto> autoIssuedLottos = LottoFactory.issueLottoWorthOf(purchaseAmount);
+        List<IssuedLotto> autoIssuedLottos = LottoFactory.issueLottoWorthOf(purchaseAmount);
         OutputView.showIssuedLottos(autoIssuedLottos);
 
-        Lotto winningLotto = getWinningLotto();
+        WinningLotto winningLotto = getWinningLotto();
         Statistics statistics = LottoGame.startLottery(autoIssuedLottos, winningLotto);
 
         OutputView.showAnalysisOf(statistics);
@@ -26,10 +26,11 @@ public class LottoGameLauncher {
         }
     }
 
-    private static Lotto getWinningLotto() {
+    private static WinningLotto getWinningLotto() {
         try {
             List<Integer> inputNumbers = InputView.inputWinningNumbers();
-            return LottoFactory.issueWinningLotto(inputNumbers);
+            int bonusNumber = InputView.inputBonusNumber();
+            return LottoFactory.issueWinningLotto(inputNumbers, LottoNumber.of(bonusNumber));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getWinningLotto();

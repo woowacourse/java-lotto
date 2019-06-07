@@ -11,12 +11,12 @@ public class LottoFactory {
         }
     }
 
-    public static List<Lotto> issueLottoWorthOf(PurchaseAmount purchaseAmount) {
-        int numberOfLottoToIssue = purchaseAmount.getPurchaseAmount() / Lotto.PRICE;
-        List<Lotto> issuedLottos = new ArrayList<>();
+    public static List<IssuedLotto> issueLottoWorthOf(PurchaseAmount purchaseAmount) {
+        int numberOfLottoToIssue = purchaseAmount.getPurchaseAmount() / IssuedLotto.PRICE;
+        List<IssuedLotto> issuedLottos = new ArrayList<>();
 
         for (int i = 0; i < numberOfLottoToIssue; i++) {
-            issuedLottos.add(new Lotto(generateLottoNumbers()));
+            issuedLottos.add(new IssuedLotto(generateLottoNumbers()));
         }
         return issuedLottos;
     }
@@ -26,13 +26,13 @@ public class LottoFactory {
         return new TreeSet<>(lottoNumberPool.subList(0, 6));
     }
 
-    public static Lotto issueWinningLotto(List<Integer> inputNumbers) {
+    public static WinningLotto issueWinningLotto(List<Integer> inputNumbers, LottoNumber bonusNumber) {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
 
         for (Integer number : inputNumbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
-        return new Lotto(lottoNumbers);
+        return new WinningLotto(lottoNumbers, bonusNumber);
     }
 }
 

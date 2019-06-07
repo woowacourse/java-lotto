@@ -1,5 +1,7 @@
 package view;
 
+import domain.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -28,6 +30,17 @@ public class InputView {
         } catch (NumberFormatException e) {
             System.out.println("정수만 입력할 수 있습니다.");
             return inputWinningNumbers();
+        }
+    }
+
+    public static int inputBonusNumber() {
+        try {
+            System.out.println("보너스 볼을 입력해주세요.");
+            String bonusNumber = SCANNER.nextLine().trim();
+            return Integer.parseInt(bonusNumber);
+        } catch (NumberFormatException e) {
+            System.out.println("정수만 입력할 수 있습니다.");
+            return inputBonusNumber();
         }
     }
 }
