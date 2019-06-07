@@ -38,7 +38,8 @@ public class OutputView {
         Collections.reverse(lottoRanks);
         lottoRanks.forEach(x -> drawRank(x, lottoResult.countOfRank(x)));
 
-        System.out.format("총 수익률은 %.6f%%입니다.%n", lottoResult.earningRate());
+        System.out.println("총 수익률은 " + lottoResult.earningRate() + "%입니다.");
+        //System.out.format("총 수익률은 %.6f%%입니다.%n", lottoResult.earningRate());
     }
 
     private static void drawRank(LottoRank lottoRank, int countOfRank) {
