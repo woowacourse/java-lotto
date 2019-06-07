@@ -2,9 +2,12 @@ package lotto;
 
 import java.util.*;
 
+import lotto.creator.LottosFactory;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.json.simple.JSONArray;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -24,10 +27,12 @@ public class WebUILottoApplication {
             List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
 
             Money money = getMoney(pairs);
-            List<String> params = getLottos(pairs);
+            List<String> manuals = getLottos(pairs);
+
+            Lottos lottos = LottosFactory.create(manuals, money);
 
             try {
-                return 0;
+                return lottos.getLottos();
             } catch (Exception e) {
                 return "Error: " + e.getMessage();
             }
