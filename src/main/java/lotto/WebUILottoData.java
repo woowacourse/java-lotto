@@ -6,13 +6,14 @@ import lotto.domain.game.Count;
 import lotto.domain.game.ManualCount;
 import lotto.domain.game.TotalLottoGames;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Number;
 
 public class WebUILottoData {
     private PurchaseAmount purchaseAmount;
     private Count totalCount;
     private ManualCount manualCount;
     private TotalLottoGames totalLottoGames;
-    private Lotto winningNumber;
+    private Lotto winningNumbers;
     private Number bonusNumber;
     private WinningLotto winningLotto;
 
@@ -48,12 +49,12 @@ public class WebUILottoData {
         this.totalLottoGames = totalLottoGames;
     }
 
-    public Lotto getWinningNumber() {
-        return winningNumber;
+    public Lotto getWinningNumbers() {
+        return winningNumbers;
     }
 
-    public void setWinningNumber(Lotto winningNumber) {
-        this.winningNumber = winningNumber;
+    public void setWinningNumbers(Lotto winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 
     public Number getBonusNumber() {

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>로또 구매하기</title>
+</head>
+<body>
+<h1>보너스볼 입력하기</h1>
+<div>수동으로 {{manualcount}}장, 자동으로 {{autocount}}장 구매하였습니다.</div>
+<div>{{lottos}}</div>
+<br>
+<br>
+당첨번호 : {{ winningnumber }}
+<br>
+<br>
+<form action="/result">
+  보너스 번호 : <input type="text" name="bonus"/>
+  <input type="submit" value="결과보기" />
+</form>
+</body>
+</html>

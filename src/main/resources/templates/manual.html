@@ -6,14 +6,18 @@
 </head>
 <body>
     <h1>수동 구매 수량 입력</h1>
-    <form action="/manual" method="post">
-        총 구매 수량 : {{ count }}
+    <form action="/manual">
+        총 구매 수량 : <div id="count">{{ count }}</div>
         <br>
         <br>
-        수동 구매 수량 : <input type="text" name="manual"/>
+        수동 구매 수량 : <input id="manual" type="number" min="0" name="manual"/>
         <br>
         <br>
         <input type="submit" value="수동 구매 수량 입력"/>
     </form>
 </body>
+<script>
+    var count = new URLSearchParams(window.location.search).get("amount") / 1000
+    document.getElementById("manual").setAttribute("max", count)
+</script>
 </html>

@@ -14,8 +14,8 @@ public class ResultCounter {
         this.counter = counter;
     }
 
-    public ResultCounter increase() {
-        return new ResultCounter(this.counter + RESULT_COUNT_UNIT);
+    public void increase() {
+        this.counter += RESULT_COUNT_UNIT;
     }
 
     public int multiply(int prize) {
