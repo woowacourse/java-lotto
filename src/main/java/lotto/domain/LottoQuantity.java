@@ -36,7 +36,7 @@ public class LottoQuantity {
     }
 
     public boolean biggerThan(LottoQuantity lottoQuantity) {
-        return biggerThan(lottoQuantity.quantity);
+        return quantity > lottoQuantity.quantity;
     }
 
     public LottoQuantity subtract(LottoQuantity lottoQuantity) {

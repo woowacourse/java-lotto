@@ -23,7 +23,7 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String> manualNumbers = new ArrayList<>();
 
-        while (manualLottoQuantity.biggerThan(manualNumbers.size())) {
+        for (int i = 0; i < manualLottoQuantity.getQuantity(); i++) {
             manualNumbers.add(input.nextLine());
         }
 
