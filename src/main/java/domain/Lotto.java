@@ -3,7 +3,7 @@ package domain;
 import java.util.Set;
 
 class Lotto {
-    private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
+    static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     Set<LottoNumber> lottoNumbers;
 
