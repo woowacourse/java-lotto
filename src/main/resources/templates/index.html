@@ -121,7 +121,7 @@
 
     <hr />
 
-    <div>
+    <div id="result">
 
     </div>
 
@@ -287,7 +287,7 @@
                     return;
                 }
                 var winningLotto = new Array();
-                $('.yellow').each(function(index, item) {
+                $('.yellow').each(function (index, item) {
                     winningLotto[index] = item.innerHTML;
                 });
                 console.log(winningLotto);
@@ -295,8 +295,8 @@
 
                 var bonus = $('.blue')[0].innerHTML;
                 var data = {
-                    'bonus' : bonus,
-                    'winningLotto' : winningLotto.join()
+                    'bonus': bonus,
+                    'winningLotto': winningLotto.join()
                 }
 
                 $.ajax({
@@ -304,6 +304,20 @@
                     data: data,
                     url: '/lottoResult',
                     success: function (data) {
+
+                        $.ajax({
+                            method: 'get',
+                            url: '/lottoResult',
+                            success: function (data) {
+                                var json_obj = $.parseJSON(data);
+                                console.log(json_obj);
+                            }
+                        });
+
+                        var json_obj = $.parseJSON(data);
+                        console.log(json_obj);
+                        $('#result').empty();
+                        $('#result').append(data);
                     }
                 });
 

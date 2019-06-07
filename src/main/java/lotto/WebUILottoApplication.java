@@ -2,15 +2,14 @@ package lotto;
 
 import java.util.*;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import lotto.creator.LottosFactory;
 import lotto.creator.ManualLottoCreator;
 import lotto.domain.*;
 import lotto.domain.Number;
-import lotto.view.InputView;
-import lotto.view.OutputView;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.json.simple.JSONArray;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -21,6 +20,7 @@ import static spark.Spark.post;
 
 public class WebUILottoApplication {
     private static Lottos lottos;
+    private static Money money;
 
     public static void main(String[] args) {
         get("/", (req, res) -> {
@@ -31,7 +31,7 @@ public class WebUILottoApplication {
         post("/lotto", (req, res) -> {
             List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
 
-            Money money = getMoney(pairs);
+            money = getMoney(pairs);
             List<String> manuals = getLottos(pairs);
 
             lottos = LottosFactory.create(manuals, money);
@@ -43,6 +43,14 @@ public class WebUILottoApplication {
             }
         });
 
+        get("/lottoResult", (req, res) -> {
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeAdapterFactory(new MyEnumAdapterFactory());
+            Gson gson = builder.create();
+            String json = gson.toJson(WinningType.values());
+            return json;
+        });
+
         post("/lottoResult", (req, res) -> {
             List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
 
@@ -50,10 +58,13 @@ public class WebUILottoApplication {
 
             LottoResult lottoResult  = new LottoResult(lottos.getLottos(), winningLotto);
 
-            OutputView.printLottoResult(lottoResult);
+            Gson gson = new GsonBuilder().create();
+            String json = gson.toJson(lottoResult.getLottoResult());
 
-            return null;
+            return json;
         });
+
+
 
     }
 
@@ -86,5 +97,4 @@ public class WebUILottoApplication {
         Number number = Number.valueOf(Integer.parseInt(bonus));
         return new WinningLotto(lotto, number);
     }
-
 }
