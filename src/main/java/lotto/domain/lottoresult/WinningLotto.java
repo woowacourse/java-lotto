@@ -1,27 +1,39 @@
 package lotto.domain.lottoresult;
 
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.*;
 
 public class WinningLotto {
-    private final LottoTicket winningLotto;
+    private final LottoNumberGroup winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(LottoTicket winningLotto, LottoNumber bonusNumber) {
-        this.winningLotto = winningLotto;
+    public WinningLotto(LottoNumberGroup winningNumbers, LottoNumber bonusNumber) {
+        this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
         validateBonusNumber();
     }
 
+    public static WinningLotto create(String winningNumbersText, String bonusNumberText) {
+        try {
+            return new WinningLotto(
+                    LottoNumberGroup.create(winningNumbersText), LottoNumber.of(bonusNumberText)
+            );
+        } catch (InvalidLottoNumberGroupException e) {
+            throw new InvalidWinningLottoException(e.getMessage());
+        } catch (InvalidLottoNumberException e) {
+            throw new InvalidWinningLottoException(e.getMessage());
+        }
+    }
+
     private void validateBonusNumber() {
-        if (winningLotto.contains(bonusNumber)) {
+        if (winningNumbers.contains(bonusNumber)) {
             throw new InvalidWinningLottoException("당첨 번호에 포함된 번호입니다.");
         }
     }
 
     public LottoRank checkLottoRank(LottoTicket userLottoTicket) {
-        return LottoRank
-                .rankOf(winningLotto.countOfMatch(userLottoTicket),
-                        userLottoTicket.contains(bonusNumber));
+        return LottoRank.rankOf(
+                userLottoTicket.countOfMatch(winningNumbers),
+                userLottoTicket.contains(bonusNumber)
+        );
     }
 }

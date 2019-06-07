@@ -1,62 +1,30 @@
 package lotto.domain.lotto;
 
-import lotto.util.StringConverter;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int PRICE = 1000;
-    static final int LOTTO_SIZE = 6;
 
-    private final Set<LottoNumber> lottoNumbers;
+    private final LottoNumberGroup lottoNumbers;
 
-    private LottoTicket(List<LottoNumber> numbers) {
-        lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
-        checkDuplicate(numbers, lottoNumbers);
-        checkLottoSize(lottoNumbers);
+    private LottoTicket(LottoNumberGroup lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoTicket create(String lottoNumbersText) {
-        try {
-            return create(StringConverter.toNumbers(lottoNumbersText));
-        } catch (NumberFormatException e) {
-            throw new InvalidLottoTicketException("로또 번호는 숫자로 입력하세요");
-        }
-    }
-
-    public static LottoTicket create(List<Integer> lottoNumbers) {
-        try {
-            return new LottoTicket(LottoNumbersGenerator.create(lottoNumbers));
-        } catch (InvalidLottoNumberException e) {
-            throw new InvalidLottoTicketException(e.getMessage());
-        }
+        return new LottoTicket(LottoNumberGroup.create(lottoNumbersText));
     }
 
     public static LottoTicket create() {
-        return new LottoTicket(LottoNumbersGenerator.create());
+        return new LottoTicket(LottoNumberGroup.create());
     }
 
-    private void checkDuplicate(List<LottoNumber> numbers, Set<LottoNumber> lottoNumbers) {
-        if (numbers.size() != lottoNumbers.size()) {
-            throw new InvalidLottoTicketException("로또 번호는 중복이 불가능합니다.");
-        }
+    public int countOfMatch(LottoNumberGroup lottoNumbers) {
+        return lottoNumbers.countOfMatch(this.lottoNumbers);
     }
 
-    private void checkLottoSize(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new InvalidLottoTicketException("로또 번호는 6개의 숫자로 구성되어야합니다.");
-        }
-    }
-
-    public int countOfMatch(LottoTicket lottoTicket) {
-        return (int) lottoTicket.lottoNumbers.stream()
-                .filter(x -> this.lottoNumbers.contains(x))
-                .count();
-    }
-
-    public boolean contains(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     @Override
@@ -79,9 +47,6 @@ public class LottoTicket {
 
     @Override
     public LottoTicket clone() {
-        return new LottoTicket(
-                lottoNumbers.stream()
-                .collect(Collectors.toList())
-        );
+        return new LottoTicket(lottoNumbers.clone());
     }
 }

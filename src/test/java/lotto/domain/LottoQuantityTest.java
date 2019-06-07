@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.purchaseamount.PurchaseAmount;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -22,18 +23,12 @@ class LottoQuantityTest {
     }
 
     @Test
-    void 유효개수_불가_확인() {
-        PurchaseAmount purchaseAmount = PurchaseAmount.create("1000");
-        assertThrows(InvalidLottoQuantityException.class, () -> {
-            LottoQuantity.create(3).validateAvailable(purchaseAmount);
-        });
+    void biggerThan_숫자입력() {
+        assertThat(LottoQuantity.create(3).biggerThan(1)).isTrue();
     }
 
     @Test
-    void 유효개수_가능_확인() {
-        PurchaseAmount purchaseAmount = PurchaseAmount.create("1000");
-        assertDoesNotThrow(() -> {
-            LottoQuantity.create(1).validateAvailable(purchaseAmount);
-        });
+    void biggerThan_객체입력() {
+        assertThat(LottoQuantity.create(3).biggerThan(LottoQuantity.create(1))).isTrue();
     }
 }

@@ -25,8 +25,8 @@ public class ConsoleUILottoApplication {
         LottoTicketGroup lottos = createLottos(manualLottoQuantity, autoLottoQuantity);
         OutputView.printLottoTickets(lottos, manualLottoQuantity, autoLottoQuantity);
 
-        lottoPurchaseAmount.buy(lottos.price());
-        OutputView.printChange(lottoPurchaseAmount);
+        PurchaseAmount change = lottoPurchaseAmount.buy(lottos.price());
+        OutputView.printChange(change);
 
         LottoResult lottoResult = new LottoResult(createWinningLotto(), lottos);
         OutputView.printLottoResult(lottoResult);
@@ -58,7 +58,7 @@ public class ConsoleUILottoApplication {
             LottoTicketGroup autoLottos = LottoMachine.generateLottos(autoLottoQuantity);
 
             return manualLottos.combine(autoLottos);
-        } catch (InvalidLottoTicketException e) {
+        } catch (InvalidLottoNumberGroupException e) {
             OutputView.printErrorMessage(e.getMessage());
             return createLottos(manualLottoQuantity, autoLottoQuantity);
         }
@@ -75,32 +75,11 @@ public class ConsoleUILottoApplication {
     }
 
     private static WinningLotto createWinningLotto() {
-        LottoTicket winningLotto = createWinningLottoTicket();
-        LottoNumber bonusNumber = createBonusNumber();
-
         try {
-            return new WinningLotto(winningLotto, bonusNumber);
+            return WinningLotto.create(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         } catch (InvalidWinningLottoException e) {
             OutputView.printErrorMessage(e.getMessage());
             return createWinningLotto();
-        }
-    }
-
-    private static LottoTicket createWinningLottoTicket() {
-        try {
-            return LottoTicket.create(InputView.inputWinningNumbers());
-        } catch (InvalidLottoTicketException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return createWinningLottoTicket();
-        }
-    }
-
-    private static LottoNumber createBonusNumber() {
-        try {
-            return LottoNumber.of(InputView.inputBonusNumber());
-        } catch (InvalidLottoNumberException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return createBonusNumber();
         }
     }
 }

@@ -19,7 +19,7 @@ public class LottoMachine {
 
     public static LottoTicketGroup generateLottos(List<String> lottosText) {
         List<LottoTicket> lottoTickets = lottosText.stream()
-                .map(x -> LottoTicket.create(x))
+                .map(LottoTicket::create)
                 .collect(Collectors.toList());
 
         return new LottoTicketGroup(lottoTickets);

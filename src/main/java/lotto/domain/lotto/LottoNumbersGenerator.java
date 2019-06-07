@@ -14,12 +14,12 @@ public class LottoNumbersGenerator {
         }
     }
 
-    static List<LottoNumber> create() {
+    static List<LottoNumber> generate() {
         Collections.shuffle(indexes);
-        return create(indexes.subList(0, LottoTicket.LOTTO_SIZE));
+        return generate(indexes.subList(0, LottoNumberGroup.LOTTO_SIZE));
     }
 
-    static List<LottoNumber> create(List<Integer> indexes) {
+    static List<LottoNumber> generate(List<Integer> indexes) {
         List<LottoNumber> lottoNumbers = indexes.stream()
                 .map(x -> LottoNumber.of(x))
                 .collect(Collectors.toList());
