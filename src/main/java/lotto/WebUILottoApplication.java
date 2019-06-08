@@ -7,16 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static spark.Spark.get;
+import static spark.Spark.staticFiles;
 
 public class WebUILottoApplication {
     public static void main(String[] args) {
-        get("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            return render(model, "index.html");
+        staticFiles.location("/templates");
+        get("/api/greeting/:name", (req, res) -> {
+            return "eee"+req.params(":name");
         });
     }
 
-    private static String render(Map<String, Object> model, String templatePath) {
-        return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
-    }
 }

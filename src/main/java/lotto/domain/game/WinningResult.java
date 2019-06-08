@@ -1,6 +1,6 @@
 package lotto.domain.game;
 
-import lotto.domain.machine.MoneyProcessor;
+import lotto.domain.machine.Money;
 import lotto.domain.ticket.LottoTickets;
 
 import java.util.*;
@@ -18,9 +18,9 @@ public class WinningResult {
             rankInformation.put(rank, 0);
         }
         List<Rank> rankResult = lottoTickets.getTicketsRank(winningLotto);
-        rankResult.stream().forEach(x -> rankInformation.put(x, rankInformation.get(x) + 1));
+        rankResult.forEach(x -> rankInformation.put(x, rankInformation.get(x) + 1));
         rankResultInformation = Collections.unmodifiableMap(rankInformation);
-        winningRate = calculateWinningRate(lottoTickets.lottoTicketsSize(), rankResultInformation);
+        winningRate = calculateWinningRate(lottoTickets.lottoTicketsSize());
     }
 
     public Map<Rank, Integer> getRankInformation() {
@@ -31,11 +31,11 @@ public class WinningResult {
         return winningRate;
     }
 
-    private double calculateWinningRate(int lottoTicketsAmount, Map<Rank, Integer> rankResultInformation) {
-        int winningMoney = rankResultInformation.entrySet()
-                .stream().map(x -> x.getKey().getWinningMoney() * x.getValue())
+    private double calculateWinningRate(int lottoTicketsAmount) {
+        int winningMoney = rankResultInformation.entrySet().stream()
+                .map(x -> x.getKey().getWinningMoney() * x.getValue())
                 .collect(Collectors.summingInt(Integer::intValue));
-        return winningMoney / (double) (lottoTicketsAmount * MoneyProcessor.getLottoPrice()) * 100;
+        return winningMoney / (double) (lottoTicketsAmount * Money.getLottoPrice()) * 100;
     }
 
 }

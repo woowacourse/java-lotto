@@ -2,17 +2,17 @@ package lotto.domain.machine;
 
 import lotto.domain.machine.exeption.InvalidMinimumMoneyException;
 
-public class MoneyProcessor {
+public class Money {
     private static final int LOTTO_PRICE = 1000;
-    private final int insertedMoney;
+    private final int money;
 
-    private MoneyProcessor(int insertedMoney) {
-        this.insertedMoney = insertedMoney;
+    private Money(int money) {
+        this.money = money;
     }
 
-    public static MoneyProcessor of(int insertedMoney) {
-        validateMinumumMoney(insertedMoney);
-        return new MoneyProcessor(insertedMoney);
+    public static Money of(int money) {
+        validateMinumumMoney(money);
+        return new Money(money);
     }
 
     private static void validateMinumumMoney(int money) {
@@ -26,10 +26,10 @@ public class MoneyProcessor {
     }
 
     public int getWholeTicketQuantity() {
-        return this.insertedMoney / LOTTO_PRICE;
+        return this.money / LOTTO_PRICE;
     }
 
     public int getRest() {
-        return this.insertedMoney % LOTTO_PRICE;
+        return this.money % LOTTO_PRICE;
     }
 }
