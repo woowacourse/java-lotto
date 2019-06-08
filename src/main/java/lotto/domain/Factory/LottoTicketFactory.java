@@ -3,6 +3,7 @@ package lotto.domain.Factory;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.exception.DuplicatedInputException;
+import lotto.exception.ExceptionMessage;
 import lotto.exception.UnexpectedInputRangeException;
 
 import java.util.*;
@@ -41,7 +42,7 @@ public class LottoTicketFactory {
             // TODO 이부분 WinningLotto와 겹치는데 하나로 묶어버리기
             for (String inputNumber : inputNumbers) {
                 validateNumeric(inputNumber);
-                lottoNumbers.add(LottoNumber.getNumber(Integer.parseInt(inputNumber)));
+                lottoNumbers.add(LottoNumber.getInstance(Integer.parseInt(inputNumber)));
             }
             validateDistinctNumber(lottoNumbers);
 
@@ -50,17 +51,17 @@ public class LottoTicketFactory {
 
         private void validateNumeric(String number) {
             if (!number.matches("(\\d+)?")) {
-                throw new ArithmeticException("로또 번호가 유효하지 않습니다.");
+                throw new ArithmeticException(ExceptionMessage.ILLEGAL_LOTTO_NUMBER_EXCEPTION);
             }
             if (number.equals("0")) {
-                throw new UnexpectedInputRangeException("로또 번호가 유효하지 않습니다.");
+                throw new UnexpectedInputRangeException(ExceptionMessage.ILLEGAL_LOTTO_NUMBER_EXCEPTION);
             }
         }
 
         private void validateDistinctNumber(List<LottoNumber> lottoNumbers) {
             boolean isDistinct = lottoNumbers.stream().distinct().collect(Collectors.toList()).size() != lottoNumbers.size();
             if (isDistinct) {
-                throw new DuplicatedInputException("중복된 번호는 입력할 수 없습니다.");
+                throw new DuplicatedInputException(ExceptionMessage.DUPLICATED_NUMBER_EXCEPTION);
             }
         }
     }

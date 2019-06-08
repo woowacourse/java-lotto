@@ -22,8 +22,8 @@ public class WinningLottoTest {
         int bonusBall = 7;
         WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusBall);
 
-        assertThat(winningLotto.hasEqualNumber(LottoNumber.getNumber(4))).isTrue();
-        assertThat(winningLotto.hasEqualNumber(LottoNumber.getNumber(9))).isFalse();
+        assertThat(winningLotto.hasEqualNumber(LottoNumber.getInstance(4))).isTrue();
+        assertThat(winningLotto.hasEqualNumber(LottoNumber.getInstance(9))).isFalse();
     }
 
     @Test
@@ -32,8 +32,8 @@ public class WinningLottoTest {
         int bonusBall = 7;
         WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusBall);
 
-        assertThat(winningLotto.hasEqualBonusBall(LottoNumber.getNumber(7))).isTrue();
-        assertThat(winningLotto.hasEqualBonusBall(LottoNumber.getNumber(6))).isFalse();
+        assertThat(winningLotto.hasEqualBonusBall(LottoNumber.getInstance(7))).isTrue();
+        assertThat(winningLotto.hasEqualBonusBall(LottoNumber.getInstance(6))).isFalse();
     }
 
     @Test

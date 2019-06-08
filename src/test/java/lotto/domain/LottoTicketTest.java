@@ -14,8 +14,8 @@ public class LottoTicketTest {
     @Test
     void create() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                LottoNumber.getNumber(1), LottoNumber.getNumber(2), LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4), LottoNumber.getNumber(5), LottoNumber.getNumber(6));
+                LottoNumber.getInstance(1), LottoNumber.getInstance(2), LottoNumber.getInstance(3),
+                LottoNumber.getInstance(4), LottoNumber.getInstance(5), LottoNumber.getInstance(6));
 
         assertThat(new LottoTicket(lottoNumbers)).isEqualTo(new LottoTicket(lottoNumbers));
     }
@@ -23,8 +23,8 @@ public class LottoTicketTest {
     @Test
     void 당첨번호와_일치하는_번호수_확인() {
         lottoTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.getNumber(1), LottoNumber.getNumber(2), LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4), LottoNumber.getNumber(5), LottoNumber.getNumber(6)));
+                LottoNumber.getInstance(1), LottoNumber.getInstance(2), LottoNumber.getInstance(3),
+                LottoNumber.getInstance(4), LottoNumber.getInstance(5), LottoNumber.getInstance(6)));
 
         assertThat(lottoTicket.getMatchingCount(winningLotto)).isEqualTo(3);
     }
@@ -32,8 +32,8 @@ public class LottoTicketTest {
     @Test
     void 보너스볼과_일치하는경우_확인() {
         lottoTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.getNumber(1), LottoNumber.getNumber(2), LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4), LottoNumber.getNumber(5), LottoNumber.getNumber(40)));
+                LottoNumber.getInstance(1), LottoNumber.getInstance(2), LottoNumber.getInstance(3),
+                LottoNumber.getInstance(4), LottoNumber.getInstance(5), LottoNumber.getInstance(40)));
 
         assertThat(lottoTicket.matchesBonusBall(winningLotto)).isTrue();
     }

@@ -20,10 +20,10 @@ public class WinningLotto {
         for (String inputNumber : inputNumbers) {
             validateNumeric(inputNumber);
             validateDistinctNumber(Integer.parseInt(inputNumber));
-            lottoNumbers.add(LottoNumber.getNumber(Integer.parseInt(inputNumber)));
+            lottoNumbers.add(LottoNumber.getInstance(Integer.parseInt(inputNumber)));
         }
         validateDistinctNumber(bonusBall);
-        this.bonusBall = LottoNumber.getNumber(bonusBall);
+        this.bonusBall = LottoNumber.getInstance(bonusBall);
     }
 
     public static WinningLotto of(final String winningLotto, final int bonusBall) {
@@ -49,7 +49,7 @@ public class WinningLotto {
     }
 
     private void validateDistinctNumber(int lottoNumber) {
-        boolean isDistinct = lottoNumbers.contains(LottoNumber.getNumber(lottoNumber));
+        boolean isDistinct = lottoNumbers.contains(LottoNumber.getInstance(lottoNumber));
 
         if (isDistinct) {
             throw new DuplicatedInputException(ExceptionMessage.DUPLICATED_NUMBER_EXCEPTION);

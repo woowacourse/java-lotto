@@ -24,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber getNumber(int key) throws UnexpectedInputRangeException {
+    public static LottoNumber getInstance(int key) throws UnexpectedInputRangeException {
         validateNumberBound(key);
 
         return numbers.get(key);
