@@ -10,7 +10,7 @@ class LottoNumberManager {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private static final int NUMBER_COUNT = 6;
-    private static List<Integer> numbers;
+    private static final List<Integer> numbers;
 
     static {
         numbers = new ArrayList<>();
@@ -39,9 +39,5 @@ class LottoNumberManager {
             return false;
         }
         return true;
-    }
-
-    public static LottoNumbers validate(List<Integer> numbers) {
-        return new LottoNumbers(numbers);
     }
 }
