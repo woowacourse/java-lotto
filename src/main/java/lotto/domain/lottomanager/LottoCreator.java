@@ -11,11 +11,14 @@ import java.util.stream.IntStream;
 
 public class LottoCreator {
     private static final int SUBLIST_FIRST_INDEX = 0;
+    private static final int LIMIT_MIN_NUM = 1;
+    private static final int LIMIT_MAX_NUM = 45;
+    private static final int LOTTO_NUM_SIZE = 6;
 
     private static List<LottoNumber> possibleNumbers;
 
     static {
-        possibleNumbers = IntStream.rangeClosed(LottoConstant.LIMIT_MIN_NUM, LottoConstant.LIMIT_MAX_NUM)
+        possibleNumbers = IntStream.rangeClosed(LIMIT_MIN_NUM, LIMIT_MAX_NUM)
                 .mapToObj(LottoNumber::createLottoNumber)
                 .collect(Collectors.toList());
     }
@@ -32,7 +35,7 @@ public class LottoCreator {
     }
 
     private static List<LottoNumber> getPossibleNumbers() {
-        return possibleNumbers.subList(SUBLIST_FIRST_INDEX, LottoConstant.LOTTO_NUM_SIZE);
+        return possibleNumbers.subList(SUBLIST_FIRST_INDEX, LOTTO_NUM_SIZE);
     }
 
     public static LottoTicket createManualTickets(List<Integer> lottoNumbers) {

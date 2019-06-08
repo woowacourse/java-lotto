@@ -5,6 +5,8 @@ import lotto.utils.NullCheckUtil;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable {
+    private static final int LIMIT_MIN_NUM = 1;
+    private static final int LIMIT_MAX_NUM = 45;
     private static final String ERROR_OUT_RANGE = "1부터 45사이의 수가 아닙니다.";
 
     private Integer lottoNumber;
@@ -25,7 +27,7 @@ public class LottoNumber implements Comparable {
     }
 
     private boolean isOutRangeNumber(Integer number) {
-        return LottoConstant.LIMIT_MIN_NUM > number || LottoConstant.LIMIT_MAX_NUM < number;
+        return LIMIT_MIN_NUM > number || LIMIT_MAX_NUM < number;
     }
 
     public static LottoNumber createLottoNumber(Integer number) {

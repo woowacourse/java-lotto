@@ -10,6 +10,7 @@ import java.util.Objects;
 public class LottoTicket {
     private static final String ERROR_OVERLAPPED = "중복된 로또 번호가 존재합니다.";
     private static final String ERROR_LOTTO_NUMBER_COUNT = "번호가 6개가 아닙니다.";
+    private static final int LOTTO_NUM_SIZE = 6;
 
     private List<LottoNumber> lottoTicket;
 
@@ -42,7 +43,7 @@ public class LottoTicket {
     }
 
     private boolean isInsufficientNumberCount(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.size() != LottoConstant.LOTTO_NUM_SIZE;
+        return lottoNumbers.size() != LOTTO_NUM_SIZE;
     }
 
     public static LottoTicket createLottoTicket(List<LottoNumber> lottoNumbers) {
