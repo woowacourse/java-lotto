@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
+    private static final String DELIMITER = ",";
 
     private final Set<LottoNumber> numbers;
 
@@ -42,12 +43,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (LottoNumber number : numbers) {
-            sb.append(number);
-            sb.append(", ");
-        }
-        return sb.toString().substring(0, sb.toString().length() - 2) + "]";
+        return String.join(DELIMITER, numbers.toString());
     }
 }
