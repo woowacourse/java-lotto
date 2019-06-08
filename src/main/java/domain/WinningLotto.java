@@ -14,7 +14,7 @@ public class WinningLotto extends Lotto {
         this.bonusNumber = bonusNumber;
     }
 
-    Rank matchUpLottoNumbersOf(IssuedLotto issuedLotto) {
+    Rank matchUpLottoNumbersWith(IssuedLotto issuedLotto) {
         int countOfMatchingNumbers = lottoNumbers.stream()
                 .filter(issuedLotto::contains)
                 .collect(Collectors.toList())

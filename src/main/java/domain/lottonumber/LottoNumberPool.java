@@ -8,7 +8,7 @@ public class LottoNumberPool {
 
     static {
         for (int number = LottoNumber.MIN_NUMBER; number <= LottoNumber.MAX_NUMBER; number++) {
-            pool.add(LottoNumber.of(number));
+            pool.add(LottoNumber.valueOf(number));
         }
     }
 

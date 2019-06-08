@@ -47,6 +47,6 @@ class WinningLottoTest {
         Set<LottoNumber> sixIssuedNumbers = new TreeSet<>(Arrays.asList(one, two, three, four, five, bonusNumber));
         IssuedLotto issuedLotto = new IssuedLotto(sixIssuedNumbers);
 
-        assertThat(winningLotto.matchUpLottoNumbersOf(issuedLotto)).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.matchUpLottoNumbersWith(issuedLotto)).isEqualTo(Rank.SECOND);
     }
 }

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,7 +24,7 @@ class LottoFactoryTest {
 
     @Test
     void 입력받은_금액만큼_자동_로또를_제대로_발행해주는지_테스트() {
-        PurchaseAmount purchaseAmount = PurchaseAmount.of(5000);
+        PurchaseAmount purchaseAmount = PurchaseAmount.valueOf(5000);
         IssuedLottos issuedLottos = LottoFactory.autoIssueLottoWorthOf(purchaseAmount);
 
         assertThat(issuedLottos.getPurchasedAmount()).isEqualTo(5000);
@@ -44,6 +43,6 @@ class LottoFactoryTest {
     void 수동으로_구매한_로또를_제대로_발행해주는지_테스트() {
         Lotto expectedLotto = new IssuedLotto(sixNumbers);
 
-        assertThat(LottoFactory.manualIssueLotto(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(expectedLotto);
+        assertThat(LottoFactory.manualIssueLottoBy(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(expectedLotto);
     }
 }

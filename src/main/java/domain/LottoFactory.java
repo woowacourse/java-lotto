@@ -22,11 +22,11 @@ public class LottoFactory {
     }
 
     public static WinningLotto issueWinningLotto(List<Integer> inputNumbers, LottoNumber bonusNumber) {
-        Set<LottoNumber> lottoNumbers = getLottoNumbersBy(inputNumbers);
+        Set<LottoNumber> lottoNumbers = getLottoNumbersOf(inputNumbers);
         return new WinningLotto(lottoNumbers, bonusNumber);
     }
 
-    private static Set<LottoNumber> getLottoNumbersBy(List<Integer> inputNumbers) {
+    private static Set<LottoNumber> getLottoNumbersOf(List<Integer> inputNumbers) {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
 
         for (Integer number : inputNumbers) {
@@ -35,8 +35,8 @@ public class LottoFactory {
         return lottoNumbers;
     }
 
-    public static IssuedLotto manualIssueLotto(List<Integer> inputNumbers) {
-        Set<LottoNumber> lottoNumbers = getLottoNumbersBy(inputNumbers);
+    public static IssuedLotto manualIssueLottoBy(List<Integer> inputNumbers) {
+        Set<LottoNumber> lottoNumbers = getLottoNumbersOf(inputNumbers);
         return new IssuedLotto(lottoNumbers);
     }
 }

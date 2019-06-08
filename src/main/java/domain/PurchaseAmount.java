@@ -9,7 +9,7 @@ public class PurchaseAmount {
         this.amountOfMoney = amountOfMoney;
     }
 
-    public static PurchaseAmount of(int amountOfMoney) {
+    public static PurchaseAmount valueOf(int amountOfMoney) {
         validateAmountOfMoney(amountOfMoney);
         validateIfMultipleOfPricePerLotto(amountOfMoney);
 
@@ -30,5 +30,15 @@ public class PurchaseAmount {
 
     int getPurchaseAmount() {
         return amountOfMoney;
+    }
+
+    public PurchaseAmount getChangeOf(int amountOfMoney) {
+        return new PurchaseAmount(this.amountOfMoney - amountOfMoney);
+    }
+
+    public void checkNumberOfManualIssue(int numberOfManualIssue) {
+        if (numberOfManualIssue * IssuedLotto.PRICE > amountOfMoney) {
+            throw new IllegalNumberOfManualIssueException();
+        }
     }
 }
