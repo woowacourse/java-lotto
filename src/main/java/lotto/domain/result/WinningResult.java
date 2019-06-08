@@ -3,7 +3,6 @@ package lotto.domain.result;
 import lotto.domain.user.UserTickets;
 import lotto.domain.winning.BonusBall;
 import lotto.domain.winning.WinningLotto;
-import lotto.utils.NullCheckUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +17,10 @@ public class WinningResult {
     private static final int MINIMUM_PURCHASE_PRICE = 0;
     private static final String ERROR_DIVIDE_ZERO = "총 수익률을 계산할 수 없습니다.";
     private static final int INITIAL_VALUE_ZERO = 0;
+    private static final String ERROR_NULL_TICKETS = "createWinningResult(UserTickets) has Null";
+    private static final String ERROR_NULL_WINNING_LOTTO = "createWinningResult(WinningLotto) has Null";
+    private static final String ERROR_NULL_BONUS_BALL = "createWinningResult(BonusBall) has Null";
+    private static final String ERROR_NULL_RANK = "getMatchedRankCountValue() has Null";
 
     private Map<Rank, Integer> matchedRankCount;
 
@@ -40,14 +43,36 @@ public class WinningResult {
     }
 
     public static WinningResult createWinningResult(UserTickets tickets, WinningLotto winningLotto, BonusBall bonus) {
-        NullCheckUtil.checkNullUserTickets(tickets);
-        NullCheckUtil.checkNullWinningLotto(winningLotto);
-        NullCheckUtil.checkNullBonusBall(bonus);
+        checkNullUserTickets(tickets);
+        checkNullWinningLotto(winningLotto);
+        checkNullBonusBall(bonus);
+
         return new WinningResult(tickets, winningLotto, bonus);
     }
 
+    private static void checkNullUserTickets(UserTickets tickets) {
+        if (tickets == null) {
+            throw new IllegalArgumentException(ERROR_NULL_TICKETS);
+        }
+    }
+
+    private static void checkNullWinningLotto(WinningLotto winningLotto) {
+        if (winningLotto == null) {
+            throw new IllegalArgumentException(ERROR_NULL_WINNING_LOTTO);
+        }
+    }
+
+    private static void checkNullBonusBall(BonusBall bonus) {
+        if (bonus == null) {
+            throw new IllegalArgumentException(ERROR_NULL_BONUS_BALL);
+        }
+    }
+
     public int getMatchedRankCountValue(Rank rank) {
-        NullCheckUtil.checkNullRank(rank);
+        if (rank == null) {
+            throw new IllegalArgumentException(ERROR_NULL_RANK);
+        }
+
         return matchedRankCount.get(rank);
     }
 

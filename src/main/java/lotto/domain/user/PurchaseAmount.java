@@ -1,7 +1,5 @@
 package lotto.domain.user;
 
-import lotto.utils.NullCheckUtil;
-
 import java.util.Objects;
 
 public class PurchaseAmount {
@@ -44,12 +42,10 @@ public class PurchaseAmount {
     }
 
     public static PurchaseAmount createLottoAmount(int purchasePrice) {
-        NullCheckUtil.checkNullInteger(purchasePrice);
         return new PurchaseAmount(purchasePrice);
     }
 
     public boolean isEqualsAmount(int number) {
-        NullCheckUtil.checkNullInteger(number);
         return this.autoLottoAmount == number;
     }
 

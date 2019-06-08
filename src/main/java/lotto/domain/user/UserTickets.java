@@ -6,7 +6,6 @@ import lotto.domain.winning.BonusBall;
 import lotto.domain.lottomanager.LottoCreator;
 import lotto.domain.lottomanager.LottoTicket;
 import lotto.domain.lottomanager.shufflerule.Shuffle;
-import lotto.utils.NullCheckUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserTickets {
+    private static final String ERROR_NULL_LOTTO_TICKET = "createUserTickets(List<LottoTicket>) has Null";
+    private static final String ERROR_NULL_PURCHASE_AMOUNT = "createUserTickets(PurchaseAmount) has Null";
+    private static final String ERROR_NULL_SHUFFLE = "createUserTickets(Shuffle) has Null";
+    private static final String ERROR_NULL_WINNING_LOTTO = "getMatchedRanks(WinningLotto) has Null";
+    private static final String ERROR_NULL_BONUS_BALL = "getMatchedRanks(BonusBall) has Null";
+
     private List<LottoTicket> userLottoTickets;
 
     private UserTickets(List<LottoTicket> manualTickets, PurchaseAmount purchaseAmount, Shuffle autoShuffle) {
@@ -36,11 +41,29 @@ public class UserTickets {
 
     public static UserTickets createUserTickets(List<LottoTicket> manualTickets, PurchaseAmount purchaseAmount
             , Shuffle autoShuffle) {
-        NullCheckUtil.checkNullLottoTickets(manualTickets);
-        NullCheckUtil.checkNullPurchaseAmount(purchaseAmount);
-        NullCheckUtil.checkNullShuffle(autoShuffle);
+        manualTickets.forEach(UserTickets::checkNullLottoTicket);
+        checkNullPurchaseAmount(purchaseAmount);
+        checkNullAutoShuffle(autoShuffle);
 
         return new UserTickets(manualTickets, purchaseAmount, autoShuffle);
+    }
+
+    private static void checkNullLottoTicket(LottoTicket lottoTicket) {
+        if (lottoTicket == null) {
+            throw new IllegalArgumentException(ERROR_NULL_LOTTO_TICKET);
+        }
+    }
+
+    private static void checkNullPurchaseAmount(PurchaseAmount purchaseAmount) {
+        if (purchaseAmount == null) {
+            throw new IllegalArgumentException(ERROR_NULL_PURCHASE_AMOUNT);
+        }
+    }
+
+    private static void checkNullAutoShuffle(Shuffle autoShuffle) {
+        if (autoShuffle == null) {
+            throw new IllegalArgumentException(ERROR_NULL_SHUFFLE);
+        }
     }
 
     public List<LottoTicket> getUserLottoTickets() {
@@ -48,10 +71,22 @@ public class UserTickets {
     }
 
     public List<Rank> getMatchedRanks(WinningLotto winningLotto, BonusBall bonusBall) {
-        NullCheckUtil.checkNullWinningLotto(winningLotto);
-        NullCheckUtil.checkNullBonusBall(bonusBall);
+        checkNullWinningLotto(winningLotto);
+        checkNullBonusBall(bonusBall);
 
         return Collections.unmodifiableList(getFilledRanks(winningLotto, bonusBall));
+    }
+
+    private void checkNullWinningLotto(WinningLotto winningLotto) {
+        if (winningLotto == null) {
+            throw new IllegalArgumentException(ERROR_NULL_WINNING_LOTTO);
+        }
+    }
+
+    private void checkNullBonusBall(BonusBall bonusBall) {
+        if (bonusBall == null) {
+            throw new IllegalArgumentException(ERROR_NULL_BONUS_BALL);
+        }
     }
 
     private List<Rank> getFilledRanks(WinningLotto winningLotto, BonusBall bonusBall) {

@@ -6,7 +6,6 @@ import lotto.domain.result.WinningResult;
 import lotto.domain.lottomanager.LottoTicket;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;
-import lotto.utils.NullCheckUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,8 +28,6 @@ public class OutputView {
     private static StringBuilder stringBuilder;
 
     public static void printAmount(PurchaseAmount purchaseAmount, int manualLottoTickets) {
-        NullCheckUtil.checkNullPurchaseAmount(purchaseAmount);
-
         stringBuilder = new StringBuilder();
         stringBuilder.append(String.format(MANUAL_LOTTO_MESSAGE, manualLottoTickets))
                 .append(String.format(AUTO_LOTTO_MESSAGE, purchaseAmount.getAutoLottoAmount() - manualLottoTickets));
@@ -39,7 +36,6 @@ public class OutputView {
     }
 
     public static void printUserLottoTickets(UserTickets userTickets) {
-        NullCheckUtil.checkNullUserTickets(userTickets);
         stringBuilder = new StringBuilder();
 
         for (LottoTicket lottoTicket : userTickets.getUserLottoTickets()) {
@@ -51,8 +47,6 @@ public class OutputView {
     }
 
     public static void printWinningStatistics(WinningResult winningResult, int purchasePrice) {
-        NullCheckUtil.checkNullWinningResult(winningResult);
-
         stringBuilder = new StringBuilder();
         stringBuilder.append(RESULT_STATISTICS_MESSAGE);
 

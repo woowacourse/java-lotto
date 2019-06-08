@@ -1,7 +1,6 @@
 package lotto.domain.lottomanager;
 
 import lotto.domain.lottomanager.shufflerule.Shuffle;
-import lotto.utils.NullCheckUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +13,8 @@ public class LottoCreator {
     private static final int LIMIT_MIN_NUM = 1;
     private static final int LIMIT_MAX_NUM = 45;
     private static final int LOTTO_NUM_SIZE = 6;
+    private static final String ERROR_NULL_LOTTO_NUMBERS = "createManualTickets() has Null";
+    private static final String ERROR_NULL_SHUFFLE = "createAutoTickets() has Null";
 
     private static List<LottoNumber> possibleNumbers;
 
@@ -24,7 +25,9 @@ public class LottoCreator {
     }
 
     public static LottoTicket createAutoTickets(Shuffle shuffle) {
-        NullCheckUtil.checkNullShuffle(shuffle);
+        if (shuffle == null) {
+            throw new IllegalArgumentException(ERROR_NULL_SHUFFLE);
+        }
 
         shuffle.shuffleLottoNumbers(possibleNumbers);
 
@@ -39,7 +42,7 @@ public class LottoCreator {
     }
 
     public static LottoTicket createManualTickets(List<Integer> lottoNumbers) {
-        NullCheckUtil.checkNullIntegerNumbers(lottoNumbers);
+        lottoNumbers.forEach(LottoCreator::checkNullNumber);
         Collections.sort(lottoNumbers);
 
         List<LottoNumber> convertedLottoNumbers = lottoNumbers.stream()
@@ -47,5 +50,11 @@ public class LottoCreator {
                 .collect(Collectors.toList());
 
         return LottoTicket.createLottoTicket(convertedLottoNumbers);
+    }
+
+    private static void checkNullNumber(Integer number) {
+        if (number == null) {
+            throw new NullPointerException(ERROR_NULL_LOTTO_NUMBERS);
+        }
     }
 }

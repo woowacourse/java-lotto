@@ -1,7 +1,6 @@
 package lotto.domain.lottomanager;
 
 import lotto.domain.winning.BonusBall;
-import lotto.utils.NullCheckUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +10,9 @@ public class LottoTicket {
     private static final String ERROR_OVERLAPPED = "중복된 로또 번호가 존재합니다.";
     private static final String ERROR_LOTTO_NUMBER_COUNT = "번호가 6개가 아닙니다.";
     private static final int LOTTO_NUM_SIZE = 6;
+    private static final String ERROR_NULL_CONTAIN_LOTTO_NUMBER = "isContainedNumbers(LottoNumber) has Null";
+    private static final String ERROR_NULL_USER_TICKET = "getMatchedNumbersCount() has Null";
+    private static final String ERROR_NULL_CONTAIN_BONUS_BALL = "isContainedNumbers(BonusBall) has Null";
 
     private List<LottoNumber> lottoTicket;
 
@@ -47,8 +49,14 @@ public class LottoTicket {
     }
 
     public static LottoTicket createLottoTicket(List<LottoNumber> lottoNumbers) {
-        NullCheckUtil.checkNullLottoNumbers(lottoNumbers);
+        lottoNumbers.forEach(LottoTicket::checkNullLottoNumber);
         return new LottoTicket(lottoNumbers);
+    }
+
+    private static void checkNullLottoNumber(LottoNumber number) {
+        if (number == null) {
+            throw new NullPointerException("createLottoTicket() has Null");
+        }
     }
 
     public List<LottoNumber> getLottoTicket() {
@@ -56,19 +64,28 @@ public class LottoTicket {
     }
 
     public int getMatchedNumbersCount(LottoTicket userTicket) {
-        NullCheckUtil.checkNullLottoTicket(userTicket);
+        if (userTicket == null) {
+            throw new NullPointerException(ERROR_NULL_USER_TICKET);
+        }
+
         return (int) this.lottoTicket.stream()
                 .filter(userTicket.lottoTicket::contains)
                 .count();
     }
 
     public boolean isContainedNumbers(LottoNumber lottoNumber) {
-        NullCheckUtil.checkNullLottoNumber(lottoNumber);
+        if (lottoNumber == null) {
+            throw new NullPointerException(ERROR_NULL_CONTAIN_LOTTO_NUMBER);
+        }
+
         return this.lottoTicket.contains(lottoNumber);
     }
 
     public boolean isContainedNumbers(BonusBall bonusBall) {
-        NullCheckUtil.checkNullBonusBall(bonusBall);
+        if (bonusBall == null) {
+            throw new IllegalArgumentException(ERROR_NULL_CONTAIN_BONUS_BALL);
+        }
+
         return bonusBall.isContainNumbers(Collections.unmodifiableList(lottoTicket));
     }
 

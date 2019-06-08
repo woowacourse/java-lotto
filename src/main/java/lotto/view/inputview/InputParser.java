@@ -1,7 +1,5 @@
 package lotto.view.inputview;
 
-import lotto.utils.NullCheckUtil;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -15,16 +13,24 @@ public class InputParser {
     private static final String SPACE = " ";
     private static final String NON_SPACE = "";
     private static final String COMMA = ",";
+    private static final String ERROR_NULL_INPUT_PRICE = "getValidInput() has NULL";
+    private static final String ERROR_NULL_INPUT_NUMBERS = "getLottoNum has Null";
 
     public static int getPurchasePrice(String inputPrice) {
         return toInts(getValidInputPrice(inputPrice));
     }
 
     private static String getValidInputPrice(String inputPrice) {
-        NullCheckUtil.checkNullInput(inputPrice);
+        checkNullInputPrice(inputPrice);
         checkNoInput(inputPrice);
 
         return getCheckedPatternInput(inputPrice);
+    }
+
+    private static void checkNullInputPrice(String input) {
+        if (input == null) {
+            throw new NullPointerException(ERROR_NULL_INPUT_PRICE);
+        }
     }
 
     private static void checkNoInput(String inputPrice) {
@@ -49,11 +55,17 @@ public class InputParser {
     }
 
     public static List<Integer> getLottoNum(String inputNumbers) {
-        NullCheckUtil.checkNullInput(inputNumbers);
+        checkNullInputNumbers(inputNumbers);
         checkNoInput(inputNumbers);
 
         return Arrays.stream(inputNumbers.replaceAll(SPACE, NON_SPACE).split(COMMA))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    private static void checkNullInputNumbers(String input) {
+        if (input == null) {
+            throw new NullPointerException(ERROR_NULL_INPUT_NUMBERS);
+        }
     }
 }
