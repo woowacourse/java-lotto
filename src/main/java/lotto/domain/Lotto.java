@@ -25,6 +25,10 @@ public class Lotto {
     public Number getLottoByIndex(int index) {
         return lotto.get(index);
     }
+    
+    public List<Number> getLotto() {
+        return Collections.unmodifiableList(lotto);
+    }
 
     private void validCheck() {
         validDuplication();
@@ -43,10 +47,6 @@ public class Lotto {
         if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
         }
-    }
-
-    public List<Number> getLotto() {
-        return Collections.unmodifiableList(lotto);
     }
 
     @Override
