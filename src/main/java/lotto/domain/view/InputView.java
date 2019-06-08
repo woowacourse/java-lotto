@@ -144,4 +144,8 @@ public class InputView {
     private static int stringToInt(String input) throws InputMismatchException {
         return Integer.parseInt(input.replace(" ", ""));
     }
+
+    public static void printRemainedManualLotto(int manualLottoSize, List<Lotto> manualLotto) {
+        System.out.println("로또 번호를 입력하세요." + manualLotto.size() + "/" + manualLottoSize);
+    }
 }

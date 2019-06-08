@@ -15,17 +15,15 @@ public class Main {
         PurchasedLotto purchasedLotto = new PurchasedLotto();
         List<Lotto> manualLotto = new ArrayList<>();
         List<Lotto> autoLotto = new ArrayList<>();
+
         Money money = new Money(InputView.inputMoney());
         int manualLottoSize = InputView.inputManualLottoSize(money);
 
         InputView.printInputManualLottoMessage(manualLottoSize);
-        // 수동, 자동 로또 생성
-
         while (manualLotto.size() < manualLottoSize) {
-            System.out.println("로또 번호를 입력하세요." + manualLotto.size() + "/" + manualLottoSize);
+            InputView.printRemainedManualLotto(manualLottoSize, manualLotto);
             manualLotto.add(new Lotto(InputView.inputLottoNumber()));
         }
-
         while (autoLotto.size() < (money.availablePurchaseCount() - manualLottoSize)) {
             autoLotto.add(new Lotto(ShuffledNumberGenerator.getShuffledNumbers()));
         }
