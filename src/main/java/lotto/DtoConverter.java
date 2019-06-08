@@ -9,20 +9,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DtoConverter {
-    public LottosDto convertLottosToDto(final List<Lotto> lottos) {
-        List<LottoDto> semiLottos = new ArrayList<>();
-        for (final Lotto lotto : lottos) {
-            LottoDto lottoDto = convertLottoToDto(lotto);
-            semiLottos.add(lottoDto);
-        }
-        return LottosDto.of(semiLottos);
-    }
+	public LottosDto convertLottosToDto(final List<Lotto> lottos) {
+		List<LottoDto> LottoDtos = new ArrayList<>();
+		for (final Lotto lotto : lottos) {
+			LottoDto lottoDto = convertLottoToDto(lotto);
+			LottoDtos.add(lottoDto);
+		}
+		return LottosDto.of(LottoDtos);
+	}
 
-    private LottoDto convertLottoToDto(Lotto lotto) {
-        LottoDto lottoDto = new LottoDto();
-        lottoDto.setNumbers(lotto.getLottoNumbers().stream()
-                .map(lottoNumber -> lottoNumber.toString())
-                .collect(Collectors.toList()));
-        return lottoDto;
-    }
+	private LottoDto convertLottoToDto(final Lotto lotto) {
+		List<String> numbers = lotto.getLottoNumbers()
+				.stream()
+				.map(lottoNumber -> lottoNumber.toString())
+				.collect(Collectors.toList());
+		return LottoDto.of(numbers);
+	}
 }

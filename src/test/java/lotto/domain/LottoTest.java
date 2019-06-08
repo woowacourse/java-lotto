@@ -63,10 +63,10 @@ class LottoTest {
 
     @Test
     public void 중복된_숫자_리스트가_입력됬을때_예외발생_검사() {
-        List<Integer> NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 5);
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
 
         assertThatExceptionOfType(NumberDuplicationException.class).isThrownBy(() -> {
-            lottoFactory.create(NUMBERS);
+            lottoFactory.create(numbers);
         });
     }
 

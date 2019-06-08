@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+      <title>lotto game</title>
+</head>
+
+
+<style>
+      div.lottobuy input {
+            max-width: 40px;
+      }
+</style>
+<!-- #users 리스트 -->
+
+<body>
+      <nav>
+            <h3>구입 금액 입력</h3>
+      </nav>
+      <form action="/test" method="post">
+            <div class="money">
+                  <label>구입 금액 : </label>
+                  <input type="text" name="money" />
+                  <input type="submit" value="충전" />
+            </div>
+      </form>
+
+      <div class="test">
+            <label> {{money}} </label>
+      </div>
+
+      <form action="/lottos" method="post">
+            <div class="lottobuy">
+                  <input type="text" name="number1" maxlength="2" />
+                  <input type="text" name="number2" maxlength="2" />
+                  <input type="text" name="number3" maxlength="2" />
+                  <input type="text" name="number4" maxlength="2" />
+                  <input type="text" name="number5" maxlength="2" />
+                  <input type="text" name="number6" maxlength="2" />
+                  <label>보너스 번호 </label>
+                  <input type="text" name="bonus" maxlength="2" />
+                  <br />
+                  <br />
+                  <input type="submit" value="구입" />
+            </div>
+      </form>
+
+      <div class="test">
+            <label> {{number1}} </label>
+            <label> {{number2}} </label>
+            <label> {{number3}} </label>
+            <label> {{number4}} </label>
+            <label> {{number5}} </label>
+            <label> {{number6}} </label>
+            <label> {{bonus}} </label>
+      </div>
+
+
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -24,9 +24,9 @@ class LottoServiceTest {
         lottoFactory = new LottoFactory();
         buyer = new LottoService(MONEY);
 
-        buyer.buy(FIFTH_NUMBERS);
+        buyer.buy(lottoFactory.create(FIFTH_NUMBERS));
         while (buyer.canBuy()) {
-            buyer.buy(MISS_NUMBERS);
+            buyer.buy(lottoFactory.create(MISS_NUMBERS));
         }
     }
 
