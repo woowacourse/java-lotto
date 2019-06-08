@@ -27,8 +27,6 @@ public class WebUILottoApplication {
             Lottos postLottos = lottosFactory.generateTotalLottos();
             loadLottos(postLottos);
 
-            OutputConsole.outputLotto(postLottos, lottoCount);
-
             Map<String, Object> model = new HashMap<>();
             model.put("lottos", postLottos);
             model.put("AutoCount", lottoCount.getAutoCount());
@@ -40,6 +38,7 @@ public class WebUILottoApplication {
             WinningLotto winningLotto = new WinningLotto(new Lotto(ConvertLottoNumber.run(req.queryParams("winningNumbers"))),
                     LottoNumber.getInstance(Integer.parseInt(req.queryParams("bonusNumber"))));
             LottoResult lottoResult = new LottoResult(winningLotto, lottos);
+
             Map<String, Object> model = new HashMap<>();
             model.put("first", lottoResult.getCountOfRank(FIRST));
             model.put("second", lottoResult.getCountOfRank(SECOND));
