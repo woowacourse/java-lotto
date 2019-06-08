@@ -3,8 +3,8 @@ package lotto.domain.TicketModel;
 import java.util.List;
 
 public class AbstractWinningLotto implements WinningTicket {
-    private Ticket winningTicket;
-    private int bonus;
+    private final Ticket winningTicket;
+    private final int bonus;
 
     public AbstractWinningLotto(List<Integer> numbers, int bonus) {
         TicketCreator generator = new LottoGenerator();
