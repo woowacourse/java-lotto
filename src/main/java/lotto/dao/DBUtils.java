@@ -6,15 +6,13 @@ public class DBUtils {
     private DBUtils() {
     }
 
-    public static Connection getConnection() {
+    public static Connection getConnection(){
         Connection conn = null;
         try {
             PropertiesUtil propertiesUtil = PropertiesUtil.getInstance();
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(propertiesUtil.getDriverClassName());
             conn = DriverManager.getConnection(propertiesUtil.getDbURL(), propertiesUtil.getProperties());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return conn;

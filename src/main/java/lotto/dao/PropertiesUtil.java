@@ -7,6 +7,7 @@ import java.util.Properties;
 public class PropertiesUtil {
     private String dbURL;
     private Properties properties;
+    private String driverClassName;
 
     public static PropertiesUtil getInstance() {
         return LazyHolder.INSTANCE;
@@ -18,7 +19,7 @@ public class PropertiesUtil {
             properties = new Properties();
             properties.load(in);
             dbURL = String.format("jdbc:mysql://%s/%s", properties.getProperty("server"), properties.getProperty("database"));
-
+            driverClassName = properties.getProperty("driver-class-name");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -30,6 +31,10 @@ public class PropertiesUtil {
 
     public Properties getProperties() {
         return properties;
+    }
+
+    public String getDriverClassName() {
+        return driverClassName;
     }
 
     private static class LazyHolder {
