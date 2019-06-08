@@ -12,8 +12,8 @@ import java.util.List;
 
 
 public class UserLottos {
+    private final TicketCreator ticketGenerator;
     private List<Ticket> tickets;
-    private TicketCreator ticketGenerator;
 
     public UserLottos(UserLottoDto dto) {
         ticketGenerator = new LottoGenerator();
@@ -22,7 +22,7 @@ public class UserLottos {
     }
 
     private void generateAuto(int buyMoney) {
-        for (int i = tickets.size(); i <= (buyMoney / 1000); i++) {
+        for (int i = tickets.size(); i < (buyMoney / 1000); i++) {
             tickets.add(ticketGenerator.create());
         }
     }
@@ -30,8 +30,8 @@ public class UserLottos {
     private void generateManual(int count, List<List<Integer>> manualNumbers) {
         validate(count, manualNumbers);
         List<Ticket> tickets = new ArrayList<>();
-        for (List<Integer> manualNumber : manualNumbers) {
-            tickets.add(ticketGenerator.create(manualNumber));
+        for (int i = 0; i < manualNumbers.size(); i++) {
+            tickets.add(ticketGenerator.create(manualNumbers.get(i)));
         }
         this.tickets = tickets;
     }
@@ -52,7 +52,11 @@ public class UserLottos {
 
     @Override
     public String toString() {
-        return "구입한 로또는\n" +
-                tickets;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(tickets.size()).append("장 구매했습니다.\n");
+        for (Ticket ticket : tickets) {
+            stringBuilder.append(ticket.toString()).append("\n");
+        }
+        return stringBuilder.toString();
     }
 }
