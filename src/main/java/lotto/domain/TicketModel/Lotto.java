@@ -36,7 +36,6 @@ class Lotto implements Ticket {
 
     @Override
     public String toString() {
-        return "Lotto " +
-                numbers;
+        return numbers.toString();
     }
 }
