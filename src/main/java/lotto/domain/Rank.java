@@ -34,9 +34,12 @@ public enum Rank {
 
     @Override
     public String toString() {
-        return "Rank{" +
-                "match=" + match +
-                ", money=" + money +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(match).append("개 일치 ");
+        if (bonus) {
+            stringBuilder.append("보너스 볼 일치 ").append(money);
+            return stringBuilder.toString();
+        }
+        return stringBuilder.append(money).toString();
     }
 }
