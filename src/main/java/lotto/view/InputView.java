@@ -51,10 +51,9 @@ public class InputView {
         try {
             String numbers = SCANNER.nextLine();
             Pattern.compile("\\d(\\d)?(,\\d(\\d)?)*").matcher(StringUtils.deleteWhitespace(numbers));
-            return Arrays.asList(numbers
+            return Arrays.stream(numbers
                     .split(","))
-                    .stream()
-                    .map(n -> Integer.parseInt(n))
+                    .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             System.out.println(NOT_CORRECT_INPUT);

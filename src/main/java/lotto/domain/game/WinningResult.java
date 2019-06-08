@@ -34,7 +34,8 @@ public class WinningResult {
     private double calculateWinningRate(int lottoTicketsAmount) {
         int winningMoney = rankResultInformation.entrySet().stream()
                 .map(x -> x.getKey().getWinningMoney() * x.getValue())
-                .collect(Collectors.summingInt(Integer::intValue));
+                .mapToInt(Integer::intValue)
+                .sum();
         return winningMoney / (double) (lottoTicketsAmount * Money.getLottoPrice()) * 100;
     }
 

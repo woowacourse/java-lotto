@@ -39,7 +39,9 @@ public class LottoTicket {
     }
 
     public int countSameNumber(SortedSet<LottoNumber> winningNumbers) {
-        return winningNumbers.stream().filter(x -> lottoNumbers.contains(x)).collect(Collectors.toList()).size();
+        return (int)winningNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
     }
 
     public boolean hasSameNumber(final LottoNumber bonusNumber) {

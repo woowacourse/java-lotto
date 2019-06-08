@@ -22,12 +22,16 @@ public class LottoTickets {
     }
 
     public List<Rank> getTicketsRank(WinningLotto winningLotto) {
-        List<Rank> ranks = lottoTickets.stream().map(x -> winningLotto.getRank(x)).collect(Collectors.toList());
+        List<Rank> ranks = lottoTickets.stream()
+                .map(winningLotto::getRank)
+                .collect(Collectors.toList());
         return ranks;
     }
 
     @Override
     public String toString() {
-        return lottoTickets.stream().map(x -> x.toString()).collect(Collectors.joining("\n"));
+        return lottoTickets.stream()
+                .map(LottoTicket::toString)
+                .collect(Collectors.joining("\n"));
     }
 }

@@ -32,6 +32,4 @@ public class LottoApplication {
         WinningResult winningResult = new WinningResult(lottoTickets, WinningLotto.of(winningNumbers, LottoNumber.of(InputView.getBonusNumber())));
         OutputView.printGameResult(winningResult.getRankInformation(), winningResult.getWinningRate());
     }
-
-
 }
