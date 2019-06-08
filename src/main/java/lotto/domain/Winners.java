@@ -9,13 +9,13 @@ public class Winners {
 
     private final List<Rank> rankResult;
 
-    private Winners(MyLotto myLotto, WinningLotto winningLotto) {
+    private Winners(Lottoes lottoes, WinningLotto winningLotto) {
         this.rankResult = new ArrayList<>();
-        getResult(myLotto, winningLotto);
+        getResult(lottoes, winningLotto);
     }
 
-    public static Winners create(MyLotto myLotto, WinningLotto winningLotto) {
-        return new Winners(myLotto, winningLotto);
+    public static Winners create(Lottoes lottoes, WinningLotto winningLotto) {
+        return new Winners(lottoes, winningLotto);
     }
 
     public List<Rank> getRankResult() {
@@ -27,10 +27,10 @@ public class Winners {
         return (prizeSum / (inputMoney * MONEY_UNIT)) * PERCENT;
     }
 
-    private void getResult(MyLotto myLotto, WinningLotto winningLotto) {
-        for (int i = 0; i < myLotto.getSize(); i++) {
-            rankResult.add(Rank.valueOf(winningLotto.match(myLotto.getIndexByLotto(i))
-                    , winningLotto.matchBonus(myLotto.getIndexByLotto(i))));
+    private void getResult(Lottoes lottoes, WinningLotto winningLotto) {
+        for (int i = 0; i < lottoes.getSize(); i++) {
+            rankResult.add(Rank.valueOf(winningLotto.match(lottoes.getIndexByLotto(i))
+                    , winningLotto.matchBonus(lottoes.getIndexByLotto(i))));
         }
     }
 
