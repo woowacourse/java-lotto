@@ -25,14 +25,12 @@ public class LottoesTest {
         lottos.add(new Lotto(lottoNumbers));
         lottos.add(new Lotto(lottoNumbers));
 
-        String[] numbers = {"1,2,3,4,5,6"};
-
-        lottoes = Lottoes.create(numbers, 4);
+        lottoes = new Lottoes(lottos, 4, LottoNumberGenerator.create());
     }
 
     @Test
     void 내가_구매한_로또_사이즈() {
-        assertThat(lottoes.getSize()).isEqualTo(5);
+        assertThat(lottoes.getSize()).isEqualTo(6);
     }
 
     @Test

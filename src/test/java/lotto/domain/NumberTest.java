@@ -8,14 +8,14 @@ public class NumberTest {
     @Test
     void 숫자가_45_이상일때() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Number number = new Number(46);
+            new Number(46);
         });
     }
 
     @Test
     void 숫자가_1_이하일때() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Number number = new Number(0);
+            new Number(0);
         });
     }
 }

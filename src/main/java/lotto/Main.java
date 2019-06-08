@@ -15,7 +15,7 @@ public class Main {
         int round = new Money(InputView.inputMoney()).getRound();
         int manualRound = InputView.inputHandNumber();
         String[] number = InputView.inputHandleNumbers(manualRound);
-        Lottoes lottoes = new Lottoes(createManualLottos(number), round);
+        Lottoes lottoes = new Lottoes(createManualLottos(number), round, LottoNumberGenerator.create());
         OutputView.printMyLotto(lottoes, round);
 
         WinningLotto winningLotto = new WinningLotto

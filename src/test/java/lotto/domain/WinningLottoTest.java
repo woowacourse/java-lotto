@@ -10,9 +10,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WinningLottoTest {
-    List<Number> lottos;
-    Lotto lotto;
-    WinningLotto winningLotto;
+    private List<Number> lottos;
+    private Lotto lotto;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
@@ -23,30 +23,23 @@ public class WinningLottoTest {
         }
 
         lotto = new Lotto(lottos);
-        winningLotto = WinningLotto.create("9,10,11,12,13,14", new Number(4));
+        winningLotto = new WinningLotto(lotto, new Number(9));
     }
 
     @Test
     void 당첨번호와_중복() {
-
         assertThrows(IllegalArgumentException.class, () -> {
-            WinningLotto.create("1,2,3,4,5,6", new Number(4));
+            new WinningLotto(lotto, new Number(4));
         });
     }
 
     @Test
     void 보너스가_당첨번호에_있는지() {
-        assertThat(winningLotto.matchBonus(lotto)).isTrue();
+        assertThat(winningLotto.matchBonus(lotto)).isFalse();
     }
 
     @Test
     void 당첨번호와_일치하는_내_로또와의_갯수() {
-        assertThat(winningLotto.match(lotto)).isEqualTo(0);
-    }
-
-    @Test
-    void 당첨번호와_일치하는_내_로또와의_갯수2() {
-        lottos.set(3, new Number(13));
-        assertThat(winningLotto.match(lotto)).isEqualTo(1);
+        assertThat(winningLotto.match(lotto)).isEqualTo(6);
     }
 }
