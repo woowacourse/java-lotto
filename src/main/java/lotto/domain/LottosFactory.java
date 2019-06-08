@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottosFactory {
-    private final List<List<Integer>> manualLottoNumbers;
+    private final List<String> manualLottoNumbers;
     private final LottoCount lottoCount;
-    private List<Lotto> lottosList = new ArrayList<>();
 
-    public LottosFactory(List<List<Integer>> manualLottoNumbers, LottoCount lottoCount) {
+    public LottosFactory(List<String> manualLottoNumbers, LottoCount lottoCount) {
         this.manualLottoNumbers = manualLottoNumbers;
         this.lottoCount = lottoCount;
     }
 
-    public Lottos getLottos() {
-        getManualLottos();
-        getAutoLottos();
+    public Lottos generateTotalLottos() {
+        List<Lotto> lottosList = new ArrayList<>();
+        getManualLottos(lottosList);
+        getAutoLottos(lottosList);
         return new Lottos(lottosList);
     }
 
-    private void getManualLottos() {
+    private void getManualLottos(List<Lotto> lottosList) {
         ManualLottoMachine manualLottoMachine = new ManualLottoMachine(manualLottoNumbers);
         List<Lotto> manualLottos = new ArrayList<>(manualLottoMachine.generateLottos());
         for (Lotto manualLotto : manualLottos) {
@@ -27,7 +27,7 @@ public class LottosFactory {
         }
     }
 
-    private void getAutoLottos() {
+    private void getAutoLottos(List<Lotto> lottosList) {
         AutoLottoMachine autoLottoMachine = new AutoLottoMachine(lottoCount.getAutoCount());
         List<Lotto> autoLottos = new ArrayList<>(autoLottoMachine.generateLottos());
         for (Lotto autoLotto : autoLottos) {

@@ -39,12 +39,21 @@ public class Lotto {
     public List<String> convertStringList() {
         List<String> numbers = new ArrayList<>();
         for (LottoNumber lottoNumber : lottoNumbers) {
-            numbers.add(lottoNumber.getNumber().toString());
+            numbers.add(lottoNumber.toString());
         }
         return numbers;
     }
 
     public boolean isContain(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        stringBuilder.append(String.join(", ", convertStringList()));
+        stringBuilder.append("]");
+        return stringBuilder.toString();
     }
 }

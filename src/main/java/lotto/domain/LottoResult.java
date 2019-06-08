@@ -32,7 +32,7 @@ public class LottoResult {
     }
 
     private void countRank() {
-        for (Lotto lotto : lottos.getList()) {
+        for (Lotto lotto : lottos.getLottos()) {
             Rank key = winningLotto.getWinning(lotto);
             rankResult.put(key, rankResult.get(key) + 1);
         }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+<h1>로또 생성 결과 및 지난 주 당첨 번호 입력</h1>
+수동으로 {{ManualCount}}장, 자동으로 {{AutoCount}}장을 구매하였습니다.
+<br/>
+{{#lottos.lottos}}
+{{this}} <br/>
+{{/lottos.lottos}}
+
+<br/>
+<br/>
+
+<table>
+    <tbody>
+    <form action="/lottoResult" method="post">
+        <tr>
+            <th>지난 주 당첨 번호:</th>
+            <td><input type="text" placeholder="Ex) 1,2,3,4,5,6" name="winningNumbers"/></td>
+        </tr>
+        <tr>
+            <th>보너스 번호:</th>
+            <td><input type="text" placeholder="Ex) 7" name="bonusNumber"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="등록"/>
+            </td>
+        </tr>
+    </form>
+    </tbody>
+</table>
+
+</body>
+</html>

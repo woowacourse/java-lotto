@@ -5,9 +5,6 @@ import lotto.util.ConvertLottoNumber;
 import lotto.view.InputConsole;
 import lotto.view.OutputConsole;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -41,23 +38,13 @@ public class Main {
     private static Lottos createLottos(LottoCount lottoCount) {
         try {
             LottosFactory lottosFactory = new LottosFactory(
-                    createManualLottoNumbers(lottoCount.getManualCount()),
+                    InputConsole.inputManulLottoNumbers(lottoCount.getManualCount()),
                     lottoCount);
-            return lottosFactory.getLottos();
+            return lottosFactory.generateTotalLottos();
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createLottos(lottoCount);
         }
-    }
-
-    private static List<List<Integer>> createManualLottoNumbers(int manualCount)
-            throws IllegalArgumentException {
-        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        List<List<Integer>> numbersList = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            numbersList.add(InputConsole.inputLotto());
-        }
-        return numbersList;
     }
 
     private static WinningLotto createWinningLotto(Lotto lastWinningLotto) {

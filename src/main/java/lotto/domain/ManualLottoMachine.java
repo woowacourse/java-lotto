@@ -7,16 +7,16 @@ import java.util.List;
 
 public class ManualLottoMachine implements LottoMachine {
 
-    private final List<List<Integer>> lottoNumbersList;
+    private final List<String> lottoNumbersList;
 
-    public ManualLottoMachine(List<List<Integer>> numbersList) {
+    public ManualLottoMachine(List<String> numbersList) {
         this.lottoNumbersList = new ArrayList<>(numbersList);
     }
 
     @Override
     public List<Lotto> generateLottos() {
         List<Lotto> lottos = new ArrayList<>();
-        for (List<Integer> lottoNumbers : lottoNumbersList) {
+        for (String lottoNumbers : lottoNumbersList) {
             lottos.add(new Lotto(ConvertLottoNumber.run(lottoNumbers)));
         }
         return lottos;

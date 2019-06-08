@@ -1,10 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
@@ -15,7 +15,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Lotto> getList() {
-        return lottos;
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }
