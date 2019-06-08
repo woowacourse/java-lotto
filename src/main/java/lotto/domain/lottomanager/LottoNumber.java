@@ -1,7 +1,5 @@
 package lotto.domain.lottomanager;
 
-import lotto.utils.NullCheckUtil;
-
 import java.util.Objects;
 
 public class LottoNumber implements Comparable {
@@ -9,29 +7,28 @@ public class LottoNumber implements Comparable {
     private static final int LIMIT_MAX_NUM = 45;
     private static final String ERROR_OUT_RANGE = "1부터 45사이의 수가 아닙니다.";
 
-    private Integer lottoNumber;
+    private final int lottoNumber;
 
-    private LottoNumber(Integer number) {
+    private LottoNumber(int number) {
         checkValidLottoNumber(number);
         this.lottoNumber = number;
     }
 
-    private void checkValidLottoNumber(Integer number) {
+    private void checkValidLottoNumber(int number) {
         checkOutRange(number);
     }
 
-    private void checkOutRange(Integer number) {
+    private void checkOutRange(int number) {
         if (isOutRangeNumber(number)) {
             throw new IllegalArgumentException(ERROR_OUT_RANGE);
         }
     }
 
-    private boolean isOutRangeNumber(Integer number) {
+    private boolean isOutRangeNumber(int number) {
         return LIMIT_MIN_NUM > number || LIMIT_MAX_NUM < number;
     }
 
-    public static LottoNumber createLottoNumber(Integer number) {
-        NullCheckUtil.checkNullInteger(number);
+    public static LottoNumber createLottoNumber(int number) {
         return new LottoNumber(number);
     }
 
@@ -56,6 +53,6 @@ public class LottoNumber implements Comparable {
     @Override
     public int compareTo(Object o) {
         final LottoNumber that = (LottoNumber) o;
-        return this.lottoNumber.compareTo(that.lottoNumber);
+        return this.lottoNumber - that.lottoNumber;
     }
 }

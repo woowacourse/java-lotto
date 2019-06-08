@@ -11,46 +11,46 @@ public class PurchaseAmount {
     private static final String ERROR_LIMIT_MINIMUM_PRICE = "구매 금액은 1000원 이상입니다.";
     private static final String ERROR_PRICE_UNIT = "구매 금액은 1,000원 단위 입니다.";
 
-    private final Integer autoLottoAmount;
+    private final int autoLottoAmount;
 
-    private PurchaseAmount(Integer purchasePrice) {
+    private PurchaseAmount(int purchasePrice) {
         checkValidPurchasePrice(purchasePrice);
         this.autoLottoAmount = calculateLottoAmount(purchasePrice);
     }
 
-    private void checkValidPurchasePrice(Integer purchasePrice) {
+    private void checkValidPurchasePrice(int purchasePrice) {
         checkMinimumLimit(purchasePrice);
         checkDivisiblePriceUnit(purchasePrice);
     }
 
-    private void checkMinimumLimit(Integer purchasePrice) {
+    private void checkMinimumLimit(int purchasePrice) {
         if (purchasePrice < LIMIT_MINIMUM_PRICE) {
             throw new IllegalArgumentException(ERROR_LIMIT_MINIMUM_PRICE);
         }
     }
 
-    private void checkDivisiblePriceUnit(Integer purchasePrice) {
+    private void checkDivisiblePriceUnit(int purchasePrice) {
         if (isIndivisiblePriceUnit(purchasePrice)) {
             throw new IllegalArgumentException(ERROR_PRICE_UNIT);
         }
     }
 
-    private boolean isIndivisiblePriceUnit(Integer purchasePrice) {
+    private boolean isIndivisiblePriceUnit(int purchasePrice) {
         return purchasePrice % PRICE_UNIT != DIVISIBLE;
     }
 
-    private int calculateLottoAmount(Integer purchasePrice) {
+    private int calculateLottoAmount(int purchasePrice) {
         return purchasePrice / PRICE_UNIT;
     }
 
-    public static PurchaseAmount createLottoAmount(Integer purchasePrice) {
+    public static PurchaseAmount createLottoAmount(int purchasePrice) {
         NullCheckUtil.checkNullInteger(purchasePrice);
         return new PurchaseAmount(purchasePrice);
     }
 
-    public boolean isEqualsAmount(Integer number) {
+    public boolean isEqualsAmount(int number) {
         NullCheckUtil.checkNullInteger(number);
-        return this.autoLottoAmount.equals(number);
+        return this.autoLottoAmount == number;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class PurchaseAmount {
         return Objects.hash(autoLottoAmount);
     }
 
-    public Integer getAutoLottoAmount() {
+    public int getAutoLottoAmount() {
         return autoLottoAmount;
     }
 }

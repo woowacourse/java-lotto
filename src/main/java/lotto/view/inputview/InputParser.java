@@ -16,7 +16,7 @@ public class InputParser {
     private static final String NON_SPACE = "";
     private static final String COMMA = ",";
 
-    public static Integer getPurchasePrice(String inputPrice) {
+    public static int getPurchasePrice(String inputPrice) {
         return toInts(getValidInputPrice(inputPrice));
     }
 

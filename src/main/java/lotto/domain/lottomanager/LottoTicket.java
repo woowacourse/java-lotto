@@ -55,19 +55,19 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottoTicket);
     }
 
-    public Integer getMatchedNumbersCount(LottoTicket userTicket) {
+    public int getMatchedNumbersCount(LottoTicket userTicket) {
         NullCheckUtil.checkNullLottoTicket(userTicket);
         return (int) this.lottoTicket.stream()
                 .filter(userTicket.lottoTicket::contains)
                 .count();
     }
 
-    public Boolean isContainedNumbers(LottoNumber lottoNumber) {
+    public boolean isContainedNumbers(LottoNumber lottoNumber) {
         NullCheckUtil.checkNullLottoNumber(lottoNumber);
         return this.lottoTicket.contains(lottoNumber);
     }
 
-    public Boolean isContainedNumbers(BonusBall bonusBall) {
+    public boolean isContainedNumbers(BonusBall bonusBall) {
         NullCheckUtil.checkNullBonusBall(bonusBall);
         return bonusBall.isContainNumbers(Collections.unmodifiableList(lottoTicket));
     }

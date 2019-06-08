@@ -35,7 +35,7 @@ public class WinningResult {
         return matchedRankCount;
     }
 
-    private Integer plusMatchedCount(Map<Rank, Integer> matchedRankCount, Rank rank) {
+    private int plusMatchedCount(Map<Rank, Integer> matchedRankCount, Rank rank) {
         return matchedRankCount.get(rank) + PLUS_AMOUNT;
     }
 
@@ -46,18 +46,17 @@ public class WinningResult {
         return new WinningResult(tickets, winningLotto, bonus);
     }
 
-    public Integer getMatchedRankCountValue(Rank rank) {
+    public int getMatchedRankCountValue(Rank rank) {
         NullCheckUtil.checkNullRank(rank);
         return matchedRankCount.get(rank);
     }
 
-    public Double getTotalYield(Integer purchasePrice) {
-        NullCheckUtil.checkNullInteger(purchasePrice);
+    public double getTotalYield(int purchasePrice) {
         checkPurchasePrice(purchasePrice);
-        return getTotalRevenue() / Double.valueOf(purchasePrice);
+        return getTotalRevenue() / (double) purchasePrice;
     }
 
-    private void checkPurchasePrice(Integer purchasePrice) {
+    private void checkPurchasePrice(int purchasePrice) {
         if (purchasePrice <= MINIMUM_PURCHASE_PRICE) {
             throw new IllegalArgumentException(ERROR_DIVIDE_ZERO);
         }

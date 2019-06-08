@@ -64,11 +64,11 @@ public class UserTickets {
         return Rank.valueOf(getMatchOfCount(winningLotto, userTicket), getMatchBonus(bonusBall, userTicket));
     }
 
-    private Integer getMatchOfCount(WinningLotto winningLotto, LottoTicket userTicket) {
+    private int getMatchOfCount(WinningLotto winningLotto, LottoTicket userTicket) {
         return winningLotto.getMatchedWinningNumbersCount(userTicket);
     }
 
-    private Boolean getMatchBonus(BonusBall bonusBall, LottoTicket userTicket) {
+    private boolean getMatchBonus(BonusBall bonusBall, LottoTicket userTicket) {
         return userTicket.isContainedNumbers(bonusBall);
     }
 }

@@ -28,9 +28,8 @@ public class OutputView {
 
     private static StringBuilder stringBuilder;
 
-    public static void printAmount(PurchaseAmount purchaseAmount, Integer manualLottoTickets) {
+    public static void printAmount(PurchaseAmount purchaseAmount, int manualLottoTickets) {
         NullCheckUtil.checkNullPurchaseAmount(purchaseAmount);
-        NullCheckUtil.checkNullInteger(manualLottoTickets);
 
         stringBuilder = new StringBuilder();
         stringBuilder.append(String.format(MANUAL_LOTTO_MESSAGE, manualLottoTickets))
@@ -51,9 +50,8 @@ public class OutputView {
         System.out.println(stringBuilder.toString());
     }
 
-    public static void printWinningStatistics(WinningResult winningResult, Integer purchasePrice) {
+    public static void printWinningStatistics(WinningResult winningResult, int purchasePrice) {
         NullCheckUtil.checkNullWinningResult(winningResult);
-        NullCheckUtil.checkNullInteger(purchasePrice);
 
         stringBuilder = new StringBuilder();
         stringBuilder.append(RESULT_STATISTICS_MESSAGE);
@@ -96,7 +94,7 @@ public class OutputView {
         return String.format(STATISTICS_MESSAGE_FORMAT_END, winningResult.getMatchedRankCountValue(rank));
     }
 
-    private static void writeTotalYield(WinningResult winningResult, Integer purchasePrice) {
+    private static void writeTotalYield(WinningResult winningResult, int purchasePrice) {
         stringBuilder.append(String.format(TOTAL_REVENUE_FORMAT, winningResult.getTotalYield(purchasePrice)));
     }
 }
