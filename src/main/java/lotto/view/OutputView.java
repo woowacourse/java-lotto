@@ -13,8 +13,8 @@ public class OutputView {
     private static final String RESULT_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
 
-    public static void printMyLotto(Lottoes lottoes, int round) {
-        System.out.println(String.format(MESSAGE_BUY_LOTTO, lottoes.getSize() - round, round));
+    public static void printMyLotto(Lottoes lottoes, int manualRound) {
+        System.out.println(String.format(MESSAGE_BUY_LOTTO, manualRound, lottoes.getSize() - manualRound));
 
         for (int i = 0; i < lottoes.getSize(); i++) {
             System.out.println(lottoes.getIndexByLotto(i).toString());
