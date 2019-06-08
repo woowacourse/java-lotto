@@ -9,12 +9,13 @@ public class Lotto {
     public static final int PRICE = 1000;
     public static final int NUMBER_OF_PICKS = 6;
 
+    private static final List<LottoNumber> balls = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX).boxed()
+                                                    .map(i -> LottoNumber.of(i))
+                                                    .collect(Collectors.toList());
+
     private final List<LottoNumber> numbers;
 
     public static Lotto autoGenerate() {
-        List<LottoNumber> balls = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX).boxed()
-                                            .map(i -> LottoNumber.of(i))
-                                            .collect(Collectors.toList());
         Collections.shuffle(balls);
         return new Lotto(new HashSet<>(balls.subList(0, NUMBER_OF_PICKS)));
     }

@@ -18,10 +18,6 @@ public class Lottos implements Iterable<Lotto> {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public Lottos(List<Lotto> manualLottos) {
-        this(manualLottos, new LottoPurchaseAmount(manualLottos.size(), 0));
-    }
-
     public Lottos(LottoPurchaseAmount purchaseAmount) {
         this(new ArrayList<>(), purchaseAmount);
     }
@@ -32,5 +28,10 @@ public class Lottos implements Iterable<Lotto> {
 
     public Iterator<Lotto> iterator() {
         return this.lottos.iterator();
+    }
+
+    @Override
+    public String toString() {
+        return lottos.toString();
     }
 }

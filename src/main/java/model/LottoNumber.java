@@ -12,8 +12,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MAX = 45;
 
     private static final Map<Integer, LottoNumber> numberPool = new HashMap<Integer, LottoNumber>() {{
-        IntStream.rangeClosed(MIN, MAX).boxed()
-                .forEach(i -> put(i, new LottoNumber(i)));
+            IntStream.rangeClosed(MIN, MAX).boxed()
+                    .forEach(i -> put(i, new LottoNumber(i)));
     }};
 
     private final int val;

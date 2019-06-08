@@ -21,28 +21,9 @@
         </section>
         <section class="wrapper">
             <div class="inner">
-                <header class="special">
-                    <h2>장당 1,000원</h2>
-                    <p>(수동으로 입력하지 않은 만큼은 자동 발권됩니다.)</p>
-                </header>
                 <section>
-                    <div class="content">
-                        <form action="/lotto" method="post">
-                            투자금 : <input id="investment" type="text" name="investment" onchange="resetManualInputs()" />
-                            <br />
-                            <div align="right">
-                                수동 번호 입력 :
-                                <input type="button" value="+" onclick="addManualInputs()" />
-                                <input type="button" value="-" onclick="removeManualInputs()" />
-                            </div>
-                            <br />
-                            <br />
-                            <p id="manualNumbersContainer">
-                            </p>
-                            <div align="right">
-                                <input type="submit" value="구매하기" />
-                            </div>
-                        </form>
+                    <div class="content" align="center">
+                        {{{result}}}
                     </div>
                 </section>
             </div>
@@ -61,7 +42,7 @@
             </div>
         </footer>
         <script type="text/javascript">
-            const price = 1000
+            const price = {{price}}
             let max = 0
             let amount = 0
 
@@ -72,14 +53,10 @@
                 }
                 const textbox = document.createElement("input")
                 textbox.setAttribute("type","text");
-                textbox.setAttribute("name", "manualNumbers[]")
+                textbox.setAttribute("name", "manualNumbers[" + amount + "]")
                 document.getElementById("manualNumbersContainer").appendChild(textbox)
                 document.getElementById("manualNumbersContainer").appendChild(document.createElement("br"))
                 amount++
-            }
-
-            function resetMaxAmountOfLottos() {
-                max = Math.floor(document.getElementById("investment").value / price)
             }
 
             function removeManualInputs() {
@@ -92,10 +69,11 @@
             }
 
             function resetManualInputs() {
-                if (document.getElementById("investment").value < 0) {
+                if (document.getElementById("investment").value < 0
+                        || isNaN(document.getElementById("investment").value)) {
                     document.getElementById("investment").value = 0
                 }
-                resetMaxAmountOfLottos()
+                max = Math.floor(document.getElementById("investment").value / price)
                 while (max < amount) {
                     removeManualInputs()
                 }
@@ -106,5 +84,6 @@
         <script src="assets/js/breakpoints.min.js"></script>
         <script src="assets/js/util.js"></script>
         <script src="assets/js/main.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </body>
 </html>

@@ -13,17 +13,25 @@ public class LottoResult implements Iterable<LottoResultPair> {
             Stream.of(LottoRank.values()).forEach(rank -> put(rank, 0));
             lottos.forEach(lotto -> lotto.match(winningNumbers).map(x -> put(x, get(x) + 1)));
         }};
-        this.table = Collections.unmodifiableList(
+        this.table = generateTable(pairs);
+        this.earningRate = processEarningRate(pairs, lottos.size());
+    }
+
+    private List<LottoResultPair> generateTable(Map<LottoRank, Integer> pairs) {
+        return Collections.unmodifiableList(
                 pairs.entrySet().stream()
                     .map(x -> new LottoResultPair(x.getKey(), x.getValue()))
                     .collect(Collectors.toList())
         );
-        this.earningRate = new Money(
+    }
+
+    private double processEarningRate(Map<LottoRank, Integer> pairs, int numberOfPurchase) {
+        return new Money(
                 pairs.entrySet().stream()
-                        .mapToInt(x -> x.getKey().prize().amount() * x.getValue())
-                        .sum()
+                    .mapToInt(x -> x.getKey().prize().amount() * x.getValue())
+                    .sum()
         ).earningRate(
-                new Money(Lotto.PRICE * lottos.size())
+                new Money(Lotto.PRICE * numberOfPurchase)
         );
     }
 
