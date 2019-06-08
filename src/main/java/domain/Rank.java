@@ -4,7 +4,13 @@ import java.util.Arrays;
 
 public enum Rank {
     FIRST(6, 2000000000),
-    SECOND(5, 30000000),
+    SECOND(5, 30000000) {
+        @Override
+        public String getRankExplanation() {
+            return SECOND.numberOfMatching + "개 일치, 보너스 볼 일치 "
+                    + "(" + SECOND.winningMoney + "원)";
+        }
+    },
     THIRD(5, 1500000),
     FOURTH(4, 50000),
     FIFTH(3, 5000),
@@ -39,11 +45,6 @@ public enum Rank {
     }
 
     public String getRankExplanation() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(Integer.toString(numberOfMatching));
-        sb.append("개 일치 ");
-        sb.append("(" + Integer.toString(winningMoney) + "원)");
-        return sb.toString();
+        return numberOfMatching + "개 일치" + "(" + winningMoney + "원)";
     }
 }
