@@ -7,7 +7,7 @@ public class Lottoes {
 
     public Lottoes(List<Lotto> lottos, int round) {
         this.lottos = lottos;
-        addMyLotto(round);
+        createAutoLottos(round);
     }
 
     public int getSize() {
@@ -18,7 +18,7 @@ public class Lottoes {
         return lottos.get(index);
     }
 
-    private void addMyLotto(int round) {
+    private void createAutoLottos(int round) {
         NumberGenerator numberGenerator = NumberGenerator.create();
 
         for (int i = 0; i < round; i++) {

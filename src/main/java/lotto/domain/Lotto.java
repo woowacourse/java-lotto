@@ -25,7 +25,7 @@ public class Lotto {
     public Number getLottoByIndex(int index) {
         return lotto.get(index);
     }
-    
+
     public List<Number> getLotto() {
         return Collections.unmodifiableList(lotto);
     }
