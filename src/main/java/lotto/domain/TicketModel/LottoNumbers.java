@@ -2,10 +2,11 @@ package lotto.domain.TicketModel;
 
 import lotto.domain.Exceptions.LottoNumberException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class LottoNumbers {
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     LottoNumbers() {
         this.numbers = LottoNumberManager.autoNumber();
@@ -23,6 +24,6 @@ class LottoNumbers {
     }
 
     List<Integer> numbers() {
-        return numbers;
+        return new ArrayList<>(numbers);
     }
 }
