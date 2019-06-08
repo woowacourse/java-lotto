@@ -14,6 +14,11 @@ public class Lotto {
         validCheck();
     }
 
+    public Lotto(String[] oneNumbers) {
+        this.lotto = makeLottoNumbers(oneNumbers);
+        validCheck();
+    }
+
     public boolean isContains(Number number) {
         return lotto.contains(number);
     }
@@ -47,6 +52,15 @@ public class Lotto {
         if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
         }
+    }
+
+    private static List<Number> makeLottoNumbers(String[] oneNumbers) {
+        List<Number> numbers = new ArrayList<>();
+
+        for (String oneNumber : oneNumbers) {
+            numbers.add(new Number(Integer.parseInt(oneNumber)));
+        }
+        return numbers;
     }
 
     @Override

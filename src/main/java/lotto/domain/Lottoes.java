@@ -22,8 +22,7 @@ public class Lottoes {
         NumberGenerator numberGenerator = NumberGenerator.create();
 
         for (int i = 0; i < round; i++) {
-            List<Number> list = numberGenerator.getNumbers();
-            lottos.add(new Lotto(list));
+            lottos.add(new Lotto(numberGenerator.getNumbers()));
         }
     }
 }

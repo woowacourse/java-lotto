@@ -42,19 +42,10 @@ public class Main {
 
         for (String handleNumber : handleNumbers) {
             String[] oneNumbers = handleNumber.split(DELIMITER);
-            lottos.add(new Lotto(addLottoNumbers(oneNumbers)));
+            lottos.add(new Lotto(oneNumbers));
         }
 
         return lottos;
-    }
-
-    private static List<Number> addLottoNumbers(String[] oneNumbers) {
-        List<Number> numbers = new ArrayList<>();
-
-        for (String oneNumber : oneNumbers) {
-            numbers.add(new Number(Integer.parseInt(oneNumber)));
-        }
-        return numbers;
     }
 
 
