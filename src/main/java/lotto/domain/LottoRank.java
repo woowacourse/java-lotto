@@ -33,13 +33,17 @@ public enum LottoRank {
             return MISS;
         }
 
-        if ((SECOND.countOfMatch == countOfMatch) && bonusMatch) {
+        if(SECOND.matchCount(countOfMatch, bonusMatch)) {
             return SECOND;
         }
 
         return Arrays.stream(values())
-                .filter(lottoRank -> (lottoRank.countOfMatch == countOfMatch) && lottoRank != SECOND)
+                .filter(lottoRank -> lottoRank.matchCount(countOfMatch,lottoRank != SECOND))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("유효한 값이 아닙니다."));
+    }
+
+    private boolean matchCount(int countOfMatch, boolean additionalCheck) {
+        return (this.countOfMatch == countOfMatch && additionalCheck);
     }
 }
