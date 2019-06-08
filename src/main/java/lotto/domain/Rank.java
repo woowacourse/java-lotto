@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIST(6, false, 2000000000),
+    FIRST(6, false, 2000000000),
     SECOND(5, true, 30000000),
     THIRD(5, false, 1500000),
     FOURTH(4, false, 50000),
@@ -11,9 +11,9 @@ public enum Rank {
     LOSE(2, false, 0);
 
 
-    private int match;
-    private boolean bonus;
-    private int money;
+    private final int match;
+    private final boolean bonus;
+    private final int money;
 
     Rank(int match, boolean bonus, int money) {
         this.match = match;
