@@ -15,6 +15,7 @@ public class InputView {
     private static final String INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_HANDLE_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String ERROR_INPUT = "잘못된 입력 입니다. 다시 입력해주세요.";
+    private static final String ERROR_MANUAL_ROUND = "입력한 금액보다 많이 사는건 허용하지 않습니다.";
     private static final String INITIALIZATION = "";
     private static final String INPUT_HANDLE_ROUND = "수동으로 구매할 로또 수를 입력해 주세요.";
 
@@ -49,16 +50,24 @@ public class InputView {
         return new Number(Integer.parseInt(bonusBall));
     }
 
-    public static int inputHandNumber() {
+    public static int inputManualRound(int round) {
         System.out.println(INPUT_HANDLE_ROUND);
         String number = INITIALIZATION;
 
         number = getCheckString(number);
 
+        validRoundBound(round, number);
+
         return Integer.parseInt(number);
     }
 
-    public static String[] inputHandleNumbers(int round) {
+    private static void validRoundBound(int round, String number) {
+        if (Integer.parseInt(number) > round) {
+            throw new IllegalArgumentException(ERROR_MANUAL_ROUND);
+        }
+    }
+
+    public static String[] inputManualNumbers(int round) {
         System.out.println(INPUT_HANDLE_NUMBER);
         String[] numbers = new String[round];
 

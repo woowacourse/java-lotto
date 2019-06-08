@@ -13,10 +13,10 @@ public class Main {
 
     public static void main(String[] args) {
         int round = new Money(InputView.inputMoney()).getRound();
-        int manualRound = InputView.inputHandNumber();
-        String[] number = InputView.inputHandleNumbers(manualRound);
-        Lottoes lottoes = new Lottoes(createManualLottos(number), round, LottoNumberGenerator.create());
-        OutputView.printMyLotto(lottoes, round);
+        int manualRound = InputView.inputManualRound(round);
+        String[] number = InputView.inputManualNumbers(manualRound);
+        Lottoes lottoes = new Lottoes(createManualLottos(number), round - manualRound, LottoNumberGenerator.create());
+        OutputView.printMyLotto(lottoes, manualRound);
 
         WinningLotto winningLotto = new WinningLotto
                 (parseWinningLotto(InputView.inputWinnerNumber())
