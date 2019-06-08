@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class WinningResult {
@@ -24,16 +25,7 @@ public class WinningResult {
         return totalWinningAmount;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (LottoRank lottoRank : result.keySet()) {
-            sb.append(lottoRank.getCountOfMatch());
-            sb.append("개 일치 ");
-            String second = lottoRank.equals(LottoRank.SECOND) ? ", 보너스볼 일치" : "";
-            sb.append(second + "(" + lottoRank.getWinningAmount() + "원) - ");
-            sb.append(result.get(lottoRank) + "개\n");
-        }
-        return sb.toString();
+    public Map<LottoRank, Integer> getResult() {
+        return Collections.unmodifiableMap(result);
     }
 }

@@ -1,7 +1,10 @@
 package lotto.view;
 
+import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.domain.WinningResult;
+
+import java.util.Map;
 
 public class OutputView {
     public static void outputCountOfPurchase(int countOfPurchase) {
@@ -12,9 +15,16 @@ public class OutputView {
         System.out.println(lottos);
     }
 
-    public static void outputWinningResult(WinningResult winningResult) {
+    public static void outputWinningResult(Map<LottoRank, Integer> result) {
         outputWinningResultTitle();
-        System.out.println(winningResult);
+        StringBuilder sb = new StringBuilder();
+        for (LottoRank lottoRank : result.keySet()) {
+            sb.append(lottoRank.getCountOfMatch() + "개 일치 ");
+            String second = lottoRank.equals(LottoRank.SECOND) ? ", 보너스볼 일치" : "";
+            sb.append(second + "(" + lottoRank.getWinningAmount() + "원) - ");
+            sb.append(result.get(lottoRank) + "개\n");
+        }
+        System.out.println(sb.toString());
     }
 
     private static void outputWinningResultTitle() {

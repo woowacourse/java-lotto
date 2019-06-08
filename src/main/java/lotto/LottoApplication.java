@@ -19,7 +19,7 @@ public class LottoApplication {
                 purchaseAmount / LOTTO_PRICE);
         OutputView.outputLottos(lottos);
         WinningResult winningResult = lottos.match(setWinningLotto());
-        OutputView.outputWinningResult(winningResult);
+        OutputView.outputWinningResult(winningResult.getResult());
         OutputView.outputRevenueRate(winningResult.calculateRevenueRate(purchaseAmount));
     }
 
