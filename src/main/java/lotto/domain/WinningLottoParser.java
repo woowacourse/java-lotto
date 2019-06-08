@@ -15,13 +15,13 @@ public class WinningLottoParser {
         if (!BONUS_NO_PATTERN.matcher(inputBonusNo).matches()) {
             throw new IllegalArgumentException("보너스번호는 숫자로 구성됩니다.");
         }
-        return new WinningLotto(Lotto.of(parseLottoGenerator(inputWinningLotto)),
+        return new WinningLotto(LottoFactory.create(parseLottoGenerator(inputWinningLotto)),
                 LottoNo.of(Integer.parseInt(inputBonusNo)));
     }
 
-    static LottoGenerator parseLottoGenerator(String manualLotto) {
+    private static LottoNoGenerator parseLottoGenerator(String manualLotto) {
         try {
-            return new LottoManualGenerator(
+            return new LottoNoManualGenerator(
                     Arrays.stream(manualLotto.split(", "))
                             .map(Integer::parseInt)
                             .collect(Collectors.toList())

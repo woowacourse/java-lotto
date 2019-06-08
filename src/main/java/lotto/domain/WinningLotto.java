@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class WinningLotto {
     private Lotto winningLotto;
     private LottoNo bonusNo;
@@ -12,7 +16,24 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
-    Rank calRank(LottoTicket lotto) {
+    public WinningLottoState match(LottoTickets lottoTickets) {
+        Map<Rank, Integer> winningLottoState = initWinningLottoState();
+        for (int index = 0; index < lottoTickets.size(); index++) {
+            Rank rank = calculateRank(lottoTickets.get(index));
+            winningLottoState.put(rank, winningLottoState.get(rank) + 1);
+        }
+        return new WinningLottoState(winningLottoState);
+    }
+
+    private Rank calculateRank(LottoTicket lotto) {
         return Rank.valueOf(lotto.includedNumber(winningLotto), lotto.contains(bonusNo));
+    }
+
+    private Map<Rank, Integer> initWinningLottoState() {
+        Map<Rank, Integer> winningLottoState = new TreeMap<>(Collections.reverseOrder());
+        for (Rank rank : Rank.values()) {
+            winningLottoState.put(rank, 0);
+        }
+        return winningLottoState;
     }
 }
