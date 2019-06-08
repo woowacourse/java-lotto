@@ -4,7 +4,7 @@ package lotto.domain.TicketModel;
 import java.util.List;
 import java.util.Objects;
 
-public class Lotto implements Ticket {
+class Lotto implements Ticket {
     private final List<Integer> numbers;
 
     Lotto(LottoNumbers lottoNumbers) {
