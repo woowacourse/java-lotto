@@ -18,7 +18,7 @@ public class IssuedLottos {
         List<IssuedLotto> lottos = new ArrayList<>();
 
         lottos.addAll(manual.lottos);
-        lottos.addAll(manual.lottos);
+        lottos.addAll(auto.lottos);
         return new IssuedLottos(lottos);
     }
 
