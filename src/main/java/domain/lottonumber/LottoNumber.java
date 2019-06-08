@@ -19,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public static LottoNumber valueOf(int number) {
+    static LottoNumber valueOf(int number) {
         return new LottoNumber(number);
     }
 
@@ -46,7 +46,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Integer.toString(number);
     }
 
-    public boolean isOf(int number) {
+    boolean isOf(int number) {
         return this.number == number;
     }
 }

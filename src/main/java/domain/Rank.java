@@ -13,13 +13,13 @@ public enum Rank {
     private int numberOfMatching;
     private int winningMoney;
 
-    Rank (int numberOfMatching, int winningMoney) {
+    Rank(int numberOfMatching, int winningMoney) {
         this.numberOfMatching = numberOfMatching;
         this.winningMoney = winningMoney;
     }
 
     public static Rank of(int numberOfMatching, boolean BonusNumberMatch) {
-        if(numberOfMatching == SECOND.numberOfMatching && BonusNumberMatch){
+        if (numberOfMatching == SECOND.numberOfMatching && BonusNumberMatch) {
             return SECOND;
         }
 

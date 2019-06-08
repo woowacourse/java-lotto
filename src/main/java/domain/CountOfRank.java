@@ -5,11 +5,11 @@ class CountOfRank {
 
     private int count = INITIAL_COUNT;
 
-   int getCount() {
+    int getCount() {
         return count;
     }
 
     void countUp() {
-       count++;
+        count++;
     }
 }

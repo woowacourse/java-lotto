@@ -21,7 +21,7 @@ public class Statistics {
     }
 
     private static void initialize(EnumMap<Rank, CountOfRank> countsOfRanks, Rank[] values) {
-        for(Rank rank : values) {
+        for (Rank rank : values) {
             countsOfRanks.put(rank, new CountOfRank());
         }
     }
