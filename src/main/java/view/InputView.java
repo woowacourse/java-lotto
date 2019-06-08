@@ -6,65 +6,65 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
+    private static final String PURCHASEMENT_MESSAGE = "구입할 금액을 입력해주세요.";
+    private static final String INTEGER_FORMAT_EXCEPTION_MESSAGE = "정수만 입력할 수 있습니다.";
+    private static final String WINNING_NUMBERS_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해주세요.";
+    private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해주세요.";
+    private static final String NUMBER_OF_MANUAL_ISSUE_INPUT_MESSAGE = "수동으로 구매할 로또 수를 입력해주세요.";
+    private static final String MANUAL_ISSUED_LOTTO_NUMBER_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해주세요.";
+
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int inputPurchaseAmount() {
         try {
-            System.out.println("구입금액을 입력해주세요.");
-            String purchasedAmount = SCANNER.nextLine().trim();
-            return Integer.parseInt(purchasedAmount);
+            return inputNumber(PURCHASEMENT_MESSAGE);
         } catch (NumberFormatException e) {
-            System.out.println("정수만 입력할 수 있습니다.");
+            System.out.println(INTEGER_FORMAT_EXCEPTION_MESSAGE);
             return inputPurchaseAmount();
         }
     }
 
+    private static int inputNumber(String inputMessage) {
+        System.out.println(inputMessage);
+        String number = SCANNER.nextLine().trim();
+        return Integer.parseInt(number);
+    }
+
     public static List<Integer> inputWinningNumbers() {
+        System.out.println(WINNING_NUMBERS_INPUT_MESSAGE);
+        return getNumbersForLotto();
+    }
+
+    public static List<Integer> getNumbersForLotto() {
         try {
-            System.out.println("지난 주 당첨 번호를 입력해주세요.");
             return Arrays.stream(SCANNER.nextLine().split(",\\s*"))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            System.out.println("정수만 입력할 수 있습니다.");
+            System.out.println(INTEGER_FORMAT_EXCEPTION_MESSAGE);
             return inputWinningNumbers();
         }
     }
 
     public static int inputBonusNumber() {
         try {
-            System.out.println("보너스 볼을 입력해주세요.");
-            String bonusNumber = SCANNER.nextLine().trim();
-            return Integer.parseInt(bonusNumber);
+            return inputNumber(BONUS_NUMBER_INPUT_MESSAGE);
         } catch (NumberFormatException e) {
-            System.out.println("정수만 입력할 수 있습니다.");
+            System.out.println(INTEGER_FORMAT_EXCEPTION_MESSAGE);
             return inputBonusNumber();
         }
     }
 
-    public static int inputNumber() {
+    public static int inputNumberOfManualIssue() {
         try {
-            System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
-            String number = SCANNER.nextLine().trim();
-            return Integer.parseInt(number);
+            return inputNumber(NUMBER_OF_MANUAL_ISSUE_INPUT_MESSAGE);
         } catch (NumberFormatException e) {
-            System.out.println("정수만 입력할 수 있습니다.");
-            return inputNumber();
+            System.out.println(INTEGER_FORMAT_EXCEPTION_MESSAGE);
+            return inputNumberOfManualIssue();
         }
     }
 
-    public static List<Integer> getManualNumbers() {
-        try {
-            return Arrays.stream(SCANNER.nextLine().split(",\\s*"))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-        } catch (NumberFormatException e) {
-            System.out.println("정수만 입력할 수 있습니다.");
-            return inputWinningNumbers();
-        }
-    }
-
-    public static void printMessage(String s) {
-        System.out.println(s);
+    public static void printInputMessageOfManualIssue() {
+        System.out.println(MANUAL_ISSUED_LOTTO_NUMBER_INPUT_MESSAGE);
     }
 }

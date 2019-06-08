@@ -22,30 +22,30 @@ public class LottoGameLauncher {
     }
 
     private static IssuedLottos getManualIssuedLottosUpTo(PurchaseAmount purchaseAmount) {
-        int numberOfManualIssue = getNumberOfManualIssuingLottosUpTo(purchaseAmount);
+        int numberOfManualIssue = getNumberOfManualIssueLottosUpTo(purchaseAmount);
         List<IssuedLotto> lottos = new ArrayList<>();
 
-        InputView.printMessage("수동 구매할 로또 번호를 입력해주세요.");
+        InputView.printInputMessageOfManualIssue();
         for (int i = 0; i < numberOfManualIssue; i++) {
             lottos.add(getManualIssuedLotto());
         }
         return IssuedLottos.of(lottos);
     }
 
-    private static int getNumberOfManualIssuingLottosUpTo(PurchaseAmount purchaseAmount) {
+    private static int getNumberOfManualIssueLottosUpTo(PurchaseAmount purchaseAmount) {
         try {
-            int numberOfMannualIssue = InputView.inputNumber();
+            int numberOfMannualIssue = InputView.inputNumberOfManualIssue();
             purchaseAmount.checkNumberOfManualIssue(numberOfMannualIssue);
             return numberOfMannualIssue;
         } catch(IllegalNumberOfManualIssueException e) {
             System.out.println(e.getMessage());
-            return getNumberOfManualIssuingLottosUpTo(purchaseAmount);
+            return getNumberOfManualIssueLottosUpTo(purchaseAmount);
         }
     }
 
     private static IssuedLotto getManualIssuedLotto() {
         try {
-            List<Integer> numbers = InputView.getManualNumbers();
+            List<Integer> numbers = InputView.getNumbersForLotto();
             return LottoFactory.manualIssueLottoBy(numbers);
         } catch(IllegalArgumentException e) {
             System.out.println(e.getMessage());
