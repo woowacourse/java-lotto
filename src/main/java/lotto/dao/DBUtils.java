@@ -6,7 +6,7 @@ public class DBUtils {
     private DBUtils() {
     }
 
-    public static Connection getConnection(){
+    static Connection getConnection(){
         Connection conn = null;
         try {
             PropertiesUtil propertiesUtil = PropertiesUtil.getInstance();
@@ -18,8 +18,7 @@ public class DBUtils {
         return conn;
     }
 
-    //TODO 이펙티브 자바 보고 예외처리 수정하기
-    public static void close(Connection conn, PreparedStatement ps) {
+    static void close(Connection conn, PreparedStatement ps) {
         if (ps != null) {
             try {
                 ps.close();
@@ -37,7 +36,7 @@ public class DBUtils {
         }
     }
 
-    public static void close(Connection conn, PreparedStatement ps, ResultSet rs) {
+    static void close(Connection conn, PreparedStatement ps, ResultSet rs) {
         if (rs != null) {
             try {
                 rs.close();
