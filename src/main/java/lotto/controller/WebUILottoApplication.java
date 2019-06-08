@@ -1,4 +1,4 @@
-package lotto;
+package lotto.controller;
 
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
