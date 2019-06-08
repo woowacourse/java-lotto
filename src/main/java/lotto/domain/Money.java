@@ -26,7 +26,7 @@ public class Money {
         return money / Lotto.LOTTO_PRICE;
     }
 
-    double calYield(long revenue) {
+    double calculateYield(long revenue) {
         return revenue / (double) money * 100;
     }
 

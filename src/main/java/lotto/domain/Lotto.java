@@ -1,35 +1,30 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto implements LottoTicket {
     static final int LOTTO_PRICE = 1000;
     static final int LOTTO_SIZE = 6;
-    private final List<LottoNo> lotto;
+    private final Set<LottoNo> lotto;
 
     private Lotto(final List<LottoNo> lotto) {
-        if (checkDuplicate(lotto)) {
-            throw new IllegalArgumentException("중복된 로또 번호가 존재합니다.");
+        Set<LottoNo> lottoSet = new TreeSet<>(lotto);
+        if (lottoSet.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(String.format("로또는 중복되지 않은 숫자 %d개로 구성 됩니다.", LOTTO_SIZE));
         }
-        Collections.sort(lotto);
-        this.lotto = lotto;
+        this.lotto = lottoSet;
     }
 
-    static Lotto of(LottoGenerator lottoGenerator) {
-        if (lottoGenerator.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(String.format("로또의 크기는 %d 입니다.", LOTTO_SIZE));
-        }
-        List<LottoNo> lotto = new ArrayList<>();
-        for (int position = 0; position < LOTTO_SIZE; position++) {
-            lotto.add(lottoGenerator.generate());
-        }
-        return new Lotto(lotto);
-    }
-
-    private boolean checkDuplicate(List<LottoNo> lotto) {
-        Set<LottoNo> lottoSet = new HashSet<>(lotto);
-        return lotto.size() != lottoSet.size();
+    static Lotto of(final List<Integer> lotto) {
+        return new Lotto(
+                lotto.stream()
+                        .map(LottoNo::of)
+                        .collect(Collectors.toList())
+        );
     }
 
     @Override

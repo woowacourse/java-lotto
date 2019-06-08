@@ -13,6 +13,11 @@ class LottoNoTest {
         assertThat(LottoNo.of(1)).isEqualTo(LottoNo.of(1));
     }
 
+    @Test
+    void 같은_로또_번호_인스턴스_테스트() {
+        assertThat(LottoNo.of(1) == LottoNo.of(1)).isTrue();
+    }
+
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void 로또_번호_생성_예외(int no) {
