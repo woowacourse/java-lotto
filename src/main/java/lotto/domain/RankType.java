@@ -10,6 +10,9 @@ public enum RankType {
     FIRST(6, 2000000000),
     NOTHING(0, 0);
 
+    private static final int FIFTH_MATCHING_COUNT = 3;
+    private static final int SECOND_OR_THIRD_MATCHING_COUNT = 5;
+
     private final int matchingCount;
     private final int prize;
 
@@ -19,11 +22,11 @@ public enum RankType {
     }
 
     public static RankType valueOf(int matchingCount, boolean bonusBall) {
-        if (matchingCount == 5 && bonusBall) {
+        if (matchingCount == SECOND_OR_THIRD_MATCHING_COUNT && bonusBall) {
             return SECOND;
         }
 
-        if (matchingCount >= 3) {
+        if (matchingCount >= FIFTH_MATCHING_COUNT) {
             return Arrays.stream(values())
                     .filter(rankType -> rankType.matchingCount == matchingCount)
                     .findFirst().get();

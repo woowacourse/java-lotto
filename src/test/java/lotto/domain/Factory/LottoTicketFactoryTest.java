@@ -10,10 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoTicketFactoryTest {
     @Test
-    public void 라우팅이_잘되는지_테스트() {
-    }
-
-    @Test
     void 수동로또_입력값_넣었을때_create() {
         String numbers = "1,2,3,4,5,6";
         assertThat(new LottoTicketFactory().create(numbers)).isEqualTo(new LottoTicketFactory().create(numbers));

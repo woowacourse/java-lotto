@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.ExceptionMessage;
 import lotto.exception.UnexpectedInputRangeException;
 
 import java.util.Objects;
@@ -25,7 +26,7 @@ public class Money {
 
     private void validateMinimumMoneyInput(int money) {
         if (money < DIVISION_OFFSET) {
-            throw new UnexpectedInputRangeException("최소 로또 구매 금액은 1000원입니다.");
+            throw new UnexpectedInputRangeException(ExceptionMessage.MINIMUM_PURCHASE_AMOUNT_MESSAGE);
         }
     }
 

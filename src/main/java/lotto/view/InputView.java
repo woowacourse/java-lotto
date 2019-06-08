@@ -1,13 +1,14 @@
 package lotto.view;
 
+import lotto.exception.ExceptionMessage;
 import lotto.exception.IllegalAmountOfNumberException;
 import lotto.exception.UnexpectedInputRangeException;
 
 import java.util.Scanner;
 
+
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final String INPUT_FORMAT_EXCEPTION_MESSAGE = "입력 조건에 맞지 않습니다. 다시 입력해주세요.";
 
     public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -16,7 +17,7 @@ public class InputView {
             String input = SCANNER.nextLine();
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            System.out.println(INPUT_FORMAT_EXCEPTION_MESSAGE);
+            System.out.println(ExceptionMessage.INPUT_FORMAT_EXCEPTION_MESSAGE);
             return inputMoney();
         }
     }
@@ -29,10 +30,10 @@ public class InputView {
             validateAmountOfCustomsException(input, maxCount);
             return input;
         } catch (ArithmeticException e) {
-            System.out.println(INPUT_FORMAT_EXCEPTION_MESSAGE);
+            System.out.println(ExceptionMessage.INPUT_FORMAT_EXCEPTION_MESSAGE);
             return inputAmountOfCustom(maxCount);
         } catch (IllegalAmountOfNumberException e) {
-            System.out.println(INPUT_FORMAT_EXCEPTION_MESSAGE);
+            System.out.println(ExceptionMessage.INPUT_FORMAT_EXCEPTION_MESSAGE);
             return inputAmountOfCustom(maxCount);
         }
     }
@@ -67,32 +68,32 @@ public class InputView {
             String input = SCANNER.nextLine();
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            System.out.println(INPUT_FORMAT_EXCEPTION_MESSAGE);
+            System.out.println(ExceptionMessage.INPUT_FORMAT_EXCEPTION_MESSAGE);
             return inputBonusBall();
         }
     }
 
     private static void validateAmountOfNumber(String input) {
         if (input.split(",").length != 6) {
-            throw new IllegalAmountOfNumberException("로또 번호의 개수가 적합하지 않습니다.");
+            throw new IllegalAmountOfNumberException(ExceptionMessage.ILLEGAL_AMOUNT_OF_LOTTO_NUMBER_EXCEPTION);
         }
     }
 
     private static void validateAmountOfCustomsException(int input, int maxCount) {
         if (input < 1 || input > maxCount) {
-            throw new UnexpectedInputRangeException(INPUT_FORMAT_EXCEPTION_MESSAGE);
+            throw new UnexpectedInputRangeException(ExceptionMessage.INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 
     private static void validateNullInputException(String input) {
         if (input == null) {
-            throw new NullPointerException(INPUT_FORMAT_EXCEPTION_MESSAGE);
+            throw new NullPointerException(ExceptionMessage.INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 
     private static void validateEmptyInputException(String input) {
         if (input.isEmpty()) {
-            throw new NullPointerException(INPUT_FORMAT_EXCEPTION_MESSAGE);
+            throw new NullPointerException(ExceptionMessage.INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 }

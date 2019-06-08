@@ -15,8 +15,11 @@ public class ConsoleUILottoApplication {
         Money money = getMoney();
         int amountOfCustoms = getAmountOfCustoms(money.getTicketCount());
         LottoTickets lottoTickets = getLottoTickets(money, amountOfCustoms);
+
         printAllLottoTickets(money, amountOfCustoms, lottoTickets);
+
         WinningLotto winningLotto = getWinningLotto();
+
         printLottoResult(money, lottoTickets, winningLotto);
     }
 

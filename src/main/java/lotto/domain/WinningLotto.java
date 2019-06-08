@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.DuplicatedInputException;
+import lotto.exception.ExceptionMessage;
 import lotto.exception.IllegalAmountOfNumberException;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class WinningLotto {
 
     private static void validateNumeric(String number) {
         if (!number.matches("(\\d+)?")) {
-            throw new ArithmeticException("로또 번호가 유효하지 않습니다.");
+            throw new ArithmeticException(ExceptionMessage.ILLEGAL_LOTTO_NUMBER_EXCEPTION);
         }
     }
 
@@ -51,7 +52,7 @@ public class WinningLotto {
         boolean isDistinct = lottoNumbers.contains(LottoNumber.getNumber(lottoNumber));
 
         if (isDistinct) {
-            throw new DuplicatedInputException("중복된 번호는 입력할 수 없습니다.");
+            throw new DuplicatedInputException(ExceptionMessage.DUPLICATED_NUMBER_EXCEPTION);
         }
     }
 
