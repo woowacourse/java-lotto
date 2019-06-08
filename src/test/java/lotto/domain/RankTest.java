@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RankTest {
     @Test
     void 순위() {
-        assertEquals(Rank.FIST, Rank.rank(6, false));
+        assertEquals(Rank.FIRST, Rank.rank(6, false));
     }
 
     @Test
