@@ -6,4 +6,6 @@ public interface Ticket {
     public List<Integer> numbers();
 
     public boolean contains(int number);
+
+    public String toString();
 }
