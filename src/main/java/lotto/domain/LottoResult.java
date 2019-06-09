@@ -15,9 +15,8 @@ public class LottoResult {
 
     private Map<Rank, Integer> calculateRank(Lottos lottos, WinningLotto winningLotto) {
         Map<Rank, Integer> winners = initWinners();
-        Rank rank;
         for (int i = 0; i < lottos.getLottoCount(); i++) {
-            rank = winningLotto.getCountOfMatch(lottos.getLottoByIndex(i));
+            Rank rank = winningLotto.getCountOfMatch(lottos.getLottoByIndex(i));
             winners.put(rank, winners.get(rank) + 1);
         }
         return winners;
