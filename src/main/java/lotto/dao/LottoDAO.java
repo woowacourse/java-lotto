@@ -44,4 +44,11 @@ public class LottoDAO {
         }
         return new Lottos(lottos);
     }
+
+    public void deleteLotto(String lottoId) throws SQLException {
+        String query = "DELETE FROM lotto WHERE lotto_id = ?";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setString(1, lottoId);
+        pstmt.executeUpdate();
+    }
 }

@@ -60,4 +60,9 @@ public class LottoDAOTest {
     void test2_로또_검색() throws SQLException {
         assertThat(lottos).isEqualTo(lottoDAO.findByLottoId("1"));
     }
+
+    @Test
+    void test3_로또_삭제() throws SQLException {
+        lottoDAO.deleteLotto("1");
+    }
 }
