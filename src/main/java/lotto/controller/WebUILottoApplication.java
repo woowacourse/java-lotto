@@ -1,8 +1,10 @@
 package lotto.controller;
 
 import lotto.domain.lotto.LottoCount;
+import lotto.domain.lotto.LottoMachine;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.dto.LottoCountDTO;
-import lotto.domain.lotto.dto.LottoDTO;
+import lotto.domain.lotto.dto.LottoNumbersDTO;
 import lotto.domain.lotto.dto.MoneyDTO;
 import lotto.domain.money.Money;
 import spark.ModelAndView;
@@ -27,14 +29,15 @@ public class WebUILottoApplication {
         });
 
         post("/manual", (req, res) -> {
+            System.out.println(req.queryParams());
             moneyDTO.set(req.queryParams("money"));
             manualLottoCountDTO.set(req.queryParams("manualLottoCount"));
 
             Money money = Money.create(moneyDTO.getMoney());
-            LottoCount lottoCount = new LottoCount(
-                    manualLottoCountDTO.getManualLottoCount());
+            LottoCount manualLottoCount = LottoCount.create(
+                    manualLottoCountDTO.getManualLottoCount(), money);
             List<String> manualLottoNames = new ArrayList<>();
-            for (int i = 0; i < lottoCount.size(); i++) {
+            for (int i = 0; i < manualLottoCount.size(); i++) {
                 manualLottoNames.add("manualLotto" + i);
             }
 
@@ -44,19 +47,26 @@ public class WebUILottoApplication {
             return render(model, "manual.html");
         });
 
-        post("/result", (req, res) -> {
-            List<LottoDTO> lottoDTOs = new ArrayList<>();
-            for (int i = 0; i < manualLottoCountDTO.getManualLottoCount(); i++) {
-                LottoDTO lottoDTO = new LottoDTO();
-                lottoDTO.set(req.queryParams("manualLotto" + i));
-                lottoDTOs.add(lottoDTO);
-            }
+        post("/lottos", (req, res) -> {
+            Money money = Money.create(moneyDTO.getMoney());
 
+            List<List<Integer>> manualLottos = new ArrayList<>();
+            for (int i = 0; i < manualLottoCountDTO.getManualLottoCount(); i++) {
+                LottoNumbersDTO lottoNumbersDTO = new LottoNumbersDTO();
+                lottoNumbersDTO.set(req.queryParams("manualLotto" + i));
+                manualLottos.add(lottoNumbersDTO.getLottoNumbers());
+            }
+            Lottos lottos = LottoMachine.generateLottos(manualLottos, money);
             Map<String, Object> model = new HashMap<>();
-            model.put("money", req.queryParams("money"));
-            model.put("manualLottoCount", req.queryParams("manualLottoCount"));
-            model.put("manualLottoNumbers", req.queryParams("manualLottoNumbers"));
-            return render(model, "result.html");
+            model.put("lottos", lottos.getLottos());
+
+            return render(model, "lottos.html");
+        });
+
+
+        post("/result", (req, res) -> {
+
+            //return render(model, "result.html");
         });
     }
 

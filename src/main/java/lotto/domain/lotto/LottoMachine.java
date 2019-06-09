@@ -14,5 +14,4 @@ public class LottoMachine {
         LottoGenerator automaticLottoGenerator = new AutomaticLottoGenerator(money.getLottoCount() - manualLottos.size());
         return manualLottoGenerator.generate().append(automaticLottoGenerator.generate());
     }
-
 }
