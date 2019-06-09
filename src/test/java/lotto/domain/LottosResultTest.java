@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottosResultTest {
     @Test
     void 반환한_로또_결과_확인() {
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
 
         List<String> inputs = Arrays.asList("1, 2, 3, 4, 5, 6", "2, 3, 4, 5, 6, 7",
                                             "3, 4, 5, 6, 7, 8", "4, 5, 6, 7, 8, 9",

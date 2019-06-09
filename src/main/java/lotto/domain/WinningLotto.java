@@ -18,8 +18,16 @@ public class WinningLotto {
         List<Integer> lottoNumbers = toInt(Arrays.asList(inputLottoNumbers.split(",")));
         int bonusNumber = parseInt(inputBonusNumber);
 
+        checkIsBonusNumberOverlap(lottoNumbers, bonusNumber);
+
         this.lotto = new Lotto(LottoNumber.getLottoNumbers(lottoNumbers));
         this.bonusNumber = LottoNumber.valueOf(bonusNumber);
+    }
+
+    private void checkIsBonusNumberOverlap(List<Integer> lottoNumbers, int bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new InvalidLottoNumbersException("보너스 숫자가 이전에 입력한 숫자와 중복됩니다.");
+        }
     }
 
     private void checkIsBlank(String input) {
