@@ -17,7 +17,7 @@ class MoneyTest {
 
     @Test
     public void 돈에_맞는_로또_갯수_반환(){
-        assertThat(Money.of(5500).getWholeTicketQuantity()).isEqualTo(5);
+        assertThat(Money.of(5500).ticketQuantity()).isEqualTo(5);
     }
 
     @Test

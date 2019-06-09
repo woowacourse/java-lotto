@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.game.WinningLotto;
 import lotto.domain.game.WinningResult;
-import lotto.domain.machine.ManualNumbers;
 import lotto.domain.machine.Money;
 import lotto.domain.machine.Purchase;
 import lotto.domain.machine.VendingMachine;
@@ -11,14 +10,13 @@ import lotto.domain.ticket.LottoTickets;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.lang.management.ManagementFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoApplication {
     public static void main(String[] args) {
         Money money = Money.of(InputView.getInsertedMoney());
-        OutputView.printInsertedMoneyInformation(money.getWholeTicketQuantity(), money.getRest());
+        OutputView.printInsertedMoneyInformation(money.ticketQuantity(), money.getRest());
         VendingMachine vendingMachine = new VendingMachine(money);
 
         int manualTicketQuantity = InputView.getManualTicketQuantity();

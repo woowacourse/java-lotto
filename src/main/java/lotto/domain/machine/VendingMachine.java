@@ -17,13 +17,13 @@ public class VendingMachine {
     public Purchase createPurchase(int manualTicketQuantity, List<List<Integer>> multipleManualIntegers) {
         validateManualNumNotOverWholeNum(manualTicketQuantity);
         List<ManualNumbers> multipleManualNumbers = multipleManualIntegers.stream()
-                .map(ManualNumbers::new)
+                .map(ManualNumbers::of)
                 .collect(Collectors.toList());
-        return Purchase.of(manualTicketQuantity, multipleManualNumbers);
+        return Purchase.of(money.ticketQuantity(), manualTicketQuantity, multipleManualNumbers);
     }
 
     private void validateManualNumNotOverWholeNum(final int manualTicketQuantity) {
-        if (manualTicketQuantity > money.getWholeTicketQuantity()) {
+        if (manualTicketQuantity > money.ticketQuantity()) {
             throw new InvalidManualNumException("전체 로또 숫자와 같거나 적게 구매 가능합니다");
         }
     }

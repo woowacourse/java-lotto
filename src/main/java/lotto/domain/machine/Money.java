@@ -25,7 +25,7 @@ public class Money {
         return LOTTO_PRICE;
     }
 
-    public int getWholeTicketQuantity() {
+    public int ticketQuantity() {
         return this.money / LOTTO_PRICE;
     }
 

@@ -29,7 +29,7 @@ public class WinningLotto extends LottoTicket {
     }
 
     protected boolean isMatchedBonus(LottoTicket lottoTicket) {
-        return lottoTicket.hasSameNumber(bonusNumber);
+        return lottoTicket.isContainsBonusNumber(bonusNumber);
     }
 
     protected int countMatchedNumber(LottoTicket lottoTicket) {

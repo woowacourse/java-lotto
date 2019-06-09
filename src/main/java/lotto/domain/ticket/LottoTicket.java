@@ -7,17 +7,12 @@ import lotto.domain.ticket.exception.InvalidNumberCountException;
 import java.util.*;
 
 public class LottoTicket {
-    static final int MAX_LOTTO_TICKET_NUMBER = 6;
-
+    private static final int MAX_LOTTO_TICKET_NUMBER = 6;
     private final SortedSet<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
         validLength(numbers);
         this.lottoNumbers = Collections.unmodifiableSortedSet(createSortedSet(numbers));
-    }
-
-    public static LottoTicket of(List<LottoNumber> numbers) {
-        return new LottoTicket(numbers);
     }
 
     private static SortedSet<LottoNumber> createSortedSet(final List<LottoNumber> numbers) {
@@ -37,13 +32,17 @@ public class LottoTicket {
         }
     }
 
+    public static int getMaxLottoTicketNumber() {
+        return MAX_LOTTO_TICKET_NUMBER;
+    }
+
     public int countSameNumber(SortedSet<LottoNumber> winningNumbers) {
         return (int) winningNumbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
     }
 
-    public boolean hasSameNumber(final LottoNumber bonusNumber) {
+    public boolean isContainsBonusNumber(final LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 
