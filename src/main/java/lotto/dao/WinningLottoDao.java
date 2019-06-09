@@ -1,8 +1,11 @@
 package lotto.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import lotto.domain.WinningLotto;
+import lotto.dto.WinningLottoDTO;
+
+import java.sql.*;
 
 public class WinningLottoDao {
     public Connection getConnection() {
@@ -30,5 +33,27 @@ public class WinningLottoDao {
         }
 
         return con;
+    }
+
+    public int addWinningLotto(WinningLotto winningLotto) throws SQLException {
+        String query = "INSERT INTO winning_lotto VALUES (?, ?, ?)";
+        PreparedStatement pstmt = getConnection().prepareStatement(query);
+        int times = countWinningLottoTimes();
+        Gson gson = new GsonBuilder().create();
+
+        pstmt.setInt(1, times + 1);
+        pstmt.setString(2, gson.toJson(winningLotto.getWinningLotto()));
+        pstmt.setString(3, gson.toJson(winningLotto.getBonusNum()));
+        return pstmt.executeUpdate();
+    }
+
+    public int countWinningLottoTimes() throws SQLException {
+        String query = "SELECT COUNT(*) FROM winning_lotto";
+        PreparedStatement pstmt = getConnection().prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (!rs.next()) return 0;
+
+        return Integer.parseInt(rs.getString(1));
     }
 }

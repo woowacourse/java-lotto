@@ -32,5 +32,11 @@ public class WinningLotto {
         return winningLotto.size();
     }
 
+    public Lotto getWinningLotto() {
+        return winningLotto;
+    }
 
+    public Number getBonusNum() {
+        return bonusNum;
+    }
 }
