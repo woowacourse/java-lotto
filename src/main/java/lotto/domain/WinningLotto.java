@@ -56,10 +56,15 @@ public class WinningLotto {
     public Rank matchRank(Lotto lotto) {
         List<LottoNumber> winningNumbers = this.lotto.getNumbers();
         List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        boolean isBonusMatch = isBonusMatch(lottoNumbers);
 
         lottoNumbers.retainAll(winningNumbers);
-
         int countOfMatch = lottoNumbers.size();
-        return Rank.valueOf(countOfMatch);
+
+        return Rank.valueOf(countOfMatch, isBonusMatch);
+    }
+
+    private boolean isBonusMatch(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }
