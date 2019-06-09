@@ -7,9 +7,6 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        if (lottos == null || lottos.contains(null)) {
-            throw new NullArgumentException("생성자의 인자로 null 을 넘길 수 없습니다.");
-        }
         this.lottos = lottos;
     }
 

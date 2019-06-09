@@ -42,4 +42,4 @@
 - ~~create LottoCount class~~
 - ~~add more tests for new classes~~
 - ~~use generic for list parameters of methods~~
-- separate random functionality from logic using interface
+- ~~separate random functionality from logic using interface~~

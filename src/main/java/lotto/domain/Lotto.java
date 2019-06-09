@@ -9,15 +9,21 @@ public class Lotto {
     private static final int SIZE_OF_LOTTO_NUMBERS = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
-        if (numbers == null || hasNull(numbers)) {
-            throw new NullArgumentException("생성자의 인자로 null 을 넘길 수 없습니다.");
-        }
-        List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(number -> LottoNumber.from(number)).collect(Collectors.toList());
+    private Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto of(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(number -> LottoNumber.from(number)).collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto random(LottoNumberGenerator lottoNumberGenerator) {
+        List<Integer> lottoNumbers = lottoNumberGenerator.generateNumbers();
+        return of(lottoNumbers);
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -34,10 +40,6 @@ public class Lotto {
             return true;
         }
         return false;
-    }
-
-    private boolean hasNull(List<Integer> lottoNumbers) {
-        return lottoNumbers.contains(null);
     }
 
     public int countMatches(Lotto another) {
