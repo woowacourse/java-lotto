@@ -1,10 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.lotto.LottoCount;
-import lotto.domain.lotto.LottoMachine;
-import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.*;
 import lotto.domain.lotto.dto.LottoCountDTO;
-import lotto.domain.lotto.dto.LottoNumbersDTO;
+import lotto.domain.lotto.dto.LottosDTO;
 import lotto.domain.lotto.dto.MoneyDTO;
 import lotto.domain.money.Money;
 import spark.ModelAndView;
@@ -22,6 +20,10 @@ public class WebUILottoApplication {
     public static void main(String[] args) {
         MoneyDTO moneyDTO = new MoneyDTO();
         LottoCountDTO manualLottoCountDTO = new LottoCountDTO();
+        LottosDTO manualLottosDTO = new LottosDTO();
+        LottosDTO totalLottodDTO = new LottosDTO();
+
+
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -50,13 +52,13 @@ public class WebUILottoApplication {
         post("/lottos", (req, res) -> {
             Money money = Money.create(moneyDTO.getMoney());
 
-            List<List<Integer>> manualLottos = new ArrayList<>();
             for (int i = 0; i < manualLottoCountDTO.getManualLottoCount(); i++) {
-                LottoNumbersDTO lottoNumbersDTO = new LottoNumbersDTO();
-                lottoNumbersDTO.set(req.queryParams("manualLotto" + i));
-                manualLottos.add(lottoNumbersDTO.getLottoNumbers());
+                manualLottosDTO.set(req.queryParams("manualLotto" + i));
             }
-            Lottos lottos = LottoMachine.generateLottos(manualLottos, money);
+
+            Lottos lottos = LottoMachine
+                    .generateLottos(manualLottosDTO.getLottos(), money);
+
             Map<String, Object> model = new HashMap<>();
             model.put("lottos", lottos.getLottos());
 
@@ -65,6 +67,16 @@ public class WebUILottoApplication {
 
 
         post("/result", (req, res) -> {
+            WinningLottoDTO winningLottoDTO = new WinningLottoDTO();
+            winningLottoDTO.set(req.queryParams("winningLotto"));
+            WinningLotto winningLotto = WinningLotto.create(winningLottoDTO.getWinningLottoNumbers(),
+                    Integer.parseInt(req.queryParams("bonusNumber")));
+            Money money = Money.create(moneyDTO.getMoney());
+            Lottos lottos = new Lottos(totalLottodDTO.getLottos());
+            LottoResult lottoResult = LottoResult.create(money, lottos.getPrizes(winningLotto));
+
+            Map<String, Object> model = new HashMap<>();
+
 
             //return render(model, "result.html");
         });
