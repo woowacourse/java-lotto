@@ -4,13 +4,14 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.sql.SQLException;
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+@TestMethodOrder(MethodOrderer.Alphanumeric.class)
 public class WinningLottoDAOTest {
     private WinningLottoDAO winningLottoDAO;
     private WinningLotto winningLotto;
@@ -74,8 +75,13 @@ public class WinningLottoDAOTest {
         winningLottoDAO.addWinningLotto("1", winningLotto);
     }
 
-    @AfterEach
-    void 로또_테이블_삭제() throws SQLException {
+    @Test
+    void test2_당첨_로또_검색() throws SQLException {
+        assertThat(winningLotto).isEqualTo(winningLottoDAO.findByLottoId("1"));
+    }
+
+    @Test
+    void test3_테이블_삭제() throws SQLException {
         lottoDAO.deleteLotto("1");
     }
 }
