@@ -6,7 +6,6 @@ import lotto.dao.LottoResultDAO;
 import lotto.dao.WinningLottoDAO;
 import lotto.domain.*;
 import lotto.util.ConvertLottoNumber;
-import lotto.view.OutputConsole;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -18,26 +17,26 @@ import static lotto.domain.Rank.*;
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
+    private final static String DELIMITER = "\r\n";
 
     private static Lottos lottos;
     private static Integer round;
 
     public static void main(String[] args) {
-        //initExceptionHandler((e) -> System.out.println("Uh-oh"));
         staticFiles.location("/static");
         Connection connection = DBManager.getConnection();
 
         post("/winningLotto", (req, res) -> {
             Money money = new Money(Integer.parseInt(req.queryParams("money")));
             LottoCount lottoCount = new LottoCount(money, Integer.parseInt(req.queryParams("numberOfManualLotto")));
-            List<String> inputManualLottoNumbers = Arrays.asList(req.queryParams("manualLottoNumbers").split("\r\n"));
+            List<String> inputManualLottoNumbers = Arrays.asList(req.queryParams("manualLottoNumbers").split(DELIMITER));
             LottosFactory lottosFactory = new LottosFactory(inputManualLottoNumbers, lottoCount);
-            Lottos postLottos = lottosFactory.generateTotalLottos();
-            loadLottos(postLottos);
+            Lottos currentLottos = lottosFactory.generateTotalLottos();
+            loadLottos(currentLottos);
             loadLottoTable(connection);
 
             Map<String, Object> model = new HashMap<>();
-            model.put("lottos", postLottos);
+            model.put("lottos", currentLottos);
             model.put("AutoCount", lottoCount.getAutoCount());
             model.put("ManualCount", lottoCount.getManualCount());
             return render(model, "winningLotto.html");
@@ -83,7 +82,7 @@ public class WebUILottoApplication {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 
-    private static void loadLottos(Lottos pLottos) {
-        lottos = pLottos;
+    private static void loadLottos(Lottos currentLottos) {
+        lottos = currentLottos;
     }
 }
