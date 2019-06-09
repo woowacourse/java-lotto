@@ -17,7 +17,7 @@ public class LottosResultTest {
                                             "4, 5, 6, 7, 8, 9", "5, 6, 7, 8, 9, 10",
                                             "6, 7, 8, 9, 10, 11");
         ManualLottoCreator creator = new ManualLottoCreator(inputs);
-        Lottos lottos = new Lottos(7, creator);
+        Lottos lottos = new Lottos(LottoFactory.createLottoList(7, creator));
 
         LottosResult result = new LottosResult(winningLotto, lottos);
 

@@ -5,8 +5,8 @@ import java.util.List;
 public class Lottos {
     private List<Lotto> lottos;
 
-    public Lottos(int lottoQuantity, LottoCreator creator) {
-        this.lottos = creator.createLottos(lottoQuantity);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> getLottos() {

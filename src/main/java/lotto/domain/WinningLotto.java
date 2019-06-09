@@ -49,7 +49,7 @@ public class WinningLotto {
         try {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new InvalidLottoNumbersException("숫자자 아닌 값이 포함되어 있습니다.");
+            throw new InvalidLottoNumbersException("숫자가 아닌 값이 포함되어 있습니다.");
         }
     }
 

@@ -24,6 +24,10 @@ public class LottosResult {
         }
     }
 
+    public int valueOf(Rank rank) {
+        return lottosResult.get(rank);
+    }
+
     public double getROI() {
         long totalWinnigMoney = getWinningMoney();
         int numberOfLotto = lottosResult.values().stream().reduce(INITIAL_NUMBER, Integer::sum);

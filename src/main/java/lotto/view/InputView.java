@@ -25,18 +25,28 @@ public class InputView {
         }
     }
 
-    public static int inputManualLotto() {
+    public static int inputManualLotto(Money money) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         String input = SCANNER.nextLine();
 
         try {
             checkIsBlank(input);
-            return parseInt(input);
+            int number = parseInt(input);
+            checkIsBuyable(money, number);
+            return number;
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());
-            return inputManualLotto();
+            return inputManualLotto(money);
         }
 
+    }
+
+    private static void checkIsBuyable(Money money, int number) {
+        int buyableLottoQuantity = money.getBuyableLottoQuantity();
+        if (number > buyableLottoQuantity) {
+            throw new InvalidInputException(
+                    String.format("구매 가능한 수량을 초과하였습니다. 최대 %d개 구매 가능합니다.", buyableLottoQuantity));
+        }
     }
 
     private static void checkIsBlank(String input) {

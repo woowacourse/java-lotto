@@ -36,6 +36,7 @@ public class LottoNumber {
     }
 
     public static List<LottoNumber> getLottoNumbers(List<Integer> inputNumbers) {
+        checkOverlab(inputNumbers);
         List<LottoNumber> numberList = new ArrayList<>();
 
         for (int number : inputNumbers) {
@@ -43,6 +44,12 @@ public class LottoNumber {
             numberList.add(numbers.get(number));
         }
         return numberList;
+    }
+
+    private static void checkOverlab(List<Integer> inputNumbers) {
+        if (inputNumbers.size() != new HashSet<>(inputNumbers).size()) {
+            throw new InvalidLottoNumbersException("한 로또 숫자들 내 중복된 숫자가 있습니다.");
+        }
     }
 
     private static void checkNumberIn(int number) {
