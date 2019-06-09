@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int SIZE_OF_LOTTO_NUMBERS = 6;
@@ -24,7 +23,7 @@ public class Lotto {
             throw new DuplicatedLottoNumbersException("로또 번호가 중복되면 안 됩니다.");
         }
         if (lottoNumbers.size() != SIZE_OF_LOTTO_NUMBERS) {
-            throw new InvalidSizeOfLottoNumbersException("로또 번호는 6개여야 합니다.");
+            throw new InvalidSizeOfLottoNumbersException(String.format("로또 번호는 %d 개여야 합니다.", SIZE_OF_LOTTO_NUMBERS));
         }
     }
 
