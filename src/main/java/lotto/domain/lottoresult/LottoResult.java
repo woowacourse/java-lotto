@@ -32,9 +32,13 @@ public class LottoResult {
     public long sumAllPrize() {
         long sumOfPrize = 0;
         for (Rank rank : results.keySet()) {
-            sumOfPrize += rank.calculatePrize(results.get(rank));
+            sumOfPrize += calculatePrizeOf(rank);
         }
         return sumOfPrize;
+    }
+
+    private long calculatePrizeOf(Rank rank) {
+        return rank.getPrize() * results.get(rank);
     }
 
     public Integer getCountsBy(Rank key) {

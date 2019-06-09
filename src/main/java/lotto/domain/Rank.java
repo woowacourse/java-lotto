@@ -44,10 +44,6 @@ public enum Rank {
         return ranks;
     }
 
-    public long calculatePrize(int countOfMatching) {
-        return prize * countOfMatching;
-    }
-
     public int getNumOfMatching() {
         return numOfMatching;
     }
