@@ -35,8 +35,9 @@ public class ConsoleUILottoApplication {
     }
 
     private static Payment inputPayment() {
+        String input = InputView.inputPayment();
+
         try {
-            String input = InputView.inputPayment();
             return new Payment(input);
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -45,8 +46,9 @@ public class ConsoleUILottoApplication {
     }
 
     private static CountOfLotto inputCountOfManualLotto(Payment payment) {
+        String input = InputView.inputCountOfManualLotto();
+
         try {
-            String input = InputView.inputCountOfManualLotto();
             return new CountOfLotto(payment, input);
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -55,9 +57,10 @@ public class ConsoleUILottoApplication {
     }
 
     private static void inputLottoNumber(LottoRepository lottoRepository) {
+        String input = InputView.inputLottoNumber();
+        List<Integer> list = splitInputLottoNumbers(input);
+
         try {
-            String input = InputView.inputLottoNumber();
-            List<Integer> list = splitInputLottoNumbers(input);
             lottoRepository.register(new ManualLottoGeneratingStrategy(list));
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -66,11 +69,12 @@ public class ConsoleUILottoApplication {
     }
 
     private static WinningLotto inputWinningLotto() {
+        String inputLotto = InputView.inputWinningLottoNumber();
+        List<Integer> list = splitInputLottoNumbers(inputLotto);
+        String inputBonusBall = InputView.inputBonusBall();
+
         try {
-            String inputLotto = InputView.inputWinningLottoNumber();
-            List<Integer> list = splitInputLottoNumbers(inputLotto);
             Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(list));
-            String inputBonusBall = InputView.inputBonusBall();
             return new WinningLotto(lotto, LottoNumber.getNumber(Integer.parseInt(inputBonusBall)));
         } catch (Exception e) {
             System.err.println(e.getMessage());
