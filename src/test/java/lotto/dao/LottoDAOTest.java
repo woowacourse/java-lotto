@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LottoDAOTest {
@@ -60,6 +61,11 @@ public class LottoDAOTest {
 
     @Test
     void test1_로또_추가() throws SQLException {
-        lottoDAO.addLottos(1, lottos);
+        lottoDAO.addLottos("1", lottos);
+    }
+
+    @Test
+    void test2_로또_검색() throws SQLException {
+        assertThat(lottos).isEqualTo(lottoDAO.findByLottoId("1"));
     }
 }
