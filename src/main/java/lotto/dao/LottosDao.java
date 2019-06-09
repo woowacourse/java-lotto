@@ -2,11 +2,12 @@ package lotto.dao;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import lotto.domain.WinningLotto;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 import java.sql.*;
 
-public class WinningLottoDao {
+public class LottosDao {
     public Connection getConnection() {
         Connection con = null;
         String server = "localhost"; // MySQL 서버 주소
@@ -34,19 +35,32 @@ public class WinningLottoDao {
         return con;
     }
 
-    public int addWinningLotto(WinningLotto winningLotto) throws SQLException {
-        String query = "INSERT INTO winning_lotto VALUES (?, ?, ?)";
+    // 드라이버 연결해제
+    public void closeConnection(Connection con) {
+        try {
+            if (con != null)
+                con.close();
+        } catch (SQLException e) {
+            System.err.println("con 오류:" + e.getMessage());
+        }
+    }
+
+    public int[] addLottos(Lottos lottos) throws SQLException {
+        String query = "INSERT INTO lotto (numbers, times) VALUES (?, ?)";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         int times = countWinningLottoTimes();
         Gson gson = new GsonBuilder().create();
 
-        pstmt.setInt(1, times + 1);
-        pstmt.setString(2, gson.toJson(winningLotto.getWinningLotto()));
-        pstmt.setString(3, gson.toJson(winningLotto.getBonusNum()));
-        return pstmt.executeUpdate();
+        for (Lotto lotto : lottos.getLottos()) {
+            pstmt.setString(1, gson.toJson(lotto.getLotto()));
+            pstmt.setInt(2, times);
+            pstmt.addBatch();
+        }
+
+        return pstmt.executeBatch();
     }
 
-    public int countWinningLottoTimes() throws SQLException {
+    private int countWinningLottoTimes() throws SQLException{
         String query = "SELECT COUNT(*) FROM winning_lotto";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
