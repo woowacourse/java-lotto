@@ -6,12 +6,10 @@ import lotto.domain.Lottos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LottoDAOTest {
     private LottoDAO lottoDAO;
@@ -19,7 +17,7 @@ public class LottoDAOTest {
 
     @BeforeEach
     public void setup_db() {
-        lottoDAO = new LottoDAO();
+        lottoDAO = new LottoDAO(DBManager.getConnection());
     }
 
     @BeforeEach
@@ -51,12 +49,6 @@ public class LottoDAOTest {
         lottos = new Lottos(Arrays.asList(
                 lotto1, lotto2, lotto3
         ));
-    }
-
-    @Test
-    public void connection() {
-        Connection con = lottoDAO.getConnection();
-        assertNotNull(con);
     }
 
     @Test
