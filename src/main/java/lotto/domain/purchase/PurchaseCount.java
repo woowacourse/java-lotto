@@ -18,7 +18,7 @@ public class PurchaseCount {
 
     private void checkManualCount(PurchaseAmount purchaseAmount, int manualCount) {
         if (manualCount < 0 || manualCount > purchaseAmount.purchaseTotalQuantity()) {
-            throw new InvalidPurchaseCount(MINIMUM_COUNT + TILDE +
+            throw new InvalidPurchaseCountException(MINIMUM_COUNT + TILDE +
                     purchaseAmount.purchaseTotalQuantity() + MSG_PURCHASE);
         }
     }

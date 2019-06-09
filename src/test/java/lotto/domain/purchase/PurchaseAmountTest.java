@@ -14,14 +14,14 @@ public class PurchaseAmountTest {
 
     @Test
     void 최소금액_이하로_입력하는_경우() {
-        assertThrows(InvalidPurchaseAmount.class, () -> {
+        assertThrows(InvalidPurchaseAmountException.class, () -> {
             PurchaseAmount.of(900);
         });
     }
 
     @Test
     void 거스름_돈이_있는_경우() {
-        assertThrows(InvalidPurchaseAmount.class, () -> {
+        assertThrows(InvalidPurchaseAmountException.class, () -> {
             PurchaseAmount.of(1902);
         });
     }

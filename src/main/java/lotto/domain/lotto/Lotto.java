@@ -22,13 +22,13 @@ public class Lotto {
 
     private void checkDuplicateNumber(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
-            throw new InvalidLotto(DUPLICATED_NUMBER_ERROR);
+            throw new InvalidLottoException(DUPLICATED_NUMBER_ERROR);
         }
     }
 
     private void checkLottoNumberCount(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
-            throw new InvalidLotto(LOTTO_NUMBER_SIZE_ERROR);
+            throw new InvalidLottoException(LOTTO_NUMBER_SIZE_ERROR);
         }
     }
 

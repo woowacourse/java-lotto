@@ -16,11 +16,11 @@ public class PurchaseCountTest {
 
     @Test
     void 수동으로_구매할_수_없는_경우() {
-        assertThrows(InvalidPurchaseCount.class, () -> {
+        assertThrows(InvalidPurchaseCountException.class, () -> {
             PurchaseCount.of(PurchaseAmount.of(PURCHASE_AMOUNT), 2);
         });
 
-        assertThrows(InvalidPurchaseCount.class, () -> {
+        assertThrows(InvalidPurchaseCountException.class, () -> {
             PurchaseCount.of(PurchaseAmount.of(PURCHASE_AMOUNT), -1);
         });
     }

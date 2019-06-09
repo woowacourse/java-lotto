@@ -20,13 +20,13 @@ public class Winning {
 
     private void checkContainNum(int bonusNum) {
         if (lotto.containNumber(bonusNum)) {
-            throw new InvalidWinning(INCLUDE_ERROR);
+            throw new InvalidWinningException(INCLUDE_ERROR);
         }
     }
 
     private void checkBonusNum(int bonusNum) {
         if (bonusNum < 0 || bonusNum > 45) {
-            throw new InvalidWinning(NOT_INCLUDE_ERROR);
+            throw new InvalidWinningException(NOT_INCLUDE_ERROR);
         }
     }
 

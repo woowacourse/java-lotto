@@ -17,13 +17,13 @@ public class PurchaseAmount {
 
     private void checkMinimumAmount(int price) {
         if (price < LOTTO_PRICE) {
-            throw new InvalidPurchaseAmount(MINIMUM_PRICE_ERROR);
+            throw new InvalidPurchaseAmountException(MINIMUM_PRICE_ERROR);
         }
     }
 
     private void checkChange(int price) {
         if (price % LOTTO_PRICE != 0) {
-            throw new InvalidPurchaseAmount(CHANGE_PRICE_ERROR);
+            throw new InvalidPurchaseAmountException(CHANGE_PRICE_ERROR);
         }
     }
 

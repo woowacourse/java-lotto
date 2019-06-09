@@ -27,12 +27,12 @@ public class WinningTest {
 
     @Test
     void 보너스번호_범위_확인() {
-        assertThrows(InvalidWinning.class, () -> Winning.of(lotto, 46));
-        assertThrows(InvalidWinning.class, () -> Winning.of(lotto, -1));
+        assertThrows(InvalidWinningException.class, () -> Winning.of(lotto, 46));
+        assertThrows(InvalidWinningException.class, () -> Winning.of(lotto, -1));
     }
 
     @Test
     void 보너스번호가_당첨번호에_포함되는지() {
-        assertThrows(InvalidWinning.class, () -> Winning.of(lotto, 5));
+        assertThrows(InvalidWinningException.class, () -> Winning.of(lotto, 5));
     }
 }

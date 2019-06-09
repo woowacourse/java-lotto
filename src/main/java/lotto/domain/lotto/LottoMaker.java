@@ -22,7 +22,7 @@ public class LottoMaker {
 
     public static Lotto generator(List<Integer> inputNumbers) {
         if (!numbers.containsAll(inputNumbers)) {
-            throw new InvalidLotto(INVALID_LOTTO_NUMBER_ERROR);
+            throw new InvalidLottoException(INVALID_LOTTO_NUMBER_ERROR);
         }
         sortAscending(inputNumbers);
         return Lotto.of(inputNumbers);

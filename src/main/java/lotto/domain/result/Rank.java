@@ -34,7 +34,7 @@ public enum Rank {
             }
         }
 
-        throw new InvalidRankCount(count + INVALID_COUNT_ERROR);
+        throw new InvalidRankCountException(count + INVALID_COUNT_ERROR);
     }
 
     private boolean matchCount(int count) {
