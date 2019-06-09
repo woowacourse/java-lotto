@@ -48,12 +48,10 @@ public class LottoResult {
 
     public int yield() {
         int purchaseAmount = map.values().stream()
-                .reduce(INIT_VALUE, Integer::sum) * PurchaseAmount.LOTTO_PRICE
-                ;
+                .reduce(INIT_VALUE, Integer::sum) * PurchaseAmount.LOTTO_PRICE;
         int result = map.keySet().stream()
                 .mapToInt(x -> x.getMoney() * map.get(x))
-                .sum()
-                ;
+                .sum();
 
         return (result / purchaseAmount) * PERCENTAGE;
     }
