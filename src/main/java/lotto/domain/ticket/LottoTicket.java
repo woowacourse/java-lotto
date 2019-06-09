@@ -5,7 +5,6 @@ import lotto.domain.ticket.exception.InvalidDuplicatedNumberException;
 import lotto.domain.ticket.exception.InvalidNumberCountException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
     static final int MAX_LOTTO_TICKET_NUMBER = 6;
@@ -39,7 +38,7 @@ public class LottoTicket {
     }
 
     public int countSameNumber(SortedSet<LottoNumber> winningNumbers) {
-        return (int)winningNumbers.stream()
+        return (int) winningNumbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
     }
