@@ -21,6 +21,16 @@ public class LottoGameLauncher {
         OutputView.showAnalysisOf(statistics);
     }
 
+    private static PurchaseAmount getPurchaseAmount() {
+        try {
+            int moneyFromPlayer = InputView.inputPurchaseAmount();
+            return PurchaseAmount.valueOf(moneyFromPlayer);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getPurchaseAmount();
+        }
+    }
+
     private static IssuedLottos getManualIssuedLottosUpTo(PurchaseAmount purchaseAmount) {
         int numberOfManualIssue = getNumberOfManualIssueLottosUpTo(purchaseAmount);
         List<IssuedLotto> lottos = new ArrayList<>();
@@ -50,16 +60,6 @@ public class LottoGameLauncher {
         } catch(IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getManualIssuedLotto();
-        }
-    }
-
-    private static PurchaseAmount getPurchaseAmount() {
-        try {
-            int moneyFromPlayer = InputView.inputPurchaseAmount();
-            return PurchaseAmount.valueOf(moneyFromPlayer);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return getPurchaseAmount();
         }
     }
 
