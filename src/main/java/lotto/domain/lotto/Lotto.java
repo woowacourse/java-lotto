@@ -8,9 +8,6 @@ import java.util.StringJoiner;
 public class Lotto {
     private static final String DUPLICATED_NUMBER_ERROR = "중복 되는 번호가 존재합니다.";
     private static final String LOTTO_NUMBER_SIZE_ERROR = "로또 번호가 6개가 아닙니다.";
-    private static final String DELIMITER = ",";
-    private static final String PREFIX = "[";
-    private static final String SUFFIX = "]";
 
     private List<Integer> lottoNumbers;
 
@@ -55,6 +52,10 @@ public class Lotto {
         return 0;
     }
 
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,14 +67,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    @Override
-    public String toString() {
-        StringJoiner stringJoiner = new StringJoiner(DELIMITER, PREFIX, SUFFIX);
-        for (Integer lottoNumber : lottoNumbers) {
-            stringJoiner.add(String.valueOf(lottoNumber));
-        }
-        return stringJoiner.toString();
     }
 }
