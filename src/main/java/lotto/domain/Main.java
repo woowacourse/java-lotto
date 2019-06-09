@@ -20,11 +20,16 @@ public class Main {
         int manualLottoSize = InputView.inputManualLottoSize(money);
 
         InputView.printInputManualLottoMessage(manualLottoSize);
+
+        // 수동 로또 생성
         while (manualLotto.size() < manualLottoSize) {
             InputView.printRemainedManualLotto(manualLottoSize, manualLotto);
             manualLotto.add(new Lotto(InputView.inputLottoNumber()));
         }
-        while (autoLotto.size() < (money.availablePurchaseCount() - manualLottoSize)) {
+
+        // 자동 로또 생성
+        int autoLottoAvailableSize = money.availablePurchaseCount() - manualLottoSize;
+        while (autoLotto.size() < autoLottoAvailableSize) {
             autoLotto.add(new Lotto(ShuffledNumberGenerator.getShuffledNumbers()));
         }
 
