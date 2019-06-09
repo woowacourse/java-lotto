@@ -1,7 +1,11 @@
 package lotto.dao;
 
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class LottoDAO {
@@ -31,5 +35,25 @@ public class LottoDAO {
         }
 
         return con;
+    }
+
+    // 드라이버 연결해제
+    public void closeConnection(Connection con) {
+        try {
+            if (con != null)
+                con.close();
+        } catch (SQLException e) {
+            System.err.println("con 오류:" + e.getMessage());
+        }
+    }
+
+    public void addLottos(Integer lottoId, Lottos lottos) throws SQLException {
+        String query = "INSERT INTO lotto VALUES (?, ?)";
+        PreparedStatement pstmt = getConnection().prepareStatement(query);
+        pstmt.setString(1, lottoId.toString());
+        StringBuilder stringLottos = new StringBuilder();
+        stringLottos.append(String.join(", ", lottos.getLottos().toString()));
+        pstmt.setString(2, stringLottos.toString());
+        pstmt.executeUpdate();
     }
 }
