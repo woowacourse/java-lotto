@@ -24,23 +24,15 @@ public class LottoMaker {
         if (!numbers.containsAll(inputNumbers)) {
             throw new InvalidLottoException(INVALID_LOTTO_NUMBER_ERROR);
         }
-        sortAscending(inputNumbers);
+        Collections.sort(numbers);
         return Lotto.of(inputNumbers);
     }
 
     public static Lotto generator() {
         List<Integer> autoNumbers = new ArrayList<>(numbers);
-        mixNumbers(autoNumbers);
-        autoNumbers = autoNumbers.subList(START, LOTTO_SIZE);
-        sortAscending(autoNumbers);
-        return Lotto.of(autoNumbers);
-    }
-
-    private static void mixNumbers(List<Integer> numbers) {
         Collections.shuffle(numbers);
-    }
-
-    private static void sortAscending(List<Integer> numbers) {
-        Collections.sort(numbers);
+        autoNumbers = autoNumbers.subList(START, LOTTO_SIZE);
+        Collections.sort(autoNumbers);
+        return Lotto.of(autoNumbers);
     }
 }
