@@ -2,17 +2,20 @@ package lotto.domain.lottonumber;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 public class LottoNumberPool {
     private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
-    static {
-        IntStream.rangeClosed(LottoNumber.FIRST_NUMBER, LottoNumber.LAST_NUMBER)
-                .forEach(number -> lottoNumbers.put(number, LottoNumber.of(number)));
+    private LottoNumberPool() {
     }
 
     public static LottoNumber valueOf(int number) {
-        return lottoNumbers.get(number);
+        if (lottoNumbers.containsKey(number)) {
+            return lottoNumbers.get(number);
+        }
+
+        LottoNumber lottoNumber = LottoNumber.of(number);
+        lottoNumbers.put(number, lottoNumber);
+        return lottoNumber;
     }
 }

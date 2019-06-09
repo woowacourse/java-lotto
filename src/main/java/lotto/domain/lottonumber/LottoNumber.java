@@ -13,7 +13,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
+    static LottoNumber of(int number) {
         if (isOutOfScope(number)) {
             throw new InvalidLottoNumberException(ERROR_OUT_OF_SCOPE_MESSAGE);
         }
