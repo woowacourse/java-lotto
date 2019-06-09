@@ -61,7 +61,7 @@ public class LottoTicketsFactory {
             List<LottoTicket> autoLottoTickets = new ArrayList<>();
 
             for (int i = 0; i < amountOfAutos; i++) {
-                autoLottoTickets.add(LottoTicketFactory.getInstance().create(null));
+                autoLottoTickets.add(LottoTicketFactory.getInstance().create());
             }
 
             return autoLottoTickets;

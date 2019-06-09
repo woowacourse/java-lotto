@@ -23,11 +23,11 @@ public class LottoTicketFactory {
     }
 
     public LottoTicket create(String input) {
-        if (input == null) {
-            return new AutoLottoFactory().makeLotto();
-        }
-
         return new CustomLottoFactory(input).makeLotto();
+    }
+
+    public LottoTicket create() {
+        return new AutoLottoFactory().makeLotto();
     }
 
     private class AutoLottoFactory implements LottoTicketFactoryStrategy {
