@@ -6,14 +6,20 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Lotto {
+    public static final int FIRST_NUMBER = 1;
+    public static final int LAST_NUMBER = 45;
+    public static final int LOTTO_SIZE = 6;
     private static final String DUPLICATED_NUMBER_ERROR = "중복 되는 번호가 존재합니다.";
     private static final String LOTTO_NUMBER_SIZE_ERROR = "로또 번호가 6개가 아닙니다.";
+    private static final String LOTTO_NUMBER_RANGE_ERROR = FIRST_NUMBER + " ~ " + LAST_NUMBER
+            + "사이의 값만 입력할 수 있습니다.";
 
     private List<Integer> lottoNumbers;
 
     private Lotto(List<Integer> lottoNumbers) {
         checkLottoNumberCount(lottoNumbers);
         checkDuplicateNumber(lottoNumbers);
+        checkLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -24,8 +30,20 @@ public class Lotto {
     }
 
     private void checkLottoNumberCount(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new InvalidLottoException(LOTTO_NUMBER_SIZE_ERROR);
+        }
+    }
+
+    private void checkLottoNumbers(List<Integer> lottoNumbers) {
+        for (int lottoNumber : lottoNumbers) {
+            checkLottoNumber(lottoNumber);
+        }
+    }
+
+    private void checkLottoNumber(int lottoNumber) {
+        if (lottoNumber < FIRST_NUMBER || lottoNumber > LAST_NUMBER) {
+            throw new InvalidLottoException(LOTTO_NUMBER_RANGE_ERROR);
         }
     }
 

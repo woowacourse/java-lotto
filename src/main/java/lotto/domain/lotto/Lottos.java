@@ -1,19 +1,38 @@
 package lotto.domain.lotto;
 
+import lotto.domain.purchase.PurchaseCount;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    private Lottos(final List<Lotto> lottos) {
-        this.lottos = lottos;
+    private Lottos(PurchaseCount purchaseCount, List<Lotto> numbers) {
+        this.lottos = new ArrayList<>();
+        lottos.addAll(LottosGenerator.generateLottos(numbers));
+        lottos.addAll(LottosGenerator.generateLottos(purchaseCount.getAutoCount()));
     }
 
-    public static Lottos of(List<Lotto> lottos) {
-        return new Lottos(lottos);
+    public static Lottos of(PurchaseCount purchaseCount, List<Lotto> numbers) {
+        return new Lottos(purchaseCount, numbers);
     }
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 }

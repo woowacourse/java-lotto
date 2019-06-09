@@ -1,5 +1,6 @@
 package lotto.view.input;
 
+import lotto.domain.lotto.Lotto;
 import lotto.domain.purchase.PurchaseCount;
 import lotto.utils.InputUtils;
 
@@ -50,12 +51,12 @@ public class InputView {
         }
     }
 
-    public static List<List<Integer>> inputLottos(PurchaseCount purchaseCount) {
+    public static List<Lotto> inputLottos(PurchaseCount purchaseCount) {
         try {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-            List<List<Integer>> lottos = new ArrayList<>();
+            List<Lotto> lottos = new ArrayList<>();
             for (int i = 0; i < purchaseCount.getManualCount(); i++) {
-                lottos.add(InputUtils.parseIntegerList(scanner.nextLine()));
+                lottos.add(Lotto.of(InputUtils.parseIntegerList(scanner.nextLine())));
             }
             return lottos;
         } catch (NumberFormatException e) {

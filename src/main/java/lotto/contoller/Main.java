@@ -29,17 +29,13 @@ public class Main {
         OutputView.outputResult(LottoResult.of(winning, lottos));
     }
 
-    private static Lottos createLottos(PurchaseCount purchaseCount) {
+    private static PurchaseAmount createPurchaseAmount() {
         try {
-            return LottosGenerator.generate(purchaseCount, createManualLottos(purchaseCount));
-        } catch (InvalidLottoException e) {
+            return PurchaseAmount.of(InputView.inputMoney());
+        } catch (InvalidPurchaseAmountException e) {
             System.out.println(e.getMessage());
-            return createLottos(purchaseCount);
+            return createPurchaseAmount();
         }
-    }
-
-    private static List<List<Integer>> createManualLottos(PurchaseCount purchaseCount) {
-        return InputView.inputLottos(purchaseCount);
     }
 
     private static PurchaseCount createManualCount(PurchaseAmount purchaseAmount) {
@@ -51,12 +47,12 @@ public class Main {
         }
     }
 
-    private static PurchaseAmount createPurchaseAmount() {
+    private static Lottos createLottos(PurchaseCount purchaseCount) {
         try {
-            return PurchaseAmount.of(InputView.inputMoney());
-        } catch (InvalidPurchaseAmountException e) {
+            return Lottos.of(purchaseCount, InputView.inputLottos(purchaseCount));
+        } catch (InvalidLottoException e) {
             System.out.println(e.getMessage());
-            return createPurchaseAmount();
+            return createLottos(purchaseCount);
         }
     }
 

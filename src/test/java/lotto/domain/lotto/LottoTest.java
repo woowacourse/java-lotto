@@ -22,7 +22,7 @@ public class LottoTest {
     }
 
     @Test
-    void 숫자가_6개가_아닌_경우() {
+    void 숫자가_5개인_경우() {
         assertThrows(InvalidLottoException.class, () -> {
             List<Integer> lottos = new ArrayList<>();
             for (int i = 0; i < 5; i++) {
@@ -30,6 +30,29 @@ public class LottoTest {
             }
             Lotto.of(lottos);
         });
+    }
+
+    @Test
+    void 숫자가_7개인_경우() {
+        assertThrows(InvalidLottoException.class, () -> {
+            List<Integer> lottos = new ArrayList<>();
+            for (int i = 0; i < 7; i++) {
+                lottos.add(i);
+            }
+            Lotto.of(lottos);
+        });
+    }
+
+    @Test
+    void 숫자_범위를_벗어난_경우() {
+        assertThrows(InvalidLottoException.class, () -> Lotto.of(Arrays.asList(-1,2,3,4,5,45)));
+        assertThrows(InvalidLottoException.class, () -> Lotto.of(Arrays.asList(1,2,3,4,5,46)));
+    }
+
+    @Test
+    void 숫자를_포함하고_있는_경우() {
+        Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,5,6));
+        assertThat(lotto.containNumber(1)).isTrue();
     }
 
     @Test
