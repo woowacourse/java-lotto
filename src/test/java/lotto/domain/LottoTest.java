@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoException;
+import lotto.utils.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +31,7 @@ class LottoTest {
         lottoNumber5 = LottoNumber.generateNumber(5);
         lottoNumber6 = LottoNumber.generateNumber(6);
         lottoNumber7 = LottoNumber.generateNumber(7);
-        lotto = new CustomLottoGenerator("1,2,3,4,5,6".split(",")).makeLotto();
+        lotto = new CustomLottoGenerator(Parser.parsingLottoNumbers("1,2,3,4,5,6".split(","))).makeLotto();
     }
 
     @Test
@@ -55,7 +56,7 @@ class LottoTest {
 
     @Test
     void 로또_매칭_테스트() {
-        Lotto testLotto = new CustomLottoGenerator("1,2,3,4,5,7".split(",")).makeLotto();
+        Lotto testLotto = new CustomLottoGenerator(Parser.parsingLottoNumbers("1,2,3,4,5,7".split(","))).makeLotto();
         assertThat(lotto.matchNumbers(testLotto)).isEqualTo(5);
     }
 

@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoPaper {
@@ -11,9 +12,9 @@ public class LottoPaper {
         this.lottos = lottos;
     }
 
-    public List<Rank> matchLotto(WinningLotto winningLotto) {
-        List<Rank> result = new ArrayList<>();
-        lottos.forEach(lotto -> result.add(winningLotto.match(lotto)));
+    public Map<Lotto, Rank> matchLotto(WinningLotto winningLotto){
+        Map<Lotto, Rank> result = new HashMap<>();
+        lottos.forEach(lotto -> result.put(lotto, winningLotto.match(lotto)));
 
         return result;
     }
