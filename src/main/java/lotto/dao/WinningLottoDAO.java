@@ -2,7 +2,6 @@ package lotto.dao;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.util.ConvertLottoNumber;
 
@@ -10,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class WinningLottoDAO {
     private final Connection con;

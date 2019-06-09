@@ -67,4 +67,9 @@ public class LottoResultDAOTest {
         lottoDAO.addLottos("1", lottos);
         lottoResultDAO.addLottoResult("1", lottoResult);
     }
+
+    @Test
+    void test2_테이블_삭제() throws SQLException {
+        lottoDAO.deleteLotto("1");
+    }
 }
