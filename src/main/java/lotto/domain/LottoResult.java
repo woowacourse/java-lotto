@@ -48,7 +48,7 @@ public class LottoResult {
                 .multiply(BigInteger.valueOf(RATE));
     }
 
-    private BigInteger getEarning() {
+    public BigInteger getEarning() {
         BigInteger earning = BigInteger.ZERO;
         for (Map.Entry<Rank, Integer> entry : rankResult.entrySet()) {
             BigInteger temp = BigInteger.valueOf(entry.getKey().getWinningMoney());

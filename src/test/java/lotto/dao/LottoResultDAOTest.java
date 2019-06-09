@@ -1,8 +1,6 @@
 package lotto.dao;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -11,20 +9,21 @@ import org.junit.jupiter.api.TestMethodOrder;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @TestMethodOrder(MethodOrderer.Alphanumeric.class)
-public class LottoDAOTest {
-    private LottoDAO lottoDAO;
+public class LottoResultDAOTest {
+    private LottoResultDAO lottoResultDAO;
+    private LottoResult lottoResult;
     private Lottos lottos;
+    private LottoDAO lottoDAO;
 
     @BeforeEach
-    public void setup_db() {
+    void setup_db() {
+        lottoResultDAO = new LottoResultDAO(DBManager.getConnection());
         lottoDAO = new LottoDAO(DBManager.getConnection());
     }
 
     @BeforeEach
-    public void setup_lottos() {
+    void setup_lottoResult() {
         Lotto lotto1 = new Lotto(Arrays.asList(
                 LottoNumber.getInstance(1),
                 LottoNumber.getInstance(2),
@@ -49,23 +48,23 @@ public class LottoDAOTest {
                 LottoNumber.getInstance(25),
                 LottoNumber.getInstance(26)
         ));
-        lottos = new Lottos(Arrays.asList(
-                lotto1, lotto2, lotto3
+        lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
+
+        Lotto lastWinningLotto = new Lotto(Arrays.asList(
+                LottoNumber.getInstance(1),
+                LottoNumber.getInstance(2),
+                LottoNumber.getInstance(3),
+                LottoNumber.getInstance(4),
+                LottoNumber.getInstance(5),
+                LottoNumber.getInstance(6)
         ));
+        LottoNumber bonusBall = LottoNumber.getInstance(7);
+        lottoResult = new LottoResult(new WinningLotto(lastWinningLotto, bonusBall), lottos);
     }
 
     @Test
-    void test1_로또_추가() throws SQLException {
+    void test1_로또_결과_추가() throws SQLException {
         lottoDAO.addLottos("1", lottos);
-    }
-
-    @Test
-    void test2_로또_검색() throws SQLException {
-        assertThat(lottos).isEqualTo(lottoDAO.findByLottoId("1"));
-    }
-
-    @Test
-    void test3_로또_삭제() throws SQLException {
-        lottoDAO.deleteLotto("1");
+        lottoResultDAO.addLottoResult("1", lottoResult);
     }
 }
