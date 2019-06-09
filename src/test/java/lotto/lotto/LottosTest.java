@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.lotto;
 
+import lotto.domain.creator.AutoLottoCreator;
+import lotto.domain.lotto.LottoFactory;
+import lotto.domain.lotto.Lottos;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

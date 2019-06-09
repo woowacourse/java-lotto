@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.Rank;
 import lotto.exception.InvalidLottoNumbersException;
 import org.apache.commons.lang3.StringUtils;
 

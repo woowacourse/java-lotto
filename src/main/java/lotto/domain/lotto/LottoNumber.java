@@ -1,10 +1,10 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import lotto.exception.InvalidLottoNumbersException;
 
 import java.util.*;
 
-import static lotto.domain.Lotto.NUMBER_OF_NUMBERS_IN_LOTTO;
+import static lotto.domain.lotto.Lotto.NUMBER_OF_NUMBERS_IN_LOTTO;
 
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -36,6 +36,7 @@ public class LottoNumber {
     }
 
     public static List<LottoNumber> getLottoNumbers(List<Integer> inputNumbers) {
+        checkNumberOfNumbers(inputNumbers);
         checkOverlab(inputNumbers);
         List<LottoNumber> numberList = new ArrayList<>();
 
@@ -44,6 +45,14 @@ public class LottoNumber {
             numberList.add(numbers.get(number));
         }
         return numberList;
+    }
+
+    private static void checkNumberOfNumbers(List<Integer> inputNumbers) {
+        if (inputNumbers.size() != NUMBER_OF_NUMBERS_IN_LOTTO) {
+            throw new InvalidLottoNumbersException(
+                    String.format("숫자를 %d개 입력하셨습니다. %d개의 숫자를 입력해주세요",
+                            inputNumbers.size(), NUMBER_OF_NUMBERS_IN_LOTTO));
+        }
     }
 
     private static void checkOverlab(List<Integer> inputNumbers) {

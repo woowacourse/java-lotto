@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.ManualLottoCreator;
+import lotto.domain.creator.ManualLottoCreator;
 import lotto.domain.Money;
-import lotto.domain.WinningLotto;
+import lotto.domain.lotto.WinningLotto;
 import lotto.exception.InvalidInputException;
 import lotto.exception.InvalidLottoNumbersException;
 import lotto.exception.InvalidPaymentException;

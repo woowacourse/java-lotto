@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import lotto.exception.InvalidLottoNumbersException;
 
@@ -18,7 +18,8 @@ public class Lotto {
     private void checkNumberOfNumbers(Set<LottoNumber> numbers) {
         if (numbers.size() != NUMBER_OF_NUMBERS_IN_LOTTO) {
             throw new InvalidLottoNumbersException(
-                    String.format("숫자를 %d개 입력하셨습니다. %d개의 숫자를 입력해주세요", numbers.size(), NUMBER_OF_NUMBERS_IN_LOTTO));
+                    String.format("숫자를 %d개 입력하셨습니다. %d개의 숫자를 입력해주세요",
+                            numbers.size(), NUMBER_OF_NUMBERS_IN_LOTTO));
        }
     }
 

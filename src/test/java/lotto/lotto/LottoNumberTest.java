@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.lotto;
 
+import lotto.domain.lotto.LottoNumber;
 import lotto.exception.InvalidLottoNumbersException;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,24 @@ public class LottoNumberTest {
     @Test
     void 로또_숫자_범위_미만_숫자를_입력받은_경우_예외_반환() {
         List<Integer> inputNumbers = Arrays.asList(0, 2, 3, 4, 5, 6);
+        assertThrows(InvalidLottoNumbersException.class, () -> LottoNumber.getLottoNumbers(inputNumbers));
+    }
+
+    @Test
+    void 중복된_숫자를_입력받은_경우_예외_반환() {
+        List<Integer> inputNumbers = Arrays.asList(1, 2, 3, 4, 5, 1);
+        assertThrows(InvalidLottoNumbersException.class, () -> LottoNumber.getLottoNumbers(inputNumbers));
+    }
+
+    @Test
+    void 숫자를_6개보다_덜_입력받은_경우_예외_발생() {
+        List<Integer> inputNumbers = Arrays.asList(1, 2, 3, 4, 5);
+        assertThrows(InvalidLottoNumbersException.class, () -> LottoNumber.getLottoNumbers(inputNumbers));
+    }
+
+    @Test
+    void 숫자를_6개보다_더_입력받은_경우_예외_발생() {
+        List<Integer> inputNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         assertThrows(InvalidLottoNumbersException.class, () -> LottoNumber.getLottoNumbers(inputNumbers));
     }
 }

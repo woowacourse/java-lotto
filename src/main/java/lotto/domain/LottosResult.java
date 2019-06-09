@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLotto;
+
 import java.util.EnumMap;
 
 import static lotto.domain.Money.ONE_LOTTO_PRICE;
