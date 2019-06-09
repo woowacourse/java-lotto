@@ -54,7 +54,7 @@ public class InputView {
         try {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
             List<List<Integer>> lottos = new ArrayList<>();
-            for (int i = 0; i < purchaseCount.calculateManualCount(); i++) {
+            for (int i = 0; i < purchaseCount.getManualCount(); i++) {
                 lottos.add(InputUtils.parseIntegerList(scanner.nextLine()));
             }
             return lottos;

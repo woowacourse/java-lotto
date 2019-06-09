@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class OutputView {
     public static void outputLottoCount(PurchaseCount purchaseCount) {
-        System.out.println("수동으로 " + purchaseCount.calculateManualCount() + "장," +
-                " 자동으로 " + purchaseCount.calculateAutoCount() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + purchaseCount.getManualCount() + "장," +
+                " 자동으로 " + purchaseCount.getAutoCount() + "개를 구매했습니다.");
     }
 
     public static void outputLottos(Lottos lottos) {

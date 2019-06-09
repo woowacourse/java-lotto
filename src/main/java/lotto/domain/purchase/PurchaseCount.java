@@ -7,13 +7,13 @@ public class PurchaseCount {
     private static final String TILDE = "~";
     private static final String MSG_PURCHASE = "사이로 구매 할 수 있습니다.";
 
-    private final PurchaseAmount purchaseAmount;
     private final int manualCount;
+    private final int autoCount;
 
     private PurchaseCount(PurchaseAmount purchaseAmount, int manualCount) {
         checkManualCount(purchaseAmount, manualCount);
-        this.purchaseAmount = purchaseAmount;
         this.manualCount = manualCount;
+        this.autoCount = purchaseAmount.purchaseTotalQuantity() - manualCount;
     }
 
     private void checkManualCount(PurchaseAmount purchaseAmount, int manualCount) {
@@ -27,12 +27,12 @@ public class PurchaseCount {
         return new PurchaseCount(purchaseAmount, manualCount);
     }
 
-    public int calculateAutoCount() {
-        return purchaseAmount.purchaseTotalQuantity() - manualCount;
+    public int getManualCount() {
+        return manualCount;
     }
 
-    public int calculateManualCount() {
-        return purchaseAmount.purchaseTotalQuantity() - calculateAutoCount();
+    public int getAutoCount() {
+        return autoCount;
     }
 
     @Override
@@ -40,11 +40,12 @@ public class PurchaseCount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PurchaseCount that = (PurchaseCount) o;
-        return Objects.equals(purchaseAmount, that.purchaseAmount);
+        return manualCount == that.manualCount &&
+                autoCount == that.autoCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(purchaseAmount);
+        return Objects.hash(manualCount, autoCount);
     }
 }

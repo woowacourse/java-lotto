@@ -9,7 +9,7 @@ public class LottosGenerator {
     public static Lottos generate(PurchaseCount purchaseCount, List<List<Integer>> numbers) {
         List<Lotto> lottos = new ArrayList<>();
         lottos.addAll(generateLottos(numbers));
-        lottos.addAll(generateLottos(purchaseCount.calculateAutoCount()));
+        lottos.addAll(generateLottos(purchaseCount.getAutoCount()));
         return Lottos.of(lottos);
     }
 

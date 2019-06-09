@@ -28,12 +28,12 @@ public class PurchaseCountTest {
     @Test
     void 자동_개수_확인() {
         PurchaseCount purchaseCount = PurchaseCount.of(PurchaseAmount.of(PURCHASE_AMOUNT), 1);
-        assertThat(purchaseCount.calculateAutoCount()).isEqualTo(0);
+        assertThat(purchaseCount.getAutoCount()).isEqualTo(0);
     }
 
     @Test
     void 수동_개수_확인() {
         PurchaseCount purchaseCount = PurchaseCount.of(PurchaseAmount.of(PURCHASE_AMOUNT), 1);
-        assertThat(purchaseCount.calculateManualCount()).isEqualTo(1);
+        assertThat(purchaseCount.getManualCount()).isEqualTo(1);
     }
 }
