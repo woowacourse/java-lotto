@@ -1,35 +1,70 @@
 package lotto.domain.Factory;
 
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
-import lotto.view.InputView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoTicketsFactory {
-    private static LottoTickets getLottoTickets(Money money, int amountOfCustoms) {
-        LottoTickets lottoTickets = new LottoTickets(amountOfCustoms);
+    private static LottoTicketsFactory FACTORY_INSTANCE;
 
-        InputView.printCustomLottoNumbersMessage();
-        try {
-            purchaseCustomLottoTickets(lottoTickets);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            purchaseCustomLottoTickets(lottoTickets);
+    private LottoTicketsFactory() { }
+
+    public static LottoTicketsFactory getInstance() {
+        if (FACTORY_INSTANCE == null) {
+            FACTORY_INSTANCE = new LottoTicketsFactory();
         }
-        purchaseAutoLottoTickets(money, amountOfCustoms, lottoTickets);
 
-        return lottoTickets;
+        return FACTORY_INSTANCE;
     }
 
-    private static void purchaseAutoLottoTickets(Money money, int amountOfCustoms, LottoTickets lottoTickets) {
-        int amountOfAutos = money.getTicketCount() - amountOfCustoms;
-        for (int i = 0; i < amountOfAutos; i++) {
-            lottoTickets.putLottoTicket(null);
+    public LottoTickets create(Money money, List<String> customLottoNumbers) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        int amountOfAutos = money.getTicketCount() - customLottoNumbers.size();
+
+        lottoTickets.addAll(new CustomLottoTickets(customLottoNumbers).purchaseLottoTickets());
+        lottoTickets.addAll(new AutoLottoTickets(amountOfAutos).purchaseLottoTickets());
+
+        return new LottoTickets(lottoTickets);
+    }
+
+    private class CustomLottoTickets implements LottoTicketsFactoryStrategy {
+        private final List<String> customLottoNumbers;
+
+        CustomLottoTickets(final List<String> customLottoNumbers) {
+            this.customLottoNumbers = customLottoNumbers;
+        }
+
+        @Override
+        public List<LottoTicket> purchaseLottoTickets() {
+            List<LottoTicket> customLottoTickets = new ArrayList<>();
+
+            for (String customLottoNumber : customLottoNumbers) {
+                customLottoTickets.add(LottoTicketFactory.getInstance().create(customLottoNumber));
+            }
+
+            return customLottoTickets;
         }
     }
 
-    private static void purchaseCustomLottoTickets(LottoTickets lottoTickets) {
-        while (lottoTickets.needMoreCustomLottoTicket()) {
-            lottoTickets.putLottoTicket(InputView.inputLottoNumbers());
+    private class AutoLottoTickets implements LottoTicketsFactoryStrategy {
+        private final int amountOfAutos;
+
+        AutoLottoTickets(final int amountOfAutos) {
+            this.amountOfAutos = amountOfAutos;
+        }
+
+        @Override
+        public List<LottoTicket> purchaseLottoTickets() {
+            List<LottoTicket> autoLottoTickets = new ArrayList<>();
+
+            for (int i = 0; i < amountOfAutos; i++) {
+                autoLottoTickets.add(LottoTicketFactory.getInstance().create(null));
+            }
+
+            return autoLottoTickets;
         }
     }
 }
