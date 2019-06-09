@@ -10,16 +10,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicketFactory {
-    private static LottoTicketFactory INSTANCE;
+    private static LottoTicketFactory FACTORY_INSTANCE;
 
     private LottoTicketFactory() { }
 
     public static LottoTicketFactory getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new LottoTicketFactory();
+        if (FACTORY_INSTANCE == null) {
+            FACTORY_INSTANCE = new LottoTicketFactory();
         }
 
-        return INSTANCE;
+        return FACTORY_INSTANCE;
     }
 
     public LottoTicket create(String input) {
