@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Application Test</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/lotto.css">
+</head>
+<body>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">테스트</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
+</div>
+
+<!-- USER DATA-->
+<div class="inputData">
+    <div class="userDataTitle">
+        <h1>User</h1>
+    </div>
+
+    <!-- count -->
+    <div class="count">
+        <div class="input-group mb-9">
+            <!-- Bonus Number -->
+            <div class="input-group mb-3">
+                <select class="custom-select" id="select count" size="1">
+                    <option value="notChoice">Select count...</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">조회</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inputDataTitle">
+        <h4>Please enter in order.</h4>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-money-list" data-toggle   ="list" href="#list-money" role="tab" aria-controls="money">1. Money</a>
+                <a class="list-group-item list-group-item-action" id="list-manual-list" data-toggle="list" href="#list-manual" role="tab" aria-controls="manual">2. Manual</a>
+                <a class="list-group-item list-group-item-action" id="list-winning-list" data-toggle="list" href="#list-winning" role="tab" aria-controls="winning">3. Winning</a>
+                <a class="list-group-item list-group-item-action" id="list-history-list" data-toggle="list" href="#list-history" role="tab" aria-controls="history">4. History</a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="tab-content" id="nav-tabContent">
+                <!-- Input Money -->
+                <div class="tab-pane fade show active" id="list-money" role="tabpanel" aria-labelledby="list-money-list">
+                    <h4><br/><br/>Please input money.</h4>
+                    <form action = "/money" method="post"> <!-- test form action -->
+                        <div class="input-group" id="money">
+                            <input type="text" name="money" placeholder="min size 1000" aria-label="One" class="form-control">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="submit" class="btn btn-primary">Send</button>
+                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Manual Number -->
+                <div class="tab-pane fade" id="list-manual" role="tabpanel" aria-labelledby="list-manual-list">
+                    <h4><br/><br/>Please enter the manual lotto numbers.</h4>
+                    <form action = "/manual" method="post">
+                        <div class="input-group" id="manual">
+                            <input type="text" name="one" aria-label="One" class="form-control" maxlength="2" style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="two" aria-label="Two" class="form-control" maxlength="2">
+                            <input type="text" name="three" aria-label="Three" class="form-control" maxlength="2" style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="four" aria-label="Four" class="form-control" maxlength="2">
+                            <input type="text" name="five" aria-label="Five" class="form-control" maxlength="2" style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="six" aria-label="Six" class="form-control" maxlength="2">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="submit" class="btn btn-primary">Send</button>
+                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Winning Number -->
+                <div class="tab-pane fade" id="list-winning" role="tabpanel" aria-labelledby="list-winning-list">
+                    <h4><br/><br/>Please enter the winning number this week.</h4>
+                    <form action = "/winning" method="post">
+                        <div class="input-group" id="winning">
+                            <input type="text" name="one" aria-label="One" class="form-control" maxlength="2" style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="two" aria-label="Two" class="form-control" maxlength="2">
+                            <input type="text" name="three" aria-label="Three" class="form-control" maxlength="2" style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="four" aria-label="Four" class="form-control" maxlength="2">
+                            <input type="text" name="five" aria-label="Five" class="form-control" maxlength="2" style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="six" aria-label="Six" class="form-control" maxlength="2">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="submit" class="btn btn-primary">Send</button>
+                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+                        <br/>
+                        <!-- Bonus Number -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Bonus</label>
+                            </div>
+                            <select class="custom-select" name="bonus" id="inputGroupSelect01" size="1">
+                                <option value="notChoice">Choice bonus number...</option>
+                                <script language="JavaScript" type="text/javascript">
+                                for(var i=1; i<=45; i++) {
+                                    document.write("<option>" + i + "</option>");
+                                 }
+                            </script>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- History -->
+                <div class="tab-pane fade" id="list-history" role="tabpanel" aria-labelledby="list-history-list">
+                    <!-- Button trigger modal -->
+                    <h4><br/><br/>Purchase history
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalLong">
+                            View
+                        </button>
+                    </h4>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Purchase history</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{lottos}}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Result title -->
+<div class="result">
+    <div class="resultTitle">
+        <h1>Result
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalLong2">
+                View
+            </button>
+        </h1>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle2"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle2">Rsult</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{result}} <br/><br/>
+                    총 수익률은 {{rateOfReturn}}% 입니다.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!-- java script -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

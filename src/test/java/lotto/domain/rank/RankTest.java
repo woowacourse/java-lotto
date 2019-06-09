@@ -28,7 +28,7 @@ public class RankTest {
     void 수익률_구하는_테스트() {
         RankResult winners = new RankResult();
         winners.addWinner(3, false);
-        assertThat((int) winners.rateOfReturn(14000)).isEqualTo(35);
+        assertThat(winners.rateOfReturn(14000)).isEqualTo(35);
     }
 
     @Test

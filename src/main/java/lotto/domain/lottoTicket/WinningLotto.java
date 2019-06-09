@@ -24,4 +24,11 @@ public class WinningLotto {
     public int matchLottoNumbers(Lotto lotto) {
         return lotto.matchLottoNumbers(winningLotto);
     }
+
+    @Override
+    public String toString() {
+        return "WinningLotto : " +
+                winningLotto +
+                ", bonus : " + bonus;
+    }
 }

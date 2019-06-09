@@ -30,9 +30,9 @@ public class RankResult {
         }
     }
 
-    public double rateOfReturn(int userMoney) {
+    public int rateOfReturn(int userMoney) {
         long totalRewardMoney = totalRewardMoney();
-        return ((double) totalRewardMoney / userMoney) * PERCENT;
+        return (int) ((double) totalRewardMoney / userMoney) * PERCENT;
     }
 
     public long totalRewardMoney() {
