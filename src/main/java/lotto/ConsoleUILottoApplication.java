@@ -5,7 +5,7 @@ import lotto.util.ConvertLottoNumber;
 import lotto.view.InputConsole;
 import lotto.view.OutputConsole;
 
-public class Main {
+public class ConsoleUILottoApplication {
 
     public static void main(String[] args) {
         Money money = createMoney();
