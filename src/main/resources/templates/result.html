@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>로또</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+    </head>
+    <body class="is-preload">
+        <header id="header">
+            <a class="logo" href="index.html">Lotto</a>
+        </header>
+        <section id="banner">
+            <div class="inner">
+                <h1>로또</h1>
+                <p>당신의 인생까지 거시겠습니까?</p>
+            </div>
+            <video autoplay loop muted playsinline src="images/banner.mp4"></video>
+        </section>
+        <section class="wrapper">
+            <div class="inner">
+                <section>
+                    <div class="content" align="center">
+                        {{{result}}}
+                    </div>
+                </section>
+            </div>
+        </section>
+        <footer id="footer">
+            <div class="inner">
+                <div class="content">
+                    <section>
+                        <h3>우아한테크코스</h3>
+                        <p>로또</p>
+                    </section>
+                </div>
+                <div class="copyright">
+                    &copy; Doughnut.
+                </div>
+            </div>
+        </footer>
+        <script type="text/javascript">
+            const price = {{price}}
+            let max = 0
+            let amount = 0
+
+            function addManualInputs() {
+                if (max === amount) {
+                    alert("투자금이 부족합니다.")
+                    return
+                }
+                const textbox = document.createElement("input")
+                textbox.setAttribute("type","text");
+                textbox.setAttribute("name", "manualNumbers[" + amount + "]")
+                document.getElementById("manualNumbersContainer").appendChild(textbox)
+                document.getElementById("manualNumbersContainer").appendChild(document.createElement("br"))
+                amount++
+            }
+
+            function removeManualInputs() {
+                if (amount > 0) {
+                    const container = document.getElementById("manualNumbersContainer")
+                    container.removeChild(container.lastChild)
+                    container.removeChild(container.lastChild)
+                    amount--
+                }
+            }
+
+            function resetManualInputs() {
+                if (document.getElementById("investment").value < 0
+                        || isNaN(document.getElementById("investment").value)) {
+                    document.getElementById("investment").value = 0
+                }
+                max = Math.floor(document.getElementById("investment").value / price)
+                while (max < amount) {
+                    removeManualInputs()
+                }
+            }
+        </script>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </body>
+</html>
