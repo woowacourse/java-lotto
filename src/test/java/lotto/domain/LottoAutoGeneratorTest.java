@@ -10,11 +10,11 @@ public class LottoAutoGeneratorTest {
     @Test
     void 자동생성된_로또_유효성_검사() {
         // Lotto 생성자를 통해 유효성 검사
-        assertDoesNotThrow(() -> new UserLotto(LottoAutoGenerator.generateAutoLotto()));
+        assertDoesNotThrow(() -> new UserLotto(AutoLottoGenerator.generateAutoLotto()));
     }
 
     @Test
     void aaak() {
-        assertThat(LottoAutoGenerator.generateAutoLotto().size()).isEqualTo(6);
+        assertThat(AutoLottoGenerator.generateAutoLotto().size()).isEqualTo(6);
     }
 }

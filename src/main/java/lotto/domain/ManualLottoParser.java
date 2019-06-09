@@ -1,22 +1,20 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ManualLottoParser {
 
-    public static List<Lotto> parseManualLottoNumbers(List<String[]> scannedManualLottoNumbers) {
+    public static UserLottos parseManualLottoNumbers(List<String[]> scannedManualLottoNumbers) {
         List<Lotto> manualLottos = new ArrayList<>();
 
         for (String[] scannedManualLottoNumber : scannedManualLottoNumbers) {
-            List<Integer> manualLotto = new ArrayList<>();
+            Set<LottoNumber> manualLotto = new TreeSet<>();
             Arrays.stream(scannedManualLottoNumber)
-                    .forEach(number -> manualLotto.add((Integer.parseInt(number.trim()))));
+                    .forEach(number -> manualLotto.add(new LottoNumber(Integer.parseInt(number.trim()))));
 
-            manualLottos.add(new UserLotto(manualLotto));
+            manualLottos.add(new Lotto(manualLotto));
         }
 
-        return manualLottos;
+        return new UserLottos(manualLottos);
     }
 }

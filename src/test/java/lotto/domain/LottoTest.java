@@ -7,23 +7,23 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class UserLottoTest {
+public class LottoTest {
 
     @Test
     void 올바른_로또_생성() {
         assertDoesNotThrow(() ->
-                new UserLotto(Arrays.asList(1,2,3,4,5,45)));
+                new Lotto(Arrays.asList(1,2,3,4,5,45)));
     }
 
     @Test
     void 갯수가_유효하지_않은_로또_생성_검증() {
         assertThrows(InvalidLottoException.class,
-                () -> new UserLotto(Arrays.asList(1,2,3,4,5)));
+                () -> new Lotto(Arrays.asList(1,2,3,4,5)));
     }
 
     @Test
     void 중복된_수가_있는_로또_생성_검증() {
         assertThrows(InvalidLottoException.class, () ->
-                new UserLotto(Arrays.asList(1,2,3,4,5,5)));
+                new Lotto(Arrays.asList(1,2,3,4,5,5)));
     }
 }

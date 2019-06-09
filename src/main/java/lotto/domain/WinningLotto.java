@@ -1,12 +1,14 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.*;
 
 public class WinningLotto extends Lotto {
 
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
     private final LottoNumber bonusBall;
 
-    public WinningLotto(List<Integer> winningLotto, LottoNumber bonusBall) {
+    public WinningLotto(Set<LottoNumber> winningLotto, LottoNumber bonusBall) {
         super(winningLotto);
         if (winningLotto.contains(bonusBall)) {
             throw new InvalidBonusBallException("보너스 볼이 당첨 번호와 중복입니다.");
@@ -16,5 +18,19 @@ public class WinningLotto extends Lotto {
 
     public boolean isBonusContain(Lotto userLotto) {
         return userLotto.isContains(bonusBall);
+    }
+
+    public Map<Rank, Integer> calculateCountOfRank(List<Lotto> userLottos) {
+        Map<Rank, Integer> countOfRank = new TreeMap<>(Collections.reverseOrder());
+        Arrays.stream(Rank.values()).forEach(rank -> countOfRank.put(rank, ZERO));
+        for (Lotto userLotto : userLottos) {
+            int countOfMatch = userLotto.calculateCountOfMatch(this);
+            boolean matchBonus = isBonusContain(userLotto);
+            Rank thisRank = Rank.valueOf(countOfMatch, matchBonus);
+            int countOfThisRank = countOfRank.get(thisRank);
+
+            countOfRank.put(thisRank, countOfThisRank + ONE);
+        }
+        return countOfRank;
     }
 }

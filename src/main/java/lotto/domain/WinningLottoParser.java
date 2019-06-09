@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class WinningLottoParser {
 
@@ -11,6 +8,6 @@ public class WinningLottoParser {
     }
 
     public static LottoNumber parseBonusBall(String scannedBonusBall) {
-        return new LottoNumber(Integer.parseInt(scannedBonusBall));
+        return new LottoNumber(Integer.parseInt(scannedBonusBall.trim()));
     }
 }

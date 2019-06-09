@@ -4,28 +4,23 @@ import lotto.View.InputView;
 import lotto.View.OutputView;
 import lotto.domain.*;
 
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
-        Money money = new Money(Integer.parseInt(InputView.inputMoney()));
+        Money money = MoneyParser.parseMoney(InputView.inputMoney());
         int countOfManualLotto = InputView.inputCountOfManualLotto();
 
-        User user = new User(money, countOfManualLotto);
-
-        if (countOfManualLotto != 0) {
-            List<Lotto> manualLottos = ManualLottoParser.parseManualLottoNumbers(InputView.inputManualLotto(countOfManualLotto));
-            user.addManualLottos(manualLottos);
-        }
+        UserLottos manualLottos = ManualLottoParser.parseManualLottoNumbers(InputView.inputManualLotto(countOfManualLotto));
+        UserLottos autoLottos = AutoLottoGenerator.generateAutoLottos(money.getAllLottoSize() - countOfManualLotto);
 
         OutputView.printCountOfLotto(money, countOfManualLotto);
-        OutputView.printUserLottos(user.getUserLottos());
+        OutputView.printUserLottos(manualLottos);
+        OutputView.printUserLottos(autoLottos);
 
         String[] scannedWinningLotto = InputView.inputWinningLotto();
         String scannedBonusBall = InputView.inputBonusNumber();
         WinningLotto winningLotto = WinningLottoParser.parseWinningLotto(scannedWinningLotto, scannedBonusBall);
 
-        LottoGame lottoGame = new LottoGame(user, winningLotto);
+        LottoGame lottoGame = new LottoGame(manualLottos,autoLottos, winningLotto);
         OutputView.printCountOfRank(lottoGame.getCountOfRank());
         OutputView.printRateOfReturn(lottoGame.calculateRateOfReturn());
     }

@@ -1,16 +1,13 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class LottoParser {
 
-    public static List<Integer> parseLottoNumbers(String[] scannedLotto) {
-        List<Integer> winningLottoNumbers = new ArrayList<>();
+    public static Set<LottoNumber> parseLottoNumbers(String[] scannedLotto) {
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
         Arrays.stream(scannedLotto)
-                .forEach(number -> winningLottoNumbers.add(Integer.parseInt(number)));
-        return winningLottoNumbers;
+                .forEach(number -> lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim()))));
+        return lottoNumbers;
     }
-
 }

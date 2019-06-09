@@ -28,4 +28,8 @@ public class Money {
     public double prizeDivideMoney(long prize) {
         return prize / money;
     }
+
+    public int getAllLottoSize() {
+        return (int) (this.money / LOTTO_PRICE);
+    }
 }
