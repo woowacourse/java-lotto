@@ -32,9 +32,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static List<LottoNumber> getRandomNumbers() {
         List<LottoNumber> randomNumbers = new ArrayList<>(numbers.values());
-        Collections.shuffle(randomNumbers);
 
-        return randomNumbers.subList(DEFAULT_INDEX_OF_LOTTO_NUMBER, MAX_INDEX_OF_LOTTO_NUMBER);
+        Collections.shuffle(randomNumbers);
+        randomNumbers = randomNumbers.subList(DEFAULT_INDEX_OF_LOTTO_NUMBER, MAX_INDEX_OF_LOTTO_NUMBER);
+        Collections.sort(randomNumbers);
+
+        return Collections.unmodifiableList(randomNumbers);
     }
 
     private static void validateNumberBound(int key) {

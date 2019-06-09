@@ -8,7 +8,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketTest {
-    private final WinningLotto winningLotto = WinningLotto.of("1,3,5,7,9,12", 40);
     private LottoTicket lottoTicket;
 
     @Test
@@ -21,12 +20,15 @@ public class LottoTicketTest {
     }
 
     @Test
-    void 당첨번호와_일치하는_번호수_확인() {
+    void 당첨번호와_일치하는_번호_갯수_확인() {
         lottoTicket = new LottoTicket(Arrays.asList(
                 LottoNumber.getInstance(1), LottoNumber.getInstance(2), LottoNumber.getInstance(3),
                 LottoNumber.getInstance(4), LottoNumber.getInstance(5), LottoNumber.getInstance(6)));
+        LottoTicket lottoTicket2 = new LottoTicket(Arrays.asList(
+                LottoNumber.getInstance(1), LottoNumber.getInstance(2), LottoNumber.getInstance(3),
+                LottoNumber.getInstance(7), LottoNumber.getInstance(8), LottoNumber.getInstance(9)));
 
-        //assertThat(lottoTicket.getMatchingCount(winningLotto)).isEqualTo(3);
+        assertThat(lottoTicket.getMatchingCount(lottoTicket2)).isEqualTo(3);
     }
 
     @Test
@@ -35,6 +37,6 @@ public class LottoTicketTest {
                 LottoNumber.getInstance(1), LottoNumber.getInstance(2), LottoNumber.getInstance(3),
                 LottoNumber.getInstance(4), LottoNumber.getInstance(5), LottoNumber.getInstance(40)));
 
-        assertThat(lottoTicket.matchesBonusBall(winningLotto)).isTrue();
+        assertThat(lottoTicket.hasSameNumber(LottoNumber.getInstance(3))).isTrue();
     }
 }

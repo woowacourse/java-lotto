@@ -11,24 +11,18 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int getMatchingCount(WinningLotto winningLotto) {
+    public int getMatchingCount(LottoTicket lottoTicket) {
         int count = 0;
 
         for (LottoNumber lottoNumber : lottoNumbers) {
-            count += winningLotto.hasEqualNumber(lottoNumber) ? 1 : 0;
+            count += lottoTicket.lottoNumbers.contains(lottoNumber) ? 1 : 0;
         }
 
         return count;
     }
 
-    public boolean matchesBonusBall(WinningLotto winningLotto) {
-        boolean matchingResult = false;
-
-        for (int i = 0; i < lottoNumbers.size() && !matchingResult; i++) {
-            matchingResult = winningLotto.hasEqualBonusBall(lottoNumbers.get(i));
-        }
-
-        return matchingResult;
+    public boolean hasSameNumber(LottoNumber bonusBall) {
+        return this.lottoNumbers.contains(bonusBall);
     }
 
     @Override

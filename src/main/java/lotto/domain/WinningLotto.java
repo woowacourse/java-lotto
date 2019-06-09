@@ -1,29 +1,20 @@
 package lotto.domain;
 
+import lotto.domain.Factory.LottoTicketFactory;
 import lotto.exception.DuplicatedInputException;
 import lotto.exception.ExceptionMessage;
-import lotto.exception.IllegalAmountOfNumberException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class WinningLotto {
     private static WinningLotto WINNING_LOTTO = null;
 
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final LottoTicket lottoNumbers;
     private final LottoNumber bonusBall;
 
     private WinningLotto(final String winningLotto, final int bonusBall) {
-        List<String> inputNumbers = Arrays.asList(winningLotto.split(","));
-
-        for (String inputNumber : inputNumbers) {
-            validateNumeric(inputNumber);
-            validateDistinctNumber(Integer.parseInt(inputNumber));
-            lottoNumbers.add(LottoNumber.getInstance(Integer.parseInt(inputNumber)));
-        }
-        validateDistinctNumber(bonusBall);
+        this.lottoNumbers = LottoTicketFactory.getInstance().create(winningLotto);
         this.bonusBall = LottoNumber.getInstance(bonusBall);
+
+        validateDistinctNumber(bonusBall);
     }
 
     public static WinningLotto of(final String winningLotto, final int bonusBall) {
@@ -34,22 +25,17 @@ public class WinningLotto {
         return WINNING_LOTTO;
     }
 
-    public boolean hasEqualNumber(LottoNumber number) {
-        return lottoNumbers.contains(number);// || lottoNumbers.contains(bonusBall);
+    public int getMatchingCount(LottoTicket lottoTicket) {
+        return lottoNumbers.getMatchingCount(lottoTicket);
     }
 
-    public boolean hasEqualBonusBall(LottoNumber number) {
-        return bonusBall == number;
+    public boolean matchesBonusBall(LottoTicket lottoTicket) {
+        return lottoTicket.hasSameNumber(this.bonusBall);
     }
 
-    private static void validateNumeric(String number) {
-        if (!number.matches("(\\d+)?")) {
-            throw new ArithmeticException(ExceptionMessage.ILLEGAL_LOTTO_NUMBER_EXCEPTION);
-        }
-    }
 
     private void validateDistinctNumber(int lottoNumber) {
-        boolean isDistinct = lottoNumbers.contains(LottoNumber.getInstance(lottoNumber));
+        boolean isDistinct = this.lottoNumbers.hasSameNumber(LottoNumber.getInstance(lottoNumber));
 
         if (isDistinct) {
             throw new DuplicatedInputException(ExceptionMessage.DUPLICATED_NUMBER_EXCEPTION);
