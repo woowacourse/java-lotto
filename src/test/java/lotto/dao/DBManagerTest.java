@@ -8,10 +8,20 @@ import java.sql.Connection;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DBManagerTest {
-    
+    private Connection con;
+
+    @BeforeEach
+    void setup() {
+        con = DBManager.getConnection();
+    }
+
     @Test
-    public void connection() {
-        Connection con = DBManager.getConnection();
+    void connection() {
         assertNotNull(con);
+    }
+
+    @Test
+    void disconnection() {
+        DBManager.closeConnection(con);
     }
 }
