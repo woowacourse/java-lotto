@@ -24,10 +24,7 @@ public class Result {
     }
 
     public long get(Rank rank) {
-        if (!lottoScore.containsKey(rank)) {
-            return 0;
-        }
-        return lottoScore.get(rank);
+        return lottoScore.getOrDefault(rank, 0L);
     }
 
     public double calculateEarningsRate(Payment payment) {
