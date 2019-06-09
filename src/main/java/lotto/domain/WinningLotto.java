@@ -24,4 +24,12 @@ public class WinningLotto {
     private boolean isMatchBonus(Lotto lotto) {
         return lotto.isContain(bonusNumber);
     }
+
+    public Lotto getWinningLotto() {
+        return winningLotto;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }

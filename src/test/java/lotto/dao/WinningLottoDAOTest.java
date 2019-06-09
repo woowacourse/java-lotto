@@ -3,6 +3,8 @@ package lotto.dao;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +16,12 @@ public class WinningLottoDAOTest {
     private Lotto winningLotto;
     private LottoNumber bonusBall;
     private Lottos lottos;
+    private LottoDAO lottoDAO;
 
     @BeforeEach
     void setup_db() {
         winningLottoDAO = new WinningLottoDAO(DBManager.getConnection());
+        lottoDAO = new LottoDAO(DBManager.getConnection());
     }
 
     @BeforeEach
@@ -66,8 +70,12 @@ public class WinningLottoDAOTest {
 
     @Test
     void test1_당첨_로또_추가() throws SQLException {
-        LottoDAO lottoDAO = new LottoDAO(DBManager.getConnection());
         lottoDAO.addLottos("1", lottos);
-        winningLottoDAO.addWinningLotto("1", winningLotto, bonusBall);
+        winningLottoDAO.addWinningLotto("1", new WinningLotto(winningLotto, bonusBall));
+    }
+
+    @AfterEach
+    void 로또_테이블_삭제() throws SQLException {
+        lottoDAO.deleteLotto("1");
     }
 }

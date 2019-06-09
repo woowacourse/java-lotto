@@ -2,6 +2,7 @@ package lotto.dao;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.WinningLotto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,12 +17,12 @@ public class WinningLottoDAO {
         this.con = connection;
     }
 
-    public void addWinningLotto(String lottoId, Lotto winningLotto, LottoNumber bonusBall) throws SQLException {
+    public void addWinningLotto(String lottoId, WinningLotto winningLotto) throws SQLException {
         String query = "INSERT INTO winninglotto VALUES (?, ?, ?)";
         PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setString(1, lottoId);
-        pstmt.setString(2, winningLotto.toString());
-        pstmt.setString(3, bonusBall.toString());
+        pstmt.setString(2, winningLotto.getWinningLotto().toString());
+        pstmt.setString(3, winningLotto.getBonusNumber().toString());
         pstmt.executeUpdate();
     }
 }
