@@ -2,11 +2,11 @@ package lotto.domain;
 
 import java.util.*;
 
-public class LottoFactory {
+public class LottoGenerator {
     public static Lottos createRandomLottos(int numOfLottos) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < numOfLottos; i++) {
-            lottos.add(Lotto.random(new RandomLottoNumberGenerator()));
+            lottos.add(Lotto.create(new RandomLottoNumberGenerator()));
         }
         return new Lottos(lottos);
     }
@@ -14,7 +14,7 @@ public class LottoFactory {
     public static Lottos createCustomLottos(List<List<Integer>> numbers) {
         List<Lotto> lottos = new ArrayList<>();
         for (List<Integer> integers : numbers) {
-            lottos.add(Lotto.of(integers));
+            lottos.add(Lotto.create(new CustomLottoNumberGenerator(integers)));
         }
         return new Lottos(lottos);
     }

@@ -7,7 +7,7 @@ public class LottoVendingMachine {
         if (customLottoNumbers.size() != lottoCount.custom()) {
             throw new InvalidCustomLottoNumbersException("수동으로 구매하기로 한 로또 수와 일치하지 않습니다.");
         }
-        Lottos userLottos = LottoFactory.createCustomLottos(customLottoNumbers);
-        return userLottos.add(LottoFactory.createRandomLottos(lottoCount.random()));
+        Lottos userLottos = LottoGenerator.createCustomLottos(customLottoNumbers);
+        return userLottos.add(LottoGenerator.createRandomLottos(lottoCount.random()));
     }
 }

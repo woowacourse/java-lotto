@@ -33,8 +33,8 @@ public class LottoTest {
     @Test
     void containTest() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.contains(LottoNumber.from(1))).isTrue();
-        assertThat(lotto.contains(LottoNumber.from(7))).isFalse();
+        assertThat(lotto.contains(LottoNumber.valueOf(1))).isTrue();
+        assertThat(lotto.contains(LottoNumber.valueOf(7))).isFalse();
     }
 
     @Test

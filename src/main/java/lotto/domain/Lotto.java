@@ -15,15 +15,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(number -> LottoNumber.from(number)).collect(Collectors.toList());
-        return new Lotto(lottoNumbers);
-    }
-
-    public static Lotto random(LottoNumberGenerator lottoNumberGenerator) {
-        List<Integer> lottoNumbers = lottoNumberGenerator.generateNumbers();
-        return of(lottoNumbers);
+    public static Lotto create(LottoNumberGenerator lottoNumberGenerator) {
+        return new Lotto(lottoNumberGenerator.generateNumbers());
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
