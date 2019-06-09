@@ -39,6 +39,10 @@ public class LottoResult {
         return (double) totalWinningMoney / (lottos.getLottoCount() * LottoMoney.LOTTO_PRICE);
     }
 
+    public Map<Rank, Integer> getWinners() {
+        return winners;
+    }
+
     public double getYield() {
         return this.yield;
     }
