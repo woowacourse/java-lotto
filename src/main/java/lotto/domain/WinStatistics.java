@@ -23,7 +23,7 @@ public class WinStatistics {
 
     private void makeResult(final List<LottoTicket> lottoTickets, final WinningLotto winningLotto) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchingCount = lottoTicket.getMatchingCount(winningLotto);
+            int matchingCount = winningLotto.getMatchingCount(lottoTicket);
             boolean bonusBall = lottoTicket.matchesBonusBall(winningLotto);
 
             int count = countOfResult.get(RankType.valueOf(matchingCount, bonusBall));

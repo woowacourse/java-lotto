@@ -10,7 +10,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicketFactory {
-    public LottoTicketFactory() { }
+    private static LottoTicketFactory INSTANCE;
+
+    private LottoTicketFactory() { }
+
+    public static LottoTicketFactory getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new LottoTicketFactory();
+        }
+
+        return INSTANCE;
+    }
 
     public LottoTicket create(String input) {
         if (input == null) {
@@ -28,9 +38,11 @@ public class LottoTicketFactory {
     }
 
     private class CustomLottoFactory implements LottoTicketFactoryStrategy {
+        private static final String NUMERIC_BUT_OUT_OF_BOUNDS = "0";
+
         private final String input;
 
-        public CustomLottoFactory(final String input) {
+        CustomLottoFactory(final String input) {
             this.input = input;
         }
 
@@ -39,7 +51,6 @@ public class LottoTicketFactory {
             List<LottoNumber> lottoNumbers = new ArrayList<>();
             String[] inputNumbers = input.split(",");
 
-            // TODO 이부분 WinningLotto와 겹치는데 하나로 묶어버리기
             for (String inputNumber : inputNumbers) {
                 validateNumeric(inputNumber);
                 lottoNumbers.add(LottoNumber.getInstance(Integer.parseInt(inputNumber)));
@@ -53,7 +64,7 @@ public class LottoTicketFactory {
             if (!number.matches("(\\d+)?")) {
                 throw new ArithmeticException(ExceptionMessage.ILLEGAL_LOTTO_NUMBER_EXCEPTION);
             }
-            if (number.equals("0")) {
+            if (number.equals(NUMERIC_BUT_OUT_OF_BOUNDS)) {
                 throw new UnexpectedInputRangeException(ExceptionMessage.ILLEGAL_LOTTO_NUMBER_EXCEPTION);
             }
         }

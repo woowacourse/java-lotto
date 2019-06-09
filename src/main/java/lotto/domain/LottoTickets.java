@@ -19,7 +19,7 @@ public class LottoTickets {
     }
 
     public void putLottoTicket(final String inputOfLottoNumber) {
-        lottoTickets.add(new LottoTicketFactory().create(inputOfLottoNumber));
+        lottoTickets.add(LottoTicketFactory.getInstance().create(inputOfLottoNumber));
     }
 
     public List<LottoTicket> getLottoTickets() {
