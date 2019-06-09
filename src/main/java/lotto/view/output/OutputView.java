@@ -4,7 +4,7 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.purchase.PurchaseCount;
 import lotto.domain.result.LottoResult;
-import lotto.domain.result.Rank;
+import lotto.domain.result.LottoRank;
 
 import java.util.Map;
 
@@ -32,21 +32,21 @@ public class OutputView {
         System.out.println("--------");
     }
 
-    private static void outputWinStats(Map<Rank, Integer> rankLinkedHashMap) {
-        for (Map.Entry<Rank, Integer> rankEntry : rankLinkedHashMap.entrySet()) {
+    private static void outputWinStats(Map<LottoRank, Integer> rankLinkedHashMap) {
+        for (Map.Entry<LottoRank, Integer> rankEntry : rankLinkedHashMap.entrySet()) {
             outputRankMessage(rankEntry.getKey(), rankEntry.getValue());
         }
     }
 
-    private static void outputRankMessage(Rank rank, int count) {
-        if (rank == Rank.MISS) {
+    private static void outputRankMessage(LottoRank lottoRank, int count) {
+        if (lottoRank == LottoRank.MISS) {
             return;
         }
-        System.out.print(rank.getRank() + "개 일치");
-        if (rank == Rank.SECOND) {
+        System.out.print(lottoRank.getRank() + "개 일치");
+        if (lottoRank == LottoRank.SECOND) {
             System.out.print(", 보너스 볼 일치");
         }
-        System.out.print("(" + rank.getMoney() + "원) - ");
+        System.out.print("(" + lottoRank.getMoney() + "원) - ");
         System.out.println(count + "개");
     }
 }

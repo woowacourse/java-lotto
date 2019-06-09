@@ -1,6 +1,6 @@
 package lotto.domain.result;
 
-public enum Rank {
+public enum LottoRank {
     FIRST(6, 2000000000),
     SECOND(5, 30000000),
     THIRD(5, 1500000),
@@ -14,12 +14,12 @@ public enum Rank {
     private final int rank;
     private final int money;
 
-    Rank(int rank, int money) {
+    LottoRank(int rank, int money) {
         this.rank = rank;
         this.money = money;
     }
 
-    public static Rank valueOf(int count, boolean isBonusNum) {
+    public static LottoRank valueOf(int count, boolean isBonusNum) {
         if (count < WINNING_MIN_COUNT) {
             return MISS;
         }
@@ -28,9 +28,9 @@ public enum Rank {
             return SECOND;
         }
 
-        for (Rank rank : values()) {
-            if (rank.matchCount(count) && !rank.equals(SECOND)) {
-                return rank;
+        for (LottoRank lottoRank : values()) {
+            if (lottoRank.matchCount(count) && !lottoRank.equals(SECOND)) {
+                return lottoRank;
             }
         }
 

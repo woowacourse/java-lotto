@@ -10,7 +10,7 @@ public class LottoResult {
     private static final int INIT_VALUE = 0;
     private static final int PERCENTAGE = 100;
 
-    private static Map<Rank, Integer> map = new LinkedHashMap<>();
+    private static Map<LottoRank, Integer> map = new LinkedHashMap<>();
     private final Winning winning;
     private final Lottos lottos;
 
@@ -24,25 +24,25 @@ public class LottoResult {
         return new LottoResult(winning, lottos);
     }
 
-    private Map<Rank, Integer> matchWinningLotto() {
-        Map<Rank, Integer> map = new LinkedHashMap<>();
+    private Map<LottoRank, Integer> matchWinningLotto() {
+        Map<LottoRank, Integer> map = new LinkedHashMap<>();
         init(map);
         addLottoResult(map);
         return map;
     }
 
-    private void init(Map<Rank, Integer> map) {
-        List<Rank> ranks = Arrays.asList(Rank.values());
-        Collections.reverse(ranks);
-        for (Rank rank : ranks) {
-            map.put(rank, INIT_VALUE);
+    private void init(Map<LottoRank, Integer> map) {
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
+        Collections.reverse(lottoRanks);
+        for (LottoRank lottoRank : lottoRanks) {
+            map.put(lottoRank, INIT_VALUE);
         }
     }
 
-    private void addLottoResult(Map<Rank, Integer> map) {
+    private void addLottoResult(Map<LottoRank, Integer> map) {
         for (Lotto lotto : lottos.getLottos()) {
-            Rank rank = winning.checkWinner(lotto);
-            map.replace(rank, map.get(rank) + 1);
+            LottoRank lottoRank = winning.checkWinner(lotto);
+            map.replace(lottoRank, map.get(lottoRank) + 1);
         }
     }
 
@@ -56,7 +56,7 @@ public class LottoResult {
         return (result / purchaseAmount) * PERCENTAGE;
     }
 
-    public Map<Rank, Integer> getMap() {
+    public Map<LottoRank, Integer> getMap() {
         return map;
     }
 }
