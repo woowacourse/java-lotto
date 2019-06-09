@@ -51,4 +51,14 @@ public class LottoDAO {
         pstmt.setString(1, lottoId);
         pstmt.executeUpdate();
     }
+
+    public Integer getRound() throws SQLException {
+        String query = "SELECT lotto_id FROM lotto ORDER BY lotto_id DESC LIMIT 1";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (!rs.next()) return 1;
+
+        return Integer.parseInt(rs.getString("lotto_id")) + 1;
+    }
 }
