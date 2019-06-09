@@ -22,7 +22,7 @@ public class LottoMaker {
 
     public static Lotto generator() {
         List<Integer> autoNumbers = new ArrayList<>(numbers);
-        Collections.shuffle(numbers);
+        Collections.shuffle(autoNumbers);
         autoNumbers = autoNumbers.subList(START, Lotto.LOTTO_SIZE);
         Collections.sort(autoNumbers);
         return Lotto.of(autoNumbers);
