@@ -1,10 +1,15 @@
 package lotto.view;
 
+import lotto.domain.ManualLottoCreator;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
+import lotto.exception.InvalidInputException;
 import lotto.exception.InvalidLottoNumbersException;
 import lotto.exception.InvalidPaymentException;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -18,6 +23,59 @@ public class InputView {
             System.out.println(e.getMessage());
             return inputMoney();
         }
+    }
+
+    public static int inputManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String input = SCANNER.nextLine();
+
+        try {
+            checkIsBlank(input);
+            return parseInt(input);
+        } catch (InvalidInputException e) {
+            System.out.println(e.getMessage());
+            return inputManualLotto();
+        }
+
+    }
+
+    private static void checkIsBlank(String input) {
+        if (StringUtils.isBlank(input)) {
+            throw new InvalidInputException("아무것도 입력하지 않으셨습니다.");
+        }
+    }
+
+    private static int parseInt(String input) {
+        try {
+            return Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("숫자자 아닌 값이 포함되어 있습니다.");
+        }
+    }
+
+    public static ManualLottoCreator generateManualLottoCreator(int numberOfManualLotto) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<String> numbers = collectManualLottoNumber(numberOfManualLotto);
+
+        try {
+            return new ManualLottoCreator(numbers);
+        } catch (InvalidLottoNumbersException e) {
+            System.out.println(e.getMessage());
+            return generateManualLottoCreator(numberOfManualLotto);
+        }
+    }
+
+    private static String inputManualLottoNumber() {
+        return SCANNER.nextLine();
+    }
+
+    private static List<String> collectManualLottoNumber(int numberOfManualLotto) {
+        List<String> numbers = new ArrayList<>();
+
+        for (int i = 0; i < numberOfManualLotto; i++) {
+            numbers.add(inputManualLottoNumber());
+        }
+        return numbers;
     }
 
     public static WinningLotto inputWinningLotto() {
