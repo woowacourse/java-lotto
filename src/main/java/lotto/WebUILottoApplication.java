@@ -21,6 +21,7 @@ import static spark.Spark.post;
 public class WebUILottoApplication {
     private static Lottos lottos;
     private static Money money;
+    private static LottoResult lottoResult;
 
     public static void main(String[] args) {
         get("/", (req, res) -> {
@@ -56,12 +57,18 @@ public class WebUILottoApplication {
 
             WinningLotto winningLotto = createWinningLotto(pairs);
 
-            LottoResult lottoResult  = new LottoResult(lottos.getLottos(), winningLotto);
+            lottoResult  = new LottoResult(lottos.getLottos(), winningLotto);
 
             Gson gson = new GsonBuilder().create();
             String json = gson.toJson(lottoResult.getLottoResult());
 
             return json;
+        });
+
+        get("/lottoYield", (req, res) -> {
+            double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
+
+            return result;
         });
 
     }

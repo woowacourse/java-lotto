@@ -98,7 +98,7 @@
 
         <div class="col-md-6">
             <div id="lottoList">
-                <div class="section">수동 선택 리스트</div>
+                <div class="section">로또 리스트</div>
             </div>
             <button class="section" id="addAutoItem">나머지 자동 구매</button>
         </div>
@@ -109,7 +109,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="section">지난주 로또 번호 입력</div>
+            <div class="section">당첨 번호 입력</div>
             <div class="section" id="winningItem">
             </div>
         </div>
@@ -355,10 +355,23 @@
                             child = '<div class="result">' + json_obj[i].matchNum + "개 일치 (" + json_obj[i].reward + "원) - " + result[json_obj[i].value] + "개" + '</div>';
                             $('#result').append(child);
                         }
-
+                        printLottoYield();
                     }
                 });
             }
+
+            function printLottoYield() {
+                $.ajax({
+                    method: 'get',
+                    url: '/lottoYield',
+                    success: function (data) {
+                        child = '<div class="result">총 수익율은 ' + data + '% 입니다.</div>';
+                        $('#result').append(child);
+                    }
+                });
+            }
+
+
 
         });
 
