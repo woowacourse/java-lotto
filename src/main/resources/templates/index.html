@@ -2,9 +2,113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>로또</title>
 </head>
 <body>
-Hello World!!
+<form action="/manualLotto" method="post">
+<tr class="lotto" height="30">
+    <div class="input-group input-group-lg">
+        <td>
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="purchase-price">구입 금액</span>
+        </div>
+        </td>
+        <td>
+        <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="true" min="1000" max="100000" name="price" id="price" onchange="isValidInput()" />
+        &nbsp;&nbsp;
+        <span id="validCheck"></span>
+        </td>
+    </div>
+</tr>
+<tr class="lotto" height="30">
+    <div class="input-group input-group-lg">
+        <td>
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="manual-count">수동 구매 개수</span>
+        </div>
+        </td>
+        <td>
+        <input type="number" required="true" name="manualCount" id="manualCount" onchange="isValidInput()" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+        </td>
+    </div>
+    <td>
+        <span id="manualCountMessage"></span>
+    </td>
+</tr>
+    <br />
+    <div id="container">
+
+    </div>
+<button type="submit" class="btn btn-primary btn-lg">구매</button>
+<button type="submit" class="btn btn-secondary btn-lg" onclick="cancel()">초기화</button>
+</form>
+
+<script>
+    function isValidInput() {
+        var price = document.getElementById('price').value;
+        var manualCount = document.getElementById('manualCount').value;
+
+        if (price < 1000 || price > 100000) {
+            window.alert("로또는 1,000원 이상 100,000원 이하만 구매 가능 합니다.");
+            document.getElementById('price').value = document.getElementById('manualCount').value = '';
+        } else {
+            document.getElementById('validCheck').innerHTML='';
+        }
+        if (document.getElementById('price').value / 1000 < document.getElementById('manualCount').value) {
+            document.getElementById('manualCountMessage').innerHTML='총 구매 개수보다 많습니다.';
+            document.getElementById('manualCountMessage').style.color='red';
+            document.getElementById('manualCount').value = '';
+            delFields();
+        } else {
+            document.getElementById('manualCountMessage').innerHTML='구매 가능합니다.';
+            document.getElementById('manualCountMessage').style.color='blue';
+            addFields();
+        }
+    }
+
+    function cancel() {
+        document.getElementById('price').value = document.getElementById('manualCount').value = '';
+    }
+
+    function addFields(){
+
+        var number = document.getElementById("manualCount").value;
+        var container = document.getElementById("container");
+        while (container.hasChildNodes()) {
+            container.removeChild(container.lastChild);
+        }
+        for (i=0;i<number;i++){
+            var tmpContainer = createContainer(i);
+            tmpContainer.appendChild(makeText(i));
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "lotto" + i;
+            input.class = "form-control"
+            tmpContainer.appendChild(input);
+            tmpContainer.appendChild(document.createElement("br"));
+            container.appendChild(tmpContainer);
+        }
+    }
+    function delFields() {
+        var container = document.getElementById("container");
+        while (container.hasChildNodes()) {
+            container.removeChild(container.lastChild);
+        }
+    }
+
+    function makeText(i) {
+        var div = document.createElement("div");
+        div.className = "input-group-prepend";
+        div.innerHTML = '<span class="input-group-text">로또' + (i+1) +'</span>';
+        return div;
+    }
+    function createContainer(i) {
+        var div = document.createElement("div");
+        div.className = "input-group input-group-lg";
+        div.id = "container" + i;
+        return div;
+    }
+</script>
 </body>
 </html>

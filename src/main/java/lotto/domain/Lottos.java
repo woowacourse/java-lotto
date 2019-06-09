@@ -28,6 +28,10 @@ public class Lottos {
         return totalLottos.get(index);
     }
 
+    public List<Lotto> getTotalLottos() {
+        return totalLottos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

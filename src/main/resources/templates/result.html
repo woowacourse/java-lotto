@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>당첨 통계</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>당첨 통계</h1>
+            <div id="lottoResult">
+                <tr>
+                    <td>3개 일치 (5000원)- {{FIFTH}}개</td><br />
+                    <td>4개 일치 (50000원)- {{FOURTH}}개</td><br />
+                    <td>5개 일치 (1500000원)- {{THIRD}}개</td><br />
+                    <td>5개 일치, 보너스 볼 일치(30000000원) - {{SECOND}}개</td><br />
+                    <td>6개 일치 (2000000000원)- {{FIRST}}개</td><br />
+                    <td>총 수익률은 {{yield}}%입니다.</td><br />
+                </tr>
+                <tr>
+                    <a href="/"><button type="button" class="btn btn-primary btn-lg">처음으로 돌아가기</button></a>
+                </tr>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+</script>
+</html>
