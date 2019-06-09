@@ -13,8 +13,7 @@ import java.util.Arrays;
 
 public class WinningLottoDAOTest {
     private WinningLottoDAO winningLottoDAO;
-    private Lotto winningLotto;
-    private LottoNumber bonusBall;
+    private WinningLotto winningLotto;
     private Lottos lottos;
     private LottoDAO lottoDAO;
 
@@ -26,7 +25,7 @@ public class WinningLottoDAOTest {
 
     @BeforeEach
     void setup_winningLotto() {
-        winningLotto = new Lotto(Arrays.asList(
+        Lotto lastWinningLotto = new Lotto(Arrays.asList(
                 LottoNumber.getInstance(1),
                 LottoNumber.getInstance(2),
                 LottoNumber.getInstance(3),
@@ -34,7 +33,8 @@ public class WinningLottoDAOTest {
                 LottoNumber.getInstance(5),
                 LottoNumber.getInstance(6)
         ));
-        bonusBall = LottoNumber.getInstance(7);
+        LottoNumber bonusBall = LottoNumber.getInstance(7);
+        winningLotto = new WinningLotto(lastWinningLotto, bonusBall);
     }
 
     @BeforeEach
@@ -71,7 +71,7 @@ public class WinningLottoDAOTest {
     @Test
     void test1_당첨_로또_추가() throws SQLException {
         lottoDAO.addLottos("1", lottos);
-        winningLottoDAO.addWinningLotto("1", new WinningLotto(winningLotto, bonusBall));
+        winningLottoDAO.addWinningLotto("1", winningLotto);
     }
 
     @AfterEach

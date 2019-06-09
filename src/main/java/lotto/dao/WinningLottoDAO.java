@@ -1,14 +1,10 @@
 package lotto.dao;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class WinningLottoDAO {
     private final Connection con;
