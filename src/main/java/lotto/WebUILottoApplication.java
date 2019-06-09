@@ -58,6 +58,12 @@ public class WebUILottoApplication {
             model.put("totalEarningRate", lottoResult.getEarningsRate());
             return render(model, "lottoResult.html");
         });
+
+        exception(IllegalArgumentException.class, (exception, request, response) -> {
+            // Handle the exception here
+            response.body("에러:" + exception.getMessage() + "<br/><br/>"
+                    + "<input type=\"button\" value=\"뒤로가기\" onclick=\"history.back(-1);\">");
+        });
     }
 
     private static void loadLottoTable(Connection connection) throws SQLException {
