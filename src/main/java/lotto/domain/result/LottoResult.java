@@ -4,6 +4,8 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.purchase.PurchaseAmount;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class LottoResult {
@@ -46,14 +48,15 @@ public class LottoResult {
         }
     }
 
-    public int yield() {
-        int purchaseAmount = map.values().stream()
-                .reduce(INIT_VALUE, Integer::sum) * PurchaseAmount.LOTTO_PRICE;
-        int result = map.keySet().stream()
+    public BigDecimal yield() {
+        BigDecimal purchaseAmount = new BigDecimal(
+                PurchaseAmount.LOTTO_PRICE * map.values().stream()
+                .reduce(INIT_VALUE, Integer::sum));
+        BigDecimal result = new BigDecimal(map.keySet().stream()
                 .mapToInt(x -> x.getMoney() * map.get(x))
-                .sum();
+                .sum());
 
-        return (result / purchaseAmount) * PERCENTAGE;
+        return result.divide(purchaseAmount, 2, RoundingMode.HALF_UP).multiply(new BigDecimal(PERCENTAGE));
     }
 
     public Map<LottoRank, Integer> getMap() {
