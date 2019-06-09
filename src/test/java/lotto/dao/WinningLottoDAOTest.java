@@ -6,6 +6,7 @@ import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.*;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 
@@ -20,8 +21,9 @@ public class WinningLottoDAOTest {
 
     @BeforeEach
     void setup_db() {
-        winningLottoDAO = new WinningLottoDAO(DBManager.getConnection());
-        lottoDAO = new LottoDAO(DBManager.getConnection());
+        Connection connection = DBManager.getConnection();
+        winningLottoDAO = new WinningLottoDAO(connection);
+        lottoDAO = new LottoDAO(connection);
     }
 
     @BeforeEach

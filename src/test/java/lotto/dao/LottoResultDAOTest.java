@@ -6,6 +6,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 
@@ -18,8 +19,9 @@ public class LottoResultDAOTest {
 
     @BeforeEach
     void setup_db() {
-        lottoResultDAO = new LottoResultDAO(DBManager.getConnection());
-        lottoDAO = new LottoDAO(DBManager.getConnection());
+        Connection connection = DBManager.getConnection();
+        lottoResultDAO = new LottoResultDAO(connection);
+        lottoDAO = new LottoDAO(connection);
     }
 
     @BeforeEach
