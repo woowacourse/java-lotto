@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,12 +25,9 @@ public class LottoTest {
     void setUp() {
 
         lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(6));
+
+        // TODO : mapToObj 알아보기
+        lottoNumbers = IntStream.rangeClosed(1, 6).mapToObj(LottoNumber::new).collect(Collectors.toList());
 
         lotto2 = Lotto.createLotto(lottoNumbers);
     }
