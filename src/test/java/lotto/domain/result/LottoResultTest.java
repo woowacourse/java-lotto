@@ -2,6 +2,7 @@ package lotto.domain.result;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.Numbers;
 import lotto.domain.purchase.PurchaseAmount;
 import lotto.domain.purchase.PurchaseCount;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,49 +24,49 @@ public class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        winning = Winning.of(Lotto.of(Arrays.asList(1,2,3,4,5,6)), 7);
+        winning = Winning.of(Lotto.of(new Numbers(Arrays.asList(1,2,3,4,5,6))), 7);
         purchaseCount = PurchaseCount.of(PurchaseAmount.of(1000), 1);
     }
 
     @Test
     void 일등_확인() {
-        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(Lotto.of((Arrays.asList(1,2,3,4,5,6))))));
+        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(new Numbers((Arrays.asList(1,2,3,4,5,6))))));
         assertThat(result.yield()).isEqualByComparingTo(new BigDecimal(LottoRank.FIRST.getMoney() / RATIO));
     }
 
     @Test
     void 이등_확인() {
-        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(Lotto.of((Arrays.asList(1,2,3,4,5,7))))));
+        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(new Numbers((Arrays.asList(1,2,3,4,5,7))))));
         assertThat(result.yield()).isEqualByComparingTo(new BigDecimal(LottoRank.SECOND.getMoney() / RATIO));
     }
 
     @Test
     void 삼등_확인() {
-        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(Lotto.of((Arrays.asList(1,2,3,4,5,8))))));
+        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(new Numbers((Arrays.asList(1,2,3,4,5,8))))));
         assertThat(result.yield()).isEqualByComparingTo(new BigDecimal(LottoRank.THIRD.getMoney() / RATIO));
     }
 
     @Test
     void 사등_확인() {
-        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(Lotto.of((Arrays.asList(1,2,3,4,7,8))))));
+        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(new Numbers((Arrays.asList(1,2,3,4,7,8))))));
         assertThat(result.yield()).isEqualByComparingTo(new BigDecimal(LottoRank.FOURTH.getMoney() / RATIO));
     }
 
     @Test
     void 오등_확인() {
-        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(Lotto.of((Arrays.asList(1,2,3,9,7,8))))));
+        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(new Numbers((Arrays.asList(1,2,3,9,7,8))))));
         assertThat(result.yield()).isEqualByComparingTo(new BigDecimal(LottoRank.FIFTH.getMoney() / RATIO));
     }
 
     @Test
     void 꽝_확인() {
-        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(Lotto.of((Arrays.asList(1,2,10,9,7, 8))))));
+        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(new Numbers((Arrays.asList(1,2,10,9,7, 8))))));
         assertThat(result.yield()).isEqualByComparingTo(new BigDecimal(LottoRank.MISS.getMoney() / RATIO));
 
-        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(Lotto.of((Arrays.asList(1,11,10,9,7, 8))))));
+        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(new Numbers((Arrays.asList(1,11,10,9,7, 8))))));
         assertThat(result.yield()).isEqualByComparingTo(new BigDecimal(LottoRank.MISS.getMoney() / RATIO));
 
-        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(Lotto.of((Arrays.asList(12,2,10,9,7, 8))))));
+        result = LottoResult.of(winning, Lottos.of(purchaseCount, Arrays.asList(new Numbers((Arrays.asList(12,2,10,9,7, 8))))));
         assertThat(result.yield()).isEqualByComparingTo(new BigDecimal(LottoRank.MISS.getMoney() / RATIO));
     }
 }

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottosGenerator {
-    public static List<Lotto> generateLottos(List<Lotto> numbers) {
+    public static List<Lotto> generateLottos(List<Numbers> numbers) {
         List<Lotto> lottos = new ArrayList<>();
-        for (Lotto lotto : numbers) {
-            lottos.add(LottoMaker.generator(lotto.getLottoNumbers()));
+        for (Numbers lottoNumber : numbers) {
+            lottos.add(LottoMaker.generator(lottoNumber));
         }
         return lottos;
     }

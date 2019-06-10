@@ -15,8 +15,8 @@ public class LottoMaker {
         }
     }
 
-    public static Lotto generator(List<Integer> inputNumbers) {
-        Collections.sort(inputNumbers);
+    public static Lotto generator(Numbers inputNumbers) {
+        Collections.sort(inputNumbers.getNumbers());
         return Lotto.of(inputNumbers);
     }
 
@@ -25,6 +25,6 @@ public class LottoMaker {
         Collections.shuffle(autoNumbers);
         autoNumbers = autoNumbers.subList(START, Lotto.LOTTO_SIZE);
         Collections.sort(autoNumbers);
-        return Lotto.of(autoNumbers);
+        return Lotto.of(new Numbers(autoNumbers));
     }
 }

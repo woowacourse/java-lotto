@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Numbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +16,7 @@ public class WinningTest {
 
     @BeforeEach
     void setUp() {
-        List<Integer> lottos = Arrays.asList(1,2,3,4,5,6);
-        lotto = Lotto.of(lottos);
+        lotto = Lotto.of(new Numbers(Arrays.asList(1,2,3,4,5,6)));
     }
 
     @Test

@@ -47,8 +47,8 @@ public class Lotto {
         }
     }
 
-    public static Lotto of(List<Integer> lottoNumbers) {
-        return new Lotto(lottoNumbers);
+    public static Lotto of(Numbers lottoNumbers) {
+        return new Lotto(lottoNumbers.getNumbers());
     }
 
     public boolean containNumber(int value) {

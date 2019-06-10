@@ -1,6 +1,7 @@
 package lotto.view.input;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Numbers;
 import lotto.domain.purchase.PurchaseCount;
 import lotto.utils.InputUtils;
 
@@ -21,10 +22,10 @@ public class InputView {
         }
     }
 
-    public static List<Integer> inputWinningLotto() {
+    public static Numbers inputWinningLotto() {
         try {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            return InputUtils.parseIntegerList(scanner.nextLine());
+            return new Numbers(InputUtils.parseIntegerList(scanner.nextLine()));
         } catch (NumberFormatException e) {
             System.out.println("숫자를 입력해주세요.");
             return inputWinningLotto();
@@ -51,14 +52,14 @@ public class InputView {
         }
     }
 
-    public static List<Lotto> inputLottos(PurchaseCount purchaseCount) {
+    public static List<Numbers> inputLottos(PurchaseCount purchaseCount) {
         try {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-            List<Lotto> lottos = new ArrayList<>();
+            List<Numbers> numbers = new ArrayList<>();
             for (int i = 0; i < purchaseCount.getManualCount(); i++) {
-                lottos.add(Lotto.of(InputUtils.parseIntegerList(scanner.nextLine())));
+                numbers.add(new Numbers(InputUtils.parseIntegerList(scanner.nextLine())));
             }
-            return lottos;
+            return numbers;
         } catch (NumberFormatException e) {
             System.out.println("숫자를 입력해주세요.");
             return inputLottos(purchaseCount);

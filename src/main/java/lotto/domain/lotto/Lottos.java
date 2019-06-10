@@ -9,13 +9,13 @@ import java.util.Objects;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    private Lottos(PurchaseCount purchaseCount, List<Lotto> numbers) {
+    private Lottos(PurchaseCount purchaseCount, List<Numbers> numbers) {
         this.lottos = new ArrayList<>();
         lottos.addAll(LottosGenerator.generateLottos(numbers));
         lottos.addAll(LottosGenerator.generateLottos(purchaseCount.getAutoCount()));
     }
 
-    public static Lottos of(PurchaseCount purchaseCount, List<Lotto> numbers) {
+    public static Lottos of(PurchaseCount purchaseCount, List<Numbers> numbers) {
         return new Lottos(purchaseCount, numbers);
     }
 
