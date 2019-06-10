@@ -28,24 +28,32 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             int money = Integer.parseInt(req.queryParams("money"));
             service.charge(money);
-            return render(model, "form.html");
+            return render(model, "ask.html");
+        });
+
+        post("/choose", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int manualCount = Integer.parseInt(req.queryParams("manualCount"));
+            model.put("manualCount", manualCount);
+            return render(model, "lottobuy.html");
         });
 
         post("/lottos", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+
             InputParser parser = new InputParser();
             Lotto lotto = parser.makeLotto(req.queryParams("lotto"));
             service.buy(lotto);
 
             int autoCount = assignAutoPurchaseCount(service);
-            model.put("manualCount", 1);
+            model.put("manualCount", req.queryParams("manualCount"));
             model.put("autoCount", autoCount);
 
             DtoConverter converter = new DtoConverter();
             LottosDto dtos = converter.convertLottosToDto(service.getLottos());
             model.put("lottoList", dtos.getLottos());
 
-            return render(model, "form2.html");
+            return render(model, "lottolist.html");
         });
 
         post("/winning", (req, res) -> {

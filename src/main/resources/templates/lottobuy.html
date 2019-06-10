@@ -26,25 +26,12 @@
 
 <body>
       <nav>
-            <h3>구입 금액 입력</h3>
+            <h3>로또 구입</h3>
       </nav>
-      <!-- <form action="/money" method="post">
-            <div class="money">
-                  <label>구입 금액 : </label>
-                  <input type="text" name="money" />
-            </div>
-      </form>
-
-      <div class="test">
-            <label> {{money}} </label>
-      </div> -->
 
       <form action="/lottos" method="post">
-            <div class="money">
-                  <label>구입 금액 : </label>
-                  <input type="text" name="money" />
-            </div>
             <div class="lottobuy">
+                  <!-- <input type="hidden" value="{{manualCount}}" /> -->
                   <input type="text" name="lotto" placeholder="1,2,3,4,5,6" maxlength="20" />
                   <label><strong>ex) 1,2,3,4,5,6 으로 입력해주세요</strong></label>
                   <br />
@@ -52,28 +39,6 @@
                   <input type="submit" value="구입" />
             </div>
       </form>
-
-      <div class="printCount">
-            <label id="count"> 수동으로 {{manualCount}} 번, 자동으로 {{autoCount}} 번 구매했습니다. </label>
-            <div><i>로또 목록</i></div>
-            {{#lottoList}}
-            {{numbers}}
-            <br>
-            {{/lottoList}}
-      </div>
-
-      <form action="/winning" method="post">
-            <br>
-            <span>당첨 번호 </span> 
-            <br>
-            <input type="text" name="winninglotto" placeholder="1,2,3,4,5,6" />
-            -
-            <input id="bonus" type="bonusnum" name="bonusnumber" placeholder="1" maxlength = 2/>
-            <input type="submit" value="구입" />
-      </form>
-
-
-
 
       <script src="./js/form2.js"></script>
       <!-- Optional JavaScript -->
