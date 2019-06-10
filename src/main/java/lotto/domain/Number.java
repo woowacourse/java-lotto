@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Number implements Comparable<Number> {
     static final int MAX_NUMBER = 45;
@@ -59,5 +56,18 @@ public class Number implements Comparable<Number> {
             return 0;
         }
         return 1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Number number = (Number) o;
+        return num == number.num;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(num);
     }
 }
