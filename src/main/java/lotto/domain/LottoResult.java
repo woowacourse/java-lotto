@@ -29,7 +29,7 @@ public class LottoResult {
             sumOfRank += entry.getKey().money() * entry.getValue();
             sumOfTickets += entry.getValue();
         }
-        return sumOfRank / sumOfTickets / LOTTO_MONEY;
+        return sumOfRank / (sumOfTickets * LOTTO_MONEY);
     }
 
     public Map<Rank, Integer> results() {
