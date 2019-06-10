@@ -18,12 +18,14 @@ public class WinningLottoDAOTest {
     private WinningLotto winningLotto;
     private Lottos lottos;
     private LottoDAO lottoDAO;
+    private String lottoId;
 
     @BeforeEach
-    void setup_db() {
+    void setup_db() throws SQLException {
         Connection connection = DBManager.getConnection();
         winningLottoDAO = new WinningLottoDAO(connection);
         lottoDAO = new LottoDAO(connection);
+        lottoId = lottoDAO.getRound().toString();
     }
 
     @BeforeEach
@@ -73,17 +75,17 @@ public class WinningLottoDAOTest {
 
     @Test
     void test1_당첨_로또_추가() throws SQLException {
-        lottoDAO.addLottos("1", lottos);
-        winningLottoDAO.addWinningLotto("1", winningLotto);
+        lottoDAO.addLottos(lottoId, lottos);
+        winningLottoDAO.addWinningLotto(lottoId, winningLotto);
     }
 
     @Test
     void test2_당첨_로또_검색() throws SQLException {
-        assertThat(winningLotto).isEqualTo(winningLottoDAO.findByLottoId("1"));
+        assertThat(winningLotto).isEqualTo(winningLottoDAO.findByLottoId(lottoId).getWinningLotto());
     }
 
     @Test
     void test3_테이블_삭제() throws SQLException {
-        lottoDAO.deleteLotto("1");
+        lottoDAO.deleteLotto(lottoId);
     }
 }

@@ -26,7 +26,7 @@ public class WinningLottoDAO {
         pstmt.executeUpdate();
     }
 
-    public WinningLotto findByLottoId(String lottoId) throws SQLException {
+    public WinningLottoDTO findByLottoId(String lottoId) throws SQLException {
         String query = "SELECT * FROM winninglotto WHERE lotto_id = ?";
         PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setString(1, lottoId);
@@ -36,7 +36,9 @@ public class WinningLottoDAO {
 
         String lastWinningLotto = rs.getString("winning_lotto");
         lastWinningLotto = lastWinningLotto.substring(1, lastWinningLotto.lastIndexOf("]"));
-        return new WinningLotto(new Lotto(ConvertLottoNumber.run(lastWinningLotto)),
-                LottoNumber.getInstance(Integer.parseInt(rs.getString("bonus_ball"))));
+        WinningLottoDTO winningLottoDTO = new WinningLottoDTO();
+        winningLottoDTO.setWinningLotto(new WinningLotto(new Lotto(ConvertLottoNumber.run(lastWinningLotto)),
+                LottoNumber.getInstance(Integer.parseInt(rs.getString("bonus_ball")))));
+        return winningLottoDTO;
     }
 }
