@@ -1,4 +1,4 @@
-package lotto.domain.Dto;
+package lotto.dto;
 
 import lotto.domain.Exceptions.LottoNumberException;
 
@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class WinningLottoDto {
     private static final String DELIMETER = ",";
-    private List<Integer> numbers;
-    private int bonus;
+    private final List<Integer> numbers;
+    private final int bonus;
 
 
     public WinningLottoDto(String numbers, String bonus) {

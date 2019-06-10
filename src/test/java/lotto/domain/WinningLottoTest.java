@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.Dto.WinningLottoDto;
+import lotto.dto.WinningLottoDto;
 import lotto.domain.TicketModel.Ticket;
 import lotto.domain.TicketModel.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoTest {
     private WinningLotto winningLotto;
-    private LottoGenerator generator = new LottoGenerator();
+    private final LottoGenerator generator = new LottoGenerator();
 
     @BeforeEach
     void setUp() {

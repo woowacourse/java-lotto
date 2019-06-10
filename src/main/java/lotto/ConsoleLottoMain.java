@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.Dto.UserLottoDto;
-import lotto.domain.Dto.WinningLottoDto;
+import lotto.dto.UserLottoDto;
+import lotto.dto.WinningLottoDto;
 import lotto.domain.LottoResult;
 import lotto.domain.UserLottos;
 import lotto.domain.WinningLotto;

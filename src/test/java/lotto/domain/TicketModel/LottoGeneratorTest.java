@@ -1,6 +1,6 @@
 package lotto.domain.TicketModel;
 
-import lotto.domain.Dto.WinningLottoDto;
+import lotto.dto.WinningLottoDto;
 import lotto.domain.Exceptions.LottoNumberException;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;

@@ -1,4 +1,4 @@
-package lotto.domain.Dto;
+package lotto.dto;
 
 import lotto.domain.Exceptions.LottoNumberException;
 
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserLottoDto {
-    private int buyMoney;
-    private int manualCount;
-    private List<List<Integer>> manualNumbers;
+    private final int buyMoney;
+    private final int manualCount;
+    private final List<List<Integer>> manualNumbers;
 
     public UserLottoDto(String buyMoney, String manualCount, List<String> manualNumbers) {
         try {

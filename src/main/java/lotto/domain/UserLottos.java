@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.Dto.UserLottoDto;
+import lotto.dto.UserLottoDto;
 import lotto.domain.Exceptions.LottoTicketException;
 import lotto.domain.TicketModel.LottoGenerator;
 import lotto.domain.TicketModel.Ticket;
