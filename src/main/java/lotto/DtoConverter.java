@@ -18,7 +18,7 @@ public class DtoConverter {
 		return LottosDto.of(LottoDtos);
 	}
 
-	private LottoDto convertLottoToDto(final Lotto lotto) {
+	public LottoDto convertLottoToDto(final Lotto lotto) {
 		List<String> numbers = lotto.getLottoNumbers()
 				.stream()
 				.map(lottoNumber -> lottoNumber.toString())
