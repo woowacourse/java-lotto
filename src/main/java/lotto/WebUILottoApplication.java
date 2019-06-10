@@ -23,8 +23,9 @@ import static spark.Spark.post;
 public class WebUILottoApplication {
     private static Money money;
 
-    private static LottosDao lottosDao = new LottosDao();
-    private static WinningLottoDao winningLottoDao = new WinningLottoDao();
+    private static DataBase dataBase = new DataBase();
+    private static LottosDao lottosDao = new LottosDao(dataBase);
+    private static WinningLottoDao winningLottoDao = new WinningLottoDao(dataBase);
 
     public static void main(String[] args) {
         get("/", (req, res) -> {
