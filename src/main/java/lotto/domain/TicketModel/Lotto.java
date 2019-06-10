@@ -1,14 +1,13 @@
 package lotto.domain.TicketModel;
 
 
-import java.util.List;
 import java.util.Objects;
 
 class Lotto implements Ticket {
-    private final List<Integer> numbers;
+    private final LottoNumbers numbers;
 
     Lotto(LottoNumbers lottoNumbers) {
-        this.numbers = lottoNumbers.numbers();
+        this.numbers = lottoNumbers;
     }
 
     @Override
@@ -17,7 +16,7 @@ class Lotto implements Ticket {
     }
 
     @Override
-    public List<Integer> numbers() {
+    public LottoNumbers numbers() {
         return numbers;
     }
 

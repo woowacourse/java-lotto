@@ -23,6 +23,10 @@ class LottoNumbers {
         }
     }
 
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
     List<Integer> numbers() {
         return new ArrayList<>(numbers);
     }

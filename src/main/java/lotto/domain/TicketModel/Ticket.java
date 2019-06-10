@@ -1,9 +1,7 @@
 package lotto.domain.TicketModel;
 
-import java.util.List;
-
 public interface Ticket {
-    public List<Integer> numbers();
+    public LottoNumbers numbers();
 
     public boolean contains(int number);
 
