@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoundDao {
 
@@ -42,5 +44,26 @@ public class RoundDao {
             DBUtils.close(conn, ps, rs);
         }
         return -1;
+    }
+
+    public List<Integer> findAll() {
+        Connection conn = DBUtils.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Integer> rounds = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM round";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rounds.add(rs.getInt("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.close(conn, ps, rs);
+        }
+        return rounds;
     }
 }

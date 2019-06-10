@@ -18,7 +18,7 @@ import java.util.*;
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
-    private static final String DELIMITER = "\n";
+    private static final String DELIMITER = "\r\n";
     private static final int SAVE_FAIL = 0;
 
     public static void main(String[] args) {
@@ -28,8 +28,22 @@ public class WebUILottoApplication {
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("round", getRound() + 1);
+            model.put("round", lqtestRound() + 1);
+            model.put("rounds", new RoundDao().findAll());
             return render(model, "start.html");
+        });
+
+        get("/round", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int round = Integer.parseInt(req.queryParams("round"));
+            WinPrize winPrize = new WinPrizeDao().findByRound(round);
+
+            model.put("results",  getResultsForm(winPrize));
+            model.put("rateOfProfit", winPrize.getRateOfProfit());
+            model.put("round", round);
+            model.put("lottos", new LottoDao().findByRound(round));
+            model.put("winningLotto", new WinningLottoDao().findByRound(round));
+            return render(model, "round.html");
         });
 
         post("/buyLotto", (req, res) -> {
@@ -55,7 +69,7 @@ public class WebUILottoApplication {
 
         get("/show", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int round = getRound();
+            int round = lqtestRound();
             List<Lotto> lottos = new LottoDao().findByRound(round);
 
             model.put("lottos", lottos);
@@ -69,7 +83,7 @@ public class WebUILottoApplication {
             try {
                 String lotto = req.queryParams("winningLotto");
                 int bonusNo = Integer.parseInt(req.queryParams("bonusNo"));
-                int round = getRound();
+                int round = lqtestRound();
                 WinningLotto winningLotto = LottoService.generateWinningLotto(lotto, bonusNo);
 
                 saveWinningLotto(round, winningLotto);
@@ -86,13 +100,10 @@ public class WebUILottoApplication {
 
         get("/result", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int round = getRound();
+            int round = lqtestRound();
 
             WinPrize winPrize = new WinPrizeDao().findByRound(round);
-            List<String> results = new ArrayList<>();
-            for (final Rank rank : Rank.values()) {
-                results.add(ResultFormat.format(rank, winPrize));
-            }
+            List<String> results = getResultsForm(winPrize);
             model.put("results", results);
             model.put("rateOfProfit", winPrize.getRateOfProfit());
             return render(model, "result.html");
@@ -103,6 +114,14 @@ public class WebUILottoApplication {
             model.put("message", req.queryParams("message"));
             return render(model, "error.html");
         });
+    }
+
+    private static List<String> getResultsForm(final WinPrize winPrize) {
+        List<String> results = new ArrayList<>();
+        for (final Rank rank : Rank.values()) {
+            results.add(ResultFormat.format(rank, winPrize));
+        }
+        return results;
     }
 
     private static void saveLottos(final List<Lotto> userLottos, final int round) throws SQLException {
@@ -128,7 +147,7 @@ public class WebUILottoApplication {
         }
     }
 
-    private static int getRound() {
+    private static int lqtestRound() {
         return new RoundDao().getLatest();
     }
 

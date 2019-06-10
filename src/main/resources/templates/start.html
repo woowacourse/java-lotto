@@ -1,9 +1,9 @@
 <!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
 <htmlm lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>로또</title>
-    </head>
     <body>
 
     <h1>{{round}} 회 로또</h1>
@@ -23,6 +23,18 @@
         <input type="submit" value="전송">
         <input type="reset" value="취소">
     </form>
+
+    <h1>라운드 회차별 조회</h1>
+    {{#each rounds}}
+    <a href="/round?round={{this}}">{{this}}회</a>
+    {{/each}}
+
+
+    <script>
+        Handlebars.registerHelper('isTenth', function (index) {
+            return index === 10;
+        });
+    </script>
 
     </body>
 </htmlm>
