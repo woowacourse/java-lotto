@@ -6,4 +6,6 @@ public interface Ticket {
     public boolean contains(int number);
 
     public String toString();
+
+    public int unitPrice();
 }

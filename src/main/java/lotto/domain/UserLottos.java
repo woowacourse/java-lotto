@@ -22,7 +22,8 @@ public class UserLottos {
     }
 
     private void generateAuto(int buyMoney) {
-        for (int i = tickets.size(); i < (buyMoney / 1000); i++) {
+        int iterate = buyMoney / tickets.get(0).unitPrice();
+        for (int i = tickets.size(); i < (buyMoney / iterate); i++) {
             tickets.add(ticketGenerator.create());
         }
     }

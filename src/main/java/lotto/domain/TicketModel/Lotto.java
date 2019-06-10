@@ -4,6 +4,7 @@ package lotto.domain.TicketModel;
 import java.util.Objects;
 
 class Lotto implements Ticket {
+    private static final int LOTTO_PRICE = 1000;
     private final LottoNumbers numbers;
 
     Lotto(LottoNumbers lottoNumbers) {
@@ -18,6 +19,11 @@ class Lotto implements Ticket {
     @Override
     public LottoNumbers numbers() {
         return numbers;
+    }
+
+    @Override
+    public int unitPrice() {
+        return LOTTO_PRICE;
     }
 
     @Override
