@@ -7,14 +7,20 @@
 <body>
 <h1>보너스볼 입력하기</h1>
 <div>수동으로 {{manualcount}}장, 자동으로 {{autocount}}장 구매하였습니다.</div>
-<div>{{lottos}}</div>
+<div>
+  {{#lottos}}
+  {{this}}
+  <br>
+  {{/lottos}}
+</div>
 <br>
 <br>
 당첨번호 : {{ winningnumber }}
 <br>
 <br>
 <form action="/result">
-  보너스 번호 : <input type="text" name="bonus"/>
+  <label for="bonus">보너스 번호 :</label>
+  <input id="bonus" type="text" name="bonus"/>
   <input type="submit" value="결과보기" />
 </form>
 </body>

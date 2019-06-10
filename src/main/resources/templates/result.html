@@ -6,9 +6,15 @@
 </head>
 <body>
 <h1>당첨 통계</h1>
-{{result}}
+{{#result}}
+{{this}}
+<br>
+{{/result}}
 <div>
   총 수익률은 {{rate}}% 입니다.
 </div>
+<form action="/">
+  <input type="submit" value="홈으로"/>
+</form>
 </body>
 </html>
