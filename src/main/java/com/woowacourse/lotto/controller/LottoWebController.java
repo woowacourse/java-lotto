@@ -5,6 +5,7 @@ import com.woowacourse.lotto.controller.dto.AutoLottoBuyingRequestDto;
 import com.woowacourse.lotto.controller.dto.LottoDrawingRequestDto;
 import com.woowacourse.lotto.controller.dto.ManualLottoBuyingRequestDto;
 import com.woowacourse.lotto.domain.*;
+import com.woowacourse.lotto.persistence.dto.AggregationDto;
 import com.woowacourse.lotto.service.LottoService;
 import spark.ModelAndView;
 import spark.Request;
@@ -99,7 +100,7 @@ public class LottoWebController {
     }
 
     /***
-     * 자동 로또 구입 API
+     * 수동 로또 구입 API
      * @param req
      * 요청 JSON 예시:
      * {
@@ -207,6 +208,23 @@ public class LottoWebController {
         Map<String, Object> map = new HashMap<>();
         map.put("result", state.getResultString());
         return map;
+    }
+
+    public static Map<String, Object> retrieveSingleResult(Request req, Response res) {
+        Map<String, Object> resMap;
+        try {
+            System.out.println("id: " + req.params("id"));
+            AggregationDto aggregation = lottoService.findAggregationById(Long.parseLong(req.params("id")));
+            resMap = createResMapWithResult(ResultState.OK);
+            resMap.put("aggregation", aggregation);
+        } catch (NumberFormatException e) {
+            resMap = createResMapWithResult(ResultState.FAIL);
+            resMap.put("message", "올바르지 않은 id 형식입니다.");
+        } catch (Exception e) {
+            resMap = createResMapWithResult(ResultState.FAIL);
+            resMap.put("message", e.getMessage());
+        }
+        return resMap;
     }
 
     /**

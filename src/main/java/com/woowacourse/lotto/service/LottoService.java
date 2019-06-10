@@ -14,6 +14,7 @@ import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class LottoService {
     private LottoDao lottoDao;
@@ -65,6 +66,16 @@ public class LottoService {
             dto.setLottoRound(aggregationDao.findLatestRound() + 1);
             long id = aggregationDao.addAggregation(dto, addWinningLotto(winningLotto).getId(), lottoIds);
             return aggregationDao.findById(id).get();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public AggregationDto findAggregationById(long id) {
+        try {
+            return aggregationDao.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("결과를 찾을 수 없습니다"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
