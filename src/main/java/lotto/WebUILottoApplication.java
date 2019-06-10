@@ -16,6 +16,11 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             return render(model, "index.html");
         });
+
+        get("/purchase", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return render(model, "purchase.html");
+        });
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
