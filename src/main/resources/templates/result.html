@@ -5,11 +5,14 @@
     <title>result</title>
 </head>
 <body>
-돈 : {{money}}
+{{#each prizeInfos}}
+일치하는 숫자 개수: {{matchCount}}
+상금: {{prizeMoney}}
+일치하는 로또 개수: {{lottoCount}}
+<br><br>
+{{/each}}
 <br>
-수동 로또 개수 : {{manualLottoCount}}
-<br>
-수동 로또 번호 : {{manualLottoNumbers}}
+{{profitRate}}
 <br>
 </body>
 </html>

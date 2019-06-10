@@ -1,10 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.lotto.*;
-import lotto.domain.lotto.dto.LottoCountDTO;
-import lotto.domain.lotto.dto.LottosDTO;
-import lotto.domain.lotto.dto.MoneyDTO;
+import lotto.domain.lotto.dto.*;
 import lotto.domain.money.Money;
+import lotto.domain.money.Prize;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -31,7 +30,6 @@ public class WebUILottoApplication {
         });
 
         post("/manual", (req, res) -> {
-            System.out.println(req.queryParams());
             moneyDTO.set(req.queryParams("money"));
             manualLottoCountDTO.set(req.queryParams("manualLottoCount"));
 
@@ -58,9 +56,13 @@ public class WebUILottoApplication {
 
             Lottos lottos = LottoMachine
                     .generateLottos(manualLottosDTO.getLottos(), money);
+            totalLottodDTO.set(lottos.getLottos());
 
             Map<String, Object> model = new HashMap<>();
             model.put("lottos", lottos.getLottos());
+            model.put("manualLottoCount", manualLottoCountDTO.getManualLottoCount());
+            model.put("automaticLottoCount", lottos.getLottos().size()
+                    - manualLottoCountDTO.getManualLottoCount());
 
             return render(model, "lottos.html");
         });
@@ -77,8 +79,14 @@ public class WebUILottoApplication {
 
             Map<String, Object> model = new HashMap<>();
 
-
-            //return render(model, "result.html");
+            List<PrizeInfoDTO> prizeInfoDTOs = new ArrayList<>();
+            for (Prize prize : Prize.values()) {
+                prizeInfoDTOs.add(new PrizeInfoDTO(prize.getMatchCount()
+                        , prize.getPrizeMoney(), lottoResult.getCount(prize)));
+            }
+            model.put("prizeInfos", prizeInfoDTOs);
+            model.put("profitRate", lottoResult.getProfitRate());
+            return render(model, "result.html");
         });
     }
 
