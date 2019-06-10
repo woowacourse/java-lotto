@@ -9,13 +9,23 @@ public class Money {
 
     private final int price;
 
-    public Money(int price) {
+    private Money(int price) {
         checkValidPrice(price);
         this.price = price;
     }
 
-    private void checkValidPrice(int price) {
-        if ((price % ONE_LOTTO_PRICE == 0) && (price >= ONE_LOTTO_PRICE)) {
+    public static Money generate(String inputPrice) {
+        try {
+            checkValidPrice(Integer.parseInt(inputPrice));
+            return new Money(Integer.parseInt(inputPrice));
+        } catch (NumberFormatException | InvalidLottoPriceException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    private static void checkValidPrice(int price) {
+        if (!((price % ONE_LOTTO_PRICE == 0) && (price >= ONE_LOTTO_PRICE))) {
             throw new InvalidLottoPriceException("구입금액을 다시 입력해 주세요.");
         }
     }

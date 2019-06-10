@@ -6,8 +6,8 @@ public class LottoTicketsTest {
 
     @Test
     void 금액에_맞게_생성되는지_테스트() {
-        Money money = new Money(10000);
-        LottoTickets lottoTickets = new LottoTickets(10,money);
+        Money money = Money.generate("10000");
+        LottoTickets lottoTickets = LottoTickets.generate("10",money);
         System.out.println(lottoTickets);
     }
 }
