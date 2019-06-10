@@ -6,6 +6,8 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottosDao {
     public Connection getConnection() {
@@ -45,28 +47,17 @@ public class LottosDao {
         }
     }
 
-    public int[] addLottos(Lottos lottos) throws SQLException {
+    public int[] addLottos(Lottos lottos, int times) throws SQLException {
         String query = "INSERT INTO lotto (numbers, times) VALUES (?, ?)";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
-        int times = countWinningLottoTimes();
         Gson gson = new GsonBuilder().create();
 
         for (Lotto lotto : lottos.getLottos()) {
             pstmt.setString(1, gson.toJson(lotto.getLotto()));
-            pstmt.setInt(2, times);
+            pstmt.setInt(2, times + 1);
             pstmt.addBatch();
         }
 
         return pstmt.executeBatch();
-    }
-
-    private int countWinningLottoTimes() throws SQLException{
-        String query = "SELECT COUNT(*) FROM winning_lotto";
-        PreparedStatement pstmt = getConnection().prepareStatement(query);
-        ResultSet rs = pstmt.executeQuery();
-
-        if (!rs.next()) return 0;
-
-        return Integer.parseInt(rs.getString(1));
     }
 }

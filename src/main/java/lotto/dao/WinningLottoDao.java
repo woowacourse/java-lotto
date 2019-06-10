@@ -64,7 +64,7 @@ public class WinningLottoDao {
         return new WinningLotto(lotto, bonusNumber);
     }
 
-    public int countWinningLottoTimes() throws SQLException {
+    public int countWinningLottoTimes() throws SQLException{
         String query = "SELECT COUNT(*) FROM winning_lotto";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();

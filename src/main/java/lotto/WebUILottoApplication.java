@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lotto.creator.LottosFactory;
 import lotto.creator.ManualLottoCreator;
+import lotto.dao.LottosDao;
+import lotto.dao.WinningLottoDao;
 import lotto.domain.*;
 import lotto.domain.Number;
 import org.apache.http.NameValuePair;
@@ -19,9 +21,11 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 
 public class WebUILottoApplication {
-    private static Lottos lottos;
     private static Money money;
     private static LottoResult lottoResult;
+
+    private static LottosDao lottosDao = new LottosDao();
+    private static WinningLottoDao winningLottoDao = new WinningLottoDao();
 
     public static void main(String[] args) {
         get("/", (req, res) -> {
@@ -35,8 +39,11 @@ public class WebUILottoApplication {
             money = getMoney(pairs);
             List<String> manuals = getLottos(pairs);
 
-            lottos = LottosFactory.create(manuals, money);
-            System.out.println(lottos.getLottos());
+            Lottos lottos = LottosFactory.create(manuals, money);
+            int times = winningLottoDao.countWinningLottoTimes();
+
+            lottosDao.addLottos(lottos, times);
+
             try {
                 return lottos.getLottos();
             } catch (Exception e) {
@@ -54,10 +61,11 @@ public class WebUILottoApplication {
 
         post("/lottoResult", (req, res) -> {
             List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
-
             WinningLotto winningLotto = createWinningLotto(pairs);
 
-            lottoResult  = new LottoResult(lottos.getLottos(), winningLotto);
+            winningLottoDao.addWinningLotto(winningLotto);
+
+            // lottoResult  = new LottoResult(lottos.getLottos(), winningLotto);
 
             Gson gson = new GsonBuilder().create();
             String json = gson.toJson(lottoResult.getLottoResult());
@@ -71,6 +79,15 @@ public class WebUILottoApplication {
             return result;
         });
 
+        get("/lottoTimes/:Times", (req, res) -> {
+            int times = Integer.parseInt(req.params(":Times"));
+            WinningLotto winningLotto = winningLottoDao.findByTimes(times);
+
+
+            double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
+
+            return result;
+        });
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
