@@ -2,7 +2,6 @@ package lotto.domain.autocreatelotto;
 
 import lotto.domain.LottoGenerateBase;
 import lotto.domain.LottoNumber;
-import lotto.domain.AutoCreateLotto;
 
 import java.util.ArrayList;
 import java.util.Collections;

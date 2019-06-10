@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.domain.customcreatelotto.CustomCreateLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,17 +52,17 @@ public class InputView {
         }
     }
 
-    public static Lotteries generateInvalidLotto(Lotteries lotteries, CustomLotto customLotto) {
+    public static Lotteries generateInvalidLotto(Lotteries lotteries, CustomCreateLotto customCreateLotto) {
         try {
             List<Integer> lottoNumbers = generateNoFormatLottoNumbers(inputByUser());
-            lotteries.addCustomLotto(lottoNumbers, customLotto);
+            lotteries.addCustomLotto(lottoNumbers, customCreateLotto);
             return lotteries;
         } catch (NumberFormatException e) {
             System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
-            return generateInvalidLotto(lotteries, customLotto);
+            return generateInvalidLotto(lotteries, customCreateLotto);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage() + EX_LOTTO_RE_INPUT_MESSAGE);
-            return generateInvalidLotto(lotteries, customLotto);
+            return generateInvalidLotto(lotteries, customCreateLotto);
         }
     }
 
@@ -74,21 +75,21 @@ public class InputView {
         return lottoNumbers;
     }
 
-    public static Winner generateWinner(CustomLotto customLotto) {
-        Lotto lotto = generateInvalidWinLotto(customLotto);
+    public static Winner generateWinner(CustomCreateLotto customCreateLotto) {
+        Lotto lotto = generateInvalidWinLotto(customCreateLotto);
         return generateInvalidWinBonus(lotto);
     }
 
-    public static Lotto generateInvalidWinLotto(CustomLotto customLotto) {
+    public static Lotto generateInvalidWinLotto(CustomCreateLotto customCreateLotto) {
         try {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            return Lotto.customLotto(generateNoFormatLottoNumbers(inputByUser()), customLotto);
+            return Lotto.customLotto(generateNoFormatLottoNumbers(inputByUser()), customCreateLotto);
         } catch (NumberFormatException e) {
             System.out.println(EX_LOTTO_FORMAT_RANGE_MESSAGE + EX_LOTTO_RE_INPUT_MESSAGE);
-            return generateInvalidWinLotto(customLotto);
+            return generateInvalidWinLotto(customCreateLotto);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return generateInvalidWinLotto(customLotto);
+            return generateInvalidWinLotto(customCreateLotto);
         }
     }
 

@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.autocreatelotto.AutoCreateLotto;
+import lotto.domain.customcreatelotto.CustomCreateLotto;
+
 import java.util.*;
 
 /**
@@ -17,8 +20,8 @@ public class Lotto implements Iterable<LottoNumber> {
         checkLottoNumberCondition();
     }
 
-    public static Lotto customLotto(List<Integer> noFormedLotto, CustomLotto customLotto) {
-        return new Lotto(customLotto.custom(noFormedLotto));
+    public static Lotto customLotto(List<Integer> noFormedLotto, CustomCreateLotto customCreateLotto) {
+        return new Lotto(customCreateLotto.custom(noFormedLotto));
     }
 
     public static Lotto createLotto(AutoCreateLotto autoCreateLotto) {

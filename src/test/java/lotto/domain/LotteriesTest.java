@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.customlotto.DefaultCustomLotto;
+import lotto.domain.customcreatelotto.DefaultCustomCreateCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,13 +18,13 @@ class LotteriesTest {
     @BeforeEach
     void setUp() {
         lotteries = new Lotteries();
-        lotteries.addCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6), new DefaultCustomLotto());
+        lotteries.addCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6), new DefaultCustomCreateCreateLotto());
     }
 
     @Test
     void create_생성() {
         Lotteries lotteries2 = new Lotteries();
-        lotteries2.addCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6), new DefaultCustomLotto());
+        lotteries2.addCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6), new DefaultCustomCreateCreateLotto());
         assertThat(lotteries).isEqualTo(lotteries2);
     }
 }
