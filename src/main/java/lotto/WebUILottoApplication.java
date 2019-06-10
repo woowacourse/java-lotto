@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import lotto.creator.LottosFactory;
 import lotto.creator.ManualLottoCreator;
 import lotto.dao.LottosDao;
+import lotto.dao.MoneyDao;
 import lotto.dao.WinningLottoDao;
 import lotto.domain.*;
 import lotto.domain.Number;
@@ -21,9 +22,8 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 
 public class WebUILottoApplication {
-    private static Money money;
-
     private static DataBase dataBase = new DataBase();
+    private static MoneyDao moneyDao = new MoneyDao(dataBase);
     private static LottosDao lottosDao = new LottosDao(dataBase);
     private static WinningLottoDao winningLottoDao = new WinningLottoDao(dataBase);
 
@@ -36,12 +36,13 @@ public class WebUILottoApplication {
         post("/lotto", (req, res) -> {
             List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
 
-            money = getMoney(pairs);
+            Money money = getMoney(pairs);
             List<String> manuals = getLottos(pairs);
 
             Lottos lottos = LottosFactory.create(manuals, money);
             int times = winningLottoDao.countWinningLottoTimes();
 
+            moneyDao.addMoney(money, times);
             lottosDao.addLottos(lottos, times);
 
             try {
@@ -78,6 +79,7 @@ public class WebUILottoApplication {
         get("/lottoYield", (req, res) -> {
             int latelyTimes = winningLottoDao.countWinningLottoTimes();
             LottoResult lottoResult = createLottoResult(latelyTimes);
+            Money money = moneyDao.findByTimes(latelyTimes);
 
             double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
 
@@ -87,6 +89,7 @@ public class WebUILottoApplication {
         get("/lottoTimes/:Times", (req, res) -> {
             int times = Integer.parseInt(req.params(":Times"));
             LottoResult lottoResult = createLottoResult(times);
+            Money money = moneyDao.findByTimes(times);
 
             double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
 
