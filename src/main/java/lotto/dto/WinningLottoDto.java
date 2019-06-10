@@ -1,8 +1,8 @@
 package lotto.dto;
 
+import lotto.domain.Exceptions.ExceptionMessages;
 import lotto.domain.Exceptions.LottoNumberException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +18,7 @@ public class WinningLottoDto {
             this.numbers = parseNumber(numbers);
             this.bonus = Integer.parseInt(bonus);
         } catch (NumberFormatException e) {
-            throw new LottoNumberException();
+            throw new LottoNumberException(ExceptionMessages.NUMBER.message());
         }
     }
 

@@ -9,10 +9,6 @@ public class LottoResult {
     private static final int LOTTO_MONEY = 1000;
     private final Map<Rank, Integer> results;
 
-    public LottoResult(Map<Rank, Integer> results) {
-        this.results = results;
-    }
-
     public LottoResult() {
         this.results = new TreeMap<>();
         for (Rank rank : Rank.values()) {

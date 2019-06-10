@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.domain.Exceptions.ExceptionMessages;
 import lotto.domain.Exceptions.LottoNumberException;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class UserLottoDto {
             this.buyMoney = parseNumber(lottoMoney);
             this.manualNumbers = parseNumber(manualNumbers);
         } catch (NumberFormatException e) {
-            throw new LottoNumberException();
+            throw new LottoNumberException(ExceptionMessages.NUMBER.message());
         }
     }
 
