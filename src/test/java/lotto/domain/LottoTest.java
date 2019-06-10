@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +18,6 @@ public class LottoTest {
     public static final Lotto createLotto = Lotto.createLotto(new MockAutoCreateLotto());
     private Lotto lotto2;
     private List<LottoNumber> lottoNumbers;
-    private List<Integer> lottoNumbersInt;
 
     @BeforeEach
     void setUp() {
@@ -33,8 +31,6 @@ public class LottoTest {
         lottoNumbers.add(new LottoNumber(6));
 
         lotto2 = Lotto.createLotto(lottoNumbers);
-
-        lottoNumbersInt = Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
     @Test
