@@ -20,6 +20,7 @@ import static lotto.domain.LottoNumber.LOTTO_START_NUMBER;
 public class InputValidator {
     private static final Pattern BUY_PRICE_REGEX = Pattern.compile("^[1-9][0-9]{3,}$");
     private static final Pattern WINNING_NUMBER_REGEX = Pattern.compile("^([0-9]{1,2}, )+[0-9]{1,2}$");
+    private static final int MIN_PRICE = 0;
 
     public static void inputValidateBuyPrice(final String buyPrice) {
         if (!BUY_PRICE_REGEX.matcher(buyPrice).matches()) {
@@ -51,7 +52,7 @@ public class InputValidator {
 
     public static void inputValidateManualBuyLottoCount(final int buyPrice, final int countOfManualBuyLotto) {
         int maxBuyLotto = buyPrice / BoughtLottos.BUY_PRICE;
-        if (!(maxBuyLotto - countOfManualBuyLotto >= 0)) {
+        if (!(maxBuyLotto - countOfManualBuyLotto >= MIN_PRICE)) {
             throw new InputManualBuyLottoCountException("수동으로 사려는 로또의 숫자가 입력한 가격과 맞지 않습니다. 최대 " + maxBuyLotto + "개");
         }
     }
