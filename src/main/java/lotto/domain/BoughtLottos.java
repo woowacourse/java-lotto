@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.generator.LottosAutoGenerator;
+import lotto.domain.generator.LottosManualGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,14 +13,14 @@ public class BoughtLottos {
     private final List<Lotto> lottos;
     private final int countOfBoughtManual;
 
-    public BoughtLottos(final List<Lotto> lottos, final int countOfBoughtManual) {
+    private BoughtLottos(final List<Lotto> lottos, final int countOfBoughtManual) {
         this.lottos = lottos;
         this.countOfBoughtManual = countOfBoughtManual;
     }
 
-    public static BoughtLottos buyLottos(final int price, List<Lotto> manualLottos) {
-        List<Lotto> lottos = new ArrayList<>(manualLottos);
-        int countOfBoughtManual = manualLottos.size();
+    public static BoughtLottos buyLottos(final int price, List<String> inputManualLottos) {
+        List<Lotto> lottos = new ArrayList<>(new LottosManualGenerator(inputManualLottos).generate());
+        int countOfBoughtManual = lottos.size();
         int amountOfAutoGenerateLotto = price / BUY_PRICE - countOfBoughtManual;
 
         lottos.addAll(new LottosAutoGenerator(amountOfAutoGenerateLotto).generate());

@@ -1,11 +1,8 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.generator.LottosManualGenerator;
 import lotto.domain.generator.ResultGenerator;
 import lotto.view.OutputView;
-
-import java.util.List;
 
 import static lotto.domain.generator.LottoNumbersGenerator.generateLottoNumbers;
 import static lotto.view.InputView.*;
@@ -16,10 +13,8 @@ public class ConsoleUILottoApplication {
         int buyPrice = money.getBuyPrice();
 
         int countOfManualBuyLotto = inputManualBuyLottoCount(buyPrice);
-        List<Lotto> manualBoughtLottos = new LottosManualGenerator(
-                inputManualLottos(countOfManualBuyLotto))
-                .generate();
-        BoughtLottos boughtLottos = BoughtLottos.buyLottos(buyPrice, manualBoughtLottos);
+        BoughtLottos boughtLottos = BoughtLottos.buyLottos(countOfManualBuyLotto,
+                inputManualLottos(countOfManualBuyLotto));
         OutputView.printBoughtLottos(boughtLottos);
 
         WinningNumber winningNumber = new WinningNumber(new Lotto(
