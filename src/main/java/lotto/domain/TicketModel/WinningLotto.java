@@ -13,11 +13,11 @@ public class WinningLotto implements WinningTicket {
 
     @Override
     public int match(Ticket lotto) {
-        return containsNumber(lotto.numbers());
+        return containsNumber(lotto.lottoNumbers());
     }
 
     private int containsNumber(LottoNumbers lottoNumbers) {
-        return (int) lottoNumbers.numbers().stream()
+        return (int) lottoNumbers.rawNumbers().stream()
                 .filter(number -> winningTicket.contains(number))
                 .count();
     }

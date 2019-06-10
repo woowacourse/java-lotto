@@ -4,8 +4,9 @@ import lotto.domain.Exceptions.LottoNumberException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-class LottoNumbers {
+public class LottoNumbers {
     private final List<Integer> numbers;
 
     LottoNumbers() {
@@ -27,7 +28,20 @@ class LottoNumbers {
         return numbers.contains(number);
     }
 
-    List<Integer> numbers() {
+    public List<Integer> rawNumbers() {
         return new ArrayList<>(numbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Exceptions.LottoTicketException;
 import lotto.domain.LottoResult;
 import lotto.domain.TicketModel.LottoCreator;
 import lotto.domain.TicketModel.WinningLotto;
@@ -13,7 +14,12 @@ import lotto.view.OutputView;
 public class ConsoleLottoMain {
     public static void main(String[] args) {
         String lottoMoney = InputView.lottoMoney();
-        String manualCount = InputView.manualLottoCount();
+        int manualCount;
+        try {
+            manualCount = Integer.parseInt(InputView.manualLottoCount());
+        } catch (NumberFormatException e) {
+            throw new LottoTicketException();
+        }
         UserLottoDto userLottoDto = new UserLottoDto(lottoMoney, manualCount, InputView.manualLottoNumber(manualCount));
         UserLottos userLottos = new UserLottos(userLottoDto);
         OutputView.printLottos(userLottos);

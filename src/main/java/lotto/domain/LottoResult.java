@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -22,14 +24,16 @@ public class LottoResult {
         results.put(rank, results.get(rank) + 1);
     }
 
-    public double summury() {
-        double sumOfRank = 0.0;
+    public BigDecimal summury() {
+        int sumOfRank = 0;
         int sumOfTickets = 0;
         for (Map.Entry<Rank, Integer> entry : results.entrySet()) {
             sumOfRank += entry.getKey().money() * entry.getValue();
             sumOfTickets += entry.getValue();
         }
-        return sumOfRank / (sumOfTickets * LOTTO_MONEY);
+        return new BigDecimal(sumOfRank)
+                .divide(new BigDecimal(sumOfTickets), 3, RoundingMode.CEILING)
+                .divide(new BigDecimal(LOTTO_MONEY), 3, RoundingMode.CEILING);
     }
 
     public Map<Rank, Integer> results() {

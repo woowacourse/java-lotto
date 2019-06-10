@@ -1,10 +1,8 @@
 package lotto.domain.TicketModel;
 
-
 import java.util.Objects;
 
 class Lotto implements Ticket {
-    private static final int LOTTO_PRICE = 1000;
     private final LottoNumbers numbers;
 
     Lotto(LottoNumbers lottoNumbers) {
@@ -12,18 +10,13 @@ class Lotto implements Ticket {
     }
 
     @Override
-    public boolean contains(int number) {
-        return numbers.contains(number);
-    }
-
-    @Override
-    public LottoNumbers numbers() {
+    public LottoNumbers lottoNumbers() {
         return numbers;
     }
 
     @Override
-    public int unitPrice() {
-        return LOTTO_PRICE;
+    public boolean contains(int number) {
+        return numbers.contains(number);
     }
 
     @Override
@@ -41,6 +34,6 @@ class Lotto implements Ticket {
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return lottoNumbers().rawNumbers().toString();
     }
 }

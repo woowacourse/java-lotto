@@ -12,29 +12,29 @@ import java.util.List;
 
 
 public class UserLottos {
-    private final TicketCreator ticketGenerator;
+    private final TicketCreator ticketCreator;
     private List<Ticket> tickets;
 
     public UserLottos(UserLottoDto dto) {
-        ticketGenerator = new LottoCreator();
+        ticketCreator = new LottoCreator();
         generateManual(dto.getManualCount(), dto.getManualNumbers());
         generateAuto(dto.getBuyMoney());
-    }
-
-    private void generateAuto(int buyMoney) {
-        int iterate = buyMoney / tickets.get(0).unitPrice();
-        for (int i = tickets.size(); i < (buyMoney / iterate); i++) {
-            tickets.add(ticketGenerator.create());
-        }
     }
 
     private void generateManual(int count, List<List<Integer>> manualNumbers) {
         validate(count, manualNumbers);
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < manualNumbers.size(); i++) {
-            tickets.add(ticketGenerator.create(manualNumbers.get(i)));
+            tickets.add(ticketCreator.create(manualNumbers.get(i)));
         }
         this.tickets = tickets;
+    }
+
+    private void generateAuto(int buyMoney) {
+        int iterate = buyMoney / ticketCreator.unitPrice();
+        for (int i = tickets.size(); i < iterate; i++) {
+            tickets.add(ticketCreator.create());
+        }
     }
 
     private void validate(int count, List<List<Integer>> manualNumbers) {
@@ -51,13 +51,7 @@ public class UserLottos {
         return lottoResult;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(tickets.size()).append("장 구매했습니다.\n");
-        for (Ticket ticket : tickets) {
-            stringBuilder.append(ticket.toString()).append("\n");
-        }
-        return stringBuilder.toString();
+    public List<Ticket> tickets() {
+        return tickets;
     }
 }

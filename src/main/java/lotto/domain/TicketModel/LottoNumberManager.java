@@ -25,7 +25,7 @@ class LottoNumberManager {
 
     public static List<Integer> autoNumber() {
         Collections.shuffle(numbers);
-        return numbers.subList(0, NUMBER_COUNT);
+        return new ArrayList<>(numbers.subList(0, NUMBER_COUNT));
     }
 
     public static boolean check(List<Integer> numbers) {

@@ -12,10 +12,10 @@ public class UserLottoDto {
     private final int manualCount;
     private final List<List<Integer>> manualNumbers;
 
-    public UserLottoDto(String buyMoney, String manualCount, List<String> manualNumbers) {
+    public UserLottoDto(String lottoMoney, int manualCount, List<String> manualNumbers) {
+        this.manualCount = manualCount;
         try {
-            this.buyMoney = parseNumber(buyMoney);
-            this.manualCount = parseNumber(manualCount);
+            this.buyMoney = parseNumber(lottoMoney);
             this.manualNumbers = parseNumber(manualNumbers);
         } catch (NumberFormatException e) {
             throw new LottoNumberException();

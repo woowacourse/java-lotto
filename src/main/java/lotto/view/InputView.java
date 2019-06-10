@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Exceptions.LottoTicketException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,20 +19,7 @@ public class InputView {
     }
 
 
-    public static List<String> manualLottoNumber(String manualCount) {
-        int iterate;
-        try {
-            iterate = Integer.parseInt(manualCount);
-        } catch (NumberFormatException e) {
-            throw new LottoTicketException();
-        }
-        if (iterate > 0) {
-            return manualLottoNumberStrings(iterate);
-        }
-        return new ArrayList<>();
-    }
-
-    private static List<String> manualLottoNumberStrings(int iterate) {
+    public static List<String> manualLottoNumber(int iterate) {
         System.out.println(ConsoleMessages.MANUAL_NUMBER.message());
         List<String> manualNumbers = new ArrayList<>();
         for (int i = 0; i < iterate; i++) {
