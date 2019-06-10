@@ -1,7 +1,5 @@
 package lotto.domain.lottomanager;
 
-import lotto.domain.winning.BonusBall;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -10,9 +8,8 @@ public class LottoTicket {
     private static final String ERROR_OVERLAPPED = "중복된 로또 번호가 존재합니다.";
     private static final String ERROR_LOTTO_NUMBER_COUNT = "번호가 6개가 아닙니다.";
     private static final int LOTTO_NUM_SIZE = 6;
-    private static final String ERROR_NULL_CONTAIN_LOTTO_NUMBER = "isContainedNumbers(LottoNumber) has Null";
     private static final String ERROR_NULL_USER_TICKET = "getMatchedNumbersCount() has Null";
-    private static final String ERROR_NULL_CONTAIN_BONUS_BALL = "isContainedNumbers(BonusBall) has Null";
+    private static final String ERROR_NULL_CONTAIN_BONUS = "isContainBonus() has Null";
 
     private List<LottoNumber> lottoTicket;
 
@@ -73,20 +70,12 @@ public class LottoTicket {
                 .count();
     }
 
-    public boolean isContainedNumbers(LottoNumber lottoNumber) {
-        if (lottoNumber == null) {
-            throw new NullPointerException(ERROR_NULL_CONTAIN_LOTTO_NUMBER);
-        }
-
-        return this.lottoTicket.contains(lottoNumber);
-    }
-
-    public boolean isContainedNumbers(BonusBall bonusBall) {
+    public boolean isContainBonus(LottoNumber bonusBall) {
         if (bonusBall == null) {
-            throw new IllegalArgumentException(ERROR_NULL_CONTAIN_BONUS_BALL);
+            throw new IllegalArgumentException(ERROR_NULL_CONTAIN_BONUS);
         }
 
-        return bonusBall.isContainNumbers(Collections.unmodifiableList(lottoTicket));
+        return lottoTicket.contains(bonusBall);
     }
 
     @Override

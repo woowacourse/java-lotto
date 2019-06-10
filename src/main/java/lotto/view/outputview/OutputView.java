@@ -46,12 +46,12 @@ public class OutputView {
         System.out.println(stringBuilder.toString());
     }
 
-    public static void printWinningStatistics(WinningResult winningResult, int purchasePrice) {
+    public static void printWinningStatistics(WinningResult winningResult) {
         stringBuilder = new StringBuilder();
         stringBuilder.append(RESULT_STATISTICS_MESSAGE);
 
         writeRankStatistics(winningResult);
-        writeTotalYield(winningResult, purchasePrice);
+        writeTotalYield(winningResult);
         System.out.println(stringBuilder.toString());
     }
 
@@ -88,7 +88,7 @@ public class OutputView {
         return String.format(STATISTICS_MESSAGE_FORMAT_END, winningResult.getMatchedRankCountValue(rank));
     }
 
-    private static void writeTotalYield(WinningResult winningResult, int purchasePrice) {
-        stringBuilder.append(String.format(TOTAL_REVENUE_FORMAT, winningResult.getTotalYield(purchasePrice)));
+    private static void writeTotalYield(WinningResult winningResult) {
+        stringBuilder.append(String.format(TOTAL_REVENUE_FORMAT, winningResult.getTotalYield()));
     }
 }
