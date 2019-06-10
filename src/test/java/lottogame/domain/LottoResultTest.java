@@ -7,8 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoResultTest {
     @Test
     void 당첨_결과를_알려주는_클래스_구현() {
-        LottoTickets lottoTickets = LottoTickets.generate("5", Money.generate("10000"));
+        LottoTickets lottoTickets = LottoTickets.generate();
         WinningLotto winningLotto = WinningLotto.generate(LottoGenerator.create("1,2,3,4,5,6"),"45");
-        assertThat(LottoResultGenerator.create(lottoTickets, winningLotto)).isExactlyInstanceOf(LottoResult.class);
+        assertThat(LottoResult.generate(lottoTickets, winningLotto)).isExactlyInstanceOf(LottoResult.class);
     }
 }

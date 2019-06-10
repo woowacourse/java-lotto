@@ -41,4 +41,13 @@ public class Money {
     long rateOf(double profits) {
         return (long) (profits / price) * PERCENTAGE;
     }
+
+    public boolean isInvalidNumber(String numberOfManualLotto) {
+        try {
+            return getNumberOfTicket() < Integer.parseInt(numberOfManualLotto);
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해 주세요.");
+            return true;
+        }
+    }
 }

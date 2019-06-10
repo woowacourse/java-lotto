@@ -1,35 +1,15 @@
 package lottogame.domain;
 
 import lottogame.lottogameexception.InvalidLottoNumberException;
-import lottogame.view.InputView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
     private List<Lotto> lottos = new ArrayList<>();
-    private final int numberOfManualTicket;
 
-    private LottoTickets(int numberOfManualTicket, Money money) {
-        if (!money.isValidateAmount(numberOfManualTicket)) {
-            throw new InvalidLottoNumberException("수동 구매 수는 " + money.getNumberOfTicket() + "개 이하여야 합니다.");
-        }
-        this.numberOfManualTicket = numberOfManualTicket;
-    }
-
-    public static LottoTickets generate(String numberOfMannualTicket, Money money) {
-        try {
-            return new LottoTickets(Integer.parseInt(numberOfMannualTicket), money);
-        } catch (NumberFormatException e) {
-            System.out.println("숫자를 입력해 주세요");
-        } catch (InvalidLottoNumberException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
-
-    public int getNumberOfManualTicket() {
-        return numberOfManualTicket;
+    public static LottoTickets generate() {
+        return new LottoTickets();
     }
 
     public void addManualLotto(String manualLotto) {
@@ -37,10 +17,6 @@ public class LottoTickets {
         if(lotto != null){
             lottos.add(lotto);
         }
-    }
-
-    public boolean isPossibleCreateManualLotto() {
-        return lottos.size() < numberOfManualTicket;
     }
 
     public void createAutoLottos() {

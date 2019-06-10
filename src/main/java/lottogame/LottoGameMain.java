@@ -8,14 +8,19 @@ import lottogame.view.OutputView;
 public class LottoGameMain {
     public static void main(String[] args) {
         Money money = getMoney();
-        LottoTickets lottoTickets = createLottoTickets(money);
-        createLottos(lottoTickets, money);
-        OutputView.printPurchaseResult(lottoTickets);
+        LottoTickets lottoTickets = new LottoTickets();
+        int numberOfManualTicket = getNumberOfManualTicket(money);
+        createLottos(lottoTickets, money, numberOfManualTicket);
+        OutputView.printPurchaseResult(lottoTickets, numberOfManualTicket);
 
         WinningLotto winningLotto = createWinningLotto();
 
         LottoResult lottoResult = LottoResult.generate(lottoTickets, winningLotto);
         OutputView.printLottoResult(lottoResult, lottoResult.getRateOfLotto(money));
+    }
+
+    private static int getNumberOfManualTicket(Money money) {
+        return InputView.getNumberOfMannualTicket(money);
     }
 
     private static Money getMoney() {
@@ -28,21 +33,11 @@ public class LottoGameMain {
         return money;
     }
 
-    private static LottoTickets createLottoTickets(Money money) {
-        LottoTickets lottoTickets;
-
-        do {
-            lottoTickets = LottoTickets.generate(InputView.getNumberOfMannualTicket(), money);
-        } while (lottoTickets == null);
-
-        return lottoTickets;
-    }
-
-    private static void createLottos(LottoTickets lottoTickets, Money money) {
-        if (lottoTickets.isPossibleCreateManualLotto()) {
+    private static void createLottos(LottoTickets lottoTickets, Money money, int numberOfManualTicket) {
+        if (lottoTickets.isPossibleCreateLottoNumberOf(numberOfManualTicket)) {
             OutputView.printRequestOfManualLottoNumber();
         }
-        while (lottoTickets.isPossibleCreateManualLotto()) {
+        while (lottoTickets.isPossibleCreateLottoNumberOf(numberOfManualTicket)) {
             createManualLotto(lottoTickets);
         }
         while (lottoTickets.isPossibleCreateLottoNumberOf(money.getNumberOfTicket())) {

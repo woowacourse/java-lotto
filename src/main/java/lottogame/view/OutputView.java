@@ -6,14 +6,14 @@ import lottogame.domain.Money;
 import lottogame.domain.Rank;
 
 public class OutputView {
-    public static void printPurchaseResult(LottoTickets lottoTickets) {
-        System.out.println("수동으로 " + lottoTickets.getNumberOfManualTicket() + "개, 자동으로 " +
-                getNumberOfAutoTicket(lottoTickets) + "개를 구매했습니다.");
+    public static void printPurchaseResult(LottoTickets lottoTickets, int numberOfManualTicket) {
+        System.out.println("수동으로 " + numberOfManualTicket + "개, 자동으로 " +
+                getNumberOfAutoTicket(lottoTickets, numberOfManualTicket) + "개를 구매했습니다.");
         System.out.println(lottoTickets);
     }
 
-    private static int getNumberOfAutoTicket(LottoTickets lottoTickets) {
-        return lottoTickets.numberOfLottos() - lottoTickets.getNumberOfManualTicket();
+    private static int getNumberOfAutoTicket(LottoTickets lottoTickets, int numberOfManualTicket) {
+        return lottoTickets.numberOfLottos() - numberOfManualTicket;
     }
 
     public static void printRequestOfManualLottoNumber() {
