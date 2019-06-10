@@ -1,21 +1,22 @@
 package lotto;
 
+import lotto.domain.Factory.LottoTicketsFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinStatistics;
 import lotto.domain.WinningLotto;
-import lotto.exception.DuplicatedInputException;
-import lotto.exception.IllegalAmountOfNumberException;
 import lotto.exception.UnexpectedInputRangeException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.List;
 
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         Money money = getMoney();
         int amountOfCustoms = getAmountOfCustoms(money.getTicketCount());
-        LottoTickets lottoTickets = getLottoTickets(money, amountOfCustoms);
 
+        LottoTickets lottoTickets = getLottoTickets(money, amountOfCustoms);
         printAllLottoTickets(money, amountOfCustoms, lottoTickets);
 
         WinningLotto winningLotto = getWinningLotto();
@@ -47,31 +48,9 @@ public class ConsoleUILottoApplication {
     }
 
     private static LottoTickets getLottoTickets(Money money, int amountOfCustoms) {
-        LottoTickets lottoTickets = new LottoTickets(amountOfCustoms);
+        List<String> inputOfCustomLottoNumbers = InputView.inputCustomLottoNumbers(amountOfCustoms);
 
-        InputView.printCustomLottoNumbersMessage();
-        try {
-            purchaseCustomLottoTickets(lottoTickets);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            purchaseCustomLottoTickets(lottoTickets);
-        }
-        purchaseAutoLottoTickets(money, amountOfCustoms, lottoTickets);
-
-        return lottoTickets;
-    }
-
-    private static void purchaseAutoLottoTickets(Money money, int amountOfCustoms, LottoTickets lottoTickets) {
-        int amountOfAutos = money.getTicketCount() - amountOfCustoms;
-        for (int i = 0; i < amountOfAutos; i++) {
-            lottoTickets.putLottoTicket(null);
-        }
-    }
-
-    private static void purchaseCustomLottoTickets(LottoTickets lottoTickets) {
-        while (lottoTickets.needMoreCustomLottoTicket()) {
-            lottoTickets.putLottoTicket(InputView.inputLottoNumbers());
-        }
+        return LottoTicketsFactory.getInstance().create(money, inputOfCustomLottoNumbers);
     }
 
     private static int getAmountOfCustoms(int maxCount) {

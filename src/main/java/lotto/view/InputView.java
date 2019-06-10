@@ -4,6 +4,8 @@ import lotto.exception.ExceptionMessage;
 import lotto.exception.IllegalAmountOfNumberException;
 import lotto.exception.UnexpectedInputRangeException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -35,8 +37,16 @@ public class InputView {
         }
     }
 
-    public static void printCustomLottoNumbersMessage() {
+    public static List<String> inputCustomLottoNumbers(int amountOfCustoms) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<String> customLottoNumbers = new ArrayList<>();
+
+        for (int i = 0; i < amountOfCustoms; i++) {
+            customLottoNumbers.add(inputLottoNumbers());
+        }
+
+        return customLottoNumbers;
     }
 
     public static void printWinningLottoNumbersMessage() {

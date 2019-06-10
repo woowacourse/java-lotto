@@ -1,22 +1,19 @@
 package lotto.domain;
 
+import lotto.domain.Factory.LottoTicketFactory;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
     @Test
     void create() {
-        int amountOfCustom = 3;
+        List<LottoTicket> lottoTickets = Arrays.asList(
+                LottoTicketFactory.getInstance().create("1,22,23,31,39,45"), LottoTicketFactory.getInstance().create("1,2,23,39,42,45"));
 
-        assertThat(new LottoTickets(amountOfCustom)).isEqualTo(new LottoTickets(amountOfCustom));
-    }
-
-    @Test
-    void 입력해야할_수동로또가_더있는경우_테스트() {
-        int amountOfCustom = 3;
-        LottoTickets lottoTickets = new LottoTickets(amountOfCustom);
-
-        assertThat(lottoTickets.needMoreCustomLottoTicket()).isTrue();
+        assertThat(new LottoTickets(lottoTickets)).isEqualTo(new LottoTickets(lottoTickets));
     }
 }
