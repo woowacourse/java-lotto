@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.Exceptions.ExceptionMessages;
 import lotto.domain.Exceptions.LottoTicketException;
 import lotto.domain.TicketModel.LottoCreator;
 import lotto.domain.TicketModel.Ticket;
@@ -39,7 +40,7 @@ public class UserLottos {
 
     private void validate(int count, List<List<Integer>> manualNumbers) {
         if (count != manualNumbers.size()) {
-            throw new LottoTicketException();
+            throw new LottoTicketException(ExceptionMessages.TICKET.message());
         }
     }
 

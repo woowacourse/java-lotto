@@ -1,5 +1,6 @@
 package lotto.domain.TicketModel;
 
+import lotto.domain.Exceptions.ExceptionMessages;
 import lotto.domain.Exceptions.LottoNumberException;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class LottoNumbers {
 
     private void validate(List<Integer> numbers) {
         if (!LottoNumberManager.check(numbers)) {
-            throw new LottoNumberException();
+            throw new LottoNumberException(ExceptionMessages.NUMBER.message());
         }
     }
 
