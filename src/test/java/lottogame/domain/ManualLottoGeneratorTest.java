@@ -1,6 +1,6 @@
 package lottogame.domain;
 
-import lottogame.utils.InvalidLottoNumberException;
+import lottogame.lottogameexception.InvalidLottoNumberException;
 import lottogame.utils.LottoNumbersParser;
 import org.junit.jupiter.api.Test;
 

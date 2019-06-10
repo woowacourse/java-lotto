@@ -1,6 +1,6 @@
 package lottogame.domain;
 
-import lottogame.utils.InvalidLottoPriceException;
+import lottogame.lottogameexception.InvalidLottoPriceException;
 
 public class Money {
     private static final int MIN_NUMBER_OF_MANUAL_TICKET = 0;
@@ -10,14 +10,14 @@ public class Money {
     private final int price;
 
     public Money(int price) {
-        if (!isValidatePrice(price)) {
-            throw new InvalidLottoPriceException("구입금액을 다시 입력해 주세요.");
-        }
+        checkValidPrice(price);
         this.price = price;
     }
 
-    private boolean isValidatePrice(int price) {
-        return (price % ONE_LOTTO_PRICE == 0) && (price >= ONE_LOTTO_PRICE);
+    private void checkValidPrice(int price) {
+        if ((price % ONE_LOTTO_PRICE == 0) && (price >= ONE_LOTTO_PRICE)) {
+            throw new InvalidLottoPriceException("구입금액을 다시 입력해 주세요.");
+        }
     }
 
     public int getNumberOfTicket() {
