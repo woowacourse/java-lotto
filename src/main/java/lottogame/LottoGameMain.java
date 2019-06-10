@@ -15,7 +15,7 @@ public class LottoGameMain {
         WinningLotto winningLotto = createWinningLotto();
 
         LottoResult lottoResult = LottoResultGenerator.create(lottoTickets, winningLotto);
-        OutputView.printLottoResult(lottoResult, money);
+        OutputView.printLottoResult(lottoResult, lottoResult.getRateOfLotto(money));
     }
 
     private static Money getMoney() {
@@ -64,7 +64,7 @@ public class LottoGameMain {
         WinningLotto winningLotto;
         Lotto lotto;
         do {
-            lotto = ManualLottoGenerator.create(InputView.getWinningLotto());
+            lotto = LottoGenerator.create(InputView.getWinningLotto());
         } while (lotto == null);
         do {
             winningLotto = WinningLotto.generate(lotto, InputView.getBonusNumber());

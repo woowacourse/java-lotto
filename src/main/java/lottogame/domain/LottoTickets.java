@@ -33,7 +33,7 @@ public class LottoTickets {
     }
 
     public void addManualLotto(String manualLotto) {
-        Lotto lotto = ManualLottoGenerator.create(manualLotto);
+        Lotto lotto = LottoGenerator.create(manualLotto);
         if(lotto != null){
             lottos.add(lotto);
         }
@@ -44,7 +44,7 @@ public class LottoTickets {
     }
 
     public void createAutoLottos() {
-        lottos.add(AutoLottoGenerator.create());
+        lottos.add(LottoGenerator.create());
     }
 
     public boolean isPossibleCreateLottoNumberOf(int numberOfTicket) {

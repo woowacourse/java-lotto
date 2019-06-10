@@ -1,5 +1,6 @@
 package lottogame.utils;
 
+import lottogame.lottogameexception.InvalidLottoNumberException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -20,6 +21,6 @@ public class LottoNumbersParserTest {
     @Test
     void 정수를_입력하지_않았을_경우_예외_처리() {
         String input = "a,2,3,4,5,6";
-        assertThrows(NumberFormatException.class,()->LottoNumbersParser.parse(input));
+        assertThrows(InvalidLottoNumberException.class,()->LottoNumbersParser.parse(input));
     }
 }

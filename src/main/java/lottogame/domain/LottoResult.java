@@ -20,12 +20,7 @@ public class LottoResult {
         return money.rateOf(profits);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Rank rank : result.keySet()) {
-            stringBuilder.append(rank).append(result.get(rank)).append("개\n");
-        }
-        return stringBuilder.toString();
+    public int getNumberOfMatch(Rank rank) {
+        return result.get(rank);
     }
 }

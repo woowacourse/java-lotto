@@ -21,6 +21,14 @@ public enum Rank {
         this.prize = prize;
     }
 
+    public int getNumberOfMatch() {
+        return numberOfMatch;
+    }
+
+    public long getPrize() {
+        return prize;
+    }
+
     public static Rank valueOf(int numberOfMatch, boolean bonusBallMatch) {
         if (numberOfMatch < MIN_MATCH_NUMBER || numberOfMatch > MAX_MATCH_NUMBER) {
             throw new IllegalArgumentException("올바른 매칭 개수가 아닙니다.");
@@ -40,13 +48,5 @@ public enum Rank {
 
     public long sumPrizeOf(Integer numberOfMatch) {
         return prize * numberOfMatch;
-    }
-
-    @Override
-    public String toString() {
-        if (this == SECOND) {
-            return numberOfMatch + "개 일치, 보너스 볼 일치(" + prize + "원) - ";
-        }
-        return numberOfMatch + "개 일치 (" + prize + "원) - ";
     }
 }
