@@ -12,17 +12,19 @@
     <title>로또</title>
 </head>
 <body>
-<form>
+<form action="input.html" method="post">
     <div class="form-group">
-        <label for="inputPayment">구입금액을 입력해주세요</label>
-        <input type="text" class="form-control" id="inputPayment" aria-describedby="emailHelp" placeholder="구입 금액">
-        <small id="paymentHelp" class="form-text text-muted">로또 하나당 가격은 1000원 입니다</small>
+        <label for="inputPayment">{{paymentMessage}}</label>
+        <input type="text" class="form-control" id="inputPayment" aria-describedby="emailHelp" placeholder="구입 금액"
+               name="payment">
+        <small id="paymentHelp" class="form-text text-muted">로또 하나당 가격은 {{lottoPrice}}원 입니다</small>
     </div>
     <div class="form-group">
-        <label for="inputCountOfManualLotto">로또번호를 수동으로 생성할 로또의 개수를 입력해주세요</label>
-        <input type="text" class="form-control" id="inputCountOfManualLotto" placeholder="개수">
+        <label for="inputCountOfManualLotto">{{countOfManualLottoMessage}}</label>
+        <input type="text" class="form-control" id="inputCountOfManualLotto" placeholder="개수" name="countOfManualLotto">
         <small id="countOfManualLottoHelp" class="form-text text-muted">총 로또개수 이하의 숫자를 입력하세요</small>
     </div>
+
     <button type="submit" class="btn btn-primary">다음</button>
 </form>
 

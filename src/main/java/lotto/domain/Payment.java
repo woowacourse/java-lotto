@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 
 public class Payment {
-    private static final int LOTTO_PRICE = 1_000;
+    public static final int LOTTO_PRICE = 1_000;
 
     private final int payment;
 
