@@ -4,6 +4,7 @@ import lotto.domain.LottoResult;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static lotto.domain.Rank.*;
@@ -23,6 +24,21 @@ public class LottoResultDAO {
         pstmt.setString(3, lottoResult.getEarning().toString());
         pstmt.setString(4, lottoResult.getEarningsRate().toString());
         pstmt.executeUpdate();
+    }
+
+    public LottoResultDTO findByLottoId(String lottoId) throws SQLException {
+        String query = "SELECT * FROM lottoresult WHERE lotto_id = ?";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setString(1, lottoId);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (!rs.next()) return null;
+
+        LottoResultDTO lottoResultDTO = new LottoResultDTO();
+        lottoResultDTO.setLottoResult(rs.getString("lotto_result"));
+        lottoResultDTO.setEarningAmount(rs.getString("winning_amount"));
+        lottoResultDTO.setEarningRate(rs.getString("earning_rate"));
+        return lottoResultDTO;
     }
 
     private String formatLottoResult(LottoResult lottoResult) {
