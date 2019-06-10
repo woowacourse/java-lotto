@@ -1,5 +1,6 @@
 package lotto.domain.lottogenerator;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +13,7 @@ public class ManualLottoGeneratingStrategy implements LottoGeneratingStrategy {
         if (Objects.isNull(inputLottoNumbers) || inputLottoNumbers.isEmpty()) {
             throw new NullPointerException();
         }
-        this.inputLottoNumbers = inputLottoNumbers;
+        this.inputLottoNumbers = new ArrayList<>(inputLottoNumbers);
     }
 
     @Override
