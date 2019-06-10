@@ -17,10 +17,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoDAOTest {
     private LottoDAO lottoDAO;
     private Lottos lottos;
+    private String lottoId;
 
     @BeforeEach
-    public void setup_db() {
+    public void setup_db() throws  SQLException {
         lottoDAO = new LottoDAO(DBManager.getConnection());
+        lottoId = lottoDAO.getRound().toString();
     }
 
     @BeforeEach
@@ -56,16 +58,16 @@ public class LottoDAOTest {
 
     @Test
     void test1_로또_추가() throws SQLException {
-        lottoDAO.addLottos("1", lottos);
+        lottoDAO.addLottos(lottoId, lottos);
     }
 
     @Test
     void test2_로또_검색() throws SQLException {
-        assertThat(lottos).isEqualTo(lottoDAO.findByLottoId("1"));
+        assertThat(lottos).isEqualTo((lottoDAO.findByLottoId(lottoId)).getLottos());
     }
 
     @Test
     void test3_로또_삭제() throws SQLException {
-        lottoDAO.deleteLotto("1");
+        lottoDAO.deleteLotto(lottoId);
     }
 }

@@ -29,7 +29,7 @@ public class LottoDAO {
         pstmt.executeUpdate();
     }
 
-    public Lottos findByLottoId(String lottoId) throws SQLException {
+    public LottosDTO findByLottoId(String lottoId) throws SQLException {
         String query = "SELECT * FROM lotto WHERE lotto_id = ?";
         PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setString(1, lottoId);
@@ -37,12 +37,20 @@ public class LottoDAO {
 
         if (!rs.next()) return null;
 
+        List<Lotto> lottos = makeLottos(rs.getString("lottos").split("\n"));
+
+        LottosDTO lottosDTO = new LottosDTO();
+        lottosDTO.setLottos(new Lottos(lottos));
+        return lottosDTO;
+    }
+
+    private List<Lotto> makeLottos(String[] stringLottos) {
         List<Lotto> lottos = new ArrayList<>();
-        for (String lotto : rs.getString("lottos").split("\n")) {
+        for (String lotto : stringLottos) {
             lotto = lotto.substring(1, lotto.lastIndexOf("]"));
             lottos.add(new Lotto(ConvertLottoNumber.run(lotto)));
         }
-        return new Lottos(lottos);
+        return lottos;
     }
 
     public void deleteLotto(String lottoId) throws SQLException {
