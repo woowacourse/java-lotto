@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class OutputView {
-    public static void printResult(Result result, Payment payment) {
+    public static void printResult(Result result, double earningRate) {
         System.out.println("당첨 통계");
         System.out.println("--------");
         Arrays.stream(Rank.values())
@@ -21,7 +21,7 @@ public class OutputView {
                         NumberFormat.getInstance().format(rank.getWinningMoney()),
                         result.get(rank))));
 
-        System.out.println(String.format("총 수익률은 %.2f입니다.", result.calculateEarningsRate(payment)));
+        System.out.println(String.format("총 수익률은 %.2f입니다.", earningRate));
     }
 
     public static void printLotto(CountOfLotto countOfLotto, LottoTickets lottoTickets) {

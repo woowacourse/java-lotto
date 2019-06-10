@@ -25,7 +25,7 @@ public class ConsoleUILottoApplication {
         WinningLotto winningLotto = inputWinningLotto();
 
         Result result = new Result(winningLotto, lottoTickets);
-        OutputView.printResult(result, payment);
+        OutputView.printResult(result, result.calculateEarningsRate(payment));
     }
 
     private static Payment inputPayment() {
