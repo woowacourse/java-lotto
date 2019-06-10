@@ -2,47 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
     <title>로또</title>
 </head>
 <body>
-<form action="/manualLotto" method="post">
-<tr class="lotto" height="30">
-    <div class="input-group input-group-lg">
-        <td>
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="purchase-price">구입 금액</span>
-        </div>
-        </td>
-        <td>
-        <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required="true" min="1000" max="100000" name="price" id="price" onchange="isValidInput()" />
-        &nbsp;&nbsp;
-        <span id="validCheck"></span>
-        </td>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">이번 회차 로또 구매</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">지난 회차 결과 조회</a>
+            </li>
+        </ul>
     </div>
-</tr>
-<tr class="lotto" height="30">
-    <div class="input-group input-group-lg">
-        <td>
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="manual-count">수동 구매 개수</span>
-        </div>
-        </td>
-        <td>
-        <input type="number" required="true" name="manualCount" id="manualCount" onchange="isValidInput()" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-        </td>
-    </div>
-    <td>
-        <span id="manualCountMessage"></span>
-    </td>
-</tr>
-    <br />
-    <div id="container">
+    <div class="card-body">
+        <form action="/manualLotto" method="post">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <tr class="lotto" height="30">
+                            <div class="input-group input-group-lg">
+                                <td>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="purchase-price">구입 금액</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" aria-label="Sizing example input"
+                                           aria-describedby="inputGroup-sizing-lg" required="true" min="1000"
+                                           max="100000"
+                                           name="price" id="price" onchange="isValidInput()"/>
+                                    &nbsp;&nbsp;
+                                    <span id="validCheck"></span>
+                                </td>
+                            </div>
+                        </tr>
+                    </div>
+                    <div class="col">
+                        <tr class="lotto" height="30">
+                            <div class="input-group input-group-lg">
+                                <td>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="manual-count">수동 구매 개수</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="number" required="true" name="manualCount" id="manualCount"
+                                           onchange="isValidInput()" class="form-control"
+                                           aria-label="Sizing example input"
+                                           aria-describedby="inputGroup-sizing-lg">
+                                </td>
+                            </div>
+                            <td>
+                                <span id="manualCountMessage"></span>
+                            </td>
+                        </tr>
+                    </div>
+                </div>
+                <br/>
+                <div id="container" style="max-height: 300px; overflow-y: scroll;">
 
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">다음으로</button>
+                <button type="submit" class="btn btn-secondary btn-lg" onclick="cancel()">초기화</button>
+            </div>
+        </form>
     </div>
-<button type="submit" class="btn btn-primary btn-lg">구매</button>
-<button type="submit" class="btn btn-secondary btn-lg" onclick="cancel()">초기화</button>
-</form>
+</div>
 
 <script>
     function isValidInput() {
@@ -109,6 +141,8 @@
         div.id = "container" + i;
         return div;
     }
+
+
 </script>
 </body>
 </html>
