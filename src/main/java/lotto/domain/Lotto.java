@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
     private static final int SIZE_OF_LOTTO_NUMBERS = 6;
@@ -14,8 +15,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto create(LottoNumberGenerator lottoNumberGenerator) {
-        return new Lotto(lottoNumberGenerator.generateNumbers());
+    public static Lotto create(LottoNumbersGenerator lottoNumbersGenerator) {
+        return new Lotto(lottoNumbersGenerator.generateNumbers());
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -52,6 +53,19 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override

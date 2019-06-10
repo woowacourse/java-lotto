@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ManualLottoNumberGenerator implements LottoNumberGenerator {
+public class ManualLottoNumbersGenerator implements LottoNumbersGenerator {
     private final List<Integer> lottoNumbers;
 
-    public ManualLottoNumberGenerator(List<Integer> lottoNumbers) {
+    public ManualLottoNumbersGenerator(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

@@ -11,8 +11,8 @@ public class LottosTest {
     @Test
     void matchTest() {
         Lottos lottos = new Lottos(Arrays.asList(
-                Lotto.create(new ManualLottoNumberGenerator(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                Lotto.create(new ManualLottoNumberGenerator(Arrays.asList(1, 2, 3, 4, 5, 7)))
+                Lotto.create(new ManualLottoNumbersGenerator(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                Lotto.create(new ManualLottoNumbersGenerator(Arrays.asList(1, 2, 3, 4, 5, 7)))
         ));
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 

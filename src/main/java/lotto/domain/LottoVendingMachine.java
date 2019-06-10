@@ -12,18 +12,18 @@ public class LottoVendingMachine {
         return userLottos.add(createRandomLottos(lottoCount.random()));
     }
 
-    public static Lottos createRandomLottos(int numOfLottos) {
+    private static Lottos createRandomLottos(int numOfLottos) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < numOfLottos; i++) {
-            lottos.add(Lotto.create(new RandomLottoNumberGenerator()));
+            lottos.add(Lotto.create(new RandomLottoNumbersGenerator()));
         }
         return new Lottos(lottos);
     }
 
-    public static Lottos createCustomLottos(List<List<Integer>> numbers) {
+    private static Lottos createCustomLottos(List<List<Integer>> numbers) {
         List<Lotto> lottos = new ArrayList<>();
         for (List<Integer> integers : numbers) {
-            lottos.add(Lotto.create(new ManualLottoNumberGenerator(integers)));
+            lottos.add(Lotto.create(new ManualLottoNumbersGenerator(integers)));
         }
         return new Lottos(lottos);
     }

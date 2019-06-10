@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 
-public class RandomLottoNumberGenerator implements LottoNumberGenerator {
+public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     @Override
     public List<LottoNumber> generateNumbers() {
         List<LottoNumber> possibleNumbers = new ArrayList<>();

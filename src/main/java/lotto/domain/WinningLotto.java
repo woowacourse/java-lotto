@@ -7,7 +7,7 @@ public class WinningLotto {
     private final LottoNumber bonusBall;
 
     public WinningLotto(List<Integer> numbers, int bonus) {
-        this.lotto = Lotto.create(new ManualLottoNumberGenerator(numbers));
+        this.lotto = Lotto.create(new ManualLottoNumbersGenerator(numbers));
         if (numbers.contains(bonus)) {
             throw new InvalidBonusBallException("보너스 볼은 당첨 번호에 포함되면 안 됩니다.");
         }
