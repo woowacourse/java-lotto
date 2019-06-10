@@ -2,10 +2,10 @@ package lotto.domain.lotto.dto;
 
 public class PrizeInfoDTO {
     private final int matchCount;
-    private final int prizeMoney;
+    private final long prizeMoney;
     private final int lottoCount;
 
-    public PrizeInfoDTO(int matchCount, int prizeMoney, int lottoCount) {
+    public PrizeInfoDTO(int matchCount, long prizeMoney, int lottoCount) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
         this.lottoCount = lottoCount;
@@ -15,7 +15,7 @@ public class PrizeInfoDTO {
         return matchCount;
     }
 
-    public int getPrizeMoney() {
+    public long getPrizeMoney() {
         return prizeMoney;
     }
 

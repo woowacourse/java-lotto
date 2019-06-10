@@ -21,9 +21,8 @@ public class Money {
         return new Money(money);
     }
 
-
     public double calculatePercentage(double sum) {
-        return sum / (double) money * (double) HUNDRED;
+        return sum / money * HUNDRED;
     }
 
     public int getLottoCount() {

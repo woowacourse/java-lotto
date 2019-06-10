@@ -3,19 +3,19 @@ package lotto.domain.money;
 import java.util.Arrays;
 
 public enum Prize {
-    FIRST(6, 2000000000, false),
-    SECOND(5, 30000000, true),
-    THIRD(5, 1500000, false),
-    FOURTH(4, 50000, false),
-    FIFTH(3, 5000, false),
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
     MISS(0, 0, false);
 
     private static int MATCH_NUMBER_LIMIT_TO_HAVE_PRIZE = 3;
     private int matchCount;
-    private int prizeMoney;
+    private long prizeMoney;
     private boolean hasBonusNumber;
 
-    Prize(int matchCount, int prizeMoney, boolean hasBonusNumber) {
+    Prize(int matchCount, long prizeMoney, boolean hasBonusNumber) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
         this.hasBonusNumber = hasBonusNumber;
@@ -33,7 +33,7 @@ public enum Prize {
 
     }
 
-    public int getPrizeMoney() {
+    public long getPrizeMoney() {
         return prizeMoney;
     }
 
