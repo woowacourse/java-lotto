@@ -65,7 +65,7 @@ public class OutputView {
         }
     }
 
-    private static String getRankResult(Map<Rank, ResultCounter> lottoResult, Rank rank) {
+    public static String getRankResult(Map<Rank, ResultCounter> lottoResult, Rank rank) {
         return String.format("%d개 일치%s (%d원) - %s개",
                 rank.getMatchCount(), rankAdditional(rank), rank.getPrize(), lottoResult.get(rank));
     }

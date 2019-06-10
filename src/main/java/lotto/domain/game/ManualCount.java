@@ -27,7 +27,7 @@ public class ManualCount {
         return COUNT_LOWER_BOUND <= manualCount && EQUAL_OR_UNDER <= totalCount.compareTo(manualCount);
     }
 
-    public Count getAutoCount(Count count) {
+    public Count autoCount(Count count) {
         return new Count(count.subtract(this.count));
     }
 

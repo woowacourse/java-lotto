@@ -65,7 +65,7 @@ public class InputView {
 
 
     public static TotalLottoGames getTotalLottoGames(Count totalCount, ManualCount manualCount) {
-        TotalLottoGames totalLottoGames = new TotalLottoGames(manualCount.getAutoCount(totalCount));
+        TotalLottoGames totalLottoGames = new TotalLottoGames(manualCount.autoCount(totalCount));
         OutputView.manualNumbers(manualCount);
         for (int indicator = 1; manualCount.isUnder(indicator); indicator++) {
             List<Number> lottoNumbers = getManualNumbers(indicator);

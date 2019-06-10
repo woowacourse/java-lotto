@@ -21,6 +21,6 @@ class ManualCountTest {
     @Test
     void getAutoCount() {
         Count count = new Count(PurchaseAmount.of(7000));
-        assertThat(ManualCount.is(5, count).getAutoCount(count)).isEqualTo(new Count(2));
+        assertThat(ManualCount.is(5, count).autoCount(count)).isEqualTo(new Count(2));
     }
 }
