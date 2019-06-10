@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
@@ -37,7 +38,7 @@ public class Lotto {
     }
 
     public static Lotto of(Set<Integer> numbers) {
-        Set<Integer> lotto = new LinkedHashSet<>();
+        Set<Integer> lotto = new TreeSet<>();
         for (Integer number : numbers) {
             lotto.add(number);
         }
@@ -45,7 +46,7 @@ public class Lotto {
     }
 
     public static Lotto of(Integer... numbers) {
-        Set<Integer> lotto = new LinkedHashSet<>();
+        Set<Integer> lotto = new TreeSet<>();
         for (Integer number : numbers) {
             lotto.add(number);
         }
@@ -58,7 +59,7 @@ public class Lotto {
         }
 
         String[] values = text.split(",");
-        Set<Integer> lotto = new LinkedHashSet<>();
+        Set<Integer> lotto = new TreeSet<>();
         for (String value : values) {
             lotto.add(Integer.parseInt(value.trim()));
         }
