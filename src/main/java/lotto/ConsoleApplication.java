@@ -11,7 +11,8 @@ public class ConsoleApplication {
 	private static final int START_COUNT = 0;
 
 	public static void main(String[] args) {
-		LottoService service = new LottoService(InputView.inputBuyMoney());
+		LottoService service = new LottoService();
+		service.charge(InputView.inputBuyMoney());
 
 		int manualPurchaseCount = assignManualPurchaseCount(service);
 		int autoPurchaseCount = assignAutoPurchaseCount(service);

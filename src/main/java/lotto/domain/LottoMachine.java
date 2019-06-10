@@ -7,11 +7,15 @@ public class LottoMachine {
 
     private int remainMoney;
 
-    LottoMachine(final int money) {
+    LottoMachine() {
+        remainMoney = 0;
+    }
+
+    void charge(final int money) {
         if (money < LOTTO_MONEY) {
             throw new LackOfMoneyException("1000원 이상 구매하세요");
         }
-        remainMoney = money;
+        remainMoney += money;
     }
 
     void buy() {

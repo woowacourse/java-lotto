@@ -22,8 +22,9 @@ class LottoServiceTest {
     @BeforeEach
     public void setUp() {
         lottoFactory = new LottoFactory();
-        buyer = new LottoService(MONEY);
+        buyer = new LottoService();
 
+        buyer.charge(MONEY);
         buyer.buy(lottoFactory.create(FIFTH_NUMBERS));
         while (buyer.canBuy()) {
             buyer.buy(lottoFactory.create(MISS_NUMBERS));

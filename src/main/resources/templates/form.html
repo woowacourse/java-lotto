@@ -25,32 +25,17 @@
       <nav>
             <h3>구입 금액 입력</h3>
       </nav>
-      <!-- <form action="/money" method="post">
+
+      <form action="/money" method="post">
             <div class="money">
                   <label>구입 금액 : </label>
                   <input type="text" name="money" />
+                  <input type="submit" value="충전" />
             </div>
       </form>
-
-      <div class="test">
-            <label> {{money}} </label>
-      </div> -->
-
       <form action="/lottos" method="post">
-            <div class="money">
-                  <label>구입 금액 : </label>
-                  <input type="text" name="money" />
-            </div>
             <div class="lottobuy">
-                  <!-- <input type="text" name="number1" maxlength="2" />
-                  <input type="text" name="number2" maxlength="2" />
-                  <input type="text" name="number3" maxlength="2" />
-                  <input type="text" name="number4" maxlength="2" />
-                  <input type="text" name="number5" maxlength="2" />
-                  <input type="text" name="number6" maxlength="2" />
-                  <label>보너스 번호 </label>
-                  <input type="text" name="bonus" maxlength="2" /> -->
-                  <input type="text" name="lotto" value="1,2,3,4,5,6" maxlength="20"/>
+                  <input type="text" name="lotto" value="1,2,3,4,5,6" maxlength="20" />
                   <label><strong>ex) 1,2,3,4,5,6 으로 입력해주세요</strong></label>
                   <br />
                   <br />
@@ -61,16 +46,6 @@
       <div class="printCount">
             <label> 수동으로 {{manualCount}} 번, 자동으로 {{autoCount}} 번 구매했습니다. </label>
       </div>
-      <!-- <div class="test">
-            <label> {{number1}} </label>
-            <label> {{number2}} </label>
-            <label> {{number3}} </label>
-            <label> {{number4}} </label>
-            <label> {{number5}} </label>
-            <label> {{number6}} </label>
-            <label> {{bonus}} </label>
-      </div> -->
-
 
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->

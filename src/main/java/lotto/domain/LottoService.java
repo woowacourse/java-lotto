@@ -6,9 +6,13 @@ public class LottoService {
     private final LottoMachine lottoMachine;
     private final Lottos lottos;
 
-    public LottoService(final int money) {
-        lottoMachine = new LottoMachine(money);
+    public LottoService() {
+        lottoMachine = new LottoMachine();
         lottos = new Lottos();
+    }
+
+    public void charge(final int money) {
+        lottoMachine.charge(money);
     }
 
     public void buy(final Lotto lotto) {

@@ -15,7 +15,8 @@ public class LottoMachineTest {
 
     @BeforeEach
     public void setUp() {
-        machine = new LottoMachine(5500);
+        machine = new LottoMachine();
+        machine.charge(5500);
         lottoFactory = new LottoFactory();
     }
 
@@ -30,7 +31,7 @@ public class LottoMachineTest {
     @Test
     public void 설정_금액_이하_구매시_예외발생하는지_확인() {
         assertThatExceptionOfType(LackOfMoneyException.class).isThrownBy(() -> {
-            new LottoMachine(500);
+            new LottoMachine().charge(500);
         });
     }
 }
