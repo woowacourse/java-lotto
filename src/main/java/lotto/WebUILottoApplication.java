@@ -22,7 +22,6 @@ import static spark.Spark.post;
 
 public class WebUILottoApplication {
     private static Money money;
-    private static LottoResult lottoResult;
 
     private static LottosDao lottosDao = new LottosDao();
     private static WinningLottoDao winningLottoDao = new WinningLottoDao();
@@ -45,7 +44,7 @@ public class WebUILottoApplication {
             lottosDao.addLottos(lottos, times);
 
             try {
-                return lottos.getLottos();
+                return lottosDao.findByTimes(times + 1).getLottos();
             } catch (Exception e) {
                 return "Error: " + e.getMessage();
             }
@@ -65,7 +64,9 @@ public class WebUILottoApplication {
 
             winningLottoDao.addWinningLotto(winningLotto);
 
-            // lottoResult  = new LottoResult(lottos.getLottos(), winningLotto);
+            int times = winningLottoDao.countWinningLottoTimes();
+            Lottos lottos = lottosDao.findByTimes(times);
+            LottoResult lottoResult  = new LottoResult(lottos.getLottos(), winningLotto);
 
             Gson gson = new GsonBuilder().create();
             String json = gson.toJson(lottoResult.getLottoResult());
@@ -74,6 +75,9 @@ public class WebUILottoApplication {
         });
 
         get("/lottoYield", (req, res) -> {
+            int latelyTimes = winningLottoDao.countWinningLottoTimes();
+            LottoResult lottoResult = createLottoResult(latelyTimes);
+
             double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
 
             return result;
@@ -81,8 +85,7 @@ public class WebUILottoApplication {
 
         get("/lottoTimes/:Times", (req, res) -> {
             int times = Integer.parseInt(req.params(":Times"));
-            WinningLotto winningLotto = winningLottoDao.findByTimes(times);
-
+            LottoResult lottoResult = createLottoResult(times);
 
             double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
 
@@ -118,5 +121,11 @@ public class WebUILottoApplication {
         String bonus = pairs.get(0).getValue();
         Number number = Number.valueOf(Integer.parseInt(bonus));
         return new WinningLotto(lotto, number);
+    }
+
+    private static LottoResult createLottoResult(int times) throws Exception {
+        Lottos lottos = lottosDao.findByTimes(times);
+        WinningLotto winningLotto = winningLottoDao.findByTimes(times);
+        return new LottoResult(lottos.getLottos(), winningLotto);
     }
 }
