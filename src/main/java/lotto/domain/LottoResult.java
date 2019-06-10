@@ -37,6 +37,6 @@ public class LottoResult {
     }
 
     public Map<Rank, Integer> results() {
-        return results;
+        return new TreeMap<>(results);
     }
 }
