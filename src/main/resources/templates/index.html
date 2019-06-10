@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <link href="../css/index.css" rel="stylesheet" type="text/css" /> -->
+    <link href="/css/index.css" rel="stylesheet" type="text/css" />
     <title>로또</title>
 </head>
 <body>
-Hello World!!
+    <div id="money-area">
+        <p>로또 구입 금액을 입력하세요.</p>
+        <input id="money-input" type="number" placeholder="1000원 이상 입력하세요" step="1000" autofocus onKeyDown="onKeyDownMoney()">
+        <button id="money-btn" onclick="clickMoneyInput()">구매하기</button>
+        <p id="lottocount-area" style="display:none">
+            로또를 총 <span id="lottocount-text">temp</span>개 구매할 수 있습니다.
+        </p>
+    </div>
+    <!-- <script src="../javascript/moneyFunc.js"></script> -->
+    <script src="/javascript/moneyFunc.js"></script>
 </body>
 </html>
