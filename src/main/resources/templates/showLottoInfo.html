@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+<h1>지난 로또 정보</h1>
+<br/>
+회차: {{lottoId}} <br/>
+<br/>
+구매한 로또 <br/>
+{{#lottos.lottos.lottos}}
+{{this}} <br/>
+{{/lottos.lottos.lottos}}
+<br/>
+<br/>
+지난 당첨 로또 번호: {{winningLotto.winningLotto.winningLotto}} <br/>
+지난 보너스 번호: {{winningLotto.winningLotto.bonusNumber}} <br/>
+<br/>
+당첨 결과: {{lottoResult.lottoResult}} <br/>
+당첨 금액: {{lottoResult.earningAmount}} <br/>
+수익률: {{lottoResult.earningRate}}% <br/>
+
+<br/><br/>
+<input type="button" value="뒤로가기" onclick="history.back(-1);">
+
+</body>
+</html>

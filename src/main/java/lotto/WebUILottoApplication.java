@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.dao.DBManager;
-import lotto.dao.LottoDAO;
-import lotto.dao.LottoResultDAO;
-import lotto.dao.WinningLottoDAO;
+import lotto.dao.*;
 import lotto.domain.*;
 import lotto.util.ConvertLottoNumber;
 import spark.ModelAndView;
@@ -25,6 +22,35 @@ public class WebUILottoApplication {
     public static void main(String[] args) {
         staticFiles.location("/static");
         Connection connection = DBManager.getConnection();
+
+        get("/show", (req, res) -> {
+            List<String> rounds = new ArrayList<>();
+            for (Integer i = 1; i < getRound(connection); i++) {
+                rounds.add(i.toString());
+            }
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("rounds", rounds);
+            return render(model, "show.html");
+        });
+
+        get("/showLottoInfo", (req, res) -> {
+            String lottoId = req.queryParams("lottoId");
+
+            LottoDAO lottoDAO = new LottoDAO(connection);
+            WinningLottoDAO winningLottoDAO = new WinningLottoDAO(connection);
+            LottoResultDAO lottoResultDAO = new LottoResultDAO(connection);
+            LottosDTO lottosDTO = lottoDAO.findByLottoId(lottoId);
+            WinningLottoDTO winningLottoDTO = winningLottoDAO.findByLottoId(lottoId);
+            LottoResultDTO lottoResultDTO = lottoResultDAO.findByLottoId(lottoId);
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("lottoId", lottoId);
+            model.put("lottos", lottosDTO);
+            model.put("winningLotto", winningLottoDTO);
+            model.put("lottoResult", lottoResultDTO);
+            return render(model, "showLottoInfo.html");
+        });
 
         post("/winningLotto", (req, res) -> {
             Money money = new Money(Integer.parseInt(req.queryParams("money")));
@@ -70,6 +96,11 @@ public class WebUILottoApplication {
         LottoDAO lottoDAO = new LottoDAO(connection);
         round = lottoDAO.getRound();
         lottoDAO.addLottos(round.toString(), lottos);
+    }
+
+    private static Integer getRound(Connection connection) throws SQLException {
+        LottoDAO lottoDAO = new LottoDAO(connection);
+        return lottoDAO.getRound();
     }
 
     private static void loadWinningLottoTable(Connection connection, WinningLotto winningLotto)
