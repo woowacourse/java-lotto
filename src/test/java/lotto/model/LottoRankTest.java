@@ -11,7 +11,7 @@ public class LottoRankTest {
         }
 
         @Test
-        void 로또_등수_추출_검사() {
+        void 등수_추출_검사() {
                 assertThat(LottoRank.getLottoRank(5, true)).isEqualTo(LottoRank.SECOND);
         }
 }

@@ -12,7 +12,7 @@ public enum LottoRank {
         private int matchNumber;
         private int prizes;
 
-        LottoRank(int matchNumber, int prizes) {
+        private LottoRank(int matchNumber, int prizes) {
                 this.matchNumber = matchNumber;
                 this.prizes = prizes;
         }

@@ -12,7 +12,6 @@ public class OutputView {
         private static final int MATCH_NUMBER_SIX = 6;
         private static final String PRINT_STATS_FORMAT = "%d개 일치 (%d원)- %d개\n";
         private static final String PRINT_STATS_FORMAT_SECOND = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
-        private static final int LOTTO_PRICE = 1000;
 
         public static void printPurchaseLottos(List<Lotto> lottos) {
 
@@ -44,11 +43,11 @@ public class OutputView {
         }
 
         public static void printYield(Yield yield) {
-                System.out.println("총 수익률은 " + yield.getRate() * 100 + "%입니다.");
+                System.out.println("총 수익률은 " + yield.getRate()*100 + "%입니다.");
         }
 
         public static void printPurchaseHistory(Payment payment, ManualPurchaseNumber manualPurchaseNumber) {
-                int autoPaymentNumber = (payment.getAmount() / LOTTO_PRICE) - manualPurchaseNumber.getNumber();
+                int autoPaymentNumber = (payment.getAmount() / Payment.LOTTO_PRICE) - manualPurchaseNumber.getNumber();
                 System.out.println("\n수동으로 " + manualPurchaseNumber.getNumber() + "장, " + "자동으로 " + autoPaymentNumber + "개를 구매했습니다.");
         }
 }

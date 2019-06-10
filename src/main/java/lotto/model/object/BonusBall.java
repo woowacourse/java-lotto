@@ -7,7 +7,7 @@ public class BonusBall {
                 this.lottoNumber = LottoNumber.getInstance(number);
         }
 
-        public boolean compareToLottoNumber(final LottoNumber lottoNumber){
+        public boolean IsSame(final LottoNumber lottoNumber){
                 return this.lottoNumber == lottoNumber;
         }
 }

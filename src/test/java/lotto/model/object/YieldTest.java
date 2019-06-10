@@ -1,33 +1,34 @@
 package lotto.model.object;
 
-import lotto.model.LottoRank;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.offset;
 
-
-class WinStatsTest {
+class YieldTest {
         @Test
-        void 당첨_통계_해당_등수_개수_추출_검사() {
+        void 수익률_생성_검사() {
+                Payment payment = new Payment(5000);
+
                 List<LottoNumber> lottoNumbers1 = new ArrayList<>();
-                lottoNumbers1.add(LottoNumber.getInstance(1));
-                lottoNumbers1.add(LottoNumber.getInstance(2));
                 lottoNumbers1.add(LottoNumber.getInstance(3));
                 lottoNumbers1.add(LottoNumber.getInstance(4));
                 lottoNumbers1.add(LottoNumber.getInstance(5));
                 lottoNumbers1.add(LottoNumber.getInstance(6));
+                lottoNumbers1.add(LottoNumber.getInstance(7));
+                lottoNumbers1.add(LottoNumber.getInstance(8));
                 Lotto purchasedLotto1 = new Lotto(lottoNumbers1);
 
                 List<LottoNumber> lottoNumbers2 = new ArrayList<>();
-                lottoNumbers2.add(LottoNumber.getInstance(10));
-                lottoNumbers2.add(LottoNumber.getInstance(2));
-                lottoNumbers2.add(LottoNumber.getInstance(3));
                 lottoNumbers2.add(LottoNumber.getInstance(4));
                 lottoNumbers2.add(LottoNumber.getInstance(5));
                 lottoNumbers2.add(LottoNumber.getInstance(6));
+                lottoNumbers2.add(LottoNumber.getInstance(7));
+                lottoNumbers2.add(LottoNumber.getInstance(8));
+                lottoNumbers2.add(LottoNumber.getInstance(9));
                 Lotto purchasedLotto2 = new Lotto(lottoNumbers2);
 
                 List<Lotto> purchasedLottos = new ArrayList<>();
@@ -42,6 +43,8 @@ class WinStatsTest {
 
                 WinStats winStats = new WinStats(purchasedLottos, winningInfo);
 
-                assertThat(winStats.getRankCount(LottoRank.SECOND)).isEqualTo(1);
+                Yield yield = new Yield(payment, winStats);
+
+                assertThat(yield.getRate()).isEqualTo(11, offset(0.0001));
         }
 }

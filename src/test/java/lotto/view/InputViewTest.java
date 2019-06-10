@@ -19,6 +19,15 @@ public class InputViewTest {
         }
 
         @Test
+        void 수동_구매_개수_입력_형식_검사() {
+                assertThrows(NumberFormatException.class, ()->{
+                        ByteArrayInputStream input = new ByteArrayInputStream("1 5".getBytes());
+                        System.setIn(input);
+                        InputView.inputManualPaymentNumber();
+                });
+        }
+
+        @Test
         void 당첨_번호_입력형식_검사() {
                 assertThrows(LottoNumberInputFormException.class, () -> {
                         ByteArrayInputStream input = new ByteArrayInputStream("1, 2, 3, 4, 5, 6,".getBytes());
@@ -42,15 +51,6 @@ public class InputViewTest {
                         ByteArrayInputStream input = new ByteArrayInputStream("1 5".getBytes());
                         System.setIn(input);
                         InputView.inputBonusBall();
-                });
-        }
-
-        @Test
-        void 수동_구매_개수_입력_형식_검사() {
-                assertThrows(NumberFormatException.class, ()->{
-                        ByteArrayInputStream input = new ByteArrayInputStream("1 5".getBytes());
-                        System.setIn(input);
-                        InputView.inputManualPaymentNumber();
                 });
         }
 }

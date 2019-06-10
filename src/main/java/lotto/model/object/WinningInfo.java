@@ -19,15 +19,7 @@ public class WinningInfo {
                 }
         }
 
-        public int getMatchNumber(final Lotto purchasedLotto) {
-                return purchasedLotto.getMatchNumber(winningLotto);
-        }
-
-        public boolean hasBonusBallIn(final Lotto purchasedLotto) {
-                return purchasedLotto.hasBonusBall(bonusBall);
-        }
-
-        public LottoRank getMatchRank(Lotto purchasedLotto) {
+        public LottoRank getMatchRank(final Lotto purchasedLotto) {
                 int matchNumber = purchasedLotto.getMatchNumber(winningLotto);
                 boolean hasBonusBall = purchasedLotto.hasBonusBall(bonusBall);
                 return LottoRank.getLottoRank(matchNumber, hasBonusBall);

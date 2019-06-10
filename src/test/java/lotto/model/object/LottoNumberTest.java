@@ -1,15 +1,15 @@
-package lotto.model.creator;
+package lotto.model.object;
 
 import lotto.model.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class BonusBallCreatorTest {
+class LottoNumberTest {
         @Test
-        void 보너스볼_범위_검사() {
+        void 로또_숫자_범위_검사() {
                 assertThrows(InvalidLottoNumberException.class, () -> {
-                        BonusBallCreator.create(55);
+                        LottoNumber.getInstance(46);
                 });
         }
 }
