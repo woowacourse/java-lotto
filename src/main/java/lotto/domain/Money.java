@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 /**
  * @author heebg
  * @version 1.0 2019-06-03
@@ -21,6 +23,10 @@ public class Money {
         return (money - manualCount * ONE_LOTTO_PRICE) / ONE_LOTTO_PRICE;
     }
 
+    public long generateLottoBuyCount() {
+        return money / ONE_LOTTO_PRICE;
+    }
+
     private void checkMoneyCondition() {
         if (money < MIN_MONEY_RANGE) {
             throw new IllegalArgumentException(EX_MONEY_MESSAGE);
@@ -35,5 +41,18 @@ public class Money {
 
     public float calculateRate(long jackpot) {
         return ((float) jackpot / (float) money);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money1 = (Money) o;
+        return money == money1.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }

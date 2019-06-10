@@ -41,4 +41,9 @@ class MoneyTest {
         Money rateMoney = new Money(8000);
         assertThat(rateMoney.calculateRate(5000)).isEqualTo(0.625f);
     }
+
+    @Test
+    void generateLottoBuyCount() {
+        assertThat(money.generateLottoBuyCount()).isEqualTo(3);
+    }
 }
