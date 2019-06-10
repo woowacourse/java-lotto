@@ -53,4 +53,8 @@ public class LottoCreator {
             throw new NullPointerException(ERROR_NULL_LOTTO_NUMBERS);
         }
     }
+
+    public static LottoNumber createBonusBall(Integer bonusBall) {
+        return new LottoNumber(bonusBall);
+    }
 }

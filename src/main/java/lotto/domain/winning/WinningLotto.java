@@ -20,7 +20,7 @@ public class WinningLotto {
         checkOverlapWithWinningNumbers(bonusBall, winningNumbers);
 
         this.winningLotto = LottoCreator.createManualTickets(winningNumbers);
-        this.bonusBall = new LottoNumber(bonusBall);
+        this.bonusBall = LottoCreator.createBonusBall(bonusBall);
     }
 
     private static void checkNullNumber(Integer number) {
