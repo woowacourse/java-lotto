@@ -10,7 +10,6 @@ public enum Rank {
     FIFTH(3, false, 5000),
     LOSE(2, false, 0);
 
-
     private final int match;
     private final boolean bonus;
     private final int money;
