@@ -12,7 +12,7 @@
     <title>로또</title>
 </head>
 <body>
-<form id="inputForm" method="post">
+<form id="inputForm" action="inputStep2.html" method="post">
 
 </form>
 
@@ -35,6 +35,7 @@
         input.setAttribute('id', 'inputLottoNumber');
         input.setAttribute('aria-describedby', 'emailHelp');
         input.setAttribute('placeholder', 'ex) 1, 2, 3, 4, 5, 6');
+        input.setAttribute('name', 'inputManualLottoNumber' + (i + 1));
 
         var small = document.createElement('small');
         small.setAttribute('id', 'lottoNumberHelp');
