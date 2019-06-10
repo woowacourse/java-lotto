@@ -36,12 +36,14 @@ public enum Rank {
             return MISS;
         }
 
+        Rank result = null;
         for (final Rank rank : values()) {
             if (rank.isMatchCount(countOfMatch) && rank.bonus.match(bonusNo)) {
-                return rank;
+                result = rank;
             }
         }
-        throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
+
+        return result;
     }
 
     private boolean isMatchCount(final int countOfMatch) {
