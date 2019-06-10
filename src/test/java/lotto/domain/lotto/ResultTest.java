@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.domain.paymentinfo.Payment;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,7 @@ public class ResultTest {
     @BeforeEach
     void setUp() {
         LottoRepository lottoRepository = new LottoRepository();
-        lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoRepository.add(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
         lottoTickets = new LottoTickets(lottoRepository);
 

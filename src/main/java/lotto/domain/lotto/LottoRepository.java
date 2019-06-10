@@ -1,8 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lottogenerator.LottoGeneratingStrategy;
-import lotto.domain.lottogenerator.LottoGenerator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,8 +11,8 @@ public class LottoRepository {
         this.lottos = new ArrayList<>();
     }
 
-    public void register(LottoGeneratingStrategy strategy) {
-        lottos.add(LottoGenerator.create(strategy));
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
     }
 
     public List<Lotto> getLottos() {

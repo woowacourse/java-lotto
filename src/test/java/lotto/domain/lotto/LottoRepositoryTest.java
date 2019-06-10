@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.domain.lottogenerator.RandomLottoGeneratingStrategy;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ class LottoRepositoryTest {
     @Test
     void 수동_로또_추가() {
         LottoRepository lottoRepository = new LottoRepository();
-        lottoRepository.register(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoRepository.add(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
@@ -23,7 +24,7 @@ class LottoRepositoryTest {
     @Test
     void 자동_로또_추가() {
         LottoRepository lottoRepository = new LottoRepository();
-        lottoRepository.register(new RandomLottoGeneratingStrategy());
+        lottoRepository.add(LottoGenerator.create(new RandomLottoGeneratingStrategy()));
 
         assertThat(lottoRepository.getLottos().size()).isEqualTo(1);
     }
