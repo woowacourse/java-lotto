@@ -24,16 +24,16 @@ public class LottoTickets {
         lottos.add(ManualLottoGenerator.create(manualLotto));
     }
 
-    public boolean isCreatedNumberOfManualLotto() {
-        return lottos.size() == numberOfManualTicket;
+    public boolean isPossibleCreateManualLotto() {
+        return lottos.size() < numberOfManualTicket;
     }
 
     public void createAutoLottos() {
         lottos.add(AutoLottoGenerator.create());
     }
 
-    public boolean isCreatedNumberOf(int numberOfTicket) {
-        return lottos.size() == numberOfTicket;
+    public boolean isPossibleCreateLottoNumberOf(int numberOfTicket) {
+        return lottos.size() < numberOfTicket;
     }
 
     public int numberOfLottos() {

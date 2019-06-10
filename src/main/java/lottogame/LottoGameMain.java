@@ -42,13 +42,13 @@ public class LottoGameMain {
     }
 
     private static void createLottos(LottoTickets lottoTickets, Money money) {
-        if (!lottoTickets.isCreatedNumberOfManualLotto()) {
+        if (lottoTickets.isPossibleCreateManualLotto()) {
             OutputView.printRequestOfManualLottoNumber();
         }
-        while (!lottoTickets.isCreatedNumberOfManualLotto()) {
+        while (lottoTickets.isPossibleCreateManualLotto()) {
             createManualLotto(lottoTickets);
         }
-        while (!lottoTickets.isCreatedNumberOf(money.getNumberOfTicket())) {
+        while (lottoTickets.isPossibleCreateLottoNumberOf(money.getNumberOfTicket())) {
             lottoTickets.createAutoLottos();
         }
     }
