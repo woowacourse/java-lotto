@@ -30,10 +30,17 @@ public class Lotto implements Iterable<LottoNumber> {
     }
 
     private void checkLottoNumberCondition() {
+        checkSize();
+        checkDuplicate();
+    }
+
+    private void checkSize() {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(EX_LOTTO_SIZE_MESSAGE);
         }
+    }
 
+    private void checkDuplicate() {
         if (lottoNumbers.size() != new ArrayList<>(new HashSet<>(lottoNumbers)).size()) {
             throw new IllegalArgumentException(EX_LOTTO_DUPLICATE_MESSAGE);
         }
