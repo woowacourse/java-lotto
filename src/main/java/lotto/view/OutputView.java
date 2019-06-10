@@ -9,7 +9,9 @@ import java.util.Map;
 public class OutputView {
 
     public static void printLottos(UserLottos userLottos) {
+
         System.out.println(userLottos.toString());
+
     }
 
     public static void printResult(LottoResult lottoResult) {

@@ -1,15 +1,16 @@
 package lotto.domain.TicketModel;
 
+import lotto.dto.WinningLottoDto;
+
 import java.util.List;
 
-public class AbstractWinningLotto implements WinningTicket {
+public class WinningLotto implements WinningTicket {
     private final Ticket winningTicket;
     private final int bonus;
 
-    public AbstractWinningLotto(List<Integer> numbers, int bonus) {
-        TicketCreator generator = new LottoGenerator();
-        this.winningTicket = generator.create(numbers);
-        this.bonus = bonus;
+    public WinningLotto(WinningLottoDto dto, TicketCreator ticketCreator) {
+        this.winningTicket = ticketCreator.create(dto.getNumbers());
+        this.bonus = dto.getBonus();
     }
 
     @Override

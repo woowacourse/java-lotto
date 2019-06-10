@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import lotto.dto.WinningLottoDto;
+import lotto.domain.TicketModel.LottoCreator;
 import lotto.domain.TicketModel.Ticket;
-import lotto.domain.TicketModel.LottoGenerator;
+import lotto.domain.TicketModel.WinningLotto;
+import lotto.dto.WinningLottoDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,12 +12,12 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoTest {
+    private final LottoCreator generator = new LottoCreator();
     private WinningLotto winningLotto;
-    private final LottoGenerator generator = new LottoGenerator();
 
     @BeforeEach
     void setUp() {
-        winningLotto = new WinningLotto(new WinningLottoDto("1,2,3,4,5,6", "7"));
+        winningLotto = new WinningLotto(new WinningLottoDto("1,2,3,4,5,6", "7"), new LottoCreator());
     }
 
     @Test

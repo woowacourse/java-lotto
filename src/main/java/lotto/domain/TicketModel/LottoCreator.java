@@ -1,11 +1,11 @@
 package lotto.domain.TicketModel;
 
 
-import java.util.*;
+import java.util.List;
 
-public class LottoGenerator implements TicketCreator {
+public class LottoCreator implements TicketCreator {
 
-    public LottoGenerator() {
+    public LottoCreator() {
 
     }
 

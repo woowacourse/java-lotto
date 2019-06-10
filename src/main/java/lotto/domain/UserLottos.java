@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import lotto.dto.UserLottoDto;
 import lotto.domain.Exceptions.LottoTicketException;
-import lotto.domain.TicketModel.LottoGenerator;
+import lotto.domain.TicketModel.LottoCreator;
 import lotto.domain.TicketModel.Ticket;
 import lotto.domain.TicketModel.TicketCreator;
 import lotto.domain.TicketModel.WinningTicket;
+import lotto.dto.UserLottoDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class UserLottos {
     private List<Ticket> tickets;
 
     public UserLottos(UserLottoDto dto) {
-        ticketGenerator = new LottoGenerator();
+        ticketGenerator = new LottoCreator();
         generateManual(dto.getManualCount(), dto.getManualNumbers());
         generateAuto(dto.getBuyMoney());
     }
