@@ -17,6 +17,7 @@ public class AutomaticGenerator implements Generator {
     }
 
     private int quantity;
+
     public AutomaticGenerator(int quantity) {
         this.quantity = quantity;
     }

@@ -10,8 +10,8 @@ import java.util.List;
 public class LottoTicketFactory {
     public static LottoTickets of(Purchase purchase) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.addAll(new AutomaticGenerator(purchase.getAutoTicketQuantity()).generateTickets());
         lottoTickets.addAll(new ManualGenerator(purchase.getManualTicketQuantity(), purchase.getMultipleManualNumbers()).generateTickets());
+        lottoTickets.addAll(new AutomaticGenerator(purchase.getAutoTicketQuantity()).generateTickets());
         return new LottoTickets(lottoTickets);
     }
 }

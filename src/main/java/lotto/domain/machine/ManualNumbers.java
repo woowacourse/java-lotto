@@ -13,9 +13,16 @@ public class ManualNumbers {
     }
 
     public static ManualNumbers of(final List<Integer> manualNumbers) {
+        validateManualNumbersLength(manualNumbers);
         return new ManualNumbers(manualNumbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
+    }
+
+    private static void validateManualNumbersLength(List<Integer> manualNumbers) {
+        if (manualNumbers.size() != 6) {
+            throw new IllegalArgumentException("수동 번호의 갯수가 맞지 않습니다.");
+        }
     }
 
     public List<LottoNumber> getManualNumbers() {

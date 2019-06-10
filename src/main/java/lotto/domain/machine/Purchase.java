@@ -14,7 +14,7 @@ public class Purchase {
     }
 
     static public Purchase of(int ticketQuantity, int manualTicketQuantity, List<ManualNumbers> multipleManualNumbers) {
-        int autoTicketQuantity = manualTicketQuantity - ticketQuantity;
+        int autoTicketQuantity = ticketQuantity - manualTicketQuantity;
         return new Purchase(autoTicketQuantity, manualTicketQuantity, multipleManualNumbers);
     }
 
