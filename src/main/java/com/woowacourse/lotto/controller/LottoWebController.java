@@ -92,7 +92,7 @@ public class LottoWebController {
         NumberGenerator numberGenerator = new RandomNumberGenerator(LottoNumber.LOTTO_NUMBER_MIN, LottoNumber.LOTTO_NUMBER_MAX);
 
         Map<String, Object> resMap = createResMapWithResult(ResultState.OK);
-        resMap.put("lottos", IntStream.of(quantity.toInt())
+        resMap.put("lottos", IntStream.range(0, quantity.toInt())
             .mapToObj(i -> LottoFactory.createLotto(numberGenerator))
             .map(lottoService::addLotto)
             .collect(Collectors.toList()));
