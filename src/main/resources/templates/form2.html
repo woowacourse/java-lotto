@@ -18,6 +18,9 @@
       div.lottobuy input {
             max-width: 100px;
       }
+      #bonus {
+            max-width: 20px;
+      }
 </style>
 <!-- #users 리스트 -->
 
@@ -42,15 +45,7 @@
                   <input type="text" name="money" />
             </div>
             <div class="lottobuy">
-                  <!-- <input type="text" name="number1" maxlength="2" />
-                  <input type="text" name="number2" maxlength="2" />
-                  <input type="text" name="number3" maxlength="2" />
-                  <input type="text" name="number4" maxlength="2" />
-                  <input type="text" name="number5" maxlength="2" />
-                  <input type="text" name="number6" maxlength="2" />
-                  <label>보너스 번호 </label>
-                  <input type="text" name="bonus" maxlength="2" /> -->
-                  <input type="text" name="lotto" value="1,2,3,4,5,6" maxlength="20"/>
+                  <input type="text" name="lotto" placeholder="1,2,3,4,5,6" maxlength="20" />
                   <label><strong>ex) 1,2,3,4,5,6 으로 입력해주세요</strong></label>
                   <br />
                   <br />
@@ -59,19 +54,28 @@
       </form>
 
       <div class="printCount">
-            <label> 수동으로 {{manualCount}} 번, 자동으로 {{autoCount}} 번 구매했습니다. </label>
+            <label id="count"> 수동으로 {{manualCount}} 번, 자동으로 {{autoCount}} 번 구매했습니다. </label>
+            <div><i>로또 목록</i></div>
+            {{#lottoList}}
+            {{numbers}}
+            <br>
+            {{/lottoList}}
       </div>
-      <!-- <div class="test">
-            <label> {{number1}} </label>
-            <label> {{number2}} </label>
-            <label> {{number3}} </label>
-            <label> {{number4}} </label>
-            <label> {{number5}} </label>
-            <label> {{number6}} </label>
-            <label> {{bonus}} </label>
-      </div> -->
+
+      <form action="/winning" method="post">
+            <br>
+            <span>당첨 번호 </span> 
+            <br>
+            <input type="text" name="winninglotto" placeholder="1,2,3,4,5,6" />
+            -
+            <input id="bonus" type="bonusnum" name="bonusnumber" placeholder="1" maxlength = 2/>
+            <input type="submit" value="구입" />
+      </form>
 
 
+
+
+      <script src="./js/form2.js"></script>
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
