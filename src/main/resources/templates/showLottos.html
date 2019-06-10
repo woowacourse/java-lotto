@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+<form action="/showResult" method="post" accept-charset="UTF-8">
+    {{#lottos.lottoTickets}}
+        {{lottoNumbers}}<br>
+    {{/lottos.lottoTickets}}
+    <br>
+    지난 주 당첨 번호를 입력해 주세요
+    <input type="text" name="winningLotto" placeholder="당첨 번호" value="1,2,3,4,5,6"><br>
+    보너스 볼을 입력해 주세요.
+    <input type="text" name="bonusBall" placeholder="보너스 볼" value="7"><br>
+    <input type="submit">
+</form>
+</body>
+</html>

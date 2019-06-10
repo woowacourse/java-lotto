@@ -12,7 +12,7 @@ public class ConsoleOutputView {
     }
 
     public static void printTickets(LottoTickets tickets) {
-        List<LottoTicket> lottoTickets = tickets.getTickets();
+        List<LottoTicket> lottoTickets = tickets.getLottoTickets();
         StringBuilder result = new StringBuilder();
         for (LottoTicket lottoTicket : lottoTickets) {
             List<LottoNumber> lottoNumbers = new ArrayList<>(lottoTicket.getLottoNumbers());

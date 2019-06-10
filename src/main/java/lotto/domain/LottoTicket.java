@@ -41,6 +41,11 @@ public class LottoTicket {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers+"";
+    }
+
     public boolean hasBonusBall(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }

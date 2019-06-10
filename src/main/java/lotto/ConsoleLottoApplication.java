@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.LottoMoney;
-import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningLotto;
 import lotto.domain.factory.LottoTicketsFactory;
@@ -9,6 +8,7 @@ import lotto.domain.factory.WinningLottoFactory;
 import lotto.view.ConsoleInputView;
 import lotto.view.ConsoleOutputView;
 
+import java.util.Collection;
 import java.util.List;
 
 public class ConsoleLottoApplication {
@@ -23,8 +23,9 @@ public class ConsoleLottoApplication {
         ConsoleOutputView.printTickets(lottoTickets);
 
         WinningLotto winningLotto = WinningLottoFactory.create(ConsoleInputView.inputRewardTicket(), ConsoleInputView.inputBonusBall());
+    }
 
-        LottoResults lottoResults = new LottoResults(lottoTickets, winningLotto, lottoMoney);
-        ConsoleOutputView.printResults(lottoResults);
+    private static void tmep(Collection<?> collection) {
+
     }
 }

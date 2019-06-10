@@ -13,8 +13,9 @@ public class LottoTicketsFactory {
         int randomAmount = totalAmount - manualAmount;
         validateAmount(totalAmount, manualAmount);
         List<LottoTicket> lottoTickets = new ArrayList<>();
-
-        generateManualTickets(manualLottoNumbers, lottoTickets);
+        if(manualAmount!=0){
+            generateManualTickets(manualLottoNumbers, lottoTickets);
+        }
         generateRandomTickets(randomAmount, lottoTickets);
         return new LottoTickets(lottoTickets);
     }

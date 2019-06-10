@@ -34,12 +34,10 @@ public class LottoMoney {
 
     @Override
     public String toString() {
-        return "LottoMoney{" +
-                "money=" + money +
-                '}';
+        return money + "";
     }
 
-    public double divideMoney(LottoMoney lottoMoney) {
-        return (double) money / lottoMoney.money;
+    public double divideMoney(double lottoMoney) {
+        return (double) lottoMoney / money;
     }
 }
