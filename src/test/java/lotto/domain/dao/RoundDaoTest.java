@@ -16,7 +16,7 @@ class RoundDaoTest {
     @Test
     void 금액_추가_테스트() throws SQLException {
         LottoMoney lottoMoney = new LottoMoney(14_000);
-        roundDao.addRound(lottoMoney);
+        roundDao.addRound(1, lottoMoney);
     }
 
     @Test

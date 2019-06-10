@@ -1,12 +1,11 @@
-package lotto.domain.dao;
+package lotto;
 
-import lotto.DatabaseConnection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DatabaseConnectionTest {
     private DatabaseConnection databaseConnection;

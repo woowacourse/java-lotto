@@ -24,7 +24,7 @@ class LottoTicketsDaoTest {
         lottoTicketList.add(new ManualTicketFactory("1,2,3,4,5,6").create());
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
 
-        lottoTicketsDao.addLottoTickets(lottoTickets);
+        lottoTicketsDao.addLottoTickets(1, lottoTickets);
     }
 
     @Test
@@ -34,7 +34,7 @@ class LottoTicketsDaoTest {
         lottoTicketList.add(new ManualTicketFactory("1,2,3,4,5,6").create());
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
 
-        assertThat(lottoTicketsDao.findByRoundLotto("1")).isEqualTo(lottoTickets);
+        assertThat(lottoTicketsDao.findByRoundLotto(1)).isEqualTo(lottoTickets);
     }
 
 }
