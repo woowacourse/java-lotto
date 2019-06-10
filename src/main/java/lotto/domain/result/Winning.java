@@ -25,7 +25,7 @@ public class Winning {
     }
 
     private void checkBonusNum(int bonusNum) {
-        if (bonusNum < 0 || bonusNum > 45) {
+        if (bonusNum < Lotto.FIRST_NUMBER || bonusNum > Lotto.LAST_NUMBER) {
             throw new InvalidWinningException(NOT_INCLUDE_ERROR);
         }
     }

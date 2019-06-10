@@ -28,7 +28,7 @@ public class WinningTest {
     @Test
     void 보너스번호_범위_확인() {
         assertThrows(InvalidWinningException.class, () -> Winning.of(lotto, 46));
-        assertThrows(InvalidWinningException.class, () -> Winning.of(lotto, -1));
+        assertThrows(InvalidWinningException.class, () -> Winning.of(lotto, 0));
     }
 
     @Test
