@@ -4,6 +4,7 @@ import lotto.exception.LottoNumberOutOfBoundsException;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,10 +31,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber getNumber(int number) {
-        if (Objects.isNull(creators.get(number))) {
-            throw new NullPointerException();
-        }
-        return creators.get(number);
+        return Optional.of(creators.get(number))
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     @Override
@@ -51,10 +50,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber lottoNumber) {
-        if (number > lottoNumber.number) {
-            return 1;
-        }
-        return -1;
+        return number > lottoNumber.number ? 1 : -1;
     }
 
     @Override
