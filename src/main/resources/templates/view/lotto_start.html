@@ -41,6 +41,7 @@
             <div class="inner">
                 <h3><a class="masthead-brand" href="/">로또 시뮬레이션</a></h3>
                 <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link" href="/">다시 시작</a>
                     <a class="nav-link" href="lotto_rule">로또 룰</a>
                     <a class="nav-link" href="lotto_contact">연락처</a>
                 </nav>
@@ -48,9 +49,34 @@
         </header>
 
         <main role="main" class="inner cover">
-            <h1 class="cover-heading">로또 게임</h1>
+            <form action="/action_page.php" class="was-validated ">
+                <div class="form-group row">
+                    <label class="col-sm-4 text-right" for="price">금액:</label>
+                    <input class="col-sm-4" type="text" class="form-control" id="price" placeholder="금액 입력" name="price"
+                        required>
+                    <div class="invalid-feedback">필수 입력란입니다.</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 text-right" for="num_manual_lotto">수동 구매 개수:</label>
+                    <input class="col-sm-4" type="text" class="form-control" id="num_manual_lotto" placeholder="수동 개수 입력" name="num_manual_lotto"
+                        required>
+                    <div class="invalid-feedback">필수 입력란입니다.</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 text-right" for="manual_lotto">수동 번호 입력:</label>
+                    <input class="col-sm-4" type="text" class="form-control" id="manual_lotto" placeholder="수동 번호 입력" name="manual_lotto"
+                        required>
+                    <div class="invalid-feedback">필수 입력란입니다.</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 text-right" for="win_lotto">당첨 번호 입력:</label>
+                    <input class="col-sm-4" type="text" class="form-control" id="win_lotto" placeholder="당첨 번호 입력" name="win_lotto"
+                        required>
+                    <div class="invalid-feedback">필수 입력란입니다.</div>
+                </div>
+            </form>
             <p class="lead">
-                <a href="/lotto_start" class="btn btn-lg btn-secondary">게임 시작!</a>
+                <button type="button" class="btn btn-primary">실행</button>
             </p>
         </main>
 

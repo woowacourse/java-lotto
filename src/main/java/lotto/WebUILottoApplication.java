@@ -28,6 +28,11 @@ public class WebUILottoApplication {
             return render(model, "view/lotto_contact.html");
         });
 
+        get("/lotto_start", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return render(model, "view/lotto_start.html");
+        });
+
 
 //        post("/users", (request, response) -> {
 //
