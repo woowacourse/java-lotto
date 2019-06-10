@@ -17,11 +17,13 @@ public class WebUILottoApplication {
         options("/*", WebUILottoApplication::cors);
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-        get("/*", LottoWebController::index);
+        get("/api/result/:id", LottoWebController::retrieveSingleResult, gson::toJson);
         post("/api/buy-auto", LottoWebController::buyAutoLotto, gson::toJson);
         post("/api/buy-manual", LottoWebController::buyManualLotto, gson::toJson);
         post("/api/draw", LottoWebController::draw, gson::toJson);
-        get("/api/result/:id", LottoWebController::retrieveSingleResult, gson::toJson);
+
+        // api 루트가 아닌 경우에는 인덱스 페이지 반환(SPA)
+        get("/*", LottoWebController::index);
     }
 
     private static String cors(Request request, Response response) {
