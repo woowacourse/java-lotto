@@ -17,7 +17,7 @@ public class LottoFactory {
         return new Lotto(numbers);
     }
 
-    public static Lottos createLottos(List<String> manualLottoNumbers, int countOfPurchase) {
+    public static List<Lotto> createLottos(List<String> manualLottoNumbers, int countOfPurchase) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (String manualNumber : manualLottoNumbers) {
@@ -27,6 +27,6 @@ public class LottoFactory {
             lottos.add(LottoFactory.createLottoAutomatically());
         }
 
-        return new Lottos(lottos);
+        return lottos;
     }
 }

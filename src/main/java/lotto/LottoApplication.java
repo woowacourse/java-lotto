@@ -14,9 +14,9 @@ public class LottoApplication {
     public static void main(String[] args) {
         int purchaseAmount = setPurchaseAmount();
         OutputView.outputCountOfPurchase(purchaseAmount / LOTTO_PRICE);
-        Lottos lottos = LottoFactory.createLottos(
+        Lottos lottos = new Lottos(LottoFactory.createLottos(
                 setManualLottoNumbers(setManualPurchaseCount(purchaseAmount / LOTTO_PRICE)),
-                purchaseAmount / LOTTO_PRICE);
+                purchaseAmount / LOTTO_PRICE));
         OutputView.outputLottos(lottos);
         WinningResult winningResult = lottos.match(setWinningLotto());
         OutputView.outputWinningResult(winningResult.getResult());
