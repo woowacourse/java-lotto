@@ -1,5 +1,6 @@
 package lotto.dao;
 
+import lotto.DataBase;
 import lotto.creator.ManualLottoCreator;
 import lotto.domain.Lottos;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,7 @@ class LottosDaoTest {
 
     @BeforeEach
     void setUp() {
-        lottosDao = new LottosDao();
+        lottosDao = new LottosDao(new DataBase());
     }
 
     @Test
@@ -42,9 +43,4 @@ class LottosDaoTest {
         assertThat(lottosDao.findByTimes(1)).isEqualTo(lottos);
     }
 
-    @Test
-    public void connection() {
-        Connection con = lottosDao.getConnection();
-        assertNotNull(con);
-    }
 }

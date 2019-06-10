@@ -1,5 +1,6 @@
 package lotto.dao;
 
+import lotto.DataBase;
 import lotto.domain.Lotto;
 import lotto.domain.Number;
 import lotto.domain.WinningLotto;
@@ -17,7 +18,7 @@ class WinningLottoDaoTest {
 
     @BeforeEach
     void setUp() {
-        winningLottoDao = new WinningLottoDao();
+        winningLottoDao = new WinningLottoDao(new DataBase());
     }
 
     @Test
@@ -51,12 +52,5 @@ class WinningLottoDaoTest {
 
         assertThat(winningLottoDao.findByTimes(1)).isEqualTo(winningLotto);
     }
-
-    @Test
-    public void connection() {
-        Connection con = winningLottoDao.getConnection();
-        assertNotNull(con);
-    }
-
 
 }
