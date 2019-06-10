@@ -53,11 +53,29 @@ public class LottosDao {
         Gson gson = new GsonBuilder().create();
 
         for (Lotto lotto : lottos.getLottos()) {
-            pstmt.setString(1, gson.toJson(lotto.getLotto()));
+            pstmt.setString(1, gson.toJson(lotto));
             pstmt.setInt(2, times + 1);
             pstmt.addBatch();
         }
 
         return pstmt.executeBatch();
     }
+
+    public Lottos findByTimes(int times) throws SQLException {
+        String query = "SELECT * FROM lotto WHERE times = ?";
+        PreparedStatement pstmt = getConnection().prepareStatement(query);
+        pstmt.setInt(1, times);
+        ResultSet rs = pstmt.executeQuery();
+
+        List<Lotto> lottos = new ArrayList<>();
+
+        Gson gson = new Gson();
+
+        while (rs.next()) {
+            Lotto lotto = gson.fromJson(rs.getString("numbers"), Lotto.class);
+            lottos.add(lotto);
+        }
+        return new Lottos(lottos);
+    }
+
 }
