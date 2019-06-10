@@ -42,9 +42,14 @@ public class Lotto implements Iterable<LottoNumber> {
     public int matchCount(Lotto lotto) {
         int match = 0;
         for (LottoNumber lottoNumber : lotto) {
-            if (contains(lottoNumber)) {
-                match += 1;
-            }
+            match = generateMatch(match, lottoNumber);
+        }
+        return match;
+    }
+
+    private int generateMatch(int match, LottoNumber lottoNumber) {
+        if (contains(lottoNumber)) {
+            return match + 1;
         }
         return match;
     }
