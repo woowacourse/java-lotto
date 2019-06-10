@@ -2,7 +2,7 @@ package lotto.domain.user;
 
 import lotto.domain.lottomanager.LottoCreator;
 import lotto.domain.lottomanager.LottoTicket;
-import lotto.domain.lottomanager.shufflerule.Shuffle;
+import lotto.domain.lottomanager.shufflerule.RandomShuffle;
 import lotto.domain.result.Rank;
 import lotto.domain.winning.WinningLotto;
 import lotto.view.inputview.InputParser;
@@ -12,45 +12,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserTickets {
-    private static final String ERROR_NULL_LOTTO_TICKET = "createUserTickets(List<LottoTicket>) has Null";
-    private static final String ERROR_NULL_PURCHASE_AMOUNT = "createUserTickets(PurchaseAmount) has Null";
-    private static final String ERROR_NULL_SHUFFLE = "createUserTickets(Shuffle) has Null";
+    private static final String ERROR_NULL_LOTTO_TICKET = "UserTickets(List<LottoTicket>) has Null";
+    private static final String ERROR_NULL_PURCHASE_AMOUNT = "UserTickets(PurchaseAmount) has Null";
     private static final String ERROR_NULL_WINNING_LOTTO = "getMatchedRanks(WinningLotto) has Null";
 
     private List<LottoTicket> userLottoTickets;
 
-    private UserTickets(List<String> manualTickets, PurchaseAmount purchaseAmount, Shuffle autoShuffle) {
-        List<LottoTicket> tickets = createManualTickets(manualTickets);
-        this.userLottoTickets = getAutoTickets(tickets, purchaseAmount, autoShuffle);
-    }
-
-    private List<LottoTicket> createManualTickets(List<String> manualTickets) {
-        return manualTickets.stream()
-                .map(InputParser::getLottoNum)
-                .map(LottoCreator::createManualTickets)
-                .collect(Collectors.toList());
-    }
-
-    private List<LottoTicket> getAutoTickets(List<LottoTicket> tickets, PurchaseAmount purchaseAmount
-            , Shuffle autoShuffle) {
-        while (!isSufficientTickets(purchaseAmount, tickets)) {
-            tickets.add(LottoCreator.createAutoTickets(autoShuffle));
-        }
-
-        return tickets;
-    }
-
-    private boolean isSufficientTickets(PurchaseAmount purchaseAmount, List<LottoTicket> tickets) {
-        return purchaseAmount.isEqualsAmount(tickets.size());
-    }
-
-    public static UserTickets createUserTickets(List<String> manualTickets, PurchaseAmount purchaseAmount
-            , Shuffle autoShuffle) {
+    public UserTickets(List<String> manualTickets, PurchaseAmount purchaseAmount) {
         manualTickets.forEach(UserTickets::checkNullLottoTicket);
         checkNullPurchaseAmount(purchaseAmount);
-        checkNullAutoShuffle(autoShuffle);
 
-        return new UserTickets(manualTickets, purchaseAmount, autoShuffle);
+        List<LottoTicket> tickets = createManualTickets(manualTickets);
+        this.userLottoTickets = getAutoTickets(tickets, purchaseAmount);
     }
 
     private static void checkNullLottoTicket(String lottoTicket) {
@@ -65,10 +38,23 @@ public class UserTickets {
         }
     }
 
-    private static void checkNullAutoShuffle(Shuffle autoShuffle) {
-        if (autoShuffle == null) {
-            throw new IllegalArgumentException(ERROR_NULL_SHUFFLE);
+    private List<LottoTicket> createManualTickets(List<String> manualTickets) {
+        return manualTickets.stream()
+                .map(InputParser::getLottoNum)
+                .map(LottoCreator::createManualTickets)
+                .collect(Collectors.toList());
+    }
+
+    private List<LottoTicket> getAutoTickets(List<LottoTicket> tickets, PurchaseAmount purchaseAmount) {
+        while (!isSufficientTickets(purchaseAmount, tickets)) {
+            tickets.add(LottoCreator.createAutoTickets(new RandomShuffle()));
         }
+
+        return tickets;
+    }
+
+    private boolean isSufficientTickets(PurchaseAmount purchaseAmount, List<LottoTicket> tickets) {
+        return purchaseAmount.isEqualsAmount(tickets.size());
     }
 
     public List<LottoTicket> getUserLottoTickets() {

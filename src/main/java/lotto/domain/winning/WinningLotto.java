@@ -8,23 +8,19 @@ import lotto.domain.result.Rank;
 import java.util.List;
 
 public class WinningLotto {
-    private static final String ERROR_NULL_WINNING_NUMBERS = "createWinningLotto() has Null";
+    private static final String ERROR_NULL_WINNING_NUMBERS = "WinningLotto() has Null";
     private static final String ERROR_OVERLAPPED_WINNING_NUMBERS = "당첨 번호에 동일한 수가 존재합니다.";
     private static final String ERROR_NULL_USER_TICKET = "getMatchRank() has Null";
 
     private LottoTicket winningLotto;
     private LottoNumber bonusBall;
 
-    private WinningLotto(LottoTicket winningLotto, LottoNumber bonusBall) {
-        this.winningLotto = winningLotto;
-        this.bonusBall = bonusBall;
-    }
-
-    public static WinningLotto createWinningLotto(List<Integer> winningNumbers, Integer bonusBall) {
+    public WinningLotto(List<Integer> winningNumbers, Integer bonusBall) {
         winningNumbers.forEach(WinningLotto::checkNullNumber);
         checkOverlapWithWinningNumbers(bonusBall, winningNumbers);
 
-        return new WinningLotto(LottoCreator.createManualTickets(winningNumbers), LottoNumber.createLottoNumber(bonusBall));
+        this.winningLotto = LottoCreator.createManualTickets(winningNumbers);
+        this.bonusBall = new LottoNumber(bonusBall);
     }
 
     private static void checkNullNumber(Integer number) {

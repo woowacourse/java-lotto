@@ -20,7 +20,7 @@ public class LottoCreator {
 
     static {
         possibleNumbers = IntStream.rangeClosed(LIMIT_MIN_NUM, LIMIT_MAX_NUM)
-                .mapToObj(LottoNumber::createLottoNumber)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
@@ -34,7 +34,7 @@ public class LottoCreator {
         List<LottoNumber> lottoNumbers = new ArrayList<>(getPossibleNumbers());
         Collections.sort(lottoNumbers);
 
-        return LottoTicket.createLottoTicket(lottoNumbers);
+        return LottoTicket.createAutoTicket(lottoNumbers);
     }
 
     private static List<LottoNumber> getPossibleNumbers() {
@@ -45,11 +45,7 @@ public class LottoCreator {
         lottoNumbers.forEach(LottoCreator::checkNullNumber);
         Collections.sort(lottoNumbers);
 
-        List<LottoNumber> convertedLottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::createLottoNumber)
-                .collect(Collectors.toList());
-
-        return LottoTicket.createLottoTicket(convertedLottoNumbers);
+        return LottoTicket.createManualTicket(lottoNumbers);
     }
 
     private static void checkNullNumber(Integer number) {

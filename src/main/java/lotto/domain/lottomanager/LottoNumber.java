@@ -9,7 +9,7 @@ public class LottoNumber implements Comparable {
 
     private final int lottoNumber;
 
-    private LottoNumber(int number) {
+    public LottoNumber(int number) {
         checkValidLottoNumber(number);
         this.lottoNumber = number;
     }
@@ -26,10 +26,6 @@ public class LottoNumber implements Comparable {
 
     private boolean isOutRangeNumber(int number) {
         return LIMIT_MIN_NUM > number || LIMIT_MAX_NUM < number;
-    }
-
-    public static LottoNumber createLottoNumber(int number) {
-        return new LottoNumber(number);
     }
 
     @Override

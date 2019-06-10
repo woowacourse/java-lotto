@@ -16,15 +16,29 @@ public class WinningResult {
     private static final int MINIMUM_PRICE = 0;
     private static final String ERROR_DIVIDE_ZERO = "총 수익률을 계산할 수 없습니다.";
     private static final int INITIAL_VALUE_ZERO = 0;
-    private static final String ERROR_NULL_TICKETS = "createWinningResult(UserTickets) has Null";
-    private static final String ERROR_NULL_WINNING_LOTTO = "createWinningResult(WinningLotto) has Null";
+    private static final String ERROR_NULL_TICKETS = "WinningResult(UserTickets) has Null";
+    private static final String ERROR_NULL_WINNING_LOTTO = "WinningResult(WinningLotto) has Null";
     private static final String ERROR_NULL_RANK = "getMatchedRankCountValue() has Null";
     private static final int CONVERT_PRICE_UNIT = 1000;
 
     private Map<Rank, Integer> matchedRankCount;
 
-    private WinningResult(UserTickets tickets, WinningLotto winningLotto) {
+    public WinningResult(UserTickets tickets, WinningLotto winningLotto) {
+        checkNullUserTickets(tickets);
+        checkNullWinningLotto(winningLotto);
         this.matchedRankCount = makeMatchedRankCount(tickets, winningLotto);
+    }
+
+    private static void checkNullUserTickets(UserTickets tickets) {
+        if (tickets == null) {
+            throw new IllegalArgumentException(ERROR_NULL_TICKETS);
+        }
+    }
+
+    private static void checkNullWinningLotto(WinningLotto winningLotto) {
+        if (winningLotto == null) {
+            throw new IllegalArgumentException(ERROR_NULL_WINNING_LOTTO);
+        }
     }
 
     private Map<Rank, Integer> makeMatchedRankCount(UserTickets tickets, WinningLotto winningLotto) {
@@ -39,25 +53,6 @@ public class WinningResult {
 
     private int plusMatchedCount(Map<Rank, Integer> matchedRankCount, Rank rank) {
         return matchedRankCount.get(rank) + PLUS_AMOUNT;
-    }
-
-    public static WinningResult createWinningResult(UserTickets tickets, WinningLotto winningLotto) {
-        checkNullUserTickets(tickets);
-        checkNullWinningLotto(winningLotto);
-
-        return new WinningResult(tickets, winningLotto);
-    }
-
-    private static void checkNullUserTickets(UserTickets tickets) {
-        if (tickets == null) {
-            throw new IllegalArgumentException(ERROR_NULL_TICKETS);
-        }
-    }
-
-    private static void checkNullWinningLotto(WinningLotto winningLotto) {
-        if (winningLotto == null) {
-            throw new IllegalArgumentException(ERROR_NULL_WINNING_LOTTO);
-        }
     }
 
     public int getMatchedRankCountValue(Rank rank) {

@@ -13,16 +13,16 @@ import java.util.List;
 
 public class LottoShop {
     public void operate() {
-        PurchaseAmount purchaseAmount = PurchaseAmount.createLottoAmount(getPurchasePrice());
+        PurchaseAmount purchaseAmount = new PurchaseAmount(getPurchasePrice());
         List<String> manualTickets = getManualTickets();
         OutputView.printAmount(purchaseAmount, manualTickets.size());
 
-        UserTickets userTickets = UserTickets.createUserTickets(manualTickets, purchaseAmount, new RandomShuffle());
+        UserTickets userTickets = new UserTickets(manualTickets, purchaseAmount);
         OutputView.printUserLottoTickets(userTickets);
 
-        WinningLotto winningLotto = WinningLotto.createWinningLotto(getLottoNum(), getBonusBall());
+        WinningLotto winningLotto = new WinningLotto(getLottoNum(), getBonusBall());
 
-        WinningResult winningResult = WinningResult.createWinningResult(userTickets, winningLotto);
+        WinningResult winningResult = new WinningResult(userTickets, winningLotto);
         OutputView.printWinningStatistics(winningResult);
     }
 

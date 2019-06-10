@@ -11,7 +11,7 @@ public class PurchaseAmount {
 
     private final int autoLottoAmount;
 
-    private PurchaseAmount(int purchasePrice) {
+    public PurchaseAmount(int purchasePrice) {
         checkValidPurchasePrice(purchasePrice);
         this.autoLottoAmount = calculateLottoAmount(purchasePrice);
     }
@@ -39,10 +39,6 @@ public class PurchaseAmount {
 
     private int calculateLottoAmount(int purchasePrice) {
         return purchasePrice / PRICE_UNIT;
-    }
-
-    public static PurchaseAmount createLottoAmount(int purchasePrice) {
-        return new PurchaseAmount(purchasePrice);
     }
 
     public boolean isEqualsAmount(int number) {
