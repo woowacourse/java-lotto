@@ -1,13 +1,28 @@
 package lottogame.domain;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-    private Map<Rank, Integer> result;
+    private Map<Rank, Integer> result = new LinkedHashMap<>();
 
-    LottoResult(Map<Rank, Integer> result) {
-        this.result = result;
-        this.result.remove(Rank.MISS);
+    LottoResult() {
+        for (Rank rank : Rank.values()) {
+            result.put(rank, 0);
+        }
+        result.remove(Rank.MISS);
+    }
+
+    public static LottoResult generate(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        LottoResult lottoResult = new LottoResult();
+        List<Rank> matchResults = lottoTickets.getMatchResultEachLotto(winningLotto);
+
+        for (Rank rank : matchResults) {
+            lottoResult.result.put(rank, lottoResult.result.get(rank) + 1);
+        }
+
+        return lottoResult;
     }
 
     public long getRateOfLotto(Money money) {

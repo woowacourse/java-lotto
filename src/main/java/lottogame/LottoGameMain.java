@@ -14,7 +14,7 @@ public class LottoGameMain {
 
         WinningLotto winningLotto = createWinningLotto();
 
-        LottoResult lottoResult = LottoResultGenerator.create(lottoTickets, winningLotto);
+        LottoResult lottoResult = LottoResult.generate(lottoTickets, winningLotto);
         OutputView.printLottoResult(lottoResult, lottoResult.getRateOfLotto(money));
     }
 
