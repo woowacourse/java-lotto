@@ -19,13 +19,17 @@ public class BoughtLottos {
     }
 
     public static BoughtLottos buyLottos(final int price, List<String> inputManualLottos) {
-        List<Lotto> lottos = new ArrayList<>(new LottosManualGenerator(inputManualLottos).generate());
+        List<Lotto> lottos = new ArrayList<>(generateLottos(new LottosManualGenerator(inputManualLottos)));
         int countOfBoughtManual = lottos.size();
         int amountOfAutoGenerateLotto = price / BUY_PRICE - countOfBoughtManual;
 
-        lottos.addAll(new LottosAutoGenerator(amountOfAutoGenerateLotto).generate());
+        lottos.addAll(generateLottos(new LottosAutoGenerator(amountOfAutoGenerateLotto)));
 
         return new BoughtLottos(lottos, countOfBoughtManual);
+    }
+
+    private static List<Lotto> generateLottos(LottosGenerator generator) {
+        return generator.generate();
     }
 
     public List<Lotto> getLottos() {
