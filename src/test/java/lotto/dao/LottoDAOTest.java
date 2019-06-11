@@ -1,7 +1,5 @@
 package lotto.dao;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.ManualLottoMachine;
 import org.junit.jupiter.api.BeforeEach;

@@ -13,10 +13,10 @@ public class LottosFactory {
     }
 
     public Lottos generateTotalLottos() {
-        List<Lotto> lottosList = new ArrayList<>();
-        getManualLottos(lottosList);
-        getAutoLottos(lottosList);
-        return new Lottos(lottosList);
+        List<Lotto> lottos = new ArrayList<>();
+        getManualLottos(lottos);
+        getAutoLottos(lottos);
+        return new Lottos(lottos);
     }
 
     private void getManualLottos(List<Lotto> lottosList) {
