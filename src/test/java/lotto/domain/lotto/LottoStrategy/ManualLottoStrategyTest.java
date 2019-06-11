@@ -11,7 +11,8 @@ class ManualLottoStrategyTest {
     @Test
     void 숫자_생성_테스트() {
         LottoStrategy strategy = new ManualLottoStrategy("1,2,3");
-        assertThat(strategy.generate()).isEqualTo(Arrays.asList(1, 2, 3));
+        assertThat(strategy.generate())
+                .isEqualTo(Arrays.asList(1, 2, 3));
     }
 
     @Test

@@ -1,9 +1,13 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lottoresult.LottoResult;
+import lotto.domain.lottoresult.WinningLotto;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicketGroup implements Iterable<LottoTicket> {
     private final List<LottoTicket> lottoTickets;
@@ -26,6 +30,13 @@ public class LottoTicketGroup implements Iterable<LottoTicket> {
         lottoTickets.addAll(lottos.lottoTickets);
 
         return new LottoTicketGroup(lottoTickets);
+    }
+
+    public LottoResult match(WinningLotto winningLotto) {
+        return new LottoResult(lottoTickets.stream()
+                .map(winningLotto::match)
+                .collect(Collectors.toList())
+        );
     }
 
     @Override

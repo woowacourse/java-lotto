@@ -16,16 +16,12 @@ public class ManualLottoStrategy implements LottoStrategy {
 
     @Override
     public List<Integer> generate() {
-        return toNumbers(numbersText);
-    }
-
-    private static List<Integer> toNumbers(String originText) {
-        List<Integer> numbers = parse(originText).stream()
-                .filter(x -> !x.isEmpty())
-                .map(x -> Integer.parseInt(x.trim()))
-                .collect(Collectors.toList());
-
-        return Collections.unmodifiableList(numbers);
+        return Collections.unmodifiableList(parse(numbersText).stream()
+                .map(String::trim)
+                .filter(x -> !x.isEmpty() || !x.isBlank())
+                .map(Integer::parseInt)
+                .collect(Collectors.toList())
+        );
     }
 
     private static List<String> parse(String originText) {

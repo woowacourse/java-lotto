@@ -22,12 +22,11 @@ public class LottoMachine {
     }
 
     public static LottoTicketGroup generateLottos(List<String> lottosText) {
-        List<LottoTicket> lottoTickets = lottosText.stream()
-                .map(ManualLottoStrategy::new)
-                .map(LottoTicket::create)
-                .collect(Collectors.toList())
-                ;
-
-        return new LottoTicketGroup(lottoTickets);
+        return new LottoTicketGroup(
+                    lottosText.stream()
+                            .map(ManualLottoStrategy::new)
+                            .map(LottoTicket::create)
+                            .collect(Collectors.toList())
+        );
     }
 }

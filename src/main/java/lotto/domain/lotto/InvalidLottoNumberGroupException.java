@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
 public class InvalidLottoNumberGroupException extends RuntimeException {
-    InvalidLottoNumberGroupException(String message) {
+    public InvalidLottoNumberGroupException(String message) {
         super(message);
     }
 }

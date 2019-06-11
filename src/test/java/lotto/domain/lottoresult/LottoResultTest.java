@@ -1,6 +1,5 @@
 package lotto.domain.lottoresult;
 
-import lotto.domain.lotto.LottoStrategy.ManualLottoStrategy;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +18,11 @@ public class LottoResultTest {
     @BeforeEach
     void setup() {
         lottoTickets = new LottoTicketGroup(Arrays.asList(
-                LottoTicket.create(new ManualLottoStrategy("1, 2, 3, 8, 9, 10")),
-                LottoTicket.create(new ManualLottoStrategy("7, 8, 9, 1, 2, 3"))
+                LottoTicket.create(()->Arrays.asList(1, 2, 3, 4, 5, 6)),
+                LottoTicket.create(()->Arrays.asList(1, 2, 3, 7, 8, 9))
         ));
-        lottoResult = new LottoResult(
-                WinningLotto.create("1, 2, 3, 4, 5, 6", "15"),
-                lottoTickets
+        lottoResult = lottoTickets.match(
+                WinningLotto.create("4,5,6,7,8,9", "15")
         );
     }
 
@@ -41,6 +39,6 @@ public class LottoResultTest {
     @Test
     void 수익률_확인() {
         assertThat(lottoResult.getEarningRate())
-                .isEqualTo( new BigDecimal(10000).divide(new BigDecimal(20), 4, RoundingMode.HALF_UP));
+                .isEqualTo(new BigDecimal(10000).divide(new BigDecimal(20), 4, RoundingMode.HALF_UP));
     }
 }

@@ -2,7 +2,8 @@ package lotto.domain.lotto;
 
 import lotto.domain.lotto.LottoStrategy.LottoStrategy;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Objects;
 
 public class LottoTicket {
     public static final int PRICE = 1000;

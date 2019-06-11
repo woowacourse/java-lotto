@@ -32,7 +32,7 @@ public class WinningLotto {
         }
     }
 
-    public LottoRank checkLottoRank(LottoTicket userLottoTicket) {
+    public LottoRank match(LottoTicket userLottoTicket) {
         return LottoRank.rankOf(
                 userLottoTicket.countOfMatch(winningNumbers),
                 userLottoTicket.contains(bonusNumber)
