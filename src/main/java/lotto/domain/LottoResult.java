@@ -21,17 +21,7 @@ public class LottoResult {
         lottoResult.put(rank, lottoResult.get(rank) + 1);
     }
 
-    private String getEachResult(Rank rank) {
-        if (rank.equals(Rank.SECOND)) {
-            return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(), lottoResult.get(rank));
-        }
-        if (rank.equals(Rank.MISS)) {
-            return "";
-        }
-        return String.format("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(), lottoResult.get(rank));
-    }
-
-    double getRateOfReturn() {
+    public double getRateOfReturn() {
         long winningMoney = 0;
         for (Rank rank : lottoResult.keySet()) {
             winningMoney += (long) rank.getWinningMoney() * lottoResult.get(rank);
@@ -47,6 +37,10 @@ public class LottoResult {
         return numberOfLotto;
     }
 
+    public int getResultByRank(Rank rank) {
+        return lottoResult.get(rank);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,15 +52,5 @@ public class LottoResult {
     @Override
     public int hashCode() {
         return Objects.hash(lottoResult);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Rank rank : Rank.values()) {
-            stringBuilder.append(getEachResult(rank));
-        }
-        stringBuilder.append(String.format("총 수익률은 %.1f%%입니다.", getRateOfReturn() * 100));
-        return stringBuilder.toString();
     }
 }
