@@ -12,137 +12,99 @@
 <body>
 <div class="card text-center">
     <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">이번 회차 로또 구매</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">지난 회차 결과 조회</a>
-            </li>
-        </ul>
+        <div class="list-group" id="list-tab" role="tablist">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
+                       href="#list-home" role="tab" aria-controls="home">이번 회차 로또 구매</a>
+                </li>
+                <li class="nav-item">
+                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
+                       href="#list-profile" role="tab" aria-controls="profile">지난 회차 결과 조회</a>
+                </li>
+            </ul>
+        </div>
+
     </div>
     <div class="card-body">
-        <form action="/manualLotto" method="post">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <tr class="lotto" height="30">
-                            <div class="input-group input-group-lg">
-                                <td>
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="purchase-price">구입 금액</span>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <form action="/manualLotto" method="post">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <tr class="lotto" height="30">
+                                    <div class="input-group input-group-lg">
+                                        <td>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="purchase-price">구입 금액</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input placeholder="1,000원 ~ 100,000원" type="number" class="form-control"
+                                                   aria-label="Sizing example input"
+                                                   aria-describedby="inputGroup-sizing-lg" required="true" min="1000"
+                                                   max="100000"
+                                                   name="price" id="price" onchange="isValidInput()"/>
+                                            <span id="validCheck"></span>
+                                        </td>
                                     </div>
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control" aria-label="Sizing example input"
-                                           aria-describedby="inputGroup-sizing-lg" required="true" min="1000"
-                                           max="100000"
-                                           name="price" id="price" onchange="isValidInput()"/>
-                                    &nbsp;&nbsp;
-                                    <span id="validCheck"></span>
-                                </td>
+                                </tr>
                             </div>
-                        </tr>
-                    </div>
-                    <div class="col">
-                        <tr class="lotto" height="30">
-                            <div class="input-group input-group-lg">
-                                <td>
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="manual-count">수동 구매 개수</span>
+                            <div class="col">
+                                <tr class="lotto" height="30">
+                                    <div class="input-group input-group-lg">
+                                        <td>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="manual-count">수동 구매 개수</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="number" required="true" name="manualCount" id="manualCount"
+                                                   onchange="isValidInput()" class="form-control"
+                                                   aria-label="Sizing example input"
+                                                   aria-describedby="inputGroup-sizing-lg">
+                                        </td>
                                     </div>
-                                </td>
-                                <td>
-                                    <input type="number" required="true" name="manualCount" id="manualCount"
-                                           onchange="isValidInput()" class="form-control"
-                                           aria-label="Sizing example input"
-                                           aria-describedby="inputGroup-sizing-lg">
-                                </td>
+                                    <td>
+                                        <span id="manualCountMessage"></span>
+                                    </td>
+                                </tr>
                             </div>
-                            <td>
-                                <span id="manualCountMessage"></span>
-                            </td>
-                        </tr>
-                    </div>
-                </div>
-                <br/>
-                <div id="container" style="max-height: 300px; overflow-y: scroll;">
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col">
+                                <div id="manualLottoDiv" style="max-height: 300px; overflow-y: scroll;">
 
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg">다음으로</button>
-                <button type="submit" class="btn btn-secondary btn-lg" onclick="cancel()">초기화</button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-lg">다음으로</button>
+                                <button type="submit" class="btn btn-secondary btn-lg" onclick="cancel()">초기화</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                dafasdasdfsafs
+            </div>
+        </div>
+
     </div>
 </div>
 
-<script>
-    function isValidInput() {
-        var price = document.getElementById('price').value;
-        var manualCount = document.getElementById('manualCount').value;
-
-        if (price < 1000 || price > 100000) {
-            window.alert("로또는 1,000원 이상 100,000원 이하만 구매 가능 합니다.");
-            document.getElementById('price').value = document.getElementById('manualCount').value = '';
-        } else {
-            document.getElementById('validCheck').innerHTML='';
-        }
-        if (document.getElementById('price').value / 1000 < document.getElementById('manualCount').value) {
-            document.getElementById('manualCountMessage').innerHTML='총 구매 개수보다 많습니다.';
-            document.getElementById('manualCountMessage').style.color='red';
-            document.getElementById('manualCount').value = '';
-            delFields();
-        } else {
-            document.getElementById('manualCountMessage').innerHTML='구매 가능합니다.';
-            document.getElementById('manualCountMessage').style.color='blue';
-            addFields();
-        }
-    }
-
-    function cancel() {
-        document.getElementById('price').value = document.getElementById('manualCount').value = '';
-    }
-
-    function addFields(){
-
-        var number = document.getElementById("manualCount").value;
-        var container = document.getElementById("container");
-        while (container.hasChildNodes()) {
-            container.removeChild(container.lastChild);
-        }
-        for (i=0;i<number;i++){
-            var tmpContainer = createContainer(i);
-            tmpContainer.appendChild(makeText(i));
-            var input = document.createElement("input");
-            input.type = "text";
-            input.name = "lotto" + i;
-            input.class = "form-control"
-            tmpContainer.appendChild(input);
-            tmpContainer.appendChild(document.createElement("br"));
-            container.appendChild(tmpContainer);
-        }
-    }
-    function delFields() {
-        var container = document.getElementById("container");
-        while (container.hasChildNodes()) {
-            container.removeChild(container.lastChild);
-        }
-    }
-
-    function makeText(i) {
-        var div = document.createElement("div");
-        div.className = "input-group-prepend";
-        div.innerHTML = '<span class="input-group-text">로또' + (i+1) +'</span>';
-        return div;
-    }
-    function createContainer(i) {
-        var div = document.createElement("div");
-        div.className = "input-group input-group-lg";
-        div.id = "container" + i;
-        return div;
-    }
-
-
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,23 +1,21 @@
 package lotto;
 
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 public class WebUILottoApplication {
     public static void main(String[] args) {
-        List<Lottos> lottoRound = new ArrayList<>();
+        staticFiles.externalLocation("src/main/resources/templates");
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -28,15 +26,16 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             int price = Integer.parseInt(req.queryParams("price"));
             int manualCount = Integer.parseInt(req.queryParams("manualCount"));
+            LottoMoney lottoMoney = new LottoMoney(price);
 
             List<String> manualLottos = new ArrayList<>();
             for (int i = 0; i < manualCount; i++) {
                 manualLottos.add(req.queryParams("lotto" + i));
             }
-            int autoCount = price / 1000 - manualCount;
-            Lottos totalLottos = new Lottos(manualLottos, autoCount + manualCount);
-            lottoRound.add(totalLottos);
-            model.put("autoCount", autoCount);
+
+            Lottos totalLottos = new Lottos(manualLottos, lottoMoney.getCountOfTicket());
+            req.session().attribute("totalLottos", totalLottos);
+            model.put("autoCount", lottoMoney.getCountOfTicket() - manualCount);
             model.put("manualCount", manualCount);
             model.put("lottos", totalLottos);
             return render(model, "manualLotto.html");
@@ -47,16 +46,28 @@ public class WebUILottoApplication {
             String input = req.queryParams("winningLotto");
             int bonusNum = Integer.parseInt(req.queryParams("bonusBall"));
             WinningLotto winningLotto = new WinningLotto(input, bonusNum);
-            LottoResult lottoResult = new LottoResult(lottoRound.get(0), winningLotto);
+            LottoResult lottoResult = new LottoResult(req.session().attribute("totalLottos"), winningLotto);
             Map<Rank, Integer> winners = lottoResult.getWinners();
 
-            model.put("FIRST", winners.get(Rank.FIRST));
-            model.put("SECOND", winners.get(Rank.SECOND));
-            model.put("THIRD", winners.get(Rank.THIRD));
-            model.put("FOURTH", winners.get(Rank.FOURTH));
-            model.put("FIFTH", winners.get(Rank.FIFTH));
-            model.put("yield", lottoResult.getYield());
+            for (Rank value : Rank.values()) {
+                model.put(value.name(), winners.get(value));
+            }
+            model.put("yield", lottoResult.getYield() * 100);
             return render(model, "result.html");
+        });
+
+        get("/error", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", req.queryParams("message"));
+            return render(model, "error.html");
+        });
+
+        exception(Exception.class, (e, req, res) -> {
+            try {
+                res.redirect("/error?message=" + URLEncoder.encode(e.getMessage(), "UTF-8"));
+            } catch (UnsupportedEncodingException e1) {
+                res.redirect("/error?message=" + "URL Encoding Error");
+            }
         });
     }
 
