@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoDto {
 	private List<String> numbers;
@@ -16,5 +17,23 @@ public class LottoDto {
 
 	public List<String> getNumbers() {
 		return new ArrayList<>(numbers);
+	}
+
+	@Override
+	public String toString() {
+		return numbers.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof LottoDto)) return false;
+		LottoDto lottoDto = (LottoDto) o;
+		return Objects.equals(numbers, lottoDto.numbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numbers);
 	}
 }

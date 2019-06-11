@@ -1,6 +1,10 @@
 package lotto;
 
+import lotto.dao.GameResultDao;
+import lotto.dao.LottosDao;
+import lotto.dao.WinningLottoDao;
 import lotto.domain.*;
+import lotto.view.LottoDto;
 import lotto.view.LottosDto;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -12,20 +16,26 @@ import java.util.Map;
 
 import static spark.Spark.*;
 
+// test. 일단 turn을 1로 가정
 public class WebUILottoApplication {
     private static final int START_COUNT = 0;
 
     public static void main(String[] args) {
         externalStaticFileLocation("src/main/resources/templates");
+
         LottoService service = new LottoService();
+        WinningLottoDao winningDao = new WinningLottoDao();
+        GameResultDao resultDao = new GameResultDao();
+        LottosDao lottosDao = new LottosDao();
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            // round
+            //TODO 횟수별 기능 구현
             return render(model, "form.html");
         });
 
         post("/money", (req, res) -> {
+            // 충전
             Map<String, Object> model = new HashMap<>();
             int money = Integer.parseInt(req.queryParams("money"));
             service.charge(money);
@@ -33,6 +43,7 @@ public class WebUILottoApplication {
         });
 
         post("/choose", (req, res) -> {
+            //구매
             Map<String, Object> model = new HashMap<>();
             int manualCount = Integer.parseInt(req.queryParams("manualCount"));
             model.put("manualCount", manualCount);
@@ -41,7 +52,6 @@ public class WebUILottoApplication {
 
         post("/lottos", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-
             InputParser parser = new InputParser();
             Lotto lotto = parser.makeLotto(req.queryParams("lotto"));
             service.buy(lotto);
@@ -50,24 +60,37 @@ public class WebUILottoApplication {
             model.put("manualCount", req.queryParams("manualCount"));
             model.put("autoCount", autoCount);
 
-            DtoConverter converter = new DtoConverter();
-            LottosDto dtos = converter.convertLottosToDto(service.getLottos());
-            model.put("lottoList", dtos.getLottos());
+            List<LottoDto> lottos = service.getLottos();
+            model.put("lottos", lottos);
 
-            return render(model, "lottolist.html");
+            return render(model, "lottos.html");
         });
 
         post("/winning", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             InputParser parser = new InputParser();
+
             Lotto lotto = parser.makeLotto(req.queryParams("winninglotto"));
             LottoNumber lottoNumber = parser.makeLottoNumber(Integer.parseInt(req.queryParams("bonusnumber")));
             WinningLotto winningLotto = WinningLotto.of(lotto, lottoNumber);
+            winningDao.add(winningLotto, 1);
+
             LottoGameResult gameResult = service.gameResult();
             gameResult.match(winningLotto);
             model.put("profit", String.format("%.1f", gameResult.profit(1000)));
             model.put("stat", showGameResult(gameResult));
+            resultDao.add(new DtoConverter().convertResultToDto(gameResult),1);
+
             return render(model, "result.html");
+        });
+
+        post("/end", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            resultDao.deleteAll();
+            winningDao.deleteAll();
+            lottosDao.deleteAll();
+
+            return render(model, "form.html");
         });
     }
 
@@ -79,10 +102,13 @@ public class WebUILottoApplication {
         RandomNumbersGenerator generator = RandomNumbersGenerator.getInstance();
         LottoFactory lottoFactory = new LottoFactory();
         int autoPurchaseCount = START_COUNT;
+        int temp;
+        //TODO 공통된 부분 뽑아내기
         for (; service.canBuy(); autoPurchaseCount++) {
             Lotto lotto = lottoFactory.create(generator.generate());
             service.buy(lotto);
         }
+
         return autoPurchaseCount;
     }
 

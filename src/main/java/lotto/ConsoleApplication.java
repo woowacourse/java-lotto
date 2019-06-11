@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.view.InputView;
+import lotto.view.LottoDto;
 import lotto.view.LottosDto;
 import lotto.view.OutputView;
 
@@ -18,7 +19,7 @@ public class ConsoleApplication {
 		int autoPurchaseCount = assignAutoPurchaseCount(service);
 		OutputView.showBuyCounts(manualPurchaseCount, autoPurchaseCount);
 
-		OutputView.showLottos(createLottosDto(service.getLottos()));
+		OutputView.showLottos(service.getLottos());
 		WinningLotto winningLotto = assignWinningLotto();
 		LottoGameResult gameResult = service.gameResult();
 		gameResult.match(winningLotto);
@@ -57,10 +58,5 @@ public class ConsoleApplication {
 			System.out.println(e.getMessage());
 			return assignWinningLotto();
 		}
-	}
-
-	private static LottosDto createLottosDto(final List<Lotto> lottos) {
-		DtoConverter converter = new DtoConverter();
-		return converter.convertLottosToDto(lottos);
 	}
 }

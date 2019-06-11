@@ -1,6 +1,5 @@
-package dao;
+package lotto.dao;
 
-import lotto.dao.DBManager;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;

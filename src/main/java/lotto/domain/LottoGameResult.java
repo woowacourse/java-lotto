@@ -14,7 +14,7 @@ public class LottoGameResult {
     private final List<Lotto> lottos;
     private final Map<Rank, Integer> lottoStat;
 
-    static LottoGameResult of(final List<Lotto> lottos) {
+    public static LottoGameResult of(final List<Lotto> lottos) {
         return new LottoGameResult(lottos);
     }
 

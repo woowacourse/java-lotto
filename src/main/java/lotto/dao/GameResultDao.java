@@ -1,0 +1,75 @@
+package lotto.dao;
+
+import lotto.GameResultDto;
+import lotto.domain.Rank;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+public class GameResultDao {
+
+    public void add(final GameResultDto gameResultDto, final int turn) {
+        Connection conn = DBManager.getConnection();
+        try {
+            String query = "insert into result(turn, first, second, third, fourth, fifth, miss, profit) " +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, turn);
+            pstmt.setInt(2, gameResultDto.getCount(Rank.FIRST));
+            pstmt.setInt(3, gameResultDto.getCount(Rank.SECOND));
+            pstmt.setInt(4, gameResultDto.getCount(Rank.THIRD));
+            pstmt.setInt(5, gameResultDto.getCount(Rank.FOURTH));
+            pstmt.setInt(6, gameResultDto.getCount(Rank.FIFTH));
+            pstmt.setInt(7, gameResultDto.getCount(Rank.MISS));
+            pstmt.setDouble(8, gameResultDto.getProfit());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.closeConnection(conn);
+        }
+    }
+
+    public GameResultDto findByTurn(final int turn) {
+        Connection conn = DBManager.getConnection();
+        try {
+            String query = "SELECT first, second, third, fourth, fifth, miss, profit FROM result WHERE turn = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, turn);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Map<Rank, Integer> map = new HashMap<Rank, Integer>();
+                map.put(Rank.FIRST, rs.getInt(1));
+                map.put(Rank.SECOND, rs.getInt(2));
+                map.put(Rank.THIRD, rs.getInt(3));
+                map.put(Rank.FOURTH, rs.getInt(4));
+                map.put(Rank.FIFTH, rs.getInt(5));
+                map.put(Rank.MISS, rs.getInt(6));
+                return GameResultDto.of(map, rs.getDouble(7));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.closeConnection(conn);
+        }
+        return null;
+        //TODO 예외 반환으로 고려해볼 것
+    }
+
+    public void deleteAll() {
+        Connection conn = DBManager.getConnection();
+        try {
+            String query = "delete from result";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.closeConnection(conn);
+        }
+    }
+}

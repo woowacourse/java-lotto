@@ -32,10 +32,10 @@
       <div class="printCount">
             <label id="count"> 수동으로 {{manualCount}} 번, 자동으로 {{autoCount}} 번 구매했습니다. </label>
             <div><i>로또 목록</i></div>
-            {{#lottoList}}
+            {{#lottos}}
             {{numbers}}
             <br>
-            {{/lottoList}}
+            {{/lottos}}
       </div>
 
       <form action="/winning" method="post">

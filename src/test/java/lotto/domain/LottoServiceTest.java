@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,5 +39,10 @@ class LottoServiceTest {
         LottoGameResult gameResult = buyer.gameResult();
         gameResult.match(WinningLotto.of(lotto, LottoNumber.of(BONUS_NUM)));
         assertThat(gameResult.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(ANSWER);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        // service내의 데이터 삭제
     }
 }

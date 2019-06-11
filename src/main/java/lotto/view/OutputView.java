@@ -36,9 +36,8 @@ public class OutputView {
         System.out.print("(" + rank.getMoney() + ")- ");
     }
 
-    public static void showLottos(final LottosDto lottos) {
-        List<LottoDto> lottoDtos = lottos.getLottos();
-        for (final LottoDto lotto : lottoDtos) {
+    public static void showLottos(final List<LottoDto> lottos) {
+        for (final LottoDto lotto : lottos) {
             showLotto(lotto);
             System.out.println();
         }

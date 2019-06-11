@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class WinningLottoDAO {
+public class WinningLottoDao {
     private static final String DELIMITER = ",";
 
     public void add(final WinningLotto winningLotto, final Integer turn) {

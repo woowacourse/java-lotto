@@ -1,6 +1,5 @@
-package dao;
+package lotto.dao;
 
-import lotto.dao.WinningLottoDAO;
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoNumber;
@@ -16,12 +15,13 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class WinningLottoDAOTest {
+class WinningLottoDaoTest {
     private static final List<Integer> NUMBERS;
     private static final Lotto SAMPLE_LOTTO;
     private static final LottoNumber SAMPLE_BONUS;
     private static final WinningLotto WINNING_LOTTO;
-    private WinningLottoDAO winningLottoDao;
+
+    private WinningLottoDao winningLottoDao;
     private static final int TEST_TURN = 2;
 
     static {
@@ -33,7 +33,7 @@ class WinningLottoDAOTest {
 
     @BeforeEach
     public void setUp() {
-        winningLottoDao = new WinningLottoDAO();
+        winningLottoDao = new WinningLottoDao();
         winningLottoDao.add(WINNING_LOTTO, TEST_TURN);
     }
 
@@ -60,6 +60,6 @@ class WinningLottoDAOTest {
 
     @AfterEach
     public void tearDown() {
-//        winningLottoDao.deleteAll();
+        winningLottoDao.deleteAll();
     }
 }
