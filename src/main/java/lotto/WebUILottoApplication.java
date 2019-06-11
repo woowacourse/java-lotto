@@ -116,11 +116,7 @@ public class WebUILottoApplication {
     }
 
     private static List<String> getResultsForm(final WinPrize winPrize) {
-        List<String> results = new ArrayList<>();
-        for (final Rank rank : Rank.values()) {
-            results.add(ResultFormat.format(rank, winPrize));
-        }
-        return results;
+        return ResultFormat.format(winPrize);
     }
 
     private static void saveLottos(final List<Lotto> userLottos, final int round) throws SQLException {

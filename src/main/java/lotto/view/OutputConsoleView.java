@@ -25,8 +25,8 @@ public class OutputConsoleView implements OutputView {
     public void printResult(final WinPrize winPrize) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (Rank rank : Rank.values()) {
-            System.out.println(ResultFormat.format(rank, winPrize));
+        for (final String message : ResultFormat.format(winPrize)) {
+            System.out.println(message);
         }
     }
 
