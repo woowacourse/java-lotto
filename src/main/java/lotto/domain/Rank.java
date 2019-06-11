@@ -2,6 +2,10 @@ package lotto.domain;
 
 import lotto.exception.InvalidRankMatchException;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Rank {
     FIRST(6, 2_000_000_000, false),
     SECOND(5, 30_000_000, true),
@@ -11,6 +15,7 @@ public enum Rank {
     MISS(0, 0, false);
 
     private static final int WINNING_MIN_COUNT = 3;
+    private static final int FIRST_LIST_INDEX = 0;
 
     private int countOfMatch;
     private int winningMoney;
@@ -27,11 +32,13 @@ public enum Rank {
             return MISS;
         }
 
-        for (Rank rank : Rank.values()) {
-            if ((rank.countOfMatch == countOfMatch)
-                    && (rank.bonusMatch == bonusMatch)) {
-                return rank;
-            }
+        List<Rank> allRank = Arrays.asList(Rank.values());
+        List<Rank> matchRank = allRank.stream()
+                .filter(rank -> ((rank.countOfMatch == countOfMatch) && (rank.bonusMatch == bonusMatch)))
+                .collect(Collectors.toList());
+
+        if (matchRank.size() == 1) {
+            return matchRank.get(FIRST_LIST_INDEX);
         }
 
         throw new InvalidRankMatchException("당첨 RANK 매칭 결과가 없습니다.");
