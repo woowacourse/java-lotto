@@ -14,23 +14,43 @@
 </head>
 
 <body class="bg-dark">
-	<div id="header"></div>
-
 	<div class="container mt-5">
 		<div class="jumbotron">
-			<h3 class="display-4">🎱 Lottery</h3>
+			<h3 class="display-4">구매한 로또</h3>
 			<hr class="my-4">
 
+			<div class="container">
+				<div class="row mb-2 text-center">
+					<div class="btn-group-toggle " data-toggle="buttons">
+						<label class="btn btn-outline-dark mb-1 active">
+							<input type="checkbox" checked autocomplete="off" disable> 1
+						</label>
+						<label class="btn btn-outline-dark mb-1 active">
+							<input type="checkbox" checked autocomplete="off" disable> 1
+						</label>
+						<label class="btn btn-outline-dark mb-1 active">
+							<input type="checkbox" checked autocomplete="off" disable> 1
+						</label>
+						<label class="btn btn-outline-dark mb-1 active">
+							<input type="checkbox" checked autocomplete="off" disable> 1
+						</label>
+						<label class="btn btn-outline-dark mb-1 active">
+							<input type="checkbox" checked autocomplete="off" disable> 1
+						</label>
+						<label class="btn btn-outline-dark mb-1 active">
+							<input type="checkbox" checked autocomplete="off" disable> 1
+						</label>
+					</div>
+				</div>
+			</div>
 
-			<div class="container" id="purchasing">
-				<a class="btn btn-warning btn-lg btn-block" href="/purchase">로또 구입하기</a>
-				<a class="btn btn-warning btn-lg btn-block" href="/lastwin">지난 주 당첨로또 입력하기</a>
-				<a class="btn btn-warning btn-lg btn-block" href="/purchase">지난 당첨내역 보기</a>
-				<a class="btn btn-warning btn-lg btn-block" href="/purchase">당첨 통계</a>
+			<div class="col-auto mt-4 text-center">
+				<button type="submit" class="btn btn-outline-secondary">당첨여부 확인</button>
 			</div>
 
 		</div>
 	</div>
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -19,81 +20,100 @@
 			<h3 class="display-4">Purchase Lottery!</h3>
 			<hr class="my-4">
 
-			<form>
+			<form action="/purchase/ticket" method="get">
+				<!--onclick="return checkMoneyNumeric();"-->
 				<div class="container" id="purchasing">
 					<h5>구입 금액</h5>
 					<small id="passwordHelpInline" class="text-muted">
-						최소 1000원 ~ 최대 100,000원
+						최소 1,000원 ~ 최대 150,000원
 					</small>
 					<div class="form-row align-items-center">
 						<div class="col-sm-4 my-1">
-							<input type="text" class="form-control" id="inlineFormInputName">
+							<input type="text" class="form-control" id="money" name="money">
+							<small class="text-muted">원</small>
 						</div>
 					</div>
 				</div>
-
 
 				<hr class="my-3">
 
 				<div class="container">
 					<h5>수동 로또 입력</h5>
 					<div class="mb-2 mr-2 text-right">
-						<button type="button" class="btn btn-success btn-sm btn-round">+</button>
+						<button type="button" class="btn btn-success btn-sm btn-round" onclick="add_lotto();">+</button>
 					</div>
-
-					<div class="container">
-						<div class="row mb-2">
-							<div class="col-10 text-center">
-								<div class="btn-group-toggle" data-toggle="buttons">
-									<!-- 45개 버튼 for문 넣기 -->
-									<label class="btn btn-outline-dark mb-1 active">
-										<input type="checkbox" checked autocomplete="off"> 1
-									</label>
-									<label class="btn btn-outline-dark mb-1">
-										<input type="checkbox" checked autocomplete="off"> 2
-									</label>
-									<label class="btn btn-outline-dark mb-1">
-										<input type="checkbox" checked autocomplete="off"> 3
-									</label>
-									<label class="btn btn-outline-dark mb-1">
-										<input type="checkbox" checked autocomplete="off"> 4
-									</label>
-									<label class="btn btn-outline-dark mb-1">
-										<input type="checkbox" checked autocomplete="off"> 5
-									</label>
-									<label class="btn btn-outline-dark mb-1">
-										<input type="checkbox" checked autocomplete="off"> 6
-									</label>
-									<label class="btn btn-outline-dark mb-1">
-										<input type="checkbox" checked autocomplete="off"> 7
-									</label>
-									<label class="btn btn-outline-dark mb-1">
-										<input type="checkbox" checked autocomplete="off"> 8
-									</label>
-									<label class="btn btn-outline-dark mb-1">
-										<input type="checkbox" checked autocomplete="off"> 9
-									</label>
-									<label class="btn btn-outline-dark mb-1">
-										<input type="checkbox" checked autocomplete="off"> 10
-									</label>
-								</div>
-							</div>
-							<div class="col-2 text-center">
-								<button type="button" class="btn btn-danger btn-sm btn-round vertical-center">-</button>
-							</div>
-						</div>
-					</div>
-
+					<div class="container" id="lotto-area"></div>
 				</div>
 
 				<div class="col-auto mt-4 text-center">
 					<button type="submit" class="btn btn-outline-secondary">구매하기</button>
 				</div>
-
 			</form>
 		</div>
 	</div>
 
+	<script type="text/javascript">
+		function checkInput() {
+			checkMoneyNumeric();
+			return false;
+		}
+
+		function checkMoneyNumeric() {
+			var money = document.getElementById("money").value;
+
+			if (isNaN(money) || money <= 0) {
+				window.alert("구입 금액의 값이 올바르지 않습니다.");
+				document.getElementById("money").focus();
+
+				return false;
+			}
+
+			return true;
+
+		}
+	</script>
+
+	<script type="text/javascript">
+		var count = 0;
+
+		function add_lotto() {
+			var div = document.getElementById('lotto-area');
+
+			var addedDiv = document.createElement('div');
+			addedDiv.id = "each-lotto-" + count;
+			addedDiv.className = "row mb-2 text-center";
+
+			var lottoNumbersDiv = document.createElement('div');
+			lottoNumbersDiv.id = "each-lotto-" + count;
+			lottoNumbersDiv.className = "col-10 btn-group-toggle";
+			lottoNumbersDiv.setAttribute("data-toggle", "buttons");
+
+			var deletingDiv = document.createElement('div');
+			deletingDiv.id = "deleting-lotto-area-" + count;
+			deletingDiv.className = "col-2";
+
+			var deletingBtn = document.createElement('button');
+			deletingBtn.type = "button";
+			deletingBtn.id = "deleting-lotto-btn-" + count;
+			deletingBtn.className = "btn btn-danger btn-sm btn-round vertical-center";
+			deletingBtn.innerHTML = '-';
+
+			var str = '';
+			for (var i = 1; i <= 45; i++) {
+				str += '<label class="btn btn-outline-dark mb-1 active">' +
+					'<input type="checkbox" checked autocomplete="off"> ' +
+					i + '</label>';
+			}
+
+			lottoNumbersDiv.innerHTML = str;
+			addedDiv.appendChild(lottoNumbersDiv);
+			addedDiv.appendChild(deletingDiv);
+			deletingDiv.appendChild(deletingBtn);
+			div.appendChild(addedDiv);
+
+			count++;
+		}
+	</script>
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
