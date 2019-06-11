@@ -57,3 +57,39 @@ CREATE TABLE LOTTORESULT (
 	FOREIGN KEY (lotto_id)
 	REFERENCES LOTTO(lotto_id) ON DELETE CASCADE 
 );
+
+
+
+
+CREATE TABLE ROUND (
+    lotto_round INT UNSIGNED NOT NULL,
+    PRIMARY KEY (lotto_round)
+);
+
+CREATE TABLE LOTTO (
+    lotto_round INT UNSIGNED NOT NULL,
+    lotto VARCHAR(40) NOT NULL,
+    FOREIGN KEY (lotto_round)
+    REFERENCES ROUND(lotto_round) ON DELETE CASCADE
+);
+
+CREATE TABLE WINNINGLOTTO (
+    lotto_round INT UNSIGNED NOT NULL,
+    lotto VARCHAR(40) NOT NULL,
+    lotto_bonus_number TINYINT UNSIGNED NOT NULL,
+    FOREIGN KEY (lotto_round)
+    REFERENCES ROUND(lotto_round) ON DELETE CASCADE
+);
+
+CREATE TABLE LOTTORESULT (
+    lotto_round INT UNSIGNED NOT NULL,
+    first INT UNSIGNED,
+    second INT UNSIGNED,
+    third INT UNSIGNED,
+    fourth INT UNSIGNED,
+    fifth INT UNSIGNED,
+    winning_amount VARCHAR(12) NOT NULL,
+    earning_rate VARCHAR(12) NOT NULL,
+    FOREIGN KEY (lotto_round)
+    REFERENCES ROUND(lotto_round) ON DELETE CASCADE
+);
