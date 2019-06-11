@@ -8,6 +8,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 
@@ -17,12 +18,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoDAOTest {
     private LottoDAO lottoDAO;
     private Lottos lottos;
-    private String lottoId;
+    private RoundDAO roundDAO;
+    private String lottoRound;
 
     @BeforeEach
-    public void setup_db() throws  SQLException {
-        lottoDAO = new LottoDAO(DBManager.getConnection());
-        lottoId = lottoDAO.getRound().toString();
+    public void setup_db() throws SQLException {
+        Connection connection = DBManager.getConnection();
+        roundDAO = new RoundDAO(connection);
+        lottoDAO = new LottoDAO(connection);
+        lottoRound = roundDAO.getCurrentRound().toString();
     }
 
     @BeforeEach
@@ -57,17 +61,22 @@ public class LottoDAOTest {
     }
 
     @Test
+    void test0_프라이머리키_튜플_생성() throws SQLException {
+        roundDAO.addRound(roundDAO.getNextRound().toString());
+    }
+
+    @Test
     void test1_로또_추가() throws SQLException {
-        lottoDAO.addLottos(lottoId, lottos);
+        lottoDAO.addLottos(lottoRound, lottos);
     }
 
     @Test
     void test2_로또_검색() throws SQLException {
-        assertThat(lottos).isEqualTo((lottoDAO.findByLottoId(lottoId)).getLottos());
+        assertThat(lottos).isEqualTo(lottoDAO.findByLottoRound(lottoRound));
     }
 
     @Test
-    void test3_로또_삭제() throws SQLException {
-        lottoDAO.deleteLotto(lottoId);
+    void test3_프라이머리키_튜플_삭제() throws SQLException {
+        roundDAO.deleteRound(lottoRound);
     }
 }

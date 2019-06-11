@@ -12,7 +12,7 @@ public class RoundDAO {
         this.connection = connection;
     }
 
-    public int getNextRound() throws SQLException {
+    public Integer getNextRound() throws SQLException {
         String query = "SELECT lotto_round FROM round ORDER BY lotto_round DESC LIMIT 1";
         PreparedStatement pstmt = connection.prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
@@ -20,6 +20,16 @@ public class RoundDAO {
         if (!rs.next()) return 1;
 
         return Integer.parseInt(rs.getString("lotto_round")) + 1;
+    }
+
+    public Integer getCurrentRound() throws SQLException {
+        String query = "SELECT lotto_round FROM round ORDER BY lotto_round DESC LIMIT 1";
+        PreparedStatement pstmt = connection.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (!rs.next()) return 0;
+
+        return Integer.parseInt(rs.getString("lotto_round"));
     }
 
     public void addRound(String round) throws SQLException {

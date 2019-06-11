@@ -15,13 +15,15 @@ public class LottoResultDAOTest {
     private LottoResultDAO lottoResultDAO;
     private LottoResult lottoResult;
     private Lottos lottos;
-    private LottoDAO lottoDAO;
+    private RoundDAO roundDAO;
+    private String lottoRound;
 
     @BeforeEach
-    void setup_db() {
+    void setup_db() throws SQLException {
         Connection connection = DBManager.getConnection();
         lottoResultDAO = new LottoResultDAO(connection);
-        lottoDAO = new LottoDAO(connection);
+        roundDAO = new RoundDAO(connection);
+        lottoRound = roundDAO.getCurrentRound().toString();
     }
 
     @BeforeEach
@@ -65,13 +67,17 @@ public class LottoResultDAOTest {
     }
 
     @Test
-    void test1_로또_결과_추가() throws SQLException {
-        lottoDAO.addLottos("1", lottos);
-        lottoResultDAO.addLottoResult("1", lottoResult);
+    void test0_프라이머리키_튜플_생성() throws  SQLException {
+        roundDAO.addRound(roundDAO.getNextRound().toString());
     }
 
     @Test
-    void test2_테이블_삭제() throws SQLException {
-        lottoDAO.deleteLotto("1");
+    void test1_로또_결과_추가() throws SQLException {
+        lottoResultDAO.addLottoResult(lottoRound, lottoResult);
+    }
+
+    @Test
+    void test2_프라이머리키_튜플_삭제() throws SQLException {
+        roundDAO.deleteRound(lottoRound);
     }
 }

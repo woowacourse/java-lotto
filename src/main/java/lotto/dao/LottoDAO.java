@@ -15,33 +15,41 @@ public class LottoDAO {
         this.con = con;
     }
 
-    public void addLottos(String lottoId, Lottos lottos) throws SQLException {
+    public void addLottos(String round, Lottos lottos) throws SQLException {
+        for (Lotto lotto : lottos.getLottos()) {
+            addLotto(round, lotto);
+        }
+    }
+
+    public void addLotto(String round, Lotto lotto) throws SQLException {
         String query = "INSERT INTO lotto VALUES (?, ?)";
         PreparedStatement pstmt = con.prepareStatement(query);
-        pstmt.setString(1, lottoId);
-        StringBuilder stringLottos = new StringBuilder();
-        List<String> strings = new ArrayList<>();
-        for (Lotto lotto : lottos.getLottos()) {
-            strings.add(lotto.toString());
-        }
-        stringLottos.append(String.join("\n", strings));
-        pstmt.setString(2, stringLottos.toString());
+        pstmt.setString(1, round);
+        pstmt.setString(2, lotto.toString());
         pstmt.executeUpdate();
     }
 
-    public LottosDTO findByLottoId(String lottoId) throws SQLException {
-        String query = "SELECT * FROM lotto WHERE lotto_id = ?";
+    public Lottos findByLottoRound(String lottoId) throws SQLException {
+        String query = "SELECT * FROM lotto WHERE lotto_round = ?";
         PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setString(1, lottoId);
         ResultSet rs = pstmt.executeQuery();
 
         if (!rs.next()) return null;
 
-        List<Lotto> lottos = makeLottos(rs.getString("lottos").split("\n"));
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(makeLotto(rs.getString("lotto")));
+        while(rs.next()) {
+            lottos.add(makeLotto(rs.getString("lotto")));
+        }
 
-        LottosDTO lottosDTO = new LottosDTO();
-        lottosDTO.setLottos(new Lottos(lottos));
-        return lottosDTO;
+        return new Lottos(lottos);
+    }
+
+    private Lotto makeLotto(String stringLotto) {
+        return new Lotto(ConvertLottoNumber.run(
+                stringLotto.substring(1, stringLotto.lastIndexOf("]")))
+        );
     }
 
     private List<Lotto> makeLottos(String[] stringLottos) {

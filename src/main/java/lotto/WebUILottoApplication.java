@@ -25,7 +25,8 @@ public class WebUILottoApplication {
 
         get("/show", (req, res) -> {
             List<String> rounds = new ArrayList<>();
-            for (Integer i = 1; i < getRound(connection); i++) {
+            RoundDAO roundDAO = new RoundDAO(connection);
+            for (Integer i = 1; i <= roundDAO.getCurrentRound(); i++) {
                 rounds.add(i.toString());
             }
 
@@ -35,19 +36,19 @@ public class WebUILottoApplication {
         });
 
         get("/showLottoInfo", (req, res) -> {
-            String lottoId = req.queryParams("lottoId");
+            String lottoRound = req.queryParams("lottoRound");
 
             LottoDAO lottoDAO = new LottoDAO(connection);
             WinningLottoDAO winningLottoDAO = new WinningLottoDAO(connection);
             LottoResultDAO lottoResultDAO = new LottoResultDAO(connection);
-            LottosDTO lottosDTO = lottoDAO.findByLottoId(lottoId);
-            WinningLottoDTO winningLottoDTO = winningLottoDAO.findByLottoId(lottoId);
-            LottoResultDTO lottoResultDTO = lottoResultDAO.findByLottoId(lottoId);
+            Lottos lottos = lottoDAO.findByLottoRound(lottoRound);
+            WinningLotto winningLotto = winningLottoDAO.findByLottoRound(lottoRound);
+            LottoResultDTO lottoResultDTO = lottoResultDAO.findByLottoRound(lottoRound);
 
             Map<String, Object> model = new HashMap<>();
-            model.put("lottoId", lottoId);
-            model.put("lottos", lottosDTO);
-            model.put("winningLotto", winningLottoDTO);
+            model.put("lottoRound", lottoRound);
+            model.put("lottos", lottos);
+            model.put("winningLotto", winningLotto);
             model.put("lottoResult", lottoResultDTO);
             return render(model, "showLottoInfo.html");
         });
@@ -58,7 +59,8 @@ public class WebUILottoApplication {
             List<String> inputManualLottoNumbers = Arrays.asList(req.queryParams("manualLottoNumbers").split(DELIMITER));
             LottosFactory lottosFactory = new LottosFactory(inputManualLottoNumbers, lottoCount);
             Lottos currentLottos = lottosFactory.generateTotalLottos();
-            loadLottos(currentLottos);
+            setLottos(currentLottos);
+            loadRoundTable(connection);
             loadLottoTable(connection);
 
             Map<String, Object> model = new HashMap<>();
@@ -92,15 +94,15 @@ public class WebUILottoApplication {
         });
     }
 
-    private static void loadLottoTable(Connection connection) throws SQLException {
-        LottoDAO lottoDAO = new LottoDAO(connection);
-        round = lottoDAO.getRound();
-        lottoDAO.addLottos(round.toString(), lottos);
+    private static void loadRoundTable(Connection connection) throws SQLException {
+        RoundDAO roundDAO = new RoundDAO(connection);
+        round = roundDAO.getNextRound();
+        roundDAO.addRound(round.toString());
     }
 
-    private static Integer getRound(Connection connection) throws SQLException {
+    private static void loadLottoTable(Connection connection) throws SQLException {
         LottoDAO lottoDAO = new LottoDAO(connection);
-        return lottoDAO.getRound();
+        lottoDAO.addLottos(round.toString(), lottos);
     }
 
     private static void loadWinningLottoTable(Connection connection, WinningLotto winningLotto)
@@ -119,7 +121,7 @@ public class WebUILottoApplication {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 
-    private static void loadLottos(Lottos currentLottos) {
+    private static void setLottos(Lottos currentLottos) {
         lottos = currentLottos;
     }
 }

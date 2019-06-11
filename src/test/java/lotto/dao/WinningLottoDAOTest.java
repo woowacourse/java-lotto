@@ -16,16 +16,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WinningLottoDAOTest {
     private WinningLottoDAO winningLottoDAO;
     private WinningLotto winningLotto;
+    private RoundDAO roundDAO;
     private Lottos lottos;
-    private LottoDAO lottoDAO;
-    private String lottoId;
+    private String lottoRound;
 
     @BeforeEach
     void setup_db() throws SQLException {
         Connection connection = DBManager.getConnection();
         winningLottoDAO = new WinningLottoDAO(connection);
-        lottoDAO = new LottoDAO(connection);
-        lottoId = lottoDAO.getRound().toString();
+        roundDAO = new RoundDAO(connection);
+        lottoRound = roundDAO.getCurrentRound().toString();
     }
 
     @BeforeEach
@@ -74,18 +74,22 @@ public class WinningLottoDAOTest {
     }
 
     @Test
+    void test0_프라이머리키_튜플_생성() throws SQLException {
+        roundDAO.addRound(roundDAO.getNextRound().toString());
+    }
+
+    @Test
     void test1_당첨_로또_추가() throws SQLException {
-        lottoDAO.addLottos(lottoId, lottos);
-        winningLottoDAO.addWinningLotto(lottoId, winningLotto);
+        winningLottoDAO.addWinningLotto(lottoRound, winningLotto);
     }
 
     @Test
     void test2_당첨_로또_검색() throws SQLException {
-        assertThat(winningLotto).isEqualTo(winningLottoDAO.findByLottoId(lottoId).getWinningLotto());
+        assertThat(winningLotto).isEqualTo(winningLottoDAO.findByLottoRound(lottoRound));
     }
 
     @Test
-    void test3_테이블_삭제() throws SQLException {
-        lottoDAO.deleteLotto(lottoId);
+    void test3_프라이머리키_튜플_삭제() throws SQLException {
+        roundDAO.deleteRound(lottoRound);
     }
 }

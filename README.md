@@ -35,32 +35,6 @@
 - 현실에서는 매주 1회차가 진행되는데 이 로또는 로또 게임을 진행할 때마다 1회차가 증가하는 것으로 가정한다.
 
 ### 로또 DB 테이블
-CREATE TABLE LOTTO (
-	lotto_id VARCHAR(12) NOT NULL,
-	lottos TEXT NOT NULL,
-	PRIMARY KEY (lotto_id)
-);
-
-CREATE TABLE WINNINGLOTTO (
-	lotto_id VARCHAR(12) NOT NULL,
-	winning_lotto VARCHAR(40) NOT NULL,
-	bonus_ball VARCHAR(3) NOT NULL,
-	FOREIGN KEY (lotto_id)
-	REFERENCES LOTTO(lotto_id) ON DELETE CASCADE
-);
-
-CREATE TABLE LOTTORESULT (
-    lotto_id VARCHAR(12) NOT NULL,
-	lotto_result VARCHAR(200) NOT NULL,
-	winning_amount VARCHAR(12) NOT NULL,
-	earning_rate VARCHAR(12) NOT NULL,
-	FOREIGN KEY (lotto_id)
-	REFERENCES LOTTO(lotto_id) ON DELETE CASCADE 
-);
-
-
-
-
 CREATE TABLE ROUND (
     lotto_round INT UNSIGNED NOT NULL,
     PRIMARY KEY (lotto_round)
@@ -76,7 +50,7 @@ CREATE TABLE LOTTO (
 CREATE TABLE WINNINGLOTTO (
     lotto_round INT UNSIGNED NOT NULL,
     lotto VARCHAR(40) NOT NULL,
-    lotto_bonus_number TINYINT UNSIGNED NOT NULL,
+    bonus_ball TINYINT UNSIGNED NOT NULL,
     FOREIGN KEY (lotto_round)
     REFERENCES ROUND(lotto_round) ON DELETE CASCADE
 );

@@ -7,18 +7,23 @@
 <body>
 <h1>지난 로또 정보</h1>
 <br/>
-회차: {{lottoId}} <br/>
+회차: {{lottoRound}} <br/>
 <br/>
 구매한 로또 <br/>
-{{#lottos.lottos.lottos}}
+{{#lottos.lottos}}
 {{this}} <br/>
-{{/lottos.lottos.lottos}}
+{{/lottos.lottos}}
 <br/>
 <br/>
-지난 당첨 로또 번호: {{winningLotto.winningLotto.winningLotto}} <br/>
-지난 보너스 번호: {{winningLotto.winningLotto.bonusNumber}} <br/>
+지난 당첨 로또 번호: {{winningLotto.winningLotto}} <br/>
+지난 보너스 번호: {{winningLotto.bonusNumber}} <br/>
 <br/>
-당첨 결과: {{lottoResult.lottoResult}} <br/>
+당첨 결과 <br/>
+3개 일치 (5000원)- {{lottoResult.fifthCount}}개 <br/>
+4개 일치 (50000원)- {{lottoResult.fourthCount}}개 <br/>
+5개 일치 (1500000원)- {{lottoResult.thirdCount}}개 <br/>
+5개 일치, 보너스 볼 일치(30000000원) - {{lottoResult.secondCount}}개 <br/>
+6개 일치 (2000000000원)- {{lottoResult.firstCount}}개 <br/>
 당첨 금액: {{lottoResult.earningAmount}} <br/>
 수익률: {{lottoResult.earningRate}}% <br/>
 
