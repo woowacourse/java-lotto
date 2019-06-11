@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.exception.DuplicateLottoException;
 import lotto.domain.exception.LottoSizeException;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,6 +15,10 @@ public class Lotto {
     public Lotto(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new LottoSizeException("로또 숫자는 6개여야 합니다.");
+        }
+
+        if (numbers.size() != new HashSet<>(numbers).size()) {
+            throw new DuplicateLottoException("로또 숫자가 중복됩니다.");
         }
 
         this.numbers = numbers;

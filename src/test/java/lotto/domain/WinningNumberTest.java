@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.WinningLottoContainBonusException;
+import lotto.domain.generator.LottoNumbersGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +9,7 @@ import java.util.Arrays;
 
 import static lotto.domain.LottoNumber.getLottoNumber;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WinningNumberTest {
 
@@ -73,5 +76,12 @@ public class WinningNumberTest {
                 getLottoNumber(1), getLottoNumber(2), getLottoNumber(7),
                 getLottoNumber(8), getLottoNumber(9), getLottoNumber(10)))))
                 .isEqualTo(Prize.NONE);
+    }
+
+    @Test
+    void 보너스볼이_로또_번호와_겹치는_경우_에러_처리() {
+        assertThrows(WinningLottoContainBonusException.class, () -> {
+            new WinningNumber(new Lotto(LottoNumbersGenerator.generateLottoNumbers("1, 2, 3, 4, 5, 6")), 1);
+        });
     }
 }

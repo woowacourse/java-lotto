@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.exception.ExceedBoughtLottosAboutMoneyException;
 import lotto.domain.generator.LottosAutoGenerator;
 import lotto.domain.generator.LottosManualGenerator;
 
@@ -13,14 +14,17 @@ public class BoughtLottos {
     private final List<Lotto> lottos;
     private final int countOfBoughtManual;
 
-    private BoughtLottos(final List<Lotto> lottos, final int countOfBoughtManual) {
+    public BoughtLottos(final List<Lotto> lottos, final int countOfBoughtManual) {
         this.lottos = lottos;
         this.countOfBoughtManual = countOfBoughtManual;
     }
 
     public static BoughtLottos buyLottos(final int price, List<String> inputManualLottos) {
+        int countOfBoughtManual = inputManualLottos.size();
+        if (price / BUY_PRICE < countOfBoughtManual) {
+            throw new ExceedBoughtLottosAboutMoneyException("입력된 가격보다 사려는 로또가 더 많습니다.");
+        }
         List<Lotto> lottos = new ArrayList<>(generateLottos(new LottosManualGenerator(inputManualLottos)));
-        int countOfBoughtManual = lottos.size();
         int amountOfAutoGenerateLotto = price / BUY_PRICE - countOfBoughtManual;
 
         lottos.addAll(generateLottos(new LottosAutoGenerator(amountOfAutoGenerateLotto)));
