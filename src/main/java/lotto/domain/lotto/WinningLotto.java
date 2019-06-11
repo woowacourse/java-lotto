@@ -2,6 +2,13 @@ package lotto.domain.lotto;
 
 import lotto.exception.DuplicateLottoNumberException;
 
+import java.util.EnumMap;
+import java.util.Map;
+
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+
 public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
@@ -14,7 +21,20 @@ public class WinningLotto {
         this.winningLotto = winningLotto;
     }
 
-    Rank match(Lotto lotto) {
+    public Result match(LottoTickets lottoTickets) {
+        return new Result(calculateLottoResult(lottoTickets));
+    }
+
+    private Map<Rank, Long> calculateLottoResult(LottoTickets lottoTickets) {
+        return lottoTickets.getAllLottoTickets()
+                .stream()
+                .map(this::matchRank)
+                .collect(groupingBy(identity(),
+                        () -> new EnumMap<>(Rank.class),
+                        counting()));
+    }
+
+    private Rank matchRank(Lotto lotto) {
         return Rank.valueOf(countMatchedLottoNumber(lotto), contains(lotto));
     }
 

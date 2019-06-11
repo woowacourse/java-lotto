@@ -34,6 +34,6 @@ class RankTest {
     @Test
     void Rank_확인_음수() {
         assertThatThrownBy(() -> Rank.valueOf(-1, false))
-                .isInstanceOf(NullPointerException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -7,24 +7,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
-
 public class Result {
     private final Map<Rank, Long> lottoScore;
 
-    public Result(WinningLotto winningLotto, LottoTickets lottoTickets) {
-        this.lottoScore = calculateLottoResult(winningLotto, lottoTickets);
-    }
-
-    private Map<Rank, Long> calculateLottoResult(WinningLotto winningLotto, LottoTickets lottoTickets) {
-        return lottoTickets.getAllLottoTickets()
-                .stream()
-                .map(winningLotto::match)
-                .collect(groupingBy(identity(),
-                        () -> new EnumMap<>(Rank.class),
-                        counting()));
+    public Result(Map<Rank, Long> lottoScore) {
+        this.lottoScore = new EnumMap<>(lottoScore);
     }
 
     public long get(Rank rank) {

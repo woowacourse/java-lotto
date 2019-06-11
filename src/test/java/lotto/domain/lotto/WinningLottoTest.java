@@ -40,7 +40,7 @@ class WinningLottoTest {
 
         LottoTickets lottoTickets = new LottoTickets(lottoRepository);
         WinningLotto winningLotto = new WinningLotto(lotto, 7);
-        Result result = new Result(winningLotto, lottoTickets);
+        Result result = winningLotto.match(lottoTickets);
 
         assertThat(result.get(Rank.FIRST)).isEqualTo(1);
         assertThat(result.get(Rank.SECOND)).isEqualTo(1);
