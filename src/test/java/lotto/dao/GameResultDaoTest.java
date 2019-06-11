@@ -22,7 +22,7 @@ public class GameResultDaoTest {
     private static final GameResultDto GAME_RESULT_DTO;
     private static final int TEST_TURN = 2;
 
-    private GameResultDao dao;
+    private GameResultDao resultDao;
 
     static {
         final Lotto sampleLotto = new LottoFactory().create(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -44,34 +44,34 @@ public class GameResultDaoTest {
 
     @BeforeEach
     public void setUp() {
-        dao = new GameResultDao();
-        dao.add(GAME_RESULT_DTO, TEST_TURN);
+        resultDao = new GameResultDao();
+        resultDao.add(GAME_RESULT_DTO, TEST_TURN);
     }
 
     @Test
     public void add() {
-        dao.add(GAME_RESULT_DTO, 1);
-        GameResultDto actual = dao.findByTurn(1);
+        resultDao.add(GAME_RESULT_DTO, 1);
+        GameResultDto actual = resultDao.findByTurn(1);
         assertEquals(GAME_RESULT_DTO, actual);
     }
 
     @Test
     public void findByTurn() {
-        GameResultDto actual = dao.findByTurn(TEST_TURN);
+        GameResultDto actual = resultDao.findByTurn(TEST_TURN);
         assertEquals(GAME_RESULT_DTO, actual);
     }
 
     @Test
     public void deleteAll() {
-        dao.deleteAll();
+        resultDao.deleteAll();
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            Optional.ofNullable(dao.findByTurn(1)).orElseThrow(IllegalArgumentException::new);
+            Optional.ofNullable(resultDao.findByTurn(1)).orElseThrow(IllegalArgumentException::new);
         });
     }
 
     @AfterEach
     public void tearDown() {
-        dao.deleteAll();
+        resultDao.deleteAll();
     }
 
 }

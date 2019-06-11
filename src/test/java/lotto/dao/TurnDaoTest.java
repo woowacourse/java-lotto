@@ -10,41 +10,42 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TurnDaoTest {
-    private static final TurnDao DAO;
+    private static final TurnDao turnDao;
 
     static {
-        DAO = new TurnDao();
+        turnDao = new TurnDao();
     }
 
     @BeforeEach
     public void setUp() {
+        turnDao.deleteAll();
     }
 
     @Test
     public void getLatestTurnIfNull() {
-        assertEquals(1, DAO.findNext());
+        assertEquals(1, turnDao.findNext());
     }
 
     @Test
     public void findLast() {
-        DAO.add();
-        assertEquals(2, DAO.findNext());
-        DAO.add();
-        assertEquals(3, DAO.findNext());
+        turnDao.add();
+        assertEquals(2, turnDao.findNext());
+        turnDao.add();
+        assertEquals(3, turnDao.findNext());
     }
 
     @Test
     public void findAllTurn() {
-        DAO.add();
-        DAO.add();
-        DAO.add();
+        turnDao.add();
+        turnDao.add();
+        turnDao.add();
 
         final List<Integer> expected = Arrays.asList(1, 2, 3);
-        assertEquals(expected, DAO.findAll());
+        assertEquals(expected, turnDao.findAll());
     }
 
     @AfterEach
     public void tearDown() {
-        DAO.deleteAll();
+        turnDao.deleteAll();
     }
 }
