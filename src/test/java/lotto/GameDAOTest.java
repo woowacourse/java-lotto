@@ -41,11 +41,6 @@ class GameDAOTest {
     }
 
     @Test
-    void maxId() throws SQLException {
-        assertThat(gameDAO.getCount()).isEqualTo(1);
-    }
-
-    @Test
     void addLottoNumbers() throws SQLException {
         List<Lotto> lottoList = Arrays.asList(
                 new Lotto(InputParser.parseLotto("1, 2, 3, 4, 5, 6")),
@@ -53,11 +48,6 @@ class GameDAOTest {
                 new Lotto(InputParser.parseLotto("3, 4, 5, 6, 7, 8"))
         );
         gameDAO.addLottoNumbers(lottoList);
-    }
-
-    @Test
-    void getGamesTotalColumns() throws SQLException {
-        assertThat(gameDAO.getGamesTotalColumns()).isEqualTo(7);
     }
 
     @Test

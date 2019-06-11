@@ -13,7 +13,7 @@ class ManualCountTest {
 
     @Test
     void factory_method_throw_exception() {
-        assertThrows(ManualCountBoundException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             ManualCount.is(5, new Count(PurchaseAmount.of(1000)));
         });
     }
