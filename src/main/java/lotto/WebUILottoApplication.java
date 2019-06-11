@@ -24,6 +24,11 @@ public class WebUILottoApplication {
             String data = callRestApiService.lottoBuyCount(req);
             return data;
         });
+
+        post("/detailLotteries", (req, res) -> {
+            String data = callRestApiService.detailLotteries(req);
+            return data;
+        });
     }
 
     private static String render(Map<String, Object> model, String templatePath) {

@@ -2,6 +2,7 @@ const MIN_MONEY = 1000
 const MAX_MONEY = 100000000
 var moneyCondition
 
+
 function onKeyDownMoney() {
     if (event.keyCode == 13) {
         clickMoneyInput()
@@ -53,8 +54,13 @@ function callLottoBuyCount(money) {
         error : function(xhr, status, error){
             alert(error)
         },
-        success : generateLottoView
+        success : generateMoneyView
     })
+}
+
+function generateMoneyView(data) {
+    var dataJson = JSON.parse(data)
+    changeMoneyArea(dataJson.money, dataJson.count)
 }
 
 function changeMoneyArea(money, count) {
@@ -62,10 +68,6 @@ function changeMoneyArea(money, count) {
     $("#money-input").attr("disabled","true")
     $("#money-btn").attr("disabled","true")
     $("#lottocount-text").text(count)
-    $("#lottocount-area").show()
-}
-
-function generateLottoView(data) {
-    var dataJson = JSON.parse(data)
-    changeMoneyArea(dataJson.money, dataJson.count)
+    $("#lottocount-area").show("slow")
+    $("#lottoset-btn").focus()
 }

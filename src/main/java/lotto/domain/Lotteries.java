@@ -19,6 +19,10 @@ public class Lotteries implements Iterable<Lotto> {
         this.lotteries = new ArrayList<>();
     }
 
+    public Lotteries(List<Lotto> lotteries) {
+        this.lotteries = lotteries;
+    }
+
     public void addCustomLotto(List<Integer> noFormedLotto, CustomCreateLotto customCreateLotto) {
         this.lotteries.add(Lotto.customLotto(noFormedLotto, customCreateLotto));
     }
