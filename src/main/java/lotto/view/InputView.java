@@ -61,7 +61,14 @@ public class InputView {
     }
 
     private static String inputManualLottoNumber() {
-        return SCANNER.nextLine();
+        try {
+            String input = SCANNER.nextLine();
+            CustomStringUtils.checkIsBlank(input);
+            return input;
+        } catch (InvalidInputException e) {
+            System.out.println(e.getMessage());
+            return inputManualLottoNumber();
+        }
     }
 
     private static List<String> collectManualLottoNumber(int numberOfManualLotto) {
