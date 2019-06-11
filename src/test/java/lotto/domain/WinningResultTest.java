@@ -32,7 +32,7 @@ public class WinningResultTest {
                         LottoFactory.createLottoManually(Arrays.asList("1","2","3","4","5","6")),
                         LottoNumber.get(7)
                 );
-        Lottos lottos = LottoFactory.createLottos(manualLottoNumbers, purchaseAmount / LOTTO_PRICE);
+        Lottos lottos = new Lottos(LottoFactory.createLottos(manualLottoNumbers, purchaseAmount / LOTTO_PRICE));
         WinningResult winningResult = lottos.match(winningLotto);
         assertThat(winningResult.sumTotalWinningAmount()).isEqualTo(2_000_010_000);
     }
@@ -44,7 +44,7 @@ public class WinningResultTest {
                         LottoFactory.createLottoManually(Arrays.asList("1","2","3","7","39","17")),
                         LottoNumber.get(30)
                 );
-        Lottos lottos = LottoFactory.createLottos(manualLottoNumbers, purchaseAmount / LOTTO_PRICE);
+        Lottos lottos = new Lottos(LottoFactory.createLottos(manualLottoNumbers, purchaseAmount / LOTTO_PRICE));
         WinningResult winningResult = lottos.match(winningLotto);
         assertThat(winningResult.calculateRevenueRate(purchaseAmount)).isEqualTo(500.0);
     }
