@@ -4,10 +4,10 @@ import lotto.domain.LottoMoney;
 import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningLotto;
-import lotto.domain.dao.GameResultDao;
 import lotto.domain.dao.LottoTicketsDao;
 import lotto.domain.dao.RoundDao;
 import lotto.domain.dao.WinningLottoDao;
+import lotto.domain.factory.LottoResultsFactory;
 import lotto.domain.factory.LottoTicketsFactory;
 import lotto.domain.factory.WinningLottoFactory;
 import spark.ModelAndView;
@@ -81,7 +81,7 @@ public class WebUILottoApplication {
                 //TODO 아래의 코드가 정상적으로 작동하는 이유 알아보기
                 LottoTickets lottoTickets = req.session().attribute(LOTTO_TICKETS.type);
                 LottoMoney money = new LottoMoney(Long.parseLong(req.session().attribute(MONEY.type)));
-                LottoResults lottoResults = new LottoResults(lottoTickets, winningLotto, money);
+                LottoResults lottoResults = LottoResultsFactory.create(lottoTickets, winningLotto, money);
 
                 model.put(LOTTO_TICKETS.type, lottoTickets);
                 model.put(MONEY.type, new LottoMoney(Long.parseLong(req.session().attribute(MONEY.type))));
@@ -96,6 +96,38 @@ public class WebUILottoApplication {
                 res.redirect("error.html");
                 return "error";
             }
+        });
+
+        get("selectRound", (req, res) -> {
+            try {
+                RoundDao roundDao = new RoundDao(connection);
+                int round = roundDao.findMaxRound();
+                Map<String, Object> model = new HashMap<>();
+                model.put("round", round);
+                return render(model, "selectRound.html");
+            } catch (Exception e) {
+                e.printStackTrace();
+                res.redirect("error.html");
+                return "error";
+            }
+        });
+
+        get("/showRounds", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int round = Integer.parseInt(req.queryParams("round"));
+            WinningLottoDao winningLottoDao = new WinningLottoDao(connection);
+            WinningLotto winningLotto = winningLottoDao.findWinningLottoByRound(round);
+            LottoTicketsDao lottoTicketsDao = new LottoTicketsDao(connection);
+            LottoTickets lottoTickets = lottoTicketsDao.findLottoByRound(round);
+            RoundDao roundDao = new RoundDao(connection);
+            int money = roundDao.findMoneyByRound(round);
+            LottoMoney lottoMoney = new LottoMoney(money);
+            LottoResults lottoResults = LottoResultsFactory.create(lottoTickets, winningLotto, lottoMoney);
+
+            model.put(LOTTO_RESULTS.type, lottoResults);
+            model.put(REWARD_MONEY.type, lottoResults.getYield());
+            model.put("round", round);
+            return render(model, "showRounds.html");
         });
 
         get("/reset", (req, res) -> {
@@ -132,7 +164,6 @@ public class WebUILottoApplication {
         addRoundToDB(lottoMoney, connection, round);
         addLottoTicketsToDB(lottoTickets, connection, round);
         addWinningLottoToDB(winningLotto, connection, round);
-        addGameResultToDB(connection, lottoTickets, winningLotto, lottoMoney, round);
     }
 
     private static void addRoundToDB(LottoMoney lottoMoney, Connection connection, int round) throws SQLException {
@@ -148,11 +179,6 @@ public class WebUILottoApplication {
     private static void addLottoTicketsToDB(LottoTickets lottoTickets, Connection connection, int round) throws SQLException {
         LottoTicketsDao lottoTicketsDao = new LottoTicketsDao(connection);
         lottoTicketsDao.addLottoTickets(round, lottoTickets);
-    }
-
-    private static void addGameResultToDB(Connection connection, LottoTickets lottoTickets, WinningLotto winningLotto, LottoMoney inputMoney, int round) throws SQLException {
-        GameResultDao gameResultDao = new GameResultDao(connection);
-        gameResultDao.addGameResult(lottoTickets, winningLotto, inputMoney, round);
     }
 
     public enum Type {

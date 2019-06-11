@@ -24,6 +24,7 @@ public class RoundDao {
         preparedStatement.executeUpdate();
     }
 
+    //TODO 3개의 DAO에서 해당하는 데이터가 없을시 반환하는 통일(?)
     public int findMoneyByRound(int round) throws SQLException {
         String query = "SELECT money FROM game where round=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
