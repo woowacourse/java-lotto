@@ -37,4 +37,8 @@ public class LottoService {
     public List<Lotto> getLottos() {
         return new LottoDtoConverter().convertDtoToLottos(lottosDao.findAllByTurn(turnDao.findNext()));
     }
+
+    public void vacateMoney() {
+        lottoMachine.vacate();
+    }
 }

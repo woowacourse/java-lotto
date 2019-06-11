@@ -50,7 +50,7 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             int money = Integer.parseInt(req.queryParams("money"));
             service.charge(money);
-            return render(model, "ask.html");
+            return render(model, "lotto_shopping.html");
         });
 
         post("/buy", (req, res) -> {
@@ -108,6 +108,7 @@ public class WebUILottoApplication {
 
         post("/end", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            service.vacateMoney();
             if (req.queryParams("token").equals("restart")) {
                 turnDao.add();
                 model.put("current_turn", turnDao.findNext());

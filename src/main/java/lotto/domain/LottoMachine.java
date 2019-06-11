@@ -25,4 +25,8 @@ public class LottoMachine {
     boolean isRemainMoney() {
         return (this.remainMoney >= LOTTO_MONEY);
     }
+
+    public void vacate() {
+        remainMoney = 0;
+    }
 }
