@@ -1,7 +1,8 @@
 package lotto.view;
 
-import lotto.domain.creator.ManualLottoCreator;
 import lotto.domain.Money;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoFactory;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.util.CustomStringUtils;
 import lotto.exception.InvalidInputException;
@@ -47,12 +48,12 @@ public class InputView {
         }
     }
 
-    public static ManualLottoCreator generateManualLottoCreator(int numberOfManualLotto) {
+    public static List<Lotto> generateManualLottoCreator(int numberOfManualLotto) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String> numbers = collectManualLottoNumber(numberOfManualLotto);
 
         try {
-            return new ManualLottoCreator(numbers);
+            return LottoFactory.createManualLottos(numberOfManualLotto, numbers);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return generateManualLottoCreator(numberOfManualLotto);

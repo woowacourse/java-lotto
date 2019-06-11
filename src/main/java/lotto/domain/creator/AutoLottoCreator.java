@@ -3,19 +3,15 @@ package lotto.domain.creator;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AutoLottoCreator implements LottoCreator {
     public AutoLottoCreator() {}
 
     @Override
-    public List<Lotto> createLottos(int lottoQuantity) {
-        List<Lotto> lottos = new ArrayList<>();
+    public Lotto createLotto() {
+        List<LottoNumber> numberList = LottoNumber.getRandomSixNumbers();
 
-        for (int i = 0; i < lottoQuantity; i++) {
-            lottos.add(new Lotto(LottoNumber.getLottoNumbers()));
-        }
-        return lottos;
+        return new Lotto(numberList);
     }
 }

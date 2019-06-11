@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.Rank;
+import lotto.domain.creator.ManualLottoCreator;
 import lotto.domain.util.CustomStringUtils;
 import lotto.exception.InvalidLottoNumbersException;
 
@@ -19,7 +20,8 @@ public class WinningLotto {
 
         checkIsBonusNumberOverlap(lottoNumbers, bonusNumber);
 
-        this.lotto = new Lotto(LottoNumber.getLottoNumbers(lottoNumbers));
+        ManualLottoCreator creator = new ManualLottoCreator(lottoNumbers);
+        this.lotto = creator.createLotto();
         this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 

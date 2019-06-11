@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.exception.InvalidLottoNumbersException;
-
 import java.util.*;
 
 import static lotto.domain.lotto.Lotto.NUMBER_OF_NUMBERS_IN_LOTTO;
@@ -28,42 +26,10 @@ public class LottoNumber {
         return numbers.get(number);
     }
 
-    public static List<LottoNumber> getLottoNumbers() {
+    public static List<LottoNumber> getRandomSixNumbers() {
         List<LottoNumber> numberList = new ArrayList<>(numbers.values());
 
         Collections.shuffle(numberList);
         return numberList.subList(0, NUMBER_OF_NUMBERS_IN_LOTTO);
-    }
-
-    public static List<LottoNumber> getLottoNumbers(List<Integer> inputNumbers) {
-        checkNumberOfNumbers(inputNumbers);
-        checkOverlab(inputNumbers);
-        List<LottoNumber> numberList = new ArrayList<>();
-
-        for (int number : inputNumbers) {
-            checkNumberIn(number);
-            numberList.add(numbers.get(number));
-        }
-        return numberList;
-    }
-
-    private static void checkNumberOfNumbers(List<Integer> inputNumbers) {
-        if (inputNumbers.size() != NUMBER_OF_NUMBERS_IN_LOTTO) {
-            throw new InvalidLottoNumbersException(
-                    String.format("숫자를 %d개 입력하셨습니다. %d개의 숫자를 입력해주세요",
-                            inputNumbers.size(), NUMBER_OF_NUMBERS_IN_LOTTO));
-        }
-    }
-
-    private static void checkOverlab(List<Integer> inputNumbers) {
-        if (inputNumbers.size() != new HashSet<>(inputNumbers).size()) {
-            throw new InvalidLottoNumbersException("한 로또 숫자들 내 중복된 숫자가 있습니다.");
-        }
-    }
-
-    private static void checkNumberIn(int number) {
-        if (numbers.get(number) == null) {
-            throw new InvalidLottoNumbersException("로또에 사용되는 숫자가 아닌 값이 포함되어 있습니다.");
-        }
     }
 }

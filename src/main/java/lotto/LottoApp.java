@@ -1,8 +1,6 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.creator.AutoLottoCreator;
-import lotto.domain.creator.ManualLottoCreator;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoFactory;
 import lotto.domain.lotto.Lottos;
@@ -19,13 +17,9 @@ public class LottoApp {
         int manualLottoQuantity = InputView.inputManualLotto(money);
         int autoLottoQuantity = money.getBuyableLottoQuantity() - manualLottoQuantity;
 
-        ManualLottoCreator manualCreator
-                = InputView.generateManualLottoCreator(manualLottoQuantity);
-        AutoLottoCreator autoCreator = new AutoLottoCreator();
-
         List<Lotto> totalLottos = new ArrayList<>();
-        List<Lotto> manualLottos = LottoFactory.createLottoList(manualLottoQuantity, manualCreator);
-        List<Lotto> autoLottos = LottoFactory.createLottoList(autoLottoQuantity, autoCreator);
+        List<Lotto> manualLottos = InputView.generateManualLottoCreator(manualLottoQuantity);
+        List<Lotto> autoLottos = LottoFactory.createAutoLottos(autoLottoQuantity);
 
         OutputView.printPurchaseResult(manualLottoQuantity, autoLottoQuantity);
 

@@ -1,7 +1,5 @@
-package lotto.lotto;
+package lotto.domain;
 
-import lotto.domain.LottosResult;
-import lotto.domain.creator.ManualLottoCreator;
 import lotto.domain.lotto.LottoFactory;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
@@ -21,9 +19,8 @@ public class LottosResultTest {
                                             "2, 3, 4, 5, 6, 7", "3, 4, 5, 6, 7, 8",
                                             "4, 5, 6, 7, 8, 9", "5, 6, 7, 8, 9, 10",
                                             "6, 7, 8, 9, 10, 11");
-        ManualLottoCreator creator = new ManualLottoCreator(inputs);
-        Lottos lottos = new Lottos(LottoFactory.createLottoList(7, creator));
 
+        Lottos lottos = new Lottos(LottoFactory.createManualLottos(7, inputs));
         LottosResult result = new LottosResult(winningLotto, lottos);
 
         double expectedROI = (double) 2031555000 / 7000;

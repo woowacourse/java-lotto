@@ -1,9 +1,7 @@
-package lotto.lotto;
+package lotto.domain.lotto;
 
 import lotto.domain.Rank;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.WinningLotto;
+import lotto.domain.creator.ManualLottoCreator;
 import lotto.exception.InvalidInputException;
 import lotto.exception.InvalidLottoNumbersException;
 import org.junit.jupiter.api.Test;
@@ -59,7 +57,9 @@ public class WinningLottoTest {
     @Test
     void 랭킹이_잘_매치되는지_확인() {
         List<Integer> inputNumbers = Arrays.asList(1, 2, 3, 4, 5, 8);
-        Lotto lotto = new Lotto(LottoNumber.getLottoNumbers(inputNumbers));
+        ManualLottoCreator creator = new ManualLottoCreator(inputNumbers);
+        Lotto lotto = creator.createLotto();
+
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
 
         assertThat(winningLotto.matchRank(lotto)).isEqualTo(Rank.THIRD);
@@ -68,7 +68,9 @@ public class WinningLottoTest {
     @Test
     void 보너스_번호_매칭여부_반영하여_랭킹이_잘_매치되는지_확인() {
         List<Integer> inputNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
-        Lotto lotto = new Lotto(LottoNumber.getLottoNumbers(inputNumbers));
+        ManualLottoCreator creator = new ManualLottoCreator(inputNumbers);
+        Lotto lotto = creator.createLotto();
+
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
 
         assertThat(winningLotto.matchRank(lotto)).isEqualTo(Rank.SECOND);

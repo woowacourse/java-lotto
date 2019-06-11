@@ -2,38 +2,33 @@ package lotto.domain.creator;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.util.CustomStringUtils;
 import lotto.exception.InvalidLottoNumbersException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottoCreator implements LottoCreator {
-    private List<List<LottoNumber>> numbers = new ArrayList<>();
+    private  List<Integer> numbers;
 
-    public ManualLottoCreator(List<String> inputs) {
-        for (String input : inputs) {
-            List<LottoNumber> inputNumbers
-                    = LottoNumber.getLottoNumbers(CustomStringUtils.parseInts(input));
-            numbers.add(inputNumbers);
-        }
+    public ManualLottoCreator(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     @Override
-    public List<Lotto> createLottos(int lottoQuantity) {
-        checkNumberOfInputLotto(lottoQuantity);
+    public Lotto createLotto() {
 
-        List<Lotto> lottos = new ArrayList<>();
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for (List<LottoNumber> numbers : numbers) {
-            lottos.add(new Lotto(numbers));
+        for (int number : numbers) {
+            checkNumberIn(number);
+            lottoNumbers.add(LottoNumber.valueOf(number));
         }
-        return lottos;
+        return new Lotto(lottoNumbers);
     }
 
-    private void checkNumberOfInputLotto(int lottoQuantity) {
-        if (numbers.size() != lottoQuantity) {
-            throw new InvalidLottoNumbersException("입력하신 수동 로또 수와 입력하신 번호 셋트의 수가 일치하지 않습니다.");
+    private static void checkNumberIn(int number) {
+        if (LottoNumber.valueOf(number) == null) {
+            throw new InvalidLottoNumbersException("로또에 사용되는 숫자가 아닌 값이 포함되어 있습니다.");
         }
     }
 }
