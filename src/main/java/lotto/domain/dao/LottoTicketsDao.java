@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketsDao {
-    Connection connection;
+    private Connection connection;
 
-    public LottoTicketsDao(Connection connection) {
+    public LottoTicketsDao(final Connection connection) {
         this.connection = connection;
     }
 
@@ -33,12 +33,12 @@ public class LottoTicketsDao {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, round);
         ResultSet resultSet = preparedStatement.executeQuery();
-        List<LottoTicket> dbLottoTickets = new ArrayList<>();
+        List<LottoTicket> lottoTickets = new ArrayList<>();
         while (resultSet.next()) {
             String result = setInput(resultSet.getString("lottoNumbers"));
-            dbLottoTickets.add(new ManualTicketFactory(result).create());
+            lottoTickets.add(new ManualTicketFactory(result).create());
         }
-        return new LottoTickets(dbLottoTickets);
+        return new LottoTickets(lottoTickets);
     }
 
     private String setInput(String lottoNumbers) {
