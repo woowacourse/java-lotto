@@ -8,9 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RoundDao {
-    private final Connection connection;
+    private Connection connection;
 
-    public RoundDao(Connection connection) {
+    public RoundDao(final Connection connection) {
         this.connection = connection;
     }
 
