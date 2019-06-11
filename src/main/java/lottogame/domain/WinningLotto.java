@@ -10,18 +10,8 @@ public class WinningLotto {
         this.bonusNumber = LottoNumber.Of(bonusNumber);
     }
 
-    private WinningLotto() {
-        this.winningLotto = null;
-        this.bonusNumber = null;
-    }
-
-    public static WinningLotto generate(Lotto lotto, String bonusNumber) {
-        try {
-            return new WinningLotto(lotto, Integer.parseInt(bonusNumber));
-        } catch (NumberFormatException | InvalidLottoNumberException | InvalidBonusLottoNumberException e) {
-            System.out.println(e.getMessage());
-            return new WinningLotto();
-        }
+    public static WinningLotto generate(Lotto lotto, int bonusNumber) {
+        return new WinningLotto(lotto, bonusNumber);
     }
 
     private void checkValidBonusNumber(int bonusNumber) {
@@ -45,9 +35,5 @@ public class WinningLotto {
 
     boolean isBonusBallMatch(LottoNumber lottoNumber) {
         return bonusNumber == lottoNumber;
-    }
-
-    public boolean isNotCreatedWell() {
-        return bonusNumber == null;
     }
 }

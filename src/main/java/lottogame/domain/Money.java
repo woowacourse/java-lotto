@@ -7,18 +7,13 @@ public class Money {
 
     private final int price;
 
-    private Money(int price) {
+    public Money(int price) {
         this.price = price;
     }
 
-    public static Money generate(String inputPrice) {
-        try {
-            checkValidPrice(Integer.parseInt(inputPrice));
-            return new Money(Integer.parseInt(inputPrice));
-        } catch (NumberFormatException | InvalidLottoPriceException e) {
-            System.out.println(e.getMessage());
-            return new Money(IN_VALID_PRICE);
-        }
+    public static Money generate(int inputPrice) {
+        checkValidPrice(inputPrice);
+        return new Money(inputPrice);
     }
 
     private static void checkValidPrice(int price) {
@@ -37,9 +32,5 @@ public class Money {
 
     public boolean isInValidNumber(int numberOfManualLotto) {
         return getNumberOfTicket() < numberOfManualLotto;
-    }
-
-    public boolean isNotCreatedWell() {
-        return price == IN_VALID_PRICE;
     }
 }

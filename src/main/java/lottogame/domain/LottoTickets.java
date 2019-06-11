@@ -12,9 +12,7 @@ public class LottoTickets {
 
     public void addManualLotto(String manualLotto) {
         Lotto lotto = ManualLottoGenerator.create(manualLotto);
-        if (lotto != null) {
-            lottos.add(lotto);
-        }
+        lottos.add(lotto);
     }
 
     public void createAutoLottos() {
