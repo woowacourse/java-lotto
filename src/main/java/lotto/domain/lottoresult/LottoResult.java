@@ -35,4 +35,16 @@ public class LottoResult {
 
         return rewards.divide(expense, 4, RoundingMode.HALF_UP).multiply(new BigDecimal(100));
     }
+
+    public List<TmpResult> getTmpResult() {
+        return rankStatistic.entrySet().stream()
+                .filter(x -> !x.getKey().equals(LottoRank.FAIL))
+                .map(TmpResult::create)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(getEarningRate());
+    }
 }

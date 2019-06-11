@@ -14,6 +14,10 @@ public class ManualLottoStrategy implements LottoStrategy {
         this.numbersText = numbersText;
     }
 
+    private static List<String> parse(String originText) {
+        return Arrays.asList(originText.split(DELIMITER));
+    }
+
     @Override
     public List<Integer> generate() {
         return Collections.unmodifiableList(parse(numbersText).stream()
@@ -22,9 +26,5 @@ public class ManualLottoStrategy implements LottoStrategy {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList())
         );
-    }
-
-    private static List<String> parse(String originText) {
-        return Arrays.asList(originText.split(DELIMITER));
     }
 }

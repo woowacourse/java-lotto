@@ -22,6 +22,6 @@ class LottoNumberTest {
 
     @Test
     void 같은_로또번호() {
-        assertThat(LottoNumber.of(3)==LottoNumber.of(3)).isTrue();
+        assertThat(LottoNumber.of(3) == LottoNumber.of(3)).isTrue();
     }
 }

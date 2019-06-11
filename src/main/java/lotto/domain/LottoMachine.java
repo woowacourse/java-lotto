@@ -23,10 +23,10 @@ public class LottoMachine {
 
     public static LottoTicketGroup generateLottos(List<String> lottosText) {
         return new LottoTicketGroup(
-                    lottosText.stream()
-                            .map(ManualLottoStrategy::new)
-                            .map(LottoTicket::create)
-                            .collect(Collectors.toList())
+                lottosText.stream()
+                        .map(ManualLottoStrategy::new)
+                        .map(LottoTicket::create)
+                        .collect(Collectors.toList())
         );
     }
 }

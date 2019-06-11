@@ -3,7 +3,9 @@ package lotto;
 import lotto.domain.InvalidLottoQuantityException;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoQuantity;
-import lotto.domain.lotto.*;
+import lotto.domain.lotto.InvalidLottoNumberGroupException;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.lottoresult.InvalidWinningLottoException;
 import lotto.domain.lottoresult.LottoResult;
 import lotto.domain.lottoresult.WinningLotto;
@@ -30,7 +32,7 @@ public class ConsoleUILottoApplication {
         PurchaseAmount change = lottoPurchaseAmount.buy(lottos.price());
         OutputView.printChange(change);
 
-        LottoResult lottoResult = new LottoResult(createWinningLotto(), lottos);
+        LottoResult lottoResult = lottos.match(createWinningLotto());
         OutputView.printLottoResult(lottoResult);
     }
 
@@ -38,7 +40,7 @@ public class ConsoleUILottoApplication {
         Optional<PurchaseAmount> purchaseAmount;
         do {
             purchaseAmount = createOptionalPurchaseAmount();
-        } while(purchaseAmount.isEmpty());
+        } while (purchaseAmount.isEmpty());
 
         return purchaseAmount.get();
     }
@@ -51,6 +53,7 @@ public class ConsoleUILottoApplication {
             return Optional.empty();
         }
     }
+
 
     private static PurchaseAmount getLottoPurchaseAmount() {
         PurchaseAmount purchaseAmount = PurchaseAmount.create(InputView.inputPurchaseAmount());
@@ -65,7 +68,7 @@ public class ConsoleUILottoApplication {
         Optional<LottoQuantity> lottoQuantity;
         do {
             lottoQuantity = createOptionalLottoQuantity(totalLottoQuantity);
-        } while(lottoQuantity.isEmpty());
+        } while (lottoQuantity.isEmpty());
 
         return lottoQuantity.get();
     }
@@ -123,7 +126,7 @@ public class ConsoleUILottoApplication {
 
         do {
             winningLotto = createOptionalWinningLotto();
-        } while(winningLotto.isEmpty());
+        } while (winningLotto.isEmpty());
 
         return winningLotto.get();
     }

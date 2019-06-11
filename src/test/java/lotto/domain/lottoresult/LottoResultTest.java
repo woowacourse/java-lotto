@@ -18,8 +18,8 @@ public class LottoResultTest {
     @BeforeEach
     void setup() {
         lottoTickets = new LottoTicketGroup(Arrays.asList(
-                LottoTicket.create(()->Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoTicket.create(()->Arrays.asList(1, 2, 3, 7, 8, 9))
+                LottoTicket.create(() -> Arrays.asList(1, 2, 3, 4, 5, 6)),
+                LottoTicket.create(() -> Arrays.asList(1, 2, 3, 7, 8, 9))
         ));
         lottoResult = lottoTickets.match(
                 WinningLotto.create("4,5,6,7,8,9", "15")
