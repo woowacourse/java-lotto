@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -8,6 +10,9 @@ import java.util.stream.Stream;
 public class Lotto {
     public static final int PRICE = 1000;
     public static final int NUMBER_OF_PICKS = 6;
+    private static final int RECENT_ROUND = 862;
+    private static final LocalDate RECENT_DATE = LocalDate.of(2019, 6, 8);
+    private static final int WEEK = 7;
 
     private static final List<LottoNumber> balls = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX).boxed()
                                                     .map(i -> LottoNumber.of(i))
@@ -18,6 +23,10 @@ public class Lotto {
     public static Lotto autoGenerate() {
         Collections.shuffle(balls);
         return new Lotto(new HashSet<>(balls.subList(0, NUMBER_OF_PICKS)));
+    }
+
+    public static int recentRound() {
+        return RECENT_ROUND + Period.between(RECENT_DATE, LocalDate.now()).getDays() / WEEK;
     }
 
     public Lotto(Set<LottoNumber> numbers) {

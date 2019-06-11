@@ -1,13 +1,10 @@
 package controller;
 
-import model.Lotto;
-import model.Lottos;
-import model.LottoPurchaseAmount;
-import model.Money;
-import spark.Filter;
+import model.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
+import view.WebView;
 
 import java.text.NumberFormat;
 import java.util.HashMap;
@@ -21,45 +18,57 @@ import static spark.Spark.*;
 public class WebUILottoApplication {
     public static void main(String[] args) {
         port(4567);
-        staticFiles.location("/");
+        staticFiles.location("/static");
 
-        get("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            model.put("priceFormatted", NumberFormat.getInstance().format(Lotto.PRICE));
-            model.put("price", Lotto.PRICE);
-            return render(model, "index.html");
-        });
-        post("/lotto", (req, res) -> {
+        get("/", (req, res) -> indexPage());
+
+        get("/lotto", (req, res) -> {
             try {
-                final int numberOfManualLottos = req.queryParams().size() - 1;
-                final LottoPurchaseAmount purchaseAmount = new LottoPurchaseAmount(
-                        new Money(Integer.parseInt(req.queryParams("investment").trim())),
-                        numberOfManualLottos
-                );
-                final Lottos lottos = new Lottos(parseManualLottos(req, numberOfManualLottos), purchaseAmount);
-                Map<String, Object> model = new HashMap<>();
-                model.put("result", lottosToText(lottos));
-                return render(model, "result.html");
+                return resultPage(req);
             } catch (IllegalArgumentException e) {
-                return "<script>alert(\"잘못된 입력입니다.\"); history.back()</script>";
+                return WebView.error();
             }
         });
 
-        get("*", (req, res) -> "404!");
+        get("*", (req, res) -> {
+            res.redirect("404.html");
+            return -1;
+        });
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 
-    private static List<Lotto> parseManualLottos(Request req, int number) {
-        return IntStream.range(0, number).boxed()
-                .map(i -> new Lotto(req.queryParams("manualNumbers[" + i + "]")))
-                .collect(Collectors.toList());
+    private static String indexPage() {
+        Map<String, Object> model = new HashMap<String, Object>() {{
+            put("price", Lotto.PRICE);
+            put("priceFormatted", NumberFormat.getInstance().format(Lotto.PRICE));
+            put("recentRoundMenu", WebView.roundSelect());
+        }};
+        return render(model, "index.html");
     }
 
-    private static String lottosToText(Lottos lottos) {
-        return lottos.toString().replace("[[", "[").replace("]]", "]")
-                .replace("[", "<span class=\"lotto\">").replace("]", "</span>").replace(">, <", "><br /><");
+    private static String resultPage(Request req) {
+        WinningNumbers winningNumbers = WinningNumbersFactory.of(req.queryParams("round"));
+        final List<Lotto> manualLottos = parseManualLottos(req);
+        final Lottos lottos = new Lottos(
+                manualLottos,
+                new LottoPurchaseAmount(new Money(req.queryParams("investment")), manualLottos.size())
+        );
+        Map<String, Object> model = new HashMap<String, Object>() {{
+            put("winningNumbers", WebView.formatWinningNumbers(winningNumbers));
+            put("purchasedLottos", WebView.formatLottos(lottos));
+            put("result", WebView.formatResult(lottos.getResult(winningNumbers)));
+        }};
+        return render(model, "result.html");
+    }
+
+    private static List<Lotto> parseManualLottos(Request req) {
+        return IntStream.range(0, req.queryParams().size() - 2).boxed()
+                .map(i -> req.queryParams("manualNumbers[" + i + "]"))
+                .filter(x -> x.trim().length() != 0)
+                .map(x -> new Lotto(x))
+                .collect(Collectors.toList());
     }
 }

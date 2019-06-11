@@ -8,7 +8,7 @@ public class LottoResult implements Iterable<LottoResultPair> {
     private final List<LottoResultPair> table;
     private final double earningRate;
 
-    protected LottoResult(List<Lotto> lottos, WinningNumbers winningNumbers) {
+    public LottoResult(List<Lotto> lottos, WinningNumbers winningNumbers) {
         Map<LottoRank, Integer> pairs = new LinkedHashMap<LottoRank, Integer>() {{
             Stream.of(LottoRank.values()).forEach(rank -> put(rank, 0));
             lottos.forEach(lotto -> lotto.match(winningNumbers).map(x -> put(x, get(x) + 1)));

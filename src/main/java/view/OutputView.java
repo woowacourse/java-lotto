@@ -2,6 +2,8 @@ package view;
 
 import model.*;
 
+import java.text.NumberFormat;
+
 public class OutputView {
     public static void printPurchaseAmount(LottoPurchaseAmount purchaseAmount) {
         System.out.println(
@@ -28,8 +30,8 @@ public class OutputView {
             System.out.println(
                     x.rank().numberOfMatches()
                     + ((x.rank().equals(LottoRank.SECOND)) ? "개 일치, 보너스 볼 일치 (" : "개 일치 (")
-                    + x.rank().prize()
-                    + "원)- "
+                    + NumberFormat.getInstance().format(x.rank().prize())
+                    + "원) - "
                     + x.number()
                     + "개"
             );
