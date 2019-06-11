@@ -21,6 +21,7 @@ import static spark.Spark.post;
 
 public class WebUILottoApplication {
     private static final String RATE_UNIT = "%";
+    private static final String AMOUNT_UNIT = "원";
 
     private static final WebUILottoData webUILottoData = new WebUILottoData();
     private static final GameDTO gameDTO = new GameDTO();
@@ -124,7 +125,7 @@ public class WebUILottoApplication {
             gameDTO.setWinningNumbers(webUILottoData.getWinningNumbers());
             gameDTO.setBonusNumber(webUILottoData.getBonusNumber());
             gameDTO.setResult(WebParser.forSQL(result));
-            gameDTO.setReturnAmount(LottoResult.resultAmount() + "원");
+            gameDTO.setReturnAmount(LottoResult.resultAmount() + AMOUNT_UNIT);
             gameDTO.setReturnRate(rate + RATE_UNIT);
             gameDAO.addGameInformation(gameDTO);
             gameDAO.addLottoNumbers(webUILottoData.getTotalLottoGames().allGames());
