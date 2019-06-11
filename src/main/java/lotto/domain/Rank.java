@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.function.Function;
+
 public enum Rank {
     /**
      * countOfMatch가 같은 객체가 있을시 Bonus.TRUE인 것을 뒤에 배치 해야한다.
@@ -56,19 +58,18 @@ public enum Rank {
     }
 
     enum Bonus {
-        TRUE {
-            public boolean match(final boolean bonus) {
-                return bonus;
-            }
-        },
-        FALSE {
-            public boolean match(final boolean bonus) {
-                return true;
-            }
-        };
+        TRUE((bonus) -> bonus),
+        FALSE((bonus) -> true);
 
-        public abstract boolean match(final boolean bonus);
+        private Function<Boolean, Boolean> expression;
 
+        Bonus(final Function<Boolean, Boolean> expression) {
+            this.expression = expression;
+        }
+
+        public boolean match(boolean bonusNo) {
+            return expression.apply(bonusNo);
+        }
     }
 }
 
