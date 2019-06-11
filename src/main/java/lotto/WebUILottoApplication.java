@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.lotto.Price;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -9,30 +10,43 @@ import java.util.Map;
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
-    public static void main(String[] args) {
-        port(8080);
+    private static WebUILottoData data = new WebUILottoData();
 
-        staticFileLocation("templates");
-        get("/", (req, res) -> {
+    public static void main(String[] args) {
+        externalStaticFileLocation("src/main/resources/templates");
+
+        get("/home", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "view/lotto_home.html");
         });
 
-        get("/lotto_rule", (req, res) -> {
+        get("/rule", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "view/lotto_rule.html");
         });
 
-        get("/lotto_contact", (req, res) -> {
+        get("/contact", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "view/lotto_contact.html");
         });
 
-        get("/lotto_start", (req, res) -> {
+        get("/start", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            return render(model, "view/lotto_start.html");
+            return render(model, "view/lotto_buy.html");
         });
 
+        get("/purchase", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            try {
+                Price price = new Price(req.queryParams("price"));
+                data.setPrice(price);
+                model.put("amount",String.valueOf(price.getNumberOfLotto()));
+                return render(model, "view/lotto_manual_amount.html");
+            } catch (Exception e){
+                model.put("error","잘못된 입력입니다.");
+                return render(model, "view/lotto_buy.html");
+            }
+        });
 
 //        post("/users", (request, response) -> {
 //

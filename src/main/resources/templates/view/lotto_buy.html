@@ -41,6 +41,7 @@
             <div class="inner">
                 <h3><a class="masthead-brand" href="/home">로또 시뮬레이션</a></h3>
                 <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link" href="/start">다시 시작</a>
                     <a class="nav-link" href="rule">로또 룰</a>
                     <a class="nav-link" href="contact">연락처</a>
                 </nav>
@@ -48,10 +49,16 @@
         </header>
 
         <main role="main" class="inner cover">
-            <h1 class="cover-heading">로또 게임</h1>
-            <p class="lead">
-                <a href="/start" class="btn btn-lg btn-secondary">게임 시작!</a>
-            </p>
+            <form action="/purchase" class="was-validated ">
+                <h4 id="error">{{error}}</h4>
+                <h4 class="cover-heading">1000원 단위로 금액을 입력해 주세요!</h4>
+                <div class="form-group">
+                    <input class="form-control" type="text" id="price" placeholder="금액 입력" name="price" required>
+                </div>
+                <p class="lead">
+                    <button type="submit" class="btn btn-success">다음</button>
+                </p>
+            </form>
         </main>
 
         <footer class="mastfoot mt-auto">
