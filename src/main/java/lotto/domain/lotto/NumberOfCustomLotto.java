@@ -11,17 +11,20 @@ public class NumberOfCustomLotto {
 
     private int number;
 
-    public NumberOfCustomLotto(String number) {
-        this.number = invalidCustomLottoNumber(number);
+    public NumberOfCustomLotto(String number, int numberOfLotto) {
+        this.number = invalidCustomLottoNumber(number, numberOfLotto);
     }
 
-    private int invalidCustomLottoNumber(String number) {
+    private int invalidCustomLottoNumber(String number, int numberOfLotto) {
         Matcher matcher = Pattern.compile(CUSTOM_LOTTO_REGEX).matcher(number);
         if (!matcher.find()) {
             throw new InvalidNumberOfCustomLotto("잘못된 입력입니다.");
         }
         if (Integer.parseInt(number) < LEAST_NUMBER) {
             throw new InvalidNumberOfCustomLotto("0이상의 수만 입력하세요.");
+        }
+        if (Integer.parseInt(number) > numberOfLotto){
+            throw new InvalidNumberOfCustomLotto("총 개수보다 넘을 수는 없습니다.");
         }
         return Integer.parseInt(number);
     }

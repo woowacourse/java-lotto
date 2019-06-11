@@ -49,16 +49,22 @@
     </header>
 
     <main role="main" class="inner cover">
-        <form action="/manual_amount" class="was-validated ">
-            <h4>{{error_amount}}</h4>
-            <h4 class="cover-heading">수동 구매 개수를 입력해 주세요!</h4>
-            <div class="form-group">
-                <p>총 구매한 개수는 {{amount}}개 입니다. </p>
-                <input class="form-control" type="text" id="manual_amount" placeholder="개수 입력" name="manual_amount" required>
+        <form action="/winning_lotto" class="was-validated ">
+            <h4>{{error_manual_lotto}}</h4>
+            <h4 class="cover-heading">수동으로 {{manual_amount}}장, 자동으로 {{auto_amount}}장을 구매하였습니다.</h4>
+            <h4 class="cover-heading">로또 번호와 당첨 번호 입력해 주세요!</h4>
+            <div class="form-group" id="tags" method="post">
+                <script>
+                    var manual_amount = new URLSearchParams(window.location.search).get("manual_amount")
+
+                    for(var i = 0 ; i <manual_amount ; i++){
+                        var input =  '<input class="form-control" type="text" placeholder="번호 입력" name="manual_lotto' + i + '" required><br><br>'
+                        document.getElementById("tags").innerHTML += input
+                    }
+
+                    document.getElementById("tags").innerHTML += '<button type="submit"class="btn btn-success"> 다음 </button>'
+                </script>
             </div>
-            <p class="lead">
-                <button type="submit" class="btn btn-success">다음</button>
-            </p>
         </form>
     </main>
 

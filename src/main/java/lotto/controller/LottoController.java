@@ -10,7 +10,7 @@ public class LottoController {
 
     public void run() {
         Price price = new Price(InputView.InputPrice());
-        int numberOfCustomLotto = new NumberOfCustomLotto(InputView.InputNumberOfCustomLotto()).getNumberOfCustomLotto();
+        int numberOfCustomLotto = new NumberOfCustomLotto(InputView.InputNumberOfCustomLotto(), price.getNumberOfLotto()).getNumberOfCustomLotto();
         List<String[]> customLottos = InputView.InputCustomLottoNumber(numberOfCustomLotto);
 
         LottoTicket lottoTicket = new LottoTicket(price, customLottos);
