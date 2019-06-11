@@ -4,13 +4,9 @@ import lotto.domain.lotto.LottoTicket;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
-public class LottoResult {
+public class LottoResult implements Iterable<Map.Entry<LottoRank, Integer>>{
     private final Map<LottoRank, Integer> rankStatistic = new EnumMap<>(LottoRank.class);
 
     public LottoResult(List<LottoRank> ranks) {
@@ -33,18 +29,16 @@ public class LottoResult {
                         .mapToInt(x -> x.getReward() * rankStatistic.get(x))
                         .sum());
 
-        return rewards.divide(expense, 4, RoundingMode.HALF_UP).multiply(new BigDecimal(100));
-    }
-
-    public List<TmpResult> getTmpResult() {
-        return rankStatistic.entrySet().stream()
-                .filter(x -> !x.getKey().equals(LottoRank.FAIL))
-                .map(TmpResult::create)
-                .collect(Collectors.toList());
+        return rewards.divide(expense, 3, RoundingMode.HALF_UP).multiply(new BigDecimal(100));
     }
 
     @Override
     public String toString() {
         return String.valueOf(getEarningRate());
+    }
+
+    @Override
+    public Iterator iterator() {
+        return rankStatistic.entrySet().iterator();
     }
 }

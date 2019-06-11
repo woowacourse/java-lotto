@@ -39,6 +39,6 @@ public class LottoResultTest {
     @Test
     void 수익률_확인() {
         assertThat(lottoResult.getEarningRate())
-                .isEqualTo(new BigDecimal(10000).divide(new BigDecimal(20), 4, RoundingMode.HALF_UP));
+                .isEqualTo(new BigDecimal(10000).divide(new BigDecimal(20), 3, RoundingMode.HALF_UP));
     }
 }

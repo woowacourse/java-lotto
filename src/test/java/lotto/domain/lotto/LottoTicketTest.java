@@ -39,7 +39,7 @@ public class LottoTicketTest {
 
     @Test
     void 번호범위_벗어남() {
-        assertThrows(InvalidLottoNumberException.class, () -> {
+        assertThrows(InvalidLottoNumberGroupException.class, () -> {
             LottoTicket.create(() -> Arrays.asList(1, 2, 3, 4, 5, 46));
         });
     }

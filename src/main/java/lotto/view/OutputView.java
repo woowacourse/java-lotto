@@ -7,10 +7,6 @@ import lotto.domain.lottoresult.LottoRank;
 import lotto.domain.lottoresult.LottoResult;
 import lotto.domain.purchaseamount.PurchaseAmount;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 public class OutputView {
     public static void printChange(PurchaseAmount purchaseAmount) {
         int change = purchaseAmount.getMoney();
@@ -33,28 +29,21 @@ public class OutputView {
 
     public static void printLottoResult(LottoResult lottoResult) {
         System.out.println("\n당첨 통계\n----------");
-
-        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
-        Collections.reverse(lottoRanks);
-        lottoRanks.forEach(x -> drawRank(x, lottoResult.countOfRank(x)));
-
-        System.out.println("총 수익률은 " + lottoResult.getEarningRate() + "%입니다.");
+        lottoResult.forEach(result -> drawStatistic(result.getKey(), result.getValue()));
+        System.out.println("\n총 수익률은 " + lottoResult.getEarningRate() + "%입니다.");
     }
 
-    private static void drawRank(LottoRank lottoRank, int countOfRank) {
-        if (lottoRank.equals(LottoRank.FAIL)) {
+    private static void drawStatistic(LottoRank rank, int count) {
+        if (LottoRank.FAIL.equals(rank)) {
             return;
         }
-        drawRankInfo(lottoRank);
-        System.out.format("- %d개\n", countOfRank);
-    }
 
-    private static void drawRankInfo(LottoRank lottoRank) {
-        System.out.format("%d개 일치", lottoRank.getCountOfMatch());
-        if (lottoRank.isBonusMatch()) {
-            System.out.print(", 보너스 볼 일치");
-        }
-        System.out.format(" (%d원)", lottoRank.getReward());
+        System.out.format("%d개 일치%s (%d원)- %d개\n",
+                rank.getCountOfMatch(),
+                rank.isBonusMatch() ? ", 보너스 볼 일치" : "",
+                rank.getReward(),
+                count
+        );
     }
 
     public static void printErrorMessage(String message) {
