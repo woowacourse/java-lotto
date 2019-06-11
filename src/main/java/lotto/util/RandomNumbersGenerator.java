@@ -1,4 +1,4 @@
-package lotto;
+package lotto.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,11 +19,11 @@ public class RandomNumbersGenerator {
         }
     }
 
-    static RandomNumbersGenerator getInstance() {
+    public static RandomNumbersGenerator getInstance() {
         return new RandomNumbersGenerator();
     }
 
-    List<Integer> generate() {
+    public List<Integer> generate() {
         List<Integer> semiNumbers = new ArrayList<>(numbers);
         Collections.shuffle(semiNumbers);
         return semiNumbers.subList(START, LOTTO_SIZE);

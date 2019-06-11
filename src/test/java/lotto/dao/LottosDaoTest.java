@@ -1,8 +1,8 @@
 package lotto.dao;
 
-import lotto.DtoConverter;
+import lotto.util.LottoDtoConverter;
 import lotto.domain.LottoFactory;
-import lotto.view.LottoDto;
+import lotto.LottoDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class LottosDaoTest {
     static {
         final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoFactory factory = new LottoFactory();
-        DtoConverter converter = new DtoConverter();
+        LottoDtoConverter converter = new LottoDtoConverter();
         LOTTOS = new ArrayList<>();
         LOTTO_DTO = converter.convertLottoToDto(factory.create(numbers));
 
@@ -35,6 +35,7 @@ public class LottosDaoTest {
 
     @BeforeEach
     public void setUp() {
+        DAO.deleteAll();
         DAO.addAll(LOTTOS, TEST_TURN);
     }
 

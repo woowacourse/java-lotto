@@ -1,9 +1,9 @@
 package lotto.dao;
 
-import lotto.DtoConverter;
-import lotto.InputParser;
+import lotto.util.LottoDtoConverter;
+import lotto.util.InputParser;
 import lotto.domain.Lotto;
-import lotto.view.LottoDto;
+import lotto.LottoDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -60,8 +60,8 @@ public class LottosDao {
             pstmt.setInt(1, turn);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                Lotto lotto = new InputParser().makeLotto(rs.getString(1));
-                LottoDto dto = new DtoConverter().convertLottoToDto(lotto);
+                Lotto lotto = new InputParser().parseLotto(rs.getString(1));
+                LottoDto dto = new LottoDtoConverter().convertLottoToDto(lotto);
                 lottos.add(dto);
             }
         } catch (SQLException e) {

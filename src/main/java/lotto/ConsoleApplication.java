@@ -1,12 +1,11 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.util.InputParser;
+import lotto.util.LottoDtoConverter;
+import lotto.util.RandomNumbersGenerator;
 import lotto.view.InputView;
-import lotto.view.LottoDto;
-import lotto.view.LottosDto;
 import lotto.view.OutputView;
-
-import java.util.List;
 
 public class ConsoleApplication {
 	private static final int START_COUNT = 0;
@@ -19,7 +18,7 @@ public class ConsoleApplication {
 		int autoPurchaseCount = assignAutoPurchaseCount(service);
 		OutputView.showBuyCounts(manualPurchaseCount, autoPurchaseCount);
 
-		OutputView.showLottos(service.getLottos());
+		OutputView.showLottos(new LottoDtoConverter().convertLottosToDto(service.getLottos()));
 		WinningLotto winningLotto = assignWinningLotto();
 		LottoGameResult gameResult = service.gameResult();
 		gameResult.match(winningLotto);
@@ -31,7 +30,7 @@ public class ConsoleApplication {
 		int manualPurchaseCount = InputView.inputManualPurchaseCount();
 		int retCount = START_COUNT;
 		for (; retCount < manualPurchaseCount && service.canBuy(); retCount++) {
-			Lotto lotto = parser.makeLotto(InputView.inputManualNumbers());
+			Lotto lotto = parser.parseLotto(InputView.inputManualNumbers());
 			service.buy(lotto);
 		}
 		return retCount;
@@ -50,8 +49,8 @@ public class ConsoleApplication {
 
 	private static WinningLotto assignWinningLotto() {
 		InputParser parser = new InputParser();
-		Lotto lotto = parser.makeLotto(InputView.inputWinningLotto());
-		LottoNumber bonusNum = parser.makeLottoNumber(InputView.inputBonusLottoNumber());
+		Lotto lotto = parser.parseLotto(InputView.inputWinningLotto());
+		LottoNumber bonusNum = parser.parseLottoNumber(InputView.inputBonusLottoNumber());
 		try {
 			return WinningLotto.of(lotto, bonusNum);
 		} catch (RuntimeException e) {

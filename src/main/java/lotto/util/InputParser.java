@@ -1,4 +1,4 @@
-package lotto;
+package lotto.util;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
@@ -12,12 +12,12 @@ public class InputParser {
     // TODO 클래스명 수정하기
     private static final String DELIMITER = ",";
 
-    public Lotto makeLotto(final String input) {
+    public Lotto parseLotto(final String input) {
         LottoFactory lottoFactory = new LottoFactory();
         return lottoFactory.create(splitWithComma(input));
     }
 
-    public LottoNumber makeLottoNumber(final int lottoNumber) {
+    public LottoNumber parseLottoNumber(final int lottoNumber) {
         return LottoNumber.of(lottoNumber);
     }
 

@@ -5,18 +5,16 @@ import lotto.dao.LottosDao;
 import lotto.dao.TurnDao;
 import lotto.dao.WinningLottoDao;
 import lotto.domain.*;
-import lotto.view.LottoDto;
+import lotto.util.InputParser;
+import lotto.util.LottoDtoConverter;
+import lotto.util.RandomNumbersGenerator;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static spark.Spark.*;
 
-// test. 일단 turn을 1로 가정
 public class WebUILottoApplication {
     private static final int START_COUNT = 0;
 
@@ -31,10 +29,9 @@ public class WebUILottoApplication {
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            //TODO 횟수별 기능 구현
-            model.put("currentturn", turnDao.findNext());
+            model.put("current_turn", turnDao.findNext());
             model.put("turns", turnDao.findAll());
-            return render(model, "form.html");
+            return render(model, "main.html");
         });
 
         get("/turn", (req, res) -> {
@@ -44,40 +41,48 @@ public class WebUILottoApplication {
             model.put("turn", turn);
             model.put("lottos", lottosDao.findAllByTurn(turn));
             model.put("winning_lotto", winningDao.findByTurn(turn));
-            model.put("result", parseResult2(result));
+            model.put("result", stringifyResult(result));
             model.put("profit", result.getProfit());
             return render(model, "turn_info.html");
         });
 
         post("/money", (req, res) -> {
-            // 충전
             Map<String, Object> model = new HashMap<>();
             int money = Integer.parseInt(req.queryParams("money"));
             service.charge(money);
             return render(model, "ask.html");
         });
 
-        post("/choose", (req, res) -> {
-            //구매
+        post("/buy", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int manualCount = Integer.parseInt(req.queryParams("manualCount"));
             model.put("manualCount", manualCount);
-            return render(model, "lottobuy.html");
+            return render(model, "lotto_shopping.html");
         });
 
         post("/lottos", (req, res) -> {
+            //TODO 리팩토링 필수
             Map<String, Object> model = new HashMap<>();
             InputParser parser = new InputParser();
-            Lotto lotto = parser.makeLotto(req.queryParams("lotto"));
-            service.buy(lotto);
 
-            //자동 구매
+            String origin = req.queryParams("numbers");
+            int manualCount = 0;
+            List<String> numbers = Arrays.asList(origin.split("\\n"));
+
+            for (String number : numbers) {
+                if (service.canBuy()) {
+                    manualCount++;
+                    Lotto lotto = parser.parseLotto(number);
+                    service.buy(lotto);
+                }
+            }
+
             int autoCount = assignAutoPurchaseCount(service);
-            model.put("manualCount", req.queryParams("manualCount"));
+            model.put("manualCount", manualCount);
             model.put("autoCount", autoCount);
 
-            List<LottoDto> lottos = service.getLottos2();
-            model.put("lottos", lottos);
+            List<Lotto> lottos = service.getLottos();
+            model.put("lottos", new LottoDtoConverter().convertLottosToDto(lottos));
 
             return render(model, "lottos.html");
         });
@@ -86,16 +91,17 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             InputParser parser = new InputParser();
 
-            Lotto lotto = parser.makeLotto(req.queryParams("winninglotto"));
-            LottoNumber lottoNumber = parser.makeLottoNumber(Integer.parseInt(req.queryParams("bonusnumber")));
+            Lotto lotto = parser.parseLotto(req.queryParams("winninglotto"));
+            LottoNumber lottoNumber = parser.parseLottoNumber(Integer.parseInt(req.queryParams("bonusnumber")));
             WinningLotto winningLotto = WinningLotto.of(lotto, lottoNumber);
             winningDao.add(winningLotto, turnDao.findNext());
 
             LottoGameResult gameResult = service.gameResult();
             gameResult.match(winningLotto);
             model.put("profit", String.format("%.1f", gameResult.profit(LottoMachine.LOTTO_MONEY)));
-            model.put("stat", parseResult(gameResult));
-            resultDao.add(new DtoConverter().convertResultToDto(gameResult), turnDao.findNext());
+            model.put("stat", stringifyResult(new LottoDtoConverter().convertResultToDto(gameResult)));
+
+            resultDao.add(new LottoDtoConverter().convertResultToDto(gameResult), turnDao.findNext());
 
             return render(model, "result.html");
         });
@@ -104,15 +110,15 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             if (req.queryParams("token").equals("restart")) {
                 turnDao.add();
-                model.put("currentturn", turnDao.findLast() + 1);
+                model.put("current_turn", turnDao.findNext());
                 model.put("turns", turnDao.findAll());
-                return render(model, "form.html");
+                return render(model, "main.html");
             }
             resultDao.deleteAll();
             winningDao.deleteAll();
             lottosDao.deleteAll();
             turnDao.deleteAll();
-            return render(model, "form.html");
+            return render(model, "main.html");
         });
     }
 
@@ -130,28 +136,19 @@ public class WebUILottoApplication {
             Lotto lotto = lottoFactory.create(generator.generate());
             service.buy(lotto);
         }
-
         return autoPurchaseCount;
     }
 
-    private static List<String> parseResult2(final GameResultDto result) {
+    private static List<String> stringifyResult(final GameResultDto result) {
         List<String> results = new ArrayList<>();
 
         for (Rank rank : Rank.reverseValues()) {
-            results.add(parseRank(rank) + result.getCount(rank) + "개");
-        }
-        return results;
-    }
-    private static List<String> parseResult(final LottoGameResult gameResult) {
-        List<String> results = new ArrayList<>();
-
-        for (Rank rank : Rank.reverseValues()) {
-            results.add(parseRank(rank) + gameResult.getRankCount(rank) + "개");
+            results.add(stringifyRank(rank) + result.getCount(rank) + "개");
         }
         return results;
     }
 
-    private static String parseRank(final Rank rank) {
+    private static String stringifyRank(final Rank rank) {
         StringBuilder sb = new StringBuilder();
         sb.append(rank.getMatchCount() + "개 일치");
         if (rank == Rank.SECOND) {

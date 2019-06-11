@@ -22,15 +22,15 @@ public class TurnDaoTest {
 
     @Test
     public void getLatestTurnIfNull() {
-        assertEquals(0, DAO.findLast());
+        assertEquals(1, DAO.findNext());
     }
 
     @Test
     public void findLast() {
         DAO.add();
-        assertEquals(1, DAO.findLast());
+        assertEquals(2, DAO.findNext());
         DAO.add();
-        assertEquals(2, DAO.findLast());
+        assertEquals(3, DAO.findNext());
     }
 
     @Test

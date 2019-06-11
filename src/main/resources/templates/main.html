@@ -15,19 +15,15 @@
 
 
 <style>
-      div.lottobuy input {
-            max-width: 100px;
-      }
+
 </style>
-<!-- #users 리스트 -->
 
 <body>
       <nav>
             <h3>구입 금액 입력</h3>
       </nav>
-      <!-- 일단 post -->
-      <div class="turns">
-            <label>제 {{currentturn}} 회 로또 게임</label>
+      <div class="turns-body">
+            <label>제 {{current_turn}} 회 로또 게임</label>
             <form action="/turn" method="post">
                   <div class="turns">
                         {{#turns}}
