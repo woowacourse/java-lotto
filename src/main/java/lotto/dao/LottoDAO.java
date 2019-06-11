@@ -8,21 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// TODO try-with-resource 적용해보기
 public class LottoDAO {
-    public int findMaxRound() throws SQLException {
-        String sql = "SELECT MAX(round) AS max FROM lotto";
-
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-            if (!resultSet.next()) {
-                return 1;
-            }
-            return resultSet.getInt("max");
-        }
-    }
-
+    // TODO resultSet의 output 처리 로직 중복 여부 체크
     public List<Lotto> findLottosByRound(int round) throws SQLException {
         String sql = "SELECT lotto FROM lotto WHERE round = ?";
 
@@ -48,9 +35,9 @@ public class LottoDAO {
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            int nextRound = findMaxRound() + 1;
+            int nextRound = new RoundDAO().findMaxRound();
             for (Lotto lotto : lottos) {
-                statement.setString(1, getSubstring(lotto));
+                statement.setString(1, getSubstring(lotto.toString()));
                 statement.setInt(2, nextRound);
                 statement.executeUpdate();
             }
@@ -58,16 +45,16 @@ public class LottoDAO {
     }
 
     // TODO WinningLotto 테이블에 저장 시 중복 코드 발생하는지 확인할 것
-    private String getSubstring(Lotto lotto) {
-        return lotto.toString().substring(1, lotto.toString().length() - 1);
+    private String getSubstring(String lotto) {
+        return lotto.substring(1, lotto.length() - 1);
     }
 
-    public void removeLotto(int lottoId) throws SQLException {
+    public void removeLotto(int round) throws SQLException {
         String sql = "DELETE FROM lotto WHERE round = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, lottoId);
+            statement.setInt(1, round);
             statement.executeUpdate();
         }
     }

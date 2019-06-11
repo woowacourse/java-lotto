@@ -2,20 +2,19 @@ package lotto.dao;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LottoDAOTest {
-    private static final Lotto LOTTO_TEST = new Lotto(new HashSet<>(
+    static final Lotto LOTTO_TEST = new Lotto(new HashSet<>(
             Arrays.asList(
                     LottoNumber.get(1),
                     LottoNumber.get(2),
@@ -26,22 +25,19 @@ public class LottoDAOTest {
             )));
 
     private LottoDAO lottoDAO;
+    private RoundDAO roundDAO;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws SQLException {
         lottoDAO = new LottoDAO();
-    }
-
-    @Test
-    public void findMaxRound() throws SQLException {
-        int maxRound = lottoDAO.findMaxRound();
-        assertThat(maxRound).isEqualTo(0);
+        roundDAO = new RoundDAO();
+        roundDAO.addRound(RoundDAOTest.AMOUNT_TEST);
     }
 
     @Test
     public void findLottosByRound() throws SQLException {
         lottoDAO.addLottos(Arrays.asList(LOTTO_TEST));
-        List<Lotto> lottos = lottoDAO.findLottosByRound(lottoDAO.findMaxRound());
+        List<Lotto> lottos = lottoDAO.findLottosByRound(roundDAO.findMaxRound());
         assertThat(lottos.get(0)).isEqualTo(LOTTO_TEST);
         removeLotto();
     }
@@ -54,6 +50,13 @@ public class LottoDAOTest {
 
     @Test
     public void removeLotto() throws SQLException {
-        lottoDAO.removeLotto(lottoDAO.findMaxRound());
+        lottoDAO.removeLotto(roundDAO.findMaxRound());
+    }
+
+    @AfterEach
+    public void tearDown() throws SQLException {
+        roundDAO.removeRound(roundDAO.findMaxRound());
+        roundDAO = null;
+        lottoDAO = null;
     }
 }
