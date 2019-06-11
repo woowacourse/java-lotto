@@ -21,7 +21,7 @@ public class ConsoleUILottoApplication {
 
         LottoRepository lottoRepository = purchaseLotto(countOfLotto);
         LottoTickets lottoTickets = new LottoTickets(lottoRepository);
-        OutputView.printLotto(countOfLotto, lottoTickets);
+        OutputView.printLotto(lottoTickets);
 
         WinningLotto winningLotto = inputWinningLotto();
 
@@ -72,11 +72,11 @@ public class ConsoleUILottoApplication {
     private static LottoRepository purchaseLotto(CountOfLotto countOfLotto) {
         LottoRepository lottoRepository = new LottoRepository();
         for (int i = 0; i < countOfLotto.getCountOfManualLotto(); i++) {
-            lottoRepository.add(inputLottoNumber());
+            lottoRepository.addManualLotto(inputLottoNumber());
         }
 
         for (int i = 0; i < countOfLotto.getCountOfRandomLotto(); i++) {
-            lottoRepository.add(LottoGenerator.create(new RandomLottoGeneratingStrategy()));
+            lottoRepository.addAutoLottos(LottoGenerator.create(new RandomLottoGeneratingStrategy()));
         }
         return lottoRepository;
     }

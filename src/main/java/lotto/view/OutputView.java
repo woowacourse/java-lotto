@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.Rank;
 import lotto.domain.lotto.Result;
-import lotto.domain.paymentinfo.CountOfLotto;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
@@ -24,10 +23,10 @@ public class OutputView {
         System.out.println(String.format("총 수익률은 %.2f입니다.", earningRate));
     }
 
-    public static void printLotto(CountOfLotto countOfLotto, LottoTickets lottoTickets) {
+    public static void printLotto(LottoTickets lottoTickets) {
         System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
-                countOfLotto.getCountOfManualLotto(),
-                countOfLotto.getCountOfRandomLotto()));
-        lottoTickets.getLottoTickets().forEach(System.out::println);
+                lottoTickets.getCountOfManualLotto(),
+                lottoTickets.getCountOfAutoLotto()));
+        lottoTickets.getAllLottoTickets().forEach(System.out::println);
     }
 }

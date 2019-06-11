@@ -5,8 +5,11 @@ import lotto.domain.paymentinfo.Payment;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 public class Result {
     private final Map<Rank, Long> lottoScore;
@@ -16,11 +19,12 @@ public class Result {
     }
 
     private Map<Rank, Long> calculateLottoResult(WinningLotto winningLotto, LottoTickets lottoTickets) {
-        return lottoTickets.stream()
+        return lottoTickets.getAllLottoTickets()
+                .stream()
                 .map(winningLotto::match)
-                .collect(Collectors.groupingBy(Function.identity(),
+                .collect(groupingBy(identity(),
                         () -> new EnumMap<>(Rank.class),
-                        Collectors.counting()));
+                        counting()));
     }
 
     public long get(Rank rank) {
@@ -28,10 +32,9 @@ public class Result {
     }
 
     public double calculateEarningsRate(Payment payment) {
-        if (Objects.isNull(payment)) {
-            throw new NullPointerException();
-        }
-        return payment.calculateEarningsRate(calculateTotalWinningMoney());
+        return Optional.of(payment)
+                .orElseThrow(NullPointerException::new)
+                .calculateEarningsRate(calculateTotalWinningMoney());
     }
 
     private long calculateTotalWinningMoney() {

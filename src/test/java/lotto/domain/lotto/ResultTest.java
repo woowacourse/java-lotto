@@ -18,7 +18,7 @@ public class ResultTest {
     @BeforeEach
     void setUp() {
         LottoRepository lottoRepository = new LottoRepository();
-        lottoRepository.add(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoRepository.addManualLotto(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
         lottoTickets = new LottoTickets(lottoRepository);
 

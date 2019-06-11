@@ -5,17 +5,27 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoRepository {
-    private final List<Lotto> lottos;
+    private final List<Lotto> manualLottos;
+    private final List<Lotto> autoLottos;
 
     public LottoRepository() {
-        this.lottos = new ArrayList<>();
+        this.manualLottos = new ArrayList<>();
+        this.autoLottos = new ArrayList<>();
     }
 
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public void addManualLotto(Lotto lotto) {
+        manualLottos.add(lotto);
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public void addAutoLottos(Lotto lotto) {
+        autoLottos.add(lotto);
+    }
+
+    public List<Lotto> getManualLottos() {
+        return Collections.unmodifiableList(manualLottos);
+    }
+
+    public List<Lotto> getAutoLottos() {
+        return Collections.unmodifiableList(autoLottos);
     }
 }

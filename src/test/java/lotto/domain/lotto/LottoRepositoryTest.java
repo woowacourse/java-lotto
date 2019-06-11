@@ -14,18 +14,18 @@ class LottoRepositoryTest {
     @Test
     void 수동_로또_추가() {
         LottoRepository lottoRepository = new LottoRepository();
-        lottoRepository.add(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoRepository.addManualLotto(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        assertThat(lottoRepository.getLottos()).isEqualTo(Arrays.asList(new Lotto(lottoNumbers)));
+        assertThat(lottoRepository.getManualLottos()).isEqualTo(Arrays.asList(new Lotto(lottoNumbers)));
     }
 
     @Test
     void 자동_로또_추가() {
         LottoRepository lottoRepository = new LottoRepository();
-        lottoRepository.add(LottoGenerator.create(new RandomLottoGeneratingStrategy()));
+        lottoRepository.addAutoLottos(LottoGenerator.create(new RandomLottoGeneratingStrategy()));
 
-        assertThat(lottoRepository.getLottos().size()).isEqualTo(1);
+        assertThat(lottoRepository.getAutoLottos().size()).isEqualTo(1);
     }
 }
