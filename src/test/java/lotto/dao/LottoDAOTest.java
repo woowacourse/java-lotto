@@ -33,13 +33,6 @@ public class LottoDAOTest {
     }
 
     @Test
-    public void connection() {
-        Connection con = lottoDAO.getConnection();
-        assertNotNull(con);
-        lottoDAO.closeConnection(con);
-    }
-
-    @Test
     public void findMaxRound() throws SQLException {
         int maxRound = lottoDAO.findMaxRound();
         assertThat(maxRound).isEqualTo(0);
