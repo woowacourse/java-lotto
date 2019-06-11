@@ -12,10 +12,7 @@ import lotto.view.InputView;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static spark.Spark.get;
@@ -79,6 +76,9 @@ public class WebUILottoApplication {
             winningLotto = inputWinningLotto(req.queryParams("winningLottoNumber"), req.queryParams("bonusNumber"));
             Result result = lottoTickets.match(winningLotto);
 
+            List<LottoDto> lottoDTOs = createLottoDTOs(lottoTickets);
+            model.put("lottos", lottoDTOs);
+
             model.put("rankFirst", Rank.FIRST);
             model.put("rankSecond", Rank.SECOND);
             model.put("rankThird", Rank.THIRD);
@@ -97,6 +97,17 @@ public class WebUILottoApplication {
 
     private static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
+    }
+
+    private static List<LottoDto> createLottoDTOs(LottoTickets lottoTickets) {
+        List<LottoDto> lottoDTOs = new ArrayList<>();
+        for (Lotto lotto : lottoTickets.getLottoTickets()) {
+            LottoDto lottoDto = new LottoDto();
+            lottoDto.setLotto(lotto.toString());
+            lottoDTOs.add(lottoDto);
+        }
+
+        return lottoDTOs;
     }
 
     private static WinningLotto inputWinningLotto(String winningLottoNumber, String bonusNumber) {

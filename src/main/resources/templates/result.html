@@ -13,6 +13,10 @@
 </head>
 <body>
 <blockquote class="blockquote">
+    {{#lottos}}
+    <p class="mb-0">{{lotto}}</p>
+    {{/lottos}}
+
     <p class="mb-0">{{rankFifth.countOfMatch}}개 일치 ({{rankFifth.winningMoney}}) - {{countOfRankFifth}}개</p>
     <p class="mb-0">{{rankFourth.countOfMatch}}개 일치 ({{rankFourth.winningMoney}}) - {{countOfRankFourth}}개</p>
     <p class="mb-0">{{rankThird.countOfMatch}}개 일치 ({{rankThird.winningMoney}}) - {{countOfRankThird}}개</p>
