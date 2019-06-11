@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.LottoDto;
 import lotto.util.LottoDtoConverter;
 import lotto.dao.LottosDao;
 import lotto.dao.TurnDao;
@@ -30,12 +31,13 @@ public class LottoService {
         return lottoMachine.isRemainMoney();
     }
 
-    public LottoGameResult gameResult() {
-        return LottoGameResult.of(getLottos());
+    public GameResult gameResult() {
+        List<Lotto> lottos = new LottoDtoConverter().convertDtoToLottos(getLottos());
+        return GameResult.of(lottos);
     }
 
-    public List<Lotto> getLottos() {
-        return new LottoDtoConverter().convertDtoToLottos(lottosDao.findAllByTurn(turnDao.findNext()));
+    public List<LottoDto> getLottos() {
+        return lottosDao.findAllByTurn(turnDao.findNext());
     }
 
     public void vacateMoney() {

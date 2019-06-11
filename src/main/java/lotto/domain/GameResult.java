@@ -1,10 +1,11 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LottoGameResult {
+public class GameResult {
     private static final int INIT_NUMBER = 0;
     private static final int INIT_SUM = 0;
     private static final int INIT_COUNT = 0;
@@ -14,12 +15,12 @@ public class LottoGameResult {
     private final List<Lotto> lottos;
     private final Map<Rank, Integer> lottoStat;
 
-    public static LottoGameResult of(final List<Lotto> lottos) {
-        return new LottoGameResult(lottos);
+    public static GameResult of(final List<Lotto> lottos) {
+        return new GameResult(lottos);
     }
 
-    private LottoGameResult(final List<Lotto> lottos) {
-        this.lottos = lottos;
+    private GameResult(final List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
         this.lottoStat = new HashMap<>();
         for (Rank value : Rank.values()) {
             this.lottoStat.put(value, INIT_NUMBER);

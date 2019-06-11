@@ -43,14 +43,18 @@ public class Lotto {
         semiLotto.addAll(another.numbers);
 
         Set<LottoNumber> semiSet = new HashSet<>(semiLotto);
+        return calculate(semiSet);
+    }
+
+    private int calculate(final Set<LottoNumber> semiSet) {
         return LOTTO_SIZE - (semiSet.size() - LOTTO_SIZE);
     }
 
-    boolean contains(LottoNumber other) {
+    boolean contains(final LottoNumber other) {
         return this.numbers.contains(other);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> getNumbers() {
         return new ArrayList<>(this.numbers);
     }
 

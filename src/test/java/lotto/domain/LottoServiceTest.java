@@ -36,7 +36,7 @@ class LottoServiceTest {
     public void 구매를_제대로하고_당첨로또에_따른_결과를_제대로_반환해주는지() {
         Lotto lotto = lottoFactory.create(WINNING_NUMBERS);
 
-        LottoGameResult gameResult = buyer.gameResult();
+        GameResult gameResult = buyer.gameResult();
         gameResult.match(WinningLotto.of(lotto, LottoNumber.of(BONUS_NUM)));
         assertThat(gameResult.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(ANSWER);
     }

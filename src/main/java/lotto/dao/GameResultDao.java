@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameResultDao {
+    private final static double DEFAULT_PROFIT_RATE = 0.0;
 
     public void add(final GameResultDto gameResultDto, final int turn) {
         Connection conn = DBManager.getConnection();
@@ -36,13 +37,13 @@ public class GameResultDao {
 
     public GameResultDto findByTurn(final int turn) {
         Connection conn = DBManager.getConnection();
+        Map<Rank, Integer> map = new HashMap<Rank, Integer>();
         try {
             String query = "SELECT first, second, third, fourth, fifth, miss, profit FROM result WHERE turn = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, turn);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                Map<Rank, Integer> map = new HashMap<Rank, Integer>();
                 map.put(Rank.FIRST, rs.getInt(1));
                 map.put(Rank.SECOND, rs.getInt(2));
                 map.put(Rank.THIRD, rs.getInt(3));
@@ -56,8 +57,7 @@ public class GameResultDao {
         } finally {
             DBManager.closeConnection(conn);
         }
-        return null;
-        //TODO 예외 반환으로 고려해볼 것
+        return GameResultDto.of(map, DEFAULT_PROFIT_RATE);
     }
 
     public void deleteAll() {

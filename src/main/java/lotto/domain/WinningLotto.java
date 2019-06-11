@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import lotto.LottoDto;
 import lotto.domain.exception.WinningLottoHasBonusException;
+import lotto.util.LottoDtoConverter;
 
 import java.util.Objects;
 
@@ -29,8 +31,8 @@ public class WinningLotto {
         return Rank.valueOf(winningLotto.matchCount(other), existBonus);
     }
 
-    public Lotto getWinningLotto() {
-        return winningLotto;
+    public LottoDto getWinningLotto() {
+        return new LottoDtoConverter().convertLottoToDto(winningLotto);
     }
 
     public Integer getBonusNumber() {

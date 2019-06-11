@@ -1,16 +1,13 @@
 package lotto.util;
 
-import lotto.GameResultDto;
 import lotto.LottoDto;
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-//TODO result와 Lotto의 DtoConverter를 분리
 public class LottoDtoConverter {
 	public List<LottoDto> convertLottosToDto(final List<Lotto> lottos) {
 		List<LottoDto> lottosDto = new ArrayList<>();
@@ -22,7 +19,7 @@ public class LottoDtoConverter {
 	}
 
 	public LottoDto convertLottoToDto(final Lotto lotto) {
-		List<String> numbers = lotto.getLottoNumbers()
+		List<String> numbers = lotto.getNumbers()
 				.stream()
 				.map(lottoNumber -> lottoNumber.toString())
 				.collect(Collectors.toList());
@@ -45,13 +42,5 @@ public class LottoDtoConverter {
 				.map(LottoNumber::of)
 				.collect(Collectors.toList());
 		return Lotto.of(numbers);
-	}
-
-	public GameResultDto convertResultToDto(final LottoGameResult gameResult) {
-		Map<Rank, Integer> counts = new HashMap<>();
-		for (Rank rank : Rank.values()) {
-			counts.put(rank, gameResult.getRankCount(rank));
-		}
-		return GameResultDto.of(counts, gameResult.profit(LottoMachine.LOTTO_MONEY));
 	}
 }

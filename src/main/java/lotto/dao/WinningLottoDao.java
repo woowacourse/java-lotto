@@ -1,11 +1,10 @@
 package lotto.dao;
 
-import lotto.util.LottoDtoConverter;
-import lotto.util.InputParser;
+import lotto.LottoDto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
-import lotto.LottoDto;
+import lotto.util.LottoParser;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +17,7 @@ public class WinningLottoDao {
 
     public void add(final WinningLotto winningLotto, final Integer turn) {
         Connection conn = DBManager.getConnection();
-        LottoDto lotto = new LottoDtoConverter().convertLottoToDto(winningLotto.getWinningLotto());
+        LottoDto lotto = winningLotto.getWinningLotto();
         try {
             String query = "insert into winning_lotto(turn, numbers, bonus_number) values (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -45,8 +44,8 @@ public class WinningLottoDao {
             pstmt.setInt(1, turn);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                Lotto lotto = new InputParser().parseLotto(rs.getString(1));
-                LottoNumber lottoNumber = new InputParser().parseLottoNumber(rs.getInt(2));
+                Lotto lotto = new LottoParser().parseLotto(rs.getString(1));
+                LottoNumber lottoNumber = new LottoParser().parseLottoNumber(rs.getInt(2));
                 return WinningLotto.of(lotto, lottoNumber);
             }
         } catch (SQLException e) {

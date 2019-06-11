@@ -5,8 +5,8 @@ import lotto.dao.LottosDao;
 import lotto.dao.TurnDao;
 import lotto.dao.WinningLottoDao;
 import lotto.domain.*;
-import lotto.util.InputParser;
-import lotto.util.LottoDtoConverter;
+import lotto.util.GameResultDtoConverter;
+import lotto.util.LottoParser;
 import lotto.util.RandomNumbersGenerator;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -63,7 +63,7 @@ public class WebUILottoApplication {
         post("/lottos", (req, res) -> {
             //TODO 리팩토링 필수
             Map<String, Object> model = new HashMap<>();
-            InputParser parser = new InputParser();
+            LottoParser parser = new LottoParser();
 
             String origin = req.queryParams("numbers");
             int manualCount = 0;
@@ -81,27 +81,27 @@ public class WebUILottoApplication {
             model.put("manualCount", manualCount);
             model.put("autoCount", autoCount);
 
-            List<Lotto> lottos = service.getLottos();
-            model.put("lottos", new LottoDtoConverter().convertLottosToDto(lottos));
+            List<LottoDto> lottos = service.getLottos();
+            model.put("lottos", lottos);
 
             return render(model, "lottos.html");
         });
 
         post("/winning", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            InputParser parser = new InputParser();
+            LottoParser parser = new LottoParser();
 
             Lotto lotto = parser.parseLotto(req.queryParams("winninglotto"));
             LottoNumber lottoNumber = parser.parseLottoNumber(Integer.parseInt(req.queryParams("bonusnumber")));
             WinningLotto winningLotto = WinningLotto.of(lotto, lottoNumber);
             winningDao.add(winningLotto, turnDao.findNext());
 
-            LottoGameResult gameResult = service.gameResult();
+            GameResult gameResult = service.gameResult();
             gameResult.match(winningLotto);
             model.put("profit", String.format("%.1f", gameResult.profit(LottoMachine.LOTTO_MONEY)));
-            model.put("stat", stringifyResult(new LottoDtoConverter().convertResultToDto(gameResult)));
+            model.put("stat", stringifyResult(new GameResultDtoConverter().convertResultToDto(gameResult)));
 
-            resultDao.add(new LottoDtoConverter().convertResultToDto(gameResult), turnDao.findNext());
+            resultDao.add(new GameResultDtoConverter().convertResultToDto(gameResult), turnDao.findNext());
 
             return render(model, "result.html");
         });

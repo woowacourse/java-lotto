@@ -1,8 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.util.InputParser;
-import lotto.util.LottoDtoConverter;
+import lotto.util.LottoParser;
 import lotto.util.RandomNumbersGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -18,15 +17,15 @@ public class ConsoleApplication {
 		int autoPurchaseCount = assignAutoPurchaseCount(service);
 		OutputView.showBuyCounts(manualPurchaseCount, autoPurchaseCount);
 
-		OutputView.showLottos(new LottoDtoConverter().convertLottosToDto(service.getLottos()));
+		OutputView.showLottos(service.getLottos());
 		WinningLotto winningLotto = assignWinningLotto();
-		LottoGameResult gameResult = service.gameResult();
+		GameResult gameResult = service.gameResult();
 		gameResult.match(winningLotto);
 		OutputView.showGameResult(gameResult);
 	}
 
 	private static int assignManualPurchaseCount(final LottoService service) {
-		InputParser parser = new InputParser();
+		LottoParser parser = new LottoParser();
 		int manualPurchaseCount = InputView.inputManualPurchaseCount();
 		int retCount = START_COUNT;
 		for (; retCount < manualPurchaseCount && service.canBuy(); retCount++) {
@@ -48,7 +47,7 @@ public class ConsoleApplication {
 	}
 
 	private static WinningLotto assignWinningLotto() {
-		InputParser parser = new InputParser();
+		LottoParser parser = new LottoParser();
 		Lotto lotto = parser.parseLotto(InputView.inputWinningLotto());
 		LottoNumber bonusNum = parser.parseLottoNumber(InputView.inputBonusLottoNumber());
 		try {
