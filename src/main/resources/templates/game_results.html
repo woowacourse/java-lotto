@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>게임 조회</title>
+</head>
+<body>
+  <h1>{{games_id}} 회차 결과</h1>
+  <h2>구매 내역</h2>
+  <div>
+    {{#lottos}}
+    {{this}}
+    <br>
+    {{/lottos}}
+  </div>
+  <h2>결과</h2>
+  <div>
+    <div>당첨 번호 - {{winning_number}}</div>
+    <div>보너스 번호 - {{bonus}}</div>
+    <div>
+      결과 : <br>
+      {{#result}}
+      {{this}}
+      <br>
+      {{/result}}
+    </div>
+    <div>수익률 - {{return_rate}}</div>
+    <div>당첨금 - {{return_amount}}</div>
+  </div>
+  <form action="/">
+    <input type="submit" value="홈으로"/>
+  </form>
+  <form action="/lookup">
+    <input type="submit" value="뒤로"/>
+  </form>
+</body>
+</html>

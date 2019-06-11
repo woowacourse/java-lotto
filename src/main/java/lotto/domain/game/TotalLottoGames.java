@@ -34,7 +34,7 @@ public class TotalLottoGames {
         return manualLottoGames.isEmpty();
     }
 
-    public List<Lotto> getAllGames() {
+    public List<Lotto> allGames() {
         return manualLottoGames.combine(autoLottoGames);
     }
 }

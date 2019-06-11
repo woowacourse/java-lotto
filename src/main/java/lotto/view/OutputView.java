@@ -25,7 +25,7 @@ public class OutputView {
 
     public static void lottoList(TotalLottoGames totalLottoGames) {
         System.out.println(getListMessage(totalLottoGames));
-        for (Lotto lotto : totalLottoGames.getAllGames()) {
+        for (Lotto lotto : totalLottoGames.allGames()) {
             System.out.println("[" + lotto.toString() + "]");
         }
         System.out.println();

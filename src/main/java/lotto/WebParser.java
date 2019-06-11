@@ -12,7 +12,7 @@ import lotto.view.OutputView;
 
 public class WebParser {
     public static List<Lotto> makeLottos(WebUILottoData webUILottoData) {
-        return new ArrayList<>(webUILottoData.getTotalLottoGames().getAllGames());
+        return new ArrayList<>(webUILottoData.getTotalLottoGames().allGames());
     }
 
     public static List<String> result(WebUILottoData webUILottoData) {

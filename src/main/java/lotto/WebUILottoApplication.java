@@ -35,7 +35,25 @@ public class WebUILottoApplication {
 
         get("/lookup", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            GameDAO gameDAO = new GameDAO();
+            model.put("totalCount", gameDAO.getCount());
             return render(model, "lookup.html");
+        });
+
+        get("/look", (req, res) -> {
+            int games_id = Integer.parseInt(req.queryParams("radio"));
+            GameDAO gameDAO = new GameDAO();
+            List<String> lottos = gameDAO.getLottosOfGame(games_id);
+            GameDTO gameDTO1 = gameDAO.getGameInformation(games_id);
+            Map<String, Object> model = new HashMap<>();
+            model.put("games_id", games_id);
+            model.put("lottos", lottos);
+            model.put("winning_number", gameDTO1.getWinningNumbers());
+            model.put("bonus", gameDTO1.getBonusNumber());
+            model.put("result", gameDTO1.getResult());
+            model.put("return_rate", gameDTO1.getReturnRate());
+            model.put("return_amount", gameDTO1.getReturnAmount());
+            return render(model, "game_results.html");
         });
 
         get("/purchase", (req, res) -> {
@@ -60,12 +78,13 @@ public class WebUILottoApplication {
         post("/numbers", (req, res) -> {
             TotalLottoGames totalLottoGames = new TotalLottoGames(webUILottoData.getManualCount().autoCount(webUILottoData.getTotalCount()));
             for (int i = 0; i < Integer.parseInt(webUILottoData.getManualCount().toString()); i++) {
-                totalLottoGames.addManual(InputParser.parseLotto(req.queryParams("manual" + i)));
+                List<Number> lotto = InputParser.parseLotto(req.queryParams("manual" + i));
+                totalLottoGames.addManual(lotto);
             }
             webUILottoData.setTotalLottoGames(totalLottoGames);
             Map<String, Object> model = new HashMap<>();
-            model.put("autocount", webUILottoData.getTotalLottoGames().autoSize());
-            model.put("manualcount", webUILottoData.getTotalLottoGames().manualSize());
+            model.put("auto_count", webUILottoData.getTotalLottoGames().autoSize());
+            model.put("manual_count", webUILottoData.getTotalLottoGames().manualSize());
             List<Lotto> list = WebParser.makeLottos(webUILottoData);
             model.put("lottos", list);
             return render(model, "all.html");
@@ -78,10 +97,10 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             List<Lotto> list = WebParser.makeLottos(webUILottoData);
             model.put("lottos", list);
-            model.put("autocount", webUILottoData.getTotalLottoGames().autoSize());
-            model.put("manualcount", webUILottoData.getTotalLottoGames().manualSize());
-            model.put("winningnumbers", webUILottoData.getWinningNumbers().toString());
-            return render(model, "winningbonus.html");
+            model.put("auto_count", webUILottoData.getTotalLottoGames().autoSize());
+            model.put("manual_count", webUILottoData.getTotalLottoGames().manualSize());
+            model.put("winning_numbers", webUILottoData.getWinningNumbers().toString());
+            return render(model, "winning_bonus.html");
         });
 
         get("/result", (req, res) -> {
@@ -101,8 +120,9 @@ public class WebUILottoApplication {
         get("/enroll", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             GameDAO gameDAO = new GameDAO();
-            gameDTO.setReturnAmount("1000원");
-            gameDAO.add(gameDTO);
+            gameDTO.setReturnAmount(LottoResult.resultAmount() + "원");
+            gameDAO.addGameInformation(gameDTO);
+            gameDAO.addLottoNumbers(webUILottoData.getTotalLottoGames().allGames());
             return render(model, "enroll.html");
         });
     }
