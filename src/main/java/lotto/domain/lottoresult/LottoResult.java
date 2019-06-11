@@ -26,7 +26,7 @@ public class LottoResult {
         return rankStatistic.get(lottoRank);
     }
 
-    public BigDecimal earningRate() {
+    public BigDecimal getEarningRate() {
         BigDecimal expense = new BigDecimal(
                 LottoTicket.PRICE * rankStatistic.values().stream()
                 .reduce(0, Integer::sum));

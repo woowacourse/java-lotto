@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoNumberTest {
@@ -17,5 +18,10 @@ class LottoNumberTest {
         assertThrows(InvalidLottoNumberException.class, () -> {
             LottoNumber.of(46);
         });
+    }
+
+    @Test
+    void 같은_로또번호() {
+        assertThat(LottoNumber.of(3)==LottoNumber.of(3)).isTrue();
     }
 }

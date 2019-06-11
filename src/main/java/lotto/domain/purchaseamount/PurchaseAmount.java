@@ -42,7 +42,7 @@ public class PurchaseAmount {
         return money >= price;
     }
 
-    public int available() {
+    public int getMoney() {
         return money;
     }
 

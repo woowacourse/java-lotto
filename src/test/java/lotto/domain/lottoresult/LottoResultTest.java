@@ -6,10 +6,11 @@ import lotto.domain.lotto.LottoTicketGroup;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoResultTest {
     private LottoTicketGroup lottoTickets;
@@ -39,6 +40,7 @@ public class LottoResultTest {
 
     @Test
     void 수익률_확인() {
-        assertEquals(10000 / 20, lottoResult.earningRate(), 0.1);
+        assertThat(lottoResult.getEarningRate())
+                .isEqualTo( new BigDecimal(10000).divide(new BigDecimal(20), 4, RoundingMode.HALF_UP));
     }
 }

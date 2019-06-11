@@ -13,7 +13,7 @@ import java.util.List;
 
 public class OutputView {
     public static void printChange(PurchaseAmount purchaseAmount) {
-        int change = purchaseAmount.available();
+        int change = purchaseAmount.getMoney();
         if (change != 0) {
             System.out.format("거스름 돈은 %d원 입니다.\n\n", change);
         }

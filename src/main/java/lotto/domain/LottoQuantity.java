@@ -14,12 +14,15 @@ public class LottoQuantity {
     }
 
     public static LottoQuantity create(int quantity) {
+        if (quantity == MIN_QUANTITY) {
+            return ZERO;
+        }
         return new LottoQuantity(quantity);
     }
 
     public static LottoQuantity create(String quantity) {
         try {
-            return new LottoQuantity(Integer.parseInt(quantity));
+            return create(Integer.parseInt(quantity));
         } catch (NumberFormatException e) {
             throw new InvalidLottoQuantityException("로또 개수는 숫자로 설정 가능합니다.");
         }

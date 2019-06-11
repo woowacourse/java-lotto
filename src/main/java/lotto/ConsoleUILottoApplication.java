@@ -111,13 +111,11 @@ public class ConsoleUILottoApplication {
     }
 
     private static List<String> getManualLottosText(LottoQuantity manualLottoQuantity) {
-        List<String> manualLottosText = new ArrayList<>();
-
-        if (!manualLottoQuantity.equals(LottoQuantity.ZERO)) {
-            manualLottosText.addAll(InputView.inputManualLottoNumbers(manualLottoQuantity));
+        if (manualLottoQuantity == LottoQuantity.ZERO) {
+            return new ArrayList<>();
         }
 
-        return manualLottosText;
+        return InputView.inputManualLottoNumbers(manualLottoQuantity);
     }
 
     private static WinningLotto createWinningLotto() {

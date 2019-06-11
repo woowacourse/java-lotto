@@ -18,6 +18,6 @@ class PurchaseAmountTest {
     void 거스름돈_확인() {
         PurchaseAmount purchaseAmount = PurchaseAmount.create("1300");
         PurchaseAmount change = purchaseAmount.buy(LottoTicket.PRICE);
-        assertThat(change.available()).isEqualTo(300);
+        assertThat(change.getMoney()).isEqualTo(300);
     }
 }
