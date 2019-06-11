@@ -16,7 +16,7 @@ public class WinningLotto {
         checkIsBlank(inputLottoNumbers);
         checkIsBlank(inputBonusNumber);
 
-        List<Integer> lottoNumbers = toInt(Arrays.asList(inputLottoNumbers.split(",")));
+        List<Integer> lottoNumbers = parseInts(Arrays.asList(inputLottoNumbers.split(",")));
         int bonusNumber = parseInt(inputBonusNumber);
 
         checkIsBonusNumberOverlap(lottoNumbers, bonusNumber);
@@ -37,7 +37,7 @@ public class WinningLotto {
         }
     }
 
-    private List<Integer> toInt(List<String> strings) {
+    private List<Integer> parseInts(List<String> strings) {
         List<Integer> numbers = new ArrayList<>();
 
         for (String string : strings) {
