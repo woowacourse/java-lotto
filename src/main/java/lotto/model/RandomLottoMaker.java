@@ -31,4 +31,13 @@ public class RandomLottoMaker extends LottoMaker {
     public Lotto getLotto() {
         return new Lotto(makeList(), rule);
     }
+
+    @Override
+    public List<Lotto> getAutoLottos(final int purchaseAmount) {
+        final List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < purchaseAmount; i++) {
+            lottos.add(getLotto());
+        }
+        return lottos;
+    }
 }

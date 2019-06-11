@@ -1,6 +1,6 @@
 package lotto.model;
 
-enum Rank {
+public enum Rank {
     MISS(0, 0), // 낙첨
     FIFTH(3, 5_000), // 5등
     FOURTH(4, 50_000), // 4등
