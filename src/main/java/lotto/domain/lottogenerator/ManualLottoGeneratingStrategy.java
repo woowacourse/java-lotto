@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class ManualLottoGeneratingStrategy implements LottoGeneratingStrategy {
     private final List<Integer> inputLottoNumbers;
@@ -20,7 +21,7 @@ public class ManualLottoGeneratingStrategy implements LottoGeneratingStrategy {
     public List<Integer> generate() {
         List<Integer> lottoNumbers = inputLottoNumbers.stream()
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(toList());
 
         return Collections.unmodifiableList(lottoNumbers);
     }

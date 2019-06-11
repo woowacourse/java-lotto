@@ -6,7 +6,8 @@ import lotto.exception.InvalidCountOfLottoNumberException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
@@ -16,7 +17,7 @@ public class Lotto {
         checkLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     private void checkLottoNumbers(List<Integer> lottoNumbers) {

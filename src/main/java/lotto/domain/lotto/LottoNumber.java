@@ -6,8 +6,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toMap;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_BOUNDARY = 1;
@@ -18,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     static {
         creators = IntStream.rangeClosed(MIN_BOUNDARY, MAX_BOUNDARY)
                 .boxed()
-                .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
+                .collect(toMap(Function.identity(), LottoNumber::new));
     }
 
     private int number;

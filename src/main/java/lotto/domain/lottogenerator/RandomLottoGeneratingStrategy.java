@@ -5,8 +5,9 @@ import lotto.domain.lotto.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class RandomLottoGeneratingStrategy implements LottoGeneratingStrategy {
 
@@ -18,7 +19,7 @@ public class RandomLottoGeneratingStrategy implements LottoGeneratingStrategy {
     private static List<Integer> shuffledLottoNumbers() {
         List<Integer> allLottoNumbers = IntStream.rangeClosed(LottoNumber.MIN_BOUNDARY, LottoNumber.MAX_BOUNDARY)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(toList());
 
         Collections.shuffle(allLottoNumbers);
         return allLottoNumbers;
@@ -29,6 +30,6 @@ public class RandomLottoGeneratingStrategy implements LottoGeneratingStrategy {
                 .stream()
                 .limit(Lotto.LOTTO_NUMBER_SIZE)
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 }

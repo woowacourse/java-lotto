@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGeneratorTest {
@@ -32,14 +32,14 @@ class LottoGeneratorTest {
         Lotto lotto = LottoGenerator.create(() -> {
             List<Integer> allLottoNumbers = IntStream.rangeClosed(LottoNumber.MIN_BOUNDARY, LottoNumber.MAX_BOUNDARY)
                     .boxed()
-                    .collect(Collectors.toList());
+                    .collect(toList());
 
             Collections.shuffle(allLottoNumbers);
 
             return allLottoNumbers.stream()
                     .limit(Lotto.LOTTO_NUMBER_SIZE)
                     .sorted()
-                    .collect(Collectors.toList());
+                    .collect(toList());
         });
 
         assertThat(lotto).isInstanceOf(Lotto.class);

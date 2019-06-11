@@ -12,7 +12,8 @@ import lotto.view.OutputView;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
@@ -105,7 +106,7 @@ public class ConsoleUILottoApplication {
     private static List<Integer> splitInputLottoNumbers(String input) {
         return Arrays.stream(input.split(","))
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     private static WinningLotto inputWinningLotto() {
