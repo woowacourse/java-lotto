@@ -1,18 +1,14 @@
 package lotto.dao;
 
-import lotto.util.GameResultDtoConverter;
 import lotto.GameResultDto;
 import lotto.domain.*;
+import lotto.util.GameResultDtoConverter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameResultDaoTest {
@@ -20,7 +16,10 @@ public class GameResultDaoTest {
     private static final List<Lotto> LOTTOS;
     private static final GameResult GAME_RESULT;
     private static final GameResultDto GAME_RESULT_DTO;
+
     private static final int TEST_TURN = 2;
+    private static final double DEFAULT_PROFIT_RATE = 0.0;
+    private static final Map<Rank, Integer> DEFAULT_MAP = new HashMap<>();
 
     private GameResultDao resultDao;
 
@@ -64,9 +63,8 @@ public class GameResultDaoTest {
     @Test
     public void deleteAll() {
         resultDao.deleteAll();
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            Optional.ofNullable(resultDao.findByTurn(1)).orElseThrow(IllegalArgumentException::new);
-        });
+        GameResultDto expected = GameResultDto.of(DEFAULT_MAP, DEFAULT_PROFIT_RATE);
+        assertEquals(expected, resultDao.findByTurn(TEST_TURN));
     }
 
     @AfterEach

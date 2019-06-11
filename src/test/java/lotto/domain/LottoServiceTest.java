@@ -18,17 +18,17 @@ class LottoServiceTest {
     private static final int ANSWER = 250;
 
     private LottoFactory lottoFactory;
-    private LottoService buyer;
+    private LottoService service;
 
     @BeforeEach
     public void setUp() {
         lottoFactory = new LottoFactory();
-        buyer = new LottoService();
+        service = new LottoService();
 
-        buyer.charge(MONEY);
-        buyer.buy(lottoFactory.create(FIFTH_NUMBERS));
-        while (buyer.canBuy()) {
-            buyer.buy(lottoFactory.create(MISS_NUMBERS));
+        service.charge(MONEY);
+        service.buy(lottoFactory.create(FIFTH_NUMBERS));
+        while (service.canBuy()) {
+            service.buy(lottoFactory.create(MISS_NUMBERS));
         }
     }
 
@@ -36,13 +36,13 @@ class LottoServiceTest {
     public void 구매를_제대로하고_당첨로또에_따른_결과를_제대로_반환해주는지() {
         Lotto lotto = lottoFactory.create(WINNING_NUMBERS);
 
-        GameResult gameResult = buyer.gameResult();
+        GameResult gameResult = service.gameResult();
         gameResult.match(WinningLotto.of(lotto, LottoNumber.of(BONUS_NUM)));
         assertThat(gameResult.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(ANSWER);
     }
 
     @AfterEach
     public void tearDown() {
-        // service내의 데이터 삭제
+        service.deleteAll();
     }
 }

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exception.CountOfNumberException;
+import lotto.domain.exception.CountsOfLottoException;
 import lotto.domain.exception.NumberDuplicationException;
 
 import java.util.*;
@@ -26,7 +26,7 @@ public class Lotto {
 
     private void checkValidSize(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new CountOfNumberException(LOTTO_SIZE + "개를 입력해주세요");
+            throw new CountsOfLottoException(LOTTO_SIZE + "개를 입력해주세요");
         }
     }
 

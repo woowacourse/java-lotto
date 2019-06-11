@@ -10,12 +10,10 @@ import java.util.List;
 public class LottoService {
     private final LottoMachine lottoMachine;
     private final LottosDao lottosDao;
-    private final TurnDao turnDao;
 
     public LottoService() {
         lottoMachine = new LottoMachine();
         lottosDao = new LottosDao();
-        turnDao = new TurnDao();
     }
 
     public void charge(final int money) {
@@ -24,7 +22,7 @@ public class LottoService {
 
     public void buy(final Lotto lotto) {
         lottoMachine.buy();
-        lottosDao.add(new LottoDtoConverter().convertLottoToDto(lotto), turnDao.findNext());
+        lottosDao.add(new LottoDtoConverter().convertLottoToDto(lotto), new TurnDao().findNext());
     }
 
     public boolean canBuy() {
@@ -37,10 +35,18 @@ public class LottoService {
     }
 
     public List<LottoDto> getLottos() {
-        return lottosDao.findAllByTurn(turnDao.findNext());
+        return lottosDao.findAllByTurn(new TurnDao().findNext());
     }
 
     public void vacateMoney() {
         lottoMachine.vacate();
+    }
+
+    public void deleteAll() {
+        lottosDao.deleteAll();
+    }
+
+    public List<LottoDto> findAllByTurn(final int turn) {
+        return lottosDao.findAllByTurn(turn);
     }
 }
