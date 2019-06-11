@@ -6,13 +6,18 @@ var count = 0
 var manual_count = 0
 var lotto = []
 var lotteries = []
-var temp
 
+// 사용하지 않는 함수
 function checkWrongApproach() {
 	if (count < 1) {
 		alert("잘못된 접근입니다.")
 		return
 	}
+}
+
+// 사용하지 않는 함수
+function autoScroll(dom) {
+	dom.scrollTop(dom[0].scrollHeight);
 }
 
 function clickShowMakeLottoArea() {
@@ -60,8 +65,24 @@ function unClickToggle(element) {
 	element.attr("select", "off")
 	element.css("color", "black")
 	var number = element.attr("number")
-	lotto.splice(lotto.indexOf(number),1)
+	var index = lotto.indexOf(number)
+	lotto.splice(index,1)
 	lotto_available_size += 1;
+}
+
+function clickWinLottoToggle(number) {
+	if (now_mode_size === WIN_LOTTO_SIZE) {
+		var index = lotto.indexOf(number)
+		var winlotto = $("#winlotto button")
+		winlotto.eq(index).text(number)
+	}
+}
+
+function unClickWinLottoToggle(index) {
+	if (now_mode_size === WIN_LOTTO_SIZE) {
+		var winlotto = $("#winlotto button")
+		winlotto.eq(index).text("")
+	}
 }
 
 function drawLotteriesArea() {
@@ -131,7 +152,7 @@ function generateLotteries(data) {
 	// data 길이랑 count랑 다르면 alert
 	generateLotteriesView(dataJson.lotteries)
 	changeLotteriesView(dataJson.manual_count, dataJson.auto_count)
-	now_mode_size = WIN_LOTTO_SIZE
+	drawWinLottoArea()
 }
 
 function generateLotteriesView(lotteriesData) {
@@ -157,5 +178,75 @@ function changeLotteriesView(manual_count, auto_count) {
 	$("#autocnt-text").text(auto_count)
 	$("#lotteriescnt").show("slow")
 	$("#end-btn").attr("disabled", "true")
-	$("makelotto-btn").attr("disabled", "false")
+	$("#makelotto-btn").attr("disabled", "true")
+}
+
+function drawWinLottoArea() {
+	$("#winlotto-area").show("slow")
+	now_mode_size = WIN_LOTTO_SIZE
+	lotto_available_size = now_mode_size
+	lotto = []
+	lotteries = []
+}
+
+function clickMakeWinLotto() {
+	if (lotto_available_size != 0) {
+		alert("숫자를 전부 선택하고 입력해주세요")
+		return
+	}
+	var winlotto = $("#winlotto button")
+	for (var i = 0 ; i < lotto.length ; i++) {
+		winlotto.eq(i).text(lotto[i])
+	}
+
+	$("#winlotto-btn").attr("disabled", "true")
+	$("#result-btn").attr("disabled", false)
+}
+
+function clickShowResult() {
+	var body = {}
+	body.bonus = lotto.pop()
+	body.winLotto = lotto
+	var queryString = JSON.stringify(body)
+	console.log(queryString)
+
+	$.ajax({
+		type : "POST",
+		url : "detailResult",
+		data : queryString,
+		contentType : 'application/json;charset=UTF-8;version=1.0',
+
+        error : function(xhr, status, error){
+            alert(error)
+        },
+        success : generateResultView
+	})
+	lotto = []
+}
+
+function generateResultView(data) {
+	console.log(data)
+	var dataJson = JSON.parse(data);
+	changeResult(dataJson)
+	drawResultArea()
+}
+
+function changeResult(data) {
+	changeResultRate(parseInt(data.rate))
+	changeResultRank(data.result)
+}
+
+function changeResultRate(rate) {
+	$("#rate").text(rate + "%")
+}
+
+function changeResultRank(resultArray) {
+	resultArray.forEach(function(result) {
+		$("#rank_" + result.rank).text(result.match_count)
+	})
+}
+
+function drawResultArea() {
+	$("#result-btn").attr("disabled", true)
+	$("#result-area").show("slow")
 }

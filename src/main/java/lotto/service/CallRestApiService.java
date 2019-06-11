@@ -1,17 +1,13 @@
 package lotto.service;
 
 import com.google.gson.*;
-import lotto.domain.Lotteries;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.domain.autocreatelotto.DefaultAutoCreateLotto;
-import lotto.domain.customcreatelotto.CustomCreateLotto;
-import lotto.domain.customcreatelotto.DefaultCustomCreateCreateLotto;
 import spark.Request;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author heebg
@@ -103,5 +99,35 @@ public class CallRestApiService {
             lottoNumbers.add(new LottoNumber(lotto.get(i).getAsInt()));
         }
         return Lotto.createLotto(lottoNumbers);
+    }
+
+    public String detailResult(Request req) {
+        JsonParser jsonParser = new JsonParser();
+        JsonElement jsonElement = jsonParser.parse(req.body());
+        int lottoNumber = jsonElement.getAsJsonObject().get("bonus").getAsInt();
+
+        Winner winner = new Winner(generateLotto(jsonElement.getAsJsonObject().get("winLotto").getAsJsonArray()), new LottoNumber(lottoNumber));
+        RankResult rankResult = new RankResult(lotteries, winner, money);
+        JsonObject jsonObject = generateResponseDetailResult(rankResult);
+        return new Gson().toJson(jsonObject);
+    }
+
+    private JsonObject generateResponseDetailResult(RankResult rankResult) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("rate",rankResult.getRate());
+        jsonObject.add("result",generateResponseRank(rankResult.getRankResult()));
+
+        return jsonObject;
+    }
+
+    private JsonArray generateResponseRank(Map<Rank, Integer> rankResult) {
+        JsonArray jsonArray = new JsonArray();
+        for (Map.Entry<Rank, Integer> entry : rankResult.entrySet()) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("rank",entry.getKey().getRank());
+            jsonObject.addProperty("match_count", entry.getValue());
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
     }
 }

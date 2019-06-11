@@ -97,6 +97,39 @@
             </div>
         </div>
     </div>
+    <div id="winlotto-area" style="display:none">
+        <div id="winlotto-title"></div>
+        <p>지난 우승 번호를 설정하세요</p>
+        <p>마지막에 선택한 번호는 보너스 번호입니다.</p>
+        <div id="winlotto" class="lotto">
+            <button name="1" type="button"></button>
+            <button name="2" type="button"></button>
+            <button name="3" type="button"></button>
+            <button name="4" type="button"></button>
+            <button name="5" type="button"></button>
+            <button name="6" type="button"></button>
+            +
+            <button name="bonus" type="button"></button>
+        </div>
+        <br>
+        <div>
+            <button id="winlotto-btn" type="button" onclick="clickMakeWinLotto()">생성</button>
+            <button id="result-btn" type="button" onclick="clickShowResult()" disabled="true">결과 확인하기</button>
+        </div>
+        <div id="result-area" style="display:none">
+            <p>-----당첨 결과-----</p>
+            <div id="rank-area">
+                <p>6개 일치 (2000000000)- <span id="rank_1"> </span>개</p>
+                <p>5개 일치, 보너스 볼 일치(30000000원)- <span id="rank_2"> </span>개</p>
+                <p>5개 일치 (1500000)- <span id="rank_3"> </span>개</p>
+                <p>4개 일치 (50000)- <span id="rank_4"> </span>개</p>
+                <p>3개 일치 (5000)- <span id="rank_5"> </span>개</p>
+            </div>
+            <div>
+                <p>총 수익률은 <span id="rate"></span> 입니다.
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="/javascript/moneyFunc.js"></script>
