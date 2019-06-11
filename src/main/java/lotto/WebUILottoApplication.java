@@ -100,8 +100,7 @@ public class WebUILottoApplication {
 
         get("selectRound", (req, res) -> {
             try {
-                RoundDao roundDao = new RoundDao(connection);
-                int round = roundDao.findMaxRound();
+                int round = getRound();
                 Map<String, Object> model = new HashMap<>();
                 model.put("round", round);
                 return render(model, "selectRound.html");
@@ -114,13 +113,10 @@ public class WebUILottoApplication {
 
         get("/showRounds", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int round = Integer.parseInt(req.queryParams("round"));
-            WinningLottoDao winningLottoDao = new WinningLottoDao(connection);
-            WinningLotto winningLotto = winningLottoDao.findWinningLottoByRound(round);
-            LottoTicketsDao lottoTicketsDao = new LottoTicketsDao(connection);
-            LottoTickets lottoTickets = lottoTicketsDao.findLottoByRound(round);
-            RoundDao roundDao = new RoundDao(connection);
-            int money = roundDao.findMoneyByRound(round);
+            int round = Integer.parseInt(req.queryParams(ROUND.type));
+            int money = getMoney(round);
+            WinningLotto winningLotto = getWinningLotto(round);
+            LottoTickets lottoTickets = getLottoTickets(round);
             LottoMoney lottoMoney = new LottoMoney(money);
             LottoResults lottoResults = LottoResultsFactory.create(lottoTickets, winningLotto, lottoMoney);
 
@@ -139,6 +135,26 @@ public class WebUILottoApplication {
             res.redirect("error.html");
             return "error";
         });
+    }
+
+    private static int getRound() throws SQLException {
+        RoundDao roundDao = new RoundDao(connection);
+        return roundDao.findMaxRound();
+    }
+
+    private static int getMoney(int round) throws SQLException {
+        RoundDao roundDao = new RoundDao(connection);
+        return roundDao.findMoneyByRound(round);
+    }
+
+    private static LottoTickets getLottoTickets(int round) throws SQLException {
+        LottoTicketsDao lottoTicketsDao = new LottoTicketsDao(connection);
+        return lottoTicketsDao.findLottoByRound(round);
+    }
+
+    private static WinningLotto getWinningLotto(int round) throws SQLException {
+        WinningLottoDao winningLottoDao = new WinningLottoDao(connection);
+        return winningLottoDao.findWinningLottoByRound(round);
     }
 
     private static List<String> getManualLottoTickets(String inputManuals) {
@@ -189,7 +205,8 @@ public class WebUILottoApplication {
         WINNING_LOTTO("winningLotto"),
         BONUS_BALL("bonusBall"),
         LOTTO_RESULTS("lottoResults"),
-        REWARD_MONEY("rewardMoney");
+        REWARD_MONEY("rewardMoney"),
+        ROUND("round");
 
         private final String type;
 
