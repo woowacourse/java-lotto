@@ -27,7 +27,7 @@ public class InputView {
     private static int getInterger() {
         try {
             return Integer.parseInt(SCANNER.nextLine());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             System.out.println(NOT_INTERGER_MESSAGE);
             return getInsertedMoney();
         }
@@ -55,7 +55,7 @@ public class InputView {
                     .split(","))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             System.out.println(NOT_CORRECT_INPUT);
             return getMultipleInteger();
         }
