@@ -5,25 +5,24 @@ import java.util.Optional;
 public class DBManager {
     public static Connection getConnection() {
         Connection conn = null;
-        String server = "localhost";
-        String database = "lotto_db";
-        String userName = "yuyu154";
-        String password = "1234";
+        PropertiesManager propManager = new PropertiesManager();
+        loadClass();
 
+        try {
+            conn = DriverManager.getConnection(propManager.getUrl() + propManager.getDbName()
+                    + "?useSSL=false&serverTimezone=UTC", propManager.getUsername(), propManager.getPassword());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
+
+    private static void loadClass() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://" + server + "/" + database
-                    + "?useSSL=false&serverTimezone=UTC", userName, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return conn;
     }
 
     public static void closeConnection(Connection conn) {
