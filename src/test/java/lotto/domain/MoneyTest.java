@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.InvalidInputException;
 import lotto.exception.InvalidPaymentException;
 import org.junit.jupiter.api.Test;
 
@@ -15,17 +16,17 @@ public class MoneyTest {
 
     @Test
     void 빈_문자열을_입력받은_경우_예외_발생() {
-        assertThrows(InvalidPaymentException.class, () -> new Money(""));
+        assertThrows(InvalidInputException.class, () -> new Money(""));
     }
 
     @Test
     void 공백을_입력받은_경우_예외_발생() {
-        assertThrows(InvalidPaymentException.class, () -> new Money(" "));
+        assertThrows(InvalidInputException.class, () -> new Money(" "));
     }
 
     @Test
     void 숫자가_아닌_값을_입력받은_경우_예외_발생() {
-        assertThrows(InvalidPaymentException.class, () -> new Money("abc"));
+        assertThrows(InvalidInputException.class, () -> new Money("abc"));
     }
 
     @Test

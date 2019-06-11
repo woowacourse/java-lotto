@@ -1,7 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.util.CustomStringUtils;
 import lotto.exception.InvalidPaymentException;
-import org.apache.commons.lang3.StringUtils;
 
 public class Money {
     public static final int ONE_LOTTO_PRICE = 1000;
@@ -10,24 +10,10 @@ public class Money {
     private final int money;
 
     public Money(String input) {
-        checkIsBlank(input);
-        int money = parseInt(input);
+        CustomStringUtils.checkIsBlank(input);
+        int money = CustomStringUtils.parseInt(input);
         checkBuyableMoney(money);
         this.money = money;
-    }
-
-    private void checkIsBlank(String input) {
-        if (StringUtils.isBlank(input)) {
-            throw new InvalidPaymentException("아무것도 입력하지 않으셨습니다.");
-        }
-    }
-
-    private int parseInt(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new InvalidPaymentException("금액을 숫자로 입력해주세요.");
-        }
     }
 
     private void checkBuyableMoney(int money) {

@@ -3,10 +3,8 @@ package lotto.view;
 import lotto.domain.creator.ManualLottoCreator;
 import lotto.domain.Money;
 import lotto.domain.lotto.WinningLotto;
+import lotto.domain.util.CustomStringUtils;
 import lotto.exception.InvalidInputException;
-import lotto.exception.InvalidLottoNumbersException;
-import lotto.exception.InvalidPaymentException;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +17,7 @@ public class InputView {
         System.out.println("구입 금액을 입력해 주세요.");
         try {
             return new Money(SCANNER.nextLine());
-        } catch (InvalidPaymentException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return inputMoney();
         }
@@ -30,8 +28,8 @@ public class InputView {
         String input = SCANNER.nextLine();
 
         try {
-            checkIsBlank(input);
-            int number = parseInt(input);
+            CustomStringUtils.checkIsBlank(input);
+            int number = CustomStringUtils.parseInt(input);
             checkIsBuyable(money, number);
             return number;
         } catch (InvalidInputException e) {
@@ -49,27 +47,13 @@ public class InputView {
         }
     }
 
-    private static void checkIsBlank(String input) {
-        if (StringUtils.isBlank(input)) {
-            throw new InvalidInputException("아무것도 입력하지 않으셨습니다.");
-        }
-    }
-
-    private static int parseInt(String input) {
-        try {
-            return Integer.parseInt(input.trim());
-        } catch (NumberFormatException e) {
-            throw new InvalidInputException("숫자자 아닌 값이 포함되어 있습니다.");
-        }
-    }
-
     public static ManualLottoCreator generateManualLottoCreator(int numberOfManualLotto) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String> numbers = collectManualLottoNumber(numberOfManualLotto);
 
         try {
             return new ManualLottoCreator(numbers);
-        } catch (InvalidLottoNumbersException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return generateManualLottoCreator(numberOfManualLotto);
         }
@@ -94,7 +78,7 @@ public class InputView {
 
         try {
             return new WinningLotto(lottoNumbers, bonusNumber);
-        } catch (InvalidLottoNumbersException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return inputWinningLotto();
         }

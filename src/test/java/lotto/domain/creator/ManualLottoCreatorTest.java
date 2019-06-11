@@ -1,5 +1,6 @@
 package lotto.domain.creator;
 
+import lotto.exception.InvalidInputException;
 import lotto.exception.InvalidLottoNumbersException;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ public class ManualLottoCreatorTest {
     @Test
     void 입력값에_숫자가_아닌_값이_포함된_경우_예외_반환() {
         List<String> inputs = Arrays.asList("1, 2, 3, 4, 5, 6", "11, 12, 13, 14, 15, a");
-        assertThrows(InvalidLottoNumbersException.class, () -> new ManualLottoCreator(inputs));
+        assertThrows(InvalidInputException.class, () -> new ManualLottoCreator(inputs));
     }
 
     @Test

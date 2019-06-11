@@ -1,11 +1,9 @@
 package lotto.domain.lotto;
 
 import lotto.domain.Rank;
+import lotto.domain.util.CustomStringUtils;
 import lotto.exception.InvalidLottoNumbersException;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WinningLotto {
@@ -13,11 +11,11 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String inputLottoNumbers, String inputBonusNumber) {
-        checkIsBlank(inputLottoNumbers);
-        checkIsBlank(inputBonusNumber);
+        CustomStringUtils.checkIsBlank(inputLottoNumbers);
+        CustomStringUtils.checkIsBlank(inputBonusNumber);
 
-        List<Integer> lottoNumbers = parseInts(Arrays.asList(inputLottoNumbers.split(",")));
-        int bonusNumber = parseInt(inputBonusNumber);
+        List<Integer> lottoNumbers = CustomStringUtils.parseInts(inputLottoNumbers);
+        int bonusNumber = CustomStringUtils.parseInt(inputBonusNumber);
 
         checkIsBonusNumberOverlap(lottoNumbers, bonusNumber);
 
@@ -28,29 +26,6 @@ public class WinningLotto {
     private void checkIsBonusNumberOverlap(List<Integer> lottoNumbers, int bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
             throw new InvalidLottoNumbersException("보너스 숫자가 이전에 입력한 숫자와 중복됩니다.");
-        }
-    }
-
-    private void checkIsBlank(String input) {
-        if (StringUtils.isBlank(input)) {
-            throw new InvalidLottoNumbersException("아무것도 입력하지 않으셨습니다.");
-        }
-    }
-
-    private List<Integer> parseInts(List<String> strings) {
-        List<Integer> numbers = new ArrayList<>();
-
-        for (String string : strings) {
-            numbers.add(parseInt(string));
-        }
-        return numbers;
-    }
-
-    private int parseInt(String input) {
-        try {
-            return Integer.parseInt(input.trim());
-        } catch (NumberFormatException e) {
-            throw new InvalidLottoNumbersException("숫자가 아닌 값이 포함되어 있습니다.");
         }
     }
 

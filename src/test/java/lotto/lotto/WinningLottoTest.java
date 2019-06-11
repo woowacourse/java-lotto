@@ -4,6 +4,7 @@ import lotto.domain.Rank;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.WinningLotto;
+import lotto.exception.InvalidInputException;
 import lotto.exception.InvalidLottoNumbersException;
 import org.junit.jupiter.api.Test;
 
@@ -22,32 +23,32 @@ public class WinningLottoTest {
 
     @Test
     void 빈_문자열을_입력받은_경우_예외_발생() {
-        assertThrows(InvalidLottoNumbersException.class, () -> new WinningLotto("", "1"));
+        assertThrows(InvalidInputException.class, () -> new WinningLotto("", "1"));
     }
 
     @Test
     void 공백을_입력받은_경우_예외_발생() {
-        assertThrows(InvalidLottoNumbersException.class, () -> new WinningLotto(" ", "1"));
+        assertThrows(InvalidInputException.class, () -> new WinningLotto(" ", "1"));
     }
 
     @Test
     void 숫자가_아닌_값을_입력받은_경우_예외_발생() {
-        assertThrows(InvalidLottoNumbersException.class, () -> new WinningLotto("1, 2, 3, 4, 5, a", "7"));
+        assertThrows(InvalidInputException.class, () -> new WinningLotto("1, 2, 3, 4, 5, a", "7"));
     }
 
     @Test
     void 보너스_숫자로_빈_문자열을_입력받은_경우_예외_발생() {
-        assertThrows(InvalidLottoNumbersException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 6", ""));
+        assertThrows(InvalidInputException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 6", ""));
     }
 
     @Test
     void 보너스_숫자로_공백을_입력받은_경우_예외_발생() {
-        assertThrows(InvalidLottoNumbersException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 6", " "));
+        assertThrows(InvalidInputException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 6", " "));
     }
 
     @Test
     void 보너스_숫자로_숫자가_아닌_값을_입력받은_경우_예외_발생() {
-        assertThrows(InvalidLottoNumbersException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 6", "a"));
+        assertThrows(InvalidInputException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 6", "a"));
     }
 
     @Test
