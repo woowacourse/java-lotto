@@ -17,7 +17,8 @@ public class WebUILottoApplication {
         options("/*", WebUILottoApplication::cors);
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-        get("/api/result/:id", LottoWebController::retrieveSingleResult, gson::toJson);
+        get("/api/results", LottoWebController::retrieveAggregations, gson::toJson);
+        get("/api/result/:id", LottoWebController::retrieveSingleAggregation, gson::toJson);
         post("/api/buy-auto", LottoWebController::buyAutoLotto, gson::toJson);
         post("/api/buy-manual", LottoWebController::buyManualLotto, gson::toJson);
         post("/api/draw", LottoWebController::draw, gson::toJson);

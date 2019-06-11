@@ -3,6 +3,8 @@ package com.woowacourse.lotto.persistence.dao;
 import com.woowacourse.lotto.persistence.dto.LottoDto;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class LottoDao {
@@ -35,7 +37,16 @@ public class LottoDao {
         PreparedStatement query = conn.prepareStatement(LottoDaoSql.SELECT_LOTTO_BY_ID);
         query.setLong(1, id);
         try (ResultSet rs = query.executeQuery()) {
-            return mapResult(rs);
+            return checkAndMapResult(rs);
+        }
+    }
+
+    public List<LottoDto> findByAggregationId(long aggregationId) throws SQLException {
+        PreparedStatement query = conn.prepareStatement(LottoDaoSql.SELECT_BY_AGGREGATION_ID);
+        query.setLong(1, aggregationId);
+
+        try (ResultSet rs = query.executeQuery()) {
+            return mapResults(rs);
         }
     }
 
@@ -45,10 +56,23 @@ public class LottoDao {
         return query.executeUpdate();
     }
 
-    private Optional<LottoDto> mapResult(ResultSet rs) throws SQLException {
+    private List<LottoDto> mapResults(ResultSet rs) throws SQLException {
+        List<LottoDto> lottos = new ArrayList<>();
+        while (rs.next()) {
+            mapResult(rs).ifPresent(lottos::add);
+        }
+
+        return lottos;
+    }
+
+    private Optional<LottoDto> checkAndMapResult(ResultSet rs) throws SQLException {
         if (!rs.next()) {
             return Optional.empty();
         }
+        return mapResult(rs);
+    }
+
+    private Optional<LottoDto> mapResult(ResultSet rs) throws SQLException {
         LottoDto found = new LottoDto();
         found.setId(rs.getLong("id"));
         found.setNumber0(rs.getInt("number_0"));
@@ -66,6 +90,11 @@ public class LottoDao {
     private static class LottoDaoSql {
         private static final String INSERT_LOTTO = "INSERT INTO lotto(number_0, number_1, number_2, number_3, number_4, number_5, price) VALUES(?, ?, ?, ?, ?, ?, ?)";
         private static final String SELECT_LOTTO_BY_ID = "SELECT id, number_0, number_1, number_2, number_3, number_4, number_5, price, reg_date FROM lotto WHERE id=?";
+        private static final String SELECT_BY_AGGREGATION_ID = "SELECT l.id, l.number_0, l.number_1, l.number_2, l.number_3, l.number_4, l.number_5, l.price, l.reg_date FROM lotto as l\n" +
+            "\tJOIN lotto_aggregated as lg\n" +
+            "\tON lg.lotto_id = l.id\n" +
+            "\tJOIN aggregation AS agg\n" +
+            "\tON lg.aggregation_id = agg.id AND agg.id=?";
         private static final String DELETE_BY_ID = "DELETE FROM lotto WHERE id=?";
     }
 }

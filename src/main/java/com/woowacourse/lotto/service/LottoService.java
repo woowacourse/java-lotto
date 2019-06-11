@@ -14,7 +14,6 @@ import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class LottoService {
     private LottoDao lottoDao;
@@ -49,11 +48,30 @@ public class LottoService {
         return null;
     }
 
+    public List<LottoDto> findLottosByAggregationId(long aggregationId) {
+        try {
+            return lottoDao.findByAggregationId(aggregationId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private WinningLottoDto addWinningLotto(WinningLotto winningLotto) {
         try {
             WinningLottoDto dto = winningLotto.toDto();
             long id = winningLottoDao.addWinningLotto(dto);
             return winningLottoDao.findById(id).get();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public WinningLottoDto findWinningLottoByAggregationId(long aggregationId) {
+        try {
+            return winningLottoDao.findByAggregationId(aggregationId)
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 당첨 로또를 찾을 수 없습니다."));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,6 +94,15 @@ public class LottoService {
         try {
             return aggregationDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("결과를 찾을 수 없습니다"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<AggregationDto> findLatestNAggregation(int n) {
+        try {
+            return aggregationDao.find(n);
         } catch (SQLException e) {
             e.printStackTrace();
         }

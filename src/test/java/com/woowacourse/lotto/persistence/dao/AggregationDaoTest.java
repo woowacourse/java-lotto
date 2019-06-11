@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -96,6 +97,34 @@ public class AggregationDaoTest {
     }
 
     @Test
+    void findLatestN() throws Exception {
+        // Test data * 2
+        int latestRound = aggregationDao.findLatestRound();
+        LottoDto lottoDto1 = createLottoDto(1, 2, 3, 4, 5, 6);
+        WinningLottoDto winning1 = createWinningLotto(1, 2, 3, 4, 5, 6, 7);
+        long lottoId1 = lottoDao.addLotto(lottoDto1);
+        long winningId1 = winningLottoDao.addWinningLotto(winning1);
+        long aggId1 = aggregationDao.addAggregation(createAggregation(++latestRound, 1, 0, 0, 0, 0, 0, 2_000_000_000L),
+            winningId1, Arrays.asList(lottoId1));
+        LottoDto lottoDto2 = createLottoDto(1, 2, 3, 4, 5, 6);
+        WinningLottoDto winning2 = createWinningLotto(7, 1, 2, 3, 4, 5, 6);
+        long lottoId2 = lottoDao.addLotto(lottoDto2);
+        long winningId2 = winningLottoDao.addWinningLotto(winning2);
+        long aggId2 = aggregationDao.addAggregation(createAggregation(++latestRound, 0, 1, 0, 0, 0, 0, 2_000_000_000L),
+            winningId2, Arrays.asList(lottoId2));
+        List<AggregationDto> result = aggregationDao.find(2);
+        assertThat(result).hasSize(2);
+        assertThat(result.get(1).getCntFirst()).isEqualTo(1);
+        assertThat(result.get(0).getCntSecond()).isEqualTo(1);
+        aggregationDao.deleteById(aggId1);
+        aggregationDao.deleteById(aggId2);
+        lottoDao.deleteById(lottoId1);
+        lottoDao.deleteById(lottoId2);
+        winningLottoDao.deleteById(winningId1);
+        winningLottoDao.deleteById(winningId2);
+    }
+
+    @Test
     void findLatestRound() throws Exception {
         assertThat(aggregationDao.findLatestRound()).isEqualTo(999);
     }
@@ -104,5 +133,42 @@ public class AggregationDaoTest {
     void deleteById() throws Exception {
         assertThat(aggregationDao.deleteById(lastGeneratedAggregationId)).isEqualTo(1);
         assertThat(aggregationDao.findById(lastGeneratedAggregationId).isPresent()).isFalse();
+    }
+
+    private static LottoDto createLottoDto(int number0, int number1, int number2, int number3, int number4, int number5) {
+        LottoDto lotto = new LottoDto();
+        lotto.setNumber0(number0);
+        lotto.setNumber0(number1);
+        lotto.setNumber0(number2);
+        lotto.setNumber0(number3);
+        lotto.setNumber0(number4);
+        lotto.setNumber0(number5);
+        lotto.setPrice(Lotto.UNIT_PRICE);
+        return lotto;
+    }
+
+    private static AggregationDto createAggregation(int round, int first, int second, int third, int fourth, int fifth, int none, long prizeMoneySum) {
+        AggregationDto aggregation = new AggregationDto();
+        aggregation.setLottoRound(round);
+        aggregation.setCntFirst(first);
+        aggregation.setCntSecond(second);
+        aggregation.setCntThird(third);
+        aggregation.setCntFourth(fourth);
+        aggregation.setCntFifth(fifth);
+        aggregation.setCntNone(none);
+        aggregation.setPrizeMoneySum(prizeMoneySum);
+        return aggregation;
+    }
+
+    private static WinningLottoDto createWinningLotto(int number0, int number1, int number2, int number3, int number4, int number5, int bonus) {
+        WinningLottoDto winningLotto = new WinningLottoDto();
+        winningLotto.setWinningNumber0(number0);
+        winningLotto.setWinningNumber1(number1);
+        winningLotto.setWinningNumber2(number2);
+        winningLotto.setWinningNumber3(number3);
+        winningLotto.setWinningNumber4(number4);
+        winningLotto.setWinningNumber5(number5);
+        winningLotto.setWinningBonusNumber(bonus);
+        return winningLotto;
     }
 }

@@ -32,18 +32,31 @@ public class WinningLottoDao {
         }
     }
 
-    public Optional<WinningLottoDto> findById(long id) throws SQLException{
+    public Optional<WinningLottoDto> findById(long id) throws SQLException {
         PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_ID);
         query.setLong(1, id);
         try (ResultSet rs = query.executeQuery()) {
-            return mapResult(rs);
+            return checkAndMapResult(rs);
+        }
+    }
+
+    private Optional<WinningLottoDto> checkAndMapResult(ResultSet rs) throws SQLException {
+        if (!rs.next()) {
+            return Optional.empty();
+        }
+        return mapResult(rs);
+    }
+
+    public Optional<WinningLottoDto> findByAggregationId(long aggregationId) throws SQLException {
+        PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_AGGREGATION_ID);
+        query.setLong(1, aggregationId);
+
+        try (ResultSet rs = query.executeQuery()) {
+            return checkAndMapResult(rs);
         }
     }
 
     private Optional<WinningLottoDto> mapResult(ResultSet rs) throws SQLException {
-        if (!rs.next()) {
-            return Optional.empty();
-        }
         WinningLottoDto found = new WinningLottoDto();
         found.setId(rs.getLong("id"));
         found.setWinningNumber0(rs.getInt("winning_number_0"));
@@ -57,7 +70,7 @@ public class WinningLottoDao {
         return Optional.of(found);
     }
 
-    public int deleteById(long id) throws SQLException{
+    public int deleteById(long id) throws SQLException {
         PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.DELETE_BY_ID);
         query.setLong(1, id);
         return query.executeUpdate();
@@ -68,6 +81,11 @@ public class WinningLottoDao {
             "VALUES(?, ?, ?, ?, ?, ?, ?)";
         private static final String SELECT_BY_ID = "SELECT id, winning_number_0, winning_number_1, winning_number_2, winning_number_3, winning_number_4, winning_number_5, winning_number_bonus, reg_date " +
             "FROM winning_lotto WHERE id=?";
+        private static final String SELECT_BY_AGGREGATION_ID = "SELECT w.id, w.winning_number_0, w.winning_number_1, w.winning_number_2, w.winning_number_3, w.winning_number_4, w.winning_number_5, w.winning_number_bonus, w.reg_date FROM winning_lotto AS w\n" +
+            "\tJOIN winning_lotto_aggregated AS lg\n" +
+            "\tON lg.winning_lotto_id = w.id\n" +
+            "\tJOIN aggregation AS agg\n" +
+            "\tON lg.aggregation_id = agg.id AND agg.id = ?";
         private static final String DELETE_BY_ID = "DELETE FROM winning_lotto WHERE id=?";
     }
 }

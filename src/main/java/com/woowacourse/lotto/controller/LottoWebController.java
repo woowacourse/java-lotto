@@ -13,6 +13,7 @@ import spark.Response;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -210,12 +211,13 @@ public class LottoWebController {
         return map;
     }
 
-    public static Map<String, Object> retrieveSingleResult(Request req, Response res) {
+    public static Map<String, Object> retrieveSingleAggregation(Request req, Response res) {
         Map<String, Object> resMap;
         try {
-            System.out.println("id: " + req.params("id"));
             AggregationDto aggregation = lottoService.findAggregationById(Long.parseLong(req.params("id")));
             resMap = createResMapWithResult(ResultState.OK);
+            aggregation.setLottos(lottoService.findLottosByAggregationId(aggregation.getId()));
+            aggregation.setWinningLotto(lottoService.findWinningLottoByAggregationId(aggregation.getId()));
             resMap.put("aggregation", aggregation);
         } catch (NumberFormatException e) {
             resMap = createResMapWithResult(ResultState.FAIL);
@@ -225,6 +227,31 @@ public class LottoWebController {
             resMap.put("message", e.getMessage());
         }
         return resMap;
+    }
+
+    public static Map<String, Object> retrieveAggregations(Request req, Response res) {
+        Map<String, Object> resMap;
+        try {
+            String queryTop = getQueryOrDefault(req, "top", "5");
+            resMap = createResMapWithResult(ResultState.OK);
+            resMap.put("aggregations", lottoService.findLatestNAggregation(Integer.parseInt(queryTop)));
+        } catch (NumberFormatException e) {
+            resMap = createResMapWithResult(ResultState.FAIL);
+            resMap.put("message", "인자가 숫자가 아닙니다.");
+        } catch (Exception e) {
+            resMap = createResMapWithResult(ResultState.FAIL);
+            resMap.put("message", e.getMessage());
+        }
+        return resMap;
+    }
+
+    private static String getQueryOrDefault(Request req, String query, String defaultValue) {
+        String ret = req.queryParams("top");
+        if (ret == null) {
+            ret = defaultValue;
+        }
+
+        return ret;
     }
 
     /**

@@ -3,6 +3,7 @@ package com.woowacourse.lotto.persistence.dao;
 import com.woowacourse.lotto.persistence.dto.AggregationDto;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,9 +59,27 @@ public class AggregationDao {
         PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_BY_ID);
         query.setLong(1, id);
 
-        try(ResultSet rs = query.executeQuery()) {
-            return mapResult(rs);
+        try (ResultSet rs = query.executeQuery()) {
+            return checkAndMapAggregationResult(rs);
         }
+    }
+
+    public List<AggregationDto> find(int topN) throws SQLException {
+        PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_LATEST_N_ROUND);
+        query.setInt(1, topN);
+        try (ResultSet result = query.executeQuery()) {
+            return mapAggregationResults(result);
+        }
+    }
+
+
+    private List<AggregationDto> mapAggregationResults(ResultSet rs) throws SQLException {
+        List<AggregationDto> results = new ArrayList<>();
+
+        while (rs.next()) {
+            mapAggregationResult(rs).ifPresent(results::add);
+        }
+        return results;
     }
 
     public int findLatestRound() throws SQLException {
@@ -73,11 +92,14 @@ public class AggregationDao {
         }
     }
 
-    private Optional<AggregationDto> mapResult(ResultSet rs) throws SQLException {
+    private Optional<AggregationDto> checkAndMapAggregationResult(ResultSet rs) throws SQLException {
         if (!rs.next()) {
             return Optional.empty();
         }
+        return mapAggregationResult(rs);
+    }
 
+    private Optional<AggregationDto> mapAggregationResult(ResultSet rs) throws SQLException {
         AggregationDto aggregation = new AggregationDto();
         aggregation.setId(rs.getLong("id"));
         aggregation.setLottoRound(rs.getInt("lotto_round"));
@@ -98,7 +120,6 @@ public class AggregationDao {
         return query.executeUpdate();
     }
 
-
     private static class AggregationDaoSql {
         private static final String INSERT_AGGREGATION = "INSERT INTO aggregation(lotto_round, cnt_first, cnt_second, cnt_third, cnt_fourth, cnt_fifth, cnt_none, prize_money_sum) " +
             "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -106,6 +127,7 @@ public class AggregationDao {
         private static final String INSERT_AGGREGATED_WINNING_LOTTO = "INSERT INTO winning_lotto_aggregated(winning_lotto_id, aggregation_id) VALUES(?, ?)";
         private static final String SELECT_BY_ID = "SELECT id, lotto_round, cnt_first, cnt_second, cnt_third, cnt_fourth, cnt_fifth, cnt_none, prize_money_sum, reg_date " +
             "FROM aggregation WHERE id=?";
+        private static final String SELECT_LATEST_N_ROUND = "SELECT * FROM aggregation ORDER BY lotto_round DESC LIMIT ?";
         private static final String SELECT_MAX_ROUND = "SELECT MAX(lotto_round) FROM aggregation";
         private static final String DELETE_BY_ID = "DELETE FROM aggregation WHERE id=?";
     }

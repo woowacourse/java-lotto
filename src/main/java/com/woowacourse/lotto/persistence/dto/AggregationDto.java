@@ -1,6 +1,7 @@
 package com.woowacourse.lotto.persistence.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class AggregationDto {
     private long id;
@@ -13,6 +14,8 @@ public class AggregationDto {
     private int cntNone;
     private long prizeMoneySum;
     private LocalDateTime regDate;
+    private List<LottoDto> lottos;
+    private WinningLottoDto winningLotto;
 
     public long getId() {
         return id;
@@ -92,5 +95,21 @@ public class AggregationDto {
 
     public void setRegDate(LocalDateTime regDate) {
         this.regDate = regDate;
+    }
+
+    public List<LottoDto> getLottos() {
+        return lottos;
+    }
+
+    public void setLottos(List<LottoDto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public WinningLottoDto getWinningLotto() {
+        return winningLotto;
+    }
+
+    public void setWinningLotto(WinningLottoDto winningLotto) {
+        this.winningLotto = winningLotto;
     }
 }
