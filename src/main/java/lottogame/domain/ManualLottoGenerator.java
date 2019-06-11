@@ -8,22 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LottoGenerator {
-    private static final int LOTTO_SIZE = 6;
-
-    static Lotto create() {
-        Set<LottoNumber> lotto = new HashSet<>();
-        while (lotto.size() < LOTTO_SIZE) {
-            addRandomLottoNumber(lotto);
-        }
-        return new Lotto(new ArrayList<>(lotto));
-    }
-
-    private static void addRandomLottoNumber(Set<LottoNumber> lotto) {
-        LottoNumber randomLottoNumber = LottoNumber.getRandomLottoNumber();
-        lotto.add(randomLottoNumber);
-    }
-
+public class ManualLottoGenerator {
     public static Lotto create(String lotto) {
         Set<LottoNumber> lottoNumbers;
         try {
@@ -45,7 +30,7 @@ public class LottoGenerator {
     }
 
     private static void checkValidLotto(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
+        if (lottoNumbers.size() != Lotto.LOTTO_SIZE) {
             throw new InvalidLottoNumberException("6개의 중복되지 않는 숫자를 입력해주세요.");
         }
     }
