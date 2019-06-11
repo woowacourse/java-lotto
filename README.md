@@ -104,3 +104,40 @@
         * 중복된 번호 입력시 예외처리
         * 1~45 범위를 넘어선 경우 예외처리
         * ", "로 번호를 구분하지 않는 경우 예외처리
+
+## 로또 4단계 - web UI
+
+### 요구사항
+
+- 기능
+    1. 콘솔 UI로 구현되어 있는 로또를 웹 UI로 동작하도록 구현한다.
+    2. 웹 화면은 콘솔 UI와 같은 기능으로 구현하며, 각자의 힘으로 구현해 본다. 자신만의 독특한 UI도 환영한다.
+
+- 프로그래밍
+    1. 콘솔 UI를 웹 UI로 변경할 때 도메인 객체를 최대한 변경하지 않는다.
+    2. [프로그래밍 체크리스트](https://github.com/woowacourse/woowacourse-docs/blob/master/cleancode/pr_checklist.md)의 원칙을 지키면서 프로그래밍 한다.
+    
+### 기능 목록
+
+※ 참고! Console Application 흐름
+1. 구매하려는 액수 입력
+2. 수동 구매 갯수 입력
+3. 수동 구매 번호 입력
+4. 자동 구매
+5. 당첨 번호 입력
+6. 결과 출력
+
+- web UI
+> `Console Application`에서 view 부분을 web front가 담당하도록 만들 예정
+    
+1. index.html (get: `/`)
+
+주어진 형식에 따라 로또를 만들 수 있는 페이지
+
+2. post: `/lotto`
+
+index.html에서 입력받은 값으로 lotto를 진행
+
+3. result.html
+
+최종 결과를 보여주는 페이지
