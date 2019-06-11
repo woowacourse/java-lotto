@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ResultTest {
     private LottoTickets lottoTickets;
@@ -49,8 +50,8 @@ public class ResultTest {
     }
 
     @Test
-    void calculateTotalWinningMoney() {
+    void 수익률_계산_잘못된_파라미터() {
         Result result = new Result(winningLotto, lottoTickets);
-        assertThat(result.calculateEarningsRate(new Payment(5_000))).isEqualTo(400_000);
+        assertThatThrownBy(() -> result.calculateEarningsRate(null)).isInstanceOf(NullPointerException.class);
     }
 }

@@ -33,7 +33,7 @@ public enum Rank {
                 .filter(rank -> rank.match(countOfMatch))
                 .filter(Rank::isNotSecond)
                 .findFirst()
-                .orElseThrow(NullPointerException::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private boolean match(int countOfMatch) {
