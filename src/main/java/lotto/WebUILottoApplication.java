@@ -4,7 +4,6 @@ import lotto.domain.*;
 import lotto.domain.generator.LottoNumbersGenerator;
 import lotto.domain.generator.ManualLottoNumbersGenerator;
 import lotto.utils.NumbersSplitter;
-import lotto.view.OutputView;
 import lotto.view.OutputViewFactory;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -30,26 +29,32 @@ public class WebUILottoApplication {
         });
 
         post("/lotto", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            PurchaseInformation purchaseInformation = setUpPurchaseInformation(
-                    req.queryParams("money"),
-                    req.queryParams("manualLottoCount"));
-            List<String> manualLottoNumber = Arrays.asList(req.queryParams("manualLottoNumber").split("\n"));
+            try {
+                Map<String, Object> model = new HashMap<>();
+                PurchaseInformation purchaseInformation = setUpPurchaseInformation(
+                        req.queryParams("money"),
+                        req.queryParams("manualLottoCount"));
+                List<String> manualLottoNumber = Arrays.asList(req.queryParams("manualLottoNumber").split("\n"));
+                registerManualLottosNumbers(purchaseInformation, manualLottoNumber);
+                Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
+                model.put("purchaseMessage", OutputViewFactory.outputLottosPurchaseMessage(purchaseInformation));
+                model.put("lottos", OutputViewFactory.outputLottos(lottos));
 
-            registerManualLottosNumbers(purchaseInformation, manualLottoNumber);
+                LottoGame lottoGame = setUpLottoGame(req.queryParams("winningNumber"), req.queryParams("bonusBall"));
+                LottoResult lottoResult = lottoGame.play(lottos);
+                model.put("result", OutputViewFactory.outputResult(lottoResult));
+                model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
 
-            Lottos lottos = purchaseLottos(purchaseInformation);
-
-            model.put("purchaseMessage", OutputViewFactory.outputLottosPurchaseMessage(purchaseInformation));
-            model.put("lottos", OutputViewFactory.outputLottos(lottos));
-
-            LottoGame lottoGame = setUpLottoGame(req.queryParams("winningNumber"),req.queryParams("bonusBall"));
-            LottoResult lottoResult = lottoGame.play(lottos);
-
-            model.put("result", OutputViewFactory.outputResult(lottoResult));
-            model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
-
-            return render(model, "result.html");
+                return render(model, "result.html");
+            } catch (NumberFormatException e) {
+                Map<String, Object> model = new HashMap<>();
+                model.put("message", "잘못된 수가 입력되었습니다.");
+                return render(model, "error.html");
+            } catch (Exception e) {
+                Map<String, Object> model = new HashMap<>();
+                model.put("message", e.getMessage());
+                return render(model, "error.html");
+            }
         });
     }
 
@@ -62,16 +67,8 @@ public class WebUILottoApplication {
         return new PurchaseInformation(lottoCount);
     }
 
-    private static Lottos purchaseLottos(PurchaseInformation purchaseInformation) {
-
-        Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
-
-        OutputView.outputLottosPurchaseMessage(purchaseInformation);
-        OutputView.outputLottos(lottos);
-        return lottos;
-    }
-
-    private static void registerManualLottosNumbers(PurchaseInformation purchaseInformation, List<String> manualLottoNumber) {
+    private static void registerManualLottosNumbers(PurchaseInformation purchaseInformation,
+                                                    List<String> manualLottoNumber) {
         if (!purchaseInformation.hasManualLottos()) {
             return;
         }
