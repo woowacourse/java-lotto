@@ -4,7 +4,6 @@ import lotto.domain.paymentinfo.Payment;
 
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Result {
@@ -28,18 +27,5 @@ public class Result {
         return lottoScore.keySet().stream()
                 .mapToLong(rank -> rank.calculateWinningMoney(lottoScore.get(rank)))
                 .sum();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Result result = (Result) o;
-        return Objects.equals(lottoScore, result.lottoScore);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoScore);
     }
 }

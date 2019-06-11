@@ -11,7 +11,7 @@ import lotto.view.OutputView;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -31,41 +31,44 @@ public class ConsoleUILottoApplication {
     }
 
     private static Payment inputPayment() {
-        Payment payment;
+        Optional<Payment> payment;
         do {
             payment = createPayment();
-        } while (Objects.isNull(payment));
-        return payment;
+
+        } while (!payment.isPresent());
+
+        return payment.get();
     }
 
-    private static Payment createPayment() {
-        Payment payment;
+    private static Optional<Payment> createPayment() {
+        Optional<Payment> payment;
         try {
             int input = Integer.parseInt(InputView.inputPayment());
-            payment = new Payment(input);
+            payment = Optional.of(new Payment(input));
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            payment = null;
+            payment = Optional.empty();
+
         }
         return payment;
     }
 
     private static CountOfLotto inputCountOfManualLotto(Payment payment) {
-        CountOfLotto countOfLotto;
+        Optional<CountOfLotto> countOfLotto;
         do {
             countOfLotto = createCountOfLotto(payment);
-        } while (Objects.isNull(countOfLotto));
-        return countOfLotto;
+        } while (!countOfLotto.isPresent());
+        return countOfLotto.get();
     }
 
-    private static CountOfLotto createCountOfLotto(Payment payment) {
-        CountOfLotto countOfLotto;
+    private static Optional<CountOfLotto> createCountOfLotto(Payment payment) {
+        Optional<CountOfLotto> countOfLotto;
         try {
             int input = Integer.parseInt(InputView.inputCountOfManualLotto());
-            countOfLotto = new CountOfLotto(payment, input);
+            countOfLotto = Optional.of(new CountOfLotto(payment, input));
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            countOfLotto = null;
+            countOfLotto = Optional.empty();
         }
         return countOfLotto;
     }
@@ -83,22 +86,22 @@ public class ConsoleUILottoApplication {
     }
 
     private static Lotto inputLottoNumber() {
-        Lotto lotto;
+        Optional<Lotto> lotto;
         do {
             lotto = createLotto();
-        } while (Objects.isNull(lotto));
-        return lotto;
+        } while (!lotto.isPresent());
+        return lotto.get();
     }
 
-    private static Lotto createLotto() {
-        Lotto lotto;
+    private static Optional<Lotto> createLotto() {
+        Optional<Lotto> lotto;
         try {
             String input = InputView.inputLottoNumber();
             List<Integer> list = splitInputLottoNumbers(input);
-            lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(list));
+            lotto = Optional.of(LottoGenerator.create(new ManualLottoGeneratingStrategy(list)));
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            lotto = null;
+            lotto = Optional.empty();
         }
         return lotto;
     }
@@ -110,25 +113,25 @@ public class ConsoleUILottoApplication {
     }
 
     private static WinningLotto inputWinningLotto() {
-        WinningLotto winningLotto;
+        Optional<WinningLotto> winningLotto;
         do {
             winningLotto = createWinningLotto();
-        } while (Objects.isNull(winningLotto));
-        return winningLotto;
+        } while (!winningLotto.isPresent());
+        return winningLotto.get();
     }
 
-    private static WinningLotto createWinningLotto() {
-        WinningLotto winningLotto;
+    private static Optional<WinningLotto> createWinningLotto() {
+        Optional<WinningLotto> winningLotto;
         try {
             String inputLotto = InputView.inputWinningLottoNumber();
             List<Integer> list = splitInputLottoNumbers(inputLotto);
             Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(list));
 
             String inputBonusBall = InputView.inputBonusBall();
-            winningLotto = new WinningLotto(lotto, Integer.parseInt(inputBonusBall));
+            winningLotto = Optional.of(new WinningLotto(lotto, Integer.parseInt(inputBonusBall)));
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            winningLotto = null;
+            winningLotto = Optional.empty();
         }
         return winningLotto;
     }

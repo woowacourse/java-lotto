@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class LottoTickets {
     private final List<Lotto> manualLottoTickets;
@@ -15,8 +14,8 @@ public class LottoTickets {
     }
 
     public List<Lotto> getAllLottoTickets() {
-        List<Lotto> allLottoTickets = new ArrayList<>(autoLottoTickets);
-        allLottoTickets.addAll(manualLottoTickets);
+        List<Lotto> allLottoTickets = new ArrayList<>(manualLottoTickets);
+        allLottoTickets.addAll(autoLottoTickets);
         return Collections.unmodifiableList(allLottoTickets);
     }
 
