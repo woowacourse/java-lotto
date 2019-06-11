@@ -47,4 +47,11 @@ public class WinningLottoDao {
                 .replace("]", "")
                 .replace(" ", "");
     }
+
+    public void deleteWinningLottoByRound(int round) throws SQLException {
+        String query = "DELETE FROM winningLotto WHERE round = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        preparedStatement.executeUpdate();
+    }
 }

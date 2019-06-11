@@ -1,7 +1,6 @@
 package lotto.domain.dao;
 
 import lotto.domain.LottoMoney;
-import lotto.domain.LottoTicket;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,7 +29,7 @@ public class RoundDao {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, round);
         ResultSet resultSet = preparedStatement.executeQuery();
-        int money = 0;
+        int money = -1;
         while (resultSet.next()) {
             money = resultSet.getInt("money");
         }
@@ -45,6 +44,13 @@ public class RoundDao {
             return resultSet.getInt("MAX(round)");
         }
         return 0;
+    }
+
+    public void deleteMoneyByRound(int round) throws SQLException {
+        String query = "DELETE FROM game WHERE round = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        preparedStatement.executeUpdate();
     }
 
 }

@@ -19,15 +19,13 @@ class WinningLottoDaoTest {
     void 우승_로또_추가() throws SQLException {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonusBall = 7;
+        int round = 100;
         WinningLotto winningLotto = new WinningLotto(lottoTicket, bonusBall);
-        winningLottoDao.addWinningLotto(1, winningLotto);
-    }
+        winningLottoDao.addWinningLotto(round, winningLotto);
 
-    @Test
-    void 우승_로또_검색() throws SQLException {
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int bonusBall = 7;
-        WinningLotto winningLotto = new WinningLotto(lottoTicket, bonusBall);
-        assertThat(winningLottoDao.findWinningLottoByRound(1)).isEqualTo(winningLotto);
+        assertThat(winningLottoDao.findWinningLottoByRound(round)).isEqualTo(winningLotto);
+
+        winningLottoDao.deleteWinningLottoByRound(round);
+        assertThat(winningLottoDao.findWinningLottoByRound(round)).isNull();
     }
 }

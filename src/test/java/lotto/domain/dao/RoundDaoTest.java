@@ -16,17 +16,11 @@ class RoundDaoTest {
     @Test
     void 금액_추가_테스트() throws SQLException {
         LottoMoney lottoMoney = new LottoMoney(14_000);
-        roundDao.addRound(1, lottoMoney);
-    }
-
-    @Test
-    void 금액_확인_테스트() throws SQLException {
-        int money = roundDao.findMoneyByRound(1);
-        assertThat(money).isEqualTo(14_000);
-    }
-
-    @Test
-    void 라운드_확인() throws SQLException {
-        assertThat(roundDao.findMaxRound()).isEqualTo(9);
+        int round = 100;
+        roundDao.addRound(round, lottoMoney);
+        assertThat(roundDao.findMoneyByRound(round)).isEqualTo(14_000);
+        assertThat(roundDao.findMaxRound()).isEqualTo(round);
+        roundDao.deleteMoneyByRound(round);
+        assertThat(roundDao.findMoneyByRound(round)).isEqualTo(-1);
     }
 }

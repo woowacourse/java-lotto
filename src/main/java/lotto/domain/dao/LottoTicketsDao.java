@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoTicketsDao {
@@ -29,7 +28,7 @@ public class LottoTicketsDao {
         }
     }
 
-    public LottoTickets findByRoundLotto(int round) throws SQLException {
+    public LottoTickets findLottoByRound(int round) throws SQLException {
         String query = "SELECT * FROM lottoTickets WHERE round=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, round);
@@ -46,5 +45,12 @@ public class LottoTicketsDao {
         return lottoNumbers.replace("[", "")
                 .replace("]", "")
                 .replace(" ", "");
+    }
+
+    public void deleteLottoByRound(int round) throws SQLException {
+        String query = "DELETE FROM lottoTickets WHERE  round = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        preparedStatement.executeUpdate();
     }
 }

@@ -73,7 +73,7 @@ public class WebUILottoApplication {
 
         post("/showResult", (req, res) -> {
             try {
-                Map<String, Object> viewModel = new HashMap<>();
+                Map<String, Object> model = new HashMap<>();
                 String inputWinningLotto = req.queryParams(WINNING_LOTTO.type);
                 String inputBonusBall = req.queryParams(BONUS_BALL.type);
 
@@ -83,14 +83,14 @@ public class WebUILottoApplication {
                 LottoMoney money = new LottoMoney(Long.parseLong(req.session().attribute(MONEY.type)));
                 LottoResults lottoResults = new LottoResults(lottoTickets, winningLotto, money);
 
-                viewModel.put(LOTTO_TICKETS.type, lottoTickets);
-                viewModel.put(MONEY.type, new LottoMoney(Long.parseLong(req.session().attribute(MONEY.type))));
-                viewModel.put(WINNING_LOTTO.type, winningLotto);
-                viewModel.put(LOTTO_RESULTS.type, lottoResults);
-                viewModel.put(REWARD_MONEY.type, lottoResults.getYield());
+                model.put(LOTTO_TICKETS.type, lottoTickets);
+                model.put(MONEY.type, new LottoMoney(Long.parseLong(req.session().attribute(MONEY.type))));
+                model.put(WINNING_LOTTO.type, winningLotto);
+                model.put(LOTTO_RESULTS.type, lottoResults);
+                model.put(REWARD_MONEY.type, lottoResults.getYield());
 
-                addDatabase(viewModel, connection);
-                return render(viewModel, "showResult.html");
+                addDatabase(model, connection);
+                return render(model, "showResult.html");
             } catch (Exception e) {
                 e.printStackTrace();
                 res.redirect("error.html");
@@ -132,7 +132,7 @@ public class WebUILottoApplication {
         addRoundToDB(lottoMoney, connection, round);
         addLottoTicketsToDB(lottoTickets, connection, round);
         addWinningLottoToDB(winningLotto, connection, round);
-        addGameResultToDB(connection, lottoTickets, winningLotto, lottoMoney);
+        addGameResultToDB(connection, lottoTickets, winningLotto, lottoMoney, round);
     }
 
     private static void addRoundToDB(LottoMoney lottoMoney, Connection connection, int round) throws SQLException {
@@ -150,9 +150,9 @@ public class WebUILottoApplication {
         lottoTicketsDao.addLottoTickets(round, lottoTickets);
     }
 
-    private static void addGameResultToDB(Connection connection, LottoTickets lottoTickets, WinningLotto winningLotto, LottoMoney inputMoney) throws SQLException {
+    private static void addGameResultToDB(Connection connection, LottoTickets lottoTickets, WinningLotto winningLotto, LottoMoney inputMoney, int round) throws SQLException {
         GameResultDao gameResultDao = new GameResultDao(connection);
-        gameResultDao.addGameResult(lottoTickets, winningLotto, inputMoney);
+        gameResultDao.addGameResult(lottoTickets, winningLotto, inputMoney, round);
     }
 
     public enum Type {
