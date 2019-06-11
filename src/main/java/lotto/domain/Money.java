@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.Exception.IllegalPriceException;
+import lotto.Exception.InvalidPurchaseException;
 
 import java.util.Map;
 
@@ -12,10 +13,13 @@ public class Money {
 
     public Money(int money) {
         if (money % MONEY_OFFSET != MIN_MONEY || money < MIN_MONEY) {
-            throw new IllegalPriceException();
+            throw new InvalidPurchaseException("올바른 구입금액을 입력해주세요");
         }
-
         this.money = money;
+    }
+
+    public int getMoney() {
+        return money;
     }
 
     public int getSize() {

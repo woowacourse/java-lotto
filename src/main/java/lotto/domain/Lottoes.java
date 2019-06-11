@@ -26,6 +26,10 @@ public class Lottoes {
                 .collect(Collectors.toList());
     }
 
+    public List<Lotto> getLottoes() {
+        return lottoes;
+    }
+
     public int getSize() {
         return lottoes.size();
     }

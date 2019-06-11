@@ -8,7 +8,7 @@ public class OutputView {
     public static void printLottoes(Lottoes lottoes, CustomLottoCount customLottoCount) {
         System.out.println("수동으로 " + customLottoCount.getCustomLottoCount() + "장," +
                 " 자동으로" + (lottoes.getSize() - customLottoCount.getCustomLottoCount()) + " 장을 구입했습니다.");
-        System.out.println(lottoes.toString());
+        System.out.println(lottoes);
     }
 
     public static void printReults(Result result, Money money) {
