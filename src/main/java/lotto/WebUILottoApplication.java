@@ -2,7 +2,10 @@ package lotto;
 
 import lotto.domain.CountOfLotto;
 import lotto.domain.Payment;
+import lotto.domain.Rank;
+import lotto.domain.Result;
 import lotto.domain.lotto.*;
+import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.domain.lottogenerator.RandomLottoGeneratingStrategy;
 import lotto.view.InputView;
@@ -22,6 +25,7 @@ public class WebUILottoApplication {
     private static Payment payment;
     private static CountOfLotto countOfLotto;
     private static LottoTickets lottoTickets;
+    private static WinningLotto winningLotto;
 
     public static void main(String[] args) {
         get("/", (req, res) -> {
@@ -50,7 +54,8 @@ public class WebUILottoApplication {
 
         post("/inputStep2.html", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("winningLottoNumberMessage",InputView.WINNING_LOTTO_NUMBER_MESSAGE);
+            model.put("winningLottoNumberMessage", InputView.WINNING_LOTTO_NUMBER_MESSAGE);
+            model.put("bonusBallMessage", InputView.BONUS_BALL_MESSAGE);
 
             LottoRepository lottoRepository = new LottoRepository();
             int countOfManualLotto = countOfLotto.getCountOfManualLotto();
@@ -68,10 +73,36 @@ public class WebUILottoApplication {
 
             return render(model, "inputStep2.html");
         });
+
+        post("result.html", ((req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            winningLotto = inputWinningLotto(req.queryParams("winningLottoNumber"), req.queryParams("bonusNumber"));
+            Result result = lottoTickets.match(winningLotto);
+
+            model.put("rankFirst", Rank.FIRST);
+            model.put("rankSecond", Rank.SECOND);
+            model.put("rankThird", Rank.THIRD);
+            model.put("rankFourth", Rank.FOURTH);
+            model.put("rankFifth", Rank.FIFTH);
+            model.put("countOfRankFirst", result.get(Rank.FIRST));
+            model.put("countOfRankSecond", result.get(Rank.SECOND));
+            model.put("countOfRankThird", result.get(Rank.THIRD));
+            model.put("countOfRankFourth", result.get(Rank.FOURTH));
+            model.put("countOfRankFifth", result.get(Rank.FIFTH));
+            model.put("earningsRate", result.calculateEarningsRate(payment));
+
+            return render(model, "result.html");
+        }));
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
+    }
+
+    private static WinningLotto inputWinningLotto(String winningLottoNumber, String bonusNumber) {
+        List<Integer> winningLottoNumbers = splitInputLottoNumbers(winningLottoNumber);
+        Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(winningLottoNumbers));
+        return new WinningLotto(lotto, LottoNumber.getNumber(Integer.parseInt(bonusNumber)));
     }
 
     private static List<Integer> splitInputLottoNumbers(String input) {

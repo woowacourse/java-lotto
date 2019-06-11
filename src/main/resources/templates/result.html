@@ -12,22 +12,18 @@
     <title>로또</title>
 </head>
 <body>
+<blockquote class="blockquote">
+    <p class="mb-0">{{rankFifth.countOfMatch}}개 일치 ({{rankFifth.winningMoney}}) - {{countOfRankFifth}}개</p>
+    <p class="mb-0">{{rankFourth.countOfMatch}}개 일치 ({{rankFourth.winningMoney}}) - {{countOfRankFourth}}개</p>
+    <p class="mb-0">{{rankThird.countOfMatch}}개 일치 ({{rankThird.winningMoney}}) - {{countOfRankThird}}개</p>
+    <p class="mb-0">{{rankSecond.countOfMatch}}개 일치 ({{rankSecond.winningMoney}}) - {{countOfRankSecond}}개</p>
+    <p class="mb-0">{{rankFirst.countOfMatch}}개 일치 ({{rankFirst.winningMoney}}) - {{countOfRankFirst}}개</p>
+    <p class="mb-0">총 수익률은 {{earningsRate}}입니다.</p>
+</blockquote>
 
-<form action="result.html" method="post">
-    <div class="form-group">
-        <label for="inputWinningLottoNumber">{{winningLottoNumberMessage}}</label>
-        <input type="text" class="form-control" id="inputWinningLottoNumber" aria-describedby="emailHelp"
-               placeholder="ex) 1, 2, 3, 4, 5, 6" name="winningLottoNumber">
-    </div>
-    <div class="form-group">
-        <label for="inputBonusNumber">{{bonusBallMessage}}</label>
-        <input type="text" class="form-control" id="inputBonusNumber" aria-describedby="emailHelp"
-               placeholder="ex) 7" name="bonusNumber">
-        <small id="bonusNumberHelp" class="form-text text-muted">당첨번호와 다른 수를 입력하세요</small>
-    </div>
-    <button type="submit" class="btn btn-primary">결과 확인</button>
-</form>
+<script type="text/javascript">
 
+</script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
