@@ -12,16 +12,32 @@
 	<title>Lotto</title>
 </head>
 <body>
-<div style="padding-left: 10%; padding-right: 10%">
-	<div class="input-group mb-3">
-		<div class="input-group-prepend">
-			<span class="input-group-text" id="basic-addon1">구매 금액을 입력해 주세요.</span>
+<div style="padding-left: 25%; padding-right: 25%">
+	<img src="lotto.png" alt="lotto" style="width: 20%; padding-top: 5px;">
+	
+	<div style="padding-top: 10px; padding-bottom: 10px;">
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">구매 금액을 입력해 주세요.</span>
+			</div>
+			<input type="number" id="lotto-money-input-text" class="form-control" min="0" placeholder="로또 구매 금액"
+			       aria-label="Username" aria-describedby="basic-addon1">
+			<button type="button" class="btn btn-outline-success" onclick="getNumOfLotto()">로또 구매</button>
 		</div>
-		<input type="number" id="lotto-money-input-text" class="form-control" min="0" placeholder="로또 구매 금액"
-		       aria-label="Username" aria-describedby="basic-addon1">
-		<button type="button" class="btn btn-outline-success" onclick="getNumOfLotto()">로또 구매</button>
+		<div id="lotto-money-result" class="badge" style="width: 30%;"></div>
 	</div>
-	<div id="num-of-lotto" class="badge" style="width: 30%;"></div>
+	
+	<div style="padding-top: 10px; padding-bottom: 10px;">
+		<div class="input-group mb-3" style="padding-top: 30px;" id="manual-lotto-input">
+			<div class="input-group-prepend">
+				<span class="input-group-text">수동으로 구매할 로또 수를 입력해 주세요.</span>
+			</div>
+			<input type="number" id="manual-lotto-input-text" class="form-control" min="0" placeholder="수동 구매 로또 수"
+			       aria-label="Username" aria-describedby="basic-addon1" disabled>
+			<button type="button" class="btn btn-outline-success" disabled onclick="getNumOfLotto()">수동 구매</button>
+		</div>
+		<div id="manual-lotto-result" class="badge" style="width: 30%;"></div>
+	</div>
 </div>
 
 <!-- Optional JavaScript -->
@@ -45,6 +61,10 @@
         parent.appendChild(node);
     }
 
+    function turnOffDisable(id) {
+        $(id).find("input, select, button, textarea").prop("disabled", false);
+    }
+    
     function getNumOfLotto() {
         return new Promise(function (resolve, reject) {
             var input = document.getElementById("lotto-money-input-text").value;
@@ -55,8 +75,9 @@
                 reject(new Error("Request is failed"));
             });
         }).then(function (value) {
+            turnOffDisable("#manual-lotto-input");
             var textNode = document.createTextNode(value);
-            var parent = document.getElementById("num-of-lotto");
+            var parent = document.getElementById("lotto-money-result");
             appendNewNodeAt(parent, textNode);
         }).catch(function (err) {
             console.log(err);

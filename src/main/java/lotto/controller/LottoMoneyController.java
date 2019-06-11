@@ -1,6 +1,8 @@
 package lotto.controller;
 
+import lotto.application.LottoSession;
 import lotto.application.lottomoney.LottoMoneyService;
+import lotto.domain.lottomoney.dto.LottoMoneyDto;
 import spark.Route;
 
 import java.util.HashMap;
@@ -13,8 +15,10 @@ public class LottoMoneyController {
         Map<String, Object> model = new HashMap<>();
 
         String purchasePrice = req.queryParams("input");
-        model.put("lottoMoney", LottoMoneyService.makeLottoMoneyDto(purchasePrice));
+        LottoMoneyDto lottoMoneyDto = LottoMoneyService.makeLottoMoneyDto(purchasePrice);
+        LottoSession.setNumOfLotto(lottoMoneyDto.getNumOfLotto());
 
+        model.put("lottoMoney", lottoMoneyDto);
         return render(model, "lotto-money.html");
     };
 
