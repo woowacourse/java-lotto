@@ -6,7 +6,7 @@ public class DBUtils {
     private DBUtils() {
     }
 
-    static Connection getConnection(){
+    static Connection getConnection() {
         Connection conn = null;
         try {
             PropertiesUtil propertiesUtil = PropertiesUtil.getInstance();

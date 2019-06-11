@@ -38,7 +38,7 @@ public class WebUILottoApplication {
             int round = Integer.parseInt(req.queryParams("round"));
             WinPrize winPrize = new WinPrizeDao().findByRound(round);
 
-            model.put("results",  getResultsForm(winPrize));
+            model.put("results", getResultsForm(winPrize));
             model.put("rateOfProfit", winPrize.getRateOfProfit());
             model.put("round", round);
             model.put("lottos", new LottoDao().findByRound(round));

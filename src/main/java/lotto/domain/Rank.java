@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public enum Rank {
     /**
      * countOfMatch가 같은 객체가 있을시 Bonus.TRUE인 것을 뒤에 배치 해야한다.
