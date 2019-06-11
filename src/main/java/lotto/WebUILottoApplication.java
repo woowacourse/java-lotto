@@ -6,12 +6,12 @@ import lotto.dao.WinPrizeDao;
 import lotto.dao.WinningLottoDao;
 import lotto.domain.*;
 import lotto.service.LottoService;
+import lotto.utils.Encoder;
 import lotto.view.ResultFormat;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -28,7 +28,7 @@ public class WebUILottoApplication {
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("round", lqtestRound() + 1);
+            model.put("round", latestRound() + 1);
             model.put("rounds", new RoundDao().findAll());
             return render(model, "start.html");
         });
@@ -47,29 +47,24 @@ public class WebUILottoApplication {
         });
 
         post("/buyLotto", (req, res) -> {
-            try {
-                RoundDao roundDao = new RoundDao();
-                roundDao.add();
-                int round = roundDao.getLatest();
+            RoundDao roundDao = new RoundDao();
+            roundDao.add();
+            int round = roundDao.getLatest();
 
-                Money money = Money.from(req.queryParams("money"));
-                List<String> manualLottos = convertList(req.queryParams("manualLottos"));
-                List<Lotto> userLottos = LottoService.generateLottos(manualLottos, money);
-                saveLottos(userLottos, round);
+            Money money = Money.from(req.queryParams("money"));
+            List<String> manualLottos = convertList(req.queryParams("manualLottos"));
+            List<Lotto> userLottos = LottoService.generateLottos(manualLottos, money);
+            saveLottos(userLottos, round);
 
-                int countOfManual = manualLottos.size();
-                int countOfAuto = money.getCountOfPurchase() - countOfManual;
-                res.redirect("/show?countOfManual=" + countOfManual + "&countOfAuto=" + countOfAuto);
-            } catch (Exception e) {
-                String message = encodeUTF8(e.getMessage());
-                res.redirect("/error?message=" + message);
-            }
+            int countOfManual = manualLottos.size();
+            int countOfAuto = money.getCountOfPurchase() - countOfManual;
+            res.redirect("/show?countOfManual=" + countOfManual + "&countOfAuto=" + countOfAuto);
             return null;
         });
 
         get("/show", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int round = lqtestRound();
+            int round = latestRound();
             List<Lotto> lottos = new LottoDao().findByRound(round);
 
             model.put("lottos", lottos);
@@ -80,27 +75,21 @@ public class WebUILottoApplication {
 
         post("/result", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            try {
-                String lotto = req.queryParams("winningLotto");
-                int bonusNo = Integer.parseInt(req.queryParams("bonusNo"));
-                int round = lqtestRound();
-                WinningLotto winningLotto = LottoService.generateWinningLotto(lotto, bonusNo);
+            String lotto = req.queryParams("winningLotto");
+            int bonusNo = Integer.parseInt(req.queryParams("bonusNo"));
+            int round = latestRound();
+            WinningLotto winningLotto = LottoService.generateWinningLotto(lotto, bonusNo);
 
-                saveWinningLotto(round, winningLotto);
-                saveWinPrize(round, winningLotto);
+            saveWinningLotto(round, winningLotto);
+            saveWinPrize(round, winningLotto);
 
-                res.redirect("result");
-            } catch (Exception e) {
-                String message = encodeUTF8(e.getMessage());
-                res.redirect("/error?message=" + message);
-            }
-
+            res.redirect("result");
             return null;
         });
 
         get("/result", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int round = lqtestRound();
+            int round = latestRound();
 
             WinPrize winPrize = new WinPrizeDao().findByRound(round);
             List<String> results = getResultsForm(winPrize);
@@ -113,6 +102,16 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             model.put("message", req.queryParams("message"));
             return render(model, "error.html");
+        });
+
+        exception(Exception.class, (exception, req, res) -> {
+            String message = null;
+            try {
+                message = Encoder.encodeUTF8(exception.getMessage());
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            res.redirect("/error?message=" + message);
         });
     }
 
@@ -147,7 +146,7 @@ public class WebUILottoApplication {
         }
     }
 
-    private static int lqtestRound() {
+    private static int latestRound() {
         return new RoundDao().getLatest();
     }
 
@@ -157,10 +156,6 @@ public class WebUILottoApplication {
             return new ArrayList<>();
         }
         return Arrays.asList(results);
-    }
-
-    private static String encodeUTF8(final String message) throws UnsupportedEncodingException {
-        return URLEncoder.encode(message, "UTF-8");
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
