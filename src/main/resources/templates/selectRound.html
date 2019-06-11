@@ -7,15 +7,19 @@
 </head>
 <body>
 <form action="/showRounds" method="get">
-    1~ {{round}} 회차 중 조회할 회차를 입력하세요.
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">회차</span>
+    <div class="container" style="max-width: 500px; margin-top: 30px">
+        <h1>1~ {{round}} 회차 중 조회할 회차를 입력하세요.</h1>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">회차</span>
+            </div>
+            <input type="text" class="form-control" placeholder="조회할 회차를 입력하세요" aria-describedby="basic-addon1"
+                   name="round">
         </div>
-        <input type="text" class="form-control" placeholder="조회할 회차를 입력하세요" aria-describedby="basic-addon1"
-               name="round">
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">결과 조회</button>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">결과 조회</button>
 </form>
 </body>
 </html>
