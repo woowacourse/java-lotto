@@ -20,7 +20,20 @@ public class LottoGameMain {
     }
 
     private static int getNumberOfManualTicket(Money money) {
-        return InputView.getNumberOfMannualTicket(money);
+        String input;
+        do {
+            input = InputView.getNumberOfMannualTicket();
+        } while (isInValidNumberOfManualInput(input, money));
+        return Integer.parseInt(input);
+    }
+
+    private static boolean isInValidNumberOfManualInput(String input, Money money) {
+        try {
+            return money.isInvalidNumber(Integer.parseInt(input));
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해 주세요.");
+            return true;
+        }
     }
 
     private static Money getMoney() {
@@ -59,7 +72,7 @@ public class LottoGameMain {
         WinningLotto winningLotto;
         Lotto lotto;
         do {
-            lotto = LottoGenerator.create(InputView.getWinningLotto());
+            lotto = ManualLottoGenerator.create(InputView.getWinningLotto());
         } while (lotto == null);
         do {
             winningLotto = WinningLotto.generate(lotto, InputView.getBonusNumber());

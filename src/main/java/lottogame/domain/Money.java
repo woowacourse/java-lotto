@@ -3,7 +3,6 @@ package lottogame.domain;
 import lottogame.lottogameexception.InvalidLottoPriceException;
 
 public class Money {
-    private static final int MIN_NUMBER_OF_MANUAL_TICKET = 0;
     private static final int PERCENTAGE = 100;
     private static final int ONE_LOTTO_PRICE = 1000;
 
@@ -34,20 +33,11 @@ public class Money {
         return price / ONE_LOTTO_PRICE;
     }
 
-    boolean isValidateAmount(int numberOfManualTicket) {
-        return (MIN_NUMBER_OF_MANUAL_TICKET <= numberOfManualTicket) && (numberOfManualTicket <= getNumberOfTicket());
-    }
-
     long rateOf(double profits) {
         return (long) (profits / price) * PERCENTAGE;
     }
 
-    public boolean isInvalidNumber(String numberOfManualLotto) {
-        try {
-            return getNumberOfTicket() < Integer.parseInt(numberOfManualLotto);
-        } catch (NumberFormatException e) {
-            System.out.println("숫자를 입력해 주세요.");
-            return true;
-        }
+    public boolean isInvalidNumber(int numberOfManualLotto) {
+        return getNumberOfTicket() < numberOfManualLotto;
     }
 }

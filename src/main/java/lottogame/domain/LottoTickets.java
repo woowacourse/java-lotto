@@ -13,14 +13,14 @@ public class LottoTickets {
     }
 
     public void addManualLotto(String manualLotto) {
-        Lotto lotto = LottoGenerator.create(manualLotto);
-        if(lotto != null){
+        Lotto lotto = ManualLottoGenerator.create(manualLotto);
+        if (lotto != null) {
             lottos.add(lotto);
         }
     }
 
     public void createAutoLottos() {
-        lottos.add(LottoGenerator.create());
+        lottos.add(AutoLottoGenerator.create());
     }
 
     public boolean isPossibleCreateLottoNumberOf(int numberOfTicket) {
