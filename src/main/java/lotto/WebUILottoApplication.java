@@ -37,19 +37,11 @@ public class WebUILottoApplication {
 
         get("/showLottoInfo", (req, res) -> {
             String lottoRound = req.queryParams("lottoRound");
-
-            LottoDAO lottoDAO = new LottoDAO(connection);
-            WinningLottoDAO winningLottoDAO = new WinningLottoDAO(connection);
-            LottoResultDAO lottoResultDAO = new LottoResultDAO(connection);
-            Lottos lottos = lottoDAO.findByLottoRound(lottoRound);
-            WinningLotto winningLotto = winningLottoDAO.findByLottoRound(lottoRound);
-            LottoResultDTO lottoResultDTO = lottoResultDAO.findByLottoRound(lottoRound);
-
             Map<String, Object> model = new HashMap<>();
             model.put("lottoRound", lottoRound);
-            model.put("lottos", lottos);
-            model.put("winningLotto", winningLotto);
-            model.put("lottoResult", lottoResultDTO);
+            model.put("lottos", getDBLottos(connection, lottoRound));
+            model.put("winningLotto", getDBWinningLotto(connection, lottoRound));
+            model.put("lottoResult", getDBLottoResultDTO(connection, lottoRound));
             return render(model, "showLottoInfo.html");
         });
 
@@ -93,6 +85,21 @@ public class WebUILottoApplication {
             response.body(errorPageInfo.append("에러:").append(exception.getMessage()).append("<br/><br/>")
                     .append("<input type=\"button\" value=\"뒤로가기\" onclick=\"history.back(-1);\">").toString());
         });
+    }
+
+    private static Lottos getDBLottos(Connection connection, String lottoRound) throws SQLException {
+        LottoDAO lottoDAO = new LottoDAO(connection);
+        return lottoDAO.findByLottoRound(lottoRound);
+    }
+
+    private static WinningLotto getDBWinningLotto(Connection connection, String lottoRound) throws SQLException {
+        WinningLottoDAO winningLottoDAO = new WinningLottoDAO(connection);
+        return winningLottoDAO.findByLottoRound(lottoRound);
+    }
+
+    private static LottoResultDTO getDBLottoResultDTO(Connection connection, String lottoRound) throws SQLException {
+        LottoResultDAO lottoResultDAO = new LottoResultDAO(connection);
+        return lottoResultDAO.findByLottoRound(lottoRound);
     }
 
     private static void loadRoundTable(Connection connection) throws SQLException {
