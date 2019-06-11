@@ -21,7 +21,7 @@ public class Number implements Comparable<Number> {
 
     private void valid(int number) {
         if (!isRange(number)) {
-            throw new LottoNumberException();
+            throw new LottoNumberException("로또 번호의 범위는 1-45 입니다.");
         }
     }
 

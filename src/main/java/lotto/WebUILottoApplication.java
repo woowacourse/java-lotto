@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static spark.Spark.exception;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
@@ -129,6 +130,14 @@ public class WebUILottoApplication {
             gameDAO.addLottoNumbers(webUILottoData.getTotalLottoGames().allGames());
             LottoResult.init();
             return render(model, "enroll.html");
+        });
+
+        exception(IllegalArgumentException.class, (e, req, res) -> {
+            res.status(404);
+            res.body("<h1>에러 발생</h1>" +
+                    "<form action=\"/\">\n" +
+                    "  <input type=\"submit\" value=\"홈으로\"/>\n" +
+                    "</form>");
         });
     }
 

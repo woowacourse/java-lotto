@@ -19,7 +19,7 @@ public class ManualCount {
 
     private void validBound(int manualCount, Count totalCount) {
         if (!isValidRange(manualCount, totalCount)) {
-            throw new CountRangeException();
+            throw new CountRangeException("유효한 입력 범위가 아닙니다.");
         }
     }
 

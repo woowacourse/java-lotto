@@ -9,7 +9,7 @@ import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoApplication {
+public class ConsoleLottoApplication {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = InputView.getPurchaseAmount();
         Count totalCount = InputView.countFrom(purchaseAmount);

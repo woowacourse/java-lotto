@@ -21,7 +21,7 @@ public class Lotto implements Iterable<Number> {
     private void validFormat(List<Number> lotto) {
         TreeSet<Number> lottoSet = new TreeSet<>(lotto);
         if (lottoSet.size() != LOTTO_SIZE) {
-            throw new NumberCountException();
+            throw new NumberCountException("번호는 6개 입니다.");
         }
     }
 

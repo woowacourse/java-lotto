@@ -24,13 +24,13 @@ public class PurchaseAmount {
 
     private void validAmount(int purchaseAmount) {
         if (purchaseAmount < PURCHASE_AMOUNT_UNIT) {
-            throw new PurchaseAmountException();
+            throw new PurchaseAmountException("구매 금액은 1000원 이상입니다.");
         }
     }
 
     private void validUnit(int purchaseAmount) {
         if (!isProperUnit(purchaseAmount)) {
-            throw new   PurchaseUnitException();
+            throw new PurchaseUnitException("구매 단위는 1000원입니다.");
         }
     }
 

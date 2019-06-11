@@ -25,14 +25,8 @@ public class InputView {
     public static PurchaseAmount getPurchaseAmount() {
         try {
             return PurchaseAmount.of(purchaseAmount());
-        } catch (PurchaseAmountException e) {
-            ErrorView.purchaseAmount();
-            return getPurchaseAmount();
-        } catch (PurchaseUnitException e) {
-            ErrorView.purchaseUnit();
-            return getPurchaseAmount();
-        } catch (NumberFormatException e) {
-            ErrorView.numberFormat();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return getPurchaseAmount();
         }
     }
@@ -49,11 +43,8 @@ public class InputView {
     public static ManualCount getManualCount(Count totalCount) {
         try {
             return ManualCount.is(manualCount(), totalCount);
-        } catch (CountRangeException e) {
-            ErrorView.countRange();
-            return getManualCount(totalCount);
-        } catch (NumberFormatException e) {
-            ErrorView.numberFormat();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return getManualCount(totalCount);
         }
     }
@@ -78,14 +69,8 @@ public class InputView {
         try {
             OutputView.indicator(indicator);
             return manualLotto();
-        } catch (IllegalFormatException | NumberFormatException e) {
-            ErrorView.numberFormat();
-            return getManualNumbers(indicator);
-        } catch (NumberCountException e) {
-            ErrorView.numberCount();
-            return getManualNumbers(indicator);
-        } catch (LottoNumberException e) {
-            ErrorView.lottoNumber();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return getManualNumbers(indicator);
         }
     }
@@ -97,11 +82,8 @@ public class InputView {
     public static Lotto getWinLotto() {
         try {
             return new Lotto(winLotto());
-        } catch (NumberFormatException e) {
-            ErrorView.numberFormat();
-            return getWinLotto();
-        } catch (NumberCountException e) {
-            ErrorView.numberCount();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return getWinLotto();
         }
     }
@@ -110,8 +92,8 @@ public class InputView {
         try {
             OutputView.win();
             return InputParser.parseLotto(scanner.nextLine());
-        } catch (LottoNumberException e) {
-            ErrorView.lottoNumber();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return winLotto();
         }
     }
@@ -119,14 +101,8 @@ public class InputView {
     public static WinningLotto getWinningLotto(Lotto winningNumbers) {
         try {
             return new WinningLotto(winningNumbers, Number.of(bonusNumber()));
-        } catch (IllegalFormatException | NumberFormatException e) {
-            ErrorView.numberFormat();
-            return getWinningLotto(winningNumbers);
-        } catch (LottoNumberException e) {
-            ErrorView.lottoNumber();
-            return getWinningLotto(winningNumbers);
-        } catch (BonusNumberException e) {
-            ErrorView.bonusNumber();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return getWinningLotto(winningNumbers);
         }
     }
