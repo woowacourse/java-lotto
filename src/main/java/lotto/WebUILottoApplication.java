@@ -20,22 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.WebUILottoApplication.Type.*;
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
-    enum Type {
-        MONEY("money"),
-        MANUAL_AMOUNT("manualAmount"),
-        MANUAL_NUMBER("manualNumber"),
-        LOTTO_TICKETS("lottoTickets");
-
-        private final String type;
-
-        Type(String type) {
-            this.type = type;
-        }
-    }
-
     private static Connection connection = new DatabaseConnection().getConnection();
 
     public static void main(String[] args) {
@@ -44,15 +32,15 @@ public class WebUILottoApplication {
         get("/lottoBuy", (req, res) -> {
             try {
                 Map<String, Object> viewModel = new HashMap<>();
-                String inputMoney = req.queryParams("money");
-                String manualAmount = req.queryParams("manualAmount");
+                String inputMoney = req.queryParams(MONEY.type);
+                String manualAmount = req.queryParams(MANUAL_AMOUNT.type);
 
                 req.session(true);
-                req.session().attribute("inputMoney", inputMoney);
-                req.session().attribute("manualAmount", manualAmount);
+                req.session().attribute(MONEY.type, inputMoney);
+                req.session().attribute(MANUAL_AMOUNT.type, manualAmount);
 
-                viewModel.put("inputMoney", new LottoMoney(Long.parseLong(inputMoney)));
-                viewModel.put("manualAmount", Integer.parseInt(manualAmount));
+                viewModel.put(MONEY.type, new LottoMoney(Long.parseLong(inputMoney)));
+                viewModel.put(MANUAL_AMOUNT.type, Integer.parseInt(manualAmount));
 
                 return render(viewModel, "manual.html");
             } catch (Exception e) {
@@ -65,15 +53,15 @@ public class WebUILottoApplication {
         post("/showLotto", (req, res) -> {
             try {
                 Map<String, Object> viewModel = new HashMap<>();
-                String inputManuals = req.queryParams("manualNumber");
-                int manualAmount = Integer.parseInt(req.session().attribute("manualAmount"));
-                LottoMoney lottoMoney = new LottoMoney(Integer.parseInt(req.session().attribute("inputMoney")));
+                String inputManuals = req.queryParams(MANUAL_NUMBER.type);
+                int manualAmount = Integer.parseInt(req.session().attribute(MANUAL_AMOUNT.type));
+                LottoMoney lottoMoney = new LottoMoney(Integer.parseInt(req.session().attribute(MONEY.type)));
                 List<String> manualLottoTickets = getManualLottoTickets(inputManuals);
 
                 LottoTickets lottoTickets = LottoTicketsFactory.create(manualAmount, manualLottoTickets, lottoMoney);
 
-                viewModel.put("lottos", lottoTickets);
-                req.session().attribute("lottoTickets", lottoTickets);
+                viewModel.put(LOTTO_TICKETS.type, lottoTickets);
+                req.session().attribute(LOTTO_TICKETS.type, lottoTickets);
 
                 return render(viewModel, "showLottos.html");
             } catch (Exception e) {
@@ -86,20 +74,20 @@ public class WebUILottoApplication {
         post("/showResult", (req, res) -> {
             try {
                 Map<String, Object> viewModel = new HashMap<>();
-                String inputWinningLotto = req.queryParams("winningLotto");
-                String inputBonusBall = req.queryParams("bonusBall");
+                String inputWinningLotto = req.queryParams(WINNING_LOTTO.type);
+                String inputBonusBall = req.queryParams(BONUS_BALL.type);
 
                 WinningLotto winningLotto = WinningLottoFactory.create(inputWinningLotto, Integer.parseInt(inputBonusBall));
                 //TODO 아래의 코드가 정상적으로 작동하는 이유 알아보기
-                LottoTickets lottoTickets = req.session().attribute("lottoTickets");
-                LottoMoney money = new LottoMoney(Long.parseLong(req.session().attribute("inputMoney")));
+                LottoTickets lottoTickets = req.session().attribute(LOTTO_TICKETS.type);
+                LottoMoney money = new LottoMoney(Long.parseLong(req.session().attribute(MONEY.type)));
                 LottoResults lottoResults = new LottoResults(lottoTickets, winningLotto, money);
 
-                viewModel.put("lottos", lottoTickets);
-                viewModel.put("inputMoney", new LottoMoney(Long.parseLong(req.session().attribute("inputMoney"))));
-                viewModel.put("winningLotto", winningLotto);
-                viewModel.put("lottoResults", lottoResults);
-                viewModel.put("rewardMoney", lottoResults.getYield());
+                viewModel.put(LOTTO_TICKETS.type, lottoTickets);
+                viewModel.put(MONEY.type, new LottoMoney(Long.parseLong(req.session().attribute(MONEY.type))));
+                viewModel.put(WINNING_LOTTO.type, winningLotto);
+                viewModel.put(LOTTO_RESULTS.type, lottoResults);
+                viewModel.put(REWARD_MONEY.type, lottoResults.getYield());
 
                 addDatabase(viewModel, connection);
                 return render(viewModel, "showResult.html");
@@ -137,33 +125,51 @@ public class WebUILottoApplication {
 
     private static void addDatabase(Map<String, Object> model, Connection connection) throws SQLException {
         int round = findThisRound() + 1;
-        addRoundToDB(model, connection, round);
-        addLottoTicketsToDB(model, connection, round);
-        addWinningLottoToDB(model, connection, round);
-        GameResultDao gameResultDao = new GameResultDao(connection);
-        LottoTickets lottos = (LottoTickets) model.get("lottos");
-        WinningLotto winningLotto = (WinningLotto) model.get("winningLotto");
-        LottoMoney inputMoney = (LottoMoney) model.get("inputMoney");
-        gameResultDao.addGameResult(lottos, winningLotto, inputMoney);
+        LottoMoney lottoMoney = (LottoMoney) model.get(MONEY.type);
+        LottoTickets lottoTickets = (LottoTickets) model.get(LOTTO_TICKETS.type);
+        WinningLotto winningLotto = (WinningLotto) model.get(WINNING_LOTTO.type);
+
+        addRoundToDB(lottoMoney, connection, round);
+        addLottoTicketsToDB(lottoTickets, connection, round);
+        addWinningLottoToDB(winningLotto, connection, round);
+        addGameResultToDB(connection, lottoTickets, winningLotto, lottoMoney);
     }
 
-    private static void addWinningLottoToDB(Map<String, Object> model, Connection connection, int round) throws SQLException {
+    private static void addRoundToDB(LottoMoney lottoMoney, Connection connection, int round) throws SQLException {
+        RoundDao roundDao = new RoundDao(connection);
+        roundDao.addRound(round, lottoMoney);
+    }
+
+    private static void addWinningLottoToDB(WinningLotto winningLotto, Connection connection, int round) throws SQLException {
         WinningLottoDao winningLottoDao = new WinningLottoDao(connection);
-        WinningLotto winningLotto = (WinningLotto) model.get("winningLotto");
         winningLottoDao.addWinningLotto(round, winningLotto);
     }
 
-    private static void addLottoTicketsToDB(Map<String, Object> model, Connection connection, int round) throws SQLException {
+    private static void addLottoTicketsToDB(LottoTickets lottoTickets, Connection connection, int round) throws SQLException {
         LottoTicketsDao lottoTicketsDao = new LottoTicketsDao(connection);
-        LottoTickets lottos = (LottoTickets) model.get("lottos");
-        lottoTicketsDao.addLottoTickets(round, lottos);
+        lottoTicketsDao.addLottoTickets(round, lottoTickets);
     }
 
-    private static void addRoundToDB(Map<String, Object> model, Connection connection, int round) throws SQLException {
-        RoundDao roundDao = new RoundDao(connection);
-        LottoMoney inputMoney = (LottoMoney) model.get("inputMoney");
-        roundDao.addRound(round, inputMoney);
+    private static void addGameResultToDB(Connection connection, LottoTickets lottoTickets, WinningLotto winningLotto, LottoMoney inputMoney) throws SQLException {
+        GameResultDao gameResultDao = new GameResultDao(connection);
+        gameResultDao.addGameResult(lottoTickets, winningLotto, inputMoney);
     }
 
+    public enum Type {
+        MONEY("money"),
+        MANUAL_AMOUNT("manualAmount"),
+        MANUAL_NUMBER("manualNumber"),
+        LOTTO_TICKETS("lottoTickets"),
+        WINNING_LOTTO("winningLotto"),
+        BONUS_BALL("bonusBall"),
+        LOTTO_RESULTS("lottoResults"),
+        REWARD_MONEY("rewardMoney");
+
+        private final String type;
+
+        Type(String type) {
+            this.type = type;
+        }
+    }
 }
 
