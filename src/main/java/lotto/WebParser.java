@@ -20,6 +20,10 @@ public class WebParser {
         return WebParser.makeLottoResult(lottoResult);
     }
 
+    public static List<String> get() {
+        return WebParser.makeLottoResult(LottoResult.get());
+    }
+
     public static String forSQL(List<String> input) {
         StringBuilder sb = new StringBuilder();
         for (String str : input) {

@@ -19,8 +19,10 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 
 public class WebUILottoApplication {
-    private static WebUILottoData webUILottoData = new WebUILottoData();
-    private static GameDTO gameDTO = new GameDTO();
+    private static final String RATE_UNIT = "%";
+
+    private static final WebUILottoData webUILottoData = new WebUILottoData();
+    private static final GameDTO gameDTO = new GameDTO();
 
     public static void main(String[] args) {
         get("/", (req, res) -> {
@@ -93,7 +95,6 @@ public class WebUILottoApplication {
         get("/winning", (req, res) -> {
             Lotto winningNumbers = new Lotto(InputParser.parseLotto(req.queryParams("winninglotto")));
             webUILottoData.setWinningNumbers(winningNumbers);
-            gameDTO.setWinningNumbers(winningNumbers); // 1
             Map<String, Object> model = new HashMap<>();
             List<Lotto> list = WebParser.makeLottos(webUILottoData);
             model.put("lottos", list);
@@ -106,11 +107,8 @@ public class WebUILottoApplication {
         get("/result", (req, res) -> {
             Number bonus = Number.of(InputParser.parseNumber(req.queryParams("bonusnumber")));
             webUILottoData.setBonusNumber(bonus);
-            gameDTO.setBonusNumber(bonus); // 2
             List<String> result = WebParser.result(webUILottoData);
-            gameDTO.setResult(WebParser.forSQL(result)); // 3
             Long rate = Math.round(LottoResult.rateOfReturn(webUILottoData.getPurchaseAmount()));
-            gameDTO.setReturnRate(rate + "%");
             Map<String, Object> model = new HashMap<>();
             model.put("result", result);
             model.put("rate", rate);
@@ -120,9 +118,16 @@ public class WebUILottoApplication {
         get("/enroll", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             GameDAO gameDAO = new GameDAO();
+            List<String> result = WebParser.get();
+            Long rate = Math.round(LottoResult.rateOfReturn(webUILottoData.getPurchaseAmount()));
+            gameDTO.setWinningNumbers(webUILottoData.getWinningNumbers());
+            gameDTO.setBonusNumber(webUILottoData.getBonusNumber());
+            gameDTO.setResult(WebParser.forSQL(result));
             gameDTO.setReturnAmount(LottoResult.resultAmount() + "원");
+            gameDTO.setReturnRate(rate + RATE_UNIT);
             gameDAO.addGameInformation(gameDTO);
             gameDAO.addLottoNumbers(webUILottoData.getTotalLottoGames().allGames());
+            LottoResult.init();
             return render(model, "enroll.html");
         });
     }

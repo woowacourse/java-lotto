@@ -16,6 +16,10 @@ public class LottoResult {
 
     static {
         lottoResult = new HashMap<>();
+        init();
+    }
+
+    public static void init() {
         lottoResult.put(FIRST, new ResultCounter());
         lottoResult.put(SECOND, new ResultCounter());
         lottoResult.put(THIRD, new ResultCounter());
@@ -28,6 +32,10 @@ public class LottoResult {
         for (Lotto lotto : totalLottoGames.allGames()) {
             increase(winningLotto.resultOf(lotto));
         }
+        return lottoResult;
+    }
+
+    public static Map<Rank, ResultCounter> get() {
         return lottoResult;
     }
 
