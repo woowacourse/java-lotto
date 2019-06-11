@@ -52,8 +52,8 @@ public class WebUILottoApplication {
             LottosFactory lottosFactory = new LottosFactory(inputManualLottoNumbers, lottoCount);
             Lottos currentLottos = lottosFactory.generateTotalLottos();
             setLottos(currentLottos);
-            loadRoundTable(connection);
-            loadLottoTable(connection);
+            loadDBRoundTable(connection);
+            loadDBLottoTable(connection);
 
             Map<String, Object> model = new HashMap<>();
             model.put("lottos", currentLottos);
@@ -65,9 +65,9 @@ public class WebUILottoApplication {
         post("/lottoResult", (req, res) -> {
             WinningLotto winningLotto = new WinningLotto(new Lotto(ConvertLottoNumber.run(req.queryParams("winningNumbers"))),
                     LottoNumber.getInstance(Integer.parseInt(req.queryParams("bonusNumber"))));
-            loadWinningLottoTable(connection, winningLotto);
+            loadDBWinningLottoTable(connection, winningLotto);
             LottoResult lottoResult = new LottoResult(winningLotto, lottos);
-            loadLottoResultTable(connection, lottoResult);
+            loadDBLottoResultTable(connection, lottoResult);
 
             Map<String, Object> model = new HashMap<>();
             model.put("first", lottoResult.getCountOfRank(FIRST));
@@ -102,24 +102,24 @@ public class WebUILottoApplication {
         return lottoResultDAO.findByLottoRound(lottoRound);
     }
 
-    private static void loadRoundTable(Connection connection) throws SQLException {
+    private static void loadDBRoundTable(Connection connection) throws SQLException {
         RoundDAO roundDAO = new RoundDAO(connection);
         round = roundDAO.getNextRound();
         roundDAO.addRound(round.toString());
     }
 
-    private static void loadLottoTable(Connection connection) throws SQLException {
+    private static void loadDBLottoTable(Connection connection) throws SQLException {
         LottoDAO lottoDAO = new LottoDAO(connection);
         lottoDAO.addLottos(round.toString(), lottos);
     }
 
-    private static void loadWinningLottoTable(Connection connection, WinningLotto winningLotto)
+    private static void loadDBWinningLottoTable(Connection connection, WinningLotto winningLotto)
             throws SQLException {
         WinningLottoDAO winningLottoDAO = new WinningLottoDAO(connection);
         winningLottoDAO.addWinningLotto(round.toString(), winningLotto);
     }
 
-    private static void loadLottoResultTable(Connection connection, LottoResult lottoResult)
+    private static void loadDBLottoResultTable(Connection connection, LottoResult lottoResult)
             throws SQLException {
         LottoResultDAO lottoResultDAO = new LottoResultDAO(connection);
         lottoResultDAO.addLottoResult(round.toString(), lottoResult);
