@@ -61,6 +61,7 @@ public class RankResult {
         StringBuilder stringBuilder = new StringBuilder();
         for (AbstractRank rank : winners.values()) {
             stringBuilder.append(rank.toString());
+            stringBuilder.append("<br/>");
         }
         return stringBuilder.toString();
     }

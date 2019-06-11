@@ -66,6 +66,6 @@ public class Lotto {
         for (LottoNumber number : lottoNumbers) {
             stringJoiner.add(number.toString());
         }
-        return stringJoiner.toString() + NEW_LINE;
+        return stringJoiner.toString() + NEW_LINE + "<br/>";
     }
 }

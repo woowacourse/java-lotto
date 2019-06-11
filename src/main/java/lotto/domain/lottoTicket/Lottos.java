@@ -35,9 +35,11 @@ public class Lottos {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("수동으로 ").append(manualLottos.size()).append("장, ");
-        stringBuilder.append("자동으로").append(autoLottos.size()).append("개를 구매했습니다.\n");
+        stringBuilder.append("자동으로").append(autoLottos.size()).append("개를 구매했습니다.\n<br/>");
+        stringBuilder.append("<br/>수동 로또<br/>");
         manualLottos.stream()
                 .forEach(manual -> stringBuilder.append(manual.toString()));
+        stringBuilder.append("<br/>자동 로또<br/>");
         autoLottos.stream()
                 .forEach(auto -> stringBuilder.append(auto.toString()));
         return stringBuilder.toString();
