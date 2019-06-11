@@ -5,14 +5,17 @@
   <title>로또 결과보기</title>
 </head>
 <body>
-<h1>당첨 통계</h1>
-{{#result}}
-{{this}}
-<br>
-{{/result}}
-<div>
-  총 수익률은 {{rate}}% 입니다.
-</div>
+  <h1>당첨 통계</h1>
+    {{#result}}
+    {{this}}
+    <br>
+    {{/result}}
+  <div>
+    총 수익률은 {{rate}}% 입니다.
+  </div>
+<form action="/enroll">
+  <input type="submit" value="저장하기"/>
+</form>
 <form action="/">
   <input type="submit" value="홈으로"/>
 </form>

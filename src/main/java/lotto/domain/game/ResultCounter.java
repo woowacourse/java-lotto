@@ -10,6 +10,10 @@ public class ResultCounter {
         this(INIT_STATE);
     }
 
+    public int getCounter() {
+        return counter;
+    }
+
     private ResultCounter(int counter) {
         this.counter = counter;
     }

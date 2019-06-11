@@ -13,9 +13,9 @@
 
 ## Step 2. Bonus Ball
 ### Function Requirements
-1. get bonus number [domain]
-    - {Exception} bonus number must not contained WinningLotto
-2. show winning statics with bonus number
+1. get bonusNumber number [domain]
+    - {Exception} bonusNumber number must not contained WinningLotto
+2. show winning statics with bonusNumber number
 
 ## Step 3. User Picked Lotto Numbers
 ### Function Requirements

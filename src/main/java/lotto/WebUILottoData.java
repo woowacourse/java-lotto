@@ -63,13 +63,14 @@ public class WebUILottoData {
 
     public void setBonusNumber(Number bonusNumber) {
         this.bonusNumber = bonusNumber;
+        this.setWinningLotto(new WinningLotto(this.winningNumbers, this.bonusNumber));
     }
 
     public WinningLotto getWinningLotto() {
         return winningLotto;
     }
 
-    public void setWinningLotto(WinningLotto winningLotto) {
+    private void setWinningLotto(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
     }
 }

@@ -42,4 +42,12 @@ public class LottoResult {
         }
         return amount.rateOf(prize);
     }
+
+    public static int resultAmount() {
+        int resultAmount = 0;
+        for (Map.Entry<Rank, ResultCounter> eachResult : lottoResult.entrySet()) {
+            resultAmount += eachResult.getKey().getPrize() * eachResult.getValue().getCounter();
+        }
+        return resultAmount;
+    }
 }

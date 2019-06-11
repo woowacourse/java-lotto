@@ -1,18 +1,14 @@
 package lotto;
 
 import lotto.domain.PurchaseAmount;
-import lotto.domain.Rank;
-import lotto.domain.WinningLotto;
 import lotto.domain.game.Count;
 import lotto.domain.game.LottoResult;
 import lotto.domain.game.ManualCount;
-import lotto.domain.game.ResultCounter;
 import lotto.domain.game.TotalLottoGames;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Number;
 import lotto.utils.InputParser;
 import spark.ModelAndView;
-import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.HashMap;
@@ -24,6 +20,7 @@ import static spark.Spark.post;
 
 public class WebUILottoApplication {
     private static WebUILottoData webUILottoData = new WebUILottoData();
+    private static GameDTO gameDTO = new GameDTO();
 
     public static void main(String[] args) {
         get("/", (req, res) -> {
@@ -34,6 +31,11 @@ public class WebUILottoApplication {
         get("/buy", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "purchase.html");
+        });
+
+        get("/lookup", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return render(model, "lookup.html");
         });
 
         get("/purchase", (req, res) -> {
@@ -70,37 +72,39 @@ public class WebUILottoApplication {
         });
 
         get("/winning", (req, res) -> {
-            Lotto winningNumber = new Lotto(InputParser.parseLotto(req.queryParams("winninglotto")));
-            webUILottoData.setWinningNumbers(winningNumber);
+            Lotto winningNumbers = new Lotto(InputParser.parseLotto(req.queryParams("winninglotto")));
+            webUILottoData.setWinningNumbers(winningNumbers);
+            gameDTO.setWinningNumbers(winningNumbers); // 1
             Map<String, Object> model = new HashMap<>();
             List<Lotto> list = WebParser.makeLottos(webUILottoData);
             model.put("lottos", list);
-            model.put("winningnumber", webUILottoData.getWinningNumbers().toString());
+            model.put("autocount", webUILottoData.getTotalLottoGames().autoSize());
+            model.put("manualcount", webUILottoData.getTotalLottoGames().manualSize());
+            model.put("winningnumbers", webUILottoData.getWinningNumbers().toString());
             return render(model, "winningbonus.html");
         });
 
         get("/result", (req, res) -> {
-            WinningLotto winningLotto = winningLotto(req);
-            List<String> result = result(winningLotto);
+            Number bonus = Number.of(InputParser.parseNumber(req.queryParams("bonusnumber")));
+            webUILottoData.setBonusNumber(bonus);
+            gameDTO.setBonusNumber(bonus); // 2
+            List<String> result = WebParser.result(webUILottoData);
+            gameDTO.setResult(WebParser.forSQL(result)); // 3
             Long rate = Math.round(LottoResult.rateOfReturn(webUILottoData.getPurchaseAmount()));
+            gameDTO.setReturnRate(rate + "%");
             Map<String, Object> model = new HashMap<>();
             model.put("result", result);
             model.put("rate", rate);
             return render(model, "result.html");
         });
-    }
 
-    private static WinningLotto winningLotto(Request req) {
-        Number bonus = Number.of(InputParser.parseNumber(req.queryParams("bonus")));
-        webUILottoData.setBonusNumber(bonus);
-        WinningLotto winningLotto = new WinningLotto(webUILottoData.getWinningNumbers(), bonus);
-        webUILottoData.setWinningLotto(winningLotto);
-        return winningLotto;
-    }
-
-    private static List<String> result(WinningLotto winningLotto) {
-        Map<Rank, ResultCounter> lottoResult = LottoResult.create(webUILottoData.getTotalLottoGames(), winningLotto);
-        return WebParser.makeLottoResult(lottoResult);
+        get("/enroll", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            GameDAO gameDAO = new GameDAO();
+            gameDTO.setReturnAmount("1000원");
+            gameDAO.add(gameDTO);
+            return render(model, "enroll.html");
+        });
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
