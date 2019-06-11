@@ -1,12 +1,12 @@
 package lotto;
 
+import lotto.dao.LottoTicketsDao;
+import lotto.dao.RoundDao;
+import lotto.dao.WinningLottoDao;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningLotto;
-import lotto.domain.dao.LottoTicketsDao;
-import lotto.domain.dao.RoundDao;
-import lotto.domain.dao.WinningLottoDao;
 import lotto.domain.factory.LottoResultsFactory;
 import lotto.domain.factory.LottoTicketsFactory;
 import lotto.domain.factory.WinningLottoFactory;

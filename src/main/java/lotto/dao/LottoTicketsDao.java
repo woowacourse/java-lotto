@@ -1,4 +1,4 @@
-package lotto.domain.dao;
+package lotto.dao;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
