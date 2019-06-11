@@ -13,7 +13,7 @@ public class ConsoleUILottoApplication {
         int buyPrice = money.getBuyPrice();
 
         int countOfManualBuyLotto = inputManualBuyLottoCount(buyPrice);
-        BoughtLottos boughtLottos = BoughtLottos.buyLottos(countOfManualBuyLotto,
+        BoughtLottos boughtLottos = BoughtLottos.buyLottos(buyPrice,
                 inputManualLottos(countOfManualBuyLotto));
         OutputView.printBoughtLottos(boughtLottos);
 
