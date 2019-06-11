@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>로또 구매</title>
 </head>
 
 <style>
@@ -79,11 +79,17 @@
         width: 100px;
         display: inline-block;
     }
+
+    .circle {
+        border-radius: 75px;
+    }
 </style>
 
 <body>
+    <h1>로또</h1>
+    <a href="/buyLotto">로또 구매</a> <a href="/lookupLotto">회차 조회</a>
 
-    <h1>로또 구매</h1>
+    <div id="nextTimes"></div>
     <div class="section">
         <span>구입 금액 : </span><input class="form-control inputForm" id="money" type="number">
         <button id="inputMoney">입력</button>
@@ -106,8 +112,6 @@
     </div>
 
     <hr />
-
-    <div id="nextTimes"></div>
     <div class="row">
         <div class="col-md-6">
             <div class="section">당첨 번호 입력</div>
@@ -128,34 +132,6 @@
     <hr />
     <h2>당첨 통계</h2>
     <div id="result" class="section">
-
-    </div>
-
-    <hr />
-
-    <div class="section">
-        <h2>회차 정보 조회</h2>
-        <input type="number" id="times">
-        <button class="section" id="btn_lookup">조회</button>
-
-        <h2>구입 금액</h2>
-        <div id="lookupMoney">
-
-        </div>
-        <h2>구매 목록</h2>
-        <div id="lookupLottoList">
-
-        </div>
-
-        <h2>당첨 번호</h2>
-        <div id="lookupWinningLotto">
-
-        </div>
-
-        <h2>당첨 통계</h2>
-        <div id="lookupResult" class="section">
-
-        </div>
 
     </div>
 
@@ -288,6 +264,7 @@
                     data: data,
                     url: '/lotto',
                     success: function (data) {
+                        initNumber('manualItem');
                         initLotto();
                         $('#money').removeAttr("readonly", "readonly");
                         $('#money').val('');
@@ -297,7 +274,8 @@
             });
 
             $('#btn_lotto_result').click(function () {
-                if ($('#lottoItmeList').has('div').length == 0) {
+                console.log($('.lottoItem').length);
+                if ($('.lottoItem').length == 0) {
                     alert("구입한 로또가 없다!");
                     return
                 }
@@ -333,63 +311,6 @@
                         initLotto();
                         printResult(json_obj, 'result');
                         printLottoYield();
-                    }
-                });
-
-            });
-
-            $('#btn_lookup').click(function () {
-                var times = $('#times').val();
-                if (times < 0 || times > $('.nextTimesData')[0].innerHTML - 1) {
-                    alert('회차조회 번호 경고!');
-                    return
-                }
-
-                $.ajax({
-                    method: 'get',
-                    url: '/lotto/money/' + times,
-                    success: function (data) {
-                        $('#lookupMoney').empty();
-                        var json_obj = $.parseJSON(data);
-                        child = '<div class="result">구입 금액은 ' + json_obj.money + '원 입니다.</div>';
-                        $('#lookupMoney').append(child);
-                    }
-                });
-
-                $.ajax({
-                    method: 'get',
-                    url: '/lotto/lottos/' + times,
-                    success: function (data) {
-                        var json_obj = $.parseJSON(data);
-                        printLottoList(json_obj, 'lookupLottoList');
-                    }
-                });
-
-                $.ajax({
-                    method: 'get',
-                    url: '/lotto/winningLotto/' + times,
-                    success: function (data) {
-                        var json_obj = $.parseJSON(data);
-                        printWinningLotto(json_obj, 'lookupWinningLotto');
-                    }
-                });
-
-                $.ajax({
-                    method: 'get',
-                    url: '/lotto/lottoResult/' + times,
-                    success: function (data) {
-                        var json_obj = $.parseJSON(data);
-                        console.log(json_obj);
-                        printResult(json_obj, 'lookupResult');
-
-                        $.ajax({
-                            method: 'get',
-                            url: '/lotto/lottoYield/' + times,
-                            success: function (data) {
-                                child = '<div class="result">총 수익율은 ' + data + '% 입니다.</div>';
-                                $('#lookupResult').append(child);
-                            }
-                        });
                     }
                 });
 
@@ -463,25 +384,10 @@
                     var no = uniqueId();
                     $('#' + divId).append('<div class="lottoItem" data_no="' + no + '">');
                     for (var j = 0 in json_obj[i]) {
-                        var chlid = '<div class="black selItem">' + json_obj[i][j] + '</div>';
+                        var chlid = '<div class="black selItem circle">' + json_obj[i][j] + '</div>';
                         $('#' + divId).find('.lottoItem[data_no=' + no + ']').append(chlid);
                     }
                 }
-            }
-
-            function printWinningLotto(json_obj, divId) {
-                $('#' + divId).empty();
-                var no = uniqueId();
-                console.log(json_obj.winningLotto);
-                console.log(json_obj.bonusNum);
-                $('#' + divId).append('<div class="lottoItem" data_no="' + no + '">');
-                for (var j = 0 in json_obj.winningLotto.lotto) {
-                    var chlid = '<div class="black selItem">' + json_obj.winningLotto.lotto[j].num + '</div>';
-                    $('#' + divId).find('.lottoItem[data_no=' + no + ']').append(chlid);
-                }
-
-                var chlid = '보너스 번호 : <div class="black selItem">' + json_obj.bonusNum.num + '</div>';
-                $('#' + divId).find('.lottoItem[data_no=' + no + ']').append(chlid);
             }
 
             function initLotto() {
@@ -492,7 +398,7 @@
                     success: function (data) {
                         console.log(data);
                         $('#nextTimes').empty();
-                        child = '<span class="nextTimesData result">' + data + '</span><span class="result">회 로또</span>';
+                        child = '<span class="nextTimesData result">' + data + '</span><span class="result">회차 로또</span>';
                         $('#nextTimes').append(child);
                         times = data;
 

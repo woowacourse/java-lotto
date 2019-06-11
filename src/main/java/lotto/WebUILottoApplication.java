@@ -27,9 +27,14 @@ public class WebUILottoApplication {
     private static WinningLottoDao winningLottoDao = new WinningLottoDao(dataBase);
 
     public static void main(String[] args) {
-        get("/", (req, res) -> {
+        get("/buyLotto", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "index.html");
+        });
+
+        get("/lookupLotto", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return render(model, "lookupPage.html");
         });
 
         post("/lotto", (req, res) -> {
