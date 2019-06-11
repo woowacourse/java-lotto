@@ -1,7 +1,5 @@
 package lottogame.domain;
 
-import lottogame.lottogameexception.InvalidLottoPriceException;
-
 public class Money {
     private static final int IN_VALID_PRICE = -1;
     private static final int PERCENTAGE = 100;

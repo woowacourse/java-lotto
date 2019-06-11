@@ -1,8 +1,5 @@
 package lottogame.domain;
 
-import lottogame.lottogameexception.InvalidBonusLottoNumberException;
-import lottogame.lottogameexception.InvalidLottoNumberException;
-
 public class WinningLotto {
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
