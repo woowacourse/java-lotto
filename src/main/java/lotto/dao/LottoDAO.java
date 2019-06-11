@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// TODO try-resource 적용해보기
+// TODO try-with-resource 적용해보기
 public class LottoDAO {
     public Connection getConnection() {
         Connection con = null;
@@ -39,66 +39,71 @@ public class LottoDAO {
         try {
             if (con != null)
                 System.out.println("정상적으로 해제되었습니다.");
-                con.close();
+            con.close();
         } catch (SQLException e) {
             System.err.println("con 오류:" + e.getMessage());
         }
     }
 
-
     public int findMaxRound() throws SQLException {
-        Connection connection = getConnection();
         String sql = "SELECT MAX(round) AS max FROM lotto";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        ResultSet resultSet = statement.executeQuery();
 
-        if (!resultSet.next()) {
-            return 1;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            if (!resultSet.next()) {
+                return 1;
+            }
+            return resultSet.getInt("max");
         }
-        int result = resultSet.getInt("max");
-        closeConnection(connection);
-        return result;
     }
 
     public List<Lotto> findLottosByRound(int round) throws SQLException {
-        Connection connection = getConnection();
         String sql = "SELECT lotto FROM lotto WHERE round = ?";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, round);
-        ResultSet resultSet = statement.executeQuery();
-        List<Lotto> lottos = new ArrayList<>();
-        while (resultSet.next()) {
-            Lotto lotto = LottoFactory.createLottoManually(
-                    Arrays.asList(resultSet.getString("lotto")
-                            .replaceAll(" ", "")
-                            .split(",")));
-            lottos.add(lotto);
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, round);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                List<Lotto> lottos = new ArrayList<>();
+                while (resultSet.next()) {
+                    Lotto lotto = LottoFactory.createLottoManually(
+                            Arrays.asList(resultSet.getString("lotto")
+                                    .replaceAll(" ", "")
+                                    .split(",")));
+                    lottos.add(lotto);
+                }
+                return lottos;
+            }
         }
-        closeConnection(connection);
-        return lottos;
     }
 
     public void addLottos(List<Lotto> lottos) throws SQLException {
-        Connection connection = getConnection();
         String sql = "INSERT INTO lotto(lotto, round) VALUES (?, ?)";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        int nextRound = findMaxRound() + 1;
-        for(Lotto lotto : lottos) {
-            statement.setString(1, lotto.toString().substring(1, lotto.toString().length() - 1));
-            statement.setInt(2, nextRound);
-            statement.executeUpdate();
-        }
 
-        closeConnection(connection);
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            int nextRound = findMaxRound() + 1;
+            for (Lotto lotto : lottos) {
+                statement.setString(1, getSubstring(lotto));
+                statement.setInt(2, nextRound);
+                statement.executeUpdate();
+            }
+        }
+    }
+
+    // TODO WinningLotto 테이블에 저장 시 중복 코드 발생하는지 확인할 것
+    private String getSubstring(Lotto lotto) {
+        return lotto.toString().substring(1, lotto.toString().length() - 1);
     }
 
     public void removeLotto(int lottoId) throws SQLException {
-        Connection connection = getConnection();
         String sql = "DELETE FROM lotto WHERE round = ?";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, lottoId);
-        statement.executeUpdate();
 
-        closeConnection(connection);
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, lottoId);
+            statement.executeUpdate();
+        }
     }
 }
