@@ -1,7 +1,5 @@
 package lottogame.domain;
 
-import lottogame.lottogameexception.InvalidLottoNumberException;
-
 import java.util.ArrayList;
 import java.util.List;
 

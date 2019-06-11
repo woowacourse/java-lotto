@@ -3,13 +3,13 @@ package lottogame.domain;
 import lottogame.lottogameexception.InvalidLottoPriceException;
 
 public class Money {
+    private static final int IN_VALID_PRICE = -1;
     private static final int PERCENTAGE = 100;
     private static final int ONE_LOTTO_PRICE = 1000;
 
     private final int price;
 
     private Money(int price) {
-        checkValidPrice(price);
         this.price = price;
     }
 
@@ -19,7 +19,7 @@ public class Money {
             return new Money(Integer.parseInt(inputPrice));
         } catch (NumberFormatException | InvalidLottoPriceException e) {
             System.out.println(e.getMessage());
-            return null;
+            return new Money(IN_VALID_PRICE);
         }
     }
 
@@ -37,7 +37,11 @@ public class Money {
         return (long) (profits / price) * PERCENTAGE;
     }
 
-    public boolean isInvalidNumber(int numberOfManualLotto) {
+    public boolean isInValidNumber(int numberOfManualLotto) {
         return getNumberOfTicket() < numberOfManualLotto;
+    }
+
+    public boolean isNotCreatedWell() {
+        return price == IN_VALID_PRICE;
     }
 }

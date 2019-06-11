@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.Set;
 
 public class ManualLottoGenerator {
-    public static Lotto create(String lotto) {
+    public static Lotto create(String inputLotto) {
         Set<LottoNumber> lottoNumbers;
         try {
-            lottoNumbers = getLottoNumbers(LottoNumbersParser.parse(lotto));
+            lottoNumbers = getLottoNumbers(LottoNumbersParser.parse(inputLotto));
             checkValidLotto(lottoNumbers);
             return new Lotto(new ArrayList<>(lottoNumbers));
         } catch (NumberFormatException | InvalidLottoNumberException e) {
             System.out.println(e.getMessage());
-            return null;
+            return new Lotto(new ArrayList<>());
         }
     }
 

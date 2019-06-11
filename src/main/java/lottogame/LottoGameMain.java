@@ -29,7 +29,7 @@ public class LottoGameMain {
 
     private static boolean isInValidNumberOfManualInput(String input, Money money) {
         try {
-            return money.isInvalidNumber(Integer.parseInt(input));
+            return money.isInValidNumber(Integer.parseInt(input));
         } catch (NumberFormatException e) {
             System.out.println("숫자를 입력해 주세요.");
             return true;
@@ -41,7 +41,7 @@ public class LottoGameMain {
 
         do {
             money = Money.generate(InputView.getPrice());
-        } while (money == null);
+        } while (money.isNotCreatedWell());
 
         return money;
     }
@@ -73,10 +73,10 @@ public class LottoGameMain {
         Lotto lotto;
         do {
             lotto = ManualLottoGenerator.create(InputView.getWinningLotto());
-        } while (lotto == null);
+        } while (lotto.isNotCreatedWell());
         do {
             winningLotto = WinningLotto.generate(lotto, InputView.getBonusNumber());
-        } while (winningLotto == null);
+        } while (winningLotto.isNotCreatedWell());
 
         return winningLotto;
     }

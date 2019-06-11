@@ -7,20 +7,20 @@ import java.util.Map;
 public class LottoResult {
     private Map<Rank, Integer> result = new LinkedHashMap<>();
 
-    LottoResult() {
+    private LottoResult(List<Rank> matchResults) {
         for (Rank rank : Rank.values()) {
             result.put(rank, 0);
+        }
+        for (Rank rank : matchResults) {
+            result.put(rank, result.get(rank) + 1);
         }
         result.remove(Rank.MISS);
     }
 
     public static LottoResult generate(LottoTickets lottoTickets, WinningLotto winningLotto) {
-        LottoResult lottoResult = new LottoResult();
         List<Rank> matchResults = lottoTickets.getMatchResultEachLotto(winningLotto);
 
-        for (Rank rank : matchResults) {
-            lottoResult.result.put(rank, lottoResult.result.get(rank) + 1);
-        }
+        LottoResult lottoResult = new LottoResult(matchResults);
 
         return lottoResult;
     }

@@ -26,6 +26,10 @@ public class Lotto {
         return lotto.contains(lottoNumber);
     }
 
+    public boolean isNotCreatedWell() {
+        return lotto.size() != LOTTO_SIZE;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -38,4 +42,5 @@ public class Lotto {
         stringBuilder.append("]");
         return stringBuilder.toString();
     }
+
 }
