@@ -1,4 +1,4 @@
-package lotto.WebUIView;
+package lotto.view;
 
 import com.google.common.base.Joiner;
 import lotto.domain.LottoResult;
@@ -11,16 +11,17 @@ import java.util.stream.Collectors;
 
 import static lotto.domain.Rank.SECOND;
 
-public class WebUIOutputView {
+public class OutputViewFactory {
     private static final String START_BRACE = "[";
     private static final String END_BRACE = "]";
     private static final String JOINER = ", ";
-    private static final String NEW_LINE = "\n";
+    private static final String PURCHASE_MESSAGE_FORMAT = "수동으로 %d장, 자동으로 %d장 구매했습니다.";
     private static final String YIELD_FORMAT = "총 수익률은 %.1f%% 입니다.";
 
     public static String outputLottosPurchaseMessage(PurchaseInformation purchaseInformation) {
-        return "수동으로 " + purchaseInformation.getManualLottoCount()
-                + "장, 자동으로" + purchaseInformation.getAutoLottoCount()+ "장 구매했습니다.";
+        return String.format(PURCHASE_MESSAGE_FORMAT,
+                purchaseInformation.getManualLottoCount(),
+                purchaseInformation.getAutoLottoCount());
     }
 
     public static List<String> outputLottos(Lottos lottos) {
@@ -33,7 +34,6 @@ public class WebUIOutputView {
         StringBuilder builder = new StringBuilder(START_BRACE);
         builder.append(Joiner.on(JOINER).join(numbers));
         builder.append(END_BRACE);
-        builder.append(NEW_LINE);
         return builder.toString();
     }
 

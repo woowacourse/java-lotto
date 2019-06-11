@@ -4,9 +4,8 @@ import lotto.domain.*;
 import lotto.domain.generator.LottoNumbersGenerator;
 import lotto.domain.generator.ManualLottoNumbersGenerator;
 import lotto.utils.NumbersSplitter;
-import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.WebUIView.WebUIOutputView;
+import lotto.view.OutputViewFactory;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -41,14 +40,14 @@ public class WebUILottoApplication {
 
             Lottos lottos = purchaseLottos(purchaseInformation);
 
-            model.put("purchaseMessage", WebUIOutputView.outputLottosPurchaseMessage(purchaseInformation));
-            model.put("lottos", WebUIOutputView.outputLottos(lottos));
+            model.put("purchaseMessage", OutputViewFactory.outputLottosPurchaseMessage(purchaseInformation));
+            model.put("lottos", OutputViewFactory.outputLottos(lottos));
 
             LottoGame lottoGame = setUpLottoGame(req.queryParams("winningNumber"),req.queryParams("bonusBall"));
             LottoResult lottoResult = lottoGame.play(lottos);
 
-            model.put("result", WebUIOutputView.outputResult(lottoResult));
-            model.put("yieldMessage", WebUIOutputView.outputYield(lottoResult));
+            model.put("result", OutputViewFactory.outputResult(lottoResult));
+            model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
 
             return render(model, "result.html");
         });
