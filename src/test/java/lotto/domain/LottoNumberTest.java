@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.exception.NumberValidException;
 import org.junit.jupiter.api.Test;
 
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoNumberTest {

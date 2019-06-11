@@ -1,7 +1,5 @@
 package lotto.domain;
 
-
-
 import lotto.exception.LottoValidException;
 import org.junit.jupiter.api.Test;
 

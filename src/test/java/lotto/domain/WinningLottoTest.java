@@ -1,6 +1,5 @@
 package lotto.domain;
 
-
 import lotto.exception.BonusBallValidException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
