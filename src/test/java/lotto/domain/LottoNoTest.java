@@ -3,13 +3,14 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LottoNoTest {
 
     @Test
-    void 생성_테스트() {
+    void 캐싱_테스트() {
         assertThat(LottoNo.from(13)).isEqualTo(LottoNo.from(13));
+        assertSame(LottoNo.from(13), LottoNo.from(13));
     }
 
     @Test
@@ -19,6 +20,6 @@ public class LottoNoTest {
 
     @Test
     void 유효값_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> LottoNo.from(47));
+        assertThrows(IllegalArgumentException.class, () -> LottoNo.from(LottoNo.MAX_NUMBER+1));
     }
 }
