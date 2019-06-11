@@ -1,22 +1,21 @@
 package lotto;
 
-import lotto.domain.*;
-import lotto.domain.generator.ResultGenerator;
+import lotto.domain.BoughtLottos;
+import lotto.domain.Money;
+import lotto.domain.Result;
 import lotto.utils.JsonTransformer;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
-import static lotto.domain.generator.LottoNumbersGenerator.generateLottoNumbers;
+import static lotto.service.LottoService.*;
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
     public static void main(String[] args) {
         externalStaticFileLocation("src/main/resources/templates/");
-
-
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -25,23 +24,12 @@ public class WebUILottoApplication {
 
         post("/lotto", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            // 구입 금액 처리
-            Money money = new Money(Integer.parseInt(req.queryParams("buy-price")));
 
-            // 수동 번호 입력 처리
-            String inputLottoNumbers = req.queryParams("lotto-numbers");
-            List<String> inputManualLottos = inputLottoNumbers.equals("") ? Collections.EMPTY_LIST
-                    : Arrays.stream(inputLottoNumbers.split("\n"))
-                    .map(String::trim)
-                    .collect(Collectors.toList());
-            BoughtLottos boughtLottos = BoughtLottos.buyLottos(money.getBuyPrice(), inputManualLottos);
+            Money money = generateMoney(req.queryParams("buy-price"));
+            BoughtLottos boughtLottos = generateBoughtLottos(money, req.queryParams("lotto-numbers"));
+            Result result = generateResult(boughtLottos, req.queryParams("winning-numbers"), req.queryParams("bonus"));
 
-            // 당첨번호 처리
-            WinningNumber winningNumber = new WinningNumber(new Lotto(
-                    generateLottoNumbers(req.queryParams("winning-numbers"))),
-                    Integer.parseInt(req.queryParams("bonus")));
-            // 결과
-            Result result = ResultGenerator.generateResult(boughtLottos, winningNumber);
+            model.put("money", money);
             model.put("boughtLottos", boughtLottos);
             model.put("result", result);
             return model;
