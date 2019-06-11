@@ -28,31 +28,13 @@ public class LottoResultDAOTest {
 
     @BeforeEach
     void setup_lottoResult() {
-        Lotto lotto1 = new Lotto(Arrays.asList(
-                LottoNumber.getInstance(1),
-                LottoNumber.getInstance(2),
-                LottoNumber.getInstance(3),
-                LottoNumber.getInstance(4),
-                LottoNumber.getInstance(5),
-                LottoNumber.getInstance(6)
-        ));
-        Lotto lotto2 = new Lotto(Arrays.asList(
-                LottoNumber.getInstance(11),
-                LottoNumber.getInstance(12),
-                LottoNumber.getInstance(13),
-                LottoNumber.getInstance(14),
-                LottoNumber.getInstance(15),
-                LottoNumber.getInstance(16)
-        ));
-        Lotto lotto3 = new Lotto(Arrays.asList(
-                LottoNumber.getInstance(21),
-                LottoNumber.getInstance(22),
-                LottoNumber.getInstance(23),
-                LottoNumber.getInstance(24),
-                LottoNumber.getInstance(25),
-                LottoNumber.getInstance(26)
-        ));
-        lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
+        ManualLottoMachine manualLottoMachine = new ManualLottoMachine(
+                Arrays.asList(
+                        "1,2,3,4,5,6",
+                        "11,12,13,14,15,16",
+                        "21,22,23,24,25,26"
+                ));
+        lottos = new Lottos(manualLottoMachine.generateLottos());
 
         Lotto lastWinningLotto = new Lotto(Arrays.asList(
                 LottoNumber.getInstance(1),
