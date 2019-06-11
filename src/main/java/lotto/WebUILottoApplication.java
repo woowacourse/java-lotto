@@ -6,11 +6,10 @@ import lotto.domain.generator.ManualLottoNumbersGenerator;
 import lotto.utils.NumbersSplitter;
 import lotto.view.OutputViewFactory;
 import spark.ModelAndView;
+import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -34,17 +33,16 @@ public class WebUILottoApplication {
                 PurchaseInformation purchaseInformation = setUpPurchaseInformation(
                         req.queryParams("money"),
                         req.queryParams("manualLottoCount"));
-                List<String> manualLottoNumber = Arrays.asList(req.queryParams("manualLottoNumber").split("\n"));
-                registerManualLottosNumbers(purchaseInformation, manualLottoNumber);
-                Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
                 model.put("purchaseMessage", OutputViewFactory.outputLottosPurchaseMessage(purchaseInformation));
+
+                registerManualLottosNumbers(purchaseInformation, req);
+                Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
                 model.put("lottos", OutputViewFactory.outputLottos(lottos));
 
                 LottoGame lottoGame = setUpLottoGame(req.queryParams("winningNumber"), req.queryParams("bonusBall"));
                 LottoResult lottoResult = lottoGame.play(lottos);
                 model.put("result", OutputViewFactory.outputResult(lottoResult));
                 model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
-
                 return render(model, "result.html");
             } catch (NumberFormatException e) {
                 Map<String, Object> model = new HashMap<>();
@@ -67,13 +65,12 @@ public class WebUILottoApplication {
         return new PurchaseInformation(lottoCount);
     }
 
-    private static void registerManualLottosNumbers(PurchaseInformation purchaseInformation,
-                                                    List<String> manualLottoNumber) {
+    private static void registerManualLottosNumbers(PurchaseInformation purchaseInformation, Request req) {
         if (!purchaseInformation.hasManualLottos()) {
             return;
         }
 
-        for (String lottoNumber : manualLottoNumber) {
+        for (String lottoNumber : req.queryParams("manualLottoNumber").split("\n")) {
             purchaseInformation.addManualLottoNumbers(lottoNumber);
         }
     }
