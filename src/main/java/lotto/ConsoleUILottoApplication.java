@@ -34,10 +34,13 @@ public class ConsoleUILottoApplication {
         Optional<Payment> payment;
         do {
             payment = createPayment();
-
-        } while (!payment.isPresent());
+        } while (isAbsent(payment));
 
         return payment.get();
+    }
+
+    private static boolean isAbsent(Optional<?> optional) {
+        return !optional.isPresent();
     }
 
     private static Optional<Payment> createPayment() {
@@ -48,8 +51,8 @@ public class ConsoleUILottoApplication {
         } catch (Exception e) {
             System.err.println(e.getMessage());
             payment = Optional.empty();
-
         }
+
         return payment;
     }
 
@@ -57,7 +60,8 @@ public class ConsoleUILottoApplication {
         Optional<CountOfLotto> countOfLotto;
         do {
             countOfLotto = createCountOfLotto(payment);
-        } while (!countOfLotto.isPresent());
+        } while (isAbsent(countOfLotto));
+
         return countOfLotto.get();
     }
 
@@ -70,6 +74,7 @@ public class ConsoleUILottoApplication {
             System.err.println(e.getMessage());
             countOfLotto = Optional.empty();
         }
+
         return countOfLotto;
     }
 
@@ -82,6 +87,7 @@ public class ConsoleUILottoApplication {
         for (int i = 0; i < countOfLotto.getCountOfRandomLotto(); i++) {
             lottoRepository.addAutoLottos(LottoGenerator.create(new RandomLottoGeneratingStrategy()));
         }
+
         return lottoRepository;
     }
 
@@ -89,7 +95,8 @@ public class ConsoleUILottoApplication {
         Optional<Lotto> lotto;
         do {
             lotto = createLotto();
-        } while (!lotto.isPresent());
+        } while (isAbsent(lotto));
+
         return lotto.get();
     }
 
@@ -103,6 +110,7 @@ public class ConsoleUILottoApplication {
             System.err.println(e.getMessage());
             lotto = Optional.empty();
         }
+
         return lotto;
     }
 
@@ -116,7 +124,8 @@ public class ConsoleUILottoApplication {
         Optional<WinningLotto> winningLotto;
         do {
             winningLotto = createWinningLotto();
-        } while (!winningLotto.isPresent());
+        } while (isAbsent(winningLotto));
+
         return winningLotto.get();
     }
 
@@ -133,6 +142,7 @@ public class ConsoleUILottoApplication {
             System.err.println(e.getMessage());
             winningLotto = Optional.empty();
         }
+
         return winningLotto;
     }
 }
