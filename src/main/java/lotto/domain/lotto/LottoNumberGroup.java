@@ -52,14 +52,6 @@ public class LottoNumberGroup {
     }
 
     @Override
-    public LottoNumberGroup clone() {
-        return new LottoNumberGroup(
-                numbers.stream()
-                .collect(Collectors.toList())
-        );
-    }
-
-    @Override
     public String toString() {
         return numbers.toString();
     }
