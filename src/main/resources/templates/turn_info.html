@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>lotto game</title>
+</head>
+
+
+<style>
+    div.lottobuy input {
+        max-width: 100px;
+    }
+
+    #bonus {
+        max-width: 20px;
+    }
+</style>
+<!-- #users 리스트 -->
+
+<body>
+
+    <div>
+        <!-- 회차별 데이터 출력 -->
+        </p>제 {{turn}} 회 로또 결과</p> <br>
+        <div id="lottos">
+            <p>로또 목록</p>
+            {{#lottos}}
+            {{this}} <br>
+            {{/lottos}}
+            <br>
+            <br>
+        </div>
+        <div id="winning">
+            {{turn}} 1회차 우승 로또는 아래와 같습니다
+            <br>당첨 번호 : {{winning_lotto.winningLotto}} <br>
+            보너스 번호 : {{winning_lotto.bonusNumber}} <br>
+        </div>
+        <br>
+        <div id="stat">
+            &lt당첨 통계&gt <br>
+            {{#result}}
+            {{this}} <br>
+            {{/result}} <br>
+            수익률은 {{profit}}% 입니다 <br>
+        </div>
+    </div>
+
+    <form action="/" method="GET">
+        <input type="submit" value="되돌아가기" />
+    </form>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

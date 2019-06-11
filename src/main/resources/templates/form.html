@@ -25,7 +25,18 @@
       <nav>
             <h3>구입 금액 입력</h3>
       </nav>
-
+      <!-- 일단 post -->
+      <div class="turns">
+            <label>제 {{currentturn}} 회 로또 게임</label>
+            <form action="/turn" method="post">
+                  <div class="turns">
+                        {{#turns}}
+                              <a href="/turn?current_turn={{this}}">{{this}}회</a>
+                        {{/turns}}
+                  </div>
+            </form>
+      </div>
+      <br>
       <form action="/money" method="post">
             <div class="money">
                   <label>구입 금액 : </label>

@@ -18,6 +18,7 @@
       div.lottobuy input {
             max-width: 100px;
       }
+
       #bonus {
             max-width: 20px;
       }
@@ -26,17 +27,22 @@
 
 <body>
 
-    <div class="print">
-        <br>
-        {{#stat}}
-        <label>{{this}}</label><br>
-        {{/stat}}
-        <label>수익률은 {{profit}}% 입니다.</label>
-    </div>
+      <div class="print">
+            <br>
+            {{#stat}}
+            <label>{{this}}</label><br>
+            {{/stat}}
+            <label>수익률은 {{profit}}% 입니다.</label>
+      </div>
 
-    <form action="/end" method="POST">
-          <input type="submit" value="끝" />
-    </form>
+      <form action="/end" method="POST">
+            <input type="hidden" name="token" value="restart"/>
+            <input type="submit" value="다시 실행하기" />
+      </form>
+      <form action="/end" method="POST">
+            <input type="hidden" name="token" value="initialize"/>
+            <input type="submit" value="초기화" />
+      </form>
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
