@@ -1,5 +1,6 @@
 package lotto.domain;
 
+
 import lotto.exception.PriceValidException;
 import org.junit.jupiter.api.Test;
 
