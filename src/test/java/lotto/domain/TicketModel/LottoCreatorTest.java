@@ -2,6 +2,7 @@ package lotto.domain.TicketModel;
 
 import lotto.domain.Exceptions.LottoNumberException;
 import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import lotto.dto.WinningLottoDto;
 import org.junit.jupiter.api.Test;
 
@@ -26,12 +27,12 @@ class LottoCreatorTest {
         });
     }
 
-    @Test
-    void 동등로또() {
-        LottoCreator generator = new LottoCreator();
-        LottoNumbers numbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertEquals(new Lotto(numbers), generator.create(Arrays.asList(1, 2, 3, 4, 5, 6)));
-    }
+//    @Test
+//    void 동등로또() {
+//        LottoCreator generator = new LottoCreator();
+//        LottoNumbers numbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+//        assertEquals(new Lotto(numbers), generator.create(Arrays.asList(1, 2, 3, 4, 5, 6)));
+//    }
 
     @Test
     void 매칭확인() {

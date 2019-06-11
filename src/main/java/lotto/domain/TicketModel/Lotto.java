@@ -3,20 +3,20 @@ package lotto.domain.TicketModel;
 import java.util.Objects;
 
 class Lotto implements Ticket {
-    private final LottoNumbers numbers;
+    private final TicketNumbers lottoNumbers;
 
-    Lotto(LottoNumbers lottoNumbers) {
-        this.numbers = lottoNumbers;
+    public Lotto(TicketNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     @Override
-    public LottoNumbers lottoNumbers() {
-        return numbers;
+    public TicketNumbers lottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
-    public boolean contains(int number) {
-        return numbers.contains(number);
+    public boolean contains(TicketNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     @Override
@@ -24,16 +24,11 @@ class Lotto implements Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return numbers.equals(lotto.numbers);
+        return lottoNumbers.equals(lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
-    }
-
-    @Override
-    public String toString() {
-        return lottoNumbers().rawNumbers().toString();
+        return Objects.hash(lottoNumbers);
     }
 }

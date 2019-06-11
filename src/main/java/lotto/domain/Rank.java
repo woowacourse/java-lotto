@@ -22,7 +22,8 @@ public enum Rank {
 
     public static Rank rank(int match, boolean bonus) {
         return Arrays.stream(values())
-                .filter(rank -> rank.match == match && rank.bonus == bonus)
+                .filter(rank -> rank.match == match)
+                .filter(rank -> rank.bonus == bonus)
                 .findAny()
                 .orElse(LOSE);
     }

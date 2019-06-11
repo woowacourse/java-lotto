@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.domain.TicketModel.LottoCreator;
 import lotto.domain.TicketModel.Ticket;
-import lotto.domain.TicketModel.WinningLotto;
 import lotto.dto.WinningLottoDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

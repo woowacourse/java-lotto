@@ -1,48 +1,42 @@
 package lotto.domain.TicketModel;
 
-import lotto.domain.Exceptions.ExceptionMessages;
 import lotto.domain.Exceptions.LottoNumberException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-public class LottoNumbers {
-    private final List<Integer> numbers;
+public class LottoNumbers implements TicketNumbers {
+    static final int NUMBER_COUNT = 6;
+    private final List<TicketNumber> numbers;
 
-    LottoNumbers() {
-        this.numbers = LottoNumberManager.autoNumber();
+    public LottoNumbers() {
+        this(LottoNumberPool.random());
     }
 
-    LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(List<TicketNumber> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        this.numbers = Collections.unmodifiableList(numbers);
     }
 
-    private void validate(List<Integer> numbers) {
-        if (!LottoNumberManager.check(numbers)) {
-            throw new LottoNumberException(ExceptionMessages.NUMBER.message());
+    private void validate(List<TicketNumber> numbers) {
+        if (numbers.size() != NUMBER_COUNT) {
+            throw new LottoNumberException();
         }
     }
 
-    public boolean contains(int number) {
-        return numbers.contains(number);
+    @Override
+    public int matchNumber(TicketNumbers numbers) {
+        Set<TicketNumber> ticketNumbers = new HashSet<>(this.numbers);
+        ticketNumbers.addAll(numbers.numbers());
+        return NUMBER_COUNT - ticketNumbers.size();
     }
 
-    public List<Integer> rawNumbers() {
+    @Override
+    public List<TicketNumber> numbers() {
         return new ArrayList<>(numbers);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers that = (LottoNumbers) o;
-        return Objects.equals(numbers, that.numbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
+    public boolean contains(TicketNumber number) {
+        return numbers.contains(number);
     }
 }

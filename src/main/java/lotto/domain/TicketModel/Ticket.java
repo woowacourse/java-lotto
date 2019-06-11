@@ -2,9 +2,7 @@ package lotto.domain.TicketModel;
 
 public interface Ticket {
 
-    public LottoNumbers lottoNumbers();
+    public TicketNumbers lottoNumbers();
 
-    public boolean contains(int number);
-
-    public String toString();
+    public boolean contains(TicketNumber number);
 }
