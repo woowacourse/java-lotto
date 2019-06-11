@@ -98,7 +98,7 @@
 
         <div class="col-md-6">
             <div id="lottoList">
-                <div class="section">로또 리스트</div>
+                <div class="section">수동 선택 리스트</div>
             </div>
             <button class="section" id="addAutoItem">나머지 자동 구매</button>
         </div>
@@ -107,15 +107,17 @@
 
     <hr />
 
+    <div id="nextTimes"></div>
     <div class="row">
         <div class="col-md-6">
             <div class="section">당첨 번호 입력</div>
             <div class="section" id="winningItem">
+
             </div>
         </div>
 
         <div class="col-md-6">
-            <div class="section">로또 구매 결과</div>
+            <div class="section">누적 로또 구매 목록</div>
             <div id="lottoItemList">
             </div>
             <button class="section" id="btn_lotto_result">결과 보기</button>
@@ -126,6 +128,34 @@
     <hr />
     <h2>당첨 통계</h2>
     <div id="result" class="section">
+
+    </div>
+
+    <hr />
+
+    <div class="section">
+        <h2>회차 정보 조회</h2>
+        <input type="number" id="times">
+        <button class="section" id="btn_lookup">조회</button>
+
+        <h2>구입 금액</h2>
+        <div id="lookupMoney">
+
+        </div>
+        <h2>구매 목록</h2>
+        <div id="lookupLottoList">
+
+        </div>
+
+        <h2>당첨 번호</h2>
+        <div id="lookupWinningLotto">
+
+        </div>
+
+        <h2>당첨 통계</h2>
+        <div id="lookupResult" class="section">
+
+        </div>
 
     </div>
 
@@ -144,6 +174,7 @@
         $(document).ready(function () {
 
             initNumber('manualItem');
+            initLotto();
 
             $(document).on("click", ".number", function () {
                 if ($('.red').length < 6 || $(this).hasClass('red')) {
@@ -257,25 +288,20 @@
                     data: data,
                     url: '/lotto',
                     success: function (data) {
-                        console.log(data);
-                        var json_obj = $.parseJSON(data);
-                        $('#lottoItemList').empty();
-                        for (var i = 0 in json_obj) {
-                            resultNumber('winningItem');
-                            var no = uniqueId();
-                            $('#lottoItemList').append('<div class="lottoItem" data_no="' + no + '">');
-                            for (var j = 0 in json_obj[i]) {
-                                var chlid = '<div class="black selItem">' + json_obj[i][j] + '</div>';
-                                $('#lottoItemList').find('.lottoItem[data_no=' + no + ']').append(chlid);
-                            }
-                        }
-
+                        initLotto();
+                        $('#money').removeAttr("readonly", "readonly");
+                        $('#money').val('');
                     }
                 });
 
             });
 
             $('#btn_lotto_result').click(function () {
+                if ($('#lottoItmeList').has('div').length == 0) {
+                    alert("구입한 로또가 없다!");
+                    return
+                }
+
                 if ($('.yellow').length != 6) {
                     alert("당첨 번호는 6자리!");
                     return;
@@ -284,6 +310,7 @@
                     alert("보너스 번호는 1자리!(오른쪽 버튼)");
                     return;
                 }
+
                 var winningLotto = new Array();
                 $('.yellow').each(function (index, item) {
                     winningLotto[index] = item.innerHTML;
@@ -303,7 +330,66 @@
                     url: '/lottoResult',
                     success: function (data) {
                         var json_obj = $.parseJSON(data);
-                        printResult(json_obj);
+                        initLotto();
+                        printResult(json_obj, 'result');
+                        printLottoYield();
+                    }
+                });
+
+            });
+
+            $('#btn_lookup').click(function () {
+                var times = $('#times').val();
+                if (times < 0 || times > $('.nextTimesData')[0].innerHTML - 1) {
+                    alert('회차조회 번호 경고!');
+                    return
+                }
+
+                $.ajax({
+                    method: 'get',
+                    url: '/lotto/money/' + times,
+                    success: function (data) {
+                        $('#lookupMoney').empty();
+                        var json_obj = $.parseJSON(data);
+                        child = '<div class="result">구입 금액은 ' + json_obj.money + '원 입니다.</div>';
+                        $('#lookupMoney').append(child);
+                    }
+                });
+
+                $.ajax({
+                    method: 'get',
+                    url: '/lotto/lottos/' + times,
+                    success: function (data) {
+                        var json_obj = $.parseJSON(data);
+                        printLottoList(json_obj, 'lookupLottoList');
+                    }
+                });
+
+                $.ajax({
+                    method: 'get',
+                    url: '/lotto/winningLotto/' + times,
+                    success: function (data) {
+                        var json_obj = $.parseJSON(data);
+                        printWinningLotto(json_obj, 'lookupWinningLotto');
+                    }
+                });
+
+                $.ajax({
+                    method: 'get',
+                    url: '/lotto/lottoResult/' + times,
+                    success: function (data) {
+                        var json_obj = $.parseJSON(data);
+                        console.log(json_obj);
+                        printResult(json_obj, 'lookupResult');
+
+                        $.ajax({
+                            method: 'get',
+                            url: '/lotto/lottoYield/' + times,
+                            success: function (data) {
+                                child = '<div class="result">총 수익율은 ' + data + '% 입니다.</div>';
+                                $('#lookupResult').append(child);
+                            }
+                        });
                     }
                 });
 
@@ -323,39 +409,38 @@
                 $('#' + type).append(chlid);
             }
 
-            function resultNumber(type) {
-                $('#' + type).empty();
+            function resultNumber() {
+                $('#winningItem').empty();
 
                 for (var i = 1; i < 46; i++) {
                     chlid = '<div class="winningNumber black">' + i + '</div>';
                     if (i % 6 == 0) {
                         chlid = '<div class="winningNumber black">' + i + '</div> <br/>';
                     }
-                    $('#' + type).append(chlid);
+                    $('#winningItem').append(chlid);
                 }
             }
 
-            function printResult(result) {
+            function printResult(result, divId) {
                 $.ajax({
                     method: 'get',
                     url: '/lottoResult',
                     success: function (data) {
                         var json_obj = $.parseJSON(data);
                         console.log(json_obj);
-                        $('#result').empty();
+                        $('#' + divId).empty();
                         for (var i = 0 in json_obj) {
                             if (json_obj[i].value == "MISS") {
                                 continue;
                             }
                             if (json_obj[i].value == "SECOND") {
                                 child = '<div class="result">' + json_obj[i].matchNum + "개 일치, 보너스 볼 일치(" + json_obj[i].reward + "원) - " + result.SECOND + "개" + '</div>';
-                                $('#result').append(child);
+                                $('#' + divId).append(child);
                                 continue;
                             }
                             child = '<div class="result">' + json_obj[i].matchNum + "개 일치 (" + json_obj[i].reward + "원) - " + result[json_obj[i].value] + "개" + '</div>';
-                            $('#result').append(child);
+                            $('#' + divId).append(child);
                         }
-                        printLottoYield();
                     }
                 });
             }
@@ -371,8 +456,58 @@
                 });
             }
 
+            function printLottoList(json_obj, divId) {
+                console.log(json_obj);
+                $('#' + divId).empty();
+                for (var i = 0 in json_obj) {
+                    var no = uniqueId();
+                    $('#' + divId).append('<div class="lottoItem" data_no="' + no + '">');
+                    for (var j = 0 in json_obj[i]) {
+                        var chlid = '<div class="black selItem">' + json_obj[i][j] + '</div>';
+                        $('#' + divId).find('.lottoItem[data_no=' + no + ']').append(chlid);
+                    }
+                }
+            }
 
+            function printWinningLotto(json_obj, divId) {
+                $('#' + divId).empty();
+                var no = uniqueId();
+                console.log(json_obj.winningLotto);
+                console.log(json_obj.bonusNum);
+                $('#' + divId).append('<div class="lottoItem" data_no="' + no + '">');
+                for (var j = 0 in json_obj.winningLotto.lotto) {
+                    var chlid = '<div class="black selItem">' + json_obj.winningLotto.lotto[j].num + '</div>';
+                    $('#' + divId).find('.lottoItem[data_no=' + no + ']').append(chlid);
+                }
 
+                var chlid = '보너스 번호 : <div class="black selItem">' + json_obj.bonusNum.num + '</div>';
+                $('#' + divId).find('.lottoItem[data_no=' + no + ']').append(chlid);
+            }
+
+            function initLotto() {
+                var times;
+                $.ajax({
+                    method: 'get',
+                    url: '/lottoNextTimes',
+                    success: function (data) {
+                        console.log(data);
+                        $('#nextTimes').empty();
+                        child = '<span class="nextTimesData result">' + data + '</span><span class="result">회 로또</span>';
+                        $('#nextTimes').append(child);
+                        times = data;
+
+                        $.ajax({
+                            method: 'get',
+                            url: '/lotto/lottos/' + times,
+                            success: function (data) {
+                                var json_obj = $.parseJSON(data);
+                                resultNumber();
+                                printLottoList(json_obj, 'lottoItemList');
+                            }
+                        });
+                    }
+                });
+            }
         });
 
     </script>

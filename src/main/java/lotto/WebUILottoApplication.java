@@ -18,8 +18,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.nio.charset.Charset;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 public class WebUILottoApplication {
     private static DataBase dataBase = new DataBase();
@@ -86,13 +85,52 @@ public class WebUILottoApplication {
             return result;
         });
 
-        get("/lottoTimes/:Times", (req, res) -> {
+        get("/lottoNextTimes", (req, res) -> {
+            int latelyTimes = winningLottoDao.countWinningLottoTimes();
+
+            return latelyTimes + 1;
+        });
+
+        get("/lotto/money/:Times", (req, res) -> {
+            int times = Integer.parseInt(req.params(":Times"));
+            Money money = moneyDao.findByTimes(times);
+            Gson gson = new GsonBuilder().create();
+            String json = gson.toJson(money);
+
+            return json;
+        });
+
+        get("/lotto/lottos/:Times", (req, res) -> {
+            int times = Integer.parseInt(req.params(":Times"));
+            Lottos lottos = lottosDao.findByTimes(times);
+            Gson gson = new GsonBuilder().create();
+
+            return lottos.getLottos();
+        });
+
+        get("/lotto/winningLotto/:Times", (req, res) -> {
+            int times = Integer.parseInt(req.params(":Times"));
+            WinningLotto winningLotto = winningLottoDao.findByTimes(times);
+            Gson gson = new GsonBuilder().create();
+
+            return gson.toJson(winningLotto);
+        });
+
+        get("/lotto/lottoResult/:Times", (req, res) -> {
+            int times = Integer.parseInt(req.params(":Times"));
+            LottoResult lottoResult = createLottoResult(times);
+            Gson gson = new GsonBuilder().create();
+            String json = gson.toJson(lottoResult.getLottoResult());
+
+            return json;
+        });
+
+        get("/lotto/lottoYield/:Times", (req, res) -> {
             int times = Integer.parseInt(req.params(":Times"));
             LottoResult lottoResult = createLottoResult(times);
             Money money = moneyDao.findByTimes(times);
 
             double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
-
             return result;
         });
     }
