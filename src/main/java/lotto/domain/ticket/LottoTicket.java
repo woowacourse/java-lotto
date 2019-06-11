@@ -36,9 +36,9 @@ public class LottoTicket {
         return MAX_LOTTO_TICKET_NUMBER;
     }
 
-    public int countSameNumber(SortedSet<LottoNumber> winningNumbers) {
-        return (int) winningNumbers.stream()
-                .filter(lottoNumbers::contains)
+    public int countSameNumber(LottoTicket winningLotto) {
+        return (int) winningLotto.lottoNumbers.stream()
+                .filter(this.lottoNumbers::contains)
                 .count();
     }
 

@@ -5,11 +5,11 @@ import lotto.domain.ticket.LottoTicket;
 
 import java.util.List;
 
-public class WinningLotto extends LottoTicket {
+public class WinningLotto{
+    private final LottoTicket lottoTicket;
     private final LottoNumber bonusNumber;
-
     private WinningLotto(final List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
-        super(lottoNumbers);
+        this.lottoTicket = new LottoTicket(lottoNumbers);
         this.bonusNumber = bonusNumber;
     }
 
@@ -25,14 +25,6 @@ public class WinningLotto extends LottoTicket {
     }
 
     public Rank getRank(LottoTicket lottoTicket) {
-        return Rank.valueOf(countMatchedNumber(lottoTicket), isMatchedBonus(lottoTicket));
-    }
-
-    protected boolean isMatchedBonus(LottoTicket lottoTicket) {
-        return lottoTicket.isContainsBonusNumber(bonusNumber);
-    }
-
-    protected int countMatchedNumber(LottoTicket lottoTicket) {
-        return lottoTicket.countSameNumber(this.getLottoNumbers());
+        return Rank.valueOf(this.lottoTicket.countSameNumber(lottoTicket), lottoTicket.isContainsBonusNumber(bonusNumber));
     }
 }

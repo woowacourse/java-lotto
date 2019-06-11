@@ -37,16 +37,16 @@ public class LottoApplication {
 
     private static WinningLotto getWinningLotto(final List<LottoNumber> winningNumbers, final LottoNumber lottoNumber) {
         try {
-            WinningLotto.of(winningNumbers, lottoNumber);
-        }catch(){
+            return WinningLotto.of(winningNumbers, lottoNumber);
+        } catch (Exception e) {
             return getWinningLotto(winningNumbers, lottoNumber);
         }
     }
 
-    private static Money insertMoney(int moneyAmount){
-        try{
+    private static Money insertMoney(int moneyAmount) {
+        try {
             return Money.of(moneyAmount);
-        }catch(Exception e){
+        } catch (Exception e) {
             return insertMoney(moneyAmount);
         }
     }
@@ -63,9 +63,9 @@ public class LottoApplication {
 
 
     private static LottoTickets makeLotto(final VendingMachine vendingMachine, final Purchase purchase) {
-        try{
+        try {
             return vendingMachine.createLotto(purchase);
-        }catch(Exception e){
+        } catch (Exception e) {
             return makeLotto(vendingMachine, purchase);
         }
     }

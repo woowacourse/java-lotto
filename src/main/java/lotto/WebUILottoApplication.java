@@ -16,8 +16,8 @@ public class WebUILottoApplication {
     public static void main(String[] args) {
         staticFiles.location("/templates");
         post("/api/money", (req, res) -> {
-            String moneyAmount= req.queryParams("money");
-
+            String moneyAmount= req.queryParams("name");
+            return null;
         });
     }
 
