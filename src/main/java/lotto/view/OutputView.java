@@ -70,7 +70,6 @@ public class OutputView {
                 rank.getMatchCount(), rankAdditional(rank), rank.getPrize(), lottoResult.get(rank));
     }
 
-
     private static String rankAdditional(Rank rank) {
         return rank.equals(Rank.SECOND) ? SECOND_ADDITIONAL : EMPTY_STRING;
     }

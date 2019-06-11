@@ -38,7 +38,7 @@ public class ManualCount {
     public boolean isUnder(int indicator) {
         return indicator <= count;
     }
-
+  
     @Override
     public String toString() {
         return String.valueOf(count);

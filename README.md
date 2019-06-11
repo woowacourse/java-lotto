@@ -13,9 +13,9 @@
 
 ## Step 2. Bonus Ball
 ### Function Requirements
-1. get bonusNumber number [domain]
-    - {Exception} bonusNumber number must not contained WinningLotto
-2. show winning statics with bonusNumber number
+1. get bonus number [domain]
+    - {Exception} bonus number must not contained WinningLotto
+2. show winning statics with bonus number
 
 ## Step 3. User Picked Lotto Numbers
 ### Function Requirements
@@ -29,3 +29,4 @@
 ## Step 4. Web UI Application
 ### Function Requirements
 1. 콘솔 UI 로 구현되어 있는 로또를 웹 UI로 동작하도록 구현
+    - {Exception} duplicated number

@@ -1,5 +1,4 @@
 package lotto.exceptions;
-
 public class CountRangeException extends IllegalArgumentException {
     public CountRangeException() {
     }

@@ -38,7 +38,7 @@ public class LottoResult {
     public static Map<Rank, ResultCounter> get() {
         return lottoResult;
     }
-
+  
     private static void increase(Rank rank) {
         lottoResult.get(rank).increase();
     }
@@ -50,7 +50,7 @@ public class LottoResult {
         }
         return amount.rateOf(prize);
     }
-
+  
     public static int resultAmount() {
         int resultAmount = 0;
         for (Map.Entry<Rank, ResultCounter> eachResult : lottoResult.entrySet()) {
