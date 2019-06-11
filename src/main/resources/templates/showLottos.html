@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,30 +15,32 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<form action="/showResult" method="post" accept-charset="UTF-8">
-    <ul class="list-group">
-        {{#lottoTickets.lottoTickets}}
-        <li class="list-group-item">{{lottoNumbers}}</li>
-        {{/lottoTickets.lottoTickets}}
-    </ul>
+<div class="container" style="max-width: 500px; margin-top: 30px">
+    <form action="/showResult" method="post" accept-charset="UTF-8">
+        <ul class="list-group">
+            {{#lottoTickets.lottoTickets}}
+            <li class="list-group-item">{{lottoNumbers}}</li>
+            {{/lottoTickets.lottoTickets}}
+        </ul>
 
-    <br>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">지난 주 당첨 번호 입력</span>
+        <br>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">지난 주 당첨 번호 입력</span>
+            </div>
+            <input type="text" name="winningLotto" class="form-control" placeholder="당첨 번호" aria-label="Username"
+                   aria-describedby="basic-addon1">
         </div>
-        <input type="text" name="winningLotto" class="form-control" placeholder="당첨 번호" aria-label="Username"
-               aria-describedby="basic-addon1">
-    </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon2">보너스 볼 입력</span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon2">보너스 볼 입력</span>
+            </div>
+            <input type="text" name="bonusBall" class="form-control" placeholder="보너스 볼" aria-label="Username"
+                   aria-describedby="basic-addon1">
         </div>
-        <input type="text" name="bonusBall" class="form-control" placeholder="보너스 볼" aria-label="Username"
-               aria-describedby="basic-addon1">
-    </div>
-    <button type="submit" class="btn btn-primary">다음 단계</button>
-</form>
+        <button type="submit" class="btn btn-primary">다음 단계</button>
+    </form>
+</div>
 </body>
 </html>
