@@ -12,11 +12,9 @@ class LottoResultTest {
     @Test
     void 결과구성() {
         LottoResult result = new LottoResult();
-        assertEquals(0, result.results().get(Rank.LOSE));
         result.plus(Rank.LOSE);
-        assertEquals(1, result.results().get(Rank.LOSE));
+        assertEquals(1, result.results().getResults().get(Rank.LOSE));
     }
-
 
     @Test
     void 수익률() {
@@ -27,7 +25,7 @@ class LottoResultTest {
         assertEquals(
                 new BigDecimal(Rank.FIFTH.money() + Rank.FIFTH.money() + Rank.LOSE.money())
                         .divide(new BigDecimal(3000), 3, RoundingMode.CEILING),
-                result.summury());
+                result.results().getSummary());
     }
 
     @Test
@@ -35,7 +33,7 @@ class LottoResultTest {
         LottoResult result = new LottoResult();
         result.plus(Rank.FIRST);
         assertEquals(1, result.results().getResults().get(Rank.FIRST));
-        result.results().put(Rank.FIRST, 3);
+        result.results().getResults().put(Rank.FIRST, 3);
         assertEquals(1, result.results().getResults().get(Rank.FIRST));
     }
 }
