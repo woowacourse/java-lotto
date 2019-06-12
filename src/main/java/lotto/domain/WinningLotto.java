@@ -32,6 +32,14 @@ public class WinningLotto {
         return Rank.valueOf(countOfMatch, matchBonus);
     }
 
+    public Lotto getWinningNumbers() {
+        return winningLotto;
+    }
+
+    public LottoNumber getBonus() {
+        return bonus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,11 +54,4 @@ public class WinningLotto {
         return Objects.hash(winningLotto, bonus);
     }
 
-    public Lotto getWinningNumbers() {
-        return winningLotto;
-    }
-
-    public LottoNumber getBonus() {
-        return bonus;
-    }
 }
