@@ -31,7 +31,7 @@ public class LottoService {
         int round = roundDao.getLatest();
 
         Money money = Money.from(req.queryParams("money"));
-        List<String> manualLottos = convertList(req.queryParams("manualLottos"));
+        List<String> manualLottos = ConvertToList(req.queryParams("manualLottos"));
         List<Lotto> userLottos = LottoHelper.generateLottos(manualLottos, money);
         saveLottos(userLottos, round);
 
@@ -39,6 +39,21 @@ public class LottoService {
         int countOfAuto = money.getCountOfPurchase() - countOfManual;
         res.redirect("/lottos?countOfManual=" + countOfManual + "&countOfAuto=" + countOfAuto);
         return null;
+    }
+
+    private static List<String> ConvertToList(final String manualLottos) {
+        String[] results = manualLottos.split(DELIMITER);
+        if (results[0].equals("")) {
+            return new ArrayList<>();
+        }
+        return Arrays.asList(results);
+    }
+
+    private static void saveLottos(final List<Lotto> userLottos, final int round) throws SQLException {
+        LottoDao lottoDao = new LottoDao();
+        if (!lottoDao.add(userLottos, round)) {
+            throw new SQLException("로또 저장 에러");
+        }
     }
 
     public static Object getLottos(Request req, Response res) {
@@ -66,24 +81,6 @@ public class LottoService {
         return null;
     }
 
-    public static Object doPostResult(Request req, Response res) {
-        Map<String, Object> model = new HashMap<>();
-        int round = latestRound();
-
-        WinPrize winPrize = new WinPrizeDao().findByRound(round);
-        List<String> results = ResultFormat.format(winPrize);
-        model.put("results", results);
-        model.put("rateOfProfit", winPrize.getRateOfProfit());
-        return render(model, "result.html");
-    }
-
-    private static void saveLottos(final List<Lotto> userLottos, final int round) throws SQLException {
-        LottoDao lottoDao = new LottoDao();
-        if (!lottoDao.add(userLottos, round)) {
-            throw new SQLException("로또 저장 에러");
-        }
-    }
-
     private static void saveWinningLotto(final int round, final WinningLotto winningLotto) throws SQLException {
         WinningLottoDao winningLottoDao = new WinningLottoDao();
         if (winningLottoDao.add(winningLotto, round) == SAVE_FAIL) {
@@ -100,15 +97,18 @@ public class LottoService {
         }
     }
 
-    private static int latestRound() {
-        return new RoundDao().getLatest();
+    public static Object doPostResult(Request req, Response res) {
+        Map<String, Object> model = new HashMap<>();
+        int round = latestRound();
+
+        WinPrize winPrize = new WinPrizeDao().findByRound(round);
+        List<String> results = ResultFormat.format(winPrize);
+        model.put("results", results);
+        model.put("rateOfProfit", winPrize.getRateOfProfit());
+        return render(model, "result.html");
     }
 
-    private static List<String> convertList(final String manualLottos) {
-        String[] results = manualLottos.split(DELIMITER);
-        if (results[0].equals("")) {
-            return new ArrayList<>();
-        }
-        return Arrays.asList(results);
+    private static int latestRound() {
+        return new RoundDao().getLatest();
     }
 }
