@@ -43,3 +43,12 @@
 - ~~add more tests for new classes~~
 - ~~use generic for list parameters of methods~~
 - ~~separate random functionality from logic using interface~~
+
+
+# Lotto DB
+- ResultDAO
+- WinningLottoDAO
+- RoundDAO
+- LottoDAO
+
+

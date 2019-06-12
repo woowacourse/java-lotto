@@ -41,6 +41,6 @@ class WebOutputViewTest {
     @Test
     void outputResult() {
         assertThat(WebOutputView.outputResult(new WinningStatistics(lottos.match(winningLotto))))
-                .isEqualTo(Arrays.asList("1등: 1회", "2등: 1회"));
+                .isEqualTo(Arrays.asList("1등(2000000000원): 1회", "2등(30000000원): 1회"));
     }
 }

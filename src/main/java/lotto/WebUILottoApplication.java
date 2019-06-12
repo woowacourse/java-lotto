@@ -61,6 +61,8 @@ public class WebUILottoApplication {
             result.setPrize(String.valueOf(winningStatistics.getPrize().getValue()));
             result.setResult(outputResult(winningStatistics));
 
+            // database access
+
             Map<String, Object> model = new HashMap<>();
             model.put("result", result);
             return render(model, "result.html");
