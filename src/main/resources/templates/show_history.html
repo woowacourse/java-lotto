@@ -14,11 +14,28 @@
             <p>조회할 회차를 입력하세요</p>
             <p>가장 최근 조회 : <span id="renect-turn">{{turn}}</span></p>
             <input type="number" id="turn-input" />
-            <button type="button" id="turn-btn">조회하기</button>
+            <button type="button" id="turn-btn" onclick="clickHistory()">조회하기</button>
         </div>
-        <div id="winlotto-area"></div>
-        <div id="result-area"></div>
-        <div id="lotteries-area"></div>
+        <div id="history-area" style="display:none">
+            <p><span id="want-turn-text"></span>회 조회</p>
+            <div id="winlotto-area"></div>
+            <div id="result-area">
+                <p>----- 결과 -----</p>
+                <div id="rank-area">
+                    <p>6개 일치 (2000000000)- <span id="rank_1"> </span>개</p>
+                    <p>5개 일치, 보너스 볼 일치(30000000원)- <span id="rank_2"> </span>개</p>
+                    <p>5개 일치 (1500000)- <span id="rank_3"> </span>개</p>
+                    <p>4개 일치 (50000)- <span id="rank_4"> </span>개</p>
+                    <p>3개 일치 (5000)- <span id="rank_5"> </span>개</p>
+                </div>
+                <div id="profit-area">
+                    <p>총 수익률은 <span id="profit-text"></span> 입니다.
+                </div>
+            </div>
+            <div id="lotteries-area"></div>
+        </div>
+        
     </div>
+    <script src="/javascript/show_history/showHistoryFunc.js"></script>
 </body>
 </html>

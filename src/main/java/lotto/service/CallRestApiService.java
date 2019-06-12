@@ -137,4 +137,15 @@ public class CallRestApiService {
         }
         return jsonArray;
     }
+
+    public String showHistory(Request req) throws SQLException {
+        JsonParser jsonParser = new JsonParser();
+        JsonElement jsonElement = jsonParser.parse(req.body());
+        int turn = jsonElement.getAsJsonObject().get("turn").getAsInt();
+        JsonObject jsonObject = new JsonObject();
+        JsonObject winner = WinnerDAO.findWinnerByTurn(turn);
+        jsonObject.add("winner", winner);
+        jsonObject.addProperty("userLotto","userLotto");
+        return new Gson().toJson(jsonObject);
+    }
 }
