@@ -1,65 +1,74 @@
 <!doctype html>
 <html lang="ko">
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	<link rel="stylesheet" type="text/css" href="css/custom.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
 
-	<title>로또</title>
+    <title>로또</title>
 </head>
 
 <body class="bg-dark">
-	<div class="container mt-5">
-		<div class="jumbotron">
-			<h3 class="display-4">구매한 로또</h3>
-			<hr class="my-4">
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h3 class="display-4">구매한 로또</h3>
+        <hr class="my-4">
 
-			<div class="container">
-				<div class="row mb-2 text-center">
-					<p class="h5">구입 금액: 1000원</p>
-					<p class="h5">수동으로 n장, 자동으로 n개를 구매했습니다.</p>
-				</div>
-				<div class="row mb-2 text-center">
-					<div class="btn-group-toggle " data-toggle="buttons">
-						<span class="badge badge-pill badge-secondary">1&nbsp;</span>
-						<label class="btn btn-outline-dark mb-1 active">
-							<input type="checkbox" checked autocomplete="off" disable> 1
-						</label>
-						<label class="btn btn-outline-dark mb-1 active">
-							<input type="checkbox" checked autocomplete="off" disable> 1
-						</label>
-						<label class="btn btn-outline-dark mb-1 active">
-							<input type="checkbox" checked autocomplete="off" disable> 1
-						</label>
-						<label class="btn btn-outline-dark mb-1 active">
-							<input type="checkbox" checked autocomplete="off" disable> 1
-						</label>
-						<label class="btn btn-outline-dark mb-1 active">
-							<input type="checkbox" checked autocomplete="off" disable> 1
-						</label>
-						<label class="btn btn-outline-dark mb-1 active">
-							<input type="checkbox" checked autocomplete="off" disable> 1
-						</label>
-					</div>
-				</div>
-			</div>
+        <div class="container">
+            <div class="row mb-2 text-center">
+                <p class="h5">구입 금액: {{money}}</p>
+                <br>
+                <p class="h5">수동으로 {{amountOfCustom}}개, 자동으로 {{amountOfAuto}}개를 구매했습니다.</p>
+            </div>
+            <div class="row mb-2">
+                <div class="btn-group-toggle " data-toggle="buttons">
+                    <span class="badge badge-pill badge-secondary">1&nbsp;</span>
+                    <label class="btn btn-outline-dark mb-1 active">
+                        <input type="checkbox" checked autocomplete="off" disable> {{num1}}
+                    </label>
+                    <label class="btn btn-outline-dark mb-1 active">
+                        <input type="checkbox" checked autocomplete="off" disable> {{num2}}
+                    </label>
+                    <label class="btn btn-outline-dark mb-1 active">
+                        <input type="checkbox" checked autocomplete="off" disable> {{num3}}
+                    </label>
+                    <label class="btn btn-outline-dark mb-1 active">
+                        <input type="checkbox" checked autocomplete="off" disable> {{num4}}
+                    </label>
+                    <label class="btn btn-outline-dark mb-1 active">
+                        <input type="checkbox" checked autocomplete="off" disable> {{num5}}
+                    </label>
+                    <label class="btn btn-outline-dark mb-1 active">
+                        <input type="checkbox" checked autocomplete="off" disable> {{num6}}
+                    </label>
+                </div>
+            </div>
+        </div>
 
-			<div class="col-auto mt-4 text-center">
-				<button type="submit" class="btn btn-outline-secondary">당첨여부 확인</button>
-			</div>
+        <div class="col-auto mt-4 text-center">
+            <button type="submit" class="btn btn-outline-secondary">당첨여부 확인</button>
+        </div>
 
-		</div>
-	</div>
+    </div>
+</div>
 
 
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body></html>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
