@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.dao.GameResultDao;
 import lotto.domain.Rank;
 
 import java.util.HashMap;

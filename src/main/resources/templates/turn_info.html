@@ -13,25 +13,13 @@
     <title>lotto game</title>
 </head>
 
-
-<style>
-    div.lottobuy input {
-        max-width: 100px;
-    }
-
-    #bonus {
-        max-width: 20px;
-    }
-</style>
-<!-- #users 리스트 -->
-
 <body>
 
     <div>
         <!-- 회차별 데이터 출력 -->
         </p>제 {{turn}} 회 로또 결과</p> <br>
         <div id="lottos">
-            <p>로또 목록</p>
+            <strong><p>로또 목록</p></strong>
             {{#lottos}}
             {{this}} <br>
             {{/lottos}}
@@ -39,13 +27,13 @@
             <br>
         </div>
         <div id="winning">
-            {{turn}}회차 우승 로또는 아래와 같습니다
+            <strong>{{turn}}회차 우승 로또는 아래와 같습니다</strong>
             <br>당첨 번호 : {{winning_lotto.winningLotto}} <br>
             보너스 번호 : {{winning_lotto.bonusNumber}} <br>
         </div>
         <br>
         <div id="stat">
-            &lt당첨 통계&gt <br>
+            <strong>&lt당첨 통계&gt <br></strong>
             {{#result}}
             {{this}} <br>
             {{/result}} <br>
