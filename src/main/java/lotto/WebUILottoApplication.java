@@ -16,6 +16,7 @@ import static spark.Spark.*;
 public class WebUILottoApplication {
     public static void main(String[] args) {
         externalStaticFileLocation("src/main/resources/templates/");
+        staticFiles.location("/static");
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
