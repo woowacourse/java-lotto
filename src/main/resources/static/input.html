@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>로또 구매</title>
+</head>
+<body>
+<div>
+    <form action="#" id="budgetInputForm" name="budgetInputForm">
+        <div>
+            구입금액 입력
+            <input id="budget" name="budget" onkeydown="javascript: return event.keyCode == 69
+                       || event.keyCode == 46 || event.keyCode == 43 || event.keyCode == 45
+                       ? false : true" type="number">
+            </br>
+            <button id="budgetButton" onclick="inputBudget()" type="button"> 입력</button>
+        </div>
+    </form>
+    <div id="manualLottoContainer" style="display: none">
+        <div id="lottoNoContainers">
+            <h1> 수동 로또 번호 입력 </h1>
+            <input id="plusBtn" onclick=addBox() type="button" value="+"><br/>
+            <div id="lottoNoContainer" name="lottoNoContainer" style="display: none">
+                로또 번호
+                <input id="lottoNo" name="lottoNo" type="text"></input>
+                <input name="minusBtn" onclick="removeBox(this)" type="button" value="-">
+            </div>
+        </div>
+        </br>
+        <input id="purchaseBtn" onclick="inputManualLotto()" type="button" value="구입"></input>
+    </div>
+    <div id="lottoReceipt" style="display: none">
+        </br></br>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var budget = -1;
+    var maxManualCount = -1;
+    var countOfManualInputBox = 0;
+
+    function inputBudget() {
+        budget = document.getElementsByName('budget')[0].value;
+
+        console.log(budget);
+
+        $.ajax({
+            url:"budget",
+            type:"POST",
+            data:budget,
+            dataType:'json',
+            error:function(request,status,error){
+                alert("입력하신 금액으로 로또를 살 수 없습니다.\n"+request.responseText);
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            success:function(data){
+                console.log(JSON.stringify(data));
+                maxManualCount = data.data.maxManualCount;
+                console.log('success : maxManualCount changed to ' + maxManualCount);
+                document.getElementById("budget").readOnly = true;
+                document.getElementById("budgetButton").style.display = "none";
+                document.getElementById("manualLottoContainer").style.display = "block";
+            }
+        });
+    }
+
+    function addBox() {
+        console.log('add : ' + countOfManualInputBox +' / ' +maxManualCount);
+        if(countOfManualInputBox < maxManualCount){
+            var div = document.createElement('div');
+
+            div.innerHTML = document.getElementById('lottoNoContainer').innerHTML;
+            document.getElementById('lottoNoContainers').appendChild(div);
+            countOfManualInputBox += 1;
+        }
+        else{
+            alert("구입 하신 금액으로 더 이상 구매할 수 없습니다.");
+        }
+    }
+
+    function removeBox(obj) {
+        if(countOfManualInputBox > 0){
+            document.getElementById('lottoNoContainers').removeChild(obj.parentNode);
+            countOfManualInputBox -= 1;
+        }
+        else{
+            alert("더 이상 삭제할 수 없습니다.");
+        }
+    }
+
+    function inputManualLotto() {
+        var manualLotto = document.getElementsByName('lottoNo');
+        if(manualLotto.length > 1){
+            var lottoArray = [];
+
+            for (var i = 1; i < manualLotto.length; i++) {
+                lottoArray.push(manualLotto[i].value);
+            }
+
+            console.log(lottoArray);
+
+            $.ajax({
+                url:"manualLotto",
+                type:"POST",
+                traditional:true,
+                data:{
+                    'budget': budget,
+                    'manualLottos': lottoArray
+                },
+                dataType:'json',
+                error:function(request,status,error){
+                    alert("로또 번호에 문제가 있습니다.\n"+request.responseText);
+                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                },
+                success:function(data){
+                    console.log("success : ManualLotto");
+                    inputAutoLotto();
+                }
+            })
+        }
+        else{
+            inputAutoLotto();
+        }
+    }
+
+    function inputAutoLotto() {
+        $.ajax({
+            url:"autoLotto",
+            type:"POST",
+            dataType:'json',
+            error:function(request,status,error){
+                alert("자동 로또 번호에 문제가 있습니다.\n"+request.responseText);
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            success:function(data){
+                console.log("success : AutoLotto");
+                showLotto();
+            }
+        })
+    }
+
+    function showLotto() {
+        $.ajax({
+            url:"showLotto",
+            type:"POST",
+            dataType:'json',
+            success:function(data){
+                alert("구입 완료!");
+                document.getElementById("lottoReceipt").style.display = "block";
+                document.getElementById("plusBtn").style.display = "none";
+                document.getElementById("purchaseBtn").style.display = "none";
+
+                var minusBtn = document.getElementsByName("minusBtn");
+                for(var i=0; i<minusBtn.length; i++){
+                    minusBtn[i].style.display = "none";
+                }
+
+                var lottoNoInputs = document.getElementsByName("lottoNo");
+                for(var i=0; i<lottoNoInputs.length; i++){
+                    lottoNoInputs[i].readOnly = true;
+                }
+
+                var summary = document.createElement('h3');
+                summary.innerHTML = data.data.lotto[0];
+                document.getElementById('lottoReceipt').appendChild(summary);
+                for(var i=1; i<data.data.lotto.length; i++){
+                    console.log(data.data.lotto[i]);
+                    var p = document.createElement('p');
+                    p.innerHTML = data.data.lotto[i];
+                    document.getElementById('lottoReceipt').appendChild(p);
+                }
+            }
+        })
+    }
+
+</script>
