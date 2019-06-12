@@ -28,4 +28,9 @@ public class Result {
                 .mapToLong(rank -> rank.calculateWinningMoney(lottoScore.get(rank)))
                 .sum();
     }
+
+    // FIXME: 2019-06-12 Temporary method
+    public Map<Rank, Long> getLottoScore() {
+        return lottoScore;
+    }
 }

@@ -21,6 +21,14 @@ public class LottoRepository {
         autoLottos.add(lotto);
     }
 
+    public void addAllManualLottos(List<Lotto> lottos) {
+        manualLottos.addAll(lottos);
+    }
+
+    public void addAllAutoLottos(List<Lotto> lottos) {
+        autoLottos.addAll(lottos);
+    }
+
     public List<Lotto> getManualLottos() {
         return Collections.unmodifiableList(manualLottos);
     }
