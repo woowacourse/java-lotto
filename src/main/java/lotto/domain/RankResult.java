@@ -71,6 +71,10 @@ public class RankResult {
         return winner.getBonus();
     }
 
+    public Lotteries getLotteries() {
+        return lotteries;
+    }
+
     @Override
     public String toString() {
         return "RankResult{" +

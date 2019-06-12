@@ -1,6 +1,7 @@
 package lotto.service;
 
 import com.google.gson.*;
+import lotto.dao.UserLottoDAO;
 import lotto.dao.WinnerDAO;
 import lotto.domain.*;
 import lotto.domain.autocreatelotto.DefaultAutoCreateLotto;
@@ -108,16 +109,21 @@ public class CallRestApiService {
 
         Winner winner = new Winner(generateLotto(jsonElement.getAsJsonObject().get("winLotto").getAsJsonArray()), new LottoNumber(lottoNumber));
         RankResult rankResult = new RankResult(lotteries, winner, money);
+
         WinnerDAO.addWinner(new WinnerDTO(rankResult));
-        JsonObject jsonObject = generateResponseDetailResult(rankResult);
+        int recentTurn = WinnerDAO.findRecentTurn();
+
+        UserLottoDAO.addUserLotteries(rankResult.getLotteries(), recentTurn);
+        JsonObject jsonObject = generateResponseDetailResult(rankResult, recentTurn);
+
         return new Gson().toJson(jsonObject);
     }
 
-    private JsonObject generateResponseDetailResult(RankResult rankResult) throws SQLException {
+    private JsonObject generateResponseDetailResult(RankResult rankResult, int turn) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("rate",rankResult.getRate());
         jsonObject.add("result",generateResponseRank(rankResult.getRankResult()));
-        jsonObject.addProperty("turn", WinnerDAO.findRecentTurn());
+        jsonObject.addProperty("turn", turn);
         return jsonObject;
     }
 
