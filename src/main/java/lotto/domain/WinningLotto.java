@@ -7,12 +7,12 @@ import java.util.Objects;
 
 public class WinningLotto {
     private final Lotto winningLotto;
-    private final LottoNumber bonusBall;
+    private final LottoNumber bonus;
 
-    public WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
-        checkWinningLotto(winningLotto, bonusBall);
+    public WinningLotto(Lotto winningLotto, LottoNumber bonus) {
+        checkWinningLotto(winningLotto, bonus);
         this.winningLotto = winningLotto;
-        this.bonusBall = bonusBall;
+        this.bonus = bonus;
     }
 
     private void checkWinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
@@ -28,7 +28,7 @@ public class WinningLotto {
 
     Rank matchLotto(Lotto lotto) {
         int countOfMatch = winningLotto.matchNumber(lotto);
-        boolean matchBonus = lotto.isContain(bonusBall);
+        boolean matchBonus = lotto.isContain(bonus);
         return Rank.valueOf(countOfMatch, matchBonus);
     }
 
@@ -38,12 +38,19 @@ public class WinningLotto {
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
         return Objects.equals(winningLotto, that.winningLotto) &&
-                Objects.equals(bonusBall, that.bonusBall);
+                Objects.equals(bonus, that.bonus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningLotto, bonusBall);
+        return Objects.hash(winningLotto, bonus);
     }
 
+    public Lotto getWinningNumbers() {
+        return winningLotto;
+    }
+
+    public LottoNumber getBonus() {
+        return bonus;
+    }
 }

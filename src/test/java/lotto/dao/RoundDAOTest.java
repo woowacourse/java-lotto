@@ -1,6 +1,7 @@
-package lotto.domain.dao;
+package lotto.dao;
 
 import lotto.db.DatabaseConnection;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
@@ -8,9 +9,14 @@ import java.sql.Connection;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoundDAOTest {
-    Connection connection = new DatabaseConnection().getConnection();
-    RoundDAO roundDAO = new RoundDAO(connection);
+    private Connection conn;
+    private RoundDAO roundDAO;
 
+    @BeforeEach
+    void setUp(){
+        conn = new DatabaseConnection().getConnection();
+        roundDAO = new RoundDAO(conn);
+    }
     @Test
     void 라운드_추가() throws Exception{
         int round = 2;

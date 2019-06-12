@@ -39,7 +39,7 @@ public class LottoNumber {
 
     }
 
-    int getNumber() {
+    public int getNumber() {
         return number;
     }
 
