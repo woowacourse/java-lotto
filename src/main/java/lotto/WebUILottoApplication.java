@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.controller.IndexController;
-import lotto.controller.LottoMoneyController;
-import lotto.controller.ManualLottoController;
-import lotto.controller.Path;
+import lotto.controller.*;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -20,6 +17,7 @@ public class WebUILottoApplication {
         post(Path.LOTTO_MONEY, LottoMoneyController.fetchLottoMoney);
         post(Path.NUM_OF_MANUAL_LOTTO, ManualLottoController.fetchNumOfManualLotto);
         post(Path.MANUAL_LOTTO, ManualLottoController.fetchManualLotto);
+        post(Path.AUTOMATIC_LOTTO, AutomaticLottoController.fetchAutomaticLotto);
     }
 
     public static String render(Map<String, Object> model, String templatePath) {

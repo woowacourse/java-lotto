@@ -1,6 +1,5 @@
 package lotto.application.lottoticket;
 
-import lotto.application.LottoSession;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoticket.InvalidLottoTicketException;
@@ -33,13 +32,6 @@ public class ManualLottoService {
     }
 
     public static LottoTicketDto getManualLottoDto(LottoTicket lottoTicket) {
-        LottoTicketDto lottoTicketDto = new LottoTicketDto();
-        lottoTicketDto.setFirstNum(lottoTicket.getLottoNumber(0).getNumber());
-        lottoTicketDto.setSecondNum(lottoTicket.getLottoNumber(1).getNumber());
-        lottoTicketDto.setThirdNum(lottoTicket.getLottoNumber(2).getNumber());
-        lottoTicketDto.setFourthNum(lottoTicket.getLottoNumber(3).getNumber());
-        lottoTicketDto.setFifthNum(lottoTicket.getLottoNumber(4).getNumber());
-        lottoTicketDto.setSixthNum(lottoTicket.getLottoNumber(5).getNumber());
-        return lottoTicketDto;
+        return LottoTicketAssembler.getLottoTicketDto(lottoTicket);
     }
 }
