@@ -34,8 +34,8 @@ class LottoResultTest {
     void 외부에서_맵_변경() {
         LottoResult result = new LottoResult();
         result.plus(Rank.FIRST);
-        assertEquals(1, result.results().get(Rank.FIRST));
+        assertEquals(1, result.results().getResults().get(Rank.FIRST));
         result.results().put(Rank.FIRST, 3);
-        assertEquals(1, result.results().get(Rank.FIRST));
+        assertEquals(1, result.results().getResults().get(Rank.FIRST));
     }
 }

@@ -8,11 +8,11 @@ public class LottoNumbers implements TicketNumbers {
     static final int NUMBER_COUNT = 6;
     private final List<TicketNumber> numbers;
 
-    public LottoNumbers() {
+    LottoNumbers() {
         this(LottoNumberPool.random());
     }
 
-    public LottoNumbers(List<TicketNumber> numbers) {
+    LottoNumbers(List<TicketNumber> numbers) {
         validate(numbers);
         this.numbers = Collections.unmodifiableList(numbers);
     }

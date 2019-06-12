@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.LottoResultDto;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class LottoResult {
                 .divide(new BigDecimal(LOTTO_MONEY), 3, RoundingMode.CEILING);
     }
 
-    public Map<Rank, Integer> results() {
-        return new TreeMap<>(results);
+    public LottoResultDto results() {
+        return new LottoResultDto(new TreeMap<>(results), summury());
     }
 }

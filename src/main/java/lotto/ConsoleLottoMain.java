@@ -22,7 +22,7 @@ public class ConsoleLottoMain {
         WinningTicket winningLotto = new WinningLotto(new WinningLottoDto(InputView.winningLottoNumber(),
                 InputView.winningLottoBonus()), new LottoCreator());
         LottoResult lottoResult = userLottos.result(winningLotto);
-        OutputView.printResult(lottoResult);
+        OutputView.printResult(lottoResult.results());
     }
 
     private static int toManualLottoCount(String number) {

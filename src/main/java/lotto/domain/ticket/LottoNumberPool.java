@@ -26,4 +26,8 @@ public class LottoNumberPool {
     private static void shuffle() {
         Collections.shuffle(ticketNumbers);
     }
+
+    public static void manual(List<Integer> intNumbers) {
+
+    }
 }
