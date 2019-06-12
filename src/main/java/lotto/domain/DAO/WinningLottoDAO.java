@@ -1,8 +1,10 @@
-package lotto.domain;
+package lotto.domain.DAO;
+
+import lotto.domain.User;
 
 import java.sql.*;
 
-public class UserDAO {
+public class WinningLottoDAO {
     public Connection getConnection() {
         Connection con = null;
         String server = "localhost"; // MySQL 서버 주소
@@ -31,6 +33,7 @@ public class UserDAO {
         return con;
     }
 
+
     public void closeConnection(Connection con) {
         try {
             if (con != null)
@@ -40,33 +43,20 @@ public class UserDAO {
         }
     }
 
-    public void addUser(User user) throws SQLException {
-        String query = "INSERT INTO user VALUES (?, ?)";
+    public void addWinningLottoInfo(int lottoRound, String winningNumber, int bonusBall) throws SQLException {
+        String query = "INSERT INTO winning_lotto_info VALUES (?, ?, ?)";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
-        pstmt.setString(1, user.getUserId());
-        pstmt.setString(2, user.getName());
+        pstmt.setInt(1,lottoRound);
+        pstmt.setString(2, winningNumber);
+        pstmt.setInt(3,bonusBall);
         pstmt.executeUpdate();
     }
 
-    public void updateByUserId(String updatedUserId, String updatedUserName, String userId) throws SQLException {
-        String query = "UPDATE user SET user_id=?, name=? WHERE user_id=?";
+    public void deleteWinningLottoInfoByLottoRound(int lottoRound) throws SQLException{
+        String query =  "DELETE FROM winning_lotto_info where lottoRound=?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
-        pstmt.setString(1, updatedUserId);
-        pstmt.setString(2, updatedUserName);
-        pstmt.setString(3, userId);
+        pstmt.setInt(1,lottoRound);
         pstmt.executeUpdate();
     }
 
-    public User findByUserId(String userId) throws SQLException {
-        String query = "SELECT * FROM user WHERE user_id = ?";
-        PreparedStatement pstmt = getConnection().prepareStatement(query);
-        pstmt.setString(1, userId);
-        ResultSet rs = pstmt.executeQuery();
-
-        if (!rs.next()) return null;
-
-        return new User(
-                rs.getString("user_id"),
-                rs.getString("name"));
-    }
 }

@@ -1,4 +1,6 @@
 package lotto.controller;
+import lotto.domain.DTO.LottoesDTO;
+import lotto.domain.DTO.ResultDTO;
 import lotto.Exception.InvalidCustomLottoNumberException;
 import lotto.Exception.InvalidPurchaseException;
 import lotto.Exception.InvalidWinningLottoException;

@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.DTO;
+
+import lotto.domain.Calculator;
+import lotto.domain.Rank;
 
 public class ResultDTO {
     private final int matchCount;
