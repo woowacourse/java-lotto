@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class LottoResult {
     private static final Map<Rank, Integer> result = new LinkedHashMap<>();

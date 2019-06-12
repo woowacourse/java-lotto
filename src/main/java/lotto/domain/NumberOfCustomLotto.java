@@ -23,7 +23,7 @@ public class NumberOfCustomLotto {
         if (Integer.parseInt(number) < LEAST_NUMBER) {
             throw new InvalidNumberOfCustomLottoException(Integer.parseInt(number));
         }
-        if (Integer.parseInt(number) > numberOfLotto){
+        if (Integer.parseInt(number) > numberOfLotto) {
             throw new InvalidNumberOfCustomLottoException(Integer.parseInt(number), numberOfLotto);
         }
         return Integer.parseInt(number);

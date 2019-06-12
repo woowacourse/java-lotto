@@ -2,7 +2,7 @@ package lotto.domain.exception;
 
 public class InvalidLottoException extends RuntimeException {
     public InvalidLottoException(int size) {
-        super(String.format("현재 로또 크기 : %d -> 로또 범위는 6개여야 합니다.",size));
+        super(String.format("현재 로또 크기 : %d -> 로또 범위는 6개여야 합니다.", size));
     }
 
     public InvalidLottoException(int checkValidateSize, int lottoNumbersSize) {

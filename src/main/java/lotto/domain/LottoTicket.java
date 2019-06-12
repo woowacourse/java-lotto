@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.*;
-import static lotto.domain.Price.LOTTO_PRICE;
 import static lotto.view.OutPutView.NEW_LINE;
 
 public class LottoTicket {
