@@ -3,22 +3,41 @@ package lotto.dto;
 import lotto.domain.Rank;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 
 public class LottoResultDto {
+    private static final int LOTTO_UNIT_PRICE = 1000;
     private final Map<Rank, Integer> results;
-    private final BigDecimal summury;
 
-    public LottoResultDto(Map<Rank, Integer> results, BigDecimal summury) {
+    public LottoResultDto(Map<Rank, Integer> results) {
         this.results = results;
-        this.summury = summury;
+    }
+
+    private BigDecimal summary() {
+        int sumOfRank = 0;
+        int sumOfTickets = 0;
+        for (Map.Entry<Rank, Integer> entry : results.entrySet()) {
+            sumOfRank += entry.getKey().money() * entry.getValue();
+            sumOfTickets += entry.getValue();
+        }
+        return toBigDecimal(sumOfRank, sumOfTickets);
+    }
+
+    private BigDecimal toBigDecimal(int numerator, int denominator) {
+        if (denominator == 0) {
+            return new BigDecimal(numerator);
+        }
+        return new BigDecimal(numerator)
+                .divide(new BigDecimal(denominator), 3, RoundingMode.CEILING)
+                .divide(new BigDecimal(LOTTO_UNIT_PRICE), 3, RoundingMode.CEILING);
     }
 
     public Map<Rank, Integer> getResults() {
         return results;
     }
 
-    public BigDecimal getSummury() {
-        return summury;
+    public BigDecimal getSummary() {
+        return summary();
     }
 }
