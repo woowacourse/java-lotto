@@ -15,19 +15,21 @@ import lotto.view.OutputView;
 public class ConsoleLottoMain {
     public static void main(String[] args) {
         String lottoMoney = InputView.lottoMoney();
-        int manualCount;
-        try {
-            manualCount = Integer.parseInt(InputView.manualLottoCount());
-        } catch (NumberFormatException e) {
-            throw new LottoTicketException(ExceptionMessages.TICKET.message());
-        }
+        int manualCount = toManualLottoCount(InputView.manualLottoCount());
         UserLottoDto userLottoDto = new UserLottoDto(lottoMoney, manualCount, InputView.manualLottoNumber(manualCount));
         UserLottos userLottos = new UserLottos(userLottoDto);
         OutputView.printLottos(userLottos);
-        WinningTicket winningLotto =
-                new WinningLotto(new WinningLottoDto(InputView.winningLottoNumber(),
-                        InputView.winningLottoBonus()), new LottoCreator());
+        WinningTicket winningLotto = new WinningLotto(new WinningLottoDto(InputView.winningLottoNumber(),
+                InputView.winningLottoBonus()), new LottoCreator());
         LottoResult lottoResult = userLottos.result(winningLotto);
         OutputView.printResult(lottoResult);
+    }
+
+    private static int toManualLottoCount(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new LottoTicketException(ExceptionMessages.TICKET.message());
+        }
     }
 }
