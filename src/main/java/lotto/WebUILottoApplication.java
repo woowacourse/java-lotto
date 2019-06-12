@@ -17,9 +17,6 @@ import static spark.Spark.*;
 public class WebUILottoApplication {
     private final static String DELIMITER = "\r\n";
 
-    private static Lottos lottos;
-    private static Integer round;
-
     public static void main(String[] args) throws SQLException {
         staticFiles.location("/static");
         Connection connection = DBManager.getConnection();
@@ -46,10 +43,15 @@ public class WebUILottoApplication {
             List<String> inputManualLottoNumbers = Arrays.asList(req.queryParams("manualLottoNumbers").split(DELIMITER));
             LottosFactory lottosFactory = new LottosFactory(inputManualLottoNumbers, lottoCount);
             Lottos currentLottos = lottosFactory.generateTotalLottos();
-            setLottos(currentLottos);
-            round = DBAccessor.getNextRound(connection);
+            Integer round = DBAccessor.getNextRound(connection);
+
+            // Session
+            req.session(true);
+            req.session().attribute("lottos", currentLottos);
+            req.session().attribute("round", round);
+
             DBAccessor.loadDBRoundTable(connection, round);
-            DBAccessor.loadDBLottoTable(connection, round, lottos);
+            DBAccessor.loadDBLottoTable(connection, round, currentLottos);
 
             return render(getLottoModel(lottoCount, currentLottos), "winningLotto.html");
         });
@@ -57,8 +59,9 @@ public class WebUILottoApplication {
         post("/lottoResult", (req, res) -> {
             WinningLotto winningLotto = new WinningLotto(new Lotto(ConvertLottoNumber.run(req.queryParams("winningNumbers"))),
                     LottoNumber.getInstance(Integer.parseInt(req.queryParams("bonusNumber"))));
-            LottoResult lottoResult = new LottoResult(winningLotto, lottos);
+            LottoResult lottoResult = new LottoResult(winningLotto, req.session().attribute("lottos"));
 
+            Integer round = req.session().attribute("round");
             DBAccessor.loadDBWinningLottoTable(connection, round, winningLotto);
             DBAccessor.loadDBLottoResultTable(connection, round, lottoResult);
 
@@ -111,9 +114,5 @@ public class WebUILottoApplication {
 
     private static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
-    }
-
-    private static void setLottos(Lottos currentLottos) {
-        lottos = currentLottos;
     }
 }
