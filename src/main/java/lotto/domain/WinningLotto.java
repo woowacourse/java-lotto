@@ -7,20 +7,21 @@ import java.util.*;
 
 import static java.util.Collections.sort;
 import static java.util.stream.Collectors.*;
+import static lotto.view.InputView.SPLIT_REGEX;
 
 public class WinningLotto extends Lotto {
 
     private BonusBall bonusBall;
 
-    public WinningLotto(String[] inputWinLottoNumber, String bonusBall) {
+    public WinningLotto(String inputWinLottoNumber, String bonusBall) {
         this.lottoNumbers = invalidWinningLottoNumbers(inputWinLottoNumber);
         sort(lottoNumbers, new AscendingNumber());
         this.bonusBall = new BonusBall(this.lottoNumbers, bonusBall);
     }
 
-    private List<LottoNumber> invalidWinningLottoNumbers(String[] winningLotto) {
+    private List<LottoNumber> invalidWinningLottoNumbers(String winningLotto) {
         try {
-            return invalidNumberOfLotto(Arrays.stream(winningLotto)
+            return invalidNumberOfLotto(Arrays.stream(winningLotto.split(SPLIT_REGEX))
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .map(LottoNumber::new)

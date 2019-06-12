@@ -30,13 +30,13 @@ public abstract class Lotto {
         return lottoNumbers;
     }
 
-    protected int numberOfMatch(List<LottoNumber> winningLotto) {
+    public int numberOfMatch(List<LottoNumber> winningLotto) {
         return (int) lottoNumbers.stream()
                 .filter(winningLotto::contains)
                 .count();
     }
 
-    protected boolean bonusOfMatch(BonusBall ball) {
+    public boolean bonusOfMatch(BonusBall ball) {
         return lottoNumbers.contains(ball.getBonus());
     }
 
