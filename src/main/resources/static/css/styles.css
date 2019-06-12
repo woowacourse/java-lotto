@@ -18,6 +18,10 @@ table {
     font-family: hanna_air;
 }
 
+.container {
+    margin-top: 30px;
+}
+
 .ball {
     border-radius: 50%;
     width: 60px;
