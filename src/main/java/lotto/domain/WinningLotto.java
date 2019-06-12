@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.TicketModel.*;
+import lotto.domain.ticket.*;
 import lotto.dto.WinningLottoDto;
 
 public class WinningLotto implements WinningTicket {

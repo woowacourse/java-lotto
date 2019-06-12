@@ -1,4 +1,4 @@
-package lotto.domain.TicketModel;
+package lotto.domain.ticket;
 
 
 import java.util.ArrayList;

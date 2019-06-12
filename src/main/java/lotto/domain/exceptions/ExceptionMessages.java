@@ -1,4 +1,4 @@
-package lotto.domain.Exceptions;
+package lotto.domain.exceptions;
 
 public enum ExceptionMessages {
     TICKET("로또 티켓을 발급할 수 없습니다."),

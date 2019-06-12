@@ -1,6 +1,6 @@
-package lotto.domain.TicketModel;
+package lotto.domain.ticket;
 
-import lotto.domain.Exceptions.LottoNumberException;
+import lotto.domain.exceptions.LottoNumberException;
 
 import java.util.Objects;
 

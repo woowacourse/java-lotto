@@ -1,8 +1,8 @@
-package lotto.domain.TicketModel;
+package lotto.domain.ticket;
 
-import lotto.domain.Exceptions.LottoNumberException;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
+import lotto.domain.exceptions.LottoNumberException;
 import lotto.dto.WinningLottoDto;
 import org.junit.jupiter.api.Test;
 

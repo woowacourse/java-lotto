@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import lotto.domain.Exceptions.LottoNumberException;
+import lotto.domain.exceptions.LottoNumberException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

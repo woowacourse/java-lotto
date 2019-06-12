@@ -2,8 +2,8 @@ package lotto.view;
 
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
-import lotto.domain.TicketModel.Ticket;
 import lotto.domain.UserLottos;
+import lotto.domain.ticket.Ticket;
 
 import java.util.Map;
 

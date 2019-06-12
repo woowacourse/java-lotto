@@ -1,7 +1,7 @@
 package lotto.dto;
 
-import lotto.domain.Exceptions.ExceptionMessages;
-import lotto.domain.Exceptions.LottoNumberException;
+import lotto.domain.exceptions.ExceptionMessages;
+import lotto.domain.exceptions.LottoNumberException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.Exceptions.ExceptionMessages;
-import lotto.domain.Exceptions.LottoTicketException;
-import lotto.domain.TicketModel.LottoCreator;
-import lotto.domain.TicketModel.Ticket;
-import lotto.domain.TicketModel.TicketCreator;
-import lotto.domain.TicketModel.WinningTicket;
+import lotto.domain.exceptions.ExceptionMessages;
+import lotto.domain.exceptions.LottoTicketException;
+import lotto.domain.ticket.LottoCreator;
+import lotto.domain.ticket.Ticket;
+import lotto.domain.ticket.TicketCreator;
+import lotto.domain.ticket.WinningTicket;
 import lotto.dto.UserLottoDto;
 
 import java.util.ArrayList;
