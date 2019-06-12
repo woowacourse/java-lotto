@@ -4,7 +4,6 @@ import java.util.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import lotto.creator.LottoCreator;
 import lotto.creator.LottosFactory;
 import lotto.creator.ManualLottoCreator;
 import lotto.dao.LottosDao;
@@ -47,7 +46,7 @@ public class WebUILottoApplication {
             Lottos lottos = LottosFactory.create(manuals, money);
             int times = winningLottoDao.nextWinningLottoTimes();
             moneyDao.addMoney(money, times);
-            lottosDao.addLottos(lottos, times);
+            addLottos(lottos, times);
 
             try {
                 return lottos.getLottos();
@@ -92,7 +91,7 @@ public class WebUILottoApplication {
         get("/lottoNextTimes", (req, res) -> {
             int latelyTimes = winningLottoDao.nextWinningLottoTimes();
 
-            return latelyTimes + 1;
+            return latelyTimes;
         });
 
         get("/lotto/money/:Times", (req, res) -> {
@@ -177,7 +176,7 @@ public class WebUILottoApplication {
     }
 
     private static void addLottos(Lottos lottos, int times) throws Exception {
-
+        lottosDao.deleteLottos(times);
         lottosDao.addLottos(lottos, times);
     }
 }
