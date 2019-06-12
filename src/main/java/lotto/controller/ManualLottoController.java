@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.application.LottoSession;
-import lotto.application.lottoticket.ManualLottoService;
+import lotto.application.lottoticket.LottoTicketService;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.dto.LottoTicketDto;
 import spark.Route;
@@ -13,7 +13,7 @@ public class ManualLottoController {
     public static final Route fetchNumOfManualLotto = (req, res) -> {
         String num = req.queryParams("num");
 
-        long numOfManualLotto = ManualLottoService.getNumOfManualLotto(num, LottoSession.getNumOfLotto());
+        long numOfManualLotto = LottoTicketService.getNumOfManualLotto(num, LottoSession.getNumOfLotto());
         JsonUtil.setResponseTypeForJson(res);
         return "{\"numOfManualLotto\":\"" + numOfManualLotto + "\"}";
     };
@@ -27,10 +27,10 @@ public class ManualLottoController {
         numbers.add(req.queryParams("fifthNum"));
         numbers.add(req.queryParams("sixthNum"));
 
-        LottoTicket lottoTicket = ManualLottoService.getManualLotto(numbers);
+        LottoTicket lottoTicket = LottoTicketService.makeLottoTicket(numbers);
         LottoSession.addManualLottoTicket(lottoTicket);
 
-        LottoTicketDto lottoTicketDto = ManualLottoService.getManualLottoDto(lottoTicket);
+        LottoTicketDto lottoTicketDto = LottoTicketService.getLottoTicketDto(lottoTicket);
 
         return JsonUtil.convertDtoToJsonStringWith(res, lottoTicketDto);
     };
