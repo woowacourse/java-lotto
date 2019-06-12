@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 class LottosDAOTest {
     Connection connection = new DatabaseConnection().getConnection();
@@ -23,7 +25,7 @@ class LottosDAOTest {
     @Test
     public void Lotto_조회() throws Exception {
         lottosDAO.addLottos(1,new Lottos(lottos));
-        lottosDAO.findLottoByRound(1);
+        assertThat(lottosDAO.findLottoByRound(1)).isEqualTo(new Lottos(lottos));
     }
 
 }
