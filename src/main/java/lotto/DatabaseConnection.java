@@ -1,7 +1,5 @@
 package lotto;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,13 +19,13 @@ public class DatabaseConnection {
         }
 
         try {
-            StrBuilder strBuilder = new StrBuilder();
-            strBuilder.append("jdbc:mysql://")
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("jdbc:mysql://")
                     .append(server)
                     .append("/")
                     .append(database)
                     .append("?useSSL=false&serverTimezone=UTC");
-            connection = DriverManager.getConnection(strBuilder.toString(), userName, password);
+            connection = DriverManager.getConnection(stringBuilder.toString(), userName, password);
             System.out.println("정상적으로 연결 되었습니다.");
         } catch (SQLException e) {
             System.out.println("연결 오류 : " + e.getMessage());
