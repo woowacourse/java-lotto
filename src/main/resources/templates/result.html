@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+<div>
+    {{#each result.result}}
+        <p>{{@key.countOfMatch}}개 일치 ({{@key.winningAmount}}원) - {{this}}개</p>
+    {{/each}}
+</div>
+<div>
+    수익률 : {{result.revenueRate}}%<br/><br/>
+</div>
+<div>
+    <form action="/">
+        <input type="submit" value="처음으로">
+    </form>
+</div>
+</body>
+</html>
