@@ -10,13 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class WinningLottoDAO {
+public class WinningLottoDao {
     private static final String INSERT_WINNING_LOTTO_SQL = "INSERT INTO winninglotto(win_1,win_2,win_3,win_4,win_5,win_6,bonus,round_id) values(?,?,?,?,?,?,?,?)";
     private static final String SELECT_WINNING_LOTTO_SQL = "SELECT * FROM winninglotto WHERE round_id=?";
 
     private final Connection conn;
 
-    public WinningLottoDAO(final Connection conn) {
+    public WinningLottoDao(final Connection conn) {
         this.conn = conn;
     }
 

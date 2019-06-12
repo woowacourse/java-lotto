@@ -13,15 +13,15 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinningLottoDAOTest {
+class WinningLottoDaoTest {
     private Connection conn;
-    private WinningLottoDAO winningLottoDAO;
+    private WinningLottoDao winningLottoDAO;
     private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
         conn = new DatabaseConnection().getConnection();
-        winningLottoDAO = new WinningLottoDAO(conn);
+        winningLottoDAO = new WinningLottoDao(conn);
         Lotto winningNumbers = new Lotto(Arrays.asList(1,2,3,10,11,12));
         LottoNumber lottoNumber = LottoNumber.valueOf(19);
         winningLotto = new WinningLotto(winningNumbers,lottoNumber);

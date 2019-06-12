@@ -14,16 +14,16 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-class LottosDAOTest {
+class LottosDaoTest {
 
     private Connection conn;
-    private LottosDAO lottosDAO;
+    private LottosDao lottosDAO;
     private List<Lotto> lottos;
 
     @BeforeEach
     public void setUp() {
         conn = new DatabaseConnection().getConnection();
-        lottosDAO = new LottosDAO(conn);
+        lottosDAO = new LottosDao(conn);
         lottos = Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6)));
     }
 

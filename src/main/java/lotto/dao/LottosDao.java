@@ -11,13 +11,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottosDAO {
+public class LottosDao {
     private static final String INSERT_SQL = "INSERT INTO lotto(num_1,num_2,num_3,num_4,num_5,num_6,round_id) values(?,?,?,?,?,?,?)";
     private static final String SELECT_SQL = "SELECT * FROM lotto WHERE round_id = ?";
 
     private final Connection conn;
 
-    public LottosDAO(final Connection conn) {
+    public LottosDao(final Connection conn) {
         this.conn = conn;
     }
 

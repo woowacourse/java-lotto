@@ -5,13 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RoundDAO {
+public class RoundDao {
     private static final String INSERT_SQL = "INSERT INTO round(id_) values(?)";
     private static final String SELECT_LAST_ROUND_SQL = "SELECT MAX(id_) FROM round";
 
     private final Connection conn;
 
-    public RoundDAO(final Connection conn) {
+    public RoundDao(final Connection conn) {
         this.conn = conn;
     }
 

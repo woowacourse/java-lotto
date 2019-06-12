@@ -8,14 +8,14 @@ import java.sql.Connection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RoundDAOTest {
+public class RoundDaoTest {
     private Connection conn;
-    private RoundDAO roundDAO;
+    private RoundDao roundDAO;
 
     @BeforeEach
     void setUp(){
         conn = new DatabaseConnection().getConnection();
-        roundDAO = new RoundDAO(conn);
+        roundDAO = new RoundDao(conn);
     }
     @Test
     void 라운드_추가() throws Exception{
