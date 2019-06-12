@@ -32,9 +32,14 @@ public enum Rank {
             return MISS;
         }
 
+        if ((countOfMatch == SECOND.countOfMatch) && (bonusMatch == true)) {
+            return SECOND;
+        }
+
         List<Rank> allRank = Arrays.asList(Rank.values());
         List<Rank> matchRank = allRank.stream()
-                .filter(rank -> ((rank.countOfMatch == countOfMatch) && (rank.bonusMatch == bonusMatch)))
+                .filter(rank -> rank.bonusMatch == false)
+                .filter(rank -> rank.countOfMatch == countOfMatch)
                 .collect(Collectors.toList());
 
         if (matchRank.size() == 1) {
