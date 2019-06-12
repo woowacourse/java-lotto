@@ -13,12 +13,20 @@ public class PurchaseAmount {
         this.money = money;
     }
 
-    public static PurchaseAmount create(String moneyText) {
+    private static PurchaseAmount create(String moneyText) {
         try {
             return new PurchaseAmount(Integer.parseInt(moneyText.trim()));
         } catch (NumberFormatException e) {
             throw new PurchaseAmountException("구입 금액은 숫자로 구성하세요.");
         }
+    }
+
+    public static PurchaseAmount createLottoPurchaseAmount(String moneyText) {
+        PurchaseAmount lottoPurchaseAmount = create(moneyText);
+        if (lottoPurchaseAmount.canBuy(LottoTicket.PRICE)) {
+            return lottoPurchaseAmount;
+        }
+        throw new PurchaseAmountException("로또 최소 구입 금액은 1000원 입니다.");
     }
 
     private void validatePurchaseAmount(int money) {

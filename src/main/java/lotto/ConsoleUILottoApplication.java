@@ -33,6 +33,7 @@ public class ConsoleUILottoApplication {
         OutputView.printChange(change);
 
         LottoResult lottoResult = lottos.match(createWinningLotto());
+
         OutputView.printLottoResult(lottoResult);
     }
 
