@@ -2,11 +2,11 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.domain.generate.LottosFactory;
-import lotto.utils.Converter;
-import lotto.utils.ResultMessage;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -42,10 +42,41 @@ public class WebUILottoApplication {
                 }
         );
 
+        post("/lottos", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<String> selfInput = Arrays.asList(req.queryParams("selfLottos").split("\r\n"));
+            LottosFactory lottosFactory = req.session().attribute("lottosFactory");
+            Lottos lottos = lottosFactory.generateLottos(selfInput, req.session().attribute("price"));
+            model.put("lottos", lottos.getLottos());
+            req.session().attribute("lottos", lottos);
+
+            return render(model, "lottos.html");
+        });
+
+
+
+
+
+
+        exception(Exception.class, (exception, req, res) -> {
+            String message = null;
+            try {
+                message = encodeUTF8(exception.getMessage());
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            res.redirect("/?message=" + message);
+
+        });
+
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
+    }
+
+    private static String encodeUTF8(final String message) throws UnsupportedEncodingException {
+        return URLEncoder.encode(message, "UTF-8");
     }
 
 }
