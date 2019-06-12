@@ -10,13 +10,13 @@ class PurchaseAmountTest {
     @Test
     void 금액_생성_실패() {
         assertThrows(PurchaseAmountException.class, () -> {
-            PurchaseAmount.create("-10");
+            PurchaseAmount.createLottoPurchaseAmount("-10");
         });
     }
 
     @Test
     void 거스름돈_확인() {
-        PurchaseAmount purchaseAmount = PurchaseAmount.create("1300");
+        PurchaseAmount purchaseAmount = PurchaseAmount.createLottoPurchaseAmount("1300");
         PurchaseAmount change = purchaseAmount.buy(LottoTicket.PRICE);
         assertThat(change.getMoney()).isEqualTo(300);
     }
