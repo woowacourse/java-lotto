@@ -27,12 +27,14 @@ class LottoTicketAssembler {
         return lottoTicketDto;
     }
 
-    static LottoTicketsDto getLottoTicketsDto(long numOfAutomaticLotto) {
-        LottoTickets automaticTickets = LottoTicketingMachine.generateLottoTickets(numOfAutomaticLotto
+    static LottoTickets getAutomaticLottoTickets(long numOfAutomaticLotto) {
+        return LottoTicketingMachine.generateLottoTickets(numOfAutomaticLotto
                 , new RandomLottoNumberGenerator());
+    }
 
+    static LottoTicketsDto getLottoTicketsDto(LottoTickets automaticTickets) {
         List<LottoTicketDto> lottoTicketDtoes = new ArrayList<>();
-        for (int index = 0; index < numOfAutomaticLotto; index++) {
+        for (int index = 0; index < automaticTickets.size(); index++) {
             LottoTicketDto lottoTicketDto = getLottoTicketDto(automaticTickets.getTicket(index));
             lottoTicketDtoes.add(lottoTicketDto);
         }

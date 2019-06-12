@@ -5,6 +5,7 @@ import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoresult.WinningLotto;
 import lotto.domain.lottoticket.InvalidLottoTicketException;
 import lotto.domain.lottoticket.LottoTicket;
+import lotto.domain.lottoticket.LottoTickets;
 import lotto.domain.lottoticket.dto.LottoTicketDto;
 import lotto.domain.lottoticket.dto.LottoTicketsDto;
 import lotto.domain.lottoticket.dto.WinningLottoDto;
@@ -38,9 +39,13 @@ public class LottoTicketService {
         return LottoTicketAssembler.getLottoTicketDto(lottoTicket);
     }
 
-    public static LottoTicketsDto getLottoTicketsDto(String num) {
+    public static LottoTickets getAutomaticLottoTickets(String num) {
         long numOfAutomaticLotto = Long.parseLong(num);
-        return LottoTicketAssembler.getLottoTicketsDto(numOfAutomaticLotto);
+        return LottoTicketAssembler.getAutomaticLottoTickets(numOfAutomaticLotto);
+    }
+
+    public static LottoTicketsDto getLottoTicketsDto(LottoTickets automaticTickets) {
+        return LottoTicketAssembler.getLottoTicketsDto(automaticTickets);
     }
 
     public static LottoNumber makeBonusBall(String num) {

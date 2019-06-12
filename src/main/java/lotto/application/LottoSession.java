@@ -2,13 +2,11 @@ package lotto.application;
 
 import lotto.domain.lottoresult.WinningLotto;
 import lotto.domain.lottoticket.LottoTicket;
-
-import java.util.ArrayList;
-import java.util.List;
+import lotto.domain.lottoticket.LottoTickets;
 
 public class LottoSession {
     private static long numOfLotto;
-    private static List<LottoTicket> manualLottoTickets = new ArrayList<>();
+    private static LottoTickets lottoTickets = new LottoTickets();
     private static WinningLotto winningLotto;
 
     public static void setNumOfLotto(long numOfLotto) {
@@ -19,12 +17,16 @@ public class LottoSession {
         return numOfLotto;
     }
 
-    public static void addManualLottoTicket(LottoTicket lottoTicket) {
-        manualLottoTickets.add(lottoTicket);
+    public static void addLottoTicket(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
     }
 
-    public static LottoTicket getManualLottoTicket(int index) {
-        return manualLottoTickets.get(index);
+    public static LottoTicket getLottoTicket(int index) {
+        return lottoTickets.getTicket(index);
+    }
+
+    public static void joinLottoTickets(LottoTickets newLottoTickets) {
+        lottoTickets = LottoTickets.join(lottoTickets, newLottoTickets);
     }
 
     public static WinningLotto getWinningLotto() {

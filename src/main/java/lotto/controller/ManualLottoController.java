@@ -28,7 +28,7 @@ public class ManualLottoController {
         numbers.add(req.queryParams("sixthNum"));
 
         LottoTicket lottoTicket = LottoTicketService.makeLottoTicket(numbers);
-        LottoSession.addManualLottoTicket(lottoTicket);
+        LottoSession.addLottoTicket(lottoTicket);
 
         LottoTicketDto lottoTicketDto = LottoTicketService.getLottoTicketDto(lottoTicket);
 
