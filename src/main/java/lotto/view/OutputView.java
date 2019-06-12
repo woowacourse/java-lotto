@@ -24,7 +24,7 @@ public class OutputView {
         for (Rank rank : rankInformation.keySet()) {
             printRankEach(rank, rankInformation.get(rank));
         }
-        System.out.println(new BigDecimal(winningRate).setScale(3, RoundingMode.HALF_EVEN)+"%");
+        System.out.println(new BigDecimal(winningRate).setScale(3, RoundingMode.HALF_EVEN) + "%");
     }
 
     public static void printRankEach(Rank rank, int nums) {

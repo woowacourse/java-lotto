@@ -10,6 +10,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_NUMBER = 45;
     private static final int MINIMUN_NUMBER = 1;
     private static final List<LottoNumber> LOTTO_NUMBER_POOL;
+    private final int number;
 
     static {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -19,19 +20,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
         LOTTO_NUMBER_POOL = Collections.unmodifiableList(lottoNumbers);
     }
 
-    private final int number;
-
     private LottoNumber(int number) {
         this.number = number;
+    }
+    public static LottoNumber of(int number) {
+        validRange(number);
+        return LOTTO_NUMBER_POOL.get(number - 1);
     }
 
     public static List<LottoNumber> getLottoNumberPool() {
         return LOTTO_NUMBER_POOL;
-    }
-
-    public static LottoNumber of(int number) {
-        validRange(number);
-        return LOTTO_NUMBER_POOL.get(number - 1);
     }
 
     private static void validRange(final int number) {

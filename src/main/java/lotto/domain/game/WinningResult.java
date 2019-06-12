@@ -4,7 +4,6 @@ import lotto.domain.machine.Money;
 import lotto.domain.ticket.LottoTickets;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class WinningResult {
     private Map<Rank, Integer> rankResultInformation;

@@ -5,8 +5,11 @@ import lotto.domain.game.WinningResult;
 import lotto.domain.machine.Money;
 import lotto.domain.machine.Purchase;
 import lotto.domain.machine.VendingMachine;
+import lotto.domain.machine.exeption.InvalidManualNumException;
+import lotto.domain.machine.exeption.InvalidMinimumMoneyException;
 import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.exception.InvalidDuplicatedNumberException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -46,7 +49,7 @@ public class LottoApplication {
     private static Money insertMoney(int moneyAmount) {
         try {
             return Money.of(moneyAmount);
-        } catch (Exception e) {
+        } catch (InvalidMinimumMoneyException e) {
             return insertMoney(moneyAmount);
         }
     }
@@ -55,6 +58,9 @@ public class LottoApplication {
         try {
             int manualTicketQuantity = InputView.getManualTicketQuantity();
             return vendingMachine.createPurchase(manualTicketQuantity, InputView.getManualNumbers(manualTicketQuantity));
+        } catch (InvalidManualNumException e) {
+            System.out.println(e);
+            return doPurchase(vendingMachine);
         } catch (Exception e) {
             System.out.println(e);
             return doPurchase(vendingMachine);
@@ -65,7 +71,11 @@ public class LottoApplication {
     private static LottoTickets makeLotto(final VendingMachine vendingMachine, final Purchase purchase) {
         try {
             return vendingMachine.createLotto(purchase);
+        }catch (RuntimeException e) {
+            System.out.println(e);
+            return makeLotto(vendingMachine, purchase);
         } catch (Exception e) {
+            System.out.println(e);
             return makeLotto(vendingMachine, purchase);
         }
     }

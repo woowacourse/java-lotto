@@ -10,13 +10,12 @@ import java.util.Random;
 
 public class AutomaticGenerator implements Generator {
     private static List<LottoNumber> randomLottoNumberPull;
+    private int quantity;
 
     static {
         randomLottoNumberPull = new ArrayList<>();
         randomLottoNumberPull.addAll(LottoNumber.getLottoNumberPool());
     }
-
-    private int quantity;
 
     public AutomaticGenerator(int quantity) {
         this.quantity = quantity;
@@ -36,7 +35,6 @@ public class AutomaticGenerator implements Generator {
 
     private List<LottoNumber> generateNumber() {
         final int INIT_INDEX = 0;
-
         Collections.shuffle(randomLottoNumberPull, new Random());
         return randomLottoNumberPull.subList(INIT_INDEX, LottoTicket.getMaxLottoTicketNumber());
     }

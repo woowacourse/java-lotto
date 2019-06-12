@@ -10,7 +10,14 @@ public class LottoTickets {
     private List<LottoTicket> lottoTickets;
 
     public LottoTickets(final List<LottoTicket> lottoTickets) {
+        validateMinimumTicketNumber(lottoTickets);
         this.lottoTickets = lottoTickets;
+    }
+
+    private void validateMinimumTicketNumber(final List<LottoTicket> lottoTickets) {
+        if (lottoTickets.size() <= 0) {
+            throw new IllegalArgumentException("최소 한장의 티켓이 있어야 합니다.");
+        }
     }
 
     public LottoTicket getIdxLottoTicket(int order) {

@@ -5,9 +5,10 @@ import lotto.domain.ticket.LottoTicket;
 
 import java.util.List;
 
-public class WinningLotto{
+public class WinningLotto {
     private final LottoTicket lottoTicket;
     private final LottoNumber bonusNumber;
+
     private WinningLotto(final List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
         this.lottoTicket = new LottoTicket(lottoNumbers);
         this.bonusNumber = bonusNumber;

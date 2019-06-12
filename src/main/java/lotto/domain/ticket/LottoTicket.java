@@ -46,10 +46,6 @@ public class LottoTicket {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    public SortedSet<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     @Override
     public String toString() {
         return Joiner.on(", ").join(lottoNumbers);
