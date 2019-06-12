@@ -3,7 +3,6 @@ package lotto.domain.dao;
 import lotto.db.DatabaseConnection;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
