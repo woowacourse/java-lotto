@@ -47,4 +47,12 @@ public class DBManager {
             System.err.println("con 오류:" + e.getMessage());
         }
     }
+
+    public static void startTransection(Connection con) throws SQLException {
+        con.setAutoCommit(false);
+    }
+
+    public static void endTransection(Connection con) throws SQLException {
+        con.commit();
+    }
 }

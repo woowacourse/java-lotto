@@ -19,9 +19,10 @@ public class WebUILottoApplication {
     private static Lottos lottos;
     private static Integer round;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         staticFiles.location("/static");
         Connection connection = DBManager.getConnection();
+        DBManager.startTransection(connection);
 
         get("/show", (req, res) -> {
             List<String> rounds = new ArrayList<>();
@@ -36,13 +37,8 @@ public class WebUILottoApplication {
         });
 
         get("/showLottoInfo", (req, res) -> {
-            String lottoRound = req.queryParams("lottoRound");
-            Map<String, Object> model = new HashMap<>();
-            model.put("lottoRound", lottoRound);
-            model.put("lottos", getDBLottos(connection, lottoRound));
-            model.put("winningLotto", getDBWinningLotto(connection, lottoRound));
-            model.put("lottoResult", getDBLottoResultDTO(connection, lottoRound));
-            return render(model, "showLottoInfo.html");
+           // String lottoRound = req.queryParams("lottoRound");
+            return getModel(connection, req.queryParams("lottoRound"));
         });
 
         post("/winningLotto", (req, res) -> {
@@ -68,6 +64,7 @@ public class WebUILottoApplication {
             loadDBWinningLottoTable(connection, winningLotto);
             LottoResult lottoResult = new LottoResult(winningLotto, lottos);
             loadDBLottoResultTable(connection, lottoResult);
+            DBManager.endTransection(connection);
 
             Map<String, Object> model = new HashMap<>();
             model.put("first", lottoResult.getCountOfRank(FIRST));
@@ -85,6 +82,15 @@ public class WebUILottoApplication {
             response.body(errorPageInfo.append("에러:").append(exception.getMessage()).append("<br/><br/>")
                     .append("<input type=\"button\" value=\"뒤로가기\" onclick=\"history.back(-1);\">").toString());
         });
+    }
+
+    private static String getModel(Connection connection, String lottoRound) throws SQLException {
+        Map<String, Object> model = new HashMap<>();
+        model.put("lottoRound", lottoRound);
+        model.put("lottos", getDBLottos(connection, lottoRound));
+        model.put("winningLotto", getDBWinningLotto(connection, lottoRound));
+        model.put("lottoResult", getDBLottoResultDTO(connection, lottoRound));
+        return render(model, "showLottoInfo.html");
     }
 
     private static Lottos getDBLottos(Connection connection, String lottoRound) throws SQLException {
