@@ -15,22 +15,14 @@ public class LottosResult {
     private final Map<Rank, Integer> lottosResult = new EnumMap<>(Rank.class);
 
     public LottosResult(WinningLotto winningLotto, Lottos myLottos) {
-        setUpResult();
-
         for (Lotto lotto : myLottos.getLottos()) {
             Rank rank = winningLotto.matchRank(lotto);
-            lottosResult.put(rank, lottosResult.get(rank) + 1);
-        }
-    }
-
-    private void setUpResult() {
-        for (Rank rank : Rank.values()) {
-            lottosResult.put(rank, INITIAL_NUMBER);
+            lottosResult.put(rank, lottosResult.getOrDefault(rank, 0) + 1);
         }
     }
 
     public int valueOf(Rank rank) {
-        return lottosResult.get(rank);
+        return lottosResult.getOrDefault(rank, 0);
     }
 
     public double getROI() {
@@ -44,7 +36,7 @@ public class LottosResult {
         long totalWinnigMoney = INITIAL_NUMBER;
 
         for (Rank rank : Rank.values()) {
-            totalWinnigMoney += rank.getWinningMoney() * lottosResult.get(rank);
+            totalWinnigMoney += rank.getWinningMoney() * lottosResult.getOrDefault(rank, 0);
         }
         return totalWinnigMoney;
     }
