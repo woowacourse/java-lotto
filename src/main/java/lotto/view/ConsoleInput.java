@@ -54,30 +54,33 @@ public class ConsoleInput {
         return input.split(INPUT_DELIMITER);
     }
 
-    // 입력된 문자열을 자연수로 형변환할 수 있을지 테스트
+    private static String getInputFirstToken(final String message) {
+        return getInput(message)[0];
+    }
+
     private static boolean isOnlyNumber(final String string) {
         if (string.length() == 0) {
-            return false; // 빈 문자열은 취급하지 않는다.
+            return false;
         }
         return string.chars() // String -> IntStream
                 .map(i -> (i - '0')) // 형변환 발생
-                .noneMatch(i -> (i < 0 || i > 9)); // 0부터 9 사이의 숫자인가
+                .noneMatch(i -> (i < 0 || i > 9));
     }
 
     private static int getSingleInt(final String message) {
-        String temp = getInput(message)[0];
-        boolean check = isOnlyNumber(temp);
-        while (!check) { // 입력에 문제가 있으면 계속 재입력 요구
-            temp = getInput(ERROR_INPUT_NUMBER)[0];
-            check = isOnlyNumber(temp);
+        String rawInput = getInputFirstToken(message);
+        boolean check = isOnlyNumber(rawInput);
+        while (!check) {
+            rawInput = getInputFirstToken(ERROR_INPUT_NUMBER);
+            check = isOnlyNumber(rawInput);
         }
-        return Integer.parseInt(temp);
+        return Integer.parseInt(rawInput);
     }
 
     private static List<Integer> tryGetNumbers() {
-        Stream<String> temp = Arrays.stream(getInput(EMPTY));
+        Stream<String> rawInput = Arrays.stream(getInput(EMPTY));
         try {
-            return temp
+            return rawInput
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
@@ -104,8 +107,8 @@ public class ConsoleInput {
         }
         while (lottos.size() < purchaseAmount) {
             try {
-                final Lotto temp = new Lotto(tryGetNumbers(), rule);
-                lottos.add(temp);
+                final Lotto lotto = new Lotto(tryGetNumbers(), rule);
+                lottos.add(lotto);
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
