@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 게임</title>
+</head>
+<body>
+<h1>로또 구매 창</h1>
+수동 로또 구매 <br>
+{{numberOfTicket}}개 구매 가능합니다. <br>
+<form action="/purchase/lotto/create" method="post">
+    <input type="text" name="lottonumber1"><br>
+    <input type="text" name="lottonumber2"><br>
+    <input type="text" name="lottonumber3"><br>
+    <input type="text" name="lottonumber4"><br>
+    <input type="text" name="lottonumber5"><br>
+    <input type="text" name="lottonumber6"><br>
+    <input type="submit" value="제출">
+</form>
+</body>
+</html>

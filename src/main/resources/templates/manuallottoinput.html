@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>로또 게임</title>
+</head>
+<body>
+<h1>수동 로또 입력</h1>
+<form action='/lottogame/showpurchaseresult' id='manual-lotto-form' method='post'>
+
+</form>
+<input type='hidden' id='numberofmanualticket' value={{numberOfManualTicket}}>
+</body>
+<script
+        src='https://code.jquery.com/jquery-3.4.1.min.js'
+        integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
+        crossorigin='anonymous'></script>
+<script type='text/javascript'>
+    var numberofticket = $('#numberofmanualticket').val();
+    console.log(numberofticket);
+    for (var i = 0; i < numberofticket; i++) {
+        console.log(i);
+        var insert = '<div class="lotto">\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber1\'>\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber2\'>\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber3\'>\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber4\'>\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber5\'>\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber6\'>\n' +
+            '        <input type=\'hidden\' id=\'lotto' + i + '\' name=\'lotto' + i + '\'>\n' +
+            '    </div><br>';
+        $(insert).appendTo('#manual-lotto-form');
+    }
+    if (numberofticket != 0) {
+        $('<input type="button" value="수동 로또 생성" onclick = setlottoinput()>').appendTo('#manual-lotto-form');
+    }
+
+    function setlottoinput() {
+        var numberofticket = $('#numberofmanualticket').val();
+        for (var i = 0; i < numberofticket; i++) {
+            var string = $('.lotto' + i + '-lottonumber1').val() + ',' +
+                $('.lotto' + i + '-lottonumber2').val() + ',' +
+                $('.lotto' + i + '-lottonumber3').val() + ',' +
+                $('.lotto' + i + '-lottonumber4').val() + ',' +
+                $('.lotto' + i + '-lottonumber5').val() + ',' +
+                $('.lotto' + i + '-lottonumber6').val();
+            $("#lotto" + i).val(string);
+        }
+        document.getElementById('manual-lotto-form').submit();
+    }
+</script>
+</html>

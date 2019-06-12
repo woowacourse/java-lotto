@@ -30,7 +30,10 @@ public class Money {
         return (long) (profits / price) * PERCENTAGE;
     }
 
-    public boolean isInValidNumber(int numberOfManualLotto) {
-        return getNumberOfTicket() < numberOfManualLotto;
+    public boolean checkInValidNumber(int numberOfManualLotto) {
+        if(getNumberOfTicket() < numberOfManualLotto){
+            throw new IllegalArgumentException(getNumberOfTicket()+"개 이하만 가능합니다.");
+        }
+        return false;
     }
 }

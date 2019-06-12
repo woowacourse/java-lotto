@@ -31,9 +31,9 @@ public class LottoGameMain {
 
     private static boolean isInValidNumberOfManualInput(String input, Money money) {
         try {
-            return money.isInValidNumber(Integer.parseInt(input));
-        } catch (NumberFormatException e) {
-            System.out.println("숫자를 입력해 주세요.");
+            return money.checkInValidNumber(Integer.parseInt(input));
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
             return true;
         }
     }
