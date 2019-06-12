@@ -27,11 +27,6 @@ public class MoneyService {
         return moneyDao.addMoney(money, times);
     }
 
-    public Money findByTimes() throws Exception {
-        int latelyTimes = winningLottoDao.nextWinningLottoTimes();
-        return moneyDao.findByTimes(latelyTimes);
-    }
-
     public Money findByTimes(int latelyTimes) throws Exception {
         return moneyDao.findByTimes(latelyTimes);
     }

@@ -310,7 +310,6 @@
                         var json_obj = $.parseJSON(data);
                         initLotto();
                         printResult(json_obj, 'result');
-                        printLottoYield();
                     }
                 });
 
@@ -362,6 +361,7 @@
                             child = '<div class="result">' + json_obj[i].matchNum + "개 일치 (" + json_obj[i].reward + "원) - " + result[json_obj[i].value] + "개" + '</div>';
                             $('#' + divId).append(child);
                         }
+                        printLottoYield();
                     }
                 });
             }

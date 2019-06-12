@@ -88,7 +88,7 @@ public class WebUILottoApplication {
             try {
                 int latelyTimes = winningLottoService.nextWinningLottoTimes();
                 LottoResult lottoResult = createLottoResult(latelyTimes);
-                Money money = moneyService.findByTimes();
+                Money money = moneyService.findByTimes(latelyTimes - 1);
 
                 double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
 
