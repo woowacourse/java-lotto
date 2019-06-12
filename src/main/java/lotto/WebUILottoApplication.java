@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.database.DatabaseConnection;
-import lotto.database.LottoDAO;
-import lotto.database.WinningInformationDAO;
+import lotto.database.RoundInformationService;
 import lotto.domain.*;
 import lotto.domain.generator.LottoNumbersGenerator;
 import lotto.domain.generator.ManualLottoNumbersGenerator;
@@ -12,8 +10,6 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +47,7 @@ public class WebUILottoApplication {
                 model.put("result", OutputViewFactory.outputResult(lottoResult));
                 model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
 
-                save(lottos, winningInformation);
+                RoundInformationService.saveRoundInformation(lottos, winningInformation);
                 return render(model, "result.html");
             } catch (NumberFormatException e) {
                 Map<String, Object> model = new HashMap<>();
@@ -70,24 +66,9 @@ public class WebUILottoApplication {
         });
 
         post("/round-result", (req, res) -> {
-            try (Connection connection = DatabaseConnection.getConnection()) {
-                Map<String, Object> model = new HashMap<>();
+            try {
                 int round = Integer.parseInt(req.queryParams("round"));
-
-                //서비스로 분리
-                WinningInformationDAO winningInformationDAO = WinningInformationDAO.getInstance(connection);
-                WinningInformation winningInformation = winningInformationDAO.findWinningInformationByRound(round);
-                model.put("winningInfo", OutputViewFactory.ouputWinningInfo(winningInformation));
-
-                LottoDAO lottoDAO = LottoDAO.getInstance(connection);
-                Lottos lottos = lottoDAO.findLottosByRound(round);
-                model.put("lottos", OutputViewFactory.outputLottos(lottos));
-
-                LottoGame lottoGame = new LottoGame(winningInformation);
-                LottoResult lottoResult = lottoGame.play(lottos);
-                model.put("result", OutputViewFactory.outputResult(lottoResult));
-                model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
-
+                Map<String, Object> model = RoundInformationService.loadRoundInformation(round);
                 return render(model, "round-result.html");
             } catch (Exception e) {
                 Map<String, Object> model = new HashMap<>();
@@ -124,17 +105,5 @@ public class WebUILottoApplication {
         LottoNumber bonusNumber = LottoNumber.valueOf(Integer.parseInt(bonusBall));
 
         return new WinningInformation(winningNumbers, bonusNumber);
-    }
-
-    private static void save(Lottos lottos, WinningInformation winningInformation) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            WinningInformationDAO winningInformationDAO = WinningInformationDAO.getInstance(connection);
-            LottoDAO lottoDAO = LottoDAO.getInstance(connection);
-
-            int round = winningInformationDAO.addWinningInformation(winningInformation);
-            lottoDAO.addAllLottos(lottos, round);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }
