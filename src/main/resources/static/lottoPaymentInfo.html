@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+
+    <title>로또 구매</title>
+</head>
+
+<body>
+    <section class="container">
+        <h1>로또 구매</h1>
+        <form action="/buyLotto" method="post">
+            <div class="form-group">
+                <label for="payment">구입 금액</label>
+                <input type="number" id="payment" name="payment" class="form-control" />
+                <small class="form-text text-muted">1,000원 단위로 입력해주세요.</small>
+            </div>
+            <div class="form-group">
+                <label for="countOfManualLotto">수동 구매 개수</label>
+                <input type="number" id="countOfManualLotto" name="countOfManualLotto" class="form-control" />
+                <small class="form-text text-muted">구입한 개수 이하의 값을 입력해주세요.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">구매하기</button>
+        </form>
+    </section>
+</body>
+
+</html>
