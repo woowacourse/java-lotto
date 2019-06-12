@@ -31,7 +31,7 @@ public class WinningLotto {
 
         for (Lotto lotto : purchasedLottos.getLotto()) {
             ranks.add(Rank.valueOf(matchCount(lotto), matchBonusNumber(lotto)));
-        }
+    }
         return ranks;
     }
 
