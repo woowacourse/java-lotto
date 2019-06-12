@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DBUtilsTest {
     @Test
-    void connection() {
+    void getConnectionTest() {
         assertNotNull(DBUtils.getConnection());
     }
 }

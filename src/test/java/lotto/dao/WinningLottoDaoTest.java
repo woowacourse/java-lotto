@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class WinningLottoDaoTest {
 
     @Test
-    void add() {
+    void addTest() {
         Lotto lotto = Lotto.of(new LottoNosManualGenerator("1,2,3,4,5,6").generate());
         LottoNo bonus = LottoNo.from(10);
         WinningLotto winningLotto = new WinningLotto(lotto, bonus);
@@ -20,7 +20,7 @@ class WinningLottoDaoTest {
     }
 
     @Test
-    void findByRound() {
+    void findByRoundTest() {
         assertThat(new WinningLottoDao().findByRound(0)).isNotNull();
     }
 }

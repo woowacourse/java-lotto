@@ -11,7 +11,7 @@ class RoundDaoTest {
     }
 
     @Test
-    void getLatest() {
+    void getLatestTest() {
         assertThat(-1).isNotEqualTo(new RoundDao().getLatest());
     }
 }

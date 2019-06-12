@@ -18,7 +18,7 @@ class LottoDaoTest {
         lottos.add(Lotto.of(new LottoNosManualGenerator("1,2,3,4,5,6").generate()));
         lottos.add(Lotto.of(new LottoNosManualGenerator("1,2,3,4,12,19").generate()));
 
-        assertTrue(new LottoDao().add(lottos, 0));
+        assertTrue(new LottoDao().add(lottos, 1));
     }
 
     @Test
