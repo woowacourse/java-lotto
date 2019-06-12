@@ -10,9 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,9 +22,9 @@ public class AggregationDaoTest {
     private AggregationDao aggregationDao;
     private WinningLottoDao winningLottoDao;
     private LottoDao lottoDao;
-    private long lastGeneratedAggregationId;
-    private long lastGeneratedWinningLottoId;
-    private long lastGeneratedLottoId;
+    private Queue<Long> aggregationIdsToDelete = new LinkedList<>();
+    private Queue<Long> winningLottoIdsToDelete = new LinkedList<>();
+    private Queue<Long> lottoIdsToDelete = new LinkedList<>();
 
 
     static {
@@ -39,7 +37,7 @@ public class AggregationDaoTest {
         TEMP_WINNING_LOTTO.setWinningNumber5(6);
         TEMP_WINNING_LOTTO.setWinningBonusNumber(7);
         TEMP_AGGREGATION = new AggregationDto();
-        TEMP_AGGREGATION.setLottoRound(999);
+        TEMP_AGGREGATION.setLottoRound(9999);
         TEMP_AGGREGATION.setCntFirst(0);
         TEMP_AGGREGATION.setCntSecond(0);
         TEMP_AGGREGATION.setCntThird(0);
@@ -65,26 +63,34 @@ public class AggregationDaoTest {
         aggregationDao = new AggregationDao(conn);
         winningLottoDao = new WinningLottoDao(conn);
         lottoDao = new LottoDao(conn);
-        lastGeneratedWinningLottoId = winningLottoDao.addWinningLotto(TEMP_WINNING_LOTTO);
-        lastGeneratedLottoId = lottoDao.addLotto(TEMP_LOTTO);
-        lastGeneratedAggregationId = aggregationDao.addAggregation(TEMP_AGGREGATION, lastGeneratedWinningLottoId, Arrays.asList(lastGeneratedLottoId));
+        long insertedWinningLottoId = winningLottoDao.addWinningLotto(TEMP_WINNING_LOTTO);
+        long insertedLottoId = lottoDao.addLotto(TEMP_LOTTO);
+        winningLottoIdsToDelete.add(insertedWinningLottoId);
+        lottoIdsToDelete.add(insertedLottoId);
+        aggregationIdsToDelete.add(aggregationDao.addAggregation(TEMP_AGGREGATION, insertedWinningLottoId, Arrays.asList(insertedLottoId)));
     }
 
     @AfterEach
     void cleanup() throws Exception {
-        aggregationDao.deleteById(lastGeneratedAggregationId);
-        winningLottoDao.deleteById(lastGeneratedWinningLottoId);
-        lottoDao.deleteById(lastGeneratedLottoId);
+        while (!aggregationIdsToDelete.isEmpty()) {
+            aggregationDao.deleteById(aggregationIdsToDelete.poll());
+        }
+        while (!winningLottoIdsToDelete.isEmpty()) {
+            winningLottoDao.deleteById(winningLottoIdsToDelete.poll());
+        }
+        while (!lottoIdsToDelete.isEmpty()) {
+            lottoDao.deleteById(lottoIdsToDelete.poll());
+        }
     }
 
     @Test
     void insert() {
-        assertThat(lastGeneratedWinningLottoId).isGreaterThanOrEqualTo(1);
+        assertThat(aggregationIdsToDelete.peek()).isGreaterThanOrEqualTo(1);
     }
 
     @Test
     void findById() throws Exception {
-        Optional<AggregationDto> maybeFound = aggregationDao.findById(lastGeneratedAggregationId);
+        Optional<AggregationDto> maybeFound = aggregationDao.findById(aggregationIdsToDelete.peek());
         assertThat(maybeFound.isPresent()).isTrue();
         AggregationDto found = maybeFound.get();
         assertThat(found.getCntFirst()).isEqualTo(TEMP_AGGREGATION.getCntFirst());
@@ -116,23 +122,24 @@ public class AggregationDaoTest {
         assertThat(result).hasSize(2);
         assertThat(result.get(1).getCntFirst()).isEqualTo(1);
         assertThat(result.get(0).getCntSecond()).isEqualTo(1);
-        aggregationDao.deleteById(aggId1);
-        aggregationDao.deleteById(aggId2);
-        lottoDao.deleteById(lottoId1);
-        lottoDao.deleteById(lottoId2);
-        winningLottoDao.deleteById(winningId1);
-        winningLottoDao.deleteById(winningId2);
+        aggregationIdsToDelete.add(aggId1);
+        aggregationIdsToDelete.add(aggId2);
+        lottoIdsToDelete.add(lottoId1);
+        lottoIdsToDelete.add(lottoId2);
+        winningLottoIdsToDelete.add(winningId1);
+        winningLottoIdsToDelete.add(winningId2);
     }
 
     @Test
     void findLatestRound() throws Exception {
-        assertThat(aggregationDao.findLatestRound()).isEqualTo(999);
+        assertThat(aggregationDao.findLatestRound()).isEqualTo(TEMP_AGGREGATION.getLottoRound());
     }
 
     @Test
     void deleteById() throws Exception {
-        assertThat(aggregationDao.deleteById(lastGeneratedAggregationId)).isEqualTo(1);
-        assertThat(aggregationDao.findById(lastGeneratedAggregationId).isPresent()).isFalse();
+        long inserted = aggregationIdsToDelete.peek();
+        assertThat(aggregationDao.deleteById(inserted)).isEqualTo(1);
+        assertThat(aggregationDao.findById(inserted).isPresent()).isFalse();
     }
 
     private static LottoDto createLottoDto(int number0, int number1, int number2, int number3, int number4, int number5) {
