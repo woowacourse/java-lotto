@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+
+    <title>당첨 결과 확인</title>
+</head>
+
+<body>
+    <header class="container">
+        header
+        <!--1~10	#FBC400
+        11~20	#69C8F2
+        21~30	#FF7272
+        31~40	#AAAAAA
+        41~45	#B0D840-->
+    </header>
+
+    <section class="container">
+
+        <article class="text-center">
+            <img src="https://via.placeholder.com/1920x400.png?text=AD (1920 x 400)" class="img-fluid rounded">
+
+            <h3>당첨 결과</h3>
+
+            <div class="d-inline-flex">
+                <div class="d-inline-block">
+                    <p class="balls">
+                        <span class="ball">1</span>
+                        <span class="ball">2</span>
+                        <span class="ball">3</span>
+                        <span class="ball">4</span>
+                        <span class="ball">5</span>
+                        <span class="ball">6</span>
+                    </p>
+                    <p>당첨번호</p>
+                </div>
+
+                <div class="d-inline-block">
+                    <p style="display: inline-block; font-size: 40px; color: #999999; margin: 40px 0 0 0;">+</p>
+                </div>
+
+                <div class="d-inline-block">
+                    <p class="balls">
+                        <span class="ball">7</span>
+                    </p>
+                    <p>보너스 번호</p>
+                </div>
+            </div>
+        </article>
+
+        <article>
+            <div class="table-responsive text-center">
+                {{result.lottoScore}}<br>
+                <table class="table">
+                    <thead>
+                        <th>순위</th>
+                        <th>등위별 총 당첨금액</th>
+                        <th>당첨 횟수</th>
+                        <th>총 당첨 금액</th>
+                        <th>당첨기준</th>
+                        <th>비고</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="col" class="align-middle">1</th>
+                            <th scope="col" class="text-right">2,000,000,000 원</th>
+                            <th scope="col" class="align-middle">{{result.lottoScore.FIRST}}</th>
+                            <th scope="col" class="text-right">2,000,000,000 원</th>
+                            <th scope="col" class="align-middle">당첨번호 6개 숫자일치</th>
+                            <th rowspan="6" class="align-middle">수동2<br>자동3</th>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="align-middle">2</th>
+                            <th scope="col" class="text-right align-middle">30,000,000 원</th>
+                            <th scope="col" class="align-middle">{{result.lottoScore.SECOND}}</th>
+                            <th scope="col" class="text-right align-middle">0 원</th>
+                            <th scope="col" class="align-middle">당첨번호 5개 숫자일치<br>+<strong>보너스</strong> 숫자 일치</th>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="align-middle">3</th>
+                            <th scope="col" class="text-right align-middle">1,500,000 원</th>
+                            <th scope="col" class="align-middle">{{result.lottoScore.THIRD}}</th>
+                            <th scope="col" class="text-right align-middle">0 원</th>
+                            <th scope="col" class="align-middle">당첨번호 5개 숫자일치</th>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="align-middle">4</th>
+                            <th scope="col" class="text-right align-middle">50,000 원</th>
+                            <th scope="col" class="align-middle">{{result.lottoScore.FOURTH}}</th>
+                            <th scope="col" class="text-right align-middle">0 원</th>
+                            <th scope="col" class="align-middle">당첨번호 4개 숫자일치</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">5</th>
+                            <th scope="col" class="text-right">5,000 원</th>
+                            <th scope="col">{{result.lottoScore.FIFTH}}</th>
+                            <th scope="col" class="text-right">0 원</th>
+                            <th scope="col">당첨번호 3개 숫자일치</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">MISS</th>
+                            <th scope="col" class="text-right">0 원</th>
+                            <th scope="col">{{result.lottoScore.MISS}}</th>
+                            <th scope="col" class="text-right">0 원</th>
+                            <th scope="col">당첨번호 3개 미만</th>
+                        </tr>
+                        <tr>
+                            <th colspan="6">최종 합계: 2,000,000,000 원</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+
+
+    </section>
+
+    <footer class="container">
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">로또 추첨</button>
+            <button type="submit" class="btn btn-primary">목록으로</button>
+        </div>
+        <hr>
+        <div class="jumbotron">
+            <div class="text-right">
+                Copylright © <strong>우아한바다이야기</strong>. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
