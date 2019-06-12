@@ -29,3 +29,7 @@
         - [ ] Exception: 다른 회차에 사용된 로또 id가 있는 경우
         - [x] Exception: 존재하지 않는 로또 id가 포함된 경우
     - [x] 당첨 통계를 출력한다.
+
+## 참고
+
+웹 UI의 코드는 별도의 [저장소](https://github.com/Laterality/java-lotto-1-view)에서 확인하실 수 있습니다.
