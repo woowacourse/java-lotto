@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="/css/show_history.css" rel="stylesheet" type="text/css"/>
+    <title>로또</title>
+</header>
+<body>
+    <div>
+        <p>구매 목록 페이지 조회</p>
+        <div id="turn-area">
+            <p>조회할 회차를 입력하세요</p>
+            <p>가장 최근 조회 : <span id="renect-turn">{{turn}}</span></p>
+            <input type="number" id="turn-input" />
+            <button type="button" id="turn-btn">조회하기</button>
+        </div>
+        <div id="winlotto-area"></div>
+        <div id="result-area"></div>
+        <div id="lotteries-area"></div>
+    </div>
+</body>
+</html>

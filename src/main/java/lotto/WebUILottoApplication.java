@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.dao.WinnerDAO;
 import lotto.service.CallRestApiService;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -18,6 +19,17 @@ public class WebUILottoApplication {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "index.html");
+        });
+
+        get("/showhistory", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("turn", WinnerDAO.findRecentTurn());
+            return render(model, "show_history.html");
+        });
+
+        get("/makelotto", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return render(model, "make_lotto.html");
         });
 
         post("/LottoBuyCount", (req, res) -> {
