@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+<div>
+    <p>이번 회차 당첨 번호</p>
+    {{winningLottoDto.winningLotto}}<br/><br/>
+    <p>이번 회차 보너스 번호</p>
+    {{winningLottoDto.bonusNumber}}<br/><br/>
+</div>
+<div>
+    <form action="/result">
+        <select name="round">
+            {{#rounds}}
+            <option value="{{this}}">{{this}}</option>
+            {{/rounds}}
+        </select>
+        <input type="submit" value="결과 조회">
+    </form>
+</div>
+</body>
+</html>
