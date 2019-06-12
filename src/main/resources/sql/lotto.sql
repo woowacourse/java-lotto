@@ -1,6 +1,7 @@
 CREATE TABLE round (
-    round INT NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY(round)
+	id INT NOT NULL AUTO_INCREMENT,
+    round INT NOT NULL,
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE money (
