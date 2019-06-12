@@ -63,6 +63,38 @@ public class WebUILottoApplication {
                 return render(model, "error.html");
             }
         });
+
+        get("/round-select", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return render(model, "round-select.html");
+        });
+
+        post("/round-result", (req, res) -> {
+            try (Connection connection = DatabaseConnection.getConnection()) {
+                Map<String, Object> model = new HashMap<>();
+                int round = Integer.parseInt(req.queryParams("round"));
+
+                //서비스로 분리
+                WinningInformationDAO winningInformationDAO = WinningInformationDAO.getInstance(connection);
+                WinningInformation winningInformation = winningInformationDAO.findWinningInformationByRound(round);
+                model.put("winningInfo", OutputViewFactory.ouputWinningInfo(winningInformation));
+
+                LottoDAO lottoDAO = LottoDAO.getInstance(connection);
+                Lottos lottos = lottoDAO.findLottosByRound(round);
+                model.put("lottos", OutputViewFactory.outputLottos(lottos));
+
+                LottoGame lottoGame = new LottoGame(winningInformation);
+                LottoResult lottoResult = lottoGame.play(lottos);
+                model.put("result", OutputViewFactory.outputResult(lottoResult));
+                model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
+
+                return render(model, "round-result.html");
+            } catch (Exception e) {
+                Map<String, Object> model = new HashMap<>();
+                model.put("message", e.getMessage());
+                return render(model, "error.html");
+            }
+        });
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
@@ -94,7 +126,7 @@ public class WebUILottoApplication {
         return new WinningInformation(winningNumbers, bonusNumber);
     }
 
-    private static void save(Lottos lottos, WinningInformation winningInformation){
+    private static void save(Lottos lottos, WinningInformation winningInformation) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             WinningInformationDAO winningInformationDAO = WinningInformationDAO.getInstance(connection);
             LottoDAO lottoDAO = LottoDAO.getInstance(connection);

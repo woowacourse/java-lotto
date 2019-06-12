@@ -1,10 +1,7 @@
 package lotto.view;
 
 import com.google.common.base.Joiner;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
-import lotto.domain.PurchaseInformation;
-import lotto.domain.Rank;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,5 +57,10 @@ public class OutputViewFactory {
 
     public static String outputYield(LottoResult lottoResult) {
         return String.format(YIELD_FORMAT, lottoResult.calculateYield());
+    }
+
+    public static String ouputWinningInfo(WinningInformation winningInformation) {
+        return "당첨 번호 : " + makeNumbersView(winningInformation.getWinningLottoNumbers())
+                + ", 보너스 볼 : " + winningInformation.getBonusNumber();
     }
 }
