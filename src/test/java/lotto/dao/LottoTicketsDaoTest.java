@@ -20,7 +20,7 @@ class LottoTicketsDaoTest {
 
     @BeforeEach
     void setUp() {
-        Connection connection = new DatabaseConnection().getConnection();
+        connection = new DatabaseConnection().getConnection();
         lottoTicketsDao = new LottoTicketsDao(connection);
     }
 
