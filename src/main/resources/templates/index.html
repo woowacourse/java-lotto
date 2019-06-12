@@ -9,34 +9,207 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	
+	<style type="text/css">
+		.btn-lotto {
+			width: 35px;
+		}
+	</style>
+	
 	<title>Lotto</title>
 </head>
 <body>
 <div style="padding-left: 25%; padding-right: 25%">
 	<img src="lotto.png" alt="lotto" style="width: 20%; padding-top: 5px;">
 	
-	<div style="padding-top: 10px; padding-bottom: 10px;">
-		<div class="input-group mb-3">
+	<div style="padding-top: 15px; padding-bottom: 15px;">
+		<div class="input-group mb-3" id="lotto-money-input">
 			<div class="input-group-prepend">
 				<span class="input-group-text">구매 금액을 입력해 주세요.</span>
 			</div>
 			<input type="number" id="lotto-money-input-text" class="form-control" min="0" placeholder="로또 구매 금액"
 			       aria-label="Username" aria-describedby="basic-addon1">
-			<button type="button" class="btn btn-outline-success" onclick="getNumOfLotto()">로또 구매</button>
+			<button type="button" class="btn btn-outline-success" onclick="getLottoMoneyResult()">로또
+				구매
+			</button>
 		</div>
-		<div id="lotto-money-result" class="badge" style="width: 30%;"></div>
+		<div id="lotto-money-result" class="badge" style="width: 30%; text-align: left"></div>
 	</div>
 	
-	<div style="padding-top: 10px; padding-bottom: 10px;">
-		<div class="input-group mb-3" style="padding-top: 30px;" id="manual-lotto-input">
+	<div style="padding-top: 15px; padding-bottom: 15px;">
+		<div class="input-group mb-3" id="num-of-manual-lotto-input">
 			<div class="input-group-prepend">
 				<span class="input-group-text">수동으로 구매할 로또 수를 입력해 주세요.</span>
 			</div>
-			<input type="number" id="manual-lotto-input-text" class="form-control" min="0" placeholder="수동 구매 로또 수"
+			<input type="number" id="num-of-manual-lotto-input-text" class="form-control" min="0"
+			       placeholder="수동 구매 로또 수"
 			       aria-label="Username" aria-describedby="basic-addon1" disabled>
-			<button type="button" class="btn btn-outline-success" disabled onclick="getNumOfLotto()">수동 구매</button>
+			<button type="button" class="btn btn-outline-success" disabled
+			        onclick="getNumOfManualLottoResult()">수동 구매
+			</button>
 		</div>
-		<div id="manual-lotto-result" class="badge" style="width: 30%;"></div>
+		<div id="num-of-manual-lotto-result" class="badge" style="width: 30%; text-align: left"></div>
+	</div>
+	
+	<div style="padding-top: 15px; padding-bottom: 15px;" id="manual-lotto-buttons">
+		<div>
+			<div class="input-group-prepend" style="padding-bottom: 10px;">
+				<span class="input-group-text">수동으로 구매할 번호를 선택하고 결정 버튼을 눌러 주세요.</span>
+				<button type="button" class="btn btn-outline-success" disabled
+				        onclick="getManualLottoResult()">결정
+				</button>
+			</div>
+		</div>
+		<div id="lotto-buttons">
+			<div>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>01
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>02
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>03
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>04
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>05
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>06
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>07
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>08
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>09
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>10
+				</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>11
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>12
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>13
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>14
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>15
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>16
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>17
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>18
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>19
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>20
+				</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>21
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>22
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>23
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>24
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>25
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>26
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>27
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>28
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>29
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>30
+				</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>31
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>32
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>33
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>34
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>35
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>36
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>37
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>38
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>39
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>40
+				</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>41
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>42
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>43
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>44
+				</button>
+				<button type="button" class="btn btn-outline-success btn-sm btn-lotto" data-toggle="button"
+				        aria-pressed="false" disabled>45
+				</button>
+			</div>
+		</div>
+	</div>
+	
+	<div style="padding-top: 15px; padding-bottom: 15px;" id="manual-lotto-list">
+		<span class="badge badge-pill badge-success"></span>
 	</div>
 </div>
 
@@ -54,34 +227,137 @@
 
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-    function appendNewNodeAt(parent, node) {
+    // TODO : erase later
+    window.onload = function () {
+        turnOffDisable("body");
+    };
+
+    var numOfManualLotto;
+
+    function updateNewNodeAt(parent, node) {
         while (parent.firstChild) {
             parent.removeChild(parent.firstChild);
         }
+        appendNewNodeAt(parent, node);
+    }
+
+    function appendNewNodeAt(parent, node) {
         parent.appendChild(node);
+    }
+
+    function turnOnDisable(id) {
+        $(id).find("input, select, button, textarea").prop("disabled", true);
     }
 
     function turnOffDisable(id) {
         $(id).find("input, select, button, textarea").prop("disabled", false);
     }
-    
-    function getNumOfLotto() {
+
+    function getLottoMoneyResult() {
         return new Promise(function (resolve, reject) {
-            var input = document.getElementById("lotto-money-input-text").value;
-            $.get('/lotto-money?input=' + input, function (response) {
+            var purchasePrice = document.getElementById("lotto-money-input-text").value;
+            $.post('/lotto-money', {lottoMoney: purchasePrice}, function (response) {
                 if (response) {
                     resolve(response);
                 }
                 reject(new Error("Request is failed"));
             });
         }).then(function (value) {
-            turnOffDisable("#manual-lotto-input");
+            turnOnDisable("#lotto-money-input");
+            turnOffDisable("#num-of-manual-lotto-input");
             var textNode = document.createTextNode(value);
             var parent = document.getElementById("lotto-money-result");
-            appendNewNodeAt(parent, textNode);
+            updateNewNodeAt(parent, textNode);
         }).catch(function (err) {
             console.log(err);
         });
+    }
+
+    function getNumOfManualLottoResult() {
+        return new Promise(function (resolve, reject) {
+            numOfManualLotto = document.getElementById("num-of-manual-lotto-input-text").value;
+            $.post('/num-of-manual-lotto', {num: numOfManualLotto}, function (response) {
+                if (response) {
+                    resolve(response);
+                }
+                reject(new Error("Request is failed"));
+            });
+        }).then(function (value) {
+            turnOnDisable("#num-of-manual-lotto-input");
+            turnOffDisable("#manual-lotto-buttons");
+            var textNode = document.createTextNode(value);
+            var parent = document.getElementById("num-of-manual-lotto-result");
+            updateNewNodeAt(parent, textNode);
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }
+
+    function generateLottoTag(value) {
+        var spanTag = document.createElement("div");
+        spanTag.setAttribute("class", "badge badge-pill badge-success");
+        spanTag.setAttribute("style", "display: block; margin-right: 75%; margin-bottom: 1px;");
+        spanTag.textContent = value['firstNum']
+            + ", " + value['secondNum']
+            + ", " + value['thirdNum']
+            + ", " + value['fourthNum']
+            + ", " + value['fifthNum']
+            + ", " + value['sixthNum'];
+        return spanTag;
+    }
+
+    function getManualLottoResult() {
+        // TODO : 현재까지 쌓인 로또의 개수를 numOfManualLotto와 비교 check
+        if (checkNumOfLottoButtons()) {
+            return new Promise(function (resolve, reject) {
+                var pressedLotto = makeManualLotto();
+                $.post('/manual-lotto', {
+                    firstNum: pressedLotto[0],
+                    secondNum: pressedLotto[1],
+                    thirdNum: pressedLotto[2],
+                    fourthNum: pressedLotto[3],
+                    fifthNum: pressedLotto[4],
+                    sixthNum: pressedLotto[5]
+                }, function (response) {
+                    if (response) {
+                        resolve(response);
+                    }
+                    reject(new Error("Request is failed"));
+                });
+            }).then(function (value) {
+                // turnOnDisable("#manual-lotto-buttons");
+                // turnOffDisable("#lotto-buttons");
+
+                var parent = document.getElementById("manual-lotto-list");
+                var spanTag = generateLottoTag(value);
+                appendNewNodeAt(parent, spanTag);
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
+        alert("로또 구매 시 6개의 숫자를 선택해 주세요.");
+    }
+
+    function checkNumOfLottoButtons() {
+        var checked = 0;
+        $("#lotto-buttons button").each(function (index) {
+            if ($(this).attr('aria-pressed') === "true") {
+                checked++;
+            }
+        });
+
+        return checked === 6;
+    }
+
+    function makeManualLotto() {
+        var pressedButtons = [];
+        $("#lotto-buttons button").each(function (index) {
+            if ($(this).attr('aria-pressed') === "true") {
+                pressedButtons.push($.trim($(this).text()));
+            }
+        });
+        console.log(pressedButtons);
+        return pressedButtons;
     }
 
 </script>

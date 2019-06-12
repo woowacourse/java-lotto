@@ -14,7 +14,7 @@ public class LottoMoneyController {
     public static final Route fetchLottoMoney = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
 
-        String purchasePrice = req.queryParams("input");
+        String purchasePrice = req.queryParams("lottoMoney");
         LottoMoneyDto lottoMoneyDto = LottoMoneyService.makeLottoMoneyDto(purchasePrice);
         LottoSession.setNumOfLotto(lottoMoneyDto.getNumOfLotto());
 
