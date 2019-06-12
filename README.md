@@ -137,7 +137,37 @@
 2. post: `/lotto`
 
 index.html에서 입력받은 값으로 lotto를 진행
+한번에 모든 입력값을 `/lotto`로 보내 최종 결과값을 ajax로 얻어와 보여주는 구조
 
-3. result.html
+## 로또 5단계 - DB 적용
 
-최종 결과를 보여주는 페이지
+### 요구사항
+
+- 기능
+    1. 각 회차별로 사용자가 구매한 로또, 당첨 번호, 당첨 결과, 당첨 금액, 수익률을 조회할 수 있어야 한다.
+    2. 현실에서는 매주 1회차가 진행되는데 이 로또는 로또 게임을 진행할 때마다 1회차가 증가하는 것으로 가정한다.
+    
+- 프로그래밍
+    1. [프로그래밍 체크리스트](https://github.com/woowacourse/woowacourse-docs/blob/master/cleancode/pr_checklist.md)의 원칙을 지키면서 프로그래밍 한다.
+    
+### DB
+
+DB 단계에서는 회차 개념이 존재, 따라서 회차 정보를 저장할 테이블이 필요
+
+![lotto-erd](https://user-images.githubusercontent.com/30178507/59393168-6e431d80-8db5-11e9-98fb-58f8a183a969.PNG)
+
+> winning_lotto 테이블은 WinningNumber 클래스의 정보를 담고 있습니다.
+>
+> 현재 미션의 편의를 위해 로또를 구성하는 6개의 숫자를 모두 bought_lotto와 winning_lotto가 담고 있도록 만들었습니다.
+
+하나의 lotto_game마다 result와 winning_lotto는 각각 하나씩이므로 각각 1:1 대응을 이루도록 구성.
+
+1. DB에 접근하기 위한 DAO 클래스 설계
+2. DTO 사용고려
+    일급 컬랙션과 원자값을 감싼 불변 클래스의 값을 db에 저장해야하는데 이때 메서드 호출(getter)이 너무 많아지므로 사용 고려
+3. DB 저장에 따른 WEB 뷰 라우팅 구성 변경
+    
+    - '/' (get) : 모든 회차의 결과를 간략하게 보여주는 페이지
+    - '/result/:round' (get) : 해당 round의 결과를 보여주는 페이지
+    - '/lotto' (get) : 로또 작성 페이지
+    - '/lotto' (post) : 작성 값을 토대로 lotto game을 실행하는 route
