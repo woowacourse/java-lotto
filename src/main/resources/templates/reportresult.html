@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/reportresult.css">
+
+    <title>당첨 결과</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="vender" id="vender" style="background-image: url('images/vendersays.png');"></div>
+    <div class="input-wrapper">
+        <div class="lotto-paper">
+            <img src="images/lottologo.jpg" alt="">
+            <h3>제 1회 로또 당첨 결과</h3>
+            <p>1등 (2,000,000,000 원) <span>0개</span></p>
+            <p>2등 (30,000,000 원) <span>0개</span></p>
+            <p>3등 (1,500,000 원) <span>0개</span></p>
+            <p>4등 (50,000 원) <span>0개</span></p>
+            <p>5등 (5,000 원) <span>1개</span></p>
+            <p>꽝 (0 원) <span>4개</span></p>
+            <hr>
+            <p>총 상금 <span>5,000 원</span></p>
+            <p>총 수익률 <span>100 %</span></p>
+        </div>
+        <button>다시하기</button>
+    </div>
+</div>
+
+<script>
+    var i = 0;
+    var txt = '두구두구 당신의 당첨 결과는??'; /* {{{ message }}} */
+    var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+    function typeWriter() {
+        if (i < txt.length) {
+            document.getElementById("vender").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+    window.onload = typeWriter;
+</script>
+</body>
+</html>
