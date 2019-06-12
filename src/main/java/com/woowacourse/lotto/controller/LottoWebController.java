@@ -178,15 +178,20 @@ public class LottoWebController {
     private static Map<String, Object> handleLottoDrawingRequest(LottoDrawingRequestDto request) {
         assertLottoIdsAreExist(request.getLottos());
         WinningLotto winningLotto = new WinningLotto(LottoNumberGroup.of(request.getWinningNumbers()), LottoNumber.of(request.getWinningBonusNumber()));
+        WinningAggregator aggregator = createAggregation(request.getLottos(), winningLotto);
+        Map<String, Object> resMap = createResMapWithResult(ResultState.OK);
+        resMap.put("aggregation", lottoService.addAggregation(aggregator, winningLotto, request.getLottos()));
+        return resMap;
+    }
+
+    private static WinningAggregator createAggregation(List<Long> lottoIds, WinningLotto winningLotto) {
         WinningAggregator aggregator = new WinningAggregator();
-        request.getLottos().stream()
+        lottoIds.stream()
             .map(lottoService::findLottoById)
             .map(Lotto::from)
             .map(winningLotto::match)
             .forEach(aggregator::addResult);
-        Map<String, Object> resMap = createResMapWithResult(ResultState.OK);
-        resMap.put("aggregation", lottoService.addAggregation(aggregator, winningLotto, request.getLottos()));
-        return resMap;
+        return aggregator;
     }
 
     private static void assertLottoIdsAreExist(List<Long> lottoIds) {
