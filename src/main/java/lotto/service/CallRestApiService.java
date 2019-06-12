@@ -23,10 +23,7 @@ public class CallRestApiService {
         long reqMoney = jsonElement.getAsJsonObject().get("money").getAsLong();
         money = new Money(reqMoney);
 
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("count", money.generateLottoBuyCount());
-        jsonObject.addProperty("money", reqMoney);
-        return new Gson().toJson(jsonObject);
+        return new Gson().toJson(money);
     }
 
     public String detailLotteries(Request req) {

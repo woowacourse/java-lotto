@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,6 +46,16 @@ class MoneyTest {
 
     @Test
     void generateLottoBuyCount() {
-        assertThat(money.generateLottoBuyCount()).isEqualTo(3);
+        assertThat(money.getCount()).isEqualTo(3);
+    }
+
+    @Test
+    void toStringTest() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("money",3500);
+        jsonObject.addProperty("count",3);
+        String jsonStr = new Gson().toJson(jsonObject);
+        assertThat(new Gson().toJson(money)).isEqualTo(jsonStr);
+        System.out.println(new Gson().toJson(money));
     }
 }
