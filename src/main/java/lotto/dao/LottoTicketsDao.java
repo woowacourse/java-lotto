@@ -19,7 +19,7 @@ public class LottoTicketsDao {
     }
 
     public void addLottoTickets(int round, LottoTickets lottoTickets) throws SQLException {
-        String query = "INSERT INTO lottoTickets VALUES(?,?)";
+        String query = "INSERT INTO lottoTickets(round, lottoNumbers) VALUES(?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             preparedStatement.setInt(1, round);
