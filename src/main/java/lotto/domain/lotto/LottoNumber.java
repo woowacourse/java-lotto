@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.exception.InvalidLottoNumbersException;
+
 import java.util.*;
 
 public class LottoNumber {
@@ -21,7 +23,15 @@ public class LottoNumber {
     }
 
     public static LottoNumber valueOf(int number) {
-        return numbers.get(number);
+        LottoNumber value = numbers.get(number);
+        checkNumberIn(value);
+        return value;
+    }
+
+    private static void checkNumberIn(LottoNumber value) {
+        if (value == null) {
+            throw new InvalidLottoNumbersException("로또에 사용되는 숫자가 아닌 값이 포함되어 있습니다.");
+        }
     }
 
     public static List<LottoNumber> getAllLottoNumbers() {
