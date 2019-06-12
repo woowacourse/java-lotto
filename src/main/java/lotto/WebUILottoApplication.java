@@ -38,17 +38,17 @@ public class WebUILottoApplication {
         });
 
         post("/lotto", (req, res) -> {
-            List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
-
-            Money money = getMoney(pairs);
-            List<String> manuals = getLottos(pairs);
-
-            Lottos lottos = LottosFactory.create(manuals, money);
-            int times = winningLottoDao.nextWinningLottoTimes();
-            moneyDao.addMoney(money, times);
-            addLottos(lottos, times);
-
             try {
+                List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
+
+                Money money = getMoney(pairs);
+                List<String> manuals = getLottos(pairs);
+
+                Lottos lottos = LottosFactory.create(manuals, money);
+                int times = winningLottoDao.nextWinningLottoTimes();
+                moneyDao.addMoney(money, times);
+                addLottos(lottos, times);
+
                 return lottos.getLottos();
             } catch (Exception e) {
                 return "Error: " + e.getMessage();
@@ -56,85 +56,117 @@ public class WebUILottoApplication {
         });
 
         get("/lottoResult", (req, res) -> {
-            GsonBuilder builder = new GsonBuilder();
-            builder.registerTypeAdapterFactory(new MyEnumAdapterFactory());
-            Gson gson = builder.create();
-            String json = gson.toJson(WinningType.values());
-            return json;
+            try {
+                GsonBuilder builder = new GsonBuilder();
+                builder.registerTypeAdapterFactory(new MyEnumAdapterFactory());
+                Gson gson = builder.create();
+                String json = gson.toJson(WinningType.values());
+                return json;
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
         });
 
         post("/lottoResult", (req, res) -> {
-            List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
-            WinningLotto winningLotto = createWinningLotto(pairs);
-            int times = winningLottoDao.nextWinningLottoTimes();
-            winningLottoDao.addWinningLotto(winningLotto, times);
+            try {
+                List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
+                WinningLotto winningLotto = createWinningLotto(pairs);
+                int times = winningLottoDao.nextWinningLottoTimes();
+                winningLottoDao.addWinningLotto(winningLotto, times);
 
-            Lottos lottos = lottosDao.findByTimes(times);
-            LottoResult lottoResult = new LottoResult(lottos.getLottos(), winningLotto);
+                Lottos lottos = lottosDao.findByTimes(times);
+                LottoResult lottoResult = new LottoResult(lottos.getLottos(), winningLotto);
 
-            Gson gson = new GsonBuilder().create();
-            String json = gson.toJson(lottoResult.getLottoResult());
+                Gson gson = new GsonBuilder().create();
+                String json = gson.toJson(lottoResult.getLottoResult());
 
-            return json;
+                return json;
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
         });
 
         get("/lottoYield", (req, res) -> {
-            int latelyTimes = winningLottoDao.nextWinningLottoTimes();
-            LottoResult lottoResult = createLottoResult(latelyTimes);
-            Money money = moneyDao.findByTimes(latelyTimes);
+            try {
+                int latelyTimes = winningLottoDao.nextWinningLottoTimes();
+                LottoResult lottoResult = createLottoResult(latelyTimes);
+                Money money = moneyDao.findByTimes(latelyTimes);
 
-            double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
+                double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
 
-            return result;
+                return result;
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
+
         });
 
         get("/lottoNextTimes", (req, res) -> {
             int latelyTimes = winningLottoDao.nextWinningLottoTimes();
-
             return latelyTimes;
         });
 
         get("/lotto/money/:Times", (req, res) -> {
-            int times = Integer.parseInt(req.params(":Times"));
-            Money money = moneyDao.findByTimes(times);
-            Gson gson = new GsonBuilder().create();
-            String json = gson.toJson(money);
+            try {
+                int times = Integer.parseInt(req.params(":Times"));
+                Money money = moneyDao.findByTimes(times);
+                Gson gson = new GsonBuilder().create();
+                String json = gson.toJson(money);
 
-            return json;
+                return json;
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
         });
 
         get("/lotto/lottos/:Times", (req, res) -> {
-            int times = Integer.parseInt(req.params(":Times"));
-            Lottos lottos = lottosDao.findByTimes(times);
-            Gson gson = new GsonBuilder().create();
+            try {
+                int times = Integer.parseInt(req.params(":Times"));
+                Lottos lottos = lottosDao.findByTimes(times);
+                Gson gson = new GsonBuilder().create();
 
-            return lottos.getLottos();
+                return lottos.getLottos();
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
         });
 
         get("/lotto/winningLotto/:Times", (req, res) -> {
-            int times = Integer.parseInt(req.params(":Times"));
-            WinningLotto winningLotto = winningLottoDao.findByTimes(times);
-            Gson gson = new GsonBuilder().create();
+            try {
+                int times = Integer.parseInt(req.params(":Times"));
+                WinningLotto winningLotto = winningLottoDao.findByTimes(times);
+                Gson gson = new GsonBuilder().create();
 
-            return gson.toJson(winningLotto);
+                return gson.toJson(winningLotto);
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
         });
 
         get("/lotto/lottoResult/:Times", (req, res) -> {
-            int times = Integer.parseInt(req.params(":Times"));
-            LottoResult lottoResult = createLottoResult(times);
-            Gson gson = new GsonBuilder().create();
-            String json = gson.toJson(lottoResult.getLottoResult());
+            try {
+                int times = Integer.parseInt(req.params(":Times"));
+                LottoResult lottoResult = createLottoResult(times);
+                Gson gson = new GsonBuilder().create();
+                String json = gson.toJson(lottoResult.getLottoResult());
 
-            return json;
+                return json;
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
         });
 
         get("/lotto/lottoYield/:Times", (req, res) -> {
-            int times = Integer.parseInt(req.params(":Times"));
-            LottoResult lottoResult = createLottoResult(times);
-            Money money = moneyDao.findByTimes(times);
+            try {
+                int times = Integer.parseInt(req.params(":Times"));
+                LottoResult lottoResult = createLottoResult(times);
+                Money money = moneyDao.findByTimes(times);
 
-            double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
-            return result;
+                double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
+                return result;
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
         });
     }
 

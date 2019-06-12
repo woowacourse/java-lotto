@@ -46,21 +46,18 @@
     <input type="number" id="times">
     <button class="section" id="btn_lookup">조회</button>
 
-    <h2>구입 금액</h2>
     <div id="lookupMoney">
 
     </div>
-    <h2>구매 목록</h2>
+
     <div id="lookupLottoList">
 
     </div>
-
-    <h2>당첨 번호</h2>
+    
     <div id="lookupWinningLotto">
 
     </div>
 
-    <h2>당첨 통계</h2>
     <div id="lookupResult" class="section">
 
     </div>
@@ -104,6 +101,8 @@
                     method: 'get',
                     url: '/lotto/lottos/' + times,
                     success: function (data) {
+                        $('#lookupLottoList').empty();
+                        $('#lookupLottoList').append('<h2>구매 목록</h2>');
                         var json_obj = $.parseJSON(data);
                         printLottoList(json_obj, 'lookupLottoList');
                     }
@@ -113,6 +112,8 @@
                     method: 'get',
                     url: '/lotto/winningLotto/' + times,
                     success: function (data) {
+                        $('#lookupWinningLotto').empty();
+                        $('#lookupWinningLotto').append('<h2>당첨 번호</h2>');
                         var json_obj = $.parseJSON(data);
                         printWinningLotto(json_obj, 'lookupWinningLotto');
                     }
@@ -123,7 +124,8 @@
                     url: '/lotto/lottoResult/' + times,
                     success: function (data) {
                         var json_obj = $.parseJSON(data);
-                        console.log(json_obj);
+                        $('#lookupResult').empty();
+                        $('#lookupResult').append('<h2>당첨 통계</h2>');
                         printResult(json_obj, 'lookupResult');
 
                         $.ajax({
@@ -140,8 +142,6 @@
             });
 
             function printLottoList(json_obj, divId) {
-                console.log(json_obj);
-                $('#' + divId).empty();
                 for (var i = 0 in json_obj) {
                     var no = uniqueId();
                     $('#' + divId).append('<div class="lottoItem" data_no="' + no + '">');
@@ -153,7 +153,6 @@
             }
 
             function printWinningLotto(json_obj, divId) {
-                $('#' + divId).empty();
                 var no = uniqueId();
                 console.log(json_obj.winningLotto);
                 console.log(json_obj.bonusNum);
@@ -173,8 +172,6 @@
                     url: '/lottoResult',
                     success: function (data) {
                         var json_obj = $.parseJSON(data);
-                        console.log(json_obj);
-                        $('#' + divId).empty();
                         for (var i = 0 in json_obj) {
                             if (json_obj[i].value == "MISS") {
                                 continue;
