@@ -1,10 +1,9 @@
 package lotto.domain;
 
 import lotto.LottoDto;
-import lotto.util.GameResultDtoConverter;
-import lotto.util.LottoDtoConverter;
 import lotto.dao.LottosDao;
 import lotto.dao.TurnDao;
+import lotto.util.LottoDtoConverter;
 
 import java.util.List;
 

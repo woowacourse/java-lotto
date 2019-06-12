@@ -107,7 +107,6 @@ public class WebUILottoApplication {
 
         List<LottoDto> lottos = service.getLottos();
         model.put("lottos", lottos);
-
         return render(model, "lottos.html");
     }
 

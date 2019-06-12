@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.dao.TurnDao;
 import lotto.domain.*;
 import lotto.util.LottoParser;
 import lotto.util.RandomNumbersGenerator;
@@ -22,6 +23,12 @@ public class ConsoleApplication {
 		GameResult gameResult = service.gameResult();
 		gameResult.match(winningLotto);
 		OutputView.showGameResult(gameResult);
+		deleteInfo(service);
+	}
+
+	private static void deleteInfo(final LottoService service) {
+		service.deleteAll();
+		new TurnDao().deleteAll();
 	}
 
 	private static int assignManualPurchaseCount(final LottoService service) {

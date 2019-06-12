@@ -5,7 +5,6 @@ import lotto.domain.exception.RankNotExistException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
