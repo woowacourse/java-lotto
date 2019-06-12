@@ -5,13 +5,14 @@ import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 
 import java.util.EnumMap;
+import java.util.Map;
 
 import static lotto.domain.Money.ONE_LOTTO_PRICE;
 
 public class LottosResult {
     private static final int INITIAL_NUMBER = 0;
 
-    private final EnumMap<Rank, Integer> lottosResult = new EnumMap<>(Rank.class);
+    private final Map<Rank, Integer> lottosResult = new EnumMap<>(Rank.class);
 
     public LottosResult(WinningLotto winningLotto, Lottos myLottos) {
         setUpResult();
