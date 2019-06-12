@@ -31,7 +31,8 @@ class WinningLottoDAOTest {
     }
 
     @Test
-    void 없는칼럼_요청할때_익셉션_테스트() {
-        assertThrows(IndexOutOfBoundsException.class, () -> winningLottoDAO.findByWinningLottoId("0"));
+    void 없는칼럼_요청할때_익셉션_테스트() throws SQLException {
+        WinningLottoDTO winningLotto = winningLottoDAO.findByWinningLottoId("0");
+        assertNull(winningLotto);
     }
 }

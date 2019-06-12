@@ -56,22 +56,24 @@ public class WinningLottoDAO {
         pstmt.setString(1, winningLottoId);
         ResultSet rs = pstmt.executeQuery();
 
+        return getWinningLottoDTO(rs);
+    }
+
+    private WinningLottoDTO getWinningLottoDTO(ResultSet rs) throws SQLException {
         int id = 1, bonusBall = 1;
         List<Integer> numbers = new ArrayList<>();
 
+        while (rs.next()) {
+            id = rs.getInt("id");
+            bonusBall = rs.getInt("bonusBall");
+            numbers.add(rs.getInt("number"));
+        }
+
         try {
-            while (rs.next()) {
-                id = rs.getInt("id");
-                bonusBall = rs.getInt("bonusBall");
-                numbers.add(rs.getInt("number"));
-            }
+            return new WinningLottoDTO(
+                    id, bonusBall, numbers.get(0),numbers.get(1),numbers.get(2),numbers.get(3),numbers.get(4),numbers.get(5));
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
-
-        return new WinningLottoDTO(
-                id,
-                numbers.get(0),numbers.get(1),numbers.get(2),numbers.get(3),numbers.get(4),numbers.get(5),
-                bonusBall);
     }
 }
