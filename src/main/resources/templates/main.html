@@ -13,34 +13,37 @@
       <title>lotto game</title>
 </head>
 
-
-<style>
-
-</style>
-
 <body>
       <nav>
             <h3>구입 금액 입력</h3>
       </nav>
-      <div class="turns-body">
+      <div id="turns-info" class="main-body">
             <label>제 {{current_turn}} 회 로또 게임</label>
             <form action="/turn" method="post">
                   <div class="turns">
                         {{#turns}}
-                              <a href="/turn?current_turn={{this}}">{{this}}회</a>
+                        <a href="/turn?current_turn={{this}}">{{this}}회</a>
                         {{/turns}}
                   </div>
             </form>
       </div>
       <br>
-      <form action="/money" method="post">
-            <div class="money">
-                  <label>구입 금액 : </label>
-                  <input type="text" name="money" />
-                  <input type="submit" value="충전" />
-            </div>
-      </form>
-
+      <div id="input-money" class="main-body">
+            <form action="/money" method="post">
+                  <div class="money">
+                        <label>구입 금액 : </label>
+                        <input type="text" name="money" />
+                        <input type="submit" value="충전" />
+                  </div>
+            </form>
+      </div>
+      <br />
+      <div id="end-button" class="main-button">
+            <form action="/end" method="POST">
+                  <input type="hidden" name="token" value="initialize" />
+                  <input type="submit" value="초기화" />
+            </form>
+      </div>
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
