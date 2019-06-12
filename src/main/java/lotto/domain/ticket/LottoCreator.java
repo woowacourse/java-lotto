@@ -1,7 +1,6 @@
 package lotto.domain.ticket;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoCreator implements TicketCreator {
@@ -13,16 +12,12 @@ public class LottoCreator implements TicketCreator {
 
     @Override
     public Ticket create(List<Integer> numbers) {
-        List<TicketNumber> ticketNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
-            ticketNumbers.add(new LottoNumber(number));
-        }
-        return new Lotto(new LottoNumbers(ticketNumbers));
+        return new Lotto(LottoNumberPool.manual(numbers));
     }
 
     @Override
     public Ticket create() {
-        return new Lotto(new LottoNumbers());
+        return new Lotto(new LottoNumbers(LottoNumberPool.random()));
     }
 
     @Override
