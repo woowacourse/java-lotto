@@ -12,11 +12,6 @@ import static lotto.domain.dao.JdbcConnector.getConnection;
 import static lotto.domain.dao.sqls.LottoDaoSqls.SELECT_ALL_LOTTO_RESULT;
 
 public class LottoDao {
-
-    private LottoDao() {
-        throw new AssertionError();
-    }
-
     private static class LottoDaoHolder {
         private static final LottoDao INSTANCE = new LottoDao();
     }
