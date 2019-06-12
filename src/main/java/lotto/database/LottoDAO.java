@@ -45,7 +45,7 @@ public class LottoDAO {
         pstmt.executeUpdate();
     }
 
-    public Lottos findLottosByRound(int round) throws Exception {
+    public Lottos findLottosByRound(int round) throws SQLException {
         String query = "SELECT * FROM lotto WHERE round = ?";
         PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.setInt(ROUND_INDEX, round);

@@ -18,10 +18,11 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class LottoDAOTest {
     private LottoDAO lottoDAO;
     private WinningInformationDAO winningInformationDAO;
+    private Connection connection;
 
     @BeforeEach
     void setUp() throws Exception {
-        Connection connection = DatabaseConnection.getConnection();
+        connection = DatabaseConnection.getConnection();
         lottoDAO = LottoDAO.getInstance(connection);
         winningInformationDAO = WinningInformationDAO.getInstance(connection);
         winningInformationDAO.clear();
@@ -49,5 +50,10 @@ public class LottoDAOTest {
         int round = winningInformationDAO.addWinningInformation(winningInformation);
         lottoDAO.addAllLottos(lottos, round);
         assertThat(lottoDAO.findLottosByRound(round)).isEqualTo(lottos);
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        connection.close();
     }
 }

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DatabaseConnection implements AutoCloseable {
+public class DatabaseConnection {
     private static final String SERVER = "localhost"; // MySQL 서버 주소
     private static final String DATABASE = "lottodb"; // MySQL DATABASE 이름
     private static final String USERNAME = "yk1028"; //  MySQL 서버 아이디
@@ -18,8 +18,8 @@ public class DatabaseConnection implements AutoCloseable {
         throw new AssertionError();
     }
 
-    public static Connection getConnection() {
-        if (connection != null) {
+    public static Connection getConnection() throws SQLException {
+        if (connection != null && !connection.isClosed()) {
             return connection;
         }
 
@@ -41,17 +41,5 @@ public class DatabaseConnection implements AutoCloseable {
             e.printStackTrace();
         }
         return connection;
-    }
-
-    @Override
-    public void close() {
-        try {
-            if (connection != null) {
-                connection.close();
-                connection = null;
-            }
-        } catch (SQLException e) {
-            System.err.println("connection 오류:" + e.getMessage());
-        }
     }
 }
