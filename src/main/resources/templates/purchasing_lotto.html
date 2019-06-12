@@ -54,6 +54,7 @@
 
 	<script type="text/javascript">
 		var count = 0;
+		var numbers = new Array;
 		
 		function checkInput() {
 			checkMoney();
@@ -108,8 +109,9 @@
 			deletingBtn.innerHTML = '-';
 
 			var str = '';
+			var id = count;
 			for (var i = 1; i <= 45; i++) {
-				str += '<label class="btn btn-outline-dark mb-1 mr-1" onclick="clickNumber(' + i + ');">' +
+				str += '<label class="btn btn-outline-dark mb-1 mr-1" onclick="selectNumber(' + id + ', ' + i + ');">' +
 					'<input type="checkbox" checked autocomplete="off"> ' +
 					i + '</label>';
 			}
@@ -150,8 +152,10 @@
 			form.removeChild(hidden);
 		}
 
-		function clickNumber(number) {
-			alert(number);
+		function selectNumber(lottoId, number) {
+			var hidden = document.getElementById('lotto-number-' + lottoId);
+			console.log(hidden);
+			numbers.push(number);
 		}
 
 		function countMaxAmountOfCustomLotto() {

@@ -24,14 +24,14 @@ public class WebUILottoApplication {
 
             get("/ticket", (req, res) -> {
                 Map<String, Object> model = new HashMap<>();
-                return render(model, "lotto_tickets.html");
+                return render(model, "purchased_tickets.html");
             });
         });
 
         path("/statistics", () -> {
             get("/win", (req, res) -> {
                 Map<String, Object> model = new HashMap<>();
-                return render(model, "purchasing_lotto.html");
+                return render(model, "purchased_tickets.html");
             });
 
             get("/ticket", (req, res) -> {
