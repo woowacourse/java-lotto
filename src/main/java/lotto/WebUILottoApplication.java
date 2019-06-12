@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LottoTickets;
 import lotto.service.LottoTicketService;
-import lotto.service.SelectRoundService;
+import lotto.service.RoundService;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -18,7 +18,7 @@ public class WebUILottoApplication {
 
         Connection connection = new DatabaseConnection().getConnection();
         LottoTicketService lottoTicketService = new LottoTicketService(connection);
-        SelectRoundService selectRoundService = new SelectRoundService(connection);
+        RoundService roundService = new RoundService(connection);
 
         get("/buy/lotto", (req, res) -> {
             try {
@@ -76,7 +76,7 @@ public class WebUILottoApplication {
 
         get("/select/round", (req, res) -> {
             try {
-                Map<String, Object> model = selectRoundService.getRound();
+                Map<String, Object> model = roundService.getRound();
                 return render(model, "selectRound.html");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -87,7 +87,7 @@ public class WebUILottoApplication {
 
         get("/show/round", (req, res) -> {
             String round = req.queryParams(ROUND.type());
-            Map<String, Object> model = selectRoundService.getLottoResults(round);
+            Map<String, Object> model = roundService.getLottoResults(round);
             return render(model, "showRounds.html");
         });
 

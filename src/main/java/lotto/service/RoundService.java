@@ -17,10 +17,10 @@ import java.util.Map;
 import static lotto.ServiceMessage.*;
 
 
-public class SelectRoundService {
+public class RoundService {
     private final Connection connection;
 
-    public SelectRoundService(Connection connection) {
+    public RoundService(Connection connection) {
         this.connection = connection;
     }
 
