@@ -61,15 +61,16 @@ class ConsoleLottoGame {
     public static void main(final String[] args) {
         ConsoleInput input = new ConsoleInput(RULE);
         try {
-            int AllPurchaseCount = input.allPurchaseCount();
-            int manualPurchaseCount = ConsoleInput.singleInt(MESSAGE_MANUAL_COUNT);
-            Lottos lottos = new Lottos(AllPurchaseCount, manualPurchaseCount);
+            final int allPurchaseCount = input.allPurchaseCount();
+            final int manualPurchaseCount = ConsoleInput.singleInt(MESSAGE_MANUAL_COUNT);
+            final int autoPurchaseCount = allPurchaseCount - manualPurchaseCount;
+            final Lottos lottos = new Lottos(allPurchaseCount, manualPurchaseCount);
             lottos.add(inputManyLottos(manualPurchaseCount));
-            lottos.add(MAKER.getAutoLottos(lottos.getAutoPurchaseCount()));
-            ConsoleOutput.buyCount(manualPurchaseCount, lottos.getAutoPurchaseCount());
+            lottos.add(MAKER.getAutoLottos(autoPurchaseCount));
+            ConsoleOutput.buyCount(manualPurchaseCount, autoPurchaseCount);
             ConsoleOutput.lottoList(lottos);
-            WinningLotto winLotto = inputWinningLotto();
-            WinStat stat = new WinStat(lottos, winLotto, RULE);
+            final WinningLotto winLotto = inputWinningLotto();
+            final WinStat stat = new WinStat(lottos, winLotto, RULE);
             ConsoleOutput.statString(stat);
         } catch (Exception e) {
             System.err.println(e.getMessage());

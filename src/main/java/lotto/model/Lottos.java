@@ -12,10 +12,9 @@ public class Lottos implements Iterable<Lotto> {
     }
 
     private final List<Lotto> lottoList = new ArrayList<>();
-    private final int autoPurchaseCount;
 
     public Lottos(final int allPurchaseCount, final int manualPurchaseCount) {
-        this.autoPurchaseCount = allPurchaseCount - manualPurchaseCount;
+        final int autoPurchaseCount = allPurchaseCount - manualPurchaseCount;
         if (autoPurchaseCount < 0) {
             throw new IllegalArgumentException(ERROR_OVER_COUNT);
         }
@@ -23,10 +22,6 @@ public class Lottos implements Iterable<Lotto> {
 
     public void add(final List<Lotto> lottoList) {
         this.lottoList.addAll(lottoList);
-    }
-
-    public int getAutoPurchaseCount() {
-        return autoPurchaseCount;
     }
 
     @Override
