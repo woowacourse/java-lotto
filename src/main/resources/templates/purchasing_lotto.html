@@ -20,8 +20,7 @@
 			<h3 class="display-4">Purchase Lottery!</h3>
 			<hr class="my-4">
 
-			<form action="/purchase/ticket" method="get">
-				<!--onclick="return checkMoneyNumeric();"-->
+			<form id="lotto-form" action="/purchase/ticket" method="get" onsubmit="return checkMoney();">
 				<div class="container" id="purchasing">
 					<h5>구입 금액</h5>
 					<small id="passwordHelpInline" class="text-muted">
@@ -29,7 +28,7 @@
 					</small>
 					<div class="form-row align-items-center">
 						<div class="col-sm-4 my-1">
-							<input type="text" class="form-control" id="money" name="money">
+							<input type="text" class="form-control" id="money" name="money" onchange="checkMoney(); countMaxAmountOfCustomLotto();">
 							<small class="text-muted">원</small>
 						</div>
 					</div>
@@ -40,7 +39,7 @@
 				<div class="container">
 					<h5>수동 로또 입력</h5>
 					<div class="mb-2 mr-2 text-right">
-						<button type="button" class="btn btn-success btn-sm btn-round" onclick="add_lotto();">+</button>
+						<button type="button" class="btn btn-success btn-sm btn-round" onclick="addLotto();">+</button>
 					</div>
 					<div class="container" id="lotto-area"></div>
 				</div>
@@ -48,20 +47,23 @@
 				<div class="col-auto mt-4 text-center">
 					<button type="submit" class="btn btn-outline-secondary">구매하기</button>
 				</div>
+				<input type="hidden" id="max-custom-amount">
 			</form>
 		</div>
 	</div>
 
 	<script type="text/javascript">
+		var count = 0;
+		
 		function checkInput() {
-			checkMoneyNumeric();
+			checkMoney();
 			return false;
 		}
 
-		function checkMoneyNumeric() {
+		function checkMoney() {
 			var money = document.getElementById("money").value;
 
-			if (isNaN(money) || money <= 0) {
+			if (money == null || isNaN(money) || money < 1000 || money > 150000) {
 				window.alert("구입 금액의 값이 올바르지 않습니다.");
 				document.getElementById("money").focus();
 
@@ -69,19 +71,22 @@
 			}
 
 			return true;
-
 		}
-	</script>
 
-	<script type="text/javascript">
-		var count = 0;
+		function addLotto() {
+			var maxCustom = document.getElementById('max-custom-amount').value;
 
-		function add_lotto() {
+			if (count >= maxCustom) {
+				alert("구입 금액보다 많은 로또는 추가할 수 없습니다.");
+				return;
+			}
+
 			var div = document.getElementById('lotto-area');
 
 			var addedDiv = document.createElement('div');
 			addedDiv.id = "each-lotto-" + count;
 			addedDiv.className = "row mb-2 text-center";
+			addedDiv.value = count;
 
 			var lottoNumbersDiv = document.createElement('div');
 			lottoNumbersDiv.id = "each-lotto-" + count;
@@ -96,11 +101,15 @@
 			deletingBtn.type = "button";
 			deletingBtn.id = "deleting-lotto-btn-" + count;
 			deletingBtn.className = "btn btn-danger btn-sm btn-round vertical-center";
+			deletingBtn.value = count;
+			deletingBtn.onclick = function() {
+				deleteLotto(deletingBtn.value);
+			};
 			deletingBtn.innerHTML = '-';
 
 			var str = '';
 			for (var i = 1; i <= 45; i++) {
-				str += '<label class="btn btn-outline-dark mb-1 active">' +
+				str += '<label class="btn btn-outline-dark mb-1 mr-1" onclick="clickNumber(' + i + ');">' +
 					'<input type="checkbox" checked autocomplete="off"> ' +
 					i + '</label>';
 			}
@@ -111,8 +120,47 @@
 			deletingDiv.appendChild(deletingBtn);
 			div.appendChild(addedDiv);
 
+			addHidden();
+
 			count++;
 		}
+
+		function deleteLotto(lottoId) {
+			var lottoDiv = document.getElementById('lotto-area');
+			var lotto = document.getElementById('each-lotto-' + lottoId);
+
+			lottoDiv.removeChild(lotto);
+			count--;
+			deleteHidden(lottoId);
+		}
+		
+		function addHidden() {
+			var form = document.getElementById('lotto-form');
+			var hidden = document.createElement('input');
+			hidden.type = 'hidden';
+			hidden.id = 'lotto-number-' + count;
+
+			form.appendChild(hidden);
+		}
+
+		function deleteHidden(hiddenId) {
+			var form = document.getElementById('lotto-form');
+			var hidden = document.getElementById('lotto-number-' + hiddenId);
+			
+			form.removeChild(hidden);
+		}
+
+		function clickNumber(number) {
+			alert(number);
+		}
+
+		function countMaxAmountOfCustomLotto() {
+			var maxHidden = document.getElementById('max-custom-amount');
+			var maxAmount = document.getElementById('money').value / 1000;
+
+			maxHidden.value = maxAmount;
+		}
+
 	</script>
 
 	<!-- Optional JavaScript -->
@@ -120,4 +168,6 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body></html>
+</body>
+
+</html>
