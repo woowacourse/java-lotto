@@ -1,69 +1,65 @@
 package com.woowacourse.lotto.persistence.dao;
 
 import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.Optional;
+import java.util.Queue;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoDaoTest {
     private static final WinningLottoDto TEMP_WINNING_LOTTO;
 
-    private WinningLottoDao dao;
-    private long lastInsertedId;
+    private static WinningLottoDao winningLottoDao;
+    private static Queue<Long> winningLottoIdsToClean = new LinkedList<>();
 
     static {
         TEMP_WINNING_LOTTO = new WinningLottoDto();
-        TEMP_WINNING_LOTTO.setWinningNumber0(1);
-        TEMP_WINNING_LOTTO.setWinningNumber1(2);
-        TEMP_WINNING_LOTTO.setWinningNumber2(3);
-        TEMP_WINNING_LOTTO.setWinningNumber3(4);
-        TEMP_WINNING_LOTTO.setWinningNumber4(5);
-        TEMP_WINNING_LOTTO.setWinningNumber5(6);
-        TEMP_WINNING_LOTTO.setWinningBonusNumber(7);
+        TEMP_WINNING_LOTTO.setWinningNumber0(31);
+        TEMP_WINNING_LOTTO.setWinningNumber1(13);
+        TEMP_WINNING_LOTTO.setWinningNumber2(14);
+        TEMP_WINNING_LOTTO.setWinningNumber3(19);
+        TEMP_WINNING_LOTTO.setWinningNumber4(26);
+        TEMP_WINNING_LOTTO.setWinningNumber5(28);
+        TEMP_WINNING_LOTTO.setWinningBonusNumber(30);
     }
 
-    @BeforeEach
-    void setup() {
-        dao = new WinningLottoDao(ConnectionFactory.getConnection());
+    @BeforeAll
+    static void init() {
+        winningLottoDao = new WinningLottoDao(ConnectionFactory.getConnection());
     }
 
-    @AfterEach
-    void cleanup() throws Exception {
-        dao.deleteById(lastInsertedId);
-    }
-
-    @Test
-    void insert() throws Exception {
-        long insertedId = dao.addWinningLotto(TEMP_WINNING_LOTTO);
-        lastInsertedId = insertedId;
-        assertThat(insertedId).isGreaterThanOrEqualTo(1);
+    @BeforeAll
+    static void cleanup() throws SQLException {
+        for (long id : winningLottoIdsToClean) {
+            winningLottoDao.deleteById(id);
+        }
     }
 
     @Test
-    void findById() throws Exception {
-        long insertedId = dao.addWinningLotto(TEMP_WINNING_LOTTO);
-        lastInsertedId = insertedId;
-        Optional<WinningLottoDto> maybeFound = dao.findById(insertedId);
-        assertThat(maybeFound.isPresent()).isTrue();
-        WinningLottoDto found = maybeFound.get();
-        assertThat(found.getWinningNumber0()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber0());
-        assertThat(found.getWinningNumber1()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber1());
-        assertThat(found.getWinningNumber2()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber2());
-        assertThat(found.getWinningNumber3()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber3());
-        assertThat(found.getWinningNumber4()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber4());
-        assertThat(found.getWinningNumber5()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber5());
-        assertThat(found.getWinningBonusNumber()).isEqualTo(TEMP_WINNING_LOTTO.getWinningBonusNumber());
+    void insertAndFind() throws SQLException {
+        long insertedWinningLottoId = winningLottoDao.addWinningLotto(TEMP_WINNING_LOTTO);
+        Optional<WinningLottoDto> found = winningLottoDao.findById(insertedWinningLottoId);
+        assertThat(found.isPresent()).isTrue();
+        assertThat(found.get().getWinningNumber0()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber0());
+        assertThat(found.get().getWinningNumber1()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber1());
+        assertThat(found.get().getWinningNumber2()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber2());
+        assertThat(found.get().getWinningNumber3()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber3());
+        assertThat(found.get().getWinningNumber4()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber4());
+        assertThat(found.get().getWinningNumber5()).isEqualTo(TEMP_WINNING_LOTTO.getWinningNumber5());
+        assertThat(found.get().getWinningBonusNumber()).isEqualTo(TEMP_WINNING_LOTTO.getWinningBonusNumber());
+        winningLottoIdsToClean.add(insertedWinningLottoId);
     }
 
     @Test
-    void deleteById() throws Exception{
-        long insertedId = dao.addWinningLotto(TEMP_WINNING_LOTTO);
-        lastInsertedId = insertedId;
-        assertThat(dao.deleteById(insertedId)).isEqualTo(1);
-        assertThat(dao.findById(insertedId).isPresent()).isFalse();
+    void delete() throws SQLException {
+        long insertedWinningLottoId = winningLottoDao.addWinningLotto(TEMP_WINNING_LOTTO);
+        winningLottoDao.deleteById(insertedWinningLottoId);
+        Optional<WinningLottoDto> found = winningLottoDao.findById(insertedWinningLottoId);
+        assertThat(found.isPresent()).isFalse();
     }
 }
