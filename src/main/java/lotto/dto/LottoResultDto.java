@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class LottoResultDto {
     private static final int LOTTO_UNIT_PRICE = 1000;
+    private static final int DECIMAL_POINT = 3;
     private final Map<Rank, Integer> results;
 
     public LottoResultDto(Map<Rank, Integer> results) {
@@ -29,8 +30,8 @@ public class LottoResultDto {
             return new BigDecimal(numerator);
         }
         return new BigDecimal(numerator)
-                .divide(new BigDecimal(denominator), 3, RoundingMode.CEILING)
-                .divide(new BigDecimal(LOTTO_UNIT_PRICE), 3, RoundingMode.CEILING);
+                .divide(new BigDecimal(denominator), DECIMAL_POINT, RoundingMode.CEILING)
+                .divide(new BigDecimal(LOTTO_UNIT_PRICE), DECIMAL_POINT, RoundingMode.CEILING);
     }
 
     public Map<Rank, Integer> getResults() {
