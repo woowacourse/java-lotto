@@ -25,16 +25,8 @@
     </form>
 
     <h1>라운드 회차별 조회</h1>
-    {{#each rounds}}
+    {{#rounds}}
     <a href="/round?round={{this}}">{{this}}회</a>
-    {{/each}}
-
-
-    <script>
-        Handlebars.registerHelper('isTenth', function (index) {
-            return index === 10;
-        });
-    </script>
-
+    {{/rounds}}
     </body>
 </htmlm>
