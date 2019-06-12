@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Rank;
 import lotto.domain.WinPrize;
 
 import java.util.List;

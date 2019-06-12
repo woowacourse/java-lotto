@@ -25,13 +25,6 @@ public class LottoService {
     private LottoService() {
     }
 
-    public static Object main(Request req, Response res) {
-        Map<String, Object> model = new HashMap<>();
-        model.put("round", latestRound() + 1);
-        model.put("rounds", new RoundDao().findAll());
-        return render(model, "start.html");
-    }
-
     public static Object addLottos(Request req, Response res) throws SQLException {
         RoundDao roundDao = new RoundDao();
         roundDao.add();

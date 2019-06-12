@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.service.ErrorService;
 import lotto.service.LottoService;
+import lotto.service.MainService;
 import lotto.service.RoundService;
 import lotto.utils.Encoder;
 import spark.ModelAndView;
@@ -19,7 +20,7 @@ public class WebUILottoApplication {
 
         externalStaticFileLocation("src/main/resources/templates");
 
-        get("/", LottoService::main);
+        get("/", MainService::main);
 
         get("/round", RoundService::round);
 

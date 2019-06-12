@@ -13,7 +13,7 @@ public class ErrorService {
     private ErrorService() {
     }
 
-    public static Object exception(Request req, Response res){
+    public static Object exception(Request req, Response res) {
         Map<String, Object> model = new HashMap<>();
         model.put("message", req.queryParams("message"));
         return render(model, "error.html");
