@@ -1,9 +1,8 @@
 package lotto.dao;
 
 import lotto.domain.Lotto;
-import lotto.util.LottoDtoConverter;
 import lotto.domain.LottoFactory;
-import lotto.LottoDto;
+import lotto.dto.LottoDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

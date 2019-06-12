@@ -19,20 +19,18 @@
       </nav>
       <div id="turns-info" class="main-body">
             <label>제 {{current_turn}} 회 로또 게임</label>
-            <form action="/turn" method="post">
-                  <div class="turns">
-                        {{#turns}}
-                        <a href="/turn?current_turn={{this}}">{{this}}회</a>
-                        {{/turns}}
-                  </div>
-            </form>
+            <div class="turns">
+                  {{#turns}}
+                  <a href="/turn/{{this}}">{{this}}회</a>
+                  {{/turns}}
+            </div>
       </div>
       <br>
       <div id="input-money" class="main-body">
             <form action="/money" method="post">
                   <div class="money">
                         <label>구입 금액 : </label>
-                        <input type="text" name="money" />
+                        <input type="text" name="money" required />
                         <input type="submit" value="충전" />
                   </div>
             </form>

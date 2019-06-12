@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.GameResultDto;
+import lotto.dto.GameResultDto;
 import lotto.domain.Rank;
 
 import java.sql.Connection;

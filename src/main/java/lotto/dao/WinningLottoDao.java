@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.LottoDto;
+import lotto.dto.LottoDto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;

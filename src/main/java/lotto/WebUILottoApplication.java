@@ -5,7 +5,8 @@ import lotto.dao.TurnDao;
 import lotto.dao.WinningLottoDao;
 import lotto.domain.*;
 import lotto.domain.exception.*;
-import lotto.util.GameResultDtoConverter;
+import lotto.dto.GameResultDto;
+import lotto.dto.LottoDto;
 import lotto.util.LottoParser;
 import lotto.util.RandomNumbersGenerator;
 import spark.ModelAndView;
@@ -24,11 +25,9 @@ public class WebUILottoApplication {
 
     public static void main(String[] args) {
         final LottoService service = new LottoService();
-
         handleException();
-
         get("/", (req, res) -> renderMain());
-        get("/turn", (req, res) ->
+        get("/turn/:index", (req, res) ->
                 renderTurnInfo(service, req)
         );
         post("/money", (req, res) ->
@@ -37,7 +36,7 @@ public class WebUILottoApplication {
         post("/lottos", (req, res) ->
                 renderLottos(service, req)
         );
-        post("/winning", (req, res) ->
+        post("/result", (req, res) ->
                 renderResult(service, req)
         );
         post("/end", (req, res) ->
@@ -69,7 +68,7 @@ public class WebUILottoApplication {
 
     private static String renderTurnInfo(final LottoService service, final Request req) {
         Map<String, Object> model = new HashMap<>();
-        int turn = Integer.parseInt(req.queryParams("current_turn"));
+        int turn = Integer.parseInt(req.params("index"));
         GameResultDto result = findResultByTurn(turn);
         model.put("turn", turn);
         model.put("lottos", service.findAllByTurn(turn));

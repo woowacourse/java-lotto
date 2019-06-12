@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.LottoDto;
+import lotto.dto.LottoDto;
 import lotto.util.LottoParser;
 
 import java.sql.Connection;

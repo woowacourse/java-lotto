@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import lotto.LottoDto;
+import lotto.dto.LottoDto;
 import lotto.dao.LottosDao;
 import lotto.dao.TurnDao;
-import lotto.util.LottoDtoConverter;
 
 import java.util.ArrayList;
 import java.util.List;

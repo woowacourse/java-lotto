@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import lotto.LottoDto;
+import lotto.dto.LottoDto;
 import lotto.domain.exception.WinningLottoHasBonusException;
-import lotto.util.LottoDtoConverter;
 
 import java.util.Objects;
 

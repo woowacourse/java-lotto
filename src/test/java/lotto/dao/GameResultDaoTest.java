@@ -1,8 +1,7 @@
 package lotto.dao;
 
-import lotto.GameResultDto;
+import lotto.dto.GameResultDto;
 import lotto.domain.*;
-import lotto.util.GameResultDtoConverter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,6 +43,7 @@ public class GameResultDaoTest {
     @BeforeEach
     public void setUp() {
         resultDao = new GameResultDao();
+        resultDao.deleteAll();
         resultDao.add(GAME_RESULT_DTO, TEST_TURN);
     }
 

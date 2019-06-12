@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.GameResultDto;
+import lotto.dto.GameResultDto;
 import lotto.domain.GameResult;
 import lotto.domain.LottoMachine;
 import lotto.domain.Rank;

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.dto;
 
 import lotto.domain.Lotto;
 import lotto.util.LottoDtoConverter;

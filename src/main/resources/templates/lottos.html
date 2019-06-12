@@ -13,18 +13,6 @@
       <title>lotto game</title>
 </head>
 
-
-<style>
-      div.lottobuy input {
-            max-width: 100px;
-      }
-
-      #bonus {
-            max-width: 20px;
-      }
-</style>
-<!-- #users 리스트 -->
-
 <body>
       <nav>
             <h3>결과 출력 및 winning 체크</h3>
@@ -39,13 +27,13 @@
             {{/lottos}}
       </div>
 
-      <form action="/winning" method="post">
+      <form action="/result" method="post">
             <br>
             <span>당첨 번호 </span>
             <br>
-            <input type="text" name="winninglotto" placeholder="1,2,3,4,5,6" />
+            <input type="text" name="winninglotto" placeholder="1,2,3,4,5,6" required/>
             -
-            <input id="bonus" type="bonusnum" name="bonusnumber" placeholder="1" maxlength=2 />
+            <input type="text" id="bonus" name="bonusnumber" placeholder="1" size="1" maxlength="2" required/>
             <input type="submit" value="구입" />
       </form>
 
