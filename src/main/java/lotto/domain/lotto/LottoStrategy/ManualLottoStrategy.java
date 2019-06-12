@@ -24,7 +24,7 @@ public class ManualLottoStrategy implements LottoStrategy {
                 .map(String::trim)
                 .filter(x -> !x.isEmpty() || !x.isBlank())
                 .map(Integer::parseInt)
-                .collect(Collectors.toList())
+                .collect(Collectors.toUnmodifiableList())
         );
     }
 }
