@@ -32,14 +32,20 @@ public enum Rank {
         return money;
     }
 
+    public int matchCount() {
+        return match;
+    }
+
+    public boolean hasBonus() {
+        return bonus;
+    }
+
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(match).append("개 일치 ");
-        if (bonus) {
-            stringBuilder.append("보너스 볼 일치 ").append(money);
-            return stringBuilder.toString();
-        }
-        return stringBuilder.append(money).toString();
+        return "Rank{" +
+                "match=" + match +
+                ", bonus=" + bonus +
+                ", money=" + money +
+                '}';
     }
 }
