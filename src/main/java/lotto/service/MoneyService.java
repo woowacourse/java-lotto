@@ -22,12 +22,11 @@ public class MoneyService {
         return instance;
     }
 
-    public int addMoney(Money money) throws Exception {
-        int times = winningLottoDao.nextWinningLottoTimes();
+    public int addMoney(Money money, int times) throws Exception {
         return moneyDao.addMoney(money, times);
     }
 
-    public Money findByTimes(int latelyTimes) throws Exception {
-        return moneyDao.findByTimes(latelyTimes);
+    public Money findByTimes(int times) throws Exception {
+        return moneyDao.findByTimes(times);
     }
 }

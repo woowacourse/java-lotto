@@ -7,11 +7,9 @@ import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoDaoTest {
     private WinningLottoDao winningLottoDao;
@@ -41,6 +39,6 @@ class WinningLottoDaoTest {
 
     @Test
     void nextTimes() throws Exception {
-        assertThat(winningLottoDao.nextWinningLottoTimes()).isEqualTo(1);
+        assertThat(winningLottoDao.newWinningLottoTimes()).isEqualTo(1);
     }
 }

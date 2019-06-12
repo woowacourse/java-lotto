@@ -51,13 +51,13 @@ public class WinningLottoDao {
         return pstmt.executeUpdate();
     }
 
-    public int nextWinningLottoTimes() throws SQLException{
+    public int newWinningLottoTimes() throws SQLException{
         String query = "SELECT MAX(times) FROM winning_lotto";
         PreparedStatement pstmt = dataBase.getConnection().prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
 
-        if (!rs.next()) return 1;
+        if (!rs.next()) return 0;
 
-        return rs.getInt(1) + 1;
+        return rs.getInt(1);
     }
 }

@@ -22,16 +22,9 @@ public class LottoService {
         return instance;
     }
 
-    public void addLottos(Lottos lottos) throws Exception {
-        int times = winningLottoDao.nextWinningLottoTimes();
-
+    public void addLottos(Lottos lottos, int times) throws Exception {
         lottosDao.deleteLottos(times);
         lottosDao.addLottos(lottos, times);
-    }
-
-    public Lottos getLottos() throws Exception {
-        int times = winningLottoDao.nextWinningLottoTimes();
-        return lottosDao.findByTimes(times);
     }
 
     public Lottos getLottos(int times) throws Exception {

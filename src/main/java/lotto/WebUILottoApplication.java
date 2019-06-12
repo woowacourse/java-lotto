@@ -46,8 +46,10 @@ public class WebUILottoApplication {
                 List<String> manuals = getLottos(pairs);
                 Lottos lottos = LottosFactory.create(manuals, money);
 
-                moneyService.addMoney(money);
-                lottoService.addLottos(lottos);
+                int nextTimes = winningLottoService.nextWinningLottoTimes();
+
+                moneyService.addMoney(money, nextTimes);
+                lottoService.addLottos(lottos, nextTimes);
 
                 return lottos.getLottos();
             } catch (Exception e) {
@@ -72,10 +74,12 @@ public class WebUILottoApplication {
                 Gson gson = new GsonBuilder().create();
                 List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
 
-                WinningLotto winningLotto = createWinningLotto(pairs);
-                Lottos lottos = lottoService.getLottos();
+                int nextTimes = winningLottoService.nextWinningLottoTimes();
 
-                winningLottoService.addWinningLotto(winningLotto);
+                WinningLotto winningLotto = createWinningLotto(pairs);
+                Lottos lottos = lottoService.getLottos(nextTimes);
+
+                winningLottoService.addWinningLotto(winningLotto, nextTimes);
                 LottoResult lottoResult = new LottoResult(lottos.getLottos(), winningLotto);
 
                 return gson.toJson(lottoResult.getLottoResult());
@@ -86,9 +90,10 @@ public class WebUILottoApplication {
 
         get("/lottoYield", (req, res) -> {
             try {
-                int latelyTimes = winningLottoService.nextWinningLottoTimes();
-                LottoResult lottoResult = createLottoResult(latelyTimes);
-                Money money = moneyService.findByTimes(latelyTimes - 1);
+                int times = winningLottoService.nowWinningLottoTimes();
+
+                LottoResult lottoResult = createLottoResult(times);
+                Money money = moneyService.findByTimes(times);
 
                 double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
 

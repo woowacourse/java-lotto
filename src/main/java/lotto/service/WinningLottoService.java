@@ -19,13 +19,15 @@ public class WinningLottoService {
         return instance;
     }
 
-
-    public int nextWinningLottoTimes() throws Exception {
-        return winningLottoDao.nextWinningLottoTimes();
+    public int nowWinningLottoTimes() throws Exception {
+        return winningLottoDao.newWinningLottoTimes();
     }
 
-    public int addWinningLotto(WinningLotto winningLotto) throws Exception {
-        int times = winningLottoDao.nextWinningLottoTimes();
+    public int nextWinningLottoTimes() throws Exception {
+        return winningLottoDao.newWinningLottoTimes() + 1;
+    }
+
+    public int addWinningLotto(WinningLotto winningLotto, int times) throws Exception {
         return winningLottoDao.addWinningLotto(winningLotto, times);
     }
 
