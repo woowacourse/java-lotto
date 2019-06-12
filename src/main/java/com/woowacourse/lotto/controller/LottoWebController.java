@@ -2,10 +2,12 @@ package com.woowacourse.lotto.controller;
 
 import com.google.gson.Gson;
 import com.woowacourse.lotto.controller.dto.AutoLottoBuyingRequestDto;
+import com.woowacourse.lotto.controller.dto.LottoBuyingRequestDto;
 import com.woowacourse.lotto.controller.dto.LottoDrawingRequestDto;
 import com.woowacourse.lotto.controller.dto.ManualLottoBuyingRequestDto;
 import com.woowacourse.lotto.domain.*;
 import com.woowacourse.lotto.persistence.dto.AggregationDto;
+import com.woowacourse.lotto.persistence.dto.LottoDto;
 import com.woowacourse.lotto.service.LottoService;
 import spark.ModelAndView;
 import spark.Request;
@@ -13,7 +15,6 @@ import spark.Response;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,11 +34,15 @@ public class LottoWebController {
     }
 
     /***
-     * 자동 로또 구입 API
+     * 로또 구입 API
      * @param req
      * 요청 JSON 예시:
      * {
-     *     "quantity": 2
+     *     "buyingMoney": 14000,
+     *     "manualNumbers": [
+     *          [1, 2, 3, 4, 5, 6],
+     *          // ...
+     *     ]
      * }
      * @param res
      * 응답 JSON 예시:
@@ -72,70 +77,58 @@ public class LottoWebController {
      *     ]
      * }
      */
-    public static Map<String, Object> buyAutoLotto(Request req, Response res) {
+    public static Map<String, Object> buyLotto(Request req, Response res) {
+        LottoBuyingRequestDto request = new Gson().fromJson(req.body(), LottoBuyingRequestDto.class);
+        Map<String, Object> resMap;
         try {
-            return handleAutoBuyingRequest(new Gson().fromJson(req.body(), AutoLottoBuyingRequestDto.class));
+            resMap = handleLottoBuyingRequest(request);
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            Map<String, Object> resMap = createResMapWithResult(ResultState.FAIL);
+            resMap = createResMapWithResult(ResultState.FAIL);
             resMap.put("message", e.getMessage());
-            return resMap;
         } catch (Exception e) {
-            e.printStackTrace();
-            Map<String, Object> resMap = createResMapWithResult(ResultState.ERROR);
+            resMap = createResMapWithResult(ResultState.ERROR);
             resMap.put("message", e.getMessage());
-            return resMap;
         }
-    }
-
-    private static Map<String, Object> handleAutoBuyingRequest(AutoLottoBuyingRequestDto request) {
-        LottoQuantity quantity = LottoQuantity.of(request.getQuantity());
-        NumberGenerator numberGenerator = new RandomNumberGenerator(LottoNumber.LOTTO_NUMBER_MIN, LottoNumber.LOTTO_NUMBER_MAX);
-
-        Map<String, Object> resMap = createResMapWithResult(ResultState.OK);
-        resMap.put("lottos", IntStream.range(0, quantity.toInt())
-            .mapToObj(i -> LottoFactory.createLotto(numberGenerator))
-            .map(lottoService::addLotto)
-            .collect(Collectors.toList()));
         return resMap;
     }
 
-    /***
-     * 수동 로또 구입 API
-     * @param req
-     * 요청 JSON 예시:
-     * {
-     *     "numbers": [
-     *     	[1, 2, 3, 4, 5, 6, 7],
-     *     	[2, 6, 10, 11, 23, 32]
-     *     ]
-     * }
-     * @param res {@link #buyAutoLotto(Request, Response)}의 응답 예시 참고.
-     */
-    public static Map<String, Object> buyManualLotto(Request req, Response res) {
-        try {
-            return handleManualBuyingRequest(new Gson().fromJson(req.body(), ManualLottoBuyingRequestDto.class));
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            Map<String, Object> resMap = createResMapWithResult(ResultState.FAIL);
-            resMap.put("message", e.getMessage());
-            return resMap;
-        } catch (Exception e) {
-            e.printStackTrace();
-            Map<String, Object> resMap = createResMapWithResult(ResultState.ERROR);
-            resMap.put("message", e.getMessage());
-            return resMap;
-        }
+    private static Map<String, Object> handleLottoBuyingRequest(LottoBuyingRequestDto req) {
+        BuyingMoney money = new BuyingMoney(req.getBuyingMoney());
+        LottoQuantity totalQuantity = money.getQuantity();
+        List<Lotto> lottos = buyManualLotto(req);
+        assertBuyingMoneyEnough(totalQuantity, lottos);
+        LottoQuantity autoQuantity = LottoQuantity.of(totalQuantity.toInt() - lottos.size());
+        lottos.addAll(buyAutoLotto(autoQuantity));
+        List<LottoDto> storedLottos = saveLottos(lottos);
+        Map<String, Object> resMap = createResMapWithResult(ResultState.OK);
+        resMap.put("lottos", storedLottos);
+        return resMap;
     }
 
-    private static Map<String, Object> handleManualBuyingRequest(ManualLottoBuyingRequestDto request) {
-        Map<String, Object> resMap = createResMapWithResult(ResultState.OK);
-        resMap.put("lottos", request.getNumbers().stream()
+    private static List<Lotto> buyManualLotto(LottoBuyingRequestDto req) {
+        return req.getManualNumbers().stream()
             .map(LottoNumberGroup::of)
             .map(LottoFactory::createLotto)
-            .map(lottoService::addLotto)
-            .collect(Collectors.toList()));
-        return resMap;
+            .collect(Collectors.toList());
+    }
+
+    private static void assertBuyingMoneyEnough(LottoQuantity totalQuantity, List<Lotto> lottos) {
+        if (totalQuantity.compareTo(LottoQuantity.of(lottos.size())) == -1) {
+            throw new IllegalArgumentException("금액이 부족합니다.");
+        }
+    }
+
+    private static List<Lotto> buyAutoLotto(LottoQuantity autoQuantity) {
+        NumberGenerator numberGenerator = new RandomNumberGenerator(LottoNumber.LOTTO_NUMBER_MIN, LottoNumber.LOTTO_NUMBER_MAX);
+        return IntStream.range(0, autoQuantity.toInt())
+            .mapToObj(i -> LottoFactory.createLotto(numberGenerator))
+            .collect(Collectors.toList());
+    }
+
+    private static List<LottoDto> saveLottos(List<Lotto> lottos) {
+        return lottos.stream()
+                .map(lottoService::addLotto)
+                .collect(Collectors.toList());
     }
 
     /**

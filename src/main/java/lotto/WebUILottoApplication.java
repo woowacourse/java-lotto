@@ -19,8 +19,7 @@ public class WebUILottoApplication {
 
         get("/api/results", LottoWebController::retrieveAggregations, gson::toJson);
         get("/api/result/:id", LottoWebController::retrieveSingleAggregation, gson::toJson);
-        post("/api/buy-auto", LottoWebController::buyAutoLotto, gson::toJson);
-        post("/api/buy-manual", LottoWebController::buyManualLotto, gson::toJson);
+        post("/api/buy", LottoWebController::buyLotto, gson::toJson);
         post("/api/draw", LottoWebController::draw, gson::toJson);
 
         // api 루트가 아닌 경우에는 인덱스 페이지 반환(SPA)
