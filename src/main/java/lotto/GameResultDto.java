@@ -1,6 +1,8 @@
 package lotto;
 
+import lotto.domain.GameResult;
 import lotto.domain.Rank;
+import lotto.util.GameResultDtoConverter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +20,10 @@ public class GameResultDto {
 
     public static GameResultDto of(Map<Rank, Integer> counts, Double profit) {
         return new GameResultDto(counts, profit);
+    }
+
+    public static GameResultDto of(final GameResult result) {
+        return new GameResultDtoConverter().convertResultToDto(result);
     }
 
     public Integer getCount(final Rank rank) {

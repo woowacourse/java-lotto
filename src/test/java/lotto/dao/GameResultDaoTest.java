@@ -38,7 +38,7 @@ public class GameResultDaoTest {
         GAME_RESULT = GameResult.of(LOTTOS);
         GAME_RESULT.match(WINNING_LOTTO);
 
-        GAME_RESULT_DTO = new GameResultDtoConverter().convertResultToDto(GAME_RESULT);
+        GAME_RESULT_DTO = GameResultDto.of(GAME_RESULT);
     }
 
     @BeforeEach

@@ -137,7 +137,7 @@ public class WebUILottoApplication {
     }
 
     private static GameResultDto convertResultToDto(GameResult gameResult) {
-        return new GameResultDtoConverter().convertResultToDto(gameResult);
+        return GameResultDto.of(gameResult);
     }
 
     private static void addWinningLotto(WinningLotto winningLotto) {
