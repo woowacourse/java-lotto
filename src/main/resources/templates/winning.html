@@ -5,6 +5,7 @@
     <title>당첨 번호 입력</title>
 </head>
 <body>
+<form action="/result" method="post">
 <div>구매된 로또 번호</div>
 {{#each lottoes}}
 <div>{{this}}<br></div>
@@ -15,5 +16,6 @@
 <div>보너스 볼을 입력해 주세요.</div>
 <input id="bonusBall" type="text" name = "bonusBall" >
 <button type="submit">확인</button><br>
+</form>
 </body>
 </html>

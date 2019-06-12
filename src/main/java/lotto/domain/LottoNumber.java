@@ -25,7 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> autoLottoNumbers = lottoNumbers.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX);
         Collections.sort(autoLottoNumbers);
-        return autoLottoNumbers;
+        return new ArrayList<>(autoLottoNumbers);
     }
 
     public static boolean isNotValidLottoNumber(int number) {
