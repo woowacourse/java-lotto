@@ -50,4 +50,9 @@ public class Lotteries implements Iterable<Lotto> {
     public int hashCode() {
         return Objects.hash(lotteries);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lotteries);
+    }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import com.google.gson.Gson;
 import lotto.domain.customcreatelotto.DefaultCustomCreateCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @version 1.0 2019-05-29
  */
 class LotteriesTest {
-    private Lotteries lotteries;
+    public static Lotteries lotteries;
 
     @BeforeEach
     void setUp() {
@@ -26,5 +27,10 @@ class LotteriesTest {
         Lotteries lotteries2 = new Lotteries();
         lotteries2.addCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6), new DefaultCustomCreateCreateLotto());
         assertThat(lotteries).isEqualTo(lotteries2);
+    }
+
+    @Test
+    void jsonTest() {
+        System.out.println(new Gson().toJson(lotteries));
     }
 }

@@ -11,8 +11,12 @@ import java.util.Objects;
 public class RankResult {
     private final Map<Rank, Integer> rankResult;
     private final float rate;
+    private final Winner winner;
+    private final Lotteries lotteries;
 
     public RankResult(Lotteries lotteries, Winner winner, Money money) {
+        this.lotteries = lotteries;
+        this.winner = winner;
         this.rankResult = initRankResult(lotteries, winner);
         this.rate = calculateRateOfJackpot(money);
 
@@ -57,6 +61,14 @@ public class RankResult {
 
     public float getRate() {
         return rate;
+    }
+
+    public LottoNumber winLotto(int index) {
+        return winner.winLotto(index);
+    }
+
+    public LottoNumber winBonus() {
+        return winner.getBonus();
     }
 
     @Override

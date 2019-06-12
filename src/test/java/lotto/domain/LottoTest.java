@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import lotto.domain.autocreatelotto.MockAutoCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,5 +60,18 @@ public class LottoTest {
     @Test
     void match_확인() {
         assertThat(createLotto.matchCount(lotto2)).isEqualTo(6);
+    }
+
+    @Test
+    void jsonTest() {
+        JsonObject jsonObject = new JsonObject();
+        JsonArray jsonArray = new JsonArray();
+        for (int i = 1; i <= 6; i++) {
+            JsonObject number = new JsonObject();
+            number.addProperty("lottoNumber", i);
+            jsonArray.add(number);
+        }
+        jsonObject.add("lotto",jsonArray);
+        assertThat(new Gson().toJson(createLotto)).isEqualTo(new Gson().toJson(jsonObject));
     }
 }

@@ -13,10 +13,10 @@ public class Lotto implements Iterable<LottoNumber> {
     private static final int LOTTO_SIZE = 6;
     private static final String EX_LOTTO_SIZE_MESSAGE = "로또 숫자는 6개여야 합니다.";
     private static final String EX_LOTTO_DUPLICATE_MESSAGE = "중복된 숫자는 사용할 수 없습니다";
-    private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lotto;
 
-    private Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    private Lotto(List<LottoNumber> lotto) {
+        this.lotto = lotto;
         checkLottoNumberCondition();
     }
 
@@ -38,13 +38,13 @@ public class Lotto implements Iterable<LottoNumber> {
     }
 
     private void checkSize() {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
+        if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(EX_LOTTO_SIZE_MESSAGE);
         }
     }
 
     private void checkDuplicate() {
-        if (lottoNumbers.size() != new ArrayList<>(new HashSet<>(lottoNumbers)).size()) {
+        if (lotto.size() != new ArrayList<>(new HashSet<>(lotto)).size()) {
             throw new IllegalArgumentException(EX_LOTTO_DUPLICATE_MESSAGE);
         }
     }
@@ -65,23 +65,27 @@ public class Lotto implements Iterable<LottoNumber> {
     }
 
     public boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+        return lotto.contains(lottoNumber);
     }
 
     public String toStringWithFormat(String startSymbol, String endSymbol, String separator) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(startSymbol);
         StringJoiner stringJoiner = new StringJoiner(separator);
-        for (LottoNumber lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : lotto) {
             stringJoiner.add(lottoNumber.toString());
         }
         stringBuilder.append(stringJoiner).append(endSymbol);
         return stringBuilder.toString();
     }
 
+    public LottoNumber get(int index) {
+        return lotto.get(index);
+    }
+
     @Override
     public Iterator iterator() {
-        return lottoNumbers.iterator();
+        return lotto.iterator();
     }
 
     @Override
@@ -89,11 +93,16 @@ public class Lotto implements Iterable<LottoNumber> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+        return Objects.equals(this.lotto, lotto.lotto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lotto);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lotto);
     }
 }

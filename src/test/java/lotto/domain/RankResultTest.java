@@ -10,19 +10,24 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author heebg
  * @version 1.0 2019-06-02
  */
-class RankResultTest {
-    private RankResult rankResult;
+public class RankResultTest {
+    private RankResult rankResultTest;
     private Lotteries lotteries;
 
     @BeforeEach
     void setUp() {
         lotteries = new Lotteries();
         lotteries.addAutoLotteries(1, new MockAutoCreateLotto());
-        rankResult = new RankResult(lotteries, WinnerTest.winner, new Money(1000));
+        rankResultTest = new RankResult(lotteries, WinnerTest.winner, new Money(1000));
     }
 
     @Test
     void addRank() {
-        assertThat(rankResult.matchRankCount(Rank.FIRST)).isEqualTo(1);
+        assertThat(rankResultTest.matchRankCount(Rank.FIRST)).isEqualTo(1);
+    }
+
+    @Test
+    void rate() {
+        System.out.println(String.valueOf(rankResultTest.getRate()));
     }
 }
