@@ -1,14 +1,16 @@
 package lotto.domain.dao;
 
 import lotto.domain.dto.ResultDTO;
-import lotto.domain.lotto.Rank;
-import lotto.domain.lotto.Result;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.domain.dao.JdbcConnector.getConnection;
+import static lotto.domain.dao.sqls.Columns.*;
 import static lotto.domain.dao.sqls.LottoDaoSqls.SELECT_ALL_LOTTO_RESULT;
 
 public class LottoDao {
@@ -27,13 +29,13 @@ public class LottoDao {
             List<ResultDTO> results = new ArrayList<>();
             while (resultSet.next()) {
                 ResultDTO resultDTO = new ResultDTO.Builder(
-                        resultSet.getInt("id"), resultSet.getString("name"))
-                        .first(resultSet.getInt("first"))
-                        .second(resultSet.getInt("second"))
-                        .third(resultSet.getInt("third"))
-                        .fourth(resultSet.getInt("fourth"))
-                        .fifth(resultSet.getInt("fifth"))
-                        .miss(resultSet.getInt("miss"))
+                        resultSet.getInt(ID), resultSet.getString(NAME))
+                        .first(resultSet.getInt(FIRST))
+                        .second(resultSet.getInt(SECOND))
+                        .third(resultSet.getInt(THIRD))
+                        .fourth(resultSet.getInt(FOURTH))
+                        .fifth(resultSet.getInt(FIFTH))
+                        .miss(resultSet.getInt(MISS))
                         .build();
                 results.add(resultDTO);
             }

@@ -29,7 +29,9 @@
     </form>
     <div class="row">
         <div class="col-md-6">
-            A table
+            {{#lottoGames}}
+                {{round}} | {{name}} | {{totalWinningMoney}} 원<br>
+            {{/lottoGames}}
         </div>
         <div class="col-md-6">
             B table

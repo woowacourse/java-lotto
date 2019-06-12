@@ -1,14 +1,17 @@
 package lotto.domain.dto;
 
+import lotto.domain.lotto.Rank;
+import lotto.domain.lotto.Result;
+
+import java.util.EnumMap;
+import java.util.Map;
+
+import static lotto.domain.lotto.Rank.*;
+
 public class ResultDTO {
     private int round;
     private String name;
-    private int first;
-    private int second;
-    private int third;
-    private int fourth;
-    private int fifth;
-    private int miss;
+    private Result result;
     private long totalWinningMoney;
     private double earningRate;
 
@@ -16,13 +19,7 @@ public class ResultDTO {
         private int round;
         private String name;
 
-        private int first = 0;
-        private int second = 0;
-        private int third = 0;
-        private int fourth = 0;
-        private int fifth = 0;
-        private int miss = 0;
-        private long totalWinningMoney = 0;
+        private Map<Rank, Long> lottoScore = new EnumMap<>(Rank.class);
         private double earningRate = 0;
 
         public Builder(int round, String name) {
@@ -30,43 +27,28 @@ public class ResultDTO {
             this.name = name;
         }
 
-        public Builder first(int value) {
-            this.first = value;
+        public Builder first(long value) {
+            lottoScore.put(FIRST, value);
             return this;
         }
-
-        public Builder second(int value) {
-            this.second = value;
+        public Builder second(long value) {
+            lottoScore.put(SECOND, value);
             return this;
         }
-
-        public Builder third(int value) {
-            this.third = value;
+        public Builder third(long value) {
+            lottoScore.put(THIRD, value);
             return this;
         }
-
-        public Builder fourth(int value) {
-            this.fourth = value;
+        public Builder fourth(long value) {
+            lottoScore.put(FOURTH, value);
             return this;
         }
-
-        public Builder fifth(int value) {
-            this.fifth = value;
+        public Builder fifth(long value) {
+            lottoScore.put(FIFTH, value);
             return this;
         }
-
-        public Builder miss(int value) {
-            this.miss = value;
-            return this;
-        }
-
-        public Builder totalWinningMoney(int value) {
-            this.totalWinningMoney = value;
-            return this;
-        }
-
-        public Builder earningRate(int value) {
-            this.earningRate = value;
+        public Builder miss(long value) {
+            lottoScore.put(MISS, value);
             return this;
         }
 
@@ -78,13 +60,28 @@ public class ResultDTO {
     private ResultDTO(Builder builder) {
         this.round = builder.round;
         this.name = builder.name;
-        this.first = builder.first;
-        this.second = builder.second;
-        this.third = builder.third;
-        this.fourth = builder.fourth;
-        this.fifth = builder.fifth;
-        this.miss = builder.miss;
-        this.totalWinningMoney = builder.totalWinningMoney;
+        this.result = new Result(builder.lottoScore);
+        this.totalWinningMoney = this.result.calculateTotalWinningMoney();
         this.earningRate = builder.earningRate;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
+    public long getTotalWinningMoney() {
+        return totalWinningMoney;
+    }
+
+    public double getEarningRate() {
+        return earningRate;
     }
 }

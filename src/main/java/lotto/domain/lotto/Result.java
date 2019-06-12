@@ -23,7 +23,7 @@ public class Result {
                 .calculateEarningsRate(calculateTotalWinningMoney());
     }
 
-    private long calculateTotalWinningMoney() {
+    public long calculateTotalWinningMoney() {
         return lottoScore.keySet().stream()
                 .mapToLong(rank -> rank.calculateWinningMoney(lottoScore.get(rank)))
                 .sum();
