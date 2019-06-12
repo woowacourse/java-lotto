@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoundDAO {
+
     public int findMaxRound() throws SQLException {
         String sql = "SELECT MAX(round) AS max FROM round";
 
@@ -31,6 +34,20 @@ public class RoundDAO {
                 }
                 return resultSet.getInt("amount");
             }
+        }
+    }
+
+    public List<Integer> findAllRounds() throws SQLException {
+        String sql = "SELECT round FROM round ORDER BY round DESC";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            List<Integer> rounds = new ArrayList<>();
+            while (resultSet.next()) {
+                rounds.add(resultSet.getInt("round"));
+            }
+            return rounds;
         }
     }
 
