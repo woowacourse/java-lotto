@@ -26,7 +26,7 @@ public class LottosDaoTest {
         final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         Lotto lotto = new LottoFactory().create(numbers);
-        LOTTO_DTO = new LottoDtoConverter().convertLottoToDto(lotto);
+        LOTTO_DTO = LottoDto.of(lotto);
 
         LOTTOS.add(LOTTO_DTO);
         LOTTOS.add(LOTTO_DTO);

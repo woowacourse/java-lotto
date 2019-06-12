@@ -32,7 +32,7 @@ public class WinningLotto {
     }
 
     public LottoDto getWinningLotto() {
-        return new LottoDtoConverter().convertLottoToDto(winningLotto);
+        return LottoDto.of(winningLotto);
     }
 
     public Integer getBonusNumber() {

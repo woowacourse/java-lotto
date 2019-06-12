@@ -19,7 +19,7 @@ public class LottoParser {
 
     public LottoDto parseLottoDto(final String input) {
         Lotto lotto = parseLotto(input);
-        return new LottoDtoConverter().convertLottoToDto(lotto);
+        return LottoDto.of(lotto);
     }
 
     public LottoNumber parseLottoNumber(final int lottoNumber) {

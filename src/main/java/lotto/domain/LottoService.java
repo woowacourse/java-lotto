@@ -5,15 +5,18 @@ import lotto.dao.LottosDao;
 import lotto.dao.TurnDao;
 import lotto.util.LottoDtoConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
     private final LottoMachine lottoMachine;
     private final LottosDao lottosDao;
+    private final TurnDao turnDao;
 
     public LottoService() {
         lottoMachine = new LottoMachine();
         lottosDao = new LottosDao();
+        turnDao = new TurnDao();
     }
 
     public void charge(final int money) {
@@ -22,8 +25,7 @@ public class LottoService {
 
     public void buy(final Lotto lotto) {
         lottoMachine.buy();
-        LottoDtoConverter converter = new LottoDtoConverter();
-        lottosDao.add(converter.convertLottoToDto(lotto), new TurnDao().findNext());
+        lottosDao.add(LottoDto.of(lotto), turnDao.findNext());
     }
 
     public boolean canBuy() {
@@ -31,13 +33,15 @@ public class LottoService {
     }
 
     public GameResult gameResult() {
-        LottoDtoConverter converter = new LottoDtoConverter();
-        List<Lotto> lottos = converter.convertDtoToLottos(getLottos());
+        List<Lotto> lottos = new ArrayList<>();
+        for (LottoDto lotto : getLottos()) {
+            lottos.add(lotto.lottoValue());
+        }
         return GameResult.of(lottos);
     }
 
     public List<LottoDto> getLottos() {
-        return lottosDao.findAllByTurn(new TurnDao().findNext());
+        return lottosDao.findAllByTurn(turnDao.findNext());
     }
 
     public void vacateMoney() {
