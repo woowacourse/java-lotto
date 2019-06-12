@@ -12,7 +12,7 @@ public class WinStat implements Iterable {
     public WinStat(final Lottos lottoList, final WinningLotto winLotto, final LottoRule rule) {
         this.lottoList = lottoList;
         this.rule = rule;
-        for (Rank rank : Rank.values()) { // 자료구조 초기화
+        for (Rank rank : Rank.values()) {
             stat.put(rank, 0);
         }
         for (Lotto lotto : lottoList) {
@@ -37,9 +37,9 @@ public class WinStat implements Iterable {
 
     public double getProfitRate() {
         double rate
-                = (double) getTotalPrizeMoney() // 소수점 형변환
+                = (double) getTotalPrizeMoney()
                 / (getAllLottoCount() * rule.getPrice());
-        if (Double.isNaN(rate)) { // 0으로 나뉠 경우 대비
+        if (Double.isNaN(rate)) {
             rate = 0;
         }
         return rate;
