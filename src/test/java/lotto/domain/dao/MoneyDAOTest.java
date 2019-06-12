@@ -4,10 +4,7 @@ import lotto.domain.model.Money;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-
-import static junit.framework.TestCase.assertNotNull;
 
 public class MoneyDAOTest {
     private MoneyDAO moneyDao;
@@ -15,12 +12,6 @@ public class MoneyDAOTest {
     @Before
     public void setUp() {
         moneyDao = new MoneyDAO();
-    }
-
-    @Test
-    public void connection() {
-        Connection con = moneyDao.getConnection();
-        assertNotNull(con);
     }
 
     @Test
