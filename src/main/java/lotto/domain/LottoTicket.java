@@ -2,15 +2,15 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.*;
 import static lotto.domain.Price.LOTTO_PRICE;
-import static lotto.view.OutPutView.ENTER;
+import static lotto.view.OutPutView.NEW_LINE;
 
 public class LottoTicket {
     private int numberOfCustomLotto;
     private int numberOfAutoLotto;
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public LottoTicket(Price price, List<String> customLottos) {
         this.numberOfCustomLotto = customLottos.size();
@@ -29,7 +29,7 @@ public class LottoTicket {
 
     private void createAutoLottoNumbers() {
         for (int i = 0; i < numberOfAutoLotto; i++) {
-            lottos.add(new AutoGenerateLotto());
+            lottos.add(new AutoGenerateLottoNumbers());
         }
     }
 
@@ -61,7 +61,7 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return lottos.stream().map(Lotto::toString).collect(Collectors.joining(ENTER));
+        return lottos.stream().map(Lotto::toString).collect(joining(NEW_LINE));
     }
 
 }

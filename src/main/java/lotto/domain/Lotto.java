@@ -1,10 +1,10 @@
 package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoException;
-import lotto.domain.exception.InvalidWinnigLottoException;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 public abstract class Lotto {
     private static final String START_BRACKET = "[";
@@ -32,12 +32,7 @@ public abstract class Lotto {
 
     protected int numberOfMatch(List<LottoNumber> winningLotto) {
         return (int) lottoNumbers.stream()
-                .filter(number -> {
-                    if (winningLotto.contains(number)) {
-                        return true;
-                    }
-                    return false;
-                })
+                .filter(winningLotto::contains)
                 .count();
     }
 
@@ -64,7 +59,7 @@ public abstract class Lotto {
                 + lottoNumbers
                 .stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.joining(DELIMITER))
+                .collect(joining(DELIMITER))
                 + END_BRACKET;
     }
 

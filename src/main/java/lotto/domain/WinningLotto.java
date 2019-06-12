@@ -4,25 +4,27 @@ import lotto.domain.exception.InvalidWinnigLottoException;
 import lotto.util.AscendingNumber;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static java.util.Collections.sort;
+import static java.util.stream.Collectors.*;
 
 public class WinningLotto extends Lotto {
 
     private BonusBall bonusBall;
 
     public WinningLotto(String[] inputWinLottoNumber, String bonusBall) {
-        this.lottoNumbers = invalidWinLottoNumber(inputWinLottoNumber);
-        Collections.sort(lottoNumbers, new AscendingNumber());
+        this.lottoNumbers = invalidWinningLottoNumbers(inputWinLottoNumber);
+        sort(lottoNumbers, new AscendingNumber());
         this.bonusBall = new BonusBall(this.lottoNumbers, bonusBall);
     }
 
-    private List<LottoNumber> invalidWinLottoNumber(String[] winningLotto) {
+    private List<LottoNumber> invalidWinningLottoNumbers(String[] winningLotto) {
         try {
             return invalidNumberOfLotto(Arrays.stream(winningLotto)
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .map(LottoNumber::new)
-                    .collect(Collectors.toList()));
+                    .collect(toList()));
         } catch (NumberFormatException e) {
             throw new InvalidWinnigLottoException(e);
         } catch (InputMismatchException e) {
