@@ -16,16 +16,16 @@ public class RoundDAO {
 
     public void addRound(int round) throws SQLException {
         PreparedStatement pstmt = databaseConnection.prepareStatement(INSERT_SQL);
-        pstmt.setInt(1,round);
+        pstmt.setInt(1, round);
 
         pstmt.executeUpdate();
     }
 
-    public int findLatestRound () throws SQLException {
+    public int findLatestRound() throws SQLException {
         PreparedStatement pstmt = databaseConnection.prepareStatement(SELECT_LAST_ROUND_SQL);
         ResultSet rs = pstmt.executeQuery();
 
-        if(rs.next()) return 0;
+        if (rs.next()) return 0;
         return rs.getInt("id_");
     }
 

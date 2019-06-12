@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.exception.LottoValidException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
@@ -32,7 +31,7 @@ public class Lotto {
         }
     }
 
-    public int getLottoNumber(int index){
+    public int getLottoNumber(int index) {
         return lottoNumbers.get(index).getNumber();
     }
 

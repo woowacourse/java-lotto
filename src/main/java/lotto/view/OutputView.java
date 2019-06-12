@@ -22,7 +22,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("----------");
         List<Rank> ranks = Arrays.stream(Rank.values()).filter(rank -> rank != MISS).collect(Collectors.toList());
-        ResultMessage.getResult(lottoResult,ranks).stream().forEach(message ->{
+        ResultMessage.getResult(lottoResult, ranks).stream().forEach(message -> {
             System.out.println(message);
         });
     }

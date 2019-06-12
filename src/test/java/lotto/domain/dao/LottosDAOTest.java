@@ -20,4 +20,10 @@ class LottosDAOTest {
         lottosDAO.addLottos(1,new Lottos(lottos));
     }
 
+    @Test
+    public void Lotto_조회() throws Exception {
+        lottosDAO.addLottos(1,new Lottos(lottos));
+        lottosDAO.findLottoByRound(1);
+    }
+
 }

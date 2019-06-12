@@ -10,10 +10,10 @@ import static lotto.domain.Rank.SECOND;
 
 public class ResultMessage {
 
-    public static List<String> getResult(LottoResult lottoResult,List<Rank> ranks) {
+    public static List<String> getResult(LottoResult lottoResult, List<Rank> ranks) {
         List<String> rankers = new ArrayList<>();
         ranks.stream().forEach(rank -> {
-            rankers.add(String.format(getMessage(rank),rank.getCountOfMatch(),rank.getWinningMoney(),lottoResult.getCountOfRanker(rank)));
+            rankers.add(String.format(getMessage(rank), rank.getCountOfMatch(), rank.getWinningMoney(), lottoResult.getCountOfRanker(rank)));
         });
 
         return rankers;
