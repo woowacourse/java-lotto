@@ -53,10 +53,11 @@ public class WebUILottoApplication {
             return render(model, "lottos.html");
         });
 
-
-
-
-
+        post("/make/winning", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("numbers", req.session().attribute("numbers"));
+            return render(model, "winningLotto.html");
+        });
 
         exception(Exception.class, (exception, req, res) -> {
             String message = null;
