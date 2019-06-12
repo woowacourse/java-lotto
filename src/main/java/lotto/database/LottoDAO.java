@@ -2,8 +2,10 @@ package lotto.database;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.generator.ManualLottoNumbersGenerator;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoDAO {
@@ -11,7 +13,7 @@ public class LottoDAO {
     private static final int NUMBER_START_INDEX = 2;
     private static final String INSERT_LOTTO_QUERY =
             "INSERT INTO lotto(round, number1, number2, number3, number4, number5, number6)" +
-            " VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     private static LottoDAO lottoDAO;
     private static Connection connection;
@@ -36,10 +38,27 @@ public class LottoDAO {
     public void addLotto(Lotto lotto, int round) throws SQLException {
         PreparedStatement pstmt = connection.prepareStatement(INSERT_LOTTO_QUERY);
         pstmt.setInt(ROUND_INDEX, round);
-        List<Integer> lottos = lotto.getLottoNumbers();
-        for (int i = 0; i < lottos.size(); i++) {
-            pstmt.setInt(i + NUMBER_START_INDEX, lottos.get(i));
+        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+        for (int i = 0; i < lottoNumbers.size(); i++) {
+            pstmt.setInt(NUMBER_START_INDEX + i, lottoNumbers.get(i));
         }
         pstmt.executeUpdate();
+    }
+
+    public Lottos findLottosByRound(int round) throws Exception {
+        String query = "SELECT * FROM lotto WHERE round = ?";
+        PreparedStatement pstmt = connection.prepareStatement(query);
+        pstmt.setInt(ROUND_INDEX, round);
+        ResultSet resultSet = pstmt.executeQuery();
+
+        Lottos lottos = new Lottos();
+        while (resultSet.next()) {
+            List<Integer> lottoNumbers = new ArrayList<>();
+            for (int i = 1; i < 7; i++) {
+                lottoNumbers.add(resultSet.getInt(NUMBER_START_INDEX + i));
+            }
+            lottos.add(new Lotto(ManualLottoNumbersGenerator.getInstance(lottoNumbers).generate()));
+        }
+        return lottos;
     }
 }

@@ -4,7 +4,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.WinningInformation;
 import lotto.domain.generator.ManualLottoNumbersGenerator;
 import lotto.exception.RoundNotFoundException;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,10 +42,5 @@ public class WinningInformationDAOTest {
     @Test
     void 찾으려는_회차의_당첨_정보가_없는_경우() {
         assertThrows(RoundNotFoundException.class, () -> winningInformationDAO.findWinningInformationByRound(99));
-    }
-
-    @AfterEach
-    void tearDown() throws Exception {
-        DatabaseConnection.getConnection().close();
     }
 }
