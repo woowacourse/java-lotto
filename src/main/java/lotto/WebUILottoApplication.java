@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static lotto.view.WebOutputView.*;
 import static spark.Spark.*;
@@ -52,16 +53,10 @@ public class WebUILottoApplication {
         });
 
         get("/result", (req, res) -> {
+            // get data from section
             WinningLotto winningLotto = req.session().attribute("winningLotto");
             Lottos lottos = req.session().attribute("lottos");
             WinningStatistics winningStatistics = new WinningStatistics(lottos.match(winningLotto));
-
-            WebResultDTO result = new WebResultDTO();
-            result.setWinningLotto(outputWinningLotto(winningLotto));
-            result.setInterestRate(String.valueOf(winningStatistics.getInterestRate(req.session().attribute("lottoBuyingMoney"))));
-            result.setLottos(outputLottos(lottos));
-            result.setPrize(String.valueOf(winningStatistics.getPrize().getValue()));
-            result.setResult(outputResult(winningStatistics));
 
             // Insert data into database
             Connection con = Connector.getConnection();
@@ -74,13 +69,38 @@ public class WebUILottoApplication {
             winningLottoDao.addWinningLotto(thisRoundId, winningLotto);
             LottoDAO lottoDao = new LottoDAO(con);
             lottoDao.addLotto(thisRoundId, lottos);
+            Connector.closeConnection(con);
+            res.redirect("/result/"+thisRoundId);
+            return null;
+        });
 
+        get("/result/:roundId", (req, res) -> {
+            WebResultDTO result = new WebResultDTO();
+
+            // get data from database
+            Connection con = Connector.getConnection();
+            RoundDAO roundDao = new RoundDAO(con);
+            int thisRoundId = Integer.parseInt(req.params("roundId"));
+            result.setRound(String.valueOf(thisRoundId));
+            result.setRounds(roundDao.getAllIds().stream().map(n -> String.valueOf(n)).collect(Collectors.toList()));
+            WinningLottoDAO winningLottoDao = new WinningLottoDAO(con);
+            WinningLotto winningLotto = winningLottoDao.findWinningLottoByRoundId(thisRoundId);
+            result.setWinningLotto(outputWinningLotto(winningLotto));
+            LottoDAO lottoDao = new LottoDAO(con);
+            Lottos lottos = lottoDao.findLottosByRoundId(thisRoundId);
+            result.setLottos(outputLottos(lottos));
+            WinningStatistics winningStatistics = new WinningStatistics(lottos.match(winningLotto));
+            result.setInterestRate(String.valueOf(winningStatistics.getInterestRate(req.session().attribute("lottoBuyingMoney"))));
+            result.setPrize(String.valueOf(winningStatistics.getPrize().getValue()));
+            result.setResult(outputResult(winningStatistics));
             Map<String, Object> model = new HashMap<>();
             model.put("result", result);
+            Connector.closeConnection(con);
             return render(model, "result.html");
         });
 
         exception(Exception.class, (e, req, res) -> {
+            e.printStackTrace();
             res.body("<script> alert('" + e.getMessage() + "'); history.back()</script>");
         });
     }

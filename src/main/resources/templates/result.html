@@ -12,6 +12,7 @@
 </head>
 <body>
 <div class="container">
+    <p>회차 : {{ result.round }}</p>
     <p>당첨로또번호 : {{ result.winningLotto }}</p>
     <p>수익률 : {{ result.interestRate }}%</p>
     <p>상금 : {{ result.prize }}원</p>
@@ -27,6 +28,13 @@
             <li>{{this}}</li>
         {{/each}}
     </ul>
+
+    <hr>
+    <p>모든 회차들</p>
+    {{#each result.rounds}}
+        <p><a href="/result/{{this}}">{{this}}회차</a></p>
+    {{/each}}
+
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

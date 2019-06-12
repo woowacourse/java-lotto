@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoundDAO {
     private final Connection con;
@@ -50,5 +52,19 @@ public class RoundDAO {
             throw new SQLException("진행한 로또 회차가 하나도 없습니다.");
         }
         return rs.getInt("ThisId");
+    }
+
+    public List<Integer> getAllIds() throws SQLException {
+        List<Integer> ids = new ArrayList<>();
+        String query = "SELECT id FROM round";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+        if (!rs.next()) {
+            throw new SQLException("진행한 로또 회차가 하나도 없습니다.");
+        }
+        do {
+            ids.add(rs.getInt("id"));
+        } while(rs.next());
+        return ids;
     }
 }

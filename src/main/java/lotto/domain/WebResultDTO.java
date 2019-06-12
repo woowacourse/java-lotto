@@ -8,6 +8,16 @@ public class WebResultDTO {
     public String prize;
     public List<String> lottos;
     public List<String> result;
+    public List<String> rounds;
+    public String round;
+
+    public List<String> getRounds() {
+        return rounds;
+    }
+
+    public void setRounds(List<String> rounds) {
+        this.rounds = rounds;
+    }
 
     public String getWinningLotto() {
         return winningLotto;
@@ -47,5 +57,13 @@ public class WebResultDTO {
 
     public void setResult(List<String> result) {
         this.result = result;
+    }
+
+    public String getRound() {
+        return round;
+    }
+
+    public void setRound(String round) {
+        this.round = round;
     }
 }
