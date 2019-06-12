@@ -30,8 +30,10 @@ public class WebUILottoApplication {
                 if(InputValidator.isNotValidCustomLottoes(array)){
                     throw new InvalidCustomLottoNumberException("올바른 수동로또 번호를 입력해 주세요.");
                 };
+
             Lottoes lottoes = LottoFactory.createLottoes(array,money);
-            model.put("lottoes",lottoes.getLottoes());
+            LottoesDTO lottoesDTO = new LottoesDTO(lottoes.getLottoes());
+            model.put("lottoes",lottoesDTO.getLottoes());
             req.session().attribute("lottoes",lottoes);
             return render(model,"winning.html");
         });
@@ -46,17 +48,17 @@ public class WebUILottoApplication {
                 throw new InvalidWinningLottoException("올바른 당첨번호를 입력해 주세요.");
             }
             WinningLotto winningLotto = LottoFactory.createWinningLotto(lotto,Integer.parseInt(bonusBall));
-            Result result = ResultFactory.createResult();
+            Calculator calculator = CalculatorFactory.createResult();
             Lottoes lottoes = req.session().attribute("lottoes");
-            result.calculateResult(lottoes, winningLotto);
+            calculator.calculateResult(lottoes, winningLotto);
 
            for(Rank rank : Rank.values()){
                if(rank == Rank.NONE){
                    continue;
                }
-                model.put(rank.name(),result.getMatchlottoCountPerRank(rank));
+                model.put(rank.name(), new ResultDTO(rank,calculator));
             }
-            model.put("rate",result.getRate(req.session().attribute("money")));
+            model.put("rate", calculator.getRate(req.session().attribute("money")));
             return render(model,"finalResult.html");
         });
 
