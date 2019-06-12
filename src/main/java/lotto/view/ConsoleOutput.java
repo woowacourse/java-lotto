@@ -25,9 +25,19 @@ public class ConsoleOutput {
     private static final String TOTAL_PROFIT_RATE;
     private static final String SENTENCE_LAST;
     private static final String HEADER;
+    private static final String FAILED;
+    private static final String MATCHED;
+    private static final String CURRENCY_UNIT;
+    private static final String PAREN_OPEN;
+    private static final String PAREN_CLOSE;
     private static final DecimalFormat PERCENT;
 
     static {
+        PAREN_OPEN = "(";
+        PAREN_CLOSE = ")";
+        CURRENCY_UNIT = "원";
+        MATCHED = "개 일치";
+        FAILED = "낙첨";
         EMPTY = "";
         SPACE = " ";
         COMMA = ",";
@@ -86,10 +96,24 @@ public class ConsoleOutput {
             String temp
                     = key.equals(Rank.MISS)
                     ? EMPTY // 낙첨은 당첨 통계에서 출력하지 않도록 함
-                    : key.getRankDescription() + ITEM_DELIMITER + value + QUANTITY + NEW_LINE;
+                    : getRankDescription(key) + ITEM_DELIMITER + value + QUANTITY + NEW_LINE;
             result.append(temp);
         }
         result.append(getProfitRateMessage(stat));
         System.out.println(result);
+    }
+
+    private static String getRankDescription(Rank rank) {
+        if (rank.equals(Rank.MISS)) {
+            return FAILED;
+        }
+        return rank.getCountOfMatch()
+                + MATCHED
+                + rank.getAdditionalMessage()
+                + SPACE
+                + PAREN_OPEN
+                + rank.getWinningMoney()
+                + CURRENCY_UNIT
+                + PAREN_CLOSE;
     }
 }

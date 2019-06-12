@@ -9,13 +9,7 @@ public enum Rank {
     FIRST(6, 2_000_000_000); // 1등;
 
     private static final int WINNING_MIN_COUNT = 3;
-    private static final String NOT_VALID_VALUE = "는 유효하지 않은 값입니다.";
-    private static final String FAILED = "낙첨";
-    private static final String MATCHED = "개 일치";
-    private static final String CURRENCY_UNIT = "원";
-    private static final String PAREN_OPEN = "(";
-    private static final String PAREN_CLOSE = ")";
-    private static final String SPACE = " ";
+    private static final String NOT_VALID_VALUE = "은(는) 유효하지 않은 값입니다.";
 
     private int countOfMatch;
     private int winningMoney;
@@ -35,17 +29,14 @@ public enum Rank {
         if (countOfMatch < WINNING_MIN_COUNT) {
             return MISS;
         }
-
         if (SECOND.matchCount(countOfMatch) && matchBonus) {
             return SECOND;
         }
-
         for (Rank rank : values()) {
             if (rank.matchCount(countOfMatch)) {
                 return rank;
             }
         }
-
         throw new IllegalArgumentException(countOfMatch + NOT_VALID_VALUE);
     }
 
@@ -57,17 +48,11 @@ public enum Rank {
         return winningMoney;
     }
 
-    public String getRankDescription() {
-        if (MISS.equals(this)) {
-            return FAILED;
-        }
-        return this.countOfMatch
-                + MATCHED
-                + this.additionalMessage
-                + SPACE
-                + PAREN_OPEN
-                + this.winningMoney
-                + CURRENCY_UNIT
-                + PAREN_CLOSE;
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public String getAdditionalMessage() {
+        return additionalMessage;
     }
 }
