@@ -17,21 +17,25 @@ public class LottoApp {
         int manualLottoQuantity = InputView.inputManualLotto(money);
         int autoLottoQuantity = money.getBuyableLottoQuantity() - manualLottoQuantity;
 
-        List<Lotto> totalLottos = new ArrayList<>();
         List<Lotto> manualLottos = InputView.generateManualLottoCreator(manualLottoQuantity);
         List<Lotto> autoLottos = LottoFactory.createAutoLottos(autoLottoQuantity);
 
         OutputView.printPurchaseResult(manualLottoQuantity, autoLottoQuantity);
 
-        totalLottos.addAll(manualLottos);
-        totalLottos.addAll(autoLottos);
-
-        Lottos myLottos = new Lottos(totalLottos);
+        Lottos myLottos = new Lottos(combineLottos(autoLottos, manualLottos));
         WinningLotto winningLotto = InputView.inputWinningLotto();
 
         LottosResult result = new LottosResult(winningLotto, myLottos);
 
         OutputView.printLottosResult(result);
         OutputView.printROI(result);
+    }
+
+    private static List<Lotto> combineLottos(List<Lotto> autoLottos, List<Lotto> manualLottos) {
+        List<Lotto> totalLottos = new ArrayList<>();
+
+        totalLottos.addAll(manualLottos);
+        totalLottos.addAll(autoLottos);
+        return totalLottos;
     }
 }
