@@ -230,6 +230,7 @@ function generateResultView(data) {
 }
 
 function changeResult(data) {
+	changeNowTurn(data.turn)
 	changeResultRate(parseInt(data.rate))
 	changeResultRank(data.result)
 }
@@ -247,4 +248,8 @@ function changeResultRank(resultArray) {
 function drawResultArea() {
 	$("#result-btn").attr("disabled", true)
 	$("#result-area").show("slow")
+}
+
+function changeNowTurn(turn) {
+	$("#turn_text").text(turn)
 }

@@ -113,11 +113,11 @@ public class CallRestApiService {
         return new Gson().toJson(jsonObject);
     }
 
-    private JsonObject generateResponseDetailResult(RankResult rankResult) {
+    private JsonObject generateResponseDetailResult(RankResult rankResult) throws SQLException {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("rate",rankResult.getRate());
         jsonObject.add("result",generateResponseRank(rankResult.getRankResult()));
-
+        jsonObject.addProperty("turn", WinnerDAO.findRecentTurn());
         return jsonObject;
     }
 

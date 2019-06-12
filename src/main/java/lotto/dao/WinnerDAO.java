@@ -50,7 +50,7 @@ public class WinnerDAO {
     }
 
     public static void addWinner(WinnerDTO winnerDTO) throws SQLException {
-        String query = "insert into winner(profit, lotto_one, lotto_two, lotto_three, lotto_four, lotto_five, lotto_six, lotto_bonus, " +
+        String query = "insert into " + table + "(profit, lotto_one, lotto_two, lotto_three, lotto_four, lotto_five, lotto_six, lotto_bonus, " +
                 "first_rank_cnt, second_rank_cnt, third_rank_cnt, fourth_rank_cnt, fifth_rank_cnt, miss_rank_cnt) " +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
@@ -76,7 +76,7 @@ public class WinnerDAO {
     }
 
     public static JsonObject findWinnerByTurn(int turn) throws SQLException {
-        String query = "select * from winner where turn = ?";
+        String query = "select * from " + table + " where turn = ?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, turn);
         ResultSet resultSet = pstmt.executeQuery();
@@ -119,12 +119,12 @@ public class WinnerDAO {
 
     public static int findRecentTurn() throws SQLException {
         int resultSetFirstColumn = 1;
-        String query = "select MAX(turn) from winner";
+        String query = "select MAX(turn) from " + table;
         PreparedStatement pstmt = getConnection().prepareStatement(query);
 
         ResultSet resultSet = pstmt.executeQuery();
 
-        if (!resultSet.next()) throw new IllegalArgumentException();
+        if (!resultSet.next()) throw new IllegalArgumentException("테이블에 데이터가 없습니다.");
         return resultSet.getInt(resultSetFirstColumn);
     }
 }
