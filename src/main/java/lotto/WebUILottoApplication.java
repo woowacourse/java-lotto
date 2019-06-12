@@ -1,11 +1,14 @@
 package lotto;
 
-import lotto.domain.lotto.NumberOfCustomLotto;
-import lotto.domain.lotto.Price;
+import lotto.domain.LottoTicket;
+import lotto.domain.NumberOfCustomLotto;
+import lotto.domain.Price;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -51,8 +54,9 @@ public class WebUILottoApplication {
 
         get("/manual_amount", (req, res) -> {
             try {
-                NumberOfCustomLotto number = new NumberOfCustomLotto(req.queryParams("manual_amount"), (int) model.get("amount"));
+                NumberOfCustomLotto number = new NumberOfCustomLotto(req.queryParams("manual_amount"), data.getPrice());
                 data.setNumberOfCustomLotto(number);
+                model.remove("error_manual");
                 model.put("manual_amount", number.getNumberOfCustomLotto());
                 model.put("auto_amount", ((int) model.get("amount")) - number.getNumberOfCustomLotto());
                 return render(model, "view/lotto_manual.html");
@@ -62,13 +66,25 @@ public class WebUILottoApplication {
             }
         });
 
-//        post("/users", (request, response) -> {
-//
-//            Map<String, Object> model = new HashMap<>();
-//            model.put("users", users);
-//
-//            return render(model,"result.html");
-//        });
+        post("/numbers", (req,res) -> {
+            List<String> manualLottos = new ArrayList<>();
+            try {
+                for(int i = 0 ; i < (int) model.get("manual_amount") ; i++){
+                    manualLottos.add(req.queryParams("manual_lotto" + i));
+                }
+                LottoTicket lottoTicket = new LottoTicket(data.getPrice(), manualLottos);
+                for(int i = 0 ; i < lottoTicket.getLottos().size() ; i++){
+
+                }
+                data.setLottos(lottoTicket.getLottos());
+                model.put("lottos",data.getLottos());
+                return render(model, "view/lotto_winning.html");
+            } catch (Exception e){
+                model.put("error_manual", e.getMessage());
+                return render(model, "view/lotto_manual_error.html");
+            }
+        });
+
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
