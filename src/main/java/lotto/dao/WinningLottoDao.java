@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class WinningLottoDao {
     private final Connection connection;
 
-    public WinningLottoDao(Connection connection) {
+    public WinningLottoDao(final Connection connection) {
         this.connection = connection;
     }
 
