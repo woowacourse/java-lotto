@@ -18,6 +18,7 @@ import static spark.Spark.*;
 public class WebUILottoApplication {
     public static void main(String[] args) {
         externalStaticFileLocation("src/main/resources/templates");
+
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "index.html");
@@ -29,35 +30,25 @@ public class WebUILottoApplication {
         });
 
         post("/lotto", (req, res) -> {
-            try {
-                Map<String, Object> model = new HashMap<>();
-                PurchaseInformation purchaseInformation = setUpPurchaseInformation(
-                        req.queryParams("money"),
-                        req.queryParams("manualLottoCount"));
-                model.put("purchaseMessage", OutputViewFactory.outputLottosPurchaseMessage(purchaseInformation));
+            Map<String, Object> model = new HashMap<>();
+            PurchaseInformation purchaseInformation = setUpPurchaseInformation(
+                    req.queryParams("money"),
+                    req.queryParams("manualLottoCount"));
+            model.put("purchaseMessage", OutputViewFactory.outputLottosPurchaseMessage(purchaseInformation));
 
-                registerManualLottosNumbers(purchaseInformation, req);
-                Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
-                model.put("lottos", OutputViewFactory.outputLottos(lottos));
+            registerManualLottosNumbers(purchaseInformation, req);
+            Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
+            model.put("lottos", OutputViewFactory.outputLottos(lottos));
 
-                WinningInformation winningInformation =
-                        setUpWinningInformation(req.queryParams("winningNumber"), req.queryParams("bonusBall"));
-                LottoGame lottoGame = new LottoGame(winningInformation);
-                LottoResult lottoResult = lottoGame.play(lottos);
-                model.put("result", OutputViewFactory.outputResult(lottoResult));
-                model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
+            WinningInformation winningInformation =
+                    setUpWinningInformation(req.queryParams("winningNumber"), req.queryParams("bonusBall"));
+            LottoGame lottoGame = new LottoGame(winningInformation);
+            LottoResult lottoResult = lottoGame.play(lottos);
+            model.put("result", OutputViewFactory.outputResult(lottoResult));
+            model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
 
-                RoundInformationService.saveRoundInformation(lottos, winningInformation);
-                return render(model, "result.html");
-            } catch (NumberFormatException e) {
-                Map<String, Object> model = new HashMap<>();
-                model.put("message", "잘못된 수가 입력되었습니다.");
-                return render(model, "error.html");
-            } catch (Exception e) {
-                Map<String, Object> model = new HashMap<>();
-                model.put("message", e.getMessage());
-                return render(model, "error.html");
-            }
+            RoundInformationService.saveRoundInformation(lottos, winningInformation);
+            return render(model, "result.html");
         });
 
         get("/round-select", (req, res) -> {
@@ -66,15 +57,15 @@ public class WebUILottoApplication {
         });
 
         post("/round-result", (req, res) -> {
-            try {
-                int round = Integer.parseInt(req.queryParams("round"));
-                Map<String, Object> model = RoundInformationService.loadRoundInformation(round);
-                return render(model, "round-result.html");
-            } catch (Exception e) {
-                Map<String, Object> model = new HashMap<>();
-                model.put("message", e.getMessage());
-                return render(model, "error.html");
-            }
+            int round = Integer.parseInt(req.queryParams("round"));
+            Map<String, Object> model = RoundInformationService.loadRoundInformation(round);
+            return render(model, "round-result.html");
+        });
+
+        exception(Exception.class, (exception, request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", exception.getMessage());
+            response.body(render(model, "error.html"));
         });
     }
 
