@@ -23,7 +23,7 @@ public class WebUILottoApplication {
     public static void main(String[] args) throws SQLException {
         staticFiles.location("/static");
         Connection connection = DBManager.getConnection();
-        DBManager.startTransection(connection);
+        DBManager.startTransaction(connection);
 
         get("/show", (req, res) -> {
             List<String> rounds = new ArrayList<>();
@@ -62,7 +62,7 @@ public class WebUILottoApplication {
             DBAccessor.loadDBWinningLottoTable(connection, round, winningLotto);
             DBAccessor.loadDBLottoResultTable(connection, round, lottoResult);
 
-            DBManager.endTransection(connection);
+            DBManager.endTransaction(connection);
 
             return render(getLottoResultModel(lottoResult), "lottoResult.html");
         });

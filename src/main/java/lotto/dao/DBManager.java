@@ -27,8 +27,6 @@ public class DBManager {
             con = DriverManager.getConnection(connectionInfo.append("jdbc:mysql://").append(server).append("/").append(database)
             .append("?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false").toString(),
                     userName, password);
-//            con = DriverManager.getConnection("jdbc:mysql://" + server + "/" + database +
-//                    "?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false", userName, password);
             System.out.println("정상적으로 연결되었습니다.");
         } catch (SQLException e) {
             System.err.println("연결 오류:" + e.getMessage());
@@ -48,11 +46,11 @@ public class DBManager {
         }
     }
 
-    public static void startTransection(Connection con) throws SQLException {
+    public static void startTransaction(Connection con) throws SQLException {
         con.setAutoCommit(false);
     }
 
-    public static void endTransection(Connection con) throws SQLException {
+    public static void endTransaction(Connection con) throws SQLException {
         con.commit();
     }
 }
