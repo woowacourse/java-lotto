@@ -2,8 +2,6 @@ package lotto.domain.lotto;
 
 import java.util.*;
 
-import static lotto.domain.lotto.Lotto.NUMBER_OF_NUMBERS_IN_LOTTO;
-
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
@@ -26,10 +24,7 @@ public class LottoNumber {
         return numbers.get(number);
     }
 
-    public static List<LottoNumber> getRandomSixNumbers() {
-        List<LottoNumber> numberList = new ArrayList<>(numbers.values());
-
-        Collections.shuffle(numberList);
-        return numberList.subList(0, NUMBER_OF_NUMBERS_IN_LOTTO);
+    public static List<LottoNumber> getAllLottoNumbers() {
+        return new ArrayList<>(numbers.values());
     }
 }
