@@ -2,15 +2,14 @@ package lotto.model;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WinStat implements Iterable {
     private final Map<Rank, Integer> stat = new LinkedHashMap<>();
-    private final List<Lotto> lottoList;
+    private final Lottos lottoList;
     private final LottoRule rule;
 
-    public WinStat(final List<Lotto> lottoList, final WinningLotto winLotto, final LottoRule rule) {
+    public WinStat(final Lottos lottoList, final WinningLotto winLotto, final LottoRule rule) {
         this.lottoList = lottoList;
         this.rule = rule;
         for (Rank rank : Rank.values()) { // 자료구조 초기화

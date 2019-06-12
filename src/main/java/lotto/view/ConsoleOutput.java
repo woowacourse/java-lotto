@@ -1,12 +1,12 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.Rank;
 import lotto.model.WinStat;
 
 import java.text.DecimalFormat;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class ConsoleOutput {
@@ -76,7 +76,7 @@ public class ConsoleOutput {
         System.out.println(result);
     }
 
-    public static void lottoList(final List<Lotto> lottos) {
+    public static void lottoList(final Lottos lottos) {
         for (Lotto lotto : lottos) {
             System.out.println(lotto);
         }

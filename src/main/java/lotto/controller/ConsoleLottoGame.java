@@ -10,7 +10,6 @@ import java.util.List;
 class ConsoleLottoGame {
     private static final LottoRule RULE;
     private static final LottoMaker MAKER;
-    private static final String ERROR_OVER_COUNT;
     private static final String MESSAGE_MANUAL_COUNT;
     private static final String MESSAGE_MANUAL_NUMBERS;
     private static final String MESSAGE_WIN_NUMBERS;
@@ -19,19 +18,10 @@ class ConsoleLottoGame {
     static {
         RULE = new KoreaLottoRule();
         MAKER = new RandomLottoMaker(RULE);
-        ERROR_OVER_COUNT = "구입한 로또보다 많은 개수입니다.";
         MESSAGE_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
         MESSAGE_MANUAL_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
         MESSAGE_WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
         MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요.";
-    }
-
-    private static int getAutoPurchaseCount(final int AllPurchaseCount, final int manualPurchaseCount) {
-        final int result = AllPurchaseCount - manualPurchaseCount;
-        if (result < 0) {
-            throw new IllegalArgumentException(ERROR_OVER_COUNT);
-        }
-        return result;
     }
 
     private static Lotto inputOneLotto() {
@@ -73,10 +63,10 @@ class ConsoleLottoGame {
         try {
             int AllPurchaseCount = input.allPurchaseCount();
             int manualPurchaseCount = ConsoleInput.singleInt(MESSAGE_MANUAL_COUNT);
-            int autoPurchaseCount = getAutoPurchaseCount(AllPurchaseCount, manualPurchaseCount);
-            List<Lotto> lottos = inputManyLottos(manualPurchaseCount);
-            lottos.addAll(MAKER.getAutoLottos(autoPurchaseCount));
-            ConsoleOutput.buyCount(manualPurchaseCount, autoPurchaseCount);
+            Lottos lottos = new Lottos(AllPurchaseCount, manualPurchaseCount);
+            lottos.add(inputManyLottos(manualPurchaseCount));
+            lottos.add(MAKER.getAutoLottos(lottos.getAutoPurchaseCount()));
+            ConsoleOutput.buyCount(manualPurchaseCount, lottos.getAutoPurchaseCount());
             ConsoleOutput.lottoList(lottos);
             WinningLotto winLotto = inputWinningLotto();
             WinStat stat = new WinStat(lottos, winLotto, RULE);
