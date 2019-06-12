@@ -5,6 +5,7 @@ import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.lottoresult.LottoRank;
 import lotto.domain.lottoresult.LottoResult;
+import lotto.domain.lottoresult.RankStatistic;
 import lotto.domain.purchaseamount.PurchaseAmount;
 
 public class OutputView {
@@ -29,14 +30,17 @@ public class OutputView {
 
     public static void printLottoResult(LottoResult lottoResult) {
         System.out.println("\n당첨 통계\n----------");
-        lottoResult.forEach(result -> drawStatistic(result.getKey(), result.getValue()));
+        lottoResult.forEach(OutputView::drawStatistic);
         System.out.println("\n총 수익률은 " + lottoResult.getEarningRate() + "%입니다.");
     }
 
-    private static void drawStatistic(LottoRank rank, int count) {
-        if (LottoRank.FAIL.equals(rank)) {
+    private static void drawStatistic(RankStatistic rankStatistic) {
+        if (rankStatistic.isFailResult()) {
             return;
         }
+
+        LottoRank rank = rankStatistic.getRank();
+        int count = rankStatistic.getCount();
 
         System.out.format("%d개 일치%s (%d원)- %d개\n",
                 rank.getCountOfMatch(),

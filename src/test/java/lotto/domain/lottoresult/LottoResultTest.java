@@ -27,16 +27,6 @@ public class LottoResultTest {
     }
 
     @Test
-    void 통계정보_확인1() {
-        assertThat(lottoResult.countOfRank(LottoRank.rankOf(3, false))).isEqualTo(2);
-    }
-
-    @Test
-    void 통계정보_확인2() {
-        assertThat(lottoResult.countOfRank(LottoRank.rankOf(2, false))).isEqualTo(0);
-    }
-
-    @Test
     void 수익률_확인() {
         assertThat(lottoResult.getEarningRate())
                 .isEqualTo(new BigDecimal(10000).divide(new BigDecimal(20), 3, RoundingMode.HALF_UP));
