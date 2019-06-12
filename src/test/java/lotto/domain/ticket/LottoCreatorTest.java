@@ -27,13 +27,6 @@ class LottoCreatorTest {
         });
     }
 
-//    @Test
-//    void 동등로또() {
-//        LottoCreator generator = new LottoCreator();
-//        LottoNumbers numbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-//        assertEquals(new Lotto(numbers), generator.create(Arrays.asList(1, 2, 3, 4, 5, 6)));
-//    }
-
     @Test
     void 매칭확인() {
         WinningTicket winningLotto = new WinningLotto(new WinningLottoDto("1,2,3,4,5,6", "7"), new LottoCreator());
