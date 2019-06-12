@@ -21,7 +21,7 @@ class LottosDaoTest {
     }
 
     @Test
-    void add_lottos() throws Exception{
+    void CRD_Lottos() throws Exception{
         ManualLottoCreator lottoCreator = new ManualLottoCreator(Arrays.asList(
                 "1, 2, 3, 4, 5, 6",
                 "1, 2, 3, 4, 5, 7",
@@ -30,17 +30,9 @@ class LottosDaoTest {
         Lottos lottos = new Lottos(lottoCreator.create());
         int[] result = {1, 1, 1};
         assertThat(lottosDao.addLottos(lottos, 0)).isEqualTo(result);
-    }
 
-    @Test
-    void findByTimes() throws Exception{
-        ManualLottoCreator lottoCreator = new ManualLottoCreator(Arrays.asList(
-                "1, 2, 3, 4, 5, 6",
-                "1, 2, 3, 4, 5, 7",
-                "7, 8, 9, 10, 11, 12"
-        ));
-        Lottos lottos = new Lottos(lottoCreator.create());
-        assertThat(lottosDao.findByTimes(1)).isEqualTo(lottos);
-    }
+        assertThat(lottosDao.findByTimes(0)).isEqualTo(lottos);
 
+        assertThat(lottosDao.deleteLottos(0)).isEqualTo(3);
+    }
 }

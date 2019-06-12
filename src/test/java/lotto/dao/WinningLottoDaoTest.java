@@ -22,7 +22,7 @@ class WinningLottoDaoTest {
     }
 
     @Test
-    void addWinningLotto() throws Exception{
+    void CRDWinningLotto() throws Exception{
         WinningLotto winningLotto = new WinningLotto(
                 new Lotto(Arrays.asList(
                         Number.valueOf(6),
@@ -34,23 +34,13 @@ class WinningLottoDaoTest {
                 )), Number.valueOf(45)
         );
 
-        assertThat(winningLottoDao.addWinningLotto(winningLotto)).isEqualTo(1);
+        assertThat(winningLottoDao.addWinningLotto(winningLotto, -1)).isEqualTo(1);
+        assertThat(winningLottoDao.findByTimes(-1)).isEqualTo(winningLotto);
+        assertThat(winningLottoDao.deleteWinningLotto(-1)).isEqualTo(1);
     }
 
     @Test
-    void findByTimes() throws Exception {
-        WinningLotto winningLotto = new WinningLotto(
-                new Lotto(Arrays.asList(
-                        Number.valueOf(6),
-                        Number.valueOf(7),
-                        Number.valueOf(8),
-                        Number.valueOf(9),
-                        Number.valueOf(10),
-                        Number.valueOf(11)
-                )), Number.valueOf(45)
-        );
-
-        assertThat(winningLottoDao.findByTimes(1)).isEqualTo(winningLotto);
+    void nextTimes() throws Exception {
+        assertThat(winningLottoDao.nextWinningLottoTimes()).isEqualTo(1);
     }
-
 }

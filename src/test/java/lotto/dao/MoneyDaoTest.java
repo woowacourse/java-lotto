@@ -18,10 +18,7 @@ class MoneyDaoTest {
     @Test
     void addMoney() throws Exception {
         moneyDao.addMoney(new Money(10000), 0);
-    }
-
-    @Test
-    void findByTimes() throws Exception {
-        //assertThat(moneyDao.findByTimes(1)).isEqualTo(new Money(10000));
+        assertThat(moneyDao.findByTimes(0)).isEqualTo(new Money(10000));
+        assertThat(moneyDao.deleteMoney(0)).isEqualTo(1);
     }
 }

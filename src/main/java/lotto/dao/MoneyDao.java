@@ -19,13 +19,21 @@ public class MoneyDao {
     }
 
     public int addMoney(Money money, int times) throws Exception {
-        String query = "INSERT INTO money (times, money) VALUES (?, ?) ON DUPLICATE KEY UPDATE times = ?, money = money + ?";
+        String query = "INSERT INTO money (times, money) VALUES (?, ?) ON DUPLICATE KEY UPDATE times = ?, money = ?";
         PreparedStatement pstmt = dataBase.getConnection().prepareStatement(query);
 
-        pstmt.setInt(1, times + 1);
+        pstmt.setInt(1, times);
         pstmt.setInt(2, money.getMoney());
-        pstmt.setInt(3, times + 1);
+        pstmt.setInt(3, times);
         pstmt.setInt(4, money.getMoney());
+
+        return pstmt.executeUpdate();
+    }
+
+    public int deleteMoney(int times) throws SQLException {
+        String query = "DELETE FROM money WHERE times = ?";
+        PreparedStatement pstmt = dataBase.getConnection().prepareStatement(query);
+        pstmt.setInt(1, times);
 
         return pstmt.executeUpdate();
     }

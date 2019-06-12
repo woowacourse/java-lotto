@@ -24,11 +24,19 @@ public class LottosDao {
 
         for (Lotto lotto : lottos.getLottos()) {
             pstmt.setString(1, gson.toJson(lotto));
-            pstmt.setInt(2, times + 1);
+            pstmt.setInt(2, times);
             pstmt.addBatch();
         }
 
         return pstmt.executeBatch();
+    }
+
+    public int deleteLottos(int times) throws SQLException {
+        String query = "DELETE FROM lotto WHERE times = ?";
+        PreparedStatement pstmt = dataBase.getConnection().prepareStatement(query);
+        pstmt.setInt(1, times);
+
+        return pstmt.executeUpdate();
     }
 
     public Lottos findByTimes(int times) throws SQLException {

@@ -87,12 +87,12 @@
 
 <body>
     <h1>로또</h1>
-    <a href="/buyLotto">로또 구매</a> <a href="/lookupLotto">회차 조회</a>
+    <a href="/buyLotto" class="btn btn-primary">로또 구매</a> <a href="/lookupLotto" class="btn btn-primary">회차 조회</a>
 
     <div id="nextTimes"></div>
     <div class="section">
         <span>구입 금액 : </span><input class="form-control inputForm" id="money" type="number">
-        <button id="inputMoney">입력</button>
+        <button id="inputMoney" class="btn btn-primary">입력</button>
     </div>
 
     <div class="row">
@@ -106,7 +106,7 @@
             <div id="lottoList">
                 <div class="section">수동 선택 리스트</div>
             </div>
-            <button class="section" id="addAutoItem">나머지 자동 구매</button>
+            <button class="section btn btn-primary" id="addAutoItem">나머지 자동 구매</button>
         </div>
 
     </div>
@@ -124,7 +124,7 @@
             <div class="section">누적 로또 구매 목록</div>
             <div id="lottoItemList">
             </div>
-            <button class="section" id="btn_lotto_result">결과 보기</button>
+            <button class="section btn btn-primary" id="btn_lotto_result">결과 보기</button>
         </div>
 
     </div>
@@ -295,11 +295,11 @@
                 });
                 console.log(winningLotto);
                 console.log($('.blue')[0].innerHTML);
-
+                
                 var bonus = $('.blue')[0].innerHTML;
                 var data = {
                     'bonus': bonus,
-                    'winningLotto': winningLotto.join()
+                    'winningLotto': winningLotto.join(),
                 }
 
                 $.ajax({
@@ -326,7 +326,7 @@
                     }
                     $('#' + type).append(chlid);
                 }
-                chlid = '<button class="section" id="addItem">선택</button>'
+                chlid = '<button class="section btn btn-primary" id="addItem">선택</button>'
                 $('#' + type).append(chlid);
             }
 

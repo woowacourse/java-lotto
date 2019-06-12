@@ -16,13 +16,12 @@ public class WinningLottoDao {
         this.dataBase = dataBase;
     }
 
-    public int addWinningLotto(WinningLotto winningLotto) throws SQLException {
+    public int addWinningLotto(WinningLotto winningLotto, int times) throws SQLException {
         String query = "INSERT INTO winning_lotto VALUES (?, ?, ?)";
         PreparedStatement pstmt = dataBase.getConnection().prepareStatement(query);
-        int times = countWinningLottoTimes();
         Gson gson = new GsonBuilder().create();
 
-        pstmt.setInt(1, times + 1);
+        pstmt.setInt(1, times);
         pstmt.setString(2, gson.toJson(winningLotto.getWinningLotto()));
         pstmt.setString(3, gson.toJson(winningLotto.getBonusNum()));
         return pstmt.executeUpdate();
@@ -44,13 +43,21 @@ public class WinningLottoDao {
         return new WinningLotto(lotto, bonusNumber);
     }
 
-    public int countWinningLottoTimes() throws SQLException{
-        String query = "SELECT COUNT(*) FROM winning_lotto";
+    public int deleteWinningLotto(int times) throws SQLException {
+        String query = "DELETE FROM winning_lotto WHERE times = ?";
+        PreparedStatement pstmt = dataBase.getConnection().prepareStatement(query);
+        pstmt.setInt(1, times);
+
+        return pstmt.executeUpdate();
+    }
+
+    public int nextWinningLottoTimes() throws SQLException{
+        String query = "SELECT MAX(times) FROM winning_lotto";
         PreparedStatement pstmt = dataBase.getConnection().prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
 
-        if (!rs.next()) return 0;
+        if (!rs.next()) return 1;
 
-        return Integer.parseInt(rs.getString(1));
+        return rs.getInt(1) + 1;
     }
 }
