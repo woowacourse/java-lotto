@@ -5,8 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesManager {
-    private String url;
-    private String dbName;
+    private String dbUrl;
     private String username;
     private String password;
 
@@ -15,8 +14,7 @@ public class PropertiesManager {
         try {
             InputStream in = getClass().getClassLoader().getResourceAsStream("db.properties");
             prop.load(in);
-            url = prop.getProperty("url");
-            dbName = prop.getProperty("database");
+            dbUrl = prop.getProperty("url") + prop.getProperty("database");
             username = prop.getProperty("username");
             password = prop.getProperty("password");
         } catch (IOException e) {
@@ -24,12 +22,8 @@ public class PropertiesManager {
         }
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public String getDbName() {
-        return dbName;
+    public String getDbUrl() {
+        return dbUrl;
     }
 
     public String getUsername() {

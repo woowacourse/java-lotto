@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.LottoDto;
+import lotto.util.GameResultDtoConverter;
 import lotto.util.LottoDtoConverter;
 import lotto.dao.LottosDao;
 import lotto.dao.TurnDao;
@@ -22,7 +23,8 @@ public class LottoService {
 
     public void buy(final Lotto lotto) {
         lottoMachine.buy();
-        lottosDao.add(new LottoDtoConverter().convertLottoToDto(lotto), new TurnDao().findNext());
+        LottoDtoConverter converter = new LottoDtoConverter();
+        lottosDao.add(converter.convertLottoToDto(lotto), new TurnDao().findNext());
     }
 
     public boolean canBuy() {
@@ -30,7 +32,8 @@ public class LottoService {
     }
 
     public GameResult gameResult() {
-        List<Lotto> lottos = new LottoDtoConverter().convertDtoToLottos(getLottos());
+        LottoDtoConverter converter = new LottoDtoConverter();
+        List<Lotto> lottos = converter.convertDtoToLottos(getLottos());
         return GameResult.of(lottos);
     }
 

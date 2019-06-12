@@ -9,15 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoDtoConverter {
-	public List<LottoDto> convertLottosToDto(final List<Lotto> lottos) {
-		List<LottoDto> lottosDto = new ArrayList<>();
-		for (final Lotto lotto : lottos) {
-			LottoDto dto = convertLottoToDto(lotto);
-			lottosDto.add(dto);
-		}
-		return lottosDto;
-	}
-
 	public LottoDto convertLottoToDto(final Lotto lotto) {
 		List<String> numbers = lotto.getNumbers()
 				.stream()

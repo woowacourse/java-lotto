@@ -29,13 +29,9 @@ public class LottosDao {
     }
 
     public void addAll(final List<LottoDto> lottos, final int turn) {
-        //TODO for문 제거할 수 있을듯 함
-//		final Connection conn = DBManager.getConnection();
-//		final String query = "INSERT INTO lottos(numbers, turn) VALUES (?, ?)";
         for (LottoDto lotto : lottos) {
             add(lotto, turn);
         }
-
     }
 
     private String stringify(final LottoDto dto) {

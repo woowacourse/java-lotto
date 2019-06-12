@@ -7,9 +7,8 @@ public class DBManager {
         Connection conn = null;
         PropertiesManager propManager = new PropertiesManager();
         loadClass();
-
         try {
-            conn = DriverManager.getConnection(propManager.getUrl() + propManager.getDbName()
+            conn = DriverManager.getConnection(propManager.getDbUrl()
                     + "?useSSL=false&serverTimezone=UTC", propManager.getUsername(), propManager.getPassword());
         } catch (SQLException e) {
             e.printStackTrace();
