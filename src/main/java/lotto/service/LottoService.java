@@ -31,7 +31,7 @@ public class LottoService {
         int round = roundDao.getLatest();
 
         Money money = Money.from(req.queryParams("money"));
-        List<String> manualLottos = ConvertToList(req.queryParams("manualLottos"));
+        List<String> manualLottos = convertToList(req.queryParams("manualLottos"));
         List<Lotto> userLottos = LottoHelper.generateLottos(manualLottos, money);
         saveLottos(userLottos, round);
 
