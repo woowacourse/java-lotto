@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>로또</title>
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
 </head>
 <body>
-<h2>{{newRound}}회 로또</h2>
-<div id="box">
+<div id="center">
+    <h2>{{newRound}}회 로또</h2>
     <form action="/amount">
-        구입 금액을 입력하세요. <br/>
-        <input type="text" name="amount"><br/>
+        구입 금액을 입력하세요.<br/>
+        <input type="text" name="amount" placeholder="1,000~100,000원 사이"> 원<br/><br/>
         <input type="submit" value="입력">
     </form>
 </div>
