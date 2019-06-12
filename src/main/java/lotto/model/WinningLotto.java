@@ -8,12 +8,12 @@ public class WinningLotto {
     private final Lotto lotto;
     private final int bonusNo;
 
-    public WinningLotto(Lotto lotto, int bonusNo) {
+    public WinningLotto(final Lotto lotto, final int bonusNo) {
         this.lotto = lotto;
         this.bonusNo = bonusNo;
     }
 
-    public Rank match(Lotto userLotto) {
+    public Rank match(final Lotto userLotto) {
         int countOfMatch = userLotto.getMatchCount(this.lotto);
         boolean matchBonus = userLotto.hasNumber(this.bonusNo);
         return Rank.valueOf(countOfMatch, matchBonus);

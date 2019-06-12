@@ -42,20 +42,20 @@ public class ConsoleInput {
         this.rule = rule;
     }
 
-    private static String inputWithMessage(String message) {
+    private static String inputWithMessage(final String message) {
         if (!message.equals(EMPTY)) {
             System.out.println(message);
         }
         return SCANNER.nextLine().strip();
     }
 
-    private static String[] getInput(String message) {
+    private static String[] getInput(final String message) {
         String input = inputWithMessage(message);
         return input.split(INPUT_DELIMITER);
     }
 
     // 입력된 문자열을 자연수로 형변환할 수 있을지 테스트
-    private static boolean isOnlyNumber(String string) {
+    private static boolean isOnlyNumber(final String string) {
         if (string.length() == 0) {
             return false; // 빈 문자열은 취급하지 않는다.
         }
@@ -64,7 +64,7 @@ public class ConsoleInput {
                 .noneMatch(i -> (i < 0 || i > 9)); // 0부터 9 사이의 숫자인가
     }
 
-    private static int getSingleInt(String message) {
+    private static int getSingleInt(final String message) {
         String temp = getInput(message)[0];
         boolean check = isOnlyNumber(temp);
         while (!check) { // 입력에 문제가 있으면 계속 재입력 요구

@@ -15,17 +15,17 @@ public enum Rank {
     private int winningMoney;
     private String additionalMessage = "";
 
-    Rank(int countOfMatch, int winningMoney) {
+    Rank(final int countOfMatch, final int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
 
-    Rank(int countOfMatch, int winningMoney, String additionalMessage) {
+    Rank(final int countOfMatch, final int winningMoney, final String additionalMessage) {
         this(countOfMatch, winningMoney);
         this.additionalMessage = additionalMessage;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+    public static Rank valueOf(final int countOfMatch, final boolean matchBonus) {
         if (countOfMatch < WINNING_MIN_COUNT) {
             return MISS;
         }
@@ -40,7 +40,7 @@ public enum Rank {
         throw new IllegalArgumentException(countOfMatch + NOT_VALID_VALUE);
     }
 
-    private boolean matchCount(int countOfMatch) {
+    private boolean matchCount(final int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }
 

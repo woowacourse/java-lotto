@@ -5,7 +5,7 @@ import java.util.List;
 public abstract class LottoMaker {
     LottoRule rule;
 
-    LottoMaker(LottoRule rule) {
+    LottoMaker(final LottoRule rule) {
         this.rule = rule;
     }
 

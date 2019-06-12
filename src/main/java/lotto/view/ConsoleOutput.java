@@ -57,23 +57,23 @@ public class ConsoleOutput {
     }
 
     private static StringBuilder amountCount(final String autoOrManual, final int ticketCount) {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(autoOrManual);
-        sb.append(SPACE);
-        sb.append(ticketCount);
-        sb.append(TICKET);
-        return sb;
+        final StringBuilder result = new StringBuilder();
+        result.append(autoOrManual);
+        result.append(SPACE);
+        result.append(ticketCount);
+        result.append(TICKET);
+        return result;
     }
 
     public static void buyCount(final int manualAmount, final int autoAmount) {
         final StringBuilder manual = amountCount(MANUAL, manualAmount);
         final StringBuilder auto = amountCount(AUTO, autoAmount);
-        final StringBuilder temp = new StringBuilder(manual);
-        temp.append(COMMA);
-        temp.append(SPACE);
-        temp.append(auto);
-        temp.append(PURCHASED);
-        System.out.println(temp);
+        final StringBuilder result = new StringBuilder(manual);
+        result.append(COMMA);
+        result.append(SPACE);
+        result.append(auto);
+        result.append(PURCHASED);
+        System.out.println(result);
     }
 
     public static void lottoList(final List<Lotto> lottos) {
@@ -82,28 +82,24 @@ public class ConsoleOutput {
         }
     }
 
-    private static String getProfitRateMessage(WinStat stat) {
+    private static String getProfitRateMessage(final WinStat stat) {
         return TOTAL_PROFIT_RATE + PERCENT.format(stat.getProfitRate()) + SENTENCE_LAST;
     }
 
-    public static void statString(WinStat stat) {
+    public static void statString(final WinStat stat) {
         final StringBuilder result = new StringBuilder(HEADER);
         final Iterator<Map.Entry<Rank, Integer>> iterator = stat.iterator();
         while (iterator.hasNext()) {
             Map.Entry<Rank, Integer> entry = iterator.next();
             Rank key = entry.getKey();
             int value = entry.getValue();
-            String temp
-                    = key.equals(Rank.MISS)
-                    ? EMPTY // 낙첨은 당첨 통계에서 출력하지 않도록 함
-                    : getRankDescription(key) + ITEM_DELIMITER + value + QUANTITY + NEW_LINE;
-            result.append(temp);
+            result.append(makeRankStat(key, value));
         }
         result.append(getProfitRateMessage(stat));
         System.out.println(result);
     }
 
-    private static String getRankDescription(Rank rank) {
+    private static String getRankDescription(final Rank rank) {
         if (rank.equals(Rank.MISS)) {
             return FAILED;
         }
@@ -115,5 +111,11 @@ public class ConsoleOutput {
                 + rank.getWinningMoney()
                 + CURRENCY_UNIT
                 + PAREN_CLOSE;
+    }
+
+    private static String makeRankStat(final Rank key, final int value) {
+        return key.equals(Rank.MISS)
+                ? EMPTY // 낙첨은 당첨 통계에서 출력하지 않도록 함
+                : getRankDescription(key) + ITEM_DELIMITER + value + QUANTITY + NEW_LINE;
     }
 }
