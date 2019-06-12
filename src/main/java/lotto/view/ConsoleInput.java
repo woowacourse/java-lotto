@@ -1,10 +1,7 @@
 package lotto.view;
 
-import lotto.model.Lotto;
 import lotto.model.LottoRule;
-import lotto.model.WinningLotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -15,10 +12,7 @@ public class ConsoleInput {
     private final static Scanner SCANNER;
     private final static String INPUT_DELIMITER;
     private static final String MESSAGE_PURCHASE_AMOUNT;
-    private static final String MESSAGE_MANUAL_COUNT;
-    private static final String MESSAGE_MANUAL_NUMBERS;
-    private static final String MESSAGE_WIN_NUMBERS;
-    private static final String MESSAGE_BONUS_BALL;
+
     private final static String ERROR_INPUT_NUMBER;
     private static final String ERROR_LOW_MONEY;
     private final static String EMPTY;
@@ -26,10 +20,6 @@ public class ConsoleInput {
     static {
         SCANNER = new Scanner(System.in);
         MESSAGE_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
-        MESSAGE_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
-        MESSAGE_MANUAL_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
-        MESSAGE_WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
-        MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요.";
         ERROR_INPUT_NUMBER = "올바른 숫자가 입력되지 않았습니다. 다시 입력해 주세요.";
         ERROR_LOW_MONEY = "금액이 모자랍니다.";
         INPUT_DELIMITER = ",\\s*"; // 구분자는 쉼표
@@ -54,7 +44,7 @@ public class ConsoleInput {
         return input.split(INPUT_DELIMITER);
     }
 
-    private static String getInputFirstToken(final String message) {
+    private static String singleToken(final String message) {
         return getInput(message)[0];
     }
 
@@ -67,17 +57,17 @@ public class ConsoleInput {
                 .noneMatch(i -> (i < 0 || i > 9));
     }
 
-    private static int getSingleInt(final String message) {
-        String rawInput = getInputFirstToken(message);
+    public static int singleInt(final String message) {
+        String rawInput = singleToken(message);
         boolean check = isOnlyNumber(rawInput);
         while (!check) {
-            rawInput = getInputFirstToken(ERROR_INPUT_NUMBER);
+            rawInput = singleToken(ERROR_INPUT_NUMBER);
             check = isOnlyNumber(rawInput);
         }
         return Integer.parseInt(rawInput);
     }
 
-    private static List<Integer> tryGetNumbers() {
+    public static List<Integer> tryGetNumbers() {
         Stream<String> rawInput = Arrays.stream(getInput(EMPTY));
         try {
             return rawInput
@@ -88,48 +78,13 @@ public class ConsoleInput {
         }
     }
 
-    public static int manualPurchaseCount() {
-        return getSingleInt(MESSAGE_MANUAL_COUNT);
-    }
-
     public int allPurchaseCount() {
-        final int result = getSingleInt(MESSAGE_PURCHASE_AMOUNT) / rule.getPrice();
+        final int result = singleInt(MESSAGE_PURCHASE_AMOUNT) / rule.getPrice();
         if (result < 1) {
             throw new IllegalArgumentException(ERROR_LOW_MONEY);
         }
         return result;
     }
 
-    public List<Lotto> manualLottos(final int purchaseAmount) {
-        final List<Lotto> lottos = new ArrayList<>();
-        if (purchaseAmount >= 1) {
-            System.out.println(MESSAGE_MANUAL_NUMBERS);
-        }
-        while (lottos.size() < purchaseAmount) {
-            try {
-                final Lotto lotto = new Lotto(tryGetNumbers(), rule);
-                lottos.add(lotto);
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
-        }
-        return lottos;
-    }
 
-    public WinningLotto winningLotto() {
-        System.out.println(MESSAGE_WIN_NUMBERS);
-        Lotto lotto = null;
-        int bonusNo = -1;
-        while (lotto == null) {
-            try {
-                lotto = new Lotto(ConsoleInput.tryGetNumbers(), rule);
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
-        }
-        while (!rule.isValidNumberRange(bonusNo)) {
-            bonusNo = ConsoleInput.getSingleInt(MESSAGE_BONUS_BALL);
-        }
-        return new WinningLotto(lotto, bonusNo);
-    }
 }
