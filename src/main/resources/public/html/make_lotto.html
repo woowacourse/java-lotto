@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="../css/make_lotto.css" rel="stylesheet" type="text/css"/>
+    <title>로또</title>
+</head>
+<body>
+<div id="money-area">
+    <p>로또 구입 금액을 입력하세요.</p>
+    <input id="money-input" type="number" placeholder="1000원 이상 입력하세요" step="1000" autofocus
+           onKeyDown="onKeyDownMoney()">
+    <button id="money-btn" onclick="clickMoneyInput()">구매하기</button>
+    <div id="lottocount-area" style="display:none">
+        <p>
+            로또를 총 <span id="lottocount-text">0</span>개 구매할 수 있습니다.
+        </p>
+        <button type="button" id="lottoset-btn" onclick="clickShowMakeLottoArea()">로또 생성하기</button>
+    </div>
+</div>
+<div id="lotto-area" style="display:none">
+    <div id="lottoset-area">
+        <div id="lottoelement-area-old" class="lotto">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>10</button>
+            <br>
+            <button>11</button>
+            <button>12</button>
+            <button>13</button>
+            <button>14</button>
+            <button>15</button>
+            <button>16</button>
+            <button>17</button>
+            <button>18</button>
+            <button>19</button>
+            <button>20</button>
+            <br>
+            <button>21</button>
+            <button>22</button>
+            <button>23</button>
+            <button>24</button>
+            <button>25</button>
+            <button>26</button>
+            <button>27</button>
+            <button>28</button>
+            <button>29</button>
+            <button>30</button>
+            <br>
+            <button>31</button>
+            <button>32</button>
+            <button>33</button>
+            <button>34</button>
+            <button>35</button>
+            <button>36</button>
+            <button>37</button>
+            <button>38</button>
+            <button>39</button>
+            <button>40</button>
+            <br>
+            <button>41</button>
+            <button>42</button>
+            <button>43</button>
+            <button>44</button>
+            <button>45</button>
+        </div>
+        <br>
+        <div id="lottomake">
+            <button id="makelotto-btn" type="button" onclick="clickMakeLotto()">확인</button>
+            <button id="end-btn" type="button" onclick="clickMakeLotteries()">자동생성/생성</button>
+        </div>
+    </div>
+    <div id="lotteries-area">
+        <div id="lotteries-title">
+            <p>로또 번호를 선택하고 확인을 눌러 로또를 생성하세요</p>
+            <p>모두 생성했거나 자동 생성을 원할 시 자동생성/생성 버튼을 클릭하세요</p>
+        </div>
+        <div id="lotteries" class="lotto">
+            <p id="lotteriescnt" style="display:none">수동 <span id="manualcnt-text"></span>장, 자동 <span
+                    id="autocnt-text"></span>장을 구매하셨습니다.</p>
+            <div id="lotto_number">
+                <button name="1" type="button"></button>
+                <button name="2" type="button"></button>
+                <button name="3" type="button"></button>
+                <button name="4" type="button"></button>
+                <button name="5" type="button"></button>
+                <button name="6" type="button"></button>
+            </div>
+        </div>
+    </div>
+    <div id="winlotto-area" style="display:none">
+        <div id="winlotto-title"></div>
+        <p>지난 우승 번호를 설정하세요</p>
+        <p>마지막에 선택한 번호는 보너스 번호입니다.</p>
+        <div id="winlotto" class="lotto">
+            <button name="1" type="button"></button>
+            <button name="2" type="button"></button>
+            <button name="3" type="button"></button>
+            <button name="4" type="button"></button>
+            <button name="5" type="button"></button>
+            <button name="6" type="button"></button>
+            +
+            <button name="bonus" type="button"></button>
+        </div>
+        <br>
+        <div>
+            <button id="winlotto-btn" type="button" onclick="clickMakeWinLotto()">생성</button>
+            <button id="result-btn" type="button" onclick="clickShowResult()" disabled="true">결과 확인하기</button>
+        </div>
+        <div id="result-area" style="display:none">
+            <p>-----당첨 결과-----</p>
+            <div id="rank-area">
+                <p>6개 일치 (2000000000)- <span id="rank_1"> </span>개</p>
+                <p>5개 일치, 보너스 볼 일치(30000000원)- <span id="rank_2"> </span>개</p>
+                <p>5개 일치 (1500000)- <span id="rank_3"> </span>개</p>
+                <p>4개 일치 (50000)- <span id="rank_4"> </span>개</p>
+                <p>3개 일치 (5000)- <span id="rank_5"> </span>개</p>
+            </div>
+            <div>
+                <p>총 수익률은 <span id="rate"></span> 입니다.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../javascript/make_lotto/moneyFunc.js"></script>
+<script src="../javascript/make_lotto/lotteriesFunc.js"></script>
+</body>
+</html>

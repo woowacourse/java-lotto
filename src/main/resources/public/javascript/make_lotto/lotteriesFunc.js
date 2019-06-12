@@ -136,7 +136,7 @@ function clickMakeLotteries() {
 
 	$.ajax({
 		type : "POST",
-		url : "detailLotteries",
+		url : "/detailLotteries",
 		data : queryString,
 		contentType : 'application/json;charset=UTF-8;version=1.0',
 
@@ -208,11 +208,10 @@ function clickShowResult() {
 	body.bonus = lotto.pop()
 	body.winLotto = lotto
 	var queryString = JSON.stringify(body)
-	console.log(queryString)
 
 	$.ajax({
 		type : "POST",
-		url : "detailResult",
+		url : "/detailResult",
 		data : queryString,
 		contentType : 'application/json;charset=UTF-8;version=1.0',
 
@@ -225,7 +224,6 @@ function clickShowResult() {
 }
 
 function generateResultView(data) {
-	console.log(data)
 	var dataJson = JSON.parse(data);
 	changeResult(dataJson)
 	drawResultArea()

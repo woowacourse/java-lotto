@@ -47,7 +47,7 @@ function callLottoBuyCount(money) {
     var queryString = JSON.stringify(body);
     $.ajax({
         type : "POST",
-        url : "LottoBuyCount",
+        url : "/LottoBuyCount",
         data : queryString,
         contentType : 'application/json;charset=UTF-8;version=1.0',
 
