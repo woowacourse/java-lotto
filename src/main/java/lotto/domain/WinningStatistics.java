@@ -21,12 +21,16 @@ public class WinningStatistics {
     }
 
     public long getInterestRate(LottoBuyingMoney inputLottoBuyingMoney) {
+        return ((long) getPrize().getValue() * 100) / (inputLottoBuyingMoney.getValue());
+    }
+
+    public Money getPrize() {
         Money totalGain = new Money(0);
         for (Map.Entry<Rank, Integer> entry : statistics.entrySet()) {
             Rank rank = entry.getKey();
             int num = entry.getValue();
             totalGain = totalGain.add(new Money(rank.getWinningMoney() * num));
         }
-        return ((long) totalGain.getValue() * 100) / (inputLottoBuyingMoney.getValue());
+        return totalGain;
     }
 }

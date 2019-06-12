@@ -17,4 +17,17 @@ public class WinningLotto {
     public Rank match(Lotto lotto) {
         return Rank.valueOf(this.lotto.countMatches(lotto), lotto.contains(bonusBall));
     }
+
+    @Override
+    public String toString() {
+        return lotto + " + " + bonusBall;
+    }
+
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public LottoNumber getBonus() {
+        return bonusBall;
+    }
 }

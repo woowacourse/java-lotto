@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class InputView {
+public class ConsoleInputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int getLottoBuyingMoney() {
@@ -60,7 +60,7 @@ public class InputView {
         List<List<Integer>> lottoNumbers = new ArrayList<>();
 
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        for (int i = 0; i < numOfCustomLottos; i++) {
+            for (int i = 0; i < numOfCustomLottos; i++) {
             lottoNumbers.add(getIntegers());
         }
 

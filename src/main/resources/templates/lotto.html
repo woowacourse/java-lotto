@@ -11,16 +11,16 @@
     <title>Lotto App</title>
 </head>
 <body>
+
 <div class="container">
-    <form method="post" action="/home">
+    <h1></h1>
+    <form method="post" action="/lotto">
         <div class="form-group">
-            <label for="money">로또 구입 금액</label>
-            <input name="lottoBuyingMoney" type="number" class="form-control" id="money" aria-describedby="inputMoneyHelp" placeholder="로또 구입 금액을 입력하세요.">
-            <small id="inputMoneyHelp" class="form-text text-muted">로또 가격은 한 장당 1000원입니다.</small>
+            <label for="money">당첨 로또와 보너스 번호</label>
+            <input name="winningLotto" type="text" class="form-control" id="money" aria-describedby="inputMoneyHelp" placeholder="e.g., 1,2,3,4,5,6,7">
         </div>
-        <div class="form-group">
-            <label for="custom">수동 로또 개수</label>
-            <input name="numOfCustomLottos" type="number" class="form-control" id="custom" placeholder="구매할 수동 로또 개수를 입력하세요.">
+        <p>수동 로또 입력</p>
+        <div class="form-group" id="lottoInputs">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -30,5 +30,25 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+    var numOfCustomLottos = {{numOfCustomLottos}};
+
+    //create input element
+
+    for (var i=0; i<numOfCustomLottos; i++) {
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = "lotto" + i;
+        input.id = "lotto" + i;
+        console.log(input)
+        $("#lottoInputs").append(input);
+        $("#lottoInputs").append("<br/>");
+        $("#lotto"+i).addClass("form-control");
+
+        if (i == 0) {
+            $("#lotto"+i).attr("placeholder", "e.g., 1,2,3,4,5,6");
+        }
+    }
+</script>
 </body>
 </html>
