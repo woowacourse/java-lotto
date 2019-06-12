@@ -36,7 +36,7 @@ public class LottoService {
         saveLottos(userLottos, round);
 
         int countOfManual = manualLottos.size();
-        int countOfAuto = money.getCountOfPurchase() - countOfManual;
+        int countOfAuto = money.getCountOfAuto(countOfManual);
         res.redirect("/lottos?countOfManual=" + countOfManual + "&countOfAuto=" + countOfAuto);
         return null;
     }

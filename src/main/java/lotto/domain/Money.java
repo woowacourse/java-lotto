@@ -31,4 +31,8 @@ public class Money {
     public int getCountOfPurchase() {
         return (int) money / PRICE_PER_LOTTO;
     }
+
+    public int getCountOfAuto(int countOfManual) {
+        return getCountOfPurchase() - countOfManual;
+    }
 }
