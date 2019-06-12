@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.domain.generate.LottosFactory;
+import lotto.utils.Converter;
+import lotto.utils.ResultMessage;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -59,6 +61,19 @@ public class WebUILottoApplication {
             return render(model, "winningLotto.html");
         });
 
+        post("/result", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            Lotto lotto = new Lotto(Converter.convertNumbers(req.queryParams("winningLotto")));
+            LottoNumber bonusNo = LottoNumber.valueOf(Integer.parseInt(req.queryParams("bonusNumber")));
+            WinningLotto winningLotto = new WinningLotto(lotto, bonusNo);
+            LottoResult lottoResult = LottoResult.generateLottoResult(req.session().attribute("lottos"), winningLotto);
+            Price price = req.session().attribute("price");
+            model.put("yield", lottoResult.findYield(price.getPrice()));
+            model.put("userLottoResult", ResultMessage.getResult(lottoResult, getRanks()));
+
+            return render(model, "result.html");
+        });
+
         exception(Exception.class, (exception, req, res) -> {
             String message = null;
             try {
@@ -70,6 +85,16 @@ public class WebUILottoApplication {
 
         });
 
+    }
+
+    private static List<Rank> getRanks() {
+        List<Rank> ranks = new ArrayList<>();
+        ranks.add(Rank.FIRST);
+        ranks.add(Rank.SECOND);
+        ranks.add(Rank.THIRD);
+        ranks.add(Rank.FOURTH);
+        ranks.add(Rank.FIFTH);
+        return ranks;
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
