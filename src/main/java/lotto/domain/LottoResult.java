@@ -2,13 +2,11 @@ package lotto.domain;
 
 import lotto.dto.LottoResultDto;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 public class LottoResult {
-    private static final int LOTTO_MONEY = 1000;
     private final Map<Rank, Integer> results;
 
     public LottoResult() {
@@ -22,19 +20,20 @@ public class LottoResult {
         results.put(rank, results.get(rank) + 1);
     }
 
-    public BigDecimal summury() {
-        int sumOfRank = 0;
-        int sumOfTickets = 0;
-        for (Map.Entry<Rank, Integer> entry : results.entrySet()) {
-            sumOfRank += entry.getKey().money() * entry.getValue();
-            sumOfTickets += entry.getValue();
-        }
-        return new BigDecimal(sumOfRank)
-                .divide(new BigDecimal(sumOfTickets), 3, RoundingMode.CEILING)
-                .divide(new BigDecimal(LOTTO_MONEY), 3, RoundingMode.CEILING);
+    public LottoResultDto results() {
+        return new LottoResultDto(new TreeMap<>(results));
     }
 
-    public LottoResultDto results() {
-        return new LottoResultDto(new TreeMap<>(results), summury());
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult result = (LottoResult) o;
+        return results.equals(result.results);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(results);
     }
 }
