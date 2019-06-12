@@ -49,32 +49,6 @@ public class WinnerDAO {
         }
     }
 
-    public void addWinner(RankResult rankResult) throws SQLException {
-        String query = "insert into winner(profit, lotto_one, lotto_two, lotto_three, lotto_four, lotto_five, lotto_six, lotto_bonus, " +
-                "first_rank_cnt, second_rank_cnt, third_rank_cnt, fourth_rank_cnt, fifth_rank_cnt, miss_rank_cnt) " +
-                "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-        PreparedStatement pstmt = getConnection().prepareStatement(query);
-
-        pstmt.setFloat(1, rankResult.getRate());
-
-        pstmt.setString(2, rankResult.winLotto(0).toString());
-        pstmt.setString(3, rankResult.winLotto(1).toString());
-        pstmt.setString(4, rankResult.winLotto(2).toString());
-        pstmt.setString(5, rankResult.winLotto(3).toString());
-        pstmt.setString(6, rankResult.winLotto(4).toString());
-        pstmt.setString(7, rankResult.winLotto(5).toString());
-        pstmt.setString(8, rankResult.winBonus().toString());
-
-        pstmt.setInt(9, rankResult.matchRankCount(Rank.FIRST));
-        pstmt.setInt(10, rankResult.matchRankCount(Rank.SECOND));
-        pstmt.setInt(11, rankResult.matchRankCount(Rank.THIRD));
-        pstmt.setInt(12, rankResult.matchRankCount(Rank.FOURTH));
-        pstmt.setInt(13, rankResult.matchRankCount(Rank.FIFTH));
-        pstmt.setInt(14, rankResult.matchRankCount(Rank.MISS));
-
-        pstmt.execute();
-    }
-
     public static void addWinner(WinnerDTO winnerDTO) throws SQLException {
         String query = "insert into winner(profit, lotto_one, lotto_two, lotto_three, lotto_four, lotto_five, lotto_six, lotto_bonus, " +
                 "first_rank_cnt, second_rank_cnt, third_rank_cnt, fourth_rank_cnt, fifth_rank_cnt, miss_rank_cnt) " +
@@ -141,5 +115,16 @@ public class WinnerDAO {
         jsonObject.add("rank", rank);
 
         return jsonObject;
+    }
+
+    public static int findRecentTurn() throws SQLException {
+        int resultSetFirstColumn = 1;
+        String query = "select MAX(turn) from winner";
+        PreparedStatement pstmt = getConnection().prepareStatement(query);
+
+        ResultSet resultSet = pstmt.executeQuery();
+
+        if (!resultSet.next()) throw new IllegalArgumentException();
+        return resultSet.getInt(resultSetFirstColumn);
     }
 }

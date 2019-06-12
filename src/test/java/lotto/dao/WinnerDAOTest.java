@@ -49,4 +49,9 @@ class WinnerDAOTest {
         JsonObject jsonObject = WinnerDAO.findWinnerByTurn(2);
         System.out.println(new Gson().toJson(jsonObject));
     }
+
+    @Test
+    void 가장_최근_회차_구하기() throws SQLException {
+        assertEquals(WinnerDAO.findRecentTurn(),2);
+    }
 }

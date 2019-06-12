@@ -4,10 +4,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.RankResult;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
 /**
  * @author heebg
  * @version 1.0 2019-06-12
