@@ -1,5 +1,5 @@
 # TODO
-
+buttonName 문자열 배열을 따로 html 문서로 보내 주는 방법 이외의 방법이 있을까?
 
 
 # DONE

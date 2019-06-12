@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import lotto.domain.lotto.exception.IllegalNumberCombinationException;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -37,6 +38,10 @@ public class Lotto {
 
     public boolean containsNumber(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override
