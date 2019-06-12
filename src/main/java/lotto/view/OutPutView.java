@@ -1,13 +1,14 @@
 package lotto.view;
 
-import lotto.domain.LottoResult;
+import lotto.domain.LottoResult_VO;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 
 public class OutPutView {
-    public static final String NEW_LINE = "\n";
     private static final String RESULT_MESSAGE = "%d개 일치 (%d원) - %d개\n";
     private static final String RESULT_SECOND_MESSAGE = "%d개 일치, 보너스볼 일치 (%d원) - %d개\n";
+    private static final int PERSENT = 100;
+    public static final String NEW_LINE = "\n";
 
     public static void showLottoTicket(LottoTicket lottoTicket) {
         System.out.println(NEW_LINE + "수동으로 "
@@ -18,7 +19,7 @@ public class OutPutView {
         System.out.println(lottoTicket + NEW_LINE);
     }
 
-    public static void showLottoResult(LottoResult lottoResult) {
+    public static void showLottoResult(LottoResult_VO lottoResult) {
         System.out.println(NEW_LINE + "당첨 통계");
         System.out.println("--------------------");
 
@@ -27,16 +28,25 @@ public class OutPutView {
                 .forEach(rank -> printStatistics(rank, lottoResult));
 
         System.out.println(NEW_LINE + "총 수익률은 "
-                + String.format("%.1f", lottoResult.dividendRate())
+                + String.format("%.1f", dividendRate(lottoResult))
                 + "% 입니다.");
     }
 
-    private static void printStatistics(Rank rank, LottoResult lottoResult) {
+    private static void printStatistics(Rank rank, LottoResult_VO lottoResult) {
         if (rank == Rank.MISS) {
             return;
         }
         System.out.printf(rank != Rank.SECOND ? RESULT_MESSAGE : RESULT_SECOND_MESSAGE
                 , rank.getCountOfMatch(), rank.getWinningMoney()
                 , lottoResult.getResultValue(rank));
+    }
+
+    private static double dividendRate(LottoResult_VO lottoResult) {
+        double rateResult = 0;
+        for (Rank rank : lottoResult.getResultKey()) {
+            rateResult += rank.getWinningMoney() * lottoResult.getResultValue(rank);
+        }
+
+        return rateResult / lottoResult.getPrice() * PERSENT;
     }
 }

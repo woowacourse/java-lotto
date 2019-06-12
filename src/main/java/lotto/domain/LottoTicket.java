@@ -47,16 +47,10 @@ public class LottoTicket {
 
     public List<Rank> matchLotto(WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
-        lottos.stream().forEach(lotto -> {
-            ranks.add(Rank.valueOf(lotto.numberOfMatch(winningLotto.getWinningLotto())
-                    , lotto.bonusOfMatch(winningLotto.getBonusBall())));
-        });
+        lottos.stream().forEach(lotto -> ranks.add(Rank.valueOf(lotto.numberOfMatch(winningLotto.getWinningLotto())
+                , lotto.bonusOfMatch(winningLotto.getBonusBall()))));
 
         return ranks;
-    }
-
-    public int getPrice() {
-        return (this.numberOfAutoLotto + this.numberOfCustomLotto) * LOTTO_PRICE;
     }
 
     @Override

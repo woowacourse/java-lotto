@@ -29,6 +29,10 @@ public class Price {
         return Integer.parseInt(money);
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     public int getNumberOfLotto() {
         return money / LOTTO_PRICE;
     }
