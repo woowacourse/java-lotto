@@ -156,7 +156,6 @@ function generateLotteries(data) {
 }
 
 function generateLotteriesView(lotteriesData) {
-	temp = lotteriesData
 	var lotteriesArea, lottoData, id
 
 	for(var i = 0 ; i < lotteriesData.length ; i++) {
@@ -245,11 +244,11 @@ function changeResultRank(resultArray) {
 	})
 }
 
+function changeNowTurn(turn) {
+	$("#turn_text").text(turn)
+}
+
 function drawResultArea() {
 	$("#result-btn").attr("disabled", true)
 	$("#result-area").show("slow")
-}
-
-function changeNowTurn(turn) {
-	$("#turn_text").text(turn)
 }

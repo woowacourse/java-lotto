@@ -1,5 +1,6 @@
 package lotto.dao;
 
+import com.google.gson.Gson;
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.customcreatelotto.DefaultCustomCreateCreateLotto;
@@ -46,5 +47,10 @@ class UserLottoDAOTest {
     @Test
     void insert_lotteries() throws SQLException {
         UserLottoDAO.addUserLotteries(lotteries, 2);
+    }
+
+    @Test
+    void select() throws SQLException {
+        System.out.println(new Gson().toJson(UserLottoDAO.findLotteriesByTurn(3)));
     }
 }

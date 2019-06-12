@@ -145,7 +145,7 @@ public class CallRestApiService {
         JsonObject jsonObject = new JsonObject();
         JsonObject winner = WinnerDAO.findWinnerByTurn(turn);
         jsonObject.add("winner", winner);
-        jsonObject.addProperty("userLotto","userLotto");
+        jsonObject.add("userLotto",UserLottoDAO.findLotteriesByTurn(turn));
         return new Gson().toJson(jsonObject);
     }
 }

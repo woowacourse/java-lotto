@@ -1,7 +1,13 @@
-var realrank
-
 function clickHistory() {
-    var body = {turn:$("#renect-turn").text()}
+    var wantTurn = parseInt($("#turn-input").val())
+    var recentTurn = $("#renect-turn").text()
+
+    if (wantTurn > recentTurn) {
+        alert("존재하지 않는 회차입니다.")
+        return
+    }
+
+    var body = {turn:wantTurn}
     var queryString = JSON.stringify(body)
     $.ajax({
         type: "POST",
@@ -17,10 +23,16 @@ function clickHistory() {
 }
 
 function showHistoryArea(data) {
+    changeInputArea()
     var dataJson = JSON.parse(data)
     drawWinnerArea(dataJson.winner)
     drawLotteriesArea(dataJson.userLotto)
     $("#history-area").show("slow")
+}
+
+function changeInputArea() {
+    $("#turn-input").attr("disabled", true)
+    $("#turn-btn").attr("disabled", true)
 }
 
 function drawWinnerArea(data) {
@@ -51,9 +63,29 @@ function drawRankArea(rank) {
 function drawWinLottoArea(winLotto) {
     var lotto = winLotto.lotto
     var bonus = winLotto.bonus
+    for(var i = 1 ; i <= 6 ; i++) {
+        $("#win_"+i).text(lotto[i-1])
+    }
+    $("#win_bonus").text(bonus)
 }
 
 function drawLotteriesArea(lotteries) {
-
+    lotteries.lotteries.forEach(function(lotto){
+        drawLottoArea(lotto)
+    })
+    $("#lotto-number-area").remove()
 }
+
+function drawLottoArea(lotto) {
+    var lotteriesArea = $("#lotto-number-area")
+    
+    var clone = lotteriesArea.clone()
+    for (var i = 0 ; i < lotto.length ; i++) {
+        clone.attr("id", "lotto-number-area" + (i + 1))
+        clone.children('button')[i].innerText = lotto[i] + ""
+    }
+    
+    clone.appendTo(lotteriesArea.parent())
+}
+
 
