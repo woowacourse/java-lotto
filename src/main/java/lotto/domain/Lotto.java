@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.LottoValidException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
@@ -29,6 +30,10 @@ public class Lotto {
         if (lotto.size() != set.size()) {
             throw new LottoValidException("중복이 아닌 번호들로만 입력하세요.");
         }
+    }
+
+    public int getLottoNumber(int index){
+        return lottoNumbers.get(index).getNumber();
     }
 
     boolean isContain(LottoNumber lottoNumber) {
