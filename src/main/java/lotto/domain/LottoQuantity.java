@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.purchaseamount.PurchaseAmount;
+
 import java.util.Objects;
 
 public class LottoQuantity {
@@ -20,11 +23,18 @@ public class LottoQuantity {
         return new LottoQuantity(quantity);
     }
 
-    public static LottoQuantity create(String quantity) {
+    public static LottoQuantity create(int quantity, PurchaseAmount purchaseAmount) {
+        if (purchaseAmount.canBuy(quantity * LottoTicket.PRICE)) {
+            return create(quantity);
+        }
+        throw new InvalidLottoQuantityException("생성 불가능한 로또 개수입니다.");
+    }
+
+    public static LottoQuantity create(String quantityText, PurchaseAmount purchaseAmount) {
         try {
-            return create(Integer.parseInt(quantity));
+            return create(Integer.parseInt(quantityText), purchaseAmount);
         } catch (NumberFormatException e) {
-            throw new InvalidLottoQuantityException("로또 개수는 숫자로 설정 가능합니다.");
+            throw new InvalidLottoQuantityException("로또 개수는 숫자만 가능합니다.");
         }
     }
 

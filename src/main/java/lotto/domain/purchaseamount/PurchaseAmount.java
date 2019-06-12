@@ -23,6 +23,7 @@ public class PurchaseAmount {
 
     public static PurchaseAmount createLottoPurchaseAmount(String moneyText) {
         PurchaseAmount lottoPurchaseAmount = create(moneyText);
+
         if (lottoPurchaseAmount.canBuy(LottoTicket.PRICE)) {
             return lottoPurchaseAmount;
         }
@@ -52,10 +53,5 @@ public class PurchaseAmount {
 
     public int getMoney() {
         return money;
-    }
-
-    @Override
-    public String toString() {
-        return "잔액 : " + money;
     }
 }

@@ -4,7 +4,6 @@ import lotto.domain.InvalidLottoQuantityException;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoQuantity;
 import lotto.domain.lotto.InvalidLottoNumberGroupException;
-import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.lottoresult.InvalidWinningLottoException;
 import lotto.domain.lottoresult.LottoResult;
@@ -22,9 +21,8 @@ public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         PurchaseAmount lottoPurchaseAmount = createLottoPurchaseAmount();
 
-        LottoQuantity totalLottoQuantity = lottoPurchaseAmount.maxLottoQuantity();
-        LottoQuantity manualLottoQuantity = createManualLottoQuantity(totalLottoQuantity);
-        LottoQuantity autoLottoQuantity = totalLottoQuantity.subtract(manualLottoQuantity);
+        LottoQuantity manualLottoQuantity = createManualLottoQuantity(lottoPurchaseAmount);
+        LottoQuantity autoLottoQuantity = lottoPurchaseAmount.maxLottoQuantity().subtract(manualLottoQuantity);
 
         LottoTicketGroup lottos = createLottos(manualLottoQuantity, autoLottoQuantity);
         OutputView.printLottoTickets(lottos, manualLottoQuantity, autoLottoQuantity);
@@ -33,7 +31,6 @@ public class ConsoleUILottoApplication {
         OutputView.printChange(change);
 
         LottoResult lottoResult = lottos.match(createWinningLotto());
-
         OutputView.printLottoResult(lottoResult);
     }
 
@@ -48,48 +45,33 @@ public class ConsoleUILottoApplication {
 
     private static Optional<PurchaseAmount> createOptionalPurchaseAmount() {
         try {
-            return Optional.of(getLottoPurchaseAmount());
+            return Optional.of(
+                    PurchaseAmount.createLottoPurchaseAmount(InputView.inputPurchaseAmount())
+            );
         } catch (PurchaseAmountException e) {
             OutputView.printErrorMessage(e.getMessage());
             return Optional.empty();
         }
     }
 
-
-    private static PurchaseAmount getLottoPurchaseAmount() {
-        PurchaseAmount purchaseAmount = PurchaseAmount.create(InputView.inputPurchaseAmount());
-
-        if (purchaseAmount.canBuy(LottoTicket.PRICE)) {
-            return purchaseAmount;
-        }
-        throw new PurchaseAmountException("로또 한 장은 " + LottoTicket.PRICE + "원 입니다.");
-    }
-
-    private static LottoQuantity createManualLottoQuantity(LottoQuantity totalLottoQuantity) {
+    private static LottoQuantity createManualLottoQuantity(PurchaseAmount lottoPurchaseAmount) {
         Optional<LottoQuantity> lottoQuantity;
         do {
-            lottoQuantity = createOptionalLottoQuantity(totalLottoQuantity);
+            lottoQuantity = createOptionalLottoQuantity(lottoPurchaseAmount);
         } while (lottoQuantity.isEmpty());
 
         return lottoQuantity.get();
     }
 
-    private static Optional<LottoQuantity> createOptionalLottoQuantity(LottoQuantity totalLottoQuantity) {
+    private static Optional<LottoQuantity> createOptionalLottoQuantity(PurchaseAmount purchaseAmount) {
         try {
-            return Optional.of(getLottoQuantity(totalLottoQuantity));
+            return Optional.of(
+                    LottoQuantity.create(InputView.inputManualLottoQuantity(), purchaseAmount)
+            );
         } catch (InvalidLottoQuantityException e) {
             OutputView.printErrorMessage(e.getMessage());
             return Optional.empty();
         }
-    }
-
-    private static LottoQuantity getLottoQuantity(LottoQuantity totalLottoQuantity) {
-        LottoQuantity lottoQuantity = LottoQuantity.create(InputView.inputManualLottoQuantity());
-
-        if (lottoQuantity.biggerThan(totalLottoQuantity)) {
-            throw new InvalidLottoQuantityException("생성 가능 로또 개수보다 큽니다.");
-        }
-        return lottoQuantity;
     }
 
     private static LottoTicketGroup createLottos(LottoQuantity manualLottoQuantity, LottoQuantity autoLottoQuantity) {
