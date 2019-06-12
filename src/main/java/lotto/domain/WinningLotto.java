@@ -1,24 +1,27 @@
 package lotto.domain;
 
-import lotto.domain.ticket.*;
-import lotto.dto.WinningLottoDto;
+import lotto.domain.ticket.Ticket;
+import lotto.domain.ticket.TicketNumber;
+import lotto.domain.ticket.WinningTicket;
 
 public class WinningLotto implements WinningTicket {
     private final Ticket winningTicket;
     private final TicketNumber bonus;
 
-    public WinningLotto(WinningLottoDto dto, TicketCreator ticketCreator) {
-        this.winningTicket = ticketCreator.create(dto.getNumbers());
-        this.bonus = new LottoNumber(dto.getBonus());
+    public WinningLotto(Ticket winningTicket, TicketNumber bonus) {
+        this.winningTicket = winningTicket;
+        this.bonus = bonus;
     }
 
     @Override
     public int match(Ticket lotto) {
-        return winningTicket.lottoNumbers().matchNumber(lotto.lottoNumbers());
+        return (int) lotto.ticketNumbers().numbers().stream()
+                .filter(ticketNumber -> winningTicket.contains(ticketNumber))
+                .count();
     }
 
     @Override
     public boolean bonus(Ticket lotto) {
-        return lotto.lottoNumbers().contains(bonus);
+        return lotto.ticketNumbers().contains(bonus);
     }
 }
