@@ -34,4 +34,9 @@ public class LottoNumbers implements TicketNumbers {
     public boolean contains(TicketNumber number) {
         return numbers.contains(number);
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }
