@@ -9,7 +9,7 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusBall;
 
-    WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
         checkWinningLotto(winningLotto, bonusBall);
         this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
