@@ -67,8 +67,7 @@ public class LottoService {
         return render(model, "showLottos.html");
     }
 
-    public static Object doGetResult(Request req, Response res) throws SQLException {
-        Map<String, Object> model = new HashMap<>();
+    public static Object doPostResult(Request req, Response res) throws SQLException {
         String lotto = req.queryParams("winningLotto");
         int bonusNo = Integer.parseInt(req.queryParams("bonusNo"));
         int round = latestRound();
@@ -97,7 +96,7 @@ public class LottoService {
         }
     }
 
-    public static Object doPostResult(Request req, Response res) {
+    public static Object doGetResult(Request req, Response res) {
         Map<String, Object> model = new HashMap<>();
         int round = latestRound();
 

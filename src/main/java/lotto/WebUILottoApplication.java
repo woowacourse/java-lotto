@@ -28,9 +28,9 @@ public class WebUILottoApplication {
 
         get("/lottos", LottoService::getLottos);
 
-        post("/result", LottoService::doGetResult);
+        post("/result", LottoService::doPostResult);
 
-        get("/result", LottoService::doPostResult);
+        get("/result", LottoService::doGetResult);
 
         get("/error", ErrorService::exception);
 
