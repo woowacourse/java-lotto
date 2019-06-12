@@ -22,6 +22,7 @@ public class WebUILottoApplication {
     private static final int START_COUNT = 0;
     private static final String SENTENCE_DELIMITER = "\\n";
     private static final String GO_BACK_ELEMENT = "<button onclick=\"history.back()\">메인 페이지로 돌아가기</button>";
+    private static final String RESTART = "restart";
 
     public static void main(String[] args) {
         final LottoService service = new LottoService();
@@ -60,7 +61,7 @@ public class WebUILottoApplication {
 
     private static String renderMain() {
         Map<String, Object> model = new HashMap<>();
-        TurnDao turnDao = new TurnDao();
+        TurnDao turnDao = TurnDao.getInstance();
         model.put("current_turn", turnDao.findNext());
         model.put("turns", turnDao.findAll());
         return render(model, "main.html");
@@ -79,11 +80,11 @@ public class WebUILottoApplication {
     }
 
     private static WinningLotto findWinningLottoByTurn(final int turn) {
-        return new WinningLottoDao().findByTurn(turn);
+        return WinningLottoDao.getInstance().findByTurn(turn);
     }
 
     private static GameResultDto findResultByTurn(final int turn) {
-        return new GameResultDao().findByTurn(turn);
+        return GameResultDao.getInstance().findByTurn(turn);
     }
 
     private static String renderLottoShopping(final LottoService service, final Request req) {
@@ -131,15 +132,15 @@ public class WebUILottoApplication {
     }
 
     private static void addGameResult(GameResult gameResult) {
-        new GameResultDao().add(convertResultToDto(gameResult), findNextTurn());
+        GameResultDao.getInstance().add(convertResultToDto(gameResult), findNextTurn());
     }
 
     private static GameResultDto convertResultToDto(GameResult gameResult) {
         return GameResultDto.of(gameResult);
     }
 
-    private static void addWinningLotto(WinningLotto winningLotto) {
-        new WinningLottoDao().add(winningLotto, findNextTurn());
+    private static void addWinningLotto(final WinningLotto winningLotto) {
+        WinningLottoDao.getInstance().add(winningLotto, findNextTurn());
     }
 
     private static LottoNumber parseLottoNumber(int lottonumber) {
@@ -180,29 +181,29 @@ public class WebUILottoApplication {
     private static String renderEndPage(final LottoService service, final Request req) {
         Map<String, Object> model = new HashMap<>();
         service.vacateMoney();
-        if (req.queryParams("token").equals("restart")) {
+        if (req.queryParams("token").equals(RESTART)) {
             return backToMain(model);
         }
         return backToInitial(service, model);
     }
 
     private static String backToInitial(final LottoService service, Map<String, Object> model) {
-        new GameResultDao().deleteAll();
-        new WinningLottoDao().deleteAll();
+        GameResultDao.getInstance().deleteAll();
+        WinningLottoDao.getInstance().deleteAll();
         service.deleteAll();
-        new TurnDao().deleteAll();
+        TurnDao.getInstance().deleteAll();
         return render(model, "main.html");
     }
 
     private static String backToMain(Map<String, Object> model) {
-        new TurnDao().add();
+        TurnDao.getInstance().add();
         model.put("current_turn", findNextTurn());
-        model.put("turns", new TurnDao().findAll());
+        model.put("turns", TurnDao.getInstance().findAll());
         return render(model, "main.html");
     }
 
     private static Integer findNextTurn() {
-        return new TurnDao().findNext();
+        return TurnDao.getInstance().findNext();
     }
 
     private static String render(Map<String, Object> model, String templatePath) {

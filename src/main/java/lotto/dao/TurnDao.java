@@ -8,6 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TurnDao {
+    private static final TurnDao INSTANCE = new TurnDao();
+
+    private TurnDao() {
+
+    }
+
+    public static TurnDao getInstance() {
+        return INSTANCE;
+    }
 
     public void add() {
         final Connection conn = DBManager.getConnection();

@@ -14,8 +14,8 @@ public class LottoService {
 
     public LottoService() {
         lottoMachine = new LottoMachine();
-        lottosDao = new LottosDao();
-        turnDao = new TurnDao();
+        lottosDao = LottosDao.getInstance();
+        turnDao = TurnDao.getInstance();
     }
 
     public void charge(final int money) {

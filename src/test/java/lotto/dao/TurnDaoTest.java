@@ -13,7 +13,7 @@ public class TurnDaoTest {
     private static final TurnDao turnDao;
 
     static {
-        turnDao = new TurnDao();
+        turnDao = TurnDao.getInstance();
     }
 
     @BeforeEach

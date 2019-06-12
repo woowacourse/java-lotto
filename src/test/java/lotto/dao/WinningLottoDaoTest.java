@@ -33,7 +33,7 @@ class WinningLottoDaoTest {
 
     @BeforeEach
     public void setUp() {
-        winningLottoDao = new WinningLottoDao();
+        winningLottoDao = WinningLottoDao.getInstance();
         winningLottoDao.add(WINNING_LOTTO, TEST_TURN);
     }
 

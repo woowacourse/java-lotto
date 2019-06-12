@@ -28,7 +28,7 @@ public class ConsoleApplication {
 
 	private static void deleteInfo(final LottoService service) {
 		service.deleteAll();
-		new TurnDao().deleteAll();
+		TurnDao.getInstance().deleteAll();
 	}
 
 	private static int assignManualPurchaseCount(final LottoService service) {

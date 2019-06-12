@@ -42,7 +42,7 @@ public class GameResultDaoTest {
 
     @BeforeEach
     public void setUp() {
-        resultDao = new GameResultDao();
+        resultDao = GameResultDao.getInstance();
         resultDao.deleteAll();
         resultDao.add(GAME_RESULT_DTO, TEST_TURN);
     }

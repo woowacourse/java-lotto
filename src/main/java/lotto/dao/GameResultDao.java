@@ -12,6 +12,15 @@ import java.util.Map;
 
 public class GameResultDao {
     private final static double DEFAULT_PROFIT_RATE = 0.0;
+    private static final GameResultDao INSTANCE = new GameResultDao();
+
+    private GameResultDao() {
+
+    }
+
+    public static GameResultDao getInstance() {
+        return INSTANCE;
+    }
 
     public void add(final GameResultDto gameResultDto, final int turn) {
         Connection conn = DBManager.getConnection();

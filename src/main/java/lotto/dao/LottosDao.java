@@ -12,6 +12,15 @@ import java.util.List;
 
 public class LottosDao {
     private static final String DELIMITER = ",";
+    private static final LottosDao INSTANCE = new LottosDao();
+
+    private LottosDao() {
+
+    }
+
+    public static LottosDao getInstance() {
+        return INSTANCE;
+    }
 
     public void add(final LottoDto lotto, final int turn) {
         final Connection conn = DBManager.getConnection();
