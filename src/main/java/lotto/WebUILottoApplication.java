@@ -1,12 +1,16 @@
 package lotto;
 
+import lotto.domain.LottoMoney;
+import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningLotto;
 import lotto.service.LottoTicketService;
 import lotto.service.RoundService;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.Map;
 
 import static lotto.ServiceMessage.*;
@@ -29,7 +33,9 @@ public class WebUILottoApplication {
                 req.session().attribute(MONEY.type(), inputMoney);
                 req.session().attribute(MANUAL_AMOUNT.type(), manualAmount);
 
-                Map<String, Object> viewModel = lottoTicketService.lottoBuy(inputMoney, manualAmount);
+                Map<String, Object> viewModel = new HashMap<>();
+                viewModel.put(MONEY.type(), inputMoney);
+                viewModel.put(MANUAL_AMOUNT.type(), manualAmount);
 
                 return render(viewModel, "manual.html");
             } catch (Exception e) {
@@ -44,10 +50,11 @@ public class WebUILottoApplication {
                 String inputManuals = req.queryParams(MANUAL_NUMBER.type());
                 String manualAmount = req.session().attribute(MANUAL_AMOUNT.type());
                 String lottoMoney = req.session().attribute(MONEY.type());
+                LottoTickets lottoTickets = lottoTicketService.showLotto(inputManuals, manualAmount, lottoMoney);
 
-                Map<String, Object> model = lottoTicketService.showLotto(inputManuals, manualAmount, lottoMoney);
-
-                req.session().attribute(LOTTO_TICKETS.type(), model.get(LOTTO_TICKETS.type()));
+                Map<String, Object> model = new HashMap<>();
+                model.put(LOTTO_TICKETS.type(), lottoTickets);
+                req.session().attribute(LOTTO_TICKETS.type(), lottoTickets);
 
                 return render(model, "showLottos.html");
             } catch (Exception e) {
@@ -64,8 +71,18 @@ public class WebUILottoApplication {
                 LottoTickets lottoTickets = req.session().attribute(LOTTO_TICKETS.type());
                 String inputMoney = req.session().attribute(MONEY.type());
 
-                Map<String, Object> model = lottoTicketService.showResult(inputWinningLotto, inputBonusBall, lottoTickets, inputMoney);
+                LottoMoney money = lottoTicketService.getMoney(inputMoney);
+                WinningLotto winningLotto = lottoTicketService.getWinningLotto(inputWinningLotto, inputBonusBall);
+                LottoResults results = lottoTicketService.getResults(lottoTickets, winningLotto, money);
 
+                Map<String, Object> model = new HashMap<>();
+                model.put(LOTTO_TICKETS.type(), lottoTickets);
+                model.put(MONEY.type(), money);
+                model.put(WINNING_LOTTO.type(), winningLotto);
+                model.put(LOTTO_RESULTS.type(), results);
+                model.put(REWARD_MONEY.type(), results.getYield());
+
+                lottoTicketService.addDataBase(lottoTickets, money, winningLotto);
                 return render(model, "showResult.html");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -76,7 +93,9 @@ public class WebUILottoApplication {
 
         get("/select/round", (req, res) -> {
             try {
-                Map<String, Object> model = roundService.getRound();
+                int round = roundService.getRound();
+                Map<String, Object> model = new HashMap<>();
+                model.put(ROUND.type(), round);
                 return render(model, "selectRound.html");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -87,7 +106,11 @@ public class WebUILottoApplication {
 
         get("/show/round", (req, res) -> {
             String round = req.queryParams(ROUND.type());
-            Map<String, Object> model = roundService.getLottoResults(round);
+            LottoResults lottoResults = roundService.getLottoResults(round);
+            Map<String, Object> model = new HashMap<>();
+            model.put(LOTTO_RESULTS.type(), lottoResults);
+            model.put(REWARD_MONEY.type(), lottoResults.getYield());
+            model.put(ROUND.type(), round);
             return render(model, "showRounds.html");
         });
 

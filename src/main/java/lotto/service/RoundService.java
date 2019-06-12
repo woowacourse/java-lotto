@@ -11,10 +11,6 @@ import lotto.domain.factory.LottoResultsFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
-import static lotto.ServiceMessage.*;
 
 
 public class RoundService {
@@ -24,28 +20,17 @@ public class RoundService {
         this.connection = connection;
     }
 
-    //TODO 맵에 넣는걸 서비스에서 할지 컨트롤러에서 할지?
-    public Map<String, Object> getRound() throws SQLException {
-        Map<String, Object> model = new HashMap<>();
+    public int getRound() throws SQLException {
         RoundDao roundDao = new RoundDao(connection);
-        int round = roundDao.findMaxRound();
-        model.put(ROUND.type(), round);
-        return model;
+        return roundDao.findMaxRound();
     }
 
-    public Map<String, Object> getLottoResults(String inputRound) throws SQLException {
+    public LottoResults getLottoResults(String inputRound) throws SQLException {
         int round = Integer.parseInt(inputRound);
         WinningLotto winningLotto = getWinningLotto(round);
         LottoTickets lottoTickets = getLottoTickets(round);
         LottoMoney lottoMoney = new LottoMoney(getMoney(round));
-        LottoResults lottoResults = LottoResultsFactory.create(lottoTickets, winningLotto, lottoMoney);
-
-        Map<String, Object> model = new HashMap<>();
-        model.put(LOTTO_RESULTS.type(), lottoResults);
-        model.put(REWARD_MONEY.type(), lottoResults.getYield());
-        model.put(ROUND.type(), round);
-
-        return model;
+        return LottoResultsFactory.create(lottoTickets, winningLotto, lottoMoney);
     }
 
     private int getMoney(int round) throws SQLException {

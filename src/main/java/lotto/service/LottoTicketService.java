@@ -14,11 +14,7 @@ import lotto.domain.factory.WinningLottoFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static lotto.ServiceMessage.*;
 
 public class LottoTicketService {
     private final Connection connection;
@@ -27,48 +23,30 @@ public class LottoTicketService {
         this.connection = connection;
     }
 
-    public Map<String, Object> lottoBuy(String inputMoney, String manualAmount) {
-        Map<String, Object> model = new HashMap<>();
-        model.put(MONEY.type(), inputMoney);
-        model.put(MANUAL_AMOUNT.type(), manualAmount);
-        return model;
-    }
-
-    public Map<String, Object> showLotto(String inputManuals, String manualAmount, String lottoMoney) {
-        Map<String, Object> model = new HashMap<>();
+    public LottoTickets showLotto(String inputManuals, String manualAmount, String inputMoney) {
         int manualAmounts = Integer.parseInt(manualAmount);
-        LottoMoney lottoMoney1 = new LottoMoney(Integer.parseInt(lottoMoney));
+        LottoMoney lottoMoney = getMoney(inputMoney);
         List<String> manualLottoTickets = getManualLottoTickets(inputManuals);
-        LottoTickets lottoTickets = LottoTicketsFactory.create(manualAmounts, manualLottoTickets, lottoMoney1);
-        model.put(LOTTO_TICKETS.type(), lottoTickets);
-        return model;
+        return LottoTicketsFactory.create(manualAmounts, manualLottoTickets, lottoMoney);
     }
 
     private List<String> getManualLottoTickets(String inputManuals) {
         return Arrays.asList(inputManuals.replaceAll("\r", "").split("\n"));
     }
 
-    public Map<String, Object> showResult(String inputWinningLotto, String inputBonusBall, LottoTickets lottoTickets, String inputMoney) throws SQLException {
-        LottoMoney money = new LottoMoney(Long.parseLong(inputMoney));
-        WinningLotto winningLotto = WinningLottoFactory.create(inputWinningLotto, Integer.parseInt(inputBonusBall));
-        LottoResults lottoResults = LottoResultsFactory.create(lottoTickets, winningLotto, money);
-
-        addDataBase(lottoTickets, money, winningLotto);
-        Map<String, Object> model = getModel(lottoTickets, money, winningLotto, lottoResults);
-        return model;
+    public LottoMoney getMoney(String inputMoney) {
+        return new LottoMoney(Long.parseLong(inputMoney));
     }
 
-    private Map<String, Object> getModel(LottoTickets lottoTickets, LottoMoney money, WinningLotto winningLotto, LottoResults lottoResults) {
-        Map<String, Object> model = new HashMap<>();
-        model.put(LOTTO_TICKETS.type(), lottoTickets);
-        model.put(MONEY.type(), money);
-        model.put(WINNING_LOTTO.type(), winningLotto);
-        model.put(LOTTO_RESULTS.type(), lottoResults);
-        model.put(REWARD_MONEY.type(), lottoResults.getYield());
-        return model;
+    public WinningLotto getWinningLotto(String inputWinningLotto, String inputBonusBall) {
+        return WinningLottoFactory.create(inputWinningLotto, Integer.parseInt(inputBonusBall));
     }
 
-    private void addDataBase(LottoTickets lottoTickets, LottoMoney money, WinningLotto winningLotto) throws SQLException {
+    public LottoResults getResults(LottoTickets lottoTickets, WinningLotto winningLotto, LottoMoney money) {
+        return LottoResultsFactory.create(lottoTickets, winningLotto, money);
+    }
+
+    public void addDataBase(LottoTickets lottoTickets, LottoMoney money, WinningLotto winningLotto) throws SQLException {
         int round = findThisRound() + 1;
         addRoundToDB(money, round);
         addLottoTicketsToDB(lottoTickets, round);
