@@ -21,13 +21,13 @@ public class Number implements Comparable<Number> {
         this.num = num;
     }
 
-    private static void validate(final int num) {
+    private void validate(final int num) {
         if (num < MIN_NUMBER || num > MAX_NUMBER) {
             throw new IllegalArgumentException("유효한 번호가 아닙니다.");
         }
     }
 
-    public static Number valueOf(int num){
+    public static Number valueOf(int num) {
         if (NUMBER_MAP.get(num) == null) {
             return new Number(num);
         }
