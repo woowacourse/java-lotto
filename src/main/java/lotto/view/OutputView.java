@@ -35,19 +35,17 @@ public class OutputView {
     }
 
     private static void drawStatistic(RankStatistic rankStatistic) {
-        if (rankStatistic.isFailResult()) {
-            return;
+        if (rankStatistic.isWinningResult()) {
+            LottoRank rank = rankStatistic.getRank();
+            int count = rankStatistic.getCount();
+
+            System.out.format("%d개 일치%s (%d원)- %d개\n",
+                    rank.getCountOfMatch(),
+                    rank.isBonusMatch() ? ", 보너스 볼 일치" : "",
+                    rank.getReward(),
+                    count
+            );
         }
-
-        LottoRank rank = rankStatistic.getRank();
-        int count = rankStatistic.getCount();
-
-        System.out.format("%d개 일치%s (%d원)- %d개\n",
-                rank.getCountOfMatch(),
-                rank.isBonusMatch() ? ", 보너스 볼 일치" : "",
-                rank.getReward(),
-                count
-        );
     }
 
     public static void printErrorMessage(String message) {

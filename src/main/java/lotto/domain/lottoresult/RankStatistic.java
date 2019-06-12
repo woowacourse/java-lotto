@@ -9,8 +9,8 @@ public class RankStatistic {
         this.count = count;
     }
 
-    public boolean isFailResult() {
-        return rank.equals(LottoRank.FAIL);
+    public boolean isWinningResult() {
+        return !rank.equals(LottoRank.FAIL);
     }
 
     public int reward() {
