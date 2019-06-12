@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.creator.AutoLottoCreator;
+import lotto.domain.creator.LottoCreator;
 import lotto.domain.creator.ManualLottoCreator;
 import lotto.domain.util.CustomStringUtils;
 import lotto.exception.InvalidLottoNumbersException;
@@ -11,7 +12,7 @@ import java.util.List;
 public class LottoFactory {
     public static List<Lotto> createAutoLottos(int lottoQuantity) {
         List<Lotto> lottos = new ArrayList<>();
-        AutoLottoCreator creator = new AutoLottoCreator();
+        LottoCreator creator = new AutoLottoCreator();
 
         for (int i = 0; i < lottoQuantity; i++) {
             lottos.add(creator.createLotto());
@@ -23,7 +24,7 @@ public class LottoFactory {
         List<Lotto> lottos = new ArrayList<>();
 
         for (String input : inputs) {
-            ManualLottoCreator creator = new ManualLottoCreator(CustomStringUtils.parseInts(input));
+            LottoCreator creator = new ManualLottoCreator(CustomStringUtils.parseInts(input));
             lottos.add(creator.createLotto());
         }
         checkNumberOfInputLotto(lottos, lottoQuantity);
