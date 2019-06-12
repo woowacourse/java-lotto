@@ -20,7 +20,7 @@ public class WebUILottoApplication {
         LottoTicketService lottoTicketService = new LottoTicketService(connection);
         SelectRoundService selectRoundService = new SelectRoundService(connection);
 
-        get("/lottoBuy", (req, res) -> {
+        get("/buy/lotto", (req, res) -> {
             try {
                 String inputMoney = req.queryParams(MONEY.type());
                 String manualAmount = req.queryParams(MANUAL_AMOUNT.type());
@@ -39,7 +39,7 @@ public class WebUILottoApplication {
             }
         });
 
-        post("/showLotto", (req, res) -> {
+        post("/show/lotto", (req, res) -> {
             try {
                 String inputManuals = req.queryParams(MANUAL_NUMBER.type());
                 String manualAmount = req.session().attribute(MANUAL_AMOUNT.type());
@@ -57,7 +57,7 @@ public class WebUILottoApplication {
             }
         });
 
-        post("/showResult", (req, res) -> {
+        post("/show/result", (req, res) -> {
             try {
                 String inputWinningLotto = req.queryParams(WINNING_LOTTO.type());
                 String inputBonusBall = req.queryParams(BONUS_BALL.type());
@@ -74,7 +74,7 @@ public class WebUILottoApplication {
             }
         });
 
-        get("selectRound", (req, res) -> {
+        get("/select/round", (req, res) -> {
             try {
                 Map<String, Object> model = selectRoundService.getRound();
                 return render(model, "selectRound.html");
@@ -85,7 +85,7 @@ public class WebUILottoApplication {
             }
         });
 
-        get("/showRounds", (req, res) -> {
+        get("/show/round", (req, res) -> {
             String round = req.queryParams(ROUND.type());
             Map<String, Object> model = selectRoundService.getLottoResults(round);
             return render(model, "showRounds.html");
