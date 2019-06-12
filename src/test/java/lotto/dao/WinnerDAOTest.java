@@ -35,18 +35,18 @@ class WinnerDAOTest {
 
     @Test
     void connection() {
-        Connection con = winnerDAO.getConnection();
+        Connection con = WinnerDAO.getConnection();
         assertNotNull(con);
     }
 
     @Test
     void insert() throws SQLException {
-        winnerDAO.addWinner(winnerDTO);
+        WinnerDAO.addWinner(winnerDTO);
     }
 
     @Test
     void findWinnerByTurn() throws SQLException {
-        JsonObject jsonObject = winnerDAO.findWinnerByTurn(2);
+        JsonObject jsonObject = WinnerDAO.findWinnerByTurn(2);
         System.out.println(new Gson().toJson(jsonObject));
     }
 }

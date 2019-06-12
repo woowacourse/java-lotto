@@ -1,10 +1,13 @@
 package lotto.service;
 
 import com.google.gson.*;
+import lotto.dao.WinnerDAO;
 import lotto.domain.*;
 import lotto.domain.autocreatelotto.DefaultAutoCreateLotto;
+import lotto.dto.WinnerDTO;
 import spark.Request;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -98,13 +101,14 @@ public class CallRestApiService {
         return Lotto.createLotto(lottoNumbers);
     }
 
-    public String detailResult(Request req) {
+    public String detailResult(Request req) throws SQLException {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(req.body());
         int lottoNumber = jsonElement.getAsJsonObject().get("bonus").getAsInt();
 
         Winner winner = new Winner(generateLotto(jsonElement.getAsJsonObject().get("winLotto").getAsJsonArray()), new LottoNumber(lottoNumber));
         RankResult rankResult = new RankResult(lotteries, winner, money);
+        WinnerDAO.addWinner(new WinnerDTO(rankResult));
         JsonObject jsonObject = generateResponseDetailResult(rankResult);
         return new Gson().toJson(jsonObject);
     }

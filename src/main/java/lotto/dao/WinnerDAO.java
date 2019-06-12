@@ -16,7 +16,7 @@ import java.sql.*;
 public class WinnerDAO {
     private static final String table = "winner";
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         String server = "localhost";
         String database = "db_lotto";
         String userName = "heebong";
@@ -75,7 +75,7 @@ public class WinnerDAO {
         pstmt.execute();
     }
 
-    public void addWinner(WinnerDTO winnerDTO) throws SQLException {
+    public static void addWinner(WinnerDTO winnerDTO) throws SQLException {
         String query = "insert into winner(profit, lotto_one, lotto_two, lotto_three, lotto_four, lotto_five, lotto_six, lotto_bonus, " +
                 "first_rank_cnt, second_rank_cnt, third_rank_cnt, fourth_rank_cnt, fifth_rank_cnt, miss_rank_cnt) " +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
@@ -101,7 +101,7 @@ public class WinnerDAO {
         pstmt.execute();
     }
 
-    public JsonObject findWinnerByTurn(int turn) throws SQLException {
+    public static JsonObject findWinnerByTurn(int turn) throws SQLException {
         String query = "select * from winner where turn = ?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, turn);
@@ -112,7 +112,7 @@ public class WinnerDAO {
         return generateResult(resultSet);
     }
 
-    private JsonObject generateResult(ResultSet resultSet) throws SQLException {
+    private static JsonObject generateResult(ResultSet resultSet) throws SQLException {
         int resultSetColumn = 1;
 
         JsonObject jsonObject = new JsonObject();
