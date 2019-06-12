@@ -41,7 +41,7 @@ public class LottoService {
         return null;
     }
 
-    private static List<String> ConvertToList(final String manualLottos) {
+    private static List<String> convertToList(final String manualLottos) {
         String[] results = manualLottos.split(DELIMITER);
         if (results[0].equals("")) {
             return new ArrayList<>();
