@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../css/inputMoney.css">
+        <title>Conas의 로또 게임!</title>
+    </head>
+    <body>
+        {{#webUILottoData}}
+        <h1>Lotto Game <b>{{round}}</b>회차 : 금액 입력</h1>
+        {{/webUILottoData}}
+
+        <form id="inputForm">
+
+            구입 금액 : <input type="number" name="money" placeholder="1000원 단위의 금액" required autofocus><br><br>
+            수동으로 구매할 로또 수 : <input type="number" id="countOfManualLotto" name="countOfManualLotto" required><br>
+            <div id="buttons">
+                <input type="submit" id="submit" value="입력 완료" onclick="nextStep()">
+                <input type="reset" id="reset" value="재입력">
+            </div>
+        </form>
+    </body>
+    <script type="text/javascript">
+        function nextStep() {
+            var countOfManualLotto=document.getElementById('countOfManualLotto').value;
+            if(countOfManualLotto==="0"){
+                document.getElementById('inputForm').setAttribute('action','/showLottos')
+            }
+            else{
+                document.getElementById('inputForm').setAttribute('action','/manualLotto')
+            }
+        }
+
+    </script>
+</html>

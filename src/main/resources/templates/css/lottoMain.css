@@ -1,0 +1,17 @@
+body{
+    text-align: center;
+}
+
+div{
+    margin-top: 100px
+}
+
+#purchase {
+    width: 20em;
+    height: 2em;
+}
+
+#search {
+    width: 20em;
+    height: 2em;
+}
