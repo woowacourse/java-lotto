@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.database.DatabaseConnection;
+import lotto.database.LottoDAO;
+import lotto.database.WinningInformationDAO;
 import lotto.domain.*;
 import lotto.domain.generator.LottoNumbersGenerator;
 import lotto.domain.generator.ManualLottoNumbersGenerator;
@@ -9,6 +12,8 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,10 +44,14 @@ public class WebUILottoApplication {
                 Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
                 model.put("lottos", OutputViewFactory.outputLottos(lottos));
 
-                LottoGame lottoGame = setUpLottoGame(req.queryParams("winningNumber"), req.queryParams("bonusBall"));
+                WinningInformation winningInformation =
+                        setUpWinningInformation(req.queryParams("winningNumber"), req.queryParams("bonusBall"));
+                LottoGame lottoGame = new LottoGame(winningInformation);
                 LottoResult lottoResult = lottoGame.play(lottos);
                 model.put("result", OutputViewFactory.outputResult(lottoResult));
                 model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
+
+                save(lottos, winningInformation);
                 return render(model, "result.html");
             } catch (NumberFormatException e) {
                 Map<String, Object> model = new HashMap<>();
@@ -75,14 +84,25 @@ public class WebUILottoApplication {
         }
     }
 
-    private static LottoGame setUpLottoGame(String winningNumber, String bonusBall) {
+    private static WinningInformation setUpWinningInformation(String winningNumber, String bonusBall) {
         LottoNumbersGenerator manualLottoNumbersGenerator =
                 ManualLottoNumbersGenerator.getInstance(NumbersSplitter.split(winningNumber));
         LottoNumbers winningNumbers = manualLottoNumbersGenerator.generate();
 
         LottoNumber bonusNumber = LottoNumber.valueOf(Integer.parseInt(bonusBall));
 
-        WinningInformation winningInformation = new WinningInformation(winningNumbers, bonusNumber);
-        return new LottoGame(winningInformation);
+        return new WinningInformation(winningNumbers, bonusNumber);
+    }
+
+    private static void save(Lottos lottos, WinningInformation winningInformation){
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            WinningInformationDAO winningInformationDAO = WinningInformationDAO.getInstance(connection);
+            LottoDAO lottoDAO = LottoDAO.getInstance(connection);
+
+            int round = winningInformationDAO.addWinningInformation(winningInformation);
+            lottoDAO.addAllLottos(lottos, round);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
