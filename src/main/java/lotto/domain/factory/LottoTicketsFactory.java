@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketsFactory {
+    private static final int LOTTO_TICKETS_MIN_CONDITION = 0;
+
     public static LottoTickets create(final int manualAmount, List<String> manualLottoNumbers, final LottoMoney lottoMoney) {
         int totalAmount = lottoMoney.getAmount();
         int randomAmount = totalAmount - manualAmount;
         validateAmount(totalAmount, manualAmount);
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        if(manualAmount!=0){
+        if (manualAmount != LOTTO_TICKETS_MIN_CONDITION) {
             generateManualTickets(manualLottoNumbers, lottoTickets);
         }
         generateRandomTickets(randomAmount, lottoTickets);
