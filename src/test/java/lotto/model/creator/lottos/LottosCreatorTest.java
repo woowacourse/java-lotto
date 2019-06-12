@@ -1,5 +1,6 @@
-package lotto.model.creator;
+package lotto.model.creator.lottos;
 
+import lotto.model.creator.lotto.AutoLottoCreator;
 import lotto.model.object.ManualPurchaseNumber;
 import lotto.model.object.Payment;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 class LottosCreatorTest {
         Payment payment;
         ManualPurchaseNumber manualPurchaseNumber;
+        LottosCreator lottosCreator;
 
 
         @BeforeEach
@@ -23,7 +25,8 @@ class LottosCreatorTest {
 
         @Test
         void 자동로또_생성_확인_로또개수() {
-                assertThat(LottosCreator.create(payment, manualPurchaseNumber).size()).isEqualTo(3);
+                lottosCreator = new LottosCreator(new AutoLottosCreatorStrategty(new AutoLottoCreator(), payment, manualPurchaseNumber));
+                assertThat(lottosCreator.create().size()).isEqualTo(3);
         }
 
         @Test
@@ -35,6 +38,8 @@ class LottosCreatorTest {
                 inputs.add(input1);
                 inputs.add(input2);
 
-                assertThat(LottosCreator.create(inputs).size()).isEqualTo(2);
+                lottosCreator = new LottosCreator(new ManualLottosCreatorStrategy(inputs));
+
+                assertThat(lottosCreator.create().size()).isEqualTo(2);
         }
 }

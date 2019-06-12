@@ -1,6 +1,9 @@
 package lotto.controller;
 
-import lotto.model.creator.LottosCreator;
+import lotto.model.creator.lotto.AutoLottoCreator;
+import lotto.model.creator.lottos.AutoLottosCreatorStrategty;
+import lotto.model.creator.lottos.LottosCreator;
+import lotto.model.creator.lottos.ManualLottosCreatorStrategy;
 import lotto.model.object.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -53,7 +56,7 @@ public class ConsoleUILottoApplication {
         private static List<Lotto> createManualLottos(final ManualPurchaseNumber manualPurchaseNumber) {
                 try {
                         List<String[]> inputs = InputView.inputManualPaymentLottosNumber(manualPurchaseNumber);
-                        return LottosCreator.create(inputs);
+                        return new LottosCreator(new ManualLottosCreatorStrategy(inputs)).create();
                 } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
                         return createManualLottos(manualPurchaseNumber);
@@ -62,7 +65,7 @@ public class ConsoleUILottoApplication {
 
         private static List<Lotto> createAutoLottos(final Payment payment, final ManualPurchaseNumber manualPurchaseNumber) {
                 try {
-                        return LottosCreator.create(payment, manualPurchaseNumber);
+                        return new LottosCreator(new AutoLottosCreatorStrategty(new AutoLottoCreator(), payment, manualPurchaseNumber)).create();
                 } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
                         return createAutoLottos(payment, manualPurchaseNumber);

@@ -1,4 +1,4 @@
-package lotto.model.creator;
+package lotto.model.creator.lotto;
 
 import lotto.model.object.Lotto;
 import lotto.model.object.LottoNumber;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoLottoNumbersCreator {
-        public static List<LottoNumber> create() {
+public class AutoLottoCreator implements LottoCreator {
+        public Lotto create() {
                 List<LottoNumber> autoCreatedNumbers = new ArrayList<>();
                 for (int i = 1; i < LottoNumber.MAX_LOTTO_NUMBER; i++) {
                         autoCreatedNumbers.add(LottoNumber.getInstance(i));
@@ -16,6 +16,6 @@ public class AutoLottoNumbersCreator {
                 Collections.shuffle(autoCreatedNumbers);
                 autoCreatedNumbers = autoCreatedNumbers.subList(0, Lotto.NUMBER_OF_LOTTO_NUMBERS);
                 Collections.sort(autoCreatedNumbers);
-                return autoCreatedNumbers;
+                return new Lotto(autoCreatedNumbers);
         }
 }
