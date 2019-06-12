@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class LottoResult {
     private static final int PERSENT = 100;
@@ -28,11 +29,11 @@ public class LottoResult {
         result.put(rank, result.get(rank) + 1);
     }
 
-    public Map<Rank, Integer> getResult() {
-        return result;
+    public Set<Rank> getResultKey() {
+        return result.keySet();
     }
 
-    public int getResultKey(Rank result) {
+    public int getResultValue(Rank result) {
         return this.result.get(result);
     }
 
