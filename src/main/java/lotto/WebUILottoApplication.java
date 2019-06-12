@@ -1,10 +1,12 @@
 package lotto;
 
+import lotto.database.*;
 import lotto.domain.*;
 import lotto.view.WebInputView;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,7 +63,17 @@ public class WebUILottoApplication {
             result.setPrize(String.valueOf(winningStatistics.getPrize().getValue()));
             result.setResult(outputResult(winningStatistics));
 
-            // database access
+            // Insert data into database
+            Connection con = Connector.getConnection();
+            RoundDAO roundDao = new RoundDAO(con);
+            roundDao.addRound(winningStatistics.getPrize().getValue(), winningStatistics.getInterestRate(req.session().attribute("lottoBuyingMoney")));
+            int thisRoundId = roundDao.getLatestRoundId();
+            ResultDAO resultDao = new ResultDAO(con);
+            resultDao.addResult(thisRoundId, winningStatistics.getStatistics());
+            WinningLottoDAO winningLottoDao = new WinningLottoDAO(con);
+            winningLottoDao.addWinningLotto(thisRoundId, winningLotto);
+            LottoDAO lottoDao = new LottoDAO(con);
+            lottoDao.addLotto(thisRoundId, lottos);
 
             Map<String, Object> model = new HashMap<>();
             model.put("result", result);

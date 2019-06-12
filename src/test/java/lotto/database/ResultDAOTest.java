@@ -27,6 +27,7 @@ public class ResultDAOTest {
         result.put(Rank.MISS, 2);
     }
 
+/*
     @Test
     void addResultTest() throws SQLException {
         Map<Rank, Integer> result = new HashMap<>();
@@ -38,6 +39,7 @@ public class ResultDAOTest {
         result.put(Rank.MISS, 2);
         resultDao.addResult(result);
     }
+*/
 
     /*
     @Test
