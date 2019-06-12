@@ -25,17 +25,9 @@ public abstract class LottoRule {
                 + "개로 이루어져 있어야 합니다.";
     }
 
-    //    public int getNumberStart() {
-    //        return numberStart;
-    //    }
-
     public int getNumberEnd() {
         return numberEnd;
     }
-
-    //    public int getNumberCount() {
-    //        return numberCount;
-    //    }
 
     public int getPrice() {
         return price;
