@@ -1,7 +1,11 @@
 package lotto.domain.lotto;
 
-import lotto.domain.InvalidCustomGenerateLotto;
-import lotto.domain.InvalidLottoException;
+import lotto.domain.BonusBall;
+import lotto.domain.CustomGenerateLotto;
+import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
+import lotto.domain.exception.InvalidCustomGenerateLottoException;
+import lotto.domain.exception.InvalidLottoException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,7 +41,7 @@ public class CustomGenerateLottoTest {
     @Test
     void Lotto_번호에_실수를_입력할때() {
         String[] lottoNumbers = {"1.1", "2", "3", "4", "5", "6"};
-        assertThrows(InvalidCustomGenerateLotto.class, () -> {
+        assertThrows(InvalidCustomGenerateLottoException.class, () -> {
             new CustomGenerateLotto(lottoNumbers);
         });
     }
@@ -45,7 +49,7 @@ public class CustomGenerateLottoTest {
     @Test
     void Lotto_번호에_문자를_입력할때() {
         String[] lottoNumbers = {"a", "2", "3", "4", "5", "6"};
-        assertThrows(InvalidCustomGenerateLotto.class, () -> {
+        assertThrows(InvalidCustomGenerateLottoException.class, () -> {
             new CustomGenerateLotto(lottoNumbers);
         });
     }

@@ -1,7 +1,9 @@
 package lotto.domain.lotto;
 
-import lotto.domain.InvalidBounusBall;
-import lotto.domain.InvalidLottoNumberException;
+import lotto.domain.BonusBall;
+import lotto.domain.LottoNumber;
+import lotto.domain.exception.InvalidBounusBallException;
+import lotto.domain.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +33,7 @@ public class BonusBallTest {
 
     @Test
     void 보너스볼에_문자를_입력했을때() {
-        assertThrows(InvalidBounusBall.class, () -> {
+        assertThrows(InvalidBounusBallException.class, () -> {
             new BonusBall(winningLottos, "a");
         });
     }
@@ -48,7 +50,7 @@ public class BonusBallTest {
 
     @Test
     void 보너스볼에_중복된_숫자를_입력했을때() {
-        assertThrows(InvalidBounusBall.class, () -> {
+        assertThrows(InvalidBounusBallException.class, () -> {
             new BonusBall(winningLottos, "6");
         });
     }

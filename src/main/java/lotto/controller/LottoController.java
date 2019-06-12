@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.lotto.*;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutPutView;
 
@@ -10,10 +10,10 @@ public class LottoController {
 
     public void run() {
         Price price = new Price(InputView.InputPrice());
-        int numberOfCustomLotto = new NumberOfCustomLotto(InputView.InputNumberOfCustomLotto(), price.getNumberOfLotto()).getNumberOfCustomLotto();
-        List<String[]> customLottos = InputView.InputCustomLottoNumber(numberOfCustomLotto);
+        NumberOfCustomLotto manualAmount = new NumberOfCustomLotto(InputView.InputNumberOfCustomLotto(), price);
+        List<String> manualNumber = InputView.InputCustomLottoNumber(manualAmount);
 
-        LottoTicket lottoTicket = new LottoTicket(price, customLottos);
+        LottoTicket lottoTicket = new LottoTicket(price, manualNumber);
         OutPutView.showLottoTicket(lottoTicket);
 
         String[] winNumber = InputView.InputWinLottoNumber();

@@ -1,6 +1,6 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
-import lotto.domain.InvalidBounusBall;
+import lotto.domain.exception.InvalidBounusBallException;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,13 +17,14 @@ public class BonusBall {
 
     private LottoNumber invalidBonusBall(List<LottoNumber> winningLotto, String bonus) {
         Matcher matcher = Pattern.compile(BONUS_PATTERN).matcher(bonus);
+        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(bonus));
         if (!matcher.find()) {
-            throw new InvalidBounusBall("옳바르지 않은 입력입니다.");
+            throw new InvalidBounusBallException(bonus);
         }
-        if (winningLotto.contains(new LottoNumber(Integer.parseInt(bonus)))) {
-            throw new InvalidBounusBall("당첨번호와 중복된 정수가 있습니다.");
+        if (winningLotto.contains(bonusNumber)) {
+            throw new InvalidBounusBallException(bonusNumber);
         }
-        return new LottoNumber(Integer.parseInt(bonus));
+        return bonusNumber;
     }
 
     public LottoNumber getBonus() {

@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
-import lotto.domain.InvalidLottoPrice;
+import lotto.domain.Price;
+import lotto.domain.exception.InvalidLottoPriceException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,21 +17,21 @@ public class PriceTest {
 
     @Test
     void 돈이_1000원_단위가_아닐때() {
-        assertThrows(InvalidLottoPrice.class, () -> {
+        assertThrows(InvalidLottoPriceException.class, () -> {
             new Price("1001");
         });
     }
 
     @Test
     void 돈이_양수가_아닐때() {
-        assertThrows(InvalidLottoPrice.class, () -> {
+        assertThrows(InvalidLottoPriceException.class, () -> {
             new Price("-1000");
         });
     }
 
     @Test
     void 돈이_문자일때_테스트() {
-        assertThrows(InvalidLottoPrice.class, () -> {
+        assertThrows(InvalidLottoPriceException.class, () -> {
             new Price("abcd");
         });
     }

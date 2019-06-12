@@ -1,6 +1,6 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
-import lotto.domain.InvalidLottoPrice;
+import lotto.domain.exception.InvalidLottoPriceException;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -20,10 +20,10 @@ public class Price {
     private int checkValidatePrice(String money) {
         Matcher matcher = Pattern.compile(MONEY_PATTERN).matcher(money);
         if (!matcher.find()) {
-            throw new InvalidLottoPrice("제대로 된 금액이 아닙니다.");
+            throw new InvalidLottoPriceException(money);
         }
         if (Integer.parseInt(money) % LOTTO_PRICE != MIN_PRICE) {
-            throw new InvalidLottoPrice("1000원 단위로 입력해주세요.");
+            throw new InvalidLottoPriceException(Integer.parseInt(money) % LOTTO_PRICE);
         }
 
         return Integer.parseInt(money);

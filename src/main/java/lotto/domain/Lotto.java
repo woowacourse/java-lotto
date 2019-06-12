@@ -1,7 +1,7 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
-import lotto.domain.InvalidLottoException;
-import lotto.domain.InvalidWinnigLotto;
+import lotto.domain.exception.InvalidLottoException;
+import lotto.domain.exception.InvalidWinnigLottoException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,10 +21,10 @@ public abstract class Lotto {
         Set<LottoNumber> checkValidateNumber = new HashSet<>(lottoNumbers);
 
         if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER) {
-            throw new InvalidLottoException("로또 범위는 6개여야 합니다.");
+            throw new InvalidLottoException(lottoNumbers.size());
         }
         if (checkValidateNumber.size() != lottoNumbers.size()) {
-            throw new InvalidWinnigLotto("중복된 숫자가 있습니다.");
+            throw new InvalidLottoException(checkValidateNumber.size(), lottoNumbers.size());
         }
 
         return lottoNumbers;

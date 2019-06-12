@@ -1,10 +1,10 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.lotto.Price.LOTTO_PRICE;
+import static lotto.domain.Price.LOTTO_PRICE;
 import static lotto.view.OutPutView.ENTER;
 
 public class LottoTicket {
@@ -12,7 +12,7 @@ public class LottoTicket {
     private int numberOfAutoLotto;
     private List<Lotto> lottos;
 
-    public LottoTicket(Price price, List<String[]> customLottos) {
+    public LottoTicket(Price price, List<String> customLottos) {
         this.numberOfCustomLotto = customLottos.size();
         this.numberOfAutoLotto = price.getNumberOfLotto() - this.numberOfCustomLotto;
         this.lottos = new ArrayList<>();
@@ -21,7 +21,7 @@ public class LottoTicket {
         createAutoLottoNumbers();
     }
 
-    private void createCustomLottoNumbers(List<String[]> customLottos) {
+    private void createCustomLottoNumbers(List<String> customLottos) {
         for (int i = 0; i < numberOfCustomLotto; i++) {
             lottos.add(new CustomGenerateLotto(customLottos.get(i)));
         }
@@ -39,6 +39,10 @@ public class LottoTicket {
 
     public int getNumberOfCustomLotto() {
         return numberOfCustomLotto;
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public List<Rank> matchLotto(WinningLotto winningLotto) {

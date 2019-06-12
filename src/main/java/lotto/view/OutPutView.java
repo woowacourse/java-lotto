@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.lotto.LottoResult;
-import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.Rank;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.Rank;
 
 public class OutPutView {
     public static final String ENTER = "\n";

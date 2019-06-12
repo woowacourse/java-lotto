@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.domain.lotto.LottoNumber;
+import lotto.domain.LottoNumber;
 
 import java.util.Comparator;
 

@@ -1,11 +1,10 @@
 package lotto.domain.lotto;
 
-import lotto.domain.InvalidLottoException;
-import lotto.domain.InvalidLottoNumberException;
-import lotto.domain.InvalidWinnigLotto;
+import lotto.domain.WinningLotto;
+import lotto.domain.exception.InvalidLottoException;
+import lotto.domain.exception.InvalidLottoNumberException;
+import lotto.domain.exception.InvalidWinnigLottoException;
 import org.junit.jupiter.api.Test;
-
-import java.util.InputMismatchException;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,7 +28,7 @@ public class WinningLottoTest {
     @Test
     void 당첨번호가_중복일때() {
         String[] numbers = {"1", "2", "3", "4", "5", "4"};
-        assertThrows(InvalidWinnigLotto.class, () -> {
+        assertThrows(InvalidWinnigLottoException.class, () -> {
             new WinningLotto(numbers, "7");
         });
     }
@@ -37,7 +36,7 @@ public class WinningLottoTest {
     @Test
     void 당첨번호에_문자를_입력할때() {
         String[] numbers = {"a", "2", "3", "4", "5", "6"};
-        assertThrows(InvalidWinnigLotto.class, () -> {
+        assertThrows(InvalidWinnigLottoException.class, () -> {
             new WinningLotto(numbers, "7");
         });
     }
@@ -45,7 +44,7 @@ public class WinningLottoTest {
     @Test
     void 당첨번호에_실수를_입력할때() {
         String[] numbers = {"1.1", "2", "3", "4", "5", "6"};
-        assertThrows(InvalidWinnigLotto.class, () -> {
+        assertThrows(InvalidWinnigLottoException.class, () -> {
             new WinningLotto(numbers, "7");
         });
     }

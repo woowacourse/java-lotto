@@ -1,6 +1,6 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
-import lotto.domain.InvalidWinnigLotto;
+import lotto.domain.exception.InvalidWinnigLottoException;
 import lotto.util.AscendingNumber;
 
 import java.util.*;
@@ -24,9 +24,9 @@ public class WinningLotto extends Lotto {
                     .map(LottoNumber::new)
                     .collect(Collectors.toList()));
         } catch (NumberFormatException e) {
-            throw new InvalidWinnigLotto("정수외의 문자가 입력되었습니다.");
+            throw new InvalidWinnigLottoException(e);
         } catch (InputMismatchException e) {
-            throw new InvalidWinnigLotto("정수외의 수가 입력되었습니다.");
+            throw new InvalidWinnigLottoException(e);
         }
     }
 

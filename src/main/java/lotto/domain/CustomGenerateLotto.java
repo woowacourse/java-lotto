@@ -1,6 +1,6 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
-import lotto.domain.InvalidCustomGenerateLotto;
+import lotto.domain.exception.InvalidCustomGenerateLottoException;
 import lotto.util.AscendingNumber;
 
 import java.util.Arrays;
@@ -11,25 +11,27 @@ import java.util.stream.Collectors;
 
 public class CustomGenerateLotto extends Lotto {
 
-    public CustomGenerateLotto(String[] customLotto) {
+    private final static String SPLIT_REGEX = ",";
+
+    public CustomGenerateLotto(String customLotto) {
         this.lottoNumbers = invalidNumberOfLotto(customGenerateLotto(customLotto));
         Collections.sort(lottoNumbers, new AscendingNumber());
     }
 
-    private List<LottoNumber> customGenerateLotto(String[] customLotto){
+    private List<LottoNumber> customGenerateLotto(String customLotto){
         return invalidCustomGenerateLotto(customLotto);
     }
 
-    private List<LottoNumber> invalidCustomGenerateLotto(String[] customLotto){
+    private List<LottoNumber> invalidCustomGenerateLotto(String customLotto){
         try{
-            return Arrays.stream(customLotto)
+            return Arrays.stream(customLotto.split(SPLIT_REGEX))
                     .mapToInt(Integer::parseInt)
                     .mapToObj(LottoNumber::new)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e){
-            throw new InvalidCustomGenerateLotto("잘못된 문자를 입력했습니다.");
+            throw new InvalidCustomGenerateLottoException(e);
         } catch (InputMismatchException e){
-            throw new InvalidCustomGenerateLotto("정수 외의 수를 입력했습니다.");
+            throw new InvalidCustomGenerateLottoException(e);
         }
     }
 

@@ -1,10 +1,10 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
-import lotto.domain.InvalidLottoNumberException;
+import lotto.domain.exception.InvalidLottoNumberException;
 
 import java.util.*;
 
-import static lotto.domain.lotto.Lotto.*;
+import static lotto.domain.Lotto.*;
 
 public class LottoNumber {
 
@@ -12,7 +12,7 @@ public class LottoNumber {
 
     public LottoNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new InvalidLottoNumberException("1부터 45까지의 수가 아닙니다.");
+            throw new InvalidLottoNumberException(number);
         }
         this.number = number;
     }
