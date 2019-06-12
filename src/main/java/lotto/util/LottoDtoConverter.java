@@ -17,15 +17,6 @@ public class LottoDtoConverter {
 		return LottoDto.of(numbers);
 	}
 
-	public List<Lotto> convertDtoToLottos(final List<LottoDto> dtos) {
-		List<Lotto> lottos = new ArrayList<>();
-		for (final LottoDto dto : dtos) {
-			Lotto lotto = convertDtoToLotto(dto);
-			lottos.add(lotto);
-		}
-		return lottos;
-	}
-
 	public Lotto convertDtoToLotto(final LottoDto dto) {
 		List<LottoNumber> numbers = dto.getNumbers()
 				.stream()

@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.util.LottoDtoConverter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,8 +18,16 @@ public class LottoDto {
 		return new LottoDto(numbers);
 	}
 
+	public static LottoDto of(final Lotto lotto) {
+		return new LottoDtoConverter().convertLottoToDto(lotto);
+	}
+
 	public List<String> getNumbers() {
 		return new ArrayList<>(numbers);
+	}
+
+	public Lotto lottoValue() {
+		return new LottoDtoConverter().convertDtoToLotto(this);
 	}
 
 	@Override
