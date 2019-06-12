@@ -11,6 +11,11 @@ public class LottoCreator implements TicketCreator {
     }
 
     @Override
+    public TicketNumber bonus(int bonus) {
+        return new LottoNumber(bonus);
+    }
+
+    @Override
     public Ticket create(List<Integer> numbers) {
         return new Lotto(LottoNumberPool.manual(numbers));
     }

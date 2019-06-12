@@ -2,7 +2,10 @@ package lotto.domain.ticket;
 
 import lotto.domain.exceptions.LottoNumberException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 
 public class LottoNumbers implements TicketNumbers {
     static final int NUMBER_COUNT = 6;
@@ -17,13 +20,9 @@ public class LottoNumbers implements TicketNumbers {
         if (numbers.size() != NUMBER_COUNT) {
             throw new LottoNumberException();
         }
-    }
-
-    @Override
-    public int matchNumber(TicketNumbers numbers) {
-        Set<TicketNumber> ticketNumbers = new HashSet<>(this.numbers);
-        ticketNumbers.addAll(numbers.numbers());
-        return NUMBER_COUNT - ticketNumbers.size();
+        if (new HashSet<>(numbers).size() != NUMBER_COUNT) {
+            throw new LottoNumberException();
+        }
     }
 
     @Override

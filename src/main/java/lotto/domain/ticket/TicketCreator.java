@@ -7,5 +7,7 @@ public interface TicketCreator {
 
     Ticket create(List<Integer> numbers);
 
+    TicketNumber bonus(int bonus);
+
     int unitPrice();
 }

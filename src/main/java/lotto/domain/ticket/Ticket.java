@@ -2,7 +2,7 @@ package lotto.domain.ticket;
 
 public interface Ticket {
 
-    public TicketNumbers lottoNumbers();
+    public TicketNumbers ticketNumbers();
 
     public boolean contains(TicketNumber number);
 }

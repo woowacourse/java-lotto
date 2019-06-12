@@ -5,12 +5,12 @@ import java.util.Objects;
 class Lotto implements Ticket {
     private final TicketNumbers lottoNumbers;
 
-    public Lotto(TicketNumbers lottoNumbers) {
+    Lotto(TicketNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     @Override
-    public TicketNumbers lottoNumbers() {
+    public TicketNumbers ticketNumbers() {
         return lottoNumbers;
     }
 
