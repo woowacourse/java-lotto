@@ -23,6 +23,6 @@ public class WinningNumbersFactory {
     }
 
     public static WinningNumbers of(String input) {
-        return of(Integer.parseInt(input.trim()));
+        return new WinningNumbersManual(input);
     }
 }

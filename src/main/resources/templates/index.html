@@ -39,18 +39,33 @@
                             <br />
                             <p id="manualNumbersContainer">
                             </p>
-                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px; grid-auto-rows: minmax(100px, auto);">
-                                <div style="grid-column: 3;" align="right">
-                                    <i id="guide"></i>
-                                    <br />
-                                    <br />
-                                    회차 : <select name="round">
+                            <p align="right">
+                                <i id="guide"></i>
+                            </p>
+                            <br />
+                            <br />
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px; grid-auto-rows: minmax(100px, auto);" align="right">
+                                <div style="grid-column: 3;">
+                                    <select name="round">
                                         {{{recentRoundMenu}}}
                                     </select>
                                     <input type="submit" value="구매하기"/>
                                 </div>
                             </div>
                         </form>
+                        <br />
+                        <br />
+                        <br />
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px; grid-auto-rows: minmax(100px, auto);" align="right">
+                            <div style="grid-column: 3;">
+                                <form action="/history" method="get">
+                                    <select name="date">
+                                        {{{history}}}
+                                    </select>
+                                    <input type="submit" value="히스토리"/>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>

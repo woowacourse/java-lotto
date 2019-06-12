@@ -14,8 +14,7 @@ public class WinningNumbersDB implements WinningNumbers {
 
     protected WinningNumbersDB(int round) throws SQLException {
         final DB db = DB.getInstance();
-        final String query = "SELECT * FROM winning_numbers WHERE round=?";
-        final PreparedStatement pstmt = db.connect().prepareStatement(query);
+        final PreparedStatement pstmt = db.connect().prepareStatement("SELECT * FROM winning_numbers WHERE round=?");
         pstmt.setInt(1, round);
         List<Integer> fetched = fetchFromResult(pstmt.executeQuery());
         db.close();
@@ -57,8 +56,9 @@ public class WinningNumbersDB implements WinningNumbers {
         final List<LottoNumber> main = winningNumbers.mainNumbers();
         final LottoNumber bonus = winningNumbers.bonusNumber();
         final DB db = DB.getInstance();
-        final String query = "INSERT INTO winning_numbers VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        final PreparedStatement pstmt = db.connect().prepareStatement(query);
+        final PreparedStatement pstmt = db.connect().prepareStatement(
+                "INSERT INTO winning_numbers VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+        );
         pstmt.setInt(1, round);
         for (int i = 0; i < Lotto.NUMBER_OF_PICKS; i++) {
             pstmt.setString(i + 2, main.get(i).toString());

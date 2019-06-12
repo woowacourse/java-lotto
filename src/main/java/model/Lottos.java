@@ -3,6 +3,7 @@ package model;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottos implements Iterable<Lotto> {
     private final List<Lotto> lottos;
@@ -22,8 +23,24 @@ public class Lottos implements Iterable<Lotto> {
         this(new ArrayList<>(), purchaseAmount);
     }
 
+    public Lottos(String encoded) {
+        this.lottos = Collections.unmodifiableList(
+                Stream.of(encoded.split("]"))
+                .map(l -> new Lotto(l))
+                .collect(Collectors.toList())
+        );
+    }
+
     public LottoResult getResult(WinningNumbers winningNumbers) {
         return new LottoResult(this.lottos, winningNumbers);
+    }
+
+    public String encodeToDB() {
+        return this.lottos.stream().map(Lotto::encodeToDB).reduce("", String::concat);
+    }
+
+    public int amount() {
+        return lottos.size();
     }
 
     public Iterator<Lotto> iterator() {

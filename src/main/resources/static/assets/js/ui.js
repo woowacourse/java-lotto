@@ -23,6 +23,9 @@ function removeManualInputs() {
         container.removeChild(container.lastChild)
         container.removeChild(container.lastChild)
         amount--
+        if (amount == 0) {
+            document.getElementById("guide").innerHTML = "";
+        }
     }
 }
 
@@ -34,8 +37,5 @@ function resetManualInputs() {
     max = Math.floor(document.getElementById("investment").value / price)
     while (max < amount) {
         removeManualInputs()
-    }
-    if (amount == 0) {
-        document.getElementById("guide").innerHTML = "";
     }
 }

@@ -61,6 +61,10 @@ public class Lotto {
         );
     }
 
+    public String encodeToDB() {
+        return toString().replace("[", "").replace(", ", ",");
+    }
+
     @Override
     public String toString() {
         return String.valueOf(this.numbers);

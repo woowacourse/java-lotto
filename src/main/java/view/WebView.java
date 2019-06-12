@@ -3,19 +3,27 @@ package view;
 import model.*;
 
 import java.text.NumberFormat;
+import java.util.List;
+import java.util.function.Function;
+import java.sql.Timestamp;
+
 public class WebView {
     public static String roundSelect() {
         int recentRound = Lotto.recentRound();
         StringBuilder menu = new StringBuilder();
-        menu.append("<option value=\"" + recentRound + "\" selected>" + recentRound + "</option>");
+        menu.append("<option value=\"" + recentRound + "\" selected>" + recentRound + " 회</option>");
         for (int i = recentRound - 1; i > 0; i--) {
-            menu.append("<option value=\"" + i + "\">" + i + "</option>");
+            menu.append("<option value=\"" + i + "\">" + i + " 회</option>");
         }
         return menu.toString();
     }
 
+    public static String historySelect(List<Timestamp> timestamps) {
+        return timestamps.stream().map(d -> "<option value=\"" + d.toInstant() + "\">" + d.toInstant() + "</option>").reduce(String::concat).orElse("");
+    }
+
     public static String formatWinningNumbers(WinningNumbers numbers) {
-        StringBuilder formatted = new StringBuilder();
+        final StringBuilder formatted = new StringBuilder();
         numbers.mainNumbers().forEach(x -> formatted.append(
                 "<span class=\"ball color" + Integer.parseInt(x.toString()) / 10 + "\">" + x.toString() + "</span>"
         ));
@@ -34,17 +42,20 @@ public class WebView {
     }
 
     public static String formatResult(LottoResult result) {
-        StringBuilder formatted = new StringBuilder("<br />");
+        final Function<Integer, String> numberFormat = NumberFormat.getInstance()::format;
+        final StringBuilder formatted = new StringBuilder("<br />");
         result.forEach(x ->
                 formatted.append(
                         x.rank().numberOfMatches()
                         + ((x.rank().equals(LottoRank.SECOND)) ? "개 일치, 보너스 볼 일치 (" : "개 일치 (")
-                        + NumberFormat.getInstance().format(x.rank().prize().amount())
+                        + numberFormat.apply(x.rank().prize().amount())
                         + "원) - "
                         + x.number()
                         + "개<br />"
                 )
         );
+        formatted.append("투자금 : " + numberFormat.apply(result.purchasedAmount().amount()) + "원<br />");
+        formatted.append("수익금 : " + numberFormat.apply(result.totalAmount().amount()) + "원<br />");
         formatted.append("수익률 : " + Math.round(result.earningRate() * 100.0) / 100.0 + "%");
         return formatted.toString();
     }
