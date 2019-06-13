@@ -11,9 +11,8 @@ import java.util.List;
 
 public class WinningInformationDAO {
     private static final int WINNING_NUMBER_START_INDEX = 1;
+    private static final int WINNING_NUMBER_END_INDEX = 6;
     private static final int BONUS_BALL_INDEX = 7;
-    private static final int INSERT_ROUND_INDEX = 1;
-    private static final int SELECT_ROUND_INDEX = 1;
     private static final String INSERT_WINNING_INFO_QUERY =
             "INSERT INTO winningInfo(" +
                     "winning_number1," +
@@ -53,31 +52,30 @@ public class WinningInformationDAO {
             pstmt.setInt(i + WINNING_NUMBER_START_INDEX, numbers.get(i));
         }
         pstmt.setInt(BONUS_BALL_INDEX, winningInformation.getBonusNumber());
-
         pstmt.executeUpdate();
 
         ResultSet resultSet = pstmt.getGeneratedKeys();
         if (!resultSet.next()) {
             throw new SQLException();
         }
-        return resultSet.getInt(INSERT_ROUND_INDEX);
+        return resultSet.getInt(1);
     }
 
     public WinningInformation findWinningInformationByRound(int round) throws SQLException {
         String query = "SELECT * FROM winningInfo WHERE round = ?";
         PreparedStatement pstmt = connection.prepareStatement(query);
-        pstmt.setInt(SELECT_ROUND_INDEX, round);
+        pstmt.setInt(1, round);
         ResultSet resultSet = pstmt.executeQuery();
         if (!resultSet.next()) {
             throw new RoundNotFoundException();
         }
 
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 2; i < 8; i++) {
+        for (int i = WINNING_NUMBER_START_INDEX; i <= WINNING_NUMBER_END_INDEX; i++) {
             numbers.add(resultSet.getInt(i));
         }
         ManualLottoNumbersGenerator manualLottoNumbersGenerator = ManualLottoNumbersGenerator.getInstance(numbers);
-        LottoNumber lottoNumber = LottoNumber.valueOf(resultSet.getInt(8));
+        LottoNumber lottoNumber = LottoNumber.valueOf(resultSet.getInt(BONUS_BALL_INDEX));
         return new WinningInformation(manualLottoNumbersGenerator.generate(), lottoNumber);
     }
 

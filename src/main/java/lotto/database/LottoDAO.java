@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoDAO {
-    private static final int ROUND_INDEX = 1;
-    private static final int NUMBER_START_INDEX = 2;
+    private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int NUMBER_START_INDEX = 1;
+    private static final int ROUND_INDEX = 7;
     private static final String INSERT_LOTTO_QUERY =
-            "INSERT INTO lotto(round, number1, number2, number3, number4, number5, number6)" +
+            "INSERT INTO lotto(number1, number2, number3, number4, number5, number6, round)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     private static LottoDAO lottoDAO;
@@ -39,7 +40,7 @@ public class LottoDAO {
         PreparedStatement pstmt = connection.prepareStatement(INSERT_LOTTO_QUERY);
         pstmt.setInt(ROUND_INDEX, round);
         List<Integer> lottoNumbers = lotto.getLottoNumbers();
-        for (int i = 0; i < lottoNumbers.size(); i++) {
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
             pstmt.setInt(NUMBER_START_INDEX + i, lottoNumbers.get(i));
         }
         pstmt.executeUpdate();
@@ -48,13 +49,13 @@ public class LottoDAO {
     public Lottos findLottosByRound(int round) throws SQLException {
         String query = "SELECT * FROM lotto WHERE round = ?";
         PreparedStatement pstmt = connection.prepareStatement(query);
-        pstmt.setInt(ROUND_INDEX, round);
+        pstmt.setInt(1, round);
         ResultSet resultSet = pstmt.executeQuery();
 
         Lottos lottos = new Lottos();
         while (resultSet.next()) {
             List<Integer> lottoNumbers = new ArrayList<>();
-            for (int i = 1; i < 7; i++) {
+            for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
                 lottoNumbers.add(resultSet.getInt(NUMBER_START_INDEX + i));
             }
             lottos.add(new Lotto(ManualLottoNumbersGenerator.getInstance(lottoNumbers).generate()));
