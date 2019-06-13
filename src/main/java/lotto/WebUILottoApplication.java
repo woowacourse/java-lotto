@@ -1,9 +1,8 @@
 package lotto;
 
 import lotto.domain.Money;
-import lotto.domain.lottoTicket.Lotto;
-import lotto.domain.lottoTicket.Lottos;
-import lotto.domain.lottoTicket.WinningLotto;
+import lotto.domain.dao.*;
+import lotto.domain.lottoTicket.*;
 import lotto.domain.rank.RankResult;
 import spark.ModelAndView;
 import spark.Request;
@@ -27,49 +26,45 @@ public class WebUILottoApplication {
         port(8080);
         staticFileLocation("/templates");
 
-        List<Lotto> manualLottos = new ArrayList<>();
+        get("/", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+           return render(model, "lotto.html");
+        });
 
         post("/money", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             Money money = new Money(convertNumber(req, "money"));
-            model.put("money", money);
             req.session().attribute("money", money);
+            req.session().attribute("manual", new ArrayList<Lotto>());
             return render(model, "lotto.html");
         });
 
         post("/manual", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            manualLottos.add(new Lotto(convertLottoNumber(req)));
-            model.put("manual", manualLottos);
-            //TODO 회차에 해당 (requestMoney -> (lotto).{one ~ six})
+            List<Integer> lottoNumbers = convertLottoNumber(req);
+            List<Lotto> manualLottos = req.session().attribute("manual");
+            manualLottos.add(new Lotto(lottoNumbers));
+            req.session().attribute("manual", manualLottos);
             return render(model, "lotto.html");
         });
 
         post("/winning", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            WinningLotto winningLotto = new WinningLotto(convertLottoNumber(req), convertNumber(req, "bonus"));
-            Money userMoney = req.session().attribute("money");
-            int autoNumber = userMoney.getAutoLottoNumber(manualLottos.size());
-            Lottos lottos = new Lottos(manualLottos, autoNumber);
+            List<Integer> winningLottoNumber = convertLottoNumber(req);
+            int bonus = convertNumber(req, "bonus");
+            WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonus);
+            Money money = req.session().attribute("money");
+            Lottos lottos = getLottos(req, money);
             RankResult rank = lottos.matchLottoRank(winningLotto);
-            /* TODO (winning).{1~6 / bonus} 등록하기 */
-            /* TODO
-            *   money 가져오기, manualLottos 크기 가져오기 => 만들 수 있는 autoLotto 갯수
-            * 개수로 autoLotto 전부 가져와서 (Lotto).{1~6} 등록하기 */
 
-            /* TODO
-            *   winningLotto랑 일치하는 로또 찾기 -> (result).{1등~5등} 등록
-            *   rank.totalMoney -> (result).{money} 등록
-            *   rank.rateOfReturn -> (result).{yeild} 등록*/
-
-            model.put("winning", winningLotto);
-            model.put("lottos", lottos);
-            model.put("result", rank);
-            model.put("rateOfReturn", rank.rateOfReturn(userMoney.getMoney()));
+            RoundDAO.registerCount();
+            LottoDAO.addTotalLottos(lottos);
+            WinningDAO.addWinningLotto(winningLottoNumber, bonus);
+            ResultDAO.addResult(rank, money);
             return render(model, "lotto.html");
         });
 
-        exception(RuntimeException.class, (e, request, response) -> {
+        exception(Exception.class, (e, request, response) -> {
             try {
                 response.redirect("/error?message=" + URLEncoder.encode(e.getMessage(), "UTF-8"));
             } catch (UnsupportedEncodingException ex) {
@@ -82,6 +77,12 @@ public class WebUILottoApplication {
             model.put("message", req.queryParams("message"));
             return render(model, "error.html");
         });
+    }
+
+    private Lottos getLottos(Request req, Money money) {
+        List<Lotto> manualLottos = req.session().attribute("manual");
+        return new Lottos(manualLottos,
+                money.getAutoLottoNumber(manualLottos.size()));
     }
 
     private static int convertNumber(Request req, String content) {

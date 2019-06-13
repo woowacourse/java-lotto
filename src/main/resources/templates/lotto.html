@@ -30,8 +30,6 @@
                    href="#list-manual" role="tab" aria-controls="manual">수동 로또</a>
                 <a class="list-group-item list-group-item-action" id="list-winning-list" data-toggle="list"
                    href="#list-winning" role="tab" aria-controls="winning">당첨 번호</a>
-                <a class="list-group-item list-group-item-action" id="list-history-list" data-toggle="list"
-                   href="#list-history" role="tab" aria-controls="history">구입 내역</a>
             </div>
         </div>
         <div class="col-9">
@@ -111,37 +109,6 @@
                     </form>
                 </div>
 
-                <!-- History -->
-                <div class="tab-pane fade" id="list-history" role="tabpanel" aria-labelledby="list-history-list">
-                    <!-- Button trigger modal -->
-                    <h5><br/><br/>구매 내역 보기
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                data-target="#exampleModalLong">
-                            View
-                        </button>
-                    </h5>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">구매 내역</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {{{lottos}}}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -171,12 +138,37 @@
 <!-- Result title -->
 <div class="result">
     <div class="resultTitle">
-        <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="modal" data-target="#exampleModalLong2">
+        <button type="button" class="btn btn-dark btn-lg btn-block" data-toggle="modal" data-target="#exampleModalLong">
+            구매 내역
+        </button>
+        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModalLong2">
             결과 보기
         </button>
+
     </div>
 
-    <!-- Modal -->
+    <!-- 구매 내역 -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">구매 내역</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{{lottos}}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 결과 내용 -->
     <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle2"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -189,7 +181,7 @@
                 </div>
                 <div class="modal-body">
                     {{{result}}} <br/><br/>
-                    총 수익률은 {{{rateOfReturn}}}% 입니다.
+                   총 수익률은 {{{rateOfReturn}}}% 입니다.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>

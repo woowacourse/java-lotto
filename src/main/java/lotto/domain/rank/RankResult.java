@@ -1,8 +1,6 @@
 package lotto.domain.rank;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class RankResult {
     public static final int ZERO = 0;
@@ -41,6 +39,16 @@ public class RankResult {
             totalRewardMoney += rank.rewardMoney();
         }
         return totalRewardMoney;
+    }
+
+    public List<Integer> getWinnersNumber() {
+        List<Integer> result = new ArrayList<>();
+        result.add(this.winners.get(RankType.FIRST).winnersNumber);
+        result.add(this.winners.get(RankType.SECOND).winnersNumber);
+        result.add(this.winners.get(RankType.THIRD).winnersNumber);
+        result.add(this.winners.get(RankType.FOURTH).winnersNumber);
+        result.add(this.winners.get(RankType.FIFTH).winnersNumber);
+        return result;
     }
 
     @Override
