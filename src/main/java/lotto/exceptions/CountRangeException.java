@@ -1,6 +1,5 @@
 package lotto.exceptions;
-
-public class CountRangeException extends RuntimeException {
+public class CountRangeException extends IllegalArgumentException {
     public CountRangeException() {
     }
 
@@ -14,9 +13,5 @@ public class CountRangeException extends RuntimeException {
 
     public CountRangeException(Throwable cause) {
         super(cause);
-    }
-
-    public CountRangeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

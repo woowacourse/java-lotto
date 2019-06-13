@@ -1,22 +1,65 @@
 package lotto;
 
-import spark.ModelAndView;
-import spark.template.handlebars.HandlebarsTemplateEngine;
+import lotto.api.BuyLottoAPI;
+import lotto.api.EnrollLottoAPI;
+import lotto.api.InquireLottoAPI;
+import lotto.data.WebUILottoData;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import static spark.Spark.exception;
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class WebUILottoApplication {
-    public static void main(String[] args) {
-        get("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            return render(model, "index.html");
-        });
-    }
+    private static WebUILottoData webUILottoData;
 
-    private static String render(Map<String, Object> model, String templatePath) {
-        return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
+    public static void main(String[] args) {
+        get("/", (req, res) ->
+                BuyLottoAPI.index()
+        );
+
+        get("/buy", (req, res) -> {
+            webUILottoData = new WebUILottoData();
+            return BuyLottoAPI.buy();
+        });
+
+        get("/purchase", (req, res) ->
+                BuyLottoAPI.purchase(req, webUILottoData)
+        );
+
+        get("/manual", (req, res) ->
+                BuyLottoAPI.manual(req, webUILottoData)
+        );
+
+        post("/numbers", (req, res) ->
+                BuyLottoAPI.numbers(req, webUILottoData)
+        );
+
+        get("/winning", (req, res) ->
+                BuyLottoAPI.winning(req, webUILottoData)
+        );
+
+        get("/result", (req, res) ->
+                BuyLottoAPI.result(req, webUILottoData)
+        );
+
+        get("/enroll", (req, res) ->
+                EnrollLottoAPI.enroll(webUILottoData)
+        );
+
+        get("/lookup", (req, res) ->
+                InquireLottoAPI.lookUp()
+        );
+
+        get("/look", (req, res) ->
+                InquireLottoAPI.look(req)
+        );
+
+        exception(IllegalArgumentException.class, (e, req, res) -> {
+            res.status(404);
+            res.body("<h1>에러 발생</h1>" +
+                    "<form action=\"/\">\n" +
+                    "  <input type=\"submit\" value=\"홈으로\"/>\n" +
+                    "</form>");
+        });
     }
 }

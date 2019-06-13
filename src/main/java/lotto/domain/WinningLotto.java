@@ -13,7 +13,7 @@ public class WinningLotto {
     public WinningLotto(Lotto winningNumbers, Number bonusNumber) {
         this.winningNumbers = winningNumbers;
         if (winningNumbers.contains(bonusNumber)) {
-            throw new BonusNumberException();
+            throw new BonusNumberException("당첨 번호와 중복될 수 없습니다.");
         }
         this.bonusNumber = bonusNumber;
     }

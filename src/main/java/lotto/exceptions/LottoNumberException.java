@@ -1,6 +1,6 @@
 package lotto.exceptions;
 
-public class LottoNumberException extends RuntimeException {
+public class LottoNumberException extends IllegalArgumentException {
     public LottoNumberException() {
     }
 
@@ -14,9 +14,5 @@ public class LottoNumberException extends RuntimeException {
 
     public LottoNumberException(Throwable cause) {
         super(cause);
-    }
-
-    public LottoNumberException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

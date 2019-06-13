@@ -1,6 +1,6 @@
 package lotto.exceptions;
 
-public class PurchaseAmountException extends RuntimeException {
+public class PurchaseAmountException extends IllegalArgumentException {
     public PurchaseAmountException() {
     }
 
@@ -14,9 +14,5 @@ public class PurchaseAmountException extends RuntimeException {
 
     public PurchaseAmountException(Throwable cause) {
         super(cause);
-    }
-
-    public PurchaseAmountException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

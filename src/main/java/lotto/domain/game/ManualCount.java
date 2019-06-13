@@ -19,7 +19,7 @@ public class ManualCount {
 
     private void validBound(int manualCount, Count totalCount) {
         if (!isValidRange(manualCount, totalCount)) {
-            throw new CountRangeException();
+            throw new CountRangeException("유효한 입력 범위가 아닙니다.");
         }
     }
 
@@ -27,7 +27,7 @@ public class ManualCount {
         return COUNT_LOWER_BOUND <= manualCount && EQUAL_OR_UNDER <= totalCount.compareTo(manualCount);
     }
 
-    public Count getAutoCount(Count count) {
+    public Count autoCount(Count count) {
         return new Count(count.subtract(this.count));
     }
 
@@ -37,5 +37,10 @@ public class ManualCount {
 
     public boolean isUnder(int indicator) {
         return indicator <= count;
+    }
+  
+    @Override
+    public String toString() {
+        return String.valueOf(count);
     }
 }

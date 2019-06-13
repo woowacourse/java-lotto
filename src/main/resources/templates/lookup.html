@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>로또 조회하기</title>
+</head>
+<body>
+  <h1>지난 회차 조회하기</h1>
+  <div>
+    총 <a id="totalCount">{{totalCount}}</a> 회 진행하였습니다.
+  </div>
+  <form id="radio-group" action="/look"></form>
+</body>
+<script>
+    var count = document.getElementById("totalCount").innerHTML
+
+    for (var i = 1; i <= count; i++) {
+        var radioButton = '<label for="radio">'+ i + '회차 - ' + '</label>' +
+            '<input type="radio" name="radio" value="' + i +'"><br><br>'
+        document.getElementById("radio-group").innerHTML += radioButton
+    }
+
+    document.getElementById("radio-group").innerHTML += '<input type="submit" value="조회"/>'
+</script>
+</html>

@@ -27,7 +27,7 @@ public class InputParser {
 
     private static void validLottoFormat(String input) {
         if (!input.matches(INPUT_FORM_REGEX)) {
-            throw new IllegalFormatException();
+            throw new IllegalFormatException("입력 형식이 올바르지 않습니다.");
         }
     }
 
@@ -47,7 +47,7 @@ public class InputParser {
 
     private static void validSize(Set<Number> result) {
         if (result.size() != LOTTO_SIZE) {
-            throw new NumberCountException();
+            throw new NumberCountException("번호는 6개 입니다.");
         }
     }
 
@@ -58,7 +58,7 @@ public class InputParser {
 
     private static void validNumeric(String input) {
         if (!isNumeric(input)) {
-            throw new NumberFormatException();
+            throw new NumberFormatException("숫자만 입력 가능합니다.");
         }
     }
 

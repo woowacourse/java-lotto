@@ -1,6 +1,6 @@
 package lotto.exceptions;
 
-public class IllegalFormatException extends RuntimeException {
+public class IllegalFormatException extends IllegalArgumentException {
     public IllegalFormatException() {
         super();
     }
@@ -15,9 +15,5 @@ public class IllegalFormatException extends RuntimeException {
 
     public IllegalFormatException(Throwable cause) {
         super(cause);
-    }
-
-    protected IllegalFormatException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

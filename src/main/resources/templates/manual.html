@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>로또 구매하기</title>
+</head>
+<body>
+<h1>수동 구매 수량 입력</h1>
+<div>
+  총 구매 수량 : {{ count }}
+  <br>
+  <br>
+  수동 구매 수량 : {{ manual }}
+  <br>
+  <br>
+</div>
+<form id="tags" action="/numbers" method="post">
+</form>
+</body>
+<script>
+    var manualcount = new URLSearchParams(window.location.search).get("manual")
+
+    for (var i = 0; i < manualcount; i++) {
+        var manualLottoInput = '<input type="text" name="manual' + i + '"><br><br>'
+        document.getElementById("tags").innerHTML += manualLottoInput
+    }
+
+    document.getElementById("tags").innerHTML += '<input type="submit" value="수동 번호 입력"/>'
+</script>
+</html>

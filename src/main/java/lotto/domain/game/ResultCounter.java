@@ -10,12 +10,16 @@ public class ResultCounter {
         this(INIT_STATE);
     }
 
+    public int getCounter() {
+        return counter;
+    }
+
     private ResultCounter(int counter) {
         this.counter = counter;
     }
 
-    public ResultCounter increase() {
-        return new ResultCounter(this.counter + RESULT_COUNT_UNIT);
+    public void increase() {
+        this.counter += RESULT_COUNT_UNIT;
     }
 
     public int multiply(int prize) {

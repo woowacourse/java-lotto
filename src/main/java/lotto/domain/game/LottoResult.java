@@ -16,6 +16,10 @@ public class LottoResult {
 
     static {
         lottoResult = new HashMap<>();
+        init();
+    }
+
+    public static void init() {
         lottoResult.put(FIRST, new ResultCounter());
         lottoResult.put(SECOND, new ResultCounter());
         lottoResult.put(THIRD, new ResultCounter());
@@ -25,12 +29,16 @@ public class LottoResult {
     }
 
     public static Map<Rank, ResultCounter> create(TotalLottoGames totalLottoGames, WinningLotto winningLotto) {
-        for (Lotto lotto : totalLottoGames.getAllGames()) {
+        for (Lotto lotto : totalLottoGames.allGames()) {
             increase(winningLotto.resultOf(lotto));
         }
         return lottoResult;
     }
 
+    public static Map<Rank, ResultCounter> get() {
+        return lottoResult;
+    }
+  
     private static void increase(Rank rank) {
         lottoResult.get(rank).increase();
     }
@@ -41,5 +49,13 @@ public class LottoResult {
             prize += rank.totalAmount(lottoResult.get(rank));
         }
         return amount.rateOf(prize);
+    }
+  
+    public static int resultAmount() {
+        int resultAmount = 0;
+        for (Map.Entry<Rank, ResultCounter> eachResult : lottoResult.entrySet()) {
+            resultAmount += eachResult.getKey().getPrize() * eachResult.getValue().getCounter();
+        }
+        return resultAmount;
     }
 }
