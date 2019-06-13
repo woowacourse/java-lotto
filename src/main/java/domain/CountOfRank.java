@@ -1,9 +1,13 @@
 package domain;
 
-class CountOfRank {
+public class CountOfRank {
     private static final int INITIAL_COUNT = 0;
 
-    private int count = INITIAL_COUNT;
+    private int count;
+
+    CountOfRank() {
+        count = INITIAL_COUNT;
+    }
 
     int getCount() {
         return count;
