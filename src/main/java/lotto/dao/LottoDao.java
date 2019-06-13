@@ -15,8 +15,8 @@ import static lotto.dao.DataConnection.closeConnection;
 import static lotto.dao.DataConnection.getConnection;
 
 public class LottoDao {
-    private static final int BOUGHT_LOTTO_NUMBER_FROM_INDEX = 0;
-    private static final int BOUGHT_LOTTO_NUMBER_TO_INDEX = 6;
+    static final int BOUGHT_LOTTO_NUMBER_FROM_INDEX = 0;
+    static final int BOUGHT_LOTTO_NUMBER_TO_INDEX = 6;
 
     public List<Lotto> findAllBoughtLottoByRound(int round) throws SQLException {
         String sql = "SELECT * FROM bought_lotto WHERE round_id = ?";
