@@ -1,8 +1,6 @@
-package lotto.DAO;
+package lotto.dao;
 
 import org.junit.jupiter.api.Test;
-
-import java.sql.Connection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
