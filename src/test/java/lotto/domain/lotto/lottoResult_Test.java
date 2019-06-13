@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.*;
+import lotto.domain.vo.LottoResult_VO;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

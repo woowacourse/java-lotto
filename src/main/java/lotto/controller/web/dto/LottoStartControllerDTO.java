@@ -1,6 +1,7 @@
 package lotto.controller.web.dto;
 
 import lotto.domain.*;
+import lotto.domain.vo.LottoResult_VO;
 
 public class LottoStartControllerDTO {
     private Price price;

@@ -1,6 +1,7 @@
 package lotto.controller.console;
 
 import lotto.domain.*;
+import lotto.domain.vo.LottoResult_VO;
 import lotto.view.ConsoleInputView;
 import lotto.view.ConsoleOutPutView;
 

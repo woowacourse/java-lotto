@@ -2,6 +2,7 @@ package lotto.controller.web;
 
 import lotto.controller.web.dto.LottoStartControllerDTO;
 import lotto.domain.*;
+import lotto.domain.vo.LottoResult_VO;
 import spark.*;
 
 import java.util.ArrayList;
