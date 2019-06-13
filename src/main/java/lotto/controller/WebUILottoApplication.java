@@ -1,13 +1,13 @@
 package lotto.controller;
 
 import lotto.domain.lotto.*;
-import lotto.domain.lotto.db.ConnectionHandler;
-import lotto.domain.lotto.db.dao.LottosDAO;
-import lotto.domain.lotto.db.dao.WinningLottoDAO;
+import lotto.domain.lotto.db.LottosDBHandler;
+import lotto.domain.lotto.db.WinningLottoDBhandler;
 import lotto.domain.lotto.dto.PrizeInfoDTO;
 import lotto.domain.money.Money;
 import lotto.domain.money.Prize;
 import spark.ModelAndView;
+import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.*;
@@ -18,22 +18,15 @@ public class WebUILottoApplication {
 
     public static void main(String[] args) {
         get("/", (req, res) -> {
-
             Map<String, Object> model = new HashMap<>();
-
             return render(model, "index.html");
         });
 
         get("/history", (req, res) -> {
-            WinningLottoDAO winningLottoDAO = new WinningLottoDAO
-                    (new ConnectionHandler("lottoGame"));
-            winningLottoDAO.create();
-            int recentId = winningLottoDAO.getRecentId();
-            List<String> buttonIds = new ArrayList<>();
-            for (int i = 1; i <= recentId; i++) {
-                buttonIds.add(String.valueOf(i));
-            }
-            winningLottoDAO.closeConnection();
+            WinningLottoDBhandler winningLottoDBhandler = new WinningLottoDBhandler();
+
+            int recentId = winningLottoDBhandler.getRecentId();
+            List<String> buttonIds = createNames(recentId, "");
 
             Map<String, Object> model = new HashMap<>();
             model.put("buttonIds", buttonIds);
@@ -44,26 +37,16 @@ public class WebUILottoApplication {
 
         get("/history_specific", (req, res) -> {
             int round = Integer.parseInt(req.queryParams("round_number"));
-
-            WinningLottoDAO winningLottoDAO = new WinningLottoDAO
-                    (new ConnectionHandler("lottoGame"));
-            LottosDAO lottosDAO = new LottosDAO
-                    (new ConnectionHandler("lottoGame"));
-            winningLottoDAO.create();
-            lottosDAO.create();
-            WinningLotto winningLotto = winningLottoDAO.foundById(round);
-            Lottos lottos = lottosDAO.foundById(round);
+            WinningLottoDBhandler winningLottoDBhandler = new WinningLottoDBhandler();
+            LottosDBHandler lottosDBHandler = new LottosDBHandler();
+            WinningLotto winningLotto = winningLottoDBhandler.foundById(round);
+            Lottos lottos = lottosDBHandler.foundById(round);
             LottoResult lottoResult = LottoResult.create
                     (Money.create(lottos.size() * Lotto.PRICE), lottos.getPrizes(winningLotto));
 
-            winningLottoDAO.closeConnection();
 
             Map<String, Object> model = new HashMap<>();
-            List<PrizeInfoDTO> prizeInfoDTOs = new ArrayList<>();
-            for (Prize prize : Prize.values()) {
-                prizeInfoDTOs.add(new PrizeInfoDTO(prize.getMatchCount()
-                        , prize.getPrizeMoney(), lottoResult.getCount(prize)));
-            }
+            List<PrizeInfoDTO> prizeInfoDTOs = createPrizeInfoDTOs(lottoResult);
             model.put("prizeInfos", prizeInfoDTOs);
             model.put("profitRate", lottoResult.getProfitRate());
             model.put("lottos", lottos.getLottosList());
@@ -77,19 +60,13 @@ public class WebUILottoApplication {
         });
 
         post("/manual", (req, res) -> {
-
             Money money = Money.create(Integer.parseInt(req.queryParams("money")));
-
             LottoCount manualLottoCount = LottoCount.create(
                     Integer.parseInt(req.queryParams("manualLottoCount")), money);
-
-            List<String> manualLottoNames = new ArrayList<>();
-            for (int i = 0; i < manualLottoCount.size(); i++) {
-                manualLottoNames.add("manualLotto" + i);
-            }
+            List<String> manualLottoTagNames = createNames(manualLottoCount.size(), "manualLotto");
 
             Map<String, Object> model = new HashMap<>();
-            model.put("manualLottoNames", manualLottoNames);
+            model.put("manualLottoTagNames", manualLottoTagNames);
 
             req.session().attribute("money", money);
             req.session().attribute("manualLottoCount", manualLottoCount.size());
@@ -101,16 +78,7 @@ public class WebUILottoApplication {
             Money money = req.session().attribute("money");
             int manualLottoCount = req.session().attribute("manualLottoCount");
 
-            List<Lotto> manualLottos = new ArrayList<>();
-            for (int i = 0; i < manualLottoCount; i++) {
-                List<Integer> lottoNumbers = new ArrayList<>();
-                List<String> tokens = Arrays.asList(req.queryParams("manualLotto" + i).split(","));
-                for (int j = 0; j < tokens.size(); j++) {
-                    lottoNumbers.add(Integer.parseInt(tokens.get(j)));
-                }
-                manualLottos.add(new Lotto(lottoNumbers));
-            }
-
+            List<Lotto> manualLottos = generateManualLottos(req, manualLottoCount);
             Lottos lottos = LottoMachine
                     .generateLottos(manualLottos, money);
 
@@ -126,34 +94,24 @@ public class WebUILottoApplication {
         });
 
         post("/result", (req, res) -> {
-            String[] tokens = req.queryParams("winningLotto").split(",");
-            List<Integer> winningLottoNumbers = new ArrayList<>();
-            for (String token : tokens) {
-                winningLottoNumbers.add(Integer.parseInt(token));
-            }
+            List<String> tokens = Arrays.asList(req.queryParams("winningLotto").split(","));
+            List<Integer> winningLottoNumbers = convertTokensToNumbers(tokens);
+
             WinningLotto winningLotto = WinningLotto.create(winningLottoNumbers,
                     Integer.parseInt(req.queryParams("bonusNumber")));
             Money money = req.session().attribute("money");
             Lottos lottos = req.session().attribute("lottos");
             LottoResult lottoResult = LottoResult.create(money, lottos.getPrizes(winningLotto));
 
-            WinningLottoDAO winningLottoDAO = new WinningLottoDAO(new ConnectionHandler("lottoGame"));
-            winningLottoDAO.create();
+            WinningLottoDBhandler winningLottoDBhandler = new WinningLottoDBhandler();
+            LottosDBHandler lottosDBHandler = new LottosDBHandler();
 
-            LottosDAO lottosDAO = new LottosDAO(new ConnectionHandler("lottoGame"));
-            lottosDAO.create();
-            lottosDAO.add(lottos, winningLottoDAO.getRecentId() + 1);
-            winningLottoDAO.add(winningLotto);
-            lottosDAO.closeConnection();
-            winningLottoDAO.closeConnection();
+            lottosDBHandler.add(lottos, winningLottoDBhandler.getRecentId() + 1);
+            winningLottoDBhandler.add(winningLotto);
 
             Map<String, Object> model = new HashMap<>();
 
-            List<PrizeInfoDTO> prizeInfoDTOs = new ArrayList<>();
-            for (Prize prize : Prize.values()) {
-                prizeInfoDTOs.add(new PrizeInfoDTO(prize.getMatchCount()
-                        , prize.getPrizeMoney(), lottoResult.getCount(prize)));
-            }
+            List<PrizeInfoDTO> prizeInfoDTOs = createPrizeInfoDTOs(lottoResult);
             model.put("prizeInfos", prizeInfoDTOs);
             model.put("profitRate", lottoResult.getProfitRate());
             return render(model, "result.html");
@@ -164,6 +122,41 @@ public class WebUILottoApplication {
             model.put("error", true);
             return render(model, "index.html");
         });
+    }
+
+    private static List<PrizeInfoDTO> createPrizeInfoDTOs(LottoResult lottoResult) {
+        List<PrizeInfoDTO> prizeInfoDTOs = new ArrayList<>();
+        for (Prize prize : Prize.values()) {
+            prizeInfoDTOs.add(new PrizeInfoDTO(prize.getMatchCount()
+                    , prize.getPrizeMoney(), lottoResult.getCount(prize)));
+        }
+        return prizeInfoDTOs;
+    }
+
+    private static List<String> createNames(int count, String name) {
+        List<String> tagNames = new ArrayList<>();
+        for (int i = 1; i <= count; i++) {
+            tagNames.add(name + i);
+        }
+        return tagNames;
+    }
+
+    private static List<Lotto> generateManualLottos(Request req, int manualLottoCount) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 1; i <= manualLottoCount; i++) {
+            List<String> tokens = Arrays.asList(req.queryParams("manualLotto" + i).split(","));
+            List<Integer> lottoNumbers = convertTokensToNumbers(tokens);
+            manualLottos.add(new Lotto(lottoNumbers));
+        }
+        return manualLottos;
+    }
+
+    private static List<Integer> convertTokensToNumbers(List<String> tokens) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < tokens.size(); i++) {
+            numbers.add(Integer.parseInt(tokens.get(i).trim()));
+        }
+        return numbers;
     }
 
     private static String render(Map<String, Object> model, String templatePath) {

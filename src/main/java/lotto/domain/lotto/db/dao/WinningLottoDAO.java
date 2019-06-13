@@ -15,7 +15,7 @@ import java.util.List;
 public class WinningLottoDAO implements DAO<WinningLotto> {
     private final static String SEPERATOR = ",";
     private ConnectionHandler connectionHandler;
-    private Connection connection = null;
+    private Connection connection;
 
     public WinningLottoDAO(ConnectionHandler connectionHandler) {
         this.connectionHandler = connectionHandler;
