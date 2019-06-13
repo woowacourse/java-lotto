@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.LottoResultDto;
+import lotto.domain.core.Rank;
 
 import java.util.Map;
 import java.util.Objects;
@@ -20,8 +20,18 @@ public class LottoResult {
         results.put(rank, results.get(rank) + 1);
     }
 
-    public LottoResultDto results() {
-        return new LottoResultDto(new TreeMap<>(results));
+    public Map<Rank, Integer> results() {
+        return new TreeMap<>(results);
+    }
+
+    public ResultSummary calculate() {
+        int sumOfRank = 0;
+        int sumOfTickets = 0;
+        for (Map.Entry<Rank, Integer> entry : results.entrySet()) {
+            sumOfRank += entry.getKey().money() * entry.getValue();
+            sumOfTickets += entry.getValue();
+        }
+        return new AverageSummary(sumOfRank, sumOfTickets);
     }
 
     @Override
