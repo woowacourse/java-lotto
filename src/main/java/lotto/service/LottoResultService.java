@@ -4,6 +4,7 @@ import lotto.dao.LottoResultDAO;
 import lottogame.domain.LottoResult;
 import lottogame.domain.Rank;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoResultService {
@@ -24,5 +25,9 @@ public class LottoResultService {
     public static Object getResultOf(LottoResult lottoResult, Rank rank) {
         Map<Rank, Integer> result = lottoResult.getResult();
         return result.get(rank);
+    }
+
+    public static List<Integer> findAllRound(int round) {
+        return LottoResultDAO.getInstance().findAllRound(round);
     }
 }

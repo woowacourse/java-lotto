@@ -8,6 +8,7 @@ import spark.Request;
 import spark.Response;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static lotto.WebUILottoApplication.render;
@@ -33,5 +34,16 @@ public class LottoResultController {
         model.put("fourth", LottoResultService.getResultOf(lottoResult, Rank.FOURTH));
         model.put("fifth", LottoResultService.getResultOf(lottoResult, Rank.FIFTH));
         return render(model, "lottoresult.html");
+    }
+
+    public static Object showSelectRoundPage(Request req, Response res) {
+        Map<String, Object> model = new HashMap<>();
+        int round = req.session().attribute("round");
+        List<Integer> rounds = LottoResultService.findAllRound(round);
+        if (rounds.size() == 0) {
+            return render(model, "noselect");
+        }
+        model.put("rounds", rounds);
+        return render(model, "selectround.html");
     }
 }

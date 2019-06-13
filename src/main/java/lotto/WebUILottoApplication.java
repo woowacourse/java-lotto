@@ -32,6 +32,7 @@ public class WebUILottoApplication {
         });
         get("/winninglotto/create", WinningLottoController::showWinningLottoInputPage);
         post("/winninglotto/getresult", LottoResultController::showLottoResultPage);
+        get("/showhistory/selectround", LottoResultController::showSelectRoundPage);
 
         exception(RuntimeException.class, (e, req, res) -> {
             String message = null;

@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResultDAO {
@@ -52,12 +54,12 @@ public class LottoResultDAO {
                     "    fifth_matcher = ? " +
                     "    where round = ?";
             pstmt = con.prepareStatement(query);
-            pstmt.setInt(1,result.get(Rank.FIRST));
-            pstmt.setInt(2,result.get(Rank.SECOND));
-            pstmt.setInt(3,result.get(Rank.THIRD));
-            pstmt.setInt(4,result.get(Rank.FOURTH));
-            pstmt.setInt(5,result.get(Rank.FIFTH));
-            pstmt.setInt(6,round);
+            pstmt.setInt(1, result.get(Rank.FIRST));
+            pstmt.setInt(2, result.get(Rank.SECOND));
+            pstmt.setInt(3, result.get(Rank.THIRD));
+            pstmt.setInt(4, result.get(Rank.FOURTH));
+            pstmt.setInt(5, result.get(Rank.FIFTH));
+            pstmt.setInt(6, round);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,5 +75,24 @@ public class LottoResultDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Integer> findAllRound(int round) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null ;
+        List<Integer> rounds = new ArrayList<>();
+        try {
+            String query = "select round from lottoresult where round!=?";
+            pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, round);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                rounds.add(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rounds;
     }
 }
