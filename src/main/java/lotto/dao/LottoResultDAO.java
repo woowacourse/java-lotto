@@ -49,14 +49,4 @@ public class LottoResultDAO {
         lottoResultDTO.setEarningRate(rs.getString("earning_rate"));
         return lottoResultDTO;
     }
-
-    private String formatLottoResult(LottoResult lottoResult) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("3개 일치 (5,000원) - " + lottoResult.getCountOfRank(FIFTH) + "개\n");
-        stringBuilder.append("4개 일치 (50,000원) - " + lottoResult.getCountOfRank(FOURTH) + "개\n");
-        stringBuilder.append("5개 일치 (1,500,000원) - " + lottoResult.getCountOfRank(THIRD) + "개\n");
-        stringBuilder.append("5개 일치,보너스 볼 일치 (30,000,000원) - " + lottoResult.getCountOfRank(SECOND) + "개\n");
-        stringBuilder.append("6개 일치 (2,000,000,000원) - " + lottoResult.getCountOfRank(FIRST) + "개");
-        return stringBuilder.toString();
-    }
 }

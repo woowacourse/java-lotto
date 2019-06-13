@@ -64,7 +64,7 @@ public class WebUILottoApplication {
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }
-            
+
             DBLoader.loadDBRoundTable(connection, round);
             DBLoader.loadDBLottoTable(connection, round, lottos);
             DBLoader.loadDBWinningLottoTable(connection, round, winningLotto);
