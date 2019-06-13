@@ -1,7 +1,5 @@
 package lotto.dao;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.dto.LottoDto;
 
 import java.sql.Connection;
@@ -18,26 +16,27 @@ public class LottoDao {
     static final int BOUGHT_LOTTO_NUMBER_FROM_INDEX = 0;
     static final int BOUGHT_LOTTO_NUMBER_TO_INDEX = 6;
 
-    public List<Lotto> findAllBoughtLottoByRound(int round) throws SQLException {
+    public List<LottoDto> findAllBoughtLottoByRound(int round) throws SQLException {
         String sql = "SELECT * FROM bought_lotto WHERE round_id = ?";
         Connection con = getConnection();
         PreparedStatement pstmt = getConnection().prepareStatement(sql);
         pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
 
-        List<Lotto> lottos = new ArrayList<>();
+        List<LottoDto> lottos = new ArrayList<>();
         while (rs.next()) {
-            lottos.add(new Lotto(getLottoNumbers(rs)));
+            lottos.add(new LottoDto(getLottoNumbers(rs)));
         }
+
         closeConnection(con);
         return lottos;
     }
 
-    private List<LottoNumber> getLottoNumbers(final ResultSet rs) throws SQLException {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private List<Integer> getLottoNumbers(final ResultSet rs) throws SQLException {
+        List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = BOUGHT_LOTTO_NUMBER_FROM_INDEX + 2; i < BOUGHT_LOTTO_NUMBER_TO_INDEX + 2; i++) {
             int lottoNumber = rs.getInt(i);
-            lottoNumbers.add(LottoNumber.getLottoNumber(lottoNumber));
+            lottoNumbers.add(lottoNumber);
         }
         return lottoNumbers;
     }
