@@ -163,11 +163,19 @@ DB 단계에서는 회차 개념이 존재, 따라서 회차 정보를 저장할
 하나의 lotto_game마다 result와 winning_lotto는 각각 하나씩이므로 각각 1:1 대응을 이루도록 구성.
 
 1. DB에 접근하기 위한 DAO 클래스 설계
+    > lotto와 lottoGame에 대한 Dao 설계
 2. DTO 사용고려
     일급 컬랙션과 원자값을 감싼 불변 클래스의 값을 db에 저장해야하는데 이때 메서드 호출(getter)이 너무 많아지므로 사용 고려
+    > 각 테이블 당 하나의 dto를 설계
 3. DB 저장에 따른 WEB 뷰 라우팅 구성 변경
-    
     - '/' (get) : 모든 회차의 결과를 간략하게 보여주는 페이지
     - '/result/:round' (get) : 해당 round의 결과를 보여주는 페이지
     - '/lotto' (get) : 로또 작성 페이지
     - '/lotto' (post) : 작성 값을 토대로 lotto game을 실행하는 route
+4. service layer
+    - service 객체로 각 Dao가 수행하는 작업들을 비즈니스 로직에 따라 관리
+    - 라운드 생성 및 조회
+    - 로또 생성 및 조회
+    - 당첨 번호 생성 및 조회
+    - 결과 생성 및 조회
+    
