@@ -31,7 +31,7 @@ public class LottoDaoTest {
         lottoDao.removeAllLotto(lottoDtos, FIRST_ROUND);
         lottoDao.addAllLotto(lottoDtos, FIRST_ROUND);
 
-        List<Lotto> lottos = lottoDao.findAllBoughtLottoByRound(FIRST_ROUND);
+        List<LottoDto> lottos = lottoDao.findAllBoughtLottoByRound(FIRST_ROUND);
         assertThat(lottos).isEqualTo(Arrays.asList(
                 new Lotto(generateLottoNumbers("1, 2, 3, 4, 5, 6")),
                 new Lotto(generateLottoNumbers("3, 4, 5, 6, 7, 8"))

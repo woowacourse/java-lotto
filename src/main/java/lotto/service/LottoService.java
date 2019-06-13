@@ -25,6 +25,10 @@ public class LottoService {
         lottoDao = new LottoDao();
     }
 
+    public int getCurrentRound() throws SQLException {
+        return lottoGameDao.currentRound();
+    }
+
     public BoughtLottos generateBoughtLottos(int round, String inputMoney, String inputLottos) throws SQLException {
         Money money = new Money(Integer.parseInt(inputMoney));
         List<String> inputManualLottos = processedInputManualLottos(inputLottos);

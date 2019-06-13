@@ -18,6 +18,16 @@ public class LottoGameDao {
     private static final int WINNING_LAST_INDEX = 8;
     private static final List<String> PRIZE_NAMES = Arrays.asList("first", "second", "third", "fourth", "fifth", "none");
 
+    public int currentRound() throws SQLException {
+        String sql = "SELECT count(*) FROM lotto_game";
+        Connection con = getConnection();
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        rs.next();
+
+        return rs.getInt(1);
+    }
+
     public void removeRound(final int testRound) throws SQLException {
         String sql = "DELETE FROM lotto_game WHERE round = ?";
         Connection con = getConnection();
@@ -151,7 +161,7 @@ public class LottoGameDao {
         Map<String, Integer> prize = resultDto.getPrize();
         for (int i = 0; i < 6; i++) {
             String prizeName = PRIZE_NAMES.get(i);
-            pstmt.setInt(i + 2, prize.get(prizeName));
+            pstmt.setInt(i + 3, prize.get(prizeName));
         }
 
         pstmt.executeUpdate();

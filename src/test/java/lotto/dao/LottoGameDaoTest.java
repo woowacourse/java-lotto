@@ -49,4 +49,9 @@ public class LottoGameDaoTest {
         assertThat(prize.get("third")).isEqualTo(1);
         assertThat(resultDto.getWinningMoney()).isEqualTo(2_003_000_000);
     }
+
+    @Test
+    void 현재_라운드가_3인지_확인_테스트() throws SQLException {
+        assertThat(lottoGameDao.currentRound()).isEqualTo(3);
+    }
 }
