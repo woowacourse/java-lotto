@@ -27,10 +27,12 @@ public class Money {
     }
 
     public double getRate(Map<Rank, Integer> map) {
-        return map.keySet().stream()
+        double rate = map.keySet()
+                .stream()
                 .mapToDouble(r -> r.getMoney() * map.get(r))
                 .sum()
                 / (double) money * PERSENT;
+        return Math.round(rate * 100) / 100.0; //셋째자리에서 반올림
     }
 
     public boolean isOverPrice(int customLottoCount) {

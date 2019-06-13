@@ -24,6 +24,14 @@ public class Calculator {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
+    public double getWholeMoney() {
+        return results
+                .entrySet()
+                .stream()
+                .mapToDouble(r -> r.getKey().getMoney() * r.getValue())
+                .sum();
+    }
+
     public int getMatchlottoCountPerRank(Rank rank) {
         return results.get(rank);
     }
@@ -33,6 +41,6 @@ public class Calculator {
     }
 
     public double getRate(Money money) {
-       return money.getRate(results);
+        return money.getRate(results);
     }
 }

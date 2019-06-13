@@ -1,8 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.DAO.DBUtil;
-import lotto.domain.DAO.WinningLottoDAO;
-import org.junit.jupiter.api.BeforeEach;
+import lotto.domain.DAO.UserLottoDAO;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
@@ -10,7 +9,8 @@ import java.sql.Connection;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class WinningLottoDAOTest {
+public class UserLottoDAOTest {
+    private UserLottoDAO userLottoDAO;
 
     @Test
     void connection() {
@@ -20,17 +20,16 @@ public class WinningLottoDAOTest {
 
     @Test
     void addRow() throws Exception{
-        WinningLottoDAO.addWinningLottoInfo(1,"11,12,13,14,15,16",8);
-    }
-
-    @Test
-    void getCurrentLoottoRoundTest() throws Exception{
-        assertThat(WinningLottoDAO.getCurrentLottoRound()).isEqualTo(0);
+       UserLottoDAO.addUserLottoNumbers("1,2,3,4,5,6",1);
     }
 
     @Test
     void deleteRow() throws Exception{
-        WinningLottoDAO.deleteWinningLottoInfoByLottoRound(1);
+        UserLottoDAO.deleteUserLottoNumbersByLottoRound(1);
     }
 
+    @Test
+    void getCurrentLoottoRoundTest() throws Exception{
+        assertThat(UserLottoDAO.getCurrentLottoRound()).isEqualTo(0);
+    }
 }

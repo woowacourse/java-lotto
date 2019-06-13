@@ -23,5 +23,12 @@
 <div> {{matchCount}}개 일치 ({{money}}원)- {{matchLottoCount}}개</div><br>
 {{/FIFTH}}
 <div>수익률은 {{rate}} % 입니다.</div>
+<br>
+{{#each round}}
+<form action="/round" method="post">
+    <button type="submit" name="{{this}}">{{this}} 회차 기록</button>
+    <input type="hidden" name="roundNumber" value="{{this}}">
+</form>
+{{/each}}
 </body>
 </html>
