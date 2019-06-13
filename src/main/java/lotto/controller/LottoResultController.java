@@ -26,6 +26,7 @@ public class LottoResultController {
         LottoResult lottoResult = LottoResultGenerator.create(lottoTickets, winningLotto);
         LottoResultService.updateLottoResult(round, lottoResult);
         LottoResultService.insertNewLottoRound();
+        req.session().attribute("round", LottoResultService.findPresentRound());
         model.put("price", price);
         model.put("rateOfLotto", lottoResult.getRateOfLotto(money));
         setMatchResult(model, lottoResult);
