@@ -5,7 +5,10 @@ import lotto.domain.lottoTicket.Lottos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoDAO {
@@ -32,5 +35,23 @@ public class LottoDAO {
             firstCount++;
         }
         preparedStatement.executeUpdate();
+    }
+
+    public static List<Lotto> searchLottoNumbers(int round) throws SQLException {
+        List<Lotto> lottoNumbers = new ArrayList<>();
+        String query = "SELECT one, two, three, four, five, six FROM number WHERE round = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            List<Integer> numbers = Arrays.asList(resultSet.getInt("one"),
+                    resultSet.getInt("two"),
+                    resultSet.getInt("three"),
+                    resultSet.getInt("four"),
+                    resultSet.getInt("five"),
+                    resultSet.getInt("six"));
+            lottoNumbers.add(new Lotto(numbers));
+        }
+        return lottoNumbers;
     }
 }

@@ -1,8 +1,13 @@
 package lotto;
 
 import lotto.domain.Money;
-import lotto.domain.dao.*;
-import lotto.domain.lottoTicket.*;
+import lotto.domain.dao.LottoDAO;
+import lotto.domain.dao.ResultDAO;
+import lotto.domain.dao.RoundDAO;
+import lotto.domain.dao.WinningDAO;
+import lotto.domain.lottoTicket.Lotto;
+import lotto.domain.lottoTicket.Lottos;
+import lotto.domain.lottoTicket.WinningLotto;
 import lotto.domain.rank.RankResult;
 import spark.ModelAndView;
 import spark.Request;
@@ -28,7 +33,8 @@ public class WebUILottoApplication {
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-           return render(model, "lotto.html");
+            model.put("searchCount", RoundDAO.searchMaxCount());
+            return render(model, "lotto.html");
         });
 
         post("/money", (req, res) -> {
@@ -36,6 +42,7 @@ public class WebUILottoApplication {
             Money money = new Money(convertNumber(req, "money"));
             req.session().attribute("money", money);
             req.session().attribute("manual", new ArrayList<Lotto>());
+            model.put("searchCount", RoundDAO.searchMaxCount());
             return render(model, "lotto.html");
         });
 
@@ -45,6 +52,7 @@ public class WebUILottoApplication {
             List<Lotto> manualLottos = req.session().attribute("manual");
             manualLottos.add(new Lotto(lottoNumbers));
             req.session().attribute("manual", manualLottos);
+            model.put("searchCount", RoundDAO.searchMaxCount());
             return render(model, "lotto.html");
         });
 
@@ -61,6 +69,20 @@ public class WebUILottoApplication {
             LottoDAO.addTotalLottos(lottos);
             WinningDAO.addWinningLotto(winningLottoNumber, bonus);
             ResultDAO.addResult(rank, money);
+            model.put("searchCount", RoundDAO.searchMaxCount());
+            return render(model, "lotto.html");
+        });
+
+        post("/search", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int round = Integer.parseInt(req.queryParams("round"));
+            /* TODO search
+             *   회차가 0이 아니면
+             *   구매 내역 -> n장의 로또 번호를 출력
+             *   결과 내역 -> 1. 당첨 번호 출력하기
+             *                2. 결과 내용 출력하기
+             * */
+
             return render(model, "lotto.html");
         });
 
@@ -94,6 +116,7 @@ public class WebUILottoApplication {
         NUMBERS.stream().forEach(number -> {
             convertNumbers.add(Integer.parseInt(req.queryParams(number)));
         });
+        Collections.sort(convertNumbers);
         return convertNumbers;
     }
 

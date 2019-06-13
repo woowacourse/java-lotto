@@ -123,14 +123,21 @@
     <div class="count">
         <div class="input-group mb-9">
             <!-- Bonus Number -->
-            <div class="input-group mb-3">
-                <select class="custom-select" id="select count" size="1">
-                    <option value="notChoice">회차를 선택해 주세요.</option>
-                </select>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">조회</button>
+            <form action="/search" method="post">
+                <div class="input-group mb-1">
+                    <select class="custom-select" name="round" id="select-count" size="1">
+                        <option value="notChoice">회차를 선택해 주세요.</option>
+                        <script language="JavaScript" type="text/javascript">
+                            for(var i=1; i<= {{searchCount}}; i++) {
+                                document.write("<option>" + i + "</option>");
+                            }
+                        </script>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">조회</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -159,7 +166,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{{lottos}}}
+                    test
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
@@ -180,8 +187,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{{result}}} <br/><br/>
-                   총 수익률은 {{{rateOfReturn}}}% 입니다.
+                    test
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>

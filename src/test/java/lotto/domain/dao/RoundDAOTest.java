@@ -14,6 +14,6 @@ public class RoundDAOTest {
 
     @Test
     void 마지막_회차_조회하기() throws SQLException {
-        assertThat(RoundDAO.searchMaxCount()).isEqualTo(4);
+        assertThat(RoundDAO.searchMaxCount()).isEqualTo(0);
     }
 }

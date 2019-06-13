@@ -1,8 +1,12 @@
 package lotto.domain.dao;
 
+import lotto.domain.lottoTicket.Lotto;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class WinningDAO {
@@ -22,5 +26,32 @@ public class WinningDAO {
         }
         preparedStatement.setInt(BONUS_COLUMN, bonus);
         preparedStatement.executeUpdate();
+    }
+
+    public static Lotto searchWinningNumbers(int round) throws SQLException {
+        String query = "SELECT one, two, three, four, five, six FROM winning WHERE round = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            return new Lotto(Arrays.asList(resultSet.getInt("one"),
+                    resultSet.getInt("two"),
+                    resultSet.getInt("three"),
+                    resultSet.getInt("four"),
+                    resultSet.getInt("five"),
+                    resultSet.getInt("six")));
+        }
+        throw new SQLException();
+    }
+
+    public static Integer searchWinningBonus(int round) throws SQLException {
+        String query = "SELECT bonus FROM winning WHERE round = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            return resultSet.getInt("bonus");
+        }
+        throw new SQLException();
     }
 }

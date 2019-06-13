@@ -5,7 +5,9 @@ import lotto.domain.rank.RankResult;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class ResultDAO {
@@ -28,5 +30,42 @@ public class ResultDAO {
         psmt.setLong(TOTAL_MONEY_COLUMN, rank.totalRewardMoney());
         psmt.setInt(YEILD_COLUMN, (int) rank.rateOfReturn(money.getMoney()));
         psmt.executeUpdate();
+    }
+
+    public static List<Integer> searchResultNumbers(int round) throws SQLException {
+        String query = "SELECT first, second, third, fourth, fifth FROM result WHERE round = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            return Arrays.asList(resultSet.getInt("first"),
+                    resultSet.getInt("second"),
+                    resultSet.getInt("third"),
+                    resultSet.getInt("fourth"),
+                    resultSet.getInt("fifth"));
+        }
+        throw new SQLException();
+    }
+
+    public static long searchTotalMoney(int round) throws SQLException {
+        String query = "SELECT money FROM result WHERE round = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            return resultSet.getLong("money");
+        }
+        throw new SQLException();
+    }
+
+    public static long searchRateOfReturn(int round) throws SQLException {
+        String query = "SELECT yeild FROM result WHERE round = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            return resultSet.getLong("yeild");
+        }
+        throw new SQLException();
     }
 }
