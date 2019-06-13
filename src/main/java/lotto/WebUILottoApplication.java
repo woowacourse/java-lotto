@@ -74,7 +74,10 @@ public class WebUILottoApplication {
         exception(IllegalArgumentException.class, (exception, request, response) -> {
             // Handle the exception here
             StringBuilder errorPageInfo = new StringBuilder();
-            response.body(errorPageInfo.append("에러:").append(exception.getMessage()).append("<br/><br/>")
+            response.body(errorPageInfo
+                    .append("에러:")
+                    .append(exception.getMessage())
+                    .append("<br/><br/>")
                     .append("<input type=\"button\" value=\"뒤로가기\" onclick=\"history.back(-1);\">").toString());
         });
     }

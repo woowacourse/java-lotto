@@ -24,8 +24,12 @@ public class DBManager {
         // 드라이버 연결
         try {
             StringBuilder connectionInfo = new StringBuilder();
-            con = DriverManager.getConnection(connectionInfo.append("jdbc:mysql://").append(server).append("/").append(database)
-            .append("?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false").toString(),
+            con = DriverManager.getConnection(connectionInfo
+                            .append("jdbc:mysql://")
+                            .append(server)
+                            .append("/")
+                            .append(database)
+                            .append("?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false").toString(),
                     userName, password);
             System.out.println("정상적으로 연결되었습니다.");
         } catch (SQLException e) {
