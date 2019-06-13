@@ -9,11 +9,11 @@ import lotto.service.LottoService;
 import lotto.service.RoundService;
 import lotto.service.WinPrizeService;
 import lotto.service.WinningLottoService;
-import lotto.utils.Encoder;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -58,7 +58,7 @@ public class WebUILottoApplication {
         exception(Exception.class, (exception, req, res) -> {
             String message = null;
             try {
-                message = Encoder.encodeUTF8(exception.getMessage());
+                message = URLEncoder.encode(exception.getMessage(), "UTF-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -69,4 +69,6 @@ public class WebUILottoApplication {
     public static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
+
+
 }
