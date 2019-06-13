@@ -21,6 +21,7 @@ public class LottoResultService {
     private static final String PRICE = "price";
     private static final String YIELD = "yield";
     private static final String LOTTO_RESULT = "userLottoResult";
+    private static final String ROUND = "round";
 
 
     public static Route makeLottoResultPage = (req, res) -> {
@@ -33,7 +34,7 @@ public class LottoResultService {
         Price price = req.session().attribute(PRICE);
         model.put(YIELD, lottoResult.findYield(price.getPrice()));
         model.put(LOTTO_RESULT, ResultMessage.getResult(lottoResult, getRanks()));
-        int round = req.session().attribute("round");
+        int round = req.session().attribute(ROUND);
 
         addRoundInDB(round, price);
         addLottosInDB(round, lottos);
@@ -49,7 +50,7 @@ public class LottoResultService {
         WinningLottoDao winningLottoDao = new WinningLottoDao(conn);
         Map<String, Object> model = new HashMap<>();
 
-        int round = Integer.parseInt(req.queryParams("round"));
+        int round = Integer.parseInt(req.queryParams(ROUND));
         Lottos lottos = lottosDao.findLottoByRound(round);
         WinningLotto winningLotto = winningLottoDao.findWinningLottoByRound(round);
         LottoResult lottoResult = LottoResult.generateLottoResult(lottos, winningLotto);
