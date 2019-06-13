@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.WinningLotto;
+import lotto.dto.ResultDto;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -50,5 +51,12 @@ public class WinningResult {
                     .multiply(BigInteger.valueOf(rankCounter[countIndexMapper.get(rank)])));
         }
         return winningMoney;
+    }
+
+    public ResultDto createResultDto() {
+        ResultDto resultDto = new ResultDto();
+        resultDto.setTotalPurchaseMoney(getSpendMoney());
+        resultDto.setTotalWinningMoney(getWinningMoney());
+        return resultDto;
     }
 }

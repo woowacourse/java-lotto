@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.ConnectionFactory;
 import lotto.dao.LottoDao;
+import lotto.dao.ResultDao;
 import lotto.dao.WinningLottoDao;
 import lotto.domain.WinningResult;
 import lotto.domain.buyer.Budget;
@@ -26,11 +27,13 @@ public class LottoService {
 
     private static LottoDao lottoDao;
     private static WinningLottoDao winningLottoDao;
+    private static ResultDao resultDao;
 
     static {
         Connection con = ConnectionFactory.connect();
         lottoDao = new LottoDao(con);
         winningLottoDao = new WinningLottoDao(con);
+        resultDao = new ResultDao(con);
     }
 
     private Budget budget;
@@ -104,9 +107,10 @@ public class LottoService {
     }
 
     public void registerResult() throws SQLException {
-        List<LottoDto> lottoDtos = lottoDao.getLottosInThisRound();
-        for (LottoDto lottoDto : lottoDtos) {
-            System.out.println(lottoDto.getLottoNo());
-        }
+        List<Lotto> lotto = lottoDao.getLottosInThisRound().stream()
+                .map(lottoDto -> LottoNoParser.parseToLottoNos(lottoDto.getLottoNo()))
+                .map(Lotto::of).collect(Collectors.toList());
+
+        resultDao.addResult(new WinningResult(lotto, winningLotto).createResultDto());
     }
 }
