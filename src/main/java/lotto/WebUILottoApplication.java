@@ -32,21 +32,25 @@ public class WebUILottoApplication {
             return render(model, "make_lotto.html");
         });
 
+        // TODO : post -> get 변경
         post("/LottoBuyCount", (req, res) -> {
             String data = callRestApiService.lottoBuyCount(req);
             return data;
         });
 
+        // TODO : 해당 api가 독립적으로 움직일 수 있게 변경(지금은 /LottoBuyCount api가 선행되지 않으면 불가)
         post("/detailLotteries", (req, res) -> {
             String data = callRestApiService.detailLotteries(req);
             return data;
         });
 
+        // TODO : 해당 api가 독립적으로 움직일 수 있게 변경(지금은 /detailLotteries api가 선행되지 않으면 불가)
         post("/detailResult", (req, res) -> {
             String data = callRestApiService.detailResult(req);
             return data;
         });
 
+        // TODO : post -> get 변경
         post("/showHistory", (req, res) -> {
             String data = callRestApiService.showHistory(req);
             return data;

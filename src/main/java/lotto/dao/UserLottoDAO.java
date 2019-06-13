@@ -4,12 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author heebg
@@ -69,18 +65,27 @@ public class UserLottoDAO {
 
         if (!resultSet.next()) throw new IllegalArgumentException("데이터가 없습니다.");
 
+        return generateResult(resultSet);
+    }
+
+    // TODO : select된 결과를 설정하는 이 함수를 하나의 객체처럼 만들 순 없을까
+    // TODO : 해당 객체를 json으로 변경 시 내가 원하는 구조로 만들 수 있을까
+    private static JsonObject generateResult(ResultSet resultSet) throws SQLException {
         JsonObject jsonObject = new JsonObject();
         JsonArray lotteries = new JsonArray();
         do {
-            int lottoStartColumn = 3;
-            JsonArray lotto = new JsonArray();
-            for (int i = 0; i < 6; i++) {
-                lotto.add(resultSet.getInt(lottoStartColumn++));
-            }
-            lotteries.add(lotto);
+            lotteries.add(generateFindLotto(resultSet));
         } while (resultSet.next());
         jsonObject.add("lotteries", lotteries);
-
         return jsonObject;
+    }
+
+    private static JsonArray generateFindLotto(ResultSet resultSet) throws SQLException {
+        int lottoStartColumn = 3;
+        JsonArray lotto = new JsonArray();
+        for (int i = 0; i < 6; i++) {
+            lotto.add(resultSet.getInt(lottoStartColumn++));
+        }
+        return lotto;
     }
 }

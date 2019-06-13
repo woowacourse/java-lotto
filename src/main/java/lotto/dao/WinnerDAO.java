@@ -55,6 +55,7 @@ public class WinnerDAO {
                 "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
 
+        // TODO : prepareStatment set하는 부분들을 여러 함수로 쪼갤 수 있을까?
         pstmt.setFloat(1, winnerDTO.getProfit());
 
         pstmt.setString(2, winnerDTO.winLotto(0).toString());
@@ -86,6 +87,8 @@ public class WinnerDAO {
         return generateResult(resultSet);
     }
 
+    // TODO : select된 결과를 설정하는 이 함수를 하나의 객체처럼 만들 순 없을까
+    // TODO : 해당 객체를 json으로 변경 시 내가 원하는 구조로 만들 수 있을까
     private static JsonObject generateResult(ResultSet resultSet) throws SQLException {
         int resultSetColumn = 1;
 
@@ -117,6 +120,7 @@ public class WinnerDAO {
         return jsonObject;
     }
 
+    // TODO : select된 결과를 가지는 객체를 만들면 되지 않을까
     public static int findRecentTurn() throws SQLException {
         int resultSetFirstColumn = 1;
         String query = "select MAX(turn) from " + table;

@@ -21,6 +21,11 @@ public class CallRestApiService {
     private static Money money;
     private static Lotteries lotteries;
 
+    /**
+     *
+     * @param req
+     * @return
+     */
     public String lottoBuyCount(Request req) {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(req.body());
@@ -30,6 +35,11 @@ public class CallRestApiService {
         return new Gson().toJson(money);
     }
 
+    /**
+     *
+     * @param req
+     * @return
+     */
     public String detailLotteries(Request req) {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(req.body());
@@ -43,31 +53,7 @@ public class CallRestApiService {
         return new Gson().toJson(jsonObject);
     }
 
-    private JsonObject generateResponseDetailLotteries(long manualCount, long autoCount, Lotteries lotteries) {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.add("lotteries", generateResponseLotteries(lotteries));
-        jsonObject.addProperty("manual_count", manualCount);
-        jsonObject.addProperty("auto_count", autoCount);
-        return jsonObject;
-    }
-
-    private JsonArray generateResponseLotteries(Lotteries lotteries) {
-        JsonArray jsonArray = new JsonArray();
-        for (Lotto lotto : lotteries) {
-            jsonArray.add(generateResponseLotto(lotto));
-        }
-
-        return jsonArray;
-    }
-
-    private JsonArray generateResponseLotto(Lotto lotto) {
-        JsonArray jsonArray = new JsonArray();
-        for (LottoNumber lottoNumber : lotto) {
-            jsonArray.add(lottoNumber.toString());
-        }
-        return jsonArray;
-    }
-
+    // TODO : request를 이용해 domain 객체를 '직접' 만드는것보다 다른 방법이 없을까
     private Lotteries generateLotteries(JsonElement jsonElement, long manualCount, long autoCount) {
         lotteries = generateManualLotteries(manualCount, jsonElement);
         lotteries.addAutoLotteries(autoCount, new DefaultAutoCreateLotto());
@@ -94,17 +80,41 @@ public class CallRestApiService {
         return new Lotteries(lottos);
     }
 
-    private Lotto generateLotto(JsonArray lotto) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < lotto.size(); i++) {
-            lottoNumbers.add(new LottoNumber(lotto.get(i).getAsInt()));
-        }
-        return Lotto.createLotto(lottoNumbers);
+    // TODO : response를 JsonObject가 아닌 객체로 만드는게 어떨까
+    private JsonObject generateResponseDetailLotteries(long manualCount, long autoCount, Lotteries lotteries) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("lotteries", generateResponseLotteries(lotteries));
+        jsonObject.addProperty("manual_count", manualCount);
+        jsonObject.addProperty("auto_count", autoCount);
+        return jsonObject;
     }
 
+    private JsonArray generateResponseLotteries(Lotteries lotteries) {
+        JsonArray jsonArray = new JsonArray();
+        for (Lotto lotto : lotteries) {
+            jsonArray.add(generateResponseLotto(lotto));
+        }
+
+        return jsonArray;
+    }
+
+    private JsonArray generateResponseLotto(Lotto lotto) {
+        JsonArray jsonArray = new JsonArray();
+        for (LottoNumber lottoNumber : lotto) {
+            jsonArray.add(lottoNumber.toString());
+        }
+        return jsonArray;
+    }
+
+    /**
+     *
+     * @param req
+     * @return
+     * @throws SQLException
+     */
     public String detailResult(Request req) throws SQLException {
-        JsonParser jsonParser = new JsonParser();
-        JsonElement jsonElement = jsonParser.parse(req.body());
+        // TODO : JsonElement를 여기서 사용하지 않고 바로 객체로 만들 수 있지 않을까
+        JsonElement jsonElement = new JsonParser().parse(req.body());
         int lottoNumber = jsonElement.getAsJsonObject().get("bonus").getAsInt();
 
         Winner winner = new Winner(generateLotto(jsonElement.getAsJsonObject().get("winLotto").getAsJsonArray()), new LottoNumber(lottoNumber));
@@ -119,6 +129,15 @@ public class CallRestApiService {
         return new Gson().toJson(jsonObject);
     }
 
+    private Lotto generateLotto(JsonArray lotto) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < lotto.size(); i++) {
+            lottoNumbers.add(new LottoNumber(lotto.get(i).getAsInt()));
+        }
+        return Lotto.createLotto(lottoNumbers);
+    }
+
+    // TODO : response를 JsonObject가 아닌 객체로 만드는게 어떨까
     private JsonObject generateResponseDetailResult(RankResult rankResult, int turn) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("rate",rankResult.getRate());
@@ -138,6 +157,14 @@ public class CallRestApiService {
         return jsonArray;
     }
 
+    /**
+     * 
+     * @param req
+     * @return
+     * @throws SQLException
+     */
+    // TODO : response를 JsonObject가 아닌 객체로 만드는게 어떨까
+    // TODO : JsonElement를 여기서 사용하지 않고 바로 객체로 만들 수 있지 않을까
     public String showHistory(Request req) throws SQLException {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(req.body());
