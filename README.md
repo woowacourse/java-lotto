@@ -6,7 +6,19 @@
 * **LottoDAO**
 
 ## Done
+* 사용자가 게임을 시작했을 때,
+  * Lotto 테이블: type, LottoNumber 테이블: number에 값을 넣고
+  * LottoGame 테이블: week, money에 값을 넣고
+* 사용자가 당첨 로또를 입력했을 때, 
+  * Lotto 테이블에 로또 정보 넣고
+  * LottoNumber 테이블에 당첨번호 넣고
+  * WinningLotto 테이블에 나머지 정보
+  넣고
 #### dao
+* 당첨 로또를 입력받으면
+  *   당첨 로또 정보 insert
+  *  게임 정보 insert
+  * 회차 정보
 * **WinningLottoDAO**
   *   당첨 로또 insert
 	    1. Lotto 테이블에 로또 정보 넣고

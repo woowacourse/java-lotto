@@ -3,6 +3,7 @@ package lotto.dto;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoDTO {
     private int lottoId;
@@ -58,5 +59,24 @@ public class LottoDTO {
 
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(Arrays.asList(num1, num2, num3, num4, num5, num6));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoDTO lottoDTO = (LottoDTO) o;
+        return lottoId == lottoDTO.lottoId &&
+                num1 == lottoDTO.num1 &&
+                num2 == lottoDTO.num2 &&
+                num3 == lottoDTO.num3 &&
+                num4 == lottoDTO.num4 &&
+                num5 == lottoDTO.num5 &&
+                num6 == lottoDTO.num6;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoId, num1, num2, num3, num4, num5, num6);
     }
 }
