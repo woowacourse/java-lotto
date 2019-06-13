@@ -1,19 +1,16 @@
 package lotto.domain.lottoticket.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketsDTO {
-    private List<LottoTicketDTO> lottoTicketDTOS;
+    private List<LottoTicketDTO> lottoTicketDTOs;
 
-    public List<LottoTicketDTO> getLottoTicketDTOS() {
-        return lottoTicketDTOS;
+    public List<LottoTicketDTO> getLottoTicketDTOs() {
+        return lottoTicketDTOs;
     }
 
-    public void setLottoTicketDTOS(List<LottoTicketDTO> lottoTicketDTOS) {
-        this.lottoTicketDTOS = lottoTicketDTOS;
-    }
-
-    public void addLottoTicketDto(LottoTicketDTO lottoTicketDto) {
-        lottoTicketDTOS.add(lottoTicketDto);
+    public void setLottoTicketDTOs(List<LottoTicketDTO> lottoTicketDTOs) {
+        this.lottoTicketDTOs = lottoTicketDTOs;
     }
 }

@@ -52,7 +52,7 @@ public class LottoTicketService {
     }
 
     public static void savePurchasedLottoTicket(LottoTicketDTO lottoTicketDto) {
-        int currentRound = LottoResultService.fetchCurrentRound();
+        int currentRound = LottoResultService.fetchLatestRoundNum();
         saveLottoTicket(currentRound, lottoTicketDto);
     }
 
@@ -62,8 +62,8 @@ public class LottoTicketService {
     }
 
     public static void savePurchasedLottoTickets(LottoTicketsDTO lottoTicketsDto) {
-        int currentRound = LottoResultService.fetchCurrentRound();
-        List<LottoTicketDTO> dtos = lottoTicketsDto.getLottoTicketDTOS();
+        int currentRound = LottoResultService.fetchLatestRoundNum();
+        List<LottoTicketDTO> dtos = lottoTicketsDto.getLottoTicketDTOs();
         for (LottoTicketDTO lottoTicketDto : dtos) {
             saveLottoTicket(currentRound, lottoTicketDto);
         }

@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.application.lottoresult.LottoResultService;
 import lotto.application.lottoticket.LottoTicketService;
 import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottoresult.LottoStatistics;
 import lotto.domain.lottoresult.WinningLotto;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.dto.WinningLottoDTO;
@@ -25,6 +26,9 @@ public class WinningLottoController {
         LottoNumber bonusBall = LottoTicketService.makeBonusBall(req.queryParams("bonusNum"));
 
         WinningLotto winningLotto = WinningLotto.of(winningTicket, bonusBall);
+        LottoStatistics lottoStatistics = LottoResultService.calculateLottoStatistics(winningLotto);
+        LottoResultService.saveLottoStatistics(lottoStatistics);
+
         WinningLottoDTO winningLottoDto = LottoResultService.getWinningLottoDto(winningLotto);
         LottoResultService.saveWinningLotto(winningLottoDto);
 

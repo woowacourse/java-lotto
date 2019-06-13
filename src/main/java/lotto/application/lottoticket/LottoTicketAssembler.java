@@ -38,7 +38,7 @@ class LottoTicketAssembler {
         }
 
         LottoTicketsDTO lottoTicketsDto = new LottoTicketsDTO();
-        lottoTicketsDto.setLottoTicketDTOS(lottoTicketDtoes);
+        lottoTicketsDto.setLottoTicketDTOs(lottoTicketDtoes);
         return lottoTicketsDto;
     }
 }

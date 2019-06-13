@@ -530,6 +530,31 @@
 		</div>
 		<div style="padding-top: 15px; padding-bottom: 15px;" id="winning-lotto-result"></div>
 	</div>
+	
+	<div style="padding-top: 15px; padding-bottom: 15px;" id="lotto-result-section">
+		<div class="input-group-prepend" style="padding-bottom: 10px;">
+			<span class="input-group-text">이번 주 결과 보기</span>
+			<button type="button" class="btn btn-outline-success" disabled
+			        onclick="getLottoResult()">확인
+			</button>
+		</div>
+		<div style="padding-top: 15px; padding-bottom: 15px;" id="lotto-result"></div>
+	</div>
+	
+	<div style="padding-top: 15px; padding-bottom: 15px;" id="lotto-statistics-section">
+		<div class="input-group mb-3" id="lotto-round-result-input">
+			<div class="input-group-prepend">
+				<span class="input-group-text">지난 회 결과 조회 : 회차를 입력하세요.</span>
+			</div>
+			<input type="number" id="lotto-round-number-input-text" class="form-control" min="0"
+			       placeholder="로또 회차 입력"
+			       aria-label="Username" aria-describedby="basic-addon1">
+			<button type="button" class="btn btn-outline-success"
+			        onclick="getLastLottoResult()">조회
+			</button>
+		</div>
+		<div style="padding-top: 15px; padding-bottom: 15px;" id="lotto-statistics-result"></div>
+	</div>
 </div>
 
 <!-- Optional JavaScript -->
@@ -546,11 +571,6 @@
 
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-    // TODO : erase later
-    window.onload = function () {
-        turnOffDisable("body");
-    };
-
     var numOfLotto;
     var numOfManualLotto;
 
@@ -610,7 +630,7 @@
             });
         }).then(function (value) {
             turnOnDisable("#num-of-manual-lotto-input");
-            turnOffDisable("#manual-lotto-buttons");
+            turnOffDisable("#manual-lotto-section");
 
             var textNode = document.createTextNode("수동 로또로 " + value['numOfManualLotto'] + "장 구입합니다.");
             var parent = document.getElementById("num-of-manual-lotto-result");
@@ -710,7 +730,7 @@
             turnOffDisable("#winning-lotto-section");
 
             var parent = document.getElementById("automatic-lotto-list");
-            value['lottoTicketDTOS'].forEach(function (item) {
+            value['lottoTicketDTOs'].forEach(function (item) {
                 var automaticLotto = generateLottoTag(item);
                 appendNewNodeAt(parent, automaticLotto);
             });
@@ -760,7 +780,7 @@
         }).then(function (value) {
             console.log(value);
             turnOnDisable("#winning-lotto-section");
-            // turnOffDisable("#manual-lotto-buttons");
+            turnOffDisable("#lotto-result-section");
 
             var parent = document.getElementById("winning-lotto-result");
             var winningTicket = generateLottoTag(value['lottoTicketDto']);
@@ -802,6 +822,69 @@
         spanTag.textContent = value['number'];
         return spanTag;
     }
+
+    function getLottoResult() {
+        return new Promise(function (resolve, reject) {
+            $.post('/lotto-result', function (response) {
+                if (response) {
+                    resolve(response);
+                }
+                reject(new Error("Request is failed"));
+            });
+        }).then(function (value) {
+            console.log(value);
+            var parent = document.getElementById("lotto-result");
+            generateLottoResult(parent, value);
+            turnOnDisable("#lotto-result-section");
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }
+
+    function generateLottoResult(parent, value) {
+        var textNodes = [];
+        textNodes.push(document.createTextNode("FIRST RANK : " + value['countsOfFirstRank'] + "개"));
+        textNodes.push(document.createTextNode("SECOND RANK : " + value['countsOfSecondRank'] + "개"));
+        textNodes.push(document.createTextNode("THIRD RANK : " + value['countsOfThirdRank'] + "개"));
+        textNodes.push(document.createTextNode("FOURTH RANK : " + value['countsOfFourthRank'] + "개"));
+        textNodes.push(document.createTextNode("FIFTH RANK : " + value['countsOfFifthRank'] + "개"));
+        textNodes.push(document.createTextNode("수익률 : " + value['profitRatio']));
+
+        textNodes.forEach(function (item) {
+            appendNewNodeWithLineBreak(parent, item);
+        })
+    }
+
+    function appendNewNodeWithLineBreak(parent, node) {
+        var brTag = document.createElement("br");
+        appendNewNodeAt(parent, node);
+        appendNewNodeAt(parent, brTag);
+    }
+
+    function getLastLottoResult() {
+        return new Promise(function (resolve, reject) {
+            var lastRound = document.getElementById("lotto-round-number-input-text").value;
+            $.post('/last-lotto-result', {"last-round": lastRound}, function (response) {
+                if (response) {
+                    resolve(response);
+                }
+                reject(new Error("Request is failed"));
+            });
+        }).then(function (value) {
+            var parent = document.getElementById("lotto-statistics-result");
+            updateNewNodeWithLineBreak(parent, value);
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }
+
+    function updateNewNodeWithLineBreak(parent, node) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+        generateLottoResult(parent, node);
+    }
+
 </script>
 
 </body>

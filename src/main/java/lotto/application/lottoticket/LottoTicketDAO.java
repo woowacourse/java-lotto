@@ -1,6 +1,7 @@
 package lotto.application.lottoticket;
 
 import lotto.application.LottoDAO;
+import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.dto.LottoTicketDTO;
 import lotto.domain.lottoticket.dto.LottoTicketsDTO;
 
@@ -8,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoTicketDAO {
     private static LottoTicketDAO lottoTicketDAO = null;
@@ -73,7 +76,7 @@ public class LottoTicketDAO {
             pstmt.setInt(1, round);
             ResultSet rs = pstmt.executeQuery();
 
-            fillLottoTicketsDto(rs, lottoTicketsDto);
+            lottoTicketsDto.setLottoTicketDTOs(makeLottoTickets(rs));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -82,7 +85,8 @@ public class LottoTicketDAO {
         return lottoTicketsDto;
     }
 
-    private void fillLottoTicketsDto(ResultSet rs, LottoTicketsDTO lottoTicketsDto) throws SQLException {
+    private List<LottoTicketDTO> makeLottoTickets(ResultSet rs) throws SQLException {
+        List<LottoTicketDTO> lottoTicketDTOs = new ArrayList<>();
         while (rs.next()) {
             LottoTicketDTO lottoTicketDto = new LottoTicketDTO();
             lottoTicketDto.setFirstNum(rs.getInt("first_num"));
@@ -91,8 +95,9 @@ public class LottoTicketDAO {
             lottoTicketDto.setFourthNum(rs.getInt("fourth_num"));
             lottoTicketDto.setFifthNum(rs.getInt("fifth_num"));
             lottoTicketDto.setSixthNum(rs.getInt("sixth_num"));
-            lottoTicketsDto.addLottoTicketDto(lottoTicketDto);
+            lottoTicketDTOs.add(lottoTicketDto);
         }
+        return lottoTicketDTOs;
     }
 
     public void deletePurchasedLotto(int round, int purchasedLottoNo) {

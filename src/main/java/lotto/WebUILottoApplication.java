@@ -21,6 +21,8 @@ public class WebUILottoApplication {
         post(Path.AUTOMATIC_LOTTO, LottoTicketController.fetchAutomaticLotto);
 
         post(Path.WINNING_LOTTO, WinningLottoController.fetchWinningLotto);
+        post(Path.LOTTO_RESULT, LottoResultController.fetchLottoResult);
+        post(Path.LAST_LOTTO_RESULT, LottoResultController.fetchLastLottoResult);
     }
 
     public static String render(Map<String, Object> model, String templatePath) {
