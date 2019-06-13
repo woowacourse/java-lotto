@@ -13,6 +13,7 @@ import java.sql.SQLException;
 public class WinningLottoDao {
     private static final String INSERT_WINNING_LOTTO_SQL = "INSERT INTO winninglotto(win_1,win_2,win_3,win_4,win_5,win_6,bonus,round_id) values(?,?,?,?,?,?,?,?)";
     private static final String SELECT_WINNING_LOTTO_SQL = "SELECT * FROM winninglotto WHERE round_id=?";
+    private static final String DELETE_ALL_WINNING_LOTTO_SQL = "DELETE FROM winninglotto";
 
     private final Connection conn;
 
@@ -42,4 +43,8 @@ public class WinningLottoDao {
 
     }
 
+    public void deleteAllWinningLotto() throws SQLException{
+        PreparedStatement pstmt = conn.prepareStatement(DELETE_ALL_WINNING_LOTTO_SQL);
+        pstmt.executeUpdate();
+    }
 }

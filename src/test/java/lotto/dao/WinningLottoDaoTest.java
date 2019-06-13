@@ -15,25 +15,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottoDaoTest {
     private Connection conn;
-    private WinningLottoDao winningLottoDAO;
+    private WinningLottoDao winningLottoDao;
     private WinningLotto winningLotto;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws SQLException{
         conn = new DatabaseConnection().getConnection();
-        winningLottoDAO = new WinningLottoDao(conn);
+        winningLottoDao = new WinningLottoDao(conn);
         Lotto winningNumbers = new Lotto(Arrays.asList(1,2,3,10,11,12));
         LottoNumber lottoNumber = LottoNumber.valueOf(19);
         winningLotto = new WinningLotto(winningNumbers,lottoNumber);
+        winningLottoDao.deleteAllWinningLotto();
     }
 
     @Test
     void addWinningLotto() throws SQLException {
-        winningLottoDAO.addWinningLotto(1,winningLotto);
+        winningLottoDao.addWinningLotto(1,winningLotto);
     }
 
     @Test
     void findWinningLottoByRound() throws SQLException{
-        assertThat(winningLottoDAO.findWinningLottoByRound(1)).isEqualTo(winningLotto);
+        winningLottoDao.addWinningLotto(1,winningLotto);
+        assertThat(winningLottoDao.findWinningLottoByRound(1)).isEqualTo(winningLotto);
     }
 }
