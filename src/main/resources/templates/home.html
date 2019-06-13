@@ -52,6 +52,7 @@
         let newRound;
         let money;
         let manualCount;
+        int availableCount;
         let manualLottoNumber;
         let winningottoNumber;
         let bonusNumber;
@@ -76,29 +77,20 @@
         // 구입 금액 입력
         $(document).on('click', '#inputMoneyButton', function () {
             let inputMoney = $("#inputMoney").val();
-            let properties = { 'money': inputMoney, 'round': newRound };
-
-            if (money % lottoPrice !== 0 || money < lottoPrice || money > lottoPrice) {
+   
+            if (inputMoney % lottoPrice !== 0 || inputMoney < lottoPrice || inputMoney > lottoPrice) {
                 alert('1,000원 이상, 100,000원 이하로 입력해주세요.');
                 return;
             }
-
-            $.ajax({
-                url: '/money',
-                type: 'GET',
-                data: properties,
-                contentType: 'json/html;charset=UTF-8',
-                dataType: 'json',
-                success: function (data) {
-                    money = inputMoney;
-                    $("#manualCount").fadeIn();
-                }
-            });
+        
+            money = inputMoney;
+            availableCount = money // 1000;
+            $("#inputManualCount").val(availableCount);
+            $("#manualCount").fadeIn();
         });
 
         // 수동 로또 구입 갯수 입력
         $(document).on('click', '#inputManualCountButton', function () {
-            let availableCount = money // 1000;
             let inputManualCount = $("#inputManualCount").val();
             if (inputManualCount > availableCount || inputManualCount < 0) {
                 alert('0장 이상, ' + availableCount + '장 이하로 구입할 수 있습니다.');
@@ -110,6 +102,7 @@
 
         // 수동 로또 입력 창 생성
         let generateManualLottoInputs = function () {
+            $("manualLotto").empty();
             if (parseInt(manualCount) === 0) {
                 return;
             }
@@ -152,33 +145,13 @@
                 contentType: 'text/html;charset=UTF-8',
                 dataType: 'text',
                 success: function () {
-                    makeAutoLotto();
+                    $("#winningLotto").fadeIn();
                 }
             });
         });
 
-        // 자동 로또 생성
-        let makeAutoLotto = function () {
-            let purchaseLottoCount = parseInt($("#purchaseMoney_hidden").val()) // 1000;
-            let round = $("#round_hidden").val();
-            let manualCount = $("manualCount_hidden").val();
-            let params = "purchaseLottoCount=" + purchaseLottoCount + "&round=" + round + "&manualLottoCount=" + manualCount;
-
-            $.ajax({
-                url: '/autoLotto',
-                type: 'GET',
-                data: params,
-                contentType: 'text/html;charset=UTF-8',
-                dataType: 'text',
-                success: function () {
-                    $("#winningLotto").fadeIn();
-                }
-            });
-        }
-
         // 지난주 당첨 번호, 보너스 번호 입력
         $(document).on('click', '#inputWinningLottoButton', function () {
-            let round = $("#round_hidden").val().replace(" ", "");
             let winningLotto = $("#inputWinningLotto").val().replace(" ", "");
             let bonusNumber = $("#inputBonusNumber").val().replace(" ", "");
             let params = "round=" + round + "&winningLotto=" + winningLotto + "&bonusNumber=" + bonusNumber;
