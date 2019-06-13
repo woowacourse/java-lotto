@@ -32,7 +32,7 @@ public class LottoService {
         return new LottosDTO.Create(lottos);
     }
 
-    public LottosDTO.Create retrieveLottos(int round) throws SQLException {
+    public LottosDTO.Create findLottosByRound(int round) throws SQLException {
         List<Lotto> lottos = lottoDAO.findLottosByRound(round);
         return new LottosDTO.Create(lottos);
     }

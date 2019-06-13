@@ -36,7 +36,7 @@ public class WinningLottoService {
         Lotto lotto = winningLottoDAO.findWinningLottoByRound(round);
         int bonusNumber = winningLottoDAO.findBonusNumberByRound(round);
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.get(bonusNumber));
-        LottosDTO.Create lottos = new LottoService().retrieveLottos(round);
+        LottosDTO.Create lottos = new LottoService().findLottosByRound(round);
         WinningResult winningResult = new Lottos(lottos.getLottos()).match(winningLotto);
         return new WinningResultDTO.Create(
                 winningResult.getResult(),
