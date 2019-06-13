@@ -2,7 +2,8 @@ package lotto;
 
 import lotto.dao.*;
 import lotto.domain.*;
-import lotto.service.DBAccessor;
+import lotto.service.DBGetter;
+import lotto.service.DBLoader;
 import lotto.util.ConvertLottoNumber;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -43,15 +44,15 @@ public class WebUILottoApplication {
             List<String> inputManualLottoNumbers = Arrays.asList(req.queryParams("manualLottoNumbers").split(DELIMITER));
             LottosFactory lottosFactory = new LottosFactory(inputManualLottoNumbers, lottoCount);
             Lottos currentLottos = lottosFactory.generateTotalLottos();
-            Integer round = DBAccessor.getNextRound(connection);
+            Integer round = DBGetter.getNextRound(connection);
 
             // Session
             req.session(true);
             req.session().attribute("lottos", currentLottos);
             req.session().attribute("round", round);
 
-            DBAccessor.loadDBRoundTable(connection, round);
-            DBAccessor.loadDBLottoTable(connection, round, currentLottos);
+            DBLoader.loadDBRoundTable(connection, round);
+            DBLoader.loadDBLottoTable(connection, round, currentLottos);
 
             return render(getLottoModel(lottoCount, currentLottos), "winningLotto.html");
         });
@@ -62,8 +63,8 @@ public class WebUILottoApplication {
             LottoResult lottoResult = new LottoResult(winningLotto, req.session().attribute("lottos"));
 
             Integer round = req.session().attribute("round");
-            DBAccessor.loadDBWinningLottoTable(connection, round, winningLotto);
-            DBAccessor.loadDBLottoResultTable(connection, round, lottoResult);
+            DBLoader.loadDBWinningLottoTable(connection, round, winningLotto);
+            DBLoader.loadDBLottoResultTable(connection, round, lottoResult);
 
             DBManager.endTransaction(connection);
 
@@ -87,9 +88,9 @@ public class WebUILottoApplication {
     private static Map<String, Object> getLottoInfoModel(Connection connection, String lottoRound) throws SQLException {
         Map<String, Object> model = new HashMap<>();
         model.put("lottoRound", lottoRound);
-        model.put("lottos", DBAccessor.getDBLottos(connection, lottoRound));
-        model.put("winningLotto", DBAccessor.getDBWinningLotto(connection, lottoRound));
-        model.put("lottoResult", DBAccessor.getDBLottoResultDTO(connection, lottoRound));
+        model.put("lottos", DBGetter.getDBLottos(connection, lottoRound));
+        model.put("winningLotto", DBGetter.getDBWinningLotto(connection, lottoRound));
+        model.put("lottoResult", DBGetter.getDBLottoResultDTO(connection, lottoRound));
         return model;
     }
 
