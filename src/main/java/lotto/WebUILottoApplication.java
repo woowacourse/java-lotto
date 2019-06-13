@@ -20,11 +20,14 @@ import static spark.Spark.*;
 public class WebUILottoApplication {
     public static void main(String[] args) {
         externalStaticFileLocation("src/main/resources/templates/js");
+        LottoDao lottoDao = new LottoDao();
+        ResultDao resultDao = new ResultDao();
+        RoundDao roundDao = new RoundDao();
+        WinningLottoDao winningLottoDao = new WinningLottoDao();
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            RoundDao roundDAO = new RoundDao();
-            List<Integer> rounds = IntStream.range(1, roundDAO.getMaxRound() + 1)
+            List<Integer> rounds = IntStream.range(1, roundDao.getMaxRound() + 1)
                     .boxed()
                     .collect(Collectors.toList());
             model.put("rounds", rounds);
@@ -44,12 +47,10 @@ public class WebUILottoApplication {
 
             Lottos totalLottos = new Lottos(manualLottos, lottoMoney.getCountOfTicket());
 
-            RoundDao roundDAO = new RoundDao();
-            roundDAO.addNextRound();
-            int maxRound = roundDAO.getMaxRound();
+            roundDao.addNextRound();
+            int maxRound = roundDao.getMaxRound();
 
-            LottoDao lottoDAO = new LottoDao();
-            lottoDAO.addTotalLottos(maxRound, totalLottos);
+            lottoDao.addTotalLottos(maxRound, totalLottos);
             req.session().attribute("totalLottos", totalLottos);
 
             model.put("autoCount", lottoMoney.getCountOfTicket() - manualCount);
@@ -66,17 +67,14 @@ public class WebUILottoApplication {
             LottoResult lottoResult = new LottoResult(req.session().attribute("totalLottos"), winningLotto);
             Map<Rank, Integer> winners = lottoResult.getWinners();
 
-            WinningLottoDao winningLottoDAO = new WinningLottoDao();
-            ResultDao resultDAO = new ResultDao();
-            RoundDao roundDAO = new RoundDao();
-            int maxRound = roundDAO.getMaxRound();
-            winningLottoDAO.addWinningLotto(maxRound, winningLotto);
+            int maxRound = roundDao.getMaxRound();
+            winningLottoDao.addWinningLotto(maxRound, winningLotto);
             ResultDto resultDTO = new ResultDto(winners, lottoResult.getYield(), lottoResult.getTotalWinningMoney());
-            resultDAO.addResult(maxRound, resultDTO);
+            resultDao.addResult(maxRound, resultDTO);
             for (Rank rank : Rank.values()) {
                 model.put(rank.name(), winners.get(rank));
             }
-            model.put("yield", resultDAO.findYieldByRound(maxRound) * 100);
+            model.put("yield", resultDao.findYieldByRound(maxRound) * 100);
             return render(model, "result.html");
         });
 
@@ -90,16 +88,13 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             int currentRound = Integer.parseInt(req.queryParams("round_selector"));
             model.put("round", currentRound);
-            LottoDao lottoDAO = new LottoDao();
-            ResultDao resultDAO = new ResultDao();
-            WinningLottoDao winningLottoDAO = new WinningLottoDao();
 
-            List<Lotto> lottos = lottoDAO.findLottoByRound(currentRound);
-            Map<Rank, Integer> winners = resultDAO.findWinnerCountByRound(currentRound);
-            List<Integer> winningLotto = winningLottoDAO.findWinningLottoByRound(currentRound);
-            int bonusNum = winningLottoDAO.findBonusNumByRound(currentRound);
-            double yield = resultDAO.findYieldByRound(currentRound);
-            long winPrize = resultDAO.findWinPrizeByRound(currentRound);
+            List<Lotto> lottos = lottoDao.findLottoByRound(currentRound);
+            Map<Rank, Integer> winners = resultDao.findWinnerCountByRound(currentRound);
+            List<Integer> winningLotto = winningLottoDao.findWinningLottoByRound(currentRound);
+            int bonusNum = winningLottoDao.findBonusNumByRound(currentRound);
+            double yield = resultDao.findYieldByRound(currentRound);
+            long winPrize = resultDao.findWinPrizeByRound(currentRound);
 
             model.put("lottos", lottos);
             for (Rank rank : Rank.values()) {
