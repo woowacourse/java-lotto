@@ -1,4 +1,3 @@
-/*
 package lotto;
 
 import spark.ModelAndView;
@@ -13,7 +12,7 @@ public class WebUILottoApplication {
     public static void main(String[] args) {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            return render(model, "index.html");
+            return render(model, "main.html");
         });
     }
 
@@ -21,4 +20,3 @@ public class WebUILottoApplication {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 }
-*/
