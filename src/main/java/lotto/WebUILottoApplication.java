@@ -8,6 +8,7 @@ import lotto.creator.LottosFactory;
 import lotto.creator.ManualLottoCreator;
 import lotto.domain.*;
 import lotto.domain.Number;
+import lotto.service.LottoResultService;
 import lotto.service.LottoService;
 import lotto.service.MoneyService;
 import lotto.service.WinningLottoService;
@@ -26,6 +27,7 @@ public class WebUILottoApplication {
     private static MoneyService moneyService = MoneyService.getInstance(dataBase);
     private static LottoService lottoService = LottoService.getInstance(dataBase);
     private static WinningLottoService winningLottoService = WinningLottoService.getInstance(dataBase);
+    private static LottoResultService lottoResultService = LottoResultService.getInstance(dataBase);
 
     public static void main(String[] args) {
         get("/buylotto", (req, res) -> {
@@ -77,9 +79,8 @@ public class WebUILottoApplication {
                 int nextTimes = winningLottoService.nextWinningLottoTimes();
                 WinningLotto winningLotto = createWinningLotto(pairs);
                 winningLottoService.addWinningLotto(winningLotto, nextTimes);
-                Lottos lottos = lottoService.getLottos(nextTimes);
 
-                LottoResult lottoResult = new LottoResult(lottos.getLottos(), winningLotto);
+                LottoResult lottoResult = lottoResultService.findByTimes(nextTimes);
 
                 return gson.toJson(lottoResult.getLottoResult());
             } catch (Exception e) {
@@ -91,14 +92,13 @@ public class WebUILottoApplication {
             try {
                 int times = winningLottoService.nowWinningLottoTimes();
 
-                LottoResult lottoResult = createLottoResult(times);
+                LottoResult lottoResult = lottoResultService.findByTimes(times);
                 Money money = moneyService.findByTimes(times);
 
                 return lottoResult.calculateLottoYield(money);
             } catch (Exception e) {
                 return "Error: " + e.getMessage();
             }
-
         });
 
         get("/lottonexttimes", (req, res) -> {
@@ -144,7 +144,7 @@ public class WebUILottoApplication {
         get("/lotto/lottoresult/:times", (req, res) -> {
             try {
                 int times = Integer.parseInt(req.params(":times"));
-                LottoResult lottoResult = createLottoResult(times);
+                LottoResult lottoResult = lottoResultService.findByTimes(times);
                 Gson gson = new GsonBuilder().create();
                 String json = gson.toJson(lottoResult.getLottoResult());
 
@@ -157,11 +157,10 @@ public class WebUILottoApplication {
         get("/lotto/lottoyield/:times", (req, res) -> {
             try {
                 int times = Integer.parseInt(req.params(":times"));
-                LottoResult lottoResult = createLottoResult(times);
+                LottoResult lottoResult = lottoResultService.findByTimes(times);
                 Money money = moneyService.findByTimes(times);
 
-                double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
-                return result;
+                return lottoResult.calculateLottoYield(money);
             } catch (Exception e) {
                 return "Error: " + e.getMessage();
             }
@@ -197,9 +196,4 @@ public class WebUILottoApplication {
         return new WinningLotto(lotto, number);
     }
 
-    private static LottoResult createLottoResult(int times) throws Exception {
-        Lottos lottos = lottoService.getLottos(times);
-        WinningLotto winningLotto = winningLottoService.findByTimes(times);
-        return new LottoResult(lottos.getLottos(), winningLotto);
-    }
 }
