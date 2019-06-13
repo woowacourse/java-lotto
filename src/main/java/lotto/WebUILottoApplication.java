@@ -19,6 +19,7 @@ import static spark.Spark.*;
 public class WebUILottoApplication {
     public static void main(String[] args) {
         externalStaticFileLocation("src/main/resources/templates");
+
         get("/home", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "index.html");
@@ -30,7 +31,7 @@ public class WebUILottoApplication {
             req.session().attribute("lottoBuyingMoney", lottoBuyingMoney);
             req.session().attribute("lottoCount", lottoCount);
             res.redirect("/lotto");
-            return res;
+            return null;
         });
 
         get("/lotto", (req, res) -> {
@@ -49,7 +50,7 @@ public class WebUILottoApplication {
             req.session().attribute("winningLotto", winningLotto);
             req.session().attribute("lottos", LottoVendingMachine.getLottos(lottoCount, lottos));
             res.redirect("/result");
-            return res;
+            return null;
         });
 
         get("/result", (req, res) -> {
