@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WinningLotto {
     private static final String ERROR_DUPLICATE = "당첨 번호와 중복되었습니다.";
 
@@ -25,6 +28,17 @@ public class WinningLotto {
         }
 
         return count;
+    }
+
+    public List<Rank> makeRankResultList(UserLotto userLotto) {
+        List<Rank> rankResults = new ArrayList<>();
+
+        for (int i = 0; i < userLotto.getSize(); i++) {
+            rankResults.add(Rank.valueOf(this.match(userLotto.getIndexByLotto(i))
+                    , this.matchBonus(userLotto.getIndexByLotto(i))));
+        }
+
+        return rankResults;
     }
 
     private int addCount(Lotto lotto, int count, int i) {
