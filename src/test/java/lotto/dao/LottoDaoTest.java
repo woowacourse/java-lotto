@@ -26,7 +26,7 @@ public class LottoDaoTest {
         lottoDtos.add(new LottoDto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoDtos.add(new LottoDto(Arrays.asList(3, 4, 5, 6, 7, 8)));
 
-        lottoDao.removeAllLotto(lottoDtos, FIRST_ROUND);
+        lottoDao.removeAllLotto(FIRST_ROUND);
         lottoDao.addAllLotto(lottoDtos, FIRST_ROUND);
 
         List<LottoDto> lottos = lottoDao.findAllBoughtLottoByRound(FIRST_ROUND);

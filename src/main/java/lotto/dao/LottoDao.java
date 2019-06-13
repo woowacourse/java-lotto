@@ -66,12 +66,14 @@ public class LottoDao {
         }
     }
 
-    public void removeAllLotto(final List<LottoDto> lottoDtos, int round) throws SQLException {
-        String sql = "DELETE FROM bought_lotto WHERE num1 = ? AND num2 = ? AND num3 = ? " +
-                "AND num4 = ? AND num5 = ? AND num6 = ? AND round_id = ?";
+    public void removeAllLotto(int round) throws SQLException {
+        String sql = "DELETE FROM bought_lotto WHERE round_id = ?";
         Connection con = getConnection();
+
         PreparedStatement pstmt = con.prepareStatement(sql);
-        lottoQueryExcute(lottoDtos, round, pstmt);
+        pstmt.setInt(1, round);
+
+        pstmt.executeUpdate();
         closeConnection(con);
     }
 }
