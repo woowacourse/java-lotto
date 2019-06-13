@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>당첨 로또 입력</title>
+</head>
+<body>
+<div id="winningLottoContainer">
+    <div id="winningLottoNoContainers">
+        <h1> 당첨 로또 번호 입력 </h1>
+        <div id="winningLottoNoContainer" name="winningLottoNoContainer">
+            당첨 로또 번호
+            <input id="winningLottoNo" name="winningLottoNo" type="text"></input></br>
+            보너스 번호
+            <input id="bonusNo" name="bonusNo" type="text"></input>
+        </div>
+    </div>
+    </br>
+    <input id="inputBtn" onclick="inputWinningLotto()" type="button" value="입력"></input>
+</div>
+</body>
+</html>
+<script>
+	function inputWinningLotto() {
+		$.ajax({
+            url:"winningLotto",
+            type:"POST",
+            data:{
+            	"winningLottoNo" : document.getElementById('winningLottoNo').value,
+            	"bonusNo" : document.getElementById('bonusNo').value
+            },
+            dataType:'json',
+            error:function(request,status,error){
+                alert("입력하신 번호는 에러가 있습니다.\n"+request.responseText);
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            success:function(data){
+            	console.log("success");
+            }
+        });
+	}
+
+</script>

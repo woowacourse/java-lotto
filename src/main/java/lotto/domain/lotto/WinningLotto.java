@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.dto.WinningLottoDto;
+
 import java.util.List;
 
 public class WinningLotto extends Lotto {
@@ -29,5 +31,13 @@ public class WinningLotto extends Lotto {
 
     public boolean checkBonusNoIn(Lotto targetLotto) {
         return targetLotto.matchNo(bonusNo);
+    }
+
+    public WinningLottoDto createWinningLottoDto() {
+        WinningLottoDto winningLottoDto = new WinningLottoDto();
+        winningLottoDto.setLottoNo(super.toString());
+        winningLottoDto.setBonusNo(String.valueOf(bonusNo.getNo()));
+
+        return winningLottoDto;
     }
 }

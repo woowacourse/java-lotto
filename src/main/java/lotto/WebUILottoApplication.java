@@ -15,11 +15,14 @@ public class WebUILottoApplication {
         staticFiles.location("/static");
 
         get("/input", LottoPurchaseController.serveInputPage);
+        get("/winninglotto", WinningLottoInputController.serveWinningLottoInputPage);
 
         post("/budget", LottoPurchaseController.inputBudget);
         post("/manualLotto", LottoPurchaseController.inputManualLotto);
         post("/autoLotto", LottoPurchaseController.inputAutoLotto);
         post("/showLotto", LottoPurchaseController.showLotto);
+        post("/winningLotto", WinningLottoInputController.inputWinningLotto);
+        post("/registerLotto", LottoPurchaseController.registerLotto);
     }
 
     public static String render(Map<String, Object> model, String templatePath) {
