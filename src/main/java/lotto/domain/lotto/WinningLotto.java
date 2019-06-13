@@ -34,10 +34,6 @@ public class WinningLotto extends Lotto {
     }
 
     public WinningLottoDto createWinningLottoDto() {
-        WinningLottoDto winningLottoDto = new WinningLottoDto();
-        winningLottoDto.setLottoNo(super.toString());
-        winningLottoDto.setBonusNo(String.valueOf(bonusNo.getNo()));
-
-        return winningLottoDto;
+        return new WinningLottoDto(0, super.toString(), String.valueOf(bonusNo.getNo()));
     }
 }

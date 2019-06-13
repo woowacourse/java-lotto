@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WinningLottoDao {
     private Connection con;
@@ -30,5 +32,21 @@ public class WinningLottoDao {
         if (!rs.next())
             return 0;
         return rs.getInt("회차");
+    }
+
+    public List<WinningLottoDto> getWinningLottos() throws SQLException {
+        List<WinningLottoDto> resultDtos = new ArrayList<>();
+        String query = "SELECT * FROM 당첨로또";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (!rs.next())
+            return resultDtos;
+        do {
+            WinningLottoDto resultDto = new WinningLottoDto(rs.getInt(1),
+                    rs.getString(2), rs.getString(3));
+            resultDtos.add(resultDto);
+        } while (rs.next());
+        return resultDtos;
     }
 }

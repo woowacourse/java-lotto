@@ -13,6 +13,8 @@ import lotto.domain.lotto.LottoNo;
 import lotto.domain.lotto.LottoType;
 import lotto.domain.lotto.WinningLotto;
 import lotto.dto.LottoDto;
+import lotto.dto.ResultDto;
+import lotto.dto.WinningLottoDto;
 import lotto.utils.LottoNoParser;
 
 import java.sql.Connection;
@@ -112,5 +114,17 @@ public class LottoService {
                 .map(Lotto::of).collect(Collectors.toList());
 
         resultDao.addResult(new WinningResult(lotto, winningLotto).createResultDto());
+    }
+
+    public List<ResultDto> getResults() throws SQLException {
+        return resultDao.getResults();
+    }
+
+    public List<LottoDto> getPurchasedLotto() throws SQLException {
+        return lottoDao.getLottos();
+    }
+
+    public List<WinningLottoDto> getWinningLotto() throws SQLException {
+        return winningLottoDao.getWinningLottos();
     }
 }

@@ -63,9 +63,7 @@ public class Lotto {
     }
 
     public LottoDto createLottoDto() {
-        LottoDto lottoDto = new LottoDto();
-        lottoDto.setLottoNo(toString());
-        lottoDto.setLottoType(lottoType.getType());
+        LottoDto lottoDto = new LottoDto(0, toString(), lottoType.getType());
         return lottoDto;
     }
 

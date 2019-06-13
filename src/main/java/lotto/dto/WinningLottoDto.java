@@ -5,6 +5,12 @@ public class WinningLottoDto {
     private String lottoNo;
     private String bonusNo;
 
+    public WinningLottoDto(int round, String lottoNo, String bonusNo) {
+        this.round = round;
+        this.lottoNo = lottoNo;
+        this.bonusNo = bonusNo;
+    }
+
     public int getRound() {
         return round;
     }

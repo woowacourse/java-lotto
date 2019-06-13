@@ -5,6 +5,16 @@ public class LottoDto {
     private String lottoNo;
     private String lottoType;
 
+    public LottoDto(int round, String lottoNo) {
+        this.round = round;
+        this.lottoNo = lottoNo;
+    }
+
+    public LottoDto(int round, String lottoNo, String lottoType) {
+        this.round = round;
+        this.lottoNo = lottoNo;
+        this.lottoType = lottoType;
+    }
     public int getRound() {
         return round;
     }

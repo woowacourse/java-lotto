@@ -2,10 +2,13 @@ package lotto.dao;
 
 import lotto.dto.ResultDto;
 
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ResultDao {
     private Connection con;
@@ -31,5 +34,21 @@ public class ResultDao {
         if (!rs.next())
             return 0;
         return rs.getInt("회차");
+    }
+
+    public List<ResultDto> getResults() throws SQLException {
+        List<ResultDto> resultDtos = new ArrayList<>();
+        String query = "SELECT * FROM 회차별결과";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (!rs.next())
+            return resultDtos;
+        do {
+            ResultDto resultDto = new ResultDto(rs.getInt(2),
+                    rs.getInt(3), new BigInteger(rs.getString(4)));
+            resultDtos.add(resultDto);
+        } while (rs.next());
+        return resultDtos;
     }
 }

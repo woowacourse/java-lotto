@@ -54,9 +54,6 @@ public class WinningResult {
     }
 
     public ResultDto createResultDto() {
-        ResultDto resultDto = new ResultDto();
-        resultDto.setTotalPurchaseMoney(getSpendMoney());
-        resultDto.setTotalWinningMoney(getWinningMoney());
-        return resultDto;
+        return new ResultDto(0, getSpendMoney(), getWinningMoney());
     }
 }

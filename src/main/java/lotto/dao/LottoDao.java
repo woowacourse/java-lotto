@@ -57,4 +57,20 @@ public class LottoDao {
 
         return lottoDtos;
     }
+
+    public List<LottoDto> getLottos() throws SQLException {
+        List<LottoDto> lottoDtos = new ArrayList<>();
+        String query = "SELECT * FROM 구매로또";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (!rs.next())
+            return lottoDtos;
+        do {
+            LottoDto lottoDto = new LottoDto(rs.getInt(2),
+                    rs.getString(3));
+            lottoDtos.add(lottoDto);
+        } while (rs.next());
+        return lottoDtos;
+    }
 }

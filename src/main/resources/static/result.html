@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>결과</title>
+</head>
+<body>
+<div>
+    <div>
+        <h1> 회차별 결과 </h1>
+        <table id="resultTable" width="500">
+            <tr>
+                <th>회차</th>
+                <th>구매 금액</th>
+                <th>당첨 금액</th>
+            </tr>
+        </table>
+    </div>
+    </br>
+    <div
+    ">
+    <h1> 구매 로또 </h1>
+    <table id="lottoTable">
+        <tr>
+            <th>회차</th>
+            <th>로또 번호</th>
+        </tr>
+    </table>
+</div>
+</br>
+<div>
+    <h1> 당첨 로또 </h1>
+    <table id="winningLottoTable">
+        <tr>
+            <th>회차</th>
+            <th>당첨 번호</th>
+            <th>보너스 번호</th>
+        </tr>
+    </table>
+</div>
+</div>
+</body>
+</html>
+<script>
+	var resultData;
+
+	window.onload = function() {
+		$.ajax({
+            url:"requestResult",
+            type:"POST",
+            dataType:'json',
+            error:function(request,status,error){
+                alert("입력하신 번호는 에러가 있습니다.\n"+request.responseText);
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            success:function(data){
+            	resultData = data;
+            	printResult(JSON.parse(data.data.Result));
+            	printWinningLotto(JSON.parse(data.data.WinningLotto));
+            	printLotto(JSON.parse(data.data.Lotto));
+            	console.log("success");
+            }
+        });
+	}
+
+	function printResult(result) {
+		var keys = ['round', 'totalPurchaseMoney', 'totalWinningMoney'];
+		var table = document.getElementById('resultTable');
+
+		for (var i = 0; i < result.length; i++) {
+			var tr = document.createElement('tr');
+
+			for (var j = 0; j < keys.length; j++){
+				var td = document.createElement('td');
+				var p = document.createElement('p');
+				p.innerHTML = result[i][keys[j]];
+				td.appendChild(p);
+				tr.appendChild(td);
+			}
+
+			table.appendChild(tr);
+		}
+	}
+
+	function printWinningLotto(winningLotto) {
+		var keys = ['round', 'lottoNo', 'bonusNo'];
+		var table = document.getElementById('winningLottoTable');
+
+		for (var i = 0; i < winningLotto.length; i++) {
+			var tr = document.createElement('tr');
+
+			for (var j = 0; j < keys.length; j++){
+				var td = document.createElement('td');
+				var p = document.createElement('p');
+				p.innerHTML = winningLotto[i][keys[j]];
+				td.appendChild(p);
+				tr.appendChild(td);
+			}
+
+			table.appendChild(tr);
+		}
+	}
+
+	function printLotto(lotto) {
+		var keys = ['round', 'lottoNo'];
+		var table = document.getElementById('lottoTable');
+
+		for (var i = 0; i < lotto.length; i++) {
+			var tr = document.createElement('tr');
+
+			for (var j = 0; j < keys.length; j++){
+				var td = document.createElement('td');
+				var p = document.createElement('p');
+				p.innerHTML = lotto[i][keys[j]];
+				td.appendChild(p);
+				tr.appendChild(td);
+			}
+
+			table.appendChild(tr);
+		}
+	}
+
+
+</script>

@@ -7,6 +7,12 @@ public class ResultDto {
     private int totalPurchaseMoney;
     private BigInteger totalWinningMoney;
 
+    public ResultDto(int round, int totalPurchaseMoney, BigInteger totalWinningMoney) {
+        this.round = round;
+        this.totalPurchaseMoney = totalPurchaseMoney;
+        this.totalWinningMoney = totalWinningMoney;
+    }
+
     public int getRound() {
         return round;
     }
