@@ -37,4 +37,9 @@ public class LottoNumber {
     public static List<LottoNumber> getAllLottoNumbers() {
         return new ArrayList<>(numbers.values());
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(number);
+    }
 }

@@ -1,8 +1,10 @@
 package lotto.view;
 
 import lotto.domain.Money;
-import lotto.domain.lotto.Lotto;
+import lotto.domain.creator.CreatorFactory;
+import lotto.domain.creator.LottoCreator;
 import lotto.domain.lotto.LottoFactory;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.util.CustomStringUtils;
 import lotto.exception.InvalidInputException;
@@ -48,16 +50,26 @@ public class InputView {
         }
     }
 
-    public static List<Lotto> generateManualLottoCreator(int numberOfManualLotto) {
+    public static Lottos generateLottos(int manualLottoQuantity, int autoLottoQuantity) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<String> numbers = collectManualLottoNumber(numberOfManualLotto);
 
         try {
-            return LottoFactory.createManualLottos(numberOfManualLotto, numbers);
+            CreatorFactory factory = new CreatorFactory(collectManualLottoNumber(manualLottoQuantity));
+            List<LottoCreator> creators = factory.createCreators(manualLottoQuantity, autoLottoQuantity);
+            return LottoFactory.createLottos(creators);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return generateManualLottoCreator(numberOfManualLotto);
+            return generateLottos(manualLottoQuantity, autoLottoQuantity);
         }
+    }
+
+    private static List<String> collectManualLottoNumber(int numberOfManualLotto) {
+        List<String> numbers = new ArrayList<>();
+
+        for (int i = 0; i < numberOfManualLotto; i++) {
+            numbers.add(inputManualLottoNumber());
+        }
+        return numbers;
     }
 
     private static String inputManualLottoNumber() {
@@ -69,15 +81,6 @@ public class InputView {
             System.out.println(e.getMessage());
             return inputManualLottoNumber();
         }
-    }
-
-    private static List<String> collectManualLottoNumber(int numberOfManualLotto) {
-        List<String> numbers = new ArrayList<>();
-
-        for (int i = 0; i < numberOfManualLotto; i++) {
-            numbers.add(inputManualLottoNumber());
-        }
-        return numbers;
     }
 
     public static WinningLotto inputWinningLotto() {

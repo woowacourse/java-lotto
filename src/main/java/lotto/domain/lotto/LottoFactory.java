@@ -1,39 +1,19 @@
 package lotto.domain.lotto;
 
-import lotto.domain.creator.AutoLottoCreator;
 import lotto.domain.creator.LottoCreator;
-import lotto.domain.creator.ManualLottoCreator;
-import lotto.domain.util.CustomStringUtils;
-import lotto.exception.InvalidLottoNumbersException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoFactory {
-    public static List<Lotto> createAutoLottos(int lottoQuantity) {
-        List<Lotto> lottos = new ArrayList<>();
-        LottoCreator creator = new AutoLottoCreator();
-
-        for (int i = 0; i < lottoQuantity; i++) {
-            lottos.add(creator.createLotto());
-        }
-        return lottos;
-    }
-
-    public static List<Lotto> createManualLottos(int lottoQuantity, List<String> inputs) {
+    public static Lottos createLottos(List<LottoCreator> creators) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (String input : inputs) {
-            LottoCreator creator = new ManualLottoCreator(CustomStringUtils.parseInts(input));
+        for (LottoCreator creator : creators) {
             lottos.add(creator.createLotto());
         }
-        checkNumberOfInputLotto(lottos, lottoQuantity);
-        return lottos;
+
+        return new Lottos(lottos);
     }
 
-    private static void checkNumberOfInputLotto(List<Lotto> lottos, int lottoQuantity) {
-        if (lottos.size() != lottoQuantity) {
-            throw new InvalidLottoNumbersException("입력하신 수동 로또 수와 입력하신 번호 셋트의 수가 일치하지 않습니다.");
-        }
-    }
 }

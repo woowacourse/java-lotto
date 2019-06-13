@@ -15,7 +15,6 @@ public class ManualLottoCreator implements LottoCreator {
 
     @Override
     public Lotto createLotto() {
-
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (int number : numbers) {
