@@ -20,7 +20,6 @@ public class LottoResult {
             winners.put(rank, winners.get(rank) + 1);
         }
         return winners;
-
     }
 
     private Map<Rank, Integer> initWinners() {
@@ -32,12 +31,18 @@ public class LottoResult {
     }
 
     private double calculateYield(Lottos lottos) {
+        int totalWinningMoney = getTotalWinningMoney();
+        return (double) totalWinningMoney / (lottos.getLottoCount() * LottoMoney.LOTTO_PRICE);
+    }
+
+    public int getTotalWinningMoney() {
         int totalWinningMoney = 0;
         for (Rank rank : winners.keySet()) {
             totalWinningMoney += rank.getWinningMoney() * winners.get(rank);
         }
-        return (double) totalWinningMoney / (lottos.getLottoCount() * LottoMoney.LOTTO_PRICE);
+        return totalWinningMoney;
     }
+
 
     public Map<Rank, Integer> getWinners() {
         return winners;

@@ -33,7 +33,7 @@ public class LottoNumber implements Comparable {
         }
     }
 
-    private int getValue() {
+    int getValue() {
         return this.lottoNumber;
     }
 

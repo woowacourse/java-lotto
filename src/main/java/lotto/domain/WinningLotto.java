@@ -24,6 +24,13 @@ public class WinningLotto {
         }
     }
 
+    public int getWinningLottoValueByIndex(int index) {
+        return winningLotto.get(index).getValue();
+    }
+
+    public int getBonusBallValue() {
+        return bonusBall.getValue();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
