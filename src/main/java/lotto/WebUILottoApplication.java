@@ -3,7 +3,6 @@ package lotto;
 import lotto.domain.BoughtLottos;
 import lotto.domain.Money;
 import lotto.domain.Result;
-import lotto.utils.JsonTransformer;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -15,7 +14,9 @@ import static spark.Spark.*;
 
 public class WebUILottoApplication {
     public static void main(String[] args) {
-        externalStaticFileLocation("src/main/resources/templates/");
+        String projectDir = "C:\\Users\\PKCH\\Desktop\\techcourse\\level1\\java-lotto-1\\";
+        externalStaticFileLocation(projectDir + "src\\main\\resources\\templates\\");
+        port(8080);
         staticFiles.location("/static");
 
         get("/", (req, res) -> {
@@ -33,8 +34,8 @@ public class WebUILottoApplication {
             model.put("money", money);
             model.put("boughtLottos", boughtLottos);
             model.put("result", result);
-            return model;
-        }, new JsonTransformer());
+            return render(model, "result.html");
+        });
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
