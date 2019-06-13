@@ -10,10 +10,6 @@ public class LottoHelper {
     private LottoHelper() {
     }
 
-    public static List<Lotto> generateLottos(final List<String> lottoNoStrings, final Money money) {
-        return LottosGenerator.of(lottoNoStrings, money.getCountOfPurchase()).generate();
-    }
-
     public static WinningLotto generateWinningLotto(String winningLotto, int bonusNumber) {
         Lotto winLotto = Lotto.of(new LottoNosManualGenerator(winningLotto).generate());
         LottoNo bonusNo = LottoNo.from(bonusNumber);

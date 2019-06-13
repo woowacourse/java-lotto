@@ -4,7 +4,7 @@ package lotto.controller;
 import lotto.domain.CountOfManual;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
-import lotto.service.LottoHelper;
+import lotto.domain.generator.LottosGenerator;
 import lotto.service.LottoService;
 import lotto.service.RoundService;
 import spark.Request;
@@ -30,7 +30,7 @@ public class LottoController {
         int round = roundService.increaseOne();
         Money money = Money.from(req.queryParams("money"));
         List<String> manualLottos = convertToList(req.queryParams("manualLottos"));
-        List<Lotto> userLottos = LottoHelper.generateLottos(manualLottos, money);
+        List<Lotto> userLottos = LottosGenerator.of(manualLottos, money.getCountOfPurchase()).generate();
         lottoService.save(userLottos, round);
 
         CountOfManual countOfManual = CountOfManual.of(manualLottos.size(), money.getCountOfPurchase());
