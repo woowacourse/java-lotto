@@ -1,22 +1,22 @@
 package lotto.model.lottomachine;
 
-
 import lotto.model.Lotto;
-import lotto.model.Lottos;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottoMachine implements LottoMachine {
-    private List<Lotto> manualLottos;
+    private static final String DELIMITER = ",";
 
-    public ManualLottoMachine(List<Lotto> manualLottos) {
-        this.manualLottos = manualLottos;
+    private String currentManualLotto;
+
+    public ManualLottoMachine(String currentManualLotto) {
+        this.currentManualLotto = currentManualLotto;
     }
 
     @Override
-    public Lottos generateLottos() {
-        List<Lotto> newManualLottos = new ArrayList<>(manualLottos);
-        return new Lottos(newManualLottos);
+    public Lotto generateLotto() {
+        String copiedCurrentManualLotto = new String(this.currentManualLotto);
+        return new Lotto(copiedCurrentManualLotto);
     }
+
 }

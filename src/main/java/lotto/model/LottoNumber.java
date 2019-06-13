@@ -26,7 +26,6 @@ public class LottoNumber {
     }
 
     public LottoNumber(int number) throws IllegalLottoNumberException {
-        //todo 상수
         if (number < MINMUM_LOTTO_NUMBERS || number > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalLottoNumberException();
         }

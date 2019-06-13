@@ -13,12 +13,12 @@ public class LottoResult {
     }
 
     public double calculateProfitRate() {
-        int totalPrizeMoney = calculateTotalPrizeMoney();
+        double totalPrizeMoney = calculateTotalPrizeMoney();
         return totalPrizeMoney / money.getMoney();
     }
 
-    private int calculateTotalPrizeMoney() {
-        int sum = 0;
+    private double calculateTotalPrizeMoney() {
+        double sum = 0;
         for (Prize prize : Prize.values()) {
             sum += prize.getPrizeMoney() * prizeInfo.get(prize);
         }

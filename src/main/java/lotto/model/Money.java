@@ -33,7 +33,7 @@ public class Money {
         return (comparison) > this.money;
     }
 
-    public int calculateAutomatiLottoCount(int count) {
+    public int calculateAutomaticLottoCount(int count) {
         return (money - (count * PRICE_OF_LOTTO)) / PRICE_OF_LOTTO;
     }
 }

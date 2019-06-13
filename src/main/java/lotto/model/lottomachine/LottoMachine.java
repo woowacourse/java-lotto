@@ -1,8 +1,7 @@
 package lotto.model.lottomachine;
 
-
-import lotto.model.Lottos;
+import lotto.model.Lotto;
 
 public interface LottoMachine {
-    Lottos generateLottos();
+    Lotto generateLotto();
 }

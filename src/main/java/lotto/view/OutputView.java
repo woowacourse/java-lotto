@@ -7,7 +7,7 @@ public class OutputView {
 
     public static void printLottos(Money money, ManualLottoCount manualLottoCount, Lottos lottos) {
         int manualCount = manualLottoCount.getCount();
-        System.out.println("수동으로 " + manualCount + " 자동으로 " + money.calculateAutomatiLottoCount(manualCount) + " 를 구매했습니다!");
+        System.out.println("수동으로 " + manualCount + " 자동으로 " + money.calculateAutomaticLottoCount(manualCount) + " 를 구매했습니다!");
         printLottos(lottos);
     }
 

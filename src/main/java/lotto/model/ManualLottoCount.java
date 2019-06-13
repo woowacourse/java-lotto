@@ -15,7 +15,7 @@ public class ManualLottoCount {
         this.count = count;
     }
 
-    public boolean isCountFinished(int currentCount) {
+    public boolean next(int currentCount) {
         return currentCount != this.count;
     }
 
