@@ -30,6 +30,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return numbers.get(key);
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     public static List<LottoNumber> getRandomNumbers() {
         List<LottoNumber> randomNumbers = new ArrayList<>(numbers.values());
 

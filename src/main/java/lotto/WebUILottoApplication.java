@@ -1,10 +1,8 @@
 package lotto;
 
 import lotto.domain.Factory.LottoTicketsFactory;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
-import lotto.view.InputView;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -14,6 +12,10 @@ import static spark.Spark.*;
 
 public class WebUILottoApplication {
     public static void main(String[] args) {
+        int week = 1;
+
+        staticFiles.location("/");
+
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "index.html");
@@ -25,6 +27,27 @@ public class WebUILottoApplication {
                 return render(model, "purchasing_lotto.html");
             });
 
+            // @params
+            // money, lottos('-'를 기준으로 한 숫자 문자열)
+            get("/ticket", (req, res) -> {
+                Map<String, Object> model = new HashMap<>();
+
+                Money money = new Money(Integer.parseInt(req.queryParams("money")));
+                model.put("money", money.getMoney());
+
+                List<String> inputCustoms = Arrays.asList(req.queryParams("lottos").split("-"));
+                LottoTickets lottoTickets = LottoTicketsFactory.getInstance().create(money, inputCustoms);
+
+                model.put("lottos", lottoTickets.getLottoTickets());
+
+                model.put("amountOfCustom", inputCustoms.size());
+                model.put("amountOfAuto", (money.getMoney() / 1000) - inputCustoms.size());
+
+                return render(model, "purchased_tickets.html");
+            });
+
+            // @params
+            // money, lottos('-'를 기준으로 한 숫자 문자열)
             post("/ticket", (req, res) -> {
                 Map<String, Object> model = new HashMap<>();
 
@@ -38,7 +61,7 @@ public class WebUILottoApplication {
                 for (String custom : customs) {
 
                 }
-                model.put("customs", lottoTickets.getLottoTickets());
+                model.put("lottos", lottoTickets.getLottoTickets());
 
                 model.put("amountOfCustom", inputCustoms.size());
                 model.put("amountOfAuto", (money.getMoney() / 1000) - inputCustoms.size());

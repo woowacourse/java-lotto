@@ -25,6 +25,10 @@ public class LottoTicket {
         return this.lottoNumbers.contains(bonusBall);
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
