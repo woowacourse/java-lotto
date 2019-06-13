@@ -1,11 +1,7 @@
 package lotto.dao;
 
-import com.google.gson.Gson;
 import lotto.DataBase;
-import lotto.domain.Lotto;
 import lotto.domain.Money;
-import lotto.domain.Number;
-import lotto.domain.WinningLotto;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
