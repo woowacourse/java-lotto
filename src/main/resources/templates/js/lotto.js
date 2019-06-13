@@ -6,26 +6,26 @@ function isValidInput() {
         window.alert("로또는 1,000원 이상 100,000원 이하만 구매 가능 합니다.");
         document.getElementById('price').value = document.getElementById('manualCount').value = '';
     } else {
-        document.getElementById('validCheck').innerHTML='';
+        document.getElementById('validCheck').innerHTML = '';
     }
     if (document.getElementById('price').value / 1000 < document.getElementById('manualCount').value) {
-        document.getElementById('manualCountMessage').innerHTML='총 구매 개수보다 많습니다.';
-        document.getElementById('manualCountMessage').style.color='red';
+        document.getElementById('manualCountMessage').innerHTML = '총 구매 개수보다 많습니다.';
+        document.getElementById('manualCountMessage').style.color = 'red';
         document.getElementById('manualCount').value = '';
         delFields();
     } else {
-        document.getElementById('manualCountMessage').innerHTML='구매 가능합니다.';
-        document.getElementById('manualCountMessage').style.color='blue';
+        document.getElementById('manualCountMessage').innerHTML = '구매 가능합니다.';
+        document.getElementById('manualCountMessage').style.color = 'blue';
         addFields();
     }
 }
 
-function cancel() {
+function initField() {
     document.getElementById('price').value = document.getElementById('manualCount').value = '';
     delFields();
 }
 
-function addFields(){
+function addFields() {
 
     var number = document.getElementById("manualCount").value;
     var manualLottoDiv = document.getElementById("manualLottoDiv");
@@ -62,15 +62,15 @@ function createContainer(i) {
 function makeText(i) {
     var div = document.createElement("div");
     div.className = "input-group-prepend";
-    div.innerHTML = '<span class="input-group-text">로또' + (i+1) +'</span>';
+    div.innerHTML = '<span class="input-group-text">로또' + (i + 1) + '</span>';
     return div;
-}
-
-function cancel() {
-    document.getElementById('winningLotto').value = document.getElementById('bonusBall').value = '';
 }
 
 window.onbeforeunload = function (e) {
     $('#manualCount')[0].value = "";
     $('#price')[0].value = "";
+};
+
+function cancel() {
+    document.getElementById('winningLotto').value = document.getElementById('bonusBall').value = '';
 }
