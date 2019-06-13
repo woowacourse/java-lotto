@@ -9,7 +9,7 @@ public class MoneyTest {
     @Test
     void 천원_단위가_아닐때() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Money money = new Money(19999);
+            new Money(19999);
         });
     }
 

@@ -2,20 +2,11 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class NumberTest {
     @Test
-    void 숫자가_45_이상일때() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Number(46);
-        });
-    }
-
-    @Test
-    void 숫자가_1_이하일때() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Number(0);
-        });
+    void getNumber() {
+        assertThat(Number.of(4)).isEqualTo(Number.of(4));
     }
 }

@@ -56,16 +56,6 @@ public enum Rank {
         return matchCount;
     }
 
-    public static List<Integer> providePrizeResult(List<Rank> ranks) {
-        List<Integer> prizes = new ArrayList<>();
-
-        for (Rank rank : ranks) {
-            prizes.add(rank.prize);
-        }
-
-        return prizes;
-    }
-
     private int plusCount(int matchCount, Rank ranks) {
         if (this.equals(ranks)) {
             matchCount++;

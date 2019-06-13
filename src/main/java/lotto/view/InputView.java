@@ -47,7 +47,7 @@ public class InputView {
 
         bonusBall = getCheckString(bonusBall);
 
-        return new Number(Integer.parseInt(bonusBall));
+        return Number.of(Integer.parseInt(bonusBall));
     }
 
     public static int inputManualRound(int round) {

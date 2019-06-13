@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lottoes;
+import lotto.domain.UserLotto;
 import lotto.domain.Rank;
 
 import java.util.List;
@@ -13,11 +13,11 @@ public class OutputView {
     private static final String RESULT_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
 
-    public static void printMyLotto(Lottoes lottoes, int manualRound) {
-        System.out.println(String.format(MESSAGE_BUY_LOTTO, manualRound, lottoes.getSize() - manualRound));
+    public static void printMyLotto(UserLotto userLotto, int manualRound) {
+        System.out.println(String.format(MESSAGE_BUY_LOTTO, manualRound, userLotto.getSize() - manualRound));
 
-        for (int i = 0; i < lottoes.getSize(); i++) {
-            System.out.println(lottoes.getIndexByLotto(i).toString());
+        for (int i = 0; i < userLotto.getSize(); i++) {
+            System.out.println(userLotto.getIndexByLotto(i).toString());
         }
     }
 

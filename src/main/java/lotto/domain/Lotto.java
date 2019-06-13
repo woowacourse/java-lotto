@@ -41,9 +41,9 @@ public class Lotto {
     }
 
     private void validDuplication() {
-        Set<Number> cheked = new HashSet<>(lotto);
+        Set<Number> checkedSize = new HashSet<>(lotto);
 
-        if (cheked.size() != lotto.size()) {
+        if (checkedSize.size() != lotto.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_MESSAGE);
         }
     }
@@ -58,7 +58,7 @@ public class Lotto {
         List<Number> numbers = new ArrayList<>();
 
         for (String oneNumber : oneNumbers) {
-            numbers.add(new Number(Integer.parseInt(oneNumber)));
+            numbers.add(Number.of(Integer.parseInt(oneNumber)));
         }
         return numbers;
     }

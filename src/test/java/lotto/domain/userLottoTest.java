@@ -8,34 +8,32 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoesTest {
+public class userLottoTest {
     private List<Number> lottoNumbers;
-    private List<Lotto> lottos;
-    private Lottoes lottoes;
+    private UserLotto userLotto;
 
     @BeforeEach
     void setUp() {
         lottoNumbers = new ArrayList<>();
 
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new Number(i));
+            lottoNumbers.add(Number.of(i));
         }
 
-        lottos = new ArrayList<>();
-        lottos.add(new Lotto(lottoNumbers));
-        lottos.add(new Lotto(lottoNumbers));
+        List<Lotto> allLotto = new ArrayList<>();
+        allLotto.add(new Lotto(lottoNumbers));
+        allLotto.add(new Lotto(lottoNumbers));
 
-        lottoes = new Lottoes(lottos, 4, LottoNumberGenerator.create());
+        userLotto = new UserLotto(allLotto, 4, new LottoNumberGenerator());
     }
 
     @Test
     void 내가_구매한_로또_사이즈() {
-        assertThat(lottoes.getSize()).isEqualTo(6);
+        assertThat(userLotto.getSize()).isEqualTo(6);
     }
 
     @Test
     void 인덱스에_맞는_객체() {
-        assertThat(lottoes.getIndexByLotto(0)).isEqualTo(new Lotto(lottoNumbers));
-
+        assertThat(userLotto.getIndexByLotto(0)).isEqualTo(new Lotto(lottoNumbers));
     }
 }

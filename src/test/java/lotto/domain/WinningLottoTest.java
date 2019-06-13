@@ -10,26 +10,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WinningLottoTest {
-    private List<Number> lottos;
     private Lotto lotto;
     private WinningLotto winningLotto;
+    private UserLotto userLotto;
 
     @BeforeEach
     void setUp() {
-        lottos = new ArrayList<>();
+        List<Number> lottoNumber = new ArrayList<>();
 
         for (int i = 1; i < 7; i++) {
-            lottos.add(new Number(i));
+            lottoNumber.add(Number.of(i));
         }
 
-        lotto = new Lotto(lottos);
-        winningLotto = new WinningLotto(lotto, new Number(9));
+        lotto = new Lotto(lottoNumber);
+        winningLotto = new WinningLotto(lotto, Number.of(9));
+
+        List<Lotto> allLotto = new ArrayList<>();
+        allLotto.add(new Lotto(lottoNumber));
+        allLotto.add(new Lotto(lottoNumber));
+
+        userLotto = new UserLotto(allLotto, 4, new LottoNumberGenerator());
     }
 
     @Test
     void 당첨번호와_중복() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new WinningLotto(lotto, new Number(4));
+            new WinningLotto(lotto, Number.of(4));
         });
     }
 
@@ -41,5 +47,10 @@ public class WinningLottoTest {
     @Test
     void 당첨번호와_일치하는_내_로또와의_갯수() {
         assertThat(winningLotto.match(lotto)).isEqualTo(6);
+    }
+
+    @Test
+    void 결과리스트() {
+        assertThat(winningLotto.makeRankResultList(userLotto)).isEqualTo(winningLotto.makeRankResultList(userLotto));
     }
 }
