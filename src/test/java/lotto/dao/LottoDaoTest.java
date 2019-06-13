@@ -22,7 +22,7 @@ class LottoDaoTest {
     }
 
     @Test
-    void findByRoundTest() {
-        assertThat(0).isNotEqualTo(new LottoDao().findByRound(0).size());
+    void findAllByRoundTest() {
+        assertThat(0).isNotEqualTo(new LottoDao().findAllByRound(0).size());
     }
 }

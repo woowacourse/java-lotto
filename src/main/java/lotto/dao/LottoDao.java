@@ -12,7 +12,6 @@ import java.util.List;
 
 public class LottoDao {
 
-    //TODO 중간에 하나라도 실패하면 롤백은 어떻게?
     public boolean add(List<Lotto> lottos, int round) {
         Connection conn = DBUtils.getConnection();
         PreparedStatement ps = null;
@@ -34,7 +33,7 @@ public class LottoDao {
         return count == lottos.size();
     }
 
-    public List<Lotto> findByRound(int round) {
+    public List<Lotto> findAllByRound(int round) {
         Connection conn = DBUtils.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;

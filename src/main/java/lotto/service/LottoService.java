@@ -21,6 +21,6 @@ public class LottoService {
 
 
     public List<Lotto> getByRound(final int round) {
-        return lottoDao.findByRound(round);
+        return lottoDao.findAllByRound(round);
     }
 }
