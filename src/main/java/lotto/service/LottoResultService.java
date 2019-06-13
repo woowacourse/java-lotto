@@ -17,19 +17,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.service.LottoService.PRICE;
+
 public class LottoResultService {
-    private static final String PRICE = "price";
     private static final String YIELD = "yield";
     private static final String LOTTO_RESULT = "userLottoResult";
     private static final String ROUND = "round";
+    private static final String WINNING_LOTTO = "winningLotto";
+    private static final String BONUS = "bonusNumber";
+    private static final String LOTTOS = "lottos";
 
 
     public static Route makeLottoResultPage = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
-        Lotto lotto = new Lotto(Converter.convertNumbers(req.queryParams("winningLotto")));
-        LottoNumber bonusNo = LottoNumber.valueOf(Integer.parseInt(req.queryParams("bonusNumber")));
+        Lotto lotto = new Lotto(Converter.convertNumbers(req.queryParams(WINNING_LOTTO)));
+        LottoNumber bonusNo = LottoNumber.valueOf(Integer.parseInt(req.queryParams(BONUS)));
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNo);
-        Lottos lottos = req.session().attribute("lottos");
+        Lottos lottos = req.session().attribute(LOTTOS);
         LottoResult lottoResult = LottoResult.generateLottoResult(lottos, winningLotto);
         Price price = req.session().attribute(PRICE);
         model.put(YIELD, lottoResult.findYield(price.getPrice()));

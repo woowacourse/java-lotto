@@ -14,6 +14,9 @@ public class RoundDao {
     private static final String SELECT_ALL_ROUND_SQL = "SELECT id_ FROM round";
     private static final String SELECT_PRICE_BY_ROUND_SQL = "SELECT price FROM round WHERE id_=?";
     private static final String DELETE_ALL_ROUND_AND_PRICE_SQL = "DELETE FROM round";
+    private static final String LATEST_ROUND_ID = "MAX(id_)";
+    private static final String ROUND_ID = "id_";
+    private static final String PRICE = "price";
 
     private final Connection conn;
 
@@ -34,7 +37,7 @@ public class RoundDao {
         ResultSet rs = pstmt.executeQuery();
 
         if (!rs.next()) return 0;
-        return rs.getInt("MAX(id_)");
+        return rs.getInt(LATEST_ROUND_ID);
     }
 
     public List<Integer> findAllRound() throws SQLException {
@@ -43,7 +46,7 @@ public class RoundDao {
         List<Integer> rounds = new ArrayList<>();
 
         while (rs.next()) {
-            rounds.add(rs.getInt("id_"));
+            rounds.add(rs.getInt(ROUND_ID));
         }
         return rounds;
     }
@@ -53,7 +56,7 @@ public class RoundDao {
         pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
         if (rs.next()) {
-            return rs.getInt("price");
+            return rs.getInt(PRICE);
         }
         return 0;
     }

@@ -15,6 +15,7 @@ public class LottosDao {
     private static final String INSERT_SQL = "INSERT INTO lotto(num_1,num_2,num_3,num_4,num_5,num_6,round_id) values(?,?,?,?,?,?,?)";
     private static final String SELECT_SQL = "SELECT * FROM lotto WHERE round_id = ?";
     private static final String DELETE_ALL_LOTTOS_SQL = "DELETE FROM lotto";
+    private static final String COL_NAME ="num";
 
     private final Connection conn;
 
@@ -39,7 +40,7 @@ public class LottosDao {
 
         List<Lotto> lottos = new ArrayList<>();
         while (rs.next()) {
-            lottos.add(DBUtils.getLottoInDB(rs, "num"));
+            lottos.add(DBUtils.getLottoInDB(rs, COL_NAME));
         }
 
         return new Lottos(lottos);

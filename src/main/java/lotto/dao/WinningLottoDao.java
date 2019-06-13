@@ -14,6 +14,10 @@ public class WinningLottoDao {
     private static final String INSERT_WINNING_LOTTO_SQL = "INSERT INTO winninglotto(win_1,win_2,win_3,win_4,win_5,win_6,bonus,round_id) values(?,?,?,?,?,?,?,?)";
     private static final String SELECT_WINNING_LOTTO_SQL = "SELECT * FROM winninglotto WHERE round_id=?";
     private static final String DELETE_ALL_WINNING_LOTTO_SQL = "DELETE FROM winninglotto";
+    private static final String BONUS = "bonus";
+    private static final String COL_WIN_NAME = "win";
+
+
 
     private final Connection conn;
 
@@ -36,8 +40,8 @@ public class WinningLottoDao {
         pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
         if (rs.next()) {
-            LottoNumber bonus = LottoNumber.valueOf(rs.getInt("bonus"));
-            return new WinningLotto(DBUtils.getLottoInDB(rs, "win"), bonus);
+            LottoNumber bonus = LottoNumber.valueOf(rs.getInt(BONUS));
+            return new WinningLotto(DBUtils.getLottoInDB(rs, COL_WIN_NAME), bonus);
         }
         return null;
 
