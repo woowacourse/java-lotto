@@ -1,34 +1,18 @@
 package domain;
 
-import java.util.EnumMap;
+import java.util.Map;
 
 public class Statistics {
-    private static final int INITIAL_PURCHASED_AMOUNT = 0;
+    private Map<Rank, CountOfRank> countsOfRanks;
+    private PurchaseAmount purchasedAmount;
 
-    private EnumMap<Rank, CountOfRank> countsOfRanks;
-    private int purchasedAmount;
-
-    private Statistics(EnumMap<Rank, CountOfRank> countsOfRanks) {
+    private Statistics(Map<Rank, CountOfRank> countsOfRanks, PurchaseAmount purchaseAmount) {
         this.countsOfRanks = countsOfRanks;
-        purchasedAmount = INITIAL_PURCHASED_AMOUNT;
+        this.purchasedAmount = purchaseAmount;
     }
 
-    static Statistics of(Rank[] values) {
-        EnumMap<Rank, CountOfRank> countsOfRanks = new EnumMap<>(Rank.class);
-
-        initialize(countsOfRanks, values);
-        return new Statistics(countsOfRanks);
-    }
-
-    private static void initialize(EnumMap<Rank, CountOfRank> countsOfRanks, Rank[] values) {
-        for (Rank rank : values) {
-            countsOfRanks.put(rank, new CountOfRank());
-        }
-    }
-
-    void add(Rank rank) {
-        countsOfRanks.get(rank).countUp();
-        purchasedAmount += IssuedLotto.PRICE;
+    static Statistics of(Map<Rank, CountOfRank> countsOfRanks, PurchaseAmount purchaseAmount) {
+        return new Statistics(countsOfRanks, purchaseAmount);
     }
 
     public int countsOf(Rank rank) {
@@ -45,6 +29,6 @@ public class Statistics {
             winningMoneyOfRank = rank.getWinningMoney();
             totalWinningMoney += countsOf(rank) * winningMoneyOfRank;
         }
-        return totalWinningMoney / (double) purchasedAmount;
+        return totalWinningMoney / (double) purchasedAmount.getMoneyAmount();
     }
 }

@@ -30,8 +30,9 @@ class IssuedLottosTest {
     @Test
     void 발급된_로또들의_총_구매_가격을_되돌려주는지_테스트() {
         IssuedLottos issuedLottos = IssuedLottos.of(Arrays.asList(new IssuedLotto(lottoNumbersOfOneToSix)));
+        PurchaseAmount purchaseAmount = issuedLottos.getPurchasedAmount();
 
-        assertThat(issuedLottos.getPurchasedAmount()).isEqualTo(1000);
+        assertThat(purchaseAmount.getMoneyAmount()).isEqualTo(1000);
     }
 
     @Test

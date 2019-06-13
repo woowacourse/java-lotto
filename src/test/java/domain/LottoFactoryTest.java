@@ -26,8 +26,9 @@ class LottoFactoryTest {
     void 입력받은_금액만큼_자동_로또를_제대로_발행해주는지_테스트() {
         PurchaseAmount purchaseAmount = PurchaseAmount.valueOf(5000);
         IssuedLottos issuedLottos = LottoFactory.autoIssueLottoWorthOf(purchaseAmount);
+        PurchaseAmount purchasedAmount = issuedLottos.getPurchasedAmount();
 
-        assertThat(issuedLottos.getPurchasedAmount()).isEqualTo(5000);
+        assertThat(purchasedAmount.getMoneyAmount()).isEqualTo(5000);
     }
 
     @Test

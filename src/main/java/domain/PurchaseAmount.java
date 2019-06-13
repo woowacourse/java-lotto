@@ -28,12 +28,12 @@ public class PurchaseAmount {
         }
     }
 
-    int getPurchaseAmount() {
+    public int getMoneyAmount() {
         return amountOfMoney;
     }
 
-    public PurchaseAmount getChangeOf(int amountOfMoney) {
-        return new PurchaseAmount(this.amountOfMoney - amountOfMoney);
+    public PurchaseAmount getChangeOf(PurchaseAmount purchaseAmount) {
+        return new PurchaseAmount(this.amountOfMoney - purchaseAmount.getMoneyAmount());
     }
 
     public void checkNumberOfManualIssue(int numberOfManualIssue) {

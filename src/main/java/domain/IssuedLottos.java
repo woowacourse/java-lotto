@@ -22,8 +22,8 @@ public class IssuedLottos {
         return new IssuedLottos(lottos);
     }
 
-    public int getPurchasedAmount() {
-        return lottos.size() * IssuedLotto.PRICE;
+    public PurchaseAmount getPurchasedAmount() {
+        return PurchaseAmount.valueOf(lottos.size() * IssuedLotto.PRICE);
     }
 
     public List<IssuedLotto> getLottos() {
