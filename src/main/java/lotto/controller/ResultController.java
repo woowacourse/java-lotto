@@ -17,9 +17,15 @@ import java.util.Map;
 import static lotto.WebUILottoApplication.render;
 
 public class ResultController {
-    private RoundDao roundDao = new RoundDao();
-    private WinningLottoDao winningLottoDao = new WinningLottoDao();
-    private ResultDao resultDao = new ResultDao();
+    private final RoundDao roundDao;
+    private final WinningLottoDao winningLottoDao;
+    private final ResultDao resultDao;
+
+    public ResultController(final RoundDao roundDao, final WinningLottoDao winningLottoDao, final ResultDao resultDao) {
+        this.roundDao = roundDao;
+        this.winningLottoDao = winningLottoDao;
+        this.resultDao = resultDao;
+    }
 
     public Object print(Request req, Response res) throws SQLException {
         Map<String, Object> model = new HashMap<>();

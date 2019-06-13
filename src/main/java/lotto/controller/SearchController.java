@@ -16,9 +16,15 @@ import java.util.Map;
 import static lotto.WebUILottoApplication.render;
 
 public class SearchController {
-    private LottoDao lottoDao = new LottoDao();
-    private ResultDao resultDao = new ResultDao();
-    private WinningLottoDao winningLottoDao = new WinningLottoDao();
+    private final LottoDao lottoDao;
+    private final WinningLottoDao winningLottoDao;
+    private final ResultDao resultDao;
+
+    public SearchController(final LottoDao lottoDao, final WinningLottoDao winningLottoDao, final ResultDao resultDao) {
+        this.lottoDao = lottoDao;
+        this.winningLottoDao = winningLottoDao;
+        this.resultDao = resultDao;
+    }
 
     public Object searchRound(Request req, Response res) throws SQLException {
         Map<String, Object> model = new HashMap<>();

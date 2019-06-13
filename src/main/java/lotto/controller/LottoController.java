@@ -18,8 +18,13 @@ import java.util.stream.IntStream;
 import static lotto.WebUILottoApplication.render;
 
 public class LottoController {
-    private RoundDao roundDao = new RoundDao();
-    private LottoDao lottoDao = new LottoDao();
+    private final RoundDao roundDao;
+    private final LottoDao lottoDao;
+
+    public LottoController(final RoundDao roundDao, final LottoDao lottoDao) {
+        this.roundDao = roundDao;
+        this.lottoDao = lottoDao;
+    }
 
     public Object main(Request req, Response res) throws SQLException {
         Map<String, Object> model = new HashMap<>();

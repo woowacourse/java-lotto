@@ -4,17 +4,13 @@ import lotto.controller.ErrorController;
 import lotto.controller.LottoController;
 import lotto.controller.ResultController;
 import lotto.controller.SearchController;
-import lotto.domain.*;
 import lotto.domain.dao.LottoDao;
 import lotto.domain.dao.ResultDao;
 import lotto.domain.dao.RoundDao;
 import lotto.domain.dao.WinningLottoDao;
-import lotto.domain.dto.ResultDto;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.*;
 
 import static spark.Spark.*;
@@ -25,16 +21,15 @@ public class WebUILottoApplication {
         port(8080);
 
 
-
         LottoDao lottoDao = new LottoDao();
         ResultDao resultDao = new ResultDao();
         RoundDao roundDao = new RoundDao();
         WinningLottoDao winningLottoDao = new WinningLottoDao();
 
-        LottoController lottoController = new LottoController();
-        ResultController resultController = new ResultController();
+        LottoController lottoController = new LottoController(roundDao, lottoDao);
+        ResultController resultController = new ResultController(roundDao, winningLottoDao, resultDao);
+        SearchController searchController = new SearchController(lottoDao, winningLottoDao, resultDao);
         ErrorController errorController = new ErrorController();
-        SearchController searchController = new SearchController();
 
         get("/", lottoController::main);
 
@@ -42,9 +37,9 @@ public class WebUILottoApplication {
 
         post("/result", resultController::print);
 
-        get("/error", errorController::printMessage);
-
         post("/searchRound", searchController::searchRound);
+
+        get("/error", errorController::printMessage);
 
         exception(Exception.class, errorController::catchException);
     }
