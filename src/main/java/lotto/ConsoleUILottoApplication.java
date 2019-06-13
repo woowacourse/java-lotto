@@ -23,7 +23,7 @@ public class ConsoleUILottoApplication {
         outputView.printLottos(userLottos, countOfManual.value(), money.getCountOfPurchase());
 
         WinningLotto winningLotto = LottoHelper.generateWinningLotto(inputView.inputWinningLotto(), inputView.inputBonusNo());
-        WinPrize winPrize = LottoHelper.generateWinPrize(userLottos, winningLotto);
+        WinPrize winPrize = winningLotto.generateWinPrize(userLottos);
         outputView.printResult(winPrize);
         outputView.printRateOfProfit(winPrize);
     }

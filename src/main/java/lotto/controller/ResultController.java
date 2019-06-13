@@ -44,7 +44,7 @@ public class ResultController {
 
     private void saveWinPrize(final int round, final WinningLotto winningLotto) throws SQLException {
         List<Lotto> userLottos = lottoService.getByRound(round);
-        WinPrize winPrize = LottoHelper.generateWinPrize(userLottos, winningLotto);
+        WinPrize winPrize = winningLotto.generateWinPrize(userLottos);
         winPrizeService.save(winPrize, round);
     }
 

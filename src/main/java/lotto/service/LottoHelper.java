@@ -15,12 +15,4 @@ public class LottoHelper {
         LottoNo bonusNo = LottoNo.from(bonusNumber);
         return new WinningLotto(winLotto, bonusNo);
     }
-
-    public static WinPrize generateWinPrize(final List<Lotto> userLottos, final WinningLotto winningLotto) {
-        WinPrize winPrize = new WinPrize();
-        for (final Lotto userLotto : userLottos) {
-            winPrize.addWinCount(winningLotto.match(userLotto));
-        }
-        return winPrize;
-    }
 }
