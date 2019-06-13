@@ -1,11 +1,9 @@
 package lotto.application.lottoticket;
 
-import lotto.domain.lottoresult.WinningLotto;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
 import lotto.domain.lottoticket.dto.LottoTicketDto;
 import lotto.domain.lottoticket.dto.LottoTicketsDto;
-import lotto.domain.lottoticket.dto.WinningLottoDto;
 import lotto.domain.lottoticket.ticketingmachine.LottoTicketingMachine;
 import lotto.domain.lottoticket.ticketingmachine.RandomLottoNumberGenerator;
 
@@ -42,15 +40,5 @@ class LottoTicketAssembler {
         LottoTicketsDto lottoTicketsDto = new LottoTicketsDto();
         lottoTicketsDto.setLottoTicketDtos(lottoTicketDtoes);
         return lottoTicketsDto;
-    }
-
-    static WinningLottoDto getWinningLottoDto(WinningLotto winningLotto) {
-        WinningLottoDto winningLottoDto = new WinningLottoDto();
-
-        LottoTicketDto lottoTicketDto = getLottoTicketDto(winningLotto.getWinningTicket());
-        winningLottoDto.setLottoTicketDto(lottoTicketDto);
-        winningLottoDto.setBonusBall(winningLotto.getBonusBall());
-
-        return winningLottoDto;
     }
 }

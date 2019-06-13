@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.application.LottoSession;
+import lotto.application.lottoresult.LottoResultService;
 import lotto.application.lottoticket.LottoTicketService;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottoresult.WinningLotto;
@@ -25,9 +25,8 @@ public class WinningLottoController {
         LottoNumber bonusBall = LottoTicketService.makeBonusBall(req.queryParams("bonusNum"));
 
         WinningLotto winningLotto = WinningLotto.of(winningTicket, bonusBall);
-        LottoSession.setWinningLotto(winningLotto);
-
-        WinningLottoDto winningLottoDto = LottoTicketService.getWinningLottoDto(winningLotto);
+        WinningLottoDto winningLottoDto = LottoResultService.getWinningLottoDto(winningLotto);
+        LottoResultService.saveWinningLotto(winningLottoDto);
 
         return JsonUtil.convertDtoToJsonStringWith(res, winningLottoDto);
     };

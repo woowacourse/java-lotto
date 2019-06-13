@@ -1,15 +1,13 @@
 package lotto.application.lottoticket;
 
-import lotto.application.lottoresult.LottoResultDAO;
+import lotto.application.lottoresult.LottoResultService;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberPool;
-import lotto.domain.lottoresult.WinningLotto;
 import lotto.domain.lottoticket.InvalidLottoTicketException;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
 import lotto.domain.lottoticket.dto.LottoTicketDto;
 import lotto.domain.lottoticket.dto.LottoTicketsDto;
-import lotto.domain.lottoticket.dto.WinningLottoDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,18 +51,9 @@ public class LottoTicketService {
         return LottoNumberPool.valueOf(Integer.parseInt(num));
     }
 
-    public static WinningLottoDto getWinningLottoDto(WinningLotto winningLotto) {
-        return LottoTicketAssembler.getWinningLottoDto(winningLotto);
-    }
-
     public static void savePurchasedLottoTicket(LottoTicketDto lottoTicketDto) {
-        int currentRound = fetchCurrentRound();
+        int currentRound = LottoResultService.fetchCurrentRound();
         saveLottoTicket(currentRound, lottoTicketDto);
-    }
-
-    private static int fetchCurrentRound() {
-        LottoResultDAO lottoResultDAO = LottoResultDAO.getInstance();
-        return lottoResultDAO.getLatestRoundNum();
     }
 
     private static void saveLottoTicket(int currentRound, LottoTicketDto lottoTicketDto) {
@@ -73,7 +62,7 @@ public class LottoTicketService {
     }
 
     public static void savePurchasedLottoTickets(LottoTicketsDto lottoTicketsDto) {
-        int currentRound = fetchCurrentRound();
+        int currentRound = LottoResultService.fetchCurrentRound();
         List<LottoTicketDto> dtos = lottoTicketsDto.getLottoTicketDtos();
         for (LottoTicketDto lottoTicketDto : dtos) {
             saveLottoTicket(currentRound, lottoTicketDto);
