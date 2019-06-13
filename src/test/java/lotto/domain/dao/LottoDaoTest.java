@@ -16,8 +16,14 @@ public class LottoDaoTest {
     }
 
     @Test
-    void create() throws SQLException {
+    void selectAllLottoGame() throws SQLException {
         // TODO: 2019-06-12 HOW TO TEST????
         assertThat(lottoDao.selectAllLottoGame()).isNotNull();
+    }
+
+    @Test
+    void insertUser() {
+        String name = "tester";
+        assertThat(lottoDao.insertUser(name)).isEqualTo(1);
     }
 }

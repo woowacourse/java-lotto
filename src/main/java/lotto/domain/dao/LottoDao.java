@@ -11,9 +11,11 @@ import java.util.List;
 
 import static lotto.domain.dao.JdbcConnector.getConnection;
 import static lotto.domain.dao.sqls.Columns.*;
+import static lotto.domain.dao.sqls.LottoDaoSqls.INSERT_USER;
 import static lotto.domain.dao.sqls.LottoDaoSqls.SELECT_ALL_LOTTO_RESULT;
 
 public class LottoDao {
+
     private static class LottoDaoHolder {
         private static final LottoDao INSTANCE = new LottoDao();
     }
@@ -44,6 +46,19 @@ public class LottoDao {
             return results;
         } catch (Exception e) {
             throw new SQLDataException();
+        }
+    }
+
+    public int insertUser(String name) {
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = getConnection().prepareStatement(INSERT_USER);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, name);
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
         }
     }
 }
