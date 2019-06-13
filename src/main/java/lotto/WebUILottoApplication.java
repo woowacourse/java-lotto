@@ -73,7 +73,7 @@ public class WebUILottoApplication {
         path("/statistics", () -> {
             get("/win", (req, res) -> {
                 Map<String, Object> model = new HashMap<>();
-                return render(model, "purchased_tickets.html");
+                return render(model, "lotto_result.html");
             });
 
             get("/ticket", (req, res) -> {
