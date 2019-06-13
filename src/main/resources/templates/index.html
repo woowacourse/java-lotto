@@ -15,12 +15,12 @@
         <div class="list-group" id="list-tab" role="tablist">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
-                       href="#list-home" role="tab" aria-controls="home">이번 회차 로또 구매</a>
+                    <a class="list-group-item list-group-item-action active" id="buy-lotto-list" data-toggle="list"
+                       href="#buy-lotto" role="tab" aria-controls="home">이번 회차 로또 구매</a>
                 </li>
                 <li class="nav-item">
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
-                       href="#list-profile" role="tab" aria-controls="profile">지난 회차 결과 조회</a>
+                    <a class="list-group-item list-group-item-action" id="search-lotto-list" data-toggle="list"
+                       href="#search-lotto" role="tab" aria-controls="profile">지난 회차 결과 조회</a>
                 </li>
             </ul>
         </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="card-body">
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+            <div class="tab-pane fade show active" id="buy-lotto" role="tabpanel" aria-labelledby="buy-lotto-list">
                 <form action="/manualLotto" method="post">
                     <div class="container">
                         <div class="row">
@@ -87,16 +87,33 @@
                     </div>
                 </form>
             </div>
-            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                dafasdasdfsafs
+            <!---조회 기능 구현-->
+            <div class="tab-pane fade" id="search-lotto" role="tabpanel" aria-labelledby="search-lotto-list">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <form method="post" action="/searchRound">
+                                <select id="round_selector" name="round_selector"
+                                        class="custom-select custom-select-lg mb-3">
+                                    <option selected>회차를 선택하세요</option>
+                                    {{#each rounds}}
+                                    <option value="{{this}}">{{this}}회차</option>
+                                    {{/each}}
+                                </select>
+                                <button type="submit" class="btn btn-primary btn-lg">조회</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--- 조회 기능 끝-->
             </div>
-        </div>
 
+        </div>
     </div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="lotto.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
