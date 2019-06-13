@@ -25,8 +25,8 @@ public class WinningInformationDAO {
                     " VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_WINNING_INFO_QUERY = "SELECT * FROM winningInfo WHERE round = ?";
     private static final String DELETE_WINNING_INFO_QUERY = "DELETE FROM winningInfo";
-    private static final String INIT_WINNING_INFO_AUTO_INCREAMENT_QUERY = "ALTER TABLE winningInfo AUTO_INCREMENT=1";
-    private static final String INIT_LOTTO_AUTO_INCREAMENT_QUERY = "ALTER TABLE lotto AUTO_INCREMENT=1";
+    private static final String INIT_WINNING_INFO_AUTO_INCREMENT_QUERY = "ALTER TABLE winningInfo AUTO_INCREMENT=1";
+    private static final String INIT_LOTTO_AUTO_INCREMENT_QUERY = "ALTER TABLE lotto AUTO_INCREMENT=1";
     private static WinningInformationDAO winningInformationDAO;
     private static Connection connection;
 
@@ -49,36 +49,48 @@ public class WinningInformationDAO {
      * @throws SQLException
      */
     public int addWinningInformation(WinningInformation winningInformation) throws SQLException {
-        PreparedStatement pstmt = connection.prepareStatement(INSERT_WINNING_INFO_QUERY, Statement.RETURN_GENERATED_KEYS);
-        List<Integer> numbers = winningInformation.getWinningLottoNumbers();
-        for (int i = 0; i < numbers.size(); i++) {
-            pstmt.setInt(i + WINNING_NUMBER_START_INDEX, numbers.get(i));
+        try (PreparedStatement pstmt = connection.prepareStatement(
+                INSERT_WINNING_INFO_QUERY, Statement.RETURN_GENERATED_KEYS)) {
+            List<Integer> numbers = winningInformation.getWinningLottoNumbers();
+            for (int i = 0; i < numbers.size(); i++) {
+                pstmt.setInt(i + WINNING_NUMBER_START_INDEX, numbers.get(i));
+            }
+            pstmt.setInt(BONUS_BALL_INDEX, winningInformation.getBonusNumber());
+            pstmt.executeUpdate();
+            return getRound(pstmt);
         }
-        pstmt.setInt(BONUS_BALL_INDEX, winningInformation.getBonusNumber());
-        pstmt.executeUpdate();
+    }
 
-        ResultSet resultSet = pstmt.getGeneratedKeys();
-        if (!resultSet.next()) {
-            throw new SQLException();
+    private int getRound(PreparedStatement pstmt) throws SQLException {
+        try (ResultSet resultSet = pstmt.getGeneratedKeys()) {
+            if (!resultSet.next()) {
+                throw new SQLException();
+            }
+            return resultSet.getInt(1);
         }
-        return resultSet.getInt(1);
     }
 
     public WinningInformation findWinningInformationByRound(int round) throws SQLException {
-        PreparedStatement pstmt = connection.prepareStatement(SELECT_WINNING_INFO_QUERY);
-        pstmt.setInt(1, round);
-        ResultSet resultSet = pstmt.executeQuery();
-        if (!resultSet.next()) {
-            throw new RoundNotFoundException();
+        try (PreparedStatement pstmt = connection.prepareStatement(SELECT_WINNING_INFO_QUERY)) {
+            pstmt.setInt(1, round);
+            return makeWinningInformation(pstmt);
         }
+    }
 
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = WINNING_NUMBER_START_INDEX; i <= WINNING_NUMBER_END_INDEX; i++) {
-            numbers.add(resultSet.getInt(i));
+    private WinningInformation makeWinningInformation(PreparedStatement pstmt) throws SQLException {
+        try (ResultSet resultSet = pstmt.executeQuery()) {
+            if (!resultSet.next()) {
+                throw new RoundNotFoundException();
+            }
+
+            List<Integer> numbers = new ArrayList<>();
+            for (int i = WINNING_NUMBER_START_INDEX; i <= WINNING_NUMBER_END_INDEX; i++) {
+                numbers.add(resultSet.getInt(i));
+            }
+            ManualLottoNumbersGenerator manualLottoNumbersGenerator = ManualLottoNumbersGenerator.getInstance(numbers);
+            LottoNumber lottoNumber = LottoNumber.valueOf(resultSet.getInt(BONUS_BALL_INDEX));
+            return new WinningInformation(manualLottoNumbersGenerator.generate(), lottoNumber);
         }
-        ManualLottoNumbersGenerator manualLottoNumbersGenerator = ManualLottoNumbersGenerator.getInstance(numbers);
-        LottoNumber lottoNumber = LottoNumber.valueOf(resultSet.getInt(BONUS_BALL_INDEX));
-        return new WinningInformation(manualLottoNumbersGenerator.generate(), lottoNumber);
     }
 
     public void clear() throws SQLException {
@@ -88,17 +100,20 @@ public class WinningInformationDAO {
     }
 
     private void deleteAllWinningInfo() throws SQLException {
-        PreparedStatement pstmt = connection.prepareStatement(DELETE_WINNING_INFO_QUERY);
-        pstmt.executeUpdate();
+        try (PreparedStatement pstmt = connection.prepareStatement(DELETE_WINNING_INFO_QUERY)) {
+            pstmt.executeUpdate();
+        }
     }
 
     private void initializeWinningInfoAutoIncrement() throws SQLException {
-        PreparedStatement pstmt = connection.prepareStatement(INIT_WINNING_INFO_AUTO_INCREAMENT_QUERY);
-        pstmt.executeUpdate();
+        try (PreparedStatement pstmt = connection.prepareStatement(INIT_WINNING_INFO_AUTO_INCREMENT_QUERY)) {
+            pstmt.executeUpdate();
+        }
     }
 
     private void initializeLottoAutoIncrement() throws SQLException {
-        PreparedStatement pstmt = connection.prepareStatement(INIT_LOTTO_AUTO_INCREAMENT_QUERY);
-        pstmt.executeUpdate();
+        try (PreparedStatement pstmt = connection.prepareStatement(INIT_LOTTO_AUTO_INCREMENT_QUERY)) {
+            pstmt.executeUpdate();
+        }
     }
 }

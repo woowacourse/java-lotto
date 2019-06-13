@@ -38,28 +38,38 @@ public class LottoDAO {
     }
 
     public void addLotto(Lotto lotto, int round) throws SQLException {
-        PreparedStatement pstmt = connection.prepareStatement(INSERT_LOTTO_QUERY);
-        pstmt.setInt(ROUND_INDEX, round);
-        List<Integer> lottoNumbers = lotto.getLottoNumbers();
-        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-            pstmt.setInt(NUMBER_START_INDEX + i, lottoNumbers.get(i));
+        try (PreparedStatement pstmt = connection.prepareStatement(INSERT_LOTTO_QUERY)) {
+            pstmt.setInt(ROUND_INDEX, round);
+            List<Integer> lottoNumbers = lotto.getLottoNumbers();
+            for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+                pstmt.setInt(NUMBER_START_INDEX + i, lottoNumbers.get(i));
+            }
+            pstmt.executeUpdate();
         }
-        pstmt.executeUpdate();
     }
 
     public Lottos findLottosByRound(int round) throws SQLException {
-        PreparedStatement pstmt = connection.prepareStatement(SELECT_LOTTOS_QUERY);
-        pstmt.setInt(1, round);
-        ResultSet resultSet = pstmt.executeQuery();
-
-        Lottos lottos = new Lottos();
-        while (resultSet.next()) {
-            List<Integer> lottoNumbers = new ArrayList<>();
-            for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-                lottoNumbers.add(resultSet.getInt(NUMBER_START_INDEX + i));
-            }
-            lottos.add(new Lotto(ManualLottoNumbersGenerator.getInstance(lottoNumbers).generate()));
+        try (PreparedStatement pstmt = connection.prepareStatement(SELECT_LOTTOS_QUERY)) {
+            pstmt.setInt(1, round);
+            return makeLottos(pstmt);
         }
-        return lottos;
+    }
+
+    private Lottos makeLottos(PreparedStatement pstmt) throws SQLException {
+        try (ResultSet resultSet = pstmt.executeQuery()) {
+            Lottos lottos = new Lottos();
+            while (resultSet.next()) {
+                lottos.add(makeLotto(resultSet));
+            }
+            return lottos;
+        }
+    }
+
+    private Lotto makeLotto(ResultSet resultSet) throws SQLException {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+            lottoNumbers.add(resultSet.getInt(NUMBER_START_INDEX + i));
+        }
+        return new Lotto(ManualLottoNumbersGenerator.getInstance(lottoNumbers).generate());
     }
 }
