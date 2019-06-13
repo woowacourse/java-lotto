@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.domain.generator.LottosGenerator;
-import lotto.service.LottoHelper;
 import lotto.view.InputConsoleView;
 import lotto.view.InputView;
 import lotto.view.OutputConsoleView;
@@ -21,8 +20,7 @@ public class ConsoleUILottoApplication {
         List<String> manualLottos = inputManualLottos(countOfManual);
         List<Lotto> userLottos = LottosGenerator.of(manualLottos, money.getCountOfPurchase()).generate();
         outputView.printLottos(userLottos, countOfManual.value(), money.getCountOfPurchase());
-
-        WinningLotto winningLotto = LottoHelper.generateWinningLotto(inputView.inputWinningLotto(), inputView.inputBonusNo());
+        WinningLotto winningLotto = new WinningLotto(inputView.inputWinningLotto(), inputView.inputBonusNo());
         WinPrize winPrize = winningLotto.generateWinPrize(userLottos);
         outputView.printResult(winPrize);
         outputView.printRateOfProfit(winPrize);

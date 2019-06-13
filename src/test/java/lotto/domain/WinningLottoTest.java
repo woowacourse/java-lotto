@@ -19,6 +19,16 @@ public class WinningLottoTest {
     }
 
     @Test
+    void 원시값_입력_생성자_테스트() {
+        final int bonusNo = 7;
+        WinningLotto actual = new WinningLotto(lotto, LottoNo.from(bonusNo));
+
+        WinningLotto expected = new WinningLotto("1,2,3,4,5,6", bonusNo);
+
+        assertThat(actual.toString()).isEqualTo(expected.toString());
+    }
+
+    @Test
     void 보너스_중복_테스트() {
         assertThrows(IllegalArgumentException.class, () -> new WinningLotto(lotto, LottoNo.from(6)));
     }

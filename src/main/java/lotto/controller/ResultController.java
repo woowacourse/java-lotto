@@ -3,7 +3,6 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.WinPrize;
 import lotto.domain.WinningLotto;
-import lotto.service.LottoHelper;
 import lotto.service.LottoService;
 import lotto.service.WinPrizeService;
 import lotto.service.WinningLottoService;
@@ -33,7 +32,7 @@ public class ResultController {
         String lotto = req.queryParams("winningLotto");
         int bonusNo = Integer.parseInt(req.queryParams("bonusNo"));
         int round = Integer.parseInt(req.queryParams("round"));
-        WinningLotto winningLotto = LottoHelper.generateWinningLotto(lotto, bonusNo);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNo);
 
         winningLottoService.save(round, winningLotto);
         saveWinPrize(round, winningLotto);

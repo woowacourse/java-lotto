@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.generator.LottoNosManualGenerator;
+
 import java.util.List;
 
 public class WinningLotto {
@@ -12,13 +14,17 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    public WinningLotto(final String lotto, final int bonusNo) {
+        this(Lotto.of(new LottoNosManualGenerator(lotto).generate()), LottoNo.from(bonusNo));
+    }
+
     private void validateDuplication(final Lotto lotto, final LottoNo bonusNo) {
         if (lotto.isMatch(bonusNo)) {
             throw new IllegalArgumentException("보너스 번호와 당첨 번호 중복은 안됩니다.");
         }
     }
 
-    public WinPrize generateWinPrize(List<Lotto> userLottos){
+    public WinPrize generateWinPrize(List<Lotto> userLottos) {
         WinPrize winPrize = new WinPrize();
         for (final Lotto userLotto : userLottos) {
             winPrize.addWinCount(this.match(userLotto));
