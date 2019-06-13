@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class LottoTicketServiceTest {
     @Test
     void 수동_로또_장_수를_반환하는_메소드() {
-        assertThat(LottoTicketService.getNumOfManualLotto("3", 12)).isEqualTo(3);
+        assertThat(LottoTicketService.getNumOfManualLotto("3", "12")).isEqualTo(3);
         assertThrows(InvalidLottoTicketException.class, () -> {
-            LottoTicketService.getNumOfManualLotto("3", 2);
+            LottoTicketService.getNumOfManualLotto("3", "2");
         });
     }
 
