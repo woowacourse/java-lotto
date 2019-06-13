@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.core.Rank;
+import lotto.dto.LottoResultDto;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -13,7 +15,7 @@ class LottoResultTest {
     void 결과구성() {
         LottoResult result = new LottoResult();
         result.plus(Rank.LOSE);
-        assertEquals(1, result.results().getResults().get(Rank.LOSE));
+        assertEquals(1, result.results().get(Rank.LOSE));
     }
 
     @Test
@@ -22,18 +24,19 @@ class LottoResultTest {
         result.plus(Rank.LOSE);
         result.plus(Rank.FIFTH);
         result.plus(Rank.FIFTH);
+        LottoResultDto dto = new LottoResultDto(result);
         assertEquals(
                 new BigDecimal(Rank.FIFTH.money() + Rank.FIFTH.money() + Rank.LOSE.money())
                         .divide(new BigDecimal(3000), 3, RoundingMode.CEILING),
-                result.results().getSummary());
+                dto.getSummary());
     }
 
     @Test
     void 외부에서_맵_변경() {
         LottoResult result = new LottoResult();
         result.plus(Rank.FIRST);
-        assertEquals(1, result.results().getResults().get(Rank.FIRST));
-        result.results().getResults().put(Rank.FIRST, 3);
-        assertEquals(1, result.results().getResults().get(Rank.FIRST));
+        assertEquals(1, result.results().get(Rank.FIRST));
+        result.results().put(Rank.FIRST, 3);
+        assertEquals(1, result.results().get(Rank.FIRST));
     }
 }
