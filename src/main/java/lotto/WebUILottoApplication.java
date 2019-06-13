@@ -1,20 +1,15 @@
 package lotto;
 
-import lotto.dao.LottosDao;
 import lotto.dao.RoundDao;
-import lotto.dao.WinningLottoDao;
 import lotto.db.DatabaseConnection;
-import lotto.domain.*;
 import lotto.service.LottoResultService;
 import lotto.service.LottoService;
 import lotto.service.WinningLottoService;
-import lotto.utils.ResultMessage;
 import lotto.utils.ViewUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Connection;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +31,7 @@ public class WebUILottoApplication {
                     model.put("present", presentRound);
                     model.put("rounds", rounds);
                     model.put("message", req.queryParams("message"));
-                    req.session().attribute("round",presentRound);
+                    req.session().attribute("round", presentRound);
                     return ViewUtils.render(model, "home.html");
                 }
         );

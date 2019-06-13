@@ -32,7 +32,7 @@ public class LottoService {
     };
 
 
-    public static Route makeUserLottosPage = (req,res) -> {
+    public static Route makeUserLottosPage = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
         List<String> selfInput = Arrays.asList(req.queryParams("selfLottos").split("\r\n"));
         LottosFactory lottosFactory = req.session().attribute("lottosFactory");

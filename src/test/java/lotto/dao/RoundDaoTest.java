@@ -23,13 +23,19 @@ public class RoundDaoTest {
 
     @Test
     void 라운드_추가() throws Exception {
-        int presentRound = roundDao.findLatestRound() + 1;
+        int presentRound = 10;
         int price = 5000;
         roundDao.addRound(presentRound, price);
     }
 
     @Test
+    void 첫_라운드_조회() throws Exception {
+        assertThat(roundDao.findLatestRound()).isEqualTo(0);
+    }
+
+    @Test
     void 마지막_라운드_조회() throws Exception {
+        roundDao.addRound(1,3000);
         assertThat(roundDao.findLatestRound()).isEqualTo(1);
     }
 
@@ -46,7 +52,6 @@ public class RoundDaoTest {
         roundDao.addRound(1, 5000);
         roundDao.addRound(2, 9000);
 
-        System.out.println(roundDao.findPriceByRound(1));
         assertThat(roundDao.findPriceByRound(1)).isEqualTo(5000);
     }
 

@@ -43,7 +43,7 @@ public class WinningLottoDao {
 
     }
 
-    public void deleteAllWinningLotto() throws SQLException{
+    public void deleteAllWinningLotto() throws SQLException {
         PreparedStatement pstmt = conn.prepareStatement(DELETE_ALL_WINNING_LOTTO_SQL);
         pstmt.executeUpdate();
     }

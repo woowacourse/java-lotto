@@ -29,9 +29,10 @@
         </div>
     </form>
     <h2 class="mt-5 text-center font-weight-bold">회차별 통계</h2>
-    <form action="/result">
+    <form action="/result?round=">
         {{#rounds}}
-        <button type="submit" class="btn btn-outline-secondary mr-2" name="round">{{this}}회</button>
+        <input type="hidden" value="{{this}}" name="round">
+        <button type="submit" class="btn btn-outline-secondary mr-2">{{this}}회</button>
         {{/rounds}}
     </form>
     {{#message}}

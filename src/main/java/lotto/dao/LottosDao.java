@@ -27,8 +27,8 @@ public class LottosDao {
         for (Lotto lotto : lottos.getLottos()) {
             DBUtils.setLottoInDB(pstmt, lotto);
             pstmt.setInt(7, round);
+            pstmt.executeUpdate();
         }
-        pstmt.executeUpdate();
     }
 
     public Lottos findLottoByRound(int round) throws SQLException {
@@ -45,7 +45,7 @@ public class LottosDao {
         return new Lottos(lottos);
     }
 
-    public void deleteAllLottos() throws SQLException{
+    public void deleteAllLottos() throws SQLException {
         PreparedStatement pstmt = conn.prepareStatement(DELETE_ALL_LOTTOS_SQL);
         pstmt.executeUpdate();
     }
