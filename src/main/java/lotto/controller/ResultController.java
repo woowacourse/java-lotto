@@ -1,8 +1,6 @@
 package lotto.controller;
 
 import lotto.WinningLottoService;
-import lotto.dao.GameResultDao;
-import lotto.dao.TurnDao;
 import lotto.domain.*;
 import lotto.dto.GameResultDto;
 import lotto.util.LottoDtoConverter;
