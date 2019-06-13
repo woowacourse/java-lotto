@@ -1,13 +1,10 @@
 package lotto;
 
+import lotto.controller.LottoService;
 import lotto.domain.InputNegativeException;
 import lotto.domain.WinningResult;
-import lotto.domain.buyer.Budget;
-import lotto.domain.buyer.LottoBuyer;
-import lotto.domain.buyer.NoMoneyException;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNo;
-import lotto.domain.lotto.WinningLotto;
 import lotto.utils.LottoNoParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -16,45 +13,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
-    public static void main(String[] args) {
-        LottoBuyer buyer = makeBuyer();
+    private static LottoService service = new LottoService();
 
-        int countOfManualLotto = getCountOfManualLotto(buyer);
+    public static void main(String[] args) {
+        makeBudget();
+
+        int countOfManualLotto = getCountOfManualLotto();
         if (countOfManualLotto != 0) {
             OutputView.printManualInputMsg();
         }
-        buyer.buyManualLotto(makeManualLottos(countOfManualLotto));
-        buyer.buyAutoLotto();
-        OutputView.printContainingLottos(buyer);
+        service.makeManualLotto(makeManualLottos(countOfManualLotto));
+        service.makeAutoLotto();
+        OutputView.printContainingLottos(service.createLottoDtos());
 
-        WinningLotto winningLotto = makeWinningLotto();
+        makeWinningLotto();
 
-        WinningResult winningResult = buyer.checkWinningLotto(winningLotto);
+        WinningResult winningResult = service.checkWinningLotto();
         OutputView.printResult(winningResult);
     }
 
-    private static LottoBuyer makeBuyer() {
+    private static boolean makeBudget() {
         try {
-            return new LottoBuyer(new Budget(InputView.inputBudget()));
-        } catch (NoMoneyException nme) {
-            OutputView.printErrorMsg(nme);
-            System.exit(0);
-            return null;
+            service.makeBuyer(InputView.inputBudget());
+            return true;
         } catch (Exception e) {
             OutputView.printErrorMsg(e);
-            return makeBuyer();
         }
+        return makeBudget();
     }
 
-    private static int getCountOfManualLotto(LottoBuyer buyer) {
+    private static int getCountOfManualLotto() {
         try {
             int countOfManualLotto = InputView.inputCountOfManualLotto();
             validatePositive(countOfManualLotto);
-            buyer.validateAffordability(countOfManualLotto);
+            service.validataeAffordability(countOfManualLotto);
             return countOfManualLotto;
         } catch (Exception e) {
             OutputView.printErrorMsg(e);
-            return getCountOfManualLotto(buyer);
+            return getCountOfManualLotto();
         }
     }
 
@@ -81,10 +77,10 @@ public class LottoApplication {
         }
     }
 
-    private static WinningLotto makeWinningLotto() {
+    private static boolean makeWinningLotto() {
         try {
             List<LottoNo> winningLottoNo = LottoNoParser.parseToLottoNos(InputView.inputWinningLotto());
-            return WinningLotto.of(winningLottoNo, new LottoNo(InputView.inputBonusNo()));
+            return service.makeWinningLotto(winningLottoNo, new LottoNo(InputView.inputBonusNo()));
         } catch (Exception e) {
             OutputView.printErrorMsg(e);
             return makeWinningLotto();

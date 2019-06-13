@@ -1,11 +1,12 @@
 package lotto.view;
 
 import lotto.domain.WinningResult;
-import lotto.domain.buyer.LottoBuyer;
 import lotto.domain.lotto.LottoType;
+import lotto.dto.LottoDto;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
     private static final String NEW_LINE = System.getProperty("line.separator");
@@ -18,10 +19,13 @@ public class OutputView {
         System.out.println(NEW_LINE + "수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public static void printContainingLottos(LottoBuyer buyer) {
-        List<String> lottos = buyer.showLottos();
-        System.out.println(NEW_LINE + "수동으로 " + buyer.getCountOfLottoMatch(LottoType.MANUAL) + "개, "
-                + "자동으로 " + buyer.getCountOfLottoMatch(LottoType.AUTOMATIC) + "개를 구매하셨습니다.");
+    public static void printContainingLottos(List<LottoDto> lottoDtos) {
+        List<String> lottos = lottoDtos.stream().map(LottoDto::getLottoNo).collect(Collectors.toList());
+        System.out.println(NEW_LINE + "수동으로 " + lottoDtos.stream()
+                .filter(lottoDto -> lottoDto.getLottoType().equals(LottoType.MANUAL.getType())).count()
+                + "개, 자동으로 " + lottoDtos.stream()
+                .filter(lottoDto -> lottoDto.getLottoType().equals(LottoType.AUTOMATIC.getType())).count()
+                + "개를 구매하셨습니다.");
         for (String lotto : lottos) {
             System.out.println(lotto);
         }

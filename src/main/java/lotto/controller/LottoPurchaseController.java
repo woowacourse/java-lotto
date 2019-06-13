@@ -1,4 +1,4 @@
-package lotto.controller.purchase;
+package lotto.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -13,7 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoPurchaseController {
-    private static LottoPurchaseService service;
+    private static LottoService service;
+
+    static {
+        service = new LottoService();
+    }
+
     public static Route inputBudget = (Request request, Response response) -> {
         response.type("application/json");
         JsonElement jsonBody = new JsonParser().parse(request.body());
@@ -32,6 +37,7 @@ public class LottoPurchaseController {
         response.redirect("/input.html");
         return null;
     };
+
     public static Route inputManualLotto = (request, response) -> {
         response.type("application/json");
         String[] temps = request.queryMap("manualLottos").values();
@@ -43,6 +49,7 @@ public class LottoPurchaseController {
         }
         return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
     };
+
     public static Route inputAutoLotto = (request, response) -> {
         response.type("application/json");
         try {
@@ -53,6 +60,7 @@ public class LottoPurchaseController {
         }
         return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
     };
+
     public static Route showLotto = (request, response) -> {
         response.type("application/json");
         Map<String, Object> model = new HashMap<>();
@@ -64,8 +72,4 @@ public class LottoPurchaseController {
         }
         return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(model)));
     };
-
-    static {
-        service = new LottoPurchaseService();
-    }
 }

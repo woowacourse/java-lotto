@@ -27,19 +27,19 @@ public class Budget {
         }
     }
 
-    boolean canBuyLotto() {
+    public boolean canBuyLotto() {
         return budget >= Lotto.LOTTO_PRICE;
     }
 
-    boolean canBuyLotto(int countOfManualLotto) {
+    public boolean canBuyLotto(int countOfManualLotto) {
         return budget >= Lotto.LOTTO_PRICE * countOfManualLotto;
     }
 
-    void pay() {
+    public void pay() {
         budget -= Lotto.LOTTO_PRICE;
     }
 
-    void pay(int countOfManualLotto) {
+    public void pay(int countOfManualLotto) {
         budget -= Lotto.LOTTO_PRICE * countOfManualLotto;
     }
 }

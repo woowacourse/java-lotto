@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.dto.LottoDto;
 import lotto.utils.LottoNoGenerator;
 
 import java.util.Collections;
@@ -61,9 +62,16 @@ public class Lotto {
         return type.equals(lottoType);
     }
 
+    public LottoDto createLottoDto() {
+        LottoDto lottoDto = new LottoDto();
+        lottoDto.setLottoNo(toString());
+        lottoDto.setLottoType(lottoType.getType());
+        return lottoDto;
+    }
+
     @Override
     public String toString() {
-        StringJoiner sj = new StringJoiner(",", "[", "]");
+        StringJoiner sj = new StringJoiner(",");
         for (LottoNo no : lottoNo) {
             sj.add(String.valueOf(no.getNo()));
         }
