@@ -61,6 +61,16 @@ public class LottoPurchaseController {
         return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
     };
 
+    public static Route registerLotto = (request, response) -> {
+        try {
+            service.registerLotto();
+        } catch (Exception e) {
+            response.status(500);
+            return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
+        }
+        return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
+    };
+
     public static Route showLotto = (request, response) -> {
         response.type("application/json");
         Map<String, Object> model = new HashMap<>();

@@ -136,6 +136,22 @@
             },
             success:function(data){
                 console.log("success : AutoLotto");
+                registerLotto();
+            }
+        })
+    }
+
+    function registerLotto() {
+        $.ajax({
+            url:"registerLotto",
+            type:"POST",
+            dataType:'json',
+            error:function(request,status,error){
+                alert(JSON.parse(request.responseText).message);
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            success:function(data){
+                console.log("success : registerLotto");
                 showLotto();
             }
         })

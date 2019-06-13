@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import lotto.ConnectionFactory;
+import lotto.dao.LottoDao;
 import lotto.domain.WinningResult;
 import lotto.domain.buyer.Budget;
 import lotto.domain.buyer.LottoContainer;
@@ -11,6 +13,8 @@ import lotto.domain.lotto.WinningLotto;
 import lotto.dto.LottoDto;
 import lotto.utils.LottoNoParser;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +22,13 @@ import java.util.stream.Collectors;
 
 public class LottoService {
     private static final String NO_MONEY_ERROR_MSG = "구입 금액으로 원하는 장 수의 로또를 살 수 없습니다.";
+
+    private static LottoDao lottoDao;
+
+    {
+        Connection con = ConnectionFactory.connect();
+        lottoDao = new LottoDao(con);
+    }
 
     private Budget budget;
     private LottoContainer lottoContainer = new LottoContainer();
@@ -76,5 +87,12 @@ public class LottoService {
 
     public WinningResult checkWinningLotto() {
         return lottoContainer.createResult(winningLotto);
+    }
+
+    public void registerLotto() throws SQLException {
+        List<LottoDto> dtos = lottoContainer.createLottoDto();
+        for (LottoDto dto : dtos) {
+            lottoDao.addLotto(dto);
+        }
     }
 }
