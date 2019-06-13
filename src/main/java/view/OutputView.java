@@ -21,8 +21,18 @@ public class OutputView {
 
     public static void showAnalysisOf(Statistics statistics) {
         for (Rank rank : Rank.values()) {
-            System.out.println(rank.getRankExplanation() + " - " + statistics.countsOf(rank) + "개");
+            showRankStatisticsOf(statistics, rank);
         }
         System.out.println("총 수익률은 " + statistics.calculateEarningRates() * 100 + "% 입니다.");
+    }
+
+    private static void showRankStatisticsOf(Statistics statistics, Rank rank) {
+        if (rank == Rank.SECOND) {
+            System.out.println(rank.getNumberOfMatching() + "개 일치, 보너스번호 일치 ("
+                    + rank.getWinningMoney() + "원) - " + statistics.countsOf(rank) + "개");
+            return;
+        }
+        System.out.println(rank.getNumberOfMatching() + "개 일치 (" + rank.getWinningMoney() + "원) - "
+                + statistics.countsOf(rank) + "개");
     }
 }

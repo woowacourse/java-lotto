@@ -3,17 +3,11 @@ package domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000) {
-        @Override
-        public String getRankExplanation() {
-            return SECOND.numberOfMatching + "개 일치, 보너스 볼 일치 "
-                    + "(" + SECOND.winningMoney + "원)";
-        }
-    },
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     private int numberOfMatching;
@@ -44,7 +38,7 @@ public enum Rank {
         return winningMoney;
     }
 
-    public String getRankExplanation() {
-        return numberOfMatching + "개 일치" + "(" + winningMoney + "원)";
+    public int getNumberOfMatching() {
+        return numberOfMatching;
     }
 }
