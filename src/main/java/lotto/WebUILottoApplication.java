@@ -102,9 +102,7 @@ public class WebUILottoApplication {
         LottoNumbersGenerator manualLottoNumbersGenerator =
                 ManualLottoNumbersGenerator.getInstance(NumbersSplitter.split(winningNumber));
         LottoNumbers winningNumbers = manualLottoNumbersGenerator.generate();
-
         LottoNumber bonusNumber = LottoNumber.valueOf(Integer.parseInt(bonusBall));
-
         return new WinningInformation(winningNumbers, bonusNumber);
     }
 }

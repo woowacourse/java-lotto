@@ -28,15 +28,16 @@ public class RoundInformationService {
 
     public static Map<String, Object> loadRoundInformation(int round) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            Map<String, Object> model = new HashMap<>();
             WinningInformationDAO winningInformationDAO = WinningInformationDAO.getInstance(connection);
-            WinningInformation winningInformation = winningInformationDAO.findWinningInformationByRound(round);
             LottoDAO lottoDAO = LottoDAO.getInstance(connection);
+
+            WinningInformation winningInformation = winningInformationDAO.findWinningInformationByRound(round);
             Lottos lottos = lottoDAO.findLottosByRound(round);
 
             LottoGame lottoGame = new LottoGame(winningInformation);
             LottoResult lottoResult = lottoGame.play(lottos);
 
+            Map<String, Object> model = new HashMap<>();
             model.put("winningInfo", OutputViewFactory.ouputWinningInfo(winningInformation));
             model.put("lottos", OutputViewFactory.outputLottos(lottos));
             model.put("result", OutputViewFactory.outputResult(lottoResult));

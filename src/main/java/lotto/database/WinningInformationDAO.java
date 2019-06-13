@@ -13,6 +13,8 @@ public class WinningInformationDAO {
     private static final int WINNING_NUMBER_START_INDEX = 1;
     private static final int WINNING_NUMBER_END_INDEX = 6;
     private static final int BONUS_BALL_INDEX = 7;
+    private static final int ROUND_INDEX = 1;
+    private static final int SELECT_WINNING_INFO_QUERY_ROUND_INDEX = 1;
     private static final String INSERT_WINNING_INFO_QUERY =
             "INSERT INTO winningInfo(" +
                     "winning_number1," +
@@ -27,6 +29,7 @@ public class WinningInformationDAO {
     private static final String DELETE_WINNING_INFO_QUERY = "DELETE FROM winningInfo";
     private static final String INIT_WINNING_INFO_AUTO_INCREMENT_QUERY = "ALTER TABLE winningInfo AUTO_INCREMENT=1";
     private static final String INIT_LOTTO_AUTO_INCREMENT_QUERY = "ALTER TABLE lotto AUTO_INCREMENT=1";
+
     private static WinningInformationDAO winningInformationDAO;
     private static Connection connection;
 
@@ -44,7 +47,7 @@ public class WinningInformationDAO {
     /**
      * 당첨 정보를 데이터베이스에 저장하고 당첨 정보의 회차를 반환한다.
      *
-     * @param winningInformation
+     * @param winningInformation 당첨 정보
      * @return 당첨 정보의 회차를 반환
      * @throws SQLException
      */
@@ -66,31 +69,36 @@ public class WinningInformationDAO {
             if (!resultSet.next()) {
                 throw new SQLException();
             }
-            return resultSet.getInt(1);
+            return resultSet.getInt(ROUND_INDEX);
         }
     }
 
     public WinningInformation findWinningInformationByRound(int round) throws SQLException {
         try (PreparedStatement pstmt = connection.prepareStatement(SELECT_WINNING_INFO_QUERY)) {
-            pstmt.setInt(1, round);
+            pstmt.setInt(SELECT_WINNING_INFO_QUERY_ROUND_INDEX, round);
             return makeWinningInformation(pstmt);
         }
     }
 
     private WinningInformation makeWinningInformation(PreparedStatement pstmt) throws SQLException {
         try (ResultSet resultSet = pstmt.executeQuery()) {
-            if (!resultSet.next()) {
-                throw new RoundNotFoundException();
-            }
-
-            List<Integer> numbers = new ArrayList<>();
-            for (int i = WINNING_NUMBER_START_INDEX; i <= WINNING_NUMBER_END_INDEX; i++) {
-                numbers.add(resultSet.getInt(i));
-            }
-            ManualLottoNumbersGenerator manualLottoNumbersGenerator = ManualLottoNumbersGenerator.getInstance(numbers);
+            ManualLottoNumbersGenerator manualLottoNumbersGenerator =
+                    ManualLottoNumbersGenerator.getInstance(makeNumbers(resultSet));
             LottoNumber lottoNumber = LottoNumber.valueOf(resultSet.getInt(BONUS_BALL_INDEX));
             return new WinningInformation(manualLottoNumbersGenerator.generate(), lottoNumber);
         }
+    }
+
+    private List<Integer> makeNumbers(ResultSet resultSet) throws SQLException {
+        if (!resultSet.next()) {
+            throw new RoundNotFoundException();
+        }
+
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = WINNING_NUMBER_START_INDEX; i <= WINNING_NUMBER_END_INDEX; i++) {
+            numbers.add(resultSet.getInt(i));
+        }
+        return numbers;
     }
 
     public void clear() throws SQLException {

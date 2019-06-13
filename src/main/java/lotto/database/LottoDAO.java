@@ -12,6 +12,7 @@ public class LottoDAO {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int NUMBER_START_INDEX = 1;
     private static final int ROUND_INDEX = 7;
+    private static final int SELECT_LOTTOS_QUERY_ROUND_INDEX = 1;
     private static final String INSERT_LOTTO_QUERY =
             "INSERT INTO lotto(number1, number2, number3, number4, number5, number6, round)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -39,18 +40,18 @@ public class LottoDAO {
 
     public void addLotto(Lotto lotto, int round) throws SQLException {
         try (PreparedStatement pstmt = connection.prepareStatement(INSERT_LOTTO_QUERY)) {
-            pstmt.setInt(ROUND_INDEX, round);
             List<Integer> lottoNumbers = lotto.getLottoNumbers();
             for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
                 pstmt.setInt(NUMBER_START_INDEX + i, lottoNumbers.get(i));
             }
+            pstmt.setInt(ROUND_INDEX, round);
             pstmt.executeUpdate();
         }
     }
 
     public Lottos findLottosByRound(int round) throws SQLException {
         try (PreparedStatement pstmt = connection.prepareStatement(SELECT_LOTTOS_QUERY)) {
-            pstmt.setInt(1, round);
+            pstmt.setInt(SELECT_LOTTOS_QUERY_ROUND_INDEX, round);
             return makeLottos(pstmt);
         }
     }

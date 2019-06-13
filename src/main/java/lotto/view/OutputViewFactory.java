@@ -14,6 +14,7 @@ public class OutputViewFactory {
     private static final String JOINER = ", ";
     private static final String PURCHASE_MESSAGE_FORMAT = "수동으로 %d장, 자동으로 %d장 구매했습니다.";
     private static final String YIELD_FORMAT = "총 수익률은 %.1f%% 입니다.";
+    private static final String WINNING_INFO_FORMAT = "당첨 번호 : %s, 보너스 볼 : %d";
 
     public static String outputLottosPurchaseMessage(PurchaseInformation purchaseInformation) {
         return String.format(PURCHASE_MESSAGE_FORMAT,
@@ -60,7 +61,8 @@ public class OutputViewFactory {
     }
 
     public static String ouputWinningInfo(WinningInformation winningInformation) {
-        return "당첨 번호 : " + makeNumbersView(winningInformation.getWinningLottoNumbers())
-                + ", 보너스 볼 : " + winningInformation.getBonusNumber();
+        return String.format(WINNING_INFO_FORMAT,
+                makeNumbersView(winningInformation.getWinningLottoNumbers()),
+                winningInformation.getBonusNumber());
     }
 }
