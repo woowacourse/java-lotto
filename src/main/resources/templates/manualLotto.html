@@ -39,22 +39,6 @@
         </div>
     </div>
 </form>
+<script type="text/javascript" src="lotto.js"></script>
 </body>
-<script>
-    function makeReadOnly() {
-        var winningArea = document.getElementById("winningLotto");
-        var bonusArea = document.getElementById("bonusBall");
-        winningArea.readOnly = true;
-        bonusArea.readOnly = true;
-    }
-    function releaseReadOnly() {
-        var winningArea = document.getElementById("winningLotto");
-        var bonusArea = document.getElementById("bonusBall");
-        winningArea.readOnly = false;
-        bonusArea.readOnly = false;
-    }
-    function cancel() {
-        document.getElementById('winningLotto').value = document.getElementById('bonusBall').value = '';
-    }
-</script>
 </html>
