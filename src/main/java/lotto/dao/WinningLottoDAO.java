@@ -56,7 +56,8 @@ public class WinningLottoDAO {
                 "FROM lotto.lotto as l " +
                 "JOIN lotto.winninglotto as w ON w.lotto_id = l.id " +
                 "JOIN lotto.lottonumber as ln ON l.id = ln.lotto_id " +
-                "WHERE w.id = ?";
+                "WHERE w.id = ? " +
+                "GROUP BY l.id;";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, winningLottoId);
         ResultSet rs = pstmt.executeQuery();
