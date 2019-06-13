@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.dao.UserLottoDAO;
 import lotto.dao.WinningLottoDAO;
 import lottogame.domain.WinningLotto;
 

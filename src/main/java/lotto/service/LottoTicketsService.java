@@ -14,4 +14,13 @@ public class LottoTicketsService {
             UserLottoDAO.getInstance().insertLotto(round, lottoNumbers);
         }
     }
+
+    public static LottoTickets findTicketsByRound(int round) {
+        LottoTickets lottoTickets = new LottoTickets();
+        List<String> lottoNumbers = UserLottoDAO.getInstance().findLottosByRound(round);
+        for (String lottoNumber : lottoNumbers) {
+            lottoTickets.addManualLotto(lottoNumber);
+        }
+        return lottoTickets;
+    }
 }
