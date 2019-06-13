@@ -39,7 +39,7 @@
 
 <body>
     <h1>로또</h1>
-    <a href="/buyLotto" class="btn btn-primary">로또 구매</a> <a href="/lookupLotto" class="btn btn-primary">회차 조회</a>
+    <a href="/buylotto" class="btn btn-primary">로또 구매</a> <a href="/lookuplotto" class="btn btn-primary">회차 조회</a>
 
     <div id="nextTimes"></div>
     
@@ -110,7 +110,7 @@
 
                 $.ajax({
                     method: 'get',
-                    url: '/lotto/winningLotto/' + times,
+                    url: '/lotto/winninglotto/' + times,
                     success: function (data) {
                         $('#lookupWinningLotto').empty();
                         $('#lookupWinningLotto').append('<h2>당첨 번호</h2>');
@@ -121,7 +121,7 @@
 
                 $.ajax({
                     method: 'get',
-                    url: '/lotto/lottoResult/' + times,
+                    url: '/lotto/lottoresult/' + times,
                     success: function (data) {
                         var json_obj = $.parseJSON(data);
                         $('#lookupResult').empty();
@@ -130,7 +130,7 @@
 
                         $.ajax({
                             method: 'get',
-                            url: '/lotto/lottoYield/' + times,
+                            url: '/lotto/lottoyield/' + times,
                             success: function (data) {
                                 child = '<div class="result">총 수익율은 ' + data + '% 입니다.</div>';
                                 $('#lookupResult').append(child);
@@ -169,7 +169,7 @@
             function printResult(result, divId) {
                 $.ajax({
                     method: 'get',
-                    url: '/lottoResult',
+                    url: '/lottoresult',
                     success: function (data) {
                         var json_obj = $.parseJSON(data);
                         for (var i = 0 in json_obj) {
@@ -192,7 +192,7 @@
                 var times;
                 $.ajax({
                     method: 'get',
-                    url: '/lottoNextTimes',
+                    url: '/lottonexttimes',
                     success: function (data) {
                         console.log(data);
                         $('#nextTimes').empty();

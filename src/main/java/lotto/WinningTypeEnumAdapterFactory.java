@@ -10,7 +10,7 @@ import lotto.domain.WinningType;
 
 import java.io.IOException;
 
-public class MyEnumAdapterFactory implements TypeAdapterFactory {
+public class WinningTypeEnumAdapterFactory implements TypeAdapterFactory {
 
     @Override
     public <T> TypeAdapter<T> create(final Gson gson, final TypeToken<T> type) {
