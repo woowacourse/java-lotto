@@ -3,6 +3,7 @@ package lotto.dao;
 import lottogame.domain.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,5 +28,16 @@ public class LottoResultDAOTest {
     @Test
     void 새로운_라운드_생성_테스트() {
         LottoResultDAO.getInstance().insertNewLottoRound();
+    }
+
+    @Test
+    void 해당_회차에_대한_result_결과_테스트() {
+        Map<Rank,Integer> test = new HashMap<>();
+        test.put(Rank.FIRST,0);
+        test.put(Rank.SECOND,0);
+        test.put(Rank.THIRD,0);
+        test.put(Rank.FOURTH,0);
+        test.put(Rank.FIFTH,0);
+        assertThat(LottoResultDAO.getInstance().findLottoResultByRound(14)).isEqualTo(test);
     }
 }
