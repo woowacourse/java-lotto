@@ -10,6 +10,10 @@ public class LottoResult {
         this.result.remove(Rank.MISS);
     }
 
+    public Map<Rank, Integer> getResult() {
+        return result;
+    }
+
     public long getRateOfLotto(Money money) {
         double profits = 0;
 

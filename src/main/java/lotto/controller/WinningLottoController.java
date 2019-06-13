@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.service.LottoResultService;
 import lotto.service.LottoTicketsService;
 import lotto.service.WinningLottoService;
 import lottogame.domain.*;
@@ -11,7 +12,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import static lotto.WebUILottoApplication.render;
-import static spark.Spark.*;
 
 public class WinningLottoController {
 
@@ -28,6 +28,8 @@ public class WinningLottoController {
         WinningLottoService.insertWinningLotto(round, winningLotto);
         LottoTickets lottoTickets = LottoTicketsService.findTicketsByRound(round);
         LottoResult lottoResult = LottoResultGenerator.create(lottoTickets, winningLotto);
+        LottoResultService.updateLottoResult(round, lottoResult);
+        LottoResultService.insertNewLottoRound();
         model.put("lottoResult", lottoResult);
         return render(model, "lottoresult.html");
     }
