@@ -23,19 +23,16 @@ public class WebUILottoApplication {
     private static final String RATE_UNIT = "%";
     private static final String AMOUNT_UNIT = "원";
 
-    private static final WebUILottoData webUILottoData = new WebUILottoData();
-    private static final GameDTO gameDTO = new GameDTO();
+    private static WebUILottoData webUILottoData = new WebUILottoData();
 
     public static void main(String[] args) {
-        get("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            return render(model, "index.html");
-        });
+        get("/", (req, res) ->
+            render(EmptyModel.get(), "index.html")
+        );
 
-        get("/buy", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            return render(model, "purchase.html");
-        });
+        get("/buy", (req, res) ->
+            render(EmptyModel.get(), "purchase.html")
+        );
 
         get("/lookup", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -52,11 +49,7 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             model.put("games_id", games_id);
             model.put("lottos", lottos);
-            model.put("winning_number", gameDTO1.getWinningNumbers());
-            model.put("bonus", gameDTO1.getBonusNumber());
-            model.put("result", gameDTO1.getResult());
-            model.put("return_rate", gameDTO1.getReturnRate());
-            model.put("return_amount", gameDTO1.getReturnAmount());
+            model.put("game_info", gameDTO1);
             return render(model, "game_results.html");
         });
 
@@ -118,19 +111,12 @@ public class WebUILottoApplication {
         });
 
         get("/enroll", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
             GameDAO gameDAO = new GameDAO();
-            List<String> result = WebParser.get();
-            Long rate = Math.round(LottoResult.rateOfReturn(webUILottoData.getPurchaseAmount()));
-            gameDTO.setWinningNumbers(webUILottoData.getWinningNumbers());
-            gameDTO.setBonusNumber(webUILottoData.getBonusNumber());
-            gameDTO.setResult(WebParser.forSQL(result));
-            gameDTO.setReturnAmount(LottoResult.resultAmount() + AMOUNT_UNIT);
-            gameDTO.setReturnRate(rate + RATE_UNIT);
+            GameDTO gameDTO = getGameDTO();
             gameDAO.addGameInformation(gameDTO);
             gameDAO.addLottoNumbers(webUILottoData.getTotalLottoGames().allGames());
             LottoResult.init();
-            return render(model, "enroll.html");
+            return render(EmptyModel.get(), "enroll.html");
         });
 
         exception(IllegalArgumentException.class, (e, req, res) -> {
@@ -140,6 +126,18 @@ public class WebUILottoApplication {
                     "  <input type=\"submit\" value=\"홈으로\"/>\n" +
                     "</form>");
         });
+    }
+
+    private static GameDTO getGameDTO() {
+        GameDTO gameDTO = new GameDTO();
+        List<String> result = WebParser.get();
+        Long rate = Math.round(LottoResult.rateOfReturn(webUILottoData.getPurchaseAmount()));
+        gameDTO.setWinningNumbers(webUILottoData.getWinningNumbers());
+        gameDTO.setBonusNumber(webUILottoData.getBonusNumber());
+        gameDTO.setResult(WebParser.forSQL(result));
+        gameDTO.setReturnAmount(LottoResult.resultAmount() + AMOUNT_UNIT);
+        gameDTO.setReturnRate(rate + RATE_UNIT);
+        return gameDTO;
     }
 
     private static String render(Map<String, Object> model, String templatePath) {

@@ -15,8 +15,9 @@
   </div>
   <h2>결과</h2>
   <div>
-    <div>당첨 번호 - {{winning_number}}</div>
-    <div>보너스 번호 - {{bonus}}</div>
+    {{#game_info}}
+    <div>당첨 번호 - {{winningNumbers}}</div>
+    <div>보너스 번호 - {{bonusNumber}}</div>
     <div>
       결과 : <br>
       {{#result}}
@@ -24,8 +25,9 @@
       <br>
       {{/result}}
     </div>
-    <div>수익률 - {{return_rate}}</div>
-    <div>당첨금 - {{return_amount}}</div>
+    <div>수익률 - {{returnRate}}</div>
+    <div>당첨금 - {{returnAmount}}</div>
+    {{/game_info}}
   </div>
   <form action="/">
     <input type="submit" value="홈으로"/>
