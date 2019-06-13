@@ -1,3 +1,4 @@
+/*
 package lotto;
 
 import spark.ModelAndView;
@@ -20,3 +21,4 @@ public class WebUILottoApplication {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 }
+*/
