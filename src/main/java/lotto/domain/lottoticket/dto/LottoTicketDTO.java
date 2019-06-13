@@ -1,6 +1,6 @@
 package lotto.domain.lottoticket.dto;
 
-public class LottoTicketDto {
+public class LottoTicketDTO {
     private int firstNum;
     private int secondNum;
     private int thirdNum;

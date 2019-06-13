@@ -1,13 +1,13 @@
 package lotto.application.lottomoney;
 
 import lotto.domain.lottomoney.MoneyForLotto;
-import lotto.domain.lottomoney.dto.LottoMoneyDto;
+import lotto.domain.lottomoney.dto.LottoMoneyDTO;
 
 class LottoMoneyAssembler {
     private LottoMoneyAssembler() {
     }
 
-    static LottoMoneyDto makeLottoMoneyDto(MoneyForLotto moneyForLotto) {
-        return new LottoMoneyDto(moneyForLotto.getNumOfLotto(), moneyForLotto.getChange());
+    static LottoMoneyDTO makeLottoMoneyDto(MoneyForLotto moneyForLotto) {
+        return new LottoMoneyDTO(moneyForLotto.getNumOfLotto(), moneyForLotto.getChange());
     }
 }

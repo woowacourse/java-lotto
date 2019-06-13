@@ -1,10 +1,10 @@
 package lotto.domain.lottomoney.dto;
 
-public class LottoMoneyDto {
+public class LottoMoneyDTO {
     private long numOfLotto;
     private long change;
 
-    public LottoMoneyDto(long numOfLotto, long change) {
+    public LottoMoneyDTO(long numOfLotto, long change) {
         this.numOfLotto = numOfLotto;
         this.change = change;
     }

@@ -3,8 +3,8 @@ package lotto.application.lottoresult;
 import lotto.application.LottoDAO;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberPool;
-import lotto.domain.lottoticket.dto.LottoTicketDto;
-import lotto.domain.lottoticket.dto.WinningLottoDto;
+import lotto.domain.lottoticket.dto.LottoTicketDTO;
+import lotto.domain.lottoticket.dto.WinningLottoDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,9 +24,9 @@ public class WinningLottoDAO {
         return winningLottoDAO;
     }
 
-    public void saveWinningLotto(int currentRound, WinningLottoDto winningLottoDto) {
+    public void saveWinningLotto(int currentRound, WinningLottoDTO winningLottoDto) {
         Connection connection = LottoDAO.getConnection();
-        LottoTicketDto lottoTicketDto = winningLottoDto.getLottoTicketDto();
+        LottoTicketDTO lottoTicketDto = winningLottoDto.getLottoTicketDto();
         LottoNumber bonusBall = winningLottoDto.getBonusBall();
         try {
             String query = "insert into winning_lotto values(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -47,7 +47,7 @@ public class WinningLottoDAO {
         }
     }
 
-    public WinningLottoDto fetchWinningLotto(int round) {
+    public WinningLottoDTO fetchWinningLotto(int round) {
         Connection connection = LottoDAO.getConnection();
         try {
             String query = "SELECT * FROM winning_lotto WHERE round = ?";
@@ -55,7 +55,7 @@ public class WinningLottoDAO {
             pstmt.setInt(1, round);
             ResultSet rs = pstmt.executeQuery();
 
-            if (!rs.next()) return new WinningLottoDto();
+            if (!rs.next()) return new WinningLottoDTO();
 
             return makeWinningLottoFrom(rs);
         } catch (SQLException e) {
@@ -63,12 +63,12 @@ public class WinningLottoDAO {
         } finally {
             LottoDAO.closeConnection(connection);
         }
-        return new WinningLottoDto();
+        return new WinningLottoDTO();
     }
 
-    private WinningLottoDto makeWinningLottoFrom(ResultSet rs) throws SQLException {
-        WinningLottoDto winningLottoDto = new WinningLottoDto();
-        LottoTicketDto lottoTicketDto = new LottoTicketDto();
+    private WinningLottoDTO makeWinningLottoFrom(ResultSet rs) throws SQLException {
+        WinningLottoDTO winningLottoDto = new WinningLottoDTO();
+        LottoTicketDTO lottoTicketDto = new LottoTicketDTO();
         lottoTicketDto.setFirstNum(rs.getInt("first_num"));
         lottoTicketDto.setSecondNum(rs.getInt("second_num"));
         lottoTicketDto.setThirdNum(rs.getInt("third_num"));

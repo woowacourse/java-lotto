@@ -3,8 +3,8 @@ package lotto.controller;
 import lotto.application.lottoticket.LottoTicketService;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
-import lotto.domain.lottoticket.dto.LottoTicketDto;
-import lotto.domain.lottoticket.dto.LottoTicketsDto;
+import lotto.domain.lottoticket.dto.LottoTicketDTO;
+import lotto.domain.lottoticket.dto.LottoTicketsDTO;
 import spark.Route;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class LottoTicketController {
         numbers.add(req.queryParams("sixthNum"));
 
         LottoTicket lottoTicket = LottoTicketService.makeLottoTicket(numbers);
-        LottoTicketDto lottoTicketDto = LottoTicketService.getLottoTicketDto(lottoTicket);
+        LottoTicketDTO lottoTicketDto = LottoTicketService.getLottoTicketDto(lottoTicket);
         LottoTicketService.savePurchasedLottoTicket(lottoTicketDto);
 
         return JsonUtil.convertDtoToJsonStringWith(res, lottoTicketDto);
@@ -41,7 +41,7 @@ public class LottoTicketController {
 
         LottoTickets lottoTickets = LottoTicketService.getAutomaticLottoTickets(numOfAutomaticLotto);
 
-        LottoTicketsDto lottoTicketsDto = LottoTicketService.getLottoTicketsDto(lottoTickets);
+        LottoTicketsDTO lottoTicketsDto = LottoTicketService.getLottoTicketsDto(lottoTickets);
         LottoTicketService.savePurchasedLottoTickets(lottoTicketsDto);
 
         return JsonUtil.convertDtoToJsonStringWith(res, lottoTicketsDto);

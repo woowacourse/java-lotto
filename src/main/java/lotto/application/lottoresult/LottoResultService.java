@@ -1,10 +1,10 @@
 package lotto.application.lottoresult;
 
 import lotto.domain.lottoresult.WinningLotto;
-import lotto.domain.lottoticket.dto.WinningLottoDto;
+import lotto.domain.lottoticket.dto.WinningLottoDTO;
 
 public class LottoResultService {
-    public static void saveWinningLotto(WinningLottoDto winningLottoDto) {
+    public static void saveWinningLotto(WinningLottoDTO winningLottoDto) {
         int latestRoundNum = fetchCurrentRound();
 
         WinningLottoDAO winningLottoDAO = WinningLottoDAO.getInstance();
@@ -16,7 +16,7 @@ public class LottoResultService {
         return lottoResultDAO.getLatestRoundNum();
     }
 
-    public static WinningLottoDto getWinningLottoDto(WinningLotto winningLotto) {
+    public static WinningLottoDTO getWinningLottoDto(WinningLotto winningLotto) {
         return LottoResultAssembler.getWinningLottoDto(winningLotto);
     }
 }

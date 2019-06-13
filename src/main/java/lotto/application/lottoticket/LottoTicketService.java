@@ -6,8 +6,8 @@ import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoticket.InvalidLottoTicketException;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
-import lotto.domain.lottoticket.dto.LottoTicketDto;
-import lotto.domain.lottoticket.dto.LottoTicketsDto;
+import lotto.domain.lottoticket.dto.LottoTicketDTO;
+import lotto.domain.lottoticket.dto.LottoTicketsDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +34,7 @@ public class LottoTicketService {
         return new LottoTicket(lottoNumbers);
     }
 
-    public static LottoTicketDto getLottoTicketDto(LottoTicket lottoTicket) {
+    public static LottoTicketDTO getLottoTicketDto(LottoTicket lottoTicket) {
         return LottoTicketAssembler.getLottoTicketDto(lottoTicket);
     }
 
@@ -43,7 +43,7 @@ public class LottoTicketService {
         return LottoTicketAssembler.getAutomaticLottoTickets(numOfAutomaticLotto);
     }
 
-    public static LottoTicketsDto getLottoTicketsDto(LottoTickets automaticTickets) {
+    public static LottoTicketsDTO getLottoTicketsDto(LottoTickets automaticTickets) {
         return LottoTicketAssembler.getLottoTicketsDto(automaticTickets);
     }
 
@@ -51,20 +51,20 @@ public class LottoTicketService {
         return LottoNumberPool.valueOf(Integer.parseInt(num));
     }
 
-    public static void savePurchasedLottoTicket(LottoTicketDto lottoTicketDto) {
+    public static void savePurchasedLottoTicket(LottoTicketDTO lottoTicketDto) {
         int currentRound = LottoResultService.fetchCurrentRound();
         saveLottoTicket(currentRound, lottoTicketDto);
     }
 
-    private static void saveLottoTicket(int currentRound, LottoTicketDto lottoTicketDto) {
+    private static void saveLottoTicket(int currentRound, LottoTicketDTO lottoTicketDto) {
         LottoTicketDAO lottoTicketDAO = LottoTicketDAO.getInstance();
         lottoTicketDAO.savePurchasedLotto(currentRound, lottoTicketDto);
     }
 
-    public static void savePurchasedLottoTickets(LottoTicketsDto lottoTicketsDto) {
+    public static void savePurchasedLottoTickets(LottoTicketsDTO lottoTicketsDto) {
         int currentRound = LottoResultService.fetchCurrentRound();
-        List<LottoTicketDto> dtos = lottoTicketsDto.getLottoTicketDtos();
-        for (LottoTicketDto lottoTicketDto : dtos) {
+        List<LottoTicketDTO> dtos = lottoTicketsDto.getLottoTicketDTOS();
+        for (LottoTicketDTO lottoTicketDto : dtos) {
             saveLottoTicket(currentRound, lottoTicketDto);
         }
     }

@@ -2,8 +2,8 @@ package lotto.application.lottoticket;
 
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
-import lotto.domain.lottoticket.dto.LottoTicketDto;
-import lotto.domain.lottoticket.dto.LottoTicketsDto;
+import lotto.domain.lottoticket.dto.LottoTicketDTO;
+import lotto.domain.lottoticket.dto.LottoTicketsDTO;
 import lotto.domain.lottoticket.ticketingmachine.LottoTicketingMachine;
 import lotto.domain.lottoticket.ticketingmachine.RandomLottoNumberGenerator;
 
@@ -14,8 +14,8 @@ class LottoTicketAssembler {
     private LottoTicketAssembler() {
     }
 
-    static LottoTicketDto getLottoTicketDto(LottoTicket lottoTicket) {
-        LottoTicketDto lottoTicketDto = new LottoTicketDto();
+    static LottoTicketDTO getLottoTicketDto(LottoTicket lottoTicket) {
+        LottoTicketDTO lottoTicketDto = new LottoTicketDTO();
         lottoTicketDto.setFirstNum(lottoTicket.getLottoNumber(0).getNumber());
         lottoTicketDto.setSecondNum(lottoTicket.getLottoNumber(1).getNumber());
         lottoTicketDto.setThirdNum(lottoTicket.getLottoNumber(2).getNumber());
@@ -30,15 +30,15 @@ class LottoTicketAssembler {
                 , new RandomLottoNumberGenerator());
     }
 
-    static LottoTicketsDto getLottoTicketsDto(LottoTickets automaticTickets) {
-        List<LottoTicketDto> lottoTicketDtoes = new ArrayList<>();
+    static LottoTicketsDTO getLottoTicketsDto(LottoTickets automaticTickets) {
+        List<LottoTicketDTO> lottoTicketDtoes = new ArrayList<>();
         for (int index = 0; index < automaticTickets.size(); index++) {
-            LottoTicketDto lottoTicketDto = getLottoTicketDto(automaticTickets.getTicket(index));
+            LottoTicketDTO lottoTicketDto = getLottoTicketDto(automaticTickets.getTicket(index));
             lottoTicketDtoes.add(lottoTicketDto);
         }
 
-        LottoTicketsDto lottoTicketsDto = new LottoTicketsDto();
-        lottoTicketsDto.setLottoTicketDtos(lottoTicketDtoes);
+        LottoTicketsDTO lottoTicketsDto = new LottoTicketsDTO();
+        lottoTicketsDto.setLottoTicketDTOS(lottoTicketDtoes);
         return lottoTicketsDto;
     }
 }

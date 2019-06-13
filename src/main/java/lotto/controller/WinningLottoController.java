@@ -5,7 +5,7 @@ import lotto.application.lottoticket.LottoTicketService;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottoresult.WinningLotto;
 import lotto.domain.lottoticket.LottoTicket;
-import lotto.domain.lottoticket.dto.WinningLottoDto;
+import lotto.domain.lottoticket.dto.WinningLottoDTO;
 import spark.Route;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class WinningLottoController {
         LottoNumber bonusBall = LottoTicketService.makeBonusBall(req.queryParams("bonusNum"));
 
         WinningLotto winningLotto = WinningLotto.of(winningTicket, bonusBall);
-        WinningLottoDto winningLottoDto = LottoResultService.getWinningLottoDto(winningLotto);
+        WinningLottoDTO winningLottoDto = LottoResultService.getWinningLottoDto(winningLotto);
         LottoResultService.saveWinningLotto(winningLottoDto);
 
         return JsonUtil.convertDtoToJsonStringWith(res, winningLottoDto);

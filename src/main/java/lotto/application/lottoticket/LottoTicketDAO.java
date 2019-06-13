@@ -1,8 +1,8 @@
 package lotto.application.lottoticket;
 
 import lotto.application.LottoDAO;
-import lotto.domain.lottoticket.dto.LottoTicketDto;
-import lotto.domain.lottoticket.dto.LottoTicketsDto;
+import lotto.domain.lottoticket.dto.LottoTicketDTO;
+import lotto.domain.lottoticket.dto.LottoTicketsDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +22,7 @@ public class LottoTicketDAO {
         return lottoTicketDAO;
     }
 
-    public void savePurchasedLotto(int currentRound, LottoTicketDto lottoTicketDto) {
+    public void savePurchasedLotto(int currentRound, LottoTicketDTO lottoTicketDto) {
         Connection connection = LottoDAO.getConnection();
         try {
             int countOfRoundByGroup = calculateCountOfRoundByGroup(currentRound);
@@ -63,9 +63,9 @@ public class LottoTicketDAO {
         return 0;
     }
 
-    public LottoTicketsDto fetchPurchasedLottoTicketsOn(int round) {
+    public LottoTicketsDTO fetchPurchasedLottoTicketsOn(int round) {
         Connection connection = LottoDAO.getConnection();
-        LottoTicketsDto lottoTicketsDto = new LottoTicketsDto();
+        LottoTicketsDTO lottoTicketsDto = new LottoTicketsDTO();
 
         try {
             String query = "SELECT * FROM purchased_lotto WHERE round = ?";
@@ -82,9 +82,9 @@ public class LottoTicketDAO {
         return lottoTicketsDto;
     }
 
-    private void fillLottoTicketsDto(ResultSet rs, LottoTicketsDto lottoTicketsDto) throws SQLException {
+    private void fillLottoTicketsDto(ResultSet rs, LottoTicketsDTO lottoTicketsDto) throws SQLException {
         while (rs.next()) {
-            LottoTicketDto lottoTicketDto = new LottoTicketDto();
+            LottoTicketDTO lottoTicketDto = new LottoTicketDTO();
             lottoTicketDto.setFirstNum(rs.getInt("first_num"));
             lottoTicketDto.setSecondNum(rs.getInt("second_num"));
             lottoTicketDto.setThirdNum(rs.getInt("third_num"));

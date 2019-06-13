@@ -2,15 +2,15 @@ package lotto.domain.lottoticket.dto;
 
 import lotto.domain.lottonumber.LottoNumber;
 
-public class WinningLottoDto {
-    private LottoTicketDto lottoTicketDto;
+public class WinningLottoDTO {
+    private LottoTicketDTO lottoTicketDto;
     private LottoNumber bonusBall;
 
-    public LottoTicketDto getLottoTicketDto() {
+    public LottoTicketDTO getLottoTicketDto() {
         return lottoTicketDto;
     }
 
-    public void setLottoTicketDto(LottoTicketDto lottoTicketDto) {
+    public void setLottoTicketDto(LottoTicketDTO lottoTicketDto) {
         this.lottoTicketDto = lottoTicketDto;
     }
 

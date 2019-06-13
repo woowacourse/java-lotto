@@ -4,7 +4,7 @@ import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoresult.WinningLotto;
 import lotto.domain.lottoticket.LottoTicket;
-import lotto.domain.lottoticket.dto.WinningLottoDto;
+import lotto.domain.lottoticket.dto.WinningLottoDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,14 +29,14 @@ class WinningLottoDAOTest {
         LottoTicket winningTicket = new LottoTicket(winningTicketNumbers);
         LottoNumber bonusBall = LottoNumberPool.valueOf(4);
         WinningLotto winningLotto = WinningLotto.of(winningTicket, bonusBall);
-        WinningLottoDto winningLottoDto = LottoResultService.getWinningLottoDto(winningLotto);
+        WinningLottoDTO winningLottoDto = LottoResultService.getWinningLottoDto(winningLotto);
 
         LottoResultDAO lottoResultDAO = LottoResultDAO.getInstance();
         int latestRoundNum = lottoResultDAO.getLatestRoundNum();
 
         winningLottoDAO.saveWinningLotto(latestRoundNum, winningLottoDto);
 
-        assertThat(winningLottoDAO.fetchWinningLotto(latestRoundNum)).isInstanceOf(WinningLottoDto.class);
+        assertThat(winningLottoDAO.fetchWinningLotto(latestRoundNum)).isInstanceOf(WinningLottoDTO.class);
 
         winningLottoDAO.deleteWinningLotto(latestRoundNum);
     }

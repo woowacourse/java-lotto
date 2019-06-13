@@ -2,14 +2,14 @@ package lotto.application.lottoresult;
 
 import lotto.application.lottoticket.LottoTicketService;
 import lotto.domain.lottoresult.WinningLotto;
-import lotto.domain.lottoticket.dto.LottoTicketDto;
-import lotto.domain.lottoticket.dto.WinningLottoDto;
+import lotto.domain.lottoticket.dto.LottoTicketDTO;
+import lotto.domain.lottoticket.dto.WinningLottoDTO;
 
 class LottoResultAssembler {
-    static WinningLottoDto getWinningLottoDto(WinningLotto winningLotto) {
-        WinningLottoDto winningLottoDto = new WinningLottoDto();
+    static WinningLottoDTO getWinningLottoDto(WinningLotto winningLotto) {
+        WinningLottoDTO winningLottoDto = new WinningLottoDTO();
 
-        LottoTicketDto lottoTicketDto = LottoTicketService.getLottoTicketDto(winningLotto.getWinningTicket());
+        LottoTicketDTO lottoTicketDto = LottoTicketService.getLottoTicketDto(winningLotto.getWinningTicket());
         winningLottoDto.setLottoTicketDto(lottoTicketDto);
         winningLottoDto.setBonusBall(winningLotto.getBonusBall());
 

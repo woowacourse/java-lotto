@@ -2,7 +2,7 @@ package lotto.application.lottoticket;
 
 import lotto.domain.lottoticket.InvalidLottoTicketException;
 import lotto.domain.lottoticket.LottoTicket;
-import lotto.domain.lottoticket.dto.LottoTicketDto;
+import lotto.domain.lottoticket.dto.LottoTicketDTO;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -30,6 +30,6 @@ class LottoTicketServiceTest {
     void ticket을_DTO로_변환() {
         List<String> numbers = Arrays.asList("1", "2", "3", "4", "5", "6");
         LottoTicket lottoTicket = LottoTicketService.makeLottoTicket(numbers);
-        assertThat(LottoTicketService.getLottoTicketDto(lottoTicket)).isInstanceOf(LottoTicketDto.class);
+        assertThat(LottoTicketService.getLottoTicketDto(lottoTicket)).isInstanceOf(LottoTicketDTO.class);
     }
 }

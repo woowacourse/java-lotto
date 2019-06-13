@@ -2,7 +2,7 @@ package lotto.application.lottoticket;
 
 import lotto.application.lottoresult.LottoResultDAO;
 import lotto.domain.lottoticket.LottoTicket;
-import lotto.domain.lottoticket.dto.LottoTicketDto;
+import lotto.domain.lottoticket.dto.LottoTicketDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ class LottoTicketDAOTest {
     void lottoTicket_save하기() {
         List<String> numbers = Arrays.asList("1", "2", "3", "4", "5", "6");
         LottoTicket lottoTicket = LottoTicketService.makeLottoTicket(numbers);
-        LottoTicketDto lottoTicketDto = LottoTicketService.getLottoTicketDto(lottoTicket);
+        LottoTicketDTO lottoTicketDto = LottoTicketService.getLottoTicketDto(lottoTicket);
 
 
         LottoResultDAO lottoResultDAO = LottoResultDAO.getInstance();

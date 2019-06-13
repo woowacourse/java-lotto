@@ -710,7 +710,7 @@
             turnOffDisable("#winning-lotto-section");
 
             var parent = document.getElementById("automatic-lotto-list");
-            value['lottoTicketDtos'].forEach(function (item) {
+            value['lottoTicketDTOS'].forEach(function (item) {
                 var automaticLotto = generateLottoTag(item);
                 appendNewNodeAt(parent, automaticLotto);
             });
@@ -794,7 +794,7 @@
         });
         return pressedButton;
     }
-    
+
     function generateBonusTag(value) {
         var spanTag = document.createElement("div");
         spanTag.setAttribute("class", "badge badge-pill badge-primary");
