@@ -117,4 +117,15 @@ public class LottoService {
         resultDto.setWinningMoney(winningMoney);
         return resultDto;
     }
+
+    public Map<String, Object> findAllDataOfRound(int round) throws SQLException {
+        Map<String, Object> model = new HashMap<>();
+
+        model.put("lottos", lottoDao.findAllBoughtLottoByRound(round));
+        model.put("lottoGame", lottoGameDao.findRoundById(round));
+        model.put("winningNumber", lottoGameDao.findWinningLottoByRound(round));
+        model.put("result", lottoGameDao.findResultByRound(round));
+
+        return model;
+    }
 }
