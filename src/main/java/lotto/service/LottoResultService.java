@@ -11,7 +11,6 @@ import lotto.utils.ViewUtils;
 import spark.Route;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +62,6 @@ public class LottoResultService {
         model.put(LOTTO_RESULT, ResultMessage.getResult(lottoResult, getRanks()));
         return ViewUtils.render(model, "result.html");
     };
-
 
     private static List<Rank> getRanks() {
         List<Rank> ranks = new ArrayList<>();

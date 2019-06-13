@@ -18,7 +18,6 @@ public class WinningLottoDao {
     private static final String COL_WIN_NAME = "win";
 
 
-
     private final Connection conn;
 
     public WinningLottoDao(final Connection conn) {

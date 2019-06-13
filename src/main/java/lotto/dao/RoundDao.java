@@ -17,6 +17,7 @@ public class RoundDao {
     private static final String LATEST_ROUND_ID = "MAX(id_)";
     private static final String ROUND_ID = "id_";
     private static final String PRICE = "price";
+    private static final int STATUS_ROUND_ZERO = 0;
 
     private final Connection conn;
 
@@ -36,7 +37,7 @@ public class RoundDao {
         PreparedStatement pstmt = conn.prepareStatement(SELECT_LAST_ROUND_SQL);
         ResultSet rs = pstmt.executeQuery();
 
-        if (!rs.next()) return 0;
+        if (!rs.next()) return STATUS_ROUND_ZERO;
         return rs.getInt(LATEST_ROUND_ID);
     }
 
