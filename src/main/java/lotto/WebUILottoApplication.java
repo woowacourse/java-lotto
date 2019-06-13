@@ -31,34 +31,15 @@ public class WebUILottoApplication {
         );
 
         get("/buy", (req, res) ->
-            render(EmptyModel.get(), "purchase.html")
+            render(EmptyModel.get(), "buy.html")
         );
-
-        get("/lookup", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            GameDAO gameDAO = new GameDAO();
-            model.put("totalCount", gameDAO.selectQuery("COUNT(id)"));
-            return render(model, "lookup.html");
-        });
-
-        get("/look", (req, res) -> {
-            int games_id = Integer.parseInt(req.queryParams("radio"));
-            GameDAO gameDAO = new GameDAO();
-            List<String> lottos = gameDAO.getLottosOfGame(games_id);
-            GameDTO gameDTO1 = gameDAO.getGameInformation(games_id);
-            Map<String, Object> model = new HashMap<>();
-            model.put("games_id", games_id);
-            model.put("lottos", lottos);
-            model.put("game_info", gameDTO1);
-            return render(model, "game_results.html");
-        });
 
         get("/purchase", (req, res) -> {
             PurchaseAmount purchaseAmount = PurchaseAmount.of(Integer.parseInt(req.queryParams("amount")));
             webUILottoData.setPurchaseAmount(purchaseAmount);
             Map<String, Object> model = new HashMap<>();
             model.put("count", String.valueOf(purchaseAmount.ofCount()));
-            return render(model, "manual.html");
+            return render(model, "purchase.html");
         });
 
         get("/manual", (req, res) -> {
@@ -69,7 +50,7 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             model.put("count", String.valueOf(webUILottoData.getPurchaseAmount().ofCount()));
             model.put("manual", manualCount.toString());
-            return render(model, "numbers.html");
+            return render(model, "manual.html");
         });
 
         post("/numbers", (req, res) -> {
@@ -84,7 +65,7 @@ public class WebUILottoApplication {
             model.put("manual_count", webUILottoData.getTotalLottoGames().manualSize());
             List<Lotto> list = WebParser.makeLottos(webUILottoData);
             model.put("lottos", list);
-            return render(model, "all.html");
+            return render(model, "numbers.html");
         });
 
         get("/winning", (req, res) -> {
@@ -96,7 +77,7 @@ public class WebUILottoApplication {
             model.put("auto_count", webUILottoData.getTotalLottoGames().autoSize());
             model.put("manual_count", webUILottoData.getTotalLottoGames().manualSize());
             model.put("winning_numbers", webUILottoData.getWinningNumbers().toString());
-            return render(model, "winning_bonus.html");
+            return render(model, "winning.html");
         });
 
         get("/result", (req, res) -> {
@@ -117,6 +98,25 @@ public class WebUILottoApplication {
             gameDAO.addLottoNumbers(webUILottoData.getTotalLottoGames().allGames());
             LottoResult.init();
             return render(EmptyModel.get(), "enroll.html");
+        });
+
+        get("/lookup", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            GameDAO gameDAO = new GameDAO();
+            model.put("totalCount", gameDAO.selectQuery("COUNT(id)"));
+            return render(model, "lookup.html");
+        });
+
+        get("/look", (req, res) -> {
+            int games_id = Integer.parseInt(req.queryParams("radio"));
+            GameDAO gameDAO = new GameDAO();
+            List<String> lottos = gameDAO.getLottosOfGame(games_id);
+            GameDTO gameDTO1 = gameDAO.getGameInformation(games_id);
+            Map<String, Object> model = new HashMap<>();
+            model.put("games_id", games_id);
+            model.put("lottos", lottos);
+            model.put("game_info", gameDTO1);
+            return render(model, "game_results.html");
         });
 
         exception(IllegalArgumentException.class, (e, req, res) -> {

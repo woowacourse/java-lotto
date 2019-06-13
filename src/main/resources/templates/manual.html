@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>로또 구매하기</title>
+  <meta charset="UTF-8">
+  <title>로또 구매하기</title>
 </head>
 <body>
-    <h1>수동 구매 수량 입력</h1>
-    <form action="/manual">
-        총 구매 수량 : <div id="count">{{ count }}</div>
-        <br>
-        <br>
-        <label for="manual">수동 구매 수량 :</label>
-        <input id="manual" type="number" min="0" name="manual"/>
-        <br>
-        <br>
-        <input type="submit" value="수동 구매 수량 입력"/>
-    </form>
+<h1>수동 구매 수량 입력</h1>
+<div>
+  총 구매 수량 : {{ count }}
+  <br>
+  <br>
+  수동 구매 수량 : {{ manual }}
+  <br>
+  <br>
+</div>
+<form id="tags" action="/numbers" method="post">
+</form>
 </body>
 <script>
-    var count = new URLSearchParams(window.location.search).get("amount") / 1000
-    document.getElementById("manual").setAttribute("max", count)
+    var manualcount = new URLSearchParams(window.location.search).get("manual")
+
+    for (var i = 0; i < manualcount; i++) {
+        var manualLottoInput = '<input type="text" name="manual' + i + '"><br><br>'
+        document.getElementById("tags").innerHTML += manualLottoInput
+    }
+
+    document.getElementById("tags").innerHTML += '<input type="submit" value="수동 번호 입력"/>'
 </script>
 </html>
