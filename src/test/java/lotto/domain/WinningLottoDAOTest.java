@@ -19,17 +19,17 @@ public class WinningLottoDAOTest {
     }
 
     @Test
-    void addRow() throws Exception{
-        WinningLottoDAO.addWinningLottoInfo(1,"11,12,13,14,15,16",8);
+    void addRow() throws Exception {
+        WinningLottoDAO.addWinningLottoInfo(1, "11,12,13,14,15,16", 8);
     }
 
     @Test
-    void getCurrentLoottoRoundTest() throws Exception{
+    void getCurrentLoottoRoundTest() throws Exception {
         assertThat(WinningLottoDAO.getCurrentLottoRound()).isEqualTo(0);
     }
 
     @Test
-    void deleteRow() throws Exception{
+    void deleteRow() throws Exception {
         WinningLottoDAO.deleteWinningLottoInfoByLottoRound(1);
     }
 

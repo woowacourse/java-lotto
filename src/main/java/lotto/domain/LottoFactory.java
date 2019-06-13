@@ -13,7 +13,7 @@ public class LottoFactory {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lottoes createLottoes(String[] customLottoNumbersInput,Money money) {
+    public static Lottoes createLottoes(String[] customLottoNumbersInput, Money money) {
         List<Lotto> lottoes = createCustomLottoes(customLottoNumbersInput);
 
         createAutoLottoes(customLottoNumbersInput, money, lottoes);
@@ -22,9 +22,9 @@ public class LottoFactory {
 
     private static List<Lotto> createCustomLottoes(String[] customLottoNumbersInput) {
         return Arrays.stream(customLottoNumbersInput)
-                    .map(s -> Arrays.asList(s.split(",")))
-                    .map(s -> createLotto(s))
-                    .collect(Collectors.toList());
+                .map(s -> Arrays.asList(s.split(",")))
+                .map(s -> createLotto(s))
+                .collect(Collectors.toList());
     }
 
     private static void createAutoLottoes(String[] customLottoNumbersInput, Money money, List<Lotto> lottoes) {

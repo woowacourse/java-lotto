@@ -1,14 +1,12 @@
 package lotto.domain;
 
-import lotto.Exception.duplicateBonusBallException;
-
 public class WinningLotto {
     private final Lotto lotto;
     private final int bonusBall;
 
     public WinningLotto(Lotto lotto, int bonusBall) {
-        if(lotto.isContainLottoNumber(LottoNumber.getLottoNumber(bonusBall))){
-            throw new duplicateBonusBallException();
+        if (lotto.isContainLottoNumber(LottoNumber.getLottoNumber(bonusBall))) {
+            throw new IllegalArgumentException("당첨번호와 일치하는 보너스볼은 안됩니다.");
         }
         this.lotto = lotto;
         this.bonusBall = bonusBall;
@@ -16,7 +14,7 @@ public class WinningLotto {
 
     @Override
     public String toString() {
-        return lotto.toString()+"\n"+bonusBall;
+        return lotto.toString() + "\n" + bonusBall;
     }
 
     public int getMatchCount(Lotto lotto) {

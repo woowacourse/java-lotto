@@ -32,6 +32,7 @@ public class DBUtil {
 
         return con;
     }
+
     public static void closeConnection(Connection con) {
         try {
             if (con != null)

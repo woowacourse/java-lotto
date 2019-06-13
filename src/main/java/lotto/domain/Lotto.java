@@ -21,7 +21,7 @@ public class Lotto {
 
     public int getMatchCount(Lotto lotto) {
         return (int) numbers.stream()
-                .filter( l -> lotto.isContainLottoNumber(l))
+                .filter(l -> lotto.isContainLottoNumber(l))
                 .count();
     }
 

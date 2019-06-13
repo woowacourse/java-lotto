@@ -38,24 +38,24 @@ public class ResultDAO {
         pstmt.executeUpdate();
     }
 
-    public static void selectWholeResultByCurrentRound(Map<String, Object> model , int inquiredRound) throws SQLException{
+    public static void selectWholeResultByCurrentRound(Map<String, Object> model, int inquiredRound) throws SQLException {
         Connection con = DBUtil.getConnection();
         String query = "SELECT * FROM result where lottoRound=?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, inquiredRound);
         ResultSet rs = pstmt.executeQuery();
         if (!rs.next()) return;
-        model.put("winningMoney",rs.getDouble("winningMoney"));
-        model.put("rate",rs.getDouble("winningRate"));
+        model.put("winningMoney", rs.getDouble("winningMoney"));
+        model.put("rate", rs.getDouble("winningRate"));
         String result = rs.getString("winningResult")
-                .replace("[","")
-                .replace("]","");
+                .replace("[", "")
+                .replace("]", "");
         List<String> winningResult = Stream.of(result.split(",")).collect(Collectors.toList());
-        model.put("firstGrade",winningResult.get(0));
-        model.put("secondGrade",winningResult.get(1));
-        model.put("thirdGrade",winningResult.get(2));
-        model.put("forthGrade",winningResult.get(3));
-        model.put("fifthGrade",winningResult.get(4));
+        model.put("firstGrade", winningResult.get(0));
+        model.put("secondGrade", winningResult.get(1));
+        model.put("thirdGrade", winningResult.get(2));
+        model.put("forthGrade", winningResult.get(3));
+        model.put("fifthGrade", winningResult.get(4));
         DBUtil.closeConnection(con);
     }
 }

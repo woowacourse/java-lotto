@@ -19,17 +19,17 @@ public class ResultDAOTest {
     }
 
     @Test
-    void addRow() throws Exception{
-      ResultDAO.addResult(1000000,"1,0,0,0,0,0",100,2);
+    void addRow() throws Exception {
+        ResultDAO.addResult(1000000, "1,0,0,0,0,0", 100, 2);
     }
 
     @Test
-    void deleteRow() throws Exception{
+    void deleteRow() throws Exception {
         ResultDAO.deleteResultByLottoRound(2);
     }
 
     @Test
-    void getCurrentLoottoRoundTest() throws Exception{
+    void getCurrentLoottoRoundTest() throws Exception {
         assertThat(ResultDAO.getCurrentLottoRound()).isEqualTo(5);
     }
 }

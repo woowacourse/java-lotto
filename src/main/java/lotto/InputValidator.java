@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.Exception.duplicateBonusBallException;
 import lotto.domain.*;
 
 import java.util.Arrays;
@@ -9,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class InputValidator {
     private static final int LOTTO_SIZE = 6;
+
     public static boolean isNotValidPrice(String priceInput) {
         return isBlank(priceInput) || isNotInteger(priceInput) || isNotValidPriceRange(priceInput);
     }
@@ -75,7 +75,7 @@ public class InputValidator {
         try {
             LottoFactory.createWinningLotto(lotto, Integer.parseInt(bonusBall));
             return false;
-        } catch (duplicateBonusBallException e) {
+        } catch (IllegalArgumentException e) {
             return true;
         }
     }

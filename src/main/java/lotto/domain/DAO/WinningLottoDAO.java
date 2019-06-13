@@ -10,9 +10,9 @@ public class WinningLottoDAO {
     public static void addWinningLottoInfo(int lottoRound, String winningNumber, int bonusBall) throws SQLException {
         String query = "INSERT INTO winning_lotto_info(lottoRound, winningNumber, bonusBall) VALUES (?, ?, ?)";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
-        pstmt.setInt(1,lottoRound);
+        pstmt.setInt(1, lottoRound);
         pstmt.setString(2, winningNumber);
-        pstmt.setInt(3,bonusBall);
+        pstmt.setInt(3, bonusBall);
         pstmt.executeUpdate();
     }
 
@@ -24,22 +24,22 @@ public class WinningLottoDAO {
         return rs.getInt("MAX(lottoRound)");
     }
 
-    public static void deleteWinningLottoInfoByLottoRound(int lottoRound) throws SQLException{
-        String query =  "DELETE FROM winning_lotto_info where lottoRound=?";
+    public static void deleteWinningLottoInfoByLottoRound(int lottoRound) throws SQLException {
+        String query = "DELETE FROM winning_lotto_info where lottoRound=?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
-        pstmt.setInt(1,lottoRound);
+        pstmt.setInt(1, lottoRound);
         pstmt.executeUpdate();
     }
 
-    public static void selectWholeResultByCurrentRound(Map<String, Object> model , int inquiredRound) throws SQLException {
+    public static void selectWholeResultByCurrentRound(Map<String, Object> model, int inquiredRound) throws SQLException {
         Connection con = DBUtil.getConnection();
         String query = "SELECT * FROM winning_lotto_info where lottoRound=?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, inquiredRound);
         ResultSet rs = pstmt.executeQuery();
         if (!rs.next()) return;
-        model.put("winningNumbers",rs.getString("winningNumber"));
-        model.put("bonusBall",rs.getInt("bonusBall"));
+        model.put("winningNumbers", rs.getString("winningNumber"));
+        model.put("bonusBall", rs.getInt("bonusBall"));
         DBUtil.closeConnection(con);
     }
 }

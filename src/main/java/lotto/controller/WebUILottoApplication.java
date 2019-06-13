@@ -90,15 +90,19 @@ public class WebUILottoApplication {
                     .createCustomLottoCount(Integer.parseInt(customLottoCountInput), money);
             req.session().attribute("money", money);
             resultModel.put("customLottoCount", customLottoCount);
-
+            List<Integer> customLottoCounts = new ArrayList<>();
+            for (int i = 1; i <= customLottoCount.getCustomLottoCount(); i++) {
+                customLottoCounts.add(i);
+            }
+            resultModel.put("autoLottoNumbers", customLottoCounts);
             return render(resultModel, "result.html");
         });
 
         post("/round", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-
             int inquiredRound = Integer.parseInt(req.queryParams("roundNumber"));
             model.put("round", inquiredRound);
+
             ResultDAO.selectWholeResultByCurrentRound(model, inquiredRound);
             WinningLottoDAO.selectWholeResultByCurrentRound(model, inquiredRound);
             UserLottoDAO.selectUserLottoNumbersByCurrentRound(model, inquiredRound);

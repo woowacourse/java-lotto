@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="inputTextFactory.js"></script>
     <title>수동 로또 입력</title>
 </head>
 <body>
+<div align="center">
 <form action="/winning" method="post">
-<h1>수동 로또 입력</h1>
-<div>수동 로또 번호를 입력해 주세요.</div>
-<br>
+    <h1>수동 로또 입력</h1>
+    <div>수동 로또 번호를 입력해 주세요.</div>
+    <br>
     <div id="lottoNumbers"></div>
     {{#customLottoCount}}
     <div id="customLottoCount" hidden>{{customLottoCount}}</div>
-    <br>
-    <button type="submit"> 확인</button>
     {{/customLottoCount}}
+    {{#each autoLottoNumbers}}
+    <span>수동로또{{this}} </span><input type="text" name="autoLottoNumbers"><br>
+    <input type="hidden" name="roundNumber" value="{{this}}">
+    {{/each}}
+    <button type="submit"> 확인</button>
 </form>
+</div>
 </body>
 </html>

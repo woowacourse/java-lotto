@@ -5,22 +5,30 @@
     <title>회차 정보</title>
 </head>
 <body>
-<div>회차 정보</div><br>
-<div>{{round}} 주차 당첨 번호 : {{winningNumbers}}</div><br>
-<div> 당첨 보너스볼 : {{bonusBall}}</div><br>
-<div> 총 당첨 금액 : {{winningMoney}} 원</div><br>
+<div align="center">
+<div>회차 정보</div>
+<br>
+<div>{{round}} 주차 당첨 번호 : {{winningNumbers}}</div>
+<br>
+<div> 당첨 보너스볼 : {{bonusBall}}</div>
+<br>
+<div> 총 당첨 금액 : {{winningMoney}} 원</div>
+<br>
 
-<div>당첨 결과 </div>
+<div>당첨 결과</div>
 <div>1등 : {{firstGrade}} 회</div>
 <div>2등 : {{secondGrade}} 회</div>
 <div>3등 : {{thirdGrade}} 회</div>
 <div>4등 : {{forthGrade}} 회</div>
 <div>5등 : {{fifthGrade}} 회</div>
-<div> 수익률 : {{rate}} % </div><br>
-<div>구매한 로또 번호</div><br>
+<div> 수익률 : {{rate}} %</div>
+<br>
+<div>구매한 로또 번호</div>
+<br>
 {{#each userLottoNumbers}}
-<div>{{this}}</div><br>
+<div>{{this}}</div>
+<br>
 {{/each}}
-
+</div>
 </body>
 </html>
