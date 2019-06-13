@@ -31,28 +31,17 @@ public class WebUILottoApplication {
                     Connection conn = new DatabaseConnection().getConnection();
                     RoundDao roundDao = new RoundDao(conn);
                     Map<String, Object> model = new HashMap<>();
+                    int presentRound = roundDao.findLatestRound() + 1;
                     List<Integer> rounds = roundDao.findAllRound();
-                    model.put("present", roundDao.findLatestRound());
+                    model.put("present", presentRound);
+                    model.put("rounds", rounds);
                     model.put("message", req.queryParams("message"));
+                    req.session().attribute("round",presentRound);
                     return ViewUtils.render(model, "home.html");
                 }
         );
 
-        get("/result",(req,res)->{
-            Connection conn = new DatabaseConnection().getConnection();
-            LottosDao lottosDao = new LottosDao(conn);
-            WinningLottoDao winningLottoDao = new WinningLottoDao(conn);
-            Map<String,Object> model = new HashMap<>();
-
-            int round = Integer.parseInt(req.queryParams("round"));
-            Lottos lottos = lottosDao.findLottoByRound(round);
-            WinningLotto winningLotto = winningLottoDao.findWinningLottoByRound(round);
-            LottoResult lottoResult = LottoResult.generateLottoResult(lottos,winningLotto);
-            model.put("round",round);
-//            model.put("yield", lottoResult.findYield(price.getPrice()));
-//            model.put("userLottoResult", ResultMessage.getResult(lottoResult, getRanks()));
-            return ViewUtils.render(model,"result");
-        });
+        get("/result", LottoResultService.makeLottoResultByRoundPage);
 
         post("/make/lotto", LottoService.makeSelfLottoPage);
 
