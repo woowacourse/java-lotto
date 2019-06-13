@@ -3,21 +3,23 @@ package lotto.domain.model;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FORTH(4, 50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0);
+    FIRST(6, 2_000_000_000, 1),
+    SECOND(5, 30_000_000,2),
+    THIRD(5, 1_500_000, 3),
+    FORTH(4, 50_000, 4),
+    FIFTH(3, 5_000, 5),
+    MISS(0, 0, 6);
 
     private static final int WINNING_MIN_COUNT = 3;
 
     private final int matchCount;
     private final int prize;
+    private final int ranking;
 
-    Rank(int matchCount, int prize) {
+    Rank(int matchCount, int prize, int ranking) {
         this.matchCount = matchCount;
         this.prize = prize;
+        this.ranking = ranking;
     }
 
     public static Rank valueOf(int matchCount, boolean matchBonus) {
@@ -54,5 +56,9 @@ public enum Rank {
         rankInfo.append(this.prize);
         rankInfo.append("원)- ");
         return rankInfo.toString();
+    }
+
+    public int getRanking() {
+        return ranking;
     }
 }

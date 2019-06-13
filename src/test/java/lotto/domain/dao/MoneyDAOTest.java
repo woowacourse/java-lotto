@@ -1,5 +1,6 @@
 package lotto.domain.dao;
 
+import lotto.domain.dto.MoneyDTO;
 import lotto.domain.model.Money;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,9 +17,12 @@ public class MoneyDAOTest {
 
     @Test
     public void addMoney() {
-        Money money = new Money(3000);
+        MoneyDTO moneyDTO = new MoneyDTO();
+        moneyDTO.setRound(2);
+        moneyDTO.setMoney(3000);
+        moneyDTO.setAvailableCount(3);
         try {
-            moneyDao.addMoney(money, 2);
+            moneyDao.addMoney(moneyDTO);
         } catch (SQLException e) {
             e.printStackTrace();
         }

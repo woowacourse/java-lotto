@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class WinningLottoDAOTest {
     private WinningLottoDAO winningLottoDAO;
 
@@ -33,5 +35,11 @@ public class WinningLottoDAOTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void getLatestRoundFromWinningLotto() throws SQLException {
+        int round = winningLottoDAO.getLatestRound();
+        assertThat(round).isEqualTo(2);
     }
 }

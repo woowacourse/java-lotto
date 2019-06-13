@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="kor">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+
+<body>
+    <input type="hidden" id="round_hidden" name="round_hidden" value="">
+    <input type="hidden" id="purchaseMoney_hidden" name="purchaseMoney_hidden" value="">
+    <input type="hidden" id="manualCount_hidden" name="manualCount_hidden" value="">
+
+    <div id="roundInfo">
+        <button id="openMoneyInput">로또 구입</button>
+    </div>
+
+    <form action="/money" method="post" style="display:none;" id="moneyForm">
+        <input type="number" id="inputMoney" name="inputMoney" placeholder="로또 구입 금액을 입력하세요 (1000원 이상, 100,000원 이하)">
+        <input type="button" id="inputMoneyButton" value="구입">
+    </form>
+
+    <form action="/manualCount" method="post" style="display:none;" id="manualCount">
+        <input type="number" id="inputManualCount" name="inputManualCount" placeholder="수동으로 구입할 로또 갯수를 입력하세요.">
+        <input type="button" id="inputManualCountButton" value="입력">
+    </form>
+
+    <div id="manualLotto"></div>
+
+<script>
+    // 가장 최근의 round 가져오기
+    $(document).ready(function () {
+        $.ajax({
+            url: '/round',
+            type: 'GET',
+            contentType: 'text/html;charset=UTF-8',
+            dataType: 'text',
+            success: function (data) {
+                $("#round_hidden").val(data);
+            }
+        });
+    });
+
+    $(document).on('click', '#openMoneyInput', function () {
+        $("#moneyForm").fadeIn();
+    });
+
+    // 돈 입력
+    $(document).on('click', '#inputMoneyButton', function () {
+        let money = $("#inputMoney").val();
+        let round = $("#round_hidden").val();
+        let properties = { 'money': money, 'round': round };
+
+        if (money % 1000 !== 0 || money < 1000 || money > 100000) {
+            alert('1,000원 이상, 100,000원 이하로 입력해주세요.');
+            return;
+        }
+
+        $.ajax({
+            url: '/money',
+            type: 'GET',
+            data: properties,
+            contentType: 'json/html;charset=UTF-8',
+            dataType: 'json',
+            success: function (data) {
+                $("#purchaseMoney_hidden").val(data);
+                $("#manualCount").fadeIn();
+            }
+        });
+    });
+
+    // 수동 로또 구입 갯수 입력
+    $(document).on('click', '#inputManualCountButton', function () {
+        let manualCount = $("#inputManualCount").val();
+        let availableCount = $("#purchaseMoney_hidden").val() / 1000;
+
+        if (manualCount > availableCount || manualCount < 0) {
+            alert('0장 이상, ' + availableCount + '장 이하로 구입할 수 있습니다.');
+            return;
+        }
+        $("#manualCount_hidden").val(manualCount);
+        generateManualLottoInputs();
+    });
+
+    // 수동 로또 입력 창 생성
+    var generateManualLottoInputs = function() {
+        let manualCount = $("#manualCount_hidden").val();
+        if (parseInt(manualCount) === 0) {
+            return;
+        }
+
+        $("#manualLotto").append('<form action="/manualLotto" method="post">');
+        for (let i = 0; i < manualCount; i++) {
+            $("#manualLotto").append('<input type="text" id="manualLotto'+i+'" name="manualLotto'+i+'" placeholder="로또 번호를 입력하세요">');
+        }
+        $("#manualLotto").append('<input type="button" id="inputManualLottoButton" value="확인">');
+        $("#manualLotto").append('</form>');
+    };
+
+    //수동 로또 구입
+    $(document).on('click', '#inputManualLottoButton', function () {
+        let manualLottos;
+        let round_hidden = $("#round_hidden").val();
+        for (let i = 0; i < manualCount; i++) {
+            let manualLotto = $("$manualLotto" + i + "").val().replace(' ', '').split(',');
+
+            if (manualLotto.length !== 6) {
+                alert('로또 번호는 6개여야 합니다.');
+                return;
+            }
+
+            for (let i = 0; i < manualLotto.length; i++) {
+                if (parseInt(manualLotto[i]) > 45 || parseInt(manualLotto[i]) < 1) {
+                    alert('1부터 45이하의 번호를 입력해야 합니다.');
+                    return;
+                }
+            }
+            
+            manualLottos += (manualLotto.join(',') + '/');
+        }
+        alert(manualLottos);
+    
+        $.ajax({
+            url: '/manualLotto',
+            type: 'POST',
+            data: manualLottos, round_hidden,
+            contentType: 'text/html;charset=UTF-8',
+            dataType: 'text',
+            success: function (data) {
+                alert('대장정을 마쳤다');
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

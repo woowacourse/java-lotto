@@ -6,6 +6,7 @@ import lotto.domain.utils.ConnectionGenerator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class WinningLottoDAO {
@@ -25,5 +26,17 @@ public class WinningLottoDAO {
 
         pstmt.executeUpdate();
         ConnectionGenerator.closeConnection(con);
+    }
+
+    public int getLatestRound() throws SQLException {
+        String query = "SELECT round FROM winning_lotto ORDER BY round";
+        PreparedStatement pstmt = ConnectionGenerator.getConnection().prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (!rs.next()) {
+            return 1;
+        }
+
+        return rs.getInt("round");
     }
 }

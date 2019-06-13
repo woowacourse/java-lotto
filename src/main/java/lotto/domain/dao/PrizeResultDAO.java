@@ -18,7 +18,6 @@ public class PrizeResultDAO {
                 "(first_prize, second_prize, third_prize, forth_prize, fifth_prize, income_rate, round) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = con.prepareStatement(query);
-
         Map<Integer, Integer> ranking = new HashMap<>();
         for (int i = 1; i <= 5; i++) {
             ranking.put(i, 0);

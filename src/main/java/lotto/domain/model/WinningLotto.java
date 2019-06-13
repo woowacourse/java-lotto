@@ -31,7 +31,7 @@ public class WinningLotto {
 
         for (Lotto lotto : purchasedLottos.getLotto()) {
             ranks.add(Rank.valueOf(matchCount(lotto), matchBonusNumber(lotto)));
-    }
+        }
         return ranks;
     }
 
@@ -45,5 +45,17 @@ public class WinningLotto {
             winResult.put(rank, (winResult.get(rank) + rank.getPrize()));
         }
         return winResult;
+    }
+
+    public Map<Integer, Integer> calculatePrize2(List<Rank> ranks) {
+        Map<Integer, Integer> ranking = new HashMap<>();
+        for (int i = 1; i <= 5; i++) {
+            ranking.put(i, 0);
+        }
+
+        for (Rank rank : ranks) {
+            ranking.put(rank.getRanking(), ranking.get(rank.getRanking() + 1));
+        }
+        return ranking;
     }
 }

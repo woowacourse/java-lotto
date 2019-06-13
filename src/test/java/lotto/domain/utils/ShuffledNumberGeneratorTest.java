@@ -1,7 +1,6 @@
 package lotto.domain.utils;
 
 import lotto.domain.model.Number;
-
 import org.junit.Before;
 import org.junit.Test;
 
