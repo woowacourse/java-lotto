@@ -1,5 +1,7 @@
 package lotto.dao;
 
+import lotto.domain.Price;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,10 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoundDao {
-    private static final String INSERT_SQL = "INSERT INTO round(id_) values(?)";
+    private static final String INSERT_ROUND_AND_PRICE_SQL = "INSERT INTO round(id_,price) values(?,?)";
+//    private static final String INSERT_PRICE_BY_ROUND_SQL = "INSERT INTO round(price) values(?)";
     private static final String SELECT_LAST_ROUND_SQL = "SELECT MAX(id_) FROM round";
-    private static final String SELECT_ALL_ROUND_SQL = "SELECT * FROM round";
-    private static final String DELETE_ALL_ROUND_SQL = "DELETE FROM round";
+    private static final String SELECT_ALL_ROUND_SQL = "SELECT id_ FROM round";
+    private static final String SELECT_PRICE_BY_ROUND_SQL = "SELECT price FROM round WHERE id_=?";
+    private static final String DELETE_ALL_ROUND_AND_PRICE_SQL = "DELETE FROM round";
 
     private final Connection conn;
 
@@ -19,12 +23,20 @@ public class RoundDao {
         this.conn = conn;
     }
 
-    public void addRound(int round) throws SQLException {
-        PreparedStatement pstmt = conn.prepareStatement(INSERT_SQL);
+    public void addRound(int round,int price) throws SQLException {
+        PreparedStatement pstmt = conn.prepareStatement(INSERT_ROUND_AND_PRICE_SQL);
         pstmt.setInt(1, round);
+        pstmt.setInt(2, price);
 
         pstmt.executeUpdate();
     }
+
+//    public void addRound(Price price) throws SQLException {
+//        PreparedStatement pstmt = conn.prepareStatement(INSERT_PRICE_BY_ROUND_SQL);
+//        pstmt.setInt(1, price.getPrice());
+//
+//        pstmt.executeUpdate();
+//    }
 
     public int findLatestRound() throws SQLException {
         PreparedStatement pstmt = conn.prepareStatement(SELECT_LAST_ROUND_SQL);
@@ -45,8 +57,18 @@ public class RoundDao {
         return rounds;
     }
 
+    public int findPriceByRound(int round) throws SQLException{
+        PreparedStatement pstmt = conn.prepareStatement(SELECT_PRICE_BY_ROUND_SQL);
+        pstmt.setInt(1, round);
+        ResultSet rs = pstmt.executeQuery();
+        if(rs.next()) {
+            return rs.getInt("price");
+        }
+        return 0;
+    }
+
     public void deleteAllRound() throws SQLException{
-        PreparedStatement pstmt = conn.prepareStatement(DELETE_ALL_ROUND_SQL);
+        PreparedStatement pstmt = conn.prepareStatement(DELETE_ALL_ROUND_AND_PRICE_SQL);
         pstmt.executeUpdate();
     }
 }

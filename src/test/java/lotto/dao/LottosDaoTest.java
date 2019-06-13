@@ -35,7 +35,6 @@ class LottosDaoTest {
 
     @Test
     public void Lotto_조회() throws SQLException {
-        lottosDao.addLottos(1,new Lottos(lottos));
         assertThat(lottosDao.findLottoByRound(1)).isEqualTo(new Lottos(lottos));
     }
 

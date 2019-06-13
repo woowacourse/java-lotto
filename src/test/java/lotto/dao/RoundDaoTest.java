@@ -24,7 +24,8 @@ public class RoundDaoTest {
     @Test
     void 라운드_추가() throws Exception{
         int presentRound = roundDao.findLatestRound() + 1;
-        roundDao.addRound(presentRound);
+        int price = 5000;
+        roundDao.addRound(presentRound,price);
     }
 
     @Test
@@ -34,9 +35,18 @@ public class RoundDaoTest {
 
     @Test
     void 전체_라운드_조회() throws Exception{
-        roundDao.addRound(4);
-        roundDao.addRound(5);
-        roundDao.addRound(6);
+        roundDao.addRound(4,1000);
+        roundDao.addRound(5,2000);
+        roundDao.addRound(6,3000);
         assertThat(roundDao.findAllRound()).isEqualTo(Arrays.asList(4,5,6));
+    }
+
+    @Test
+    void 가격_조회() throws SQLException{
+        roundDao.addRound(1,5000);
+        roundDao.addRound(2,9000);
+
+        System.out.println(roundDao.findPriceByRound(1));
+        assertThat(roundDao.findPriceByRound(1)).isEqualTo(5000);
     }
 }
