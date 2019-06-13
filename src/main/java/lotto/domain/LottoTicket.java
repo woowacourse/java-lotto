@@ -2,19 +2,18 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
-import static lotto.view.OutPutView.NEW_LINE;
+import static lotto.view.ConsoleOutPutView.NEW_LINE;
 
 public class LottoTicket {
     private int numberOfCustomLotto;
     private int numberOfAutoLotto;
     private final List<Lotto> lottos;
 
-    public LottoTicket(Price price, List<String> customLottos) {
-        this.numberOfCustomLotto = customLottos.size();
-        this.numberOfAutoLotto = price.getNumberOfLotto() - this.numberOfCustomLotto;
+    public LottoTicket(NumberOfCustomLotto customAmount, List<String> customLottos) {
+        this.numberOfCustomLotto = customAmount.getNumberOfCustomLotto();
+        this.numberOfAutoLotto = customAmount.getNumberOfAutoLotto();
         this.lottos = new ArrayList<>();
 
         createCustomLottoNumbers(customLottos);
@@ -47,7 +46,7 @@ public class LottoTicket {
 
     public List<Rank> matchLotto(WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
-        lottos.stream().forEach(lotto -> ranks.add(Rank.valueOf(lotto.numberOfMatch(winningLotto.getWinningLotto())
+        lottos.stream().forEach(lotto -> ranks.add(Rank.valueOf(lotto.numberOfMatch(winningLotto.getWinningNumbers())
                 , lotto.bonusOfMatch(winningLotto.getBonusBall()))));
 
         return ranks;

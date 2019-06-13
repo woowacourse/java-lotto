@@ -61,7 +61,7 @@ public class CustomGenerateLottoTest {
         String winningLottoNumbers = "1,2,3,4,5,6";
 
         assertThat(new CustomGenerateLotto(inputLottoNumbers)
-                .numberOfMatch(new WinningLotto(winningLottoNumbers, "7").getWinningLotto()))
+                .numberOfMatch(new WinningLotto(winningLottoNumbers, "7").getWinningNumbers()))
                 .isEqualTo(6);
     }
 
@@ -72,6 +72,6 @@ public class CustomGenerateLottoTest {
 
         assertTrue(new CustomGenerateLotto(inputLottoNumbers)
                 .bonusOfMatch(new BonusBall(
-                        new WinningLotto(winningLottoNumbers, "1").getWinningLotto(), "1")));
+                        new WinningLotto(winningLottoNumbers, "1").getWinningNumbers(), "1")));
     }
 }

@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static lotto.view.OutPutView.NEW_LINE;
+import static lotto.view.ConsoleOutPutView.NEW_LINE;
 
-public class InputView {
+public class ConsoleInputView {
     public static final String SPLIT_REGEX = ",";
     private static Scanner scanner = new Scanner(System.in);
 

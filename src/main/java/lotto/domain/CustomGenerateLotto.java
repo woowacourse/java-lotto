@@ -9,7 +9,7 @@ import java.util.List;
 
 import static java.util.Collections.sort;
 import static java.util.stream.Collectors.*;
-import static lotto.view.InputView.SPLIT_REGEX;
+import static lotto.view.ConsoleInputView.SPLIT_REGEX;
 
 public class CustomGenerateLotto extends Lotto {
 

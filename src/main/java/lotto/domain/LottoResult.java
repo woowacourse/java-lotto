@@ -6,18 +6,19 @@ import java.util.Map;
 public class LottoResult {
     private static final Map<Rank, Integer> result = new LinkedHashMap<>();
 
-    static {
-        for (Rank rank : Rank.values()) {
-            result.put(rank, 0);
-        }
-    }
-
     private final LottoTicket lottoTicket;
     private final WinningLotto winningLotto;
 
     public LottoResult(LottoTicket lottoTicket, WinningLotto winningLotto) {
         this.lottoTicket = lottoTicket;
         this.winningLotto = winningLotto;
+        init();
+    }
+
+    private void init() {
+        for (Rank rank : Rank.values()) {
+            result.put(rank, 0);
+        }
     }
 
     public Map<Rank, Integer> matchLotto() {

@@ -8,9 +8,9 @@ public class BonusBall {
     private LottoNumber bonus;
 
     public BonusBall(List<LottoNumber> winningLotto, String bonus) {
-        try{
+        try {
             this.bonus = invalidBonusBall(winningLotto, Integer.parseInt(bonus));
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new InvalidBounusBallException(e);
         }
 
@@ -26,5 +26,10 @@ public class BonusBall {
 
     public LottoNumber getBonus() {
         return bonus;
+    }
+
+    @Override
+    public String toString() {
+        return bonus.toString();
     }
 }

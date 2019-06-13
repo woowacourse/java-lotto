@@ -49,17 +49,25 @@
     </header>
 
     <main role="main" class="inner cover">
-        <form action="/amount" class="was-validated ">
-            <h4>{{error_amount}}</h4>
-            <h4 class="cover-heading">수동 구매 개수를 입력해 주세요!</h4>
+        <form>
+            <h4 class="cover-heading">결과는 다음과 같습니다!</h4>
             <div class="form-group">
-                <p>총 구매한 개수는 {{amount}}개 입니다. </p>
-                <input class="form-control" type="text" id="customAmount" placeholder="개수 입력" name="customAmount"
-                       required>
+                당첨 번호 : {{winningLotto}}<br/>
+                보너스 번호 : {{bonusBall}}<br/>
+
+                <h4 class="cover-heading">당첨 통계</h4><br/>
+
+                {{#result}}
+                {{this}} <br/>
+                {{/result}}
+
+                총 수익률은 {{resultIncomeRate}}% 입니다.
             </div>
-            <p class="lead">
-                <button type="submit" class="btn btn-success">다음</button>
-            </p>
+        </form>
+
+        <br/>
+        <form action="/home" class="was-validated">
+            <button type="submit" class="btn btn-success">처음으로</button>
         </form>
     </main>
 

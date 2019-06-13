@@ -49,21 +49,33 @@
     </header>
 
     <main role="main" class="inner cover">
-        <form action="/winning_lotto" class="was-validated ">
+        <form>
+            {{error_winning}}
             <h4 class="cover-heading">구매한 로또 번호는 다음과 같습니다.</h4>
             <div class="form-group">
-                {{#lottos}}
+                {{#lottoTicket}}
                 {{this}}
                 <br/>
-                {{/lottos}}
+                {{/lottoTicket}}
             </div>
+        </form>
+        <br/>
+        <form action="/result" class="was-validated" method="post">
+            <h4 class="cover-heading">당첨 번호와 보너스 볼을 입력하세요!</h4>
+            <div class="form-group">
+                <input class="form-control" type="text" id="winningNumbers" placeholder="당첨 번호 입력" name="winningNumbers" required> <br/>
+                <input class="form-control" type="text" id="bonusNumber" placeholder="보너스 번호 입력" name="bonusNumber" required>
+            </div>
+            <p class="lead">
+                <button type="submit" class="btn btn-success">다음</button>
+            </p>
         </form>
     </main>
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
-            <p>Made by Pododang <br />
-                <a href="https://github.com/backlo">Git 주소 클릭!!</a> <br />
+            <p>Made by Pododang <br/>
+                <a href="https://github.com/backlo">Git 주소 클릭!!</a> <br/>
                 Call : 010-0000-0000.
             </p>
         </div>

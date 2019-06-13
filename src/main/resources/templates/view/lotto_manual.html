@@ -50,21 +50,21 @@
 
     <main role="main" class="inner cover">
         <form action="/numbers" class="was-validated" method="post">
-            <h4>{{error_manual}}</h4>
-            <h4 class="cover-heading">수동으로 {{manual_amount}}장, 자동으로 {{auto_amount}}장을 구매하였습니다.</h4>
-            <div class="form-group" id="tags">
+            <h4>{{error_custom}}</h4>
+            <h4 class="cover-heading">수동으로 {{customAmount}}장, 자동으로 {{autoAmount}}장을 구매하였습니다.</h4>
+            <div class="form-group" id="forms">
                 <script>
-                    var manual_amount = new URLSearchParams(window.location.search).get("manual_amount")
+                    var customAmount = new URLSearchParams(window.location.search).get("customAmount")
 
-                    if(manual_amount != 0){
-                        document.getElementById("tags").innerHTML += '<h4 class="cover-heading">로또 번호와 당첨 번호 입력해 주세요!</h4>'
-                        for(var i = 0 ; i < manual_amount ; i++){
-                            var input =  '<input class="form-control" id="manual_lotto" type="text" placeholder="번호 입력" name="manual_lotto' + i + '" required><br>'
-                            document.getElementById("tags").innerHTML += input
+                    if (customAmount != 0) {
+                        document.getElementById("forms").innerHTML += '<h4 class="cover-heading">로또 번호를 입력해 주세요!</h4>'
+                        for (var i = 0; i < customAmount; i++) {
+                            var input = '<input class="form-control" id="customNumbers" type="text" placeholder="번호 입력" name="customNumbers' + i + '" required><br>'
+                            document.getElementById("forms").innerHTML += input
                         }
                     }
 
-                    document.getElementById("tags").innerHTML += '<button type="submit"class="btn btn-success"> 다음 </button>'
+                    document.getElementById("forms").innerHTML += '<button type="submit"class="btn btn-success"> 다음 </button>'
                 </script>
             </div>
         </form>
@@ -72,8 +72,8 @@
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
-            <p>Made by Pododang <br />
-                <a href="https://github.com/backlo">Git 주소 클릭!!</a> <br />
+            <p>Made by Pododang <br/>
+                <a href="https://github.com/backlo">Git 주소 클릭!!</a> <br/>
                 Call : 010-0000-0000.
             </p>
         </div>

@@ -10,9 +10,11 @@ public class NumberOfCustomLotto {
     private static final int LEAST_NUMBER = 0;
 
     private int number;
+    private Price price;
 
     public NumberOfCustomLotto(String number, Price price) {
-        this.number = invalidCustomLottoNumber(number, price.getNumberOfLotto());
+        this.price = price;
+        this.number = invalidCustomLottoNumber(number, this.price.getNumberOfLotto());
     }
 
     private int invalidCustomLottoNumber(String number, int numberOfLotto) {
@@ -31,5 +33,9 @@ public class NumberOfCustomLotto {
 
     public int getNumberOfCustomLotto() {
         return number;
+    }
+
+    public int getNumberOfAutoLotto() {
+        return this.price.getNumberOfLotto() - this.number;
     }
 }

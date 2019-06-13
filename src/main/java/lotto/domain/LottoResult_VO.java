@@ -7,6 +7,7 @@ public class LottoResult_VO {
 
     private final Map<Rank, Integer> result;
     private final int price;
+    private static final int PERSENT = 100;
 
     public LottoResult_VO(Map<Rank, Integer> result, int price) {
         this.result = result;
@@ -21,7 +22,13 @@ public class LottoResult_VO {
         return this.result.get(result);
     }
 
-    public int getPrice() {
-        return price;
+    public double dividendRate() {
+        double rateResult = 0;
+        for (Rank rank : result.keySet()) {
+            rateResult += rank.getWinningMoney() * result.get(rank);
+        }
+
+        return rateResult / price * PERSENT;
     }
+
 }
