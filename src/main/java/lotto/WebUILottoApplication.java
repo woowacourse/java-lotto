@@ -1,8 +1,13 @@
 package lotto;
 
 import lotto.controller.LottoPurchaseController;
+import lotto.controller.WinningLottoController;
 import lotto.service.LottoResultService;
+import lotto.service.LottoTicketsService;
+import lottogame.domain.*;
 import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.io.UnsupportedEncodingException;
@@ -14,19 +19,20 @@ import static spark.Spark.*;
 
 public class WebUILottoApplication {
     public static void main(String[] args) {
-        staticFiles.externalLocation("src/main/resources/templates");
-        get("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            int round = LottoResultService.findPresentRound();
-            req.session().attribute("round", round);
-            return render(model, "index.html");
+        get("/", WebUILottoApplication::indexShow);
+        get("/error", WebUILottoApplication::redirectErrorPage);
+        path("/lottogame/money", () -> {
+            get("", LottoPurchaseController::showMoneyInputPage);
+            post("", LottoPurchaseController::showMoneyInputPage);
         });
-
-        get("/error", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            model.put("message", req.queryParams("message"));
-            return render(model, "error.html");
+        post("/lottogame/numberofmanual", LottoPurchaseController::showNumberOfManualInputPage);
+        post("/lottogame/createmanuallotto", LottoPurchaseController::showManualLottoInputPage);
+        path("/lottogame/purchaseresult", () -> {
+            get("", LottoPurchaseController::showPurchaseResultGet);
+            post("", LottoPurchaseController::showPurchaseResultPost);
         });
+        get("/winninglotto/create", WinningLottoController::showWinningLottoInputPage);
+//        post("/winninglotto/getresult", );
 
         exception(RuntimeException.class, (e, req, res) -> {
             String message = null;
@@ -37,8 +43,19 @@ public class WebUILottoApplication {
             }
             res.redirect("/error?message=" + message);
         });
+    }
 
-        LottoPurchaseController.controller();
+    private static Object redirectErrorPage(Request req, Response res) {
+        Map<String, Object> model = new HashMap<>();
+        model.put("message", req.queryParams("message"));
+        return render(model, "error.html");
+    }
+
+    private static Object indexShow(Request req, Response res) {
+        Map<String, Object> model = new HashMap<>();
+        int round = LottoResultService.findPresentRound();
+        req.session().attribute("round", round);
+        return render(model, "index.html");
     }
 
     public static String render(Map<String, Object> model, String templatePath) {

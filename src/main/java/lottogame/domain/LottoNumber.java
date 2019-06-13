@@ -36,6 +36,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumbers.get(random.nextInt(MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER);
     }
 
+    public int getLottoNumber() {
+        return lottoNumber;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(lottoNumber);

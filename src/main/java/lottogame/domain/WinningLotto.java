@@ -10,6 +10,14 @@ public class WinningLotto {
         this.bonusNumber = LottoNumber.Of(bonusNumber);
     }
 
+    public Lotto getWinningLotto() {
+        return winningLotto;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
     public static WinningLotto generate(Lotto lotto, int bonusNumber) {
         return new WinningLotto(lotto, bonusNumber);
     }
