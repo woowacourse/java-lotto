@@ -7,44 +7,7 @@ import java.sql.*;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ResultDao {
-    public Connection getConnection() {
-        Connection connection = null;
-        String server = "seongmo.synology.me";
-        String database = "techcourse_lotto";
-        String userName = "techcourse";
-        String password = "8IaSoMTzND7qeNuW";
-        String portNumber = ":3307";
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.err.println("!! JDBC Driver load 오류: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://" + server + portNumber + "/" +
-                    database + "?useSSL=false&serverTimezone=UTC", userName, password);
-            System.out.println("정상적으로 연결되었습니다~");
-        } catch (SQLException e) {
-            System.out.println("연결 오류: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        return connection;
-    }
-
-    public void closeConnection(Connection connection) {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            System.err.println("con 오류: " + e.getMessage());
-        }
-    }
-
+public class ResultDao extends Connector {
     public void addResult(int round, ResultDto resultDTO) throws SQLException {
         String query = "INSERT INTO lotto_result " +
                 "(round, first, second, third, fourth, fifth, miss, yield, win_prize) " +
