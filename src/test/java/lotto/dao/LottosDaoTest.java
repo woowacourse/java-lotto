@@ -17,25 +17,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottosDaoTest {
 
     private Connection conn;
-    private LottosDao lottosDAO;
+    private LottosDao lottosDao;
     private List<Lotto> lottos;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws SQLException {
         conn = new DatabaseConnection().getConnection();
-        lottosDAO = new LottosDao(conn);
+        lottosDao = new LottosDao(conn);
         lottos = Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        lottosDao.deleteAllLottos();
     }
 
     @Test
     public void Lottos_추가() throws SQLException {
-        lottosDAO.addLottos(1,new Lottos(lottos));
+        lottosDao.addLottos(1,new Lottos(lottos));
     }
 
     @Test
     public void Lotto_조회() throws SQLException {
-        lottosDAO.addLottos(1,new Lottos(lottos));
-        assertThat(lottosDAO.findLottoByRound(1)).isEqualTo(new Lottos(lottos));
+        lottosDao.addLottos(1,new Lottos(lottos));
+        assertThat(lottosDao.findLottoByRound(1)).isEqualTo(new Lottos(lottos));
     }
 
 }
