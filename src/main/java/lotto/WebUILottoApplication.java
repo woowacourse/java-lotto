@@ -2,8 +2,7 @@ package lotto;
 
 import lotto.dao.*;
 import lotto.domain.*;
-import lotto.service.DBGetter;
-import lotto.service.DBLoader;
+import lotto.service.*;
 import lotto.util.ConvertLottoNumber;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -24,7 +23,7 @@ public class WebUILottoApplication {
 
         get("/show", (req, res) -> {
             List<String> rounds = new ArrayList<>();
-            for (Integer i = 1; i <= DBGetter.getCurrentRound(connection); i++) {
+            for (Integer i = 1; i <= LottoInfoService.getCurrentRound(connection); i++) {
                 rounds.add(i.toString());
             }
 
@@ -42,9 +41,9 @@ public class WebUILottoApplication {
             List<String> inputManualLottoNumbers = Arrays.asList(req.queryParams("manualLottoNumbers").split(DELIMITER));
             LottosFactory lottosFactory = new LottosFactory(inputManualLottoNumbers, lottoCount);
             Lottos currentLottos = lottosFactory.generateTotalLottos();
-            Integer round = DBGetter.getNextRound(connection);
+            Integer round = LottoPurchasingService.getNextRound(connection);
 
-            // Session
+            // Set Session
             req.session(true);
             req.session().attribute("round", round);
             req.session().attribute("lottos", currentLottos);
@@ -65,10 +64,10 @@ public class WebUILottoApplication {
                 System.err.println(e.getMessage());
             }
 
-            DBLoader.loadDBRoundTable(connection, round);
-            DBLoader.loadDBLottoTable(connection, round, lottos);
-            DBLoader.loadDBWinningLottoTable(connection, round, winningLotto);
-            DBLoader.loadDBLottoResultTable(connection, round, lottoResult);
+            LottoPurchasingService.loadDBRoundTable(connection, round);
+            LottoPurchasingService.loadDBLottoTable(connection, round, lottos);
+            LottoResultService.loadDBWinningLottoTable(connection, round, winningLotto);
+            LottoResultService.loadDBLottoResultTable(connection, round, lottoResult);
 
             DBManager.endTransaction(connection);
 
@@ -95,9 +94,9 @@ public class WebUILottoApplication {
     private static Map<String, Object> getLottoInfoModel(Connection connection, String lottoRound) throws SQLException {
         Map<String, Object> model = new HashMap<>();
         model.put("lottoRound", lottoRound);
-        model.put("lottos", DBGetter.getDBLottos(connection, lottoRound));
-        model.put("winningLotto", DBGetter.getDBWinningLotto(connection, lottoRound));
-        model.put("lottoResult", DBGetter.getDBLottoResultDTO(connection, lottoRound));
+        model.put("lottos", LottoInfoService.getDBLottos(connection, lottoRound));
+        model.put("winningLotto", LottoInfoService.getDBWinningLotto(connection, lottoRound));
+        model.put("lottoResult", LottoInfoService.getDBLottoResultDTO(connection, lottoRound));
         return model;
     }
 
