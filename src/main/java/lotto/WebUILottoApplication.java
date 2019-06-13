@@ -61,12 +61,12 @@ public class WebUILottoApplication {
             return render(model, "winning-result.html");
         });
 
-        get("/round-select", (req, res) -> {
+        get("/round/select", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "round-select.html");
         });
 
-        post("/round-result", (req, res) -> {
+        post("/round/result", (req, res) -> {
             int round = Integer.parseInt(req.queryParams("round"));
             Map<String, Object> model = RoundInformationService.loadRoundInformation(round);
             return render(model, "round-result.html");

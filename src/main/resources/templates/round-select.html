@@ -11,7 +11,7 @@
     <title>로또</title>
     <style>
             body {
-                background-image: url("./images/lotto_background.jpeg");
+                background-image: url("../images/lotto_background.jpeg");
                 background-repeat:no-repeat;
                 background-size:cover;
             }
@@ -20,7 +20,7 @@
 <body>
 <button type="button" class="btn btn-primary m-3" onclick="window.location.href='/'">홈으로</button>
 <div class="container jumbotron" style="text-align: center">
-    <form class="text-dark mt-5" method="post" action="/round-result">
+    <form class="text-dark mt-5" method="post" action="/round/result">
         <div class="container form-group">
             <label for="round">확인하고 싶은 회차를 입력해 주세요.</label>
             <input type="number" class="form-control" id="round" name="round">
