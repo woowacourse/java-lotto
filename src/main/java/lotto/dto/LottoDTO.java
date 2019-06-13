@@ -1,6 +1,8 @@
 package lotto.dto;
 
-import lotto.domain.LottoTicket;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoDTO {
     private int lottoId;
@@ -11,16 +13,23 @@ public class LottoDTO {
     private int num5;
     private int num6;
 
-    public LottoDTO(LottoTicket lottoTicket) {
-        String lottoNumbers = lottoTicket.toString().replaceAll("[|]", "");
-        String[] numbers = lottoNumbers.split(",");
+    public LottoDTO(int lottoId, int num1, int num2, int num3, int num4, int num5, int num6) {
+        this.lottoId = lottoId;
+        this.num1 = num1;
+        this.num2 = num2;
+        this.num3 = num3;
+        this.num4 = num4;
+        this.num5 = num5;
+        this.num6 = num6;
+    }
 
-        this.num1 = Integer.parseInt(numbers[0]);
-        this.num2 = Integer.parseInt(numbers[1]);
-        this.num3 = Integer.parseInt(numbers[2]);
-        this.num4 = Integer.parseInt(numbers[3]);
-        this.num5 = Integer.parseInt(numbers[4]);
-        this.num6 = Integer.parseInt(numbers[5]);
+    public LottoDTO(int num1, int num2, int num3, int num4, int num5, int num6) {
+        this.num1 = num1;
+        this.num2 = num2;
+        this.num3 = num3;
+        this.num4 = num4;
+        this.num5 = num5;
+        this.num6 = num6;
     }
 
     public int getNum1() {
@@ -45,5 +54,9 @@ public class LottoDTO {
 
     public int getNum6() {
         return num6;
+    }
+
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(Arrays.asList(num1, num2, num3, num4, num5, num6));
     }
 }

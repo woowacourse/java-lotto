@@ -9,12 +9,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoDAOTest {
-    private WinningLottoDAO winningLottoDAO;
-    
-    @BeforeEach
-    void setup() {
-        winningLottoDAO = new WinningLottoDAO();
-    }
+    private WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
 
     @Test
     void DB에서_당첨로또_갖고오는지_테스트() throws SQLException {
@@ -32,6 +27,6 @@ class WinningLottoDAOTest {
     @Test
     void 당첨로또_삽입_테스트() throws SQLException {
         WinningLottoDTO winningLotto = new WinningLottoDTO(7,11,12,13,14,15,16);
-        winningLottoDAO.addWinningLotto(winningLotto);
+        winningLottoDAO.addWinningLottoTicket(winningLotto);
     }
 }

@@ -11,7 +11,7 @@ import static lotto.db.DBConnection.getConnection;
 public class WinningLottoDAO {
     private static final Connection conn = getConnection();
 
-    public void addWinningLotto(WinningLottoDTO winningLotto) throws SQLException {
+    public void addWinningLottoTicket(WinningLottoDTO winningLotto) throws SQLException {
         int autoInsertedKey = addLotto();
         addLottoNumbers(autoInsertedKey, winningLotto.getNumbers());
         addWinningLotto(winningLotto, autoInsertedKey);

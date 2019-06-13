@@ -2,17 +2,21 @@
 로또 미션 진행을 위한 저장소
 
 ## TODO
-#### dto
 #### dao
-* 당첨 로또 insert
-	1. Lotto 테이블에 로또 정보 넣고
-	2. LottoNumber 테이블에 당첨번호 넣고
-	3. WinningLotto 테이블에 나머지 정보 넣고
+* **LottoDAO**
 
 ## Done
-#### dto
 #### dao
-* 당첨 로또 id에 대한 데이터 꺼내서 리턴하기
+* **WinningLottoDAO**
+  *   당첨 로또 insert
+	    1. Lotto 테이블에 로또 정보 넣고
+	    2. LottoNumber 테이블에 당첨번호 넣고
+	    3. WinningLotto 테이블에 나머지 정보 넣고
+    * 당첨 로또 id에 대한 데이터 꺼내서 리턴하기
+* **LottoDAO**
+  *   일반 로또 insert
+	    1. Lotto 테이블에 로또 정보 넣고
+	    2. LottoNumber 테이블에 당첨번호 넣고
 #### view
 * 구입 금액 입력 받았을 때,
     * 자연수인지 확인하기
