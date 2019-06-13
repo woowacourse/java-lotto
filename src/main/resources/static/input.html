@@ -52,7 +52,7 @@
             data:budget,
             dataType:'json',
             error:function(request,status,error){
-                alert("입력하신 금액으로 로또를 살 수 없습니다.\n"+request.responseText);
+                alert(JSON.parse(request.responseText).message);
                 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             },
             success:function(data){
@@ -111,7 +111,7 @@
                 },
                 dataType:'json',
                 error:function(request,status,error){
-                    alert("로또 번호에 문제가 있습니다.\n"+request.responseText);
+                    alert(JSON.parse(request.responseText).message);
                     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 },
                 success:function(data){
@@ -131,7 +131,7 @@
             type:"POST",
             dataType:'json',
             error:function(request,status,error){
-                alert("자동 로또 번호에 문제가 있습니다.\n"+request.responseText);
+                alert(JSON.parse(request.responseText).message);
                 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             },
             success:function(data){
