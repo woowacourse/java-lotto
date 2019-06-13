@@ -40,9 +40,9 @@ public class LottoResultService {
         model.put(LOTTO_RESULT, ResultMessage.getResult(lottoResult, getRanks()));
         int round = req.session().attribute(ROUND);
 
-        addRoundInDB(round, price);
-        addLottosInDB(round, lottos);
-        addWinningLottoInDB(round, winningLotto);
+        DaoService.addRoundInDB(round, price);
+        DaoService.addLottosInDB(round, lottos);
+        DaoService.addWinningLottoInDB(round, winningLotto);
 
         return ViewUtils.render(model, "result.html");
     };
@@ -64,26 +64,6 @@ public class LottoResultService {
         return ViewUtils.render(model, "result.html");
     };
 
-    private static void addRoundInDB(int round, Price price) throws SQLException {
-        Connection conn = new DatabaseConnection().getConnection();
-        RoundDao roundDao = new RoundDao(conn);
-
-        roundDao.addRound(round, price.getPrice());
-    }
-
-    private static void addLottosInDB(int round, Lottos lottos) throws SQLException {
-        Connection conn = new DatabaseConnection().getConnection();
-        LottosDao lottosDao = new LottosDao(conn);
-
-        lottosDao.addLottos(round, lottos);
-    }
-
-    private static void addWinningLottoInDB(int round, WinningLotto winningLotto) throws SQLException {
-        Connection conn = new DatabaseConnection().getConnection();
-        WinningLottoDao winningLottoDao = new WinningLottoDao(conn);
-
-        winningLottoDao.addWinningLotto(round, winningLotto);
-    }
 
     private static List<Rank> getRanks() {
         List<Rank> ranks = new ArrayList<>();
