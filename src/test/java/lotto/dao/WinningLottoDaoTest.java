@@ -21,6 +21,6 @@ class WinningLottoDaoTest {
 
     @Test
     void findByRoundTest() {
-        assertThat(new WinningLottoDao().findByRound(0)).isNotNull();
+        assertThat(new WinningLottoDao().findAllByRound(0)).isNotNull();
     }
 }

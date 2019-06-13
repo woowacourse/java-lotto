@@ -21,4 +21,7 @@ public class WinningLottoService {
     }
 
 
+    public Object findAllByRound(final int round) {
+        return winningLottoDao.findAllByRound(round);
+    }
 }

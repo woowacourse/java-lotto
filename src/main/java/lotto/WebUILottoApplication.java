@@ -37,12 +37,13 @@ public class WebUILottoApplication {
         ResultController resultController = new ResultController(winPrizeService, winningLottoService, lottoService);
         ErrorController errorController = new ErrorController();
         MainController mainController = new MainController(roundDao);
+        RoundController roundController = new RoundController(winPrizeService, lottoService, winningLottoService);
 
         externalStaticFileLocation("src/main/resources/templates");
 
         get("/", mainController::main);
 
-        get("/round", RoundController::round);
+        get("/round", roundController::round);
 
         post("/lottos", lottoController::addLottos);
 

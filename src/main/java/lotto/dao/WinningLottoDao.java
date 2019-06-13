@@ -32,7 +32,7 @@ public class WinningLottoDao {
         return result;
     }
 
-    public WinningLotto findByRound(int round) {
+    public WinningLotto findAllByRound(int round) {
         Connection conn = DBUtils.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
