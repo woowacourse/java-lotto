@@ -28,7 +28,7 @@ public class WinningLottoDao {
         Connection conn = DBManager.getConnection();
         LottoDto lotto = winningLotto.getWinningLotto();
         try {
-            String query = "insert into winning_lotto(turn, numbers, bonus_number) values (?, ?, ?)";
+            String query = "insert into winning_lotto(round, numbers, bonus_number) values (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, round);
             pstmt.setString(2, makeNumbersFormat(lotto.getNumbers()));
@@ -48,7 +48,7 @@ public class WinningLottoDao {
     public WinningLotto findByRound(final int round) {
         Connection conn = DBManager.getConnection();
         try {
-            String query = "select numbers, bonus_number from winning_lotto where turn = ?";
+            String query = "select numbers, bonus_number from winning_lotto where round = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, round);
             ResultSet rs = pstmt.executeQuery();

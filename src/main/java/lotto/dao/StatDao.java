@@ -25,7 +25,7 @@ public class StatDao {
     public void add(final StatDto statDto, final int round) {
         Connection conn = DBManager.getConnection();
         try {
-            String query = "insert into stat(turn, first, second, third, fourth, fifth, miss, profit) " +
+            String query = "insert into stat(round, first, second, third, fourth, fifth, miss, profit) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, round);
@@ -48,7 +48,7 @@ public class StatDao {
         Connection conn = DBManager.getConnection();
         Map<Rank, Integer> map = new HashMap<Rank, Integer>();
         try {
-            String query = "SELECT first, second, third, fourth, fifth, miss, profit FROM stat WHERE turn = ?";
+            String query = "SELECT first, second, third, fourth, fifth, miss, profit FROM stat WHERE round = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, round);
             ResultSet rs = pstmt.executeQuery();
