@@ -30,25 +30,35 @@ public class WebUILottoApplication {
         });
 
         post("/lotto", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
             PurchaseInformation purchaseInformation = setUpPurchaseInformation(
                     req.queryParams("money"),
                     req.queryParams("manualLottoCount"));
-            model.put("purchaseMessage", OutputViewFactory.outputLottosPurchaseMessage(purchaseInformation));
-
             registerManualLottosNumbers(purchaseInformation, req);
             Lottos lottos = LottoMachine.buyLottos(purchaseInformation);
+
+            req.session(true);
+            req.session().attribute("lottos", lottos);
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("purchaseMessage", OutputViewFactory.outputLottosPurchaseMessage(purchaseInformation));
             model.put("lottos", OutputViewFactory.outputLottos(lottos));
+            return render(model, "purchase-result.html");
+        });
+
+        post("/lotto/result", (req, res) -> {
+            Lottos lottos = req.session().attribute("lottos");
 
             WinningInformation winningInformation =
                     setUpWinningInformation(req.queryParams("winningNumber"), req.queryParams("bonusBall"));
             LottoGame lottoGame = new LottoGame(winningInformation);
             LottoResult lottoResult = lottoGame.play(lottos);
+
+            Map<String, Object> model = new HashMap<>();
             model.put("result", OutputViewFactory.outputResult(lottoResult));
             model.put("yieldMessage", OutputViewFactory.outputYield(lottoResult));
 
             RoundInformationService.saveRoundInformation(lottos, winningInformation);
-            return render(model, "result.html");
+            return render(model, "winning-result.html");
         });
 
         get("/round-select", (req, res) -> {

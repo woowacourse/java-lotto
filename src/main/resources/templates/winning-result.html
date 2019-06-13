@@ -11,11 +11,11 @@
     <title>로또</title>
     <style>
             body {
-                background-image: url("./images/lotto_background.jpeg");
+                background-image: url("../images/lotto_background.jpeg");
                 background-repeat:no-repeat;
                 background-size:cover;
             }
-        </style>
+    </style>
 </head>
 <body>
 <button type="button" class="btn btn-primary m-3" onclick="window.location.href='/'">홈으로</button>
@@ -25,11 +25,6 @@
     <p class="lead">{{this}}</p>
     {{/result}}
     {{yieldMessage}}
-    <hr class="my-4">
-    <h3 class="display-4">{{purchaseMessage}}</h3>
-    {{#lottos}}
-    <p class="lead">{{this}}</p>
-    {{/lottos}}
 </div>
 
 <!-- Optional JavaScript -->
