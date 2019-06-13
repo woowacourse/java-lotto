@@ -1,9 +1,13 @@
-package lotto.dao;
+package lotto.db.dao;
 
-import lotto.dto.LottoDTO;
+import lotto.db.dto.LottoDTO;
+import lotto.domain.Factory.LottoTicketsFactory;
+import lotto.domain.LottoTickets;
+import lotto.domain.Money;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,8 +29,8 @@ class LottoDAOTest {
 
     @Test
     void 일반로또_삽입_테스트() throws SQLException {
-        LottoDTO lotto = new LottoDTO(11, 12, 13, 14, 15, 16);
-        lottoDAO.addLottoTicket(lotto);
+        LottoTickets lottoTickets = LottoTicketsFactory.getInstance().create(new Money(5000), Arrays.asList("1,2,3,4,5,6", "10,20,30,40,41,42"));
+        lottoDAO.addLottoTicket(lottoTickets);
     }
 
 }

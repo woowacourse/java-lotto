@@ -1,7 +1,6 @@
-package lotto.dao;
+package lotto.db.dao;
 
-import lotto.dto.WinningLottoDTO;
-import org.junit.jupiter.api.BeforeEach;
+import lotto.db.dto.WinningLottoDTO;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;

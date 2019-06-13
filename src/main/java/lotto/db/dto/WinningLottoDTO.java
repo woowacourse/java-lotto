@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.db.dto;
 
 import java.util.*;
 

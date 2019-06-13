@@ -20,20 +20,20 @@
 			<hr class="my-4">
 			<div class="container">
 				<div class="row mb-2 text-center">
-					<p class="h5">구입 금액: {{money}}</p>
+					<p class="h5">구입 금액: {{money}}원</p>
 					<br />
 					<p class="h5">수동으로 {{amountOfCustom}}개, 자동으로 {{amountOfAuto}}개를 구매했습니다.</p>
 				</div>
 				<div class="row mb-2">
 					{{#lottos}}
 						<div class="btn-group-toggle " data-toggle="buttons">
-							<span class="badge badge-pill badge-secondary">1&nbsp;</span>
+							<span class="badge badge-pill badge-secondary">{{@index}}</span>
 							{{#lottoNumbers}}
 								<label class="btn btn-outline-dark mb-1 active disable">
 									<input type="checkbox" checked autocomplete="off" disable> {{this}}
 								</label>
 							{{/lottoNumbers}}
-						</div>
+						</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					{{/lottos}}
 				</div>
 			</div>
