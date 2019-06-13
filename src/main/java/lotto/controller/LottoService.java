@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.ConnectionFactory;
 import lotto.dao.LottoDao;
+import lotto.dao.WinningLottoDao;
 import lotto.domain.WinningResult;
 import lotto.domain.buyer.Budget;
 import lotto.domain.buyer.LottoContainer;
@@ -24,10 +25,12 @@ public class LottoService {
     private static final String NO_MONEY_ERROR_MSG = "구입 금액으로 원하는 장 수의 로또를 살 수 없습니다.";
 
     private static LottoDao lottoDao;
+    private static WinningLottoDao winningLottoDao;
 
-    {
+    static {
         Connection con = ConnectionFactory.connect();
         lottoDao = new LottoDao(con);
+        winningLottoDao = new WinningLottoDao(con);
     }
 
     private Budget budget;
@@ -93,6 +96,17 @@ public class LottoService {
         List<LottoDto> dtos = lottoContainer.createLottoDto();
         for (LottoDto dto : dtos) {
             lottoDao.addLotto(dto);
+        }
+    }
+
+    public void registerWinningLotto() throws SQLException {
+        winningLottoDao.addWinningLotto(winningLotto.createWinningLottoDto());
+    }
+
+    public void registerResult() throws SQLException {
+        List<LottoDto> lottoDtos = lottoDao.getLottosInThisRound();
+        for (LottoDto lottoDto : lottoDtos) {
+            System.out.println(lottoDto.getLottoNo());
         }
     }
 }

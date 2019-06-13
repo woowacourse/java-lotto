@@ -1,11 +1,15 @@
 package lotto.dao;
 
+import lotto.domain.lotto.Lotto;
 import lotto.dto.LottoDto;
+import lotto.utils.LottoNoParser;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoDao {
     private Connection con;
@@ -20,7 +24,6 @@ public class LottoDao {
         pstmt.setInt(1, findRoundNo() + 1);
         pstmt.setString(2, lottoDto.getLottoNo());
         pstmt.executeUpdate();
-        pstmt.close();
     }
 
     public int findRoundNo() throws SQLException {
@@ -31,5 +34,27 @@ public class LottoDao {
         if (!rs.next())
             return 0;
         return rs.getInt("회차");
+    }
+
+    public List<LottoDto> getLottosInThisRound() throws SQLException {
+        String query = "SELECT 로또번호 FROM 구매로또 WHERE 회차 = ?";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setInt(1, findRoundNo());
+        ResultSet rs = pstmt.executeQuery();
+
+        return getLottoDtos(rs);
+    }
+
+    private List<LottoDto> getLottoDtos(ResultSet rs) throws SQLException {
+        List<LottoDto> lottoDtos = new ArrayList<>();
+        if (!rs.next())
+            return lottoDtos;
+        do {
+            lottoDtos.add(
+                    Lotto.of(LottoNoParser.parseToLottoNos(rs.getString("로또번호")))
+                            .createLottoDto());
+        } while (rs.next());
+
+        return lottoDtos;
     }
 }
