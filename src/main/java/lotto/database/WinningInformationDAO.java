@@ -83,7 +83,8 @@ public class WinningInformationDAO {
 
     public void clear() throws SQLException {
         deleteAllWinningInfo();
-        initializeAutoIncrement();
+        initializeWinningInfoAutoIncrement();
+        initializeLottoAutoIncrement();
     }
 
     private void deleteAllWinningInfo() throws SQLException {
@@ -92,8 +93,14 @@ public class WinningInformationDAO {
         pstmt.executeUpdate();
     }
 
-    private void initializeAutoIncrement() throws SQLException {
+    private void initializeWinningInfoAutoIncrement() throws SQLException {
         String query = "ALTER TABLE winningInfo AUTO_INCREMENT=1";
+        PreparedStatement pstmt = connection.prepareStatement(query);
+        pstmt.executeUpdate();
+    }
+
+    private void initializeLottoAutoIncrement() throws SQLException {
+        String query = "ALTER TABLE lotto AUTO_INCREMENT=1";
         PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.executeUpdate();
     }
