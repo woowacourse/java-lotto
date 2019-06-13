@@ -15,6 +15,7 @@ public class LottoDAO {
     private static final String INSERT_LOTTO_QUERY =
             "INSERT INTO lotto(number1, number2, number3, number4, number5, number6, round)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String SELECT_LOTTOS_QUERY = "SELECT * FROM lotto WHERE round = ?";
 
     private static LottoDAO lottoDAO;
     private static Connection connection;
@@ -47,8 +48,7 @@ public class LottoDAO {
     }
 
     public Lottos findLottosByRound(int round) throws SQLException {
-        String query = "SELECT * FROM lotto WHERE round = ?";
-        PreparedStatement pstmt = connection.prepareStatement(query);
+        PreparedStatement pstmt = connection.prepareStatement(SELECT_LOTTOS_QUERY);
         pstmt.setInt(1, round);
         ResultSet resultSet = pstmt.executeQuery();
 

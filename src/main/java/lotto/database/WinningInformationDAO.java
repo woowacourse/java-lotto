@@ -23,7 +23,10 @@ public class WinningInformationDAO {
                     " winning_number6," +
                     " bonus)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+    private static final String SELECT_WINNING_INFO_QUERY = "SELECT * FROM winningInfo WHERE round = ?";
+    private static final String DELETE_WINNING_INFO_QUERY = "DELETE FROM winningInfo";
+    private static final String INIT_WINNING_INFO_AUTO_INCREAMENT_QUERY = "ALTER TABLE winningInfo AUTO_INCREMENT=1";
+    private static final String INIT_LOTTO_AUTO_INCREAMENT_QUERY = "ALTER TABLE lotto AUTO_INCREMENT=1";
     private static WinningInformationDAO winningInformationDAO;
     private static Connection connection;
 
@@ -62,8 +65,7 @@ public class WinningInformationDAO {
     }
 
     public WinningInformation findWinningInformationByRound(int round) throws SQLException {
-        String query = "SELECT * FROM winningInfo WHERE round = ?";
-        PreparedStatement pstmt = connection.prepareStatement(query);
+        PreparedStatement pstmt = connection.prepareStatement(SELECT_WINNING_INFO_QUERY);
         pstmt.setInt(1, round);
         ResultSet resultSet = pstmt.executeQuery();
         if (!resultSet.next()) {
@@ -86,20 +88,17 @@ public class WinningInformationDAO {
     }
 
     private void deleteAllWinningInfo() throws SQLException {
-        String query = "DELETE FROM winningInfo";
-        PreparedStatement pstmt = connection.prepareStatement(query);
+        PreparedStatement pstmt = connection.prepareStatement(DELETE_WINNING_INFO_QUERY);
         pstmt.executeUpdate();
     }
 
     private void initializeWinningInfoAutoIncrement() throws SQLException {
-        String query = "ALTER TABLE winningInfo AUTO_INCREMENT=1";
-        PreparedStatement pstmt = connection.prepareStatement(query);
+        PreparedStatement pstmt = connection.prepareStatement(INIT_WINNING_INFO_AUTO_INCREAMENT_QUERY);
         pstmt.executeUpdate();
     }
 
     private void initializeLottoAutoIncrement() throws SQLException {
-        String query = "ALTER TABLE lotto AUTO_INCREMENT=1";
-        PreparedStatement pstmt = connection.prepareStatement(query);
+        PreparedStatement pstmt = connection.prepareStatement(INIT_LOTTO_AUTO_INCREAMENT_QUERY);
         pstmt.executeUpdate();
     }
 }
