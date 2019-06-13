@@ -1,8 +1,11 @@
 package controller;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import model.*;
 import spark.ModelAndView;
 import spark.Request;
+import spark.Response;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import view.WebView;
 
@@ -21,23 +24,11 @@ public class WebUILottoApplication {
         port(4567);
         staticFiles.location("/static");
 
-        get("/", (req, res) -> indexPage());
+        get("/", (req, res) -> main());
 
-        get("/lotto", (req, res) -> {
-            try {
-                return resultPage(req);
-            } catch (IllegalArgumentException e) {
-                return WebView.error();
-            }
-        });
+        post("/purchase", "application/json", (req, res) -> orThrowError(() -> purchase(req), res));
 
-        get("/history", (req, res) -> {
-            try {
-                return historyPage(req);
-            } catch (IllegalArgumentException | SQLException e) {
-                return WebView.error();
-            }
-        });
+        post("/history", (req, res) -> orThrowError(() -> history(req), res));
 
         get("*", (req, res) -> {
             res.status(404);
@@ -50,23 +41,41 @@ public class WebUILottoApplication {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 
-    private static String indexPage() {
+    @FunctionalInterface
+    public interface SupplierWithExceptions<T, E extends Exception> {
+        T get() throws E;
+    }
+
+    private static String orThrowError(SupplierWithExceptions<String, Exception> f, Response res) {
+        try {
+            return f.get();
+        } catch (Exception e) {
+            res.status(500);
+            return WebView.error();
+        }
+    }
+
+    private static String main() {
         Map<String, Object> model = new HashMap<String, Object>() {{
             put("price", Lotto.PRICE);
             put("priceFormatted", NumberFormat.getInstance().format(Lotto.PRICE));
             put("history", WebView.historySelect(PurchaseHistory.retrieveDatesFromLog()));
             put("recentRoundMenu", WebView.roundSelect());
         }};
-        return render(model, "index.html");
+        return render(model, "app.html");
     }
 
-    private static String resultPage(Request req) {
-        final int round = Integer.parseInt(req.queryParams("round").trim());
+    private static String purchase(Request req) {
+        JsonElement el = new JsonParser().parse(req.body());
+        final int round = el.getAsJsonObject().get("round").getAsInt();
         final WinningNumbers winningNumbers = WinningNumbersFactory.of(round);
         final List<Lotto> manualLottos = parseManualLottos(req);
         final Lottos lottos = new Lottos(
                 manualLottos,
-                new LottoPurchaseAmount(new Money(req.queryParams("investment")), manualLottos.size())
+                new LottoPurchaseAmount(
+                        new Money(el.getAsJsonObject().get("investment").getAsInt()),
+                        manualLottos.size()
+                )
         );
         final LottoResult result = lottos.getResult(winningNumbers);
         PurchaseHistory.writeLog(lottos, round, result);
@@ -79,8 +88,9 @@ public class WebUILottoApplication {
         return render(model, "result.html");
     }
 
-    private static String historyPage(Request req) throws SQLException {
-        final PurchaseHistory history = new PurchaseHistory(req.queryParams("date").trim());
+    private static String history(Request req) throws SQLException {
+        JsonElement el = new JsonParser().parse(req.body());
+        final PurchaseHistory history = new PurchaseHistory(el.getAsJsonObject().get("date").getAsString());
         if (history.round() == 0) {
             throw new IllegalArgumentException();
         }

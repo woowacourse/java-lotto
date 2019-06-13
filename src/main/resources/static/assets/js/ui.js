@@ -39,3 +39,7 @@ function resetManualInputs() {
         removeManualInputs()
     }
 }
+
+function deleteFrontPage() {
+    document.getElementById("front_page").outerHTML = "";
+}
