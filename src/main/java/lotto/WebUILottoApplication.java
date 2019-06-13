@@ -37,7 +37,7 @@ public class WebUILottoApplication {
         get("/lookup", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             GameDAO gameDAO = new GameDAO();
-            model.put("totalCount", gameDAO.getCount());
+            model.put("totalCount", gameDAO.selectQuery("COUNT(id)"));
             return render(model, "lookup.html");
         });
 

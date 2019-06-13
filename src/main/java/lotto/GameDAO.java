@@ -23,7 +23,7 @@ public class GameDAO {
     }
 
     public void addLottoNumbers(List<Lotto> lottoNumbers) throws SQLException {
-        int maxId = getMaxId();
+        int maxId = selectQuery("MAX(id)");
         String query = "INSERT INTO lottos(games_id, numbers) VALUES(?, ?)";
         PreparedStatement pstmt = JDBCConnection.start().prepareStatement(query);
         for (Lotto lotto : lottoNumbers) {
@@ -33,22 +33,12 @@ public class GameDAO {
         }
     }
 
-    public int getCount() throws SQLException {
-        String query = "SELECT COUNT(id) FROM games";
+    public int selectQuery(String label) throws SQLException {
+        String query = "SELECT "+ label + " FROM games";
         PreparedStatement pstmt = JDBCConnection.start().prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
         if (rs.next()) {
-            return rs.getInt("COUNT(id)");
-        }
-        return 1;
-    }
-
-    public int getMaxId() throws SQLException {
-        String query = "SELECT MAX(id) FROM games";
-        PreparedStatement pstmt = JDBCConnection.start().prepareStatement(query);
-        ResultSet rs = pstmt.executeQuery();
-        if (rs.next()) {
-            return rs.getInt("MAX(id)");
+            return rs.getInt(label);
         }
         return 1;
     }
