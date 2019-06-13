@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+<div class="container">
+    <form action="/lotto" method="POST">
+        <div>
+            <label>
+                구입 금액 입력
+                <input min="0" name="buy-price" step="1000" type="number">
+            </label>
+        </div>
+        <div>
+            수동 구입할 로또 번호를 입력해주세요. (각 번호 구분은 ', '로 해야합니다.)
+            <textarea name="lotto-numbers"></textarea>
+        </div>
+        <div>
+            <label>
+                당첨 번호 입력 (각 번호 구분은 ', '로 해야합니다.)
+                <input name="winning-numbers" type="text">
+            </label>
+            <label>
+                보너스 볼 입력해주세요
+                <input max="45" min="1" name="bonus" type="number">
+            </label>
+        </div>
+        <button type="submit">로또 만들기</button>
+    </form>
+</div>
+</body>
+</html>
