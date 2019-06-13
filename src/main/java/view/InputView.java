@@ -42,7 +42,7 @@ public class InputView {
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             System.out.println(INTEGER_FORMAT_EXCEPTION_MESSAGE);
-            return inputWinningNumbers();
+            return getNumbersForLotto();
         }
     }
 
