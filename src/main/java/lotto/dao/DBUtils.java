@@ -8,8 +8,8 @@ public class DBUtils {
 
     static Connection getConnection() {
         Connection conn = null;
+        PropertiesUtil propertiesUtil = PropertiesUtil.getInstance();
         try {
-            PropertiesUtil propertiesUtil = PropertiesUtil.getInstance();
             Class.forName(propertiesUtil.getDriverClassName());
             conn = DriverManager.getConnection(propertiesUtil.getDbURL(), propertiesUtil.getProperties());
         } catch (SQLException | ClassNotFoundException e) {
@@ -17,6 +17,21 @@ public class DBUtils {
         }
         return conn;
     }
+
+    // TODO 추상화하기
+    static Connection getTestConnection() {
+        Connection conn = null;
+        PropertiesUtil propertiesUtil = PropertiesUtil.getTestIntance();
+        try {
+            Class.forName(propertiesUtil.getDriverClassName());
+            conn = DriverManager.getConnection(propertiesUtil.getDbURL(), propertiesUtil.getProperties());
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
+
+
 
     static void close(Connection conn, PreparedStatement ps) {
         if (ps != null) {

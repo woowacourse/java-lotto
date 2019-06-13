@@ -4,11 +4,16 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
 import lotto.domain.WinningLotto;
 import lotto.domain.generator.LottoNosManualGenerator;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottoDaoTest {
+    @BeforeAll
+    static void createTable() throws Exception {
+        TableCreator.create();
+    }
 
     @Test
     void addTest() {

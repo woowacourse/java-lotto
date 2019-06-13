@@ -2,6 +2,7 @@ package lotto.dao;
 
 import lotto.domain.Rank;
 import lotto.domain.WinPrize;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,11 @@ class WinPrizeDaoTest {
     WinPrize winPrize = new WinPrize();
     WinPrizeDao winPrizeDao = new WinPrizeDao();
     int round = 0;
+
+    @BeforeAll
+    static void createTable() throws Exception {
+        TableCreator.create();
+    }
 
     @BeforeEach
     void setUp() {

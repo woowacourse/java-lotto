@@ -13,12 +13,16 @@ public class PropertiesUtil {
         return LazyHolder.INSTANCE;
     }
 
-    private PropertiesUtil() {
+    public static PropertiesUtil getTestIntance() {
+        return LazyHolder.INSTANCE_TEST;
+    }
+
+    private PropertiesUtil(String path) {
         try {
-            InputStream in = this.getClass().getClassLoader().getResourceAsStream("jdbc.properties");
+            InputStream in = this.getClass().getClassLoader().getResourceAsStream(path);
             properties = new Properties();
             properties.load(in);
-            dbURL = String.format("jdbc:mysql://%s/%s", properties.getProperty("server"), properties.getProperty("database"));
+            dbURL = properties.getProperty("url");
             driverClassName = properties.getProperty("driver-class-name");
         } catch (IOException e) {
             e.printStackTrace();
@@ -38,6 +42,7 @@ public class PropertiesUtil {
     }
 
     private static class LazyHolder {
-        private static final PropertiesUtil INSTANCE = new PropertiesUtil();
+        private static final PropertiesUtil INSTANCE = new PropertiesUtil("jdbc.properties");
+        private static final PropertiesUtil INSTANCE_TEST = new PropertiesUtil("jdbcTest.properties");
     }
 }

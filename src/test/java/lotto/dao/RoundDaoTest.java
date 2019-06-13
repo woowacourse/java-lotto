@@ -1,10 +1,16 @@
 package lotto.dao;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RoundDaoTest {
+    @BeforeAll
+    static void createTable() throws Exception {
+        TableCreator.create();
+    }
+
     @Test
     void addTest() {
         assertThat(1).isEqualTo(new RoundDao().add());
