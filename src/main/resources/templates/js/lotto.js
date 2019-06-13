@@ -32,7 +32,7 @@ function addFields(){
     while (manualLottoDiv.hasChildNodes()) {
         manualLottoDiv.removeChild(manualLottoDiv.lastChild);
     }
-    for (i=0; i < number; i++){
+    for (i = 0; i < number; i++) {
         var tmpContainer = createContainer(i);
         tmpContainer.appendChild(makeText(i));
         var input = document.createElement("input");
@@ -64,6 +64,10 @@ function makeText(i) {
     div.className = "input-group-prepend";
     div.innerHTML = '<span class="input-group-text">로또' + (i+1) +'</span>';
     return div;
+}
+
+function cancel() {
+    document.getElementById('winningLotto').value = document.getElementById('bonusBall').value = '';
 }
 
 window.onbeforeunload = function (e) {
