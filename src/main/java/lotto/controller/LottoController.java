@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoService;
+import lotto.service.LottoService;
 import lotto.util.LottoParser;
 import spark.Request;
 

@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import lotto.dto.GameResultDto;
+import lotto.service.LottoService;
 import lotto.util.LottoDtoConverter;
-import lotto.util.LottoParser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

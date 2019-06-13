@@ -1,8 +1,10 @@
 package lotto.controller;
 
-import lotto.WinningLottoService;
+import lotto.service.LottoService;
+import lotto.service.StatService;
+import lotto.service.WinningLottoService;
 import lotto.domain.*;
-import lotto.dto.GameResultDto;
+import lotto.dto.GameStatDto;
 import lotto.util.LottoDtoConverter;
 import lotto.util.LottoParser;
 import spark.Request;
@@ -11,22 +13,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-public class ResultController {
-    private final static ResultController INSTANCE = new ResultController();
+public class StatController {
+    private final static StatController INSTANCE = new StatController();
 
     private final LottoService lottoService;
     private final WinningLottoService winningLottoService;
-    private final ResultService resultService;
+    private final StatService statService;
 
-    private ResultController() {
+    private StatController() {
         lottoService = LottoService.getInstance();
         winningLottoService = WinningLottoService.getInstance();
-        resultService = ResultService.getInstance();
+        statService = StatService.getInstance();
     }
 
-    public static ResultController getInstance() {
+    public static StatController getInstance() {
         return INSTANCE;
     }
 
@@ -35,10 +36,10 @@ public class ResultController {
         WinningLotto winningLotto = makeWinningLotto(req);
         winningLottoService.add(winningLotto);
         List<Lotto> lottos = makeLottos();
-        GameResultDto gameResultDto = makeGameResultDto(winningLotto, lottos);
-        model.put("profit", stringifyProfit(gameResultDto));
-        model.put("stat", stringifyResult(gameResultDto));
-        resultService.add(gameResultDto);
+        GameStatDto gameStatDto = makeGameResultDto(winningLotto, lottos);
+        model.put("profit", stringifyProfit(gameStatDto));
+        model.put("stat", stringifyResult(gameStatDto));
+        statService.add(gameStatDto);
         return model;
     }
 
@@ -55,17 +56,17 @@ public class ResultController {
         return converter.convertDtoToLottos(lottoService.getLottos());
     }
 
-    private GameResultDto makeGameResultDto(WinningLotto winningLotto, List<Lotto> lottos) {
+    private GameStatDto makeGameResultDto(WinningLotto winningLotto, List<Lotto> lottos) {
         GameResultMatcher gameResultMatcher = GameResultMatcher.of(lottos);
         gameResultMatcher.match(winningLotto);
-        return GameResultDto.of(gameResultMatcher);
+        return GameStatDto.of(gameResultMatcher);
     }
 
-    private String stringifyProfit(GameResultDto gameResultDto) {
-        return String.format("%.1f", gameResultDto.getProfit());
+    private String stringifyProfit(GameStatDto gameStatDto) {
+        return String.format("%.1f", gameStatDto.getProfit());
     }
 
-    private List<String> stringifyResult(final GameResultDto result) {
+    private List<String> stringifyResult(final GameStatDto result) {
         List<String> results = new ArrayList<>();
         for (Rank rank : Rank.reverseValues()) {
             results.add(stringifyRank(rank) + result.getCount(rank) + "개");

@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.dao.TurnDao;
 import lotto.domain.*;
+import lotto.service.LottoService;
 import lotto.util.LottoDtoConverter;
 import lotto.util.LottoParser;
 import lotto.view.InputView;

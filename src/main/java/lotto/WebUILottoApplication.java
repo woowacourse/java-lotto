@@ -1,15 +1,15 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.controller.ResultController;
-import lotto.dao.GameResultDao;
+import lotto.controller.StatController;
+import lotto.dao.GameStatDao;
 import lotto.dao.TurnDao;
 import lotto.dao.WinningLottoDao;
-import lotto.domain.LottoService;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.domain.exception.*;
-import lotto.dto.GameResultDto;
+import lotto.dto.GameStatDto;
+import lotto.service.LottoService;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -29,7 +29,7 @@ public class WebUILottoApplication {
     public static void main(String[] args) {
         final LottoService service = LottoService.getInstance();
         final LottoController lottoController = LottoController.getInstance();
-        final ResultController resultController = ResultController.getInstance();
+        final StatController statController = StatController.getInstance();
         handleException();
         get("/", (req, res) -> renderMain());
         get("/turn/:index", (req, res) ->
@@ -42,7 +42,7 @@ public class WebUILottoApplication {
                 render(lottoController.processLottos(req), "lottos.html")
         );
         post("/result", (req, res) ->
-                render(resultController.processResult(req), "result.html")
+                render(statController.processResult(req), "result.html")
         );
         post("/end", (req, res) ->
                 renderEndPage(service, req)
@@ -73,11 +73,10 @@ public class WebUILottoApplication {
     }
 
     // TODO 회차당 정보
-    //turnDao만 쓸 수 있다. 지금은 유지한다
     private static String renderTurnInfo(final LottoService service, final Request req) {
         Map<String, Object> model = new HashMap<>();
         int turn = Integer.parseInt(req.params("index"));
-        GameResultDto result = findResultByTurn(turn);
+        GameStatDto result = findResultByTurn(turn);
         model.put("turn", turn);
         model.put("lottos", service.findAllByTurn(turn));
         model.put("winning_lotto", findWinningLottoByTurn(turn));
@@ -90,11 +89,11 @@ public class WebUILottoApplication {
         return WinningLottoDao.getInstance().findByTurn(turn);
     }
 
-    private static GameResultDto findResultByTurn(final int turn) {
-        return GameResultDao.getInstance().findByTurn(turn);
+    private static GameStatDto findResultByTurn(final int turn) {
+        return GameStatDao.getInstance().findByTurn(turn);
     }
 
-    private static List<String> stringifyResult(final GameResultDto result) {
+    private static List<String> stringifyResult(final GameStatDto result) {
         List<String> results = new ArrayList<>();
         for (Rank rank : Rank.reverseValues()) {
             results.add(stringifyRank(rank) + result.getCount(rank) + "개");
@@ -125,14 +124,16 @@ public class WebUILottoApplication {
         return backToInitial(service, model);
     }
 
+    //TODO
     private static String backToInitial(final LottoService service, Map<String, Object> model) {
-        GameResultDao.getInstance().deleteAll();
+        GameStatDao.getInstance().deleteAll();
         WinningLottoDao.getInstance().deleteAll();
         service.deleteAll();
         TurnDao.getInstance().deleteAll();
         return render(model, "main.html");
     }
 
+    //TODO
     private static String backToMain(Map<String, Object> model) {
         TurnDao.getInstance().add();
         model.put("current_turn", findNextTurn());
@@ -140,6 +141,7 @@ public class WebUILottoApplication {
         return render(model, "main.html");
     }
 
+    //TODO
     private static Integer findNextTurn() {
         return TurnDao.getInstance().findNext();
     }

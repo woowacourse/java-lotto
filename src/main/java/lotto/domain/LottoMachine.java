@@ -7,22 +7,22 @@ public class LottoMachine {
 
 	private int remainMoney;
 
-	LottoMachine() {
+	public LottoMachine() {
 		remainMoney = 0;
 	}
 
-	void charge(final int money) {
+	public void charge(final int money) {
 		if (money < LOTTO_MONEY) {
 			throw new LackOfMoneyException("1000원 이상 구매하세요");
 		}
 		remainMoney += money;
 	}
 
-	void buy() {
+	public void buy() {
 		this.remainMoney -= LOTTO_MONEY;
 	}
 
-	boolean isRemainMoney() {
+	public boolean isRemainMoney() {
 		return (this.remainMoney >= LOTTO_MONEY);
 	}
 

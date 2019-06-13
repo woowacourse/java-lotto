@@ -1,7 +1,10 @@
-package lotto.domain;
+package lotto.service;
 
 import lotto.dao.LottosDao;
 import lotto.dao.TurnDao;
+import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
+import lotto.domain.LottoMachine;
 import lotto.dto.LottoDto;
 import lotto.util.RandomNumbersGenerator;
 
@@ -64,16 +67,16 @@ public class LottoService {
         return lottoMachine.isRemainMoney();
     }
 
-    public List<LottoDto> getLottos() {
-        return lottosDao.findAllByTurn(turnDao.findNext());
-    }
-
     public void vacateMoney() {
         lottoMachine.vacate();
     }
 
     public void deleteAll() {
         lottosDao.deleteAll();
+    }
+
+    public List<LottoDto> getLottos() {
+        return lottosDao.findAllByTurn(turnDao.findNext());
     }
 
     public List<LottoDto> findAllByTurn(final int turn) {
