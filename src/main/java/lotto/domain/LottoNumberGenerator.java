@@ -6,27 +6,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumberGenerator implements NumberGenerator{
+public class LottoNumberGenerator implements NumberGenerator {
     private static final int MIN = 1;
     private static final int MAX = 45;
     private static final int START_POINT = 0;
     private static final int NUMBER_BOUND = 6;
 
-    private final List<Number> generator;
+    private final List<Number> lottoBoundNumber;
 
-    private LottoNumberGenerator() {
-        this.generator = new ArrayList<>();
+    public LottoNumberGenerator() {
+        this.lottoBoundNumber = new ArrayList<>();
         addNumbers();
-    }
-
-    public static LottoNumberGenerator create() {
-        return new LottoNumberGenerator();
     }
 
     @Override
     public List<Number> getNumbers() {
-        Collections.shuffle(generator);
-        List<Number> numbers = Lists.newCopyOnWriteArrayList(generator.subList(START_POINT, NUMBER_BOUND));
+        Collections.shuffle(lottoBoundNumber);
+        List<Number> numbers = Lists.newCopyOnWriteArrayList(lottoBoundNumber.subList(START_POINT, NUMBER_BOUND));
         Collections.sort(numbers);
 
         return numbers;
@@ -34,7 +30,7 @@ public class LottoNumberGenerator implements NumberGenerator{
 
     private void addNumbers() {
         for (int i = MIN; i <= MAX; i++) {
-            generator.add(new Number(i));
+            lottoBoundNumber.add(Number.of(i));
         }
     }
 }
