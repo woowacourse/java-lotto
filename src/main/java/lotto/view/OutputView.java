@@ -1,15 +1,15 @@
 package lotto.view;
 
-import lotto.domain.Rank;
-import lotto.domain.UserLottos;
-import lotto.domain.ticket.Ticket;
+import lotto.domain.core.Rank;
+import lotto.domain.core.Ticket;
+import lotto.domain.core.UserTickets;
 import lotto.dto.LottoResultDto;
 
 import java.util.Map;
 
 public class OutputView {
 
-    public static void printLottos(UserLottos userLottos) {
+    public static void printLottos(UserTickets userLottos) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("로또를 ").append(userLottos.tickets().size()).append(" 개 구입했습니다.\n");
         for (Ticket ticket : userLottos.tickets()) {
