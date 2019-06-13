@@ -30,14 +30,7 @@ public class RoundDao {
 
         pstmt.executeUpdate();
     }
-
-//    public void addRound(Price price) throws SQLException {
-//        PreparedStatement pstmt = conn.prepareStatement(INSERT_PRICE_BY_ROUND_SQL);
-//        pstmt.setInt(1, price.getPrice());
-//
-//        pstmt.executeUpdate();
-//    }
-
+    
     public int findLatestRound() throws SQLException {
         PreparedStatement pstmt = conn.prepareStatement(SELECT_LAST_ROUND_SQL);
         ResultSet rs = pstmt.executeQuery();

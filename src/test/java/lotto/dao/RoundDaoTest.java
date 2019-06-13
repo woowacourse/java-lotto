@@ -1,6 +1,7 @@
 package lotto.dao;
 
 import lotto.db.DatabaseConnection;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,38 +16,42 @@ public class RoundDaoTest {
     private RoundDao roundDao;
 
     @BeforeEach
-    void setUp() throws SQLException{
+    void setUp() {
         conn = new DatabaseConnection().getConnection();
         roundDao = new RoundDao(conn);
-        roundDao.deleteAllRound();
     }
 
     @Test
-    void 라운드_추가() throws Exception{
+    void 라운드_추가() throws Exception {
         int presentRound = roundDao.findLatestRound() + 1;
         int price = 5000;
-        roundDao.addRound(presentRound,price);
+        roundDao.addRound(presentRound, price);
     }
 
     @Test
-    void 마지막_라운드_조회() throws Exception{
+    void 마지막_라운드_조회() throws Exception {
         assertThat(roundDao.findLatestRound()).isEqualTo(1);
     }
 
     @Test
-    void 전체_라운드_조회() throws Exception{
-        roundDao.addRound(4,1000);
-        roundDao.addRound(5,2000);
-        roundDao.addRound(6,3000);
-        assertThat(roundDao.findAllRound()).isEqualTo(Arrays.asList(4,5,6));
+    void 전체_라운드_조회() throws Exception {
+        roundDao.addRound(4, 1000);
+        roundDao.addRound(5, 2000);
+        roundDao.addRound(6, 3000);
+        assertThat(roundDao.findAllRound()).isEqualTo(Arrays.asList(4, 5, 6));
     }
 
     @Test
-    void 가격_조회() throws SQLException{
-        roundDao.addRound(1,5000);
-        roundDao.addRound(2,9000);
+    void 가격_조회() throws SQLException {
+        roundDao.addRound(1, 5000);
+        roundDao.addRound(2, 9000);
 
         System.out.println(roundDao.findPriceByRound(1));
         assertThat(roundDao.findPriceByRound(1)).isEqualTo(5000);
+    }
+
+    @AfterEach
+    void tearDown() throws SQLException {
+        roundDao.deleteAllRound();
     }
 }

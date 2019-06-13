@@ -4,6 +4,7 @@ import lotto.db.DatabaseConnection;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +20,12 @@ class WinningLottoDaoTest {
     private WinningLotto winningLotto;
 
     @BeforeEach
-    void setUp() throws SQLException{
+    void setUp(){
         conn = new DatabaseConnection().getConnection();
         winningLottoDao = new WinningLottoDao(conn);
         Lotto winningNumbers = new Lotto(Arrays.asList(1,2,3,10,11,12));
         LottoNumber lottoNumber = LottoNumber.valueOf(19);
         winningLotto = new WinningLotto(winningNumbers,lottoNumber);
-        winningLottoDao.deleteAllWinningLotto();
     }
 
     @Test
@@ -37,5 +37,10 @@ class WinningLottoDaoTest {
     void findWinningLottoByRound() throws SQLException{
         winningLottoDao.addWinningLotto(1,winningLotto);
         assertThat(winningLottoDao.findWinningLottoByRound(1)).isEqualTo(winningLotto);
+    }
+
+    @AfterEach
+    void tearDown() throws SQLException{
+        winningLottoDao.deleteAllWinningLotto();
     }
 }

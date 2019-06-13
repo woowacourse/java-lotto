@@ -3,6 +3,8 @@ package lotto.dao;
 import lotto.db.DatabaseConnection;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,22 +23,26 @@ class LottosDaoTest {
     private List<Lotto> lottos;
 
     @BeforeEach
-    public void setUp() throws SQLException {
+    void setUp() {
         conn = new DatabaseConnection().getConnection();
         lottosDao = new LottosDao(conn);
         lottos = Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6)));
-        lottosDao.deleteAllLottos();
     }
 
     @Test
-    public void Lottos_추가() throws SQLException {
+    void Lottos_추가() throws SQLException {
         lottosDao.addLottos(1,new Lottos(lottos));
     }
 
     @Test
-    public void Lotto_조회() throws SQLException {
+    void Lotto_조회() throws SQLException {
         lottosDao.addLottos(1,new Lottos(lottos));
         assertThat(lottosDao.findLottoByRound(1)).isEqualTo(new Lottos(lottos));
+    }
+
+    @AfterEach
+    void tearDown() throws SQLException{
+        lottosDao.deleteAllLottos();
     }
 
 }
