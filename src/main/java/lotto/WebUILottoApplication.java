@@ -1,10 +1,9 @@
 package lotto;
 
 import lotto.controller.LottoPurchaseController;
+import lotto.controller.LottoResultController;
 import lotto.controller.WinningLottoController;
 import lotto.service.LottoResultService;
-import lotto.service.LottoTicketsService;
-import lottogame.domain.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -32,7 +31,7 @@ public class WebUILottoApplication {
             post("", LottoPurchaseController::showPurchaseResultPost);
         });
         get("/winninglotto/create", WinningLottoController::showWinningLottoInputPage);
-//        post("/winninglotto/getresult", );
+        post("/winninglotto/getresult", LottoResultController::showLottoResultPage);
 
         exception(RuntimeException.class, (e, req, res) -> {
             String message = null;

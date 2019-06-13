@@ -6,7 +6,9 @@
 </head>
 <body>
 <h1>구입 결과</h1>
-수동으로{{numberOfManual}}개, 자동으로 {{numberOfAuto}}개 구입하였습니다.
-{{lottoTickets}}
+수동으로{{numberOfManual}}개, 자동으로 {{numberOfAuto}}개 구입하였습니다.<br>
+{{#lottoTickets}}
+{{this}}<br>
+{{/lottoTickets}}
 </body>
 </html>

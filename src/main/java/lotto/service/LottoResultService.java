@@ -20,4 +20,9 @@ public class LottoResultService {
         LottoResultDAO.getInstance().insertNewLottoRound();
 
     }
+
+    public static Object getResultOf(LottoResult lottoResult, Rank rank) {
+        Map<Rank, Integer> result = lottoResult.getResult();
+        return result.get(rank);
+    }
 }

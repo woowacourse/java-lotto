@@ -41,7 +41,7 @@ public class LottoPurchaseController {
         req.session().attribute("numberOfManualTicket", numberOfManual);
         model.put("numberOfManualTicket", numberOfManual);
         if (numberOfManual == 0) {
-            res.redirect("/lottogame/showpurchaseresult");
+            res.redirect("/lottogame/purchaseresult");
         }
         return render(model, "manuallottoinput.html");
     }
@@ -81,7 +81,7 @@ public class LottoPurchaseController {
     }
 
     private static Object renderResult(Map<String, Object> model, LottoTickets lottoTickets, int numberOfManualTicket) {
-        model.put("lottoTickets", lottoTickets);
+        model.put("lottoTickets", lottoTickets.getLottos());
         model.put("numberOfManual", numberOfManualTicket);
         model.put("numberOfAuto", getNumberOfAutoTicket(lottoTickets, numberOfManualTicket));
         return render(model, "purchaseresult.html");
