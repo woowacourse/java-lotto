@@ -33,12 +33,12 @@ public class WebUILottoApplication {
             return render(getRoundsModel(rounds), "show.html");
         });
 
-        get("/showLottoInfo", (req, res) -> {
+        get("/lottosinfo", (req, res) -> {
             return render(getLottoInfoModel(connection, req.queryParams("lottoRound")),
-                    "showLottoInfo.html");
+                    "show_lottos_info.html");
         });
 
-        post("/winningLotto", (req, res) -> {
+        post("/winninglotto", (req, res) -> {
             Money money = new Money(Integer.parseInt(req.queryParams("money")));
             LottoCount lottoCount = new LottoCount(money, Integer.parseInt(req.queryParams("numberOfManualLotto")));
             List<String> inputManualLottoNumbers = Arrays.asList(req.queryParams("manualLottoNumbers").split(DELIMITER));
@@ -54,10 +54,10 @@ public class WebUILottoApplication {
             DBLoader.loadDBRoundTable(connection, round);
             DBLoader.loadDBLottoTable(connection, round, currentLottos);
 
-            return render(getLottoModel(lottoCount, currentLottos), "winningLotto.html");
+            return render(getLottoModel(lottoCount, currentLottos), "winning_lotto.html");
         });
 
-        post("/lottoResult", (req, res) -> {
+        post("/lottoresult", (req, res) -> {
             WinningLotto winningLotto = new WinningLotto(new Lotto(ConvertLottoNumber.run(req.queryParams("winningNumbers"))),
                     LottoNumber.getInstance(Integer.parseInt(req.queryParams("bonusNumber"))));
             LottoResult lottoResult = new LottoResult(winningLotto, req.session().attribute("lottos"));
@@ -68,7 +68,7 @@ public class WebUILottoApplication {
 
             DBManager.endTransaction(connection);
 
-            return render(getLottoResultModel(lottoResult), "lottoResult.html");
+            return render(getLottoResultModel(lottoResult), "lotto_result.html");
         });
 
         exception(IllegalArgumentException.class, (exception, request, response) -> {
