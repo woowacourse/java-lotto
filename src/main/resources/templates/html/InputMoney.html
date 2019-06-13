@@ -24,10 +24,11 @@
         function nextStep() {
             var countOfManualLotto=document.getElementById('countOfManualLotto').value;
             if(countOfManualLotto==="0"){
-                document.getElementById('inputForm').setAttribute('action','/showLottos')
+                document.getElementById('inputForm').setAttribute('action','/showLottos');
+                document.getElementById('inputForm').setAttribute('method','post');
             }
             else{
-                document.getElementById('inputForm').setAttribute('action','/manualLotto')
+                document.getElementById('inputForm').setAttribute('action','/manualLotto');
             }
         }
 

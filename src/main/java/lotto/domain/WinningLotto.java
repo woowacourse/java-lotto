@@ -31,6 +31,12 @@ public class WinningLotto extends Lotto {
 
             countOfRank.put(thisRank, countOfThisRank + ONE);
         }
+        countOfRank.remove(Rank.MISS);
         return countOfRank;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString()+"  보너스볼 : "+bonusBall.toString();
     }
 }

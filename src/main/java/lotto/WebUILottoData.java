@@ -4,6 +4,7 @@ import lotto.domain.*;
 
 public class WebUILottoData {
 
+    private boolean isGenerated=false;
     private int round = 1;
     private int countOfAllLotto;
     private int countOfManualLotto;
@@ -15,6 +16,14 @@ public class WebUILottoData {
     private LottoGame lottoGame;
 
     public WebUILottoData() {
+    }
+
+    public boolean getIsGenerated() {
+        return isGenerated;
+    }
+
+    public void setIsGenerated(boolean generated) {
+        isGenerated = generated;
     }
 
     public int getRound() {

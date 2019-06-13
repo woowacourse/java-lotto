@@ -35,4 +35,10 @@ public class LottoGame {
         return new Money((manualLottos.getSize() + autoLottos.getSize()) * LOTTO_PRICE);
     }
 
+    public List<String> gameResult() {
+        Map<Rank, Integer> result=getCountOfRank();
+        List<String> gameResultMessage=new ArrayList<>();
+        result.forEach((rank, number) -> gameResultMessage.add(rank.toString()+" : "+number+"개"));
+        return gameResultMessage;
+    }
 }

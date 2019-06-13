@@ -16,7 +16,7 @@ public class Main {
         OutputView.printUserLottos(manualLottos);
         OutputView.printUserLottos(autoLottos);
 
-        String[] scannedWinningLotto = InputView.inputWinningLotto();
+        String scannedWinningLotto = InputView.inputWinningLotto();
         String scannedBonusBall = InputView.inputBonusNumber();
         WinningLotto winningLotto = WinningLottoParser.parseWinningLotto(scannedWinningLotto, scannedBonusBall);
 

@@ -11,16 +11,16 @@
         <p> 수동으로 <b>{{countOfManualLotto}}</b>장, 자동으로 <b>{{countOfAutoLotto}}</b>장 구매했습니다.</p>
         {{/webUILottoData}}
         <div id="lottoList">
-            {{#autoLottos}}
-            {{this}}
-            {{/autoLottos}}
-<!--            {{#manualLottos}}-->
-<!--            {{this}}-->
-<!--            {{/manualLottos}}-->
+            {{#manualLottos}}
+            수동 : {{this}}<br>
+            {{/manualLottos}}
 
+            {{#autoLottos}}
+            자동 : {{this}}<br>
+            {{/autoLottos}}
         </div>
         <form action="/winningLotto">
-            <input type="submit" value="다음">
+            <input type="submit" id="submit" value="다음">
         </form>
     </body>
     <script>
