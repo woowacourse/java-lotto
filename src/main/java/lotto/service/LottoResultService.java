@@ -30,4 +30,9 @@ public class LottoResultService {
     public static List<Integer> findAllRound(int round) {
         return LottoResultDAO.getInstance().findAllRound(round);
     }
+
+    public static LottoResult findLottoResultByRound(int round) {
+        Map<Rank,Integer> result = LottoResultDAO.getInstance().findLottoResultByRound(round);
+        return new LottoResult(result);
+    }
 }

@@ -28,13 +28,10 @@ public class LottoResultController {
         LottoResultService.insertNewLottoRound();
         model.put("price", price);
         model.put("rateOfLotto", lottoResult.getRateOfLotto(money));
-        model.put("first", LottoResultService.getResultOf(lottoResult, Rank.FIRST));
-        model.put("second", LottoResultService.getResultOf(lottoResult, Rank.SECOND));
-        model.put("third", LottoResultService.getResultOf(lottoResult, Rank.THIRD));
-        model.put("fourth", LottoResultService.getResultOf(lottoResult, Rank.FOURTH));
-        model.put("fifth", LottoResultService.getResultOf(lottoResult, Rank.FIFTH));
+        setMatchResult(model, lottoResult);
         return render(model, "lottoresult.html");
     }
+
 
     public static Object showSelectRoundPage(Request req, Response res) {
         Map<String, Object> model = new HashMap<>();
@@ -45,5 +42,32 @@ public class LottoResultController {
         }
         model.put("rounds", rounds);
         return render(model, "selectround.html");
+    }
+
+    public static Object showResultOfRound(Request req, Response res) {
+        Map<String, Object> model = new HashMap<>();
+        int round = Integer.parseInt(req.queryParams("selected-round"));
+        LottoTickets lottoTickets = LottoTicketsService.findTicketsByRound(round);
+        WinningLotto winningLotto = WinningLottoService.findWinningLottoByRound(round);
+        LottoResult lottoResult = LottoResultService.findLottoResultByRound(round);
+        int price = lottoTickets.numberOfLottos() * 1000;
+        Money money = Money.generate(price);
+        model.put("round", round);
+        model.put("numberOfTicket", lottoTickets.numberOfLottos());
+        model.put("lottos", lottoTickets.getLottos());
+        model.put("winninglotto", winningLotto.getWinningLotto());
+        model.put("bonus", winningLotto.getBonusNumber());
+        model.put("price", price);
+        model.put("rateOfLotto", lottoResult.getRateOfLotto(money));
+        setMatchResult(model, lottoResult);
+        return render(model, "resultofround.html");
+    }
+
+    private static void setMatchResult(Map<String, Object> model, LottoResult lottoResult) {
+        model.put("first", LottoResultService.getResultOf(lottoResult, Rank.FIRST));
+        model.put("second", LottoResultService.getResultOf(lottoResult, Rank.SECOND));
+        model.put("third", LottoResultService.getResultOf(lottoResult, Rank.THIRD));
+        model.put("fourth", LottoResultService.getResultOf(lottoResult, Rank.FOURTH));
+        model.put("fifth", LottoResultService.getResultOf(lottoResult, Rank.FIFTH));
     }
 }

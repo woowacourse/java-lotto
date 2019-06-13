@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,7 +80,7 @@ public class LottoResultDAO {
 
     public List<Integer> findAllRound(int round) {
         PreparedStatement pstmt = null;
-        ResultSet rs = null ;
+        ResultSet rs = null;
         List<Integer> rounds = new ArrayList<>();
         try {
             String query = "select round from lottoresult where round!=?";
@@ -94,5 +95,27 @@ public class LottoResultDAO {
             e.printStackTrace();
         }
         return rounds;
+    }
+
+    public Map<Rank, Integer> findLottoResultByRound(int round) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Map<Rank, Integer> result = new HashMap<>();
+        try {
+            String query = "select * from lottoresult where round = ?";
+            pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, round);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                result.put(Rank.FIRST, rs.getInt(2));
+                result.put(Rank.SECOND, rs.getInt(3));
+                result.put(Rank.THIRD, rs.getInt(4));
+                result.put(Rank.FOURTH, rs.getInt(5));
+                result.put(Rank.FIFTH, rs.getInt(6));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
