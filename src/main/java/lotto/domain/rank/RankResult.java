@@ -30,9 +30,9 @@ public class RankResult {
         }
     }
 
-    public int rateOfReturn(int userMoney) {
+    public double rateOfReturn(int userMoney) {
         long totalRewardMoney = totalRewardMoney();
-        return (int) ((double) totalRewardMoney / userMoney) * PERCENT;
+        return ((double) totalRewardMoney / userMoney) * PERCENT;
     }
 
     public long totalRewardMoney() {
@@ -61,7 +61,6 @@ public class RankResult {
         StringBuilder stringBuilder = new StringBuilder();
         for (AbstractRank rank : winners.values()) {
             stringBuilder.append(rank.toString());
-            stringBuilder.append("<br/>");
         }
         return stringBuilder.toString();
     }

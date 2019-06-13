@@ -4,7 +4,7 @@ import lotto.domain.exception.AmountDeficientException;
 import lotto.domain.exception.LottoNotBuyException;
 
 public class Money {
-    private static final int LOTTO_PRICE = 1_000;
+    private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_MAX_PRICE = 100_000;
     private final int money;
 
@@ -35,10 +35,5 @@ public class Money {
 
     public int getMoney() {
         return money;
-    }
-
-    @Override
-    public String toString() {
-        return "money : " + money;
     }
 }

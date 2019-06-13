@@ -47,6 +47,14 @@ public class Lotto {
         return lottoNumbers.contains(bonus);
     }
 
+    public Set<Integer> getLotto() {
+        Set<Integer> lotto = new TreeSet<>();
+        for (LottoNumber number : this.lottoNumbers) {
+            lotto.add(Integer.parseInt(number.toString()));
+        }
+        return lotto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,6 +74,6 @@ public class Lotto {
         for (LottoNumber number : lottoNumbers) {
             stringJoiner.add(number.toString());
         }
-        return stringJoiner.toString() + NEW_LINE + "<br/>";
+        return stringJoiner.toString() + NEW_LINE;
     }
 }
