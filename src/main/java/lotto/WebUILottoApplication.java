@@ -14,10 +14,7 @@ import static spark.Spark.*;
 
 public class WebUILottoApplication {
     public static void main(String[] args) throws SQLException {
-        String projectDir = "C:\\Users\\PKCH\\Desktop\\techcourse\\level1\\java-lotto-1\\";
-        externalStaticFileLocation(projectDir + "src\\main\\resources\\templates\\");
         port(8080);
-        staticFiles.location("/static");
 
         LottoService lottoService = new LottoService();
         int round = lottoService.getCurrentRound() + 1;
