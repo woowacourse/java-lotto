@@ -23,6 +23,7 @@ public class LottoDao {
     }
 
     public List<ResultDTO> selectAllLottoGame() throws SQLException {
+        // TODO: 2019-06-13 IF Add ??
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(SELECT_ALL_LOTTO_RESULT);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
@@ -36,6 +37,7 @@ public class LottoDao {
                         .fourth(resultSet.getInt(FOURTH))
                         .fifth(resultSet.getInt(FIFTH))
                         .miss(resultSet.getInt(MISS))
+                        .payment(resultSet.getInt(PAYMENT))
                         .build();
                 results.add(resultDTO);
             }
