@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Price;
 import lotto.domain.generate.LottosFactory;
@@ -22,7 +23,7 @@ public class LottoService {
         model.put("countOfSelf", lottosFactory.getCountOfSelf());
         req.session().attribute("price", price);
         req.session().attribute("lottosFactory", lottosFactory);
-        List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+        List<Integer> numbers = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER).boxed().collect(Collectors.toList());
         model.put("numbers", numbers);
         req.session().attribute("numbers", numbers);
         model.put("message", req.session().attribute("message"));

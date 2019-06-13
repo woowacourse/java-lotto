@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.dao.RoundDao;
+import lotto.db.DatabaseConnection;
 import lotto.service.LottoResultService;
 import lotto.service.LottoService;
 import lotto.service.WinningLottoService;
@@ -7,7 +9,9 @@ import lotto.utils.ViewUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Connection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -19,7 +23,11 @@ public class WebUILottoApplication {
         staticFiles.location("/static");
 
         get("/", (req, res) -> {
+                    Connection conn = new DatabaseConnection().getConnection();
+                    RoundDao roundDao = new RoundDao(conn);
                     Map<String, Object> model = new HashMap<>();
+                    List<Integer> rounds = roundDao.findAllRound();
+                    model.put("present", roundDao.findLatestRound());
                     model.put("message", req.queryParams("message"));
                     return ViewUtils.render(model, "home.html");
                 }

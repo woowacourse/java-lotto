@@ -5,26 +5,38 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoundDaoTest {
     private Connection conn;
-    private RoundDao roundDAO;
+    private RoundDao roundDao;
 
     @BeforeEach
-    void setUp(){
+    void setUp() throws SQLException{
         conn = new DatabaseConnection().getConnection();
-        roundDAO = new RoundDao(conn);
+        roundDao = new RoundDao(conn);
+        roundDao.deleteAllRound();
     }
+
     @Test
     void 라운드_추가() throws Exception{
-        int round = 2;
-        roundDAO.addRound(round);
+        int presentRound = roundDao.findLatestRound() + 1;
+        roundDao.addRound(presentRound);
     }
 
     @Test
     void 마지막_라운드_조회() throws Exception{
-        assertThat(roundDAO.findLatestRound()).isEqualTo(0);
+        assertThat(roundDao.findLatestRound()).isEqualTo(1);
+    }
+
+    @Test
+    void 전체_라운드_조회() throws Exception{
+        roundDao.addRound(4);
+        roundDao.addRound(5);
+        roundDao.addRound(6);
+        assertThat(roundDao.findAllRound()).isEqualTo(Arrays.asList(4,5,6));
     }
 }

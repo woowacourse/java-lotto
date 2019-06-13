@@ -9,7 +9,7 @@
 <body>
 
 <div class="container" style="max-width: 500px">
-    <h1 class="mt-5 text-center font-weight-bold">Lotto Game</h1>
+    <h1 class="mt-5 text-center font-weight-bold">{{present}}회 Lotto Game</h1>
 
     <form action="/make/lotto" method="post">
         <div class="input-group mb-3">
@@ -27,6 +27,12 @@
         <div class="col text-center">
             <button class="btn btn-outline-secondary mb-2" type="submit">작성</button>
         </div>
+    </form>
+    <h2 class="mt-5 text-center font-weight-bold">회차별 통계</h2>
+    <form action="/round/statistic">
+        {{#round}}
+        <button type="submit" class="btn btn-outline-secondary mr-2" name="round">{{this}}회</button>
+        {{/round}}
     </form>
     {{#message}}
     <div class="form-control text-center">{{message}}</div>
