@@ -6,25 +6,26 @@ import com.woowacourse.lotto.dao.UserLottoDAO;
 import com.woowacourse.lotto.dao.WinningLottoDAO;
 import com.woowacourse.lotto.domain.*;
 import com.woowacourse.lotto.domain.factory.LottosFactory;
+import com.woowacourse.lotto.utils.StringSeparator;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.sql.SQLException;
 import java.util.*;
 
-import static com.woowacourse.lotto.view.OutputView.PRINT_EARNINGS_RATE;
-import static com.woowacourse.lotto.view.OutputView.PRINT_RESULT_OF_LOTTO;
+import static com.woowacourse.lotto.view.OutputView.*;
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
 	public static final String PRINT_SUM = "총 당첨금액은 %d원" + " 입니다.";
 	private static final String NEW_LINE = "<br>";
+	private static final String WHITE_SPACE = "\\r\\n";
 	private static DBConnector DBConnector = new DBConnector();
 	private static LottoResultDAO lottoResultDAO = new LottoResultDAO(DBConnector.getConnection());
 	private static UserLottoDAO userLottoDAO = new UserLottoDAO(DBConnector.getConnection());
 	private static WinningLottoDAO winningLottoDAO = new WinningLottoDAO(DBConnector.getConnection());
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) {
 		staticFiles.location("/static");
 
 		get("/", ((request, response) -> {
@@ -52,7 +53,7 @@ public class WebUILottoApplication {
 		post("inputWinningLotto", (request, response) -> {
 			try {
 				int bonusBall = Integer.parseInt(request.queryParams("bonusBall"));
-				List<String> winningLottoNumbers = Arrays.asList(request.queryParams("winningLotto").split(","));
+				List<String> winningLottoNumbers = StringSeparator.splitString(request.queryParams("winningLotto"));
 				WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
 				int round = addWinningLotto(winningLotto);
 				int countOfManualLotto = request.session().attribute("countOfManualLotto");
@@ -70,13 +71,12 @@ public class WebUILottoApplication {
 
 		post("/generateLottos", (request, response) -> {
 			try {
-				System.out.println("ㅇㅅㅇ");
 				int countOfManualLotto = request.session().attribute("countOfManualLotto");
 				LottoMoney lottoMoney = request.session().attribute("lottoMoney");
 				LottosFactory lottosFactory = request.session().attribute("lottosFactory");
 				List<String> list = null;
 				if (countOfManualLotto > 0) {
-					list = Arrays.asList(request.queryParams("manualLottos").split("\\r\\n"));
+					list = Arrays.asList(request.queryParams("manualLottos").split(WHITE_SPACE));
 				}
 				Lottos lottos = lottosFactory.generateLotto(list);
 
@@ -101,15 +101,15 @@ public class WebUILottoApplication {
 			try {
 				WinningLotto winningLotto = request.session().attribute("winningLotto");
 				LottoResult lottoResult = new LottoResult(winningLotto, request.session().attribute("lottos"));
-				StringBuilder matchedResult = new StringBuilder();
-				for (LottoRank lottoRank : LottoRank.values()) {
-					matchedResult.append(String.format(PRINT_RESULT_OF_LOTTO + NEW_LINE, lottoRank.getCount(), lottoRank.getPrice(), lottoResult.valueOf(lottoRank)));
-				}
+				int round = request.session().attribute("round");
+
 				LottoMoney lottoMoney = request.session().attribute("lottoMoney");
 				long earningRate = lottoMoney.calculateEarningsRate(lottoResult.sum());
-				addLottoResult(request.session().attribute("round"), lottoMoney, lottoResult);
+				addLottoResult(round, lottoMoney, lottoResult);
+				String matchedResult = findLottoResultRankById(round);
+
 				Map<String, Object> model = new HashMap<>();
-				model.put("matchedResult", matchedResult.toString());
+				model.put("matchedResult", matchedResult);
 				model.put("earningRate", earningRate);
 				return render(model, "/showLottoResult.html");
 			} catch (Exception e) {
@@ -136,12 +136,13 @@ public class WebUILottoApplication {
 			try {
 				int selectedRound = Integer.parseInt(request.queryParams("selectedRound"));
 				List<Integer> rounds = request.session().attribute("rounds");
+				Map<String, Long> sumAndEarningRate = findLottoResultSumAndEarningRateById(selectedRound);
 				Map<String, Object> model = new HashMap<>();
 				model.put("selectNumber", selectedRound);
 				model.put("rounds", rounds);
 				model.put("ranks", findLottoResultRankById(selectedRound));
-				model.put("earningRate", String.format(PRINT_EARNINGS_RATE + NEW_LINE, findLottoResultSumAndEarningRateById(selectedRound).get("earningRate")));
-				model.put("sum", String.format(PRINT_SUM + NEW_LINE, findLottoResultSumAndEarningRateById(selectedRound).get("sum")));
+				model.put("earningRate", String.format(PRINT_EARNINGS_RATE + NEW_LINE, sumAndEarningRate.get("earningRate")));
+				model.put("sum", String.format(PRINT_SUM + NEW_LINE, sumAndEarningRate.get("sum")));
 				return render(model, "/searchLottoResult.html");
 			} catch (Exception e) {
 				Map<String, Object> model = new HashMap<>();
@@ -151,17 +152,29 @@ public class WebUILottoApplication {
 		}));
 	}
 
-	private static Map<String, Long> findLottoResultSumAndEarningRateById(int selectedRound) throws SQLException {
-		return lottoResultDAO.findSumAndEarningRateById(selectedRound);
+	private static void printLottoResult(Map<LottoRank, Integer> ranks, StringBuilder stringBuilder) {
+		for (LottoRank lottoRank : ranks.keySet()) {
+			printRankResult(ranks, stringBuilder, lottoRank);
+		}
 	}
 
-	private static String findLottoResultRankById(int selectedRound) throws SQLException {
-		Map<LottoRank, Integer> ranks = lottoResultDAO.findLottoResultRankById(selectedRound);
-		StringBuilder stringBuilder = new StringBuilder();
-		for (LottoRank lottoRank : ranks.keySet()) {
-			stringBuilder.append(String.format(PRINT_RESULT_OF_LOTTO + NEW_LINE, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
+	private static void printRankResult(Map<LottoRank, Integer> ranks, StringBuilder stringBuilder, LottoRank lottoRank) {
+		if (lottoRank == LottoRank.SECOND) {
+			stringBuilder.append(String.format(PRINT_SECOND_OF_LOTTO + NEW_LINE, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
+			return;
 		}
+		stringBuilder.append(String.format(PRINT_RESULT_OF_LOTTO + NEW_LINE, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
+	}
+
+	private static String findLottoResultRankById(int round) throws SQLException {
+		Map<LottoRank, Integer> ranks = lottoResultDAO.findLottoResultRankById(round);
+		StringBuilder stringBuilder = new StringBuilder();
+		printLottoResult(ranks, stringBuilder);
 		return stringBuilder.toString();
+	}
+
+	private static Map<String, Long> findLottoResultSumAndEarningRateById(int selectedRound) throws SQLException {
+		return lottoResultDAO.findSumAndEarningRateById(selectedRound);
 	}
 
 	private static List<Integer> getLottoRound() throws SQLException {

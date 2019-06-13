@@ -64,16 +64,6 @@ public class LottoResultDAO {
 		return result;
 	}
 
-	public int getLottoResultCount() throws SQLException {
-		PreparedStatement pstmt = connection.prepareStatement("select count(*) as total from lotto_result");
-		ResultSet rs = pstmt.executeQuery();
-
-		if (!rs.next()) {
-			return -1;
-		}
-		return rs.getInt("total");
-	}
-
 	public ResultSet findById(String query, int id) throws SQLException {
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		pstmt.setInt(1, id);
