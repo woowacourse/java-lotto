@@ -4,51 +4,19 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.dto.LottoDto;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.dao.DataConnection.closeConnection;
+import static lotto.dao.DataConnection.getConnection;
+
 public class LottoDao {
-    private static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String SERVER = "localhost";
-    private static final String DATABASE = "lotto";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "1234";
-    private static final String URL_FORMAT = "jdbc:mysql://%s/%s?useSSL=false&serverTimezone=UTC";
     private static final int BOUGHT_LOTTO_NUMBER_FROM_INDEX = 0;
     private static final int BOUGHT_LOTTO_NUMBER_TO_INDEX = 6;
-
-    public Connection getConnection() {
-        loadDriver();
-        String url = String.format(URL_FORMAT, SERVER, DATABASE);
-        Connection con = connectDriver(url);
-        return con;
-    }
-
-    private void loadDriver() {
-        try {
-            Class.forName(MYSQL_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Connection connectDriver(final String url) {
-        try {
-            return DriverManager.getConnection(url, USERNAME, PASSWORD);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public void closeConnection(Connection con) {
-        try {
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public List<Lotto> findAllBoughtLottoByRound(int round) throws SQLException {
         String sql = "SELECT * FROM bought_lotto WHERE round_id = ?";
@@ -105,5 +73,6 @@ public class LottoDao {
         Connection con = getConnection();
         PreparedStatement pstmt = con.prepareStatement(sql);
         lottoQueryExcute(lottoDtos, round, pstmt);
+        closeConnection(con);
     }
 }
