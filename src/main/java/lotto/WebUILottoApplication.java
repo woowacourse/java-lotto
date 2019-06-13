@@ -42,32 +42,31 @@ public class WebUILottoApplication {
             List<String> inputManualLottoNumbers = Arrays.asList(req.queryParams("manualLottoNumbers").split(DELIMITER));
             LottosFactory lottosFactory = new LottosFactory(inputManualLottoNumbers, lottoCount);
             Lottos currentLottos = lottosFactory.generateTotalLottos();
+            Integer round = DBGetter.getNextRound(connection);
+
+            // Session
+            req.session(true);
+            req.session().attribute("round", round);
+            req.session().attribute("lottos", currentLottos);
+
+            return render(getLottoModel(lottoCount, currentLottos), "winning_lotto.html");
+        });
+
+        post("/lottoresult", (req, res) -> {
+            Integer round = req.session().attribute("round");
+            Lottos lottos = req.session().attribute("lottos");
+            WinningLotto winningLotto = new WinningLotto(new Lotto(ConvertLottoNumber.run(req.queryParams("winningNumbers"))),
+                    LottoNumber.getInstance(Integer.parseInt(req.queryParams("bonusNumber"))));
+            LottoResult lottoResult = new LottoResult(winningLotto, lottos);
 
             try {
                 DBManager.startTransaction(connection);
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }
-
-            Integer round = DBGetter.getNextRound(connection);
-
-            // Session
-            req.session(true);
-            req.session().attribute("lottos", currentLottos);
-            req.session().attribute("round", round);
-
+            
             DBLoader.loadDBRoundTable(connection, round);
-            DBLoader.loadDBLottoTable(connection, round, currentLottos);
-
-            return render(getLottoModel(lottoCount, currentLottos), "winning_lotto.html");
-        });
-
-        post("/lottoresult", (req, res) -> {
-            WinningLotto winningLotto = new WinningLotto(new Lotto(ConvertLottoNumber.run(req.queryParams("winningNumbers"))),
-                    LottoNumber.getInstance(Integer.parseInt(req.queryParams("bonusNumber"))));
-            LottoResult lottoResult = new LottoResult(winningLotto, req.session().attribute("lottos"));
-
-            Integer round = req.session().attribute("round");
+            DBLoader.loadDBLottoTable(connection, round, lottos);
             DBLoader.loadDBWinningLottoTable(connection, round, winningLotto);
             DBLoader.loadDBLottoResultTable(connection, round, lottoResult);
 
