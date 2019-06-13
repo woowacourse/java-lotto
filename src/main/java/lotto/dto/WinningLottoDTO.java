@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import java.util.Objects;
+import java.util.*;
 
 public class WinningLottoDTO {
     private int winningLottoId;
@@ -14,6 +14,16 @@ public class WinningLottoDTO {
 
     public WinningLottoDTO(int winningLottoId, int bonusBall, int num1, int num2, int num3, int num4, int num5, int num6) {
         this.winningLottoId = winningLottoId;
+        this.bonusBall = bonusBall;
+        this.num1 = num1;
+        this.num2 = num2;
+        this.num3 = num3;
+        this.num4 = num4;
+        this.num5 = num5;
+        this.num6 = num6;
+    }
+
+    public WinningLottoDTO(int bonusBall, int num1, int num2, int num3, int num4, int num5, int num6) {
         this.bonusBall = bonusBall;
         this.num1 = num1;
         this.num2 = num2;
@@ -49,6 +59,10 @@ public class WinningLottoDTO {
 
     public int getNum6() {
         return num6;
+    }
+
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(Arrays.asList(num1, num2, num3, num4, num5, num6));
     }
 
     public int getBonusBall() {

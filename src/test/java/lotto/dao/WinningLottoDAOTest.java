@@ -28,4 +28,10 @@ class WinningLottoDAOTest {
         WinningLottoDTO winningLotto = winningLottoDAO.findByWinningLottoId("0");
         assertNull(winningLotto);
     }
+
+    @Test
+    void 당첨로또_삽입_테스트() throws SQLException {
+        WinningLottoDTO winningLotto = new WinningLottoDTO(7,11,12,13,14,15,16);
+        winningLottoDAO.addWinningLotto(winningLotto);
+    }
 }
