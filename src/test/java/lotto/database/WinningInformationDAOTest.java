@@ -20,7 +20,7 @@ public class WinningInformationDAOTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        Connection connection = DatabaseConnection.getConnection();
+        connection = DatabaseConnection.getConnection();
         winningInformationDAO = WinningInformationDAO.getInstance(connection);
         winningInformationDAO.clear();
     }
