@@ -8,7 +8,7 @@ web 데모 영상
 
 EER Diagram
 
-![1560391460348](.\images\eer)
+![1560391460348](.\images\eer.jpg)
 
 schema는 /schema 폴더 안에 정리
 
