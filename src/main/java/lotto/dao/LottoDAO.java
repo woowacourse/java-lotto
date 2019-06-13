@@ -2,14 +2,18 @@ package lotto.dao;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
+import lotto.util.StringUtil;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoDAO {
-    // TODO resultSet의 output 처리 로직 중복 여부 체크
+    private static final String DELIMITER = ",";
+
     public List<Lotto> findLottosByRound(int round) throws SQLException {
         String sql = "SELECT lotto FROM lotto WHERE round = ?";
 
@@ -20,9 +24,7 @@ public class LottoDAO {
                 List<Lotto> lottos = new ArrayList<>();
                 while (resultSet.next()) {
                     Lotto lotto = LottoFactory.createLottoManually(
-                            Arrays.asList(resultSet.getString("lotto")
-                                    .replaceAll(" ", "")
-                                    .split(",")));
+                            StringUtil.convertToList(resultSet.getString("lotto"), DELIMITER));
                     lottos.add(lotto);
                 }
                 return lottos;
@@ -37,16 +39,11 @@ public class LottoDAO {
              PreparedStatement statement = connection.prepareStatement(sql)) {
             int nextRound = new RoundDAO().findMaxRound();
             for (Lotto lotto : lottos) {
-                statement.setString(1, getSubstring(lotto.toString()));
+                statement.setString(1, StringUtil.removeBrackets(lotto.toString()));
                 statement.setInt(2, nextRound);
                 statement.executeUpdate();
             }
         }
-    }
-
-    // TODO WinningLotto 테이블에 저장 시 중복 코드 발생하는지 확인할 것
-    private String getSubstring(String lotto) {
-        return lotto.substring(1, lotto.length() - 1);
     }
 
     public void removeLotto(int round) throws SQLException {

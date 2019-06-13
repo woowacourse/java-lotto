@@ -10,6 +10,10 @@ public class StringUtil {
     private static final String SPACE = " ";
     private static final String BLANK = "";
 
+    public static String removeBrackets(String lotto) {
+        return lotto.substring(1, lotto.length() - 1);
+    }
+
     public static List<String> convertToList(String text, String separator) {
         String[] splitedText = text.replaceAll(SPACE, BLANK).split(separator);
         if(StringUtils.isBlank(splitedText[0])) {

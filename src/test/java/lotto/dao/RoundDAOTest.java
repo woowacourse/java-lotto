@@ -19,11 +19,6 @@ public class RoundDAOTest {
     }
 
     @Test
-    public void findMaxRound() throws SQLException {
-        assertThat(roundDAO.findMaxRound()).isEqualTo(0);
-    }
-
-    @Test
     public void findAmountByRound() throws SQLException {
         roundDAO.addRound(AMOUNT_TEST);
         int amount = roundDAO.findAmountByRound(roundDAO.findMaxRound());
