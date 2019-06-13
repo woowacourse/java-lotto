@@ -16,9 +16,9 @@ public class WebUILottoApplication {
 
         post(Path.LOTTO_MONEY, LottoMoneyController.fetchLottoMoney);
 
-        post(Path.NUM_OF_MANUAL_LOTTO, ManualLottoController.fetchNumOfManualLotto);
-        post(Path.MANUAL_LOTTO, ManualLottoController.fetchManualLotto);
-        post(Path.AUTOMATIC_LOTTO, AutomaticLottoController.fetchAutomaticLotto);
+        post(Path.NUM_OF_MANUAL_LOTTO, LottoTicketController.fetchNumOfManualLotto);
+        post(Path.MANUAL_LOTTO, LottoTicketController.fetchManualLotto);
+        post(Path.AUTOMATIC_LOTTO, LottoTicketController.fetchAutomaticLotto);
 
         post(Path.WINNING_LOTTO, WinningLottoController.fetchWinningLotto);
     }
