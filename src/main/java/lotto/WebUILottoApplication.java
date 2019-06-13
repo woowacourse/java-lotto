@@ -18,10 +18,15 @@ import static spark.Spark.*;
 public class WebUILottoApplication {
     private final static String DELIMITER = "\r\n";
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         staticFiles.location("/static");
         Connection connection = DBManager.getConnection();
-        DBManager.startTransaction(connection);
+
+        try {
+            DBManager.startTransaction(connection);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
 
         get("/show", (req, res) -> {
             List<String> rounds = new ArrayList<>();
