@@ -57,4 +57,8 @@ public class DBManager {
     public static void endTransaction(Connection con) throws SQLException {
         con.commit();
     }
+
+    public static void rollbackTransaction(Connection connection) throws SQLException {
+        connection.rollback();
+    }
 }

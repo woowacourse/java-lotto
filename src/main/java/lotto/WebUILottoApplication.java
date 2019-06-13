@@ -22,16 +22,9 @@ public class WebUILottoApplication {
         staticFiles.location("/static");
         Connection connection = DBManager.getConnection();
 
-        try {
-            DBManager.startTransaction(connection);
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-
         get("/show", (req, res) -> {
             List<String> rounds = new ArrayList<>();
-            RoundDAO roundDAO = new RoundDAO(connection);
-            for (Integer i = 1; i <= roundDAO.getCurrentRound(); i++) {
+            for (Integer i = 1; i <= DBGetter.getCurrentRound(connection); i++) {
                 rounds.add(i.toString());
             }
 
@@ -49,6 +42,13 @@ public class WebUILottoApplication {
             List<String> inputManualLottoNumbers = Arrays.asList(req.queryParams("manualLottoNumbers").split(DELIMITER));
             LottosFactory lottosFactory = new LottosFactory(inputManualLottoNumbers, lottoCount);
             Lottos currentLottos = lottosFactory.generateTotalLottos();
+
+            try {
+                DBManager.startTransaction(connection);
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+
             Integer round = DBGetter.getNextRound(connection);
 
             // Session

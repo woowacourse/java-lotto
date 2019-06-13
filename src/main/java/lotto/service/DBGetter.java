@@ -24,6 +24,11 @@ public class DBGetter {
         return lottoResultDAO.findByLottoRound(lottoRound);
     }
 
+    public static Integer getCurrentRound(Connection connection) throws SQLException {
+        RoundDAO roundDAO = new RoundDAO(connection);
+        return roundDAO.getCurrentRound();
+    }
+
     public static Integer getNextRound(Connection connection) throws SQLException {
         RoundDAO roundDAO = new RoundDAO(connection);
         return roundDAO.getNextRound();

@@ -43,7 +43,6 @@ CREATE TABLE ROUND (
 CREATE TABLE LOTTO (
     lotto_round INT UNSIGNED NOT NULL,
     lotto VARCHAR(40) NOT NULL,
-    PRIMARY KEY (lotto_round),
     FOREIGN KEY (lotto_round)
     REFERENCES ROUND(lotto_round) ON DELETE CASCADE
 );
