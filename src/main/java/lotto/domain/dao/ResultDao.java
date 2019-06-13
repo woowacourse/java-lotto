@@ -24,7 +24,7 @@ public class ResultDao extends Connector {
     }
 
     public Map<Rank, Integer> findWinnerCountByRound(int round) throws SQLException {
-        String query = "SELECT FIRST,SECOND,THIRD,FOURTH,FIFTH,MISS FROM lotto_result WHERE round = ?";
+        String query = "SELECT FIRST, SECOND, THIRD, FOURTH, FIFTH, MISS FROM lotto_result WHERE round = ?";
         Map<Rank, Integer> winnerCount = new TreeMap<>();
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
@@ -33,7 +33,7 @@ public class ResultDao extends Connector {
         if (!rs.next()) return null;
 
         for (Rank rank : Rank.values()) {
-            winnerCount.put(rank,rs.getInt(rank.name()));
+            winnerCount.put(rank, rs.getInt(rank.name()));
         }
         return winnerCount;
     }
