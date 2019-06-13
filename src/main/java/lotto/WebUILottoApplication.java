@@ -1,44 +1,48 @@
 package lotto;
 
+import lotto.controller.LottoController;
+import lotto.controller.ResultController;
 import lotto.dao.GameResultDao;
 import lotto.dao.TurnDao;
 import lotto.dao.WinningLottoDao;
-import lotto.domain.*;
+import lotto.domain.LottoService;
+import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import lotto.domain.exception.*;
 import lotto.dto.GameResultDto;
-import lotto.dto.LottoDto;
-import lotto.util.LottoParser;
-import lotto.util.RandomNumbersGenerator;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
-    private static final int START_COUNT = 0;
-    private static final String SENTENCE_DELIMITER = "\\n";
     private static final String GO_BACK_ELEMENT = "<button onclick=\"history.back()\">메인 페이지로 돌아가기</button>";
     private static final String RESTART = "restart";
 
     public static void main(String[] args) {
-        final LottoService service = new LottoService();
+        final LottoService service = LottoService.getInstance();
+        final LottoController lottoController = LottoController.getInstance();
+        final ResultController resultController = ResultController.getInstance();
         handleException();
         get("/", (req, res) -> renderMain());
         get("/turn/:index", (req, res) ->
                 renderTurnInfo(service, req)
         );
         post("/money", (req, res) ->
-                renderLottoShopping(service, req)
+                render(lottoController.processLottoShopping(req), "lotto_shopping.html")
         );
         post("/lottos", (req, res) ->
-                renderLottos(service, req)
+                render(lottoController.processLottos(req), "lottos.html")
         );
         post("/result", (req, res) ->
-                renderResult(service, req)
+                render(resultController.processResult(req), "result.html")
         );
         post("/end", (req, res) ->
                 renderEndPage(service, req)
@@ -59,6 +63,7 @@ public class WebUILottoApplication {
         );
     }
 
+    //TODO TurnDao만 쓴다
     private static String renderMain() {
         Map<String, Object> model = new HashMap<>();
         TurnDao turnDao = TurnDao.getInstance();
@@ -67,6 +72,8 @@ public class WebUILottoApplication {
         return render(model, "main.html");
     }
 
+    // TODO 회차당 정보
+    //turnDao만 쓸 수 있다. 지금은 유지한다
     private static String renderTurnInfo(final LottoService service, final Request req) {
         Map<String, Object> model = new HashMap<>();
         int turn = Integer.parseInt(req.params("index"));
@@ -87,77 +94,8 @@ public class WebUILottoApplication {
         return GameResultDao.getInstance().findByTurn(turn);
     }
 
-    private static String renderLottoShopping(final LottoService service, final Request req) {
-        Map<String, Object> model = new HashMap<>();
-        int money = Integer.parseInt(req.queryParams("money"));
-        service.charge(money);
-        return render(model, "lotto_shopping.html");
-    }
-
-    private static String renderLottos(final LottoService service, final Request req) {
-        Map<String, Object> model = new HashMap<>();
-
-        String origin = req.queryParams("numbers");
-        List<String> numbers = splitSentences(origin);
-        int manualCount = assignManualPurchaseCount(service, numbers);
-        int autoCount = assignAutoPurchaseCount(service);
-
-        model.put("manualCount", manualCount);
-        model.put("autoCount", autoCount);
-
-        List<LottoDto> lottos = service.getLottos();
-        model.put("lottos", lottos);
-        return render(model, "lottos.html");
-    }
-
-    private static List<String> splitSentences(String origin) {
-        return Arrays.asList(origin.split(SENTENCE_DELIMITER));
-    }
-
-    private static String renderResult(final LottoService service, final Request req) {
-        Map<String, Object> model = new HashMap<>();
-
-        Lotto lotto = parseLotto(req.queryParams("winninglotto"));
-        LottoNumber lottoNumber = parseLottoNumber(Integer.parseInt(req.queryParams("bonusnumber")));
-        WinningLotto winningLotto = WinningLotto.of(lotto, lottoNumber);
-        addWinningLotto(winningLotto);
-
-        GameResult gameResult = service.gameResult();
-        gameResult.match(winningLotto);
-        model.put("profit", stringifyProfit(gameResult));
-        model.put("stat", stringifyResult(convertResultToDto(gameResult)));
-        addGameResult(gameResult);
-
-        return render(model, "result.html");
-    }
-
-    private static void addGameResult(GameResult gameResult) {
-        GameResultDao.getInstance().add(convertResultToDto(gameResult), findNextTurn());
-    }
-
-    private static GameResultDto convertResultToDto(GameResult gameResult) {
-        return GameResultDto.of(gameResult);
-    }
-
-    private static void addWinningLotto(final WinningLotto winningLotto) {
-        WinningLottoDao.getInstance().add(winningLotto, findNextTurn());
-    }
-
-    private static LottoNumber parseLottoNumber(int lottonumber) {
-        return new LottoParser().parseLottoNumber(lottonumber);
-    }
-
-    private static Lotto parseLotto(String winninglotto) {
-        return new LottoParser().parseLotto(winninglotto);
-    }
-
-    private static String stringifyProfit(GameResult gameResult) {
-        return String.format("%.1f", gameResult.profit(LottoMachine.LOTTO_MONEY));
-    }
-
     private static List<String> stringifyResult(final GameResultDto result) {
         List<String> results = new ArrayList<>();
-
         for (Rank rank : Rank.reverseValues()) {
             results.add(stringifyRank(rank) + result.getCount(rank) + "개");
         }
@@ -208,32 +146,5 @@ public class WebUILottoApplication {
 
     private static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
-    }
-
-    private static int assignManualPurchaseCount(final LottoService service, final List<String> numbers) {
-        int manualCount = START_COUNT;
-        for (final String number : numbers) {
-            manualCount = getManualCount(service, manualCount, number);
-        }
-        return manualCount;
-    }
-
-    private static int getManualCount(final LottoService service, int manualCount, String number) {
-        if (service.canBuy()) {
-            Lotto lotto = parseLotto(number);
-            service.buy(lotto);
-            manualCount++;
-        }
-        return manualCount;
-    }
-
-    private static int assignAutoPurchaseCount(final LottoService service) {
-        RandomNumbersGenerator generator = RandomNumbersGenerator.getInstance();
-        int autoPurchaseCount = START_COUNT;
-        for (; service.canBuy(); autoPurchaseCount++) {
-            Lotto lotto = new LottoFactory().create(generator.generate());
-            service.buy(lotto);
-        }
-        return autoPurchaseCount;
     }
 }

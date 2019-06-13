@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GameResultDaoTest {
     private static final WinningLotto WINNING_LOTTO;
     private static final List<Lotto> LOTTOS;
-    private static final GameResult GAME_RESULT;
+    private static final GameResultMatcher GAME_RESULT;
     private static final GameResultDto GAME_RESULT_DTO;
 
     private static final int TEST_TURN = 2;
@@ -34,7 +34,7 @@ public class GameResultDaoTest {
         LOTTOS.add(new LottoFactory().create(Arrays.asList(1, 2, 3, 8, 9, 10)));
         LOTTOS.add(new LottoFactory().create(Arrays.asList(1, 2, 8, 9, 10, 11)));
 
-        GAME_RESULT = GameResult.of(LOTTOS);
+        GAME_RESULT = GameResultMatcher.of(LOTTOS);
         GAME_RESULT.match(WINNING_LOTTO);
 
         GAME_RESULT_DTO = GameResultDto.of(GAME_RESULT);

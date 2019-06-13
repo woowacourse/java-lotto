@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import lotto.domain.GameResult;
+import lotto.domain.GameResultMatcher;
 import lotto.domain.Rank;
 import lotto.util.GameResultDtoConverter;
 
@@ -22,7 +22,7 @@ public class GameResultDto {
         return new GameResultDto(counts, profit);
     }
 
-    public static GameResultDto of(final GameResult result) {
+    public static GameResultDto of(final GameResultMatcher result) {
         return new GameResultDtoConverter().convertResultToDto(result);
     }
 

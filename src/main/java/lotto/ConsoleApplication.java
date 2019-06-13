@@ -11,7 +11,7 @@ public class ConsoleApplication {
 	private static final int START_COUNT = 0;
 
 	public static void main(String[] args) {
-		LottoService service = new LottoService();
+		LottoService service = LottoService.getInstance();
 		service.charge(InputView.inputBuyMoney());
 
 		int manualPurchaseCount = assignManualPurchaseCount(service);
@@ -20,9 +20,9 @@ public class ConsoleApplication {
 
 		OutputView.showLottos(service.getLottos());
 		WinningLotto winningLotto = assignWinningLotto();
-		GameResult gameResult = service.gameResult();
-		gameResult.match(winningLotto);
-		OutputView.showGameResult(gameResult);
+		GameResultMatcher gameResultMatcher = service.gameResult();
+		gameResultMatcher.match(winningLotto);
+		OutputView.showGameResult(gameResultMatcher);
 		deleteInfo(service);
 	}
 

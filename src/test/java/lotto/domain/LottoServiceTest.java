@@ -23,7 +23,7 @@ class LottoServiceTest {
     @BeforeEach
     public void setUp() {
         lottoFactory = new LottoFactory();
-        service = new LottoService();
+        service = LottoService.getInstance();
 
         service.charge(MONEY);
         service.buy(lottoFactory.create(FIFTH_NUMBERS));
@@ -36,9 +36,9 @@ class LottoServiceTest {
     public void 구매를_제대로하고_당첨로또에_따른_결과를_제대로_반환해주는지() {
         Lotto lotto = lottoFactory.create(WINNING_NUMBERS);
 
-        GameResult gameResult = service.gameResult();
-        gameResult.match(WinningLotto.of(lotto, LottoNumber.of(BONUS_NUM)));
-        assertThat(gameResult.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(ANSWER);
+        GameResultMatcher gameResultMatcher = service.gameResult();
+        gameResultMatcher.match(WinningLotto.of(lotto, LottoNumber.of(BONUS_NUM)));
+        assertThat(gameResultMatcher.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(ANSWER);
     }
 
     @AfterEach

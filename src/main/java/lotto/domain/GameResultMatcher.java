@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameResult {
+public class GameResultMatcher {
     private static final int INIT_NUMBER = 0;
     private static final int INIT_SUM = 0;
     private static final int INIT_COUNT = 0;
@@ -15,11 +15,11 @@ public class GameResult {
     private final List<Lotto> lottos;
     private final Map<Rank, Integer> lottoStat;
 
-    public static GameResult of(final List<Lotto> lottos) {
-        return new GameResult(lottos);
+    public static GameResultMatcher of(final List<Lotto> lottos) {
+        return new GameResultMatcher(lottos);
     }
 
-    private GameResult(final List<Lotto> lottos) {
+    private GameResultMatcher(final List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
         this.lottoStat = new HashMap<>();
         for (Rank value : Rank.values()) {

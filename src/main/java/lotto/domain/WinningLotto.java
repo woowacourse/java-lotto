@@ -15,14 +15,14 @@ public class WinningLotto {
         this.bonus = bonus;
     }
 
+    public static WinningLotto of(final Lotto winningLotto, final LottoNumber bonus) {
+        return new WinningLotto(winningLotto, bonus);
+    }
+
     private void validate(final Lotto winningLotto, final LottoNumber bonus) {
         if (winningLotto.contains(bonus)) {
             throw new WinningLottoHasBonusException("보너스 번호와 로또 번호가 같으면 안됩니다");
         }
-    }
-
-    public static WinningLotto of(final Lotto winningLotto, final LottoNumber bonus) {
-        return new WinningLotto(winningLotto, bonus);
     }
 
     Rank match(final Lotto other) {

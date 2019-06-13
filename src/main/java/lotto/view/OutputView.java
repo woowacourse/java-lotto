@@ -18,15 +18,15 @@ public class OutputView {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualPurchaseCount, autoPurchaseCount);
     }
 
-    public static void showGameResult(final GameResult gameResult) {
+    public static void showGameResult(final GameResultMatcher gameResultMatcher) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         for (Rank rank : Rank.reverseValues()) {
             showRank(rank);
-            System.out.println(gameResult.getRankCount(rank) + "개");
+            System.out.println(gameResultMatcher.getRankCount(rank) + "개");
         }
-        System.out.printf("총 수익률은 %.1f 퍼센트입니다.", gameResult.profit(LottoMachine.LOTTO_MONEY));
+        System.out.printf("총 수익률은 %.1f 퍼센트입니다.", gameResultMatcher.profit(LottoMachine.LOTTO_MONEY));
     }
 
     private static void showRank(final Rank rank) {
