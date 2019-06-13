@@ -1,14 +1,14 @@
 package lotto.dao;
 
 import lotto.dto.LottoGameDto;
+import lotto.dto.ResultDto;
 import lotto.dto.WinningNumberDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static lotto.dao.DataConnection.closeConnection;
 import static lotto.dao.DataConnection.getConnection;
@@ -18,6 +18,7 @@ import static lotto.dao.LottoDao.BOUGHT_LOTTO_NUMBER_TO_INDEX;
 public class LottoGameDao {
 
     private static final int WINNING_BONUS_INDEX = 8;
+    private static final List<String> PRIZE_NAMES = Arrays.asList("first", "second", "third", "fourth", "fifth", "none");
 
     public void removeRound(final int testRound) throws SQLException {
         String sql = "DELETE FROM lotto_game WHERE round = ?";
@@ -92,5 +93,32 @@ public class LottoGameDao {
         winningNumberDto.setNumbers(winningLottoNumbers);
         winningNumberDto.setBonusBall(rs.getInt(WINNING_BONUS_INDEX));
         return winningNumberDto;
+    }
+
+    public ResultDto findResultByRound(final int round) throws SQLException {
+        String sql = "SELECT * FROM result WHERE id = ?";
+        Connection con = getConnection();
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setInt(1, round);
+        ResultSet rs = pstmt.executeQuery();
+
+        ResultDto resultDto = conbineResultDto(rs);
+        closeConnection(con);
+        return resultDto;
+    }
+
+    private ResultDto conbineResultDto(ResultSet rs) throws SQLException {
+        ResultDto resultDto = new ResultDto();
+        Map<String, Integer> prize = new HashMap<>();
+        rs.next();
+
+        for (String prizeName : PRIZE_NAMES) {
+            prize.put(prizeName, rs.getInt(prizeName));
+        }
+
+        resultDto.setPrize(prize);
+        resultDto.setWinningMoney(rs.getInt("winning_money"));
+        return resultDto;
     }
 }

@@ -1,12 +1,14 @@
 package lotto.dao;
 
 import lotto.dto.LottoGameDto;
+import lotto.dto.ResultDto;
 import lotto.dto.WinningNumberDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,5 +39,14 @@ public class LottoGameDaoTest {
         WinningNumberDto winningNumberDto = lottoGameDao.findWinningLottoByRound(TEST_ROUND);
         assertThat(winningNumberDto.getNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(winningNumberDto.getBonusBall()).isEqualTo(7);
+    }
+
+    @Test
+    void 해당_라운드의_로또_당첨_결과_조회() throws SQLException {
+        ResultDto resultDto = lottoGameDao.findResultByRound(TEST_ROUND);
+        Map<String, Integer> prize = resultDto.getPrize();
+        assertThat(prize.get("first")).isEqualTo(1);
+        assertThat(prize.get("third")).isEqualTo(1);
+        assertThat(resultDto.getWinningMoney()).isEqualTo(2_003_000_000);
     }
 }
