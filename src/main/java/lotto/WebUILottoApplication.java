@@ -1,11 +1,10 @@
 package lotto;
 
-import lotto.controller.RoundController;
-import lotto.controller.LottoController;
 import lotto.controller.InitialViewController;
+import lotto.controller.LottoController;
+import lotto.controller.RoundController;
 import lotto.controller.StatController;
 import lotto.domain.exception.*;
-import lotto.service.LottoService;
 import spark.ModelAndView;
 import spark.Response;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -18,7 +17,6 @@ public class WebUILottoApplication {
     private static final String GO_BACK_ELEMENT = "<button onclick=\"history.back()\">메인 페이지로 돌아가기</button>";
 
     public static void main(String[] args) {
-        final LottoService service = LottoService.getInstance();
         final LottoController lottoController = LottoController.getInstance();
         final StatController statController = StatController.getInstance();
         final InitialViewController initialViewController = InitialViewController.getInstance();
@@ -28,7 +26,9 @@ public class WebUILottoApplication {
         get("/", (req, res) ->
                 render(initialViewController.processMain(), "main.html")
         );
-        get("/turn/:index", (req, res) -> render(roundController.processTurnInfo(req), "turn_info.html"));
+        get("/turn/:index", (req, res) ->
+                render(roundController.processTurnInfo(req), "turn_info.html")
+        );
         post("/money", (req, res) ->
                 render(lottoController.processLottoShopping(req), "lotto_shopping.html")
         );
@@ -55,6 +55,7 @@ public class WebUILottoApplication {
         exception(WinningLottoHasBonusException.class, (e, req, res) ->
                 renderError("당첨 번호중에 보너스 번호가 있습니다", res)
         );
+        exception(NumberFormatException.class, (e, req, res) -> renderError("숫자를 입력하세요", res));
     }
 
     private static void renderError(final String message, final Response res) {

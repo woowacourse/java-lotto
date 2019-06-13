@@ -3,12 +3,10 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.service.LottoService;
 import lotto.util.LottoParser;
+import org.apache.commons.lang3.StringUtils;
 import spark.Request;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoController {
@@ -51,6 +49,9 @@ public class LottoController {
     }
 
     private List<String> splitSentences(final String origin) {
+        if (StringUtils.isBlank(origin)) {
+            return new ArrayList<>();
+        }
         return Arrays.asList(origin.split(SENTENCE_DELIMITER));
     }
 
