@@ -52,9 +52,7 @@ public class ResultController {
 
     private List<Lotto> makeLottos() {
         LottoDtoConverter converter = new LottoDtoConverter();
-        return lottoService.getLottos().stream()
-                .map(converter::convertDtoToLotto)
-                .collect(Collectors.toList());
+        return converter.convertDtoToLottos(lottoService.getLottos());
     }
 
     private GameResultDto makeGameResultDto(WinningLotto winningLotto, List<Lotto> lottos) {

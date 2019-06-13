@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.dto.GameResultDto;
+import lotto.util.LottoDtoConverter;
+import lotto.util.LottoParser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,8 +38,8 @@ class LottoServiceTest {
     @Test
     public void 구매를_제대로하고_당첨로또에_따른_결과를_제대로_반환해주는지() {
         Lotto lotto = lottoFactory.create(WINNING_NUMBERS);
-
-        GameResultMatcher gameResultMatcher = service.gameResult();
+        LottoDtoConverter converter = new LottoDtoConverter();
+        GameResultMatcher gameResultMatcher = GameResultMatcher.of(converter.convertDtoToLottos(service.getLottos()));
         gameResultMatcher.match(WinningLotto.of(lotto, LottoNumber.of(BONUS_NUM)));
         assertThat(gameResultMatcher.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(ANSWER);
     }

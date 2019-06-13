@@ -5,7 +5,6 @@ import lotto.dao.TurnDao;
 import lotto.dto.LottoDto;
 import lotto.util.RandomNumbersGenerator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
@@ -63,14 +62,6 @@ public class LottoService {
 
     public boolean canBuy() {
         return lottoMachine.isRemainMoney();
-    }
-
-    public GameResultMatcher gameResult() {
-        List<Lotto> lottos = new ArrayList<>();
-        for (LottoDto lotto : getLottos()) {
-            lottos.add(lotto.lottoValue());
-        }
-        return GameResultMatcher.of(lottos);
     }
 
     public List<LottoDto> getLottos() {
