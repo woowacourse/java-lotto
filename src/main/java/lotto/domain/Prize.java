@@ -49,6 +49,15 @@ public enum Prize {
         this.winningAmount = winningAmount;
     }
 
+    public static Prize valueOf(int countOfNumber, boolean hasBonus) {
+        for (Prize prize : Prize.values()) {
+            if (prize.checkPrizeMatchWith(countOfNumber, hasBonus)) {
+                return prize;
+            }
+        }
+        throw new NotMatchLottoPrizeException("당첨 갯수가 맞지 않습니다.");
+    }
+
     public int getCountOfNumber() {
         return countOfNumber;
     }
@@ -58,13 +67,4 @@ public enum Prize {
     }
 
     public abstract boolean checkPrizeMatchWith(int countOfNumber, boolean hasBonus);
-
-    public static Prize valueOf(int countOfNumber, boolean hasBonus) {
-        for (Prize prize : Prize.values()) {
-            if (prize.checkPrizeMatchWith(countOfNumber, hasBonus)) {
-                return prize;
-            }
-        }
-        throw new NotMatchLottoPrizeException("당첨 갯수가 맞지 않습니다.");
-    }
 }

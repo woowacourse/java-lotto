@@ -31,12 +31,12 @@ public class BoughtLottosTest {
     void 생성() {
         assertThat(boughtLottos).isEqualTo(
                 new BoughtLottos(Arrays.asList(
-                    new Lotto(Arrays.asList(getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),
-                            getLottoNumber(4), getLottoNumber(5), getLottoNumber(6))),
-                    new Lotto(Arrays.asList(getLottoNumber(5), getLottoNumber(6), getLottoNumber(10),
-                            getLottoNumber(14), getLottoNumber(25), getLottoNumber(42))),
-                    new Lotto(Arrays.asList(getLottoNumber(11), getLottoNumber(23), getLottoNumber(25),
-                            getLottoNumber(29), getLottoNumber(33), getLottoNumber(15)))
+                        new Lotto(Arrays.asList(getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),
+                                getLottoNumber(4), getLottoNumber(5), getLottoNumber(6))),
+                        new Lotto(Arrays.asList(getLottoNumber(5), getLottoNumber(6), getLottoNumber(10),
+                                getLottoNumber(14), getLottoNumber(25), getLottoNumber(42))),
+                        new Lotto(Arrays.asList(getLottoNumber(11), getLottoNumber(23), getLottoNumber(25),
+                                getLottoNumber(29), getLottoNumber(33), getLottoNumber(15)))
                 ), 0));
     }
 

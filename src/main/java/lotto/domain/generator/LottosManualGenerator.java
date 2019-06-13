@@ -15,11 +15,6 @@ public class LottosManualGenerator implements LottosGenerator {
         this.inputLottos = inputLottos;
     }
 
-    @Override
-    public List<Lotto> generate() {
-        return generateManualLottos(inputLottos);
-    }
-
     private static List<Lotto> generateManualLottos(List<String> inputLottos) {
         List<Lotto> lottos = new ArrayList<>();
         for (String inputLottoNumbers : inputLottos) {
@@ -30,5 +25,10 @@ public class LottosManualGenerator implements LottosGenerator {
 
     public static Lotto generateManualLotto(String inputLottoNumbers) {
         return new Lotto(generateLottoNumbers(inputLottoNumbers));
+    }
+
+    @Override
+    public List<Lotto> generate() {
+        return generateManualLottos(inputLottos);
     }
 }
