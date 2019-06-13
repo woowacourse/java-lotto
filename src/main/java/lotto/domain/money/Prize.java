@@ -30,7 +30,6 @@ public enum Prize {
             return THIRD;
         }
         return Arrays.stream(values()).filter(prize -> prize.matchCount == matchCount).findAny().get();
-
     }
 
     public long getPrizeMoney() {

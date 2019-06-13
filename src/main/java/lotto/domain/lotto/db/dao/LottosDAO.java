@@ -44,7 +44,7 @@ public class LottosDAO implements DAO<Lottos> {
     }
 
     public void add(Lottos lottos, int id) throws SQLException {
-        for (Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos.getLottosList()) {
             String query = "INSERT INTO lottos (round, lotto_numbers) VALUES (?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, id);

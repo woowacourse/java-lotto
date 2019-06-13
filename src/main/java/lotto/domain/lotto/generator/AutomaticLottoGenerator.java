@@ -20,7 +20,6 @@ public class AutomaticLottoGenerator implements LottoGenerator {
         return new Lotto(generateRandomLottoNumbers());
     }
 
-
     private List<Integer> generateRandomLottoNumbers() {
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size() < Lotto.NUMBER_LENGTH) {
@@ -34,7 +33,6 @@ public class AutomaticLottoGenerator implements LottoGenerator {
                 * (LottoNumber.MAXIMUM_NUMBER - LottoNumber.MINIMUM_NUMBER + 1)
                 + LottoNumber.MINIMUM_NUMBER);
     }
-
 
     @Override
     public Lottos generate() {

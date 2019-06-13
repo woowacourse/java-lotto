@@ -10,7 +10,6 @@ public class LottoResult {
     private Money money;
     private PrizeInfo prizeInfo;
 
-
     private LottoResult(Money money, List<Prize> prizes) {
         prizeInfo = new PrizeInfo(prizes);
         this.money = money;

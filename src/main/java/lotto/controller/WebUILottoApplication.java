@@ -15,7 +15,6 @@ import java.util.*;
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
-    private final static int ILLEGAL_REQUEST_CODE = 400;
 
     public static void main(String[] args) {
         get("/", (req, res) -> {
@@ -67,7 +66,7 @@ public class WebUILottoApplication {
             }
             model.put("prizeInfos", prizeInfoDTOs);
             model.put("profitRate", lottoResult.getProfitRate());
-            model.put("lottos", lottos.getLottos());
+            model.put("lottos", lottos.getLottosList());
             model.put("winningLotto", winningLotto.getWinningLotto());
             model.put("bonusNumber", winningLotto.getBonusNumber());
             model.put("profit", lottoResult.getProfit());
@@ -116,9 +115,9 @@ public class WebUILottoApplication {
                     .generateLottos(manualLottos, money);
 
             Map<String, Object> model = new HashMap<>();
-            model.put("lottos", lottos.getLottos());
+            model.put("lottos", lottos.getLottosList());
             model.put("manualLottoCount", manualLottoCount);
-            model.put("automaticLottoCount", lottos.getLottos().size()
+            model.put("automaticLottoCount", lottos.getLottosList().size()
                     - manualLottoCount);
 
             req.session().attribute("lottos", lottos);
@@ -147,7 +146,6 @@ public class WebUILottoApplication {
             winningLottoDAO.add(winningLotto);
             lottosDAO.closeConnection();
             winningLottoDAO.closeConnection();
-
 
             Map<String, Object> model = new HashMap<>();
 

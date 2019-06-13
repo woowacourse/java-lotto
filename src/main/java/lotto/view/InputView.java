@@ -25,7 +25,6 @@ public class InputView {
         return lottoNumbers;
     }
 
-
     public static int askBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         String userInput = reader.nextLine();

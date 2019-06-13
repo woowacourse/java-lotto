@@ -1,5 +1,6 @@
 # TODO
-buttonName 문자열 배열을 따로 html 문서로 보내 주는 방법 이외의 방법이 있을까?
+- dao를 독립적으로 테스트할 수 있는 방법
+- SEPERATOR 상수를 다른 객체로 뺄 수 있는 방법
 
 
 # DONE

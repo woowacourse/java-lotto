@@ -10,7 +10,7 @@ public class OutputView {
         System.out.println("수동으로 " + manualLottoCount + "자동으로 "
                 + (lottos.size() - manualLottoCount) + " 를 구매했습니다!");
 
-        for (Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos.getLottosList()) {
             printLotto(lotto);
         }
     }

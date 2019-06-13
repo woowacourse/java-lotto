@@ -1,6 +1,5 @@
 package lotto.domain.lotto.db.dao;
 
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.db.ConnectionHandler;
@@ -90,7 +89,6 @@ public class WinningLottoDAO implements DAO<WinningLotto> {
         for (String token : tokens) {
             numbers.add(Integer.parseInt(token));
         }
-        Lotto lotto = new Lotto(numbers);
 
         int bonusNumber = rs.getInt("bonus_number");
 

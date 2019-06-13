@@ -5,10 +5,20 @@
     <title>result</title>
 </head>
 <body>
-{{#each prizeInfos}}
-일치하는 숫자 개수: {{matchCount}}
-상금: {{prizeMoney}}
-일치하는 로또 개수: {{lottoCount}}
+<table>
+    {{#each prizeInfos}}
+    <tr>
+        <td>
+            일치하는 숫자 개수: {{matchCount}}
+        </td>
+        <td>
+            상금: {{prizeMoney}}
+        </td>
+        <td>
+            일치하는 로또 개수: {{lottoCount}}
+        </td>
+    </tr>
+</table>
 <br><br>
 {{/each}}
 <br>

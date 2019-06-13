@@ -10,7 +10,6 @@ public class Lotto {
     public static final int PRICE = 1000;
     List<LottoNumber> numbers;
 
-
     public Lotto(List<Integer> numbers) {
         checkDuplication(numbers);
         checkLottoLength(numbers);
@@ -28,7 +27,6 @@ public class Lotto {
             throw new IllegalNumberCombinationException("로또 수의 개수는 6개여야 합니다.");
         }
     }
-
 
     public int countMatchLottoNumber(Lotto lotto) {
         return (int) numbers.stream()
