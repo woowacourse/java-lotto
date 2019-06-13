@@ -1,6 +1,5 @@
 package lotto.dao;
 
-import lotto.domain.Lotto;
 import lotto.dto.LottoDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.generator.LottoNumbersGenerator.generateLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoDaoTest {
@@ -32,9 +30,7 @@ public class LottoDaoTest {
         lottoDao.addAllLotto(lottoDtos, FIRST_ROUND);
 
         List<LottoDto> lottos = lottoDao.findAllBoughtLottoByRound(FIRST_ROUND);
-        assertThat(lottos).isEqualTo(Arrays.asList(
-                new Lotto(generateLottoNumbers("1, 2, 3, 4, 5, 6")),
-                new Lotto(generateLottoNumbers("3, 4, 5, 6, 7, 8"))
-        ));
+        assertThat(lottos.get(0).getLottoNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottos.get(1).getLottoNumbers()).isEqualTo(Arrays.asList(3, 4, 5, 6, 7, 8));
     }
 }
