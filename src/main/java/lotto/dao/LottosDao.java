@@ -22,13 +22,13 @@ public class LottosDao {
         return INSTANCE;
     }
 
-    public void add(final LottoDto lotto, final int turn) {
+    public void add(final LottoDto lotto, final int round) {
         final Connection conn = DBManager.getConnection();
-        final String query = "INSERT INTO lottos(numbers, turn) VALUES (?, ?)";
+        final String query = "INSERT INTO lottos(numbers, round) VALUES (?, ?)";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, stringify(lotto));
-            pstmt.setInt(2, turn);
+            pstmt.setInt(2, round);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -37,9 +37,9 @@ public class LottosDao {
         }
     }
 
-    public void addAll(final List<LottoDto> lottos, final int turn) {
+    public void addAll(final List<LottoDto> lottos, final int round) {
         for (LottoDto lotto : lottos) {
-            add(lotto, turn);
+            add(lotto, round);
         }
     }
 
@@ -47,13 +47,13 @@ public class LottosDao {
         return String.join(DELIMITER, dto.getNumbers());
     }
 
-    public List<LottoDto> findAllByTurn(final int turn) {
+    public List<LottoDto> findAllByRound(final int round) {
         Connection conn = DBManager.getConnection();
         List<LottoDto> lottos = new ArrayList<>();
         try {
-            String query = "select numbers from lottos where turn = ?";
+            String query = "select numbers from lottos where round = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, turn);
+            pstmt.setInt(1, round);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 LottoDto dto = new LottoParser().parseLottoDto(rs.getString(1));

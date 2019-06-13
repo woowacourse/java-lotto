@@ -15,7 +15,7 @@ public class LottoMachine {
 		if (money < LOTTO_MONEY) {
 			throw new LackOfMoneyException("1000원 이상 구매하세요");
 		}
-		remainMoney += money;
+		remainMoney = money;
 	}
 
 	public void buy() {
@@ -24,9 +24,5 @@ public class LottoMachine {
 
 	public boolean isRemainMoney() {
 		return (this.remainMoney >= LOTTO_MONEY);
-	}
-
-	public void vacate() {
-		remainMoney = 0;
 	}
 }

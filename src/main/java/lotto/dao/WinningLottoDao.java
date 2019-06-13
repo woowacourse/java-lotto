@@ -24,13 +24,13 @@ public class WinningLottoDao {
         return INSTANCE;
     }
 
-    public void add(final WinningLotto winningLotto, final Integer turn) {
+    public void add(final WinningLotto winningLotto, final Integer round) {
         Connection conn = DBManager.getConnection();
         LottoDto lotto = winningLotto.getWinningLotto();
         try {
             String query = "insert into winning_lotto(turn, numbers, bonus_number) values (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, turn);
+            pstmt.setInt(1, round);
             pstmt.setString(2, makeNumbersFormat(lotto.getNumbers()));
             pstmt.setInt(3, winningLotto.getBonusNumber());
             pstmt.executeUpdate();
@@ -45,12 +45,12 @@ public class WinningLottoDao {
         return String.join(DELIMITER, numbers);
     }
 
-    public WinningLotto findByTurn(final int turn) {
+    public WinningLotto findByRound(final int round) {
         Connection conn = DBManager.getConnection();
         try {
             String query = "select numbers, bonus_number from winning_lotto where turn = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, turn);
+            pstmt.setInt(1, round);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 Lotto lotto = new LottoParser().parseLotto(rs.getString(1));

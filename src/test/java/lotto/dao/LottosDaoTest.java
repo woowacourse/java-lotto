@@ -17,7 +17,7 @@ public class LottosDaoTest {
     private static final List<LottoDto> LOTTOS;
     private static final LottoDto LOTTO_DTO;
     private static final LottosDao LOTTOS_DAO;
-    private static final int TEST_TURN = 2;
+    private static final int TEST_ROUND = 2;
 
     static {
         LOTTOS_DAO = LottosDao.getInstance();
@@ -36,7 +36,7 @@ public class LottosDaoTest {
     @BeforeEach
     public void setUp() {
         LOTTOS_DAO.deleteAll();
-        LOTTOS_DAO.addAll(LOTTOS, TEST_TURN);
+        LOTTOS_DAO.addAll(LOTTOS, TEST_ROUND);
     }
 
     @Test
@@ -46,14 +46,14 @@ public class LottosDaoTest {
     @Test
     public void addAll() {
         LOTTOS_DAO.addAll(LOTTOS, 1);
-        List<LottoDto> actual = LOTTOS_DAO.findAllByTurn(1);
+        List<LottoDto> actual = LOTTOS_DAO.findAllByRound(1);
 
         assertEquals(LOTTOS, actual);
     }
 
     @Test
-    public void findByTurn() {
-        List<LottoDto> actual = LOTTOS_DAO.findAllByTurn(TEST_TURN);
+    public void findByRound() {
+        List<LottoDto> actual = LOTTOS_DAO.findAllByRound(TEST_ROUND);
 
         assertEquals(LOTTOS, actual);
     }
@@ -61,7 +61,7 @@ public class LottosDaoTest {
     @Test
     public void deleteAll() {
         LOTTOS_DAO.deleteAll();
-        assertEquals( 0, LOTTOS_DAO.findAllByTurn(TEST_TURN).size());
+        assertEquals( 0, LOTTOS_DAO.findAllByRound(TEST_ROUND).size());
     }
 
     @AfterEach

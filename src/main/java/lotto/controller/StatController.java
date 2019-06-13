@@ -4,12 +4,11 @@ import lotto.service.LottoService;
 import lotto.service.StatService;
 import lotto.service.WinningLottoService;
 import lotto.domain.*;
-import lotto.dto.GameStatDto;
+import lotto.dto.StatDto;
 import lotto.util.LottoDtoConverter;
 import lotto.util.LottoParser;
 import spark.Request;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,11 +34,13 @@ public class StatController {
         Map<String, Object> model = new HashMap<>();
         WinningLotto winningLotto = makeWinningLotto(req);
         winningLottoService.add(winningLotto);
+
         List<Lotto> lottos = makeLottos();
-        GameStatDto gameStatDto = makeGameResultDto(winningLotto, lottos);
-        model.put("profit", stringifyProfit(gameStatDto));
-        model.put("stat", stringifyResult(gameStatDto));
-        statService.add(gameStatDto);
+
+        StatDto statDto = makeGameResultDto(winningLotto, lottos);
+        model.put("profit", stringifyProfit(statDto));
+        model.put("stat", stringifyResult(statDto));
+        statService.add(statDto);
         return model;
     }
 
@@ -56,31 +57,19 @@ public class StatController {
         return converter.convertDtoToLottos(lottoService.getLottos());
     }
 
-    private GameStatDto makeGameResultDto(WinningLotto winningLotto, List<Lotto> lottos) {
+    private StatDto makeGameResultDto(WinningLotto winningLotto, List<Lotto> lottos) {
         GameResultMatcher gameResultMatcher = GameResultMatcher.of(lottos);
         gameResultMatcher.match(winningLotto);
-        return GameStatDto.of(gameResultMatcher);
+        return StatDto.of(gameResultMatcher);
     }
 
-    private String stringifyProfit(GameStatDto gameStatDto) {
-        return String.format("%.1f", gameStatDto.getProfit());
+    private String stringifyProfit(StatDto statDto) {
+        StatStringifier statStringifier = new StatStringifier();
+        return statStringifier.stringifyProfit(statDto);
     }
 
-    private List<String> stringifyResult(final GameStatDto result) {
-        List<String> results = new ArrayList<>();
-        for (Rank rank : Rank.reverseValues()) {
-            results.add(stringifyRank(rank) + result.getCount(rank) + "개");
-        }
-        return results;
-    }
-
-    private String stringifyRank(final Rank rank) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(rank.getMatchCount() + "개 일치");
-        if (rank == Rank.SECOND) {
-            sb.append(", 보너스 볼 일치");
-        }
-        sb.append("(" + rank.getMoney() + ")- ");
-        return sb.toString();
+    private List<String> stringifyResult(final StatDto statDto) {
+        StatStringifier statStringifier = new StatStringifier();
+        return statStringifier.stringifyResult(statDto);
     }
 }

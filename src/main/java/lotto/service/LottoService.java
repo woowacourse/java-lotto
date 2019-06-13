@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.dao.LottosDao;
-import lotto.dao.TurnDao;
+import lotto.dao.RoundDao;
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoMachine;
@@ -16,12 +16,12 @@ public class LottoService {
 
     private final LottoMachine lottoMachine;
     private final LottosDao lottosDao;
-    private final TurnDao turnDao;
+    private final RoundDao roundDao;
 
     private LottoService() {
         lottoMachine = new LottoMachine();
         lottosDao = LottosDao.getInstance();
-        turnDao = TurnDao.getInstance();
+        roundDao = RoundDao.getInstance();
     }
 
     public static LottoService getInstance() {
@@ -60,15 +60,11 @@ public class LottoService {
 
     public void buy(final Lotto lotto) {
         lottoMachine.buy();
-        lottosDao.add(LottoDto.of(lotto), turnDao.findNext());
+        lottosDao.add(LottoDto.of(lotto), roundDao.findNext());
     }
 
     public boolean canBuy() {
         return lottoMachine.isRemainMoney();
-    }
-
-    public void vacateMoney() {
-        lottoMachine.vacate();
     }
 
     public void deleteAll() {
@@ -76,10 +72,10 @@ public class LottoService {
     }
 
     public List<LottoDto> getLottos() {
-        return lottosDao.findAllByTurn(turnDao.findNext());
+        return lottosDao.findAllByRound(roundDao.findNext());
     }
 
-    public List<LottoDto> findAllByTurn(final int turn) {
-        return lottosDao.findAllByTurn(turn);
+    public List<LottoDto> findAllByRound(final int round) {
+        return lottosDao.findAllByRound(round);
     }
 }

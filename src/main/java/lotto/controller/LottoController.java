@@ -34,28 +34,33 @@ public class LottoController {
 
     public Map<String, Object> processLottos(final Request req) {
         Map<String, Object> model = new HashMap<>();
-
-        String origin = req.queryParams("numbers");
-        List<String> numbers = splitSentences(origin);      //controller의 일 ok
-        List<Lotto> lottos = numbers.stream()               //컨트롤러의 일 ok
-                .map(lotto -> parseLotto(lotto))
-                .collect(Collectors.toList());
-
+        List<Lotto> lottos = makeLottos(req);
         int manualCount = lottoService.assignManualCount(lottos);
         int autoCount = lottoService.assignAutoPurchaseCount();
 
         model.put("manualCount", manualCount);
         model.put("autoCount", autoCount);
-
         model.put("lottos", lottoService.getLottos());
         return model;
     }
 
-    private List<String> splitSentences(String origin) {
+    private List<Lotto> makeLottos(Request req) {
+        String origin = req.queryParams("numbers");
+        List<String> numbers = splitSentences(origin);
+        return parseLottos(numbers);
+    }
+
+    private List<String> splitSentences(final String origin) {
         return Arrays.asList(origin.split(SENTENCE_DELIMITER));
     }
 
-    private Lotto parseLotto(String winninglotto) {
-        return new LottoParser().parseLotto(winninglotto);
+    private List<Lotto> parseLottos(List<String> numbers) {
+        return numbers.stream()
+                .map(str -> parseLotto(str))
+                .collect(Collectors.toList());
+    }
+
+    private Lotto parseLotto(final String lotto) {
+        return new LottoParser().parseLotto(lotto);
     }
 }

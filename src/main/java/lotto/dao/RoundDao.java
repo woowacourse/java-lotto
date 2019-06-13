@@ -7,20 +7,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TurnDao {
-    private static final TurnDao INSTANCE = new TurnDao();
+public class RoundDao {
+    private static final RoundDao INSTANCE = new RoundDao();
 
-    private TurnDao() {
+    private RoundDao() {
 
     }
 
-    public static TurnDao getInstance() {
+    public static RoundDao getInstance() {
         return INSTANCE;
     }
 
     public void add() {
         final Connection conn = DBManager.getConnection();
-        final String query = "INSERT INTO turn() VALUES ()";
+        final String query = "INSERT INTO round() VALUES ()";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.executeUpdate();
@@ -37,7 +37,7 @@ public class TurnDao {
 
     public Integer findLast() {
         Connection conn = DBManager.getConnection();
-        String query = "SELECT id FROM turn ORDER BY id DESC LIMIT 1";
+        String query = "SELECT id FROM round ORDER BY id DESC LIMIT 1";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
@@ -55,7 +55,7 @@ public class TurnDao {
     public List<Integer> findAll() {
         Connection conn = DBManager.getConnection();
         List<Integer> turns = new ArrayList<>();
-        String query = "SELECT id FROM turn ORDER BY id";
+        String query = "SELECT id FROM round ORDER BY id";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
@@ -72,7 +72,7 @@ public class TurnDao {
 
     public void deleteAll() {
         Connection conn = DBManager.getConnection();
-        String query = "DELETE FROM turn";
+        String query = "DELETE FROM round";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.executeUpdate();
@@ -86,7 +86,7 @@ public class TurnDao {
 
     private void initialize() {
         Connection conn = DBManager.getConnection();
-        String query = "ALTER TABLE turn AUTO_INCREMENT=1";
+        String query = "ALTER TABLE round AUTO_INCREMENT=1";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.executeUpdate();

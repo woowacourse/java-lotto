@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.dao.TurnDao;
+import lotto.dao.RoundDao;
 import lotto.domain.*;
 import lotto.service.LottoService;
 import lotto.util.LottoDtoConverter;
@@ -60,6 +60,6 @@ public class ConsoleApplication {
 
     private static void deleteInfo(final LottoService service) {
         service.deleteAll();
-        TurnDao.getInstance().deleteAll();
+        RoundDao.getInstance().deleteAll();
     }
 }

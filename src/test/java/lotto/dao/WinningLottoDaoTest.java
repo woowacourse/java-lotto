@@ -22,7 +22,7 @@ class WinningLottoDaoTest {
     private static final WinningLotto WINNING_LOTTO;
 
     private WinningLottoDao winningLottoDao;
-    private static final int TEST_TURN = 2;
+    private static final int TEST_ROUND = 2;
 
     static {
         NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -34,19 +34,19 @@ class WinningLottoDaoTest {
     @BeforeEach
     public void setUp() {
         winningLottoDao = WinningLottoDao.getInstance();
-        winningLottoDao.add(WINNING_LOTTO, TEST_TURN);
+        winningLottoDao.add(WINNING_LOTTO, TEST_ROUND);
     }
 
     @Test
     public void add() {
         winningLottoDao.add(WINNING_LOTTO, 1);
-        WinningLotto actual = winningLottoDao.findByTurn(1);
+        WinningLotto actual = winningLottoDao.findByRound(1);
         assertEquals(WINNING_LOTTO, actual);
     }
 
     @Test
-    public void findByTurn() {
-        WinningLotto actual = winningLottoDao.findByTurn(TEST_TURN);
+    public void findByRound() {
+        WinningLotto actual = winningLottoDao.findByRound(TEST_ROUND);
         assertEquals(WINNING_LOTTO, actual);
     }
 
@@ -54,7 +54,7 @@ class WinningLottoDaoTest {
     public void delete() {
         winningLottoDao.deleteAll();
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            Optional.ofNullable(winningLottoDao.findByTurn(1)).orElseThrow(IllegalArgumentException::new);
+            Optional.ofNullable(winningLottoDao.findByRound(1)).orElseThrow(IllegalArgumentException::new);
         });
     }
 

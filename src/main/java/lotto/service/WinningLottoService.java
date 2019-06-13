@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.dao.TurnDao;
+import lotto.dao.RoundDao;
 import lotto.dao.WinningLottoDao;
 import lotto.domain.WinningLotto;
 
@@ -8,11 +8,11 @@ public class WinningLottoService {
     private static final WinningLottoService INSTANCE = new WinningLottoService();
 
     private final WinningLottoDao winningLottoDao;
-    private final TurnDao turnDao;
+    private final RoundDao roundDao;
 
     private WinningLottoService() {
         winningLottoDao = WinningLottoDao.getInstance();
-        turnDao = TurnDao.getInstance();
+        roundDao = RoundDao.getInstance();
     }
 
     public static WinningLottoService getInstance() {
@@ -20,7 +20,15 @@ public class WinningLottoService {
     }
 
     public void add(final WinningLotto winningLotto) {
-        int nextTurn = turnDao.findNext();
-        winningLottoDao.add(winningLotto, nextTurn);
+        int nextRound = roundDao.findNext();
+        winningLottoDao.add(winningLotto, nextRound);
+    }
+
+    public void deleteAll() {
+        winningLottoDao.deleteAll();
+    }
+
+    public WinningLotto findByRound(final int round) {
+        return winningLottoDao.findByRound(round);
     }
 }

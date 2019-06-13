@@ -9,43 +9,43 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TurnDaoTest {
-    private static final TurnDao turnDao;
+public class RoundDaoTest {
+    private static final RoundDao ROUND_DAO;
 
     static {
-        turnDao = TurnDao.getInstance();
+        ROUND_DAO = RoundDao.getInstance();
     }
 
     @BeforeEach
     public void setUp() {
-        turnDao.deleteAll();
+        ROUND_DAO.deleteAll();
     }
 
     @Test
     public void getLatestTurnIfNull() {
-        assertEquals(1, turnDao.findNext());
+        assertEquals(1, ROUND_DAO.findNext());
     }
 
     @Test
     public void findLast() {
-        turnDao.add();
-        assertEquals(2, turnDao.findNext());
-        turnDao.add();
-        assertEquals(3, turnDao.findNext());
+        ROUND_DAO.add();
+        assertEquals(2, ROUND_DAO.findNext());
+        ROUND_DAO.add();
+        assertEquals(3, ROUND_DAO.findNext());
     }
 
     @Test
     public void findAllTurn() {
-        turnDao.add();
-        turnDao.add();
-        turnDao.add();
+        ROUND_DAO.add();
+        ROUND_DAO.add();
+        ROUND_DAO.add();
 
         final List<Integer> expected = Arrays.asList(1, 2, 3);
-        assertEquals(expected, turnDao.findAll());
+        assertEquals(expected, ROUND_DAO.findAll());
     }
 
     @AfterEach
     public void tearDown() {
-        turnDao.deleteAll();
+        ROUND_DAO.deleteAll();
     }
 }
