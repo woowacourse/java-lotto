@@ -24,12 +24,12 @@ class WinPrizeDaoTest {
 
     @Test
     void addTest() {
-        assertThat(1).isEqualTo(winPrizeDao.add(winPrize, round));
+        assertThat(1).isEqualTo(winPrizeDao.save(winPrize, round));
     }
 
     @Test
     void findByRoundTest() {
-        WinPrize expected = winPrizeDao.findByRound(round);
+        WinPrize expected = winPrizeDao.findAllByRound(round);
         assertThat(expected).isNotNull();
     }
 }

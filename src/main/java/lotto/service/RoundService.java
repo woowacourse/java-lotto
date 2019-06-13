@@ -1,30 +1,26 @@
 package lotto.service;
 
-import lotto.dao.LottoDao;
-import lotto.dao.WinPrizeDao;
-import lotto.dao.WinningLottoDao;
-import lotto.domain.WinPrize;
-import lotto.view.ResultFormat;
-import spark.Request;
-import spark.Response;
+import lotto.dao.RoundDao;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static lotto.WebUILottoApplication.render;
+import java.sql.SQLException;
 
 public class RoundService {
-    public static Object round(Request req, Response res) {
-        Map<String, Object> model = new HashMap<>();
-        int round = Integer.parseInt(req.queryParams("round"));
-        WinPrize winPrize = new WinPrizeDao().findByRound(round);
+    private static final int SAVE_FAIL = 0;
 
-        model.put("results", ResultFormat.format(winPrize));
-        model.put("rateOfProfit", winPrize.getRateOfProfit());
-        model.put("round", round);
-        model.put("lottos", new LottoDao().findByRound(round));
-        model.put("winningLotto", new WinningLottoDao().findByRound(round));
-        return render(model, "round.html");
+    private final RoundDao roundDao;
+
+    public RoundService(final RoundDao roundDao) {
+        this.roundDao = roundDao;
     }
 
+    public int increaseOne() throws SQLException {
+        if (roundDao.add() == SAVE_FAIL) {
+            throw new SQLException("라운드 DB 저장 에러");
+        }
+        return getLatestRound();
+    }
+
+    public int getLatestRound() {
+        return roundDao.getLatest();
+    }
 }

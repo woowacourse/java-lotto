@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class WinPrizeDao {
-    public int add(WinPrize winPrize, int round) {
+    public int save(WinPrize winPrize, int round) {
         Connection conn = DBUtils.getConnection();
         PreparedStatement ps = null;
         int result = 0;
@@ -32,7 +32,7 @@ public class WinPrizeDao {
         return result;
     }
 
-    public WinPrize findByRound(int round) {
+    public WinPrize findAllByRound(int round) {
         Connection conn = DBUtils.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;

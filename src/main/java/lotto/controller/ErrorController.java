@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.controller;
 
 import spark.Request;
 import spark.Response;
@@ -8,12 +8,12 @@ import java.util.Map;
 
 import static lotto.WebUILottoApplication.render;
 
-public class ErrorService {
+public class ErrorController {
 
-    private ErrorService() {
+    public ErrorController() {
     }
 
-    public static Object exception(Request req, Response res) {
+    public Object exception(Request req, Response res) {
         Map<String, Object> model = new HashMap<>();
         model.put("message", req.queryParams("message"));
         return render(model, "error.html");

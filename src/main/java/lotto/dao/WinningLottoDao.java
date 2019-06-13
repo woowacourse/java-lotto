@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class WinningLottoDao {
-    public int add(WinningLotto winningLotto, int round) {
+    public int save(WinningLotto winningLotto, int round) {
         Connection conn = DBUtils.getConnection();
         PreparedStatement ps = null;
         int result = 0;

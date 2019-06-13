@@ -1,9 +1,14 @@
 package lotto;
 
-import lotto.service.ErrorService;
+import lotto.controller.*;
+import lotto.dao.LottoDao;
+import lotto.dao.RoundDao;
+import lotto.dao.WinPrizeDao;
+import lotto.dao.WinningLottoDao;
 import lotto.service.LottoService;
-import lotto.service.MainService;
 import lotto.service.RoundService;
+import lotto.service.WinPrizeService;
+import lotto.service.WinningLottoService;
 import lotto.utils.Encoder;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -18,21 +23,36 @@ public class WebUILottoApplication {
     public static void main(String[] args) {
         port(8080);
 
+        RoundDao roundDao = new RoundDao();
+        LottoDao lottoDao = new LottoDao();
+        WinPrizeDao winPrizeDao = new WinPrizeDao();
+        WinningLottoDao winningLottoDao = new WinningLottoDao();
+
+        RoundService roundService = new RoundService(roundDao);
+        LottoService lottoService = new LottoService(lottoDao);
+        WinPrizeService winPrizeService = new WinPrizeService(winPrizeDao);
+        WinningLottoService winningLottoService = new WinningLottoService(winningLottoDao);
+
+        LottoController lottoController = new LottoController(roundService, lottoService);
+        ResultController resultController = new ResultController(winPrizeService, winningLottoService, lottoService);
+        ErrorController errorController = new ErrorController();
+        MainController mainController = new MainController(roundDao);
+
         externalStaticFileLocation("src/main/resources/templates");
 
-        get("/", MainService::main);
+        get("/", mainController::main);
 
-        get("/round", RoundService::round);
+        get("/round", RoundController::round);
 
-        post("/lottos", LottoService::addLottos);
+        post("/lottos", lottoController::addLottos);
 
-        get("/lottos", LottoService::getLottos);
+        get("/lottos", lottoController::getLottos);
 
-        post("/result", LottoService::doPostResult);
+        post("/result", resultController::doPostResult);
 
-        get("/result", LottoService::doGetResult);
+        get("/result", resultController::doGetResult);
 
-        get("/error", ErrorService::exception);
+        get("/error", errorController::exception);
 
         exception(Exception.class, (exception, req, res) -> {
             String message = null;

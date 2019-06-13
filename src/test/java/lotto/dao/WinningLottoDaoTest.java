@@ -16,7 +16,7 @@ class WinningLottoDaoTest {
         LottoNo bonus = LottoNo.from(10);
         WinningLotto winningLotto = new WinningLotto(lotto, bonus);
 
-        assertThat(1).isEqualTo(new WinningLottoDao().add(winningLotto, 0));
+        assertThat(1).isEqualTo(new WinningLottoDao().save(winningLotto, 0));
     }
 
     @Test
