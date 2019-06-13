@@ -45,7 +45,6 @@ public class WebUILottoApplication {
 
             Map<String, Object> sessionMap = new HashMap<>();
             sessionMap.put("name", userName);
-
             req.session().attribute("user", sessionMap); // session 에 등록
 
             return render(null, "../static/lottoPaymentInfo.html");

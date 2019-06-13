@@ -1,5 +1,6 @@
 package lotto.domain.dao;
 
+import lotto.domain.dto.PaymentInfoDTO;
 import lotto.domain.dto.ResultDTO;
 
 import java.sql.PreparedStatement;
@@ -32,7 +33,7 @@ public class LottoDao {
             List<ResultDTO> results = new ArrayList<>();
             while (resultSet.next()) {
                 ResultDTO resultDTO = new ResultDTO.Builder(
-                        resultSet.getInt(ID), resultSet.getString(NAME))
+                        resultSet.getInt(ROUND), resultSet.getString(NAME))
                         .first(resultSet.getInt(FIRST))
                         .second(resultSet.getInt(SECOND))
                         .third(resultSet.getInt(THIRD))
@@ -45,6 +46,7 @@ public class LottoDao {
             }
             return results;
         } catch (Exception e) {
+            System.err.println(e.getMessage());
             throw new SQLDataException();
         }
     }
@@ -60,5 +62,9 @@ public class LottoDao {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public int insertPayment(PaymentInfoDTO paymentDTO) {
+        return 0;
     }
 }
