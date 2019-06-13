@@ -1,5 +1,6 @@
 package lotto.application.lottoticket;
 
+import lotto.application.lottoresult.LottoResultDAO;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoresult.WinningLotto;
@@ -54,5 +55,28 @@ public class LottoTicketService {
 
     public static WinningLottoDto getWinningLottoDto(WinningLotto winningLotto) {
         return LottoTicketAssembler.getWinningLottoDto(winningLotto);
+    }
+
+    public static void savePurchasedLottoTicket(LottoTicketDto lottoTicketDto) {
+        int currentRound = fetchCurrentRound();
+        saveLottoTicket(currentRound, lottoTicketDto);
+    }
+
+    private static int fetchCurrentRound() {
+        LottoResultDAO lottoResultDAO = LottoResultDAO.getInstance();
+        return lottoResultDAO.getLatestRoundNum();
+    }
+
+    private static void saveLottoTicket(int currentRound, LottoTicketDto lottoTicketDto) {
+        LottoTicketDAO lottoTicketDAO = LottoTicketDAO.getInstance();
+        lottoTicketDAO.savePurchasedLotto(currentRound, lottoTicketDto);
+    }
+
+    public static void savePurchasedLottoTickets(LottoTicketsDto lottoTicketsDto) {
+        int currentRound = fetchCurrentRound();
+        List<LottoTicketDto> dtos = lottoTicketsDto.getLottoTicketDtos();
+        for (LottoTicketDto lottoTicketDto : dtos) {
+            saveLottoTicket(currentRound, lottoTicketDto);
+        }
     }
 }

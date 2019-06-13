@@ -12,4 +12,8 @@ public class LottoTicketsDto {
     public void setLottoTicketDtos(List<LottoTicketDto> lottoTicketDtos) {
         this.lottoTicketDtos = lottoTicketDtos;
     }
+
+    public void addLottoTicketDto(LottoTicketDto lottoTicketDto) {
+        lottoTicketDtos.add(lottoTicketDto);
+    }
 }

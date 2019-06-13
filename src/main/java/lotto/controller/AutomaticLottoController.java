@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.application.LottoSession;
 import lotto.application.lottoticket.LottoTicketService;
 import lotto.domain.lottoticket.LottoTickets;
 import lotto.domain.lottoticket.dto.LottoTicketsDto;
@@ -11,9 +10,9 @@ public class AutomaticLottoController {
         String numOfAutomaticLotto = req.queryParams("numOfAutomaticLotto");
 
         LottoTickets lottoTickets = LottoTicketService.getAutomaticLottoTickets(numOfAutomaticLotto);
-        LottoSession.joinLottoTickets(lottoTickets);
 
         LottoTicketsDto lottoTicketsDto = LottoTicketService.getLottoTicketsDto(lottoTickets);
+        LottoTicketService.savePurchasedLottoTickets(lottoTicketsDto);
 
         return JsonUtil.convertDtoToJsonStringWith(res, lottoTicketsDto);
     };

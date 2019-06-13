@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.application.LottoSession;
 import lotto.application.lottoticket.LottoTicketService;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.dto.LottoTicketDto;
@@ -29,9 +28,8 @@ public class ManualLottoController {
         numbers.add(req.queryParams("sixthNum"));
 
         LottoTicket lottoTicket = LottoTicketService.makeLottoTicket(numbers);
-        LottoSession.addLottoTicket(lottoTicket);
-
         LottoTicketDto lottoTicketDto = LottoTicketService.getLottoTicketDto(lottoTicket);
+        LottoTicketService.savePurchasedLottoTicket(lottoTicketDto);
 
         return JsonUtil.convertDtoToJsonStringWith(res, lottoTicketDto);
     };
