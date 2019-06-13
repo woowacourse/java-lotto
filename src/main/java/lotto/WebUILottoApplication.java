@@ -1,5 +1,10 @@
 package lotto;
 
+import lotto.api.BuyLottoAPI;
+import lotto.api.EnrollLottoAPI;
+import lotto.api.InquireLottoAPI;
+import lotto.data.WebUILottoData;
+
 import static spark.Spark.exception;
 import static spark.Spark.get;
 import static spark.Spark.post;

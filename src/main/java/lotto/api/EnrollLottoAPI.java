@@ -1,8 +1,12 @@
-package lotto;
+package lotto.api;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import lotto.data.GameDAO;
+import lotto.data.GameDTO;
+import lotto.utils.WebParser;
+import lotto.data.WebUILottoData;
 import lotto.domain.game.LottoResult;
 
 public class EnrollLottoAPI {

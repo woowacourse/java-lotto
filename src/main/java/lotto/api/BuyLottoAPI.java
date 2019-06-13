@@ -1,9 +1,11 @@
-package lotto;
+package lotto.api;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lotto.utils.WebParser;
+import lotto.data.WebUILottoData;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.game.Count;
 import lotto.domain.game.LottoResult;

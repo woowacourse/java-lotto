@@ -1,10 +1,12 @@
-package lotto;
+package lotto.api;
 
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lotto.data.GameDAO;
+import lotto.data.GameDTO;
 import spark.Request;
 
 public class InquireLottoAPI {

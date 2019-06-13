@@ -1,4 +1,4 @@
-package lotto;
+package lotto.data;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

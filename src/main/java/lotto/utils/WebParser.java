@@ -1,9 +1,10 @@
-package lotto;
+package lotto.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import lotto.data.WebUILottoData;
 import lotto.domain.Rank;
 import lotto.domain.game.LottoResult;
 import lotto.domain.game.ResultCounter;

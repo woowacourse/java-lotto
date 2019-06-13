@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import lotto.data.GameDAO;
+import lotto.data.GameDTO;
 import lotto.domain.lotto.Number;
 import lotto.domain.lotto.Lotto;
 import lotto.utils.InputParser;
