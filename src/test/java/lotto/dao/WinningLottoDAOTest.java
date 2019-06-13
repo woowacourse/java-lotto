@@ -18,12 +18,6 @@ class WinningLottoDAOTest {
     }
 
     @Test
-    void connection() {
-        Connection con = winningLottoDAO.getConnection();
-        assertNotNull(con);
-    }
-
-    @Test
     void DB에서_당첨로또_갖고오는지_테스트() throws SQLException {
         WinningLottoDTO winningLotto = winningLottoDAO.findByWinningLottoId("1");
 
