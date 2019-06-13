@@ -36,8 +36,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return Collections.unmodifiableList(shuffleLottoNumbers.subList(0, NUMBER_OF_LOTTO));
 	}
 
-	public String getName() {
-		return String.valueOf(number);
+	public Integer getName() {
+		return number;
 	}
 
 	@Override

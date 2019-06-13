@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <title>로또</title>
+</head>
+<body onload="del()" style="font-weight: bold;">
+<div style="color : red; font-size:20pt; margin-top:5%; left:40%;">
+    {{errorMessage}}
+</div>
+<script>
+    function del() {
+        if ({{countOfManualLotto}} <= 0){
+            const el = document.getElementById("manualInputs")
+            el.parentNode.removeChild(el)
+        }
+    }
+</script>
+<form action="generateLottos" method="post">
+    <fieldset>
+        <div id="manualInputs" style="font-size:20pt; margin-top:5%; margin-left:15%;">
+            수동 로또 숫자를 입력해주세요. <br/> <br/>
+            <div class="form-group" style="width: 80%;">
+                <textarea class="form-control" placeholder="ex) 1,2,3,4,5,6"
+                          name="manualLottos" rows="5"></textarea>
+            </div>
+        </div>
+        <div style="margin-top:5%; margin-left:50%; font-size: 20pt;">
+            <button type="submit" class="btn btn-danger">로또 생성!</button>
+        </div>
+    </fieldset>
+</form>
+
+</body>
+</html>

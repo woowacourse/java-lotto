@@ -27,6 +27,10 @@ public class Lotto {
 		return numbers.contains(lottoNumber);
 	}
 
+	public Set<LottoNumber> getNumbers() {
+		return new TreeSet<>(numbers);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

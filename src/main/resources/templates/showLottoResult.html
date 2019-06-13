@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <title>로또</title>
+</head>
+<body>
+<div style="color : red; font-size:20pt; position:absolute; top:30%; left:40%; margin:-50px 0 0 -50px; font-weight: bold;">
+    {{errorMessage}}
+</div>
+<fieldset>
+    <form class="bs-component" action="/">
+        <button type="submit" class="btn btn-primary" style="width:100px; margin-top:5%; margin-left: 80%">돌아가기</button>
+    </form>
+    <div style="font-size:20pt; position:absolute; top:30%; left:40%; margin:-50px 0 0 -50px; font-weight: bold;">
+        {{{matchedResult}}}
+        <br/>
+        총 수익률을 {{earningRate}}% 입니다.
+    </div>
+
+</fieldset>
+</body>
+</html>

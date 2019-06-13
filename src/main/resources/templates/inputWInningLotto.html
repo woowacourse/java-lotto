@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <title>로또</title>
+</head>
+<body style="font-weight: bold;">
+<div style="color : red; font-size:20pt; margin-top:5%; margin-left:30%;">
+    {{errorMessage}}
+</div>
+<fieldset>
+    <form action="inputWinningLotto" method="post">
+        <div style="font-size:20pt; margin-top:5%; margin-left:20%;">
+            지난 주 당첨 번호와 보너스를 입력해주세요.
+            <textarea class="form-control" style="width:80%;" placeholder="ex) 1,2,3,4,5,6" name="winningLotto" rows="5"></textarea>
+            <br/>
+            <input class="form-control form-control-lg" style="width:80%;" type="text" placeholder="보너스 볼 입력 ex) 24" name="bonusBall">
+        </div>
+        <div style="position:absolute; margin-top:5%; margin-left:48%; font-size: 15pt;">
+            <button type="submit" class="btn btn-danger">입력</button>
+        </div>
+    </form>
+</fieldset>
+</body>
+</html>
