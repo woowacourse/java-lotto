@@ -75,12 +75,10 @@ public class WebUILottoApplication {
                 List<NameValuePair> pairs = URLEncodedUtils.parse(req.body(), Charset.defaultCharset());
 
                 int nextTimes = winningLottoService.nextWinningLottoTimes();
-
                 WinningLotto winningLotto = createWinningLotto(pairs);
-
+                winningLottoService.addWinningLotto(winningLotto, nextTimes);
                 Lottos lottos = lottoService.getLottos(nextTimes);
 
-                winningLottoService.addWinningLotto(winningLotto, nextTimes);
                 LottoResult lottoResult = new LottoResult(lottos.getLottos(), winningLotto);
 
                 return gson.toJson(lottoResult.getLottoResult());
@@ -96,9 +94,7 @@ public class WebUILottoApplication {
                 LottoResult lottoResult = createLottoResult(times);
                 Money money = moneyService.findByTimes(times);
 
-                double result = ((double) lottoResult.getRewardAll() / money.getMoney()) * 100;
-
-                return result;
+                return lottoResult.calculateLottoYield(money);
             } catch (Exception e) {
                 return "Error: " + e.getMessage();
             }

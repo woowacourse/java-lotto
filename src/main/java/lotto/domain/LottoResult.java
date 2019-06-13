@@ -46,4 +46,8 @@ public class LottoResult {
     public Map<WinningType, Integer> getLottoResult() {
         return lottoResult;
     }
+
+    public double calculateLottoYield(Money money) {
+        return ((double) getRewardAll() / money.getMoney()) * 100;
+    }
 }
