@@ -77,3 +77,6 @@
 4. 회차별 결과 조회 화면
     - 회차별로 사용자가 구매한 로또, 당첨 번호, 당첨 결과, 당첨 금액, 수익률을 조회 가능
     - 메인 화면으로 이동 가능
+    
+### DB EER DIAGRAM
+![DB_ERR_DIAGRAM](/schema/lottoDB_EER_Diagram.png)
