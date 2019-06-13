@@ -599,7 +599,10 @@
     function getNumOfManualLottoResult() {
         return new Promise(function (resolve, reject) {
             numOfManualLotto = parseInt(document.getElementById("num-of-manual-lotto-input-text").value);
-            $.post('/num-of-manual-lotto', {num: numOfManualLotto}, function (response) {
+            $.post('/num-of-manual-lotto', {
+                "numOfManualLotto": numOfManualLotto,
+                "numOfLotto": numOfLotto,
+            }, function (response) {
                 if (response) {
                     resolve(response);
                 }

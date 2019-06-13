@@ -19,9 +19,9 @@ public class LottoTicketService {
     private LottoTicketService() {
     }
 
-    public static long getNumOfManualLotto(String num, long numOfLotto) {
+    public static long getNumOfManualLotto(String num, String numOfLotto) {
         long numOfManualLotto = Long.parseLong(num);
-        if (numOfManualLotto > numOfLotto) {
+        if (numOfManualLotto > Long.parseLong(numOfLotto)) {
             throw new InvalidLottoTicketException(ERROR_OUT_OF_BOUND_NUM_OF_MANUAL_LOTTO);
         }
         return numOfManualLotto;

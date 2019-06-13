@@ -11,9 +11,10 @@ import java.util.List;
 
 public class ManualLottoController {
     public static final Route fetchNumOfManualLotto = (req, res) -> {
-        String num = req.queryParams("num");
+        String num = req.queryParams("numOfManualLotto");
+        String numOfLotto = req.queryParams("numOfLotto");
 
-        long numOfManualLotto = LottoTicketService.getNumOfManualLotto(num, LottoSession.getNumOfLotto());
+        long numOfManualLotto = LottoTicketService.getNumOfManualLotto(num, numOfLotto);
         JsonUtil.setResponseTypeForJson(res);
         return "{\"numOfManualLotto\":\"" + numOfManualLotto + "\"}";
     };

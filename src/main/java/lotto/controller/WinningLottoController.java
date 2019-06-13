@@ -3,10 +3,8 @@ package lotto.controller;
 import lotto.application.LottoSession;
 import lotto.application.lottoticket.LottoTicketService;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoresult.WinningLotto;
 import lotto.domain.lottoticket.LottoTicket;
-import lotto.domain.lottoticket.dto.LottoTicketDto;
 import lotto.domain.lottoticket.dto.WinningLottoDto;
 import spark.Route;
 
