@@ -1,9 +1,12 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoTicket {
-    public static final int PRICE = 1000;
+    public static final int PRICE = 1_000;
     public static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
@@ -36,6 +39,11 @@ public class LottoTicket {
             return 1;
         }
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers+"";
     }
 
     public boolean hasBonusBall(final LottoNumber lottoNumber) {

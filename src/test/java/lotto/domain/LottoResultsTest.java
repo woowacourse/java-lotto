@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.factory.LottoResultsFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -23,7 +24,9 @@ class LottoResultsTest {
 
         WinningLotto winningLotto = new WinningLotto(new LottoTicket(Arrays.asList(1, 2, 3, 6, 7, 8)), 10);
 
-        LottoResults lottoResults = new LottoResults(new LottoTickets(lottoTickets), winningLotto, new LottoMoney(2000));
+        LottoResults lottoResults =
+                LottoResultsFactory.create(
+                        new LottoTickets(lottoTickets), winningLotto, new LottoMoney(2000));
 
         assertThat(lottoResults.getYield()).isEqualTo(500);
     }

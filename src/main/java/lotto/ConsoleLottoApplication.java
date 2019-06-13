@@ -4,6 +4,7 @@ import lotto.domain.LottoMoney;
 import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningLotto;
+import lotto.domain.factory.LottoResultsFactory;
 import lotto.domain.factory.LottoTicketsFactory;
 import lotto.domain.factory.WinningLottoFactory;
 import lotto.view.ConsoleInputView;
@@ -24,7 +25,7 @@ public class ConsoleLottoApplication {
 
         WinningLotto winningLotto = WinningLottoFactory.create(ConsoleInputView.inputRewardTicket(), ConsoleInputView.inputBonusBall());
 
-        LottoResults lottoResults = new LottoResults(lottoTickets, winningLotto, lottoMoney);
+        LottoResults lottoResults = LottoResultsFactory.create(lottoTickets, winningLotto, lottoMoney);
         ConsoleOutputView.printResults(lottoResults);
     }
 }

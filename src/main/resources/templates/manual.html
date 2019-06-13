@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+<div class="container" style="max-width: 500px; margin-top: 30px">
+    <form action="/show/lotto" method="post" accept-charset="UTF-8">
+        <h1>수동으로 {{manualAmount}} 개 구매 가능합니다.</h1>
+        {{#manualAmount}}
+        <h2>쉼표로 구분해서 한줄에 숫자 6개씩 입력해 주세요</h2>
+        <textarea class="form-control" rows="{{manualAmount}}" name="manualNumber"
+                  placeholder="1,2,3,4,5,6"></textarea>
+        {{/manualAmount}}
+        <textarea style="display: none;" class="form-control" name="manualNumber"
+                  value="" placeholder="1,2,3,4,5,6"></textarea>
+        <input type="submit">
+    </form>
+</div>
+</body>
+</html>

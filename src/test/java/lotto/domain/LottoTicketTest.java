@@ -43,6 +43,13 @@ class LottoTicketTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new LottoTicket(lottoNumbersFirst);
         });
+    }
 
+    @Test
+    void to_string() {
+        List<Integer> lottoNumbersFirst = Arrays.asList(
+                1, 2, 3, 4, 5, 6
+        );
+        System.out.println(new LottoTicket(lottoNumbersFirst));
     }
 }

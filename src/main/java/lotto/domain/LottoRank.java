@@ -9,6 +9,7 @@ public enum LottoRank {
     FIRST(6, 2_000_000_000);
 
     private static final int WINNING_CONDITION = 3;
+    private static final int COUNT_OF_MATCH_SECOND_THIRD = 5;
 
     private int countOfMatch;
     private int rewardMoney;
@@ -30,7 +31,7 @@ public enum LottoRank {
         if (countOfMatch < WINNING_CONDITION) {
             return MISS;
         }
-        if (countOfMatch == 5 && hasBonusBall) {
+        if (countOfMatch == COUNT_OF_MATCH_SECOND_THIRD && hasBonusBall) {
             return SECOND;
         }
         for (LottoRank lottoRank : values()) {

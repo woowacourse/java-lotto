@@ -1,0 +1,25 @@
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>결과 조회</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<form action="/show/round" method="get">
+    <div class="container" style="max-width: 500px; margin-top: 30px">
+        <h1>1~ {{round}} 회차 중 조회할 회차를 입력하세요.</h1>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">회차</span>
+            </div>
+            <input type="text" class="form-control" placeholder="조회할 회차를 입력하세요" aria-describedby="basic-addon1"
+                   name="round">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">결과 조회</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>
