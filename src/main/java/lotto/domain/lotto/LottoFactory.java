@@ -15,5 +15,4 @@ public class LottoFactory {
 
         return new Lottos(lottos);
     }
-
 }

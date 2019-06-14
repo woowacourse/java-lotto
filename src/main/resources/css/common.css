@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    width: 800px;
+    margin: auto;
+    padding-top: 80px;
+}
+
+.vender {
+    width: 100%;
+    height: 320px;
+    padding-top: 40px;
+    padding-left: 360px;
+    padding-right: 36px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+.input-wrapper {
+    width: 100%;
+    margin: 40px 0;
+    padding: 80px 180px;
+    background-color: #eeeeee;
+    font-size: 32px;
+}
+
+.input-wrapper input {
+    height: 60px;
+    padding: 0 16px;
+    border: none;
+    vertical-align: middle;
+    text-align: right;
+    font-size: 32px;
+}
+
+.input-wrapper button {
+    width: 100px;
+    height: 60px;
+    border: none;
+    border-radius: 8px;
+    background-color: #b70000;
+    vertical-align: middle;
+    float: right;
+    font-size: 28px;
+    color: #ffffff;
+}

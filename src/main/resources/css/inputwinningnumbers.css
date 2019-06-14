@@ -1,0 +1,49 @@
+.input-wrapper {
+    padding: 40px 92px;
+    font-size: 48px;
+}
+
+.input-wrapper input {
+    width: 348px;
+    vertical-align: middle;
+}
+
+.input-wrapper input#bonus {
+    width: 100px;
+}
+
+.input-wrapper button {
+    width: 100px;
+}
+
+.input-wrapper > .lotto-paper {
+    width: 400px;
+    margin: auto;
+    margin-bottom: 60px;
+    padding: 20px 52px;
+    background-color: #ffffff;
+}
+
+.input-wrapper > .lotto-paper > img {
+    width: 120px;
+    margin: auto;
+    display: block;
+}
+
+.input-wrapper > .lotto-paper > h3 {
+    margin: 28px 0 16px;
+    text-align: center;
+    font-size: 28px;
+}
+
+.input-wrapper > .lotto-paper > p {
+    margin: 0;
+    margin-top: 10px;
+    font-size: 22px;
+}
+
+.input-wrapper > .lotto-paper > p > span {
+    color: #666666;
+    font-weight: bold;
+    letter-spacing: 20px;
+}
