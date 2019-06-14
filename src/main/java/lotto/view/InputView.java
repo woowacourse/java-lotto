@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.lotto.Lotto;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +25,6 @@ public class InputView {
         return lottoNumbers;
     }
 
-
     public static int askBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         String userInput = reader.nextLine();
@@ -45,11 +46,11 @@ public class InputView {
         return lottoNumbers;
     }
 
-    public static List<List<Integer>> askManualLottos(int manualLottoNumber) {
-        List<List<Integer>> manualLottonNumbers = new ArrayList<>();
+    public static List<Lotto> askManualLottos(int manualLottoNumber) {
+        List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < manualLottoNumber; i++) {
-            manualLottonNumbers.add(askManualLotto());
+            manualLottos.add(new Lotto(askManualLotto()));
         }
-        return manualLottonNumbers;
+        return manualLottos;
     }
 }

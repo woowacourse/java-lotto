@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>history</title>
+</head>
+<body>
+<h1> {{round}} 회차 기록 </h1>
+구입 로또 목록
+<br>
+{{#each lottos}}
+{{this}}
+<br>
+{{/each}}
+<br>
+당첨 로또 번호:
+{{winningLotto}}
+보너스 번호: {{bonusNumber}}
+<br>
+<br>
+구입 금액 : {{expense}}
+<br>
+당첨 금액: {{profit}}
+<br>
+수익률: {{profitRate}} %
+<br>
+<h2> 결과 상세 </h2>
+<table border="1px">
+    {{#each prizeInfos}}
+    <tr>
+        <td>
+            일치하는 숫자 개수: {{matchCount}}
+        </td>
+        <td>
+            상금: {{prizeMoney}}
+        </td>
+        <td>
+            일치하는 로또 개수: {{lottoCount}}
+        </td>
+    </tr>
+    {{/each}}
+</table>
+
+
+</body>
+</html>

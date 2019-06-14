@@ -32,7 +32,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Lotto> getLottos() {
+    public List<Lotto> getLottosList() {
         return Collections.unmodifiableList(lottos);
     }
 }

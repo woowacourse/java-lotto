@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>result</title>
+</head>
+<body>
+<table>
+    {{#each prizeInfos}}
+    <tr>
+        <td>
+            일치하는 숫자 개수: {{matchCount}}
+        </td>
+        <td>
+            상금: {{prizeMoney}}
+        </td>
+        <td>
+            일치하는 로또 개수: {{lottoCount}}
+        </td>
+    </tr>
+</table>
+<br><br>
+{{/each}}
+<br>
+수익률은 {{profitRate}}%입니다.
+<br>
+</body>
+</html>

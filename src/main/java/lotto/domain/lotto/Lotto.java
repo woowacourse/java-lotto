@@ -2,13 +2,13 @@ package lotto.domain.lotto;
 
 import lotto.domain.lotto.exception.IllegalNumberCombinationException;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
     public static final int NUMBER_LENGTH = 6;
     public static final int PRICE = 1000;
     List<LottoNumber> numbers;
-
 
     public Lotto(List<Integer> numbers) {
         checkDuplication(numbers);
@@ -28,7 +28,6 @@ public class Lotto {
         }
     }
 
-
     public int countMatchLottoNumber(Lotto lotto) {
         return (int) numbers.stream()
                 .filter(number -> lotto.containsNumber(number))
@@ -37,6 +36,10 @@ public class Lotto {
 
     public boolean containsNumber(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override

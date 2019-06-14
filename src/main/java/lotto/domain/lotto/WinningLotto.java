@@ -26,4 +26,12 @@ public class WinningLotto {
         Prize prize = Prize.getPrizeRank(matchCount, lotto.containsNumber(bonusNumber));
         return prize;
     }
+
+    public Lotto getWinningLotto() {
+        return winningLotto;
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber.getNumber();
+    }
 }

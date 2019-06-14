@@ -5,6 +5,20 @@
     <title>로또</title>
 </head>
 <body>
-Hello World!!
+{{#if error}}
+잘못된 입력입니다. 다시 입력해 주세요.
+{{/if}}
+
+<form action="/manual" method="post">
+    구입금액: <input name="money" type="text"/>
+    <br><br>
+    수동 로또 개수: <input name="manualLottoCount" type="text"/>
+    <input type="submit" value="입력"/>
+</form>
+<br>
+<form action="/history" method="get">
+    <button type="submit">게임 기록</button>
+</form>
+
 </body>
 </html>

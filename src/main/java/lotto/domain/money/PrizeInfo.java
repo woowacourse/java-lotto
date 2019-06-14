@@ -17,7 +17,6 @@ public class PrizeInfo {
         for (Prize prize : prizes) {
             prizeInfo.put(prize, prizeInfo.get(prize) + 1);
         }
-
     }
 
     public int get(Prize prize) {

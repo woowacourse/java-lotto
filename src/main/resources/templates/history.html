@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lotto History</title>
+</head>
+<body>
+{{#if empty}}
+보여줄 기록이 없습니다.
+{{/if}}
+{{#each buttonIds}}
+
+<form action="/history_specific" method="get">
+    <button type="submit">{{this}} 회차 기록</button>
+    <input name="round_number" type="hidden" value={{this}}>
+</form>
+{{/each}}
+</body>
+</html>

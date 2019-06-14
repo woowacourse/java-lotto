@@ -6,7 +6,7 @@ import lotto.domain.money.exception.IllegalCountException;
 public class LottoCount {
     private final int count;
 
-    public LottoCount(int count) {
+    private LottoCount(int count) {
         this.count = count;
     }
 

@@ -12,7 +12,7 @@ public class LottoLauncher {
     public static void main(String[] args) {
         Money money = Money.create(InputView.askMoney());
         LottoCount manualLottoCount = LottoCount.create(InputView.askManualLottoCount(), money);
-        List<List<Integer>> manualLottos = InputView.askManualLottos(manualLottoCount.size());
+        List<Lotto> manualLottos = InputView.askManualLottos(manualLottoCount.size());
 
         Lottos lottos = LottoMachine.generateLottos(manualLottos, money);
 

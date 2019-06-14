@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>수동 로또 입력 페이지</title>
+</head>
+<body>
+<form action="/lottos" method="post">
+    {{#each manualLottoTagNames}}
+    수동 로또 번호: <input name="{{this}}" type="text"/>
+    <br><br>
+    {{/each}}
+    <input type="submit" value="입력"/>
+</form>
+</body>
+</html>

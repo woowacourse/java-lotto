@@ -10,7 +10,6 @@ public class LottoResult {
     private Money money;
     private PrizeInfo prizeInfo;
 
-
     private LottoResult(Money money, List<Prize> prizes) {
         prizeInfo = new PrizeInfo(prizes);
         this.money = money;
@@ -21,7 +20,7 @@ public class LottoResult {
     }
 
     public double getProfitRate() {
-        double sum = 0;
+        long sum = 0;
         for (Prize prize : Prize.values()) {
             sum += prize.getPrizeMoney() * prizeInfo.get(prize);
         }
@@ -30,5 +29,13 @@ public class LottoResult {
 
     public int getCount(Prize prize) {
         return prizeInfo.get(prize);
+    }
+
+    public long getProfit() {
+        long sum = 0;
+        for (Prize prize : Prize.values()) {
+            sum += prize.getPrizeMoney() * prizeInfo.get(prize);
+        }
+        return sum;
     }
 }
