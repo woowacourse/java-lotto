@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-    public static LottoTicketGroup generateLottos(LottoQuantity autoLottoQuantity) {
+    public static LottoTicketGroup generateAutoLottos(LottoQuantity autoLottoQuantity) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         LottoStrategy strategy = new RandomLottoStrategy();
 
@@ -21,7 +21,7 @@ public class LottoMachine {
         return new LottoTicketGroup(lottoTickets);
     }
 
-    public static LottoTicketGroup generateLottos(List<String> lottosText) {
+    public static LottoTicketGroup generateManualLottos(List<String> lottosText) {
         return new LottoTicketGroup(
                 lottosText.stream()
                         .map(ManualLottoStrategy::new)

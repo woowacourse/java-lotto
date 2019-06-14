@@ -4,11 +4,9 @@ import lotto.domain.LottoQuantity;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.lottoresult.LottoRank;
+import lotto.domain.lottoresult.LottoResult;
 import lotto.domain.lottoresult.RankCount;
 import lotto.domain.purchaseamount.PurchaseAmount;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 public class OutputView {
     public static void printChange(PurchaseAmount purchaseAmount) {

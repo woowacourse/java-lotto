@@ -5,17 +5,17 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoQuantity;
 import lotto.domain.lotto.InvalidLottoNumberGroupException;
 import lotto.domain.lotto.LottoTicketGroup;
-import lotto.domain.lottoresult.*;
+import lotto.domain.lottoresult.InvalidWinningLottoException;
+import lotto.domain.lottoresult.LottoResult;
+import lotto.domain.lottoresult.WinningLotto;
 import lotto.domain.purchaseamount.PurchaseAmount;
 import lotto.domain.purchaseamount.PurchaseAmountException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class ConsoleUILottoApplication {
         OutputView.printChange(change);
 
         LottoResult lottoResult = lottos.match(createWinningLotto());
-        OutputView.printLottoResult(getCounts(lottoResult), lottoResult.getEarningRate());
+        OutputView.printLottoResult(lottoResult);
     }
 
     private static PurchaseAmount createLottoPurchaseAmount() {
@@ -124,12 +124,4 @@ public class ConsoleUILottoApplication {
             return Optional.empty();
         }
     }
-
-    private static List<RankCount> getCounts(LottoResult lottoResult) {
-        return Arrays.asList(LottoRank.values()).stream()
-                .sorted((x,y) -> x.getReward() - y.getReward())
-                .map(rank -> new RankCount(rank, lottoResult.getCountOf(rank)))
-                .collect(Collectors.toList());
-    }
-
 }

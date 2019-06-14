@@ -3,6 +3,7 @@ package lotto.domain.lottoresult;
 import lotto.domain.lotto.LottoTicket;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class LottoResult {
                 ;
     }
 
-    private BigDecimal getRewards() {
+    public BigDecimal getRewards() {
         return rankStatistic.keySet().stream()
                 .map(rank -> multiply(rank.getReward(), rankStatistic.get(rank)))
                 .reduce(new BigDecimal(0), BigDecimal::add)
@@ -44,5 +45,13 @@ public class LottoResult {
 
     private BigDecimal multiply(int x, int y) {
         return new BigDecimal(x).multiply(new BigDecimal(y));
+    }
+
+    public List<RankCount> getRankCounts() {
+        return Arrays.asList(LottoRank.values()).stream()
+                .sorted((x,y) -> x.getReward() - y.getReward())
+                .map(rank -> new RankCount(rank, getCountOf(rank)))
+                .collect(Collectors.toList())
+                ;
     }
 }
