@@ -71,7 +71,8 @@ public class WebUILottoApplication {
                 DBManager.rollbackTransaction(connection);
             }
 
-            return render(getLottoResultModel(lottoResult), "lotto_result.html");
+            return render(getLottoResultModel(LottoInfoService.getDBLottoResultDTO(connection, round.toString())),
+                    "lotto_result.html");
         });
 
         exception(IllegalArgumentException.class, (exception, request, response) -> {
@@ -108,14 +109,9 @@ public class WebUILottoApplication {
         return model;
     }
 
-    private static Map<String, Object> getLottoResultModel(LottoResult lottoResult) {
+    private static Map<String, Object> getLottoResultModel(LottoResultDTO lottoResult) {
         Map<String, Object> model = new HashMap<>();
-        model.put("first", lottoResult.getCountOfRank(FIRST));
-        model.put("second", lottoResult.getCountOfRank(SECOND));
-        model.put("third", lottoResult.getCountOfRank(THIRD));
-        model.put("fourth", lottoResult.getCountOfRank(FOURTH));
-        model.put("fifth", lottoResult.getCountOfRank(FIFTH));
-        model.put("totalEarningRate", lottoResult.getEarningsRate());
+        model.put("lottoResult", lottoResult);
         return model;
     }
 
