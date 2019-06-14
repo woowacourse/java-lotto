@@ -1,5 +1,9 @@
 package lotto.domain.core;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.Ticket;
 import lotto.domain.exceptions.LottoNumberException;
 import org.junit.jupiter.api.Test;
 

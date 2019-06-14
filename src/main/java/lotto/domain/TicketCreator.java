@@ -1,4 +1,4 @@
-package lotto.domain.core;
+package lotto.domain;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ public interface TicketCreator {
 
     Ticket create(List<Integer> numbers);
 
-    TicketNumber bonus(int bonus);
+    LottoNumber bonus(int bonus);
 
     int unitPrice();
 }

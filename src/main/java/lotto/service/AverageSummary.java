@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.service;
 
-import lotto.domain.core.LottoCreator;
+import lotto.domain.LottoCreator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

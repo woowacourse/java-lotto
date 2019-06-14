@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.service;
 
-import lotto.domain.core.Rank;
+import lotto.domain.Rank;
 
 import java.util.Map;
 import java.util.Objects;

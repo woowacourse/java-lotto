@@ -1,5 +1,6 @@
 package lotto.domain.core;
 
+import lotto.domain.LottoCreator;
 import lotto.domain.exceptions.LottoNumberException;
 import org.junit.jupiter.api.Test;
 

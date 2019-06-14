@@ -1,14 +1,12 @@
 package lotto;
 
-import lotto.domain.UserLottosCreator;
-import lotto.domain.UserTicketCreator;
-import lotto.domain.WinningLottoCreator;
-import lotto.domain.WinningTicketCreator;
-import lotto.domain.core.UserTickets;
-import lotto.domain.core.WinningTicket;
 import lotto.domain.exceptions.ExceptionMessages;
 import lotto.domain.exceptions.LottoTicketException;
 import lotto.dto.LottoResultDto;
+import lotto.service.UserLottosCreator;
+import lotto.service.UserTicketCreator;
+import lotto.service.WinningLottoCreator;
+import lotto.service.WinningTicketCreator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

@@ -1,4 +1,4 @@
-package lotto.domain.core;
+package lotto.domain;
 
 import java.util.Objects;
 

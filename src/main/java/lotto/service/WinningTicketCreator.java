@@ -1,6 +1,4 @@
-package lotto.domain;
-
-import lotto.domain.core.WinningTicket;
+package lotto.service;
 
 public interface WinningTicketCreator {
     WinningTicket create();

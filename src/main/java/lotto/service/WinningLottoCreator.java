@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.service;
 
-import lotto.domain.core.*;
+import lotto.domain.*;
 import lotto.domain.exceptions.LottoNumberException;
 
 import java.util.Arrays;

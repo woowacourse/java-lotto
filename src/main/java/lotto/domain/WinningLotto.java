@@ -1,4 +1,4 @@
-package lotto.domain.core;
+package lotto.domain;
 
 public class WinningLotto implements WinningTicket {
     private final Ticket winningTicket;

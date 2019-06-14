@@ -1,6 +1,4 @@
-package lotto.domain;
-
-import lotto.domain.core.UserTickets;
+package lotto.service;
 
 public interface UserTicketCreator {
     UserTickets create();

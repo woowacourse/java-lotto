@@ -1,5 +1,6 @@
 package lotto.domain.core;
 
+import lotto.domain.LottoNumberPool;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

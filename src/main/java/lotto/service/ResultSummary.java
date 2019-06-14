@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.service;
 
 import java.math.BigDecimal;
 
