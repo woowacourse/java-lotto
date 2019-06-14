@@ -6,19 +6,19 @@ import java.util.List;
 public class LottoNoGenerators {
     private List<LottoNoGenerator> lottoNoGenerators;
 
-    LottoNoGenerators() {
+    public LottoNoGenerators() {
         lottoNoGenerators = new ArrayList<>();
     }
 
-    int size() {
+    public int size() {
         return lottoNoGenerators.size();
     }
 
-    LottoNoGenerator get(int index) {
+    public LottoNoGenerator get(int index) {
         return lottoNoGenerators.get(index);
     }
 
-    void add(LottoNoGenerator lottoNoGenerator) {
+    public void add(LottoNoGenerator lottoNoGenerator) {
         lottoNoGenerators.add(lottoNoGenerator);
     }
 }

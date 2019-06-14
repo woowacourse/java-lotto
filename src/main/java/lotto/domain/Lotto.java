@@ -19,12 +19,19 @@ public class Lotto implements LottoTicket {
         this.lotto = lottoSet;
     }
 
-    static Lotto of(final List<Integer> lotto) {
+    public static Lotto of(final List<Integer> lotto) {
         return new Lotto(
                 lotto.stream()
                         .map(LottoNo::of)
                         .collect(Collectors.toList())
         );
+    }
+
+    public int getLottoNo(int index) {
+        return lotto.stream()
+                .map(LottoNo::getNo)
+                .collect(Collectors.toList())
+                .get(index);
     }
 
     @Override
