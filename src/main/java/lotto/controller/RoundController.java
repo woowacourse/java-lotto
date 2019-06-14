@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.dao.RoundDao;
-import lotto.domain.Rank;
 import lotto.dto.StatDto;
 import lotto.service.LottoService;
 import lotto.service.StatService;
@@ -9,7 +8,6 @@ import lotto.service.TurnService;
 import lotto.service.WinningLottoService;
 import spark.Request;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
