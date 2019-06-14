@@ -27,14 +27,29 @@ public class WebUILottoApplication {
     public static void main(String[] args) {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            return render(model, "index.html");
+        });
+
+        get("/selectPage.html", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return render(model, "selectPage.html");
+        });
+
+        get("/selectResult.html", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return render(model, "selectResult.html");
+        });
+
+        get("/inputStep1.html", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
             model.put("lottoPrice", Payment.LOTTO_PRICE);
             model.put("paymentMessage", InputView.PAYMENT_MESSAGE);
             model.put("countOfManualLottoMessage", InputView.COUNT_OF_MANUAL_LOTTO_MESSAGE);
 
-            return render(model, "index.html");
+            return render(model, "inputStep1.html");
         });
 
-        post("/inputStep1.html", (req, res) -> {
+        post("/inputStep2.html", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("lottoNumberMessage", InputView.LOTTO_NUMBER_MESSAGE);
             model.put("lottoNumberMinBoundary", LottoNumber.MIN_BOUNDARY);
@@ -46,10 +61,10 @@ public class WebUILottoApplication {
             model.put("countOfLotto", countOfLotto);
             model.put("countOfTotalLotto", payment.calculateCountOfLotto());
 
-            return render(model, "inputStep1.html");
+            return render(model, "inputStep2.html");
         });
 
-        post("/inputStep2.html", (req, res) -> {
+        post("/inputStep3.html", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("winningLottoNumberMessage", InputView.WINNING_LOTTO_NUMBER_MESSAGE);
             model.put("bonusBallMessage", InputView.BONUS_BALL_MESSAGE);
@@ -59,7 +74,7 @@ public class WebUILottoApplication {
             int countOfRandomLotto = countOfLotto.getCountOfRandomLotto();
 
             for (int i = 1; i <= countOfManualLotto; i++) {
-                List<Integer> splitLottoNumbers = splitInputLottoNumbers(req.queryParams("inputManualLottoNumber1"));
+                List<Integer> splitLottoNumbers = splitInputLottoNumbers(req.queryParams("inputManualLottoNumber" + i));
                 lottoRepository.register(new ManualLottoGeneratingStrategy(splitLottoNumbers));
             }
 
@@ -68,13 +83,23 @@ public class WebUILottoApplication {
             }
             lottoTickets = lottoRepository.createLottoTickets();
 
-            return render(model, "inputStep2.html");
+            return render(model, "inputStep3.html");
         });
 
         post("result.html", ((req, res) -> {
             Map<String, Object> model = new HashMap<>();
             winningLotto = inputWinningLotto(req.queryParams("winningLottoNumber"), req.queryParams("bonusNumber"));
             Result result = lottoTickets.match(winningLotto);
+
+            WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
+            LottoDAO lottoDAO = new LottoDAO();
+
+            try {
+                int round = winningLottoDAO.addWinningLotto(winningLotto);
+                lottoDAO.addLotto(lottoTickets.getLottoTickets().get(0), round);
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
 
             List<LottoDto> lottoDTOs = createLottoDTOs(lottoTickets);
             model.put("lottos", lottoDTOs);
