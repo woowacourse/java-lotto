@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.LottoDTO;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +12,7 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         validateDuplication(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
@@ -32,6 +34,22 @@ public class Lotto {
             countOfMatch += (lotto.contains(lottoNumber))? 1 : 0;
         }
         return countOfMatch;
+    }
+
+    int getLottoNumber(int index) {
+        return lottoNumbers.get(index).getNumber();
+    }
+
+    public LottoDTO toDTO(int round) {
+        LottoDTO lottoDTO = new LottoDTO();
+        lottoDTO.setRound(round);
+        lottoDTO.setNumber1(getLottoNumber(0));
+        lottoDTO.setNumber2(getLottoNumber(1));
+        lottoDTO.setNumber3(getLottoNumber(2));
+        lottoDTO.setNumber4(getLottoNumber(3));
+        lottoDTO.setNumber5(getLottoNumber(4));
+        lottoDTO.setNumber6(getLottoNumber(5));
+        return lottoDTO;
     }
 
     @Override
