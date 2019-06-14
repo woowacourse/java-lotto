@@ -60,16 +60,16 @@ public class WebUILottoApplication {
 
             try {
                 DBManager.startTransaction(connection);
+
+                LottoPurchasingService.loadDBRoundTable(connection, round);
+                LottoPurchasingService.loadDBLottoTable(connection, round, lottos);
+                LottoResultService.loadDBWinningLottoTable(connection, round, winningLotto);
+                LottoResultService.loadDBLottoResultTable(connection, round, lottoResult);
+
+                DBManager.endTransaction(connection);
             } catch (SQLException e) {
-                System.err.println(e.getMessage());
+                DBManager.rollbackTransaction(connection);
             }
-
-            LottoPurchasingService.loadDBRoundTable(connection, round);
-            LottoPurchasingService.loadDBLottoTable(connection, round, lottos);
-            LottoResultService.loadDBWinningLottoTable(connection, round, winningLotto);
-            LottoResultService.loadDBLottoResultTable(connection, round, lottoResult);
-
-            DBManager.endTransaction(connection);
 
             return render(getLottoResultModel(lottoResult), "lotto_result.html");
         });
