@@ -15,6 +15,7 @@ public class LottoDto {
         this.lottoNo = lottoNo;
         this.lottoType = lottoType;
     }
+
     public int getRound() {
         return round;
     }

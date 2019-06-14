@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.controller.IndexController;
 import lotto.controller.LottoPurchaseController;
 import lotto.controller.ResultConroller;
 import lotto.controller.WinningLottoInputController;
@@ -17,6 +18,7 @@ public class WebUILottoApplication {
         staticFiles.location("/static");
 
         get("/input", LottoPurchaseController.serveInputPage);
+        get("/index", IndexController.serveIndexPage);
         get("/winninglotto", WinningLottoInputController.serveWinningLottoInputPage);
         get("/result", ResultConroller.serveResultPage);
 
