@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.service;
+
+import lotto.domain.Money;
 
 import java.util.regex.Pattern;
 

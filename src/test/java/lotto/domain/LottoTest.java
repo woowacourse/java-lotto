@@ -10,8 +10,8 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class LottoTest {
     @Test
     void 로또_생성() {
-        assertThat(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)))
-                .isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7)))
+                .isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7)));
     }
 
     @Test

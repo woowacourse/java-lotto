@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.service;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,4 +1,8 @@
-package lotto.domain;
+package lotto.service;
+
+import lotto.domain.LottoNoGenerator;
+import lotto.domain.LottoNoGenerators;
+import lotto.domain.LottoNoManualGenerator;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
