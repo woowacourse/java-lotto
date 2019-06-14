@@ -18,6 +18,10 @@ public class UserLotto {
         return userLotto.get(index);
     }
 
+    public List<Lotto> getUserLotto() {
+        return userLotto;
+    }
+
     private void createLotto(NumberGenerator numberGenerator, int round) {
         for (int i = 0; i < round; i++) {
             userLotto.add(new Lotto(numberGenerator.getNumbers()));

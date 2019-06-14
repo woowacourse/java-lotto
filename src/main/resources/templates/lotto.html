@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>구매한 로또 목록 페이지</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div id="top-panel">
+    <h1 align="center">내 로또 목록</h1>
+</div>
+<div>
+    <h2 align="center">수동으로 {{manualRound}}장, 자동으로 {{autoRound}}개를 구매했습니다.</h2>
+</div>
+<div class="col-md-8" style="margin: auto">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">로또 번호</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#userLotto}}
+        <tr class="table-light">
+            <th scope="row">{{@index}}</th>
+            <td>{{this}}</td>
+        </tr>
+        {{/userLotto}}
+        </tbody>
+    </table>
+</div>
+<form method="POST" action="/winLotto" id="postLottoes">
+    <div hidden>
+        <input type="hidden" value="{{userLotto}}" name="lottoNumbers"/>
+        <input type="hidden" value="{{round}}" name="round"/>
+    </div>
+    <div id="bottom-panel" style="float: right; margin-right: 500px">
+        <button type="submit" class="btn btn-secondary">당첨 번호 입력</button>
+    </div>
+</form>
+</body>
+</html>
