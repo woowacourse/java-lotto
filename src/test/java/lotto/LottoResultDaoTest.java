@@ -1,9 +1,7 @@
 package lotto;
 
 import lotto.model.*;
-import lotto.model.dao.LottoGameInfoDao;
 import lotto.model.dao.LottoResultDao;
-import lotto.model.dao.LottosDao;
 import org.junit.Test;
 
 import java.sql.SQLException;

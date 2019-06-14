@@ -1,5 +1,6 @@
 package lotto;
 
+//import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import lotto.model.*;
 import lotto.model.dao.LottoResultDao;
 import lotto.model.dao.LottosDao;

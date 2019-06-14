@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
-import lotto.model.dao.LottoGameInfoDao;
 import lotto.model.dao.LottosDao;
 import org.junit.Test;
 
@@ -11,21 +10,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class LottosDaoTest {
-    @Test
-    public void addLotto() throws SQLException {
-        LottoGameInfoDao lottoGameInfoDao = new LottoGameInfoDao();
-        lottoGameInfoDao.addLottoInfo("1200", "3");
-    }
-
-    @Test
-    public void findLotto() throws SQLException {
-        LottoGameInfoDao lottoGameInfoDao = new LottoGameInfoDao();
-        lottoGameInfoDao.findLottonumbers();
-    }
+//    @Test
+//    public void addLotto() throws SQLException {
+//        LottoGameInfoDao lottoGameInfoDao = new LottoGameInfoDao();
+//        lottoGameInfoDao.addLottoInfo("1200", "3");
+//    }
+//
+//    @Test
+//    public void findLotto() throws SQLException {
+//        LottoGameInfoDao lottoGameInfoDao = new LottoGameInfoDao();
+//        lottoGameInfoDao.findLottonumbers();
+//    }
 
     @Test
     public void saveLottos() throws SQLException {

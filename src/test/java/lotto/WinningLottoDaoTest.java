@@ -3,16 +3,11 @@ package lotto;
 
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
-import lotto.model.Lottos;
-import lotto.model.dao.LottoGameInfoDao;
-import lotto.model.dao.LottosDao;
 import lotto.model.dao.WinningLottoDao;
 import org.junit.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 
 public class WinningLottoDaoTest {
