@@ -10,15 +10,19 @@ public class LottoResult {
 
     private Map<Rank, Integer> lottoResult;
 
-    LottoResult() {
+    public LottoResult() {
         lottoResult = new HashMap<>();
         for (Rank rank : Rank.values()) {
             lottoResult.put(rank, ZERO);
         }
     }
 
-    void add(Rank rank) {
+    public void add(Rank rank) {
         lottoResult.put(rank, lottoResult.get(rank) + 1);
+    }
+
+    public void add(Rank rank, int value) {
+        lottoResult.put(rank, value);
     }
 
     public double getRateOfReturn() {
