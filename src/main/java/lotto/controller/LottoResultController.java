@@ -20,13 +20,13 @@ public class LottoResultController {
         WinningLotto winningLotto = WinningLotto.generate(ManualLottoGenerator.create(req.queryParams("winning-lotto")),
                 Integer.parseInt(req.queryParams("bonus-number")));
         LottoTickets lottoTickets = LottoTicketsService.findTicketsByRound(round);
-        int price = getPrice(res, lottoTickets);
-        Money money = Money.generate(price);
         LottoResult lottoResult = LottoResultGenerator.create(lottoTickets, winningLotto);
 
         updateResult(round, winningLotto, lottoResult);
         req.session().attribute("round", LottoResultService.findPresentRound());
 
+        int price = getPrice(res, lottoTickets);
+        Money money = Money.generate(price);
         model.put("price", price);
         setMatchResult(model, lottoResult, money);
         return render(model, "lottoresult.html");
@@ -45,7 +45,7 @@ public class LottoResultController {
         List<Integer> rounds = LottoResultService.findAllRound(round);
 
         if (rounds.size() == 0) {
-            return render(model, "noselect.html");
+            return render(model, "/showhistory/noselect");
         }
 
         model.put("rounds", rounds);
@@ -61,12 +61,10 @@ public class LottoResultController {
         objects.put("lottoTickets", LottoTicketsService.findTicketsByRound(round));
         objects.put("winningLotto", WinningLottoService.findWinningLottoByRound(round));
         objects.put("lottoResult", LottoResultService.findLottoResultByRound(round));
-        setResultOfRound(model, objects, res);
-
-        return render(model, "resultofround.html");
+        return renderResultOfRound(model, objects, res);
     }
 
-    private static void setResultOfRound(Map<String, Object> model, Map<String, Object> objects, Response res) {
+    private static Object renderResultOfRound(Map<String, Object> model, Map<String, Object> objects, Response res) {
         LottoTickets lottoTickets = (LottoTickets) objects.get("lottoTickets");
         int price = getPrice(res, lottoTickets);
         Money money = Money.generate(price);
@@ -76,13 +74,15 @@ public class LottoResultController {
         setLottoTickets(model, lottoTickets);
         setWinningLotto(model, (WinningLotto) objects.get("winningLotto"));
         setMatchResult(model, (LottoResult) objects.get("lottoResult"), money);
+
+        return render(model, "resultofround.html");
     }
 
     private static int getPrice(Response res, LottoTickets lottoTickets) {
         int price = lottoTickets.numberOfLottos() * 1000;
 
         if (price == 0) {
-            res.redirect("nopurchaselotto.html");
+            res.redirect("/showhistory/nopurchase");
         }
 
         return price;

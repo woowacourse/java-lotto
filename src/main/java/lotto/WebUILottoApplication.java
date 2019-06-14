@@ -33,7 +33,9 @@ public class WebUILottoApplication {
         get("/winninglotto/create", WinningLottoController::showWinningLottoInputPage);
         post("/winninglotto/getresult", LottoResultController::showLottoResultPage);
         get("/showhistory/selectround", LottoResultController::showSelectRoundPage);
-        post("/showhistory/result",LottoResultController::showResultOfRound);
+        post("/showhistory/result", LottoResultController::showResultOfRound);
+        get("/showhistory/nopurchase", (req, res) -> render(new HashMap<>(), "nopurchaselotto.html"));
+        get("/showhistory/noselect", (req, res) -> render(new HashMap<>(), "noselect.html"));
 
         exception(RuntimeException.class, (e, req, res) -> {
             String message = null;

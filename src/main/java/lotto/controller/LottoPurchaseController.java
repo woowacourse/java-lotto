@@ -10,7 +10,6 @@ import spark.Response;
 import java.util.*;
 
 import static lotto.WebUILottoApplication.render;
-import static spark.Spark.*;
 
 public class LottoPurchaseController {
     public static Object showMoneyInputPage(Request req, Response res) {
@@ -31,12 +30,8 @@ public class LottoPurchaseController {
 
     public static Object showManualLottoInputPage(Request req, Response res) {
         Map<String, Object> model = new HashMap<>();
-        String numberOfManualInput = req.queryParams("numberofmanual");
-        int numberOfManual;
-
         Money money = req.session().attribute("money");
-        money.checkInValidNumber(Integer.parseInt(numberOfManualInput));
-        numberOfManual = Integer.parseInt(numberOfManualInput);
+        int numberOfManual = getNumberOfManulTicket(money, req.queryParams("numberofmanual"));
 
         req.session().attribute("numberOfManualTicket", numberOfManual);
         model.put("numberOfManualTicket", numberOfManual);
@@ -46,24 +41,34 @@ public class LottoPurchaseController {
         return render(model, "manuallottoinput.html");
     }
 
+    private static int getNumberOfManulTicket(Money money, String numberOfManual) {
+        money.checkInValidNumber(Integer.parseInt(numberOfManual));
+        return Integer.parseInt(numberOfManual);
+    }
+
     public static Object showPurchaseResultPost(Request req, Response res) {
         Map<String, Object> model = new HashMap<>();
         LottoTickets lottoTickets = new LottoTickets();
-        Money money = req.session().attribute("money");
         int numberOfManualTicket = req.session().attribute("numberOfManualTicket");
         int round = req.session().attribute("round");
+
+        checkValidCount(req, numberOfManualTicket);
+        addManualLotto(req, lottoTickets);
+        createAutoLotto(lottoTickets, req.session().attribute("money"));
+        LottoTicketsService.insertPurchaseResult(round, lottoTickets);
+        return renderPurchaseResult(model, lottoTickets, numberOfManualTicket);
+    }
+
+    private static void checkValidCount(Request req, int numberOfManualTicket) {
         if (req.queryParams().size() != numberOfManualTicket) {
             throw new InvalidLottoNumberException("개수가 일치하지 않습니다.");
         }
+    }
+
+    private static void addManualLotto(Request req, LottoTickets lottoTickets) {
         for (String lotto : req.queryParams()) {
-            System.out.println(lotto);
             lottoTickets.addManualLotto(req.queryParams(lotto));
         }
-        while (lottoTickets.isPossibleCreateLottoNumberOf(money.getNumberOfTicket())) {
-            lottoTickets.createAutoLottos();
-        }
-        LottoTicketsService.insertPurchaseResult(round, lottoTickets);
-        return renderResult(model, lottoTickets, numberOfManualTicket);
     }
 
     public static Object showPurchaseResultGet(Request req, Response res) {
@@ -73,14 +78,18 @@ public class LottoPurchaseController {
         int round = req.session().attribute("round");
         int numberOfManualTicket = 0;
 
+        createAutoLotto(lottoTickets, money);
+        LottoTicketsService.insertPurchaseResult(round, lottoTickets);
+        return renderPurchaseResult(model, lottoTickets, numberOfManualTicket);
+    }
+
+    private static void createAutoLotto(LottoTickets lottoTickets, Money money) {
         while (lottoTickets.isPossibleCreateLottoNumberOf(money.getNumberOfTicket())) {
             lottoTickets.createAutoLottos();
         }
-        LottoTicketsService.insertPurchaseResult(round, lottoTickets);
-        return renderResult(model, lottoTickets, numberOfManualTicket);
     }
 
-    private static Object renderResult(Map<String, Object> model, LottoTickets lottoTickets, int numberOfManualTicket) {
+    private static Object renderPurchaseResult(Map<String, Object> model, LottoTickets lottoTickets, int numberOfManualTicket) {
         model.put("lottoTickets", lottoTickets.getLottos());
         model.put("numberOfManual", numberOfManualTicket);
         model.put("numberOfAuto", getNumberOfAutoTicket(lottoTickets, numberOfManualTicket));
