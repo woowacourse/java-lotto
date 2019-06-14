@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class RoundDaoTest {
     private RoundDao roundDAO;
+
     @BeforeEach
     void setUp() {
         roundDAO = new RoundDao();
@@ -22,7 +23,7 @@ public class RoundDaoTest {
     }
 
     @Test
-    void maxRound() throws SQLException{
+    void maxRound() throws SQLException {
         System.out.println(roundDAO.getMaxRound());
     }
 

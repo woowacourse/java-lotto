@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLottoDao extends Connector {
+    private static final int LOTTO_COUNT = 6;
+
     public void addWinningLotto(int round, WinningLotto winningLotto) throws SQLException {
-        String query = "INSERT INTO winning_lotto (round, lotto_num1, lotto_num2, lotto_num3, lotto_num4, lotto_num5, lotto_num6, bonus_num) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO winning_lotto (round, num1, num2, num3, num4, num5, num6, bonus) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < LOTTO_COUNT; i++) {
             pstmt.setInt(i + 2, winningLotto.getWinningLottoValueByIndex(i));
         }
         pstmt.setInt(8, winningLotto.getBonusBallValue());
@@ -19,7 +21,7 @@ public class WinningLottoDao extends Connector {
     }
 
     public List<Integer> findWinningLottoByRound(int round) throws SQLException {
-        String query = "SELECT lotto_num1, lotto_num2, lotto_num3, lotto_num4, lotto_num5, lotto_num6 FROM winning_lotto WHERE round = ?";
+        String query = "SELECT num1, num2, num3, num4, num5, num6 FROM winning_lotto WHERE round = ?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
@@ -27,20 +29,20 @@ public class WinningLottoDao extends Connector {
         if (!rs.next()) return null;
 
         List<Integer> winningLotto = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            winningLotto.add(rs.getInt("lotto_num" + i));
+        for (int i = 1; i <= LOTTO_COUNT; i++) {
+            winningLotto.add(rs.getInt("num" + i));
         }
         return winningLotto;
     }
 
     public int findBonusNumByRound(int round) throws SQLException {
-        String query = "SELECT bonus_num FROM winning_lotto WHERE round = ?";
+        String query = "SELECT bonus FROM winning_lotto WHERE round = ?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
 
         if (!rs.next()) return -1;
 
-        return rs.getInt("bonus_num");
+        return rs.getInt("bonus");
     }
 }

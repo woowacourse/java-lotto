@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoDao extends Connector {
+    private static final int LOTTO_COUNT = 6;
+
     public void addTotalLottos(int round, Lottos lottos) throws SQLException {
         for (int i = 0; i < lottos.getLottoCount(); i++) {
             addLotto(round, lottos.getLottoByIndex(i));
@@ -16,10 +18,10 @@ public class LottoDao extends Connector {
     }
 
     private void addLotto(int round, Lotto lotto) throws SQLException {
-        String query = "INSERT INTO lotto (round, lotto_num1, lotto_num2, lotto_num3, lotto_num4, lotto_num5, lotto_num6) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO lotto (round, num1, num2, num3, num4, num5, num6) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < LOTTO_COUNT; i++) {
             pstmt.setInt(i + 2, lotto.getLottoNumberByIndex(i));
         }
         pstmt.executeUpdate();
@@ -47,8 +49,8 @@ public class LottoDao extends Connector {
 
     private List<LottoNumber> getLotto(ResultSet rs) throws SQLException {
         List<LottoNumber> lotto = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            lotto.add(LottoNumber.from(rs.getInt("lotto_num" + i)));
+        for (int i = 1; i <= LOTTO_COUNT; i++) {
+            lotto.add(LottoNumber.from(rs.getInt("num" + i)));
         }
         return lotto;
     }

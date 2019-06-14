@@ -28,13 +28,13 @@ class ResultDaoTest {
         double yield = 0.3;
         long winPrize = 100_000_000;
         ResultDto resultDTO = new ResultDto(winners, yield, winPrize);
-        int round = 6;
+        int round = 0;
         resultDAO.addResult(round, resultDTO);
     }
 
     @Test
     void searchWinnerCount() throws SQLException {
-        Map<Rank, Integer> winnerCount = resultDAO.findWinnerCountByRound(6);
+        Map<Rank, Integer> winnerCount = resultDAO.findWinnerCountByRound(0);
         Map<Rank, Integer> expected = new TreeMap<>();
         for (Rank rank : Rank.values()) {
             expected.put(rank, 1);
@@ -44,13 +44,13 @@ class ResultDaoTest {
 
     @Test
     void searchYield() throws SQLException {
-        int round = 6;
+        int round = 0;
         assertThat(resultDAO.findYieldByRound(round)).isEqualTo(0.3);
     }
 
     @Test
     void searchWinPrize() throws SQLException {
-        int round = 6;
+        int round = 0;
         assertThat(resultDAO.findWinPrizeByRound(round)).isEqualTo(100_000_000);
     }
 }

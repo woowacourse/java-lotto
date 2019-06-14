@@ -20,21 +20,21 @@ class WinningLottoDaoTest {
 
     @Test
     void add() throws SQLException {
-        int round = 6;
+        int round = 0;
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
         winningLottoDAO.addWinningLotto(round, winningLotto);
     }
 
     @Test
     void searchWinningLotto() throws SQLException {
-        int round = 6;
-        List<Integer> winningLotto = Arrays.asList(1,2,3,4,5,6);
+        int round = 0;
+        List<Integer> winningLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertThat(winningLottoDAO.findWinningLottoByRound(round)).isEqualTo(winningLotto);
     }
 
     @Test
     void searchBonusNumber() throws SQLException {
-        int round = 6;
+        int round = 0;
         int bonusNumber = 7;
         assertThat(winningLottoDAO.findBonusNumByRound(round)).isEqualTo(bonusNumber);
     }

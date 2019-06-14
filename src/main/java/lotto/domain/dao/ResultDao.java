@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 public class ResultDao extends Connector {
     public void addResult(int round, ResultDto resultDTO) throws SQLException {
-        String query = "INSERT INTO lotto_result " +
+        String query = "INSERT INTO result " +
                 "(round, first, second, third, fourth, fifth, miss, yield, win_prize) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
@@ -24,7 +24,7 @@ public class ResultDao extends Connector {
     }
 
     public Map<Rank, Integer> findWinnerCountByRound(int round) throws SQLException {
-        String query = "SELECT FIRST, SECOND, THIRD, FOURTH, FIFTH, MISS FROM lotto_result WHERE round = ?";
+        String query = "SELECT FIRST, SECOND, THIRD, FOURTH, FIFTH, MISS FROM result WHERE round = ?";
         Map<Rank, Integer> winnerCount = new TreeMap<>();
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
@@ -38,9 +38,8 @@ public class ResultDao extends Connector {
         return winnerCount;
     }
 
-
     public double findYieldByRound(int round) throws SQLException {
-        String query = "SELECT yield FROM lotto_result WHERE round = ?";
+        String query = "SELECT yield FROM result WHERE round = ?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
@@ -51,7 +50,7 @@ public class ResultDao extends Connector {
     }
 
     public long findWinPrizeByRound(int round) throws SQLException {
-        String query = "SELECT win_prize FROM lotto_result WHERE round = ?";
+        String query = "SELECT win_prize FROM result WHERE round = ?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
