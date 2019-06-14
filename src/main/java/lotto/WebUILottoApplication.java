@@ -37,6 +37,15 @@ public class WebUILottoApplication {
 
             return render(model, "lotto.html");
         });
+
+        post("/winLotto", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+
+            model.put("round", Integer.parseInt(req.queryParams("round")));
+            model.put("userLotto", req.queryParams("userLotto"));
+
+            return render(model, "winNumber.html");
+        });
     }
 
     private static String render(Object model, String templatePath) {
