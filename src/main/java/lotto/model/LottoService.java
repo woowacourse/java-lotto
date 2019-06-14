@@ -15,7 +15,6 @@ public class LottoService {
         addAutoLottos(finalLottos, money.calculateAutomaticLottoCount(manualLottos.size()));
         return new Lottos(finalLottos);
 
-
 //        LottoMachine manualLottoMachine = new ManualLottoMachine(manualLottos);
 //        LottoMachine automaticLottoMachine = new AutomaticLottoMachine(money, manualLottos.size());
 //        Lottos manualLottosOrganized = createLottos(manualLottoMachine);

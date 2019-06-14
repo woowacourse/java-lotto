@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.model.*;
-import lotto.model.shufflemethod.ShuffleMethod;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,12 +14,10 @@ public class LottoLauncher {
         Money money = generateMoney();
         ManualLottoCount manualLottoCount = generateManualLottoCount(money);
         Lottos lottos = generateLottos(money, manualLottoCount);
-
         OutputView.printLottos(money, manualLottoCount, lottos);
 
         WinningLotto winningLotto = generateWinningLotto();
         LottoResult lottoResult = new LottoResult(money, lottos.getPrizes(winningLotto));
-
         OutputView.printStatistics(lottoResult);
     }
 

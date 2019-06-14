@@ -6,5 +6,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface ShuffleMethod {
-    String shuffle(List<Integer> all45Numbers);
+    List<Integer> shuffle (List<Integer> all45Numbers);
 }

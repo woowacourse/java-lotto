@@ -33,7 +33,6 @@ public class AutomaticLottoMachine implements LottoMachine {
 
     @Override
     public Lotto generateLotto() {
-        String shuffledLottoNumbers = shuffleMethod.shuffle(this.all45Numbers);
-        return new Lotto(shuffledLottoNumbers);
+        return new Lotto(shuffleMethod.shuffle(this.all45Numbers));
     }
 }
