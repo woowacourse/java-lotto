@@ -32,7 +32,7 @@ public class LottosResult {
         return (double) totalWinnigMoney / (numberOfLotto * ONE_LOTTO_PRICE);
     }
 
-    private long getWinningMoney() {
+    public long getWinningMoney() {
         long totalWinnigMoney = INITIAL_NUMBER;
 
         for (Rank rank : Rank.values()) {
