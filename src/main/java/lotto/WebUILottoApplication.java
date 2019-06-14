@@ -76,25 +76,21 @@ public class WebUILottoApplication {
             return render(model, "get_winning_lotto.html");
         });
 
-        post("/get_round_info", (request, response) -> {
-            Map<String,Object> model = new HashMap<>();
-            return render(model, "show_results.html");
-        });
-
         get("/show_final_results", (request, response) -> {
             int requestRound = Integer.parseInt(request.queryParams("result_number"));
-            //구매한로또
+
             List<String> lottos = new ArrayList<>();
             LOTTOS_DAO.fetchRequestLottos(requestRound, lottos);
             for(int i = 0; i < lottos.size(); i++) {
                 System.out.println(lottos.get(i));
             }
-            //당첨번호
+
             List<String> winningLotto = new ArrayList<>();
             WINNINGLOTTOS_DAO.fetchRequestWinningLotto(requestRound, winningLotto);
-            //당첨결과
+
             List<String> results = new ArrayList<>();
             LOTTORESULT_DAO.fetchRequestResult(requestRound, results);
+
             Map<String,Object> model = new HashMap<>();
             model.put("final_lottos", lottos);
             model.put("final_winning", winningLotto);
@@ -114,7 +110,7 @@ public class WebUILottoApplication {
     private static List<Integer> makeButtonIdentifiers() throws SQLException {
         List<Integer> buttonIdentifiers = new ArrayList<>();
         int latestRound = WINNINGLOTTOS_DAO.getLatestRound();
-        for (int i = 1; i <= latestRound; i++) {
+        for (int i = 1; i <= latestRound - 1 ; i++) {
             buttonIdentifiers.add(i);
         }
         return buttonIdentifiers;

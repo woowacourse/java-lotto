@@ -14,6 +14,7 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             prizes.add(winningLotto.prizeOf(lotto));
         }
+        System.out.println(prizes);
         return prizes;
     }
 
