@@ -6,15 +6,16 @@ import java.util.List;
 public class LottoMachine {
     public static LottoTickets generateTickets(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money.getNumberOfLotto(); i++) {
-            lottos.add(RandomLottoGenerator.generate());
-        }
-        return new LottoTickets(lottos);
+        return generate(lottos, money.getNumberOfLotto());
     }
 
     public static LottoTickets generateTickets(Money money, List<Lotto> lottos) {
         int numberOfRandomLotto = money.getNumberOfLotto() - lottos.size();
-        for (int i = 0; i < numberOfRandomLotto; i++) {
+        return generate(lottos, numberOfRandomLotto);
+    }
+
+    private static LottoTickets generate(List<Lotto> lottos, int numberOfLotto) {
+        for (int i = 0; i < numberOfLotto; i++) {
             lottos.add(RandomLottoGenerator.generate());
         }
         return new LottoTickets(lottos);
