@@ -40,6 +40,4 @@ public class Lotto {
                 .collect(Collectors.joining(", "))
                 + "]";
     }
-
-
 }

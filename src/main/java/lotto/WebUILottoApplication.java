@@ -20,7 +20,6 @@ public class WebUILottoApplication {
         externalStaticFileLocation("src/main/resources/templates");
         port(8080);
 
-
         LottoDao lottoDao = new LottoDao();
         ResultDao resultDao = new ResultDao();
         RoundDao roundDao = new RoundDao();

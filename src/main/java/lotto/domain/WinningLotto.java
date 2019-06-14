@@ -31,6 +31,7 @@ public class WinningLotto {
     public int getBonusBallValue() {
         return bonusBall.getValue();
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,5 +53,4 @@ public class WinningLotto {
         Rank rank = Rank.valueOf(count, lotto.isContainNumber(bonusBall));
         return rank;
     }
-
 }
