@@ -3,7 +3,7 @@
 
 <head>
     <meta charset='UTF-8'>
-    <title>로또 게임</title>
+    <placeholder>로또 게임</placeholder>
 </head>
 <body>
 <h1>수동 로또 입력</h1>
@@ -22,12 +22,12 @@
     for (var i = 0; i < numberofticket; i++) {
         console.log(i);
         var insert = '<div class="lotto">\n' +
-            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber1\'>\n' +
-            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber2\'>\n' +
-            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber3\'>\n' +
-            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber4\'>\n' +
-            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber5\'>\n' +
-            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber6\'>\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber1\' placeholder="첫번째 숫자">\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber2\' placeholder="두번째 숫자">\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber3\' placeholder="세번째 숫자">\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber4\' placeholder="네번째 숫자">\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber5\' placeholder="다섯번째 숫자">\n' +
+            '        <input type=\'text\' class=\'lotto' + i + '\-lottonumber6\' placeholder="여섯번째 숫자">\n' +
             '        <input type=\'hidden\' id=\'lotto' + i + '\' name=\'lotto' + i + '\'>\n' +
             '    </div><br>';
         $(insert).appendTo('#manual-lotto-form');
