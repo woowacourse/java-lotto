@@ -5,17 +5,17 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoQuantity;
 import lotto.domain.lotto.InvalidLottoNumberGroupException;
 import lotto.domain.lotto.LottoTicketGroup;
-import lotto.domain.lottoresult.InvalidWinningLottoException;
-import lotto.domain.lottoresult.LottoResult;
-import lotto.domain.lottoresult.WinningLotto;
+import lotto.domain.lottoresult.*;
 import lotto.domain.purchaseamount.PurchaseAmount;
 import lotto.domain.purchaseamount.PurchaseAmountException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ConsoleUILottoApplication {
     public static void main(String[] args) {
@@ -31,14 +31,14 @@ public class ConsoleUILottoApplication {
         OutputView.printChange(change);
 
         LottoResult lottoResult = lottos.match(createWinningLotto());
-        OutputView.printLottoResult(lottoResult);
+        OutputView.printLottoResult(getCounts(lottoResult), lottoResult.getEarningRate());
     }
 
     private static PurchaseAmount createLottoPurchaseAmount() {
         Optional<PurchaseAmount> purchaseAmount;
         do {
             purchaseAmount = createOptionalPurchaseAmount();
-        } while (purchaseAmount.isEmpty());
+        } while (!purchaseAmount.isPresent());
 
         return purchaseAmount.get();
     }
@@ -58,7 +58,7 @@ public class ConsoleUILottoApplication {
         Optional<LottoQuantity> lottoQuantity;
         do {
             lottoQuantity = createOptionalLottoQuantity(lottoPurchaseAmount);
-        } while (lottoQuantity.isEmpty());
+        } while (!lottoQuantity.isPresent());
 
         return lottoQuantity.get();
     }
@@ -79,15 +79,15 @@ public class ConsoleUILottoApplication {
 
         do {
             lottos = createOptionalLottos(manualLottoQuantity, autoLottoQuantity);
-        } while (lottos.isEmpty());
+        } while (!lottos.isPresent());
 
         return lottos.get();
     }
 
     private static Optional<LottoTicketGroup> createOptionalLottos(LottoQuantity manualLottoQuantity, LottoQuantity autoLottoQuantity) {
         try {
-            LottoTicketGroup manualLottos = LottoMachine.generateLottos(getManualLottosText(manualLottoQuantity));
-            LottoTicketGroup autoLottos = LottoMachine.generateLottos(autoLottoQuantity);
+            LottoTicketGroup manualLottos = LottoMachine.generateManualLottos(getManualLottosText(manualLottoQuantity));
+            LottoTicketGroup autoLottos = LottoMachine.generateAutoLottos(autoLottoQuantity);
 
             return Optional.of(manualLottos.combine(autoLottos));
         } catch (InvalidLottoNumberGroupException e) {
@@ -109,7 +109,7 @@ public class ConsoleUILottoApplication {
 
         do {
             winningLotto = createOptionalWinningLotto();
-        } while (winningLotto.isEmpty());
+        } while (!winningLotto.isPresent());
 
         return winningLotto.get();
     }
@@ -124,4 +124,12 @@ public class ConsoleUILottoApplication {
             return Optional.empty();
         }
     }
+
+    private static List<RankCount> getCounts(LottoResult lottoResult) {
+        return Arrays.asList(LottoRank.values()).stream()
+                .sorted((x,y) -> x.getReward() - y.getReward())
+                .map(rank -> new RankCount(rank, lottoResult.getCountOf(rank)))
+                .collect(Collectors.toList());
+    }
+
 }

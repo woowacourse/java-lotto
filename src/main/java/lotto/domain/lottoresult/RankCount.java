@@ -1,20 +1,16 @@
 package lotto.domain.lottoresult;
 
-public class RankStatistic {
+public class RankCount {
     private final LottoRank rank;
     private final int count;
 
-    public RankStatistic(LottoRank rank, int count) {
+    public RankCount(LottoRank rank, int count) {
         this.rank = rank;
         this.count = count;
     }
 
     public boolean isWinningResult() {
         return !rank.equals(LottoRank.FAIL);
-    }
-
-    public int reward() {
-        return rank.getReward() * count;
     }
 
     public int getCount() {

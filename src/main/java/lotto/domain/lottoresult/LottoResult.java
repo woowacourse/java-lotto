@@ -3,48 +3,46 @@ package lotto.domain.lottoresult;
 import lotto.domain.lotto.LottoTicket;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class LottoResult implements Iterable<RankStatistic> {
-    private final List<RankStatistic> lottoStatistic;
+public class LottoResult {
+    private final Map<LottoRank, Integer> rankStatistic;
 
     public LottoResult(List<LottoRank> ranks) {
-        List<RankStatistic> statistics = Arrays.stream(LottoRank.values())
-                .map(rank -> new RankStatistic(rank,
-                        (int) ranks.stream()
-                        .filter(x -> rank == x)
-                        .count()
+        rankStatistic = Collections.unmodifiableMap(ranks.stream()
+                .collect(Collectors.groupingBy(
+                        Function.identity(), Collectors.reducing(0, rank -> 1, Integer::sum)
                 ))
-                .collect(Collectors.toList())
-        ;
+        );
+    }
 
-        Collections.reverse(statistics);
-        lottoStatistic = Collections.unmodifiableList(statistics);
+    public int getCountOf(LottoRank rank) {
+        return rankStatistic.getOrDefault(rank, 0);
     }
 
     public BigDecimal getEarningRate() {
-        BigDecimal expense = new BigDecimal(
-                LottoTicket.PRICE * lottoStatistic.stream()
-                        .mapToInt(RankStatistic::getCount)
-                        .sum()
-        );
-        BigDecimal rewards = new BigDecimal(
-                lottoStatistic.stream()
-                        .mapToInt(RankStatistic::reward)
-                        .sum()
-        );
-
-        return rewards.divide(expense, 3, RoundingMode.HALF_UP)
-                .multiply(new BigDecimal(100));
+        return getRewards().divide(getExpense()).multiply(new BigDecimal(100));
     }
 
-    @Override
-    public Iterator iterator() {
-        return lottoStatistic.iterator();
+    private BigDecimal getExpense() {
+        return rankStatistic.keySet().stream()
+                .map(rank -> multiply(rankStatistic.get(rank), LottoTicket.PRICE))
+                .reduce(new BigDecimal(0), BigDecimal::add)
+                ;
+    }
+
+    private BigDecimal getRewards() {
+        return rankStatistic.keySet().stream()
+                .map(rank -> multiply(rank.getReward(), rankStatistic.get(rank)))
+                .reduce(new BigDecimal(0), BigDecimal::add)
+                ;
+    }
+
+    private BigDecimal multiply(int x, int y) {
+        return new BigDecimal(x).multiply(new BigDecimal(y));
     }
 }

@@ -4,9 +4,11 @@ import lotto.domain.LottoQuantity;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.lottoresult.LottoRank;
-import lotto.domain.lottoresult.LottoResult;
-import lotto.domain.lottoresult.RankStatistic;
+import lotto.domain.lottoresult.RankCount;
 import lotto.domain.purchaseamount.PurchaseAmount;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 public class OutputView {
     public static void printChange(PurchaseAmount purchaseAmount) {
@@ -28,24 +30,26 @@ public class OutputView {
         }
     }
 
-    public static void printLottoResult(LottoResult lottoResult) {
+    public static void printLottoResult(List<RankCount> rankCounts, BigDecimal earningRate) {
         System.out.println("\n당첨 통계\n----------");
-        lottoResult.forEach(OutputView::drawStatistic);
-        System.out.println("\n총 수익률은 " + lottoResult.getEarningRate() + "%입니다.");
+        rankCounts.stream()
+                .filter(RankCount::isWinningResult)
+                .forEach(OutputView::drawStatistic)
+        ;
+        System.out.println("\n총 수익률은 " + earningRate + "%입니다.");
     }
 
-    private static void drawStatistic(RankStatistic rankStatistic) {
-        if (rankStatistic.isWinningResult()) {
-            LottoRank rank = rankStatistic.getRank();
-            int count = rankStatistic.getCount();
+    private static void drawStatistic(RankCount rankCount) {
+        LottoRank rank = rankCount.getRank();
+        int count = rankCount.getCount();
 
-            System.out.format("%d개 일치%s (%d원)- %d개\n",
-                    rank.getCountOfMatch(),
-                    rank.isBonusMatch() ? ", 보너스 볼 일치" : "",
-                    rank.getReward(),
-                    count
-            );
-        }
+        System.out.format("%d개 일치%s (%d원)- %d개\n",
+                rank.getCountOfMatch(),
+                rank.isBonusMatch() ? ", 보너스 볼 일치" : "",
+                rank.getReward(),
+                count
+        );
+
     }
 
     public static void printErrorMessage(String message) {

@@ -22,9 +22,9 @@ public class ManualLottoStrategy implements LottoStrategy {
     public List<Integer> generate() {
         return Collections.unmodifiableList(parse(numbersText).stream()
                 .map(String::trim)
-                .filter(x -> !x.isEmpty() || !x.isBlank())
+                .filter(x -> !x.isEmpty() || !x.equals(" "))
                 .map(Integer::parseInt)
-                .collect(Collectors.toUnmodifiableList())
+                .collect(Collectors.toList())
         );
     }
 }

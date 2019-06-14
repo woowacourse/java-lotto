@@ -2,7 +2,6 @@ package lotto.domain.lotto;
 
 import lotto.domain.lotto.LottoStrategy.LottoStrategy;
 
-import java.util.Iterator;
 import java.util.Objects;
 
 public class LottoTicket {
@@ -42,10 +41,5 @@ public class LottoTicket {
     @Override
     public String toString() {
         return lottoNumbers.toString();
-    }
-
-    @Override
-    public LottoTicket clone() {
-        return new LottoTicket(lottoNumbers.clone());
     }
 }
