@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.LottoResultDTO;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -26,11 +28,15 @@ public class LottoResult {
     }
 
     public double getRateOfReturn() {
+        return (double) getWinningMoney() / (getNumberOfLotto() * MONEY_PER_LOTTO);
+    }
+
+    private long getWinningMoney() {
         long winningMoney = 0;
         for (Rank rank : lottoResult.keySet()) {
             winningMoney += (long) rank.getWinningMoney() * lottoResult.get(rank);
         }
-        return (double) winningMoney / (getNumberOfLotto() * MONEY_PER_LOTTO);
+        return winningMoney;
     }
 
     private int getNumberOfLotto() {
@@ -43,6 +49,18 @@ public class LottoResult {
 
     public int getResultByRank(Rank rank) {
         return lottoResult.get(rank);
+    }
+
+    public LottoResultDTO toDTO(int round) {
+        LottoResultDTO lottoResultDto = new LottoResultDTO();
+        lottoResultDto.setRound(round);
+        lottoResultDto.setFirst(lottoResult.get(Rank.FIRST));
+        lottoResultDto.setSecond(lottoResult.get(Rank.SECOND));
+        lottoResultDto.setThird(lottoResult.get(Rank.THIRD));
+        lottoResultDto.setFourth(lottoResult.get(Rank.FOURTH));
+        lottoResultDto.setFifth(lottoResult.get(Rank.FIFTH));
+        lottoResultDto.setMiss(lottoResult.get(Rank.MISS));
+        return lottoResultDto;
     }
 
     @Override
