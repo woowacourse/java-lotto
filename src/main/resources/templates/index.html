@@ -1,10 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>로또</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Lotto Game</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/script/app.js"></script>
 </head>
+
 <body>
-Hello World!!
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <img alt="" class="d-inline-block align-top" height="30" src="../public/img/lotto_logo.png" width="30">
+        Lotto Game
+    </a>
+</nav>
+
+<div class="container mt-2">
+    <!-- Links -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#purchase-lotto">구입하기</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#check-lotto" id="check-lotto-tab">회차 조회 하기</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="container tab-pane active" id="purchase-lotto" style="margin-top:30px">
+            <form>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3>Step-1</h3>
+                        <div class="form-group" data-name="money">
+                            <label for="money">Money:</label>
+                            <input class="form-control" id="money" max="100000" min="1000" required step="1000"
+                                   type="number">
+                        </div>
+                        <div class="form-group" data-name="lotto-count">
+                            <label for="lotto-count">Lotto-Manual-Count:</label>
+                            <input class="form-control" id="lotto-count" min="0" required step="1" type="number">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <h3>Step-2</h3>
+                        <div data-name="lotto-list" style="overflow-y: auto; max-height: 30rem;"></div>
+                    </div>
+                    <div class="col-sm-4">
+                        <h3>Step-3</h3>
+                        <div class="form-group" data-name="winning-lotto">
+                            <label>Winnig-Lotto</label>
+                            <div class="input-group">
+                                <input class="form-control" data-no="0" max="45" min="1" required type="number">
+                                <input class="form-control" data-no="1" max="45" min="1" required type="number">
+                                <input class="form-control" data-no="2" max="45" min="1" required type="number">
+                                <input class="form-control" data-no="3" max="45" min="1" required type="number">
+                                <input class="form-control" data-no="4" max="45" min="1" required type="number">
+                                <input class="form-control" data-no="5" max="45" min="1" required type="number">
+                            </div>
+                        </div>
+
+                        <div class="form-group" data-name="bonus-no">
+                            <label for="bonus-no">Bonus-No</label>
+                            <input class="form-control" id="bonus-no" max="45" min="1" required type="number">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row" style="margin-top:30px">
+                    <div class="col-sm-12">
+                        <button class="btn btn-primary btn-block" id="submit" type="button">추첨</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container tab-pane fade" id="check-lotto" style="margin-top:30px">
+            <div class="row">
+                <div class="form-group">
+                    <label for="lotto-round">회차 : </label>
+                    <select class="form-control" id="lotto-round-options" name="lotto-round">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>lotto</h3>
+                    <div id="lotto-tickets"></div>
+                </div>
+                <div class="col-sm-6">
+                    <h3>lotto-result</h3>
+                    <div id="winning-lotto-status"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
+
 </html>

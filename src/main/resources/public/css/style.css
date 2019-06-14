@@ -1,0 +1,8 @@
+.hidden-number::-webkit-outer-spin-button, .hidden-number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.hidden-number {
+    -moz-appearance: textfield;
+}
