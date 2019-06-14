@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,10 +14,18 @@ public class LottoFactory {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lottoes createLottoes(String[] customLottoNumbersInput, Money money) {
-        List<Lotto> lottoes = createCustomLottoes(customLottoNumbersInput);
+    public static Lottoes createOnlyAutoLottoes(int count){
+        List<Lotto> lottoes = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottoes.add(createAutoLotto());
+        }
+        return new Lottoes(lottoes);
+    }
 
-        createAutoLottoes(customLottoNumbersInput, money, lottoes);
+    public static Lottoes createLottoes(String[] customLottoNumbersInput, Money money) {
+        System.out.println(customLottoNumbersInput.length);
+        List<Lotto> lottoes = createCustomLottoes(customLottoNumbersInput);
+        addAutoLottoes(customLottoNumbersInput, money, lottoes);
         return new Lottoes(lottoes);
     }
 
@@ -27,7 +36,7 @@ public class LottoFactory {
                 .collect(Collectors.toList());
     }
 
-    private static void createAutoLottoes(String[] customLottoNumbersInput, Money money, List<Lotto> lottoes) {
+    private static void addAutoLottoes(String[] customLottoNumbersInput, Money money, List<Lotto> lottoes) {
         for (int i = 0; i < money.getAutoLottoCount(customLottoNumbersInput); i++) {
             lottoes.add(createAutoLotto());
         }

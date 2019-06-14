@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>수동 로또 입력</title>
 </head>
 <body>
@@ -16,8 +14,8 @@
     {{#customLottoCount}}
     <div id="customLottoCount" hidden>{{customLottoCount}}</div>
     {{/customLottoCount}}
-    {{#each autoLottoNumbers}}
-    <span>수동로또{{this}} </span><input type="text" name="autoLottoNumbers"><br>
+    {{#each customLottoNumbers}}
+    <span>수동로또{{this}} </span><input type="text" name="customLottoNumbers"><br>
     <input type="hidden" name="roundNumber" value="{{this}}">
     {{/each}}
     <button type="submit"> 확인</button>

@@ -41,11 +41,12 @@ public class UserLottoDAO {
         pstmt.setInt(1, inquiredRound);
         ResultSet rs = pstmt.executeQuery();
         List<String> userLottoNumbers = new ArrayList<>();
-        if (!rs.next()) return;
         while (rs.next()) {
             userLottoNumbers.add(rs.getString("userLottoNumbers"));
         }
         model.put("userLottoNumbers", userLottoNumbers);
+        if (!rs.next()) return;
+
         DBUtil.closeConnection(con);
     }
 

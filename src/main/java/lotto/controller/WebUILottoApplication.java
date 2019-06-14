@@ -12,6 +12,7 @@ import lotto.Exception.InvalidWinningLottoException;
 import lotto.InputValidator;
 import lotto.domain.*;
 import spark.ModelAndView;
+import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.sql.Connection;
@@ -28,19 +29,50 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             return render(model, "form.html");
         });
-        post("/winning", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            String[] array = req.queryParamsValues("autoLottoNumbers");
-            Money money = req.session().attribute("money");
-            if (InputValidator.isNotValidCustomLottoes(array)) {
-                throw new InvalidCustomLottoNumberException("올바른 수동로또 번호를 입력해 주세요.");
+
+        post("/main", (req, res) -> {
+            Map<String, Object> resultModel = new HashMap<>();
+            String moneyInput = req.queryParams("money");
+            String customLottoCountInput = req.queryParams("customLottoCount");
+
+            if (InputValidator.isNotValidPrice(moneyInput)) {
+                throw new InvalidPurchaseException("올바른 구매금액을 입력해주세요.");
             }
+            Money money = MoneyFactory.createMoney(Integer.parseInt(moneyInput));
+            if (InputValidator.isNotValidCustomLottoCount(customLottoCountInput, money)) {
+                throw new InvalidPurchaseException("올바른 수동로또 개수를 입력해주세요.");
+            }
+            CustomLottoCount customLottoCount = CustomLottoCountFactory
+                    .createCustomLottoCount(Integer.parseInt(customLottoCountInput), money);
+            req.session().attribute("money", money);
+            req.session().attribute("customLottoCount",customLottoCount.getCustomLottoCount());
+            resultModel.put("customLottoCount", customLottoCount);
+            List<Integer> customLottoCounts = new ArrayList<>();
+            for (int i = 1; i <= customLottoCount.getCustomLottoCount(); i++) {
+                customLottoCounts.add(i);
+            }
+            resultModel.put("customLottoNumbers", customLottoCounts);
+            if(customLottoCount.getCustomLottoCount() == 0){
+                res.redirect("/winning?autoLottoCount="+money.getSize());
+            }
+            return render(resultModel, "result.html");
+        });
+
+        get("/winning", (req, res) -> {
+            Lottoes lottoes = LottoFactory.createOnlyAutoLottoes(Integer.parseInt(req.queryParams("autoLottoCount")));
+            Map<String, Object> model = printLottoNumbers(req, lottoes);
+            return render(model, "winning.html");
+        });
+
+        post("/winning", (req, res) -> {
+            Money money = req.session().attribute("money");
+            String[] array = req.queryParamsValues("customLottoNumbers");
+                if (InputValidator.isNotValidCustomLottoes(array)) {
+                    throw new InvalidCustomLottoNumberException("올바른 수동로또 번호를 입력해 주세요.");
+                }
             Lottoes lottoes = LottoFactory.createLottoes(array, money);
-            LottoesDTO lottoesDTO = new LottoesDTO(lottoes.getLottoes());
-            List<Lotto> lottoList = lottoes.getLottoes();
-            insertUserLottoData(lottoList);
-            model.put("lottoes", lottoesDTO.getLottoes());
-            req.session().attribute("lottoes", lottoes);
+
+            Map<String, Object> model = printLottoNumbers(req, lottoes);
             return render(model, "winning.html");
         });
 
@@ -73,31 +105,6 @@ public class WebUILottoApplication {
             return render(model, "finalResult.html");
         });
 
-        post("/main", (req, res) -> {
-            Map<String, Object> resultModel = new HashMap<>();
-            String moneyInput = req.queryParams("money");
-            String customLottoCountInput = req.queryParams("customLottoCount");
-
-            if (InputValidator.isNotValidPrice(moneyInput)) {
-                throw new InvalidPurchaseException("올바른 구매금액을 입력해주세요.");
-            }
-            Money money = MoneyFactory.createMoney(Integer.parseInt(moneyInput));
-            if (InputValidator.isNotValidCustomLottoCount(customLottoCountInput, money)) {
-                throw new InvalidPurchaseException("올바른 수동로또 개수를 입력해주세요.");
-            }
-
-            CustomLottoCount customLottoCount = CustomLottoCountFactory
-                    .createCustomLottoCount(Integer.parseInt(customLottoCountInput), money);
-            req.session().attribute("money", money);
-            resultModel.put("customLottoCount", customLottoCount);
-            List<Integer> customLottoCounts = new ArrayList<>();
-            for (int i = 1; i <= customLottoCount.getCustomLottoCount(); i++) {
-                customLottoCounts.add(i);
-            }
-            resultModel.put("autoLottoNumbers", customLottoCounts);
-            return render(resultModel, "result.html");
-        });
-
         post("/round", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int inquiredRound = Integer.parseInt(req.queryParams("roundNumber"));
@@ -113,6 +120,16 @@ public class WebUILottoApplication {
             response.status(404);
             response.body(exception.getMessage());
         });
+    }
+
+    private static Map<String, Object> printLottoNumbers(Request req, Lottoes lottoes) throws SQLException {
+        Map<String, Object> model = new HashMap<>();
+        LottoesDTO lottoesDTO = new LottoesDTO(lottoes.getLottoes());
+        List<Lotto> lottoList = lottoes.getLottoes();
+        insertUserLottoData(lottoList);
+        model.put("lottoes", lottoesDTO.getLottoes());
+        req.session().attribute("lottoes", lottoes);
+        return model;
     }
 
     private static List<Integer> getRounds() throws SQLException {
