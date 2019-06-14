@@ -38,11 +38,12 @@ public class ResultDAO {
         preparedStatement.setInt(1, round);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            return Arrays.asList(resultSet.getInt("first"),
-                    resultSet.getInt("second"),
-                    resultSet.getInt("third"),
+            return Arrays.asList(
+                    resultSet.getInt("fifth"),
                     resultSet.getInt("fourth"),
-                    resultSet.getInt("fifth"));
+                    resultSet.getInt("third"),
+                    resultSet.getInt("second"),
+                    resultSet.getInt("first"));
         }
         throw new SQLException();
     }
