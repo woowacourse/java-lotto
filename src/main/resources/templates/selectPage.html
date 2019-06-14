@@ -12,8 +12,15 @@
     <title>Hello, world!</title>
 </head>
 <body>
-<a href="inputStep1.html" class="btn btn-primary">로또 구매하기</a>
-<a href="selectPage.html" class="btn btn-primary">조회하기</a>
+<form action="selectResult.html" method="get">
+    <div class="form-group">
+        <label for="inputLottoRound">조회할 로또 라운드를 입력해주세요</label>
+        <input type="text" class="form-control" id="inputLottoRound" aria-describedby="emailHelp" placeholder="ex) 1"
+               name="inputRound">
+    </div>
+    <button type="submit" class="btn btn-primary">조회하기</button>
+</form>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

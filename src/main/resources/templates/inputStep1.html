@@ -12,50 +12,22 @@
     <title>로또</title>
 </head>
 <body>
-<form id="inputForm" action="inputStep2.html" method="post">
+<form action="inputStep2.html" method="post">
+    <div class="form-group">
+        <label for="inputPayment">{{paymentMessage}}</label>
+        <input type="text" class="form-control" id="inputPayment" aria-describedby="emailHelp" placeholder="구입 금액"
+               name="payment">
+        <small id="paymentHelp" class="form-text text-muted">로또 하나당 가격은 {{lottoPrice}}원 입니다</small>
+    </div>
+    <div class="form-group">
+        <label for="inputCountOfManualLotto">{{countOfManualLottoMessage}}</label>
+        <input type="text" class="form-control" id="inputCountOfManualLotto" placeholder="개수" name="countOfManualLotto">
+        <small id="countOfManualLottoHelp" class="form-text text-muted">총 로또개수 이하의 숫자를 입력하세요</small>
+    </div>
 
+    <button type="submit" class="btn btn-primary">다음</button>
 </form>
 
-<script type="text/javascript">
-    var inputForm = document.getElementById('inputForm');
-    var countOfManualLotto = '{{countOfLotto.countOfManualLotto}}';
-
-    var label = document.createElement('label');
-    label.setAttribute('for', 'inputLottoNumber');
-    label.innerText = '{{lottoNumberMessage}}';
-    inputForm.appendChild(label);
-
-    for (var i = 0; i < countOfManualLotto; i++) {
-        var div = document.createElement('div');
-        div.setAttribute('class', 'form-group');
-
-        var input = document.createElement('input');
-        input.setAttribute('type', 'text');
-        input.setAttribute('class', 'form-control');
-        input.setAttribute('id', 'inputLottoNumber');
-        input.setAttribute('aria-describedby', 'emailHelp');
-        input.setAttribute('placeholder', 'ex) 1, 2, 3, 4, 5, 6');
-        input.setAttribute('name', 'inputManualLottoNumber' + (i + 1));
-
-        var small = document.createElement('small');
-        small.setAttribute('id', 'lottoNumberHelp');
-        small.setAttribute('class', 'form-text text-muted');
-        small.innerText = '{{lottoNumberMinBoundary}} ~ {{lottoNumberMaxBoundary}}사이의 수 {{lottoNumberSize}}개 입력';
-
-        div.appendChild(input);
-        div.appendChild(small);
-
-        inputForm.appendChild(div);
-    }
-
-    var createLottoButton = document.createElement('button');
-    createLottoButton.setAttribute('type', 'submit');
-    createLottoButton.setAttribute('class', 'btn btn-primary');
-    createLottoButton.innerText = '로또 구매';
-
-    inputForm.appendChild(createLottoButton);
-
-</script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

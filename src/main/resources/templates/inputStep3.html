@@ -9,11 +9,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>로또</title>
 </head>
 <body>
-<a href="inputStep1.html" class="btn btn-primary">로또 구매하기</a>
-<a href="selectPage.html" class="btn btn-primary">조회하기</a>
+
+<form action="result.html" method="post">
+    <div class="form-group">
+        <label for="inputWinningLottoNumber">{{winningLottoNumberMessage}}</label>
+        <input type="text" class="form-control" id="inputWinningLottoNumber" aria-describedby="emailHelp"
+               placeholder="ex) 1, 2, 3, 4, 5, 6" name="winningLottoNumber">
+    </div>
+    <div class="form-group">
+        <label for="inputBonusNumber">{{bonusBallMessage}}</label>
+        <input type="text" class="form-control" id="inputBonusNumber" aria-describedby="emailHelp"
+               placeholder="ex) 7" name="bonusNumber">
+        <small id="bonusNumberHelp" class="form-text text-muted">당첨번호와 다른 수를 입력하세요</small>
+    </div>
+    <button type="submit" class="btn btn-primary">결과 확인</button>
+</form>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
