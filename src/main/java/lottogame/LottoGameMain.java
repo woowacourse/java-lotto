@@ -42,18 +42,18 @@ public class LottoGameMain {
         Optional<Money> money;
 
         do {
-            money = Optional.ofNullable(createMoney(InputView.getPrice()));
+            money = createMoney(InputView.getPrice());
         } while (!money.isPresent());
 
         return money.get();
     }
 
-    private static Money createMoney(String price) {
+    private static Optional<Money> createMoney(String price) {
         try {
-            return Money.generate(Integer.parseInt(price));
+            return Optional.of(Money.generate(Integer.parseInt(price)));
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 
