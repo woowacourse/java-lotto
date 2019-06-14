@@ -1,6 +1,5 @@
 package lotto.model.dao;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import lotto.model.LottoResult;
 import lotto.model.Money;
 
@@ -49,7 +48,7 @@ public class LottoResultDao {
         ps.setInt(1, round);
         ps.setString(2, String.join("\n", result));
         ps.setString(3, "" + lottoResult.calculateProfitRate());
-        ps.setString(4, "" + lottoResult.calculateTotal());
+        ps.setString(4, "" + lottoResult.calculateTotalPrizeMoney());
         ps.executeUpdate();
     }
 

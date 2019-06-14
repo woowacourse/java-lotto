@@ -13,7 +13,7 @@ public class Lotto {
 
     private List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers){
+    public Lotto(List<Integer> numbers) {
         checkDuplication(numbers);
         checkLottoLength(numbers);
         this.numbers = LottoNumber.convertNumbersToLottoNumbers(numbers);
@@ -78,5 +78,29 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    public int getFirst() {
+        return this.numbers.get(0).getNumber();
+    }
+
+    public int getSecond() {
+        return this.numbers.get(1).getNumber();
+    }
+
+    public int getThird() {
+        return this.numbers.get(2).getNumber();
+    }
+
+    public int getFourth() {
+        return this.numbers.get(3).getNumber();
+    }
+
+    public int getFifth() {
+        return this.numbers.get(4).getNumber();
+    }
+
+    public int getSixth() {
+        return this.numbers.get(5).getNumber();
     }
 }

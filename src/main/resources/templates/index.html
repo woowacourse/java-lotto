@@ -5,6 +5,31 @@
     <title>로또</title>
 </head>
 <body>
-Hello World!!
+<h1>로또게임</h1>
+<br>
+<br>
+<br>
+<form action="/prepare_lottos" method="post">
+    구입금액을 입력해 주세요: <input type="text" name="money">
+    <br>
+    <br>
+    <br>
+    수동로또 구매횟수를 입력해 주세요: <input type="text" name="manual_count">
+    <br>
+    <br>
+    <br>
+    수동로또 번호를 입력해 주세요:
+    <br>
+    <b>예시:</b>
+    <br>
+    <b>1,2,3,4,5,6</b>
+    <br>
+    <b>3,4,5,6,7,8</b>
+    <br>
+    <textarea name="manual_lotto_numbers"></textarea>
+    <br>
+    <br>
+    <input type="submit" value="SUBMIT">
+</form>
 </body>
 </html>

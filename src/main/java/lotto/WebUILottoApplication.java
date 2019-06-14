@@ -1,6 +1,5 @@
 package lotto;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import lotto.model.*;
 import lotto.model.dao.LottoResultDao;
 import lotto.model.dao.LottosDao;
@@ -40,8 +39,9 @@ public class WebUILottoApplication {
 
                 Map<String, Object> model = new HashMap<>();
                 model.put("manual_count", manualLottoCount.getCount());
-                model.put("auto_count", money.calculateAutomatiLottoCount(manualLottoCount.getCount()));
+                model.put("auto_count", money.calculateAutomaticLottoCount(manualLottoCount.getCount()));
                 model.put("lottos", lottos);
+
                 return render(model, "show_lottos.html");
             } catch (Exception e) {
                 Map<String, Object> model = new HashMap<>();
@@ -129,13 +129,9 @@ public class WebUILottoApplication {
         return readable;
     }
 
-    private static List<Lotto> prepareManualLottos(String manualLottoNumbers) {
-        List<Lotto> lottos = new ArrayList<>();
+    private static List<String> prepareManualLottos(String manualLottoNumbers) {
         List<String> splitLottos = new ArrayList<>(Arrays.asList(manualLottoNumbers.split(NEW_LINE)));
-        for (int i = 0, n = splitLottos.size(); i < n; i++) {
-            lottos.add(new Lotto(convert(splitLottos.get(i))));
-        }
-        return lottos;
+        return splitLottos;
     }
 
     private static List<Integer> convert(String splitLotto) {

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Count</title>
+</head>
+<body>
+<h1>로또게임</h1>
+
+<br>
+<br>
+<br>
+수동으로 {{manual_count}} 자동으로 {{auto_count}} 개 구매했습니다.
+<br>
+<br>
+<br>
+{{#lottos.lottos}}
+    {{this}}<br>
+{{/lottos.lottos}}
+
+<br>
+<br>
+
+<form action="get_winning_lotto_info" method="post">
+    <input type="submit" value="당첨번호 및 보너스 번호 입력하러 가기">
+</form>
+
+</body>
+</html>
