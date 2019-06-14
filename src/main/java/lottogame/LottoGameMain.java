@@ -83,30 +83,30 @@ public class LottoGameMain {
         Optional<Lotto> lotto;
         Optional<WinningLotto> winningLotto;
         do {
-            lotto = Optional.ofNullable(createMatchLotto(InputView.getWinningLotto()));
+            lotto = createMatchLotto(InputView.getWinningLotto());
         } while (!lotto.isPresent());
         do {
-            winningLotto = Optional.ofNullable(createWinningLotto(lotto.get(), InputView.getBonusNumber()));
+            winningLotto = createWinningLotto(lotto.get(), InputView.getBonusNumber());
         } while (!winningLotto.isPresent());
 
         return winningLotto.get();
     }
 
-    private static Lotto createMatchLotto(String winningLotto) {
+    private static Optional<Lotto> createMatchLotto(String winningLotto) {
         try {
-            return ManualLottoGenerator.create(winningLotto);
+            return Optional.of(ManualLottoGenerator.create(winningLotto));
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 
-    private static WinningLotto createWinningLotto(Lotto lotto, String bonusNumber) {
+    private static Optional<WinningLotto> createWinningLotto(Lotto lotto, String bonusNumber) {
         try {
-            return WinningLotto.generate(lotto, Integer.parseInt(bonusNumber));
+            return Optional.of(WinningLotto.generate(lotto, Integer.parseInt(bonusNumber)));
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 }
