@@ -29,6 +29,7 @@ public class LottoStartController {
         try{
             Price price = new Price(req.queryParams("price"));
             lottoStartDTO.setPrice(price);
+
             model.put("amount", lottoStartDTO.getPrice().getNumberOfLotto());
             return render(model, "view/lotto_manual_amount.html");
         } catch (Exception e){

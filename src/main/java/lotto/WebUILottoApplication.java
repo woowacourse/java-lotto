@@ -15,7 +15,7 @@ public class WebUILottoApplication {
         staticFileLocation("/templates");
 
         get("/home", LottoHomeController::home);
-        get("/rule", LottoHomeController::rule);
+        get("/check", LottoHomeController::checkRound);
         get("/contact", LottoHomeController::contact);
 
         get("/start", LottoStartController::start);

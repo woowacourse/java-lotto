@@ -14,9 +14,9 @@ public class LottoHomeController {
         return render(model, "view/lotto_home.html");
     }
 
-    public static String rule(Request req, Response res) {
+    public static String checkRound(Request req, Response res) {
         Map<String, Object> model = new HashMap<>();
-        return render(model, "view/lotto_rule.html");
+        return render(model, "view/lotto_check_round.html");
     }
 
     public static String contact(Request req, Response res) {
