@@ -17,7 +17,6 @@
 
 <body>
     <header class="container">
-        header
         <!--1~10	#FBC400
         11~20	#69C8F2
         21~30	#FF7272
@@ -26,21 +25,17 @@
     </header>
 
     <section class="container">
-
         <article class="text-center">
             <img src="https://via.placeholder.com/1920x400.png?text=AD (1920 x 400)" class="img-fluid rounded">
-
+            <div class="text-right">{{name}} 님</div>
             <h3>당첨 결과</h3>
 
             <div class="d-inline-flex">
                 <div class="d-inline-block">
                     <p class="balls">
-                        <span class="ball">1</span>
-                        <span class="ball">2</span>
-                        <span class="ball">3</span>
-                        <span class="ball">4</span>
-                        <span class="ball">5</span>
-                        <span class="ball">6</span>
+                        {{#winningLotto.winningLotto.lottoNumbers}}
+                            <span class="ball">{{this}}</span>
+                        {{/winningLotto.winningLotto.lottoNumbers}}
                     </p>
                     <p>당첨번호</p>
                 </div>
@@ -51,7 +46,7 @@
 
                 <div class="d-inline-block">
                     <p class="balls">
-                        <span class="ball">7</span>
+                        <span class="ball">{{winningLotto.bonusNumber}}</span>
                     </p>
                     <p>보너스 번호</p>
                 </div>
@@ -60,13 +55,11 @@
 
         <article>
             <div class="table-responsive text-center">
-                {{result.lottoScore}}<br>
                 <table class="table">
                     <thead>
                         <th>순위</th>
                         <th>등위별 총 당첨금액</th>
                         <th>당첨 횟수</th>
-                        <th>총 당첨 금액</th>
                         <th>당첨기준</th>
                         <th>비고</th>
                     </thead>
@@ -75,60 +68,57 @@
                             <th scope="col" class="align-middle">1</th>
                             <th scope="col" class="text-right">2,000,000,000 원</th>
                             <th scope="col" class="align-middle">{{result.lottoScore.FIRST}}</th>
-                            <th scope="col" class="text-right">2,000,000,000 원</th>
                             <th scope="col" class="align-middle">당첨번호 6개 숫자일치</th>
-                            <th rowspan="6" class="align-middle">수동2<br>자동3</th>
+                            <th rowspan="6" class="align-middle">수동{{manual}}<br>자동{{auto}}</th>
                         </tr>
                         <tr>
                             <th scope="col" class="align-middle">2</th>
                             <th scope="col" class="text-right align-middle">30,000,000 원</th>
                             <th scope="col" class="align-middle">{{result.lottoScore.SECOND}}</th>
-                            <th scope="col" class="text-right align-middle">0 원</th>
                             <th scope="col" class="align-middle">당첨번호 5개 숫자일치<br>+<strong>보너스</strong> 숫자 일치</th>
                         </tr>
                         <tr>
                             <th scope="col" class="align-middle">3</th>
                             <th scope="col" class="text-right align-middle">1,500,000 원</th>
                             <th scope="col" class="align-middle">{{result.lottoScore.THIRD}}</th>
-                            <th scope="col" class="text-right align-middle">0 원</th>
                             <th scope="col" class="align-middle">당첨번호 5개 숫자일치</th>
                         </tr>
                         <tr>
                             <th scope="col" class="align-middle">4</th>
                             <th scope="col" class="text-right align-middle">50,000 원</th>
                             <th scope="col" class="align-middle">{{result.lottoScore.FOURTH}}</th>
-                            <th scope="col" class="text-right align-middle">0 원</th>
                             <th scope="col" class="align-middle">당첨번호 4개 숫자일치</th>
                         </tr>
                         <tr>
                             <th scope="col">5</th>
                             <th scope="col" class="text-right">5,000 원</th>
                             <th scope="col">{{result.lottoScore.FIFTH}}</th>
-                            <th scope="col" class="text-right">0 원</th>
                             <th scope="col">당첨번호 3개 숫자일치</th>
                         </tr>
                         <tr>
                             <th scope="col">MISS</th>
                             <th scope="col" class="text-right">0 원</th>
                             <th scope="col">{{result.lottoScore.MISS}}</th>
-                            <th scope="col" class="text-right">0 원</th>
                             <th scope="col">당첨번호 3개 미만</th>
                         </tr>
                         <tr>
-                            <th colspan="6">최종 합계: 2,000,000,000 원</th>
+                            <th colspan="6" class="text-right">최종 합계: {{result.totalWinningMoney}} 원</th>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </article>
-
+        <div>
+            {{#lottoTicket}}
+                {{this}}<br>
+            {{/lottoTicket}}
+        </div>
 
     </section>
 
     <footer class="container">
         <div class="text-right">
-            <button type="submit" class="btn btn-primary">로또 추첨</button>
-            <button type="submit" class="btn btn-primary">목록으로</button>
+            <a href="/" class="btn btn-primary">다시하기</a>
         </div>
         <hr>
         <div class="jumbotron">

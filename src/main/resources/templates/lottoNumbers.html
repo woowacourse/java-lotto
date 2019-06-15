@@ -16,19 +16,49 @@
 
 <body>
     <section class="container">
+        <div class="text-right">{{name}} 님</div>
+        <form action="/lottoResult" method="post">
         <h1>로또 번호 입력</h1>
-        <form action="/inputLottos" method="post">
 
             <!-- 반복...? -->
             {{#lottoName}}
             <div class="form-group">
                 <label for="lotto_number">{{this}}</label>
-                <input type="text" id="lotto_number" name="lotto_number_{{@index}}" class="form-control" placeholder="예) 1,2,3,4,5,6"/>
+                <input type="text" id="lotto_number" name="lotto_number" class="form-control" placeholder="예) 1,2,3,4,5,6"/>
                 <small class="form-text text-muted">로또 번호를 쉼표(,)로 구분하여 입력해주세요.</small>
             </div>
             {{/lottoName}}
 
-            <button type="submit" class="btn btn-primary">진행하기</button>
+            <br><br>
+
+            <h1>지난주 당첨 번호 입력</h1>
+
+            <div class="form-group">
+                <label for="">지난주 당첨 번호</label>
+                <div class="form-row">
+                    <div class="col-sm-9">
+                        <input type="text" id="winning_lotto" name="winning_lotto" class="form-control" placeholder="예) 1,2,3,4,5,6"/>
+
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label class="sr-only" for="bonus">Bonus ball</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Bonus</div>
+                            </div>
+                            <input type="number" id="bonus" name="bonus_ball" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <small class="form-text text-muted">지난주 당첨 번호를 쉼표(,)로 구분하여 입력해주세요.</small>
+                <input type="hidden" name="name" value={{name}} />
+                <input type="hidden" name="round" value={{round}} />
+                <input type="hidden" name="countOfLotto" value={{countOfLotto}} />
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">결과보기</button>
+            </div>
         </form>
     </section>
 </body>
