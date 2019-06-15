@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.config.DBUtils;
+import lotto.config.DBConnector;
 import lotto.domain.Rank;
 import lotto.domain.WinPrize;
 
@@ -10,13 +10,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class WinPrizeDao {
-    public int save(WinPrize winPrize, int round) {
-        Connection conn = DBUtils.getConnection();
-        PreparedStatement ps = null;
-        int result = 0;
-        try {
-            String sql = "INSERT INTO win_prize (round, first, second, third, fourth, fifth, miss) VALUES(?, ?,?,?,?,?,?)";
-            ps = conn.prepareStatement(sql);
+    private DBConnector dbConnector;
+
+    public WinPrizeDao(final DBConnector dbConnector) {
+        this.dbConnector = dbConnector;
+    }
+
+    public void save(WinPrize winPrize, int round) {
+        String sql = "INSERT INTO win_prize (round, first, second, third, fourth, fifth, miss) VALUES(?, ?,?,?,?,?,?)";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, round);
             ps.setInt(2, winPrize.getWinCount(Rank.FIRST));
             ps.setInt(3, winPrize.getWinCount(Rank.SECOND));
@@ -24,27 +28,17 @@ public class WinPrizeDao {
             ps.setInt(5, winPrize.getWinCount(Rank.FOURTH));
             ps.setInt(6, winPrize.getWinCount(Rank.FIFTH));
             ps.setInt(7, winPrize.getWinCount(Rank.MISS));
-            result = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            DBUtils.close(conn, ps);
         }
-        return result;
     }
 
     public WinPrize findAllByRound(int round) {
-        Connection conn = DBUtils.getConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        WinPrize winPrize = new WinPrize();
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement ps = createPreparedStatement(conn, round);
+             ResultSet rs = ps.executeQuery()) {
 
-        try {
-            String sql = "SELECT * FROM win_prize WHERE round = ?";
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, round);
-            rs = ps.executeQuery();
-
+            WinPrize winPrize = new WinPrize();
             if (rs.next()) {
                 winPrize.put(Rank.FIRST, rs.getInt("first"));
                 winPrize.put(Rank.SECOND, rs.getInt("second"));
@@ -54,11 +48,17 @@ public class WinPrizeDao {
                 winPrize.put(Rank.MISS, rs.getInt("miss"));
             }
             return winPrize;
+
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            DBUtils.close(conn, ps, rs);
         }
         return null;
+    }
+
+    private PreparedStatement createPreparedStatement(final Connection conn, final int round) throws SQLException {
+        String sql = "SELECT * FROM win_prize WHERE round = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, round);
+        return ps;
     }
 }

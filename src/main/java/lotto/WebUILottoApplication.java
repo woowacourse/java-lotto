@@ -27,10 +27,10 @@ public class WebUILottoApplication {
 
         DBConnector dbConnector = new DBConnector(DataSource.getInstance());
 
-        RoundDao roundDao = new RoundDao();
+        RoundDao roundDao = new RoundDao(dbConnector);
         LottoDao lottoDao = new LottoDao(dbConnector);
-        WinPrizeDao winPrizeDao = new WinPrizeDao();
-        WinningLottoDao winningLottoDao = new WinningLottoDao();
+        WinPrizeDao winPrizeDao = new WinPrizeDao(dbConnector);
+        WinningLottoDao winningLottoDao = new WinningLottoDao(dbConnector);
 
         RoundService roundService = new RoundService(roundDao);
         LottoService lottoService = new LottoService(lottoDao);

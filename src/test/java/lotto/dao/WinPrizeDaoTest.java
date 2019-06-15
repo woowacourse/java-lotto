@@ -1,6 +1,8 @@
 package lotto.dao;
 
-import lotto.config.TableCreator;
+import lotto.TestTableCreator;
+import lotto.config.DBConnector;
+import lotto.config.DataSource;
 import lotto.domain.Rank;
 import lotto.domain.WinPrize;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,13 +12,14 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinPrizeDaoTest {
+    DBConnector dbConnector = new DBConnector(DataSource.getTestInstance());
+    WinPrizeDao winPrizeDao = new WinPrizeDao(dbConnector);
     WinPrize winPrize = new WinPrize();
-    WinPrizeDao winPrizeDao = new WinPrizeDao();
     int round = 0;
 
     @BeforeAll
-    static void createTable() throws Exception {
-        TableCreator.create();
+    static void createTable() {
+        TestTableCreator.create();
     }
 
     @BeforeEach
@@ -30,13 +33,11 @@ class WinPrizeDaoTest {
     }
 
     @Test
-    void addTest() {
-        assertThat(1).isEqualTo(winPrizeDao.save(winPrize, round));
-    }
-
-    @Test
     void findByRoundTest() {
+        winPrizeDao.save(winPrize, round);
+
         WinPrize expected = winPrizeDao.findAllByRound(round);
+
         assertThat(expected).isNotNull();
     }
 }

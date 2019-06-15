@@ -1,8 +1,8 @@
 package lotto.dao;
 
+import lotto.TestTableCreator;
 import lotto.config.DBConnector;
 import lotto.config.DataSource;
-import lotto.config.TableCreator;
 import lotto.domain.Lotto;
 import lotto.domain.generator.LottoNosManualGenerator;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoDaoTest {
-    LottoDao lottoDao = new LottoDao(new DBConnector(DataSource.getTestInstance()));
+    DBConnector dbConnector = new DBConnector(DataSource.getTestInstance());
+    LottoDao lottoDao = new LottoDao(dbConnector);
     int round = 0;
 
     @BeforeAll
-    static void createTable() throws Exception {
-        TableCreator.create();
+    static void createTable() {
+        TestTableCreator.create();
     }
 
     @BeforeEach
