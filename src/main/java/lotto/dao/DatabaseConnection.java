@@ -9,7 +9,7 @@ public class DatabaseConnection {
     private static final String SERVER = "localhost";
     private static final String DATABASE = "lotto";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "1234";
+    private static final String PASSWORD = "fantasy7";
     private static final String URL_FORMAT = "jdbc:mysql://%s/%s?useSSL=false&serverTimezone=UTC";
 
     public static Connection getConnection() {

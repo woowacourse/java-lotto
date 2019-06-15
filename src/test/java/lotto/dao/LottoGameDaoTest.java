@@ -3,7 +3,6 @@ package lotto.dao;
 import lotto.dto.LottoGameDto;
 import lotto.dto.WinningNumberDto;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -30,28 +29,16 @@ public class LottoGameDaoTest {
     }
 
     @Test
-    @Order(1)
     void 라운드_추가_조회_테스트() throws SQLException {
         LottoDao lottoDao = LottoDao.getInstance();
         lottoDao.removeAllLotto(TEST_ROUND);
-        lottoGameDao.removeWinningNumber(TEST_ROUND);
         lottoGameDao.removeRound(TEST_ROUND);
 
-        LottoGameDto lottoGameDto = new LottoGameDto();
-        lottoGameDto.setRound(TEST_ROUND);
-        lottoGameDto.setMoney(2000);
-        lottoGameDto.setCountOfManual(2);
+        int money = 2000;
+        int countOfManual = 2;
+        LottoGameDto lottoGameDto = new LottoGameDto(TEST_ROUND, money, countOfManual);
 
         lottoGameDao.addRound(lottoGameDto);
         assertThat(lottoGameDao.findRoundById(TEST_ROUND).getRound()).isEqualTo(1);
-    }
-
-    @Test
-    @Order(2)
-    void 해당_라운드의_당첨번호_조회() throws SQLException {
-        lottoGameDao.addWinningNumber(TEST_ROUND, initWinningNumberDto);
-        WinningNumberDto winningNumberDto = lottoGameDao.findWinningLottoByRound(TEST_ROUND);
-        assertThat(winningNumberDto.getNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(winningNumberDto.getBonusNumber()).isEqualTo(7);
     }
 }

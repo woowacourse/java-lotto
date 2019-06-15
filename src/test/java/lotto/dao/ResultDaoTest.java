@@ -1,5 +1,7 @@
 package lotto.dao;
 
+import lotto.domain.Prize;
+import lotto.domain.Result;
 import lotto.dto.ResultDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,34 +16,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ResultDaoTest {
 
     ResultDao resultDao;
-    ResultDto initResultDto;
+    Result initResult;
 
     @BeforeEach
     void setUp() {
         resultDao = ResultDao.getInstance();
 
-        initResultDto = new ResultDto();
-        Map<String, Integer> initPrize = new HashMap<>();
-        initPrize.put("first", 1);
-        initPrize.put("second", 0);
-        initPrize.put("third", 1);
-        initPrize.put("fourth", 0);
-        initPrize.put("fifth", 0);
-        initPrize.put("none", 0);
-        initResultDto.setPrizeResult(initPrize);
-        initResultDto.setWinningMoney(2_003_000_000);
+        Map<Prize, Integer> initPrize = new HashMap<>();
+        initPrize.put(Prize.FIRST, 1);
+        initPrize.put(Prize.SECOND, 0);
+        initPrize.put(Prize.THIRD, 1);
+        initPrize.put(Prize.FOURTH, 0);
+        initPrize.put(Prize.FIFTH, 0);
+        initPrize.put(Prize.NONE, 0);
+        initResult = new Result(initPrize);
     }
 
     @Test
     void 첫번째_라운드의_결과_일치_여부_테스트() throws SQLException {
         ResultDto resultDto = resultDao.findResultByRound(TEST_ROUND);
-        Map<String, Integer> prize = resultDto.getPrizeResult();
-        assertThat(prize.get("first")).isEqualTo(1);
-        assertThat(prize.get("second")).isEqualTo(0);
-        assertThat(prize.get("third")).isEqualTo(1);
-        assertThat(prize.get("fourth")).isEqualTo(0);
-        assertThat(prize.get("fifth")).isEqualTo(0);
-        assertThat(prize.get("none")).isEqualTo(0);
-        assertThat(resultDto.getWinningMoney()).isEqualTo(2_003_000_000);
+        assertThat(resultDto.toEntity()).isEqualTo(initResult);
     }
 }
