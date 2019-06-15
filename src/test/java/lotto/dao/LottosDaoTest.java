@@ -1,4 +1,4 @@
-package lotto;
+package lotto.dao;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;

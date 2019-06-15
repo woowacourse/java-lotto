@@ -1,5 +1,6 @@
-package lotto;
+package lotto.dao;
 
+import lotto.WebUILottoApplication;
 import lotto.model.*;
 import lotto.model.dao.LottoResultDao;
 import org.junit.Test;
@@ -29,6 +30,5 @@ public class LottoResultDaoTest {
 
         LottoResultDao dao = new LottoResultDao();
         dao.saveResult(WebUILottoApplication.makeReadableLottoResult(lottoResult), money, lottoResult);
-
     }
 }
