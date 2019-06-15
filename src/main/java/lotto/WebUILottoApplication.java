@@ -6,7 +6,10 @@ import lotto.domain.dao.PaymentInfoDao;
 import lotto.domain.dto.PaymentInfoDTO;
 import lotto.domain.dto.RankingDTO;
 import lotto.domain.dto.ResultDTO;
-import lotto.domain.lotto.Result;
+import lotto.domain.lotto.*;
+import lotto.domain.lottogenerator.LottoGenerator;
+import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
+import lotto.domain.lottogenerator.RandomLottoGeneratingStrategy;
 import lotto.domain.paymentinfo.CountOfLotto;
 import lotto.domain.paymentinfo.Payment;
 import spark.ModelAndView;
@@ -68,6 +71,48 @@ public class WebUILottoApplication {
             return render(model, "lottoNumbers.html");
         });
 
+        // input lotto -> lotto result page
+        post("/lottoResult", (req, res) -> {
+            int countOfLotto = Integer.parseInt(nullable(req.queryParams("countOfLotto")));
+            int round = Integer.parseInt(nullable(req.queryParams("round")));
+            String name = nullable(req.queryParams("name"));
+
+            LottoRepository lottoRepository = addLottos(req.queryParamsValues("lotto_number"), countOfLotto);
+
+            int insertLottoTicket = LottoDao.getInstance().insertLottoTicket(
+                    new LottoTickets(lottoRepository), round);
+
+            WinningLotto winningLotto = createWinningLotto(
+                    nullable(req.queryParams("winning_lotto")),
+                    nullable(req.queryParams("bonus_ball")));
+
+            int insertWinningLotto = LottoDao.getInstance().insertWinningLotto(winningLotto, round);
+
+            ResultDTO resultDTO = createResultDTO(winningLotto, lottoRepository, round, name);
+            int resultInsertResult = LottoResultDao.getInstance().insertLottoResult(resultDTO);
+
+
+            res.redirect("/lottoResult/" + round);
+
+            // TODO How to process return?
+            return render(null, "lottoResult.html");
+        });
+
+        get("/lottoResult/:round", (req, res) -> {
+            int round = Integer.parseInt(nullable(req.params(":round")));
+            ResultDTO resultDTO = createResult(round);
+
+            List<Lotto> lottoTicket = LottoDao.getInstance().selectAllLotto(round);
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("result", resultDTO);
+            model.put("winningLotto", LottoDao.getInstance().selectWinningLotto(round));
+            model.put("lottoTicket", lottoTicket);
+            model.put("name", resultDTO.getName());
+            model.put("auto", lottoTicket.stream().filter(Lotto::isAuto).count());
+            model.put("manual", lottoTicket.stream().filter(lotto -> !lotto.isAuto()).count());
+            return render(model, "lottoResult.html");
+        });
     }
 
     private static void setUp() {
@@ -85,6 +130,15 @@ public class WebUILottoApplication {
                 .collect(toList());
     }
 
+
+    private static ResultDTO createResult(int round) throws SQLDataException {
+        ResultDTO resultDTO = LottoResultDao.getInstance().selectLottoResult(round);
+        Result result = new Result(resultDTO.getLottoScore());
+        resultDTO.setTotalWinningMoney(result.calculateTotalWinningMoney());
+        resultDTO.setEarningRate(result.calculateEarningsRate(new Payment(resultDTO.getPayment())));
+        return resultDTO;
+    }
+
     private static List<String> createResponseInputTag(int countOfManualLotto) {
         return IntStream.rangeClosed(1, countOfManualLotto)
                 .mapToObj(i -> "로또 번호 " + i)
@@ -93,6 +147,36 @@ public class WebUILottoApplication {
 
     private static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
+    }
+
+    private static ResultDTO createResultDTO(WinningLotto winningLotto, LottoRepository lottoRepository, int round, String name) {
+        Result result = winningLotto.match(new LottoTickets(lottoRepository));
+        ResultDTO resultDTO = new ResultDTO.Builder(round, name)
+                .first(result.get(Rank.FIRST))
+                .second(result.get(Rank.SECOND))
+                .third(result.get(Rank.THIRD))
+                .fourth(result.get(Rank.FOURTH))
+                .fifth(result.get(Rank.FIFTH))
+                .miss(result.get(Rank.MISS))
+                .build();
+        resultDTO.setTotalWinningMoney(result.calculateTotalWinningMoney());
+        return resultDTO;
+    }
+
+    private static WinningLotto createWinningLotto(String winningLotto, String bonusBall) {
+        List<Integer> inputWinningLotto = splitInputLottoNumbers(winningLotto);
+        Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(inputWinningLotto));
+        return new WinningLotto(lotto, Integer.parseInt(bonusBall));
+    }
+
+    private static LottoRepository addLottos(String[] inputLottos, int countOfLotto) {
+        LottoRepository lottoRepository = new LottoRepository();
+        List<Lotto> manualLotto = createManualLottos(inputLottos);
+        lottoRepository.addAll(manualLotto);
+
+        List<Lotto> randomLotto = createRandomLottos(countOfLotto - manualLotto.size());
+        lottoRepository.addAll(randomLotto);
+        return lottoRepository;
     }
 
     private static List<ResultDTO> selectAllLottoResult() throws SQLDataException {
@@ -112,6 +196,30 @@ public class WebUILottoApplication {
         paymentInfoDTO.setAuto(countOfLotto.getCountOfRandomLotto());
         paymentInfoDTO.setName(name);
         return paymentInfoDTO;
+    }
+
+    private static List<Integer> splitInputLottoNumbers(String input) {
+        return Arrays.stream(input.split(","))
+                .map(Integer::parseInt)
+                .collect(toList());
+    }
+
+    private static List<Lotto> createManualLottos(String[] inputLottos) {
+        return Arrays.stream(Optional.ofNullable(inputLottos).orElse(new String[]{}))
+                .filter(WebUILottoApplication::hasContent)
+                .map(WebUILottoApplication::splitInputLottoNumbers)
+                .map(list -> LottoGenerator.create(new ManualLottoGeneratingStrategy(list)))
+                .collect(toList());
+    }
+
+    private static List<Lotto> createRandomLottos(int countOfRandomLotto) {
+        return IntStream.rangeClosed(1, countOfRandomLotto)
+                .mapToObj(i -> LottoGenerator.create(new RandomLottoGeneratingStrategy()))
+                .collect(toList());
+    }
+
+    private static boolean hasContent(String value) {
+        return !Objects.isNull(value) && !value.isEmpty();
     }
 
     private static String nullable(String param) {
