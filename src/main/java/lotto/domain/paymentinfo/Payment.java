@@ -24,6 +24,10 @@ public class Payment {
         return (double) totalWinningMoney / payment;
     }
 
+    public int getPayment() {
+        return payment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

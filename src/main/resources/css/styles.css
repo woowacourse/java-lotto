@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'hanna';
+    src: url(../font/BMHANNAPro.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'hanna_air';
+    src: url(../font/BMHANNAAir_ttf.ttf) format('truetype');
+}
+
+body {
+    font-family: hanna;
+}
+
+table {
+    font-family: hanna_air;
+}
+
+.container {
+    margin-top: 30px;
+}
+
+.ball {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    padding: 10px;
+    margin: 0 10px 0 10px;
+    background: #fbc400;
+    text-align: center;
+    font: 32px Arial, sans-serif;
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    text-shadow: 0px 0px 3px rgba(0, 49, 70, .8);
+}
+
+.balls {
+    border-radius: 30px;
+    background: #fafafa;
+    padding: 30px;
+    display: inline-block;
+    margin: 10px;
+}
+

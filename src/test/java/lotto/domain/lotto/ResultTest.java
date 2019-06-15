@@ -19,10 +19,11 @@ public class ResultTest {
     @BeforeEach
     void setUp() {
         LottoRepository lottoRepository = new LottoRepository();
-        lottoRepository.addManualLotto(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoRepository.add(LottoGenerator.create(
+                new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
         lottoTickets = new LottoTickets(lottoRepository);
 
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), false);
         winningLotto = new WinningLotto(lotto, 7);
 
         result = winningLotto.match(lottoTickets);

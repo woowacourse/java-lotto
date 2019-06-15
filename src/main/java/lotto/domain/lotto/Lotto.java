@@ -6,18 +6,21 @@ import lotto.exception.InvalidCountOfLottoNumberException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
+    private final boolean isAuto;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers, boolean isAuto) {
         checkLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(toList());
+        this.isAuto = isAuto;
     }
 
     private void checkLottoNumbers(List<Integer> lottoNumbers) {
@@ -44,6 +47,14 @@ public class Lotto {
         return lottoNumbers.contains(bonusNumber);
     }
 
+    public boolean isAuto() {
+        return isAuto;
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,6 +70,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(","));
     }
 }

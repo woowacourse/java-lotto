@@ -1,7 +1,37 @@
 # java-lotto
 로또 미션 진행을 위한 저장소
 
-# 구현해야할 기능
+# 구현 기능 (web)
+### 1. View
+#### 1.1. Name 입력 화면
+- 라운드별 기록 --click--> result 화면으로 이동
+- 당첨금 순위 (or 투자금액 순위?)
+
+#### 1.2. Payment & manual lotto 입력 화면
+- 지불 금액 입력
+- 구매를 원하는 수동 로또의 개수 입력
+
+#### 1.3. Lotto 입력
+- 수동 로또 개수만큼 입력
+
+#### 1.4. Winning lotto 입력
+- 지난 주 당첨 로또 입력 (보너스볼까지)
+
+#### 1.5. Result 화면
+- 해당 lotto들과 winning lotto와 비교
+- 총 당첨 금액 및 수익률 계산
+
+### 2. Database 연동
+#### 2.0. DB connect
+- mysql과 연동할 connection 구성
+
+#### 2.1. Insert item
+- 각 view에서 입력받은 정보를 mysql에 저장
+
+#### 2.2. Select all Lotto
+- 각 라운드 별 lotto 결과를 가져옴
+
+# 구현 기능 (console)
 1. 입력
     1. 구입금액 입력
         1. 0 이상 정수인지 확인

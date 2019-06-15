@@ -81,11 +81,11 @@ public class ConsoleUILottoApplication {
     private static LottoRepository purchaseLotto(CountOfLotto countOfLotto) {
         LottoRepository lottoRepository = new LottoRepository();
         for (int i = 0; i < countOfLotto.getCountOfManualLotto(); i++) {
-            lottoRepository.addManualLotto(inputLottoNumber());
+            lottoRepository.add(inputLottoNumber());
         }
 
         for (int i = 0; i < countOfLotto.getCountOfRandomLotto(); i++) {
-            lottoRepository.addAutoLottos(LottoGenerator.create(new RandomLottoGeneratingStrategy()));
+            lottoRepository.add(LottoGenerator.create(new RandomLottoGeneratingStrategy()));
         }
 
         return lottoRepository;
