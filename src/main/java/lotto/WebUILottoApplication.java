@@ -1,7 +1,5 @@
 package lotto;
 
-import lotto.domain.*;
-import lotto.domain.Number;
 import lotto.service.LottoService;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -36,20 +34,11 @@ public class WebUILottoApplication {
         });
 
         get("/result", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            WinningLotto winningLotto = new WinningLotto(
-                    Parser.parseWinningLotto(req.queryParams("winNumbers"))
-                    , Number.of(Integer.parseInt(req.queryParams("bonusNumber")))
-            );
-
-//            Winners winners = lottoService.createWinners(winningLotto.makeRankResultList(), winningLotto);
-//
-//            model.put("winningLotto", winningLotto);
-//            model.put("winners", winners);
-//            model.put("winnersResult", lottoService.provideResultStatus(winners.getRankResult()));
-//            model.put("returnRate", lottoService.offerReturnRate(winners.calculateResultRate(round)));
-
-            return render(model, "result.html");
+            String winNumbers = req.queryParams("winNumbers");
+            String bonusNumber = req.queryParams("bonusNumber");
+            int round = Integer.parseInt(req.queryParams("round"));
+            String userLottoString = req.queryParams("userLotto");
+            return render(lottoService.offerResults(winNumbers, bonusNumber, userLottoString, round), "result.html");
         });
     }
 

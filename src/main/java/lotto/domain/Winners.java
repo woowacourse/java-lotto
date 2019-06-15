@@ -16,9 +16,9 @@ public class Winners {
         return rankResult;
     }
 
-    public double calculateResultRate(int inputMoney) {
+    public String calculateResultRate(int inputMoney) {
         double prizeSum = getPrizeSum(rankResult);
-        return (prizeSum / (inputMoney * MONEY_UNIT)) * PERCENT;
+        return String.format("%.2f", (prizeSum / (inputMoney * MONEY_UNIT)) * PERCENT);
     }
 
     private static double getPrizeSum(List<Rank> ranks) {
