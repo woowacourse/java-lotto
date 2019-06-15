@@ -26,7 +26,6 @@ public class WebUILottoApplication {
     private static Payment payment;
     private static CountOfLotto countOfLotto;
     private static LottoTickets lottoTickets;
-    private static WinningLotto winningLotto;
 
     public static void main(String[] args) {
         get("/", (req, res) -> {
@@ -106,7 +105,7 @@ public class WebUILottoApplication {
 
         post("result.html", ((req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            winningLotto = inputWinningLotto(req.queryParams("winningLottoNumber"), req.queryParams("bonusNumber"));
+            WinningLotto winningLotto = inputWinningLotto(req.queryParams("winningLottoNumber"), req.queryParams("bonusNumber"));
             Result result = lottoTickets.match(winningLotto);
 
             WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
