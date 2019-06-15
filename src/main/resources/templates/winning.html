@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500" rel="stylesheet">
+
+    <title>로또</title>
+</head>
+<body>
+<div id="container">
+    <h1>로또</h1>
+
+    <p>
+        발행된 로또는 다음과 같습니다.<br><br>
+        {{{lottoTickets}}}<br>
+        지난주 당첨 번호 6개와 보너스 볼을 같은 방식으로 입력해 주세요.
+    </p>
+
+    <form action="/check" method="POST">
+        <input name="winning" type="text" placeholder="당첨 번호"><br>
+        <input name="bonus" type="text" placeholder="보너스 볼"><br>
+        <input type="submit" value="다음">
+    </form>
+</div>
+</body>
+</html>

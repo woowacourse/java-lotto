@@ -36,7 +36,7 @@ public class Lotto {
         return countOfMatch;
     }
 
-    int getLottoNumber(int index) {
+    public int getLottoNumber(int index) {
         return lottoNumbers.get(index).getNumber();
     }
 

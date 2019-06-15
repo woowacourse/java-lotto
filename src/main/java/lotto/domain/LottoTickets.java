@@ -19,6 +19,14 @@ public class LottoTickets {
         return lottoResult;
     }
 
+    public int getLottoTicketsSize() {
+        return lottos.size();
+    }
+
+    public Lotto getLotto(int index) {
+        return lottos.get(index);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
