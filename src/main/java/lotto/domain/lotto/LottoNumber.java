@@ -32,7 +32,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber getNumber(int number) {
-        return Optional.of(creators.get(number))
+        return Optional.ofNullable(creators.get(number))
                 .orElseThrow(IllegalArgumentException::new);
     }
 
