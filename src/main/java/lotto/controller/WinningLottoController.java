@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.controller;
 
 import lotto.utils.ViewUtils;
 import spark.Route;
@@ -6,9 +6,9 @@ import spark.Route;
 import java.util.HashMap;
 import java.util.Map;
 
-import static lotto.service.LottoService.NUMBERS;
+import static lotto.controller.LottoController.NUMBERS;
 
-public class WinningLottoService {
+public class WinningLottoController {
 
     public static Route makeWinningLottoPage = (req, res) -> {
         Map<String, Object> model = new HashMap<>();

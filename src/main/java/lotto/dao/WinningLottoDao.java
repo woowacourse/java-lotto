@@ -3,7 +3,7 @@ package lotto.dao;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
-import lotto.utils.DBUtils;
+import lotto.db.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

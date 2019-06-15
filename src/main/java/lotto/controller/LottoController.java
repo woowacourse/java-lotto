@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.controller;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoService {
+public class LottoController {
     private static final String SELF_LOTTO_COUNT = "selfCount";
     private static final String LOTTOS_FACTORY = "lottosFactory";
     private static final String ERROR_MESSAGE = "message";

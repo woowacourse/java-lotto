@@ -2,9 +2,9 @@ package lotto;
 
 import lotto.dao.RoundDao;
 import lotto.db.DatabaseConnection;
-import lotto.service.LottoResultService;
-import lotto.service.LottoService;
-import lotto.service.WinningLottoService;
+import lotto.controller.LottoResultController;
+import lotto.controller.LottoController;
+import lotto.controller.WinningLottoController;
 import lotto.utils.ViewUtils;
 
 import java.io.UnsupportedEncodingException;
@@ -36,15 +36,15 @@ public class WebUILottoApplication {
                 }
         );
 
-        get("/result", LottoResultService.makeLottoResultByRoundPage);
+        get("/result", LottoResultController.makeLottoResultByRoundPage);
 
-        post("/make/lotto", LottoService.makeSelfLottoPage);
+        post("/make/lotto", LottoController.makeSelfLottoPage);
 
-        post("/lottos", LottoService.makeUserLottosPage);
+        post("/lottos", LottoController.makeUserLottosPage);
 
-        post("/make/winning", WinningLottoService.makeWinningLottoPage);
+        post("/make/winning", WinningLottoController.makeWinningLottoPage);
 
-        post("/result", LottoResultService.makeLottoResultPage);
+        post("/result", LottoResultController.makeLottoResultPage);
 
         exception(Exception.class, (exception, req, res) -> {
             String message = null;

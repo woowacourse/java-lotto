@@ -1,5 +1,6 @@
-package lotto.service;
+package lotto.controller;
 
+import lotto.dao.DaoManager;
 import lotto.dao.LottosDao;
 import lotto.dao.RoundDao;
 import lotto.dao.WinningLottoDao;
@@ -16,9 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.service.LottoService.PRICE;
+import static lotto.controller.LottoController.PRICE;
 
-public class LottoResultService {
+public class LottoResultController {
     private static final String YIELD = "yield";
     private static final String LOTTO_RESULT = "userLottoResult";
     private static final String ROUND = "round";
@@ -39,9 +40,9 @@ public class LottoResultService {
         model.put(LOTTO_RESULT, ResultMessage.getResult(lottoResult, getRanks()));
         int round = req.session().attribute(ROUND);
 
-        DaoService.addRoundInDB(round, price);
-        DaoService.addLottosInDB(round, lottos);
-        DaoService.addWinningLottoInDB(round, winningLotto);
+        DaoManager.addRoundInDB(round, price);
+        DaoManager.addLottosInDB(round, lottos);
+        DaoManager.addWinningLottoInDB(round, winningLotto);
 
         return ViewUtils.render(model, "result.html");
     };
