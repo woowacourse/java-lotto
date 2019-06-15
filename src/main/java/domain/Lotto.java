@@ -4,13 +4,14 @@ import com.google.common.collect.Comparators;
 import exception.LottoDuplicationException;
 import exception.LottoExceedSizeException;
 import exception.LottoNotSortedException;
+import lottoGame.money.Money;
 
 import java.util.*;
 
 /**
  * 로또 한장을 의미하는 객체
  */
-public class Lotto {
+public class Lotto implements Iterable<Number> {
     public static final int NUM_CNT = 6;
     public static final Money PRICE = Money.from(1000);
 
@@ -39,6 +40,11 @@ public class Lotto {
         return set.size() != numbers.size();
     }
 
+    @Override
+    public Iterator<Number> iterator() {
+        return numbers.iterator();
+    }
+
     public int countEqualNumbers(Lotto userLotto) {
         return (int) numbers.stream()
                 .filter(userLotto::contains)
@@ -47,6 +53,10 @@ public class Lotto {
 
     public boolean contains(Number number) {
         return numbers.contains(number);
+    }
+
+    public Number get(int i) {
+        return numbers.get(i);
     }
 
     @Override

@@ -27,6 +27,10 @@ public class Number implements Comparable<Number> {
         return NumberCache.get(number);
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     public static List<Number> generateAllNumbers() {
         return IntStream.rangeClosed(NUMBER_FROM, NUMBER_TO)
                 .mapToObj(i -> Number.from(i))

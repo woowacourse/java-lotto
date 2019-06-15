@@ -31,6 +31,10 @@ public enum Rank {
         return winningMoney;
     }
 
+    public boolean getHasBonus() {
+        return hasBonus;
+    }
+
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         if (countOfMatch < WINNING_MIN_COUNT) {
             return MISS;

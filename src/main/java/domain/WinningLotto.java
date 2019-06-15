@@ -28,6 +28,14 @@ public class WinningLotto {
         return Rank.valueOf(countOfMatch, userLotto.contains(bonusNumber));
     }
 
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public Number getBonusNumber() {
+        return bonusNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
