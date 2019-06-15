@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.config.DBConnector;
 import lotto.config.DataSource;
+import lotto.config.TableCreator;
 import lotto.controller.*;
 import lotto.dao.LottoDao;
 import lotto.dao.RoundDao;
@@ -22,10 +23,12 @@ import static spark.Spark.*;
 
 public class WebUILottoApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         port(8080);
 
-        DBConnector dbConnector = new DBConnector(DataSource.getInstance());
+        DBConnector dbConnector = new DBConnector(DataSource.getTestInstance());
+
+        createTable(dbConnector);
 
         RoundDao roundDao = new RoundDao(dbConnector);
         LottoDao lottoDao = new LottoDao(dbConnector);
@@ -68,6 +71,11 @@ public class WebUILottoApplication {
             }
             res.redirect("/error?message=" + message);
         });
+    }
+
+    private static void createTable(final DBConnector dbConnector) throws Exception {
+        TableCreator tableCreator = new TableCreator(dbConnector);
+        tableCreator.create();
     }
 
     public static String render(Map<String, Object> model, String templatePath) {
