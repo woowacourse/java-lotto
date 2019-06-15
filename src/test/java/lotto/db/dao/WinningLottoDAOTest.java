@@ -1,7 +1,7 @@
 package lotto.db.dao;
 
-import lotto.domain.dto.LottoGameResultDTO;
 import lotto.domain.WinningLotto;
+import lotto.domain.dto.LottoGameResultDTO;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -9,7 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class WinningLottoDAOTest {
     @Test
@@ -39,7 +40,7 @@ class WinningLottoDAOTest {
         List<String> actual = Arrays.asList(WinningLottoDAO.findLatestWinningLotto().getWinningNumbers().split(","));
         Collections.sort(actual);
 
-        assertEquals(Arrays.asList("21","22","23","24","25","26"), actual);
+        assertEquals(Arrays.asList("21", "22", "23", "24", "25", "26"), actual);
     }
 
     @Test

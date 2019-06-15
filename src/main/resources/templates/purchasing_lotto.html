@@ -2,56 +2,58 @@
 <html lang="ko">
 
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	<title>로또</title>
+    <title>로또</title>
 </head>
 
 <body class="bg-dark">
-	<div class="container mt-5">
-		<div class="jumbotron">
-			<h3 class="display-4">Purchase Lottery!</h3>
-			<hr class="my-4">
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h3 class="display-4">Purchase Lottery!</h3>
+        <hr class="my-4">
 
-			<form id="lotto-form" action="/purchase/ticket" method="post" onsubmit="return checkInput();">
-				<div class="container" id="purchasing">
-					<h5>구입 금액</h5>
-					<small id="passwordHelpInline" class="text-muted">
-						최소 1,000원 ~ 최대 150,000원
-					</small>
-					<div class="form-row align-items-center">
-						<div class="col-sm-4 my-1">
-							<input type="text" class="form-control" id="money" name="money" onchange="checkMoney(); countMaxAmountOfCustomLotto();">
-							<small class="text-muted">원</small>
-						</div>
-					</div>
-				</div>
+        <form id="lotto-form" action="/purchase/ticket" method="post" onsubmit="return checkInput();">
+            <div class="container" id="purchasing">
+                <h5>구입 금액</h5>
+                <small id="passwordHelpInline" class="text-muted">
+                    최소 1,000원 ~ 최대 150,000원
+                </small>
+                <div class="form-row align-items-center">
+                    <div class="col-sm-4 my-1">
+                        <input type="text" class="form-control" id="money" name="money"
+                               onchange="checkMoney(); countMaxAmountOfCustomLotto();">
+                        <small class="text-muted">원</small>
+                    </div>
+                </div>
+            </div>
 
-				<hr class="my-3">
+            <hr class="my-3">
 
-				<div class="container">
-					<h5>수동 로또 입력</h5>
-					<div class="mb-2 mr-2 text-right">
-						<button type="button" class="btn btn-success btn-sm btn-round" onclick="addLotto();">+</button>
-					</div>
-					<div class="container" id="lotto-area"></div>
-				</div>
+            <div class="container">
+                <h5>수동 로또 입력</h5>
+                <div class="mb-2 mr-2 text-right">
+                    <button type="button" class="btn btn-success btn-sm btn-round" onclick="addLotto();">+</button>
+                </div>
+                <div class="container" id="lotto-area"></div>
+            </div>
 
-				<div class="col-auto mt-4 text-center">
-					<button type="submit" class="btn btn-outline-secondary">구매하기</button>
-				</div>
-				<input type="hidden" id="max-custom-amount">
-				<input type="hidden" name="lottos" id="lottos">
-			</form>
-		</div>
-	</div>
+            <div class="col-auto mt-4 text-center">
+                <button type="submit" class="btn btn-outline-secondary">구매하기</button>
+            </div>
+            <input type="hidden" id="max-custom-amount">
+            <input type="hidden" name="lottos" id="lottos">
+        </form>
+    </div>
+</div>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 		var count = 0;
 
 		function checkInput() {
@@ -159,11 +161,19 @@
 
 			maxHidden.value = maxAmount;
 		}
-	</script>
 
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body></html>
+</script>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

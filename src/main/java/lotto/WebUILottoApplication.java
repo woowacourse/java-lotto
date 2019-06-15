@@ -6,7 +6,6 @@ import lotto.domain.*;
 import lotto.domain.dto.LottoGameResultDTO;
 import lotto.domain.factory.LottoTicketsFactory;
 import spark.ModelAndView;
-import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.*;

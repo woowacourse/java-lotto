@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.domain.factory.LottoTicketFactory;
 import lotto.exception.DuplicatedInputException;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

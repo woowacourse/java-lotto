@@ -1,15 +1,16 @@
 package lotto.db.dao;
 
-import lotto.domain.dto.LottoDTO;
-import lotto.domain.factory.LottoTicketsFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.dto.LottoDTO;
+import lotto.domain.factory.LottoTicketsFactory;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class LottoDAOTest {
     private LottoDAO lottoDAO = new LottoDAO();
