@@ -4,19 +4,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class TableCreator {
-    private final static Logger LOGGER = LoggerFactory.getLogger(TableCreator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TableCreator.class);
     private static final String SEMICOLON_DELIMITER = ";";
 
     private static boolean flag = false;
+    private DBConnector dbConnector;
 
-    private TableCreator() {
+    public TableCreator(final DBConnector dbConnector) {
+        this.dbConnector = dbConnector;
     }
 
-    public static void create() throws Exception {
+    public void create() throws Exception {
         if (flag) {
             return;
         }
@@ -26,7 +29,6 @@ public class TableCreator {
         FileInputStream fis = new FileInputStream(file);
 
         String[] querys = getFileContent(fis).split(SEMICOLON_DELIMITER);
-        DBConnector dbConnector = new DBConnector(DataSource.getTestInstance());
         for (final String query : querys) {
             Connection connection = dbConnector.getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
@@ -36,9 +38,9 @@ public class TableCreator {
         }
     }
 
-    public static String getFileContent(FileInputStream fis) throws IOException {
+    public String getFileContent(FileInputStream fis) throws IOException {
         StringBuilder sb = new StringBuilder();
-        Reader r = new InputStreamReader(fis, "UTF-8");  //or whatever encoding
+        Reader r = new InputStreamReader(fis, StandardCharsets.UTF_8);  //or whatever encoding
         char[] buf = new char[1024];
         int amt = r.read(buf);
         while (amt > 0) {
