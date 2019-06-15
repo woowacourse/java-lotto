@@ -1,15 +1,11 @@
 package lotto.domain.lottogenerator;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGeneratorTest {
