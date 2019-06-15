@@ -4,6 +4,7 @@ import lotto.dto.WinningLottoDTO;
 import lotto.dto.WinningResultDTO;
 import lotto.service.RoundService;
 import lotto.service.WinningLottoService;
+import lotto.util.StringUtil;
 import spark.Route;
 
 import java.util.HashMap;
@@ -14,12 +15,15 @@ import static lotto.WebUILottoApplication.render;
 
 public class WinningLottoController {
 
+    private static final String COMMA_DELIMITER = ",";
     private static final WinningLottoService winningLottoService = new WinningLottoService();
     private static final RoundService roundService = new RoundService();
 
     public static final Route CREATE_WINNING_LOTTO = (request, response) -> {
+        List<String> winningLottoNumbers =
+                StringUtil.convertToList(request.queryParams("winningLottoNumbers"), COMMA_DELIMITER);
         WinningLottoDTO.Create winningLottoDto = winningLottoService.createWinningLotto(
-                request.queryParams("winningLottoNumbers"),
+                winningLottoNumbers,
                 request.queryParams("bonusNumber"));
         List<Integer> rounds = roundService.findAllRounds();
 

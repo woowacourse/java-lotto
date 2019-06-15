@@ -6,19 +6,16 @@ import lotto.domain.*;
 import lotto.dto.LottosDTO;
 import lotto.dto.WinningLottoDTO;
 import lotto.dto.WinningResultDTO;
-import lotto.util.StringUtil;
 
 import java.util.List;
 
 public class WinningLottoService {
-    private static final String DELIMITER = ",";
 
     private final WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
 
-    public WinningLottoDTO.Create createWinningLotto(String winningLottoNumbers, String bonus) {
-        List<String> winLotto = StringUtil.convertToList(winningLottoNumbers, DELIMITER);
+    public WinningLottoDTO.Create createWinningLotto(List<String> winningLottoNumbers, String bonus) {
         int bonusNumber = Integer.parseInt(bonus);
-        Lotto winningLotto = LottoFactory.createLottoManually(winLotto);
+        Lotto winningLotto = LottoFactory.createLottoManually(winningLottoNumbers);
 
         winningLottoDAO.addWinningLotto(winningLotto, bonusNumber);
 

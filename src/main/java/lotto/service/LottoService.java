@@ -5,20 +5,18 @@ import lotto.dao.RoundDAO;
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.dto.LottosDTO;
-import lotto.util.StringUtil;
 
 import java.util.List;
 
 public class LottoService {
-    private static final String NEXTLINE = "\r\n";
+    private static final int PRICE_PER_LOTTO = 1_000;
 
     private final RoundDAO roundDAO = new RoundDAO();
     private final LottoDAO lottoDAO = new LottoDAO();
 
-    public LottosDTO.Create createLottos(String manualLottoNumbers) {
-        List<String> manualLottos = StringUtil.convertToList(manualLottoNumbers, NEXTLINE);
-        int countOfPurchase = roundDAO.findAmountByRound(roundDAO.findMaxRound()) / 1000;
-        List<Lotto> lottos = LottoFactory.createLottos(manualLottos, countOfPurchase);
+    public LottosDTO.Create createLottos(List<String> manualLottoNumbers) {
+        int countOfPurchase = roundDAO.findAmountByRound(roundDAO.findMaxRound()) / PRICE_PER_LOTTO;
+        List<Lotto> lottos = LottoFactory.createLottos(manualLottoNumbers, countOfPurchase);
 
         lottoDAO.addLottos(lottos);
 
