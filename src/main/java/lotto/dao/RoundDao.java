@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.config.DBUtils;
+import lotto.config.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,62 +10,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoundDao {
+    private DBConnector dbConnector;
 
-    public int add() {
-        Connection conn = DBUtils.getConnection();
-        PreparedStatement ps = null;
-        int result = 0;
+    public RoundDao(final DBConnector dbConnector) {
+        this.dbConnector = dbConnector;
+    }
 
-        try {
-            String sql = "INSERT INTO round () VALUES ()";
-            ps = conn.prepareStatement(sql);
-            result = ps.executeUpdate();
+    public void add() {
+        String sql = "INSERT INTO round () VALUES ()";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            DBUtils.close(conn, ps);
         }
-        return result;
     }
 
     public int getLatest() {
-        Connection conn = DBUtils.getConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        String sql = "SELECT * FROM round ORDER BY id DESC LIMIT 1";
 
-        try {
-            String sql = "SELECT * FROM round ORDER BY id DESC LIMIT 1";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
             if (rs.next()) {
                 return rs.getInt("id");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            DBUtils.close(conn, ps, rs);
         }
         return -1;
     }
 
     public List<Integer> findAll() {
-        Connection conn = DBUtils.getConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        List<Integer> rounds = new ArrayList<>();
+        String sql = "SELECT * FROM round";
 
-        try {
-            String sql = "SELECT * FROM round";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
+        List<Integer> rounds = new ArrayList<>();
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 rounds.add(rs.getInt("id"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            DBUtils.close(conn, ps, rs);
         }
+
         return rounds;
     }
 }
