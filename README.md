@@ -1,7 +1,7 @@
 # java-lotto
 로또 미션 진행을 위한 저장소
 
-## TODO
+## Done
 * 일반로또 입력
 	1. Lotto 테이블에 데이터(type) 삽입
 	2. LottoNumber 테이블에 한 로또에 대한 번호 6개 삽입
@@ -10,8 +10,6 @@
   1. WinngLotto 테이블에 데이터(type) 삽입
 	2. LottoNumber 테이블에 한 로또에 대한 번호 6개 삽입
 	3. 생성된 Lotto의 id 받아서 Result에 넣기
-
-## Done
 * 사용자가 게임을 시작했을 때,
   * Lotto 테이블: type, LottoNumber 테이블: number에 값을 넣고
   * LottoGame 테이블: week, money에 값을 넣고
