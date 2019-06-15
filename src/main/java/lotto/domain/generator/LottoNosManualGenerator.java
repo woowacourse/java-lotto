@@ -16,7 +16,7 @@ public class LottoNosManualGenerator implements LottoNosGenerator {
     }
 
     private void validateEmpty(final String input) {
-        if(input.isEmpty()){
+        if (input.isEmpty()) {
             throw new IllegalArgumentException("로또 번호를 입력해주세요");
         }
     }

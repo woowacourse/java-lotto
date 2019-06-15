@@ -1,5 +1,6 @@
 package lotto.dao;
 
+import lotto.config.DBUtils;
 import lotto.domain.Rank;
 import lotto.domain.WinPrize;
 

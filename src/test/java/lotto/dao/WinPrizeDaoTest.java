@@ -1,5 +1,6 @@
 package lotto.dao;
 
+import lotto.config.TableCreator;
 import lotto.domain.Rank;
 import lotto.domain.WinPrize;
 import org.junit.jupiter.api.BeforeAll;

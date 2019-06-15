@@ -1,6 +1,7 @@
 package lotto.dao;
 
 
+import lotto.config.DBUtils;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
 import lotto.domain.WinningLotto;

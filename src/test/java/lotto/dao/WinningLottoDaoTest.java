@@ -1,5 +1,6 @@
 package lotto.dao;
 
+import lotto.config.TableCreator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
 import lotto.domain.WinningLotto;

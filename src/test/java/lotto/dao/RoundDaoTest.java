@@ -1,5 +1,6 @@
 package lotto.dao;
 
+import lotto.config.TableCreator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
