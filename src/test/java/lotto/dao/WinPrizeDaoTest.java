@@ -33,7 +33,7 @@ class WinPrizeDaoTest {
     }
 
     @Test
-    void findByRoundTest() {
+    void saveAndFindTest() {
         winPrizeDao.save(winPrize, round);
 
         WinPrize expected = winPrizeDao.findAllByRound(round);

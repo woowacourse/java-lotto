@@ -28,6 +28,8 @@ public class WinPrizeDao {
             ps.setInt(5, winPrize.getWinCount(Rank.FOURTH));
             ps.setInt(6, winPrize.getWinCount(Rank.FIFTH));
             ps.setInt(7, winPrize.getWinCount(Rank.MISS));
+
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,8 +48,9 @@ public class WinPrizeDao {
                 winPrize.put(Rank.FOURTH, rs.getInt("fourth"));
                 winPrize.put(Rank.FIFTH, rs.getInt("fifth"));
                 winPrize.put(Rank.MISS, rs.getInt("miss"));
+
+                return winPrize;
             }
-            return winPrize;
 
         } catch (SQLException e) {
             e.printStackTrace();
