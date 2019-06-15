@@ -1,43 +1,29 @@
 package lotto.domain;
 
 import lotto.domain.exception.ExceedBoughtLottosAboutMoneyException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static lotto.domain.LottoNumber.getLottoNumber;
+import static lotto.domain.generator.LottoNumbersGenerator.generateLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BoughtLottosTest {
 
-    BoughtLottos boughtLottos;
-
-    @BeforeEach
-    void setUp() {
-        boughtLottos = new BoughtLottos(Arrays.asList(
-                new Lotto(Arrays.asList(getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),
-                        getLottoNumber(4), getLottoNumber(5), getLottoNumber(6))),
-                new Lotto(Arrays.asList(getLottoNumber(5), getLottoNumber(6), getLottoNumber(10),
-                        getLottoNumber(14), getLottoNumber(25), getLottoNumber(42))),
-                new Lotto(Arrays.asList(getLottoNumber(11), getLottoNumber(23), getLottoNumber(25),
-                        getLottoNumber(29), getLottoNumber(33), getLottoNumber(15)))
-        ), 0);
-    }
+    public static BoughtLottos boughtLottos = new BoughtLottos(Arrays.asList(
+            new Lotto(generateLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))),
+            new Lotto(generateLottoNumbers(Arrays.asList(3, 4, 5, 6, 7, 8)))
+    ), 2);
 
     @Test
     void 생성() {
         assertThat(boughtLottos).isEqualTo(
                 new BoughtLottos(Arrays.asList(
-                        new Lotto(Arrays.asList(getLottoNumber(1), getLottoNumber(2), getLottoNumber(3),
-                                getLottoNumber(4), getLottoNumber(5), getLottoNumber(6))),
-                        new Lotto(Arrays.asList(getLottoNumber(5), getLottoNumber(6), getLottoNumber(10),
-                                getLottoNumber(14), getLottoNumber(25), getLottoNumber(42))),
-                        new Lotto(Arrays.asList(getLottoNumber(11), getLottoNumber(23), getLottoNumber(25),
-                                getLottoNumber(29), getLottoNumber(33), getLottoNumber(15)))
-                ), 0));
+                        new Lotto(generateLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                        new Lotto(generateLottoNumbers(Arrays.asList(3, 4, 5, 6, 7, 8)))
+                ), 2));
     }
 
     @Test
