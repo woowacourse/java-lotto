@@ -11,6 +11,8 @@ import java.util.List;
 import com.woowacourse.lotto.domain.LottoNumber;
 import com.woowacourse.lotto.domain.WinningLotto;
 
+import static com.woowacourse.lotto.domain.LottoNumber.NUMBER_OF_LOTTO;
+
 public class WinningLottoDAO {
 	private final Connection connection;
 
@@ -19,7 +21,8 @@ public class WinningLottoDAO {
 	}
 
 	public WinningLotto findWinningLottoByRound(int round) throws SQLException {
-		String query = "select * from winning_lotto where round = ?";
+		String query = "select first_number, second_number, third_number, fourth_number," +
+				"fifth_number, sixth_number, bonus_ball from winning_lotto where round = ?";
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		pstmt.setInt(1, round);
 		ResultSet rs = pstmt.executeQuery();
@@ -27,7 +30,7 @@ public class WinningLottoDAO {
 			return null;
 		}
 		List<String> winningLotto = new LinkedList<>();
-		for (int i = 2; i <= 7; ++i) {
+		for (int i = 1; i <= NUMBER_OF_LOTTO; ++i) {
 			winningLotto.add(rs.getString(i));
 		}
 		return new WinningLotto(winningLotto, rs.getInt("bonus_ball"));

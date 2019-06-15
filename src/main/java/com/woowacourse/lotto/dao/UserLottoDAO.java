@@ -10,6 +10,8 @@ import java.util.List;
 import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.LottoNumber;
 
+import static com.woowacourse.lotto.domain.LottoNumber.NUMBER_OF_LOTTO;
+
 
 public class UserLottoDAO {
 	private final Connection connection;
@@ -33,7 +35,8 @@ public class UserLottoDAO {
 	}
 
 	public Lotto findUserLottoById(int userLottoId) throws SQLException {
-		String query = "select * from user_lotto where id = ?";
+		String query = "select first_number, second_number, third_number, fourth_number," +
+				"fifth_number, sixth_number from user_lotto where id = ?";
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		pstmt.setInt(1, userLottoId);
 		ResultSet rs = pstmt.executeQuery();
@@ -41,7 +44,7 @@ public class UserLottoDAO {
 			return null;
 		}
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
-		for (int i = 2; i <= 7; ++i) {
+		for (int i = 1; i <= NUMBER_OF_LOTTO; ++i) {
 			lottoNumbers.add(LottoNumber.getLottoNumber(rs.getInt(i)));
 		}
 		return new Lotto(lottoNumbers);
