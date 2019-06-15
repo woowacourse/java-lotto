@@ -6,6 +6,7 @@ import lotto.db.dto.LottoGameResultDTO;
 import lotto.domain.Factory.LottoTicketsFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -64,6 +65,19 @@ public class WebUILottoApplication {
                 LottoDAO.addLottoTicket(lottoTickets);
 
                 return render(model, "purchased_tickets.html");
+            });
+        });
+
+        path("/win", () -> {
+            post("/input", (req, res) -> {
+                StringBuilder lottoNumbers = new StringBuilder();
+                for (int i = 1; i <= 6; i++) {
+                    lottoNumbers.append(req.queryParams("num" + i)).append(",");
+                }
+                WinningLottoDAO.addWinningLottoTicket(WinningLotto.of(lottoNumbers.toString(), Integer.parseInt(req.queryParams("bonusBall"))));
+
+                res.redirect("/");
+                return null;
             });
         });
 
