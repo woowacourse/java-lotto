@@ -26,7 +26,7 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public Object addLottos(Request req, Response res) throws SQLException {
+    public Object addLottos(Request req, Response res) {
         int round = roundService.increaseOne();
         Money money = Money.from(req.queryParams("money"));
         List<String> manualLottos = convertToList(req.queryParams("manualLottos"));

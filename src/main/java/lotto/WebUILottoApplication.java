@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.config.DBConnector;
 import lotto.config.DataSource;
+import lotto.config.TableCreator;
 import lotto.controller.*;
 import lotto.dao.LottoDao;
 import lotto.dao.RoundDao;

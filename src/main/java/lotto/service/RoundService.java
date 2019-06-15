@@ -10,6 +10,7 @@ public class RoundService {
     }
 
     public int increaseOne() {
+        roundDao.add();
         return getLatestRound();
     }
 
