@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS payment_info(
 
 CREATE TABLE IF NOT EXISTS lotto_ticket(
 	id INT(10) AUTO_INCREMENT,
-    lotto VARCHAR(20) NOT NULL,
+    lotto VARCHAR(30) NOT NULL,
     is_auto BOOLEAN NOT NULL,
     round INT(10) NOT NULL,
     PRIMARY KEY (id),
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS lotto_ticket(
 
 CREATE TABLE IF NOT EXISTS winning_lotto(
 	round INT(10),
-    winning_lotto VARCHAR(20) NOT NULL,
+    winning_lotto VARCHAR(30) NOT NULL,
     bonus_ball VARCHAR(2) NOT NULL,    
     PRIMARY KEY (round),
     FOREIGN KEY (round) REFERENCES payment_info (round)
@@ -91,6 +91,13 @@ INNER JOIN payment_info ON payment_info.user_id = user.id
 INNER JOIN lotto_result ON lotto_result.round = payment_info.round
 LIMIT 10;
 
+-- round로 Lotto result 조회
+SELECT payment_info.round, name, first, second, third, fourth, fifth, miss, payment
+FROM user
+INNER JOIN payment_info ON payment_info.user_id = user.id
+INNER JOIN lotto_result ON lotto_result.round = payment_info.round
+WHERE lotto_result.round = 3;
+
 -- 유저 등록 (없을 경우)
 INSERT INTO user (name) 
   SELECT 'pobi' FROM DUAL
@@ -101,3 +108,31 @@ WHERE NOT EXISTS
 INSERT INTO payment_info(payment, user_id, manual, auto) VALUES(5000, 1, 1, (SELECT id
 FROM user
 WHERE name = '김고래'));
+
+-- 로또 입력
+INSERT INTO lotto_ticket(lotto, is_auto, round) VALUES(?, ?, ?);
+
+SELECT *
+FROM payment_info
+WHERE round = (SELECT last_insert_id());
+
+
+
+SELECT * FROM user;
+select * from payment_info;
+select * from lotto_ticket;
+SELECT * FROM lotto_result;
+select * from winning_lotto;
+
+select * from lotto_ticket
+WHERE round = 1;
+
+SELECT winning_lotto, bonus_ball
+FROM winning_lotto
+WHERE round = 10;
+
+SELECT name, SUM(payment) as sum
+FROM user
+INNER JOIN payment_info ON payment_info.user_id = user.id
+GROUP BY name
+ORDER BY sum DESC;
