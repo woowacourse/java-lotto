@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DataConnection {
+public class DatabaseConnection {
     private static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String SERVER = "localhost";
     private static final String DATABASE = "lotto";
