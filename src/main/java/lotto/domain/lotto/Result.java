@@ -28,4 +28,8 @@ public class Result {
                 .mapToLong(rank -> rank.calculateWinningMoney(lottoScore.get(rank)))
                 .sum();
     }
+
+    public Map<Rank, Long> getLottoScore() {
+        return lottoScore;
+    }
 }

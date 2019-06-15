@@ -109,4 +109,8 @@ public class ResultDTO {
     public void setEarningRate(double earningRate) {
         this.earningRate = earningRate;
     }
+
+    public long get(Rank rank) {
+        return lottoScore.get(rank);
+    }
 }

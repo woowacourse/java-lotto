@@ -2,7 +2,10 @@ package lotto.domain.dto;
 
 public class PaymentInfoDTO {
     private int payment;
+    private int manual;
+    private int auto;
     private int userId;
+    private String name;
 
     public int getPayment() {
         return payment;
@@ -10,6 +13,22 @@ public class PaymentInfoDTO {
 
     public void setPayment(int payment) {
         this.payment = payment;
+    }
+
+    public int getManual() {
+        return manual;
+    }
+
+    public void setManual(int manual) {
+        this.manual = manual;
+    }
+
+    public int getAuto() {
+        return auto;
+    }
+
+    public void setAuto(int auto) {
+        this.auto = auto;
     }
 
     public int getUserId() {
@@ -20,8 +39,11 @@ public class PaymentInfoDTO {
         this.userId = userId;
     }
 
-    public PaymentInfoDTO(int payment, int userId) {
-        this.payment = payment;
-        this.userId = userId;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

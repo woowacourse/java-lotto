@@ -22,6 +22,10 @@ public class CountOfLotto {
         this.countOfRandomLotto = totalLotto - countOfManualLotto;
     }
 
+    public int getTotalCountOfLotto() {
+        return countOfManualLotto + countOfRandomLotto;
+    }
+
     public int getCountOfManualLotto() {
         return countOfManualLotto;
     }
