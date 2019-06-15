@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.config.DBConnector;
+import lotto.config.DataSource;
 import lotto.controller.*;
 import lotto.dao.LottoDao;
 import lotto.dao.RoundDao;
@@ -23,8 +25,10 @@ public class WebUILottoApplication {
     public static void main(String[] args) {
         port(8080);
 
+        DBConnector dbConnector = new DBConnector(DataSource.getInstance());
+
         RoundDao roundDao = new RoundDao();
-        LottoDao lottoDao = new LottoDao();
+        LottoDao lottoDao = new LottoDao(dbConnector);
         WinPrizeDao winPrizeDao = new WinPrizeDao();
         WinningLottoDao winningLottoDao = new WinningLottoDao();
 
