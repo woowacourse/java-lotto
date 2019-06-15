@@ -14,16 +14,15 @@ import com.woowacourse.lotto.domain.LottoResult;
 import com.woowacourse.lotto.domain.WinningLotto;
 import spark.Request;
 
-import static com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text.NEW_LINE;
-import static com.woowacourse.lotto.view.OutputView.PRINT_EARNINGS_RATE;
-import static lotto.WebUILottoApplication.printLottoResult;
+import static com.woowacourse.lotto.view.OutputView.*;
 import static lotto.WebUILottoApplication.render;
 
 public class LottoResultService {
+	private static final String NEW_LINE = "<br>";
+	private static final String PRINT_SUM = "총 당첨금액은 %d원" + " 입니다.";
 	private static Map<String, Object> model;
 	private static LottoResultDAO lottoResultDAO = new LottoResultDAO(new DBConnector().getConnection());
 	private static WinningLottoDAO winningLottoDAO = new WinningLottoDAO(new DBConnector().getConnection());
-	private static final String PRINT_SUM = "총 당첨금액은 %d원" + " 입니다.";
 
 	public String matchLotto(Request request) {
 		model = new HashMap<>();
@@ -88,6 +87,20 @@ public class LottoResultService {
 		StringBuilder stringBuilder = new StringBuilder();
 		printLottoResult(ranks, stringBuilder);
 		return stringBuilder.toString();
+	}
+
+	private static void printLottoResult(Map<LottoRank, Integer> ranks, StringBuilder stringBuilder) {
+		for (LottoRank lottoRank : ranks.keySet()) {
+			printRankResult(ranks, stringBuilder, lottoRank);
+		}
+	}
+
+	private static void printRankResult(Map<LottoRank, Integer> ranks, StringBuilder stringBuilder, LottoRank lottoRank) {
+		if (lottoRank == LottoRank.SECOND) {
+			stringBuilder.append(String.format(PRINT_SECOND_OF_LOTTO + NEW_LINE, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
+			return;
+		}
+		stringBuilder.append(String.format(PRINT_RESULT_OF_LOTTO + NEW_LINE, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
 	}
 
 	private static List<Integer> getLottoRound() throws SQLException {
