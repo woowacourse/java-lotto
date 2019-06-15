@@ -12,4 +12,10 @@ public class Columns {
     public static final String FIFTH_COLUMN = "fifth";
     public static final String MISS_COLUMN = "miss";
 
+    public static final String WINNING_LOTTO_COLUMN = "winning_lotto";
+    public static final String BONUS_BALL = "bonus_ball";
+
+    public static final String LOTTO_COLUMN = "lotto";
+    public static final String IS_AUTO_COLUMN = "is_auto";
+
 }
