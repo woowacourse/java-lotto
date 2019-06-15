@@ -27,19 +27,19 @@
         {{# numbers }}
         {{.}}
         {{/ numbers }}
-        보너스볼: {{ bonusBall }}
+        보너스볼: {{ bonusNumber }}
         {{/ winningNumber }}
     </div>
     <div>
         <h1>당첨 결과</h1>
         {{# result }}
-        {{# prize }}
+        {{# prizeResult }}
         <p>1등 담첨 횟수 : {{ first }}</p>
         <p>2등 담첨 횟수 : {{ second }}</p>
         <p>3등 담첨 횟수 : {{ third }}</p>
         <p>4등 담첨 횟수 : {{ fourth }}</p>
         <p>5등 담첨 횟수 : {{ fifth }}</p>
-        {{/ prize }}
+        {{/ prizeResult }}
         <p> 총 당첨 금액: {{ winningMoney }}원</p>
         {{/ result }}
     </div>
