@@ -11,9 +11,7 @@ import com.woowacourse.lotto.domain.Lottos;
 import com.woowacourse.lotto.domain.factory.LottosFactory;
 import spark.Request;
 
-import static lotto.WebUILottoApplication.render;
-
-public class UserLottoService {
+public class UserLottoService implements Service {
 	private static final String WHITE_SPACE = "\\r\\n";
 	private static Map<String, Object> model;
 	private static UserLottoDAO userLottoDAO = new UserLottoDAO(new DBConnector().getConnection());

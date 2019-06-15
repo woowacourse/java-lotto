@@ -20,7 +20,7 @@ public class WebUILottoApplication {
 
 		get("/", ((request, response) -> {
 			Map<String, Object> model = new HashMap<>();
-			return render(model, "/index.html");
+			return new HandlebarsTemplateEngine().render(new ModelAndView(model, "/index.html"));
 		}));
 
 		post("/inputCountOfLotto", ((request, response) -> userLottoController.inputCountOfLotto(request, response)));
@@ -34,9 +34,5 @@ public class WebUILottoApplication {
 		get("/lottoResult", (request, response) -> lottoResultController.getLottoResult(request, response));
 
 		post("/searchLottoResult", ((request, response) -> lottoResultController.searchLottoResult(request, response)));
-	}
-
-	public static String render(Map<String, Object> model, String templatePath) {
-		return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
 	}
 }

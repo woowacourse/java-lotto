@@ -15,9 +15,8 @@ import com.woowacourse.lotto.domain.WinningLotto;
 import spark.Request;
 
 import static com.woowacourse.lotto.view.OutputView.*;
-import static lotto.WebUILottoApplication.render;
 
-public class LottoResultService {
+public class LottoResultService implements Service {
 	private static final String NEW_LINE = "<br>";
 	private static final String PRINT_SUM = "총 당첨금액은 %d원" + " 입니다.";
 	private static Map<String, Object> model;

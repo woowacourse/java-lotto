@@ -11,13 +11,11 @@ import com.woowacourse.lotto.domain.WinningLotto;
 import com.woowacourse.lotto.utils.StringSeparator;
 import spark.Request;
 
-import static lotto.WebUILottoApplication.render;
-
-public class WinningLottoService {
+public class WinningLottoService implements Service {
 	private static WinningLottoDAO winningLottoDAO = new WinningLottoDAO(new DBConnector().getConnection());
 	private static Map<String, Object> model;
 
-	public static String inputWinningLotto(Request request) {
+	public String inputWinningLotto(Request request) {
 		model = new HashMap<>();
 		try {
 			int bonusBall = Integer.parseInt(request.queryParams("bonusBall"));
