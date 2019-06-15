@@ -1,0 +1,64 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: "Source Han Sans KR";
+    font-weight: 500;
+    src: local("※"), url(../font/Source_Han_Sans_KR_500.woff) format("woff")
+}
+
+@font-face {
+    font-family: "Source Han Sans KR";
+    font-weight: 600;
+    src: local("※"), url(../font/Source_Han_Sans_KR_600.woff) format("woff")
+}
+
+@font-face {
+    font-family: "Source Han Sans KR";
+    font-weight: 700;
+    src: local("※"), url(../font/Source_Han_Sans_KR_700.woff) format("woff")
+}
+
+body {
+	font-family: 'Montserrat', "Source Han Sans KR";
+	font-size: 1em;
+	font-weight: 600;
+	line-height: 1.6;
+}
+
+h1 {
+	font-size: 3.5em;
+	margin-bottom: 30px;
+}
+
+p {
+	font-size: 1.5em;
+	margin-bottom: 30px;
+}
+
+#container {
+	width: 70%;
+	max-width: 900px;
+	margin: 20px auto;
+}
+
+input, textarea {
+	font-family: 'Montserrat', "Source Han Sans KR";
+	font-size: 2.5em;
+	font-weight: 500;
+	width: 100%;
+	border: 0;
+	border-radius: 20px;
+	background-color: #e1e1e1;
+	padding: 10px;
+	margin: 10px 0;
+	text-align: center;
+}
+
+input[type=submit] {
+	font-size: 1em;
+	color: #fff;
+	width: 100px;
+	height: 50px;
+	border-radius: 10px;
+	background-color: red;
+}
