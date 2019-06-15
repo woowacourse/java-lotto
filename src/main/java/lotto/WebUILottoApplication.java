@@ -37,6 +37,15 @@ public class WebUILottoApplication {
 
         get("/selectResult.html", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            LottoDAO lottoDAO = new LottoDAO();
+
+            List<Lotto> lottos = lottoDAO.selectByRound(Integer.parseInt(req.queryParams("inputRound")));
+            List<LottoDTO> lottoDTOs = lottos.stream()
+                    .map(LottoDTO::new)
+                    .collect(Collectors.toList());
+
+            model.put("lottos", lottoDTOs);
+
             return render(model, "selectResult.html");
         });
 
@@ -96,12 +105,14 @@ public class WebUILottoApplication {
 
             try {
                 int round = winningLottoDAO.addWinningLotto(winningLotto);
-                lottoDAO.addLotto(lottoTickets.getLottoTickets().get(0), round);
+                for (Lotto lotto : lottoTickets.getLottoTickets()) {
+                    lottoDAO.addLotto(lotto, round);
+                }
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
 
-            List<LottoDto> lottoDTOs = createLottoDTOs(lottoTickets);
+            List<LottoDTO> lottoDTOs = createLottoDTOs(lottoTickets);
             model.put("lottos", lottoDTOs);
 
             model.put("rankFirst", Rank.FIRST);
@@ -124,12 +135,10 @@ public class WebUILottoApplication {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 
-    private static List<LottoDto> createLottoDTOs(LottoTickets lottoTickets) {
-        List<LottoDto> lottoDTOs = new ArrayList<>();
+    private static List<LottoDTO> createLottoDTOs(LottoTickets lottoTickets) {
+        List<LottoDTO> lottoDTOs = new ArrayList<>();
         for (Lotto lotto : lottoTickets.getLottoTickets()) {
-            LottoDto lottoDto = new LottoDto();
-            lottoDto.setLotto(lotto.toString());
-            lottoDTOs.add(lottoDto);
+            lottoDTOs.add(new LottoDTO(lotto));
         }
 
         return lottoDTOs;
@@ -143,6 +152,7 @@ public class WebUILottoApplication {
 
     private static List<Integer> splitInputLottoNumbers(String input) {
         return Arrays.stream(input.split(","))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
