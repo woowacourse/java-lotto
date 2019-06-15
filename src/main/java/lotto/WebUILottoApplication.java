@@ -69,7 +69,7 @@ public class WebUILottoApplication {
                 model.put("winningNumbers", winningLotto.getWinningNumbers().split(","));
                 model.put("bonusBall", winningLotto.getBonusBall());
                 model.put("results", getEachRank(winStatistics));
-                model.put("incoming_rate", String.format("%.2f", winStatistics.calculateProfitRate(lottoTickets.size() * 1000)));
+                model.put("incoming_rate", String.format("%.2f", lottoTickets.size() > 0 ? winStatistics.calculateProfitRate(lottoTickets.size() * 1000) : 0));
 
                 return render(model, "lotto_result.html");
             });

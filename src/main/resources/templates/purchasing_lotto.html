@@ -18,7 +18,7 @@
 			<h3 class="display-4">Purchase Lottery!</h3>
 			<hr class="my-4">
 
-			<form id="lotto-form" action="/purchase/ticket" method="post" onsubmit="return checkMoney();">
+			<form id="lotto-form" action="/purchase/ticket" method="post" onsubmit="return checkInput();">
 				<div class="container" id="purchasing">
 					<h5>구입 금액</h5>
 					<small id="passwordHelpInline" class="text-muted">
@@ -46,19 +46,17 @@
 					<button type="submit" class="btn btn-outline-secondary">구매하기</button>
 				</div>
 				<input type="hidden" id="max-custom-amount">
-				<input type="hidden" name="money" value="5000">
-				<input type="hidden" name="lottos" value="1,2,3,4,5,6-11,12,13,14,15,16">
+				<input type="hidden" name="lottos" id="lottos">
 			</form>
 		</div>
 	</div>
 
 	<script type="text/javascript">
 		var count = 0;
-		var numbers = new Array;
-		
+
 		function checkInput() {
-			checkMoney();
-			return false;
+			addCustomLottos();
+			return checkMoney();
 		}
 
 		function checkMoney() {
@@ -72,6 +70,26 @@
 			}
 
 			return true;
+		}
+
+		function addCustomLottos() {
+			var lottos = document.getElementById('lottos');
+
+			var checkedNumber = "";
+			for (var i = 0; i < count; i++) {
+				var number_chk = document.getElementsByName("lotto-number-" + i);
+
+				for (var j = 0; j < number_chk.length; j++) {
+					var classNames = number_chk[j].className.split(" ");
+					if (classNames[classNames.length - 1] == 'active') {
+						checkedNumber += (j + 1) + ",";
+						console.log(checkedNumber);
+					}
+				}
+				checkedNumber += "-";
+			}
+
+			lottos.value = checkedNumber;
 		}
 
 		function addLotto() {
@@ -111,9 +129,11 @@
 			var str = '';
 			var id = count;
 			for (var i = 1; i <= 45; i++) {
-				str += '<label class="btn btn-outline-dark mb-1 mr-1" onclick="selectNumber(' + id + ', ' + i + ');">' +
-					'<input type="checkbox" checked autocomplete="off"> ' +
-					i + '</label>';
+				str += '<label class="btn btn-outline-dark mb-1 mr-1" name="lotto-number-' + count + '">';
+				str += '<input type="checkbox" autocomplete="off">';
+				str += i + '</label>'
+				/*str += '<button type="button" class="btn btn-outline-dark mb-1 mr-1" data-toggle="button" aria-pressed="false" autocomplete="off" name="lotto-number-' + count + '">' +
+					i + '</button>';*/
 			}
 
 			lottoNumbersDiv.innerHTML = str;
@@ -121,8 +141,6 @@
 			addedDiv.appendChild(deletingDiv);
 			deletingDiv.appendChild(deletingBtn);
 			div.appendChild(addedDiv);
-
-			addHidden();
 
 			count++;
 		}
@@ -133,29 +151,6 @@
 
 			lottoDiv.removeChild(lotto);
 			count--;
-			deleteHidden(lottoId);
-		}
-		
-		function addHidden() {
-			var form = document.getElementById('lotto-form');
-			var hidden = document.createElement('input');
-			hidden.type = 'hidden';
-			hidden.id = 'lotto-number-' + count;
-
-			form.appendChild(hidden);
-		}
-
-		function deleteHidden(hiddenId) {
-			var form = document.getElementById('lotto-form');
-			var hidden = document.getElementById('lotto-number-' + hiddenId);
-			
-			form.removeChild(hidden);
-		}
-
-		function selectNumber(lottoId, number) {
-			var hidden = document.getElementById('lotto-number-' + lottoId);
-			console.log(hidden);
-			numbers.push(number);
 		}
 
 		function countMaxAmountOfCustomLotto() {
@@ -164,7 +159,6 @@
 
 			maxHidden.value = maxAmount;
 		}
-
 	</script>
 
 	<!-- Optional JavaScript -->
@@ -172,6 +166,4 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-
-</html>
+</body></html>

@@ -15,17 +15,18 @@
 	<div class="container mt-5">
 		<div class="jumbotron">
 			<h3 class="display-4">당첨내역 확인</h3>
+
 			<hr class="my-4">
 
 			<div class="container">
 				<div class="mb-2">
-					<p class="h5">{{week}}주차 당첨 로또 번호</p>
+					<h4>{{week}}주차 당첨 로또 번호</h4>
 					<small class="text-muted">
 						로또 번호
 					</small>
 					<div class="btn-group-toggle" data-toggle="buttons">
 						{{#winningNumbers}}
-						<button type="button" class="btn btn-secondary mb-1" disabled>{{this}}</button>
+							<button type="button" class="btn btn-secondary mb-1" disabled>{{this}}</button>
 						{{/winningNumbers}}
 					</div>
 					<small class="text-muted">
@@ -36,13 +37,16 @@
 					</div>
 				</div>
 
+				<hr class="my-3">
+
+				<h4>당첨 통계</h4>
 				{{#results}}
-				<div class="mb-2">
-					<p>{{this}}</p>
-				</div>
+					<div class="mb-2">
+						<p>{{this}}</p>
+					</div>
 				{{/results}}
 				<div class="mb-2">
-					<p>총 수익률은 {{incoming_rate}}%입니다.</p>
+					<p class="h5">총 수익률은 {{incoming_rate}}%입니다.</p>
 				</div>
 			</div>
 		</div>
