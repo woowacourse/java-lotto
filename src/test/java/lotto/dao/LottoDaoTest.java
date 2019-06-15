@@ -17,7 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoDaoTest {
     DBConnector dbConnector = new DBConnector(DataSource.getTestInstance());
     LottoDao lottoDao = new LottoDao(dbConnector);
+    List<Lotto> lottos = new ArrayList<>();
     int round = 0;
+
 
     @BeforeAll
     static void createTable() {
@@ -26,7 +28,6 @@ class LottoDaoTest {
 
     @BeforeEach
     void setUp() {
-        List<Lotto> lottos = new ArrayList<>();
         lottos.add(Lotto.of(new LottoNosManualGenerator("1,2,3,4,5,6").generate()));
         lottos.add(Lotto.of(new LottoNosManualGenerator("1,2,3,4,12,19").generate()));
         lottoDao.add(lottos, round);
@@ -35,7 +36,7 @@ class LottoDaoTest {
     @Test
     void findAllByRoundTest() {
         List<Lotto> expected = lottoDao.findAllByRound(round);
-        assertThat(0).isNotEqualTo(expected.size());
+        assertThat(lottos.size()).isEqualTo(expected.size());
 
     }
 }
