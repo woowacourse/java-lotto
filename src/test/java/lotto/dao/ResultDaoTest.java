@@ -28,14 +28,14 @@ public class ResultDaoTest {
         initPrize.put("fourth", 0);
         initPrize.put("fifth", 0);
         initPrize.put("none", 0);
-        initResultDto.setPrize(initPrize);
+        initResultDto.setPrizeResult(initPrize);
         initResultDto.setWinningMoney(2_003_000_000);
     }
 
     @Test
     void 첫번째_라운드의_결과_일치_여부_테스트() throws SQLException {
         ResultDto resultDto = resultDao.findResultByRound(TEST_ROUND);
-        Map<String, Integer> prize = resultDto.getPrize();
+        Map<String, Integer> prize = resultDto.getPrizeResult();
         assertThat(prize.get("first")).isEqualTo(1);
         assertThat(prize.get("second")).isEqualTo(0);
         assertThat(prize.get("third")).isEqualTo(1);

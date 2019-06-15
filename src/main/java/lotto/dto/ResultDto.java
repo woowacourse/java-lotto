@@ -1,17 +1,29 @@
 package lotto.dto;
 
+import lotto.domain.Prize;
+import lotto.domain.Result;
+
+import java.util.HashMap;
 import java.util.Map;
 
 public class ResultDto {
-    private Map<String, Integer> prize;
+    private Map<String, Integer> prizeResult;
     private int winningMoney;
 
-    public Map<String, Integer> getPrize() {
-        return prize;
+    public ResultDto() {
     }
 
-    public void setPrize(final Map<String, Integer> prize) {
-        this.prize = prize;
+    public ResultDto(final Map<String, Integer> prizeResult, final int winningMoney) {
+        this.prizeResult = prizeResult;
+        this.winningMoney = winningMoney;
+    }
+
+    public Map<String, Integer> getPrizeResult() {
+        return prizeResult;
+    }
+
+    public void setPrizeResult(final Map<String, Integer> prizeResult) {
+        this.prizeResult = prizeResult;
     }
 
     public int getWinningMoney() {
@@ -20,5 +32,15 @@ public class ResultDto {
 
     public void setWinningMoney(final int winningMoney) {
         this.winningMoney = winningMoney;
+    }
+
+    public Result toEntity() {
+        Map<Prize, Integer> wrappedPrizeResult = new HashMap<>();
+
+        for (Prize prize : Prize.values()) {
+            wrappedPrizeResult.put(prize, prizeResult.get(prize.name().toLowerCase()));
+        }
+
+        return new Result(wrappedPrizeResult);
     }
 }

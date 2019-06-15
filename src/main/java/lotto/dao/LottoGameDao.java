@@ -106,7 +106,7 @@ public class LottoGameDao {
         for (int i = WINNING_START_INDEX; i < WINNING_LAST_INDEX; i++) {
             pstmt.setInt(i, winningNumbers.get(i - 2));
         }
-        pstmt.setInt(WINNING_LAST_INDEX, winningNumberDto.getBonusBall());
+        pstmt.setInt(WINNING_LAST_INDEX, winningNumberDto.getBonusNumber());
     }
 
     public WinningNumberDto findWinningLottoByRound(final int round) throws SQLException {
@@ -132,7 +132,7 @@ public class LottoGameDao {
         }
 
         winningNumberDto.setNumbers(winningLottoNumbers);
-        winningNumberDto.setBonusBall(rs.getInt(WINNING_LAST_INDEX));
+        winningNumberDto.setBonusNumber(rs.getInt(WINNING_LAST_INDEX));
         return winningNumberDto;
     }
 

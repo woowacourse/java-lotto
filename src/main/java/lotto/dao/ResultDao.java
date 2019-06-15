@@ -51,7 +51,7 @@ public class ResultDao {
             prize.put(prizeName, rs.getInt(prizeName));
         }
 
-        resultDto.setPrize(prize);
+        resultDto.setPrizeResult(prize);
         resultDto.setWinningMoney(rs.getInt("winning_money"));
         return resultDto;
     }
@@ -64,7 +64,7 @@ public class ResultDao {
 
         pstmt.setInt(1, round);
         pstmt.setInt(2, resultDto.getWinningMoney());
-        Map<String, Integer> prize = resultDto.getPrize();
+        Map<String, Integer> prize = resultDto.getPrizeResult();
         for (int i = 0; i < 6; i++) {
             String prizeName = PRIZE_NAMES.get(i);
             pstmt.setInt(i + 3, prize.get(prizeName));

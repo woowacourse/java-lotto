@@ -5,6 +5,15 @@ public class LottoGameDto {
     public int money;
     public int countOfManual;
 
+    public LottoGameDto() {
+    }
+
+    public LottoGameDto(final int round, final int money, final int countOfManual) {
+        this.round = round;
+        this.money = money;
+        this.countOfManual = countOfManual;
+    }
+
     public int getRound() {
         return round;
     }

@@ -21,7 +21,7 @@ public class LottoGameDaoTest {
         lottoGameDao = LottoGameDao.getInstance();
         initWinningNumberDto = new WinningNumberDto();
         initWinningNumberDto.setNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        initWinningNumberDto.setBonusBall(7);
+        initWinningNumberDto.setBonusNumber(7);
     }
 
     @Test
@@ -52,6 +52,6 @@ public class LottoGameDaoTest {
         lottoGameDao.addWinningNumber(TEST_ROUND, initWinningNumberDto);
         WinningNumberDto winningNumberDto = lottoGameDao.findWinningLottoByRound(TEST_ROUND);
         assertThat(winningNumberDto.getNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(winningNumberDto.getBonusBall()).isEqualTo(7);
+        assertThat(winningNumberDto.getBonusNumber()).isEqualTo(7);
     }
 }
