@@ -29,5 +29,3 @@ CREATE TABLE IF NOT EXISTS  win_prize (
     miss   INT DEFAULT 0,
     PRIMARY KEY (id)
 );
-
-INSERT INTO round () VALUES();
