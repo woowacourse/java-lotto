@@ -14,7 +14,7 @@ public class WebUILottoApplication {
 
     public static void main(String[] args) {
 
-        get("/", RoundController.MAX_ROUND);
+        get("/", RoundController.GET_MAX_ROUND);
         get("/amount", RoundController.SAVE_PURCHASE_AMOUNT);
 
         post("/lotto", LottosController.CREATE_LOTTOS);

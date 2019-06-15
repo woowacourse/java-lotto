@@ -12,7 +12,7 @@ public class RoundController {
 
     private static final RoundService roundService = new RoundService();
 
-    public static final Route MAX_ROUND = (request, response) -> {
+    public static final Route GET_MAX_ROUND = (request, response) -> {
         Map<String, Object> model = new HashMap<>();
         int newRound = roundService.findMaxRound() + 1;
         model.put("newRound", newRound);
