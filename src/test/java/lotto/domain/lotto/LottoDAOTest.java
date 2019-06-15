@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.dao.LottoDAO;
 import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import org.junit.jupiter.api.BeforeEach;

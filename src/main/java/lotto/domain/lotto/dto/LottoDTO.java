@@ -1,4 +1,6 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.dto;
+
+import lotto.domain.lotto.Lotto;
 
 public class LottoDTO {
     private Lotto lotto;

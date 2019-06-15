@@ -1,5 +1,6 @@
-package lotto.domain.lotto;
+package lotto.dao;
 
+import lotto.domain.lotto.WinningLotto;
 import lotto.utils.DBUtils;
 
 import java.sql.PreparedStatement;

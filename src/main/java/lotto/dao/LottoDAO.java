@@ -1,5 +1,6 @@
-package lotto.domain.lotto;
+package lotto.dao;
 
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.utils.DBUtils;
