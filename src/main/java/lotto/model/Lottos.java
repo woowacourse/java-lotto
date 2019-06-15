@@ -1,6 +1,8 @@
 package lotto.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Lottos {
     private List<Lotto> lottos;

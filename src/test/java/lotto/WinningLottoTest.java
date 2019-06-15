@@ -1,11 +1,12 @@
 package lotto;
 
 
-import lotto.model.*;
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+import lotto.model.Prize;
+import lotto.model.WinningLotto;
 import lotto.model.exceptions.IllegalNumberCombinationException;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

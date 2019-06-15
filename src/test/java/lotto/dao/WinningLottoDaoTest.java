@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class WinningLottoDaoTest {
     @Test
     public void saveWinningLotto() throws SQLException {
-        Lotto winningLottoTicket = new Lotto(Arrays.asList(11,12,13,14,15,16));
+        Lotto winningLottoTicket = new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16));
         LottoNumber lottoNumber = new LottoNumber(44);
         WinningLottoDao winningLottoDao = new WinningLottoDao();
         winningLottoDao.saveWinningLotto(winningLottoTicket, lottoNumber);

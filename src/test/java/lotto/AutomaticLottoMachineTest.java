@@ -1,17 +1,13 @@
 package lotto;
 
 import lotto.model.Lotto;
-import lotto.model.LottoNumber;
 import lotto.model.lottomachine.AutomaticLottoMachine;
-import lotto.model.lottomachine.LottoMachine;
 import lotto.model.lottomachine.ManualLottoMachine;
-import lotto.model.shufflemethod.RandomShuffleMethod;
 import lotto.model.shufflemethod.ShuffleMethod;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;

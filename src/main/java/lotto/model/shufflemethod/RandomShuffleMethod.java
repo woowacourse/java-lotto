@@ -1,7 +1,5 @@
 package lotto.model.shufflemethod;
 
-import lotto.model.Lotto;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +15,7 @@ public class RandomShuffleMethod implements ShuffleMethod {
 //            returnString += "" + currentInteger;
 //            returnString += ",";
 //        }
-        return all45NumbersCopied.subList(0,6);
+        return all45NumbersCopied.subList(0, 6);
 
     }
 }

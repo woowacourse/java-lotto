@@ -2,7 +2,9 @@ package lotto.model;
 
 import lotto.model.exceptions.IllegalLottoNumberException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
     public static final int MAXIMUM_LOTTO_NUMBER = 45;

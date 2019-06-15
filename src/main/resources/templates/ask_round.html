@@ -6,10 +6,10 @@
 </head>
 <body>
 {{#button_identifiers}}
-    <form action = "/show_final_results">
-        <button type="submit">{{this}}회차 정보보러가기</button>
-        <input type = "hidden" name = "result_number" value = {{this}}>
-    </form>
+<form action="/show_final_results">
+    <button type="submit">{{this}}회차 정보보러가기</button>
+    <input type="hidden" name="result_number" value={{this}}>
+</form>
 {{/button_identifiers}}
 </body>
 </html>

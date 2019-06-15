@@ -1,10 +1,13 @@
 package lotto;
 
 //import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+
 import lotto.model.*;
 import lotto.model.dao.LottoResultDao;
 import lotto.model.dao.LottosDao;
 import lotto.model.dao.WinningLottoDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -17,6 +20,7 @@ public class WebUILottoApplication {
     private static final String NEW_LINE = "\r\n";
     private static final String COMMA = ",";
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebUILottoApplication.class);
     private static final LottosDao LOTTOS_DAO = new LottosDao();
     private static final WinningLottoDao WINNINGLOTTOS_DAO = new WinningLottoDao();
     private static final LottoResultDao LOTTORESULT_DAO = new LottoResultDao();
@@ -72,7 +76,7 @@ public class WebUILottoApplication {
         });
 
         post("/get_winning_lotto_info", (request, response) -> {
-            Map<String,Object> model = new HashMap<>();
+            Map<String, Object> model = new HashMap<>();
             return render(model, "get_winning_lotto.html");
         });
 
@@ -81,8 +85,8 @@ public class WebUILottoApplication {
 
             List<String> lottos = new ArrayList<>();
             LOTTOS_DAO.fetchRequestLottos(requestRound, lottos);
-            for(int i = 0; i < lottos.size(); i++) {
-                System.out.println(lottos.get(i));
+            for (String lotto : lottos) {
+                LOGGER.info(lotto);
             }
 
             List<String> winningLotto = new ArrayList<>();
@@ -91,7 +95,7 @@ public class WebUILottoApplication {
             List<String> results = new ArrayList<>();
             LOTTORESULT_DAO.fetchRequestResult(requestRound, results);
 
-            Map<String,Object> model = new HashMap<>();
+            Map<String, Object> model = new HashMap<>();
             model.put("final_lottos", lottos);
             model.put("final_winning", winningLotto);
             model.put("final_results", results);
@@ -110,7 +114,7 @@ public class WebUILottoApplication {
     private static List<Integer> makeButtonIdentifiers() throws SQLException {
         List<Integer> buttonIdentifiers = new ArrayList<>();
         int latestRound = WINNINGLOTTOS_DAO.getLatestRound();
-        for (int i = 1; i <= latestRound - 1 ; i++) {
+        for (int i = 1; i <= latestRound - 1; i++) {
             buttonIdentifiers.add(i);
         }
         return buttonIdentifiers;
@@ -121,6 +125,7 @@ public class WebUILottoApplication {
         for (Prize prize : Prize.values()) {
             StringBuilder sb = new StringBuilder();
             sb.append(prize.getMatchCount() + "개 일치 " + prize.getPrizeMoney() + "..." + lottoResult.getCount(prize));
+            sb.append("\n");
             readable.add(sb.toString());
         }
         return readable;
