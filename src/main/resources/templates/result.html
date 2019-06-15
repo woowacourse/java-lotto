@@ -17,11 +17,10 @@
     <p class="mb-0">{{lotto}}</p>
     {{/lottos}}
 
-    <p class="mb-0">{{rankFifth.countOfMatch}}개 일치 ({{rankFifth.winningMoney}}) - {{countOfRankFifth}}개</p>
-    <p class="mb-0">{{rankFourth.countOfMatch}}개 일치 ({{rankFourth.winningMoney}}) - {{countOfRankFourth}}개</p>
-    <p class="mb-0">{{rankThird.countOfMatch}}개 일치 ({{rankThird.winningMoney}}) - {{countOfRankThird}}개</p>
-    <p class="mb-0">{{rankSecond.countOfMatch}}개 일치 ({{rankSecond.winningMoney}}) - {{countOfRankSecond}}개</p>
-    <p class="mb-0">{{rankFirst.countOfMatch}}개 일치 ({{rankFirst.winningMoney}}) - {{countOfRankFirst}}개</p>
+    {{#result}}
+    <p class="mb-0">{{countOfMatch}}개 일치 ({{winningMoney}}) - {{lottoScore}}개</p>
+    {{/result}}
+
     <p class="mb-0">총 수익률은 {{earningsRate}}입니다.</p>
 </blockquote>
 

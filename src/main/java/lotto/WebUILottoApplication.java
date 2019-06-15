@@ -1,10 +1,14 @@
 package lotto;
 
+import lotto.dao.LottoDAO;
+import lotto.dao.WinningLottoDAO;
 import lotto.domain.CountOfLotto;
 import lotto.domain.Payment;
 import lotto.domain.Rank;
 import lotto.domain.Result;
 import lotto.domain.lotto.*;
+import lotto.domain.lotto.dto.LottoDTO;
+import lotto.domain.lotto.dto.ResultDTO;
 import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.domain.lottogenerator.RandomLottoGeneratingStrategy;
@@ -38,8 +42,13 @@ public class WebUILottoApplication {
         get("/selectResult.html", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             LottoDAO lottoDAO = new LottoDAO();
+            List<Lotto> lottos = new ArrayList<>();
 
-            List<Lotto> lottos = lottoDAO.selectByRound(Integer.parseInt(req.queryParams("inputRound")));
+            try {
+                lottos = lottoDAO.selectByRound(Integer.parseInt(req.queryParams("inputRound")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             List<LottoDTO> lottoDTOs = lottos.stream()
                     .map(LottoDTO::new)
                     .collect(Collectors.toList());
@@ -115,16 +124,12 @@ public class WebUILottoApplication {
             List<LottoDTO> lottoDTOs = createLottoDTOs(lottoTickets);
             model.put("lottos", lottoDTOs);
 
-            model.put("rankFirst", Rank.FIRST);
-            model.put("rankSecond", Rank.SECOND);
-            model.put("rankThird", Rank.THIRD);
-            model.put("rankFourth", Rank.FOURTH);
-            model.put("rankFifth", Rank.FIFTH);
-            model.put("countOfRankFirst", result.get(Rank.FIRST));
-            model.put("countOfRankSecond", result.get(Rank.SECOND));
-            model.put("countOfRankThird", result.get(Rank.THIRD));
-            model.put("countOfRankFourth", result.get(Rank.FOURTH));
-            model.put("countOfRankFifth", result.get(Rank.FIFTH));
+            List<ResultDTO> resultDTOs = Arrays.stream(Rank.values())
+                    .map(rank -> new ResultDTO(rank, result.get(rank)))
+                    .collect(Collectors.toList());
+            resultDTOs.remove(resultDTOs.size() - 1); // MISS 제거
+
+            model.put("result", resultDTOs);
             model.put("earningsRate", result.calculateEarningsRate(payment));
 
             return render(model, "result.html");
