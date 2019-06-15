@@ -12,12 +12,14 @@ import static java.util.stream.Collectors.toList;
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
+    private final boolean isAuto;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers, boolean isAuto) {
         checkLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(toList());
+        this.isAuto = isAuto;
     }
 
     private void checkLottoNumbers(List<Integer> lottoNumbers) {
@@ -42,6 +44,10 @@ public class Lotto {
 
     boolean contains(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
+    }
+
+    public boolean isAuto() {
+        return isAuto;
     }
 
     @Override

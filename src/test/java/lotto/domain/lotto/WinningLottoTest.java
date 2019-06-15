@@ -16,7 +16,7 @@ class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), false);
     }
 
     @Test
@@ -34,9 +34,9 @@ class WinningLottoTest {
     @Test
     void 당첨로또_결과를_잘_생성하는지_확인() {
         LottoRepository lottoRepository = new LottoRepository();
-        lottoRepository.addManualLotto(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        lottoRepository.addManualLotto(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 7))));
-        lottoRepository.addManualLotto(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 9))));
+        lottoRepository.add(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoRepository.add(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 7))));
+        lottoRepository.add(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 9))));
 
         LottoTickets lottoTickets = new LottoTickets(lottoRepository);
         WinningLotto winningLotto = new WinningLotto(lotto, 7);
