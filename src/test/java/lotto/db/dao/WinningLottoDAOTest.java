@@ -1,6 +1,8 @@
 package lotto.db.dao;
 
 import lotto.db.dto.LottoGameResultDTO;
+import lotto.domain.Factory.LottoTicketFactory;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -23,7 +25,7 @@ class WinningLottoDAOTest {
 
     @Test
     void 당첨로또_삽입_테스트() throws SQLException {
-        LottoGameResultDTO winningLotto = new LottoGameResultDTO(7,11,12,13,14,15,16);
+        WinningLotto winningLotto = WinningLotto.of("7,11,12,13,15,16", 1);
         WinningLottoDAO.addWinningLottoTicket(winningLotto);
     }
 }

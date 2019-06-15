@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.db.dao.LottoDAO;
+import lotto.db.dao.WinningLottoDAO;
+import lotto.db.dto.LottoGameResultDTO;
 import lotto.domain.Factory.LottoTicketsFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
@@ -68,6 +70,12 @@ public class WebUILottoApplication {
         path("/statistics", () -> {
             get("/win", (req, res) -> {
                 Map<String, Object> model = new HashMap<>();
+                // 1. week, 2. 로또 번호
+
+                LottoGameResultDTO winningLotto = WinningLottoDAO.findLatestWinningLotto();
+                model.put("winningNumbers", winningLotto.getNumbers());
+                model.put("bonusBall", winningLotto.getBonusBall());
+
                 return render(model, "lotto_result.html");
             });
 

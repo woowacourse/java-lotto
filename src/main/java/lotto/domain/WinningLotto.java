@@ -25,6 +25,14 @@ public class WinningLotto {
         return WINNING_LOTTO;
     }
 
+    public LottoTicket getWinningNumbers() {
+        return winningNumbers;
+    }
+
+    public LottoNumber getBonusBall() {
+        return bonusBall;
+    }
+
     public int getMatchingCount(LottoTicket lottoTicket) {
         return winningNumbers.getMatchingCount(lottoTicket);
     }
