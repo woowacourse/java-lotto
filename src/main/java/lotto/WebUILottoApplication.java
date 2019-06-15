@@ -113,6 +113,11 @@ public class WebUILottoApplication {
             model.put("manual", lottoTicket.stream().filter(lotto -> !lotto.isAuto()).count());
             return render(model, "lottoResult.html");
         });
+
+        exception(IllegalArgumentException.class, (exception, req, res) -> {
+            res.status(500);
+            res.body("잘못 입력했습니다.\n" + exception.getMessage());
+        });
     }
 
     private static void setUp() {
