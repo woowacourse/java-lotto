@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.dao.LottoDao;
 import lotto.dao.LottoGameDao;
 import lotto.dao.ResultDao;
+import lotto.dao.WinningNumberDao;
 import lotto.domain.*;
 import lotto.domain.generator.ResultGenerator;
 import lotto.dto.LottoDto;
@@ -21,11 +22,13 @@ public class LottoService {
     private LottoGameDao lottoGameDao;
     private LottoDao lottoDao;
     private ResultDao resultDao;
+    private WinningNumberDao winningNumberDao;
 
     public LottoService() {
         lottoGameDao = LottoGameDao.getInstance();
         lottoDao = LottoDao.getInstance();
         resultDao = ResultDao.getInstance();
+        winningNumberDao = WinningNumberDao.getInstance();
     }
 
     public int getCurrentRound() throws SQLException {
@@ -76,7 +79,7 @@ public class LottoService {
         int bonusBall = Integer.parseInt(bonus);
 
         WinningNumberDto winningNumberDto = new WinningNumberDto(convertIntegerFrom(lottoNumbers), bonusBall);
-        lottoGameDao.addWinningNumber(round, winningNumberDto);
+        winningNumberDao.addWinningNumber(round, winningNumberDto);
 
         return winningNumberDto.toEntity();
     }

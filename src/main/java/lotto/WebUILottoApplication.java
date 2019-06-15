@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.BoughtLottos;
 import lotto.domain.WinningNumber;
 import lotto.service.LottoService;
+import lotto.service.ResultService;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -17,7 +18,8 @@ public class WebUILottoApplication {
         port(8080);
 
         LottoService lottoService = new LottoService();
-        int round = lottoService.getCurrentRound() + 1;
+        ResultService resultService = new ResultService();
+        int current = lottoService.getCurrentRound() + 1;
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -25,20 +27,25 @@ public class WebUILottoApplication {
         });
 
         get("/result/:round", (req, res) -> {
-            int urlRound = Integer.parseInt(req.params(":round"));
-            Map<String, Object> model = lottoService.findAllDataOfRound(urlRound);
+            int targetRound = Integer.parseInt(req.params(":round"));
+            Map<String, Object> model = new HashMap<>();
+
+            model.put("lottoGame", resultService.findGameDataByRound(targetRound));
+            model.put("lottos", resultService.findLottosByRound(targetRound));
+            model.put("winningNumber", resultService.findWinningNumberByRound(targetRound));
+            model.put("result", resultService.findResultByRound(targetRound));
 
             return render(model, "result.html");
         });
 
         post("/lotto", (req, res) -> {
-            BoughtLottos boughtLottos = lottoService.generateBoughtLottos(round,
+            BoughtLottos boughtLottos = lottoService.generateBoughtLottos(current,
                     req.queryParams("buy-price"), req.queryParams("lotto-numbers"));
-            WinningNumber winningNumber = lottoService.generateWinningNumber(round,
+            WinningNumber winningNumber = lottoService.generateWinningNumber(current,
                     req.queryParams("winning-numbers"), req.queryParams("bonus"));
-            lottoService.generateResult(round, boughtLottos, winningNumber);
+            lottoService.generateResult(current, boughtLottos, winningNumber);
 
-            res.redirect("/result/" + round);
+            res.redirect("/result/" + current);
             return true;
         });
     }

@@ -1,49 +1,44 @@
 package lotto.service;
 
+import lotto.dao.LottoDao;
+import lotto.dao.LottoGameDao;
 import lotto.dao.ResultDao;
-import lotto.domain.BoughtLottos;
-import lotto.domain.Prize;
-import lotto.domain.Result;
-import lotto.domain.WinningNumber;
-import lotto.domain.generator.ResultGenerator;
+import lotto.dao.WinningNumberDao;
+import lotto.dto.LottoDto;
+import lotto.dto.LottoGameDto;
 import lotto.dto.ResultDto;
+import lotto.dto.WinningNumberDto;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class ResultService {
 
-    ResultDao resultDao;
+    private LottoGameDao lottoGameDao;
+    private LottoDao lottoDao;
+    private WinningNumberDao winningNumberDao;
+    private ResultDao resultDao;
 
     public ResultService() {
-        this.resultDao = ResultDao.getInstance();
+        lottoGameDao = LottoGameDao.getInstance();
+        lottoDao = LottoDao.getInstance();
+        resultDao = ResultDao.getInstance();
+        winningNumberDao = WinningNumberDao.getInstance();
     }
 
-    public Result generateResult(int round, BoughtLottos boughtLottos,
-                                 WinningNumber winningNumber) throws SQLException {
-        Result result = ResultGenerator.generateResult(boughtLottos, winningNumber);
-        ResultDto resultDto = generateResultDto(result);
-        resultDao.addResult(round, resultDto);
-
-        return result;
+    public LottoGameDto findGameDataByRound(int round) throws SQLException {
+        return lottoGameDao.findRoundById(round);
     }
 
-    private ResultDto generateResultDto(Result result) {
-        Map<String, Integer> prizeResult = new HashMap<>();
-        int winningMoney = 0;
+    public List<LottoDto> findLottosByRound(int round) throws SQLException {
+        return lottoDao.findAllBoughtLottoByRound(round);
+    }
 
-        for (Prize prize : Prize.values()) {
-            String prizeName = prize.name();
-            int countOfPrize = result.getCountOfPrize(prize);
+    public WinningNumberDto findWinningNumberByRound(int round) throws SQLException {
+        return winningNumberDao.findWinningLottoByRound(round);
+    }
 
-            prizeResult.put(prizeName.toLowerCase(), countOfPrize);
-            winningMoney += prize.getWinningAmount() * countOfPrize;
-        }
-
-        ResultDto resultDto = new ResultDto();
-        resultDto.setPrize(prizeResult);
-        resultDto.setWinningMoney(winningMoney);
-        return resultDto;
+    public ResultDto findResultByRound(int round) throws SQLException {
+        return resultDao.findResultByRound(round);
     }
 }
