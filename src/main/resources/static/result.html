@@ -7,113 +7,166 @@
 </head>
 <body>
 <div>
-    <div>
-        <h1> 회차별 결과 </h1>
-        <table id="resultTable" width="500">
-            <tr>
-                <th>회차</th>
-                <th>구매 금액</th>
-                <th>당첨 금액</th>
-            </tr>
-        </table>
+    <div id="roundContainer">
+
     </div>
-    </br>
-    <div
-    ">
-    <h1> 구매 로또 </h1>
-    <table id="lottoTable">
-        <tr>
-            <th>회차</th>
-            <th>로또 번호</th>
-        </tr>
-    </table>
-</div>
-</br>
-<div>
-    <h1> 당첨 로또 </h1>
-    <table id="winningLottoTable">
-        <tr>
-            <th>회차</th>
-            <th>당첨 번호</th>
-            <th>보너스 번호</th>
-        </tr>
-    </table>
-</div>
+    <div>
+        <div>
+            <h1> 회차별 결과 </h1>
+            <table id="resultTable" width="500">
+                <tr>
+                    <th>회차</th>
+                    <th>구매 금액</th>
+                    <th>당첨 금액</th>
+                </tr>
+            </table>
+        </div>
+        </br>
+        <div>
+            <h1> 구매 로또 </h1>
+            <table id="lottoTable" width="500">
+                <tr>
+                    <th>회차</th>
+                    <th>로또 번호</th>
+                </tr>
+            </table>
+        </div>
+        </br>
+        <div>
+            <h1> 당첨 로또 </h1>
+            <table id="winningLottoTable" width="500">
+                <tr>
+                    <th>회차</th>
+                    <th>당첨 번호</th>
+                    <th>보너스 번호</th>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>
 <script>
-	var resultData;
+	var round;
+	var result;
+	var winningLotto;
+	var purchasedLotto;
+	var data;
 
 	window.onload = function() {
 		$.ajax({
-            url:"requestResult",
-            type:"POST",
+            url:"requestRound",
+            type:"GET",
             dataType:'json',
             error:function(request,status,error){
-                alert("입력하신 번호는 에러가 있습니다.\n"+request.responseText);
+                alert(request.responseText);
                 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             },
             success:function(data){
-            	resultData = data;
-            	printResult(JSON.parse(data.data.Result));
-            	printWinningLotto(JSON.parse(data.data.WinningLotto));
-            	printLotto(JSON.parse(data.data.Lotto));
+            	round = data.message;
+            	console.log(round);
+            	addRoundButton();
+            	document.getElementById('roundContainer').addEventListener('click', function(event){
+            		requestResult((event.target).getAttribute('round'));
+            	})
             	console.log("success");
             }
         });
 	}
 
-	function printResult(result) {
+	function requestResult(round) {
+		$.ajax({
+			url:"/result/"+round,
+			type:"GET",
+			dataType:'json',
+            error:function(request,status,error){
+                alert(request.responseText);
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            success:function(data){
+            	result = JSON.parse(data.data.Result);
+            	winningLotto = JSON.parse(data.data.WinningLotto);
+            	purchasedLotto = JSON.parse(data.data.Lotto);
+            	deleteRowsExceptFirst(document.getElementById('resultTable'));
+            	deleteRowsExceptFirst(document.getElementById('winningLottoTable'));
+            	deleteRowsExceptFirst(document.getElementById('lottoTable'));
+            	// $('resultTable').children('tr:not(:first)'.remove());
+            	// $('winningLottoTable').children('tr:not(:first)'.remove());
+            	// $('lottoTable').children('tr:not(:first)'.remove());
+            	printResult();
+            	printLotto();
+            	printWinningLotto();
+            	console.log("success");
+            }
+		})
+	}
+
+	function addRoundButton() {
+		for (var i = 1; i <= round; i++) {
+			var button = document.createElement('button');
+			button.innerHTML = i + "회차";
+			button.setAttribute('round', i);
+			document.getElementById("roundContainer").appendChild(button);
+		}
+	}
+
+	function deleteRowsExceptFirst(table) {
+		var rows = table.rows;
+		var i = rows.length;
+		while (--i) {
+			rows[i].parentNode.removeChild(rows[i]);
+		}
+	}
+
+	function printResult() {
 		var keys = ['round', 'totalPurchaseMoney', 'totalWinningMoney'];
 		var table = document.getElementById('resultTable');
 
-		for (var i = 0; i < result.length; i++) {
-			var tr = document.createElement('tr');
+		var tr = document.createElement('tr');
 
-			for (var j = 0; j < keys.length; j++){
-				var td = document.createElement('td');
-				var p = document.createElement('p');
-				p.innerHTML = result[i][keys[j]];
-				td.appendChild(p);
-				tr.appendChild(td);
-			}
-
-			table.appendChild(tr);
+		for (var j = 0; j < keys.length; j++){
+			var td = document.createElement('td');
+			var p = document.createElement('p');
+			p.innerHTML = result[keys[j]];
+			td.appendChild(p);
+			td.style.textAlign='center';
+			tr.appendChild(td);
 		}
+
+		table.appendChild(tr);
 	}
 
-	function printWinningLotto(winningLotto) {
+	function printWinningLotto() {
 		var keys = ['round', 'lottoNo', 'bonusNo'];
 		var table = document.getElementById('winningLottoTable');
 
-		for (var i = 0; i < winningLotto.length; i++) {
-			var tr = document.createElement('tr');
+		var tr = document.createElement('tr');
 
-			for (var j = 0; j < keys.length; j++){
-				var td = document.createElement('td');
-				var p = document.createElement('p');
-				p.innerHTML = winningLotto[i][keys[j]];
-				td.appendChild(p);
-				tr.appendChild(td);
-			}
-
-			table.appendChild(tr);
+		for (var j = 0; j < keys.length; j++){
+			var td = document.createElement('td');
+			var p = document.createElement('p');
+			p.innerHTML = winningLotto[keys[j]];
+			td.appendChild(p);
+			td.style.textAlign='center';
+			tr.appendChild(td);
 		}
+
+		table.appendChild(tr);
 	}
 
-	function printLotto(lotto) {
+	function printLotto() {
 		var keys = ['round', 'lottoNo'];
 		var table = document.getElementById('lottoTable');
 
-		for (var i = 0; i < lotto.length; i++) {
+		for (var i = 0; i < purchasedLotto.length; i++) {
 			var tr = document.createElement('tr');
 
 			for (var j = 0; j < keys.length; j++){
 				var td = document.createElement('td');
 				var p = document.createElement('p');
-				p.innerHTML = lotto[i][keys[j]];
+				p.innerHTML = purchasedLotto[i][keys[j]];
 				td.appendChild(p);
+				td.style.textAlign='center';
 				tr.appendChild(td);
 			}
 

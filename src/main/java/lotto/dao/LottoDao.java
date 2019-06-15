@@ -58,10 +58,11 @@ public class LottoDao {
         return lottoDtos;
     }
 
-    public List<LottoDto> getLottos() throws SQLException {
+    public List<LottoDto> getLottos(int round) throws SQLException {
         List<LottoDto> lottoDtos = new ArrayList<>();
-        String query = "SELECT * FROM 구매로또";
+        String query = "SELECT * FROM 구매로또 WHERE 회차 = ?";
         PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
 
         if (!rs.next())

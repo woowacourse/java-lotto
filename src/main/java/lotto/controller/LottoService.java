@@ -116,15 +116,19 @@ public class LottoService {
         resultDao.addResult(new WinningResult(lotto, winningLotto).createResultDto());
     }
 
-    public List<ResultDto> getResults() throws SQLException {
-        return resultDao.getResults();
+    public List<LottoDto> getPurchasedLotto(int round) throws SQLException {
+        return lottoDao.getLottos(round);
     }
 
-    public List<LottoDto> getPurchasedLotto() throws SQLException {
-        return lottoDao.getLottos();
+    public WinningLottoDto getWinningLotto(int round) throws SQLException {
+        return winningLottoDao.getWinningLotto(round);
     }
 
-    public List<WinningLottoDto> getWinningLotto() throws SQLException {
-        return winningLottoDao.getWinningLottos();
+    public int getMaxRound() throws SQLException {
+        return resultDao.findRoundNo();
+    }
+
+    public ResultDto getResult(int round) throws SQLException {
+        return resultDao.getResult(round);
     }
 }

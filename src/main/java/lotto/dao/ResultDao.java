@@ -7,8 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ResultDao {
     private Connection con;
@@ -36,19 +34,14 @@ public class ResultDao {
         return rs.getInt("회차");
     }
 
-    public List<ResultDto> getResults() throws SQLException {
-        List<ResultDto> resultDtos = new ArrayList<>();
-        String query = "SELECT * FROM 회차별결과";
+    public ResultDto getResult(int round) throws SQLException {
+        String query = "SELECT * FROM 회차별결과 WHERE 회차 = ?";
         PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
 
         if (!rs.next())
-            return resultDtos;
-        do {
-            ResultDto resultDto = new ResultDto(rs.getInt(2),
-                    rs.getInt(3), new BigInteger(rs.getString(4)));
-            resultDtos.add(resultDto);
-        } while (rs.next());
-        return resultDtos;
+            throw new SQLException("DB에 해당 라운드의 결과가 없습니다.");
+        return new ResultDto(rs.getInt(2), rs.getInt(3), new BigInteger(rs.getString(4)));
     }
 }
