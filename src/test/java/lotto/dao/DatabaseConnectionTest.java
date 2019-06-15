@@ -6,11 +6,11 @@ import java.sql.Connection;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class DataConnectionTest {
+public class DatabaseConnectionTest {
 
     @Test
     void 연결_테스트() {
-        Connection con = DataConnection.getConnection();
+        Connection con = DatabaseConnection.getConnection();
         assertNotNull(con);
     }
 }

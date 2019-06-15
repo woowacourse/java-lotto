@@ -9,12 +9,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.dao.DataConnection.closeConnection;
-import static lotto.dao.DataConnection.getConnection;
+import static lotto.dao.DatabaseConnection.closeConnection;
+import static lotto.dao.DatabaseConnection.getConnection;
 
 public class LottoDao {
     static final int BOUGHT_LOTTO_NUMBER_FROM_INDEX = 0;
     static final int BOUGHT_LOTTO_NUMBER_TO_INDEX = 6;
+
+    private static LottoDao lottoDao;
+
+    private LottoDao() {
+    }
+
+    public static LottoDao getInstance() {
+        if (lottoDao == null) {
+            lottoDao = new LottoDao();
+        }
+        return lottoDao;
+    }
 
     public List<LottoDto> findAllBoughtLottoByRound(int round) throws SQLException {
         String sql = "SELECT * FROM bought_lotto WHERE round_id = ?";

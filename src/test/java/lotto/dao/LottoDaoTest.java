@@ -17,7 +17,7 @@ public class LottoDaoTest {
 
     @BeforeEach
     void setUp() {
-        lottoDao = new LottoDao();
+        lottoDao = LottoDao.getInstance();
     }
 
     @Test

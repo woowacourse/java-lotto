@@ -8,16 +8,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import static lotto.dao.DataConnection.closeConnection;
-import static lotto.dao.DataConnection.getConnection;
+import static lotto.dao.DatabaseConnection.closeConnection;
+import static lotto.dao.DatabaseConnection.getConnection;
 
 public class LottoGameDao {
     private static final int WINNING_START_INDEX = 2;
     private static final int WINNING_LAST_INDEX = 8;
-    private static final List<String> PRIZE_NAMES = Arrays.asList("first", "second", "third", "fourth", "fifth", "none");
 
+    private static LottoGameDao lottoGameDao;
+
+    private LottoGameDao() {
+    }
+
+    public static LottoGameDao getInstance() {
+        if (lottoGameDao == null) {
+            lottoGameDao = new LottoGameDao();
+        }
+        return lottoGameDao;
+    }
+
+    // TODO DAO Singleton으로 구현, 테이블 별로 DAO 나누기
     public int currentRound() throws SQLException {
         String sql = "SELECT count(*) FROM lotto_game";
         Connection con = getConnection();
@@ -135,59 +148,11 @@ public class LottoGameDao {
         closeConnection(con);
     }
 
-    public ResultDto findResultByRound(final int round) throws SQLException {
-        String sql = "SELECT * FROM result WHERE id = ?";
-        Connection con = getConnection();
-
-        PreparedStatement pstmt = con.prepareStatement(sql);
-        pstmt.setInt(1, round);
-        ResultSet rs = pstmt.executeQuery();
-
-        ResultDto resultDto = conbineResultDto(rs);
-        closeConnection(con);
-        return resultDto;
+    public Object findResultByRound(final int round) {
+        return null;
     }
 
-    private ResultDto conbineResultDto(ResultSet rs) throws SQLException {
-        ResultDto resultDto = new ResultDto();
-        Map<String, Integer> prize = new HashMap<>();
-        rs.next();
+    public void addResult(final int round, final ResultDto resultDto) {
 
-        for (String prizeName : PRIZE_NAMES) {
-            prize.put(prizeName, rs.getInt(prizeName));
-        }
-
-        resultDto.setPrize(prize);
-        resultDto.setWinningMoney(rs.getInt("winning_money"));
-        return resultDto;
-    }
-
-
-    public void addResult(int round, ResultDto resultDto) throws SQLException {
-        String sql = "INSERT INTO result VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        Connection con = getConnection();
-        PreparedStatement pstmt = con.prepareStatement(sql);
-
-        pstmt.setInt(1, round);
-        pstmt.setInt(2, resultDto.getWinningMoney());
-        Map<String, Integer> prize = resultDto.getPrize();
-        for (int i = 0; i < 6; i++) {
-            String prizeName = PRIZE_NAMES.get(i);
-            pstmt.setInt(i + 3, prize.get(prizeName));
-        }
-
-        pstmt.executeUpdate();
-        closeConnection(con);
-    }
-
-    public void removeResult(int round) throws SQLException {
-        String sql = "DELETE FROM result WHERE id = ?";
-        Connection con = getConnection();
-
-        PreparedStatement pstmt = con.prepareStatement(sql);
-        pstmt.setInt(1, round);
-
-        pstmt.executeUpdate();
-        closeConnection(con);
     }
 }
