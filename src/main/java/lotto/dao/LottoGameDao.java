@@ -1,7 +1,6 @@
 package lotto.dao;
 
 import lotto.dto.LottoGameDto;
-import lotto.dto.ResultDto;
 import lotto.dto.WinningNumberDto;
 
 import java.sql.Connection;
@@ -146,13 +145,5 @@ public class LottoGameDao {
 
         pstmt.executeUpdate();
         closeConnection(con);
-    }
-
-    public Object findResultByRound(final int round) {
-        return null;
-    }
-
-    public void addResult(final int round, final ResultDto resultDto) {
-
     }
 }
