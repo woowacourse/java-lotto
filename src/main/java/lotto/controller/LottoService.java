@@ -71,7 +71,7 @@ public class LottoService {
         }
     }
 
-    public List<String> showLottoInfos() {
+    List<String> showLottoInfos() {
         List<String> lottoInfos = new ArrayList<>();
         lottoInfos.add("수동으로 " + lottoContainer.getCountOfLottoMatch(LottoType.MANUAL) + "개, "
                 + "자동으로 " + lottoContainer.getCountOfLottoMatch(LottoType.AUTOMATIC) + "개를 구매하셨습니다.");
@@ -80,7 +80,7 @@ public class LottoService {
         return lottoInfos;
     }
 
-    public int calculateMaxManualCount(int budget) {
+    int calculateMaxManualCount(int budget) {
         return budget / Lotto.LOTTO_PRICE;
     }
 
@@ -97,18 +97,18 @@ public class LottoService {
         return lottoContainer.createResult(winningLotto);
     }
 
-    public void registerLotto() throws SQLException {
+    void registerLotto() throws SQLException {
         List<LottoDto> dtos = lottoContainer.createLottoDto();
         for (LottoDto dto : dtos) {
             lottoDao.addLotto(dto);
         }
     }
 
-    public void registerWinningLotto() throws SQLException {
+    void registerWinningLotto() throws SQLException {
         winningLottoDao.addWinningLotto(winningLotto.createWinningLottoDto());
     }
 
-    public void registerResult() throws SQLException {
+    void registerResult() throws SQLException {
         List<Lotto> lotto = lottoDao.getLottosInThisRound().stream()
                 .map(lottoDto -> LottoNoParser.parseToLottoNos(lottoDto.getLottoNo()))
                 .map(Lotto::of).collect(Collectors.toList());
@@ -116,19 +116,19 @@ public class LottoService {
         resultDao.addResult(new WinningResult(lotto, winningLotto).createResultDto());
     }
 
-    public List<LottoDto> getPurchasedLotto(int round) throws SQLException {
+    List<LottoDto> getPurchasedLotto(int round) throws SQLException {
         return lottoDao.getLottos(round);
     }
 
-    public WinningLottoDto getWinningLotto(int round) throws SQLException {
+    WinningLottoDto getWinningLotto(int round) throws SQLException {
         return winningLottoDao.getWinningLotto(round);
     }
 
-    public int getMaxRound() throws SQLException {
+    int getMaxRound() throws SQLException {
         return resultDao.findRoundNo();
     }
 
-    public ResultDto getResult(int round) throws SQLException {
+    ResultDto getResult(int round) throws SQLException {
         return resultDao.getResult(round);
     }
 }

@@ -11,6 +11,16 @@ import spark.Route;
 
 public class WinningLottoInputController {
     private static LottoService service;
+
+    static {
+        service = new LottoService();
+    }
+
+    public static Route serveWinningLottoInputPage = (Request request, Response response) -> {
+        response.redirect("/winninglotto.html");
+        return null;
+    };
+
     public static Route inputWinningLotto = (Request request, Response response) -> {
         response.type("application/json");
         try {
@@ -24,13 +34,4 @@ public class WinningLottoInputController {
         }
         return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
     };
-
-    public static Route serveWinningLottoInputPage = (Request request, Response response) -> {
-        response.redirect("/winninglotto.html");
-        return null;
-    };
-
-    static {
-        service = new LottoService();
-    }
 }

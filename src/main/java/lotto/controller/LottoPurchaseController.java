@@ -19,6 +19,11 @@ public class LottoPurchaseController {
         service = new LottoService();
     }
 
+    public static Route serveInputPage = (Request request, Response response) -> {
+        response.redirect("/input.html");
+        return null;
+    };
+
     public static Route inputBudget = (Request request, Response response) -> {
         response.type("application/json");
         JsonElement jsonBody = new JsonParser().parse(request.body());
@@ -31,11 +36,6 @@ public class LottoPurchaseController {
             return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
         }
         return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(model)));
-    };
-
-    public static Route serveInputPage = (Request request, Response response) -> {
-        response.redirect("/input.html");
-        return null;
     };
 
     public static Route inputManualLotto = (request, response) -> {

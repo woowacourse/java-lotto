@@ -10,13 +10,18 @@ import spark.Route;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResultConroller {
+public class ResultController {
     private static LottoService service;
+
+    static {
+        service = new LottoService();
+    }
 
     public static Route serveResultPage = (Request request, Response response) -> {
         response.redirect("/result.html");
         return null;
     };
+
     public static Route responseResultRound = (request, response) -> {
         int round = Integer.valueOf(request.params(":round"));
         response.type("application/json");
@@ -42,8 +47,4 @@ public class ResultConroller {
             return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
         }
     };
-
-    static {
-        service = new LottoService();
-    }
 }

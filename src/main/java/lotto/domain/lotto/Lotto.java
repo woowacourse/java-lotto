@@ -63,8 +63,7 @@ public class Lotto {
     }
 
     public LottoDto createLottoDto() {
-        LottoDto lottoDto = new LottoDto(0, toString(), lottoType.getType());
-        return lottoDto;
+        return new LottoDto(0, toString(), lottoType.getType());
     }
 
     @Override

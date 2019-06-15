@@ -37,8 +37,15 @@
             },
             success:function(data){
             	console.log("success");
+                document.getElementById('winningLottoNo').readOnly = true;
+                document.getElementById('bonusNo').readOnly = true;
+                document.getElementById('inputBtn').style.display = "none";
+
+                var winningLottoNoMsg = document.createElement('h3');
+                winningLottoNoMsg.innerHTML = "당첨 로또 : " + document.getElementById('winningLottoNo').innerHTML + "\
+                보너스 번호 : " + document.getElementById('bonusNo').innerHTML;
+                document.getElementById('winningLottoContainer').appendChild(winningLottoNoMsg);
             }
         });
 	}
-
 </script>
