@@ -17,8 +17,9 @@ public class LottoDAO {
     public static void addLottoTicket(LottoTickets inputLottoTickets) throws SQLException {
         List<LottoTicket> lottoTickets = inputLottoTickets.getLottoTickets();
         for (LottoTicket lottoTicket : lottoTickets) {
-            int autoInsertedKey = addLotto();
-            addLottoNumbers(autoInsertedKey, lottoTicket.getLottoNumbers());
+            int lotto_id = addLotto();
+            addLottoNumbers(lotto_id, lottoTicket.getLottoNumbers());
+            addResult(lotto_id);
         }
     }
 
@@ -44,6 +45,14 @@ public class LottoDAO {
             pstmt.clearParameters();
         }
         pstmt.executeBatch();
+    }
+
+    private static void addResult(int lotto_id) throws SQLException {
+        String query = "INSERT INTO lotto.result (lotto_id) VALUES (?)";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+
+        pstmt.setInt(1, lotto_id);
+        pstmt.executeUpdate();
     }
 
     public static LottoDTO findByLottoId(String lottoId) throws SQLException {

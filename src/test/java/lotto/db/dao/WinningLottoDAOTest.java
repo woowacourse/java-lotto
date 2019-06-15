@@ -1,6 +1,6 @@
 package lotto.db.dao;
 
-import lotto.db.dto.WinningLottoDTO;
+import lotto.db.dto.LottoGameResultDTO;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -8,24 +8,22 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoDAOTest {
-    private WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
-
     @Test
     void DB에서_당첨로또_갖고오는지_테스트() throws SQLException {
-        WinningLottoDTO winningLotto = winningLottoDAO.findByWinningLottoId("1");
+        LottoGameResultDTO winningLotto = WinningLottoDAO.findByWinningLottoId("1");
 
-        assertEquals(winningLotto, winningLottoDAO.findByWinningLottoId("1"));
+        assertEquals(winningLotto, WinningLottoDAO.findByWinningLottoId("1"));
     }
 
     @Test
     void 없는칼럼_요청할때_익셉션_테스트() throws SQLException {
-        WinningLottoDTO winningLotto = winningLottoDAO.findByWinningLottoId("0");
+        LottoGameResultDTO winningLotto = WinningLottoDAO.findByWinningLottoId("0");
         assertNull(winningLotto);
     }
 
     @Test
     void 당첨로또_삽입_테스트() throws SQLException {
-        WinningLottoDTO winningLotto = new WinningLottoDTO(7,11,12,13,14,15,16);
-        winningLottoDAO.addWinningLottoTicket(winningLotto);
+        LottoGameResultDTO winningLotto = new LottoGameResultDTO(7,11,12,13,14,15,16);
+        WinningLottoDAO.addWinningLottoTicket(winningLotto);
     }
 }
