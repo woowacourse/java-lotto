@@ -71,11 +71,12 @@
 </div>
 <script>
     var count = 0;
-    var selfCount = document.getElementById("countOfSelf").value;
+    var selfCount = document.getElementById("selfCount").value;
     var text = "";
     function showLotto() {
 
         if(count < selfCount){
+            console.log('showLotto')
             count++;
             for(var i=1; i<=6; i++)
             {
