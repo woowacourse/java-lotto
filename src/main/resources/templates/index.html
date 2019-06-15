@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -21,11 +22,56 @@
 			<h3 class="display-4">🎱 Lottery</h3>
 			<hr class="my-4">
 
-			<div class="container" id="purchasing">
+			<div class="container">
 				<a class="btn btn-warning btn-lg btn-block" href="/purchase">로또 구입하기</a>
-				<a class="btn btn-warning btn-lg btn-block" href="/lastwin">지난 주 당첨로또 입력하기</a>
-				<a class="btn btn-warning btn-lg btn-block" href="/purchase">지난 당첨내역 보기</a>
+				<button type="button" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#winningLottoModal">지난 주 당첨로또 입력하기</button>
+				<a class="btn btn-warning btn-lg btn-block" href="/statistics/win">지난 당첨내역 보기</a>
 				<a class="btn btn-warning btn-lg btn-block" href="/purchase">당첨 통계</a>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="winningLottoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">당첨 로또 번호</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form id="lotto-form" action="/purchase/ticket" method="get" onsubmit="return checkMoney();">
+							<div class="container">
+								<h5>당첨번호</h5>
+								<div class="form-row align-items-center mb-3">
+									<div class="col-sm-10 my-1">
+										<div class="input-group">
+											<input type="text" aria-label="num1" class="form-control" name="num1">
+											<input type="text" aria-label="num2" class="form-control" name="num2">
+											<input type="text" aria-label="num3" class="form-control" name="num3">
+											<input type="text" aria-label="num4" class="form-control" name="num4">
+											<input type="text" aria-label="num5" class="form-control" name="num5">
+											<input type="text" aria-label="num6" class="form-control" name="num6">
+										</div>
+									</div>
+								</div>
+								<h5>보너스 볼</h5>
+								<div class="form-row align-items-center">
+									<div class="col-sm-2 my-1">
+										<div class="input-group">
+											<input type="text" aria-label="bonusBall" class="form-control" name="bonusBall">
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+						<input type="submit" class="btn btn-primary" value="등록">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -35,4 +81,6 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body></html>
+</body>
+
+</html>

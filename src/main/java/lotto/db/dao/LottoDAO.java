@@ -19,7 +19,7 @@ public class LottoDAO {
         for (LottoTicket lottoTicket : lottoTickets) {
             int lotto_id = addLotto();
             addLottoNumbers(lotto_id, lottoTicket.getLottoNumbers());
-            addResult(lotto_id);
+            addLottoGame(lotto_id);
         }
     }
 
@@ -47,8 +47,8 @@ public class LottoDAO {
         pstmt.executeBatch();
     }
 
-    private static void addResult(int lotto_id) throws SQLException {
-        String query = "INSERT INTO lotto.result (lotto_id) VALUES (?)";
+    private static void addLottoGame(int lotto_id) throws SQLException {
+        String query = "INSERT INTO lotto.lottogame (lotto_id) VALUES (?);";
         PreparedStatement pstmt = conn.prepareStatement(query);
 
         pstmt.setInt(1, lotto_id);
