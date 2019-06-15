@@ -5,12 +5,55 @@
     <title>로또</title>
 </head>
 <body>
-로또 구매
-<form action = "/buycustomlotto" method = "post">
-    구입 금액 : <input type = "text" name = "money"/><br>
-    수동 구매 장수 : <input type = "text" id = "countOfCustomLotto" name = "countOfCustomLotto"/><br>
-    <input type = "submit" value = "확인" />
+
+ <a id="round">{{round}}</a> 회차 로또<br>
+
+ 과거 이력 조회
+<form action="/roundresult" method="post">
+	<select id="roundchoice" name="roundchoice">
+        <option selected>Choose...</option>
+    </select>
+    <input type = "submit" value = "조회" /><br>
 
 </form>
+로또 구매
+<form action = "/purchase" id = 'purchaseFrom' method = "post">
+    구입 금액 : <input type = "text" id = "money" name = "money"/><br>
+    수동 구매 장수 : <input type = "text" id = "countOfCustomLotto" name = "countOfCustomLotto" onkeyup="enterKey()" /><br>
+</form>
 </body>
+<script type="text/javascript">
+        	var count = document.getElementById("round").innerHTML
+        	
+        	for (var i = count - 1 ; i > 0 ; i--) {
+        		document.getElementById("roundchoice").innerHTML += "<option>" + i + "</option>" 
+        	}
+    </script>
+
+    <script type="text/javascript">
+		function enterKey() {
+			if (window.event.keyCode == 13) {
+				var money = document.getElementById("money").value
+				var count = document.getElementById("countOfCustomLotto").value
+				
+				if (money / 1000 < count) {
+					alert("구입 금액보다 많이 구매는 불가능 합니다.")
+				}
+				else{
+					for (var i = 0; i < count; i++) {
+						var manualLottoInput = '<input type="text" name="custom"><br>'
+		        		document.getElementById("purchaseFrom").innerHTML += manualLottoInput
+					}
+					
+					//document.getElementById("money").value = money
+					//document.getElementById("countOfCustomLotto").value = count
+					document.getElementById("money").setAttribute('value', money);
+					document.getElementById("countOfCustomLotto").setAttribute('value', count);
+					document.getElementById("purchaseFrom").innerHTML += '<input type = "submit" value = "구입" />'
+				}
+					
+			}
+		}
+	</script>
+
 </html>
