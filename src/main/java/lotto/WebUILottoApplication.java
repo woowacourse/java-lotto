@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.controller.RoundController;
 import lotto.dao.RoundDao;
 import lotto.db.DatabaseConnection;
 import lotto.controller.LottoResultController;
@@ -22,19 +23,7 @@ public class WebUILottoApplication {
         externalStaticFileLocation("src/main/resources/templates");
         staticFiles.location("/static");
 
-        get("/", (req, res) -> {
-                    Connection conn = new DatabaseConnection().getConnection();
-                    RoundDao roundDao = new RoundDao(conn);
-                    Map<String, Object> model = new HashMap<>();
-                    int presentRound = roundDao.findLatestRound() + 1;
-                    List<Integer> rounds = roundDao.findAllRound();
-                    model.put("present", presentRound);
-                    model.put("rounds", rounds);
-                    model.put("message", req.queryParams("message"));
-                    req.session().attribute("round", presentRound);
-                    return ViewUtils.render(model, "home.html");
-                }
-        );
+        get("/", RoundController.makeRoundPage);
 
         get("/result", LottoResultController.makeLottoResultByRoundPage);
 
