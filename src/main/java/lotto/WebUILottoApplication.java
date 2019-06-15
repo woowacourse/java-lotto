@@ -70,7 +70,9 @@ public class WebUILottoApplication {
                 model.put("winningNumbers", winningLotto.getWinningNumbers().split(","));
                 model.put("bonusBall", winningLotto.getBonusBall());
                 model.put("results", getEachRank(winStatistics));
-                model.put("incoming_rate", String.format("%.2f", lottoTickets.size() > 0 ? winStatistics.calculateProfitRate(lottoTickets.size() * 1000) : 0));
+                model.put("money", lottoTickets.size() * MONEY_OFFSET);
+                model.put("profit", winStatistics.getProfit());
+                model.put("incoming_rate", String.format("%.2f", lottoTickets.size() > 0 ? winStatistics.calculateProfitRate(lottoTickets.size() * MONEY_OFFSET) : 0));
 
                 return render(model, "lotto_result.html");
             });
@@ -100,7 +102,7 @@ public class WebUILottoApplication {
             if (rankType.equals(RankType.NOTHING)) {
                 continue;
             }
-            results.add(String.format("%d개 일치 (%d원)- %d개", matchingCount, prize, count));
+            results.add(String.format("%d개 일치 (%d원) - %d개", matchingCount, prize, count));
         }
         return results;
     }

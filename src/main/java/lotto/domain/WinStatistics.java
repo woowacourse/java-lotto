@@ -31,6 +31,10 @@ public class WinStatistics {
         }
     }
 
+    public int getProfit() {
+        return profit;
+    }
+
     private void calculateProfit() {
         for (RankType rankType : countOfResult.keySet()) {
             this.profit += rankType.getPrize() * countOfResult.get(rankType);
