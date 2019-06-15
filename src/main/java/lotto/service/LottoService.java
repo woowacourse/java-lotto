@@ -3,14 +3,15 @@ package lotto.service;
 import lotto.dao.LottoDao;
 import lotto.dao.LottoGameDao;
 import lotto.domain.*;
-import lotto.domain.generator.ResultGenerator;
 import lotto.dto.LottoDto;
 import lotto.dto.LottoGameDto;
-import lotto.dto.ResultDto;
 import lotto.dto.WinningNumberDto;
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.domain.generator.LottoNumbersGenerator.generateLottoNumbers;
@@ -21,8 +22,8 @@ public class LottoService {
     private LottoDao lottoDao;
 
     public LottoService() {
-        lottoGameDao = new LottoGameDao();
-        lottoDao = new LottoDao();
+        lottoGameDao = LottoGameDao.getInstance();
+        lottoDao = LottoDao.getInstance();
     }
 
     public int getCurrentRound() throws SQLException {
@@ -93,43 +94,5 @@ public class LottoService {
         winningNumberDto.setBonusBall(bonusBall);
 
         return winningNumberDto;
-    }
-
-    public Result generateResult(int round, BoughtLottos boughtLottos,
-                                 WinningNumber winningNumber) throws SQLException {
-        Result result = ResultGenerator.generateResult(boughtLottos, winningNumber);
-        ResultDto resultDto = generateResultDto(result);
-        lottoGameDao.addResult(round, resultDto);
-
-        return result;
-    }
-
-    private ResultDto generateResultDto(Result result) {
-        Map<String, Integer> prizeResult = new HashMap<>();
-        int winningMoney = 0;
-
-        for (Prize prize : Prize.values()) {
-            String prizeName = prize.name();
-            int countOfPrize = result.getCountOfPrize(prize);
-
-            prizeResult.put(prizeName.toLowerCase(), countOfPrize);
-            winningMoney += prize.getWinningAmount() * countOfPrize;
-        }
-
-        ResultDto resultDto = new ResultDto();
-        resultDto.setPrize(prizeResult);
-        resultDto.setWinningMoney(winningMoney);
-        return resultDto;
-    }
-
-    public Map<String, Object> findAllDataOfRound(int round) throws SQLException {
-        Map<String, Object> model = new HashMap<>();
-
-        model.put("lottos", lottoDao.findAllBoughtLottoByRound(round));
-        model.put("lottoGame", lottoGameDao.findRoundById(round));
-        model.put("winningNumber", lottoGameDao.findWinningLottoByRound(round));
-        model.put("result", lottoGameDao.findResultByRound(round));
-
-        return model;
     }
 }
