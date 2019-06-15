@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UserDBConnectorTest {
+class UserLottoDAOTest {
 	private UserLottoDAO userLottoDAO;
 	private WinningLottoDAO winningLottoDAO;
 	private WinningLotto winningLotto;
