@@ -17,7 +17,7 @@ public class LottoApplication {
         Lottos lottos = new Lottos(LottoFactory.createLottos(
                 setManualLottoNumbers(setManualPurchaseCount(purchaseAmount / LOTTO_PRICE)),
                 purchaseAmount / LOTTO_PRICE));
-        OutputView.outputLottos(lottos);
+        OutputView.outputLottos(lottos.getLottos());
         WinningResult winningResult = lottos.match(setWinningLotto());
         OutputView.outputWinningResult(winningResult.getResult());
         OutputView.outputRevenueRate(winningResult.calculateRevenueRate(purchaseAmount));
