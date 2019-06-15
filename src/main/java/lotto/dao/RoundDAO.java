@@ -9,8 +9,9 @@ import java.util.List;
 
 public class RoundDAO {
 
-    public int findMaxRound() throws SQLException {
+    public int findMaxRound() {
         String sql = "SELECT MAX(round) AS max FROM round";
+        int result = 0;
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -18,12 +19,16 @@ public class RoundDAO {
             if (!resultSet.next()) {
                 return 1;
             }
-            return resultSet.getInt("max");
+            result = resultSet.getInt("max");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return result;
     }
 
-    public int findAmountByRound(int round) throws SQLException {
+    public int findAmountByRound(int round) {
         String sql = "SELECT amount FROM round WHERE round = ?";
+        int result = 0;
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -32,42 +37,51 @@ public class RoundDAO {
                 if (!resultSet.next()) {
                     return 0;
                 }
-                return resultSet.getInt("amount");
+                result = resultSet.getInt("amount");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return result;
     }
 
-    public List<Integer> findAllRounds() throws SQLException {
+    public List<Integer> findAllRounds() {
         String sql = "SELECT round FROM round ORDER BY round DESC";
+        List<Integer> rounds = new ArrayList<>();
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
-            List<Integer> rounds = new ArrayList<>();
             while (resultSet.next()) {
                 rounds.add(resultSet.getInt("round"));
             }
-            return rounds;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return rounds;
     }
 
-    public void addRound(int amount) throws SQLException {
+    public void addRound(int amount) {
         String sql = "INSERT INTO round(amount) VALUES (?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, amount);
             statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public void removeRound(int round) throws SQLException {
+    public void removeRound(int round) {
         String sql = "DELETE FROM round WHERE round = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, round);
             statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

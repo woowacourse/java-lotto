@@ -8,7 +8,6 @@ import lotto.dto.WinningLottoDTO;
 import lotto.dto.WinningResultDTO;
 import lotto.util.StringUtil;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class WinningLottoService {
@@ -16,7 +15,7 @@ public class WinningLottoService {
 
     private final WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
 
-    public WinningLottoDTO.Create createWinningLotto(String winningLottoNumbers, String bonus) throws SQLException {
+    public WinningLottoDTO.Create createWinningLotto(String winningLottoNumbers, String bonus) {
         List<String> winLotto = StringUtil.convertToList(winningLottoNumbers, DELIMITER);
         int bonusNumber = Integer.parseInt(bonus);
         Lotto winningLotto = LottoFactory.createLottoManually(winLotto);
@@ -26,7 +25,7 @@ public class WinningLottoService {
         return new WinningLottoDTO.Create(winningLotto, bonusNumber);
     }
 
-    public WinningResultDTO.Create calculateResult(int round) throws SQLException {
+    public WinningResultDTO.Create calculateResult(int round) {
         Lotto lotto = winningLottoDAO.findWinningLottoByRound(round);
         int bonusNumber = winningLottoDAO.findBonusNumberByRound(round);
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.get(bonusNumber));

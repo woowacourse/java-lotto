@@ -14,25 +14,27 @@ import java.util.List;
 public class LottoDAO {
     private static final String DELIMITER = ",";
 
-    public List<Lotto> findLottosByRound(int round) throws SQLException {
+    public List<Lotto> findLottosByRound(int round) {
         String sql = "SELECT lotto FROM lotto WHERE round = ?";
+        List<Lotto> lottos = new ArrayList<>();
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, round);
             try (ResultSet resultSet = statement.executeQuery()) {
-                List<Lotto> lottos = new ArrayList<>();
                 while (resultSet.next()) {
                     Lotto lotto = LottoFactory.createLottoManually(
                             StringUtil.convertToList(resultSet.getString("lotto"), DELIMITER));
                     lottos.add(lotto);
                 }
-                return lottos;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return lottos;
     }
 
-    public void addLottos(List<Lotto> lottos) throws SQLException {
+    public void addLottos(List<Lotto> lottos) {
         String sql = "INSERT INTO lotto(lotto, round) VALUES (?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
@@ -43,16 +45,20 @@ public class LottoDAO {
                 statement.setInt(2, nextRound);
                 statement.executeUpdate();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public void removeLotto(int round) throws SQLException {
+    public void removeLotto(int round) {
         String sql = "DELETE FROM lotto WHERE round = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, round);
             statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

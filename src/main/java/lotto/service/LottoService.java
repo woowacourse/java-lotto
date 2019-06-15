@@ -7,7 +7,6 @@ import lotto.domain.LottoFactory;
 import lotto.dto.LottosDTO;
 import lotto.util.StringUtil;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class LottoService {
@@ -16,7 +15,7 @@ public class LottoService {
     private final RoundDAO roundDAO = new RoundDAO();
     private final LottoDAO lottoDAO = new LottoDAO();
 
-    public LottosDTO.Create createLottos(String manualLottoNumbers) throws SQLException {
+    public LottosDTO.Create createLottos(String manualLottoNumbers) {
         List<String> manualLottos = StringUtil.convertToList(manualLottoNumbers, NEXTLINE);
         int countOfPurchase = roundDAO.findAmountByRound(roundDAO.findMaxRound()) / 1000;
         List<Lotto> lottos = LottoFactory.createLottos(manualLottos, countOfPurchase);
@@ -26,7 +25,7 @@ public class LottoService {
         return new LottosDTO.Create(lottos);
     }
 
-    public LottosDTO.Create findLottosByRound(int round) throws SQLException {
+    public LottosDTO.Create findLottosByRound(int round) {
         List<Lotto> lottos = lottoDAO.findLottosByRound(round);
         return new LottosDTO.Create(lottos);
     }

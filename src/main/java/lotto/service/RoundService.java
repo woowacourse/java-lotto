@@ -2,21 +2,20 @@ package lotto.service;
 
 import lotto.dao.RoundDAO;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class RoundService {
     private final RoundDAO roundDAO = new RoundDAO();
 
-    public void addRound(int amount) throws SQLException {
+    public void addRound(int amount) {
         roundDAO.addRound(amount);
     }
 
-    public int findMaxRound() throws SQLException {
+    public int findMaxRound() {
         return roundDAO.findMaxRound();
     }
 
-    public List<Integer> findAllRounds() throws SQLException {
+    public List<Integer> findAllRounds() {
         return roundDAO.findAllRounds();
     }
 }
