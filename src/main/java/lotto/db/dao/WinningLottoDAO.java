@@ -1,8 +1,8 @@
 package lotto.db.dao;
 
-import lotto.db.dto.LottoGameResultDTO;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
+import lotto.domain.dto.LottoGameResultDTO;
 
 import java.sql.*;
 import java.util.List;
@@ -93,6 +93,6 @@ public class WinningLottoDAO {
         ResultSet rs = pstmt.executeQuery();
         rs.next();
 
-        return rs.next() ? new LottoGameResultDTO(rs.getInt("id"), rs.getString("numbers"), rs.getInt("bonusBall")): null;
+        return rs.next() ? new LottoGameResultDTO(rs.getInt("id"), rs.getString("numbers"), rs.getInt("bonusBall")) : null;
     }
 }

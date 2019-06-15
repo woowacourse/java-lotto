@@ -1,10 +1,10 @@
 package lotto;
 
-import lotto.domain.Factory.LottoTicketsFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinStatistics;
 import lotto.domain.WinningLotto;
+import lotto.domain.factory.LottoTicketsFactory;
 import lotto.exception.UnexpectedInputRangeException;
 import lotto.view.InputView;
 import lotto.view.OutputView;

@@ -1,7 +1,7 @@
 package lotto.db.dao;
 
-import lotto.db.dto.LottoDTO;
-import lotto.domain.Factory.LottoTicketsFactory;
+import lotto.domain.dto.LottoDTO;
+import lotto.domain.factory.LottoTicketsFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import org.junit.jupiter.api.Test;

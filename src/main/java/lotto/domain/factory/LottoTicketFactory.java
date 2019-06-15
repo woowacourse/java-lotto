@@ -1,4 +1,4 @@
-package lotto.domain.Factory;
+package lotto.domain.factory;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
@@ -6,13 +6,15 @@ import lotto.exception.DuplicatedInputException;
 import lotto.exception.ExceptionMessage;
 import lotto.exception.UnexpectedInputRangeException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicketFactory {
     private static LottoTicketFactory FACTORY_INSTANCE;
 
-    private LottoTicketFactory() { }
+    private LottoTicketFactory() {
+    }
 
     public static LottoTicketFactory getInstance() {
         if (FACTORY_INSTANCE == null) {

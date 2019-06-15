@@ -2,9 +2,9 @@ package lotto;
 
 import lotto.db.dao.LottoDAO;
 import lotto.db.dao.WinningLottoDAO;
-import lotto.db.dto.LottoGameResultDTO;
 import lotto.domain.*;
-import lotto.domain.Factory.LottoTicketsFactory;
+import lotto.domain.dto.LottoGameResultDTO;
+import lotto.domain.factory.LottoTicketsFactory;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -13,9 +13,10 @@ import java.util.*;
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
-    public static void main(String[] args) {
-        int week = 1;
+    private static final int MONEY_OFFSET = 1000;
+    private static final String LOTTO_DELIMITER = "-";
 
+    public static void main(String[] args) {
         staticFiles.location("/");
 
         get("/", (req, res) -> {
@@ -32,13 +33,13 @@ public class WebUILottoApplication {
             post("/ticket", (req, res) -> {
                 Map<String, Object> model = new HashMap<>();
                 Money money = new Money(Integer.parseInt(req.queryParams("money")));
-                List<String> inputCustoms = Arrays.asList(req.queryParams("lottos").split("-"));
+                List<String> inputCustoms = Arrays.asList(req.queryParams("lottos").split(LOTTO_DELIMITER));
                 LottoTickets lottoTickets = LottoTicketsFactory.getInstance().create(money, inputCustoms);
 
                 model.put("money", money.getMoney());
                 model.put("lottos", lottoTickets.getLottoTickets());
                 model.put("amountOfCustom", inputCustoms.size());
-                model.put("amountOfAuto", (money.getMoney() / 1000) - inputCustoms.size());
+                model.put("amountOfAuto", (money.getMoney() / MONEY_OFFSET) - inputCustoms.size());
 
                 LottoDAO.addLottoTicket(lottoTickets);
 
@@ -83,13 +84,13 @@ public class WebUILottoApplication {
             int count = winStatistics.getCountOfResult().get(rankType);
 
             if (rankType.equals(RankType.SECOND)) {
-                results.add(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개\n", matchingCount, prize, count));
+                results.add(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개", matchingCount, prize, count));
                 continue;
             }
             if (rankType.equals(RankType.NOTHING)) {
                 continue;
             }
-            results.add(String.format("%d개 일치 (%d원)- %d개\n", matchingCount, prize, count));
+            results.add(String.format("%d개 일치 (%d원)- %d개", matchingCount, prize, count));
         }
         return results;
     }

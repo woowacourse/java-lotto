@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.Factory.LottoTicketFactory;
+import lotto.domain.factory.LottoTicketFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

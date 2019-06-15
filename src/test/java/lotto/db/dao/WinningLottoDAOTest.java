@@ -1,6 +1,6 @@
 package lotto.db.dao;
 
-import lotto.db.dto.LottoGameResultDTO;
+import lotto.domain.dto.LottoGameResultDTO;
 import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.Test;
 

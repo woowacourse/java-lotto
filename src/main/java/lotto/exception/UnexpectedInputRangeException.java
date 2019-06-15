@@ -1,6 +1,6 @@
 package lotto.exception;
 
-public class UnexpectedInputRangeException extends NullPointerException{
+public class UnexpectedInputRangeException extends NullPointerException {
     public UnexpectedInputRangeException() {
         super();
     }

@@ -1,11 +1,9 @@
 package lotto.domain;
 
-import lotto.domain.Factory.LottoTicketFactory;
+import lotto.domain.factory.LottoTicketFactory;
 import lotto.exception.DuplicatedInputException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -65,10 +63,5 @@ public class WinningLottoTest {
         int bonusBall = 7;
 
         assertThrows(DuplicatedInputException.class, () -> WinningLotto.of(winningNumbers, bonusBall));
-    }
-
-    @AfterEach
-    void tearDown() {
-        WinningLotto.makeObjectNull();
     }
 }

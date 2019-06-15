@@ -1,4 +1,4 @@
-package lotto.domain.Factory;
+package lotto.domain.factory;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -10,7 +10,8 @@ import java.util.List;
 public class LottoTicketsFactory {
     private static LottoTicketsFactory FACTORY_INSTANCE;
 
-    private LottoTicketsFactory() { }
+    private LottoTicketsFactory() {
+    }
 
     public static LottoTicketsFactory getInstance() {
         if (FACTORY_INSTANCE == null) {

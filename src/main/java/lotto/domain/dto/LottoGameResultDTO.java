@@ -1,4 +1,4 @@
-package lotto.db.dto;
+package lotto.domain.dto;
 
 public class LottoGameResultDTO {
     private int winningLottoId;

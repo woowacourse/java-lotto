@@ -1,10 +1,10 @@
 package lotto.db.dao;
 
-import lotto.db.dto.LottoDTO;
-import lotto.domain.Factory.LottoTicketFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.dto.LottoDTO;
+import lotto.domain.factory.LottoTicketFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
