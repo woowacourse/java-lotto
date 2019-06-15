@@ -6,6 +6,7 @@ import lotto.domain.*;
 import lotto.domain.dto.LottoGameResultDTO;
 import lotto.domain.factory.LottoTicketsFactory;
 import spark.ModelAndView;
+import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.*;
@@ -33,7 +34,7 @@ public class WebUILottoApplication {
             post("/ticket", (req, res) -> {
                 Map<String, Object> model = new HashMap<>();
                 Money money = new Money(Integer.parseInt(req.queryParams("money")));
-                List<String> inputCustoms = Arrays.asList(req.queryParams("lottos").split(LOTTO_DELIMITER));
+                List<String> inputCustoms = getInputCustoms(req.queryParams("lottos"));
                 LottoTickets lottoTickets = LottoTicketsFactory.getInstance().create(money, inputCustoms);
 
                 model.put("money", money.getMoney());
@@ -55,7 +56,7 @@ public class WebUILottoApplication {
                 }
                 WinningLottoDAO.addWinningLottoTicket(WinningLotto.of(lottoNumbers.toString(), Integer.parseInt(req.queryParams("bonusBall"))));
 
-                res.redirect("/");
+                res.redirect("/win/result");
                 return null;
             });
 
@@ -74,6 +75,15 @@ public class WebUILottoApplication {
                 return render(model, "lotto_result.html");
             });
         });
+    }
+
+    private static List<String> getInputCustoms(String lottos) {
+        List<String> inputCustoms = Arrays.asList(lottos.split(LOTTO_DELIMITER));
+
+        if (lottos.isEmpty()) {
+            inputCustoms = new ArrayList<>();
+        }
+        return inputCustoms;
     }
 
     private static List<String> getEachRank(WinStatistics winStatistics) {
