@@ -1,11 +1,13 @@
 package lotto.db.dao;
 
 import lotto.db.dto.LottoDTO;
+import lotto.domain.Factory.LottoTicketFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,6 +68,24 @@ public class LottoDAO {
         ResultSet rs = pstmt.executeQuery();
 
         return getLottoDTO(rs);
+    }
+
+    public static List<LottoTicket> findLottosByLottoId(int lottoId) throws SQLException {
+        String query = "SELECT GROUP_CONCAT(ln.number SEPARATOR  ',') as numbers " +
+                "FROM lotto.lotto as l " +
+                "JOIN lotto.lottonumber as ln ON l.id = ln.lotto_id " +
+                "JOIN lotto.lottogame as lg ON l.id = lg.lotto_id " +
+                "WHERE lg.winning_id = ? GROUP BY l.id;";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, lottoId);
+        ResultSet rs = pstmt.executeQuery();
+
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        while (rs.next()) {
+            lottoTickets.add(LottoTicketFactory.getInstance().create(rs.getString("numbers")));
+        }
+
+        return lottoTickets;
     }
 
     private static LottoDTO getLottoDTO(ResultSet rs) throws SQLException {

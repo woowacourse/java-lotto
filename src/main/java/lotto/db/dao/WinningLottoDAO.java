@@ -2,11 +2,9 @@ package lotto.db.dao;
 
 import lotto.db.dto.LottoGameResultDTO;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 import lotto.domain.WinningLotto;
 
 import java.sql.*;
-import java.util.Arrays;
 import java.util.List;
 
 import static lotto.db.DBConnection.getConnection;
@@ -20,7 +18,7 @@ public class WinningLottoDAO {
         int lotto_id = addLotto();
         addLottoNumbers(lotto_id, lottoNumbers);
         int winning_id = addWinningLotto(winningLotto, lotto_id);
-        addWinningLottoIdIntoLottoGame(winning_id, lotto_id);
+        addWinningLottoIdIntoLottoGame(winning_id);
     }
 
     private static int addLotto() throws SQLException {
@@ -60,17 +58,17 @@ public class WinningLottoDAO {
         return (rs.next()) ? rs.getInt(1) : 0;
     }
 
-    private static void addWinningLottoIdIntoLottoGame(int winning_id, int lotto_id) throws SQLException {
-        String query = "UPDATE lotto.lottogame SET winning_id = ? WHERE (lotto_id = ?)";
-        PreparedStatement pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+    private static void addWinningLottoIdIntoLottoGame(int winning_id) throws SQLException {
+        String query = "UPDATE lotto.lottogame SET winning_id = ? WHERE winning_id IS NULL";
+        PreparedStatement pstmt = conn.prepareStatement(query);
 
         pstmt.setInt(1, winning_id);
-        pstmt.setInt(2, lotto_id);
+
         pstmt.executeUpdate();
     }
 
     public static LottoGameResultDTO findLatestWinningLotto() throws SQLException {
-        String query = "SELECT l.id, GROUP_CONCAT(ln.number SEPARATOR  ',') as numbers, w.bonusBall " +
+        String query = "SELECT w.id, GROUP_CONCAT(ln.number SEPARATOR  ',') as numbers, w.bonusBall " +
                 "FROM lotto.lotto as l " +
                 "JOIN lotto.winninglotto as w ON w.lotto_id = l.id " +
                 "JOIN lotto.lottonumber as ln ON l.id = ln.lotto_id " +
@@ -78,8 +76,9 @@ public class WinningLottoDAO {
                 "ORDER BY l.id DESC limit 1";
         PreparedStatement pstmt = conn.prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
+        rs.next();
 
-        return getWinningLottoDTO(rs);
+        return new LottoGameResultDTO(rs.getInt("id"), rs.getString("numbers"), rs.getInt("bonusBall"));
     }
 
     public static LottoGameResultDTO findByWinningLottoId(String winningLottoId) throws SQLException {
@@ -92,25 +91,8 @@ public class WinningLottoDAO {
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, winningLottoId);
         ResultSet rs = pstmt.executeQuery();
+        rs.next();
 
-        return getWinningLottoDTO(rs);
-    }
-
-    private static LottoGameResultDTO getWinningLottoDTO(ResultSet rs) throws SQLException {
-        if (!rs.next()) {
-            return null;
-        }
-
-        try {
-            int id = rs.getInt("id");
-            int bonusBall = rs.getInt("bonusBall");
-            List<String> numbers = Arrays.asList(rs.getString("numbers").split(","));
-
-            return new LottoGameResultDTO(
-                    new LottoGameResultDTO.Builder(Integer.parseInt(numbers.get(0)), Integer.parseInt(numbers.get(1)), Integer.parseInt(numbers.get(2)),
-                            Integer.parseInt(numbers.get(3)), Integer.parseInt(numbers.get(4)), Integer.parseInt(numbers.get(5)), bonusBall).winningLottoId(id));
-        } catch (Exception e) {
-            return null;
-        }
+        return rs.next() ? new LottoGameResultDTO(rs.getInt("id"), rs.getString("numbers"), rs.getInt("bonusBall")): null;
     }
 }
