@@ -22,9 +22,10 @@ public class WinningLottoController {
     public static final Route CREATE_WINNING_LOTTO = (request, response) -> {
         List<String> winningLottoNumbers =
                 StringUtil.convertToList(request.queryParams("winningLottoNumbers"), COMMA_DELIMITER);
+        int bonusNumber = Integer.parseInt(request.queryParams("bonusNumber"));
         WinningLottoDTO.Create winningLottoDto = winningLottoService.createWinningLotto(
                 winningLottoNumbers,
-                request.queryParams("bonusNumber"));
+                bonusNumber);
         List<Integer> rounds = roundService.findAllRounds();
 
         Map<String, Object> model = new HashMap<>();

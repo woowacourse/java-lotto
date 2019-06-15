@@ -13,8 +13,7 @@ public class WinningLottoService {
 
     private final WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
 
-    public WinningLottoDTO.Create createWinningLotto(List<String> winningLottoNumbers, String bonus) {
-        int bonusNumber = Integer.parseInt(bonus);
+    public WinningLottoDTO.Create createWinningLotto(List<String> winningLottoNumbers, int bonusNumber) {
         Lotto winningLotto = LottoFactory.createLottoManually(winningLottoNumbers);
 
         winningLottoDAO.addWinningLotto(winningLotto, bonusNumber);
