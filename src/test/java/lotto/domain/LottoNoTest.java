@@ -3,7 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoNoTest {
 
@@ -20,6 +21,6 @@ public class LottoNoTest {
 
     @Test
     void 유효값_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> LottoNo.from(LottoNo.MAX_NUMBER+1));
+        assertThrows(IllegalArgumentException.class, () -> LottoNo.from(LottoNo.MAX_NUMBER + 1));
     }
 }

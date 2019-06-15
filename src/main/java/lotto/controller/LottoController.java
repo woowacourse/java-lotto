@@ -10,7 +10,6 @@ import lotto.service.RoundService;
 import spark.Request;
 import spark.Response;
 
-import java.sql.SQLException;
 import java.util.*;
 
 import static lotto.WebUILottoApplication.render;
