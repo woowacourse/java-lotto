@@ -27,15 +27,54 @@
             <button type="submit" class="btn btn-primary">시작하기</button>
         </div>
     </form>
+
     <div class="row">
         <div class="col-md-6">
-            round | name | total price | earning rate<br>
-            {{#lottoGames}}
-                {{round}} | {{name}} | {{totalWinningMoney}} 원 | {{earningRate}}<br>
-            {{/lottoGames}}
+            <h3>Recent</h3>
+            <div class="table-responsive-lg text-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Round</th>
+                            <th scope="col">name</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Earning Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {{#lottoGames}}
+                        <tr>
+                            <th scope="row"><a href="/lottoResult/{{round}}">{{round}}</a></th>
+                            <td>{{name}}</td>
+                            <td class="text-right">{{totalWinningMoney}} 원</td>
+                            <td>{{earningRate}}</td>
+                        </tr>
+                    {{/lottoGames}}
+                    </tbody>
+                </table>
+            </div>
         </div>
+
         <div class="col-md-6">
-            B table
+            <h3>Ranking</h3>
+            <div class="table-responsive-lg text-center">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">name</th>
+                        <th scope="col">Total Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#ranking}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td class="text-right">{{totalWinningMoney}} 원</td>
+                    </tr>
+                    {{/ranking}}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </section>
