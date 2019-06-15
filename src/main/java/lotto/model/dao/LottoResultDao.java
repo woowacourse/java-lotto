@@ -8,6 +8,7 @@ import lotto.model.config.DBConnector;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoResultDao {
@@ -37,22 +38,36 @@ public class LottoResultDao {
         return round + 1;
     }
 
-    public void fetchRequestResult(int requestRound, List<String> results) throws SQLException {
+    public List<String> fetchRequestResult(int requestRound) throws SQLException {
+        List<String> results = new ArrayList<>();
         String query = "SELECT * FROM lotto_result_info WHERE round = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, requestRound);
         ResultSet rs = ps.executeQuery();
 
-        List<String> r = new ArrayList<>();
         if (rs.next()) {
-            results.add(rs.getString("result"));
+            results = new ArrayList<>(Arrays.asList(rs.getString("result").split("\n")));
+        }
+        return results;
+    }
+
+    public List<String> fetchRequestMoneyAndProfit(int requestRound) throws SQLException {
+        List<String> results = new ArrayList<>();
+        String query = "SELECT * FROM lotto_result_info WHERE round = ?";
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, requestRound);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
             results.add("당첨금액: \n");
-            results.add(rs.getInt("prize_money") + "");
+            results.add(rs.getDouble("prize_money") + "");
             results.add("수익률: \n");
-            results.add(rs.getInt("profit_rate") + "%");
+            results.add(rs.getDouble("profit_rate") + "%");
         }
         DBConnector.closeConnection(connection);
+        return results;
     }
 }
 

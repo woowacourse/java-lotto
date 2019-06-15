@@ -83,32 +83,14 @@ public class WebUILottoApplication {
         get("/show_final_results", (request, response) -> {
             int requestRound = Integer.parseInt(request.queryParams("result_number"));
 
-            List<String> lottos = new ArrayList<>();
-            LOTTOS_DAO.fetchRequestLottos(requestRound, lottos);
-            for (String lotto : lottos) {
-                LOGGER.info(lotto);
-            }
-
-            List<String> winningLotto = new ArrayList<>();
-            WINNINGLOTTOS_DAO.fetchRequestWinningLotto(requestRound, winningLotto);
-
-            List<String> results = new ArrayList<>();
-            LOTTORESULT_DAO.fetchRequestResult(requestRound, results);
-
             Map<String, Object> model = new HashMap<>();
-            model.put("final_lottos", lottos);
-            model.put("final_winning", winningLotto);
-            model.put("final_results", results);
+            model.put("final_lottos", LOTTOS_DAO.fetchRequestLottos(requestRound));
+            model.put("final_winning", WINNINGLOTTOS_DAO.fetchRequestWinningLotto(requestRound));
+            model.put("final_results", LOTTORESULT_DAO.fetchRequestResult(requestRound));
+            model.put("final_stats", LOTTORESULT_DAO.fetchRequestMoneyAndProfit(requestRound));
             return render(model, "final.html");
         });
 
-        get("/manual_count", ((request, response) -> {
-            Lottos lottos = request.session().attribute("lottos");
-            Money money = new Money(request.queryParams("money"));
-            Map<String, Object> model = new HashMap<>();
-            model.put("money", money);
-            return render(model, "check_money.html");
-        }));
     }
 
     private static List<Integer> makeButtonIdentifiers() throws SQLException {
@@ -144,7 +126,6 @@ public class WebUILottoApplication {
         }
         return convertedLotto;
     }
-
 
     private static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));

@@ -5,6 +5,7 @@ import lotto.model.Lottos;
 import lotto.model.config.DBConnector;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottosDao {
@@ -39,27 +40,30 @@ public class LottosDao {
         return round + 1;
     }
 
-    public void fetchRequestLottos(int requestRound, List<String> lottos) throws SQLException {
+    public List<String> fetchRequestLottos(int requestRound) throws SQLException {
+        List<String> lottos = new ArrayList<>();
         String query = "SELECT * FROM lotto_numbers_info WHERE round = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, requestRound);
         ResultSet resultSet = ps.executeQuery();
-        while (resultSet.next()) {
-            String result = "";
-            result += resultSet.getInt("first");
-            result += "-";
-            result += resultSet.getInt("second");
-            result += "-";
-            result += resultSet.getInt("third");
-            result += "-";
-            result += resultSet.getInt("fourth");
-            result += "-";
-            result += resultSet.getInt("fifth");
-            result += "-";
-            result += resultSet.getInt("sixth");
-            lottos.add(result);
-        }
+
+        retrieveDataFromDB(resultSet, lottos);
+
         DBConnector.closeConnection(connection);
+        return lottos;
+    }
+
+    private void retrieveDataFromDB(ResultSet resultSet, List<String> lottos) throws SQLException {
+        while (resultSet.next()) {
+            List<String> numbers = new ArrayList<>();
+            numbers.add(Integer.toString(resultSet.getInt("first")));
+            numbers.add(Integer.toString(resultSet.getInt("second")));
+            numbers.add(Integer.toString(resultSet.getInt("third")));
+            numbers.add(Integer.toString(resultSet.getInt("fourth")));
+            numbers.add(Integer.toString(resultSet.getInt("fifth")));
+            numbers.add(Integer.toString(resultSet.getInt("sixth")));
+            lottos.add(String.join(",", numbers));
+        }
     }
 }

@@ -5,6 +5,7 @@ import lotto.model.LottoNumber;
 import lotto.model.config.DBConnector;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLottoDao {
@@ -39,29 +40,31 @@ public class WinningLottoDao {
         return round + 1;
     }
 
-    public void fetchRequestWinningLotto(int requestRound, List<String> winningLotto) throws SQLException {
+    public List<String> fetchRequestWinningLotto(int requestRound) throws SQLException {
+        List<String> winningLotto = new ArrayList<>();
         String query = "SELECT * FROM winning_lotto_info WHERE round = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, requestRound);
         ResultSet resultSet = ps.executeQuery();
-        while (resultSet.next()) {
-            String result = "";
-            result += resultSet.getInt("first");
-            result += "-";
-            result += resultSet.getInt("second");
-            result += "-";
-            result += resultSet.getInt("third");
-            result += "-";
-            result += resultSet.getInt("fourth");
-            result += "-";
-            result += resultSet.getInt("fifth");
-            result += "-";
-            result += resultSet.getInt("sixth");
-            result += "-";
-            result += resultSet.getInt("bonus_number");
-            winningLotto.add(result);
-        }
+
+        retrieveDataFromDB(resultSet, winningLotto);
+
         DBConnector.closeConnection(connection);
+        return winningLotto;
+    }
+
+    private void retrieveDataFromDB(ResultSet resultSet, List<String> winningLotto) throws SQLException {
+        if (resultSet.next()) {
+            List<String> numbers = new ArrayList<>();
+            numbers.add(Integer.toString(resultSet.getInt("first")));
+            numbers.add(Integer.toString(resultSet.getInt("second")));
+            numbers.add(Integer.toString(resultSet.getInt("third")));
+            numbers.add(Integer.toString(resultSet.getInt("fourth")));
+            numbers.add(Integer.toString(resultSet.getInt("fifth")));
+            numbers.add(Integer.toString(resultSet.getInt("sixth")));
+            numbers.add("보너스 번호 :" + resultSet.getInt("bonus_number"));
+            winningLotto.add(String.join(",", numbers));
+        }
     }
 }
