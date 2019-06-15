@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>결과 확인</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div id="top-panel">
+    <h1 align="center">내 로또 결과</h1>
+</div>
+<div class="col-md-8" style="margin: auto;">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">당첨 통계</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#winnersResult}}
+        <tr>
+            <th scope="row">{{this}}</th>
+        </tr>
+        {{/winnersResult}}
+        </tbody>
+    </table>
+</div>
+<div id="bottom-panel">
+    <h3 align="center">{{returnRate}}</h3>
+</div>
+</body>
+</html>

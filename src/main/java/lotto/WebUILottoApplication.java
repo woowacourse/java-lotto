@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.Money;
-import lotto.domain.UserLotto;
+import lotto.domain.*;
+import lotto.domain.Number;
 import lotto.service.LottoService;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -22,29 +22,34 @@ public class WebUILottoApplication {
         });
 
         post("/lotto", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-
-            int round = new Money(Integer.parseInt(req.queryParams("money"))).getRound();
+            int money = Integer.parseInt(req.queryParams("money"));
             int manualRound = Integer.parseInt(req.queryParams("manualRound"));
-            int autoRound = lottoService.getAutoRound(round, manualRound);
-            String[] numbers = lottoService.splitNumbers(req.queryParams("manualNumbers"));
-            UserLotto userLotto = lottoService.createUserLotto(numbers, autoRound);
+            String manualNumbers = req.queryParams("manualNumbers");
 
-            model.put("round", round);
-            model.put("manualRound", manualRound);
-            model.put("autoRound", autoRound);
-            model.put("userLotto", userLotto.getUserLotto());
-
-            return render(model, "lotto.html");
+            return render(lottoService.offerLottoInfo(money, manualRound, manualNumbers), "lotto.html");
         });
 
         post("/winLotto", (req, res) -> {
+            int round = Integer.parseInt(req.queryParams("round"));
+            String userLottoString = req.queryParams("userLotto");
+            return render(lottoService.offerUserLottoInfo(round, userLottoString), "winNumber.html");
+        });
+
+        get("/result", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            WinningLotto winningLotto = new WinningLotto(
+                    Parser.parseWinningLotto(req.queryParams("winNumbers"))
+                    , Number.of(Integer.parseInt(req.queryParams("bonusNumber")))
+            );
 
-            model.put("round", Integer.parseInt(req.queryParams("round")));
-            model.put("userLotto", req.queryParams("userLotto"));
+//            Winners winners = lottoService.createWinners(winningLotto.makeRankResultList(), winningLotto);
+//
+//            model.put("winningLotto", winningLotto);
+//            model.put("winners", winners);
+//            model.put("winnersResult", lottoService.provideResultStatus(winners.getRankResult()));
+//            model.put("returnRate", lottoService.offerReturnRate(winners.calculateResultRate(round)));
 
-            return render(model, "winNumber.html");
+            return render(model, "result.html");
         });
     }
 

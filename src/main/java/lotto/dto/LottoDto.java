@@ -9,12 +9,14 @@ public class LottoDto {
     private int manualRound;
     private int autoRound;
     private List<Lotto> userLotto;
+    private String[] numbers;
 
-    public LottoDto(int round, int manualRound, int autoRound, List<Lotto> userLotto) {
+    public LottoDto(int round, int manualRound, int autoRound, List<Lotto> userLotto, String[] numbers) {
         this.round = round;
         this.manualRound = manualRound;
         this.autoRound = autoRound;
         this.userLotto = userLotto;
+        this.numbers = numbers;
     }
 
     public int getRound() {
@@ -31,5 +33,9 @@ public class LottoDto {
 
     public List<Lotto> getUserLotto() {
         return userLotto;
+    }
+
+    public String[] getNumbers() {
+        return numbers;
     }
 }

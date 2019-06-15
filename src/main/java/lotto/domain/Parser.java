@@ -27,4 +27,12 @@ public class Parser {
 
         return userLotto;
     }
+
+    public static String[] parseLottoStrings(String userLottoString) {
+        String temp = userLottoString
+                .replace("[[" , "")
+                .replace("]]", "")
+                .replace(", ",",");
+        return temp.split("\\],\\[");
+    }
 }

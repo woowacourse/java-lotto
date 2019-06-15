@@ -10,6 +10,10 @@ public class UserLotto {
         createLotto(numberGenerator, round);
     }
 
+    public UserLotto(List<Lotto> userLotto) {
+        this.userLotto = userLotto;
+    }
+
     public int getSize() {
         return userLotto.size();
     }
