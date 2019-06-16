@@ -41,6 +41,36 @@ p {
 	margin: 20px auto;
 }
 
+.ball {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	margin: 5px;
+	line-height: 50px;
+	font-size: 24px;
+	font-weight: 500;
+	color: #fff;
+	border-radius: 100%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.ball1 {
+	background: #fbc400;
+}
+.ball2 {
+	background: #69c8f2;
+}
+.ball3 {
+	background: #ff7272;
+}
+.ball4 {
+	background: #aaa;
+}
+.ball5 {
+	background: #b0d840;
+}
+
 input, textarea {
 	font-family: 'Montserrat', "Source Han Sans KR";
 	font-size: 2.5em;
@@ -54,6 +84,10 @@ input, textarea {
 	text-align: center;
 }
 
+textarea {
+	min-height: 200px;
+}
+
 input[type=submit] {
 	font-size: 1em;
 	color: #fff;
@@ -62,3 +96,6 @@ input[type=submit] {
 	border-radius: 10px;
 	background-color: red;
 }
+
+::selection { background: #ffaeb5; color: #333; }
+::-moz-selection { background: #ffaeb5; color: #333; }

@@ -1,7 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoTickets;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.WebInputParser;
 import lotto.view.WebOutputView;
 import spark.ModelAndView;
@@ -16,6 +15,7 @@ public class WebUILottoApplication {
     static Money money;
     static int numberOfManualLotto;
     static LottoTickets lottoTickets;
+    static WinningLotto winningLotto;
 
     public static void main(String[] args) {
         staticFiles.location("/templates");
@@ -69,6 +69,19 @@ public class WebUILottoApplication {
             }
 
             return render(model, "winning.html");
+        });
+
+        post("/check", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            try {
+                winningLotto = WebInputParser.getWinningLotto(req.queryParams("winningLotto"), req.queryParams("bonus"));
+                model.put("winningLotto", WebOutputView.printWinningLottoAsBall(winningLotto));
+            } catch (Exception e) {
+                model.put("error", e.getMessage());
+                return render(model, "error.html");
+            }
+
+            return render(model, "check.html");
         });
     }
 

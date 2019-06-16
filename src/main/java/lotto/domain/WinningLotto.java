@@ -27,6 +27,14 @@ public class WinningLotto {
         return Rank.valueOf(countOfMatch, matchBonus);
     }
 
+    public int getLottoNumber(int index) {
+        return lotto.getLottoNumber(index);
+    }
+
+    public int getBonusNumber() {
+        return bonusBall.getNumber();
+    }
+
     public WinningLottoDTO toDTO(int round) {
         WinningLottoDTO winningLottoDto = new WinningLottoDTO();
         winningLottoDto.setRound(round);

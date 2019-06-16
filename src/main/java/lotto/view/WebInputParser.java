@@ -42,4 +42,10 @@ public class WebInputParser {
             throw new IllegalArgumentException("입력된 수동 로또의 개수가 맞지 않습니다.");
         }
     }
+
+    public static WinningLotto getWinningLotto(String winningNumbersInput, String bonusBallInput) {
+        Lotto lotto = ManualLottoGenerator.generate(Arrays.asList(winningNumbersInput.split(",")));
+        LottoNumber bonusBall = new LottoNumber(Integer.parseInt(bonusBallInput));
+        return new WinningLotto(lotto, bonusBall);
+    }
 }

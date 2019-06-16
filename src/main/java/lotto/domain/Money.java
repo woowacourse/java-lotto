@@ -33,4 +33,8 @@ public class Money {
     public int getNumberOfLotto() {
         return money / MONEY_PER_LOTTO;
     }
+
+    public int getMoney() {
+        return money;
+    }
 }
