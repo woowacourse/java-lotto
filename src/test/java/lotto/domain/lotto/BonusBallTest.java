@@ -24,7 +24,7 @@ public class BonusBallTest {
     @BeforeEach
     void setUp() {
         winningLottos = new ArrayList<>();
-        for (int i = NUMBER_MIN; i < NUMBER_MIN + LOTTO_LENGTH ; i++) {
+        for (int i = NUMBER_MIN; i < NUMBER_MIN + LOTTO_LENGTH; i++) {
             winningLottos.add(new LottoNumber(i));
         }
     }

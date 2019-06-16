@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LottoWinningService {
 
-    public static int insertResult(LottoResult_VO lottoResult_vo, WinningLotto winningLotto){
+    public static int insertResult(LottoResult_VO lottoResult_vo, WinningLotto winningLotto) {
         ResultLottoDTO lottoDTO = new ResultLottoDTO();
         lottoDTO.setWinningLotto(winningLotto.getWinningNumbers().toString());
         lottoDTO.setBonusBall(Integer.parseInt(winningLotto.getBonusBall().toString()));
@@ -20,7 +20,7 @@ public class LottoWinningService {
         return LottoWinningDAO.getInstance().addResult(lottoDTO);
     }
 
-    public static List<String> findByResultRound(int round){
+    public static List<String> findByResultRound(int round) {
         return LottoWinningDAO.getInstance().findByResultRound(round);
     }
 }

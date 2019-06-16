@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.vo.LottoResult_VO;
 import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
 
 public class ConsoleOutPutView {
     public static final String NEW_LINE = "\n";

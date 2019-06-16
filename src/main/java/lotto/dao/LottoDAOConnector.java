@@ -21,16 +21,16 @@ public class LottoDAOConnector {
 
         try {
             con = DriverManager.getConnection("jdbc:mysql://" + server + "/"
-                + database + "?useSSL=false", userName, password);
-        } catch (SQLException e){
+                    + database + "?useSSL=false", userName, password);
+        } catch (SQLException e) {
             System.err.println("연결 오류 : " + e.getMessage());
         }
 
         return con;
     }
 
-    public static void closeConnection(Connection con){
-        try{
+    public static void closeConnection(Connection con) {
+        try {
             if (con != null) {
                 con.close();
             }

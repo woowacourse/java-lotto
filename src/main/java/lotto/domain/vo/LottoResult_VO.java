@@ -25,7 +25,7 @@ public class LottoResult_VO {
         return result;
     }
 
-    public List<String> getRank(){
+    public List<String> getRank() {
         return result.keySet()
                 .stream()
                 .map(rank -> selectMessage(rank))
@@ -41,7 +41,7 @@ public class LottoResult_VO {
                 , result.get(rank));
     }
 
-    public int getPrize(){
+    public int getPrize() {
         return result.keySet().stream()
                 .map(rank -> rank.getWinningMoney() * result.get(rank))
                 .reduce(0, Integer::sum);

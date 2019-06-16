@@ -42,12 +42,12 @@ public class LottoTicketDAO {
                 }).count();
     }
 
-    public int findRoundId(){
+    public int findRoundId() {
         try {
             String query = "SELECT " + MAX_ID + " FROM result";
             PreparedStatement pstmt = con.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getInt(MAX_ID);
             }
         } catch (SQLException e) {

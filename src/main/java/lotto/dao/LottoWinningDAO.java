@@ -41,17 +41,17 @@ public class LottoWinningDAO {
         }
     }
 
-    public List<String> findByResultRound(int round){
-        try{
+    public List<String> findByResultRound(int round) {
+        try {
             String query = "SELECT * FROM result WHERE rId = ?";
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setInt(1, round);
 
             ResultSet rs = pstmt.executeQuery();
-            if(!rs.next()) throw new LottoWinningDAOException("데이터 없음");
+            if (!rs.next()) throw new LottoWinningDAOException("데이터 없음");
             return Arrays.asList(rs.getString("winning_lotto"), rs.getString("bonus_ball")
-                    ,rs.getString("result_statistic"), rs.getString("result_prize")
-                    ,rs.getString("result_rate"));
+                    , rs.getString("result_statistic"), rs.getString("result_prize")
+                    , rs.getString("result_rate"));
         } catch (SQLException e) {
             throw new LottoWinningDAOException(e);
         }

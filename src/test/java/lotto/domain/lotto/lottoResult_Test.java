@@ -13,7 +13,7 @@ public class lottoResult_Test {
     @Test
     void 매칭_테스트() {
         Price price = new Price("8000");
-        NumberOfCustomLotto amount = new NumberOfCustomLotto("5",price);
+        NumberOfCustomLotto amount = new NumberOfCustomLotto("5", price);
         List<String> customLotto = new ArrayList<>(Arrays.asList(
                 "1,2,3,4,11,12", "1,2,3,10,11,12", "1,2,3,10,11,13", "1,2,9,10,11,13", "1,2,19,20,21,22"
         ));
