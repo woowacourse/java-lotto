@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="top-panel">
-    <h1 align="center">로또 구매 페이지</h1>
+    <h1 align="center">{{lottoRound}}회 로또 구매 페이지</h1>
 </div>
 <form method="POST" id="lotto" action="/lotto" onsubmit="return check()">
     <div class="form-group col-md-4" style="margin: auto">
@@ -37,7 +37,47 @@
     <div id="bottom-panel" style="float: right; margin-right: 500px">
         <button type="submit" class="btn btn-secondary">구매</button>
         <button type="reset" class="btn btn-secondary disabled">취소</button>
+        <input type="hidden" id="lottoRound" name="lottoRound" value="{{lottoRound}}">
     </div>
 </form>
+<script>
+    function check() {
+        if (checkMoney()) {
+            return false;
+        }
+
+        if (checkRound()) {
+            return false;
+        }
+    }
+
+    function checkMoney() {
+        var money = document.getElementById('money').value;
+
+        if (checkNumbers(money, '금액')) {
+            return true;
+        }
+        if (money % 1000 !== 0) {
+            alert('금액을 확인 해 주세요.');
+            return true;
+        }
+
+        return false;
+    }
+
+    function checkRound() {
+        var manualRound = document.getElementById('manualRound').value;
+        return checkNumbers(manualRound, '수동 숫자');
+    }
+
+    function checkNumbers(value, name) {
+        if (isNaN(value)) {
+            alert(name + '은(는) 숫자만 입력해 주세요.');
+            return true;
+        }
+
+        return false;
+    }
+</script>
 </body>
 </html>

@@ -1,8 +1,10 @@
 package lotto.service;
 
+import lotto.dao.LottoDao;
 import lotto.domain.*;
 import lotto.domain.Number;
 import lotto.dto.LottoDto;
+import lotto.dto.LottoRoundDto;
 import lotto.dto.ResultDto;
 import lotto.dto.UserLottoDto;
 
@@ -19,6 +21,7 @@ public class LottoService {
         int autoRound = getAutoRound(round, manualRound);
         String[] numbers = splitNumbers(manualNumbers);
         UserLotto userLotto = createUserLotto(numbers, autoRound);
+        LottoDao.addLottoes(userLotto, round);
 
         return new LottoDto(round, manualRound, autoRound, userLotto.getUserLotto(), numbers);
     }
@@ -39,6 +42,11 @@ public class LottoService {
         return new ResultDto(resultRanks, winners.calculateResultRate(round));
     }
 
+    public LottoRoundDto offerLottoRounds() {
+        int lottoRound = LottoDao.getMaxRound() + 1;
+        return new LottoRoundDto(lottoRound);
+    }
+
     private UserLotto createUserLotto(String[] numbers, int autoRound) {
         return new UserLotto(Parser.parseLotto(numbers), autoRound, new LottoNumberGenerator());
     }
@@ -54,7 +62,7 @@ public class LottoService {
         return round - manualRound;
     }
 
-    public static List<String> provideResultStatus(List<Rank> ranks) {
+    private List<String> provideResultStatus(List<Rank> ranks) {
         List<String> results = new ArrayList<>();
 
         for (Rank rank : Rank.values()) {
@@ -64,7 +72,7 @@ public class LottoService {
         return results;
     }
 
-    private static String getResult(List<Rank> ranks, Rank rank) {
+    private String getResult(List<Rank> ranks, Rank rank) {
         if (Rank.MISS.equals(rank)) {
             return null;
         }

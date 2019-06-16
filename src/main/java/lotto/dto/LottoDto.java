@@ -5,11 +5,11 @@ import lotto.domain.Lotto;
 import java.util.List;
 
 public class LottoDto {
-    private int round;
-    private int manualRound;
-    private int autoRound;
-    private List<Lotto> userLotto;
-    private String[] numbers;
+    private final int round;
+    private final int manualRound;
+    private final int autoRound;
+    private final List<Lotto> userLotto;
+    private final String[] numbers;
 
     public LottoDto(int round, int manualRound, int autoRound, List<Lotto> userLotto, String[] numbers) {
         this.round = round;
