@@ -2,9 +2,10 @@ package lotto.domain.lotto;
 
 import lotto.domain.lotto.LottoStrategy.LottoStrategy;
 
+import java.util.Iterator;
 import java.util.Objects;
 
-public class LottoTicket {
+public class LottoTicket implements Iterable<LottoNumber> {
     public static final int PRICE = 1000;
 
     private final LottoNumberGroup lottoNumbers;
@@ -41,5 +42,10 @@ public class LottoTicket {
     @Override
     public String toString() {
         return lottoNumbers.toString();
+    }
+
+    @Override
+    public Iterator<LottoNumber> iterator() {
+        return lottoNumbers.iterator();
     }
 }

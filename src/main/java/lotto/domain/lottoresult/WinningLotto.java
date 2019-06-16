@@ -4,6 +4,8 @@ import lotto.domain.lotto.*;
 import lotto.domain.lotto.LottoStrategy.ManualLottoStrategy;
 
 public class WinningLotto {
+    public static final int SIZE = LottoNumberGroup.LOTTO_SIZE + 1;
+
     private final LottoNumberGroup winningNumbers;
     private final LottoNumber bonusNumber;
 
@@ -37,5 +39,13 @@ public class WinningLotto {
                 userLottoTicket.countOfMatch(winningNumbers),
                 userLottoTicket.contains(bonusNumber)
         );
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
+    public LottoNumberGroup getWinningNumbers() {
+        return winningNumbers;
     }
 }

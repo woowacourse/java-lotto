@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -29,6 +28,6 @@ public class LottoResultTest {
     @Test
     void 수익률_확인() {
         assertThat(lottoResult.getEarningRate())
-                .isEqualTo(new BigDecimal(10000).divide(new BigDecimal(20), 3, RoundingMode.HALF_UP));
+                .isEqualTo(new BigDecimal(500.000));
     }
 }

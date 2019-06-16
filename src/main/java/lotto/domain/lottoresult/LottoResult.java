@@ -3,10 +3,7 @@ package lotto.domain.lottoresult;
 import lotto.domain.lotto.LottoTicket;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -49,9 +46,22 @@ public class LottoResult {
 
     public List<RankCount> getRankCounts() {
         return Arrays.asList(LottoRank.values()).stream()
-                .sorted((x,y) -> x.getReward() - y.getReward())
+                .sorted(Comparator.comparingInt(LottoRank::getReward))
                 .map(rank -> new RankCount(rank, getCountOf(rank)))
                 .collect(Collectors.toList())
                 ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(rankStatistic, that.rankStatistic);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rankStatistic);
     }
 }

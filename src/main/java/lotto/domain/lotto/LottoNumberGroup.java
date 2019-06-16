@@ -5,7 +5,7 @@ import lotto.domain.lotto.LottoStrategy.LottoStrategy;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoNumberGroup {
+public class LottoNumberGroup implements Iterable<LottoNumber> {
     public static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> numbers;
@@ -18,7 +18,8 @@ public class LottoNumberGroup {
 
     public static LottoNumberGroup create(LottoStrategy strategy) {
         try {
-            return new LottoNumberGroup(strategy.generate().stream()
+            return new LottoNumberGroup(
+                    strategy.generate().stream()
                     .map(LottoNumber::of)
                     .collect(Collectors.toList())
             );
@@ -67,5 +68,10 @@ public class LottoNumberGroup {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public Iterator<LottoNumber> iterator() {
+        return numbers.iterator();
     }
 }

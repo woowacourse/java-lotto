@@ -28,13 +28,13 @@ public class OutputView {
         }
     }
 
-    public static void printLottoResult(List<RankCount> rankCounts, BigDecimal earningRate) {
+    public static void printLottoResult(LottoResult lottoResult) {
         System.out.println("\n당첨 통계\n----------");
-        rankCounts.stream()
+        lottoResult.getRankCounts().stream()
                 .filter(RankCount::isWinningResult)
                 .forEach(OutputView::drawStatistic)
         ;
-        System.out.println("\n총 수익률은 " + earningRate + "%입니다.");
+        System.out.println("\n총 수익률은 " + lottoResult.getEarningRate() + "%입니다.");
     }
 
     private static void drawStatistic(RankCount rankCount) {
@@ -47,7 +47,6 @@ public class OutputView {
                 rank.getReward(),
                 count
         );
-
     }
 
     public static void printErrorMessage(String message) {

@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lottoresult.LottoRank;
 import lotto.domain.lottoresult.LottoResult;
 import lotto.domain.lottoresult.WinningLotto;
 
@@ -17,12 +16,8 @@ public class LottoTicketGroup implements Iterable<LottoTicket> {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public int size() {
-        return lottoTickets.size();
-    }
-
     public int price() {
-        return size() * LottoTicket.PRICE;
+        return lottoTickets.size() * LottoTicket.PRICE;
     }
 
     public LottoTicketGroup combine(LottoTicketGroup lottos) {
