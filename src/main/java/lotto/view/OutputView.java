@@ -20,12 +20,14 @@ public class OutputView {
 
     public static void printStatistics(Statistics statistics) {
         System.out.println(STATISTICS_MESSAGE);
-
         statistics.ranksStatistics().forEach(OutputView::printRankStatistics);
         System.out.println(String.format(PERCENT_FORMAT, ((int) (statistics.returnOfRate() * PERCENT))));
     }
 
     private static void printRankStatistics(Rank rank, Long count) {
+        if (rank == Rank.MISS) {
+            return;
+        }
         System.out.printf(rank != Rank.SECOND ? RESULT_MESSAGE : RESULT_SECOND_MESSAGE, rank.getCountOfMatch(), rank.getReward(), count);
     }
 

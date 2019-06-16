@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import static lotto.domain.Money.LOTTO_PRICE;
@@ -9,9 +8,9 @@ import static lotto.domain.Money.LOTTO_PRICE;
 public class Statistics {
     private static final int DEFAULT_MONEY = 0;
 
-    private List<Rank> ranks;
+    private Map<Lotto, Rank> ranks;
 
-    public Statistics(List<Rank> ranks) {
+    public Statistics(Map<Lotto, Rank> ranks) {
         this.ranks = ranks;
     }
 
@@ -19,7 +18,11 @@ public class Statistics {
         Map<Rank, Long> rankResult = new LinkedHashMap<>();
 
         for (Rank value : Rank.values()) {
-            rankResult.put(value, ranks.stream().filter(rank -> rank == value).count());
+            rankResult.put(value, ranks.values()
+                    .stream()
+                    .filter(rank -> rank == value)
+                    .count()
+            );
         }
 
         return rankResult;

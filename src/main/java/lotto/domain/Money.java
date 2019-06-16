@@ -29,6 +29,10 @@ public class Money {
         }
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     public int howManyLotto(){
         return money / LOTTO_PRICE;
     }

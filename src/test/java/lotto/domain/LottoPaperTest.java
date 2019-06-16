@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.utils.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,14 +20,14 @@ class LottoPaperTest {
 
     @BeforeEach
     void setUp() {
-        Lotto winningNumbers = new CustomLottoGenerator("1,2,3,4,5,6".split(",")).makeLotto();
+        Lotto winningNumbers = new CustomLottoGenerator(Parser.parsingLottoNumbers("1,2,3,4,5,6".split(","))).makeLotto();
         LottoNumber bonusNumber = LottoNumber.generateNumber(7);
         winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        customLotto1 = new CustomLottoGenerator("1,2,3,4,5,6".split(",")).makeLotto();
-        customLotto2 = new CustomLottoGenerator("1,2,3,4,5,7".split(",")).makeLotto();
-        customLotto3 = new CustomLottoGenerator("1,2,3,4,5,8".split(",")).makeLotto();
-        customLotto4 = new CustomLottoGenerator("1,2,3,4,5,6".split(",")).makeLotto();
+        customLotto1 = new CustomLottoGenerator(Parser.parsingLottoNumbers("1,2,3,4,5,6".split(","))).makeLotto();
+        customLotto2 = new CustomLottoGenerator(Parser.parsingLottoNumbers("1,2,3,4,5,7".split(","))).makeLotto();
+        customLotto3 = new CustomLottoGenerator(Parser.parsingLottoNumbers("1,2,3,4,5,8".split(","))).makeLotto();
+        customLotto4 = new CustomLottoGenerator(Parser.parsingLottoNumbers("1,2,3,4,5,6".split(","))).makeLotto();
     }
 
     @Test

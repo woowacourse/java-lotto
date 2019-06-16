@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<title>로또</title>
+</head>
+<body>
+	구매내역<br>
+	{{#lottos}}
+		{{numbers}}<br>
+	{{/lottos}}
+	<br>
+	당첨번호<br>
+	{{#winningLotto}}
+		당첨 번호 : {{numbers}}<br>
+		보너스 번호 : {{bonusNumber}}<br>
+	{{/winningLotto}}
+	<br>
+	통계<br>
+	{{#statistics}}
+		
+		{{result}}<br>
+		수익율 : {{returnOfRate}}
+	{{/statistics}}
+
+</body>
+</html>
