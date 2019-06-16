@@ -32,11 +32,15 @@ public class Lotto {
                 .count();
     }
 
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public String toString() {
         final String numbers = lottoNumbers.stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.joining(", "));
-        return "[" + numbers + "]";
+                .collect(Collectors.joining(","));
+        return numbers;
     }
 }

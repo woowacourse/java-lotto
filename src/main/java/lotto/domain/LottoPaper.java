@@ -19,6 +19,10 @@ public class LottoPaper {
         return result;
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     @Override
     public String toString() {
         return lottos.stream()
