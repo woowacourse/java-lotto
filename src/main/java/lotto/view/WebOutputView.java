@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.List;
+
 public class WebOutputView {
     private static final int LOTTO_SIZE = 6;
 
@@ -9,6 +11,14 @@ public class WebOutputView {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < lottoTickets.getLottoTicketsSize(); i++) {
             Lotto lotto = lottoTickets.getLotto(i);
+            stringBuilder.append(printLottoAsBall(lotto)).append("<br>");
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String printLottosAsBall(List<Lotto> lottos) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Lotto lotto : lottos) {
             stringBuilder.append(printLottoAsBall(lotto)).append("<br>");
         }
         return stringBuilder.toString();
@@ -35,12 +45,17 @@ public class WebOutputView {
         return stringBuilder.toString();
     }
 
-    public static String printLottoResult(LottoResult lottoResult) {
+    public static String printResultSelectBox(int round, int end) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Rank rank : Rank.values()) {
-            stringBuilder.append("<span class=\"rank\">").append(rank).append(" : ").append(lottoResult.getResultByRank(rank)).append("</span><br>");
+        stringBuilder.append("<select name=\"round\">\n");
+        for (int i = 1; i <= end; i++) {
+            if (i == round) {
+                stringBuilder.append("<option value=\"" + round + "\" selected=\"selected\">" + round + "회차" + "</option>\n");
+                continue;
+            }
+            stringBuilder.append("<option value=\"" + i + "\">" + i + "회차" + "</option>\n");
         }
-        stringBuilder.append("수익률은 ").append(lottoResult.getRateOfReturn()).append("%");
+        stringBuilder.append("</select>");
         return stringBuilder.toString();
     }
 }

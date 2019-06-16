@@ -1,9 +1,6 @@
 package lotto.dao;
 
-import lotto.dto.GameDTO;
-import lotto.dto.LottoDTO;
-import lotto.dto.LottoResultDTO;
-import lotto.dto.WinningLottoDTO;
+import lotto.dto.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -29,4 +26,6 @@ public class GameDAO {
         LottoResultDAO lottoResultDao = new LottoResultDAO(conn);
         lottoResultDao.addLottoResult(lottoResultDto);
     }
+
+
 }

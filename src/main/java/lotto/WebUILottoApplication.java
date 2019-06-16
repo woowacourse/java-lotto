@@ -91,7 +91,7 @@ public class WebUILottoApplication {
             try {
                 LottoResult lottoResult = gameDTO.getLottoTickets().getLottoResult(gameDTO.getWinningLotto());
                 gameDTO.setLottoResult(lottoResult);
-                model.put("lottoResult", WebOutputView.printLottoResult(lottoResult));
+                model.put("result", lottoResult);
             } catch (Exception e) {
                 model.put("error", e.getMessage());
                 return render(model, "error.html");

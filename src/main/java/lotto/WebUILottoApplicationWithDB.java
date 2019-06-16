@@ -1,7 +1,6 @@
 package lotto;
 
-import lotto.dao.GameDAO;
-import lotto.dao.RoundDAO;
+import lotto.dao.*;
 import lotto.database.DBConnector;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
@@ -99,7 +98,7 @@ public class WebUILottoApplicationWithDB {
             try {
                 LottoResult lottoResult = gameDto.getLottoTickets().getLottoResult(gameDto.getWinningLotto());
                 gameDto.setLottoResult(lottoResult);
-                model.put("lottoResult", WebOutputView.printLottoResult(lottoResult));
+                model.put("result", lottoResult);
 
                 Connection conn = DBConnector.getConnection();
                 GameDAO gameDao = new GameDAO(conn);
@@ -110,7 +109,24 @@ public class WebUILottoApplicationWithDB {
                 return render(model, "error.html");
             }
 
-            return render(model, "result.html");
+            return render(model, "result_db.html");
+        });
+
+        get("/all", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            try {
+                int round = Integer.parseInt(req.queryParams("round"));
+                Connection conn = DBConnector.getConnection();
+                model.put("select", WebOutputView.printResultSelectBox(round, new RoundDAO(conn).getRound() - 1));
+                model.put("winningLotto", WebOutputView.printWinningLottoAsBall(new WinningLottoDAO(conn).findByRound(round)));
+                model.put("lottos", WebOutputView.printLottosAsBall(new LottoDAO(conn).findByRound(round)));
+                model.put("result", new LottoResultDAO(conn).findByRound(round));
+            } catch (Exception e) {
+                model.put("error", e.getMessage());
+                return render(model, "error.html");
+            }
+
+            return render(model, "all.html");
         });
     }
 

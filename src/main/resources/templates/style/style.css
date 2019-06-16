@@ -30,6 +30,11 @@ h1 {
 	margin-bottom: 30px;
 }
 
+h2 {
+	font-size: 2em;
+	font-weight: 600;
+}
+
 p {
 	font-size: 1.5em;
 	margin-bottom: 30px;
@@ -39,6 +44,10 @@ p {
 	width: 70%;
 	max-width: 900px;
 	margin: 20px auto;
+}
+
+.all {
+	text-align: center;
 }
 
 .ball {
@@ -95,6 +104,20 @@ input[type=submit] {
 	height: 50px;
 	border-radius: 10px;
 	background-color: red;
+}
+
+input.round {
+	height: 40px;
+	background-color: #c658d8;
+}
+
+select {
+	width: 100px;
+	font-family: 'Montserrat', "Source Han Sans KR";
+	font-size: 1em;
+	font-weight: 500;
+	padding: 5px;
+	line-height: 1.6;
 }
 
 ::selection { background: #ffaeb5; color: #333; }

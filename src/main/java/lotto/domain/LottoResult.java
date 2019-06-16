@@ -31,7 +31,7 @@ public class LottoResult {
         return (double) getWinningMoney() / (getNumberOfLotto() * MONEY_PER_LOTTO);
     }
 
-    private long getWinningMoney() {
+    public long getWinningMoney() {
         long winningMoney = 0;
         for (Rank rank : lottoResult.keySet()) {
             winningMoney += (long) rank.getWinningMoney() * lottoResult.get(rank);
@@ -49,6 +49,26 @@ public class LottoResult {
 
     public int getResultByRank(Rank rank) {
         return lottoResult.get(rank);
+    }
+
+    public int getFirst() {
+        return lottoResult.get(Rank.FIRST);
+    }
+
+    public int getSecond() {
+        return lottoResult.get(Rank.SECOND);
+    }
+
+    public int getThird() {
+        return lottoResult.get(Rank.THIRD);
+    }
+
+    public int getFourth() {
+        return lottoResult.get(Rank.FOURTH);
+    }
+
+    public int getFifth() {
+        return lottoResult.get(Rank.FIFTH);
     }
 
     public LottoResultDTO toDTO(int round) {
