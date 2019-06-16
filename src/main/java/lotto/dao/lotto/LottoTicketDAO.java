@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.dao.lotto.sqls.LottoHistoryDAOSQLs.INSERT_LOTTO_TICKET;
-import static lotto.dao.lotto.sqls.LottoHistoryDAOSQLs.SELECT_LOTTO_TICKETS_BY_LOTTO_ROUND_ID;
+import static lotto.dao.lotto.sqls.LottoTicketDAOSQLs.INSERT_LOTTO_TICKET;
+import static lotto.dao.lotto.sqls.LottoTicketDAOSQLs.SELECT_LOTTO_TICKETS_BY_LOTTO_ROUND_ID;
 
 public class LottoTicketDAO {
     public static List<LottoTicketDTO> selectLottoTicketsByLottoRoundId(int lottoRoundId) throws SQLException {
