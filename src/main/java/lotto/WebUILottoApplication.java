@@ -16,6 +16,7 @@ public class WebUILottoApplication {
     static int numberOfManualLotto;
     static LottoTickets lottoTickets;
     static WinningLotto winningLotto;
+    static LottoResult lottoResult;
 
     public static void main(String[] args) {
         staticFiles.location("/templates");
@@ -74,7 +75,7 @@ public class WebUILottoApplication {
         post("/check", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             try {
-                winningLotto = WebInputParser.getWinningLotto(req.queryParams("winningLotto"), req.queryParams("bonus"));
+                winningLotto = WebInputParser.getWinningLotto(req.queryParams("winning"), req.queryParams("bonus"));
                 model.put("winningLotto", WebOutputView.printWinningLottoAsBall(winningLotto));
             } catch (Exception e) {
                 model.put("error", e.getMessage());
@@ -82,6 +83,19 @@ public class WebUILottoApplication {
             }
 
             return render(model, "check.html");
+        });
+
+        post("/result", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            try {
+                lottoResult = lottoTickets.getLottoResult(winningLotto);
+                model.put("lottoResult", WebOutputView.printLottoResult(lottoResult));
+            } catch (Exception e) {
+                model.put("error", e.getMessage());
+                return render(model, "error.html");
+            }
+
+            return render(model, "result.html");
         });
     }
 

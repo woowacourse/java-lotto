@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500" rel="stylesheet">
+
+    <title>로또</title>
+</head>
+<body>
+<div id="container">
+    <h1>로또</h1>
+
+    <p>
+        입력하신 우승 로또는 다음과 같습니다.<br><br>
+        {{{winningLotto}}}
+    </p>
+
+    <form action="/result" method="POST">
+        <input type="submit" value="결과 확인">
+    </form>
+</div>
+</body>
+</html>

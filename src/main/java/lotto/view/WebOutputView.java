@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoTickets;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 
 public class WebOutputView {
     private static final int LOTTO_SIZE = 6;
@@ -34,6 +32,15 @@ public class WebOutputView {
             stringBuilder.append(printNumberAsBall(winningLotto.getLottoNumber(i)));
         }
         stringBuilder.append(" + ").append(printNumberAsBall(winningLotto.getBonusNumber()));
+        return stringBuilder.toString();
+    }
+
+    public static String printLottoResult(LottoResult lottoResult) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Rank rank : Rank.values()) {
+            stringBuilder.append("<span class=\"rank\">").append(rank).append(" : ").append(lottoResult.getResultByRank(rank)).append("</span><br>");
+        }
+        stringBuilder.append("수익률은 ").append(lottoResult.getRateOfReturn());
         return stringBuilder.toString();
     }
 }
