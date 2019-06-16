@@ -4,19 +4,16 @@ public class LottoDTO {
     private String round;
     private String numbers;
 
+    public LottoDTO(String round, String numbers) {
+        this.round = round;
+        this.numbers = numbers;
+    }
+
     public String getRound() {
         return round;
     }
 
-    public void setRound(String round) {
-        this.round = round;
-    }
-
     public String getNumbers() {
         return numbers;
-    }
-
-    public void setNumbers(String numbers) {
-        this.numbers = numbers;
     }
 }

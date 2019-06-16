@@ -5,27 +5,21 @@ public class StatisticsDTO {
     private String result;
     private String returnOfRate;
 
-    public String getRound() {
-        return round;
+    public StatisticsDTO(String round, String result, String returnOfRate) {
+        this.round = round;
+        this.result = result;
+        this.returnOfRate = returnOfRate;
     }
 
-    public void setRound(String round) {
-        this.round = round;
+    public String getRound() {
+        return round;
     }
 
     public String getResult() {
         return result;
     }
 
-    public void setResult(String result) {
-        this.result = result;
-    }
-
     public String getReturnOfRate() {
         return returnOfRate;
-    }
-
-    public void setReturnOfRate(String returnOfRate) {
-        this.returnOfRate = returnOfRate;
     }
 }
