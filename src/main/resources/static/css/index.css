@@ -1,0 +1,168 @@
+@font-face {
+    font-family: BMHanna_11yrs;
+    src: url("../fonts/BMHANNA_11yrs_ttf.ttf") format('truetype')
+}
+
+@font-face {
+    font-family: BMHannaair;
+    src: url("../fonts/BMHANNAAir_ttf.ttf") format('truetype')
+}
+
+body {
+    text-align: center;
+    font-family: BMHanna_11yrs;
+    font-size: 2em;
+}
+
+body {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.button-group {
+    text-align: center;
+}
+
+.display-none {
+    display: none;
+}
+
+.btn-bm {
+    background: #45c3c1;
+    color: white;
+}
+
+.btn-bm:hover {
+    background-color: #308887;
+    border-color: #308887;
+    color: white;
+}
+
+.number-input-area {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.number-input-box {
+    width: 25%;
+    text-align: right;
+    border-width: 0px;
+    border: solid 1px gray;
+    border-radius: 25px;
+}
+
+.answer-text {
+    text-align: left;
+}
+
+.btn {
+    width: 25%;
+    height: 30%;
+    font-size: 1em;
+}
+
+.btn-plus-minus {
+    border: 0;
+    background: white;
+}
+
+.btn-minus {
+    padding-right: 15%;
+}
+
+.btn-plus {
+    padding-left: 15%;
+}
+
+.btn-mv {
+    width: 60px;
+    height: 80px;
+    font-size: .6em;
+}
+
+.lotto-number-label {
+    margin-left: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    float: left;
+}
+
+.lotto-number-label-checked {
+    margin-left: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    float: left;
+    background-color: #45c3c1;
+    border-color: #45c3c1;
+    color: white;
+}
+
+.lotto-number {
+    color: black;
+    position: absolute;
+    left: -999em
+}
+
+.margin-bottom-10px {
+    margin-bottom: 10px;
+}
+
+#manual-number-select-area {
+    display: inline-block;
+    height: 200px;
+    float: left;
+    width: 100%;
+    text-align: -webkit-center;
+}
+
+#number-checkbox-area {
+    width: 20%;
+    float: left;
+    margin-left: 30%;
+    text-align: center;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+#manual-select-area {
+    border-radius: 36px;
+    border: 1px solid gray;
+    height: 75px;
+    width: 25%;
+    display: inline-block;
+}
+
+#manual-select-area > div {
+    transform: translate(0%, 25%);
+}
+
+#detail-area {
+    width: 40%;
+    float: right;
+    margin-right: 10%;
+    height: 180px;
+    display: flex;
+}
+
+#detail-buttons-area {
+    display: grid;
+}
+
+#round-select {
+    width: 50%;
+}
+
+#manual-count {
+    width: 10%;
+    border: 0;
+}
+
+#selected-numbers-area {
+    height: 100%;
+    width: 60%;
+    overflow-y: scroll;
+}
+
+#button-purchase {
+    width: 200px;
+}
