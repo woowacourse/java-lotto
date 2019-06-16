@@ -40,7 +40,7 @@ public class WebUILottoApplication {
         });
 
         // index -> payment page
-        post("/inputPayment", (req, res) -> {
+        post("/payment", (req, res) -> {
             String userName = nullable(req.queryParams("user_name"));
 
             // TODO: 2019-06-13 How to process insert result? void?
@@ -52,7 +52,7 @@ public class WebUILottoApplication {
         });
 
         // payment -> input lotto numbers page
-        post("/buyLotto", (req, res) -> {
+        post("/lotto", (req, res) -> {
             Payment payment = new Payment(Integer.parseInt(nullable(req.queryParams("payment"))));
             int countOfManualLotto = Integer.parseInt(nullable(req.queryParams("countOfManualLotto")));
             CountOfLotto countOfLotto = new CountOfLotto(payment, countOfManualLotto);
@@ -72,7 +72,7 @@ public class WebUILottoApplication {
         });
 
         // input lotto -> lotto result page
-        post("/lottoResult", (req, res) -> {
+        post("/result", (req, res) -> {
             int countOfLotto = Integer.parseInt(nullable(req.queryParams("countOfLotto")));
             int round = Integer.parseInt(nullable(req.queryParams("round")));
             String name = nullable(req.queryParams("name"));
@@ -98,7 +98,7 @@ public class WebUILottoApplication {
             return render(null, "lottoResult.html");
         });
 
-        get("/lottoResult/:round", (req, res) -> {
+        get("/result/:round", (req, res) -> {
             int round = Integer.parseInt(nullable(req.params(":round")));
             ResultDTO resultDTO = createResult(round);
 

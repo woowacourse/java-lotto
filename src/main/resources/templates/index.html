@@ -17,7 +17,7 @@
 <body>
 <section class="container">
     <h1>로또 구매</h1>
-    <form action="/inputPayment" method="post">
+    <form action="/payment" method="post">
         <div class="form-group">
             <label for="user">사용자 이름</label>
             <input type="text" id="user" name="user_name" class="form-control" />
@@ -44,7 +44,7 @@
                     <tbody>
                     {{#lottoGames}}
                         <tr>
-                            <th scope="row"><a href="/lottoResult/{{round}}">{{round}}</a></th>
+                            <th scope="row"><a href="/result/{{round}}">{{round}}</a></th>
                             <td>{{name}}</td>
                             <td class="text-right">{{totalWinningMoney}} 원</td>
                             <td>{{earningRate}}</td>
