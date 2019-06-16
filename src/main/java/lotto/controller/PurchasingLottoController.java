@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.db.dao.LottoDAO;
+import lotto.db.dao.LottoTicketDAO;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.factory.LottoTicketsFactory;
@@ -30,7 +30,7 @@ public class PurchasingLottoController {
         model.put("amountOfCustom", inputCustoms.size());
         model.put("amountOfAuto", (money.getMoney() / MONEY_OFFSET) - inputCustoms.size());
 
-        LottoDAO.addLottoTicket(lottoTickets);
+        LottoTicketDAO.addLottoTicket(lottoTickets);
 
         return render(model, "purchased_tickets.html");
     };

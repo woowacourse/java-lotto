@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.db.dao.LottoDAO;
-import lotto.db.dao.WinningLottoDAO;
+import lotto.db.dao.LottoTicketDAO;
+import lotto.db.dao.LottoGameDAO;
 import lotto.domain.LottoTicket;
 import lotto.domain.RankType;
 import lotto.domain.WinStatistics;
@@ -29,7 +29,7 @@ public class LottoGameController {
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.append(req.queryParams("num" + i)).append(",");
         }
-        WinningLottoDAO.addWinningLottoTicket(WinningLotto.of(lottoNumbers.toString(), Integer.parseInt(req.queryParams("bonusBall"))));
+        LottoGameDAO.addWinningLottoTicket(WinningLotto.of(lottoNumbers.toString(), Integer.parseInt(req.queryParams("bonusBall"))));
 
         res.redirect("/win/result");
         return null;
@@ -37,8 +37,8 @@ public class LottoGameController {
 
     public static Route latestGameResult = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
-        LottoGameResultDTO winningLotto = WinningLottoDAO.findLatestWinningLotto();
-        List<LottoTicket> lottoTickets = LottoDAO.findLottosByLottoId(winningLotto.getWinningLottoId());
+        LottoGameResultDTO winningLotto = LottoGameDAO.findLatestWinningLotto();
+        List<LottoTicket> lottoTickets = LottoTicketDAO.findLottosByLottoId(winningLotto.getWinningLottoId());
         WinStatistics winStatistics = new WinStatistics(lottoTickets, WinningLotto.of(winningLotto.getWinningNumbers(), winningLotto.getBonusBall()));
 
         model.put("week", winningLotto.getWinningLottoId());
@@ -54,8 +54,8 @@ public class LottoGameController {
 
     public static Route gameResultByWinningLottoId = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
-        LottoGameResultDTO winningLotto = WinningLottoDAO.findByWinningLottoId(req.params(":week"));
-        List<LottoTicket> lottoTickets = LottoDAO.findLottosByLottoId(winningLotto.getWinningLottoId());
+        LottoGameResultDTO winningLotto = LottoGameDAO.findByWinningLottoId(req.params(":week"));
+        List<LottoTicket> lottoTickets = LottoTicketDAO.findLottosByLottoId(winningLotto.getWinningLottoId());
         WinStatistics winStatistics = new WinStatistics(lottoTickets, WinningLotto.of(winningLotto.getWinningNumbers(), winningLotto.getBonusBall()));
 
         model.put("week", winningLotto.getWinningLottoId());
@@ -71,7 +71,7 @@ public class LottoGameController {
 
     public static Route allWeeksOfGame = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
-        model.put("weeksOfGame", WinningLottoDAO.findAllWinningLottoId());
+        model.put("weeksOfGame", LottoGameDAO.findAllWinningLottoId());
 
         return render(model, "select_result.html");
     };

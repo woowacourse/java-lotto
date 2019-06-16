@@ -10,7 +10,7 @@ import java.util.List;
 
 import static lotto.db.DBConnection.getConnection;
 
-public class WinningLottoDAO {
+public class LottoGameDAO {
     private static final Connection conn = getConnection();
 
     public static void addWinningLottoTicket(WinningLotto winningLotto) throws SQLException {

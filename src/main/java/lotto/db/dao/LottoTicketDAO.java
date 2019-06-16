@@ -11,7 +11,7 @@ import java.util.List;
 
 import static lotto.db.DBConnection.getConnection;
 
-public class LottoDAO {
+public class LottoTicketDAO {
     private static final Connection conn = getConnection();
 
     public static void addLottoTicket(LottoTickets inputLottoTickets) throws SQLException {

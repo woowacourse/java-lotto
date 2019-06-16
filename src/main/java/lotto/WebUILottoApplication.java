@@ -2,10 +2,6 @@ package lotto;
 
 import lotto.controller.PurchasingLottoController;
 import lotto.controller.LottoGameController;
-import spark.ModelAndView;
-import spark.template.handlebars.HandlebarsTemplateEngine;
-
-import java.util.*;
 
 import static spark.Spark.*;
 
