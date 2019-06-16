@@ -61,6 +61,22 @@ public class LottoDao {
         }
     }
 
+    public static void addResultInfo(int lottoRound, double sum, String returnRate) {
+        try {
+            String query = "INSERT INTO resultInfo VALUES(?,?,?)";
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+
+            statement.setInt(1, lottoRound);
+            statement.setInt(2, (int) sum);
+            statement.setString(3, returnRate);
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
     public static int offerMaxRound() {
         try {
             String query = "SELECT MAX(round) FROM userLotto";

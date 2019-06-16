@@ -17,14 +17,14 @@ public class Winners {
     }
 
     public String calculateResultRate(int inputMoney) {
-        double prizeSum = getPrizeSum(rankResult);
+        double prizeSum = getPrizeSum();
         return String.format("%.2f", (prizeSum / (inputMoney * MONEY_UNIT)) * PERCENT);
     }
 
-    private static double getPrizeSum(List<Rank> ranks) {
+    public double getPrizeSum() {
         double sum = 0;
 
-        for (Rank rank : ranks) {
+        for (Rank rank : rankResult) {
             sum += rank.getPrize();
         }
 
