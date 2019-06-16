@@ -174,7 +174,6 @@ function roundClickEvent(lottoRoundId){
             lottoResult.innerHTML += winningResultTemplate;
         })
         .catch(function(error){
-            console.log(error)
             alert(error)
         });
 }
