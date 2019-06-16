@@ -31,7 +31,7 @@ public class LottoWinningDAOTest {
     @Test
     void 결과_데이터_잘나오는지_테스트() {
         assertEquals(winningDAO.findByResultRound(2), Arrays.asList("1,2,3,4,5,6"
-                ,"3개 일치 (5000원)- 1개","5000","30"));
+                ,"[3개 일치 (5000원)- 1개]","5000","30"));
     }
 
     @AfterEach

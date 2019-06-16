@@ -42,7 +42,7 @@ public class LottoWinningDAO {
 
     public List<String> findByResultRound(int round){
         try{
-            String query = "SELECT * FROM result WHERE id = ?";
+            String query = "SELECT * FROM result WHERE rId = ?";
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setInt(1, round);
 

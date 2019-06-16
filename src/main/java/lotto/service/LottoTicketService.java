@@ -13,9 +13,8 @@ import static java.util.stream.Collectors.*;
 
 public class LottoTicketService {
 
-    public static int insertLottos(int round, LottoTicket lottoTicket) {
+    public static int insertLottos(LottoTicket lottoTicket) {
         LottoTicketDTO lottoTicketDTO = new LottoTicketDTO();
-        lottoTicketDTO.setRound(round);
         lottoTicketDTO.setLottos(lottoTicket.getLottos().stream().map(Lotto::toString).collect(toList()));
         return LottoTicketDAO.getInstance().addLotto(lottoTicketDTO);
     }

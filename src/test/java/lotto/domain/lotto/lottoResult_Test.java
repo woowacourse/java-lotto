@@ -20,21 +20,19 @@ public class lottoResult_Test {
         LottoTicket ticket = new LottoTicket(amount, customLotto);
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
 
-        LottoResult_VO lottoResult_vo = new LottoResult_VO(new LottoResult(ticket, winningLotto).matchLotto(), price.getMoney());
-        assertThat(lottoResult_vo.getResultValue(Rank.FOURTH)).isEqualTo(1);
-        assertThat(lottoResult_vo.getResultValue(Rank.FIFTH)).isEqualTo(2);
-        assertThat(lottoResult_vo.getResultValue(Rank.MISS)).isEqualTo(5);
+        LottoResult_VO lottoResult_vo = new LottoResult_VO(new LottoResult(ticket, winningLotto).matchLotto(), price);
+        assertThat(lottoResult_vo.getResult().get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(lottoResult_vo.getResult().get(Rank.FIFTH)).isEqualTo(2);
+        assertThat(lottoResult_vo.getResult().get(Rank.MISS)).isEqualTo(5);
 
         assertThat(sum(lottoResult_vo)).isEqualTo(60_000);
     }
 
     private static double sum(LottoResult_VO lottoResult) {
-        double rateResult = 0;
-        for (Rank rank : lottoResult.getResultKey()) {
-            rateResult += rank.getWinningMoney() * lottoResult.getResultValue(rank);
-        }
-
-        return rateResult;
+        return lottoResult.getResult().keySet()
+                .stream()
+                .map(rank -> rank.getWinningMoney() * lottoResult.getResult().get(rank))
+                .reduce(0, Integer::sum);
     }
 
 }

@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketDAO {
+    private static final int FIND_SUCCESS = 10;
+    private static final String MAX_ID = "MAX(rId)";
+
     private static LottoTicketDAO lottoTicketDAO;
     private static Connection con;
 
@@ -24,18 +27,34 @@ public class LottoTicketDAO {
     }
 
     public int addLotto(LottoTicketDTO lottoTicketDTO) {
-        String query = "INSERT INTO lottos (round,lotto) VALUE(?,?)";
+        int round = findRoundId();
+        String query = "INSERT INTO lottos (round, lotto) VALUE(?,?)";
         return (int) lottoTicketDTO.getLottos().stream()
                 .map(lotto -> {
                     try {
                         PreparedStatement pstmt = con.prepareStatement(query);
-                        pstmt.setInt(1, lottoTicketDTO.getRound());
+                        pstmt.setInt(1, round);
                         pstmt.setString(2, lotto);
                         return pstmt.executeUpdate();
                     } catch (SQLException e) {
                         throw new LottoTicketDAOException(e);
                     }
                 }).count();
+    }
+
+    public int findRoundId(){
+        try {
+            String query = "SELECT " + MAX_ID + " FROM result";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                return rs.getInt(MAX_ID);
+            }
+        } catch (SQLException e) {
+            throw new LottoTicketDAOException(e);
+        }
+
+        return FIND_SUCCESS;
     }
 
     public static List<String> findByLottoTicket(LottoTicketDTO lottoTicketDTO) {

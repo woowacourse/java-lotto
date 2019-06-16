@@ -18,9 +18,13 @@ public class LottoTicketDAOTest {
     }
 
     @Test
+    void name() {
+        assertEquals(lottoTicketDAO.findRoundId(), 2);
+    }
+
+    @Test
     void 로또티켓이_잘들어가는지_테스트() {
         LottoTicketDTO lottoTicketDTO = new LottoTicketDTO();
-        lottoTicketDTO.setRound(2);
         lottoTicketDTO.setLottos(Arrays.asList("2,3,4,5,6,7","3,4,5,6,7,8","4,5,6,7,8,9"));
 
         assertEquals(lottoTicketDAO.addLotto(lottoTicketDTO), 3);
@@ -30,7 +34,7 @@ public class LottoTicketDAOTest {
     public void 로또_해당회차_찾기_테스트() {
         LottoTicketDTO lottoTicketDTO = new LottoTicketDTO();
         lottoTicketDTO.setRound(2);
-        assertEquals(lottoTicketDAO.findByLottoTicket(lottoTicketDTO), Arrays.asList("1,2,3,4,5,6","2,3,4,5,6,7","3,4,5,6,7,8","4,5,6,7,8,9"));
+        assertEquals(lottoTicketDAO.findByLottoTicket(lottoTicketDTO), Arrays.asList("2,3,4,5,6,7","3,4,5,6,7,8","4,5,6,7,8,9"));
     }
 
     @AfterEach

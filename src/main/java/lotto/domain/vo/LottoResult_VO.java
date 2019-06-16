@@ -21,6 +21,10 @@ public class LottoResult_VO {
         this.price = price;
     }
 
+    public Map<Rank, Integer> getResult() {
+        return result;
+    }
+
     public List<String> getRank(){
         return result.keySet()
                 .stream()

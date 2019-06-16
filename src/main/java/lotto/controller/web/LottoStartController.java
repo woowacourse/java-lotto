@@ -2,9 +2,10 @@ package lotto.controller.web;
 
 import lotto.domain.*;
 import lotto.domain.vo.LottoResult_VO;
+import lotto.service.LottoTicketService;
+import lotto.service.LottoWinningService;
 import spark.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,9 @@ public class LottoStartController {
             WinningLotto winningLotto = new WinningLotto(req.queryParams("winningNumbers"), req.queryParams("bonusNumber"));
             LottoResult lottoResult = new LottoResult(req.session().attribute("lottoTicket"), winningLotto);
             LottoResult_VO lottoResult_vo = new LottoResult_VO(lottoResult.matchLotto(), req.session().attribute("price"));
+
+            new LottoWinningService().insertResult(lottoResult_vo, winningLotto);
+            new LottoTicketService().insertLottos(req.session().attribute("lottoTicket"));
 
             model.put("winningLotto", winningLotto);
             model.put("bonusBall", winningLotto.getBonusBall());
