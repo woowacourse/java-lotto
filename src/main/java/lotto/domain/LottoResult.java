@@ -31,7 +31,7 @@ public class LottoResult {
         return (double) getWinningMoney() / (getNumberOfLotto() * MONEY_PER_LOTTO) * 100;
     }
 
-    private long getWinningMoney() {
+    public long getWinningMoney() {
         long winningMoney = 0;
         for (Rank rank : lottoResult.keySet()) {
             winningMoney += (long) rank.getWinningMoney() * lottoResult.get(rank);
