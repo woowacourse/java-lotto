@@ -82,6 +82,21 @@ public class WinningLottoDAO {
         return new LottoGameResultDTO(rs.getInt("id"), rs.getString("numbers"), rs.getInt("bonusBall"));
     }
 
+    public static List<Integer> findAllWinningLottoId() throws SQLException {
+        String query = "SELECT w.id FROM lotto.lotto as l " +
+                "JOIN lotto.winninglotto as w ON w.lotto_id = l.id " +
+                "WHERE l.type = 1";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        List<Integer> gameWeeks = new ArrayList<>();
+        while (rs.next()) {
+            gameWeeks.add(rs.getInt("id"));
+        }
+
+        return gameWeeks;
+    }
+
     public static LottoGameResultDTO findByWinningLottoId(String winningLottoId) throws SQLException {
         String query = "SELECT l.id, l.type, GROUP_CONCAT(ln.number ORDER BY ln.number SEPARATOR ',') as numbers, w.bonusBall " +
                 "FROM lotto.lotto as l " +

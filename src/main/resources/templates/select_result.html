@@ -21,11 +21,11 @@
         <div class="container">
             <h4>회차 선택하기</h4>
             <div class="mb-5">
-                {{#winningNumbers}}
+                {{#weeksOfGame}}
                 <div class="mb-2">
-                    <button type="button" class="btn btn-outline-secondary">{{this}}주차 당첨내역 보기</button>
+                    <a class="btn btn-outline-secondary" href="/win/result/{{this}}">{{this}}주차 당첨내역 보기</a>
                 </div>
-                {{/winningNumbers}}
+                {{/weeksOfGame}}
             </div>
         </div>
 
