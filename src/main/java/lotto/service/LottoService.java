@@ -37,6 +37,7 @@ public class LottoService {
         String[] numbers = Parser.parseLottoStrings(userLottoString);
         UserLotto userLotto = new UserLotto(Parser.parseLotto(numbers));
         Winners winners = new Winners(winningLotto.makeRankResultList(userLotto));
+        LottoDao.addWinningLotto(winningLotto, lottoRound);
         List<String> resultRanks = provideResultStatus(winners.getRankResult());
 
         return new ResultDto(resultRanks, winners.calculateResultRate(round), lottoRound);
