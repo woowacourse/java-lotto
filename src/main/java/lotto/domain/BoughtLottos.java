@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.exception.ExceedBoughtLottosAboutMoneyException;
 import lotto.domain.generator.LottosAutoGenerator;
+import lotto.domain.generator.LottosManualGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,14 +19,22 @@ public class BoughtLottos {
         this.countOfBoughtManual = countOfBoughtManual;
     }
 
-    public static BoughtLottos buyLottos(final int price, List<Lotto> manualLottos) {
-        List<Lotto> lottos = new ArrayList<>(manualLottos);
-        int countOfBoughtManual = manualLottos.size();
-        int amountOfAutoGenerateLotto = price / BUY_PRICE - countOfBoughtManual;
+    public static BoughtLottos buyLottos(final Money money, List<String> inputManualLottos) {
+        int countOfBoughtManual = inputManualLottos.size();
+        int price = money.getBuyPrice();
+        if (price / BUY_PRICE < countOfBoughtManual) {
+            throw new ExceedBoughtLottosAboutMoneyException("입력된 가격보다 사려는 로또가 더 많습니다.");
+        }
 
-        lottos.addAll(new LottosAutoGenerator(amountOfAutoGenerateLotto).generate());
+        List<Lotto> lottos = new ArrayList<>(generateLottos(new LottosManualGenerator(inputManualLottos)));
+        int amountOfAutoGenerateLotto = price / BUY_PRICE - countOfBoughtManual;
+        lottos.addAll(generateLottos(new LottosAutoGenerator(amountOfAutoGenerateLotto)));
 
         return new BoughtLottos(lottos, countOfBoughtManual);
+    }
+
+    private static List<Lotto> generateLottos(LottosGenerator generator) {
+        return generator.generate();
     }
 
     public List<Lotto> getLottos() {

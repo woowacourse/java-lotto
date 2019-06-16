@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class Result {
     private static final double ONE_HUNDRED_PERCENT = 100.0;
@@ -24,5 +25,18 @@ public class Result {
             return 0;
         }
         return countOfPrize;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Result result1 = (Result) o;
+        return Objects.equals(result, result1.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(result);
     }
 }

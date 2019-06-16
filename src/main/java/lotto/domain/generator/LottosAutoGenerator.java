@@ -12,6 +12,8 @@ import java.util.List;
 import static lotto.domain.LottoNumber.getAllLottoNumbers;
 
 public class LottosAutoGenerator implements LottosGenerator {
+    private static final int FROM_INDEX = 0;
+    private static final int TO_INDEX = 6;
     private final int countOfGenerate;
 
     public LottosAutoGenerator(int countOfGenerate) {
@@ -32,7 +34,7 @@ public class LottosAutoGenerator implements LottosGenerator {
     private Lotto generateAutoLotto() {
         List<LottoNumber> allLottoNumbers = getAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
-        List<LottoNumber> numbers = allLottoNumbers.subList(0, 6);
+        List<LottoNumber> numbers = allLottoNumbers.subList(FROM_INDEX, TO_INDEX);
         numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
         return new Lotto(numbers);
     }

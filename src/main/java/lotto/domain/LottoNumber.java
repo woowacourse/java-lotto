@@ -10,13 +10,14 @@ public class LottoNumber {
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_LAST_NUMBER = 45;
     private static final List<LottoNumber> numbers = new ArrayList<>();
-    private final int number;
 
     static {
         for (int i = LOTTO_START_NUMBER; i <= LOTTO_LAST_NUMBER; i++) {
             numbers.add(new LottoNumber(i));
         }
     }
+
+    private final int number;
 
     private LottoNumber(final int number) {
         this.number = number;

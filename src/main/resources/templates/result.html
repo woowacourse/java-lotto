@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 결과</title>
+</head>
+<body>
+<div class="container">
+    {{# lottoGame }}
+    <h1>{{ round }}회차</h1>
+    <h3>구매금액 : {{ money }}</h3>
+    <h3>수동 구매 갯수 {{ countOfManual }}</h3>
+    {{/ lottoGame }}
+    <div>
+        <h3>내가 산 로또 번호</h3>
+        {{# lottos }}
+        <div>
+            {{# lottoNumbers }}
+            <span>{{.}}</span>
+            {{/ lottoNumbers }}
+        </div>
+        {{/ lottos }}
+    </div>
+    <div>
+        <h1>당첨 번호</h1>
+        {{# winningNumber }}
+        {{# numbers }}
+        {{.}}
+        {{/ numbers }}
+        보너스볼: {{ bonusNumber }}
+        {{/ winningNumber }}
+    </div>
+    <div>
+        <h1>당첨 결과</h1>
+        {{# result }}
+        {{# prizeResult }}
+        <p>1등 담첨 횟수 : {{ first }}</p>
+        <p>2등 담첨 횟수 : {{ second }}</p>
+        <p>3등 담첨 횟수 : {{ third }}</p>
+        <p>4등 담첨 횟수 : {{ fourth }}</p>
+        <p>5등 담첨 횟수 : {{ fifth }}</p>
+        {{/ prizeResult }}
+        <p> 총 당첨 금액: {{ winningMoney }}원</p>
+        {{/ result }}
+    </div>
+</div>
+</body>
+</html>

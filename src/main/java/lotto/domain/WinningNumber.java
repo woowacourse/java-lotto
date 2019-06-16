@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.WinningLottoContainBonusException;
+
 import java.util.Objects;
 
 public class WinningNumber {
@@ -9,6 +11,10 @@ public class WinningNumber {
     public WinningNumber(final Lotto winningLotto, int bonusNumber) {
         this.winningLotto = new WinningLotto(winningLotto);
         this.bonusBall = new BonusBall(bonusNumber);
+
+        if (winningLotto.hasBonusBall(this.bonusBall)) {
+            throw new WinningLottoContainBonusException("보너스 볼이 당첨 로또 번호와 중복됩니다.");
+        }
     }
 
     public Prize prize(final Lotto lotto) {

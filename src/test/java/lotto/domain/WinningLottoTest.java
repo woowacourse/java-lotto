@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.domain.LottoNumber.*;
+import static lotto.domain.LottoNumber.getLottoNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {

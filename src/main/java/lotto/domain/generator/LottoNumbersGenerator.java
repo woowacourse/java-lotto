@@ -15,4 +15,10 @@ public class LottoNumbersGenerator {
                 .map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toList());
     }
+
+    public static List<LottoNumber> generateLottoNumbers(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
+    }
 }
