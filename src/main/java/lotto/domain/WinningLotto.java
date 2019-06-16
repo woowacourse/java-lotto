@@ -35,7 +35,6 @@ public class WinningLotto {
         return lottoTicket.hasSameNumber(this.bonusBall);
     }
 
-
     private void validateDistinctNumber(int lottoNumber) {
         boolean isDistinct = this.winningNumbers.hasSameNumber(LottoNumber.getInstance(lottoNumber));
 
