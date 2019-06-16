@@ -16,6 +16,14 @@ public class WinningLotto extends Lotto {
         this.bonusBall = bonusBall;
     }
 
+    public LottoNumber getBonusBall() {
+        return bonusBall;
+    }
+
+    public String getNumbers(){
+        return super.toString();
+    }
+
     public boolean isBonusContain(Lotto userLotto) {
         return userLotto.isContains(bonusBall);
     }

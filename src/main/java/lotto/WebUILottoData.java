@@ -1,11 +1,16 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.LottoGame;
+import lotto.domain.Money;
+import lotto.domain.UserLottos;
+import lotto.domain.WinningLotto;
+
+import java.util.List;
 
 public class WebUILottoData {
 
-    private boolean isGenerated=false;
-    private int round = 1;
+    private boolean isGenerated;
+    private int round;
     private int countOfAllLotto;
     private int countOfManualLotto;
     private int countOfAutoLotto;
@@ -14,6 +19,7 @@ public class WebUILottoData {
     private UserLottos manualLottos;
     private WinningLotto winningLotto;
     private LottoGame lottoGame;
+    private List<List<String>> allResult;
 
     public WebUILottoData() {
     }
@@ -96,5 +102,13 @@ public class WebUILottoData {
 
     public void setLottoGame(LottoGame lottoGame) {
         this.lottoGame = lottoGame;
+    }
+
+    public List<List<String>> getAllResult() {
+        return allResult;
+    }
+
+    public void setAllResult(List<List<String>> allResult) {
+        this.allResult = allResult;
     }
 }

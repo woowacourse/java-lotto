@@ -8,7 +8,16 @@
     <body>
         <h1>Lotto 모든 라운드 : 조회 </h1>
         <div id="resultOfRound">
-            
+            --------사용자 로또--------<br>
+            {{#userLottos}}
+                {{this}}<br>
+            {{/userLottos}}
+            <br><br>
+            -------당첨 로또---------<br>
+            {{winningLotto}}
+            <br><br>
+            -------결과 ------------<br>
+            {{result}}
         </div>
     </body>
 </html>

@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.dao.LottoDAO;
+import lotto.dao.RoundDAO;
+import lotto.dao.WinningLottoDAO;
 import lotto.domain.*;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -17,9 +20,16 @@ public class WebUILottoApplication {
         externalStaticFileLocation("src/main/resources/templates");
 
         WebUILottoData webUILottoData = new WebUILottoData();
+        LottoDAO lottoDAO = new LottoDAO();
+        WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
+        RoundDAO roundDAO = new RoundDAO();
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            roundDAO.addRound();
+            int round = roundDAO.findlast();
+            webUILottoData.setRound(round);
+            webUILottoData.setIsGenerated(false);
             model.put("webUILottoData", webUILottoData);
             return render(model, "/html/LottoMain.html");
         });
@@ -34,6 +44,7 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
 
             generateWebUILottoData(webUILottoData, req.queryParams("money"), req.queryParams("countOfManualLotto"));
+
             model.put("webUILottoData", webUILottoData);
             return render(model, "/html/InputManualLotto.html");
         });
@@ -41,12 +52,19 @@ public class WebUILottoApplication {
         post("/showLottos", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             generateWebUILottoData(webUILottoData, req.queryParams("money"), req.queryParams("countOfManualLotto"));
+            UserLottos autoLottos = AutoLottoGenerator.generateAutoLottos(webUILottoData.getCountOfAutoLotto());
+            webUILottoData.setAutoLottos(autoLottos);
 
             List<String> scannedManualLottos = new ArrayList<>();
             for (int i = 1; i <= webUILottoData.getCountOfManualLotto(); i++) {
                 scannedManualLottos.add(req.queryParams("manual" + i));
             }
-            webUILottoData.setManualLottos(ManualLottoParser.parseManualLottoNumbers(scannedManualLottos));
+            UserLottos manualLottos = ManualLottoParser.parseManualLottoNumbers(scannedManualLottos);
+            webUILottoData.setManualLottos(manualLottos);
+
+            List<Lotto> allUserLottos = new ArrayList<>(autoLottos.getUserLottos());
+            allUserLottos.addAll(manualLottos.getUserLottos());
+            lottoDAO.addLottos(new UserLottos(allUserLottos), webUILottoData.getRound());
 
             model.put("webUILottoData", webUILottoData);
             model.put("manualLottos", webUILottoData.getManualLottos().getUserLottos());
@@ -64,7 +82,8 @@ public class WebUILottoApplication {
         get("/resultOfRound", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             webUILottoData.setWinningLotto(WinningLottoParser.parseWinningLotto(req.queryParams("winningLotto"), req.queryParams("bonusBall")));
-            webUILottoData.setLottoGame(new LottoGame(webUILottoData.getManualLottos(), webUILottoData.getAutoLottos(), webUILottoData.getWinningLotto()));
+            webUILottoData.setLottoGame(new LottoGame(lottoDAO.findAllByRound(webUILottoData.getRound()), webUILottoData.getWinningLotto()));
+            winningLottoDAO.addWinningLotto(webUILottoData.getWinningLotto(), webUILottoData.getRound());
 
             model.put("winningLotto", webUILottoData.getWinningLotto());
             model.put("webUILottoData", webUILottoData);
@@ -74,6 +93,14 @@ public class WebUILottoApplication {
 
         get("/search", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+
+            int round = Integer.parseInt(req.queryParams("round"));
+            UserLottos userLottos = lottoDAO.findAllByRound(round);
+            WinningLotto winningLotto = winningLottoDAO.findAllByRound(round);
+            model.put("userLottos", userLottos.getUserLottos());
+            model.put("winningLotto", winningLotto);
+            model.put("result", new LottoGame(userLottos, winningLotto).gameResult());
+
             model.put("webUILottoData", webUILottoData);
             return render(model, "/html/ResultOfAllRound.html");
         });
@@ -91,7 +118,6 @@ public class WebUILottoApplication {
             webUILottoData.setCountOfAllLotto(webUILottoData.getMoney().getAllLottoSize());
             webUILottoData.setCountOfManualLotto(Integer.parseInt(countOfManualLotto));
             webUILottoData.setCountOfAutoLotto(webUILottoData.getCountOfAllLotto() - webUILottoData.getCountOfManualLotto());
-            webUILottoData.setAutoLottos(AutoLottoGenerator.generateAutoLottos(webUILottoData.getCountOfAutoLotto()));
         }
     }
 

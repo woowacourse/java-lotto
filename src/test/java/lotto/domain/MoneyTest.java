@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,7 +10,7 @@ public class MoneyTest {
 
     @Test
     void 올바른_돈_검증() {
-        assertThat(new Money(1000).getMoney()).isEqualTo(1000);
+        Assertions.assertThat(new Money(1000).getMoney()).isEqualTo(1000);
     }
 
     @Test
