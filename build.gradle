@@ -12,7 +12,11 @@ dependencies {
     testCompile('org.junit.jupiter:junit-jupiter:5.4.2')
     testCompile('org.assertj:assertj-core:3.11.1')
 
+    compile('ch.qos.logback:logback-classic:1.2.3')
     compile "com.sparkjava:spark-core:2.8.0"
     compile "com.sparkjava:spark-template-handlebars:2.7.1"
     compile 'org.apache.commons:commons-dbcp2:2.6.0'
+    compile("mysql:mysql-connector-java:8.0.16")
+
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
