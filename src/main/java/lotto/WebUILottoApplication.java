@@ -12,6 +12,7 @@ import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.domain.lottogenerator.RandomLottoGeneratingStrategy;
 import lotto.domain.paymentinfo.CountOfLotto;
 import lotto.domain.paymentinfo.Payment;
+import lotto.exception.IllegalParameterException;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -91,8 +92,7 @@ public class WebUILottoApplication {
             ResultDTO resultDTO = createResultDTO(winningLotto, lottoRepository, round, name);
             int resultInsertResult = LottoResultDao.getInstance().insertLottoResult(resultDTO);
 
-
-            res.redirect("/lottoResult/" + round);
+            res.redirect("/result/" + round);
 
             // TODO How to process return?
             return render(null, "lottoResult.html");
@@ -108,7 +108,6 @@ public class WebUILottoApplication {
             model.put("result", resultDTO);
             model.put("winningLotto", LottoDao.getInstance().selectWinningLotto(round));
             model.put("lottoTicket", lottoTicket);
-            model.put("name", resultDTO.getName());
             model.put("auto", lottoTicket.stream().filter(Lotto::isAuto).count());
             model.put("manual", lottoTicket.stream().filter(lotto -> !lotto.isAuto()).count());
             return render(model, "lottoResult.html");
@@ -228,6 +227,6 @@ public class WebUILottoApplication {
     }
 
     private static String nullable(String param) {
-        return Optional.ofNullable(param).orElseThrow(IllegalArgumentException::new);
+        return Optional.ofNullable(param).orElseThrow(IllegalParameterException::new);
     }
 }
