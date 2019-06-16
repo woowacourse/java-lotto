@@ -1,6 +1,5 @@
 package lotto.model.winninglotto;
 
-import lotto.model.lotto.BonusNumber;
 import lotto.model.lotto.LottoNumber;
 import lotto.model.lotto.LottoNumberRepository;
 import lotto.model.lotto.LottoTicket;
@@ -24,7 +23,7 @@ public class WinningResultTest {
     @Test
     void 수익률_계산_5등() {
 
-        WinningLotto winningLotto = WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), new BonusNumber(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), LottoNumberRepository.fromNumber(45));
 
         List<LottoNumber> lottoNumber = Arrays.asList(LottoNumberRepository.fromNumber(1)
                 , LottoNumberRepository.fromNumber(2)
@@ -40,7 +39,7 @@ public class WinningResultTest {
     @Test
     void 수익률_계산_4등() {
 
-        WinningLotto winningLotto = WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), new BonusNumber(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), LottoNumberRepository.fromNumber(45));
 
         List<LottoNumber> lottoNumber = Arrays.asList(LottoNumberRepository.fromNumber(1)
                 , LottoNumberRepository.fromNumber(2)
@@ -56,7 +55,7 @@ public class WinningResultTest {
     @Test
     void 수익률_계산_3등() {
 
-        WinningLotto winningLotto = WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), new BonusNumber(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), LottoNumberRepository.fromNumber(45));
 
         List<LottoNumber> lottoNumber = Arrays.asList(LottoNumberRepository.fromNumber(1)
                 , LottoNumberRepository.fromNumber(2)
@@ -72,7 +71,7 @@ public class WinningResultTest {
     @Test
     void 수익률_계산_2등() {
 
-        WinningLotto winningLotto = WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), new BonusNumber(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), LottoNumberRepository.fromNumber(45));
 
         List<LottoNumber> lottoNumber = Arrays.asList(LottoNumberRepository.fromNumber(1)
                 , LottoNumberRepository.fromNumber(2)
@@ -88,7 +87,7 @@ public class WinningResultTest {
     @Test
     void 수익률_계산_1등() {
 
-        WinningLotto winningLotto = WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), new BonusNumber(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), LottoNumberRepository.fromNumber(45));
 
         List<LottoNumber> lottoNumber = Arrays.asList(LottoNumberRepository.fromNumber(1)
                 , LottoNumberRepository.fromNumber(2)
