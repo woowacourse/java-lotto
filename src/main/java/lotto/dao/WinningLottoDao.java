@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class WinningLottoDao {
     private DBConnector dbConnector;
@@ -33,19 +34,19 @@ public class WinningLottoDao {
         }
     }
 
-    public WinningLotto findAllByRound(int round) {
+    public Optional<WinningLotto> findAllByRound(int round) {
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement ps = createPreparedStatement(conn, round);
              ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
                 LottoNo bonusNo = LottoNo.from(rs.getInt("bonus_no"));
                 Lotto lotto = Lotto.of(ConverterToLottoNos.convert(rs.getString("numbers")));
-                return new WinningLotto(lotto, bonusNo);
+                return Optional.of(new WinningLotto(lotto, bonusNo));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return Optional.empty();
     }
 
     private PreparedStatement createPreparedStatement(final Connection conn, final int round) throws SQLException {

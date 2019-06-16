@@ -8,6 +8,7 @@ import lotto.view.ResultFormat;
 import spark.Request;
 import spark.Response;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class RoundController {
         this.winningLottoService = winningLottoService;
     }
 
-    public Object round(Request req, Response res) {
+    public Object round(Request req, Response res) throws SQLException {
         Map<String, Object> model = new HashMap<>();
         int round = Integer.parseInt(req.queryParams("round"));
         WinPrize winPrize = winPrizeService.getAllByRound(round);

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class WinPrizeDao {
     private DBConnector dbConnector;
@@ -35,27 +36,26 @@ public class WinPrizeDao {
         }
     }
 
-    public WinPrize findAllByRound(int round) {
+    public Optional<WinPrize> findAllByRound(int round) {
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement ps = createPreparedStatement(conn, round);
              ResultSet rs = ps.executeQuery()) {
 
-            WinPrize winPrize = new WinPrize();
             if (rs.next()) {
+                WinPrize winPrize = new WinPrize();
                 winPrize.put(Rank.FIRST, rs.getInt("first"));
                 winPrize.put(Rank.SECOND, rs.getInt("second"));
                 winPrize.put(Rank.THIRD, rs.getInt("third"));
                 winPrize.put(Rank.FOURTH, rs.getInt("fourth"));
                 winPrize.put(Rank.FIFTH, rs.getInt("fifth"));
                 winPrize.put(Rank.MISS, rs.getInt("miss"));
-
-                return winPrize;
+                return Optional.of(winPrize);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return Optional.empty();
     }
 
     private PreparedStatement createPreparedStatement(final Connection conn, final int round) throws SQLException {

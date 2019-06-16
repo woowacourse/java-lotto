@@ -3,6 +3,8 @@ package lotto.service;
 import lotto.dao.WinningLottoDao;
 import lotto.domain.WinningLotto;
 
+import java.sql.SQLException;
+
 public class WinningLottoService {
     private final WinningLottoDao winningLottoDao;
 
@@ -15,7 +17,7 @@ public class WinningLottoService {
     }
 
 
-    public Object findAllByRound(final int round) {
-        return winningLottoDao.findAllByRound(round);
+    public WinningLotto findAllByRound(final int round) throws SQLException {
+        return winningLottoDao.findAllByRound(round).orElseThrow(SQLException::new);
     }
 }

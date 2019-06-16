@@ -3,6 +3,9 @@ package lotto.service;
 import lotto.dao.WinPrizeDao;
 import lotto.domain.WinPrize;
 
+import java.sql.SQLException;
+import java.util.Optional;
+
 public class WinPrizeService {
     private final WinPrizeDao winPrizeDao;
 
@@ -10,8 +13,9 @@ public class WinPrizeService {
         this.winPrizeDao = winPrizeDao;
     }
 
-    public WinPrize getAllByRound(final int round) {
-        return winPrizeDao.findAllByRound(round);
+    public WinPrize getAllByRound(final int round) throws SQLException {
+        Optional<WinPrize> winPrize = winPrizeDao.findAllByRound(round);
+        return winPrize.orElseThrow(SQLException::new);
     }
 
     public void save(final WinPrize winPrize, final int round) {

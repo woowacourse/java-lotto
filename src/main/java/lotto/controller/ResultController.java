@@ -47,7 +47,7 @@ public class ResultController {
         winPrizeService.save(winPrize, round);
     }
 
-    public Object doGetResult(Request req, Response res) {
+    public Object doGetResult(Request req, Response res) throws SQLException {
         Map<String, Object> model = new HashMap<>();
         int round = Integer.parseInt(req.queryParams("round"));
 

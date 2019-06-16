@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinPrizeDaoTest {
@@ -36,8 +38,8 @@ class WinPrizeDaoTest {
     void saveAndFindTest() {
         winPrizeDao.save(winPrize, round);
 
-        WinPrize expected = winPrizeDao.findAllByRound(round);
-
-        assertThat(expected).isNotNull();
+        Optional<WinPrize> expected = winPrizeDao.findAllByRound(0);
+//        System.out.println(expected.orElse(new WinPrize()).getTotalPrize());
+        assertThat(expected.get().getTotalPrize()).isNotNull();
     }
 }
