@@ -39,6 +39,7 @@ public class LottoService {
         Winners winners = new Winners(winningLotto.makeRankResultList(userLotto));
         LottoDao.addWinningLotto(winningLotto, lottoRound);
         List<String> resultRanks = provideResultStatus(winners.getRankResult());
+        LottoDao.addResult(resultRanks, lottoRound);
 
         return new ResultDto(resultRanks, winners.calculateResultRate(round), lottoRound);
     }

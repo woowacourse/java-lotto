@@ -8,6 +8,7 @@ import lotto.domain.WinningLotto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class LottoDao {
     public static void addLotto(UserLotto userLotto, int round) {
@@ -37,6 +38,24 @@ public class LottoDao {
             pstm.setInt(3, winningLotto.getBonus());
 
             pstm.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void addResult(List<String> results, int lottoRound) {
+        try {
+            String query = "INSERT INTO results (result, round) VALUES (?,?)";
+            PreparedStatement pstm = DBConnection.getConnection().prepareStatement(query);
+
+            for (String result : results) {
+                pstm.setString(1, result);
+                pstm.setInt(2, lottoRound);
+                pstm.addBatch();
+                pstm.clearParameters();
+            }
+
+            pstm.executeBatch();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
