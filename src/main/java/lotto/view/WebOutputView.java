@@ -40,7 +40,7 @@ public class WebOutputView {
         for (Rank rank : Rank.values()) {
             stringBuilder.append("<span class=\"rank\">").append(rank).append(" : ").append(lottoResult.getResultByRank(rank)).append("</span><br>");
         }
-        stringBuilder.append("수익률은 ").append(lottoResult.getRateOfReturn());
+        stringBuilder.append("수익률은 ").append(lottoResult.getRateOfReturn()).append("%");
         return stringBuilder.toString();
     }
 }

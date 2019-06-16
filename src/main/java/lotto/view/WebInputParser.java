@@ -7,7 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WebInputParser {
-    private static final String delimiter = "\r\n";
+    private static final String lottoDelimiter = "\r\n";
+    private static final String lottoNumberDelimiter = ",";
 
     public static Money getMoney(String moneyInput) {
         return new Money(Integer.parseInt(moneyInput));
@@ -23,7 +24,7 @@ public class WebInputParser {
         if (numberOfManualLotto == 0) {
             return LottoMachine.generateTickets(money);
         }
-        List<Lotto> manualLotto = getManualLotto(manualLottoInput.split(delimiter));
+        List<Lotto> manualLotto = getManualLotto(manualLottoInput.split(lottoDelimiter));
         validateManualLotto(numberOfManualLotto, manualLotto);
         return LottoMachine.generateTickets(money, manualLotto);
     }
@@ -31,7 +32,7 @@ public class WebInputParser {
     private static List<Lotto> getManualLotto(String[] manualLottoInput) {
         List<Lotto> manualLotto = new ArrayList<>();
         for (String s : manualLottoInput) {
-            List<String> lottoNumbersInput = Arrays.asList(s.split(","));
+            List<String> lottoNumbersInput = Arrays.asList(s.split(lottoNumberDelimiter));
             manualLotto.add(ManualLottoGenerator.generate(lottoNumbersInput));
         }
         return manualLotto;
@@ -44,7 +45,7 @@ public class WebInputParser {
     }
 
     public static WinningLotto getWinningLotto(String winningNumbersInput, String bonusBallInput) {
-        Lotto lotto = ManualLottoGenerator.generate(Arrays.asList(winningNumbersInput.split(",")));
+        Lotto lotto = ManualLottoGenerator.generate(Arrays.asList(winningNumbersInput.split(lottoNumberDelimiter)));
         LottoNumber bonusBall = new LottoNumber(Integer.parseInt(bonusBallInput));
         return new WinningLotto(lotto, bonusBall);
     }

@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.dto.LottoDTO;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +28,14 @@ public class LottoTickets {
 
     public Lotto getLotto(int index) {
         return lottos.get(index);
+    }
+
+    public List<LottoDTO> toDTO(int round) {
+        List<LottoDTO> lottoDtos = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            lottoDtos.add(lotto.toDTO(round));
+        }
+        return lottoDtos;
     }
 
     @Override

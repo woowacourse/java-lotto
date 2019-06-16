@@ -6,11 +6,20 @@ import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 
 public class GameDTO {
+    private int round;
     private Money money;
     private int numberOfManualLotto;
     private LottoTickets lottoTickets;
     private WinningLotto winningLotto;
     private LottoResult lottoResult;
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
 
     public Money getMoney() {
         return money;
