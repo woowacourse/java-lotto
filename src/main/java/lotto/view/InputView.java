@@ -51,10 +51,10 @@ public class InputView {
         }
     }
 
-    public static BonusNumber inputBonusNumber() {
+    public static LottoNumber inputBonusNumber() {
         try {
             System.out.println("보너스 볼을 입력해주세요.");
-            return new BonusNumber(Integer.parseInt(SCANNER.nextLine()));
+            return LottoNumberRepository.fromNumber(Integer.parseInt(SCANNER.nextLine()));
         } catch (NumberFormatException e) {
             System.out.println("잘못된 번호입니다.");
             return inputBonusNumber();

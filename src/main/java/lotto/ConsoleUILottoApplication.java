@@ -1,14 +1,14 @@
-package lotto.controller;
+package lotto;
 
 import lotto.model.customer.PurchaseAmount;
 import lotto.model.lotto.LottoTickets;
 import lotto.model.lottostore.LottoStore;
 import lotto.model.winninglotto.WinningLotto;
-import lotto.model.winninglotto.WinningStatistics;
+import lotto.model.winninglotto.WinningResult;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoApplication {
+public class ConsoleUILottoApplication {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = InputView.inputPurchaseAmount();
 
@@ -19,6 +19,6 @@ public class LottoApplication {
         OutputView.printLottoTickets(lottoTickets, manualPurchaseQuantity);
 
         WinningLotto winningLotto = InputView.inputWinningLotto();
-        OutputView.printWinningStatistics(WinningStatistics.of(lottoTickets, winningLotto));
+        OutputView.printWinningResult(WinningResult.of(lottoTickets, winningLotto));
     }
 }
