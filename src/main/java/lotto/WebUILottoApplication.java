@@ -14,6 +14,8 @@ import static spark.Spark.*;
 
 public class WebUILottoApplication {
     static Money money;
+    static int numberOfManualLotto;
+    static LottoTickets lottoTickets;
 
     public static void main(String[] args) {
         staticFiles.location("/templates");
@@ -39,9 +41,9 @@ public class WebUILottoApplication {
         post("/manual", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             try {
-                int numberOfManualLotto = WebInputParser.getNumberOfManualLotto(money, req.queryParams("number"));
+                numberOfManualLotto = WebInputParser.getNumberOfManualLotto(money, req.queryParams("number"));
                 if (numberOfManualLotto == 0) {
-                    LottoTickets lottoTickets = WebInputParser.getLottoTickets(money, 0, null);
+                    lottoTickets = WebInputParser.getLottoTickets(money, 0, null);
                     model.put("lottoTickets", WebOutputView.printLottoTicketsAsBall(lottoTickets));
 
                     return render(model, "winning.html");
@@ -54,6 +56,19 @@ public class WebUILottoApplication {
             }
 
             return render(model, "manual.html");
+        });
+
+        post("/winning", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            try {
+                lottoTickets = WebInputParser.getLottoTickets(money, numberOfManualLotto, req.queryParams("manual"));
+                model.put("lottoTickets", WebOutputView.printLottoTicketsAsBall(lottoTickets));
+            } catch (Exception e) {
+                model.put("error", e.getMessage());
+                return render(model, "error.html");
+            }
+
+            return render(model, "winning.html");
         });
     }
 
