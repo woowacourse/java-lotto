@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.util.CustomStringUtils;
+import lotto.exception.InvalidInputException;
 import lotto.exception.InvalidPaymentException;
 
 import java.util.Objects;
@@ -29,6 +30,12 @@ public class Money {
 
     public int getBuyableLottoQuantity() {
         return money / ONE_LOTTO_PRICE;
+    }
+
+    public void checkIsBuyableLottoQuantity(int quantity) {
+        if (quantity > getBuyableLottoQuantity()) {
+            throw new InvalidInputException("구매 가능한 갯수를 초과하였습니다.");
+        }
     }
 
     public int getMoney() {

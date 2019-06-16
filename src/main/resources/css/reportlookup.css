@@ -1,27 +1,21 @@
 .input-wrapper {
     padding: 40px 92px;
     font-size: 48px;
-}
-
-.input-wrapper input {
-    width: 348px;
-    vertical-align: middle;
-}
-
-.input-wrapper input#bonus {
-    width: 100px;
+    text-align: center;
 }
 
 .input-wrapper button {
-    width: 100px;
+    width: 160px;
+    float: none;
 }
 
 .input-wrapper > .lotto-paper {
     width: 400px;
     margin: auto;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
     padding: 20px 52px;
     background-color: #ffffff;
+    text-align: left;
 }
 
 .input-wrapper > .lotto-paper > img {
@@ -53,4 +47,16 @@
     display: inline-block;
     vertical-align: middle;
     text-align: center;
+}
+
+.input-wrapper > .lotto-paper > p {
+    margin: 0;
+    margin-top: 10px;
+    font-size: 22px;
+}
+
+.input-wrapper > .lotto-paper > p > span {
+    float: right;
+    color: #666666;
+    font-weight: bold;
 }

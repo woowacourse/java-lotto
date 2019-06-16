@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottoCreator implements LottoCreator {
+    private static boolean IS_AUTO = false;
+
     private  List<Integer> numbers;
 
     public ManualLottoCreator(List<Integer> numbers) {
@@ -20,6 +22,6 @@ public class ManualLottoCreator implements LottoCreator {
         for (int number : numbers) {
             lottoNumbers.add(LottoNumber.valueOf(number));
         }
-        return new Lotto(lottoNumbers);
+        return new Lotto(lottoNumbers, IS_AUTO);
     }
 }

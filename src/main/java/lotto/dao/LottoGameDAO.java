@@ -21,11 +21,11 @@ public class LottoGameDAO {
     }
 
     public int getLastRound() throws SQLException {
-        String query = "SELECT MAX(round) as round from lotto_game";
+        String query = "SELECT * from lotto_game ORDER BY round DESC limit 1";
         PreparedStatement pstmt = controller.getConnection().prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
 
-        if (!rs.next()) return 1;
+        if (!rs.next()) return 0;
 
         return rs.getInt("round");
     }

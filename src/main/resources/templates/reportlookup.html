@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/reportresult.css">
+    <link rel="stylesheet" href="css/reportlookup.css">
 
     <title>당첨 결과</title>
 </head>
@@ -14,7 +14,22 @@
     <div class="input-wrapper">
         <div class="lotto-paper">
             <img src="images/lottologo.jpg" alt="">
-            <h3>제 {{ round }}회 로또 당첨 결과</h3>
+            <h3>제 {{ round }}회</h3>
+            {{#lottos}}
+            <div class="lotto-numbers">
+                <span>{{#if isAuto}}자동{{else}}수동{{/if}}</span>
+                {{#numbers}}<div class="lotto-number">{{ this }}</div>{{/numbers}}
+            </div>
+            {{/lottos}}
+            <hr>
+            {{#winning}}
+            <div class="lotto-numbers">
+                <span>당첨</span>
+                {{#lotto}}{{#numbers}}<div class="lotto-number">{{ this }}</div>{{/numbers}}{{/lotto}}
+                <br><span>보너스</span><div class="lotto-number">{{ bonusNumber }}</div>
+            </div>
+            {{/winning}}
+            <hr>
             <p>1등 (2,000,000,000 원) <span>{{values.[0]}}개</span></p>
             <p>2등 (30,000,000 원) <span>{{values.[1]}}개</span></p>
             <p>3등 (1,500,000 원) <span>{{values.[2]}}개</span></p>
@@ -27,7 +42,7 @@
             <p>총 수익률 <span>{{ rOI }} %</span></p>
             {{/result}}
         </div>
-        <button onclick="location.href='/'">홈으로</button>
+        <button onclick="location.href='/money'">다시하기</button>
     </div>
 </div>
 

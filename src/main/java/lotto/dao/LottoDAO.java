@@ -19,12 +19,12 @@ public class LottoDAO {
         this.controller = controller;
     }
 
-    public int addLotto(Lotto lotto, int round, boolean isAuto) throws SQLException {
+    public int addLotto(Lotto lotto, int round) throws SQLException {
         String query = "INSERT INTO lotto VALUES (?, ?, ?)";
         PreparedStatement pstmt = controller.getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
         pstmt.setString(2, lotto.getNumbers().toString().replaceAll(("(\\[|])+"), ""));
-        pstmt.setBoolean(3, isAuto);
+        pstmt.setBoolean(3, lotto.getIsAuto());
         return pstmt.executeUpdate();
     }
 
@@ -36,9 +36,10 @@ public class LottoDAO {
 
         List<Lotto> lottos = new ArrayList<>();
         while (rs.next()) {
-            LottoCreator creator = new ManualLottoCreator(
-                    CustomStringUtils.parseInts(rs.getString("numbers")));
-            lottos.add(creator.createLotto());
+            LottoCreator creator = new ManualLottoCreator(CustomStringUtils.parseInts(rs.getString("numbers")));
+            Lotto lotto = creator.createLotto();
+            lotto.setIsAuto(rs.getBoolean("is_auto"));
+            lottos.add(lotto);
         }
         return lottos;
     }

@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class WinningLottoDAO {
+    private static String regexForDelteBracket = "(\\[|])+";
+
     private final DBConnectionController controller;
 
     public WinningLottoDAO(DBConnectionController controller) {
@@ -19,7 +21,7 @@ public class WinningLottoDAO {
         PreparedStatement pstmt = controller.getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
         pstmt.setString(2,
-                winningLotto.getLotto().getNumbers().toString().replaceAll(("(\\[|])+"), ""));
+                winningLotto.getLotto().getNumbers().toString().replaceAll((regexForDelteBracket), ""));
         pstmt.setString(3, winningLotto.getBonusNumber().toString());
         return pstmt.executeUpdate();
     }

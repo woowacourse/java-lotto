@@ -26,11 +26,11 @@ class LottoDAOTest {
 
         LottoCreator creator1 = new ManualLottoCreator(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto1 = creator1.createLotto();
-        assertEquals(lottoDAO.addLotto(lotto1, 0, false), 1);
+        assertEquals(lottoDAO.addLotto(lotto1, 0), 1);
 
         LottoCreator creator2 = new ManualLottoCreator(Arrays.asList(2, 3, 4, 5, 6, 7));
         Lotto lotto2 = creator2.createLotto();
-        lottoDAO.addLotto(lotto2, 0, false);
+        lottoDAO.addLotto(lotto2, 0);
         assertTrue(lottoDAO.findByRound(0).containsAll(Arrays.asList(lotto1, lotto2)));
 
         assertEquals(lottoDAO.deleteLotto(0), 2);

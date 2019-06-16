@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/inputmanualquantity.css">
+    <link rel="stylesheet" href="css/home.css">
 
-    <title>수동 로또 개수 입력</title>
+    <title>로또 홈</title>
 </head>
 <body>
 <div class="wrapper">
     <div class="vender" id="vender" style="background-image: url('images/vendersays.png');"></div>
     <div class="input-wrapper">
-        <form action="/manual-quantity" method="post">
-            <input type="text" name="manual-quantity"> 개 수동으로
-            <button type="submit">구매</button>
-        <form>
+        <button type="submit" onclick="location.href='/money'">로또 구매</button>
+        <button type="submit" onclick="location.href='/lookup'">로또 결과 조회</button>
     </div>
 </div>
 

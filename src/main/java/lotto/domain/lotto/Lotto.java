@@ -7,15 +7,18 @@ import java.util.*;
 public class Lotto {
     public static final int NUMBER_OF_NUMBERS_IN_LOTTO = 6;
 
-    private final Set<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
+    private boolean isAuto;
 
-    public Lotto (List<LottoNumber> numbers) {
+    public Lotto (List<LottoNumber> numbers, boolean isAuto) {
         Set<LottoNumber> numberSet = new HashSet<>(numbers);
-        checkNumberOfNumbers(numberSet);
-        this.numbers = numberSet;
+        List<LottoNumber> numberList = new ArrayList<>(numberSet);
+        checkNumberOfNumbers(numberList);
+        this.numbers = numberList;
+        this.isAuto = isAuto;
     }
 
-    private void checkNumberOfNumbers(Set<LottoNumber> numbers) {
+    private void checkNumberOfNumbers(List<LottoNumber> numbers) {
         if (numbers.size() != NUMBER_OF_NUMBERS_IN_LOTTO) {
             throw new InvalidLottoNumbersException(
                     String.format("숫자를 %d개 입력하셨습니다. %d개의 숫자를 중복없이 입력해주세요",
@@ -24,7 +27,16 @@ public class Lotto {
     }
 
     public List<LottoNumber> getNumbers() {
-        return new ArrayList<>(numbers);
+        Collections.sort(numbers);
+        return numbers;
+    }
+
+    public boolean getIsAuto() {
+        return isAuto;
+    }
+
+    public void setIsAuto(boolean isAuto) {
+        this.isAuto = isAuto;
     }
 
     @Override

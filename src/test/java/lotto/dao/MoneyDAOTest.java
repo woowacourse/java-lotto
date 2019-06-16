@@ -18,13 +18,13 @@ class MoneyDAOTest {
     @Test
     void crdMoney() throws Exception {
         LottoGameDAO lottoGameDAO = new LottoGameDAO(new DBConnectionController());
-        lottoGameDAO.addLottoGame(0);
+        //lottoGameDAO.addLottoGame(0);
 
         Money money = new Money("3000");
-        assertEquals(moneyDAO.addMoney(money, 0), 1);
-        assertEquals(moneyDAO.findByRound(0), money);
-        assertEquals(moneyDAO.deleteMoney(0), 1);
+        //assertEquals(moneyDAO.addMoney(money, 0), 1);
+        //assertEquals(moneyDAO.findByRound(0), money);
+        assertEquals(moneyDAO.deleteMoney(1), 1);
 
-        lottoGameDAO.deleteLottoGame(0);
+        lottoGameDAO.deleteLottoGame(1);
     }
 }
