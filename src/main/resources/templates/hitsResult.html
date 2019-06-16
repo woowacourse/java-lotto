@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>결과 조회</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div id="top-panel">
+    <h1 align="center">{{lottoRound}}회차 로또 결과</h1>
+</div>
+<div class="col-md-8" style="margin: auto">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">로또 번호</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#userLotto}}
+        <tr class="table-light">
+            <th scope="row">{{@index}}</th>
+            <td>{{this}}</td>
+        </tr>
+        {{/userLotto}}
+        </tbody>
+    </table>
+</div>
+<div class="col-md-8" style="margin: auto">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">{{lottoRound}} 회차 당첨 번호</th>
+            <th scope="col">보너스 번호</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-light">
+            <td>{{winningLotto}}</td>
+            <td>{{bonus}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-8" style="margin: auto;">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">{{lottoRound}} 회차 당첨 통계</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#results}}
+        <tr class="table-light">
+            <th scope="row">{{this}}</th>
+        </tr>
+        </tbody>
+        {{/results}}
+    </table>
+</div>
+<div class="col-md-8" style="margin: auto;">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">{{lottoRound}} 회차 상금</th>
+            <th scope="col">{{lottoRound}} 회차 수익률</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-light">
+            <th scope="row">{{prize}}</th>
+            <th scope="row">{{returnRate}}</th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

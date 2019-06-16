@@ -3,10 +3,7 @@ package lotto.service;
 import lotto.dao.LottoDao;
 import lotto.domain.*;
 import lotto.domain.Number;
-import lotto.dto.LottoDto;
-import lotto.dto.LottoRoundDto;
-import lotto.dto.ResultDto;
-import lotto.dto.UserLottoDto;
+import lotto.dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +40,18 @@ public class LottoService {
         LottoDao.addResultInfo(lottoRound, winners.getPrizeSum(), winners.calculateResultRate(round));
 
         return new ResultDto(resultRanks, winners.calculateResultRate(round), lottoRound);
+    }
+
+    public StatusDto offerHitsStatus(int lottoRound) {
+        List<String> userLotto = LottoDao.offerUserLottoNumber(lottoRound);
+        String winningNumber = LottoDao.offerWinningNumber(lottoRound);
+        int bonus = LottoDao.offerBonusNumber(lottoRound);
+        List<String> results = LottoDao.offerResults(lottoRound);
+        String returnRate = String.valueOf(LottoDao.offerReturnRate(lottoRound));
+        int prize = LottoDao.offerPrize(lottoRound);
+
+        return new StatusDto(lottoRound, userLotto, winningNumber, bonus, results, returnRate, prize);
+
     }
 
     public LottoRoundDto offerLottoRounds() {

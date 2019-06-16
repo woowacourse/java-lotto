@@ -4,6 +4,9 @@ import lotto.service.LottoService;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static spark.Spark.get;
 import static spark.Spark.post;
 
@@ -37,6 +40,16 @@ public class WebUILottoApplication {
             String userLottoString = req.queryParams("userLotto");
             int lottoRound = Integer.parseInt(req.queryParams("lottoRound"));
             return render(lottoService.offerResults(winNumbers, bonusNumber, userLottoString, round, lottoRound), "result.html");
+        });
+
+        get("/hits", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return render(model, "hits.html");
+        });
+
+        post("/lottoHits", (req, res) -> {
+            int lottoRound = Integer.parseInt(req.queryParams("hitsRound"));
+            return render(lottoService.offerHitsStatus(lottoRound), "hitsResult.html");
         });
     }
 

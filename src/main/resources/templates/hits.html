@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회차 조회</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div id="top-panel">
+    <h1 align="center">로또 조회 페이지</h1>
+</div>
+<form method="POST" id="lottoHits" action="/lottoHits">
+    <div class="form-group col-md-4" style="margin: auto">
+        <label class="control-label">결과를 조회할 회차를 입력해주세요.</label>
+        <input type="text" class="form-control" placeholder="회차 입력" id="hitsRound" name="hitsRound" required>
+    </div>
+    <div class="form-group">
+        <div id="bottom-panel" style="float: right; margin-right: 500px">
+            <button type="submit" class="btn btn-secondary">조회하기</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>
