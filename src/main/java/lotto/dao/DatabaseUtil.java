@@ -25,7 +25,7 @@ public class DatabaseUtil {
     private Connection connectDB() {
         Connection con = null;
         String server = "localhost"; // MySQL 서버 주소
-        String database = "test"; // MySQL DATABASE 이름
+        String database = "lotto"; // MySQL DATABASE 이름
         String userName = "zino"; //  MySQL 서버 아이디
         String password = "1234"; // MySQL 서버 비밀번호
 
