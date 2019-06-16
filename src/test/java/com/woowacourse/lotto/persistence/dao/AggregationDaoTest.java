@@ -2,6 +2,8 @@ package com.woowacourse.lotto.persistence.dao;
 
 import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.LottoResult;
+import com.woowacourse.lotto.persistence.DataSourceFactory;
+import com.woowacourse.lotto.persistence.TestDataSourceFactory;
 import com.woowacourse.lotto.persistence.dto.AggregationDto;
 import com.woowacourse.lotto.persistence.dto.LottoDto;
 import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.*;
 
@@ -59,10 +62,10 @@ public class AggregationDaoTest {
 
     @BeforeEach
     void setup() throws Exception {
-        Connection conn = ConnectionFactory.getConnection();
-        aggregationDao = new AggregationDao(conn);
-        winningLottoDao = new WinningLottoDao(conn);
-        lottoDao = new LottoDao(conn);
+        DataSource ds = new TestDataSourceFactory().createDataSource();
+        aggregationDao = new AggregationDao(ds);
+        winningLottoDao = new WinningLottoDao(ds);
+        lottoDao = new LottoDao(ds);
         long insertedWinningLottoId = winningLottoDao.addWinningLotto(TEMP_WINNING_LOTTO);
         long insertedLottoId = lottoDao.addLotto(TEMP_LOTTO);
         winningLottoIdsToDelete.add(insertedWinningLottoId);
@@ -118,7 +121,7 @@ public class AggregationDaoTest {
         long winningId2 = winningLottoDao.addWinningLotto(winning2);
         long aggId2 = aggregationDao.addAggregation(createAggregation(++latestRound, 0, 1, 0, 0, 0, 0, 2_000_000_000L),
             winningId2, Arrays.asList(lottoId2));
-        List<AggregationDto> result = aggregationDao.find(2);
+        List<AggregationDto> result = aggregationDao.findLatestN(2);
         assertThat(result).hasSize(2);
         assertThat(result.get(1).getCntFirst()).isEqualTo(1);
         assertThat(result.get(0).getCntSecond()).isEqualTo(1);

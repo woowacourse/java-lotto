@@ -2,31 +2,35 @@ package com.woowacourse.lotto.persistence.dao;
 
 import com.woowacourse.lotto.persistence.dto.LottoDto;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class LottoDao {
-    private final Connection conn;
-    private static final String[] id = {"id"};
+    private final DataSource dataSource;
 
-    public LottoDao(Connection conn) {
-        this.conn = conn;
+    public LottoDao(DataSource ds) {
+        this.dataSource = ds;
     }
 
     public long addLotto(LottoDto lotto) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(LottoDaoSql.INSERT_LOTTO, Statement.RETURN_GENERATED_KEYS);
-        query.setInt(1, lotto.getNumber0());
-        query.setInt(2, lotto.getNumber1());
-        query.setInt(3, lotto.getNumber2());
-        query.setInt(4, lotto.getNumber3());
-        query.setInt(5, lotto.getNumber4());
-        query.setInt(6, lotto.getNumber5());
-        query.setInt(7, lotto.getPrice());
-        if (query.executeUpdate() == 0) {
-            throw new SQLException("No lotto is inserted");
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement query = conn.prepareStatement(LottoDaoSql.INSERT_LOTTO, Statement.RETURN_GENERATED_KEYS);
+            query.setInt(1, lotto.getNumber0());
+            query.setInt(2, lotto.getNumber1());
+            query.setInt(3, lotto.getNumber2());
+            query.setInt(4, lotto.getNumber3());
+            query.setInt(5, lotto.getNumber4());
+            query.setInt(6, lotto.getNumber5());
+            query.setInt(7, lotto.getPrice());
+            query.executeUpdate();
+            return getGeneratedId(query);
         }
+    }
+
+    private long getGeneratedId(PreparedStatement query) throws SQLException {
         try (ResultSet generated = query.getGeneratedKeys()) {
             generated.next();
             return generated.getLong(1);
@@ -34,26 +38,40 @@ public class LottoDao {
     }
 
     public Optional<LottoDto> findById(long id) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(LottoDaoSql.SELECT_LOTTO_BY_ID);
-        query.setLong(1, id);
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement query = conn.prepareStatement(LottoDaoSql.SELECT_LOTTO_BY_ID);
+            query.setLong(1, id);
+            return executeAndGetFoundLotto(query);
+        }
+    }
+
+    private Optional<LottoDto> executeAndGetFoundLotto(PreparedStatement query) throws SQLException {
         try (ResultSet rs = query.executeQuery()) {
             return checkAndMapResult(rs);
         }
     }
 
     public List<LottoDto> findByAggregationId(long aggregationId) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(LottoDaoSql.SELECT_BY_AGGREGATION_ID);
-        query.setLong(1, aggregationId);
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement query = conn.prepareStatement(LottoDaoSql.SELECT_BY_AGGREGATION_ID);
+            query.setLong(1, aggregationId);
 
+            return executeAndGetFoundLottos(query);
+        }
+    }
+
+    private List<LottoDto> executeAndGetFoundLottos(PreparedStatement query) throws SQLException {
         try (ResultSet rs = query.executeQuery()) {
             return mapResults(rs);
         }
     }
 
     public int deleteById(long id) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(LottoDaoSql.DELETE_BY_ID);
-        query.setLong(1, id);
-        return query.executeUpdate();
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement query = conn.prepareStatement(LottoDaoSql.DELETE_BY_ID);
+            query.setLong(1, id);
+            return query.executeUpdate();
+        }
     }
 
     private List<LottoDto> mapResults(ResultSet rs) throws SQLException {

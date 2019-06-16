@@ -4,14 +4,14 @@ import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.WinningAggregator;
 import com.woowacourse.lotto.domain.WinningLotto;
 import com.woowacourse.lotto.persistence.dao.AggregationDao;
-import com.woowacourse.lotto.persistence.dao.ConnectionFactory;
+import com.woowacourse.lotto.persistence.DataSourceFactory;
 import com.woowacourse.lotto.persistence.dao.LottoDao;
 import com.woowacourse.lotto.persistence.dao.WinningLottoDao;
 import com.woowacourse.lotto.persistence.dto.AggregationDto;
 import com.woowacourse.lotto.persistence.dto.LottoDto;
 import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
 
-import java.sql.Connection;
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,10 +21,10 @@ public class LottoService {
     private AggregationDao aggregationDao;
 
     public LottoService() {
-        Connection conn = ConnectionFactory.getConnection();
-        lottoDao = new LottoDao(conn);
-        winningLottoDao = new WinningLottoDao(conn);
-        aggregationDao = new AggregationDao(conn);
+        DataSource ds = new DataSourceFactory().createDataSource();
+        lottoDao = new LottoDao(ds);
+        winningLottoDao = new WinningLottoDao(ds);
+        aggregationDao = new AggregationDao(ds);
     }
 
     public LottoDto addLotto(Lotto lotto) {
@@ -102,7 +102,7 @@ public class LottoService {
 
     public List<AggregationDto> findLatestNAggregation(int n) {
         try {
-            return aggregationDao.find(n);
+            return aggregationDao.findLatestN(n);
         } catch (SQLException e) {
             e.printStackTrace();
         }

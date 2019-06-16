@@ -1,5 +1,6 @@
 package com.woowacourse.lotto.persistence.dao;
 
+import com.woowacourse.lotto.persistence.TestDataSourceFactory;
 import com.woowacourse.lotto.persistence.dto.LottoDto;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,7 +32,7 @@ public class LottoDaoTest {
 
     @BeforeAll
     static void init() {
-        lottoDao = new LottoDao(ConnectionFactory.getConnection());
+        lottoDao = new LottoDao(new TestDataSourceFactory().createDataSource());
     }
 
     @AfterAll

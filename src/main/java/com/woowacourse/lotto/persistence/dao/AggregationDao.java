@@ -2,45 +2,69 @@ package com.woowacourse.lotto.persistence.dao;
 
 import com.woowacourse.lotto.persistence.dto.AggregationDto;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class AggregationDao {
-    private final Connection conn;
+    private final DataSource dataSource;
 
-    public AggregationDao(Connection conn) {
-        this.conn = conn;
+    public AggregationDao(DataSource ds) {
+        this.dataSource = ds;
     }
 
     public long addAggregation(AggregationDto aggregation, long winningLottoId, List<Long> lottoIds) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(AggregationDaoSql.INSERT_AGGREGATION, Statement.RETURN_GENERATED_KEYS);
-        query.setInt(1, aggregation.getLottoRound());
-        query.setInt(2, aggregation.getCntFirst());
-        query.setInt(3, aggregation.getCntSecond());
-        query.setInt(4, aggregation.getCntThird());
-        query.setInt(5, aggregation.getCntFourth());
-        query.setInt(6, aggregation.getCntFifth());
-        query.setInt(7, aggregation.getCntNone());
-        query.setLong(8, aggregation.getPrizeMoneySum());
-
-        if (query.executeUpdate() == 0) {
-            throw new SQLException("No aggregation is inserted");
-        }
-
-        try (ResultSet generated = query.getGeneratedKeys()) {
-            generated.next();
-            long aggregationId = generated.getLong(1);
-            addAggregatedLottos(aggregationId, lottoIds);
-            addAggregatedWinningLotto(aggregationId, winningLottoId);
-            return aggregationId;
+        try (Connection conn = dataSource.getConnection()){
+            conn.setAutoCommit(false);
+            // 1. agg 엔티티 추가
+            long aggId = addAggregationEntity(aggregation, conn);
+            // 2. winning lotto ref. 엔티티 추가
+            addAggregatedLottos(aggId, lottoIds, conn);
+            // 3. lotto ref. 엔티티 추가
+            addAggregatedWinningLotto(aggId, winningLottoId, conn);
+            conn.commit();
+            return aggId;
         }
     }
 
-    private void addAggregatedLottos(long aggregationId, List<Long> lottoIds) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(AggregationDaoSql.INSERT_AGGREGATED_LOTTO);
-        query.setLong(2, aggregationId);
+    private long addAggregationEntity(AggregationDto aggregation, Connection conn) throws SQLException {
+        try (PreparedStatement query = conn.prepareStatement(AggregationDaoSql.INSERT_AGGREGATION, Statement.RETURN_GENERATED_KEYS)) {
+            query.setInt(1, aggregation.getLottoRound());
+            query.setInt(2, aggregation.getCntFirst());
+            query.setInt(3, aggregation.getCntSecond());
+            query.setInt(4, aggregation.getCntThird());
+            query.setInt(5, aggregation.getCntFourth());
+            query.setInt(6, aggregation.getCntFifth());
+            query.setInt(7, aggregation.getCntNone());
+            query.setLong(8, aggregation.getPrizeMoneySum());
+            assertInserted(query.executeUpdate());
+            return getGeneratedId(query);
+        }
+    }
+
+    private void assertInserted(int updated) throws SQLException {
+        if (updated == 0) {
+            throw new IllegalStateException("Aggregation is not inserted");
+        }
+    }
+
+    private long getGeneratedId(PreparedStatement query) throws SQLException {
+        try (ResultSet generated = query.getGeneratedKeys()) {
+            generated.next();
+            return generated.getLong(1);
+        }
+    }
+
+    private void addAggregatedLottos(long aggregationId, List<Long> lottoIds, Connection conn) throws SQLException {
+        try (PreparedStatement query = conn.prepareStatement(AggregationDaoSql.INSERT_AGGREGATED_LOTTO)) {
+            query.setLong(2, aggregationId);
+            executeAddAggregatedLottosForEachLottoId(aggregationId, lottoIds, query);
+        }
+    }
+
+    private void executeAddAggregatedLottosForEachLottoId(long aggregationId, List<Long> lottoIds, PreparedStatement query) throws SQLException {
         for (long id : lottoIds) {
             query.setLong(1, id);
             query.setLong(2, aggregationId);
@@ -48,25 +72,48 @@ public class AggregationDao {
         }
     }
 
-    private void addAggregatedWinningLotto(long aggregationId, long winningLottoId) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(AggregationDaoSql.INSERT_AGGREGATED_WINNING_LOTTO);
-        query.setLong(1, winningLottoId);
-        query.setLong(2, aggregationId);
-        query.executeUpdate();
+    private void addAggregatedWinningLotto(long aggregationId, long winningLottoId, Connection conn) throws SQLException {
+        try (PreparedStatement query = conn.prepareStatement(AggregationDaoSql.INSERT_AGGREGATED_WINNING_LOTTO)) {
+            query.setLong(1, winningLottoId);
+            query.setLong(2, aggregationId);
+            query.executeUpdate();
+        }
     }
 
     public Optional<AggregationDto> findById(long id) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_BY_ID);
-        query.setLong(1, id);
+        try (Connection conn = dataSource.getConnection()) {
+            return handleFindByIdQuery(id, conn);
+        }
+    }
 
+    private Optional<AggregationDto> handleFindByIdQuery(long id, Connection conn) throws SQLException {
+        try (PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_BY_ID)) {
+            query.setLong(1, id);
+
+            return executeAndGetFoundAggregation(query);
+        }
+    }
+
+    private Optional<AggregationDto> executeAndGetFoundAggregation(PreparedStatement query) throws SQLException {
         try (ResultSet rs = query.executeQuery()) {
             return checkAndMapAggregationResult(rs);
         }
     }
 
-    public List<AggregationDto> find(int topN) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_LATEST_N_ROUND);
-        query.setInt(1, topN);
+    public List<AggregationDto> findLatestN(int limit) throws SQLException {
+        try (Connection conn = dataSource.getConnection()) {
+            return executeFindLatestNResultsQuery(limit, conn);
+        }
+    }
+
+    private List<AggregationDto> executeFindLatestNResultsQuery(int limit, Connection conn) throws SQLException {
+        try (PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_LATEST_N_ROUND)) {
+            query.setInt(1, limit);
+            return executeAndGetFoundAggregations(query);
+        }
+    }
+
+    private List<AggregationDto> executeAndGetFoundAggregations(PreparedStatement query) throws SQLException {
         try (ResultSet result = query.executeQuery()) {
             return mapAggregationResults(result);
         }
@@ -83,7 +130,13 @@ public class AggregationDao {
     }
 
     public int findLatestRound() throws SQLException {
-        PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_MAX_ROUND);
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_MAX_ROUND);
+            return executeAndGetLatestRound(query);
+        }
+    }
+
+    private int executeAndGetLatestRound(PreparedStatement query) throws SQLException {
         try (ResultSet result = query.executeQuery()) {
             if (!result.next()) {
                 return 0;
@@ -115,9 +168,11 @@ public class AggregationDao {
     }
 
     public int deleteById(long id) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(AggregationDaoSql.DELETE_BY_ID);
-        query.setLong(1, id);
-        return query.executeUpdate();
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement query = conn.prepareStatement(AggregationDaoSql.DELETE_BY_ID);
+            query.setLong(1, id);
+            return query.executeUpdate();
+        }
     }
 
     private static class AggregationDaoSql {

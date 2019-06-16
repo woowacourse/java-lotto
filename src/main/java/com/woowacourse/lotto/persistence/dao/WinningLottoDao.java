@@ -2,30 +2,38 @@ package com.woowacourse.lotto.persistence.dao;
 
 import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Optional;
 
 public class WinningLottoDao {
-    private Connection conn;
+    private DataSource dataSource;
 
-    public WinningLottoDao(Connection conn) {
-        this.conn = conn;
+    public WinningLottoDao(DataSource ds) {
+        this.dataSource = ds;
     }
 
     public long addWinningLotto(WinningLottoDto winningLotto) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.INSERT, Statement.RETURN_GENERATED_KEYS);
-        query.setInt(1, winningLotto.getWinningNumber0());
-        query.setInt(2, winningLotto.getWinningNumber1());
-        query.setInt(3, winningLotto.getWinningNumber2());
-        query.setInt(4, winningLotto.getWinningNumber3());
-        query.setInt(5, winningLotto.getWinningNumber4());
-        query.setInt(6, winningLotto.getWinningNumber5());
-        query.setInt(7, winningLotto.getWinningBonusNumber());
-
-        if (query.executeUpdate() == 0) {
-            throw new SQLException("No winning lotto is inserted");
+        try (Connection conn = dataSource.getConnection()) {
+            return executeAddWinningLottoQuery(winningLotto, conn);
         }
+    }
 
+    private long executeAddWinningLottoQuery(WinningLottoDto winningLotto, Connection conn) throws SQLException {
+        try (PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.INSERT, Statement.RETURN_GENERATED_KEYS)) {
+            query.setInt(1, winningLotto.getWinningNumber0());
+            query.setInt(2, winningLotto.getWinningNumber1());
+            query.setInt(3, winningLotto.getWinningNumber2());
+            query.setInt(4, winningLotto.getWinningNumber3());
+            query.setInt(5, winningLotto.getWinningNumber4());
+            query.setInt(6, winningLotto.getWinningNumber5());
+            query.setInt(7, winningLotto.getWinningBonusNumber());
+            query.executeUpdate();
+            return getGeneratedId(query);
+        }
+    }
+
+    private long getGeneratedId(PreparedStatement query) throws SQLException {
         try (ResultSet generated = query.getGeneratedKeys()) {
             generated.next();
             return generated.getLong(1);
@@ -33,8 +41,14 @@ public class WinningLottoDao {
     }
 
     public Optional<WinningLottoDto> findById(long id) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_ID);
-        query.setLong(1, id);
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_ID);
+            query.setLong(1, id);
+            return executeAndGetFoundWinningLottoResult(query);
+        }
+    }
+
+    private Optional<WinningLottoDto> executeAndGetFoundWinningLottoResult(PreparedStatement query) throws SQLException {
         try (ResultSet rs = query.executeQuery()) {
             return checkAndMapResult(rs);
         }
@@ -48,11 +62,11 @@ public class WinningLottoDao {
     }
 
     public Optional<WinningLottoDto> findByAggregationId(long aggregationId) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_AGGREGATION_ID);
-        query.setLong(1, aggregationId);
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_AGGREGATION_ID);
+            query.setLong(1, aggregationId);
 
-        try (ResultSet rs = query.executeQuery()) {
-            return checkAndMapResult(rs);
+            return executeAndGetFoundWinningLottoResult(query);
         }
     }
 
@@ -71,9 +85,11 @@ public class WinningLottoDao {
     }
 
     public int deleteById(long id) throws SQLException {
-        PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.DELETE_BY_ID);
-        query.setLong(1, id);
-        return query.executeUpdate();
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.DELETE_BY_ID);
+            query.setLong(1, id);
+            return query.executeUpdate();
+        }
     }
 
     private static class WinningLottoDaoSql {
