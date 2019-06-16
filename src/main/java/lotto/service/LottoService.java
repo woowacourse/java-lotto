@@ -16,12 +16,12 @@ public class LottoService {
     private static final String RESULT_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
 
-    public LottoDto offerLottoInfo(int money, int manualRound, String manualNumbers) {
+    public LottoDto offerLottoInfo(int money, int manualRound, String manualNumbers, int lottoRound) {
         int round = new Money(money).getRound();
         int autoRound = getAutoRound(round, manualRound);
         String[] numbers = splitNumbers(manualNumbers);
         UserLotto userLotto = createUserLotto(numbers, autoRound);
-        LottoDao.addLottoes(userLotto, round);
+        LottoDao.addLotto(userLotto, lottoRound);
 
         return new LottoDto(round, manualRound, autoRound, userLotto.getUserLotto(), numbers);
     }
@@ -43,7 +43,7 @@ public class LottoService {
     }
 
     public LottoRoundDto offerLottoRounds() {
-        int lottoRound = LottoDao.getMaxRound() + 1;
+        int lottoRound = LottoDao.offerMaxRound() + 1;
         return new LottoRoundDto(lottoRound);
     }
 

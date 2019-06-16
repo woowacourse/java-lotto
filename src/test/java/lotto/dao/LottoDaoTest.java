@@ -27,13 +27,13 @@ class LottoDaoTest {
     }
 
     @Test
-    void addLotto() throws Exception {
+    void addLotto() {
         UserLotto userLotto = new UserLotto(lotto, 4, new LottoNumberGenerator());
-        LottoDao.addLottoes(userLotto, 1);
+        LottoDao.addLotto(userLotto, 1);
     }
 
     @Test
-    void maxRound() throws Exception {
-        System.out.println(LottoDao.getMaxRound());
+    void maxRound() {
+        System.out.println(LottoDao.offerMaxRound());
     }
 }

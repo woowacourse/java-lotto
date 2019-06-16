@@ -11,16 +11,15 @@ public class WebUILottoApplication {
     private static LottoService lottoService = new LottoService();
 
     public static void main(String[] args) {
-        get("/", (req, res) -> {
-            return render(lottoService.offerLottoRounds(), "main.html");
-        });
+        get("/", (req, res) -> render(lottoService.offerLottoRounds(), "main.html"));
 
         post("/lotto", (req, res) -> {
             int money = Integer.parseInt(req.queryParams("money"));
             int manualRound = Integer.parseInt(req.queryParams("manualRound"));
             String manualNumbers = req.queryParams("manualNumbers");
+            int lottoRound = Integer.parseInt(req.queryParams("lottoRound"));
 
-            return render(lottoService.offerLottoInfo(money, manualRound, manualNumbers), "lotto.html");
+            return render(lottoService.offerLottoInfo(money, manualRound, manualNumbers, lottoRound), "lotto.html");
         });
 
         post("/winLotto", (req, res) -> {
