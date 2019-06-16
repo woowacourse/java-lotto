@@ -16,8 +16,8 @@ public class DBCPDataSource {
     private static final String URL = "jdbc:" + DBMS + "://" + SERVER + "/" + DATABASE + CONNECTION_PROPERTIES;
     private static final String USER_NAME = "bmo";
     private static final String PASSWORD = "0000";
-    private static final int MIN_IDLE = 20;
-    private static final int MAX_IDLE = 30;
+    private static final int MIN_IDLE = 5;
+    private static final int MAX_IDLE = 10;
     private static final int MAX_OPEN_PREPARED_STATEMENTS = 100;
 
     static {
