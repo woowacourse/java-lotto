@@ -11,10 +11,10 @@ public class LottoResult {
     private final Map<LottoRank, Integer> rankStatistic;
 
     public LottoResult(List<LottoRank> ranks) {
-        rankStatistic = Collections.unmodifiableMap(ranks.stream()
-                .collect(Collectors.groupingBy(
-                        Function.identity(), Collectors.reducing(0, rank -> 1, Integer::sum)
-                ))
+        rankStatistic = Collections.unmodifiableMap(
+                ranks.stream()
+                        .collect(Collectors.groupingBy(
+                                Function.identity(), Collectors.summingInt(x -> 1)))
         );
     }
 
