@@ -98,7 +98,7 @@ public class WinningLottoDAO {
     }
 
     public static LottoGameResultDTO findByWinningLottoId(String winningLottoId) throws SQLException {
-        String query = "SELECT l.id, l.type, GROUP_CONCAT(ln.number ORDER BY ln.number SEPARATOR ',') as numbers, w.bonusBall " +
+        String query = "SELECT w.id, l.type, GROUP_CONCAT(ln.number ORDER BY ln.number SEPARATOR ',') as numbers, w.bonusBall " +
                 "FROM lotto.lotto as l " +
                 "JOIN lotto.winninglotto as w ON w.lotto_id = l.id " +
                 "JOIN lotto.lottonumber as ln ON l.id = ln.lotto_id " +
@@ -109,6 +109,6 @@ public class WinningLottoDAO {
         ResultSet rs = pstmt.executeQuery();
         rs.next();
 
-        return rs.next() ? new LottoGameResultDTO(rs.getInt("id"), rs.getString("numbers"), rs.getInt("bonusBall")) : null;
+        return new LottoGameResultDTO(rs.getInt("id"), rs.getString("numbers"), rs.getInt("bonusBall"));
     }
 }

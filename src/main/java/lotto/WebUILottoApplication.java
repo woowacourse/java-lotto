@@ -76,7 +76,24 @@ public class WebUILottoApplication {
                 return render(model, "lotto_result.html");
             });
 
-            get("/result/select", (req, res) -> {
+            get("/result/:week", (req, res) -> {
+                Map<String, Object> model = new HashMap<>();
+                LottoGameResultDTO winningLotto = WinningLottoDAO.findByWinningLottoId(req.params(":week"));
+                List<LottoTicket> lottoTickets = LottoDAO.findLottosByLottoId(winningLotto.getWinningLottoId());
+                WinStatistics winStatistics = new WinStatistics(lottoTickets, WinningLotto.of(winningLotto.getWinningNumbers(), winningLotto.getBonusBall()));
+
+                model.put("week", winningLotto.getWinningLottoId());
+                model.put("winningNumbers", winningLotto.getWinningNumbers().split(","));
+                model.put("bonusBall", winningLotto.getBonusBall());
+                model.put("results", getEachRank(winStatistics));
+                model.put("money", lottoTickets.size() * MONEY_OFFSET);
+                model.put("profit", winStatistics.getProfit());
+                model.put("incoming_rate", String.format("%.2f", lottoTickets.size() > 0 ? winStatistics.calculateProfitRate(lottoTickets.size() * MONEY_OFFSET) : 0));
+
+                return render(model, "lotto_result.html");
+            });
+
+            get("/select", (req, res) -> {
                 Map<String, Object> model = new HashMap<>();
                 model.put("weeksOfGame", WinningLottoDAO.findAllWinningLottoId());
 
