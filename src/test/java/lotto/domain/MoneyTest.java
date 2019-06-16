@@ -22,6 +22,11 @@ public class MoneyTest {
     }
 
     @Test
+    void NULL_입력_예외처리() {
+        assertThrows(NullPointerException.class, ()-> Money.from(null));
+    }
+
+    @Test
     void getCountOfAutoTest() {
         Money money = Money.from(100000);
         int countOfManual = 5;

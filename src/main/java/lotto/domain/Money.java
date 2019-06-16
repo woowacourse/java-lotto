@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Money {
     static final int PRICE_PER_LOTTO = 1000;
 
@@ -15,7 +17,7 @@ public class Money {
     }
 
     public static Money from(final String money) {
-        return from(Integer.parseInt(money));
+        return from(Integer.parseInt(Objects.requireNonNull(money)));
     }
 
     private static void validate(final long money) {
