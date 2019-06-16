@@ -25,7 +25,7 @@ public class OutputView {
         for (Rank rank : Rank.values()) {
             System.out.print(getEachResult(lottoResult, rank));
         }
-        System.out.printf("총 수익률은 %.1f%%입니다.", lottoResult.getRateOfReturn() * 100);
+        System.out.printf("총 수익률은 %.1f%%입니다.", lottoResult.getRateOfReturn());
     }
 
     private static String getEachResult(LottoResult lottoResult, Rank rank) {

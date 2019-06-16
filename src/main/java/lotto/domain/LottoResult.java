@@ -28,10 +28,10 @@ public class LottoResult {
     }
 
     public double getRateOfReturn() {
-        return (double) getWinningMoney() / (getNumberOfLotto() * MONEY_PER_LOTTO);
+        return (double) getWinningMoney() / (getNumberOfLotto() * MONEY_PER_LOTTO) * 100;
     }
 
-    public long getWinningMoney() {
+    private long getWinningMoney() {
         long winningMoney = 0;
         for (Rank rank : lottoResult.keySet()) {
             winningMoney += (long) rank.getWinningMoney() * lottoResult.get(rank);
