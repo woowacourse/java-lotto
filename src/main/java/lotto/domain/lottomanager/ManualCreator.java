@@ -11,7 +11,7 @@ public class ManualCreator implements LottoCreator {
     public ManualCreator(List<Integer> lottoNumbers) {
         lottoNumbers.forEach(ManualCreator::checkNullNumber);
         this.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumberManager::getMatchNumber)
                 .collect(Collectors.toList());
     }
 

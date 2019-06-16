@@ -24,6 +24,10 @@ public class LottoNumber implements Comparable {
         }
     }
 
+    boolean isMatchNumber(int anotherNumber) {
+        return lottoNumber == anotherNumber;
+    }
+
     private boolean isOutRangeNumber(int number) {
         return LIMIT_MIN_NUM > number || LIMIT_MAX_NUM < number;
     }

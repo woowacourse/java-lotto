@@ -19,7 +19,7 @@ public class WinningLotto {
         LottoCreator lottoCreator = new ManualCreator(winningNumbers);
 
         this.winningLotto = lottoCreator.createTickets();
-        this.bonusBall = new LottoNumber(bonusBall);
+        this.bonusBall = LottoNumberManager.getMatchNumber(bonusBall);
     }
 
     private static void checkNullNumber(Integer number) {

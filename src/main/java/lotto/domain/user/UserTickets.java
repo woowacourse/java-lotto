@@ -40,7 +40,7 @@ public class UserTickets {
         }
     }
 
-    private List<LottoTicket> createManualTickets(List<String> inputTickets){
+    private List<LottoTicket> createManualTickets(List<String> inputTickets) {
         return inputTickets.stream()
                 .map(InputParser::getLottoNum)
                 .map(numbers -> (LottoCreator) new ManualCreator(numbers))
