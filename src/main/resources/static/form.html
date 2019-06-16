@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+<h1> 로또 입력 </h1>
+
+<table>
+    <tbody>
+    <form action="/winninglotto" method="post">
+        <tr>
+            <th>금액:</th>
+            <td><input type="text" placeholder="14000" name="money"/></td>
+        </tr>
+        <tr>
+            <th>수동 로또 개수:</th>
+            <td><input type="text" placeholder="3" name="numberOfManualLotto"/></td>
+        </tr>
+        <tr>
+            <th>수동 로또 번호:</th>
+            <td><textarea rows="5" cols="30" placeholder="8, 21, 23, 41, 42, 43
+3, 5, 11, 16, 32, 38
+7, 11, 16, 35, 36, 44"
+                          name="manualLottoNumbers"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="등록"/>
+            </td>
+        </tr>
+    </form>
+    </tbody>
+</table>
+
+<a href="/show">
+    <input type="button" value="조회" />
+</a>
+
+</body>
+</html>

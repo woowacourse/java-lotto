@@ -13,10 +13,9 @@ public class OutputConsole {
         System.out.println("\n수동으로 " + lottoCount.getManualCount() + "장, " +
                 "자동으로 " + lottoCount.getAutoCount() + "장을 구매했습니다.");
         StringBuilder stringBuilder = new StringBuilder();
-        for (Lotto lotto : lottos.getList()) {
-            stringBuilder.append("[");
-            stringBuilder.append(String.join(",", lotto.convertStringList()));
-            stringBuilder.append("]\n");
+        for (Lotto lotto : lottos.getLottos()) {
+            stringBuilder.append(lotto.toString());
+            stringBuilder.append("\n");
         }
         System.out.println(stringBuilder.toString());
     }

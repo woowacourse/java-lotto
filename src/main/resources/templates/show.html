@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+<h2>조회할 회차를 선택해주세요.</h2>
+<br/>
+
+<form action="/lottosinfo">
+    <select name="lottoRound">
+        {{#rounds}}
+        <option value={{this}}>{{this}}</option>
+        {{/rounds}}
+    </select>
+    <input type="submit" value="조회"/>
+</form>
+
+</body>
+</html>

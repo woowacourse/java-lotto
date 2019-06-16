@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,18 +26,18 @@ public class InputConsole {
         }
     }
 
-    public static List<Integer> inputLotto() {
-        Scanner scanner = new Scanner(System.in);
-        List<String> inputLottoNumbers = Arrays.asList((scanner.nextLine()).split(","));
-        List<Integer> lottoNumbers = new ArrayList<>();
-        for (String inputLottoNumber : inputLottoNumbers) {
-            try {
-                lottoNumbers.add(Integer.parseInt(inputLottoNumber.trim()));
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("로또 번호는 숫자를 입력해야 합니다.");
-            }
+    public static List<String> inputManulLottoNumbers(int manualCount) {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        List<String> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            lottoNumbers.add(inputLotto());
         }
         return lottoNumbers;
+    }
+
+    public static String inputLotto() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
     public static int inputBonusNumber() {

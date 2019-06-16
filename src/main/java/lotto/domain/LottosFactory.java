@@ -4,34 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottosFactory {
-    private final List<List<Integer>> manualLottoNumbers;
+    private final List<String> manualLottoNumbers;
     private final LottoCount lottoCount;
-    private List<Lotto> lottosList = new ArrayList<>();
 
-    public LottosFactory(List<List<Integer>> manualLottoNumbers, LottoCount lottoCount) {
+    public LottosFactory(List<String> manualLottoNumbers, LottoCount lottoCount) {
         this.manualLottoNumbers = manualLottoNumbers;
         this.lottoCount = lottoCount;
     }
 
-    public Lottos getLottos() {
-        getManualLottos();
-        getAutoLottos();
-        return new Lottos(lottosList);
+    public Lottos generateTotalLottos() {
+        List<Lotto> lottos = new ArrayList<>();
+        getManualLottos(lottos);
+        getAutoLottos(lottos);
+        return new Lottos(lottos);
     }
 
-    private void getManualLottos() {
+    private void getManualLottos(List<Lotto> lottos) {
         ManualLottoMachine manualLottoMachine = new ManualLottoMachine(manualLottoNumbers);
         List<Lotto> manualLottos = new ArrayList<>(manualLottoMachine.generateLottos());
-        for (Lotto manualLotto : manualLottos) {
-            lottosList.add(manualLotto);
-        }
+        lottos.addAll(manualLottos);
     }
 
-    private void getAutoLottos() {
+    private void getAutoLottos(List<Lotto> lottos) {
         AutoLottoMachine autoLottoMachine = new AutoLottoMachine(lottoCount.getAutoCount());
         List<Lotto> autoLottos = new ArrayList<>(autoLottoMachine.generateLottos());
-        for (Lotto autoLotto : autoLottos) {
-            lottosList.add(autoLotto);
-        }
+        lottos.addAll(autoLottos);
     }
 }

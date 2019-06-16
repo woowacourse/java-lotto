@@ -1,3 +1,4 @@
+
 package lotto.domain;
 
 import java.util.*;

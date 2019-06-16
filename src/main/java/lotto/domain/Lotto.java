@@ -39,12 +39,34 @@ public class Lotto {
     public List<String> convertStringList() {
         List<String> numbers = new ArrayList<>();
         for (LottoNumber lottoNumber : lottoNumbers) {
-            numbers.add(lottoNumber.getNumber().toString());
+            numbers.add(lottoNumber.toString());
         }
         return numbers;
     }
 
     public boolean isContain(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        stringBuilder.append(String.join(", ", convertStringList()));
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
