@@ -5,6 +5,7 @@ import lotto.domain.WinningLotto;
 import lotto.domain.dto.LottoGameResultDTO;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.db.DBConnection.getConnection;
@@ -68,7 +69,7 @@ public class WinningLottoDAO {
     }
 
     public static LottoGameResultDTO findLatestWinningLotto() throws SQLException {
-        String query = "SELECT w.id, GROUP_CONCAT(ln.number SEPARATOR  ',') as numbers, w.bonusBall " +
+        String query = "SELECT w.id, GROUP_CONCAT(ln.number ORDER BY ln.number SEPARATOR  ',') as numbers, w.bonusBall " +
                 "FROM lotto.lotto as l " +
                 "JOIN lotto.winninglotto as w ON w.lotto_id = l.id " +
                 "JOIN lotto.lottonumber as ln ON l.id = ln.lotto_id " +
@@ -82,7 +83,7 @@ public class WinningLottoDAO {
     }
 
     public static LottoGameResultDTO findByWinningLottoId(String winningLottoId) throws SQLException {
-        String query = "SELECT l.id, l.type, GROUP_CONCAT(ln.number SEPARATOR ',') as numbers, w.bonusBall " +
+        String query = "SELECT l.id, l.type, GROUP_CONCAT(ln.number ORDER BY ln.number SEPARATOR ',') as numbers, w.bonusBall " +
                 "FROM lotto.lotto as l " +
                 "JOIN lotto.winninglotto as w ON w.lotto_id = l.id " +
                 "JOIN lotto.lottonumber as ln ON l.id = ln.lotto_id " +

@@ -58,7 +58,7 @@ public class LottoDAO {
     }
 
     public static LottoDTO findByLottoId(String lottoId) throws SQLException {
-        String query = "SELECT l.id, l.type, GROUP_CONCAT(ln.number SEPARATOR  ',') as numbers " +
+        String query = "SELECT l.id, l.type, GROUP_CONCAT(ln.number ORDER BY ln.number SEPARATOR  ',') as numbers " +
                 "FROM lotto.lotto as l " +
                 "JOIN lotto.lottonumber as ln ON l.id = ln.lotto_id " +
                 "WHERE l.id = ? " +
@@ -71,7 +71,7 @@ public class LottoDAO {
     }
 
     public static List<LottoTicket> findLottosByLottoId(int lottoId) throws SQLException {
-        String query = "SELECT GROUP_CONCAT(ln.number SEPARATOR  ',') as numbers " +
+        String query = "SELECT GROUP_CONCAT(ln.number ORDER BY ln.number SEPARATOR  ',') as numbers " +
                 "FROM lotto.lotto as l " +
                 "JOIN lotto.lottonumber as ln ON l.id = ln.lotto_id " +
                 "JOIN lotto.lottogame as lg ON l.id = lg.lotto_id " +
