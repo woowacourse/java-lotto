@@ -11,22 +11,26 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int lottoNumber;
 
     LottoNumber(int lottoNumber) {
-        checkValidLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
     static LottoNumber from(int lottoNumber) {
+        checkValidLottoNumber(lottoNumber);
         return new LottoNumber(lottoNumber);
     }
 
-    private void checkValidLottoNumber(int lottoNumber) {
+    private static void checkValidLottoNumber(int lottoNumber) {
         if (isInLottoNumberRange(lottoNumber)) {
             throw new InvalidLottoNumberException("번호가 " + MIN_LOTTO_NUMBER + " ~ " + MAX_LOTTO_NUMBER + " 범위를 벗어납니다.");
         }
     }
 
-    private boolean isInLottoNumberRange(int lottoNumber) {
+    private static boolean isInLottoNumberRange(int lottoNumber) {
         return lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER;
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
