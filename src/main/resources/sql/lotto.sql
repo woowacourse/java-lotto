@@ -91,54 +91,49 @@ INSERT INTO lotto_result (first, second, third, fourth, fifth, miss, round) VALU
 -- test code --
 -----------------
 -- 전체 데이터 조회
-SELECT payment_info.round, name, first, second, third, fourth, fifth, miss, payment
-FROM user
-INNER JOIN payment_info ON payment_info.user_id = user.id
-INNER JOIN lotto_result ON lotto_result.round = payment_info.round
-LIMIT 10;
+# SELECT payment_info.round, name, first, second, third, fourth, fifth, miss, payment
+# FROM user
+# INNER JOIN payment_info ON payment_info.user_id = user.id
+# INNER JOIN lotto_result ON lotto_result.round = payment_info.round
+# LIMIT 10;
 
 -- round로 Lotto result 조회
-SELECT payment_info.round, name, first, second, third, fourth, fifth, miss, payment
-FROM user
-INNER JOIN payment_info ON payment_info.user_id = user.id
-INNER JOIN lotto_result ON lotto_result.round = payment_info.round
-WHERE lotto_result.round = 3;
+# SELECT payment_info.round, name, first, second, third, fourth, fifth, miss, payment
+# FROM user
+# INNER JOIN payment_info ON payment_info.user_id = user.id
+# INNER JOIN lotto_result ON lotto_result.round = payment_info.round
+# WHERE lotto_result.round = 3;
 
 -- 유저 등록 (없을 경우)
-INSERT INTO user (name) 
-  SELECT 'pobi' FROM DUAL
-WHERE NOT EXISTS 
-  (SELECT name FROM user WHERE name = 'pobi');
+# INSERT INTO user (name)
+#   SELECT 'pobi' FROM DUAL
+# WHERE NOT EXISTS
+#   (SELECT name FROM user WHERE name = 'pobi');
 
 -- 이름에 일치하는 id를 찾아 payment 입력
-INSERT INTO payment_info(payment, user_id, manual, auto) VALUES(5000, 1, 1, (SELECT id
-FROM user
-WHERE name = '김고래'));
+# INSERT INTO payment_info(payment, user_id, manual, auto) VALUES(5000, 1, 1, (SELECT id
+# FROM user
+# WHERE name = '김고래'));
 
 -- 로또 입력
-INSERT INTO lotto_ticket(lotto, is_auto, round) VALUES(?, ?, ?);
+# INSERT INTO lotto_ticket(lotto, is_auto, round) VALUES(?, ?, ?);
 
-SELECT *
-FROM payment_info
-WHERE round = (SELECT last_insert_id());
+# SELECT *
+# FROM payment_info
+# WHERE round = (SELECT last_insert_id());
 
+# SELECT * FROM user;
+# SELECT * FROM payment_info;
+# SELECT * FROM lotto_ticket;
+# SELECT * FROM lotto_result;
+# SELECT * FROM winning_lotto;
 
+# SELECT winning_lotto, bonus_ball
+# FROM winning_lotto
+# WHERE round = 10;
 
-SELECT * FROM user;
-select * from payment_info;
-select * from lotto_ticket;
-SELECT * FROM lotto_result;
-select * from winning_lotto;
-
-select * from lotto_ticket
-WHERE round = 1;
-
-SELECT winning_lotto, bonus_ball
-FROM winning_lotto
-WHERE round = 10;
-
-SELECT name, SUM(payment) as sum
-FROM user
-INNER JOIN payment_info ON payment_info.user_id = user.id
-GROUP BY name
-ORDER BY sum DESC;
+# SELECT name, SUM(payment) as sum
+# FROM user
+# INNER JOIN payment_info ON payment_info.user_id = user.id
+# GROUP BY name
+# ORDER BY sum DESC;
