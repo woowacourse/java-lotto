@@ -8,7 +8,7 @@ import java.sql.Connection;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class LottoDAOTest {
+public class LottoDAOConnectorTest {
     private LottoDAOConnector lottoDAO;
     private Connection con;
 
@@ -28,4 +28,5 @@ public class LottoDAOTest {
         lottoDAO.closeConnection(con);
         lottoDAO = null;
     }
+
 }

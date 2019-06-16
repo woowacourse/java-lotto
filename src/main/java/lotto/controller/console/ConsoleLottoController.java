@@ -19,7 +19,7 @@ public class ConsoleLottoController {
 
         WinningLotto winningLotto = new WinningLotto(ConsoleInputView.InputWinLottoNumber(), ConsoleInputView.InputBonusNumber());
         LottoResult result = new LottoResult(lottoTicket, winningLotto);
-        LottoResult_VO result_vo = new LottoResult_VO(result.matchLotto(), price.getMoney());
+        LottoResult_VO result_vo = new LottoResult_VO(result.matchLotto(), price);
         ConsoleOutPutView.showLottoResult(result_vo);
     }
 
