@@ -1,3 +1,9 @@
+CREATE USER 'whale'@'localhost' IDENTIFIED BY 'whale';
+GRANT ALL PRIVILEGES ON *.* TO 'whale'@'localhost';
+FLUSH PRIVILEGES;
+CREATE DATABASE lotto DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE lotto;
+
 DROP TABLE IF EXISTS lotto_ticket CASCADE;
 DROP TABLE IF EXISTS lotto_result CASCADE;
 DROP TABLE IF EXISTS winning_lotto CASCADE;
