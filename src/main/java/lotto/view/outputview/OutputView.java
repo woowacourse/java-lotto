@@ -30,7 +30,7 @@ public class OutputView {
     public static void printAmount(PurchaseAmount purchaseAmount, int manualLottoTickets) {
         stringBuilder = new StringBuilder();
         stringBuilder.append(String.format(MANUAL_LOTTO_MESSAGE, manualLottoTickets))
-                .append(String.format(AUTO_LOTTO_MESSAGE, purchaseAmount.getAutoLottoAmount() - manualLottoTickets));
+                .append(String.format(AUTO_LOTTO_MESSAGE, purchaseAmount.getLottoAmount() - manualLottoTickets));
 
         System.out.println(stringBuilder.toString());
     }

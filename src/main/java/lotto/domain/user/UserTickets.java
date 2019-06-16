@@ -1,10 +1,12 @@
 package lotto.domain.user;
 
+import lotto.domain.lottomanager.AutoCreator;
 import lotto.domain.lottomanager.LottoCreator;
 import lotto.domain.lottomanager.LottoTicket;
+import lotto.domain.lottomanager.ManualCreator;
 import lotto.domain.lottomanager.shufflerule.RandomShuffle;
 import lotto.domain.result.Rank;
-import lotto.domain.winning.WinningLotto;
+import lotto.domain.lottomanager.WinningLotto;
 import lotto.view.inputview.InputParser;
 
 import java.util.Collections;
@@ -38,16 +40,19 @@ public class UserTickets {
         }
     }
 
-    private List<LottoTicket> createManualTickets(List<String> manualTickets) {
-        return manualTickets.stream()
+    private List<LottoTicket> createManualTickets(List<String> inputTickets){
+        return inputTickets.stream()
                 .map(InputParser::getLottoNum)
-                .map(LottoCreator::createManualTickets)
+                .map(numbers -> (LottoCreator) new ManualCreator(numbers))
+                .map(LottoCreator::createTickets)
                 .collect(Collectors.toList());
     }
 
     private List<LottoTicket> getAutoTickets(List<LottoTicket> tickets, PurchaseAmount purchaseAmount) {
+        LottoCreator lottoCreator = new AutoCreator(new RandomShuffle());
+
         while (!isSufficientTickets(purchaseAmount, tickets)) {
-            tickets.add(LottoCreator.createAutoTickets(new RandomShuffle()));
+            tickets.add(lottoCreator.createTickets());
         }
 
         return tickets;

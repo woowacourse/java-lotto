@@ -17,40 +17,40 @@ class LottoTicketTest {
     @BeforeEach
     void setUp() {
         lottoNumbers = IntStream.rangeClosed(1, 5)
-                .mapToObj(LottoNumber::createLottoNumber)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
     @Test
     void null_check() {
         assertThrows(NullPointerException.class, () -> {
-            LottoTicket.createLottoTicket(null);
+            new LottoTicket(null);
         });
     }
 
     @Test
     void 중복_번호() {
-        lottoNumbers.add(LottoNumber.createLottoNumber(5));
+        lottoNumbers.add(new LottoNumber(5));
         assertThrows(IllegalArgumentException.class, () -> {
-            LottoTicket.createLottoTicket(lottoNumbers);
+            new LottoTicket(lottoNumbers);
         });
     }
 
     @Test
     void 번호_개수_6개_아닌경우() {
         assertThrows(IllegalArgumentException.class, () -> {
-            LottoTicket.createLottoTicket(lottoNumbers);
+            new LottoTicket(lottoNumbers);
         });
     }
 
     @Test
     void 당첨번호개수() {
         List<LottoNumber> numbers1 = new ArrayList<>(lottoNumbers);
-        numbers1.add(LottoNumber.createLottoNumber(6));
+        numbers1.add(new LottoNumber(6));
 
         List<LottoNumber> numbers2 = new ArrayList<>(lottoNumbers);
-        numbers2.add(LottoNumber.createLottoNumber(7));
-        assertThat(LottoTicket.createLottoTicket(numbers1)
-                .getMatchedNumbersCount(LottoTicket.createLottoTicket(numbers2))).isEqualTo(5);
+        numbers2.add(new LottoNumber(7));
+        assertThat( new LottoTicket(numbers1)
+                .getMatchedNumbersCount( new LottoTicket(numbers2))).isEqualTo(5);
     }
 }

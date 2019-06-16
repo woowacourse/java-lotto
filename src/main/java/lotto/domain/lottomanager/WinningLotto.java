@@ -1,8 +1,5 @@
-package lotto.domain.winning;
+package lotto.domain.lottomanager;
 
-import lotto.domain.lottomanager.LottoCreator;
-import lotto.domain.lottomanager.LottoNumber;
-import lotto.domain.lottomanager.LottoTicket;
 import lotto.domain.result.Rank;
 
 import java.util.List;
@@ -19,8 +16,10 @@ public class WinningLotto {
         winningNumbers.forEach(WinningLotto::checkNullNumber);
         checkOverlapWithWinningNumbers(bonusBall, winningNumbers);
 
-        this.winningLotto = LottoCreator.createManualTickets(winningNumbers);
-        this.bonusBall = LottoCreator.createBonusBall(bonusBall);
+        LottoCreator lottoCreator = new ManualCreator(winningNumbers);
+
+        this.winningLotto = lottoCreator.createTickets();
+        this.bonusBall = new LottoNumber(bonusBall);
     }
 
     private static void checkNullNumber(Integer number) {

@@ -1,7 +1,7 @@
 package lotto.domain.result;
 
 import lotto.domain.user.UserTickets;
-import lotto.domain.winning.WinningLotto;
+import lotto.domain.lottomanager.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -9,11 +9,11 @@ public class PurchaseAmount {
     private static final String ERROR_LIMIT_MINIMUM_PRICE = "구매 금액은 1000원 이상입니다.";
     private static final String ERROR_PRICE_UNIT = "구매 금액은 1,000원 단위 입니다.";
 
-    private final int autoLottoAmount;
+    private final int lottoAmount;
 
     public PurchaseAmount(int purchasePrice) {
         checkValidPurchasePrice(purchasePrice);
-        this.autoLottoAmount = calculateLottoAmount(purchasePrice);
+        this.lottoAmount = calculateLottoAmount(purchasePrice);
     }
 
     private void checkValidPurchasePrice(int purchasePrice) {
@@ -42,7 +42,7 @@ public class PurchaseAmount {
     }
 
     public boolean isEqualsAmount(int number) {
-        return this.autoLottoAmount == number;
+        return this.lottoAmount == number;
     }
 
     @Override
@@ -50,15 +50,15 @@ public class PurchaseAmount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final PurchaseAmount that = (PurchaseAmount) o;
-        return Objects.equals(autoLottoAmount, that.autoLottoAmount);
+        return Objects.equals(lottoAmount, that.lottoAmount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(autoLottoAmount);
+        return Objects.hash(lottoAmount);
     }
 
-    public int getAutoLottoAmount() {
-        return autoLottoAmount;
+    public int getLottoAmount() {
+        return lottoAmount;
     }
 }

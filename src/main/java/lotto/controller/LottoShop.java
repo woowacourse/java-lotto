@@ -1,10 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.lottomanager.shufflerule.RandomShuffle;
 import lotto.domain.result.WinningResult;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;
-import lotto.domain.winning.WinningLotto;
+import lotto.domain.lottomanager.WinningLotto;
 import lotto.view.inputview.InputParser;
 import lotto.view.inputview.InputView;
 import lotto.view.outputview.OutputView;
