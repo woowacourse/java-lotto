@@ -1,12 +1,11 @@
 package lotto.domain.dao;
 
-import lotto.domain.dao.sqls.PaymentDaoSqls;
 import lotto.domain.dto.PaymentInfoDTO;
 
 import java.sql.*;
 
 import static lotto.domain.dao.JdbcConnector.getConnection;
-import static lotto.domain.dao.sqls.PaymentDaoSqls.*;
+import static lotto.domain.dao.sqls.PaymentDaoSqls.INSERT_PAYMENT_INFO;
 
 public class PaymentInfoDao {
     private PaymentInfoDao(){}
@@ -20,7 +19,8 @@ public class PaymentInfoDao {
     }
 
     public int insertPayment(PaymentInfoDTO paymentInfoDTO) throws SQLDataException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
                 INSERT_PAYMENT_INFO, Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setInt(1, paymentInfoDTO.getPayment());

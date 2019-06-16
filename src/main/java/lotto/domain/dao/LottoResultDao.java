@@ -2,6 +2,7 @@ package lotto.domain.dao;
 
 import lotto.domain.dto.ResultDTO;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
@@ -28,7 +29,8 @@ public class LottoResultDao {
     }
 
     public int insertLottoResult(ResultDTO resultDTO) throws SQLDataException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(INSERT_LOTTO_RESULT)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LOTTO_RESULT)) {
             preparedStatement.setLong(1, resultDTO.get(FIRST));
             preparedStatement.setLong(2, resultDTO.get(SECOND));
             preparedStatement.setLong(3, resultDTO.get(THIRD));
@@ -44,7 +46,8 @@ public class LottoResultDao {
     }
 
     public List<ResultDTO> selectAllLottoResult() throws SQLDataException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(SELECT_ALL_LOTTO_RESULT);
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_LOTTO_RESULT);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             List<ResultDTO> results = new ArrayList<>();
@@ -69,7 +72,8 @@ public class LottoResultDao {
     }
 
     public ResultDTO selectLottoResult(int round) throws SQLDataException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(SELECT_LOTTO_RESULT_BY_ROUND)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOTTO_RESULT_BY_ROUND)) {
             preparedStatement.setInt(1, round);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {

@@ -1,6 +1,5 @@
 package lotto.domain.dao;
 
-import lotto.domain.dto.ResultDTO;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinningLotto;
@@ -14,7 +13,6 @@ import static java.util.stream.Collectors.toList;
 import static lotto.domain.dao.JdbcConnector.getConnection;
 import static lotto.domain.dao.sqls.Columns.*;
 import static lotto.domain.dao.sqls.LottoDaoSqls.*;
-import static lotto.domain.lotto.Rank.*;
 
 public class LottoDao {
 
@@ -30,7 +28,8 @@ public class LottoDao {
     }
 
     public int insertUser(String name) throws SQLDataException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(INSERT_USER)) {
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, name);
             return preparedStatement.executeUpdate();
@@ -46,7 +45,8 @@ public class LottoDao {
             queryBuilder.append(COMMA_AND_THREE_COLUMNS);
         }
 
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(queryBuilder.toString())) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(queryBuilder.toString())) {
             int parameter = 1;
 
             for (Lotto lotto : lottoTickets.getAllLottoTickets()) {
@@ -62,7 +62,8 @@ public class LottoDao {
     }
 
     public int insertWinningLotto(WinningLotto winningLotto, int round) throws SQLDataException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(INSERT_WINNING_LOTTO)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_WINNING_LOTTO)) {
             preparedStatement.setInt(1, round);
             preparedStatement.setString(2, winningLotto.getWinningLotto().toString());
             preparedStatement.setString(3, winningLotto.getBonusNumber().toString());
@@ -74,7 +75,8 @@ public class LottoDao {
     }
 
     public List<Lotto> selectAllLotto(int round) throws SQLDataException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(SELECT_ALL_LOTTO_BY_ROUND)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_LOTTO_BY_ROUND)) {
             preparedStatement.setInt(1, round);
 
             List<Lotto> lottos = new ArrayList<>();
@@ -98,7 +100,8 @@ public class LottoDao {
     }
 
     public WinningLotto selectWinningLotto(int round) throws SQLDataException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(SELECT_WINNING_LOTTO_BY_ROUND)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_WINNING_LOTTO_BY_ROUND)) {
             preparedStatement.setInt(1, round);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (!resultSet.next()) {
