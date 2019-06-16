@@ -25,7 +25,9 @@ public class WebUILottoApplication {
         post("/winLotto", (req, res) -> {
             int round = Integer.parseInt(req.queryParams("round"));
             String userLottoString = req.queryParams("userLotto");
-            return render(lottoService.offerUserLottoInfo(round, userLottoString), "winNumber.html");
+            int lottoRound = Integer.parseInt(req.queryParams("lottoRound"));
+
+            return render(lottoService.offerUserLottoInfo(round, userLottoString, lottoRound), "winNumber.html");
         });
 
         get("/result", (req, res) -> {
@@ -33,7 +35,8 @@ public class WebUILottoApplication {
             String bonusNumber = req.queryParams("bonusNumber");
             int round = Integer.parseInt(req.queryParams("round"));
             String userLottoString = req.queryParams("userLotto");
-            return render(lottoService.offerResults(winNumbers, bonusNumber, userLottoString, round), "result.html");
+            int lottoRound = Integer.parseInt(req.queryParams("lottoRound"));
+            return render(lottoService.offerResults(winNumbers, bonusNumber, userLottoString, round, lottoRound), "result.html");
         });
     }
 

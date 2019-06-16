@@ -23,15 +23,15 @@ public class LottoService {
         UserLotto userLotto = createUserLotto(numbers, autoRound);
         LottoDao.addLotto(userLotto, lottoRound);
 
-        return new LottoDto(round, manualRound, autoRound, userLotto.getUserLotto(), numbers);
+        return new LottoDto(round, manualRound, autoRound, userLotto.getUserLotto(), numbers, lottoRound);
     }
 
-    public UserLottoDto offerUserLottoInfo(int round, String userLottoString) {
+    public UserLottoDto offerUserLottoInfo(int round, String userLottoString, int lottoRound) {
         String[] numbers = Parser.parseLottoStrings(userLottoString);
-        return new UserLottoDto(round, new UserLotto(Parser.parseLotto(numbers)).getUserLotto());
+        return new UserLottoDto(round, new UserLotto(Parser.parseLotto(numbers)).getUserLotto(), lottoRound);
     }
 
-    public ResultDto offerResults(String winNumber, String bonusNumber, String userLottoString, int round) {
+    public ResultDto offerResults(String winNumber, String bonusNumber, String userLottoString, int round, int lottoRound) {
         Lotto results = Parser.parseWinningLotto(winNumber);
         WinningLotto winningLotto = new WinningLotto(results, Number.of(Integer.parseInt(bonusNumber)));
         String[] numbers = Parser.parseLottoStrings(userLottoString);
@@ -39,7 +39,7 @@ public class LottoService {
         Winners winners = new Winners(winningLotto.makeRankResultList(userLotto));
         List<String> resultRanks = provideResultStatus(winners.getRankResult());
 
-        return new ResultDto(resultRanks, winners.calculateResultRate(round));
+        return new ResultDto(resultRanks, winners.calculateResultRate(round), lottoRound);
     }
 
     public LottoRoundDto offerLottoRounds() {
