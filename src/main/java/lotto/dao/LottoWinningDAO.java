@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.dao.Exception.LottoWinningDAOException;
+import lotto.dao.exception.LottoWinningDAOException;
 
 import lotto.dto.ResultLottoDTO;
 
@@ -25,14 +25,15 @@ public class LottoWinningDAO {
 
     public int addResult(ResultLottoDTO resultLotto) {
         try {
-            String query = "INSERT INTO result (winning_lotto,result_statistic,result_prize,result_rate)"
-                    + " VALUE(?,?,?,?)";
+            String query = "INSERT INTO result (winning_lotto,bonus_ball,result_statistic,result_prize,result_rate)"
+                    + " VALUE(?,?,?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(query);
 
             pstmt.setString(1, resultLotto.getWinningLotto());
-            pstmt.setString(2, resultLotto.getRank().toString());
-            pstmt.setInt(3, resultLotto.getPrize());
-            pstmt.setInt(4, resultLotto.getIncomeRate());
+            pstmt.setInt(2, resultLotto.getBonusBall());
+            pstmt.setString(3, resultLotto.getRank().toString());
+            pstmt.setInt(4, resultLotto.getPrize());
+            pstmt.setInt(5, resultLotto.getIncomeRate());
 
             return pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -48,7 +49,7 @@ public class LottoWinningDAO {
 
             ResultSet rs = pstmt.executeQuery();
             if(!rs.next()) throw new LottoWinningDAOException("데이터 없음");
-            return Arrays.asList(rs.getString("winning_lotto")
+            return Arrays.asList(rs.getString("winning_lotto"), rs.getString("bonus_ball")
                     ,rs.getString("result_statistic"), rs.getString("result_prize")
                     ,rs.getString("result_rate"));
         } catch (SQLException e) {

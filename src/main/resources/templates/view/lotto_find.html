@@ -1,10 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="로또 시뮬레이션">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>로또</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <!-- Bootstrap javascript-->
+    <script src="../js/bootstrap.min.js"></script>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="../css/cover.css" type="text/css" rel="stylesheet">
+    <script src="../js/cover.js"></script>
+
+</head>
+
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand"><a class="masthead-brand" href="/home">로또 시뮬레이션</a></h3>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link" href="check">조회하기</a>
+                <a class="nav-link" href="contact">연락처</a>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main" class="inner cover">
+        <form class="was-validated ">
+            <h4 class="cover-heading">{{round}}회차 조회 내역 입니다!</h4>
+            <h4 class="cover-heading">로또 번호!</h4>
+            <div class="form-group">
+                {{#lottos}}
+                {{this}}
+                <br/>
+                {{/lottos}}
+            </div>
+            <h4 class="cover-heading">당첨 번호!</h4>
+            <div class="form-group">
+                {{winningLottos}}, 보너스 볼 : {{bonusBall}}
+            </div>
+            <h4 class="cover-heading">당첨 통계!</h4>
+            <div class="form-group">
+                {{#rank}}
+                {{this}}
+                <br/>
+                {{/rank}}
+                당첨 금액은 {{prize}}원 입니다.<br/>
+                수익률은 {{incomeRate}}% 입니다.
+            </div>
+            <p class="lead">
+                <a href="/home" class="btn btn-lg btn-secondary">처음으로</a>
+            </p>
+        </form>
+    </main>
+
+    <footer class="mastfoot mt-auto">
+        <div class="inner">
+            <p>Made by Pododang <br/>
+                <a href="https://github.com/backlo">Git 주소 클릭!!</a> <br/>
+                Call : 010-0000-0000.
+            </p>
+        </div>
+    </footer>
+</div>
 </body>
+
 </html>

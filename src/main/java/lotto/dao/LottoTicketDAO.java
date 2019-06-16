@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.dao.Exception.LottoTicketDAOException;
+import lotto.dao.exception.LottoTicketDAOException;
 
 import lotto.dto.LottoTicketDTO;
 

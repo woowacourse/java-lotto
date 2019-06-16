@@ -18,7 +18,7 @@ public class LottoTicketDAOTest {
     }
 
     @Test
-    void name() {
+    void 게임_회차를_찾기위한_테스트() {
         assertEquals(lottoTicketDAO.findRoundId(), 2);
     }
 

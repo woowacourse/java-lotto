@@ -7,6 +7,7 @@ public class ResultLottoDTO {
     private List<String> rank;
     private int prize;
     private int incomeRate;
+    private int bonusBall;
 
     public String getWinningLotto() {
         return winningLotto;
@@ -38,5 +39,13 @@ public class ResultLottoDTO {
 
     public void setIncomeRate(int incomeRate) {
         this.incomeRate = incomeRate;
+    }
+
+    public int getBonusBall() {
+        return bonusBall;
+    }
+
+    public void setBonusBall(int bonusBall) {
+        this.bonusBall = bonusBall;
     }
 }

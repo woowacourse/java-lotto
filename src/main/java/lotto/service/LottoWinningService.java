@@ -12,6 +12,7 @@ public class LottoWinningService {
     public static int insertResult(LottoResult_VO lottoResult_vo, WinningLotto winningLotto){
         ResultLottoDTO lottoDTO = new ResultLottoDTO();
         lottoDTO.setWinningLotto(winningLotto.getWinningNumbers().toString());
+        lottoDTO.setBonusBall(Integer.parseInt(winningLotto.getBonusBall().toString()));
         lottoDTO.setRank(lottoResult_vo.getRank());
         lottoDTO.setPrize(lottoResult_vo.getPrize());
         lottoDTO.setIncomeRate(lottoResult_vo.dividendRate());

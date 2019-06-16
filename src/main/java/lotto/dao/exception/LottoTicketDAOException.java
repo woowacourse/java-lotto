@@ -1,4 +1,4 @@
-package lotto.dao.Exception;
+package lotto.dao.exception;
 
 import java.sql.SQLException;
 

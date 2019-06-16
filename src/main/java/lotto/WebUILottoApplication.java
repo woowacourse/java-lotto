@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.controller.web.LottoCheckController;
 import lotto.controller.web.LottoHomeController;
 import lotto.controller.web.LottoStartController;
 import spark.ModelAndView;
@@ -24,6 +25,8 @@ public class WebUILottoApplication {
         post("/numbers", LottoStartController::getLottoTicket);
 
         post("/result", LottoStartController::getWinningLotto);
+
+        get("/find", LottoCheckController::findRoundLotto);
     }
 
     public static String render(Map<String, Object> model, String templatePath) {
