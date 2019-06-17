@@ -1,19 +1,15 @@
 package lotto.dao;
 
+import lotto.dao.sqls.WinningLottoSQLs;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.WinningLotto;
 import lotto.utils.DBUtils;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.sql.*;
 
 public class WinningLottoDAO {
     private static WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
+    private static final int START_COLUMN_NUMBER_OF_WINNING_LOTTO_TABLE = 1;
 
     private WinningLottoDAO() {
     }
@@ -23,29 +19,24 @@ public class WinningLottoDAO {
     }
 
     public int addWinningLotto(WinningLotto winningLotto) throws SQLException {
-        Lotto lotto = winningLotto.getWinningLotto();
-        List<Integer> winningLottoNumbers = lotto.getLottoNumbers().stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+        String query = WinningLottoSQLs.INSERT_WINNING_LOTTO;
 
-        String query = "INSERT INTO winning_lotto(number_1, number_2, number_3,number_4, number_5, number_6," +
-                " bonus_number) VALUES(?,?,?,?,?,?,?)";
-        PreparedStatement pstmt = DBUtils.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-        pstmt.setInt(1, winningLottoNumbers.get(0));
-        pstmt.setInt(2, winningLottoNumbers.get(1));
-        pstmt.setInt(3, winningLottoNumbers.get(2));
-        pstmt.setInt(4, winningLottoNumbers.get(3));
-        pstmt.setInt(5, winningLottoNumbers.get(4));
-        pstmt.setInt(6, winningLottoNumbers.get(5));
-        pstmt.setInt(7, Integer.parseInt(winningLotto.getBonusNumber().toString()));
-        pstmt.executeUpdate();
+        try (Connection connection = DBUtils.getConnection()) {
+            PreparedStatement pstmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-        ResultSet resultSet = pstmt.getGeneratedKeys();
+            Lotto lotto = winningLotto.getWinningLotto();
+            DBUtils.setLottoNumber(pstmt, lotto, START_COLUMN_NUMBER_OF_WINNING_LOTTO_TABLE);
+            pstmt.setInt(START_COLUMN_NUMBER_OF_WINNING_LOTTO_TABLE + Lotto.LOTTO_NUMBER_SIZE,
+                    winningLotto.getBonusNumber().getNumber());
+            pstmt.executeUpdate();
 
-        if (!resultSet.next()) {
-            return -1;
+            ResultSet resultSet = pstmt.getGeneratedKeys();
+
+            if (!resultSet.next()) {
+                return -1;
+            }
+
+            return resultSet.getInt(1);
         }
-
-        return resultSet.getInt(1);
     }
 }
