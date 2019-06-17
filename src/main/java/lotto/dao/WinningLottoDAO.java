@@ -18,8 +18,8 @@ public class WinningLottoDAO {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        String query = "INSERT INTO winning_lotto(winning_number_1, winning_number_2,winning_number_3," +
-                "winning_number_4, winning_number_5, winning_number_6, bonus_number) VALUES(?,?,?,?,?,?,?)";
+        String query = "INSERT INTO winning_lotto(number_1, number_2, number_3,number_4, number_5, number_6," +
+                " bonus_number) VALUES(?,?,?,?,?,?,?)";
         PreparedStatement pstmt = DBUtils.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         pstmt.setInt(1, winningLottoNumbers.get(0));
         pstmt.setInt(2, winningLottoNumbers.get(1));

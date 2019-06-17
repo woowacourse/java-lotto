@@ -24,8 +24,8 @@ public class LottoDAO {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        String query = "INSERT INTO lotto(round, lotto_number_1,lotto_number_2,lotto_number_3," +
-                "lotto_number_4,lotto_number_5,lotto_number_6) VALUES(?,?,?,?,?,?,?)";
+        String query = "INSERT INTO lotto(round, number_1, number_2, number_3, number_4,number_5,number_6) " +
+                "VALUES(?,?,?,?,?,?,?)";
         PreparedStatement pstmt = DBUtils.getConnection().prepareStatement(query);
 
         pstmt.setInt(1, round);
