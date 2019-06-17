@@ -9,8 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoMakerTest {
     @Test
     void 수동_로또_생성_순서_정렬() {
-        Lotto lotto = LottoMaker.generator(new Numbers(Arrays.asList(6,5,4,3,2,1)));
-        assertThat(lotto).isEqualTo(Lotto.of(new Numbers(Arrays.asList(1,2,3,4,5,6))));
+        Lotto lotto = LottoMaker.generator(new Numbers("6,5,4,3,2,1"));
+        assertThat(lotto).isEqualTo(Lotto.of(new Numbers("1,2,3,4,5,6")));
     }
 
     @Test

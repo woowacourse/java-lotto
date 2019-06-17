@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMaker {
     private static final int START = 0;
@@ -25,6 +26,9 @@ public class LottoMaker {
         Collections.shuffle(autoNumbers);
         autoNumbers = autoNumbers.subList(START, Lotto.LOTTO_SIZE);
         Collections.sort(autoNumbers);
-        return Lotto.of(new Numbers(autoNumbers));
+
+        return Lotto.of(new Numbers(autoNumbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(","))));
     }
 }
