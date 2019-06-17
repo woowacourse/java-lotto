@@ -46,13 +46,13 @@ public class WebUILottoApplication {
                 model.put("manual_count", manualLottoCount.getCount());
                 model.put("auto_count", money.calculateAutomaticLottoCount(manualLottoCount.getCount()));
                 model.put("lottos", lottos);
-
                 return render(model, "show_lottos.html");
             } catch (Exception e) {
                 Map<String, Object> model = new HashMap<>();
                 return render(model, "error.html");
             }
         });
+
         post("/produce_lotto_results", (request, response) ->
         {
             try {
@@ -90,7 +90,6 @@ public class WebUILottoApplication {
             model.put("final_stats", LOTTORESULT_DAO.fetchRequestMoneyAndProfit(requestRound));
             return render(model, "final.html");
         });
-
     }
 
     private static List<Integer> makeButtonIdentifiers() throws SQLException {
@@ -130,6 +129,4 @@ public class WebUILottoApplication {
     private static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
-
-
 }

@@ -27,7 +27,14 @@ public class LottosDao {
         }
     }
 
-    private int getLatestRound() throws SQLException {
+    public void deleteLottos() throws SQLException {
+        String query = "DELETE FROM lotto_numbers_info WHERE round = ?";
+        PreparedStatement ps = DBConnector.getConnection().prepareStatement(query);
+        ps.setInt(1, getLatestRound() - 1);
+        ps.executeUpdate();
+    }
+
+    public int getLatestRound() throws SQLException {
         String query = "SELECT MAX(ROUND) as MAX_ROUND FROM lotto_numbers_info";
         Connection connection = DBConnector.getConnection();
         PreparedStatement ps = connection.prepareStatement(query);
