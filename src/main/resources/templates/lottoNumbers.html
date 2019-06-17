@@ -18,18 +18,19 @@
     <section class="container">
         <div class="text-right">{{name}} 님</div>
         <form action="/result" method="post">
-        <h1>로또 번호 입력</h1>
 
-            <!-- 반복...? -->
-            {{#lottoName}}
-            <div class="form-group">
-                <label for="lotto_number">{{this}}</label>
-                <input type="text" id="lotto_number" name="lotto_number" class="form-control" placeholder="예) 1,2,3,4,5,6"/>
-                <small class="form-text text-muted">로또 번호를 쉼표(,)로 구분하여 입력해주세요.</small>
-            </div>
-            {{/lottoName}}
+            {{#if lottoName}}
+                <h1>로또 번호 입력</h1>
 
-            <br><br>
+                {{#lottoName}}
+                <div class="form-group">
+                    <label for="lotto_number">{{this}}</label>
+                    <input type="text" id="lotto_number" name="lotto_number" class="form-control" placeholder="예) 1,2,3,4,5,6"/>
+                    <small class="form-text text-muted">로또 번호를 쉼표(,)로 구분하여 입력해주세요.</small>
+                </div>
+                {{/lottoName}}
+                <br><br>
+            {{/if}}
 
             <h1>지난주 당첨 번호 입력</h1>
 
@@ -62,5 +63,4 @@
         </form>
     </section>
 </body>
-
 </html>
