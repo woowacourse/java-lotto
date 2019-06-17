@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.application.lottoresult.LottoResultService;
 import lotto.application.lottoticket.LottoTicketService;
+import lotto.controller.util.JsonUtil;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottoresult.LottoStatistics;
 import lotto.domain.lottoresult.WinningLotto;

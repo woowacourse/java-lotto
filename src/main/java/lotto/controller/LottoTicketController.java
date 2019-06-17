@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.application.lottoticket.LottoTicketService;
+import lotto.controller.util.JsonUtil;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.lottoticket.LottoTickets;
 import lotto.domain.lottoticket.dto.LottoTicketDTO;

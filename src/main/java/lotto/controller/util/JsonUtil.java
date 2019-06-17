@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.controller.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.application.lottomoney.LottoMoneyService;
+import lotto.controller.util.JsonUtil;
 import lotto.domain.lottomoney.dto.LottoMoneyDTO;
 import spark.Route;
 
