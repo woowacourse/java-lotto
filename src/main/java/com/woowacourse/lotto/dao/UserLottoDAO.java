@@ -21,7 +21,7 @@ public class UserLottoDAO {
 	}
 
 	public void addUserLotto(Lotto lotto, int round) throws SQLException {
-		String query = "insert into user_lotto(first_number, second_number, third_number, fourth_number, fifth_number, sixth_number, winning_lotto_fk)" +
+		String query = "insert into user_lotto(first_number, second_number, third_number, fourth_number, fifth_number, sixth_number, round)" +
 				"VALUES(?,?,?,?,?,?,?)";
 		List<Integer> lottoNumber = new ArrayList<>();
 		lotto.getNumbers().stream().forEach(number -> lottoNumber.add(number.getName()));

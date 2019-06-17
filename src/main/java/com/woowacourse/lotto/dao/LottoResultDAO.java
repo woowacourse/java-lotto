@@ -21,7 +21,7 @@ public class LottoResultDAO {
 	}
 
 	public void addLottoResult(int round, LottoMoney lottoMoney, LottoResult lottoResult) throws SQLException {
-		String query = "insert into lotto_result(fifth_rank, fourth_rank, third_rank, second_rank, first_rank, winning_lotto_fk, sum, earning_rate)" +
+		String query = "insert into lotto_result(fifth_rank, fourth_rank, third_rank, second_rank, first_rank, round, sum, earning_rate)" +
 				"values(?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		List<LottoRank> lottoRanks = lottoResult.getRanks();
@@ -36,7 +36,7 @@ public class LottoResultDAO {
 	}
 
 	public Map<LottoRank, Integer> findLottoResultRankById(int selectedRound) throws SQLException {
-		String query = "select first_rank, second_rank, third_rank, fourth_rank, fifth_rank from lotto_result where winning_lotto_fk = ?";
+		String query = "select first_rank, second_rank, third_rank, fourth_rank, fifth_rank from lotto_result where round = ?";
 		ResultSet rs = findById(query, selectedRound);
 		if (!rs.next()) {
 			return null;
@@ -51,7 +51,7 @@ public class LottoResultDAO {
 	}
 
 	public Map<String, Long> findSumAndEarningRateById(int lottoResultId) throws SQLException {
-		String query = "select sum, earning_rate from lotto_result where winning_lotto_fk = ?";
+		String query = "select sum, earning_rate from lotto_result where round = ?";
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		pstmt.setInt(1, lottoResultId);
 		ResultSet rs = pstmt.executeQuery();
