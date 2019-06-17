@@ -19,7 +19,7 @@ public class LottoDAOTest {
     @BeforeEach
     void setUp() {
         testLotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoDAO = new LottoDAO();
+        lottoDAO = LottoDAO.getInstance();
     }
 
     @Test

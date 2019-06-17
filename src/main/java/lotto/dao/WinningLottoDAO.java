@@ -1,5 +1,7 @@
 package lotto.dao;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.WinningLotto;
 import lotto.utils.DBUtils;
 
@@ -7,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,9 +23,9 @@ public class WinningLottoDAO {
     }
 
     public int addWinningLotto(WinningLotto winningLotto) throws SQLException {
-        List<Integer> winningLottoNumbers = Arrays.stream(splitLottoNumbers(winningLotto))
-                .map(String::trim)
-                .map(Integer::parseInt)
+        Lotto lotto = winningLotto.getWinningLotto();
+        List<Integer> winningLottoNumbers = lotto.getLottoNumbers().stream()
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
 
         String query = "INSERT INTO winning_lotto(number_1, number_2, number_3,number_4, number_5, number_6," +
@@ -46,13 +47,5 @@ public class WinningLottoDAO {
         }
 
         return resultSet.getInt(1);
-    }
-
-    private String[] splitLottoNumbers(WinningLotto winningLotto) {
-        return winningLotto.getWinningLotto()
-                .toString()
-                .replace("[", "")
-                .replace("]", "")
-                .split(",");
     }
 }

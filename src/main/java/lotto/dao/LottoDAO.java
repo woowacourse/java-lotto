@@ -1,6 +1,7 @@
 package lotto.dao;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.utils.DBUtils;
@@ -25,12 +26,8 @@ public class LottoDAO {
     }
 
     public void addLotto(Lotto lotto, int round) throws SQLException {
-        List<Integer> lottoNumbers = Arrays.stream(lotto.toString()
-                .replace("[", "")
-                .replace("]", "")
-                .split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
+        List<Integer> lottoNumbers = lotto.getLottoNumbers().stream()
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
 
         String query = "INSERT INTO lotto(round, number_1, number_2, number_3, number_4,number_5,number_6) " +

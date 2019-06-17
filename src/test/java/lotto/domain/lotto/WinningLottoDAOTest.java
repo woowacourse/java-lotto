@@ -14,7 +14,7 @@ public class WinningLottoDAOTest {
         Lotto lotto = LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.getNumber(7));
 
-        WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
+        WinningLottoDAO winningLottoDAO = WinningLottoDAO.getInstance();
         winningLottoDAO.addWinningLotto(winningLotto);
     }
 }
