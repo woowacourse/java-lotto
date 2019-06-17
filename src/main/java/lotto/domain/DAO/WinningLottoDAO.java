@@ -7,13 +7,15 @@ import static lotto.domain.DAO.DBUtil.getConnection;
 
 public class WinningLottoDAO {
 
-    public static void addWinningLottoInfo(int lottoRound, String winningNumber, int bonusBall) throws SQLException {
+    public static void addWinningLottoInfo(String winningNumber, int bonusBall) throws SQLException {
+        Connection con = DBUtil.getConnection();
         String query = "INSERT INTO winning_lotto_info(lottoRound, winningNumber, bonusBall) VALUES (?, ?, ?)";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
-        pstmt.setInt(1, lottoRound);
+        pstmt.setInt(1, getCurrentLottoRound() + 1);
         pstmt.setString(2, winningNumber);
         pstmt.setInt(3, bonusBall);
         pstmt.executeUpdate();
+        DBUtil.closeConnection(con);
     }
 
     public static int getCurrentLottoRound() throws SQLException {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,19 @@ public class Calculator {
                 .filter(r -> r.getKey() != Rank.NONE)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
+
+    public List<Integer> getMatchCounts(){
+        List<Integer> matchCounts = new ArrayList<>();
+
+        for (Rank rank : Rank.values()) {
+            if (rank == Rank.NONE) {
+                continue;
+            }
+            matchCounts.add(getMatchlottoCountPerRank(rank));
+        }
+        return matchCounts;
+    }
+
 
     public double getWholeMoney() {
         return results

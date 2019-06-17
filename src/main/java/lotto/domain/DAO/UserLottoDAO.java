@@ -11,12 +11,14 @@ import java.util.Map;
 import static lotto.domain.DAO.DBUtil.getConnection;
 
 public class UserLottoDAO {
-    public static void addUserLottoNumbers(String userLottoNumbers, int lottoRound) throws SQLException {
+    public static void addUserLottoNumbers(String userLottoNumbers) throws SQLException {
         String query = "INSERT INTO user_lotto_numbers(userLottoNumbers,lottoRound) VALUES (?, ?)";
+        Connection con = DBUtil.getConnection();
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setString(1, userLottoNumbers);
-        pstmt.setInt(2, lottoRound);
+        pstmt.setInt(2, getCurrentLottoRound() + 1);
         pstmt.executeUpdate();
+        DBUtil.closeConnection(con);
     }
 
     public static int getCurrentLottoRound() throws SQLException {

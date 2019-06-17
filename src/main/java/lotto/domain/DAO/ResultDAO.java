@@ -13,14 +13,16 @@ import java.util.stream.Stream;
 import static lotto.domain.DAO.DBUtil.getConnection;
 
 public class ResultDAO {
-    public static void addResult(double winningMoney, String winningResult, double winningRate, int lottoRound) throws SQLException {
+    public static void addResult(double winningMoney, String winningResult, double winningRate) throws SQLException {
         String query = "INSERT INTO result(winningMoney, winningResult, winningRate, lottoRound) VALUES (?, ?, ?, ?)";
+        Connection con = DBUtil.getConnection();
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setDouble(1, winningMoney);
         pstmt.setString(2, winningResult);
         pstmt.setDouble(3, winningRate);
-        pstmt.setInt(4, lottoRound);
+        pstmt.setInt(4, getCurrentLottoRound() + 1);
         pstmt.executeUpdate();
+        DBUtil.closeConnection(con);
     }
 
     public static int getCurrentLottoRound() throws SQLException {
