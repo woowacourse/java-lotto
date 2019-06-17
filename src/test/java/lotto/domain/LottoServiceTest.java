@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.service.LottoService;
+import lotto.util.LottoDtoConverter;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,25 +20,31 @@ class LottoServiceTest {
     private static final int ANSWER = 250;
 
     private LottoFactory lottoFactory;
-    private LottoService buyer;
+    private LottoService service;
 
     @BeforeEach
     public void setUp() {
         lottoFactory = new LottoFactory();
-        buyer = new LottoService(MONEY);
+        service = LottoService.getInstance();
 
-        buyer.buy(FIFTH_NUMBERS);
-        while (buyer.canBuy()) {
-            buyer.buy(MISS_NUMBERS);
+        service.charge(MONEY);
+        service.buy(lottoFactory.create(FIFTH_NUMBERS));
+        while (service.canBuy()) {
+            service.buy(lottoFactory.create(MISS_NUMBERS));
         }
     }
 
     @Test
     public void 구매를_제대로하고_당첨로또에_따른_결과를_제대로_반환해주는지() {
         Lotto lotto = lottoFactory.create(WINNING_NUMBERS);
+        LottoDtoConverter converter = new LottoDtoConverter();
+        GameResultMatcher gameResultMatcher = GameResultMatcher.of(converter.convertDtoToLottos(service.getLottos()));
+        gameResultMatcher.match(WinningLotto.of(lotto, LottoNumber.of(BONUS_NUM)));
+        assertThat(gameResultMatcher.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(ANSWER);
+    }
 
-        LottoGameResult gameResult = buyer.gameResult();
-        gameResult.match(WinningLotto.of(lotto, LottoNumber.of(BONUS_NUM)));
-        assertThat(gameResult.profit(LottoMachine.LOTTO_MONEY)).isEqualTo(ANSWER);
+    @AfterEach
+    public void tearDown() {
+        service.deleteAll();
     }
 }

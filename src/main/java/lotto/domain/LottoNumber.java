@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exception.NumberBoundException;
+import lotto.domain.exception.BoundOfNumberException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,9 +8,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    static final int MIN_NUMBER = 1;
-    static final int MAX_NUMBER = 45;
     private static final Map<Integer, LottoNumber> LOTTO_NUMBERS;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+
+    private final int lottoNumber;
 
     static {
         LOTTO_NUMBERS = new HashMap<>();
@@ -19,8 +21,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    private final int lottoNumber;
-
     private LottoNumber(final int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
@@ -28,8 +28,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static LottoNumber of(final int lottoNumber) {
         Optional<LottoNumber> optLottoNumber = Optional.ofNullable(LOTTO_NUMBERS.get(lottoNumber));
         return optLottoNumber.orElseThrow(() ->
-                new NumberBoundException(MIN_NUMBER + "~" + MAX_NUMBER + " 사이의 숫자를 입력하세요")
+                new BoundOfNumberException(MIN_NUMBER + "~" + MAX_NUMBER + " 사이의 숫자를 입력하세요")
         );
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override

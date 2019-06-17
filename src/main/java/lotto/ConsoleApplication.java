@@ -1,51 +1,51 @@
 package lotto;
 
+import lotto.dao.RoundDao;
 import lotto.domain.*;
+import lotto.service.LottoService;
+import lotto.util.LottoDtoConverter;
+import lotto.util.LottoParser;
 import lotto.view.InputView;
-import lotto.view.LottosDto;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleApplication {
-    private static final int START_COUNT = 0;
 
     public static void main(String[] args) {
-        LottoService service = new LottoService(InputView.inputBuyMoney());
+        LottoService service = LottoService.getInstance();
+        service.charge(InputView.inputBuyMoney());
 
-        int manualPurchaseCount = assignManualPurchaseCount(service);
-        int autoPurchaseCount = assignAutoPurchaseCount(service);
+        List<Lotto> lottos = assignLottos();
+        int manualPurchaseCount = service.assignManualCount(lottos);
+        int autoPurchaseCount = service.assignAutoPurchaseCount();
         OutputView.showBuyCounts(manualPurchaseCount, autoPurchaseCount);
 
-        OutputView.showLottos(createLottosDto(service.getLottos()));
+        OutputView.showLottos(service.getLottos());
         WinningLotto winningLotto = assignWinningLotto();
-        LottoGameResult gameResult = service.gameResult();
-        gameResult.match(winningLotto);
-        OutputView.showGameResult(gameResult);
+
+        GameResultMatcher gameResultMatcher = GameResultMatcher.of(makeLottos(service));
+        gameResultMatcher.match(winningLotto);
+        OutputView.showGameResult(gameResultMatcher);
+        deleteInfo(service);
     }
 
-    private static int assignManualPurchaseCount(final LottoService buyer) {
+    private static List<Lotto> assignLottos() {
+        LottoParser parser = new LottoParser();
+        List<Lotto> lottos = new ArrayList<>();
         int manualPurchaseCount = InputView.inputManualPurchaseCount();
-        int retCount = START_COUNT;
-        for (; retCount < manualPurchaseCount && buyer.canBuy(); retCount++) {
-            List<Integer> numbers = InputView.inputManualNumbers();
-            buyer.buy(numbers);
+        for (int i = 0; i < manualPurchaseCount; i++) {
+            Lotto lotto = parser.parseLotto(InputView.inputManualNumbers());
+            lottos.add(lotto);
         }
-        return retCount;
-    }
-
-    private static int assignAutoPurchaseCount(final LottoService buyer) {
-        int autoPurchaseCount = START_COUNT;
-        while (buyer.canBuy()) {
-            buyer.buyRandom();
-            autoPurchaseCount++;
-        }
-        return autoPurchaseCount;
+        return lottos;
     }
 
     private static WinningLotto assignWinningLotto() {
-        Lotto lotto = InputView.inputWinningLotto();
-        LottoNumber bonusNum = InputView.inputBonusLottoNumber();
+        LottoParser parser = new LottoParser();
+        Lotto lotto = parser.parseLotto(InputView.inputWinningLotto());
+        LottoNumber bonusNum = parser.parseLottoNumber(InputView.inputBonusLottoNumber());
         try {
             return WinningLotto.of(lotto, bonusNum);
         } catch (RuntimeException e) {
@@ -54,8 +54,12 @@ public class ConsoleApplication {
         }
     }
 
-    private static LottosDto createLottosDto(final List<Lotto> lottos) {
-        DtoConverter converter = new DtoConverter();
-        return converter.convertLottosToDto(lottos);
+    private static List<Lotto> makeLottos(LottoService service) {
+        return new LottoDtoConverter().convertDtoToLottos(service.getLottos());
+    }
+
+    private static void deleteInfo(final LottoService service) {
+        service.deleteAll();
+        RoundDao.getInstance().deleteAll();
     }
 }

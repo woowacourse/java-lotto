@@ -2,29 +2,27 @@ package lotto.domain;
 
 import lotto.domain.exception.LackOfMoneyException;
 
-import java.util.List;
-
 public class LottoMachine {
-    public static final int LOTTO_MONEY = 1000;
+	public static final int LOTTO_MONEY = 1000;
 
-    private LottoFactory lottoFactory;
-    private int remainMoney;
+	private int remainMoney;
 
-    LottoMachine(final int money) {
-        if (money < LOTTO_MONEY) {
-            throw new LackOfMoneyException("1000원 이상 구매하세요");
-        }
-        lottoFactory = new LottoFactory();
-        remainMoney = money;
-    }
+	public LottoMachine() {
+		remainMoney = 0;
+	}
 
-    Lotto buy(final List<Integer> lottoNumbers) {
-        this.remainMoney -= LOTTO_MONEY;
+	public void charge(final int money) {
+		if (money < LOTTO_MONEY) {
+			throw new LackOfMoneyException("1000원 이상 구매하세요");
+		}
+		remainMoney = money;
+	}
 
-        return lottoFactory.create(lottoNumbers);
-    }
+	public void buy() {
+		this.remainMoney -= LOTTO_MONEY;
+	}
 
-    boolean isRemainMoney() {
-        return (this.remainMoney >= LOTTO_MONEY);
-    }
+	public boolean isRemainMoney() {
+		return (this.remainMoney >= LOTTO_MONEY);
+	}
 }
