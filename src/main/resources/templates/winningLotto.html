@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Lotto</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="Invest project" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="./styles/bootstrap4/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="./styles/main_styles.css" rel="stylesheet" type="text/css">
+    <link href="./styles/responsive.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+{{#if purchaseInformation.change}}
+<script>
+    alert("거스름 돈은 {{purchaseInformation.change}}원 입니다.");
+</script>
+{{/if}}
+
+<div class="super_container">
+    <div class="intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro_content lotto_info">
+                        <div class="intro_title_container">
+                            <h3 class="intro_title">
+                                수동 : {{purchaseInformation.manualQuantity}}장, 자동 : {{purchaseInformation.autoQuantity}}장
+                            </h3>
+                        </div>
+                        <div class="intro_text">
+                            {{#purchaseInformation.lottos}}
+                            <p class="lotto_number">
+                                {{#this}}
+                                {{this.number}}
+                                {{/this}}
+                            </p>
+                            {{/purchaseInformation.lottos}}
+                        </div>
+                    </div>
+                    <form action="/result" method="post">
+                        <div>
+                            <h4 class="intro_title">
+                                당첨 번호
+                            </h4>
+                            <input class="input_nums" name="winningNums" required="required" type="text">
+                            <h4 class="intro_title">
+                                보너스 번호
+                            </h4>
+                            <input class="input_nums" name="bonusNum" required="required" type="text">
+                            <button class="purchase_button trans_200" id="purchase_btn1" type="submit" value="Submit">
+                                확인
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./js/jquery-3.2.1.min.js"></script>
+<script src="./styles/bootstrap4/popper.js"></script>
+<script src="./styles/bootstrap4/bootstrap.min.js"></script>
+<script src="./plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="./plugins/easing/easing.js"></script>
+<script src="./plugins/parallax-js-master/parallax.min.js"></script>
+<script src="./js/custom.js"></script>
+</body>
+</html>
