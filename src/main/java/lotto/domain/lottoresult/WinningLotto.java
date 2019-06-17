@@ -27,14 +27,6 @@ public class WinningLotto {
         return lottoNumbers.contains(bonusBall);
     }
 
-    public LottoTicket getWinningTicket() {
-        return winningTicket;
-    }
-
-    public LottoNumber getBonusBall() {
-        return bonusBall;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
