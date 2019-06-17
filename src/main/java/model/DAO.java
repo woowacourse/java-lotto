@@ -2,24 +2,24 @@ package model;
 
 import java.sql.*;
 
-public class DB {
+public class DAO {
     private static final String server = "localhost";
     private static final String database = "woowa";
     private static final String userName = "donut";
     private static final String password = "qwer1234";
 
-    private static DB instance = null;
+    private static DAO instance = null;
 
     private Connection con = null;
 
-    public static DB getInstance() {
+    public static DAO getInstance() {
         if (instance == null) {
-            instance = new DB();
+            instance = new DAO();
         }
         return instance;
     }
 
-    private DB() {}
+    private DAO() {}
 
     public Connection connect() {
         if (this.con == null) {

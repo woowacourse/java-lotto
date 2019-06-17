@@ -3,14 +3,12 @@ package controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import model.*;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.template.handlebars.HandlebarsTemplateEngine;
+import view.OutputView;
 import view.WebView;
 
 import java.sql.SQLException;
-import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +22,7 @@ public class WebUILottoApplication {
         port(4567);
         staticFiles.location("/static");
 
-        get("/", (req, res) -> main());
+        get("/", (req, res) -> OutputView.index(PurchaseHistory.retrieveDatesFromLog()));
 
         post("/purchase", "application/json", (req, res) -> orThrowError(() -> purchase(req), res));
 
@@ -35,10 +33,6 @@ public class WebUILottoApplication {
             res.redirect("404.html");
             return 404;
         });
-    }
-
-    private static String render(Map<String, Object> model, String templatePath) {
-        return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 
     @FunctionalInterface
@@ -53,16 +47,6 @@ public class WebUILottoApplication {
             res.status(500);
             return WebView.error();
         }
-    }
-
-    private static String main() {
-        Map<String, Object> model = new HashMap<String, Object>() {{
-            put("price", Lotto.PRICE);
-            put("priceFormatted", NumberFormat.getInstance().format(Lotto.PRICE));
-            put("history", WebView.historySelect(PurchaseHistory.retrieveDatesFromLog()));
-            put("recentRoundMenu", WebView.roundSelect());
-        }};
-        return render(model, "app.html");
     }
 
     private static String purchase(Request req) {

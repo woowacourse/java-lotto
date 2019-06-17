@@ -11,18 +11,18 @@ import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class WinningNumbersWeb implements WinningNumbers {
+public class WinningNumbersFromWeb implements WinningNumbers {
     private static final String NANUM_LOTTERY_URL = "https://m.dhlottery.co.kr/gameResult.do?method=byWin";
 
     private final Future<List<LottoNumber>> winningNumbers;
     private final int round;
 
-    protected WinningNumbersWeb(int round) {
+    protected WinningNumbersFromWeb(int round) {
         this.round = round;
         this.winningNumbers = Executors.newSingleThreadExecutor().submit(this::fetchAndParseWinningNumbers);
     }
 
-    protected WinningNumbersWeb() {
+    protected WinningNumbersFromWeb() {
         this(0);
     }
 

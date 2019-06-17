@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-public class WinningNumbersDB implements WinningNumbers {
+public class WinningNumbersFromDB implements WinningNumbers {
     private final List<LottoNumber> numbers;
 
-    protected WinningNumbersDB(int round) throws SQLException {
-        final DB db = DB.getInstance();
-        final PreparedStatement pstmt = db.connect().prepareStatement("SELECT * FROM winning_numbers WHERE round=?");
+    protected WinningNumbersFromDB(int round) throws SQLException {
+        final DAO dao = DAO.getInstance();
+        final PreparedStatement pstmt = dao.connect().prepareStatement("SELECT * FROM winning_numbers WHERE round=?");
         pstmt.setInt(1, round);
         List<Integer> fetched = fetchFromResult(pstmt.executeQuery());
-        db.close();
+        dao.close();
         if (fetched.isEmpty()) {
             throw new SQLException();
         }
@@ -28,7 +28,7 @@ public class WinningNumbersDB implements WinningNumbers {
         );
     }
 
-    protected WinningNumbersDB() throws SQLException {
+    protected WinningNumbersFromDB() throws SQLException {
         this(0);
     }
 
@@ -55,8 +55,8 @@ public class WinningNumbersDB implements WinningNumbers {
     private static void registerHelper(WinningNumbers winningNumbers, int round) throws SQLException {
         final List<LottoNumber> main = winningNumbers.mainNumbers();
         final LottoNumber bonus = winningNumbers.bonusNumber();
-        final DB db = DB.getInstance();
-        final PreparedStatement pstmt = db.connect().prepareStatement(
+        final DAO dao = DAO.getInstance();
+        final PreparedStatement pstmt = dao.connect().prepareStatement(
                 "INSERT INTO winning_numbers VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
         );
         pstmt.setInt(1, round);
@@ -65,7 +65,7 @@ public class WinningNumbersDB implements WinningNumbers {
         }
         pstmt.setString(8, bonus.toString());
         pstmt.executeUpdate();
-        db.close();
+        dao.close();
     }
 
     @Override

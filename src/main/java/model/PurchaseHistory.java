@@ -11,14 +11,14 @@ public class PurchaseHistory {
 
     public static void writeLog(Lottos lottos, int round, LottoResult result) {
         try {
-            final DB db = DB.getInstance();
-            PreparedStatement pstmt = db.connect().prepareStatement(
+            final DAO dao = DAO.getInstance();
+            PreparedStatement pstmt = dao.connect().prepareStatement(
                     "INSERT INTO purchase_history (round, lottos) VALUES (?, ?)"
             );
             pstmt.setInt(1, round);
             pstmt.setString(2, lottos.encodeToDB());
             pstmt.executeUpdate();
-            db.close();
+            dao.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -26,14 +26,14 @@ public class PurchaseHistory {
 
     public static List<Timestamp> retrieveDatesFromLog() {
         try {
-            final DB db = DB.getInstance();
-            final PreparedStatement pstmt = db.connect().prepareStatement("SELECT date FROM purchase_history");
+            final DAO dao = DAO.getInstance();
+            final PreparedStatement pstmt = dao.connect().prepareStatement("SELECT date FROM purchase_history");
             List<Timestamp> fetched = new ArrayList<>();
             ResultSet result = pstmt.executeQuery();
             while (result.next()) {
                 fetched.add(result.getTimestamp(1));
             }
-            db.close();
+            dao.close();
             return fetched;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,15 +42,15 @@ public class PurchaseHistory {
     }
 
     public PurchaseHistory(String date) throws SQLException {
-        final DB db = DB.getInstance();
-        final PreparedStatement pstmt = db.connect().prepareStatement("SELECT round, lottos FROM purchase_history WHERE date=?");
+        final DAO dao = DAO.getInstance();
+        final PreparedStatement pstmt = dao.connect().prepareStatement("SELECT round, lottos FROM purchase_history WHERE date=?");
         pstmt.setTimestamp(1, Timestamp.from(Instant.parse(date)));
         ResultSet result = pstmt.executeQuery();
         if (result.next()) {
             this.round = result.getInt(1);
             this.lottos = new Lottos(result.getString(2));
         }
-        db.close();
+        dao.close();
     }
 
     public int round() {

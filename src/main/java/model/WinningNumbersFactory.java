@@ -10,10 +10,10 @@ public class WinningNumbersFactory {
         }
         round = Math.min(round, Lotto.recentRound());
         try {
-            return new WinningNumbersDB(round);
+            return new WinningNumbersFromDB(round);
         } catch (SQLException e) {
-            WinningNumbers fetched = new WinningNumbersWeb(round);
-            WinningNumbersDB.register(fetched, round);
+            WinningNumbers fetched = new WinningNumbersFromWeb(round);
+            WinningNumbersFromDB.register(fetched, round);
             return fetched;
         }
     }
@@ -25,4 +25,6 @@ public class WinningNumbersFactory {
     public static WinningNumbers of(String input) {
         return new WinningNumbersManual(input);
     }
+
+    private WinningNumbersFactory() {};
 }

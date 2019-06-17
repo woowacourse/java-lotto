@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class WinningNumbersTest {
     @Test
     void autoTest() {
-        assertThat(new Lotto("10, 34, 38, 40, 42, 43").match(new WinningNumbersWeb())).get().isEqualTo(LottoRank.FIRST);
+        assertThat(new Lotto("10, 34, 38, 40, 42, 43").match(new WinningNumbersFromWeb(862))).get().isEqualTo(LottoRank.FIRST);
     }
 
     @Test
