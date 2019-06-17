@@ -40,7 +40,7 @@ public class WebUILottoApplication {
 
         get("/selectResult.html", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            LottoDAO lottoDAO = new LottoDAO();
+            LottoDAO lottoDAO = LottoDAO.getInstance();
             List<Lotto> lottos = new ArrayList<>();
 
             try {
@@ -108,8 +108,8 @@ public class WebUILottoApplication {
             WinningLotto winningLotto = inputWinningLotto(req.queryParams("winningLottoNumber"), req.queryParams("bonusNumber"));
             Result result = lottoTickets.match(winningLotto);
 
-            WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
-            LottoDAO lottoDAO = new LottoDAO();
+            WinningLottoDAO winningLottoDAO = WinningLottoDAO.getInstance();
+            LottoDAO lottoDAO = LottoDAO.getInstance();
 
             try {
                 int round = winningLottoDAO.addWinningLotto(winningLotto);

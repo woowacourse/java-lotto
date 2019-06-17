@@ -15,6 +15,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoDAO {
+    private static LottoDAO lottoDAO = new LottoDAO();
+
+    private LottoDAO() {
+    }
+
+    public static LottoDAO getInstance() {
+        return lottoDAO;
+    }
+
     public void addLotto(Lotto lotto, int round) throws SQLException {
         List<Integer> lottoNumbers = Arrays.stream(lotto.toString()
                 .replace("[", "")

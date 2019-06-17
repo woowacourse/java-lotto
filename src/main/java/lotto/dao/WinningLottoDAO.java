@@ -12,6 +12,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLottoDAO {
+    private static WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
+
+    private WinningLottoDAO() {
+    }
+
+    public static WinningLottoDAO getInstance() {
+        return winningLottoDAO;
+    }
+
     public int addWinningLotto(WinningLotto winningLotto) throws SQLException {
         List<Integer> winningLottoNumbers = Arrays.stream(splitLottoNumbers(winningLotto))
                 .map(String::trim)
