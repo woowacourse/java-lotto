@@ -2,9 +2,155 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>로또</title>
+    <meta name="referrer" content="origin">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <title>Lotto</title>
 </head>
 <body>
-Hello World!!
+<header>
+
+</header>
+<div>
+    <div class="button-group">
+        <button id="show-lotto-purchase" type="button" class="btn btn-bm">로또 구매하기</button>
+        <button id="show-lotto-result" type="button" class="btn btn-light">결과 보기</button>
+    </div>
+    <form id="purchase-form" action="/purchase" method="post">
+        <div class="purchase-area">
+            <div class="lotto-buy-area">
+                <div class="number-input-area">
+                    <div class="margin-bottom-10px">
+                        <span>구매 금액을 입력해주세요.</span>
+                    </div>
+                    <input id="purchase-amount-input" name="purchaseAmount" alt="최소 구입 금액은 1000원입니다"
+                           class="number-input-box" type="number" min="1000" step="1000" value="1000"
+                           onchange="checkPurchaseAmount()">
+                    <span>원</span>
+                </div>
+                <div class="number-input-area">
+                    <div class="margin-bottom-10px">
+                        <span>수동구매 개수를 입력해주세요.</span>
+                    </div>
+                    <div id="manual-select-area">
+                        <div>
+                            <button type="button" id="manual-minus" class="btn-plus-minus btn-minus" disabled>빼기
+                            </button>
+                            <input name="manualCount" id="manual-count" value="0" onchange="checkPurchaseAmount()">개
+                            <button type="button" id="manual-plus" class="btn-plus-minus btn-plus">더하기</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="manual-number-select-area">
+                    <div id="number-checkbox-area">
+
+                    </div>
+                    <div id="detail-area">
+                        <div id="detail-buttons-area">
+                            <button id="select-button" type="button" class="btn btn-bm btn-mv" disabled>선택 ></button>
+                            <button id="cancel-button" type="button" class="btn btn-bm btn-mv" disabled>취소 <</button>
+                        </div>
+                        <div id="selected-numbers-area">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="purchase-button">
+                    <button id="button-purchase" type="button" class="btn btn-bm">구매하기</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div id="winning-lotto-area" style="display: none;">
+        <div class="margin-bottom-10px" style="margin-top:30px">
+            <span>당첨 번호를 입력해주세요.</span>
+            <input id="winning-lotto" type="text">
+        </div>
+        <div class="margin-bottom-10px" style="margin-top:30px">
+            <span>보너스 번호를 입력해주세요.</span>
+            <input id="bonus-number" type="text">
+        </div>
+        <button id="winning-lotto-button" type="button" class="btn btn-bm">선택 완료</button>
+    </div>
+
+    <div class="lotto-results-area" style="display:none">
+        <select class="custom-select" id="round-select" onchange="roundClickEvent(value)">
+            <option selected value="-1">원하는 회차를 고르세요.</option>
+        </select>
+        <div id="lotto-result">
+
+        </div>
+    </div>
+</div>
+<footer>
+
+</footer>
+<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="/js/common/ajax.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/lotto/lotto-purchase-quantity.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/lotto/lotto-checkbox.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/lotto/lotto.js" charset="utf-8"></script>
+<script type="rv-template" id="number-checkbox-template">
+    <input type="checkbox" id="number-checkbox{number}" class="number-checkbox" onchange="checkLength({number})"
+           value="{number}">
+    <label class="number-checkbox-label" for="number-checkbox{number}">{number}</label>
+</script>
+<script type="rv-template" id="lotto-numbers-template">
+    <div class="lotto-number-area">
+        <input id="lottoNumber{n}" type="checkbox" class="lotto-number" onclick="clickLottoNumber({n})"
+               value="{lottoNumberInput}" name="lottoNumber">
+        <label for="lottoNumber{n}" class="lotto-number-label">
+            {lottoNumber}
+        </label>
+    </div>
+</script>
+
+<script type="rv-template" id="round-template">
+    <option class="rounds" value={roundId} >{roundId}회차</option>
+</script>
+<script type="rv-template" id="winning-result-template">
+    <div id="winning-statistics">
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">등수</th>
+                <th scope="col">개수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1등</th>
+                <td>first</td>
+            </tr>
+            <tr>
+                <th scope="row">2등</th>
+                <td>second</td>
+            </tr>
+            <tr>
+                <th scope="row">3등</th>
+                <td>third</td>
+            </tr>
+            <tr>
+                <th scope="row">4등</th>
+                <td>fourth</td>
+            </tr>
+            <tr>
+                <th scope="row">5등</th>
+                <td>fifth</td>
+            </tr>
+            <tr>
+                <th scope="row">낙첨</th>
+                <td>miss</td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="roi">
+            <h3>수익률 : roi</h3>
+        </div>
+    </div>
+</script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package lotto.model.winninglotto;
 
-import lotto.model.lotto.BonusNumber;
 import lotto.model.lotto.LottoNumber;
 import lotto.model.lotto.LottoNumberRepository;
 import lotto.model.lotto.LottoTicket;
@@ -22,6 +21,6 @@ public class WinningLottoTest {
                 , LottoNumberRepository.fromNumber(4)
                 , LottoNumberRepository.fromNumber(5)
                 , LottoNumberRepository.fromNumber(45));
-        assertThrows(InvalidWinningLottoException.class, () -> WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), new BonusNumber(45)));
+        assertThrows(InvalidWinningLottoException.class, () -> WinningLotto.of(LottoTicket.from(new TreeSet<>(lottoNumbers)), LottoNumberRepository.fromNumber(45)));
     }
 }
