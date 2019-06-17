@@ -1,5 +1,6 @@
 package lotto.domain.dao;
 
+import lotto.domain.dao.utils.DaoTemplate;
 import lotto.domain.dto.ResultDTO;
 
 import java.sql.Connection;
@@ -9,18 +10,19 @@ import java.sql.SQLDataException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.dao.JdbcConnector.getConnection;
 import static lotto.domain.dao.sqls.Columns.*;
 import static lotto.domain.dao.sqls.LottoDaoSqls.INSERT_LOTTO_RESULT;
 import static lotto.domain.dao.sqls.LottoResultDaoSqls.SELECT_ALL_LOTTO_RESULT;
 import static lotto.domain.dao.sqls.LottoResultDaoSqls.SELECT_LOTTO_RESULT_BY_ROUND;
+import static lotto.domain.dao.utils.JdbcConnector.getConnection;
 import static lotto.domain.lotto.Rank.*;
 
 public class LottoResultDao {
 
-    private LottoResultDao(){}
+    private LottoResultDao() {
+    }
 
-    private static class LottoResultDaoHolder{
+    private static class LottoResultDaoHolder {
         private static final LottoResultDao INSTANCE = new LottoResultDao();
     }
 
@@ -29,8 +31,7 @@ public class LottoResultDao {
     }
 
     public int insertLottoResult(ResultDTO resultDTO) throws SQLDataException {
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LOTTO_RESULT)) {
+        DaoTemplate daoTemplate = (preparedStatement) -> {
             preparedStatement.setLong(1, resultDTO.get(FIRST));
             preparedStatement.setLong(2, resultDTO.get(SECOND));
             preparedStatement.setLong(3, resultDTO.get(THIRD));
@@ -38,11 +39,8 @@ public class LottoResultDao {
             preparedStatement.setLong(5, resultDTO.get(FIFTH));
             preparedStatement.setLong(6, resultDTO.get(MISS));
             preparedStatement.setLong(7, resultDTO.getRound());
-            return preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new SQLDataException();
-        }
+        };
+        return daoTemplate.cudTemplate(INSERT_LOTTO_RESULT);
     }
 
     public List<ResultDTO> selectAllLottoResult() throws SQLDataException {

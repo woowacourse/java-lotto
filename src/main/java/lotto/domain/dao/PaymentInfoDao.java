@@ -4,8 +4,8 @@ import lotto.domain.dto.PaymentInfoDTO;
 
 import java.sql.*;
 
-import static lotto.domain.dao.JdbcConnector.getConnection;
 import static lotto.domain.dao.sqls.PaymentDaoSqls.INSERT_PAYMENT_INFO;
+import static lotto.domain.dao.utils.JdbcConnector.getConnection;
 
 public class PaymentInfoDao {
     private PaymentInfoDao(){}
