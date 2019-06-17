@@ -17,7 +17,7 @@ import java.util.List;
 
 public class WinningResultService {
     public static void addWinningResult(WinningLottoDTO winningLottoDTO, int lottoRoundId) throws SQLException {
-        List<LottoTicketDTO> lottoTicketDTOs = LottoTicketDAO.selectLottoTicketsByLottoRoundId(lottoRoundId);
+        List<LottoTicketDTO> lottoTicketDTOs = LottoTicketDAO.getInstance().selectLottoTicketsByLottoRoundId(lottoRoundId);
 
         LottoTickets lottoTickets = LottoTicketAssembler.toLottoTickets(lottoTicketDTOs);
         LottoTicket winningLottoTicket = LottoTicketAssembler.toLottoTicket(new LottoTicketDTO(winningLottoDTO.getWinningLotto()));
@@ -25,10 +25,10 @@ public class WinningResultService {
         WinningLotto winningLotto = WinningLotto.of(winningLottoTicket, LottoNumberRepository.fromNumber(winningLottoDTO.getBonusNumber()));
         WinningResult winningResult = WinningResult.of(lottoTickets, winningLotto);
 
-        WinningResultDAO.insertWinningResult(WinningResultAssembler.toDTO(winningResult, lottoRoundId));
+        WinningResultDAO.getInstance().insertWinningResult(WinningResultAssembler.toDTO(winningResult, lottoRoundId));
     }
 
     public static WinningResultDTO getWinningResultByLottoRoundId(int lottoRoundId) throws SQLException {
-        return WinningResultDAO.selectWinningResultByLottoRoundId(lottoRoundId);
+        return WinningResultDAO.getInstance().selectWinningResultByLottoRoundId(lottoRoundId);
     }
 }

@@ -13,7 +13,13 @@ import static lotto.dao.winninglotto.sqls.WinningResultDAOSQLs.SELECT_WINNING_RE
 
 
 public class WinningResultDAO {
-    public static WinningResultDTO selectWinningResultByLottoRoundId(int lottoRoundId) throws SQLException {
+    private static WinningResultDAO winningResultDAO = new WinningResultDAO();
+
+    public static WinningResultDAO getInstance() {
+        return winningResultDAO;
+    }
+
+    public WinningResultDTO selectWinningResultByLottoRoundId(int lottoRoundId) throws SQLException {
         try (Connection connection = DBCPDataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_WINNING_RESULT_BY_LOTTO_ROUND_ID)) {
             preparedStatement.setInt(1, lottoRoundId);
@@ -38,7 +44,7 @@ public class WinningResultDAO {
 
     }
 
-    public static void insertWinningResult(WinningResultDTO winningResult) throws SQLException {
+    public void insertWinningResult(WinningResultDTO winningResult) throws SQLException {
         try (Connection connection = DBCPDataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_WINNING_RESULT)) {
             preparedStatement.setLong(1, winningResult.getLottoRoundId());

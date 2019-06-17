@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicketService {
     public static List<LottoTicketDTO> getLottoTicketByLottoRoundId(int lottoRoundId) throws SQLException {
-        return LottoTicketDAO.selectLottoTicketsByLottoRoundId(lottoRoundId);
+        return LottoTicketDAO.getInstance().selectLottoTicketsByLottoRoundId(lottoRoundId);
     }
 
     public static void addLottoTicketByLottoRoundId(String[] manualLottoTickets, int amount, int lottoRoundId) throws SQLException {
@@ -27,7 +27,7 @@ public class LottoTicketService {
         LottoTickets lottoTickets = LottoStore.buyLottoTickets(purchaseAmount, manualLottoTicket);
         lottoTickets.stream().forEach(lottoTicket -> {
             try {
-                LottoTicketDAO.insertLottoTicket(LottoTicketAssembler.toDTO(lottoTicket), lottoRoundId);
+                LottoTicketDAO.getInstance().insertLottoTicket(LottoTicketAssembler.toDTO(lottoTicket), lottoRoundId);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

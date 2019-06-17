@@ -14,6 +14,6 @@ public class WinningLottoService {
         LottoTicketDTO lottoTicketDTO = new LottoTicketDTO(lottoNumbers);
         LottoTicket lottoTicket = LottoTicketAssembler.toLottoTicket(lottoTicketDTO);
         WinningLotto winningLotto = WinningLotto.of(lottoTicket, LottoNumberRepository.fromNumber(bonusNumber));
-        WinningLottoDAO.insertWinningLotto(WinningLottoAssembler.toDTO(winningLotto), lottoRoundId);
+        WinningLottoDAO.getInstance().insertWinningLotto(WinningLottoAssembler.toDTO(winningLotto), lottoRoundId);
     }
 }

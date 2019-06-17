@@ -8,10 +8,10 @@ import java.util.List;
 
 public class LottoRoundService {
     public static int addLottoRound() throws SQLException {
-        return LottoRoundDAO.insertLottoRoundReturnsKey();
+        return LottoRoundDAO.getInstance().insertLottoRoundReturnsKey();
     }
 
     public static List<LottoRoundDTO> getLottoRoundAll() throws SQLException {
-        return LottoRoundDAO.selectLottoRoundAll();
+        return LottoRoundDAO.getInstance().selectLottoRoundAll();
     }
 }
