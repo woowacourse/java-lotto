@@ -14,7 +14,7 @@ public class LottoFactory {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lottoes createOnlyAutoLottoes(int count){
+    public static Lottoes createOnlyAutoLottoes(int count) {
         List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottoes.add(createAutoLotto());

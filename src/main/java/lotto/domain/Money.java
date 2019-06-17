@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.Exception.IllegalPriceException;
 import lotto.Exception.InvalidPurchaseException;
 
 import java.util.Map;

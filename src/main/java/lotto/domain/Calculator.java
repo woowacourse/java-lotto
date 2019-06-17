@@ -25,7 +25,7 @@ public class Calculator {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public List<Integer> getMatchCounts(){
+    public List<Integer> getMatchCounts() {
         List<Integer> matchCounts = new ArrayList<>();
 
         for (Rank rank : Rank.values()) {

@@ -1,6 +1,9 @@
 package lotto.domain.DAO;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
 
 import static lotto.domain.DAO.DBUtil.getConnection;

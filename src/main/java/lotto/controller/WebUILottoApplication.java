@@ -1,20 +1,16 @@
 package lotto.controller;
 
-import lotto.domain.DAO.DBUtil;
+import lotto.domain.*;
 import lotto.domain.DAO.ResultDAO;
 import lotto.domain.DAO.UserLottoDAO;
 import lotto.domain.DAO.WinningLottoDAO;
 import lotto.domain.DTO.LottoesDTO;
 import lotto.domain.DTO.ResultDTO;
-import lotto.Exception.InvalidWinningLottoException;
-import lotto.InputValidator;
-import lotto.domain.*;
 import lotto.service.LottoService;
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -32,13 +28,14 @@ public class WebUILottoApplication {
         post("/main", (req, res) -> {
             Map<String, Object> resultModel = new HashMap<>();
             Money money = LottoService.createMoney(req.queryParams("money"));
-            CustomLottoCount customLottoCount = LottoService.createCustomLottoCount(req.queryParams("customLottoCount"), money);
+            CustomLottoCount customLottoCount = LottoService.createCustomLottoCount(req.queryParams("customLottoCount"
+            ), money);
             req.session().attribute("money", money);
-            req.session().attribute("customLottoCount",customLottoCount.getCustomLottoCount());
+            req.session().attribute("customLottoCount", customLottoCount.getCustomLottoCount());
             resultModel.put("customLottoCount", customLottoCount);
             resultModel.put("customLottoNumbers", customLottoCount.getCustomLottoCountInOrder());
-            if(customLottoCount.getCustomLottoCount() == 0){
-                res.redirect("/winning?autoLottoCount="+money.getSize());
+            if (customLottoCount.getCustomLottoCount() == 0) {
+                res.redirect("/winning?autoLottoCount=" + money.getSize());
             }
             return render(resultModel, "result.html");
         });
@@ -51,7 +48,8 @@ public class WebUILottoApplication {
         });
 
         post("/winning", (req, res) -> {
-            Lottoes lottoes = LottoService.createLottoes(req.session().attribute("money"), req.queryParamsValues("customLottoNumbers"));
+            Lottoes lottoes = LottoService.createLottoes(req.session().attribute("money"), req.queryParamsValues(
+                    "customLottoNumbers"));
             InsertUserLottoNumbers(lottoes.getLottoes());
             Map<String, Object> model = printLottoNumbers(req, lottoes);
             return render(model, "winning.html");
@@ -61,7 +59,7 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
             List<String> winnigNumberInput = Arrays.asList(req.queryParams("winningNumber").split(","));
             String bonusBall = req.queryParams("bonusBall");
-            WinningLotto winningLotto = LottoService.createWinningLotto(winnigNumberInput,bonusBall);
+            WinningLotto winningLotto = LottoService.createWinningLotto(winnigNumberInput, bonusBall);
             Calculator calculator = CalculatorFactory.createResult();
             Lottoes lottoes = req.session().attribute("lottoes");
             calculator.calculateResult(lottoes, winningLotto);
@@ -99,7 +97,7 @@ public class WebUILottoApplication {
         });
     }
 
-    private static Map<String, Object> printLottoNumbers(Request req, Lottoes lottoes) throws SQLException {
+    private static Map<String, Object> printLottoNumbers(Request req, Lottoes lottoes) {
         Map<String, Object> model = new HashMap<>();
         LottoesDTO lottoesDTO = new LottoesDTO(lottoes.getLottoes());
         model.put("lottoes", lottoesDTO.getLottoes());

@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.CustomLottoCount;
-import lotto.domain.CustomLottoCountFactory;
 import lotto.InputValidator;
 import lotto.domain.*;
 import lotto.view.InputView;

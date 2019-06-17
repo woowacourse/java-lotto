@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class CustomLottoCount {
     private static final int MIN_CUSTOM_LOTTO_COUNT = 0;
@@ -24,9 +23,9 @@ public class CustomLottoCount {
         return customLottoCount;
     }
 
-    public List<Integer> getCustomLottoCountInOrder(){
-        List<Integer> customLottoCountOrders =  new ArrayList<>();
-        for(int i=1;i<customLottoCount;i++){
+    public List<Integer> getCustomLottoCountInOrder() {
+        List<Integer> customLottoCountOrders = new ArrayList<>();
+        for (int i = 1; i < customLottoCount; i++) {
             customLottoCountOrders.add(i);
         }
         return customLottoCountOrders;
