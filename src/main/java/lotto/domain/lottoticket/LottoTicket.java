@@ -46,10 +46,6 @@ public class LottoTicket {
         return Rank.valueOf(numOfMatching, winningLotto.isBonusBallIn(lottoNumbers));
     }
 
-    public LottoNumber getLottoNumber(int index) {
-        return lottoNumbers.get(index);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

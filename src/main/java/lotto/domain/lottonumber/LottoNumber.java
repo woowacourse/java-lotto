@@ -25,10 +25,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number < FIRST_NUMBER || number > LAST_NUMBER;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     @Override
     public int compareTo(LottoNumber o) {
         return this.number - o.number;

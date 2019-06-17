@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.controller.console.LottoController;
+import lotto.controller.LottoController;
 
-public class ConsoleUILottoApplication {
+public class LottoMain {
     public static void main(String[] args) {
         new LottoController().run();
     }
