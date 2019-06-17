@@ -1,58 +1,55 @@
 package lotto.domain.lottoticket.dto;
 
+import lotto.domain.lottoticket.LottoTicket;
+
 public class LottoTicketDTO {
-    private int firstNum;
-    private int secondNum;
-    private int thirdNum;
-    private int fourthNum;
-    private int fifthNum;
-    private int sixthNum;
+    private int[] numbers = new int[LottoTicket.SIZE_OF_LOTTO];
 
     public int getFirstNum() {
-        return firstNum;
+        return numbers[0];
     }
 
     public void setFirstNum(int firstNum) {
-        this.firstNum = firstNum;
+        this.numbers[0] = firstNum;
     }
 
     public int getSecondNum() {
-        return secondNum;
+        return numbers[1];
     }
 
     public void setSecondNum(int secondNum) {
-        this.secondNum = secondNum;
+        this.numbers[1] = secondNum;
     }
 
     public int getThirdNum() {
-        return thirdNum;
+        return numbers[2];
     }
 
     public void setThirdNum(int thirdNum) {
-        this.thirdNum = thirdNum;
+        this.numbers[2] = thirdNum;
     }
 
     public int getFourthNum() {
-        return fourthNum;
+        return numbers[3];
     }
 
     public void setFourthNum(int fourthNum) {
-        this.fourthNum = fourthNum;
+        this.numbers[3] = fourthNum;
     }
 
     public int getFifthNum() {
-        return fifthNum;
+        return numbers[4];
     }
 
     public void setFifthNum(int fifthNum) {
-        this.fifthNum = fifthNum;
+        this.numbers[4] = fifthNum;
     }
 
     public int getSixthNum() {
-        return sixthNum;
+        return numbers[5];
     }
 
     public void setSixthNum(int sixthNum) {
-        this.sixthNum = sixthNum;
+        this.numbers[5] = sixthNum;
     }
 }
