@@ -14,12 +14,6 @@ public class LottoService {
         addManualLottos(finalLottos, manualLottos);
         addAutoLottos(finalLottos, money.calculateAutomaticLottoCount(manualLottos.size()));
         return new Lottos(finalLottos);
-
-//        LottoMachine manualLottoMachine = new ManualLottoMachine(manualLottos);
-//        LottoMachine automaticLottoMachine = new AutomaticLottoMachine(money, manualLottos.size());
-//        Lottos manualLottosOrganized = createLottos(manualLottoMachine);
-//        Lottos automaticLottos = createLottos(automaticLottoMachine);
-//        return manualLottosOrganized.append(automaticLottos);
     }
 
     private static void addManualLottos(List<Lotto> finalLottos, List<String> manualLottos) {
