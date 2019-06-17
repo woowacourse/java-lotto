@@ -15,9 +15,9 @@ import static lotto.dao.lotto.sqls.LottoRoundDAOSQLs.SELECT_LOTTO_ROUND_ALL;
 
 public class LottoRoundDAO {
     public static List<LottoRoundDTO> selectLottoRoundAll() throws SQLException {
-        try (Connection connection = DBCPDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOTTO_ROUND_ALL);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOTTO_ROUND_ALL);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
             List<LottoRoundDTO> lottoRoundIds = new ArrayList<>();
             while (resultSet.next()) {
@@ -31,8 +31,8 @@ public class LottoRoundDAO {
     }
 
     public static int insertLottoRoundReturnsKey() throws SQLException {
-        try (Connection connection = DBCPDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LOTTO_ROUND, PreparedStatement.RETURN_GENERATED_KEYS);
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LOTTO_ROUND, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             resultSet.next();

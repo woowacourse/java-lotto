@@ -14,11 +14,11 @@ import static lotto.dao.winninglotto.sqls.WinningLottoDAOSQLs.SELECT_WINNING_LOT
 public class WinningLottoDAO {
     public static WinningLottoDTO selectWinningLottoByLottoRoundId(int lottoRoundId) throws SQLException {
 
-        try (Connection connection = DBCPDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_WINNING_LOTTO_BY_LOTTO_ROUND_ID);
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_WINNING_LOTTO_BY_LOTTO_ROUND_ID)) {
+
             preparedStatement.setInt(1, lottoRoundId);
             ResultSet resultSet = preparedStatement.executeQuery();
-
             if (!resultSet.next()) {
                 return null;
             }
@@ -32,8 +32,8 @@ public class WinningLottoDAO {
     }
 
     public static void insertWinningLotto(WinningLottoDTO winningLotto, int lottoRoundId) throws SQLException {
-        try (Connection connection = DBCPDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_WINNING_LOTTO);
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_WINNING_LOTTO)) {
             preparedStatement.setInt(1, lottoRoundId);
             preparedStatement.setString(2, winningLotto.getWinningLotto());
             preparedStatement.setInt(3, winningLotto.getBonusNumber());

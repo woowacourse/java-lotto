@@ -15,8 +15,9 @@ import static lotto.dao.lotto.sqls.LottoTicketDAOSQLs.SELECT_LOTTO_TICKETS_BY_LO
 
 public class LottoTicketDAO {
     public static List<LottoTicketDTO> selectLottoTicketsByLottoRoundId(int lottoRoundId) throws SQLException {
-        try (Connection connection = DBCPDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOTTO_TICKETS_BY_LOTTO_ROUND_ID);
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOTTO_TICKETS_BY_LOTTO_ROUND_ID)) {
+
             preparedStatement.setInt(1, lottoRoundId);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<LottoTicketDTO> lottoTicketDTOs = new ArrayList<>();
@@ -31,8 +32,8 @@ public class LottoTicketDAO {
     }
 
     public static void insertLottoTicket(LottoTicketDTO lottoTicketDTO, int lottoRoundId) throws SQLException {
-        try (Connection connection = DBCPDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LOTTO_TICKET);
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LOTTO_TICKET)) {
             preparedStatement.setInt(1, lottoRoundId);
             preparedStatement.setString(2, lottoTicketDTO.getLottoTicket());
             preparedStatement.executeUpdate();
