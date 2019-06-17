@@ -1,6 +1,5 @@
 package lotto.domain.lottoticket.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketsDTO {

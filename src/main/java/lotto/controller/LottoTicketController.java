@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketController {
+    public static final String PATH_NUM_OF_MANUAL_LOTTO = "/num-of-manual-lotto";
+    public static final String PATH_MANUAL_LOTTO = "/manual-lotto";
+    public static final String PATH_AUTOMATIC_LOTTO = "/automatic-lotto";
+
     public static final Route fetchNumOfManualLotto = (req, res) -> {
         String num = req.queryParams("numOfManualLotto");
         String numOfLotto = req.queryParams("numOfLotto");

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLottoController {
+    public static final String PATH_WINNING_LOTTO = "/winning-lotto";
+
     public static final Route fetchWinningLotto = (req, res) -> {
         List<String> numbers = new ArrayList<>();
         numbers.add(req.queryParams("firstNum"));

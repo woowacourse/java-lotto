@@ -12,17 +12,17 @@ public class WebUILottoApplication {
     public static void main(String[] args) {
         externalStaticFileLocation("src/main/resources/templates");
 
-        get(Path.INDEX, IndexController.serveIndexPage);
+        get(IndexController.PATH_INDEX, IndexController.serveIndexPage);
 
-        post(Path.LOTTO_MONEY, LottoMoneyController.fetchLottoMoney);
+        post(LottoMoneyController.PATH_LOTTO_MONEY, LottoMoneyController.fetchLottoMoney);
 
-        post(Path.NUM_OF_MANUAL_LOTTO, LottoTicketController.fetchNumOfManualLotto);
-        post(Path.MANUAL_LOTTO, LottoTicketController.fetchManualLotto);
-        post(Path.AUTOMATIC_LOTTO, LottoTicketController.fetchAutomaticLotto);
+        post(LottoTicketController.PATH_NUM_OF_MANUAL_LOTTO, LottoTicketController.fetchNumOfManualLotto);
+        post(LottoTicketController.PATH_MANUAL_LOTTO, LottoTicketController.fetchManualLotto);
+        post(LottoTicketController.PATH_AUTOMATIC_LOTTO, LottoTicketController.fetchAutomaticLotto);
 
-        post(Path.WINNING_LOTTO, WinningLottoController.fetchWinningLotto);
-        post(Path.LOTTO_RESULT, LottoResultController.fetchLottoResult);
-        post(Path.LAST_LOTTO_RESULT, LottoResultController.fetchLastLottoResult);
+        post(WinningLottoController.PATH_WINNING_LOTTO, WinningLottoController.fetchWinningLotto);
+        post(LottoResultController.PATH_LOTTO_RESULT, LottoResultController.fetchLottoResult);
+        post(LottoResultController.PATH_LAST_LOTTO_RESULT, LottoResultController.fetchLastLottoResult);
     }
 
     public static String render(Map<String, Object> model, String templatePath) {
