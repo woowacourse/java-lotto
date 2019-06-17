@@ -23,7 +23,7 @@ public class LottosDaoTest {
         lottoList.add(new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10)));
         Lottos lottos = new Lottos(lottoList);
         lottosDao.saveLottos(lottos);
-        lottosDao.deleteLottos();
+        lottosDao.deleteLottos(lottosDao.getLatestRound());
     }
 
     @Test
@@ -37,5 +37,6 @@ public class LottosDaoTest {
 
         List<String> result = Arrays.asList("1,2,3,4,5,6", "3,4,5,6,7,8");
         assertThat(lottosDao.fetchRequestLottos(lottosDao.getLatestRound()-1)).isEqualTo(result);
+        lottosDao.deleteLottos(lottosDao.getLatestRound());
     }
 }

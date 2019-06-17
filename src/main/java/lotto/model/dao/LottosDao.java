@@ -27,10 +27,10 @@ public class LottosDao {
         }
     }
 
-    public void deleteLottos() throws SQLException {
+    public void deleteLottos(int targetRound) throws SQLException {
         String query = "DELETE FROM lotto_numbers_info WHERE round = ?";
         PreparedStatement ps = DBConnector.getConnection().prepareStatement(query);
-        ps.setInt(1, getLatestRound() - 1);
+        ps.setInt(1, targetRound - 1);
         ps.executeUpdate();
     }
 

@@ -63,8 +63,15 @@ public class WinningLottoDao {
             numbers.add(Integer.toString(resultSet.getInt("fourth")));
             numbers.add(Integer.toString(resultSet.getInt("fifth")));
             numbers.add(Integer.toString(resultSet.getInt("sixth")));
-            numbers.add("보너스 번호 :" + resultSet.getInt("bonus_number"));
+            numbers.add("보너스 번호 : " + resultSet.getInt("bonus_number"));
             winningLotto.add(String.join(",", numbers));
         }
+    }
+
+    public void deleteWinningLotto(int targetRound) throws SQLException {
+        String query = "DELETE FROM winning_lotto_info WHERE round = ?";
+        PreparedStatement ps = DBConnector.getConnection().prepareStatement(query);
+        ps.setInt(1, targetRound - 1);
+        ps.executeUpdate();
     }
 }
