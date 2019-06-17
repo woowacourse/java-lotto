@@ -106,8 +106,9 @@ public class WebUILottoApplication {
     }
 
     private static void InsertUserLottoNumbers(List<Lotto> lottoList) throws SQLException {
+        int currentRound = UserLottoDAO.getCurrentLottoRound() + 1;
         for (int i = 0; i < lottoList.size(); i++) {
-            UserLottoDAO.addUserLottoNumbers(lottoList.get(i).toString());
+            UserLottoDAO.addUserLottoNumbers(lottoList.get(i).toString(), currentRound);
         }
     }
 

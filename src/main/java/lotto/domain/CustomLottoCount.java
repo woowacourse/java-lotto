@@ -25,7 +25,7 @@ public class CustomLottoCount {
 
     public List<Integer> getCustomLottoCountInOrder() {
         List<Integer> customLottoCountOrders = new ArrayList<>();
-        for (int i = 1; i < customLottoCount; i++) {
+        for (int i = 1; i <= customLottoCount; i++) {
             customLottoCountOrders.add(i);
         }
         return customLottoCountOrders;

@@ -37,7 +37,6 @@ public class Calculator {
         return matchCounts;
     }
 
-
     public double getWholeMoney() {
         return results
                 .entrySet()
