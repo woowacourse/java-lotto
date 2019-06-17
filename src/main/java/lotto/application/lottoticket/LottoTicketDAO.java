@@ -1,6 +1,6 @@
 package lotto.application.lottoticket;
 
-import lotto.application.LottoDriverConnector;
+import lotto.application.LottoJDBCDriverConnector;
 import lotto.domain.lottoticket.dto.LottoTicketDTO;
 import lotto.domain.lottoticket.dto.LottoTicketsDTO;
 
@@ -25,12 +25,12 @@ public class LottoTicketDAO {
     }
 
     public void savePurchasedLotto(int currentRound, LottoTicketDTO lottoTicketDto) {
-        Connection connection = LottoDriverConnector.getConnection();
-        try {
+        String query = "insert into purchased_lotto values(?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection connection = LottoJDBCDriverConnector.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
             int countOfRoundByGroup = calculateCountOfRoundByGroup(currentRound);
 
-            String query = "insert into purchased_lotto values(?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, currentRound);
             pstmt.setInt(2, countOfRoundByGroup + 1);
             pstmt.setInt(3, lottoTicketDto.getFirstNum());
@@ -42,44 +42,39 @@ public class LottoTicketDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            LottoDriverConnector.closeConnection(connection);
         }
     }
 
     public int calculateCountOfRoundByGroup(int currentRound) {
-        Connection connection = LottoDriverConnector.getConnection();
-        try {
-            String queryForGettingNextLottoNo = "SELECT count(round) AS cnt FROM purchased_lotto WHERE round = ? GROUP BY round";
-            PreparedStatement pstmt = connection.prepareStatement(queryForGettingNextLottoNo);
+        String queryForGettingNextLottoNo = "SELECT count(round) AS cnt FROM purchased_lotto WHERE round = ? GROUP BY round";
+
+        try (Connection connection = LottoJDBCDriverConnector.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(queryForGettingNextLottoNo)) {
             pstmt.setInt(1, currentRound);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("cnt");
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("cnt");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            LottoDriverConnector.closeConnection(connection);
         }
         return 0;
     }
 
     public LottoTicketsDTO fetchPurchasedLottoTicketsOn(int round) {
-        Connection connection = LottoDriverConnector.getConnection();
+        String query = "SELECT * FROM purchased_lotto WHERE round = ?";
         LottoTicketsDTO lottoTicketsDto = new LottoTicketsDTO();
 
-        try {
-            String query = "SELECT * FROM purchased_lotto WHERE round = ?";
-            PreparedStatement pstmt = connection.prepareStatement(query);
+        try (Connection connection = LottoJDBCDriverConnector.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query);
+             ResultSet rs = pstmt.executeQuery()) {
             pstmt.setInt(1, round);
-            ResultSet rs = pstmt.executeQuery();
 
             lottoTicketsDto.setLottoTicketDTOs(makeLottoTickets(rs));
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            LottoDriverConnector.closeConnection(connection);
         }
         return lottoTicketsDto;
     }
@@ -100,17 +95,15 @@ public class LottoTicketDAO {
     }
 
     public void deletePurchasedLotto(int round, int purchasedLottoNo) {
-        Connection connection = LottoDriverConnector.getConnection();
-        try {
-            String query = "delete from purchased_lotto where round = ? AND purchased_lotto_no = ?";
-            PreparedStatement pstmt = connection.prepareStatement(query);
+        String query = "delete from purchased_lotto where round = ? AND purchased_lotto_no = ?";
+
+        try (Connection connection = LottoJDBCDriverConnector.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setInt(1, round);
             pstmt.setInt(2, purchasedLottoNo);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            LottoDriverConnector.closeConnection(connection);
         }
     }
 }

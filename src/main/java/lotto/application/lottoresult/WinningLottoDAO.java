@@ -1,6 +1,6 @@
 package lotto.application.lottoresult;
 
-import lotto.application.LottoDriverConnector;
+import lotto.application.LottoJDBCDriverConnector;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoticket.dto.LottoTicketDTO;
@@ -25,12 +25,12 @@ public class WinningLottoDAO {
     }
 
     public void saveWinningLotto(int currentRound, WinningLottoDTO winningLottoDto) {
-        Connection connection = LottoDriverConnector.getConnection();
+        String query = "insert into winning_lotto values(?, ?, ?, ?, ?, ?, ?, ?)";
         LottoTicketDTO lottoTicketDto = winningLottoDto.getLottoTicketDto();
         LottoNumber bonusBall = winningLottoDto.getBonusBall();
-        try {
-            String query = "insert into winning_lotto values(?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = connection.prepareStatement(query);
+
+        try (Connection connection = LottoJDBCDriverConnector.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setInt(1, currentRound);
             pstmt.setInt(2, lottoTicketDto.getFirstNum());
             pstmt.setInt(3, lottoTicketDto.getSecondNum());
@@ -42,26 +42,23 @@ public class WinningLottoDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            LottoDriverConnector.closeConnection(connection);
         }
     }
 
     public WinningLottoDTO fetchWinningLotto(int round) {
-        Connection connection = LottoDriverConnector.getConnection();
-        try {
-            String query = "SELECT * FROM winning_lotto WHERE round = ?";
-            PreparedStatement pstmt = connection.prepareStatement(query);
+        String query = "SELECT * FROM winning_lotto WHERE round = ?";
+
+        try (Connection connection = LottoJDBCDriverConnector.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setInt(1, round);
-            ResultSet rs = pstmt.executeQuery();
 
-            if (!rs.next()) return new WinningLottoDTO();
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (!rs.next()) return new WinningLottoDTO();
 
-            return makeWinningLottoFrom(rs);
+                return makeWinningLottoFrom(rs);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            LottoDriverConnector.closeConnection(connection);
         }
         return new WinningLottoDTO();
     }
@@ -83,16 +80,15 @@ public class WinningLottoDAO {
     }
 
     public void deleteWinningLotto(int round) {
-        Connection connection = LottoDriverConnector.getConnection();
-        try {
-            String query = "delete from winning_lotto where round = ?";
-            PreparedStatement pstmt = connection.prepareStatement(query);
+        String query = "delete from winning_lotto where round = ?";
+
+        try (Connection connection = LottoJDBCDriverConnector.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            LottoDriverConnector.closeConnection(connection);
         }
     }
 }

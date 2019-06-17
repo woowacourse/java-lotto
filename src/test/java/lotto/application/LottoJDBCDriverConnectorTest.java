@@ -6,10 +6,10 @@ import java.sql.Connection;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class LottoDriverConnectorTest {
+class LottoJDBCDriverConnectorTest {
     @Test
     void connection() {
-        Connection con = LottoDriverConnector.getConnection();
+        Connection con = LottoJDBCDriverConnector.getConnection();
         assertNotNull(con);
     }
 }
