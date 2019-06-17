@@ -4,6 +4,7 @@ import lotto.dao.DBUtil;
 import lotto.dao.LottoRoundDAO;
 import lotto.dto.LottoResultDTO;
 import lotto.dto.PurchaseInformationDTO;
+import lotto.service.LottoHistoryService;
 import lotto.service.LottoPurchaseService;
 import lotto.service.LottoResultService;
 import spark.ModelAndView;
@@ -14,6 +15,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -23,10 +25,17 @@ public class WebUILottoApplication {
         port(8080);
         Spark.staticFileLocation("/public");
 
+        get("/", WebUILottoApplication::menu);
         get("/purchase", WebUILottoApplication::purchaseLotto);
         post("/winningLotto", WebUILottoApplication::winningLotto);
         post("/result", WebUILottoApplication::result);
+        get("/list", WebUILottoApplication::list);
+        get("/history", WebUILottoApplication::history);
+    }
 
+    private static String menu(Request request, Response response) {
+        Map<String, Object> model = new HashMap<>();
+        return render(model, "index.html");
     }
 
     private static String purchaseLotto(Request request, Response response) {
@@ -80,6 +89,28 @@ public class WebUILottoApplication {
             e.printStackTrace();
             return handleError(e.getMessage());
         }
+    }
+
+    private static String history(Request request, Response response) {
+        Map<String, Object> model = new HashMap<>();
+        int round = Integer.parseInt(request.queryParams("round"));
+        try {
+            model.put("history", LottoHistoryService.historyOf(round));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return render(model, "history.html");
+    }
+
+    private static String list(Request request, Response response) {
+        Map<String, Object> model = new HashMap<>();
+        try {
+            List<Integer> rounds = new LottoRoundDAO(DBUtil.getConnection()).selectLottoRounds();
+            model.put("rounds", rounds);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return render(model, "list.html");
     }
 
     private static String render(Map<String, Object> model, String templatePath) {

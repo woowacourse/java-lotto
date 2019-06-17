@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Lotto</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="Invest project" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="./styles/bootstrap4/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!--<link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+    <link href="./styles/main_styles.css" rel="stylesheet" type="text/css">
+    <link href="./styles/responsive.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="super_container">
+    <div class="intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro_text">
+                        <h3 class="intro_title">
+                            {{history.round}}회차 정보
+                        </h3>
+                        <h4 class="intro_title">
+                            발급 로또
+                        </h4>
+                        {{#history.lottos}}
+                        <p class="lotto_number">
+                            {{#this}}
+                            {{this.number}}
+                            {{/this}}
+                        </p>
+                        {{/history.lottos}}
+                    </div>
+                    <div>
+                        <h4 class="intro_title">
+                            당첨 번호
+                        </h4>
+                        <p class="lotto_number">
+
+                            {{#history.winningLottoDTO.winningNumbers}}
+                            {{#this}}
+                            {{this.number}}
+                            {{/this}}
+
+                            {{/history.winningLottoDTO.winningNumbers}}
+                        </p>
+                        <h4 class="intro_title">
+                            보너스 번호
+                        </h4>
+                        <p>{{history.winningLottoDTO.bonusNumber}}</p>
+                    </div>
+                    <div>
+                        <h4 class="intro_title">
+                            결과
+                        </h4>
+                        <div class="lotto_static_container">
+                            <table class="table lotto_result_table">
+                                <thead class="grey lighten-2">
+                                <tr>
+                                    <th scope="col">번호 일치</th>
+                                    <th scope="col">상금</th>
+                                    <th scope="col">개수</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#history.lottoResultDTO.rankCounts}}
+                                {{#if this.winningResult}}
+                                <tr>
+                                    <td>{{this.rank.countOfMatch}}개{{#if this.rank.bonusMatch}}, 보너스볼{{/if}}</td>
+                                    <td>{{this.rank.reward}}원</td>
+                                    <td>{{this.count}}개</td>
+                                </tr>
+                                {{/if}}
+                                {{/history.lottoResultDTO.rankCounts}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>
+                            전체 상금  :  {{history.lottoResultDTO.winningReward}}원
+                        </h4>
+                        <h4>
+                            수익률  :  {{history.lottoResultDTO.earningRate}}%
+                        </h4>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
