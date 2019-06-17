@@ -1,6 +1,6 @@
 package lotto.application.lottoresult;
 
-import lotto.application.LottoDAO;
+import lotto.application.LottoDriverConnector;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoticket.dto.LottoTicketDTO;
@@ -25,7 +25,7 @@ public class WinningLottoDAO {
     }
 
     public void saveWinningLotto(int currentRound, WinningLottoDTO winningLottoDto) {
-        Connection connection = LottoDAO.getConnection();
+        Connection connection = LottoDriverConnector.getConnection();
         LottoTicketDTO lottoTicketDto = winningLottoDto.getLottoTicketDto();
         LottoNumber bonusBall = winningLottoDto.getBonusBall();
         try {
@@ -43,12 +43,12 @@ public class WinningLottoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            LottoDAO.closeConnection(connection);
+            LottoDriverConnector.closeConnection(connection);
         }
     }
 
     public WinningLottoDTO fetchWinningLotto(int round) {
-        Connection connection = LottoDAO.getConnection();
+        Connection connection = LottoDriverConnector.getConnection();
         try {
             String query = "SELECT * FROM winning_lotto WHERE round = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -61,7 +61,7 @@ public class WinningLottoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            LottoDAO.closeConnection(connection);
+            LottoDriverConnector.closeConnection(connection);
         }
         return new WinningLottoDTO();
     }
@@ -83,7 +83,7 @@ public class WinningLottoDAO {
     }
 
     public void deleteWinningLotto(int round) {
-        Connection connection = LottoDAO.getConnection();
+        Connection connection = LottoDriverConnector.getConnection();
         try {
             String query = "delete from winning_lotto where round = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -92,7 +92,7 @@ public class WinningLottoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            LottoDAO.closeConnection(connection);
+            LottoDriverConnector.closeConnection(connection);
         }
     }
 }

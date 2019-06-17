@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class LottoDAO {
+public class LottoDriverConnector {
     private static String server = "localhost";
     private static String database = "lotto";
     private static String userName = "root";
     private static String password = "1234";
 
-    private LottoDAO() {
+    private LottoDriverConnector() {
     }
 
     public static Connection getConnection() {

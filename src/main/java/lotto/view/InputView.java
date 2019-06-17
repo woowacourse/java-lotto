@@ -105,7 +105,8 @@ public class InputView {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumberPool::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                ;
         return new LottoTicket(lottoNumbers);
     }
 

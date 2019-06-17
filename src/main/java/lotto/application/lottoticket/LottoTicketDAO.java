@@ -1,7 +1,6 @@
 package lotto.application.lottoticket;
 
-import lotto.application.LottoDAO;
-import lotto.domain.lottoticket.LottoTicket;
+import lotto.application.LottoDriverConnector;
 import lotto.domain.lottoticket.dto.LottoTicketDTO;
 import lotto.domain.lottoticket.dto.LottoTicketsDTO;
 
@@ -26,7 +25,7 @@ public class LottoTicketDAO {
     }
 
     public void savePurchasedLotto(int currentRound, LottoTicketDTO lottoTicketDto) {
-        Connection connection = LottoDAO.getConnection();
+        Connection connection = LottoDriverConnector.getConnection();
         try {
             int countOfRoundByGroup = calculateCountOfRoundByGroup(currentRound);
 
@@ -44,12 +43,12 @@ public class LottoTicketDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            LottoDAO.closeConnection(connection);
+            LottoDriverConnector.closeConnection(connection);
         }
     }
 
     public int calculateCountOfRoundByGroup(int currentRound) {
-        Connection connection = LottoDAO.getConnection();
+        Connection connection = LottoDriverConnector.getConnection();
         try {
             String queryForGettingNextLottoNo = "SELECT count(round) AS cnt FROM purchased_lotto WHERE round = ? GROUP BY round";
             PreparedStatement pstmt = connection.prepareStatement(queryForGettingNextLottoNo);
@@ -61,13 +60,13 @@ public class LottoTicketDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            LottoDAO.closeConnection(connection);
+            LottoDriverConnector.closeConnection(connection);
         }
         return 0;
     }
 
     public LottoTicketsDTO fetchPurchasedLottoTicketsOn(int round) {
-        Connection connection = LottoDAO.getConnection();
+        Connection connection = LottoDriverConnector.getConnection();
         LottoTicketsDTO lottoTicketsDto = new LottoTicketsDTO();
 
         try {
@@ -80,7 +79,7 @@ public class LottoTicketDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            LottoDAO.closeConnection(connection);
+            LottoDriverConnector.closeConnection(connection);
         }
         return lottoTicketsDto;
     }
@@ -101,7 +100,7 @@ public class LottoTicketDAO {
     }
 
     public void deletePurchasedLotto(int round, int purchasedLottoNo) {
-        Connection connection = LottoDAO.getConnection();
+        Connection connection = LottoDriverConnector.getConnection();
         try {
             String query = "delete from purchased_lotto where round = ? AND purchased_lotto_no = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -111,7 +110,7 @@ public class LottoTicketDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            LottoDAO.closeConnection(connection);
+            LottoDriverConnector.closeConnection(connection);
         }
     }
 }
