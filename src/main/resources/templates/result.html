@@ -1,0 +1,66 @@
+<html lang="ko">
+<head>
+    <title>Lotto</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="Invest project" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="./styles/bootstrap4/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="./styles/main_styles.css" rel="stylesheet" type="text/css">
+    <link href="./styles/responsive.css" rel="stylesheet" type="text/css">
+    <link href="./styles/main_styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 intro_content">
+                <div class="intro_title_container">
+                    <h3 class="intro_title">
+                        당첨 통계
+                    </h3>
+                </div>
+                <div class="lotto_static_container">
+                    <table class="table lotto_result_table">
+                        <thead class="grey lighten-2">
+                        <tr>
+                            <!--                            <th scope="col">등수</th>-->
+                            <th scope="col">번호 일치</th>
+                            <th scope="col">상금</th>
+                            <th scope="col">개수</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#lottoResult.rankCounts}}
+                        {{#if this.winningResult}}
+                        <tr>
+                            <td>{{this.rank.countOfMatch}}개{{#if this.rank.bonusMatch}}, 보너스볼{{/if}}</td>
+                            <td>{{this.rank.reward}}원</td>
+                            <td>{{this.count}}개</td>
+                        </tr>
+                        {{/if}}
+                        {{/lottoResult.rankCounts}}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h4>
+                        총 수익률은 {{lottoResult.earningRate}}%입니다.
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./js/jquery-3.2.1.min.js"></script>
+<script src="./styles/bootstrap4/popper.js"></script>
+<script src="./styles/bootstrap4/bootstrap.min.js"></script>
+<script src="./plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="./plugins/easing/easing.js"></script>
+<script src="./plugins/parallax-js-master/parallax.min.js"></script>
+<script src="./js/custom.js"></script>
+</body>
+</html>

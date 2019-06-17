@@ -2,8 +2,10 @@ package lotto;
 
 import lotto.dao.DBUtil;
 import lotto.dao.LottoRoundDAO;
+import lotto.dto.LottoResultDTO;
 import lotto.dto.PurchaseInformationDTO;
 import lotto.service.LottoPurchaseService;
+import lotto.service.LottoResultService;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -23,6 +25,8 @@ public class WebUILottoApplication {
 
         get("/purchase", WebUILottoApplication::purchaseLotto);
         post("/winningLotto", WebUILottoApplication::winningLotto);
+        post("/result", WebUILottoApplication::result);
+
     }
 
     private static String purchaseLotto(Request request, Response response) {
@@ -53,6 +57,25 @@ public class WebUILottoApplication {
             request.session().attribute("lottos", purchaseInformationDTO.getLottos());
 
             return render(model, "winningLotto.html");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return handleError(e.getMessage());
+        }
+    }
+
+    private static String result(Request request, Response response) {
+        try {
+            Map<String, Object> model = new HashMap<>();
+
+            LottoResultDTO lottoResultDTO = LottoResultService.createResult(
+                    request.session().attribute("round"),
+                    request.queryParams("winningNums"),
+                    request.queryParams("bonusNum"),
+                    request.session().attribute("lottos")
+            );
+
+            model.put("lottoResult", lottoResultDTO);
+            return render(model, "result.html");
         } catch (Exception e) {
             e.printStackTrace();
             return handleError(e.getMessage());
