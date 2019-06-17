@@ -1,6 +1,6 @@
-package lotto.domain.core;
+package lotto.domain;
 
-import lotto.domain.LottoNumberPool;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

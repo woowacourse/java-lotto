@@ -24,7 +24,7 @@ public class LottoResult {
         return new TreeMap<>(results);
     }
 
-    public ResultSummary calculate() {
+    public AverageSummary calculate() {
         int sumOfRank = 0;
         int sumOfTickets = 0;
         for (Map.Entry<Rank, Integer> entry : results.entrySet()) {

@@ -3,19 +3,19 @@ package lotto.domain;
 import java.util.Objects;
 
 class Lotto implements Ticket {
-    private final TicketNumbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
-    Lotto(TicketNumbers lottoNumbers) {
+    Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     @Override
-    public TicketNumbers ticketNumbers() {
+    public LottoNumbers ticketNumbers() {
         return lottoNumbers;
     }
 
     @Override
-    public boolean contains(TicketNumber number) {
+    public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 

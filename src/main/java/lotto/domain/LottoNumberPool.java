@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 class LottoNumberPool {
-    private static final List<TicketNumber> ticketNumbers;
+    private static final List<LottoNumber> ticketNumbers;
 
     static {
         ticketNumbers = new ArrayList<>();
@@ -18,7 +18,7 @@ class LottoNumberPool {
 
     }
 
-    static List<TicketNumber> random() {
+    static List<LottoNumber> random() {
         shuffle();
         return new ArrayList<>(ticketNumbers.subList(0, LottoNumbers.NUMBER_COUNT));
     }
@@ -27,8 +27,8 @@ class LottoNumberPool {
         Collections.shuffle(ticketNumbers);
     }
 
-    static TicketNumbers manual(List<Integer> intNumbers) {
-        List<TicketNumber> ticketNumbers = new ArrayList<>();
+    static LottoNumbers manual(List<Integer> intNumbers) {
+        List<LottoNumber> ticketNumbers = new ArrayList<>();
         for (Integer intNumber : intNumbers) {
             ticketNumbers.add(new LottoNumber(intNumber));
         }

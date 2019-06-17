@@ -1,6 +1,9 @@
 package lotto.service;
 
-import lotto.domain.*;
+import lotto.domain.LottoCreator;
+import lotto.domain.Ticket;
+import lotto.domain.TicketCreator;
+import lotto.domain.UserLottos;
 import lotto.domain.exceptions.ExceptionMessages;
 import lotto.domain.exceptions.LottoTicketException;
 
@@ -9,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserLottosCreator implements UserTicketCreator {
+public class UserLottosCreator {
     private static final String DELIMETER = ",";
     private final List<Ticket> tickets;
     private final TicketCreator ticketCreator;
@@ -24,8 +27,7 @@ public class UserLottosCreator implements UserTicketCreator {
         generateAuto(parseNumber(lottoMoney));
     }
 
-    @Override
-    public UserTickets create() {
+    public UserLottos create() {
         return new UserLottos(tickets);
     }
 

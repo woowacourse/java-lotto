@@ -5,7 +5,7 @@ import lotto.domain.LottoCreator;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class AverageSummary implements ResultSummary {
+public class AverageSummary {
     private static final int DECIMAL_POINT = 3;
     private final BigDecimal summary;
 
@@ -22,7 +22,6 @@ public class AverageSummary implements ResultSummary {
                 .divide(new BigDecimal(LottoCreator.LOTTO_PRICE), DECIMAL_POINT, RoundingMode.CEILING);
     }
 
-    @Override
     public BigDecimal summary() {
         return summary;
     }

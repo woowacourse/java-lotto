@@ -11,7 +11,7 @@ public class LottoCreator implements TicketCreator {
     }
 
     @Override
-    public TicketNumber bonus(int bonus) {
+    public LottoNumber bonus(int bonus) {
         return new LottoNumber(bonus);
     }
 

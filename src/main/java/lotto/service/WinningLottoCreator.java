@@ -7,25 +7,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningLottoCreator implements WinningTicketCreator {
+public class WinningLottoCreator {
     private static final String DELIMETER = ",";
-    private final TicketCreator ticketCreator;
     private final Ticket winningTicket;
-    private final TicketNumber bonus;
+    private final LottoNumber bonus;
 
+
+    public WinningLottoCreator(String numbers, String bonus, TicketCreator ticketCreator) {
+        this.winningTicket = ticketCreator.create(parseNumber(numbers));
+        this.bonus = ticketCreator.bonus(toInt(bonus));
+    }
 
     public WinningLottoCreator(String numbers, String bonus) {
         this(numbers, bonus, new LottoCreator());
     }
 
-    public WinningLottoCreator(String numbers, String bonus, TicketCreator ticketCreator) {
-        this.ticketCreator = ticketCreator;
-        this.winningTicket = ticketCreator.create(parseNumber(numbers));
-        this.bonus = ticketCreator.bonus(toInt(bonus));
-    }
-
-    @Override
-    public WinningTicket create() {
+    public WinningLotto create() {
         return new WinningLotto(winningTicket, bonus);
     }
 

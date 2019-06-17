@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoTest {
     private final LottoCreator generator = new LottoCreator();
-    private WinningTicket winningTicket;
+    private WinningLotto winningTicket;
 
     @BeforeEach
     void setUp() {
         Ticket ticket = new LottoCreator().create(Arrays.asList(1, 2, 3, 4, 5, 6));
-        TicketNumber bonus = new LottoNumber(7);
+        LottoNumber bonus = new LottoNumber(7);
         winningTicket = new WinningLotto(ticket, bonus);
     }
 

@@ -4,7 +4,7 @@ import lotto.domain.exceptions.LottoNumberException;
 
 import java.util.Objects;
 
-public class LottoNumber implements TicketNumber {
+public class LottoNumber {
     static final int MIN_NUMBER = 1;
     static final int MAX_NUMBER = 45;
     private final int number;
@@ -20,13 +20,11 @@ public class LottoNumber implements TicketNumber {
         }
     }
 
-    @Override
     public int get() {
         return number;
     }
 
-    @Override
-    public int compareTo(TicketNumber o) {
+    public int compareTo(LottoNumber o) {
         return number - o.get();
     }
 
