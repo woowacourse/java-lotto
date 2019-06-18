@@ -12,7 +12,8 @@ class LottoResultAssembler {
     static WinningLottoDTO getWinningLottoDto(WinningLotto winningLotto) {
         WinningLottoDTO winningLottoDto = new WinningLottoDTO();
 
-        LottoTicketDTO lottoTicketDto = LottoTicketService.getLottoTicketDto(winningLotto.getWinningTicket());
+        LottoTicketService lottoTicketService = LottoTicketService.getInstance();
+        LottoTicketDTO lottoTicketDto = lottoTicketService.getLottoTicketDto(winningLotto.getWinningTicket());
         winningLottoDto.setLottoTicketDto(lottoTicketDto);
         winningLottoDto.setBonusBall(winningLotto.getBonusBall());
 

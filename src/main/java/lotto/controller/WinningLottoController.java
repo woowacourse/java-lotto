@@ -25,15 +25,17 @@ public class WinningLottoController {
         numbers.add(req.queryParams("fifthNum"));
         numbers.add(req.queryParams("sixthNum"));
 
-        LottoTicket winningTicket = LottoTicketService.makeLottoTicket(numbers);
-        LottoNumber bonusBall = LottoTicketService.makeBonusBall(req.queryParams("bonusNum"));
+        LottoTicketService lottoTicketService = LottoTicketService.getInstance();
+        LottoTicket winningTicket = lottoTicketService.makeLottoTicket(numbers);
+        LottoNumber bonusBall = lottoTicketService.makeBonusBall(req.queryParams("bonusNum"));
 
         WinningLotto winningLotto = WinningLotto.of(winningTicket, bonusBall);
-        LottoStatistics lottoStatistics = LottoResultService.calculateLottoStatistics(winningLotto);
-        LottoResultService.saveLottoStatistics(lottoStatistics);
+        LottoResultService lottoResultService = LottoResultService.getInstance();
+        LottoStatistics lottoStatistics = lottoResultService.calculateLottoStatistics(winningLotto);
+        lottoResultService.saveLottoStatistics(lottoStatistics);
 
-        WinningLottoDTO winningLottoDto = LottoResultService.getWinningLottoDto(winningLotto);
-        LottoResultService.saveWinningLotto(winningLottoDto);
+        WinningLottoDTO winningLottoDto = lottoResultService.getWinningLottoDto(winningLotto);
+        lottoResultService.saveWinningLotto(winningLottoDto);
 
         return JsonUtil.convertDtoToJsonStringWith(res, winningLottoDto);
     };

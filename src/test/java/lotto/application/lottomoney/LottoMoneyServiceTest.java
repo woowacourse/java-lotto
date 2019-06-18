@@ -8,7 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoMoneyServiceTest {
     @Test
     void DTO_생성() {
-        LottoMoneyDTO lottoMoneyDto = LottoMoneyService.makeLottoMoneyDto("3500");
+        LottoMoneyService lottoMoneyService = LottoMoneyService.getInstance();
+        LottoMoneyDTO lottoMoneyDto = lottoMoneyService.makeLottoMoneyDto("3500");
         assertThat(lottoMoneyDto.getNumOfLotto()).isEqualTo(3);
         assertThat(lottoMoneyDto.getChange()).isEqualTo(500);
     }

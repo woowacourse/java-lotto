@@ -22,8 +22,9 @@ class LottoTicketDAOTest {
     @Test
     void lottoTicket_save하기() {
         List<String> numbers = Arrays.asList("1", "2", "3", "4", "5", "6");
-        LottoTicket lottoTicket = LottoTicketService.makeLottoTicket(numbers);
-        LottoTicketDTO lottoTicketDto = LottoTicketService.getLottoTicketDto(lottoTicket);
+        LottoTicketService lottoTicketService = LottoTicketService.getInstance();
+        LottoTicket lottoTicket = lottoTicketService.makeLottoTicket(numbers);
+        LottoTicketDTO lottoTicketDto = lottoTicketService.getLottoTicketDto(lottoTicket);
 
 
         LottoResultDAO lottoResultDAO = LottoResultDAO.getInstance();

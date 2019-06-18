@@ -20,7 +20,8 @@ public class LottoTicketController {
         String num = req.queryParams("numOfManualLotto");
         String numOfLotto = req.queryParams("numOfLotto");
 
-        long numOfManualLotto = LottoTicketService.getNumOfManualLotto(num, numOfLotto);
+        LottoTicketService lottoTicketService = LottoTicketService.getInstance();
+        long numOfManualLotto = lottoTicketService.getNumOfManualLotto(num, numOfLotto);
         JsonUtil.setResponseTypeForJson(res);
         return "{\"numOfManualLotto\":\"" + numOfManualLotto + "\"}";
     };
@@ -34,9 +35,10 @@ public class LottoTicketController {
         numbers.add(req.queryParams("fifthNum"));
         numbers.add(req.queryParams("sixthNum"));
 
-        LottoTicket lottoTicket = LottoTicketService.makeLottoTicket(numbers);
-        LottoTicketDTO lottoTicketDto = LottoTicketService.getLottoTicketDto(lottoTicket);
-        LottoTicketService.savePurchasedLottoTicket(lottoTicketDto);
+        LottoTicketService lottoTicketService = LottoTicketService.getInstance();
+        LottoTicket lottoTicket = lottoTicketService.makeLottoTicket(numbers);
+        LottoTicketDTO lottoTicketDto = lottoTicketService.getLottoTicketDto(lottoTicket);
+        lottoTicketService.savePurchasedLottoTicket(lottoTicketDto);
 
         return JsonUtil.convertDtoToJsonStringWith(res, lottoTicketDto);
     };
@@ -44,10 +46,11 @@ public class LottoTicketController {
     public static final Route fetchAutomaticLotto = (req, res) -> {
         String numOfAutomaticLotto = req.queryParams("numOfAutomaticLotto");
 
-        LottoTickets lottoTickets = LottoTicketService.getAutomaticLottoTickets(numOfAutomaticLotto);
+        LottoTicketService lottoTicketService = LottoTicketService.getInstance();
+        LottoTickets lottoTickets = lottoTicketService.getAutomaticLottoTickets(numOfAutomaticLotto);
 
-        LottoTicketsDTO lottoTicketsDto = LottoTicketService.getLottoTicketsDto(lottoTickets);
-        LottoTicketService.savePurchasedLottoTickets(lottoTicketsDto);
+        LottoTicketsDTO lottoTicketsDto = lottoTicketService.getLottoTicketsDto(lottoTickets);
+        lottoTicketService.savePurchasedLottoTickets(lottoTicketsDto);
 
         return JsonUtil.convertDtoToJsonStringWith(res, lottoTicketsDto);
     };

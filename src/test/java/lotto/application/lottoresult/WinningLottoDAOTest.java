@@ -29,7 +29,9 @@ class WinningLottoDAOTest {
         LottoTicket winningTicket = new LottoTicket(winningTicketNumbers);
         LottoNumber bonusBall = LottoNumberPool.valueOf(4);
         WinningLotto winningLotto = WinningLotto.of(winningTicket, bonusBall);
-        WinningLottoDTO winningLottoDto = LottoResultService.getWinningLottoDto(winningLotto);
+
+        LottoResultService lottoResultService = LottoResultService.getInstance();
+        WinningLottoDTO winningLottoDto = lottoResultService.getWinningLottoDto(winningLotto);
 
         LottoResultDAO lottoResultDAO = LottoResultDAO.getInstance();
         int latestRoundNum = lottoResultDAO.getLatestRoundNum();

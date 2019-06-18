@@ -6,10 +6,19 @@ import lotto.domain.lottomoney.MoneyForLotto;
 import lotto.domain.lottomoney.dto.LottoMoneyDTO;
 
 public class LottoMoneyService {
+    private static LottoMoneyService lottoMoneyService = null;
+
     private LottoMoneyService() {
     }
 
-    public static LottoMoneyDTO makeLottoMoneyDto(String purchasePrice) {
+    public static LottoMoneyService getInstance() {
+        if (lottoMoneyService == null) {
+            lottoMoneyService = new LottoMoneyService();
+        }
+        return lottoMoneyService;
+    }
+
+    public LottoMoneyDTO makeLottoMoneyDto(String purchasePrice) {
         Cash cash = new Cash(Long.parseLong(purchasePrice));
         MoneyForLotto moneyForLotto = new MoneyForLotto(cash);
         LottoMoneyDTO lottoMoneyDto = LottoMoneyAssembler.makeLottoMoneyDto(moneyForLotto);
@@ -18,7 +27,7 @@ public class LottoMoneyService {
         return lottoMoneyDto;
     }
 
-    private static void createRound() {
+    private void createRound() {
         LottoResultDAO lottoResultDAO = LottoResultDAO.getInstance();
         lottoResultDAO.createNextRound();
     }

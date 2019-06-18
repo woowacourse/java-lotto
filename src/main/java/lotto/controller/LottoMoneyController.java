@@ -10,7 +10,8 @@ public class LottoMoneyController {
 
     public static final Route fetchLottoMoney = (req, res) -> {
         String purchasePrice = req.queryParams("lottoMoney");
-        LottoMoneyDTO lottoMoneyDto = LottoMoneyService.makeLottoMoneyDto(purchasePrice);
+        LottoMoneyService lottoMoneyService = LottoMoneyService.getInstance();
+        LottoMoneyDTO lottoMoneyDto = lottoMoneyService.makeLottoMoneyDto(purchasePrice);
 
         return JsonUtil.convertDtoToJsonStringWith(res, lottoMoneyDto);
     };
