@@ -33,6 +33,7 @@ public class LottoController {
         List<Integer> rounds = IntStream.range(1, roundDao.getMaxRound() + 1)
                 .boxed()
                 .collect(Collectors.toList());
+
         Map<String, Object> model = new HashMap<>();
         model.put("rounds", rounds);
         return render(model, HOME_HTML);
@@ -43,17 +44,9 @@ public class LottoController {
         int manualCount = Integer.parseInt(req.queryParams("manualCount"));
         LottoMoney lottoMoney = new LottoMoney(price);
 
-        List<String> manualLottos = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            manualLottos.add(req.queryParams("lotto" + i));
-        }
+        List<String> manualLottos = getManualLottos(req, manualCount);
+        Lottos totalLottos = getTotalLottos(lottoMoney, manualLottos);
 
-        Lottos totalLottos = new Lottos(manualLottos, lottoMoney.getCountOfTicket());
-
-        roundDao.addNextRound();
-        int maxRound = roundDao.getMaxRound();
-
-        lottoDao.addTotalLottos(maxRound, totalLottos);
         req.session().attribute("totalLottos", totalLottos);
 
         Map<String, Object> model = new HashMap<>();
@@ -61,5 +54,21 @@ public class LottoController {
         model.put("manualCount", manualCount);
         model.put("lottos", totalLottos);
         return render(model, MANUAL_LOTTO_HTML);
+    }
+
+    private List<String> getManualLottos(Request req, int manualCount) {
+        List<String> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            manualLottos.add(req.queryParams("lotto" + i));
+        }
+        return manualLottos;
+    }
+
+    private Lottos getTotalLottos(LottoMoney lottoMoney, List<String> manualLottos) throws SQLException {
+        roundDao.addNextRound();
+        int maxRound = roundDao.getMaxRound();
+        Lottos totalLottos = new Lottos(manualLottos, lottoMoney.getCountOfTicket());
+        lottoDao.addTotalLottos(maxRound, totalLottos);
+        return totalLottos;
     }
 }
