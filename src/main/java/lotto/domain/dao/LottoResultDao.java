@@ -3,10 +3,7 @@ package lotto.domain.dao;
 import lotto.domain.dao.utils.DaoTemplate;
 import lotto.domain.dto.ResultDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLDataException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,30 +68,32 @@ public class LottoResultDao {
 
     public ResultDTO selectLottoResult(int round) throws SQLDataException {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOTTO_RESULT_BY_ROUND)) {
-            preparedStatement.setInt(1, round);
+             PreparedStatement preparedStatement = createPreparedStatement(connection, round);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (!resultSet.next()) {
-                    throw new IllegalArgumentException("존재하지 않는 round입니다.");
-                }
-                return new ResultDTO.Builder(
-                        resultSet.getInt(ROUND_COLUMN), resultSet.getString(NAME_COLUMN))
-                        .first(resultSet.getInt(FIRST_COLUMN))
-                        .second(resultSet.getInt(SECOND_COLUMN))
-                        .third(resultSet.getInt(THIRD_COLUMN))
-                        .fourth(resultSet.getInt(FOURTH_COLUMN))
-                        .fifth(resultSet.getInt(FIFTH_COLUMN))
-                        .miss(resultSet.getInt(MISS_COLUMN))
-                        .payment(resultSet.getInt(PAYMENT_COLUMN))
-                        .build();
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new SQLDataException();
+            if (!resultSet.next()) {
+                throw new IllegalArgumentException("존재하지 않는 round입니다.");
             }
+            return new ResultDTO.Builder(
+                    resultSet.getInt(ROUND_COLUMN), resultSet.getString(NAME_COLUMN))
+                    .first(resultSet.getInt(FIRST_COLUMN))
+                    .second(resultSet.getInt(SECOND_COLUMN))
+                    .third(resultSet.getInt(THIRD_COLUMN))
+                    .fourth(resultSet.getInt(FOURTH_COLUMN))
+                    .fifth(resultSet.getInt(FIFTH_COLUMN))
+                    .miss(resultSet.getInt(MISS_COLUMN))
+                    .payment(resultSet.getInt(PAYMENT_COLUMN))
+                    .build();
         } catch (Exception e) {
             e.printStackTrace();
             throw new SQLDataException();
         }
+    }
+
+    private PreparedStatement createPreparedStatement(Connection connection, int round) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOTTO_RESULT_BY_ROUND);
+        preparedStatement.setInt(1, round);
+        return preparedStatement;
+
     }
 }

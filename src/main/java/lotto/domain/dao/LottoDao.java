@@ -13,6 +13,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static lotto.domain.dao.sqls.Columns.*;
 import static lotto.domain.dao.sqls.LottoDaoSqls.*;
+import static lotto.domain.dao.sqls.LottoResultDaoSqls.SELECT_LOTTO_RESULT_BY_ROUND;
 import static lotto.domain.dao.utils.JdbcConnector.getConnection;
 
 public class LottoDao {
@@ -71,20 +72,15 @@ public class LottoDao {
 
     public List<Lotto> selectAllLotto(int round) throws SQLDataException {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_LOTTO_BY_ROUND)) {
-            preparedStatement.setInt(1, round);
+             PreparedStatement preparedStatement = createPreparedStatement(connection, round, SELECT_ALL_LOTTO_BY_ROUND);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
             List<Lotto> lottos = new ArrayList<>();
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    String lotto = resultSet.getString(LOTTO_COLUMN);
-                    boolean isAuto = resultSet.getBoolean(IS_AUTO_COLUMN);
+            while (resultSet.next()) {
+                String lotto = resultSet.getString(LOTTO_COLUMN);
+                boolean isAuto = resultSet.getBoolean(IS_AUTO_COLUMN);
 
-                    lottos.add(convertStringToLotto(lotto, isAuto));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new SQLDataException();
+                lottos.add(convertStringToLotto(lotto, isAuto));
             }
 
             return lottos;
@@ -96,22 +92,17 @@ public class LottoDao {
 
     public WinningLotto selectWinningLotto(int round) throws SQLDataException {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_WINNING_LOTTO_BY_ROUND)) {
-            preparedStatement.setInt(1, round);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (!resultSet.next()) {
-                    throw new SQLDataException();
-                }
-
-                String winningLotto = resultSet.getString(WINNING_LOTTO_COLUMN);
-                String bonusBall = resultSet.getString(BONUS_BALL);
-
-                Lotto lotto = convertStringToLotto(winningLotto, false);
-                return new WinningLotto(lotto, Integer.parseInt(bonusBall));
-            } catch (Exception e) {
-                e.printStackTrace();
+             PreparedStatement preparedStatement = createPreparedStatement(connection, round, SELECT_WINNING_LOTTO_BY_ROUND);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (!resultSet.next()) {
                 throw new SQLDataException();
             }
+
+            String winningLotto = resultSet.getString(WINNING_LOTTO_COLUMN);
+            String bonusBall = resultSet.getString(BONUS_BALL);
+
+            Lotto lotto = convertStringToLotto(winningLotto, false);
+            return new WinningLotto(lotto, Integer.parseInt(bonusBall));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLDataException();
@@ -124,4 +115,9 @@ public class LottoDao {
                 .collect(toList()), isAuto);
     }
 
+    private PreparedStatement createPreparedStatement(Connection connection, int round, String query) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        return preparedStatement;
+    }
 }
