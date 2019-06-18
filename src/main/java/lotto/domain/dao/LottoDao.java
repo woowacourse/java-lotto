@@ -29,15 +29,6 @@ public class LottoDao {
         return LottoDaoHolder.INSTANCE;
     }
 
-    public int insertUser(String name) throws SQLDataException {
-        DaoTemplate daoTemplate = (preparedStatement) -> {
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, name);
-        };
-
-        return daoTemplate.cudTemplate(INSERT_USER);
-    }
-
     public int insertLottoTicket(LottoTickets lottoTickets, int round) throws SQLDataException {
         StringBuilder queryBuilder = buildInsertLottoQuery(lottoTickets.getAllLottoTickets().size());
 

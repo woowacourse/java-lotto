@@ -1,9 +1,11 @@
 package lotto.domain.dao;
 
+import lotto.domain.dao.utils.DaoTemplate;
 import lotto.domain.dto.PaymentInfoDTO;
 
 import java.sql.*;
 
+import static lotto.domain.dao.sqls.LottoDaoSqls.INSERT_USER;
 import static lotto.domain.dao.sqls.PaymentDaoSqls.INSERT_PAYMENT_INFO;
 import static lotto.domain.dao.utils.JdbcConnector.getConnection;
 
@@ -17,6 +19,15 @@ public class PaymentInfoDao {
 
     public static PaymentInfoDao getInstance() {
         return PaymentInfoDaoHolder.INSTANCE;
+    }
+
+    public int insertUser(String name) throws SQLDataException {
+        DaoTemplate daoTemplate = (preparedStatement) -> {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, name);
+        };
+
+        return daoTemplate.cudTemplate(INSERT_USER);
     }
 
     public int insertPayment(PaymentInfoDTO paymentInfoDTO) throws SQLDataException {
