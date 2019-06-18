@@ -18,7 +18,6 @@ public class LottoController {
     private static final String ERROR_MESSAGE = "message";
     private static final String SELF_LOTTOS = "selfLottos";
     private static final String LOTTOS = "lottos";
-    private static final String DELIMITER = "\r\n";
     static final String NUMBERS = "numbers";
     static final String PRICE = "price";
 

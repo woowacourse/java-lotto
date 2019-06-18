@@ -1,12 +1,14 @@
 package lotto.controller;
 
-import lotto.dao.DaoManager;
 import lotto.dao.LottosDao;
 import lotto.dao.RoundDao;
 import lotto.dao.WinningLottoDao;
 import lotto.db.DatabaseConnection;
 import lotto.domain.*;
-import lotto.utils.Converter;
+import lotto.service.LottoResultService;
+import lotto.service.LottoService;
+import lotto.service.RoundService;
+import lotto.service.WinningLottoService;
 import lotto.utils.ResultMessage;
 import lotto.utils.ViewUtils;
 import spark.Route;
@@ -27,22 +29,26 @@ public class LottoResultController {
     private static final String BONUS = "bonusNumber";
     private static final String LOTTOS = "lottos";
 
-
     public static Route makeLottoResultPage = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
-        Lotto lotto = new Lotto(Converter.convertNumbers(req.queryParams(WINNING_LOTTO)));
-        LottoNumber bonusNo = LottoNumber.valueOf(Integer.parseInt(req.queryParams(BONUS)));
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusNo);
+        RoundService roundService = new RoundService();
+        LottoService lottoService = new LottoService();
+        WinningLottoService winningLottoService = new WinningLottoService();
+        LottoResultService lottoResultService = new LottoResultService();
+
         Lottos lottos = req.session().attribute(LOTTOS);
-        LottoResult lottoResult = LottoResult.generateLottoResult(lottos, winningLotto);
+        WinningLotto winningLotto = winningLottoService.getWinningLotto(req.queryParams(WINNING_LOTTO),req.queryParams(BONUS));
+        LottoResult lottoResult = lottoResultService.getLottoResult(lottos,winningLotto);
+
         Price price = req.session().attribute(PRICE);
         model.put(YIELD, lottoResult.findYield(price.getPrice()));
         model.put(LOTTO_RESULT, ResultMessage.getResult(lottoResult, getRanks()));
+
         int round = req.session().attribute(ROUND);
 
-        DaoManager.addRoundInDB(round, price);
-        DaoManager.addLottosInDB(round, lottos);
-        DaoManager.addWinningLottoInDB(round, winningLotto);
+        roundService.addRoundInDB(round,price);
+        lottoService.addLottosInDB(round,lottos);
+        winningLottoService.addWinningLottoInDB(round,winningLotto);
 
         return ViewUtils.render(model, "result.html");
     };
@@ -52,6 +58,7 @@ public class LottoResultController {
         RoundDao roundDao = new RoundDao(conn);
         LottosDao lottosDao = new LottosDao(conn);
         WinningLottoDao winningLottoDao = new WinningLottoDao(conn);
+
         Map<String, Object> model = new HashMap<>();
 
         int round = Integer.parseInt(req.queryParams(ROUND));

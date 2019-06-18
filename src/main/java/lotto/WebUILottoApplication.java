@@ -1,19 +1,12 @@
 package lotto;
 
 import lotto.controller.RoundController;
-import lotto.dao.RoundDao;
-import lotto.db.DatabaseConnection;
 import lotto.controller.LottoResultController;
 import lotto.controller.LottoController;
 import lotto.controller.WinningLottoController;
-import lotto.utils.ViewUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.sql.Connection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static spark.Spark.*;
 

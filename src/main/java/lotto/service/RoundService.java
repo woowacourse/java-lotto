@@ -23,4 +23,8 @@ public class RoundService {
     public Price getPrice(String price) {
         return new Price(Integer.parseInt(price));
     }
+
+    public void addRoundInDB(int round, Price price) throws SQLException {
+        roundDao.addRound(round, price.getPrice());
+    }
 }
