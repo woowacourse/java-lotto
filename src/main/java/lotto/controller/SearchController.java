@@ -16,6 +16,9 @@ import java.util.Map;
 import static lotto.WebUILottoApplication.render;
 
 public class SearchController {
+    private static final int PERCENT = 100;
+    private static final String ROUND_HTML = "round.html";
+
     private final LottoDao lottoDao;
     private final WinningLottoDao winningLottoDao;
     private final ResultDao resultDao;
@@ -44,9 +47,9 @@ public class SearchController {
         }
         model.put("winningLotto", winningLotto);
         model.put("bonusNum", bonusNum);
-        model.put("yield", yield * 100);
+        model.put("yield", yield * PERCENT);
         model.put("winPrize", winPrize);
 
-        return render(model, "round.html");
+        return render(model, ROUND_HTML);
     }
 }

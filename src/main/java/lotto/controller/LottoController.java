@@ -18,6 +18,9 @@ import java.util.stream.IntStream;
 import static lotto.WebUILottoApplication.render;
 
 public class LottoController {
+    private static final String MANUAL_LOTTO_HTML = "manualLotto.html";
+    private static final String HOME_HTML = "home.html";
+
     private final RoundDao roundDao;
     private final LottoDao lottoDao;
 
@@ -27,17 +30,15 @@ public class LottoController {
     }
 
     public Object main(Request req, Response res) throws SQLException {
-        Map<String, Object> model = new HashMap<>();
         List<Integer> rounds = IntStream.range(1, roundDao.getMaxRound() + 1)
                 .boxed()
                 .collect(Collectors.toList());
+        Map<String, Object> model = new HashMap<>();
         model.put("rounds", rounds);
-        return render(model, "home.html");
+        return render(model, HOME_HTML);
     }
 
     public Object printManual(Request req, Response res) throws SQLException {
-
-        Map<String, Object> model = new HashMap<>();
         int price = Integer.parseInt(req.queryParams("price"));
         int manualCount = Integer.parseInt(req.queryParams("manualCount"));
         LottoMoney lottoMoney = new LottoMoney(price);
@@ -55,9 +56,10 @@ public class LottoController {
         lottoDao.addTotalLottos(maxRound, totalLottos);
         req.session().attribute("totalLottos", totalLottos);
 
+        Map<String, Object> model = new HashMap<>();
         model.put("autoCount", lottoMoney.getCountOfTicket() - manualCount);
         model.put("manualCount", manualCount);
         model.put("lottos", totalLottos);
-        return render(model, "manualLotto.html");
+        return render(model, MANUAL_LOTTO_HTML);
     }
 }

@@ -11,10 +11,13 @@ import java.util.Map;
 import static lotto.WebUILottoApplication.render;
 
 public class ErrorController {
+    private static final String ERROR_HTML = "error.html";
+    private static final String ERROR_MESSAGE = "message";
+
     public Object printMessage(Request req, Response res) {
         Map<String, Object> model = new HashMap<>();
-        model.put("message", req.queryParams("message"));
-        return render(model, "error.html");
+        model.put(ERROR_MESSAGE, req.queryParams(ERROR_MESSAGE));
+        return render(model, ERROR_HTML);
     }
 
     public void catchException(Exception e, Request req, Response res) {

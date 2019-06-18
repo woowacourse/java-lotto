@@ -17,6 +17,8 @@ import java.util.Map;
 import static lotto.WebUILottoApplication.render;
 
 public class ResultController {
+    private static final String RESULT_HTML = "result.html";
+
     private final RoundDao roundDao;
     private final WinningLottoDao winningLottoDao;
     private final ResultDao resultDao;
@@ -43,6 +45,6 @@ public class ResultController {
             model.put(rank.name(), winners.get(rank));
         }
         model.put("yield", resultDao.findYieldByRound(maxRound) * 100);
-        return render(model, "result.html");
+        return render(model, RESULT_HTML);
     }
 }
