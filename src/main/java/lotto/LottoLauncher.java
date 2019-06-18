@@ -1,13 +1,21 @@
 package lotto;
 
 import lotto.model.*;
+import lotto.model.exceptions.IllegalCountException;
+import lotto.model.exceptions.IllegalLottoNumberException;
+import lotto.model.exceptions.IllegalMoneyException;
+import lotto.model.exceptions.IllegalNumberCombinationException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class LottoLauncher {
+    private final static Logger LOGGER = Logger.getLogger(LottoLauncher.class.getName());
     private static final int STARTING_COUNT = 0;
 
     public static void main(String[] args) {
@@ -30,8 +38,8 @@ public class LottoLauncher {
                 currentCount++;
             }
             return LottoService.produceLottos(money, manualLottos);
-        } catch (Exception e) {
-            System.out.println("수동로또 입력값중 잘못된 부분이 있습니다!");
+        } catch (IllegalNumberCombinationException | IndexOutOfBoundsException e) {
+            LOGGER.log(Level.INFO, "error", e);
             return generateLottos(money, manualLottoCount);
         }
     }
@@ -41,8 +49,8 @@ public class LottoLauncher {
             Lotto winningLottoTicket = new Lotto(InputView.askWinningLottoNumbers());
             LottoNumber bonusNumber = new LottoNumber(InputView.askBonusNumber());
             return new WinningLotto(winningLottoTicket, bonusNumber);
-        } catch (Exception e) {
-            System.out.println("잘못된 번호 입력이 있습니다!");
+        } catch (IllegalNumberCombinationException | IllegalLottoNumberException e) {
+            LOGGER.log(Level.INFO, "error", e);
             return generateWinningLotto();
         }
     }
@@ -51,7 +59,8 @@ public class LottoLauncher {
         try {
             int input = InputView.askManualLottoCount();
             return new ManualLottoCount(input, money);
-        } catch (Exception e) {
+        } catch (IllegalCountException e) {
+            LOGGER.log(Level.INFO, "error", e);
             return generateManualLottoCount(money);
         }
     }
@@ -60,8 +69,8 @@ public class LottoLauncher {
         try {
             String userInput = InputView.askMoney();
             return new Money(userInput);
-        } catch (Exception e) {
-            System.out.println("잘못된 구입 금액입니다");
+        } catch (IllegalMoneyException e) {
+            LOGGER.log(Level.INFO, "error", e);
             return generateMoney();
         }
     }

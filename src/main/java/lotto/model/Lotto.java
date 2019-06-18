@@ -62,24 +62,6 @@ public class Lotto {
         return numbers;
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
-    }
-
     public int getFirst() {
         return this.numbers.get(0).getNumber();
     }
@@ -102,5 +84,23 @@ public class Lotto {
 
     public int getSixth() {
         return this.numbers.get(5).getNumber();
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

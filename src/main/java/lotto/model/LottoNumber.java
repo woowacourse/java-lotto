@@ -19,19 +19,19 @@ public class LottoNumber {
         }
     }
 
+    public LottoNumber(int number) throws IllegalLottoNumberException {
+        if (number < MINMUM_LOTTO_NUMBERS || number > MAXIMUM_LOTTO_NUMBER) {
+            throw new IllegalLottoNumberException();
+        }
+        this.number = number;
+    }
+
     public static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> returnList = new ArrayList<>();
         for (int i = 0, n = numbers.size(); i < n; i++) {
             returnList.add(lottoNumbers.get(numbers.get(i) - 1));
         }
         return returnList;
-    }
-
-    public LottoNumber(int number) throws IllegalLottoNumberException {
-        if (number < MINMUM_LOTTO_NUMBERS || number > MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalLottoNumberException();
-        }
-        this.number = number;
     }
 
     public int getNumber() {
