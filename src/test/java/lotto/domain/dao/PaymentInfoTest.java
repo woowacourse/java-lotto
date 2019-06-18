@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class LottoDaoTest {
-    private LottoDao lottoDao;
+public class PaymentInfoTest {
+    private PaymentInfoDao paymentInfoDao;
 
     @BeforeEach
     void setUp() {
-        lottoDao = LottoDao.getInstance();
+        paymentInfoDao = PaymentInfoDao.getInstance();
     }
 
     @Test
     void insertUser() throws Exception {
         String name = "tester";
-        assertThat(lottoDao.insertUser(name)).isEqualTo(1);
+        assertThat(paymentInfoDao.insertUser(name)).isEqualTo(1);
     }
 }

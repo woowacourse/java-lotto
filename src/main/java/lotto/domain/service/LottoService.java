@@ -82,4 +82,12 @@ public class LottoService {
     public List<Lotto> selectAllLotto(int round) throws SQLDataException {
         return LottoDao.getInstance().selectAllLotto(round);
     }
+
+    public WinningLotto selectWinningLotto(int round) throws SQLDataException {
+        return LottoDao.getInstance().selectWinningLotto(round);
+    }
+
+    public long calculateCountOfAutoLotto(List<Lotto> lottoTickets) {
+        return lottoTickets.stream().filter(Lotto::getIsAuto).count();
+    }
 }
