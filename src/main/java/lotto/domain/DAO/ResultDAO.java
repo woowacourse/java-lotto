@@ -1,5 +1,7 @@
 package lotto.domain.DAO;
 
+import lotto.domain.util.DBUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static lotto.domain.DAO.DBUtil.getConnection;
+import static lotto.domain.util.DBUtil.getConnection;
 
 public class ResultDAO {
     public static void addResult(double winningMoney, String winningResult, double winningRate) throws SQLException {
@@ -28,7 +30,10 @@ public class ResultDAO {
         String query = "SELECT MAX(lottoRound) FROM result";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
-        if (!rs.next()) return 0;
+        if (!rs.next()) {
+            rs.close();
+            return 0;
+        }
         return rs.getInt("MAX(lottoRound)");
     }
 
@@ -45,7 +50,10 @@ public class ResultDAO {
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, inquiredRound);
         ResultSet rs = pstmt.executeQuery();
-        if (!rs.next()) return;
+        if (!rs.next()) {
+            rs.close();
+            return;
+        }
         model.put("winningMoney", rs.getDouble("winningMoney"));
         model.put("rate", rs.getDouble("winningRate"));
         String result = rs.getString("winningResult")

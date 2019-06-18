@@ -5,8 +5,13 @@ import lotto.Exception.InvalidPurchaseException;
 import lotto.Exception.InvalidWinningLottoException;
 import lotto.InputValidator;
 import lotto.domain.*;
+import lotto.domain.DAO.ResultDAO;
+import lotto.domain.DAO.UserLottoDAO;
+import lotto.domain.DAO.WinningLottoDAO;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class LottoService {
 
@@ -39,5 +44,33 @@ public class LottoService {
             throw new InvalidWinningLottoException("올바른 당첨번호를 입력해 주세요.");
         }
         return LottoFactory.createWinningLotto(lotto, Integer.parseInt(bonusBall));
+    }
+
+    public static void InsertWinningLottoInfoData(String bonusBall, WinningLotto winningLotto) throws SQLException {
+        WinningLottoDAO.addWinningLottoInfo(winningLotto.getLotto().toString(), Integer.parseInt(bonusBall));
+    }
+
+    public static void InsertResultData(Calculator calculator, Money money) throws SQLException {
+        ResultDAO.addResult(calculator.getWholeMoney(), calculator.getMatchCounts().toString(),
+                calculator.getRate(money));
+    }
+
+    public static void selectUserLottoNumbersByCurrentRound(Map<String, Object> model, int inquiredRound) throws SQLException {
+        UserLottoDAO.selectUserLottoNumbersByCurrentRound(model, inquiredRound);
+    }
+
+    public static void selectWinningNumbersByCourrentRound(Map<String, Object> model, int inquiredRound) throws SQLException {
+        WinningLottoDAO.selectWinningNumbersByCurrentRound(model, inquiredRound);
+    }
+
+    public static void selectWholeResultByCurrentRound(Map<String, Object> model, int inquiredRound) throws SQLException {
+        ResultDAO.selectWholeResultByCurrentRound(model, inquiredRound);
+    }
+
+    public static void InsertUserLottoNumbers(List<Lotto> lottoList) throws SQLException {
+        int currentRound = UserLottoDAO.getCurrentLottoRound() + 1;
+        for (int i = 0; i < lottoList.size(); i++) {
+            UserLottoDAO.addUserLottoNumbers(lottoList.get(i).toString(), currentRound);
+        }
     }
 }

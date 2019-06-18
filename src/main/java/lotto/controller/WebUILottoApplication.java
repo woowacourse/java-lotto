@@ -42,7 +42,7 @@ public class WebUILottoApplication {
 
         get("/winning", (req, res) -> {
             Lottoes lottoes = LottoFactory.createOnlyAutoLottoes(Integer.parseInt(req.queryParams("autoLottoCount")));
-            InsertUserLottoNumbers(lottoes.getLottoes());
+            LottoService.InsertUserLottoNumbers(lottoes.getLottoes());
             Map<String, Object> model = printLottoNumbers(req, lottoes);
             return render(model, "winning.html");
         });
@@ -50,7 +50,7 @@ public class WebUILottoApplication {
         post("/winning", (req, res) -> {
             Lottoes lottoes = LottoService.createLottoes(req.session().attribute("money"), req.queryParamsValues(
                     "customLottoNumbers"));
-            InsertUserLottoNumbers(lottoes.getLottoes());
+            LottoService.InsertUserLottoNumbers(lottoes.getLottoes());
             Map<String, Object> model = printLottoNumbers(req, lottoes);
             return render(model, "winning.html");
         });
@@ -72,9 +72,8 @@ public class WebUILottoApplication {
             }
             Money money = req.session().attribute("money");
             model.put("rate", calculator.getRate(money));
-            WinningLottoDAO.addWinningLottoInfo(winningLotto.getLotto().toString(), Integer.parseInt(bonusBall));
-            ResultDAO.addResult(calculator.getWholeMoney(), calculator.getMatchCounts().toString(),
-                    calculator.getRate(money));
+            LottoService.InsertWinningLottoInfoData(bonusBall, winningLotto);
+            LottoService.InsertResultData(calculator, money);
             List<Integer> rounds = getRounds();
             model.put("round", rounds);
             return render(model, "finalResult.html");
@@ -85,9 +84,9 @@ public class WebUILottoApplication {
             int inquiredRound = Integer.parseInt(req.queryParams("roundNumber"));
             model.put("round", inquiredRound);
 
-            ResultDAO.selectWholeResultByCurrentRound(model, inquiredRound);
-            WinningLottoDAO.selectWholeResultByCurrentRound(model, inquiredRound);
-            UserLottoDAO.selectUserLottoNumbersByCurrentRound(model, inquiredRound);
+            LottoService.selectWholeResultByCurrentRound(model, inquiredRound);
+            LottoService.selectWinningNumbersByCourrentRound(model, inquiredRound);
+            LottoService.selectUserLottoNumbersByCurrentRound(model, inquiredRound);
             return render(model, "round.html");
         });
 
@@ -103,13 +102,6 @@ public class WebUILottoApplication {
         model.put("lottoes", lottoesDTO.getLottoes());
         req.session().attribute("lottoes", lottoes);
         return model;
-    }
-
-    private static void InsertUserLottoNumbers(List<Lotto> lottoList) throws SQLException {
-        int currentRound = UserLottoDAO.getCurrentLottoRound() + 1;
-        for (int i = 0; i < lottoList.size(); i++) {
-            UserLottoDAO.addUserLottoNumbers(lottoList.get(i).toString(), currentRound);
-        }
     }
 
     private static List<Integer> getRounds() throws SQLException {

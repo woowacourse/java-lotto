@@ -1,5 +1,7 @@
 package lotto.domain.DAO;
 
+import lotto.domain.util.DBUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.DAO.DBUtil.getConnection;
+import static lotto.domain.util.DBUtil.getConnection;
 
 public class UserLottoDAO {
     public static void addUserLottoNumbers(String userLottoNumbers,int currentRound) throws SQLException {
@@ -25,7 +27,10 @@ public class UserLottoDAO {
         String query = "SELECT MAX(lottoRound) FROM user_lotto_numbers";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
-        if (!rs.next()) return 0;
+        if (!rs.next()) {
+            rs.close();
+            return 0;
+        }
         return rs.getInt("MAX(lottoRound)");
     }
 
@@ -47,7 +52,10 @@ public class UserLottoDAO {
             userLottoNumbers.add(rs.getString("userLottoNumbers"));
         }
         model.put("userLottoNumbers", userLottoNumbers);
-        if (!rs.next()) return;
+        if (!rs.next()) {
+            rs.close();
+            return;
+        }
 
         DBUtil.closeConnection(con);
     }

@@ -1,12 +1,14 @@
 package lotto.domain.DAO;
 
+import lotto.domain.util.DBUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import static lotto.domain.DAO.DBUtil.getConnection;
+import static lotto.domain.util.DBUtil.getConnection;
 
 public class WinningLottoDAO {
 
@@ -25,7 +27,10 @@ public class WinningLottoDAO {
         String query = "SELECT MAX(lottoRound) FROM winning_lotto_info";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
-        if (!rs.next()) return 0;
+        if (!rs.next()) {
+            rs.close();
+            return 0;
+        }
         return rs.getInt("MAX(lottoRound)");
     }
 
@@ -36,13 +41,16 @@ public class WinningLottoDAO {
         pstmt.executeUpdate();
     }
 
-    public static void selectWholeResultByCurrentRound(Map<String, Object> model, int inquiredRound) throws SQLException {
+    public static void selectWinningNumbersByCurrentRound(Map<String, Object> model, int inquiredRound) throws SQLException {
         Connection con = DBUtil.getConnection();
         String query = "SELECT * FROM winning_lotto_info where lottoRound=?";
         PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, inquiredRound);
         ResultSet rs = pstmt.executeQuery();
-        if (!rs.next()) return;
+        if (!rs.next()) {
+            rs.close();
+            return;
+        }
         model.put("winningNumbers", rs.getString("winningNumber"));
         model.put("bonusBall", rs.getInt("bonusBall"));
         DBUtil.closeConnection(con);

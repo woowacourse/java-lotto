@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.DAO.DBUtil;
+import lotto.domain.util.DBUtil;
 import lotto.domain.DAO.UserLottoDAO;
 import org.junit.jupiter.api.Test;
 

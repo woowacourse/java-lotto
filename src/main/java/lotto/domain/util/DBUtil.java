@@ -1,17 +1,16 @@
-package lotto.domain.DAO;
+package lotto.domain.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtil {
+    private static final String SERVER = "localhost"; // MySQL 서버 주소
+    private static final String DATABASE = "lottoDB"; // MySQL DATABASE 이름
+    private static final String USER_NAME = "kangmin46"; //  MySQL 서버 아이디
+    private static final String PASSWORD = "rkdals46"; // MySQL 서버 비밀번호
     public static Connection getConnection() {
         Connection con = null;
-        String server = "localhost"; // MySQL 서버 주소
-        String database = "lottoDB"; // MySQL DATABASE 이름
-        String userName = "kangmin46"; //  MySQL 서버 아이디
-        String password = "rkdals46"; // MySQL 서버 비밀번호
-
         // 드라이버 로딩
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -19,11 +18,10 @@ public class DBUtil {
             System.err.println(" !! JDBC Driver load 오류: " + e.getMessage());
             e.printStackTrace();
         }
-
         // 드라이버 연결
         try {
-            con = DriverManager.getConnection("jdbc:mysql://" + server + "/" + database + "?serverTimezone=UTC" +
-                    "&allowPublicKeyRetrieval=true&useSSL=false", userName, password);
+            con = DriverManager.getConnection("jdbc:mysql://" + SERVER + "/" + DATABASE + "?serverTimezone=UTC" +
+                    "&allowPublicKeyRetrieval=true&useSSL=false", USER_NAME, PASSWORD);
             System.out.println("정상적으로 연결되었습니다.");
         } catch (SQLException e) {
             System.err.println("연결 오류:" + e.getMessage());
