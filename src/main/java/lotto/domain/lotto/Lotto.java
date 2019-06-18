@@ -47,7 +47,7 @@ public class Lotto {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    public boolean isAuto() {
+    public boolean getIsAuto() {
         return isAuto;
     }
 

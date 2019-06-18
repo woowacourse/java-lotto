@@ -22,14 +22,14 @@ public class LottoTicketsTest {
     @Test
     void 수동_로또_확인() {
         lottoRepository.add(LottoGenerator.create(new ManualLottoGeneratingStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        assertThat(new LottoTickets(lottoRepository).getManualLottoTickets()).isEqualTo(lottoRepository.getLottos().stream().filter(lotto -> !lotto.isAuto()).collect(Collectors.toList()));
+        assertThat(new LottoTickets(lottoRepository).getManualLottoTickets()).isEqualTo(lottoRepository.getLottos().stream().filter(lotto -> !lotto.getIsAuto()).collect(Collectors.toList()));
     }
 
     @Test
     void 자동_로또_확인() {
         lottoRepository.add(LottoGenerator.create(new RandomLottoGeneratingStrategy()));
         lottoRepository.add(LottoGenerator.create(new RandomLottoGeneratingStrategy()));
-        assertThat(new LottoTickets(lottoRepository).getAutoLottoTickets()).isEqualTo(lottoRepository.getLottos().stream().filter(Lotto::isAuto).collect(Collectors.toList()));
+        assertThat(new LottoTickets(lottoRepository).getAutoLottoTickets()).isEqualTo(lottoRepository.getLottos().stream().filter(Lotto::getIsAuto).collect(Collectors.toList()));
     }
 
     @Test

@@ -13,7 +13,6 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static lotto.domain.dao.sqls.Columns.*;
 import static lotto.domain.dao.sqls.LottoDaoSqls.*;
-import static lotto.domain.dao.sqls.LottoResultDaoSqls.SELECT_LOTTO_RESULT_BY_ROUND;
 import static lotto.domain.dao.utils.JdbcConnector.getConnection;
 
 public class LottoDao {
@@ -36,7 +35,7 @@ public class LottoDao {
             int index = 1;
             for (Lotto lotto : lottoTickets.getAllLottoTickets()) {
                 preparedStatement.setString(index++, lotto.toString());
-                preparedStatement.setBoolean(index++, lotto.isAuto());
+                preparedStatement.setBoolean(index++, lotto.getIsAuto());
                 preparedStatement.setInt(index++, round);
             }
         };

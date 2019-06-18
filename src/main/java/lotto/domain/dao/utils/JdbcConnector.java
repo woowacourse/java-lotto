@@ -15,7 +15,6 @@ public class JdbcConnector {
         throw new AssertionError();
     }
 
-    // TODO: 2019-06-12 Do clean & divide static method!!
     public static Connection getConnection() {
         searchDriver();
 

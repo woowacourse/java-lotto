@@ -108,10 +108,37 @@
                 </table>
             </div>
         </article>
-        <div>
+        <!--<div>
             {{#lottoTicket}}
                 {{this}}<br>
             {{/lottoTicket}}
+        </div>-->
+
+
+        <div class="col-md-6">
+            <h3>Purchased Lotto List</h3>
+            <div class="table-responsive-lg text-center">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Lotto Number</th>
+                        <th scope="col">Auto/Manual</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#lottoTicket}}
+                    <tr>
+                        <td>{{this}}</td>
+                        {{#if this.isAuto}}
+                            <td>Auto</td>
+                        {{else}}
+                            <td>Manual</td>
+                        {{/if}}
+                    </tr>
+                    {{/lottoTicket}}
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </section>

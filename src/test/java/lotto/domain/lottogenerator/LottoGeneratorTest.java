@@ -28,6 +28,6 @@ class LottoGeneratorTest {
         Lotto lotto = LottoGenerator.create(new RandomLottoGeneratingStrategy());
 
         assertThat(lotto).isInstanceOf(Lotto.class);
-        assertThat(lotto.isAuto()).isTrue();
+        assertThat(lotto.getIsAuto()).isTrue();
     }
 }

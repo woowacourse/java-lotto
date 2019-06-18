@@ -16,7 +16,6 @@ public class LottoResultDaoTest {
 
     @Test
     void selectAllLottoGame() throws Exception {
-        // TODO: 2019-06-12 HOW TO TEST???? -> Mock?
         assertThat(lottoResultDao.selectAllLottoResult()).isNotNull();
     }
 }

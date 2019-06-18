@@ -18,14 +18,14 @@ public class LottoTickets {
 
     public List<Lotto> getManualLottoTickets() {
         List<Lotto> manualLottoTickets = lottoTickets.stream()
-                .filter(lotto -> !lotto.isAuto())
+                .filter(lotto -> !lotto.getIsAuto())
                 .collect(Collectors.toList());
         return Collections.unmodifiableList(manualLottoTickets);
     }
 
     public List<Lotto> getAutoLottoTickets() {
         List<Lotto> autoLottoTickets = lottoTickets.stream()
-                .filter(Lotto::isAuto)
+                .filter(Lotto::getIsAuto)
                 .collect(Collectors.toList());
         return Collections.unmodifiableList(autoLottoTickets);
     }
