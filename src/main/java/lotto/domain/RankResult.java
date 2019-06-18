@@ -11,31 +11,31 @@ import java.util.Objects;
 public class RankResult {
     private final Map<Rank, Integer> rankResult;
     private final float rate;
+    private final Winner winner;
+    private final Lotteries lotteries;
 
     public RankResult(Lotteries lotteries, Winner winner, Money money) {
-        this.rankResult = initRankResult();
-        generateRankResult(lotteries, winner);
+        this.lotteries = lotteries;
+        this.winner = winner;
+        this.rankResult = initRankResult(lotteries, winner);
         this.rate = calculateRateOfJackpot(money);
 
     }
 
-    private void generateRankResult(Lotteries lotteries, Winner winner) {
-        for (Lotto lotto : lotteries) {
-            addRank(winner.generateRank(lotto));
-        }
-    }
-
-    private Map<Rank, Integer> initRankResult() {
+    private Map<Rank, Integer> initRankResult(Lotteries lotteries, Winner winner) {
         Map<Rank, Integer> rankResult = new LinkedHashMap<>();
         for (Rank value : Rank.values()) {
             rankResult.put(value, 0);
         }
-
-        return rankResult;
+        return generateRankResult(rankResult, lotteries, winner);
     }
 
-    public void addRank(Rank rank) {
-        rankResult.put(rank, rankResult.get(rank) + 1);
+    private Map<Rank, Integer> generateRankResult(Map<Rank, Integer> rankResult, Lotteries lotteries, Winner winner) {
+        for (Lotto lotto : lotteries) {
+            Rank rank = winner.generateRank(lotto);
+            rankResult.put(rank, rankResult.get(rank) + 1);
+        }
+        return rankResult;
     }
 
     public int matchRankCount(Rank rank) {
@@ -61,6 +61,18 @@ public class RankResult {
 
     public float getRate() {
         return rate;
+    }
+
+    public LottoNumber winLotto(int index) {
+        return winner.winLotto(index);
+    }
+
+    public LottoNumber winBonus() {
+        return winner.getBonus();
+    }
+
+    public Lotteries getLotteries() {
+        return lotteries;
     }
 
     @Override

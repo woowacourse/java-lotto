@@ -1,12 +1,16 @@
 package lotto.domain;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import lotto.domain.autocreatelotto.MockAutoCreateLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,22 +23,16 @@ public class LottoTest {
     public static final Lotto createLotto = Lotto.createLotto(new MockAutoCreateLotto());
     private Lotto lotto2;
     private List<LottoNumber> lottoNumbers;
-    private List<Integer> lottoNumbersInt;
 
     @BeforeEach
     void setUp() {
 
         lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(6));
+
+        // TODO : mapToObj 알아보기
+        lottoNumbers = IntStream.rangeClosed(1, 6).mapToObj(LottoNumber::new).collect(Collectors.toList());
 
         lotto2 = Lotto.createLotto(lottoNumbers);
-
-        lottoNumbersInt = Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
     @Test
@@ -62,5 +60,18 @@ public class LottoTest {
     @Test
     void match_확인() {
         assertThat(createLotto.matchCount(lotto2)).isEqualTo(6);
+    }
+
+    @Test
+    void jsonTest() {
+        JsonObject jsonObject = new JsonObject();
+        JsonArray jsonArray = new JsonArray();
+        for (int i = 1; i <= 6; i++) {
+            JsonObject number = new JsonObject();
+            number.addProperty("lottoNumber", i);
+            jsonArray.add(number);
+        }
+        jsonObject.add("lotto",jsonArray);
+        assertThat(new Gson().toJson(createLotto)).isEqualTo(new Gson().toJson(jsonObject));
     }
 }

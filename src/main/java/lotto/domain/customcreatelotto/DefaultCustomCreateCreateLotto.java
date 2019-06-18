@@ -1,6 +1,5 @@
-package lotto.domain.customlotto;
+package lotto.domain.customcreatelotto;
 
-import lotto.domain.CustomLotto;
 import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.List;
  * @author heebg
  * @version 1.0 2019-05-31
  */
-public class DefaultCustomLotto implements CustomLotto {
+public class DefaultCustomCreateCreateLotto implements CustomCreateLotto {
 
     @Override
     public List<LottoNumber> custom(List<Integer> noFormedLotto) {

@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.customlotto.DefaultCustomLotto;
-import lotto.domain.autocreatelotto.MockAutoCreateLotto;
-import org.junit.jupiter.api.BeforeEach;
+import lotto.domain.customcreatelotto.DefaultCustomCreateCreateLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -24,7 +22,7 @@ public class WinnerTest {
 
     @Test
     void customWinBonus_확인() {
-        assertTrue(winner.matchBonus(Lotto.customLotto(Arrays.asList(1, 2, 3, 4, 5, 8), new DefaultCustomLotto())));
+        assertTrue(winner.matchBonus(Lotto.customLotto(Arrays.asList(1, 2, 3, 4, 5, 8), new DefaultCustomCreateCreateLotto())));
     }
 
     @Test

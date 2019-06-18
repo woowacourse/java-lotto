@@ -1,0 +1,14 @@
+Table,"Create Table"
+user_lotto,"CREATE TABLE `user_lotto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `turn` int(11) NOT NULL,
+  `lotto_one` varchar(3) NOT NULL,
+  `lotto_two` varchar(3) NOT NULL,
+  `lotto_three` varchar(3) NOT NULL,
+  `lotto_four` varchar(3) NOT NULL,
+  `lotto_five` varchar(3) NOT NULL,
+  `lotto_six` varchar(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `turn_idx` (`turn`),
+  CONSTRAINT `turn` FOREIGN KEY (`turn`) REFERENCES `winner` (`turn`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='회차별 사용자의 로또'"

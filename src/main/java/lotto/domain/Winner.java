@@ -34,6 +34,14 @@ public class Winner {
         return Rank.valueOf(matchLottoCount(lotto), matchBonus(lotto));
     }
 
+    public LottoNumber winLotto(int index) {
+        return winLotto.get(index);
+    }
+
+    public LottoNumber getBonus() {
+        return winBonus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

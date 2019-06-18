@@ -1,0 +1,19 @@
+Table,"Create Table"
+winner,"CREATE TABLE `winner` (
+  `turn` int(11) NOT NULL AUTO_INCREMENT COMMENT '회차',
+  `profit` bigint(20) NOT NULL COMMENT '수익 퍼센트 값',
+  `lotto_one` varchar(3) COLLATE utf8_bin NOT NULL,
+  `lotto_two` varchar(3) COLLATE utf8_bin NOT NULL,
+  `lotto_three` varchar(3) COLLATE utf8_bin NOT NULL,
+  `lotto_four` varchar(3) COLLATE utf8_bin NOT NULL,
+  `lotto_five` varchar(3) COLLATE utf8_bin NOT NULL,
+  `lotto_six` varchar(3) COLLATE utf8_bin NOT NULL,
+  `lotto_bonus` varchar(3) COLLATE utf8_bin NOT NULL,
+  `first_rank_cnt` int(11) DEFAULT '0',
+  `second_rank_cnt` int(11) DEFAULT '0',
+  `third_rank_cnt` int(11) DEFAULT '0',
+  `fourth_rank_cnt` int(11) DEFAULT '0',
+  `fifth_rank_cnt` int(11) DEFAULT '0',
+  `miss_rank_cnt` int(11) DEFAULT '0',
+  PRIMARY KEY (`turn`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='회차별 우승 로또 번호와 수익 저장 테이블 '"

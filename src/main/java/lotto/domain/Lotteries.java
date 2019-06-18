@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.autocreatelotto.AutoCreateLotto;
+import lotto.domain.customcreatelotto.CustomCreateLotto;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,8 +19,12 @@ public class Lotteries implements Iterable<Lotto> {
         this.lotteries = new ArrayList<>();
     }
 
-    public void addCustomLotto(List<Integer> noFormedLotto, CustomLotto customLotto) {
-        this.lotteries.add(Lotto.customLotto(noFormedLotto, customLotto));
+    public Lotteries(List<Lotto> lotteries) {
+        this.lotteries = lotteries;
+    }
+
+    public void addCustomLotto(List<Integer> noFormedLotto, CustomCreateLotto customCreateLotto) {
+        this.lotteries.add(Lotto.customLotto(noFormedLotto, customCreateLotto));
     }
 
     public void addAutoLotteries(long count, AutoCreateLotto autoCreateLotto) {
@@ -42,5 +49,10 @@ public class Lotteries implements Iterable<Lotto> {
     @Override
     public int hashCode() {
         return Objects.hash(lotteries);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lotteries);
     }
 }

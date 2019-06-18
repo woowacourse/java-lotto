@@ -25,14 +25,14 @@ public class LottoNumberTest {
 
     @Test
     void create_경계값_0_예외() {
-        assertThrows(Exception.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             new LottoNumber(0);
         });
     }
 
     @Test
     void create_경계값_46_예외() {
-        assertThrows(Exception.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             new LottoNumber(46);
         });
     }

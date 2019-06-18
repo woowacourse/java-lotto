@@ -1,4 +1,23 @@
+# 로또
+
+web 데모 영상
+
+![demo](./images/demo.gif)
+
+
+
+EER Diagram
+
+![eer](./images/eer.jpg)
+
+schema는 /schema 폴더 안에 정리
+
+
+
+
+
 # 요구 사항 정리
+
 - 구매 금액 설정
   - 정수만 가능
   - 1000원 이상 가능
