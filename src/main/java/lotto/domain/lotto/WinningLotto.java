@@ -24,4 +24,14 @@ public class WinningLotto {
     public Rank match(Lotto lotto) {
         return Rank.valueOf(lotto.match(winningLotto), lotto.contains(bonusNumber));
     }
+
+    public Lotto getWinningLotto() {
+        return winningLotto;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
+
 }

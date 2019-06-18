@@ -9,11 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>로또</title>
 </head>
 <body>
-<a href="inputStep1.html" class="btn btn-primary">로또 구매하기</a>
-<a href="selectPage.html" class="btn btn-primary">조회하기</a>
+<blockquote class="blockquote">
+    {{#lottos}}
+    <p class="mb-0">{{lotto}}</p>
+    {{/lottos}}
+</blockquote>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
