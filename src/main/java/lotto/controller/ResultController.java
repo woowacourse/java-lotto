@@ -30,21 +30,32 @@ public class ResultController {
     }
 
     public Object print(Request req, Response res) throws SQLException {
-        Map<String, Object> model = new HashMap<>();
         String input = req.queryParams("winningLotto");
         int bonusNum = Integer.parseInt(req.queryParams("bonusBall"));
-        WinningLotto winningLotto = new WinningLotto(input, bonusNum);
-        LottoResult lottoResult = new LottoResult(req.session().attribute("totalLottos"), winningLotto);
-        Map<Rank, Integer> winners = lottoResult.getWinners();
-
         int maxRound = roundDao.getMaxRound();
-        winningLottoDao.addWinningLotto(maxRound, winningLotto);
-        ResultDto resultDTO = new ResultDto(winners, lottoResult.getYield(), lottoResult.getTotalWinningMoney());
-        resultDao.addResult(maxRound, resultDTO);
+
+        WinningLotto winningLotto = getWinningLotto(input, bonusNum, maxRound);
+        Map<Rank, Integer> winners = getLottoWinners(req, maxRound, winningLotto);
+
+        Map<String, Object> model = new HashMap<>();
         for (Rank rank : Rank.values()) {
             model.put(rank.name(), winners.get(rank));
         }
         model.put("yield", resultDao.findYieldByRound(maxRound) * 100);
         return render(model, RESULT_HTML);
+    }
+
+    private WinningLotto getWinningLotto(String input, int bonusNum, int maxRound) throws SQLException {
+        WinningLotto winningLotto = new WinningLotto(input, bonusNum);
+        winningLottoDao.addWinningLotto(maxRound, winningLotto);
+        return winningLotto;
+    }
+
+    private Map<Rank, Integer> getLottoWinners(Request req, int maxRound, WinningLotto winningLotto) throws SQLException {
+        LottoResult lottoResult = new LottoResult(req.session().attribute("totalLottos"), winningLotto);
+        Map<Rank, Integer> winners = lottoResult.getWinners();
+        ResultDto resultDTO = new ResultDto(winners, lottoResult.getYield(), lottoResult.getTotalWinningMoney());
+        resultDao.addResult(maxRound, resultDTO);
+        return winners;
     }
 }
