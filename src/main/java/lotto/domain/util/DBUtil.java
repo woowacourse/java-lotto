@@ -9,6 +9,7 @@ public class DBUtil {
     private static final String DATABASE = "lottoDB"; // MySQL DATABASE 이름
     private static final String USER_NAME = "kangmin46"; //  MySQL 서버 아이디
     private static final String PASSWORD = "rkdals46"; // MySQL 서버 비밀번호
+
     public static Connection getConnection() {
         Connection con = null;
         // 드라이버 로딩

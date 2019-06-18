@@ -13,7 +13,7 @@ import java.util.Map;
 import static lotto.domain.util.DBUtil.getConnection;
 
 public class UserLottoDAO {
-    public static void addUserLottoNumbers(String userLottoNumbers,int currentRound) throws SQLException {
+    public static void addUserLottoNumbers(String userLottoNumbers, int currentRound) throws SQLException {
         String query = "INSERT INTO user_lotto_numbers(userLottoNumbers,lottoRound) VALUES (?, ?)";
         Connection con = DBUtil.getConnection();
         PreparedStatement pstmt = getConnection().prepareStatement(query);

@@ -2,8 +2,6 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.domain.DAO.ResultDAO;
-import lotto.domain.DAO.UserLottoDAO;
-import lotto.domain.DAO.WinningLottoDAO;
 import lotto.domain.DTO.LottoesDTO;
 import lotto.domain.DTO.ResultDTO;
 import lotto.service.LottoService;

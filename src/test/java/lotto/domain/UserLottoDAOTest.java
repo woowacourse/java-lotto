@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.util.DBUtil;
 import lotto.domain.DAO.UserLottoDAO;
+import lotto.domain.util.DBUtil;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
