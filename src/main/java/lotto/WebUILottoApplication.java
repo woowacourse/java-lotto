@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.dao.LottoDao;
 import lotto.domain.dto.RankingDTO;
 import lotto.domain.dto.ResultDTO;
 import lotto.domain.lotto.*;
@@ -94,16 +93,18 @@ public class WebUILottoApplication {
 
         get("/result/:round", (req, res) -> {
             int round = Integer.parseInt(nullable(req.params(":round")));
-            ResultDTO resultDTO = LottoResultService.getInstance().selectLottoResult(round);
 
+            ResultDTO resultDTO = LottoResultService.getInstance().selectLottoResult(round);
             List<Lotto> lottoTicket = LottoService.getInstance().selectAllLotto(round);
+
+            long countOfAutoLotto = LottoService.getInstance().calculateCountOfAutoLotto(lottoTicket);
 
             Map<String, Object> model = new HashMap<>();
             model.put("result", resultDTO);
-            model.put("winningLotto", LottoDao.getInstance().selectWinningLotto(round));
+            model.put("winningLotto", LottoService.getInstance().selectWinningLotto(round));
             model.put("lottoTicket", lottoTicket);
-            model.put("auto", lottoTicket.stream().filter(Lotto::isAuto).count());
-            model.put("manual", lottoTicket.stream().filter(lotto -> !lotto.isAuto()).count());
+            model.put("auto", countOfAutoLotto);
+            model.put("manual", lottoTicket.size() - countOfAutoLotto);
             return render(model, "lottoResult.html");
         });
 
