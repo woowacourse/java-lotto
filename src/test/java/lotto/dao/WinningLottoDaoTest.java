@@ -20,8 +20,9 @@ class WinningLottoDaoTest {
     private WinningLotto winningLotto;
 
     @BeforeEach
-    void setUp(){
+    void setUp() throws SQLException{
         conn = new DatabaseConnection().getConnection();
+        conn.setAutoCommit(false);
         winningLottoDao = new WinningLottoDao(conn);
         Lotto winningNumbers = new Lotto(Arrays.asList(1,2,3,10,11,12));
         LottoNumber lottoNumber = LottoNumber.valueOf(19);
@@ -41,6 +42,6 @@ class WinningLottoDaoTest {
 
     @AfterEach
     void tearDown() throws SQLException{
-        winningLottoDao.deleteAllWinningLotto();
+        conn.rollback();
     }
 }

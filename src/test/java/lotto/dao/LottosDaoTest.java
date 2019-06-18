@@ -23,8 +23,9 @@ class LottosDaoTest {
     private List<Lotto> lottos;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws SQLException{
         conn = new DatabaseConnection().getConnection();
+        conn.setAutoCommit(false);
         lottosDao = new LottosDao(conn);
         lottos = Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6)));
     }
@@ -42,7 +43,7 @@ class LottosDaoTest {
 
     @AfterEach
     void tearDown() throws SQLException{
-        lottosDao.deleteAllLottos();
+        conn.rollback();
     }
 
 }

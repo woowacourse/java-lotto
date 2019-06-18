@@ -16,9 +16,10 @@ public class RoundDaoTest {
     private RoundDao roundDao;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws SQLException{
         conn = new DatabaseConnection().getConnection();
         roundDao = new RoundDao(conn);
+        conn.setAutoCommit(false);
     }
 
     @Test
@@ -57,6 +58,6 @@ public class RoundDaoTest {
 
     @AfterEach
     void tearDown() throws SQLException {
-        roundDao.deleteAllRound();
+        conn.rollback();
     }
 }
