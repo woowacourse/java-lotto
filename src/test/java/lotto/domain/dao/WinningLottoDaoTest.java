@@ -1,9 +1,11 @@
 package lotto.domain.dao;
 
 import lotto.domain.WinningLotto;
+import lotto.domain.util.DBUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
@@ -12,10 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottoDaoTest {
     private WinningLottoDao winningLottoDAO;
+    private DataSource dataSource = DBUtil.getDataSource();
+
 
     @BeforeEach
     void setUp() {
-        winningLottoDAO = new WinningLottoDao();
+        winningLottoDAO = new WinningLottoDao(dataSource);
     }
 
     @Test

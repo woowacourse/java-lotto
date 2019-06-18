@@ -3,9 +3,11 @@ package lotto.domain.dao;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.util.DBUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,15 +19,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LottoDaoTest {
     private LottoDao lottoDAO;
+    private DataSource dataSource = DBUtil.getDataSource();
 
     @BeforeEach
     void setUp() {
-        lottoDAO = new LottoDao();
+        lottoDAO = new LottoDao(dataSource);
     }
 
     @Test
-    void connection() {
-        Connection connection = lottoDAO.getConnection();
+    void connection() throws SQLException {
+        Connection connection = dataSource.getConnection();
         assertNotNull(connection);
     }
 

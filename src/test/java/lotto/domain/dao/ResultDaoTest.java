@@ -2,9 +2,11 @@ package lotto.domain.dao;
 
 import lotto.domain.Rank;
 import lotto.domain.dto.ResultDto;
+import lotto.domain.util.DBUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.TreeMap;
@@ -13,10 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultDaoTest {
     private ResultDao resultDAO;
+    private DataSource dataSource = DBUtil.getDataSource();
+
 
     @BeforeEach
     void setUp() {
-        resultDAO = new ResultDao();
+        resultDAO = new ResultDao(dataSource);
     }
 
     @Test

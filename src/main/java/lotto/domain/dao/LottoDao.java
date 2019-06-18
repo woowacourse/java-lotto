@@ -4,12 +4,25 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 
-import java.sql.*;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoDao extends Connector {
+public class LottoDao {
     private static final int LOTTO_COUNT = 6;
+    private static final String ADD_LOTTO = "INSERT INTO lotto (round, num1, num2, num3, num4, num5, num6) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String SELECT_LOTTO_BY_ROUND = "SELECT * FROM lotto WHERE round = ?";
+    private static final String DELETE_BY_ROUND = "DELETE FROM lotto WHERE round = ?";
+
+    private DataSource dataSource;
+
+    public LottoDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public void addTotalLottos(int round, Lottos lottos) throws SQLException {
         for (int i = 0; i < lottos.getLottoCount(); i++) {
@@ -18,21 +31,45 @@ public class LottoDao extends Connector {
     }
 
     private void addLotto(int round, Lotto lotto) throws SQLException {
-        String query = "INSERT INTO lotto (round, num1, num2, num3, num4, num5, num6) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement pstmt = getConnection().prepareStatement(query);
+        try (Connection con = dataSource.getConnection()) {
+            executeAddLotto(round, lotto, con);
+        }
+    }
+
+    private void executeAddLotto(int round, Lotto lotto, Connection con) throws SQLException {
+        try (PreparedStatement pstmt = con.prepareStatement(ADD_LOTTO)) {
+            setPstmtForAddLotto(round, lotto, pstmt);
+            pstmt.executeUpdate();
+        }
+    }
+
+    private void setPstmtForAddLotto(int round, Lotto lotto, PreparedStatement pstmt) throws SQLException {
         pstmt.setInt(1, round);
         for (int i = 0; i < LOTTO_COUNT; i++) {
             pstmt.setInt(i + 2, lotto.getLottoNumberByIndex(i));
         }
-        pstmt.executeUpdate();
     }
 
     public List<Lotto> findLottoByRound(int round) throws SQLException {
-        String query = "SELECT * FROM lotto WHERE round = ?";
-        PreparedStatement pstmt = getConnection().prepareStatement(query);
-        pstmt.setInt(1, round);
-        ResultSet rs = pstmt.executeQuery();
+        try (Connection con = dataSource.getConnection()) {
+            return executeFindLotto(round, con);
+        }
+    }
 
+    private List<Lotto> executeFindLotto(int round, Connection con) throws SQLException {
+        try (PreparedStatement pstmt = con.prepareStatement(SELECT_LOTTO_BY_ROUND)) {
+            pstmt.setInt(1, round);
+            return getResultFindLotto(pstmt);
+        }
+    }
+
+    private List<Lotto> getResultFindLotto(PreparedStatement pstmt) throws SQLException {
+        try (ResultSet rs = pstmt.executeQuery()) {
+            return getLottos(rs);
+        }
+    }
+
+    private List<Lotto> getLottos(ResultSet rs) throws SQLException {
         if (!rs.next()) return null;
 
         List<Lotto> lottos = new ArrayList<>();
@@ -43,9 +80,9 @@ public class LottoDao extends Connector {
             lottos.add(new Lotto(getLotto(rs)));
             rs.next();
         }
-
         return lottos;
     }
+
 
     private List<LottoNumber> getLotto(ResultSet rs) throws SQLException {
         List<LottoNumber> lotto = new ArrayList<>();
@@ -56,9 +93,15 @@ public class LottoDao extends Connector {
     }
 
     public void deleteLottos(int round) throws SQLException {
-        String query = "DELETE FROM lotto WHERE round = ?";
-        PreparedStatement pstmt = getConnection().prepareStatement(query);
-        pstmt.setInt(1, round);
-        pstmt.executeUpdate();
+        try (Connection con = dataSource.getConnection()) {
+            executeDeleteLottos(round, con);
+        }
+    }
+
+    private void executeDeleteLottos(int round, Connection con) throws SQLException {
+        try (PreparedStatement pstmt = con.prepareStatement(DELETE_BY_ROUND)) {
+            pstmt.setInt(1, round);
+            pstmt.executeUpdate();
+        }
     }
 }
