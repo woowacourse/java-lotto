@@ -33,13 +33,6 @@ public class LottoResultDAO {
         }
     }
 
-    private PreparedStatement createPreparedStatement(Connection con, int userId) throws SQLException {
-        String sql = "SELECT id, username FROM users WHERE id = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, userId);
-        return ps;
-    }
-
     public int getLatestRoundNum() {
         String query = "SELECT round FROM lotto_result ORDER BY round DESC LIMIT 1";
 
