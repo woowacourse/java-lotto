@@ -1,6 +1,5 @@
 package lotto.dao;
 
-import lotto.domain.DBConnector;
 import lotto.domain.lotto.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,12 +11,12 @@ class WinningLottoDAOTest {
 
     @BeforeEach
     void setUp() {
-        this.winningLottoDAO = new WinningLottoDAO(new DBConnector());
+        this.winningLottoDAO = WinningLottoDAOImpl.getInstance();
     }
 
     @Test
     void crdWinningLotto() throws Exception {
-        LottoGameDAO lottoGameDAO = new LottoGameDAO(new DBConnector());
+        LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
         lottoGameDAO.addLottoGame(0);
 
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");

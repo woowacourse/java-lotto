@@ -1,6 +1,5 @@
 package lotto.dao;
 
-import lotto.domain.DBConnector;
 import lotto.domain.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,19 +11,19 @@ class MoneyDAOTest {
 
     @BeforeEach
     void setUp() {
-        moneyDAO = new MoneyDAO(new DBConnector());
+        this.moneyDAO = MoneyDAOImpl.getInstance();
     }
 
     @Test
     void crdMoney() throws Exception {
-        LottoGameDAO lottoGameDAO = new LottoGameDAO(new DBConnector());
-        //lottoGameDAO.addLottoGame(0);
+        LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
+        lottoGameDAO.addLottoGame(0);
 
         Money money = new Money("3000");
-        //assertEquals(moneyDAO.addMoney(money, 0), 1);
-        //assertEquals(moneyDAO.findByRound(0), money);
-        assertEquals(moneyDAO.deleteMoney(1), 1);
+        assertEquals(moneyDAO.addMoney(money, 0), 1);
+        assertEquals(moneyDAO.findByRound(0), money);
+        assertEquals(moneyDAO.deleteMoney(0), 1);
 
-        lottoGameDAO.deleteLottoGame(1);
+        lottoGameDAO.deleteLottoGame(0);
     }
 }

@@ -14,6 +14,7 @@ public class Lotto {
         Set<LottoNumber> numberSet = new HashSet<>(numbers);
         List<LottoNumber> numberList = new ArrayList<>(numberSet);
         checkNumberOfNumbers(numberList);
+        Collections.sort(numberList);
         this.numbers = numberList;
         this.isAuto = isAuto;
     }
@@ -27,7 +28,6 @@ public class Lotto {
     }
 
     public List<LottoNumber> getNumbers() {
-        Collections.sort(numbers);
         return numbers;
     }
 

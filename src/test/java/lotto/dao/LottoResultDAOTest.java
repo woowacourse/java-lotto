@@ -20,12 +20,12 @@ class LottoResultDAOTest {
 
     @BeforeEach
     void setUp() {
-        this.lottoResultDAO = new LottoResultDAO(new DBConnector());
+        this.lottoResultDAO = LottoResultDAOImpl.getInstance();
     }
 
     @Test
     void crdLottoResult() throws Exception {
-        LottoGameDAO lottoGameDAO = new LottoGameDAO(new DBConnector());
+        LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
         lottoGameDAO.addLottoGame(0);
 
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "12");

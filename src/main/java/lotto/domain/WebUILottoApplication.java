@@ -38,7 +38,7 @@ public class WebUILottoApplication {
         get("/money", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 
-            LottoGameDAO lottoGameDAO = new LottoGameDAO(DBConnector.getInstance());
+            LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
             String message = String.format("%d회차 로또를 구매하러 오셨군요~ 구입 금액을 입력해주세요.",
                                         lottoGameDAO.getLastRound() + ADD_ONE_BEFORE_ADD_LOTTO_GAME);
 
@@ -48,8 +48,8 @@ public class WebUILottoApplication {
         });
 
         post("/money", (req, res) -> {
-            LottoGameDAO lottoGameDAO = new LottoGameDAO(DBConnector.getInstance());
-            MoneyDAO moneyDAO = new MoneyDAO(DBConnector.getInstance());
+            LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
+            MoneyDAO moneyDAO = MoneyDAOImpl.getInstance();
             Money money = new Money(req.queryParams("money"));
             int round = lottoGameDAO.getLastRound() + ADD_ONE_BEFORE_ADD_LOTTO_GAME;
             System.out.println(round);
@@ -65,8 +65,8 @@ public class WebUILottoApplication {
         get("/manual-quantity", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 
-            LottoGameDAO lottoGameDAO = new LottoGameDAO(DBConnector.getInstance());
-            MoneyDAO moneyDAO = new MoneyDAO(DBConnector.getInstance());
+            LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
+            MoneyDAO moneyDAO = MoneyDAOImpl.getInstance();
 
             Money money = moneyDAO.findByRound(lottoGameDAO.getLastRound());
             String message = String.format("총 %d장의 로또를 구매할 수 있습니다. 이중 수동으로 구매할 로또의 수 입력해주세요.", money.getBuyableLottoQuantity());
@@ -81,9 +81,9 @@ public class WebUILottoApplication {
             CustomStringUtils.checkIsBlank(inputQuantity);
             int manualQuantity = CustomStringUtils.parseInt(inputQuantity);
 
-            LottoGameDAO lottoGameDAO = new LottoGameDAO(DBConnector.getInstance());
-            MoneyDAO moneyDAO = new MoneyDAO(DBConnector.getInstance());
-            LottoDAO lottoDAO = new LottoDAO(DBConnector.getInstance());
+            LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
+            MoneyDAO moneyDAO = MoneyDAOImpl.getInstance();
+            LottoDAO lottoDAO = LottoDAOImpl.getInstance();
             int round = lottoGameDAO.getLastRound();
 
             Money money = moneyDAO.findByRound(round);
@@ -117,7 +117,7 @@ public class WebUILottoApplication {
         });
 
         post("/manual-numbers", (req, res) -> {
-            LottoGameDAO lottoGameDAO = new LottoGameDAO(DBConnector.getInstance());
+            LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
             int round = lottoGameDAO.getLastRound();
 
             int manualQuantity = Integer.parseInt(req.queryParams("quantity"));
@@ -132,7 +132,7 @@ public class WebUILottoApplication {
             List<LottoCreator> creators = factory.createCreators(manualQuantity, 0);
             Lottos lottos = LottoFactory.createLottos(creators);
 
-            LottoDAO lottoDAO = new LottoDAO(DBConnector.getInstance());
+            LottoDAO lottoDAO = LottoDAOImpl.getInstance();
 
             for (Lotto lotto : lottos.getLottos()) {
                 lottoDAO.addLotto(lotto, round);
@@ -144,8 +144,8 @@ public class WebUILottoApplication {
         });
 
         get("/winning", (req, res) -> {
-            LottoGameDAO lottoGameDAO = new LottoGameDAO(DBConnector.getInstance());
-            LottoDAO lottoDAO = new LottoDAO(DBConnector.getInstance());
+            LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
+            LottoDAO lottoDAO = LottoDAOImpl.getInstance();
 
             Map<String, Object> model = new HashMap<>();
 
@@ -164,10 +164,10 @@ public class WebUILottoApplication {
         });
 
         post("/winning", (req, res) -> {
-            LottoGameDAO lottoGameDAO = new LottoGameDAO(DBConnector.getInstance());
-            WinningLottoDAO winningLottoDAO = new WinningLottoDAO(DBConnector.getInstance());
-            LottoDAO lottoDAO = new LottoDAO(DBConnector.getInstance());
-            LottoResultDAO lottoResultDAO = new LottoResultDAO(DBConnector.getInstance());
+            LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
+            WinningLottoDAO winningLottoDAO = WinningLottoDAOImpl.getInstance();
+            LottoDAO lottoDAO = LottoDAOImpl.getInstance();
+            LottoResultDAO lottoResultDAO = LottoResultDAOImpl.getInstance();
             int round = lottoGameDAO.getLastRound();
 
             WinningLotto winningLotto = new WinningLotto(req.queryParams("winning-numbers"), req.queryParams("winning-bonus-numbers"));
@@ -181,9 +181,9 @@ public class WebUILottoApplication {
         });
 
         get("/result", (req, res) -> {
-            LottoGameDAO lottoGameDAO = new LottoGameDAO(DBConnector.getInstance());
-            LottoDAO lottoDAO = new LottoDAO(DBConnector.getInstance());
-            WinningLottoDAO winningLottoDAO = new WinningLottoDAO(DBConnector.getInstance());
+            LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
+            LottoDAO lottoDAO = LottoDAOImpl.getInstance();
+            WinningLottoDAO winningLottoDAO = WinningLottoDAOImpl.getInstance();
             int round = lottoGameDAO.getLastRound();
 
             Map<String, Object> model = new HashMap<>();
@@ -207,7 +207,7 @@ public class WebUILottoApplication {
         get("/lookup", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 
-            LottoGameDAO lottoGameDAO = new LottoGameDAO(DBConnector.getInstance());
+            LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
             String message = String.format("조회하고 싶은 회차를 입력해주세요. 현재 최대 %d회차까지 진행되었습니다.", lottoGameDAO.getLastRound());
 
             model.put("message", message);
@@ -226,8 +226,8 @@ public class WebUILottoApplication {
 
             Map<String, Object> model = new HashMap<>();
 
-            LottoDAO lottoDAO = new LottoDAO(DBConnector.getInstance());
-            WinningLottoDAO winningLottoDAO = new WinningLottoDAO(DBConnector.getInstance());
+            LottoDAO lottoDAO = LottoDAOImpl.getInstance();
+            WinningLottoDAO winningLottoDAO = WinningLottoDAOImpl.getInstance();
 
             List<Lotto> lottos = lottoDAO.findByRound(round);
             WinningLotto winningLotto = winningLottoDAO.findByRound(round);
