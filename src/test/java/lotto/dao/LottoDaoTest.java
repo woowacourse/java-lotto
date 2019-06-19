@@ -37,7 +37,7 @@ class LottoDaoTest {
     void addWinningLotto() {
         Lotto lotto = new Lotto(lottoNumbers);
         WinningLotto winningLotto = new WinningLotto(lotto, Number.of(9));
-        LottoDao.addWinningLotto(winningLotto, 9);
+        WinningLottoDao.addWinningLotto(winningLotto, 9);
     }
 
     @Test
@@ -45,12 +45,12 @@ class LottoDaoTest {
         List<String> results = new ArrayList<>();
         results.add("FIRST");
         results.add("SECOND");
-        LottoDao.addResult(results, 7);
+        ResultDao.addResult(results, 7);
     }
 
     @Test
     void addResultInfo() {
-        LottoDao.addResultInfo(4, 2.0, "300000");
+        LottoStatusDao.addResultInfo(4, 2.0, "300000");
     }
 
     @Test
