@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    Lottos() {
+    public Lottos() {
         lottos = new ArrayList<>();
     }
 

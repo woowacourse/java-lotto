@@ -10,10 +10,11 @@ public class LottoCount {
 
     public LottoCount(int manualLottoCount, Money money) {
         if (manualLottoCount < ZERO) {
-            throw new InvalidPurchaseInformationException("수동 로또의 개수는 0이상이여야 합니다.");
+            throw new InvalidPurchaseInformationException(
+                    InvalidPurchaseInformationException.LOTTO_COUNT_BIGGER_THAN_ZERO_MSG);
         }
         if (!money.canBuy(manualLottoCount)) {
-            throw new InvalidPurchaseInformationException("구입 금액이 부족합니다.");
+            throw new InvalidPurchaseInformationException(InvalidPurchaseInformationException.NOT_ENOUGH_MONEY_MSG);
         }
         this.manualLottoCount = manualLottoCount;
         this.autoLottoCount = money.calculateMaxNumberOfPurchase() - manualLottoCount;
