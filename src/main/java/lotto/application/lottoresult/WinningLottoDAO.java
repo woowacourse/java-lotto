@@ -1,15 +1,14 @@
 package lotto.application.lottoresult;
 
-import lotto.application.LottoJDBCDriverConnector;
+import lotto.application.LottoJDBCTemplate;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberPool;
 import lotto.domain.lottoticket.dto.LottoTicketDTO;
 import lotto.domain.lottoticket.dto.WinningLottoDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class WinningLottoDAO {
     private static WinningLottoDAO winningLottoDAO = null;
@@ -29,51 +28,45 @@ public class WinningLottoDAO {
         LottoTicketDTO lottoTicketDto = winningLottoDto.getLottoTicketDto();
         LottoNumber bonusBall = winningLottoDto.getBonusBall();
 
-        try (Connection connection = LottoJDBCDriverConnector.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setInt(1, currentRound);
-            pstmt.setInt(2, lottoTicketDto.getFirstNum());
-            pstmt.setInt(3, lottoTicketDto.getSecondNum());
-            pstmt.setInt(4, lottoTicketDto.getThirdNum());
-            pstmt.setInt(5, lottoTicketDto.getFourthNum());
-            pstmt.setInt(6, lottoTicketDto.getFifthNum());
-            pstmt.setInt(7, lottoTicketDto.getSixthNum());
-            pstmt.setInt(8, bonusBall.getNumber());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(currentRound);
+        queryValues.add(lottoTicketDto.getFirstNum());
+        queryValues.add(lottoTicketDto.getSecondNum());
+        queryValues.add(lottoTicketDto.getThirdNum());
+        queryValues.add(lottoTicketDto.getFourthNum());
+        queryValues.add(lottoTicketDto.getFifthNum());
+        queryValues.add(lottoTicketDto.getSixthNum());
+        queryValues.add(bonusBall.getNumber());
+        LottoJDBCTemplate lottoJDBCTemplate = LottoJDBCTemplate.getInstance();
+        lottoJDBCTemplate.executeUpdate(query, queryValues);
     }
 
     public WinningLottoDTO fetchWinningLotto(int round) {
         String query = "SELECT * FROM winning_lotto WHERE round = ?";
 
-        try (Connection connection = LottoJDBCDriverConnector.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setInt(1, round);
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(round);
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (!rs.next()) return new WinningLottoDTO();
-
-                return makeWinningLottoFrom(rs);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        LottoJDBCTemplate lottoJDBCTemplate = LottoJDBCTemplate.getInstance();
+        List<Map<String, Object>> results = lottoJDBCTemplate.executeQuery(query, queryValues);
+        if (results.isEmpty()) {
+            return new WinningLottoDTO();
         }
-        return new WinningLottoDTO();
+        Map<String, Object> resultRow = results.get(0);
+        return makeWinningLottoFrom(resultRow);
     }
 
-    private WinningLottoDTO makeWinningLottoFrom(ResultSet rs) throws SQLException {
+    private WinningLottoDTO makeWinningLottoFrom(Map<String, Object> resultRow) {
         WinningLottoDTO winningLottoDto = new WinningLottoDTO();
         LottoTicketDTO lottoTicketDto = new LottoTicketDTO();
-        lottoTicketDto.setFirstNum(rs.getInt("first_num"));
-        lottoTicketDto.setSecondNum(rs.getInt("second_num"));
-        lottoTicketDto.setThirdNum(rs.getInt("third_num"));
-        lottoTicketDto.setFourthNum(rs.getInt("fourth_num"));
-        lottoTicketDto.setFifthNum(rs.getInt("fifth_num"));
-        lottoTicketDto.setSixthNum(rs.getInt("sixth_num"));
+        lottoTicketDto.setFirstNum((int) resultRow.get("first_num"));
+        lottoTicketDto.setSecondNum((int) resultRow.get("second_num"));
+        lottoTicketDto.setThirdNum((int) resultRow.get("third_num"));
+        lottoTicketDto.setFourthNum((int) resultRow.get("fourth_num"));
+        lottoTicketDto.setFifthNum((int) resultRow.get("fifth_num"));
+        lottoTicketDto.setSixthNum((int) resultRow.get("sixth_num"));
 
-        int bonusBall = rs.getInt("bonus_ball");
+        int bonusBall = (int) resultRow.get("bonus_ball");
         winningLottoDto.setBonusBall(LottoNumberPool.valueOf(bonusBall));
 
         return winningLottoDto;
@@ -82,13 +75,9 @@ public class WinningLottoDAO {
     public void deleteWinningLotto(int round) {
         String query = "delete from winning_lotto where round = ?";
 
-        try (Connection connection = LottoJDBCDriverConnector.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
-
-            pstmt.setInt(1, round);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(round);
+        LottoJDBCTemplate lottoJDBCTemplate = LottoJDBCTemplate.getInstance();
+        lottoJDBCTemplate.executeUpdate(query, queryValues);
     }
 }
