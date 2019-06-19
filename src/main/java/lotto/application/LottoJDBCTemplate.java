@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoJDBCTemplate {
+    private static final String ERROR_INVALID_EXECUTE_UPDATE_MESSAGE = "올바르지 않은 executeUpdate 실행입니다.";
+    private static final String ERROR_INVALID_EXECUTE_QUERY_MESSAGE = "올바르지 않은 executeQuery 실행입니다.";
     private static LottoJDBCTemplate lottoJDBCTemplate = null;
 
     private LottoJDBCTemplate() {
@@ -25,7 +27,7 @@ public class LottoJDBCTemplate {
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataAccessException(ERROR_INVALID_EXECUTE_UPDATE_MESSAGE);
         }
     }
 
@@ -35,21 +37,17 @@ public class LottoJDBCTemplate {
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataAccessException(ERROR_INVALID_EXECUTE_UPDATE_MESSAGE);
         }
     }
 
-    private PreparedStatement createPreparedStatement(Connection connection, String query, List<Object> queryValues) {
-        try {
-            PreparedStatement pstmt = connection.prepareStatement(query);
-            for (int index = 0; index < queryValues.size(); index++) {
-                pstmt.setObject(index + 1, queryValues.get(index));
-            }
-            return pstmt;
-        } catch (SQLException e) {
-            e.printStackTrace();
+    private PreparedStatement createPreparedStatement(Connection connection, String query, List<Object> queryValues)
+            throws SQLException {
+        PreparedStatement pstmt = connection.prepareStatement(query);
+        for (int index = 0; index < queryValues.size(); index++) {
+            pstmt.setObject(index + 1, queryValues.get(index));
         }
-        throw new RuntimeException();
+        return pstmt;
     }
 
     public List<Map<String, Object>> executeQuery(String query) {
@@ -59,9 +57,8 @@ public class LottoJDBCTemplate {
 
             return makeResults(rs);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataAccessException(ERROR_INVALID_EXECUTE_QUERY_MESSAGE);
         }
-        throw new RuntimeException();
     }
 
     public List<Map<String, Object>> executeQuery(String query, List<Object> queryValues) {
@@ -71,9 +68,8 @@ public class LottoJDBCTemplate {
 
             return makeResults(rs);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataAccessException(ERROR_INVALID_EXECUTE_QUERY_MESSAGE);
         }
-        throw new RuntimeException();
     }
 
     private List<Map<String, Object>> makeResults(ResultSet rs) throws SQLException {
