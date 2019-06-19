@@ -1,6 +1,9 @@
 package lotto.service;
 
 import lotto.dao.LottoDao;
+import lotto.dao.LottoStatusDao;
+import lotto.dao.ResultDao;
+import lotto.dao.WinningLottoDao;
 import lotto.domain.*;
 import lotto.domain.Number;
 import lotto.dto.*;
@@ -18,6 +21,7 @@ public class LottoService {
         int autoRound = getAutoRound(round, manualRound);
         String[] numbers = splitNumbers(manualNumbers);
         UserLotto userLotto = createUserLotto(numbers, autoRound);
+
         LottoDao.addLotto(userLotto, lottoRound);
 
         return new LottoDto(round, manualRound, autoRound, userLotto.getUserLotto(), numbers, lottoRound);
@@ -34,24 +38,26 @@ public class LottoService {
         String[] numbers = Parser.parseLottoStrings(userLottoString);
         UserLotto userLotto = new UserLotto(Parser.parseLotto(numbers));
         Winners winners = new Winners(winningLotto.makeRankResultList(userLotto));
-        LottoDao.addWinningLotto(winningLotto, lottoRound);
+
+        WinningLottoDao.addWinningLotto(winningLotto, lottoRound);
+
         List<String> resultRanks = provideResultStatus(winners.getRankResult());
-        LottoDao.addResult(resultRanks, lottoRound);
-        LottoDao.addResultInfo(lottoRound, winners.getPrizeSum(), winners.calculateResultRate(round));
+
+        ResultDao.addResult(resultRanks, lottoRound);
+        LottoStatusDao.addResultInfo(lottoRound, winners.getPrizeSum(), winners.calculateResultRate(round));
 
         return new ResultDto(resultRanks, winners.calculateResultRate(round), lottoRound);
     }
 
     public StatusDto offerHitsStatus(int lottoRound) {
         List<String> userLotto = LottoDao.offerUserLottoNumber(lottoRound);
-        String winningNumber = LottoDao.offerWinningNumber(lottoRound);
-        int bonus = LottoDao.offerBonusNumber(lottoRound);
-        List<String> results = LottoDao.offerResults(lottoRound);
-        String returnRate = String.valueOf(LottoDao.offerReturnRate(lottoRound));
-        int prize = LottoDao.offerPrize(lottoRound);
+        String winningNumber = WinningLottoDao.offerWinningNumber(lottoRound);
+        int bonus = WinningLottoDao.offerBonusNumber(lottoRound);
+        List<String> results = ResultDao.offerResults(lottoRound);
+        String returnRate = String.valueOf(LottoStatusDao.offerReturnRate(lottoRound));
+        int prize = LottoStatusDao.offerPrize(lottoRound);
 
         return new StatusDto(lottoRound, userLotto, winningNumber, bonus, results, returnRate, prize);
-
     }
 
     public LottoRoundDto offerLottoRounds() {
