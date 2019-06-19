@@ -7,16 +7,16 @@ public class RoundDAO {
 
     public static void registerCount() throws SQLException {
         String query = "INSERT INTO round(round) SELECT ifnull(MAX(round) + 1, 1) FROM round";
-        PreparedStatement psmt = connection.prepareStatement(query);
-        psmt.executeUpdate();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
     }
 
     public static int searchMaxCount() throws SQLException {
         String query = "SELECT MAX(round) FROM round";
         Statement psmt = connection.createStatement();
-        ResultSet re = psmt.executeQuery(query);
-        while (re.next()) {
-            return re.getInt(1);
+        ResultSet resultSet = psmt.executeQuery(query);
+        while (resultSet.next()) {
+            return resultSet.getInt(1);
         }
         throw new SQLException();
     }

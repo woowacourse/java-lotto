@@ -13,6 +13,11 @@ import static spark.Spark.*;
 
 public class WebUILottoApplication {
     public static final List<String> NUMBERS = Arrays.asList("one", "two", "three", "four", "five", "six");
+    public static final WebController WEB_LOTTO_CONTROLLER = new WebLottoController();
+    public static final WebController WEB_MONEY_CONTROLLER = new WebMoneyController();
+    public static final WebController WEB_MANUAL_CONTROLLER = new WebManualLottoController();
+    public static final WebController WEB_WINNING_CONTROLLER = new WebWinningLottoController();
+    public static final WebController WEB_SEARCH_CONTROLLER = new WebSearchController();
 
     public static void main(String[] args) {
         WebUILottoApplication webUILottoApplication = new WebUILottoApplication();
@@ -23,12 +28,12 @@ public class WebUILottoApplication {
         port(8080);
         staticFileLocation("/templates");
 
-        get("/", WebLottoController::main);
+        get("/", WEB_LOTTO_CONTROLLER::page);
 
-        post("/money", WebMoneyController::money);
-        post("/manual", WebManualLottoController::manualLotto);
-        post("/winning", WebWinningLottoController::winningLotto);
-        post("/search", WebSearchController::search);
+        post("/money", WEB_MONEY_CONTROLLER::page);
+        post("/manual", WEB_MANUAL_CONTROLLER::page);
+        post("/winning", WEB_WINNING_CONTROLLER::page);
+        post("/search", WEB_SEARCH_CONTROLLER::page);
 
         exception(Exception.class, (e, request, response) -> {
             try {

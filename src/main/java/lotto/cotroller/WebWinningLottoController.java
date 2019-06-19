@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WebWinningLottoController {
-    public static String winningLotto(Request req, Response res) throws SQLException {
+public class WebWinningLottoController implements WebController{
+    public String page(Request req, Response res) throws SQLException {
         Map<String, Object> model = new HashMap<>();
         List<Integer> winningLottoNumber = WebUILottoApplication.convertLottoNumber(req);
         int bonus = WebUILottoApplication.convertNumber(req, "bonus");

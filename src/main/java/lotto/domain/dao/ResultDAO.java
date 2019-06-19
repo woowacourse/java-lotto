@@ -34,9 +34,7 @@ public class ResultDAO {
 
     public static List<Integer> searchResultNumbers(int round) throws SQLException {
         String query = "SELECT first, second, third, fourth, fifth FROM result WHERE round = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, round);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = ConnectionDB.getResultSet(round, query);
         while (resultSet.next()) {
             return Arrays.asList(
                     resultSet.getInt("fifth"),
@@ -50,9 +48,7 @@ public class ResultDAO {
 
     public static long searchTotalMoney(int round) throws SQLException {
         String query = "SELECT money FROM result WHERE round = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, round);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = ConnectionDB.getResultSet(round, query);
         while (resultSet.next()) {
             return resultSet.getLong("money");
         }
@@ -61,9 +57,7 @@ public class ResultDAO {
 
     public static long searchRateOfReturn(int round) throws SQLException {
         String query = "SELECT yeild FROM result WHERE round = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, round);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = ConnectionDB.getResultSet(round, query);
         while (resultSet.next()) {
             return resultSet.getLong("yeild");
         }

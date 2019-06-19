@@ -30,9 +30,7 @@ public class WinningDAO {
 
     public static Lotto searchWinningNumbers(int round) throws SQLException {
         String query = "SELECT one, two, three, four, five, six FROM winning WHERE round = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, round);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = ConnectionDB.getResultSet(round, query);
         while (resultSet.next()) {
             return new Lotto(Arrays.asList(resultSet.getInt("one"),
                     resultSet.getInt("two"),
@@ -46,9 +44,7 @@ public class WinningDAO {
 
     public static Integer searchWinningBonus(int round) throws SQLException {
         String query = "SELECT bonus FROM winning WHERE round = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, round);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = ConnectionDB.getResultSet(round, query);
         while (resultSet.next()) {
             return resultSet.getInt("bonus");
         }

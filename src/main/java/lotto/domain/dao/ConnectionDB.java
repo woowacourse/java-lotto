@@ -1,8 +1,6 @@
 package lotto.domain.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ConnectionDB {
     public static Connection getConnection() {
@@ -24,5 +22,11 @@ public class ConnectionDB {
             e.printStackTrace();
         }
         return connection;
+    }
+
+    public static ResultSet getResultSet(int round, String query) throws SQLException {
+        PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+        preparedStatement.setInt(1, round);
+        return preparedStatement.executeQuery();
     }
 }

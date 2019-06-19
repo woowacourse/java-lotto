@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WebMoneyController {
-    public static String money(Request req, Response res) throws SQLException {
+public class WebMoneyController implements WebController{
+    public String page(Request req, Response res) throws SQLException {
         Map<String, Object> model = new HashMap<>();
         Money money = new Money(WebUILottoApplication.convertNumber(req, "money"));
         req.session().attribute("money", money);

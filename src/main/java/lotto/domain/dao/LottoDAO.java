@@ -40,9 +40,7 @@ public class LottoDAO {
     public static List<Lotto> searchLottoNumbers(int round) throws SQLException {
         List<Lotto> lottoNumbers = new ArrayList<>();
         String query = "SELECT one, two, three, four, five, six FROM number WHERE round = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, round);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = ConnectionDB.getResultSet(round, query);
         while (resultSet.next()) {
             List<Integer> numbers = Arrays.asList(resultSet.getInt("one"),
                     resultSet.getInt("two"),

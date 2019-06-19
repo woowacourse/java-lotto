@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WebLottoController {
-    public static String main(Request request, Response response) throws SQLException {
+public class WebLottoController implements WebController {
+    public String page(Request request, Response response) throws SQLException {
         Map<String, Object> model = new HashMap<>();
         model.put("searchCount", RoundDAO.searchMaxCount());
         return WebUILottoApplication.render(model, "lotto.html");

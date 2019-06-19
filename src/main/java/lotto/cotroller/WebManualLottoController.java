@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WebManualLottoController {
-    public static String manualLotto(Request req, Response res) throws SQLException {
+public class WebManualLottoController implements WebController {
+    public String page(Request req, Response res) throws SQLException {
         Map<String, Object> model = new HashMap<>();
         List<Integer> lottoNumbers = WebUILottoApplication.convertLottoNumber(req);
         List<Lotto> manualLottos = req.session().attribute("manual");

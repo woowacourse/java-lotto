@@ -14,10 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WebSearchController {
+public class WebSearchController implements WebController {
     public static final List<String> RANK = Arrays.asList("fifth", "fourth", "third", "second", "first");
 
-    public static String search(Request req, Response res) throws SQLException {
+    public String page(Request req, Response res) throws SQLException {
         Map<String, Object> model = new HashMap<>();
         int round = Integer.parseInt(req.queryParams("round"));
         if (round != 0) {
