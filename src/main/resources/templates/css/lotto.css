@@ -1,0 +1,41 @@
+.count {
+    width: 850px;
+    height: 100px;
+    margin: auto;
+}
+
+.registerDataTitle {
+    width: 850px;
+    height: 75px;
+    margin: auto;
+}
+
+.row {
+    width: 850px;
+    height: 100px;
+    margin: auto;
+}
+
+.userDataTitle {
+    width: 850px;
+    height: 75px;
+    margin: auto;
+}
+
+.inputData {
+    width: 850px;
+    height: 300px;
+    margin: auto;
+}
+
+.result {
+    width: 850px;
+    height: 70px;
+    margin: auto;
+}
+
+.resultTitle {
+    width: 850px;
+    height: 75px;
+    margin: auto;
+}

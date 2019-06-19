@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lotto</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/lotto.css">
+</head>
+<body>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Lotto Game</h1>
+    </div>
+</div>
+<!-- USER DATA-->
+<div class="inputData">
+    <div class="registerDataTitle">
+        <h1>Register</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-money-list" data-toggle="list"
+                   href="#list-money" role="tab" aria-controls="money">구매 하기</a>
+                <a class="list-group-item list-group-item-action" id="list-manual-list" data-toggle="list"
+                   href="#list-manual" role="tab" aria-controls="manual">수동 로또</a>
+                <a class="list-group-item list-group-item-action" id="list-winning-list" data-toggle="list"
+                   href="#list-winning" role="tab" aria-controls="winning">당첨 번호</a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="tab-content" id="nav-tabContent">
+                <!-- Input Money -->
+                <div class="tab-pane fade show active" id="list-money" role="tabpanel"
+                     aria-labelledby="list-money-list">
+                    <h5><br/><br/>금액을 입력해 주세요.</h5>
+                    <form action="/money" method="post"> <!-- test form action -->
+                        <div class="input-group" id="money">
+                            <input type="text" name="money" placeholder="로또 1장의 가격은 1,000원 입니다." aria-label="One"
+                                   class="form-control" maxlength="6">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="submit" class="btn btn-primary">확인</button>
+                                <button type="reset" class="btn btn-secondary">취소</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Manual Number -->
+                <div class="tab-pane fade" id="list-manual" role="tabpanel" aria-labelledby="list-manual-list">
+                    <h5><br/><br/>로또 번호를 입력해 주세요.</h5>
+                    <form action="/manual" method="post">
+                        <div class="input-group" id="manual">
+                            <input type="text" name="one" aria-label="One" class="form-control" maxlength="2"
+                                   style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="two" aria-label="Two" class="form-control" maxlength="2">
+                            <input type="text" name="three" aria-label="Three" class="form-control" maxlength="2"
+                                   style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="four" aria-label="Four" class="form-control" maxlength="2">
+                            <input type="text" name="five" aria-label="Five" class="form-control" maxlength="2"
+                                   style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="six" aria-label="Six" class="form-control" maxlength="2">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="submit" class="btn btn-primary">확인</button>
+                                <button type="reset" class="btn btn-secondary">취소</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Winning Number -->
+                <div class="tab-pane fade" id="list-winning" role="tabpanel" aria-labelledby="list-winning-list">
+                    <h5><br/><br/>이번 주 당첨 번호를 입력해 주세요.</h5>
+                    <form action="/winning" method="post">
+                        <div class="input-group" id="winning">
+                            <input type="text" name="one" aria-label="One" class="form-control" maxlength="2"
+                                   style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="two" aria-label="Two" class="form-control" maxlength="2">
+                            <input type="text" name="three" aria-label="Three" class="form-control" maxlength="2"
+                                   style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="four" aria-label="Four" class="form-control" maxlength="2">
+                            <input type="text" name="five" aria-label="Five" class="form-control" maxlength="2"
+                                   style="BACKGROUND-COLOR: #F2F5F7">
+                            <input type="text" name="six" aria-label="Six" class="form-control" maxlength="2">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="submit" class="btn btn-primary">확인</button>
+                                <button type="reset" class="btn btn-secondary">취소</button>
+                            </div>
+                        </div>
+                        <br/>
+                        <!-- Bonus Number -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">보너스</label>
+                            </div>
+                            <select class="custom-select" name="bonus" id="inputGroupSelect01" size="1">
+                                <option value="notChoice">번호를 선택해 주세요.</option>
+                                <script language="JavaScript" type="text/javascript">
+                                    for(var i=1; i<=45; i++) {
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="userDataTitle">
+        <h1>Search</h1>
+    </div>
+
+    <!-- count -->
+    <div class="count">
+        <div class="input-group mb-9">
+            <!-- Bonus Number -->
+            <form action="/search" method="post">
+                <div class="input-group mb-1">
+                    <select class="custom-select" name="round" id="select-count" size="1">
+                        <option value="notChoice">회차를 선택해 주세요.</option>
+                        <script language="JavaScript" type="text/javascript">
+                            for(var i=1; i<= {{searchCount}}; i++) {
+                                document.write("<option>" + i + "</option>");
+                            }
+                        </script>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">조회</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+<!-- Result title -->
+<div class="result">
+    <div class="resultTitle">
+        <button type="button" class="btn btn-dark btn-lg btn-block" data-toggle="modal" data-target="#exampleModalLong">
+            구매 내역
+        </button>
+        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModalLong2">
+            결과 보기
+        </button>
+
+    </div>
+
+    <!-- 구매 내역 -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">구매 내역</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{#purchaseLotto}}
+                        {{.}} <br/>
+                    {{/purchaseLotto}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 결과 내용 -->
+    <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle2"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle2">결과 내용</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    당첨 로또 번호 : {{winningLotto}} <br/>
+                    당첨 보너스 번호 : {{winningLottoBonus}} <br/> <br/>
+
+                    3개 일치 (5000원)- {{fifth}}개<br/>
+                    4개 일치 (50000원)- {{fourth}}개<br/>
+                    5개 일치 (1500000원)- {{third}}개<br/>
+                    5개 일치, 보너스 볼 일치(30000000원) - {{second}}개<br/>
+                    6개 일치 (2000000000원)- {{first}}개<br/><br/>
+
+                    당첨 금액은 {{resultMoney}}원 입니다.<br/>
+                    총 수익률은 {{resultRate}}%입니다.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- java script -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

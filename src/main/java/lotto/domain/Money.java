@@ -5,11 +5,15 @@ import lotto.domain.exception.LottoNotBuyException;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_MAX_PRICE = 100_000;
     private final int money;
 
     public Money(int money) {
         if (money < LOTTO_PRICE) {
             throw new AmountDeficientException("로또 1장의 가격은 1,000원 입니다.");
+        }
+        if (money > LOTTO_MAX_PRICE) {
+            throw new AmountDeficientException("구매 가능한 금액은 100,000원 미만 입니다.");
         }
         this.money = money;
     }

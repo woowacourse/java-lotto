@@ -31,6 +31,12 @@ public class Lottos {
         return rank;
     }
 
+    public List<Lotto> getTotalLottos() {
+        List<Lotto> totalLottos = new ArrayList<>(this.manualLottos);
+        totalLottos.addAll(this.autoLottos);
+        return totalLottos;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
