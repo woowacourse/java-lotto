@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LottoDaoTest {
     private LottoDao lottoDAO;
-    private DataSource dataSource = DBUtil.getDataSource();
+    private DataSource dataSource = DBUtil.getDataSource("lotto_test");
 
     @BeforeEach
     void setUp() {

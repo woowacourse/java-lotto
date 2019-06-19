@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottoDaoTest {
     private WinningLottoDao winningLottoDAO;
-    private DataSource dataSource = DBUtil.getDataSource();
+    private DataSource dataSource = DBUtil.getDataSource("lotto_test");
 
 
     @BeforeEach

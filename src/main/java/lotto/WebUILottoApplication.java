@@ -24,12 +24,13 @@ public class WebUILottoApplication {
     private static final String RESULT = "/result";
     private static final String SEARCH_ROUND = "/searchRound";
     private static final String ERROR_PAGE = "/error";
+    private static final String database = "lotto";
 
     public static void main(String[] args) {
         externalStaticFileLocation(EXTERNAL_FILE_LOCATION);
         port(8080);
 
-        DataSource dataSource = DBUtil.getDataSource();
+        DataSource dataSource = DBUtil.getDataSource(database);
         LottoDao lottoDao = new LottoDao(dataSource);
         ResultDao resultDao = new ResultDao(dataSource);
         RoundDao roundDao = new RoundDao(dataSource);
