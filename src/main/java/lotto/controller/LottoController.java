@@ -40,20 +40,28 @@ public class LottoController {
     }
 
     public Object printManual(Request req, Response res) throws SQLException {
-        int price = Integer.parseInt(req.queryParams("price"));
-        int manualCount = Integer.parseInt(req.queryParams("manualCount"));
-        LottoMoney lottoMoney = new LottoMoney(price);
+        Map<String, Object> model = new HashMap<>();
 
+        int manualCount = getManualCount(req, model);
+        LottoMoney lottoMoney = getLottoMoney(req, model, manualCount);
         List<String> manualLottos = getManualLottos(req, manualCount);
-        Lottos totalLottos = getTotalLottos(lottoMoney, manualLottos);
+        Lottos totalLottos = getTotalLottos(lottoMoney, manualLottos, model);
 
         req.session().attribute("totalLottos", totalLottos);
-
-        Map<String, Object> model = new HashMap<>();
-        model.put("autoCount", lottoMoney.getCountOfTicket() - manualCount);
-        model.put("manualCount", manualCount);
-        model.put("lottos", totalLottos);
         return render(model, MANUAL_LOTTO_HTML);
+    }
+
+    private int getManualCount(Request req, Map<String, Object> model) {
+        int manualCount = Integer.parseInt(req.queryParams("manualCount"));
+        model.put("manualCount", manualCount);
+        return manualCount;
+    }
+
+    private LottoMoney getLottoMoney(Request req, Map<String, Object> model, int manualCount) {
+        int price = Integer.parseInt(req.queryParams("price"));
+        LottoMoney lottoMoney = new LottoMoney(price);
+        model.put("autoCount", lottoMoney.getCountOfTicket() - manualCount);
+        return lottoMoney;
     }
 
     private List<String> getManualLottos(Request req, int manualCount) {
@@ -64,11 +72,12 @@ public class LottoController {
         return manualLottos;
     }
 
-    private Lottos getTotalLottos(LottoMoney lottoMoney, List<String> manualLottos) throws SQLException {
+    private Lottos getTotalLottos(LottoMoney lottoMoney, List<String> manualLottos, Map<String, Object> model) throws SQLException {
         roundDao.addNextRound();
         int maxRound = roundDao.getMaxRound();
         Lottos totalLottos = new Lottos(manualLottos, lottoMoney.getCountOfTicket());
         lottoDao.addTotalLottos(maxRound, totalLottos);
+        model.put("lottos", totalLottos);
         return totalLottos;
     }
 }

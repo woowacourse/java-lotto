@@ -30,32 +30,36 @@ public class ResultController {
     }
 
     public Object print(Request req, Response res) throws SQLException {
-        String input = req.queryParams("winningLotto");
-        int bonusNum = Integer.parseInt(req.queryParams("bonusBall"));
+        Map<String, Object> model = new HashMap<>();
         int maxRound = roundDao.getMaxRound();
 
-        WinningLotto winningLotto = getWinningLotto(input, bonusNum, maxRound);
-        Map<Rank, Integer> winners = getLottoWinners(req, maxRound, winningLotto);
+        WinningLotto winningLotto = getWinningLotto(req, maxRound);
+        LottoResult lottoResult = new LottoResult(req.session().attribute("totalLottos"), winningLotto);
 
-        Map<String, Object> model = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            model.put(rank.name(), winners.get(rank));
-        }
-        model.put("yield", resultDao.findYieldByRound(maxRound) * 100);
+        putLottoWinners(model, maxRound, lottoResult);
+        putYield(model, maxRound);
+
         return render(model, RESULT_HTML);
     }
 
-    private WinningLotto getWinningLotto(String input, int bonusNum, int maxRound) throws SQLException {
+    private WinningLotto getWinningLotto(Request req, int maxRound) throws SQLException {
+        String input = req.queryParams("winningLotto");
+        int bonusNum = Integer.parseInt(req.queryParams("bonusBall"));
         WinningLotto winningLotto = new WinningLotto(input, bonusNum);
         winningLottoDao.addWinningLotto(maxRound, winningLotto);
         return winningLotto;
     }
 
-    private Map<Rank, Integer> getLottoWinners(Request req, int maxRound, WinningLotto winningLotto) throws SQLException {
-        LottoResult lottoResult = new LottoResult(req.session().attribute("totalLottos"), winningLotto);
+    private void putLottoWinners(Map<String, Object> model, int maxRound, LottoResult lottoResult) throws SQLException {
         Map<Rank, Integer> winners = lottoResult.getWinners();
-        ResultDto resultDTO = new ResultDto(winners, lottoResult.getYield(), lottoResult.getTotalWinningMoney());
-        resultDao.addResult(maxRound, resultDTO);
-        return winners;
+        ResultDto resultDto = new ResultDto(winners, lottoResult.getYield(), lottoResult.getTotalWinningMoney());
+        resultDao.addResult(maxRound, resultDto);
+        for (Rank rank : Rank.values()) {
+            model.put(rank.name(), winners.get(rank));
+        }
+    }
+
+    private void putYield(Map<String, Object> model, int maxRound) throws SQLException {
+        model.put("yield", resultDao.findYieldByRound(maxRound) * 100);
     }
 }

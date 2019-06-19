@@ -31,25 +31,54 @@ public class SearchController {
 
     public Object searchRound(Request req, Response res) throws SQLException {
         Map<String, Object> model = new HashMap<>();
-        int currentRound = Integer.parseInt(req.queryParams("round_selector"));
-        model.put("round", currentRound);
 
-        List<Lotto> lottos = lottoDao.findLottoByRound(currentRound);
-        Map<Rank, Integer> winners = resultDao.findWinnerCountByRound(currentRound);
-        List<Integer> winningLotto = winningLottoDao.findWinningLottoByRound(currentRound);
-        int bonusNum = winningLottoDao.findBonusNumByRound(currentRound);
-        double yield = resultDao.findYieldByRound(currentRound);
+        int currentRound = getCurrentRound(req, model);
+
+        getLottos(model, currentRound);
+        getWinners(model, currentRound);
+        getWinningLotto(model, currentRound);
+        getBonusNum(model, currentRound);
+        getYield(model, currentRound);
+        getWinPrize(model, currentRound);
+
+        return render(model, ROUND_HTML);
+    }
+
+    private void getWinPrize(Map<String, Object> model, int currentRound) throws SQLException {
         long winPrize = resultDao.findWinPrizeByRound(currentRound);
+        model.put("winPrize", winPrize);
+    }
 
-        model.put("lottos", lottos);
+    private void getYield(Map<String, Object> model, int currentRound) throws SQLException {
+        double yield = resultDao.findYieldByRound(currentRound);
+        model.put("yield", yield * PERCENT);
+    }
+
+    private void getBonusNum(Map<String, Object> model, int currentRound) throws SQLException {
+        int bonusNum = winningLottoDao.findBonusNumByRound(currentRound);
+        model.put("bonusNum", bonusNum);
+    }
+
+    private void getWinningLotto(Map<String, Object> model, int currentRound) throws SQLException {
+        List<Integer> winningLotto = winningLottoDao.findWinningLottoByRound(currentRound);
+        model.put("winningLotto", winningLotto);
+    }
+
+    private void getWinners(Map<String, Object> model, int currentRound) throws SQLException {
+        Map<Rank, Integer> winners = resultDao.findWinnerCountByRound(currentRound);
         for (Rank rank : Rank.values()) {
             model.put(rank.name(), winners.get(rank));
         }
-        model.put("winningLotto", winningLotto);
-        model.put("bonusNum", bonusNum);
-        model.put("yield", yield * PERCENT);
-        model.put("winPrize", winPrize);
+    }
 
-        return render(model, ROUND_HTML);
+    private void getLottos(Map<String, Object> model, int currentRound) throws SQLException {
+        List<Lotto> lottos = lottoDao.findLottoByRound(currentRound);
+        model.put("lottos", lottos);
+    }
+
+    private int getCurrentRound(Request req, Map<String, Object> model) {
+        int currentRound = Integer.parseInt(req.queryParams("round_selector"));
+        model.put("round", currentRound);
+        return currentRound;
     }
 }
