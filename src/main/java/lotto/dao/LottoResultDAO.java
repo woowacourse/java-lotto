@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.domain.DBConnectionController;
+import lotto.domain.DBConnector;
 import lotto.domain.LottosResult;
 
 import java.sql.PreparedStatement;
@@ -8,9 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LottoResultDAO {
-    private final DBConnectionController controller;
+    private final DBConnector controller;
 
-    public LottoResultDAO(DBConnectionController controller) {
+    public LottoResultDAO(DBConnector controller) {
         this.controller = controller;
     }
 

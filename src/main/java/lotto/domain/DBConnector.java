@@ -4,7 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnectionController {
+public class DBConnector {
+    private DBConnector () {}
+
+    private static class Singleton {
+        private static final DBConnector instance = new DBConnector();
+    }
+
+    public static DBConnector getInstance () {
+        return Singleton.instance;
+    }
+
     public Connection getConnection() {
         Connection con = null;
         String server = "localhost"; // MySQL 서버 주소

@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.domain.DBConnectionController;
+import lotto.domain.DBConnector;
 import lotto.domain.LottosResult;
 import lotto.domain.creator.CreatorFactory;
 import lotto.domain.lotto.LottoFactory;
@@ -20,12 +20,12 @@ class LottoResultDAOTest {
 
     @BeforeEach
     void setUp() {
-        this.lottoResultDAO = new LottoResultDAO(new DBConnectionController());
+        this.lottoResultDAO = new LottoResultDAO(new DBConnector());
     }
 
     @Test
     void crdLottoResult() throws Exception {
-        LottoGameDAO lottoGameDAO = new LottoGameDAO(new DBConnectionController());
+        LottoGameDAO lottoGameDAO = new LottoGameDAO(new DBConnector());
         lottoGameDAO.addLottoGame(0);
 
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "12");

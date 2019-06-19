@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.domain.DBConnectionController;
+import lotto.domain.DBConnector;
 import lotto.domain.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,12 +12,12 @@ class MoneyDAOTest {
 
     @BeforeEach
     void setUp() {
-        moneyDAO = new MoneyDAO(new DBConnectionController());
+        moneyDAO = new MoneyDAO(new DBConnector());
     }
 
     @Test
     void crdMoney() throws Exception {
-        LottoGameDAO lottoGameDAO = new LottoGameDAO(new DBConnectionController());
+        LottoGameDAO lottoGameDAO = new LottoGameDAO(new DBConnector());
         //lottoGameDAO.addLottoGame(0);
 
         Money money = new Money("3000");

@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.domain.DBConnectionController;
+import lotto.domain.DBConnector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ class LottoGameDAOTest {
 
     @BeforeEach
     void setup() {
-        lottoGameDAO = new LottoGameDAO(new DBConnectionController());
+        lottoGameDAO = new LottoGameDAO(new DBConnector());
     }
 
     @Test

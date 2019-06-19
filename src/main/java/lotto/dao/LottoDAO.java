@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.domain.DBConnectionController;
+import lotto.domain.DBConnector;
 import lotto.domain.creator.LottoCreator;
 import lotto.domain.creator.ManualLottoCreator;
 import lotto.domain.lotto.Lotto;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoDAO {
-    private final DBConnectionController controller;
+    private final DBConnector controller;
 
-    public LottoDAO(DBConnectionController controller) {
+    public LottoDAO(DBConnector controller) {
         this.controller = controller;
     }
 

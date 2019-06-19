@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.domain.DBConnectionController;
+import lotto.domain.DBConnector;
 import lotto.domain.lotto.WinningLotto;
 
 import java.sql.PreparedStatement;
@@ -10,9 +10,9 @@ import java.sql.SQLException;
 public class WinningLottoDAO {
     private static String regexForDelteBracket = "(\\[|])+";
 
-    private final DBConnectionController controller;
+    private final DBConnector controller;
 
-    public WinningLottoDAO(DBConnectionController controller) {
+    public WinningLottoDAO(DBConnector controller) {
         this.controller = controller;
     }
 
