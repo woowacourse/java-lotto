@@ -28,7 +28,7 @@ public class LottoController {
 
         Price price = roundService.getPrice(req.queryParams(PRICE));
         int selfCount = lottoService.getSelfCount(req.queryParams(SELF_LOTTO_COUNT));
-        LottosFactory lottosFactory = lottoService.getLottosFactory(price,selfCount);
+        LottosFactory lottosFactory = lottoService.getLottosFactory(price, selfCount);
         model.put(SELF_LOTTO_COUNT, selfCount);
         req.session().attribute(PRICE, price);
         req.session().attribute(LOTTOS_FACTORY, lottosFactory);

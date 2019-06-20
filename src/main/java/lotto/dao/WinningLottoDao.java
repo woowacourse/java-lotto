@@ -1,9 +1,9 @@
 package lotto.dao;
 
+import lotto.db.DBUtils;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
-import lotto.db.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

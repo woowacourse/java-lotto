@@ -23,10 +23,10 @@ public class WinningLottoService {
         Connection conn = new DatabaseConnection().getConnection();
         WinningLottoDao winningLottoDao = new WinningLottoDao(conn);
 
-        winningLottoDao.addWinningLotto(round,winningLotto);
+        winningLottoDao.addWinningLotto(round, winningLotto);
     }
 
-    public WinningLotto getWinningLottoByRound(int round) throws SQLException{
+    public WinningLotto getWinningLottoByRound(int round) throws SQLException {
         Connection conn = new DatabaseConnection().getConnection();
         WinningLottoDao winningLottoDao = new WinningLottoDao(conn);
 

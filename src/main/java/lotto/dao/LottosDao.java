@@ -1,8 +1,8 @@
 package lotto.dao;
 
+import lotto.db.DBUtils;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.db.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +14,6 @@ import java.util.List;
 public class LottosDao {
     private static final String INSERT_SQL = "INSERT INTO lotto(num_1,num_2,num_3,num_4,num_5,num_6,round_id) values(?,?,?,?,?,?,?)";
     private static final String SELECT_SQL = "SELECT * FROM lotto WHERE round_id = ?";
-    private static final String DELETE_ALL_LOTTOS_SQL = "DELETE FROM lotto";
     private static final String COL_NAME = "num";
 
     private final Connection conn;
@@ -44,11 +43,6 @@ public class LottosDao {
         }
 
         return new Lottos(lottos);
-    }
-
-    public void deleteAllLottos() throws SQLException {
-        PreparedStatement pstmt = conn.prepareStatement(DELETE_ALL_LOTTOS_SQL);
-        pstmt.executeUpdate();
     }
 
 }

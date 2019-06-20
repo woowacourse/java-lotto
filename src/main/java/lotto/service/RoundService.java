@@ -16,7 +16,7 @@ public class RoundService {
         return roundDao.findLatestRound();
     }
 
-    public List<Integer> getAllRound() throws SQLException{
+    public List<Integer> getAllRound() throws SQLException {
         return roundDao.findAllRound();
     }
 

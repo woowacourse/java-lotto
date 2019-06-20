@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoundDao {
-    private static final String INSERT_ROUND_AND_PRICE_SQL = "INSERT INTO round(id_,price) values(?,?)";
-    private static final String SELECT_LAST_ROUND_SQL = "SELECT MAX(id_) FROM round";
-    private static final String SELECT_ALL_ROUND_SQL = "SELECT id_ FROM round";
-    private static final String SELECT_PRICE_BY_ROUND_SQL = "SELECT price FROM round WHERE id_=?";
-    private static final String LATEST_ROUND_ID = "MAX(id_)";
-    private static final String ROUND_ID = "id_";
+    private static final String INSERT_ROUND_AND_PRICE_SQL = "INSERT INTO round(id,price) values(?,?)";
+    private static final String SELECT_LAST_ROUND_SQL = "SELECT MAX(id) FROM round";
+    private static final String SELECT_ALL_ROUND_SQL = "SELECT id FROM round";
+    private static final String SELECT_PRICE_BY_ROUND_SQL = "SELECT price FROM round WHERE id=?";
+    private static final String LATEST_ROUND_ID = "MAX(id)";
+    private static final String ROUND_ID = "id";
     private static final String PRICE = "price";
     private static final int FIRST_ROUND = 1;
 

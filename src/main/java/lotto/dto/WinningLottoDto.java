@@ -24,6 +24,6 @@ public class WinningLottoDto {
     }
 
     public WinningLotto getWinningLotto() {
-        return new WinningLotto(lotto,bonus);
+        return new WinningLotto(lotto, bonus);
     }
 }

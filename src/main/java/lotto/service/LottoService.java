@@ -1,7 +1,6 @@
 package lotto.service;
 
 import lotto.dao.LottosDao;
-import lotto.dao.RoundDao;
 import lotto.db.DatabaseConnection;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
@@ -43,7 +42,7 @@ public class LottoService {
         lottosDao.addLottos(round, lottos);
     }
 
-    public Lottos getLottoByRound(int round) throws SQLException{
+    public Lottos getLottoByRound(int round) throws SQLException {
         Connection conn = new DatabaseConnection().getConnection();
         LottosDao lottosDao = new LottosDao(conn);
 

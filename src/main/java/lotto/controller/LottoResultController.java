@@ -1,6 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
+import lotto.domain.Price;
+import lotto.domain.WinningLotto;
 import lotto.service.LottoResultService;
 import lotto.service.LottoService;
 import lotto.service.RoundService;
@@ -9,9 +12,7 @@ import lotto.utils.ResultMessage;
 import lotto.utils.ViewUtils;
 import spark.Route;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static lotto.controller.LottoController.PRICE;
@@ -37,7 +38,7 @@ public class LottoResultController {
 
         Price price = req.session().attribute(PRICE);
         model.put(YIELD, lottoResult.findYield(price.getPrice()));
-        model.put(LOTTO_RESULT, ResultMessage.getResult(lottoResult, getRanks()));
+        model.put(LOTTO_RESULT, ResultMessage.getResult(lottoResult));
 
         int round = req.session().attribute(ROUND);
 
@@ -48,7 +49,7 @@ public class LottoResultController {
         return ViewUtils.render(model, "result.html");
     };
 
-    public static Route makeLottoResultByRoundPage2 = (req, res) -> {
+    public static Route makeLottoResultByRoundPage = (req, res) -> {
         LottoService lottoService = new LottoService();
         WinningLottoService winningLottoService = new WinningLottoService();
         LottoResultService lottoResultService = new LottoResultService();
@@ -60,19 +61,9 @@ public class LottoResultController {
         WinningLotto winningLotto = winningLottoService.getWinningLottoByRound(round);
         LottoResult lottoResult = LottoResult.generateLottoResult(lottos, winningLotto);
 
-        model.put(YIELD, lottoResultService.getYield(lottoResult,round));
+        model.put(YIELD, lottoResultService.getYield(lottoResult, round));
         model.put(LOTTO_RESULT, lottoResultService.getResultMessage(lottoResult));
         return ViewUtils.render(model, "result.html");
     };
-
-    private static List<Rank> getRanks() {
-        List<Rank> ranks = new ArrayList<>();
-        ranks.add(Rank.FIRST);
-        ranks.add(Rank.SECOND);
-        ranks.add(Rank.THIRD);
-        ranks.add(Rank.FOURTH);
-        ranks.add(Rank.FIFTH);
-        return ranks;
-    }
 
 }

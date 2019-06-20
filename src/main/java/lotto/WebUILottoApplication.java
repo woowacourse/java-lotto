@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.controller.RoundController;
-import lotto.controller.LottoResultController;
 import lotto.controller.LottoController;
+import lotto.controller.LottoResultController;
+import lotto.controller.RoundController;
 import lotto.controller.WinningLottoController;
 
 import java.io.UnsupportedEncodingException;
@@ -13,12 +13,11 @@ import static spark.Spark.*;
 public class WebUILottoApplication {
 
     public static void main(String[] args) {
-        externalStaticFileLocation("src/main/resources/templates");
         staticFiles.location("/static");
 
         get("/", RoundController.makeRoundPage);
 
-        get("/result", LottoResultController.makeLottoResultByRoundPage2);
+        get("/result", LottoResultController.makeLottoResultByRoundPage);
 
         post("/make/lotto", LottoController.makeSelfLottoPage);
 

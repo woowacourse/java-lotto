@@ -2,14 +2,9 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
-import lotto.domain.Rank;
 import lotto.utils.ResultMessage;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static lotto.domain.Rank.MISS;
 
 public class OutputView {
 
@@ -21,8 +16,7 @@ public class OutputView {
     public static void printStatistic(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        List<Rank> ranks = Arrays.stream(Rank.values()).filter(rank -> rank != MISS).collect(Collectors.toList());
-        ResultMessage.getResult(lottoResult, ranks).stream().forEach(message -> {
+        ResultMessage.getResult(lottoResult).stream().forEach(message -> {
             System.out.println(message);
         });
     }
