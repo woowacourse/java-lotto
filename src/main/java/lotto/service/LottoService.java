@@ -42,4 +42,11 @@ public class LottoService {
 
         lottosDao.addLottos(round, lottos);
     }
+
+    public Lottos getLottoByRound(int round) throws SQLException{
+        Connection conn = new DatabaseConnection().getConnection();
+        LottosDao lottosDao = new LottosDao(conn);
+
+        return lottosDao.findLottoByRound(round);
+    }
 }

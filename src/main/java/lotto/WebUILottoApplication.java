@@ -18,7 +18,7 @@ public class WebUILottoApplication {
 
         get("/", RoundController.makeRoundPage);
 
-        get("/result", LottoResultController.makeLottoResultByRoundPage);
+        get("/result", LottoResultController.makeLottoResultByRoundPage2);
 
         post("/make/lotto", LottoController.makeSelfLottoPage);
 

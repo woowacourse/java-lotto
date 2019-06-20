@@ -25,4 +25,11 @@ public class WinningLottoService {
 
         winningLottoDao.addWinningLotto(round,winningLotto);
     }
+
+    public WinningLotto getWinningLottoByRound(int round) throws SQLException{
+        Connection conn = new DatabaseConnection().getConnection();
+        WinningLottoDao winningLottoDao = new WinningLottoDao(conn);
+
+        return winningLottoDao.findWinningLottoByRound(round);
+    }
 }
