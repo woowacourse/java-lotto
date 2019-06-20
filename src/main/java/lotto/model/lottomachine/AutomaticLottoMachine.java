@@ -1,45 +1,38 @@
 package lotto.model.lottomachine;
 
 import lotto.model.Lotto;
-import lotto.model.Lottos;
-import lotto.model.Money;
+import lotto.model.shufflemethod.RandomShuffleMethod;
+import lotto.model.shufflemethod.ShuffleMethod;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import static lotto.model.Lotto.LOTTO_NUMBER_LENGTH;
-import static lotto.model.LottoNumber.MAXIMUM_LOTTO_NUMBER;
-import static lotto.model.LottoNumber.MINMUM_LOTTO_NUMBERS;
 
 public class AutomaticLottoMachine implements LottoMachine {
+    public static final int MAXIMUM_LOTTO_NUMBER = 45;
+    public static final int MINMUM_LOTTO_NUMBERS = 1;
 
-    private final int automaticLottoCount;
+    private ShuffleMethod shuffleMethod;
+    private List<Integer> all45Numbers;
 
-    public AutomaticLottoMachine(Money money, int manualLottoCount) {
-        this.automaticLottoCount = money.calculateAutomatiLottoCount(manualLottoCount);
+    public AutomaticLottoMachine() {
+        this(new RandomShuffleMethod());
+    }
+
+    public AutomaticLottoMachine(ShuffleMethod shuffleMethod) {
+        this.shuffleMethod = shuffleMethod;
+        this.all45Numbers = create45Numbers();
+    }
+
+    private List<Integer> create45Numbers() {
+        List<Integer> all45Numbers = new ArrayList<>();
+        for (int i = MINMUM_LOTTO_NUMBERS; i <= MAXIMUM_LOTTO_NUMBER; i++) {
+            all45Numbers.add(i);
+        }
+        return all45Numbers;
     }
 
     @Override
-    public Lottos generateLottos() {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < automaticLottoCount; i++) {
-            lottos.add(new Lotto(generateRandomLottoNumbers()));
-        }
-        return new Lottos(lottos);
+    public Lotto generateLotto() {
+        return new Lotto(shuffleMethod.shuffle(this.all45Numbers));
     }
-
-    private static List<Integer> generateRandomLottoNumbers() {
-        Set<Integer> numbers = new HashSet<>();
-        while (numbers.size() < LOTTO_NUMBER_LENGTH) {
-            numbers.add(generateRandomLottoNumberIndex());
-        }
-        return new ArrayList<>(numbers);
-    }
-
-    private static int generateRandomLottoNumberIndex() {
-        return (int) (Math.random() * (MAXIMUM_LOTTO_NUMBER) + MINMUM_LOTTO_NUMBERS);
-    }
-
 }

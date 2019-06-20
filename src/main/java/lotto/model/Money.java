@@ -10,15 +10,21 @@ public class Money {
 
     public Money(String input) {
         int currentMoney = Integer.parseInt(input);
-        if (currentMoney < PRICE_OF_LOTTO || currentMoney % PRICE_OF_LOTTO != DIVISION_CONDITION) {
-            throw new IllegalMoneyException();
-        }
+        checkValidMoneyAmount(currentMoney);
         this.money = currentMoney;
     }
 
+    public int getMoney() {
+        return money;
+    }
 
-    public double calculateProfitRate(double sum) {
-        return sum / money;
+    private void checkValidMoneyAmount(int currentMoney) {
+        if (currentMoney < PRICE_OF_LOTTO) {
+            throw new IllegalMoneyException();
+        }
+        if (currentMoney % PRICE_OF_LOTTO != DIVISION_CONDITION) {
+            throw new IllegalMoneyException();
+        }
     }
 
 
@@ -27,7 +33,7 @@ public class Money {
         return (comparison) > this.money;
     }
 
-    public int calculateAutomatiLottoCount(int count) {
+    public int calculateAutomaticLottoCount(int count) {
         return (money - (count * PRICE_OF_LOTTO)) / PRICE_OF_LOTTO;
     }
 }

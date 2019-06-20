@@ -2,7 +2,9 @@ package lotto.model;
 
 import lotto.model.exceptions.IllegalLottoNumberException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
@@ -17,6 +19,13 @@ public class LottoNumber {
         }
     }
 
+    public LottoNumber(int number) throws IllegalLottoNumberException {
+        if (number < MINMUM_LOTTO_NUMBERS || number > MAXIMUM_LOTTO_NUMBER) {
+            throw new IllegalLottoNumberException();
+        }
+        this.number = number;
+    }
+
     public static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> returnList = new ArrayList<>();
         for (int i = 0, n = numbers.size(); i < n; i++) {
@@ -25,12 +34,8 @@ public class LottoNumber {
         return returnList;
     }
 
-    public LottoNumber(int number) throws IllegalLottoNumberException {
-        //todo 상수
-        if (number < MINMUM_LOTTO_NUMBERS || number > MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalLottoNumberException();
-        }
-        this.number = number;
+    public int getNumber() {
+        return number;
     }
 
     @Override

@@ -2,18 +2,33 @@ package lotto.model;
 
 import lotto.model.exceptions.IllegalNumberCombinationException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_LENGTH = 6;
+    private static final String SEPERATOR = ",";
 
     private List<LottoNumber> numbers;
-
 
     public Lotto(List<Integer> numbers) {
         checkDuplication(numbers);
         checkLottoLength(numbers);
         this.numbers = LottoNumber.convertNumbersToLottoNumbers(numbers);
+    }
+
+    public Lotto(String inputNumbers) {
+        this(convert(inputNumbers));
+    }
+
+    private static List<Integer> convert(String inputNumbers) {
+        List<String> inputs = new ArrayList<>(Arrays.asList(inputNumbers.split(SEPERATOR)));
+        List<Integer> lottoNumbers = new ArrayList<>();
+
+        inputs.forEach(input -> lottoNumbers.add(Integer.parseInt(input)));
+        return lottoNumbers;
     }
 
     private void checkDuplication(List<Integer> numbers) {
@@ -43,8 +58,49 @@ public class Lotto {
         return Prize.getPrizeRank(countMatchLottoNumber(winningLotto), containsNumber(bonusNumber));
     }
 
+    public List<LottoNumber> getNumbers() {
+        return numbers;
+    }
+
+    public int getFirst() {
+        return this.numbers.get(0).getNumber();
+    }
+
+    public int getSecond() {
+        return this.numbers.get(1).getNumber();
+    }
+
+    public int getThird() {
+        return this.numbers.get(2).getNumber();
+    }
+
+    public int getFourth() {
+        return this.numbers.get(3).getNumber();
+    }
+
+    public int getFifth() {
+        return this.numbers.get(4).getNumber();
+    }
+
+    public int getSixth() {
+        return this.numbers.get(5).getNumber();
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
