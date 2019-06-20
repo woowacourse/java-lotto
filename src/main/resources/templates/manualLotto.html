@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>로또 구매 결과</title>
+</head>
+<body>
+<form action="/result" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>구매 결과</h1>
+                자동으로 {{autoCount}}장 수동으로 {{manualCount}}장 구매했습니다.
+                <div id="lottoList">
+                    <tr>
+                        {{#lottos.totalLottos}}
+                        <td>{{this}}</td><br />
+                        {{/lottos.totalLottos}}
+                    </tr>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="winning-lotto">당첨 번호 입력</span>
+                    </div>
+                    <input type="text" name="winningLotto" id="winningLotto" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                </div>
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                       <span class="input-group-text" id="bonus-ball">보너스 볼 입력</span>
+                    </div>
+                    <input type="number" name="bonusBall" id="bonusBall" min="1" max="45" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">결과 보기</button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="cancel()">재입력</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="js/lotto.js"></script>
+</body>
+</html>

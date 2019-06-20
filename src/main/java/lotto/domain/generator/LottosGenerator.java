@@ -36,5 +36,4 @@ public class LottosGenerator {
     private static Lotto generateRandomLotto() {
         return new Lotto(LottoRandomGenerator.generate());
     }
-
 }

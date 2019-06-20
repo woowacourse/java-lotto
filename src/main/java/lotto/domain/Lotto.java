@@ -15,6 +15,10 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    public int getLottoNumberByIndex(int i) {
+        return lottoNumbers.get(i).getValue();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,6 +40,4 @@ public class Lotto {
                 .collect(Collectors.joining(", "))
                 + "]";
     }
-
-
 }

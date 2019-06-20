@@ -25,7 +25,6 @@ public class ConsoleUILottoApplication {
             int bonusBall = InputView.receiveBonus();
             WinningLotto winningLotto = new WinningLotto(winningLottoInput, bonusBall);
 
-
             LottoResult lottoResult = new LottoResult(totalLottos, winningLotto);
             OutputView.printLottoResult(lottoResult);
         } catch (NumberFormatException e) {

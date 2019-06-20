@@ -15,13 +15,11 @@ public class LottoResult {
 
     private Map<Rank, Integer> calculateRank(Lottos lottos, WinningLotto winningLotto) {
         Map<Rank, Integer> winners = initWinners();
-        Rank rank;
         for (int i = 0; i < lottos.getLottoCount(); i++) {
-            rank = winningLotto.getCountOfMatch(lottos.getLottoByIndex(i));
+            Rank rank = winningLotto.getCountOfMatch(lottos.getLottoByIndex(i));
             winners.put(rank, winners.get(rank) + 1);
         }
         return winners;
-
     }
 
     private Map<Rank, Integer> initWinners() {
@@ -33,11 +31,21 @@ public class LottoResult {
     }
 
     private double calculateYield(Lottos lottos) {
+        int totalWinningMoney = getTotalWinningMoney();
+        return (double) totalWinningMoney / (lottos.getLottoCount() * LottoMoney.LOTTO_PRICE);
+    }
+
+    public int getTotalWinningMoney() {
         int totalWinningMoney = 0;
         for (Rank rank : winners.keySet()) {
             totalWinningMoney += rank.getWinningMoney() * winners.get(rank);
         }
-        return (double) totalWinningMoney / (lottos.getLottoCount() * LottoMoney.LOTTO_PRICE);
+        return totalWinningMoney;
+    }
+
+
+    public Map<Rank, Integer> getWinners() {
+        return winners;
     }
 
     public double getYield() {
