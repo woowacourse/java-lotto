@@ -11,9 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class InputValidatorTest {
     Lotto lotto;
     Money money;
+
     @BeforeEach
     void setUp() {
-        lotto = new Lotto(LottoNumber.getLotto(Arrays.asList(1,2,3,4,5,6)));
+        lotto = new Lotto(LottoNumber.getLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         money = new Money(5000);
     }
 
@@ -59,32 +60,33 @@ public class InputValidatorTest {
 
     @Test
     void 보너스볼_음수() {
-        assertThat(InputValidator.isNotValidWinningLotto(lotto,"-1")).isTrue();
+        assertThat(InputValidator.isNotValidWinningLotto(lotto, "-1")).isTrue();
     }
 
     @Test
     void 보너스볼_로또번호와중복() {
-        assertThat(InputValidator.isNotValidWinningLotto(lotto,"1")).isTrue();
+        assertThat(InputValidator.isNotValidWinningLotto(lotto, "1")).isTrue();
     }
 
     @Test
     void 보너스볼_문자() {
-        assertThat(InputValidator.isNotValidWinningLotto(lotto,"abs")).isTrue();assertThat(InputValidator.isNotValidLotto(Arrays.asList("1,2,3, ,5,6,7"))).isTrue();
+        assertThat(InputValidator.isNotValidWinningLotto(lotto, "abs")).isTrue();
+        assertThat(InputValidator.isNotValidLotto(Arrays.asList("1,2,3, ,5,6,7"))).isTrue();
     }
 
     @Test
     void 수동로또개수_문자() {
-        assertThat(InputValidator.isNotValidCustomLottoCount("asd",money)).isTrue();
+        assertThat(InputValidator.isNotValidCustomLottoCount("asd", money)).isTrue();
     }
 
     @Test
     void 수동로또개수_음수() {
-        assertThat(InputValidator.isNotValidCustomLottoCount("-1",money)).isTrue();
+        assertThat(InputValidator.isNotValidCustomLottoCount("-1", money)).isTrue();
     }
 
     @Test
     void 수동로또_돈초과() {
-        assertThat(InputValidator.isNotValidCustomLottoCount("6",money)).isTrue();
+        assertThat(InputValidator.isNotValidCustomLottoCount("6", money)).isTrue();
     }
 
     @Test
@@ -110,7 +112,6 @@ public class InputValidatorTest {
 
         assertThat(InputValidator.isNotValidCustomLottoes(lottoInput)).isTrue();
     }
-
 
 
 }

@@ -20,10 +20,12 @@ public class Lottoes {
 
     public List<Rank> getRanks(WinningLotto winningLotto) {
         return lottoes.stream()
-                .map(l -> {
-                 return Rank.valueOf(winningLotto.getMatchCount(l),winningLotto.isMatchBonus(l));
-                })
+                .map(l -> Rank.valueOf(winningLotto.getMatchCount(l), winningLotto.isMatchBonus(l)))
                 .collect(Collectors.toList());
+    }
+
+    public List<Lotto> getLottoes() {
+        return lottoes;
     }
 
     public int getSize() {

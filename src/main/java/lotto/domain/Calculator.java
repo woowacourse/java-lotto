@@ -1,14 +1,15 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Result {
+public class Calculator {
     private Map<Rank, Integer> results = new HashMap<>();
 
-    public Result() {
+    public Calculator() {
         for (Rank rank : Rank.values()) {
             results.put(rank, 0);
         }
@@ -24,6 +25,26 @@ public class Result {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
+    public List<Integer> getMatchCounts() {
+        List<Integer> matchCounts = new ArrayList<>();
+
+        for (Rank rank : Rank.values()) {
+            if (rank == Rank.NONE) {
+                continue;
+            }
+            matchCounts.add(getMatchlottoCountPerRank(rank));
+        }
+        return matchCounts;
+    }
+
+    public double getWholeMoney() {
+        return results
+                .entrySet()
+                .stream()
+                .mapToDouble(r -> r.getKey().getMoney() * r.getValue())
+                .sum();
+    }
+
     public int getMatchlottoCountPerRank(Rank rank) {
         return results.get(rank);
     }
@@ -33,6 +54,6 @@ public class Result {
     }
 
     public double getRate(Money money) {
-       return money.getRate(results);
+        return money.getRate(results);
     }
 }

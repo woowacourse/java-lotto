@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>수동 로또 입력</title>
+</head>
+<body>
+<div align="center">
+    <form action="/winning" method="post">
+        <h1>수동 로또 입력</h1>
+        <div>수동 로또 번호를 입력해 주세요.</div>
+        <br>
+        <div id="lottoNumbers"></div>
+        {{#customLottoCount}}
+        <div id="customLottoCount" hidden>{{customLottoCount}}</div>
+        {{/customLottoCount}}
+        {{#each customLottoNumbers}}
+        <span>수동로또{{this}} </span><input type="text" name="customLottoNumbers"><br>
+        <input type="hidden" name="roundNumber" value="{{this}}">
+        {{/each}}
+        <button type="submit"> 확인</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.CustomLottoCount;
-import lotto.domain.CustomLottoCountFactory;
 import lotto.InputValidator;
 import lotto.domain.*;
 import lotto.view.InputView;
@@ -28,10 +26,10 @@ public class ConsoleUILottoApplication {
         String bonusBall = InputView.promptBonusBall();
         WinningLotto winningLotto = createWinningLotto(winnigLottoNumbers, bonusBall);// ConsoleUILottoApplication ->
         // createWinningLotto
-        Result result = ResultFactory.createResult();
-        result.calculateResult(lottoes, winningLotto);
+        Calculator calculator = CalculatorFactory.createResult();
+        calculator.calculateResult(lottoes, winningLotto);
 
-        OutputView.printReults(result, money);
+        OutputView.printResults(calculator, money);
     }
 
     private static Money createMoney(String moneyInput) {

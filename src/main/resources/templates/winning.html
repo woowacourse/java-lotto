@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>당첨 번호 입력</title>
+</head>
+<body>
+<div align="center">
+    <form action="/result" method="post">
+        <div>구매된 로또 번호</div>
+        {{#each lottoes}}
+        <div>{{this}}<br></div>
+        {{/each}}
+        <br>
+        <div>당첨번호를 입력해 주세요.</div>
+        <input id="winningNumber" type="text" name="winningNumber">
+        <div>보너스 볼을 입력해 주세요.</div>
+        <input id="bonusBall" type="text" name="bonusBall">
+        <button type="submit">확인</button>
+        <br>
+    </form>
+</div>
+</body>
+</html>

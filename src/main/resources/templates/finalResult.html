@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 결과</title>
+</head>
+<body>
+<div align="center">
+    <h1>당첨 통계</h1>
+    <div>-----------</div>
+    {{#FIRST}}
+    <div> {{matchCount}}개 일치 ({{money}}원)- {{matchLottoCount}}개</div>
+    <br>
+    {{/FIRST}}
+    {{#SECOND}}
+    <div> {{matchCount}}개 일치,보너스 볼 일치 ({{money}}원)- {{matchLottoCount}}개</div>
+    <br>
+    {{/SECOND}}
+    {{#THIRD}}
+    <div> {{matchCount}}개 일치 ({{money}}원)- {{matchLottoCount}}개</div>
+    <br>
+    {{/THIRD}}
+    {{#FORTH}}
+    <div> {{matchCount}}개 일치 ({{money}}원)- {{matchLottoCount}}개</div>
+    <br>
+    {{/FORTH}}
+    {{#FIFTH}}
+    <div> {{matchCount}}개 일치 ({{money}}원)- {{matchLottoCount}}개</div>
+    <br>
+    {{/FIFTH}}
+    <div>수익률은 {{rate}} % 입니다.</div>
+    <br>
+    {{#each round}}
+    <form action="/round" method="post">
+        <button type="submit" name="{{this}}">{{this}} 회차 기록</button>
+        <input type="hidden" name="roundNumber" value="{{this}}">
+    </form>
+    {{/each}}
+</div>
+</body>
+</html>

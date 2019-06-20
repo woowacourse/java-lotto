@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -25,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> autoLottoNumbers = lottoNumbers.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX);
         Collections.sort(autoLottoNumbers);
-        return autoLottoNumbers;
+        return new ArrayList<>(autoLottoNumbers);
     }
 
     public static boolean isNotValidLottoNumber(int number) {
