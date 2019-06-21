@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.db.dao.LottoTicketDAO;
 import lotto.db.dao.LottoGameDAO;
+import lotto.db.dao.LottoTicketDAO;
 import lotto.domain.LottoTicket;
 import lotto.domain.RankType;
 import lotto.domain.WinStatistics;
