@@ -1,6 +1,5 @@
 package lotto.db.dao;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
 import lotto.domain.dto.LottoGameResultDTO;
 
@@ -13,40 +12,7 @@ import static lotto.db.DBConnection.getConnection;
 public class LottoGameDAO {
     private static final Connection conn = getConnection();
 
-    public static void addWinningLottoTicket(WinningLotto winningLotto) throws SQLException {
-        List<LottoNumber> lottoNumbers = winningLotto.getWinningNumbers().getLottoNumbers();
-
-        int lotto_id = addLotto();
-        addLottoNumbers(lotto_id, lottoNumbers);
-        int winning_id = addWinningLotto(winningLotto, lotto_id);
-        addWinningLottoIdIntoLottoGame(winning_id);
-    }
-
-    private static int addLotto() throws SQLException {
-        // 당첨로또의 로또 타입은 1
-        String query = "INSERT INTO lotto.lotto (type) VALUES (1)";
-        PreparedStatement pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-
-        pstmt.executeUpdate();
-
-        ResultSet rs = pstmt.getGeneratedKeys();
-        return (rs.next()) ? rs.getInt(1) : 0;
-    }
-
-    private static void addLottoNumbers(int autoInsertedKey, List<LottoNumber> numbers) throws SQLException {
-        String query = "INSERT INTO lotto.lottonumber (lotto_id, number) VALUES (?, ?)";
-        PreparedStatement pstmt = conn.prepareStatement(query);
-
-        for (LottoNumber number : numbers) {
-            pstmt.setInt(1, autoInsertedKey);
-            pstmt.setInt(2, number.getNumber());
-            pstmt.addBatch();
-            pstmt.clearParameters();
-        }
-        pstmt.executeBatch();
-    }
-
-    private static int addWinningLotto(WinningLotto winningLotto, int autoInsertedKey) throws SQLException {
+    public static int addWinningLotto(WinningLotto winningLotto, int autoInsertedKey) throws SQLException {
         String query = "INSERT INTO lotto.winninglotto (lotto_id, bonusBall) VALUES (?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
@@ -59,7 +25,7 @@ public class LottoGameDAO {
         return (rs.next()) ? rs.getInt(1) : 0;
     }
 
-    private static void addWinningLottoIdIntoLottoGame(int winning_id) throws SQLException {
+    public static void addWinningLottoIdIntoLottoGame(int winning_id) throws SQLException {
         String query = "UPDATE lotto.lottogame SET winning_id = ? WHERE winning_id IS NULL";
         PreparedStatement pstmt = conn.prepareStatement(query);
 

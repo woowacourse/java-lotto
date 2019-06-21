@@ -1,9 +1,9 @@
 package lotto.controller;
 
-import lotto.db.dao.LottoTicketDAO;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.factory.LottoTicketsFactory;
+import lotto.service.LottoTicketService;
 import spark.Route;
 
 import java.util.*;
@@ -30,7 +30,7 @@ public class PurchasingLottoController {
         model.put("amountOfCustom", inputCustoms.size());
         model.put("amountOfAuto", (money.getMoney() / MONEY_OFFSET) - inputCustoms.size());
 
-        LottoTicketDAO.addLottoTicket(lottoTickets);
+        LottoTicketService.addLottoTicket(lottoTickets);
 
         return render(model, "purchased_tickets.html");
     };

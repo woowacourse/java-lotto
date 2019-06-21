@@ -7,6 +7,7 @@ import lotto.domain.RankType;
 import lotto.domain.WinStatistics;
 import lotto.domain.WinningLotto;
 import lotto.domain.dto.LottoGameResultDTO;
+import lotto.service.LottoGameService;
 import spark.Route;
 
 import java.util.ArrayList;
@@ -29,7 +30,8 @@ public class LottoGameController {
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.append(req.queryParams("num" + i)).append(",");
         }
-        LottoGameDAO.addWinningLottoTicket(WinningLotto.of(lottoNumbers.toString(), Integer.parseInt(req.queryParams("bonusBall"))));
+
+        LottoGameService.addWinningLottoTicket(lottoNumbers.toString(), req.queryParams("bonusBall"));
 
         res.redirect("/win/result");
         return null;

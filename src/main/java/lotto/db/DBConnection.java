@@ -22,7 +22,11 @@ public class DBConnection {
 
         // 드라이버 연결
         try {
-            con = DriverManager.getConnection("jdbc:mysql://" + server + "/" + database + "?serverTimezone=UTC&useSSL=false", userName, password);
+            String url = new StringBuilder("jdbc:mysql://")
+                    .append(server)
+                    .append("/").append(database)
+                    .append("?serverTimezone=UTC&useSSL=false").toString();
+            con = DriverManager.getConnection(url, userName, password);
             System.out.println("정상적으로 연결되었습니다.");
         } catch (SQLException e) {
             System.err.println("연결 오류:" + e.getMessage());

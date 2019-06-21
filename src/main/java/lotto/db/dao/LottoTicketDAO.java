@@ -2,7 +2,6 @@ package lotto.db.dao;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.domain.factory.LottoTicketFactory;
 
 import java.sql.*;
@@ -14,18 +13,9 @@ import static lotto.db.DBConnection.getConnection;
 public class LottoTicketDAO {
     private static final Connection conn = getConnection();
 
-    public static void addLottoTicket(LottoTickets inputLottoTickets) throws SQLException {
-        List<LottoTicket> lottoTickets = inputLottoTickets.getLottoTickets();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            int lotto_id = addLotto();
-            addLottoNumbers(lotto_id, lottoTicket.getLottoNumbers());
-            addLottoGame(lotto_id);
-        }
-    }
-
-    private static int addLotto() throws SQLException {
-        // 일반로또의 로또 타입은 0
-        String query = "INSERT INTO lotto.lotto (type) VALUES (0)";
+    public static int addLotto(int lottoType) throws SQLException {
+        // 일반로또의 로또 타입은 0, 당첨 로또 타입은 1
+        String query = "INSERT INTO lotto.lotto (type) VALUES (" + lottoType + ")";
         PreparedStatement pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
         pstmt.executeUpdate();
@@ -34,7 +24,7 @@ public class LottoTicketDAO {
         return (rs.next()) ? rs.getInt(1) : 0;
     }
 
-    private static void addLottoNumbers(int autoInsertedKey, List<LottoNumber> numbers) throws SQLException {
+    public static void addLottoNumbers(int autoInsertedKey, List<LottoNumber> numbers) throws SQLException {
         String query = "INSERT INTO lotto.lottonumber (lotto_id, number) VALUES (?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(query);
 
@@ -47,7 +37,7 @@ public class LottoTicketDAO {
         pstmt.executeBatch();
     }
 
-    private static void addLottoGame(int lotto_id) throws SQLException {
+    public static void addLottoGame(int lotto_id) throws SQLException {
         String query = "INSERT INTO lotto.lottogame (lotto_id) VALUES (?);";
         PreparedStatement pstmt = conn.prepareStatement(query);
 
