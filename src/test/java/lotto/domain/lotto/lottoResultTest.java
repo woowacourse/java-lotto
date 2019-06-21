@@ -1,14 +1,14 @@
 package lotto.domain.lotto;
 
 import lotto.domain.*;
-import lotto.domain.vo.LottoResult_VO;
+import lotto.domain.vo.LottoResultVO;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class lottoResult_Test {
+public class lottoResultTest {
 
     @Test
     void 매칭_테스트() {
@@ -20,7 +20,7 @@ public class lottoResult_Test {
         LottoTicket ticket = new LottoTicket(amount, customLotto);
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
 
-        LottoResult_VO lottoResult_vo = new LottoResult_VO(new LottoResult(ticket, winningLotto).matchLotto(), price);
+        LottoResultVO lottoResult_vo = new LottoResultVO(new LottoResult(ticket, winningLotto).matchLotto(), price);
         assertThat(lottoResult_vo.getResult().get(Rank.FOURTH)).isEqualTo(1);
         assertThat(lottoResult_vo.getResult().get(Rank.FIFTH)).isEqualTo(2);
         assertThat(lottoResult_vo.getResult().get(Rank.MISS)).isEqualTo(5);
@@ -28,7 +28,7 @@ public class lottoResult_Test {
         assertThat(sum(lottoResult_vo)).isEqualTo(60_000);
     }
 
-    private static double sum(LottoResult_VO lottoResult) {
+    private static double sum(LottoResultVO lottoResult) {
         return lottoResult.getResult().keySet()
                 .stream()
                 .map(rank -> rank.getWinningMoney() * lottoResult.getResult().get(rank))

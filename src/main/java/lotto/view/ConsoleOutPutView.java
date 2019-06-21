@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.vo.LottoResult_VO;
+import lotto.domain.vo.LottoResultVO;
 import lotto.domain.LottoTicket;
 
 public class ConsoleOutPutView {
@@ -15,7 +15,7 @@ public class ConsoleOutPutView {
         System.out.println(lottoTicket + NEW_LINE);
     }
 
-    public static void showLottoResult(LottoResult_VO lottoResult) {
+    public static void showLottoResult(LottoResultVO lottoResult) {
         System.out.println(NEW_LINE + "당첨 통계");
         System.out.println("--------------------");
 

@@ -1,7 +1,7 @@
 package lotto.controller.web;
 
 import lotto.domain.*;
-import lotto.domain.vo.LottoResult_VO;
+import lotto.domain.vo.LottoResultVO;
 import lotto.service.LottoTicketService;
 import lotto.service.LottoWinningService;
 import spark.*;
@@ -69,7 +69,7 @@ public class LottoStartController {
         try {
             WinningLotto winningLotto = new WinningLotto(req.queryParams("winningNumbers"), req.queryParams("bonusNumber"));
             LottoResult lottoResult = new LottoResult(req.session().attribute("lottoTicket"), winningLotto);
-            LottoResult_VO lottoResult_vo = new LottoResult_VO(lottoResult.matchLotto(), req.session().attribute("price"));
+            LottoResultVO lottoResult_vo = new LottoResultVO(lottoResult.matchLotto(), req.session().attribute("price"));
 
             new LottoWinningService().insertResult(lottoResult_vo, winningLotto);
             new LottoTicketService().insertLottos(req.session().attribute("lottoTicket"));
@@ -82,7 +82,7 @@ public class LottoStartController {
             return render(model, "view/lotto_result.html");
         } catch (Exception e) {
             model.put("error_custom", e.getMessage());
-            return render(model, "view/lotto_winning.html");
+            return render(model, "view/lotto_manual_error.html");
         }
     }
 

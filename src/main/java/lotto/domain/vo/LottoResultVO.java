@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.*;
 
-public class LottoResult_VO {
+public class LottoResultVO {
     private static final String RESULT_MESSAGE = "%d개 일치 (%d원) - %d개\n";
     private static final String RESULT_SECOND_MESSAGE = "%d개 일치, 보너스볼 일치 (%d원) - %d개\n";
 
@@ -16,7 +16,7 @@ public class LottoResult_VO {
     private final Price price;
     private static final int PERSENT = 100;
 
-    public LottoResult_VO(Map<Rank, Integer> result, Price price) {
+    public LottoResultVO(Map<Rank, Integer> result, Price price) {
         this.result = result;
         this.price = price;
     }

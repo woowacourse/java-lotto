@@ -1,7 +1,7 @@
 package lotto.controller.console;
 
 import lotto.domain.*;
-import lotto.domain.vo.LottoResult_VO;
+import lotto.domain.vo.LottoResultVO;
 import lotto.view.ConsoleInputView;
 import lotto.view.ConsoleOutPutView;
 
@@ -19,7 +19,7 @@ public class ConsoleLottoController {
 
         WinningLotto winningLotto = new WinningLotto(ConsoleInputView.InputWinLottoNumber(), ConsoleInputView.InputBonusNumber());
         LottoResult result = new LottoResult(lottoTicket, winningLotto);
-        LottoResult_VO result_vo = new LottoResult_VO(result.matchLotto(), price);
+        LottoResultVO result_vo = new LottoResultVO(result.matchLotto(), price);
         ConsoleOutPutView.showLottoResult(result_vo);
     }
 

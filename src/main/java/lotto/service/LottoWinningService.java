@@ -2,14 +2,14 @@ package lotto.service;
 
 import lotto.dao.LottoWinningDAO;
 import lotto.domain.WinningLotto;
-import lotto.domain.vo.LottoResult_VO;
+import lotto.domain.vo.LottoResultVO;
 import lotto.dto.ResultLottoDTO;
 
 import java.util.List;
 
 public class LottoWinningService {
 
-    public static int insertResult(LottoResult_VO lottoResult_vo, WinningLotto winningLotto) {
+    public static int insertResult(LottoResultVO lottoResult_vo, WinningLotto winningLotto) {
         ResultLottoDTO lottoDTO = new ResultLottoDTO();
         lottoDTO.setWinningLotto(winningLotto.getWinningNumbers().toString());
         lottoDTO.setBonusBall(Integer.parseInt(winningLotto.getBonusBall().toString()));
