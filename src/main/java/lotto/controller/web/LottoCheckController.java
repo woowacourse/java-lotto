@@ -29,7 +29,7 @@ public class LottoCheckController {
             return render(model, "view/lotto_find.html");
         } catch (Exception e) {
             model.put("error_check", e.getMessage());
-            return render(model, "view/lotto_buy.html");
+            return render(model, "view/lotto_check_round.html");
         }
     }
 
