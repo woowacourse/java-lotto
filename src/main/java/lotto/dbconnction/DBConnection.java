@@ -3,10 +3,22 @@ package lotto.dbconnction;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+import java.util.Objects;
 
 public class DBConnection {
-    public static Connection getConnection() {
+    private static DBConnection dbConnection;
+
+    private DBConnection() {
+    }
+
+    public static DBConnection getInstacne() {
+        if (Objects.isNull(dbConnection)) {
+            dbConnection = new DBConnection();
+        }
+        return dbConnection;
+    }
+
+    public Connection getConnection() {
         Connection con = null;
         String server = "localhost";
         String database = "wwCourse";
