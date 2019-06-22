@@ -34,12 +34,11 @@ public class UserLottoController {
 	public String generateUserLotto(Request request) {
 		Map<String, Object> model = new HashMap<>();
 		LottoGenerateRequest lottoGenerateRequest = new LottoGenerateRequest();
-		lottoGenerateRequest.setCountOfManualLotto(Integer.parseInt(request.session().attribute("countOfManualLotto")));
+		lottoGenerateRequest.setCountOfManualLotto(request.session().attribute("countOfManualLotto"));
 		lottoGenerateRequest.setLottoMoney(request.session().attribute("lottoMoney"));
 		lottoGenerateRequest.setLottosFactory(request.session().attribute("lottosFactory"));
 		lottoGenerateRequest.setManualLottos(InputViewWeb.splitString(request.queryParams("manualLottos")));
 		lottoGenerateRequest.setRound(request.session().attribute("round"));
-
 		try {
 			model = userLottoService.generateLotto(lottoGenerateRequest);
 			request.session().attribute("lottos", model.get("lottos"));
