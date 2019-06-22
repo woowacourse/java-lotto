@@ -28,7 +28,7 @@ public class LottoRankDTO {
 
 	public String printLottoRank() {
 		StringBuilder stringBuilder = new StringBuilder();
-		for(LottoRank lottoRank : lottoRanks.keySet()) {
+		for (LottoRank lottoRank : lottoRanks.keySet()) {
 			printRankResult(lottoRanks, stringBuilder, lottoRank);
 		}
 		return stringBuilder.toString();
