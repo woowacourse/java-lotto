@@ -42,13 +42,13 @@
             <p>총 수익률 <span>{{ rOI }} %</span></p>
             {{/result}}
         </div>
-        <button onclick="location.href='/money'">다시하기</button>
+        <button onclick="location.href='/lookup'">다시하기</button>
     </div>
 </div>
 
 <script>
     var i = 0;
-    var txt = "{{{ message }}}";
+    var txt = "{{ round }}회차 로또 구매, 당첨 결과입니다.";
     var speed = 50; /* The speed/duration of the effect in milliseconds */
 
     function typeWriter() {

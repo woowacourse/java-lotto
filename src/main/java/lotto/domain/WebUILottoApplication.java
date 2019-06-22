@@ -28,21 +28,14 @@ public class WebUILottoApplication {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 
-            String message = "안녕하세요! 로또를 구매하시겠습니까? 로또 결과를 조회하시겠습니까?";
-
-            model.put("message", message);
-
             return render(model, "home.html");
         });
 
         get("/money", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-
             LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
-            String message = String.format("%d회차 로또를 구매하러 오셨군요~ 구입 금액을 입력해주세요.",
-                                        lottoGameDAO.getLastRound() + ADD_ONE_BEFORE_ADD_LOTTO_GAME);
 
-            model.put("message", message);
+            Map<String, Object> model = new HashMap<>();
+            model.put("round", lottoGameDAO.getLastRound() + ADD_ONE_BEFORE_ADD_LOTTO_GAME);
 
             return render(model, "paymoney.html");
         });
@@ -63,15 +56,12 @@ public class WebUILottoApplication {
         });
 
         get("/manual-quantity", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-
             LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
             MoneyDAO moneyDAO = MoneyDAOImpl.getInstance();
-
             Money money = moneyDAO.findByRound(lottoGameDAO.getLastRound());
-            String message = String.format("총 %d장의 로또를 구매할 수 있습니다. 이중 수동으로 구매할 로또의 수 입력해주세요.", money.getBuyableLottoQuantity());
 
-            model.put("message", message);
+            Map<String, Object> model = new HashMap<>();
+            model.put("totalQuantity", money.getBuyableLottoQuantity());
 
             return render(model, "inputmanualquantity.html");
         });
@@ -105,12 +95,10 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
 
             String quantity = req.queryParams("quantity");
-            String message = String.format("수동으로 구매할 로또 숫자들을 입력해주세요. %s장 산다고 했으니 %s개 입력해야겠죠?", quantity, quantity);
             List<Integer> iterator = IntStream.range(1, Integer.parseInt(quantity) + ADD_ONE_FOR_INCLUDE_LIMIT_NUMBER)
                                     .boxed().collect(Collectors.toList());
 
             model.put("quantity", quantity);
-            model.put("message", message);
             model.put("iterator", iterator);
 
             return render(model, "inputmanualnumbers.html");
@@ -151,14 +139,13 @@ public class WebUILottoApplication {
 
             int round = lottoGameDAO.getLastRound();
             List<Lotto> lottos = lottoDAO.findByRound(round);
-            long manualQuantity = lottos.stream().filter(lotto -> lotto.getIsAuto() == false).count();
-            long autoQuantity = lottos.stream().filter(lotto -> lotto.getIsAuto() == true).count();
-
-            String message = String.format("수동으로 %d개, 자동으로 %d개를 구매했습니다. 이번주 당첨 번호와 보너스 볼을 입력해주세요.", manualQuantity, autoQuantity);
+            long manualQuantity = lottos.stream().filter(lotto -> lotto.isAuto() == false).count();
+            long autoQuantity = lottos.stream().filter(lotto -> lotto.isAuto() == true).count();
 
             model.put("round", round);
             model.put("lottos", lottos);
-            model.put("message", message);
+            model.put("manualQuantity", manualQuantity);
+            model.put("autoQuantity", autoQuantity);
 
             return render(model, "inputwinningnumbers.html");
         });
@@ -195,22 +182,18 @@ public class WebUILottoApplication {
                 values.add(result.valueOf(rank));
             }
 
-            String message = "두구두구 당신의 당첨 결과는??";
             model.put("round", round);
             model.put("values", values);
             model.put("result", result);
-            model.put("message", message);
 
             return render(model, "reportresult.html");
         });
 
         get("/lookup", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-
             LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
-            String message = String.format("조회하고 싶은 회차를 입력해주세요. 현재 최대 %d회차까지 진행되었습니다.", lottoGameDAO.getLastRound());
 
-            model.put("message", message);
+            Map<String, Object> model = new HashMap<>();
+            model.put("maxRound", lottoGameDAO.getLastRound());
 
             return render(model, "lookupresult.html");
         });
@@ -238,13 +221,11 @@ public class WebUILottoApplication {
                 values.add(result.valueOf(rank));
             }
 
-            String message = String.format("%d회차 로또 당첨 결과입니다.", round);
             model.put("round", round);
             model.put("lottos", lottos);
             model.put("winning", winningLotto);
             model.put("values", values);
             model.put("result", result);
-            model.put("message", message);
 
             return render(model, "reportlookup.html");
         });
