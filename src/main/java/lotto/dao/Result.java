@@ -39,7 +39,7 @@ public class Result implements ResultDao {
         List<Map<String, Object>> results = jdbcTemplate.executeQuery(query, queryValues);
 
         if (results.size() == 0) {
-            return null;
+            throw new IllegalArgumentException();
         }
 
         return results.stream().map(map -> (String) map.get("result")).collect(Collectors.toList());

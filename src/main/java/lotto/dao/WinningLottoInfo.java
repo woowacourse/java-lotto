@@ -56,7 +56,7 @@ public class WinningLottoInfo implements WinningLottoDao {
         List<Map<String, Object>> results = jdbcTemplate.executeQuery(query, queryValues);
 
         if (results.size() == 0) {
-            return 0;
+            throw new IllegalArgumentException();
         }
 
         Map<String, Object> result = results.get(0);

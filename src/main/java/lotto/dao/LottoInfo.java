@@ -57,7 +57,7 @@ public class LottoInfo implements LottoDao {
         List<Map<String, Object>> results = jdbcTemplate.executeQuery(query, queryValues);
 
         if (results.size() == 0) {
-            return null;
+            throw new IllegalArgumentException();
         }
 
         return results.stream().map(map -> (String) map.get("lottoNumbers")).collect(Collectors.toList());
