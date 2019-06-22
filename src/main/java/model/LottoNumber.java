@@ -2,8 +2,6 @@ package model;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
@@ -11,10 +9,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN = 1;
     public static final int MAX = 45;
 
-    private static final Map<Integer, LottoNumber> numberPool = new HashMap<Integer, LottoNumber>() {{
-            IntStream.rangeClosed(MIN, MAX).boxed()
-                    .forEach(i -> put(i, new LottoNumber(i)));
-    }};
+    private static final LottoNumber[] CACHE = IntStream.rangeClosed(MIN, MAX)
+                                                        .mapToObj(LottoNumber::new)
+                                                        .toArray(LottoNumber[]::new);
 
     private final int val;
 
@@ -22,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (i < MIN || i > MAX) {
             throw new IllegalArgumentException();
         }
-        return numberPool.get(i);
+        return CACHE[i - 1];
     }
 
     public static LottoNumber of(String input) {

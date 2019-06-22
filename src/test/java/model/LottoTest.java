@@ -18,7 +18,7 @@ class LottoTest {
 
     @Test
     void matchingTestAuto() {
-        assertThat(new Lotto("10,34 , 38 ,40,,42    ,32").match(new WinningNumbersFromWeb(862))).get().isEqualTo(LottoRank.SECOND);
+        assertThat(new Lotto("10,34 , 38 ,40,,42    ,32").match(new WinningNumbersWeb(862))).get().isEqualTo(LottoRank.SECOND);
     }
 
     @Test

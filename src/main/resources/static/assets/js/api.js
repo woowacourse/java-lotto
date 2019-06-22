@@ -8,11 +8,8 @@ function submit(type) {
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then(function (res) {
-            document.getElementById("result_page").innerHTML = res.data
-        }).catch(function (err) {
-            alert(err)
-        }
+        }).then(res => document.getElementById("result_page").innerHTML = res.data
+        ).catch(err => document.getElementById("result_page").innerHTML = err.response.data
     )
 }
 

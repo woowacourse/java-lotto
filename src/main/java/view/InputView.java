@@ -30,8 +30,8 @@ public class InputView {
         }
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요(쉼표로 구분).");
         return Collections.unmodifiableList(
-                IntStream.range(0, purchaseAmount.manual()).boxed()
-                        .map(i -> TryUntilSuccess.run(() -> new Lotto(input.nextLine())))
+                IntStream.range(0, purchaseAmount.manual())
+                        .mapToObj(i -> TryUntilSuccess.run(() -> new Lotto(input.nextLine())))
                         .collect(Collectors.toList())
         );
     }

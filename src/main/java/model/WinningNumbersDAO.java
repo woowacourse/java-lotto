@@ -4,35 +4,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
-public class WinningNumbersFromDB implements WinningNumbers {
-    private final List<LottoNumber> numbers;
-
-    protected WinningNumbersFromDB(int round) throws SQLException {
+public class WinningNumbersDAO {
+    protected static List<Integer> fetchWinningNumbers(int round) throws SQLException {
         final DAO dao = DAO.getInstance();
-        final PreparedStatement pstmt = dao.connect().prepareStatement("SELECT * FROM winning_numbers WHERE round=?");
+        final PreparedStatement pstmt = dao.connect().prepareStatement(
+                "SELECT * FROM winning_numbers WHERE round = ?"
+                //TODO : remove *
+        );
         pstmt.setInt(1, round);
-        List<Integer> fetched = fetchFromResult(pstmt.executeQuery());
+        final List<Integer> fetched = fetchFromResult(pstmt.executeQuery());
         dao.close();
         if (fetched.isEmpty()) {
             throw new SQLException();
         }
-        numbers = Collections.unmodifiableList(
-                fetched.stream()
-                .map(x -> LottoNumber.of(x))
-                .collect(Collectors.toList())
-        );
+        return fetched;
     }
 
-    protected WinningNumbersFromDB() throws SQLException {
-        this(0);
-    }
-
-    private List<Integer> fetchFromResult(ResultSet result) throws SQLException {
+    private static List<Integer> fetchFromResult(ResultSet result) throws SQLException {
         List<Integer> fetched = new ArrayList<>();
         while (result.next()) {
             for (int i = 2; i <= Lotto.NUMBER_OF_PICKS + 2; i++) {
@@ -42,39 +33,29 @@ public class WinningNumbersFromDB implements WinningNumbers {
         return fetched;
     }
 
-    protected static void register(WinningNumbers winningNumbers, int round) {
+    protected static void register(WinningNumbersWeb winningNumbers) {
         Executors.newSingleThreadExecutor().submit(() -> {
             try {
-                registerHelper(winningNumbers, round);
+                registerHelper(winningNumbers);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
     }
 
-    private static void registerHelper(WinningNumbers winningNumbers, int round) throws SQLException {
+    private static void registerHelper(WinningNumbersWeb winningNumbers) throws SQLException {
         final List<LottoNumber> main = winningNumbers.mainNumbers();
         final LottoNumber bonus = winningNumbers.bonusNumber();
         final DAO dao = DAO.getInstance();
         final PreparedStatement pstmt = dao.connect().prepareStatement(
                 "INSERT INTO winning_numbers VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
         );
-        pstmt.setInt(1, round);
+        pstmt.setInt(1, winningNumbers.round());
         for (int i = 0; i < Lotto.NUMBER_OF_PICKS; i++) {
             pstmt.setString(i + 2, main.get(i).toString());
         }
         pstmt.setString(8, bonus.toString());
         pstmt.executeUpdate();
         dao.close();
-    }
-
-    @Override
-    public List<LottoNumber> mainNumbers() {
-        return numbers.subList(0, Lotto.NUMBER_OF_PICKS);
-    }
-
-    @Override
-    public LottoNumber bonusNumber() {
-        return numbers.get(Lotto.NUMBER_OF_PICKS);
     }
 }

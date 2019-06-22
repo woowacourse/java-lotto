@@ -11,37 +11,45 @@ import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class WinningNumbersFromWeb implements WinningNumbers {
+public class WinningNumbersWeb implements WinningNumbers {
     private static final String NANUM_LOTTERY_URL = "https://m.dhlottery.co.kr/gameResult.do?method=byWin";
 
-    private final Future<List<LottoNumber>> winningNumbers;
-    private final int round;
+    private final Future<WinningNumbersVO> winningNumbers;
 
-    protected WinningNumbersFromWeb(int round) {
-        this.round = round;
-        this.winningNumbers = Executors.newSingleThreadExecutor().submit(this::fetchAndParseWinningNumbers);
+    protected WinningNumbersWeb(int round) {
+        this.winningNumbers = Executors.newSingleThreadExecutor().submit(() -> fetchAndParseWinningNumbers(round));
     }
 
-    protected WinningNumbersFromWeb() {
+    protected WinningNumbersWeb() {
         this(0);
     }
 
-    private List<LottoNumber> fetchAndParseWinningNumbers() {
+    private WinningNumbersVO fetchAndParseWinningNumbers(int round) {
         try {
+            final String html = httpWinningNumbersRequest(round);
             final List<LottoNumber> numbers = new ArrayList<>();
-            final Matcher matcher = Pattern.compile(">[0-9]+<").matcher(httpWinningNumbersRequest());
-            while (matcher.find()) {
-                String token = matcher.group();
+            final Matcher numbersMatcher = Pattern.compile(">[0-9]+<").matcher(html);
+            while (numbersMatcher.find()) {
+                String token = numbersMatcher.group();
                 numbers.add(LottoNumber.of(token.substring(1, token.indexOf("<"))));
             }
-            return Collections.unmodifiableList(numbers);
+            if (numbers.isEmpty()) {
+                return fetchAndParseWinningNumbers(0);
+            }
+            if (round == 0) {
+                final Matcher roundMatcher = Pattern.compile("<option value=\"[0-9]+\" >").matcher(html);
+                roundMatcher.find();
+                String token = roundMatcher.group();
+                round = Integer.parseInt(token.substring(15, token.lastIndexOf("\"")));
+            }
+            return new WinningNumbersVO(numbers, round);
         } catch (Exception e) {
             throw new RuntimeException();
         }
     }
 
-    private String httpWinningNumbersRequest() throws Exception {
-        final String roundAttr = this.round == 0 ? "" : "&drwNo=" + this.round;
+    private String httpWinningNumbersRequest(int round) throws Exception {
+        final String roundAttr = (round == 0) ? "" : "&drwNo=" + round;
         final StringBuilder html = new StringBuilder();
         HttpURLConnection con = (HttpURLConnection) new URL(NANUM_LOTTERY_URL + roundAttr).openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -56,7 +64,7 @@ public class WinningNumbersFromWeb implements WinningNumbers {
     @Override
     public List<LottoNumber> mainNumbers() {
         try {
-            return this.winningNumbers.get().subList(0, Lotto.NUMBER_OF_PICKS);
+            return this.winningNumbers.get().mainNumbers();
         } catch (InterruptedException | ExecutionException e) {
             return mainNumbers();
         }
@@ -65,9 +73,17 @@ public class WinningNumbersFromWeb implements WinningNumbers {
     @Override
     public LottoNumber bonusNumber() {
         try {
-            return this.winningNumbers.get().get(Lotto.NUMBER_OF_PICKS);
+            return this.winningNumbers.get().bonusNumber();
         } catch (InterruptedException | ExecutionException e) {
             return bonusNumber();
+        }
+    }
+
+    public int round() {
+        try {
+            return this.winningNumbers.get().round();
+        } catch (InterruptedException | ExecutionException e) {
+            return round();
         }
     }
 }

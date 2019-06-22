@@ -10,22 +10,20 @@ public class LottoResult implements Iterable<LottoResultPair> {
     private final Money totalAmount;
 
     public LottoResult(List<Lotto> lottos, WinningNumbers winningNumbers) {
-        Map<LottoRank, Integer> pairs = new LinkedHashMap<LottoRank, Integer>() {{
-            Stream.of(LottoRank.values()).forEach(rank -> put(rank, 0));
-            lottos.forEach(lotto -> lotto.match(winningNumbers).map(x -> put(x, get(x) + 1)));
-        }};
-        this.table = generateTable(pairs);
+        this.table = Collections.unmodifiableList(
+                lottos.stream()
+                        .map(l -> l.match(winningNumbers))
+                        .flatMap(r -> r.map(Stream::of).orElseGet(Stream::empty))
+                        .collect(Collectors.groupingBy(LottoRank::prize))
+                        .values().stream()
+                        .map(l -> new LottoResultPair(l.get(0), l.size()))
+                        .collect(Collectors.toList())
+        );
         this.purchasedAmount = new Money(Lotto.PRICE * lottos.size());
-        this.totalAmount = new Money(pairs.entrySet().stream()
-                                    .mapToInt(x -> x.getKey().prize().amount() * x.getValue())
-                                    .sum());
-    }
-
-    private List<LottoResultPair> generateTable(Map<LottoRank, Integer> pairs) {
-        return Collections.unmodifiableList(
-                pairs.entrySet().stream()
-                .map(x -> new LottoResultPair(x.getKey(), x.getValue()))
-                .collect(Collectors.toList())
+        this.totalAmount = new Money(
+                this.table.stream()
+                .map(pair -> pair.rank().prize().amount() * pair.number())
+                .reduce(0, (a, b) -> a + b)
         );
     }
 

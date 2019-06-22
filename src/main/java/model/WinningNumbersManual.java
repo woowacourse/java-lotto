@@ -5,13 +5,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WinningNumbersManual implements WinningNumbers {
-    private final List<LottoNumber> mains;
-    private final LottoNumber bonus;
+    private final List<LottoNumber> mainNumbers;
+    private final LottoNumber bonusNumber;
 
     protected WinningNumbersManual(Set<LottoNumber> mainNumbers, LottoNumber bonusNumber) {
         validation(mainNumbers, bonusNumber);
-        this.mains = Collections.unmodifiableList(new ArrayList<>(mainNumbers));
-        this.bonus = bonusNumber;
+        this.mainNumbers = Collections.unmodifiableList(new ArrayList<>(mainNumbers));
+        this.bonusNumber = bonusNumber;
     }
 
     protected WinningNumbersManual(String input) {
@@ -21,8 +21,8 @@ public class WinningNumbersManual implements WinningNumbers {
         Set<LottoNumber> mainNumbers = new HashSet<>(numbers.subList(0, Lotto.NUMBER_OF_PICKS));
         LottoNumber bonusNumber = numbers.get(Lotto.NUMBER_OF_PICKS);
         validation(mainNumbers, bonusNumber);
-        this.mains = Collections.unmodifiableList(new ArrayList<>(mainNumbers));
-        this.bonus = bonusNumber;
+        this.mainNumbers = Collections.unmodifiableList(new ArrayList<>(mainNumbers));
+        this.bonusNumber = bonusNumber;
 
     }
 
@@ -34,11 +34,11 @@ public class WinningNumbersManual implements WinningNumbers {
 
     @Override
     public List<LottoNumber> mainNumbers() {
-        return mains;
+        return this.mainNumbers;
     }
 
     @Override
     public LottoNumber bonusNumber() {
-        return bonus;
+        return this.bonusNumber;
     }
 }

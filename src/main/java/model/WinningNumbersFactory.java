@@ -3,17 +3,18 @@ package model;
 import java.sql.SQLException;
 
 public class WinningNumbersFactory {
-
     public static WinningNumbers of(int round) {
         if (round < 0) {
             throw new IllegalArgumentException();
         }
-        round = Math.min(round, Lotto.recentRound());
+        if (round == 0) {
+            return new WinningNumbersWeb();
+        }
         try {
-            return new WinningNumbersFromDB(round);
+            return new WinningNumbersDB(round);
         } catch (SQLException e) {
-            WinningNumbers fetched = new WinningNumbersFromWeb(round);
-            WinningNumbersFromDB.register(fetched, round);
+            WinningNumbersWeb fetched = new WinningNumbersWeb(round);
+            WinningNumbersDAO.register(fetched);
             return fetched;
         }
     }

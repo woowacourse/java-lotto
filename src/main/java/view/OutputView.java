@@ -1,30 +1,10 @@
 package view;
 
 import model.*;
-import spark.ModelAndView;
-import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.sql.Timestamp;
 import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class OutputView {
-    private static String render(Map<String, Object> model, String templatePath) {
-        return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
-    }
-
-    public static String index(List<Timestamp> dates) {
-        Map<String, Object> model = new HashMap<String, Object>() {{
-            put("price", Lotto.PRICE);
-            put("priceFormatted", NumberFormat.getInstance().format(Lotto.PRICE));
-            put("history", WebView.historySelect(dates));
-            put("recentRoundMenu", WebView.roundSelect());
-        }};
-        return render(model, "app.html");
-    }
-
     public static void printPurchaseAmount(LottoPurchaseAmount purchaseAmount) {
         System.out.println(
                 "\n수동으로 " + purchaseAmount.manual() + "장, 자동으로 " + purchaseAmount.auto() + "개를 구매했습니다."
