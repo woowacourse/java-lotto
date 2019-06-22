@@ -15,7 +15,7 @@ class WinningLottoTest {
     @BeforeEach
     void setUp() {
         lottoNumber1 = LottoNumber.generateNumber(1);
-        lotto = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,6".split(","))).makeLotto();
+        lotto = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,6".split(","))).makeLotto();
     }
 
     @Test

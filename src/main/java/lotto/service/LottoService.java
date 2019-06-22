@@ -26,7 +26,7 @@ public class LottoService {
     }
 
     public void enterWinningLotto(String round, String winningBalls, String bonusBall) throws SQLException {
-        Lotto Lotto = new CustomLottoGenerator(NumberUtil.parsing(winningBalls.split(","))).makeLotto();
+        Lotto Lotto = new CustomLottoGenerator(NumberUtil.parsingNumber(winningBalls.split(","))).makeLotto();
         LottoNumber bonusNumber = LottoNumber.generateNumber(Integer.parseInt(bonusBall));
 
         WinningLotto winningLotto = new WinningLotto(Lotto, bonusNumber);

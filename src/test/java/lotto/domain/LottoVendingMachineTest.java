@@ -21,17 +21,17 @@ class LottoVendingMachineTest {
     void setUp() {
         money = new Money(4000);
         lottoOMRCard = new LottoOMRCard();
-        lottoOMRCard.addCustomLotto(NumberUtil.parsing("1,2,3,4,5,6".split(",")));
-        lottoOMRCard.addCustomLotto(NumberUtil.parsing("1,2,3,4,5,7".split(",")));
-        lottoOMRCard.addCustomLotto(NumberUtil.parsing("1,2,3,4,5,8".split(",")));
-        lottoOMRCard.addCustomLotto(NumberUtil.parsing("1,2,3,4,5,9".split(",")));
+        lottoOMRCard.addCustomLotto(NumberUtil.parsingNumber("1,2,3,4,5,6".split(",")));
+        lottoOMRCard.addCustomLotto(NumberUtil.parsingNumber("1,2,3,4,5,7".split(",")));
+        lottoOMRCard.addCustomLotto(NumberUtil.parsingNumber("1,2,3,4,5,8".split(",")));
+        lottoOMRCard.addCustomLotto(NumberUtil.parsingNumber("1,2,3,4,5,9".split(",")));
 
         lottoVendingMachine = new LottoVendingMachine();
 
-        customLotto1 = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,6".split(","))).makeLotto();
-        customLotto2 = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,7".split(","))).makeLotto();
-        customLotto3 = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,8".split(","))).makeLotto();
-        customLotto4 = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,9".split(","))).makeLotto();
+        customLotto1 = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,6".split(","))).makeLotto();
+        customLotto2 = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,7".split(","))).makeLotto();
+        customLotto3 = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,8".split(","))).makeLotto();
+        customLotto4 = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,9".split(","))).makeLotto();
     }
 
     @Test

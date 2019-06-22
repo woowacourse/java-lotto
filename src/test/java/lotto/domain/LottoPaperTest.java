@@ -21,14 +21,14 @@ class LottoPaperTest {
 
     @BeforeEach
     void setUp() {
-        Lotto winningNumbers = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,6".split(","))).makeLotto();
+        Lotto winningNumbers = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,6".split(","))).makeLotto();
         LottoNumber bonusNumber = LottoNumber.generateNumber(7);
         winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        customLotto1 = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,6".split(","))).makeLotto();
-        customLotto2 = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,7".split(","))).makeLotto();
-        customLotto3 = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,8".split(","))).makeLotto();
-        customLotto4 = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,6".split(","))).makeLotto();
+        customLotto1 = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,6".split(","))).makeLotto();
+        customLotto2 = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,7".split(","))).makeLotto();
+        customLotto3 = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,8".split(","))).makeLotto();
+        customLotto4 = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,6".split(","))).makeLotto();
     }
 
     @Test

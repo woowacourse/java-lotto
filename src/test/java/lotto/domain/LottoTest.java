@@ -31,7 +31,7 @@ public class LottoTest {
         lottoNumber5 = LottoNumber.generateNumber(5);
         lottoNumber6 = LottoNumber.generateNumber(6);
         lottoNumber7 = LottoNumber.generateNumber(7);
-        lotto = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,6".split(","))).makeLotto();
+        lotto = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,6".split(","))).makeLotto();
     }
 
     @Test
@@ -56,7 +56,7 @@ public class LottoTest {
 
     @Test
     void 로또_매칭_테스트() {
-        Lotto testLotto = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,7".split(","))).makeLotto();
+        Lotto testLotto = new CustomLottoGenerator(NumberUtil.parsingNumber("1,2,3,4,5,7".split(","))).makeLotto();
         assertThat(lotto.matchNumbers(testLotto)).isEqualTo(5);
     }
 

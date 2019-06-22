@@ -36,8 +36,17 @@ public class StatisticsDao extends Dao {
     }
 
     public void insertStatistics(StatisticsDto statisticsDTO) throws SQLException {
-        String query = "INSERT INTO statistics (round, first_count, second_count, third_count, fourth_count, fifth_count, miss_count, return_of_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO statistics (round," +
+                " first_count," +
+                " second_count," +
+                " third_count," +
+                " fourth_count," +
+                " fifth_count," +
+                " miss_count," +
+                " return_of_rate) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = connection.prepareStatement(query);
+
         pstmt.setString(1, statisticsDTO.getRound());
         pstmt.setString(2, statisticsDTO.getFirstCount());
         pstmt.setString(3, statisticsDTO.getSecondCount());

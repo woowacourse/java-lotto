@@ -22,7 +22,7 @@ public class LottoDao extends Dao {
         List<Lotto> roundLottosResult = new ArrayList<>();
 
         while (resultSet.next()) {
-            Lotto lotto = new CustomLottoGenerator(NumberUtil.parsing(resultSet.getString("numbers").split(","))).makeLotto();
+            Lotto lotto = new CustomLottoGenerator(NumberUtil.parsingNumber(resultSet.getString("numbers").split(","))).makeLotto();
             roundLottosResult.add(lotto);
         }
 
@@ -30,7 +30,7 @@ public class LottoDao extends Dao {
     }
 
     public void insertLottos(List<LottoDto> lottoDTOs) throws SQLException {
-        for (LottoDto lottoDTO : lottoDTOs){
+        for (LottoDto lottoDTO : lottoDTOs) {
             insertLotto(lottoDTO);
         }
     }

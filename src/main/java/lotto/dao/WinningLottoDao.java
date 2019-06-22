@@ -20,7 +20,7 @@ public class WinningLottoDao extends Dao {
         ResultSet re = pstmt.executeQuery();
         re.next();
 
-        Lotto lotto = new CustomLottoGenerator(NumberUtil.parsing(re.getString("numbers").split(","))).makeLotto();
+        Lotto lotto = new CustomLottoGenerator(NumberUtil.parsingNumber(re.getString("numbers").split(","))).makeLotto();
         LottoNumber lottoNumber = LottoNumber.generateNumber(Integer.parseInt(re.getString("bonus")));
 
         return new WinningLotto(lotto, lottoNumber);

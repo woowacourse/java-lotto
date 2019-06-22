@@ -24,7 +24,7 @@ public class BuyingService {
 
         if (customsLottoNumbers != null) {
             Stream.of(customsLottoNumbers)
-                    .map(customsLottoNumber -> NumberUtil.parsing(customsLottoNumber.split(",")))
+                    .map(customsLottoNumber -> NumberUtil.parsingNumber(customsLottoNumber.split(",")))
                     .forEachOrdered(lottoOMRCard::addCustomLotto);
         }
 

@@ -27,7 +27,7 @@ public class Main {
         int count = customLottoCount.getCount();
 
         for (int i = 0; i < count; i++) {
-            lottoOMRCard.addCustomLotto(NumberUtil.parsing(InputView.inputCustomLotto()));
+            lottoOMRCard.addCustomLotto(NumberUtil.parsingNumber(InputView.inputCustomLotto()));
         }
 
         LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
@@ -36,7 +36,7 @@ public class Main {
     }
 
     private static WinningLotto makeWinningLotto() {
-        Lotto Lotto = new CustomLottoGenerator(NumberUtil.parsing(InputView.inputWinningLotto())).makeLotto();
+        Lotto Lotto = new CustomLottoGenerator(NumberUtil.parsingNumber(InputView.inputWinningLotto())).makeLotto();
         LottoNumber bonusNumber = LottoNumber.generateNumber(InputView.inputBonusNumber());
 
         return new WinningLotto(Lotto, bonusNumber);
