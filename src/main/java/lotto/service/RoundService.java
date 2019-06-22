@@ -6,18 +6,24 @@ import lotto.domain.Price;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoundService {
-    Connection conn = new DatabaseConnection().getConnection();
-    RoundDao roundDao = new RoundDao(conn);
+    private Connection conn = new DatabaseConnection().getConnection();
+    private RoundDao roundDao = new RoundDao(conn);
 
     public int getPresentRound() throws SQLException {
-        return roundDao.findLatestRound();
+        return roundDao.findLatestRound() + 1;
     }
 
     public List<Integer> getAllRound() throws SQLException {
-        return roundDao.findAllRound();
+        List<Integer> rounds = new ArrayList<>();
+        int countOfRounds = roundDao.findLatestRound();
+        for (int i = 1; i <= countOfRounds; i++) {
+            rounds.add(i);
+        }
+        return rounds;
     }
 
     public Price getPrice(String price) {

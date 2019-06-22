@@ -54,11 +54,4 @@ public class WinningLotto {
         return Objects.hash(winningLotto, bonus);
     }
 
-    @Override
-    public String toString() {
-        return "WinningLotto{" +
-                "winningLotto=" + winningLotto +
-                ", bonus=" + bonus +
-                '}';
-    }
 }

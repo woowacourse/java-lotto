@@ -5,18 +5,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 public class RoundDao {
     private static final String INSERT_ROUND_AND_PRICE_SQL = "INSERT INTO round(id,price) values(?,?)";
     private static final String SELECT_LAST_ROUND_SQL = "SELECT MAX(id) FROM round";
-    private static final String SELECT_ALL_ROUND_SQL = "SELECT id FROM round";
     private static final String SELECT_PRICE_BY_ROUND_SQL = "SELECT price FROM round WHERE id=?";
-    private static final String LATEST_ROUND_ID = "MAX(id)";
-    private static final String ROUND_ID = "id";
+    private static final String LATEST_ROUND = "MAX(id)";
     private static final String PRICE = "price";
-    private static final int FIRST_ROUND = 1;
+    private static final int ZERO_ROUND = 0;
 
     private final Connection conn;
 
@@ -36,19 +33,8 @@ public class RoundDao {
         PreparedStatement pstmt = conn.prepareStatement(SELECT_LAST_ROUND_SQL);
         ResultSet rs = pstmt.executeQuery();
 
-        if (!rs.next()) return FIRST_ROUND;
-        return rs.getInt(LATEST_ROUND_ID) + 1;
-    }
-
-    public List<Integer> findAllRound() throws SQLException {
-        PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL_ROUND_SQL);
-        ResultSet rs = pstmt.executeQuery();
-        List<Integer> rounds = new ArrayList<>();
-
-        while (rs.next()) {
-            rounds.add(rs.getInt(ROUND_ID));
-        }
-        return rounds;
+        if (!rs.next()) return ZERO_ROUND;
+        return rs.getInt(LATEST_ROUND);
     }
 
     public int findPriceByRound(int round) throws SQLException {
@@ -58,7 +44,7 @@ public class RoundDao {
         if (rs.next()) {
             return rs.getInt(PRICE);
         }
-        return 0;
+        throw new SQLException("round에 해당하는 price가 없습니다!");
     }
 
 }

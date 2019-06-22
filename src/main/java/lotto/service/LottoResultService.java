@@ -9,6 +9,7 @@ import lotto.utils.ResultMessage;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class LottoResultService {
 
@@ -22,6 +23,8 @@ public class LottoResultService {
 
     public double getYield(LottoResult lottoResult, int round) throws SQLException {
         RoundDao roundDao = new RoundDao(new DatabaseConnection().getConnection());
-        return lottoResult.findYield(roundDao.findPriceByRound(round));
+        int price = roundDao.findPriceByRound(round);
+
+        return lottoResult.findYield(price);
     }
 }

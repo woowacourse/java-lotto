@@ -1,13 +1,13 @@
 CREATE TABLE round
 (
-    id_   INT,
+    id   BIGINT,
     price INT,
-    PRIMARY KEY (id_)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE lotto
 (
-    id_      INT AUTO_INCREMENT,
+    id_      BIGINT, AUTO_INCREMENT,
     num_1    INT,
     num_2    INT,
     num_3    INT,
@@ -15,12 +15,12 @@ CREATE TABLE lotto
     num_5    INT,
     num_6    INT,
     round_id INT,
-    PRIMARY KEY (id_)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE winninglotto
 (
-    id_      INT AUTO_INCREMENT,
+    id      BIGINT AUTO_INCREMENT,
     win_1    INT,
     win_2    INT,
     win_3    INT,
@@ -29,5 +29,7 @@ CREATE TABLE winninglotto
     win_6    INT,
     bonus    INT,
     round_id INT,
-    PRIMARY KEY (id_)
+    PRIMARY KEY (id)
 );
+
+SET GLOBAL sql_mode='';

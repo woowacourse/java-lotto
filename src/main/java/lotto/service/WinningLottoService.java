@@ -9,8 +9,11 @@ import lotto.utils.Converter;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class WinningLottoService {
+    private Connection conn = new DatabaseConnection().getConnection();
+    private WinningLottoDao winningLottoDao = new WinningLottoDao(conn);
 
     public WinningLotto getWinningLotto(String winningLotto, String bonus) {
         Lotto lotto = new Lotto(Converter.convertNumbers(winningLotto));
@@ -20,16 +23,10 @@ public class WinningLottoService {
     }
 
     public void addWinningLottoInDB(int round, WinningLotto winningLotto) throws SQLException {
-        Connection conn = new DatabaseConnection().getConnection();
-        WinningLottoDao winningLottoDao = new WinningLottoDao(conn);
-
         winningLottoDao.addWinningLotto(round, winningLotto);
     }
 
     public WinningLotto getWinningLottoByRound(int round) throws SQLException {
-        Connection conn = new DatabaseConnection().getConnection();
-        WinningLottoDao winningLottoDao = new WinningLottoDao(conn);
-
         return winningLottoDao.findWinningLottoByRound(round);
     }
 }

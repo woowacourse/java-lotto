@@ -30,12 +30,12 @@ class WinningLottoDaoTest {
     }
 
     @Test
-    void addWinningLotto() throws SQLException {
+    void winningLotto_추가() throws SQLException {
         winningLottoDao.addWinningLotto(1,winningLotto);
     }
 
     @Test
-    void findWinningLottoByRound() throws SQLException{
+    void 요청_round에_winningLotto_조회() throws SQLException{
         winningLottoDao.addWinningLotto(1,winningLotto);
         assertThat(winningLottoDao.findWinningLottoByRound(1)).isEqualTo(winningLotto);
     }

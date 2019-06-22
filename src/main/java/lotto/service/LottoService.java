@@ -17,6 +17,9 @@ import java.util.stream.IntStream;
 public class LottoService {
     private static final String DELIMITER = "\r\n";
 
+    private Connection conn = new DatabaseConnection().getConnection();
+    private LottosDao lottosDao = new LottosDao(conn);
+
     public List<String> splitSelfInputs(String selfInputs) {
         return Arrays.asList(selfInputs.split(DELIMITER));
     }
@@ -36,16 +39,10 @@ public class LottoService {
     }
 
     public void addLottosInDB(int round, Lottos lottos) throws SQLException {
-        Connection conn = new DatabaseConnection().getConnection();
-        LottosDao lottosDao = new LottosDao(conn);
-
         lottosDao.addLottos(round, lottos);
     }
 
     public Lottos getLottoByRound(int round) throws SQLException {
-        Connection conn = new DatabaseConnection().getConnection();
-        LottosDao lottosDao = new LottosDao(conn);
-
         return lottosDao.findLottoByRound(round);
     }
 }
