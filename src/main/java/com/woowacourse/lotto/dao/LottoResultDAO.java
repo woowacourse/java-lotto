@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import com.woowacourse.lotto.domain.LottoMoney;
 import com.woowacourse.lotto.domain.LottoRank;
 import com.woowacourse.lotto.domain.LottoResult;
-import com.woowacourse.lotto.domain.dto.LottoRankDTO;
+import com.woowacourse.lotto.dto.LottoRankDTO;
 import com.woowacourse.lotto.exception.NotFoundLottoResult;
 
 public class LottoResultDAO {

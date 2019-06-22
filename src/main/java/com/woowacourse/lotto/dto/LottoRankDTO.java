@@ -1,4 +1,4 @@
-package com.woowacourse.lotto.domain.dto;
+package com.woowacourse.lotto.dto;
 
 import java.util.Map;
 import java.util.Objects;

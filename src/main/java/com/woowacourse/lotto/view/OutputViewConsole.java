@@ -1,7 +1,7 @@
 package com.woowacourse.lotto.view;
 
 import com.woowacourse.lotto.domain.*;
-import com.woowacourse.lotto.domain.dto.LottoRankDTO;
+import com.woowacourse.lotto.dto.LottoRankDTO;
 
 public class OutputViewConsole {
 	private static final String PRINT_RESULT_MESSAGE = "당첨 통계\n---------";

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.woowacourse.lotto.dao.DBConnector;
-import com.woowacourse.lotto.domain.dto.LottoRankDTO;
+import com.woowacourse.lotto.dto.LottoRankDTO;
 import com.woowacourse.lotto.dao.LottoResultDAO;
 import com.woowacourse.lotto.dao.WinningLottoDAO;
 import com.woowacourse.lotto.domain.*;

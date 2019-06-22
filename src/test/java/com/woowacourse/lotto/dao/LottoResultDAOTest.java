@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.woowacourse.lotto.domain.*;
-import com.woowacourse.lotto.domain.dto.LottoRankDTO;
+import com.woowacourse.lotto.dto.LottoRankDTO;
 import com.woowacourse.lotto.domain.factory.LottosFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
