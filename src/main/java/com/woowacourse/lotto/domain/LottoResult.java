@@ -38,6 +38,10 @@ public class LottoResult {
 		return new LinkedList<>(ranks);
 	}
 
+	public Map<LottoRank, Integer> getRankResult() {
+		return new TreeMap<>(rankResult);
+	}
+
 	public int valueOf(LottoRank rank) {
 		return rankResult.get(rank);
 	}

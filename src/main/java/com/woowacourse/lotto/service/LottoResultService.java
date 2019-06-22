@@ -65,23 +65,7 @@ public class LottoResultService {
 
 	private String findLottoResultRankById(int round) throws SQLException {
 		LottoRankDTO lottoRankDTO = lottoResultDAO.findLottoResultRankById(round);
-		StringBuilder stringBuilder = new StringBuilder();
-		printLottoResult(lottoRankDTO.getLottoRanks(), stringBuilder);
-		return stringBuilder.toString();
-	}
-
-	private void printLottoResult(Map<LottoRank, Integer> ranks, StringBuilder stringBuilder) {
-		for (LottoRank lottoRank : ranks.keySet()) {
-			printRankResult(ranks, stringBuilder, lottoRank);
-		}
-	}
-
-	private void printRankResult(Map<LottoRank, Integer> ranks, StringBuilder stringBuilder, LottoRank lottoRank) {
-		if (lottoRank == LottoRank.SECOND) {
-			stringBuilder.append(String.format(PRINT_SECOND_OF_LOTTO + NEW_LINE, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
-			return;
-		}
-		stringBuilder.append(String.format(PRINT_RESULT_OF_LOTTO + NEW_LINE, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
+		return lottoRankDTO.printLottoRank();
 	}
 
 	private List<Integer> getLottoRound() throws SQLException {

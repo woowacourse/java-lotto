@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.woowacourse.lotto.domain.*;
+import com.woowacourse.lotto.domain.dto.LottoRankDTO;
 import com.woowacourse.lotto.domain.factory.LottosFactory;
 import com.woowacourse.lotto.view.InputViewConsole;
 import com.woowacourse.lotto.view.OutputViewConsole;
@@ -21,7 +22,7 @@ public class LottoAppMain {
 
 		LottoResult lottoResult = new LottoResult(InputViewConsole.inputWinningLotto(), lottos);
 
-		OutputViewConsole.printLottoResult(lottoResult);
+		OutputViewConsole.printLottoResult(new LottoRankDTO(lottoResult.getRankResult()));
 		OutputViewConsole.printEarningsRate(lottoMoney, lottoResult);
 	}
 

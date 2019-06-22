@@ -5,9 +5,9 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import com.woowacourse.lotto.domain.*;
+import com.woowacourse.lotto.domain.dto.LottoRankDTO;
 import com.woowacourse.lotto.domain.factory.LottosFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,9 +38,8 @@ class LottoResultDAOTest {
 		lottoResultDAO.addLottoResult(round, lottoMoney, lottoResult);
 		int winningLottoId = winningLottoDAO.getWinningLottoCount();
 
-		Map<LottoRank, Integer> map = new TreeMap<>();
-		lottoResult.getRanks().stream().forEach(x -> map.put(x, lottoResult.valueOf(x)));
-		assertThat(map).isEqualTo(lottoResultDAO.findLottoResultRankById(winningLottoId));
+		LottoRankDTO lottoRankDTO = new LottoRankDTO(lottoResult.getRankResult());
+		assertThat(lottoRankDTO).isEqualTo(lottoResultDAO.findLottoResultRankById(winningLottoId));
 		Map<String, Long> sumAndEarning = lottoResultDAO.findSumAndEarningRateById(winningLottoId);
 		assertThat((long) lottoResult.sum()).isEqualTo(sumAndEarning.get("sum"));
 		assertThat(lottoMoney.calculateEarningsRate(lottoResult.sum())).isEqualTo(sumAndEarning.get("earningRate"));
