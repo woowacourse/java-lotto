@@ -29,7 +29,6 @@ public class LottoDao extends Dao {
         return roundLottosResult;
     }
 
-    //todo 서비스로 옮기는 작업하기
     public void insertLottos(List<LottoDto> lottoDTOs) throws SQLException {
         for (LottoDto lottoDTO : lottoDTOs){
             insertLotto(lottoDTO);
