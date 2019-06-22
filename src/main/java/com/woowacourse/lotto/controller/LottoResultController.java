@@ -6,9 +6,9 @@ import java.util.Map;
 import com.woowacourse.lotto.domain.request.LottoSearchRequest;
 import com.woowacourse.lotto.domain.request.WinningLottoRequest;
 import com.woowacourse.lotto.service.LottoResultService;
-import spark.ModelAndView;
+import com.woowacourse.lotto.view.OutputViewWeb;
 import spark.Request;
-import spark.template.handlebars.HandlebarsTemplateEngine;
+
 
 import static com.woowacourse.lotto.view.OutputViewWeb.render;
 
@@ -53,7 +53,7 @@ public class LottoResultController {
 
 		try {
 			model = lottoResultService.searchLottoResult(lottoSearchRequest);
-			return render(model, "/searchLottoResult.html");
+			return OutputViewWeb.printLottoResult(model);
 		} catch (Exception e) {
 			model.put("errorMessage", e.getMessage());
 			return render(model, "/searchLottoResult.html");
