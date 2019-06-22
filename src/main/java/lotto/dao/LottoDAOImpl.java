@@ -29,8 +29,9 @@ public class LottoDAOImpl implements LottoDAO {
         String query = "SELECT * FROM lotto WHERE round = ?";
         List<Lotto> lottos = new ArrayList<>();
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             ResultSet rs = pstmt.executeQuery();
 
@@ -41,6 +42,7 @@ public class LottoDAOImpl implements LottoDAO {
                 lotto.setIsAuto(rs.getBoolean("is_auto"));
                 lottos.add(lotto);
             }
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,8 +54,9 @@ public class LottoDAOImpl implements LottoDAO {
         String query = "INSERT INTO lotto VALUES (?, ?, ?)";
         int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = con.prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             pstmt.setString(2, lotto.getNumbers().toString().replaceAll(("(\\[|])+"), ""));
             pstmt.setBoolean(3, lotto.getIsAuto());
@@ -69,8 +72,9 @@ public class LottoDAOImpl implements LottoDAO {
         String query = "DELETE FROM lotto WHERE round=?";
         int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = con.prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             result = pstmt.executeUpdate();
         } catch (SQLException e) {

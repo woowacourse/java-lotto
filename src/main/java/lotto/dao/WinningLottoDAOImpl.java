@@ -25,15 +25,17 @@ public class WinningLottoDAOImpl implements WinningLottoDAO {
         String query = "SELECT * FROM winning_lotto WHERE round = ?";
         WinningLotto winningLotto = null;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = con.prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             ResultSet rs = pstmt.executeQuery();
 
             if (!rs.next()) return winningLotto;
 
             winningLotto = new WinningLotto(rs.getString("numbers"),
-                    rs.getString("bonus_number"));
+                                            rs.getString("bonus_number"));
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,8 +47,9 @@ public class WinningLottoDAOImpl implements WinningLottoDAO {
         String query = "INSERT INTO winning_lotto VALUES (?, ?, ?)";
         int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = con.prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             pstmt.setString(2,
                     winningLotto.getLotto().getNumbers().toString().replaceAll((regexForDelteBracket), ""));
@@ -63,8 +66,9 @@ public class WinningLottoDAOImpl implements WinningLottoDAO {
         String query = "DELETE FROM winning_lotto WHERE round=?";
         int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = con.prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             result = pstmt.executeUpdate();
         } catch (SQLException e) {

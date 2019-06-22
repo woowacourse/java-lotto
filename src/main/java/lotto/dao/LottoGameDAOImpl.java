@@ -23,9 +23,9 @@ public class LottoGameDAOImpl implements LottoGameDAO {
         String query = "SELECT * from lotto_game ORDER BY round DESC limit 1";
         int round = 0;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = con.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery();
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query);
+             ResultSet rs = pstmt.executeQuery()) {
 
             if (!rs.next()) return round;
 
@@ -41,8 +41,9 @@ public class LottoGameDAOImpl implements LottoGameDAO {
         String query = "INSERT INTO lotto_game VALUES (?)";
         int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = con.prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -56,8 +57,9 @@ public class LottoGameDAOImpl implements LottoGameDAO {
         String query = "DELETE FROM lotto_game WHERE round=?";
         int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = con.prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             result = pstmt.executeUpdate();
         } catch (SQLException e) {

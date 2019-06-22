@@ -24,14 +24,16 @@ public class MoneyDAOImpl implements MoneyDAO {
         String query = "SELECT * FROM money WHERE round = ?";
         Money money = null;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = con.prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             ResultSet rs = pstmt.executeQuery();
 
             if (!rs.next()) return money;
 
             money = new Money(rs.getString("money"));
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,8 +45,9 @@ public class MoneyDAOImpl implements MoneyDAO {
         String query = "INSERT INTO money VALUES (?, ?)";
         int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = con.prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             pstmt.setInt(2, money.getMoney());
             result = pstmt.executeUpdate();
@@ -59,8 +62,9 @@ public class MoneyDAOImpl implements MoneyDAO {
         String query = "DELETE FROM money WHERE round = ?";
         int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection()) {
-            PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
+        try (Connection con = CONNECTOR.getConnection();
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
             pstmt.setInt(1, round);
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
