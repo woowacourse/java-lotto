@@ -12,6 +12,8 @@ import java.util.TreeMap;
 import com.woowacourse.lotto.domain.LottoMoney;
 import com.woowacourse.lotto.domain.LottoRank;
 import com.woowacourse.lotto.domain.LottoResult;
+import com.woowacourse.lotto.domain.dto.LottoRankDTO;
+import com.woowacourse.lotto.exception.NotFoundLottoResult;
 
 public class LottoResultDAO {
 	private final Connection connection;
@@ -21,8 +23,17 @@ public class LottoResultDAO {
 	}
 
 	public void addLottoResult(int round, LottoMoney lottoMoney, LottoResult lottoResult) throws SQLException {
-		String query = "insert into lotto_result(fifth_rank, fourth_rank, third_rank, second_rank, first_rank, round, sum, earning_rate)" +
-				"values(?,?,?,?,?,?,?,?)";
+		String query = String.join("\n",
+				"insert into lotto_result(" +
+						"fifth_rank," +
+						" fourth_rank," +
+						" third_rank," +
+						" second_rank," +
+						" first_rank," +
+						" round," +
+						" sum," +
+						" earning_rate)" +
+						"values(?,?,?,?,?,?,?,?)");
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		List<LottoRank> lottoRanks = lottoResult.getRanks();
 		long sumOfLottoMoney = (long) lottoResult.sum();
@@ -35,11 +46,18 @@ public class LottoResultDAO {
 		pstmt.executeUpdate();
 	}
 
-	public Map<LottoRank, Integer> findLottoResultRankById(int selectedRound) throws SQLException {
-		String query = "select first_rank, second_rank, third_rank, fourth_rank, fifth_rank from lotto_result where round = ?";
+	public LottoRankDTO findLottoResultRankById(int selectedRound) throws SQLException {
+		String query = String.join("\n",
+				"select first_rank," +
+						" second_rank," +
+						" third_rank," +
+						" fourth_rank," +
+						" fifth_rank" +
+						" from lotto_result" +
+						" where round = ?");
 		ResultSet rs = findById(query, selectedRound);
 		if (!rs.next()) {
-			return null;
+			throw new NotFoundLottoResult();
 		}
 		Map<LottoRank, Integer> lottoRanks = new TreeMap<>();
 		lottoRanks.put(LottoRank.FIRST, rs.getInt(1));
@@ -47,16 +65,21 @@ public class LottoResultDAO {
 		lottoRanks.put(LottoRank.THIRD, rs.getInt(3));
 		lottoRanks.put(LottoRank.FOURTH, rs.getInt(4));
 		lottoRanks.put(LottoRank.FIFTH, rs.getInt(5));
-		return lottoRanks;
+		return new LottoRankDTO(lottoRanks);
 	}
 
 	public Map<String, Long> findSumAndEarningRateById(int lottoResultId) throws SQLException {
-		String query = "select sum, earning_rate from lotto_result where round = ?";
+		String query = String.join("\n",
+				"select" +
+						" sum," +
+						" earning_rate" +
+						" from lotto_result" +
+						" where round = ?");
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		pstmt.setInt(1, lottoResultId);
 		ResultSet rs = pstmt.executeQuery();
 		if (!rs.next()) {
-			return null;
+			throw new NotFoundLottoResult();
 		}
 		Map<String, Long> result = new HashMap<>();
 		result.put("sum", rs.getLong("sum"));

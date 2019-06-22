@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.LottoNumber;
+import com.woowacourse.lotto.exception.NotFoundUserLotto;
 
 import static com.woowacourse.lotto.domain.LottoNumber.NUMBER_OF_LOTTO;
 
@@ -21,10 +22,19 @@ public class UserLottoDAO {
 	}
 
 	public void addUserLotto(Lotto lotto, int round) throws SQLException {
-		String query = "insert into user_lotto(first_number, second_number, third_number, fourth_number, fifth_number, sixth_number, round)" +
-				"VALUES(?,?,?,?,?,?,?)";
+		String query = String.join("\n",
+				"insert into user_lotto(" +
+						"first_number," +
+						" second_number," +
+						" third_number," +
+						" fourth_number," +
+						" fifth_number," +
+						" sixth_number," +
+						" round)" +
+						"VALUES(?,?,?,?,?,?,?)");
 		List<Integer> lottoNumber = new ArrayList<>();
-		lotto.getNumbers().stream().forEach(number -> lottoNumber.add(number.getName()));
+		lotto.getNumbers()
+				.forEach(number -> lottoNumber.add(number.getName()));
 
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		for (int i = 1; i <= lottoNumber.size(); ++i) {
@@ -35,13 +45,19 @@ public class UserLottoDAO {
 	}
 
 	public Lotto findUserLottoById(int userLottoId) throws SQLException {
-		String query = "select first_number, second_number, third_number, fourth_number," +
-				"fifth_number, sixth_number from user_lotto where id = ?";
+		String query = String.join("\n", "select first_number" +
+				", second_number" +
+				", third_number" +
+				", fourth_number" +
+				",fifth_number" +
+				", sixth_number" +
+				" from user_lotto" +
+				" where id = ?");
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		pstmt.setInt(1, userLottoId);
 		ResultSet rs = pstmt.executeQuery();
 		if (!rs.next()) {
-			return null;
+			throw new NotFoundUserLotto();
 		}
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
 		for (int i = 1; i <= NUMBER_OF_LOTTO; ++i) {
@@ -51,11 +67,15 @@ public class UserLottoDAO {
 	}
 
 	public int getUserLottoCount() throws SQLException {
-		PreparedStatement pstmt = connection.prepareStatement("SELECT count(*) as total from user_lotto");
+		PreparedStatement pstmt = connection.prepareStatement(
+				String.join("\n",
+						"SELECT count(*)" +
+								" as total" +
+								" from user_lotto"));
 		ResultSet rs = pstmt.executeQuery();
 
 		if (!rs.next()) {
-			return -1;
+			return 0;
 		}
 		return rs.getInt("total");
 	}

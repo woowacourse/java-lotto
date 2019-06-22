@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.woowacourse.lotto.domain.LottoNumber;
 import com.woowacourse.lotto.domain.WinningLotto;
+import com.woowacourse.lotto.exception.NotFoundWinningLotto;
 
 import static com.woowacourse.lotto.domain.LottoNumber.NUMBER_OF_LOTTO;
 
@@ -21,13 +22,21 @@ public class WinningLottoDAO {
 	}
 
 	public WinningLotto findWinningLottoByRound(int round) throws SQLException {
-		String query = "select first_number, second_number, third_number, fourth_number," +
-				"fifth_number, sixth_number, bonus_ball from winning_lotto where round = ?";
+		String query = String.join("\n",
+				"select first_number," +
+						" second_number," +
+						" third_number," +
+						" fourth_number," +
+						"fifth_number," +
+						" sixth_number," +
+						" bonus_ball" +
+						" from winning_lotto" +
+						" where round = ?");
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		pstmt.setInt(1, round);
 		ResultSet rs = pstmt.executeQuery();
 		if (!rs.next()) {
-			return null;
+			throw new NotFoundWinningLotto();
 		}
 		List<String> winningLotto = new LinkedList<>();
 		for (int i = 1; i <= NUMBER_OF_LOTTO; ++i) {
@@ -37,8 +46,16 @@ public class WinningLottoDAO {
 	}
 
 	public int addWinningLotto(WinningLotto winningLotto) throws SQLException {
-		String query = "INSERT INTO winning_lotto(first_number, second_number, third_number, fourth_number, fifth_number, sixth_number,  bonus_ball)" +
-				" VALUES (?,?,?,?,?,?,?)";
+		String query = String.join("\n",
+				"INSERT INTO winning_lotto(" +
+						"first_number," +
+						" second_number," +
+						" third_number," +
+						" fourth_number," +
+						" fifth_number," +
+						" sixth_number," +
+						"  bonus_ball)" +
+						" VALUES (?,?,?,?,?,?,?)");
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		List<LottoNumber> lottoNumbers = winningLotto.getWinningLotto();
 		for (int i = 1; i <= lottoNumbers.size(); i++) {
@@ -50,11 +67,14 @@ public class WinningLottoDAO {
 	}
 
 	public int getWinningLottoCount() throws SQLException {
-		PreparedStatement pstmt = connection.prepareStatement("SELECT count(*) as total from winning_lotto");
+		PreparedStatement pstmt = connection.prepareStatement(String.join("\n",
+				"SELECT count(*)" +
+						" as total" +
+						" from winning_lotto"));
 		ResultSet rs = pstmt.executeQuery();
 
 		if (!rs.next()) {
-			return -1;
+			return 0;
 		}
 		return rs.getInt("total");
 	}
