@@ -11,8 +11,7 @@ public class WinningNumbersDAO {
     protected static List<Integer> fetchWinningNumbers(int round) throws SQLException {
         final DAO dao = DAO.getInstance();
         final PreparedStatement pstmt = dao.connect().prepareStatement(
-                "SELECT * FROM winning_numbers WHERE round = ?"
-                //TODO : remove *
+                "SELECT round, first_num, second_num, third_num, fourth_num, fifth_num, sixth_num, bonus_num FROM winning_numbers WHERE round = ?"
         );
         pstmt.setInt(1, round);
         final List<Integer> fetched = fetchFromResult(pstmt.executeQuery());

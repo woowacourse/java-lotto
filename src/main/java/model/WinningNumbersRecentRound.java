@@ -8,14 +8,14 @@ public class WinningNumbersRecentRound {
     private static int recentRound = new WinningNumbersWeb().round();
     private static LocalDateTime scheduledFetchDate = nextAnnouncementDate();
 
-    public static int getRecentRound() {
+    protected static int getRecentRound() {
         if (LocalDateTime.now().isAfter(scheduledFetchDate)) {
             refresh();
         }
         return recentRound;
     }
 
-    public static int refresh() {
+    protected static int refresh() {
         WinningNumbersWeb recentWinningNumbers = new WinningNumbersWeb();
         if (recentWinningNumbers.round() > recentRound) {
             recentRound = recentWinningNumbers.round();
