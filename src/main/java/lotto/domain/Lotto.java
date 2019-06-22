@@ -18,6 +18,7 @@ public class Lotto {
         }
     }
 
+
     private void checkLottoSize(List<Integer> lotto) {
         if (lotto.size() != LOTTO_NUMBER_SIZE) {
             throw new LottoValidException("6개의 번호를 입력해주세요.");

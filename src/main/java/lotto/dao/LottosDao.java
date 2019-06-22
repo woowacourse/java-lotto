@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.db.SettingLotto;
+import lotto.db.SettingToTransferLotto;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
@@ -25,7 +25,7 @@ public class LottosDao {
     public void addLottos(int round, Lottos lottos) throws SQLException {
         PreparedStatement pstmt = conn.prepareStatement(INSERT_SQL);
         for (Lotto lotto : lottos.getLottos()) {
-            SettingLotto.setLottoInDB(pstmt, lotto);
+            SettingToTransferLotto.setLottoInDB(pstmt, lotto);
             pstmt.setInt(7, round);
             pstmt.executeUpdate();
         }
@@ -38,7 +38,7 @@ public class LottosDao {
 
         List<Lotto> lottos = new ArrayList<>();
         while (rs.next()) {
-            lottos.add(SettingLotto.getLottoInDB(rs, COL_NAME));
+            lottos.add(SettingToTransferLotto.getLottoInDB(rs, COL_NAME));
         }
 
         return new Lottos(lottos);

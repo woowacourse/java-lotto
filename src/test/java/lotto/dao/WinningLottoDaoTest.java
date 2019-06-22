@@ -31,13 +31,13 @@ class WinningLottoDaoTest {
 
     @Test
     void winningLotto_추가() throws SQLException {
-        winningLottoDao.addWinningLotto(1,winningLotto);
+        winningLottoDao.addWinningLotto(100,winningLotto);
     }
 
     @Test
     void 요청_round에_winningLotto_조회() throws SQLException{
-        winningLottoDao.addWinningLotto(1,winningLotto);
-        assertThat(winningLottoDao.findWinningLottoByRound(1)).isEqualTo(winningLotto);
+        winningLottoDao.addWinningLotto(100,winningLotto);
+        assertThat(winningLottoDao.findWinningLottoByRound(100)).isEqualTo(winningLotto);
     }
 
     @AfterEach

@@ -31,13 +31,13 @@ class LottosDaoTest {
 
     @Test
     void Lottos_추가() throws SQLException {
-        lottosDao.addLottos(1,new Lottos(lottos));
+        lottosDao.addLottos(100,new Lottos(lottos));
     }
 
     @Test
     void Lotto_조회() throws SQLException {
-        lottosDao.addLottos(1,new Lottos(lottos));
-        assertThat(lottosDao.findLottoByRound(1)).isEqualTo(new Lottos(lottos));
+        lottosDao.addLottos(100,new Lottos(lottos));
+        assertThat(lottosDao.findLottoByRound(100)).isEqualTo(new Lottos(lottos));
     }
 
     @AfterEach

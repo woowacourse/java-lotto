@@ -1,6 +1,6 @@
 package lotto.dao;
 
-import lotto.db.SettingLotto;
+import lotto.db.SettingToTransferLotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class WinningLottoDao {
     private static final String INSERT_WINNING_LOTTO_SQL = "INSERT INTO winninglotto(win_1,win_2,win_3,win_4,win_5,win_6,bonus,round_id) values(?,?,?,?,?,?,?,?)";
@@ -28,7 +27,7 @@ public class WinningLottoDao {
         PreparedStatement pstmt = conn.prepareStatement(INSERT_WINNING_LOTTO_SQL);
         Lotto lotto = winningLotto.getWinningNumbers();
         LottoNumber bonus = winningLotto.getBonus();
-        SettingLotto.setLottoInDB(pstmt, lotto);
+        SettingToTransferLotto.setLottoInDB(pstmt, lotto);
         pstmt.setInt(7, bonus.getNumber());
         pstmt.setInt(8, round);
         pstmt.executeUpdate();
@@ -41,7 +40,7 @@ public class WinningLottoDao {
 
         if (rs.next()) {
             LottoNumber bonus = LottoNumber.valueOf(rs.getInt(BONUS));
-            return new WinningLotto(SettingLotto.getLottoInDB(rs, COL_WIN_NAME), bonus);
+            return new WinningLotto(SettingToTransferLotto.getLottoInDB(rs, COL_WIN_NAME), bonus);
         }
         throw new SQLException("요청하신 round에 해당하는 winningLotto가 없습니다!");
     }

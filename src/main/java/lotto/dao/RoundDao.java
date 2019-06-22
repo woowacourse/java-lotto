@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class RoundDao {
     private static final String INSERT_ROUND_AND_PRICE_SQL = "INSERT INTO round(id,price) values(?,?)";

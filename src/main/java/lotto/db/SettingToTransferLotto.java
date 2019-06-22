@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingLotto {
+public class SettingToTransferLotto {
 
     public static Lotto getLottoInDB(ResultSet rs, String colName) throws SQLException {
         List<Integer> lottoNumbers = new ArrayList<>();
