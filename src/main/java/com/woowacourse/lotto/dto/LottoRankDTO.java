@@ -6,9 +6,9 @@ import java.util.TreeMap;
 
 import com.woowacourse.lotto.domain.LottoRank;
 
-import static com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text.NEW_LINE;
 
 public class LottoRankDTO {
+	public static final String NEW_LINE = "<br>";
 	public static final String PRINT_SECOND_OF_LOTTO = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
 	public static final String PRINT_RESULT_OF_LOTTO = "%d개 일치 (%d원)- %d개\n";
 

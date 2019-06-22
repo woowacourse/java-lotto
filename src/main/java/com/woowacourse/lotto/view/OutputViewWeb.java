@@ -1,7 +1,6 @@
 package com.woowacourse.lotto.view;
 
 import java.util.Map;
-
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -9,7 +8,7 @@ import static com.woowacourse.lotto.view.OutputViewConsole.PRINT_EARNINGS_RATE;
 
 public class OutputViewWeb {
 	private static final String NEW_LINE = "<br>";
-	private static final String PRINT_SUM = "총 당첨금액은 %d원" + " 입니다.";
+	private static final String PRINT_SUM = "총 당첨금액은 %d 원 입니다.";
 
 	public static String render(Map<String, Object> model, String templatePath) {
 		return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
