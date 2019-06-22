@@ -3,8 +3,7 @@ package lotto;
 import com.woowacourse.lotto.controller.LottoResultController;
 import com.woowacourse.lotto.controller.UserLottoController;
 import com.woowacourse.lotto.controller.WinningLottoController;
-import spark.ModelAndView;
-import spark.template.handlebars.HandlebarsTemplateEngine;
+import com.woowacourse.lotto.view.OutputViewWeb;
 
 import java.util.*;
 
@@ -18,21 +17,18 @@ public class WebUILottoApplication {
 	public static void main(String[] args) {
 		staticFiles.location("/static");
 
-		get("/", ((request, response) -> {
-			Map<String, Object> model = new HashMap<>();
-			return new HandlebarsTemplateEngine().render(new ModelAndView(model, "/index.html"));
-		}));
+		get("/", ((request, response) -> OutputViewWeb.render(new HashMap<>(), "/index.html")));
 
-		post("/inputCountOfLotto", ((request, response) -> userLottoController.inputCountOfLotto(request, response)));
+		post("/inputCountOfLotto", ((request, response) -> userLottoController.inputCountOfLotto(request)));
 
-		post("inputWinningLotto", (request, response) -> winningLottoController.inputWinningLotto(request, response));
+		post("inputWinningLotto", (request, response) -> winningLottoController.inputWinningLotto(request));
 
-		post("/generateLottos", (request, response) -> userLottoController.generateUserLotto(request, response));
+		post("/generateLottos", (request, response) -> userLottoController.generateUserLotto(request));
 
-		post("/matchLotto", (request, response) -> lottoResultController.matchLotto(request, response));
+		post("/matchLotto", (request, response) -> lottoResultController.matchLotto(request));
 
-		get("/lottoResult", (request, response) -> lottoResultController.getLottoResult(request, response));
+		get("/lottoResult", (request, response) -> lottoResultController.getLottoResult(request));
 
-		post("/searchLottoResult", ((request, response) -> lottoResultController.searchLottoResult(request, response)));
+		post("/searchLottoResult", ((request, response) -> lottoResultController.searchLottoResult(request)));
 	}
 }

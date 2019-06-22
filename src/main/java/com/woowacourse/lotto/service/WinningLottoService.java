@@ -8,32 +8,26 @@ import java.util.Map;
 import com.woowacourse.lotto.dao.DBConnector;
 import com.woowacourse.lotto.dao.WinningLottoDAO;
 import com.woowacourse.lotto.domain.WinningLotto;
-import com.woowacourse.lotto.utils.StringSeparator;
-import spark.Request;
+import com.woowacourse.lotto.domain.request.WinningLottoInputRequest;
 
-public class WinningLottoService implements Service {
+public class WinningLottoService {
 	private static WinningLottoDAO winningLottoDAO = new WinningLottoDAO(new DBConnector().getConnection());
-	private static Map<String, Object> model;
 
-	public String inputWinningLotto(Request request) {
-		model = new HashMap<>();
-		try {
-			int bonusBall = Integer.parseInt(request.queryParams("bonusBall"));
-			int countOfManualLotto = request.session().attribute("countOfManualLotto");
-			List<String> winningLottoNumbers = StringSeparator.splitString(request.queryParams("winningLotto"));
-			WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
-			int round = addWinningLotto(winningLotto);
-			request.session().attribute("round", round);
-			request.session().attribute("winningLotto", winningLotto);
+	public Map<String, Object> inputWinningLotto(WinningLottoInputRequest winningLottoInputRequest) throws SQLException {
+		Map<String, Object> model = new HashMap<>();
+		int bonusBall = winningLottoInputRequest.getBonusBall();
+		int countOfManualLotto = winningLottoInputRequest.getCountOfManualLotto();
+		List<String> winningLottoNumbers = winningLottoInputRequest.getWinningLotto();
+		WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
+		int round = addWinningLotto(winningLotto);
 
-			model.put("countOfManualLotto", countOfManualLotto);
-			return render(model, "/inputManualLotto.html");
-		} catch (Exception e) {
-			return render(model, "/inputWinningLotto.html");
-		}
+		model.put("countOfManualLotto", countOfManualLotto);
+		model.put("round", round);
+		model.put("winningLotto", winningLotto);
+		return model;
 	}
 
-	private static int addWinningLotto(WinningLotto winningLotto) throws SQLException {
+	private int addWinningLotto(WinningLotto winningLotto) throws SQLException {
 		return winningLottoDAO.addWinningLotto(winningLotto);
 	}
 }
