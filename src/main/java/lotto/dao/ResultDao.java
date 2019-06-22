@@ -1,51 +1,47 @@
 package lotto.dao;
 
-import lotto.dbconnction.DBConnection;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ResultDao {
-    public static void addResult(List<String> results, int lottoRound) {
-        try {
-            String query = "INSERT INTO results (result, round) VALUES (?,?)";
-            PreparedStatement pstm = DBConnection.getConnection().prepareStatement(query);
+    private static ResultDao resultDao;
 
-            for (String result : results) {
-                pstm.setString(1, result);
-                pstm.setInt(2, lottoRound);
-                pstm.addBatch();
-                pstm.clearParameters();
-            }
+    public static ResultDao getInstance() {
+        if (Objects.isNull(resultDao)) {
+            resultDao = new ResultDao();
+        }
+        return resultDao;
+    }
 
-            pstm.executeBatch();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    public void addResult(List<String> results, int lottoRound) {
+        String query = "INSERT INTO results (result, round) VALUES (?,?)";
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
+
+        for (String result : results) {
+            List<Object> queryValues = new ArrayList<>();
+
+            queryValues.add(result);
+            queryValues.add(lottoRound);
+            jdbcTemplate.executeUpdate(query, queryValues);
         }
     }
 
-    public static List<String> offerResults(int lottoRound) {
+    public List<String> offerResults(int lottoRound) {
         String query = "SELECT result FROM results WHERE round = ?";
-        List<String> numbers = new ArrayList<>();
 
-        try {
-            PreparedStatement pstm = DBConnection.getConnection().prepareStatement(query);
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(lottoRound);
 
-            pstm.setInt(1, lottoRound);
-            ResultSet rs = pstm.executeQuery();
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
+        List<Map<String, Object>> results = jdbcTemplate.executeQuery(query, queryValues);
 
-            while (rs.next()) {
-                numbers.add(rs.getString(1));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        if (Objects.isNull(results)) {
+            return null;
         }
 
-        return numbers;
+        return results.stream().map(map -> (String) map.get("result")).collect(Collectors.toList());
     }
-
-
 }

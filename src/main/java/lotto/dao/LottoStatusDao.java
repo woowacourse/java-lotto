@@ -1,56 +1,63 @@
 package lotto.dao;
 
-import lotto.dbconnction.DBConnection;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class LottoStatusDao {
-    public static void addResultInfo(int lottoRound, double sum, String returnRate) {
-        try {
-            String query = "INSERT INTO resultInfo VALUES(?,?,?)";
-            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+    private static LottoStatusDao lottoStatusDao;
 
-            statement.setInt(1, lottoRound);
-            statement.setInt(2, (int) sum);
-            statement.setString(3, returnRate);
-
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    public static LottoStatusDao getInstance() {
+        if (Objects.isNull(lottoStatusDao)) {
+            lottoStatusDao = new LottoStatusDao();
         }
+        return lottoStatusDao;
     }
 
-    public static int offerPrize(int lottoRound) {
-        try {
-            String query = "SELECT prize FROM resultInfo WHERE round = ?";
-            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
-            statement.setInt(1, lottoRound);
-            ResultSet rs = statement.executeQuery();
+    public void addResultInfo(int lottoRound, double sum, String returnRate) {
+        String query = "INSERT INTO resultInfo VALUES(?,?,?)";
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
 
-            if (!rs.next()) return 0;
-            return rs.getInt(1);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        List<Object> queryValues = new ArrayList<>();
 
-        return 0;
+        queryValues.add(lottoRound);
+        queryValues.add((int) sum);
+        queryValues.add(returnRate);
+
+        jdbcTemplate.executeUpdate(query, queryValues);
     }
 
-    public static double offerReturnRate(int lottoRound) {
-        try {
-            String query = "SELECT returnRate FROM resultInfo WHERE round = ?";
-            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
-            statement.setInt(1, lottoRound);
-            ResultSet rs = statement.executeQuery();
+    public int offerPrize(int lottoRound) {
+        String query = "SELECT prize FROM resultInfo WHERE round = ?";
 
-            if (!rs.next()) return 0;
-            return rs.getDouble(1);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(lottoRound);
+
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
+        List<Map<String, Object>> results = jdbcTemplate.executeQuery(query, queryValues);
+
+        if (Objects.isNull(results)) {
+            return 0;
         }
 
-        return 0;
+        Map<String, Object> result = results.get(0);
+        return (int) result.get("prize");
+    }
+
+    public double offerReturnRate(int lottoRound) {
+        String query = "SELECT returnRate FROM resultInfo WHERE round = ?";
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(lottoRound);
+
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
+        List<Map<String, Object>> results = jdbcTemplate.executeQuery(query, queryValues);
+
+        if (Objects.isNull(results)) {
+            return 0;
+        }
+
+        Map<String, Object> result = results.get(0);
+        return (double) result.get("returnRate");
     }
 }

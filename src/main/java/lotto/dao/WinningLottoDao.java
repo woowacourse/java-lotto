@@ -1,61 +1,66 @@
 package lotto.dao;
 
-import lotto.dbconnction.DBConnection;
 import lotto.domain.WinningLotto;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class WinningLottoDao {
-    public static void addWinningLotto(WinningLotto winningLotto, int lottoRound) {
-        try {
-            String query = "INSERT INTO winningLotto VALUES (?,?,?)";
-            PreparedStatement pstm = DBConnection.getConnection().prepareStatement(query);
+    private static WinningLottoDao winningLottoDao;
 
-            pstm.setInt(1, lottoRound);
-            pstm.setString(2, winningLotto.toString());
-            pstm.setInt(3, winningLotto.getBonus());
-
-            pstm.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    public static WinningLottoDao getInstance() {
+        if (Objects.isNull(winningLottoDao)) {
+            winningLottoDao = new WinningLottoDao();
         }
+        return winningLottoDao;
     }
 
-    public static String offerWinningNumber(int lottoRound) {
-        try {
-            String query = "SELECT winningLottoNumber FROM winningLotto WHERE round = ?";
-            PreparedStatement pstm = DBConnection.getConnection().prepareStatement(query);
-            pstm.setInt(1, lottoRound);
-            ResultSet rs = pstm.executeQuery();
+    public void addWinningLotto(WinningLotto winningLotto, int lottoRound) {
+        String query = "INSERT INTO winningLotto VALUES (?,?,?)";
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
 
-            if (!rs.next()) return null;
+        List<Object> queryValues = new ArrayList<>();
 
-            return rs.getString(1);
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return null;
+        queryValues.add(lottoRound);
+        queryValues.add(winningLotto.toString());
+        queryValues.add(winningLotto.getBonus());
+        jdbcTemplate.executeUpdate(query, queryValues);
     }
 
-    public static int offerBonusNumber(int lottoRound) {
-        try {
-            String query = "SELECT bonus FROM winningLotto WHERE round = ?";
-            PreparedStatement pstm = DBConnection.getConnection().prepareStatement(query);
-            pstm.setInt(1, lottoRound);
-            ResultSet rs = pstm.executeQuery();
+    public String offerWinningNumber(int lottoRound) {
+        String query = "SELECT winningLottoNumber FROM winningLotto WHERE round = ?";
 
-            if (!rs.next()) return 0;
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(lottoRound);
 
-            return rs.getInt(1);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
+        List<Map<String, Object>> results = jdbcTemplate.executeQuery(query, queryValues);
+
+        if (Objects.isNull(results)) {
+            return null;
         }
 
-        return 0;
+        Map<String, Object> result = results.get(0);
+        return (String) result.get("winningLottoNumber");
+    }
+
+    public int offerBonusNumber(int lottoRound) {
+        String query = "SELECT bonus FROM winningLotto WHERE round = ?";
+
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(lottoRound);
+
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
+        List<Map<String, Object>> results = jdbcTemplate.executeQuery(query, queryValues);
+
+        if (Objects.isNull(results)) {
+            return 0;
+        }
+
+        Map<String, Object> result = results.get(0);
+        return (int) result.get("bonus");
     }
 
 }

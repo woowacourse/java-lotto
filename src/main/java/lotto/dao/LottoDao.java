@@ -1,69 +1,65 @@
 package lotto.dao;
 
-import lotto.dbconnction.DBConnection;
 import lotto.domain.Lotto;
 import lotto.domain.UserLotto;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoDao {
-    public static void addLotto(UserLotto userLotto, int round) {
-        try {
-            String query = "INSERT INTO userLotto (lottoNumbers, round) VALUES (?,?)";
-            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+    private static LottoDao lottoDao;
 
-            for (Lotto lotto : userLotto.getUserLotto()) {
-                statement.setString(1, lotto.toString());
-                statement.setInt(2, round);
-                statement.addBatch();
-                statement.clearParameters();
-            }
-            statement.executeBatch();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public static LottoDao getInstance() {
+        if (Objects.isNull(lottoDao)) {
+            lottoDao = new LottoDao();
+        }
+        return lottoDao;
+    }
+
+    public void addLotto(UserLotto userLotto, int round) {
+        String query = "INSERT INTO userLotto (lottoNumbers, round) VALUES (?,?)";
+
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
+
+        for (Lotto lotto : userLotto.getUserLotto()) {
+            List<Object> queryValues = new ArrayList<>();
+
+            queryValues.add(lotto.toString());
+            queryValues.add(round);
+            jdbcTemplate.executeUpdate(query, queryValues);
         }
     }
 
-    public static int offerMaxRound() {
-        try {
-            String query = "SELECT MAX(round) FROM userLotto";
-            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
-            ResultSet rs = statement.executeQuery();
+    public int offerMaxRound() {
+        String query = "SELECT MAX(round) FROM userLotto";
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
 
-            if (!rs.next()) return 0;
+        List<Map<String, Object>> results = jdbcTemplate.executeQuery(query);
 
-            return rs.getInt(1);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        if (Objects.isNull(results.get(0).get("MAX(round)"))) {
+            return 0;
         }
 
-        return 0;
+        Map<String, Object> result = results.get(0);
+        return (int) result.get("MAX(round)");
     }
 
-    public static List<String> offerUserLottoNumber(int lottoRound) {
+    public List<String> offerUserLottoNumber(int lottoRound) {
         String query = "SELECT lottoNumbers FROM userLotto WHERE round = ?";
 
-        List<String> numbers = new ArrayList<>();
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(lottoRound);
 
-        try {
-            PreparedStatement pstm = DBConnection.getConnection().prepareStatement(query);
+        JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
+        List<Map<String, Object>> results = jdbcTemplate.executeQuery(query, queryValues);
 
-            pstm.setInt(1, lottoRound);
-            ResultSet rs = pstm.executeQuery();
-
-            while (rs.next()) {
-                numbers.add(rs.getString(1));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        if (Objects.isNull(results)) {
+            return null;
         }
 
-        return numbers;
+        return results.stream().map(map -> (String) map.get("lottoNumbers")).collect(Collectors.toList());
     }
-
-
 }
