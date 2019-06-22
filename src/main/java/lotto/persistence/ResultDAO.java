@@ -1,4 +1,4 @@
-package lotto.database;
+package lotto.persistence;
 
 import lotto.domain.Rank;
 

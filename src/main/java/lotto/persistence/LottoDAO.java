@@ -1,4 +1,4 @@
-package lotto.database;
+package lotto.persistence;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
@@ -28,7 +28,7 @@ public class LottoDAO {
         for (Lotto lotto : lottos.getLottos()) {
             List<Integer> numbers = lotto.getLottoNumbers().stream().map(n -> n.getNumber()).collect(Collectors.toList());
             for (int i = 0; i < numbers.size(); i++) {
-                pstmt.setString(2+i, String.valueOf(numbers.get(i)));
+                pstmt.setString(2 + i, String.valueOf(numbers.get(i)));
             }
             pstmt.executeUpdate();
         }

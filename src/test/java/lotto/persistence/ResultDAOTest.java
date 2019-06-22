@@ -1,13 +1,10 @@
-package lotto.database;
+package lotto.persistence;
 
 import lotto.domain.Rank;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
 
 public class ResultDAOTest {
     private Connection con;

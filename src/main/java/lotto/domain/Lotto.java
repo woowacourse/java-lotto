@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.DuplicatedLottoNumbersException;
+import lotto.domain.exceptions.InvalidSizeOfLottoNumbersException;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;

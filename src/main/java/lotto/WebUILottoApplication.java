@@ -1,19 +1,15 @@
 package lotto;
 
-import lotto.database.*;
-import lotto.domain.*;
-import lotto.view.WebInputView;
+import lotto.service.*;
+import org.javatuples.Pair;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import static lotto.view.WebOutputView.*;
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
@@ -26,77 +22,45 @@ public class WebUILottoApplication {
         });
 
         post("/home", (req, res) -> {
-            LottoBuyingMoney lottoBuyingMoney = WebInputView.inputLottoBuyingMoney(req.queryParams("lottoBuyingMoney"));
-            LottoCount lottoCount = WebInputView.inputLottoCount(lottoBuyingMoney, req.queryParams("numOfCustomLottos"));
+            int lottoBuyingMoney = LottoBuyingMoneyService.validateLottoBuyingMoney(req.queryParams("lottoBuyingMoney"));
+            Pair<Integer, Integer> numOfLottos = LottoCountService.calculateNumOfLottos(lottoBuyingMoney, req.queryParams("numOfCustomLottos"));
+            int numOfCustomLottos = numOfLottos.getValue0();
+            int numOfAutoLottos = numOfLottos.getValue1();
+
             req.session().attribute("lottoBuyingMoney", lottoBuyingMoney);
-            req.session().attribute("lottoCount", lottoCount);
+            req.session().attribute("numOfCustomLottos", numOfCustomLottos);
+            req.session().attribute("numOfAutoLottos", numOfAutoLottos);
+
             res.redirect("/lotto");
             return null;
         });
 
         get("/lotto", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("numOfCustomLottos", ((LottoCount) req.session().attribute("lottoCount")).custom());
+            model.put("numOfCustomLottos", req.session().attribute("numOfCustomLottos"));
             return render(model, "lotto.html");
         });
 
         post("/lotto", (req, res) -> {
-            WinningLotto winningLotto = WebInputView.inputWinningLotto(req.queryParams("winningLotto"));
-            LottoCount lottoCount = req.session().attribute("lottoCount");
-            List<List<Integer>> lottos = new ArrayList<>();
-            for (int i = 0; i < lottoCount.custom(); i++) {
-                lottos.add(WebInputView.inputLotto(req.queryParams("lotto" + i)));
+            int lottoBuyingMoney = req.session().attribute("lottoBuyingMoney");
+            int numOfCustomLottos = req.session().attribute("numOfCustomLottos");
+
+            String winningLotto = req.queryParams("winningLotto");
+            List<String> customLottos = new ArrayList<>();
+            for (int i = 0; i < numOfCustomLottos; i++) {
+                customLottos.add(req.queryParams("lotto" + i));
             }
-            req.session().attribute("winningLotto", winningLotto);
-            req.session().attribute("lottos", LottoVendingMachine.getLottos(lottoCount, lottos));
-            res.redirect("/result");
-            return null;
-        });
 
-        get("/result", (req, res) -> {
-            // get data from section
-            WinningLotto winningLotto = req.session().attribute("winningLotto");
-            Lottos lottos = req.session().attribute("lottos");
-            WinningStatistics winningStatistics = new WinningStatistics(lottos.match(winningLotto));
-
-            // Insert data into database
-            Connection con = Connector.getConnection();
-            RoundDAO roundDao = new RoundDAO(con);
-            roundDao.addRound(winningStatistics.getPrize().getValue(), winningStatistics.getInterestRate(req.session().attribute("lottoBuyingMoney")));
-            int thisRoundId = roundDao.getLatestRoundId();
-            ResultDAO resultDao = new ResultDAO(con);
-            resultDao.addResult(thisRoundId, winningStatistics.getStatistics());
-            WinningLottoDAO winningLottoDao = new WinningLottoDAO(con);
-            winningLottoDao.addWinningLotto(thisRoundId, winningLotto);
-            LottoDAO lottoDao = new LottoDAO(con);
-            lottoDao.addLotto(thisRoundId, lottos);
-            Connector.closeConnection(con);
-            res.redirect("/result/"+thisRoundId);
+            LottoService.saveResult(lottoBuyingMoney, numOfCustomLottos, winningLotto, customLottos);
+            res.redirect("/result/" + RoundService.getThisLottoRoundId());
             return null;
         });
 
         get("/result/:roundId", (req, res) -> {
-            WebResultDTO result = new WebResultDTO();
-
-            // get data from database
-            Connection con = Connector.getConnection();
-            RoundDAO roundDao = new RoundDAO(con);
             int thisRoundId = Integer.parseInt(req.params("roundId"));
-            result.setRound(String.valueOf(thisRoundId));
-            result.setRounds(roundDao.getAllIds().stream().map(n -> String.valueOf(n)).collect(Collectors.toList()));
-            WinningLottoDAO winningLottoDao = new WinningLottoDAO(con);
-            WinningLotto winningLotto = winningLottoDao.findWinningLottoByRoundId(thisRoundId);
-            result.setWinningLotto(outputWinningLotto(winningLotto));
-            LottoDAO lottoDao = new LottoDAO(con);
-            Lottos lottos = lottoDao.findLottosByRoundId(thisRoundId);
-            result.setLottos(outputLottos(lottos));
-            WinningStatistics winningStatistics = new WinningStatistics(lottos.match(winningLotto));
-            result.setInterestRate(String.valueOf(winningStatistics.getInterestRate(req.session().attribute("lottoBuyingMoney"))));
-            result.setPrize(String.valueOf(winningStatistics.getPrize().getValue()));
-            result.setResult(outputResult(winningStatistics));
+            ResultDTO result = ResultService.getResultByRoundId(thisRoundId);
             Map<String, Object> model = new HashMap<>();
             model.put("result", result);
-            Connector.closeConnection(con);
             return render(model, "result.html");
         });
 

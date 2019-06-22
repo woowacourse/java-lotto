@@ -1,4 +1,4 @@
-package lotto.database;
+package lotto.persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,7 +34,7 @@ public class RoundDAO {
     }
 
     public double getInterestRateOfId(int id) throws SQLException {
-        String query = "SELECT interestRate FROM round WHERE id=?";
+        String query = "SELECT interest_rate FROM round WHERE id=?";
         PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setString(1, String.valueOf(id));
         ResultSet rs = pstmt.executeQuery();
@@ -64,7 +64,7 @@ public class RoundDAO {
         }
         do {
             ids.add(rs.getInt("id"));
-        } while(rs.next());
+        } while (rs.next());
         return ids;
     }
 }

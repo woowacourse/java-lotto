@@ -13,8 +13,6 @@ public class RestWebUILottoApplication {
     public static void main(String[] args) {
         staticFiles.location("/static");
 
-
-
         get("/*", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return render(model, "vue-index.html");

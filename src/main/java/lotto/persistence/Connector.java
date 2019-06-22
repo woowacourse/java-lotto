@@ -1,4 +1,4 @@
-package lotto.database;
+package lotto.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,7 +22,7 @@ public class Connector {
 
         // 드라이버 연결
         try {
-            con = DriverManager.getConnection("jdbc:mysql://" + server +"/"
+            con = DriverManager.getConnection("jdbc:mysql://" + server + "/"
                     + database + "?serverTimezone=UTC&useSSL=false", userName, password);
             System.out.println("데이터베이스에 연결되었습니다.");
         } catch (SQLException e) {

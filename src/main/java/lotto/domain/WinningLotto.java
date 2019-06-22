@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.InvalidBonusBallException;
+
 import java.util.List;
 
 public class WinningLotto {

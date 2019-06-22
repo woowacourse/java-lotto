@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.InvalidLottoBuyingMoneyException;
+
 public class LottoBuyingMoney extends Money {
     private static final int LOTTO_PRICE = 1000;
 

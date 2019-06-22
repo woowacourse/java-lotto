@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.InvalidRankException;
+
 import java.util.Arrays;
 
 /**
