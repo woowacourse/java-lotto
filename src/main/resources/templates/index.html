@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>로또</title>
+    <title>로또 구입 페이지</title>
 </head>
 <body>
-Hello World!!
+<div>
+    <div>
+        <h3>구입 금액을 입력해주세요.</h3>
+        <hr>
+        <form action="./purchase" id="purchase" method="post">
+            <input type="text" id="purchaseAmount" name="purchaseAmount" placeholder="구입 금액을 입력해주세요."/><br/>
+            <input type="text" id="manualCount" name="manualCount" placeholder="수동 구입 개수를 입력해주세요.">
+            <input type="button" value="구매" id="purchaseButton"><br/>
+        </form>
+    </div>
+</div>
+
+<!-- script -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="./js/purchase.js"></script>
 </body>
 </html>

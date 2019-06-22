@@ -35,7 +35,6 @@ public class LottoResult {
 
     private void init(Map<LottoRank, Integer> map) {
         List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
-        Collections.reverse(lottoRanks);
         for (LottoRank lottoRank : lottoRanks) {
             map.put(lottoRank, INIT_VALUE);
         }
@@ -61,5 +60,19 @@ public class LottoResult {
 
     public Map<LottoRank, Integer> getMap() {
         return map;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(winning, that.winning) &&
+                Objects.equals(lottos, that.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winning, lottos);
     }
 }

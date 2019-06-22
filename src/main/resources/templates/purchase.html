@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h2>수동 로또 입력</h2>
+    {{#purchaseCount}}
+    <div>
+        <span id="manualCount" value="{{manualCount}}" hidden="hidden"></span>
+        <span id="autoCount" value="{{autoCount}}" hidden="hidden"></span>
+    </div>
+    {{/purchaseCount}}
+    <div>
+        <form action="purchaseLotto" id="manualLottoGroup" method="post">
+            <input type="submit" value="구입">
+            <input type="button" value="취소" id="cancelButton">
+        </form>
+    </div>
+</div>
+
+<!-- script -->
+<script src="./js/purchaseRender.js"></script>
+</body>
+</html>
