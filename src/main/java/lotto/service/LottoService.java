@@ -10,6 +10,7 @@ import lotto.dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoService {
     private static final int FIRST_INDEX = 0;
@@ -19,6 +20,19 @@ public class LottoService {
     private static final LottoStatus LOTTO_STATUS = LottoStatus.getInstance();
     private static final Result RESULT = Result.getInstance();
     private static final WinningLottoInfo WINNING_LOTTO_INFO = WinningLottoInfo.getInstance();
+
+    private static LottoService lottoService;
+
+    private LottoService() {
+    }
+
+    public static LottoService getInstance() {
+        if (Objects.isNull(lottoService)) {
+            return new LottoService();
+        }
+
+        return lottoService;
+    }
 
     public LottoInfoDto offerLottoInfo(int money, int manualRound, String manualNumbers, int lottoRound) {
         int round = new Money(money).getRound();
@@ -58,6 +72,7 @@ public class LottoService {
         List<String> userLotto = LOTTO_INFO.offerUserLottoNumber(lottoRound);
         String winningNumber = WINNING_LOTTO_INFO.offerWinningNumber(lottoRound);
         int bonus = WINNING_LOTTO_INFO.offerBonusNumber(lottoRound);
+
         List<String> results = RESULT.offerResults(lottoRound);
         String returnRate = String.valueOf(LOTTO_STATUS.offerReturnRate(lottoRound));
         int prize = LOTTO_STATUS.offerPrize(lottoRound);
