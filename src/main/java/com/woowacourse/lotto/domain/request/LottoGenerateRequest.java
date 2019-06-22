@@ -1,5 +1,7 @@
 package com.woowacourse.lotto.domain.request;
 
+import java.util.List;
+
 import com.woowacourse.lotto.domain.LottoMoney;
 import com.woowacourse.lotto.domain.factory.LottosFactory;
 
@@ -7,7 +9,7 @@ public class LottoGenerateRequest {
 	private int countOfManualLotto;
 	private LottoMoney lottoMoney;
 	private LottosFactory lottosFactory;
-	private String manualLottos;
+	private List<String> manualLottos;
 	private int round;
 
 	public int getCountOfManualLotto() {
@@ -34,11 +36,11 @@ public class LottoGenerateRequest {
 		this.lottosFactory = lottosFactory;
 	}
 
-	public String getManualLottos() {
+	public List<String> getManualLottos() {
 		return manualLottos;
 	}
 
-	public void setManualLottos(String manualLottos) {
+	public void setManualLottos(List<String> manualLottos) {
 		this.manualLottos = manualLottos;
 	}
 

@@ -13,11 +13,7 @@ import com.woowacourse.lotto.domain.*;
 import com.woowacourse.lotto.domain.request.LottoSearchRequest;
 import com.woowacourse.lotto.domain.request.WinningLottoRequest;
 
-import static com.woowacourse.lotto.view.OutputViewConsole.*;
-
 public class LottoResultService {
-	private static final String NEW_LINE = "<br>";
-	private static final String PRINT_SUM = "총 당첨금액은 %d원" + " 입니다.";
 	private static Map<String, Object> model;
 	private static LottoResultDAO lottoResultDAO = new LottoResultDAO(new DBConnector().getConnection());
 	private static WinningLottoDAO winningLottoDAO = new WinningLottoDAO(new DBConnector().getConnection());
@@ -54,8 +50,8 @@ public class LottoResultService {
 		model.put("selectNumber", selectedRound);
 		model.put("rounds", rounds);
 		model.put("ranks", findLottoResultRankById(selectedRound));
-		model.put("earningRate", String.format(PRINT_EARNINGS_RATE + NEW_LINE, sumAndEarningRate.get("earningRate")));
-		model.put("sum", String.format(PRINT_SUM + NEW_LINE, sumAndEarningRate.get("sum")));
+		model.put("earningRate", sumAndEarningRate.get("earningRate"));
+		model.put("sum", sumAndEarningRate.get("sum"));
 		return model;
 	}
 

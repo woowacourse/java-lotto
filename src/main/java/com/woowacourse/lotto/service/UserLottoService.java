@@ -12,7 +12,6 @@ import com.woowacourse.lotto.domain.factory.LottosFactory;
 import com.woowacourse.lotto.domain.request.LottoGenerateRequest;
 
 public class UserLottoService {
-	private static final String WHITE_SPACE = "\\r\\n";
 	private static Map<String, Object> model;
 	private static UserLottoDAO userLottoDAO = new UserLottoDAO(new DBConnector().getConnection());
 
@@ -21,10 +20,7 @@ public class UserLottoService {
 		int countOfManualLotto = lottoGenerateRequest.getCountOfManualLotto();
 		LottoMoney lottoMoney = lottoGenerateRequest.getLottoMoney();
 		LottosFactory lottosFactory = lottoGenerateRequest.getLottosFactory();
-		List<String> manualLottos = null;
-		if (countOfManualLotto > 0) {
-			manualLottos = Arrays.asList(lottoGenerateRequest.getManualLottos().split(WHITE_SPACE));
-		}
+		List<String> manualLottos = lottoGenerateRequest.getManualLottos();
 		Lottos lottos = lottosFactory.generateLotto(manualLottos);
 		List<String> userLottos = new ArrayList<>();
 		lottos.getLottos().stream().forEach(x -> userLottos.add(x.toString()));

@@ -7,6 +7,7 @@ import com.woowacourse.lotto.domain.LottoMoney;
 import com.woowacourse.lotto.domain.factory.LottosFactory;
 import com.woowacourse.lotto.domain.request.LottoGenerateRequest;
 import com.woowacourse.lotto.service.UserLottoService;
+import com.woowacourse.lotto.view.InputViewWeb;
 import spark.Request;
 
 import static com.woowacourse.lotto.view.OutputViewWeb.render;
@@ -36,7 +37,7 @@ public class UserLottoController {
 		lottoGenerateRequest.setCountOfManualLotto(Integer.parseInt(request.session().attribute("countOfManualLotto")));
 		lottoGenerateRequest.setLottoMoney(request.session().attribute("lottoMoney"));
 		lottoGenerateRequest.setLottosFactory(request.session().attribute("lottosFactory"));
-		lottoGenerateRequest.setManualLottos(request.queryParams("manualLottos"));
+		lottoGenerateRequest.setManualLottos(InputViewWeb.splitString(request.queryParams("manualLottos")));
 		lottoGenerateRequest.setRound(request.session().attribute("round"));
 
 		try {
