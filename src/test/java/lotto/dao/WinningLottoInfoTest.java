@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class WinningLottoDaoTest {
+class WinningLottoInfoTest {
     private List<Number> lottoNumbers = new ArrayList<>();
-    private WinningLottoDao winningLottoDao = WinningLottoDao.getInstance();
+    private WinningLottoInfo winningLottoInfo = WinningLottoInfo.getInstance();
 
     @BeforeEach
     void setUp() {
@@ -24,16 +24,16 @@ class WinningLottoDaoTest {
     void addWinningLotto() {
         Lotto lotto = new Lotto(lottoNumbers);
         WinningLotto winningLotto = new WinningLotto(lotto, Number.of(9));
-        winningLottoDao.addWinningLotto(winningLotto, 9);
+        winningLottoInfo.addWinningLotto(winningLotto, 9);
     }
 
     @Test
     void offerWinningNumber() {
-        System.out.println(winningLottoDao.offerWinningNumber(2));
+        System.out.println(winningLottoInfo.offerWinningNumber(2));
     }
 
     @Test
     void offerBonusNumber() {
-        System.out.println(winningLottoDao.offerBonusNumber(2));
+        System.out.println(winningLottoInfo.offerBonusNumber(2));
     }
 }

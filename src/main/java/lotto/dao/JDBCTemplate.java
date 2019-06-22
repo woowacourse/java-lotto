@@ -38,7 +38,7 @@ public class JDBCTemplate {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Map<String, Object>> executeQuery(String query, List<Object> queryValues) {
@@ -49,7 +49,7 @@ public class JDBCTemplate {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return Collections.emptyList();
     }
 
     private List<Map<String, Object>> createResult(ResultSet rs) throws SQLException {

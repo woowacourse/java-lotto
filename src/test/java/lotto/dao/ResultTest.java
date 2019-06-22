@@ -5,19 +5,19 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class ResultDaoTest {
-    private ResultDao resultDao = ResultDao.getInstance();
+class ResultTest {
+    private Result result = Result.getInstance();
 
     @Test
     void addResult() {
         List<String> results = new ArrayList<>();
         results.add("FIRST");
         results.add("SECOND");
-        resultDao.addResult(results, 7);
+        result.addResult(results, 7);
     }
 
     @Test
     void offerResults() {
-        System.out.println(resultDao.offerResults(7));
+        System.out.println(result.offerResults(7));
     }
 }

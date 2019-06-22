@@ -4,12 +4,12 @@ import lotto.domain.Lotto;
 
 import java.util.List;
 
-public class LottoDto {
+public class LottoInfoDto {
     private final RoundDto roundDto;
     private final List<Lotto> userLotto;
     private final String[] numbers;
 
-    public LottoDto(RoundDto roundDto, List<Lotto> userLotto, String[] numbers) {
+    public LottoInfoDto(RoundDto roundDto, List<Lotto> userLotto, String[] numbers) {
         this.roundDto = roundDto;
         this.userLotto = userLotto;
         this.numbers = numbers;

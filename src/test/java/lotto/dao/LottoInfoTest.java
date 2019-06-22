@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class LottoDaoTest {
+class LottoInfoTest {
     private List<Lotto> lotto;
-    private LottoDao lottoDao = LottoDao.getInstance();
+    private LottoInfo lottoInfo = LottoInfo.getInstance();
 
     @BeforeEach
     void setUp() {
@@ -28,16 +28,16 @@ class LottoDaoTest {
     @Test
     void addLotto() {
         UserLotto userLotto = new UserLotto(lotto, 4, new LottoNumberGenerator());
-        lottoDao.addLotto(userLotto, 1);
+        lottoInfo.addLotto(userLotto, 1);
     }
 
     @Test
     void offerMaxRound() {
-        System.out.println(lottoDao.offerMaxRound());
+        System.out.println(lottoInfo.offerMaxRound());
     }
 
     @Test
     void offerUserLottoNumber() {
-        System.out.println(lottoDao.offerUserLottoNumber(1));
+        System.out.println(lottoInfo.offerUserLottoNumber(1));
     }
 }
