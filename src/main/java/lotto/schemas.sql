@@ -9,13 +9,16 @@ CREATE TABLE winningLotto (
 CREATE TABLE lotto (
     lotto_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     round int NOT NULL,
-    numbers text(64) NOT NULL,
-    FOREIGN KEY (round) REFERENCES winningLotto (round)
+    numbers VARCHAR(64) NOT NULL
 );
 
 CREATE TABLE statistics (
     round int NOT NULL PRIMARY KEY,
-    result VARCHAR(256) NOT NULL,
-    return_of_rate VARCHAR(64) NOT NULL,
-    FOREIGN KEY (round) REFERENCES winningLotto (round)
+    first_count int NOT NULL,
+    second_count int NOT NULL,
+    third_count int NOT NULL,
+    fourth_count int NOT NULL,
+    fifth_count int NOT NULL,
+    miss_count int NOT NULL,
+    return_of_rate VARCHAR(64) NOT NULL
 );
