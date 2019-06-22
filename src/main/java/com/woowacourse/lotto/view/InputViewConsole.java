@@ -8,7 +8,7 @@ import com.woowacourse.lotto.exception.InvalidMoneyException;
 import com.woowacourse.lotto.exception.InvalidNumberException;
 import com.woowacourse.lotto.utils.StringSeparator;
 
-public class InputView {
+public class InputViewConsole {
 	private static final String DEMAND_MONEY_FOR_LOTTO_PURCHASE = "구입금액을 입력해 주세요.";
 	private static final String DEMAND_WINNING_LOTTO = "지난 주 당첨 번호를 입력해주세요.";
 	private static final String DEMAND_BONUS_BALL = "보너스 볼을 입력해 주세요.";

@@ -2,7 +2,7 @@ package com.woowacourse.lotto.view;
 
 import com.woowacourse.lotto.domain.*;
 
-public class OutputView {
+public class OutputViewConsole {
 	private static final String PRINT_RESULT_MESSAGE = "당첨 통계\n---------";
 	public static final String PRINT_EARNINGS_RATE = "총 수익률은 %d%%" + " 입니다.\n";
 	public static final String PRINT_SECOND_OF_LOTTO = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
