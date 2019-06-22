@@ -40,7 +40,8 @@ public class WebUILottoApplication {
             int round = Integer.parseInt(req.queryParams("round"));
             String userLottoString = req.queryParams("userLotto");
             int lottoRound = Integer.parseInt(req.queryParams("lottoRound"));
-            return render(lottoService.offerResults(new RoundInfoDto(winNumbers, bonusNumber, userLottoString, round, lottoRound)), "result.html");
+            RoundInfoDto roundInfoDto = new RoundInfoDto(winNumbers, bonusNumber, userLottoString, round, lottoRound);
+            return render(lottoService.offerResults(roundInfoDto), "result.html");
         });
 
         get("/hits", (req, res) -> {

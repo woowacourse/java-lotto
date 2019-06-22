@@ -25,10 +25,11 @@ public class LottoService {
         int autoRound = getAutoRound(round, manualRound);
         String[] numbers = splitNumbers(manualNumbers);
         UserLotto userLotto = createUserLotto(numbers, autoRound);
+        RoundDto roundDto = new RoundDto(round, manualRound, autoRound, lottoRound);
 
         lottoDao.addLotto(userLotto, lottoRound);
 
-        return new LottoDto(round, manualRound, autoRound, userLotto.getUserLotto(), numbers, lottoRound);
+        return new LottoDto(roundDto, userLotto.getUserLotto(), numbers);
     }
 
     public UserLottoDto offerUserLottoInfo(int round, String userLottoString, int lottoRound) {
