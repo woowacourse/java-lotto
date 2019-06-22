@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class DBConnectionTest {
     @Test
     void connection() {
-        Connection con = DBConnection.getConnection();
-        assertNotNull(con);
+        DBConnection dbConnection = DBConnection.getInstacne();
 
-        DBConnection.closeConnection(con);
+        Connection con = dbConnection.getConnection();
+        assertNotNull(con);
     }
 }

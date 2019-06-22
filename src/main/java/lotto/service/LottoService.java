@@ -15,6 +15,10 @@ public class LottoService {
     private static final int FIRST_INDEX = 0;
     private static final String RESULT_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
+    private static final LottoDao lottoDao = LottoDao.getInstance();
+    private static final LottoStatusDao lottoStatusDao = LottoStatusDao.getInstance();
+    private static final ResultDao resultDao = ResultDao.getInstance();
+    private static final WinningLottoDao winningLottoDao = WinningLottoDao.getInstance();
 
     public LottoDto offerLottoInfo(int money, int manualRound, String manualNumbers, int lottoRound) {
         int round = new Money(money).getRound();
@@ -22,7 +26,7 @@ public class LottoService {
         String[] numbers = splitNumbers(manualNumbers);
         UserLotto userLotto = createUserLotto(numbers, autoRound);
 
-        LottoDao.addLotto(userLotto, lottoRound);
+        lottoDao.addLotto(userLotto, lottoRound);
 
         return new LottoDto(round, manualRound, autoRound, userLotto.getUserLotto(), numbers, lottoRound);
     }
@@ -32,36 +36,36 @@ public class LottoService {
         return new UserLottoDto(round, new UserLotto(Parser.parseLotto(numbers)).getUserLotto(), lottoRound);
     }
 
-    public ResultDto offerResults(String winNumber, String bonusNumber, String userLottoString, int round, int lottoRound) {
-        Lotto results = Parser.parseWinningLotto(winNumber);
-        WinningLotto winningLotto = new WinningLotto(results, Number.of(Integer.parseInt(bonusNumber)));
-        String[] numbers = Parser.parseLottoStrings(userLottoString);
+    public ResultDto offerResults(RoundInfoDto roundInfoDto) {
+        Lotto results = Parser.parseWinningLotto(roundInfoDto.getWinNumber());
+        WinningLotto winningLotto = new WinningLotto(results, Number.of(Integer.parseInt(roundInfoDto.getBonusNumber())));
+        String[] numbers = Parser.parseLottoStrings(roundInfoDto.getUserLottoString());
         UserLotto userLotto = new UserLotto(Parser.parseLotto(numbers));
         Winners winners = new Winners(winningLotto.makeRankResultList(userLotto));
 
-        WinningLottoDao.addWinningLotto(winningLotto, lottoRound);
+        winningLottoDao.addWinningLotto(winningLotto, roundInfoDto.getLottoRound());
 
         List<String> resultRanks = provideResultStatus(winners.getRankResult());
 
-        ResultDao.addResult(resultRanks, lottoRound);
-        LottoStatusDao.addResultInfo(lottoRound, winners.getPrizeSum(), winners.calculateResultRate(round));
+        resultDao.addResult(resultRanks, roundInfoDto.getLottoRound());
+        lottoStatusDao.addResultInfo(roundInfoDto.getLottoRound(), winners.getPrizeSum(), winners.calculateResultRate(roundInfoDto.getRound()));
 
-        return new ResultDto(resultRanks, winners.calculateResultRate(round), lottoRound);
+        return new ResultDto(resultRanks, winners.calculateResultRate(roundInfoDto.getRound()), roundInfoDto.getLottoRound());
     }
 
     public StatusDto offerHitsStatus(int lottoRound) {
-        List<String> userLotto = LottoDao.offerUserLottoNumber(lottoRound);
-        String winningNumber = WinningLottoDao.offerWinningNumber(lottoRound);
-        int bonus = WinningLottoDao.offerBonusNumber(lottoRound);
-        List<String> results = ResultDao.offerResults(lottoRound);
-        String returnRate = String.valueOf(LottoStatusDao.offerReturnRate(lottoRound));
-        int prize = LottoStatusDao.offerPrize(lottoRound);
+        List<String> userLotto = lottoDao.offerUserLottoNumber(lottoRound);
+        String winningNumber = winningLottoDao.offerWinningNumber(lottoRound);
+        int bonus = winningLottoDao.offerBonusNumber(lottoRound);
+        List<String> results = resultDao.offerResults(lottoRound);
+        String returnRate = String.valueOf(lottoStatusDao.offerReturnRate(lottoRound));
+        int prize = lottoStatusDao.offerPrize(lottoRound);
 
         return new StatusDto(lottoRound, userLotto, winningNumber, bonus, results, returnRate, prize);
     }
 
     public LottoRoundDto offerLottoRounds() {
-        int lottoRound = LottoDao.offerMaxRound() + 1;
+        int lottoRound = lottoDao.offerMaxRound() + 1;
         return new LottoRoundDto(lottoRound);
     }
 

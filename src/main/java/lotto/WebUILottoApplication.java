@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.dto.RoundInfoDto;
 import lotto.service.LottoService;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -39,7 +40,7 @@ public class WebUILottoApplication {
             int round = Integer.parseInt(req.queryParams("round"));
             String userLottoString = req.queryParams("userLotto");
             int lottoRound = Integer.parseInt(req.queryParams("lottoRound"));
-            return render(lottoService.offerResults(winNumbers, bonusNumber, userLottoString, round, lottoRound), "result.html");
+            return render(lottoService.offerResults(new RoundInfoDto(winNumbers, bonusNumber, userLottoString, round, lottoRound)), "result.html");
         });
 
         get("/hits", (req, res) -> {
