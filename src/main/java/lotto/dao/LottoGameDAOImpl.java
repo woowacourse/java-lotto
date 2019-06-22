@@ -2,6 +2,7 @@ package lotto.dao;
 
 import lotto.domain.DBConnector;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,29 +19,50 @@ public class LottoGameDAOImpl implements LottoGameDAO {
     }
 
     @Override
-    public int getLastRound() throws SQLException {
+    public int getLastRound() {
         String query = "SELECT * from lotto_game ORDER BY round DESC limit 1";
-        PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
-        ResultSet rs = pstmt.executeQuery();
+        int round = 0;
 
-        if (!rs.next()) return 0;
+        try (Connection con = CONNECTOR.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
 
-        return rs.getInt("round");
+            if (!rs.next()) return round;
+
+            round = rs.getInt("round");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return round;
     }
 
     @Override
-    public int addLottoGame(int round) throws SQLException {
+    public int addLottoGame(int round) {
         String query = "INSERT INTO lotto_game VALUES (?)";
-        PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
-        pstmt.setInt(1, round);
-        return pstmt.executeUpdate();
+        int result = 0;
+
+        try (Connection con = CONNECTOR.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, round);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
-    public int deleteLottoGame(int round) throws SQLException {
+    public int deleteLottoGame(int round) {
         String query = "DELETE FROM lotto_game WHERE round=?";
-        PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
-        pstmt.setInt(1, round);
-        return pstmt.executeUpdate();
+        int result = 0;
+
+        try (Connection con = CONNECTOR.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, round);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

@@ -3,6 +3,7 @@ package lotto.dao;
 import lotto.domain.DBConnector;
 import lotto.domain.lotto.WinningLotto;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,34 +21,55 @@ public class WinningLottoDAOImpl implements WinningLottoDAO {
     }
 
     @Override
-    public WinningLotto findByRound(int round) throws SQLException {
+    public WinningLotto findByRound(int round) {
         String query = "SELECT * FROM winning_lotto WHERE round = ?";
-        PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
-        pstmt.setInt(1, round);
-        ResultSet rs = pstmt.executeQuery();
+        WinningLotto winningLotto = null;
 
-        if (!rs.next()) return null;
+        try (Connection con = CONNECTOR.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, round);
+            ResultSet rs = pstmt.executeQuery();
 
-        return new WinningLotto(rs.getString("numbers"),
-                rs.getString("bonus_number"));
+            if (!rs.next()) return winningLotto;
+
+            winningLotto = new WinningLotto(rs.getString("numbers"),
+                    rs.getString("bonus_number"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return winningLotto;
     }
 
     @Override
-    public int addWinningLotto(WinningLotto winningLotto, int round) throws SQLException {
+    public int addWinningLotto(WinningLotto winningLotto, int round) {
         String query = "INSERT INTO winning_lotto VALUES (?, ?, ?)";
-        PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
-        pstmt.setInt(1, round);
-        pstmt.setString(2,
-                winningLotto.getLotto().getNumbers().toString().replaceAll((regexForDelteBracket), ""));
-        pstmt.setString(3, winningLotto.getBonusNumber().toString());
-        return pstmt.executeUpdate();
+        int result = 0;
+
+        try (Connection con = CONNECTOR.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, round);
+            pstmt.setString(2,
+                    winningLotto.getLotto().getNumbers().toString().replaceAll((regexForDelteBracket), ""));
+            pstmt.setString(3, winningLotto.getBonusNumber().toString());
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
-    public int deleteWinningLotto(int round) throws SQLException {
+    public int deleteWinningLotto(int round) {
         String query = "DELETE FROM winning_lotto WHERE round=?";
-        PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
-        pstmt.setInt(1, round);
-        return pstmt.executeUpdate();
+        int result = 0;
+
+        try (Connection con = CONNECTOR.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, round);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

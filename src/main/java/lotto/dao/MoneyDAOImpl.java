@@ -3,6 +3,7 @@ package lotto.dao;
 import lotto.domain.DBConnector;
 import lotto.domain.Money;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,31 +20,52 @@ public class MoneyDAOImpl implements MoneyDAO {
     }
 
     @Override
-    public Money findByRound(int round) throws SQLException {
+    public Money findByRound(int round) {
         String query = "SELECT * FROM money WHERE round = ?";
-        PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
-        pstmt.setInt(1, round);
-        ResultSet rs = pstmt.executeQuery();
+        Money money = null;
 
-        if (!rs.next()) return null;
+        try (Connection con = CONNECTOR.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, round);
+            ResultSet rs = pstmt.executeQuery();
 
-        return new Money(rs.getString("money"));
+            if (!rs.next()) return money;
+
+            money = new Money(rs.getString("money"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return money;
     }
 
     @Override
-    public int addMoney(Money money, int round) throws SQLException {
+    public int addMoney(Money money, int round) {
         String query = "INSERT INTO money VALUES (?, ?)";
-        PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
-        pstmt.setInt(1, round);
-        pstmt.setInt(2, money.getMoney());
-        return pstmt.executeUpdate();
+        int result = 0;
+
+        try (Connection con = CONNECTOR.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, round);
+            pstmt.setInt(2, money.getMoney());
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
-    public int deleteMoney(int round) throws SQLException {
+    public int deleteMoney(int round) {
         String query = "DELETE FROM money WHERE round = ?";
-        PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
-        pstmt.setInt(1, round);
-        return pstmt.executeUpdate();
+        int result = 0;
+
+        try (Connection con = CONNECTOR.getConnection()) {
+            PreparedStatement pstmt = CONNECTOR.getConnection().prepareStatement(query);
+            pstmt.setInt(1, round);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
