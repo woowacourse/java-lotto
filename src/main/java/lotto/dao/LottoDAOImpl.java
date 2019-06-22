@@ -39,7 +39,7 @@ public class LottoDAOImpl implements LottoDAO {
                 LottoCreator creator = new ManualLottoCreator(CustomStringUtils.parseInts(rs.getString("numbers")));
                 Lotto lotto = creator.createLotto();
 
-                lotto.setIsAuto(rs.getBoolean("is_auto"));
+                lotto.setAuto(rs.getBoolean("is_auto"));
                 lottos.add(lotto);
             }
             rs.close();
@@ -59,7 +59,7 @@ public class LottoDAOImpl implements LottoDAO {
 
             pstmt.setInt(1, round);
             pstmt.setString(2, lotto.getNumbers().toString().replaceAll(("(\\[|])+"), ""));
-            pstmt.setBoolean(3, lotto.getIsAuto());
+            pstmt.setBoolean(3, lotto.isAuto());
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

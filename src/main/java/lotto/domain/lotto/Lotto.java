@@ -31,11 +31,11 @@ public class Lotto {
         return numbers;
     }
 
-    public boolean getIsAuto() {
+    public boolean isAuto() {
         return isAuto;
     }
 
-    public void setIsAuto(boolean isAuto) {
+    public void setAuto(boolean isAuto) {
         this.isAuto = isAuto;
     }
 
