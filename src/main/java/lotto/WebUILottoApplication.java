@@ -1,34 +1,31 @@
 package lotto;
 
-import lotto.service.RoundService;
+import lotto.service.BuyingService;
 import lotto.service.LottoService;
+import lotto.service.RoundService;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
-    private static final int WINNING_LOTTO = 0;
-    private static final int LOTTOS = 1;
-    private static final int STATISTICS = 2;
-
-    private static Map<String, Object> model;
-    private static String round;
+    private static BuyingService buyingService;
     private static LottoService lottoService;
+
 
     public static void main(String[] args) {
         port(8080);
         externalStaticFileLocation("/templates");
 
         get("/", (req, res) -> {
-            round = new RoundService().searchRound();
-            model = new HashMap<>();
+            req.session(true);
+            Map<String, Object> model = new HashMap<>();
+            String round = new RoundService().searchRound();
 
-            lottoService = new LottoService(round);
+            req.session().attribute("round", round);
 
             model.put("round", round);
 
@@ -36,39 +33,42 @@ public class WebUILottoApplication {
         });
 
         post("/purchase", (req, res) -> {
-            model = new HashMap<>();
+            Map<String, Object> model = new HashMap<>();
+
+            String round = req.session().attribute("round");
             String money = req.queryParams("money");
-            String[] customs = req.queryParamsValues("custom") != null ? req.queryParamsValues("custom") : new String[0];
+            String[] customs = req.queryParamsValues("custom");
 
-            lottoService.buyLotto(money, customs);
+            buyingService = new BuyingService();
+            buyingService.buyLotto(round, money, customs);
 
-            model.put("money", money);
+            model.put("round", round);
 
             return render(model, "winningLotto.html");
         });
 
         post("/matchLotto", (req, res) -> {
-            model = new HashMap<>();
+            Map<String, Object> model;
 
-            lottoService.enterWinningLotto(req.queryParams("winningNumbers"), req.queryParams("bonusNumber"));
+            String round = req.session().attribute("round");
+            String winningNumbers = req.queryParams("winningNumbers");
+            String bonusNumber = req.queryParams("bonusNumber");
 
-            List<Object> result = lottoService.draw();
+            lottoService = new LottoService();
+            lottoService.enterWinningLotto(round, winningNumbers, bonusNumber);
+            lottoService.draw(round);
 
-            model.put("winningLotto", result.get(WINNING_LOTTO));
-            model.put("lottos", result.get(LOTTOS));
-            model.put("statistics", result.get(STATISTICS));
+            model = lottoService.searchRound(round);
 
             return render(model, "result.html");
         });
 
         post("/roundresult", (req, res) -> {
-            model = new HashMap<>();
-            String roundChoice = req.queryParams("roundchoice");
-            List<Object> roundResult = lottoService.searchRound(roundChoice);
+            Map<String, Object> model;
 
-            model.put("winningLotto", roundResult.get(WINNING_LOTTO));
-            model.put("lottos", roundResult.get(LOTTOS));
-            model.put("statistics", roundResult.get(STATISTICS));
+            String roundChoice = req.queryParams("roundchoice");
+
+            model = lottoService.searchRound(roundChoice);
 
             return render(model, "result.html");
         });

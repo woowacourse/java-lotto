@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DatabaseUtil {
+public class DatabaseConnect {
     private Connection connection;
 
     private static class Holder {
-        private static final DatabaseUtil INSTANCE = new DatabaseUtil();
+        private static final DatabaseConnect INSTANCE = new DatabaseConnect();
     }
 
-    static DatabaseUtil getInstance() {
+    static DatabaseConnect getInstance() {
         return Holder.INSTANCE;
     }
 

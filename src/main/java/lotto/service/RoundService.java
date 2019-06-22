@@ -1,14 +1,14 @@
 package lotto.service;
 
-import lotto.dao.RoundDAO;
+import lotto.dao.RoundDao;
 
 import java.sql.SQLException;
 
 public class RoundService {
-    private RoundDAO roundDAO;
+    private RoundDao roundDAO;
 
     public RoundService() {
-        this.roundDAO = new RoundDAO();
+        this.roundDAO = new RoundDao();
     }
 
     public String searchRound() throws SQLException {

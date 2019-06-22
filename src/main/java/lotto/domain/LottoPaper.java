@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class LottoPaper {
     private List<Lotto> lottos;
 
-    LottoPaper(List<Lotto> lottos) {
+    public LottoPaper(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 

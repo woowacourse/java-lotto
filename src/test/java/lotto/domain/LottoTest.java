@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoException;
-import lotto.utils.Parser;
+import lotto.utils.NumberUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ import java.util.HashSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class LottoTest {
+public class LottoTest {
 
     private LottoNumber lottoNumber1;
     private LottoNumber lottoNumber2;
@@ -31,7 +31,7 @@ class LottoTest {
         lottoNumber5 = LottoNumber.generateNumber(5);
         lottoNumber6 = LottoNumber.generateNumber(6);
         lottoNumber7 = LottoNumber.generateNumber(7);
-        lotto = new CustomLottoGenerator(Parser.parsingLottoNumbers("1,2,3,4,5,6".split(","))).makeLotto();
+        lotto = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,6".split(","))).makeLotto();
     }
 
     @Test
@@ -56,7 +56,7 @@ class LottoTest {
 
     @Test
     void 로또_매칭_테스트() {
-        Lotto testLotto = new CustomLottoGenerator(Parser.parsingLottoNumbers("1,2,3,4,5,7".split(","))).makeLotto();
+        Lotto testLotto = new CustomLottoGenerator(NumberUtil.parsing("1,2,3,4,5,7".split(","))).makeLotto();
         assertThat(lotto.matchNumbers(testLotto)).isEqualTo(5);
     }
 

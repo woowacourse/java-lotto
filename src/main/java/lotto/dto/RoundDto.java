@@ -1,6 +1,6 @@
 package lotto.dto;
 
-public class RoundDTO {
+public class RoundDto {
     private String round;
 
     public String getRound() {
