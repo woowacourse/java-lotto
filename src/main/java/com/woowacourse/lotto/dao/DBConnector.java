@@ -17,13 +17,7 @@ public class DBConnector {
 			e.printStackTrace();
 		}
 		try {
-			this.connection = DriverManager.getConnection(String.join("\n",
-					"jdbc:mysql://"
-							+ server + "/" + database
-							+ "?serverTimezone=UTC" +
-							"&useSSL=false" +
-							"&allowPublicKeyRetrieval=true",
-					userName, password));
+			this.connection = DriverManager.getConnection("jdbc:mysql://" + server + "/" + database + "?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true", userName, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
