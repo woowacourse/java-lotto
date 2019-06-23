@@ -7,12 +7,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class WinningLottoDAO {
+public class WinningLottoDao {
+
+    private static final String quaryForAddWinningLotto = "INSERT INTO winninglotto (numbers,bonus_no,round_no) VALUES (?,?,?)";
+    private static final String queryForFindWinningLotto = "SELECT numbers,bonus_no FROM winninglotto WHERE round_no=?";
+
+    private Connection con = null;
+
+    private WinningLottoDao() {
+    }
+
+    private static class WinningLottoDaoHolder {
+        private static final WinningLottoDao INSTANCE = new WinningLottoDao();
+    }
+
+    public static WinningLottoDao getInstance() {
+        return WinningLottoDaoHolder.INSTANCE;
+    }
 
     public void addWinningLotto(WinningLotto winningLotto, int round) throws SQLException {
-        String query = "INSERT INTO winninglotto (numbers,bonus_no,round_no) VALUES (?,?,?)";
-        Connection con = DBConnection.getConnection();
-        PreparedStatement pstmt = con.prepareStatement(query);
+        PreparedStatement pstmt = ConnectionManager.prepareStatement(DBConnection.getConnection(), quaryForAddWinningLotto);
+
         try {
             pstmt.setString(1, winningLotto.getNumbers());
             pstmt.setString(2, winningLotto.getBonusBall().toString());
@@ -26,9 +41,7 @@ public class WinningLottoDAO {
     }
 
     public WinningLotto findAllByRound(int round) throws SQLException {
-        String query = "SELECT numbers,bonus_no FROM winninglotto WHERE round_no=?";
-        Connection con = DBConnection.getConnection();
-        PreparedStatement pstmt = con.prepareStatement(query);
+        PreparedStatement pstmt = ConnectionManager.prepareStatement(DBConnection.getConnection(), queryForFindWinningLotto);
 
         pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
