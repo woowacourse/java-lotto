@@ -18,6 +18,7 @@ public class Connector {
         } catch (ClassNotFoundException e) {
             System.err.println((" !! JDBC Driver load 오류: " + e.getMessage()));
             e.printStackTrace();
+            throw new FailedJDBCDriverLoadingException("JDBC 드라이버 연결을 로드하는 데 실패하였습니다.");
         }
 
         // 드라이버 연결
@@ -28,6 +29,7 @@ public class Connector {
         } catch (SQLException e) {
             System.err.println("데이터베이스 연결 오류: " + e.getMessage());
             e.printStackTrace();
+            throw new FailedDBConnectionException("데이터베이스 연결에 실패하였습니다.");
         }
 
         return con;
