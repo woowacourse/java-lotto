@@ -16,9 +16,9 @@ public class LottoApplication {
     private static final int PRICE_PER_LOTTO = 1000;
     private static final String COMMA_DELIMITER = ",";
 
-    private static final RoundService roundService = new RoundService();
-    private static final LottoService lottoService = new LottoService();
-    private static final WinningLottoService winningLottoService = new WinningLottoService();
+    private static final RoundService roundService = RoundService.getInstance();
+    private static final LottoService lottoService = LottoService.getInstance();
+    private static final WinningLottoService winningLottoService = WinningLottoService.getInstance();
 
     public static void main(String[] args) {
         int purchaseAmount = setPurchaseAmount();

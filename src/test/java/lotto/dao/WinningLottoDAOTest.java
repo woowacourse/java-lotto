@@ -34,12 +34,12 @@ public class WinningLottoDAOTest {
         lottoDAO = LottoDAO.getInstance();
         winningLottoDAO = WinningLottoDAO.getInstance();
         roundDAO.addRound(RoundDAOTest.AMOUNT_TEST);
-        lottoDAO.addLottos(Arrays.asList(LottoDAOTest.LOTTO_TEST));
+        lottoDAO.addLottos(Arrays.asList(LottoDAOTest.LOTTO_TEST), roundDAO.findMaxRound());
     }
 
     @Test
     public void findWinningLottoByRound() throws SQLException {
-        winningLottoDAO.addWinningLotto(WINNING_LOTTO_TEST, BONUS_NUMBER);
+        winningLottoDAO.addWinningLotto(WINNING_LOTTO_TEST, BONUS_NUMBER, roundDAO.findMaxRound());
         Lotto winningLotto = winningLottoDAO.findWinningLottoByRound(roundDAO.findMaxRound());
         assertThat(winningLotto).isEqualTo(WINNING_LOTTO_TEST);
         removeWinningLotto();
@@ -47,7 +47,7 @@ public class WinningLottoDAOTest {
 
     @Test
     public void findBonusNumberByRound() throws SQLException {
-        winningLottoDAO.addWinningLotto(WINNING_LOTTO_TEST, BONUS_NUMBER);
+        winningLottoDAO.addWinningLotto(WINNING_LOTTO_TEST, BONUS_NUMBER, roundDAO.findMaxRound());
         int bonusNumber = winningLottoDAO.findBonusNumberByRound(roundDAO.findMaxRound());
         assertThat(bonusNumber).isEqualTo(BONUS_NUMBER);
         removeWinningLotto();
@@ -55,7 +55,7 @@ public class WinningLottoDAOTest {
 
     @Test
     public void addWinningLotto() throws SQLException {
-        winningLottoDAO.addWinningLotto(WINNING_LOTTO_TEST, BONUS_NUMBER);
+        winningLottoDAO.addWinningLotto(WINNING_LOTTO_TEST, BONUS_NUMBER, roundDAO.findMaxRound());
         removeWinningLotto();
     }
 

@@ -36,7 +36,7 @@ public class LottoDAOTest {
 
     @Test
     public void findLottosByRound() throws SQLException {
-        lottoDAO.addLottos(Arrays.asList(LOTTO_TEST));
+        lottoDAO.addLottos(Arrays.asList(LOTTO_TEST), roundDAO.findMaxRound());
         List<Lotto> lottos = lottoDAO.findLottosByRound(roundDAO.findMaxRound());
         assertThat(lottos.get(0)).isEqualTo(LOTTO_TEST);
         removeLotto();
@@ -44,7 +44,7 @@ public class LottoDAOTest {
 
     @Test
     public void addLottos() throws SQLException {
-        lottoDAO.addLottos(Arrays.asList(LOTTO_TEST));
+        lottoDAO.addLottos(Arrays.asList(LOTTO_TEST), roundDAO.findMaxRound());
         removeLotto();
     }
 
