@@ -44,12 +44,11 @@ public class LottoDAO {
         return lottos;
     }
 
-    public void addLottos(List<Lotto> lottos) {
+    public void addLottos(List<Lotto> lottos, int nextRound) {
         String sql = "INSERT INTO lotto(lotto, round) VALUES (?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            int nextRound = RoundDAO.getInstance().findMaxRound();
             for (Lotto lotto : lottos) {
                 statement.setString(1, StringUtil.removeBrackets(lotto.toString()));
                 statement.setInt(2, nextRound);

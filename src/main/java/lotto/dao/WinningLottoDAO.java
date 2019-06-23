@@ -61,12 +61,11 @@ public class WinningLottoDAO {
         return result;
     }
 
-    public void addWinningLotto(Lotto winningLotto, int bonusNumber) {
+    public void addWinningLotto(Lotto winningLotto, int bonusNumber, int nextRound) {
         String sql = "INSERT INTO winning_lotto (winning_lotto, bonus_number, round) VALUES (?, ?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            int nextRound = RoundDAO.getInstance().findMaxRound();
             statement.setString(1, StringUtil.removeBrackets(winningLotto.toString()));
             statement.setInt(2, bonusNumber);
             statement.setInt(3, nextRound);
