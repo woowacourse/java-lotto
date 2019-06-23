@@ -26,7 +26,7 @@ public class LottoResultController {
 
 		try {
 			model = lottoResultService.matchLotto(winningLottoRequest);
-			return render(model, "/showLottoResult.html");
+			return OutputViewWeb.printLottoResult(model, "/showLottoResult.html");
 		} catch (Exception e) {
 			model.put("errorMessage", e.getMessage());
 			return render(model, "/showPurchasedLottos.html");
@@ -53,7 +53,7 @@ public class LottoResultController {
 
 		try {
 			model = lottoResultService.searchLottoResult(lottoSearchRequest);
-			return OutputViewWeb.printLottoResult(model);
+			return OutputViewWeb.printLottoResult(model, "/searchLottoResult.html");
 		} catch (Exception e) {
 			model.put("errorMessage", e.getMessage());
 			return render(model, "/searchLottoResult.html");

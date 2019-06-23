@@ -16,11 +16,11 @@ public class OutputViewWeb {
 		return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
 	}
 
-	public static String printLottoResult(Map<String, Object> model) {
+	public static String printLottoResult(Map<String, Object> model, String path) {
 		String ranks = String.valueOf(model.get("ranks"));
 		model.put("ranks", ranks.replaceAll(NEW_LINE_FOR_CONSOLE, NEW_LINE_FOR_WEB));
 		model.put("earningRate", String.format(PRINT_EARNINGS_RATE + NEW_LINE_FOR_WEB, model.get("earningRate")));
 		model.put("sum", String.format(PRINT_SUM + NEW_LINE_FOR_WEB, model.get("sum")));
-		return render(model, "/searchLottoResult.html");
+		return render(model, path);
 	}
 }

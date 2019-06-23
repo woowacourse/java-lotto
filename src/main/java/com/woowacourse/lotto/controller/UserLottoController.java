@@ -37,8 +37,12 @@ public class UserLottoController {
 		lottoGenerateRequest.setCountOfManualLotto(request.session().attribute("countOfManualLotto"));
 		lottoGenerateRequest.setLottoMoney(request.session().attribute("lottoMoney"));
 		lottoGenerateRequest.setLottosFactory(request.session().attribute("lottosFactory"));
-		lottoGenerateRequest.setManualLottos(InputViewWeb.splitString(request.queryParams("manualLottos")));
 		lottoGenerateRequest.setRound(request.session().attribute("round"));
+
+		if(lottoGenerateRequest.getCountOfManualLotto() != 0) {
+			lottoGenerateRequest.setManualLottos(InputViewWeb.splitString(request.queryParams("manualLottos")));
+		}
+
 		try {
 			model = userLottoService.generateLotto(lottoGenerateRequest);
 			request.session().attribute("lottos", model.get("lottos"));

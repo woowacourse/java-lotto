@@ -28,8 +28,9 @@ public class LottoResultService {
 		addLottoResult(round, lottoMoney, lottoResult);
 		String matchedResult = findLottoResultRankById(round);
 
-		model.put("matchedResult", matchedResult);
+		model.put("ranks", matchedResult);
 		model.put("earningRate", earningRate);
+		model.put("sum", (long) lottoResult.sum());
 		return model;
 	}
 
