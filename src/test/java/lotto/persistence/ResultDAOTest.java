@@ -13,15 +13,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultDAOTest {
     private Connection con;
-    private ResultDAO resultDao;
+    private ResultDAOImpl resultDao;
     private HashMap<Rank, Integer> result;
-    private RoundDAO roundDao;
+    private RoundDAOImpl roundDao;
 
     @BeforeEach
     void setup() {
         this.con = Connector.getConnection();
-        this.roundDao = new RoundDAO(con);
-        this.resultDao = new ResultDAO(con);
+        this.roundDao = new RoundDAOImpl(con);
+        this.resultDao = new ResultDAOImpl(con);
         this.result = new HashMap<>();
         result.put(Rank.FIRST, 1);
         result.put(Rank.SECOND, 0);

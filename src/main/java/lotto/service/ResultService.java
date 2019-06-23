@@ -3,39 +3,28 @@ package lotto.service;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningStatistics;
-import lotto.persistence.Connector;
-import lotto.persistence.LottoDAO;
-import lotto.persistence.RoundDAO;
-import lotto.persistence.WinningLottoDAO;
-
-import java.sql.Connection;
-import java.sql.SQLException;
+import lotto.persistence.*;
 
 public class ResultService {
-    public static ResultDTO getResultByRoundId(int thisRoundId) throws SQLException {
-        try (Connection con = Connector.getConnection()) {
-            ResultDTO result = new ResultDTO();
+    public static ResultDTO getResultByRoundId(int thisRoundId) {
+        ResultDTO result = new ResultDTO();
 
-            RoundDAO roundDao = new RoundDAO(con);
-            WinningLottoDAO winningLottoDao = new WinningLottoDAO(con);
-            LottoDAO lottoDao = new LottoDAO(con);
+        RoundDAO roundDao = RoundDAO.getInstance();
+        WinningLottoDAO winningLottoDao = WinningLottoDAO.getInstance();
+        LottoDAO lottoDao = LottoDAO.getInstance();
 
-            result.setRound(thisRoundId);
-            result.setRounds(roundDao.getAllIds());
-            WinningLotto winningLotto = winningLottoDao.findWinningLottoByRoundId(thisRoundId);
-            result.setWinningLotto(winningLotto);
+        result.setRound(thisRoundId);
+        result.setRounds(roundDao.getAllIds());
+        WinningLotto winningLotto = winningLottoDao.findWinningLottoByRoundId(thisRoundId);
+        result.setWinningLotto(winningLotto);
 
-            Lottos lottos = lottoDao.findLottosByRoundId(thisRoundId);
-            result.setLottos(lottos);
+        Lottos lottos = lottoDao.findLottosByRoundId(thisRoundId);
+        result.setLottos(lottos);
 
-            WinningStatistics winningStatistics = new WinningStatistics(lottos.match(winningLotto));
-            result.setInterestRate(roundDao.getInterestRateOfId(thisRoundId));
-            result.setPrize(roundDao.getPrizeOfId(thisRoundId));
-            result.setResult(winningStatistics);
-            return result;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw e;
-        }
+        WinningStatistics winningStatistics = new WinningStatistics(lottos.match(winningLotto));
+        result.setInterestRate(roundDao.getInterestRateOfId(thisRoundId));
+        result.setPrize(roundDao.getPrizeOfId(thisRoundId));
+        result.setResult(winningStatistics);
+        return result;
     }
 }

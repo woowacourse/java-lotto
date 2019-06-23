@@ -12,12 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoundDAOTest {
     private Connection con;
-    private RoundDAO roundDao;
+    private RoundDAOImpl roundDao;
 
     @BeforeEach
     void setUp() {
         this.con = Connector.getConnection();
-        this.roundDao = new RoundDAO(con);
+        this.roundDao = new RoundDAOImpl(con);
     }
 
     @Test

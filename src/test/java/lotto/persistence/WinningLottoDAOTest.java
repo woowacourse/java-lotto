@@ -13,15 +13,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoDAOTest {
     private Connection con;
-    private WinningLottoDAO winningLottoDao;
-    private RoundDAO roundDao;
+    private WinningLottoDAOImpl winningLottoDao;
+    private RoundDAOImpl roundDao;
     private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
         this.con = Connector.getConnection();
-        this.winningLottoDao = new WinningLottoDAO(con);
-        this.roundDao = new RoundDAO(con);
+        this.winningLottoDao = new WinningLottoDAOImpl(con);
+        this.roundDao = new RoundDAOImpl(con);
         this.winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
     }
 

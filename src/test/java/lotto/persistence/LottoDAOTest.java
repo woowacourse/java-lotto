@@ -15,15 +15,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoDAOTest {
     private Connection con;
-    private LottoDAO lottoDao;
-    private RoundDAO roundDao;
+    private LottoDAOImpl lottoDao;
+    private RoundDAOImpl roundDao;
     private Lottos lottos;
 
     @BeforeEach
     void setUp() {
         this.con = Connector.getConnection();
-        this.lottoDao = new LottoDAO(con);
-        this.roundDao = new RoundDAO(con);
+        this.lottoDao = new LottoDAOImpl(con);
+        this.roundDao = new RoundDAOImpl(con);
 
         this.lottos = new Lottos(Arrays.asList(
                 Lotto.create(new ManualLottoNumbersGenerator(Arrays.asList(1, 2, 3, 4, 5, 6)))
