@@ -52,6 +52,9 @@ public class JDBCTemplate {
 
     private PreparedStatement getPreparedStatement(String query, List<String> args, Connection con) throws SQLException {
         PreparedStatement pstmt = con.prepareStatement(query);
+        if (args == null) {
+            return pstmt;
+        }
         int argIdx = 1;
         for (String arg : args) {
             pstmt.setString(argIdx++, arg);

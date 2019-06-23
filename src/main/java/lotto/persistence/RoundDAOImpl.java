@@ -1,110 +1,56 @@
 package lotto.persistence;
 
-import lotto.persistence.exceptions.DataAccessException;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RoundDAOImpl implements RoundDAO {
+    private static JDBCTemplate jdbcTemplate = JDBCTemplate.getInstance();
+
     public static RoundDAOImpl getInstance() {
         return new RoundDAOImpl();
     }
 
     public void addRound(int prize, double interestRate) {
-        try (Connection con = Connector.getConnection()) {
-            String query = "INSERT INTO round (prize, interest_rate) VALUES(?, ?)";
-            PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setString(1, String.valueOf(prize));
-            pstmt.setString(2, String.valueOf(interestRate));
-            pstmt.executeUpdate();
-        } catch (Exception e) {
-            throw new DataAccessException(e);
-        }
+        String query = "INSERT INTO round (prize, interest_rate) VALUES(?, ?)";
+        List<String> args = Arrays.asList(
+                String.valueOf(prize),
+                String.valueOf(interestRate)
+        );
+        jdbcTemplate.updateQuery(query, args);
     }
 
     public int getPrizeOfId(int id) {
-        try (Connection con = Connector.getConnection()) {
-            String query = "SELECT prize FROM round WHERE id=?";
-            PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setString(1, String.valueOf(id));
-            ResultSet rs = pstmt.executeQuery();
-
-            if (!rs.next()) {
-                throw new SQLException(id + "에 해당하는 상금을 찾는데 실패했습니다.");
-            }
-            int result = rs.getInt("prize");
-            rs.close();
-            return result;
-        } catch (Exception e) {
-            throw new DataAccessException(e);
-        }
+        String query = "SELECT prize FROM round WHERE id=?";
+        List<String> arg = new ArrayList<>(Collections.singletonList(String.valueOf(id)));
+        Map<String, String> result = jdbcTemplate.selectQuery(query, arg).get(0);
+        return Integer.valueOf(result.get("prize"));
     }
 
     public double getInterestRateOfId(int id) {
-        try (Connection con = Connector.getConnection()) {
-            String query = "SELECT interest_rate FROM round WHERE id=?";
-            PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setString(1, String.valueOf(id));
-            ResultSet rs = pstmt.executeQuery();
-
-            if (!rs.next()) {
-                throw new SQLException(id + "에 해당하는 수익률을 찾는데 실패했습니다.");
-            }
-            double result = rs.getDouble("interest_rate");
-            rs.close();
-            return result;
-        } catch (Exception e) {
-            throw new DataAccessException(e);
-        }
+        String query = "SELECT interest_rate FROM round WHERE id=?";
+        List<String> arg = new ArrayList<>(Collections.singletonList(String.valueOf(id)));
+        Map<String, String> result = jdbcTemplate.selectQuery(query, arg).get(0);
+        return Double.valueOf(result.get("interest_rate"));
     }
 
     public int getLatestRoundId() {
-        try (Connection con = Connector.getConnection()) {
-            String query = "SELECT MAX(id) AS ThisId FROM round";
-            PreparedStatement pstmt = con.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery();
-            if (!rs.next()) {
-                throw new SQLException("진행한 로또 회차가 하나도 없습니다.");
-            }
-            int result = rs.getInt("ThisId");
-            rs.close();
-            return result;
-        } catch (Exception e) {
-            throw new DataAccessException(e);
-        }
+        String query = "SELECT MAX(id) AS ThisId FROM round";
+        Map<String, String> result = jdbcTemplate.selectQuery(query, null).get(0);
+        return Integer.valueOf(result.get("ThisId"));
     }
 
     public List<Integer> getAllIds() {
-        try (Connection con = Connector.getConnection()) {
-            List<Integer> ids = new ArrayList<>();
-            String query = "SELECT id FROM round";
-            PreparedStatement pstmt = con.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery();
-            if (!rs.next()) {
-                throw new SQLException("진행한 로또 회차가 하나도 없습니다.");
-            }
-            do {
-                ids.add(rs.getInt("id"));
-            } while (rs.next());
-            rs.close();
-            return ids;
-        } catch (Exception e) {
-            throw new DataAccessException(e);
+        String query = "SELECT id FROM round";
+        List<Map<String, String>> result = jdbcTemplate.selectQuery(query, null);
+        List<Integer> ids = new ArrayList<>();
+        for (Map<String, String> map : result) {
+            ids.add(Integer.valueOf(map.get("id")));
         }
+        return ids;
     }
 
     public void removeRoundById(int roundId) {
-        try (Connection con = Connector.getConnection()) {
-            String query = "DELETE FROM round WHERE id=?";
-            PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setString(1, String.valueOf(roundId));
-            pstmt.executeUpdate();
-        } catch (Exception e) {
-            throw new DataAccessException(e);
-        }
+        String query = "DELETE FROM round WHERE id=?";
+        List<String> arg = new ArrayList<>(Collections.singletonList(String.valueOf(roundId)));
+        jdbcTemplate.updateQuery(query, arg);
     }
 }
