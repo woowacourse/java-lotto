@@ -4,28 +4,47 @@ import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.LottoBuyList;
 import com.woowacourse.lotto.domain.ManualNumber;
 import com.woowacourse.lotto.domain.PurchaseMoney;
-import com.woowacourse.lotto.util.IntendedLottoGenerator;
 import com.woowacourse.lotto.util.LottoGenerator;
 import com.woowacourse.lotto.util.RandomLottoGenerator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class LottoService {
-    public static LottoBuyList getAutoLottoBuyList(PurchaseMoney purchaseMoney, ManualNumber manualNumber) {
+public class LottoBuyConsoleService implements LottoBuyService {
+    private ManualNumber manualNumber;
+    private PurchaseMoney purchaseMoney;
+    private LottoBuyList manualBuyList;
+
+    public LottoBuyConsoleService(ManualNumber manualNumber, PurchaseMoney purchaseMoney, LottoBuyList manualBuyList) {
+        this.manualNumber = manualNumber;
+        this.purchaseMoney = purchaseMoney;
+        this.manualBuyList = manualBuyList;
+    }
+
+    @Override
+    public LottoBuyList createTotalBuyList() {
+        LottoBuyList autoBuys = getAutoLottoBuyList();
+        return autoBuys.joinBuyList(manualBuyList);
+    }
+
+    @Override
+    public LottoBuyList getAutoLottoBuyList() {
         if (!purchaseMoney.isEnoughMoney(manualNumber)) {
             return new LottoBuyList(Collections.emptyList());
         }
 
-        List<Lotto> lottoBuyList = createAutoLottoList(purchaseMoney, manualNumber);
+        List<Lotto> lottoBuyList = createAutoLottoList();
 
         return new LottoBuyList(lottoBuyList);
     }
 
-    private static List<Lotto> createAutoLottoList(PurchaseMoney purchaseMoney, ManualNumber manualNumber) {
+    @Override
+    public PurchaseMoney getPurchaseMoney() {
+        return purchaseMoney;
+    }
+
+    private List<Lotto> createAutoLottoList() {
         List<Lotto> lottoBuyList = new ArrayList<>();
         LottoGenerator lottoGenerator = new RandomLottoGenerator();
 
@@ -35,14 +54,5 @@ public class LottoService {
         }
 
         return lottoBuyList;
-    }
-
-    public static void addManualLotto(List<Lotto> manualLottoList, String input) {
-        List<Integer> numbers = Arrays.stream(input.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-        LottoGenerator lottoGenerator = new IntendedLottoGenerator(numbers);
-        manualLottoList.add(new Lotto(lottoGenerator));
     }
 }

@@ -1,30 +1,32 @@
 package com.woowacourse.lotto;
 
 import com.woowacourse.lotto.domain.*;
-import com.woowacourse.lotto.service.LottoService;
-import com.woowacourse.lotto.view.InputView;
+import com.woowacourse.lotto.service.DrawConsoleService;
+import com.woowacourse.lotto.service.LottoBuyConsoleService;
 import com.woowacourse.lotto.view.InputViewConsole;
-import com.woowacourse.lotto.view.OutputView;
 import com.woowacourse.lotto.view.OutputViewConsole;
 
 public class Main {
+    private static InputViewConsole inputViewConsole = new InputViewConsole();
+    private static LottoBuyConsoleService lottoBuyConsoleService;
+    private static DrawConsoleService drawService;
+
     public static void main(String[] args) {
-        InputView inputViewConsole = new InputViewConsole();
-        OutputView outputViewConsole = new OutputViewConsole();
-
-        PurchaseMoney purchaseMoney = inputViewConsole.inputMoney();
+        PurchaseMoney purchaseMoney = inputViewConsole.inputPurchaseMoney();
         ManualNumber manualNumber = inputViewConsole.inputManualNumber(purchaseMoney);
+        LottoBuyList manualBuys = inputViewConsole.inputManualBuys(manualNumber);
 
-        LottoBuyList manualBuys = inputViewConsole.inputManualLotto(manualNumber);
-        LottoBuyList autoBuys = LottoService.getAutoLottoBuyList(purchaseMoney, manualNumber);
-        LottoBuyList totalBuys = autoBuys.joinBuyList(manualBuys);
+        lottoBuyConsoleService = new LottoBuyConsoleService(manualNumber, purchaseMoney, manualBuys);
+        LottoBuyList totalBuys = lottoBuyConsoleService.createTotalBuyList();
 
-        outputViewConsole.printLottoBuyList(totalBuys);
+        OutputViewConsole.printLottoBuyList(totalBuys);
 
         Lotto lastWeekLotto = inputViewConsole.inputLastWeekLotto();
-        LottoNumber bonusNumber = inputViewConsole.inputBonusNumber(lastWeekLotto);
-        LottoResult lottoResult = new LottoResult(totalBuys, new WinningLotto(lastWeekLotto, bonusNumber));
+        BonusNumber bonusNumber = inputViewConsole.inputBonusNumber(lastWeekLotto);
 
-        outputViewConsole.printLottoResult(lottoResult, purchaseMoney);
+        drawService = new DrawConsoleService(totalBuys, lastWeekLotto, bonusNumber);
+        LottoResult lottoResult = drawService.createResult();
+
+        OutputViewConsole.printLottoResult(lottoResult, purchaseMoney);
     }
 }

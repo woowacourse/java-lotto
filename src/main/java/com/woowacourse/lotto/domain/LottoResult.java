@@ -13,18 +13,16 @@ public class LottoResult {
         makeResult(totalBuys, winningLotto);
     }
 
+    private void makeResult(LottoBuyList totalBuys, WinningLotto winningLotto) {
+        for (int i = 0; i < totalBuys.size(); i++) {
+            Rank rank = winningLotto.match(totalBuys.getLotto(i));
+            result.put(rank, result.get(rank) + 1);
+        }
+    }
+
     private void initResultMap() {
         Arrays.stream(Rank.values())
                 .forEach(rank -> result.put(rank, 0));
-    }
-
-    private void makeResult(LottoBuyList lottoBuyList, WinningLotto winningLotto) {
-        for (Lotto lotto: lottoBuyList.getLottoBuyList()) {
-            int matchCount = winningLotto.matchCount(lotto);
-            boolean isBonusMatch = winningLotto.isBonusMatch(lotto);
-            Rank rank = Rank.getRank(matchCount, isBonusMatch);
-            result.put(rank, result.get(rank) + 1);
-        }
     }
 
     public Iterator<Map.Entry<Rank, Integer>> getIterator() {
@@ -32,11 +30,15 @@ public class LottoResult {
     }
 
     public double calculateProfitRatio(PurchaseMoney purchaseMoney) {
-        double sum = result.keySet().stream()
-                .mapToDouble(rank -> rank.getMoney() * result.get(rank))
-                .sum();
+        double sum = calculateWinningMoney();
 
         return purchaseMoney.getProfitRatio(sum);
+    }
+
+    public double calculateWinningMoney() {
+        return result.keySet().stream()
+                .mapToDouble(rank -> rank.getMoney() * result.get(rank))
+                .sum();
     }
 
     @Override
@@ -52,5 +54,12 @@ public class LottoResult {
     @Override
     public int hashCode() {
         return result.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "LottoResult{" +
+                "result=" + result +
+                '}';
     }
 }

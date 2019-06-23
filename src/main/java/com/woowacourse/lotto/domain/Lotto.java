@@ -6,9 +6,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import java.util.stream.Collectors;
 
-public class Lotto {
+public class Lotto implements LottoTicket {
     public static final int PRICE = 1000;
     public static final int MIN_NUM = 1;
     public static final int MAX_NUM = 45;
@@ -30,23 +31,24 @@ public class Lotto {
 
     private void checkNumber(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != Lotto.COMPOSITE_NUM) {
-            throw new IllegalArgumentException("로또 숫자는 6개여야 합니다");
+            throw new IllegalArgumentException("로또 생성 에러");
         }
     }
 
     private void checkDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
         if (lottoNumberSet.size() != lottoNumbers.size()) {
-            throw new IllegalArgumentException("중복된 로또입니다");
+            throw new IllegalArgumentException("로또 생성 에러");
         }
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    @Override
+    public boolean contains(Number lottoNumber) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumbers -> lottoNumbers.isMatch(lottoNumber));
     }
 
-    public int matchCount(Lotto lotto) {
+    public int matchCount(LottoTicket lotto) {
         return (int) lottoNumbers.stream()
                 .filter(lotto::contains)
                 .count();
@@ -69,14 +71,12 @@ public class Lotto {
 
     @Override
     public String toString() {
-        String lotto = lottoNumbers.stream()
-                .map(LottoNumber::getLottoNum)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
-
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        sb.append(lotto);
+        sb.append(lottoNumbers.stream()
+                .map(LottoNumber::getLottoNum)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ")));
         sb.append("]");
 
         return sb.toString();
