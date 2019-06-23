@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>Conas의 로또 게임!</title>
+        <link rel="stylesheet" href="../css/inputWinningLotto.css">
+    </head>
+    <body>
+        {{#webUILottoData}}
+        <h1>Lotto <b>{{round}}</b>회차 : 당첨 로또 입력 </h1>
+        {{/webUILottoData}}
+        <div>
+            <form action="/resultOfRound">
+                로또 6자리 : <input type="text" name="winningLotto" placeholder="ex) 1, 2, 3, 4, 5, 6" autofocus required><br><br>
+                보너스 번호 : <input type="number" name="bonusBall" placeholder="ex) 7" required><br><br>
+                <input type="submit" value="입력 완료">
+                <input type="reset" value="재입력">
+            </form>
+        </div>
+        
+    </body>
+</html>

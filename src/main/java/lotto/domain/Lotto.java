@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
+    private static final String DELIMITER = ", ";
     public Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
@@ -28,5 +30,12 @@ public class Lotto {
 
     public int calculateCountOfMatch(Lotto anotherLotto) {
         return (int) lottoNumbers.stream().filter(anotherLotto.lottoNumbers::contains).count();
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(DELIMITER));
     }
 }

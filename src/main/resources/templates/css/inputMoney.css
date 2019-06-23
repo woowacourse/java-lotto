@@ -1,0 +1,18 @@
+body{
+    text-align: center;
+}
+
+#submit {
+    width: 20em;
+    height: 2em;
+}
+
+#reset {
+    width: 20em;
+    height: 2em;
+    margin-left: 1em;
+}
+
+#buttons {
+    margin-top: 2em;
+}

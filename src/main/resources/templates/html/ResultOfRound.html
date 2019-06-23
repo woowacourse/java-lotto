@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>Conas의 로또 게임!</title>
+        <link rel="stylesheet" href="../css/resultOfRound.css">
+    </head>
+    <body>
+        {{#webUILottoData}}
+        <h1>Lotto <b>{{round}}</b>회차 : 결과 </h1>
+        {{/webUILottoData}}
+        <div id="resultOfRound">
+            {{#lottoGameResult}}
+            <br>{{this}} <br>
+            {{/lottoGameResult}}
+        </div>
+        <form action="/">
+            <input type="submit" id="submit" value="확인">
+        </form>
+    </body>
+</html>

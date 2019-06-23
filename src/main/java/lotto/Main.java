@@ -4,6 +4,8 @@ import lotto.View.InputView;
 import lotto.View.OutputView;
 import lotto.domain.*;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         Money money = MoneyParser.parseMoney(InputView.inputMoney());
@@ -16,11 +18,13 @@ public class Main {
         OutputView.printUserLottos(manualLottos);
         OutputView.printUserLottos(autoLottos);
 
-        String[] scannedWinningLotto = InputView.inputWinningLotto();
+        String scannedWinningLotto = InputView.inputWinningLotto();
         String scannedBonusBall = InputView.inputBonusNumber();
         WinningLotto winningLotto = WinningLottoParser.parseWinningLotto(scannedWinningLotto, scannedBonusBall);
 
-        LottoGame lottoGame = new LottoGame(manualLottos,autoLottos, winningLotto);
+        List<Lotto> allUserLottos=manualLottos.getUserLottos();
+        allUserLottos.addAll(autoLottos.getUserLottos());
+        LottoGame lottoGame = new LottoGame(new UserLottos(allUserLottos), winningLotto);
         OutputView.printCountOfRank(lottoGame.getCountOfRank());
         OutputView.printRateOfReturn(lottoGame.calculateRateOfReturn());
     }

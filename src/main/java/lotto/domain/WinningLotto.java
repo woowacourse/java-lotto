@@ -16,6 +16,14 @@ public class WinningLotto extends Lotto {
         this.bonusBall = bonusBall;
     }
 
+    public LottoNumber getBonusBall() {
+        return bonusBall;
+    }
+
+    public String getNumbers(){
+        return super.toString();
+    }
+
     public boolean isBonusContain(Lotto userLotto) {
         return userLotto.isContains(bonusBall);
     }
@@ -31,6 +39,12 @@ public class WinningLotto extends Lotto {
 
             countOfRank.put(thisRank, countOfThisRank + ONE);
         }
+        countOfRank.remove(Rank.MISS);
         return countOfRank;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString()+"  보너스볼 : "+bonusBall.toString();
     }
 }

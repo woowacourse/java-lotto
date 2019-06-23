@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>Conas의 로또 게임!</title>
+        <link rel="stylesheet" href="../css/inputManualLotto.css">
+<!--        <script type="text/javascript" src="../js/inputManualLotto.js"></script>-->
+    </head>
+    <body>
+    {{#webUILottoData}}
+    <h1>Lotto <b>{{ round }}</b>회차 : 로또 수동 입력 </h1>
+    {{/webUILottoData}}
+    <p> 각 로또에 6개의 수를 입력 하세요.</p>
+        <form action="/showLottos" method="POST">
+            <div id="inputManualLotto">
+            </div>
+            <div id="div_btn">
+                <input type="submit" id="submit" value="입력 완료">
+                <input type="reset" id="reset" value="재입력">
+            </div>
+        </form>
+
+    </body>
+    <script>
+        var countOfManualLotto = new URLSearchParams(window.location.search).get("countOfManualLotto");
+
+        for (var i = 0; i < countOfManualLotto; i++) {
+            var inputForm = "<br>수동 Lotto "+(i+1)+" :  <input type='text' name='manual"+(i+1)+"'><br>";
+            document.getElementById("inputManualLotto").innerHTML += inputForm;
+        }
+    </script>
+</html>
