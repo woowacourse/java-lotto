@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+    <div id="roundInfo">
+        <button id="openMoneyInput">{{newRound}}회 로또 게임 시작</button>
+    </div>
+    <br /><br />
+
+    <form action="/money" method="post" style="display:none;" id="moneyForm">
+        <h2>구매 금액을 입력해 주세요.</h2>
+        <input type="number" id="inputMoney" name="inputMoney" placeholder="로또 구입 금액을 입력하세요 (1000원 이상, 100,000원 이하)">
+        <input type="button" id="inputMoneyButton" value="구입">
+    </form>
+    <br /><br />
+
+    <form action="/manualCount" method="post" style="display:none;" id="manualCount">
+        <h2>수동으로 구입할 로또 갯수를 입력하세요.</h2>
+        <input type="number" id="inputManualCount" name="inputManualCount" placeholder="수동으로 구입할 로또 갯수를 입력하세요.">
+        <input type="button" id="inputManualCountButton" value="입력">
+    </form>
+    <br /><br />
+
+    <div id="manualLotto"></div>
+    <br /><br />
+
+    <div id="purchasedLotto"></div>
+    <br /><br />
+
+    <form action="/winningLotto" method="get" style="display:none;" id="winningLotto">
+        <h2>지난주 당첨 번호를 입력해 주세요</h2>
+        <input type="text" id="inputWinningLotto" name="inputWinningLotto" placeholder="지난주 당첨 번호를 입력해 주세요">
+        <input type="text" id="inputBonusNumber" name="inputBonusNumber" placeholder="보너스 번호를 입력해주세요">
+        <input type="button" id="inputWinningLottoButton" value="입력">
+    </form>
+    <br /><br />
+
+    <div id="lottoResult" style="display:none">
+        <button id="showResultButton">결과를 보시겠습니까?</button>
+    </div>
+
+    <script>
+        var newRound ="";
+        var money ="";
+        var purchseLottoCount = (money / 1000);
+        var manualCount ="";
+        var manualLottos ="";
+        var totalPurchaseCount ="";
+        var manualLottoNumber ="";
+        var winningLottoNumber ="";
+        var bonusNumber ="";
+        var lottoPrice = 1000;
+
+        // 가장 최근의 round 가져오기
+        $(document).ready(function () {
+            $.ajax({
+                url: '/startGame',
+                type: 'GET',
+                success: function (data) {
+                    newRound = data
+                }
+            });
+        });
+
+        $(document).on('click', '#openMoneyInput', function () {
+            $("#moneyForm").fadeIn();
+        });
+
+        // 구입 금액 입력
+        $(document).on('click', '#inputMoneyButton', function () {
+            var inputMoney = $("#inputMoney").val();
+   
+            if (inputMoney < lottoPrice || inputMoney > 100000 || inputMoney % 1000 !== 0) {
+                alert('1,000원 이상, 100,000원 이하로 입력해주세요.(1,000원 단위');
+                return;
+            }
+
+            money = inputMoney
+            totalPurchaseCount = money / 1000;
+            $("#manualCount").fadeIn();
+        });
+
+        // 수동 로또 구입 갯수 입력
+        $(document).on('click', '#inputManualCountButton', function () {
+            var inputManualCount = $("#inputManualCount").val();
+
+            if (inputManualCount === "0") {
+                $("#winningLotto").fadeIn();
+                manualCount = 0;
+                return;
+            }
+
+            if (inputManualCount > totalPurchaseCount || inputManualCount < 0) {
+                alert('0장 이상, ' + totalPurchaseCount + '장 이하로 구입할 수 있습니다.');
+                return;
+            }
+            manualCount = inputManualCount;
+            generateManualLottoInputs();
+        });
+
+        // 수동 로또 입력 창 생성
+        var generateManualLottoInputs = function () {
+            $("#manualLotto").empty();
+            if (parseInt(manualCount) === 0) {
+                return;
+            }
+            $("#manualLotto").append("<h2>로또 번호를 입력하세요.</h2>");
+            $("#manualLotto").append('<form action="/manualLotto" method="post">');
+            for (var i = 0; i < manualCount; i++) {
+                $("#manualLotto").append('<input class="inputManualLotto" type="text" id="manualLotto' + i + '" name="manualLotto' + i + '" placeholder="로또 번호를 입력하세요"><br/>');
+            }
+            $("#manualLotto").append('<br /><input type="button" id="inputManualLottoButton" value="확인">');
+            $("#manualLotto").append('</form>');
+        };
+
+        //수동 로또 구입
+        $(document).on('click', '#inputManualLottoButton', function () {
+            var manualLotto = "";
+
+            for (var i = 0; i < manualCount; i++) {
+                manualLotto = $("#manualLotto" + i + "").val().replace(' ', '').split(',');
+
+                if (manualLotto.length !== 6) {
+                    alert('로또 번호는 6개여야 합니다.');
+                    return;
+                }
+
+                if (manualLotto.some(i => parseInt(i) < 0 || parseInt(i) > 45)) {
+                    alert('1부터 45이하의 번호를 입력해야 합니다.');
+                    return;
+                }
+                
+                manualLottos += (manualLotto.join(',') + '/');
+            }
+
+            var manualLottoInputTextCount = $("#manualLotto .inputManualLotto").length;
+            var moneyInputText = $("#inputMoney").val();
+
+            if ((money / 1000) < manualCount 
+            || manualCount != manualLottoInputTextCount 
+            || money !== moneyInputText) {
+                alert('구매 금액과 수동 로또 구입 갯수를 확인해주세요.');
+                return;
+            }
+
+            $("#winningLotto").fadeIn();
+        });
+
+        // 지난주 당첨 번호, 보너스 번호 입력
+        $(document).on('click', '#inputWinningLottoButton', function () {
+            winningLottoNumber = $("#inputWinningLotto").val().replace(" ", "");
+            bonusNumber = $("#inputBonusNumber").val().replace(" ", "");
+
+            var splitedWinningLotto = winningLottoNumber.replace(' ', '').split(',');
+            var intBonusNumber = bonusNumber;
+
+            if (splitedWinningLotto.length !== 6) {
+                alert('로또 번호는 6개여야 합니다.');
+                return;
+            }
+
+            for (var i = 0; i < 6; i++) {
+                if (parseInt(splitedWinningLotto[i]) > 45 || parseInt(splitedWinningLotto[i]) < 1) {
+                    alert('1부터 45이하의 번호를 입력해야 합니다.');
+                    return;
+                }
+            }
+
+            if (intBonusNumber < 1 || intBonusNumber > 45) {
+                alert('1부터 45이하의 보너스 번호를 입력해야 합니다.');
+                return;
+            }
+
+            if (splitedWinningLotto.includes(bonusNumber)) {
+                alert('중복된 보너스 번호입니다.');
+                return;
+            }
+
+            saveGameResult();
+            $("#lottoResult").fadeIn();
+        });
+        
+        var saveGameResult = function() {
+            let params = "";
+            params += "&money=" + money;
+            params += "&manualCount=" + manualCount;
+            params += "&manualLottos=" + manualLottos;
+            params += "&totalPurchaseCount=" + totalPurchaseCount;
+            params += "&winningLottoNumber=" + winningLottoNumber;
+            params += "&bonusNumber=" + bonusNumber;
+
+            $.ajax({
+                url: '/saveGame',
+                type: 'get',
+                data: params,
+                contentType: 'text/html;charset=UTF-8',
+                dataType: 'text',
+            });
+        }
+
+        $(document).on('click', '#lottoResult', function () {
+            window.location= "/showGame?money="+money;
+        });
+    </script>
+</body>
+
+</html>
