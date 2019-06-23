@@ -11,8 +11,8 @@ import java.util.List;
 public class LottoService {
     private static final int PRICE_PER_LOTTO = 1_000;
 
-    private final RoundDAO roundDAO = new RoundDAO();
-    private final LottoDAO lottoDAO = new LottoDAO();
+    private final LottoDAO lottoDAO = LottoDAO.getInstance();
+    private final RoundDAO roundDAO = RoundDAO.getInstance();
 
     public LottosDTO.Create createLottos(List<String> manualLottoNumbers) {
         int countOfPurchase = roundDAO.findAmountByRound(roundDAO.findMaxRound()) / PRICE_PER_LOTTO;

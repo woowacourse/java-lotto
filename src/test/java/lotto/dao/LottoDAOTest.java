@@ -29,8 +29,8 @@ public class LottoDAOTest {
 
     @BeforeEach
     void setUp() throws SQLException {
-        lottoDAO = new LottoDAO();
-        roundDAO = new RoundDAO();
+        lottoDAO = LottoDAO.getInstance();
+        roundDAO = RoundDAO.getInstance();
         roundDAO.addRound(RoundDAOTest.AMOUNT_TEST);
     }
 

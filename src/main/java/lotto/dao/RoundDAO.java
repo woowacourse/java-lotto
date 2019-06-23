@@ -8,6 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoundDAO {
+    private RoundDAO() {}
+
+    private static class RoundDAOHolder {
+        static final RoundDAO ROUND_DAO = new RoundDAO();
+    }
+
+    public static RoundDAO getInstance() {
+        return RoundDAOHolder.ROUND_DAO;
+    }
 
     public int findMaxRound() {
         String sql = "SELECT MAX(round) AS max FROM round";

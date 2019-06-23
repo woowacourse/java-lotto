@@ -15,7 +15,7 @@ public class RoundDAOTest {
 
     @BeforeEach
     void setUp() {
-        roundDAO = new RoundDAO();
+        roundDAO = RoundDAO.getInstance();
     }
 
     @Test

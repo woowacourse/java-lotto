@@ -11,7 +11,8 @@ import java.util.List;
 
 public class WinningLottoService {
 
-    private final WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
+    private final WinningLottoDAO winningLottoDAO = WinningLottoDAO.getInstance();
+    private final RoundDAO roundDAO = RoundDAO.getInstance();
 
     public WinningLottoDTO.Create createWinningLotto(List<String> winningLottoNumbers, int bonusNumber) {
         Lotto winningLotto = LottoFactory.createLottoManually(winningLottoNumbers);
@@ -29,6 +30,6 @@ public class WinningLottoService {
         WinningResult winningResult = new Lottos(lottos.getLottos()).match(winningLotto);
         return new WinningResultDTO.Create(
                 winningResult.getResult(),
-                winningResult.calculateRevenueRate(new RoundDAO().findAmountByRound(round)));
+                winningResult.calculateRevenueRate(roundDAO.findAmountByRound(round)));
     }
 }

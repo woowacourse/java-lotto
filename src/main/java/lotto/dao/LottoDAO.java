@@ -14,6 +14,16 @@ import java.util.List;
 public class LottoDAO {
     private static final String DELIMITER = ",";
 
+    private LottoDAO() {}
+
+    private static class LottoDAOHolder {
+        static final LottoDAO LOTTO_DAO = new LottoDAO();
+    }
+
+    public static LottoDAO getInstance() {
+        return LottoDAOHolder.LOTTO_DAO;
+    }
+
     public List<Lotto> findLottosByRound(int round) {
         String sql = "SELECT lotto FROM lotto WHERE round = ?";
         List<Lotto> lottos = new ArrayList<>();
@@ -39,7 +49,7 @@ public class LottoDAO {
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            int nextRound = new RoundDAO().findMaxRound();
+            int nextRound = RoundDAO.getInstance().findMaxRound();
             for (Lotto lotto : lottos) {
                 statement.setString(1, StringUtil.removeBrackets(lotto.toString()));
                 statement.setInt(2, nextRound);

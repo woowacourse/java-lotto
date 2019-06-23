@@ -5,7 +5,7 @@ import lotto.dao.RoundDAO;
 import java.util.List;
 
 public class RoundService {
-    private final RoundDAO roundDAO = new RoundDAO();
+    private final RoundDAO roundDAO = RoundDAO.getInstance();
 
     public void addRound(int amount) {
         roundDAO.addRound(amount);

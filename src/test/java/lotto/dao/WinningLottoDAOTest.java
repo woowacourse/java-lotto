@@ -30,9 +30,9 @@ public class WinningLottoDAOTest {
 
     @BeforeEach
     void setUp() throws SQLException {
-        roundDAO = new RoundDAO();
-        lottoDAO = new LottoDAO();
-        winningLottoDAO = new WinningLottoDAO();
+        roundDAO = RoundDAO.getInstance();
+        lottoDAO = LottoDAO.getInstance();
+        winningLottoDAO = WinningLottoDAO.getInstance();
         roundDAO.addRound(RoundDAOTest.AMOUNT_TEST);
         lottoDAO.addLottos(Arrays.asList(LottoDAOTest.LOTTO_TEST));
     }

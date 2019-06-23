@@ -10,8 +10,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class WinningLottoDAO {
-
     private static final String DELIMITER = ",";
+
+    private WinningLottoDAO() {}
+
+    private static class WinningLottoDAOHolder {
+        static final WinningLottoDAO WINNING_LOTTO_DAO = new WinningLottoDAO();
+    }
+
+    public static WinningLottoDAO getInstance() {
+        return WinningLottoDAOHolder.WINNING_LOTTO_DAO;
+    }
 
     public Lotto findWinningLottoByRound(int round) {
         String sql = "SELECT winning_lotto FROM winning_lotto WHERE round = ?";
@@ -57,7 +66,7 @@ public class WinningLottoDAO {
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            int nextRound = new RoundDAO().findMaxRound();
+            int nextRound = RoundDAO.getInstance().findMaxRound();
             statement.setString(1, StringUtil.removeBrackets(winningLotto.toString()));
             statement.setInt(2, bonusNumber);
             statement.setInt(3, nextRound);
