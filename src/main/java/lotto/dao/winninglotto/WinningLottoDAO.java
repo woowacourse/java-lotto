@@ -12,10 +12,12 @@ import static lotto.dao.winninglotto.sqls.WinningLottoDAOSQLs.INSERT_WINNING_LOT
 import static lotto.dao.winninglotto.sqls.WinningLottoDAOSQLs.SELECT_WINNING_LOTTO_BY_LOTTO_ROUND_ID;
 
 public class WinningLottoDAO {
-    private static WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
+    private static class WinningLottoDAOLazyHolder {
+        private static final WinningLottoDAO INSTANCE = new WinningLottoDAO();
+    }
 
     public static WinningLottoDAO getInstance() {
-        return winningLottoDAO;
+        return WinningLottoDAOLazyHolder.INSTANCE;
     }
 
     public WinningLottoDTO selectWinningLottoByLottoRoundId(int lottoRoundId) throws SQLException {

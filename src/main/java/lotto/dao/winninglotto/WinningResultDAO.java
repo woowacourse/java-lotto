@@ -2,6 +2,7 @@ package lotto.dao.winninglotto;
 
 import lotto.dao.DBCPDataSource;
 import lotto.dto.WinningResultDTO;
+import lotto.model.winninglotto.WinningResult;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,10 +14,12 @@ import static lotto.dao.winninglotto.sqls.WinningResultDAOSQLs.SELECT_WINNING_RE
 
 
 public class WinningResultDAO {
-    private static WinningResultDAO winningResultDAO = new WinningResultDAO();
+    private static class WinningResultDAOLazyHolder {
+        private static final WinningResultDAO INSTANCE = new WinningResultDAO();
+    }
 
     public static WinningResultDAO getInstance() {
-        return winningResultDAO;
+        return WinningResultDAOLazyHolder.INSTANCE;
     }
 
     public WinningResultDTO selectWinningResultByLottoRoundId(int lottoRoundId) throws SQLException {

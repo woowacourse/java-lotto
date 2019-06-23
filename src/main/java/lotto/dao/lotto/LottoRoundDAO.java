@@ -14,10 +14,12 @@ import static lotto.dao.lotto.sqls.LottoRoundDAOSQLs.INSERT_LOTTO_ROUND;
 import static lotto.dao.lotto.sqls.LottoRoundDAOSQLs.SELECT_LOTTO_ROUND_ALL;
 
 public class LottoRoundDAO {
-    private static LottoRoundDAO lottoRoundDAO = new LottoRoundDAO();
+    private static class LottoRoundDAOLazyHolder {
+        private static final LottoRoundDAO INSTANCE = new LottoRoundDAO();
+    }
 
     public static LottoRoundDAO getInstance() {
-        return lottoRoundDAO;
+        return LottoRoundDAOLazyHolder.INSTANCE;
     }
 
     public List<LottoRoundDTO> selectLottoRoundAll() throws SQLException {

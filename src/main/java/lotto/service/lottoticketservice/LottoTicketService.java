@@ -3,6 +3,7 @@ package lotto.service.lottoticketservice;
 import lotto.dao.lotto.LottoTicketDAO;
 import lotto.dto.LottoTicketDTO;
 import lotto.model.customer.PurchaseAmount;
+import lotto.model.lotto.LottoTicket;
 import lotto.model.lotto.LottoTickets;
 import lotto.model.lottostore.LottoStore;
 
@@ -12,11 +13,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicketService {
-    public static List<LottoTicketDTO> getLottoTicketByLottoRoundId(int lottoRoundId) throws SQLException {
+    private static class LottoTicketServiceLazyHolder {
+        private static final LottoTicketService INSTANCE = new LottoTicketService();
+    }
+
+    public static LottoTicketService getInstance() {
+        return LottoTicketServiceLazyHolder.INSTANCE;
+    }
+
+    public List<LottoTicketDTO> getLottoTicketByLottoRoundId(int lottoRoundId) throws SQLException {
         return LottoTicketDAO.getInstance().selectLottoTicketsByLottoRoundId(lottoRoundId);
     }
 
-    public static void addLottoTicketByLottoRoundId(String[] manualLottoTickets, int amount, int lottoRoundId) throws SQLException {
+    public void addLottoTicketByLottoRoundId(String[] manualLottoTickets, int amount, int lottoRoundId) throws SQLException {
         PurchaseAmount purchaseAmount = PurchaseAmount.from(amount);
         List<LottoTicketDTO> manualLottoTicketDTOs = Arrays.stream(manualLottoTickets)
                 .map(LottoTicketDTO::new)

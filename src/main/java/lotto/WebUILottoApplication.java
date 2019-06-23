@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.get;
-import static spark.Spark.port;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
@@ -34,9 +33,9 @@ public class WebUILottoApplication {
         post("/purchase", (request, response) -> {
             PurchaseDTO purchaseDTO = new Gson().fromJson(request.body(), PurchaseDTO.class);
 
-            int lottoRoundId = LottoRoundService.addLottoRound();
+            int lottoRoundId = LottoRoundService.getInstance().addLottoRound();
             request.session().attribute("lottoRoundId", lottoRoundId);
-            LottoTicketService.addLottoTicketByLottoRoundId(purchaseDTO.getLottoNumbers(), purchaseDTO.getPurchaseAmount(), lottoRoundId);
+            LottoTicketService.getInstance().addLottoTicketByLottoRoundId(purchaseDTO.getLottoNumbers(), purchaseDTO.getPurchaseAmount(), lottoRoundId);
             return "";
         });
 
@@ -61,7 +60,7 @@ public class WebUILottoApplication {
         get("/winningResult", (request, response) -> {
             response.type("application/json");
 
-            List<LottoRoundDTO> lottoRounds = LottoRoundService.getLottoRoundAll();
+            List<LottoRoundDTO> lottoRounds = LottoRoundService.getInstance().getLottoRoundAll();
             return new Gson().toJson(lottoRounds);
         });
     }

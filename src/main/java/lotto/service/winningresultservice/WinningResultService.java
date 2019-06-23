@@ -16,6 +16,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class WinningResultService {
+    private static class WinningResultServiceLazyHolder {
+        private static final WinningResultService INSTANCE = new WinningResultService();
+    }
+
+    public static WinningResultService getInstance() {
+        return WinningResultServiceLazyHolder.INSTANCE;
+    }
+
     public static void addWinningResult(WinningLottoDTO winningLottoDTO, int lottoRoundId) throws SQLException {
         List<LottoTicketDTO> lottoTicketDTOs = LottoTicketDAO.getInstance().selectLottoTicketsByLottoRoundId(lottoRoundId);
 

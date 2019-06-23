@@ -16,7 +16,8 @@ public class LottoTicketAssembler {
     public static LottoTicketDTO toDTO(LottoTicket from) {
         String lottoTicket = from.getLottoTicket()
                 .stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
+                .map(LottoNumber::getLottoNumber)
+                .map(String::valueOf)
                 .collect(Collectors.joining(", "));
 
         LottoTicketDTO lottoTicketDTO = new LottoTicketDTO();

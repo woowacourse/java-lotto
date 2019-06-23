@@ -14,10 +14,12 @@ import static lotto.dao.lotto.sqls.LottoTicketDAOSQLs.INSERT_LOTTO_TICKET;
 import static lotto.dao.lotto.sqls.LottoTicketDAOSQLs.SELECT_LOTTO_TICKETS_BY_LOTTO_ROUND_ID;
 
 public class LottoTicketDAO {
-    private static LottoTicketDAO lottoTicketDAO = new LottoTicketDAO();
+    private static class LottoTicketDAOLazyHolder {
+        private static final LottoTicketDAO INSTANCE = new LottoTicketDAO();
+    }
 
     public static LottoTicketDAO getInstance() {
-        return lottoTicketDAO;
+        return LottoTicketDAOLazyHolder.INSTANCE;
     }
 
     public List<LottoTicketDTO> selectLottoTicketsByLottoRoundId(int lottoRoundId) throws SQLException {

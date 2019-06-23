@@ -10,6 +10,14 @@ import lotto.service.lottoticketservice.LottoTicketAssembler;
 import java.sql.SQLException;
 
 public class WinningLottoService {
+    private static class WinningLottoServiceLazyHolder {
+        private static final WinningLottoService INSTANCE = new WinningLottoService();
+    }
+
+    public static WinningLottoService getInstance() {
+        return WinningLottoServiceLazyHolder.INSTANCE;
+    }
+
     public static void addWinningLottoByLottoRoundId(String lottoNumbers, int bonusNumber, int lottoRoundId) throws SQLException {
         LottoTicketDTO lottoTicketDTO = new LottoTicketDTO(lottoNumbers);
         LottoTicket lottoTicket = LottoTicketAssembler.toLottoTicket(lottoTicketDTO);

@@ -7,11 +7,19 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class LottoRoundService {
-    public static int addLottoRound() throws SQLException {
+    private static class LottoRoundServiceLazyHolder {
+        private static final LottoRoundService INSTANCE = new LottoRoundService();
+    }
+
+    public static LottoRoundService getInstance() {
+        return LottoRoundServiceLazyHolder.INSTANCE;
+    }
+
+    public int addLottoRound() throws SQLException {
         return LottoRoundDAO.getInstance().insertLottoRoundReturnsKey();
     }
 
-    public static List<LottoRoundDTO> getLottoRoundAll() throws SQLException {
+    public List<LottoRoundDTO> getLottoRoundAll() throws SQLException {
         return LottoRoundDAO.getInstance().selectLottoRoundAll();
     }
 }
