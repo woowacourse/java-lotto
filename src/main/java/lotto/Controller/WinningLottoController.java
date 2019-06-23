@@ -16,8 +16,8 @@ import static lotto.WebUILottoApplication.render;
 public class WinningLottoController {
 
     private static final String COMMA_DELIMITER = ",";
-    private static final WinningLottoService winningLottoService = new WinningLottoService();
-    private static final RoundService roundService = new RoundService();
+    private static final WinningLottoService winningLottoService = WinningLottoService.getInstance();
+    private static final RoundService roundService = RoundService.getInstance();
 
     public static final Route CREATE_WINNING_LOTTO = (request, response) -> {
         List<String> winningLottoNumbers =

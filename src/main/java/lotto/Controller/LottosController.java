@@ -13,7 +13,7 @@ import static lotto.WebUILottoApplication.render;
 
 public class LottosController {
     private static final String NEXT_LINE = "\r\n";
-    private final static LottoService lottoService = new LottoService();
+    private final static LottoService lottoService = LottoService.getInstance();
 
     public static final Route CREATE_LOTTOS = (request, response) -> {
         List<String> manualLottoNumbers =

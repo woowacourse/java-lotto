@@ -10,7 +10,7 @@ import static lotto.WebUILottoApplication.render;
 
 public class RoundController {
 
-    private static final RoundService roundService = new RoundService();
+    private static final RoundService roundService = RoundService.getInstance();
 
     public static final Route GET_MAX_ROUND = (request, response) -> {
         Map<String, Object> model = new HashMap<>();
