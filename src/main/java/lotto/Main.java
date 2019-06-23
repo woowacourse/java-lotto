@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.utils.NumberUtil;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -26,17 +27,16 @@ public class Main {
         int count = customLottoCount.getCount();
 
         for (int i = 0; i < count; i++) {
-            lottoOMRCard.addCustomLotto(InputView.inputCustomLotto());
+            lottoOMRCard.addCustomLotto(NumberUtil.parsingNumber(InputView.inputCustomLotto()));
         }
 
         LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
 
         return lottoVendingMachine.buyLotto(money, lottoOMRCard);
-
     }
 
     private static WinningLotto makeWinningLotto() {
-        Lotto Lotto = new CustomLottoGenerator(InputView.inputWinningLotto()).makeLotto();
+        Lotto Lotto = new CustomLottoGenerator(NumberUtil.parsingNumber(InputView.inputWinningLotto())).makeLotto();
         LottoNumber bonusNumber = LottoNumber.generateNumber(InputView.inputBonusNumber());
 
         return new WinningLotto(Lotto, bonusNumber);

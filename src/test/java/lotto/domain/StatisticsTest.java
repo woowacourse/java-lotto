@@ -3,9 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +13,13 @@ class StatisticsTest {
 
     @BeforeEach
     void setUp() {
-        List<Rank> ranks = Arrays.asList(Rank.FIRST, Rank.MISS, Rank.MISS, Rank.FIRST, Rank.THIRD);
+        Map<Lotto, Rank> ranks = new HashMap<>();
+        ranks.put(new CustomLottoGenerator(new int[]{1, 2, 3, 4, 5, 6}).makeLotto(), Rank.FIRST);
+        ranks.put(new CustomLottoGenerator(new int[]{7, 8, 9, 10, 11, 12}).makeLotto(), Rank.MISS);
+        ranks.put(new CustomLottoGenerator(new int[]{7, 8, 9, 10, 11, 12}).makeLotto(), Rank.MISS);
+        ranks.put(new CustomLottoGenerator(new int[]{1, 2, 3, 4, 5, 6}).makeLotto(), Rank.FIRST);
+        ranks.put(new CustomLottoGenerator(new int[]{1, 2, 3, 7, 8, 9}).makeLotto(), Rank.THIRD);
+
         statistics = new Statistics(ranks);
     }
 

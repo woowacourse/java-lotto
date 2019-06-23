@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exception.InvalidRankException;
+import java.util.stream.Stream;
 
 public enum Rank {
     FIRST(6, 2_000_000_000), // 1등
@@ -9,8 +9,6 @@ public enum Rank {
     FOURTH(4, 50_000), // 4등
     FIFTH(3, 5_000), // 5등
     MISS(0, 0);
-
-    private static final int MINIMUM_MATCH_COUNT = 3;
 
     private int countOfMatch;
 
@@ -30,10 +28,6 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonusNumber) {
-        if (countOfMatch < MINIMUM_MATCH_COUNT) {
-            return MISS;
-        }
-
         if (countOfMatch == 5 && matchBonusNumber) {
             return SECOND;
         }
@@ -42,11 +36,8 @@ public enum Rank {
             return THIRD;
         }
 
-        for (Rank rank : values()) {
-            if (rank.countOfMatch == countOfMatch) {
-                return rank;
-            }
-        }
-        throw new InvalidRankException("유효하지 않은 당첨");
+        return Stream.of(values())
+                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
+                .findAny().orElse(MISS);
     }
 }

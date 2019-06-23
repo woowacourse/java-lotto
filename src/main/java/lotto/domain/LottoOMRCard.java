@@ -10,7 +10,7 @@ public class LottoOMRCard {
         lottos = new ArrayList<>();
     }
 
-    public void addCustomLotto(String[] userNumbers) {
+    public void addCustomLotto(int[] userNumbers) {
         lottos.add(new CustomLottoGenerator(userNumbers).makeLotto());
     }
 
