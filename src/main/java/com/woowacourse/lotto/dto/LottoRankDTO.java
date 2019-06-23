@@ -8,7 +8,6 @@ import com.woowacourse.lotto.domain.LottoRank;
 
 
 public class LottoRankDTO {
-	public static final String NEW_LINE = "<br>";
 	public static final String PRINT_SECOND_OF_LOTTO = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
 	public static final String PRINT_RESULT_OF_LOTTO = "%d개 일치 (%d원)- %d개\n";
 
@@ -36,10 +35,10 @@ public class LottoRankDTO {
 
 	private void printRankResult(Map<LottoRank, Integer> ranks, StringBuilder stringBuilder, LottoRank lottoRank) {
 		if (lottoRank == LottoRank.SECOND) {
-			stringBuilder.append(String.format(PRINT_SECOND_OF_LOTTO + NEW_LINE, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
+			stringBuilder.append(String.format(PRINT_SECOND_OF_LOTTO, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
 			return;
 		}
-		stringBuilder.append(String.format(PRINT_RESULT_OF_LOTTO + NEW_LINE, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
+		stringBuilder.append(String.format(PRINT_RESULT_OF_LOTTO, lottoRank.getCount(), lottoRank.getPrice(), ranks.get(lottoRank)));
 	}
 
 	@Override
