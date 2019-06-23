@@ -46,6 +46,7 @@ public class ResultDAO {
         result.put(Rank.THIRD, rs.getInt("third"));
         result.put(Rank.SECOND, rs.getInt("second"));
         result.put(Rank.FIRST, rs.getInt("first"));
+        rs.close();
         return result;
     }
 

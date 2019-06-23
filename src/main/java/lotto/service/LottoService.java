@@ -21,19 +21,22 @@ public class LottoService {
         List<Rank> ranks = lottos.match(winLotto);
         WinningStatistics winStat = new WinningStatistics(ranks);
 
-        Connection con = Connector.getConnection();
-        RoundDAO roundDao = new RoundDAO(con);
-        ResultDAO resultDao = new ResultDAO(con);
-        LottoDAO lottoDao = new LottoDAO(con);
-        WinningLottoDAO winningLottoDao = new WinningLottoDAO(con);
+        try (Connection con = Connector.getConnection()) {
+            RoundDAO roundDao = new RoundDAO(con);
+            ResultDAO resultDao = new ResultDAO(con);
+            LottoDAO lottoDao = new LottoDAO(con);
+            WinningLottoDAO winningLottoDao = new WinningLottoDAO(con);
 
-        // 로또, 통계 등을 DB에 저장한다.
-        roundDao.addRound(winStat.getPrize().getValue(), winStat.getInterestRate(new LottoBuyingMoney(lottoBuyingMoney)));
-        int thisRoundId = roundDao.getLatestRoundId();
-        resultDao.addResult(thisRoundId, winStat.getStatistics());
-        winningLottoDao.addWinningLotto(thisRoundId, winLotto);
-        lottoDao.addLotto(thisRoundId, lottos);
-        Connector.closeConnection(con);
+            // 로또, 통계 등을 DB에 저장한다.
+            roundDao.addRound(winStat.getPrize().getValue(), winStat.getInterestRate(new LottoBuyingMoney(lottoBuyingMoney)));
+            int thisRoundId = roundDao.getLatestRoundId();
+            resultDao.addResult(thisRoundId, winStat.getStatistics());
+            winningLottoDao.addWinningLotto(thisRoundId, winLotto);
+            lottoDao.addLotto(thisRoundId, lottos);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
     }
 
     private static Lottos createLottos(LottoCount lottoCount, List<String> customLottos) {

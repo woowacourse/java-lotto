@@ -13,26 +13,29 @@ import java.sql.SQLException;
 
 public class ResultService {
     public static ResultDTO getResultByRoundId(int thisRoundId) throws SQLException {
-        ResultDTO result = new ResultDTO();
-        Connection con = Connector.getConnection();
-        RoundDAO roundDao = new RoundDAO(con);
-        WinningLottoDAO winningLottoDao = new WinningLottoDAO(con);
-        LottoDAO lottoDao = new LottoDAO(con);
+        try (Connection con = Connector.getConnection()) {
+            ResultDTO result = new ResultDTO();
 
-        result.setRound(thisRoundId);
-        result.setRounds(roundDao.getAllIds());
-        WinningLotto winningLotto = winningLottoDao.findWinningLottoByRoundId(thisRoundId);
-        result.setWinningLotto(winningLotto);
+            RoundDAO roundDao = new RoundDAO(con);
+            WinningLottoDAO winningLottoDao = new WinningLottoDAO(con);
+            LottoDAO lottoDao = new LottoDAO(con);
 
-        Lottos lottos = lottoDao.findLottosByRoundId(thisRoundId);
-        result.setLottos(lottos);
+            result.setRound(thisRoundId);
+            result.setRounds(roundDao.getAllIds());
+            WinningLotto winningLotto = winningLottoDao.findWinningLottoByRoundId(thisRoundId);
+            result.setWinningLotto(winningLotto);
 
-        WinningStatistics winningStatistics = new WinningStatistics(lottos.match(winningLotto));
-        result.setInterestRate(roundDao.getInterestRateOfId(thisRoundId));
-        result.setPrize(roundDao.getPrizeOfId(thisRoundId));
-        result.setResult(winningStatistics);
+            Lottos lottos = lottoDao.findLottosByRoundId(thisRoundId);
+            result.setLottos(lottos);
 
-        Connector.closeConnection(con);
-        return result;
+            WinningStatistics winningStatistics = new WinningStatistics(lottos.match(winningLotto));
+            result.setInterestRate(roundDao.getInterestRateOfId(thisRoundId));
+            result.setPrize(roundDao.getPrizeOfId(thisRoundId));
+            result.setResult(winningStatistics);
+            return result;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
     }
 }

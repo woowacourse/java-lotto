@@ -40,7 +40,7 @@ public class WinningLottoDAO {
             throw new SQLException(String.format("데이터베이스에서 회차 번호가 %d인 당첨 로또를 찾는 데 실패했습니다.", roundId));
         }
 
-        return new WinningLotto(Arrays.asList(
+        WinningLotto winLotto = new WinningLotto(Arrays.asList(
                 rs.getInt("no1"),
                 rs.getInt("no2"),
                 rs.getInt("no3"),
@@ -48,5 +48,7 @@ public class WinningLottoDAO {
                 rs.getInt("no5"),
                 rs.getInt("no6")
         ), rs.getInt("bonus"));
+        rs.close();
+        return winLotto;
     }
 }

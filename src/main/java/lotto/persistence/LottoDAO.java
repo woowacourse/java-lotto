@@ -55,6 +55,7 @@ public class LottoDAO {
             ))));
         } while (rs.next());
 
+        rs.close();
         return new Lottos(lottos);
     }
 

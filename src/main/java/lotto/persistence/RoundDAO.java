@@ -29,7 +29,7 @@ public class RoundDAO {
         ResultSet rs = pstmt.executeQuery();
 
         if (!rs.next()) return -1;
-
+        rs.close();
         return rs.getInt("prize");
     }
 
@@ -40,7 +40,7 @@ public class RoundDAO {
         ResultSet rs = pstmt.executeQuery();
 
         if (!rs.next()) return -1.0;
-
+        rs.close();
         return rs.getDouble("interest_rate");
     }
 
@@ -51,6 +51,7 @@ public class RoundDAO {
         if (!rs.next()) {
             throw new SQLException("진행한 로또 회차가 하나도 없습니다.");
         }
+        rs.close();
         return rs.getInt("ThisId");
     }
 
@@ -65,6 +66,7 @@ public class RoundDAO {
         do {
             ids.add(rs.getInt("id"));
         } while (rs.next());
+        rs.close();
         return ids;
     }
 
