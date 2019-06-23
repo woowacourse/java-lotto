@@ -35,6 +35,7 @@ public class Main {
 
         purchasedLotto.addLottos(manualLotto);
         purchasedLotto.addLottos(autoLotto);
+
         OutputView.printPurchasedLottoResult(purchasedLotto, manualLottoSize);
 
         InputView.printInputWinningLottoMessage();
