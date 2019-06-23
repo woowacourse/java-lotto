@@ -14,7 +14,7 @@ public class Parser {
             userLotto.add(Number.of(Integer.parseInt(number)));
         }
 
-        return new Lotto(userLotto);
+        return LottoFactory.createLotto(userLotto);
     }
 
     public static List<Lotto> parseLotto(String[] numbers) {
@@ -22,9 +22,17 @@ public class Parser {
 
         for (String number : numbers) {
             String[] oneNumbers = number.split(DELIMITER);
-            userLotto.add(new Lotto(oneNumbers));
+            userLotto.add(LottoFactory.createLotto(oneNumbers));
         }
 
         return userLotto;
+    }
+
+    public static String[] parseLottoStrings(String userLottoString) {
+        String temp = userLottoString
+                .replace("[[", "")
+                .replace("]]", "")
+                .replace(", ", ",");
+        return temp.split("\\],\\[");
     }
 }

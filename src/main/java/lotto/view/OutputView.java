@@ -9,7 +9,7 @@ public class OutputView {
     private static final String MESSAGE_BUY_LOTTO = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String RESULT = "\n당첨 통계";
     private static final String BASIC_BAR = "--------";
-    private static final String RETURN_RATE = "총 수입률은 %.0f%%입니다.";
+    private static final String RETURN_RATE = "총 수입률은 %s입니다.";
     private static final String RESULT_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
 
@@ -21,7 +21,7 @@ public class OutputView {
         }
     }
 
-    public static void printResultStatus(List<Rank> ranks, double returnRate) {
+    public static void printResultStatus(List<Rank> ranks, String returnRate) {
         System.out.println(RESULT);
         System.out.println(BASIC_BAR);
 

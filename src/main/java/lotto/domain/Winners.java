@@ -16,15 +16,15 @@ public class Winners {
         return rankResult;
     }
 
-    public double calculateResultRate(int inputMoney) {
-        double prizeSum = getPrizeSum(rankResult);
-        return (prizeSum / (inputMoney * MONEY_UNIT)) * PERCENT;
+    public String calculateResultRate(int inputMoney) {
+        double prizeSum = getPrizeSum();
+        return String.format("%.2f", (prizeSum / (inputMoney * MONEY_UNIT)) * PERCENT);
     }
 
-    private static double getPrizeSum(List<Rank> ranks) {
+    public double getPrizeSum() {
         double sum = 0;
 
-        for (Rank rank : ranks) {
+        for (Rank rank : rankResult) {
             sum += rank.getPrize();
         }
 

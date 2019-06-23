@@ -13,7 +13,7 @@ public class Number implements Comparable<Number> {
 
     private final int number;
 
-    private static Map<Integer, Number> cacheMap;
+    private final static Map<Integer, Number> cacheMap;
 
     static {
         cacheMap = IntStream.rangeClosed(MIN, MAX)

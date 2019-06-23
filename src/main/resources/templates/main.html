@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div id="top-panel">
+    <h1 align="center">{{lottoRound}}회 로또 구매 페이지</h1>
+</div>
+<form method="POST" id="lotto" action="/lotto" onsubmit="return check()">
+    <div class="form-group col-md-4" style="margin: auto">
+        <label class="control-label">구입금액을 입력해 주세요.</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">&#8361;</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Amount(money)" name="money" id="money" required>
+            <div class="input-group-append">
+                <span class="input-group-text">원</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="manualRound">수동으로 구매할 로또 수를 입력해 주세요.</label>
+            <input type="text" class="form-control" placeholder="수동 구매 로또 수 입력" id="manualRound" name="manualRound"
+                   required>
+        </div>
+        <div class="form-group">
+            <label for="manualNumbers">수동으로 구매할 번호를 입력해 주세요.</label>
+            <textarea class="form-control" id="manualNumbers" rows="10" placeholder="1,2,3,4,5,6"
+                      name="manualNumbers"></textarea>
+        </div>
+    </div>
+    <div id="bottom-panel" style="float: right; margin-right: 500px">
+        <button type="submit" class="btn btn-secondary">구매</button>
+        <button type="reset" class="btn btn-secondary disabled">취소</button>
+        <input type="hidden" id="lottoRound" name="lottoRound" value="{{lottoRound}}">
+    </div>
+</form>
+<script>
+    function check() {
+        if (checkMoney()) {
+            return false;
+        }
+
+        if (checkRound()) {
+            return false;
+        }
+    }
+
+    function checkMoney() {
+        var money = document.getElementById('money').value;
+
+        if (checkNumbers(money, '금액')) {
+            return true;
+        }
+        if (money % 1000 !== 0) {
+            alert('금액을 확인 해 주세요.');
+            return true;
+        }
+
+        return false;
+    }
+
+    function checkRound() {
+        var manualRound = document.getElementById('manualRound').value;
+        return checkNumbers(manualRound, '수동 숫자');
+    }
+
+    function checkNumbers(value, name) {
+        if (isNaN(value)) {
+            alert(name + '은(는) 숫자만 입력해 주세요.');
+            return true;
+        }
+
+        return false;
+    }
+</script>
+</body>
+</html>
