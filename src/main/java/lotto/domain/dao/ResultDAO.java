@@ -40,7 +40,7 @@ public class ResultDAO {
         ResultDTO resultDTO = new ResultDTO();
 
         if (!rs.next()) {
-            return resultDTO;
+            return null;
         }
 
         resultDTO.setRound(rs.getInt("round"));
@@ -52,5 +52,12 @@ public class ResultDAO {
         resultDTO.setProfitRate(rs.getDouble("profit_rate"));
         resultDTO.setMoney(rs.getInt("money"));
         return resultDTO;
+    }
+
+    public void deleteResult(final int round) throws SQLException {
+        String query = "DELETE FROM result WHERE round = ?";
+        PreparedStatement pstmt = ConnectionGenerator.getConnection().prepareStatement(query);
+        pstmt.setInt(1, round);
+        pstmt.executeUpdate();
     }
 }
