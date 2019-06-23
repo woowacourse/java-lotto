@@ -2,7 +2,7 @@ package lotto.domain.dto;
 
 import lotto.domain.model.Number;
 
-public class WinningLottoDTO {
+public class LottoDTO {
     private int round;
     private Number firstNum;
     private Number secondNum;
@@ -10,7 +10,6 @@ public class WinningLottoDTO {
     private Number forthNum;
     private Number fifthNum;
     private Number sixthNum;
-    private Number bonusNum;
 
     public int getRound() {
         return round;
@@ -66,13 +65,5 @@ public class WinningLottoDTO {
 
     public void setSixthNum(final Number sixthNum) {
         this.sixthNum = sixthNum;
-    }
-
-    public Number getBonusNum() {
-        return bonusNum;
-    }
-
-    public void setBonusNum(final Number bonusNum) {
-        this.bonusNum = bonusNum;
     }
 }

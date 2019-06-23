@@ -33,8 +33,8 @@ public class Main {
             autoLotto.add(new Lotto(ShuffledNumberGenerator.getShuffledNumbers()));
         }
 
-        purchasedLotto.addLotto(manualLotto);
-        purchasedLotto.addLotto(autoLotto);
+        purchasedLotto.addLottos(manualLotto);
+        purchasedLotto.addLottos(autoLotto);
         OutputView.printPurchasedLottoResult(purchasedLotto, manualLottoSize);
 
         InputView.printInputWinningLottoMessage();

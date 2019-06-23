@@ -1,14 +1,11 @@
 package lotto.domain.dao;
 
-import lotto.domain.model.Lotto;
-import lotto.domain.model.Number;
+import lotto.domain.dto.WinningLottoDTO;
 import lotto.domain.model.NumberSet;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,16 +19,17 @@ public class WinningLottoDAOTest {
 
     @Test
     public void addWinningLotto() {
-        List<Number> lottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(NumberSet.of(i));
-        }
-        Lotto lotto = new Lotto(lottoNumbers);
-        Number bonusNumber = NumberSet.of(7);
-        int round = 2;
-
         try {
-            winningLottoDAO.addWinningLotto(lotto, bonusNumber, round);
+            WinningLottoDTO winningLottoDTO = new WinningLottoDTO();
+            winningLottoDTO.setRound(0);
+            winningLottoDTO.setFirstNum(NumberSet.of(1));
+            winningLottoDTO.setSecondNum(NumberSet.of(2));
+            winningLottoDTO.setThirdNum(NumberSet.of(3));
+            winningLottoDTO.setForthNum(NumberSet.of(4));
+            winningLottoDTO.setFifthNum(NumberSet.of(5));
+            winningLottoDTO.setSixthNum(NumberSet.of(6));
+            winningLottoDTO.setBonusNum(NumberSet.of(7));
+            winningLottoDAO.addWinningLotto(winningLottoDTO);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -39,7 +37,7 @@ public class WinningLottoDAOTest {
 
     @Test
     public void getLatestRoundFromWinningLotto() throws SQLException {
-        int round = winningLottoDAO.getLatestRound();
+        int round = winningLottoDAO.getNewRound();
         assertThat(round).isEqualTo(2);
     }
 }

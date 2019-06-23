@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.dao.WinningLottoDAO;
 import lotto.domain.service.*;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -11,46 +10,38 @@ import java.util.Map;
 import static spark.Spark.get;
 
 public class WebUILottoApplication {
+
     public static void main(String[] args) {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            return render(model, "home.html");
+            req.session(true);
+            return render(model, "main.html");
         });
 
-        get("/round", (req, res) -> {
-            WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
-            return winningLottoDAO.getLatestRound();
+        get("/startGame", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            WinningLottoService  winningLottoService = new WinningLottoService();
+
+            req.session().attribute("newRound", winningLottoService.getNewRound());
+            model.put("newRound", req.session().attribute("newRound"));
+
+            return render(model, "lotto.html");
         });
 
-        // 구입 금액
-        get("/money", (req, res) -> {
-            MoneyService moneyService = new MoneyService();
-            moneyService.addMoney(req.queryParams("money"), req.queryParams("round"));
+        get("/saveGame", (req, res) -> {
+            GameService gameService = new GameService();
+            gameService.saveGame(req.session().attribute("newRound"), req.queryParams("manualLottos"),
+                    req.queryParams("totalPurchaseCount"), req.queryParams("manualCount"),
+                    req.queryParams("bonusNumber"),req.queryParams("winningLottoNumber"), req.queryParams("money"));
+
             return res.status();
         });
 
-        get("/manualLotto", (req, res) -> {
-            ManualLottoService manualLottoService = new ManualLottoService();
-            manualLottoService.addLotto(req.queryParams("manualLotto"), req.queryParams("round"));
-            return res.status();
-        });
-
-        get("/autoLotto", (req, res) -> {
-            LottoService lottoService = new LottoService();
-            lottoService.addLotto(req.queryParams("round"), req.queryParams("purchaseLottoCount"), req.queryParams("manualLottoCount"));
-            return res.status();
-        });
-
-        get("/winningLotto", (req, res) -> {
-            WinningLottoService winningLottoService = new WinningLottoService();
-            winningLottoService.addWinningLotto(req.queryParams("round"), req.queryParams("bonusNumber"), req.queryParams("winningLotto"));
-            return res.status();
-        });
-
-        get("/result", (req, res) -> {
-           ResultService resultService = new ResultService();
-           resultService.getResult(req.queryParams("round"));
-           return 0;
+        get("/showGame", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            ResultService resultService = new ResultService();
+            model.put("resultDTO", resultService.getResult(req.session().attribute("newRound")));
+            return render(model, "result.html");
         });
     }
 
