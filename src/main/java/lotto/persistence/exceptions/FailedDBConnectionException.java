@@ -1,4 +1,4 @@
-package lotto.persistence;
+package lotto.persistence.exceptions;
 
 public class FailedDBConnectionException extends RuntimeException {
     public FailedDBConnectionException(String message) {

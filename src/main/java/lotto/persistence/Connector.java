@@ -1,5 +1,8 @@
 package lotto.persistence;
 
+import lotto.persistence.exceptions.FailedDBConnectionException;
+import lotto.persistence.exceptions.FailedJDBCDriverLoadingException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

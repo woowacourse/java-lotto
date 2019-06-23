@@ -1,6 +1,7 @@
 package lotto.persistence;
 
 import lotto.domain.WinningLotto;
+import lotto.persistence.exceptions.DataAccessException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

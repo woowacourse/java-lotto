@@ -1,4 +1,4 @@
-package lotto.persistence;
+package lotto.persistence.exceptions;
 
 public class DataAccessException extends RuntimeException {
     public DataAccessException(Throwable cause) {

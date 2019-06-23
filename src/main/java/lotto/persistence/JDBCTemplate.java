@@ -1,5 +1,7 @@
 package lotto.persistence;
 
+import lotto.persistence.exceptions.DataAccessException;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
