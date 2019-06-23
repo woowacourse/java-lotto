@@ -11,7 +11,11 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 public class WinningLottoDao {
-    public static void addWinningLotto(WinningLotto winningLotto, int roundNo) {
+    public static WinningLottoDao getInstance() {
+        return WinningLottoDaoHolder.INSTANCE;
+    }
+
+    public void addWinningLotto(WinningLotto winningLotto, int roundNo) {
         try {
             String query = "INSERT INTO winning_lotto(NO_1, NO_2, NO_3, NO_4, NO_5, NO_6, BONUS_NO, ROUND_NO)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -33,7 +37,7 @@ public class WinningLottoDao {
         }
     }
 
-    public static WinningLotto findByRoundNo(int roundNo) {
+    public WinningLotto findByRoundNo(int roundNo) {
         try {
             String query = "SELECT * FROM winning_lotto WHERE round_no = ?";
             PreparedStatement pstmt = DbConnector.getConnection().prepareStatement(query);
@@ -57,5 +61,9 @@ public class WinningLottoDao {
         } finally {
             DbConnector.closeConnection();
         }
+    }
+
+    private static class WinningLottoDaoHolder {
+        static final WinningLottoDao INSTANCE = new WinningLottoDao();
     }
 }

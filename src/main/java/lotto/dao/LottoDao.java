@@ -12,7 +12,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LottoDao {
-    public static void addLotto(Lotto lotto, int roundNo) {
+    public static LottoDao getInstance() {
+        return LottoDaoHolder.INSTANCE;
+    }
+
+    public void addLotto(Lotto lotto, int roundNo) {
         try {
             String query = "INSERT INTO lotto(NO_1, NO_2, NO_3, NO_4, NO_5, NO_6, ROUND_NO)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -33,7 +37,7 @@ public class LottoDao {
         }
     }
 
-    public static Lottos findByRoundNo(int roundNo) {
+    public Lottos findByRoundNo(int roundNo) {
         try {
             String query = "SELECT * FROM lotto WHERE round_no = ?";
             PreparedStatement pstmt = DbConnector.getConnection().prepareStatement(query);
@@ -59,5 +63,9 @@ public class LottoDao {
             DbConnector.closeConnection();
         }
 
+    }
+
+    private static class LottoDaoHolder {
+        static final LottoDao INSTANCE = new LottoDao();
     }
 }

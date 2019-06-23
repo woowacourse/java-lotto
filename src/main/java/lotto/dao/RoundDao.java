@@ -8,7 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RoundDao {
-    public static void addRound(int roundNo, Money money) {
+    public static RoundDao getInstance() {
+        return RoundDaoHolder.INSTANCE;
+    }
+
+    public void addRound(int roundNo, Money money) {
         try {
             String query = "INSERT INTO round(ROUND_NO, MONEY, DATE)" +
                     " VALUES (?, ?, NOW())";
@@ -23,7 +27,7 @@ public class RoundDao {
         }
     }
 
-    public static Money findByRoundNo(int roundNo) {
+    public Money findByRoundNo(int roundNo) {
         try {
             String query = "SELECT * FROM round WHERE ROUND_NO = ?";
             PreparedStatement pstmt = DbConnector.getConnection().prepareStatement(query);
@@ -41,7 +45,7 @@ public class RoundDao {
         }
     }
 
-    public static Integer findMaxRounNo() {
+    public Integer findMaxRoundNo() {
         try {
             String query = "SELECT MAX(ROUND_NO) AS max_round_no FROM round";
             PreparedStatement pstmt = DbConnector.getConnection().prepareStatement(query);
@@ -56,5 +60,9 @@ public class RoundDao {
         } finally {
             DbConnector.closeConnection();
         }
+    }
+
+    private static class RoundDaoHolder {
+        static final RoundDao INSTANCE = new RoundDao();
     }
 }
