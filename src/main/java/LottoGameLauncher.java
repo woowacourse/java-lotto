@@ -47,7 +47,7 @@ public class LottoGameLauncher {
             int numberOfMannualIssue = InputView.inputNumberOfManualIssue();
             purchaseAmount.checkNumberOfManualIssue(numberOfMannualIssue);
             return numberOfMannualIssue;
-        } catch(IllegalNumberOfManualIssueException e) {
+        } catch (IllegalNumberOfManualIssueException e) {
             System.out.println(e.getMessage());
             return getNumberOfManualIssueLottosUpTo(purchaseAmount);
         }
@@ -57,7 +57,7 @@ public class LottoGameLauncher {
         try {
             List<Integer> numbers = InputView.getNumbersForLotto();
             return LottoFactory.manualIssueLottoBy(numbers);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getManualIssuedLotto();
         }
