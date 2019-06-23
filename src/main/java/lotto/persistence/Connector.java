@@ -25,7 +25,6 @@ public class Connector {
         try {
             con = DriverManager.getConnection("jdbc:mysql://" + server + "/"
                     + database + "?serverTimezone=UTC&useSSL=false", userName, password);
-            System.out.println("데이터베이스에 연결되었습니다.");
         } catch (SQLException e) {
             System.err.println("데이터베이스 연결 오류: " + e.getMessage());
             e.printStackTrace();

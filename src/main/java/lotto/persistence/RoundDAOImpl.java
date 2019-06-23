@@ -31,9 +31,12 @@ public class RoundDAOImpl implements RoundDAO {
             pstmt.setString(1, String.valueOf(id));
             ResultSet rs = pstmt.executeQuery();
 
-            if (!rs.next()) return -1;
+            if (!rs.next()) {
+                throw new SQLException(id + "에 해당하는 상금을 찾는데 실패했습니다.");
+            }
+            int result = rs.getInt("prize");
             rs.close();
-            return rs.getInt("prize");
+            return result;
         } catch (Exception e) {
             throw new DataAccessException(e);
         }
@@ -46,9 +49,12 @@ public class RoundDAOImpl implements RoundDAO {
             pstmt.setString(1, String.valueOf(id));
             ResultSet rs = pstmt.executeQuery();
 
-            if (!rs.next()) return -1.0;
+            if (!rs.next()) {
+                throw new SQLException(id + "에 해당하는 수익률을 찾는데 실패했습니다.");
+            }
+            double result = rs.getDouble("interest_rate");
             rs.close();
-            return rs.getDouble("interest_rate");
+            return result;
         } catch (Exception e) {
             throw new DataAccessException(e);
         }
@@ -62,8 +68,9 @@ public class RoundDAOImpl implements RoundDAO {
             if (!rs.next()) {
                 throw new SQLException("진행한 로또 회차가 하나도 없습니다.");
             }
+            int result = rs.getInt("ThisId");
             rs.close();
-            return rs.getInt("ThisId");
+            return result;
         } catch (Exception e) {
             throw new DataAccessException(e);
         }

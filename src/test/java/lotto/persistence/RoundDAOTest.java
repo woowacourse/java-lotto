@@ -1,27 +1,21 @@
 package lotto.persistence;
 
 import org.assertj.core.data.Offset;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoundDAOTest {
-    private Connection con;
-    private RoundDAOImpl roundDao;
+    private RoundDAO roundDao;
 
     @BeforeEach
     void setUp() {
-        this.con = Connector.getConnection();
-        this.roundDao = new RoundDAOImpl(con);
+        this.roundDao = RoundDAO.getInstance();
     }
 
     @Test
-    void addRoundTest() throws SQLException {
+    void addRoundTest() {
         int latestRoundIdBeforeAddRound = roundDao.getLatestRoundId();
         roundDao.addRound(100, 1.0);
         int latestRoundIdAfterAddRound = roundDao.getLatestRoundId();
@@ -30,7 +24,7 @@ public class RoundDAOTest {
     }
 
     @Test
-    void getPrizeTest() throws SQLException {
+    void getPrizeTest() {
         roundDao.addRound(100, 1.0);
         int latestRoundId = roundDao.getLatestRoundId();
         assertThat(roundDao.getPrizeOfId(latestRoundId)).isEqualTo(100);
@@ -38,7 +32,7 @@ public class RoundDAOTest {
     }
 
     @Test
-    void getInterestRateTest() throws SQLException {
+    void getInterestRateTest() {
         roundDao.addRound(100, 1.0);
         int latestRoundId = roundDao.getLatestRoundId();
         assertThat(roundDao.getInterestRateOfId(latestRoundId)).isEqualTo(1.0, Offset.offset(0.01));
@@ -46,15 +40,10 @@ public class RoundDAOTest {
     }
 
     @Test
-    void removeTest() throws SQLException {
+    void removeTest() {
         int latestRoundId = roundDao.getLatestRoundId();
         roundDao.addRound(100, 1.0);
         roundDao.removeRoundById(roundDao.getLatestRoundId());
         assertThat(roundDao.getLatestRoundId()).isEqualTo(latestRoundId);
-    }
-
-    @AfterEach
-    void tearDown() {
-        Connector.closeConnection(con);
     }
 }
