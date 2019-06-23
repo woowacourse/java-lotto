@@ -67,4 +67,11 @@ public class RoundDAO {
         } while (rs.next());
         return ids;
     }
+
+    public void removeRoundById(int roundId) throws SQLException {
+        String query = "DELETE FROM round WHERE id=?";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setString(1, String.valueOf(roundId));
+        pstmt.executeUpdate();
+    }
 }

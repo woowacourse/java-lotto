@@ -1,4 +1,5 @@
--- round Table Create SQL
+USE JAVA_LOTTO;
+
 CREATE TABLE round
 (
     `id`             INT       NOT NULL    AUTO_INCREMENT, 
@@ -7,10 +8,6 @@ CREATE TABLE round
     PRIMARY KEY (id)
 );
 
-ALTER TABLE round;
-
-
--- result Table Create SQL
 CREATE TABLE result
 (
     `id`      INT    NOT NULL    AUTO_INCREMENT, 
@@ -21,17 +18,10 @@ CREATE TABLE result
     `third`   INT    NOT NULL, 
     `second`  INT    NOT NULL, 
     `first`   INT    NOT NULL, 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (ro_id) REFERENCES round (id) ON DELETE CASCADE
 );
 
-ALTER TABLE result COMMENT '당첨 결과';
-
-ALTER TABLE result
-    ADD CONSTRAINT FK_result_ro_id_round_id FOREIGN KEY (ro_id)
-        REFERENCES round (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
--- winningLotto Table Create SQL
 CREATE TABLE winningLotto
 (
     `id`     INT    NOT NULL    AUTO_INCREMENT, 
@@ -43,17 +33,10 @@ CREATE TABLE winningLotto
     `no5`    INT    NOT NULL, 
     `no6`    INT    NOT NULL, 
     `bonus`  INT    NOT NULL, 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (ro_id) REFERENCES round (id) ON DELETE CASCADE
 );
 
-ALTER TABLE winningLotto;
-
-ALTER TABLE winningLotto
-    ADD CONSTRAINT FK_winningLotto_ro_id_round_id FOREIGN KEY (ro_id)
-        REFERENCES round (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
--- lotto Table Create SQL
 CREATE TABLE lotto
 (
     `id`     INT    NOT NULL    AUTO_INCREMENT, 
@@ -64,13 +47,6 @@ CREATE TABLE lotto
     `no4`    INT    NOT NULL, 
     `no5`    INT    NOT NULL, 
     `no6`    INT    NOT NULL, 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (ro_id) REFERENCES round (id) ON DELETE CASCADE
 );
-
-ALTER TABLE lotto;
-
-ALTER TABLE lotto
-    ADD CONSTRAINT FK_lotto_ro_id_round_id FOREIGN KEY (ro_id)
-        REFERENCES round (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-

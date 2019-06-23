@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.exceptions.InvalidBonusBallException;
 
 import java.util.List;
+import java.util.Objects;
 
 public class WinningLotto {
     private final Lotto lotto;
@@ -20,16 +21,30 @@ public class WinningLotto {
         return Rank.valueOf(this.lotto.countMatches(lotto), lotto.contains(bonusBall));
     }
 
-    @Override
-    public String toString() {
-        return lotto + " + " + bonusBall;
-    }
-
     public Lotto getLotto() {
         return lotto;
     }
 
     public LottoNumber getBonus() {
         return bonusBall;
+    }
+
+    @Override
+    public String toString() {
+        return lotto + " + " + bonusBall;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningLotto that = (WinningLotto) o;
+        return Objects.equals(lotto, that.lotto) &&
+                Objects.equals(bonusBall, that.bonusBall);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto, bonusBall);
     }
 }

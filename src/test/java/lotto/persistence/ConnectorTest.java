@@ -13,6 +13,4 @@ public class ConnectorTest {
         assertThat(con).isNotNull();
         Connector.closeConnection(con);
     }
-
-
 }

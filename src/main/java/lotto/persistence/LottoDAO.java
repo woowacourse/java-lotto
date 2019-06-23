@@ -57,4 +57,6 @@ public class LottoDAO {
 
         return new Lottos(lottos);
     }
+
+
 }

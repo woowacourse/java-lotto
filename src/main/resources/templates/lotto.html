@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Lotto App</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/home">Lotto App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 </nav>
@@ -23,7 +25,8 @@
     <form method="post" action="/lotto">
         <div class="form-group">
             <label for="money">당첨 로또와 보너스 번호</label>
-            <input name="winningLotto" type="text" class="form-control" id="money" aria-describedby="inputMoneyHelp" placeholder="e.g., 1,2,3,4,5,6,7">
+            <input name="winningLotto" type="text" class="form-control" id="money" aria-describedby="inputMoneyHelp"
+                   placeholder="e.g., 1,2,3,4,5,6,7">
         </div>
         <p>수동 로또 입력</p>
         <div class="form-group" id="lottoInputs">
@@ -33,15 +36,26 @@
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 <script>
-    var numOfCustomLottos = {{numOfCustomLottos}};
+    var numOfCustomLottos = {
+    {
+        numOfCustomLottos
+    }
+    }
+    ;
 
     //create input element
 
-    for (var i=0; i<numOfCustomLottos; i++) {
+    for (var i = 0; i < numOfCustomLottos; i++) {
         var input = document.createElement("input");
         input.type = "text";
         input.name = "lotto" + i;
@@ -49,10 +63,10 @@
         console.log(input)
         $("#lottoInputs").append(input);
         $("#lottoInputs").append("<br/>");
-        $("#lotto"+i).addClass("form-control");
+        $("#lotto" + i).addClass("form-control");
 
         if (i == 0) {
-            $("#lotto"+i).attr("placeholder", "e.g., 1,2,3,4,5,6");
+            $("#lotto" + i).attr("placeholder", "e.g., 1,2,3,4,5,6");
         }
     }
 </script>
