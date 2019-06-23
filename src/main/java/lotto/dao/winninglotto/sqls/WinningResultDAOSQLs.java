@@ -12,7 +12,7 @@ public class WinningResultDAOSQLs {
             + ", roi "
             + " FROM winning_result "
             + " WHERE "
-            + " lotto_round_id = ? ";
+            + " lotto_round_id = :lottoRoundId ";
 
     public static final String INSERT_WINNING_RESULT
             = " INSERT INTO "
@@ -27,13 +27,13 @@ public class WinningResultDAOSQLs {
             + ", roi "
             + " ) "
             + " VALUES ("
-            + "  ? "
-            + ", ? "
-            + ", ? "
-            + ", ? "
-            + ", ? "
-            + ", ? "
-            + ", ? "
-            + ", ? "
+            + "  :lottoRoundId "
+            + ", :first "
+            + ", :second "
+            + ", :third "
+            + ", :fourth "
+            + ", :fifth "
+            + ", :miss "
+            + ", :roi "
             + " ) ";
 }

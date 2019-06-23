@@ -7,7 +7,7 @@ public class WinningLottoDAOSQLs {
             + ", bonus_number "
             + " FROM winning_lotto "
             + " WHERE "
-            + " lotto_round_id = ? ";
+            + " lotto_round_id = :lottoRoundId ";
 
     public static final String INSERT_WINNING_LOTTO
             = " INSERT INTO "
@@ -17,8 +17,8 @@ public class WinningLottoDAOSQLs {
             + ", bonus_number "
             + " ) "
             + " VALUES ("
-            + "  ? "
-            + ", ? "
-            + ", ? "
+            + "  :lottoRoundId "
+            + ", :lottoTicket "
+            + ", :bonusNumber "
             + " ) ";
 }

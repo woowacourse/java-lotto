@@ -1,12 +1,15 @@
 package lotto.dao.winninglotto;
 
-import lotto.dao.DBCPDataSource;
+import lotto.dao.JdbcTemplate.JdbcTemplate;
 import lotto.dto.WinningLottoDTO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static lotto.dao.winninglotto.sqls.WinningLottoDAOSQLs.INSERT_WINNING_LOTTO;
 import static lotto.dao.winninglotto.sqls.WinningLottoDAOSQLs.SELECT_WINNING_LOTTO_BY_LOTTO_ROUND_ID;
@@ -21,34 +24,25 @@ public class WinningLottoDAO {
     }
 
     public WinningLottoDTO selectWinningLottoByLottoRoundId(int lottoRoundId) throws SQLException {
+        Map<String, Integer> rowMapper = Collections.singletonMap("lottoRoundId", lottoRoundId);
+        AtomicReference<WinningLottoDTO> winningLottoDTO = new AtomicReference<>();
 
-        try (Connection connection = DBCPDataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_WINNING_LOTTO_BY_LOTTO_ROUND_ID)) {
-
-            preparedStatement.setInt(1, lottoRoundId);
+        JdbcTemplate.query(SELECT_WINNING_LOTTO_BY_LOTTO_ROUND_ID, rowMapper, preparedStatement -> {
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (!resultSet.next()) {
-                return null;
-            }
             String lottoTicket = resultSet.getString("lotto_ticket");
             int bonusNumber = resultSet.getInt("bonus_number");
+            winningLottoDTO.set(new WinningLottoDTO(lottoTicket, bonusNumber));
+        });
 
-            return new WinningLottoDTO(lottoTicket, bonusNumber);
-        } catch (SQLException e) {
-            throw e;
-        }
+        return winningLottoDTO.get();
     }
 
     public void insertWinningLotto(WinningLottoDTO winningLotto, int lottoRoundId) throws SQLException {
-        try (Connection connection = DBCPDataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_WINNING_LOTTO)) {
-            preparedStatement.setInt(1, lottoRoundId);
-            preparedStatement.setString(2, winningLotto.getWinningLotto());
-            preparedStatement.setInt(3, winningLotto.getBonusNumber());
+        Map<String, Object> rowMapper = new HashMap<>();
+        rowMapper.put("lottoRoundId", lottoRoundId);
+        rowMapper.put("winningLotto", winningLotto.getWinningLotto());
+        rowMapper.put("bonusNumber", winningLotto.getBonusNumber());
 
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw e;
-        }
+        JdbcTemplate.query(INSERT_WINNING_LOTTO, rowMapper, (PreparedStatement::executeUpdate));
     }
 }

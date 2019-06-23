@@ -1,13 +1,14 @@
 package lotto.dao.winninglotto;
 
-import lotto.dao.DBCPDataSource;
+import lotto.dao.JdbcTemplate.JdbcTemplate;
 import lotto.dto.WinningResultDTO;
-import lotto.model.winninglotto.WinningResult;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static lotto.dao.winninglotto.sqls.WinningResultDAOSQLs.INSERT_WINNING_RESULT;
 import static lotto.dao.winninglotto.sqls.WinningResultDAOSQLs.SELECT_WINNING_RESULT_BY_LOTTO_ROUND_ID;
@@ -23,13 +24,12 @@ public class WinningResultDAO {
     }
 
     public WinningResultDTO selectWinningResultByLottoRoundId(int lottoRoundId) throws SQLException {
-        try (Connection connection = DBCPDataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_WINNING_RESULT_BY_LOTTO_ROUND_ID)) {
-            preparedStatement.setInt(1, lottoRoundId);
+        Map<String, Integer> rowMapper = new HashMap<>();
+        AtomicReference<WinningResultDTO> winningResultDTO = new AtomicReference<>();
+        rowMapper.put("lottoRoundId", lottoRoundId);
+        JdbcTemplate.query(SELECT_WINNING_RESULT_BY_LOTTO_ROUND_ID, rowMapper, (preparedStatement -> {
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (!resultSet.next()) {
-                return null;
-            }
+            resultSet.next();
 
             long first = resultSet.getBigDecimal("first").longValue();
             long second = resultSet.getBigDecimal("second").longValue();
@@ -38,30 +38,23 @@ public class WinningResultDAO {
             long fifth = resultSet.getBigDecimal("fifth").longValue();
             long miss = resultSet.getBigDecimal("miss").longValue();
             long roi = resultSet.getBigDecimal("roi").longValue();
+            winningResultDTO.set(new WinningResultDTO(lottoRoundId, first, second, third, fourth, fifth, miss, roi));
+        }));
 
-            return new WinningResultDTO(lottoRoundId, first, second, third, fourth, fifth, miss, roi);
-        } catch (SQLException e) {
-            throw e;
-        }
-
-
+        return winningResultDTO.get();
     }
 
     public void insertWinningResult(WinningResultDTO winningResult) throws SQLException {
-        try (Connection connection = DBCPDataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_WINNING_RESULT)) {
-            preparedStatement.setLong(1, winningResult.getLottoRoundId());
-            preparedStatement.setLong(2, winningResult.getFirst());
-            preparedStatement.setLong(3, winningResult.getSecond());
-            preparedStatement.setLong(4, winningResult.getThird());
-            preparedStatement.setLong(5, winningResult.getFourth());
-            preparedStatement.setLong(6, winningResult.getFifth());
-            preparedStatement.setLong(7, winningResult.getMiss());
-            preparedStatement.setLong(8, winningResult.getRoi());
+        Map<String, Long> rowMapper = new HashMap<>();
+        rowMapper.put("lottoRoundId", winningResult.getLottoRoundId());
+        rowMapper.put("first", winningResult.getFirst());
+        rowMapper.put("second", winningResult.getSecond());
+        rowMapper.put("third", winningResult.getThird());
+        rowMapper.put("fourth", winningResult.getFourth());
+        rowMapper.put("fifth", winningResult.getFifth());
+        rowMapper.put("miss", winningResult.getMiss());
+        rowMapper.put("roi", winningResult.getRoi());
 
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw e;
-        }
+        JdbcTemplate.query(INSERT_WINNING_RESULT, rowMapper, (PreparedStatement::executeUpdate));
     }
 }

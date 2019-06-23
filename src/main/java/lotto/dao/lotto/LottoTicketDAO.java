@@ -1,14 +1,16 @@
 package lotto.dao.lotto;
 
-import lotto.dao.DBCPDataSource;
+import lotto.dao.JdbcTemplate.JdbcTemplate;
 import lotto.dto.LottoTicketDTO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static lotto.dao.lotto.sqls.LottoTicketDAOSQLs.INSERT_LOTTO_TICKET;
 import static lotto.dao.lotto.sqls.LottoTicketDAOSQLs.SELECT_LOTTO_TICKETS_BY_LOTTO_ROUND_ID;
@@ -23,30 +25,24 @@ public class LottoTicketDAO {
     }
 
     public List<LottoTicketDTO> selectLottoTicketsByLottoRoundId(int lottoRoundId) throws SQLException {
-        try (Connection connection = DBCPDataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOTTO_TICKETS_BY_LOTTO_ROUND_ID)) {
-
-            preparedStatement.setInt(1, lottoRoundId);
+        Map<String, Integer> rowMapper = Collections.singletonMap("lottoRoundId", lottoRoundId);
+        List<LottoTicketDTO> lottoTicketDTOs = new ArrayList<>();
+        JdbcTemplate.query(SELECT_LOTTO_TICKETS_BY_LOTTO_ROUND_ID, rowMapper, (preparedStatement) -> {
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<LottoTicketDTO> lottoTicketDTOs = new ArrayList<>();
             while (resultSet.next()) {
                 String lottoTicket = resultSet.getString("lotto_ticket");
                 lottoTicketDTOs.add(new LottoTicketDTO(lottoTicket));
             }
-            return lottoTicketDTOs;
-        } catch (SQLException e) {
-            throw e;
-        }
+        });
+
+        return lottoTicketDTOs;
     }
 
     public void insertLottoTicket(LottoTicketDTO lottoTicketDTO, int lottoRoundId) throws SQLException {
-        try (Connection connection = DBCPDataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_LOTTO_TICKET)) {
-            preparedStatement.setInt(1, lottoRoundId);
-            preparedStatement.setString(2, lottoTicketDTO.getLottoTicket());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw e;
-        }
+        Map<String, Object> rowMapper = new HashMap<>();
+        rowMapper.put("lottoRoundId", lottoRoundId);
+        rowMapper.put("lottoTicket", lottoTicketDTO.getLottoTicket());
+
+        JdbcTemplate.query(INSERT_LOTTO_TICKET, rowMapper, (PreparedStatement::executeUpdate));
     }
 }
