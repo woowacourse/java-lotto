@@ -4,7 +4,6 @@ import lotto.dao.LottoDAO;
 import lotto.dao.RoundDAO;
 import lotto.dao.WinningLottoDAO;
 import lotto.domain.*;
-import lotto.dto.LottosDTO;
 import lotto.dto.WinningLottoDTO;
 import lotto.dto.WinningResultDTO;
 
@@ -17,12 +16,12 @@ public class WinningLottoService {
 
     private WinningLottoService() {}
 
-    private static class WinningLottoServceHolder {
+    private static class WinningLottoServiceHolder {
         static final WinningLottoService WINNING_LOTTO_SERVICE = new WinningLottoService();
     }
 
     public static WinningLottoService getInstance() {
-        return WinningLottoServceHolder.WINNING_LOTTO_SERVICE;
+        return WinningLottoServiceHolder.WINNING_LOTTO_SERVICE;
     }
 
     public WinningLottoDTO.Create createWinningLotto(List<String> winningLottoNumbers, int bonusNumber) {
@@ -37,8 +36,8 @@ public class WinningLottoService {
         Lotto lotto = winningLottoDAO.findWinningLottoByRound(round);
         int bonusNumber = winningLottoDAO.findBonusNumberByRound(round);
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.get(bonusNumber));
-        LottosDTO.Create lottos = new LottosDTO.Create(lottoDAO.findLottosByRound(round));
-        WinningResult winningResult = new Lottos(lottos.getLottos()).match(winningLotto);
+        Lottos lottos = new Lottos(lottoDAO.findLottosByRound(round));
+        WinningResult winningResult = lottos.match(winningLotto);
         return new WinningResultDTO.Create(
                 winningResult.getResult(),
                 winningResult.calculateRevenueRate(roundDAO.findAmountByRound(round)));

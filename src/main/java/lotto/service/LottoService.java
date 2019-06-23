@@ -26,15 +26,10 @@ public class LottoService {
 
     public LottosDTO.Create createLottos(List<String> manualLottoNumbers) {
         int countOfPurchase = roundDAO.findAmountByRound(roundDAO.findMaxRound()) / PRICE_PER_LOTTO;
-        List<Lotto> lottos = LottoFactory.createLottos(manualLottoNumbers, countOfPurchase);
+        List<Lotto> lottos = LottoFactory.createLottos(manualLottoNumbers, countOfPurchase).getLottos();
 
         lottoDAO.addLottos(lottos, roundDAO.findMaxRound());
 
-        return new LottosDTO.Create(lottos);
-    }
-
-    public LottosDTO.Create findLottosByRound(int round) {
-        List<Lotto> lottos = lottoDAO.findLottosByRound(round);
         return new LottosDTO.Create(lottos);
     }
 }
