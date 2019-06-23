@@ -20,12 +20,11 @@ public class WinningLottoController {
 		winningLottoInputRequest.setBonusBall(Integer.parseInt(request.queryParams("bonusBall")));
 		winningLottoInputRequest.setCountOfManualLotto(request.session().attribute("countOfManualLotto"));
 		winningLottoInputRequest.setWinningLotto(StringSeparator.splitString(request.queryParams("winningLotto")));
-
 		try {
 			model = winningLottoService.inputWinningLotto(winningLottoInputRequest);
 			request.session().attribute("round", model.get("round"));
 			request.session().attribute("winningLotto", model.get("winningLotto"));
-			return render(model, "/inputManualLotto.html");
+		return render(model, "/inputManualLotto.html");
 		} catch (Exception e) {
 			model.put("errorMessage", e.getMessage());
 			return render(model, "/inputWinningLotto.html");

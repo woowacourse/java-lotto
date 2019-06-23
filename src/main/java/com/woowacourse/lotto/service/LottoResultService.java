@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.woowacourse.lotto.dao.DBConnector;
-import com.woowacourse.lotto.dto.LottoRankDTO;
 import com.woowacourse.lotto.dao.LottoResultDAO;
 import com.woowacourse.lotto.dao.WinningLottoDAO;
 import com.woowacourse.lotto.domain.*;
@@ -60,8 +59,7 @@ public class LottoResultService {
 	}
 
 	private String findLottoResultRankById(int round) throws SQLException {
-		LottoRankDTO lottoRankDTO = lottoResultDAO.findLottoResultRankById(round);
-		return lottoRankDTO.printLottoRank();
+		return lottoResultDAO.findLottoResultRankById(round).printLottoRank();
 	}
 
 	private List<Integer> getLottoRound() throws SQLException {
