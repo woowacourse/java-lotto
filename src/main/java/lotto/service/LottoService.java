@@ -14,11 +14,21 @@ public class LottoService {
     private final LottoDAO lottoDAO = LottoDAO.getInstance();
     private final RoundDAO roundDAO = RoundDAO.getInstance();
 
+    private LottoService() {}
+
+    private static class LottoServiceHolder {
+        static final LottoService LOTTO_SERVICE = new LottoService();
+    }
+
+    public static LottoService getInstance() {
+        return LottoServiceHolder.LOTTO_SERVICE;
+    }
+
     public LottosDTO.Create createLottos(List<String> manualLottoNumbers) {
         int countOfPurchase = roundDAO.findAmountByRound(roundDAO.findMaxRound()) / PRICE_PER_LOTTO;
         List<Lotto> lottos = LottoFactory.createLottos(manualLottoNumbers, countOfPurchase);
 
-        lottoDAO.addLottos(lottos);
+        lottoDAO.addLottos(lottos, roundDAO.findMaxRound());
 
         return new LottosDTO.Create(lottos);
     }
