@@ -7,7 +7,10 @@ import java.util.Stack;
 public class LottoNoManualGenerator implements LottoNoGenerator {
     private Stack<Integer> lottoNumbers;
 
-    LottoNoManualGenerator(List<Integer> lottoNoList) {
+    public LottoNoManualGenerator(List<Integer> lottoNoList) {
+        if (lottoNoList.size() != Lotto.LOTTO_SIZE) {
+            throw new IllegalArgumentException(String.format("수동 로또는 숫자 %d개를 선택해야 합니다.", Lotto.LOTTO_SIZE));
+        }
         lottoNumbers = lottoNoList.stream()
                 .collect(Stack::new, Stack::add, Stack::addAll)
         ;

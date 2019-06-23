@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.service.WinningLottoParser;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

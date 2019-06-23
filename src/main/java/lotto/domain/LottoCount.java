@@ -5,7 +5,7 @@ import java.util.Objects;
 public class LottoCount {
     private int count;
 
-    LottoCount(Money money, int count) {
+    public LottoCount(Money money, int count) {
         if (!money.canBuyLotto(count)) {
             throw new IllegalArgumentException("금액이 부족합니다.");
         }

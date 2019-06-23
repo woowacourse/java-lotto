@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.service;
+
+import lotto.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +8,7 @@ import java.util.List;
 public class LottoVendingMachine {
     public static LottoTickets purchase(Money money, LottoNoGenerators lottoNoManualGenerators) {
         int lottoAutoCount = money.calCountOfLotto() - lottoNoManualGenerators.size();
+        System.err.println(lottoAutoCount);
         for (int position = 0; position < lottoAutoCount; position++) {
             lottoNoManualGenerators.add(new LottoNoAutoGenerator());
         }

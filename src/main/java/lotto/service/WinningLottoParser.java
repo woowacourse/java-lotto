@@ -1,6 +1,9 @@
-package lotto.domain;
+package lotto.service;
+
+import lotto.domain.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -17,6 +20,10 @@ public class WinningLottoParser {
         }
         return new WinningLotto(LottoFactory.create(parseLottoGenerator(inputWinningLotto)),
                 LottoNo.of(Integer.parseInt(inputBonusNo)));
+    }
+
+    public static WinningLotto parse(List<Integer> winningLotto, int bonusNo) {
+        return new WinningLotto(Lotto.of(winningLotto), LottoNo.of(bonusNo));
     }
 
     private static LottoNoGenerator parseLottoGenerator(String manualLotto) {

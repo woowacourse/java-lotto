@@ -22,7 +22,11 @@ public class Money {
         }
     }
 
-    int calCountOfLotto() {
+    public int getMoney() {
+        return money;
+    }
+
+    public int calCountOfLotto() {
         return money / Lotto.LOTTO_PRICE;
     }
 
