@@ -18,6 +18,7 @@ public class Lotto {
         }
     }
 
+
     private void checkLottoSize(List<Integer> lotto) {
         if (lotto.size() != LOTTO_NUMBER_SIZE) {
             throw new LottoValidException("6개의 번호를 입력해주세요.");
@@ -29,6 +30,10 @@ public class Lotto {
         if (lotto.size() != set.size()) {
             throw new LottoValidException("중복이 아닌 번호들로만 입력하세요.");
         }
+    }
+
+    public int getLottoNumber(int index) {
+        return lottoNumbers.get(index).getNumber();
     }
 
     boolean isContain(LottoNumber lottoNumber) {

@@ -1,6 +1,9 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
+import lotto.domain.Price;
+import lotto.domain.WinningLotto;
 import lotto.domain.generate.LottosFactory;
 import lotto.view.InputView;
 import lotto.view.OutputView;

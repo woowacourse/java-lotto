@@ -14,14 +14,18 @@ public class LottoNumber {
     private final int number;
 
     private LottoNumber(final int number) {
-        if (number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER) {
-            throw new NumberValidException("로또번호에 해당되지 않는 숫자입니다.");
-        }
         this.number = number;
     }
 
-    static LottoNumber valueOf(int number) {
+    public static LottoNumber valueOf(int number) {
+        checkValidLottoNumber(number);
         return LottoNumbers.lottoNumbers.get(number - 1);
+    }
+
+    private static void checkValidLottoNumber(int number) {
+        if (number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER) {
+            throw new NumberValidException("로또번호에 해당되지 않는 숫자입니다.");
+        }
     }
 
     private static class LottoNumbers {
@@ -33,6 +37,10 @@ public class LottoNumber {
                     .forEach(number -> lottoNumbers.add(new LottoNumber(number)));
         }
 
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override

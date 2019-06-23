@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <title>Buddy's LOTTO HTML</title>
+</head>
+
+<body>
+<div class="container" style="max-width: 900px">
+    <h1 class="mt-5 text-center font-weight-bold">Select Winning Lotto Number</h1>
+    <form action="/result" method="post">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <select id="num1" class="custom-select mr-sm-2">
+                    {{#numbers}}
+                    <option>{{this}}</option>
+                    {{/numbers}}
+                </select>
+            </div>
+            <div class="col-auto">
+                <select id="num2" class="custom-select mr-sm-2">
+                    {{#numbers}}
+                    <option>{{this}}</option>
+                    {{/numbers}}
+                </select>
+            </div>
+            <div class="col-auto">
+                <select id="num3" class="custom-select mr-sm-2">
+                    {{#numbers}}
+                    <option>{{this}}</option>
+                    {{/numbers}}
+                </select>
+            </div>
+            <div class="col-auto">
+                <select id="num4" class="custom-select mr-sm-2">
+                    {{#numbers}}
+                    <option>{{this}}</option>
+                    {{/numbers}}
+                </select>
+            </div>
+            <div class="col-auto">
+                <select id="num5" class="custom-select mr-sm-2">
+                    {{#numbers}}
+                    <option>{{this}}</option>
+                    {{/numbers}}
+                </select>
+            </div>
+            <div class="col-auto">
+                <select id="num6" class="custom-select mr-sm-2">
+                    {{#numbers}}
+                    <option>{{this}}</option>
+                    {{/numbers}}
+                </select>
+            </div>
+            <button type="button" class="col-auto btn btn-outline-secondary mb-3"
+                    onclick="showLotto()">확인
+            </button>
+        </div>
+        <textarea id="lotto" class="text-center col-lg-15 form-control" name="winningLotto" readonly></textarea>
+
+        <h1 class="mt-5 text-center font-weight-bold">Select BonusBall Number</h1>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <select id="bonus" class="custom-select mr-sm-2">
+                    {{#numbers}}
+                    <option>{{this}}</option>
+                    {{/numbers}}
+                </select>
+            </div>
+            <button type="button" class="col-auto btn btn-outline-secondary mb-3 text-center"
+                    onclick="showBonus()">확인
+            </button>
+        </div>
+        <textarea id="bonusNumber" class="col-lg-15 text-center form-control" name="bonusNumber" readonly></textarea>
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-secondary mt-2">결과보기</button>
+        </div>
+    </form>
+</div>
+<script>
+    var count = 0;
+    var text = "";
+
+    function showLotto() {
+        if (count < 1) {
+            count++;
+            for (var i = 1; i <= 6; i++) {
+                text += document.getElementById("num" + i).value + ",";
+            }
+
+            document.getElementById('lotto').value = text;
+        }
+
+    }
+
+    var bonusCount = 0;
+
+    function showBonus() {
+        if (bonusCount < 1) {
+            bonusCount++;
+            document.getElementById('bonusNumber').value = document.getElementById("bonus").value;
+        }
+    }
+</script>
+<script src="/js/bootstrap.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+</body>
+</html>
