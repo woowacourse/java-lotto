@@ -20,7 +20,7 @@ class LottoRoundDAOTest {
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        lottoRoundDAO = new LottoRoundDAO(connection);
+        lottoRoundDAO = LottoRoundDAO.getInstance(connection);
     }
 
     //에러 발생1 (해당 라운드 이미 존재)

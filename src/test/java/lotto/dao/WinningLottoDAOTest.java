@@ -24,7 +24,7 @@ class WinningLottoDAOTest {
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        winningLottoDAO = new WinningLottoDAO(connection);
+        winningLottoDAO = WinningLottoDAO.getInstance(connection);
     }
 
     //에러 발생1 (해당 라운드 값이 round 테이블에 존재하지 않아 외래키가 없음)
@@ -48,7 +48,7 @@ class WinningLottoDAOTest {
     @Test
     public void insertTest3() {
         assertDoesNotThrow(() -> {
-            new LottoRoundDAO(connection).insertRound(200);
+            LottoRoundDAO.getInstance(connection).insertRound(200);
             winningLottoDAO.insertWinningLotto(200, WinningLotto.create("1, 2, 3, 4, 5, 6", "7"));
         });
     }
@@ -56,7 +56,7 @@ class WinningLottoDAOTest {
     //존재하는 라운드 결과
     @Test
     public void selectTest1() throws Exception {
-        new LottoRoundDAO(connection).insertRound(200);
+        LottoRoundDAO.getInstance(connection).insertRound(200);
         winningLottoDAO.insertWinningLotto(200, WinningLotto.create("1, 2, 3, 4, 5, 6", "7"));
 
         WinningLottoDTO winningLottoDTO = winningLottoDAO.selectByLottoRound(200);

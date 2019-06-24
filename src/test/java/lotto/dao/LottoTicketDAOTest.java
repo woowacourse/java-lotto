@@ -24,7 +24,7 @@ class LottoTicketDAOTest {
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        lottoTicketDAO = new LottoTicketDAO(connection);
+        lottoTicketDAO = LottoTicketDAO.getInstance(connection);
         lottos = new LottoTicketGroup(Arrays.asList(LottoTicket.create(()->Arrays.asList(1, 2, 3, 4, 5, 6))));
     }
 
@@ -40,7 +40,7 @@ class LottoTicketDAOTest {
     @Test
     public void insertTest3() {
         assertDoesNotThrow(() -> {
-            new LottoRoundDAO(connection).insertRound(200);
+            LottoRoundDAO.getInstance(connection).insertRound(200);
             lottoTicketDAO.insertLottoTickets(200, lottos);
         });
     }
@@ -48,7 +48,7 @@ class LottoTicketDAOTest {
     //해당 라운드 존재하는 경우
     @Test
     public void selectTest1() throws Exception {
-        new LottoRoundDAO(connection).insertRound(200);
+        LottoRoundDAO.getInstance(connection).insertRound(200);
         lottoTicketDAO.insertLottoTickets(200, lottos);
 
         LottoTicketGroup lottoTickets = lottoTicketDAO.selectByLottoRound(200);

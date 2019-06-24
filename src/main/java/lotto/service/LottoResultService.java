@@ -28,7 +28,7 @@ public class LottoResultService {
 
     private static void saveResult(int round, WinningLotto winningLotto, LottoResultDTO lottoResultDTO) throws SQLException {
         Connection connection = DBUtil.getConnection();
-        new WinningLottoDAO(connection).insertWinningLotto(round, winningLotto);
-        new LottoResultDAO(connection).insertResult(round, lottoResultDTO);
+        WinningLottoDAO.getInstance(connection).insertWinningLotto(round, winningLotto);
+        LottoResultDAO.getInstance(connection).insertResult(round, lottoResultDTO);
     }
 }

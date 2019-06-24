@@ -42,7 +42,7 @@ public class LottoPurchaseService {
 
     private static void saveLottos(int round, LottoTicketGroup lottos) throws SQLException {
         Connection connection = DBUtil.getConnection();
-        new LottoRoundDAO(connection).insertRound(round);
-        new LottoTicketDAO(connection).insertLottoTickets(round, lottos);
+        LottoRoundDAO.getInstance(connection).insertRound(round);
+        LottoTicketDAO.getInstance(connection).insertLottoTickets(round, lottos);
     }
 }

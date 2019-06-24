@@ -8,14 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoRoundDAO {
+    private static LottoRoundDAO instance;
+
     private static final String insertQuery = "INSERT INTO lotto_rounds VALUES (?)";
     private static final String selectQuery = "SELECT * FROM lotto_rounds WHERE round>0";
     private static final String selectMaxQuery = "SELECT MAX(round) FROM lotto_rounds";
 
     private final Connection connection;
 
-    public LottoRoundDAO(Connection connection) {
+    private LottoRoundDAO(Connection connection) {
         this.connection = connection;
+    }
+
+    public static LottoRoundDAO getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new LottoRoundDAO(connection);
+        }
+        return instance;
     }
 
     public void insertRound(int round) throws SQLException {

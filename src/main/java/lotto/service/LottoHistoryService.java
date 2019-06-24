@@ -12,8 +12,8 @@ import java.sql.SQLException;
 public class LottoHistoryService {
     public static LottoHistoryDTO historyOf(int round) throws SQLException {
         Connection connection = DBUtil.getConnection();
-        LottoHistoryDTO lottoHistoryDTO = new LottoHistoryDAO(connection).selectLottoHistory(round);
-        LottoTicketGroup lottos = new LottoTicketDAO(connection).selectByLottoRound(round);
+        LottoHistoryDTO lottoHistoryDTO = LottoHistoryDAO.getInstance(connection).selectLottoHistory(round);
+        LottoTicketGroup lottos = LottoTicketDAO.getInstance(connection).selectByLottoRound(round);
         lottoHistoryDTO.setLottos(lottos);
 
         return lottoHistoryDTO;

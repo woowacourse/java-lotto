@@ -19,7 +19,7 @@ class LottoHistoryDAOTest {
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        lottoHistoryDAO = new LottoHistoryDAO(connection);
+        lottoHistoryDAO = LottoHistoryDAO.getInstance(connection);
     }
 
     //존재하는 라운드

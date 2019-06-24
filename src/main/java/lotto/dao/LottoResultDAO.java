@@ -15,13 +15,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoResultDAO {
+    private static LottoResultDAO instance;
+
     private static final String insertQuery = "INSERT INTO results (round, fail_rank, fifth_rank, fourth_rank, third_rank, second_rank, first_rank, winning_reward, earning_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String selectQuery = "SELECT first_rank, second_rank, third_rank, fourth_rank, fifth_rank, fail_rank, winning_reward, earning_rate FROM results WHERE round=?";
 
     private final Connection connection;
 
-    public LottoResultDAO(Connection connection) {
+    private LottoResultDAO(Connection connection) {
         this.connection = connection;
+    }
+
+    public static LottoResultDAO getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new LottoResultDAO(connection);
+        }
+        return instance;
     }
 
     public void insertResult(int round, LottoResultDTO lottoResultDTO) throws SQLException {

@@ -9,14 +9,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LottoHistoryDAO {
+    private static LottoHistoryDAO instance;
+
     private static final String selectQuery = "SELECT num1, num2, num3, num4, num5, num6, bonus_num, "
             + "first_rank, second_rank, third_rank, fourth_rank, fifth_rank, fail_rank, winning_reward, earning_rate "
             + "FROM results a, winning_lotto b WHERE a.round=? and b.round=?";
 
     private final Connection connection;
 
-    public LottoHistoryDAO(Connection connection) {
+    private LottoHistoryDAO(Connection connection) {
         this.connection = connection;
+    }
+
+    public static LottoHistoryDAO getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new LottoHistoryDAO(connection);
+        }
+        return instance;
     }
 
     public LottoHistoryDTO selectLottoHistory(int round) throws SQLException {

@@ -26,7 +26,7 @@ class LottoResultDAOTest {
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        lottoResultDAO = new LottoResultDAO(connection);
+        lottoResultDAO = LottoResultDAO.getInstance(connection);
 
         lottoResult = new LottoResult(Arrays.asList(LottoRank.FIFTH));
         lottoResultDTO = new LottoResultDTO();
@@ -56,7 +56,7 @@ class LottoResultDAOTest {
     @Test
     public void insertTest3() {
         assertDoesNotThrow(() -> {
-            new LottoRoundDAO(connection).insertRound(200);
+            LottoRoundDAO.getInstance(connection).insertRound(200);
             lottoResultDAO.insertResult(200, lottoResultDTO);
         });
     }
@@ -64,7 +64,7 @@ class LottoResultDAOTest {
     //존재하는 라운드 결과
     @Test
     public void selectTest1() throws Exception {
-        new LottoRoundDAO(connection).insertRound(200);
+        LottoRoundDAO.getInstance(connection).insertRound(200);
         lottoResultDAO.insertResult(200, lottoResultDTO);
 
         LottoResultDTO testLottoResultDTO = lottoResultDAO.selectLottoResultByRound(200);

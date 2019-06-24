@@ -42,7 +42,7 @@ public class WebUILottoApplication {
         try {
             Map<String, Object> model = new HashMap<>();
 
-            int thisRound = new LottoRoundDAO(DBUtil.getConnection()).selectMaxRound() + 1;
+            int thisRound = LottoRoundDAO.getInstance(DBUtil.getConnection()).selectMaxRound() + 1;
             request.session().attribute("round", thisRound);
             model.put("round", thisRound);
             return render(model, "purchaseLotto.html");
@@ -105,7 +105,7 @@ public class WebUILottoApplication {
     private static String list(Request request, Response response) {
         Map<String, Object> model = new HashMap<>();
         try {
-            List<Integer> rounds = new LottoRoundDAO(DBUtil.getConnection()).selectLottoRounds();
+            List<Integer> rounds = LottoRoundDAO.getInstance(DBUtil.getConnection()).selectLottoRounds();
             model.put("rounds", rounds);
         } catch (SQLException e) {
             e.printStackTrace();

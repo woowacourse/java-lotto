@@ -13,13 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketDAO {
+    private static LottoTicketDAO instance;
+
     private static final String insertQuery = "INSERT INTO lotto_tickets (round, num1, num2, num3, num4, num5, num6) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String selectQuery = "SELECT * FROM lotto_tickets WHERE round = ?";
 
     private final Connection connection;
 
-    public LottoTicketDAO(Connection connection) {
+    private LottoTicketDAO(Connection connection) {
         this.connection = connection;
+    }
+
+    public static LottoTicketDAO getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new LottoTicketDAO(connection);
+        }
+        return instance;
     }
 
     public void insertLottoTickets(int round, LottoTicketGroup lottoTickets) throws SQLException {
