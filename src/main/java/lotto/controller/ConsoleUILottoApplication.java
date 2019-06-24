@@ -1,6 +1,8 @@
 package lotto.controller;
 
-import lotto.model.creator.lotto.AutoLottoCreator;
+import lotto.model.creator.lotto.AutoLottoCreatorStrategy;
+import lotto.model.creator.lotto.LottoCreatorStrategy;
+import lotto.model.creator.lotto.ManualLottoCreatorStrategy;
 import lotto.model.creator.lottos.AutoLottosCreatorStrategty;
 import lotto.model.creator.lottos.LottosCreator;
 import lotto.model.creator.lottos.ManualLottosCreatorStrategy;
@@ -8,6 +10,7 @@ import lotto.model.object.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleUILottoApplication {
@@ -56,16 +59,24 @@ public class ConsoleUILottoApplication {
         private static List<Lotto> createManualLottos(final ManualPurchaseNumber manualPurchaseNumber) {
                 try {
                         List<String[]> inputs = InputView.inputManualPaymentLottosNumber(manualPurchaseNumber);
-                        return new LottosCreator(new ManualLottosCreatorStrategy(inputs)).create();
+                        List<LottoCreatorStrategy> lottoCreatorStrategies = new ArrayList<>();
+                        createManualLottoCreators(inputs, lottoCreatorStrategies);
+                        return new LottosCreator(new ManualLottosCreatorStrategy(lottoCreatorStrategies)).create();
                 } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
                         return createManualLottos(manualPurchaseNumber);
                 }
         }
 
+        private static void createManualLottoCreators(List<String[]> inputs, List<LottoCreatorStrategy> lottoCreatorStrategies) {
+                for (String[] input : inputs) {
+                        lottoCreatorStrategies.add(new ManualLottoCreatorStrategy(input));
+                }
+        }
+
         private static List<Lotto> createAutoLottos(final Payment payment, final ManualPurchaseNumber manualPurchaseNumber) {
                 try {
-                        return new LottosCreator(new AutoLottosCreatorStrategty(new AutoLottoCreator(), payment, manualPurchaseNumber)).create();
+                        return new LottosCreator(new AutoLottosCreatorStrategty(new AutoLottoCreatorStrategy(), payment, manualPurchaseNumber)).create();
                 } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
                         return createAutoLottos(payment, manualPurchaseNumber);

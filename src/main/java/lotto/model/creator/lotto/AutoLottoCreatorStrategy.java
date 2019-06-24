@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoLottoCreator implements LottoCreator {
+public class AutoLottoCreatorStrategy implements LottoCreatorStrategy {
+        @Override
         public Lotto create() {
                 List<LottoNumber> autoCreatedNumbers = new ArrayList<>();
                 for (int i = 1; i < LottoNumber.MAX_LOTTO_NUMBER; i++) {
