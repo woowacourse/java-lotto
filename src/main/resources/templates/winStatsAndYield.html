@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>당첨 통계 및 수익률</title>
+</head>
+<body>
+    <h1>당첨 통계 및 수익률</h1>
+    <h3>통계</h3>
+    {{#winStats}}
+        {{this}}
+    {{/winStats}}
+    <h3>수익률</h3>
+    {{yield}}%
+    <br>
+    <form action="/" method="post">
+        <input type="submit" value="홈으로">
+    </form>
+</body>
+</html>

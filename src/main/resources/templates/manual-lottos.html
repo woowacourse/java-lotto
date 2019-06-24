@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>구매 로또</title>
+</head>
+<body>
+    <h1>수동 로또 구매</h1>
+    수동 구매 개수 : {{manual-lotto-number}}
+    <form action="/purchase-lottos" method="post">
+        수동 구매 로또 번호 : <br>
+        <textarea col="17" name="manual-lottos" rows= {{manual-lotto-number}}></textarea>
+        <input type="submit">
+    </form>
+    <form action="/" method="post">
+        <input type="submit" value="홈으로">
+    </form>
+</body>
+</html>
