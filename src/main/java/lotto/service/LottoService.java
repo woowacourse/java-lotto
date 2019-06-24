@@ -1,6 +1,6 @@
-package lotto.domain.service;
+package lotto.service;
 
-import lotto.domain.dao.LottoDao;
+import lotto.dao.LottoDao;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lotto.LottoTickets;

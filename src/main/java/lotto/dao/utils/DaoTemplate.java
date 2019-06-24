@@ -1,11 +1,11 @@
-package lotto.domain.dao.utils;
+package lotto.dao.utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 
-import static lotto.domain.dao.utils.JdbcConnector.getConnection;
+import static lotto.dao.utils.JdbcConnector.getConnection;
 
 @FunctionalInterface
 public interface DaoTemplate {

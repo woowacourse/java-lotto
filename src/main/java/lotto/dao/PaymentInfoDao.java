@@ -1,13 +1,13 @@
-package lotto.domain.dao;
+package lotto.dao;
 
-import lotto.domain.dao.utils.DaoTemplate;
+import lotto.dao.utils.DaoTemplate;
 import lotto.domain.dto.PaymentInfoDTO;
 
 import java.sql.*;
 
-import static lotto.domain.dao.sqls.LottoDaoSqls.INSERT_USER;
-import static lotto.domain.dao.sqls.PaymentDaoSqls.INSERT_PAYMENT_INFO;
-import static lotto.domain.dao.utils.JdbcConnector.getConnection;
+import static lotto.dao.sqls.LottoDaoSqls.INSERT_USER;
+import static lotto.dao.sqls.PaymentDaoSqls.INSERT_PAYMENT_INFO;
+import static lotto.dao.utils.JdbcConnector.getConnection;
 
 public class PaymentInfoDao {
     private PaymentInfoDao() {

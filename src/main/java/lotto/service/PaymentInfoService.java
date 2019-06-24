@@ -1,6 +1,6 @@
-package lotto.domain.service;
+package lotto.service;
 
-import lotto.domain.dao.PaymentInfoDao;
+import lotto.dao.PaymentInfoDao;
 import lotto.domain.dto.PaymentInfoDTO;
 import lotto.domain.paymentinfo.CountOfLotto;
 import lotto.domain.paymentinfo.Payment;

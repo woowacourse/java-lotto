@@ -1,4 +1,4 @@
-package lotto.domain.dao.utils;
+package lotto.dao.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package lotto.domain.dao.sqls;
+package lotto.dao.sqls;
 
 public class Columns {
     public static final String ROUND_COLUMN = "round";

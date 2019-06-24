@@ -1,17 +1,17 @@
-package lotto.domain.dao;
+package lotto.dao;
 
-import lotto.domain.dao.utils.DaoTemplate;
+import lotto.dao.utils.DaoTemplate;
 import lotto.domain.dto.ResultDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.dao.sqls.Columns.*;
-import static lotto.domain.dao.sqls.LottoDaoSqls.INSERT_LOTTO_RESULT;
-import static lotto.domain.dao.sqls.LottoResultDaoSqls.SELECT_ALL_LOTTO_RESULT;
-import static lotto.domain.dao.sqls.LottoResultDaoSqls.SELECT_LOTTO_RESULT_BY_ROUND;
-import static lotto.domain.dao.utils.JdbcConnector.getConnection;
+import static lotto.dao.sqls.Columns.*;
+import static lotto.dao.sqls.LottoDaoSqls.INSERT_LOTTO_RESULT;
+import static lotto.dao.sqls.LottoResultDaoSqls.SELECT_ALL_LOTTO_RESULT;
+import static lotto.dao.sqls.LottoResultDaoSqls.SELECT_LOTTO_RESULT_BY_ROUND;
+import static lotto.dao.utils.JdbcConnector.getConnection;
 import static lotto.domain.lotto.Rank.*;
 
 public class LottoResultDao {

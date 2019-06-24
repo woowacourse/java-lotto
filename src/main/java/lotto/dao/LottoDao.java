@@ -1,6 +1,6 @@
-package lotto.domain.dao;
+package lotto.dao;
 
-import lotto.domain.dao.utils.DaoTemplate;
+import lotto.dao.utils.DaoTemplate;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinningLotto;
@@ -11,9 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static lotto.domain.dao.sqls.Columns.*;
-import static lotto.domain.dao.sqls.LottoDaoSqls.*;
-import static lotto.domain.dao.utils.JdbcConnector.getConnection;
+import static lotto.dao.sqls.Columns.*;
+import static lotto.dao.sqls.LottoDaoSqls.*;
+import static lotto.dao.utils.JdbcConnector.getConnection;
 
 public class LottoDao {
 

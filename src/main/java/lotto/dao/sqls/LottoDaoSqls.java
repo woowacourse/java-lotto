@@ -1,4 +1,4 @@
-package lotto.domain.dao.sqls;
+package lotto.dao.sqls;
 
 public class LottoDaoSqls {
     public static final String INSERT_USER =

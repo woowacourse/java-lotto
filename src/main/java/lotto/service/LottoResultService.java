@@ -1,6 +1,6 @@
-package lotto.domain.service;
+package lotto.service;
 
-import lotto.domain.dao.LottoResultDao;
+import lotto.dao.LottoResultDao;
 import lotto.domain.dto.RankingDTO;
 import lotto.domain.dto.ResultDTO;
 import lotto.domain.lotto.Result;

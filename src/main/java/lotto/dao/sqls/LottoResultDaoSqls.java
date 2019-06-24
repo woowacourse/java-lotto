@@ -1,4 +1,4 @@
-package lotto.domain.dao.sqls;
+package lotto.dao.sqls;
 
 public class LottoResultDaoSqls {
     public static final String SELECT_ALL_LOTTO_RESULT =

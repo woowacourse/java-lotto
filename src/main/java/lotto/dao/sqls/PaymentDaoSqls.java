@@ -1,4 +1,4 @@
-package lotto.domain.dao.sqls;
+package lotto.dao.sqls;
 
 public class PaymentDaoSqls {
     public static final String INSERT_PAYMENT_INFO =
