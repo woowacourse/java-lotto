@@ -23,11 +23,13 @@ public class LottoGameLauncher {
 
     private static PurchaseAmount getPurchaseAmount() {
         try {
-            int moneyFromPlayer = InputView.inputPurchaseAmount();
-            return PurchaseAmount.valueOf(moneyFromPlayer);
-        } catch (IllegalArgumentException e) {
+            String moneyFromPlayer = InputView.inputPurchaseAmount();
+            int amount = StringParser.parsePurchaseAmount(moneyFromPlayer);
+            return PurchaseAmount.valueOf(amount);
+        } catch (IllegalPurchasementException e) {
             System.out.println(e.getMessage());
-            return getPurchaseAmount();
+            OutputView.show404NotFound();
+            throw new RuntimeException();
         }
     }
 
@@ -44,33 +46,38 @@ public class LottoGameLauncher {
 
     private static int getNumberOfManualIssueLottosUpTo(PurchaseAmount purchaseAmount) {
         try {
-            int numberOfMannualIssue = InputView.inputNumberOfManualIssue();
-            purchaseAmount.checkNumberOfManualIssue(numberOfMannualIssue);
-            return numberOfMannualIssue;
+            String inputNumber = InputView.inputNumberOfManualIssue();
+            int numberOfManualIssue = StringParser.parseInt(inputNumber);
+            purchaseAmount.checkNumberOfManualIssue(numberOfManualIssue);
+            return numberOfManualIssue;
         } catch (IllegalNumberOfManualIssueException e) {
             System.out.println(e.getMessage());
-            return getNumberOfManualIssueLottosUpTo(purchaseAmount);
+            OutputView.show404NotFound();
+            throw new RuntimeException();
         }
     }
 
     private static IssuedLotto getManualIssuedLotto() {
         try {
-            List<Integer> numbers = InputView.getNumbersForLotto();
+            String inputNumbers = InputView.getNumbersForLotto();
+            List<Integer> numbers = StringParser.parseNumbers(inputNumbers);
             return LottoFactory.manualIssueLottoBy(numbers);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getManualIssuedLotto();
+            OutputView.show404NotFound();
+            throw new RuntimeException();
         }
     }
 
     private static WinningLotto getWinningLotto() {
         try {
-            List<Integer> inputNumbers = InputView.inputWinningNumbers();
-            int bonusNumber = InputView.inputBonusNumber();
-            return LottoFactory.issueWinningLotto(inputNumbers, LottoNumberPool.pickLottoNumber(bonusNumber));
+            List<Integer> winningNumbers = StringParser.parseNumbers(InputView.inputWinningNumbers());
+            int bonusNumber = StringParser.parseInt(InputView.inputBonusNumber());
+            return LottoFactory.issueWinningLotto(winningNumbers, LottoNumberPool.pickLottoNumber(bonusNumber));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getWinningLotto();
+            OutputView.show404NotFound();
+            throw new RuntimeException();
         }
     }
 }

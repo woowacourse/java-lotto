@@ -35,4 +35,8 @@ public class OutputView {
         System.out.println(rank.getNumberOfMatching() + "개 일치 (" + rank.getWinningMoney() + "원) - "
                 + statistics.countsOf(rank) + "개");
     }
+
+    public static void show404NotFound() {
+        System.out.println("404 not found");
+    }
 }
