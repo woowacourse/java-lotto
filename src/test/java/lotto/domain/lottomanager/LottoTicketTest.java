@@ -15,21 +15,21 @@ class LottoTicketTest {
     private static List<LottoNumber> lottoNumbers;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         lottoNumbers = IntStream.rangeClosed(1, 5)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
     @Test
-    void null_check() {
+    public void null_check() {
         assertThrows(NullPointerException.class, () -> {
             new LottoTicket(null);
         });
     }
 
     @Test
-    void 중복_번호() {
+    public void 중복_번호() {
         lottoNumbers.add(new LottoNumber(5));
         assertThrows(IllegalArgumentException.class, () -> {
             new LottoTicket(lottoNumbers);
@@ -37,14 +37,14 @@ class LottoTicketTest {
     }
 
     @Test
-    void 번호_개수_6개_아닌경우() {
+    public void 번호_개수_6개_아닌경우() {
         assertThrows(IllegalArgumentException.class, () -> {
             new LottoTicket(lottoNumbers);
         });
     }
 
     @Test
-    void 당첨번호개수() {
+    public void 당첨번호개수() {
         List<LottoNumber> numbers1 = new ArrayList<>(lottoNumbers);
         numbers1.add(new LottoNumber(6));
 

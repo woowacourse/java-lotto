@@ -1,23 +1,24 @@
 package lotto;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DBUtilsTest {
-    private DBUtils dbUtils;
-
-    @BeforeEach
-    void setUp() {
-        dbUtils = new DBUtils();
-    }
 
     @Test
     public void connection() {
-        Connection con = dbUtils.getConnection();
+        Connection con = DBUtils.getConnection();
         assertNotNull(con);
+    }
+
+    @Test
+    public void round_잘_가져오는지() throws SQLException {
+        Connection con = DBUtils.getConnection();
+        assertThat(DBUtils.getRound(con)).isEqualTo(1);
     }
 }
