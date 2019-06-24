@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.DuplicatedLottoNumbersException;
+import lotto.domain.exceptions.InvalidSizeOfLottoNumbersException;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -70,8 +73,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "Lotto{" +
-                "lottoNumbers=" + lottoNumbers +
-                '}';
+        return String.valueOf(lottoNumbers);
     }
 }

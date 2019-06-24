@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class OutputView {
+public class ConsoleOutputView {
     public static void printLottos(Lottos lottos, int numOfCustomLottos) {
         System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", numOfCustomLottos, lottos.size() - numOfCustomLottos);
         for (Lotto lotto : lottos.getLottos()) {

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.InvalidMoneyException;
+
 import java.util.Objects;
 
 public class Money {

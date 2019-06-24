@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.InvalidLottoNumberException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -61,8 +63,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public String toString() {
-        return "LottoNumber{" +
-                "number=" + number +
-                '}';
+        return String.valueOf(number);
     }
 }

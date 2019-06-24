@@ -1,8 +1,8 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.view.ConsoleInputView;
+import lotto.view.ConsoleOutputView;
 
 public class ConsoleLottoApplication {
     public static void main(String[] args) {
@@ -10,16 +10,16 @@ public class ConsoleLottoApplication {
         LottoCount lottoCount = getNumOfCustomLottos(lottoBuyingMoney);
 
         Lottos lottos = getLottos(lottoCount);
-        OutputView.printLottos(lottos, lottoCount.custom());
+        ConsoleOutputView.printLottos(lottos, lottoCount.custom());
 
         WinningStatistics winStat = new WinningStatistics(lottos.match(getWinningLotto()));
-        OutputView.printStatistics(winStat.getStatistics());
-        OutputView.printInterestRate(winStat.getInterestRate(lottoBuyingMoney));
+        ConsoleOutputView.printStatistics(winStat.getStatistics());
+        ConsoleOutputView.printInterestRate(winStat.getInterestRate(lottoBuyingMoney));
     }
 
     private static LottoCount getNumOfCustomLottos(LottoBuyingMoney money) {
         try {
-            return new LottoCount(money, InputView.getNumOfCustomLottos());
+            return new LottoCount(money, ConsoleInputView.getNumOfCustomLottos());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return getNumOfCustomLottos(money);
@@ -28,7 +28,7 @@ public class ConsoleLottoApplication {
 
     private static LottoBuyingMoney getLottoBuyingMoney() {
         try {
-            return new LottoBuyingMoney(InputView.getLottoBuyingMoney());
+            return new LottoBuyingMoney(ConsoleInputView.getLottoBuyingMoney());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return getLottoBuyingMoney();
@@ -37,7 +37,7 @@ public class ConsoleLottoApplication {
 
     private static Lottos getLottos(LottoCount lottoCount) {
         try {
-            return LottoVendingMachine.getLottos(lottoCount, InputView.getCustomLottoNumbers(lottoCount.custom()));
+            return LottoVendingMachine.getLottos(lottoCount, ConsoleInputView.getCustomLottoNumbers(lottoCount.custom()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return getLottos(lottoCount);
@@ -46,7 +46,7 @@ public class ConsoleLottoApplication {
 
     private static WinningLotto getWinningLotto() {
         try {
-            return new WinningLotto(InputView.getWinningNumbers(), InputView.getBonusBall());
+            return new WinningLotto(ConsoleInputView.getWinningNumbers(), ConsoleInputView.getBonusBall());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return getWinningLotto();
