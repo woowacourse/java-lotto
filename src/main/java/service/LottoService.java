@@ -22,12 +22,12 @@ public class LottoService {
 
     private static String encodeLottos(Lottos lottos) {
         return lottos.getLottos().stream()
-                .map(Lotto::getNumbers)
-                .map(List::stream)
-                .map(x -> x.map(LottoNumber::toString))
-                .map(x -> x.reduce("", (a, b) -> a + "," + b))
-                .reduce("", (a, b) -> a + "/" + b)
-                .replace("/,", "/");
+                                .map(Lotto::getNumbers)
+                                .map(List::stream)
+                                .map(x -> x.map(LottoNumber::toString))
+                                .map(x -> x.reduce("", (a, b) -> a + "," + b))
+                                .reduce("", (a, b) -> a + "/" + b)
+                                .replace("/,", "/");
     }
 
     public static LottoVO history(String date) throws SQLException, IllegalArgumentException {

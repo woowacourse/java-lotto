@@ -10,15 +10,13 @@ public class LottoResult implements Iterable<LottoResultPair> {
     private final Money totalAmount;
 
     public LottoResult(List<Lotto> lottos, WinningNumbers winningNumbers) {
-        this.table = Collections.unmodifiableList(
-                lottos.stream()
+        this.table = lottos.stream()
                         .map(l -> l.match(winningNumbers))
                         .flatMap(r -> r.map(Stream::of).orElseGet(Stream::empty))
                         .collect(Collectors.groupingBy(LottoRank::prize))
                         .values().stream()
                         .map(l -> new LottoResultPair(l.get(0), l.size()))
-                        .collect(Collectors.toList())
-        );
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
         this.purchasedAmount = new Money(Lotto.PRICE * lottos.size());
         this.totalAmount = new Money(
                 this.table.stream()

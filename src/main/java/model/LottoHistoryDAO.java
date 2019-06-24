@@ -45,7 +45,7 @@ public class LottoHistoryDAO {
         try {
             final DAO dao = DAO.getInstance();
             final PreparedStatement pstmt = dao.connect().prepareStatement(
-                    "SELECT date FROM purchase_history LIMIT 1000"
+                    "SELECT date FROM purchase_history ORDER BY date LIMIT 1000 "
             );
             final List<Timestamp> fetched = new ArrayList<>();
             final ResultSet result = pstmt.executeQuery();

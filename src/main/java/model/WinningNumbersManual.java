@@ -9,27 +9,27 @@ public class WinningNumbersManual implements WinningNumbers {
     private final LottoNumber bonusNumber;
 
     protected WinningNumbersManual(Set<LottoNumber> mainNumbers, LottoNumber bonusNumber) {
-        validation(mainNumbers, bonusNumber);
-        this.mainNumbers = Collections.unmodifiableList(new ArrayList<>(mainNumbers));
-        this.bonusNumber = bonusNumber;
-    }
-
-    protected WinningNumbersManual(String input) {
-        List<LottoNumber> numbers = Stream.of(input.split(","))
-                                    .map(LottoNumber::of)
-                                    .collect(Collectors.toList());
-        Set<LottoNumber> mainNumbers = new HashSet<>(numbers.subList(0, Lotto.NUMBER_OF_PICKS));
-        LottoNumber bonusNumber = numbers.get(Lotto.NUMBER_OF_PICKS);
-        validation(mainNumbers, bonusNumber);
-        this.mainNumbers = Collections.unmodifiableList(new ArrayList<>(mainNumbers));
-        this.bonusNumber = bonusNumber;
-
-    }
-
-    private void validation(Set<LottoNumber> mainNumbers, LottoNumber bonusNumber) {
         if ((mainNumbers.size() != Lotto.NUMBER_OF_PICKS) || mainNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException();
         }
+        this.mainNumbers = Collections.unmodifiableList(new ArrayList<>(mainNumbers));
+        this.bonusNumber = bonusNumber;
+    }
+
+    protected WinningNumbersManual(List<LottoNumber> winningNumbers) {
+        this(
+                new HashSet<>(winningNumbers.subList(0, Lotto.NUMBER_OF_PICKS)),
+                winningNumbers.get(Lotto.NUMBER_OF_PICKS)
+        );
+    }
+
+    protected WinningNumbersManual(String input) {
+        this(Stream.of(input.split(","))
+                    .map(LottoNumber::of)
+                    .collect(Collectors.toList())
+                    .subList(0, Lotto.NUMBER_OF_PICKS + 1)
+        );
+
     }
 
     @Override

@@ -16,9 +16,6 @@ public class WinningNumbersDAO {
         pstmt.setInt(1, round);
         final List<Integer> fetched = fetchFromResult(pstmt.executeQuery());
         dao.close();
-        if (fetched.isEmpty()) {
-            throw new SQLException();
-        }
         return fetched;
     }
 

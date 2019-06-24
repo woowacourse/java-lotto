@@ -12,18 +12,18 @@ public class WinningNumbersFactory {
         }
         try {
             return new WinningNumbersDB(round);
-        } catch (SQLException e) {
+        } catch (SQLException | NoWinningNumbersInDBException e) {
             WinningNumbersWeb fetched = new WinningNumbersWeb(round);
             WinningNumbersDAO.register(fetched);
             return fetched;
         }
     }
 
-    public static WinningNumbers of() {
+    public static WinningNumbers ofRecent() {
         return of(0);
     }
 
-    public static WinningNumbers of(String input) {
+    public static WinningNumbers ofManual(String input) {
         return new WinningNumbersManual(input);
     }
 

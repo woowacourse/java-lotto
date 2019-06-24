@@ -21,10 +21,15 @@ public class Lotto {
     }
 
     public Lotto(Set<LottoNumber> numbers) {
-        validation(numbers);
-        List<LottoNumber> sorted = new ArrayList<>(numbers);
-        Collections.sort(sorted);
-        this.numbers = Collections.unmodifiableList(sorted);
+        if (numbers.size() != NUMBER_OF_PICKS) {
+            throw new IllegalArgumentException();
+        }
+        this.numbers = new ArrayList<>(numbers).stream()
+                                                .sorted()
+                                                .collect(Collectors.collectingAndThen(
+                                                        Collectors.toList(),
+                                                        Collections::unmodifiableList)
+                                                );
     }
 
     public Lotto(String input) {
@@ -35,13 +40,6 @@ public class Lotto {
                     .collect(Collectors.toSet())
         );
     }
-
-    private void validation(Set<LottoNumber> numbers) {
-        if (numbers.size() != NUMBER_OF_PICKS) {
-            throw new IllegalArgumentException();
-        }
-    }
-
 
     public Optional<LottoRank> match(WinningNumbers winningNumbers) {
         Set<LottoNumber> intersectionTest = new HashSet<>(this.numbers);

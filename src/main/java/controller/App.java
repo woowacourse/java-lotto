@@ -10,7 +10,7 @@ import static view.OutputView.*;
 
 public class App {
     public static void main(String[] argc) {
-        final WinningNumbers winningNumbers = WinningNumbersFactory.of();
+        final WinningNumbers winningNumbers = WinningNumbersFactory.ofRecent();
         final LottoPurchaseAmount purchaseAmount = inputAmountOfManualPicks(inputAmountOfMoney());
         final List<Lotto> manualLottos = inputManualLottoNumbers(purchaseAmount);
         printPurchaseAmount(purchaseAmount);

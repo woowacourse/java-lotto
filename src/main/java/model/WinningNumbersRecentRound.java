@@ -15,23 +15,22 @@ public class WinningNumbersRecentRound {
         return recentRound;
     }
 
-    protected static int refresh() {
+    protected static void refresh() {
         WinningNumbersWeb recentWinningNumbers = new WinningNumbersWeb();
         if (recentWinningNumbers.round() > recentRound) {
             recentRound = recentWinningNumbers.round();
             scheduledFetchDate = nextAnnouncementDate();
             WinningNumbersDAO.register(recentWinningNumbers);
         }
-        return recentRound;
     }
 
     private static LocalDateTime nextAnnouncementDate() {
-        LocalDateTime candidateA = LocalDateTime.now().with(
+        LocalDateTime nextSaturdayOrToday = LocalDateTime.now().with(
                 TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY)
         ).plusHours(21).plusMinutes(30);
-        LocalDateTime candidateB = LocalDateTime.now().with(
+        LocalDateTime nextSaturday = LocalDateTime.now().with(
                 TemporalAdjusters.next(DayOfWeek.SATURDAY)
         ).plusHours(21).plusMinutes(30);
-        return (LocalDateTime.now().isAfter(candidateA)) ? candidateA : candidateB;
+        return (nextSaturdayOrToday.equals(nextSaturday)) ? nextSaturday : nextSaturdayOrToday;
     }
 }

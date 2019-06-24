@@ -34,7 +34,10 @@ public class WinningNumbersWeb implements WinningNumbers {
                 numbers.add(LottoNumber.of(token.substring(1, token.indexOf("<"))));
             }
             if (numbers.isEmpty()) {
-                return fetchAndParseWinningNumbers(0);
+                if (round != 0) {
+                    return fetchAndParseWinningNumbers(0);
+                }
+                throw new FailedFetchingWinningNumbersFromWebException("Schema has changed.");
             }
             if (round == 0) {
                 final Matcher roundMatcher = Pattern.compile("<option value=\"[0-9]+\" >").matcher(html);
@@ -44,7 +47,7 @@ public class WinningNumbersWeb implements WinningNumbers {
             }
             return new WinningNumbersVO(numbers, round);
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new FailedFetchingWinningNumbersFromWebException(e.getMessage());
         }
     }
 
