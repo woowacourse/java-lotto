@@ -11,13 +11,12 @@ import lotto.domain.model.PurchasedLotto;
 import lotto.domain.model.Rank;
 import lotto.domain.model.WinningLotto;
 
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class ResultService {
-    public void setResult(final int round, final int money) throws SQLException {
+    public void setResult(final int round, final int money) {
         ResultDTO resultDTO = new ResultDTO();
         ResultDAO resultDAO = new ResultDAO();
 
@@ -47,24 +46,24 @@ public class ResultService {
         return Math.round((prizeSum / money) * 1000) / 1000.0;
     }
 
-    private PurchasedLotto getPurchasedLotto(final int round) throws SQLException {
+    private PurchasedLotto getPurchasedLotto(final int round) {
         LottoDAO lottoDAO = new LottoDAO();
         PurchasedLotto purchasedLotto = new PurchasedLotto();
         List<LottoDTO> purchasedLottoDTOs = lottoDAO.getPurchasedLotto(round);
 
         for (LottoDTO lottoDTO : purchasedLottoDTOs) {
-             purchasedLotto.addLotto(new Lotto(Arrays.asList(lottoDTO.getFifthNum(),
-                     lottoDTO.getSecondNum(),
-                     lottoDTO.getThirdNum(),
-                     lottoDTO.getForthNum(),
-                     lottoDTO.getFifthNum(),
-                     lottoDTO.getSixthNum())));
+            purchasedLotto.addLotto(new Lotto(Arrays.asList(lottoDTO.getFifthNum(),
+                    lottoDTO.getSecondNum(),
+                    lottoDTO.getThirdNum(),
+                    lottoDTO.getForthNum(),
+                    lottoDTO.getFifthNum(),
+                    lottoDTO.getSixthNum())));
         }
 
         return purchasedLotto;
     }
 
-    private WinningLotto getWinningLotto(int round) throws SQLException {
+    private WinningLotto getWinningLotto(int round) {
         WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
         WinningLottoDTO winningLottoDTO = winningLottoDAO.getWinningLotto(round);
 
@@ -78,7 +77,7 @@ public class ResultService {
         return new WinningLotto(winningLottoNumbers, winningLottoDTO.getBonusNum());
     }
 
-    public ResultDTO getResult(final int newRound) throws SQLException {
+    public ResultDTO getResult(final int newRound) {
         ResultDAO resultDAO = new ResultDAO();
         return resultDAO.getResult(newRound);
     }
