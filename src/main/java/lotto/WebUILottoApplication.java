@@ -2,7 +2,11 @@ package lotto;
 
 import lotto.domain.dao.LottoGameDao;
 import lotto.domain.dao.LottoTicketDao;
+import lotto.domain.dao.WinningLottoDao;
 import lotto.domain.lottomanager.LottoTicket;
+import lotto.domain.lottomanager.WinningLotto;
+import lotto.domain.result.Rank;
+import lotto.domain.result.WinningResult;
 import lotto.domain.user.PurchaseAmount;
 import lotto.domain.user.UserTickets;
 import lotto.view.inputview.InputParser;
@@ -45,6 +49,25 @@ public class WebUILottoApplication {
             return render(model, "winningLotto.html");
         });
 
+        get("/winningResult", (req, res) -> {
+            WinningLotto winningLotto = new WinningLotto(InputParser.getLottoNum(req.queryParams("winningLotto"))
+                    , Integer.parseInt(req.queryParams("bonusNum")));
+            WinningLottoDao winningLottoDao = WinningLottoDao.getInstance();
+            winningLottoDao.addWinningLotto(winningLotto);
+
+            WinningResult winningResult = new WinningResult(userTickets, winningLotto);
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("FIFTH", winningResult.getMatchedRankCountValue(Rank.FIFTH));
+            model.put("FOURTH", winningResult.getMatchedRankCountValue(Rank.FOURTH));
+            model.put("THIRD", winningResult.getMatchedRankCountValue(Rank.THIRD));
+            model.put("SECOND", winningResult.getMatchedRankCountValue(Rank.SECOND));
+            model.put("FIRST", winningResult.getMatchedRankCountValue(Rank.FIRST));
+
+            model.put("totalYield",winningResult.getTotalYield());
+
+            return render(model, "winningResult.html");
+        });
     }
 
     private static List<String> getManualLotto(Request req) {
