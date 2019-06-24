@@ -1,6 +1,9 @@
 package lotto.model.object;
 
+<<<<<<< HEAD
 import lotto.model.*;
+=======
+>>>>>>> da7b5280162c03e3cb85956a36ace4e4eaa36719
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
