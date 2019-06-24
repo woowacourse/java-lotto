@@ -79,4 +79,9 @@ public class LottoTicket {
     public int hashCode() {
         return Objects.hash(lottoTicket);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoTicket);
+    }
 }

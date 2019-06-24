@@ -6,8 +6,10 @@ public class PurchaseAmount {
     private static final int LIMIT_MINIMUM_PRICE = 1000;
     private static final int PRICE_UNIT = 1000;
     private static final int DIVISIBLE = 0;
+    private static final int MINIMUM_AMOUNT = 0;
     private static final String ERROR_LIMIT_MINIMUM_PRICE = "구매 금액은 1000원 이상입니다.";
     private static final String ERROR_PRICE_UNIT = "구매 금액은 1,000원 단위 입니다.";
+    private static final String ERROR_OVER_MANUAL_LOTTO = "구매 개수보다 수동 입력 개수가 많습니다.";
 
     private final int lottoAmount;
 
@@ -60,5 +62,14 @@ public class PurchaseAmount {
 
     public int getLottoAmount() {
         return lottoAmount;
+    }
+
+    public int getAutoAmount(int manualAmount) {
+        int result = lottoAmount - manualAmount;
+        if (result < MINIMUM_AMOUNT) {
+            throw new IllegalArgumentException(ERROR_OVER_MANUAL_LOTTO);
+        }
+
+        return result;
     }
 }
