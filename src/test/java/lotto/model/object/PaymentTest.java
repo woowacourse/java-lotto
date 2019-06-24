@@ -1,5 +1,6 @@
 package lotto.model.object;
 
+import lotto.model.Payment;
 import lotto.model.exception.PaymentNotMultipleOfThousandException;
 import lotto.model.exception.PaymentNotNaturalNumberException;
 import org.junit.jupiter.api.Test;

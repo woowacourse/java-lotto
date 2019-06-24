@@ -1,12 +1,12 @@
 package lotto.controller;
 
+import lotto.model.*;
 import lotto.model.creator.lotto.AutoLottoCreatorStrategy;
 import lotto.model.creator.lotto.LottoCreatorStrategy;
 import lotto.model.creator.lotto.ManualLottoCreatorStrategy;
 import lotto.model.creator.lottos.AutoLottosCreatorStrategty;
 import lotto.model.creator.lottos.LottosCreator;
 import lotto.model.creator.lottos.ManualLottosCreatorStrategy;
-import lotto.model.object.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

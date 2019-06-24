@@ -1,6 +1,6 @@
 package lotto.model.creator.lotto;
 
-import lotto.model.object.Lotto;
+import lotto.model.Lotto;
 
 public interface LottoCreatorStrategy {
         Lotto create();

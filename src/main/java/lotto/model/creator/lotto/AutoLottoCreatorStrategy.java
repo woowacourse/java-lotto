@@ -1,7 +1,7 @@
 package lotto.model.creator.lotto;
 
-import lotto.model.object.Lotto;
-import lotto.model.object.LottoNumber;
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,6 +1,6 @@
 package lotto.model.creator.lotto;
 
-import lotto.model.object.LottoNumber;
+import lotto.model.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

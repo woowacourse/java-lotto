@@ -1,9 +1,9 @@
 package lotto.model.creator.lottos;
 
+import lotto.model.Lotto;
+import lotto.model.ManualPurchaseNumber;
+import lotto.model.Payment;
 import lotto.model.creator.lotto.LottoCreatorStrategy;
-import lotto.model.object.Lotto;
-import lotto.model.object.ManualPurchaseNumber;
-import lotto.model.object.Payment;
 
 import java.util.ArrayList;
 import java.util.List;

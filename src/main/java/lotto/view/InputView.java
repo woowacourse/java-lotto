@@ -1,7 +1,7 @@
 package lotto.view;
 
+import lotto.model.ManualPurchaseNumber;
 import lotto.model.exception.LottoNumberInputFormException;
-import lotto.model.object.ManualPurchaseNumber;
 
 import java.util.ArrayList;
 import java.util.List;

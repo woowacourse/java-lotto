@@ -1,5 +1,8 @@
 package lotto.model.object;
 
+import lotto.model.BonusBall;
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.exception.LottoNumberDuplicationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

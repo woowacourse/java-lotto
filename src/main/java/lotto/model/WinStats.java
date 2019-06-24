@@ -1,8 +1,6 @@
-package lotto.model.object;
+package lotto.model;
 
-import lotto.model.LottoRank;
-
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +8,7 @@ public class WinStats {
         private Map<LottoRank, Integer> mappingStats;
 
         public WinStats(final List<Lotto> purchasedLottos, final WinningInfo winningInfo) {
-                mappingStats = new HashMap<>();
+                mappingStats = new LinkedHashMap<>();
                 {
                         mappingStats.put(LottoRank.FIRST, 0);
                         mappingStats.put(LottoRank.SECOND, 0);

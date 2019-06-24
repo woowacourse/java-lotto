@@ -1,5 +1,7 @@
 package lotto.model.object;
 
+import lotto.model.BonusBall;
+import lotto.model.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;

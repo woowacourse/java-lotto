@@ -1,4 +1,4 @@
-package lotto.model.object;
+package lotto.model;
 
 import lotto.model.exception.LottoNumberDuplicationException;
 
@@ -49,11 +49,7 @@ public class Lotto {
                 for (LottoNumber lottoNumber : lottoNumbers) {
                         count = this.lottoNumbers.contains(lottoNumber) ? count + 1 : count;
                 }
-                //return count;
-
-                return (int) lottoNumbers.stream()
-                    .filter(lottoNumbers::contains)
-                    .count();
+                return count;
         }
 
         public boolean hasBonusBall(final BonusBall bonusBall) {

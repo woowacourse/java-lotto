@@ -1,6 +1,4 @@
-package lotto.model.object;
-
-import lotto.model.LottoRank;
+package lotto.model;
 
 public class Yield {
         private double rate;

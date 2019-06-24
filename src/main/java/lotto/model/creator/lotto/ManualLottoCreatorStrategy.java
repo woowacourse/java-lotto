@@ -1,6 +1,6 @@
 package lotto.model.creator.lotto;
 
-import lotto.model.object.Lotto;
+import lotto.model.Lotto;
 
 public class ManualLottoCreatorStrategy implements LottoCreatorStrategy {
         private final String[] inputs;

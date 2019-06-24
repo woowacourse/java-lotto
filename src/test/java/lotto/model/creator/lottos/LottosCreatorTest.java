@@ -1,11 +1,11 @@
 package lotto.model.creator.lottos;
 
+import lotto.model.LottoNumber;
+import lotto.model.ManualPurchaseNumber;
+import lotto.model.Payment;
 import lotto.model.creator.lotto.AutoLottoCreatorStrategy;
 import lotto.model.creator.lotto.LottoCreatorStrategy;
 import lotto.model.creator.lotto.ManualLottoCreatorStrategy;
-import lotto.model.object.LottoNumber;
-import lotto.model.object.ManualPurchaseNumber;
-import lotto.model.object.Payment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

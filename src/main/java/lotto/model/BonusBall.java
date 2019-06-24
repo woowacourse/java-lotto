@@ -1,4 +1,4 @@
-package lotto.model.object;
+package lotto.model;
 
 public class BonusBall {
         private final LottoNumber lottoNumber;

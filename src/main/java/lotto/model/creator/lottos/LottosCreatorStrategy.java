@@ -1,6 +1,6 @@
 package lotto.model.creator.lottos;
 
-import lotto.model.object.Lotto;
+import lotto.model.Lotto;
 
 import java.util.List;
 

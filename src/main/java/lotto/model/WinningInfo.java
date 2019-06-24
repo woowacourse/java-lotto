@@ -1,6 +1,5 @@
-package lotto.model.object;
+package lotto.model;
 
-import lotto.model.LottoRank;
 import lotto.model.exception.WinningLottoBonusBallDuplicationException;
 
 public class WinningInfo {
