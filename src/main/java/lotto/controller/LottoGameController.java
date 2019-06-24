@@ -1,24 +1,19 @@
 package lotto.controller;
 
 import lotto.db.dao.LottoGameDAO;
-import lotto.db.dao.LottoTicketDAO;
-import lotto.domain.LottoTicket;
-import lotto.domain.RankType;
-import lotto.domain.WinStatistics;
-import lotto.domain.WinningLotto;
-import lotto.domain.dto.LottoGameResultDTO;
+import lotto.domain.dto.LottoGameResultDto;
 import lotto.service.LottoGameService;
 import spark.Route;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static lotto.utils.WebUIRenderer.render;
 
 public class LottoGameController {
-    private static final int MONEY_OFFSET = 1000;
+    public static final int MIN_BOUND_OF_LOTTO_COUNT = 1;
+    public static final int MAX_BOUND_OF_LOTTO_COUNT = 6;
+    private static final String DELIMITER = ",";
 
     public static Route index = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
@@ -27,8 +22,8 @@ public class LottoGameController {
 
     public static Route addWinningLotto = (req, res) -> {
         StringBuilder lottoNumbers = new StringBuilder();
-        for (int i = 1; i <= 6; i++) {
-            lottoNumbers.append(req.queryParams("num" + i)).append(",");
+        for (int i = MIN_BOUND_OF_LOTTO_COUNT; i <= MAX_BOUND_OF_LOTTO_COUNT; i++) {
+            lottoNumbers.append(req.queryParams("num" + i)).append(DELIMITER);
         }
 
         LottoGameService.addWinningLottoTicket(lottoNumbers.toString(), req.queryParams("bonusBall"));
@@ -39,35 +34,17 @@ public class LottoGameController {
 
     public static Route latestGameResult = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
-        LottoGameResultDTO winningLotto = LottoGameDAO.findLatestWinningLotto();
-        List<LottoTicket> lottoTickets = LottoTicketDAO.findLottosByLottoId(winningLotto.getWinningLottoId());
-        WinStatistics winStatistics = new WinStatistics(lottoTickets, WinningLotto.of(winningLotto.getWinningNumbers(), winningLotto.getBonusBall()));
+        LottoGameResultDto lottoGameResult = LottoGameService.findLatestLottoGameResult();
 
-        model.put("week", winningLotto.getWinningLottoId());
-        model.put("winningNumbers", winningLotto.getWinningNumbers().split(","));
-        model.put("bonusBall", winningLotto.getBonusBall());
-        model.put("results", getEachRank(winStatistics));
-        model.put("money", lottoTickets.size() * MONEY_OFFSET);
-        model.put("profit", winStatistics.getProfit());
-        model.put("incoming_rate", String.format("%.2f", lottoTickets.size() > 0 ? winStatistics.calculateProfitRate(lottoTickets.size() * MONEY_OFFSET) : 0));
-
+        model.put("result", lottoGameResult);
         return render(model, "lotto_result.html");
     };
 
     public static Route gameResultByWinningLottoId = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
-        LottoGameResultDTO winningLotto = LottoGameDAO.findByWinningLottoId(req.params(":week"));
-        List<LottoTicket> lottoTickets = LottoTicketDAO.findLottosByLottoId(winningLotto.getWinningLottoId());
-        WinStatistics winStatistics = new WinStatistics(lottoTickets, WinningLotto.of(winningLotto.getWinningNumbers(), winningLotto.getBonusBall()));
+        LottoGameResultDto lottoGameResult = LottoGameService.findResultByWinningLottoId(req.params(":week"));
 
-        model.put("week", winningLotto.getWinningLottoId());
-        model.put("winningNumbers", winningLotto.getWinningNumbers().split(","));
-        model.put("bonusBall", winningLotto.getBonusBall());
-        model.put("results", getEachRank(winStatistics));
-        model.put("money", lottoTickets.size() * MONEY_OFFSET);
-        model.put("profit", winStatistics.getProfit());
-        model.put("incoming_rate", String.format("%.2f", lottoTickets.size() > 0 ? winStatistics.calculateProfitRate(lottoTickets.size() * MONEY_OFFSET) : 0));
-
+        model.put("result", lottoGameResult);
         return render(model, "lotto_result.html");
     };
 
@@ -77,23 +54,4 @@ public class LottoGameController {
 
         return render(model, "select_result.html");
     };
-
-    private static List<String> getEachRank(WinStatistics winStatistics) {
-        List<String> results = new ArrayList<>();
-        for (RankType rankType : RankType.values()) {
-            int matchingCount = rankType.getMatchingCount();
-            int prize = rankType.getPrize();
-            int count = winStatistics.getCountOfResult().get(rankType);
-
-            if (rankType.equals(RankType.SECOND)) {
-                results.add(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개", matchingCount, prize, count));
-                continue;
-            }
-            if (rankType.equals(RankType.NOTHING)) {
-                continue;
-            }
-            results.add(String.format("%d개 일치 (%d원) - %d개", matchingCount, prize, count));
-        }
-        return results;
-    }
 }

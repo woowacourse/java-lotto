@@ -66,5 +66,5 @@ public class ConsoleUILottoApplication {
             return getMoney();
         }
     }
-    
+
 }

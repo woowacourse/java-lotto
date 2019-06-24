@@ -2,12 +2,12 @@ package lotto.domain.dto;
 
 import java.util.Objects;
 
-public class LottoGameResultDTO {
+public class WinningLottoDto {
     private int winningLottoId;
     private String winningNumbers;
     private int bonusBall;
 
-    public LottoGameResultDTO(int winningLottoId, String winningNumbers, int bonusBall) {
+    public WinningLottoDto(int winningLottoId, String winningNumbers, int bonusBall) {
         this.winningLottoId = winningLottoId;
         this.winningNumbers = winningNumbers;
         this.bonusBall = bonusBall;
@@ -29,7 +29,7 @@ public class LottoGameResultDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoGameResultDTO that = (LottoGameResultDTO) o;
+        WinningLottoDto that = (WinningLottoDto) o;
         return winningLottoId == that.winningLottoId &&
                 bonusBall == that.bonusBall &&
                 Objects.equals(winningNumbers, that.winningNumbers);

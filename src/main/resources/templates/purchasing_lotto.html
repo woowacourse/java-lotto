@@ -55,113 +55,113 @@
 </div>
 
 <script type="text/javascript">
-		var count = 0;
+    var count = 0;
 
-		function checkInput() {
-			addCustomLottos();
-			return checkMoney();
-		}
+    function checkInput() {
+        addCustomLottos();
+        return checkMoney();
+    }
 
-		function checkMoney() {
-			var money = document.getElementById("money").value;
+    function checkMoney() {
+        var money = document.getElementById("money").value;
 
-			if (money == null || isNaN(money) || money < 1000 || money > 150000) {
-				window.alert("구입 금액의 값이 올바르지 않습니다.");
-				document.getElementById("money").focus();
+        if (money == null || isNaN(money) || money < 1000 || money > 150000) {
+            window.alert("구입 금액의 값이 올바르지 않습니다.");
+            document.getElementById("money").focus();
 
-				return false;
-			}
+            return false;
+        }
 
-			return true;
-		}
+        return true;
+    }
 
-		function addCustomLottos() {
-			var lottos = document.getElementById('lottos');
+    function addCustomLottos() {
+        var lottos = document.getElementById('lottos');
 
-			var checkedNumber = "";
-			for (var i = 0; i < count; i++) {
-				var number_chk = document.getElementsByName("lotto-number-" + i);
+        var checkedNumber = "";
+        for (var i = 0; i < count; i++) {
+            var number_chk = document.getElementsByName("lotto-number-" + i);
 
-				for (var j = 0; j < number_chk.length; j++) {
-					var classNames = number_chk[j].className.split(" ");
-					if (classNames[classNames.length - 1] == 'active') {
-						checkedNumber += (j + 1) + ",";
-						console.log(checkedNumber);
-					}
-				}
-				checkedNumber += "-";
-			}
+            for (var j = 0; j < number_chk.length; j++) {
+                var classNames = number_chk[j].className.split(" ");
+                if (classNames[classNames.length - 1] == 'active') {
+                    checkedNumber += (j + 1) + ",";
+                    console.log(checkedNumber);
+                }
+            }
+            checkedNumber += "-";
+        }
 
-			lottos.value = checkedNumber;
-		}
+        lottos.value = checkedNumber;
+    }
 
-		function addLotto() {
-			var maxCustom = document.getElementById('max-custom-amount').value;
+    function addLotto() {
+        var maxCustom = document.getElementById('max-custom-amount').value;
 
-			if (count >= maxCustom) {
-				alert("구입 금액보다 많은 로또는 추가할 수 없습니다.");
-				return;
-			}
+        if (count >= maxCustom) {
+            alert("구입 금액보다 많은 로또는 추가할 수 없습니다.");
+            return;
+        }
 
-			var div = document.getElementById('lotto-area');
+        var div = document.getElementById('lotto-area');
 
-			var addedDiv = document.createElement('div');
-			addedDiv.id = "each-lotto-" + count;
-			addedDiv.className = "row mb-2 text-center";
-			addedDiv.value = count;
+        var addedDiv = document.createElement('div');
+        addedDiv.id = "each-lotto-" + count;
+        addedDiv.className = "row mb-2 text-center";
+        addedDiv.value = count;
 
-			var lottoNumbersDiv = document.createElement('div');
-			lottoNumbersDiv.id = "each-lotto-" + count;
-			lottoNumbersDiv.className = "col-10 btn-group-toggle";
-			lottoNumbersDiv.setAttribute("data-toggle", "buttons");
+        var lottoNumbersDiv = document.createElement('div');
+        lottoNumbersDiv.id = "each-lotto-" + count;
+        lottoNumbersDiv.className = "col-10 btn-group-toggle";
+        lottoNumbersDiv.setAttribute("data-toggle", "buttons");
 
-			var deletingDiv = document.createElement('div');
-			deletingDiv.id = "deleting-lotto-area-" + count;
-			deletingDiv.className = "col-2";
+        var deletingDiv = document.createElement('div');
+        deletingDiv.id = "deleting-lotto-area-" + count;
+        deletingDiv.className = "col-2";
 
-			var deletingBtn = document.createElement('button');
-			deletingBtn.type = "button";
-			deletingBtn.id = "deleting-lotto-btn-" + count;
-			deletingBtn.className = "btn btn-danger btn-sm btn-round vertical-center";
-			deletingBtn.value = count;
-			deletingBtn.onclick = function() {
-				deleteLotto(deletingBtn.value);
-			};
-			deletingBtn.innerHTML = '-';
+        var deletingBtn = document.createElement('button');
+        deletingBtn.type = "button";
+        deletingBtn.id = "deleting-lotto-btn-" + count;
+        deletingBtn.className = "btn btn-danger btn-sm btn-round vertical-center";
+        deletingBtn.value = count;
+        deletingBtn.onclick = function () {
+            deleteLotto(deletingBtn.value);
+        };
+        deletingBtn.innerHTML = '-';
 
-			var str = '';
-			var id = count;
-			for (var i = 1; i <= 45; i++) {
-				str += '<label class="btn btn-outline-dark mb-1 mr-1" name="lotto-number-' + count + '">';
-				str += '<input type="checkbox" autocomplete="off">';
-				str += i + '</label>'
-				/*str += '<button type="button" class="btn btn-outline-dark mb-1 mr-1" data-toggle="button" aria-pressed="false" autocomplete="off" name="lotto-number-' + count + '">' +
-					i + '</button>';*/
-			}
+        var str = '';
+        var id = count;
+        for (var i = 1; i <= 45; i++) {
+            str += '<label class="btn btn-outline-dark mb-1 mr-1" name="lotto-number-' + count + '">';
+            str += '<input type="checkbox" autocomplete="off">';
+            str += i + '</label>'
+            /*str += '<button type="button" class="btn btn-outline-dark mb-1 mr-1" data-toggle="button" aria-pressed="false" autocomplete="off" name="lotto-number-' + count + '">' +
+                i + '</button>';*/
+        }
 
-			lottoNumbersDiv.innerHTML = str;
-			addedDiv.appendChild(lottoNumbersDiv);
-			addedDiv.appendChild(deletingDiv);
-			deletingDiv.appendChild(deletingBtn);
-			div.appendChild(addedDiv);
+        lottoNumbersDiv.innerHTML = str;
+        addedDiv.appendChild(lottoNumbersDiv);
+        addedDiv.appendChild(deletingDiv);
+        deletingDiv.appendChild(deletingBtn);
+        div.appendChild(addedDiv);
 
-			count++;
-		}
+        count++;
+    }
 
-		function deleteLotto(lottoId) {
-			var lottoDiv = document.getElementById('lotto-area');
-			var lotto = document.getElementById('each-lotto-' + lottoId);
+    function deleteLotto(lottoId) {
+        var lottoDiv = document.getElementById('lotto-area');
+        var lotto = document.getElementById('each-lotto-' + lottoId);
 
-			lottoDiv.removeChild(lotto);
-			count--;
-		}
+        lottoDiv.removeChild(lotto);
+        count--;
+    }
 
-		function countMaxAmountOfCustomLotto() {
-			var maxHidden = document.getElementById('max-custom-amount');
-			var maxAmount = document.getElementById('money').value / 1000;
+    function countMaxAmountOfCustomLotto() {
+        var maxHidden = document.getElementById('max-custom-amount');
+        var maxAmount = document.getElementById('money').value / 1000;
 
-			maxHidden.value = maxAmount;
-		}
+        maxHidden.value = maxAmount;
+    }
 
 </script>
 

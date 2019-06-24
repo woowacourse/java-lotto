@@ -11,7 +11,7 @@ import java.util.*;
 import static lotto.utils.WebUIRenderer.render;
 
 public class PurchasingLottoController {
-    private static final int MONEY_OFFSET = 1000;
+    private static final int MONEY_OFFSET = 1_000;
     private static final String LOTTO_DELIMITER = "-";
 
     public static Route purchasingTickets = (req, res) -> {

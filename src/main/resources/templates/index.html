@@ -80,24 +80,24 @@
 </div>
 
 <script type="text/javascript">
-		function checkInputValues() {
-			for (var i = 1; i <= 6; i++) {
-				var num = document.getElementById('num' + i).value;
+    function checkInputValues() {
+        for (var i = 1; i <= 6; i++) {
+            var num = document.getElementById('num' + i).value;
 
-				if (isNaN(num) || num < 1 || num > 45) {
-					alert("당첨번호의 값이 올바르지 않습니다.");
-					document.getElementById('num' + i).focus();
-					return false;
-				}
-			}
+            if (isNaN(num) || num < 1 || num > 45) {
+                alert("당첨번호의 값이 올바르지 않습니다.");
+                document.getElementById('num' + i).focus();
+                return false;
+            }
+        }
 
-			var bonusBall = document.getElementById('bonusBall').value;
-			if (isNaN(bonusBall) || bonusBall < 1 || bonusBall > 45) {
-				alert("당첨번호의 값이 올바르지 않습니다.");
-				document.getElementById('bonusBall').focus();
-				return false;
-			}
-		}
+        var bonusBall = document.getElementById('bonusBall').value;
+        if (isNaN(bonusBall) || bonusBall < 1 || bonusBall > 45) {
+            alert("당첨번호의 값이 올바르지 않습니다.");
+            document.getElementById('bonusBall').focus();
+            return false;
+        }
+    }
 
 
 </script>

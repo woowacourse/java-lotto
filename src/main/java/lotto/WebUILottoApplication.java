@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.controller.PurchasingLottoController;
 import lotto.controller.LottoGameController;
+import lotto.controller.PurchasingLottoController;
 
 import static spark.Spark.*;
 

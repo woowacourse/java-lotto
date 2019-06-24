@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 public class LottoTicketsFactoryTest {
     private List<String> customLottoNumbers = Arrays.asList("1,2,3,4,5,6", "1,12,14,21,29,38");
 
