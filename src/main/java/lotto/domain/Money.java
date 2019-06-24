@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Money {
-    private static final int PRICE_PER_LOTTO = 1000;
+    static final int PRICE_PER_LOTTO = 1000;
 
     private final long money;
 
@@ -15,7 +17,7 @@ public class Money {
     }
 
     public static Money from(final String money) {
-        return from(Integer.parseInt(money));
+        return from(Integer.parseInt(Objects.requireNonNull(money)));
     }
 
     private static void validate(final long money) {
@@ -30,5 +32,9 @@ public class Money {
 
     public int getCountOfPurchase() {
         return (int) money / PRICE_PER_LOTTO;
+    }
+
+    public int getCountOfAuto(int countOfManual) {
+        return getCountOfPurchase() - countOfManual;
     }
 }

@@ -20,4 +20,18 @@ public class MoneyTest {
     void 천원_이하_입력() {
         assertThrows(IllegalArgumentException.class, () -> Money.from(0));
     }
+
+    @Test
+    void NULL_입력_예외처리() {
+        assertThrows(NullPointerException.class, ()-> Money.from(null));
+    }
+
+    @Test
+    void getCountOfAutoTest() {
+        Money money = Money.from(100000);
+        int countOfManual = 5;
+        int actual = (int) money.value() / Money.PRICE_PER_LOTTO - countOfManual;
+
+        assertThat(actual).isEqualTo(money.getCountOfAuto(countOfManual));
+    }
 }

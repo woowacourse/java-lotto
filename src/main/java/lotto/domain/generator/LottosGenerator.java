@@ -29,24 +29,28 @@ public class LottosGenerator {
 
     public List<Lotto> generate() {
         List<Lotto> lottos = new ArrayList<>();
-        addManualLotto(lottos);
-        addAutoLotto(lottos, countOfAuto(lottos));
+        lottos.addAll(addManualLotto());
+        lottos.addAll(addAutoLotto(countOfAuto(lottos)));
         return lottos;
     }
 
-    private void addManualLotto(final List<Lotto> lottos) {
+    private List<Lotto> addManualLotto() {
+        List<Lotto> manualLottos = new ArrayList<>();
         for (final String lottoNo : lottoNoStrings) {
             List<LottoNo> lottoNos = new LottoNosManualGenerator(lottoNo).generate();
-            lottos.add(Lotto.of(lottoNos));
+            manualLottos.add(Lotto.of(lottoNos));
         }
+        return manualLottos;
     }
 
-    private void addAutoLotto(final List<Lotto> lottos, int countOfAuto) {
+    private List<Lotto> addAutoLotto(int countOfAuto) {
+        List<Lotto> autoLottos = new ArrayList<>();
         LottoNosGenerator lottoNosGenerator = new LottoNosAutoGenerator();
         for (int i = 0; i < countOfAuto; i++) {
             List<LottoNo> lottoNos = lottoNosGenerator.generate();
-            lottos.add(Lotto.of(lottoNos));
+            autoLottos.add(Lotto.of(lottoNos));
         }
+        return autoLottos;
     }
 
     private int countOfAuto(final List<Lotto> lottos) {

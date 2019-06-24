@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WinPrizeTest {
     @Test
     void 수익률_구하기_테스트() {
-        long purchasedAmount = 20000;
+        long purchasedAmount = 2000;
         long totalPrice = Rank.FIRST.getPrize() + Rank.THIRD.getPrize();
         double actual = (double) totalPrice / purchasedAmount * 100;
 
@@ -15,6 +15,6 @@ public class WinPrizeTest {
         winPrize.addWinCount(Rank.FIRST);
         winPrize.addWinCount(Rank.THIRD);
 
-        assertThat(actual).isEqualTo(winPrize.getRateOfProfit(purchasedAmount));
+        assertThat(actual).isEqualTo(winPrize.getRateOfProfit());
     }
 }

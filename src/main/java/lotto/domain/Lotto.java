@@ -10,10 +10,17 @@ public class Lotto {
 
     private Lotto(final List<LottoNo> lottoNos) {
         this.lottoNos = new TreeSet<>(lottoNos);
-        validateSize(this.lottoNos);
+        validateSize(lottoNos);
+        validateDuplication(this.lottoNos);
     }
 
-    private void validateSize(final Set<LottoNo> lottoNos) {
+    private void validateDuplication(final Set<LottoNo> lottoNos) {
+        if (lottoNos.size() != LOTTO_NO_SIZE) {
+            throw new IllegalArgumentException("중복된 번호 입력은 불가능합니다.");
+        }
+    }
+
+    private void validateSize(final List<LottoNo> lottoNos) {
         if (lottoNos.size() != LOTTO_NO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NO_SIZE + "개만 가능합니다.");
         }

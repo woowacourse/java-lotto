@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 출력</title>
+</head>
+<body>
+
+<h1>로또 출력</h1>
+<h2>수동으로 {{countOfManual}}장, 자동으로 {{countOfAuto}}개를 구매했습니다.</h2>
+
+<table class="table">
+    <thead>
+    <th></th>
+    <th class="text-center">로또 번호</th>
+    </thead>
+    <tbody>
+    {{#lottos}}
+    <tr>
+        <th>{{@index}}</th>
+        <td>[{{this}}]</td>
+    </tr>
+    {{/lottos}}
+    </tbody>
+</table>
+
+<form method="post" action="/result">
+    <h3>지난 주 당첨 번호를 입력해 주세요.</h3>
+    <input type="text" name="winningLotto" placeholder="1,2,3,4,5,6">
+    <h3>보너스 볼을 입력해 주세요.</h3>
+    <input type="number" name="bonusNo" placeholder="41">
+    <input type="hidden" name="round" value="{{round}}">
+    <input type="submit" value="전송">
+</form>
+
+</body>
+</html>
