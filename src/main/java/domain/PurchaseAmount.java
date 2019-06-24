@@ -1,39 +1,29 @@
 package domain;
 
-public class PurchaseAmount {
-    private static final int FIT_AMOUNT = 0;
+public class PurchaseAmount extends Money {
+    public static final int MINIMUM_AMOUNT = 1000;
 
-    private int amountOfMoney;
-
-    private PurchaseAmount(int amountOfMoney) {
-        this.amountOfMoney = amountOfMoney;
+    public PurchaseAmount(int amountOfMoney) {
+        super(amountOfMoney);
     }
 
     public static PurchaseAmount valueOf(int amountOfMoney) {
-        validateAmountOfMoney(amountOfMoney);
+        validatePurchaseAmount(amountOfMoney);
         validateIfMultipleOfPricePerLotto(amountOfMoney);
 
         return new PurchaseAmount(amountOfMoney);
     }
 
-    private static void validateAmountOfMoney(int amountOfMoney) {
-        if (amountOfMoney < IssuedLotto.PRICE) {
-            throw new IllegalArgumentException("고작 그정도 돈으로는 로또를 살 수 없습니다");
+    private static void validatePurchaseAmount(int amountOfMoney) {
+        if (amountOfMoney < MINIMUM_AMOUNT) {
+            throw new IllegalPurchasementException();
         }
     }
 
     private static void validateIfMultipleOfPricePerLotto(int amountOfMoney) {
-        if (amountOfMoney % IssuedLotto.PRICE != FIT_AMOUNT) {
-            throw new IllegalArgumentException(IssuedLotto.PRICE + "원의 배수만 입력할 수 있습니다.");
+        if (amountOfMoney % IssuedLotto.PRICE != 0) {
+            throw new IllegalPurchasementException();
         }
-    }
-
-    public int getMoneyAmount() {
-        return amountOfMoney;
-    }
-
-    public PurchaseAmount getChangeOf(PurchaseAmount purchaseAmount) {
-        return new PurchaseAmount(this.amountOfMoney - purchaseAmount.getMoneyAmount());
     }
 
     public void checkNumberOfManualIssue(int numberOfManualIssue) {

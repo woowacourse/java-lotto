@@ -6,8 +6,8 @@ import domain.lottonumber.LottoNumberPool;
 import java.util.*;
 
 public class LottoFactory {
-    public static IssuedLottos autoIssueLottoWorthOf(PurchaseAmount purchaseAmount) {
-        int numberOfLottoToIssue = purchaseAmount.getMoneyAmount() / IssuedLotto.PRICE;
+    public static IssuedLottos autoIssueLottoWorthOf(Money purchaseAmount) {
+        int numberOfLottoToIssue = purchaseAmount.getAmount() / IssuedLotto.PRICE;
         List<IssuedLotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < numberOfLottoToIssue; i++) {

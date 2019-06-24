@@ -4,15 +4,15 @@ import java.util.Map;
 
 public class Statistics {
     private Map<Rank, CountOfRank> countsOfRanks;
-    private PurchaseAmount purchasedAmount;
+    private Money purchasedAmount;
 
-    private Statistics(Map<Rank, CountOfRank> countsOfRanks, PurchaseAmount purchaseAmount) {
+    private Statistics(Map<Rank, CountOfRank> countsOfRanks, Money purchasedAmount) {
         this.countsOfRanks = countsOfRanks;
-        this.purchasedAmount = purchaseAmount;
+        this.purchasedAmount = purchasedAmount;
     }
 
-    static Statistics of(Map<Rank, CountOfRank> countsOfRanks, PurchaseAmount purchaseAmount) {
-        return new Statistics(countsOfRanks, purchaseAmount);
+    static Statistics of(Map<Rank, CountOfRank> countsOfRanks, Money purchasedAmount) {
+        return new Statistics(countsOfRanks, purchasedAmount);
     }
 
     public int countsOf(Rank rank) {
@@ -29,6 +29,6 @@ public class Statistics {
             winningMoneyOfRank = rank.getWinningMoney();
             totalWinningMoney += countsOf(rank) * winningMoneyOfRank;
         }
-        return totalWinningMoney / (double) purchasedAmount.getMoneyAmount();
+        return totalWinningMoney / (double) purchasedAmount.getAmount();
     }
 }

@@ -1,6 +1,7 @@
 import domain.*;
 import domain.lottonumber.LottoNumberPool;
 import domain.IllegalNumberOfManualIssueException;
+import utils.StringParser;
 import view.InputView;
 import view.OutputView;
 
@@ -11,7 +12,7 @@ public class LottoGameLauncher {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         IssuedLottos manualIssuedLottos = getManualIssuedLottosUpTo(purchaseAmount);
-        PurchaseAmount changeAfterManualIssue = purchaseAmount.getChangeOf(manualIssuedLottos.getPurchasedAmount());
+        Money changeAfterManualIssue = purchaseAmount.getChangeOf(manualIssuedLottos.getPurchasedAmount());
         IssuedLottos autoIssuedLottos = LottoFactory.autoIssueLottoWorthOf(changeAfterManualIssue);
         OutputView.showIssuedLottos(manualIssuedLottos, autoIssuedLottos);
 
