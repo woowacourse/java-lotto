@@ -2,7 +2,6 @@ package com.woowacourse.lotto.persistence.dao;
 
 import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.LottoResult;
-import com.woowacourse.lotto.persistence.DataSourceFactory;
 import com.woowacourse.lotto.persistence.TestDataSourceFactory;
 import com.woowacourse.lotto.persistence.dto.AggregationDto;
 import com.woowacourse.lotto.persistence.dto.LottoDto;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -4,7 +4,7 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 import javax.sql.DataSource;
 
-public class TestDataSourceFactory implements AbstractDataSourceFactory {
+public class TestDataSourceFactory {
     private static final String DB_HOST = "localhost";
     private static final String DB_NAME = "wtc_lotto_test_db";
     private static final String DB_USER = "root";

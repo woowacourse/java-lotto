@@ -16,7 +16,7 @@ public class AggregationDao {
     }
 
     public long addAggregation(AggregationDto aggregation, long winningLottoId, List<Long> lottoIds) throws SQLException {
-        try (Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             conn.setAutoCommit(false);
             // 1. agg 엔티티 추가
             long aggId = addAggregationEntity(aggregation, conn);

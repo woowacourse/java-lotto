@@ -1,10 +1,8 @@
 package com.woowacourse.lotto.controller;
 
 import com.google.gson.Gson;
-import com.woowacourse.lotto.controller.dto.AutoLottoBuyingRequestDto;
 import com.woowacourse.lotto.controller.dto.LottoBuyingRequestDto;
 import com.woowacourse.lotto.controller.dto.LottoDrawingRequestDto;
-import com.woowacourse.lotto.controller.dto.ManualLottoBuyingRequestDto;
 import com.woowacourse.lotto.domain.*;
 import com.woowacourse.lotto.persistence.dto.AggregationDto;
 import com.woowacourse.lotto.persistence.dto.LottoDto;
@@ -127,8 +125,8 @@ public class LottoWebController {
 
     private static List<LottoDto> saveLottos(List<Lotto> lottos) {
         return lottos.stream()
-                .map(lottoService::addLotto)
-                .collect(Collectors.toList());
+            .map(lottoService::addLotto)
+            .collect(Collectors.toList());
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.woowacourse.lotto.persistence.dao;
 
-import com.woowacourse.lotto.persistence.DataSourceFactory;
 import com.woowacourse.lotto.persistence.TestDataSourceFactory;
 import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
 import org.junit.jupiter.api.BeforeAll;

@@ -15,7 +15,7 @@ public class WinningAggregator {
 
     public void addResult(LottoResult result) {
         results.putIfAbsent(result, 0);
-        results.compute(result, (key, count) -> count + 1 );
+        results.compute(result, (key, count) -> count + 1);
     }
 
     public double calculateEarningRate(int unitPrice) {

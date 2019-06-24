@@ -3,7 +3,6 @@ package com.woowacourse.lotto.view;
 import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.LottoNumber;
 import com.woowacourse.lotto.domain.LottoResult;
-import com.woowacourse.lotto.domain.WinningAggregator;
 
 import java.util.ArrayList;
 import java.util.List;
