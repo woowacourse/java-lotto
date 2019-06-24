@@ -36,6 +36,7 @@ public class ResultDAO {
         PreparedStatement pstmt = ConnectionGenerator.getConnection().prepareStatement(query);
         pstmt.setInt(1, newRound);
         ResultSet rs = pstmt.executeQuery();
+        ConnectionGenerator.closeConnection(con);
 
         ResultDTO resultDTO = new ResultDTO();
 
@@ -55,9 +56,11 @@ public class ResultDAO {
     }
 
     public void deleteResult(final int round) throws SQLException {
+        Connection con = ConnectionGenerator.getConnection();
         String query = "DELETE FROM result WHERE round = ?";
-        PreparedStatement pstmt = ConnectionGenerator.getConnection().prepareStatement(query);
+        PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setInt(1, round);
         pstmt.executeUpdate();
+        ConnectionGenerator.closeConnection(con);
     }
 }

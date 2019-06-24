@@ -34,9 +34,11 @@ public class WinningLottoDAO {
     }
 
     public int getNewRound() throws SQLException {
+        Connection con = ConnectionGenerator.getConnection();
         String query = "SELECT round FROM winning_lotto ORDER BY round DESC";
-        PreparedStatement pstmt = ConnectionGenerator.getConnection().prepareStatement(query);
+        PreparedStatement pstmt = con.prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
+        ConnectionGenerator.closeConnection(con);
 
         if (!rs.next()) {
             return 1;
@@ -46,10 +48,12 @@ public class WinningLottoDAO {
     }
 
     public WinningLottoDTO getWinningLotto(int round) throws SQLException {
+        Connection con = ConnectionGenerator.getConnection();
         String query = "SELECT * FROM winning_lotto WHERE round = ?";
-        PreparedStatement pstmt = ConnectionGenerator.getConnection().prepareStatement(query);
+        PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
+        ConnectionGenerator.closeConnection(con);
 
         WinningLottoDTO winningLottoDTO = new WinningLottoDTO();
 
@@ -70,9 +74,11 @@ public class WinningLottoDAO {
     }
 
     public void deleteWinningLotto(final int round) throws SQLException {
+        Connection con = ConnectionGenerator.getConnection();
         String query = "DELETE FROM winning_lotto WHERE round = ?";
-        PreparedStatement pstmt = ConnectionGenerator.getConnection().prepareStatement(query);
+        PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setInt(1, round);
         pstmt.executeUpdate();
+        ConnectionGenerator.closeConnection(con);
     }
 }
