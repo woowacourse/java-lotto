@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionGenerator {
-    public static Connection getConnection() {
+    public static Connection getConnection() throws JDBCDriverLoadException, JDBCConnectException {
         Connection con = null;
         String server = "localhost";
         String database = "lotto";
@@ -15,28 +15,16 @@ public class ConnectionGenerator {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            System.err.println(" !! JDBC Dirver load 오류 : " + e.getMessage());
-            e.printStackTrace();
+            throw new JDBCDriverLoadException(" !! JDBC Dirver load 오류 : " + e.getMessage());
         }
 
         try {
             con = DriverManager.getConnection("jdbc:mysql://" + server + "/" + database + "?useSSL=false&serverTimezone=UTC", userName, password);
             System.out.println("정상적으로 연결되었습니다.");
         } catch (SQLException e) {
-            System.err.println("연결 오류 : " + e.getMessage());
-            e.printStackTrace();
+            throw new JDBCConnectException("연결 오류 : " + e.getMessage());
         }
 
         return con;
-    }
-
-    public static void closeConnection(Connection con) {
-        try {
-            if (con != null) {
-                con.close();
-            }
-        } catch (SQLException e) {
-            System.out.println("con 오류 : " + e.getMessage());
-        }
     }
 }
