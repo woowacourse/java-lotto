@@ -76,7 +76,7 @@ public class ConsoleUILottoApplication {
 
         private static List<Lotto> createAutoLottos(final Payment payment, final ManualPurchaseNumber manualPurchaseNumber) {
                 try {
-                        return new LottosCreator(new AutoLottosCreatorStrategty(new AutoLottoCreatorStrategy(), payment, manualPurchaseNumber)).create();
+                        return new LottosCreator(new AutoLottosCreatorStrategty(AutoLottoCreatorStrategy.getInstance(), payment, manualPurchaseNumber)).create();
                 } catch (RuntimeException e) {
                         System.err.println(e.getMessage());
                         return createAutoLottos(payment, manualPurchaseNumber);

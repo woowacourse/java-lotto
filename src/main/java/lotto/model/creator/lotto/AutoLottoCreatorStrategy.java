@@ -8,6 +8,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class AutoLottoCreatorStrategy implements LottoCreatorStrategy {
+        private static final AutoLottoCreatorStrategy INSTANCE = new AutoLottoCreatorStrategy();
+
+        private AutoLottoCreatorStrategy() {
+        }
+
+        public static AutoLottoCreatorStrategy getInstance() {
+                return INSTANCE;
+        }
+
         @Override
         public Lotto create() {
                 List<LottoNumber> autoCreatedNumbers = new ArrayList<>();

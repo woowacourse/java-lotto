@@ -29,7 +29,7 @@ class LottosCreatorTest {
 
         @Test
         void 자동로또_생성_확인_로또개수() {
-                lottosCreator = new LottosCreator(new AutoLottosCreatorStrategty(new AutoLottoCreatorStrategy(), payment, manualPurchaseNumber));
+                lottosCreator = new LottosCreator(new AutoLottosCreatorStrategty(AutoLottoCreatorStrategy.getInstance(), payment, manualPurchaseNumber));
                 assertThat(lottosCreator.create().size()).isEqualTo(3);
         }
 
