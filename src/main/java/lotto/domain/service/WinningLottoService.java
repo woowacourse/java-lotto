@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 public class WinningLottoService {
 
     private static final String LOTTO_SEPARATOR = ",";
+    public static final int NEXT_ROUND = 1;
 
     public void addWinningLotto(final int round, final String bonusNumber, final String winningLotto) throws SQLException {
         List<Number> winningLottoNumbers = Stream.of(winningLotto.split(LOTTO_SEPARATOR))
@@ -32,8 +33,8 @@ public class WinningLottoService {
         winningLottoDAO.addWinningLotto(winningLottoDTO);
     }
 
-    public int getNewRound() throws SQLException {
+    public int getNewRound() {
         WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
-        return winningLottoDAO.getNewRound();
+        return winningLottoDAO.getLatestRound() + NEXT_ROUND;
     }
 }

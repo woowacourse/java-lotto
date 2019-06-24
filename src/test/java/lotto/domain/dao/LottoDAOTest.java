@@ -6,8 +6,6 @@ import lotto.domain.model.NumberSet;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.SQLException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoDAOTest {
@@ -42,7 +40,7 @@ public class LottoDAOTest {
     }
 
     @Test
-    public void addLotto_테스트() throws SQLException {
+    public void addLotto_테스트() {
         // lotto의 pk인 round가 winningLotto의 pk인 round와 fk로 연결되어 있어 winninglotto를 먼저 add함
         winningLottoDAO.addWinningLotto(winningLottoDTO);
         lottoDAO.addLotto(lottoDTO);
@@ -53,7 +51,7 @@ public class LottoDAOTest {
     }
 
     @Test
-    public void getPurchasedLotto_테스트() throws SQLException {
+    public void getPurchasedLotto_테스트() {
         assertThat(lottoDAO.getPurchasedLotto(1)).isNotNull();
     }
 }

@@ -6,14 +6,12 @@ import lotto.domain.model.NumberSet;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.SQLException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultDAOTest {
     private ResultDAO resultDAO;
     private ResultDTO resultDTO;
-    private WinningLottoDAO  winningLottoDAO;
+    private WinningLottoDAO winningLottoDAO;
     private WinningLottoDTO winningLottoDTO;
 
     @Before
@@ -43,7 +41,7 @@ public class ResultDAOTest {
     }
 
     @Test
-    public void addPrizeResult() throws SQLException {
+    public void addPrizeResult() {
         winningLottoDAO.addWinningLotto(winningLottoDTO);
         resultDAO.setResult(resultDTO);
         resultDAO.deleteResult(0);
@@ -51,7 +49,7 @@ public class ResultDAOTest {
     }
 
     @Test
-    public void getResult_테스트() throws SQLException {
+    public void getResult_테스트() {
         winningLottoDAO.addWinningLotto(winningLottoDTO);
         resultDAO.setResult(resultDTO);
         ResultDTO actual = resultDAO.getResult(0);

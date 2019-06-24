@@ -5,13 +5,12 @@ import lotto.domain.model.NumberSet;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.SQLException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoDAOTest {
     private WinningLottoDAO winningLottoDAO;
     private WinningLottoDTO winningLottoDTO;
+
     @Before
     public void setUp() {
         winningLottoDAO = new WinningLottoDAO();
@@ -27,18 +26,18 @@ public class WinningLottoDAOTest {
     }
 
     @Test
-    public void addWinningLotto_테스트() throws SQLException {
+    public void addWinningLotto_테스트() {
         winningLottoDAO.addWinningLotto(winningLottoDTO);
         winningLottoDAO.deleteWinningLotto(0);
     }
 
     @Test
-    public void getNewRound_테스트() throws SQLException {
-        assertThat(winningLottoDAO.getNewRound()).isNotNull();
+    public void getNewRound_테스트() {
+        assertThat(winningLottoDAO.getLatestRound()).isNotNull();
     }
 
     @Test
-    public void getWinningLotto_테스트() throws SQLException {
+    public void getWinningLotto_테스트() {
         winningLottoDAO.addWinningLotto(winningLottoDTO);
         WinningLottoDTO winningLotto = winningLottoDAO.getWinningLotto(0);
         assertThat(winningLotto.getRound()).isEqualTo(0);

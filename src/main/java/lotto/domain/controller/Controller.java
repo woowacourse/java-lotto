@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Controller {
-    public static Map<String, Object> startGame(final Request req) throws SQLException {
+    public static Map<String, Object> startGame(final Request req) {
         Map<String, Object> model = new HashMap<>();
         WinningLottoService winningLottoService = new WinningLottoService();
 
