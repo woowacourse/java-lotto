@@ -4,12 +4,12 @@ import java.util.Objects;
 
 import com.woowacourse.lotto.exception.InvalidMoneyException;
 
-public class Money {
+public class LottoMoney {
 	private static final int PERCENT = 100;
 	public static final int MINIMUM_MONEY_FOR_PURCHASE = 1000;
 	private final int money;
 
-	public Money(int money) {
+	public LottoMoney(int money) {
 		validateMoney(money);
 		this.money = money;
 	}
@@ -33,11 +33,11 @@ public class Money {
 		if (this == o) {
 			return true;
 		}
-		if (!(o instanceof Money)) {
+		if (!(o instanceof LottoMoney)) {
 			return false;
 		}
-		final Money money1 = (Money) o;
-		return money == money1.money;
+		final LottoMoney lottoMoney1 = (LottoMoney) o;
+		return money == lottoMoney1.money;
 	}
 
 	@Override

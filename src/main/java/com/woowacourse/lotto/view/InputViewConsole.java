@@ -2,13 +2,13 @@ package com.woowacourse.lotto.view;
 
 import java.util.Scanner;
 
-import com.woowacourse.lotto.domain.Money;
+import com.woowacourse.lotto.domain.LottoMoney;
 import com.woowacourse.lotto.domain.WinningLotto;
 import com.woowacourse.lotto.exception.InvalidMoneyException;
 import com.woowacourse.lotto.exception.InvalidNumberException;
 import com.woowacourse.lotto.utils.StringSeparator;
 
-public class InputView {
+public class InputViewConsole {
 	private static final String DEMAND_MONEY_FOR_LOTTO_PURCHASE = "구입금액을 입력해 주세요.";
 	private static final String DEMAND_WINNING_LOTTO = "지난 주 당첨 번호를 입력해주세요.";
 	private static final String DEMAND_BONUS_BALL = "보너스 볼을 입력해 주세요.";
@@ -17,10 +17,10 @@ public class InputView {
 	private static final String REPLACE_WHITE_SPACE = "\\s";
 	private static final Scanner SCANNER = new Scanner(System.in);
 
-	public static Money inputMoneyForPurchaseOfLotto() {
+	public static LottoMoney inputMoneyForPurchaseOfLotto() {
 		System.out.println(DEMAND_MONEY_FOR_LOTTO_PURCHASE);
 		try {
-			return new Money(Integer.parseInt(SCANNER.nextLine()));
+			return new LottoMoney(Integer.parseInt(SCANNER.nextLine()));
 		} catch (InvalidMoneyException e) {
 			System.out.println(e.getMessage());
 			return inputMoneyForPurchaseOfLotto();

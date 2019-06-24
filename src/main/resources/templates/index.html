@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <title>로또</title>
 </head>
-<body>
-Hello World!!
+<body style="font-weight: bold;">
+<div style="color : red; font-size:20pt; margin-top:5%; margin-left:30%;">
+    {{errorMessage}}
+</div>
+    <div style="font-size:40pt; margin-top:10%; margin-left:47%;">
+        LOTTO
+        <form class="bs-component" action="/lottoResult">
+            <button type="submit" class="btn btn-primary" style="size: 15px; margin-left: 25%">지난 당첨 결과</button>
+        </form>
+    </div>
+<form class="bs-component" action="/inputCountOfLotto" method="post">
+    <div style="width:500px; margin-top:3%; margin-left:35%;">
+        <br/>
+        <input class="form-control form-control-lg" type="text" placeholder="구매 금액 ex) 10000" name="lottoMoney">
+        <br/>
+        <input class="form-control form-control-lg" type="text" placeholder="수동 개수 ex) 3" name="countOfManualLotto">
+    </div>
+    <div style="width:500px; margin-top:5%; margin-left:50%;">
+        <button type="submit" class="btn btn-danger">입력</button>
+    </div>
+</form>
 </body>
 </html>

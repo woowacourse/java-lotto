@@ -1,22 +1,34 @@
 package lotto;
 
-import spark.ModelAndView;
-import spark.template.handlebars.HandlebarsTemplateEngine;
+import com.woowacourse.lotto.controller.LottoResultController;
+import com.woowacourse.lotto.controller.UserLottoController;
+import com.woowacourse.lotto.controller.WinningLottoController;
+import com.woowacourse.lotto.view.OutputViewWeb;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import static spark.Spark.get;
+import static spark.Spark.*;
 
 public class WebUILottoApplication {
-	public static void main(String[] args) {
-		get("/", (req, res) -> {
-			Map<String, Object> model = new HashMap<>();
-			return render(model, "index.html");
-		});
-	}
+	private static final WinningLottoController winningLottoController = new WinningLottoController();
+	private static final UserLottoController userLottoController = new UserLottoController();
+	private static final LottoResultController lottoResultController = new LottoResultController();
 
-	private static String render(Map<String, Object> model, String templatePath) {
-		return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
+	public static void main(String[] args) {
+		staticFiles.location("/static");
+
+		get("/", ((request, response) -> OutputViewWeb.render(new HashMap<>(), "/index.html")));
+
+		post("/inputCountOfLotto", ((request, response) -> userLottoController.inputCountOfLotto(request)));
+
+		post("inputWinningLotto", (request, response) -> winningLottoController.inputWinningLotto(request));
+
+		post("/generateLottos", (request, response) -> userLottoController.generateUserLotto(request));
+
+		post("/matchLotto", (request, response) -> lottoResultController.matchLotto(request));
+
+		get("/lottoResult", (request, response) -> lottoResultController.getLottoResult(request));
+
+		post("/searchLottoResult", ((request, response) -> lottoResultController.searchLottoResult(request)));
 	}
 }

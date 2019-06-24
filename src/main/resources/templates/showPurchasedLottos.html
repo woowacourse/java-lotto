@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <title>로또</title>
+</head>
+<body style="font-weight: bold;">
+<div style="color : red; font-size:20pt; margin-top:5%; left:40%;">
+    {{errorMessage}}
+</div>
+<fieldset>
+    <form action="matchLotto" method="post">
+        <div style="text-align: center; margin-top: 10%; font-size:20pt;">
+            수동 로또 {{countOfManualLotto}} 개, 자동 로또 {{countOfAutoLotto}} 개를 구매하셨습니다. <br/>
+            {{purchasedLotto}}
+            <br/> <br/>
+            <button type="submit" class="btn btn-danger">view results</button>
+        </div>
+    </form>
+</fieldset>
+</body>
+</html>

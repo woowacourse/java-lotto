@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <title>로또결과조회</title>
+</head>
+<body>
+<div style="color:red; font-weight: bold; font-size:20pt; margin-top:5%; margin-left:40%;">
+    {{errorMessage}}
+</div>
+<fieldset>
+    <div style="font-size :20pt; font-weight: bold;">
+        <div style="margin-left: 45%">
+            {{selectNumber}} 회차
+            <form class="bs-component" action="/">
+                <button type="submit" class="btn btn-primary" style="width:100px; margin-left: 70%">돌아가기</button>
+            </form>
+        </div>
+        <form action="/searchLottoResult" method="post" style="margin-top:2%; margin-left:38%;">
+            <select name="selectedRound" style="width:150px;">
+                {{#rounds}}
+                <option value="{{this}}">{{this}}</option>
+                {{/rounds}}
+            </select>
+            <button type="submit" class="btn btn-danger" style="width:100px; margin-left:3%">조회</button>
+        </form>
+        <div style="margin-top: 5%; margin-left: 35%;">
+            {{{ranks}}}
+            {{{earningRate}}}
+            {{{sum}}}
+        </div>
+    </div>
+</fieldset>
+</body>
+</html>

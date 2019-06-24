@@ -1,8 +1,6 @@
 package com.woowacourse.lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.woowacourse.lotto.exception.InvalidNumberException;
@@ -62,6 +60,14 @@ public class WinningLotto {
 		if (!numbers.stream().allMatch(number -> StringUtils.isNumeric(number))) {
 			throw new IllegalArgumentException(VIOLATE_LOTTO_NUMBER_RANGE);
 		}
+	}
+
+	public List<LottoNumber> getWinningLotto() {
+		return new ArrayList<>(winningLotto.getNumbers());
+	}
+
+	public int getBonusBall() {
+		return bonusBall.getName();
 	}
 
 	public int matchLotto(Lotto lotto) {
