@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>로또 구매</title>
 </head>
@@ -16,29 +17,40 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="purchasePrice" style="display:block;width:150px"><b>구입 금액</b></span>
         </div>
-        <input type="text" class="form-control" name="purchasePrice" placeholder="구입 금액은 1,000원 단위로 입력하세요" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input type="text" class="form-control" name="purchasePrice" placeholder="구입 금액은 1,000원 단위로 입력하세요"
+               aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
 
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="manualAmount" style="display:block;width:150px"><b>수동 구매 개수</b></span>
         </div>
-        <input type="text" class="form-control" name="manualAmount" placeholder="구매 수량보다 높은 개수는 입력할 수 없습니다" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input type="text" class="form-control" name="manualAmount" placeholder="구매 수량보다 높은 개수는 입력할 수 없습니다"
+               aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
 
     <div class="input-group">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="manualLotto" style="display:block;width:150px;height:100px;"><b>수동 로또 입력</b></span>
+            <span class="input-group-text" id="manualLotto"
+                  style="display:block;width:150px;height:100px;"><b>수동 로또 입력</b></span>
         </div>
-        <textarea class="form-control" name="manualLotto" placeholder="한 줄에 하나의 로또를 입력하세요&#13;&#10;번호는 1 ~ 45까지 입니다&#13;&#10;한 로또는 콤마(,)를 기준으로 6개 입니다" aria-label="With textarea"></textarea>
+        <textarea class="form-control" name="manualLotto"
+                  placeholder="한 줄에 하나의 로또를 입력하세요&#13;&#10;번호는 1 ~ 45까지 입니다&#13;&#10;한 로또는 콤마(,)를 기준으로 6개 입니다"
+                  aria-label="With textarea"></textarea>
     </div>
     <input type="submit" value="로또 생성" class="btn btn-secondary btn-lg btn-block">
 </form>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

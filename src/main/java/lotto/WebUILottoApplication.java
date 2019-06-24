@@ -64,7 +64,7 @@ public class WebUILottoApplication {
             model.put("SECOND", winningResult.getMatchedRankCountValue(Rank.SECOND));
             model.put("FIRST", winningResult.getMatchedRankCountValue(Rank.FIRST));
 
-            model.put("totalYield",winningResult.getTotalYield());
+            model.put("totalYield", winningResult.getTotalYield());
 
             return render(model, "winningResult.html");
         });

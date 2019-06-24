@@ -12,12 +12,14 @@
     <title>당첨 번호 입력</title>
 </head>
 <body>
-<p><ul class="list-group">
+<p>
+<ul class="list-group">
     <li class="list-group-item active">수동으로 {{manualAmount}}장, 자동으로 {{autoAmount}}장 구매했습니다.</li>
     {{#userTickets}}
     <li class="list-group-item">{{this}}</li>
     {{/userTickets}}
-</ul></p>
+</ul>
+</p>
 
 <form action="/winningResult" method="GET">
     <div class="input-group mb-3">
