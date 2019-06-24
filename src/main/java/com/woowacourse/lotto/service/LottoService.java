@@ -36,9 +36,9 @@ public class LottoService {
 
     public LottoService() {
         DataSource ds = createDataSource();
-        lottoDao = new LottoDao(ds);
-        winningLottoDao = new WinningLottoDao(ds);
-        aggregationDao = new AggregationDao(ds);
+        lottoDao = LottoDao.getInstance(ds);
+        winningLottoDao = WinningLottoDao.getInstance(ds);
+        aggregationDao = AggregationDao.getInstance(ds);
     }
 
     public LottoDto addLotto(Lotto lotto) {

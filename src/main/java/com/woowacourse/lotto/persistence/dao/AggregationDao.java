@@ -9,9 +9,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class AggregationDao {
+    private static AggregationDao instance;
+
     private final DataSource dataSource;
 
-    public AggregationDao(DataSource ds) {
+    public static AggregationDao getInstance(DataSource ds) {
+        if (instance == null) {
+            instance = new AggregationDao(ds);
+        }
+        return instance;
+    }
+
+    private AggregationDao(DataSource ds) {
         this.dataSource = ds;
     }
 
@@ -124,7 +133,7 @@ public class AggregationDao {
         List<AggregationDto> results = new ArrayList<>();
 
         while (rs.next()) {
-            mapAggregationResult(rs).ifPresent(results::add);
+            results.add(mapAggregationResult(rs));
         }
         return results;
     }
@@ -149,22 +158,23 @@ public class AggregationDao {
         if (!rs.next()) {
             return Optional.empty();
         }
-        return mapAggregationResult(rs);
+        return Optional.of(mapAggregationResult(rs));
     }
 
-    private Optional<AggregationDto> mapAggregationResult(ResultSet rs) throws SQLException {
-        AggregationDto aggregation = new AggregationDto();
-        aggregation.setId(rs.getLong("id"));
-        aggregation.setLottoRound(rs.getInt("lotto_round"));
-        aggregation.setCntFirst(rs.getInt("cnt_first"));
-        aggregation.setCntSecond(rs.getInt("cnt_second"));
-        aggregation.setCntThird(rs.getInt("cnt_third"));
-        aggregation.setCntFourth(rs.getInt("cnt_fourth"));
-        aggregation.setCntFifth(rs.getInt("cnt_fifth"));
-        aggregation.setCntNone(rs.getInt("cnt_none"));
-        aggregation.setPrizeMoneySum(rs.getLong("prize_money_sum"));
-        aggregation.setRegDate(rs.getTimestamp("reg_date").toLocalDateTime());
-        return Optional.of(aggregation);
+    private AggregationDto mapAggregationResult(ResultSet rs) throws SQLException {
+        return AggregationDto.of(
+            rs.getLong("id"),
+            rs.getInt("lotto_round"),
+            rs.getInt("cnt_first"),
+            rs.getInt("cnt_second"),
+            rs.getInt("cnt_third"),
+            rs.getInt("cnt_fourth"),
+            rs.getInt("cnt_fifth"),
+            rs.getInt("cnt_none"),
+            rs.getLong("prize_money_sum"),
+            null, null,
+            rs.getTimestamp("reg_date").toLocalDateTime()
+        );
     }
 
     public int deleteById(long id) throws SQLException {

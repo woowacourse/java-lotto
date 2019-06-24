@@ -10,7 +10,7 @@ public class TestDataSourceFactory {
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "root";
 
-    public DataSource createDataSource() {
+    public static DataSource createDataSource() {
         MysqlDataSource ds = new MysqlDataSource();
         ds.setUrl("jdbc:mysql://" + DB_HOST + "/" + DB_NAME + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC");
         ds.setUser(DB_USER);

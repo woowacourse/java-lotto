@@ -9,9 +9,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class LottoDao {
+    private static LottoDao instance;
+
     private final DataSource dataSource;
 
-    public LottoDao(DataSource ds) {
+    public static LottoDao getInstance(DataSource ds) {
+        if (instance == null) {
+            instance = new LottoDao(ds);
+        }
+        return instance;
+    }
+
+    private LottoDao(DataSource ds) {
         this.dataSource = ds;
     }
 
@@ -77,7 +86,7 @@ public class LottoDao {
     private List<LottoDto> mapResults(ResultSet rs) throws SQLException {
         List<LottoDto> lottos = new ArrayList<>();
         while (rs.next()) {
-            mapResult(rs).ifPresent(lottos::add);
+            lottos.add(mapResult(rs));
         }
 
         return lottos;
@@ -87,21 +96,21 @@ public class LottoDao {
         if (!rs.next()) {
             return Optional.empty();
         }
-        return mapResult(rs);
+        return Optional.of(mapResult(rs));
     }
 
-    private Optional<LottoDto> mapResult(ResultSet rs) throws SQLException {
-        LottoDto found = new LottoDto();
-        found.setId(rs.getLong("id"));
-        found.setNumber0(rs.getInt("number_0"));
-        found.setNumber1(rs.getInt("number_1"));
-        found.setNumber2(rs.getInt("number_2"));
-        found.setNumber3(rs.getInt("number_3"));
-        found.setNumber4(rs.getInt("number_4"));
-        found.setNumber5(rs.getInt("number_5"));
-        found.setPrice(rs.getInt("price"));
-        found.setRegDate(rs.getTimestamp("reg_date").toLocalDateTime());
-        return Optional.of(found);
+    private LottoDto mapResult(ResultSet rs) throws SQLException {
+        return LottoDto.of(
+            rs.getLong("id"),
+            rs.getInt("number_0"),
+            rs.getInt("number_1"),
+            rs.getInt("number_2"),
+            rs.getInt("number_3"),
+            rs.getInt("number_4"),
+            rs.getInt("number_5"),
+            rs.getInt("price"),
+            rs.getTimestamp("reg_date").toLocalDateTime()
+        );
     }
 
 

@@ -7,9 +7,18 @@ import java.sql.*;
 import java.util.Optional;
 
 public class WinningLottoDao {
+    private static WinningLottoDao instance;
+
     private DataSource dataSource;
 
-    public WinningLottoDao(DataSource ds) {
+    public static WinningLottoDao getInstance(DataSource ds) {
+        if (instance == null) {
+            instance = new WinningLottoDao(ds);
+        }
+        return instance;
+    }
+
+    private WinningLottoDao(DataSource ds) {
         this.dataSource = ds;
     }
 
@@ -58,7 +67,7 @@ public class WinningLottoDao {
         if (!rs.next()) {
             return Optional.empty();
         }
-        return mapResult(rs);
+        return Optional.of(mapResult(rs));
     }
 
     public Optional<WinningLottoDto> findByAggregationId(long aggregationId) throws SQLException {
@@ -70,18 +79,18 @@ public class WinningLottoDao {
         }
     }
 
-    private Optional<WinningLottoDto> mapResult(ResultSet rs) throws SQLException {
-        WinningLottoDto found = new WinningLottoDto();
-        found.setId(rs.getLong("id"));
-        found.setWinningNumber0(rs.getInt("winning_number_0"));
-        found.setWinningNumber1(rs.getInt("winning_number_1"));
-        found.setWinningNumber2(rs.getInt("winning_number_2"));
-        found.setWinningNumber3(rs.getInt("winning_number_3"));
-        found.setWinningNumber4(rs.getInt("winning_number_4"));
-        found.setWinningNumber5(rs.getInt("winning_number_5"));
-        found.setWinningBonusNumber(rs.getInt("winning_number_bonus"));
-        found.setRegDate(rs.getTimestamp("reg_date").toLocalDateTime());
-        return Optional.of(found);
+    private WinningLottoDto mapResult(ResultSet rs) throws SQLException {
+        return WinningLottoDto.of(
+            rs.getLong("id"),
+            rs.getInt("winning_number_0"),
+            rs.getInt("winning_number_1"),
+            rs.getInt("winning_number_2"),
+            rs.getInt("winning_number_3"),
+            rs.getInt("winning_number_4"),
+            rs.getInt("winning_number_5"),
+            rs.getInt("winning_number_bonus"),
+            rs.getTimestamp("reg_date").toLocalDateTime()
+        );
     }
 
     public int deleteById(long id) throws SQLException {

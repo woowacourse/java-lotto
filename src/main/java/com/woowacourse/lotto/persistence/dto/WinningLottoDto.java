@@ -13,6 +13,20 @@ public class WinningLottoDto {
     private int winningBonusNumber;
     private LocalDateTime regDate;
 
+    public static WinningLottoDto of(long id, int winningNumber0, int winningNumber1, int winningNumber2, int winningNumber3,
+                                     int winningNumber4, int winningNumber5, int winningNumberBonus, LocalDateTime regDate) {
+        WinningLottoDto dto = new WinningLottoDto();
+        dto.setId(id);
+        dto.setWinningNumber0(winningNumber0);
+        dto.setWinningNumber1(winningNumber1);
+        dto.setWinningNumber2(winningNumber2);
+        dto.setWinningNumber3(winningNumber3);
+        dto.setWinningNumber4(winningNumber4);
+        dto.setWinningNumber5(winningNumber5);
+        dto.setWinningBonusNumber(winningNumberBonus);
+        dto.setRegDate(regDate);
+        return dto;
+    }
 
     public long getId() {
         return id;

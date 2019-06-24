@@ -20,19 +20,13 @@ public class LottoDaoTest {
     private static Queue<Long> lottoIdsToClean = new LinkedList<>();
 
     static {
-        TEMP_LOTTO = new LottoDto();
-        TEMP_LOTTO.setNumber0(22);
-        TEMP_LOTTO.setNumber1(33);
-        TEMP_LOTTO.setNumber2(44);
-        TEMP_LOTTO.setNumber3(31);
-        TEMP_LOTTO.setNumber4(29);
-        TEMP_LOTTO.setNumber5(17);
-        TEMP_LOTTO.setPrice(1000);
+        TEMP_LOTTO = LottoDto.of(0, 22, 33, 44, 31,
+            29, 17, 1000, null);
     }
 
     @BeforeAll
     static void init() {
-        lottoDao = new LottoDao(new TestDataSourceFactory().createDataSource());
+        lottoDao = LottoDao.getInstance(TestDataSourceFactory.createDataSource());
     }
 
     @AfterAll

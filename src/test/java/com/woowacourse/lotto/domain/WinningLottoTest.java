@@ -1,6 +1,5 @@
 package com.woowacourse.lotto.domain;
 
-import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

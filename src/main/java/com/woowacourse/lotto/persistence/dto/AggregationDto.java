@@ -17,6 +17,24 @@ public class AggregationDto {
     private List<LottoDto> lottos;
     private WinningLottoDto winningLotto;
 
+    public static AggregationDto of(long id, int lottoRound, int cntFirst, int cntSecond, int cntThird, int cntFourth, int cntFifth,
+                                    int cntNone, long prizeMoneySum, List<LottoDto> lottos, WinningLottoDto winningLotto, LocalDateTime regDate) {
+        AggregationDto dto = new AggregationDto();
+        dto.setId(id);
+        dto.setLottoRound(lottoRound);
+        dto.setCntFirst(cntFirst);
+        dto.setCntSecond(cntSecond);
+        dto.setCntThird(cntThird);
+        dto.setCntFourth(cntFourth);
+        dto.setCntFifth(cntFifth);
+        dto.setCntNone(cntNone);
+        dto.setPrizeMoneySum(prizeMoneySum);
+        dto.setLottos(lottos);
+        dto.setWinningLotto(winningLotto);
+        dto.setRegDate(regDate);
+        return dto;
+    }
+
     public long getId() {
         return id;
     }

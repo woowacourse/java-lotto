@@ -31,7 +31,7 @@ public class WinningLottoDaoTest {
 
     @BeforeAll
     static void init() {
-        winningLottoDao = new WinningLottoDao(new TestDataSourceFactory().createDataSource());
+        winningLottoDao = WinningLottoDao.getInstance(TestDataSourceFactory.createDataSource());
     }
 
     @BeforeAll

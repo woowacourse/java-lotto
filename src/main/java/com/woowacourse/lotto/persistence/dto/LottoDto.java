@@ -13,6 +13,21 @@ public class LottoDto {
     private int price;
     private LocalDateTime regDate;
 
+    public static LottoDto of(long id, int number0, int number1, int number2, int number3,
+                              int number4, int number5, int price, LocalDateTime regDate) {
+        LottoDto dto = new LottoDto();
+        dto.setId(id);
+        dto.setNumber0(number0);
+        dto.setNumber1(number1);
+        dto.setNumber2(number2);
+        dto.setNumber3(number3);
+        dto.setNumber4(number4);
+        dto.setNumber5(number5);
+        dto.setPrice(price);
+        dto.setRegDate(regDate);
+        return dto;
+    }
+
     public long getId() {
         return id;
     }
