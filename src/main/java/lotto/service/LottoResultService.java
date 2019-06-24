@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResultService {
+    private LottoResultService(){
+
+    }
     public static int findPresentRound() {
         return LottoResultDAO.getInstance().findPresentRound();
     }

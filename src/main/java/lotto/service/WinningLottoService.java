@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningLottoService {
+    private WinningLottoService(){
+
+    }
     public static void insertWinningLotto(int round, WinningLotto winningLotto) {
         List<Integer> lottoNumbers = winningLotto.getWinningLotto().getNumbers();
         int bonusNumber = winningLotto.getBonusNumber().getLottoNumber();

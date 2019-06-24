@@ -7,6 +7,9 @@ import lottogame.domain.LottoTickets;
 import java.util.List;
 
 public class LottoTicketsService {
+    private LottoTicketsService(){
+
+    }
     public static void insertPurchaseResult(int round, LottoTickets lottoTickets) {
         List<Lotto> lottos = lottoTickets.getLottos();
         for (Lotto lotto : lottos) {
