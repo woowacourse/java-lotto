@@ -11,7 +11,7 @@ public class PaymentInfoService {
     private PaymentInfoService() {
     }
 
-    public static class PaymentServiceHolder{
+    private static class PaymentServiceHolder {
         private static final PaymentInfoService INSTANCE = new PaymentInfoService();
     }
 

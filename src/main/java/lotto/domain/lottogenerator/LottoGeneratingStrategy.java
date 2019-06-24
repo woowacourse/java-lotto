@@ -6,7 +6,7 @@ import java.util.List;
 public interface LottoGeneratingStrategy {
     List<Integer> generate();
 
-    default boolean isAuto(){
+    default boolean isAuto() {
         return true;
     }
 }
