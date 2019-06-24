@@ -9,17 +9,24 @@ import java.util.Map;
 
 public class JdbcTemplate {
     public static void query(String sql, Map<String, ?> rowMapper, PreparedStatementProcessor preparedStatementProcessor) throws SQLException {
-        NamedSqlMapper namedSqlMapper = NamedSqlMapper.mapSql(sql, rowMapper);
+        NamedSqlMapper namedSqlMapper = NamedSqlMapper.mapSQL(sql);
         try (Connection connection = DBCPDataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(namedSqlMapper.getMappedSql(), PreparedStatement.RETURN_GENERATED_KEYS)) {
-            Map<Integer, String> indexMap = namedSqlMapper.getIndexMap();
-            for (Integer index : indexMap.keySet()) {
-                preparedStatement.setObject(index, rowMapper.get(indexMap.get(index)));
-            }
+             PreparedStatement preparedStatement = connection.prepareStatement(namedSqlMapper.getMappedSQL(), PreparedStatement.RETURN_GENERATED_KEYS)) {
 
+            setPreparedStatementParameter(preparedStatement, rowMapper, namedSqlMapper.getIndexMap());
             preparedStatementProcessor.process(preparedStatement);
         } catch (SQLException e) {
-            throw e;
+            e.printStackTrace();
         }
+    }
+
+    private static void setPreparedStatementParameter(PreparedStatement preparedStatement, Map<String, ?> rowMapper, Map<Integer, String> indexMap) {
+        indexMap.keySet().forEach(index -> {
+            try {
+                preparedStatement.setObject(index, rowMapper.get(indexMap.get(index)));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
