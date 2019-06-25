@@ -18,7 +18,7 @@ public class LottoTicketDAO {
     private static final String insertQuery = "INSERT INTO lotto_tickets (round, num1, num2, num3, num4, num5, num6) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String selectQuery = "SELECT * FROM lotto_tickets WHERE round = ?";
 
-    private final Connection connection;
+    private Connection connection;
 
     private LottoTicketDAO(Connection connection) {
         this.connection = connection;
@@ -27,6 +27,10 @@ public class LottoTicketDAO {
     public static LottoTicketDAO getInstance(Connection connection) {
         if (instance == null) {
             instance = new LottoTicketDAO(connection);
+        }
+
+        if (instance.connection != connection) {
+            instance.connection = connection;
         }
         return instance;
     }

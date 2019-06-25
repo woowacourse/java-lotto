@@ -14,7 +14,7 @@ public class LottoRoundDAO {
     private static final String selectQuery = "SELECT * FROM lotto_rounds WHERE round>0";
     private static final String selectMaxQuery = "SELECT MAX(round) FROM lotto_rounds";
 
-    private final Connection connection;
+    private Connection connection;
 
     private LottoRoundDAO(Connection connection) {
         this.connection = connection;
@@ -23,6 +23,10 @@ public class LottoRoundDAO {
     public static LottoRoundDAO getInstance(Connection connection) {
         if (instance == null) {
             instance = new LottoRoundDAO(connection);
+        }
+
+        if (instance.connection != connection) {
+            instance.connection = connection;
         }
         return instance;
     }

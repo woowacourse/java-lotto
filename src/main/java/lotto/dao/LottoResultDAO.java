@@ -20,7 +20,7 @@ public class LottoResultDAO {
     private static final String insertQuery = "INSERT INTO results (round, fail_rank, fifth_rank, fourth_rank, third_rank, second_rank, first_rank, winning_reward, earning_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String selectQuery = "SELECT first_rank, second_rank, third_rank, fourth_rank, fifth_rank, fail_rank, winning_reward, earning_rate FROM results WHERE round=?";
 
-    private final Connection connection;
+    private Connection connection;
 
     private LottoResultDAO(Connection connection) {
         this.connection = connection;
@@ -29,6 +29,9 @@ public class LottoResultDAO {
     public static LottoResultDAO getInstance(Connection connection) {
         if (instance == null) {
             instance = new LottoResultDAO(connection);
+        }
+        if (instance.connection != connection) {
+            instance.connection = connection;
         }
         return instance;
     }

@@ -15,7 +15,7 @@ public class LottoHistoryDAO {
             + "first_rank, second_rank, third_rank, fourth_rank, fifth_rank, fail_rank, winning_reward, earning_rate "
             + "FROM results a, winning_lotto b WHERE a.round=? and b.round=?";
 
-    private final Connection connection;
+    private Connection connection;
 
     private LottoHistoryDAO(Connection connection) {
         this.connection = connection;
@@ -24,6 +24,10 @@ public class LottoHistoryDAO {
     public static LottoHistoryDAO getInstance(Connection connection) {
         if (instance == null) {
             instance = new LottoHistoryDAO(connection);
+        }
+
+        if (instance.connection != connection) {
+            instance.connection = connection;
         }
         return instance;
     }
