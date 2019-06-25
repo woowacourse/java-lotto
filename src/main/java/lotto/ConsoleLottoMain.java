@@ -2,33 +2,24 @@ package lotto;
 
 import lotto.domain.UserLottos;
 import lotto.domain.WinningLotto;
-import lotto.domain.exceptions.ExceptionMessages;
-import lotto.domain.exceptions.LottoTicketException;
 import lotto.dto.LottoResultDto;
-import lotto.service.UserLottosCreator;
-import lotto.service.WinningLottoCreator;
+import lotto.presentation.UserLottoPresentation;
+import lotto.presentation.WinningLottoPresentation;
+import lotto.service.UserLottoService;
+import lotto.service.WinningLottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class ConsoleLottoMain {
     public static void main(String[] args) {
-        String lottoMoney = InputView.lottoMoney();
-        int manualCount = toManualLottoCount(InputView.manualLottoCount());
 
-        UserLottosCreator userTicketCreator = new UserLottosCreator(lottoMoney, manualCount, InputView.manualLottoNumber(manualCount));
-        UserLottos userLottos = userTicketCreator.create();
+        UserLottoPresentation userLottoPresentation = InputView.userLottoPresentation();
+        UserLottos userLottos = UserLottoService.userLottos(userLottoPresentation.getLottoMoney(), userLottoPresentation.getManualCount(), userLottoPresentation.getManualNumbers());
         OutputView.printLottos(userLottos);
 
-        WinningLottoCreator winningTicketCreator = new WinningLottoCreator(InputView.winningLottoNumber(), InputView.winningLottoBonus());
-        WinningLotto winningLotto = winningTicketCreator.create();
-        OutputView.printResult(new LottoResultDto(userLottos.result(winningLotto)));
-    }
+        WinningLottoPresentation winningLottoPresentation = InputView.winningLottoPresentation();
+        WinningLotto winningLotto = WinningLottoService.insertWinningLotto(winningLottoPresentation.getNumbers(), winningLottoPresentation.getBonus());
 
-    private static int toManualLottoCount(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new LottoTicketException(ExceptionMessages.TICKET.message());
-        }
+        OutputView.printResult(new LottoResultDto(userLottos.result(winningLotto)));
     }
 }
