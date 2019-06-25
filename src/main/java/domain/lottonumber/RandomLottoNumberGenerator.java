@@ -2,7 +2,7 @@ package domain.lottonumber;
 
 import java.util.*;
 
-public class LottoNumberPool {
+public class RandomLottoNumberGenerator {
     private static final int BASE_SEED = 0;
     private static final List<LottoNumber> pool = new ArrayList<>();
 
@@ -12,14 +12,7 @@ public class LottoNumberPool {
         }
     }
 
-    public static LottoNumber pickLottoNumber(int number) {
-        return pool.stream()
-                .filter(lottonumber -> lottonumber.isOf(number))
-                .findFirst()
-                .orElseThrow(IllegalLottoNumberException::new);
-    }
-
-    public static Set<LottoNumber> randomPickAsManyAs(int numberOfLottoNumber) {
+    public static Set<LottoNumber> generateNumbersAsManyAs(int numberOfLottoNumber) {
         if (numberOfLottoNumber > pool.size()) {
             throw new IllegalArgumentException("뽑을 수 있는 로또 번호의 개수는 45개를 넘을 수 없습니다.");
         }

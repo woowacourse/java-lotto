@@ -1,7 +1,6 @@
 package domain;
 
 import domain.lottonumber.LottoNumber;
-import domain.lottonumber.LottoNumberPool;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +15,10 @@ class LottoFactoryTest {
 
     @BeforeEach
     void setUp() {
-        sixNumbers = new TreeSet<>(Arrays.asList(LottoNumberPool.pickLottoNumber(1),
-                LottoNumberPool.pickLottoNumber(2), LottoNumberPool.pickLottoNumber(3),
-                LottoNumberPool.pickLottoNumber(4), LottoNumberPool.pickLottoNumber(5),
-                LottoNumberPool.pickLottoNumber(6)));
+        sixNumbers = new TreeSet<>(Arrays.asList(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
     }
 
     @Test
@@ -33,7 +32,7 @@ class LottoFactoryTest {
 
     @Test
     void 당첨_로또를_제대로_발행해주는지_테스트() {
-        LottoNumber bonusNumber = LottoNumberPool.pickLottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
         WinningLotto expectedWinningLotto = new WinningLotto(sixNumbers, bonusNumber);
 
         assertThat(LottoFactory.issueWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber))

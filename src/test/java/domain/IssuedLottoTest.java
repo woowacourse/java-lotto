@@ -1,11 +1,12 @@
 package domain;
 
 import domain.lottonumber.LottoNumber;
-import domain.lottonumber.LottoNumberPool;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,12 +22,12 @@ class IssuedLottoTest {
 
     @BeforeEach
     void setUp() {
-        one = LottoNumberPool.pickLottoNumber(1);
-        two = LottoNumberPool.pickLottoNumber(2);
-        three = LottoNumberPool.pickLottoNumber(3);
-        four = LottoNumberPool.pickLottoNumber(4);
-        five = LottoNumberPool.pickLottoNumber(5);
-        six = LottoNumberPool.pickLottoNumber(6);
+        one = LottoNumber.valueOf(1);
+        two = LottoNumber.valueOf(2);
+        three = LottoNumber.valueOf(3);
+        four = LottoNumber.valueOf(4);
+        five = LottoNumber.valueOf(5);
+        six = LottoNumber.valueOf(6);
         lottoNumberFromOneToSix = new TreeSet<>(Arrays.asList(one, two, three, four, five, six));
     }
 

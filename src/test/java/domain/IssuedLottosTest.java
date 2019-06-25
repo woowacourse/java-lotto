@@ -1,7 +1,6 @@
 package domain;
 
 import domain.lottonumber.LottoNumber;
-import domain.lottonumber.LottoNumberPool;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,14 +16,14 @@ class IssuedLottosTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumbersOfOneToSix = new TreeSet<>(Arrays.asList(LottoNumberPool.pickLottoNumber(1),
-                LottoNumberPool.pickLottoNumber(2), LottoNumberPool.pickLottoNumber(3),
-                LottoNumberPool.pickLottoNumber(4), LottoNumberPool.pickLottoNumber(5),
-                LottoNumberPool.pickLottoNumber(6)));
-        lottoNumbersOfTwoToSeven = new TreeSet<>(Arrays.asList(LottoNumberPool.pickLottoNumber(2),
-                LottoNumberPool.pickLottoNumber(3), LottoNumberPool.pickLottoNumber(4),
-                LottoNumberPool.pickLottoNumber(5), LottoNumberPool.pickLottoNumber(6),
-                LottoNumberPool.pickLottoNumber(7)));
+        lottoNumbersOfOneToSix = new TreeSet<>(Arrays.asList(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
+        lottoNumbersOfTwoToSeven = new TreeSet<>(Arrays.asList(LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3), LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5), LottoNumber.valueOf(6),
+                LottoNumber.valueOf(7)));
     }
 
     @Test

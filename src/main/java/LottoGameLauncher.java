@@ -1,6 +1,5 @@
 import domain.*;
-import domain.lottonumber.LottoNumberPool;
-import domain.IllegalNumberOfManualIssueException;
+import domain.lottonumber.LottoNumber;
 import utils.StringParser;
 import view.InputView;
 import view.OutputView;
@@ -74,7 +73,7 @@ public class LottoGameLauncher {
         try {
             List<Integer> winningNumbers = StringParser.parseNumbers(InputView.inputWinningNumbers());
             int bonusNumber = StringParser.parseInt(InputView.inputBonusNumber());
-            return LottoFactory.issueWinningLotto(winningNumbers, LottoNumberPool.pickLottoNumber(bonusNumber));
+            return LottoFactory.issueWinningLotto(winningNumbers, LottoNumber.valueOf(bonusNumber));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             OutputView.show404NotFound();

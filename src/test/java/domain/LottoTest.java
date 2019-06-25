@@ -1,7 +1,6 @@
 package domain;
 
 import domain.lottonumber.LottoNumber;
-import domain.lottonumber.LottoNumberPool;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,11 +19,11 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        one = LottoNumberPool.pickLottoNumber(1);
-        two = LottoNumberPool.pickLottoNumber(2);
-        three = LottoNumberPool.pickLottoNumber(3);
-        four = LottoNumberPool.pickLottoNumber(4);
-        five = LottoNumberPool.pickLottoNumber(5);
+        one = LottoNumber.valueOf(1);
+        two = LottoNumber.valueOf(2);
+        three = LottoNumber.valueOf(3);
+        four = LottoNumber.valueOf(4);
+        five = LottoNumber.valueOf(5);
     }
 
     @Test

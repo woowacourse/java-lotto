@@ -1,9 +1,12 @@
 package domain;
 
 import domain.lottonumber.LottoNumber;
-import domain.lottonumber.LottoNumberPool;
+import domain.lottonumber.RandomLottoNumberGenerator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoFactory {
     public static IssuedLottos autoIssueLottoWorthOf(Money purchaseAmount) {
@@ -17,7 +20,7 @@ public class LottoFactory {
     }
 
     private static IssuedLotto autoIssueLotto() {
-        Set<LottoNumber> randomLottoNumbers = LottoNumberPool.randomPickAsManyAs(Lotto.NUMBER_OF_LOTTO_NUMBERS);
+        Set<LottoNumber> randomLottoNumbers = RandomLottoNumberGenerator.generateNumbersAsManyAs(Lotto.NUMBER_OF_LOTTO_NUMBERS);
         return new IssuedLotto(randomLottoNumbers);
     }
 
@@ -30,7 +33,7 @@ public class LottoFactory {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
 
         for (Integer number : inputNumbers) {
-            lottoNumbers.add(LottoNumberPool.pickLottoNumber(number));
+            lottoNumbers.add(LottoNumber.valueOf(number));
         }
         return lottoNumbers;
     }
