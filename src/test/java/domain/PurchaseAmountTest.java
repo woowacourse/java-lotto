@@ -1,5 +1,7 @@
 package domain;
 
+import domain.money.IllegalNumberOfManualIssueException;
+import domain.money.PurchaseAmount;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

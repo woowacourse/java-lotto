@@ -1,6 +1,6 @@
 package utils;
 
-import domain.PurchaseAmount;
+import domain.money.PurchaseAmount;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,8 +1,8 @@
 import domain.*;
 import domain.lottonumber.LottoNumber;
+import domain.money.*;
 import utils.StringParser;
-import view.InputView;
-import view.OutputView;
+import view.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class LottoGameLauncher {
             String moneyFromPlayer = InputView.inputPurchaseAmount();
             int amount = StringParser.parsePurchaseAmount(moneyFromPlayer);
             return PurchaseAmount.valueOf(amount);
-        } catch (IllegalPurchasementException e) {
+        } catch (IllegalPurchasementException | NumberFormatException e) {
             System.out.println(e.getMessage());
             OutputView.show404NotFound();
             throw new RuntimeException();

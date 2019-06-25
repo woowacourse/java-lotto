@@ -1,5 +1,7 @@
 package domain;
 
+import domain.money.Money;
+
 import java.util.Map;
 
 public class Statistics {

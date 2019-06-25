@@ -1,5 +1,6 @@
 package domain;
 
+import domain.money.PurchaseAmount;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumMap;

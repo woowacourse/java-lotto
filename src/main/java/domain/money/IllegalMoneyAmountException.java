@@ -1,4 +1,4 @@
-package domain;
+package domain.money;
 
 public class IllegalMoneyAmountException extends IllegalArgumentException {
     public IllegalMoneyAmountException() {

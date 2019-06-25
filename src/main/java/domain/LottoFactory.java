@@ -2,6 +2,7 @@ package domain;
 
 import domain.lottonumber.LottoNumber;
 import domain.lottonumber.RandomLottoNumberGenerator;
+import domain.money.Money;
 
 import java.util.ArrayList;
 import java.util.List;

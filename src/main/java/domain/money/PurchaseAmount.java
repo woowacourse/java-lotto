@@ -1,4 +1,6 @@
-package domain;
+package domain.money;
+
+import domain.IssuedLotto;
 
 public class PurchaseAmount extends Money {
     public static final int MINIMUM_AMOUNT = 1000;

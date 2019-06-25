@@ -5,7 +5,7 @@ import domain.lottonumber.LottoNumber;
 import java.util.Set;
 
 public class IssuedLotto extends Lotto {
-    static final int PRICE = 1000;
+    public static final int PRICE = 1000;
 
     IssuedLotto(Set<LottoNumber> lottoNumbers) {
         super(lottoNumbers);

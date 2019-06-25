@@ -1,6 +1,7 @@
 package domain;
 
 import domain.lottonumber.LottoNumber;
+import domain.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

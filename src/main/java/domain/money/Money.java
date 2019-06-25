@@ -1,4 +1,4 @@
-package domain;
+package domain.money;
 
 public class Money {
     private static final int MINIMUM_AMOUNT = 0;
@@ -15,11 +15,11 @@ public class Money {
         }
     }
 
-    static Money valueOf(int amountOfMoney) {
+    public static Money valueOf(int amountOfMoney) {
         return new Money(amountOfMoney);
     }
 
-    int getAmount() {
+    public int getAmount() {
         return amountOfMoney;
     }
 
