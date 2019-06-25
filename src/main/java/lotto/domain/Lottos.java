@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -28,13 +31,7 @@ public class Lottos {
         return result;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            sb.append(lotto);
-            sb.append("\n");
-        }
-        return sb.toString();
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }

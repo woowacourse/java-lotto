@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+<p>
+    총 구매하는 로또 수는 {{countOfPurchase}}개 입니다.<br/>
+    수동으로 생성할 로또 개수만큼 번호를 입력해주세요.<br/>
+    개행으로 로또를 구분합니다.<br/>
+</p>
+<p>수동으로 구매할 로또의 수를 입력하세요.</p>
+<form action="/lotto" method="post">
+    <input type="text" name="countOfManual" placeholder="수동 구매 개수"> 개<br/><br/>
+    <br/>
+    <textarea name="manualLottoNumbers" placeholder="수동 구매 로또 번호"></textarea><br/><br/>
+    <input type="submit" value="로또 발급"><br/><br/>
+</form>
+</body>
+</html>

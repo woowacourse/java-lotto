@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+<h2>로또 발급</h2>
+<div>
+    {{#lottosDto.lottos}}
+    <ul>
+        <li>{{this}}</li>
+    </ul>
+    {{/lottosDto.lottos}}
+</div>
+<br/><br/>
+<div>
+    당첨 번호와 보너스 번호를 입력해주세요.<br/><br/>
+    <form action="/winning" method="post">
+        <input type="text" name="winningLottoNumbers" placeholder="당첨 번호"><br/><br/>
+        <input type="text" name="bonusNumber" placeholder="보너스 번호"><br/><br/>
+        <input type="submit" value="입력"><br/><br/>
+    </form>
+</div>
+</body>
+</html>
