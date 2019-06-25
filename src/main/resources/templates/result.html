@@ -5,9 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<div>총 수익률은 {{yield}} 입니다.</div>
+<div>
 {{#lottoResult}}
-    {{.}}<br>
+    <div>{{key.rank}}개 일치 ({{key.money}}원) - {{value}}개</div>
 {{/lottoResult}}
+</div>
+<div>총 수익률은 {{yield}}% 입니다.</div>
+<button onclick="location.href='/'">처음으로</button>
 </body>
 </html>
