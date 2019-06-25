@@ -1,14 +1,34 @@
 package lotto.dao;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class DAOConnector {
     public static Connection getConnection() {
+        Properties properties = getProperties();
+        Connection con = null;
+        String url = properties.getProperty("jdbc.url");
+        String userName = properties.getProperty("jdbc.username");
+        String password = properties.getProperty("jdbc.password");
+
+        // 드라이버 로딩
+        loadDriver();
+
+        // 드라이버 연결
+        con = connectDriver(con, url, userName, password);
+
+        return con;
+    }
+
+    private static Properties getProperties() {
         Properties properties = new Properties();
         FileInputStream in;
         try {
@@ -18,20 +38,19 @@ public class DAOConnector {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        Connection con = null;
-        String url = properties.getProperty("jdbc.url");
-        String userName = properties.getProperty("jdbc.username");
-        String password = properties.getProperty("jdbc.password");
+        return properties;
+    }
 
-        // 드라이버 로딩
+    private static void loadDriver() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.err.println(" !! JDBC Driver load 오류: " + e.getMessage());
             e.printStackTrace();
         }
+    }
 
-        // 드라이버 연결
+    private static Connection connectDriver(Connection con, String url, String userName, String password) {
         try {
             con = DriverManager.getConnection(url, userName, password);
             System.out.println("정상적으로 연결되었습니다.");
@@ -39,7 +58,6 @@ public class DAOConnector {
             System.err.println("연결 오류:" + e.getMessage());
             e.printStackTrace();
         }
-
         return con;
     }
 
@@ -52,4 +70,6 @@ public class DAOConnector {
             System.err.println("con 오류:" + e.getMessage());
         }
     }
+
+
 }
