@@ -42,6 +42,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number > MAX_NUMBER || number < MINIMUN_NUMBER;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public int compareTo(final LottoNumber o) {
         return number - o.number;

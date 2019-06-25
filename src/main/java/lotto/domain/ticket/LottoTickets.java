@@ -24,6 +24,10 @@ public class LottoTickets {
         return lottoTickets.get(order);
     }
 
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
+
     public int lottoTicketsSize() {
         return lottoTickets.size();
     }

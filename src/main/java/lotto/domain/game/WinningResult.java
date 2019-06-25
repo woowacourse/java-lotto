@@ -37,5 +37,4 @@ public class WinningResult {
                 .sum();
         return winningMoney / (double) (lottoTicketsAmount * Money.getLottoPrice()) * 100;
     }
-
 }

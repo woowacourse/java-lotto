@@ -8,6 +8,7 @@ import java.util.*;
 
 public class LottoTicket {
     private static final int MAX_LOTTO_TICKET_NUMBER = 6;
+
     private final SortedSet<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
@@ -44,6 +45,10 @@ public class LottoTicket {
 
     public boolean isContainsBonusNumber(final LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
+    }
+
+    public SortedSet<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
