@@ -13,6 +13,7 @@ import java.util.Set;
 public class WinningLottoDAO {
     private final Connection connection;
     private final int WINNING_NUMBER_LENGTH = 7;
+
     public WinningLottoDAO(final Connection connection) {
         this.connection = connection;
     }
@@ -36,7 +37,7 @@ public class WinningLottoDAO {
         ResultSet rs = pstmt.executeQuery();
         List<Integer> winningNumbers = new ArrayList<>();
         rs.next();
-        for(int i = 1; i <=WINNING_NUMBER_LENGTH;  i ++) {
+        for (int i = 1; i <= WINNING_NUMBER_LENGTH; i++) {
             winningNumbers.add(rs.getInt(i));
         }
         rs.close();
