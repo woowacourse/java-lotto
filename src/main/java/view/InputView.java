@@ -13,15 +13,15 @@ public class InputView {
 
     public static Money inputAmountOfMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new TryUntilSuccess<>(() -> new Money(input.nextLine())).get();
+        return TryUntilSuccess.run(() -> new Money(input.nextLine()));
     }
 
     public static LottoPurchaseAmount inputAmountOfManualPicks(Money investment) {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
-        return new TryUntilSuccess<>(() -> {
+        return TryUntilSuccess.run(() -> {
             final int amount = Integer.parseInt(input.nextLine());
             return new LottoPurchaseAmount(investment, amount);
-        }).get();
+        });
     }
 
     public static List<Lotto> inputManualLottoNumbers(LottoPurchaseAmount purchaseAmount) {
@@ -30,8 +30,8 @@ public class InputView {
         }
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요(쉼표로 구분).");
         return Collections.unmodifiableList(
-                IntStream.range(0, purchaseAmount.manual()).boxed()
-                        .map(i -> new TryUntilSuccess<>(() -> new Lotto(input.nextLine())).get())
+                IntStream.range(0, purchaseAmount.manual())
+                        .mapToObj(i -> TryUntilSuccess.run(() -> new Lotto(input.nextLine())))
                         .collect(Collectors.toList())
         );
     }

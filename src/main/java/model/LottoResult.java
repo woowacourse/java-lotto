@@ -6,37 +6,35 @@ import java.util.stream.Stream;
 
 public class LottoResult implements Iterable<LottoResultPair> {
     private final List<LottoResultPair> table;
-    private final double earningRate;
+    private final Money purchasedAmount;
+    private final Money totalAmount;
 
-    protected LottoResult(List<Lotto> lottos, WinningNumbers winningNumbers) {
-        Map<LottoRank, Integer> pairs = new LinkedHashMap<LottoRank, Integer>() {{
-            Stream.of(LottoRank.values()).forEach(rank -> put(rank, 0));
-            lottos.forEach(lotto -> lotto.match(winningNumbers).map(x -> put(x, get(x) + 1)));
-        }};
-        this.table = generateTable(pairs);
-        this.earningRate = processEarningRate(pairs, lottos.size());
-    }
-
-    private List<LottoResultPair> generateTable(Map<LottoRank, Integer> pairs) {
-        return Collections.unmodifiableList(
-                pairs.entrySet().stream()
-                    .map(x -> new LottoResultPair(x.getKey(), x.getValue()))
-                    .collect(Collectors.toList())
+    public LottoResult(List<Lotto> lottos, WinningNumbers winningNumbers) {
+        this.table = lottos.stream()
+                        .map(l -> l.match(winningNumbers))
+                        .flatMap(r -> r.map(Stream::of).orElseGet(Stream::empty))
+                        .collect(Collectors.groupingBy(LottoRank::prize))
+                        .values().stream()
+                        .map(l -> new LottoResultPair(l.get(0), l.size()))
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+        this.purchasedAmount = new Money(Lotto.PRICE * lottos.size());
+        this.totalAmount = new Money(
+                this.table.stream()
+                .map(pair -> pair.rank().prize().amount() * pair.number())
+                .reduce(0, (a, b) -> a + b)
         );
     }
 
-    private double processEarningRate(Map<LottoRank, Integer> pairs, int numberOfPurchase) {
-        return new Money(
-                pairs.entrySet().stream()
-                    .mapToInt(x -> x.getKey().prize().amount() * x.getValue())
-                    .sum()
-        ).earningRate(
-                new Money(Lotto.PRICE * numberOfPurchase)
-        );
+    public Money purchasedAmount() {
+        return this.purchasedAmount;
+    }
+
+    public Money totalAmount() {
+        return this.totalAmount;
     }
 
     public double earningRate() {
-        return this.earningRate;
+        return this.totalAmount.earningRate(this.purchasedAmount);
     }
 
     @Override

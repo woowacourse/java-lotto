@@ -1,0 +1,37 @@
+span.ball {
+  border-radius: 0.8em;
+  -moz-border-radius: 0.8em;
+  -webkit-border-radius: 0.8em;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.6em;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+  width: 1.6em;
+}
+
+span.color0 {
+  background: #f74433;
+}
+
+span.color1 {
+  background: #f7ed32;
+}
+
+span.color2 {
+  background: #55fc07;
+}
+
+span.color3 {
+  background: #0771fc;
+}
+
+span.color4 {
+  background: #f442ce;
+}
+
+span.color5 {
+  background: #8d07fc;
+}

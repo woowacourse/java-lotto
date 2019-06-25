@@ -18,13 +18,13 @@ class LottoTest {
 
     @Test
     void matchingTestAuto() {
-        assertThat(new Lotto("11,17 , 19 ,21,,22    ,24").match(new AutoWinningNumbers())).get().isEqualTo(LottoRank.SECOND);
+        assertThat(new Lotto("10,34 , 38 ,40,,42    ,32").match(new WinningNumbersWeb(862))).get().isEqualTo(LottoRank.SECOND);
     }
 
     @Test
     void matchingTestManual() {
         assertThat(
-                new Lotto("1,2,    3, ,,,4, 5, 6").match(new ManualWinningNumbers("1, 2, 3, 7, 8, 9, 10"))
+                new Lotto("1,2,    3, ,,,4, 5, 6").match(new WinningNumbersManual("1, 2, 3, 7, 8, 9, 10"))
         ).get().isEqualTo(LottoRank.FIFTH);
     }
 }

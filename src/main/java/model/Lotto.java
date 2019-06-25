@@ -9,9 +9,9 @@ public class Lotto {
     public static final int PRICE = 1000;
     public static final int NUMBER_OF_PICKS = 6;
 
-    private static final List<LottoNumber> balls = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX).boxed()
-                                                    .map(i -> LottoNumber.of(i))
-                                                    .collect(Collectors.toList());
+    private static final List<LottoNumber> balls = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
+                                                            .mapToObj(i -> LottoNumber.of(i))
+                                                            .collect(Collectors.toList());
 
     private final List<LottoNumber> numbers;
 
@@ -21,10 +21,15 @@ public class Lotto {
     }
 
     public Lotto(Set<LottoNumber> numbers) {
-        validation(numbers);
-        List<LottoNumber> sorted = new ArrayList<>(numbers);
-        Collections.sort(sorted);
-        this.numbers = Collections.unmodifiableList(sorted);
+        if (numbers.size() != NUMBER_OF_PICKS) {
+            throw new IllegalArgumentException();
+        }
+        this.numbers = new ArrayList<>(numbers).stream()
+                                                .sorted()
+                                                .collect(Collectors.collectingAndThen(
+                                                        Collectors.toList(),
+                                                        Collections::unmodifiableList)
+                                                );
     }
 
     public Lotto(String input) {
@@ -36,13 +41,6 @@ public class Lotto {
         );
     }
 
-    private void validation(Set<LottoNumber> numbers) {
-        if (numbers.size() != NUMBER_OF_PICKS) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-
     public Optional<LottoRank> match(WinningNumbers winningNumbers) {
         Set<LottoNumber> intersectionTest = new HashSet<>(this.numbers);
         intersectionTest.removeAll(winningNumbers.mainNumbers());
@@ -50,6 +48,10 @@ public class Lotto {
                 Lotto.NUMBER_OF_PICKS - intersectionTest.size(),
                 intersectionTest.contains(winningNumbers.bonusNumber())
         );
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return this.numbers;
     }
 
     @Override

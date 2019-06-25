@@ -15,6 +15,6 @@ public class LottoResultPair {
     }
 
     public int number() {
-        return number;
+        return this.number;
     }
 }

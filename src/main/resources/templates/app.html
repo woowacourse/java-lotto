@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>로또</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="assets/css/balls.css" />
+    </head>
+    <body class="is-preload">
+        <header id="header">
+            <a class="logo" href="/">Lotto</a>
+        </header>
+        <section id="banner">
+            <div class="inner">
+                <h1>로또</h1>
+                <p>당신의 인생까지 거시겠습니까?</p>
+            </div>
+            <video autoplay loop muted playsinline src="images/banner.mp4"></video>
+        </section>
+        <section class="wrapper">
+            <div id="front_page" class="inner">
+                <header class="special">
+                    <h2>장당 {{priceFormatted}}원</h2>
+                    <p>(수동으로 입력하지 않은 만큼은 자동 발권됩니다.)</p>
+                </header>
+                <section>
+                    <div class="content">
+                        <form id="purchase">
+                            투자금 : <input id="investment" type="text" name="investment" onchange="resetManualInputs()" />
+                            <br />
+                            <div align="right">
+                                수동 번호 입력 :
+                                <input type="button" value="+" onclick="addManualInputs()" />
+                                <input type="button" value="-" onclick="removeManualInputs()" />
+                            </div>
+                            <br />
+                            <br />
+                            <p id="manualNumbersContainer">
+                            </p>
+                            <p align="right">
+                                <i id="guide"></i>
+                            </p>
+                            <br />
+                            <br />
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px; grid-auto-rows: minmax(100px, auto);" align="right">
+                                <div style="grid-column: 3;">
+                                    <select name="round">
+                                        {{{recentRoundMenu}}}
+                                    </select>
+                                    <input type="button" value="구매하기" onclick="submitPurchase()" />
+                                </div>
+                            </div>
+                        </form>
+                        <br />
+                        <br />
+                        <br />
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px; grid-auto-rows: minmax(100px, auto);" align="right">
+                            <div style="grid-column: 3;">
+                                <form id="history">
+                                    <select name="date">
+                                        {{{history}}}
+                                    </select>
+                                    <input type="button" value="히스토리" onclick="submitHistory()" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div id="result_page" class="inner" />
+        </section>
+        <footer id="footer">
+            <div class="inner">
+                <div class="content">
+                    <section>
+                        <h3>우아한테크코스</h3>
+                        <p>로또</p>
+                    </section>
+                </div>
+                <div class="copyright">
+                    &copy; Doughnut.
+                </div>
+            </div>
+        </footer>
+        <script type="text/javascript">
+            const price = {{price}}
+        </script>
+        <script src="assets/js/ui.js"></script>
+        <script src="assets/js/api.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>

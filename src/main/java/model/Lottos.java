@@ -8,8 +8,8 @@ public class Lottos implements Iterable<Lotto> {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> manualLottos, LottoPurchaseAmount purchaseAmount) {
-        List<Lotto> lottos = IntStream.range(0, purchaseAmount.auto()).boxed()
-                                        .map(i -> Lotto.autoGenerate())
+        List<Lotto> lottos = IntStream.range(0, purchaseAmount.auto())
+                                        .mapToObj(i -> Lotto.autoGenerate())
                                         .collect(Collectors.toList());
         lottos.addAll(manualLottos);
         if (lottos.isEmpty() || (manualLottos.size() != purchaseAmount.manual())) {
@@ -22,8 +22,16 @@ public class Lottos implements Iterable<Lotto> {
         this(new ArrayList<>(), purchaseAmount);
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this(lottos, new LottoPurchaseAmount(lottos.size(), lottos.size()));
+    }
+
     public LottoResult getResult(WinningNumbers winningNumbers) {
         return new LottoResult(this.lottos, winningNumbers);
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public Iterator<Lotto> iterator() {
@@ -32,6 +40,6 @@ public class Lottos implements Iterable<Lotto> {
 
     @Override
     public String toString() {
-        return lottos.toString();
+        return this.lottos.toString();
     }
 }

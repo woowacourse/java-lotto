@@ -19,7 +19,7 @@ public class Money {
     }
 
     public double earningRate(Money investment) {
-        return ((double) this.amount / investment.amount() - 1.0) * 100.0;
+        return (this.amount / (double) investment.amount() - 1.0) * 100.0;
     }
 
     public int amount() {
