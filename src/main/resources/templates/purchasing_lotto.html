@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>로또</title>
+</head>
+
+<body class="bg-dark">
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h3 class="display-4">Purchase Lottery!</h3>
+        <hr class="my-4">
+
+        <form id="lotto-form" action="/purchase/ticket" method="post" onsubmit="return checkInput();">
+            <div class="container" id="purchasing">
+                <h5>구입 금액</h5>
+                <small id="passwordHelpInline" class="text-muted">
+                    최소 1,000원 ~ 최대 150,000원
+                </small>
+                <div class="form-row align-items-center">
+                    <div class="col-sm-4 my-1">
+                        <input type="text" class="form-control" id="money" name="money"
+                               onchange="checkMoney(); countMaxAmountOfCustomLotto();">
+                        <small class="text-muted">원</small>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-3">
+
+            <div class="container">
+                <h5>수동 로또 입력</h5>
+                <div class="mb-2 mr-2 text-right">
+                    <button type="button" class="btn btn-success btn-sm btn-round" onclick="addLotto();">+</button>
+                </div>
+                <div class="container" id="lotto-area"></div>
+            </div>
+
+            <div class="col-auto mt-4 text-center">
+                <button type="submit" class="btn btn-outline-secondary">구매하기</button>
+                <a class="btn btn-outline-secondary" href="/">홈으로 가기</a>
+            </div>
+            <input type="hidden" id="max-custom-amount">
+            <input type="hidden" name="lottos" id="lottos">
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var count = 0;
+
+    function checkInput() {
+        addCustomLottos();
+        return checkMoney();
+    }
+
+    function checkMoney() {
+        var money = document.getElementById("money").value;
+
+        if (money == null || isNaN(money) || money < 1000 || money > 150000) {
+            window.alert("구입 금액의 값이 올바르지 않습니다.");
+            document.getElementById("money").focus();
+
+            return false;
+        }
+
+        return true;
+    }
+
+    function addCustomLottos() {
+        var lottos = document.getElementById('lottos');
+
+        var checkedNumber = "";
+        for (var i = 0; i < count; i++) {
+            var number_chk = document.getElementsByName("lotto-number-" + i);
+
+            for (var j = 0; j < number_chk.length; j++) {
+                var classNames = number_chk[j].className.split(" ");
+                if (classNames[classNames.length - 1] == 'active') {
+                    checkedNumber += (j + 1) + ",";
+                    console.log(checkedNumber);
+                }
+            }
+            checkedNumber += "-";
+        }
+
+        lottos.value = checkedNumber;
+    }
+
+    function addLotto() {
+        var maxCustom = document.getElementById('max-custom-amount').value;
+
+        if (count >= maxCustom) {
+            alert("구입 금액보다 많은 로또는 추가할 수 없습니다.");
+            return;
+        }
+
+        var div = document.getElementById('lotto-area');
+
+        var addedDiv = document.createElement('div');
+        addedDiv.id = "each-lotto-" + count;
+        addedDiv.className = "row mb-2 text-center";
+        addedDiv.value = count;
+
+        var lottoNumbersDiv = document.createElement('div');
+        lottoNumbersDiv.id = "each-lotto-" + count;
+        lottoNumbersDiv.className = "col-10 btn-group-toggle";
+        lottoNumbersDiv.setAttribute("data-toggle", "buttons");
+
+        var deletingDiv = document.createElement('div');
+        deletingDiv.id = "deleting-lotto-area-" + count;
+        deletingDiv.className = "col-2";
+
+        var deletingBtn = document.createElement('button');
+        deletingBtn.type = "button";
+        deletingBtn.id = "deleting-lotto-btn-" + count;
+        deletingBtn.className = "btn btn-danger btn-sm btn-round vertical-center";
+        deletingBtn.value = count;
+        deletingBtn.onclick = function () {
+            deleteLotto(deletingBtn.value);
+        };
+        deletingBtn.innerHTML = '-';
+
+        var str = '';
+        var id = count;
+        for (var i = 1; i <= 45; i++) {
+            str += '<label class="btn btn-outline-dark mb-1 mr-1" name="lotto-number-' + count + '">';
+            str += '<input type="checkbox" autocomplete="off">';
+            str += i + '</label>'
+            /*str += '<button type="button" class="btn btn-outline-dark mb-1 mr-1" data-toggle="button" aria-pressed="false" autocomplete="off" name="lotto-number-' + count + '">' +
+                i + '</button>';*/
+        }
+
+        lottoNumbersDiv.innerHTML = str;
+        addedDiv.appendChild(lottoNumbersDiv);
+        addedDiv.appendChild(deletingDiv);
+        deletingDiv.appendChild(deletingBtn);
+        div.appendChild(addedDiv);
+
+        count++;
+    }
+
+    function deleteLotto(lottoId) {
+        var lottoDiv = document.getElementById('lotto-area');
+        var lotto = document.getElementById('each-lotto-' + lottoId);
+
+        lottoDiv.removeChild(lotto);
+        count--;
+    }
+
+    function countMaxAmountOfCustomLotto() {
+        var maxHidden = document.getElementById('max-custom-amount');
+        var maxAmount = document.getElementById('money').value / 1000;
+
+        maxHidden.value = maxAmount;
+    }
+
+</script>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

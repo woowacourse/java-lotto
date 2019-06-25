@@ -1,22 +1,26 @@
 package lotto;
 
-import spark.ModelAndView;
-import spark.template.handlebars.HandlebarsTemplateEngine;
+import lotto.controller.LottoGameController;
+import lotto.controller.PurchasingLottoController;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static spark.Spark.get;
+import static spark.Spark.*;
 
 public class WebUILottoApplication {
     public static void main(String[] args) {
-        get("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            return render(model, "index.html");
-        });
-    }
+        staticFiles.location("/");
 
-    private static String render(Map<String, Object> model, String templatePath) {
-        return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
+        get("/", LottoGameController.index);
+
+        path("/purchase", () -> {
+            get("", PurchasingLottoController.purchasingTickets);
+            post("/ticket", PurchasingLottoController.purchasedTickets);
+        });
+
+        path("/win", () -> {
+            post("/input", LottoGameController.addWinningLotto);
+            get("/result", LottoGameController.latestGameResult);
+            get("/result/:week", LottoGameController.gameResultByWinningLottoId);
+            get("/select", LottoGameController.allWeeksOfGame);
+        });
     }
 }
