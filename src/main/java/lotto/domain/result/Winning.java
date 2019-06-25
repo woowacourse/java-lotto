@@ -42,6 +42,14 @@ public class Winning {
         return lotto.containNumber(bonusNum);
     }
 
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public int getBonusNum() {
+        return bonusNum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

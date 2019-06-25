@@ -15,7 +15,9 @@ public class Numbers {
     }
 
     private List<Integer> generate(String text) {
-        return Arrays.stream(StringUtils.split(text, ","))
+        String tmp = text.replace("[", "").replace("]", "");
+
+        return Arrays.stream(StringUtils.split(tmp, ", "))
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
