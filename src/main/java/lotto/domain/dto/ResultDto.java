@@ -7,7 +7,7 @@ import java.util.Map;
 
 import static lotto.domain.lotto.Rank.*;
 
-public class ResultDTO {
+public class ResultDto {
     private int round;
     private String name;
     private Map<Rank, Long> lottoScore;
@@ -64,12 +64,12 @@ public class ResultDTO {
             return this;
         }
 
-        public ResultDTO build() {
-            return new ResultDTO(this);
+        public ResultDto build() {
+            return new ResultDto(this);
         }
     }
 
-    private ResultDTO(Builder builder) {
+    private ResultDto(Builder builder) {
         this.round = builder.round;
         this.name = builder.name;
         this.lottoScore = new EnumMap<>(builder.lottoScore);

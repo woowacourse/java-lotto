@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.dto.ResultDTO;
+import lotto.domain.dto.ResultDto;
 import lotto.domain.lotto.*;
 import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
@@ -31,9 +31,11 @@ public class LottoController {
         Payment payment = new Payment(Integer.parseInt(nullable(request.queryParams("payment"))));
         int countOfManualLotto = Integer.parseInt(nullable(request.queryParams("countOfManualLotto")));
         CountOfLotto countOfLotto = new CountOfLotto(payment, countOfManualLotto);
+
         String name = nullable(request.queryParams("name"));
 
-        int round = PaymentInfoService.getInstance().insertPaymentInfoAndReturnKeyValue(payment, countOfLotto, name);
+        int round = PaymentInfoService.getInstance()
+                .insertPaymentInfoAndReturnKeyValue(payment, countOfLotto, name);
 
         List<String> manualLottoInputTag = LottoService.getInstance().createResponseInputTag(countOfManualLotto);
 
@@ -82,9 +84,9 @@ public class LottoController {
                 .collect(toList());
     }
 
-    private static ResultDTO createResultDTO(WinningLotto winningLotto, LottoRepository lottoRepository, int round, String name) {
+    private static ResultDto createResultDTO(WinningLotto winningLotto, LottoRepository lottoRepository, int round, String name) {
         Result result = winningLotto.match(new LottoTickets(lottoRepository));
-        ResultDTO resultDTO = new ResultDTO.Builder(round, name)
+        ResultDto resultDTO = new ResultDto.Builder(round, name)
                 .first(result.get(Rank.FIRST))
                 .second(result.get(Rank.SECOND))
                 .third(result.get(Rank.THIRD))

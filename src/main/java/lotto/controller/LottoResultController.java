@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.dto.RankingDTO;
-import lotto.domain.dto.ResultDTO;
+import lotto.domain.dto.RankingDto;
+import lotto.domain.dto.ResultDto;
 import lotto.domain.lotto.Lotto;
 import lotto.service.LottoResultService;
 import lotto.service.LottoService;
@@ -23,8 +23,8 @@ public class LottoResultController {
 
     public static String goIndex(Request request, Response response) throws SQLDataException {
         Map<String, Object> model = new HashMap<>();
-        List<ResultDTO> lottoGames = LottoResultService.getInstance().selectAllLottoResult();
-        List<RankingDTO> ranking = LottoResultService.getInstance().createUserRanking(lottoGames);
+        List<ResultDto> lottoGames = LottoResultService.getInstance().selectAllLottoResult();
+        List<RankingDto> ranking = LottoResultService.getInstance().createUserRanking(lottoGames);
 
         model.put("lottoGames", lottoGames);
         model.put("ranking", ranking);
@@ -34,7 +34,7 @@ public class LottoResultController {
     public static String goLottoResult(Request request, Response response) throws SQLDataException {
         int round = Integer.parseInt(nullable(request.params(":round")));
 
-        ResultDTO resultDTO = LottoResultService.getInstance().selectLottoResult(round);
+        ResultDto resultDTO = LottoResultService.getInstance().selectLottoResult(round);
         List<Lotto> lottoTicket = LottoService.getInstance().selectAllLotto(round);
 
         long countOfAutoLotto = LottoService.getInstance().calculateCountOfAutoLotto(lottoTicket);

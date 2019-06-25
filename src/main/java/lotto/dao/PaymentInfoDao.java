@@ -1,7 +1,7 @@
 package lotto.dao;
 
 import lotto.dao.utils.DaoTemplate;
-import lotto.domain.dto.PaymentInfoDTO;
+import lotto.domain.dto.PaymentInfoDto;
 
 import java.sql.*;
 
@@ -30,7 +30,7 @@ public class PaymentInfoDao {
         return daoTemplate.cudTemplate(INSERT_USER);
     }
 
-    public int insertPayment(PaymentInfoDTO paymentInfoDTO) throws SQLDataException {
+    public int insertPayment(PaymentInfoDto paymentInfoDTO) throws SQLDataException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = createPreparedStatement(connection, paymentInfoDTO);
              ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
@@ -46,7 +46,7 @@ public class PaymentInfoDao {
         }
     }
 
-    private PreparedStatement createPreparedStatement(Connection connection, PaymentInfoDTO paymentInfoDTO) throws SQLException {
+    private PreparedStatement createPreparedStatement(Connection connection, PaymentInfoDto paymentInfoDTO) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 INSERT_PAYMENT_INFO, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setInt(1, paymentInfoDTO.getPayment());

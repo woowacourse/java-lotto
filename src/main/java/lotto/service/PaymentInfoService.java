@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.dao.PaymentInfoDao;
-import lotto.domain.dto.PaymentInfoDTO;
+import lotto.domain.dto.PaymentInfoDto;
 import lotto.domain.paymentinfo.CountOfLotto;
 import lotto.domain.paymentinfo.Payment;
 
@@ -24,12 +24,12 @@ public class PaymentInfoService {
     }
 
     public int insertPaymentInfoAndReturnKeyValue(Payment payment, CountOfLotto countOfLotto, String name) throws SQLDataException {
-        PaymentInfoDTO paymentInfoDTO = createPaymentInfoDTO(payment, countOfLotto, name);
+        PaymentInfoDto paymentInfoDTO = createPaymentInfoDTO(payment, countOfLotto, name);
         return PaymentInfoDao.getInstance().insertPayment(paymentInfoDTO);
     }
 
-    private static PaymentInfoDTO createPaymentInfoDTO(Payment payment, CountOfLotto countOfLotto, String name) {
-        PaymentInfoDTO paymentInfoDTO = new PaymentInfoDTO();
+    private static PaymentInfoDto createPaymentInfoDTO(Payment payment, CountOfLotto countOfLotto, String name) {
+        PaymentInfoDto paymentInfoDTO = new PaymentInfoDto();
         paymentInfoDTO.setPayment(payment.getPayment());
         paymentInfoDTO.setManual(countOfLotto.getCountOfManualLotto());
         paymentInfoDTO.setAuto(countOfLotto.getCountOfRandomLotto());

@@ -1,6 +1,6 @@
 package lotto.domain.dto;
 
-public class PaymentInfoDTO {
+public class PaymentInfoDto {
     private int payment;
     private int manual;
     private int auto;

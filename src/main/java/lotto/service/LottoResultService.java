@@ -1,8 +1,8 @@
 package lotto.service;
 
 import lotto.dao.LottoResultDao;
-import lotto.domain.dto.RankingDTO;
-import lotto.domain.dto.ResultDTO;
+import lotto.domain.dto.RankingDto;
+import lotto.domain.dto.ResultDto;
 import lotto.domain.lotto.Result;
 import lotto.domain.paymentinfo.Payment;
 
@@ -25,8 +25,8 @@ public class LottoResultService {
         return LottoResultServiceHolder.INSTANCE;
     }
 
-    public List<ResultDTO> selectAllLottoResult() throws SQLDataException {
-        List<ResultDTO> lottoGames = LottoResultDao.getInstance().selectAllLottoResult();
+    public List<ResultDto> selectAllLottoResult() throws SQLDataException {
+        List<ResultDto> lottoGames = LottoResultDao.getInstance().selectAllLottoResult();
 
         lottoGames.forEach(resultDTO -> {
             resultDTO.setTotalWinningMoney(new Result(resultDTO.getLottoScore()).calculateTotalWinningMoney());
@@ -35,22 +35,22 @@ public class LottoResultService {
         return lottoGames;
     }
 
-    public List<RankingDTO> createUserRanking(List<ResultDTO> lottoGames) {
+    public List<RankingDto> createUserRanking(List<ResultDto> lottoGames) {
         Map<String, Long> ranking = lottoGames.stream()
-                .collect(groupingBy(ResultDTO::getName,
-                        summingLong(ResultDTO::getTotalWinningMoney)));
+                .collect(groupingBy(ResultDto::getName,
+                        summingLong(ResultDto::getTotalWinningMoney)));
 
         return ranking.keySet().stream()
-                .map(key -> new RankingDTO(key, ranking.get(key))).sorted(Comparator.reverseOrder())
+                .map(key -> new RankingDto(key, ranking.get(key))).sorted(Comparator.reverseOrder())
                 .collect(toList());
     }
 
-    public int insertLottoResult(ResultDTO resultDTO) throws SQLDataException {
+    public int insertLottoResult(ResultDto resultDTO) throws SQLDataException {
         return LottoResultDao.getInstance().insertLottoResult(resultDTO);
     }
 
-    public ResultDTO selectLottoResult(int round) throws SQLDataException {
-        ResultDTO resultDTO = LottoResultDao.getInstance().selectLottoResult(round);
+    public ResultDto selectLottoResult(int round) throws SQLDataException {
+        ResultDto resultDTO = LottoResultDao.getInstance().selectLottoResult(round);
         Result result = new Result(resultDTO.getLottoScore());
         resultDTO.setTotalWinningMoney(result.calculateTotalWinningMoney());
         resultDTO.setEarningRate(result.calculateEarningsRate(new Payment(resultDTO.getPayment())));
