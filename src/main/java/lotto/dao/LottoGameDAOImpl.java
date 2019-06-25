@@ -31,7 +31,8 @@ public class LottoGameDAOImpl implements LottoGameDAO {
 
             round = rs.getInt("round");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("최근 회차를 가져오지 못했습니다.");
         }
         return round;
     }
@@ -47,7 +48,8 @@ public class LottoGameDAOImpl implements LottoGameDAO {
             pstmt.setInt(1, round);
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("로또 게임을 생성하지 못했습니다.");
         }
         return result;
     }
@@ -63,7 +65,8 @@ public class LottoGameDAOImpl implements LottoGameDAO {
             pstmt.setInt(1, round);
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("로또를 삭제하지 못했습니다.");
         }
         return result;
     }

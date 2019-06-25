@@ -35,7 +35,8 @@ public class MoneyDAOImpl implements MoneyDAO {
             money = new Money(rs.getString("money"));
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("구매 금액을 가져오지 못했습니다.");
         }
         return money;
     }
@@ -52,7 +53,8 @@ public class MoneyDAOImpl implements MoneyDAO {
             pstmt.setInt(2, money.getMoney());
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("로또 금액을 생성하지 못했습니다.");
         }
         return result;
     }
@@ -68,7 +70,8 @@ public class MoneyDAOImpl implements MoneyDAO {
             pstmt.setInt(1, round);
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("로또 금액을 삭제하지 못했습니다.");
         }
         return result;
     }

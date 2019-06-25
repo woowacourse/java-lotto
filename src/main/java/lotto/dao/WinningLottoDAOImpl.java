@@ -37,7 +37,8 @@ public class WinningLottoDAOImpl implements WinningLottoDAO {
                                             rs.getString("bonus_number"));
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("당첨 로또를 가져오지 못했습니다.");
         }
         return winningLotto;
     }
@@ -56,7 +57,8 @@ public class WinningLottoDAOImpl implements WinningLottoDAO {
             pstmt.setString(3, winningLotto.getBonusNumber().toString());
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("당첨 로또를 생성하지 못했습니다.");
         }
         return result;
     }
@@ -72,7 +74,8 @@ public class WinningLottoDAOImpl implements WinningLottoDAO {
             pstmt.setInt(1, round);
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("당첨 로또를 삭제하지 못했습니다.");
         }
         return result;
     }

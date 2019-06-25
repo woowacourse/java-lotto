@@ -35,7 +35,8 @@ public class LottoResultDAOImpl implements LottoResultDAO {
             winningMoney = rs.getLong("winning_money");
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("로또 결과를 가져오지 못했습니다.");
         }
         return winningMoney;
     }
@@ -53,7 +54,8 @@ public class LottoResultDAOImpl implements LottoResultDAO {
             pstmt.setDouble(3, Math.round(lottosResult.getROI() * 100));
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("로또 결과를 생성하지 못했습니다.");
         }
         return result;
     }
@@ -69,7 +71,8 @@ public class LottoResultDAOImpl implements LottoResultDAO {
             pstmt.setInt(1, round);
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new RuntimeException("로또 결과를 삭제하지 못했습니다.");
         }
         return result;
     }
