@@ -1,15 +1,20 @@
 package lotto;
 
 import com.google.gson.Gson;
+import lotto.domain.LottoResult;
 import lotto.domain.UserLottos;
-import lotto.service.UserLottosCreator;
+import lotto.domain.WinningLotto;
+import lotto.presentation.UserLottoPresentation;
+import lotto.presentation.WinningLottoPresentation;
+import lotto.service.LottoResultService;
+import lotto.service.UserLottoService;
+import lotto.service.WinningLottoService;
+import lotto.view.WebView;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static spark.Spark.*;
 
@@ -31,28 +36,26 @@ public class WebUILottoApplication {
 
         post("/lotto", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("money", req.queryParams("money"));
-            model.put("manual", req.queryParams("manual"));
-            return render(model, "lotto.html");
-        });
-
-        get("/lotto", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
             return render(model, "lotto.html");
         });
 
         post("/userLotto", (req, res) -> {
-            int manualCount;
-            try {
-                manualCount = Integer.parseInt(req.queryParams("manualCount"));
-            } catch (NumberFormatException e) {
-                manualCount = 0;
-            }
-            UserLottos userLottos = new UserLottosCreator(req.queryParams("lottoMoney"), manualCount, Arrays.asList(req.queryParamsValues("manualLottos"))).create();
-            return userLottos.tickets().stream().map(ticket -> ticket.ticketNumbers().toString()).collect(Collectors.toList());
+            UserLottoPresentation presentation = WebView.userLottoPresentation(req);
+            UserLottos userLottos = UserLottoService.userLottos(presentation.getLottoMoney(), presentation.getManualCount(), presentation.getManualNumbers());
+            return WebView.userLottoJson(userLottos);
         }, gson::toJson);
 
-        get("/test", (req, res) -> req.queryParams(), gson::toJson);
+        post("/winningLotto", (req, res) -> {
+            WinningLottoPresentation presentation = new WinningLottoPresentation(req.queryParams("numbers"), req.queryParams("bonus"));
+            WinningLotto winningLotto = WinningLottoService.insertWinningLotto(presentation.getNumbers(), presentation.getBonus());
+            LottoResultService.insertCurrentLottoResult();
+            return WebView.winningLottoJson(winningLotto);
+        }, gson::toJson);
+
+        get("/lottoResult", (req, res) -> {
+            LottoResult lottoResult = LottoResultService.insertCurrentLottoResult();
+            return WebView.lottoResultJson(lottoResult);
+        }, gson::toJson);
     }
 
     private static String render(Map<String, Object> model, String templatePath) {
