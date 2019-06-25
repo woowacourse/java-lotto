@@ -26,7 +26,7 @@ public class LottoMaker {
         Collections.shuffle(autoNumbers);
         autoNumbers = autoNumbers.subList(START, Lotto.LOTTO_SIZE);
         Collections.sort(autoNumbers);
-
+      
         return Lotto.of(new Numbers(autoNumbers.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(","))));

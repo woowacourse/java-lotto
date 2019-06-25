@@ -23,7 +23,7 @@ public class Lottos {
         lottos.addAll(LottosGenerator.generateLottos(numbers));
         lottos.addAll(LottosGenerator.generateLottos(purchaseCount.getAutoCount()));
     }
-
+  
     public static Lottos of(List<Numbers> numbers) {
         return new Lottos(numbers);
     }
