@@ -15,12 +15,12 @@ class LottoNumbersTest {
         Ticket lotto = new Lotto(new LottoNumbers(Arrays.asList(new LottoNumber(1),
                 new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
                 new LottoNumber(5), new LottoNumber(6))));
-        assertTrue(lotto.contains(new LottoNumber(1)));
-        assertTrue(lotto.contains(new LottoNumber(2)));
-        assertTrue(lotto.contains(new LottoNumber(3)));
-        assertTrue(lotto.contains(new LottoNumber(4)));
-        assertTrue(lotto.contains(new LottoNumber(5)));
-        assertTrue(lotto.contains(new LottoNumber(6)));
+        assertTrue(lotto.contains(1));
+        assertTrue(lotto.contains(2));
+        assertTrue(lotto.contains(3));
+        assertTrue(lotto.contains(4));
+        assertTrue(lotto.contains(5));
+        assertTrue(lotto.contains(6));
     }
 
     @Test

@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 class Lotto implements Ticket {
     private final LottoNumbers lottoNumbers;
@@ -10,13 +12,13 @@ class Lotto implements Ticket {
     }
 
     @Override
-    public LottoNumbers ticketNumbers() {
-        return lottoNumbers;
+    public List<Integer> ticketNumbers() {
+        return lottoNumbers.numbers().stream().map(LottoNumber::toInt).collect(Collectors.toList());
     }
 
     @Override
-    public boolean contains(LottoNumber number) {
-        return lottoNumbers.contains(number);
+    public boolean contains(int number) {
+        return ticketNumbers().contains(number);
     }
 
     @Override

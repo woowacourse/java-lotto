@@ -1,4 +1,5 @@
 const generateBtn = document.getElementById("generate");
+const winningBtn = document.getElementById("winning");
 var selectedBalls = [];
 const deliveryData = {
     lottoMoney: "",
@@ -37,7 +38,6 @@ function postAjax(url, data, success) {
 
 function addHistory(numberList) {
     const historyDiv = document.getElementById("history");
-    const span = document.createElement("span");
     makeBalls(numberList, historyDiv);
     deliveryData.manualLottos.push(selectedBalls);
     selectedBalls = [];
@@ -67,7 +67,6 @@ generateBtn.addEventListener('click', () => {
     }, (res) => {
         deliveryData.lottoMoney = document.getElementById('money').value;
         deliveryData.manualCount = document.getElementById('manual').value;
-
         document.getElementById('container').innerHTML = res;
         Array.from(document.getElementById('side-right').getElementsByClassName('ball'))
             .forEach(v => {
@@ -88,22 +87,60 @@ generateBtn.addEventListener('click', () => {
 
         generateBtn.addEventListener('click', () => {
             postAjax('/userLotto', deliveryData, (res) => {
+                const parseData = JSON.parse(res).userLotto;
                 clearBalls();
                 document.getElementById('history').innerHTML = "";
-                const resData = JSON.parse(res);
-                resData
-                    .map(data => addHistory(JSON.parse(data)));
+                parseData
+                    .map(data => addHistory(data));
+                winningBtn.style.visibility = "visible";
                 alert("구입완료");
             })
         }, { once: true });
     })
 }, { once: true });
 
-fetch('./buyLotto')
-    .then(res => {
-        return res.text();
+winningBtn.addEventListener('click', (e) => {
+    postAjax('/lotto', {}, (res) => {
+        document.getElementById('container').innerHTML = res;
+
+        Array.from(document.getElementById('side-right').getElementsByClassName('ball'))
+            .forEach(v => {
+                v.addEventListener('click', (e) => {
+                    if (selectedBalls.indexOf(e.target.innerText) === -1) {
+                        selectedBalls.push(e.target.innerText);
+                        e.target.style.backgroundColor = "#fa8b60";
+                    } else {
+                        selectedBalls.remove(e.target.innerText);
+                        e.target.style.backgroundColor = "white";
+                    }
+                    if (selectedBalls.length > 6) {
+                        return addHistory(selectedBalls);
+                    }
+                })
+            })
+
+        winningBtn.addEventListener('click', (e) => {
+            const balls = Array.from(document.getElementById('history').getElementsByClassName('ball'))
+                .map(ele => ele.innerText);
+            const lottoNumber = balls.slice(0, 6);
+            const bonusNumber = balls[0];
+            console.log(balls);
+            console.log(lottoNumber);
+            console.log(bonusNumber);
+            postAjax('/winningLotto', {
+                numbers: lottoNumber,
+                bonus: bonusNumber
+            }, (res) => {
+                winningBtn.addEventListener('click', (e) => {
+                    fetch('/lottoResult')
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            document.getElementById('container').innerHTML = JSON.stringify(data);
+                        });
+                })
+            })
+        }, { once: true });
     })
-    .then(body => {
-        document.getElementById('container').innerHTML = body;
-    })
-    .catch(err => console.log(err));
+}, { once: true });
+
