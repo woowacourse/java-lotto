@@ -9,11 +9,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
 
-
 import static lotto.model.lotto.LottoNumberRepository.fromNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinningStatisticsTest {
+public class WinningResultTest {
     List<LottoNumber> lottoNumbers = Arrays.asList(fromNumber(1)
             , fromNumber(2)
             , fromNumber(3)

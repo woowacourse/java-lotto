@@ -1,13 +1,13 @@
 package lotto.view;
 
 import lotto.model.lotto.LottoTickets;
-import lotto.model.winninglotto.WinningStatistics;
+import lotto.model.winninglotto.WinningResult;
 
 public class OutputView {
-    public static void printWinningStatistics(WinningStatistics winningStatistics) {
+    public static void printWinningResult(WinningResult winningResult) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        System.out.println(winningStatistics);
+        System.out.println(winningResult);
     }
 
     public static void printLottoTickets(LottoTickets lottoTickets, int manualPurchaseQuantity) {
