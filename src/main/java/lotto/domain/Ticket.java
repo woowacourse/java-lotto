@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.List;
+
 public interface Ticket {
 
-    LottoNumbers ticketNumbers();
+    List<Integer> ticketNumbers();
 
-    boolean contains(LottoNumber number);
+    boolean contains(int number);
 }
