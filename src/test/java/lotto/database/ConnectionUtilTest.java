@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ConnectionUtilTest {
     private ConnectionUtil userDao;
@@ -17,7 +17,7 @@ class ConnectionUtilTest {
 
     @Test
     public void connection() {
-        Connection con = userDao.getConnection();
+        Connection con = ConnectionUtil.getConnection();
         assertNotNull(con);
     }
 

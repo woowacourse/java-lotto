@@ -10,12 +10,13 @@ import java.util.Random;
 
 public class AutomaticGenerator implements Generator {
     private static List<LottoNumber> randomLottoNumberPull;
-    private int quantity;
 
     static {
         randomLottoNumberPull = new ArrayList<>();
         randomLottoNumberPull.addAll(LottoNumber.getLottoNumberPool());
     }
+
+    private int quantity;
 
     public AutomaticGenerator(int quantity) {
         this.quantity = quantity;

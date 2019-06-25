@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class RoundDAOTest {
@@ -16,7 +15,7 @@ class RoundDAOTest {
     private RoundDAO roundDao;
 
     @BeforeEach
-    public void setUp() throws Exception  {
+    public void setUp() throws Exception {
         this.con = ConnectionUtil.getConnection();
         this.roundDao = new RoundDAO(con);
         con.setAutoCommit(false);

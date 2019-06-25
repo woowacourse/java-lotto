@@ -20,24 +20,24 @@ public class RoundDAO {
         pstmt.executeUpdate();
     }
 
-    public int getMaxRound() throws SQLException{
+    public int getMaxRound() throws SQLException {
         String query = "SELECT MAX(id) FROM round";
         PreparedStatement pstmt = connection.prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
-        if(!rs.next()){
+        if (!rs.next()) {
             return 0;
         }
         return rs.getInt("MAX(id)");
     }
 
-    public void deleteRound(int round) throws SQLException{
+    public void deleteRound(int round) throws SQLException {
         String query = "DELETE FROM round WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.setString(1, String.valueOf(round));
         pstmt.executeUpdate();
     }
 
-    public void deleteRoundAll() throws SQLException{
+    public void deleteRoundAll() throws SQLException {
         String query = "DELETE FROM round";
         PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.executeUpdate();

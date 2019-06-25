@@ -1,9 +1,12 @@
 package lotto.dto;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class ResultDTO {
+    private int round;
+    private List<Integer> ranks;
+    private double winningRate;
+
     public int getRound() {
         return round;
     }
@@ -27,10 +30,6 @@ public class ResultDTO {
     public void setWinningRate(final double winningRate) {
         this.winningRate = winningRate;
     }
-
-    private int round;
-    private List<Integer> ranks;
-    private double winningRate;
 
 
 }

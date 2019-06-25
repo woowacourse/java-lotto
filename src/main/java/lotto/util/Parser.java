@@ -22,7 +22,7 @@ public class Parser {
         return Arrays.stream(numbers
                 .split(","))
                 .map(Integer::parseInt)
-                .map(x->LottoNumber.of(x))
+                .map(x -> LottoNumber.of(x))
                 .collect(Collectors.toList());
     }
 }

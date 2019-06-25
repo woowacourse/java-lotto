@@ -13,6 +13,7 @@ import java.util.Arrays;
 class ResultDAOTest {
     private Connection con;
     private ResultDAO resultDAO;
+
     @BeforeEach
     public void setUp() throws Exception {
         this.con = ConnectionUtil.getConnection();
@@ -25,7 +26,7 @@ class ResultDAOTest {
         ResultDTO resultDTO = new ResultDTO();
         resultDTO.setRound(2);
         resultDTO.setWinningRate(0.22);
-        resultDTO.setRanks(Arrays.asList(1,2,3,4,5,6));
+        resultDTO.setRanks(Arrays.asList(1, 2, 3, 4, 5, 6));
         resultDAO.addResult(resultDTO);
     }
 

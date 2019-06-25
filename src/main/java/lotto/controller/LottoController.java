@@ -18,10 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoController {
-
     public static Map<String, Object> insertMoney(Request req, Response res) {
         try {
-
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(req.body());
             Map<String, Object> resMap = new HashMap<>();
@@ -65,7 +63,4 @@ public class LottoController {
             return resMap;
         }
     }
-
-
-
 }

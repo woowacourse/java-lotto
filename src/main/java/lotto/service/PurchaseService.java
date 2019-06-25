@@ -17,13 +17,12 @@ public class PurchaseService {
         VendingMachine vendingMachine = new VendingMachine(money);
         Purchase purchase = vendingMachine.createPurchase(manualNumbers.size(), manualNumbers);
         LottoTickets lottoTickets = vendingMachine.createLotto(purchase);
-
         return new PurchaseDTO(
                 round,
                 manualNumbers.size(),
                 money.ticketQuantity() - manualNumbers.size(),
                 lottoTickets
-                );
+        );
     }
 
     public static void savePurchase(PurchaseDTO purchaseDTO) throws SQLException {

@@ -12,6 +12,7 @@ import lotto.dto.ResultDTO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,13 @@ public class ResultService {
         new WinningLottoDAO(connection).addWinningLotto(round, winningLotto.getLottoTicket().getLottoNumbers(), winningLotto.getBonusNumber().getNumber());
     }
 
-    public static Object getLastestPrize() {
+    public static Map<String, Object> getLastestResult() throws SQLException {
+        Connection connection = ConnectionUtil.getConnection();
+        Map<String, Object> resMap = new HashMap<>();
+        resMap.put("winningRate", new ResultDAO(connection).getLastestRate());
+        resMap.put("prize", new ResultDAO(connection).getLastestPrize());
+        return resMap;
     }
+
+
 }

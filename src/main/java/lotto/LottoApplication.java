@@ -9,7 +9,6 @@ import lotto.domain.machine.exeption.InvalidManualNumException;
 import lotto.domain.machine.exeption.InvalidMinimumMoneyException;
 import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTickets;
-import lotto.domain.ticket.exception.InvalidDuplicatedNumberException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -71,7 +70,7 @@ public class LottoApplication {
     private static LottoTickets makeLotto(final VendingMachine vendingMachine, final Purchase purchase) {
         try {
             return vendingMachine.createLotto(purchase);
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             System.out.println(e);
             return makeLotto(vendingMachine, purchase);
         } catch (Exception e) {

@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultController {
-
-
     public static Map<String, Object> getWinningLotto(Request req, Response res) {
         try {
             JsonParser parser = new JsonParser();
@@ -42,10 +40,8 @@ public class ResultController {
 
     public static Map<String, Object> getResult(Request req, Response res) {
         try {
-            Map<String, Object> resMap = new HashMap<>();
+            Map<String, Object> resMap = ResultService.getLastestResult();
 
-            resMap.put("prize",  ResultService.getLastestPrize());
-            resMap.put("winningRate", ResultService.getLastestRate());
             return resMap;
         } catch (SQLException e) {
             e.printStackTrace();
