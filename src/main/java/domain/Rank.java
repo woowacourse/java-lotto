@@ -1,19 +1,21 @@
 package domain;
 
+import domain.money.Money;
+
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0);
+    FIRST(6, Money.amountOf(2_000_000_000)),
+    SECOND(5, Money.amountOf(30_000_000)),
+    THIRD(5, Money.amountOf(1_500_000)),
+    FOURTH(4, Money.amountOf(50_000)),
+    FIFTH(3, Money.amountOf(5_000)),
+    MISS(0, Money.amountOf(0));
 
     private int numberOfMatching;
-    private int winningMoney;
+    private Money winningMoney;
 
-    Rank(int numberOfMatching, int winningMoney) {
+    Rank(int numberOfMatching, Money winningMoney) {
         this.numberOfMatching = numberOfMatching;
         this.winningMoney = winningMoney;
     }
@@ -34,7 +36,7 @@ public enum Rank {
         return this.numberOfMatching == numberOfMatching;
     }
 
-    public int getWinningMoney() {
+    public Money getWinningMoney() {
         return winningMoney;
     }
 

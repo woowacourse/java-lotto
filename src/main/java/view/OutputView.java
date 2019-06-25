@@ -29,10 +29,10 @@ public class OutputView {
     private static void showRankStatisticsOf(Statistics statistics, Rank rank) {
         if (rank == Rank.SECOND) {
             System.out.println(rank.getNumberOfMatching() + "개 일치, 보너스번호 일치 ("
-                    + rank.getWinningMoney() + "원) - " + statistics.countsOf(rank) + "개");
+                    + rank.getWinningMoney().getAmount() + "원) - " + statistics.countsOf(rank) + "개");
             return;
         }
-        System.out.println(rank.getNumberOfMatching() + "개 일치 (" + rank.getWinningMoney() + "원) - "
+        System.out.println(rank.getNumberOfMatching() + "개 일치 (" + rank.getWinningMoney().getAmount() + "원) - "
                 + statistics.countsOf(rank) + "개");
     }
 

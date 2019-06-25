@@ -24,13 +24,12 @@ public class Statistics {
     }
 
     public double calculateEarningRates() {
-        int winningMoneyOfRank;
-        int totalWinningMoney = 0;
+        int amountOfTotalWinningMoney = 0;
 
         for (Rank rank : countsOfRanks.keySet()) {
-            winningMoneyOfRank = rank.getWinningMoney();
-            totalWinningMoney += countsOf(rank) * winningMoneyOfRank;
+            Money winningMoneyOfRank = rank.getWinningMoney();
+            amountOfTotalWinningMoney += countsOf(rank) * winningMoneyOfRank.getAmount();
         }
-        return totalWinningMoney / (double) purchasedAmount.getAmount();
+        return amountOfTotalWinningMoney / (double) purchasedAmount.getAmount();
     }
 }

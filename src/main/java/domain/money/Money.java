@@ -15,7 +15,7 @@ public class Money {
         }
     }
 
-    public static Money valueOf(int amountOfMoney) {
+    public static Money amountOf(int amountOfMoney) {
         return new Money(amountOfMoney);
     }
 
