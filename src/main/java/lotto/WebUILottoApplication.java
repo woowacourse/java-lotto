@@ -1,32 +1,35 @@
 package lotto;
 
 import lotto.domain.lotto.InvalidLottoException;
-import lotto.domain.lotto.Lottos;
 import lotto.domain.purchase.InvalidPurchaseAmountException;
 import lotto.domain.purchase.InvalidPurchaseCountException;
 import lotto.domain.purchase.PurchaseAmount;
 import lotto.domain.purchase.PurchaseCount;
 import lotto.domain.result.InvalidWinningException;
 import lotto.domain.result.LottoResult;
-import lotto.domain.result.Winning;
-import lotto.service.ConnectionService;
-import lotto.service.LottoService;
+import lotto.service.*;
+import lotto.utils.DBUtils;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
-    public static void main(String[] args) {
-        ConnectionService.connection();
+    private static Connection connection = DBUtils.getConnection();
+    private static LottoRoundService lottoRoundService = new LottoRoundService(connection);
+    private static LottoPurchaseService lottoPurchaseService = new LottoPurchaseService(connection);
+    private static LottoWinningService lottoWinningService = new LottoWinningService(connection);
+    private static LottoResultService lottoResultService = new LottoResultService(connection);
+    private static LottoYieldService lottoYieldService = new LottoYieldService(connection);
 
+    public static void main(String[] args) {
         externalStaticFileLocation("src/main/resources/templates");
 
         get("/", (req, res) -> {
@@ -34,13 +37,32 @@ public class WebUILottoApplication {
             return render(model, "index.html");
         });
 
-        post("/purchase", "application/json", (req, res) -> {
+        get("/lottoRound", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("lottoRound", lottoRoundService.inquireTotalRound());
+            return render(model, "lottoRound.html");
+        });
+
+        get("/lottoRound/:round", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int round = Integer.parseInt(req.params(":round"));
+
+            model.put("lottoGroup", lottoPurchaseService.inquireLottos(round));
+            model.put("winning", lottoWinningService.inquireWinningLotto(round));
+            model.put("lottoResult", lottoResultService.inquireLottoResult(round).entrySet());
+            model.put("yield", lottoYieldService.inquireLottoYield(round));
+
+            return render(model, "lottoRoundResult.html");
+        });
+
+        post("/purchase", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 
             Integer purchaseAmount = Integer.parseInt(req.queryParams("purchaseAmount"));
             Integer manualCount = Integer.parseInt(req.queryParams("manualCount"));
 
             PurchaseCount purchaseCount = PurchaseCount.of(PurchaseAmount.of(purchaseAmount), manualCount);
+            lottoRoundService.playLottoGame();
 
             req.session().attribute("purchaseCount", purchaseCount);
             model.put("purchaseCount", purchaseCount);
@@ -52,10 +74,8 @@ public class WebUILottoApplication {
             Map<String, Object> model = new HashMap<>();
 
             PurchaseCount purchaseCount = req.session().attribute("purchaseCount");
-            Lottos lottos = new LottoService().createLottos(purchaseCount, req.queryParamsValues("manualLotto"));
-
-            req.session().attribute("lottoGroup", lottos);
-            model.put("lottoGroup", lottos.getLottos());
+            lottoPurchaseService.saveLottos(purchaseCount, req.queryParamsValues("manualLotto"));
+            model.put("lottoGroup", lottoPurchaseService.inquireLottos());
             model.put("purchaseCount", purchaseCount);
 
             return render(model, "winning.html");
@@ -63,13 +83,16 @@ public class WebUILottoApplication {
 
         post("/result", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            LottoService lottoService = new LottoService();
 
-            Winning winning = lottoService.createWinningLotto(req.queryParams("winningLotto"), req.queryParams("bonusBall"));
-            LottoResult lottoResult = lottoService.createLottoResult(winning, req.session().attribute("lottoGroup"));
+            lottoWinningService.saveWinningLotto(req.queryParams("winningLotto"), req.queryParams("bonusBall"));
 
-            model.put("yield", lottoResult.yield());
-            model.put("lottoResult", lottoService.createLottoMessage(lottoResult.getMap()));
+            LottoResult lottoResult = lottoRoundService.createLottoResult(lottoWinningService.inquireWinningLotto(), lottoPurchaseService.inquireLottos());
+
+            lottoResultService.saveLottoResult(lottoResult);
+            lottoYieldService.saveLottoYield(lottoResult);
+
+            model.put("lottoResult", lottoResultService.inquireLottoResult().entrySet());
+            model.put("yield", lottoYieldService.inquireLottoYield());
 
             return render(model, "result.html");
         });
