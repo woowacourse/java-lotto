@@ -5,7 +5,7 @@ import lotto.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class LottoGame {
+public class LottoGame {
     private static final String MESSAGE_LOW_MONEY = "금액이 모자랍니다.";
 
     private final LottoRule rule;
@@ -38,6 +38,10 @@ class LottoGame {
 
     public WinStat getStat() {
         return this.stat;
+    }
+
+    public int getPrice() {
+        return this.rule.getPrice();
     }
 
     public int getAllPurchaseCount() {

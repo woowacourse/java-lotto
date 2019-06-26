@@ -1,4 +1,5 @@
 let allPurchaseAmount = 0;
+let allPurchaseCount = 0;
 let manualLottos = [];
 let winningLotto = [];
 let bonusNo = 0;
@@ -50,9 +51,9 @@ const applyManualLottoNums = (lottoNumsArray, buttonParent) => {
     }
 };
 
-const manualLottoAmount = (value) => {
+const manualLottoCount = (value) => {
     const count = parseInt(value);
-    if (allPurchaseAmount - count < 0) {
+    if (allPurchaseCount - count < 0) {
         alert("구입 금액보다 수동 로또 개수가 더 많습니다.");
         return;
     }
@@ -60,8 +61,8 @@ const manualLottoAmount = (value) => {
 };
 
 const changePurchaseAmount = (value) => {
-    const temp = parseInt(value) / 1000;
-    allPurchaseAmount = Math.ceil(temp);
+    allPurchaseAmount = parseInt(value)
+    allPurchaseCount = Math.ceil(allPurchaseAmount / 1000);
 };
 
 const getWinningLotto = () => {
@@ -86,6 +87,9 @@ const queryToLottos = () => {
         type: "POST",
         url: "/api/newLottos",
         data: JSON.stringify(query),
-        dataType: "json"
+        dataType: "json",
+        success: response => {
+            console.log(response);
+        }
     });
 };

@@ -1,5 +1,9 @@
 package lotto;
 
+import lotto.controller.LottoGame;
+import lotto.view.JsonInput;
+import lotto.view.JsonOutput;
+
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
@@ -14,9 +18,9 @@ public class WebUILottoApplication {
         init();
 
         post("/api/newLottos", (request, response) -> {
-            System.err.println(request.body());
             response.type(CONTENT_JSON);
-            return EMPTY_JSON;
+            final LottoGame game = JsonInput.getLottoGame(request.body());
+            return JsonOutput.lottoGameToJson(game);
         });
     }
 }
