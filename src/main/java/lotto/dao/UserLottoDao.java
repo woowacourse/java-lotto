@@ -7,21 +7,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserLottoDAO {
-    private static UserLottoDAO userLottoDAO;
+public class UserLottoDao {
+    private static UserLottoDao userLottoDAO;
 
-    private UserLottoDAO() {
+    private UserLottoDao() {
     }
 
-    public static UserLottoDAO getInstance() {
+    public static UserLottoDao getInstance() {
         if (userLottoDAO == null) {
-            userLottoDAO = new UserLottoDAO();
+            userLottoDAO = new UserLottoDao();
         }
         return userLottoDAO;
     }
 
     public void insertLotto(int round, List<Integer> lottoNumbers) {
-        UpdatejdbcTemplate template = new UpdatejdbcTemplate();
+        UpdateJdbcTemplate template = new UpdateJdbcTemplate();
         String query = "insert into userlotto values(?,?,?,?,?,?,?)";
         List<Integer> parameters = new ArrayList<>();
         parameters.add(round);

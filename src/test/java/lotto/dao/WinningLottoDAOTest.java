@@ -14,7 +14,7 @@ public class WinningLottoDAOTest {
     void 삽입_테스트() {
         List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 7;
-        WinningLottoDAO.getInstance().insertWinningLotto(1, lotto, bonusNumber);
+        WinningLottoDao.getInstance().insertWinningLotto(1, lotto, bonusNumber);
     }
 
     @Test
@@ -22,6 +22,6 @@ public class WinningLottoDAOTest {
         Map<String,String> test = new HashMap<>();
         test.put("winningLotto","1,2,3,4,5,6");
         test.put("bonusNumber","20");
-        assertThat(WinningLottoDAO.getInstance().findWinningLottoByRound(14)).isEqualTo(test);
+        assertThat(WinningLottoDao.getInstance().findWinningLottoByRound(14)).isEqualTo(test);
     }
 }

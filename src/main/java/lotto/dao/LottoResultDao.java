@@ -7,15 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class LottoResultDAO {
-    private static LottoResultDAO lottoResultDAO;
+public class LottoResultDao {
+    private static LottoResultDao lottoResultDAO;
 
-    private LottoResultDAO() {
+    private LottoResultDao() {
     }
 
-    public static LottoResultDAO getInstance() {
+    public static LottoResultDao getInstance() {
         if (lottoResultDAO == null) {
-            lottoResultDAO = new LottoResultDAO();
+            lottoResultDAO = new LottoResultDao();
         }
         return lottoResultDAO;
     }
@@ -40,7 +40,7 @@ public class LottoResultDAO {
     }
 
     public void updateLottoResult(int round, Map<Rank, Integer> result) {
-        UpdatejdbcTemplate template = new UpdatejdbcTemplate();
+        UpdateJdbcTemplate template = new UpdateJdbcTemplate();
         PreparedStatement pstmt = null;
         String query = "update lottoresult set \n" +
                 "    first_matcher = ?," +
@@ -63,7 +63,7 @@ public class LottoResultDAO {
     }
 
     public void insertNewLottoRound() {
-        UpdatejdbcTemplate template = new UpdatejdbcTemplate();
+        UpdateJdbcTemplate template = new UpdateJdbcTemplate();
         String query = "insert into lottoresult value();";
 
         try {

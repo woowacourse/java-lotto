@@ -7,7 +7,7 @@ public class WinningLotto {
     private WinningLotto(Lotto lotto, int bonusNumber) {
         this.winningLotto = lotto;
         checkValidBonusNumber(bonusNumber);
-        this.bonusNumber = LottoNumber.Of(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public Lotto getWinningLotto() {
@@ -24,7 +24,7 @@ public class WinningLotto {
 
     private void checkValidBonusNumber(int bonusNumber) {
         try {
-            checkDuplicateBonusNumber(LottoNumber.Of(bonusNumber));
+            checkDuplicateBonusNumber(LottoNumber.of(bonusNumber));
         } catch (InvalidLottoNumberException e) {
             System.out.println(e.getMessage());
             throw new InvalidBonusLottoNumberException("보너스 번호를 다시 입력해 주세요.");

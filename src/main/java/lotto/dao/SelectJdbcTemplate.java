@@ -6,12 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class SelectJdbcTemplate <T>{
+public abstract class SelectJdbcTemplate<T> {
     public T executeQuery(String query, List<Integer> parameters) throws SQLException {
         PreparedStatement pstmt = null;
-        Connection con = DAOConnector.getConnection();
+        Connection con = DaoConnector.getConnection();
         pstmt = con.prepareStatement(query);
-        setParameter(pstmt,parameters);
+        setParameter(pstmt, parameters);
         ResultSet rs = pstmt.executeQuery();
         return getResult(rs);
     }

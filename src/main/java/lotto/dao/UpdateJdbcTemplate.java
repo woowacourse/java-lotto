@@ -5,10 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UpdatejdbcTemplate {
+public class UpdateJdbcTemplate {
     public void updateQuery(String query, List<Integer> parameters) throws SQLException {
         PreparedStatement pstmt = null;
-        Connection con = DAOConnector.getConnection();
+        Connection con = DaoConnector.getConnection();
         pstmt = con.prepareStatement(query);
         setParameter(pstmt,parameters);
         pstmt.executeUpdate();

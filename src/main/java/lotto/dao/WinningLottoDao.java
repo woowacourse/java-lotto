@@ -9,21 +9,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WinningLottoDAO {
-    private static WinningLottoDAO WinningLottoDAO;
+public class WinningLottoDao {
+    private static WinningLottoDao WinningLottoDAO;
 
-    private WinningLottoDAO() {
+    private WinningLottoDao() {
     }
 
-    public static WinningLottoDAO getInstance() {
+    public static WinningLottoDao getInstance() {
         if (WinningLottoDAO == null) {
-            WinningLottoDAO = new WinningLottoDAO();
+            WinningLottoDAO = new WinningLottoDao();
         }
         return WinningLottoDAO;
     }
 
     public void insertWinningLotto(int round, List<Integer> lottoNumbers, int bonusNumber) {
-        UpdatejdbcTemplate template = new UpdatejdbcTemplate();
+        UpdateJdbcTemplate template = new UpdateJdbcTemplate();
         String query = "insert into winninglotto values(?,?,?,?,?,?,?,?)";
         List<Integer> parameters = new ArrayList<>();
         parameters.add(round);

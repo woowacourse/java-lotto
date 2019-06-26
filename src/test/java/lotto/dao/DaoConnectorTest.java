@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DAOConnectorTest {
+public class DaoConnectorTest {
 
     @Test
     void connection() {
-        assertThat(DAOConnector.getConnection()).isNotNull();
+        assertThat(DaoConnector.getConnection()).isNotNull();
     }
 }

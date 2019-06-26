@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DAOConnector {
+public class DaoConnector {
     public static Connection getConnection() {
         Properties properties = getProperties();
         Connection con = null;

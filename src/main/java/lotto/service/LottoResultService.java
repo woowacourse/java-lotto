@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.dao.LottoResultDAO;
+import lotto.dao.LottoResultDao;
 import lottogame.domain.LottoResult;
 import lottogame.domain.Rank;
 
@@ -12,16 +12,16 @@ public class LottoResultService {
 
     }
     public static int findPresentRound() {
-        return LottoResultDAO.getInstance().findPresentRound();
+        return LottoResultDao.getInstance().findPresentRound();
     }
 
     public static void updateLottoResult(int round, LottoResult lottoResult) {
         Map<Rank, Integer> result = lottoResult.getResult();
-        LottoResultDAO.getInstance().updateLottoResult(round, result);
+        LottoResultDao.getInstance().updateLottoResult(round, result);
     }
 
     public static void insertNewLottoRound() {
-        LottoResultDAO.getInstance().insertNewLottoRound();
+        LottoResultDao.getInstance().insertNewLottoRound();
 
     }
 
@@ -31,11 +31,11 @@ public class LottoResultService {
     }
 
     public static List<Integer> findAllRound(int round) {
-        return LottoResultDAO.getInstance().findAllRound(round);
+        return LottoResultDao.getInstance().findAllRound(round);
     }
 
     public static LottoResult findLottoResultByRound(int round) {
-        Map<Rank,Integer> result = LottoResultDAO.getInstance().findLottoResultByRound(round);
+        Map<Rank,Integer> result = LottoResultDao.getInstance().findLottoResultByRound(round);
         return new LottoResult(result);
     }
 }

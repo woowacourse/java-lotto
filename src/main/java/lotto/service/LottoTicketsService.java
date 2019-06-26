@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.dao.UserLottoDAO;
+import lotto.dao.UserLottoDao;
 import lottogame.domain.Lotto;
 import lottogame.domain.LottoTickets;
 
@@ -14,13 +14,13 @@ public class LottoTicketsService {
         List<Lotto> lottos = lottoTickets.getLottos();
         for (Lotto lotto : lottos) {
             List<Integer> lottoNumbers = lotto.getNumbers();
-            UserLottoDAO.getInstance().insertLotto(round, lottoNumbers);
+            UserLottoDao.getInstance().insertLotto(round, lottoNumbers);
         }
     }
 
     public static LottoTickets findTicketsByRound(int round) {
         LottoTickets lottoTickets = new LottoTickets();
-        List<String> lottoNumbers = UserLottoDAO.getInstance().findLottosByRound(round);
+        List<String> lottoNumbers = UserLottoDao.getInstance().findLottosByRound(round);
         for (String lottoNumber : lottoNumbers) {
             lottoTickets.addManualLotto(lottoNumber);
         }
