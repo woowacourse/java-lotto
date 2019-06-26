@@ -111,7 +111,7 @@ public class LottoWebController {
     }
 
     private static void assertBuyingMoneyEnough(LottoQuantity totalQuantity, List<Lotto> lottos) {
-        if (totalQuantity.compareTo(LottoQuantity.of(lottos.size())) == -1) {
+        if (totalQuantity.isLessThan(LottoQuantity.of(lottos.size()))) {
             throw new IllegalArgumentException("금액이 부족합니다.");
         }
     }

@@ -5,7 +5,6 @@ import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
@@ -35,14 +34,14 @@ public class WinningLottoDaoTest {
     }
 
     @BeforeAll
-    static void cleanup() throws SQLException {
+    static void cleanup() {
         for (long id : winningLottoIdsToClean) {
             winningLottoDao.deleteById(id);
         }
     }
 
     @Test
-    void insertAndFind() throws SQLException {
+    void insertAndFind() {
         long insertedWinningLottoId = winningLottoDao.addWinningLotto(TEMP_WINNING_LOTTO);
         Optional<WinningLottoDto> found = winningLottoDao.findById(insertedWinningLottoId);
         assertThat(found.isPresent()).isTrue();
@@ -57,7 +56,7 @@ public class WinningLottoDaoTest {
     }
 
     @Test
-    void delete() throws SQLException {
+    void delete() {
         long insertedWinningLottoId = winningLottoDao.addWinningLotto(TEMP_WINNING_LOTTO);
         winningLottoDao.deleteById(insertedWinningLottoId);
         Optional<WinningLottoDto> found = winningLottoDao.findById(insertedWinningLottoId);

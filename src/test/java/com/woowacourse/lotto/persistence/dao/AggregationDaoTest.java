@@ -40,7 +40,7 @@ public class AggregationDaoTest {
     }
 
     @BeforeEach
-    void setup() throws Exception {
+    void setup() {
         DataSource ds = TestDataSourceFactory.createDataSource();
         aggregationDao = AggregationDao.getInstance(ds);
         winningLottoDao = WinningLottoDao.getInstance(ds);
@@ -53,7 +53,7 @@ public class AggregationDaoTest {
     }
 
     @AfterEach
-    void cleanup() throws Exception {
+    void cleanup() {
         while (!aggregationIdsToDelete.isEmpty()) {
             aggregationDao.deleteById(aggregationIdsToDelete.poll());
         }
@@ -71,7 +71,7 @@ public class AggregationDaoTest {
     }
 
     @Test
-    void findById() throws Exception {
+    void findById() {
         Optional<AggregationDto> maybeFound = aggregationDao.findById(aggregationIdsToDelete.peek());
         assertThat(maybeFound.isPresent()).isTrue();
         AggregationDto found = maybeFound.get();
@@ -85,7 +85,7 @@ public class AggregationDaoTest {
     }
 
     @Test
-    void findLatestN() throws Exception {
+    void findLatestN() {
         // Test data * 2
         int latestRound = aggregationDao.findLatestRound();
         LottoDto lottoDto1 = LottoDto.of(0, 1, 2, 3, 4, 5, 6, Lotto.UNIT_PRICE, null);
@@ -115,12 +115,12 @@ public class AggregationDaoTest {
     }
 
     @Test
-    void findLatestRound() throws Exception {
+    void findLatestRound() {
         assertThat(aggregationDao.findLatestRound()).isEqualTo(TEMP_AGGREGATION.getLottoRound());
     }
 
     @Test
-    void deleteById() throws Exception {
+    void deleteById() {
         long inserted = aggregationIdsToDelete.peek();
         assertThat(aggregationDao.deleteById(inserted)).isEqualTo(1);
         assertThat(aggregationDao.findById(inserted).isPresent()).isFalse();

@@ -22,9 +22,11 @@ public class WinningLottoDao {
         this.dataSource = ds;
     }
 
-    public long addWinningLotto(WinningLottoDto winningLotto) throws SQLException {
+    public long addWinningLotto(WinningLottoDto winningLotto) {
         try (Connection conn = dataSource.getConnection()) {
             return executeAddWinningLottoQuery(winningLotto, conn);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -49,11 +51,13 @@ public class WinningLottoDao {
         }
     }
 
-    public Optional<WinningLottoDto> findById(long id) throws SQLException {
+    public Optional<WinningLottoDto> findById(long id) {
         try (Connection conn = dataSource.getConnection()) {
             PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_ID);
             query.setLong(1, id);
             return executeAndGetFoundWinningLottoResult(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -70,12 +74,14 @@ public class WinningLottoDao {
         return Optional.of(mapResult(rs));
     }
 
-    public Optional<WinningLottoDto> findByAggregationId(long aggregationId) throws SQLException {
+    public Optional<WinningLottoDto> findByAggregationId(long aggregationId) {
         try (Connection conn = dataSource.getConnection()) {
             PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_AGGREGATION_ID);
             query.setLong(1, aggregationId);
 
             return executeAndGetFoundWinningLottoResult(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -93,11 +99,13 @@ public class WinningLottoDao {
         );
     }
 
-    public int deleteById(long id) throws SQLException {
+    public int deleteById(long id) {
         try (Connection conn = dataSource.getConnection()) {
             PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.DELETE_BY_ID);
             query.setLong(1, id);
             return query.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -25,8 +25,12 @@ public class LottoQuantity {
         }
     }
 
-    public int compareTo(LottoQuantity q) {
-        return Integer.compare(this.quantity, q.quantity);
+    public boolean isMoreThan(LottoQuantity q) {
+        return this.quantity > q.quantity;
+    }
+
+    public boolean isLessThan(LottoQuantity q) {
+        return this.quantity < q.quantity;
     }
 
     public int toInt() {

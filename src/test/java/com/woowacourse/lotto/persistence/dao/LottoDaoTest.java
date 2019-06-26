@@ -6,7 +6,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
@@ -30,14 +29,14 @@ public class LottoDaoTest {
     }
 
     @AfterAll
-    static void cleanup() throws SQLException {
+    static void cleanup() {
         for (long id : lottoIdsToClean) {
             lottoDao.deleteById(id);
         }
     }
 
     @Test
-    void insertAndFind() throws SQLException {
+    void insertAndFind() {
         long insertedLottoId = lottoDao.addLotto(TEMP_LOTTO);
         Optional<LottoDto> found = lottoDao.findById(insertedLottoId);
         assertThat(found.isPresent()).isTrue();
@@ -51,7 +50,7 @@ public class LottoDaoTest {
     }
 
     @Test
-    void delete() throws SQLException {
+    void delete() {
         long insertedLottoId = lottoDao.addLotto(TEMP_LOTTO);
         assertThat(lottoDao.deleteById(insertedLottoId)).isEqualTo(1);
         assertThat(lottoDao.findById(insertedLottoId).isPresent()).isFalse();

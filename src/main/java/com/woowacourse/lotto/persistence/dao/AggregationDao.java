@@ -24,7 +24,7 @@ public class AggregationDao {
         this.dataSource = ds;
     }
 
-    public long addAggregation(AggregationDto aggregation, long winningLottoId, List<Long> lottoIds) throws SQLException {
+    public long addAggregation(AggregationDto aggregation, long winningLottoId, List<Long> lottoIds) {
         try (Connection conn = dataSource.getConnection()) {
             conn.setAutoCommit(false);
             // 1. agg 엔티티 추가
@@ -35,6 +35,8 @@ public class AggregationDao {
             addAggregatedWinningLotto(aggId, winningLottoId, conn);
             conn.commit();
             return aggId;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -53,7 +55,7 @@ public class AggregationDao {
         }
     }
 
-    private void assertInserted(int updated) throws SQLException {
+    private void assertInserted(int updated) {
         if (updated == 0) {
             throw new IllegalStateException("Aggregation is not inserted");
         }
@@ -89,9 +91,11 @@ public class AggregationDao {
         }
     }
 
-    public Optional<AggregationDto> findById(long id) throws SQLException {
+    public Optional<AggregationDto> findById(long id) {
         try (Connection conn = dataSource.getConnection()) {
             return handleFindByIdQuery(id, conn);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -109,9 +113,11 @@ public class AggregationDao {
         }
     }
 
-    public List<AggregationDto> findLatestN(int limit) throws SQLException {
+    public List<AggregationDto> findLatestN(int limit) {
         try (Connection conn = dataSource.getConnection()) {
             return executeFindLatestNResultsQuery(limit, conn);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -138,10 +144,12 @@ public class AggregationDao {
         return results;
     }
 
-    public int findLatestRound() throws SQLException {
+    public int findLatestRound() {
         try (Connection conn = dataSource.getConnection()) {
             PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_MAX_ROUND);
             return executeAndGetLatestRound(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -177,11 +185,13 @@ public class AggregationDao {
         );
     }
 
-    public int deleteById(long id) throws SQLException {
+    public int deleteById(long id) {
         try (Connection conn = dataSource.getConnection()) {
             PreparedStatement query = conn.prepareStatement(AggregationDaoSql.DELETE_BY_ID);
             query.setLong(1, id);
             return query.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

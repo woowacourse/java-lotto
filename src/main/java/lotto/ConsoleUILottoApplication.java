@@ -52,16 +52,12 @@ public class ConsoleUILottoApplication {
     private static List<Lotto> getManualLottos(LottoQuantity totalLottoQuantity) {
         LottoQuantity manualLottoQuantity = createManualLottoQuantity();
 
-        while (isManualQuantityGreaterThanTotal(totalLottoQuantity, manualLottoQuantity)) {
+        while (totalLottoQuantity.isMoreThan(manualLottoQuantity)) {
             ConsoleOutputView.printError(String.format("최대 %d장 까지 구매할 수 있습니다.", totalLottoQuantity.toInt()));
             manualLottoQuantity = createManualLottoQuantity();
         }
 
         return createManualLottos(manualLottoQuantity);
-    }
-
-    private static boolean isManualQuantityGreaterThanTotal(LottoQuantity totalLottoQuantity, LottoQuantity manualLottoQuantity) {
-        return manualLottoQuantity.compareTo(totalLottoQuantity) == 1;
     }
 
     private static LottoQuantity createManualLottoQuantity() {
