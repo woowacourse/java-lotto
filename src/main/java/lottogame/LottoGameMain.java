@@ -1,7 +1,6 @@
 package lottogame;
 
 import lottogame.domain.*;
-import lottogame.domain.InvalidLottoNumberException;
 import lottogame.view.InputView;
 import lottogame.view.OutputView;
 

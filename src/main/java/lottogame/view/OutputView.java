@@ -2,7 +2,6 @@ package lottogame.view;
 
 import lottogame.domain.LottoResult;
 import lottogame.domain.LottoTickets;
-import lottogame.domain.Money;
 import lottogame.domain.Rank;
 
 public class OutputView {

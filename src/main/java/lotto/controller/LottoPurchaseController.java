@@ -7,7 +7,8 @@ import lottogame.domain.Money;
 import spark.Request;
 import spark.Response;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static lotto.WebUILottoApplication.render;
 
