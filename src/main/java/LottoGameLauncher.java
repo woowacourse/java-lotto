@@ -1,8 +1,12 @@
 import domain.*;
 import domain.lottonumber.LottoNumber;
-import domain.money.*;
+import domain.money.IllegalNumberOfManualIssueException;
+import domain.money.IllegalPurchasementException;
+import domain.money.Money;
+import domain.money.PurchaseAmount;
 import utils.StringParser;
-import view.*;
+import view.InputView;
+import view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +22,8 @@ public class LottoGameLauncher {
         WinningLotto winningLotto = getWinningLotto();
         IssuedLottos issuedLottos = IssuedLottos.getTotalLottosOf(manualIssuedLottos, autoIssuedLottos);
         Statistics statistics = LottoGame.startLottery(issuedLottos, winningLotto);
-        OutputView.showAnalysisOf(statistics);
+        double earningRates = statistics.calculateEarningRates();
+        OutputView.showAnalysisOf(statistics, earningRates);
     }
 
     private static PurchaseAmount getPurchaseAmount() {

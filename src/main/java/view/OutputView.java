@@ -16,11 +16,11 @@ public class OutputView {
         }
     }
 
-    public static void showAnalysisOf(Statistics statistics) {
+    public static void showAnalysisOf(Statistics statistics, double earningRates) {
         for (Rank rank : Rank.values()) {
             showRankStatisticsOf(statistics, rank);
         }
-        System.out.println("총 수익률은 " + statistics.calculateEarningRates() * 100 + "% 입니다.");
+        System.out.println("총 수익률은 " + earningRates * 100 + "% 입니다.");
     }
 
     private static void showRankStatisticsOf(Statistics statistics, Rank rank) {
