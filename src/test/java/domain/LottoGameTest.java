@@ -21,10 +21,10 @@ class LottoGameTest {
                 LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5),
                 LottoNumber.valueOf(6)));
-        LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
-        IssuedLottos issuedLottos = IssuedLottos.of(Arrays.asList(new IssuedLotto(lottoNumbers)));
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        IssuedLottos issuedLottos = IssuedLottos.of(Arrays.asList(new Lotto(lottoNumbers)));
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusNumber);
 
         /* When: */
         Statistics statistics = LottoGame.startLottery(issuedLottos, winningLotto);

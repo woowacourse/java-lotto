@@ -11,8 +11,8 @@ import java.util.TreeSet;
 
 public class LottoFactory {
     public static IssuedLottos autoIssueLottoWorthOf(Money purchaseAmount) {
-        int numberOfLottoToIssue = purchaseAmount.getAmount() / IssuedLotto.PRICE;
-        List<IssuedLotto> lottos = new ArrayList<>();
+        int numberOfLottoToIssue = purchaseAmount.getAmount() / Lotto.PRICE;
+        List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < numberOfLottoToIssue; i++) {
             lottos.add(autoIssueLotto());
@@ -20,14 +20,15 @@ public class LottoFactory {
         return IssuedLottos.of(lottos);
     }
 
-    private static IssuedLotto autoIssueLotto() {
+    private static Lotto autoIssueLotto() {
         Set<LottoNumber> randomLottoNumbers = RandomLottoNumberGenerator.generateNumbersAsManyAs(Lotto.NUMBER_OF_LOTTO_NUMBERS);
-        return new IssuedLotto(randomLottoNumbers);
+        return new Lotto(randomLottoNumbers);
     }
 
-    public static WinningLotto issueWinningLotto(List<Integer> inputNumbers, LottoNumber bonusNumber) {
+    public static WinningLotto getWinningLotto(List<Integer> inputNumbers, LottoNumber bonusNumber) {
         Set<LottoNumber> lottoNumbers = getLottoNumbersOf(inputNumbers);
-        return new WinningLotto(lottoNumbers, bonusNumber);
+        Lotto winningLotto = new Lotto(lottoNumbers);
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
     private static Set<LottoNumber> getLottoNumbersOf(List<Integer> inputNumbers) {
@@ -39,9 +40,9 @@ public class LottoFactory {
         return lottoNumbers;
     }
 
-    public static IssuedLotto manualIssueLottoBy(List<Integer> inputNumbers) {
+    public static Lotto manualIssueLottoBy(List<Integer> inputNumbers) {
         Set<LottoNumber> lottoNumbers = getLottoNumbersOf(inputNumbers);
-        return new IssuedLotto(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 }
 

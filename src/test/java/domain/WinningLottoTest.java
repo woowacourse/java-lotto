@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class WinningLottoTest {
     private LottoNumber one;
@@ -32,20 +31,13 @@ class WinningLottoTest {
     }
 
     @Test
-    void 로또_발급시_숫자가_6개가_아니면_예외를_던지는지_테스트() {
-        Set<LottoNumber> fiveLottoNumbers = new TreeSet<>(Arrays.asList(one, two, three, four, five));
-
-        assertThrows(IllegalArgumentException.class, () -> new WinningLotto(fiveLottoNumbers, bonusNumber));
-    }
-
-    @Test
     void 당첨_로또와_맞춰본_결과를_제대로_알려주는지_테스트() {
         Set<LottoNumber> sixWinningNumbers = new TreeSet<>(Arrays.asList(one, two, three, four, five, six));
-        WinningLotto winningLotto = new WinningLotto(sixWinningNumbers, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(sixWinningNumbers), bonusNumber);
 
         Set<LottoNumber> sixIssuedNumbers = new TreeSet<>(Arrays.asList(one, two, three, four, five, bonusNumber));
-        IssuedLotto issuedLotto = new IssuedLotto(sixIssuedNumbers);
+        Lotto lotto = new Lotto(sixIssuedNumbers);
 
-        assertThat(winningLotto.matchUpLottoNumbersWith(issuedLotto)).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.matchUpLottoNumbersWith(lotto)).isEqualTo(Rank.SECOND);
     }
 }

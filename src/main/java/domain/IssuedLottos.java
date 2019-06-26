@@ -6,18 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IssuedLottos {
-    private List<IssuedLotto> lottos;
+    private List<Lotto> lottos;
 
-    private IssuedLottos(List<IssuedLotto> lottos) {
+    private IssuedLottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public static IssuedLottos of(List<IssuedLotto> lottos) {
+    public static IssuedLottos of(List<Lotto> lottos) {
         return new IssuedLottos(lottos);
     }
 
     public static IssuedLottos getTotalLottosOf(IssuedLottos manual, IssuedLottos auto) {
-        List<IssuedLotto> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
 
         lottos.addAll(manual.lottos);
         lottos.addAll(auto.lottos);
@@ -25,10 +25,10 @@ public class IssuedLottos {
     }
 
     public Money getPurchasedAmount() {
-        return Money.amountOf(lottos.size() * IssuedLotto.PRICE);
+        return Money.amountOf(lottos.size() * Lotto.PRICE);
     }
 
-    public List<IssuedLotto> getLottos() {
+    public List<Lotto> getLottos() {
         return lottos;
     }
 

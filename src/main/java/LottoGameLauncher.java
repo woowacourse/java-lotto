@@ -35,7 +35,7 @@ public class LottoGameLauncher {
 
     private static IssuedLottos getManualIssuedLottosUpTo(PurchaseAmount purchaseAmount) {
         int numberOfManualIssue = getNumberOfManualIssueLottosUpTo(purchaseAmount);
-        List<IssuedLotto> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
 
         InputView.printInputMessageOfManualIssue();
         for (int i = 0; i < numberOfManualIssue; i++) {
@@ -57,7 +57,7 @@ public class LottoGameLauncher {
         }
     }
 
-    private static IssuedLotto getManualIssuedLotto() {
+    private static Lotto getManualIssuedLotto() {
         try {
             String inputNumbers = InputView.getNumbersForLotto();
             List<Integer> numbers = StringParser.parseNumbers(inputNumbers);
@@ -73,7 +73,7 @@ public class LottoGameLauncher {
         try {
             List<Integer> winningNumbers = StringParser.parseNumbers(InputView.inputWinningNumbers());
             int bonusNumber = StringParser.parseInt(InputView.inputBonusNumber());
-            return LottoFactory.issueWinningLotto(winningNumbers, LottoNumber.valueOf(bonusNumber));
+            return LottoFactory.getWinningLotto(winningNumbers, LottoNumber.valueOf(bonusNumber));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             OutputView.show404NotFound();

@@ -7,8 +7,8 @@ public class LottoGame {
     public static Statistics startLottery(IssuedLottos issuedLottos, WinningLotto winningLotto) {
         Map<Rank, CountOfRank> countsOfRank = getEnumMapOfRankCounts();
 
-        for (IssuedLotto issuedLotto : issuedLottos.getLottos()) {
-            Rank matchingResult = winningLotto.matchUpLottoNumbersWith(issuedLotto);
+        for (Lotto lotto : issuedLottos.getLottos()) {
+            Rank matchingResult = winningLotto.matchUpLottoNumbersWith(lotto);
             addRankToCountsOfRank(matchingResult, countsOfRank);
         }
 

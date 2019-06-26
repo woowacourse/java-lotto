@@ -35,15 +35,15 @@ class LottoFactoryTest {
     @Test
     void 당첨_로또를_제대로_발행해주는지_테스트() {
         LottoNumber bonusNumber = LottoNumber.valueOf(7);
-        WinningLotto expectedWinningLotto = new WinningLotto(sixNumbers, bonusNumber);
+        WinningLotto expectedWinningLotto = new WinningLotto(new Lotto(sixNumbers), bonusNumber);
 
-        assertThat(LottoFactory.issueWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber))
+        assertThat(LottoFactory.getWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber))
                 .isEqualTo(expectedWinningLotto);
     }
 
     @Test
     void 수동으로_구매한_로또를_제대로_발행해주는지_테스트() {
-        Lotto expectedLotto = new IssuedLotto(sixNumbers);
+        Lotto expectedLotto = new Lotto(sixNumbers);
 
         assertThat(LottoFactory.manualIssueLottoBy(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(expectedLotto);
     }

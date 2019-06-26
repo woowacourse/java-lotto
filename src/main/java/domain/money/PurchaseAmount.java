@@ -1,11 +1,11 @@
 package domain.money;
 
-import domain.IssuedLotto;
+import domain.Lotto;
 
 public class PurchaseAmount extends Money {
     public static final int MINIMUM_AMOUNT = 1000;
 
-    public PurchaseAmount(int amountOfMoney) {
+    PurchaseAmount(int amountOfMoney) {
         super(amountOfMoney);
     }
 
@@ -23,13 +23,13 @@ public class PurchaseAmount extends Money {
     }
 
     private static void validateIfMultipleOfPricePerLotto(int amountOfMoney) {
-        if (amountOfMoney % IssuedLotto.PRICE != 0) {
+        if (amountOfMoney % Lotto.PRICE != 0) {
             throw new IllegalPurchasementException();
         }
     }
 
     public void checkNumberOfManualIssue(int numberOfManualIssue) {
-        if (numberOfManualIssue * IssuedLotto.PRICE > amountOfMoney) {
+        if (numberOfManualIssue * Lotto.PRICE > amountOfMoney) {
             throw new IllegalNumberOfManualIssueException();
         }
     }

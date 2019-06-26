@@ -1,9 +1,6 @@
 package view;
 
-import domain.IssuedLotto;
-import domain.IssuedLottos;
-import domain.Rank;
-import domain.Statistics;
+import domain.*;
 
 public class OutputView {
     public static void showIssuedLottos(IssuedLottos manualIssuedLottos, IssuedLottos autoIssuedLottos) {
@@ -14,8 +11,8 @@ public class OutputView {
     }
 
     private static void printAllLottosIn(IssuedLottos manualIssuedLottos) {
-        for (IssuedLotto issuedLotto : manualIssuedLottos.getLottos()) {
-            System.out.println(issuedLotto);
+        for (Lotto lotto : manualIssuedLottos.getLottos()) {
+            System.out.println(lotto);
         }
     }
 

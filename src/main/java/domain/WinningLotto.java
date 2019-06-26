@@ -3,19 +3,19 @@ package domain;
 import domain.lottonumber.LottoNumber;
 
 import java.util.Objects;
-import java.util.Set;
 
-public class WinningLotto extends Lotto {
+public class WinningLotto {
+    private Lotto lotto;
     private LottoNumber bonusNumber;
 
-    WinningLotto(Set<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
-        super(lottoNumbers);
+    WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+        this.lotto = lotto;
         this.bonusNumber = bonusNumber;
     }
 
-    Rank matchUpLottoNumbersWith(IssuedLotto issuedLotto) {
-        int countOfMatchingNumbers = (int) lottoNumbers.stream()
-                .filter(issuedLotto::contains)
+    Rank matchUpLottoNumbersWith(Lotto issuedLotto) {
+        int countOfMatchingNumbers = (int) issuedLotto.lottoNumbers.stream()
+                .filter(lotto::contains)
                 .count();
 
         return Rank.of(countOfMatchingNumbers, issuedLotto.contains(bonusNumber));
@@ -26,11 +26,12 @@ public class WinningLotto extends Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
-        return Objects.equals(bonusNumber, that.bonusNumber);
+        return Objects.equals(lotto, that.lotto) &&
+                Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bonusNumber);
+        return Objects.hash(lotto, bonusNumber);
     }
 }

@@ -29,7 +29,7 @@ class IssuedLottosTest {
 
     @Test
     void 발급된_로또들의_총_구매_가격을_되돌려주는지_테스트() {
-        IssuedLottos issuedLottos = IssuedLottos.of(Arrays.asList(new IssuedLotto(lottoNumbersOfOneToSix)));
+        IssuedLottos issuedLottos = IssuedLottos.of(Arrays.asList(new Lotto(lottoNumbersOfOneToSix)));
         Money purchaseAmount = issuedLottos.getPurchasedAmount();
 
         assertThat(purchaseAmount.getAmount()).isEqualTo(1000);
@@ -37,11 +37,11 @@ class IssuedLottosTest {
 
     @Test
     void 발급된_로또들을_하나의_콜렉션으로_합치는지_테스트() {
-        IssuedLottos lottoGroupA = IssuedLottos.of(Arrays.asList(new IssuedLotto(lottoNumbersOfOneToSix)));
-        IssuedLottos lottoGroupB = IssuedLottos.of(Arrays.asList(new IssuedLotto(lottoNumbersOfTwoToSeven)));
+        IssuedLottos lottoGroupA = IssuedLottos.of(Arrays.asList(new Lotto(lottoNumbersOfOneToSix)));
+        IssuedLottos lottoGroupB = IssuedLottos.of(Arrays.asList(new Lotto(lottoNumbersOfTwoToSeven)));
 
         assertThat(IssuedLottos.getTotalLottosOf(lottoGroupA, lottoGroupB).getLottos())
-                .isEqualTo(Arrays.asList(new IssuedLotto(lottoNumbersOfOneToSix), new IssuedLotto(lottoNumbersOfTwoToSeven)));
+                .isEqualTo(Arrays.asList(new Lotto(lottoNumbersOfOneToSix), new Lotto(lottoNumbersOfTwoToSeven)));
     }
 }
 
