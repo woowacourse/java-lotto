@@ -1,6 +1,9 @@
 package lottogame.domain;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Random;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_LOTTO_NUMBER = 45;
@@ -20,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber Of(int lottoNumber) {
+    public static LottoNumber of(int lottoNumber) {
         validateLottoNumber(lottoNumber);
         return lottoNumbers.get(lottoNumber);
     }
@@ -34,6 +37,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     static LottoNumber getRandomLottoNumber() {
         Random random = new Random();
         return lottoNumbers.get(random.nextInt(MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER);
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override

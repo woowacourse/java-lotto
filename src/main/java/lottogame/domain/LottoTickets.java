@@ -10,6 +10,10 @@ public class LottoTickets {
         return new LottoTickets();
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     public void addManualLotto(String manualLotto) {
         Lotto lotto = ManualLottoGenerator.create(manualLotto);
         lottos.add(lotto);

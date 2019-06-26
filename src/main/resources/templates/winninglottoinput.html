@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 게임</title>
+</head>
+<body>
+<h1>당첨 번호 입력</h1>
+<form action="/winninglotto/getresult" id="winning-lotto-form" method="post">
+    <div class="lotto">
+        <input type=text class=winning-lotto-lottonumber1 placeholder="첫번째 숫자">
+        <input type=text class=winning-lotto-lottonumber2 placeholder="두번째 숫자">
+        <input type=text class=winning-lotto-lottonumber3 placeholder="세번째 숫자">
+        <input type=text class=winning-lotto-lottonumber4 placeholder="네번째 숫자">
+        <input type=text class=winning-lotto-lottonumber5 placeholder="다섯번째 숫자">
+        <input type=text class=winning-lotto-lottonumber6 placeholder="여섯번째 숫자">
+        <input type=hidden id=winning-lotto name=winning-lotto>
+    </div>
+    <input type="text" name="bonus-number" placeholder="보너스 숫자">
+    <input type="button" value="당첨 번호 생성" onclick=setwinninglotto()>
+</form>
+</body>
+<script
+        src='https://code.jquery.com/jquery-3.4.1.min.js'
+        integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
+        crossorigin='anonymous'></script>
+<script type='text/javascript'>
+    function setwinninglotto() {
+        var string = $('.winning-lotto-lottonumber1').val() + ',' +
+            $('.winning-lotto-lottonumber2').val() + ',' +
+            $('.winning-lotto-lottonumber3').val() + ',' +
+            $('.winning-lotto-lottonumber4').val() + ',' +
+            $('.winning-lotto-lottonumber5').val() + ',' +
+            $('.winning-lotto-lottonumber6').val();
+        $("#winning-lotto").val(string);
+
+        document.getElementById('winning-lotto-form').submit();
+    }
+</script>
+</html>

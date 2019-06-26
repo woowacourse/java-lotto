@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>로또 게임</title>
+</head>
+<body>
+<h1>회차 선택</h1>
+원하는 회차를 선택해주세요.
+<select name="round-select" id="round-select">
+    {{#rounds}}
+    <option value={{this}}>{{this}}</option>
+    {{/rounds}}
+</select>
+<form action='/showhistory/result' id='manual-lotto-form' method='post'>
+    <input type="hidden" id="selected-round" name="selected-round">
+    <input type="button" value="결과 보기" onclick=setround()>
+</form>
+</body>
+<script
+        src='https://code.jquery.com/jquery-3.4.1.min.js'
+        integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
+        crossorigin='anonymous'></script>
+<script>
+    function setround() {
+        $('#selected-round').val($('#round-select').val());
+
+        document.getElementById('manual-lotto-form').submit();
+    }
+</script>
+</html>

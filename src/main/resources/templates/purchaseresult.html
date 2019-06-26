@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 게임</title>
+</head>
+<body>
+<h1>구입 결과</h1>
+수동으로{{numberOfManual}}개, 자동으로 {{numberOfAuto}}개 구입하였습니다.<br>
+{{#lottoTickets}}
+{{this}}<br>
+{{/lottoTickets}}
+<br>
+
+<form action="/">
+    <input type="submit" value="시작으로 돌아가기">
+</form>
+</body>
+</html>

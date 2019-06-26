@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>로또</title>
+    <title>로또 게임</title>
 </head>
 <body>
-Hello World!!
+<h1>메인 페이지 입력</h1>
+<form action="lottogame/money" method="post">
+    <input type="submit" value="로또 구입">
+</form>
+<form action="winninglotto/create">
+    <input type="submit" value="당첨 번호 입력">
+</form>
+<form action="/showhistory/selectround">
+    <input type="submit" value="이전 기록 보기">
+</form>
+<div class="hello"></div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package lottogame;
 
 import lottogame.domain.*;
-import lottogame.domain.InvalidLottoNumberException;
 import lottogame.view.InputView;
 import lottogame.view.OutputView;
 
@@ -31,9 +30,9 @@ public class LottoGameMain {
 
     private static boolean isInValidNumberOfManualInput(String input, Money money) {
         try {
-            return money.isInValidNumber(Integer.parseInt(input));
-        } catch (NumberFormatException e) {
-            System.out.println("숫자를 입력해 주세요.");
+            return money.checkInValidNumber(Integer.parseInt(input));
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
             return true;
         }
     }
@@ -42,18 +41,18 @@ public class LottoGameMain {
         Optional<Money> money;
 
         do {
-            money = Optional.ofNullable(createMoney(InputView.getPrice()));
+            money = createMoney(InputView.getPrice());
         } while (!money.isPresent());
 
         return money.get();
     }
 
-    private static Money createMoney(String price) {
+    private static Optional<Money> createMoney(String price) {
         try {
-            return Money.generate(Integer.parseInt(price));
+            return Optional.of(Money.generate(Integer.parseInt(price)));
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -83,30 +82,30 @@ public class LottoGameMain {
         Optional<Lotto> lotto;
         Optional<WinningLotto> winningLotto;
         do {
-            lotto = Optional.ofNullable(createMatchLotto(InputView.getWinningLotto()));
+            lotto = createMatchLotto(InputView.getWinningLotto());
         } while (!lotto.isPresent());
         do {
-            winningLotto = Optional.ofNullable(createWinningLotto(lotto.get(), InputView.getBonusNumber()));
+            winningLotto = createWinningLotto(lotto.get(), InputView.getBonusNumber());
         } while (!winningLotto.isPresent());
 
         return winningLotto.get();
     }
 
-    private static Lotto createMatchLotto(String winningLotto) {
+    private static Optional<Lotto> createMatchLotto(String winningLotto) {
         try {
-            return ManualLottoGenerator.create(winningLotto);
+            return Optional.of(ManualLottoGenerator.create(winningLotto));
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 
-    private static WinningLotto createWinningLotto(Lotto lotto, String bonusNumber) {
+    private static Optional<WinningLotto> createWinningLotto(Lotto lotto, String bonusNumber) {
         try {
-            return WinningLotto.generate(lotto, Integer.parseInt(bonusNumber));
+            return Optional.of(WinningLotto.generate(lotto, Integer.parseInt(bonusNumber)));
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 }

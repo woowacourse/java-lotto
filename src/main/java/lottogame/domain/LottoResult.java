@@ -5,9 +5,13 @@ import java.util.Map;
 public class LottoResult {
     private Map<Rank, Integer> result;
 
-    LottoResult(Map<Rank, Integer> result) {
+    public LottoResult(Map<Rank, Integer> result) {
         this.result = result;
         this.result.remove(Rank.MISS);
+    }
+
+    public Map<Rank, Integer> getResult() {
+        return result;
     }
 
     public long getRateOfLotto(Money money) {

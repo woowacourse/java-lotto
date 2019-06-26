@@ -17,7 +17,7 @@ public class ManualLottoGenerator {
     private static Set<LottoNumber> getLottoNumbers(List<Integer> parse) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer lottoNumber : parse) {
-            lottoNumbers.add(LottoNumber.Of(lottoNumber));
+            lottoNumbers.add(LottoNumber.of(lottoNumber));
         }
         return lottoNumbers;
     }

@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,6 +27,14 @@ public class Lotto {
         return lotto.contains(lottoNumber);
     }
 
+    public List<Integer> getNumbers() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : lotto) {
+            lottoNumbers.add(lottoNumber.getLottoNumber());
+        }
+        return lottoNumbers;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -38,5 +47,4 @@ public class Lotto {
         stringBuilder.append("]");
         return stringBuilder.toString();
     }
-
 }
