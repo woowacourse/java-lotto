@@ -4,6 +4,7 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.domain.WinningAggregator;
 import com.woowacourse.lotto.domain.WinningLotto;
+import com.woowacourse.lotto.persistence.DataSourceFactory;
 import com.woowacourse.lotto.persistence.dao.AggregationDao;
 import com.woowacourse.lotto.persistence.dao.LottoDao;
 import com.woowacourse.lotto.persistence.dao.WinningLottoDao;
@@ -16,26 +17,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class LottoService {
-    private static final String DB_HOST = "localhost";
-    private static final String DB_NAME = "wtc_lotto_db";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
-
     private LottoDao lottoDao;
     private WinningLottoDao winningLottoDao;
     private AggregationDao aggregationDao;
 
-    private DataSource createDataSource() {
-        MysqlDataSource ds = new MysqlDataSource();
-        ds.setUrl("jdbc:mysql://" + DB_HOST + "/" + DB_NAME + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC");
-        ds.setUser(DB_USER);
-        ds.setPassword(DB_PASSWORD);
-        ds.setDatabaseName(DB_NAME);
-        return ds;
-    }
-
     public LottoService() {
-        DataSource ds = createDataSource();
+        DataSource ds = DataSourceFactory.createDataSource();
         lottoDao = LottoDao.getInstance(ds);
         winningLottoDao = WinningLottoDao.getInstance(ds);
         aggregationDao = AggregationDao.getInstance(ds);
