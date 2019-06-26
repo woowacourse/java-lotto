@@ -41,7 +41,6 @@ public class LottoResultDao {
 
     public void updateLottoResult(int round, Map<Rank, Integer> result) {
         UpdateJdbcTemplate template = new UpdateJdbcTemplate();
-        PreparedStatement pstmt = null;
         String query = "update lottoresult set \n" +
                 "    first_matcher = ?," +
                 "    second_matcher = ?," +
@@ -56,7 +55,7 @@ public class LottoResultDao {
                 result.get(Rank.FIFTH),
                 round);
         try {
-            template.updateQuery(query,parameters);
+            template.updateQuery(query, parameters);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,7 +66,7 @@ public class LottoResultDao {
         String query = "insert into lottoresult value();";
 
         try {
-            template.updateQuery(query,new ArrayList<>());
+            template.updateQuery(query, new ArrayList<>());
         } catch (SQLException e) {
             e.printStackTrace();
         }

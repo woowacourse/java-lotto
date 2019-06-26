@@ -31,8 +31,8 @@ public class Money {
     }
 
     public boolean checkInValidNumber(int numberOfManualLotto) {
-        if(getNumberOfTicket() < numberOfManualLotto){
-            throw new IllegalArgumentException(getNumberOfTicket()+"개 이하만 가능합니다.");
+        if (getNumberOfTicket() < numberOfManualLotto) {
+            throw new IllegalArgumentException(getNumberOfTicket() + "개 이하만 가능합니다.");
         }
         return false;
     }

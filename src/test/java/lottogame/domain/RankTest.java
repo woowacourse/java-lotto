@@ -13,6 +13,6 @@ public class RankTest {
 
     @Test
     void 범위를_벗어나는_매치개수를_입력했을때_예외처리_테스트() {
-        assertThrows(IllegalArgumentException.class,()->Rank.valueOf(-1, false));
+        assertThrows(IllegalArgumentException.class, () -> Rank.valueOf(-1, false));
     }
 }

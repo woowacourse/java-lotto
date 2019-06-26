@@ -21,8 +21,8 @@ public class LottoResultDaoTest {
         lottoTickets.addManualLotto("1,2,3,4,5,6");
         WinningLotto winningLotto = WinningLotto.generate(ManualLottoGenerator.create("1,2,3,4,5,6"), 7);
         LottoResult lottoResult = LottoResultGenerator.create(lottoTickets, winningLotto);
-        Map<Rank,Integer> result = lottoResult.getResult();
-        LottoResultDao.getInstance().updateLottoResult(1,result);
+        Map<Rank, Integer> result = lottoResult.getResult();
+        LottoResultDao.getInstance().updateLottoResult(1, result);
     }
 
     @Test
@@ -32,12 +32,12 @@ public class LottoResultDaoTest {
 
     @Test
     void 해당_회차에_대한_result_결과_테스트() {
-        Map<Rank,Integer> test = new HashMap<>();
-        test.put(Rank.FIRST,0);
-        test.put(Rank.SECOND,0);
-        test.put(Rank.THIRD,0);
-        test.put(Rank.FOURTH,0);
-        test.put(Rank.FIFTH,0);
+        Map<Rank, Integer> test = new HashMap<>();
+        test.put(Rank.FIRST, 0);
+        test.put(Rank.SECOND, 0);
+        test.put(Rank.THIRD, 0);
+        test.put(Rank.FOURTH, 0);
+        test.put(Rank.FIFTH, 0);
         assertThat(LottoResultDao.getInstance().findLottoResultByRound(14)).isEqualTo(test);
     }
 }

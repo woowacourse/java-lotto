@@ -7,10 +7,9 @@ import java.util.List;
 
 public class UpdateJdbcTemplate {
     public void updateQuery(String query, List<Integer> parameters) throws SQLException {
-        PreparedStatement pstmt = null;
         Connection con = DaoConnector.getConnection();
-        pstmt = con.prepareStatement(query);
-        setParameter(pstmt,parameters);
+        PreparedStatement pstmt = con.prepareStatement(query);
+        setParameter(pstmt, parameters);
         pstmt.executeUpdate();
     }
 
