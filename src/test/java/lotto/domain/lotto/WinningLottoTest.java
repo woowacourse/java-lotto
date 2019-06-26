@@ -2,7 +2,7 @@ package lotto.domain.lotto;
 
 import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
-import lotto.exception.DuplicateLottoNumberException;
+import lotto.domain.exception.DuplicateLottoNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

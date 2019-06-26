@@ -1,4 +1,4 @@
-package lotto.exception;
+package lotto.controller.exception;
 
 public class IllegalParameterException extends IllegalArgumentException {
     public IllegalParameterException() {

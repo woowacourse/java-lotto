@@ -1,4 +1,4 @@
-package lotto.exception;
+package lotto.domain.exception;
 
 public class PaymentOutOfBoundsException extends IllegalArgumentException {
     public PaymentOutOfBoundsException(String message) {

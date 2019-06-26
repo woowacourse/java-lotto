@@ -1,8 +1,8 @@
 package lotto.service;
 
 import lotto.dao.LottoResultDao;
-import lotto.domain.dto.RankingDto;
-import lotto.domain.dto.ResultDto;
+import lotto.service.dto.RankingDto;
+import lotto.service.dto.ResultDto;
 import lotto.domain.lotto.Result;
 import lotto.domain.paymentinfo.Payment;
 

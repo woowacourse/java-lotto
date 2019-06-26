@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.exception.LottoNumberOutOfBoundsException;
+import lotto.domain.exception.LottoNumberOutOfBoundsException;
 
 import java.util.Map;
 import java.util.Objects;

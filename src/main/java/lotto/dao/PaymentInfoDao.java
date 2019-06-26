@@ -1,7 +1,7 @@
 package lotto.dao;
 
 import lotto.dao.utils.DaoTemplate;
-import lotto.domain.dto.PaymentInfoDto;
+import lotto.service.dto.PaymentInfoDto;
 
 import java.sql.*;
 

@@ -1,6 +1,6 @@
 package lotto.controller.common;
 
-import lotto.exception.IllegalParameterException;
+import lotto.controller.exception.IllegalParameterException;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;

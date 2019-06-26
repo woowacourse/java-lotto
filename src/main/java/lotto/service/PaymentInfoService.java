@@ -1,11 +1,13 @@
 package lotto.service;
 
 import lotto.dao.PaymentInfoDao;
-import lotto.domain.dto.PaymentInfoDto;
+import lotto.service.dto.PaymentInfoDto;
 import lotto.domain.paymentinfo.CountOfLotto;
 import lotto.domain.paymentinfo.Payment;
 
 import java.sql.SQLDataException;
+
+import static lotto.controller.common.CommonController.nullable;
 
 public class PaymentInfoService {
     private PaymentInfoService() {
@@ -23,7 +25,10 @@ public class PaymentInfoService {
         return PaymentInfoDao.getInstance().insertUser(userName);
     }
 
-    public int insertPaymentInfoAndReturnKeyValue(Payment payment, CountOfLotto countOfLotto, String name) throws SQLDataException {
+    public int insertPaymentInfoAndReturnKeyValue(int inputPayment, int countOfManualLotto, String name) throws SQLDataException {
+        Payment payment = new Payment(inputPayment);
+        CountOfLotto countOfLotto = new CountOfLotto(payment, countOfManualLotto);
+
         PaymentInfoDto paymentInfoDTO = createPaymentInfoDTO(payment, countOfLotto, name);
         return PaymentInfoDao.getInstance().insertPayment(paymentInfoDTO);
     }

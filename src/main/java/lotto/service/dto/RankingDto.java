@@ -1,4 +1,4 @@
-package lotto.domain.dto;
+package lotto.service.dto;
 
 public class RankingDto implements Comparable<RankingDto> {
     private String name;

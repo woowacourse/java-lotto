@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.exception.DuplicateLottoNumberException;
+import lotto.domain.exception.DuplicateLottoNumberException;
 
 import java.util.EnumMap;
 import java.util.Map;

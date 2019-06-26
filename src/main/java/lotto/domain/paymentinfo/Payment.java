@@ -1,6 +1,6 @@
 package lotto.domain.paymentinfo;
 
-import lotto.exception.PaymentOutOfBoundsException;
+import lotto.domain.exception.PaymentOutOfBoundsException;
 
 import java.util.Objects;
 

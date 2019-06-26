@@ -1,7 +1,7 @@
 package lotto.dao;
 
 import lotto.dao.utils.DaoTemplate;
-import lotto.domain.dto.ResultDto;
+import lotto.service.dto.ResultDto;
 
 import java.sql.*;
 import java.util.ArrayList;

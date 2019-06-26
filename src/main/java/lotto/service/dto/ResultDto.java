@@ -1,4 +1,4 @@
-package lotto.domain.dto;
+package lotto.service.dto;
 
 import lotto.domain.lotto.Rank;
 
