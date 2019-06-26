@@ -4,7 +4,6 @@ import domain.lottonumber.LottoNumber;
 
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WinningLotto extends Lotto {
     private LottoNumber bonusNumber;
@@ -15,10 +14,9 @@ public class WinningLotto extends Lotto {
     }
 
     Rank matchUpLottoNumbersWith(IssuedLotto issuedLotto) {
-        int countOfMatchingNumbers = lottoNumbers.stream()
+        int countOfMatchingNumbers = (int) lottoNumbers.stream()
                 .filter(issuedLotto::contains)
-                .collect(Collectors.toList())
-                .size();
+                .count();
 
         return Rank.of(countOfMatchingNumbers, issuedLotto.contains(bonusNumber));
     }
