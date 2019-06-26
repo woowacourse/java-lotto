@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class LottoFactory {
     public static IssuedLottos autoIssueLottoWorthOf(Money purchaseAmount) {
-        int numberOfLottoToIssue = purchaseAmount.getAmount() / Lotto.PRICE;
+        int numberOfLottoToIssue = purchaseAmount.getAmount() / Lotto.PRICE.getAmount();
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < numberOfLottoToIssue; i++) {

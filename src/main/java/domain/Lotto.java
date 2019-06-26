@@ -1,13 +1,14 @@
 package domain;
 
 import domain.lottonumber.LottoNumber;
+import domain.money.Money;
 
 import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
     static final int NUMBER_OF_LOTTO_NUMBERS = 6;
-    public static final int PRICE = 1000;
+    public static final Money PRICE = Money.amountOf(1000);
 
     Set<LottoNumber> lottoNumbers;
 

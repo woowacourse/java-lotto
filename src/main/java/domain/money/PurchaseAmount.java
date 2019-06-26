@@ -23,13 +23,13 @@ public class PurchaseAmount extends Money {
     }
 
     private static void validateIfMultipleOfPricePerLotto(int amountOfMoney) {
-        if (amountOfMoney % Lotto.PRICE != 0) {
+        if (amountOfMoney % Lotto.PRICE.getAmount() != 0) {
             throw new IllegalPurchasementException();
         }
     }
 
     public void checkNumberOfManualIssue(int numberOfManualIssue) {
-        if (numberOfManualIssue * Lotto.PRICE > amountOfMoney) {
+        if (numberOfManualIssue * Lotto.PRICE.getAmount() > amountOfMoney) {
             throw new IllegalNumberOfManualIssueException();
         }
     }

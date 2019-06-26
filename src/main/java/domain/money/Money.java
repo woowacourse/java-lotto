@@ -1,5 +1,7 @@
 package domain.money;
 
+import java.util.Objects;
+
 public class Money {
     private static final int MINIMUM_AMOUNT = 0;
     protected int amountOfMoney;
@@ -25,5 +27,22 @@ public class Money {
 
     public Money getChangeOf(Money money) {
         return new Money(this.amountOfMoney - money.getAmount());
+    }
+
+    public Money multiply(int multiplier) {
+        return new Money(amountOfMoney * multiplier);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money = (Money) o;
+        return amountOfMoney == money.amountOfMoney;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amountOfMoney);
     }
 }
