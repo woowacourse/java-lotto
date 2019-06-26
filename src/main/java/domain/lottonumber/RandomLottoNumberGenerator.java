@@ -12,6 +12,8 @@ public class RandomLottoNumberGenerator {
         }
     }
 
+    private RandomLottoNumberGenerator() {}
+
     public static Set<LottoNumber> generateNumbersAsManyAs(int numberOfLottoNumber) {
         if (numberOfLottoNumber > pool.size()) {
             throw new IllegalArgumentException("뽑을 수 있는 로또 번호의 개수는 45개를 넘을 수 없습니다.");
