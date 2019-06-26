@@ -12,6 +12,8 @@ import static lotto.controller.common.CommonController.nullable;
 import static lotto.controller.common.CommonController.render;
 
 public class PaymentInfoController {
+    private static final PaymentInfoService PAYMENT_INFO_SERVICE = PaymentInfoService.getInstance();
+
     private PaymentInfoController() {
         throw new AssertionError();
     }
@@ -20,7 +22,7 @@ public class PaymentInfoController {
         String userName = nullable(request.queryParams("user_name"));
 
         // TODO: 2019-06-13 How to process insert result? void?
-        int userInsertResult = PaymentInfoService.getInstance().insertUser(userName);
+        int userInsertResult = PAYMENT_INFO_SERVICE.insertUser(userName);
 
         Map<String, Object> model = new HashMap<>();
         model.put("name", userName);

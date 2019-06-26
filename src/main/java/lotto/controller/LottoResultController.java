@@ -1,7 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.dto.RankingDto;
-import lotto.domain.dto.ResultDto;
+import lotto.service.PaymentInfoService;
+import lotto.service.dto.RankingDto;
+import lotto.service.dto.ResultDto;
 import lotto.domain.lotto.Lotto;
 import lotto.service.LottoResultService;
 import lotto.service.LottoService;
@@ -17,14 +18,17 @@ import static lotto.controller.common.CommonController.nullable;
 import static lotto.controller.common.CommonController.render;
 
 public class LottoResultController {
+    private static final LottoService LOTTO_SERVICE = LottoService.getInstance();
+    private static final LottoResultService LOTTO_RESULT_SERVICE = LottoResultService.getInstance();
+
     private LottoResultController() {
         throw new AssertionError();
     }
 
     public static String goIndex(Request request, Response response) throws SQLDataException {
         Map<String, Object> model = new HashMap<>();
-        List<ResultDto> lottoGames = LottoResultService.getInstance().selectAllLottoResult();
-        List<RankingDto> ranking = LottoResultService.getInstance().createUserRanking(lottoGames);
+        List<ResultDto> lottoGames = LOTTO_RESULT_SERVICE.selectAllLottoResult();
+        List<RankingDto> ranking = LOTTO_RESULT_SERVICE.createUserRanking(lottoGames);
 
         model.put("lottoGames", lottoGames);
         model.put("ranking", ranking);
@@ -34,14 +38,14 @@ public class LottoResultController {
     public static String goLottoResult(Request request, Response response) throws SQLDataException {
         int round = Integer.parseInt(nullable(request.params(":round")));
 
-        ResultDto resultDTO = LottoResultService.getInstance().selectLottoResult(round);
-        List<Lotto> lottoTicket = LottoService.getInstance().selectAllLotto(round);
+        ResultDto resultDTO = LOTTO_RESULT_SERVICE.selectLottoResult(round);
+        List<Lotto> lottoTicket = LOTTO_SERVICE.selectAllLotto(round);
 
-        long countOfAutoLotto = LottoService.getInstance().calculateCountOfAutoLotto(lottoTicket);
+        long countOfAutoLotto = LOTTO_SERVICE.calculateCountOfAutoLotto(lottoTicket);
 
         Map<String, Object> model = new HashMap<>();
         model.put("result", resultDTO);
-        model.put("winningLotto", LottoService.getInstance().selectWinningLotto(round));
+        model.put("winningLotto", LOTTO_SERVICE.selectWinningLotto(round));
         model.put("lottoTicket", lottoTicket);
         model.put("auto", countOfAutoLotto);
         model.put("manual", lottoTicket.size() - countOfAutoLotto);

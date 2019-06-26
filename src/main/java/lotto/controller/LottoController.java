@@ -1,11 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.dto.ResultDto;
+import lotto.service.dto.ResultDto;
 import lotto.domain.lotto.*;
 import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
-import lotto.domain.paymentinfo.CountOfLotto;
-import lotto.domain.paymentinfo.Payment;
 import lotto.service.LottoResultService;
 import lotto.service.LottoService;
 import lotto.service.PaymentInfoService;
@@ -23,21 +21,22 @@ import static lotto.controller.common.CommonController.nullable;
 import static lotto.controller.common.CommonController.render;
 
 public class LottoController {
+    private static final PaymentInfoService PAYMENT_INFO_SERVICE = PaymentInfoService.getInstance();
+    private static final LottoService LOTTO_SERVICE = LottoService.getInstance();
+    private static final LottoResultService LOTTO_RESULT_SERVICE = LottoResultService.getInstance();
+
     private LottoController() {
         throw new AssertionError();
     }
 
     public static String goSelectLotto(Request request, Response response) throws SQLDataException {
-        Payment payment = new Payment(Integer.parseInt(nullable(request.queryParams("payment"))));
+        int payment = Integer.parseInt(nullable(request.queryParams("payment")));
         int countOfManualLotto = Integer.parseInt(nullable(request.queryParams("countOfManualLotto")));
-        CountOfLotto countOfLotto = new CountOfLotto(payment, countOfManualLotto);
-
         String name = nullable(request.queryParams("name"));
 
-        int round = PaymentInfoService.getInstance()
-                .insertPaymentInfoAndReturnKeyValue(payment, countOfLotto, name);
+        int round = PAYMENT_INFO_SERVICE.insertPaymentInfoAndReturnKeyValue(payment, countOfManualLotto, name);
 
-        List<String> manualLottoInputTag = LottoService.getInstance().createResponseInputTag(countOfManualLotto);
+        List<String> manualLottoInputTag = LOTTO_SERVICE.createResponseInputTag(countOfManualLotto);
 
         Map<String, Object> model = new HashMap<>();
         model.put("lottoName", manualLottoInputTag);
@@ -52,17 +51,18 @@ public class LottoController {
         int round = Integer.parseInt(nullable(request.queryParams("round")));
         String name = nullable(request.queryParams("name"));
 
-        LottoRepository lottoRepository = LottoService.getInstance().addLottos(request.queryParamsValues("lotto_number"), countOfLotto);
+        LottoRepository lottoRepository = LOTTO_SERVICE
+                .addLottos(request.queryParamsValues("lotto_number"), countOfLotto);
 
-        int insertLottoTicket = LottoService.getInstance().insertLottoTicket(lottoRepository, round);
+        int insertLottoTicket = LOTTO_SERVICE.insertLottoTicket(lottoRepository, round);
 
         WinningLotto winningLotto = createWinningLotto(
                 nullable(request.queryParams("winning_lotto")),
                 nullable(request.queryParams("bonus_ball")));
 
-        int insertWinningLotto = LottoService.getInstance().insertWinningLotto(winningLotto, round);
+        int insertWinningLotto = LOTTO_SERVICE.insertWinningLotto(winningLotto, round);
 
-        int insertResult = LottoResultService.getInstance()
+        int insertResult = LOTTO_RESULT_SERVICE
                 .insertLottoResult(createResultDTO(winningLotto, lottoRepository, round, name));
 
         response.redirect("/result/" + round);
