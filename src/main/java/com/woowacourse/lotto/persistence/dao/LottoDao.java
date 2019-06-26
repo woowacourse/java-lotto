@@ -25,8 +25,8 @@ public class LottoDao {
     }
 
     public long addLotto(LottoDto lotto) {
-        try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement query = conn.prepareStatement(LottoDaoSql.INSERT_LOTTO, Statement.RETURN_GENERATED_KEYS);
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement query = conn.prepareStatement(LottoDaoSql.INSERT_LOTTO, Statement.RETURN_GENERATED_KEYS);) {
             query.setInt(1, lotto.getNumber0());
             query.setInt(2, lotto.getNumber1());
             query.setInt(3, lotto.getNumber2());
@@ -49,8 +49,8 @@ public class LottoDao {
     }
 
     public Optional<LottoDto> findById(long id) {
-        try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement query = conn.prepareStatement(LottoDaoSql.SELECT_LOTTO_BY_ID);
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement query = conn.prepareStatement(LottoDaoSql.SELECT_LOTTO_BY_ID)) {
             query.setLong(1, id);
             return executeAndGetFoundLotto(query);
         } catch (SQLException e) {
@@ -65,8 +65,8 @@ public class LottoDao {
     }
 
     public List<LottoDto> findByAggregationId(long aggregationId) {
-        try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement query = conn.prepareStatement(LottoDaoSql.SELECT_BY_AGGREGATION_ID);
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement query = conn.prepareStatement(LottoDaoSql.SELECT_BY_AGGREGATION_ID)) {
             query.setLong(1, aggregationId);
 
             return executeAndGetFoundLottos(query);
@@ -82,8 +82,8 @@ public class LottoDao {
     }
 
     public int deleteById(long id) {
-        try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement query = conn.prepareStatement(LottoDaoSql.DELETE_BY_ID);
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement query = conn.prepareStatement(LottoDaoSql.DELETE_BY_ID)) {
             query.setLong(1, id);
             return query.executeUpdate();
         } catch (SQLException e) {

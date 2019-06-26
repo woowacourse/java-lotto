@@ -145,8 +145,8 @@ public class AggregationDao {
     }
 
     public int findLatestRound() {
-        try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_MAX_ROUND);
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement query = conn.prepareStatement(AggregationDaoSql.SELECT_MAX_ROUND)) {
             return executeAndGetLatestRound(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -186,8 +186,8 @@ public class AggregationDao {
     }
 
     public int deleteById(long id) {
-        try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement query = conn.prepareStatement(AggregationDaoSql.DELETE_BY_ID);
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement query = conn.prepareStatement(AggregationDaoSql.DELETE_BY_ID)) {
             query.setLong(1, id);
             return query.executeUpdate();
         } catch (SQLException e) {

@@ -52,8 +52,8 @@ public class WinningLottoDao {
     }
 
     public Optional<WinningLottoDto> findById(long id) {
-        try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_ID);
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_ID)) {
             query.setLong(1, id);
             return executeAndGetFoundWinningLottoResult(query);
         } catch (SQLException e) {
@@ -75,8 +75,8 @@ public class WinningLottoDao {
     }
 
     public Optional<WinningLottoDto> findByAggregationId(long aggregationId) {
-        try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_AGGREGATION_ID);
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.SELECT_BY_AGGREGATION_ID)) {
             query.setLong(1, aggregationId);
 
             return executeAndGetFoundWinningLottoResult(query);
@@ -100,8 +100,8 @@ public class WinningLottoDao {
     }
 
     public int deleteById(long id) {
-        try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.DELETE_BY_ID);
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement query = conn.prepareStatement(WinningLottoDaoSql.DELETE_BY_ID)) {
             query.setLong(1, id);
             return query.executeUpdate();
         } catch (SQLException e) {
