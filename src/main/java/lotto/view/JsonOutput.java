@@ -75,8 +75,8 @@ public class JsonOutput {
         return quotationWrap(key) + COLON_DELIMITER + value;
     }
 
-    private static String keyAndIntValue(final int key, final int value) {
-        return quotationWrap(Integer.toString(key)) + COLON_DELIMITER + value;
+    private static String keyAndDoubleValue(final String key, final double value) {
+        return quotationWrap(key) + COLON_DELIMITER + value;
     }
 
     private static String joinByComma(final String... strings) {
@@ -117,7 +117,9 @@ public class JsonOutput {
                 keyAndIntValue("autoPurchaseCount", game.getAutoPurchaseCount()),
                 keyAndIntValue("manualPurchaseCount", game.getManualPurchaseCount()),
                 keyAndJsonValue("lottos", lottosToJson(game.getLottos())),
-                keyAndJsonValue("stat", statToJson(game.getStat()))
+                keyAndJsonValue("stat", statToJson(game.getStat())),
+                keyAndIntValue("totalPrizeMoney", game.getStat().getTotalPrizeMoney()),
+                keyAndDoubleValue("profitRate", game.getStat().getProfitRate())
         );
         return responseOk("result", braceWrap(result));
     }

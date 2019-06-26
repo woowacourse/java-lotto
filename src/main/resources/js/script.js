@@ -6,15 +6,19 @@ let bonusNo = 0;
 
 const numberInputElement = `:input[type="number"]`;
 
-const manualLottoNumsDiv = `<li><div class="manualLottoNums">
-<input type="number" class="manualLottoNum" min="1" max="45" />,
-<input type="number" class="manualLottoNum" min="1" max="45" />,
-<input type="number" class="manualLottoNum" min="1" max="45" />,
-<input type="number" class="manualLottoNum" min="1" max="45" />,
-<input type="number" class="manualLottoNum" min="1" max="45" />,
-<input type="number" class="manualLottoNum" min="1" max="45" />
-<input type="button" value="추가" onClick="getManualLottoNums(this)" />
-</div></li>`;
+const manualLottoNumsDiv = `<li><div class="manualLottoNums">` +
+`<input type="number" class="manualLottoNum" min="1" max="45" />`.repeat(6) +
+`<input type="button" value="추가" onClick="getManualLottoNums(this)" /></div></li>`;
+
+const winningStatDiv = (result) => `<p>당첨 통계</p>
+<ul>
+  <li>3개 일치 (5,000원) - ${result.stat["5"]}개</li>
+  <li>4개 일치 (50,000원) - ${result.stat["4"]}개</li>
+  <li>5개 일치 (1,500,000원) - ${result.stat["3"]}개</li>
+  <li>5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.stat["2"]}개</li>
+  <li>6개 일치 (2,000,000,000원) - ${result.stat["1"]}개</li>
+</ul>
+<p>총 수익률은 ${result.profitRate}%입니다.</p>`;
 
 const manualLottoNumsDivApplied = (lottoNumsArray) => `<li>
 <div class="manualLottoNums">${lottoNumsArray.join(", ")}</div>
@@ -89,7 +93,8 @@ const queryToLottos = () => {
         data: JSON.stringify(query),
         dataType: "json",
         success: response => {
-            console.log(response);
+            const div = winningStatDiv(response.result);
+            $("#winningStat").html(div);
         }
     });
 };
