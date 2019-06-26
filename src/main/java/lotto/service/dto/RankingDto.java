@@ -18,8 +18,8 @@ public class RankingDto implements Comparable<RankingDto> {
     }
 
     @Override
-    public int compareTo(RankingDto rankingDTO) {
-        return Long.compare(totalWinningMoney, rankingDTO.totalWinningMoney);
+    public int compareTo(RankingDto rankingDto) {
+        return Long.compare(totalWinningMoney, rankingDto.totalWinningMoney);
     }
 
     @Override

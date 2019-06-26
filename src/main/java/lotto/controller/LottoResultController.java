@@ -38,13 +38,13 @@ public class LottoResultController {
     public static String goLottoResult(Request request, Response response) throws SQLDataException {
         int round = Integer.parseInt(nullable(request.params(":round")));
 
-        ResultDto resultDTO = LOTTO_RESULT_SERVICE.selectLottoResult(round);
+        ResultDto resultDto = LOTTO_RESULT_SERVICE.selectLottoResult(round);
         List<Lotto> lottoTicket = LOTTO_SERVICE.selectAllLotto(round);
 
         long countOfAutoLotto = LOTTO_SERVICE.calculateCountOfAutoLotto(lottoTicket);
 
         Map<String, Object> model = new HashMap<>();
-        model.put("result", resultDTO);
+        model.put("result", resultDto);
         model.put("winningLotto", LOTTO_SERVICE.selectWinningLotto(round));
         model.put("lottoTicket", lottoTicket);
         model.put("auto", countOfAutoLotto);

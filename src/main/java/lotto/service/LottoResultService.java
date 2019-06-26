@@ -14,6 +14,8 @@ import java.util.Map;
 import static java.util.stream.Collectors.*;
 
 public class LottoResultService {
+    private static final LottoResultDao LOTTO_RESULT_DAO = LottoResultDao.getInstance();
+
     private LottoResultService() {
     }
 
@@ -26,11 +28,11 @@ public class LottoResultService {
     }
 
     public List<ResultDto> selectAllLottoResult() throws SQLDataException {
-        List<ResultDto> lottoGames = LottoResultDao.getInstance().selectAllLottoResult();
+        List<ResultDto> lottoGames = LOTTO_RESULT_DAO.selectAllLottoResult();
 
-        lottoGames.forEach(resultDTO -> {
-            resultDTO.setTotalWinningMoney(new Result(resultDTO.getLottoScore()).calculateTotalWinningMoney());
-            resultDTO.setEarningRate(resultDTO.getTotalWinningMoney() / resultDTO.getPayment());
+        lottoGames.forEach(resultDto -> {
+            resultDto.setTotalWinningMoney(new Result(resultDto.getLottoScore()).calculateTotalWinningMoney());
+            resultDto.setEarningRate(resultDto.getTotalWinningMoney() / resultDto.getPayment());
         });
         return lottoGames;
     }
@@ -45,15 +47,15 @@ public class LottoResultService {
                 .collect(toList());
     }
 
-    public int insertLottoResult(ResultDto resultDTO) throws SQLDataException {
-        return LottoResultDao.getInstance().insertLottoResult(resultDTO);
+    public int insertLottoResult(ResultDto resultDto) throws SQLDataException {
+        return LOTTO_RESULT_DAO.insertLottoResult(resultDto);
     }
 
     public ResultDto selectLottoResult(int round) throws SQLDataException {
-        ResultDto resultDTO = LottoResultDao.getInstance().selectLottoResult(round);
-        Result result = new Result(resultDTO.getLottoScore());
-        resultDTO.setTotalWinningMoney(result.calculateTotalWinningMoney());
-        resultDTO.setEarningRate(result.calculateEarningsRate(new Payment(resultDTO.getPayment())));
-        return resultDTO;
+        ResultDto resultDto = LOTTO_RESULT_DAO.selectLottoResult(round);
+        Result result = new Result(resultDto.getLottoScore());
+        resultDto.setTotalWinningMoney(result.calculateTotalWinningMoney());
+        resultDto.setEarningRate(result.calculateEarningsRate(new Payment(resultDto.getPayment())));
+        return resultDto;
     }
 }

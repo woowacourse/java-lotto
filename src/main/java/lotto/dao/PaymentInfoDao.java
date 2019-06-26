@@ -30,9 +30,9 @@ public class PaymentInfoDao {
         return daoTemplate.cudTemplate(INSERT_USER);
     }
 
-    public int insertPayment(PaymentInfoDto paymentInfoDTO) throws SQLDataException {
+    public int insertPayment(PaymentInfoDto paymentInfoDto) throws SQLDataException {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = createPreparedStatement(connection, paymentInfoDTO);
+             PreparedStatement preparedStatement = createPreparedStatement(connection, paymentInfoDto);
              ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
 
             if (!resultSet.next()) {
@@ -46,13 +46,13 @@ public class PaymentInfoDao {
         }
     }
 
-    private PreparedStatement createPreparedStatement(Connection connection, PaymentInfoDto paymentInfoDTO) throws SQLException {
+    private PreparedStatement createPreparedStatement(Connection connection, PaymentInfoDto paymentInfoDto) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 INSERT_PAYMENT_INFO, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setInt(1, paymentInfoDTO.getPayment());
-        preparedStatement.setInt(2, paymentInfoDTO.getManual());
-        preparedStatement.setInt(3, paymentInfoDTO.getAuto());
-        preparedStatement.setString(4, paymentInfoDTO.getName());
+        preparedStatement.setInt(1, paymentInfoDto.getPayment());
+        preparedStatement.setInt(2, paymentInfoDto.getManual());
+        preparedStatement.setInt(3, paymentInfoDto.getAuto());
+        preparedStatement.setString(4, paymentInfoDto.getName());
         preparedStatement.executeUpdate();
         return preparedStatement;
     }

@@ -1,15 +1,14 @@
 package lotto.service;
 
 import lotto.dao.PaymentInfoDao;
-import lotto.service.dto.PaymentInfoDto;
 import lotto.domain.paymentinfo.CountOfLotto;
 import lotto.domain.paymentinfo.Payment;
+import lotto.service.dto.PaymentInfoDto;
 
 import java.sql.SQLDataException;
 
-import static lotto.controller.common.CommonController.nullable;
-
 public class PaymentInfoService {
+    private static final PaymentInfoDao PAYMENT_INFO_DAO = PaymentInfoDao.getInstance();
     private PaymentInfoService() {
     }
 
@@ -22,23 +21,23 @@ public class PaymentInfoService {
     }
 
     public int insertUser(String userName) throws SQLDataException {
-        return PaymentInfoDao.getInstance().insertUser(userName);
+        return PAYMENT_INFO_DAO.insertUser(userName);
     }
 
     public int insertPaymentInfoAndReturnKeyValue(int inputPayment, int countOfManualLotto, String name) throws SQLDataException {
         Payment payment = new Payment(inputPayment);
         CountOfLotto countOfLotto = new CountOfLotto(payment, countOfManualLotto);
 
-        PaymentInfoDto paymentInfoDTO = createPaymentInfoDTO(payment, countOfLotto, name);
-        return PaymentInfoDao.getInstance().insertPayment(paymentInfoDTO);
+        PaymentInfoDto paymentInfoDto = createPaymentInfoDTO(payment, countOfLotto, name);
+        return PAYMENT_INFO_DAO.insertPayment(paymentInfoDto);
     }
 
     private static PaymentInfoDto createPaymentInfoDTO(Payment payment, CountOfLotto countOfLotto, String name) {
-        PaymentInfoDto paymentInfoDTO = new PaymentInfoDto();
-        paymentInfoDTO.setPayment(payment.getPayment());
-        paymentInfoDTO.setManual(countOfLotto.getCountOfManualLotto());
-        paymentInfoDTO.setAuto(countOfLotto.getCountOfRandomLotto());
-        paymentInfoDTO.setName(name);
-        return paymentInfoDTO;
+        PaymentInfoDto paymentInfoDto = new PaymentInfoDto();
+        paymentInfoDto.setPayment(payment.getPayment());
+        paymentInfoDto.setManual(countOfLotto.getCountOfManualLotto());
+        paymentInfoDto.setAuto(countOfLotto.getCountOfRandomLotto());
+        paymentInfoDto.setName(name);
+        return paymentInfoDto;
     }
 }

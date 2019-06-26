@@ -63,7 +63,7 @@ public class LottoController {
         int insertWinningLotto = LOTTO_SERVICE.insertWinningLotto(winningLotto, round);
 
         int insertResult = LOTTO_RESULT_SERVICE
-                .insertLottoResult(createResultDTO(winningLotto, lottoRepository, round, name));
+                .insertLottoResult(createResultDto(winningLotto, lottoRepository, round, name));
 
         response.redirect("/result/" + round);
 
@@ -84,9 +84,9 @@ public class LottoController {
                 .collect(toList());
     }
 
-    private static ResultDto createResultDTO(WinningLotto winningLotto, LottoRepository lottoRepository, int round, String name) {
+    private static ResultDto createResultDto(WinningLotto winningLotto, LottoRepository lottoRepository, int round, String name) {
         Result result = winningLotto.match(new LottoTickets(lottoRepository));
-        ResultDto resultDTO = new ResultDto.Builder(round, name)
+        ResultDto resultDto = new ResultDto.Builder(round, name)
                 .first(result.get(Rank.FIRST))
                 .second(result.get(Rank.SECOND))
                 .third(result.get(Rank.THIRD))
@@ -94,8 +94,8 @@ public class LottoController {
                 .fifth(result.get(Rank.FIFTH))
                 .miss(result.get(Rank.MISS))
                 .build();
-        resultDTO.setTotalWinningMoney(result.calculateTotalWinningMoney());
-        return resultDTO;
+        resultDto.setTotalWinningMoney(result.calculateTotalWinningMoney());
+        return resultDto;
     }
 
 }

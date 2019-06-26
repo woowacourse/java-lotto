@@ -27,15 +27,15 @@ public class LottoResultDao {
         return LottoResultDaoHolder.INSTANCE;
     }
 
-    public int insertLottoResult(ResultDto resultDTO) throws SQLDataException {
+    public int insertLottoResult(ResultDto resultDto) throws SQLDataException {
         DaoTemplate daoTemplate = (preparedStatement) -> {
-            preparedStatement.setLong(1, resultDTO.get(FIRST));
-            preparedStatement.setLong(2, resultDTO.get(SECOND));
-            preparedStatement.setLong(3, resultDTO.get(THIRD));
-            preparedStatement.setLong(4, resultDTO.get(FOURTH));
-            preparedStatement.setLong(5, resultDTO.get(FIFTH));
-            preparedStatement.setLong(6, resultDTO.get(MISS));
-            preparedStatement.setLong(7, resultDTO.getRound());
+            preparedStatement.setLong(1, resultDto.get(FIRST));
+            preparedStatement.setLong(2, resultDto.get(SECOND));
+            preparedStatement.setLong(3, resultDto.get(THIRD));
+            preparedStatement.setLong(4, resultDto.get(FOURTH));
+            preparedStatement.setLong(5, resultDto.get(FIFTH));
+            preparedStatement.setLong(6, resultDto.get(MISS));
+            preparedStatement.setLong(7, resultDto.getRound());
         };
         return daoTemplate.cudTemplate(INSERT_LOTTO_RESULT);
     }

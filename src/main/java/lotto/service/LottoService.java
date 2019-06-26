@@ -19,6 +19,9 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 
 public class LottoService {
+
+    public static final LottoDao LOTTO_DAO = LottoDao.getInstance();
+
     private LottoService() {
     }
 
@@ -71,20 +74,20 @@ public class LottoService {
     }
 
     public int insertLottoTicket(LottoRepository lottoRepository, int round) throws SQLDataException {
-        return LottoDao.getInstance().insertLottoTicket(
+        return LOTTO_DAO.insertLottoTicket(
                 new LottoTickets(lottoRepository), round);
     }
 
     public int insertWinningLotto(WinningLotto winningLotto, int round) throws SQLDataException {
-        return LottoDao.getInstance().insertWinningLotto(winningLotto, round);
+        return LOTTO_DAO.insertWinningLotto(winningLotto, round);
     }
 
     public List<Lotto> selectAllLotto(int round) throws SQLDataException {
-        return LottoDao.getInstance().selectAllLotto(round);
+        return LOTTO_DAO.selectAllLotto(round);
     }
 
     public WinningLotto selectWinningLotto(int round) throws SQLDataException {
-        return LottoDao.getInstance().selectWinningLotto(round);
+        return LOTTO_DAO.selectWinningLotto(round);
     }
 
     public long calculateCountOfAutoLotto(List<Lotto> lottoTickets) {
