@@ -7,7 +7,6 @@ import domain.money.Money;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class LottoFactory {
     public static IssuedLottos autoIssueLottoWorthOf(Money purchaseAmount) {
@@ -26,22 +25,13 @@ public class LottoFactory {
     }
 
     public static WinningLotto getWinningLotto(List<Integer> inputNumbers, LottoNumber bonusNumber) {
-        Set<LottoNumber> lottoNumbers = getLottoNumbersOf(inputNumbers);
+        Set<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbersOf(inputNumbers);
         Lotto winningLotto = new Lotto(lottoNumbers);
         return new WinningLotto(winningLotto, bonusNumber);
     }
 
-    private static Set<LottoNumber> getLottoNumbersOf(List<Integer> inputNumbers) {
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-
-        for (Integer number : inputNumbers) {
-            lottoNumbers.add(LottoNumber.valueOf(number));
-        }
-        return lottoNumbers;
-    }
-
     public static Lotto manualIssueLottoBy(List<Integer> inputNumbers) {
-        Set<LottoNumber> lottoNumbers = getLottoNumbersOf(inputNumbers);
+        Set<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbersOf(inputNumbers);
         return new Lotto(lottoNumbers);
     }
 }

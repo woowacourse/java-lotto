@@ -1,6 +1,9 @@
 package domain.lottonumber;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     static final int MIN_NUMBER = 1;
@@ -36,6 +39,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalLottoNumberException();
         }
+    }
+
+    public static Set<LottoNumber> getLottoNumbersOf(List<Integer> inputNumbers) {
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
+
+        for (Integer number : inputNumbers) {
+            lottoNumbers.add(valueOf(number));
+        }
+        return lottoNumbers;
     }
 
     boolean isOf(int number) {
