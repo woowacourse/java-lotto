@@ -2,6 +2,8 @@ package domain;
 
 import domain.money.Money;
 
+import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Statistics {
@@ -9,8 +11,8 @@ public class Statistics {
     private Money purchasedAmount;
 
     private Statistics(Map<Rank, CountOfRank> countsOfRanks, Money purchasedAmount) {
-        this.countsOfRanks = countsOfRanks;
-        this.purchasedAmount = purchasedAmount;
+        this.countsOfRanks = new EnumMap<>(countsOfRanks);
+        this.purchasedAmount = Money.amountOf(purchasedAmount.getAmount());
     }
 
     static Statistics of(Map<Rank, CountOfRank> countsOfRanks, Money purchasedAmount) {
