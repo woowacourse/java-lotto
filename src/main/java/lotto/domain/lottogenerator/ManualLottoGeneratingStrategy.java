@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toList;
 public class ManualLottoGeneratingStrategy implements LottoGeneratingStrategy {
     private final List<Integer> inputLottoNumbers;
 
-
     public ManualLottoGeneratingStrategy(List<Integer> inputLottoNumbers) {
         if (Objects.isNull(inputLottoNumbers) || inputLottoNumbers.isEmpty()) {
             throw new NullPointerException();
