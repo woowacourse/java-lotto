@@ -85,6 +85,4 @@ public class ConsoleInput {
         }
         return result;
     }
-
-
 }
