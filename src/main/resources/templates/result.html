@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>결과</title>
+</head>
+<body>
+    <button onclick="location.href='index.html'" type="button">홈으로</button>
+    <h3>구매로또</h3>
+    {{#lottos}}
+        {{this}} <br>
+    {{/lottos}}
+    <h3>당첨 정보</h3>
+    당첨 번호 : {{winningLotto}} / 보너스볼 : {{bonusball}}
+    <h3>당첨 결과</h3>
+    1등 : {{first}}
+    2등 : {{second}}
+    3등 : {{third}}
+    4등 : {{fourth}}
+    5등 : {{fifth}}
+    꽝  : {{none}}
+    <h3>총 수익</h3>
+    {{revenue}}
+    <h3>수익률</h3>
+    {{yield}}
+</body>
+</html>
