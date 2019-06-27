@@ -28,11 +28,12 @@ public class LottosResult {
     public double getROI() {
         long totalWinnigMoney = getWinningMoney();
         int numberOfLotto = lottosResult.values().stream().reduce(INITIAL_NUMBER, Integer::sum);
+        double ROI = (double) totalWinnigMoney / (numberOfLotto * ONE_LOTTO_PRICE);
 
-        return (double) totalWinnigMoney / (numberOfLotto * ONE_LOTTO_PRICE);
+        return Math.round(ROI * 100.0);
     }
 
-    private long getWinningMoney() {
+    public long getWinningMoney() {
         long totalWinnigMoney = INITIAL_NUMBER;
 
         for (Rank rank : Rank.values()) {

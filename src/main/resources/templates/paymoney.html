@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/paymoney.css">
+
+    <title>로또 구매</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="vender" id="vender" style="background-image: url('images/vendersays.png');"></div>
+        <div class="input-wrapper">
+            <form action="/money" method="post">
+                <input type="text" name="money"> 원
+                <button type="submit">구매</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var i = 0;
+        var txt = "{{ round }}회차 로또 판매중입니다. 구입할 금액을 입력해주세요!";
+        var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("vender").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+        window.onload = typeWriter;
+    </script>
+</body>
+</html>

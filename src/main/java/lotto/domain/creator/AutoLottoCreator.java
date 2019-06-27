@@ -9,6 +9,8 @@ import java.util.List;
 import static lotto.domain.lotto.Lotto.NUMBER_OF_NUMBERS_IN_LOTTO;
 
 public class AutoLottoCreator implements LottoCreator {
+    private static boolean IS_AUTO = true;
+
     public AutoLottoCreator() {}
 
     @Override
@@ -17,6 +19,6 @@ public class AutoLottoCreator implements LottoCreator {
 
         Collections.shuffle(allNumbers);
 
-        return new Lotto(allNumbers.subList(0, NUMBER_OF_NUMBERS_IN_LOTTO));
+        return new Lotto(allNumbers.subList(0, NUMBER_OF_NUMBERS_IN_LOTTO), IS_AUTO);
     }
 }

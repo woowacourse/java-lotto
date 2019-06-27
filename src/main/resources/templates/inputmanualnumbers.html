@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/inputmanualnumbers.css">
+
+    <title>수동 로또 숫자 입력</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="vender" id="vender" style="background-image: url('images/vendersays.png');"></div>
+    <div class="input-wrapper">
+        <form action="/manual-numbers?quantity={{ quantity }}" method="post">
+            {{#iterator}}
+                <input type="text" name="manual-lotto-numbers-{{ this }}">
+            {{/iterator}}
+            <button type="submit">번호 제출</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    var i = 0;
+    var txt = "수동 로또 번호들을 입력해주세요. {{ quantity }}장 산다고 했으니 {{ quantity }}번 입력해야겠죠?";
+    var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+    function typeWriter() {
+        if (i < txt.length) {
+            document.getElementById("vender").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+    window.onload = typeWriter;
+</script>
+</body>
+</html>

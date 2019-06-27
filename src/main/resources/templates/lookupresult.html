@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/lookupresult.css">
+
+    <title>결과 조회</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="vender" id="vender" style="background-image: url('images/vendersays.png');"></div>
+    <div class="input-wrapper">
+        <form action="/lookup" method="post">
+            <input type="text" name="round"> 회차
+            <button type="submit">조회</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    var i = 0;
+    var txt = "조회하고 싶은 회차를 입력해주세요. 현재 최대 {{ maxRound }}회차까지 진행되었습니다.";
+    var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+    function typeWriter() {
+        if (i < txt.length) {
+            document.getElementById("vender").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+    window.onload = typeWriter;
+</script>
+</body>
+</html>

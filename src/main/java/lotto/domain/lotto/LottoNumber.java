@@ -4,7 +4,7 @@ import lotto.exception.InvalidLottoNumbersException;
 
 import java.util.*;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
@@ -41,5 +41,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return Integer.toString(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Double.compare(this.number, o.number);
     }
 }

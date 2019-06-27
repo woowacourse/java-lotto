@@ -5,7 +5,9 @@ import lotto.domain.creator.ManualLottoCreator;
 import lotto.domain.util.CustomStringUtils;
 import lotto.exception.InvalidLottoNumbersException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class WinningLotto {
     private final Lotto lotto;
@@ -33,7 +35,7 @@ public class WinningLotto {
 
     public Rank matchRank(Lotto lotto) {
         List<LottoNumber> winningNumbers = this.lotto.getNumbers();
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.getNumbers());
         boolean isBonusMatch = isBonusMatch(lottoNumbers);
 
         lottoNumbers.retainAll(winningNumbers);
@@ -44,5 +46,27 @@ public class WinningLotto {
 
     private boolean isBonusMatch(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.contains(bonusNumber);
+    }
+
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningLotto that = (WinningLotto) o;
+        return Objects.equals(lotto, that.lotto) &&
+                Objects.equals(bonusNumber, that.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto, bonusNumber);
     }
 }

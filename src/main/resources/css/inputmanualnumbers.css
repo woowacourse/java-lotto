@@ -1,0 +1,13 @@
+.input-wrapper {
+    padding: 40px 180px;
+    padding-bottom: 80px;
+}
+
+.input-wrapper input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-wrapper button {
+    width: 160px;
+}

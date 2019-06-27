@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/inputwinningnumbers.css">
+
+    <title>당첨 번호 입력</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="vender" id="vender" style="background-image: url('images/vendersays.png');"></div>
+    <div class="input-wrapper">
+        <div class="lotto-paper">
+            <img src="images/lottologo.jpg" alt="">
+            <h3>제 {{ round }}회</h3>
+            {{#lottos}}
+            <div class="lotto-numbers">
+                <span>{{#if isAuto}}자동{{else}}수동{{/if}}</span>
+                {{#numbers}}<div class="lotto-number">{{ this }}</div>{{/numbers}}
+            </div>
+            {{/lottos}}
+        </div>
+        <form action="/winning" method="post">
+            <input type="text" name="winning-numbers">
+            / <input id="bonus" type="text" name="winning-bonus-numbers">
+            <button type="submit">입력</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    var i = 0;
+    var txt = "수동으로 {{ manualQuantity }}개, 자동으로 {{ autoQuantity }}개를 구매했습니다. " +
+              "이번주 당첨 번호와 보너스 볼을 입력해주세요. 결과를 알려드릴게요!";
+    var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+    function typeWriter() {
+        if (i < txt.length) {
+            document.getElementById("vender").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+    window.onload = typeWriter;
+</script>
+</body>
+</html>
