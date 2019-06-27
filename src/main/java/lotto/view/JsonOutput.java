@@ -189,6 +189,6 @@ public class JsonOutput {
     }
 
     public static String previousResultListDTO(final List<PreviousWinLottoResultDTO> resultDTO) {
-        return objectListToJSONArray(resultDTO, JsonOutput::winResultDTOtoJSON);
+        return responseOk("result", objectListToJSONArray(resultDTO, JsonOutput::winResultDTOtoJSON));
     }
 }

@@ -211,6 +211,7 @@ class LottoDAO {
     }
 
     private List<PreviousLottoDTO> getLottos(final int resultID) throws SQLException {
+        initSqlTable();
         final List<PreviousLottoDTO> result = new ArrayList<>();
         final String query = "SELECT * FROM lotto WHERE result = ?";
         final PreparedStatement statement = connection.prepareStatement(query);
