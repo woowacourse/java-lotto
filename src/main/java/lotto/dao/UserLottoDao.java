@@ -1,18 +1,13 @@
 package lotto.dao;
 
-import lotto.domain.exceptions.LottoTicketException;
 import lotto.dto.UserLottoDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class UserLottoDao {
-    public static final int MIN_BOUND = 1;
-    public static final int MAX_BOUND = 7;
     private static UserLottoDao dao;
 
     private UserLottoDao() {
@@ -26,68 +21,43 @@ public class UserLottoDao {
         return dao;
     }
 
-    private List<Integer> rsToList(ResultSet rs) throws SQLException {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 2; i < 8; i++) {
-            numbers.add(rs.getInt(i));
-        }
-        return numbers;
-    }
-
     public void insertUserLottos(UserLottoDto dto) {
-        try {
-            insertUserLottos(dto.getNumbers());
-        } catch (SQLException e) {
-            throw new IllegalArgumentException();
+        increaseRound();
+        String sql = "INSERT INTO user_lotto(num_1,num_2,num_3,num_4,num_5,num_6) VALUES(?,?,?,?,?,?)";
+        QueryManager manager = QueryManager.getManager();
+        for (List<Integer> number : dto.getNumbers()) {
+            manager.executeUpdate(sql, number);
         }
     }
 
-    public void insertUserLottos(int round, List<List<Integer>> numbers) throws SQLException {
-        for (List<Integer> number : numbers) {
-            insertLotto(round, number);
-        }
+    private void increaseRound() {
+        String sql = "INSERT INTO lotto_game(round) VALUES(SELECT MAX(round) + 1 FROM lotto_game)";
+        QueryManager manager = QueryManager.getManager();
+        manager.executeQuery(sql);
     }
 
-    public void insertUserLottos(List<List<Integer>> numbers) throws SQLException {
-        int currentRound = DBManager.lastRound();
-        PreparedStatement stmt = DBManager.getConnection().prepareStatement("INSERT INTO lotto_game(round) VALUES(?)");
-        stmt.setInt(1, currentRound + 1);
-        stmt.executeUpdate();
-        insertUserLottos(currentRound + 1, numbers);
-    }
-
-    private void insertLotto(int round, List<Integer> number) throws SQLException {
-        Connection conn = DBManager.getConnection();
+    public void insertUserLottos(int round, UserLottoDto dto) {
         String sql = "INSERT INTO user_lotto(num_1,num_2,num_3,num_4,num_5,num_6,round_id) VALUES(?,?,?,?,?,?,?)";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        for (int i = 1; i < 7; i++) {
-            stmt.setInt(i, number.get(i - 1));
+        QueryManager manager = QueryManager.getManager();
+        for (List<Integer> number : dto.getNumbers()) {
+            number.add(round);
+            manager.executeUpdate(sql, number);
         }
-        stmt.setInt(7, round);
-        stmt.executeUpdate();
     }
 
-    public List<List<Integer>> selectUserLottos(int round) {
-        Connection conn = DBManager.getConnection();
+    public UserLottoDto selectUserLottos(int round) {
         String sql = "SELECT * FROM user_lotto WHERE round_id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, round);
-            ResultSet rs = stmt.executeQuery();
-            return getLists(rs);
-        } catch (SQLException e) {
-            throw new LottoTicketException();
-        }
-    }
-
-    private List<List<Integer>> getLists(ResultSet rs) throws SQLException {
+        QueryManager manager = QueryManager.getManager();
         List<List<Integer>> numbers = new ArrayList<>();
-        while (rs.next()) {
-            numbers.add(rsToList(rs));
+        for (Map<String, Integer> map : manager.executeQuery(sql, Arrays.asList(round))) {
+            numbers.add(new ArrayList<>(map.values()));
         }
-        return numbers;
+        UserLottoDto dto = new UserLottoDto();
+        dto.setNumbers(numbers);
+        return dto;
     }
 
-    public List<List<Integer>> currentUserLottos() {
-        return selectUserLottos(DBManager.lastRound());
+    public UserLottoDto currentUserLottos() {
+        return selectUserLottos(QueryManager.lastRound());
     }
 }

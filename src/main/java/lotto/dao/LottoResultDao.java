@@ -1,21 +1,10 @@
 package lotto.dao;
 
 import lotto.domain.Rank;
-import lotto.domain.exceptions.LottoException;
 import lotto.dto.LottoResultDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static lotto.dao.UserLottoDao.MAX_BOUND;
-import static lotto.dao.UserLottoDao.MIN_BOUND;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class LottoResultDao {
 
@@ -34,60 +23,26 @@ public class LottoResultDao {
     }
 
     public void insertResult(int round, LottoResultDto dto) {
-        Connection conn = DBManager.getConnection();
         String sql = "INSERT INTO result(first,second,third,fourth,fifth,lose,round_id) " +
                 "VALUES(?,?,?,?,?,?,?)";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            setStatement(stmt, dto.getResults());
-            stmt.setInt(7, round);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-        }
+        QueryManager manager = QueryManager.getManager();
+        List<Integer> params = new ArrayList<>(dto.getResults().values());
+        params.add(round);
+        manager.executeUpdate(sql, params);
     }
 
-    public void insertResult(LottoResultDto dto) {
-        insertResult(DBManager.lastRound(), dto);
-    }
+    public LottoResultDto selectResult(int round) {
+        String sql = "SELECT first, second, third, fourth, fifth, lose, summary FROM result where round_id = ?";
+        QueryManager manager = QueryManager.getManager();
 
-    private void setStatement(PreparedStatement stmt, Map<Rank, Integer> results) throws SQLException {
-        List<Integer> resultCount = new ArrayList<>(results.values());
-        for (int i = MIN_BOUND; i < MAX_BOUND; i++) {
-            stmt.setInt(i, resultCount.get(i - 1));
-        }
-    }
-
-    public List<Rank> currentResult() {
-        return selectResult(DBManager.lastRound());
-    }
-
-    public List<Rank> selectResult(int round) {
-        Connection conn = DBManager.getConnection();
-        String sql = "SELECT first, second, third, fourth, fifth, lose FROM result where round_id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, round);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            return iterateResultSet(rs);
-        } catch (SQLException e) {
-            throw new LottoException();
-        }
-    }
-
-    private List<Rank> iterateResultSet(ResultSet rs) throws SQLException {
-        List<Rank> ranks = new ArrayList<>();
-        for (int i = MIN_BOUND; i < MAX_BOUND; i++) {
-            ranks.addAll(rankByColumn(i - 1, rs.getInt(i)));
-        }
-        return ranks;
-    }
-
-    private List<Rank> rankByColumn(int columnIndex, int count) {
-        boolean bonus = false;
-        if (columnIndex == 1) {
-            bonus = true;
-        }
-        return Stream.of(Rank.rank(MAX_BOUND - columnIndex, bonus)).limit(count).collect(Collectors.toList());
+        Map<Rank, Integer> rankMap = new TreeMap<>();
+        Map<String, Integer> result = manager.executeQuery(sql, Arrays.asList(round)).get(0);
+        rankMap.put(Rank.FIRST, result.get("first"));
+        rankMap.put(Rank.SECOND, result.get("second"));
+        rankMap.put(Rank.THIRD, result.get("third"));
+        rankMap.put(Rank.FOURTH, result.get("fourth"));
+        rankMap.put(Rank.FIFTH, result.get("fifth"));
+        rankMap.put(Rank.FIFTH, result.get("lose"));
+        return new LottoResultDto(rankMap, BigDecimal.valueOf(result.get("summary")));
     }
 }

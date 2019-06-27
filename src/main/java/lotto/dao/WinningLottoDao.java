@@ -2,15 +2,10 @@ package lotto.dao;
 
 import lotto.dto.WinningLottoDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import static lotto.dao.UserLottoDao.MAX_BOUND;
-import static lotto.dao.UserLottoDao.MIN_BOUND;
+import java.util.Map;
 
 public class WinningLottoDao {
     private static WinningLottoDao dao;
@@ -28,52 +23,25 @@ public class WinningLottoDao {
     }
 
     public WinningLottoDto selectWinningLotto(int round) {
-        Connection conn = DBManager.getConnection();
         String sql = "SELECT num_1,num_2,num_3,num_4,num_5,num_6,num_bonus FROM winning_lotto where round_id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, round);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            return resultSet(rs);
-        } catch (SQLException e) {
-            throw new IllegalArgumentException();
-        }
+        QueryManager manager = QueryManager.getManager();
+        List<Map<String, Integer>> result = manager.executeQuery(sql, Arrays.asList(round));
+        List<Integer> numbers = new ArrayList<>(result.get(0).values());
+        int bonus = numbers.get(6);
+        numbers = numbers.subList(0, 6);
+        return new WinningLottoDto(numbers, bonus);
     }
 
-    public WinningLottoDto resultSet(ResultSet rs) throws SQLException {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = MIN_BOUND; i < MAX_BOUND; i++) {
-            numbers.add(rs.getInt(i));
-        }
-
-        return new WinningLottoDto(numbers, rs.getInt(7));
-    }
-
-    public void insertWinningLotto(WinningLottoDto dto) {
-        try {
-            insertWinningLotto(dto.getNumbers(), dto.getBonus());
-        } catch (SQLException e) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void insertWinningLotto(int round, List<Integer> numbers, int bonus) throws SQLException {
-        Connection conn = DBManager.getConnection();
+    public void insertWinningLotto(int round, WinningLottoDto dto) {
         String sql = "INSERT INTO winning_lotto(num_1,num_2,num_3,num_4,num_5,num_6,num_bonus,round_id) VALUES(?,?,?,?,?,?,?,?)";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        for (int i = MIN_BOUND; i < MAX_BOUND; i++) {
-            stmt.setInt(i, numbers.get(i - 1));
-        }
-        stmt.setInt(MAX_BOUND, bonus);
-        stmt.setInt(MAX_BOUND + 1, round);
-        stmt.executeUpdate();
-    }
-
-    private void insertWinningLotto(List<Integer> numbers, int bonus) throws SQLException {
-        insertWinningLotto(DBManager.lastRound(), numbers, bonus);
+        QueryManager manager = QueryManager.getManager();
+        List<Integer> params = new ArrayList<>(dto.getNumbers());
+        params.add(dto.getBonus());
+        params.add(round);
+        manager.executeUpdate(sql, params);
     }
 
     public WinningLottoDto currentWinningLotto() {
-        return selectWinningLotto(DBManager.lastRound());
+        return selectWinningLotto(QueryManager.lastRound());
     }
 }

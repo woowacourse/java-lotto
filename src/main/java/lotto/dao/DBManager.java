@@ -1,6 +1,8 @@
 package lotto.dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBManager {
     private static Connection conn;
@@ -34,24 +36,4 @@ public class DBManager {
         return conn;
     }
 
-    public static void close() {
-        try {
-            if (conn != null)
-                conn.close();
-        } catch (SQLException e) {
-            System.err.println("con 오류:" + e.getMessage());
-        }
-    }
-
-    public static int lastRound() {
-        String sql = "SELECT MAX(round) FROM lotto_game";
-        ResultSet rs;
-        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
-            rs = stmt.executeQuery();
-            rs.next();
-            return rs.getInt(1);
-        } catch (SQLException e) {
-            throw new IllegalArgumentException();
-        }
-    }
 }
