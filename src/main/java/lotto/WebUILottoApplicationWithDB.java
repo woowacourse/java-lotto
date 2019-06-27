@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.dao.*;
-import lotto.database.DBConnector;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
@@ -12,8 +11,6 @@ import lotto.view.WebOutputView;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
