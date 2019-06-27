@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.database.JdbcConnector;
 import lotto.database.dao.ResultDAO;
 import lotto.database.dao.WinningLottoDAO;
 import lotto.domain.game.Rank;
@@ -9,7 +8,6 @@ import lotto.domain.game.WinningResult;
 import lotto.domain.ticket.LottoTickets;
 import lotto.dto.ResultDTO;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultService {
-
+    private static ResultDAO resultDAO = ResultDAO.getInstance();
+    private static WinningLottoDAO winningLottoDAO = WinningLottoDAO.getInstance();
 
     public static ResultDTO createResult(int round, LottoTickets lottoTickets, WinningLotto winningLotto) {
         WinningResult winningResult = new WinningResult(lottoTickets, winningLotto);
@@ -40,20 +39,17 @@ public class ResultService {
     }
 
     public static void saveResult(ResultDTO resultDTO) throws SQLException {
-        Connection connection = JdbcConnector.getConnection();
-        new ResultDAO(connection).addResult(resultDTO);
+        resultDAO.addResult(resultDTO);
     }
 
     public static void saveWinningLotto(int round, WinningLotto winningLotto) throws SQLException {
-        Connection connection = JdbcConnector.getConnection();
-        new WinningLottoDAO(connection).addWinningLotto(round, winningLotto.getLottoTicket().getLottoNumbers(), winningLotto.getBonusNumber().getNumber());
+        winningLottoDAO.addWinningLotto(round, winningLotto.getLottoTicket().getLottoNumbers(), winningLotto.getBonusNumber().getNumber());
     }
 
     public static Map<String, Object> getLastestResult() throws SQLException {
-        Connection connection = JdbcConnector.getConnection();
         Map<String, Object> resMap = new HashMap<>();
-        resMap.put("winningRate", new ResultDAO(connection).getLastestRate());
-        resMap.put("prize", new ResultDAO(connection).getLastestPrize());
+        resMap.put("winningRate", new ResultDAO().getLastestRate());
+        resMap.put("prize", new ResultDAO().getLastestPrize());
         return resMap;
     }
 

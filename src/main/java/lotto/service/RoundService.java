@@ -1,19 +1,17 @@
 package lotto.service;
 
-import lotto.database.JdbcConnector;
 import lotto.database.dao.RoundDAO;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class RoundService {
+    private static RoundDAO roundDAO = RoundDAO.getInstance();
+
     public static int getMaxRound() throws SQLException {
-        Connection connection = JdbcConnector.getConnection();
-        return new RoundDAO(connection).getMaxRound();
+        return roundDAO.getMaxRound();
     }
 
     public static void createRound(final int nowRound) throws SQLException {
-        Connection connection = JdbcConnector.getConnection();
-        new RoundDAO(connection).addRound(nowRound);
+        roundDAO.addRound(nowRound);
     }
 }
