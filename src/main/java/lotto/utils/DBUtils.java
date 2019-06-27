@@ -40,12 +40,4 @@ public class DBUtils {
             System.err.println("con 오류:" + e.getMessage());
         }
     }
-
-    public static void commit(Connection connection) throws SQLException {
-        connection.commit();
-    }
-
-    public static void rollback(Connection connection) throws SQLException {
-        connection.rollback();
-    }
 }

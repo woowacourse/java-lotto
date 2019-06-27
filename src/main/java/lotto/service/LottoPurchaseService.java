@@ -14,12 +14,12 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 public class LottoPurchaseService {
-    private LottoPurchaseDAO lottoPurchaseDAO ;
     private LottoRoundDAO lottoRoundDAO;
+    private LottoPurchaseDAO lottoPurchaseDAO;
 
-    public LottoPurchaseService(Connection connection) {
-        lottoRoundDAO = new LottoRoundDAO(connection);
-        lottoPurchaseDAO = new LottoPurchaseDAO(connection);
+    public LottoPurchaseService(LottoRoundDAO lottoRoundDAO, LottoPurchaseDAO lottoPurchaseDAO) {
+        this.lottoRoundDAO = lottoRoundDAO;
+        this.lottoPurchaseDAO = lottoPurchaseDAO;
     }
 
     public void saveLottos(PurchaseCount purchaseCount, String[] manualLotto) throws SQLException {

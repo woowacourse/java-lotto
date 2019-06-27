@@ -5,17 +5,16 @@ import lotto.dao.LottoRoundDAO;
 import lotto.domain.result.LottoRank;
 import lotto.domain.result.LottoResult;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
 
 public class LottoResultService {
-    private static LottoRoundDAO lottoRoundDAO;
-    private static LottoResultDAO lottoResultDAO;
+    private LottoRoundDAO lottoRoundDAO;
+    private LottoResultDAO lottoResultDAO;
 
-    public LottoResultService(Connection connection) {
-        lottoRoundDAO = new LottoRoundDAO(connection);
-        lottoResultDAO = new LottoResultDAO(connection);
+    public LottoResultService(LottoRoundDAO lottoRoundDAO, LottoResultDAO lottoResultDAO) {
+        this.lottoRoundDAO = lottoRoundDAO;
+        this.lottoResultDAO = lottoResultDAO;
     }
 
     public void saveLottoResult(LottoResult lottoResult) throws SQLException {

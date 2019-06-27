@@ -11,6 +11,7 @@ import java.util.*;
 public class LottoResult {
     private static final long INIT_VALUE = 0L;
     private static final int PERCENTAGE = 100;
+    private static final int ROUNDING_DIGIT = 2;
 
     private Map<LottoRank, Integer> map;
     private final Winning winning;
@@ -48,15 +49,21 @@ public class LottoResult {
     }
 
     public BigDecimal yield() {
-        BigDecimal purchaseAmount = new BigDecimal(
-                PurchaseAmount.LOTTO_PRICE * map.values().stream()
-                        .map(Long::valueOf)
-                        .reduce(INIT_VALUE, Long::sum));
-        BigDecimal result = new BigDecimal(map.keySet().stream()
-                .mapToLong(x -> (long)x.getMoney() * map.get(x))
-                .sum());
+        return sumResult().divide(purchaseAmount(), ROUNDING_DIGIT, RoundingMode.HALF_UP)
+                .multiply(new BigDecimal(PERCENTAGE));
+    }
 
-        return result.divide(purchaseAmount, 2, RoundingMode.HALF_UP).multiply(new BigDecimal(PERCENTAGE));
+    private BigDecimal purchaseAmount() {
+        return new BigDecimal(
+                    PurchaseAmount.LOTTO_PRICE * map.values().stream()
+                            .map(Long::valueOf)
+                            .reduce(INIT_VALUE, Long::sum));
+    }
+
+    private BigDecimal sumResult() {
+        return new BigDecimal(map.keySet().stream()
+                    .mapToLong(x -> (long)x.getMoney() * map.get(x))
+                    .sum());
     }
 
     public Map<LottoRank, Integer> getMap() {

@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.dao.*;
 import lotto.domain.lotto.InvalidLottoException;
 import lotto.domain.purchase.InvalidPurchaseAmountException;
 import lotto.domain.purchase.InvalidPurchaseCountException;
@@ -23,11 +24,18 @@ import static spark.Spark.*;
 
 public class WebUILottoApplication {
     private static Connection connection = DBUtils.getConnection();
-    private static LottoRoundService lottoRoundService = new LottoRoundService(connection);
-    private static LottoPurchaseService lottoPurchaseService = new LottoPurchaseService(connection);
-    private static LottoWinningService lottoWinningService = new LottoWinningService(connection);
-    private static LottoResultService lottoResultService = new LottoResultService(connection);
-    private static LottoYieldService lottoYieldService = new LottoYieldService(connection);
+
+    private static LottoRoundDAO lottoRoundDAO = new LottoRoundDAO(connection);
+    private static LottoPurchaseDAO lottoPurchaseDAO = new LottoPurchaseDAO(connection);
+    private static LottoWinningDAO lottoWinningDAO = new LottoWinningDAO(connection);
+    private static LottoResultDAO lottoResultDAO = new LottoResultDAO(connection);
+    private static LottoYieldDAO lottoYieldDAO = new LottoYieldDAO(connection);
+
+    private static LottoRoundService lottoRoundService = new LottoRoundService(lottoRoundDAO);
+    private static LottoPurchaseService lottoPurchaseService = new LottoPurchaseService(lottoRoundDAO, lottoPurchaseDAO);
+    private static LottoWinningService lottoWinningService = new LottoWinningService(lottoRoundDAO, lottoWinningDAO);
+    private static LottoResultService lottoResultService = new LottoResultService(lottoRoundDAO, lottoResultDAO);
+    private static LottoYieldService lottoYieldService = new LottoYieldService(lottoRoundDAO, lottoYieldDAO);
 
     public static void main(String[] args) {
         externalStaticFileLocation("src/main/resources/templates");

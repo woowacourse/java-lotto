@@ -3,18 +3,16 @@ package lotto.service;
 import lotto.dao.LottoRoundDAO;
 import lotto.dao.LottoWinningDAO;
 import lotto.domain.result.Winning;
-import lotto.utils.DBUtils;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class LottoWinningService {
-    private static LottoRoundDAO lottoRoundDAO;
-    private static LottoWinningDAO lottoWinningDAO;
+    private LottoRoundDAO lottoRoundDAO;
+    private LottoWinningDAO lottoWinningDAO;
 
-    public LottoWinningService(Connection connection) {
-        lottoRoundDAO = new LottoRoundDAO(connection);
-        lottoWinningDAO = new LottoWinningDAO(connection);
+    public LottoWinningService(LottoRoundDAO lottoRoundDAO, LottoWinningDAO lottoWinningDAO) {
+        this.lottoRoundDAO = lottoRoundDAO;
+        this.lottoWinningDAO = lottoWinningDAO;
     }
 
     public void saveWinningLotto(String winningLotto, String bonusBall) throws SQLException {

@@ -5,15 +5,14 @@ import lotto.domain.lotto.Lottos;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.Winning;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class LottoRoundService {
-    private static LottoRoundDAO lottoRoundDAO;
+    private LottoRoundDAO lottoRoundDAO;
 
-    public LottoRoundService(Connection connection) {
-        lottoRoundDAO = new LottoRoundDAO(connection);
+    public LottoRoundService(LottoRoundDAO lottoRoundDAO) {
+        this.lottoRoundDAO = lottoRoundDAO;
     }
 
     public void playLottoGame() throws SQLException {
