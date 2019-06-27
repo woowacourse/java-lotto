@@ -7,17 +7,17 @@ import java.sql.Connection;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class ConnectionUtilTest {
-    private ConnectionUtil userDao;
+class JdbcConnectorTest {
+    private JdbcConnector userDao;
 
     @BeforeEach
     public void setup() {
-        userDao = new ConnectionUtil();
+        userDao = new JdbcConnector();
     }
 
     @Test
     public void connection() {
-        Connection con = ConnectionUtil.getConnection();
+        Connection con = JdbcConnector.getConnection();
         assertNotNull(con);
     }
 

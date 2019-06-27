@@ -1,6 +1,6 @@
 package lotto.database.dao;
 
-import lotto.database.ConnectionUtil;
+import lotto.database.JdbcConnector;
 import lotto.dto.ResultDTO;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,7 @@ class ResultDAOTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        this.con = ConnectionUtil.getConnection();
+        this.con = JdbcConnector.getConnection();
         this.resultDAO = new ResultDAO(con);
         con.setAutoCommit(false);
     }

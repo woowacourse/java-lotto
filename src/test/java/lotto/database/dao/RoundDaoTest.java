@@ -1,6 +1,6 @@
 package lotto.database.dao;
 
-import lotto.database.ConnectionUtil;
+import lotto.database.JdbcConnector;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class RoundDAOTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        this.con = ConnectionUtil.getConnection();
+        this.con = JdbcConnector.getConnection();
         this.roundDao = new RoundDAO(con);
         con.setAutoCommit(false);
 

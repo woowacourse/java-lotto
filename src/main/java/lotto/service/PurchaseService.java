@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.database.ConnectionUtil;
+import lotto.database.JdbcConnector;
 import lotto.database.dao.LottoTicketDAO;
 import lotto.domain.machine.Money;
 import lotto.domain.machine.Purchase;
@@ -26,7 +26,7 @@ public class PurchaseService {
     }
 
     public static void savePurchase(PurchaseDTO purchaseDTO) throws SQLException {
-        Connection connection = ConnectionUtil.getConnection();
+        Connection connection = JdbcConnector.getConnection();
         new LottoTicketDAO(connection).addLottoTickets(purchaseDTO);
     }
 }

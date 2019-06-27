@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.database.ConnectionUtil;
+import lotto.database.JdbcConnector;
 import lotto.database.dao.ResultDAO;
 import lotto.database.dao.WinningLottoDAO;
 import lotto.domain.game.Rank;
@@ -40,17 +40,17 @@ public class ResultService {
     }
 
     public static void saveResult(ResultDTO resultDTO) throws SQLException {
-        Connection connection = ConnectionUtil.getConnection();
+        Connection connection = JdbcConnector.getConnection();
         new ResultDAO(connection).addResult(resultDTO);
     }
 
     public static void saveWinningLotto(int round, WinningLotto winningLotto) throws SQLException {
-        Connection connection = ConnectionUtil.getConnection();
+        Connection connection = JdbcConnector.getConnection();
         new WinningLottoDAO(connection).addWinningLotto(round, winningLotto.getLottoTicket().getLottoNumbers(), winningLotto.getBonusNumber().getNumber());
     }
 
     public static Map<String, Object> getLastestResult() throws SQLException {
-        Connection connection = ConnectionUtil.getConnection();
+        Connection connection = JdbcConnector.getConnection();
         Map<String, Object> resMap = new HashMap<>();
         resMap.put("winningRate", new ResultDAO(connection).getLastestRate());
         resMap.put("prize", new ResultDAO(connection).getLastestPrize());

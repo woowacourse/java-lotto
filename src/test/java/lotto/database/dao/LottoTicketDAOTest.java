@@ -1,6 +1,6 @@
 package lotto.database.dao;
 
-import lotto.database.ConnectionUtil;
+import lotto.database.JdbcConnector;
 import lotto.domain.machine.Purchase;
 import lotto.domain.ticket.LottoTicketFactory;
 import lotto.domain.ticket.LottoTickets;
@@ -20,7 +20,7 @@ class LottoTicketDAOTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        this.con = ConnectionUtil.getConnection();
+        this.con = JdbcConnector.getConnection();
         this.lottoTicketDAO = new LottoTicketDAO(con);
         con.setAutoCommit(false);
 
