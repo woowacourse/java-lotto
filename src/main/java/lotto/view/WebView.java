@@ -4,18 +4,13 @@ import lotto.domain.LottoResult;
 import lotto.domain.Ticket;
 import lotto.domain.UserLottos;
 import lotto.domain.WinningLotto;
-import lotto.presentation.UserLottoPresentation;
-import lotto.presentation.WinningLottoPresentation;
-import spark.Request;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WebView {
-    public static UserLottoPresentation userLottoPresentation(Request request) {
-        return new UserLottoPresentation(request.queryParams("lottoMoney"),
-                request.queryParams("manualCount"), Arrays.asList(request.queryParamsValues("manualLottos")));
-
-    }
 
     public static Map<String, Object> userLottoJson(UserLottos userLottos) {
         List<List<Integer>> numbers = new ArrayList<>();
@@ -27,9 +22,6 @@ public class WebView {
         return json;
     }
 
-    public static WinningLottoPresentation winningLottoPresentation(Request request) {
-        return new WinningLottoPresentation(request.queryParams("numbers"), request.queryParams("bonus"));
-    }
 
     public static Map<String, Object> winningLottoJson(WinningLotto winningLotto) {
         Map<String, Object> json = new HashMap<>();

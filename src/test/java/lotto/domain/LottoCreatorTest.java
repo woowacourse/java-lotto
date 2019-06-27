@@ -12,7 +12,7 @@ class LottoCreatorTest {
     @Test
     void 로또숫자아님() {
         assertThrows(LottoNumberException.class, () -> {
-                    new LottoCreator().create(Arrays.asList(0, 1, 2, 3, 4, 5));
+                    LottoCreator.getLottoCreator().create(Arrays.asList(0, 1, 2, 3, 4, 5));
                 }
         );
     }
@@ -20,7 +20,7 @@ class LottoCreatorTest {
     @Test
     void 중복숫자() {
         assertThrows(LottoNumberException.class, () -> {
-            new LottoCreator().create(Arrays.asList(1, 1, 2, 3, 4, 5));
+            LottoCreator.getLottoCreator().create(Arrays.asList(1, 1, 2, 3, 4, 5));
         });
     }
 }
