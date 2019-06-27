@@ -10,7 +10,7 @@ class WinningLottoTest {
     @Test
     void 로또번호가_보너스를_포함할경우() {
         assertThrows(DuplicatedNumberException.class, () ->
-                WinningLotto.of(Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3),
-                        new LottoNo(4), new LottoNo(5), new LottoNo(6)), new LottoNo(6)));
+                WinningLotto.of(Arrays.asList(LottoNo.of(1), LottoNo.of(2), LottoNo.of(3),
+                        LottoNo.of(4), LottoNo.of(5), LottoNo.of(6)), LottoNo.of(6)));
     }
 }

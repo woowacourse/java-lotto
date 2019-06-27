@@ -13,7 +13,7 @@ public class LottoNoGenerator {
 
     static {
         for (int i = LottoNo.MIN_NO; i <= LottoNo.MAX_NO; i++) {
-            lottoNoContainer.add(new LottoNo(i));
+            lottoNoContainer.add(LottoNo.of(i));
         }
     }
 

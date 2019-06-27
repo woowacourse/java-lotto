@@ -2,11 +2,12 @@ package lotto.domain;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.WinningLotto;
+import lotto.dto.ResultDto;
 
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class WinningResult {
@@ -23,11 +24,11 @@ public class WinningResult {
 
     private int[] rankCounter = new int[6];
 
-    public WinningResult(Iterator<Lotto> lottoIterator, WinningLotto winningLotto) {
+    public WinningResult(List<Lotto> lottos, WinningLotto winningLotto) {
         Arrays.fill(rankCounter, 0);
 
-        while (lottoIterator.hasNext()) {
-            count(lottoIterator.next(), winningLotto);
+        for (Lotto lotto : lottos) {
+            count(lotto, winningLotto);
         }
     }
 
@@ -50,5 +51,9 @@ public class WinningResult {
                     .multiply(BigInteger.valueOf(rankCounter[countIndexMapper.get(rank)])));
         }
         return winningMoney;
+    }
+
+    public ResultDto createResultDto() {
+        return new ResultDto(0, getSpendMoney(), getWinningMoney());
     }
 }

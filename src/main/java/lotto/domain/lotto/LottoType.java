@@ -1,13 +1,17 @@
 package lotto.domain.lotto;
 
 public enum LottoType {
-    MANUAL(1),
-    AUTOMATIC(2),
-    WINNING(3);
+    MANUAL("MANUAL"),
+    AUTOMATIC("AUTO"),
+    WINNING("WINNING");
 
-    private int code;
+    private String type;
 
-    LottoType(int code) {
-        this.code = code;
+    LottoType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 }
