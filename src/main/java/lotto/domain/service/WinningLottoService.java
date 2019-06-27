@@ -2,6 +2,7 @@ package lotto.domain.service;
 
 import lotto.domain.dao.WinningLottoDAO;
 import lotto.domain.dto.WinningLottoDTO;
+import lotto.domain.model.Lotto;
 import lotto.domain.model.Number;
 import lotto.domain.model.NumberSet;
 
@@ -13,6 +14,14 @@ public class WinningLottoService {
 
     private static final String LOTTO_SEPARATOR = ",";
     private static final int NEXT_ROUND = 1;
+    private static final WinningLottoService INSTANCE = new WinningLottoService();
+
+    private WinningLottoService() {
+    }
+
+    public static WinningLottoService getInstance() {
+        return INSTANCE;
+    }
 
     public void addWinningLotto(final int round, final String bonusNumber, final String winningLotto) {
         List<Number> winningLottoNumbers = Stream.of(winningLotto.split(LOTTO_SEPARATOR))
@@ -20,20 +29,13 @@ public class WinningLottoService {
                 .collect(Collectors.toList());
 
         WinningLottoDTO winningLottoDTO = new WinningLottoDTO();
-        WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
         winningLottoDTO.setRound(round);
-        winningLottoDTO.setFirstNum(winningLottoNumbers.get(0));
-        winningLottoDTO.setSecondNum(winningLottoNumbers.get(1));
-        winningLottoDTO.setThirdNum(winningLottoNumbers.get(2));
-        winningLottoDTO.setForthNum(winningLottoNumbers.get(3));
-        winningLottoDTO.setFifthNum(winningLottoNumbers.get(4));
-        winningLottoDTO.setSixthNum(winningLottoNumbers.get(5));
+        winningLottoDTO.setWinningLotto(new Lotto(winningLottoNumbers));
         winningLottoDTO.setBonusNum(NumberSet.of(Integer.parseInt(bonusNumber)));
-        winningLottoDAO.addWinningLotto(winningLottoDTO);
+        WinningLottoDAO.getInstance().addWinningLotto(winningLottoDTO);
     }
 
     public int getNewRound() {
-        WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
-        return winningLottoDAO.getLatestRound() + NEXT_ROUND;
+        return WinningLottoDAO.getInstance().getLatestRound() + NEXT_ROUND;
     }
 }

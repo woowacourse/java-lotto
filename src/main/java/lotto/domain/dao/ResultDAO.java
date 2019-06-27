@@ -1,71 +1,14 @@
 package lotto.domain.dao;
 
 import lotto.domain.dto.ResultDTO;
-import lotto.domain.utils.ConnectionGenerator;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+public interface ResultDAO {
 
-public class ResultDAO {
-
-    public void setResult(final ResultDTO resultDTO) {
-        try (Connection con = ConnectionGenerator.getConnection()) {
-            String query = "INSERT INTO result " +
-                    "(round, first_prize, second_prize, third_prize, forth_prize, fifth_prize, profit_rate, money) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = con.prepareStatement(query);
-
-            pstmt.setInt(1, resultDTO.getRound());
-            pstmt.setInt(2, resultDTO.getFirstPrize());
-            pstmt.setInt(3, resultDTO.getSecondPrize());
-            pstmt.setInt(4, resultDTO.getThirdPrize());
-            pstmt.setInt(5, resultDTO.getForthPrize());
-            pstmt.setInt(6, resultDTO.getFifthPrize());
-            pstmt.setDouble(7, resultDTO.getProfitRate());
-            pstmt.setInt(8, resultDTO.getMoney());
-
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.getMessage();
-        }
+    static ResultDAOImpl getInstance() {
+        return ResultDAOImpl.getInstance();
     }
 
-    public ResultDTO getResult(final int newRound) {
-        ResultDTO resultDTO = new ResultDTO();
-
-        try (Connection con = ConnectionGenerator.getConnection()) {
-            String query = "SELECT * FROM result WHERE round = ?";
-            PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setInt(1, newRound);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (!rs.next()) return null;
-
-            resultDTO.setRound(rs.getInt("round"));
-            resultDTO.setFirstPrize(rs.getInt("first_prize"));
-            resultDTO.setSecondPrize(rs.getInt("second_prize"));
-            resultDTO.setThirdPrize(rs.getInt("third_prize"));
-            resultDTO.setForthPrize(rs.getInt("forth_prize"));
-            resultDTO.setFifthPrize(rs.getInt("fifth_prize"));
-            resultDTO.setProfitRate(rs.getDouble("profit_rate"));
-            resultDTO.setMoney(rs.getInt("money"));
-        } catch (SQLException e) {
-            e.getMessage();
-        }
-
-        return resultDTO;
-    }
-
-    public void deleteResult(final int round) {
-        try (Connection con = ConnectionGenerator.getConnection()) {
-            String query = "DELETE FROM result WHERE round = ?";
-            PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setInt(1, round);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.getMessage();
-        }
-    }
+    void setResult(final ResultDTO resultDTO);
+    ResultDTO getResult(final int newRound);
+    void deleteResult(final int round);
 }

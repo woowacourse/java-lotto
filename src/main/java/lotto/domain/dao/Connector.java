@@ -1,10 +1,10 @@
-package lotto.domain.utils;
+package lotto.domain.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionGenerator {
+public class Connector {
     public static Connection getConnection() throws JDBCDriverLoadException, JDBCConnectException {
         Connection con = null;
         String server = "localhost";

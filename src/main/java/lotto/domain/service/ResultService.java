@@ -5,20 +5,27 @@ import lotto.domain.dao.ResultDAO;
 import lotto.domain.dao.WinningLottoDAO;
 import lotto.domain.dto.LottoDTO;
 import lotto.domain.dto.ResultDTO;
-import lotto.domain.dto.WinningLottoDTO;
-import lotto.domain.model.Lotto;
 import lotto.domain.model.PurchasedLotto;
 import lotto.domain.model.Rank;
 import lotto.domain.model.WinningLotto;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class ResultService {
+
+    private static final ResultService INSTANCE = new ResultService();
+
+    private ResultService() {
+    }
+
+    public static ResultService getInstance() {
+        return INSTANCE;
+    }
+
+
     public void setResult(final int round, final int money) {
         ResultDTO resultDTO = new ResultDTO();
-        ResultDAO resultDAO = new ResultDAO();
 
         WinningLotto winningLotto = getWinningLotto(round);
         PurchasedLotto purchasedLotto = getPurchasedLotto(round);
@@ -35,7 +42,7 @@ public class ResultService {
         resultDTO.setMoney(money);
         resultDTO.setProfitRate(calculateProfitRate(money, prizeResult));
 
-        resultDAO.setResult(resultDTO);
+        ResultDAO.getInstance().setResult(resultDTO);
     }
 
     private double calculateProfitRate(final double money, final Map<Rank, Integer> prizeResult) {
@@ -47,38 +54,21 @@ public class ResultService {
     }
 
     private PurchasedLotto getPurchasedLotto(final int round) {
-        LottoDAO lottoDAO = new LottoDAO();
         PurchasedLotto purchasedLotto = new PurchasedLotto();
-        List<LottoDTO> purchasedLottoDTOs = lottoDAO.getPurchasedLotto(round);
+        List<LottoDTO> purchasedLottoDTOs = LottoDAO.getInstance().getPurchasedLotto(round);
 
         for (LottoDTO lottoDTO : purchasedLottoDTOs) {
-            purchasedLotto.addLotto(new Lotto(Arrays.asList(lottoDTO.getFifthNum(),
-                    lottoDTO.getSecondNum(),
-                    lottoDTO.getThirdNum(),
-                    lottoDTO.getForthNum(),
-                    lottoDTO.getFifthNum(),
-                    lottoDTO.getSixthNum())));
+            purchasedLotto.addLotto(lottoDTO.getLotto());
         }
 
         return purchasedLotto;
     }
 
     private WinningLotto getWinningLotto(int round) {
-        WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
-        WinningLottoDTO winningLottoDTO = winningLottoDAO.getWinningLotto(round);
-
-        Lotto winningLottoNumbers = new Lotto(Arrays.asList(winningLottoDTO.getFirstNum(),
-                winningLottoDTO.getSecondNum(),
-                winningLottoDTO.getThirdNum(),
-                winningLottoDTO.getForthNum(),
-                winningLottoDTO.getFifthNum(),
-                winningLottoDTO.getSixthNum()));
-
-        return new WinningLotto(winningLottoNumbers, winningLottoDTO.getBonusNum());
+        return WinningLottoDAO.getInstance().getWinningLotto(round);
     }
 
     public ResultDTO getResult(final int newRound) {
-        ResultDAO resultDAO = new ResultDAO();
-        return resultDAO.getResult(newRound);
+        return ResultDAO.getInstance().getResult(newRound);
     }
 }

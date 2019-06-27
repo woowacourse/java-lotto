@@ -16,14 +16,14 @@ public class WinningLotto {
     }
 
     public int matchCount(Lotto purchasedLotto) {
-        List<Number> myLotto = new ArrayList<>(purchasedLotto.getLotto());
-        List<Number> winLotto = new ArrayList<>(winningLotto.getLotto());
+        List<Number> myLotto = new ArrayList<>(purchasedLotto.getLottoNumbers());
+        List<Number> winLotto = new ArrayList<>(winningLotto.getLottoNumbers());
         myLotto.retainAll(winLotto);
         return myLotto.size();
     }
 
     public boolean matchBonusNumber(Lotto purchasedLotto) {
-        return purchasedLotto.getLotto().contains(bonusNumber);
+        return purchasedLotto.getLottoNumbers().contains(bonusNumber);
     }
 
     public List<Rank> match(PurchasedLotto purchasedLottos) {

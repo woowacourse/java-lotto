@@ -1,10 +1,12 @@
 package lotto;
 
-import lotto.domain.controller.Controller;
+import lotto.domain.controller.HomeController;
+import lotto.domain.controller.SaveGameController;
+import lotto.domain.controller.ShowGameController;
+import lotto.domain.controller.StartGameController;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static spark.Spark.get;
@@ -12,30 +14,20 @@ import static spark.Spark.get;
 public class WebUILottoApplication {
 
     public static void main(String[] args) {
-        get("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            req.session(true);
-            return render(model, "main.html");
-        });
+        HomeController homeController = HomeController.getInstance();
+        get(homeController.HOME_URL, (req, res) -> homeController.get(req, res));
 
-        get("/startGame", (req, res) -> {
-            Map<String, Object> model = Controller.startGame(req);
-            return render(model, "lotto.html");
-        });
+        StartGameController startGameController = StartGameController.getInstance();
+        get(startGameController.START_GAME_URL, (req, res) -> startGameController.get(req));
 
-        get("/saveGame", (req, res) -> {
-            Controller.saveGame(req);
-            return res.status();
-        });
+        SaveGameController saveGameController = SaveGameController.getInstance();
+        get(saveGameController.SAVE_GAME_URL, (req, res) -> saveGameController.get(req));
 
-        get("/showGame", (req, res) -> {
-            Map<String, Object> model = Controller.showGame(req.session().attribute("newRound"));
-            return render(model, "result.html");
-        });
+        ShowGameController showGameController = ShowGameController.getInstance();
+        get(showGameController.SHOW_GAME_URL, (req, res) -> showGameController.get(req));
     }
-
-
-    private static String render(Map<String, Object> model, String templatePath) {
+    
+    public static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 }
