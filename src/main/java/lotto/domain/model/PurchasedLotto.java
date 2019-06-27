@@ -7,8 +7,12 @@ public class PurchasedLotto {
 
     private List<Lotto> purchasedLotto = new ArrayList<>();
 
-    public void addLotto(List<Lotto> lotto) {
+    public void addLottos(List<Lotto> lotto) {
         purchasedLotto.addAll(lotto);
+    }
+
+    public void addLotto(Lotto lotto) {
+        this.purchasedLotto.add(lotto);
     }
 
     public int size() {

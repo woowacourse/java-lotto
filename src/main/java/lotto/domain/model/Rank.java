@@ -55,4 +55,10 @@ public enum Rank {
         rankInfo.append("원)- ");
         return rankInfo.toString();
     }
+
+    public static Rank[] ranks() {
+        Rank[] ranks = {FIRST, SECOND, THIRD, FORTH, FIFTH};
+        return ranks;
+    }
+
 }

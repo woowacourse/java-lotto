@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="kor">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>로또</title>
+</head>
+<body>
+{{#resultDTO}}
+<h2>로또 결과</h2>
+1등 : {{firstPrize}}명
+<br>
+2등 : {{secondPrize}}명
+<br>
+3등 : {{thirdPrize}}명
+<br>
+4등 : {{forthPrize}}명
+<br>
+5등 : {{fifthPrize}}명
+<br><br>
+수익률 : {{profitRate}}
+
+{{/resultDTO}}
+<div>
+    <button type="button" onclick="buyLotto();">새 게임</button>
+</div>
+</body>
+<script>
+    function buyLotto () {
+        location.href = "/startGame";
+    }
+</script>
+</body>
+</html>
