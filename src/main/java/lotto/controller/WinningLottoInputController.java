@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import lotto.StandardResponse;
 import lotto.StatusResponse;
 import lotto.domain.lotto.LottoNo;
+import lotto.service.LottoService;
 import lotto.utils.LottoNoParser;
 import spark.Request;
 import spark.Response;

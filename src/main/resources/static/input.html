@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<script type = 'text/javascript' src = 'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.js'> </script>
 <html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -6,6 +7,7 @@
     <title>로또 구매</title>
 </head>
 <body>
+<script id = 'initial_template' type='text/x-handlebars-template'></script>
 <div>
     <form action="#" id="budgetInputForm" name="budgetInputForm">
         <div>
@@ -28,42 +30,33 @@
             </div>
         </div>
         </br>
-        <input id="purchaseBtn" onclick="inputManualLotto()" type="button" value="구입"></input>
+        <input id="purchaseBtn" onclick="buyLotto()" type="button" value="구입"></input>
     </div>
     <div id="lottoReceipt" style="display: none">
         </br></br>
     </div>
+    <input type="hidden" id="lotto_price" value="{{lotto_price}}"/>
 </div>
-</body>
-</html>
 <script>
     var budget = -1;
     var maxManualCount = -1;
     var countOfManualInputBox = 0;
+    var lotto_price = parseInt(document.getElementById('lotto_price').value)
+    var lotto_result
 
     function inputBudget() {
         budget = document.getElementsByName('budget')[0].value;
 
-        console.log(budget);
-
-        $.ajax({
-            url:"budget",
-            type:"POST",
-            data:budget,
-            dataType:'json',
-            error:function(request,status,error){
-                alert(JSON.parse(request.responseText).message);
-                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            },
-            success:function(data){
-                console.log(JSON.stringify(data));
-                maxManualCount = data.data.maxManualCount;
+        if(budget <= lotto_price) {
+                alert('돈이 부족해서 로또를 살 수 없습니다.');
+        }
+        else {
+                maxManualCount = parseInt(budget / lotto_price)
                 console.log('success : maxManualCount changed to ' + maxManualCount);
                 document.getElementById("budget").readOnly = true;
                 document.getElementById("budgetButton").style.display = "none";
                 document.getElementById("manualLottoContainer").style.display = "block";
-            }
-        });
+        }
     }
 
     function addBox() {
@@ -90,105 +83,70 @@
         }
     }
 
-    function inputManualLotto() {
-        var manualLotto = document.getElementsByName('lottoNo');
-        if(manualLotto.length > 1){
-            var lottoArray = [];
+    function buyLotto() {
+        var lotto_purchase_info = new Object()
 
-            for (var i = 1; i < manualLotto.length; i++) {
-                lottoArray.push(manualLotto[i].value);
-            }
+        var manualLotto = document.getElementsByName('lottoNo')
+        lotto_purchase_info.budget = budget
+        lotto_purchase_info.manualCount = manualLotto.length - 1
 
-            console.log(lottoArray);
+        var lottoArray = [];
 
-            $.ajax({
-                url:"manualLotto",
-                type:"POST",
-                traditional:true,
-                data:{
-                    'budget': budget,
-                    'manualLottos': lottoArray
-                },
-                dataType:'json',
-                error:function(request,status,error){
-                    alert(JSON.parse(request.responseText).message);
-                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                },
-                success:function(data){
-                    console.log("success : ManualLotto");
-                    inputAutoLotto();
-                }
-            })
+        for (var i = 1; i < manualLotto.length; i++) {
+            lottoArray.push(manualLotto[i].value);
         }
-        else{
-            inputAutoLotto();
-        }
-    }
+        lotto_purchase_info.manualLottos = lottoArray
+        lotto_purchase_info.autoCount = maxManualCount - manualLotto.length + 1
 
-    function inputAutoLotto() {
+        console.log(lotto_purchase_info)
+
         $.ajax({
-            url:"autoLotto",
+            url:"lottoPurchase",
             type:"POST",
+            traditional:true,
+            data:lotto_purchase_info,
             dataType:'json',
             error:function(request,status,error){
                 alert(JSON.parse(request.responseText).message);
                 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             },
             success:function(data){
-                console.log("success : AutoLotto");
-                registerLotto();
-            }
-        })
-    }
-
-    function registerLotto() {
-        $.ajax({
-            url:"registerLotto",
-            type:"POST",
-            dataType:'json',
-            error:function(request,status,error){
-                alert(JSON.parse(request.responseText).message);
-                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            },
-            success:function(data){
-                console.log("success : registerLotto");
-                showLotto();
+                console.log("success : buyLotto");
+                lotto_result = data
+                showLotto()
             }
         })
     }
 
     function showLotto() {
-        $.ajax({
-            url:"showLotto",
-            type:"GET",
-            dataType:'json',
-            success:function(data){
-                alert("구입 완료!");
-                document.getElementById("lottoReceipt").style.display = "block";
-                document.getElementById("plusBtn").style.display = "none";
-                document.getElementById("purchaseBtn").style.display = "none";
+        alert("구입 완료!");
+        document.getElementById("lottoReceipt").style.display = "block";
+        document.getElementById("plusBtn").style.display = "none";
+        document.getElementById("purchaseBtn").style.display = "none";
 
-                var minusBtn = document.getElementsByName("minusBtn");
-                for(var i=0; i<minusBtn.length; i++){
-                    minusBtn[i].style.display = "none";
-                }
+        var minusBtn = document.getElementsByName("minusBtn");
+        for(var i=0; i<minusBtn.length; i++){
+            minusBtn[i].style.display = "none";
+        }
 
-                var lottoNoInputs = document.getElementsByName("lottoNo");
-                for(var i=0; i<lottoNoInputs.length; i++){
-                    lottoNoInputs[i].readOnly = true;
-                }
+        var lottoNoInputs = document.getElementsByName("lottoNo");
+        for(var i=0; i<lottoNoInputs.length; i++){
+            lottoNoInputs[i].readOnly = true;
+        }
 
-                var summary = document.createElement('h3');
-                summary.innerHTML = data.data.lotto[0];
-                document.getElementById('lottoReceipt').appendChild(summary);
-                for(var i=1; i<data.data.lotto.length; i++){
-                    console.log(data.data.lotto[i]);
-                    var p = document.createElement('p');
-                    p.innerHTML = data.data.lotto[i];
-                    document.getElementById('lottoReceipt').appendChild(p);
-                }
-            }
-        })
+        var summary = document.createElement('h3');
+        summary.innerHTML = '수동으로 ' + lotto_result.data.manualCount + '개 자동으로 ' 
+            + lotto_result.data.autoCount + '개를 구입했습니다.'
+        document.getElementById('lottoReceipt').appendChild(summary);
+        lottos = lotto_result.data.manualLottos.concat(lotto_result.data.autoLottos)
+        for(var i=0; i<lottos.length; i++){
+            console.log(lottos[i]);
+            var p = document.createElement('p');
+            p.innerHTML = lottos[i];
+            document.getElementById('lottoReceipt').appendChild(p);
+        }
     }
 
 </script>
+</body>
+</html>

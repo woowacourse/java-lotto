@@ -3,6 +3,7 @@ package lotto.controller;
 import com.google.gson.Gson;
 import lotto.StandardResponse;
 import lotto.StatusResponse;
+import lotto.service.LottoService;
 import spark.Request;
 import spark.Response;
 import spark.Route;

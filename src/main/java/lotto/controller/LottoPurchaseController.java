@@ -1,85 +1,54 @@
 package lotto.controller;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import lotto.StandardResponse;
 import lotto.StatusResponse;
+import lotto.domain.lotto.Lotto;
+import lotto.dto.PurchaseDto;
+import lotto.service.LottoService;
+import lotto.utils.JsonUtils;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LottoPurchaseController {
     private static LottoService service;
+    private static int INTERNAL_SERVER_ERROR_CODE = 500;
 
     static {
         service = new LottoService();
     }
 
     public static Route serveInputPage = (Request request, Response response) -> {
-        response.redirect("/input.html");
-        return null;
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("lotto_price", Lotto.LOTTO_PRICE);
+        return render(dataMap, "../static/input.html");
     };
 
-    public static Route inputBudget = (Request request, Response response) -> {
+    public static Route buyLotto = (request, response) -> {
         response.type("application/json");
-        JsonElement jsonBody = new JsonParser().parse(request.body());
-        Map<String, Object> model = new HashMap<>();
+        System.out.println("buyLotto");
         try {
-            service.makeBuyer(jsonBody.getAsInt());
-            model.put("maxManualCount", service.calculateMaxManualCount(jsonBody.getAsInt()));
+            PurchaseDto purchaseInfo = new PurchaseDto();
+            purchaseInfo.setBudget(Integer.parseInt(request.queryParams("budget")));
+            purchaseInfo.setAutoCount(Integer.parseInt(request.queryParams("autoCount")));
+            purchaseInfo.setManualCount(Integer.parseInt(request.queryParams("manualCount")));
+            purchaseInfo.setManualLottos(Arrays.asList(request.queryParamsValues("manualLottos")));
+            purchaseInfo = service.buyLotto(purchaseInfo);
+            return JsonUtils.toJson(new StandardResponse(StatusResponse.SUCCESS, JsonUtils.toJsonTree(purchaseInfo)));
         } catch (Exception e) {
-            response.status(500);
+            response.status(INTERNAL_SERVER_ERROR_CODE);
             return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
         }
-        return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(model)));
     };
 
-    public static Route inputManualLotto = (request, response) -> {
-        response.type("application/json");
-        String[] temps = request.queryMap("manualLottos").values();
-        try {
-            service.makeManualLotto(temps);
-        } catch (Exception e) {
-            response.status(500);
-            return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
-        }
-        return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
-    };
-
-    public static Route inputAutoLotto = (request, response) -> {
-        response.type("application/json");
-        try {
-            service.makeAutoLotto();
-        } catch (Exception e) {
-            response.status(500);
-            return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
-        }
-        return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
-    };
-
-    public static Route registerLotto = (request, response) -> {
-        try {
-            service.registerLotto();
-        } catch (Exception e) {
-            response.status(500);
-            return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
-        }
-        return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
-    };
-
-    public static Route showLotto = (request, response) -> {
-        response.type("application/json");
-        Map<String, Object> model = new HashMap<>();
-        try {
-            model.put("lotto", service.showLottoInfos());
-        } catch (Exception e) {
-            response.status(500);
-            return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
-        }
-        return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(model)));
-    };
+    private static String render(Map<String, Object> model, String templatePath) {
+        return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
+    }
 }

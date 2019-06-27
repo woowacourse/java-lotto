@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.service;
 
 import lotto.ConnectionFactory;
 import lotto.dao.LottoDao;
@@ -10,9 +10,9 @@ import lotto.domain.buyer.LottoContainer;
 import lotto.domain.buyer.NoMoneyException;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNo;
-import lotto.domain.lotto.LottoType;
 import lotto.domain.lotto.WinningLotto;
 import lotto.dto.LottoDto;
+import lotto.dto.PurchaseDto;
 import lotto.dto.ResultDto;
 import lotto.dto.WinningLottoDto;
 import lotto.utils.LottoNoParser;
@@ -20,7 +20,6 @@ import lotto.utils.LottoNoParser;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,54 +37,47 @@ public class LottoService {
         resultDao = new ResultDao(con);
     }
 
-    private Budget budget;
-    private LottoContainer lottoContainer = new LottoContainer();
     private WinningLotto winningLotto;
 
-    public void makeBuyer(int budget) {
-        this.budget = new Budget(budget);
+    private Budget makeBuyer(int budget) {
+        return new Budget(budget);
     }
 
-    void makeManualLotto(String[] rawLottoInputs) {
-        List<Lotto> lottos = Arrays.stream(rawLottoInputs)
+    private LottoContainer makeManualLotto(List<String> rawLottoInputs) {
+        LottoContainer lottoContainer = new LottoContainer();
+        List<Lotto> lottos = rawLottoInputs.stream()
                 .map(LottoNoParser::parseToLottoNos)
                 .map(Lotto::of).collect(Collectors.toList());
-        budget.pay(rawLottoInputs.length);
         lottoContainer.addLotto(lottos);
+        return lottoContainer;
     }
 
-    public void validataeAffordability(int countOfManualLotto) {
+    private void validateAffordability(Budget budget, int countOfManualLotto) {
         if (!budget.canBuyLotto(countOfManualLotto))
             throw new NoMoneyException(NO_MONEY_ERROR_MSG);
     }
 
-    public void makeManualLotto(List<Lotto> lottos) {
-        budget.pay(lottos.size());
-        lottoContainer.addLotto(lottos);
+
+    public PurchaseDto buyLotto(PurchaseDto purchaseInfo) throws SQLException {
+        Budget budget = makeBuyer(purchaseInfo.getBudget());
+        validateAffordability(budget, purchaseInfo.getManualCount());
+        LottoContainer lottoContainer = makeManualLotto(purchaseInfo.getManualLottos());
+        budget.pay(purchaseInfo.getManualCount());
+        List<Lotto> autoLottos = makeAutoLotto(budget);
+        lottoContainer.addLotto(autoLottos);
+        purchaseInfo.setAutoLottos(autoLottos.stream().map(Lotto::toString).collect(Collectors.toList()));
+        registerLotto(lottoContainer);
+        return purchaseInfo;
     }
 
-    public void makeAutoLotto() {
+
+    private List<Lotto> makeAutoLotto(Budget budget) {
+        List<Lotto> autoLottos = new ArrayList<>();
         while (budget.canBuyLotto()) {
             budget.pay();
-            lottoContainer.addLotto(Lotto.of());
+            autoLottos.add(Lotto.of());
         }
-    }
-
-    List<String> showLottoInfos() {
-        List<String> lottoInfos = new ArrayList<>();
-        lottoInfos.add("수동으로 " + lottoContainer.getCountOfLottoMatch(LottoType.MANUAL) + "개, "
-                + "자동으로 " + lottoContainer.getCountOfLottoMatch(LottoType.AUTOMATIC) + "개를 구매하셨습니다.");
-        lottoInfos.addAll(lottoContainer.showLottos());
-
-        return lottoInfos;
-    }
-
-    int calculateMaxManualCount(int budget) {
-        return budget / Lotto.LOTTO_PRICE;
-    }
-
-    public List<LottoDto> createLottoDtos() {
-        return lottoContainer.createLottoDto();
+        return autoLottos;
     }
 
     public boolean makeWinningLotto(List<LottoNo> winningLottoNo, LottoNo bonusNo) {
@@ -93,42 +85,42 @@ public class LottoService {
         return true;
     }
 
-    public WinningResult checkWinningLotto() {
-        return lottoContainer.createResult(winningLotto);
-    }
-
-    void registerLotto() throws SQLException {
+    //
+//    public WinningResult checkWinningLotto() {
+//        return lottoContainer.createResult(winningLotto);
+//    }
+//
+    private void registerLotto(LottoContainer lottoContainer) throws SQLException {
         List<LottoDto> dtos = lottoContainer.createLottoDto();
         for (LottoDto dto : dtos) {
             lottoDao.addLotto(dto);
         }
     }
 
-    void registerWinningLotto() throws SQLException {
+    public void registerWinningLotto() throws SQLException {
         winningLottoDao.addWinningLotto(winningLotto.createWinningLottoDto());
     }
 
-    void registerResult() throws SQLException {
+    public void registerResult() throws SQLException {
         List<Lotto> lotto = lottoDao.getLottosInThisRound().stream()
                 .map(lottoDto -> LottoNoParser.parseToLottoNos(lottoDto.getLottoNo()))
                 .map(Lotto::of).collect(Collectors.toList());
-
         resultDao.addResult(new WinningResult(lotto, winningLotto).createResultDto());
     }
 
-    List<LottoDto> getPurchasedLotto(int round) throws SQLException {
+    public List<LottoDto> getPurchasedLotto(int round) throws SQLException {
         return lottoDao.getLottos(round);
     }
 
-    WinningLottoDto getWinningLotto(int round) throws SQLException {
+    public WinningLottoDto getWinningLotto(int round) throws SQLException {
         return winningLottoDao.getWinningLotto(round);
     }
 
-    int getMaxRound() throws SQLException {
+    public int getMaxRound() throws SQLException {
         return resultDao.findRoundNo();
     }
 
-    ResultDto getResult(int round) throws SQLException {
+    public ResultDto getResult(int round) throws SQLException {
         return resultDao.getResult(round);
     }
 }
