@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoResultDAOTest {
-    LottoResultDAO lottoResultDAO;
+    LottoResultDao lottoResultDAO;
     Connection connection;
     JdbcTemplate jdbcTemplate;
     LottoResult lottoResult;
@@ -28,7 +28,7 @@ class LottoResultDAOTest {
         connection = getConnection();
         connection.setAutoCommit(false);
         jdbcTemplate = JdbcTemplate.getInstance(connection);
-        lottoResultDAO = LottoResultDAO.getInstance(jdbcTemplate);
+        lottoResultDAO = LottoResultDao.getInstance(jdbcTemplate);
 
         lottoResult = new LottoResult(Arrays.asList(LottoRank.FIFTH));
         lottoResultDTO = new LottoResultDTO();
@@ -58,7 +58,7 @@ class LottoResultDAOTest {
     @Test
     public void insertTest3() {
         assertDoesNotThrow(() -> {
-            LottoRoundDAO.getInstance(jdbcTemplate).insertRound(200);
+            LottoRoundDao.getInstance(jdbcTemplate).insertRound(200);
             lottoResultDAO.insertResult(200, lottoResultDTO);
         });
     }
@@ -66,7 +66,7 @@ class LottoResultDAOTest {
     //존재하는 라운드 결과
     @Test
     public void selectTest1() throws Exception {
-        LottoRoundDAO.getInstance(jdbcTemplate).insertRound(200);
+        LottoRoundDao.getInstance(jdbcTemplate).insertRound(200);
         lottoResultDAO.insertResult(200, lottoResultDTO);
 
         LottoResultDTO testLottoResultDTO = lottoResultDAO.selectLottoResultByRound(200);

@@ -8,22 +8,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoHistoryDAO {
+public class LottoHistoryDao {
     private static final String selectQuery = "SELECT num1, num2, num3, num4, num5, num6, bonus_num, "
             + "first_rank, second_rank, third_rank, fourth_rank, fifth_rank, fail_rank, winning_reward, earning_rate "
             + "FROM results a, winning_lotto b WHERE a.round=? and b.round=?";
 
-    private static LottoHistoryDAO instance;
+    private static LottoHistoryDao instance;
 
     private JdbcTemplate jdbcTemplate;
 
-    private LottoHistoryDAO(JdbcTemplate jdbcTemplate) {
+    private LottoHistoryDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public static LottoHistoryDAO getInstance(JdbcTemplate jdbcTemplate) {
+    public static LottoHistoryDao getInstance(JdbcTemplate jdbcTemplate) {
         if (instance == null) {
-            instance = new LottoHistoryDAO(jdbcTemplate);
+            instance = new LottoHistoryDao(jdbcTemplate);
         }
 
         if (!instance.jdbcTemplate.equals(jdbcTemplate)) {
@@ -47,8 +47,8 @@ public class LottoHistoryDAO {
 
     private LottoHistoryDTO getLottoHistoryDTO(ResultSet rs, int index) throws SQLException {
         LottoHistoryDTO lottoHistoryDTO = new LottoHistoryDTO();
-        lottoHistoryDTO.setWinningLottoDTO(WinningLottoDAO.getWinningLottoDTO(rs, index));
-        lottoHistoryDTO.setLottoResultDTO(LottoResultDAO.getLottoResultDTO(rs, index + WinningLotto.SIZE));
+        lottoHistoryDTO.setWinningLottoDTO(WinningLottoDao.getWinningLottoDTO(rs, index));
+        lottoHistoryDTO.setLottoResultDTO(LottoResultDao.getLottoResultDTO(rs, index + WinningLotto.SIZE));
 
         return lottoHistoryDTO;
     }

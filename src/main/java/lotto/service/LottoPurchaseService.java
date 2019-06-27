@@ -2,8 +2,8 @@ package lotto.service;
 
 import lotto.dao.DBConnection;
 import lotto.dao.JdbcTemplate;
-import lotto.dao.LottoRoundDAO;
-import lotto.dao.LottoTicketDAO;
+import lotto.dao.LottoRoundDao;
+import lotto.dao.LottoTicketDao;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoQuantity;
 import lotto.domain.lotto.LottoTicketGroup;
@@ -18,7 +18,13 @@ import java.util.List;
 public class LottoPurchaseService {
     private static LottoPurchaseService instance;
 
+    private final LottoTicketDao lottoTicketDAO;
+    private final LottoRoundDao lottoRoundDAO;
+
     private LottoPurchaseService() {
+        JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance(DBConnection.getConnection());
+        lottoRoundDAO = LottoRoundDao.getInstance(jdbcTemplate);
+        lottoTicketDAO = LottoTicketDao.getInstance(jdbcTemplate);
     }
 
     public static LottoPurchaseService getInstance() {
@@ -53,8 +59,7 @@ public class LottoPurchaseService {
     }
 
     private void saveLottos(int round, LottoTicketGroup lottos) throws SQLException {
-        JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance(DBConnection.getConnection());
-        LottoRoundDAO.getInstance(jdbcTemplate).insertRound(round);
-        LottoTicketDAO.getInstance(jdbcTemplate).insertLottoTickets(round, lottos);
+        lottoRoundDAO.insertRound(round);
+        lottoTicketDAO.insertLottoTickets(round, lottos);
     }
 }

@@ -13,14 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoRoundDAOTest {
-    LottoRoundDAO lottoRoundDAO;
+    LottoRoundDao lottoRoundDAO;
     Connection connection;
 
     @BeforeEach
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        lottoRoundDAO = LottoRoundDAO.getInstance(JdbcTemplate.getInstance(connection));
+        lottoRoundDAO = LottoRoundDao.getInstance(JdbcTemplate.getInstance(connection));
     }
 
     //에러 발생1 (해당 라운드 이미 존재)

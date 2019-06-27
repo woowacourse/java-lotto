@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoTicketDAOTest {
     LottoTicketGroup lottos;
-    LottoTicketDAO lottoTicketDAO;
+    LottoTicketDao lottoTicketDAO;
     Connection connection;
     JdbcTemplate jdbcTemplate;
 
@@ -26,7 +26,7 @@ class LottoTicketDAOTest {
         connection = getConnection();
         connection.setAutoCommit(false);
         jdbcTemplate = JdbcTemplate.getInstance(connection);
-        lottoTicketDAO = LottoTicketDAO.getInstance(jdbcTemplate);
+        lottoTicketDAO = LottoTicketDao.getInstance(jdbcTemplate);
         lottos = new LottoTicketGroup(Arrays.asList(LottoTicket.create(()->Arrays.asList(1, 2, 3, 4, 5, 6))));
     }
 
@@ -42,7 +42,7 @@ class LottoTicketDAOTest {
     @Test
     public void insertTest3() {
         assertDoesNotThrow(() -> {
-            LottoRoundDAO.getInstance(jdbcTemplate).insertRound(200);
+            LottoRoundDao.getInstance(jdbcTemplate).insertRound(200);
             lottoTicketDAO.insertLottoTickets(200, lottos);
         });
     }
@@ -50,7 +50,7 @@ class LottoTicketDAOTest {
     //해당 라운드 존재하는 경우
     @Test
     public void selectTest1() throws Exception {
-        LottoRoundDAO.getInstance(jdbcTemplate).insertRound(200);
+        LottoRoundDao.getInstance(jdbcTemplate).insertRound(200);
         lottoTicketDAO.insertLottoTickets(200, lottos);
 
         LottoTicketGroup lottoTickets = lottoTicketDAO.selectByLottoRound(200);

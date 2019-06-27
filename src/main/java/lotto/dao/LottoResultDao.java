@@ -12,21 +12,21 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoResultDAO {
+public class LottoResultDao {
     private static final String insertQuery = "INSERT INTO results (round, fail_rank, fifth_rank, fourth_rank, third_rank, second_rank, first_rank, winning_reward, earning_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String selectQuery = "SELECT first_rank, second_rank, third_rank, fourth_rank, fifth_rank, fail_rank, winning_reward, earning_rate FROM results WHERE round=?";
 
-    private static LottoResultDAO instance;
+    private static LottoResultDao instance;
 
     private JdbcTemplate jdbcTemplate;
 
-    private LottoResultDAO(JdbcTemplate jdbcTemplate) {
+    private LottoResultDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public static LottoResultDAO getInstance(JdbcTemplate jdbcTemplate) {
+    public static LottoResultDao getInstance(JdbcTemplate jdbcTemplate) {
         if (instance == null) {
-            instance = new LottoResultDAO(jdbcTemplate);
+            instance = new LottoResultDao(jdbcTemplate);
         }
 
         if (!instance.jdbcTemplate.equals(jdbcTemplate)) {

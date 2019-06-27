@@ -11,21 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoTicketDAO {
-    private static LottoTicketDAO instance;
+public class LottoTicketDao {
+    private static LottoTicketDao instance;
 
     private static final String insertQuery = "INSERT INTO lotto_tickets (round, num1, num2, num3, num4, num5, num6) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String selectQuery = "SELECT * FROM lotto_tickets WHERE round = ?";
 
     private JdbcTemplate jdbcTemplate;
 
-    private LottoTicketDAO(JdbcTemplate jdbcTemplate) {
+    private LottoTicketDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public static LottoTicketDAO getInstance(JdbcTemplate jdbcTemplate) {
+    public static LottoTicketDao getInstance(JdbcTemplate jdbcTemplate) {
         if (instance == null) {
-            instance = new LottoTicketDAO(jdbcTemplate);
+            instance = new LottoTicketDao(jdbcTemplate);
         }
 
         if (!instance.jdbcTemplate.equals(jdbcTemplate)) {

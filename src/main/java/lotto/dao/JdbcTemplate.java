@@ -29,7 +29,6 @@ public class JdbcTemplate {
         PreparedStatement pstmt = connection.prepareStatement(query);
         setPreparedStatement(pstmt, parameters);
         pstmt.executeUpdate();
-
     }
 
     public ResultSet executeQuery(String query, List<Object> parameters) throws SQLException {

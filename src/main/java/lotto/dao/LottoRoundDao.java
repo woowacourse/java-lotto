@@ -5,22 +5,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoRoundDAO {
+public class LottoRoundDao {
     private static final String insertQuery = "INSERT INTO lotto_rounds VALUES (?)";
     private static final String selectQuery = "SELECT * FROM lotto_rounds WHERE round>0";
     private static final String selectMaxQuery = "SELECT MAX(round) FROM lotto_rounds";
 
-    private static LottoRoundDAO instance;
+    private static LottoRoundDao instance;
 
     private JdbcTemplate jdbcTemplate;
 
-    private LottoRoundDAO(JdbcTemplate jdbcTemplate) {
+    private LottoRoundDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public static LottoRoundDAO getInstance(JdbcTemplate jdbcTemplate) {
+    public static LottoRoundDao getInstance(JdbcTemplate jdbcTemplate) {
         if (instance == null) {
-            instance = new LottoRoundDAO(jdbcTemplate);
+            instance = new LottoRoundDao(jdbcTemplate);
         }
 
         if (!instance.jdbcTemplate.equals(jdbcTemplate)) {

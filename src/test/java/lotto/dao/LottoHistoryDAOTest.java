@@ -12,14 +12,14 @@ import static lotto.dao.DBConnection.getConnection;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoHistoryDAOTest {
-    LottoHistoryDAO lottoHistoryDAO;
+    LottoHistoryDao lottoHistoryDAO;
     Connection connection;
 
     @BeforeEach
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        lottoHistoryDAO = LottoHistoryDAO.getInstance(JdbcTemplate.getInstance(connection));
+        lottoHistoryDAO = LottoHistoryDao.getInstance(JdbcTemplate.getInstance(connection));
     }
 
     //존재하는 라운드

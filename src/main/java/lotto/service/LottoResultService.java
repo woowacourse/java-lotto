@@ -2,8 +2,8 @@ package lotto.service;
 
 import lotto.dao.DBConnection;
 import lotto.dao.JdbcTemplate;
-import lotto.dao.LottoResultDAO;
-import lotto.dao.WinningLottoDAO;
+import lotto.dao.LottoResultDao;
+import lotto.dao.WinningLottoDao;
 import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.lottoresult.LottoResult;
 import lotto.domain.lottoresult.WinningLotto;
@@ -14,7 +14,13 @@ import java.sql.SQLException;
 public class LottoResultService {
     private static LottoResultService instance;
 
+    private final WinningLottoDao winningLottoDAO;
+    private final LottoResultDao lottoResultDAO;
+
     private LottoResultService() {
+        JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance(DBConnection.getConnection());
+        winningLottoDAO = WinningLottoDao.getInstance(jdbcTemplate);
+        lottoResultDAO = LottoResultDao.getInstance(jdbcTemplate);
     }
 
     public static LottoResultService getInstance() {
@@ -39,8 +45,7 @@ public class LottoResultService {
     }
 
     private void saveResult(int round, WinningLotto winningLotto, LottoResultDTO lottoResultDTO) throws SQLException {
-        JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance(DBConnection.getConnection());
-        WinningLottoDAO.getInstance(jdbcTemplate).insertWinningLotto(round, winningLotto);
-        LottoResultDAO.getInstance(jdbcTemplate).insertResult(round, lottoResultDTO);
+        winningLottoDAO.insertWinningLotto(round, winningLotto);
+        lottoResultDAO.insertResult(round, lottoResultDTO);
     }
 }
