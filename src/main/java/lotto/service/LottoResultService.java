@@ -1,6 +1,7 @@
 package lotto.service;
 
-import lotto.dao.DBUtil;
+import lotto.dao.DBConnection;
+import lotto.dao.JdbcTemplate;
 import lotto.dao.LottoResultDAO;
 import lotto.dao.WinningLottoDAO;
 import lotto.domain.lotto.LottoTicketGroup;
@@ -8,7 +9,6 @@ import lotto.domain.lottoresult.LottoResult;
 import lotto.domain.lottoresult.WinningLotto;
 import lotto.dto.LottoResultDTO;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class LottoResultService {
@@ -39,8 +39,8 @@ public class LottoResultService {
     }
 
     private void saveResult(int round, WinningLotto winningLotto, LottoResultDTO lottoResultDTO) throws SQLException {
-        Connection connection = DBUtil.getConnection();
-        WinningLottoDAO.getInstance(connection).insertWinningLotto(round, winningLotto);
-        LottoResultDAO.getInstance(connection).insertResult(round, lottoResultDTO);
+        JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance(DBConnection.getConnection());
+        WinningLottoDAO.getInstance(jdbcTemplate).insertWinningLotto(round, winningLotto);
+        LottoResultDAO.getInstance(jdbcTemplate).insertResult(round, lottoResultDTO);
     }
 }

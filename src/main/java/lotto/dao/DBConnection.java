@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBUtil {
+public class DBConnection {
     static {
         loadDriver();
     }
@@ -34,6 +34,7 @@ public class DBUtil {
             System.err.println("연결 오류:" + e.getMessage());
             e.printStackTrace();
         }
+
         return con;
     }
 

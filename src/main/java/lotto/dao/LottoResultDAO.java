@@ -4,8 +4,6 @@ import lotto.domain.lottoresult.LottoRank;
 import lotto.domain.lottoresult.RankCount;
 import lotto.dto.LottoResultDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,45 +13,48 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoResultDAO {
-    private static LottoResultDAO instance;
-
     private static final String insertQuery = "INSERT INTO results (round, fail_rank, fifth_rank, fourth_rank, third_rank, second_rank, first_rank, winning_reward, earning_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String selectQuery = "SELECT first_rank, second_rank, third_rank, fourth_rank, fifth_rank, fail_rank, winning_reward, earning_rate FROM results WHERE round=?";
 
-    private Connection connection;
+    private static LottoResultDAO instance;
 
-    private LottoResultDAO(Connection connection) {
-        this.connection = connection;
+    private JdbcTemplate jdbcTemplate;
+
+    private LottoResultDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
-    public static LottoResultDAO getInstance(Connection connection) {
+    public static LottoResultDAO getInstance(JdbcTemplate jdbcTemplate) {
         if (instance == null) {
-            instance = new LottoResultDAO(connection);
+            instance = new LottoResultDAO(jdbcTemplate);
         }
-        if (instance.connection != connection) {
-            instance.connection = connection;
+
+        if (!instance.jdbcTemplate.equals(jdbcTemplate)) {
+            instance.jdbcTemplate = jdbcTemplate;
         }
         return instance;
     }
 
     public void insertResult(int round, LottoResultDTO lottoResultDTO) throws SQLException {
-        PreparedStatement pstmt = connection.prepareStatement(insertQuery);
-        int parameterIndex = 1;
 
-        pstmt.setInt(parameterIndex++, round);
+        List<Object> parameters = new ArrayList<>();
+
+        parameters.add(round);
         for (RankCount rankCount : lottoResultDTO.getRankCounts()) {
-            pstmt.setInt(parameterIndex++, rankCount.getCount());
+            parameters.add(rankCount.getCount());
         }
-        pstmt.setBigDecimal(parameterIndex++, lottoResultDTO.getWinningReward());
-        pstmt.setBigDecimal(parameterIndex, lottoResultDTO.getEarningRate());
 
-        pstmt.executeUpdate();
+        parameters.add(lottoResultDTO.getWinningReward());
+        parameters.add(lottoResultDTO.getEarningRate());
+
+        jdbcTemplate.executeUpdate(insertQuery, parameters);
     }
 
     public LottoResultDTO selectLottoResultByRound(int round) throws SQLException {
-        PreparedStatement pstmt = connection.prepareStatement(selectQuery);
-        pstmt.setInt(1, round);
-        ResultSet rs = pstmt.executeQuery();
+        List<Object> parameters = new ArrayList();
+        parameters.add(round);
+
+        ResultSet rs = jdbcTemplate.executeQuery(selectQuery, parameters);
 
         return (rs.next()) ? getLottoResultDTO(rs, 1) : new LottoResultDTO();
     }
@@ -77,8 +78,8 @@ public class LottoResultDAO {
 
         return Collections.unmodifiableList(
                 rankCounts.stream()
-                .sorted(Comparator.comparingInt(rankCount -> rankCount.getRank().getReward()))
-                .collect(Collectors.toList())
+                        .sorted(Comparator.comparingInt(rankCount -> rankCount.getRank().getReward()))
+                        .collect(Collectors.toList())
         );
     }
 }

@@ -1,12 +1,12 @@
 package lotto.service;
 
-import lotto.dao.DBUtil;
+import lotto.dao.DBConnection;
+import lotto.dao.JdbcTemplate;
 import lotto.dao.LottoHistoryDAO;
 import lotto.dao.LottoTicketDAO;
 import lotto.domain.lotto.LottoTicketGroup;
 import lotto.dto.LottoHistoryDTO;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class LottoHistoryService {
@@ -23,9 +23,9 @@ public class LottoHistoryService {
     }
 
     public LottoHistoryDTO historyOf(int round) throws SQLException {
-        Connection connection = DBUtil.getConnection();
-        LottoHistoryDTO lottoHistoryDTO = LottoHistoryDAO.getInstance(connection).selectLottoHistory(round);
-        LottoTicketGroup lottos = LottoTicketDAO.getInstance(connection).selectByLottoRound(round);
+        JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance(DBConnection.getConnection());
+        LottoHistoryDTO lottoHistoryDTO = LottoHistoryDAO.getInstance(jdbcTemplate).selectLottoHistory(round);
+        LottoTicketGroup lottos = LottoTicketDAO.getInstance(jdbcTemplate).selectByLottoRound(round);
         lottoHistoryDTO.setLottos(lottos);
 
         return lottoHistoryDTO;

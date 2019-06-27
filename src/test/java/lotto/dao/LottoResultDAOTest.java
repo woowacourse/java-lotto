@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-import static lotto.dao.DBUtil.getConnection;
+import static lotto.dao.DBConnection.getConnection;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class LottoResultDAOTest {
     LottoResultDAO lottoResultDAO;
     Connection connection;
+    JdbcTemplate jdbcTemplate;
     LottoResult lottoResult;
     LottoResultDTO lottoResultDTO;
 
@@ -26,7 +27,8 @@ class LottoResultDAOTest {
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        lottoResultDAO = LottoResultDAO.getInstance(connection);
+        jdbcTemplate = JdbcTemplate.getInstance(connection);
+        lottoResultDAO = LottoResultDAO.getInstance(jdbcTemplate);
 
         lottoResult = new LottoResult(Arrays.asList(LottoRank.FIFTH));
         lottoResultDTO = new LottoResultDTO();
@@ -56,7 +58,7 @@ class LottoResultDAOTest {
     @Test
     public void insertTest3() {
         assertDoesNotThrow(() -> {
-            LottoRoundDAO.getInstance(connection).insertRound(200);
+            LottoRoundDAO.getInstance(jdbcTemplate).insertRound(200);
             lottoResultDAO.insertResult(200, lottoResultDTO);
         });
     }
@@ -64,7 +66,7 @@ class LottoResultDAOTest {
     //존재하는 라운드 결과
     @Test
     public void selectTest1() throws Exception {
-        LottoRoundDAO.getInstance(connection).insertRound(200);
+        LottoRoundDAO.getInstance(jdbcTemplate).insertRound(200);
         lottoResultDAO.insertResult(200, lottoResultDTO);
 
         LottoResultDTO testLottoResultDTO = lottoResultDAO.selectLottoResultByRound(200);

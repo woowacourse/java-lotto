@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static lotto.dao.DBUtil.getConnection;
+import static lotto.dao.DBConnection.getConnection;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoHistoryDAOTest {
@@ -19,7 +19,7 @@ class LottoHistoryDAOTest {
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        lottoHistoryDAO = LottoHistoryDAO.getInstance(connection);
+        lottoHistoryDAO = LottoHistoryDAO.getInstance(JdbcTemplate.getInstance(connection));
     }
 
     //존재하는 라운드

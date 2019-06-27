@@ -52,6 +52,10 @@ public class LottoNumberGroup implements Iterable<LottoNumber> {
         return numbers.contains(number);
     }
 
+    public Set<LottoNumber> getNumbers() {
+        return numbers;
+    }
+
     @Override
     public String toString() {
         return numbers.toString();

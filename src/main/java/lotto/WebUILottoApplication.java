@@ -1,6 +1,7 @@
 package lotto;
 
-import lotto.dao.DBUtil;
+import lotto.dao.DBConnection;
+import lotto.dao.JdbcTemplate;
 import lotto.dao.LottoRoundDAO;
 import lotto.dto.LottoResultDTO;
 import lotto.dto.PurchaseInformationDTO;
@@ -42,7 +43,9 @@ public class WebUILottoApplication {
         try {
             Map<String, Object> model = new HashMap<>();
 
-            int thisRound = LottoRoundDAO.getInstance(DBUtil.getConnection()).selectMaxRound() + 1;
+            JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance(DBConnection.getConnection());
+            int thisRound = LottoRoundDAO.getInstance(jdbcTemplate).selectMaxRound() + 1;
+
             request.session().attribute("round", thisRound);
             model.put("round", thisRound);
             return render(model, "purchaseLotto.html");
@@ -105,7 +108,8 @@ public class WebUILottoApplication {
     private static String list(Request request, Response response) {
         Map<String, Object> model = new HashMap<>();
         try {
-            List<Integer> rounds = LottoRoundDAO.getInstance(DBUtil.getConnection()).selectLottoRounds();
+            JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance(DBConnection.getConnection());
+            List<Integer> rounds = LottoRoundDAO.getInstance(jdbcTemplate).selectLottoRounds();
             model.put("rounds", rounds);
         } catch (SQLException e) {
             e.printStackTrace();

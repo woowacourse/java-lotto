@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-import static lotto.dao.DBUtil.getConnection;
+import static lotto.dao.DBConnection.getConnection;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,12 +19,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class WinningLottoDAOTest {
     WinningLottoDAO winningLottoDAO;
     Connection connection;
+    JdbcTemplate jdbcTemplate;
 
     @BeforeEach
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        winningLottoDAO = WinningLottoDAO.getInstance(connection);
+        jdbcTemplate = JdbcTemplate.getInstance(connection);
+        winningLottoDAO = WinningLottoDAO.getInstance(jdbcTemplate);
     }
 
     //에러 발생1 (해당 라운드 값이 round 테이블에 존재하지 않아 외래키가 없음)
@@ -48,7 +50,7 @@ class WinningLottoDAOTest {
     @Test
     public void insertTest3() {
         assertDoesNotThrow(() -> {
-            LottoRoundDAO.getInstance(connection).insertRound(200);
+            LottoRoundDAO.getInstance(jdbcTemplate).insertRound(200);
             winningLottoDAO.insertWinningLotto(200, WinningLotto.create("1, 2, 3, 4, 5, 6", "7"));
         });
     }
@@ -56,7 +58,7 @@ class WinningLottoDAOTest {
     //존재하는 라운드 결과
     @Test
     public void selectTest1() throws Exception {
-        LottoRoundDAO.getInstance(connection).insertRound(200);
+        LottoRoundDAO.getInstance(jdbcTemplate).insertRound(200);
         winningLottoDAO.insertWinningLotto(200, WinningLotto.create("1, 2, 3, 4, 5, 6", "7"));
 
         WinningLottoDTO winningLottoDTO = winningLottoDAO.selectByLottoRound(200);

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static lotto.dao.DBUtil.getConnection;
+import static lotto.dao.DBConnection.getConnection;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -20,7 +20,7 @@ class LottoRoundDAOTest {
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        lottoRoundDAO = LottoRoundDAO.getInstance(connection);
+        lottoRoundDAO = LottoRoundDAO.getInstance(JdbcTemplate.getInstance(connection));
     }
 
     //에러 발생1 (해당 라운드 이미 존재)

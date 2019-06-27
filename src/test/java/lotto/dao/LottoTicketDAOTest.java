@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-import static lotto.dao.DBUtil.getConnection;
+import static lotto.dao.DBConnection.getConnection;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,12 +19,14 @@ class LottoTicketDAOTest {
     LottoTicketGroup lottos;
     LottoTicketDAO lottoTicketDAO;
     Connection connection;
+    JdbcTemplate jdbcTemplate;
 
     @BeforeEach
     void setUp() throws Exception {
         connection = getConnection();
         connection.setAutoCommit(false);
-        lottoTicketDAO = LottoTicketDAO.getInstance(connection);
+        jdbcTemplate = JdbcTemplate.getInstance(connection);
+        lottoTicketDAO = LottoTicketDAO.getInstance(jdbcTemplate);
         lottos = new LottoTicketGroup(Arrays.asList(LottoTicket.create(()->Arrays.asList(1, 2, 3, 4, 5, 6))));
     }
 
@@ -40,7 +42,7 @@ class LottoTicketDAOTest {
     @Test
     public void insertTest3() {
         assertDoesNotThrow(() -> {
-            LottoRoundDAO.getInstance(connection).insertRound(200);
+            LottoRoundDAO.getInstance(jdbcTemplate).insertRound(200);
             lottoTicketDAO.insertLottoTickets(200, lottos);
         });
     }
@@ -48,7 +50,7 @@ class LottoTicketDAOTest {
     //해당 라운드 존재하는 경우
     @Test
     public void selectTest1() throws Exception {
-        LottoRoundDAO.getInstance(connection).insertRound(200);
+        LottoRoundDAO.getInstance(jdbcTemplate).insertRound(200);
         lottoTicketDAO.insertLottoTickets(200, lottos);
 
         LottoTicketGroup lottoTickets = lottoTicketDAO.selectByLottoRound(200);
