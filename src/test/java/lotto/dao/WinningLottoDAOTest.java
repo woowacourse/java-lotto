@@ -2,7 +2,6 @@ package lotto.dao;
 
 import lotto.domain.*;
 import lotto.dto.WinningLottoDTO;
-import lotto.database.DBConnector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ public class WinningLottoDAOTest {
 
     @BeforeEach
     public void setUp() {
-        winningLottoDao = new WinningLottoDAO(DBConnector.getConnection());
+        winningLottoDao = WinningLottoDAO.getInstance();
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {

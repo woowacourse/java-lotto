@@ -3,8 +3,6 @@ package lotto.dao;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 import lotto.dto.LottoResultDTO;
-import lotto.database.DBConnector;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -12,12 +10,7 @@ import java.sql.SQLException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultDAOTest {
-    private LottoResultDAO lottoResultDao;
-
-    @BeforeEach
-    public void setUp() {
-        lottoResultDao = new LottoResultDAO(DBConnector.getConnection());
-    }
+    private LottoResultDAO lottoResultDao = LottoResultDAO.getInstance();
 
     @Test
     public void addTest() throws SQLException {

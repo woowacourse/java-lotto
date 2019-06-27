@@ -1,5 +1,6 @@
 package lotto.dao;
 
+import lotto.database.DBConnector;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.dto.LottoDTO;
@@ -12,38 +13,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoDAO {
-    private final Connection conn;
+    private static LottoDAO lottoDAO = new LottoDAO();
 
-    public LottoDAO(Connection conn) {
-        this.conn = conn;
+    public static LottoDAO getInstance() {
+        return lottoDAO;
     }
 
     public void addLotto(List<LottoDTO> lottoDtos) throws SQLException {
-        for (LottoDTO lottoDto : lottoDtos) {
-            String query = "INSERT INTO lotto VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, lottoDto.getRound());
-            pstmt.setInt(2, lottoDto.getNumber1());
-            pstmt.setInt(3, lottoDto.getNumber2());
-            pstmt.setInt(4, lottoDto.getNumber3());
-            pstmt.setInt(5, lottoDto.getNumber4());
-            pstmt.setInt(6, lottoDto.getNumber5());
-            pstmt.setInt(7, lottoDto.getNumber6());
-            pstmt.executeUpdate();
+        String query = "INSERT INTO lotto VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DBConnector.getConnection()) {
+            for (LottoDTO lottoDto : lottoDtos) {
+                PreparedStatement pstmt = conn.prepareStatement(query);
+                pstmt.setInt(1, lottoDto.getRound());
+                pstmt.setInt(2, lottoDto.getNumber1());
+                pstmt.setInt(3, lottoDto.getNumber2());
+                pstmt.setInt(4, lottoDto.getNumber3());
+                pstmt.setInt(5, lottoDto.getNumber4());
+                pstmt.setInt(6, lottoDto.getNumber5());
+                pstmt.setInt(7, lottoDto.getNumber6());
+                pstmt.executeUpdate();
+            }
         }
     }
 
     public List<Lotto> findByRound(int round) throws SQLException {
         String query = "SELECT * FROM lotto WHERE round = ?";
-        PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setInt(1, round);
-        ResultSet rs = pstmt.executeQuery();
 
-        if (!rs.next()) {
-            return null;
+        try (Connection conn = DBConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, round);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (!rs.next()) {
+                return null;
+            }
+
+            return makeLottos(rs);
         }
-
-        return makeLottos(rs);
     }
 
     private List<Lotto> makeLottos(ResultSet rs) throws SQLException {

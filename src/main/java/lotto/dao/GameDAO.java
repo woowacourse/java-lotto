@@ -1,29 +1,21 @@
 package lotto.dao;
 
 import lotto.dto.*;
-
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class GameDAO {
-    private final Connection conn;
-
-    public GameDAO(Connection conn) {
-        this.conn = conn;
-    }
-
     public void addAll(GameDTO gameDto) throws SQLException {
         int round = gameDto.getRound();
         List<LottoDTO> lottoDtos = gameDto.getLottoTickets().toDTO(round);
         WinningLottoDTO winningLottoDto = gameDto.getWinningLotto().toDTO(round);
         LottoResultDTO lottoResultDto = gameDto.getLottoResult().toDTO(round);
 
-        LottoDAO lottoDao = new LottoDAO(conn);
+        LottoDAO lottoDao = LottoDAO.getInstance();
         lottoDao.addLotto(lottoDtos);
-        WinningLottoDAO winningLottoDao = new WinningLottoDAO(conn);
+        WinningLottoDAO winningLottoDao = WinningLottoDAO.getInstance();
         winningLottoDao.addWinningLotto(winningLottoDto);
-        LottoResultDAO lottoResultDao = new LottoResultDAO(conn);
+        LottoResultDAO lottoResultDao = LottoResultDAO.getInstance();
         lottoResultDao.addLottoResult(lottoResultDto);
     }
 }

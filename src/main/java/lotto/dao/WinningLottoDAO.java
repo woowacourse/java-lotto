@@ -1,5 +1,6 @@
 package lotto.dao;
 
+import lotto.database.DBConnector;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
@@ -13,37 +14,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLottoDAO {
-    private final Connection conn;
+    private static WinningLottoDAO winningLottoDAO = new WinningLottoDAO();
 
-    public WinningLottoDAO(Connection conn) {
-        this.conn = conn;
+    public static WinningLottoDAO getInstance() {
+        return winningLottoDAO;
     }
 
     public void addWinningLotto(WinningLottoDTO winningLottoDto) throws SQLException {
         String query = "INSERT INTO winninglotto VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setInt(1, winningLottoDto.getRound());
-        pstmt.setInt(2, winningLottoDto.getNumber1());
-        pstmt.setInt(3, winningLottoDto.getNumber2());
-        pstmt.setInt(4, winningLottoDto.getNumber3());
-        pstmt.setInt(5, winningLottoDto.getNumber4());
-        pstmt.setInt(6, winningLottoDto.getNumber5());
-        pstmt.setInt(7, winningLottoDto.getNumber6());
-        pstmt.setInt(8, winningLottoDto.getBonus());
-        pstmt.executeUpdate();
+
+        try (Connection conn = DBConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, winningLottoDto.getRound());
+            pstmt.setInt(2, winningLottoDto.getNumber1());
+            pstmt.setInt(3, winningLottoDto.getNumber2());
+            pstmt.setInt(4, winningLottoDto.getNumber3());
+            pstmt.setInt(5, winningLottoDto.getNumber4());
+            pstmt.setInt(6, winningLottoDto.getNumber5());
+            pstmt.setInt(7, winningLottoDto.getNumber6());
+            pstmt.setInt(8, winningLottoDto.getBonus());
+            pstmt.executeUpdate();
+        }
     }
 
     public WinningLotto findByRound(int round) throws SQLException {
         String query = "SELECT * FROM winninglotto WHERE round = ?";
-        PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setInt(1, round);
-        ResultSet rs = pstmt.executeQuery();
 
-        if (!rs.next()) {
-            return null;
+        try (Connection conn = DBConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, round);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (!rs.next()) {
+                return null;
+            }
+
+            return makeWinningLotto(rs);
         }
-
-        return makeWinningLotto(rs);
     }
 
     private WinningLotto makeWinningLotto(ResultSet rs) throws SQLException {

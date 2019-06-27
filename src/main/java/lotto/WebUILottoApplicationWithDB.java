@@ -100,9 +100,8 @@ public class WebUILottoApplicationWithDB {
                 gameDto.setLottoResult(lottoResult);
                 model.put("result", lottoResult);
 
-                Connection conn = DBConnector.getConnection();
-                GameDAO gameDao = new GameDAO(conn);
-                gameDto.setRound(new RoundDAO(conn).getRound());
+                GameDAO gameDao = new GameDAO();
+                gameDto.setRound(RoundDAO.getInstance().getRound());
                 gameDao.addAll(gameDto);
             } catch (Exception e) {
                 model.put("error", e.getMessage());
@@ -116,11 +115,10 @@ public class WebUILottoApplicationWithDB {
             Map<String, Object> model = new HashMap<>();
             try {
                 int round = Integer.parseInt(req.queryParams("round"));
-                Connection conn = DBConnector.getConnection();
-                model.put("select", WebOutputView.printResultSelectBox(round, new RoundDAO(conn).getRound() - 1));
-                model.put("winningLotto", WebOutputView.printWinningLottoAsBall(new WinningLottoDAO(conn).findByRound(round)));
-                model.put("lottos", WebOutputView.printLottosAsBall(new LottoDAO(conn).findByRound(round)));
-                model.put("result", new LottoResultDAO(conn).findByRound(round));
+                model.put("select", WebOutputView.printResultSelectBox(round, RoundDAO.getInstance().getRound() - 1));
+                model.put("winningLotto", WebOutputView.printWinningLottoAsBall(WinningLottoDAO.getInstance().findByRound(round)));
+                model.put("lottos", WebOutputView.printLottosAsBall(LottoDAO.getInstance().findByRound(round)));
+                model.put("result", LottoResultDAO.getInstance().findByRound(round));
             } catch (Exception e) {
                 model.put("error", e.getMessage());
                 return render(model, "error.html");
