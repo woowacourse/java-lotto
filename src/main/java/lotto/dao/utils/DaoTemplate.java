@@ -1,5 +1,7 @@
 package lotto.dao.utils;
 
+import lotto.dao.exception.DataAccessException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLDataException;
@@ -16,13 +18,15 @@ public interface DaoTemplate {
      * @return result Query result
      * @throws SQLDataException
      */
-    default int cudTemplate(String query) throws SQLException {
+    default int cudTemplate(String query) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             setPreparedStatement(preparedStatement);
 
             return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException(e);
         }
     }
 

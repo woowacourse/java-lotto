@@ -1,11 +1,11 @@
 package lotto.controller;
 
+import lotto.dao.exception.DataAccessException;
 import lotto.service.PaymentInfoService;
 import spark.Request;
 import spark.Response;
 
 import java.sql.SQLDataException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +25,7 @@ public class PaymentInfoController {
         Map<String, Object> model = new HashMap<>();
         try {
             PAYMENT_INFO_SERVICE.insertUser(userName);
-        } catch (SQLException e) {
+        } catch (DataAccessException e) {
             e.printStackTrace();
             model.put("errorMessage", "죄송합니다. Payment를 등록할 수 없습니다. 관리자에게 문의해주세요.");
             return render(model, "lottoNumbers.html");

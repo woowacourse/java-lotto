@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.dao.exception.DataAccessException;
 import lotto.service.LottoService;
 import lotto.service.PaymentInfoService;
 import lotto.service.dto.PaymentInfoDto;
@@ -7,7 +8,6 @@ import spark.Request;
 import spark.Response;
 
 import java.sql.SQLDataException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class LottoController {
         Map<String, Object> model = new HashMap<>();
         try {
             round = PAYMENT_INFO_SERVICE.insertPaymentInfoAndReturnKeyValue(paymentInfoDto);
-        } catch (SQLException e) {
+        } catch (DataAccessException e) {
             e.printStackTrace();
             model.put("errorMessage", "죄송합니다. Payment를 등록할 수 없습니다. 관리자에게 문의해주세요.");
             return render(model, "error.html");
@@ -68,7 +68,7 @@ public class LottoController {
         // TODO: 2019-06-27 Create Dto class...
         try {
             LOTTO_SERVICE.insertLottoAndResult(inputLottos, countOfLotto, inputWinningLotto, inputBonusBall, round, name);
-        } catch (SQLException e) {
+        } catch (DataAccessException e) {
             e.printStackTrace();
             Map<String, Object> model = new HashMap<>();
             model.put("errorMessage", "죄송합니다. Lotto를 등록할 수 없습니다. 관리자에게 문의해주세요.");

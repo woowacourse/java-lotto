@@ -1,5 +1,6 @@
 package lotto.dao;
 
+import lotto.dao.exception.DataAccessException;
 import lotto.dao.utils.DaoTemplate;
 import lotto.service.dto.PaymentInfoDto;
 
@@ -21,7 +22,7 @@ public class PaymentInfoDao {
         return PaymentInfoDaoHolder.INSTANCE;
     }
 
-    public int insertUser(String name) throws SQLException {
+    public int insertUser(String name) {
         DaoTemplate daoTemplate = (preparedStatement) -> {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, name);
@@ -30,16 +31,18 @@ public class PaymentInfoDao {
         return daoTemplate.cudTemplate(INSERT_USER);
     }
 
-    public int insertPayment(PaymentInfoDto paymentInfoDto) throws SQLException {
+    public int insertPayment(PaymentInfoDto paymentInfoDto) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = createPreparedStatement(connection, paymentInfoDto);
              ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
 
             if (!resultSet.next()) {
-                throw new SQLDataException();
+                throw new DataAccessException();
             }
 
             return resultSet.getInt(1);
+        } catch (SQLException e) {
+            throw new DataAccessException(e);
         }
     }
 

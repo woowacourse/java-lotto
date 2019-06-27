@@ -7,8 +7,6 @@ import lotto.domain.lottogenerator.ManualLottoGeneratingStrategy;
 import lotto.domain.lottogenerator.RandomLottoGeneratingStrategy;
 import lotto.service.dto.ResultDto;
 
-import java.sql.SQLDataException;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -18,9 +16,9 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 
 public class LottoService {
-    private static final LottoDao LOTTO_DAO = LottoDao.getInstance();
-    private static final LottoService LOTTO_SERVICE = LottoService.getInstance();
-    private static final LottoResultService LOTTO_RESULT_SERVICE = LottoResultService.getInstance();
+    private LottoDao lottoDao = LottoDao.getInstance();
+    private LottoService lottoService = LottoService.getInstance();
+    private LottoResultService lottoResultService = LottoResultService.getInstance();
 
     private LottoService() {
     }
@@ -51,13 +49,13 @@ public class LottoService {
         return !Objects.isNull(value) && !value.isEmpty();
     }
 
-    public int insertLottoAndResult(String[] inputLottos, int countOfLotto, String inputWinningLotto, String inputBonusBall, int round, String name) throws SQLException {
+    public int insertLottoAndResult(String[] inputLottos, int countOfLotto, String inputWinningLotto, String inputBonusBall, int round, String name) {
         LottoRepository lottoRepository = addLottos(inputLottos, countOfLotto);
         WinningLotto winningLotto = createWinningLotto(inputWinningLotto, inputBonusBall);
-        LOTTO_SERVICE.insertWinningLotto(winningLotto, round);
-        LOTTO_RESULT_SERVICE.insertLottoResult(createResultDto(winningLotto, lottoRepository, round, name));
+        lottoService.insertWinningLotto(winningLotto, round);
+        lottoResultService.insertLottoResult(createResultDto(winningLotto, lottoRepository, round, name));
 
-        return LOTTO_DAO.insertLottoTicket(new LottoTickets(lottoRepository), round);
+        return lottoDao.insertLottoTicket(new LottoTickets(lottoRepository), round);
     }
 
     private ResultDto createResultDto(WinningLotto winningLotto, LottoRepository lottoRepository, int round, String name) {
@@ -91,8 +89,8 @@ public class LottoService {
                 .collect(toList());
     }
 
-    public int insertWinningLotto(WinningLotto winningLotto, int round) throws SQLException {
-        return LOTTO_DAO.insertWinningLotto(winningLotto, round);
+    public int insertWinningLotto(WinningLotto winningLotto, int round) {
+        return lottoDao.insertWinningLotto(winningLotto, round);
     }
 
     private WinningLotto createWinningLotto(String winningLotto, String bonusBall) {
@@ -101,12 +99,12 @@ public class LottoService {
         return new WinningLotto(lotto, Integer.parseInt(bonusBall));
     }
 
-    public List<Lotto> selectAllLotto(int round) throws SQLException {
-        return LOTTO_DAO.selectAllLotto(round);
+    public List<Lotto> selectAllLotto(int round) {
+        return lottoDao.selectAllLotto(round);
     }
 
-    public WinningLotto selectWinningLotto(int round) throws SQLException {
-        return LOTTO_DAO.selectWinningLotto(round);
+    public WinningLotto selectWinningLotto(int round) {
+        return lottoDao.selectWinningLotto(round);
     }
 
     public long calculateCountOfAutoLotto(List<Lotto> lottoTickets) {

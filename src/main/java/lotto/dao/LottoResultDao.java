@@ -1,9 +1,13 @@
 package lotto.dao;
 
+import lotto.dao.exception.DataAccessException;
 import lotto.dao.utils.DaoTemplate;
 import lotto.service.dto.ResultDto;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +31,7 @@ public class LottoResultDao {
         return LottoResultDaoHolder.INSTANCE;
     }
 
-    public int insertLottoResult(ResultDto resultDto) throws SQLException {
+    public int insertLottoResult(ResultDto resultDto) {
         DaoTemplate daoTemplate = (preparedStatement) -> {
             preparedStatement.setLong(1, resultDto.get(FIRST));
             preparedStatement.setLong(2, resultDto.get(SECOND));
@@ -40,7 +44,7 @@ public class LottoResultDao {
         return daoTemplate.cudTemplate(INSERT_LOTTO_RESULT);
     }
 
-    public List<ResultDto> selectAllLottoResult() throws SQLException {
+    public List<ResultDto> selectAllLottoResult() {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_LOTTO_RESULT);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -60,10 +64,12 @@ public class LottoResultDao {
                 results.add(resultDTO);
             }
             return results;
+        } catch (SQLException e) {
+            throw new DataAccessException(e);
         }
     }
 
-    public ResultDto selectLottoResult(int round) throws SQLException {
+    public ResultDto selectLottoResult(int round) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = createPreparedStatement(connection, round);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -81,6 +87,8 @@ public class LottoResultDao {
                     .miss(resultSet.getInt(MISS_COLUMN))
                     .payment(resultSet.getInt(PAYMENT_COLUMN))
                     .build();
+        } catch (SQLException e) {
+            throw new DataAccessException(e);
         }
     }
 
@@ -88,6 +96,5 @@ public class LottoResultDao {
         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOTTO_RESULT_BY_ROUND);
         preparedStatement.setInt(1, round);
         return preparedStatement;
-
     }
 }

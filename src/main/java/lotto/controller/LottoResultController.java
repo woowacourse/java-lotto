@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.dao.exception.DataAccessException;
 import lotto.domain.lotto.Lotto;
 import lotto.service.LottoResultService;
 import lotto.service.LottoService;
@@ -8,8 +9,6 @@ import lotto.service.dto.ResultDto;
 import spark.Request;
 import spark.Response;
 
-import java.sql.SQLDataException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +29,7 @@ public class LottoResultController {
         List<ResultDto> lottoGames = null;
         try {
             lottoGames = LOTTO_RESULT_SERVICE.selectAllLottoResult();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (DataAccessException e) {
             e.printStackTrace();
             model.put("errorMessage", "죄송합니다. 해당 로또를 조회할 수 없습니다. 관리자에게 문의해주세요.");
             return render(model, "lottoNumbers.html");
@@ -52,7 +50,7 @@ public class LottoResultController {
             lottoTicket = LOTTO_SERVICE.selectAllLotto(round);
             model.put("result", LOTTO_RESULT_SERVICE.selectLottoResult(round));
             model.put("winningLotto", LOTTO_SERVICE.selectWinningLotto(round));
-        } catch (SQLException e) {
+        } catch (DataAccessException e) {
             e.printStackTrace();
             model.put("errorMessage", "죄송합니다. 해당 로또를 조회할 수 없습니다. 관리자에게 문의해주세요.");
             return render(model, "lottoNumbers.html");

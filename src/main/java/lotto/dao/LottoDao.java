@@ -1,11 +1,15 @@
 package lotto.dao;
 
+import lotto.dao.exception.DataAccessException;
 import lotto.dao.utils.DaoTemplate;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinningLotto;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +32,7 @@ public class LottoDao {
         return LottoDaoHolder.INSTANCE;
     }
 
-    public int insertLottoTicket(LottoTickets lottoTickets, int round) throws SQLException {
+    public int insertLottoTicket(LottoTickets lottoTickets, int round) {
         StringBuilder queryBuilder = buildInsertLottoQuery(lottoTickets.getAllLottoTickets().size());
 
         DaoTemplate daoTemplate = (preparedStatement) -> {
@@ -51,7 +55,7 @@ public class LottoDao {
         return queryBuilder;
     }
 
-    public int insertWinningLotto(WinningLotto winningLotto, int round) throws SQLException {
+    public int insertWinningLotto(WinningLotto winningLotto, int round) {
         DaoTemplate daoTemplate = (preparedStatement) -> {
             preparedStatement.setInt(1, round);
             preparedStatement.setString(2, winningLotto.getWinningLotto().toString());
@@ -60,7 +64,7 @@ public class LottoDao {
         return daoTemplate.cudTemplate(INSERT_WINNING_LOTTO);
     }
 
-    public List<Lotto> selectAllLotto(int round) throws SQLException {
+    public List<Lotto> selectAllLotto(int round) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = createPreparedStatement(connection, round, SELECT_ALL_LOTTO_BY_ROUND);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -74,15 +78,17 @@ public class LottoDao {
             }
 
             return lottos;
+        } catch (SQLException e) {
+            throw new DataAccessException(e);
         }
     }
 
-    public WinningLotto selectWinningLotto(int round) throws SQLException {
+    public WinningLotto selectWinningLotto(int round) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = createPreparedStatement(connection, round, SELECT_WINNING_LOTTO_BY_ROUND);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             if (!resultSet.next()) {
-                throw new SQLException();
+                throw new DataAccessException();
             }
 
             String winningLotto = resultSet.getString(WINNING_LOTTO_COLUMN);
@@ -90,6 +96,8 @@ public class LottoDao {
 
             Lotto lotto = convertStringToLotto(winningLotto, false);
             return new WinningLotto(lotto, Integer.parseInt(bonusBall));
+        } catch (SQLException e) {
+            throw new DataAccessException(e);
         }
     }
 
