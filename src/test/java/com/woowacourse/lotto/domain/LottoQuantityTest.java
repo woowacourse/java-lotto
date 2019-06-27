@@ -20,9 +20,4 @@ public class LottoQuantityTest {
     void createWithString() {
         assertThat(LottoQuantity.of("2")).isEqualTo(LottoQuantity.of(2));
     }
-
-    @Test
-    void compareWithQuantity() {
-        assertThat(LottoQuantity.of(14).compareTo(LottoQuantity.of(15))).isEqualTo(-1);
-    }
 }

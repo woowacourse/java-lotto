@@ -1,5 +1,9 @@
 package com.woowacourse.lotto.domain;
 
+import com.woowacourse.lotto.persistence.dto.WinningLottoDto;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class WinningLotto {
@@ -16,6 +20,20 @@ public class WinningLotto {
 
     public LottoResult match(Lotto lotto) {
         return LottoResult.valueOf(lotto.countMatch(winningNums), lotto.contains(bonus));
+    }
+
+    public WinningLottoDto toDto() {
+        WinningLottoDto dto = new WinningLottoDto();
+        List<LottoNumber> winningNumbers = new ArrayList<>();
+        winningNums.forEachNumbers(winningNumbers::add);
+        dto.setWinningNumber0(winningNumbers.get(0).toInt());
+        dto.setWinningNumber1(winningNumbers.get(1).toInt());
+        dto.setWinningNumber2(winningNumbers.get(2).toInt());
+        dto.setWinningNumber3(winningNumbers.get(3).toInt());
+        dto.setWinningNumber4(winningNumbers.get(4).toInt());
+        dto.setWinningNumber5(winningNumbers.get(5).toInt());
+        dto.setWinningBonusNumber(bonus.toInt());
+        return dto;
     }
 
     @Override

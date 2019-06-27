@@ -1,7 +1,6 @@
 package com.woowacourse.lotto.view;
 
-import com.woowacourse.lotto.domain.*;
-import com.woowacourse.lotto.util.InputUtil;
+import com.woowacourse.lotto.domain.LottoQuantity;
 
 import java.util.ArrayList;
 import java.util.List;

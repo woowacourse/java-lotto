@@ -1,5 +1,6 @@
 package com.woowacourse.lotto.domain;
 
+import com.woowacourse.lotto.persistence.dto.LottoDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +41,18 @@ public class LottoTest {
     @Test
     void createWithDuplicateNums() {
         assertThrows(IllegalArgumentException.class, () -> new Lotto(LottoNumberGroup.of(Arrays.asList(1, 2, 2, 15, 22, 32))));
+    }
 
+    @Test
+    void convertToDto() {
+        Lotto lotto = LottoFactory.createLotto(LottoNumberGroup.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoDto dto = lotto.toDto();
+        assertThat(dto.getNumber0()).isEqualTo(1);
+        assertThat(dto.getNumber1()).isEqualTo(2);
+        assertThat(dto.getNumber2()).isEqualTo(3);
+        assertThat(dto.getNumber3()).isEqualTo(4);
+        assertThat(dto.getNumber4()).isEqualTo(5);
+        assertThat(dto.getNumber5()).isEqualTo(6);
+        assertThat(dto.getPrice()).isEqualTo(Lotto.UNIT_PRICE);
     }
 }
