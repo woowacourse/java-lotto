@@ -1,15 +1,15 @@
-package lotto.presentation;
+package lotto.service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningLottoPresentation {
+public class WinningLottoTranslator {
     private static final String DELIMITER = ",";
-    private List<Integer> numbers;
-    private int bonus;
+    private final List<Integer> numbers;
+    private final int bonus;
 
-    public WinningLottoPresentation(String numbers, String bonus) {
+    public WinningLottoTranslator(String numbers, String bonus) {
         this.numbers = parseLottoNumber(numbers);
         this.bonus = toInt(bonus);
     }

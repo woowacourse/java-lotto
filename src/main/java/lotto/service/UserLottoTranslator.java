@@ -1,4 +1,4 @@
-package lotto.presentation;
+package lotto.service;
 
 import lotto.domain.exceptions.ExceptionMessages;
 import lotto.domain.exceptions.LottoTicketException;
@@ -8,13 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserLottoPresentation {
+public class UserLottoTranslator {
     private static final String DELIMITER = ",";
     private final int lottoMoney;
     private final int manualCount;
     private final List<List<Integer>> manualNumbers;
 
-    public UserLottoPresentation(String lottoMoney, String manualCount, List<String> manualNumbers) {
+    public UserLottoTranslator(String lottoMoney, String manualCount, List<String> manualNumbers) {
         this.lottoMoney = toInt(lottoMoney);
         this.manualCount = toInt(manualCount);
         this.manualNumbers = manualLottoNumber(this.manualCount, manualNumbers);
