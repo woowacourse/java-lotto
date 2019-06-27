@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.dto.LottoDTO;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
@@ -41,14 +38,12 @@ public class Lotto {
     }
 
     public LottoDTO toDTO(int round) {
-        LottoDTO lottoDTO = new LottoDTO();
-        lottoDTO.setRound(round);
-        lottoDTO.setNumber1(getLottoNumber(0));
-        lottoDTO.setNumber2(getLottoNumber(1));
-        lottoDTO.setNumber3(getLottoNumber(2));
-        lottoDTO.setNumber4(getLottoNumber(3));
-        lottoDTO.setNumber5(getLottoNumber(4));
-        lottoDTO.setNumber6(getLottoNumber(5));
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < LOTTO_SIZE; i++) {
+            numbers.add(getLottoNumber(i));
+        }
+        LottoDTO lottoDTO = new LottoDTO(round, numbers);
+
         return lottoDTO;
     }
 

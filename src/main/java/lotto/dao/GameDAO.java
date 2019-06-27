@@ -26,6 +26,4 @@ public class GameDAO {
         LottoResultDAO lottoResultDao = new LottoResultDAO(conn);
         lottoResultDao.addLottoResult(lottoResultDto);
     }
-
-
 }
