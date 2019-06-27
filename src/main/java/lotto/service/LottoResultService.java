@@ -2,8 +2,6 @@ package lotto.service;
 
 import lotto.dao.LottoResultDao;
 import lotto.domain.LottoResult;
-import lotto.domain.UserLottos;
-import lotto.domain.WinningLotto;
 import lotto.dto.LottoResultDto;
 
 public class LottoResultService {
@@ -13,16 +11,15 @@ public class LottoResultService {
 
     }
 
-    public static LottoResult insertCurrentLottoResult() {
-        UserLottos userLottos = UserLottoService.currentUserLottos();
-        WinningLotto winningLotto = WinningLottoService.currentWinnigLotto();
-        LottoResult lottoResult = userLottos.result(winningLotto);
+    public static LottoResult insertLottoResult(int round) {
+        LottoResult lottoResult = new LottoResult(dao.selectResult(round).getResults());
         LottoResultDto dto = new LottoResultDto(lottoResult);
-        dao.insertResult(dto);
+        dao.insertResult(round, dto);
         return lottoResult;
     }
 
     public static LottoResult selectLottoResult(int round) {
-        return new LottoResult(dao.selectResult(round));
+        LottoResultDto dto = dao.selectResult(round);
+        return new LottoResult(dto.getResults());
     }
 }

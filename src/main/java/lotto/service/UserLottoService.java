@@ -2,58 +2,36 @@ package lotto.service;
 
 import lotto.dao.UserLottoDao;
 import lotto.domain.LottoCreator;
-import lotto.domain.Ticket;
-import lotto.domain.TicketCreator;
 import lotto.domain.UserLottos;
 import lotto.dto.UserLottoDto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UserLottoService {
-    private static final TicketCreator ticketCreator = new LottoCreator();
     private static final UserLottoDao dao = UserLottoDao.getDao();
 
     private UserLottoService() {
 
     }
 
-    public static UserLottos userLottos(int lottoMoney, int manualCount, List<List<Integer>> numbers) {
-        UserLottos userLottos = new UserLottos(generate(lottoMoney, manualCount, numbers));
+    public static UserLottos userLottos(UserLottoTranslator translator) {
+        UserLottos userLottos = LottoCreator.getLottoCreator().createUserLotto(translator.getLottoMoney(), translator.getManualCount(), translator.getManualNumbers());
         UserLottoDto dto = new UserLottoDto(userLottos);
         dao.insertUserLottos(dto);
         return userLottos;
     }
 
-    private static List<Ticket> generate(List<List<Integer>> lottoNumbers) {
-        List<Ticket> tickets = new ArrayList<>();
-        for (List<Integer> number : lottoNumbers) {
-            tickets.add(ticketCreator.create(number));
-        }
-        return tickets;
-    }
-
-    private static List<Ticket> generate(int lottoMoney, int manualCount, List<List<Integer>> manualNumbers) {
-        List<Ticket> tickets = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            tickets.add(ticketCreator.create(manualNumbers.get(i)));
-        }
-        return generateAuto(lottoMoney, tickets);
-    }
-
-    private static List<Ticket> generateAuto(int lottoMoney, List<Ticket> tickets) {
-        int autoTicketCount = (lottoMoney / ticketCreator.unitPrice()) - tickets.size();
-        for (int i = 0; i < autoTicketCount; i++) {
-            tickets.add(ticketCreator.create());
-        }
-        return tickets;
+    public static UserLottos userLottos(UserLottoDto dto) {
+        UserLottos userLottos = LottoCreator.getLottoCreator().createUserLotto(dto.getLottoMoney(), dto.getManualCount(), dto.getNumbers());
+        dao.insertUserLottos(dto);
+        return userLottos;
     }
 
     public static UserLottos userLottos(int round) {
-        return new UserLottos(generate(dao.selectUserLottos(round)));
+        UserLottoDto dto = dao.selectUserLottos(round);
+        return LottoCreator.getLottoCreator().createUserLotto(dto.getNumbers());
     }
 
     public static UserLottos currentUserLottos() {
-        return new UserLottos(generate(dao.currentUserLottos()));
+        UserLottoDto dto = dao.currentUserLottos();
+        return LottoCreator.getLottoCreator().createUserLotto(dto.getNumbers());
     }
 }
