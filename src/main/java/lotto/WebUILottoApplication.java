@@ -56,7 +56,7 @@ public class WebUILottoApplication {
         try {
             Map<String, Object> model = new HashMap<>();
 
-            PurchaseInformationDTO purchaseInformationDTO = LottoPurchaseService.purchaseLottos(
+            PurchaseInformationDTO purchaseInformationDTO = LottoPurchaseService.getInstance().purchaseLottos(
                     request.session().attribute("round"),
                     request.queryParams("purchaseAmount"),
                     request.queryParamsValues("manualNums")
@@ -76,7 +76,7 @@ public class WebUILottoApplication {
         try {
             Map<String, Object> model = new HashMap<>();
 
-            LottoResultDTO lottoResultDTO = LottoResultService.createResult(
+            LottoResultDTO lottoResultDTO = LottoResultService.getInstance().createResult(
                     request.session().attribute("round"),
                     request.queryParams("winningNums"),
                     request.queryParams("bonusNum"),
@@ -95,7 +95,7 @@ public class WebUILottoApplication {
         Map<String, Object> model = new HashMap<>();
         int round = Integer.parseInt(request.queryParams("round"));
         try {
-            model.put("history", LottoHistoryService.historyOf(round));
+            model.put("history", LottoHistoryService.getInstance().historyOf(round));
         } catch (SQLException e) {
             e.printStackTrace();
         }

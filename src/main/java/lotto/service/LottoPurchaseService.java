@@ -16,7 +16,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LottoPurchaseService {
-    public static PurchaseInformationDTO purchaseLottos(int round, String purchaseAmountText, String[] manualNums) throws SQLException {
+    private static LottoPurchaseService instance;
+
+    private LottoPurchaseService() {
+    }
+
+    public static LottoPurchaseService getInstance() {
+        if (instance == null) {
+            instance = new LottoPurchaseService();
+        }
+        return instance;
+    }
+
+    public PurchaseInformationDTO purchaseLottos(int round, String purchaseAmountText, String[] manualNums) throws SQLException {
         List<String> manualNumberText = (manualNums == null) ? new ArrayList<>() : Arrays.asList(manualNums);
         PurchaseAmount purchaseAmount = PurchaseAmount.createLottoPurchaseAmount(purchaseAmountText);
 
@@ -34,13 +46,13 @@ public class LottoPurchaseService {
         );
     }
 
-    private static LottoTicketGroup generateLottos(List<String> manualNumberText, LottoQuantity autoQuantity) {
+    private LottoTicketGroup generateLottos(List<String> manualNumberText, LottoQuantity autoQuantity) {
         LottoTicketGroup manualLottos = LottoMachine.generateManualLottos(manualNumberText);
         LottoTicketGroup autoLottos = LottoMachine.generateAutoLottos(autoQuantity);
         return manualLottos.combine(autoLottos);
     }
 
-    private static void saveLottos(int round, LottoTicketGroup lottos) throws SQLException {
+    private void saveLottos(int round, LottoTicketGroup lottos) throws SQLException {
         Connection connection = DBUtil.getConnection();
         LottoRoundDAO.getInstance(connection).insertRound(round);
         LottoTicketDAO.getInstance(connection).insertLottoTickets(round, lottos);

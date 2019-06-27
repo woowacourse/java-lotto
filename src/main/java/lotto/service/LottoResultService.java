@@ -12,7 +12,19 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class LottoResultService {
-    public static LottoResultDTO createResult(int round, String winningNums, String bonusNum, LottoTicketGroup lottos) throws SQLException {
+    private static LottoResultService instance;
+
+    private LottoResultService() {
+    }
+
+    public static LottoResultService getInstance() {
+        if (instance == null) {
+            instance = new LottoResultService();
+        }
+        return instance;
+    }
+
+    public LottoResultDTO createResult(int round, String winningNums, String bonusNum, LottoTicketGroup lottos) throws SQLException {
         WinningLotto winningLotto = WinningLotto.create(winningNums, bonusNum);
         LottoResult lottoResult = lottos.match(winningLotto);
 
@@ -26,7 +38,7 @@ public class LottoResultService {
         return lottoResultDTO;
     }
 
-    private static void saveResult(int round, WinningLotto winningLotto, LottoResultDTO lottoResultDTO) throws SQLException {
+    private void saveResult(int round, WinningLotto winningLotto, LottoResultDTO lottoResultDTO) throws SQLException {
         Connection connection = DBUtil.getConnection();
         WinningLottoDAO.getInstance(connection).insertWinningLotto(round, winningLotto);
         LottoResultDAO.getInstance(connection).insertResult(round, lottoResultDTO);
