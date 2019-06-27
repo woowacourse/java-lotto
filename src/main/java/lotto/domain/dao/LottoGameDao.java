@@ -17,11 +17,13 @@ public class LottoGameDao {
         return lottoGameDao;
     }
 
-    public void addLottoAmount(PurchaseAmount purchaseAmount) throws SQLException {
+    public void addLottoAmount(PurchaseAmount purchaseAmount) {
         try (Connection connection = DBUtils.getConnection()) {
             PreparedStatement pstmt = connection.prepareStatement(INSERT_LOTTO_GAME_QUERY);
             pstmt.setInt(LOTTO_AMOUNT, purchaseAmount.getLottoAmount());
             pstmt.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException("addLottoAmount() : " + e.getMessage());
         }
     }
 }

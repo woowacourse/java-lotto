@@ -15,10 +15,4 @@ class DBUtilsTest {
         Connection con = DBUtils.getConnection();
         assertNotNull(con);
     }
-
-    @Test
-    public void round_잘_가져오는지() throws SQLException {
-        Connection con = DBUtils.getConnection();
-        assertThat(DBUtils.getRound(con)).isEqualTo(1);
-    }
 }
