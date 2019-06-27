@@ -45,7 +45,7 @@ public class ResultDAO {
                 }
         }
 
-        public ResultDTO selectResult(int id) {
+        public ResultDTO selectResultDTO(int id) {
                 ResultDTO resultDTO = null;
                 try(Connection connection = DatabaseUtil.getConnection();
                     PreparedStatement psmt = createSelectResultQuery(connection, id);

@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto;
 
 import lotto.model.*;
 import lotto.model.creator.lotto.AutoLottoCreatorStrategy;

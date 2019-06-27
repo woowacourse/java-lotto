@@ -24,33 +24,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static spark.Spark.*;
-
-public class WebUILottoApplication {
-        public static void main(String[] args) {
-                port(8080);
-
-                staticFiles.location("/static");
-
-                post("/", home());
-                post("/round-result", roundResult());
-                get("/eachResult", eachResult());
-                post("/payment", pay());
-                post("/manual-lotto-number", manualNumber());
-                post("/purchase-lottos", purchaseLottos());
-                post("/winStatsAndYield", result());
-                exception(Exception.class, error());
-        }
-
-
-        private static Route home() {
+public class Controller {
+        public static Route home() {
                 return (req, res) -> {
                         Map<String, Object> model = new HashMap<>();
                         return render(model, "index.html");
                 };
         }
 
-        private static Route roundResult() {
+        public static Route roundResult() {
                 return (req, res)->{
                         Map<String, Object> model = new HashMap<>();
 
@@ -61,14 +43,14 @@ public class WebUILottoApplication {
                 };
         }
 
-        private static Route eachResult() {
+        public static Route eachResult() {
                 return (req, res) -> {
                         Map<String, Object> model = new HashMap<>();
 
                         int id = Integer.parseInt(req.queryParams("id"));
                         List<String> lottos = LottoDAO.getInstance().selectLottos(id);
                         WinningInfo winningInfo = RoundInfoDAO.getInstance().selectWinningInfo(id);
-                        ResultDTO resultDTO = ResultDAO.getInstance().selectResult(id);
+                        ResultDTO resultDTO = ResultDAO.getInstance().selectResultDTO(id);
 
                         model.put("lottos", lottos);
                         model.put("winningLotto", winningInfo.getWinningLotto().toString());
@@ -86,7 +68,7 @@ public class WebUILottoApplication {
                 };
         }
 
-        private static Route pay() {
+        public static Route pay() {
                 return (req, res) -> {
                         Map<String, Object> model = new HashMap<>();
 
@@ -99,7 +81,7 @@ public class WebUILottoApplication {
                 };
         }
 
-        private static Route manualNumber() {
+        public static Route manualNumber() {
                 return (req, res) -> {
                         Map<String, Object> model = new HashMap<>();
 
@@ -111,7 +93,7 @@ public class WebUILottoApplication {
                 };
         }
 
-        private static Route purchaseLottos() {
+        public static Route purchaseLottos() {
                 return (req, res) -> {
                         Map<String, Object> model = new HashMap<>();
 
@@ -151,41 +133,42 @@ public class WebUILottoApplication {
                 return lottos;
         }
 
-        private static Route result() {
+        public static Route result() {
                 return (req, res) -> {
                         Map<String, Object> model = new HashMap<>();
 
                         Lotto winningLotto = new Lotto(req.queryParams("winningLotto").split(", "));
                         BonusBall bonusBall = new BonusBall(Integer.parseInt(req.queryParams("bonusBall")));
                         WinningInfo winningInfo = new WinningInfo(winningLotto, bonusBall);
+
                         WinStats winStats = new WinStats(req.session().attribute("lottos"), winningInfo);
 
                         Payment payment = req.session().attribute("payment");
                         Yield yield = new Yield(payment, winStats);
 
-                        model.put("winStats", winStats.getMappingStats().values());
-                        model.put("yield", yield.getRate());
-
                         ManualPurchaseNumber manualPurchaseNumber = req.session().attribute("manualPurchaseNumber");
                         RoundInfoDTO roundInfoDTO = new RoundInfoDTO(payment.getAmount(), manualPurchaseNumber.getNumber(), winningLotto.toString(), bonusBall.getLottoNumber().getNumber());
                         RoundInfoDAO.getInstance().insertRoundInfo(roundInfoDTO);
+
                         LottoService.insertResult(new ResultDTO(winStats.getMappingStats(), yield.getTotalRevenue(), yield.getRate()));
                         List<Lotto> lottos = req.session().attribute("lottos");
                         LottoService.insertLottos(lottos);
 
+                        model.put("winStats", winStats.getMappingStats().values());
+                        model.put("yield", yield.getRate());
                         return render(model, "winStatsAndYield.html");
                 };
         }
 
-        private static ExceptionHandler<Exception> error() {
+        public static String render(Map<String, Object> model, String templatePath) {
+                return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
+        }
+
+        public static ExceptionHandler<Exception> error() {
                 return (exception, request, response) -> {
                         Map<String, Object> model = new HashMap<>();
                         model.put("message", exception.getMessage());
                         response.body(render(model, "error.html"));
                 };
-        }
-
-        private static String render(Map<String, Object> model, String templatePath) {
-                return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
         }
 }
