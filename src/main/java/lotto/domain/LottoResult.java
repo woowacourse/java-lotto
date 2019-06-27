@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -15,11 +14,8 @@ public class LottoResult {
         }
     }
 
-    public LottoResult(List<Rank> ranks) {
-        this.results = new TreeMap<>();
-        for (Rank rank : ranks) {
-            plus(rank);
-        }
+    public LottoResult(Map<Rank, Integer> results) {
+        this.results = results;
     }
 
     public void plus(Rank rank) {

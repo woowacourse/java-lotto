@@ -18,7 +18,7 @@ public class WinningLotto {
     }
 
     public boolean bonus(Ticket lotto) {
-        return lotto.ticketNumbers().contains(bonus);
+        return lotto.ticketNumbers().contains(bonusNumbers());
     }
 
     public List<Integer> ticketNumbers() {
