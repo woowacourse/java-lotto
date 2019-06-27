@@ -162,7 +162,8 @@ class LottoDAO {
         }
     }
 
-    public List<PreviousWinLottoResultDTO> getPreviousResults() throws SQLException {
+    List<PreviousWinLottoResultDTO> getPreviousResults() throws SQLException {
+        initSqlTable();
         final List<PreviousWinLottoResultDTO> result = new ArrayList<>();
         final String query = "SELECT * FROM win_lotto";
         final PreparedStatement statement = connection.prepareStatement(query);
@@ -188,6 +189,7 @@ class LottoDAO {
         final List<PreviousPurchaseDTO> result = new ArrayList<>();
         final String query = "SELECT * FROM result WHERE win_lotto = ?";
         final PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, winLottoID);
         final ResultSet set = statement.executeQuery();
         while (set.next()) {
             final int resultID = set.getInt("id");
@@ -211,13 +213,14 @@ class LottoDAO {
     }
 
     private List<PreviousLottoDTO> getLottos(final int resultID) throws SQLException {
-        initSqlTable();
         final List<PreviousLottoDTO> result = new ArrayList<>();
         final String query = "SELECT * FROM lotto WHERE result = ?";
         final PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, resultID);
         final ResultSet set = statement.executeQuery();
         while (set.next()) {
             final PreviousLottoDTO lottoNums = new PreviousLottoDTO();
+            int first = set.getInt("first");
             lottoNums.addNumber(set.getInt("first"));
             lottoNums.addNumber(set.getInt("second"));
             lottoNums.addNumber(set.getInt("third"));

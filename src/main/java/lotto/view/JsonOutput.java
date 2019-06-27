@@ -154,7 +154,7 @@ public class JsonOutput {
         final String lottos = objectListToJSONArray(dto.getLottoList(), JsonOutput::lottoDTOtoJSON);
         final String result = joinByComma(
                 keyAndIntValue("amount", dto.getAmount()),
-                keyAndIntValue("autoCount", dto.getAmount()),
+                keyAndIntValue("autoCount", dto.getAutoCount()),
                 keyAndIntValue("manualCount", dto.getManualCount()),
                 keyAndIntValue("totalPrize", dto.getTotalPrize()),
                 keyAndIntValue("rank1st", dto.getRank1st()),

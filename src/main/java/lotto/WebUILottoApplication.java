@@ -39,6 +39,7 @@ public class WebUILottoApplication {
                 System.err.println(JsonOutput.previousResultListDTO(resultDTO));
                 return JsonOutput.previousResultListDTO(resultDTO);
             } catch (Exception e) {
+                System.err.println(e);
                 return JsonOutput.responseFailed(e.getMessage());
             }
         });

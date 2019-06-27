@@ -96,6 +96,7 @@ const queryToLottos = () => {
             const div = winningStatDiv(response.result);
             $("#winningStat").html(div);
             getPreviousResults();
+            inputReset();
         }
     });
 };
@@ -105,7 +106,6 @@ const getPreviousResults = () => {
         type: "GET",
         url: "/api/previousResults",
         success: response => {
-            console.log(response);
             printPreviousResults(response.result);
         }
     });
@@ -120,7 +120,7 @@ const printPreviousResults = (resultArray) => {
 }
 
 const makewinResultDiv = (winResult) => {
-    const html =
+    let html =
     `<h2>${winResult.winLottoID}회차</h2>
     <h3>당첨번호 : ${winResult.winNumber.join(", ")}, 보너스 볼 : ${winResult.winLottoBonus}</h3>`;
     for (let i of winResult.purchases) {
@@ -130,23 +130,27 @@ const makewinResultDiv = (winResult) => {
 }
 
 const makePurchaseDiv = (purchase) => {
-    const html = `<h4>구입 내역</h4>
-    <p>총 구입금액 : ${purchase.amount}원, 자동 구매 : ${purchase.autoCount}, 수동 구매 : ${purchase.manualCount},
+    let html = `<h4>구입 내역</h4>
+    <p>총 구입금액 : ${purchase.amount}원, 자동 구매 : ${purchase.autoCount}개, 수동 구매 : ${purchase.manualCount}개, 
+    총 당첨금액 : ${purchase.totalPrize}원, 총 수익률 : ${purchase.profitRate}배<br />
     1등 : ${purchase.rank1st}개, 2등 : ${purchase.rank2nd}개, 3등 : ${purchase.rank3rd}개,
-    4등 : ${purchase.rank4th}개, 5등 : ${purchase.rank5th}개, 미당첨 : ${purchase.rankmiss}개,
-    총 당첨금액 : ${purchase.totalPrize}, 총 수익률 : ${purchase.profitRate}</p>
+    4등 : ${purchase.rank4th}개, 5등 : ${purchase.rank5th}개, 미당첨 : ${purchase.rankMiss}개</p>
     <p>구입한 로또 번호 :</p>`;
     html += makeLottoListDiv(purchase.lottoList);
     return html;
 };
 
 const makeLottoListDiv = (lottoArray) => {
-    let html = `<ol>`;
+    let html = `<ul>`;
     for (let i of lottoArray) {
         html += `<li>${i.join(", ")}</li>`;
     }
-    html += `</ol>`
+    html += `</ul>`
     return html;
+};
+
+const inputReset = () => {
+    $(numberInputElement).each(function() {$(this).val("")});
 };
 
 getPreviousResults();
