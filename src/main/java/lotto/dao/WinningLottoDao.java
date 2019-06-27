@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.dao.UserLottoDao.MAX_BOUND;
+import static lotto.dao.UserLottoDao.MIN_BOUND;
+
 public class WinningLottoDao {
     private static WinningLottoDao dao;
 
@@ -39,7 +42,7 @@ public class WinningLottoDao {
 
     public WinningLottoDto resultSet(ResultSet rs) throws SQLException {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i < 7; i++) {
+        for (int i = MIN_BOUND; i < MAX_BOUND; i++) {
             numbers.add(rs.getInt(i));
         }
 
@@ -58,11 +61,11 @@ public class WinningLottoDao {
         Connection conn = DBManager.getConnection();
         String sql = "INSERT INTO winning_lotto(num_1,num_2,num_3,num_4,num_5,num_6,num_bonus,round_id) VALUES(?,?,?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        for (int i = 1; i < 7; i++) {
+        for (int i = MIN_BOUND; i < MAX_BOUND; i++) {
             stmt.setInt(i, numbers.get(i - 1));
         }
-        stmt.setInt(7, bonus);
-        stmt.setInt(8, round);
+        stmt.setInt(MAX_BOUND, bonus);
+        stmt.setInt(MAX_BOUND + 1, round);
         stmt.executeUpdate();
     }
 

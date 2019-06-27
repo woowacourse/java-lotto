@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserLottoDao {
+    public static final int MIN_BOUND = 1;
+    public static final int MAX_BOUND = 7;
     private static UserLottoDao dao;
 
     private UserLottoDao() {

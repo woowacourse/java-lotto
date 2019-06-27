@@ -14,7 +14,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static lotto.dao.UserLottoDao.MAX_BOUND;
+import static lotto.dao.UserLottoDao.MIN_BOUND;
+
 public class LottoResultDao {
+
     private static LottoResultDao dao;
 
     private LottoResultDao() {
@@ -49,7 +53,7 @@ public class LottoResultDao {
 
     private void setStatement(PreparedStatement stmt, Map<Rank, Integer> results) throws SQLException {
         List<Integer> resultCount = new ArrayList<>(results.values());
-        for (int i = 1; i < 7; i++) {
+        for (int i = MIN_BOUND; i < MAX_BOUND; i++) {
             stmt.setInt(i, resultCount.get(i - 1));
         }
     }
@@ -73,7 +77,7 @@ public class LottoResultDao {
 
     private List<Rank> iterateResultSet(ResultSet rs) throws SQLException {
         List<Rank> ranks = new ArrayList<>();
-        for (int i = 1; i < 7; i++) {
+        for (int i = MIN_BOUND; i < MAX_BOUND; i++) {
             ranks.addAll(rankByColumn(i - 1, rs.getInt(i)));
         }
         return ranks;
@@ -84,6 +88,6 @@ public class LottoResultDao {
         if (columnIndex == 1) {
             bonus = true;
         }
-        return Stream.of(Rank.rank(6 - columnIndex, bonus)).limit(count).collect(Collectors.toList());
+        return Stream.of(Rank.rank(MAX_BOUND - columnIndex, bonus)).limit(count).collect(Collectors.toList());
     }
 }
