@@ -38,19 +38,9 @@ public class DBConnector {
         } catch (SQLException e) {
             System.err.println("연결 오류:" + e.getMessage());
             e.printStackTrace();
+            throw new RuntimeException("연결 과정에 오류가 있습니다.");
         }
 
         return con;
-    }
-
-    // 드라이버 연결해제
-    public void closeConnection(Connection con) {
-        try {
-            if (con != null)
-                System.out.println("연결이 해제되었습니다.");
-                con.close();
-        } catch (SQLException e) {
-            System.err.println("con 오류:" + e.getMessage());
-        }
     }
 }
