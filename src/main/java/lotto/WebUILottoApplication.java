@@ -1,15 +1,9 @@
 package lotto;
 
 import com.google.gson.Gson;
-import lotto.domain.LottoResult;
-import lotto.domain.UserLottos;
-import lotto.domain.WinningLotto;
-import lotto.presentation.UserLottoPresentation;
-import lotto.presentation.WinningLottoPresentation;
-import lotto.service.LottoResultService;
-import lotto.service.UserLottoService;
-import lotto.service.WinningLottoService;
-import lotto.view.WebView;
+import lotto.controller.LottoResultController;
+import lotto.controller.UserLottoController;
+import lotto.controller.WinningLottoController;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -39,23 +33,11 @@ public class WebUILottoApplication {
             return render(model, "lotto.html");
         });
 
-        post("/userLotto", (req, res) -> {
-            UserLottoPresentation presentation = WebView.userLottoPresentation(req);
-            UserLottos userLottos = UserLottoService.userLottos(presentation.getLottoMoney(), presentation.getManualCount(), presentation.getManualNumbers());
-            return WebView.userLottoJson(userLottos);
-        }, gson::toJson);
+        post("/userLotto", UserLottoController::userLotto, gson::toJson);
 
-        post("/winningLotto", (req, res) -> {
-            WinningLottoPresentation presentation = new WinningLottoPresentation(req.queryParams("numbers"), req.queryParams("bonus"));
-            WinningLotto winningLotto = WinningLottoService.insertWinningLotto(presentation.getNumbers(), presentation.getBonus());
-            LottoResultService.insertCurrentLottoResult();
-            return WebView.winningLottoJson(winningLotto);
-        }, gson::toJson);
+        post("/winningLotto", WinningLottoController::winningLotto, gson::toJson);
 
-        get("/lottoResult", (req, res) -> {
-            LottoResult lottoResult = LottoResultService.insertCurrentLottoResult();
-            return WebView.lottoResultJson(lottoResult);
-        }, gson::toJson);
+        get("/lottoResult", LottoResultController::lottoResult, gson::toJson);
     }
 
     private static String render(Map<String, Object> model, String templatePath) {

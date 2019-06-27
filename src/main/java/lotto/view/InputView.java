@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.domain.exceptions.LottoTicketException;
-import lotto.presentation.UserLottoPresentation;
-import lotto.presentation.WinningLottoPresentation;
+import lotto.service.UserLottoTranslator;
+import lotto.service.WinningLottoTranslator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,13 +50,13 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static UserLottoPresentation userLottoPresentation() {
+    public static UserLottoTranslator userLottoPresentation() {
         String money = lottoMoney();
         String manualCount = manualLottoCount();
-        return new UserLottoPresentation(money, manualCount, manualLottoNumber(manualCount));
+        return new UserLottoTranslator(money, manualCount, manualLottoNumber(manualCount));
     }
 
-    public static WinningLottoPresentation winningLottoPresentation() {
-        return new WinningLottoPresentation(winningLottoNumber(), winningLottoBonus());
+    public static WinningLottoTranslator winningLottoPresentation() {
+        return new WinningLottoTranslator(winningLottoNumber(), winningLottoBonus());
     }
 }
