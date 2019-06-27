@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class LottoNumberTest {
 
     @Test
-    void 번호_범위() {
+    public void 번호_범위() {
         assertThrows(IllegalArgumentException.class, () -> {
             new LottoNumber(0);
         });

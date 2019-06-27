@@ -41,4 +41,12 @@ public class WinningLotto {
 
         return Rank.valueOf(winningLotto.getMatchedNumbersCount(userTicket), userTicket.isContainBonus(bonusBall));
     }
+
+    public LottoTicket getWinningLotto() {
+        return winningLotto;
+    }
+
+    public LottoNumber getBonusBall() {
+        return bonusBall;
+    }
 }
