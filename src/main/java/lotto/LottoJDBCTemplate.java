@@ -29,7 +29,7 @@ public class LottoJDBCTemplate {
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Invalid Execute Update");
+            throw new RuntimeException(e.getMessage());
         }
         return result;
     }
@@ -41,7 +41,7 @@ public class LottoJDBCTemplate {
 
             return makeResults(rs);
         } catch (SQLException e) {
-            throw new RuntimeException("Invalid Execute Query");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -52,7 +52,7 @@ public class LottoJDBCTemplate {
 
             return makeResults(rs);
         } catch (SQLException e) {
-            throw new RuntimeException("Invalid Execute Query");
+            throw new RuntimeException(e.getMessage());
         }
     }
 

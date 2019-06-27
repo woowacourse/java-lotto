@@ -29,7 +29,7 @@ public class WinningLottoDAOImpl implements WinningLottoDAO {
         List<Object> queryValues = new ArrayList<>();
         queryValues.add(round);
 
-        List<Map<String, Object>> resultList = TEMPLATE.executeQuery(query);
+        List<Map<String, Object>> resultList = TEMPLATE.executeQuery(query, queryValues);
 
         Map<String, Object> result = resultList.get(0);
 

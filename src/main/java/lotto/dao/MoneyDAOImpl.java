@@ -25,9 +25,9 @@ public class MoneyDAOImpl implements MoneyDAO {
         List<Object> queryValues = new ArrayList<>();
         queryValues.add(round);
 
-        List<Map<String, Object>> resultList = TEMPLATE.executeQuery(query);
+        List<Map<String, Object>> resultList = TEMPLATE.executeQuery(query, queryValues);
 
-        return new Money((String) resultList.get(0).get("money"));
+        return new Money(Integer.toString((int) resultList.get(0).get("money")));
     }
 
     @Override
