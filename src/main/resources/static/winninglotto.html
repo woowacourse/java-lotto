@@ -22,6 +22,8 @@
 </body>
 </html>
 <script>
+    var winningLottoNo
+    var bonusNo
 	function inputWinningLotto() {
 		$.ajax({
             url:"winningLotto",
@@ -37,13 +39,14 @@
             },
             success:function(data){
             	console.log("success");
+                winningLottoNo = document.getElementById('winningLottoNo').value
+                bonusNo = document.getElementById('bonusNo').value
                 document.getElementById('winningLottoNo').readOnly = true;
                 document.getElementById('bonusNo').readOnly = true;
                 document.getElementById('inputBtn').style.display = "none";
 
                 var winningLottoNoMsg = document.createElement('h3');
-                winningLottoNoMsg.innerHTML = "당첨 로또 : " + document.getElementById('winningLottoNo').innerHTML + "\
-                보너스 번호 : " + document.getElementById('bonusNo').innerHTML;
+                winningLottoNoMsg.innerHTML = "당첨 로또 : " + winningLottoNo + "\n보너스 번호 : " + bonusNo;
                 document.getElementById('winningLottoContainer').appendChild(winningLottoNoMsg);
             }
         });

@@ -13,6 +13,7 @@ import spark.Response;
 import spark.Route;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,11 +36,7 @@ public class LottoPurchaseController {
         response.type("application/json");
         System.out.println("buyLotto");
         try {
-            PurchaseDto purchaseInfo = new PurchaseDto();
-            purchaseInfo.setBudget(Integer.parseInt(request.queryParams("budget")));
-            purchaseInfo.setAutoCount(Integer.parseInt(request.queryParams("autoCount")));
-            purchaseInfo.setManualCount(Integer.parseInt(request.queryParams("manualCount")));
-            purchaseInfo.setManualLottos(Arrays.asList(request.queryParamsValues("manualLottos")));
+            PurchaseDto purchaseInfo = createPurchaseInfo(request);
             purchaseInfo = service.buyLotto(purchaseInfo);
             return JsonUtils.toJson(new StandardResponse(StatusResponse.SUCCESS, JsonUtils.toJsonTree(purchaseInfo)));
         } catch (Exception e) {
@@ -47,6 +44,19 @@ public class LottoPurchaseController {
             return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
         }
     };
+
+    private static PurchaseDto createPurchaseInfo(Request request) {
+        PurchaseDto purchaseInfo = new PurchaseDto();
+        purchaseInfo.setBudget(Integer.parseInt(request.queryParams("budget")));
+        purchaseInfo.setAutoCount(Integer.parseInt(request.queryParams("autoCount")));
+        purchaseInfo.setManualCount(Integer.parseInt(request.queryParams("manualCount")));
+        if (request.queryParamsValues("manualLottos") == null) {
+            purchaseInfo.setManualLottos(new ArrayList<>());
+            return purchaseInfo;
+        }
+        purchaseInfo.setManualLottos(Arrays.asList(request.queryParamsValues("manualLottos")));
+        return purchaseInfo;
+    }
 
     private static String render(Map<String, Object> model, String templatePath) {
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));

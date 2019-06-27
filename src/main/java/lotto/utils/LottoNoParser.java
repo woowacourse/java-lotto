@@ -15,7 +15,7 @@ public class LottoNoParser {
             validateInputValidFormat(rawInput);
             return Arrays.stream(rawInput.replaceAll(" ", "").split(SPLITTER))
                     .map(Integer::parseInt)
-                    .map(LottoNo::new)
+                    .map(LottoNo::of)
                     .collect(Collectors.toList());
         } catch (NumberFormatException nfe) {
             throw new NumberFormatException("정수가 아닌 문자가 있습니다. 다시 입력해주세요.");
