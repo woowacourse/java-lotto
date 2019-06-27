@@ -29,17 +29,17 @@ public class RoundInfoDAO {
         }
 
         public void insertRoundInfo(RoundInfoDTO roundInfoDTO) {
-                try (Connection connection = DatabaseUtil.getConnection();
-                     PreparedStatement psmt = connection.prepareStatement(INSERT_ROUND_INFO_QUERRY)) {
-                        psmt.setInt(1, roundInfoDTO.getPayment());
-                        psmt.setInt(2, roundInfoDTO.getManualPurchaseNumber());
-                        psmt.setString(3, roundInfoDTO.getWinningLotto());
-                        psmt.setInt(4, roundInfoDTO.getBonusBall());
+                JdbcTemplate template = new JdbcTemplate() {
+                        @Override
+                        public void setParameters(PreparedStatement pstmt) throws SQLException {
+                                pstmt.setInt(1, roundInfoDTO.getPayment());
+                                pstmt.setInt(2, roundInfoDTO.getManualPurchaseNumber());
+                                pstmt.setString(3, roundInfoDTO.getWinningLotto());
+                                pstmt.setInt(4, roundInfoDTO.getBonusBall());
 
-                        psmt.executeUpdate();
-                } catch (SQLException e) {
-                        System.err.println(e.getMessage());
-                }
+                        }
+                };
+                template.executeUpdate(INSERT_ROUND_INFO_QUERRY);
         }
 
         public int selectRoundId() {

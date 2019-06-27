@@ -24,15 +24,14 @@ public class LottoDAO {
         }
 
         public void insertLotto(int roundId, String lottoNumbers) {
-                try(Connection connection = DatabaseUtil.getConnection();
-                    PreparedStatement psmt = connection.prepareStatement(INSERT_LOTTO_QUERRY)){
-                        psmt.setInt(1, roundId);
-                        psmt.setString(2, lottoNumbers);
-
-                        psmt.executeUpdate();
-                }catch (SQLException e){
-                        System.out.println(e.getMessage());
-                }
+                JdbcTemplate template = new JdbcTemplate() {
+                        @Override
+                        public void setParameters(PreparedStatement pstmt) throws SQLException {
+                                pstmt.setInt(1, roundId);
+                                pstmt.setString(2, lottoNumbers);
+                        }
+                };
+                template.executeUpdate(INSERT_LOTTO_QUERRY);
         }
 
         public List<String> selectLottos(int id) {

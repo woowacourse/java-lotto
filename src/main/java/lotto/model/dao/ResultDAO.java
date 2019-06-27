@@ -26,23 +26,22 @@ public class ResultDAO {
         }
 
         public void insertResult(int id, ResultDTO resultDTO) {
-                try(Connection connection = DatabaseUtil.getConnection();
-                    PreparedStatement psmt = connection.prepareStatement(INSERT_RESULT_QUERY)){
-                        Map<LottoRank, Integer> result = resultDTO.getWinningResult();
-                        psmt.setInt(1, id);
-                        psmt.setInt(2, result.get(LottoRank.FIRST));
-                        psmt.setInt(3, result.get(LottoRank.SECOND));
-                        psmt.setInt(4, result.get(LottoRank.THIRD));
-                        psmt.setInt(5, result.get(LottoRank.FOURTH));
-                        psmt.setInt(6, result.get(LottoRank.FIFTH));
-                        psmt.setInt(7, result.get(LottoRank.NONE));
-                        psmt.setInt(8, resultDTO.getRevenue());
-                        psmt.setDouble(9, resultDTO.getYield());
-
-                        psmt.executeUpdate();
-                }catch (SQLException e){
-                        System.out.println(e.getMessage());
-                }
+                JdbcTemplate template = new JdbcTemplate() {
+                        @Override
+                        public void setParameters(PreparedStatement pstmt) throws SQLException {
+                                Map<LottoRank, Integer> result = resultDTO.getWinningResult();
+                                pstmt.setInt(1, id);
+                                pstmt.setInt(2, result.get(LottoRank.FIRST));
+                                pstmt.setInt(3, result.get(LottoRank.SECOND));
+                                pstmt.setInt(4, result.get(LottoRank.THIRD));
+                                pstmt.setInt(5, result.get(LottoRank.FOURTH));
+                                pstmt.setInt(6, result.get(LottoRank.FIFTH));
+                                pstmt.setInt(7, result.get(LottoRank.NONE));
+                                pstmt.setInt(8, resultDTO.getRevenue());
+                                pstmt.setDouble(9, resultDTO.getYield());
+                        }
+                };
+                template.executeUpdate(INSERT_RESULT_QUERY);
         }
 
         public ResultDTO selectResultDTO(int id) {
