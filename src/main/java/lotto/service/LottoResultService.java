@@ -7,6 +7,7 @@ import lotto.service.dto.RankingDto;
 import lotto.service.dto.ResultDto;
 
 import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class LottoResultService {
         return LottoResultServiceHolder.INSTANCE;
     }
 
-    public List<ResultDto> selectAllLottoResult() throws SQLDataException {
+    public List<ResultDto> selectAllLottoResult() throws SQLException {
         List<ResultDto> lottoGames = LOTTO_RESULT_DAO.selectAllLottoResult();
 
         lottoGames.forEach(resultDto -> {
@@ -47,11 +48,11 @@ public class LottoResultService {
                 .collect(toList());
     }
 
-    public int insertLottoResult(ResultDto resultDto) throws SQLDataException {
+    public int insertLottoResult(ResultDto resultDto) throws SQLException {
         return LOTTO_RESULT_DAO.insertLottoResult(resultDto);
     }
 
-    public ResultDto selectLottoResult(int round) throws SQLDataException {
+    public ResultDto selectLottoResult(int round) throws SQLException {
         ResultDto resultDto = LOTTO_RESULT_DAO.selectLottoResult(round);
         Result result = new Result(resultDto.getLottoScore());
         resultDto.setTotalWinningMoney(result.calculateTotalWinningMoney());

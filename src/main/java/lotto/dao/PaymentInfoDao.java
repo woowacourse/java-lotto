@@ -21,7 +21,7 @@ public class PaymentInfoDao {
         return PaymentInfoDaoHolder.INSTANCE;
     }
 
-    public int insertUser(String name) throws SQLDataException {
+    public int insertUser(String name) throws SQLException {
         DaoTemplate daoTemplate = (preparedStatement) -> {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, name);
@@ -30,7 +30,7 @@ public class PaymentInfoDao {
         return daoTemplate.cudTemplate(INSERT_USER);
     }
 
-    public int insertPayment(PaymentInfoDto paymentInfoDto) throws SQLDataException {
+    public int insertPayment(PaymentInfoDto paymentInfoDto) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = createPreparedStatement(connection, paymentInfoDto);
              ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
@@ -40,9 +40,6 @@ public class PaymentInfoDao {
             }
 
             return resultSet.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new SQLDataException();
         }
     }
 

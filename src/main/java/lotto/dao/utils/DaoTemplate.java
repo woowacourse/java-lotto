@@ -16,16 +16,13 @@ public interface DaoTemplate {
      * @return result Query result
      * @throws SQLDataException
      */
-    default int cudTemplate(String query) throws SQLDataException {
+    default int cudTemplate(String query) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             setPreparedStatement(preparedStatement);
 
             return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new SQLDataException();
         }
     }
 

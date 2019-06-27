@@ -8,6 +8,7 @@ import lotto.domain.lottogenerator.RandomLottoGeneratingStrategy;
 import lotto.service.dto.ResultDto;
 
 import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -50,7 +51,7 @@ public class LottoService {
         return !Objects.isNull(value) && !value.isEmpty();
     }
 
-    public int insertLottoAndResult(String[] inputLottos, int countOfLotto, String inputWinningLotto, String inputBonusBall, int round, String name) throws SQLDataException {
+    public int insertLottoAndResult(String[] inputLottos, int countOfLotto, String inputWinningLotto, String inputBonusBall, int round, String name) throws SQLException {
         LottoRepository lottoRepository = addLottos(inputLottos, countOfLotto);
         WinningLotto winningLotto = createWinningLotto(inputWinningLotto, inputBonusBall);
         LOTTO_SERVICE.insertWinningLotto(winningLotto, round);
@@ -90,7 +91,7 @@ public class LottoService {
                 .collect(toList());
     }
 
-    public int insertWinningLotto(WinningLotto winningLotto, int round) throws SQLDataException {
+    public int insertWinningLotto(WinningLotto winningLotto, int round) throws SQLException {
         return LOTTO_DAO.insertWinningLotto(winningLotto, round);
     }
 
@@ -100,11 +101,11 @@ public class LottoService {
         return new WinningLotto(lotto, Integer.parseInt(bonusBall));
     }
 
-    public List<Lotto> selectAllLotto(int round) throws SQLDataException {
+    public List<Lotto> selectAllLotto(int round) throws SQLException {
         return LOTTO_DAO.selectAllLotto(round);
     }
 
-    public WinningLotto selectWinningLotto(int round) throws SQLDataException {
+    public WinningLotto selectWinningLotto(int round) throws SQLException {
         return LOTTO_DAO.selectWinningLotto(round);
     }
 

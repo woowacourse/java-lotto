@@ -6,6 +6,7 @@ import lotto.domain.paymentinfo.Payment;
 import lotto.service.dto.PaymentInfoDto;
 
 import java.sql.SQLDataException;
+import java.sql.SQLException;
 
 public class PaymentInfoService {
     private static final PaymentInfoDao PAYMENT_INFO_DAO = PaymentInfoDao.getInstance();
@@ -21,11 +22,11 @@ public class PaymentInfoService {
         return PaymentServiceHolder.INSTANCE;
     }
 
-    public int insertUser(String userName) throws SQLDataException {
+    public int insertUser(String userName) throws SQLException {
         return PAYMENT_INFO_DAO.insertUser(userName);
     }
 
-    public int insertPaymentInfoAndReturnKeyValue(PaymentInfoDto paymentInfoDto) throws SQLDataException {
+    public int insertPaymentInfoAndReturnKeyValue(PaymentInfoDto paymentInfoDto) throws SQLException {
         paymentInfoDto.setAuto(calculateCountOfRandomLotto(paymentInfoDto));
         return PAYMENT_INFO_DAO.insertPayment(paymentInfoDto);
     }

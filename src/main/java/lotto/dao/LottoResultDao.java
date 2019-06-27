@@ -27,7 +27,7 @@ public class LottoResultDao {
         return LottoResultDaoHolder.INSTANCE;
     }
 
-    public int insertLottoResult(ResultDto resultDto) throws SQLDataException {
+    public int insertLottoResult(ResultDto resultDto) throws SQLException {
         DaoTemplate daoTemplate = (preparedStatement) -> {
             preparedStatement.setLong(1, resultDto.get(FIRST));
             preparedStatement.setLong(2, resultDto.get(SECOND));
@@ -40,7 +40,7 @@ public class LottoResultDao {
         return daoTemplate.cudTemplate(INSERT_LOTTO_RESULT);
     }
 
-    public List<ResultDto> selectAllLottoResult() throws SQLDataException {
+    public List<ResultDto> selectAllLottoResult() throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_LOTTO_RESULT);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -60,13 +60,10 @@ public class LottoResultDao {
                 results.add(resultDTO);
             }
             return results;
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            throw new SQLDataException();
         }
     }
 
-    public ResultDto selectLottoResult(int round) throws SQLDataException {
+    public ResultDto selectLottoResult(int round) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = createPreparedStatement(connection, round);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -84,9 +81,6 @@ public class LottoResultDao {
                     .miss(resultSet.getInt(MISS_COLUMN))
                     .payment(resultSet.getInt(PAYMENT_COLUMN))
                     .build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new SQLDataException();
         }
     }
 

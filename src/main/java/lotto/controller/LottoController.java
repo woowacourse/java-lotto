@@ -7,6 +7,7 @@ import spark.Request;
 import spark.Response;
 
 import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +31,17 @@ public class LottoController {
         String name = nullable(request.queryParams("name"));
         PaymentInfoDto paymentInfoDto = createPaymentInfoDto(payment, countOfManualLotto, name);
 
-        int round = PAYMENT_INFO_SERVICE.insertPaymentInfoAndReturnKeyValue(paymentInfoDto);
-        paymentInfoDto.setCountOfLotto(PAYMENT_INFO_SERVICE.calculateCountOfLotto(paymentInfoDto));
-
+        int round = 0;
         Map<String, Object> model = new HashMap<>();
+        try {
+            round = PAYMENT_INFO_SERVICE.insertPaymentInfoAndReturnKeyValue(paymentInfoDto);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            model.put("errorMessage", "죄송합니다. Payment를 등록할 수 없습니다. 관리자에게 문의해주세요.");
+            return render(model, "error.html");
+        }
+
+        paymentInfoDto.setCountOfLotto(PAYMENT_INFO_SERVICE.calculateCountOfLotto(paymentInfoDto));
         model.put("lottoName", createResponseInputTag(countOfManualLotto));
         model.put("paymentInfo", paymentInfoDto);
         model.put("round", round);
@@ -58,7 +66,14 @@ public class LottoController {
         String inputBonusBall = nullable(request.queryParams("bonus_ball"));
 
         // TODO: 2019-06-27 Create Dto class...
-        LOTTO_SERVICE.insertLottoAndResult(inputLottos, countOfLotto, inputWinningLotto, inputBonusBall, round, name);
+        try {
+            LOTTO_SERVICE.insertLottoAndResult(inputLottos, countOfLotto, inputWinningLotto, inputBonusBall, round, name);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Map<String, Object> model = new HashMap<>();
+            model.put("errorMessage", "죄송합니다. Lotto를 등록할 수 없습니다. 관리자에게 문의해주세요.");
+            return render(model, "lottoNumbers.html");
+        }
 
         response.redirect("/result/" + round);
 
