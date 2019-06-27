@@ -59,4 +59,13 @@ public class Lotto {
                 }
                 return has;
         }
+
+        @Override
+        public String toString() {
+                String str = "";
+                for (LottoNumber lottoNumber : lottoNumbers) {
+                        str += lottoNumber.getNumber() + ", ";
+                }
+                return str.substring(0, str.length() - 2);
+        }
 }

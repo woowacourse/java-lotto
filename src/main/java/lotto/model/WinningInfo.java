@@ -23,4 +23,13 @@ public class WinningInfo {
                 boolean hasBonusBall = purchasedLotto.hasBonusBall(bonusBall);
                 return LottoRank.getLottoRank(matchNumber, hasBonusBall);
         }
+
+        public BonusBall getBonusBall() {
+                return bonusBall;
+        }
+
+        public Lotto getWinningLotto() {
+                return winningLotto;
+        }
 }
+

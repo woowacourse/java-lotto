@@ -7,9 +7,20 @@
 <body>
     <h1>당첨 통계 및 수익률</h1>
     <h3>통계</h3>
-    {{#winStats}}
-        {{this}}
-    {{/winStats}}
+    <table>
+        <tr>
+            <th>1등</th>
+            <th>2등</th>
+            <th>3등</th>
+            <th>4등</th>
+            <th>5등</th>
+            <th>꽝</th>
+        </tr>
+        {{#winStats}}
+            <td>{{this}}</td>
+        {{/winStats}}
+    </table>
+
     <h3>수익률</h3>
     {{yield}}%
     <br>

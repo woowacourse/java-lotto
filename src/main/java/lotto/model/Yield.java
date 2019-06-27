@@ -2,9 +2,10 @@ package lotto.model;
 
 public class Yield {
         private double rate;
+        private int totalRevenue;
 
         public Yield(final Payment payment, final WinStats winStats) {
-                long totalRevenue = 0;
+                totalRevenue = 0;
                 for (LottoRank lottoRank : LottoRank.values()) {
                         totalRevenue += lottoRank.getPrizes() * winStats.getRankCount(lottoRank);
                 }
@@ -13,6 +14,10 @@ public class Yield {
 
         public double getRate() {
                 return rate;
+        }
+
+        public int getTotalRevenue() {
+                return totalRevenue;
         }
 }
 

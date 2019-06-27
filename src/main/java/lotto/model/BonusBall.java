@@ -10,4 +10,8 @@ public class BonusBall {
         public boolean IsSame(final LottoNumber lottoNumber){
                 return this.lottoNumber == lottoNumber;
         }
+
+        public LottoNumber getLottoNumber() {
+                return lottoNumber;
+        }
 }
