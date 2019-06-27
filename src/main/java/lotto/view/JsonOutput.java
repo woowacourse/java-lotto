@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.PreviousLottoDTO;
+import lotto.PreviousPurchaseDTO;
+import lotto.PreviousWinLottoResultDTO;
 import lotto.controller.LottoGame;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
@@ -7,6 +10,8 @@ import lotto.model.Rank;
 import lotto.model.WinStat;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class JsonOutput {
     private static final String BRACE_OPEN = "{";
@@ -83,7 +88,13 @@ public class JsonOutput {
         return String.join(COMMA_SEPARATOR, strings);
     }
 
-    private static String statToJson(final WinStat stat) {
+    private static String joinByComma(final int... integers) {
+        return Arrays.stream(integers)
+                .mapToObj(Integer::toString)
+                .collect(Collectors.joining(COMMA_SEPARATOR));
+    }
+
+    private static String statToJSON(final WinStat stat) {
         final List<String> result = new ArrayList<>();
         final Iterator<Map.Entry<Rank, Integer>> iterator = stat.iterator();
         while (iterator.hasNext()) {
@@ -95,7 +106,7 @@ public class JsonOutput {
         return braceWrap(String.join(COMMA_SEPARATOR, result));
     }
 
-    private static String lottoToJson(final Lotto lotto) {
+    private static String lottoToJSON(final Lotto lotto) {
         List<String> result = new ArrayList<>();
         for (int i : lotto.getNumbers()) {
             result.add(Integer.toString(i));
@@ -103,24 +114,81 @@ public class JsonOutput {
         return squareBracketWrap(String.join(COMMA_SEPARATOR, result));
     }
 
-    private static String lottosToJson(final Lottos lottos) {
+    private static String lottosToJSON(final Lottos lottos) {
         List<String> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            result.add(lottoToJson(lotto));
+            result.add(lottoToJSON(lotto));
         }
         return squareBracketWrap(String.join(COMMA_SEPARATOR, result));
     }
 
-    public static String lottoGameToJson(final LottoGame game) {
+    public static String lottoGameToJSON(final LottoGame game) {
         final String result = joinByComma(
                 keyAndIntValue("allPurchaseAmount", game.getAllPurchaseCount() * game.getPrice()),
                 keyAndIntValue("autoPurchaseCount", game.getAutoPurchaseCount()),
                 keyAndIntValue("manualPurchaseCount", game.getManualPurchaseCount()),
-                keyAndJsonValue("lottos", lottosToJson(game.getLottos())),
-                keyAndJsonValue("stat", statToJson(game.getStat())),
+                keyAndJsonValue("lottos", lottosToJSON(game.getLottos())),
+                keyAndJsonValue("stat", statToJSON(game.getStat())),
                 keyAndIntValue("totalPrizeMoney", game.getStat().getTotalPrizeMoney()),
                 keyAndDoubleValue("profitRate", game.getStat().getProfitRate())
         );
         return responseOk("result", braceWrap(result));
+    }
+
+    private static <T> String objectListToJSONArray(final List<T> list, final Function<T, String> processor) {
+        final List<String> result = new ArrayList<>();
+        for (T element : list) {
+            result.add(processor.apply(element));
+        }
+        return squareBracketWrap(String.join(COMMA_SEPARATOR, result));
+    }
+
+    private static String lottoDTOtoJSON(final PreviousLottoDTO dto) {
+        final String json = dto.getLottoNumbers().stream()
+                .map(i -> Integer.toString(i))
+                .collect(Collectors.joining(COMMA_SEPARATOR));
+        return squareBracketWrap(json);
+    }
+
+    private static String purchaseDTOtoJSON(final PreviousPurchaseDTO dto) {
+        final String lottos = objectListToJSONArray(dto.getLottoList(), JsonOutput::lottoDTOtoJSON);
+        final String result = joinByComma(
+                keyAndIntValue("amount", dto.getAmount()),
+                keyAndIntValue("autoCount", dto.getAmount()),
+                keyAndIntValue("manualCount", dto.getManualCount()),
+                keyAndIntValue("totalPrize", dto.getTotalPrize()),
+                keyAndIntValue("rank1st", dto.getRank1st()),
+                keyAndIntValue("rank2nd", dto.getRank2nd()),
+                keyAndIntValue("rank3rd", dto.getRank3rd()),
+                keyAndIntValue("rank4th", dto.getRank4th()),
+                keyAndIntValue("rank5th", dto.getRank5th()),
+                keyAndIntValue("rankMiss", dto.getRankMiss()),
+                keyAndDoubleValue("profitRate", dto.getProfitRate()),
+                keyAndJsonValue("lottoList", lottos)
+        );
+        return braceWrap(result);
+    }
+
+    private static String winResultDTOtoJSON(final PreviousWinLottoResultDTO dto) {
+        final String purchases = objectListToJSONArray(dto.getPreviousPurchases(), JsonOutput::purchaseDTOtoJSON);
+        final String winNumber = squareBracketWrap(joinByComma(
+                dto.getFirst(),
+                dto.getSecond(),
+                dto.getThird(),
+                dto.getFourth(),
+                dto.getFifth(),
+                dto.getSixth()
+        ));
+        final String result = joinByComma(
+                keyAndIntValue("winLottoID", dto.getWinLottoID()),
+                keyAndIntValue("winLottoBonus", dto.getWinLottoBonus()),
+                keyAndJsonValue("winNumber", winNumber),
+                keyAndJsonValue("purchases", purchases)
+        );
+        return braceWrap(result);
+    }
+
+    public static String previousResultListDTO(final List<PreviousWinLottoResultDTO> resultDTO) {
+        return objectListToJSONArray(resultDTO, JsonOutput::winResultDTOtoJSON);
     }
 }

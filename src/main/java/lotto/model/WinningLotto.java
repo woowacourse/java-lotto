@@ -19,6 +19,14 @@ public class WinningLotto {
         return Rank.valueOf(countOfMatch, matchBonus);
     }
 
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public int getBonusNo() {
+        return bonusNo;
+    }
+
     @Override
     public String toString() {
         return WIN_NUMBER
