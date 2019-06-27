@@ -29,7 +29,5 @@ public class PurchaseService {
         Connection connection = ConnectionUtil.getConnection();
         new LottoTicketDAO(connection).addLottoTickets(purchaseDTO);
     }
-
-
 }
 
