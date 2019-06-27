@@ -60,4 +60,5 @@ public enum Rank {
         Rank[] ranks = {FIRST, SECOND, THIRD, FORTH, FIFTH};
         return ranks;
     }
+
 }
