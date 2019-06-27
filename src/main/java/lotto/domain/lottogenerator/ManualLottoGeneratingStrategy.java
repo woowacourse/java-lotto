@@ -25,4 +25,9 @@ public class ManualLottoGeneratingStrategy implements LottoGeneratingStrategy {
 
         return Collections.unmodifiableList(lottoNumbers);
     }
+
+    @Override
+    public boolean isAuto() {
+        return false;
+    }
 }

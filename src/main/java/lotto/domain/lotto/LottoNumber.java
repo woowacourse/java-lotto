@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.exception.LottoNumberOutOfBoundsException;
+import lotto.domain.exception.LottoNumberOutOfBoundsException;
 
 import java.util.Map;
 import java.util.Objects;
@@ -32,8 +32,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber getNumber(int number) {
-        return Optional.of(creators.get(number))
+        return Optional.ofNullable(creators.get(number))
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber lottoNumber) {
-        return number > lottoNumber.number ? 1 : -1;
+        return number - lottoNumber.number;
     }
 
     @Override

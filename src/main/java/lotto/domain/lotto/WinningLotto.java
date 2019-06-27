@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.exception.DuplicateLottoNumberException;
+import lotto.domain.exception.DuplicateLottoNumberException;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -44,5 +44,21 @@ public class WinningLotto {
 
     private boolean contains(Lotto lotto) {
         return lotto.contains(bonusNumber);
+    }
+
+    public Lotto getWinningLotto() {
+        return winningLotto;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "WinningLotto{" +
+                "winningLotto=" + winningLotto +
+                ", bonusNumber=" + bonusNumber +
+                '}';
     }
 }

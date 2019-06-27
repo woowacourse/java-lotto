@@ -1,6 +1,6 @@
 package lotto.domain.paymentinfo;
 
-import lotto.exception.PaymentOutOfBoundsException;
+import lotto.domain.exception.PaymentOutOfBoundsException;
 
 import java.util.Objects;
 
@@ -22,6 +22,10 @@ public class Payment {
 
     public double calculateEarningsRate(long totalWinningMoney) {
         return (double) totalWinningMoney / payment;
+    }
+
+    public int getPayment() {
+        return payment;
     }
 
     @Override

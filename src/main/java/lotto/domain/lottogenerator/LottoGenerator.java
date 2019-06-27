@@ -13,6 +13,6 @@ public class LottoGenerator {
         if (Objects.isNull(strategy)) {
             throw new NullPointerException();
         }
-        return new Lotto(strategy.generate());
+        return new Lotto(strategy.generate(), strategy.isAuto());
     }
 }

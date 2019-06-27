@@ -1,7 +1,7 @@
 package lotto.domain.paymentinfo;
 
-import lotto.exception.NaturalNumberException;
-import lotto.exception.PaymentOutOfBoundsException;
+import lotto.domain.exception.NaturalNumberException;
+import lotto.domain.exception.PaymentOutOfBoundsException;
 
 public class CountOfLotto {
     private static final int ZERO = 0;
@@ -20,6 +20,10 @@ public class CountOfLotto {
         }
         this.countOfManualLotto = countOfManualLotto;
         this.countOfRandomLotto = totalLotto - countOfManualLotto;
+    }
+
+    public int getTotalCountOfLotto() {
+        return countOfManualLotto + countOfRandomLotto;
     }
 
     public int getCountOfManualLotto() {

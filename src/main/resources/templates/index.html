@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
-    <title>로또</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+
+    <title>우아한 바다 이야기</title>
 </head>
+
 <body>
-Hello World!!
+<section class="container">
+    <h1>로또 구매</h1>
+    <form action="/payment" method="post">
+        <div class="form-group">
+            <label for="user">사용자 이름</label>
+            <input type="text" id="user" name="user_name" class="form-control"/>
+            <small class="form-text text-muted">원하시는 사용자 이름을 입력해주세요.</small>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">시작하기</button>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Recent</h3>
+            <div class="table-responsive-lg text-center">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Round</th>
+                        <th scope="col">name</th>
+                        <th scope="col">Total Price</th>
+                        <th scope="col">Earning Rate</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#lottoGames}}
+                    <tr>
+                        <th scope="row"><a href="/result/{{round}}">{{round}}</a></th>
+                        <td>{{name}}</td>
+                        <td class="text-right">{{totalWinningMoney}} 원</td>
+                        <td>{{earningRate}}</td>
+                    </tr>
+                    {{/lottoGames}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Ranking</h3>
+            <div class="table-responsive-lg text-center">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">name</th>
+                        <th scope="col">Total Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#ranking}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td class="text-right">{{totalWinningMoney}} 원</td>
+                    </tr>
+                    {{/ranking}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
+
 </html>
