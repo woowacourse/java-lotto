@@ -13,7 +13,7 @@ import java.util.Map;
 import static java.util.stream.Collectors.*;
 
 public class LottoResultService {
-    private static final LottoResultDao LOTTO_RESULT_DAO = LottoResultDao.getInstance();
+    private LottoResultDao lottoResultDao = LottoResultDao.getInstance();
 
     private LottoResultService() {
     }
@@ -27,7 +27,7 @@ public class LottoResultService {
     }
 
     public List<ResultDto> selectAllLottoResult() {
-        List<ResultDto> lottoGames = LOTTO_RESULT_DAO.selectAllLottoResult();
+        List<ResultDto> lottoGames = lottoResultDao.selectAllLottoResult();
 
         lottoGames.forEach(resultDto -> {
             resultDto.setTotalWinningMoney(new Result(resultDto.getLottoScore()).calculateTotalWinningMoney());
@@ -47,11 +47,11 @@ public class LottoResultService {
     }
 
     public int insertLottoResult(ResultDto resultDto) {
-        return LOTTO_RESULT_DAO.insertLottoResult(resultDto);
+        return lottoResultDao.insertLottoResult(resultDto);
     }
 
     public ResultDto selectLottoResult(int round) {
-        ResultDto resultDto = LOTTO_RESULT_DAO.selectLottoResult(round);
+        ResultDto resultDto = lottoResultDao.selectLottoResult(round);
         Result result = new Result(resultDto.getLottoScore());
         resultDto.setTotalWinningMoney(result.calculateTotalWinningMoney());
         resultDto.setEarningRate(result.calculateEarningsRate(new Payment(resultDto.getPayment())));
