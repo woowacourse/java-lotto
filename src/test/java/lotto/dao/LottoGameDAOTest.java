@@ -15,7 +15,7 @@ class LottoGameDAOTest {
     }
 
     @Test
-    void crdLottoGame() throws Exception {
+    void crdLottoGame() {
         assertEquals(lottoGameDAO.addLottoGame(0), 1);
         //assertEquals(lottoGameDAO.getLastRound(), 0);
         assertEquals(lottoGameDAO.deleteLottoGame(0), 1);

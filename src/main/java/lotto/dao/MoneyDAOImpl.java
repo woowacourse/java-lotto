@@ -1,15 +1,14 @@
 package lotto.dao;
 
-import lotto.domain.DBConnector;
+import lotto.LottoJDBCTemplate;
 import lotto.domain.Money;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MoneyDAOImpl implements MoneyDAO {
-    private static final DBConnector CONNECTOR = DBConnector.getInstance();
+    private static final LottoJDBCTemplate TEMPLATE = LottoJDBCTemplate.getInstance();
 
     private static class MoneyDAOImplHolder {
         private static final MoneyDAO instance = new MoneyDAOImpl();
@@ -22,57 +21,33 @@ public class MoneyDAOImpl implements MoneyDAO {
     @Override
     public Money findByRound(int round) {
         String query = "SELECT * FROM money WHERE round = ?";
-        Money money = null;
 
-        try (Connection con = CONNECTOR.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query)) {
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(round);
 
-            pstmt.setInt(1, round);
-            ResultSet rs = pstmt.executeQuery();
+        List<Map<String, Object>> resultList = TEMPLATE.executeQuery(query);
 
-            if (!rs.next()) return money;
-
-            money = new Money(rs.getString("money"));
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("구매 금액을 가져오지 못했습니다.");
-        }
-        return money;
+        return new Money((String) resultList.get(0).get("money"));
     }
 
     @Override
     public int addMoney(Money money, int round) {
         String query = "INSERT INTO money VALUES (?, ?)";
-        int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query)) {
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(round);
+        queryValues.add(money.getMoney());
 
-            pstmt.setInt(1, round);
-            pstmt.setInt(2, money.getMoney());
-            result = pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("로또 금액을 생성하지 못했습니다.");
-        }
-        return result;
+        return TEMPLATE.executeUpdate(query, queryValues);
     }
 
     @Override
     public int deleteMoney(int round) {
         String query = "DELETE FROM money WHERE round = ?";
-        int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query)) {
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(round);
 
-            pstmt.setInt(1, round);
-            result = pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("로또 금액을 삭제하지 못했습니다.");
-        }
-        return result;
+        return TEMPLATE.executeUpdate(query, queryValues);
     }
 }

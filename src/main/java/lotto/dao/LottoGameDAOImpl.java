@@ -1,14 +1,13 @@
 package lotto.dao;
 
-import lotto.domain.DBConnector;
+import lotto.LottoJDBCTemplate;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class LottoGameDAOImpl implements LottoGameDAO {
-    private static final DBConnector CONNECTOR = DBConnector.getInstance();
+    private static final LottoJDBCTemplate TEMPLATE = LottoJDBCTemplate.getInstance();
 
     private static class LottoGameDAOImplHolder {
         private static final LottoGameDAO instance = new LottoGameDAOImpl();
@@ -21,53 +20,29 @@ public class LottoGameDAOImpl implements LottoGameDAO {
     @Override
     public int getLastRound() {
         String query = "SELECT * from lotto_game ORDER BY round DESC limit 1";
-        int round = 0;
 
-        try (Connection con = CONNECTOR.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
+        List<Map<String, Object>> resultList = TEMPLATE.executeQuery(query);
 
-            if (!rs.next()) return round;
-
-            round = rs.getInt("round");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("최근 회차를 가져오지 못했습니다.");
-        }
-        return round;
+        return (int) resultList.get(0).get("round");
     }
 
     @Override
     public int addLottoGame(int round) {
         String query = "INSERT INTO lotto_game VALUES (?)";
-        int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query)) {
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(round);
 
-            pstmt.setInt(1, round);
-            result = pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("로또 게임을 생성하지 못했습니다.");
-        }
-        return result;
+        return TEMPLATE.executeUpdate(query, queryValues);
     }
 
     @Override
     public int deleteLottoGame(int round) {
         String query = "DELETE FROM lotto_game WHERE round=?";
-        int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query)) {
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(round);
 
-            pstmt.setInt(1, round);
-            result = pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("로또를 삭제하지 못했습니다.");
-        }
-        return result;
+        return TEMPLATE.executeUpdate(query, queryValues);
     }
 }

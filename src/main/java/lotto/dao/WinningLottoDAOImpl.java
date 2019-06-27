@@ -1,16 +1,18 @@
 package lotto.dao;
 
+import lotto.LottoJDBCTemplate;
 import lotto.domain.DBConnector;
 import lotto.domain.lotto.WinningLotto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class WinningLottoDAOImpl implements WinningLottoDAO {
     private static final String regexForDelteBracket = "(\\[|])+";
     private static final DBConnector CONNECTOR = DBConnector.getInstance();
+    private static final LottoJDBCTemplate TEMPLATE = LottoJDBCTemplate.getInstance();
+
 
     private static class WinningLottoDAOImplHolder {
         private static final WinningLottoDAO instance = new WinningLottoDAOImpl();
@@ -23,60 +25,36 @@ public class WinningLottoDAOImpl implements WinningLottoDAO {
     @Override
     public WinningLotto findByRound(int round) {
         String query = "SELECT * FROM winning_lotto WHERE round = ?";
-        WinningLotto winningLotto = null;
 
-        try (Connection con = CONNECTOR.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query)) {
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(round);
 
-            pstmt.setInt(1, round);
-            ResultSet rs = pstmt.executeQuery();
+        List<Map<String, Object>> resultList = TEMPLATE.executeQuery(query);
 
-            if (!rs.next()) return winningLotto;
+        Map<String, Object> result = resultList.get(0);
 
-            winningLotto = new WinningLotto(rs.getString("numbers"),
-                                            rs.getString("bonus_number"));
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("당첨 로또를 가져오지 못했습니다.");
-        }
-        return winningLotto;
+        return new WinningLotto((String) result.get("numbers"), (String) result.get("bonus_number"));
     }
 
     @Override
     public int addWinningLotto(WinningLotto winningLotto, int round) {
         String query = "INSERT INTO winning_lotto VALUES (?, ?, ?)";
-        int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query)) {
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(round);
+        queryValues.add(winningLotto.getLotto().getNumbers().toString().replaceAll((regexForDelteBracket), ""));
+        queryValues.add(winningLotto.getBonusNumber().toString());
 
-            pstmt.setInt(1, round);
-            pstmt.setString(2,
-                    winningLotto.getLotto().getNumbers().toString().replaceAll((regexForDelteBracket), ""));
-            pstmt.setString(3, winningLotto.getBonusNumber().toString());
-            result = pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("당첨 로또를 생성하지 못했습니다.");
-        }
-        return result;
+        return TEMPLATE.executeUpdate(query, queryValues);
     }
 
     @Override
     public int deleteWinningLotto(int round) {
         String query = "DELETE FROM winning_lotto WHERE round=?";
-        int result = 0;
 
-        try (Connection con = CONNECTOR.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query)) {
+        List<Object> queryValues = new ArrayList<>();
+        queryValues.add(round);
 
-            pstmt.setInt(1, round);
-            result = pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("당첨 로또를 삭제하지 못했습니다.");
-        }
-        return result;
+        return TEMPLATE.executeUpdate(query, queryValues);
     }
 }

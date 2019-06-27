@@ -24,7 +24,7 @@ class LottoResultDAOTest {
     }
 
     @Test
-    void crdLottoResult() throws Exception {
+    void crdLottoResult() {
         LottoGameDAO lottoGameDAO = LottoGameDAOImpl.getInstance();
         lottoGameDAO.addLottoGame(0);
 
