@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import com.google.gson.Gson;
 import lotto.StandardResponse;
 import lotto.StatusResponse;
 import lotto.domain.lotto.Lotto;
@@ -34,14 +33,13 @@ public class LottoPurchaseController {
 
     public static Route buyLotto = (request, response) -> {
         response.type("application/json");
-        System.out.println("buyLotto");
         try {
             PurchaseDto purchaseInfo = createPurchaseInfo(request);
             purchaseInfo = service.buyLotto(purchaseInfo);
-            return JsonUtils.toJson(new StandardResponse(StatusResponse.SUCCESS, JsonUtils.toJsonTree(purchaseInfo)));
+            return new StandardResponse(StatusResponse.SUCCESS, JsonUtils.toJsonTree(purchaseInfo)).toJson();
         } catch (Exception e) {
             response.status(INTERNAL_SERVER_ERROR_CODE);
-            return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
+            return new StandardResponse(StatusResponse.ERROR, e.getMessage()).toJson();
         }
     };
 

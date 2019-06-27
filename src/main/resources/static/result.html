@@ -84,9 +84,9 @@
                 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             },
             success:function(data){
-            	result = JSON.parse(data.data.Result);
-            	winningLotto = JSON.parse(data.data.WinningLotto);
-            	purchasedLotto = JSON.parse(data.data.Lotto);
+            	result = data.data.Result;
+            	winningLotto = data.data.WinningLotto;
+            	purchasedLotto = data.data.Lotto;
             	deleteRowsExceptFirst(document.getElementById('resultTable'));
             	deleteRowsExceptFirst(document.getElementById('winningLottoTable'));
             	deleteRowsExceptFirst(document.getElementById('lottoTable'));

@@ -1,6 +1,7 @@
 package lotto;
 
 import com.google.gson.JsonElement;
+import lotto.utils.JsonUtils;
 
 public class StandardResponse {
     private StatusResponse status;
@@ -19,6 +20,10 @@ public class StandardResponse {
     public StandardResponse(StatusResponse status, JsonElement data) {
         this.status = status;
         this.data = data;
+    }
+
+    public String toJson() {
+        return JsonUtils.toJson(this);
     }
 
     public StatusResponse getStatus() {

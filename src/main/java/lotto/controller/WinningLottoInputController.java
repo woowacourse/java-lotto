@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import com.google.gson.Gson;
 import lotto.StandardResponse;
 import lotto.StatusResponse;
 import lotto.service.WinningLottoService;
@@ -10,6 +9,7 @@ import spark.Route;
 
 public class WinningLottoInputController {
     private static WinningLottoService service;
+    private static int INTERNAL_SERVER_ERROR_CODE = 500;
 
     static {
         service = new WinningLottoService();
@@ -26,9 +26,9 @@ public class WinningLottoInputController {
             service.makeWinningLotto(request.queryParams("winningLottoNo"),
                     Integer.parseInt(request.queryParams("bonusNo")));
         } catch (Exception e) {
-            response.status(500);
-            return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, e.getMessage()));
+            response.status(INTERNAL_SERVER_ERROR_CODE);
+            return new StandardResponse(StatusResponse.ERROR, e.getMessage()).toJson();
         }
-        return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
+        return new StandardResponse(StatusResponse.SUCCESS).toJson();
     };
 }

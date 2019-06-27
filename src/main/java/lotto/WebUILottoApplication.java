@@ -8,8 +8,10 @@ import lotto.controller.WinningLottoInputController;
 import static spark.Spark.*;
 
 public class WebUILottoApplication {
+    private static final int PORT_NO = 8080;
+
     public static void main(String[] args) {
-        port(8080);
+        port(PORT_NO);
 
         staticFiles.location("/static");
 
