@@ -58,7 +58,7 @@ public class WebLottoShop {
 
         WinningResult winningResult = new WinningResult(userTickets, winningLotto);
 
-        return  getResultModel(winningResult);
+        return getResultModel(winningResult);
     }
 
     private Map<String, Object> getResultModel(WinningResult winningResult) {

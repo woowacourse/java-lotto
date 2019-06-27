@@ -1,5 +1,6 @@
 package lotto.domain.dao;
 
+import lotto.DBUtils;
 import lotto.domain.lottomanager.LottoNumber;
 
 import java.sql.Connection;
@@ -16,18 +17,25 @@ class LottoDaoUtils {
     private static final int NUMBER_START_COLUMN = 2;
     private static final String GET_ROUND_QUERY = "select round from lottoGame order by round desc limit 1";
 
-    int getRound(Connection connection) {
+    int getRound() {
         try {
-            PreparedStatement pstmt = connection.prepareStatement(GET_ROUND_QUERY);
-            ResultSet resultSet = pstmt.executeQuery();
-
+            ResultSet resultSet = getDBRound();
             int round = FALSE_VALUE;
             if (resultSet.next()) {
                 round = resultSet.getInt(ROUND_COLUMN);
             }
             return round;
         } catch (SQLException e) {
-            throw new RuntimeException("getRound() : " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    private ResultSet getDBRound() {
+        try (Connection connection = DBUtils.getConnection()) {
+            PreparedStatement pstmt = connection.prepareStatement(GET_ROUND_QUERY);
+            return pstmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

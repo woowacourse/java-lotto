@@ -1,11 +1,6 @@
 package lotto.domain.dao;
 
-import lotto.DBUtils;
 import lotto.domain.user.PurchaseAmount;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class LottoGameDao {
     private static final String INSERT_LOTTO_GAME_QUERY = "INSERT INTO lottoGame (lotto_amount) VALUES(?)";
@@ -18,12 +13,7 @@ public class LottoGameDao {
     }
 
     public void addLottoAmount(PurchaseAmount purchaseAmount) {
-        try (Connection connection = DBUtils.getConnection()) {
-            PreparedStatement pstmt = connection.prepareStatement(INSERT_LOTTO_GAME_QUERY);
-            pstmt.setInt(LOTTO_AMOUNT, purchaseAmount.getLottoAmount());
-            pstmt.executeUpdate();
-        } catch (SQLException e){
-            throw new RuntimeException("addLottoAmount() : " + e.getMessage());
-        }
+        DaoTemplate daoTemplate = pstmt -> pstmt.setInt(LOTTO_AMOUNT, purchaseAmount.getLottoAmount());
+        daoTemplate.insertTemplate(INSERT_LOTTO_GAME_QUERY);
     }
 }
