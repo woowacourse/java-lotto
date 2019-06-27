@@ -2,10 +2,19 @@ package lotto.service.dto;
 
 public class PaymentInfoDto {
     private int payment;
+    private int countOfLotto;
     private int manual;
     private int auto;
     private int userId;
     private String name;
+
+    public int getCountOfLotto() {
+        return countOfLotto;
+    }
+
+    public void setCountOfLotto(int countOfLotto) {
+        this.countOfLotto = countOfLotto;
+    }
 
     public int getPayment() {
         return payment;

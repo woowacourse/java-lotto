@@ -21,8 +21,7 @@ public class PaymentInfoController {
     public static String goPayment(Request request, Response response) throws SQLDataException {
         String userName = nullable(request.queryParams("user_name"));
 
-        // TODO: 2019-06-13 How to process insert result? void?
-        int userInsertResult = PAYMENT_INFO_SERVICE.insertUser(userName);
+        PAYMENT_INFO_SERVICE.insertUser(userName);
 
         Map<String, Object> model = new HashMap<>();
         model.put("name", userName);

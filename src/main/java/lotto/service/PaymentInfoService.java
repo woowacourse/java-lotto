@@ -9,6 +9,7 @@ import java.sql.SQLDataException;
 
 public class PaymentInfoService {
     private static final PaymentInfoDao PAYMENT_INFO_DAO = PaymentInfoDao.getInstance();
+
     private PaymentInfoService() {
     }
 
@@ -24,20 +25,18 @@ public class PaymentInfoService {
         return PAYMENT_INFO_DAO.insertUser(userName);
     }
 
-    public int insertPaymentInfoAndReturnKeyValue(int inputPayment, int countOfManualLotto, String name) throws SQLDataException {
-        Payment payment = new Payment(inputPayment);
-        CountOfLotto countOfLotto = new CountOfLotto(payment, countOfManualLotto);
-
-        PaymentInfoDto paymentInfoDto = createPaymentInfoDTO(payment, countOfLotto, name);
+    public int insertPaymentInfoAndReturnKeyValue(PaymentInfoDto paymentInfoDto) throws SQLDataException {
+        paymentInfoDto.setAuto(calculateCountOfRandomLotto(paymentInfoDto));
         return PAYMENT_INFO_DAO.insertPayment(paymentInfoDto);
     }
 
-    private static PaymentInfoDto createPaymentInfoDTO(Payment payment, CountOfLotto countOfLotto, String name) {
-        PaymentInfoDto paymentInfoDto = new PaymentInfoDto();
-        paymentInfoDto.setPayment(payment.getPayment());
-        paymentInfoDto.setManual(countOfLotto.getCountOfManualLotto());
-        paymentInfoDto.setAuto(countOfLotto.getCountOfRandomLotto());
-        paymentInfoDto.setName(name);
-        return paymentInfoDto;
+    private int calculateCountOfRandomLotto(PaymentInfoDto paymentInfoDto) {
+        Payment payment = new Payment(paymentInfoDto.getPayment());
+        CountOfLotto countOfLotto = new CountOfLotto(payment, paymentInfoDto.getManual());
+        return countOfLotto.getCountOfRandomLotto();
+    }
+
+    public int calculateCountOfLotto(PaymentInfoDto paymentInfoDto) {
+        return calculateCountOfRandomLotto(paymentInfoDto) + paymentInfoDto.getManual();
     }
 }

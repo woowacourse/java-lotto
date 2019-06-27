@@ -1,11 +1,10 @@
 package lotto.controller;
 
-import lotto.service.PaymentInfoService;
-import lotto.service.dto.RankingDto;
-import lotto.service.dto.ResultDto;
 import lotto.domain.lotto.Lotto;
 import lotto.service.LottoResultService;
 import lotto.service.LottoService;
+import lotto.service.dto.RankingDto;
+import lotto.service.dto.ResultDto;
 import spark.Request;
 import spark.Response;
 
@@ -38,13 +37,12 @@ public class LottoResultController {
     public static String goLottoResult(Request request, Response response) throws SQLDataException {
         int round = Integer.parseInt(nullable(request.params(":round")));
 
-        ResultDto resultDto = LOTTO_RESULT_SERVICE.selectLottoResult(round);
         List<Lotto> lottoTicket = LOTTO_SERVICE.selectAllLotto(round);
 
         long countOfAutoLotto = LOTTO_SERVICE.calculateCountOfAutoLotto(lottoTicket);
 
         Map<String, Object> model = new HashMap<>();
-        model.put("result", resultDto);
+        model.put("result", LOTTO_RESULT_SERVICE.selectLottoResult(round));
         model.put("winningLotto", LOTTO_SERVICE.selectWinningLotto(round));
         model.put("lottoTicket", lottoTicket);
         model.put("auto", countOfAutoLotto);

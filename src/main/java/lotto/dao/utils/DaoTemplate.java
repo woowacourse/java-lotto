@@ -11,6 +11,7 @@ import static lotto.dao.utils.JdbcConnector.getConnection;
 public interface DaoTemplate {
     /**
      * General CUD(Create, Update, Delete) template
+     *
      * @param query Query to execute
      * @return result Query result
      * @throws SQLDataException
