@@ -56,18 +56,9 @@ public class Lotto {
     }
 
     public int sameNumberCount(Lotto lotto) {
-        int count = 0;
-        for (Integer lottoNumber : lottoNumbers) {
-            count += containNumber(lotto, lottoNumber);
-        }
-        return count;
-    }
-
-    private int containNumber(Lotto lotto, int lottoNumber) {
-        if (lotto.containNumber(lottoNumber)) {
-            return 1;
-        }
-        return 0;
+        return (int) lottoNumbers.stream()
+                .filter(lotto::containNumber)
+                .count();
     }
 
     public List<Integer> getLottoNumbers() {

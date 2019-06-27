@@ -1,11 +1,13 @@
 package lotto.domain.result;
 
+import java.util.Arrays;
+
 public enum LottoRank {
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     private static final int WINNING_MIN_COUNT = 3;
@@ -28,13 +30,11 @@ public enum LottoRank {
             return SECOND;
         }
 
-        for (LottoRank lottoRank : values()) {
-            if (lottoRank.matchCount(count) && !lottoRank.equals(SECOND)) {
-                return lottoRank;
-            }
-        }
-
-        throw new InvalidRankCountException(count + INVALID_COUNT_ERROR);
+        return Arrays.stream(values())
+                .filter((lottoRank) -> lottoRank.matchCount(count))
+                .filter(lottoRank -> !lottoRank.equals(SECOND))
+                .findAny()
+                .orElseThrow(() -> new InvalidRankCountException(count + INVALID_COUNT_ERROR));
     }
 
     private boolean matchCount(int count) {

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div>
+        <div>사용자가 구매한 로또</div>
+        {{#lottoGroup}}
+            {{#lottos}}
+                {{lottoNumbers}}<br/>
+            {{/lottos}}
+        {{/lottoGroup}}
+    </div>
+    <br>
+    <div>
+        <div>우승 번호</div>
+        <div>
+            {{#winning}}
+            <div>당첨 번호: {{#lotto}}{{lottoNumbers}}{{/lotto}} </div>
+            <div>보너스 번호: {{bonusNum}}</div>
+            {{/winning}}
+        </div>
+    </div>
+    <br>
+    <div>
+        <div>당첨 결과</div>
+        <div>
+            {{#lottoResult}}
+            <div>{{key.rank}}개 일치 ({{key.money}}원) - {{value}}개</div>
+            {{/lottoResult}}
+        </div>
+    </div>
+    <br>
+    <div>
+        <div>수익률</div>
+        <div>
+            <span>{{yield}}%</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

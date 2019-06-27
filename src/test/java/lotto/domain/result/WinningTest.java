@@ -16,7 +16,7 @@ public class WinningTest {
 
     @BeforeEach
     void setUp() {
-        lotto = Lotto.of(new Numbers(Arrays.asList(1,2,3,4,5,6)));
+        lotto = Lotto.of(new Numbers("1,2,3,4,5,6"));
     }
 
     @Test
@@ -28,7 +28,7 @@ public class WinningTest {
     @Test
     void 보너스번호_범위_확인() {
         assertThrows(InvalidWinningException.class, () -> Winning.of(lotto, 46));
-        assertThrows(InvalidWinningException.class, () -> Winning.of(lotto, -1));
+        assertThrows(InvalidWinningException.class, () -> Winning.of(lotto, 0));
     }
 
     @Test

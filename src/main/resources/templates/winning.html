@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{#purchaseCount}}
+<div>
+    <span>수동으로 {{manualCount}}장, 자동으로 {{autoCount}} 장을 구매 했습니다.</span>
+</div>
+{{/purchaseCount}}
+
+{{#lottoGroup}}
+    {{#lottos}}
+        {{lottoNumbers}}<br/>
+    {{/lottos}}
+{{/lottoGroup}}
+
+<div>
+    <div>
+        <form action="/result" method="post">
+            <input type="text" name="winningLotto" placeholder="우승 번호를 입력해주세요.">
+            <input type="text" name="bonusBall" placeholder="보너스 번호를 입력해주세요.">
+            <input type="submit" value="전송">
+        </form>
+    </div>
+</div>
+</body>
+</html>

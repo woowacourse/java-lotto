@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 회차 목록</title>
+</head>
+<body>
+{{#lottoRound}}
+    <input type="button" id="{{.}}" value="{{.}}회차">
+{{/lottoRound}}
+{{^lottoRound}}
+    조회할 기록이 없습니다.
+{{/lottoRound}}
+<script>
+    var buttons = document.querySelectorAll('[type=button]');
+
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function() {
+            location.href='./lottoRound/' + this.id;
+        })
+    }
+</script>
+</body>
+</html>
