@@ -26,8 +26,7 @@ public class PurchaseService {
     }
 
     public static void savePurchase(PurchaseDTO purchaseDTO) throws SQLException {
-        Connection connection = JdbcConnector.getConnection();
-        new LottoTicketDAO(connection).addLottoTickets(purchaseDTO);
+        new LottoTicketDAO().addLottoTickets(purchaseDTO);
     }
 }
 

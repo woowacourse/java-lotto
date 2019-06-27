@@ -4,24 +4,24 @@ import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTicket;
 import lotto.dto.PurchaseDTO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.database.JdbcConnector.getConnection;
+
 public class LottoTicketDAO {
-    private final Connection connection;
     private final int LOTTO_NUMBER_LENGTH = 6;
 
-    public LottoTicketDAO(Connection connection) {
-        this.connection = connection;
+    public static LottoTicketDAO getInstance() {
+        return LottoTicketDAOHolder.INSTANCE;
     }
 
     public void addLottoTickets(PurchaseDTO purchaseDTO) throws SQLException {
         String query = "INSERT INTO lotto (round, num1, num2, num3, num4, num5, num6) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement pstmt = connection.prepareStatement(query);
+        PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, purchaseDTO.getRound());
         for (LottoTicket lottoTicket : purchaseDTO.getLottoTickets().getLottoTickets()) {
             addLottoTicket(pstmt, lottoTicket);
@@ -38,7 +38,7 @@ public class LottoTicketDAO {
 
     public List<List<Integer>> getLottoNumbersByRound(final int round) throws SQLException {
         String query = "SELECT num1,num2,num3,num4,num5,num6 FROM lotto WHERE round = (?)";
-        PreparedStatement pstmt = connection.prepareStatement(query);
+        PreparedStatement pstmt = getConnection().prepareStatement(query);
         pstmt.setInt(1, round);
         ResultSet rs = pstmt.executeQuery();
         List<List<Integer>> lottoNumbers = new ArrayList<>();
@@ -55,5 +55,9 @@ public class LottoTicketDAO {
             number.add(rs.getInt(i));
         }
         return number;
+    }
+
+    private static class LottoTicketDAOHolder {
+        private static final LottoTicketDAO INSTANCE = new LottoTicketDAO();
     }
 }
