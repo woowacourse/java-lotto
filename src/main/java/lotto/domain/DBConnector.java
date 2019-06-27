@@ -21,7 +21,7 @@ public class DBConnector {
     }
 
     public Connection getConnection() {
-        Connection con = null;
+        Connection con;
 
         // 드라이버 로딩
         try {
