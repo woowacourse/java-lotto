@@ -1,12 +1,15 @@
 package lotto.view;
 
+import lotto.domain.exceptions.LottoTicketException;
+import lotto.service.UserLottoTranslator;
+import lotto.service.WinningLottoTranslator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
-
 
     public static String lottoMoney() {
         System.out.println(ConsoleMessages.BUY_MONEY.message());
@@ -18,14 +21,23 @@ public class InputView {
         return scanner.nextLine();
     }
 
-
-    public static List<String> manualLottoNumber(int iterate) {
+    private static List<String> manualLottoNumber(int iterate) {
         System.out.println(ConsoleMessages.MANUAL_NUMBER.message());
         List<String> manualNumbers = new ArrayList<>();
         for (int i = 0; i < iterate; i++) {
             manualNumbers.add(scanner.nextLine());
         }
         return manualNumbers;
+    }
+
+    public static List<String> manualLottoNumber(String iterate) {
+        int iterateNumber;
+        try {
+            iterateNumber = Integer.parseInt(iterate);
+        } catch (NumberFormatException e) {
+            throw new LottoTicketException();
+        }
+        return manualLottoNumber(iterateNumber);
     }
 
     public static String winningLottoNumber() {
@@ -36,5 +48,15 @@ public class InputView {
     public static String winningLottoBonus() {
         System.out.println(ConsoleMessages.WINNING_BONUS.message());
         return scanner.nextLine();
+    }
+
+    public static UserLottoTranslator userLottoPresentation() {
+        String money = lottoMoney();
+        String manualCount = manualLottoCount();
+        return new UserLottoTranslator(money, manualCount, manualLottoNumber(manualCount));
+    }
+
+    public static WinningLottoTranslator winningLottoPresentation() {
+        return new WinningLottoTranslator(winningLottoNumber(), winningLottoBonus());
     }
 }

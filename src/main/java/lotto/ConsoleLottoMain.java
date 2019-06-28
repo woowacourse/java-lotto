@@ -2,33 +2,24 @@ package lotto;
 
 import lotto.domain.UserLottos;
 import lotto.domain.WinningLotto;
-import lotto.domain.exceptions.ExceptionMessages;
-import lotto.domain.exceptions.LottoTicketException;
 import lotto.dto.LottoResultDto;
-import lotto.service.UserLottosCreator;
-import lotto.service.WinningLottoCreator;
+import lotto.service.UserLottoService;
+import lotto.service.UserLottoTranslator;
+import lotto.service.WinningLottoService;
+import lotto.service.WinningLottoTranslator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class ConsoleLottoMain {
     public static void main(String[] args) {
-        String lottoMoney = InputView.lottoMoney();
-        int manualCount = toManualLottoCount(InputView.manualLottoCount());
 
-        UserLottosCreator userTicketCreator = new UserLottosCreator(lottoMoney, manualCount, InputView.manualLottoNumber(manualCount));
-        UserLottos userLottos = userTicketCreator.create();
+        UserLottoTranslator userLottoTranslator = InputView.userLottoPresentation();
+        UserLottos userLottos = UserLottoService.userLottos(userLottoTranslator);
         OutputView.printLottos(userLottos);
 
-        WinningLottoCreator winningTicketCreator = new WinningLottoCreator(InputView.winningLottoNumber(), InputView.winningLottoBonus());
-        WinningLotto winningLotto = winningTicketCreator.create();
-        OutputView.printResult(new LottoResultDto(userLottos.result(winningLotto)));
-    }
+        WinningLottoTranslator winningLottoTranslator = InputView.winningLottoPresentation();
+        WinningLotto winningLotto = WinningLottoService.insertWinningLotto(1, winningLottoTranslator.getNumbers(), winningLottoTranslator.getBonus());
 
-    private static int toManualLottoCount(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new LottoTicketException(ExceptionMessages.TICKET.message());
-        }
+        OutputView.printResult(new LottoResultDto(userLottos.result(winningLotto)));
     }
 }

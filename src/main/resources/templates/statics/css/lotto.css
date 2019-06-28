@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    padding-top: 20px;
+    font-family: "Open Sans", sans-serif;
+    background-color: #3f2860;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.floatfix:after {
+    display: block;
+    content: ""; 
+    clear: both;
+}
+
+h1 {
+    text-align: center;
+    color: #ef6d3b;
+    text-shadow: 1px 1px 1px #000;
+    font-size: 30px;
+}
+
+#user-input{
+    text-align: center;
+}
+
+input {
+    font-size: 50px;
+    padding: 0.1em;
+    border: 0.08em solid #444;
+    border-radius: 0.2em;
+    width: 300px;
+}
+
+label{
+    display:block;
+    width: 100px;
+}
+.position {
+    width: 1080px;
+    margin: 0 auto;
+}
+
+#side-right {
+    width: 450px;
+    background-color: #90c5a9;
+    overflow: hidden;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    float: right;
+    margin-right: 50px;
+}
+
+.ball {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: #3d3c3a;
+    border-radius: 100%;
+    float: left;
+    background-color: #fff;
+    margin: 10px;
+    font-weight: 500;
+    box-shadow: 1px 1px 0.5px #000;
+}
+
+#history .ball{
+    background-color: blueviolet;
+    color: #ef6d3b;
+}
+
+button {
+    display: inline-block;
+    background-color: #ef6d3b;
+    outline: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 20px;
+    width: 120px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+    color: #3f2860;
+}
+
+#controls{
+    text-align: center;
+}
+
+#container{
+    margin-top: 50px;
+}
+
+#history {
+    text-align: center;
+    width: 300px;
+    padding: 20px 0;
+    border-radius: 20px;
+    background-color: #90c5a9;
+    float: left;
+    margin-left: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.side-left p {
+    font-weight: 500;
+    color: #3f2860;
+}

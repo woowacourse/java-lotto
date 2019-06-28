@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
-    <title>로또</title>
+    <title>Lotto Generator</title>
+    <link rel="stylesheet" href="./statics/css/lotto.css">
 </head>
+
 <body>
-Hello World!!
+    <div id="headline">
+        <h1>답은 "로또"다.</h1>
+    </div>
+    <div id="controls">
+        <div id="user-input">
+            <input type="number" name="money" id="money" placeholder="구입금액">
+            <input type="number" name="manual" id="manual" placeholder="수동구매">
+        </div>
+        <button id="generate" type="button">가즈아</button>
+        <button id="winning" type="button" style="visibility: hidden;">주작기</button>
+    </div>
+    <div id="container">
+    </div>
+    <script src="./statics/js/lotto.js"></script>
 </body>
+
 </html>

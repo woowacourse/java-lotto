@@ -23,7 +23,7 @@ public class OutputView {
         for (Map.Entry<Rank, Integer> entry : lottoResult.getResults().entrySet()) {
             stringBuilder.append(rankToString(entry.getKey())).append(" - ").append(entry.getValue()).append(" 개\n");
         }
-        stringBuilder.append("총 수익률은 ").append(lottoResult.getSummary()).append("입니다.\n");
+        stringBuilder.append("총 수익률은 ").append(lottoResult).append("입니다.\n");
         System.out.println("당첨통계\n-------");
         System.out.println(stringBuilder.toString());
     }

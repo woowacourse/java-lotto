@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.service.LottoResult;
-
 import java.util.List;
 
 

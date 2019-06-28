@@ -1,6 +1,4 @@
-package lotto.service;
-
-import lotto.domain.Rank;
+package lotto.domain;
 
 import java.util.Map;
 import java.util.Objects;
@@ -14,6 +12,10 @@ public class LottoResult {
         for (Rank rank : Rank.values()) {
             results.put(rank, 0);
         }
+    }
+
+    public LottoResult(Map<Rank, Integer> results) {
+        this.results = results;
     }
 
     public void plus(Rank rank) {

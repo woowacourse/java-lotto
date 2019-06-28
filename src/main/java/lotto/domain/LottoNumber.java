@@ -20,12 +20,12 @@ public class LottoNumber {
         }
     }
 
-    public int get() {
+    public int toInt() {
         return number;
     }
 
     public int compareTo(LottoNumber o) {
-        return number - o.get();
+        return number - o.toInt();
     }
 
     @Override
