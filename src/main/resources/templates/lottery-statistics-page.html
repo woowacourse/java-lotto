@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+당첨 통계<br>
+-----------------------<br>
+{{#statistics}}
+    {{numberOfMatching}}개 일치 ({{winningMoney}}원) - {{countsOfRank}}개
+    <br>
+{{/statistics}}
+총 수익률은 {{earningRatesAsPercent}}% 입니다.
+
+<form action="/" method="post">
+    <br>
+    <input type="submit" value="홈으로">
+</form>
+</body>
+</html>
