@@ -40,7 +40,7 @@ class IssuedLottosTest {
         IssuedLottos lottoGroupA = IssuedLottos.of(Arrays.asList(new Lotto(lottoNumbersOfOneToSix)));
         IssuedLottos lottoGroupB = IssuedLottos.of(Arrays.asList(new Lotto(lottoNumbersOfTwoToSeven)));
 
-        assertThat(IssuedLottos.getTotalLottosOf(lottoGroupA, lottoGroupB).getLottos())
+        assertThat(IssuedLottos.join(lottoGroupA, lottoGroupB).getLottos())
                 .isEqualTo(Arrays.asList(new Lotto(lottoNumbersOfOneToSix), new Lotto(lottoNumbersOfTwoToSeven)));
     }
 }

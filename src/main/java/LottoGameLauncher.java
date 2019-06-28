@@ -20,7 +20,7 @@ public class LottoGameLauncher {
         OutputView.showIssuedLottos(manualIssuedLottos, autoIssuedLottos);
 
         WinningLotto winningLotto = getWinningLotto();
-        IssuedLottos issuedLottos = IssuedLottos.getTotalLottosOf(manualIssuedLottos, autoIssuedLottos);
+        IssuedLottos issuedLottos = IssuedLottos.join(manualIssuedLottos, autoIssuedLottos);
         Statistics statistics = LottoGame.startLottery(issuedLottos, winningLotto);
         double earningRates = statistics.calculateEarningRates();
         OutputView.showAnalysisOf(statistics, earningRates);
