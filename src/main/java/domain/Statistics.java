@@ -2,9 +2,7 @@ package domain;
 
 import domain.money.Money;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Statistics {
     private Map<Rank, CountOfRank> countsOfRanks;
@@ -32,6 +30,13 @@ public class Statistics {
             Money winningMoneyOfRank = rank.getWinningMoney();
             amountOfTotalWinningMoney += countsOf(rank) * winningMoneyOfRank.getAmount();
         }
+        if (purchasedAmount.getAmount() == 0) {
+            return 0;
+        }
         return amountOfTotalWinningMoney / (double) purchasedAmount.getAmount();
+    }
+
+    public List<Rank> getKeys() {
+        return new ArrayList(countsOfRanks.keySet());
     }
 }

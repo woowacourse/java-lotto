@@ -16,7 +16,7 @@ public class IssuedLottos {
         return new IssuedLottos(lottos);
     }
 
-    public static IssuedLottos getTotalLottosOf(IssuedLottos manual, IssuedLottos auto) {
+    public static IssuedLottos join(IssuedLottos manual, IssuedLottos auto) {
         List<Lotto> lottos = new ArrayList<>();
 
         lottos.addAll(manual.lottos);
@@ -34,6 +34,14 @@ public class IssuedLottos {
 
     public int size() {
         return lottos.size();
+    }
+
+    public void addAll(IssuedLottos lottos) {
+        this.lottos.addAll(lottos.lottos);
+    }
+
+    public void add(Lotto manualIssueLotto) {
+        lottos.add(manualIssueLotto);
     }
 }
 

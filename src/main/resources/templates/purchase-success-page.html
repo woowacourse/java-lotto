@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+수동으로 {{sizeOfManual}}, 자동으로 {{sizeOfAuto}}장 구매했습니다.<br>
+{{#issuedLottos}}
+    {{this}}
+    <br>
+{{/issuedLottos}}
+<form action="/" method="get">
+    <input type="submit" value="홈으로">
+</form>
+</body>
+</html>

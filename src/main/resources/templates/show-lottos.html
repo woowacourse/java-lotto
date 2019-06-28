@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:br="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>로또</title>
+</head>
+<body>
+<br>
+<br>
+<br>
+자동으로 {{numberOfIssuedLottos}} 장을 구매했습니다.
+<br>
+{{#issuedLottos}}
+    {{lottoNumbers}}
+    <br>
+{{/issuedLottos}}
+<form action="/lottery-result" method="post">
+    지난 주 당첨 번호를 입력해주세요 : <input type="text" name="winningNumbers"><br>
+    보너스 번호를 입력해주세요 : <input type="text" name="bonusNumber"><br>
+    <input type="submit" value="추첨시작">
+</form>
+</body>
+</html>
