@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로또</title>
+    <style>
+      input[type="number"] {
+        width: 3em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>로또</h1>
+    <div>
+      <p>구입금액을 입력해 주세요.</p>
+      <div>
+        <input
+          type="number"
+          name="purchaseAmount"
+          id="purchaseAmount"
+          min="0"
+          value="0"
+          step="1000"
+          onchange="changePurchaseAmount(value)"
+          style="width: 5em;"
+        />
+        <label for="purchaseAmount">원</label>
+      </div>
+    </div>
+    <div>
+      <p>수동으로 구매할 로또 수를 입력해 주세요.</p>
+      <div>
+        <input
+          type="number"
+          name="manualPurchaseCount"
+          id="manualPurchaseCount"
+          min="0"
+          value="0"
+          onchange="manualLottoCount(value)"
+        />
+        <label for="manualPurchaseCount">개</label>
+      </div>
+    </div>
+    <div id="manualLottosDiv">
+      <p>수동으로 구매할 번호를 입력해 주세요.</p>
+      <ul>
+      </ul>
+    </div>
+    <div>
+      <p>지난 주 당첨 번호를 입력해 주세요.</p>
+
+      <div id="winningLotto">
+        <input type="number" class="winningLottoNum" min="1" max="45" />,
+        <input type="number" class="winningLottoNum" min="1" max="45" />,
+        <input type="number" class="winningLottoNum" min="1" max="45" />,
+        <input type="number" class="winningLottoNum" min="1" max="45" />,
+        <input type="number" class="winningLottoNum" min="1" max="45" />,
+        <input type="number" class="winningLottoNum" min="1" max="45" />
+      </div>
+    </div>
+    <div>
+      <p>보너스 볼을 입력해 주세요.</p>
+
+      <div id="bonusNum">
+        <input type="number" id="bonusLottoNum" name="bonusLottoNum" min="1" max="45" />
+        <input type="button" value="당첨번호 입력" onclick="queryToLottos()" />
+      </div>
+    </div>
+    <hr />
+    <div id="winningStat">
+    </div>
+    <hr />
+    <div id="previousResults">
+    </div>
+    <script defer type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script defer type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>

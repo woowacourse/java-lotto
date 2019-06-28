@@ -7,7 +7,7 @@ import java.util.Random;
 public class RandomLottoMaker extends LottoMaker {
     private Random RANDOM = new Random();
 
-    public RandomLottoMaker(LottoRule rule) {
+    public RandomLottoMaker(final LottoRule rule) {
         super(rule);
     }
 

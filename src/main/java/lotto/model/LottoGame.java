@@ -1,16 +1,14 @@
-package lotto.controller;
-
-import lotto.model.*;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class LottoGame {
+public class LottoGame {
     private static final String MESSAGE_LOW_MONEY = "금액이 모자랍니다.";
 
     private final LottoRule rule;
     private final LottoMaker maker;
-    private final List<Lotto> lottos;
+    private final Lottos lottos;
     private final WinningLotto winLotto;
     private final int autoPurchaseCount;
     private final WinStat stat;
@@ -24,11 +22,11 @@ class LottoGame {
         final int allPurchaseCount = getAllPurchaseCount(builder.purchaseAmount);
         autoPurchaseCount = getAutoPurchaseCount(allPurchaseCount);
 
-        lottos.addAll(autoLottos(autoPurchaseCount));
+        lottos.add(autoLottos(autoPurchaseCount));
         stat = new WinStat(lottos, winLotto, rule);
     }
 
-    public List<Lotto> getLottos() {
+    public Lottos getLottos() {
         return this.lottos;
     }
 
@@ -38,6 +36,10 @@ class LottoGame {
 
     public WinStat getStat() {
         return this.stat;
+    }
+
+    public int getPrice() {
+        return this.rule.getPrice();
     }
 
     public int getAllPurchaseCount() {
@@ -80,7 +82,7 @@ class LottoGame {
         private final LottoRule rule;
         private final LottoMaker maker;
         private int purchaseAmount;
-        private List<Lotto> lottos;
+        private Lottos lottos;
         private WinningLotto winLotto;
 
         public Builder(final LottoRule rule, final LottoMaker maker) {
@@ -93,7 +95,7 @@ class LottoGame {
             return this;
         }
 
-        public Builder purchasedLottos(final List<Lotto> lottos) {
+        public Builder purchasedLottos(final Lottos lottos) {
             this.lottos = lottos;
             return this;
         }

@@ -13,13 +13,17 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    int getMatchCount(Lotto winningNumbers) {
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    int getMatchCount(final Lotto winningNumbers) {
         return (int) numbers.stream() // count()의 결과는 long이므로 주의
-                .filter(i -> winningNumbers.hasNumber(i))
+                .filter(winningNumbers::hasNumber)
                 .count();
     }
 
-    boolean hasNumber(int number) {
+    boolean hasNumber(final int number) {
         return numbers.contains(number);
     }
 
