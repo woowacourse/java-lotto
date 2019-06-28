@@ -64,14 +64,19 @@ class ConsoleLottoGame {
             final int allPurchaseCount = input.allPurchaseCount();
             final int manualPurchaseCount = ConsoleInput.singleInt(MESSAGE_MANUAL_COUNT);
             final int autoPurchaseCount = allPurchaseCount - manualPurchaseCount;
+            final int allPurchaseAmount = allPurchaseCount * RULE.getPrice();
             final Lottos lottos = new Lottos(allPurchaseCount, manualPurchaseCount);
             lottos.add(inputManyLottos(manualPurchaseCount));
             lottos.add(MAKER.getAutoLottos(autoPurchaseCount));
             ConsoleOutput.buyCount(manualPurchaseCount, autoPurchaseCount);
             ConsoleOutput.lottoList(lottos);
             final WinningLotto winLotto = inputWinningLotto();
-            final WinStat stat = new WinStat(lottos, winLotto, RULE);
-            ConsoleOutput.statString(stat);
+            final LottoGame game = new LottoGame.Builder(RULE, MAKER)
+                    .purchaseAmount(allPurchaseAmount)
+                    .purchasedLottos(lottos)
+                    .winLotto(winLotto)
+                    .build();
+            ConsoleOutput.statString(game.getStat());
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
