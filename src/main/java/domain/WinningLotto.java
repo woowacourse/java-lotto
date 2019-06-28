@@ -34,4 +34,13 @@ public class WinningLotto {
     public int hashCode() {
         return Objects.hash(lotto, bonusNumber);
     }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString();
+    }
 }

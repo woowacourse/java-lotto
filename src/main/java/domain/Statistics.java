@@ -30,6 +30,9 @@ public class Statistics {
             Money winningMoneyOfRank = rank.getWinningMoney();
             amountOfTotalWinningMoney += countsOf(rank) * winningMoneyOfRank.getAmount();
         }
+        if (purchasedAmount.getAmount() == 0) {
+            return 0;
+        }
         return amountOfTotalWinningMoney / (double) purchasedAmount.getAmount();
     }
 

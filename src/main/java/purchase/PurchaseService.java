@@ -1,9 +1,13 @@
 package purchase;
 
 import domain.IssuedLottos;
+import domain.Lotto;
 import domain.LottoFactory;
+import domain.Statistics;
 import domain.money.Money;
+import repository.IssuedLottoDao;
 import repository.LottoInmemoryRepository;
+import repository.StatisticsDao;
 import spark.Request;
 
 import java.util.*;
@@ -11,13 +15,24 @@ import java.util.stream.Collectors;
 
 class PurchaseService {
     static IssuedLottos autoissueLottosWorthOf(Money purchaseAmount) {
+        IssuedLottoDao issuedLottoDao = IssuedLottoDao.getInsatnce();
+        StatisticsDao statisticsDao = StatisticsDao.getInstance();
         IssuedLottos issuedLottos = LottoFactory.autoIssueLottoWorthOf(purchaseAmount);
 
-        LottoInmemoryRepository.add(issuedLottos);
+        int trial = statisticsDao.fetchLastTrial() + 1;
+        for (Lotto lotto : issuedLottos.getLottos()) {
+            System.out.println("===================================");
+            System.out.println(lotto);
+            issuedLottoDao.add(lotto, trial);
+        }
         return issuedLottos;
     }
 
     static IssuedLottos manualIssueLottosBy(Request req) {
+        IssuedLottoDao issuedLottoDao = IssuedLottoDao.getInsatnce();
+        StatisticsDao statisticsDao = StatisticsDao.getInstance();
+        int trial = statisticsDao.fetchLastTrial() + 1;
+
         IssuedLottos manualIssuedLottos = IssuedLottos.of(new ArrayList<>());
         List<String> groupOfSixNumbers = getManualNumbersFrom(req);
 
@@ -26,7 +41,9 @@ class PurchaseService {
             manualIssuedLottos.add(LottoFactory.manualIssueLottoBy(manualNumbers));
         }
 
-        LottoInmemoryRepository.add(manualIssuedLottos);
+        for (Lotto lotto : manualIssuedLottos.getLottos()) {
+            issuedLottoDao.add(lotto, trial);
+        }
         return manualIssuedLottos;
     }
 
