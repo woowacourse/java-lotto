@@ -7,6 +7,7 @@ import java.util.List;
 
 public class WinningLotto {
     private final LottoTicket lottoTicket;
+
     private final LottoNumber bonusNumber;
 
     private WinningLotto(final List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
@@ -27,5 +28,13 @@ public class WinningLotto {
 
     public Rank getRank(LottoTicket lottoTicket) {
         return Rank.valueOf(this.lottoTicket.countSameNumber(lottoTicket), lottoTicket.isContainsBonusNumber(bonusNumber));
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
+    public LottoTicket getLottoTicket() {
+        return lottoTicket;
     }
 }
