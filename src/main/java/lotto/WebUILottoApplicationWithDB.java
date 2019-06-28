@@ -5,7 +5,6 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.dto.GameDTO;
 import lotto.view.WebInputParser;
 import lotto.view.WebOutputView;
 import spark.ModelAndView;
@@ -19,7 +18,6 @@ import static spark.Spark.*;
 public class WebUILottoApplicationWithDB {
     public static void main(String[] args) {
         staticFiles.location("/templates");
-        GameDTO gameDto = new GameDTO();
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -30,7 +28,7 @@ public class WebUILottoApplicationWithDB {
             Map<String, Object> model = new HashMap<>();
             try {
                 Money money = WebInputParser.getMoney(req.queryParams("money"));
-                gameDto.setMoney(money);
+                req.session().attribute("money", money);
                 model.put("money", money);
             } catch (Exception e) {
                 model.put("error", e.getMessage());
@@ -43,16 +41,16 @@ public class WebUILottoApplicationWithDB {
         post("/manual", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             try {
-                int numberOfManualLotto = WebInputParser.getNumberOfManualLotto(gameDto.getMoney(), req.queryParams("number"));
-                gameDto.setNumberOfManualLotto(numberOfManualLotto);
+                int numberOfManualLotto = WebInputParser.getNumberOfManualLotto(req.session().attribute("money"),
+                        req.queryParams("number"));
+                req.session().attribute("numberOfManualLotto", numberOfManualLotto);
                 if (numberOfManualLotto == 0) {
-                    LottoTickets lottoTickets = WebInputParser.getLottoTickets(gameDto.getMoney(), 0, null);
-                    gameDto.setLottoTickets(lottoTickets);
+                    LottoTickets lottoTickets = WebInputParser.getLottoTickets(req.session().attribute("money"), 0, null);
+                    req.session().attribute("lottoTickets", lottoTickets);
                     model.put("lottoTickets", WebOutputView.printLottoTicketsAsBall(lottoTickets));
 
                     return render(model, "winning.html");
                 }
-
                 model.put("number", numberOfManualLotto);
             } catch (Exception e) {
                 model.put("error", e.getMessage());
@@ -65,8 +63,9 @@ public class WebUILottoApplicationWithDB {
         post("/winning", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             try {
-                LottoTickets lottoTickets = WebInputParser.getLottoTickets(gameDto.getMoney(), gameDto.getNumberOfManualLotto(), req.queryParams("manual"));
-                gameDto.setLottoTickets(lottoTickets);
+                LottoTickets lottoTickets = WebInputParser.getLottoTickets(req.session().attribute("money"),
+                        req.session().attribute("numberOfManualLotto"), req.queryParams("manual"));
+                req.session().attribute("lottoTickets", lottoTickets);
                 model.put("lottoTickets", WebOutputView.printLottoTicketsAsBall(lottoTickets));
             } catch (Exception e) {
                 model.put("error", e.getMessage());
@@ -80,7 +79,7 @@ public class WebUILottoApplicationWithDB {
             Map<String, Object> model = new HashMap<>();
             try {
                 WinningLotto winningLotto = WebInputParser.getWinningLotto(req.queryParams("winning"), req.queryParams("bonus"));
-                gameDto.setWinningLotto(winningLotto);
+                req.session().attribute("winningLotto", winningLotto);
                 model.put("winningLotto", WebOutputView.printWinningLottoAsBall(winningLotto));
             } catch (Exception e) {
                 model.put("error", e.getMessage());
@@ -93,13 +92,12 @@ public class WebUILottoApplicationWithDB {
         post("/result", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             try {
-                LottoResult lottoResult = gameDto.getLottoTickets().getLottoResult(gameDto.getWinningLotto());
-                gameDto.setLottoResult(lottoResult);
+                LottoResult lottoResult = ((LottoTickets) req.session().attribute("lottoTickets"))
+                        .getLottoResult(req.session().attribute("winningLotto"));
+                req.session().attribute("lottoResult", lottoResult);
                 model.put("result", lottoResult);
 
-                GameDAO gameDao = new GameDAO();
-                gameDto.setRound(RoundDAO.getInstance().getRound());
-                gameDao.addAll(gameDto);
+                GameDAO.addAll(req.session());
             } catch (Exception e) {
                 model.put("error", e.getMessage());
                 return render(model, "error.html");
