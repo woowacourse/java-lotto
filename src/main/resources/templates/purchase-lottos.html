@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>구매 로또</title>
+</head>
+<body>
+<h1>구매 로또</h1>
+    {{#lottos}}
+        {{#lottoNumbers}} {{number}} {{/lottoNumbers}} <br>
+    {{/lottos}}
+    <br><br>
+    <button onclick="location.href='winningInfo.html'" type="button">당첨 정보 입력하기</button>
+    <form action="/" method="post">
+        <input type="submit" value="홈으로">
+    </form>
+</body>
+</html>

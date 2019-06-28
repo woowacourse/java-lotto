@@ -1,5 +1,7 @@
 package lotto.model.object;
 
+import lotto.model.ManualPurchaseNumber;
+import lotto.model.Payment;
 import lotto.model.exception.InvalidManualPurchaseNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

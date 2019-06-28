@@ -1,4 +1,4 @@
-package lotto.model.object;
+package lotto.model;
 
 import lotto.model.exception.LottoNumberDuplicationException;
 
@@ -58,5 +58,14 @@ public class Lotto {
                         has = bonusBall.IsSame(lottoNumber) || has;
                 }
                 return has;
+        }
+
+        @Override
+        public String toString() {
+                String str = "";
+                for (LottoNumber lottoNumber : lottoNumbers) {
+                        str += lottoNumber.getNumber() + ", ";
+                }
+                return str.substring(0, str.length() - 2);
         }
 }

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회차별 결과</title>
+</head>
+    <body>
+        <button onclick="location.href='index.html'" type="button">홈으로</button><br>
+        {{#ids}}
+            <a href="eachResult?id={{this}}">{{this}} 회차 결과</a> <br>
+        {{/ids}}
+    </body>
+</html>

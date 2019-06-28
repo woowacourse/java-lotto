@@ -1,4 +1,4 @@
-package lotto.model.object;
+package lotto.model;
 
 public class BonusBall {
         private final LottoNumber lottoNumber;
@@ -9,5 +9,9 @@ public class BonusBall {
 
         public boolean IsSame(final LottoNumber lottoNumber){
                 return this.lottoNumber == lottoNumber;
+        }
+
+        public LottoNumber getLottoNumber() {
+                return lottoNumber;
         }
 }

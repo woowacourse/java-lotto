@@ -1,6 +1,9 @@
 package lotto.model.object;
 
+import lotto.model.BonusBall;
+import lotto.model.Lotto;
 import lotto.model.LottoRank;
+import lotto.model.WinningInfo;
 import lotto.model.exception.WinningLottoBonusBallDuplicationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
