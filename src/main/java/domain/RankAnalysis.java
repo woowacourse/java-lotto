@@ -1,5 +1,9 @@
 package domain;
 
+import dto.RankAnalysisDTO;
+import dto.RankResult;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -38,6 +42,16 @@ public class RankAnalysis {
         }
 
         return (totalUsedCnt == 0) ? 0.0 : totalWinningMoney / (double) (totalUsedCnt * Lotto.PRICE.toInt());
+    }
+
+    public RankAnalysisDTO toDTO() {
+        List<RankResult> results = new ArrayList<>();
+        long reward = 0;
+        for (Rank rank : ANALYZED_RANKS) {
+            results.add(RankResult.of(rank, count(rank)));
+            reward += count(rank) * (long) rank.getWinningMoney();
+        }
+        return RankAnalysisDTO.of(results, reward, getEarningRate());
     }
 
     @Override

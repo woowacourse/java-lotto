@@ -1,5 +1,6 @@
 package domain;
 
+import lottoGame.money.Money;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

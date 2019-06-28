@@ -1,12 +1,10 @@
-package domain;
+package lottoGame.money;
 
-import lottoGame.money.Money;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MoneyTest {
-
     @Test
     void lessThan_() {
         int price = 100;

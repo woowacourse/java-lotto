@@ -1,5 +1,7 @@
 package domain;
 
+import lottoGame.money.Money;
+
 import java.util.ArrayList;
 import java.util.List;
 
