@@ -1,0 +1,92 @@
+<html lang="ko">
+<head>
+    <title>Lotto</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="Invest project" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="./styles/bootstrap4/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="./styles/main_styles.css" rel="stylesheet" type="text/css">
+    <link href="./styles/responsive.css" rel="stylesheet" type="text/css">
+    <link href="./styles/main_styles.css" rel="stylesheet">
+</head>
+<body>
+<div class="intro">
+    <div class="intro_title_container">
+        <h2 class="intro_title">{{round}}회차 로또 구매</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 intro_content">
+
+                <form action="/winningLotto" id="myForm" method="post" name="myForm">
+                    <div class="intro_title_container">
+                        <h2 class="intro_title">구입 금액</h2>
+                    </div>
+                    <div class="intro_text">
+                        <p>로또 한장의 가격은 1000원 입니다.
+                    </div>
+                    <div class="col-md-12">
+                        <input class="input_nums" name="purchaseAmount" required="required" type="text">
+                    </div>
+
+                    <div class="intro_title_container">
+                        <h2 class="intro_title">수동 로또 번호</h2>
+                    </div>
+                    <div class="intro_text">
+                        <p>쉼표(,)로 구분하는 6개의 숫자를 입력하세요</p>
+                    </div>
+                    <div class="col-md-12 button_container">
+                        <input class="add_button" onclick="add_item()" type="button" value="+">
+                    </div>
+                    <div id="field"></div>
+                    <div class="col-md-12">
+                        <button class="purchase_button trans_200" id="purchase_btn1" onclick="go_submit()" type="submit"
+                                value="Submit">구매
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./js/jquery-3.2.1.min.js"></script>
+<script src="./styles/bootstrap4/popper.js"></script>
+<script src="./styles/bootstrap4/bootstrap.min.js"></script>
+<script src="./plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="./plugins/easing/easing.js"></script>
+<script src="./plugins/parallax-js-master/parallax.min.js"></script>
+<script src="./js/custom.js"></script>
+
+<script type="text/javascript">
+    <!--
+    function add_item() {
+        // pre_set 에 있는 내용을 읽어와서 처리..
+        var div = document.createElement('div');
+        div.setAttribute("class", "col-md-12 manual_nums");
+        div.innerHTML = document.getElementById('manual-numbers-template').innerText;
+        document.getElementById('field').appendChild(div);
+    }
+
+    function remove_item(obj) {
+        // obj.parentNode 를 이용하여 삭제
+        document.getElementById('field').removeChild(obj.parentNode);
+    }
+
+    function go_submit() {
+        $("#myForm").submit(function (e) {
+            console.log(e);
+        });
+        console.log("success")
+    }
+
+    //-->
+</script>
+<script id="manual-numbers-template" type="rv-template">
+    <input type="text" class="input_manual_nums" required="required" name="manualNums">
+    <input type="button" class="delete_button" value="-" onclick="remove_item(this)">
+</script>
+</body>
+</html>

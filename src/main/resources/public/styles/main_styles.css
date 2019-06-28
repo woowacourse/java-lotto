@@ -1,0 +1,417 @@
+@charset "utf-8";
+/* CSS Document */
+/***********
+1. Fonts
+***********/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+
+@font-face {
+    font-family: 'gill';
+    src: url('../fonts/gil.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'gill';
+    src: url('../fonts/gil_b.ttf') format('truetype');
+    font-weight: bold;
+}
+
+/*********************************
+2. Body and some general stuff
+*********************************/
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+    text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    background: #FFFFFF;
+    /*color: #a5a5a5;*/
+}
+
+div {
+    display: block;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+    margin-bottom: 0px;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.92;
+    font-weight: 400;
+    /*color: #838383;*/
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+    text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+}
+
+p a {
+    display: inline;
+    position: relative;
+    color: inherit;
+    border-bottom: solid 1px #ffa07f;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+
+a, a:hover, a:visited, a:active, a:link {
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+    text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+}
+
+p a:active {
+    position: relative;
+    color: #FF6347;
+}
+
+p a:hover {
+    color: #FFFFFF;
+    background: #ffa07f;
+}
+
+p a:hover::after {
+    opacity: 0.2;
+}
+
+::selection {
+
+}
+
+p::selection {
+
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+    text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+}
+
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection {
+
+}
+
+.form-control {
+    color: #db5246;
+}
+
+section {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.clear {
+    clear: both;
+}
+
+.clearfix::before, .clearfix::after {
+    content: "";
+    display: table;
+}
+
+.clearfix::after {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.float_left {
+    float: left;
+}
+
+.float_right {
+    float: right;
+}
+
+.trans_200 {
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+
+.trans_300 {
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+
+.trans_400 {
+    -webkit-transition: all 400ms ease;
+    -moz-transition: all 400ms ease;
+    -ms-transition: all 400ms ease;
+    -o-transition: all 400ms ease;
+    transition: all 400ms ease;
+}
+
+.trans_500 {
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+}
+
+.fill_height {
+    height: 100%;
+}
+
+/*.super_container*/
+/*{*/
+/*	width: 100%;*/
+/*	overflow: hidden;*/
+/*}*/
+.prlx_parent {
+    overflow: hidden;
+}
+
+.prlx {
+    height: 130% !important;
+}
+
+.parallax-window {
+    min-height: 400px;
+    background: transparent;
+}
+
+.nopadding {
+    padding: 0px !important;
+}
+
+/*********************************
+6. Intro
+*********************************/
+
+.intro {
+    padding-top: 60px;
+    padding-bottom: 110px;
+    background: #f5f9fa;
+}
+
+.intro_image {
+    max-width: 100%;
+    /*height: 394px;*/
+    margin-right: 66px;
+}
+
+.intro_image img {
+    max-width: 100%;
+}
+
+.intro_title {
+    font-family: 'gill', sans-serif;
+    color: #212121;
+    margin-top: -1px;
+    padding-top: 12px;
+
+}
+
+.intro_subtitle {
+    font-family: 'gill', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #a5a5a5;
+    padding-left: 6px;
+    padding-top: 12px;
+}
+
+.intro_subtitle::after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 68px;
+    height: 3px;
+    background: #ffa800;
+    content: '';
+}
+
+.intro_text {
+    margin-top: 15px;
+    padding-left: 6px;
+}
+
+.intro_button {
+    margin-top: 39px;
+}
+
+/*-----------contact--------------*/
+
+.input_item {
+    width: 80%;
+    height: 47px;
+    border: solid 2px #b5b5b5;
+    margin-bottom: 40px;
+    padding-left: 27px;
+    outline: none;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+
+.purchase_button {
+    display: block;
+    position: relative;
+    width: 30%;
+    height: 47px;
+    background: #ffa800;
+    line-height: 47px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.input_nums {
+    width: 100%;
+    height: 47px;
+    border: solid 2px #b5b5b5;
+    margin-bottom: 40px;
+    /*margin-right: 3%;*/
+    padding-left: 27px;
+    outline: none;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+
+.delete_button {
+    /*display: block;*/
+    position: relative;
+    width: 12%;
+    height: 47px;
+    top: 5px;
+    /*padding-right: 15px;*/
+    /*padding-left: 15px;*/
+    background: #ffa800;
+    line-height: 47px;
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.add_button {
+    display: block;
+    position: relative;
+    width: 12%;
+    height: 47px;
+    margin-bottom: 18px;
+    background: #ffa800;
+    line-height: 47px;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.manual_nums {
+    margin-bottom: 25px;
+}
+
+.lotto_static_container {
+    margin-top: 16px;
+    margin-botton: 25px;
+}
+
+.lotto_number {
+    margin-right: 10px
+}
+
+.lotto_result_table {
+    align-self: center;
+    margin-bottom: 30px;
+}
+
+.lotto_info {
+    margin-bottom: 50px;
+}
+
+.input_manual_nums {
+    width: 80%;
+    height: 47px;
+    border: solid 2px #b5b5b5;
+    margin-bottom: 10px;
+    margin-right: 5%;
+    padding-left: 27px;
+    outline: none;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+
+.row {
+    justify-content: center;
+}

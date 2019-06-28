@@ -26,6 +26,10 @@ public class LottoTicket implements Iterable<LottoNumber> {
         return lottoNumbers.contains(number);
     }
 
+    public LottoNumberGroup getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
