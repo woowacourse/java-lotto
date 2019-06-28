@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.LottoResultDTO;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -10,23 +12,31 @@ public class LottoResult {
 
     private Map<Rank, Integer> lottoResult;
 
-    LottoResult() {
+    public LottoResult() {
         lottoResult = new HashMap<>();
         for (Rank rank : Rank.values()) {
             lottoResult.put(rank, ZERO);
         }
     }
 
-    void add(Rank rank) {
+    public void add(Rank rank) {
         lottoResult.put(rank, lottoResult.get(rank) + 1);
     }
 
+    public void add(Rank rank, int value) {
+        lottoResult.put(rank, value);
+    }
+
     public double getRateOfReturn() {
+        return (double) getWinningMoney() / (getNumberOfLotto() * MONEY_PER_LOTTO) * 100;
+    }
+
+    public long getWinningMoney() {
         long winningMoney = 0;
         for (Rank rank : lottoResult.keySet()) {
             winningMoney += (long) rank.getWinningMoney() * lottoResult.get(rank);
         }
-        return (double) winningMoney / (getNumberOfLotto() * MONEY_PER_LOTTO);
+        return winningMoney;
     }
 
     private int getNumberOfLotto() {
@@ -39,6 +49,38 @@ public class LottoResult {
 
     public int getResultByRank(Rank rank) {
         return lottoResult.get(rank);
+    }
+
+    public int getFirst() {
+        return lottoResult.get(Rank.FIRST);
+    }
+
+    public int getSecond() {
+        return lottoResult.get(Rank.SECOND);
+    }
+
+    public int getThird() {
+        return lottoResult.get(Rank.THIRD);
+    }
+
+    public int getFourth() {
+        return lottoResult.get(Rank.FOURTH);
+    }
+
+    public int getFifth() {
+        return lottoResult.get(Rank.FIFTH);
+    }
+
+    public LottoResultDTO toDTO(int round) {
+        LottoResultDTO lottoResultDto = new LottoResultDTO();
+        lottoResultDto.setRound(round);
+        lottoResultDto.setFirst(lottoResult.get(Rank.FIRST));
+        lottoResultDto.setSecond(lottoResult.get(Rank.SECOND));
+        lottoResultDto.setThird(lottoResult.get(Rank.THIRD));
+        lottoResultDto.setFourth(lottoResult.get(Rank.FOURTH));
+        lottoResultDto.setFifth(lottoResult.get(Rank.FIFTH));
+        lottoResultDto.setMiss(lottoResult.get(Rank.MISS));
+        return lottoResultDto;
     }
 
     @Override

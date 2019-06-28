@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500" rel="stylesheet">
+
+    <title>로또</title>
+</head>
+<body>
+<div id="container">
+    <h1>로또 결과</h1>
+
+    <p>
+        {{#result}}
+        1등🎉🎉 : {{first}}개<br>
+        2등🎉 : {{second}}개<br>
+        3등 : {{third}}개<br>
+        4등 : {{fourth}}개<br>
+        5등 : {{fifth}}개<br>
+        <br>
+        총 상금💸 : {{winningMoney}}원<br>
+        수익률 : {{rateOfReturn}}%
+        {{/result}}
+    </p>
+
+    <a href="/"><input type="submit" value="처음으로"></a>
+    <a href="/all?round=1"><input type="submit" value="모든 결과"></a>
+</div>
+</body>
+</html>

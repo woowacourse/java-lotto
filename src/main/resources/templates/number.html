@@ -14,11 +14,12 @@
     <h1>로또</h1>
 
     <p>
-        로또를 구입할 금액을 입력해 주세요.
+        입력하신 금액은 {{money.money}}원입니다.<br>
+        수동 구입할 로또 개수를 입력해 주세요.
     </p>
 
-    <form action="/number" method="POST">
-        <input name="money" type="text"><br>
+    <form action="/manual" method="POST">
+        <input name="number" type="text"><br>
         <input type="submit" value="다음">
     </form>
 </div>

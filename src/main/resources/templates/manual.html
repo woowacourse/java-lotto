@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500" rel="stylesheet">
+
+    <title>로또</title>
+</head>
+<body>
+<div id="container">
+    <h1>로또</h1>
+
+    <p>
+        {{number}}개의 수동 로또를 구입합니다.<br>
+        수동 구입할 로또 번호를 입력해 주세요.<br>
+        중복되지 않는 로또 숫자 6개를 입력하셔야 하며, 각 숫자는 1 이상 45 이하만 가능하고 쉼표(,)로 구분합니다.<br>
+        또한 각 로또는 줄을 바꾸어 구분해 주세요.<br><br>
+        입력 예시:<br>
+        1,2,13,24,35,40<br>
+        11,13,20,25,38,45<br>
+        8,15,22,34,37,41
+    </p>
+
+    <form action="/winning" method="POST">
+        <textarea name="manual"></textarea>
+        <input type="submit" value="다음">
+    </form>
+</div>
+</body>
+</html>

@@ -14,11 +14,14 @@
     <h1>로또</h1>
 
     <p>
-        로또를 구입할 금액을 입력해 주세요.
+        발행된 로또는 다음과 같습니다.<br><br>
+        {{{lottoTickets}}}<br>
+        지난주 당첨 번호 6개와 보너스 볼을 같은 방식으로 입력해 주세요.
     </p>
 
-    <form action="/number" method="POST">
-        <input name="money" type="text"><br>
+    <form action="/check" method="POST">
+        <input name="winning" type="text" placeholder="당첨 번호"><br>
+        <input name="bonus" type="text" placeholder="보너스 볼"><br>
         <input type="submit" value="다음">
     </form>
 </div>

@@ -11,16 +11,22 @@
 </head>
 <body>
 <div id="container">
-    <h1>로또</h1>
+    <h1>로또 결과</h1>
 
     <p>
-        로또를 구입할 금액을 입력해 주세요.
+        {{#result}}
+        1등🎉🎉 : {{first}}개<br>
+        2등🎉 : {{second}}개<br>
+        3등 : {{third}}개<br>
+        4등 : {{fourth}}개<br>
+        5등 : {{fifth}}개<br>
+        <br>
+        총 상금💸 : {{winningMoney}}원<br>
+        수익률 : {{rateOfReturn}}%
+        {{/result}}
     </p>
 
-    <form action="/number" method="POST">
-        <input name="money" type="text"><br>
-        <input type="submit" value="다음">
-    </form>
+    <a href="/"><input type="submit" value="처음으로"></a>
 </div>
 </body>
 </html>

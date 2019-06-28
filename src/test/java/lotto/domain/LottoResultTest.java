@@ -11,6 +11,6 @@ public class LottoResultTest {
         lottoResult.add(Rank.FIFTH);
         lottoResult.add(Rank.FIFTH);
 
-        assertThat(lottoResult.getRateOfReturn()).isEqualTo(5);
+        assertThat(lottoResult.getRateOfReturn()).isEqualTo(500);
     }
 }

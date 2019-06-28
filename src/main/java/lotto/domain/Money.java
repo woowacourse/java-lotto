@@ -21,7 +21,20 @@ public class Money {
         }
     }
 
+    public void validateNumberOfManualLotto(int numberOfManualLotto) {
+        if (numberOfManualLotto < 0) {
+            throw new IllegalArgumentException("0 이상의 숫자만 입력할 수 있습니다.");
+        }
+        if (numberOfManualLotto > getNumberOfLotto()) {
+            throw new IllegalArgumentException("구입 금액을 초과하는 숫자입니다.");
+        }
+    }
+
     public int getNumberOfLotto() {
         return money / MONEY_PER_LOTTO;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }

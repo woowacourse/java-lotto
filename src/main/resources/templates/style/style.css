@@ -1,0 +1,124 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: "Source Han Sans KR";
+    font-weight: 500;
+    src: local("※"), url(../font/Source_Han_Sans_KR_500.woff) format("woff")
+}
+
+@font-face {
+    font-family: "Source Han Sans KR";
+    font-weight: 600;
+    src: local("※"), url(../font/Source_Han_Sans_KR_600.woff) format("woff")
+}
+
+@font-face {
+    font-family: "Source Han Sans KR";
+    font-weight: 700;
+    src: local("※"), url(../font/Source_Han_Sans_KR_700.woff) format("woff")
+}
+
+body {
+	font-family: 'Montserrat', "Source Han Sans KR";
+	font-size: 1em;
+	font-weight: 600;
+	line-height: 1.6;
+}
+
+h1 {
+	font-size: 3.5em;
+	margin-bottom: 30px;
+}
+
+h2 {
+	font-size: 2em;
+	font-weight: 600;
+}
+
+p {
+	font-size: 1.5em;
+	margin-bottom: 30px;
+}
+
+#container {
+	width: 70%;
+	max-width: 900px;
+	margin: 20px auto;
+}
+
+.all {
+	text-align: center;
+}
+
+.ball {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	margin: 5px;
+	line-height: 50px;
+	font-size: 24px;
+	font-weight: 500;
+	color: #fff;
+	border-radius: 100%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.ball1 {
+	background: #fbc400;
+}
+.ball2 {
+	background: #69c8f2;
+}
+.ball3 {
+	background: #ff7272;
+}
+.ball4 {
+	background: #aaa;
+}
+.ball5 {
+	background: #b0d840;
+}
+
+input, textarea {
+	font-family: 'Montserrat', "Source Han Sans KR";
+	font-size: 2.5em;
+	font-weight: 500;
+	width: 100%;
+	border: 0;
+	border-radius: 20px;
+	background-color: #e1e1e1;
+	padding: 10px;
+	margin: 10px 0;
+	text-align: center;
+}
+
+textarea {
+	min-height: 200px;
+}
+
+input[type=submit] {
+	font-size: 1em;
+	color: #fff;
+	width: 100px;
+	height: 50px;
+	border-radius: 10px;
+	background-color: red;
+}
+
+input.round {
+	height: 40px;
+	background-color: #c658d8;
+}
+
+select {
+	width: 100px;
+	font-family: 'Montserrat', "Source Han Sans KR";
+	font-size: 1em;
+	font-weight: 500;
+	padding: 5px;
+	line-height: 1.6;
+}
+
+::selection { background: #ffaeb5; color: #333; }
+::-moz-selection { background: #ffaeb5; color: #333; }

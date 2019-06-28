@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500" rel="stylesheet">
+
+    <title>로또</title>
+</head>
+<body>
+<div id="container" class="all">
+    <h1>로또 결과 🤗</h1>
+
+    <form action="/all" method="GET">
+        {{{select}}}
+        <input type="submit" class="round" value="회차 선택">
+    </form>
+
+    <h2>당첨 번호</h2>
+    <p>
+        {{{winningLotto}}}
+    </p>
+
+    <h2>구입 번호</h2>
+    <p>
+        {{{lottos}}}
+    </p>
+
+    <h2>해당 회차 결과</h2>
+    <p>
+        {{#result}}
+        1등🎉🎉 : {{first}}개<br>
+        2등🎉 : {{second}}개<br>
+        3등 : {{third}}개<br>
+        4등 : {{fourth}}개<br>
+        5등 : {{fifth}}개<br>
+        <br>
+        총 상금💸 : {{winningMoney}}원<br>
+        수익률 : {{rateOfReturn}}%
+        {{/result}}
+    </p>
+
+    <a href="/"><input type="submit" value="처음으로"></a>
+
+</div>
+</body>
+</html>
