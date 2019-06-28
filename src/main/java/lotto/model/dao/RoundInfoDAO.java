@@ -44,7 +44,7 @@ public class RoundInfoDAO {
                         if (rs.next()) {
                                 return rs.getInt(1);
                         }
-                        return null;
+                        return new IllegalArgumentException("존재 하지 않는 id");
                 };
 
                 JdbcTemplate template = new JdbcTemplate();
@@ -79,7 +79,7 @@ public class RoundInfoDAO {
                                 BonusBall bonusBall = new BonusBall(rs.getInt("bonusball"));
                                 return new WinningInfo(winningLotto, bonusBall);
                         }
-                        return null;
+                        return new IllegalArgumentException("존재 하지 않는 id");
                 };
 
                 JdbcTemplate template = new JdbcTemplate();

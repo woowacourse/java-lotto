@@ -62,7 +62,7 @@ public class ResultDAO {
                                 }};
                                 return new ResultDTO(result, revenue, yield);
                         }
-                        return null;
+                        return new IllegalArgumentException("존재하지 않는 결과");
                 };
                 JdbcTemplate template = new JdbcTemplate();
                 return (ResultDTO)template.executeQuery(SELECT_RESULT_QUERY, pss, rm);

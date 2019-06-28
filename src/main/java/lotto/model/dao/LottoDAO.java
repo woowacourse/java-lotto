@@ -34,6 +34,9 @@ public class LottoDAO {
                         while(rs.next()){
                                 lottos.add(rs.getString("number"));
                         }
+                        if (lottos.size() == 0) {
+                                return new IllegalArgumentException("존재 하지 않는 id");
+                        }
                         return lottos;
                 };
 
