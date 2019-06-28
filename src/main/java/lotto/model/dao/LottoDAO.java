@@ -1,11 +1,5 @@
 package lotto.model.dao;
 
-import lotto.util.DatabaseUtil;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,34 +18,26 @@ public class LottoDAO {
         }
 
         public void insertLotto(int roundId, String lottoNumbers) {
-                JdbcTemplate template = new JdbcTemplate() {
-                        @Override
-                        public void setParameters(PreparedStatement pstmt) throws SQLException {
-                                pstmt.setInt(1, roundId);
-                                pstmt.setString(2, lottoNumbers);
-                        }
+                PreparedStatementSetter pss = pstmt -> {
+                        pstmt.setInt(1, roundId);
+                        pstmt.setString(2, lottoNumbers);
                 };
-                template.executeUpdate(INSERT_LOTTO_QUERRY);
+                JdbcTemplate template = new JdbcTemplate();
+                template.executeUpdate(INSERT_LOTTO_QUERRY, pss);
         }
 
         public List<String> selectLottos(int id) {
-                List<String> lottos = new ArrayList<>();
-                try(Connection connection = DatabaseUtil.getConnection();
-                    PreparedStatement psmt = createSelectLottosQuery(connection, id);
-                    ResultSet rs = psmt.executeQuery()) {
+                PreparedStatementSetter pss = pstmt -> pstmt.setInt(1, id);
+
+                RowMapper rm = rs -> {
+                        List<String> lottos = new ArrayList<>();
                         while(rs.next()){
                                 lottos.add(rs.getString("number"));
                         }
-                }catch (SQLException e){
-                        System.out.println(e.getMessage());
+                        return lottos;
+                };
 
-                }
-                return lottos;
-        }
-
-        private PreparedStatement createSelectLottosQuery(Connection connection, int id) throws SQLException {
-                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOTTOS_QUERY);
-                preparedStatement.setInt(1, id);
-                return preparedStatement;
+                JdbcTemplate template = new JdbcTemplate();
+                return (List<String>)template.executeQuery(SELECT_LOTTOS_QUERY, pss, rm);
         }
 }
