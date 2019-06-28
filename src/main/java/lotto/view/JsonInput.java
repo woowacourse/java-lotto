@@ -3,7 +3,6 @@ package lotto.view;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import lotto.controller.LottoGame;
 import lotto.model.*;
 
 import java.util.ArrayList;

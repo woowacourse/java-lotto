@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.controller.LottoGame;
+import lotto.model.LottoGame;
 import lotto.view.JsonInput;
 import lotto.view.JsonOutput;
 

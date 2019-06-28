@@ -3,11 +3,7 @@ package lotto.view;
 import lotto.PreviousLottoDTO;
 import lotto.PreviousPurchaseDTO;
 import lotto.PreviousWinLottoResultDTO;
-import lotto.controller.LottoGame;
-import lotto.model.Lotto;
-import lotto.model.Lottos;
-import lotto.model.Rank;
-import lotto.model.WinStat;
+import lotto.model.*;
 
 import java.util.*;
 import java.util.function.Function;

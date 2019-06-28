@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.controller.LottoGame;
 import lotto.model.Lotto;
+import lotto.model.LottoGame;
 import lotto.model.Rank;
 import lotto.model.WinningLotto;
 
@@ -220,7 +220,6 @@ class LottoDAO {
         final ResultSet set = statement.executeQuery();
         while (set.next()) {
             final PreviousLottoDTO lottoNums = new PreviousLottoDTO();
-            int first = set.getInt("first");
             lottoNums.addNumber(set.getInt("first"));
             lottoNums.addNumber(set.getInt("second"));
             lottoNums.addNumber(set.getInt("third"));
