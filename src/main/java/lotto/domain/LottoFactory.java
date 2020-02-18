@@ -8,7 +8,8 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
     private static final int TICKET_PRICE = 1000;
-    private static List<LottoBall> balls = makeBalls();
+    private static final List<LottoBall> balls = makeBalls();
+    private static final int BALL_COUNT = 6;
 
     private static List<LottoBall> makeBalls() {
         return IntStream.rangeClosed(1, 45)
@@ -30,7 +31,9 @@ public class LottoFactory {
     private static LottoTicket getTicket() {
         Collections.shuffle(balls);
         List<LottoBall> lottoBalls = new ArrayList<>();
-
-        return null;
+        for (int i = 0; i < BALL_COUNT; i++) {
+            lottoBalls.add(balls.get((i)));
+        }
+        return new LottoTicket(lottoBalls);
     }
 }
