@@ -26,4 +26,9 @@ public class LottoNumber {
         LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
 }
