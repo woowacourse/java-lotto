@@ -1,5 +1,6 @@
 package domain.lotto;
 
+import java.util.Iterator;
 import java.util.Set;
 
 public class LottoTicket {
@@ -16,5 +17,15 @@ public class LottoTicket {
 
     public boolean has(LottoNumber bonusNumber) {
         return lottoTicket.contains(bonusNumber);
+    }
+
+    public int countMatches(LottoTicket targetTicket) {
+        return (int) lottoTicket.stream()
+                .filter(targetTicket::contains)
+                .count();
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoTicket.contains(lottoNumber);
     }
 }

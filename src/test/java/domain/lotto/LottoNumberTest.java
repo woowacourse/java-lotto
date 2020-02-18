@@ -47,6 +47,17 @@ public class LottoNumberTest {
         return numbers;
     }
 
+    public static Set<LottoNumber> getFromOneToSevenWithoutSixFixture() {
+        Set<LottoNumber> numbers = new HashSet<>();
+        numbers.add(new LottoNumber(1));
+        numbers.add(new LottoNumber(2));
+        numbers.add(new LottoNumber(3));
+        numbers.add(new LottoNumber(4));
+        numbers.add(new LottoNumber(5));
+        numbers.add(new LottoNumber(7));
+        return numbers;
+    }
+
     public static LottoNumber getLottoNumberOneFixture() {
         return new LottoNumber(1);
     }
