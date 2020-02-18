@@ -12,6 +12,12 @@ public class PurchaseAmountTest {
     }
 
     @Test
+    void 남은_돈_반환() {
+        int purchaseAmount = 1500;
+        assertThat(PurchaseAmount.giveChangeMoney(purchaseAmount)).isEqualTo(500);
+    }
+
+    @Test
     void 숫자_외_다른_값_입력_시_재입력() {
         String purchaseAmount = "1a가A";
         assertThat(PurchaseAmount.isNumber(purchaseAmount)).isFalse();

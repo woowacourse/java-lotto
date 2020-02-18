@@ -22,4 +22,8 @@ public class PurchaseAmount {
     public static boolean isPositiveNumber(int purchaseAmount) {
         return purchaseAmount > 0;
     }
+
+    public static int giveChangeMoney(int purchaseAmount) {
+        return purchaseAmount % LOTTO_PURCHASE_UNIT;
+    }
 }
