@@ -18,7 +18,7 @@ public enum LottoNumber {
     FIFTEEN(15),
     SIXTEEN(16),
     SEVENTEEN(17),
-    EIGHTTEEN(18),
+    EIGHTEEN(18),
     NINETEEN(19),
     TWENTY(20),
     TWENTY_ONE(21),
@@ -40,16 +40,20 @@ public enum LottoNumber {
     THIRTY_SEVEN(37),
     THIRTY_EIGHT(38),
     THIRTY_NINE(39),
-    FOURTY(40),
-    FOURTY_ONE(41),
-    FOURTY_TWO(42),
-    FOURTY_THREE(43),
-    FOURTY_FOUR(44),
-    FOURTY_FIVE(45);
+    FORTY(40),
+    FORTY_ONE(41),
+    FORTY_TWO(42),
+    FORTY_THREE(43),
+    FORTY_FOUR(44),
+    FORTY_FIVE(45);
 
     private final int value;
 
     LottoNumber(int value) {
         this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 }

@@ -3,11 +3,9 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputView {
-    public static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner("14000\n");
 
     public static String getInput() {
         return scanner.nextLine();
     }
-
-
 }
