@@ -1,12 +1,28 @@
 # java-lotto
 로또 미션 진행을 위한 저장소
 
-## 기능 구현 목록
-- [v] 구입 금액 입력
+## 클래스 목록
+- money
+  - 구입 금액 
+- ticket
+  - 복권 한장 한장
+- ticketFactory
+- tickets
+  - 구입한 복권들
+- lottoManager
+  - 복권 번호 비교, 당첨 통계
+  - 수익률
+- inputView
+- outputView
+- main <- controller
 
-- [ ] 입력한 금액을 1,000원으로 나눠서 몫을 int로 반환
+## 기능 구현 목록
+- [x] 구입 금액 입력
+
+- [ ] 입력한 금액을 1,000원으로 나눠서 몫을 int 로 반환
 
 - [ ] 6개의 겹치지 않는 숫자를 리스트로 생성
+  - [ ] 셔플
 
 - [ ] 당첨 번호를 List로 주면 구매한 번호 List와 비교하여 int로 반환
 
