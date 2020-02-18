@@ -30,4 +30,8 @@ public class PurchaseNumber {
             throw new IllegalArgumentException(INVALID_PURCHASE_NUMBER_EXCEPTION_MESSAGE);
         }
     }
+
+    public int getPurchaseNumber() {
+        return purchaseNumber;
+    }
 }
