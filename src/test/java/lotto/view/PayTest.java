@@ -23,4 +23,11 @@ public class PayTest {
             InputView.checkNumberFormat("a");
         });
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"999, false", "99999, true", "100001, false"})
+    @DisplayName("금액범위를 벗어난 경우 (1000 부터 10만 까지)")
+    void isValueRange(int input, boolean expected) {
+        assertThat(InputView.isValueRange(input)).isEqualTo(expected);
+    }
 }

@@ -15,4 +15,8 @@ public class InputView {
             throw new NumberFormatException("");
         }
     }
+
+    public static boolean isValueRange(int i) {
+        return i >= 1000 && i <= 100000;
+    }
 }
