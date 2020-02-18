@@ -21,7 +21,7 @@ public enum LottoNumber {
 		this.lottoNumber = inputLottoNumber;
 	}
 
-	public static LottoNumber of(final int inputLottoNumber) throws WrongLottoNumberException {
+	public static LottoNumber of(final int inputLottoNumber) {
 		return Arrays.stream(LottoNumber.values())
 				.filter(value -> value.lottoNumber == inputLottoNumber)
 				.findFirst()

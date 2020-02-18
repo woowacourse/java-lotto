@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoNumberTest {
 	@ParameterizedTest
 	@MethodSource("getRightTestCase")
-	void of_올바른_동작_확인(int inputLottoNumber, LottoNumber expected) throws WrongLottoNumberException {
+	void of_올바른_동작_확인(int inputLottoNumber, LottoNumber expected) {
 		assertThat(LottoNumber.of(inputLottoNumber)).isEqualTo(expected);
 	}
 

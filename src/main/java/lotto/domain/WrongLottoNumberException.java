@@ -8,7 +8,7 @@ package lotto.domain;
  * <p>
  * 날짜 : 2020/02/18
  */
-public class WrongLottoNumberException extends Exception {
+public class WrongLottoNumberException extends IllegalArgumentException {
 	public WrongLottoNumberException() {
 		super();
 	}
