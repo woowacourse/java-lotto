@@ -3,9 +3,9 @@ package lotto.domain;
 import lotto.exceptions.InvalidMoneyException;
 
 public class Money {
-    private int amount;
+    private final int amount;
 
-    public Money(String amount) {
+    public Money(final String amount) {
         this.amount = validNumber(amount);
     }
 
@@ -27,6 +27,6 @@ public class Money {
     }
 
     public int ticketQuantity() {
-        return this.amount/1000;
+        return this.amount / 1000;
     }
 }
