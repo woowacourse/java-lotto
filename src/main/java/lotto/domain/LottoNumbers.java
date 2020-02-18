@@ -41,4 +41,14 @@ public class LottoNumbers {
 	public List<LottoNumber> getNumbers() {
 		return Collections.unmodifiableList(numbers);
 	}
+
+	public boolean contains(LottoNumber number) {
+		return numbers.contains(number);
+	}
+
+	public int calculateMatchCount(LottoNumbers target) {
+		return (int)numbers.stream()
+				.filter(target::contains)
+				.count();
+	}
 }
