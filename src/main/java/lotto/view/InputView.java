@@ -1,26 +1,15 @@
 package lotto.view;
 
+import java.util.Scanner;
+
 public class InputView {
-    public static boolean isUnderK(int payment) {
-        if (payment < 1000) {
-            return false;
-        }
-        return true;
-    }
-
-    public static void checkNumberFormat(String a) {
+    private static Scanner sc = new Scanner(System.in);
+    public static int inputPayment() {
         try {
-            Integer.parseInt(a);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("");
+            int payment = sc.nextInt();
+            return payment;
+        } catch (Exception e) {
+            throw new NumberFormatException("숫자가 아닌 값을 입력 할 수 없습니다.");
         }
-    }
-
-    public static boolean isValueRange(int i) {
-        return i >= 1000 && i <= 100000;
-    }
-
-    public static boolean isUnitK(int input) {
-        return input % 1000 == 0;
     }
 }
