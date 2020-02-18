@@ -16,7 +16,6 @@ public class WinningTicket {
     }
 
     Rank match(LottoTicket lottoTicket) {
-        Rank rank = Rank.find(winningTicket.compare(lottoTicket));
-        return rank.getRightRank(lottoTicket.contains(bonusNumber));
+        return Rank.find(winningTicket.compare(lottoTicket), lottoTicket.contains(bonusNumber));
     }
 }
