@@ -1,5 +1,6 @@
+package lotto.domain;
 
-import lotto.Lotto;
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -29,4 +30,6 @@ public class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호의 범위가 잘못되었습니다.");
     }
+
+
 }
