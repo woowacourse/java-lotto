@@ -25,4 +25,8 @@ public class Money {
     private boolean isInvalid(int amount) {
         return amount % 1000 != 0 || amount < 1000;
     }
+
+    public int ticketQuantity() {
+        return this.amount/1000;
+    }
 }

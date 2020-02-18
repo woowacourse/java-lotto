@@ -30,4 +30,10 @@ class MoneyTest {
             Arguments.of("입력 받은 구입 금액이 1000원 이하일 때", "0")
         );
     }
+
+    @Test
+    @DisplayName("입력 받은 금액으로 로또를 몇 개 살 수 있는지 테스트")
+    void lottoTicketNumber() {
+        assertThat(new Money("5000").ticketQuantity()).isEqualTo(5);
+    }
 }
