@@ -2,7 +2,9 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,7 +32,7 @@ public class LottoFactory {
 
     private static LottoTicket getTicket() {
         Collections.shuffle(balls);
-        List<LottoBall> lottoBalls = new ArrayList<>();
+        Set<LottoBall> lottoBalls = new HashSet<>();
         for (int i = 0; i < BALL_COUNT; i++) {
             lottoBalls.add(balls.get((i)));
         }
