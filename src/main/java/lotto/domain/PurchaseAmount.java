@@ -1,29 +1,40 @@
 package lotto.domain;
 
-import lotto.view.OutputView;
-
 public class PurchaseAmount {
 
     public static final int LOTTO_PURCHASE_UNIT = 1000;
+    int purchaseAmount;
 
-    public static int giveLottoPieces(int purchaseAmount) {
-        return purchaseAmount / LOTTO_PURCHASE_UNIT;
+    public PurchaseAmount(String purchaseAmount) {
+        this.purchaseAmount = isNumber(purchaseAmount);
+        isPositiveNumber(this.purchaseAmount);
+        underLottoUnit();
     }
 
-    public static boolean isNumber(String purchaseAmount) {
+    public int giveLottoPieces() {
+        return this.purchaseAmount / LOTTO_PURCHASE_UNIT;
+    }
+
+    public int giveChangeMoney() {
+        return this.purchaseAmount % LOTTO_PURCHASE_UNIT;
+    }
+
+    private int isNumber(String purchaseAmount) {
         try {
-            Integer.parseInt(purchaseAmount);
-        }catch (NumberFormatException e){
-            return false;
+            return Integer.parseInt(purchaseAmount);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자가 아닙니다.");
         }
-        return true;
+    }
+    private void isPositiveNumber(int purchaseAmount) {
+        if(purchaseAmount < 0){
+            throw new IllegalArgumentException("음수입니다.");
+        }
     }
 
-    public static boolean isPositiveNumber(int purchaseAmount) {
-        return purchaseAmount > 0;
-    }
-
-    public static int giveChangeMoney(int purchaseAmount) {
-        return purchaseAmount % LOTTO_PURCHASE_UNIT;
+    public void underLottoUnit(){
+        if(this.purchaseAmount<LOTTO_PURCHASE_UNIT){
+            throw new IllegalArgumentException("한개도 구매할 수 없습니다." + this.purchaseAmount + "원을 반환합니다.");
+        }
     }
 }
