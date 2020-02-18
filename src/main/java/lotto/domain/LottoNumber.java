@@ -21,10 +21,10 @@ public enum LottoNumber {
 		this.lottoNumber = inputLottoNumber;
 	}
 
-	public static LottoNumber of(final int inputLottoNumber) {
+	public static LottoNumber of(final int inputLottoNumber) throws WrongLottoNumberException {
 		return Arrays.stream(LottoNumber.values())
 				.filter(value -> value.lottoNumber == inputLottoNumber)
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException(""));
+				.orElseThrow(() -> new WrongLottoNumberException("유효한 로또 번호가 아닙니다."));
 	}
 }

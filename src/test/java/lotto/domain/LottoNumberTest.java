@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * LottoNumber 테스트
@@ -19,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoNumberTest {
 	@ParameterizedTest
 	@MethodSource("getRightTestCase")
-	void of_올바른_동작_확인(int inputLottoNumber, LottoNumber expected) {
+	void of_올바른_동작_확인(int inputLottoNumber, LottoNumber expected) throws WrongLottoNumberException {
 		assertThat(LottoNumber.of(inputLottoNumber)).isEqualTo(expected);
 	}
 
@@ -28,6 +29,23 @@ public class LottoNumberTest {
 				Arguments.of(1, LottoNumber.ONE),
 				Arguments.of(20, LottoNumber.TWENTY),
 				Arguments.of(45, LottoNumber.FORTY_FIVE)
+		);
+	}
+
+	@ParameterizedTest
+	@MethodSource("getWrongTestCase")
+	void of_잘못된_입력_예외처리 (int inputLottoNumber) {
+		assertThatThrownBy(() -> LottoNumber.of(inputLottoNumber))
+				.isInstanceOf(WrongLottoNumberException.class)
+				.hasMessage("유효한 로또 번호가 아닙니다.");
+	}
+
+	private static Stream<Arguments> getWrongTestCase() {
+		return Stream.of(
+				Arguments.of(-99),
+				Arguments.of(0),
+				Arguments.of(46),
+				Arguments.of(10000)
 		);
 	}
 }
