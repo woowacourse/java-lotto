@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoNumber {
-	public static final int MIN = 1;
-	public static final int MAX = 45;
+public class LottoNumber implements Comparable<LottoNumber> {
+	private static final int MIN = 1;
+	private static final int MAX = 45;
+	private static final String INVALID_NUMBER_MESSAGE = "생성할 수 없는 수입니다.";
 	private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
 	private final int number;
@@ -29,7 +30,7 @@ public class LottoNumber {
 
 	private static void validate(int number) {
 		if (number < MIN || number > MAX) {
-			throw new IllegalArgumentException("생성할 수 없는 수입니다.");
+			throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
 		}
 	}
 
@@ -48,5 +49,10 @@ public class LottoNumber {
 	@Override
 	public int hashCode() {
 		return Objects.hash(number);
+	}
+
+	@Override
+	public int compareTo(LottoNumber lottoNumber) {
+		return Integer.compare(number, lottoNumber.number);
 	}
 }
