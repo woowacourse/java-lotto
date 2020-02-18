@@ -7,4 +7,12 @@ public class InputView {
         }
         return true;
     }
+
+    public static void checkNumberFormat(String a) {
+        try {
+            Integer.parseInt(a);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("");
+        }
+    }
 }
