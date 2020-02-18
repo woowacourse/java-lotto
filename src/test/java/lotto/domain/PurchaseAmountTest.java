@@ -16,4 +16,10 @@ public class PurchaseAmountTest {
         String purchaseAmount = "1a가A";
         assertThat(PurchaseAmount.isNumber(purchaseAmount)).isFalse();
     }
+
+    @Test
+    void 음수인경우() {
+        int purchaseAmount = -3;
+        assertThat(PurchaseAmount.isPositiveNumber(purchaseAmount)).isFalse();
+    }
 }

@@ -18,4 +18,8 @@ public class PurchaseAmount {
         }
         return true;
     }
+
+    public static boolean isPositiveNumber(int purchaseAmount) {
+        return purchaseAmount > 0;
+    }
 }
