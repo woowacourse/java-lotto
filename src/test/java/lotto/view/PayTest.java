@@ -30,4 +30,11 @@ public class PayTest {
     void isValueRange(int input, boolean expected) {
         assertThat(InputView.isValueRange(input)).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"999, false", "99999, false", "100001, false"})
+    @DisplayName("1000원 단위인지")
+    void isUnitK(int input, boolean expected) {
+        assertThat(InputView.isUnitK(input)).isEqualTo(expected);
+    }
 }
