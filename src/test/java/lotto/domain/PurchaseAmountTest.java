@@ -6,9 +6,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PurchaseAmountTest {
     @Test
-    void 천원_단위가_아닌경우() {
+    void 로또_개수_반환() {
         int purchaseAmount = 1500;
-        assertThat(PurchaseAmount.isLottoPurchaseUnit(purchaseAmount)).isFalse();
+        assertThat(PurchaseAmount.giveLottoPieces(purchaseAmount)).isEqualTo(1);
     }
 
     @Test

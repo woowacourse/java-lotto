@@ -6,8 +6,8 @@ public class PurchaseAmount {
 
     public static final int LOTTO_PURCHASE_UNIT = 1000;
 
-    public static boolean isLottoPurchaseUnit(int purchaseAmount) {
-        return purchaseAmount / LOTTO_PURCHASE_UNIT == 0;
+    public static int giveLottoPieces(int purchaseAmount) {
+        return purchaseAmount / LOTTO_PURCHASE_UNIT;
     }
 
     public static boolean isNumber(String purchaseAmount) {
