@@ -13,4 +13,8 @@ public class LottoTicket {
         }
         this.lottoTicket = lottoTicket;
     }
+
+    public boolean has(LottoNumber bonusNumber) {
+        return lottoTicket.contains(bonusNumber);
+    }
 }
