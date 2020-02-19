@@ -1,13 +1,15 @@
 package lotto.domain;
 
+import lotto.util.InputValidationUtil;
+
 public class PurchaseAmount {
 
-    public static final int LOTTO_PURCHASE_UNIT = 1000;
-    int purchaseAmount;
+    private static final int LOTTO_PURCHASE_UNIT = 1000;
+    private int purchaseAmount;
 
     public PurchaseAmount(String purchaseAmount) {
-        this.purchaseAmount = isNumber(purchaseAmount);
-        isPositiveNumber(this.purchaseAmount);
+        this.purchaseAmount = InputValidationUtil.isNumber(purchaseAmount);
+        InputValidationUtil.isPositiveNumber(this.purchaseAmount);
         underLottoUnit();
     }
 
@@ -19,18 +21,6 @@ public class PurchaseAmount {
         return this.purchaseAmount % LOTTO_PURCHASE_UNIT;
     }
 
-    private int isNumber(String purchaseAmount) {
-        try {
-            return Integer.parseInt(purchaseAmount);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자가 아닙니다.");
-        }
-    }
-    private void isPositiveNumber(int purchaseAmount) {
-        if(purchaseAmount < 0){
-            throw new IllegalArgumentException("음수입니다.");
-        }
-    }
 
     public void underLottoUnit(){
         if(this.purchaseAmount<LOTTO_PURCHASE_UNIT){
