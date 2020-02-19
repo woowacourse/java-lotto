@@ -6,13 +6,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static lotto.domain.LottoTicket.LOTTO_PRICE;
+
 public class LottoCompany {
-    private static final int TICKET_PRICE = 1000;
     private static final int BALL_COUNT = 6;
     private static final List<LottoBall> balls = LottoFactory.getInstance();
 
     public static List<LottoTicket> buyTicket(int money) {
-        int amount = money / TICKET_PRICE;
+        int amount = money / LOTTO_PRICE;
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < amount; i++) {

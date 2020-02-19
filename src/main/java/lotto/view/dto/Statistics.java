@@ -6,8 +6,9 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.domain.LottoTicket.LOTTO_PRICE;
+
 public class Statistics {
-    private static final int LOTTO_PRICE = 1000;
     private final Map<PrizeGroup, StatisticsDetail> statistics;
 
     public Statistics(List<PrizeGroup> prizeGroups) {
