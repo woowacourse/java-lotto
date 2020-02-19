@@ -8,9 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
-import lotto.domain.Number;
 import lotto.exception.InvalidLottoException;
 
 public class LottoTest {
@@ -101,7 +98,7 @@ public class LottoTest {
 		);
 
 		assertThat(
-			new Lotto(numbers).hasBonusNumber(new BonusNumber("8"))
+			new Lotto(numbers).contains(new BonusNumber("8"))
 		).isTrue();
 
 	}

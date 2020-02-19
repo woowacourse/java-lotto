@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -8,10 +9,6 @@ import lotto.exception.InvalidLottoException;
 
 public class Lotto implements Iterable<Number> {
 	protected final List<Number> numbers;
-
-	public List<Number> getNumbers() {
-		return numbers;
-	}
 
 	public Lotto(List<Number> numbers) {
 		validate(numbers);
@@ -39,21 +36,26 @@ public class Lotto implements Iterable<Number> {
 		return numbers.iterator();
 	}
 
-	public int compareLotto(WinningNumbers winningNumbers){
+	public int compareLotto(WinningNumbers winningNumbers) {
 
 		Iterator<Number> lottoIterator = iterator();
 		int matchingNumber = 0;
 
-		while(lottoIterator.hasNext()){
+		while (lottoIterator.hasNext()) {
 			Number number = lottoIterator.next();
-			if(winningNumbers.getNumbers().contains(number)){
+			if (winningNumbers.contains(number)) {
 				matchingNumber++;
 			}
 		}
 		return matchingNumber;
 	}
 
-	public boolean hasBonusNumber(BonusNumber bonusNumber) {
-		return numbers.contains(bonusNumber);
+	public boolean contains(Number number) {
+		return numbers.contains(number);
 	}
+
+	public List<Number> getNumbers() {
+		return Collections.unmodifiableList(numbers);
+	}
+
 }

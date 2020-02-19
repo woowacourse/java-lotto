@@ -15,11 +15,12 @@ public class GameResult {
 		this.winningLotto = winningLotto;
 	}
 
+	// TODO: 2020/02/19 리턴 만들기 (통계 values) 
 	public void makeStatistics() {
 		Iterator<Lotto> lottoIterator = lottos.iterator();
 		while (lottoIterator.hasNext()) {
 			Lotto lotto = lottoIterator.next();
-			Statistic statistic = winningLotto.isWinningLotto(lotto);
+			Rank statistic = winningLotto.isWinningLotto(lotto);
 			statistic.count();
 		}
 	}
