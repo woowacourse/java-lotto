@@ -15,4 +15,8 @@ public class Lottos {
 			throw new IllegalArgumentException("null이나 빈 값이 들어올 수 없습니다.");
 		}
 	}
+
+	public List<Lotto> getLottos() {
+		return lottos;
+	}
 }

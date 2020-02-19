@@ -43,4 +43,8 @@ public class Lotto {
 		int winningCount = (lottoNumber.size() * 2) - concatenatedSet.size();
 		return 0;
 	}
+
+	public List<Integer> getLottoNumber() {
+		return lottoNumber;
+	}
 }
