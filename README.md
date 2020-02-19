@@ -80,7 +80,7 @@
     - [x] 금액 / 1000 == Lottos.size()    
 
 - WinningLotto
-    - 보너스넘버와 WinningNumbers의 값이 겹치지 않아야 한다.
+    - [x] 보너스넘버와 WinningNumbers의 값이 겹치지 않아야 한다.
     - [x] BonusNumber (상속 : Number)
     - [x] WinningNumbers
         - [x] 상속받고 있고 (Lotto) : 로직이 같고, 로또와 의미를 구분하기 위함

@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.domain.result;
 
 public enum Statistic {
+	DEFAULT(0,0),
 	THREE(3, 5000),
 	FOUR(4, 50000),
 	FIVE(5, 150000),
@@ -14,5 +15,18 @@ public enum Statistic {
 	Statistic(int matchingNumbers, int prize) {
 		this.matchingNumbers = matchingNumbers;
 		this.prize = prize;
+	}
+
+	public static Statistic getRank(int numberOfMatch) {
+		for(Statistic statistic : values()){
+			if(statistic.matchingNumbers == numberOfMatch){
+				return statistic;
+			}
+		}
+		return DEFAULT;
+	}
+
+	public void count() {
+		this.count++;
 	}
 }

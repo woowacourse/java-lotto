@@ -27,4 +27,17 @@ class WinningLottoTest {
 		}).isInstanceOf(InvalidWinningLottoException.class)
 			.hasMessageMatching("보너스 번호와 당첨번호는 중복될 수 없습니다.");
 	}
+
+	@Test
+	void name() {
+		List<Number> winningNumbers = Arrays.asList(
+			new Number("1"),
+			new Number("2"),
+			new Number("3"),
+			new Number("4"),
+			new Number("5"),
+			new Number("6")
+		);
+		assertThat(winningNumbers.contains(new BonusNumber("3")));
+	}
 }

@@ -45,10 +45,10 @@ public class LottoTest {
 			new Number("7"),
 			new Number("9")
 		);
-		assertThatThrownBy(()->{
+		assertThatThrownBy(() -> {
 			new Lotto(numbers);
 		}).isInstanceOf(InvalidLottoException.class)
-		.hasMessageMatching("로또는 6개의 수를 가져야 합니다.");
+			.hasMessageMatching("로또는 6개의 수를 가져야 합니다.");
 	}
 
 	@Test
@@ -62,9 +62,48 @@ public class LottoTest {
 			new Number("7"),
 			new Number("9")
 		);
-		assertThatThrownBy(()->{
+		assertThatThrownBy(() -> {
 			new Lotto(numbers);
 		}).isInstanceOf(InvalidLottoException.class)
-		.hasMessageMatching("로또 번호는 중복 될 수 없습니다.");
+			.hasMessageMatching("로또 번호는 중복 될 수 없습니다.");
 	}
+
+	@Test
+	void win() {
+		List<Number> numbers = Arrays.asList(
+			new Number("3"),
+			new Number("8"),
+			new Number("6"),
+			new Number("4"),
+			new Number("7"),
+			new Number("9")
+		);
+		List<Number> win = Arrays.asList(
+			new Number("3"),
+			new Number("43"),
+			new Number("6"),
+			new Number("4"),
+			new Number("7"),
+			new Number("9")
+		);
+		assertThat(new Lotto(numbers).compareLotto(new WinningNumbers(win))).isEqualTo(5);
+	}
+
+	@Test
+	void bonus() {
+		List<Number> numbers = Arrays.asList(
+			new Number("3"),
+			new Number("8"),
+			new Number("6"),
+			new Number("4"),
+			new Number("7"),
+			new Number("9")
+		);
+
+		assertThat(
+			new Lotto(numbers).hasBonusNumber(new BonusNumber("8"))
+		).isTrue();
+
+	}
+
 }

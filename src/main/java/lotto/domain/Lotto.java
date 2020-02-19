@@ -38,4 +38,22 @@ public class Lotto implements Iterable<Number> {
 	public Iterator<Number> iterator() {
 		return numbers.iterator();
 	}
+
+	public int compareLotto(WinningNumbers winningNumbers){
+
+		Iterator<Number> lottoIterator = iterator();
+		int matchingNumber = 0;
+
+		while(lottoIterator.hasNext()){
+			Number number = lottoIterator.next();
+			if(winningNumbers.getNumbers().contains(number)){
+				matchingNumber++;
+			}
+		}
+		return matchingNumber;
+	}
+
+	public boolean hasBonusNumber(BonusNumber bonusNumber) {
+		return numbers.contains(bonusNumber);
+	}
 }
