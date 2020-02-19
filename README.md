@@ -4,16 +4,20 @@
 ## 클래스 목록
 - money
   - 구입 금액 
-- ticket
-  - 복권 한장 한장
-- ticketFactory
-- tickets
-  - 구입한 복권들
-- lottoManager
-  - 복권 번호 비교, 당첨 통계
-  - 수익률
+- Lotto
+
+- LottoFactory
+
+- LottoManager
+  - 당첨 복권과 비교, 당첨 통계
+- WinLotto
+
+- BonusBall
+
 - inputView
+
 - outputView
+
 - main <- controller
 
 ## 기능 구현 목록
@@ -23,9 +27,13 @@
 
 - [x] 6개의 겹치지 않는 숫자를 리스트로 생성
   - [ ] int 로 입력받으면 그 수만큼 복권 생성
-
-- [x] 당첨 번호를 List로 주면 구매한 번호 List와 비교하여 int로 반환
-
+  
+- [ ] 이번주 당첨번호(WinLotto) 를 리스트로 입력받아 저장
+  - [x] string 으로 당첨번호를 입력받아 리스트로 반환
+  
+- [ ] 로또들을 주면 구매한 번호 List 와 비교
+  - [ ] 로또 하나를 List 로 주면 WinLotto 와 비교하여 INT 반환
+  
 - [ ] 전체 구매한 번호와 당첨번호를 비교 몇개 일치한게 몇개인지 LIST로 반환
 
 - [ ] 수익률 계산하기

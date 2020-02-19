@@ -1,22 +1,12 @@
 package lotto;
 
-import spark.ModelAndView;
-import spark.template.handlebars.HandlebarsTemplateEngine;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static spark.Spark.get;
-
 public class WebUILottoApplication {
     public static void main(String[] args) {
-        get("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            return render(model, "index.html");
-        });
+        // Money money = new Money(InputView.inputBuyMoney());
+        // int num = money.divideThousand();
+        // OutputView.printLottoCount(num);
+        // Lotteris lotteris = new Lotteris(num);
+        // OutputView.printLotteris(lotteris);
     }
 
-    private static String render(Map<String, Object> model, String templatePath) {
-        return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
-    }
 }

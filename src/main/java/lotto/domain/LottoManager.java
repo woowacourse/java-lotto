@@ -1,12 +1,14 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManager {
+	private List<Lotto> lotteries = new ArrayList<>();
 
-	public static long compareTicket(List<Integer> ticket, List<Integer> winNumber) {
-		return ticket.stream()
-			.filter(x -> winNumber.contains(x))
-			.count();
-	}
+	// public long compareTicket(Lotto lotto, Lotto winLotto) {
+	// 	return lotto.stream()
+	// 		.filter(x -> winLotto.numbers.contains(x))
+	// 		.count();
+	// }
 }
