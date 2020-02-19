@@ -7,15 +7,24 @@ import java.util.Set;
 
 public class Lotto {
 	private static final String DUPLICATED_NUMBER_EXCEPTION_MESSAGE = "중복된 볼이 포함";
+	private static final int BALL_COUNT = 6;
+	public static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 갯수가 적절하지 않습니다.";
 
 	private final List<Ball> balls;
 
 	public Lotto(List<Ball> balls) {
-		validateBalls(balls);
+		validateDuplication(balls);
+		validateBallCount(balls);
 		this.balls = Collections.unmodifiableList(balls);
 	}
 
-	private void validateBalls(List<Ball> balls) {
+	private void validateBallCount(List<Ball> balls) {
+		if (balls.size() != BALL_COUNT) {
+			throw new IllegalArgumentException(BALL_COUNT_EXCEPTION_MESSAGE);
+		}
+	}
+
+	private void validateDuplication(List<Ball> balls) {
 		Set<Ball> distinctBalls = new HashSet<>(balls);
 		if (distinctBalls.size() != balls.size()) {
 			throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION_MESSAGE);
