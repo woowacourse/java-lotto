@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class WinningNumberParser {
-	public static List<Integer> parse(String input) {
+public class NumberParser {
+	public static List<Integer> winningNumberParse(String input) {
 		return Stream.of(input.split(","))
 			.map(String::trim)
-			.map(WinningNumberParser::parseNumber)
+			.map(NumberParser::parseNumber)
 			.collect(Collectors.toList());
 	}
 
-	private static int parseNumber(String input) {
+	public static int parseNumber(String input) {
 		try {
 			return Integer.parseInt(input);
 		} catch (NumberFormatException e) {
