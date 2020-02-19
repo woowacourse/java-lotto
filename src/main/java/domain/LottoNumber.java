@@ -9,6 +9,7 @@ public class LottoNumber implements Comparable {
     private int number;
 
     public LottoNumber(String number) {
+        number = number.trim();
         checkNotNumber(number);
         int numberIntegerValue = Integer.parseInt(number);
         checkLottoRange(numberIntegerValue);

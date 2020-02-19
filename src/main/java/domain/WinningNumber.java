@@ -10,7 +10,6 @@ public class WinningNumber {
     public WinningNumber(String[] numbers, String bonusNumber) {
         Set<LottoNumber> winningNumbers = new HashSet<>();
         for (String number : numbers) {
-            number.trim();
             winningNumbers.add(new LottoNumber(number));
         }
         this.winningNumbers = new Lotto(winningNumbers);

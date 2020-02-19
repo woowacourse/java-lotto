@@ -34,4 +34,12 @@ public enum LottoResult {
                 .findFirst()
                 .orElse(null);
     }
+
+    public String getResultMessage(){
+        return resultMessage;
+    }
+
+    public int getWinningMoney(){
+        return winningMoney;
+    }
 }

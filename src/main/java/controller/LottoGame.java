@@ -1,18 +1,21 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoFactory;
-import domain.PurchaseAmount;
-import domain.WinningNumber;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LottoGame {
     private static PurchaseAmount amount;
     private static List<Lotto> lottoDummy = new ArrayList<>();
+    private static Map<LottoResult, Integer> result = new HashMap<LottoResult, Integer>(){{
+        put(LottoResult.FIRST, 0);
+        put(LottoResult.SECOND, 0);
+        put(LottoResult.THIRD, 0);
+        put(LottoResult.FOURTH, 0);
+        put(LottoResult.FIFTH, 0);
+    }};
 
     public static void main(String[] args) {
 
@@ -26,6 +29,11 @@ public class LottoGame {
         OutputView.printLottoDummy(lottoDummy);
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 
-        OutputView.printResult();
+        for (Lotto lotto : lottoDummy){
+            LottoResult rank = winningNumber.findRank(lotto);
+            result.put(rank, result.getOrDefault(rank, 0) + 1);
+        }
+
+        OutputView.printResult(result);
     }
 }

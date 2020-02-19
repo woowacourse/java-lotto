@@ -2,8 +2,12 @@ package view;
 
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.LottoResult;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     public static final String NEW_LINE = System.lineSeparator();
@@ -45,8 +49,17 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printResult() {
+    public static void printResult(Map<LottoResult, Integer> result) {
         System.out.println("당첨 통계" + NEW_LINE + "------------");
 
+        List<LottoResult> keys = Arrays.asList(LottoResult.values());
+        Collections.reverse(keys);
+        for (LottoResult rank : keys){
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(rank.getResultMessage())
+                        .append(result.get(rank))
+                        .append("개");
+            System.out.println(stringBuilder);
+        }
     }
 }
