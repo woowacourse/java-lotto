@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class LottoNumbersTest {
+public class LottoTest {
 	@Test
 	@DisplayName("선택된 로또 번호 리스트가 정상적으로 생성된 경우")
 	void constructor() {
@@ -22,7 +22,7 @@ public class LottoNumbersTest {
 				LottoNumber.of(43),
 				LottoNumber.of(44),
 				LottoNumber.of(45));
-		assertThat(new LottoNumbers(lottoNumbers)).isInstanceOf(LottoNumbers.class);
+		assertThat(new Lotto(lottoNumbers)).isInstanceOf(Lotto.class);
 	}
 
 	static Stream<List<LottoNumber>> invalidSize() {
@@ -47,7 +47,7 @@ public class LottoNumbersTest {
 	@DisplayName("로또 번호 리스트의 크기가 올바르지 않은 경우")
 	@MethodSource("invalidSize")
 	void constructor_로또_번호_리스트의_크기가_올바르지_않은_경우(List<LottoNumber> lottoNumbers) {
-		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new LottoNumbers(lottoNumbers));
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(lottoNumbers));
 	}
 
 	@Test
@@ -59,24 +59,24 @@ public class LottoNumbersTest {
 				LottoNumber.of(43),
 				LottoNumber.of(44),
 				LottoNumber.of(45));
-		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new LottoNumbers(lottoNumbers));
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(lottoNumbers));
 	}
 
 	@Test
 	@DisplayName("수가 정렬되어 있는지 확인")
 	void constructor_수가_정렬되어_있는지_확인() {
-		LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(LottoNumber.of(45),
+		Lotto lotto = new Lotto(Arrays.asList(LottoNumber.of(45),
 				LottoNumber.of(44),
 				LottoNumber.of(43),
 				LottoNumber.of(1),
 				LottoNumber.of(2),
 				LottoNumber.of(3)));
-		List<LottoNumber> expected = Arrays.asList(LottoNumber.of(1),
+		Lotto expected = new Lotto(Arrays.asList(LottoNumber.of(1),
 				LottoNumber.of(2),
 				LottoNumber.of(3),
 				LottoNumber.of(43),
 				LottoNumber.of(44),
-				LottoNumber.of(45));
-		assertThat(lottoNumbers.getNumbers()).isEqualTo(expected);
+				LottoNumber.of(45)));
+		assertThat(lotto).isEqualTo(expected);
 	}
 }

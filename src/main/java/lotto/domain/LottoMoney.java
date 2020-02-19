@@ -24,4 +24,8 @@ public class LottoMoney {
 	public int calculateBuyCount() {
 		return lottoMoney / LOTTO_PURCHASE_UNIT;
 	}
+
+	public int getValue() {
+		return lottoMoney;
+	}
 }

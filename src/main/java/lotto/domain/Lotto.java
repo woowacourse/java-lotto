@@ -1,20 +1,23 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto implements Iterable<LottoNumber> {
 	private static final int SIZE = 6;
 	private static final String DUPLICATED_NUMBER_MESSAGE = "로또 번호가 중복됩니다.";
 	private static final String INVALID_SIZE_MESSAGE = "로또 번호가 존재하지 않습니다.";
 
 	private final List<LottoNumber> numbers = new ArrayList<>();
 
-	public LottoNumbers(List<LottoNumber> numbers) {
+	public Lotto(List<LottoNumber> numbers) {
 		validate(numbers);
 		this.numbers.addAll(numbers);
 		Collections.sort(this.numbers);
@@ -38,17 +41,39 @@ public class LottoNumbers {
 		}
 	}
 
-	public List<LottoNumber> getNumbers() {
-		return Collections.unmodifiableList(numbers);
+	public static Lotto of(int... numbers) {
+		return new Lotto(Arrays.stream(numbers)
+				.mapToObj(LottoNumber::of)
+				.collect(Collectors.toList()));
 	}
 
 	public boolean contains(LottoNumber number) {
 		return numbers.contains(number);
 	}
 
-	public int calculateMatchCount(LottoNumbers target) {
-		return (int)numbers.stream()
+	public long calculateMatchCount(Lotto target) {
+		return numbers.stream()
 				.filter(target::contains)
 				.count();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lotto that = (Lotto)o;
+		return Objects.equals(numbers, that.numbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numbers);
+	}
+
+	@Override
+	public Iterator<LottoNumber> iterator() {
+		return numbers.iterator();
 	}
 }

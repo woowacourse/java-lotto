@@ -10,15 +10,15 @@ public enum LottoRank {
 	FIFTH(3, 5_000),
 	MISS(0, 0);
 
-	private final int matchCount;
-	private final int winnings;
+	private final long matchCount;
+	private final long winnings;
 
-	LottoRank(int matchCount, int winnings) {
+	LottoRank(long matchCount, long winnings) {
 		this.matchCount = matchCount;
 		this.winnings = winnings;
 	}
 
-	public static LottoRank of(int matchCount, boolean isBonus) {
+	public static LottoRank of(long matchCount, boolean isBonus) {
 		if (isMismatch(matchCount))
 			return MISS;
 		if (SECOND.match(matchCount) && isBonus)
@@ -29,11 +29,15 @@ public enum LottoRank {
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순위 입니다."));
 	}
 
-	private boolean match(int matchCount) {
+	private boolean match(long matchCount) {
 		return this.matchCount == matchCount;
 	}
 
-	private static boolean isMismatch(int matchCount) {
+	private static boolean isMismatch(long matchCount) {
 		return matchCount >= MISS.matchCount && matchCount < FIFTH.matchCount;
+	}
+
+	public long calculateTotalWinnings(long amount) {
+		return winnings * amount;
 	}
 }
