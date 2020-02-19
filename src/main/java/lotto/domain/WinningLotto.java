@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 클래스 이름 : .java
@@ -17,5 +18,13 @@ public class WinningLotto extends Lotto {
 
 	public boolean isContain(LottoNumber lottoNumber) {
 		return lottoNumbers.stream().anyMatch(value -> value == lottoNumber);
+	}
+
+	public int getHowManyContain(PaidLotto paidLotto) {
+		Objects.requireNonNull(paidLotto, "매개변수가 null 입니다.");
+		return (int) paidLotto.getLottoNumbers()
+				.stream()
+				.filter(this::isContain)
+				.count();
 	}
 }
