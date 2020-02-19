@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class LearningTest {
 	@Test
@@ -13,6 +11,13 @@ public class LearningTest {
 
 		System.out.println(list);
 		System.out.println(inConstructor);
+	}
 
+	@Test
+	void 정렬() {
+		List<Integer> unmodifiableList = List.of(1, 3, 2);
+		unmodifiableList.sort(Comparator.naturalOrder());
+
+		System.out.println(unmodifiableList);
 	}
 }
