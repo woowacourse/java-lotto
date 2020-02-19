@@ -4,6 +4,9 @@ public class BonusNumber {
 	private int bonusNumber;
 
 	public BonusNumber(int bonusNumber) {
+		if(isInvalidNumberRange(bonusNumber)) {
+			throw new IllegalArgumentException("보너스 넘버의 범위:1-45");
+		}
 		this.bonusNumber = bonusNumber;
 	}
 
