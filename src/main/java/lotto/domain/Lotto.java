@@ -5,7 +5,7 @@ import java.util.List;
 import lotto.exception.InvalidLottoException;
 
 public class Lotto {
-	private static final int CORRECT_SIZE = 6;
+	public static final int CORRECT_SIZE = 6;
 
 	private final List<Number> numbers;
 
@@ -36,5 +36,9 @@ public class Lotto {
 		if (distinctSize != numbers.size()) {
 			throw new InvalidLottoException(InvalidLottoException.DUPLICATION);
 		}
+	}
+
+	public List<Number> getNumbers() {
+		return numbers;
 	}
 }

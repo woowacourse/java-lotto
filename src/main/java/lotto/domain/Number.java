@@ -7,8 +7,8 @@ import java.util.Objects;
 import lotto.exception.InvalidNumberException;
 
 public class Number {
-	private static final int MIN_BOUND = 1;
-	private static final int MAX_BOUND = 45;
+	public static final int MIN_BOUND = 1;
+	public static final int MAX_BOUND = 45;
 
 	private final int number;
 
@@ -44,6 +44,10 @@ public class Number {
 			return NumberCache.cache.get(number + (-MIN_BOUND));
 		}
 		return new Number(number);
+	}
+
+	public int getNumber() {
+		return number;
 	}
 
 	@Override

@@ -1,16 +1,15 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 public class LottoGenerator {
 	public static Lotto generate() {
-		List<Number> numbers = new Random().ints(1, 45)
+		return new Lotto(new Random().ints(Number.MIN_BOUND, Number.MAX_BOUND + 1)
 			.distinct()
-			.limit(6)
+			.limit(Lotto.CORRECT_SIZE)
+			.sorted()
 			.mapToObj(Number::valueOf)
-			.collect(Collectors.toList());
-		return new Lotto(numbers);
+			.collect(Collectors.toList()));
 	}
 }
