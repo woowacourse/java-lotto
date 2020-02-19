@@ -1,15 +1,29 @@
 package domain;
 
-import java.util.Set;
+public class WinningNumbers extends LottoNumbersContainer {
 
-public class WinningNumbers extends AbstractNumbersContainer {
-
-    private final Set<LottoNumber> lastWeekNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningNumbers(Set<LottoNumber> lastWeekNumbers, LottoNumber bonusNumber) {
-        validateSize(lastWeekNumbers);
-        this.lastWeekNumbers = lastWeekNumbers;
-        this.bonusNumber = bonusNumber;
+    public WinningNumbers(LottoNumbersDto lottoNumbersDto) {
+        super(lottoNumbersDto);
+        validateBonusNumber(lottoNumbersDto.getBonusNumber());
+        this.bonusNumber = lottoNumbersDto.getBonusNumber();
+    }
+
+    private void validateBonusNumber(LottoNumber bonusNumber) {
+        validateErrorBonusNumber(bonusNumber);
+        validateDuplicatedBonusNumber(bonusNumber);
+    }
+
+    private void validateErrorBonusNumber(LottoNumber bonusNumber) {
+        if (bonusNumber != LottoNumber.ERROR) {
+            throw new IllegalArgumentException("잘못된 보너스 번호를 입력했습니다.");
+        }
+    }
+
+    private void validateDuplicatedBonusNumber(LottoNumber bonusNumber) {
+        if (this.lottoSixNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("당첨번호와 보너스 번호가 중복됩니다.");
+        }
     }
 }

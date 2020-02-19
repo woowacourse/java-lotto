@@ -2,8 +2,15 @@ package domain;
 
 import java.util.Set;
 
-abstract class AbstractNumbersContainer {
+abstract class LottoNumbersContainer {
     private static final int TICKET_SIZE = 6;
+
+    protected final Set<LottoNumber> lottoSixNumbers;
+
+    public LottoNumbersContainer(LottoNumbersDto lottoNumbersDto) {
+        validateSize(lottoNumbersDto.getSixNumbers());
+        this.lottoSixNumbers = lottoNumbersDto.getSixNumbers();
+    }
 
     protected void validateSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != TICKET_SIZE) {
