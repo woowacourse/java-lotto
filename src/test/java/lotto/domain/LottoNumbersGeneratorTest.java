@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 class LottoNumbersGeneratorTest {
 
     @Test
-    void generate() {
+    void 로또숫자_생성_갯수() {
         //when
         List<Integer> lottoNumbers = LottoNumbersGenerator.generate();
         //then
