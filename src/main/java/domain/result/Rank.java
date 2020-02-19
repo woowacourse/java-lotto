@@ -9,6 +9,14 @@ public enum Rank {
     FIFTH(3, 5000),
     MISS(0, 0);
 
+    public int getCountOfMatches() {
+        return countOfMatches;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
+    }
+
     private int countOfMatches;
     private int winningMoney;
 

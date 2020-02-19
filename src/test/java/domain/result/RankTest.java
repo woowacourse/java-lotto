@@ -2,6 +2,8 @@ package domain.result;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,5 +27,13 @@ public class RankTest {
                 Arguments.of(Rank.valueOf(5, true), Rank.SECOND),
                 Arguments.of(Rank.valueOf(6, false), Rank.FIRST)
         );
+    }
+
+    public static List<Rank> getRanksFixture() {
+        List<Rank> ranks = new ArrayList<>();
+        for (int i = 0; i < 1000000; i++) {
+            ranks.add(Rank.FIRST);
+        }
+        return ranks;
     }
 }

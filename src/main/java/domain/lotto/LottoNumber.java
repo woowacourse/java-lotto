@@ -2,7 +2,7 @@ package domain.lotto;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable {
 
     private int number;
 
@@ -30,5 +30,19 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (o == null || !(o instanceof LottoNumber)) {
+            return 1;
+        }
+        LottoNumber targetNumber = (LottoNumber)o;
+        return this.number - targetNumber.number;
     }
 }

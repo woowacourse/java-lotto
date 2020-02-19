@@ -3,6 +3,7 @@ package domain.lotto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import domain.result.LottoResult;
 import domain.result.Rank;
 
 public class LottoTickets {
@@ -13,9 +14,14 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<Rank> getLottoResults(WinningLotto winningLotto) {
-        return lottoTickets.stream()
+    public LottoResult getLottoResults(WinningLotto winningLotto) {
+        List<Rank> ranks = lottoTickets.stream()
                 .map(winningLotto::getRank)
                 .collect(Collectors.toList());
+        return new LottoResult(ranks);
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 }

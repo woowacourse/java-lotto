@@ -1,5 +1,8 @@
 package domain.lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
@@ -26,5 +29,12 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoTicket.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        List<LottoNumber> lottoTicketList = new ArrayList<>(lottoTicket);
+        Collections.sort(lottoTicketList);
+        return lottoTicketList.toString();
     }
 }
