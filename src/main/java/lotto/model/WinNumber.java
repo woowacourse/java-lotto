@@ -9,7 +9,7 @@ public class WinNumber {
 
     public WinNumber(String winNumber) {
         List<Integer> winNumbers = makeWinNumbers(makeNumbers(winNumber));
-        isOverSix(winNumbers);
+        hasSix(winNumbers);
         this.winNumbers = winNumbers;
     }
 
@@ -17,9 +17,9 @@ public class WinNumber {
         return Arrays.asList(winNumber.split(","));
     }
 
-    private void isOverSix(List<Integer> inputs) {
-        if (inputs.size() > 6) {
-            throw new IllegalArgumentException("숫자가 6개를 초과할 수 없습니다.");
+    private void hasSix(List<Integer> inputs) {
+        if (inputs.size() != 6) {
+            throw new IllegalArgumentException("6개의 숫자를 입력하셔야 합니다.");
         }
     }
 
