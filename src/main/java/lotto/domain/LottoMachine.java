@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoBalls {
+public class LottoMachine {
 	private static final int MAX_LOTTO_NUMBER = 45;
 	private static final int MIN_LOTTO_NUMBER = 1;
 
 	private final List<Integer> lottoBalls;
 
-	public LottoBalls() {
+	public LottoMachine() {
 		lottoBalls = new ArrayList<>();
 		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
 			lottoBalls.add(i);
