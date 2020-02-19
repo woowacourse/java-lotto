@@ -21,5 +21,7 @@ public class LottoApplication {
         winningLotto.validateBonusNumber(bonusNumber);
         // compare lottoTickets and winningLotto
         // output statistics
+        OutputView.prizeStatistics(lottoTickets.matchResult(winningLotto, bonusNumber));
+
     }
 }
