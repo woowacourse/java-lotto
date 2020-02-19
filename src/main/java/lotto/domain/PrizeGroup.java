@@ -24,13 +24,14 @@ public enum PrizeGroup {
                 .findFirst()
                 .orElse(SIXTH);
 
-        if (isThird(result, prize)) {
+        if (prize.isThird(result)) {
             return THIRD;
         }
         return prize;
     }
 
-    private static boolean isThird(LottoResult result, PrizeGroup prize) {
-        return prize == SECOND && !result.isBonusMatch();
+    private boolean isThird(LottoResult lottoResult) {
+        return this == SECOND && !lottoResult.isBonusMatch();
     }
+
 }
