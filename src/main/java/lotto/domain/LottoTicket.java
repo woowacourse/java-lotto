@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,7 +42,7 @@ public class LottoTicket {
         List<LottoNumber> numbers = Arrays.asList(LottoNumber.values());
         List<LottoNumber> randomNumbers = new ArrayList<>();
         Collections.shuffle(numbers);
-        for (int i = 0; i< LOTTO_NUMBER_COUNT; i++) {
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
             randomNumbers.add(numbers.get(i));
         }
         return new LottoTicket(randomNumbers);
@@ -70,4 +69,7 @@ public class LottoTicket {
         return winnerSet.size();
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoTicket.contains(lottoNumber);
+    }
 }
