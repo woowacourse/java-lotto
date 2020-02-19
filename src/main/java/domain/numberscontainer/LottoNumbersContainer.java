@@ -1,4 +1,6 @@
-package domain;
+package domain.numberscontainer;
+
+import domain.LottoNumber;
 
 import java.util.Set;
 

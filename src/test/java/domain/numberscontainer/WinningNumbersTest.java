@@ -1,9 +1,12 @@
-package domain;
+package domain.numberscontainer;
 
+import domain.LottoNumber;
+import domain.numberscontainer.LottoNumbersDto;
+import domain.numberscontainer.Ticket;
+import domain.numberscontainer.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -36,7 +39,7 @@ public class WinningNumbersTest {
 
     @Test
     @DisplayName("Ticket과 당첨 번호 비교")
-    void name() {
+    void findDuplicatedNumbers() {
         LottoNumbersDto lottoNumbersDto1 = createLottoNumberDto(1, 2, 3, 4, 5, 6, 7);
         LottoNumbersDto lottoNumbersDto2 = createLottoNumberDto(4, 5, 6, 7, 8, 9, 10);
         WinningNumbers winningNumbers = new WinningNumbers(lottoNumbersDto1);

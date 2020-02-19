@@ -1,4 +1,6 @@
-package domain;
+package domain.numberscontainer;
+
+import domain.LottoNumber;
 
 public class Ticket extends LottoNumbersContainer {
     public Ticket(LottoNumbersDto lottoNumbersDto) {

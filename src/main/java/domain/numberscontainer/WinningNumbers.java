@@ -1,7 +1,6 @@
-package domain;
+package domain.numberscontainer;
 
-import java.util.Iterator;
-import java.util.Set;
+import domain.LottoNumber;
 
 public class WinningNumbers extends LottoNumbersContainer {
 
