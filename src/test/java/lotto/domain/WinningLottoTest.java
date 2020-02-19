@@ -1,12 +1,27 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 public class WinningLottoTest {
-//    @Test
-//    void validateBonusNumber_보너스볼이_이미_나온_숫자일_때() {
-//        WinningLotto winningLotto = null;
-//        int invalidNumber = 6;
-//        assertThatThrownBy(() -> winningLotto.validateBonusNumber(invalidNumbers))
-//                .isInstanceOf(IllegalArgumentException.class)
-//                .hasMessage("중복되는 로또 번호가 존재합니다.");
-//    }
+    @Test
+    void validateBonusNumber_보너스볼이_이미_나온_숫자일_때() {
+        List<LottoNumber> winningNumbers = new ArrayList<LottoNumber>(Arrays.asList(
+                new LottoNumber("1"),
+                new LottoNumber("2"),
+                new LottoNumber("3"),
+                new LottoNumber("4"),
+                new LottoNumber("5"),
+                new LottoNumber("6")));
+        int invalidNumber = 6;
+        assertThatThrownBy(() -> new WinningLotto(winningNumbers, invalidNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("보너스 번호가 당첨번호와 중복됩니다.");
+    }
+
 }
