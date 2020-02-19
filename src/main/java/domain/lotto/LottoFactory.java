@@ -1,10 +1,11 @@
 package domain.lotto;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+
+import domain.money.LottoMoney;
 
 public class LottoFactory {
 
@@ -22,9 +23,10 @@ public class LottoFactory {
         return lottoNumbers;
     }
 
-    public static LottoTickets publishLottoTickets(int number) {
+    public static LottoTickets publishLottoTickets(LottoMoney lottoMoney) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = FROM_INDEX; i < number; i++) {
+        int lottoPurchaseCounts = lottoMoney.getLottoPurchaseCounts();
+        for (int i = FROM_INDEX; i < lottoPurchaseCounts; i++) {
             lottoTickets.add(publishLottoTicket());
         }
         return new LottoTickets(lottoTickets);

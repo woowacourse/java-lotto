@@ -1,6 +1,6 @@
 package domain.lotto;
 
-import javax.swing.*;
+import domain.result.Rank;
 
 public class WinningLotto {
 

@@ -1,4 +1,4 @@
-package domain.lotto;
+package domain.money;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -22,7 +22,7 @@ public class LottoMoneyTest {
     @Test
     void createMoneyWithChange() {
         int lottoMoneyWithChange = 1001;
-        assertThatThrownBy(() ->new LottoMoney(lottoMoneyWithChange))
+        assertThatThrownBy(() -> new LottoMoney(lottoMoneyWithChange))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -31,5 +31,9 @@ public class LottoMoneyTest {
         int tenLottoTicketMoney = 10000;
         LottoMoney lottoMoney = new LottoMoney(tenLottoTicketMoney);
         assertThat(lottoMoney.getLottoPurchaseCounts()).isEqualTo(10);
+    }
+
+    public static LottoMoney getLottoMoneyFixture() {
+        return new LottoMoney(10000);
     }
 }

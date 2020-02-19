@@ -1,6 +1,5 @@
 package domain.lotto;
 
-import java.util.Iterator;
 import java.util.Set;
 
 public class LottoTicket {
@@ -20,7 +19,7 @@ public class LottoTicket {
     }
 
     public int countMatches(LottoTicket targetTicket) {
-        return (int) lottoTicket.stream()
+        return (int)lottoTicket.stream()
                 .filter(targetTicket::contains)
                 .count();
     }

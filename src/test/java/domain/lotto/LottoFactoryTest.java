@@ -1,11 +1,16 @@
 package domain.lotto;
 
+import static domain.money.LottoMoneyTest.*;
+
 import org.junit.jupiter.api.Test;
+
+import domain.money.LottoMoney;
 
 public class LottoFactoryTest {
 
     @Test
     void testLottoFactoryTest() {
-        LottoTickets lottoTickets = LottoFactory.publishLottoTickets(10);
+        LottoMoney lottoMoney = getLottoMoneyFixture();
+        LottoTickets lottoTickets = LottoFactory.publishLottoTickets(lottoMoney);
     }
 }

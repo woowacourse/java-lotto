@@ -27,12 +27,12 @@ public class LottoTicketTest {
 
     @Test
     void countNumberOfSameLottoNumber() {
-       Set<LottoNumber> lottoNumbers = getProperLottoNumbersFixture();
-       LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-       LottoTicket sameLottoTicket = new LottoTicket(lottoNumbers);
-       int numberOfSameLottoNumber = 6;
+        Set<LottoNumber> lottoNumbers = getProperLottoNumbersFixture();
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket sameLottoTicket = new LottoTicket(lottoNumbers);
+        int numberOfSameLottoNumber = 6;
 
-       assertThat(lottoTicket.countMatches(sameLottoTicket)).isEqualTo(numberOfSameLottoNumber);
+        assertThat(lottoTicket.countMatches(sameLottoTicket)).isEqualTo(numberOfSameLottoNumber);
     }
 
     @Test
@@ -56,7 +56,6 @@ public class LottoTicketTest {
         return new LottoTicket(lottoNumbers);
     }
 
-
     public static LottoTicket getLottoTicketFromTwoToEightWithoutSevenFixture() {
         Set<LottoNumber> lottoNumbers = getLottoNumberFromTwoToEightWithoutSevenFixture();
         return new LottoTicket(lottoNumbers);
@@ -77,14 +76,15 @@ public class LottoTicketTest {
         return new LottoTicket(lottoNumbers);
     }
 
-    public static List<LottoTicket> getLottoTicketsFixture() {
+    public static List<LottoTicket> getLottoTicketListFixture() {
         LottoTicket firstLottoTicket = getLottoTicketFromOneToSixFixture();
         LottoTicket secondLottoTicket = getLottoTicketFromOneToSevenWithoutSixFixture();
         LottoTicket thirdLottoTicket = getLottoTicketFromTwoToEightWithoutSevenFixture();
         LottoTicket fourthLottoTicket = getLottoTicketFromThreeToEightFixture();
         LottoTicket fifthLottoTicket = getLottoTicketFromFourToNineFixture();
         LottoTicket missLottoTicket = getLottoTicketFromFiveToTenFixture();
-        return Arrays.asList(firstLottoTicket, secondLottoTicket, thirdLottoTicket, fourthLottoTicket, fifthLottoTicket, missLottoTicket);
+        return Arrays.asList(firstLottoTicket, secondLottoTicket, thirdLottoTicket, fourthLottoTicket, fifthLottoTicket,
+                missLottoTicket);
     }
 
 }
