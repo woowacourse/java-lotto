@@ -65,14 +65,14 @@ public class WinningNumberTest {
 
         Set<LottoNumber> myLotto = new HashSet<>();
         myLotto.add(new LottoNumber(1));
-        myLotto.add(new LottoNumber(2));
-        myLotto.add(new LottoNumber(3));
+        myLotto.add(new LottoNumber(20));
+        myLotto.add(new LottoNumber(30));
         myLotto.add(new LottoNumber(4));
         myLotto.add(new LottoNumber(5));
         myLotto.add(new LottoNumber(7));
         Lotto myLottoNumbers = new Lotto(myLotto);
 
         LottoResult result = winningNumber.findRank(myLottoNumbers);
-        assertThat(result).isEqualTo(LottoResult.SECOND);
+        assertThat(result).isEqualTo(LottoResult.FIFTH);
     }
 }

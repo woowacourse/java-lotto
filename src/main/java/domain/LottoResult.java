@@ -22,6 +22,12 @@ public enum LottoResult {
     }
 
     public static LottoResult findResult(int winningMatchCount, boolean bonusMatchCount) {
+        if (winningMatchCount < 5) {
+            return Arrays.stream(LottoResult.values())
+                    .filter(result -> result.winningMatchCount == winningMatchCount)
+                    .findFirst()
+                    .orElse(null);
+        }
         return Arrays.stream(LottoResult.values())
                 .filter(result -> result.winningMatchCount == winningMatchCount)
                 .filter(result -> result.isBonusMatch == bonusMatchCount)
