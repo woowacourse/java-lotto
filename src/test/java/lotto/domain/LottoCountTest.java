@@ -13,4 +13,12 @@ public class LottoCountTest {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("천 원 단위");
 	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {999, 0, -100})
+	void 한_장도_살_수_없는_경우(int value) {
+		assertThatThrownBy(() -> new LottoCount(value))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("부족합니다");
+	}
 }
