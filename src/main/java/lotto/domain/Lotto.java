@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Lotto {
 	private static final int LOTTO_SIZE = 6;
+
 	private final List<Integer> lottoNumber;
 
 	public Lotto(final List<Integer> lottoNumber) {
@@ -31,12 +32,8 @@ public class Lotto {
 	}
 
 	private void validateDuplicateNumber(List<Integer> lottoNumber) {
-		if (new HashSet<>(lottoNumber).size() != lottoNumber.size()) {
+		if (lottoNumber.size() != new HashSet<>(lottoNumber).size()) {
 			throw new IllegalArgumentException("중복된 번호가 존재합니다!");
 		}
-	}
-
-	public boolean contains(int value) {
-		return lottoNumber.contains(value);
 	}
 }
