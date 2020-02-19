@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 public class LottoTicketTest {
 	@Test
 	void LottoTicketToStringTest() {
-
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
 		lottoNumbers.add(new LottoNumber(1));
 		lottoNumbers.add(new LottoNumber(2));

@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class LottoTicket {
 	public static final String DELIMITER = ", ";
@@ -38,5 +39,9 @@ public class LottoTicket {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
+	}
+
+	public Stream<LottoNumber> stream() {
+		return lottoNumbers.stream();
 	}
 }

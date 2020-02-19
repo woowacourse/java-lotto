@@ -5,14 +5,15 @@ import java.util.Iterator;
 public class PurchasingAmount implements Iterator<Integer> {
 	public static final int PURCHASE_UNIT = 1000;
 	public static final int ZERO = 0;
+
 	private int amount;
 
-	public PurchasingAmount(final int amount) {
+	public PurchasingAmount(int amount) {
 		checkValidationOf(amount);
 		this.amount = amount;
 	}
 
-	private void checkValidationOf(final int amount) {
+	private void checkValidationOf(int amount) {
 		if (amount == 0) {
 			throw new IllegalArgumentException("최소 한장이상 구매 하셔야 합니다.");
 		}
@@ -24,7 +25,7 @@ public class PurchasingAmount implements Iterator<Integer> {
 		}
 	}
 
-	private boolean hasChangeMoney(final int amount) {
+	private boolean hasChangeMoney(int amount) {
 		return amount % PURCHASE_UNIT != ZERO;
 	}
 

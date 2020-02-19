@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
@@ -69,5 +70,13 @@ public class WinningNumbers {
 
 	private boolean isNotMatchSize(List<String> winningNumbersValue) {
 		return winningNumbersValue.size() != WINNING_NUMBER_SIZE;
+	}
+
+	public List<LottoNumber> getOrdinarys() {
+		return Collections.unmodifiableList(winningNumbers);
+	}
+
+	public boolean isMatchWithBonus(LottoNumber lottoNumber) {
+		return lottoNumber.equals(bonusNumber);
 	}
 }
