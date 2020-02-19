@@ -40,11 +40,11 @@ public class Lotto implements Iterable<LottoNumber> {
 			throw new IllegalArgumentException(DUPLICATED_NUMBER_MESSAGE);
 		}
 	}
-	
+
 	public static Lotto of(int... lottoNumbers) {
-		return new Lotto(Arrays.stream(lottoNumbers)
+		return Arrays.stream(lottoNumbers)
 				.mapToObj(LottoNumber::of)
-				.collect(Collectors.toList()));
+				.collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
 	}
 
 	public boolean contains(LottoNumber lottoNumber) {
