@@ -15,7 +15,7 @@ public class OutputView {
 	private static final String SECOND_RANK_ADDITIONAL_MESSAGE = "보너스 볼 일치 ";
 	private static final String PURCHASED_LOTTO_MESSAGE = "개를 구매했습니다.";
 	private static final String NEW_LINE = "\n";
-	private static final String STATISTICS_FORMAT = "%d개 일치 %s %d원 - %d개%s";
+	private static final String STATISTICS_FORMAT = "%d개 일치 %s%d원 - %d개%s";
 
 	public static void showEarningRate(Money money, List<Rank> ranks) {
 		int sum = ranks.stream()
@@ -34,7 +34,7 @@ public class OutputView {
 			rankCounts.putIfAbsent(rank, 0L);
 		}
 
-		rankCounts.keySet().forEach(rank ->
+		rankCounts.keySet().stream().sorted().forEach(rank ->
 			System.out.printf(STATISTICS_FORMAT, rank.getHitCount(), printBonus(rank), rank.getReward(),
 				rankCounts.get(rank), NEW_LINE));
 	}
@@ -56,5 +56,10 @@ public class OutputView {
 			.map(x -> String.valueOf(x.getNumbers()))
 			.collect(Collectors.joining(NEW_LINE))
 		);
+	}
+
+	public static void showResult(Money money, List<Rank> ranks) {
+		showStatistics(ranks);
+		showEarningRate(money, ranks);
 	}
 }
