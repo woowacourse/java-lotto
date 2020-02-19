@@ -1,24 +1,30 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManager {
-	private List<Lotto> lotteries = new ArrayList<>();
+	private List<Lotto> lotteries;
 
-	// public long compareTicket(Lotto lotto, Lotto winLotto) {
-	// 	return lotto.stream()
-	// 		.filter(x -> winLotto.lottoNumbers.contains(x))
-	// 		.count();
-	// }
- /*
 	public LottoManager(int count) {
-		lotteries.stream()
-			.map(same(5))
-			.forEach();
-		this.lotteries = LottoFactory.createLotteries(count);
+		lotteries = LottoFactory.createLotteries(count);
 	}
 
-  */
+	public void 통계(WinLotto winLotto) {
+		for (Lotto lotto : lotteries) {
+			int count = winLotto.compare(lotto);
+			boolean isBonus = winLotto.isMatchBonus(lotto);
+			if (count >= 3) {
+				resultCountPlus(count, isBonus);
+			}
+		}
+	}
+
+	private void resultCountPlus(int count, boolean isFalg) {
+		Result result = Result.of(count);
+		if (result == Result.THREE && isFalg) {
+			result = Result.TWO;
+		}
+		result.countPlus();
+	}
 
 }

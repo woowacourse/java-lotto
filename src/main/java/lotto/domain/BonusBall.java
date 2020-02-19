@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class BonusBall {
 	private int bonusBall;
 
@@ -10,7 +8,7 @@ public class BonusBall {
 		this.bonusBall = Integer.valueOf(bonusBall);
 	}
 
-	public boolean isMatchBonusBall(List<Integer> numbers) {
-		return numbers.contains(this.bonusBall);
+	public boolean isMatchBonusBall(Lotto lotto) {
+		return lotto.isContain(this.bonusBall);
 	}
 }

@@ -15,4 +15,8 @@ public class WinLotto extends Lotto {
 			.filter(x -> lotto.isContain(x))
 			.count();
 	}
+
+	public boolean isMatchBonus(Lotto lotto) {
+		return bonusBall.isMatchBonusBall(lotto);
+	}
 }
