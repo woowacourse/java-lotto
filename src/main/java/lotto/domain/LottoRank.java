@@ -31,6 +31,6 @@ public enum LottoRank {
 	}
 
 	public long getTotal(int count) {
-		return count * prize;
+		return (long) count * (long) prize;
 	}
 }

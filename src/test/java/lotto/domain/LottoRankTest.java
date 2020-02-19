@@ -14,7 +14,7 @@ public class LottoRankTest {
 	@Test
 	void getTotal() {
 		long totalPrize = LottoRank.FIRST.getTotal(3);
-		long expected = 2000000000 * 3;
+		long expected = 2_000_000_000L * 3L;
 		assertThat(totalPrize).isEqualTo(expected);
 	}
 }
