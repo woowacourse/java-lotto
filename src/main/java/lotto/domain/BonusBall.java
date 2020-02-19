@@ -5,9 +5,9 @@ import java.util.List;
 public class BonusBall {
 	private int bonusBall;
 
-	public BonusBall(int bonusBall) {
+	public BonusBall(String bonusBall) {
 		// 검증
-		this.bonusBall = bonusBall;
+		this.bonusBall = Integer.valueOf(bonusBall);
 	}
 
 	public boolean isMatchBonusBall(List<Integer> numbers) {
