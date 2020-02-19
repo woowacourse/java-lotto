@@ -8,6 +8,8 @@ public class LottoNumber {
 	private static final int MIN = 1;
 	private static final int MAX = 60;
 
+	private final int lottoNumber;
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -21,9 +23,7 @@ public class LottoNumber {
 		return Objects.hash(lottoNumber);
 	}
 
-	private int lottoNumber;
-
-	public LottoNumber(int lottoNumber) throws LottoNumberIllegalArgumentException {
+	public LottoNumber(final int lottoNumber) throws LottoNumberIllegalArgumentException {
 		checkIsWithinRange(lottoNumber);
 		this.lottoNumber = lottoNumber;
 	}
@@ -32,5 +32,9 @@ public class LottoNumber {
 		if (number < MIN || number > MAX) {
 			throw new LottoNumberIllegalArgumentException(number);
 		}
+	}
+
+	public static int compare(LottoNumber a, LottoNumber b) {
+		return a.lottoNumber - b.lottoNumber;
 	}
 }
