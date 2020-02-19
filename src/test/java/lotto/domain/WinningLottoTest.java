@@ -33,11 +33,7 @@ public class WinningLottoTest {
 
 		Lottos lottos = LottosFactory.createLottosByCount(2);
 
-		Map<LottoRank, Integer> result = winningLotto.getResult(lottos);
-		assertThat(result.get(LottoRank.THIRD)).isEqualTo(2);
-		assertThat(result.get(LottoRank.FIRST)).isEqualTo(0);
-		assertThat(result.get(LottoRank.SECOND)).isEqualTo(0);
-		assertThat(result.get(LottoRank.FOURTH)).isEqualTo(0);
-		assertThat(result.get(LottoRank.FIFTH)).isEqualTo(0);
+		TotalResult totalResult = winningLotto.getResult(lottos);
+		assertThat(totalResult.getProfitRate()).isEqualTo(150000);
 	}
 }

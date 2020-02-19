@@ -19,7 +19,7 @@ public class WinningLotto {
 		}
 	}
 
-	public Map<LottoRank, Integer> getResult(Lottos lottos) {
+	public TotalResult getResult(Lottos lottos) {
 		Map<LottoRank, Integer> result = new HashMap<>();
 		for(LottoRank lottoRank : LottoRank.values()) {
 			result.put(lottoRank, 0);
@@ -31,6 +31,6 @@ public class WinningLotto {
 			}
 			result.put(rank, result.get(rank) + 1);
 		}
-		return result;
+		return new TotalResult(new LottoResult(result), lottos.getSize());
 	}
 }
