@@ -3,31 +3,45 @@ package lotto.domain.result;
 import java.util.Arrays;
 
 public enum GameResult {
-    FIRST_RANK(2000000000, (correctLottoNumberSize, isCorrectBonusNumber)
-            -> correctLottoNumberSize == 6),
-    SECOND_RANK(30000000, (correctLottoNumberSize, isCorrectBonusNumber)
-            -> correctLottoNumberSize == 5 && isCorrectBonusNumber),
-    THIRD_RANK(1500000, (correctLottoNumberSize, isCorrectBonusNumber)
-            -> correctLottoNumberSize == 5 && isCorrectBonusNumber == false),
-    FOURTH_RANK(50000, (correctLottoNumberSize, isCorrectBonusNumber)
-            -> correctLottoNumberSize == 4),
-    FIFTH_RANK(5000, (correctLottoNumberSize, isCorrectBonusNumber)
-            -> correctLottoNumberSize == 3),
-    NO_RANK(0, (correctLottoNumberSize, isCorrectBonusNumber)
-            -> correctLottoNumberSize < 3);
+    FIRST_RANK(2000000000, 6),
+    SECOND_RANK(30000000, 5),
+    THIRD_RANK(1500000, 5),
+    FOURTH_RANK(50000, 4),
+    FIFTH_RANK(5000, 3),
+    NO_RANK(0, 0);
 
-    int prize;
-    GameResultStrategy gameResultStrategy;
+    public final int prize;
+    public final int correctLottoNumberSize;
 
-    GameResult(int prize, GameResultStrategy gameResultStrategy) {
+    GameResult(int prize, int correctLottoNumberSize) {
         this.prize = prize;
-        this.gameResultStrategy = gameResultStrategy;
+        this.correctLottoNumberSize = correctLottoNumberSize;
     }
 
     public static GameResult calculateRank(int correctNumber, boolean isCorrectBonusNumber) {
-        return Arrays.stream(GameResult.values())
-                .filter(gameResult -> gameResult.gameResultStrategy.calculate(correctNumber, isCorrectBonusNumber))
+        GameResult calculatedGameResult = Arrays.stream(GameResult.values())
+                .filter(gameResult -> gameResult.isSame(correctNumber))
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(GameResult.NO_RANK);
+        if (calculatedGameResult.isThirdRank(isCorrectBonusNumber)) {
+            calculatedGameResult = GameResult.THIRD_RANK;
+        }
+        return calculatedGameResult;
+    }
+
+    private boolean isThirdRank(boolean isCorrectBonusNumber) {
+        return this.isSame(5) && isCorrectBonusNumber == false;
+    }
+
+    private boolean isSame(int collectLottoNumber) {
+        return this.correctLottoNumberSize == collectLottoNumber;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public int getCorrectLottoNumberSize() {
+        return correctLottoNumberSize;
     }
 }

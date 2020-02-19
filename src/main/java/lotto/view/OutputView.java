@@ -4,7 +4,10 @@ import lotto.domain.number.AllLottoNumbers;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.number.PurchaseNumber;
+import lotto.domain.result.GameResult;
+import lotto.domain.result.GameResults;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,5 +32,24 @@ public class OutputView {
                 .map(Object::toString)
                 .collect(Collectors.joining(", ", "[", "]"));
         System.out.println(output);
+    }
+
+    public static void printGameResults(GameResults results) {
+        System.out.println("당첨 통계\n" + "---------");
+        Arrays.stream(GameResult.values())
+                .filter(gameResult -> !gameResult.equals(GameResult.NO_RANK))
+                .forEach(gameResult -> printGameResultElement(results, gameResult));
+    }
+
+    private static void printGameResultElement(GameResults results, GameResult gameResult) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(gameResult.getCorrectLottoNumberSize());
+        sb.append("개 일치");
+        if (gameResult.equals(GameResult.SECOND_RANK)) {
+            sb.append("보너스 볼 일치");
+        }
+        sb.append("(").append(gameResult.getPrize()).append("원)-");
+        sb.append(results.calculateCaseNumberSize(gameResult)).append("개");
+        System.out.println(sb.toString());
     }
 }
