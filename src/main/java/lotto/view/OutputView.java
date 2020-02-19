@@ -36,4 +36,7 @@ public class OutputView {
 		return "";
 	}
 
+	public static void showPurchasedLottoCount(int purchasedLottoCount) {
+		System.out.println(purchasedLottoCount + "개를 구매했습니다.");
+	}
 }
