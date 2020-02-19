@@ -15,7 +15,7 @@ class LottoFactoryTest {
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "1500,1", "2000,2"})
     void test1(int money, int expect) {
-        List<LottoTicket> lottoTickets = LottoFactory.buyTicket(money);
+        List<LottoTicket> lottoTickets = LottoCompany.buyTicket(money);
 
         assertThat(lottoTickets).hasSize(expect);
     }

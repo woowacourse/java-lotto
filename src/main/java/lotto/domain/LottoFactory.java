@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -15,6 +15,6 @@ public class LottoFactory {
     }
 
     public static List<LottoBall> getInstance() {
-        return Collections.unmodifiableList(instance);
+        return new ArrayList<>(instance);
     }
 }

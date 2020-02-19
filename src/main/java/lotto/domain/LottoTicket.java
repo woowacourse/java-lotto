@@ -31,4 +31,11 @@ public class LottoTicket {
     public int hashCode() {
         return Objects.hash(lottoBalls);
     }
+
+    @Override
+    public String toString() {
+        return "LottoTicket{" +
+                "lottoBalls=" + lottoBalls +
+                '}';
+    }
 }

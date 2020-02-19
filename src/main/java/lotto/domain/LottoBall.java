@@ -2,12 +2,16 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoBall {
+public final class LottoBall {
     private final int number;
 
     public LottoBall(int number) {
         validateNumber(number);
         this.number = number;
+    }
+
+    public static LottoBall of(int number) {
+        return new LottoBall(number);
     }
 
     private void validateNumber(int number) {
@@ -31,5 +35,12 @@ public class LottoBall {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoBall{" +
+                "number=" + number +
+                '}';
     }
 }

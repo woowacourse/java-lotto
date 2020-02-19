@@ -1,13 +1,17 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class LottoCompany {
     private static final int TICKET_PRICE = 1000;
     private static final int BALL_COUNT = 6;
     private static final List<LottoBall> balls = LottoFactory.getInstance();
 
-    public List<LottoTicket> buyTicket(int money) {
+    public static List<LottoTicket> buyTicket(int money) {
         int amount = money / TICKET_PRICE;
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -18,7 +22,7 @@ public class LottoCompany {
         return lottoTickets;
     }
 
-    private LottoTicket getTicket() {
+    private static LottoTicket getTicket() {
         Collections.shuffle(balls);
         Set<LottoBall> lottoBalls = new HashSet<>();
         for (int i = 0; i < BALL_COUNT; i++) {
