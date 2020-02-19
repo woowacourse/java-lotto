@@ -22,4 +22,8 @@ public class WinningLotto extends Lotto {
             throw new IllegalArgumentException();
         }
     }
+
+    public boolean isBonusNumber(List<Integer> lotto) {
+        return lotto.contains(this.bonusNumber);
+    }
 }

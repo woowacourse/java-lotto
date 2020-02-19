@@ -39,4 +39,9 @@ public class Lotto {
             throw new IllegalArgumentException("잘못된 로또 번호입니다.");
         }
     }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
 }
