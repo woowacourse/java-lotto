@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LottoTicket {
     private static final int MAX_LOTTO_TICKET_SIZE = 6;
@@ -15,6 +13,7 @@ public class LottoTicket {
         validateLottoTicketSize(lottoTicket);
         validateLottoTicketNumberRange(lottoTicket);
         validateDuplicateLottoNumber(lottoTicket);
+        Collections.sort(lottoTicket);
         this.lottoTicket = lottoTicket;
     }
 
