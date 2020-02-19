@@ -7,6 +7,11 @@ public class LottoNumber {
     private static final String NOT_IN_SCOPE_NUMBERS_ERROR_MSG = "로또 번호의 범위가 잘못되었습니다.";
     private static final String NOT_NUMBER_MSG = "정수로 입력하셔야 합니다.";
 
+    private int number;
+
+    public LottoNumber(String number){
+        this.number = Integer.parseInt(number);
+    }
 
     public static void validateNumber(String lottoNumber) {
         try {
@@ -23,5 +28,8 @@ public class LottoNumber {
         }
     }
 
+    public int getNumber() {
+        return number;
+    }
 }
 
