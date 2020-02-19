@@ -14,16 +14,6 @@ public class Lotto {
 		return lottoNumbers.toString();
 	}
 
-	public int compare(WinLotto winLotto) {
-		int count = 0;
-		for (int num : lottoNumbers) {
-			winLotto.isContain(num);
-			count++;
-		}
-		return count;
-
-	}
-
 	protected boolean isContain(int num) {
 		return lottoNumbers.contains(num);
 	}

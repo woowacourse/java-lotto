@@ -26,7 +26,26 @@ public enum Result {
 			.orElseThrow(() -> new IllegalArgumentException(""));
 	}
 
+	public static long calculateTotalReward() {
+		return Arrays.stream(values())
+			.map(x -> x.reward * x.count)
+			.reduce((x, y) -> x + y)
+			.get();
+	}
+
 	public void countPlus() {
-		this.count += 1;
+		this.count++;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public long getReward() {
+		return reward;
+	}
+
+	public int getHitCount() {
+		return hitCount;
 	}
 }

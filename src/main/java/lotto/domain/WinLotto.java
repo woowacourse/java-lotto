@@ -17,6 +17,6 @@ public class WinLotto extends Lotto {
 	}
 
 	public boolean isMatchBonus(Lotto lotto) {
-		return bonusBall.isMatchBonusBall(lotto);
+		return bonusBall.isContainBonusBall(lotto);
 	}
 }

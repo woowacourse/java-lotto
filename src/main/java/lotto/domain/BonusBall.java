@@ -8,7 +8,7 @@ public class BonusBall {
 		this.bonusBall = Integer.valueOf(bonusBall);
 	}
 
-	public boolean isMatchBonusBall(Lotto lotto) {
+	public boolean isContainBonusBall(Lotto lotto) {
 		return lotto.isContain(this.bonusBall);
 	}
 }
