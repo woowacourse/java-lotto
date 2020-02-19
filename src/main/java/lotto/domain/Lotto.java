@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -37,5 +38,11 @@ public class Lotto {
 
 	public boolean contains(Ball ball) {
 		return balls.contains(ball);
+	}
+
+	public int countCommonBalls(Lotto lotto) {
+		List<Ball> sameBalls = new ArrayList<>(balls);
+		sameBalls.retainAll(lotto.balls);
+		return sameBalls.size();
 	}
 }

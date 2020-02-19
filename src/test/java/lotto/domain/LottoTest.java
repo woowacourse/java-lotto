@@ -36,4 +36,14 @@ public class LottoTest {
 		Lotto lotto = new Lotto(balls);
 		assertThat(lotto.contains(Ball.of(ballNo))).isEqualTo(expected);
 	}
+
+	@DisplayName("보내준 로또와 얼마나 일치하는지 확인")
+	@Test
+	void hasLottoBall() {
+		List<Ball> balls = Arrays.asList(Ball.of(1), Ball.of(2), Ball.of(3), Ball.of(4), Ball.of(5), Ball.of(6));
+		Lotto lotto = new Lotto(balls);
+		List<Ball> balls2 = Arrays.asList(Ball.of(1), Ball.of(12), Ball.of(7), Ball.of(4), Ball.of(5), Ball.of(6));
+		Lotto lotto2 = new Lotto(balls2);
+		assertThat(lotto.countCommonBalls(lotto2)).isEqualTo(4);
+	}
 }
