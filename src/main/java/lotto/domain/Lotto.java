@@ -8,7 +8,7 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
-    private List<Integer> lottoNumbers;
+    protected List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
         validateDuplication(numbers);
