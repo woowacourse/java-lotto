@@ -17,6 +17,10 @@ public class AutoNumbers {
         autoNumbers.sort(Comparator.naturalOrder());
     }
 
+    public AutoNumbers(List<Integer> input) {
+        this.autoNumbers = input;
+    }
+
     public List<Integer> getAutoNumbers() {
         return autoNumbers;
     }
