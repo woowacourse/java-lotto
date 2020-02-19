@@ -33,4 +33,16 @@ public class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("각 숫자의 범위 유효성 확인")
+    void validateNumberScopeTest() {
+        List<Integer> input1 = Arrays.asList(0, 1, 2, 3, 4, 5);
+        List<Integer> input2 = Arrays.asList(1, 2, 3, 4, 5, 46);
+        assertThatThrownBy(() -> Lotto.validateNumberScope(input1))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Lotto.validateNumberScope(input2))
+                .isInstanceOf(IllegalArgumentException.class);
+
+    }
+
 }
