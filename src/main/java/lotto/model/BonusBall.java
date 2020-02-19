@@ -1,7 +1,7 @@
 package lotto.model;
 
 public class BonusBall {
-    private int bonusNo;
+    public static int bonusNo;
 
     public BonusBall(String input) {
         int inputNo = isNumber(input);
