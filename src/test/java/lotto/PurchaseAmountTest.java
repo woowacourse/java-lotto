@@ -33,7 +33,7 @@ public class PurchaseAmountTest {
 
     @Test
     void 구매금액에_따른_로또_갯수_반환_테스트(){
-        PurchaseAmount amount = new PurchaseAmount("14000");
+        PurchaseAmount amount = new PurchaseAmount("14800");
         int lottoCount = amount.calculateCount();
         assertThat(lottoCount).isEqualTo(14);
     }
