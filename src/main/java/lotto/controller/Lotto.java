@@ -21,18 +21,10 @@ public class Lotto {
     }
 
     public static int isInWinNumber(AutoNumber autoNumbers) {
-        int count = 0;
-        for (int autoNumber : autoNumbers.getAutoNumber()) {
-            count += checkInWinNumber(autoNumber);
-        }
-        return count;
-    }
-
-    private static int checkInWinNumber(int autoNumber) {
-        if (WinNumber.winNumbers.contains(autoNumber)) {
-            return 1;
-        }
-        return 0;
+        return (int) autoNumbers.getAutoNumber()
+                .stream()
+                .filter(x -> WinNumber.winNumbers.contains(x))
+                .count();
     }
 
     private static void checkCountOverThree(HashMap<String, Integer> resultCount, AutoNumber autoNum, int count) {
