@@ -72,8 +72,8 @@ public class WinningNumberTest {
         Lotto myLottoNumbers = new Lotto(myLotto);
 
         int winningMatchCount = winningNumber.countWinningMatch(myLottoNumbers);
-        boolean bonusMatchCount = winningNumber.countBonusMatch(myLottoNumbers);
+        boolean isBonusMatch = winningNumber.isBonusMatch(myLottoNumbers);
         assertThat(winningMatchCount).isEqualTo(5);
-        assertThat(bonusMatchCount).isTrue();
+        assertThat(isBonusMatch).isTrue();
     }
 }

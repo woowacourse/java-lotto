@@ -20,7 +20,7 @@ public class WinningNumber {
         return winningNumbers.countMatchNumbers(myLottoNumbers);
     }
 
-    public boolean countBonusMatch(Lotto myLottoNumber) {
+    public boolean isBonusMatch(Lotto myLottoNumber) {
         return myLottoNumber.contains(bonusNumber);
     }
 }
