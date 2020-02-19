@@ -14,7 +14,8 @@ public class LottosTest {
 		Lottos lottos = new Lottos(Arrays.asList(
 				Lotto.of(1, 2, 5, 43, 44, 45),
 				Lotto.of(1, 2, 5, 43, 44, 45),
-				Lotto.of(1, 2, 3, 43, 44, 45)));
+				Lotto.of(1, 2, 3, 43, 44, 45)
+		));
 		WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 5, 43, 44, 45), LottoNumber.of(7));
 
 		Map<LottoRank, Long> expected = new HashMap<>();

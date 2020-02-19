@@ -19,7 +19,7 @@ public class RandomLottoGenerator implements LottoGenerator {
 	@Override
 	public Lottos generate(int count) {
 		List<Lotto> lottos = new ArrayList<>();
-		for (;count > 0; --count) {
+		for (; count > 0; --count) {
 			lottos.add(generate());
 		}
 		return new Lottos(lottos);

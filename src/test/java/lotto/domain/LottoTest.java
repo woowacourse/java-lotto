@@ -16,12 +16,14 @@ public class LottoTest {
 	@Test
 	@DisplayName("선택된 로또 번호 리스트가 정상적으로 생성된 경우")
 	void constructor() {
-		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.of(1),
+		List<LottoNumber> lottoNumbers = Arrays.asList(
+				LottoNumber.of(1),
 				LottoNumber.of(2),
 				LottoNumber.of(3),
 				LottoNumber.of(43),
 				LottoNumber.of(44),
-				LottoNumber.of(45));
+				LottoNumber.of(45)
+		);
 		assertThat(new Lotto(lottoNumbers)).isInstanceOf(Lotto.class);
 	}
 
@@ -29,18 +31,23 @@ public class LottoTest {
 		return Stream.of(
 				null,
 				new ArrayList<>(),
-				Arrays.asList(LottoNumber.of(1),
+				Arrays.asList(
+						LottoNumber.of(1),
 						LottoNumber.of(2),
 						LottoNumber.of(3),
 						LottoNumber.of(43),
-						LottoNumber.of(44)),
-				Arrays.asList(LottoNumber.of(1),
+						LottoNumber.of(44)
+				),
+				Arrays.asList(
+						LottoNumber.of(1),
 						LottoNumber.of(2),
 						LottoNumber.of(3),
 						LottoNumber.of(4),
 						LottoNumber.of(43),
 						LottoNumber.of(44),
-						LottoNumber.of(45)));
+						LottoNumber.of(45)
+				)
+		);
 	}
 
 	@ParameterizedTest
@@ -53,30 +60,36 @@ public class LottoTest {
 	@Test
 	@DisplayName("중복된 수가 있는 경우")
 	void constructor_중복된_수가_있는_경우() {
-		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.of(1),
+		List<LottoNumber> lottoNumbers = Arrays.asList(
+				LottoNumber.of(1),
 				LottoNumber.of(2),
 				LottoNumber.of(2),
 				LottoNumber.of(43),
 				LottoNumber.of(44),
-				LottoNumber.of(45));
+				LottoNumber.of(45)
+		);
 		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(lottoNumbers));
 	}
 
 	@Test
 	@DisplayName("수가 정렬되어 있는지 확인")
 	void constructor_수가_정렬되어_있는지_확인() {
-		Lotto lotto = new Lotto(Arrays.asList(LottoNumber.of(45),
+		Lotto lotto = new Lotto(Arrays.asList(
+				LottoNumber.of(45),
 				LottoNumber.of(44),
 				LottoNumber.of(43),
 				LottoNumber.of(1),
 				LottoNumber.of(2),
-				LottoNumber.of(3)));
-		Lotto expected = new Lotto(Arrays.asList(LottoNumber.of(1),
+				LottoNumber.of(3)
+		));
+		Lotto expected = new Lotto(Arrays.asList(
+				LottoNumber.of(1),
 				LottoNumber.of(2),
 				LottoNumber.of(3),
 				LottoNumber.of(43),
 				LottoNumber.of(44),
-				LottoNumber.of(45)));
+				LottoNumber.of(45)
+		));
 		assertThat(lotto).isEqualTo(expected);
 	}
 }
