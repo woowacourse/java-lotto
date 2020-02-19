@@ -11,7 +11,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static void validateDistinctNumbers(List<LottoNumber> inputNumbers) {
+    private void validateDistinctNumbers(List<LottoNumber> inputNumbers) {
         if (inputNumbers.stream().mapToInt(LottoNumber::getNumber).distinct().count() != inputNumbers.size()) {
             throw new IllegalArgumentException(NOT_DISTINCT_NUMBERS_ERROR_MSG);
         }

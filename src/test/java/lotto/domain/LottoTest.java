@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +18,7 @@ public class LottoTest {
                 new LottoNumber("4"),
                 new LottoNumber("5"),
                 new LottoNumber("5")));
-        assertThatThrownBy(() -> Lotto.validateDistinctNumbers(invalidNumbers))
+        assertThatThrownBy(() -> new Lotto(invalidNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복되는 로또 번호가 존재합니다.");
     }

@@ -9,16 +9,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoNumberTest {
     @Test
     void validateNumberScope_숫자가_범위보다_작을_때() {
-        int invalidNumberUnderScope = -11;
-        assertThatThrownBy(() -> LottoNumber.validateNumberScope(invalidNumberUnderScope))
+        String invalidNumberUnderScope = "-11";
+        assertThatThrownBy(() -> new LottoNumber(invalidNumberUnderScope))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호의 범위가 잘못되었습니다.");
     }
 
     @Test
-    void validateNumberScope_숫자가_범위보다_클_때 () {
-        int invalidNumberOverScope = 50;
-        assertThatThrownBy(() -> LottoNumber.validateNumberScope(invalidNumberOverScope))
+    void validateNumberScope_숫자가_범위보다_클_때() {
+        String invalidNumberOverScope = "50";
+        assertThatThrownBy(() -> new LottoNumber(invalidNumberOverScope))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호의 범위가 잘못되었습니다.");
     }
@@ -26,7 +26,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"천원", "3.2"})
     void validateNumber_정수로_입력하지_않았을_때(String invalidInputMoney) {
-        assertThatThrownBy(() -> LottoNumber.validateNumber(invalidInputMoney))
+        assertThatThrownBy(() -> new LottoNumber(invalidInputMoney))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("정수로 입력하셔야 합니다.");
     }

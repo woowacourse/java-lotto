@@ -9,11 +9,13 @@ public class LottoNumber {
 
     private int number;
 
-    public LottoNumber(String number){
+    public LottoNumber(String number) {
+        validateNumber(number);
+        validateNumberScope(Integer.parseInt(number));
         this.number = Integer.parseInt(number);
     }
 
-    public static void validateNumber(String lottoNumber) {
+    private void validateNumber(String lottoNumber) {
         try {
             Integer.parseInt(lottoNumber);
         } catch (NumberFormatException e) {
@@ -21,7 +23,7 @@ public class LottoNumber {
         }
     }
 
-    public static void validateNumberScope(int lottoNumber) {
+    private void validateNumberScope(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER
                 || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(NOT_IN_SCOPE_NUMBERS_ERROR_MSG);

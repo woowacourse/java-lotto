@@ -6,10 +6,16 @@ public class Payment {
     private static final String UNDER_LOTTO_PRICE_MSG = "1000원 이상으로 입력해야 합니다.";
     private static final String NOT_NUMBER_MSG = "정수로 입력하셔야 합니다.";
 
-    public Payment() {
+    private int payment;
+
+    public Payment(String inputMoney) {
+        validateNumber(inputMoney);
+        validateUnderLottoPrice(Integer.parseInt(inputMoney));
+        validatePricePerLotto(Integer.parseInt(inputMoney));
+        this.payment = Integer.parseInt(inputMoney);
     }
 
-    public static void validateNumber(String inputMoney) {
+    private void validateNumber(String inputMoney) {
         try {
             Integer.parseInt(inputMoney);
         } catch (NumberFormatException e) {
@@ -17,13 +23,13 @@ public class Payment {
         }
     }
 
-    static void validatePricePerLotto(int inputMoney) {
+    private void validatePricePerLotto(int inputMoney) {
         if (inputMoney % MONEY_PER_LOTTO != 0) {
             throw new IllegalArgumentException(PRICE_PER_LOTTO_ERROR_MSG);
         }
     }
 
-    static void validateUnderLottoPrice(int inputMoney) {
+    private void validateUnderLottoPrice(int inputMoney) {
         if (inputMoney < MONEY_PER_LOTTO) {
             throw new IllegalArgumentException(UNDER_LOTTO_PRICE_MSG);
         }
