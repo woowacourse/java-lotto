@@ -1,7 +1,7 @@
 package lotto.model;
 
 public class Payment {
-    private int payment = 0;
+    public static int payment = 0;
 
     public Payment(String input) {
         int payment = isNotNumber(input);
