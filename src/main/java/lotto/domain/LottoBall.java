@@ -1,12 +1,16 @@
 package lotto.domain;
 
 public class LottoBall {
-    private int lottoBall;
+    private int lottoNumber;
 
-    public LottoBall(int lottoBall){
-        if(lottoBall<0 || lottoBall > 45){
+    public LottoBall(int lottoNumber){
+        if(lottoNumber < 0 || lottoNumber > 45){
             throw new IllegalArgumentException("로또 볼 범위를 벗어났습니다.");
         }
-        this.lottoBall = lottoBall;
+        this.lottoNumber = lottoNumber;
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 }

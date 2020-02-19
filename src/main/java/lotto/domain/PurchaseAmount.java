@@ -11,7 +11,7 @@ public class PurchaseAmount {
         underLottoUnit();
     }
 
-    public int giveLottoPieces() {
+    public int lottoTicket() {
         return this.purchaseAmount / LOTTO_PURCHASE_UNIT;
     }
 

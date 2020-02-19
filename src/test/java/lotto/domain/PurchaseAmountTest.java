@@ -9,7 +9,7 @@ public class PurchaseAmountTest {
     @Test
     void 로또_개수_반환() {
         PurchaseAmount purchaseAmount = new PurchaseAmount("1500");
-        assertThat(purchaseAmount.giveLottoPieces()).isEqualTo(1);
+        assertThat(purchaseAmount.lottoTicket()).isEqualTo(1);
     }
 
     @Test
