@@ -1,6 +1,6 @@
 package domain;
 
-import org.apache.commons.lang3.ObjectUtils;
+import java.util.Arrays;
 
 public enum LottoResult {
     FIRST(6, 0, 2_000_000_000, "6개 일치(2000000000원) - "),
@@ -21,14 +21,11 @@ public enum LottoResult {
         this.resultMessage = resultMessage;
     }
 
-
-
     public static LottoResult findResult(int winningMatchCount, int bonusMatchCount) {
-        for (LottoResult result : LottoResult.values()) {
-            if (result.winningMatchCount == winningMatchCount && result.bonusMatchCount == bonusMatchCount) {
-                return result;
-            }
-        }
-        return null;
+        return Arrays.stream(LottoResult.values())
+                .filter(result -> result.winningMatchCount == winningMatchCount)
+                .filter(result -> result.bonusMatchCount == bonusMatchCount)
+                .findFirst()
+                .orElse(null);
     }
 }
