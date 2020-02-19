@@ -1,5 +1,7 @@
 package domain.lotto;
 
+import javax.swing.*;
+
 public class WinningLotto {
 
     private LottoTicket winningLotto;
@@ -11,5 +13,12 @@ public class WinningLotto {
         }
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
+    }
+
+    public Rank getRank(LottoTicket lottoTicket) {
+        int countOfMatches = winningLotto.countMatches(lottoTicket);
+        boolean bonusMatches = lottoTicket.contains(bonusNumber);
+
+        return Rank.valueOf(countOfMatches, bonusMatches);
     }
 }

@@ -58,6 +58,50 @@ public class LottoNumberTest {
         return numbers;
     }
 
+    public static Set<LottoNumber> getLottoNumberFromTwoToEightWithoutSevenFixture() {
+        Set<LottoNumber> numbers = new HashSet<>();
+        numbers.add(new LottoNumber(2));
+        numbers.add(new LottoNumber(3));
+        numbers.add(new LottoNumber(4));
+        numbers.add(new LottoNumber(5));
+        numbers.add(new LottoNumber(6));
+        numbers.add(new LottoNumber(8));
+        return numbers;
+    }
+
+    public static Set<LottoNumber> getLottoNumberFromThreeToEightFixture() {
+        Set<LottoNumber> numbers = new HashSet<>();
+        numbers.add(new LottoNumber(3));
+        numbers.add(new LottoNumber(4));
+        numbers.add(new LottoNumber(5));
+        numbers.add(new LottoNumber(6));
+        numbers.add(new LottoNumber(7));
+        numbers.add(new LottoNumber(8));
+        return numbers;
+    }
+
+    public static Set<LottoNumber> getLottoNumberFromFourToNineFixture() {
+        Set<LottoNumber> numbers = new HashSet<>();
+        numbers.add(new LottoNumber(4));
+        numbers.add(new LottoNumber(5));
+        numbers.add(new LottoNumber(6));
+        numbers.add(new LottoNumber(7));
+        numbers.add(new LottoNumber(8));
+        numbers.add(new LottoNumber(9));
+        return numbers;
+    }
+
+    public static Set<LottoNumber> getLottoNumberFromFiveToTenFixture() {
+        Set<LottoNumber> numbers = new HashSet<>();
+        numbers.add(new LottoNumber(5));
+        numbers.add(new LottoNumber(6));
+        numbers.add(new LottoNumber(7));
+        numbers.add(new LottoNumber(8));
+        numbers.add(new LottoNumber(9));
+        numbers.add(new LottoNumber(10));
+        return numbers;
+    }
+
     public static LottoNumber getLottoNumberOneFixture() {
         return new LottoNumber(1);
     }

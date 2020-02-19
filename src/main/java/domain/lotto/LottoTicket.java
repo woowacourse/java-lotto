@@ -25,7 +25,7 @@ public class LottoTicket {
                 .count();
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoTicket.contains(lottoNumber);
     }
 }
