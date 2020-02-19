@@ -4,21 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningNumbers {
+public class WinningNumbers extends LottoRound {
     private static final int WINNING_NUMBER_SIZE = 7;
-    private final LottoNumbers winningNumbers;
     private final LottoNumber bonusBall;
 
-    public WinningNumbers(List<Integer> winningNumbers, int bonusBall) {
+    public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
+        super(winningNumbers);
         validateDuplicate(winningNumbers, bonusBall);
-        this.winningNumbers = new LottoNumbers(winningNumbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList()));
-        this.bonusBall = LottoNumber.of(bonusBall);
+        this.bonusBall = bonusBall;
     }
 
-    private void validateDuplicate(List<Integer> winningNumbers, int bonusBall) {
-        List<Integer> tempWinningNumbers = new ArrayList<>(winningNumbers);
+    private void validateDuplicate(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
+        List<LottoNumber> tempWinningNumbers = new ArrayList<>(winningNumbers);
         tempWinningNumbers.add(bonusBall);
         boolean isDuplicate = tempWinningNumbers.stream()
                 .distinct()
