@@ -17,10 +17,20 @@ public class LottoTest {
     void validateDuplication() {
         List<Integer> input1 = Arrays.asList(1, 2, 3, 4, 5, 5);
         List<Integer> input2 = Arrays.asList(1, 2, 3, 4, 5, 6);
+
         assertThatThrownBy(() -> Lotto.validateDuplication(input1))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatCode(() ->
-            Lotto.validateDuplication(input2)
-        ).doesNotThrowAnyException();
+        assertThatCode(() -> Lotto.validateDuplication(input2))
+                .doesNotThrowAnyException();
     }
+
+    @Test
+    @DisplayName("로또 숫자 6개인지 검사")
+    void validateSizeTest() {
+        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+
+        assertThatThrownBy(() -> Lotto.validateSize(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
