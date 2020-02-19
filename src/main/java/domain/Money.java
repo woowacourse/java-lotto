@@ -13,6 +13,10 @@ public class Money {
         validateMoneyUnit(money);
     }
 
+    public int getNumberOfTickets() {
+        return this.money / 1000;
+    }
+
     private void validateMoneyRange(int money) {
         if (money < 0 || money > 50000) {
             throw new IllegalArgumentException("0원 이상, 5만원 이하 금액만 구매 가능합니다.");

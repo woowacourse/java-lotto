@@ -68,6 +68,10 @@ public enum LottoNumber {
                 .findFirst()
                 .orElse(LottoNumber.ERROR);
     }
+
+    public int getValue() {
+        return this.number;
+    }
 //
 //    private static void validateNumber(int number) {
 //        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {

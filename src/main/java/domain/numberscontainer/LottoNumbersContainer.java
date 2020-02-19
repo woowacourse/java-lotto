@@ -7,11 +7,11 @@ import java.util.Set;
 abstract class LottoNumbersContainer {
     private static final int TICKET_SIZE = 6;
 
-    protected final Set<LottoNumber> lottoSixNumbers;
+    protected final Set<LottoNumber> sixLottoNumbers;
 
     public LottoNumbersContainer(LottoNumbersDto lottoNumbersDto) {
         validateSize(lottoNumbersDto.getSixNumbers());
-        this.lottoSixNumbers = lottoNumbersDto.getSixNumbers();
+        this.sixLottoNumbers = lottoNumbersDto.getSixNumbers();
     }
 
     protected void validateSize(Set<LottoNumber> lottoNumbers) {

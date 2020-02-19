@@ -1,7 +1,6 @@
 package domain.factory;
 
 import domain.LottoNumber;
-import domain.numberscontainer.LottoNumbersDto;
 import domain.numberscontainer.Ticket;
 import domain.numberscontainer.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +26,7 @@ class LottoNumbersDtoFactoryTest {
     @DisplayName("고정값 당첨 번호 생성")
     void generateFixedWinningNumber() {
         LottoNumberFactory lottoNumberFactory = new LottoNumberFactory();
-        assertThatCode(() -> new WinningNumbers(lottoNumberFactory.generateFixedNumber(createSixNumbers(1, 2, 3, 4, 5, 6), LottoNumber.SEVEN)))
+        assertThatCode(() -> new WinningNumbers(lottoNumberFactory.generateFixedNumberDto(createSixNumbers(1, 2, 3, 4, 5, 6), LottoNumber.SEVEN)))
                 .doesNotThrowAnyException();
     }
 

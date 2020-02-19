@@ -24,13 +24,13 @@ public class WinningNumbers extends LottoNumbersContainer {
     }
 
     private void validateDuplicatedBonusNumber(LottoNumber bonusNumber) {
-        if (this.lottoSixNumbers.contains(bonusNumber)) {
+        if (this.sixLottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호와 중복되지 않는 보너스 번호를 입력해주세요.");
         }
     }
 
     public int findDuplicatedNumbers(Ticket ticket) {
-        return this.lottoSixNumbers.stream()
+        return this.sixLottoNumbers.stream()
                 .filter(number -> ticket.contains(number))
                 .mapToInt(number -> 1)
                 .sum();
