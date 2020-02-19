@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -28,7 +29,8 @@ public class LottoNumberTest {
 		return Stream.of(
 				Arguments.of(1, LottoNumber.ONE),
 				Arguments.of(20, LottoNumber.TWENTY),
-				Arguments.of(45, LottoNumber.FORTY_FIVE)
+				Arguments.of(45, LottoNumber.FORTY_FIVE),
+				Arguments.of(40, LottoNumber.FORTY)
 		);
 	}
 
