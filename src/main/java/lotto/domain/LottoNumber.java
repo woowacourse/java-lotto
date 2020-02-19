@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exceptions.InvalidLottoNumberException;
+
 public enum LottoNumber {
     ONE(1),
     TWO(2),
@@ -51,6 +53,24 @@ public enum LottoNumber {
 
     LottoNumber(int value) {
         this.value = value;
+    }
+
+    public static LottoNumber find(String value) {
+        int parsedValue;
+        try {
+            parsedValue = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new InvalidLottoNumberException();
+        }
+        if (parsedValue < 1 || parsedValue > 45) {
+            throw new InvalidLottoNumberException();
+        }
+        for (LottoNumber number : LottoNumber.values()) {
+            if (number.getValue() == parsedValue) {
+                return number;
+            }
+        }
+        return null;
     }
 
     public int getValue() {
