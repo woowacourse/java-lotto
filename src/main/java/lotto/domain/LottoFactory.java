@@ -30,11 +30,10 @@ public class LottoFactory {
 		return lottoCreator.create(lottoNumbers);
 	}
 
-	// 로또 번호 직접 입력시 사용하는 메서드
-	public static Lotto getWinningLotto(LottoType lottoType, List<LottoNumber> winningLottoNumbers) {
+	public static Lotto getLottoManual(LottoType lottoType, List<LottoNumber> inputLottoNumbers) {
 		Objects.requireNonNull(lottoType);
 		LottoCreator lottoCreator = creators.get(lottoType);
-		return lottoCreator.create(winningLottoNumbers);
+		return lottoCreator.create(inputLottoNumbers);
 	}
 }
 

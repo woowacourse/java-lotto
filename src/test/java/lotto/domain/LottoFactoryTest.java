@@ -34,7 +34,7 @@ public class LottoFactoryTest {
 				LottoNumber.FORTY_FOUR
 		);
 
-		assertThat(LottoFactory.getWinningLotto(LottoType.WINNING_LOTTO, winningLottoNumbers))
+		assertThat(LottoFactory.getLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers))
 				.isInstanceOf(WinningLotto.class);
 	}
 
@@ -50,7 +50,7 @@ public class LottoFactoryTest {
 		);
 
 		assertThatThrownBy(() -> {
-			LottoFactory.getWinningLotto(LottoType.WINNING_LOTTO, winningLottoNumbers);
+			LottoFactory.getLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers);
 		}).isInstanceOf(IllegalArgumentException.class)
 		.hasMessage("입력 리스트에 중복이 있습니다.");
 	}
