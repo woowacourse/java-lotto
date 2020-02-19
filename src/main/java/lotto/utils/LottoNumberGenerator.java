@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.utils;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;

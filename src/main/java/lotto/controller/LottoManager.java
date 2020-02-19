@@ -1,8 +1,12 @@
-package lotto.domain;
+package lotto.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import lotto.domain.Lotto;
+import lotto.domain.Money;
+import lotto.utils.LottoNumberGenerator;
 
 public class LottoManager {
 	private static final int LOTTO_PRICE = 1000;

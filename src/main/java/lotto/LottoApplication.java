@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.domain.LottoManager.*;
+import static lotto.controller.LottoManager.*;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
 import lotto.domain.Rank;
-import lotto.domain.RankCalculator;
+import lotto.controller.RankCalculator;
 import lotto.domain.WinningNumber;
 import lotto.utils.NumberParser;
 import lotto.view.InputView;
