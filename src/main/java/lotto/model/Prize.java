@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class Prize {
     private static double prize = 0;
+
     public static double sumPrize(HashMap<String, Integer> resultCount) {
         prize += LottoResult.THREE.prizeResult(resultCount.get("3"));
         prize += LottoResult.FOUR.prizeResult(resultCount.get("4"));

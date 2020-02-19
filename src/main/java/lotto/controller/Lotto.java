@@ -63,6 +63,6 @@ public class Lotto {
         OutputView.printCorrectResult(resultCount.get("4"), LottoResult.FOUR.getCorrect(), LottoResult.FOUR.getPrize());
         OutputView.printCorrectResult(resultCount.get("5"), LottoResult.FIVE.getCorrect(), LottoResult.FIVE.getPrize());
         OutputView.printBonusCorrectResult(resultCount.get("5+"));
-        OutputView.printCorrectResult(resultCount.get("6"), LottoResult.SIX.getCorrect(),LottoResult.SIX.getPrize());
+        OutputView.printCorrectResult(resultCount.get("6"), LottoResult.SIX.getCorrect(), LottoResult.SIX.getPrize());
     }
 }

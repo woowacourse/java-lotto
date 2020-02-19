@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.model.AutoNumber;
-import lotto.model.LottoResult;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class OutputView {
     }
 
     public static void printCorrectResult(int count, int correct, int prize) {
-        System.out.println(correct + "개 일치 (" + prize + "원) - " + count+"개");
+        System.out.println(correct + "개 일치 (" + prize + "원) - " + count + "개");
     }
 
     public static void printBonusCorrectResult(int count) {
