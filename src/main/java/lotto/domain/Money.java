@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Optional;
 
 public class Money {
+	private static final int MIN_MONEY = 0;
 	private int money;
 
 	public Money(String money) {
@@ -20,6 +21,6 @@ public class Money {
 	}
 
 	private boolean isNaturalNumber(int money) {
-		return money > 0;
+		return money > MIN_MONEY;
 	}
 }

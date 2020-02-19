@@ -10,6 +10,8 @@ import lotto.domain.Money;
 import lotto.domain.Rank;
 
 public class OutputView {
+	private static final String EMPTY_STRING = "";
+
 	public static void showEarningRate(Money money, List<Rank> ranks) {
 		int sum = ranks.stream()
 			.filter(Objects::nonNull)
@@ -37,7 +39,7 @@ public class OutputView {
 			return "보너스 볼 일치 ";
 		}
 
-		return "";
+		return EMPTY_STRING;
 	}
 
 	public static void showPurchasedLottoCount(int purchasedLottoCount) {

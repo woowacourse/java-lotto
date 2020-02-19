@@ -19,13 +19,16 @@ public class LottoApplication {
 		Money money = new Money(InputView.inputAsMoney());
 		int purchasedLottoAmount = calculateLottoAmount(money);
 		OutputView.showPurchasedLottoCount(purchasedLottoAmount);
+
 		List<Lotto> purchasedLotto = generateLottoByAmount(purchasedLottoAmount);
 		OutputView.showPurchasedLottoNumbers(purchasedLotto);
-		List<Integer> winningNumber = NumberParser.winningNumberParse(InputView.inputAsWinningNumbers());
-		Lotto winningNumberLotto = new Lotto(winningNumber);
+
+		List<Integer> inputWinningNumbers = NumberParser.winningNumberParse(InputView.inputAsWinningNumbers());
+		Lotto winningNumberLotto = new Lotto(inputWinningNumbers);
 		BonusNumber bonusNumber = new BonusNumber(NumberParser.parseNumber(InputView.inputAsBonusNumber()));
-		WinningNumber winningNumber1 = new WinningNumber(winningNumberLotto, bonusNumber);
-		List<Rank> ranks = RankCalculator.calculateMultiple(purchasedLotto, winningNumber1);
+		WinningNumber winningLottoNumber = new WinningNumber(winningNumberLotto, bonusNumber);
+		List<Rank> ranks = RankCalculator.calculateMultiple(purchasedLotto, winningLottoNumber);
+
 		OutputView.showStatistics(ranks);
 		OutputView.showEarningRate(money, ranks);
 	}

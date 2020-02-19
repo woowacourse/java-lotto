@@ -5,8 +5,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class NumberParser {
+	private static final String DELIMITER = ",";
+
 	public static List<Integer> winningNumberParse(String input) {
-		return Stream.of(input.split(","))
+		return Stream.of(input.split(DELIMITER))
 			.map(String::trim)
 			.map(NumberParser::parseNumber)
 			.collect(Collectors.toList());

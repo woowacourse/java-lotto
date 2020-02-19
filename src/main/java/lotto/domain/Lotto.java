@@ -3,6 +3,10 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto {
+	private static final int MAX_LOTTO_NUMBER_RANGE = 45;
+	private static final int MIN_LOTTO_NUMBER_RANGE = 1;
+	private static final int LOTTO_NUMBER_SIZE = 6;
+
 	private List<Integer> numbers;
 
 	public Lotto(List<Integer> numbers) {
@@ -16,16 +20,16 @@ public class Lotto {
 	}
 
 	private boolean hasDuplicatedNumbers(List<Integer> numbers) {
-		return 6 != numbers.stream().distinct().count();
+		return LOTTO_NUMBER_SIZE != numbers.stream().distinct().count();
 	}
 
 	private boolean wrongAmountOfNumbers(List<Integer> numbers) {
-		return 6 != numbers.size();
+		return LOTTO_NUMBER_SIZE != numbers.size();
 	}
 
 	private boolean isInvalidNumberRange(List<Integer> numbers) {
 		return numbers.stream()
-			.anyMatch(number -> number > 45 || number < 1);
+			.anyMatch(number -> number > MAX_LOTTO_NUMBER_RANGE || number < MIN_LOTTO_NUMBER_RANGE);
 	}
 
 	public List<Integer> getNumbers() {

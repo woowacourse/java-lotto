@@ -5,9 +5,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class LottoNumberGenerator implements NumberGenerator {
-	public static final int LOTTO_NUMBER_SIZE = 6;
-	public static final int MAX_LOTTO_NUMBER_RANGE = 46;
-	public static final int MIN_LOTTO_NUMBER_RANGE = 1;
+	private static final int LOTTO_NUMBER_SIZE = 6;
+	private static final int MAX_LOTTO_NUMBER_RANGE = 46;
+	private static final int MIN_LOTTO_NUMBER_RANGE = 1;
 
 	@Override
 	public List<Integer> generate() {
