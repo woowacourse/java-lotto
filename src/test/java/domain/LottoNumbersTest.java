@@ -74,6 +74,5 @@ public class LottoNumbersTest {
         Assertions.assertThatThrownBy(() -> new LottoNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복된 인자가 존재합니다.");
-
     }
 }

@@ -4,11 +4,13 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber>{
     private static final String ERROR_BOUND_MESSAGE = "1부터 45 사이의 숫자만 입력 가능합니다.";
+    public static final int LOTTO_UNDER_BOUND = 1;
+    public static final int LOTTO_UPPER_BOUND = 45;
 
     private int number;
 
     public LottoNumber(int number) {
-        if (number < 1 || number > 45) {
+        if (number < LOTTO_UNDER_BOUND || number > LOTTO_UPPER_BOUND) {
             throw new IllegalArgumentException(ERROR_BOUND_MESSAGE);
         }
         this.number = number;
