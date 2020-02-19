@@ -20,7 +20,7 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"0","46", "abc"})
+    @ValueSource(strings = {"0", "46", "abc"})
     @DisplayName("당첨 번호 입력이 유효하지 않은 경우")
     void invalidFindWithNumber(String number) {
         assertThatThrownBy(() -> {
@@ -32,7 +32,9 @@ public class LottoNumberTest {
     @DisplayName("당첨 번호 중 중복되는 숫자가 있는 경우")
     void numberDuplicate() {
         assertThatThrownBy(() -> {
-            new LottoTicket(Arrays.asList(LottoNumber.ONE, LottoNumber.ONE, LottoNumber.ONE, LottoNumber.ONE, LottoNumber.ONE, LottoNumber.ONE));
+            new LottoTicket(
+                Arrays.asList(LottoNumber.ONE, LottoNumber.ONE, LottoNumber.ONE, LottoNumber.ONE, LottoNumber.ONE,
+                    LottoNumber.ONE));
         }).isInstanceOf(InvalidLottoTicketException.class);
     }
 
