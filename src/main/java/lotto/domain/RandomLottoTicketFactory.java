@@ -10,11 +10,11 @@ public class RandomLottoTicketFactory {
 	private final List<LottoNumber> allLottoNumbers;
 
 	public RandomLottoTicketFactory() {
-		allLottoNumbers = new ArrayList<>(AllLottoNumbers.get());
+		allLottoNumbers = new ArrayList<>(AllLottoNumbers.getAll());
 	}
 
-	public LottoTicket createLottoTicket() {
+	public SerialLottoNumber createLottoTicket() {
 		Collections.shuffle(allLottoNumbers);
-		return new LottoTicket(allLottoNumbers.subList(ZERO_INDEX, SIX_INDEX));
+		return new SerialLottoNumber(allLottoNumbers.subList(ZERO_INDEX, SIX_INDEX));
 	}
 }

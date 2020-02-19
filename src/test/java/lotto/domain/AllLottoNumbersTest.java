@@ -10,7 +10,7 @@ class AllLottoNumbersTest {
 	@Test
 	void get() {
 		// when
-		List<LottoNumber> allLottoNumbers = AllLottoNumbers.get();
+		List<LottoNumber> allLottoNumbers = AllLottoNumbers.getAll();
 
 		// then
 		List<LottoNumber> expected = new ArrayList<>();

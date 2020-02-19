@@ -22,7 +22,7 @@ public class LottoTicketTest {
 				.collect(Collectors.toList());
 
 		// when
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		SerialLottoNumber lottoTicket = new SerialLottoNumber(lottoNumbers);
 
 		// then
 		int[] sortedInput = {1, 3, 5, 6, 10, 11};
@@ -46,7 +46,7 @@ public class LottoTicketTest {
 		Assertions.assertThatThrownBy(() -> {
 
 			// when
-			new LottoTicket(lottoNumbers);
+			new SerialLottoNumber(lottoNumbers);
 		}).isInstanceOf(LottoTicketIllegalArgumentException.class)
 		.hasMessageMatching(LottoTicketIllegalArgumentException.MESSAGE);
 	}
@@ -68,7 +68,7 @@ public class LottoTicketTest {
 		Assertions.assertThatThrownBy(() -> {
 
 			// when
-			new LottoTicket(lottoNumbers);
+			new SerialLottoNumber(lottoNumbers);
 		}).isInstanceOf(LottoTicketIllegalArgumentException.class)
 				.hasMessageMatching(LottoTicketIllegalArgumentException.MESSAGE);
 	}

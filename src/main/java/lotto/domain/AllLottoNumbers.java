@@ -18,7 +18,7 @@ public class AllLottoNumbers {
 		allLottoNumbers = Collections.unmodifiableList(lottoNumbers);
 	}
 
-	public static List<LottoNumber> get() {
+	public static List<LottoNumber> getAll() {
 		return allLottoNumbers;
 	}
 }

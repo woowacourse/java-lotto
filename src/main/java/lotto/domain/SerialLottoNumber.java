@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class SerialLottoNumber {
 	public static final int LOTTO_TICKET_SIZE = 6;
+
 	private final List<LottoNumber> lottoNumbers;
 
 	public SerialLottoNumber(final List<LottoNumber> lottoNumbers) {
@@ -29,6 +30,10 @@ public class SerialLottoNumber {
 		if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
 			throw new LottoTicketIllegalArgumentException();
 		}
+	}
+
+	public boolean contains(LottoNumber bonus) {
+		return lottoNumbers.contains(bonus);
 	}
 
 	public List<LottoNumber> getLottoNumbers() {
