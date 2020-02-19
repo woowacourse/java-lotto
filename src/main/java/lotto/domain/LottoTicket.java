@@ -3,6 +3,7 @@ package lotto.domain;
 import static java.util.stream.Collectors.*;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LottoTicket {
 	public static final String DELIMITER = ", ";
@@ -22,5 +23,20 @@ public class LottoTicket {
 			.map(LottoNumber::toString)
 			.collect(joining(DELIMITER)) +
 			END_BRACKET;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		LottoTicket that = (LottoTicket)o;
+		return Objects.equals(lottoNumbers, that.lottoNumbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoNumbers);
 	}
 }

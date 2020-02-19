@@ -1,9 +1,11 @@
 package lotto.domain;
 
-public class PurchasingAmount {
+import java.util.Iterator;
+
+public class PurchasingAmount implements Iterator<Integer> {
 	public static final int PURCHASE_UNIT = 1000;
 	public static final int ZERO = 0;
-	private final int amount;
+	private int amount;
 
 	public PurchasingAmount(final int amount) {
 		checkValidationOf(amount);
@@ -24,5 +26,15 @@ public class PurchasingAmount {
 
 	private boolean hasChangeMoney(final int amount) {
 		return amount % PURCHASE_UNIT != ZERO;
+	}
+
+	@Override
+	public boolean hasNext() {
+		return amount >= PURCHASE_UNIT;
+	}
+
+	@Override
+	public Integer next() {
+		return amount -= PURCHASE_UNIT;
 	}
 }
