@@ -12,4 +12,13 @@ public class OutputView {
     public static void lottoTicketList(LottoTickets lottoTickets) {
         System.out.println(lottoTickets);
     }
+    public static void inputWinningNumberInstruction() {
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+    }
+    public static void inputBonusNumberInstruction() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+    public static void prizeStatistics() {
+        System.out.println("당첨 통계\n--------");
+    }
 }
