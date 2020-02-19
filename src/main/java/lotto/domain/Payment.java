@@ -34,4 +34,8 @@ public class Payment {
             throw new IllegalArgumentException(UNDER_LOTTO_PRICE_MSG);
         }
     }
+
+    public int getPayment() {
+        return payment;
+    }
 }

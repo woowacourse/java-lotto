@@ -33,15 +33,19 @@ public enum WinningInfo {
                 break;
             case 5:
                 if (hasBonus) {
-                    winningInfo = WinningInfo.THIRD;
+                    winningInfo = WinningInfo.SECOND;
                     break;
                 }
-                winningInfo = WinningInfo.SECOND;
+                winningInfo = WinningInfo.THIRD;
                 break;
             case 6:
                 winningInfo = WinningInfo.FIRST;
                 break;
         }
         return winningInfo;
+    }
+
+    public int getWinningPrice(){
+        return winningPrice;
     }
 }
