@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lotto.domain.Lotto;
 import lotto.domain.Money;
 import lotto.domain.Rank;
 
@@ -38,5 +39,12 @@ public class OutputView {
 
 	public static void showPurchasedLottoCount(int purchasedLottoCount) {
 		System.out.println(purchasedLottoCount + "개를 구매했습니다.");
+	}
+
+	public static void showPurchasedLottoNumbers(List<Lotto> purchasedLottoNumbers) {
+		System.out.println(purchasedLottoNumbers.stream()
+			.map(x -> x.getNumbers() + "")
+			.collect(Collectors.joining("\n"))
+		);
 	}
 }
