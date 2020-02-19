@@ -1,15 +1,14 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    List<LottoBall> lottoTicket = new ArrayList<>();
+    List<LottoBall> lottoTicket;
 
     public LottoTicket(List<LottoBall> lottoTicket){
         //NUll 예외처리 하기
-
+        Collections.sort(lottoTicket);
         this.lottoTicket = lottoTicket;
     }
 

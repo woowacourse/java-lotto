@@ -21,10 +21,12 @@ public class LottoController {
         OutputView.printLottoTicket();
 
         OutputView.printAnswerWinningBalls();
-        List<LottoBall> winningBalls = InputView.InputWinningBalls();
+        List<LottoBall> winningBallsInput = InputView.InputWinningBalls();
         OutputView.printAnswerBonusBall();
         int bonusBall = InputView.InputBonusBall();
-        WinningBalls winningBalls1 = new WinningBalls(winningBalls, bonusBall);
+
+        WinningBalls winningBalls = new WinningBalls(winningBallsInput, bonusBall);
+
     }
 
     private static void startInputPurchaseAmount() {
@@ -34,11 +36,11 @@ public class LottoController {
             OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
     }
 
-    public static List<LottoBall> generateLottoTicket() {
+    public static LottoTicket generateLottoTicket() {
         List<LottoBall> lottoTicket = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             lottoTicket.add(LottoBallFactory.getInstance().get(i));
         }
-        return lottoTicket;
+        return new LottoTicket(lottoTicket);
     }
 }

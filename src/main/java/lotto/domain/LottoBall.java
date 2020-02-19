@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class LottoBall {
+public class LottoBall implements Comparable<LottoBall> {
     private int lottoNumber;
 
     public LottoBall(int lottoNumber){
@@ -12,5 +12,21 @@ public class LottoBall {
 
     public int getLottoNumber() {
         return lottoNumber;
+    }
+
+    @Override
+    public int compareTo(LottoBall lottoBall) {
+        return this.lottoNumber - lottoBall.lottoNumber;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        LottoBall lottoBall = (LottoBall)obj;
+        return lottoNumber == lottoBall.getLottoNumber();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode()+137;
     }
 }

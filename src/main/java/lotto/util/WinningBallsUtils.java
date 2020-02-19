@@ -17,6 +17,7 @@ public class WinningBallsUtils {
                 .map(Integer::parseInt)
                 .map(LottoBall::new)
                 .collect(Collectors.toList());
+        Collections.sort(this.winningBalls);
     }
 
     public void validateWinningBallsNumber(String[] winningBalls) {
