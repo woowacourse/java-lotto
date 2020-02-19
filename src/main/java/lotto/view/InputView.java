@@ -1,9 +1,13 @@
 package lotto.view;
 
 import lotto.domain.PurchaseNumber;
+import lotto.domain.WinningNumbers;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -21,5 +25,16 @@ public class InputView {
             System.out.println(e.getMessage());
             return inputPurchaseMoney();
         }
+    }
+
+    public static WinningNumbers inputWinningNumbers() {
+        List<Integer> winningNumbers;
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        winningNumbers = Arrays.stream(SCANNER.nextLine().trim().split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusBall = SCANNER.nextInt();
+        return new WinningNumbers(winningNumbers, bonusBall);
     }
 }
