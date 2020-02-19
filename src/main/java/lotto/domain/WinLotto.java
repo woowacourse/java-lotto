@@ -2,16 +2,17 @@ package lotto.domain;
 
 import lotto.utils.StringUtils;
 
-public class WinLotto {
-	private Lotto winLotto;
+public class WinLotto extends Lotto {
 	private BonusBall bonusBall;
 
 	public WinLotto(String winLotto, String bonusBall) {
-		this.winLotto = new Lotto(StringUtils.split(winLotto));
+		super(StringUtils.split(winLotto));
 		this.bonusBall = new BonusBall(bonusBall);
 	}
 
-	// public List<Integer> getWinLotto() {
-	// 	return winLotto;
-	// }
+	public int compare(Lotto lotto) {
+		return (int)this.lottoNumbers.stream()
+			.filter(x -> lotto.isContain(x))
+			.count();
+	}
 }

@@ -12,4 +12,5 @@ public class LottoManagerTest {
 	// 	winNumber = (Lotto)Arrays.asList(5, 6, 7, 8, 1, 10);
 	// 	assertThat(lottoManager.compareTicket(ticket, winNumber)).isEqualTo(3);
 	// }
+
 }

@@ -8,7 +8,7 @@ public class LottoManager {
 
 	// public long compareTicket(Lotto lotto, Lotto winLotto) {
 	// 	return lotto.stream()
-	// 		.filter(x -> winLotto.numbers.contains(x))
+	// 		.filter(x -> winLotto.lottoNumbers.contains(x))
 	// 		.count();
 	// }
 

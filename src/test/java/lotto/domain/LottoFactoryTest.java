@@ -13,10 +13,10 @@ public class LottoFactoryTest {
 	// @Test
 	// void createTest() {
 	// 	Lotto ticket = LottoFactory.createLotto();
-	// 	assertThat(ticket.numbers.size()).isEqualTo(6);
+	// 	assertThat(ticket.lottoNumbers.size()).isEqualTo(6);
 	//
 	// 	Set<Integer> set = new HashSet<>();
-	// 	for (int number : ticket.numbers) {
+	// 	for (int number : ticket.lottoNumbers) {
 	// 		set.add(number);
 	// 	}
 	// 	assertThat(set.size()).isEqualTo(6);
