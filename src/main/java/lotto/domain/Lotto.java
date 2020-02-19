@@ -16,4 +16,8 @@ public class Lotto {
             throw new IllegalArgumentException(NOT_DISTINCT_NUMBERS_ERROR_MSG);
         }
     }
+
+    protected List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
