@@ -27,4 +27,8 @@ public enum WinningValue {
                 .findFirst()
                 .orElseThrow(IllegalAccessError::new);
     }
+
+    public int getReward() {
+        return reward;
+    }
 }
