@@ -15,7 +15,6 @@ public class Number {
 	}
 
 	private void validate(String value) {
-
 		checkNull(value);
 		checkBlank(value);
 		checkNumberFormat(value);
@@ -59,8 +58,12 @@ public class Number {
 		return number == number1.number;
 	}
 
+	public int getNumber() {
+		return number;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(number);
+		return Objects.hashCode(number);
 	}
 }

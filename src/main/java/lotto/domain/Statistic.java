@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.Iterator;
-import java.util.List;
-
 public enum Statistic {
 	THREE(3, 5000),
 	FOUR(4, 50000),
