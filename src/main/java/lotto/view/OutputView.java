@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 import java.util.List;
 
@@ -11,7 +12,18 @@ public class OutputView {
 
     private OutputView() { /* prevent creating OutputView instance */ }
 
-    public static void printLottoNumbers(Lotto lotto) {
+    public static void printLottoCount(int lottoCount) {
+        System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
+    }
+
+    public static void printLottos(Lottos lottos) {
+        List<Lotto> lottoLines = lottos.getLottos();
+        for (Lotto lotto : lottoLines) {
+            printLottoNumbers(lotto);
+        }
+    }
+
+    private static void printLottoNumbers(Lotto lotto) {
         List<Integer> numbers = lotto.getNumbers();
         String result = numbers.stream()
                 .map(String::valueOf)
@@ -22,9 +34,5 @@ public class OutputView {
                 .append("]");
 
         System.out.println(sb.toString());
-    }
-
-    public static void printLottoCount(int lottoCount) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
     }
 }

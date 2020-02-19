@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lottos;
 import lotto.domain.PurchasePrice;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -12,6 +13,8 @@ public class LottoApplication {
         int lottoCount = purchasePrice.calculateLottoCount();
 
         OutputView.printLottoCount(lottoCount);
+        Lottos lottos = new Lottos(lottoCount);
+        OutputView.printLottos(lottos);
 
     }
 }
