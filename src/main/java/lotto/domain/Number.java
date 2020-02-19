@@ -66,23 +66,4 @@ public class Number {
 			throw new InvalidNumberException("Null문자열은 사용이 불가능합니다.");
 		}
 	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null)
-			return false;
-		Number number1 = (Number)o;
-		return number == number1.number;
-	}
-
-	public int getNumber() {
-		return number;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(number);
-	}
 }

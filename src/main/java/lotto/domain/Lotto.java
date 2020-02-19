@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,7 +13,7 @@ public class Lotto implements Iterable<Number> {
 
 	public Lotto(List<Number> numbers) {
 		validate(numbers);
-		this.numbers = numbers;
+		this.numbers = new ArrayList<>(numbers);
 	}
 
 	private void validate(List<Number> numbers) {
@@ -36,8 +37,7 @@ public class Lotto implements Iterable<Number> {
 		return numbers.iterator();
 	}
 
-	public int compareLotto(WinningNumbers winningNumbers) {
-
+	public int countSameNumber(Lotto winningNumbers) {
 		Iterator<Number> lottoIterator = iterator();
 		int matchingNumber = 0;
 

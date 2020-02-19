@@ -20,8 +20,8 @@ public class GameResult {
 		Iterator<Lotto> lottoIterator = lottos.iterator();
 		while (lottoIterator.hasNext()) {
 			Lotto lotto = lottoIterator.next();
-			Rank statistic = winningLotto.isWinningLotto(lotto);
-			statistic.count();
+			Rank rank = winningLotto.isWinningLotto(lotto);
+			rank.count();
 		}
 	}
 }
