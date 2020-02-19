@@ -1,8 +1,8 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.domain.InvalidMoneyException;
 import lotto.domain.Money;
+import lotto.exception.InvalidMoneyException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

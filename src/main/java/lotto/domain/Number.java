@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import lotto.exception.InvalidNumberException;
+
 public class Number {
 	private static final int MIN_BOUND = 1;
 	private static final int MAX_BOUND = 45;

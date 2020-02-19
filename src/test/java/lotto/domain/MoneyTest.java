@@ -8,6 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.exception.InvalidMoneyException;
+
 public class MoneyTest {
 	@DisplayName("money 생성자에 null이나 빈 스트링 입력이 들어올 때 InvalidMoneyException 발생")
 	@ParameterizedTest

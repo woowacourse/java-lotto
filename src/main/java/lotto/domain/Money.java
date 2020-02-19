@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InvalidMoneyException;
+
 public class Money {
 	private static final int ZERO = 0;
 	private static final int UNIT = 1000;
