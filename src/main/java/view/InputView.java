@@ -10,4 +10,15 @@ public class InputView {
         OutputView.printInputPurchaseAmountMessage();
         return scanner.nextLine();
     }
+
+    public static String[] inputWinningNumbers() {
+        OutputView.printInputWinningNumbersMessage();
+        return scanner.nextLine()
+                    .split(COMMA);
+    }
+
+    public static String inputBonusNumber() {
+        OutputView.printInputBonusNumberMessage();
+        return scanner.nextLine();
+    }
 }

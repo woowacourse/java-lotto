@@ -13,7 +13,6 @@ import java.util.List;
 public class LottoGame {
     private static PurchaseAmount amount;
     private static List<Lotto> lottoDummy = new ArrayList<>();
-    private static WinningNumber winningNumber;
 
     public static void main(String[] args) {
 
@@ -25,8 +24,8 @@ public class LottoGame {
             lottoDummy.add(LottoFactory.createOneLotto());
         }
         OutputView.printLottoDummy(lottoDummy);
+        WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 
-
-
+        OutputView.printResult();
     }
 }

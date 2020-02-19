@@ -36,4 +36,17 @@ public class OutputView {
         stringBuilder.append("]");
         System.out.println(stringBuilder);
     }
+
+    public static void printInputWinningNumbersMessage() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    }
+
+    public static void printInputBonusNumberMessage() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
+    public static void printResult() {
+        System.out.println("당첨 통계" + NEW_LINE + "------------");
+
+    }
 }
