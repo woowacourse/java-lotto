@@ -6,17 +6,22 @@ public class LottoNumber {
 
 	private final int number;
 
-	public LottoNumber(int number) {
+	public LottoNumber(final int number) {
 		checkValidationOf(number);
 		this.number = number;
 	}
 
-	private void checkValidationOf(int number) {
+	private void checkValidationOf(final int number) {
 		if (number > MAX_NUMBER) {
 			throw new IllegalArgumentException("로또 숫자는 45를 넘기면 안됩니다.");
 		}
 		if (number < MIN_NUMBER) {
 			throw new IllegalArgumentException("로또 숫자는 0이하 일 수 없습니다.");
 		}
+	}
+
+	@Override
+	public String toString() {
+		return Integer.toString(number);
 	}
 }

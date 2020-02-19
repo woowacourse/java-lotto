@@ -22,8 +22,6 @@ public class PurchasingAmount {
 		}
 	}
 
-
-
 	private boolean hasChangeMoney(final int amount) {
 		return amount % PURCHASE_UNIT != ZERO;
 	}
