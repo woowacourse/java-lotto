@@ -8,6 +8,13 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * 여러 개의 로또를 테스트하는 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public class LottosTest {
 	@Test
 	void calculate() {

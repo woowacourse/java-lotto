@@ -7,6 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+/**
+ * 로또 수 테스트 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public class LottoNumberTest {
 	@Test
 	@DisplayName("로또 번호 범위가 정상인 경우")

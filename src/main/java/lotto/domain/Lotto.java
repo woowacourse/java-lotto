@@ -10,6 +10,13 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * 선택한 로또 하나를 나타내는 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public class Lotto implements Iterable<LottoNumber> {
 	public static final int SIZE = 6;
 	private static final String DUPLICATED_NUMBER_MESSAGE = "로또 번호가 중복됩니다.";
@@ -21,6 +28,12 @@ public class Lotto implements Iterable<LottoNumber> {
 		validate(numbers);
 		this.numbers.addAll(numbers);
 		Collections.sort(this.numbers);
+	}
+
+	static Lotto of(int... numbers) {
+		return new Lotto(Arrays.stream(numbers)
+				.mapToObj(LottoNumber::of)
+				.collect(Collectors.toList()));
 	}
 
 	private void validate(List<LottoNumber> numbers) {
@@ -39,12 +52,6 @@ public class Lotto implements Iterable<LottoNumber> {
 		if (distinctNumbers.size() != numbers.size()) {
 			throw new IllegalArgumentException(DUPLICATED_NUMBER_MESSAGE);
 		}
-	}
-
-	public static Lotto of(int... numbers) {
-		return new Lotto(Arrays.stream(numbers)
-				.mapToObj(LottoNumber::of)
-				.collect(Collectors.toList()));
 	}
 
 	public boolean contains(LottoNumber number) {

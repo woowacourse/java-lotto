@@ -2,6 +2,13 @@ package lotto.domain;
 
 import java.util.Arrays;
 
+/**
+ * 로또 순위 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public enum LottoRank {
 	FIRST(6, 2_000_000_000),
 	SECOND(5, 30_000_000),
@@ -29,12 +36,12 @@ public enum LottoRank {
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순위 입니다."));
 	}
 
-	private boolean match(long matchCount) {
-		return this.matchCount == matchCount;
-	}
-
 	private static boolean isMismatch(long matchCount) {
 		return matchCount >= MISS.matchCount && matchCount < FIFTH.matchCount;
+	}
+
+	private boolean match(long matchCount) {
+		return this.matchCount == matchCount;
 	}
 
 	public long calculateTotalWinnings(long amount) {

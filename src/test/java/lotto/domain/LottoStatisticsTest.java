@@ -7,6 +7,13 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * 로또 통계 테스트 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public class LottoStatisticsTest {
 	@Test
 	void constructor() {

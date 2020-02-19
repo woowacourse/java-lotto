@@ -1,5 +1,12 @@
 package lotto.domain;
 
+/**
+ * 로또 구입 금액 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public class LottoMoney {
 	private static final int LOTTO_PURCHASE_UNIT = 1000;
 	private static final String INVALID_PURCHASE_MONEY_MESSAGE = "잘못된 구입 금액을 입력하셨습니다.";

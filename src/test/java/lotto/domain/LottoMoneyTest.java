@@ -5,6 +5,13 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * 로또 구입 금액 테스트 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public class LottoMoneyTest {
 	@Test
 	@DisplayName("생성자 테스트")

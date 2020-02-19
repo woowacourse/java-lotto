@@ -1,14 +1,22 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * 로또 통계 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public class LottoStatistics {
 	private final Map<LottoRank, Long> statistics;
 
 	public LottoStatistics(Map<LottoRank, Long> statistics) {
 		validate(statistics);
-		this.statistics = Map.copyOf(statistics);
+		this.statistics = new HashMap<>(statistics);
 	}
 
 	private void validate(Map<LottoRank, Long> statistics) {
@@ -19,7 +27,6 @@ public class LottoStatistics {
 
 	public long calculateTotalProfits(LottoMoney money) {
 		long totalWinning = calculateTotalWinnings();
-		System.out.println(money);
 		return totalWinning * 100 / money.getValue();
 	}
 

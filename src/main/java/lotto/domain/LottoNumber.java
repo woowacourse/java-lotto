@@ -3,23 +3,29 @@ package lotto.domain;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * 로또 수 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public class LottoNumber implements Comparable<LottoNumber> {
 	private static final int MIN = 1;
 	private static final int MAX = 45;
 	private static final String INVALID_NUMBER_MESSAGE = "생성할 수 없는 수입니다.";
 	private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
-	private final int number;
-
 	static {
 		for (int number = MIN; number <= MAX; ++number) {
 			CACHE.put(number, new LottoNumber(number));
 		}
 	}
+
+	private final int number;
 
 	private LottoNumber(int number) {
 		validate(number);

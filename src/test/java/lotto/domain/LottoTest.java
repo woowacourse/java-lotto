@@ -12,19 +12,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+/**
+ * 선택한 로또 하나를 테스트하는 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public class LottoTest {
-	@Test
-	@DisplayName("선택된 로또 번호 리스트가 정상적으로 생성된 경우")
-	void constructor() {
-		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(3),
-				LottoNumber.of(43),
-				LottoNumber.of(44),
-				LottoNumber.of(45));
-		assertThat(new Lotto(lottoNumbers)).isInstanceOf(Lotto.class);
-	}
-
 	static Stream<List<LottoNumber>> invalidSize() {
 		return Stream.of(
 				null,
@@ -41,6 +36,18 @@ public class LottoTest {
 						LottoNumber.of(43),
 						LottoNumber.of(44),
 						LottoNumber.of(45)));
+	}
+
+	@Test
+	@DisplayName("선택된 로또 번호 리스트가 정상적으로 생성된 경우")
+	void constructor() {
+		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.of(1),
+				LottoNumber.of(2),
+				LottoNumber.of(3),
+				LottoNumber.of(43),
+				LottoNumber.of(44),
+				LottoNumber.of(45));
+		assertThat(new Lotto(lottoNumbers)).isInstanceOf(Lotto.class);
 	}
 
 	@ParameterizedTest

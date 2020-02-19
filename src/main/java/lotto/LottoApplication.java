@@ -1,9 +1,7 @@
 package lotto;
 
-import java.util.Arrays;
 import java.util.Map;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
@@ -12,6 +10,13 @@ import lotto.domain.Lottos;
 import lotto.domain.RandomLottoGenerator;
 import lotto.domain.WinningLotto;
 
+/**
+ * 로또 게임 실행 클래스
+ *
+ * @version 1.0.0
+ * @author K.S.KIM
+ * @since 2020/02/19
+ */
 public class LottoApplication {
 	public static void main(String[] args) {
 		int amount = 2100000000;
