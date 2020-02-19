@@ -10,6 +10,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     @Test
+    void validateDistinctNumberTest_중복숫자가_없을_때() {
+        List<LottoNumber> invalidNumbers = new ArrayList<LottoNumber>(Arrays.asList(
+                new LottoNumber("1"),
+                new LottoNumber("2"),
+                new LottoNumber("3"),
+                new LottoNumber("4"),
+                new LottoNumber("5"),
+                new LottoNumber("45")));
+        new Lotto(invalidNumbers);
+    }
+
+    @Test
     void validateDistinctNumberTest_중복숫자가_있을_때() {
         List<LottoNumber> invalidNumbers = new ArrayList<LottoNumber>(Arrays.asList(
                 new LottoNumber("1"),
