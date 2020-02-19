@@ -32,10 +32,6 @@ public class Lotto {
 		}
 	}
 
-	public List<Ball> getBalls() {
-		return balls;
-	}
-
 	public boolean contains(Ball ball) {
 		return balls.contains(ball);
 	}
