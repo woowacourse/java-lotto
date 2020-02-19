@@ -15,4 +15,5 @@ public class LottoManager {
 	public LottoManager(int count) {
 		this.lotteries = LottoFactory.createLotteries(count);
 	}
+
 }

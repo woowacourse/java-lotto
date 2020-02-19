@@ -21,6 +21,5 @@ public class WinLottoTest {
 		WinLotto winLotto = new WinLotto("1,2,3,4,5,6", "7");
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 		assertThat(winLotto.compare(lotto)).isEqualTo(6);
-
 	}
 }

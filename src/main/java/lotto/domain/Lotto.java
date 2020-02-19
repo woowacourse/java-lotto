@@ -21,6 +21,7 @@ public class Lotto {
 			count++;
 		}
 		return count;
+
 	}
 
 	protected boolean isContain(int num) {
