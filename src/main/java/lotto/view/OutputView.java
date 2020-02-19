@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.AllLottoNumbers;
-import lotto.domain.LottoNumberGroup;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.PurchaseNumber;
 
@@ -15,7 +15,6 @@ public class OutputView {
         System.out.println(purchaseNumber.getPurchaseNumber() + PURCHASE_NUMBER_POSTFIX);
     }
 
-    // TODO : 일급 컬렉션의 책임이 어느정도인지 의견을 물어봅시다!
     public static void printAllLottoNumbers(AllLottoNumbers allLottoNumbers) {
         List<LottoNumbers> allLottoNumbersList = allLottoNumbers.getAllLottoNumbers();
         for (int i = 0; i < allLottoNumbersList.size(); i++) {
@@ -24,9 +23,9 @@ public class OutputView {
     }
 
     private static void printLottoNumbers(LottoNumbers lottoNumbers) {
-        List<LottoNumberGroup> lottoNumberGroups = lottoNumbers.getLottoNumbers();
+        List<LottoNumber> lottoNumberGroups = lottoNumbers.getLottoNumbers();
         String output = lottoNumberGroups.stream()
-                .map(LottoNumberGroup::getValue)
+                .map(LottoNumber::getNumber)
                 .map(Object::toString)
                 .collect(Collectors.joining(", ", "[", "]"));
         System.out.println(output);

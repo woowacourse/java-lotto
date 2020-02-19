@@ -15,7 +15,7 @@ public class ConsoleLottoApplication {
         OutputView.printPurchaseNumber(purchaseNumber);
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         for (int i = 0; i < purchaseNumber.getPurchaseNumber(); i++) {
-            List<LottoNumberGroup> randomNumbers = randomNumberGenerator.generateNumbers();
+            List<LottoNumber> randomNumbers = randomNumberGenerator.generateNumbers();
             lottoNumbersList.add(new LottoNumbers(randomNumbers));
         }
         AllLottoNumbers allLottoNumbers = new AllLottoNumbers(lottoNumbersList);

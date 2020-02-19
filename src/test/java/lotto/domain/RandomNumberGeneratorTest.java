@@ -8,7 +8,7 @@ public class RandomNumberGeneratorTest {
     @SuppressWarnings("NonAsciiCharacters")
     void generate_범위_안에_랜덤_값을_도출하는지_확인() {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-        Assertions.assertThat(randomNumberGenerator.generate().getValue())
+        Assertions.assertThat(randomNumberGenerator.generate().getNumber())
                 .isBetween(1, 45);
     }
 

@@ -7,14 +7,14 @@ import java.util.stream.Collectors;
 public class WinningNumbers {
     private static final int WINNING_NUMBER_SIZE = 7;
     private final LottoNumbers winningNumbers;
-    private final LottoNumberGroup bonusBall;
+    private final LottoNumber bonusBall;
 
     public WinningNumbers(List<Integer> winningNumbers, int bonusBall) {
         validateDuplicate(winningNumbers, bonusBall);
         this.winningNumbers = new LottoNumbers(winningNumbers.stream()
-                .map(LottoNumberGroup::parseLottoNumberGroup)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList()));
-        this.bonusBall = LottoNumberGroup.parseLottoNumberGroup(bonusBall);
+        this.bonusBall = LottoNumber.of(bonusBall);
     }
 
     private void validateDuplicate(List<Integer> winningNumbers, int bonusBall) {

@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbersTest {
-    List<LottoNumberGroup> lottoNumberList;
+    List<LottoNumber> lottoNumberList;
 
     @BeforeEach
     void initiate() {
         lottoNumberList = new ArrayList<>();
-        lottoNumberList.add(LottoNumberGroup.ONE);
-        lottoNumberList.add(LottoNumberGroup.FIVE);
-        lottoNumberList.add(LottoNumberGroup.NINE);
-        lottoNumberList.add(LottoNumberGroup.THREE);
-        lottoNumberList.add(LottoNumberGroup.FORTY_FIVE);
-        lottoNumberList.add(LottoNumberGroup.TWELVE);
+        lottoNumberList.add(LottoNumber.of(27));
+        lottoNumberList.add(LottoNumber.of(5));
+        lottoNumberList.add(LottoNumber.of(7));
+        lottoNumberList.add(LottoNumber.of(44));
+        lottoNumberList.add(LottoNumber.of(23));
+        lottoNumberList.add(LottoNumber.of(45));
     }
 
     @Test
@@ -30,9 +30,9 @@ public class LottoNumbersTest {
 
     @Test
     @SuppressWarnings("NonAsciiCharacters")
-    void 정상_범위를_많은_경우() {
+    void 정상_범위보다_입력의_수가_많은_경우() {
         Assertions.assertThatThrownBy(() -> {
-            lottoNumberList.add(LottoNumberGroup.THIRTY);
+            lottoNumberList.add(LottoNumber.of(30));
             new LottoNumbers(lottoNumberList);
         }).isInstanceOf(IllegalArgumentException.class);
     }
