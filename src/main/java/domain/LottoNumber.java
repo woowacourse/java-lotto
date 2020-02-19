@@ -1,6 +1,8 @@
 package domain;
 
 
+import java.util.Objects;
+
 public class LottoNumber implements Comparable {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -38,7 +40,12 @@ public class LottoNumber implements Comparable {
 
     @Override
     public boolean equals(Object lottoNumber) {
-        return this.number == ((LottoNumber)lottoNumber).number;
+        return (lottoNumber instanceof LottoNumber) &&  this.number == ((LottoNumber)lottoNumber).number;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(number);
     }
 
     @Override
@@ -48,5 +55,10 @@ public class LottoNumber implements Comparable {
         } else {
             return -1;
         }
+    }
+
+    @Override
+    public String toString(){
+        return Integer.toString(number);
     }
 }
