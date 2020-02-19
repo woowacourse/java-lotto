@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 
 public class WinningNumbersTest {
 	@Test
@@ -25,4 +26,13 @@ public class WinningNumbersTest {
 			new WinningNumbers("w, r, o, o, n, g")
 		).withMessage("당첨 번호는 정수만 가능합니다");
 	}
+
+	@Test
+	void checkValidationWhenDuplicateNumber() {
+		assertThatIllegalArgumentException().isThrownBy(() ->
+			new WinningNumbers("1, 1, 2, 3, 4, 5")
+		).withMessage("중복된 번호는 허용하지 않습니다");
+	}
+
+
 }

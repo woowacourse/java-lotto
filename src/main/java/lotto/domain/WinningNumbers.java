@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -29,6 +32,14 @@ public class WinningNumbers {
 		if (isNotNumberFormat(winningNumbersValue)) {
 			throw new IllegalArgumentException("당첨 번호는 정수만 가능합니다");
 		}
+		if (isDuplicatedNumber(winningNumbersValue)) {
+			throw new IllegalArgumentException("중복된 번호는 허용하지 않습니다");
+		}
+	}
+
+	private boolean isDuplicatedNumber(List<String> winningNumbersValue) {
+		HashSet<String> checkDuplicateSet = new HashSet<>(winningNumbersValue);
+		return isNotMatchSize(new ArrayList<>(checkDuplicateSet));
 	}
 
 	private boolean isNotNumberFormat(List<String> winningNumbersValue) {
