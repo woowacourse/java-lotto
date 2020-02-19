@@ -20,11 +20,4 @@ public class LottoTest {
     void isInWinNumber() {
         assertThat(Lotto.isInWinNumber(autonumbers)).isEqualTo(2);
     }
-
-    @Test
-    @DisplayName("보너스 볼 값을 갖고 있는지")
-    void hasBonusNumber() {
-        BonusBall bonusBall = new BonusBall("2");
-        assertTrue(Lotto.hasBonusBall(autonumbers));
-    }
 }

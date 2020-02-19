@@ -20,9 +20,9 @@ public class Lotto {
         OutputView.printYield(YieldMoney.countYieldMoney(Prize.sumPrize(resultCount)));
     }
 
-    public static int isInWinNumber(AutoNumber autonumbers) {
+    public static int isInWinNumber(AutoNumber autoNumbers) {
         int count = 0;
-        for (int autoNumber : autonumbers.getAutoNumber()) {
+        for (int autoNumber : autoNumbers.getAutoNumber()) {
             count += checkInWinNumber(autoNumber);
         }
         return count;

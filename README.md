@@ -58,18 +58,16 @@
 
 ### 입력 관련 테스트
 
+- null 빈 문자열 → isNullOrEmptyString()
 - 구입 금액에 대한 테스트
-    - 1000원 미만 → isUnderK()
+    - 1000원 미만, 10만원 초과인 경우 → isValueRange()
     - 숫자가 아닌 값 → isNotAnumber()
-    - 금액 범위를 지정합시다 (10만원까지) → isOverMaxValue()
     - 1000원 단위인지 → isUnitK()
 - 당첨 번호에 대한 테스트
-    - null 빈 문자열 →isNullOrEmptyString()
-    - 6개 초과 → isOverSix()
+    - 6개 아닌 갯수만큼 입력 → hasSix()
     - 숫자와 , 가 아닌 값 → isNumberFormat()
 - 보너스 볼에 대한 테스트
-    - 숫자가 아닌 값 → isNumberFormat()
-    - 1~45 외의 값 ⇒ enum 안에 있는지 → isOutOfRange()
+    - 숫자가 아닌 값 → isNumber()
     - 당첨 번호와 동일한 값이 있는지 → isContainsWinNumber()
 
 ### 로직 관련 테스트
