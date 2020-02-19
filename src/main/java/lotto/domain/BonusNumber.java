@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exceptions.LottoNumberRangeException;
+
 public class BonusNumber {
 	private static final int MAX_LOTTO_NUMBER_RANGE = 45;
 	private static final int MIN_LOTTO_NUMBER_RANGE = 1;
@@ -8,7 +10,7 @@ public class BonusNumber {
 
 	public BonusNumber(int bonusNumber) {
 		if (isInvalidNumberRange(bonusNumber)) {
-			throw new IllegalArgumentException("보너스 넘버의 범위:1-45");
+			throw new LottoNumberRangeException("보너스 넘버의 범위:1-45");
 		}
 		this.bonusNumber = bonusNumber;
 	}

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import lotto.exceptions.NotNumberException;
+
 public class NumberParser {
 	private static final String DELIMITER = ",";
 
@@ -18,7 +20,7 @@ public class NumberParser {
 		try {
 			return Integer.parseInt(input);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("숫자만 입력하세요.");
+			throw new NotNumberException("숫자만 입력하세요.");
 		}
 	}
 }

@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import lotto.exceptions.LottoNumberDuplicatedException;
+
 public class WinningNumberTest {
 	@Test
 	public void initWinningNumberTest() {
@@ -16,7 +18,7 @@ public class WinningNumberTest {
 		assertThat(new WinningNumber(winningNumber, bonusNumber)).isNotNull();
 
 		assertThatThrownBy(() -> new WinningNumber(winningNumber, duplicatedBonusNumber))
-			.isInstanceOf(IllegalArgumentException.class)
+			.isInstanceOf(LottoNumberDuplicatedException.class)
 			.hasMessageContaining("중복");
 	}
 }

@@ -11,6 +11,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.exceptions.NotNumberException;
+
 public class NumberParserTest {
 	@ParameterizedTest
 	@MethodSource("generateRightInput")
@@ -29,7 +31,7 @@ public class NumberParserTest {
 	@DisplayName("파싱 안되는것만 테스트")
 	public void wrongWinningNumberParseTest(String input) {
 		assertThatThrownBy(() -> NumberParser.winningNumberParse(input))
-			.isInstanceOf(IllegalArgumentException.class)
+			.isInstanceOf(NotNumberException.class)
 			.hasMessageContaining("숫자만 입력하세요");
 	}
 

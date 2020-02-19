@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Optional;
 
+import lotto.exceptions.NotAllowedMoneyAmountException;
+
 public class Money {
 	private static final int MIN_MONEY = 0;
 	private int money;
@@ -12,7 +14,7 @@ public class Money {
 				.filter(this::isNaturalNumber)
 				.orElseThrow(NumberFormatException::new);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("구입금액은 자연수로 입력해주세요.");
+			throw new NotAllowedMoneyAmountException("구입금액은 자연수로 입력해주세요.");
 		}
 	}
 

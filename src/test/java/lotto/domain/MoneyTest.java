@@ -8,13 +8,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.exceptions.NotAllowedMoneyAmountException;
+
 public class MoneyTest {
 	@ParameterizedTest
 	@MethodSource("generateMoneyInput")
 	public void initTest(String moneyInput, boolean expected) {
 		assertThatThrownBy(() -> {
 			Money money = new Money(moneyInput);
-		}).isInstanceOf(IllegalArgumentException.class)
+		}).isInstanceOf(NotAllowedMoneyAmountException.class)
 			.hasMessageContaining("자연수");
 	}
 
