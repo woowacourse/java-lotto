@@ -7,13 +7,21 @@ public class WinningNumber {
 	public WinningNumber(Lotto winningNumber, BonusNumber bonusNumber) {
 		this.winningNumber = winningNumber;
 
-		if (bonusNumberNotDuplicatedWithWinningNumber(bonusNumber)) {
+		if (bonusNumberDuplicatedWithWinningNumber(bonusNumber)) {
 			throw new IllegalArgumentException("보너스 넘버와 중복될수 없습니다.");
 		}
 		this.bonusNumber = bonusNumber;
 	}
 
-	private boolean bonusNumberNotDuplicatedWithWinningNumber(BonusNumber bonusNumber) {
-		return !winningNumber.getNumbers().contains(bonusNumber.getBonusNumber());
+	private boolean bonusNumberDuplicatedWithWinningNumber(BonusNumber bonusNumber) {
+		return winningNumber.getNumbers().contains(bonusNumber.getBonusNumber());
+	}
+
+	public Lotto getWinningNumber() {
+		return winningNumber;
+	}
+
+	public BonusNumber getBonusNumber() {
+		return bonusNumber;
 	}
 }

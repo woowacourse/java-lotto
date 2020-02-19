@@ -9,14 +9,14 @@ public class Lotto {
 		if (isInvalidNumberRange(numbers)) {
 			throw new IllegalArgumentException("1~45 범위의 숫자만 로또 번호가 될 수 있습니다.");
 		}
-		if (hasRightAmountOfNumbers(numbers)) {
+		if (wrongAmountOfNumbers(numbers)) {
 			throw new IllegalArgumentException("잘못된 로또 번호입니다. 중복 안됨, 갯수는 6개");
 		}
 		this.numbers = numbers;
 	}
 
-	private boolean hasRightAmountOfNumbers(List<Integer> numbers) {
-		return 6 == numbers.stream()
+	private boolean wrongAmountOfNumbers(List<Integer> numbers) {
+		return 6 != numbers.stream()
 			.distinct()
 			.count();
 	}
