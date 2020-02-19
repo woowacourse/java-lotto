@@ -1,17 +1,14 @@
 package domain.numberscontainer;
 
 import domain.LottoNumber;
-import domain.numberscontainer.LottoNumbersDto;
-import domain.numberscontainer.Ticket;
-import domain.numberscontainer.WinningNumbers;
+import domain.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -57,5 +54,32 @@ public class WinningNumbersTest {
         LottoNumber bonusNumber = LottoNumber.getLottoNumber(number7);
 
         return new LottoNumbersDto(sixNumbers, bonusNumber);
+    }
+
+    @Test
+    @DisplayName("당첨 결과 확인")
+    void getLottoResultTest() {
+        List<Ticket> tickets = Arrays.asList(
+                new Ticket(createLottoNumberDto(3, 4, 5, 6, 7, 8, -1)), // 1등
+                new Ticket(createLottoNumberDto(3, 4, 5, 6, 7, 9, -1)), // 2등
+                new Ticket(createLottoNumberDto(3, 4, 5, 6, 7, 10, -1)), // 3등
+                new Ticket(createLottoNumberDto(3, 4, 5, 6, 10, 11, -1)), // 4등
+                new Ticket(createLottoNumberDto(3, 4, 5, 10, 11, 12, -1)), // 5등
+                new Ticket(createLottoNumberDto(4, 5, 6, 7, 8, 9, -1)), // 2등
+                new Ticket(createLottoNumberDto(4, 5, 6, 7, 8, 10, -1)), // 3등
+                new Ticket(createLottoNumberDto(4, 5, 6, 7, 10, 11, -1)), // 4등
+                new Ticket(createLottoNumberDto(10, 11, 12, 13, 14, 15, -1))); // 당첨X
+
+        WinningNumbers winningNumbers = new WinningNumbers(createLottoNumberDto(3, 4, 5, 6, 7, 8, 9));
+
+        Map<LottoResult, Long> map = tickets.stream()
+                .collect(Collectors.groupingBy(ticket -> winningNumbers.getLottoResult(ticket), Collectors.counting()));
+
+        assertThat(map.get(LottoResult.FIRST)).isEqualTo(1);
+        assertThat(map.get(LottoResult.SECOND)).isEqualTo(2);
+        assertThat(map.get(LottoResult.THIRD)).isEqualTo(2);
+        assertThat(map.get(LottoResult.FOURTH)).isEqualTo(2);
+        assertThat(map.get(LottoResult.FIFTH)).isEqualTo(1);
+        assertThat(map.get(LottoResult.NO_WIN)).isEqualTo(1);
     }
 }

@@ -26,7 +26,6 @@ public class LottoApplication {
         OutputView.printTickets(tickets);
 
         WinningNumbers winningNumbers = enterWinningNumbers();
-
     }
 
     private static WinningNumbers enterWinningNumbers() {

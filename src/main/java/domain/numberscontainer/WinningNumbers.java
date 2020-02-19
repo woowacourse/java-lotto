@@ -1,6 +1,7 @@
 package domain.numberscontainer;
 
 import domain.LottoNumber;
+import domain.LottoResult;
 
 public class WinningNumbers extends LottoNumbersContainer {
 
@@ -34,5 +35,12 @@ public class WinningNumbers extends LottoNumbersContainer {
                 .filter(number -> ticket.contains(number))
                 .mapToInt(number -> 1)
                 .sum();
+    }
+
+    public LottoResult getLottoResult(Ticket ticket) {
+        int matchingNumber = findDuplicatedNumbers(ticket);
+        boolean isBonus = ticket.contains(bonusNumber);
+        return LottoResult.findLottoResult(matchingNumber, isBonus);
+        //return LottoResult.FIRST;
     }
 }

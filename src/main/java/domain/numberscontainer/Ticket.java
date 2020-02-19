@@ -18,11 +18,9 @@ public class Ticket extends LottoNumbersContainer {
         StringBuilder stringBuilder = new StringBuilder();
         String numbers = this.sixLottoNumbers.stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(", ", "[", "]"));
 
-        stringBuilder.append("[");
         stringBuilder.append(numbers);
-        stringBuilder.append("]");
         return stringBuilder.toString();
     }
 }
