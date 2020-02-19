@@ -1,6 +1,10 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.number.AllLottoNumbers;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
+import lotto.domain.number.PurchaseNumber;
+import lotto.domain.random.RandomNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

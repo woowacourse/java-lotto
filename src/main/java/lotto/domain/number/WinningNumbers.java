@@ -1,8 +1,7 @@
-package lotto.domain;
+package lotto.domain.number;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningNumbers extends LottoRound {
     private static final int WINNING_NUMBER_SIZE = 7;

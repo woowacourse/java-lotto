@@ -1,8 +1,7 @@
-package lotto.domain;
+package lotto.domain.number;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class LottoNumbers extends LottoRound{
 

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.number;
 
 public class PurchaseNumber {
     private static final int MINIMUM_MONEY = 1000;

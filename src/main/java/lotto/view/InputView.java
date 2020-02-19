@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.PurchaseNumber;
-import lotto.domain.WinningNumbers;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.PurchaseNumber;
+import lotto.domain.number.WinningNumbers;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;

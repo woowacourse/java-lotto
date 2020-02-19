@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.random;
+
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
