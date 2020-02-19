@@ -12,7 +12,7 @@ public class LottoStatistics {
 	}
 
 	private void validate(Map<LottoRank, Long> statistics) {
-		if (Objects.isNull(statistics) || statistics.isEmpty()) {
+		if (statistics == null || statistics.isEmpty()) {
 			throw new IllegalArgumentException("통계를 수행할 로또 결과가 없습니다.");
 		}
 	}
