@@ -16,7 +16,8 @@ public class InputView {
     }
 
     public static String inputWinningLottoNumbers() {
-        return scanner.nextLine();
+        return scanner.nextLine()
+                .trim();
     }
 
     public static int inputBonusNumber() {
