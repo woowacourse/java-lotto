@@ -27,4 +27,8 @@ public class WinningBalls {
     public boolean hitBonus(LottoTicket lottoTicket){
         return lottoTicket.getLottoTicket().contains(bonusBall);
     }
+
+
+
+
 }
