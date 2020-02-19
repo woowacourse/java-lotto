@@ -21,8 +21,12 @@ public class WinningNumbers {
 	}
 
 	private void checkValidationOf(List<String> winningNumbersValue) {
-		if (winningNumbersValue.size() > WINNING_NUMBER_SIZE) {
+		if (isNotMatchSize(winningNumbersValue)) {
 			throw new IllegalArgumentException("당첨 번호는 보너스 번호를 제외하고 6자리 이어야 합니다");
 		}
+	}
+
+	private boolean isNotMatchSize(List<String> winningNumbersValue) {
+		return winningNumbersValue.size() != WINNING_NUMBER_SIZE;
 	}
 }
