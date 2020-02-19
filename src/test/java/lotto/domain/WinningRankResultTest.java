@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinningResultTest {
+public class WinningRankResultTest {
     static Stream<Arguments> generateLottoNumbers() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
@@ -24,6 +25,14 @@ public class WinningResultTest {
     @MethodSource("generateLottoNumbers")
     void checkCorrectNumberTest(List<Integer> input, int result) {
         List<Integer> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertThat(WinningResult.checkCorrectNumber(input, winningLottoNumbers)).isEqualTo(result);
+        assertThat(WinningRankResult.checkCorrectNumber(input, winningLottoNumbers)).isEqualTo(result);
+    }
+
+    @Test
+    @DisplayName("보너스볼 일치 여부 확인")
+    void isBonusNumberContain() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThat(WinningRankResult.isBonusNumberContain(lottoNumbers, 6)).isTrue();
+        assertThat(WinningRankResult.isBonusNumberContain(lottoNumbers, 7)).isFalse();
     }
 }
