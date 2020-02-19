@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-public class ResultTest {
+public class TotalTotalResultTest {
 	@Test
 	void calculateTotalPrize() {
 		Map<LottoRank, Integer> map = new HashMap<>();
@@ -22,8 +22,8 @@ public class ResultTest {
 			expectedTotalPrize += lottoRank.getTotal(map.get(lottoRank));
 		}
 
-		Result result = new Result(map);
-		long prize = result.calculateTotalPrize();
+		TotalResult totalResult = new TotalResult(map);
+		long prize = totalResult.calculateTotalPrize();
 		assertThat(prize).isEqualTo(expectedTotalPrize);
 	}
 }
