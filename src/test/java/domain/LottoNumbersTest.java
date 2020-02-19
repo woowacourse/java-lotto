@@ -1,6 +1,6 @@
 package domain;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberGroup;
 import lotto.domain.LottoNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,17 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbersTest {
-    List<LottoNumber> lottoNumberList;
+    List<LottoNumberGroup> lottoNumberList;
 
     @BeforeEach
     void initiate() {
         lottoNumberList = new ArrayList<>();
-        lottoNumberList.add(new LottoNumber(1));
-        lottoNumberList.add(new LottoNumber(2));
-        lottoNumberList.add(new LottoNumber(3));
-        lottoNumberList.add(new LottoNumber(4));
-        lottoNumberList.add(new LottoNumber(5));
-        lottoNumberList.add(new LottoNumber(6));
+        lottoNumberList.add(LottoNumberGroup.ONE);
+        lottoNumberList.add(LottoNumberGroup.FIVE);
+        lottoNumberList.add(LottoNumberGroup.NINE);
+        lottoNumberList.add(LottoNumberGroup.THREE);
+        lottoNumberList.add(LottoNumberGroup.FORTY_FIVE);
+        lottoNumberList.add(LottoNumberGroup.TWELVE);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class LottoNumbersTest {
     @SuppressWarnings("NonAsciiCharacters")
     void 정상_범위를_많은_경우() {
         Assertions.assertThatThrownBy(() -> {
-            lottoNumberList.add(new LottoNumber(7));
+            lottoNumberList.add(LottoNumberGroup.THIRTY);
             new LottoNumbers(lottoNumberList);
         }).isInstanceOf(IllegalArgumentException.class);
     }
