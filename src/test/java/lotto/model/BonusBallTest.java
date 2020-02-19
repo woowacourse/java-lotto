@@ -14,4 +14,12 @@ public class BonusBallTest {
         }).isInstanceOf(NumberFormatException.class)
         .hasMessage("숫자가 아닙니다.");
     }
+
+    @Test
+    void isContainsWinNumber() {
+        WinNumber winNumber = new WinNumber("1, 3, 4, 44, 34, 13");
+        assertThatThrownBy(() -> {
+            new BonusBall("1");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

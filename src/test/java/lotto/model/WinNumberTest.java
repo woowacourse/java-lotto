@@ -3,10 +3,6 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinNumberTest {
@@ -15,7 +11,7 @@ public class WinNumberTest {
     void isNumberFormat() {
         assertThatThrownBy(() -> {
             String 당첨번호1 = "1, 3, 5, 7, a, 11";
-            new  winNumber(당첨번호1);
+            new WinNumber(당첨번호1);
         }).isInstanceOf(NumberFormatException.class)
                 .hasMessage("숫자가 아니야");
     }
@@ -25,7 +21,7 @@ public class WinNumberTest {
     void isOverSix() {
         assertThatThrownBy(() -> {
             String 당첨번호2 = "1, 3, 5, 7, 9, 11, 13";
-            new  winNumber(당첨번호2);
+            new WinNumber(당첨번호2);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자가 6개를 초과할 수 없습니다.");
     }

@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.model.winNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

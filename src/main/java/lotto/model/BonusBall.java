@@ -4,14 +4,22 @@ public class BonusBall {
     private int bonusNo;
 
     public BonusBall(String input) {
-        isNumber(input);
+        int inputNo = isNumber(input);
+        isContainsWinNumber(inputNo);
+        this.bonusNo = inputNo;
     }
 
-    private void isNumber(String input) {
+    private int isNumber(String input) {
         try {
-            Integer.parseInt(input);
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new NumberFormatException("숫자가 아닙니다.");
+        }
+    }
+
+    private void isContainsWinNumber(int inputNo) {
+        if (WinNumber.winNumbers.contains(inputNo)) {
+            throw new IllegalArgumentException("당첨번호와 중복되는 숫자가 있습니다.");
         }
     }
 }

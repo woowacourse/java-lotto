@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class winNumber {
-    private List<Integer> winNumbers;
+public class WinNumber {
+    public static List<Integer> winNumbers;
 
-    public winNumber(String winNumber) {
+    public WinNumber(String winNumber) {
         List<Integer> winNumbers = makeWinNumbers(makeNumbers(winNumber));
         isOverSix(winNumbers);
         this.winNumbers = winNumbers;
@@ -38,6 +38,4 @@ public class winNumber {
             throw new NumberFormatException("숫자가 아니야");
         }
     }
-
-
 }
