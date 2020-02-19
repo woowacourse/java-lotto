@@ -24,6 +24,16 @@ public class PurchaseMoney {
 		}
 	}
 
+	private void checkIsLessOrEqualThanZero(int purchaseMoney) {
+		if (purchaseMoney <= POSITIVE_THRESHOLD) {
+			throw new PurchaseMoneyIllegalArgumentException(purchaseMoney);
+		}
+	}
+
+	public int getPurchaseMoney() {
+		return purchaseMoney;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -35,15 +45,5 @@ public class PurchaseMoney {
 	@Override
 	public int hashCode() {
 		return Objects.hash(purchaseMoney);
-	}
-
-	private void checkIsLessOrEqualThanZero(int purchaseMoney) {
-		if (purchaseMoney <= POSITIVE_THRESHOLD) {
-			throw new PurchaseMoneyIllegalArgumentException(purchaseMoney);
-		}
-	}
-
-	public int getPurchaseMoney() {
-		return purchaseMoney;
 	}
 }

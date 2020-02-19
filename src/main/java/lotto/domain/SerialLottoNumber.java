@@ -2,17 +2,14 @@ package lotto.domain;
 
 import lotto.exceptions.LottoTicketIllegalArgumentException;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoTicket {
+public class SerialLottoNumber {
 	public static final int LOTTO_TICKET_SIZE = 6;
 	private final List<LottoNumber> lottoNumbers;
 
-	public LottoTicket(final List<LottoNumber> lottoNumbers) {
+	public SerialLottoNumber(final List<LottoNumber> lottoNumbers) {
 		checkIsSizeSix(lottoNumbers);
 		checkIsDuplicated(lottoNumbers);
 
@@ -36,5 +33,18 @@ public class LottoTicket {
 
 	public List<LottoNumber> getLottoNumbers() {
 		return Collections.unmodifiableList(lottoNumbers);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		SerialLottoNumber that = (SerialLottoNumber) o;
+		return Objects.equals(lottoNumbers, that.lottoNumbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoNumbers);
 	}
 }
