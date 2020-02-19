@@ -11,9 +11,14 @@ public class LottoManager {
 	// 		.filter(x -> winLotto.lottoNumbers.contains(x))
 	// 		.count();
 	// }
-
+ /*
 	public LottoManager(int count) {
+		lotteries.stream()
+			.map(same(5))
+			.forEach();
 		this.lotteries = LottoFactory.createLotteries(count);
 	}
+
+  */
 
 }
