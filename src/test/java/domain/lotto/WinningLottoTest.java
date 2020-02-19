@@ -55,4 +55,10 @@ public class WinningLottoTest {
                 Arguments.of(winningLotto, lottoTicket, Rank.FIRST)
         );
     }
+
+    public static WinningLotto getWinningLottoFixture() {
+        LottoTicket lottoTicket = getLottoTicketFromOneToSixFixture();
+        LottoNumber bonusNumber = getLottoNumberSevenFixture();
+        return new WinningLotto(lottoTicket, bonusNumber);
+    }
 }
