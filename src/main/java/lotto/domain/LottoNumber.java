@@ -59,13 +59,13 @@ public enum LottoNumber {
 
 	private final int lottoNumber;
 
-	LottoNumber(final int inputLottoNumber) {
-		this.lottoNumber = inputLottoNumber;
+	LottoNumber(final int lottoNumber) {
+		this.lottoNumber = lottoNumber;
 	}
 
-	public static LottoNumber of(final int inputLottoNumber) {
+	public static LottoNumber of(final int lottoNumber) {
 		return Arrays.stream(LottoNumber.values())
-				.filter(value -> value.lottoNumber == inputLottoNumber)
+				.filter(value -> value.lottoNumber == lottoNumber)
 				.findFirst()
 				.orElseThrow(() -> new WrongLottoNumberException("유효한 로또 번호가 아닙니다."));
 	}
