@@ -1,10 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LottoCompany {
     private static final int TICKET_PRICE = 1000;
@@ -20,6 +16,14 @@ public class LottoCompany {
         }
 
         return lottoTickets;
+    }
+
+    public static LottoTicket makeWinningLotto(int... numbers) {
+        Set<LottoBall> winningLotto = new HashSet<>();
+        for (int number : numbers) {
+            winningLotto.add(LottoFactory.findLottoBallByNumber(number));
+        }
+        return new LottoTicket(winningLotto);
     }
 
     private static LottoTicket getTicket() {
