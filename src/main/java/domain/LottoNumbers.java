@@ -6,7 +6,8 @@ import java.util.Objects;
 public class LottoNumbers {
     private static final String ERROR_NULL_MESSAGE = "null값이 입력되었습니다.";
     private static final String ERROR_INVALID_SIZE_MESSAGE = "인자의 갯수가 올바르지 않습니다.";
-    public static final String ERROR_DUPLICATE_MESSAGE = "중복된 인자가 존재합니다.";
+    private static final String ERROR_DUPLICATE_MESSAGE = "중복된 인자가 존재합니다.";
+    private static final int LOTTO_SIZE = 6;
     private List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -17,13 +18,13 @@ public class LottoNumbers {
     }
 
     private void validateDuplication(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() != 6) {
+        if (lottoNumbers.stream().distinct().count() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_MESSAGE);
         }
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_INVALID_SIZE_MESSAGE);
         }
     }
