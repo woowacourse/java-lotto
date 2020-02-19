@@ -2,6 +2,8 @@ package lotto.domain;
 
 import lotto.exceptions.PurchaseMoneyIllegalArgumentException;
 
+import java.util.Objects;
+
 public class PurchaseMoney {
 	public static final int POSITIVE_THRESHOLD = 0;
 	private static final int DIVISOR = 1000;
@@ -20,6 +22,19 @@ public class PurchaseMoney {
 		if (purchaseMoney % DIVISOR != REMAINDER) {
 			throw new PurchaseMoneyIllegalArgumentException(purchaseMoney);
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		PurchaseMoney that = (PurchaseMoney) o;
+		return purchaseMoney == that.purchaseMoney;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(purchaseMoney);
 	}
 
 	private void checkIsLessOrEqualThanZero(int purchaseMoney) {
