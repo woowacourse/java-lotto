@@ -25,4 +25,8 @@ public class Lotto {
 		return numbers.stream()
 			.anyMatch(number -> number > 45 || number < 1);
 	}
+
+	public List<Integer> getNumbers() {
+		return numbers;
+	}
 }
