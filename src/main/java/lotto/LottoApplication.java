@@ -2,8 +2,8 @@ package lotto;
 
 import java.util.Map;
 
-import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;

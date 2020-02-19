@@ -32,10 +32,12 @@ public class LottoStatistics {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
+		}
 		LottoStatistics that = (LottoStatistics)o;
 		return Objects.equals(statistics, that.statistics);
 	}

@@ -15,65 +15,67 @@ public class Lotto implements Iterable<LottoNumber> {
 	private static final String DUPLICATED_NUMBER_MESSAGE = "로또 번호가 중복됩니다.";
 	private static final String INVALID_SIZE_MESSAGE = "로또 번호가 존재하지 않습니다.";
 
-	private final List<LottoNumber> numbers = new ArrayList<>();
+	private final List<LottoNumber> lotto = new ArrayList<>();
 
-	public Lotto(List<LottoNumber> numbers) {
-		validate(numbers);
-		this.numbers.addAll(numbers);
-		Collections.sort(this.numbers);
+	public Lotto(List<LottoNumber> lotto) {
+		validate(lotto);
+		this.lotto.addAll(lotto);
+		Collections.sort(this.lotto);
 	}
 
-	private void validate(List<LottoNumber> numbers) {
-		validateSize(numbers);
-		validateDuplicate(numbers);
+	private void validate(List<LottoNumber> lotto) {
+		validateSize(lotto);
+		validateDuplicate(lotto);
 	}
 
-	private void validateSize(List<LottoNumber> numbers) {
-		if (Objects.isNull(numbers) || numbers.size() != SIZE) {
+	private void validateSize(List<LottoNumber> lotto) {
+		if (lotto == null || lotto.size() != SIZE) {
 			throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
 		}
 	}
 
-	private void validateDuplicate(List<LottoNumber> numbers) {
-		Set<LottoNumber> distinctNumbers = new HashSet<>(numbers);
-		if (distinctNumbers.size() != numbers.size()) {
+	private void validateDuplicate(List<LottoNumber> lotto) {
+		Set<LottoNumber> distinct = new HashSet<>(lotto);
+		if (distinct.size() != lotto.size()) {
 			throw new IllegalArgumentException(DUPLICATED_NUMBER_MESSAGE);
 		}
 	}
 
-	public static Lotto of(int... numbers) {
-		return new Lotto(Arrays.stream(numbers)
+	public static Lotto of(int... lottoNumbers) {
+		return new Lotto(Arrays.stream(lottoNumbers)
 				.mapToObj(LottoNumber::of)
 				.collect(Collectors.toList()));
 	}
 
-	public boolean contains(LottoNumber number) {
-		return numbers.contains(number);
+	public boolean contains(LottoNumber lottoNumber) {
+		return lotto.contains(lottoNumber);
 	}
 
-	public long calculateMatchCount(Lotto target) {
-		return numbers.stream()
-				.filter(target::contains)
+	public long countOfMatch(Lotto that) {
+		return lotto.stream()
+				.filter(that::contains)
 				.count();
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
+		}
 		Lotto that = (Lotto)o;
-		return Objects.equals(numbers, that.numbers);
+		return Objects.equals(lotto, that.lotto);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(numbers);
+		return Objects.hash(lotto);
 	}
 
 	@Override
 	public Iterator<LottoNumber> iterator() {
-		return numbers.iterator();
+		return lotto.iterator();
 	}
 }
