@@ -40,4 +40,8 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 숫자의 개수가 잘못되었습니다.");
         }
     }
+
+    public List<Integer> getLottoTicket() {
+        return this.lottoTicket;
+    }
 }

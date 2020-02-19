@@ -10,6 +10,7 @@ public class WinningLottoTicket {
     private static final String NUMBER_FORMAT = "-?\\d+(\\.\\d+)?";
 
     LottoTicket winningTicket;
+    BonusBall bonusBall;
 
     public WinningLottoTicket(String input) {
         validateNull(input);
@@ -47,5 +48,9 @@ public class WinningLottoTicket {
         if (input.matches(NUMBER_FORMAT)) {
             throw new IllegalArgumentException("input값이 숫자가 아닙니다.");
         }
+    }
+
+    public void initializeBonusBall(String input) {
+        this.bonusBall = new BonusBall(this.winningTicket.getLottoTicket(), input);
     }
 }
