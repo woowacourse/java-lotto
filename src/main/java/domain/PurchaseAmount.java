@@ -1,12 +1,20 @@
 package domain;
 
 public class PurchaseAmount {
+    public static final int LOTTO_PRICE = 1000;
     private int amount;
 
     public PurchaseAmount(String inputMoney) {
         checkNotNumber(inputMoney);
         this.amount = Integer.parseInt(inputMoney);
         checkNegativeAmount(amount);
+        checkUnderLottoPrice();
+    }
+
+    private void checkUnderLottoPrice() {
+        if (amount < LOTTO_PRICE){
+            throw new IllegalArgumentException("로또 한장 가격보다 낮은 금액을 입력하셨습니다.");
+        }
     }
 
     private void checkNotNumber(String inputMoney) {

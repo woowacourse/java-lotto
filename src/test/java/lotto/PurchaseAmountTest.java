@@ -22,4 +22,12 @@ public class PurchaseAmountTest {
                 .hasMessage("구매 금액은 음수일 수 없습니다.");
     }
 
+    @Test
+    void 구매금액이_로또_한_장_가격_보다_낮은지_검증(){
+        assertThatThrownBy(() -> {
+            new PurchaseAmount("500");
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 한장 가격보다 낮은 금액을 입력하셨습니다.");
+    }
+
 }
