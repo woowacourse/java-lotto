@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,9 +36,9 @@ public class LottoTest {
     void validateNumberScopeTest() {
         List<Integer> input1 = Arrays.asList(0, 1, 2, 3, 4, 5);
         List<Integer> input2 = Arrays.asList(1, 2, 3, 4, 5, 46);
-        assertThatThrownBy(() -> Lotto.validateNumberScope(input1))
+        assertThatThrownBy(() -> Lotto.validateNumbersScope(input1))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Lotto.validateNumberScope(input2))
+        assertThatThrownBy(() -> Lotto.validateNumbersScope(input2))
                 .isInstanceOf(IllegalArgumentException.class);
 
     }

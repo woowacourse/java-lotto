@@ -1,21 +1,19 @@
 package lotto.domain;
 
-import com.sun.org.apache.bcel.internal.generic.ATHROW;
-
 import java.util.LinkedHashSet;
 import java.util.List;
 
 public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
-    public static final int MAX_LOTTO_NUMBER = 45;
-    public static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
     private List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
         validateDuplication(numbers);
         validateSize(numbers);
-        validateNumberScope(numbers);
+        validateNumbersScope(numbers);
         this.lottoNumbers = numbers;
     }
 
@@ -32,11 +30,13 @@ public class Lotto {
         }
     }
 
-    static void validateNumberScope(List<Integer> numbers) {
-        numbers.forEach(number -> {
-                    if (number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER) {
-                        throw new IllegalArgumentException("잘못된 로또 번호입니다.");
-                    }
-                });
+    static void validateNumbersScope(List<Integer> numbers) {
+        numbers.forEach(Lotto::validateNumberScope);
+    }
+
+    static void validateNumberScope(Integer number) {
+        if (number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("잘못된 로또 번호입니다.");
+        }
     }
 }
