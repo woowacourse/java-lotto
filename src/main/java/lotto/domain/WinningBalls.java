@@ -23,4 +23,8 @@ public class WinningBalls {
                 .filter(winningBalls::contains)
                 .count();
     }
+
+    public boolean hitBonus(LottoTicket lottoTicket){
+        return lottoTicket.getLottoTicket().contains(bonusBall);
+    }
 }
