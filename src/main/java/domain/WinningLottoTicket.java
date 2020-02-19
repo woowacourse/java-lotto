@@ -7,7 +7,6 @@ import java.util.List;
 
 public class WinningLottoTicket {
     private static final String DELIMITER = ", ";
-    private static final String NUMBER_FORMAT = "-?\\d+(\\.\\d+)?";
 
     LottoTicket winningTicket;
     BonusBall bonusBall;
@@ -45,7 +44,9 @@ public class WinningLottoTicket {
     }
 
     private void validateNumber(String input) {
-        if (input.matches(NUMBER_FORMAT)) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("input값이 숫자가 아닙니다.");
         }
     }
