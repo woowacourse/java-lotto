@@ -19,6 +19,16 @@ public class LottoTicket {
         }
     }
 
+    public int getMatchCount(LottoTicket lottoTicket) {
+        return (int) this.lottoBalls.stream()
+                .filter(lottoTicket::has)
+                .count();
+    }
+
+    public boolean has(LottoBall bonusBall) {
+        return this.lottoBalls.contains(bonusBall);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
