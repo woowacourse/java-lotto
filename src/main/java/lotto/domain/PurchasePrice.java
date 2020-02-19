@@ -1,7 +1,8 @@
 package lotto.domain;
 
 public class PurchasePrice {
-    private static final int MINIMUM_PRICE = 1000;
+    private static final int MINIMUM_PRICE = 1_000;
+    private static final int PRICE_PER_LOTTO = 1_000;
 
     private final int purchasePrice;
 
@@ -30,5 +31,9 @@ public class PurchasePrice {
         if (price < MINIMUM_PRICE) {
             throw new RuntimeException(String.format("최소 %d원 이상 구매하셔야 합니다.", MINIMUM_PRICE));
         }
+    }
+
+    public int calculateLottoCount() {
+        return purchasePrice / PRICE_PER_LOTTO;
     }
 }
