@@ -2,12 +2,14 @@ package domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber>{
+    private static final String ERROR_BOUND_MESSAGE = "1부터 45 사이의 숫자만 입력 가능합니다.";
+
     private int number;
 
     public LottoNumber(int number) {
         if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("1부터 45 사이의 숫자만 입력 가능합니다.");
+            throw new IllegalArgumentException(ERROR_BOUND_MESSAGE);
         }
         this.number = number;
     }
@@ -23,5 +25,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(number,o.number);
     }
 }
