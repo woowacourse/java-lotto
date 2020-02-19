@@ -18,7 +18,16 @@ public class LottoMachine {
 		}
 	}
 
-	public List<Integer> pickRandomBalls() {
+	public List<Lotto> makeRandomLottos(int lottoCount) {
+		List<Lotto> lottos = new ArrayList<>();
+
+		for (int i = 0; i < lottoCount; i++) {
+			lottos.add(new Lotto(pickRandomBalls()));
+		}
+		return lottos;
+	}
+
+	private List<Integer> pickRandomBalls() {
 		Collections.shuffle(lottoBalls);
 		return lottoBalls.stream()
 			.limit(6)

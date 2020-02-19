@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 public class LottoMachineTest {
 	@Test
-	void 로또_랜덤번호_6개_뽑기() {
+	void 주어진_개수만큼_자동_로또_사기() {
 		LottoMachine lottoMachine = new LottoMachine();
-		assertThat(lottoMachine.pickRandomBalls()).size().isEqualTo(6);
+		assertThat(lottoMachine.makeRandomLottos(6).size()).isEqualTo(6);
 	}
 }
