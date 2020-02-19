@@ -14,7 +14,7 @@ public class Lotto {
 
     public static void checkLottoSizeSix(int size) {
         if (size != LOTTO_SIZE){
-            throw new IllegalArgumentException("로또 한장은 6개의 숫자로 이루어져 있어야 합니다.");
+            throw new IllegalArgumentException("로또의 번호는 6개의 숫자로 이루어져 있어야 합니다.");
         }
     }
 
