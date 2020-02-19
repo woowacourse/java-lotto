@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.BallNumberOutOfRangeException;
+import lotto.exceptions.LottoNumberIllegalArgumentException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,7 +14,7 @@ class LottoNumberTest {
 
 			// when
 			LottoNumber lottoNumber = new LottoNumber(input);
-		}).isInstanceOf(BallNumberOutOfRangeException.class)
-				.hasMessageMatching("-?[0-9]+" + BallNumberOutOfRangeException.MESSAGE );
+		}).isInstanceOf(LottoNumberIllegalArgumentException.class)
+				.hasMessageMatching("-?[0-9]+" + LottoNumberIllegalArgumentException.MESSAGE );
 	}
 }
