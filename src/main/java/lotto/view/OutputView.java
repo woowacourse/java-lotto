@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
@@ -11,13 +12,15 @@ import lotto.domain.Rank;
 public class OutputView {
 	public static void showEarningRate(Money money, List<Rank> ranks) {
 		int sum = ranks.stream()
+			.filter(Objects::nonNull)
 			.mapToInt(Rank::getReward)
 			.sum();
-		System.out.printf("총 수익률은 %.2f %%입니다.", sum / money.getMoney() * 100.0);
+		System.out.printf("총 수익률은 %.3f %%입니다.", (double)sum / money.getMoney() * 100);
 	}
 
 	public static void showStatistics(List<Rank> ranks) {
 		Map<Rank, Long> rankCounts = ranks.stream()
+			.filter(Objects::nonNull)
 			.collect(Collectors.groupingBy(x -> x, Collectors.counting()));
 
 		for (Rank rank : Rank.values()) {

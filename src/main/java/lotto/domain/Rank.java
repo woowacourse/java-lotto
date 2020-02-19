@@ -19,15 +19,19 @@ public enum Rank {
 
 	public static Rank getRank(int hitCount, boolean hasBonusNumber) {
 		Rank rank = Stream.of(Rank.values())
-			.filter(x -> x.getHitCount() == hitCount)
+			.filter(x -> isSameHitCount(hitCount, x))
 			.findFirst()
-			.orElseThrow(IllegalAccessError::new);
+			.orElse(null);
 
 		if (rank == SECOND && !hasBonusNumber) {
 			return THIRD;
 		}
 
 		return rank;
+	}
+
+	private static boolean isSameHitCount(int hitCount, Rank rank) {
+		return rank.getHitCount() == hitCount;
 	}
 
 	public int getHitCount() {
