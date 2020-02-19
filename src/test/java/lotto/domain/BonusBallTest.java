@@ -13,9 +13,10 @@ public class BonusBallTest {
 	void isMatchBonusBall() {
 		BonusBall bonusBall = new BonusBall("3");
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-		assertThat(bonusBall.isContainBonusBall(numbers)).isTrue();
+		Lotto lotto = new Lotto(numbers);
+		assertThat(bonusBall.isContainBonusBall(lotto)).isTrue();
 		bonusBall = new BonusBall("9");
-		assertThat(bonusBall.isContainBonusBall(numbers)).isFalse();
+		assertThat(bonusBall.isContainBonusBall(lotto)).isFalse();
 
 	}
 }

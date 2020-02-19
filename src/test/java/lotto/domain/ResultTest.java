@@ -8,6 +8,6 @@ public class ResultTest {
 	@Test
 	void findTest() {
 		Result result = Result.of(5);
-		assertThat(result == Result.TWO).isTrue();
+		assertThat(result == Result.THREE).isTrue();
 	}
 }

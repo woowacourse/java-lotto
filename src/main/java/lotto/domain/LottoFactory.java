@@ -27,9 +27,16 @@ public class LottoFactory {
 	}
 
 	public static Lotto createLotto() {
-		List<Integer> ticket = new ArrayList<>();
-		ticket.addAll(lottoBox);
-		Collections.shuffle(ticket);
-		return new Lotto(ticket.subList(TICKET_FROM_INDEX, TICKET_TO_INDEX));
+		List<Integer> lotto = randomNoPick();
+		Collections.sort(lotto);
+		return new Lotto(lotto);
+	}
+
+	private static List<Integer> randomNoPick() {
+		List<Integer> lotto = new ArrayList<>();
+		lotto.addAll(lottoBox);
+		Collections.shuffle(lotto);
+		lotto = lotto.subList(TICKET_FROM_INDEX, TICKET_TO_INDEX);
+		return lotto;
 	}
 }
