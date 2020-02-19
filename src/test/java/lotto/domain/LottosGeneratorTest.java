@@ -17,5 +17,4 @@ class LottosGeneratorTest {
         //then
         assertThat(lottos.size()).isEqualTo(expectedLottosSize);
     }
-
 }
