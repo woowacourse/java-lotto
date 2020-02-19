@@ -34,5 +34,17 @@ public class WinningNumbersTest {
 		).withMessage("중복된 번호는 허용하지 않습니다");
 	}
 
+	@Test
+	void checkValidationWhenEachUnderRange() {
+		assertThatIllegalArgumentException().isThrownBy(() ->
+			new WinningNumbers("0, 1, 23, 34, 22, 3")
+		).withMessage("로또 숫자는 0이하 일 수 없습니다.");
+	}
 
+	@Test
+	void checkValidationWhenEachOverRange() {
+		assertThatIllegalArgumentException().isThrownBy(() ->
+			new WinningNumbers("46, 47123, 48234345, 78123123, 893, 90134234")
+		).withMessage("로또 숫자는 45를 넘기면 안됩니다.");
+	}
 }
