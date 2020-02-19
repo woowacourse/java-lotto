@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+
+import lotto.exception.InvalidLottoException;
 
 public class LottoTest {
 	@DisplayName("Lotto 생성자에 Number List 입력이 들어올 때 객체 생성")
@@ -21,13 +24,22 @@ public class LottoTest {
 		assertThat(new Lotto(numbers)).isInstanceOf(Lotto.class);
 	}
 
-	@DisplayName("Lotto 생성자에 Null이나 Empty List 입력이 들어올 때 InvalidLottoException 발생")
+	@DisplayName("Lotto 생성자에 null 입력이 들어올 때 InvalidLottoException 발생")
 	@ParameterizedTest
 	@NullAndEmptySource
-	void validateNullOrEmpty_NullOrEmptyNumberList_ExceptionThrown(List<Number> numbers) {
+	void validateNull_NullNumberList_ExceptionThrown(List<Number> numbers) {
 		assertThatThrownBy(() -> new Lotto(numbers))
 			.isInstanceOf(InvalidLottoException.class)
-			.hasMessage(InvalidLottoException.NULL_OR_EMPTY);
+			.hasMessage(InvalidLottoException.NULL);
+	}
+
+	@DisplayName("Lotto 생성자에 사이즈가 올바르지 않은 List 입력이 들어올 때 InvalidLottoException 발생")
+	@Test
+	void validateSize_NullNumberList_ExceptionThrown() {
+		List<Number> numbers = new ArrayList<>(5);
+		assertThatThrownBy(() -> new Lotto(numbers))
+			.isInstanceOf(InvalidLottoException.class)
+			.hasMessage(InvalidLottoException.WRONG_SIZE);
 	}
 
 	@DisplayName("Lotto 생성자에 중복된 Number를 가진 Number List 입력이 들어올 때 InvalidLottoException 발생")

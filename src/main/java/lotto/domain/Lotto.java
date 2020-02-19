@@ -2,18 +2,29 @@ package lotto.domain;
 
 import java.util.List;
 
+import lotto.exception.InvalidLottoException;
+
 public class Lotto {
+	private static final int CORRECT_SIZE = 6;
+
 	private final List<Number> numbers;
 
 	public Lotto(List<Number> numbers) {
-		validateNullOrEmpty(numbers);
+		validateNull(numbers);
+		validateSize(numbers);
 		validateDuplication(numbers);
 		this.numbers = numbers;
 	}
 
-	private void validateNullOrEmpty(List<Number> numbers) {
-		if (null == numbers || numbers.isEmpty()) {
-			throw new InvalidLottoException(InvalidLottoException.NULL_OR_EMPTY);
+	private void validateNull(List<Number> numbers) {
+		if (null == numbers) {
+			throw new InvalidLottoException(InvalidLottoException.NULL);
+		}
+	}
+
+	private void validateSize(List<Number> numbers) {
+		if (numbers.size() != CORRECT_SIZE) {
+			throw new InvalidLottoException(InvalidLottoException.WRONG_SIZE);
 		}
 	}
 
