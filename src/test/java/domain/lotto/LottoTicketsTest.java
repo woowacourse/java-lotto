@@ -2,9 +2,12 @@ package domain.lotto;
 
 import static domain.lotto.LottoTicketTest.*;
 import static domain.lotto.WinningLottoTest.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+
+import javax.swing.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,6 +31,7 @@ public class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
         WinningLotto winningLotto = getWinningLottoFixture();
         LottoResult lottoResult = lottoTickets.getLottoResults(winningLotto);
+        assertThat(lottoTickets.getLottoTickets()).isEqualTo(lottoTicketList);
     }
 
     private static List<Rank> createRank() {

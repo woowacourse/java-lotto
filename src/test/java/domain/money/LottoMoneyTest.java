@@ -10,6 +10,7 @@ public class LottoMoneyTest {
     void lottoMoneyTest() {
         int money = 1000;
         LottoMoney lottoMoney = new LottoMoney(money);
+        assertThat(lottoMoney.getMoney()).isEqualTo(money);
     }
 
     @Test

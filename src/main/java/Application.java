@@ -19,5 +19,6 @@ public class Application {
                 InputView.inputBonusNumber());
         LottoResult lottoResult = lottoTickets.getLottoResults(winningLotto);
         OutputView.printLottoResult(lottoResult);
+        OutputView.printProfit(lottoResult, lottoMoney);
     }
 }

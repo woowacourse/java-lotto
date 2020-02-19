@@ -19,4 +19,8 @@ public class LottoMoney {
     public int getLottoPurchaseCounts() {
         return lottoMoney / MINIMUM_COST;
     }
+
+    public double getMoney() {
+        return lottoMoney;
+    }
 }

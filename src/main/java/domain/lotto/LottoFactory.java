@@ -9,13 +9,13 @@ import domain.money.LottoMoney;
 
 public class LottoFactory {
 
-    private static final List<LottoNumber> LOTTO_NUMBERS = initLottoNumbder();
+    private static final List<LottoNumber> LOTTO_NUMBERS = initLottoNumber();
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final int FROM_INDEX = 0;
     private static final int LOTTO_SIZE = 6;
 
-    private static List<LottoNumber> initLottoNumbder() {
+    private static List<LottoNumber> initLottoNumber() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
             lottoNumbers.add(new LottoNumber(i));

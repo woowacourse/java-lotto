@@ -2,6 +2,8 @@ package domain.result;
 
 import java.util.List;
 
+import domain.money.LottoMoney;
+
 public class LottoResult {
 
     private List<Rank> ranks;
@@ -16,4 +18,15 @@ public class LottoResult {
                 .count();
     }
 
+    public double getProfit(LottoMoney lottoMoney) {
+        double profit = getTotalPrize() - lottoMoney.getMoney();
+        double profitRatio = profit / lottoMoney.getMoney();
+        return profitRatio * 100;
+    }
+
+    private double getTotalPrize() {
+        return ranks.stream()
+                .mapToLong(Rank::getWinningMoney)
+                .sum();
+    }
 }

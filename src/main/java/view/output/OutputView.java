@@ -4,6 +4,7 @@ import java.util.List;
 
 import domain.lotto.LottoTicket;
 import domain.lotto.LottoTickets;
+import domain.money.LottoMoney;
 import domain.result.LottoResult;
 import domain.result.Rank;
 
@@ -29,5 +30,10 @@ public class OutputView {
             return rank.getCountOfMatches() + "개 일치, 보너스볼 일 (" + rank.getWinningMoney() + "원) - ";
         }
         return rank.getCountOfMatches() + "개 일치 (" + rank.getWinningMoney() + "원) - ";
+    }
+
+    public static void printProfit(LottoResult lottoResult, LottoMoney lottoMoney) {
+        double profit = lottoResult.getProfit(lottoMoney);
+        System.out.println(String.format("총 수익률은 %.0f%%입니다.", profit));
     }
 }
