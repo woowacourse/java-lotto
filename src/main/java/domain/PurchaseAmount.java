@@ -30,4 +30,8 @@ public class PurchaseAmount {
             throw new IllegalArgumentException("구매 금액은 음수일 수 없습니다.");
         }
     }
+
+    public int calculateCount() {
+        return amount / LOTTO_PRICE;
+    }
 }

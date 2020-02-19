@@ -3,6 +3,7 @@ package lotto;
 import domain.PurchaseAmount;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PurchaseAmountTest {
@@ -28,6 +29,13 @@ public class PurchaseAmountTest {
             new PurchaseAmount("500");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 한장 가격보다 낮은 금액을 입력하셨습니다.");
+    }
+
+    @Test
+    void 구매금액에_따른_로또_갯수_반환_테스트(){
+        PurchaseAmount amount = new PurchaseAmount("14000");
+        int lottoCount = amount.calculateCount();
+        assertThat(lottoCount).isEqualTo(14);
     }
 
 }
