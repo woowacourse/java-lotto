@@ -78,8 +78,19 @@
     - [x] Lotto를 구매한 만큼 가지고 있는 Lottos 객체를 생성한다
     - [x] 금액 / 1000 == Lottos.size()    
 
-
-
+- WinningLotto
+    - [x] BonusNumber (상속 : Number)
+    - [x] WinningNumbers
+        - [x] 상속받고 있고 (Lotto) : 로직이 같고, 로또와 의미를 구분하기 위함
+        
+- Result
+    - 인자 : WinningLotto, Lottos
+    - 기능
+        - Enum에 메세지를 보내기
+        - 받아온 메세지로 갯수를 저장
+        - 수익률
+        - OutputView 보내기         
+        
 ### 프로그래밍 요구사항
 
 - indent(인덴트, 들여쓰기) depth를 2단계에서 1단계로 줄여라.

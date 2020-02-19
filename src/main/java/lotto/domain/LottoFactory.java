@@ -18,4 +18,6 @@ public class LottoFactory {
 		Collections.shuffle(numbers);
 		return new Lotto(numbers.subList(0, 6));
 	}
+
+
 }
