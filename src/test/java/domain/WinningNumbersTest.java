@@ -38,4 +38,11 @@ public class WinningNumbersTest {
         Assertions.assertThatThrownBy(() -> new WinningNumbers(inputNumbers, bonusBall))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 중복된_숫자가_들어온_경우() {
+        Assertions.assertThatThrownBy(() -> new WinningNumbers(inputNumbers, 1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
