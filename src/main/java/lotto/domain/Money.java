@@ -4,6 +4,7 @@ public class Money {
 	private static final int ZERO = 0;
 	private static final int UNIT = 1000;
 	private static final int MAX_BOUND = 100000;
+	public static final int LOTTO_PRICE = 1000;
 
 	private final int money;
 
@@ -50,5 +51,9 @@ public class Money {
 		if (parsedMoney > MAX_BOUND) {
 			throw new InvalidMoneyException(InvalidMoneyException.OUT_OF_BOUND);
 		}
+	}
+
+	public int purchaseLotto() {
+		return money / LOTTO_PRICE;
 	}
 }

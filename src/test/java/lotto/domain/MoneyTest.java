@@ -58,4 +58,10 @@ public class MoneyTest {
 			.isInstanceOf(InvalidMoneyException.class)
 			.hasMessage(InvalidMoneyException.OUT_OF_BOUND);
 	}
+
+	@Test
+	void purchaseLotto_Money_NumberOfLotto() {
+		Money money = new Money("2000");
+		assertThat(money.purchaseLotto()).isEqualTo(2);
+	}
 }
