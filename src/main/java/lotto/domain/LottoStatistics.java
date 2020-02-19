@@ -19,7 +19,6 @@ public class LottoStatistics {
 
 	public long calculateTotalProfits(LottoPurchaseMoney money) {
 		long totalWinning = calculateTotalWinnings();
-		System.out.println(money);
 		return totalWinning * 100 / money.getValue();
 	}
 

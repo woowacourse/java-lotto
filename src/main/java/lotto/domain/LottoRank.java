@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public enum LottoRank {
 	FIRST(6, 2_000_000_000),
@@ -18,23 +19,24 @@ public enum LottoRank {
 		this.winnings = winnings;
 	}
 
-	public static LottoRank of(long matchCount, boolean isBonus) {
-		if (isMismatch(matchCount))
-			return MISS;
-		if (SECOND.match(matchCount) && isBonus)
-			return SECOND;
+	public static LottoRank of(long matchCount, boolean hasBonus) {
 		return Arrays.stream(values())
-				.filter(rank -> rank != SECOND && rank.match(matchCount))
+				.filter(getLottoRankPredicate(matchCount, hasBonus))
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 순위 입니다."));
+				.orElse(MISS);
 	}
 
-	private boolean match(long matchCount) {
-		return this.matchCount == matchCount;
+	private static Predicate<LottoRank> getLottoRankPredicate(long matchCount, boolean hasBonus) {
+		return rank -> matchSecond(matchCount, hasBonus, rank) || match(matchCount, rank);
 	}
 
-	private static boolean isMismatch(long matchCount) {
-		return matchCount >= MISS.matchCount && matchCount < FIFTH.matchCount;
+	private static boolean match(long matchCount, LottoRank rank) {
+		return rank != SECOND
+				&& rank.matchCount == matchCount;
+	}
+
+	private static boolean matchSecond(long matchCount, boolean hasBonus, LottoRank rank) {
+		return rank == SECOND && rank.matchCount == matchCount && hasBonus;
 	}
 
 	public long calculateTotalWinnings(long amount) {

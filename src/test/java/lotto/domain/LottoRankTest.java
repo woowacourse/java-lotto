@@ -21,6 +21,6 @@ public class LottoRankTest {
 	@DisplayName("로또 순위권내에 없는 경우")
 	@ValueSource(ints = {-1, 7})
 	void of_순위권내에_없는_경우(int rank) {
-		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> LottoRank.of(rank, false));
+		assertThat(LottoRank.of(rank, false)).isEqualTo(LottoRank.MISS);
 	}
 }
