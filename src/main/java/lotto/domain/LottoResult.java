@@ -3,16 +3,16 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoResult {
-    private final int matchAmount;
+    private final int matchCount;
     private final boolean isBonusMatch;
 
-    public LottoResult(int matchAmount, boolean isBonusMatch) {
-        this.matchAmount = matchAmount;
+    public LottoResult(int matchCount, boolean isBonusMatch) {
+        this.matchCount = matchCount;
         this.isBonusMatch = isBonusMatch;
     }
 
-    public int getMatchAmount() {
-        return matchAmount;
+    public boolean isEqualToMatchCount(int matchCount) {
+        return this.matchCount == matchCount;
     }
 
     public boolean isBonusMatch() {
@@ -24,12 +24,12 @@ public class LottoResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResult that = (LottoResult) o;
-        return matchAmount == that.matchAmount &&
+        return matchCount == that.matchCount &&
                 isBonusMatch == that.isBonusMatch;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matchAmount, isBonusMatch);
+        return Objects.hash(matchCount, isBonusMatch);
     }
 }
