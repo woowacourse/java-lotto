@@ -11,10 +11,10 @@ public class BonusBallTest {
 
 	@Test
 	void isMatchBonusBall() {
-		BonusBall bonusBall = new BonusBall(3);
+		BonusBall bonusBall = new BonusBall("3");
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 		assertThat(bonusBall.isMatchBonusBall(numbers)).isTrue();
-		bonusBall = new BonusBall(9);
+		bonusBall = new BonusBall("9");
 		assertThat(bonusBall.isMatchBonusBall(numbers)).isFalse();
 
 	}

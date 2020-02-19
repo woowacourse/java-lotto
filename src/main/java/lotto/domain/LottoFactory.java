@@ -18,7 +18,15 @@ public class LottoFactory {
 		}
 	}
 
-	public static Lotto create() {
+	public static List<Lotto> createLotteries(int count) {
+		List<Lotto> result = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			result.add(createLotto());
+		}
+		return result;
+	}
+
+	public static Lotto createLotto() {
 		List<Integer> ticket = new ArrayList<>();
 		ticket.addAll(lottoBox);
 		Collections.shuffle(ticket);

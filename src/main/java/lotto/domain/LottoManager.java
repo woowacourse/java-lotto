@@ -11,4 +11,8 @@ public class LottoManager {
 	// 		.filter(x -> winLotto.numbers.contains(x))
 	// 		.count();
 	// }
+
+	public LottoManager(int count) {
+		this.lotteries = LottoFactory.createLotteries(count);
+	}
 }
