@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.Lottos;
 import lotto.domain.PurchasePrice;
 import lotto.domain.WinningNumbers;
@@ -19,5 +20,8 @@ public class LottoApplication {
 
         String winningNumbersInput = InputView.requestWinningNumbersInput();
         WinningNumbers winningNumbers = new WinningNumbers(winningNumbersInput);
+
+        String bonusNumberInput = InputView.requestBonusNumberInput();
+        BonusNumber bonusNumber = new BonusNumber(bonusNumberInput);
     }
 }
