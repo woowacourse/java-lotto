@@ -36,4 +36,11 @@ public class Lotto {
 			throw new IllegalArgumentException("중복된 번호가 존재합니다!");
 		}
 	}
+
+	public int findLottoPrize(List<Integer> winningNumbers, int bonusNumber) {
+		HashSet<Integer> concatenatedSet = new HashSet<>(lottoNumber);
+		concatenatedSet.addAll(winningNumbers);
+		int winningCount = (lottoNumber.size() * 2) - concatenatedSet.size();
+		return 0;
+	}
 }
