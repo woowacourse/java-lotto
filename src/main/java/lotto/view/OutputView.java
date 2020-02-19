@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.model.AutoNumbers;
+import lotto.model.AutoNumber;
 import lotto.model.LottoResult;
 
 import java.util.List;
@@ -14,9 +14,9 @@ public class OutputView {
         System.out.println(count + "개를 구입했습니다.");
     }
 
-    public static void printAutoNumbers(List<AutoNumbers> autoNumbers) {
-        for (AutoNumbers autoNumber : autoNumbers) {
-            System.out.println(autoNumber.getAutoNumbers());
+    public static void printAutoNumbers(List<AutoNumber> autoNumbers) {
+        for (AutoNumber autoNumber : autoNumbers) {
+            System.out.println(autoNumber.getAutoNumber());
         }
     }
 
@@ -33,8 +33,8 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    public static void printCorrectResult(int count, LottoResult lottoResult) {
-        System.out.println(lottoResult.getCorrect() + "개 일치 (" + lottoResult.getPrice() + "원) - " + count+"개");
+    public static void printCorrectResult(int count, int correct, int prize) {
+        System.out.println(correct + "개 일치 (" + prize + "원) - " + count+"개");
     }
 
     public static void printBonusCorrectResult(int count) {

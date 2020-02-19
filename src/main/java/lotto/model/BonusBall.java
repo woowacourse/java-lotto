@@ -4,9 +4,9 @@ public class BonusBall {
     public static int bonusNo;
 
     public BonusBall(String input) {
-        int inputNo = isNumber(input);
-        isContainsWinNumber(inputNo);
-        this.bonusNo = inputNo;
+        int inputNumber = isNumber(input);
+        isContainsWinNumber(inputNumber);
+        this.bonusNo = inputNumber;
     }
 
     private int isNumber(String input) {
@@ -17,8 +17,8 @@ public class BonusBall {
         }
     }
 
-    private void isContainsWinNumber(int inputNo) {
-        if (WinNumber.winNumbers.contains(inputNo)) {
+    private void isContainsWinNumber(int inputNumber) {
+        if (WinNumber.winNumbers.contains(inputNumber)) {
             throw new IllegalArgumentException("당첨번호와 중복되는 숫자가 있습니다.");
         }
     }
