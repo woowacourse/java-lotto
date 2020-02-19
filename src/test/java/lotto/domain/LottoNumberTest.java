@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class BallNumberTest {
+class LottoNumberTest {
 	@ParameterizedTest
 	@ValueSource(ints = {0, 61, -1})
 	void Number_LessThanOneOrMoreThanSixty_ShouldThrowException(int input) {
@@ -13,7 +13,7 @@ class BallNumberTest {
 		Assertions.assertThatThrownBy(() -> {
 
 			// when
-			BallNumber ballNumber = new BallNumber(input);
+			LottoNumber lottoNumber = new LottoNumber(input);
 		}).isInstanceOf(BallNumberOutOfRangeException.class)
 				.hasMessageMatching("-?[0-9]+" + BallNumberOutOfRangeException.MESSAGE );
 	}
