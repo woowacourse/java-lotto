@@ -73,4 +73,7 @@ public enum LottoNumber {
 	public int getLottoNumber() {
 		return this.lottoNumber;
 	}
+
+
+
 }

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class Lotto {
 	public static final int LOTTO_LENGTH = 6;
-	private final List<LottoNumber> lottoNumbers;
+	protected final List<LottoNumber> lottoNumbers;
 
 	public Lotto(List<LottoNumber> inputLottoNumbers) {
 		validateLottoNumbers(inputLottoNumbers);
