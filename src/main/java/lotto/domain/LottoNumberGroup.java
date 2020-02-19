@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoNumberGroup {
     ONE(1),
     TWO(2),
@@ -55,5 +57,20 @@ public enum LottoNumberGroup {
 
     public int getValue() {
         return value;
+    }
+
+    // todo : 유효성 처리
+    public static LottoNumberGroup parseLottoNumberGroup(int value2) {
+        return Arrays.stream(LottoNumberGroup.values())
+                .filter(lottoNumberGroup -> lottoNumberGroup.isSame(value2))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 값이 입력되었습니다."));
+    }
+
+    private boolean isSame(int value) {
+        if (this.value == value) {
+            return true;
+        }
+        return false;
     }
 }
