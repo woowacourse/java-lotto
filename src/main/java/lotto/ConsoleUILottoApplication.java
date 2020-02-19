@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.List;
+
 import lotto.controller.LottoController;
+import lotto.domain.Lotto;
 import lotto.domain.Money;
 import lotto.exception.InvalidMoneyException;
 import lotto.view.InputView;
@@ -11,8 +14,10 @@ public class ConsoleUILottoApplication {
 		Money inputMoney = receiveInputMoney();
 		LottoController lottoController = new LottoController();
 
-		OutputView.printPurchaseCompleteMessage(inputMoney.purchaseLotto());
-		lottoController.start(inputMoney);
+		int numberOfLotto = inputMoney.purchaseLotto();
+		OutputView.printPurchaseCompleteMessage(numberOfLotto);
+		List<Lotto> lottos = lottoController.start(numberOfLotto);
+		OutputView.printPurchasedLotto(lottos);
 	}
 
 	private static Money receiveInputMoney() {
