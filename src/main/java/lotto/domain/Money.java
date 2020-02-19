@@ -13,6 +13,10 @@ public class Money {
 		this.money = money;
 	}
 
+	public static int getBuyMoney(LottoCount lottoCount) {
+		return lottoCount.getLottoCount() * LOTTO_PRICE;
+	}
+
 	private void validatePositive(int money) {
 		if (money <= ZERO) {
 			throw new IllegalArgumentException(MONEY_EXCEPTION_MESSAGE);

@@ -16,7 +16,7 @@ public class TotalResultTest {
 		rankResult.put(LottoRank.FOURTH, 10);
 		LottoResult result = new LottoResult(rankResult);
 		long totalPrize = (2_000_000_000L + 5_000L + 50_000L) * 10L;
-		TotalResult totalResult = new TotalResult(result, 30);
+		TotalResult totalResult = new TotalResult(result, new LottoCount(30));
 		assertThat(totalResult.getProfitRate()).isEqualTo(totalPrize / 30000L * 100L);
 	}
 }

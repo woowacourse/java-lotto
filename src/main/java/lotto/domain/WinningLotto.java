@@ -31,6 +31,6 @@ public class WinningLotto {
 			}
 			result.put(rank, result.get(rank) + 1);
 		}
-		return new TotalResult(new LottoResult(result), lottos.getSize());
+		return new TotalResult(new LottoResult(result), lottos.getCount());
 	}
 }
