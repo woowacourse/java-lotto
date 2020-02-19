@@ -15,5 +15,13 @@ public class WinningNumber {
         this.winningNumbers = new Lotto(winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
+
+    public int countWinningMatch(Lotto myLottoNumbers) {
+        return winningNumbers.countMatchNumbers(myLottoNumbers);
+    }
+
+    public boolean countBonusMatch(Lotto myLottoNumber) {
+        return myLottoNumber.contains(bonusNumber);
+    }
 }
 

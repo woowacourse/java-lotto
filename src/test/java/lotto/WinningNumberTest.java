@@ -1,8 +1,14 @@
 package lotto;
 
+import domain.Lotto;
+import domain.LottoNumber;
 import domain.WinningNumber;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningNumberTest {
@@ -48,5 +54,26 @@ public class WinningNumberTest {
             new WinningNumber(numbers, bonusNumber);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 숫자 범위를 넘어섰습니다.");
+    }
+
+    @Test
+    void 당첨번호_갯수_계산_테스트(){
+        String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
+        String bonusNumber = "7";
+        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
+
+        Set<LottoNumber> myLotto = new HashSet<>();
+        myLotto.add(new LottoNumber(1));
+        myLotto.add(new LottoNumber(2));
+        myLotto.add(new LottoNumber(3));
+        myLotto.add(new LottoNumber(4));
+        myLotto.add(new LottoNumber(5));
+        myLotto.add(new LottoNumber(7));
+        Lotto myLottoNumbers = new Lotto(myLotto);
+
+        int winningMatchCount = winningNumber.countWinningMatch(myLottoNumbers);
+        boolean bonusMatchCount = winningNumber.countBonusMatch(myLottoNumbers);
+        assertThat(winningMatchCount).isEqualTo(5);
+        assertThat(bonusMatchCount).isTrue();
     }
 }

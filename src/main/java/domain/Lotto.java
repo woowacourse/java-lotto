@@ -21,4 +21,18 @@ public class Lotto {
     public int getSize() {
         return lotto.size();
     }
+
+    public int countMatchNumbers(Lotto myLottoNumbers) {
+        int count = 0;
+        for(LottoNumber number : lotto){
+            if (myLottoNumbers.contains(number)){
+                count ++;
+            }
+        }
+        return count;
+    }
+
+    public boolean contains(LottoNumber number) {
+        return lotto.contains(number);
+    }
 }
