@@ -17,6 +17,15 @@ public class LottoTicket {
         this.lottoTicket = Collections.unmodifiableList(lottoTicket);
     }
 
+    public LottoTicket(String[] numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (String number : numbers) {
+            lottoNumbers.add(LottoNumber.find(number));
+        }
+        validate(lottoNumbers);
+        this.lottoTicket = lottoNumbers;
+    }
+
     private void validate(List<LottoNumber> lottoTicket) {
         if (lottoTicket.size() != LOTTO_NUMBER_COUNT) {
             throw new InvalidLottoTicketException();
@@ -44,4 +53,12 @@ public class LottoTicket {
             .map(String::valueOf)
             .collect(Collectors.joining(", ", "[", "]"));
     }
+
+    public void validateBonusNumber(LottoNumber number) {
+        if (this.lottoTicket.contains(number)) {
+            throw new InvalidLottoTicketException("보너스 숫자는 당첨 번호와 중복될 수 없습니다.");
+        }
+    }
+
+
 }

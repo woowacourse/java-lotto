@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.view.InputView;
@@ -10,6 +12,14 @@ public class LottoApplication {
         OutputView.inputMoneyInstruction();
         int quantity = new Money(InputView.getInput()).ticketQuantity();
         OutputView.ticketAmountInstruction(quantity);
-        OutputView.lottoTicketList(LottoTickets.createLottoTickets(quantity));
+        LottoTickets lottoTickets = LottoTickets.createLottoTickets(quantity);
+        OutputView.lottoTicketList(lottoTickets);
+        OutputView.inputWinningNumberInstruction();
+        LottoTicket winningLotto = new LottoTicket(InputView.getWinningNumbers());
+        OutputView.inputBonusNumberInstruction();
+        LottoNumber bonusNumber = LottoNumber.find(InputView.getInput());
+        winningLotto.validateBonusNumber(bonusNumber);
+        // compare lottoTickets and winningLotto
+        // output statistics
     }
 }
