@@ -67,6 +67,7 @@
     - [x] 1~45 사이의 값인지
     - [x] 문자열이 포함되는 경우 예외처리
     - [x] 공백 및 NULL 예외처리
+    - Enum을 통해서 Number 기능을 같이 하는 방안 고려 (현재 static 부분)
     
 - LottoFactory
     
@@ -86,8 +87,7 @@
 - Result
     - 인자 : WinningLotto, Lottos
     - 기능
-        - Enum에 메세지를 보내기
-        - 받아온 메세지로 갯수를 저장
+        - 맞힌 갯수별로 장수 + 수익금 계산
         - 수익률
         - OutputView 보내기         
         

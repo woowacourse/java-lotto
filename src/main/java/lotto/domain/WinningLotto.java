@@ -1,6 +1,7 @@
 package lotto.domain;
 
 public class WinningLotto {
+
 	private final WinningNumbers winningNumbers;
 	private final BonusNumber bonusNumber;
 

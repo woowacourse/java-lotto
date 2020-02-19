@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import lotto.exception.InvalidLottoException;
 
-public class Lotto {
+public class Lotto implements Iterable<Number> {
 	private final List<Number> numbers;
 
 	public Lotto(List<Number> numbers) {
@@ -28,5 +29,9 @@ public class Lotto {
 		if(numbers.size() != 6){
 			throw new InvalidLottoException("로또는 6개의 수를 가져야 합니다.");
 		}
+	}
+
+	public Iterator<Number> iterator(){
+		return numbers.iterator();
 	}
 }
