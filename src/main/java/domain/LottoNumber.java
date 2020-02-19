@@ -66,7 +66,7 @@ public enum LottoNumber {
         return lottoNumbers.stream()
                 .filter(lottoNumber -> lottoNumber.number == number)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("1부터 45사이의 숫자를 입력해주세요."));
+                .orElse(LottoNumber.ERROR);
     }
 //
 //    private static void validateNumber(int number) {

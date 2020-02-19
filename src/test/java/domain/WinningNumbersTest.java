@@ -2,11 +2,15 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("당첨 번호 객체 테스트")
@@ -18,6 +22,26 @@ public class WinningNumbersTest {
         assertThatThrownBy(() -> new WinningNumbers(lottoNumbersDto))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("6개의 숫자를 입력해주세요.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 1})
+    @DisplayName("유효한 보너스 번호인지 검증")
+    void validateBonusNumber(int input) {
+        LottoNumbersDto lottoNumbersDto = createLottoNumberDto(1, 2, 3, 4, 5, 6, input);
+        assertThatThrownBy(() -> new WinningNumbers(lottoNumbersDto))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageEndingWith("보너스 번호를 입력해주세요.");
+    }
+
+    @Test
+    @DisplayName("Ticket과 당첨 번호 비교")
+    void name() {
+        LottoNumbersDto lottoNumbersDto1 = createLottoNumberDto(1, 2, 3, 4, 5, 6, 7);
+        LottoNumbersDto lottoNumbersDto2 = createLottoNumberDto(4, 5, 6, 7, 8, 9, 10);
+        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbersDto1);
+        Ticket ticket = new Ticket(lottoNumbersDto2);
+        assertThat((winningNumbers.findDuplicatedNumbers(ticket))).isEqualTo(3);
     }
 
     private LottoNumbersDto createLottoNumberDto(int number1, int number2, int number3, int number4, int number5, int number6, int number7) {
