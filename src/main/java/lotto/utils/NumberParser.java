@@ -8,6 +8,7 @@ import lotto.exceptions.NotNumberException;
 
 public class NumberParser {
 	private static final String DELIMITER = ",";
+	private static final String NOT_NUMBER_MESSAGE = "숫자만 입력하세요.";
 
 	public static List<Integer> winningNumberParse(String input) {
 		return Stream.of(input.split(DELIMITER))
@@ -20,7 +21,7 @@ public class NumberParser {
 		try {
 			return Integer.parseInt(input);
 		} catch (NumberFormatException e) {
-			throw new NotNumberException("숫자만 입력하세요.");
+			throw new NotNumberException(NOT_NUMBER_MESSAGE);
 		}
 	}
 }

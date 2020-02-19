@@ -9,15 +9,17 @@ public class Lotto {
 	private static final int MAX_LOTTO_NUMBER_RANGE = 45;
 	private static final int MIN_LOTTO_NUMBER_RANGE = 1;
 	private static final int LOTTO_NUMBER_SIZE = 6;
+	private static final String LOTTO_NUMBER_RANGE_MESSAGE = "1~45 범위의 숫자만 로또 번호가 될 수 있습니다.";
+	private static final String LOTTO_NUMBER_DUPLICATED_MESSAGE = "잘못된 로또 번호입니다. 중복 안됨, 갯수는 6개";
 
 	private List<Integer> numbers;
 
 	public Lotto(List<Integer> numbers) {
 		if (isInvalidNumberRange(numbers)) {
-			throw new LottoNumberRangeException("1~45 범위의 숫자만 로또 번호가 될 수 있습니다.");
+			throw new LottoNumberRangeException(LOTTO_NUMBER_RANGE_MESSAGE);
 		}
 		if (wrongAmountOfNumbers(numbers) || hasDuplicatedNumbers(numbers)) {
-			throw new LottoNumberDuplicatedException("잘못된 로또 번호입니다. 중복 안됨, 갯수는 6개");
+			throw new LottoNumberDuplicatedException(LOTTO_NUMBER_DUPLICATED_MESSAGE);
 		}
 		this.numbers = numbers;
 	}

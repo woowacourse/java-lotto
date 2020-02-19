@@ -11,13 +11,18 @@ import lotto.domain.Rank;
 
 public class OutputView {
 	private static final String EMPTY_STRING = "";
+	private static final String EARNING_RATE_MESSAGE = "총 수익률은 %.3f %%입니다.";
+	private static final String SECOND_RANK_ADDITIONAL_MESSAGE = "보너스 볼 일치 ";
+	private static final String PURCHASED_LOTTO_MESSAGE = "개를 구매했습니다.";
+	private static final String NEW_LINE = "\n";
+	private static final String STATISTICS_FORMAT = "%d개 일치 %s %d원 - %d개%s";
 
 	public static void showEarningRate(Money money, List<Rank> ranks) {
 		int sum = ranks.stream()
 			.filter(Objects::nonNull)
 			.mapToInt(Rank::getReward)
 			.sum();
-		System.out.printf("총 수익률은 %.3f %%입니다.", (double)sum / money.getMoney() * 100);
+		System.out.printf(EARNING_RATE_MESSAGE, (double)sum / money.getMoney() * 100);
 	}
 
 	public static void showStatistics(List<Rank> ranks) {
@@ -29,27 +34,27 @@ public class OutputView {
 			rankCounts.putIfAbsent(rank, 0L);
 		}
 
-		rankCounts.keySet().forEach(rank -> System.out.println(
-			rank.getHitCount() + "개 일치 " + printBonus(rank) + rank.getReward() +
-				"원 - " + rankCounts.get(rank) + "개"));
+		rankCounts.keySet().forEach(rank ->
+			System.out.printf(STATISTICS_FORMAT, rank.getHitCount(), printBonus(rank), rank.getReward(),
+				rankCounts.get(rank), NEW_LINE));
 	}
 
 	public static String printBonus(Rank rank) {
 		if (rank == Rank.SECOND) {
-			return "보너스 볼 일치 ";
+			return SECOND_RANK_ADDITIONAL_MESSAGE;
 		}
 
 		return EMPTY_STRING;
 	}
 
 	public static void showPurchasedLottoCount(int purchasedLottoCount) {
-		System.out.println(purchasedLottoCount + "개를 구매했습니다.");
+		System.out.println(purchasedLottoCount + PURCHASED_LOTTO_MESSAGE);
 	}
 
 	public static void showPurchasedLottoNumbers(List<Lotto> purchasedLottoNumbers) {
 		System.out.println(purchasedLottoNumbers.stream()
-			.map(x -> x.getNumbers() + "")
-			.collect(Collectors.joining("\n"))
+			.map(x -> String.valueOf(x.getNumbers()))
+			.collect(Collectors.joining(NEW_LINE))
 		);
 	}
 }
