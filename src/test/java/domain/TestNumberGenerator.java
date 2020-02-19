@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomNumberGenerator implements NumberGenerator {
+public class TestNumberGenerator implements NumberGenerator{
     private static final List<Integer> numbers = new ArrayList<>();
 
     static {
-        for (int i = 1; i <= 45; i++) {
+        for (int i = 1; i <= 6; i++) {
             numbers.add(i);
         }
     }
 
     @Override
     public List<Integer> create() {
-        Collections.shuffle(numbers);
-        return numbers.subList(0,6);
+        return numbers;
     }
 }
