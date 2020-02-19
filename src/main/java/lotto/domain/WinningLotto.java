@@ -25,7 +25,11 @@ public class WinningLotto {
 			result.put(lottoRank, 0);
 		}
 		for (Lotto lot: lottos) {
-			// 대기
+			LottoRank rank = LottoRank.getRank(lot.countCommonBalls(lotto));
+			if(rank == LottoRank.THIRD && lot.contains(ball)) {
+				rank = LottoRank.SECOND;
+			}
+			result.put(rank, result.get(rank) + 1);
 		}
 		return result;
 	}

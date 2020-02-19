@@ -23,8 +23,9 @@ public class WinningLottoTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@DisplayName("로또 당첨 내역 랭크 반환")
 	@Test
-	void name() {
+	void getResult() {
 		List<Ball> balls = Arrays.asList(Ball.of(1), Ball.of(2), Ball.of(3), Ball.of(4), Ball.of(5), Ball.of(7));
 		Lotto lotto = new Lotto(balls);
 		Ball ball = Ball.of(40);
