@@ -16,12 +16,20 @@ public class WinningNumber {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public int countWinningMatch(Lotto myLottoNumbers) {
-        return winningNumbers.countMatchNumbers(myLottoNumbers);
+    public int countWinningMatch(Lotto myLotto) {
+        checkLottoNull(myLotto);
+        return winningNumbers.countMatchNumbers(myLotto);
     }
 
-    public boolean isBonusMatch(Lotto myLottoNumber) {
-        return myLottoNumber.contains(bonusNumber);
+    public boolean isBonusMatch(Lotto myLotto) {
+        checkLottoNull(myLotto);
+        return myLotto.contains(bonusNumber);
+    }
+
+    private void checkLottoNull(Lotto myLotto) {
+        if (myLotto == null) {
+            throw new NullPointerException("비교할 로또가 없습니다.");
+        }
     }
 }
 
