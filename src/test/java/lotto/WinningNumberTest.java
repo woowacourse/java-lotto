@@ -2,6 +2,7 @@ package lotto;
 
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.LottoResult;
 import domain.WinningNumber;
 import org.junit.jupiter.api.Test;
 
@@ -57,7 +58,7 @@ public class WinningNumberTest {
     }
 
     @Test
-    void 당첨번호_갯수_계산_테스트(){
+    void 당첨_번호_개수에_따른_등수_결과_반환() {
         String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
         String bonusNumber = "7";
         WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
@@ -71,9 +72,7 @@ public class WinningNumberTest {
         myLotto.add(new LottoNumber(7));
         Lotto myLottoNumbers = new Lotto(myLotto);
 
-        int winningMatchCount = winningNumber.countWinningMatch(myLottoNumbers);
-        boolean isBonusMatch = winningNumber.isBonusMatch(myLottoNumbers);
-        assertThat(winningMatchCount).isEqualTo(5);
-        assertThat(isBonusMatch).isTrue();
+        LottoResult result = winningNumber.findRank(myLottoNumbers);
+        assertThat(result).isEqualTo(LottoResult.SECOND);
     }
 }

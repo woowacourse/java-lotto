@@ -16,14 +16,9 @@ public class WinningNumber {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public int countWinningMatch(Lotto myLotto) {
+    public LottoResult findRank(Lotto myLotto) {
         checkLottoNull(myLotto);
-        return winningNumbers.countMatchNumbers(myLotto);
-    }
-
-    public boolean isBonusMatch(Lotto myLotto) {
-        checkLottoNull(myLotto);
-        return myLotto.contains(bonusNumber);
+        return LottoResult.findResult(countWinningMatch(myLotto), isBonusMatch(myLotto));
     }
 
     private void checkLottoNull(Lotto myLotto) {
@@ -31,5 +26,17 @@ public class WinningNumber {
             throw new NullPointerException("비교할 로또가 없습니다.");
         }
     }
+
+    private int countWinningMatch(Lotto myLotto) {
+        checkLottoNull(myLotto);
+        return winningNumbers.countMatchNumbers(myLotto);
+    }
+
+    private boolean isBonusMatch(Lotto myLotto) {
+        checkLottoNull(myLotto);
+        return myLotto.contains(bonusNumber);
+    }
+
+
 }
 
