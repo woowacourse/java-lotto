@@ -2,14 +2,14 @@ package lotto.controller;
 
 import java.io.IOException;
 
+import lotto.domain.LottoCount;
 import lotto.utils.InputUtil;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 	public static void run() {
-		readMoney();
-		//LottoCount lc = new LottoCount(readLottocount());
+		LottoCount lc = new LottoCount(readMoney());
 		// LottoGame lottoGame = new LottoGame(new LottoCount());
 		//
 		// WinningNumber wn = new WinningNumber(readWinningNumber());
