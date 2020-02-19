@@ -34,4 +34,7 @@ public enum PrizeGroup {
         return this == SECOND && !lottoResult.isBonusMatch();
     }
 
+    public int getMoney() {
+        return money;
+    }
 }

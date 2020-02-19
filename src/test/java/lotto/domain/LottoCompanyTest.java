@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoCompanyTest {
 
+    @DisplayName("우승 로또 만들기")
     @Test
     void makeWinningLotto() {
         //given

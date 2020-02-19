@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -7,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 class PrizeGroupTest {
+    @DisplayName("로또 결과에 따른 상금정보 찾기")
     @ParameterizedTest
     @CsvSource(value = {
             "6,false,FIRST",
