@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -20,10 +21,6 @@ public class LottoTest {
 		assertThat(lotto.contains(value)).isEqualTo(expected);
 	}
 
-	static Stream<Arguments> generateInput() {
-		return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
-	}
 
 	@ParameterizedTest
 	@NullAndEmptySource
@@ -39,5 +36,17 @@ public class LottoTest {
 		assertThatThrownBy(() -> new Lotto(value))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("개여야 합니다");
+	}
+
+	static Stream<Arguments> generateInput() {
+		return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+	}
+
+	@Test
+	void 중복_숫자() {
+		assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5)))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("중복");
 	}
 }
