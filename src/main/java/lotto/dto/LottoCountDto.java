@@ -1,12 +1,12 @@
-package lotto.domain;
+package lotto.dto;
 
-public class LottoCount {
+public class LottoCountDto {
 	private static final int MONEY_UNIT = 1000;
 	private static final int MINIMUM_MONEY = 1000;
 
 	private final int lottoCount;
 
-	public LottoCount(int money) {
+	public LottoCountDto(int money) {
 		validate(money);
 		this.lottoCount = money / MONEY_UNIT;
 	}
@@ -26,5 +26,9 @@ public class LottoCount {
 		if (money % MONEY_UNIT != 0) {
 			throw new IllegalArgumentException("천 원 단위로 입력하셔야 합니다.");
 		}
+	}
+
+	public int getLottoCount() {
+		return lottoCount;
 	}
 }
