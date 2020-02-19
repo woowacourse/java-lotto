@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
@@ -11,6 +9,7 @@ public class Lotto {
     public Lotto(Set<LottoNumber> lotto) {
         checkLottoSizeSix(lotto.size());
         this.lotto = new ArrayList<LottoNumber>(lotto);
+        Collections.sort(this.lotto);
     }
 
     public static void checkLottoSizeSix(int size) {

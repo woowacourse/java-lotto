@@ -1,6 +1,7 @@
 package domain;
 
-public class LottoNumber {
+
+public class LottoNumber implements Comparable {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private int number;
@@ -38,5 +39,14 @@ public class LottoNumber {
     @Override
     public boolean equals(Object lottoNumber) {
         return this.number == ((LottoNumber)lottoNumber).number;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (this.number > ((LottoNumber)o).number){
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }

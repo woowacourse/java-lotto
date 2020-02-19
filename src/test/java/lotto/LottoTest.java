@@ -17,7 +17,5 @@ public class LottoTest {
             Lotto.checkLottoSizeSix(7);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 한장은 6개의 숫자로 이루어져 있어야 합니다.");
-
-
     }
 }
