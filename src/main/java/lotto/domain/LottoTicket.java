@@ -3,7 +3,10 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lotto.exceptions.InvalidLottoTicketException;
@@ -60,5 +63,11 @@ public class LottoTicket {
         }
     }
 
+    public int compare(LottoTicket other) {
+        Set<LottoNumber> winnerSet = new HashSet<>(this.lottoTicket);
+        Set<LottoNumber> otherSet = new HashSet<>(other.lottoTicket);
+        winnerSet.retainAll(otherSet);
+        return winnerSet.size();
+    }
 
 }
