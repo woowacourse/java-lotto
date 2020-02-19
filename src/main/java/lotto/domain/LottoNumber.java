@@ -69,4 +69,8 @@ public enum LottoNumber {
 				.findFirst()
 				.orElseThrow(() -> new WrongLottoNumberException("유효한 로또 번호가 아닙니다."));
 	}
+
+	public int getLottoNumber() {
+		return this.lottoNumber;
+	}
 }
