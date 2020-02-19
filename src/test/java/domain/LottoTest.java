@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.domain.Number;
 import lotto.exception.InvalidLottoException;
 
@@ -26,6 +27,12 @@ public class LottoTest {
 			new Number("9")
 		);
 		assertThat(new Lotto(numbers));
+	}
+
+	@Test
+	@DisplayName("정상작동 : 로또 하나의 사이즈 6")
+	void 로또_팩토리_생성() {
+		assertThat(LottoFactory.create());
 	}
 
 	@Test

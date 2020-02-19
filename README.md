@@ -71,12 +71,12 @@
 - LottoFactory
     
 - Lotto
-    - `Lotto.size()` = 6
-    - 중복된 수가 있으면 안된다.
+    - [x] `Lotto.size()` = 6
+    - [x] 중복된 수가 있으면 안된다.
         
 - Lottos
-    - Lotto를 구매한 만큼 가지고 있는 Lottos 객체를 생성한다
-    - 금액 / 1000 == Lottos.size()    
+    - [x] Lotto를 구매한 만큼 가지고 있는 Lottos 객체를 생성한다
+    - [x] 금액 / 1000 == Lottos.size()    
 
 
 
