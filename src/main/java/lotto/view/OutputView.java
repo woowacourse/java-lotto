@@ -1,14 +1,11 @@
 package lotto.view;
 
 import lotto.domain.Lotties;
-import lotto.domain.Lotto;
-import lotto.domain.Payment;
-
-import java.util.List;
+import lotto.domain.PaidPrice;
 
 public class OutputView {
-    public static void printLottoCount(Payment payment) {
-        System.out.println(payment.getLottoCount() + "개를 구매했습니다");
+    public static void printLottoCount(PaidPrice paidPrice) {
+        System.out.println(paidPrice.getLottoCount() + "개를 구매했습니다");
     }
 
     public static void printLottiesNumbers(Lotties lotties) {

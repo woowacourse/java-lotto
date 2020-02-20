@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class Payment {
+public class PaidPrice {
     private static final int MONEY_PER_LOTTO = 1000;
     private static final String PRICE_PER_LOTTO_ERROR_MSG = "가격은 1000원 단위로 입력해야 합니다.";
     private static final String UNDER_LOTTO_PRICE_MSG = "1000원 이상으로 입력해야 합니다.";
@@ -8,7 +8,7 @@ public class Payment {
 
     private int payment;
 
-    public Payment(String inputMoney) {
+    public PaidPrice(String inputMoney) {
         validateNumber(inputMoney);
         validateUnderLottoPrice(Integer.parseInt(inputMoney));
         validatePricePerLotto(Integer.parseInt(inputMoney));
