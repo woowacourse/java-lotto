@@ -14,7 +14,7 @@ public class ResultCalculator {
         return new ResultsDTO(results, totalEarning, earningRate);
     }
 
-    private static ArrayList<WinningInfo> getResult(Lottos lottos, WinningLotto winningLotto) {
+    public static ArrayList<WinningInfo> getResult(Lottos lottos, WinningLotto winningLotto) {
         ArrayList<WinningInfo> results = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
             int winningCount = getWinningCount(lotto, winningLotto);
@@ -24,26 +24,26 @@ public class ResultCalculator {
         return results;
     }
 
-    private static int getWinningCount(Lotto lotto, WinningLotto winningLotto) {
+    public static int getWinningCount(Lotto lotto, WinningLotto winningLotto) {
         return (int) lotto.getLottoNumbers()
                 .stream()
                 .filter(userLottoNumber -> winningLotto.lottoNumbers.stream().anyMatch(Predicate.isEqual(userLottoNumber)))
                 .count();
     }
 
-    private static boolean getHasBonus(Lotto lotto, WinningLotto winningLotto) {
+    public static boolean getHasBonus(Lotto lotto, WinningLotto winningLotto) {
         return lotto.getLottoNumbers()
                 .stream()
-                .anyMatch(lottoNumber -> lottoNumber == winningLotto.getBonusNumber());
+                .anyMatch(lottoNumber -> lottoNumber.equals(winningLotto.getBonusNumber()));
     }
 
-    private static int getTotalEarning(ArrayList<WinningInfo> results) {
+    public static int getTotalEarning(ArrayList<WinningInfo> results) {
         return results.stream()
                 .map(o -> o.getWinningPrice())
                 .collect(Collectors.summingInt(Integer::intValue));
     }
 
-    private static int getEarningRate(int totalEarning, int lottoSize) {
+    public static int getEarningRate(int totalEarning, int lottoSize) {
         return totalEarning / (lottoSize * MONEY_PER_LOTTO);
     }
 }
