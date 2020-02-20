@@ -21,17 +21,24 @@ public class WinningRankResult {
     }
 
     public void checkRank(List<Lotto> lottos, WinningLotto winningLotto) {
-        List<Integer> tempRank = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            WinningValue winningValue = WinningValue.findWinningValue(
-                    checkCorrectNumber(lotto, winningLotto),
-                    isBonusNumberContain(lotto, winningLotto));
-            winningValueResult.put(winningValue, winningValueResult.get(winningValue) + 1);
+            WinningValue winningValue = getWinningValue(winningLotto, lotto);
+            putWinningResult(winningValue);
         }
     }
 
+    private void putWinningResult(WinningValue winningValue) {
+        winningValueResult.put(winningValue, winningValueResult.get(winningValue) + 1);
+    }
+
+    private WinningValue getWinningValue(WinningLotto winningLotto, Lotto lotto) {
+        return WinningValue.findWinningValue(
+                checkCorrectNumber(lotto, winningLotto),
+                isBonusNumberContain(lotto, winningLotto));
+    }
+
     public Map<WinningValue, Integer> getWinningValueResult() {
-        return winningValueResult;
+        return Collections.unmodifiableMap(winningValueResult);
     }
 
 }
