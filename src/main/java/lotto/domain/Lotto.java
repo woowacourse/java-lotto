@@ -56,6 +56,10 @@ public class Lotto {
 				.count();
 	}
 
+	public List<LottoNumber> getValue() {
+		return Collections.unmodifiableList(lotto);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
