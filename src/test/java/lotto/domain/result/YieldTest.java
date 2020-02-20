@@ -11,11 +11,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class YieldTest {
 
     @Test
+    @SuppressWarnings("NonAsciiCharacters")
     void 생성자테스트() {
         assertThat(new Yield(10)).isInstanceOf(Yield.class);
     }
 
     @Test
+    @SuppressWarnings("NonAsciiCharacters")
     void 수익률_계산하기() {
         PurchaseNumber purchaseNumber = PurchaseNumber.calculate(5000);
         // given

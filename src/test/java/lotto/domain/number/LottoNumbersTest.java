@@ -1,11 +1,8 @@
 package lotto.domain.number;
 
-import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +57,7 @@ public class LottoNumbersTest {
     }
 
     @Test
+    @SuppressWarnings("NonAsciiCharacters")
     void LottoNumber_요소를_가지고_있는지_확인() {
         // given
         List<LottoNumber> lottoNumberList = new ArrayList<>();
