@@ -10,6 +10,11 @@ public class ProfitCalculator {
             totalPrizeMoney = totalPrizeMoney +
                     prizeType.calculatePrizeMoney(winningCalculator.getPrizeTypeValue(prizeType));
         }
-        return totalPrizeMoney / money.getMoney();
+        return castingInteger(totalPrizeMoney, money.getMoney());
+    }
+
+    private static int castingInteger(int totalPrizeMoney, int money) {
+        Double profitPercent = Double.valueOf(totalPrizeMoney) / Double.valueOf(money) * 100;
+        return profitPercent.intValue();
     }
 }

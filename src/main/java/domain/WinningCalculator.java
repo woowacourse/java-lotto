@@ -46,7 +46,7 @@ public class WinningCalculator {
         return PrizeType.getPrizeTypeForWinningCount(winningCount, false);
     }
 
-    private int checkLottoTicketHasWinningNumber(LottoTicket lottoTicket, int winningCount, Integer number) {
+    private int checkLottoTicketHasWinningNumber(LottoTicket lottoTicket, int winningCount, int number) {
         if (lottoTicket.hasNumber(number)) {
             winningCount = winningCount + 1;
         }
@@ -58,12 +58,11 @@ public class WinningCalculator {
     }
 
     private void addPrizeInfoValue(PrizeType prizeType) {
+        if (prizeType == null) {
+            return;
+        }
         int originalPrizeCount = prizeInfo.get(prizeType);
         this.prizeInfo.put(prizeType, originalPrizeCount + 1);
-    }
-
-    public int getPrizeCount(int count, boolean isBonus) {
-        return this.prizeInfo.get(PrizeType.getPrizeTypeForWinningCount(count, isBonus));
     }
 
     public int getPrizeTypeValue(PrizeType prizeType) {

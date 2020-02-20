@@ -4,13 +4,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class MoneyTest {
-
-
     @DisplayName("복권 갯수 계산 테스트")
     @ParameterizedTest
     @CsvSource(value = {"1500,1", "11000,11", "12345,12"}, delimiter = ',')
@@ -19,17 +15,12 @@ public class MoneyTest {
         Assertions.assertThat(money.toString()).isEqualTo(expected);
     }
 
-    private static Stream<String> MoneySetUp() {
-        return Stream.of("", " ", null, "askjfakl", "0", "123");
-    }
-
     @DisplayName("복권 널값 및 공백, 숫자 이외 테스트")
     @ParameterizedTest
-    @MethodSource("MoneySetUp")
+    @ValueSource(strings = {"", " ", "askjfakl", "0", "123"})
     public void validateMoneyTest(String input) {
         Assertions.assertThatThrownBy(() -> {
             new Money(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
-
 }

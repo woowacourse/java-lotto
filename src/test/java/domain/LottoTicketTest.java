@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class LottoTicketTest {
-
     private static Stream<List<Integer>> lottoTicketSetUp() {
         return Stream.of(
                 new ArrayList(Arrays.asList(1, 2, 3, 4, 5)),
@@ -36,5 +35,13 @@ public class LottoTicketTest {
     public void hasNumberTest() {
         LottoTicket lottoTicket = new LottoTicket(new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Assertions.assertThat(lottoTicket.hasNumber(2)).isTrue();
+    }
+
+    @DisplayName("LottoTicket 이 갖는 숫자들을 문자로 변환하는 테스트")
+    @Test
+    public void lottoTicketNumberToString() {
+        LottoTicket lottoTicket = new LottoTicket(new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        List<String> expected = new ArrayList(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        Assertions.assertThat(lottoTicket.lottoTicketNumberToString()).isEqualTo(expected);
     }
 }

@@ -44,6 +44,14 @@ public class LottoTicket {
         return this.lottoTicket.contains(number);
     }
 
+    public List<String> lottoTicketNumberToString() {
+        List<String> ticketNumbers = new ArrayList<>();
+        for (int number : this.lottoTicket) {
+            ticketNumbers.add(Integer.toString(number));
+        }
+        return ticketNumbers;
+    }
+
     public List<Integer> getLottoTicket() {
         return this.lottoTicket;
     }

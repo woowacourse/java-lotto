@@ -25,6 +25,6 @@ public class ProfitCalculatorTest {
         WinningCalculator winningCalculator = new WinningCalculator();
         winningCalculator.calculateWinningCount(lottoTickets, winningLottoTicket);
 
-        Assertions.assertThat(ProfitCalculator.calculateProfit(money, winningCalculator)).isEqualTo(145111);
+        Assertions.assertThat(ProfitCalculator.calculateProfit(money, winningCalculator)).isEqualTo(14511107);
     }
 }

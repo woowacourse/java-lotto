@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumbersTest {
+public class LottoTicketsGeneratorTest {
     @DisplayName("셔플 기능 테스트")
     @Test
     public void shuffleLottoNumbersTest() {
@@ -25,7 +25,7 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"1,1", "10,10", "15,15"}, delimiter = ',')
     public void generateLottoTicketsTest(String input, String expected) {
-        List<LottoTicket> lottoTickets = LottoNumbers.generateLottoTickets(Integer.parseInt(input));
+        List<LottoTicket> lottoTickets = LottoTicketsGenerator.generateLottoTickets(Integer.parseInt(input));
         Assertions.assertThat(lottoTickets.size()).isEqualTo(Integer.parseInt(expected));
     }
 }
