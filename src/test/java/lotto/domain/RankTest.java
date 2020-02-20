@@ -45,4 +45,20 @@ class RankTest {
         assertThatThrownBy(() -> Rank.valueOf(invalidWinningNumber, true)).isInstanceOf(
             IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @MethodSource("provideRank")
+    void 순위에_따른_당첨금액_산출(Rank rank, int winningMoney) {
+        assertThat(rank.calculateWinningMoney()).isEqualTo(winningMoney);
+    }
+
+    private static Stream<Arguments> provideRank() {
+        return Stream.of(
+            Arguments.arguments(Rank.FIRST, 2_000_000_000),
+            Arguments.arguments(Rank.SECOND, 30_000_000),
+            Arguments.arguments(Rank.THIRD, 1_500_000),
+            Arguments.arguments(Rank.FOURTH, 50_000),
+            Arguments.arguments(Rank.FIFTH, 5_000)
+        );
+    }
 }
