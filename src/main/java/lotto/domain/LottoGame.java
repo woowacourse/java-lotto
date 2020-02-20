@@ -1,9 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
+import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoGame {
@@ -14,18 +15,28 @@ public class LottoGame {
     }
 
     public void play() {
-        int purchaseAmount = 14000;
+
+        int purchaseAmount = InputView.inputPurchaseAmount();
+        OutputView.printLottosSize(purchaseAmount);
+
         int lottosSize = Lotto.convertMoneyToLottosSize(purchaseAmount);
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
         List<List<Integer>> lottosNumbersList = new ArrayList<>(new ArrayList<>());
         for (int i = 0; i < lottosSize; i++) {
             lottosNumbersList.add(LottoNumbersGenerator.generate());
         }
 
-        int bonusBall = 7;
-
         List<Lotto> lottos = LottosGenerator.generate(lottosSize, lottosNumbersList);
+        for (Lotto lotto : lottos) {
+            OutputView.printLotto(lotto);
+        }
+
+        List<Integer> winningNumbers = InputView.inputLastWeekWinningNumbers();
+        int bonusBall = InputView.inputBonusBall();
+
         List<Integer> winningMoneys = new ArrayList<>();
+
+        Result result = new Result(new HashMap<>());
         for (Lotto lotto : lottos) {
             int matchingNumber = LottoComparator.compare(lotto, winningNumbers, bonusBall);
             if (!Rank.isExists(matchingNumber)) {
@@ -33,14 +44,16 @@ public class LottoGame {
             }
 
             Rank rank = Rank.valueOf(matchingNumber, lotto.matchBonusBall(bonusBall));
+            result.addWinningResult(rank);
 
             int winningMoney = rank.calculateWinningMoney();
             winningMoneys.add(winningMoney);
         }
 
         int totalWinningMoney = TotalWinningMoneyCalculator.calculate(winningMoneys);
-
+        OutputView.printStatistics(result);
         int earningRate = EarningRateCalculator.calculate(totalWinningMoney, purchaseAmount);
+        OutputView.printEarningRate(earningRate);
 
     }
 
