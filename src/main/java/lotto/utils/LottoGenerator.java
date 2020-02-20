@@ -7,6 +7,7 @@ import lotto.domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,13 @@ public class LottoGenerator {
         for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
             lottoNumbers.add(new LottoNumber(randomNumbers.get(i)));
         }
+        return sortLottoNumbers(lottoNumbers);
+    }
+
+    public static List<LottoNumber> sortLottoNumbers(List<LottoNumber> lottoNumbers) {
+        Collections.sort(lottoNumbers.stream()
+                .map(lottoNumber -> lottoNumber.getNumber())
+                .collect(Collectors.toList()));
         return lottoNumbers;
     }
 
