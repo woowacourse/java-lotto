@@ -65,4 +65,8 @@ public class WinningCalculator {
     public int getPrizeCount(int count, boolean isBonus) {
         return this.prizeInfo.get(PrizeType.getPrizeTypeForWinningCount(count, isBonus));
     }
+
+    public int getPrizeTypeValue(PrizeType prizeType) {
+        return this.prizeInfo.get(prizeType);
+    }
 }

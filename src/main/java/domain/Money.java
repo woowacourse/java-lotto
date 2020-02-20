@@ -36,7 +36,12 @@ public class Money {
         }
     }
 
-    public int calculateLottoTicket() {
-        return this.money / TICKET_PRICE;
+    public int getMoney() {
+        return this.money;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString((this.money / TICKET_PRICE));
     }
 }

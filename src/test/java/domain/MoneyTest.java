@@ -14,9 +14,9 @@ public class MoneyTest {
     @DisplayName("복권 갯수 계산 테스트")
     @ParameterizedTest
     @CsvSource(value = {"1500,1", "11000,11", "12345,12"}, delimiter = ',')
-    public void calculateLottoTicketTest(String input, int expected) {
+    public void calculateLottoTicketTest(String input, String expected) {
         Money money = new Money(input);
-        Assertions.assertThat(money.calculateLottoTicket()).isEqualTo(expected);
+        Assertions.assertThat(money.toString()).isEqualTo(expected);
     }
 
     private static Stream<String> MoneySetUp() {
