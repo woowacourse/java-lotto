@@ -1,29 +1,29 @@
 package lotto;
 
-import lotto.domain.Lottos;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Payment;
+import lotto.domain.*;
 import lotto.utils.LottoFactory;
+import lotto.utils.NumberGenerator;
+import lotto.utils.UserInputNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
 
 public class Application {
-    public static void main(String args[]){
+    public static void main(String args[]) {
+        NumberGenerator numberGenerator = new UserInputNumberGenerator();
         Payment payment = new Payment(InputView.getPayment());
         OutputView.printLottoCount(payment);
 
         Lottos lottos = new Lottos(LottoFactory.createLottoList(payment));
 
         List<Lotto> lottoList = lottos.getLottos();
-        for(int i=0;i<lottoList.size();i++){
-            List<LottoNumber> nowLottoNumbers = lottoList.get(i).getLottoNumbers();
-            for(int j=0;j<nowLottoNumbers.size();j++){
-                System.out.print(lottoList.get(i).getLottoNumbers().get(j).getNumber() +" ");
-            }
-            System.out.println();
+        for (int i = 0; i < lottoList.size(); i++) {
+            System.out.println(lottoList.get(i).getLottoNumbers().toString());
         }
+
+        WinningLotto winningLotto = new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
+
+        OutputView.printResults();
     }
 }

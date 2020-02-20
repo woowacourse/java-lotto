@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LottoFactory {
     public static List<Lotto> createLottoList(Payment payment) {
-        NumberGenerator randomGenerator = new RandomGenerator();
+        NumberGenerator randomGenerator = new RandomNumberGenerator();
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < payment.getLottoCount(); i++) {

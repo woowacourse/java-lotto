@@ -14,4 +14,5 @@ public class OutputView {
             System.out.println(lottos.getLottos());
         }
     }
+
 }
