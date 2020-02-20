@@ -22,11 +22,10 @@ public class LottoApplication {
     private static Money enterMoney() {
         try {
             return InputView.enterMoney();
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return enterMoney();
+            throw new IllegalArgumentException();
         }
-
     }
 
     private static WinningNumbers enterWinningNumbers() {
@@ -35,7 +34,7 @@ public class LottoApplication {
             return new WinningNumbers(lottoNumbersDto);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return enterWinningNumbers();
+            throw new IllegalArgumentException();
         }
     }
 }
