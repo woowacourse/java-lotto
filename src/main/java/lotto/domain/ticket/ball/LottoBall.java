@@ -5,12 +5,12 @@ import java.util.Objects;
 public final class LottoBall {
     private final int number;
 
-    public LottoBall(int number) {
+    private LottoBall(int number) {
         validateNumber(number);
         this.number = number;
     }
 
-    public static LottoBall of(int number) {
+    public static LottoBall from(int number) {
         return new LottoBall(number);
     }
 

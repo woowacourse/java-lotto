@@ -37,7 +37,7 @@ class WinningLottoTest {
     void name(int[] numbers, LottoResult expectedResult) {
         //given
         Set<LottoBall> winBalls = aLottoTicket(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(winBalls, LottoBall.of(7));
+        WinningLotto winningLotto = new WinningLotto(winBalls, LottoBall.from(7));
 
         LottoTicket buyLottoTicket = new LottoTicket(aLottoTicket(numbers));
 
@@ -50,11 +50,11 @@ class WinningLottoTest {
 
     private Set<LottoBall> aLottoTicket(int... numbers) {
         return new HashSet<>(Arrays.asList(
-                LottoBall.of(numbers[0]),
-                LottoBall.of(numbers[1]),
-                LottoBall.of(numbers[2]),
-                LottoBall.of(numbers[3]),
-                LottoBall.of(numbers[4]),
-                LottoBall.of(numbers[5])));
+                LottoBall.from(numbers[0]),
+                LottoBall.from(numbers[1]),
+                LottoBall.from(numbers[2]),
+                LottoBall.from(numbers[3]),
+                LottoBall.from(numbers[4]),
+                LottoBall.from(numbers[5])));
     }
 }

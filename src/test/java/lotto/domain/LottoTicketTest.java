@@ -17,33 +17,33 @@ class LottoTicketTest {
     @DisplayName("로또 티켓 생성하기")
     @Test
     void test1() {
-        Set<LottoBall> lottoBalls = new HashSet<>(Arrays.asList(new LottoBall(1),
-                new LottoBall(2),
-                new LottoBall(3),
-                new LottoBall(4),
-                new LottoBall(5),
-                new LottoBall(6)));
+        Set<LottoBall> lottoBalls = new HashSet<>(Arrays.asList(LottoBall.from(1),
+                LottoBall.from(2),
+                LottoBall.from(3),
+                LottoBall.from(4),
+                LottoBall.from(5),
+                LottoBall.from(6)));
 
         LottoTicket lottoTicket = new LottoTicket(lottoBalls);
 
-        LottoTicket expectedTicket = new LottoTicket(new HashSet<>(Arrays.asList(new LottoBall(1),
-                new LottoBall(2),
-                new LottoBall(3),
-                new LottoBall(4),
-                new LottoBall(5),
-                new LottoBall(6))));
+        LottoTicket expectedTicket = new LottoTicket(new HashSet<>(Arrays.asList(LottoBall.from(1),
+                LottoBall.from(2),
+                LottoBall.from(3),
+                LottoBall.from(4),
+                LottoBall.from(5),
+                LottoBall.from(6))));
         assertThat(lottoTicket).isEqualTo(expectedTicket);
     }
 
     @DisplayName("잘못된 갯수의 로또 번호를 입력받은 티켓은 Exception 발생")
     @Test
     void test2() {
-        Set<LottoBall> lottoBalls = new HashSet<>(Arrays.asList(new LottoBall(1),
-                new LottoBall(1),
-                new LottoBall(2),
-                new LottoBall(4),
-                new LottoBall(5),
-                new LottoBall(6)));
+        Set<LottoBall> lottoBalls = new HashSet<>(Arrays.asList(LottoBall.from(1),
+                LottoBall.from(1),
+                LottoBall.from(2),
+                LottoBall.from(4),
+                LottoBall.from(5),
+                LottoBall.from(6)));
         int wrongSize = lottoBalls.size();
 
         assertThatThrownBy(() -> new LottoTicket(lottoBalls))

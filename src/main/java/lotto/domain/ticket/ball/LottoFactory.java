@@ -12,7 +12,7 @@ public class LottoFactory {
 
     static {
         instance = IntStream.rangeClosed(1, 45)
-                .mapToObj(LottoBall::new)
+                .mapToObj(LottoBall::from)
                 .collect(Collectors.toMap(LottoBall::getNumber, Function.identity()));
     }
 
