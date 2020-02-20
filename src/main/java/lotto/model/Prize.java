@@ -5,11 +5,11 @@ public class Prize {
     private static double prize = 0;
 
     public static double sumPrize() {
-        prize += LottoResult.THREE.prizeResult(LottoResult.THREE.getCount());
-        prize += LottoResult.FOUR.prizeResult(LottoResult.FOUR.getCount());
-        prize += LottoResult.FIVE.prizeResult(LottoResult.FIVE.getCount());
-        prize += LottoResult.FIVE_BONUS.prizeResult(LottoResult.FIVE_BONUS.getCount());
-        prize += LottoResult.SIX.prizeResult(LottoResult.SIX.getCount());
+        prize += LottoResult.THREE.prizeResult();
+        prize += LottoResult.FOUR.prizeResult();
+        prize += LottoResult.FIVE.prizeResult();
+        prize += LottoResult.FIVE_BONUS.prizeResult();
+        prize += LottoResult.SIX.prizeResult();
         return prize;
     }
 }

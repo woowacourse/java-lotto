@@ -20,8 +20,8 @@ public enum LottoResult {
         count++;
     }
 
-    public double prizeResult(int count) {
-        return count * this.prize;
+    public double prizeResult() {
+        return count * prize;
     }
 
     public int getPrize() {
