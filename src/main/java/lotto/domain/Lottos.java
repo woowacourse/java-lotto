@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Lottos {
     private List<Lotto> lottos;
+    private static String INCORRECT_INDEX_MSG = "Lottos에 잘못된 index 접근입니다.";
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
@@ -15,7 +16,7 @@ public class Lottos {
 
     public Lotto getLottoByIndex(int index) {
         if (index < 0 || index > lottos.size())
-            throw new IllegalArgumentException("Lottos에 잘못된 접급입니다.");
+            throw new IllegalArgumentException(INCORRECT_INDEX_MSG);
         return this.lottos.get(index);
     }
 }
