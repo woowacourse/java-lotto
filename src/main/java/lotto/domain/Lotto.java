@@ -9,10 +9,11 @@ import java.util.List;
 import lotto.exception.InvalidLottoException;
 
 public class Lotto implements Iterable<Number> {
-	protected final List<Number> numbers;
+	private final List<Number> numbers;
 
 	public Lotto(List<Number> numbers) {
 		validate(numbers);
+		Collections.sort(numbers);
 		this.numbers = new ArrayList<>(numbers);
 	}
 
@@ -37,10 +38,9 @@ public class Lotto implements Iterable<Number> {
 		return numbers.iterator();
 	}
 
-	public int countSameNumber(Lotto winningNumbers) {
+	public int compare(Lotto winningNumbers) {
 		Iterator<Number> lottoIterator = iterator();
 		int matchingNumber = 0;
-
 		while (lottoIterator.hasNext()) {
 			Number number = lottoIterator.next();
 			if (winningNumbers.contains(number)) {

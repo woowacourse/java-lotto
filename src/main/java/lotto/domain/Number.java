@@ -8,11 +8,12 @@ import java.util.Objects;
 
 import lotto.exception.InvalidNumberException;
 
-public class Number {
-	private final int number;
+public class Number implements Comparable<Number> {
 	public static final int MAX_LOTTO_NUMBER = 45;
 	public static final int MIN_LOTTO_NUMBER = 1;
 	private static final Map<Integer, Number> numbers = new HashMap<>();
+
+	private final int number;
 
 	static {
 		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
@@ -65,5 +66,15 @@ public class Number {
 		if (Objects.isNull(value)) {
 			throw new InvalidNumberException("Null문자열은 사용이 불가능합니다.");
 		}
+	}
+
+	@Override
+	public String toString() {
+		return Integer.toString(number);
+	}
+
+	@Override
+	public int compareTo(Number o) {
+		return Integer.compare(this.number, o.number);
 	}
 }

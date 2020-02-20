@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.result.Rank;
+import lotto.domain.result.Statistic;
 import lotto.exception.InvalidWinningLottoException;
 
 public class WinningLotto {
@@ -15,12 +15,15 @@ public class WinningLotto {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public Rank isWinningLotto(Lotto lotto) {
-		int numberOfMatch = lotto.countSameNumber(winningNumbers);
-		if (numberOfMatch == SECOND && lotto.contains(bonusNumber)) {
-			return Rank.BONUS;
-		}
-		return Rank.getRank(numberOfMatch);
+	public Statistic isWinningLotto(Lotto lotto) throws Exception {
+		int numberOfMatch = lotto.compare(winningNumbers);
+		if (checkSecond(lotto, numberOfMatch))
+			return Statistic.BONUS;
+		return Statistic.getRank(numberOfMatch);
+	}
+
+	private boolean checkSecond(Lotto lotto, int numberOfMatch) {
+		return numberOfMatch == SECOND && lotto.contains(bonusNumber);
 	}
 
 	private void validateDuplication(Lotto winningNumbers, Number bonusNumber) {

@@ -83,7 +83,7 @@ public class LottoTest {
 			Number.of("7"),
 			Number.of("8")
 		);
-		assertThat(new Lotto(numbers).countSameNumber(new Lotto(win))).isEqualTo(5);
+		assertThat(new Lotto(numbers).compare(new Lotto(win))).isEqualTo(5);
 	}
 
 	@Test

@@ -10,7 +10,7 @@ public class PurchaseMoney {
 	public static final int MIN = 1000;
 	public static final int LOWER_BOUND = MIN;
 	public static final int UPPER_BOUND = 100000;
-	public static final int LOTTO_PICEC_PRICE = 1000;
+	public static final int LOTTO_PIECE_PRICE = 1000;
 
 	private int purchaseMoney;
 
@@ -60,6 +60,10 @@ public class PurchaseMoney {
 	}
 
 	public int parseToPiece() {
-		return purchaseMoney / LOTTO_PICEC_PRICE;
+		return purchaseMoney / LOTTO_PIECE_PRICE;
+	}
+
+	public int getPurchaseMoney() {
+		return purchaseMoney;
 	}
 }
