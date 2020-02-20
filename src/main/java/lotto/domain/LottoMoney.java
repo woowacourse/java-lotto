@@ -1,12 +1,12 @@
 package lotto.domain;
 
 public class LottoMoney {
-	public static final LottoMoney FIRST_RANK = new LottoMoney(2_000_000_000);
-	public static final LottoMoney SECOND_RANK = new LottoMoney(30_000_000);
-	public static final LottoMoney THIRD_RANK = new LottoMoney(1_500_000);
-	public static final LottoMoney FOURTH_RANK = new LottoMoney(50_000);
-	public static final LottoMoney FIFTH_RANK = new LottoMoney(5_000);
-	public static final LottoMoney ZERO_MONEY = new LottoMoney(0);
+	public static final LottoMoney FIRST_PRIZE = new LottoMoney(2_000_000_000);
+	public static final LottoMoney SECOND_PRIZE = new LottoMoney(30_000_000);
+	public static final LottoMoney THIRD_PRIZE = new LottoMoney(1_500_000);
+	public static final LottoMoney FOURTH_PRIZE = new LottoMoney(50_000);
+	public static final LottoMoney FIFTH_PRIZE = new LottoMoney(5_000);
+	public static final LottoMoney MISS_PRIZE = new LottoMoney(0);
 
 	private static final long ZERO = 0;
 	private static final long UNIT = 1000;
@@ -64,7 +64,11 @@ public class LottoMoney {
 		}
 	}
 
-	public int purchaseLotto() {
+	public int getNumberOfLotto() {
 		return (int)(money / LOTTO_PRICE);
+	}
+
+	public long getMoney() {
+		return money;
 	}
 }

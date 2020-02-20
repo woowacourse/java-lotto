@@ -62,6 +62,6 @@ public class LottoMoneyTest {
 	@Test
 	void purchaseLotto_Money_NumberOfLotto() {
 		LottoMoney lottoMoney = new LottoMoney("2000");
-		assertThat(lottoMoney.purchaseLotto()).isEqualTo(2);
+		assertThat(lottoMoney.getNumberOfLotto()).isEqualTo(2);
 	}
 }
