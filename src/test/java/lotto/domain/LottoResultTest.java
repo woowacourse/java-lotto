@@ -8,10 +8,11 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MatchResultsTest {
+public class LottoResultTest {
     private List<Lotto> lottos;
     private WinningNumbers winningNumbers;
     private BonusNumber bonusNumber;
+    private Map<MatchResult, Integer> expectedMatchResults;
 
     @BeforeEach
     void setUpLottos() {
@@ -25,6 +26,12 @@ public class MatchResultsTest {
         winningNumbers = new WinningNumbers("1,2,3,4,5,7");
         bonusNumber = new BonusNumber("6");
 
+        expectedMatchResults = new HashMap<>();
+        expectedMatchResults.put(MatchResult.THREE_MATCH, 1);
+        expectedMatchResults.put(MatchResult.FOUR_MATCH, 1);
+        expectedMatchResults.put(MatchResult.FIVE_MATCH, 1);
+        expectedMatchResults.put(MatchResult.FIVE_MATCH_WITH_BONUSBALL, 1);
+        expectedMatchResults.put(MatchResult.SIX_MATCH, 1);
     }
 
     @DisplayName("로또 한 줄과 당첨번호를 비교했을때 올바른 당첨 결과를 반환하는지 확인")
@@ -42,14 +49,14 @@ public class MatchResultsTest {
     void createMatchResultsTest() {
         Lottos lottos = new Lottos(this.lottos);
         Map<MatchResult, Integer> matchResults = lottos.createMatchResults(winningNumbers, bonusNumber);
-
-        Map<MatchResult, Integer> expectedMatchResults = new HashMap<>();
-        expectedMatchResults.put(MatchResult.THREE_MATCH, 1);
-        expectedMatchResults.put(MatchResult.FOUR_MATCH, 1);
-        expectedMatchResults.put(MatchResult.FIVE_MATCH, 1);
-        expectedMatchResults.put(MatchResult.FIVE_MATCH_WITH_BONUSBALL, 1);
-        expectedMatchResults.put(MatchResult.SIX_MATCH, 1);
-
         assertThat(matchResults).isEqualTo(expectedMatchResults);
+    }
+
+    @DisplayName("올바른 수익률을 반환하는지 확인")
+    @Test
+    void calculateEarningRateTest() {
+        LottoResults lottoResults = new LottoResults(expectedMatchResults);
+        int earningRate = lottoResults.calculateEarningRate(new PurchasePrice("5000"));
+        assertThat(earningRate).isEqualTo(40_631_100);
     }
 }
