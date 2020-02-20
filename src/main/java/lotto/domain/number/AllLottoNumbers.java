@@ -22,7 +22,7 @@ public class AllLottoNumbers {
         }
     }
 
-    public List<GameResult> calculateCollectNumber(WinningNumbers winningNumbers) {
+    public List<GameResult> calcurateGameResult(WinningNumbers winningNumbers) {
         List<GameResult> gameResultList = new ArrayList<>();
         for (int i = 0; i < allLottoNumbers.size(); i++) {
             LottoNumbers presentLottoNumbers = allLottoNumbers.get(i);

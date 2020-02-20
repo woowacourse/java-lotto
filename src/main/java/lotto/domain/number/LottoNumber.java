@@ -7,11 +7,10 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable {
     private static final Map<Integer, LottoNumber> lottoNumberMapper = new Hashtable<>();
-
-    private int number;
-
     private static final int LOWER_BOUND = 1;
     private static final int UPPER_BOUND = 45;
+
+    private int number;
 
     static {
         for (int i = LOWER_BOUND; i <= UPPER_BOUND; i++) {
@@ -28,14 +27,18 @@ public class LottoNumber implements Comparable {
         return lottoNumberMapper.get(number);
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     private static void validateBound(int number) {
         if (LOWER_BOUND > number || UPPER_BOUND < number) {
             throw new IllegalArgumentException("범위를 벗어난 숫자가 생성되었습니다.");
         }
+    }
+
+    public static Map<Integer, LottoNumber> getLottoNumberMapper() {
+        return Collections.unmodifiableMap(lottoNumberMapper);
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -61,9 +64,5 @@ public class LottoNumber implements Comparable {
         LottoNumber that = (LottoNumber) o;
 
         return Integer.compare(number, that.number);
-    }
-
-    public static Map<Integer, LottoNumber> getLottoNumberMapper() {
-        return Collections.unmodifiableMap(lottoNumberMapper);
     }
 }

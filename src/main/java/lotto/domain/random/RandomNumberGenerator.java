@@ -3,17 +3,18 @@ package lotto.domain.random;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Collections;
+import java.util.ArrayList;
 
 public class RandomNumberGenerator {
     private final List<LottoNumber> lottoNumberPool = new LinkedList<>();
 
     public RandomNumberGenerator() {
-        LottoNumber.getLottoNumberMapper().forEach((integer, lottoNumber) ->
-                lottoNumberPool.add(lottoNumber));
+        Map<Integer, LottoNumber> lottoNumberMapper = LottoNumber.getLottoNumberMapper();
+        lottoNumberPool.addAll(lottoNumberMapper.values());
         Collections.shuffle(lottoNumberPool);
     }
 

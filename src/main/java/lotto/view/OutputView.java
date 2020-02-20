@@ -26,8 +26,8 @@ public class OutputView {
 
     public static void printAllLottoNumbers(AllLottoNumbers allLottoNumbers) {
         List<LottoNumbers> allLottoNumbersList = allLottoNumbers.getAllLottoNumbers();
-        for (int i = 0; i < allLottoNumbersList.size(); i++) {
-            printLottoNumbers(allLottoNumbersList.get(i));
+        for (LottoNumbers anAllLottoNumbersList : allLottoNumbersList) {
+            printLottoNumbers(anAllLottoNumbersList);
         }
     }
 

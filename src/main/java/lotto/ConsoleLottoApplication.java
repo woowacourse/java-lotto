@@ -44,7 +44,7 @@ public class ConsoleLottoApplication {
     }
 
     private static GameResults createGameResults(AllLottoNumbers allLottoNumbers, WinningNumbers winningNumbers) {
-        List<GameResult> gameResults = allLottoNumbers.calculateCollectNumber(winningNumbers);
+        List<GameResult> gameResults = allLottoNumbers.calcurateGameResult(winningNumbers);
         return new GameResults(gameResults);
     }
 

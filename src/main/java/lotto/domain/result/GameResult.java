@@ -10,8 +10,9 @@ public enum GameResult {
     FIFTH_RANK(5000, 3),
     NO_RANK(0, 0);
 
-    public final double prize;
-    public final int correctLottoNumberSize;
+    private static final int SECOND_OR_THIRD_RANK_CORRECT_NUMBER_SIZE = 5;
+    private final double prize;
+    private final int correctLottoNumberSize;
 
     GameResult(double prize, int correctLottoNumberSize) {
         this.prize = prize;
@@ -30,7 +31,7 @@ public enum GameResult {
     }
 
     private boolean isThirdRank(boolean isCorrectBonusNumber) {
-        return this.isSame(5) && isCorrectBonusNumber == false;
+        return this.isSame(SECOND_OR_THIRD_RANK_CORRECT_NUMBER_SIZE) && isCorrectBonusNumber == false;
     }
 
     private boolean isSame(int collectLottoNumber) {

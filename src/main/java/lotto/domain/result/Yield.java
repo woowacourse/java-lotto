@@ -5,6 +5,7 @@ import lotto.domain.number.PurchaseNumber;
 import java.util.Objects;
 
 public class Yield {
+    private static final int MULTIPLE_PERCENTAGE = 100;
 
     private final double yield;
 
@@ -15,7 +16,11 @@ public class Yield {
     public static Yield calculateYield(PurchaseNumber purchaseNumber, GameResults gameResults) {
         double purchaseMoney = purchaseNumber.getPurchaseMoney();
         double benefit = gameResults.calculateBenefit();
-        return new Yield((benefit / purchaseMoney) * 100);
+        return new Yield((benefit / purchaseMoney) * MULTIPLE_PERCENTAGE);
+    }
+
+    public double getYield() {
+        return yield;
     }
 
     @Override
@@ -24,10 +29,6 @@ public class Yield {
         if (o == null || getClass() != o.getClass()) return false;
         Yield yield1 = (Yield) o;
         return yield == yield1.yield;
-    }
-
-    public double getYield() {
-        return yield;
     }
 
     @Override

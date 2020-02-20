@@ -17,7 +17,7 @@ public class GameResults {
 
     public double calculateBenefit() {
         return gameResults.stream()
-                .mapToDouble(value -> value.prize)
+                .mapToDouble(GameResult::getPrize)
                 .sum();
     }
 }
