@@ -39,8 +39,11 @@ public enum LottoResult {
         return prize;
     }
 
+    @Override
     public String toString() {
-        if (this == NO_WIN) return "";
+        if (this == NO_WIN) {
+            return "";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(this.matchingNumbers);
         stringBuilder.append("개 일치 ");
