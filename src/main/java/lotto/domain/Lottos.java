@@ -25,7 +25,9 @@ public class Lottos {
 			.collect(Collectors.toList()));
 	}
 
-	public List<Lotto> getLottos() {
-		return lottos;
+	public List<WinningPrize> findAllLottoPrizes(WinningNumber winningNumber) {
+		return lottos.stream()
+			.map(lotto -> lotto.findLottoPrize(winningNumber))
+			.collect(Collectors.toList());
 	}
 }

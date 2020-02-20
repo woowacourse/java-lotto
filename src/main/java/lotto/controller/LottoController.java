@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.domain.LottoMachine;
 import lotto.domain.Lottos;
 import lotto.domain.WinningNumber;
+import lotto.domain.WinningPrize;
 import lotto.dto.LottoCountDto;
 import lotto.utils.InputUtil;
 import lotto.view.InputView;
@@ -14,9 +15,9 @@ import lotto.view.OutputView;
 public class LottoController {
 	public static void run() {
 		Lottos lottos = buyLottos();
-
 		OutputView.printLottos(lottos.makeLottoDtos());
-		WinningNumber winningNumber = checkLWinningNumber();
+		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(receiveWinningNumber());
+		OutputView.printLottoResult(winningPrizes);
 	}
 
 	private static int readBonusNumber() {
@@ -52,6 +53,15 @@ public class LottoController {
 		}
 	}
 
+	public static WinningNumber receiveWinningNumber() {
+		try {
+			return new WinningNumber(readWinningNumber(), readBonusNumber());
+		} catch (IllegalArgumentException e) {
+			OutputView.printExceptionMessage(e);
+			return receiveWinningNumber();
+		}
+	}
+
 	public static List<String> readWinningNumber() {
 		try {
 			InputView.printInsertWinningNumber();
@@ -59,15 +69,6 @@ public class LottoController {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return readWinningNumber();
-		}
-	}
-
-	public static WinningNumber checkLWinningNumber() {
-		try {
-			return new WinningNumber(readWinningNumber(), readBonusNumber());
-		} catch (IllegalArgumentException e) {
-			OutputView.printExceptionMessage(e);
-			return checkLWinningNumber();
 		}
 	}
 }

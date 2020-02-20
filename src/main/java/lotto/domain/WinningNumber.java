@@ -73,4 +73,12 @@ public class WinningNumber {
 			throw new IllegalArgumentException("보너스 번호가 범위를 벗어날 수 없습니다.");
 		}
 	}
+
+	public List<Integer> getWinningNumber() {
+		return winningNumber;
+	}
+
+	public int getBonusNumber() {
+		return bonusNumber;
+	}
 }

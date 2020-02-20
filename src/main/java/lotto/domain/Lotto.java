@@ -39,19 +39,17 @@ public class Lotto {
 		}
 	}
 
-	public int findLottoPrize(List<Integer> winningNumbers, int bonusNumber) {
+	public WinningPrize findLottoPrize(WinningNumber winningNumber) {
 		HashSet<Integer> concatenatedSet = new HashSet<>(lottoNumber);
-		concatenatedSet.addAll(winningNumbers);
-		int winningCount = (lottoNumber.size() * 2) - concatenatedSet.size();
-		return 0;
+		concatenatedSet.addAll(winningNumber.getWinningNumber());
+
+		int matchCount = (lottoNumber.size() * 2) - concatenatedSet.size();
+		boolean bonusMatch = lottoNumber.contains(winningNumber.getBonusNumber());
+
+		return WinningPrize.of(matchCount, bonusMatch);
 	}
 
 	public LottoDto makeLottoDto() {
 		return new LottoDto(this.lottoNumber);
 	}
-
-	public List<Integer> getLottoNumber() {
-		return lottoNumber;
-	}
-
 }
