@@ -8,8 +8,12 @@ import lotto.view.dto.BettingMoneyRequestDTO;
 import lotto.view.dto.StatisticsResponseDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
 
+import java.util.Scanner;
+
 public class LottoController {
 
+
+    private static final InputView inputView = new InputView(new Scanner(System.in));
     private final LottoService lottoService;
 
     public LottoController(LottoService lottoService) {
@@ -25,14 +29,14 @@ public class LottoController {
     }
 
     private LottoTicketBundle getLottoTicketBundle() {
-        BettingMoneyRequestDTO bettingMoney = new BettingMoneyRequestDTO(InputView.inputBettingMoney());
+        BettingMoneyRequestDTO bettingMoney = new BettingMoneyRequestDTO(inputView.inputBettingMoney());
 
         return lottoService.getLottoTicketBundle(bettingMoney);
     }
 
     private StatisticsResponseDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle) {
-        String winningNumber = InputView.inputWinningNumber();
-        int bonusNumber = InputView.inputBonusNumber();
+        String winningNumber = inputView.inputWinningNumber();
+        int bonusNumber = inputView.inputBonusNumber();
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO(winningNumber, bonusNumber);
 
         return lottoService.getStatisticsDTO(lottoTicketBundle, winningLottoRequestDTO);
