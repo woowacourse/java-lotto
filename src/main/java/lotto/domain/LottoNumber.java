@@ -3,16 +3,13 @@ package lotto.domain;
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
-
     private static final String NOT_IN_SCOPE_NUMBERS_ERROR_MSG = "로또 번호의 범위가 잘못되었습니다.";
     private static final String NOT_NUMBER_MSG = "정수로 입력하셔야 합니다.";
 
     private int number;
 
     public LottoNumber(String number) {
-        validateNumber(number);
-        validateNumberScope(Integer.parseInt(number));
-        this.number = Integer.parseInt(number);
+        this(validateNumber(number));
     }
 
     public LottoNumber(int number) {
@@ -20,12 +17,13 @@ public class LottoNumber {
         this.number = number;
     }
 
-    private void validateNumber(String lottoNumber) {
+    private static int validateNumber(String lottoNumber) {
         try {
             Integer.parseInt(lottoNumber);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NOT_NUMBER_MSG);
         }
+        return Integer.parseInt(lottoNumber);
     }
 
     private void validateNumberScope(int lottoNumber) {
