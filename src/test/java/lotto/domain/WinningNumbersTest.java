@@ -46,16 +46,34 @@ public class WinningNumbersTest {
 			new WinningNumbers("46, 47123, 48234345, 78123123, 893, 90134234", "23")
 		).withMessage("로또 숫자는 45를 넘기면 안됩니다.");
 	}
+
 	@Test
 	void checkValidationWhenBonusNumberNotInteger() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 			new WinningNumbers("1, 2, 3, 4, 5, 6", "a")
 		).withMessage("보너스 번호는 정수만 가능합니다");
 	}
+
 	@Test
 	void checkValidationWhenBonusNumberDuplicateLottoNumbers() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 			new WinningNumbers("1, 2, 3, 4, 5, 6","2")
 		).withMessage("보너스 번호 일반 당첨번호와 중복될수 없습니다.");
+	}
+
+	@Test
+	void checkIsFalseWhenNotMatchWithBonusNumber() {
+		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6","7");
+		LottoNumber lottoNumber = new LottoNumber(2);
+
+		assertThat(winningNumbers.isMatchWithBonus(lottoNumber)).isFalse();
+	}
+
+	@Test
+	void checkIsTrueWhenMatchWithBonusNumber() {
+		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6","7");
+		LottoNumber lottoNumber = new LottoNumber(7);
+
+		assertThat(winningNumbers.isMatchWithBonus(lottoNumber)).isTrue();
 	}
 }
