@@ -50,11 +50,11 @@ public class WinningRuleTest {
 
     @Test
     @DisplayName("당첨 결과 계산하는 테스트")
-    void calculateWinningResult() {
+    void calculateRank() {
         WinningRule winningRule = new WinningRule(inputNumbers, 7);
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(inputNumbers));
-        winningRule.calculateWinningResult(new PurchaseLottos(lottos));
+        winningRule.calculateRank(new PurchaseLottos(lottos));
         Assertions.assertThat(Rank.FIRST_RANK.count)
                 .isEqualTo(1);
     }

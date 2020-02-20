@@ -32,16 +32,16 @@ public class WinningRule {
                 != WINNING_NUMBER_SIZE;
     }
 
-    public void calculateWinningResult(PurchaseLottos purchaseLottos) {
+    public void calculateRank(PurchaseLottos purchaseLottos) {
         for (Lotto lotto : purchaseLottos.getPurchaseLottos()) {
-            calculateWinningResult(lotto);
+            calculateRank(lotto);
         }
     }
 
-    private void calculateWinningResult(Lotto lotto) {
+    private void calculateRank(Lotto lotto) {
         List<LottoNumber> mergedLottoNumbers = new ArrayList<>(lotto.getLottoNumbers());
         mergedLottoNumbers.addAll(winningNumbers.getLottoNumbers());
-        ResultCalculator.calculateRank(countCorrectLottoNumber(mergedLottoNumbers), isCorrectBonusNumber(lotto));
+        ResultCalculator.findRank(countCorrectLottoNumber(mergedLottoNumbers), isCorrectBonusNumber(lotto));
     }
 
     private int countCorrectLottoNumber(List<LottoNumber> mergedLottoNumbers) {

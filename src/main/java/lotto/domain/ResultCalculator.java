@@ -7,7 +7,7 @@ public class ResultCalculator {
     private static final int ORIGINAL_PERCENT = 100;
     private static final int LOTTO_PRICE = 1000;
 
-    public static void calculateRank(int rightNumber, boolean isCorrectBonusNumber) {
+    public static void findRank(int rightNumber, boolean isCorrectBonusNumber) {
         Arrays.stream(Rank.values())
                 .filter(rank -> isSameRank(rank, rightNumber, isCorrectBonusNumber))
                 .forEach(Rank::countUp);

@@ -24,7 +24,7 @@ public class ConsoleLottoApplication {
         OutputView.printPurchaseLottoNumbers(purchaseLottos);
 
         WinningRule winningNumbers = InputView.inputWinningNumbers();
-        winningNumbers.calculateWinningResult(purchaseLottos);
+        winningNumbers.calculateRank(purchaseLottos);
 
         OutputView.printResult(purchaseAmount);
     }
