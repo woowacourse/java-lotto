@@ -9,24 +9,33 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoController {
+    public static final int MAX_LOTTO_BALL_COUNT = 6;
     private static PurchaseAmount purchaseAmount;
-    private static LottoTickets lottoTickets;
 
     public static void play() {
-        startInputPurchaseAmount();
-        for (int i = 0; i < purchaseAmount.lottoTicket(); i++) {
-            Collections.shuffle(LottoBallFactory.getInstance());
-            lottoTickets = new LottoTickets(generateLottoTicket());
-        }
-        OutputView.printLottoTicket();
+        WinningBalls winningBalls;
 
+        startInputPurchaseAmount();
+        generateLottoTickets();
+
+        winningBalls = generateWinningBalls();
+    }
+
+    private static WinningBalls generateWinningBalls() {
         OutputView.printAnswerWinningBalls();
         List<LottoBall> winningBallsInput = InputView.InputWinningBalls();
         OutputView.printAnswerBonusBall();
         int bonusBall = InputView.InputBonusBall();
 
-        WinningBalls winningBalls = new WinningBalls(winningBallsInput, bonusBall);
+        return  new WinningBalls(winningBallsInput, bonusBall);
+    }
 
+    private static void generateLottoTickets() {
+        for (int i = 0; i < purchaseAmount.lottoTicket(); i++) {
+            Collections.shuffle(LottoBallFactory.getInstance());
+            new LottoTickets(generateLottoTicket());
+        }
+        OutputView.printLottoTicket();
     }
 
     private static void startInputPurchaseAmount() {
@@ -38,7 +47,7 @@ public class LottoController {
 
     public static LottoTicket generateLottoTicket() {
         List<LottoBall> lottoTicket = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < MAX_LOTTO_BALL_COUNT; i++) {
             lottoTicket.add(LottoBallFactory.getInstance().get(i));
         }
         return new LottoTicket(lottoTicket);
