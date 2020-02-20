@@ -6,10 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import lotto.domain.exception.InvalidLottoNumberException;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 	private static final int MIN = 1;
 	private static final int MAX = 45;
-	private static final String INVALID_NUMBER_MESSAGE = "생성할 수 없는 수입니다.";
 	private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
 	private final int number;
@@ -44,7 +45,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private static void validate(int number) {
 		if (number < MIN || number > MAX) {
-			throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
+			throw new InvalidLottoNumberException("로또 번호는 1 ~ 45 사이의 수만 가능합니다.");
 		}
 	}
 
