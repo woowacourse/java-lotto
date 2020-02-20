@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -40,7 +41,7 @@ public class OutputView {
     }
 
 
-    public static void printWinningResult(WinningRank winningRank, int count) {
+    public static void printEachWinningResult(WinningRank winningRank, int count) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(winningRank.getWinningBallCount()).append("개 일치(");
@@ -53,6 +54,11 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
+    public static void printResultAllOfRank(List<WinningRank> winningRanks, EarningRate earningRate) {
+        for (WinningRank winningRank : WinningRank.values()) {
+            OutputView.printEachWinningResult(winningRank, earningRate.countRankPeople(winningRanks, winningRank));
+        }
+    }
 
     public static void printRankPrintedConstant() {
         System.out.println("당첨통계");
