@@ -1,10 +1,16 @@
 package lotto.domain;
 
-public class PurchaseLotto {
+public class MoneyManager {
     private static final int LOTTO_PRICE = 1000;
 
-    public static int purchase(int money) {
+    private int money;
+
+    public MoneyManager(int money) {
         purchaseException(money);
+        this.money = money;
+    }
+
+    public int purchase() {
         return money / LOTTO_PRICE;
     }
 
