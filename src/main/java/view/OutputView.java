@@ -1,9 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.LottoResult;
-import domain.Profit;
+import domain.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,8 +20,8 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다." + NEW_LINE, calculateCount);
     }
 
-    public static void printLottoDummy(List<Lotto> lottoDummy) {
-        for (Lotto eachLotto : lottoDummy){
+    public static void printLottoDummy(LottoDummy lottoDummy) {
+        for (Lotto eachLotto : lottoDummy.getLottoDummy()){
             printEachLotto(eachLotto);
         }
     }
