@@ -1,8 +1,5 @@
 package lotto.view;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.function.Predicate;
 
 import lotto.domain.LottoTicket;
@@ -14,12 +11,7 @@ public class OutputView {
 	public static final int PERCENT = 100;
 
 	public static void printResult(final Ranks ranks) {
-		final Rank[] rankValues = Rank.values();
-
-		List<Rank> rankResults = Arrays.asList(rankValues);
-		Collections.reverse(rankResults);
-
-		rankResults.stream()
+		Rank.getOrderReversed().stream()
 			.filter(hasPrize())
 			.forEach(rank -> printEachResult(rank, ranks));
 	}

@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 public enum Rank {
@@ -26,6 +29,13 @@ public enum Rank {
 
 	public int getAmount() {
 		return this.amount;
+	}
+
+	public static Ranks getOrderReversed() {
+		final Rank[] rankValues = Rank.values();
+		List<Rank> rankResults = Arrays.asList(rankValues);
+		Collections.reverse(rankResults);
+		return new Ranks(rankResults);
 	}
 
 	public static Rank of(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
