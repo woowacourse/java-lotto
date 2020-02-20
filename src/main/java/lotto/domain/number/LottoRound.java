@@ -10,7 +10,7 @@ public class LottoRound {
     public static final int LOTTO_NUMBER_AMOUNT = 6;
     private static final String LOTTO_NUMBER_AMOUNT_EXCEPTION_MESSAGE = "로또 번호의 갯수가 6개가 아닙니다.";
 
-    protected List<LottoNumber> lottoNumbers;
+    List<LottoNumber> lottoNumbers;
 
     public LottoRound(List<LottoNumber> randomNumbers) {
         Objects.requireNonNull(randomNumbers);
