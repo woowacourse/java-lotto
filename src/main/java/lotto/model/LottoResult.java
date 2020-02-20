@@ -7,12 +7,17 @@ public enum LottoResult {
     FIVE_BONUS(5, 30000000),
     SIX(6, 2000000000);
 
-    protected final int prize;
+    private final int prize;
     private final int correct;
+    private int count = 0;
 
     LottoResult(int correct, int prize) {
         this.correct = correct;
         this.prize = prize;
+    }
+
+    public void setCount() {
+        count++;
     }
 
     public double prizeResult(int count) {
@@ -25,5 +30,9 @@ public enum LottoResult {
 
     public int getCorrect() {
         return correct;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

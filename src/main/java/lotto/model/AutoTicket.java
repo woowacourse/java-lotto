@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AutoNumber {
-    public static final int LOTTO_NUMBER_LENGTH = 6;
+public class AutoTicket {
+    private static final int LOTTO_NUMBER_LENGTH = 6;
     private List<Integer> autoNumber = new ArrayList<>();
 
-    public AutoNumber() {
+    public AutoTicket() {
         Collections.shuffle(LottoNumbers.getLottoNumbers());
         for (int i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
             autoNumber.add(LottoNumbers.getLottoNumbers().get(i));
@@ -17,11 +17,11 @@ public class AutoNumber {
         autoNumber.sort(Comparator.naturalOrder());
     }
 
-    public AutoNumber(List<Integer> input) {
+    public AutoTicket(List<Integer> input) {
         this.autoNumber = input;
     }
 
-    public List<Integer> getAutoNumber() {
+    public List<Integer> getAutoTicket() {
         return autoNumber;
     }
 }

@@ -1,22 +1,15 @@
 package lotto.model;
 
-import java.util.HashMap;
-
 public class Prize {
-    public static final String THREE = "3";
-    public static final String FOUR = "4";
-    public static final String FIVE = "5";
-    public static final String FIVE_BONUS = "5+";
-    public static final String SIX = "6";
 
     private static double prize = 0;
 
-    public static double sumPrize(HashMap<String, Integer> resultCount) {
-        prize += LottoResult.THREE.prizeResult(resultCount.get(THREE));
-        prize += LottoResult.FOUR.prizeResult(resultCount.get(FOUR));
-        prize += LottoResult.FIVE.prizeResult(resultCount.get(FIVE));
-        prize += LottoResult.FIVE_BONUS.prizeResult(resultCount.get(FIVE_BONUS));
-        prize += LottoResult.SIX.prizeResult(resultCount.get(SIX));
+    public static double sumPrize() {
+        prize += LottoResult.THREE.prizeResult(LottoResult.THREE.getCount());
+        prize += LottoResult.FOUR.prizeResult(LottoResult.FOUR.getCount());
+        prize += LottoResult.FIVE.prizeResult(LottoResult.FIVE.getCount());
+        prize += LottoResult.FIVE_BONUS.prizeResult(LottoResult.FIVE_BONUS.getCount());
+        prize += LottoResult.SIX.prizeResult(LottoResult.SIX.getCount());
         return prize;
     }
 }

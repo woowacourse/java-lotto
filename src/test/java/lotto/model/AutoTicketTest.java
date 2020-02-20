@@ -3,12 +3,12 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class AutoNumberTest {
+public class AutoTicketTest {
     @Test
     @DisplayName("AutoNumber 생성자 테스트")
     void AutoNumbers() {
-        AutoNumber an = new AutoNumber();
-        for(int i : an.getAutoNumber()) {
+        AutoTicket an = new AutoTicket();
+        for(int i : an.getAutoTicket()) {
             System.out.println(i);
         }
     }

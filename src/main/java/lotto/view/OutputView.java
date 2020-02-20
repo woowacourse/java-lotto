@@ -1,34 +1,32 @@
 package lotto.view;
 
-import lotto.model.AutoNumber;
+import lotto.model.AutoTicket;
 
 import java.util.List;
 
 public class OutputView {
 
-    public static final String INPUT_MESSAGE = "구입금액을 입력해 주세요.";
-    public static final String LOTTO_COUNT_MESSAGE = "개를 구입했습니다.";
-    public static final String INPUT_WIN_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    public static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
-    public static final String RESULT_MESSAGE = "당첨 통계\n---------";
-    public static final String CORRECT_MESSAGE = "개 일치 (";
-    public static final String PRIZE_MESSAGE = "원) - ";
-    public static final String COUNT_MESSAGE = "개";
-    public static final String FIVE_BONUS_CORRECT_RESULT_MESSAGE = "5개 일치, 보너스 볼 일치(30000000원) - ";
-    public static final String YIELD_MESSAGE = "총 수익률은 ";
-    public static final String YIELD_PERCENT_MESSAGE = "%입니다.";
+    private static final String INPUT_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구입했습니다.";
+    private static final String INPUT_WIN_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String RESULT_MESSAGE = "당첨 통계\n---------";
+    private static final String RESULT_DETAIL_MESSAGE = "%d개 일치 (%d원)- %d개";
+    private static final String RESULT_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
+    private static final String YIELD_MESSAGE = "총 수익률은 %d%%입니다.";
 
-    public static void printinput() {
+    public static void printInput() {
         System.out.println(INPUT_MESSAGE);
     }
 
-    public static void printLottoCount(int count) {
-        System.out.println(count + LOTTO_COUNT_MESSAGE);
+    public static void printHowManyTicketsPurchase(int count) {
+        System.out.printf(LOTTO_COUNT_MESSAGE, count);
+        System.out.println();
     }
 
-    public static void printAutoNumbers(List<AutoNumber> autoNumbers) {
-        for (AutoNumber autoNumber : autoNumbers) {
-            System.out.println(autoNumber.getAutoNumber());
+    public static void printAutoNumbers(List<AutoTicket> autoTickets) {
+        for (AutoTicket autoTicket : autoTickets) {
+            System.out.println(autoTicket.getAutoTicket());
         }
     }
 
@@ -44,15 +42,18 @@ public class OutputView {
         System.out.println(RESULT_MESSAGE);
     }
 
-    public static void printCorrectResult(int count, int correct, int prize) {
-        System.out.println(correct + CORRECT_MESSAGE + prize + PRIZE_MESSAGE + count + COUNT_MESSAGE);
+    public static void printCorrectResult(int correct, int prize, int count) {
+        System.out.printf(RESULT_DETAIL_MESSAGE, correct, prize, count);
+        System.out.println();
     }
 
-    public static void printBonusCorrectResult(int count) {
-        System.out.println(FIVE_BONUS_CORRECT_RESULT_MESSAGE + count + COUNT_MESSAGE);
+    public static void printBonusCorrectResult(int correct, int prize, int count) {
+        System.out.printf(RESULT_BONUS_MESSAGE, correct, prize, count);
+        System.out.println();
     }
 
     public static void printYield(int yield) {
-        System.out.println(YIELD_MESSAGE + yield + YIELD_PERCENT_MESSAGE);
+        System.out.printf(YIELD_MESSAGE, yield);
+        System.out.println();
     }
 }

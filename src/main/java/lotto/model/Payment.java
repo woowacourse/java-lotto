@@ -5,12 +5,13 @@ import lotto.exception.NotNumberException;
 import lotto.exception.OverRangeException;
 
 public class Payment {
-    public static final int MINIMUM_PAYMENT = 1000;
-    public static final int MAXINUM_PAYMENT = 100000;
-    public static final int PAYMENT_UNIT = 1000;
-    public static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하세요.";
-    public static final String OVER_RANGE_EXCEPTION_MESSAGE = "범위를 벗어났습니다.";
-    public static final String UNIT_EXCEPTION_MESSAGE = "천 단위로 입력하세요.";
+    private static final int MINIMUM_PAYMENT = 1000;
+    private static final int MAXINUM_PAYMENT = 100000;
+    private static final int PAYMENT_UNIT = 1000;
+    private static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하세요.";
+    private static final String OVER_RANGE_EXCEPTION_MESSAGE = "범위를 벗어났습니다.";
+    private static final String UNIT_EXCEPTION_MESSAGE = "천 단위로 입력하세요.";
+
     public static int payment = 0;
 
     public Payment(String input) {
