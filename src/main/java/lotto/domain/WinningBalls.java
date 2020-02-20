@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class WinningBalls {
@@ -7,7 +8,7 @@ public class WinningBalls {
     private final LottoBall hitBonusBall;
 
     public WinningBalls(List<LottoBall> winningBalls, int hitBonusBall) {
-        this.winningBalls = winningBalls;
+        this.winningBalls = Collections.unmodifiableList(winningBalls);
         this.hitBonusBall = LottoBallFactory.findByLottoBall(hitBonusBall);
     }
 
