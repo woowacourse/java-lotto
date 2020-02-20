@@ -34,4 +34,8 @@ public class PurchaseNumber {
     public int getPurchaseNumber() {
         return purchaseNumber;
     }
+
+    public int getPurchaseMoney() {
+        return purchaseNumber * 1000;
+    }
 }
