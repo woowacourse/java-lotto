@@ -10,14 +10,14 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {10, 1, 45})
     void 생성_테스트(int value) {
-        lottoNumber = new LottoNumber(value);
+        lottoNumber = LottoNumber.of(value);
         Assertions.assertThat(lottoNumber).hasFieldOrPropertyWithValue("number", value);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, -1, 46})
     void 예외처리_테스트(int value) {
-        Assertions.assertThatThrownBy(() -> lottoNumber = new LottoNumber(value))
+        Assertions.assertThatThrownBy(() -> lottoNumber = LottoNumber.of(value))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("1부터 45 사이의 숫자만 입력 가능합니다.");
     }
@@ -25,6 +25,6 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 3, 5})
     void 동일성_테스트(int value) {
-        Assertions.assertThat(new LottoNumber(value)).isEqualTo(new LottoNumber(value));
+        Assertions.assertThat(LottoNumber.of(value)).isEqualTo(LottoNumber.of(value));
     }
 }

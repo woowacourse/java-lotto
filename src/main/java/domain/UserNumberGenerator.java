@@ -10,7 +10,7 @@ public class UserNumberGenerator implements NumberGenerator{
 
     public void input(List<Integer> ints) {
         numbers = ints.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

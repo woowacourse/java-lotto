@@ -11,7 +11,7 @@ public class RandomNumberGenerator implements NumberGenerator {
 
     static {
         numbers = IntStream.range(1, 46)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
