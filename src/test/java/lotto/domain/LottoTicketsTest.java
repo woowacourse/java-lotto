@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTicketsTest {
@@ -28,11 +29,12 @@ class LottoTicketsTest {
     }
 
     @Test
+    @DisplayName("당첨 통계가 제대로 나오는지 확인하는 테스트")
     void result() {
         LottoTicket winningTicket = new LottoTicket(new String[] {"1", "2", "3", "4", "5", "6"});
-        Map<Integer, Integer> result = lottoTickets.matchResult(winningTicket, LottoNumber.SEVEN);
-        assertThat(result.get(1)).isEqualTo(2);
-        assertThat(result.get(-1)).isEqualTo(1);
-        assertThat(result.getOrDefault(5, 0)).isEqualTo(1);
+        Map<Rank, Integer> result = lottoTickets.matchResult(winningTicket, LottoNumber.SEVEN);
+        assertThat(result.get(Rank.BONUS)).isEqualTo(1);
+        assertThat(result.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
     }
+
 }
