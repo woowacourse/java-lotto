@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class BonusNumber {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
@@ -36,5 +38,10 @@ public class BonusNumber {
         if (bonus < MIN_NUMBER || MAX_NUMBER < bonus) {
             throw new RuntimeException(String.format("%d 이상 %d 이하의 숫자만 입력 가능합니다.", MIN_NUMBER, MAX_NUMBER));
         }
+    }
+
+    public boolean isIncluded(List<Integer> numbers) {
+        return numbers.stream()
+                .anyMatch(integer -> integer == bonus);
     }
 }

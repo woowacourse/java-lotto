@@ -13,11 +13,10 @@ public class WinningNumbers {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
-    private List<Integer> winningNumbers;
+    private final List<Integer> winningNumbers;
 
     public WinningNumbers(String winningNumbersInput) {
-        List<Integer> winningNumbers = getValidatedWinningNumbers(winningNumbersInput);
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = getValidatedWinningNumbers(winningNumbersInput);
     }
 
     private static void checkNoInput(String winningNumbersInput) {
@@ -88,4 +87,7 @@ public class WinningNumbers {
         }
     }
 
+    public List<Integer> getWinningNumbers() {
+        return this.winningNumbers;
+    }
 }
