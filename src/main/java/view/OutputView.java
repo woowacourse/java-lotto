@@ -1,14 +1,17 @@
 package view;
 
-import domain.lottonumber.LottoNumber;
-import domain.lottonumber.LottoNumbers;
-import domain.lottoresult.LottoRank;
-import domain.lottoresult.ResultCount;
+import domain.Money;
+import domain.lotto.LottoGame;
+import domain.lotto.LottoNumber;
+import domain.lotto.LottoNumbers;
+import domain.lotto.lottoresult.LottoRank;
+import domain.lotto.lottoresult.LottoResult;
+import domain.lotto.lottoresult.ResultCount;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
-
     private OutputView() {
         throw new AssertionError();
     }
@@ -25,7 +28,17 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printLottoNumbers(LottoNumbers lottoNumbers) {
+    public static void printLottoNumbersCount(Money money) {
+        System.out.println(money.countGames() + "개를 구매습니다.");
+    }
+
+    public static void printLottoGame(LottoGame lottogame) {
+        for (LottoNumbers lottoNumbers : lottogame.getLottoGame()) {
+            OutputView.printLottoNumbers(lottoNumbers);
+        }
+    }
+
+    private static void printLottoNumbers(LottoNumbers lottoNumbers) {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         sb.append(lottoNumbers.getLottoNumbers()
@@ -42,7 +55,7 @@ public class OutputView {
         System.out.println("--------");
     }
 
-    public static void printResult(LottoRank rank, ResultCount resultCount) {
+    public static void printRankResult(LottoRank rank, ResultCount resultCount) {
         StringBuilder sb = new StringBuilder();
         sb.append(rank.getHitCount());
         sb.append("개 일치 (");
@@ -51,6 +64,13 @@ public class OutputView {
         sb.append(resultCount.toString());
         sb.append("개");
         System.out.println(sb.toString());
+    }
+
+    public static void printLottoResult(LottoResult lottoResult) {
+        Map<LottoRank, ResultCount> result = lottoResult.getResult();
+        result.keySet().stream()
+                .filter(rank -> rank != LottoRank.NOTHING)
+                .forEach(lottoRank -> printRankResult(lottoRank, result.get(lottoRank)));
     }
 
     public static void printEarning(long rating) {

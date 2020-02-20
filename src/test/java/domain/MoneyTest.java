@@ -1,6 +1,7 @@
 package domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -35,6 +36,13 @@ public class MoneyTest {
     @CsvSource(value = {"100000,10000", "200000,20000", "1000,100", "700,70"})
     void 수익률_계산_확인(int input, int result) {
         Money money = new Money(1000);
-        Assertions.assertThat(money.calculateEarnings(input)).isEqualTo(result);
+        Assertions.assertThat(money.calculateEarningRate(input)).isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"100000,100", "200000,200", "1000,1"})
+    void 금액에_대한_게임수_계산_확인(int value, int expected) {
+        Money money = new Money(value);
+        Assertions.assertThat(money.countGames()).isEqualTo(expected);
     }
 }

@@ -1,16 +1,12 @@
-package domain.lottoresult;
+package domain.lotto.lottoresult;
 
 import java.util.Objects;
 
 public class ResultCount {
-    int count;
+    private long count;
 
-    public ResultCount() {
-        count = 0;
-    }
-
-    public void increase() {
-        count++;
+    public ResultCount(long count) {
+        this.count = count;
     }
 
     public long multiply(int operand) {
@@ -37,5 +33,9 @@ public class ResultCount {
     @Override
     public String toString() {
         return String.valueOf(count);
+    }
+
+    public static ResultCount sum(ResultCount count1, ResultCount count2) {
+        return new ResultCount(count1.count + count2.count);
     }
 }

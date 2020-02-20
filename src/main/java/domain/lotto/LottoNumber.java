@@ -1,4 +1,4 @@
-package domain.lottonumber;
+package domain.lotto;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,16 +22,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
+    public static LottoNumber of(int number) {
+        validateBound(number);
+        return cache.get(number);
+    }
+
     private static void validateBound(int number) {
         if (number < LOTTO_UNDER_BOUND || number > LOTTO_UPPER_BOUND) {
             throw new IllegalArgumentException(ERROR_BOUND_MESSAGE);
         }
     }
 
-    public static LottoNumber of(int number) {
-        validateBound(number);
-        return cache.get(number);
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,6 +1,6 @@
-package domain.lottonumber.generator;
+package domain.lotto.generator;
 
-import domain.lottonumber.LottoNumber;
+import domain.lotto.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,9 +10,13 @@ import java.util.stream.IntStream;
 
 public class RandomNumberGenerator implements NumberGenerator {
     private static final List<LottoNumber> numbers;
+    private static final int START_LOTTO_INCLUSIVE = 1;
+    private static final int END_LOTTO_EXCLUSIVE = 46;
+    private static final int START_INDEX = 0;
+    private static final int END_INDEX = 6;
 
     static {
-        numbers = IntStream.range(1, 46)
+        numbers = IntStream.range(START_LOTTO_INCLUSIVE, END_LOTTO_EXCLUSIVE)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }
@@ -20,6 +24,6 @@ public class RandomNumberGenerator implements NumberGenerator {
     @Override
     public List<LottoNumber> create() {
         Collections.shuffle(numbers);
-        return new ArrayList<>(numbers.subList(0, 6));
+        return new ArrayList<>(numbers.subList(START_INDEX, END_INDEX));
     }
 }

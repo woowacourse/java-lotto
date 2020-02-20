@@ -1,7 +1,7 @@
-package domain.lottoresult;
+package domain.lotto.lottoresult;
 
-import domain.lottonumber.LottoNumber;
-import domain.lottonumber.LottoNumbers;
+import domain.lotto.LottoNumber;
+import domain.lotto.LottoNumbers;
 
 import java.util.Objects;
 
@@ -32,7 +32,7 @@ public class LottoWinner {
     }
 
     public LottoRank createRank(LottoNumbers lottoNumbers) {
-        int result = this.lottoNumbers.calculateMatchNumber(lottoNumbers);
+        int result = lottoNumbers.calculateMatchNumber(this.lottoNumbers);
         return LottoRank.calculateRank(result, lottoNumbers.contains(bonus));
     }
 }
