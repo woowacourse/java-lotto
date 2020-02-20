@@ -11,32 +11,32 @@ public enum LottoRank {
 	FIFTH(3, 5_000),
 	MISS(0, 0);
 
-	private final long matchCount;
-	private final long winnings;
-	private final BiPredicate<Long, Boolean> predicate;
+	private final int matchCount;
+	private final int winnings;
+	private final BiPredicate<Integer, Boolean> predicate;
 
-	LottoRank(long matchCount, long winnings) {
+	LottoRank(int matchCount, int winnings) {
 		this(matchCount, winnings, (count, hasBonus) -> count == matchCount);
 	}
 
-	LottoRank(long matchCount, long winnings, BiPredicate<Long, Boolean> predicate) {
+	LottoRank(int matchCount, int winnings, BiPredicate<Integer, Boolean> predicate) {
 		this.matchCount = matchCount;
 		this.winnings = winnings;
 		this.predicate = predicate;
 	}
 
-	public static LottoRank of(long matchCount, boolean hasBonus) {
+	public static LottoRank of(int matchCount, boolean hasBonus) {
 		return Arrays.stream(values())
 				.filter(rank -> rank.predicate.test(matchCount, hasBonus))
 				.findFirst()
 				.orElse(MISS);
 	}
 
-	public long getWinnings() {
+	public int getWinnings() {
 		return winnings;
 	}
 
-	public long getMatchCount() {
+	public int getMatchCount() {
 		return matchCount;
 	}
 }

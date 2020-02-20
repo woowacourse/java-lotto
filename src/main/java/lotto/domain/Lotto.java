@@ -56,8 +56,8 @@ public class Lotto {
 		return lotto.contains(lottoNumber);
 	}
 
-	public long countOfMatch(Lotto that) {
-		return lotto.stream()
+	public int countOfMatch(Lotto that) {
+		return (int)lotto.stream()
 				.filter(that::contains)
 				.count();
 	}

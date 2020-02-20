@@ -22,7 +22,7 @@ public class WinningLotto {
 	}
 
 	public LottoRank match(Lotto lotto) {
-		long matchCount = lotto.countOfMatch(winningLotto);
+		int matchCount = lotto.countOfMatch(winningLotto);
 		boolean hasBonus = lotto.contains(bonus);
 		return LottoRank.of(matchCount, hasBonus);
 	}
