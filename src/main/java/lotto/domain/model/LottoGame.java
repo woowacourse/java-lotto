@@ -10,7 +10,6 @@ import lotto.domain.PurchaseMoney;
 import lotto.domain.WinningLotto;
 import lotto.domain.result.GameResultDto;
 import lotto.domain.result.Statistic;
-import lotto.exception.InvalidRankException;
 
 public class LottoGame {
 	private final Lottos lottos;
