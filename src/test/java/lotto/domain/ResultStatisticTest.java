@@ -36,7 +36,7 @@ public class ResultStatisticTest {
 				LottoNumber.SIX
 		);
 
-		winningLotto = (WinningLotto) LottoFactory.getLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers);
+		winningLotto = (WinningLotto) LottoFactory.createLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers);
 
 		List<LottoNumber> lottoNumbersFistPrize = Arrays.asList(
 				LottoNumber.ONE,
@@ -64,9 +64,9 @@ public class ResultStatisticTest {
 				LottoNumber.NINE
 		);
 
-		tempLottos.add(LottoFactory.getLottoManual(LottoType.PAID_LOTTO, lottoNumbersFistPrize));
-		tempLottos.add(LottoFactory.getLottoManual(LottoType.PAID_LOTTO, lottoNumbersForthPrize));
-		tempLottos.add(LottoFactory.getLottoManual(LottoType.PAID_LOTTO, lottoNumbersSixthPrize));
+		tempLottos.add(LottoFactory.createLottoManual(LottoType.PAID_LOTTO, lottoNumbersFistPrize));
+		tempLottos.add(LottoFactory.createLottoManual(LottoType.PAID_LOTTO, lottoNumbersForthPrize));
+		tempLottos.add(LottoFactory.createLottoManual(LottoType.PAID_LOTTO, lottoNumbersSixthPrize));
 		lottos = new Lottos(tempLottos);
 
 		bonusLottoNumber = new BonusLottoNumber(7, winningLotto);

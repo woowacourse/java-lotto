@@ -13,9 +13,10 @@ import java.util.stream.Collectors;
  */
 public class Lotto {
 	public static final int LOTTO_LENGTH = 6;
+
 	protected final List<LottoNumber> lottoNumbers;
 
-	public Lotto(List<LottoNumber> inputLottoNumbers) {
+	public Lotto(final List<LottoNumber> inputLottoNumbers) {
 		validateLottoNumbers(inputLottoNumbers);
 		this.lottoNumbers = inputLottoNumbers.stream()
 				.sorted(Comparator.comparing(LottoNumber::getLottoNumber))
@@ -48,7 +49,7 @@ public class Lotto {
 		}
 	}
 
-	public boolean isContain(LottoNumber lottoNumber) {
+	public boolean isContain(final LottoNumber lottoNumber) {
 		return lottoNumbers.stream()
 				.anyMatch(value -> value == lottoNumber);
 	}
@@ -56,6 +57,5 @@ public class Lotto {
 	public List<LottoNumber> getLottoNumbers() {
 		return this.lottoNumbers;
 	}
-
 }
 

@@ -15,13 +15,13 @@ import java.util.Objects;
 public class Lottos {
 	private final List<Lotto> lottos;
 
-	public Lottos(List<Lotto> inputLottos) {
+	public Lottos(final List<Lotto> inputLottos) {
 		Objects.requireNonNull(inputLottos, "입력이 null일 수 없습니다.");
 		validateEmptyInput(inputLottos);
 		this.lottos = Collections.unmodifiableList(inputLottos);
 	}
 
-	private void validateEmptyInput(List<Lotto> inputLottos) {
+	private void validateEmptyInput(final List<Lotto> inputLottos) {
 		if (inputLottos.isEmpty()) {
 			throw new IllegalArgumentException("로또는 한 장 이상 사야합니다.");
 		}

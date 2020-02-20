@@ -11,12 +11,12 @@ package lotto.domain;
 public class BonusLottoNumber {
 	LottoNumber bonusLottoNumber;
 
-	BonusLottoNumber(int inputBonusLottoNumber, WinningLotto winningLotto) {
+	BonusLottoNumber(final int inputBonusLottoNumber, final WinningLotto winningLotto) {
 		this.bonusLottoNumber = LottoNumber.of(inputBonusLottoNumber);
 		validateBonusLottoNumber(winningLotto);
 	}
 
-	private void validateBonusLottoNumber(WinningLotto winningLotto) {
+	private void validateBonusLottoNumber(final WinningLotto winningLotto) {
 		if (winningLotto.isContain(this.bonusLottoNumber)) {
 			throw new WrongLottoNumberException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
 		}

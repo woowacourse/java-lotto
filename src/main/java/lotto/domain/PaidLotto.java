@@ -12,12 +12,12 @@ import java.util.List;
  */
 public class PaidLotto extends Lotto {
 
-	public PaidLotto(List<LottoNumber> inputLottoNumbers) {
+	public PaidLotto(final List<LottoNumber> inputLottoNumbers) {
 		super(inputLottoNumbers);
 	}
 
 	public Rank getRank(final WinningLotto winningLotto, final BonusLottoNumber bonusLottoNumber) {
-		int numberOfContain = winningLotto.getHowManyContain(this);
+		int numberOfContain = winningLotto.calculateMatchCount(this);
 		boolean hasBonusLottoNumber = this.isContain(bonusLottoNumber.getBonusLottoNumber());
 
 		return Rank.getRank(numberOfContain, hasBonusLottoNumber);

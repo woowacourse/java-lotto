@@ -13,7 +13,7 @@ public class WrongLottoNumberException extends IllegalArgumentException {
 		super();
 	}
 
-	public WrongLottoNumberException(String message) {
+	public WrongLottoNumberException(final String message) {
 		super(message);
 	}
 }

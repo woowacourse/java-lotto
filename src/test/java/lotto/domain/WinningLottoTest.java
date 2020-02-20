@@ -43,7 +43,7 @@ public class WinningLottoTest {
 	}
 
 	@Test
-	void getHowManyContain_올바른_동작_확인() {
+	void calculateMatchCount_올바른_동작_확인() {
 		List<LottoNumber> lottoNumbers = new ArrayList<>(
 				Arrays.asList(
 						LottoNumber.ONE,
@@ -57,14 +57,14 @@ public class WinningLottoTest {
 
 		PaidLotto paidLotto = new PaidLotto(lottoNumbers);
 
-		assertThat(winningLotto.getHowManyContain(paidLotto)).isEqualTo(6);
+		assertThat(winningLotto.calculateMatchCount(paidLotto)).isEqualTo(6);
 	}
 
 	@ParameterizedTest
 	@NullSource
-	void getHowManyContain_매개변수_null_예외처리(PaidLotto nullLotto) {
+	void calculateMatchCount_매개변수_null_예외처리(PaidLotto nullLotto) {
 		assertThatThrownBy(() -> {
-			winningLotto.getHowManyContain(nullLotto);
+			winningLotto.calculateMatchCount(nullLotto);
 		}).isInstanceOf(NullPointerException.class)
 				.hasMessage("매개변수가 null 입니다.");
 	}

@@ -21,30 +21,32 @@ public enum Rank {
 	FIFTH(new ArrayList<Integer>(Collections.singletonList(3)), false, 5000),
 	SIXTH(new ArrayList<Integer>(Arrays.asList(0, 1, 2)), false, 0);
 
-	private List<Integer> winningNumbersCount;
-	private boolean hasBonusLottoNumber; // TODO: 마지막까지도 안쓰이면 지우
+	private static final int MATCH_COUNT_RELATED_TO_BONUS = 5;
+
+	private List<Integer> matchCounts;
+	private boolean hasBonus; // TODO: 마지막까지도 안쓰이면 지우기
 	private int reward;
 
-	Rank(List<Integer> winningNumbersCount, boolean hasBonusLottoNumber, final int reward) {
-		this.winningNumbersCount = winningNumbersCount;
-		this.hasBonusLottoNumber = hasBonusLottoNumber;
+	Rank(List<Integer> matchCounts, boolean hasBonus, final int reward) {
+		this.matchCounts = matchCounts;
+		this.hasBonus = hasBonus;
 		this.reward = reward;
 	}
 
-	public static Rank getRank(int numberOfContain, boolean hasBonusLottoNumber) {
-		if (numberOfContain != 5) {  // TODO MAgic number 없에기 -> 로또 넘버로 만ㄷ르어라 intfmf
- 			return getRankNotRelatedToBonusLottoNumber(numberOfContain);
+	public static Rank getRank(int matchCount, boolean hasBonus) {
+		if (matchCount != MATCH_COUNT_RELATED_TO_BONUS) {
+ 			return getRankNotRelatedToBonus(matchCount);
 		}
 
-		if (hasBonusLottoNumber) {
+		if (hasBonus) {
 			return Rank.SECOND;
 		}
 		return Rank.THIRD;
 	}
 
-	private static Rank getRankNotRelatedToBonusLottoNumber(int numberOfContain) {
+	private static Rank getRankNotRelatedToBonus(int matchCount) {
 		return Arrays.stream(Rank.values())
-				.filter(value -> value.winningNumbersCount.contains(numberOfContain))
+				.filter(value -> value.matchCounts.contains(matchCount))
 				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException("로또의 등수를 구할 수 없습니다."));
 	}
@@ -53,7 +55,7 @@ public enum Rank {
 		return this.reward;
 	}
 
-	public List<Integer> getWinningNumbersCount() {
-		return this.winningNumbersCount;
+	public List<Integer> getMatchCounts() {
+		return this.matchCounts;
 	}
 }

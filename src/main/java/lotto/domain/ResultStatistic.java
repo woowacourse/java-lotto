@@ -17,11 +17,15 @@ public class ResultStatistic {
 
 	private Map<Rank, Integer> results;
 
-	private ResultStatistic(Map<Rank, Integer> input) {
+	private ResultStatistic(final Map<Rank, Integer> input) {
 		results = input;
 	}
 
-	public static ResultStatistic calculate(Lottos lottos, WinningLotto winningLotto, BonusLottoNumber bonus){
+	public static ResultStatistic calculate(
+			final Lottos lottos,
+			final WinningLotto winningLotto,
+			final BonusLottoNumber bonus
+	) {
 		Map<Rank, Integer> results = createInitialResult();
 
 		for (Lotto lotto : lottos.getLottos()) {

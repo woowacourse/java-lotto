@@ -12,11 +12,11 @@ import java.util.Objects;
  * 날짜 : 2020/02/19
  */
 public class WinningLotto extends Lotto {
-	public WinningLotto(List<LottoNumber> inputLottoNumbers) {
+	public WinningLotto(final List<LottoNumber> inputLottoNumbers) {
 		super(inputLottoNumbers);
 	}
 
-	public int getHowManyContain(PaidLotto paidLotto) { // TODO get은 로직이 들어가며 ㄴ안된다 ->그래서 cal or match로하자
+	public int calculateMatchCount(final PaidLotto paidLotto) {
 		Objects.requireNonNull(paidLotto, "매개변수가 null 입니다.");
 		return (int) paidLotto.getLottoNumbers()
 				.stream()

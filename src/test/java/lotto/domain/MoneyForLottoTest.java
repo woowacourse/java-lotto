@@ -38,7 +38,7 @@ public class MoneyForLottoTest {
 	}
 
 	@Test
-	void getAmountOfLottos_올바른_동작_확인() {
-		assertThat(new MoneyForLotto(5253).getAmountOfLottos()).isEqualTo(5);
+	void calculateAmountOfLottos_올바른_동작_확인() {
+		assertThat(new MoneyForLotto(5253).calculateAmountOfLottos()).isEqualTo(5);
 	}
 }
