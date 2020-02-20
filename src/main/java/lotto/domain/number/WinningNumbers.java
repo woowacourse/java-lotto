@@ -29,4 +29,8 @@ public class WinningNumbers extends LottoRound {
                 .filter(lottoNumbers::isHave)
                 .count();
     }
+
+    public boolean isCorrectBonusNumber(LottoNumbers lottoNumb2ers) {
+        return lottoNumb2ers.isHave(bonusBall);
+    }
 }

@@ -80,4 +80,64 @@ public class WinningNumbersTest {
         // then
         assertThat(correctSize).isEqualTo(3);
     }
+
+    @Test
+    void 로또번호에_보너스번호가_맞는지_확인() {
+        // given
+        List<LottoNumber> winningLottoNumbers = new ArrayList<>();
+        winningLottoNumbers.add(LottoNumber.of(3));
+        winningLottoNumbers.add(LottoNumber.of(4));
+        winningLottoNumbers.add(LottoNumber.of(5));
+        winningLottoNumbers.add(LottoNumber.of(6));
+        winningLottoNumbers.add(LottoNumber.of(7));
+        winningLottoNumbers.add(LottoNumber.of(8));
+
+        LottoNumber bonusNumber = LottoNumber.of(45);
+        WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
+
+        List<LottoNumber> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(LottoNumber.of(3));
+        lottoNumbersList.add(LottoNumber.of(4));
+        lottoNumbersList.add(LottoNumber.of(5));
+        lottoNumbersList.add(LottoNumber.of(10));
+        lottoNumbersList.add(LottoNumber.of(11));
+        lottoNumbersList.add(LottoNumber.of(45));
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumbersList);
+
+        // when
+        boolean result = winningNumbers.isCorrectBonusNumber(lottoNumbers);
+
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void 로또번호에_보너스번호가_없는_경우_확인() {
+        // given
+        List<LottoNumber> winningLottoNumbers = new ArrayList<>();
+        winningLottoNumbers.add(LottoNumber.of(3));
+        winningLottoNumbers.add(LottoNumber.of(4));
+        winningLottoNumbers.add(LottoNumber.of(5));
+        winningLottoNumbers.add(LottoNumber.of(6));
+        winningLottoNumbers.add(LottoNumber.of(7));
+        winningLottoNumbers.add(LottoNumber.of(8));
+
+        LottoNumber bonusNumber = LottoNumber.of(45);
+        WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
+
+        List<LottoNumber> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(LottoNumber.of(3));
+        lottoNumbersList.add(LottoNumber.of(4));
+        lottoNumbersList.add(LottoNumber.of(5));
+        lottoNumbersList.add(LottoNumber.of(10));
+        lottoNumbersList.add(LottoNumber.of(11));
+        lottoNumbersList.add(LottoNumber.of(13));
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumbersList);
+
+        // when
+        boolean result = winningNumbers.isCorrectBonusNumber(lottoNumbers);
+
+        // then
+        assertThat(result).isFalse();
+    }
 }
