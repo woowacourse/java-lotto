@@ -25,11 +25,22 @@ class LottoTest {
     void 당첨숫자와_일치하는_로또번호_갯수_반환() {
         //given
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 40));
         Lotto lotto = new Lotto(lottoNumbers);
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 40));
         //when
         int matchSize = lotto.matchWinningNumbers(winningNumbers);
         //then
         assertThat(matchSize).isEqualTo(5);
+    }
+
+    @Test
+    void 당첨숫자와_보너스볼_일치() {
+        //given
+        int bonusBall = 1;
+        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(bonusBall, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        //when & then
+        assertThat(lotto.matchBonusBall(bonusBall)).isTrue();
     }
 }
