@@ -1,10 +1,9 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 
 class Result {
-    private Map<Rank, Integer> winningResults = new HashMap<>();
+    private Map<Rank, Integer> winningResults;
 
     Result(Map<Rank, Integer> winningResults) {
         this.winningResults = winningResults;
