@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.exception.InvalidWinningLottoException;
+
 public class WinningLottoTest {
 	private Lotto lotto;
 
@@ -21,10 +23,10 @@ public class WinningLottoTest {
 	}
 
 	@Test
-	@DisplayName("로또 번호와 보너스가 중복될 경우")
-	void constructor_로또_번호와_보너스가_중복() {
-		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(
-				() -> new WinningLotto(lotto, LottoNumber.of(45)));
+	@DisplayName("로또 번호와 보너스가 겹칠 경우")
+	void constructor_로또_번호와_겹칠_경우() {
+		assertThatExceptionOfType(InvalidWinningLottoException.class).isThrownBy(
+				() -> new WinningLotto(lotto, LottoNumber.of(45))).withMessage("로또 번호와 보너스가 겹치면 안됩니다.");
 	}
 
 	@Test

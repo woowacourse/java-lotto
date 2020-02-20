@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.InvalidWinningLottoException;
+
 public class WinningLotto {
 	private final Lotto winningLotto;
 	private final LottoNumber bonus;
@@ -12,7 +14,7 @@ public class WinningLotto {
 
 	private void validate(Lotto winningLotto, LottoNumber bonus) {
 		if (winningLotto.contains(bonus)) {
-			throw new IllegalArgumentException("로또 번호와 보너스가 중복되면 안됩니다.");
+			throw new InvalidWinningLottoException("로또 번호와 보너스가 겹치면 안됩니다.");
 		}
 	}
 
