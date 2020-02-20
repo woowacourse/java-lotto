@@ -7,6 +7,12 @@ import java.util.stream.Collectors;
 
 public class OutputView {
     private static final String PURCHASE_NUMBER_POSTFIX = "개를 구입했습니다.";
+    public static final String PRINT_EARNING_RATE_FORMAT = "총 수익률은 %d%%입니다.\n";
+    public static final String PRINT_CORRECT_LOTTO_NUMBER_FORMAT = "%d개 일치";
+    public static final String PRINT_BONUS_CORRECT_MESSAGE = ", 보너스 볼 일치";
+    public static final String PRINT_RANK_INFO_FORMAT = " (%d원) - %d개 \n";
+    public static final String PRINT_WINNING_STATISTICS_MESSAGE = "당첨 통계";
+    public static final String PRINT_DIVISION_LINE = "---------";
 
     public static void printPurchaseNumber(PurchaseAmount purchaseAmount) {
         System.out.println(purchaseAmount.getPurchaseNumber() + PURCHASE_NUMBER_POSTFIX);
@@ -30,19 +36,19 @@ public class OutputView {
     }
 
     public static void printResult(PurchaseAmount purchaseAmount) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(PRINT_WINNING_STATISTICS_MESSAGE);
+        System.out.println(PRINT_DIVISION_LINE);
         for (Rank rank : Rank.values()) {
             printRankResult(rank);
         }
-        System.out.println("총 수익률은 " + ResultCalculator.calculateEarningRate(purchaseAmount) + "%입니다.");
+        System.out.printf(PRINT_EARNING_RATE_FORMAT, ResultCalculator.calculateEarningRate(purchaseAmount));
     }
 
     private static void printRankResult(Rank rank) {
-        System.out.printf("%d개 일치", rank.correctLottoNumber);
-        if (rank.isCorrectBonusNumber == true) {
-            System.out.printf(", 보너스 볼 일치");
+        System.out.printf(PRINT_CORRECT_LOTTO_NUMBER_FORMAT, rank.correctLottoNumber);
+        if (rank.isCorrectBonusNumber) {
+            System.out.print(PRINT_BONUS_CORRECT_MESSAGE);
         }
-        System.out.printf(" (%d원) - %d개 \n", rank.prize, rank.count);
+        System.out.printf(PRINT_RANK_INFO_FORMAT, rank.prize, rank.count);
     }
 }
