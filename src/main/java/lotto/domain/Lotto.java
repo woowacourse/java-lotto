@@ -21,13 +21,13 @@ public class Lotto {
     static void validateDuplication(List<Integer> numbers) {
         LinkedHashSet<Integer> duplicationNumbers = new LinkedHashSet<>(numbers);
         if (duplicationNumbers.size() != numbers.size()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
 
     static void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호의 개수가 올바르지 않습니다.");
         }
     }
 
@@ -44,5 +44,4 @@ public class Lotto {
     public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
-
 }
