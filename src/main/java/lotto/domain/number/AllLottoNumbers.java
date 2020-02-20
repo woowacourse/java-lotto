@@ -12,13 +12,14 @@ public class AllLottoNumbers {
     private final List<LottoNumbers> allLottoNumbers;
 
     public AllLottoNumbers(List<LottoNumbers> allLottoNumbers) {
-        validateEmptyOrNull(allLottoNumbers);
+        Objects.requireNonNull(allLottoNumbers);
+        validateEmpty(allLottoNumbers);
         this.allLottoNumbers = allLottoNumbers;
     }
 
-    private void validateEmptyOrNull(List<LottoNumbers> allLottoNumbers) {
-        if (Objects.isNull(allLottoNumbers) || allLottoNumbers.isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_OR_NULL_INPUT_EXCEPTION_MESSAGE);
+    private void validateEmpty(List<LottoNumbers> allLottoNumbers) {
+        if (allLottoNumbers.isEmpty()) {
+            throw new IllegalStateException(EMPTY_OR_NULL_INPUT_EXCEPTION_MESSAGE);
         }
     }
 
