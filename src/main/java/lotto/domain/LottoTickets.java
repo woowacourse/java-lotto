@@ -48,8 +48,6 @@ public class LottoTickets {
         result.put(Rank.SECOND, result.getOrDefault(Rank.SECOND, 0) - 1);
     }
 
-    // TODO: 수익률 계산 메소드
-
     @Override
     public String toString() {
         return lottoTickets.stream()

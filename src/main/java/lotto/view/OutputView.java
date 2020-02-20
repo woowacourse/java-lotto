@@ -47,7 +47,7 @@ public class OutputView {
         return rank.getMatchCount() + "개 일치 (" + rank.getPrize() + "원)- " + results.getOrDefault(rank, 0) + "개\n";
     }
 
-    public static void profitRate(int rate) {
+    public static void profitRate(String rate) {
         System.out.println("총 수익률은 " + rate + "%입니다.");
     }
 }

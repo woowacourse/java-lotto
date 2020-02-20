@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Accountant;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -9,6 +10,7 @@ import lotto.view.OutputView;
 
 public class LottoApplication {
     public static void main(String[] args) {
+        // TODO : 10줄 이내로 변경
         OutputView.inputMoneyInstruction();
         Money money = new Money(InputView.getInput());
         OutputView.ticketAmountInstruction(money);
@@ -22,9 +24,7 @@ public class LottoApplication {
         winningLotto.validateBonusNumber(bonusNumber);
 
         OutputView.prizeStatistics(lottoTickets.matchResult(winningLotto, bonusNumber));
-
-        // TODO: 수익률 계산
-        OutputView.profitRate(1000);
+        OutputView.profitRate(Accountant.calculate(money));
 
     }
 }
