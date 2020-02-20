@@ -1,28 +1,30 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class TestNumberGenerator implements NumberGenerator{
-    private final List<Integer> numbers;
+public class TestNumberGenerator implements NumberGenerator {
+    private final List<LottoNumber> numbers;
 
-    public TestNumberGenerator(){
-        numbers = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            numbers.add(i);
-        }
+    public TestNumberGenerator() {
+        numbers = IntStream.range(1, 7)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public TestNumberGenerator(List<Integer> values){
-        if(Objects.isNull(values)){
+    public TestNumberGenerator(List<Integer> values) {
+        if (Objects.isNull(values)) {
             throw new IllegalArgumentException("null값은 입력할 수 없습니다.");
         }
-        this.numbers = values;
+        this.numbers = values.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<Integer> create() {
+    public List<LottoNumber> create() {
         return numbers;
     }
 }

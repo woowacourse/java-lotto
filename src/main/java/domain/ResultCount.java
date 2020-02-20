@@ -13,6 +13,10 @@ public class ResultCount {
         count++;
     }
 
+    public long multiply(int operand) {
+        return (long) count * operand;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -28,5 +32,10 @@ public class ResultCount {
     @Override
     public int hashCode() {
         return Objects.hash(count);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(count);
     }
 }

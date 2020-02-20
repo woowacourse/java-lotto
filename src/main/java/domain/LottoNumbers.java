@@ -16,6 +16,7 @@ public class LottoNumbers {
         validateSize(lottoNumbers);
         validateDuplication(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers.sort(null);
     }
 
     private void validateDuplication(List<LottoNumber> lottoNumbers) {
@@ -44,5 +45,9 @@ public class LottoNumbers {
         return (int) lottoNumbers.stream()
                 .filter(comparedLottoNumbers::contains)
                 .count();
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

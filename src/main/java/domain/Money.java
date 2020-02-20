@@ -25,7 +25,11 @@ public class Money {
         }
     }
 
-    public int calculateEarnings(int earningMoney) {
+    public long calculateEarnings(long earningMoney) {
         return 100 * earningMoney / money;
+    }
+
+    public int calculateGames(){
+        return money / LOTTO_PRICE;
     }
 }

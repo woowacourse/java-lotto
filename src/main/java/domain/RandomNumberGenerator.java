@@ -3,19 +3,21 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RandomNumberGenerator implements NumberGenerator {
-    private static final List<Integer> numbers = new ArrayList<>();
+    private static final List<LottoNumber> numbers;
 
     static {
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
-        }
+        numbers = IntStream.range(1, 46)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<Integer> create() {
+    public List<LottoNumber> create() {
         Collections.shuffle(numbers);
-        return numbers.subList(0,6);
+        return new ArrayList<>(numbers.subList(0,6));
     }
 }

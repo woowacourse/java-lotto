@@ -31,4 +31,11 @@ public class ResultCountTest {
         resultCount2.add();
         Assertions.assertThat(resultCount1).isEqualTo(resultCount2);
     }
+
+    @Test
+    void rank별_당첨금액_확인() {
+        ResultCount resultCount = new ResultCount();
+        resultCount.add();
+        Assertions.assertThat(resultCount.multiply(5_000)).isEqualTo(5_000);
+    }
 }
