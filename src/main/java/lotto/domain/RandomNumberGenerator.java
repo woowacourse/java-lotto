@@ -6,24 +6,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class RandomNumberGenerator {
-    private final List<LottoNumberGroup> lottoNumberPool = new LinkedList<>();
+    public static List<Integer> generateNumbers() {
+        List<Integer> lottoNumberPool = generateNumberPool();
+        List<Integer> randomNumbers = new ArrayList<>();
+        for (int i = 0; i < Lotto.LOTTO_NUMBER_AMOUNT; i++) {
+            randomNumbers.add(lottoNumberPool.remove(lottoNumberPool.size() - 1));
+        }
+        Collections.sort(randomNumbers);
+        return randomNumbers;
+    }
 
-    public RandomNumberGenerator() {
-        for (LottoNumberGroup lottoNumber : LottoNumberGroup.values()) {
-            lottoNumberPool.add(lottoNumber);
+    private static List<Integer> generateNumberPool() {
+        List<Integer> lottoNumberPool = new LinkedList<>();
+        for (int i = 1; i <= 45; i++) {
+            lottoNumberPool.add(i);
         }
         Collections.shuffle(lottoNumberPool);
-    }
-
-    public LottoNumberGroup generate() {
-        return lottoNumberPool.remove(0);
-    }
-
-    public List<LottoNumberGroup> generateNumbers() {
-        List<LottoNumberGroup> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < LottoNumbers.LOTTO_NUMBER_AMOUNT; i++) {
-            randomNumbers.add(generate());
-        }
-        return randomNumbers;
+        return lottoNumberPool;
     }
 }
