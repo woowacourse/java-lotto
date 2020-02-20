@@ -58,12 +58,19 @@ public class WinningNumber {
 	}
 
 	private void validateBonusNumber(int bonusNumber) {
-		validateDuplicateBonus(bonusNumber);
+		validateBonusDuplicate(bonusNumber);
+		validateBonusRange(bonusNumber);
 	}
 
-	private void validateDuplicateBonus(int bonusNumber) {
+	private void validateBonusDuplicate(int bonusNumber) {
 		if (winningNumber.stream().anyMatch(number -> number == bonusNumber)) {
 			throw new IllegalArgumentException("중복된 보너스 번호가 있습니다.");
+		}
+	}
+
+	private void validateBonusRange(int bonusNumber) {
+		if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
+			throw new IllegalArgumentException("보너스 번호가 범위를 벗어날 수 없습니다.");
 		}
 	}
 }
