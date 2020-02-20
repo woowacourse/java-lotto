@@ -40,6 +40,10 @@ public class LottoTicket {
         }
     }
 
+    public boolean hasNumber(int number) {
+        return this.lottoTicket.contains(number);
+    }
+
     public List<Integer> getLottoTicket() {
         return this.lottoTicket;
     }

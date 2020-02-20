@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbersTest {
-
     @DisplayName("셔플 기능 테스트")
     @Test
     public void shuffleLottoNumbersTest() {

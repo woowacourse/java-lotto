@@ -14,7 +14,6 @@ public class WinningLottoTicket {
     public WinningLottoTicket(String input) {
         validateNull(input);
         List<Integer> winningTicket = new ArrayList<>();
-
         addTicketNumber(winningTicket, input);
         this.winningTicket = new LottoTicket(winningTicket);
     }
@@ -33,13 +32,13 @@ public class WinningLottoTicket {
 
     private void validateNull(String input) {
         if (input == null) {
-            throw new IllegalArgumentException("input값이 null 입니다.");
+            throw new IllegalArgumentException("입력값이 null 입니다.");
         }
     }
 
     private void validateEmpty(String input) {
         if (StringUtils.isBlank(input)) {
-            throw new IllegalArgumentException("input값이 공백입니다.");
+            throw new IllegalArgumentException("입력값이 공백입니다.");
         }
     }
 
@@ -47,11 +46,19 @@ public class WinningLottoTicket {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("input값이 숫자가 아닙니다.");
+            throw new IllegalArgumentException("입력값이 숫자가 아닙니다.");
         }
     }
 
     public void initializeBonusBall(String input) {
         this.bonusBall = new BonusBall(this.winningTicket.getLottoTicket(), input);
+    }
+
+    public List<Integer> getWinningLottoTicket() {
+        return this.winningTicket.getLottoTicket();
+    }
+
+    public int getBonusNumber() {
+        return this.bonusBall.getBonusNumber();
     }
 }
