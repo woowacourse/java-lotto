@@ -15,6 +15,7 @@ public class LottoRound {
     public LottoRound(List<LottoNumber> randomNumbers) {
         Objects.requireNonNull(randomNumbers);
         validateSize(randomNumbers);
+        Collections.sort(randomNumbers);
         this.lottoNumbers = randomNumbers;
     }
 
