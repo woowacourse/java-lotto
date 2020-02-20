@@ -54,7 +54,7 @@ public class Lotto {
 
 	public Rank compare(Lotto winningLotto, LottoNumber bonusNumber) {
 		int count = (int)this.numbers.stream()
-			.filter(number -> winningLotto.numbers.contains(number))
+			.filter(winningLotto.numbers::contains)
 			.count();
 
 		if (count == FIVE && this.numbers.contains(bonusNumber)) {

@@ -19,7 +19,6 @@ public class Main {
 
 			WinningNumbers winningNumbers = new WinningNumbers(InputView.inputSixNumbers(),
 				InputView.inputBonusNumber());
-
 			List<Rank> ranks = winningNumbers.compareLottos(lottos);
 
 			OutputView.printResult(ranks);
