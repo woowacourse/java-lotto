@@ -4,15 +4,15 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Lottos implements Iterable<Lotto>{
+public class Lottos implements Iterable<Lotto> {
 	private final List<Lotto> lottos;
 
 	public Lottos(List<Lotto> lottos) {
 		this.lottos = Collections.unmodifiableList(lottos);
 	}
 
-	public boolean isRightSize(int size) {
-		return lottos.size() == size;
+	public boolean isSameCount(int count) {
+		return lottos.size() == count;
 	}
 
 	@Override

@@ -14,7 +14,7 @@ class BallTest {
 	@ValueSource(ints = {0, 46})
 	void getBallOutOfRange(int number) {
 		assertThatThrownBy(() -> Ball.of(number))
-		.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("볼 비교")

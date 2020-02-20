@@ -18,6 +18,6 @@ public class LottosFactoryTest {
 		LottosFactory lottosFactory = new LottosFactory(lottoFactory);
 
 		Lottos lottos = lottosFactory.createLottosByCount(new LottoCount(5));
-		assertThat(lottos.isRightSize(5)).isTrue();
+		assertThat(lottos.isSameCount(5)).isTrue();
 	}
 }

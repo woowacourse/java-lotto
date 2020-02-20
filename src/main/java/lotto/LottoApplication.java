@@ -14,22 +14,37 @@ import lotto.view.OutputView;
 
 public class LottoApplication {
 	public static void main(String[] args) {
-		int inputMoney = InputView.inputMoney();
-		Money money = new Money(inputMoney);
-		LottosFactory lottosFactory = new LottosFactory(new RandomLottoFactory());
+		LottoCount count = getCountByMoney();
+		OutputView.printLottoCount(count);
 
-		LottoCount count = money.getCount();
+		LottosFactory lottosFactory = new LottosFactory(new RandomLottoFactory());
 		Lottos lottos = lottosFactory.createLottosByCount(count);
-		OutputView.printLottoCount(lottos.getCount());
 		OutputView.printLottos(lottos);
 
-		String rawWinningLotto = InputView.inputWinningLotto();
-		int rawWinningBall = InputView.inputWinningBonusBall();
-
-		Lotto lotto = Lotto.of(rawWinningLotto);
-
-		WinningLotto winningLotto = new WinningLotto(lotto, Ball.of(rawWinningBall));
+		WinningLotto winningLotto = getWinningLotto();
 		TotalResult result = winningLotto.getResult(lottos);
 		OutputView.printStatistics(result);
+	}
+
+	private static LottoCount getCountByMoney() {
+		try {
+			int inputMoney = InputView.inputMoney();
+			Money money = new Money(inputMoney);
+			return money.getCount();
+		} catch (RuntimeException re) {
+			OutputView.printExceptionMessage(re.getMessage());
+			return getCountByMoney();
+		}
+	}
+
+	private static WinningLotto getWinningLotto() {
+		try {
+			Lotto winningLotto = Lotto.of(InputView.inputWinningLotto());
+			Ball bonusBall = Ball.of(InputView.inputWinningBonusBall());
+			return new WinningLotto(winningLotto, bonusBall);
+		} catch (RuntimeException re) {
+			OutputView.printExceptionMessage(re.getMessage());
+			return getWinningLotto();
+		}
 	}
 }

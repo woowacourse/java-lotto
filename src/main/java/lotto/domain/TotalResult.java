@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Map;
 
 public class TotalResult {
+	private static final int PERCENTAGE = 100;
+
 	private final LottoResult lottoResult;
 	private final LottoCount count;
 
@@ -12,7 +14,9 @@ public class TotalResult {
 	}
 
 	public long getProfitRate() {
-		return lottoResult.calculateTotalPrize() * 100 / Money.getBuyMoney(count);
+		long totalPrize = lottoResult.calculateTotalPrize();
+		int buyMoney = Money.getBuyMoney(count);
+		return totalPrize * PERCENTAGE / buyMoney;
 	}
 
 	public Map<LottoRank, Integer> getLottoResult() {
