@@ -11,7 +11,7 @@ package lotto.domain;
 public class BonusLottoNumber {
 	LottoNumber bonusLottoNumber;
 
-	BonusLottoNumber(final int inputBonusLottoNumber, final WinningLotto winningLotto) {
+	public BonusLottoNumber(final int inputBonusLottoNumber, final WinningLotto winningLotto) {
 		this.bonusLottoNumber = LottoNumber.of(inputBonusLottoNumber);
 		validateBonusLottoNumber(winningLotto);
 	}
