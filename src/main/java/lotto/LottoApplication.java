@@ -24,5 +24,10 @@ public class LottoApplication {
 
         String bonusNumberInput = InputView.requestBonusNumberInput();
         BonusNumber bonusNumber = new BonusNumber(bonusNumberInput);
+
+        Map<MatchResult, Integer> matchResults = lottos.createMatchResults(winningNumbers, bonusNumber);
+        LottoResults lottoResults = new LottoResults(matchResults);
+
+        OutputView.printLottoResult(lottoResults, purchasePrice);
     }
 }
