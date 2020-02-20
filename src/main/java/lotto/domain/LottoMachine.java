@@ -31,6 +31,7 @@ public class LottoMachine {
 		Collections.shuffle(lottoBalls);
 		return lottoBalls.stream()
 			.limit(6)
+			.sorted()
 			.collect(Collectors.toList());
 	}
 }
