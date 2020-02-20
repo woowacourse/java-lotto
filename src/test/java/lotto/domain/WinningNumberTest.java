@@ -20,16 +20,29 @@ public class WinningNumberTest {
 			.hasMessageContaining("널이나 빈 값");
 	}
 
-	static Stream<Arguments> generateInput_번호갯수() {
-		return Stream.of(Arguments.of(Arrays.asList("1", "2", "3", "4", "5")),
-			Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6", "7")));
-	}
-
 	@ParameterizedTest
 	@MethodSource("generateInput_번호갯수")
 	void 번호_갯수가_틀린_경우(List<String> value) {
 		assertThatThrownBy(() -> new WinningNumber(value, 21))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("개여야 합니다");
+	}
+
+	static Stream<Arguments> generateInput_번호갯수() {
+		return Stream.of(Arguments.of(Arrays.asList("1", "2", "3", "4", "5")),
+			Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6", "7")));
+	}
+
+	static Stream<Arguments> generateInput_중복번호() {
+		return Stream.of(Arguments.of(Arrays.asList("1", "2", "3", "3", "4", "5")),
+			Arguments.of(Arrays.asList("1", "4", "7", "13", "13", "21")));
+	}
+
+	@ParameterizedTest
+	@MethodSource("generateInput_중복번호")
+	void 중복_번호기_있는_경우(List<String> value) {
+		assertThatThrownBy(() -> new WinningNumber(value, 34))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("중복");
 	}
 }
