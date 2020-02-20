@@ -1,4 +1,4 @@
-package domain;
+package domain.lottoresult;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class LottoResult {
 
     public void add(LottoRank lottoRank) {
         validateNull(lottoRank);
-        result.get(lottoRank).add();
+        result.get(lottoRank).increase();
     }
 
     public ResultCount get(LottoRank lottoRank) {

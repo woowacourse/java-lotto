@@ -1,10 +1,9 @@
 package view;
 
-import com.sun.org.apache.xpath.internal.operations.String;
-import domain.LottoNumber;
-import domain.LottoNumbers;
-import domain.LottoRank;
-import domain.ResultCount;
+import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumbers;
+import domain.lottoresult.LottoRank;
+import domain.lottoresult.ResultCount;
 
 import java.util.stream.Collectors;
 

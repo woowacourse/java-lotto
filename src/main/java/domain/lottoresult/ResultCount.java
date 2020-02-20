@@ -1,4 +1,4 @@
-package domain;
+package domain.lottoresult;
 
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ public class ResultCount {
         count = 0;
     }
 
-    public void add() {
+    public void increase() {
         count++;
     }
 

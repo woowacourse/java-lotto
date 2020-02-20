@@ -1,6 +1,13 @@
 package controller;
 
 import domain.*;
+import domain.lottonumber.*;
+import domain.lottonumber.generator.NumberGenerator;
+import domain.lottonumber.generator.RandomNumberGenerator;
+import domain.lottonumber.generator.UserNumberGenerator;
+import domain.lottoresult.LottoRank;
+import domain.lottoresult.LottoResult;
+import domain.lottoresult.LottoWinner;
 import view.InputView;
 import view.OutputView;
 
@@ -8,29 +15,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
-    Money money;
-    List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    List<LottoNumbers> lottoGame = new ArrayList<>();
     LottoWinner lottoWinner;
     LottoResult lottoResult = new LottoResult();
 
     public void run() {
-        money = new Money(InputView.inputMoney());
-        int repeat = money.calculateGames();
-        NumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-        for (int i = 0; i < repeat; i++) {
-            LottoNumbers lottoNumberss = LottoNumbersFactory.createLottoNumbers(randomNumberGenerator);
-            OutputView.printLottoNumbers(lottoNumberss);
-            lottoNumbers.add(lottoNumberss);
-        }
-        UserNumberGenerator userNumberGenerator = new UserNumberGenerator();
-        userNumberGenerator.input(InputView.inputWinnerNumbers());
-        LottoNumbers winnerNumbers = LottoNumbersFactory.createLottoNumbers(userNumberGenerator);
-        LottoNumber bonus = LottoNumber.of(InputView.inputBonusNumber());
+        Money money = new Money(InputView.inputMoney());
+        makeLottoNumbers(money.calculateGames());
+        makeWinnerNumbers();
+        makeResult();
+        printResult(money);
+    }
 
-        lottoWinner = new LottoWinner(winnerNumbers, bonus);
-        for (LottoNumbers lotto : lottoNumbers) {
+    private void makeResult() {
+        for (LottoNumbers lotto : lottoGame) {
             lottoResult.add(lottoWinner.createRank(lotto));
         }
+    }
+
+    private void printResult(Money money) {
         long earning = 0;
         OutputView.printResultTitle();
         for (LottoRank rank : LottoRank.values()) {
@@ -41,5 +44,23 @@ public class LottoController {
             OutputView.printResult(rank, lottoResult.get(rank));
         }
         OutputView.printEarning(money.calculateEarnings(earning));
+    }
+
+    private void makeWinnerNumbers() {
+        UserNumberGenerator userNumberGenerator = new UserNumberGenerator();
+        userNumberGenerator.inputNumbers(InputView.inputWinnerNumbers());
+        LottoNumbers winnerNumbers = LottoNumbersFactory.createLottoNumbers(userNumberGenerator);
+        LottoNumber bonus = LottoNumber.of(InputView.inputBonusNumber());
+
+        lottoWinner = new LottoWinner(winnerNumbers, bonus);
+    }
+
+    private void makeLottoNumbers(int repeat) {
+        NumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        for (int i = 0; i < repeat; i++) {
+            LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(randomNumberGenerator);
+            OutputView.printLottoNumbers(lottoNumbers);
+            lottoGame.add(lottoNumbers);
+        }
     }
 }

@@ -1,5 +1,6 @@
-package domain;
+package domain.lottoresult;
 
+import domain.lottoresult.LottoRank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,8 @@
-package domain;
+package domain.lottoresult;
 
+import domain.lottoresult.LottoRank;
+import domain.lottoresult.LottoResult;
+import domain.lottoresult.ResultCount;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,9 +30,9 @@ public class LottoResultTest {
         ResultCount countOne = new ResultCount();
         ResultCount countTwo = new ResultCount();
         ResultCount countZero = new ResultCount();
-        countOne.add();
-        countTwo.add();
-        countTwo.add();
+        countOne.increase();
+        countTwo.increase();
+        countTwo.increase();
         Assertions.assertThat(lottoResult.get(LottoRank.FIRST)).isEqualTo(countOne);
         Assertions.assertThat(lottoResult.get(LottoRank.SECOND)).isEqualTo(countTwo);
         Assertions.assertThat(lottoResult.get(LottoRank.THIRD)).isEqualTo(countZero);

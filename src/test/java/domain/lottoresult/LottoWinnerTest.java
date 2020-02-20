@@ -1,5 +1,9 @@
-package domain;
+package domain.lottoresult;
 
+import domain.lottonumber.TestNumberGenerator;
+import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumbers;
+import domain.lottonumber.LottoNumbersFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

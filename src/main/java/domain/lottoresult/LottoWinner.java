@@ -1,4 +1,7 @@
-package domain;
+package domain.lottoresult;
+
+import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumbers;
 
 import java.util.Objects;
 

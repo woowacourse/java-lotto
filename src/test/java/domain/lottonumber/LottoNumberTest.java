@@ -1,5 +1,6 @@
-package domain;
+package domain.lottonumber;
 
+import domain.lottonumber.LottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
