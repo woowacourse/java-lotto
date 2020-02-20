@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -24,15 +25,15 @@ public class PurchaseLottosTest {
     }
 
     @Test
-    @SuppressWarnings("NonAsciiCharacters")
-    void 정상_입력_생성자_테스트() {
+    @DisplayName("정상 입력 생성자 테스트")
+    void purchaseLottos() {
         Assertions.assertThat(new PurchaseLottos(inputLottoNumbers))
                 .isInstanceOf(PurchaseLottos.class);
     }
 
     @Test
-    @SuppressWarnings("NonAsciiCharacters")
-    void 생성자에_빈_입력이_들어간_경우() {
+    @DisplayName("빈 입력이 들어간 경우")
+    void purchaseLottos_empty() {
         Assertions.assertThatThrownBy(() -> {
             new PurchaseLottos(new ArrayList<>());
         }).isInstanceOf(IllegalArgumentException.class)
@@ -40,8 +41,8 @@ public class PurchaseLottosTest {
     }
 
     @Test
-    @SuppressWarnings("NonAsciiCharacters")
-    void 생성자에_null이_들어온_경우() {
+    @DisplayName("null이 들어간 경우")
+    void purchaseLottos_null() {
         Assertions.assertThatThrownBy(() -> {
             new PurchaseLottos(null);
         }).isInstanceOf(IllegalArgumentException.class)

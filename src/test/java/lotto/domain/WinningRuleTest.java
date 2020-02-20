@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,32 +25,32 @@ public class WinningRuleTest {
     }
 
     @Test
-    @SuppressWarnings("NonAsciiCharacters")
-    void 정상_입력_생성자_테스트() {
+    @DisplayName("정상 입력")
+    void winningRule() {
         Assertions.assertThat(new WinningRule(inputNumbers, 7))
                 .isInstanceOf(WinningRule.class);
     }
 
     @ParameterizedTest
-    @SuppressWarnings("NonAsciiCharacters")
+    @DisplayName("범위 외의 값이 들어간 경우")
     @ValueSource(ints = {0, 46})
-    void 로또_숫자_범위_외의_값이_들어온_경우(int bonusBall) {
+    void winningRule_outOfRange(int bonusBall) {
         Assertions.assertThatThrownBy(() -> new WinningRule(inputNumbers, bonusBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Lotto number out of range.");
     }
 
     @Test
-    @SuppressWarnings("NonAsciiCharacters")
-    void 중복된_숫자가_들어온_경우() {
+    @DisplayName("중복된 숫자가 들어간 경우")
+    void winningRule_duplicate() {
         Assertions.assertThatThrownBy(() -> new WinningRule(inputNumbers, 1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Duplicate exist.");
     }
 
     @Test
-    @SuppressWarnings("NonAsciiCharacters")
-    void 당첨_로또_계산하는_테스트() {
+    @DisplayName("당첨 결과 계산하는 테스트")
+    void calculateWinningResult() {
         WinningRule winningRule = new WinningRule(inputNumbers, 7);
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(inputNumbers));
