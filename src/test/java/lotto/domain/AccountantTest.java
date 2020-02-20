@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class AccountantTest {
@@ -13,20 +14,25 @@ class AccountantTest {
 
     @BeforeEach
     void setUp() {
+        String[][] numbers = {
+            LottoTicketTest.MATCH_THREE,
+            LottoTicketTest.MATCH_TWO,
+            LottoTicketTest.MATCH_ONE,
+            LottoTicketTest.MATCH_ONE,
+            LottoTicketTest.MATCH_NONE
+        };
         List<LottoTicket> sampleTickets = new ArrayList<>();
-        sampleTickets.add(new LottoTicket(new String[] {"1", "2", "3", "7", "8", "9"})); // 3
-        sampleTickets.add(new LottoTicket(new String[] {"1", "2", "10", "7", "8", "9"})); // 2
-        sampleTickets.add(new LottoTicket(new String[] {"1", "11", "10", "7", "8", "9"})); // 1
-        sampleTickets.add(new LottoTicket(new String[] {"2", "11", "10", "7", "8", "9"})); // 1
-        sampleTickets.add(new LottoTicket(new String[] {"12", "11", "10", "7", "8", "9"})); // 0
+        for (String[] number : numbers) {
+            sampleTickets.add(new LottoTicket(number));
+        }
         lottoTickets = new LottoTickets(sampleTickets);
     }
 
     @Test
+    @DisplayName("수익률이 정상적으로 계산되는지")
     void calculate() {
-        LottoTicket winningTicket = new LottoTicket(new String[] {"1", "2", "3", "4", "5", "6"});
+        LottoTicket winningTicket = new LottoTicket(LottoTicketTest.WINNING_NUMBER);
         lottoTickets.matchResult(winningTicket, LottoNumber.SEVEN);
-        String test = Accountant.calculate(new Money("5000"));
-        assertThat(test).isEqualTo("100.00");
+        assertThat(Accountant.calculate(Money.create("5000"))).isEqualTo("100.00");
     }
 }
