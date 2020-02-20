@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoUser;
@@ -16,7 +17,7 @@ public class LottoController {
 		LottoUser lottoUser = new LottoUser(lottos);
 
 		OutputView.printLottos(lottos.makeLottoDtos());
-		// WinningNumber wn = new WinningNumber(readWinningNumber());
+		// WinningNumber winningNumber = new WinningNumber(readWinningNumber());
 	}
 
 	private static Lottos buyLottos() {
@@ -31,10 +32,20 @@ public class LottoController {
 	public static int readMoney() {
 		try {
 			InputView.printInsertMoney();
-			return InputUtil.readMoney();
+			return InputUtil.inputMoney();
 		} catch (NumberFormatException | IOException e) {
 			OutputView.printWrongMoneyInput();
 			return readMoney();
+		}
+	}
+
+	public static List<String> readWinningNumber() {
+		try {
+			InputView.printInsertWinningNumber();
+			return InputUtil.inputWinningNumber();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return readWinningNumber();
 		}
 	}
 }
