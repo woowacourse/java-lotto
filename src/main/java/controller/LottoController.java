@@ -37,13 +37,17 @@ public class LottoController {
         long earning = 0;
         OutputView.printResultTitle();
         for (LottoRank rank : LottoRank.values()) {
-            if (rank == LottoRank.NOTHING) {
-                continue;
-            }
+            printEachResult(rank);
             earning += lottoResult.get(rank).multiply(rank.getWinning());
-            OutputView.printResult(rank, lottoResult.get(rank));
         }
         OutputView.printEarning(money.calculateEarnings(earning));
+    }
+
+    private void printEachResult(LottoRank rank) {
+        if (rank == LottoRank.NOTHING) {
+            return;
+        }
+        OutputView.printResult(rank, lottoResult.get(rank));
     }
 
     private void makeWinnerNumbers() {
