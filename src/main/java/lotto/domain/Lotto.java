@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 	private static final String DUPLICATED_NUMBER_EXCEPTION_MESSAGE = "중복된 볼이 포함";
@@ -17,6 +19,15 @@ public class Lotto {
 		validateDuplication(balls);
 		validateBallCount(balls);
 		this.balls = Collections.unmodifiableList(balls);
+	}
+
+	public static Lotto of(String rawWinningLotto) {
+		String[] numbers = rawWinningLotto.replaceAll(" ", "").split(",");
+		List<Ball> balls = new ArrayList<>();
+		for(String number : numbers) {
+			balls.add(Ball.of(Integer.parseInt(number)));
+		}
+		return new Lotto(balls);
 	}
 
 	private void validateBallCount(List<Ball> balls) {
@@ -40,5 +51,12 @@ public class Lotto {
 		List<Ball> sameBalls = new ArrayList<>(balls);
 		sameBalls.retainAll(lotto.balls);
 		return sameBalls.size();
+	}
+
+	public List<String> getLotto() {
+		List<String> ballsData = balls.stream()
+			.map(Ball::toString)
+			.collect(Collectors.toList());
+		return Collections.unmodifiableList(ballsData);
 	}
 }

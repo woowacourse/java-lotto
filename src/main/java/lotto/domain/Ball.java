@@ -29,4 +29,9 @@ public class Ball {
 		}
 		return new Ball(number);
 	}
+
+	@Override
+	public String toString() {
+		return Integer.toString(number);
+	}
 }

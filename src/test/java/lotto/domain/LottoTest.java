@@ -46,4 +46,23 @@ public class LottoTest {
 		Lotto lotto2 = new Lotto(balls2);
 		assertThat(lotto.countCommonBalls(lotto2)).isEqualTo(4);
 	}
+
+	@Test
+	void getLotto() {
+		List<Ball> balls = Arrays.asList(Ball.of(1), Ball.of(2), Ball.of(3), Ball.of(4), Ball.of(5), Ball.of(6));
+		Lotto lotto = new Lotto(balls);
+		List<String> lottoData = lotto.getLotto();
+		assertThat(lottoData).containsExactly("1", "2", "3", "4", "5", "6");
+	}
+
+	@Test
+	void constructByRawNumber() {
+		Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
+		assertThat(lotto.contains(Ball.of(1)));
+		assertThat(lotto.contains(Ball.of(2)));
+		assertThat(lotto.contains(Ball.of(3)));
+		assertThat(lotto.contains(Ball.of(4)));
+		assertThat(lotto.contains(Ball.of(5)));
+		assertThat(lotto.contains(Ball.of(6)));
+	}
 }
