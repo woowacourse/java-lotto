@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
     FIFTH(3, 5000),
@@ -22,5 +23,25 @@ public enum Rank {
                 .filter(rank -> rank.matchedCount == count)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public static double sumWinningMoney(List<Rank> ranks) {
+        return Arrays.stream(values())
+                .mapToDouble(rank -> rank.winningMoney)
+                .sum();
+    }
+
+    public int getMatchedCount() {
+        return matchedCount;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
+    }
+
+    public int getContainingCount(List<Rank> ranks) {
+        return (int)ranks.stream()
+                .filter(rank -> rank.equals(this))
+                .count();
     }
 }
