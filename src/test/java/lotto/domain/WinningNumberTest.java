@@ -33,16 +33,31 @@ public class WinningNumberTest {
 			Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6", "7")));
 	}
 
-	static Stream<Arguments> generateInput_중복번호() {
-		return Stream.of(Arguments.of(Arrays.asList("1", "2", "3", "3", "4", "5")),
-			Arguments.of(Arrays.asList("1", "4", "7", "13", "13", "21")));
-	}
-
 	@ParameterizedTest
 	@MethodSource("generateInput_중복번호")
 	void 중복_번호기_있는_경우(List<String> value) {
 		assertThatThrownBy(() -> new WinningNumber(value, 34))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("중복");
+	}
+
+	static Stream<Arguments> generateInput_중복번호() {
+		return Stream.of(Arguments.of(Arrays.asList("1", "2", "3", "3", "4", "5")),
+			Arguments.of(Arrays.asList("1", "4", "7", "13", "13", "21")));
+	}
+
+	static Stream<Arguments> generateInput_번호범위() {
+		return Stream.of(Arguments.of(Arrays.asList("-9999", "2", "1", "3", "4", "5")),
+			Arguments.of(Arrays.asList("1", "4", "7", "5", "13", "0")),
+			Arguments.of(Arrays.asList("1", "4", "7", "46", "13", "21")),
+			Arguments.of(Arrays.asList("1", "4", "7", "13", "19999", "21")));
+	}
+
+	@ParameterizedTest
+	@MethodSource("generateInput_번호범위")
+	void 번호_범위를_벗어나는_경우(List<String> value) {
+		assertThatThrownBy(() -> new WinningNumber(value, 34))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("범위");
 	}
 }

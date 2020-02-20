@@ -6,22 +6,25 @@ import java.util.stream.Collectors;
 
 public class WinningNumber {
 	private static final int LOTTO_SIZE = 6;
+	private static final int MIN_LOTTO_NUMBER = 1;
+	private static final int MAX_LOTTO_NUMBER = 45;
 
 	private final List<Integer> winningNumber;
 	private final int bonusNumber;
 
 	public WinningNumber(final List<String> winningNumber, final int bonusNumber) {
-		validate(winningNumber);
+		validateWinningNumber(winningNumber);
 		this.winningNumber = winningNumber.stream()
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
 		this.bonusNumber = bonusNumber;
 	}
 
-	private void validate(List<String> winningNumber) {
+	private void validateWinningNumber(List<String> winningNumber) {
 		validateNullAndEmpty(winningNumber);
 		validateNumberAmount(winningNumber);
 		validateDuplicate(winningNumber);
+		validateRange(winningNumber);
 	}
 
 	private void validateNullAndEmpty(List<String> winningNumber) {
@@ -39,6 +42,16 @@ public class WinningNumber {
 	private void validateDuplicate(List<String> winningNumber) {
 		if (winningNumber.size() != new HashSet<>(winningNumber).size()) {
 			throw new IllegalArgumentException("중복된 번호가 있습니다.");
+		}
+	}
+
+	private void validateRange(List<String> winningNumber) {
+		if (winningNumber.stream()
+			.mapToInt(Integer::parseInt)
+			.filter(number -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER)
+			.findFirst()
+			.isPresent()) {
+			throw new IllegalArgumentException("범위를 벗어난 번호가 포함되어 있습니다.");
 		}
 	}
 }
