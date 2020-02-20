@@ -24,7 +24,10 @@ public class RankTest {
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", "7");
 
 		Rank expected = Rank.FIRST;
-		Rank actual = Rank.of(lottoTicket, winningNumbers);
+		Rank actual = Rank.of(
+			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
+			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+		);
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -45,7 +48,10 @@ public class RankTest {
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 7", "6");
 
 		Rank expected = Rank.SECOND;
-		Rank actual = Rank.of(lottoTicket, winningNumbers);
+		Rank actual = Rank.of(
+			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
+			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+		);
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -66,7 +72,10 @@ public class RankTest {
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 7", "8");
 
 		Rank expected = Rank.THIRD;
-		Rank actual = Rank.of(lottoTicket, winningNumbers);
+		Rank actual = Rank.of(
+			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
+			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+		);
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -87,7 +96,10 @@ public class RankTest {
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 8, 9", "7");
 
 		Rank expected = Rank.FOURTH;
-		Rank actual = Rank.of(lottoTicket, winningNumbers);
+		Rank actual = Rank.of(
+			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
+			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+		);
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -108,7 +120,10 @@ public class RankTest {
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 8, 9, 10", "7");
 
 		Rank expected = Rank.FIFTH;
-		Rank actual = Rank.of(lottoTicket, winningNumbers);
+		Rank actual = Rank.of(
+			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
+			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+		);
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -129,7 +144,10 @@ public class RankTest {
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 11, 8, 9, 10", "7");
 
 		Rank expected = Rank.NONE;
-		Rank actual = Rank.of(lottoTicket, winningNumbers);
+		Rank actual = Rank.of(
+			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
+			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+		);
 
 		assertThat(actual).isEqualTo(expected);
 	}
