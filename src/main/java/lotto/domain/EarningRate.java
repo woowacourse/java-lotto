@@ -11,14 +11,17 @@ public class EarningRate {
     private long totalWinningMoney = 0;
 
     public EarningRate(List<WinningRank> winningRanks, PurchaseAmount purchaseAmount) {
+        generateWinningRank(winningRanks);
+        this.earningRate = (int) (totalWinningMoney / purchaseAmount.getPurchaseAmount() * RATE_NUMBER);
+    }
+
+    private void generateWinningRank(List<WinningRank> winningRanks) {
         for (WinningRank winningRank : WinningRank.values()) {
-            int count = (int) winningRanks.stream()
-                    .filter(Rank -> winningRank == Rank)
-                    .count();
+            int count = (int) winningRanks.stream().filter(Rank -> winningRank == Rank).count();
+
             OutputView.printWinningResult(winningRank, count);
             sumWinningMoney(winningRank.getWinningMoney() * count);
         }
-        this.earningRate = (int) (totalWinningMoney / purchaseAmount.getPurchaseAmount() * RATE_NUMBER);
     }
 
     private void sumWinningMoney(int totalWinningMoney) {

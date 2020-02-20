@@ -18,8 +18,10 @@ public class LottoController {
         generateLottoTickets();
         WinningBalls winningBalls = generateWinningBalls();
         List<WinningRank> winningRanks = generateWinningRank(winningBalls);
+        OutputView.printRankPrintedConstant();
         OutputView.printEarningRate(new EarningRate(winningRanks, purchaseAmount));
     }
+
 
     private WinningBalls generateWinningBalls() {
         try {

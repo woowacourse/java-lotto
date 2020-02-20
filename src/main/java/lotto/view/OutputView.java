@@ -39,9 +39,26 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
+
     public static void printWinningResult(WinningRank winningRank, int count) {
-        System.out.println(winningRank.getWinningBallCount() + "개 일치 (" + winningRank.getWinningMoney() + "원) - " + count + "개");
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(winningRank.getWinningBallCount()).append("개 일치(");
+
+        if (winningRank.getWinningMoney() == WinningRank.SECOND_RANK.getWinningMoney()) {
+            stringBuilder.append(", 보너스 볼 일치 (");
+        }
+        stringBuilder.append(+winningRank.getWinningMoney()).append("원) - ").append(count).append("개");
+
+        System.out.println(stringBuilder);
     }
+
+
+    public static void printRankPrintedConstant() {
+        System.out.println("당첨통계");
+        System.out.println("---------");
+    }
+
 
     public static void printEarningRate(EarningRate earningRate) {
         System.out.println("총 수익률은 " + earningRate.getEarningRate() + "% 입니다.");
