@@ -1,7 +1,6 @@
 package lotto.utils;
 
 import lotto.domain.*;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,48 +9,63 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ResultsTest {
+public class ResultCalculatorTest {
     private static final String[] WINNING_LOTTO_NUMBERS = {"1", "2", "3", "4", "5", "6"};
     private static final String BONUS_NUMBER = "7";
-    private static final String[] NOT_WINNING_LOTTO_NUMBERS = {"11", "12", "13", "14", "15", "16"};
+    private static final String[] ALL_FAIL_LOTTO_NUMBERS = {"11", "12", "13", "14", "15", "16"};
 
     private List<LottoNumber> winningNumbers = LottoGenerator.createLottoNumbersByUserInput(WINNING_LOTTO_NUMBERS);
     private LottoNumber bonusNumber = new LottoNumber(BONUS_NUMBER);
     private WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-    private List<LottoNumber> notWinningUserLottoNumbers = LottoGenerator.createLottoNumbersByUserInput(NOT_WINNING_LOTTO_NUMBERS);
-    private Lotto notWinningUserLotto = new Lotto(notWinningUserLottoNumbers);
-
-    private List<LottoNumber> secondWinningUserLottoNumbers = new ArrayList<LottoNumber>(Arrays.asList(
-            new LottoNumber(WINNING_LOTTO_NUMBERS[0]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[1]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[2]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[3]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[4]),
-            new LottoNumber(BONUS_NUMBER)));
-    private Lotto secondWinningUserLotto = new Lotto(secondWinningUserLottoNumbers);
-
+    private List<LottoNumber> allFailUserLottoNumbers = LottoGenerator.createLottoNumbersByUserInput(ALL_FAIL_LOTTO_NUMBERS);
+    private Lotto allFailUserLotto = new Lotto(allFailUserLottoNumbers);
 
     @Test
-    void calculateResults_당첨되지_않았을_때() {
-        Results results = new Results(new Lottos(Arrays.asList(notWinningUserLotto)), winningLotto);
-        results.calculateResults();
-        assertThat(results.getResults().get(0).isSameWinning(WinningInfo.FAIL)).isTrue();
+    void hasBonus() {
+        List<LottoNumber> hasBonusLottoNumbers = new ArrayList<LottoNumber>(Arrays.asList(
+                new LottoNumber(ALL_FAIL_LOTTO_NUMBERS[0]),
+                new LottoNumber(ALL_FAIL_LOTTO_NUMBERS[1]),
+                new LottoNumber(ALL_FAIL_LOTTO_NUMBERS[2]),
+                new LottoNumber(ALL_FAIL_LOTTO_NUMBERS[3]),
+                new LottoNumber(ALL_FAIL_LOTTO_NUMBERS[4]),
+                new LottoNumber(BONUS_NUMBER)));
+        Lotto hasBonusLotto = new Lotto(hasBonusLottoNumbers);
+        assertThat(ResultCalculator.getHasBonus(hasBonusLotto, winningLotto)).isTrue();
+
+        Lotto notHasBonusLotto = new Lotto(allFailUserLottoNumbers);
+        assertThat(ResultCalculator.getHasBonus(notHasBonusLotto, winningLotto)).isFalse();
     }
 
     @Test
-    void calculateResults_당첨이_존재할_때() {
-        Results results = new Results(new Lottos(Arrays.asList(notWinningUserLotto)), winningLotto);
-        results.calculateResults();
-        assertThat(results.getResults().get(0).isSameWinning(WinningInfo.FAIL));
-        assertThat(results.getResults().get(1).isSameWinning(WinningInfo.SECOND));
+    void getWinningCount() {
+        final int ALL_FAIL_WINNING_COUNT = 0;
+        final int FIRST_WINNING_COUNT = 6;
+
+        assertThat(ResultCalculator.getWinningCount(allFailUserLotto, winningLotto)
+                == ALL_FAIL_WINNING_COUNT);
+
+        Lotto firstWinningLotto = new Lotto(winningNumbers);
+        assertThat(ResultCalculator.getWinningCount(firstWinningLotto, winningLotto)
+                == FIRST_WINNING_COUNT);
+    }
+
+    @Test
+    void getTotalEarning() {
+        int expected = 2000000000;
+        Lotto firstWinningLotto = new Lotto(winningNumbers);
+        Lottos lottos = new Lottos(Arrays.asList(firstWinningLotto));
+        ArrayList<WinningInfo> result = ResultCalculator.getResult(lottos, winningLotto);
+
+        assertThat(ResultCalculator.getTotalEarning(result)).isEqualTo(expected);
     }
 
     @Test
     void getEarningRate() {
-        final int EXPECTED_EARNING_RATE = 15000;
-        Results results = new Results(new Lottos(Arrays.asList(notWinningUserLotto)), winningLotto);
-        results.calculateResults();
-        assertThat(results.getEarningRate()).isEqualTo(EXPECTED_EARNING_RATE);
+        int expected = 2000000;
+        int totalEarning = 2000000000;
+        int lottoSize = 1;
+        assertThat(ResultCalculator.getEarningRate(totalEarning, lottoSize)).isEqualTo(expected);
     }
+
 }
