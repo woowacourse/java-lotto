@@ -13,8 +13,7 @@ public class LottoResults {
 		lottoResults = lottoRanks.stream()
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		Arrays.stream(LottoRank.values())
-				.filter(rank -> rank != LottoRank.MISS).
-				forEach(rank -> lottoResults.putIfAbsent(rank, 0L));
+				.forEach(rank -> lottoResults.putIfAbsent(rank, 0L));
 	}
 
 	public long getRankCount(LottoRank lottoRank) {

@@ -22,7 +22,6 @@ public class LottoApplication {
 		WinningLotto winningLotto = new WinningLotto(LottoFactory.create(InputView.inputWinningLotto()),
 				LottoNumber.of(InputView.inputWinningLottoBonus()));
 		LottoStatistics lottoStatistics = new LottoStatistics(lottoPurchaseMoney, lottos.match(winningLotto));
-		long profitRate = lottoStatistics.getProfitRate();
-		System.out.println(profitRate);
+		OutputView.printStatistics(lottoStatistics);
 	}
 }
