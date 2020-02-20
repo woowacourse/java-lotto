@@ -22,7 +22,7 @@ public class LottoTicket {
     public LottoTicket(String[] numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String number : numbers) {
-            lottoNumbers.add(LottoNumber.find(number));
+            lottoNumbers.add(LottoNumber.find(number.trim()));
         }
         validate(lottoNumbers);
         this.lottoTicket = lottoNumbers;
@@ -38,7 +38,7 @@ public class LottoTicket {
 
     }
 
-    static LottoTicket create() {
+    public static LottoTicket create() {
         List<LottoNumber> numbers = Arrays.asList(LottoNumber.values());
         List<LottoNumber> randomNumbers = new ArrayList<>();
         Collections.shuffle(numbers);
@@ -48,19 +48,13 @@ public class LottoTicket {
         return new LottoTicket(randomNumbers);
     }
 
-    @Override
-    public String toString() {
-        return lottoTicket.stream()
-            .map(LottoNumber::getValue)
-            .map(String::valueOf)
-            .collect(Collectors.joining(", ", "[", "]"));
-    }
-
     public void validateBonusNumber(LottoNumber number) {
         if (this.lottoTicket.contains(number)) {
             throw new InvalidLottoTicketException("보너스 숫자는 당첨 번호와 중복될 수 없습니다.");
         }
     }
+
+    // TODO: 테스트 리팩토링할 것 (public만 테스트)
 
     public int compare(LottoTicket other) {
         Set<LottoNumber> winnerSet = new HashSet<>(this.lottoTicket);
@@ -71,5 +65,14 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoTicket.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return lottoTicket.stream()
+            .map(LottoNumber::getValue)
+            .sorted()
+            .map(String::valueOf)
+            .collect(Collectors.joining(", ", "[", "]"));
     }
 }

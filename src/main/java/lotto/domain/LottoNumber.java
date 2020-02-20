@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exceptions.InvalidLottoNumberException;
 
 public enum LottoNumber {
+    INVALID(-1),
     ONE(1),
     TWO(2),
     THREE(3),
@@ -49,6 +50,8 @@ public enum LottoNumber {
     FORTY_FOUR(44),
     FORTY_FIVE(45);
 
+    public static final int UPPER_LIMIT = 45;
+    public static final int LOWER_LIMIT = 1;
     private final int value;
 
     LottoNumber(int value) {
@@ -62,7 +65,7 @@ public enum LottoNumber {
         } catch (NumberFormatException e) {
             throw new InvalidLottoNumberException();
         }
-        if (parsedValue < 1 || parsedValue > 45) {
+        if (parsedValue < LOWER_LIMIT || parsedValue > UPPER_LIMIT) {
             throw new InvalidLottoNumberException();
         }
         for (LottoNumber number : LottoNumber.values()) {
@@ -70,7 +73,7 @@ public enum LottoNumber {
                 return number;
             }
         }
-        return null;
+        return INVALID;
     }
 
     public int getValue() {

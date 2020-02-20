@@ -10,18 +10,21 @@ import lotto.view.OutputView;
 public class LottoApplication {
     public static void main(String[] args) {
         OutputView.inputMoneyInstruction();
-        int quantity = new Money(InputView.getInput()).ticketQuantity();
-        OutputView.ticketAmountInstruction(quantity);
-        LottoTickets lottoTickets = LottoTickets.createLottoTickets(quantity);
+        Money money = new Money(InputView.getInput());
+        OutputView.ticketAmountInstruction(money);
+        LottoTickets lottoTickets = LottoTickets.createLottoTickets(money);
         OutputView.lottoTicketList(lottoTickets);
+
         OutputView.inputWinningNumberInstruction();
         LottoTicket winningLotto = new LottoTicket(InputView.getWinningNumbers());
         OutputView.inputBonusNumberInstruction();
         LottoNumber bonusNumber = LottoNumber.find(InputView.getInput());
         winningLotto.validateBonusNumber(bonusNumber);
-        // compare lottoTickets and winningLotto
-        // output statistics
+
         OutputView.prizeStatistics(lottoTickets.matchResult(winningLotto, bonusNumber));
+
+        // TODO: 수익률 계산
+        OutputView.profitRate(1000);
 
     }
 }
