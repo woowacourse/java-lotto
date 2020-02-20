@@ -2,7 +2,6 @@ package lotto.domain;
 
 public class PurchaseAmount {
     private static final int MINIMUM_MONEY = 1000;
-    private static final int MINIMUM_AMOUNT = 1;
     private static final int LOTTO_PRICE = 1000;
     private static final String INVALID_PURCHASE_MONEY_EXCEPTION_MESSAGE = "Input money out of range (minimum - 1000).";
 
