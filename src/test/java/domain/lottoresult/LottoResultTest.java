@@ -1,21 +1,19 @@
 package domain.lottoresult;
 
-import domain.lottoresult.LottoRank;
-import domain.lottoresult.LottoResult;
-import domain.lottoresult.ResultCount;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class LottoResultTest {
     LottoResult lottoResult;
+
     @BeforeEach
-    void init(){
+    void init() {
         lottoResult = new LottoResult();
     }
 
     @Test
-    void 생성_테스트(){
+    void 생성_테스트() {
         Assertions.assertThat(lottoResult)
                 .hasFieldOrProperty("result")
                 .extracting("result")
@@ -23,7 +21,7 @@ public class LottoResultTest {
     }
 
     @Test
-    void 결과입력_메서드_호출_테스트(){
+    void 결과입력_메서드_호출_테스트() {
         lottoResult.add(LottoRank.FIRST);
         lottoResult.add(LottoRank.SECOND);
         lottoResult.add(LottoRank.SECOND);

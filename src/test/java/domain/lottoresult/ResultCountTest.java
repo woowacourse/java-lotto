@@ -1,12 +1,12 @@
 package domain.lottoresult;
 
-import domain.lottoresult.ResultCount;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ResultCountTest {
     @Test
-    void 생성_테스트(){
+    void 생성_테스트() {
         ResultCount resultCount = new ResultCount();
 
         Assertions.assertThat(resultCount).hasFieldOrPropertyWithValue("count", 0);

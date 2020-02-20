@@ -19,7 +19,7 @@ public class LottoWinnerTest {
     }
 
     @Test
-    void 보너스볼_중복_예외_확인(){
+    void 보너스볼_중복_예외_확인() {
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumber bonus = LottoNumber.of(6);
         Assertions.assertThatThrownBy(() -> new LottoWinner(lottoNumbers, bonus))
@@ -28,7 +28,7 @@ public class LottoWinnerTest {
     }
 
     @Test
-    void 등수_1등_반환_확인(){
+    void 등수_1등_반환_확인() {
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumber bonus = LottoNumber.of(7);
@@ -37,8 +37,8 @@ public class LottoWinnerTest {
     }
 
     @Test
-    void 등수_2등_반환_확인(){
-        List<Integer> value = Arrays.asList(1,2,3,4,6,7);
+    void 등수_2등_반환_확인() {
+        List<Integer> value = Arrays.asList(1, 2, 3, 4, 6, 7);
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator(value));
         LottoNumber bonus = LottoNumber.of(7);
@@ -47,8 +47,8 @@ public class LottoWinnerTest {
     }
 
     @Test
-    void 등수_3등_반환_확인(){
-        List<Integer> value = Arrays.asList(1,2,3,4,6,8);
+    void 등수_3등_반환_확인() {
+        List<Integer> value = Arrays.asList(1, 2, 3, 4, 6, 8);
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator(value));
         LottoNumber bonus = LottoNumber.of(7);
@@ -57,8 +57,8 @@ public class LottoWinnerTest {
     }
 
     @Test
-    void 등수_4등_반환_확인(){
-        List<Integer> value = Arrays.asList(1,2,3,4,7,8);
+    void 등수_4등_반환_확인() {
+        List<Integer> value = Arrays.asList(1, 2, 3, 4, 7, 8);
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator(value));
         LottoNumber bonus = LottoNumber.of(7);
@@ -67,8 +67,8 @@ public class LottoWinnerTest {
     }
 
     @Test
-    void 등수_5등_반환_확인(){
-        List<Integer> value = Arrays.asList(1,2,3,8,9,10);
+    void 등수_5등_반환_확인() {
+        List<Integer> value = Arrays.asList(1, 2, 3, 8, 9, 10);
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator(value));
         LottoNumber bonus = LottoNumber.of(7);
@@ -77,8 +77,8 @@ public class LottoWinnerTest {
     }
 
     @Test
-    void 등수_없음_반환_확인(){
-        List<Integer> value = Arrays.asList(11,21,13,14,16,17);
+    void 등수_없음_반환_확인() {
+        List<Integer> value = Arrays.asList(11, 21, 13, 14, 16, 17);
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator(value));
         LottoNumber bonus = LottoNumber.of(7);
