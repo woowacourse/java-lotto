@@ -65,7 +65,7 @@ public class LottoController {
 
     private void makeWinnerNumbers() {
         UserNumberGenerator userNumberGenerator = new UserNumberGenerator();
-        userNumberGenerator.inputNumbers(InputView.inputWinnerNumbers());
+        userNumberGenerator.init(InputView.inputWinnerNumbers());
         LottoNumbers winnerNumbers = LottoNumbersFactory.createLottoNumbers(userNumberGenerator);
         LottoNumber bonus = LottoNumber.of(InputView.inputBonusNumber());
 
