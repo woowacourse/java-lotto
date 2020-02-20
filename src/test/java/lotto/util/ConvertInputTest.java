@@ -15,4 +15,10 @@ public class ConvertInputTest {
         List<Integer> result = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertThat(ConvertInput.splitLottoNumbers("1,2,3,4,5,6")).isEqualTo(result);
     }
+
+    @Test
+    @DisplayName("공백 제거 검사")
+    void removeBlankTest() {
+        assertThat(ConvertInput.removeBlank("1, 2, 3, 4, 5, 6")).isEqualTo("1,2,3,4,5,6");
+    }
 }
