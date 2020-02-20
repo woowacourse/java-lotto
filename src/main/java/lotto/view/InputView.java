@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputView {

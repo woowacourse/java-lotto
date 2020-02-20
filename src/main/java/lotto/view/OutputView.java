@@ -1,8 +1,9 @@
 package lotto.view;
 
-import lotto.domain.*;
-
-import java.util.stream.Collectors;
+import lotto.domain.LottoResult;
+import lotto.domain.PurchaseMoney;
+import lotto.domain.PurchasedLottoTickets;
+import lotto.domain.WinningType;
 
 public class OutputView {
 	private static final String NEW_LINE = System.lineSeparator();
@@ -20,10 +21,7 @@ public class OutputView {
 		System.out.println("당첨통계");
 		System.out.println("----------");
 		StringBuilder stringBuilder = new StringBuilder();
-		for (WinningType winningType : lottoResult.getLottoResult().keySet().stream().sorted().collect(Collectors.toList())) {
-			if (winningType.isNONE()) {
-				continue;
-			}
+		for (WinningType winningType : lottoResult.getWinningKeys()) {
 			stringBuilder.append(winningType.getSameNumberCount())
 					.append("개 일치");
 			if (winningType.isBonusTRUE()) {
@@ -41,5 +39,9 @@ public class OutputView {
 
 	public static void printWarningMessage(String message) {
 		System.out.println(message);
+	}
+
+	public static void printEarningRate(double calculateEarningRate) {
+		System.out.printf("총 수익률은 %.2f %% 입니다.\n", calculateEarningRate);
 	}
 }
