@@ -6,6 +6,7 @@ import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.dto.BettingMoneyRequestDTO;
+import lotto.view.dto.LottoTicketBundleResponseDTO;
 import lotto.view.dto.StatisticsResponseDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
 
@@ -14,6 +15,8 @@ public class LottoController {
 
     public void run() {
         LottoTicketBundle lottoTicketBundle = getLottoTicketBundle();
+
+        OutputView.printLottoTicket(new LottoTicketBundleResponseDTO(lottoTicketBundle));
 
         StatisticsResponseDTO statisticsResponseDTO = getStatisticsDTO(lottoTicketBundle);
 

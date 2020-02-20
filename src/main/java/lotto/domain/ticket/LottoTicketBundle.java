@@ -3,6 +3,7 @@ package lotto.domain.ticket;
 import lotto.domain.result.LottoResultBundle;
 import lotto.domain.result.win.WinningLotto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,5 +18,9 @@ public class LottoTicketBundle {
         return lottoTickets.stream()
                 .map(winningLotto::getResult)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResultBundle::new));
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return Collections.unmodifiableList(this.lottoTickets);
     }
 }

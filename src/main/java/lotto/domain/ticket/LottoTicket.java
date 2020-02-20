@@ -2,6 +2,7 @@ package lotto.domain.ticket;
 
 import lotto.domain.ticket.ball.LottoBall;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,6 +27,10 @@ public class LottoTicket {
 
     public boolean has(LottoBall lottoBall) {
         return this.lottoBalls.contains(lottoBall);
+    }
+
+    public Set<LottoBall> getLottoBalls() {
+        return Collections.unmodifiableSet(this.lottoBalls);
     }
 
     @Override
