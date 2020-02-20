@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Map;
+
 public class TotalResult {
 	private final LottoResult lottoResult;
 	private final LottoCount count;
@@ -10,6 +12,10 @@ public class TotalResult {
 	}
 
 	public long getProfitRate() {
-		return lottoResult.calculateTotalPrize() / Money.getBuyMoney(count) * 100;
+		return lottoResult.calculateTotalPrize() * 100 / Money.getBuyMoney(count);
+	}
+
+	public Map<LottoRank, Integer> getLottoResult() {
+		return lottoResult.getRankResult();
 	}
 }

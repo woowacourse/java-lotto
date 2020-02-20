@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class LottoResult {
 	private final Map<LottoRank, Integer> rankResult;
 
 	public LottoResult(Map<LottoRank, Integer> rankResult) {
-		this.rankResult = rankResult;
+		this.rankResult = Collections.unmodifiableMap(rankResult);
 	}
 
 	public long calculateTotalPrize() {
@@ -15,5 +16,9 @@ public class LottoResult {
 			totalPrize += lottoRank.getTotal(rankResult.get(lottoRank));
 		}
 		return totalPrize;
+	}
+
+	public Map<LottoRank, Integer> getRankResult() {
+		return rankResult;
 	}
 }
