@@ -18,7 +18,7 @@ public class LottoController {
 		LottoUser lottoUser = new LottoUser(lottos);
 
 		OutputView.printLottos(lottos.makeLottoDtos());
-		WinningNumber winningNumber = new WinningNumber(readWinningNumber(), readBonusNumber());
+		WinningNumber winningNumber = checkLWinningNumber();
 	}
 
 	private static int readBonusNumber() {
@@ -32,12 +32,16 @@ public class LottoController {
 	}
 
 	private static Lottos buyLottos() {
-		LottoMachine lottoMachine = new LottoMachine();
-		LottoCountDto lottoCountDto = new LottoCountDto(readMoney());
+		try {
+			LottoMachine lottoMachine = new LottoMachine();
+			LottoCountDto lottoCountDto = new LottoCountDto(readMoney());
 
-		OutputView.printLottoCount(lottoCountDto.getLottoCount());
-
-		return new Lottos(lottoMachine.makeRandomLottos(lottoCountDto.getLottoCount()));
+			OutputView.printLottoCount(lottoCountDto.getLottoCount());
+			return new Lottos(lottoMachine.makeRandomLottos(lottoCountDto.getLottoCount()));
+		} catch (IllegalArgumentException e) {
+			OutputView.printExceptionMessage(e);
+			return buyLottos();
+		}
 	}
 
 	public static int readMoney() {
@@ -57,6 +61,15 @@ public class LottoController {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return readWinningNumber();
+		}
+	}
+
+	public static WinningNumber checkLWinningNumber() {
+		try {
+			return new WinningNumber(readWinningNumber(), readBonusNumber());
+		} catch (IllegalArgumentException e) {
+			OutputView.printExceptionMessage(e);
+			return checkLWinningNumber();
 		}
 	}
 }
