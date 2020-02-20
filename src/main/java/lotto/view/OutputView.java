@@ -43,12 +43,12 @@ public class OutputView {
     }
 
     public static void printCorrectResult(int correct, int prize, int count) {
+        if (prize == 30000000) {
+            System.out.printf(RESULT_BONUS_MESSAGE, correct, prize, count);
+            System.out.println();
+            return ;
+        }
         System.out.printf(RESULT_DETAIL_MESSAGE, correct, prize, count);
-        System.out.println();
-    }
-
-    public static void printBonusCorrectResult(int correct, int prize, int count) {
-        System.out.printf(RESULT_BONUS_MESSAGE, correct, prize, count);
         System.out.println();
     }
 

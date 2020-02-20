@@ -22,15 +22,14 @@ public class Lotto {
             .count();
     }
 
-    private static void checkCountOverThree(AutoTicket autoNum, int count) {
+    private static void checkCountOverThree(AutoTicket autoTicket, int count) {
         if (count >= LottoResult.THREE.getCorrect()) {
             String correctCount = Integer.toString(count);
-            checkCount(autoNum, count, correctCount);
+            checkCount(autoTicket, count, correctCount);
         }
     }
 
-    private static void checkCount(AutoTicket autoTicket,
-        int count, String correctCount) {
+    private static void checkCount(AutoTicket autoTicket, int count, String correctCount) {
         if (count == LottoResult.FIVE.getCorrect()) {
             isSecondWin(autoTicket, correctCount);
             return;
@@ -38,10 +37,9 @@ public class Lotto {
         LottoResultMap.resultCount.get(correctCount).setCount();
     }
 
-    private static void isSecondWin(AutoTicket autoTicket,
-        String correctCount) {
+    private static void isSecondWin(AutoTicket autoTicket, String correctCount) {
         if (autoTicket.getAutoTicket().contains(BonusBall.bonusNo)) {
-            LottoResultMap.resultCount.get(correctCount).setCount();
+            LottoResultMap.resultCount.get("5+").setCount();
             return;
         }
         LottoResultMap.resultCount.get(correctCount).setCount();
