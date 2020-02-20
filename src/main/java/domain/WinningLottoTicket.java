@@ -19,6 +19,15 @@ public class WinningLottoTicket {
         this.winningTicket = new LottoTicket(winningTicket);
     }
 
+    public LottoTicket getWinningTicket() {
+        return winningTicket;
+    }
+
+    public boolean isMatchBonusBall() {
+        return winningTicket.getLottoTicket()
+                .contains(bonusBall.getBonusNumber());
+    }
+
     private void addTicketNumber(List<Integer> winningTicket, String input) {
         for (String number : splitInputNumber(input)) {
             validateEmpty(number);

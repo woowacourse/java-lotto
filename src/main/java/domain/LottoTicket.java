@@ -7,7 +7,7 @@ public class LottoTicket {
     private static final int MIN_LOTTO_NUMBER_RANGE = 1;
     private static final int MAX_LOTTO_NUMBER_RANGE = 45;
 
-    List<Integer> lottoTicket;
+    private List<Integer> lottoTicket;
 
     public LottoTicket(List<Integer> lottoTicket) {
         validateLottoTicketSize(lottoTicket);
@@ -15,6 +15,10 @@ public class LottoTicket {
         validateDuplicateLottoNumber(lottoTicket);
         Collections.sort(lottoTicket);
         this.lottoTicket = lottoTicket;
+    }
+
+    public List<Integer> getLottoTicket() {
+        return this.lottoTicket;
     }
 
     private void validateDuplicateLottoNumber(List<Integer> lottoTicket) {
@@ -40,13 +44,9 @@ public class LottoTicket {
         }
     }
 
-    public List<Integer> getLottoTicket() {
-        return this.lottoTicket;
-    }
-
     public int getCorrectCount(List<Integer> winningTicket) {
         int correctCount = 0;
-        for(int i = 0 ; i < lottoTicket.size() ; i++) {
+        for (int i = 0; i < lottoTicket.size(); i++) {
             if (lottoTicket.get(i) == winningTicket.get(i)) {
                 correctCount++;
             }

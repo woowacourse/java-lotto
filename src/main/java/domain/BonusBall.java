@@ -18,6 +18,10 @@ public class BonusBall {
         this.bonusNumber = parseNumber;
     }
 
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
+
     private void validateDuplicate(List<Integer> winningNumber, int parseNumber) {
         if (winningNumber.contains(parseNumber)) {
             throw new IllegalArgumentException("중복된 보너스 숫자를 입력하였습니다.");
@@ -44,5 +48,9 @@ public class BonusBall {
         if (StringUtils.isBlank(input)) {
             throw new IllegalArgumentException("null 또는 빈 문자를 입력하였습니다.");
         }
+    }
+
+    public boolean isSameBonusNumber(int number) {
+        return bonusNumber == number;
     }
 }

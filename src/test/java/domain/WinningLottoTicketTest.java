@@ -1,6 +1,7 @@
 package domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -23,5 +24,12 @@ public class WinningLottoTicketTest {
         Assertions.assertThatThrownBy(() -> {
             new WinningLottoTicket(input);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void isMatchBonusBallTest() {
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6");
+        winningLottoTicket.initializeBonusBall("7");
+        Assertions.assertThat(winningLottoTicket.isMatchBonusBall()).isFalse();
     }
 }

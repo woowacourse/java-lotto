@@ -11,9 +11,10 @@ public class LottoTickets {
 
     public LottoResults match(WinningLottoTicket winningLottoTicket) {
         LottoResults lottoResults = new LottoResults();
-        lottoTickets.forEach(lottoTicket -> {
-            lottoTicket.getCorrectCount(winningLottoTicket.winningTicket)
-        });
+
+        lottoTickets.stream()
+                .map(lottoTicket -> new LottoResult(lottoTicket.getCorrectCount(winningLottoTicket.getWinningTicket().getLottoTicket()), winningLottoTicket.isMatchBonusBall()))
+                .forEach(lottoResults::add);
 
         return lottoResults;
     }

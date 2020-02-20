@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class LottoTicketsTest {
@@ -26,13 +27,14 @@ public class LottoTicketsTest {
     @DisplayName("당첨 티켓과 매칭 테스트")
     @ParameterizedTest
     @MethodSource("lottoTicketSetUp")
-    void 모두_맞는_당첨_티켓_테스트() {
+    void 모두_맞는지_확인하는_당첨_티켓_테스트(List<Integer> lottoTicket, int expected) {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6");
         winningLottoTicket.initializeBonusBall("7");
 
-        LottoResults lottoResults = LottoTickets.match(winningLottoTicket);
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(lottoTicket)));
+        LottoResults lottoResults = lottoTickets.match(winningLottoTicket);
 
-        Assertions.assertThat(lottoResults.getCount());
+//        Assertions.assertThat(lottoResults.size()).isEqualTo(1);
 
     }
 
