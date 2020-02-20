@@ -1,6 +1,5 @@
-package lotto.domain;
+package lotto.domain.result;
 
-import lotto.domain.result.LottoResult;
 import lotto.domain.result.win.prize.PrizeGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
