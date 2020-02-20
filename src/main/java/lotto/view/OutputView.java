@@ -6,6 +6,7 @@ import lotto.domain.number.LottoNumbers;
 import lotto.domain.number.PurchaseNumber;
 import lotto.domain.result.GameResult;
 import lotto.domain.result.GameResults;
+import lotto.domain.result.Yield;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,5 +52,9 @@ public class OutputView {
         sb.append("(").append(gameResult.getPrize()).append("원)-");
         sb.append(results.calculateCaseNumberSize(gameResult)).append("개");
         System.out.println(sb.toString());
+    }
+
+    public static void printYield(Yield yield) {
+        System.out.println("총 수익률은 " + yield.getYield() + "입니다.");
     }
 }
