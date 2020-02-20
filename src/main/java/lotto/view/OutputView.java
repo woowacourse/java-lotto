@@ -8,6 +8,7 @@ import lotto.domain.result.GameResult;
 import lotto.domain.result.GameResults;
 import lotto.domain.result.Yield;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,6 +56,7 @@ public class OutputView {
     }
 
     public static void printYield(Yield yield) {
-        System.out.println("총 수익률은 " + yield.getYield() + "입니다.");
+        BigDecimal bigDecimal = new BigDecimal(Math.round(yield.getYield()));
+        System.out.println("총 수익률은 " + bigDecimal.toString() + "% 입니다.");
     }
 }

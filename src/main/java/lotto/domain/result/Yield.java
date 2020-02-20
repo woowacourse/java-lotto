@@ -6,15 +6,15 @@ import java.util.Objects;
 
 public class Yield {
 
-    private final long yield;
+    private final double yield;
 
-    public Yield(long yield) {
+    public Yield(double yield) {
         this.yield = yield;
     }
 
     public static Yield calculateYield(PurchaseNumber purchaseNumber, GameResults gameResults) {
-        int purchaseMoney = purchaseNumber.getPurchaseMoney();
-        long benefit = gameResults.calculateBenefit();
+        double purchaseMoney = purchaseNumber.getPurchaseMoney();
+        double benefit = gameResults.calculateBenefit();
         return new Yield((benefit / purchaseMoney) * 100);
     }
 
@@ -26,7 +26,7 @@ public class Yield {
         return yield == yield1.yield;
     }
 
-    public long getYield() {
+    public double getYield() {
         return yield;
     }
 

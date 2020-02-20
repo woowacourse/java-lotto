@@ -75,8 +75,8 @@ public class GameResultsTest {
         results.add(GameResult.NO_RANK);
         // when
         GameResults gameResults = new GameResults(results);
-        long benefit = gameResults.calculateBenefit();
+        double benefit = gameResults.calculateBenefit();
         // then
-        assertThat(benefit).isEqualTo(4031570000L);
+        assertThat(benefit).isEqualTo(4031570000.0);
     }
 }

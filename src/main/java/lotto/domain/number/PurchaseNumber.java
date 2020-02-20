@@ -35,7 +35,7 @@ public class PurchaseNumber {
         return purchaseNumber;
     }
 
-    public int getPurchaseMoney() {
+    public double getPurchaseMoney() {
         return purchaseNumber * 1000;
     }
 }

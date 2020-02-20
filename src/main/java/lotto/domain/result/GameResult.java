@@ -10,10 +10,10 @@ public enum GameResult {
     FIFTH_RANK(5000, 3),
     NO_RANK(0, 0);
 
-    public final int prize;
+    public final double prize;
     public final int correctLottoNumberSize;
 
-    GameResult(int prize, int correctLottoNumberSize) {
+    GameResult(double prize, int correctLottoNumberSize) {
         this.prize = prize;
         this.correctLottoNumberSize = correctLottoNumberSize;
     }
@@ -37,7 +37,7 @@ public enum GameResult {
         return this.correctLottoNumberSize == collectLottoNumber;
     }
 
-    public int getPrize() {
+    public double getPrize() {
         return prize;
     }
 

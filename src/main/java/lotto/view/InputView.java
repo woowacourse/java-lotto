@@ -18,7 +18,8 @@ public class InputView {
     public static PurchaseNumber inputPurchaseMoney() {
         try {
             System.out.println(INPUT_PURCHASE_NUMBER_MESSAGE);
-            return PurchaseNumber.calculate(SCANNER.nextInt());
+            String input = SCANNER.nextLine();
+            return PurchaseNumber.calculate(Integer.parseInt(input));
         } catch (InputMismatchException e) {
             System.out.println(INVALID_PURCHASE_NUMBER_MESSAGE);
             return inputPurchaseMoney();
@@ -31,7 +32,9 @@ public class InputView {
     public static WinningNumbers inputWinningNumbers() {
         List<LottoNumber> winningNumbers;
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        winningNumbers = Arrays.stream(SCANNER.nextLine().trim().split(","))
+        String inputWinningNumbers = SCANNER.nextLine();
+        String[] inputWinningNumber = inputWinningNumbers.replace(" ", "").split(",");
+        winningNumbers = Arrays.stream(inputWinningNumber)
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());

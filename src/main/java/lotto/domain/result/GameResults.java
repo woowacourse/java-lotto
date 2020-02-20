@@ -15,9 +15,9 @@ public class GameResults {
                 .count();
     }
 
-    public long calculateBenefit() {
+    public double calculateBenefit() {
         return gameResults.stream()
-                .mapToLong(value -> value.prize)
+                .mapToDouble(value -> value.prize)
                 .sum();
     }
 }
