@@ -1,6 +1,12 @@
 package lotto.model;
 
 public class Payment {
+    public static final int MINIMUM_PAYMENT = 1000;
+    public static final int MAXINUM_PAYMENT = 100000;
+    public static final int PAYMENT_UNIT = 1000;
+    public static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하세요.";
+    public static final String OVER_RANGE_EXCEPTION_MESSAGE = "범위를 벗어났습니다.";
+    public static final String UNIT_EXCEPTION_MESSAGE = "천 단위로 입력하세요.";
     public static int payment = 0;
 
     public Payment(String input) {
@@ -14,19 +20,19 @@ public class Payment {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자를 입력하세요.");
+            throw new NumberFormatException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 
     private static void isValueRange(int payment) {
-        if (!(payment >= 1000 && payment <= 100000)) {
-            throw new IllegalArgumentException("범위를 벗어났습니다.");
+        if (!(payment >= MINIMUM_PAYMENT && payment <= MAXINUM_PAYMENT)) {
+            throw new IllegalArgumentException(OVER_RANGE_EXCEPTION_MESSAGE);
         }
     }
 
     private static void isUnitK(int payment) {
-        if (!(payment % 1000 == 0)) {
-            throw new IllegalArgumentException("천 단위로 입력하세요.");
+        if (!(payment % PAYMENT_UNIT == 0)) {
+            throw new IllegalArgumentException(UNIT_EXCEPTION_MESSAGE);
         }
     }
 }

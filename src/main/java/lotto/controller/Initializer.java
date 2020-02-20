@@ -8,10 +8,19 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Initializer {
+
+    public static final String THREE = "3";
+    public static final String FOUR = "4";
+    public static final String FIVE = "5";
+    public static final String FIVE_BONUS = "5+";
+    public static final String SIX = "6";
+    public static final int PAYMENT_UNIT = 1000;
+    public static final int INITIAL_NUMBER = 0;
+
     public static void initialize(List<AutoNumber> autoNumbers, HashMap<String, Integer> resultCount) {
         LottoNumbers.lottoNumbersCreate();
         initializePayment();
-        int tryCount = Payment.payment / 1000;
+        int tryCount = Payment.payment / PAYMENT_UNIT;
         OutputView.printLottoCount(tryCount);
         initializeResultCount(resultCount);
         initializeAutoNumbers(autoNumbers, tryCount);
@@ -42,10 +51,10 @@ public class Initializer {
     }
 
     private static void initializeResultCount(HashMap<String, Integer> resultCount) {
-        resultCount.put("3", 0);
-        resultCount.put("4", 0);
-        resultCount.put("5", 0);
-        resultCount.put("5+", 0);
-        resultCount.put("6", 0);
+        resultCount.put(THREE, INITIAL_NUMBER);
+        resultCount.put(FOUR, INITIAL_NUMBER);
+        resultCount.put(FIVE, INITIAL_NUMBER);
+        resultCount.put(FIVE_BONUS, INITIAL_NUMBER);
+        resultCount.put(SIX, INITIAL_NUMBER);
     }
 }

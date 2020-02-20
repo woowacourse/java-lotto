@@ -6,11 +6,12 @@ import java.util.Comparator;
 import java.util.List;
 
 public class AutoNumber {
+    public static final int LOTTO_NUMBER_LENGTH = 6;
     private List<Integer> autoNumber = new ArrayList<>();
 
     public AutoNumber() {
         Collections.shuffle(LottoNumbers.getLottoNumbers());
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
             autoNumber.add(LottoNumbers.getLottoNumbers().get(i));
         }
         autoNumber.sort(Comparator.naturalOrder());

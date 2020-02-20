@@ -1,6 +1,8 @@
 package lotto.model;
 
 public class BonusBall {
+    public static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자가 아닙니다.";
+    public static final String IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE = "당첨번호와 중복되는 숫자가 있습니다.";
     public static int bonusNo;
 
     public BonusBall(String input) {
@@ -13,13 +15,13 @@ public class BonusBall {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자가 아닙니다.");
+            throw new NumberFormatException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 
     private void isContainsWinNumber(int inputNumber) {
         if (WinNumber.winNumbers.contains(inputNumber)) {
-            throw new IllegalArgumentException("당첨번호와 중복되는 숫자가 있습니다.");
+            throw new IllegalArgumentException(IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 }
