@@ -9,6 +9,7 @@ public class InputView {
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String CONVERT_FAIL_EXCEPTION_MESSAGE = "%s : 잘못된 숫자 입력";
+    private static final String EMPTY_EXCEPTION_MESSAGE = "입력값이 비어있습니다.";
 
     private final Scanner scanner;
 
@@ -40,7 +41,7 @@ public class InputView {
 
     private void validateEmpty(String input) {
         if (isEmpty(input)) {
-            throw new IllegalArgumentException("입력값이 비어있습니다.");
+            throw new IllegalArgumentException(EMPTY_EXCEPTION_MESSAGE);
         }
     }
 
