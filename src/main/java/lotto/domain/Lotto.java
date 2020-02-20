@@ -3,14 +3,14 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto {
-    private final int PRICE = 1_000;
+    private static final int PRICE = 1_000;
     private List<Integer> lottoNumbers;
 
     Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    int convertMoneyToLottosSize(int money) {
+    static int convertMoneyToLottosSize(int money) {
         return money / PRICE;
     }
 
@@ -22,7 +22,15 @@ public class Lotto {
             .count();
     }
 
-    boolean matchBonusBall(int bonusBall) {
+    public boolean matchBonusBall(int bonusBall) {
         return lottoNumbers.contains(bonusBall);
     }
+
+    private boolean contains(int bonusBall) {
+        return this.lottoNumbers.contains(bonusBall);
+    }
+
+    // public static boolean matchBonusBall(int bonusBall) {
+    //     return this.contains(bonusBall);
+    // }
 }
