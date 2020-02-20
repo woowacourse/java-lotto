@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Ball {
+public class Ball implements Comparable<Ball> {
 	private static final int MINIMUM_NUMBER = 1;
 	private static final int MAXIMUM_NUMBER = 45;
 	private static final Map<Integer, Ball> ballCaches = new HashMap<>();
@@ -37,12 +37,17 @@ public class Ball {
 		return new Ball(number);
 	}
 
-	public static List<Ball> getBallList() {
+	public static List<Ball> getBalls() {
 		return new ArrayList<>(ballCaches.values());
 	}
 
 	@Override
 	public String toString() {
 		return Integer.toString(number);
+	}
+
+	@Override
+	public int compareTo(Ball o) {
+		return Integer.compare(number, o.number);
 	}
 }

@@ -13,8 +13,11 @@ public class RandomLottoFactory implements LottoFactory {
 	}
 
 	private List<Ball> createRandomBalls() {
-		List<Ball> randomBalls = Ball.getBallList();
-		Collections.shuffle(randomBalls);
-		return randomBalls.subList(FROM_INDEX, TO_INDEX);
+		List<Ball> balls = Ball.getBalls();
+		Collections.shuffle(balls);
+
+		List<Ball> randomBalls = balls.subList(FROM_INDEX, TO_INDEX);
+		Collections.sort(randomBalls);
+		return randomBalls;
 	}
 }
