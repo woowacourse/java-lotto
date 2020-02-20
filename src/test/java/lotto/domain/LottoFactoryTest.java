@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.ticket.LottoCompany;
+import lotto.domain.ticket.LottoTicket;
 import lotto.view.dto.BettingMoneyRequestDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

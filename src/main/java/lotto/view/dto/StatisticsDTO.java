@@ -1,12 +1,12 @@
 package lotto.view.dto;
 
-import lotto.domain.PrizeGroup;
+import lotto.domain.result.win.prize.PrizeGroup;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoTicket.LOTTO_PRICE;
+import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
 public class StatisticsDTO {
     private final List<PrizeDTO> prizeDTOs;

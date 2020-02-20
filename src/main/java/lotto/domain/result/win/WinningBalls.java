@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.result.win;
+
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.ball.LottoBall;
 
 import java.util.HashSet;
 import java.util.Objects;

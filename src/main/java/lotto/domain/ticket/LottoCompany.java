@@ -1,11 +1,18 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
+import lotto.domain.result.win.WinningLotto;
+import lotto.domain.ticket.ball.LottoBall;
+import lotto.domain.ticket.ball.LottoFactory;
 import lotto.view.dto.BettingMoneyRequestDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import static lotto.domain.LottoTicket.LOTTO_PRICE;
+import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
 public class LottoCompany {
     private static final int BALL_COUNT = 6;

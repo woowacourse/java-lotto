@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.result.win.prize.PrizeGroup;
 import lotto.view.dto.StatisticsDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.PrizeGroup.FIFTH;
-import static lotto.domain.PrizeGroup.SIXTH;
+import static lotto.domain.result.win.prize.PrizeGroup.FIFTH;
+import static lotto.domain.result.win.prize.PrizeGroup.SIXTH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class StatisticsDTOTest {

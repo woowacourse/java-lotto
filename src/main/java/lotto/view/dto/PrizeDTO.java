@@ -1,6 +1,6 @@
 package lotto.view.dto;
 
-import lotto.domain.PrizeGroup;
+import lotto.domain.result.win.prize.PrizeGroup;
 
 import java.util.List;
 

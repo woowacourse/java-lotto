@@ -7,7 +7,7 @@ public class OutputView {
     private static final String MESSAGE_FOR_DEFAULT_CASE = "%d개 일치 (%d원)- %d개";
     private static final String SECOND = "SECOND";
 
-    public void printResult(StatisticsDTO statisticsDTO) {
+    public static void printResult(StatisticsDTO statisticsDTO) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (int i = 0; i < statisticsDTO.size(); i++) {
@@ -20,14 +20,14 @@ public class OutputView {
         System.out.println(String.format("총 수익률은 %f입니다.", statisticsDTO.getRate()));
     }
 
-    public String findMessage(String name) {
+    private static String findMessage(String name) {
         if (isSecond(name)) {
             return MESSAGE_FOR_BONUS_CASE;
         }
         return MESSAGE_FOR_DEFAULT_CASE;
     }
 
-    private boolean isSecond(String name) {
+    private static boolean isSecond(String name) {
         return SECOND.equals(name);
     }
 

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticket.ball;
 
 import java.util.Objects;
 

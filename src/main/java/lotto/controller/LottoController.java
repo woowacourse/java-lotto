@@ -1,24 +1,34 @@
 package lotto.controller;
 
-import lotto.domain.LottoCompany;
-import lotto.domain.LottoTicket;
-import lotto.domain.WinningLotto;
+import lotto.domain.ticket.LottoTicketBundle;
+import lotto.service.LottoService;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 import lotto.view.dto.BettingMoneyRequestDTO;
+import lotto.view.dto.StatisticsDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
-
-import java.util.List;
 
 public class LottoController {
     public void run() {
-        BettingMoneyRequestDTO bettingMoney = new BettingMoneyRequestDTO(InputView.inputBettingMoney());
-        List<LottoTicket> lottoTickets = LottoCompany.buyTicket(bettingMoney);
+        LottoTicketBundle lottoTicketBundle = getLottoTicketBundle();
 
+        StatisticsDTO statisticsDTO = getStatisticsDTO(lottoTicketBundle);
+
+        OutputView.printResult(statisticsDTO);
+    }
+
+    private LottoTicketBundle getLottoTicketBundle() {
+        BettingMoneyRequestDTO bettingMoney = new BettingMoneyRequestDTO(InputView.inputBettingMoney());
+
+        return LottoService.getLottoTicketBundle(bettingMoney);
+    }
+
+    private StatisticsDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle) {
         String winningNumber = InputView.inputWinningNumber();
         int bonusNumber = InputView.inputBonusNumber();
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO(winningNumber, bonusNumber);
-        WinningLotto winningLotto = LottoCompany.makeWinningLotto(winningLottoRequestDTO);
 
-
+        return LottoService.getStatisticsDTO(lottoTicketBundle, winningLottoRequestDTO);
     }
+
 }
