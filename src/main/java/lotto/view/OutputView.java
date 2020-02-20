@@ -12,4 +12,8 @@ public class OutputView {
         System.out.println(lotto);
     }
 
+    public static void printEarningRate(int earningRate) {
+        System.out.println(String.format("총 수익률은 %d입니다.", earningRate));
+    }
+
 }

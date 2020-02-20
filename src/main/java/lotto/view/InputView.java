@@ -8,9 +8,9 @@ import lotto.utils.StringUtils;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static String inputPurchaseAmount() {
+    public static int inputPurchaseAmount() {
         System.out.println("구입금액을 입력해주세요");
-        return scanner.nextLine();
+        return scanner.nextInt();
     }
 
     public static List<Integer> inputLastWeekWinningNumbers() {
