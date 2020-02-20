@@ -3,36 +3,36 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoManager {
-	public static final int MIN_WIN_COUNT = 3;
+    public static final int MIN_WIN_COUNT = 3;
 
-	private List<Lotto> lotteries;
-	private WinLotto winLotto;
+    private List<Lotto> lotteries;
+    private WinLotto winLotto;
 
-	public LottoManager(List<Lotto> lotteris, WinLotto winLotto) {
-		this.lotteries = lotteris;
-		this.winLotto = winLotto;
-	}
+    public LottoManager(List<Lotto> lotteris, WinLotto winLotto) {
+        this.lotteries = lotteris;
+        this.winLotto = winLotto;
+    }
 
-	public void compareLotto() {
-		for (Lotto lotto : lotteries) {
-			int count = winLotto.compare(lotto);
-			boolean isBonus = winLotto.isMatchBonus(lotto);
-			resultCountPlus(count, isBonus);
-		}
-	}
+    public void compareLotto() {
+        for (Lotto lotto : lotteries) {
+            int hitCount = winLotto.compare(lotto);
+            boolean isBonusHit = winLotto.isMatchBonus(lotto);
+            lottoResultUpdate(hitCount, isBonusHit);
+        }
+    }
 
-	private void resultCountPlus(int count, boolean isBonus) {
-		if (count < MIN_WIN_COUNT) {
-			return;
-		}
-		LottoResult lottoResult = LottoResult.findRank(count);
-		if (isSecond(isBonus, lottoResult)) {
-			lottoResult = LottoResult.SECOND;
-		}
-		lottoResult.countPlus();
-	}
+    private void lottoResultUpdate(int hitCount, boolean isBonus) {
+        if (hitCount < MIN_WIN_COUNT) {
+            return;
+        }
+        LottoResult lottoRank = LottoResult.findRank(hitCount);
+        if (isSecondRank(lottoRank, isBonus)) {
+            lottoRank = LottoResult.SECOND;
+        }
+        lottoRank.TicketCountPlus();
+    }
 
-	private boolean isSecond(boolean isBonus, LottoResult lottoResult) {
-		return lottoResult == LottoResult.THIRD && isBonus;
-	}
+    private boolean isSecondRank(LottoResult lottoResult, boolean isBonus) {
+        return lottoResult == LottoResult.THIRD && isBonus;
+    }
 }

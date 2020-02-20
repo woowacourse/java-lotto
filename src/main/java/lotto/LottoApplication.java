@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoManager;
@@ -10,6 +8,8 @@ import lotto.domain.WinLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoApplication {
 	public static void main(String[] args) {
 		Money money = new Money(InputView.inputBuyMoney());
@@ -17,10 +17,9 @@ public class LottoApplication {
 		OutputView.printLotteris(lotteris);
 
 		WinLotto winLotto = new WinLotto(InputView.inputWinNumber(), InputView.inputBounsBall());
-		LottoManager lottoManager = new LottoManager(lotteris, winLotto);
 
+		LottoManager lottoManager = new LottoManager(lotteris, winLotto);
 		lottoManager.compareLotto();
 		OutputView.printResult(money);
 	}
-
 }

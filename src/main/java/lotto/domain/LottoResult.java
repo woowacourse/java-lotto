@@ -11,36 +11,36 @@ public enum LottoResult {
 
 	public static final String ERROR_MESSAGE_NOT_FOUND_RANK = "당첨되지 않았습니다.";
 
-	private int count;
+	private int ticketCount;
 	private long reward;
 	private int hitCount;
 
-	LottoResult(int count, long reward, int hitCount) {
-		this.count = count;
+	LottoResult(int ticketCount, long reward, int hitCount) {
+		this.ticketCount = ticketCount;
 		this.reward = reward;
 		this.hitCount = hitCount;
 	}
 
 	public static LottoResult findRank(int count) {
 		return Arrays.stream(values())
-			.filter(x -> x.hitCount == count)
-			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE_NOT_FOUND_RANK));
+				.filter(x -> x.hitCount == count)
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE_NOT_FOUND_RANK));
 	}
 
 	public static long calculateTotalReward() {
 		return Arrays.stream(values())
-			.map(x -> x.reward * x.count)
-			.reduce((x, y) -> x + y)
-			.get();
+				.map(x -> x.reward * x.ticketCount)
+				.reduce((x, y) -> x + y)
+				.get();
 	}
 
-	public void countPlus() {
-		this.count++;
+	public void TicketCountPlus() {
+		this.ticketCount++;
 	}
 
-	public int getCount() {
-		return count;
+	public int getTicketCount() {
+		return ticketCount;
 	}
 
 	public long getReward() {

@@ -5,11 +5,13 @@
 - money
   - 구입 금액 
 - Lotto
+- LottoNo
 
 - LottoFactory
 
 - LottoManager
   - 당첨 복권과 비교, 당첨 통계
+  
 - WinLotto
 
 - BonusBall
