@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.DuplicatedNumberException;
+
 import java.util.List;
 
 public class Lotto {
@@ -13,7 +15,7 @@ public class Lotto {
 
     private void validateDistinctNumbers(List<LottoNumber> inputNumbers) {
         if (inputNumbers.stream().mapToInt(LottoNumber::getNumber).distinct().count() != inputNumbers.size()) {
-            throw new IllegalArgumentException(NOT_DISTINCT_NUMBERS_ERROR_MSG);
+            throw new DuplicatedNumberException(NOT_DISTINCT_NUMBERS_ERROR_MSG);
         }
     }
 

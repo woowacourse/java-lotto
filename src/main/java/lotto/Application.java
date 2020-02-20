@@ -24,7 +24,6 @@ public class Application {
 
         WinningLotto winningLotto = new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
 
-        Results results = new Results(lottoList, winningLotto);
-        OutputView.printResults(results);
+        OutputView.printResults(new Results(lottoList, winningLotto));
     }
 }

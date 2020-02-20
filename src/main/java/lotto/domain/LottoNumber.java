@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.NotInScopeException;
+import lotto.exception.NotNumberException;
+
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
@@ -24,14 +27,14 @@ public class LottoNumber {
         try {
             Integer.parseInt(lottoNumber);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_NUMBER_MSG);
+            throw new NotNumberException(NOT_NUMBER_MSG);
         }
     }
 
     private void validateNumberScope(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER
                 || lottoNumber > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(NOT_IN_SCOPE_NUMBERS_ERROR_MSG);
+            throw new NotInScopeException(NOT_IN_SCOPE_NUMBERS_ERROR_MSG);
         }
     }
 
