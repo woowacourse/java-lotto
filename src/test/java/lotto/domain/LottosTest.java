@@ -9,6 +9,9 @@ import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.exception.InvalidLottoException;
+import lotto.domain.exception.InvalidLottosException;
+
 public class LottosTest {
 	@Test
 	@DisplayName("로또 여러 장이 정상적으로 생성된 경우")
@@ -19,9 +22,9 @@ public class LottosTest {
 	@Test
 	@DisplayName("로또가 없는 경우")
 	void constructor_로또가_없는_경우() {
-		assertThatThrownBy(() -> {
+		assertThatExceptionOfType(InvalidLottosException.class).isThrownBy(() -> {
 			new Lottos(null);
 			new Lotto(Collections.emptyList());
-		}).isInstanceOf(IllegalArgumentException.class);
+		}).withMessage("하나 이상의 로또가 필요합니다.");
 	}
 }

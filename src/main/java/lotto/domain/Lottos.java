@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class Lottos {
-	public static final String INVALID_LOTTO_SIZE_MESSAGE = "로또가 존재하지 않습니다.";
+import lotto.domain.exception.InvalidLottosException;
 
+public class Lottos {
 	private final List<Lotto> lottos;
 
 	public Lottos(List<Lotto> lottos) {
@@ -16,7 +16,7 @@ public class Lottos {
 
 	private void validate(List<Lotto> lottos) {
 		if (lottos == null || lottos.isEmpty()) {
-			throw new IllegalArgumentException(INVALID_LOTTO_SIZE_MESSAGE);
+			throw new InvalidLottosException("하나 이상의 로또가 필요합니다.");
 		}
 	}
 
