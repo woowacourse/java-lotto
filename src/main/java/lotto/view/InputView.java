@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.exception.PurchaseMoneyLackException;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.PurchaseNumber;
 
@@ -26,6 +27,9 @@ public class InputView {
             return PurchaseNumber.calculate(Integer.parseInt(input));
         } catch (NumberFormatException e) {
             System.out.println(INVALID_PURCHASE_NUMBER_MESSAGE);
+            return inputPurchaseMoney();
+        } catch (PurchaseMoneyLackException e) {
+            System.out.println(e.getMessage());
             return inputPurchaseMoney();
         }
     }
