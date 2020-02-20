@@ -8,8 +8,6 @@ public class InputView {
     private static final String INPUT_ERROR_MESSAGE = "문자가 입력되었습니다. 숫자를 입력해주세요.";
     private static final String WINNING_LOTTO_NUMBER_INPUT_MESSAGE = "당첨번호를 입력해주세요.";
     private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 번호를 입력해주세요.";
-    private static final String SPACE = " ";
-    private static final String BLANK = "";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -25,8 +23,7 @@ public class InputView {
 
     public static String inputWinningLottoNumbers() {
         System.out.println(WINNING_LOTTO_NUMBER_INPUT_MESSAGE);
-        return SCANNER.nextLine()
-                .replace(SPACE, BLANK);
+        return SCANNER.nextLine();
     }
 
     public static int inputBonusNumber() {

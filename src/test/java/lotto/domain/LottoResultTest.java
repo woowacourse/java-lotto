@@ -12,16 +12,14 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
-
-
     static Stream<Arguments> generateLottos() {
         return Stream.of(
                 Arguments.of(Arrays.asList(
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 9)),
-                        new Lotto(Arrays.asList(10, 20, 31, 41, 11, 9))
-                ), new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7))
+                        new Lotto(ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 6")),
+                        new Lotto(ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 7")),
+                        new Lotto(ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 9")),
+                        new Lotto(ConvertInput.convertLottoNumbers("10, 20, 31, 41, 11, 9"))
+                ), new WinningLotto(ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 6"), 7))
         );
     }
 
@@ -30,7 +28,7 @@ public class LottoResultTest {
     @MethodSource("generateLottos")
     void checkRankTest(List<Lotto> lottos) {
         LottoResult lottoResult = new LottoResult();
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningLotto = new WinningLotto(ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 6"), 7);
 
         lottoResult.calculateLottoResult(lottos, winningLotto);
 

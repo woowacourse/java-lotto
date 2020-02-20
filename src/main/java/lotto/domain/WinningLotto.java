@@ -5,21 +5,16 @@ import java.util.List;
 public class WinningLotto extends Lotto {
     private static final String BONUS_NUMBER_DUPLICATION_ERROR_MESSAGE = "보너스 번호가 당첨 번호와 같습니다.";
 
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> numbers, int bonusNumber) {
+    public WinningLotto(List<LottoNumber> numbers, int bonusNumber) {
         super(numbers);
-        validateBonusNumberScope(bonusNumber);
         validateBonusNumberDuplication(bonusNumber);
-        this.bonusNumber = bonusNumber;
-    }
-
-    static void validateBonusNumberScope(int bonusNumber) {
-        validateNumberScope(bonusNumber);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     void validateBonusNumberDuplication(int bonusNumber) {
-        if (lottoNumbers.contains(bonusNumber)) {
+        if (lottoNumbers.contains(new LottoNumber(bonusNumber))) {
             throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATION_ERROR_MESSAGE);
         }
     }

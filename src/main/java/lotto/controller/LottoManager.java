@@ -17,7 +17,7 @@ public class LottoManager {
     }
 
     public void setWinningLotto(String numbers, int bonusNumber) {
-        List<Integer> winningLottoNumbers = SplitLottoNumbers.splitLottoNumbers(numbers);
+        List<LottoNumber> winningLottoNumbers = ConvertInput.convertLottoNumbers(numbers);
         this.winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
     }
 
