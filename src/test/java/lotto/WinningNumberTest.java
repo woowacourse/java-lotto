@@ -58,6 +58,17 @@ public class WinningNumberTest {
     }
 
     @Test
+    void 당첨_번호와_보너스_번호가_중복되는_경우_예외_처리() {
+        assertThatThrownBy(() -> {
+            String[] numbers = {"1", "2", "3", "5", "4", "6"};
+            String bonusNumber = "1";
+            new WinningNumber(numbers, bonusNumber);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
+
+    }
+
+    @Test
     void 당첨_번호_개수에_따른_등수_결과_반환() {
         String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
         String bonusNumber = "7";

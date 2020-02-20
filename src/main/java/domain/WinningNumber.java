@@ -14,6 +14,7 @@ public class WinningNumber {
         }
         this.winningNumbers = new Lotto(winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
+        checkDuplicatedLottoNumber();
     }
 
     public LottoResult findRank(Lotto myLotto) {
@@ -37,6 +38,11 @@ public class WinningNumber {
         return myLotto.contains(bonusNumber);
     }
 
+    private void checkDuplicatedLottoNumber() {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
+        }
+    }
 
 }
 
