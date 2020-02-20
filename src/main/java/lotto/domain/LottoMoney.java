@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.exception.InvalidMoneyException;
 
-public class Money {
+public class LottoMoney {
 	private static final int ZERO = 0;
 	private static final int UNIT = 1000;
 	private static final int MAX_BOUND = 100000;
@@ -10,7 +10,7 @@ public class Money {
 
 	private final int money;
 
-	public Money(String money) {
+	public LottoMoney(String money) {
 		this.money = validate(money);
 	}
 

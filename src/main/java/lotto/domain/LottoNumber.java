@@ -1,18 +1,25 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import lotto.exception.InvalidNumberException;
 
-public class Number {
+public class LottoNumber {
 	public static final int MIN_BOUND = 1;
 	public static final int MAX_BOUND = 45;
+	private static final Map<Integer, LottoNumber> cache = new HashMap<>();
 
 	private final int number;
 
-	private Number(int number) {
+	static {
+		for (int i = MIN_BOUND; i < MAX_BOUND; i++) {
+			cache.put(i, new LottoNumber(i));
+		}
+	}
+
+	private LottoNumber(int number) {
 		validateBound(number);
 		this.number = number;
 	}
@@ -23,27 +30,11 @@ public class Number {
 		}
 	}
 
-	private static class NumberCache {
-		final static List<Number> cache;
-
-		static {
-			cache = new ArrayList<>();
-
-			int value = MIN_BOUND;
-			for (int i = 0; i < ((MAX_BOUND - MIN_BOUND) + 1); i++) {
-				cache.add(new Number(value++));
-			}
-		}
-
-		private NumberCache() {
-		}
-	}
-
-	public static Number valueOf(int number) {
+	public static LottoNumber valueOf(int number) {
 		if (number >= MIN_BOUND && number <= MAX_BOUND) {
-			return NumberCache.cache.get(number + (-MIN_BOUND));
+			return cache.get(number);
 		}
-		return new Number(number);
+		return new LottoNumber(number);
 	}
 
 	public int getNumber() {
@@ -56,8 +47,8 @@ public class Number {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		Number number = (Number)o;
-		return this.number == number.number;
+		LottoNumber lottoNumber = (LottoNumber)o;
+		return this.number == lottoNumber.number;
 	}
 
 	@Override
