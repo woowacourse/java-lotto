@@ -30,10 +30,6 @@ public enum WinningPrize {
 			.orElse(NO_PRIZE);
 	}
 
-	public int getMatchCount() {
-		return matchCount;
-	}
-
 	public int getPrize() {
 		return prize;
 	}
