@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class PurchasingAmountTest {
-	//TODO : getPrice하는 경우 TestCode를 작성해야 합니다.
 	@Test
 	void IllegalArgumentExceptionWhenInputHasChangeMoney() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
@@ -25,5 +24,5 @@ public class PurchasingAmountTest {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 			new PurchasingAmount(0))
 			.withMessage("최소 한장이상 구매 하셔야 합니다.");
-}
+	}
 }
