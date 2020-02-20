@@ -9,6 +9,9 @@ import java.util.*;
 public class LottoGame {
     private static PurchaseAmount amount;
     private static List<Lotto> lottoDummy = new ArrayList<>();
+
+    private int profit = 0;
+
     private static Map<LottoResult, Integer> result = new HashMap<LottoResult, Integer>(){{
         put(LottoResult.FIRST, 0);
         put(LottoResult.SECOND, 0);
@@ -31,9 +34,10 @@ public class LottoGame {
 
         for (Lotto lotto : lottoDummy){
             LottoResult rank = winningNumber.findRank(lotto);
+            //profit += rank.getWinningMoney();
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
-
         OutputView.printResult(result);
+        //OutputView.printProfitRatio(profit);
     }
 }
