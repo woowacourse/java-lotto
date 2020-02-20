@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoUser;
 import lotto.domain.Lottos;
 import lotto.domain.WinningNumber;
 import lotto.dto.LottoCountDto;
@@ -15,7 +14,6 @@ import lotto.view.OutputView;
 public class LottoController {
 	public static void run() {
 		Lottos lottos = buyLottos();
-		LottoUser lottoUser = new LottoUser(lottos);
 
 		OutputView.printLottos(lottos.makeLottoDtos());
 		WinningNumber winningNumber = checkLWinningNumber();
