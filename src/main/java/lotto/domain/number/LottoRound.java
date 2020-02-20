@@ -1,5 +1,7 @@
 package lotto.domain.number;
 
+import lotto.domain.exception.LottoNumberSizeException;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +20,7 @@ public class LottoRound {
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_AMOUNT) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_AMOUNT_EXCEPTION_MESSAGE);
+            throw new LottoNumberSizeException(LOTTO_NUMBER_AMOUNT_EXCEPTION_MESSAGE);
         }
     }
 

@@ -59,4 +59,8 @@ public class OutputView {
         BigDecimal bigDecimal = new BigDecimal(Math.round(yield.getYield()));
         System.out.println("총 수익률은 " + bigDecimal.toString() + "% 입니다.");
     }
+
+    public static void printErrorMessage(String errorMessage) {
+        System.out.println(errorMessage);
+    }
 }

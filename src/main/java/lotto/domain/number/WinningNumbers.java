@@ -1,10 +1,13 @@
 package lotto.domain.number;
 
+import lotto.domain.exception.DuplicateLottoNumberException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumbers extends LottoRound {
     private static final int WINNING_NUMBER_SIZE = 7;
+    private static final String DUPLICATE_LOTTO_NUMBER_EXCEPTION_MESSAGE = "중복이 존재합니다.";
     private final LottoNumber bonusBall;
 
     public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
@@ -20,7 +23,7 @@ public class WinningNumbers extends LottoRound {
                 .distinct()
                 .count() != WINNING_NUMBER_SIZE;
         if (isDuplicate) {
-            throw new IllegalArgumentException("중복이 존재합니다.");
+            throw new DuplicateLottoNumberException(DUPLICATE_LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 

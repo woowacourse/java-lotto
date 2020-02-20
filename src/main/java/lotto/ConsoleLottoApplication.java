@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.exception.DuplicateLottoNumberException;
+import lotto.domain.exception.LottoNumberSizeException;
 import lotto.domain.number.*;
 import lotto.domain.random.RandomNumberGenerator;
 import lotto.domain.result.GameResult;
@@ -16,9 +18,9 @@ public class ConsoleLottoApplication {
         PurchaseNumber purchaseNumber = inputPurchaseNumber();
         AllLottoNumbers allLottoNumbers = createAllLottoNumbers(purchaseNumber);
         OutputView.printAllLottoNumbers(allLottoNumbers);
-        WinningNumbers winningNumbers = InputView.inputWinningNumbers();
+        WinningNumbers winningNumbers = inputWinningNumbers();
 
-        GameResults gameResults = createGameResultsAndPrint(purchaseNumber, allLottoNumbers, winningNumbers);
+        GameResults gameResults = createGameResults(purchaseNumber, allLottoNumbers, winningNumbers);
         OutputView.printGameResults(gameResults);
 
         Yield yield = Yield.calculateYield(purchaseNumber, gameResults);
@@ -26,9 +28,7 @@ public class ConsoleLottoApplication {
     }
 
     private static PurchaseNumber inputPurchaseNumber() {
-        // 구입 금액 입력
         PurchaseNumber purchaseNumber = InputView.inputPurchaseMoney();
-        // 구입 개수 출력
         OutputView.printPurchaseNumber(purchaseNumber);
         return purchaseNumber;
     }
@@ -43,7 +43,7 @@ public class ConsoleLottoApplication {
         return new AllLottoNumbers(lottoNumbersList);
     }
 
-    private static GameResults createGameResultsAndPrint(PurchaseNumber purchaseNumber, AllLottoNumbers allLottoNumbers, WinningNumbers winningNumbers) {
+    private static GameResults createGameResults(PurchaseNumber purchaseNumber, AllLottoNumbers allLottoNumbers, WinningNumbers winningNumbers) {
         List<GameResult> gameResultList = new ArrayList<>();
         for (int i = 0; i < purchaseNumber.getPurchaseNumber(); i++) {
             LottoNumbers presentLottoNumbers = allLottoNumbers.getAllLottoNumbers().get(i);
@@ -53,5 +53,16 @@ public class ConsoleLottoApplication {
             gameResultList.add(gameResult);
         }
         return new GameResults(gameResultList);
+    }
+
+    private static WinningNumbers inputWinningNumbers() {
+        try {
+            List<LottoNumber> lottoNumbers = InputView.inputWinningNumbers();
+            LottoNumber bonusNumber = InputView.inputBonusNumber();
+            return new WinningNumbers(lottoNumbers, bonusNumber);
+        } catch (DuplicateLottoNumberException | LottoNumberSizeException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return inputWinningNumbers();
+        }
     }
 }
