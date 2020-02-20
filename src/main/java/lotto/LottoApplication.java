@@ -1,11 +1,11 @@
 package lotto;
 
-import lotto.domain.BonusNumber;
-import lotto.domain.Lottos;
-import lotto.domain.PurchasePrice;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.List;
+import java.util.Map;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -15,7 +15,8 @@ public class LottoApplication {
         int lottoCount = purchasePrice.calculateLottoCount();
         OutputView.printLottoCount(lottoCount);
 
-        Lottos lottos = new Lottos(lottoCount);
+        List<Lotto> randomLottos = LottoGenerator.generate(lottoCount);
+        Lottos lottos = new Lottos(randomLottos);
         OutputView.printLottos(lottos);
 
         String winningNumbersInput = InputView.requestWinningNumbersInput();

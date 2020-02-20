@@ -15,8 +15,12 @@ public class LottoGenerator {
         allLottoNumbers = gatherAllNumbers();
     }
 
-    public static Lotto generate() {
-        return new Lotto(generateLottoNumbers());
+    public static List<Lotto> generate(int lottoCount) {
+        List<Lotto> randomLottos = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            randomLottos.add(new Lotto(generateLottoNumbers()));
+        }
+        return randomLottos;
     }
 
     private static List<Integer> gatherAllNumbers() {
@@ -28,11 +32,7 @@ public class LottoGenerator {
     }
 
     private static List<Integer> generateLottoNumbers() {
-        List<Integer> cloneAllLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < allLottoNumbers.size(); i++) {
-            int cloneLottoNumber = allLottoNumbers.get(i);
-            cloneAllLottoNumbers.add(cloneLottoNumber);
-        }
+        List<Integer> cloneAllLottoNumbers = new ArrayList<>(allLottoNumbers);
         Collections.shuffle(cloneAllLottoNumbers);
         List<Integer> resultNumbers = pickLottoNumbers(cloneAllLottoNumbers);
         Collections.sort(resultNumbers);

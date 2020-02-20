@@ -1,18 +1,25 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(int lottoCount) {
-        List<Lotto> lottoLines = new ArrayList<Lotto>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottoLines.add(LottoGenerator.generate());
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public Map<MatchResult, Integer> createMatchResults(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        Map<MatchResult, Integer> matchResults = new HashMap<>();
+        for (Lotto lotto : lottos) {
+            MatchResult lottoMatchResult = lotto.findMatchResult(winningNumbers, bonusNumber);
+            int matchCount = matchResults.get(lottoMatchResult);
+            matchResults.put(lottoMatchResult, matchCount++);
         }
-        this.lottos = lottoLines;
+        return matchResults;
     }
 
     public List<Lotto> getLottos() {
