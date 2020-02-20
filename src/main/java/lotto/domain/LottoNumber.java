@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import lotto.exception.InvalidNumberException;
-
 public class LottoNumber implements Comparable<LottoNumber> {
 	public static final int MIN_BOUND = 1;
 	public static final int MAX_BOUND = 45;
@@ -29,7 +27,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private void validateBound(int number) {
 		if (number < MIN_BOUND || number > MAX_BOUND) {
-			throw new InvalidNumberException(InvalidNumberException.OUT_OF_BOUND);
+			throw new InvalidLottoNumberException(InvalidLottoNumberException.OUT_OF_BOUND);
 		}
 	}
 
@@ -38,6 +36,22 @@ public class LottoNumber implements Comparable<LottoNumber> {
 			return cache.get(number);
 		}
 		return new LottoNumber(number);
+	}
+
+	public static LottoNumber valueOf(String inputNumber) {
+		int number = parseToInt(inputNumber);
+		if (number >= MIN_BOUND && number <= MAX_BOUND) {
+			return cache.get(number);
+		}
+		return new LottoNumber(number);
+	}
+
+	private static int parseToInt(String inputNumber) {
+		try {
+			return Integer.parseInt(inputNumber);
+		} catch (NumberFormatException nfe) {
+			throw new InvalidLottoNumberException(InvalidLottoNumberException.NOT_INTEGER);
+		}
 	}
 
 	public static List<LottoNumber> values() {
