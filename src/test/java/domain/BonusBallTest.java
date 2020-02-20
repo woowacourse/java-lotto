@@ -12,15 +12,10 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class BonusBallTest {
-    List<Integer> winningNumber;
-
-    @BeforeEach
-    private void setUp() {
-        winningNumber = new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 6));
-    }
+    List<Integer> winningNumber = new ArrayList<>();
 
     private static Stream<String> bonusBallSetUp() {
-        return Stream.of("", " ", null, "askjfakl", "60", "0", "2");
+        return Stream.of("", " ", null, "askjfakl", "60", "0");
     }
 
     @DisplayName("BonusBall 생성자 테스트")

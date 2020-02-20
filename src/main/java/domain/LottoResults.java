@@ -15,7 +15,7 @@ public class LottoResults {
         lottoResults.add(lottoResult);
     }
 
-    public long getCountSameLottoNumber(int number) {
+    private long getCountSameLottoNumber(int number) {
         return lottoResults.stream()
                 .filter(lottoResult -> lottoResult.isCorrectCount(number))
                 .count();

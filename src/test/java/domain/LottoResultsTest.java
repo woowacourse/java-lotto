@@ -3,21 +3,34 @@ package domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import view.InputView;
+import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class LottoResultsTest {
 
-    @DisplayName("로또 결과값 추가해서 잘 들어갔는지 테스트")
+    @DisplayName("로또 당첨갯수 확인 메서드 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"1,1", "10,10", "15,15"})
-    void 로또_결과값_추가_테스트(int size, int expected) {
-        LottoResults lottoResults = new LottoResults();
-        for(int i = 0 ; i < size ; i++) {
-            lottoResults.add(new LottoResult(i, false));
-        }
+    @CsvSource(value = {"MATCH_THREE,1"})
+    void 로또_당첨갯수_확인_메서드(String lottoTypeStr, int expected) {
 
-//        Assertions.assertThat(lottoResults.size()).isEqualTo(expected);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6");
+        winningLottoTicket.initializeBonusBall("7");
+
+        List<LottoTicket> originalLottoTickets = new ArrayList<>();
+        originalLottoTickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 12, 13, 14)));
+        LottoTickets lottoTickets = new LottoTickets(originalLottoTickets);
+
+        LottoResults lottoResults = lottoTickets.match(winningLottoTicket);
+        HashMap<String, Integer> map = lottoResults.getCountMap();
+
+        Assertions.assertThat(map.get(lottoTypeStr)).isEqualTo(expected);
     }
 }
