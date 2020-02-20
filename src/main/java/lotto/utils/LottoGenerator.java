@@ -43,11 +43,11 @@ public class LottoGenerator {
     public static List<LottoNumber> createLottoNumbersByUserInput(String[] splitedWinningLottoNumbers) {
         if (splitedWinningLottoNumbers.length != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(INCORRECT_LOTTO_NUMBER_MSG);
-
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
-            lottoNumbers.add(new LottoNumber(splitedWinningLottoNumbers[i]));
         }
+
+        List<LottoNumber> lottoNumbers = Arrays.stream(splitedWinningLottoNumbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
         return lottoNumbers;
     }
 
