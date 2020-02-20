@@ -27,18 +27,18 @@ public class InputView {
             String winningBalls = scanner.nextLine();
             WinningBallsUtils winningBallsUtils = new WinningBallsUtils(winningBalls);
             return winningBallsUtils.getWinningBalls();
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
             return InputWinningBalls();
         }
     }
 
     public static int InputBonusBall() {
-        try{
+        try {
             OutputView.printAnswerBonusBall();
             String bonusBall = scanner.nextLine();
             return InputValidationUtil.returnNumberWithNumberCheck(bonusBall);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
             return InputBonusBall();
         }

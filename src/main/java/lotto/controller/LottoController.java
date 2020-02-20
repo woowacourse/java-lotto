@@ -22,10 +22,14 @@ public class LottoController {
     }
 
     private WinningBalls generateWinningBalls() {
-        List<LottoBall> winningBallsInput = InputView.InputWinningBalls();
-        int bonusBall = InputView.InputBonusBall();
-
-        return new WinningBalls(winningBallsInput, bonusBall);
+        try {
+            List<LottoBall> winningBallsInput = InputView.InputWinningBalls();
+            int bonusBall = InputView.InputBonusBall();
+            return new WinningBalls(winningBallsInput, bonusBall);
+        } catch (RuntimeException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return generateWinningBalls();
+        }
     }
 
     private void generateLottoTickets() {

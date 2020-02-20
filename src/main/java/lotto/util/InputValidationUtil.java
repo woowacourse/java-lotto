@@ -18,7 +18,7 @@ public class InputValidationUtil {
     }
 
     public static void isPositiveNumber(long inputValue) {
-        if(inputValue < ZERO){
+        if (inputValue < ZERO) {
             throw new NotPositiveNumberException("음수입니다. 재입력 해주세요.");
         }
     }

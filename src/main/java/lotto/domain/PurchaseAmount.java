@@ -4,8 +4,8 @@ import lotto.Exception.NotBuyLottoTicketException;
 import lotto.util.InputValidationUtil;
 
 public class PurchaseAmount {
-
     private static final int LOTTO_PURCHASE_UNIT = 1000;
+
     private long purchaseAmount;
 
     public PurchaseAmount(String purchaseAmount) {

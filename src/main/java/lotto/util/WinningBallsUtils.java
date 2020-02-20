@@ -23,19 +23,19 @@ public class WinningBallsUtils {
         Collections.sort(this.winningBalls);
     }
 
-    public void validateWinningBallsNumber(String[] winningBalls) {
+    private void validateWinningBallsNumber(String[] winningBalls) {
         for (String winningBall : winningBalls) {
             InputValidationUtil.returnNumberWithNumberCheck(winningBall);
         }
     }
 
-    public void validateWinningBallsLength(String[] winningBalls) {
+    private void validateWinningBallsLength(String[] winningBalls) {
         if (winningBalls.length != 6) {
             throw new NumberOutOfRangeException("6개의 숫자를 입력해주세요");
         }
     }
 
-    public void validateDuplicatedWinningBalls(String[] winningBalls) {
+    private void validateDuplicatedWinningBalls(String[] winningBalls) {
         Set<String> DuplicatedValidation = new HashSet<>(Arrays.asList(winningBalls));
         if (DuplicatedValidation.size() != winningBalls.length) {
             throw new DuplicationException("중복값을 제거하고 입력해주세요.");
