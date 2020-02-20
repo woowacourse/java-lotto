@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class LottoStatisticsTest {
 	@Test
 	void constructor() {
-		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(14000);
+		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("14000");
 		LottoResults lottoResults = new LottoResults(Arrays.asList(
 				LottoRank.FIRST,
 				LottoRank.FIRST,
