@@ -3,13 +3,11 @@ package lotto.domain;
 import lotto.validator.Validator;
 
 public class BonusBall {
-	private int bonusBall;
+	private LottoNo bonusBall;
 
 	public BonusBall(String bonusBall) {
 		Validator.validateInteger(bonusBall);
-		int bonusNo = Integer.valueOf(bonusBall);
-		Validator.validateLottoRange(bonusNo);
-		this.bonusBall = bonusNo;
+		this.bonusBall = new LottoNo(Integer.parseInt(bonusBall));
 	}
 
 	public boolean isContainBonusBall(Lotto lotto) {

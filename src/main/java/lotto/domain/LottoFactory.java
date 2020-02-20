@@ -10,11 +10,11 @@ public class LottoFactory {
 	private static final int LOTTO_FROM_INDEX = 0;
 	private static final int LOTTO_TO_INDEX = 6;
 
-	private static List<Integer> lottoBox = new ArrayList<>();
+	private static List<LottoNo> lottoBox = new ArrayList<>();
 
 	static {
 		for (int count = START_LOTTO_NO; count <= END_LOTTO_NO; count++) {
-			lottoBox.add(count);
+			lottoBox.add(new LottoNo(count));
 		}
 	}
 
@@ -28,13 +28,13 @@ public class LottoFactory {
 	}
 
 	private static Lotto createLotto() {
-		List<Integer> lotto = pickAutoRandomNumber();
+		List<LottoNo> lotto = pickAutoRandomNumber();
 		Collections.sort(lotto);
 		return new Lotto(lotto);
 	}
 
-	private static List<Integer> pickAutoRandomNumber() {
-		List<Integer> lotto = new ArrayList<>();
+	private static List<LottoNo> pickAutoRandomNumber() {
+		List<LottoNo> lotto = new ArrayList<>();
 		lotto.addAll(lottoBox);
 		Collections.shuffle(lotto);
 		lotto = lotto.subList(LOTTO_FROM_INDEX, LOTTO_TO_INDEX);
