@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.controller.Money;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,7 +31,7 @@ class RankTest {
     @Test
     void sumWinningMoney() {
         List<Rank> ranks = Arrays.asList(Rank.FIFTH, Rank.SECOND, Rank.FOURTH);
-        double expected = 30055000;
+        Money expected = new Money(30055000);
         assertThat(Rank.sumWinningMoney(ranks)).isEqualTo(expected);
     }
 }

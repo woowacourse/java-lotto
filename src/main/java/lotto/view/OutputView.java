@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.controller.Money;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 
@@ -19,15 +20,15 @@ public class OutputView {
 
         for (Rank rank : Rank.values()) {
             int matchedCount = rank.getMatchedCount();
-            int winningMoney = rank.getWinningMoney();
+            Money winningMoney = rank.getWinningMoney();
             int containingCount = rank.getContainingCount(ranks);
-            System.out.println(String.format("%d개 일치 (%d원) - %d개",matchedCount, winningMoney, containingCount));
+            System.out.println(String.format("%d개 일치 (%d원) - %d개",matchedCount, winningMoney.getValue(), containingCount));
         }
     }
 
-    public static void printProfit(int purchaseMoney, List<Rank> ranks) {
-        double totalWinningMoney = Rank.sumWinningMoney(ranks);
-        double profit = totalWinningMoney / purchaseMoney * 100;
-        System.out.println(String.format("총 수익률은 %d%%입니다.", (int)profit));
+    public static void printProfit(Money purchaseMoney, List<Rank> ranks) {
+        Money totalWinningMoney = Rank.sumWinningMoney(ranks);
+        int profit = totalWinningMoney.calculateProfit(purchaseMoney);
+        System.out.println(String.format("총 수익률은 %d%%입니다.", profit));
     }
 }
