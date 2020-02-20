@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.AutoLottosGenerator;
-import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.LottoStatistics;
@@ -19,7 +19,8 @@ public class LottoApplication {
 		Lottos lottos = lottosGenerator.generate(buyCount);
 		OutputView.printBuyCount(buyCount);
 		OutputView.printLottos(lottos);
-		WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
+		WinningLotto winningLotto = new WinningLotto(LottoFactory.create(InputView.inputWinningLotto()),
+				LottoNumber.of(InputView.inputWinningLottoBonus()));
 		LottoStatistics lottoStatistics = new LottoStatistics(lottoPurchaseMoney, lottos.match(winningLotto));
 		long profitRate = lottoStatistics.getProfitRate();
 		System.out.println(profitRate);

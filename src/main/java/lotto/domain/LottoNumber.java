@@ -30,6 +30,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return CACHE.get(number);
 	}
 
+	public static LottoNumber of(String number) {
+		try {
+			return of(Integer.parseInt(number));
+		} catch (NumberFormatException e) {
+			throw e;
+		}
+	}
+
 	public static Collection<LottoNumber> values() {
 		return Collections.unmodifiableCollection(CACHE.values());
 	}

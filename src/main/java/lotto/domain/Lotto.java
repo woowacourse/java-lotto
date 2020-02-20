@@ -46,6 +46,12 @@ public class Lotto {
 				.collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
 	}
 
+	public static Lotto of(String... lottoNumbers) {
+		return Arrays.stream(lottoNumbers)
+				.map(LottoNumber::of)
+				.collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+	}
+
 	public boolean contains(LottoNumber lottoNumber) {
 		return lotto.contains(lottoNumber);
 	}
