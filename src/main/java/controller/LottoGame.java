@@ -17,7 +17,7 @@ public class LottoGame {
         WinningNumber winningNumber = inputWinningNumber();
 
         LottoResult lottoResult = new LottoResult();
-        lottoDummy.countWinningLottoRank(winningNumber, lottoResult);
+        lottoDummy.countWinningLotto(winningNumber, lottoResult);
 
         Profit profit = new Profit();
         int totalProfit = lottoResult.calculateProfit();

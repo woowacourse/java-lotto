@@ -13,7 +13,7 @@ public class LottoDummy {
         }
     }
 
-    public void countWinningLottoRank(WinningNumber winningNumber, LottoResult lottoResult) {
+    public void countWinningLotto(WinningNumber winningNumber, LottoResult lottoResult) {
         for (Lotto lotto : lottoDummy){
             LottoRank rank = LottoRank.findRank(winningNumber.countWinningMatch(lotto),
                                             winningNumber.isBonusMatch(lotto));
