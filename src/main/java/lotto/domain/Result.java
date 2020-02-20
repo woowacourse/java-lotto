@@ -12,9 +12,9 @@ public class Result {
 
     void calculate(WinningLotto winningLotto, Lotto userLotto) {
         boolean hasBonus = userLotto.getLottoNumbers().stream()
-                .anyMatch(x -> winningLotto.getBonusNumber().equals(x));
+                .anyMatch(userLottoNumber -> winningLotto.getBonusNumber().equals(userLottoNumber));
         long winningCount = userLotto.getLottoNumbers().stream()
-                .filter(x -> winningLotto.getLottoNumbers().contains(x))
+                .filter(userLottoNumber -> winningLotto.getLottoNumbers().contains(userLottoNumber))
                 .count();
         winningInfo = WinningInfo.valueOf(Math.toIntExact(winningCount), hasBonus);
     }

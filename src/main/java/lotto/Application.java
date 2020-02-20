@@ -1,10 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.exception.DuplicatedNumberException;
-import lotto.exception.NotEnoughNumberException;
-import lotto.exception.NotInScopeException;
-import lotto.exception.NotNumberException;
+import lotto.exception.*;
 import lotto.utils.LottoFactory;
 import lotto.utils.NumberGenerator;
 import lotto.utils.UserInputNumberGenerator;
@@ -29,7 +26,7 @@ public class Application {
         while (true) {
             try {
                 return new Payment(InputView.getPayment());
-            } catch (NotNumberException exception) {
+            } catch (NotNumberException | InvalidPriceException exception) {
                 OutputView.printErrorMessage(exception.getMessage());
             }
         }
