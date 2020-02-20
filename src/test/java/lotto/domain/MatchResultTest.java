@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  * @author K.S.KIM
  * @since 2020/02/19
  */
-public class LottoStatisticsTest {
+public class MatchResultTest {
 	@Test
 	void constructor() {
 		Map<LottoRank, Long> statistics = new LinkedHashMap<>();
@@ -22,6 +22,6 @@ public class LottoStatisticsTest {
 		statistics.put(LottoRank.THIRD, 3L);
 		statistics.put(LottoRank.FIFTH, 2L);
 		statistics.put(LottoRank.MISS, 5L);
-		assertThat(new LottoStatistics(statistics)).isInstanceOf(LottoStatistics.class);
+		assertThat(new MatchResult(statistics)).isInstanceOf(MatchResult.class);
 	}
 }

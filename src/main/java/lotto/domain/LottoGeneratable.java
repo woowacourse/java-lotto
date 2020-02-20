@@ -7,8 +7,6 @@ package lotto.domain;
  * @author K.S.KIM
  * @since 2020/02/19
  */
-public interface LottoGenerator {
-	Lotto generate();
-
-	Lottos generate(int count);
+public interface LottoGeneratable {
+	Lottos generate(long count);
 }

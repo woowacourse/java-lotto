@@ -24,10 +24,11 @@ public class LottosTest {
 				Lotto.of(1, 2, 3, 43, 44, 45)));
 		WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 5, 43, 44, 45), LottoNumber.of(7));
 
-		Map<LottoRank, Long> expected = new HashMap<>();
-		expected.put(LottoRank.FIRST, 2L);
-		expected.put(LottoRank.THIRD, 1L);
+		Map<LottoRank, Long> matchResult = new HashMap<>();
+		matchResult.put(LottoRank.FIRST, 2L);
+		matchResult.put(LottoRank.THIRD, 1L);
+		MatchResult expected = new MatchResult(matchResult);
 
-		assertThat(lottos.calculate(winningLotto)).isEqualTo(expected);
+		assertThat(lottos.matchAll(winningLotto)).isEqualTo(expected);
 	}
 }

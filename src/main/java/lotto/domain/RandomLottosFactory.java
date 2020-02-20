@@ -12,23 +12,22 @@ import java.util.stream.Collectors;
  * @author K.S.KIM
  * @since 2020/02/19
  */
-public class RandomLottoGenerator implements LottoGenerator {
+public class RandomLottosFactory implements LottoGeneratable {
 	private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>(LottoNumber.values());
 
 	@Override
-	public Lotto generate() {
+	public Lottos generate(long totalCount) {
+		List<Lotto> lottos = new ArrayList<>();
+		for (long count = 0; count < totalCount; count++) {
+			lottos.add(generate());
+		}
+		return new Lottos(lottos);
+	}
+
+	private Lotto generate() {
 		Collections.shuffle(LOTTO_NUMBERS);
 		return new Lotto(LOTTO_NUMBERS.stream()
 				.limit(Lotto.SIZE)
 				.collect(Collectors.toList()));
-	}
-
-	@Override
-	public Lottos generate(int totalCount) {
-		List<Lotto> lottos = new ArrayList<>();
-		for (int count = 0; count < totalCount; count++) {
-			lottos.add(generate());
-		}
-		return new Lottos(lottos);
 	}
 }

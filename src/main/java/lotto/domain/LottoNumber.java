@@ -14,13 +14,13 @@ import java.util.Objects;
  * @since 2020/02/19
  */
 public class LottoNumber implements Comparable<LottoNumber> {
-	private static final int MIN = 1;
-	private static final int MAX = 45;
+	private static final int MIN_VALUE = 1;
+	private static final int MAX_VAULE = 45;
 	private static final String INVALID_NUMBER_MESSAGE = "생성할 수 없는 수입니다.";
 	private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
 	static {
-		for (int number = MIN; number <= MAX; ++number) {
+		for (int number = MIN_VALUE; number <= MAX_VAULE; ++number) {
 			CACHE.put(number, new LottoNumber(number));
 		}
 	}
@@ -42,20 +42,20 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	private static void validate(int number) {
-		if (number < MIN || number > MAX) {
+		if (number < MIN_VALUE || number > MAX_VAULE) {
 			throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
 		}
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
+	public boolean equals(Object object) {
+		if (this == object) {
 			return true;
 		}
-		if (o == null || getClass() != o.getClass()) {
+		if (object == null || getClass() != object.getClass()) {
 			return false;
 		}
-		LottoNumber that = (LottoNumber)o;
+		LottoNumber that = (LottoNumber)object;
 		return number == that.number;
 	}
 
@@ -67,5 +67,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	@Override
 	public int compareTo(LottoNumber lottoNumber) {
 		return Integer.compare(number, lottoNumber.number);
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(number);
 	}
 }
