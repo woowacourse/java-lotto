@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum Result {
+public enum LottoResult {
 	FIVE(0, 5000, 3),
 	FOUR(0, 50000, 4),
 	THREE(0, 1500000, 5),
@@ -13,13 +13,13 @@ public enum Result {
 	private long reward;
 	private int hitCount;
 
-	Result(int count, long reward, int hitCount) {
+	LottoResult(int count, long reward, int hitCount) {
 		this.count = count;
 		this.reward = reward;
 		this.hitCount = hitCount;
 	}
 
-	public static Result of(int count) {
+	public static LottoResult of(int count) {
 		return Arrays.stream(values())
 			.filter(x -> x.hitCount == count)
 			.findFirst()

@@ -7,8 +7,8 @@ import java.util.List;
 public class LottoFactory {
 	private static final int START_LOTTO_NO = 1;
 	private static final int END_LOTTO_NO = 45;
-	private static final int TICKET_FROM_INDEX = 0;
-	private static final int TICKET_TO_INDEX = 6;
+	private static final int LOTTO_FROM_INDEX = 0;
+	private static final int LOTTO_TO_INDEX = 6;
 
 	private static List<Integer> lottoBox = new ArrayList<>();
 
@@ -18,25 +18,26 @@ public class LottoFactory {
 		}
 	}
 
-	public static List<Lotto> createLotteries(int count) {
+	public static List<Lotto> createLotteries(Money money) {
 		List<Lotto> result = new ArrayList<>();
+		int count = money.divideThousand();
 		for (int i = 0; i < count; i++) {
 			result.add(createLotto());
 		}
 		return result;
 	}
 
-	public static Lotto createLotto() {
-		List<Integer> lotto = randomNoPick();
+	private static Lotto createLotto() {
+		List<Integer> lotto = pickAutoRandomNumber();
 		Collections.sort(lotto);
 		return new Lotto(lotto);
 	}
 
-	private static List<Integer> randomNoPick() {
+	private static List<Integer> pickAutoRandomNumber() {
 		List<Integer> lotto = new ArrayList<>();
 		lotto.addAll(lottoBox);
 		Collections.shuffle(lotto);
-		lotto = lotto.subList(TICKET_FROM_INDEX, TICKET_TO_INDEX);
+		lotto = lotto.subList(LOTTO_FROM_INDEX, LOTTO_TO_INDEX);
 		return lotto;
 	}
 }

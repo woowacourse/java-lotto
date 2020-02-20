@@ -23,10 +23,10 @@ public class LottoManager {
 	}
 
 	private void resultCountPlus(int count, boolean isBonus) {
-		Result result = Result.of(count);
-		if (result == Result.THREE && isBonus) {
-			result = Result.TWO;
+		LottoResult lottoResult = LottoResult.of(count);
+		if (lottoResult == LottoResult.THREE && isBonus) {
+			lottoResult = LottoResult.TWO;
 		}
-		result.countPlus();
+		lottoResult.countPlus();
 	}
 }

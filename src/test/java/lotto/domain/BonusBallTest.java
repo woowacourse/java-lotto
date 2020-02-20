@@ -10,13 +10,12 @@ import org.junit.jupiter.api.Test;
 public class BonusBallTest {
 
 	@Test
-	void isMatchBonusBall() {
+	void isContainBonusBall() {
 		BonusBall bonusBall = new BonusBall("3");
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 		Lotto lotto = new Lotto(numbers);
 		assertThat(bonusBall.isContainBonusBall(lotto)).isTrue();
 		bonusBall = new BonusBall("9");
 		assertThat(bonusBall.isContainBonusBall(lotto)).isFalse();
-
 	}
 }

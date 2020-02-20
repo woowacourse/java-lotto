@@ -3,8 +3,8 @@ package lotto.view;
 import java.util.List;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.Money;
-import lotto.domain.Result;
 
 public class OutputView {
 
@@ -27,13 +27,13 @@ public class OutputView {
 	}
 
 	public static void printResult(Money money) {
-		for (Result result : Result.values()) {
-			int count = result.getCount();
-			int hitCount = result.getHitCount();
-			long reward = result.getReward();
+		for (LottoResult lottoResult : LottoResult.values()) {
+			int count = lottoResult.getCount();
+			int hitCount = lottoResult.getHitCount();
+			long reward = lottoResult.getReward();
 			System.out.println(String.format(RESULT_MESSAGE_FORMAT, hitCount, reward, count));
 		}
-		int incomeRate = money.calculateIncomeRate(Result.calculateTotalReward());
+		int incomeRate = money.calculateIncomeRate(LottoResult.calculateTotalReward());
 		System.out.println(String.format(INCOME_RATE_MESSAGE_FORMAT, incomeRate));
 	}
 }
