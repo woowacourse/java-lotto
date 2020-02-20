@@ -7,11 +7,14 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.domain.ticket.ball.LottoBall.LOWER_BOUND;
+import static lotto.domain.ticket.ball.LottoBall.UPPER_BOUND;
+
 public class LottoFactory {
     private static final Map<Integer, LottoBall> instance;
 
     static {
-        instance = IntStream.rangeClosed(1, 45)
+        instance = IntStream.rangeClosed(LOWER_BOUND, UPPER_BOUND)
                 .mapToObj(LottoBall::new)
                 .collect(Collectors.toMap(LottoBall::getNumber, Function.identity()));
     }

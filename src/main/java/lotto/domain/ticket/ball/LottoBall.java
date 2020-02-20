@@ -3,6 +3,8 @@ package lotto.domain.ticket.ball;
 import java.util.Objects;
 
 public final class LottoBall {
+    public static final int LOWER_BOUND = 1;
+    public static final int UPPER_BOUND = 45;
     private final int number;
 
     public LottoBall(int number) {
@@ -15,7 +17,7 @@ public final class LottoBall {
     }
 
     private void validateNumber(int number) {
-        if (number < 1 || number > 45) {
+        if (number < LOWER_BOUND || number > UPPER_BOUND) {
             throw new IllegalArgumentException("입력값: " + number + ": 범위 이외 숫자");
         }
     }

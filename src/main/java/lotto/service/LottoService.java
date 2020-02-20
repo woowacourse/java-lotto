@@ -9,13 +9,18 @@ import lotto.view.dto.StatisticsResponseDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
 
 public class LottoService {
+    private final LottoCompany lottoCompany;
 
-    public static LottoTicketBundle getLottoTicketBundle(BettingMoneyRequestDTO bettingMoneyRequestDTO) {
-        return new LottoTicketBundle(LottoCompany.buyTicket(bettingMoneyRequestDTO));
+    public LottoService(LottoCompany lottoCompany) {
+        this.lottoCompany = lottoCompany;
     }
 
-    public static StatisticsResponseDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle, WinningLottoRequestDTO winningLottoRequestDTO) {
-        WinningLotto winningLotto = LottoCompany.makeWinningLotto(winningLottoRequestDTO);
+    public LottoTicketBundle getLottoTicketBundle(BettingMoneyRequestDTO bettingMoneyRequestDTO) {
+        return new LottoTicketBundle(lottoCompany.buyTicket(bettingMoneyRequestDTO));
+    }
+
+    public StatisticsResponseDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle, WinningLottoRequestDTO winningLottoRequestDTO) {
+        WinningLotto winningLotto = lottoCompany.makeWinningLotto(winningLottoRequestDTO);
         LottoResultBundle lottoResultBundle = lottoTicketBundle.getLottoResults(winningLotto);
 
         return lottoResultBundle.getStatistics();

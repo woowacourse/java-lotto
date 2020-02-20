@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.ticket.LottoTicketBundle;
+import lotto.domain.ticket.RealLottoCompany;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -9,6 +10,8 @@ import lotto.view.dto.StatisticsResponseDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
 
 public class LottoController {
+    private LottoService service = new LottoService(new RealLottoCompany());
+
     public void run() {
         LottoTicketBundle lottoTicketBundle = getLottoTicketBundle();
 
@@ -20,7 +23,7 @@ public class LottoController {
     private LottoTicketBundle getLottoTicketBundle() {
         BettingMoneyRequestDTO bettingMoney = new BettingMoneyRequestDTO(InputView.inputBettingMoney());
 
-        return LottoService.getLottoTicketBundle(bettingMoney);
+        return service.getLottoTicketBundle(bettingMoney);
     }
 
     private StatisticsResponseDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle) {
@@ -28,7 +31,7 @@ public class LottoController {
         int bonusNumber = InputView.inputBonusNumber();
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO(winningNumber, bonusNumber);
 
-        return LottoService.getStatisticsDTO(lottoTicketBundle, winningLottoRequestDTO);
+        return service.getStatisticsDTO(lottoTicketBundle, winningLottoRequestDTO);
     }
 
 }
