@@ -21,7 +21,7 @@ public enum MatchResult {
         return Arrays.stream(values())
                 .filter(v -> matchCount == v.matchCount)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("일치하는 당첨 결과가 없습니다."));
+                .orElse(null);
     }
 
     public int getMatchCount() {

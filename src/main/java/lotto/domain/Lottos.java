@@ -16,8 +16,7 @@ public class Lottos {
         Map<MatchResult, Integer> matchResults = setUpMatchResults();
         for (Lotto lotto : lottos) {
             MatchResult lottoMatchResult = lotto.findMatchResult(winningNumbers, bonusNumber);
-            int matchCount = matchResults.get(lottoMatchResult);
-            matchResults.put(lottoMatchResult, ++matchCount);
+            updateMatchResults(matchResults, lottoMatchResult);
         }
         return matchResults;
     }
@@ -29,6 +28,14 @@ public class Lottos {
             matchResults.put(result, 0);
         }
         return matchResults;
+    }
+
+    private void updateMatchResults(Map<MatchResult, Integer> matchResults, MatchResult lottoMatchResult) {
+        if (lottoMatchResult == null) {
+            return;
+        }
+        int matchCount = matchResults.get(lottoMatchResult);
+        matchResults.put(lottoMatchResult, ++matchCount);
     }
 
     public List<Lotto> getLottos() {
