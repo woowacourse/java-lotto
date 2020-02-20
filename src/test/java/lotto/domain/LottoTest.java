@@ -1,23 +1,24 @@
 package lotto.domain;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 public class LottoTest {
 	List<LottoNo> numbers;
 
 	@BeforeEach
 	void setUp() {
-		numbers = new ArrayList<>();
-		for (int i = 1; i <= 6; i++) {
-			numbers.add(new LottoNo(i));
-		}
+		numbers = IntStream.range(1, 7)
+				.boxed()
+				.map(LottoNo::new)
+				.collect(Collectors.toList());
 	}
 
 	@Test
