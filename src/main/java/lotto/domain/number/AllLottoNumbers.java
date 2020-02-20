@@ -1,7 +1,8 @@
 package lotto.domain.number;
 
-import lotto.domain.number.LottoNumbers;
+import lotto.domain.result.GameResult;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +20,18 @@ public class AllLottoNumbers {
         if (Objects.isNull(allLottoNumbers) || allLottoNumbers.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_OR_NULL_INPUT_EXCEPTION_MESSAGE);
         }
+    }
+
+    public List<GameResult> calculateCollectNumber(WinningNumbers winningNumbers) {
+        List<GameResult> gameResultList = new ArrayList<>();
+        for (int i = 0; i < allLottoNumbers.size(); i++) {
+            LottoNumbers presentLottoNumbers = allLottoNumbers.get(i);
+            int correctNumber = winningNumbers.calculateCollectNumberSize(presentLottoNumbers);
+            boolean isCorrectBonusNumber = winningNumbers.isCorrectBonusNumber(presentLottoNumbers);
+            GameResult gameResult = GameResult.calculateRank(correctNumber, isCorrectBonusNumber);
+            gameResultList.add(gameResult);
+        }
+        return gameResultList;
     }
 
     public List<LottoNumbers> getAllLottoNumbers() {

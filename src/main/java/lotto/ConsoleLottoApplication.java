@@ -20,7 +20,7 @@ public class ConsoleLottoApplication {
         OutputView.printAllLottoNumbers(allLottoNumbers);
         WinningNumbers winningNumbers = inputWinningNumbers();
 
-        GameResults gameResults = createGameResults(purchaseNumber, allLottoNumbers, winningNumbers);
+        GameResults gameResults = createGameResults(allLottoNumbers, winningNumbers);
         OutputView.printGameResults(gameResults);
 
         Yield yield = Yield.calculateYield(purchaseNumber, gameResults);
@@ -43,16 +43,9 @@ public class ConsoleLottoApplication {
         return new AllLottoNumbers(lottoNumbersList);
     }
 
-    private static GameResults createGameResults(PurchaseNumber purchaseNumber, AllLottoNumbers allLottoNumbers, WinningNumbers winningNumbers) {
-        List<GameResult> gameResultList = new ArrayList<>();
-        for (int i = 0; i < purchaseNumber.getPurchaseNumber(); i++) {
-            LottoNumbers presentLottoNumbers = allLottoNumbers.getAllLottoNumbers().get(i);
-            int correctNumber = winningNumbers.calculateCollectNumberSize(presentLottoNumbers);
-            boolean isCorrectBonusNumber = winningNumbers.isCorrectBonusNumber(presentLottoNumbers);
-            GameResult gameResult = GameResult.calculateRank(correctNumber, isCorrectBonusNumber);
-            gameResultList.add(gameResult);
-        }
-        return new GameResults(gameResultList);
+    private static GameResults createGameResults(AllLottoNumbers allLottoNumbers, WinningNumbers winningNumbers) {
+        List<GameResult> gameResults = allLottoNumbers.calculateCollectNumber(winningNumbers);
+        return new GameResults(gameResults);
     }
 
     private static WinningNumbers inputWinningNumbers() {
