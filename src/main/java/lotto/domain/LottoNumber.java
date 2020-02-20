@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 import lotto.domain.exception.InvalidLottoNumberException;
 
@@ -16,9 +17,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	private final int number;
 
 	static {
-		for (int number = MIN; number <= MAX; ++number) {
-			CACHE.put(number, new LottoNumber(number));
-		}
+		IntStream.rangeClosed(MIN, MAX).forEach(number -> CACHE.put(number, new LottoNumber(number)));
 	}
 
 	private LottoNumber(int number) {
