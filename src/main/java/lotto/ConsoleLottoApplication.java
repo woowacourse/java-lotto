@@ -1,8 +1,10 @@
 package lotto;
 
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import lotto.domain.CreateRandomTicketsStrategy;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
@@ -31,15 +33,18 @@ public class ConsoleLottoApplication {
 
 		final Ranks results = new Ranks(
 			lottoTickets.stream()
-				.map(lottoTicket ->
-					Rank.of(
-						TicketComparator.getMatchCount(lottoTicket, winningNumbers),
-						TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers))
-				)
+				.map(getRankBy(winningNumbers))
 				.collect(Collectors.toList())
 		);
 
 		OutputView.printResult(results);
 		OutputView.printProfit(ProfitCalculator.calculate(inputMoney, results));
+	}
+
+	private static Function<LottoTicket, Rank> getRankBy(WinningNumbers winningNumbers) {
+		return lottoTicket -> Rank.of(
+			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
+			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+		);
 	}
 }
