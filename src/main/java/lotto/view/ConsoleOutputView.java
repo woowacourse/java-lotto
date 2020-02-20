@@ -11,10 +11,10 @@ import lotto.domain.LottoRank;
 public class ConsoleOutputView {
 	public static final String PURCHASE_COMPLETE_MESSAGE = "%d개를 구매했습니다.\n";
 	public static final String DELIMITER = ",";
-	public static final String STATISTICS_MESSAGE_1 = "당첨 통계";
-	public static final String STATISTICS_MESSAGE_2 = "---------";
-	public static final String STATISTICS_RESULT = "%d개 일치 (%d원) - %d개\n";
-	public static final String STATISTICS_SECOND_RANK_RESULT = "%d개 일치, 보너스 볼 일치(%d원) - %d개\n";
+	public static final String STATISTICS_NOTICE_MESSAGE = "당첨 통계";
+	public static final String SEPARATION_LINE = "---------";
+	public static final String WINNING_RESULT = "%d개 일치 (%d원) - %d개";
+	public static final String WINNING_SECOND_RANK_RESULT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
 	public static final String WINNING_RATIO_MESSAGE = "총 수익률은 %d%%입니다.\n";
 
 	public static void printExceptionMessage(String exceptionMessage) {
@@ -40,33 +40,26 @@ public class ConsoleOutputView {
 	}
 
 	public static void printStatisticsMessage() {
-		System.out.println(STATISTICS_MESSAGE_1);
-		System.out.println(STATISTICS_MESSAGE_2);
+		System.out.println(STATISTICS_NOTICE_MESSAGE);
+		System.out.println(SEPARATION_LINE);
 	}
 
-	public static void printStatisticsResult(Map<LottoRank, Integer> lottoRankCount) {
-		for (Map.Entry<LottoRank, Integer> lottoRankEntry : lottoRankCount.entrySet()) {
-			if (lottoRankEntry.getKey().isLottoRankOf(LottoRank.SECOND)) {
-				printSecondRankResult(lottoRankEntry);
-				continue;
-			}
-			if (lottoRankEntry.getKey().isLottoRankOf(LottoRank.MISS)) {
-				continue;
-			}
-			printRankResult(lottoRankEntry);
+	public static void printWinningResult(Map<LottoRank, Integer> lottoRankCount) {
+		lottoRankCount.entrySet().stream()
+				.filter(entry -> !entry.getKey().isLottoRankOf(LottoRank.MISS))
+				.map(entry -> getWinningResultMessage(entry.getKey(), entry.getValue()))
+				.forEach(System.out::println);
+	}
+
+	private static String getWinningResultMessage(LottoRank lottoRank, int winningLottoCount) {
+		String resultMessage = WINNING_RESULT;
+		if (lottoRank.isLottoRankOf(LottoRank.SECOND)) {
+			resultMessage = WINNING_SECOND_RANK_RESULT;
 		}
-	}
-
-	private static void printRankResult(Map.Entry<LottoRank, Integer> lottoRankEntry) {
-		System.out.printf(STATISTICS_RESULT, lottoRankEntry.getKey().getMatchCount(),
-			lottoRankEntry.getKey().getWinningMoney().getMoney(),
-			lottoRankEntry.getValue());
-	}
-
-	private static void printSecondRankResult(Map.Entry<LottoRank, Integer> lottoRankEntry) {
-		System.out.printf(STATISTICS_SECOND_RANK_RESULT, lottoRankEntry.getKey().getMatchCount(),
-			lottoRankEntry.getKey().getWinningMoney().getMoney(),
-			lottoRankEntry.getValue());
+		return String.format(resultMessage,
+				lottoRank.getMatchCount(),
+				lottoRank.getWinningMoney().getMoney(),
+				winningLottoCount);
 	}
 
 	public static void printWinningRatio(int winningRatio) {
