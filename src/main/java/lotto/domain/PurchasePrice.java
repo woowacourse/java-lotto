@@ -4,13 +4,13 @@ public class PurchasePrice {
     private static final int MINIMUM_PRICE = 1_000;
     private static final int PRICE_PER_LOTTO = 1_000;
 
-    private final int purchasePrice;
+    private final int price;
 
     public PurchasePrice(String purchasePriceInput) {
         checkNoInput(purchasePriceInput);
         int price = convertToInt(purchasePriceInput);
         validateMinimumPrice(price);
-        this.purchasePrice = price;
+        this.price = price;
     }
 
     private static void checkNoInput(String purchasePriceInput) {
@@ -34,6 +34,10 @@ public class PurchasePrice {
     }
 
     public int calculateLottoCount() {
-        return purchasePrice / PRICE_PER_LOTTO;
+        return price / PRICE_PER_LOTTO;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
