@@ -1,9 +1,15 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
+	private static final int FIVE = 5;
+	private static final String DELIMITER = ", ";
+	private static final int LOTTO_LENGTH = 6;
+
 	private final List<LottoNumber> numbers;
 
 	public Lotto(List<LottoNumber> numbers) {
@@ -12,13 +18,20 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
+	public Lotto(String input) {
+		this(Arrays.stream(input.split(DELIMITER))
+			.map(Integer::parseInt)
+			.map(LottoNumber::new)
+			.collect(Collectors.toList()));
+	}
+
 	private void validate(List<LottoNumber> numbers) {
 		validateNumbersCount(numbers);
 		validateNumbersDuplication(numbers);
 	}
 
 	private void validateNumbersCount(List<LottoNumber> numbers) {
-		if (numbers.size() != 6) {
+		if (numbers.size() != LOTTO_LENGTH) {
 			throw new IllegalArgumentException("로또의 숫자는 6개여야 합니다.");
 		}
 	}
@@ -44,7 +57,7 @@ public class Lotto {
 			.filter(number -> winningLotto.numbers.contains(number))
 			.count();
 
-		if (count == 5 && this.numbers.contains(bonusNumber)) {
+		if (count == FIVE && this.numbers.contains(bonusNumber)) {
 			return Rank.SECOND;
 		}
 

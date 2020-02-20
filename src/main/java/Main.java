@@ -2,8 +2,8 @@ import java.util.List;
 
 import domain.Lotto;
 import domain.LottoFactory;
-import domain.LottoNumber;
 import domain.Money;
+import domain.Profit;
 import domain.Rank;
 import domain.WinningNumbers;
 import view.InputView;
@@ -11,18 +11,21 @@ import view.OutputView;
 
 public class Main {
 	public static void main(String[] args) {
-		Money purchaseMoney = new Money(InputView.inputPurchaseMoney());
-		List<Lotto> lottos = LottoFactory.createLottos(purchaseMoney);
+		try {
+			Money purchaseMoney = new Money(InputView.inputPurchaseMoney());
+			List<Lotto> lottos = LottoFactory.createLottos(purchaseMoney);
 
-		OutputView.printLottos(lottos);
+			OutputView.printLottos(lottos);
 
-		List<LottoNumber> sixNumbers = InputView.inputSixNumbers();
-		LottoNumber bonusNumber = InputView.inputBonusNumber();
-		WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, bonusNumber);
+			WinningNumbers winningNumbers = new WinningNumbers(InputView.inputSixNumbers(),
+				InputView.inputBonusNumber());
 
-		List<Rank> ranks = winningNumbers.compareLottos(lottos);
+			List<Rank> ranks = winningNumbers.compareLottos(lottos);
 
-		OutputView.printResult(ranks);
-		OutputView.printProfit(purchaseMoney, ranks);
+			OutputView.printResult(ranks);
+			OutputView.printProfit(new Profit(purchaseMoney, ranks));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

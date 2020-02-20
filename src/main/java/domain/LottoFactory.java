@@ -10,20 +10,28 @@ public class LottoFactory {
 	private static final int RANGE_END = 6;
 	private static final int LOTTO_PRICE = 1000;
 	private static final int LOTTO_NUMBER_RANGE = 45;
+	private static final int ONE = 1;
 
 	static {
-		for (int i = 1; i <= LOTTO_NUMBER_RANGE; i++) {
+		for (int i = ONE; i <= LOTTO_NUMBER_RANGE; i++) {
 			numbers.add(new LottoNumber(i));
 		}
 	}
 
 	public static List<Lotto> createLottos(Money purchaseMoney) {
+		validate(purchaseMoney);
 		int lottoCount = purchaseMoney.getMoney() / LOTTO_PRICE;
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < lottoCount; i++) {
 			lottos.add(createLotto());
 		}
 		return lottos;
+	}
+
+	private static void validate(Money purchaseMoney) {
+		if (purchaseMoney.getMoney() < LOTTO_PRICE) {
+			throw new IllegalArgumentException("가격은 1000원 이상 입력해야합니다.");
+		}
 	}
 
 	private static Lotto createLotto() {

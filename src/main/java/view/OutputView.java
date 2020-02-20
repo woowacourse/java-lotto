@@ -5,6 +5,7 @@ import java.util.StringJoiner;
 
 import domain.Lotto;
 import domain.Money;
+import domain.Profit;
 import domain.Rank;
 
 public class OutputView {
@@ -34,9 +35,7 @@ public class OutputView {
 		}
 	}
 
-	public static void printProfit(Money purchaseMoney, List<Rank> ranks) {
-		Money totalWinningMoney = Rank.sumWinningMoney(ranks);
-		double profit = (double)totalWinningMoney.getMoney() / purchaseMoney.getMoney() * HUNDRED;
-		System.out.println(String.format("총 수익률은 %d%%입니다.", (int)profit));
+	public static void printProfit(Profit profit) {
+		System.out.println(String.format("총 수익률은 %d%%입니다.", profit.getMoney()));
 	}
 }

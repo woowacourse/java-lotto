@@ -5,11 +5,16 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
 	private static final int LOTTO_MINIMUM_NUMBER = 1;
 	private static final int LOTTO_MAXIMUM_NUMBER = 45;
+
 	private final int number;
 
 	public LottoNumber(int number) {
 		validate(number);
 		this.number = number;
+	}
+
+	public LottoNumber(String number) {
+		this(Integer.parseInt(number));
 	}
 
 	private void validate(int number) {
