@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Map;
 
-class Result {
+public class Result {
     private Map<Rank, Integer> winningResults;
 
     Result(Map<Rank, Integer> winningResults) {

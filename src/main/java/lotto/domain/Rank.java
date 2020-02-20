@@ -21,11 +21,11 @@ public enum Rank {
         return Arrays.stream(Rank.values()).anyMatch(rank -> rank.getMatchNumber() == matchingNumber);
     }
 
-    int getMatchNumber() {
+    public int getMatchNumber() {
         return matchNumber;
     }
 
-    int calculateWinningMoney() {
+    public int calculateWinningMoney() {
         return winningMoney;
     }
 
