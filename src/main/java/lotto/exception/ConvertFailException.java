@@ -1,7 +1,7 @@
 package lotto.exception;
 
 public class ConvertFailException extends NumberFormatException {
-    public ConvertFailException(String s) {
-        super(s);
+    public ConvertFailException(String message) {
+        super(message);
     }
 }

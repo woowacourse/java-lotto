@@ -1,7 +1,6 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import lotto.domain.result.win.WinningLotto;
-import lotto.domain.ticket.LottoCompany;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoFactory;
 import lotto.view.dto.WinningLottoRequestDTO;

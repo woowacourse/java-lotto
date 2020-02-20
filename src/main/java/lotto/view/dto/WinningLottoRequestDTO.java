@@ -7,10 +7,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningLottoRequestDTO {
-    private static final int LOTTO_BALL_SIZE = 6;
     private static final String MESSAGE_INVALID_BALL_SIZE = "볼 %d개, 입력한 볼의 갯수가 6개가 아닙니다.";
-    private static final String COMMA = ",";
     private static final String PARSE_FAIL_EXCEPTION_MESSAGE = "%s : 숫자가 아닌 문자가 존재합니다.";
+    private static final String COMMA = ",";
+    private static final int LOTTO_BALL_SIZE = 6;
+
     private final Set<Integer> winningNumbers;
     private final int bonusNumber;
 
