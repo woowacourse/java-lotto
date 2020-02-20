@@ -3,13 +3,15 @@ package lotto.domain;
 import java.util.Map;
 
 public class RewardRate {
+
+    private static final int RATE = 100;
+
     public static int calculateRewardRate(int money, Map<WinningValue, Integer> winningValueResult) {
-        int sum = 0;
-        for (Map.Entry<WinningValue, Integer> result : winningValueResult.entrySet()) {
-            WinningValue winningValue = result.getKey();
-            int count = result.getValue();
-            sum += winningValue.getReward() * count;
-        }
-        return (sum / money) / 100;
+        return winningValueResult.entrySet()
+                .stream()
+                .mapToInt(result ->
+                        result.getKey().getReward()
+                                * result.getValue())
+                .sum() / money / RATE;
     }
 }
