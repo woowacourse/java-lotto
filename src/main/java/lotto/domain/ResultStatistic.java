@@ -51,4 +51,18 @@ public class ResultStatistic {
 	public Map<Rank, Integer> getResults() {
 		return this.results;
 	}
+
+	public int calculateRevenueRate(MoneyForLotto moneyForLotto) {
+		return (int) (((double) getTotalRevenue() / moneyForLotto.getMoneyForLotto()) * 100);
+	}
+
+	private int getTotalRevenue() {
+		int totalRevenue = 0;
+
+		for (Rank rank : Rank.values()) {
+			totalRevenue += results.get(rank) * rank.getReward();
+		}
+
+		return totalRevenue;
+	}
 }

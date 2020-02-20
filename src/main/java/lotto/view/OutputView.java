@@ -55,13 +55,14 @@ public class OutputView {
 		System.out.println(ENTER_BONUS_BALL_NUMBER_GUIDE_MESSAGE);
 	}
 
-	public static void printResultStatistic(ResultStatistic result) {
+	public static void printResultStatistic(ResultStatistic result, MoneyForLotto money) {
 		System.out.println(RESULT_STATISTIC_MESSAGE);
 		printEachRankResult(Rank.FIFTH, result);
 		printEachRankResult(Rank.FOURTH, result);
 		printEachRankResult(Rank.THIRD, result);
 		printEachRankResult(Rank.SECOND, result);
 		printEachRankResult(Rank.FIRST, result);
+		System.out.printf("총 수익률은 %d%%입니다.\n", result.calculateRevenueRate(money));
 	}
 
 

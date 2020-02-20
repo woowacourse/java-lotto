@@ -34,6 +34,6 @@ public class LottoController {
 		BonusLottoNumber bonusLottoNumber = InputView.getBonusLottoNumber(winningLotto);
 
 		ResultStatistic result = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
-		OutputView.printResultStatistic(result);
+		OutputView.printResultStatistic(result, moneyForLotto);
 	}
 }
