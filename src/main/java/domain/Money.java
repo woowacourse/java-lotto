@@ -1,8 +1,9 @@
 package domain;
 
-import spark.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class Money {
+    public static final int MIN_MONEY = 1000;
 
     private int money;
 
@@ -34,12 +35,12 @@ public class Money {
     }
 
     private void validateMoneyRange(int money) {
-        if (money < 1000) {
+        if (money < MIN_MONEY) {
             throw new IllegalArgumentException("input 값이 1000원보다 작습니다.");
         }
     }
 
     public int calculateLottoTicket() {
-        return this.money / 1000;
+        return this.money / MIN_MONEY;
     }
 }

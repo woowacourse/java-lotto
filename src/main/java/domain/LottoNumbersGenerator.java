@@ -7,20 +7,25 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbersGenerator {
+    public static final int START_LOTTO_RANGE = 1;
+    public static final int END_LOTTO_RANGE = 45;
+    public static final int START_LOTTO_INDEX = 0;
+    public static final int END_LOTTO_INDEX = 6;
+
     private static List<Integer> lottoNumbers;
 
     static {
-        lottoNumbers = IntStream.rangeClosed(1, 45)
+        lottoNumbers = IntStream.rangeClosed(START_LOTTO_RANGE, END_LOTTO_RANGE)
                 .boxed()
                 .collect(Collectors.toList());
     }
 
     public static List<LottoTicket> generateLottoTickets(int number) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
+        for (int i = START_LOTTO_INDEX; i < number; i++) {
             Collections.shuffle(lottoNumbers);
             lottoTickets.add(new LottoTicket(lottoNumbers.stream()
-                    .limit(6)
+                    .limit(END_LOTTO_INDEX)
                     .collect(Collectors.toList())));
         }
         return lottoTickets;

@@ -49,8 +49,4 @@ public class BonusBall {
             throw new IllegalArgumentException("null 또는 빈 문자를 입력하였습니다.");
         }
     }
-
-    public boolean isSameBonusNumber(int number) {
-        return bonusNumber == number;
-    }
 }

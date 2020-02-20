@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 public class MoneyTest {
 
-
     @DisplayName("복권 갯수 계산 테스트")
     @ParameterizedTest
     @CsvSource(value = {"1500,1", "11000,11", "12345,12"}, delimiter = ',')

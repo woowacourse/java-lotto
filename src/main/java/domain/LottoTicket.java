@@ -6,6 +6,7 @@ public class LottoTicket {
     private static final int MAX_LOTTO_TICKET_SIZE = 6;
     private static final int MIN_LOTTO_NUMBER_RANGE = 1;
     private static final int MAX_LOTTO_NUMBER_RANGE = 45;
+    public static final int INIT_CORRECT_COUNT = 0;
 
     private List<Integer> lottoTicket;
 
@@ -45,7 +46,7 @@ public class LottoTicket {
     }
 
     public int getCorrectCount(List<Integer> winningTicket) {
-        int correctCount = 0;
+        int correctCount = INIT_CORRECT_COUNT;
         for (int i = 0; i < lottoTicket.size(); i++) {
             if (winningTicket.contains(lottoTicket.get(i))) {
                 correctCount++;

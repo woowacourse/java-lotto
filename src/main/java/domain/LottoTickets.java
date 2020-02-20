@@ -13,7 +13,8 @@ public class LottoTickets {
         LottoResults lottoResults = new LottoResults();
 
         lottoTickets.stream()
-                .map(lottoTicket -> new LottoResult(lottoTicket.getCorrectCount(winningLottoTicket.getWinningTicket().getLottoTicket()), winningLottoTicket.isMatchBonusBall()))
+                .map(lottoTicket -> new LottoResult(lottoTicket.getCorrectCount(
+                                winningLottoTicket.getWinningTicket().getLottoTicket()), winningLottoTicket.isMatchBonusBall()))
                 .forEach(lottoResults::add);
 
         return lottoResults;
