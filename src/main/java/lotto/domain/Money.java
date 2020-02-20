@@ -8,6 +8,10 @@ public class Money {
 		this.lottoMoneyValue = Integer.parseInt(lottoMoneyValue);
 	}
 
+	public int getLottoMoneyValue() {
+		return this.lottoMoneyValue;
+	}
+
 	private void checkValidationOf(final String lottoMoneyValue) {
 		if (isNotNumber(lottoMoneyValue)) {
 			throw new IllegalArgumentException("금액은 숫자이어야 합니다.");

@@ -13,8 +13,12 @@ public class LottoTicket {
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public LottoTicket(List<LottoNumber> lottoNumbers) {
+	public LottoTicket(final List<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
+	}
+
+	public Stream<LottoNumber> stream() {
+		return lottoNumbers.stream();
 	}
 
 	@Override
@@ -39,9 +43,5 @@ public class LottoTicket {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
-	}
-
-	public Stream<LottoNumber> stream() {
-		return lottoNumbers.stream();
 	}
 }

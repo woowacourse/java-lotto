@@ -16,7 +16,7 @@ public class WinningNumbers {
 	private final LottoNumber bonusNumber;
 
 	public WinningNumbers(String winningNumbers, String bonusNumber) {
-		List<String> winningNumbersValues = Arrays.asList(winningNumbers.split(DELIMITER));
+		final List<String> winningNumbersValues = Arrays.asList(winningNumbers.split(DELIMITER));
 		checkValidationOf(winningNumbersValues, bonusNumber);
 
 		this.winningNumbers = winningNumbersValues.stream()
@@ -27,12 +27,12 @@ public class WinningNumbers {
 		this.bonusNumber = new LottoNumber(Integer.parseInt(bonusNumber));
 	}
 
-	private void checkValidationOf(List<String> winningNumbersValue, String bonusNumber) {
+	private void checkValidationOf(final List<String> winningNumbersValue, final String bonusNumber) {
 		checkValid(winningNumbersValue);
 		checkValid(winningNumbersValue, bonusNumber);
 	}
 
-	private void checkValid(List<String> winningNumbersValue) {
+	private void checkValid(final List<String> winningNumbersValue) {
 		if (isNotMatchSize(winningNumbersValue)) {
 			throw new IllegalArgumentException("당첨 번호는 보너스 번호를 제외하고 6자리 이어야 합니다");
 		}
@@ -44,7 +44,7 @@ public class WinningNumbers {
 		}
 	}
 
-	private void checkValid(List<String> winningNumbersValue, String bonusNumber) {
+	private void checkValid(final List<String> winningNumbersValue, final String bonusNumber) {
 		if (winningNumbersValue.contains(bonusNumber)) {
 			throw new IllegalArgumentException("보너스 번호 일반 당첨번호와 중복될수 없습니다.");
 		}
@@ -53,12 +53,12 @@ public class WinningNumbers {
 		}
 	}
 
-	private boolean isDuplicatedNumber(List<String> winningNumbersValue) {
-		HashSet<String> checkDuplicateSet = new HashSet<>(winningNumbersValue);
+	private boolean isDuplicatedNumber(final List<String> winningNumbersValue) {
+		final HashSet<String> checkDuplicateSet = new HashSet<>(winningNumbersValue);
 		return isNotMatchSize(new ArrayList<>(checkDuplicateSet));
 	}
 
-	private boolean isNotNumberFormat(List<String> winningNumbersValue) {
+	private boolean isNotNumberFormat(final List<String> winningNumbersValue) {
 		return winningNumbersValue.stream()
 			.anyMatch(isNotDigit());
 	}
@@ -68,15 +68,15 @@ public class WinningNumbers {
 				.anyMatch(ch -> !Character.isDigit(ch));
 	}
 
-	private boolean isNotMatchSize(List<String> winningNumbersValue) {
+	private boolean isNotMatchSize(final List<String> winningNumbersValue) {
 		return winningNumbersValue.size() != WINNING_NUMBER_SIZE;
 	}
 
-	public List<LottoNumber> getOrdinarys() {
+	public List<LottoNumber> getOrdinaries() {
 		return Collections.unmodifiableList(winningNumbers);
 	}
 
-	public boolean isMatchWithBonus(LottoNumber lottoNumber) {
+	public boolean isMatchWithBonus(final LottoNumber lottoNumber) {
 		return lottoNumber.equals(bonusNumber);
 	}
 }

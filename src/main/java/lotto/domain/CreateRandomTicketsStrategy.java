@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class CreateRandomTicketsStrategy implements CreateNumbersStrategy {
@@ -27,21 +28,18 @@ public class CreateRandomTicketsStrategy implements CreateNumbersStrategy {
 	@Override
 	public LottoTickets create(PurchasingAmount purchasingAmount) {
 		List<LottoTicket> lottoTickets = new ArrayList<>();
-		List<LottoNumber> lottoNumbers = new ArrayList<>();
-
 		purchasingAmount.forEachRemaining((count) -> {
 			Collections.shuffle(numberPool);
-			createLottoTicket(lottoTickets, lottoNumbers);
+			createLottoTicket(lottoTickets);
 		});
-
 		return new LottoTickets(lottoTickets);
 	}
 
-	private void createLottoTicket(List<LottoTicket> lottoTickets, List<LottoNumber> lottoNumbers) {
-		for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
-			lottoNumbers.add(numberPool.get(i));
-		}
-		lottoTickets.add(new LottoTicket(lottoNumbers));
-		lottoNumbers.clear();
+	private void createLottoTicket(List<LottoTicket> lottoTickets) {
+		lottoTickets.add(new LottoTicket(
+			numberPool.stream()
+				.limit(LOTTO_NUMBER_SIZE)
+				.collect(Collectors.toList())
+		));
 	}
 }

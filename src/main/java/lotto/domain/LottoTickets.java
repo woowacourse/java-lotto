@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 public class LottoTickets {
 	private final List<LottoTicket> lottoTickets;
 
-	public LottoTickets(List<LottoTicket> lottoTickets) {
+	public LottoTickets(final List<LottoTicket> lottoTickets) {
 		this.lottoTickets = lottoTickets;
 	}
 

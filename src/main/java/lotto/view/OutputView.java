@@ -1,0 +1,41 @@
+package lotto.view;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Predicate;
+
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+import lotto.domain.Rank;
+import lotto.domain.Ranks;
+
+public class OutputView {
+	public static void printResult(final Ranks ranks) {
+		final Rank[] rankValues = Rank.values();
+
+		List<Rank> rankResults = Arrays.asList(rankValues);
+		Collections.reverse(rankResults);
+
+		rankResults.stream()
+			.filter(hasPrize())
+			.forEach(rank -> printEachResult(rank, ranks));
+	}
+
+	private static Predicate<Rank> hasPrize() {
+		return rank -> !rank.equals(Rank.NONE);
+	}
+
+	private static void printEachResult(final Rank rank, final Ranks ranks) {
+		if (rank.equals(Rank.SECOND)) {
+			System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", rank.getMatchCount(), rank.getAmount(), ranks.getCountOf(rank));
+		}
+		System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchCount(), rank.getAmount(), ranks.getCountOf(rank));
+	}
+
+	public static void printLottoState(final LottoTickets lottoTickets) {
+		lottoTickets.stream()
+			.map(LottoTicket::toString)
+			.forEach(System.out::println);
+	}
+}
