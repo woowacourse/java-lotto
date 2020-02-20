@@ -1,21 +1,18 @@
 package lotto.domain;
 
+import java.util.function.Predicate;
+
 public class Result {
     private WinningInfo winningInfo;
 
-    void calculate(WinningLotto winningLotto, Lotto userLotto) {
-        int winningCount = 0;
-        boolean hasBonus = false;
-        for (LottoNumber userLottoNumber : userLotto.getLottoNumbers()) {
-            for (LottoNumber winningLottoNumber : winningLotto.getLottoNumbers()) {
-                if (userLottoNumber.getNumber() == winningLottoNumber.getNumber()) {
-                    winningCount++;
-                }
-                if (userLottoNumber.getNumber() == winningLotto.getBonusNumber().getNumber()) {
-                    hasBonus = true;
-                }
-            }
-        }
+    void calculate(Lotto userLotto, WinningLotto winningLotto) {
+        int winningCount = (int) userLotto.getLottoNumbers()
+                .stream()
+                .filter(userLottoNumber -> winningLotto.lottoNumbers.stream().anyMatch(Predicate.isEqual(userLottoNumber)))
+                .count();
+        boolean hasBonus = userLotto.getLottoNumbers()
+                .stream()
+                .anyMatch(userLottoNumber -> userLottoNumber == winningLotto.getBonusNumber());
         this.winningInfo = WinningInfo.valueOf(winningCount, hasBonus);
     }
 
