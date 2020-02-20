@@ -10,9 +10,10 @@ public class LottosFactory {
 		this.lottoFactory = lottoFactory;
 	}
 
-	public Lottos createLottosByCount(int count) {
+	public Lottos createLottosByCount(LottoCount count) {
 		List<Lotto> lottos = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
+		int lottoCount = count.getLottoCount();
+		for (int i = 0; i < lottoCount; i++) {
 			lottos.add(lottoFactory.create());
 		}
 		return new Lottos(lottos);

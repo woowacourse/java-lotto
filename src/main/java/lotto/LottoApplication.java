@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Ball;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.LottosFactory;
 import lotto.domain.Money;
@@ -16,8 +17,9 @@ public class LottoApplication {
 		int inputMoney = InputView.inputMoney();
 		Money money = new Money(inputMoney);
 		LottosFactory lottosFactory = new LottosFactory(new RandomLottoFactory());
-		int countA = money.getCount().getLottoCount();
-		Lottos lottos = lottosFactory.createLottosByCount(countA);
+
+		LottoCount count = money.getCount();
+		Lottos lottos = lottosFactory.createLottosByCount(count);
 		OutputView.printLottoCount(lottos.getCount());
 		OutputView.printLottos(lottos);
 

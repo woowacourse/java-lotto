@@ -17,7 +17,7 @@ public class LottosFactoryTest {
 		};
 		LottosFactory lottosFactory = new LottosFactory(lottoFactory);
 
-		Lottos lottos = lottosFactory.createLottosByCount(5);
+		Lottos lottos = lottosFactory.createLottosByCount(new LottoCount(5));
 		assertThat(lottos.isRightSize(5)).isTrue();
 	}
 }
