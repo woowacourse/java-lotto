@@ -5,6 +5,8 @@ import lotto.view.OutputView;
 
 public class Lotto {
 
+    private static final String BONUS_KEY = "5+";
+
     public static void lottoGame() {
         Initializer.initialize();
         for (AutoTicket autoTicket : AutoTickets.getAutoTickets()) {
@@ -39,7 +41,7 @@ public class Lotto {
 
     private static void isSecondWin(AutoTicket autoTicket, String correctCount) {
         if (autoTicket.getAutoTicket().contains(BonusBall.bonusNo)) {
-            LottoResultMap.resultCount.get("5+").setCount();
+            LottoResultMap.resultCount.get(BONUS_KEY).setCount();
             return;
         }
         LottoResultMap.resultCount.get(correctCount).setCount();
