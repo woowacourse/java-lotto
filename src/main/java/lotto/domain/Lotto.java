@@ -8,9 +8,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-	private static final int BALL_COUNT = 6;
 	private static final String DUPLICATED_NUMBER_EXCEPTION_MESSAGE = "중복된 볼이 포함";
 	private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 갯수가 적절하지 않습니다.";
+	static final int BALL_COUNT = 6;
 
 	private final List<Ball> balls;
 

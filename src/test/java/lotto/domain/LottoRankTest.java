@@ -10,11 +10,4 @@ public class LottoRankTest {
 	void getRank() {
 		assertThat(LottoRank.getRank(3)).isEqualTo(LottoRank.FIFTH);
 	}
-
-	@Test
-	void getTotal() {
-		long totalPrize = LottoRank.FIRST.getTotal(3);
-		long expected = 2_000_000_000L * 3L;
-		assertThat(totalPrize).isEqualTo(expected);
-	}
 }
