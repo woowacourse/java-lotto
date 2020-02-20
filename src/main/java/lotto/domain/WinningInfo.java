@@ -20,11 +20,7 @@ public enum WinningInfo {
 
     public static WinningInfo valueOf(int winningCount, boolean hasBonus) {
         WinningInfo winningInfo = null;
-
         switch (winningCount) {
-            case 0:
-                winningInfo = WinningInfo.FAIL;
-                break;
             case 3:
                 winningInfo = WinningInfo.FIFTH;
                 break;
@@ -41,11 +37,26 @@ public enum WinningInfo {
             case 6:
                 winningInfo = WinningInfo.FIRST;
                 break;
+            default:
+                winningInfo = WinningInfo.FAIL;
         }
         return winningInfo;
     }
 
     public int getWinningPrice(){
         return winningPrice;
+    }
+
+    @Override
+    public String toString() {
+        String winningCount = String.format("%d 개 일치", this.winningCount);
+        String winningPrice = String.format("(%d원)", this.winningPrice);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(winningCount);
+        if (hasBonus)
+            stringBuilder.append(", 보너스 볼 일치");
+        stringBuilder.append(winningPrice);
+        return stringBuilder.toString();
     }
 }

@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lottos;
-import lotto.domain.PaidPrice;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.utils.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -19,5 +17,10 @@ public class Application {
         String bonusNumberInputByUser = InputView.getBonusNumber();
         WinningLotto winningLotto =
                 LottoGenerator.createWinningLottoByUserInput(winningNumberInputByUser, bonusNumberInputByUser);
+
+        Results results = new Results(lottos, winningLotto);
+        results.calculateResults();
+        System.out.println();
+        OutputView.printResults(results);
     }
 }

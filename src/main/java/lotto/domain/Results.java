@@ -2,22 +2,23 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Results {
     private static final int MONEY_PER_LOTTO = 1000;
 
     private List<Result> results;
-    private List<Lotto> userLotties;
+    private Lottos userLottos;
     private WinningLotto winningLotto;
 
-    public Results(List<Lotto> userLotties, WinningLotto winningLotto) {
+    public Results(Lottos userLottos, WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
-        this.userLotties = userLotties;
+        this.userLottos = userLottos;
         this.results = new ArrayList<>();
     }
 
     public void calculateResults() {
-        for (Lotto userLotto : userLotties) {
+        for (Lotto userLotto : userLottos.getLottos()) {
             Result result = new Result();
             result.calculate(winningLotto, userLotto);
             results.add(result);
@@ -37,6 +38,14 @@ public class Results {
     }
 
     public int getEarningRate() {
-        return (getTotalEarning()) / (userLotties.size() * 1000);
+        return (getTotalEarning()) / (userLottos.getLottos().size() * 1000);
+    }
+
+    public int getWinningCount(WinningInfo winningInfo) {
+        return results
+                .stream()
+                .filter(result -> result.isSameWinning(winningInfo))
+                .collect(Collectors.toList())
+                .size();
     }
 }

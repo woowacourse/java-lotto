@@ -16,11 +16,14 @@ public class Result {
                 }
             }
         }
-
-        winningInfo = WinningInfo.valueOf(winningCount, hasBonus);
+        this.winningInfo = WinningInfo.valueOf(winningCount, hasBonus);
     }
 
     public WinningInfo getWinningInfo() {
         return winningInfo;
+    }
+
+    public boolean isSameWinning(WinningInfo winningInfo) {
+        return this.winningInfo == winningInfo;
     }
 }
