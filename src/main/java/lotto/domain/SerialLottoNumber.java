@@ -32,8 +32,14 @@ public class SerialLottoNumber {
 		}
 	}
 
-	public boolean contains(LottoNumber bonus) {
-		return lottoNumbers.contains(bonus);
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
+
+	public int countMatching(SerialLottoNumber winningLottoNumbers) {
+		return (int) lottoNumbers.stream()
+				.filter(winningLottoNumbers::contains)
+				.count();
 	}
 
 	public List<LottoNumber> getLottoNumbers() {

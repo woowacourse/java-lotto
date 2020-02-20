@@ -48,7 +48,7 @@ public class SerialLottoNumberTest {
 			// when
 			new SerialLottoNumber(lottoNumbers);
 		}).isInstanceOf(LottoTicketIllegalArgumentException.class)
-		.hasMessageMatching(LottoTicketIllegalArgumentException.MESSAGE);
+				.hasMessageMatching(LottoTicketIllegalArgumentException.MESSAGE);
 	}
 
 	static Stream<Arguments> generateNotSizeSixInput() {

@@ -42,4 +42,11 @@ public class WinningLottoNumbers {
 	public int hashCode() {
 		return Objects.hash(winningLottoNumbers, bonus);
 	}
+
+	public WinningType findMatchingWinningTypeWith(SerialLottoNumber lottoTicket) {
+		int sameNumberCount = lottoTicket.countMatching(winningLottoNumbers);
+		boolean isContainsBonus = lottoTicket.contains(bonus);
+
+		return WinningType.getWinningType(sameNumberCount, isContainsBonus);
+	}
 }
