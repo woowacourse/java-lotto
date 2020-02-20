@@ -25,13 +25,14 @@ public class ConsoleLottoApplication {
 		final WinningNumbers winningNumbers =
 			new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 
-		final Ranks prizeResults =
+		final Ranks results =
 			new Ranks(
 				lottoTickets.stream()
 					.map(lottoTicket -> Rank.of(lottoTicket, winningNumbers))
 					.collect(Collectors.toList())
 			);
 
-		OutputView.printResult(prizeResults);
+		OutputView.printResult(results);
+		OutputView.printProfit(ProfitCalculator.calculate(inputMoney, results));
 	}
 }
