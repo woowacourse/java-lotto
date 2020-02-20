@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.utils.StringUtils;
-
 public class Lotto {
     private static final int PRICE = 1_000;
     private List<Integer> lottoNumbers;
@@ -29,21 +27,14 @@ public class Lotto {
         return lottoNumbers.contains(bonusBall);
     }
 
-    private boolean contains(int bonusBall) {
-        return this.lottoNumbers.contains(bonusBall);
-    }
-
     @Override
     public String toString() {
         List<String> lottoNumbersString = lottoNumbers.stream()
             .map(lottoNumber -> lottoNumber.toString())
             .collect(Collectors.toList());
 
-        return "["  + String.join(",", lottoNumbersString) + "]";
+        return "[" + String.join(",", lottoNumbersString) + "]";
 
     }
 
-    // public static boolean matchBonusBall(int bonusBall) {
-    //     return this.contains(bonusBall);
-    // }
 }
