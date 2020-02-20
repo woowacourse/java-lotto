@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoUser;
 import lotto.domain.Lottos;
+import lotto.domain.WinningNumber;
 import lotto.dto.LottoCountDto;
 import lotto.utils.InputUtil;
 import lotto.view.InputView;
@@ -17,7 +18,17 @@ public class LottoController {
 		LottoUser lottoUser = new LottoUser(lottos);
 
 		OutputView.printLottos(lottos.makeLottoDtos());
-		// WinningNumber winningNumber = new WinningNumber(readWinningNumber());
+		WinningNumber winningNumber = new WinningNumber(readWinningNumber(), readBonusNumber());
+	}
+
+	private static int readBonusNumber() {
+		try {
+			InputView.printInsertBonusNumber();
+			return InputUtil.inputBonusNumber();
+		} catch (NumberFormatException | IOException e) {
+			OutputView.printWrongBonusNumberInput();
+			return readBonusNumber();
+		}
 	}
 
 	private static Lottos buyLottos() {

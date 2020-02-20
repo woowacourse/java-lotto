@@ -17,4 +17,12 @@ public class OutputView {
 			System.out.println(lotto.getLottoNumber());
 		}
 	}
+
+	public static void printWrongBonusNumberInput() {
+		System.out.println("정수가 아닌 보너스 번호입니다.");
+	}
+
+	public static void printExceptionMessage(IllegalArgumentException e) {
+		System.out.println(e.getMessage());
+	}
 }

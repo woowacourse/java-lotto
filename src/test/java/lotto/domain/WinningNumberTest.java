@@ -11,7 +11,7 @@ public class WinningNumberTest {
 	@ParameterizedTest
 	@NullAndEmptySource
 	void 널이나_빈_값이_들어올_경우(List<String> value) {
-		assertThatThrownBy(() -> new WinningNumber(value))
+		assertThatThrownBy(() -> new WinningNumber(value, 5))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("널이나 빈 값");
 	}
