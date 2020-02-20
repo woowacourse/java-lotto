@@ -11,5 +11,6 @@ public class LottoMain {
         OutputView.printLottoNumbers(lottoManager.buyer.getLottos());
         lottoManager.setWinningLotto(InputView.inputWinningLottoNumbers(), InputView.inputBonusNumber());
         OutputView.printLottoResults(lottoManager.analyzeLotto());
+        OutputView.printRewardRate(lottoManager.analyzeRewardRate());
     }
 }

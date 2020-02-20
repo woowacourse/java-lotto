@@ -12,6 +12,6 @@ public class RewardRate {
                 .mapToInt(result ->
                         result.getKey().getReward()
                                 * result.getValue())
-                .sum() / money / RATE;
+                .sum() / money * RATE;
     }
 }

@@ -27,5 +27,7 @@ public class LottoManager {
         return winningRankResult.getWinningValueResult();
     }
 
-
+    public int analyzeRewardRate() {
+        return RewardRate.calculateRewardRate(moneyManager.getMoney(), winningRankResult.getWinningValueResult());
+    }
 }

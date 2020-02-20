@@ -29,4 +29,7 @@ public class OutputView {
         System.out.println(result.getValue() + "개");
     }
 
+    public static void printRewardRate(int rewardRate) {
+        System.out.println("총 수익률은 " + rewardRate + "% 입니다.");
+    }
 }

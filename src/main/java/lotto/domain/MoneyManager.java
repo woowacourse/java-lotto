@@ -19,4 +19,8 @@ public class MoneyManager {
             throw new IllegalArgumentException("돈이 부족해 로또를 살 수 없습니다.");
         }
     }
+
+    public int getMoney() {
+        return money;
+    }
 }
