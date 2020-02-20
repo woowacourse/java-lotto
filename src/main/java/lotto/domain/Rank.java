@@ -35,4 +35,8 @@ public enum Rank {
     public int getMatchCount() {
         return matchCount;
     }
+
+    public static void reset() {
+        result.clear();
+    }
 }

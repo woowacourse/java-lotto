@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,4 +38,8 @@ class LottoTicketsTest {
         assertThat(result.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
     }
 
+    @AfterEach
+    void tearDown() {
+        Rank.reset();
+    }
 }
