@@ -43,4 +43,14 @@ public class LottoTicket {
     public List<Integer> getLottoTicket() {
         return this.lottoTicket;
     }
+
+    public int getCorrectCount(List<Integer> winningTicket) {
+        int correctCount = 0;
+        for(int i = 0 ; i < lottoTicket.size() ; i++) {
+            if (lottoTicket.get(i) == winningTicket.get(i)) {
+                correctCount++;
+            }
+        }
+        return correctCount;
+    }
 }

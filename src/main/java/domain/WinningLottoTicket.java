@@ -8,8 +8,8 @@ import java.util.List;
 public class WinningLottoTicket {
     private static final String DELIMITER = ", ";
 
-    LottoTicket winningTicket;
-    BonusBall bonusBall;
+    private LottoTicket winningTicket;
+    private BonusBall bonusBall;
 
     public WinningLottoTicket(String input) {
         validateNull(input);
