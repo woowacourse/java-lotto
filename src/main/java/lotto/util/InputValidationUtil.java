@@ -5,7 +5,7 @@ public class InputValidationUtil {
     private InputValidationUtil() {
     }
 
-    public static int isNumber(String inputValue) {
+    public static int returnNumberWithNumberCheck(String inputValue) {
         try {
             return Integer.parseInt(inputValue);
         } catch (NumberFormatException e) {
@@ -13,7 +13,7 @@ public class InputValidationUtil {
         }
     }
 
-    public static void isPositiveNumber(int inputValue) {
+    public static void isPositiveNumber(long inputValue) {
         if(inputValue < 0){
             throw new IllegalArgumentException("음수입니다.");
         }

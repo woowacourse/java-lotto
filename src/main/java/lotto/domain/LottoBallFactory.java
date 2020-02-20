@@ -8,9 +8,7 @@ public class LottoBallFactory {
 
     private static List<LottoBall> lottoBalls;
 
-    private LottoBallFactory(){
-
-    }
+    private LottoBallFactory(){ }
 
     static{
         lottoBalls = IntStream.rangeClosed(1, 45)

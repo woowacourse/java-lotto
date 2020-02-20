@@ -1,20 +1,15 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 
 public class WinningBalls {
     private final List<LottoBall> winningBalls;
-    private final LottoBall bonusBall;
+    private final LottoBall hitBonusBall;
 
-    public WinningBalls(List<LottoBall> winningBalls, int bonusBall) {
-        this.bonusBall = new LottoBall(bonusBall);
+    public WinningBalls(List<LottoBall> winningBalls, int hitBonusBall) {
+        this.hitBonusBall = new LottoBall(hitBonusBall);
         this.winningBalls = winningBalls;
     }
-
-//    public List<LottoBall> getWinningBalls() {
-//        return Collections.unmodifiableList(winningBalls);
-//    }
 
 
     public int hitLottoBalls(LottoTicket lottoTicket) {
@@ -25,7 +20,7 @@ public class WinningBalls {
     }
 
     public boolean hitBonus(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoTicket().contains(bonusBall);
+        return lottoTicket.getLottoTicket().contains(hitBonusBall);
     }
 
 }

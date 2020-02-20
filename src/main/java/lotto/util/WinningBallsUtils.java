@@ -22,7 +22,7 @@ public class WinningBallsUtils {
 
     public void validateWinningBallsNumber(String[] winningBalls) {
         for (String winningBall : winningBalls) {
-            InputValidationUtil.isNumber(winningBall);
+            InputValidationUtil.returnNumberWithNumberCheck(winningBall);
         }
     }
 
