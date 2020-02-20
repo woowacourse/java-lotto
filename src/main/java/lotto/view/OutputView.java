@@ -1,15 +1,15 @@
-package view;
+package lotto.view;
 
-import lotto.Lotto;
-import lotto.Rank;
+import lotto.domain.LottoTicket;
+import lotto.domain.Rank;
 
 import java.util.List;
 
 public class OutputView {
-    public static void printLottos(List<Lotto> lottos) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottos.size()));
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto.getNumbers());
+    public static void printLottos(List<LottoTicket> lottoTickets) {
+        System.out.println(String.format("%d개를 구매했습니다.", lottoTickets.size()));
+        for (LottoTicket lottoTicket : lottoTickets) {
+            System.out.println(lottoTicket.getNumbers());
         }
     }
 

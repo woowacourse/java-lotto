@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,18 +13,18 @@ public class LottoFactory {
         }
     }
 
-    public static List<Lotto> createLottos(int purchaseMoney) {
+    public static List<LottoTicket> createLottos(int purchaseMoney) {
         int lottoCount = purchaseMoney / 1000;
-        List<Lotto> lottos = new ArrayList<>();
+        List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(createLotto());
+            lottoTickets.add(createLotto());
         }
-        return lottos;
+        return lottoTickets;
     }
 
-    private static Lotto createLotto() {
+    private static LottoTicket createLotto() {
         Collections.shuffle(numbers);
         ArrayList<Integer> subNumbers = new ArrayList<Integer>(numbers.subList(0, 6));
-        return new Lotto(subNumbers);
+        return new LottoTicket(subNumbers);
     }
 }

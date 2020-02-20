@@ -1,12 +1,12 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
 
-public class Lotto {
+public class LottoTicket {
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public LottoTicket(List<Integer> numbers) {
         validate(numbers);
         Collections.sort(numbers);
         this.numbers = numbers;
@@ -54,9 +54,9 @@ public class Lotto {
         return Collections.unmodifiableList(numbers);
     }
 
-    public Rank compare(Lotto winningLotto, int bonusNumber) {
+    public Rank compare(LottoTicket winningLottoTicket, int bonusNumber) {
         int count = (int) this.numbers.stream()
-                .filter(number -> winningLotto.numbers.contains(number))
+                .filter(number -> winningLottoTicket.numbers.contains(number))
                 .count();
 
         if (count == 5 && this.numbers.contains(bonusNumber)) {
