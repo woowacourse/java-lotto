@@ -3,11 +3,13 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoResult {
-	FIVE(0, 5000, 3),
-	FOUR(0, 50000, 4),
-	THREE(0, 1500000, 5),
-	TWO(0, 30000000, 5),
-	ONE(0, 2000000000, 6);
+	FIFTH(0, 5000, 3),
+	FOURTH(0, 50000, 4),
+	THIRD(0, 1500000, 5),
+	SECOND(0, 30000000, 5),
+	FIRST(0, 2000000000, 6);
+
+	public static final String ERROR_MESSAGE_NOT_FOUND_RANK = "당첨되지 않았습니다.";
 
 	private int count;
 	private long reward;
@@ -19,11 +21,11 @@ public enum LottoResult {
 		this.hitCount = hitCount;
 	}
 
-	public static LottoResult of(int count) {
+	public static LottoResult findRank(int count) {
 		return Arrays.stream(values())
 			.filter(x -> x.hitCount == count)
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(""));
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE_NOT_FOUND_RANK));
 	}
 
 	public static long calculateTotalReward() {

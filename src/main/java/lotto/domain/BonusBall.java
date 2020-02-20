@@ -1,11 +1,15 @@
 package lotto.domain;
 
+import lotto.validator.Validator;
+
 public class BonusBall {
 	private int bonusBall;
 
 	public BonusBall(String bonusBall) {
-		// 검증
-		this.bonusBall = Integer.valueOf(bonusBall);
+		Validator.validateInteger(bonusBall);
+		int bonusNo = Integer.valueOf(bonusBall);
+		Validator.validateLottoRange(bonusNo);
+		this.bonusBall = bonusNo;
 	}
 
 	public boolean isContainBonusBall(Lotto lotto) {
