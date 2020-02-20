@@ -12,6 +12,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
+@DisplayName("Dto 생성 테스트")
 class LottoNumbersDtoGeneratorTest {
 
     @Test
