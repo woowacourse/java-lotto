@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.HashSet;
 import java.util.List;
 
+import lotto.dto.LottoDto;
+
 public class Lotto {
 	private static final int LOTTO_SIZE = 6;
 
@@ -44,7 +46,12 @@ public class Lotto {
 		return 0;
 	}
 
+	public LottoDto makeLottoDto() {
+		return new LottoDto(this.lottoNumber);
+	}
+
 	public List<Integer> getLottoNumber() {
 		return lottoNumber;
 	}
+
 }

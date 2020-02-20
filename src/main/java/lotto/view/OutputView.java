@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.dto.LottoDto;
+import lotto.dto.LottoDtos;
 
 public class OutputView {
 	public static void printWrongMoneyInput() {
@@ -12,8 +12,8 @@ public class OutputView {
 		System.out.println(lottoCount + "개를 구매했습니다.");
 	}
 
-	public static void printLottos(Lottos lottos) {
-		for (Lotto lotto : lottos.getLottos()) {
+	public static void printLottos(LottoDtos lottoDtos) {
+		for (LottoDto lotto : lottoDtos.getLottoDtos()) {
 			System.out.println(lotto.getLottoNumber());
 		}
 	}

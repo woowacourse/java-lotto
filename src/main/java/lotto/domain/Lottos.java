@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import lotto.dto.LottoDtos;
 
 public class Lottos {
 	private final List<Lotto> lottos;
@@ -14,6 +17,12 @@ public class Lottos {
 		if (lottos == null || lottos.isEmpty()) {
 			throw new IllegalArgumentException("null이나 빈 값이 들어올 수 없습니다.");
 		}
+	}
+
+	public LottoDtos makeLottoDtos() {
+		return new LottoDtos(lottos.stream()
+			.map(Lotto::makeLottoDto)
+			.collect(Collectors.toList()));
 	}
 
 	public List<Lotto> getLottos() {
