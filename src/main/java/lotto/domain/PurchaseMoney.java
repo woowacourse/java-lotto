@@ -30,6 +30,10 @@ public class PurchaseMoney {
 		}
 	}
 
+	public int countPurchasedTickets() {
+		return purchaseMoney / DIVISOR;
+	}
+
 	public int getPurchaseMoney() {
 		return purchaseMoney;
 	}

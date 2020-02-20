@@ -16,6 +16,10 @@ public class PurchasedLottoTickets {
 		return Collections.unmodifiableList(purchasedLottoTickets);
 	}
 
+	public int countPurchasedLottoTickets() {
+		return purchasedLottoTickets.size();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
