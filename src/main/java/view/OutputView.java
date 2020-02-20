@@ -64,7 +64,7 @@ public class OutputView {
         }
     }
 
-    public static void printProfitRatio(double profitRatio) {
-        System.out.printf("총 수익률은 %f%%입니다.", profitRatio);
+    public static void printProfitRatio(int profitRatio) {
+        System.out.printf("총 수익률은 %d%%입니다.", profitRatio);
     }
 }

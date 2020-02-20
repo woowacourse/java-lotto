@@ -32,10 +32,12 @@ public class LottoGame {
         Profit profit = new Profit();
         for (Lotto lotto : lottoDummy){
             LottoResult rank = winningNumber.findRank(lotto);
-            result.put(rank, result.getOrDefault(rank, 0) + 1);
+            if (rank != null){
+                result.put(rank, result.get(rank) + 1);
+            }
         }
 
-        double profitRatio = profit.calculateProfitRatio(result, amount.getCount());
+        int profitRatio = profit.calculateProfitRatio(result, amount.getCount());
         OutputView.printResult(result);
         OutputView.printProfitRatio(profitRatio);
     }
