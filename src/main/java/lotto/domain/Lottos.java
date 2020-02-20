@@ -1,9 +1,9 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import javax.management.remote.rmi.RMIJRMPServerImpl;
 
 public class Lottos {
 	public static final String INVALID_LOTTO_SIZE_MESSAGE = "로또가 존재하지 않습니다.";
@@ -21,9 +21,9 @@ public class Lottos {
 		}
 	}
 
-	public Map<LottoRank, Long> calculate(WinningLotto winningLotto) {
+	public LottoResults match(WinningLotto winningLotto) {
 		return lottos.stream()
 				.map(winningLotto::match)
-				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+				.collect(Collectors.collectingAndThen(Collectors.toList(), LottoResults::new));
 	}
 }

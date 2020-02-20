@@ -32,7 +32,7 @@ public enum LottoRank {
 		return matchCount == THIRD.matchCount && !hasBonus;
 	}
 
-	public long calculateWinnings(long amount) {
-		return winnings * amount;
+	public long getWinnings() {
+		return winnings;
 	}
 }

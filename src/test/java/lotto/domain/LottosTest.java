@@ -2,26 +2,26 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 	@Test
-	void calculate() {
-		Lottos lottos = new Lottos(Arrays.asList(
-				Lotto.of(1, 2, 5, 43, 44, 45),
-				Lotto.of(1, 2, 5, 43, 44, 45),
-				Lotto.of(1, 2, 3, 43, 44, 45)
-		));
-		WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 5, 43, 44, 45), LottoNumber.of(7));
+	@DisplayName("로또 여러 장이 정상적으로 생성된 경우")
+	void constructor() {
+		assertThat(new Lottos(Arrays.asList(Lotto.of(1,2,3,4,5,6), Lotto.of(2,3,4,5,6,7)))).isInstanceOf(Lottos.class);
+	}
 
-		Map<LottoRank, Long> expected = new HashMap<>();
-		expected.put(LottoRank.FIRST, 2L);
-		expected.put(LottoRank.THIRD, 1L);
-
-		assertThat(lottos.calculate(winningLotto)).isEqualTo(expected);
+	@Test
+	@DisplayName("로또가 없는 경우")
+	void constructor_로또가_없는_경우() {
+		assertThatThrownBy(() -> {
+			new Lottos(null);
+			new Lotto(Collections.emptyList());
+		}).isInstanceOf(IllegalArgumentException.class);
 	}
 }

@@ -1,48 +1,23 @@
 package lotto.domain;
 
-import java.util.Map;
-import java.util.Objects;
+import java.util.Arrays;
 
 public class LottoStatistics {
-	private final Map<LottoRank, Long> statistics;
+	private final LottoPurchaseMoney lottoPurchaseMoney;
+	private final LottoResults lottoResults;
 
-	public LottoStatistics(Map<LottoRank, Long> statistics) {
-		validate(statistics);
-		this.statistics = Map.copyOf(statistics);
+	public LottoStatistics(LottoPurchaseMoney lottoPurchaseMoney, LottoResults lottoResults) {
+		this.lottoPurchaseMoney = lottoPurchaseMoney;
+		this.lottoResults = lottoResults;
 	}
 
-	private void validate(Map<LottoRank, Long> statistics) {
-		if (statistics == null || statistics.isEmpty()) {
-			throw new IllegalArgumentException("통계를 수행할 로또 결과가 없습니다.");
-		}
+	public long getProfitRate() {
+		return sumWinnings() / lottoPurchaseMoney.getValue() * 100;
 	}
 
-	public long calculateTotalProfits(LottoPurchaseMoney money) {
-		long totalWinning = calculateTotalWinnings();
-		return totalWinning * 100 / money.getValue();
-	}
-
-	private long calculateTotalWinnings() {
-		return statistics.entrySet()
-				.stream()
-				.mapToLong(result -> result.getKey().calculateTotalWinnings(result.getValue()))
+	private long sumWinnings() {
+		return Arrays.stream(LottoRank.values())
+				.mapToLong(rank -> rank.getWinnings() * lottoResults.getRankCount(rank))
 				.sum();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		LottoStatistics that = (LottoStatistics)o;
-		return Objects.equals(statistics, that.statistics);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(statistics);
 	}
 }

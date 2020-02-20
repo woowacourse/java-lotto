@@ -1,24 +1,22 @@
 package lotto;
 
-import java.util.Map;
-
+import lotto.domain.AutoLottosGenerator;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchaseMoney;
-import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
-import lotto.domain.RandomLottoGenerator;
+import lotto.domain.LottosGenerator;
 import lotto.domain.WinningLotto;
 
 public class LottoApplication {
 	public static void main(String[] args) {
-		int amount = 2100000000;
-		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(amount);
-		Lottos lottos = new RandomLottoGenerator().generate(lottoPurchaseMoney.getBuyCount());
-		WinningLotto winningLotto = new WinningLotto(new RandomLottoGenerator().generate(), LottoNumber.of(6));
-		Map<LottoRank, Long> matchResults = lottos.calculate(winningLotto);
-		LottoStatistics lottoStatistics = new LottoStatistics(matchResults);
-		long totalProfits = lottoStatistics.calculateTotalProfits(lottoPurchaseMoney);
-		System.out.println(totalProfits);
+		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(14000);
+		LottosGenerator lottosGenerator = new AutoLottosGenerator();
+		Lottos lottos = lottosGenerator.generate(lottoPurchaseMoney.getBuyCount());
+		WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
+		LottoStatistics lottoStatistics = new LottoStatistics(lottoPurchaseMoney, lottos.match(winningLotto));
+		long profitRate = lottoStatistics.getProfitRate();
+		System.out.println(profitRate);
 	}
 }

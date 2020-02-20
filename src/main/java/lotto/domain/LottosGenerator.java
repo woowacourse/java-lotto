@@ -1,7 +1,5 @@
 package lotto.domain;
 
-public interface LottoGenerator {
-	Lotto generate();
-
+public interface LottosGenerator {
 	Lottos generate(int count);
 }

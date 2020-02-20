@@ -4,22 +4,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Lotto implements Iterable<LottoNumber> {
+public class Lotto {
 	public static final int SIZE = 6;
 	private static final String DUPLICATED_NUMBER_MESSAGE = "로또 번호가 중복됩니다.";
 	private static final String INVALID_SIZE_MESSAGE = "로또 번호가 존재하지 않습니다.";
 
-	private final List<LottoNumber> lotto = new ArrayList<>();
+	private final List<LottoNumber> lotto;
 
 	public Lotto(List<LottoNumber> lotto) {
 		validate(lotto);
-		this.lotto.addAll(lotto);
+		this.lotto = new ArrayList<>(lotto);
 		Collections.sort(this.lotto);
 	}
 
@@ -72,10 +71,5 @@ public class Lotto implements Iterable<LottoNumber> {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lotto);
-	}
-
-	@Override
-	public Iterator<LottoNumber> iterator() {
-		return lotto.iterator();
 	}
 }
