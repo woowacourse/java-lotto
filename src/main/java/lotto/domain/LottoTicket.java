@@ -35,7 +35,6 @@ public class LottoTicket {
                 .count();
     }
 
-
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }

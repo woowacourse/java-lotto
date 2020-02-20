@@ -8,8 +8,15 @@ public class WinningNumbers {
     private final LottoNumber bonusNumber;
 
     public WinningNumbers(List<LottoNumber> sixNumbers, LottoNumber bonusNumber) {
+        validateDuplication(sixNumbers, bonusNumber);
         this.winningLottoTicket = new LottoTicket(sixNumbers);
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateDuplication(List<LottoNumber> sixNumbers, LottoNumber bonusNumber) {
+        if (sixNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+        }
     }
 
     public List<Rank> compareLottos(List<LottoTicket> lottoTickets) {
