@@ -4,16 +4,7 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.*;
-
 public class LottoGame {
-    private static Map<LottoRank, Integer> result = new HashMap<LottoRank, Integer>(){{
-        put(LottoRank.FIRST, 0);
-        put(LottoRank.SECOND, 0);
-        put(LottoRank.THIRD, 0);
-        put(LottoRank.FOURTH, 0);
-        put(LottoRank.FIFTH, 0);
-    }};
 
     public static void main(String[] args) {
         PurchaseAmount amount = inputPurchaseAmount();
@@ -23,11 +14,14 @@ public class LottoGame {
         LottoDummy lottoDummy = new LottoDummy(lottoCount);
         OutputView.printLottoDummy(lottoDummy);
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
-        lottoDummy.countWinningLottoRank(winningNumber, result);
+        LottoResult lottoResult = new LottoResult();
+        lottoDummy.countWinningLottoRank(winningNumber, lottoResult);
 
         Profit profit = new Profit();
-        int profitRatio = profit.calculateProfitRatio(result, amount.getCount());
-        OutputView.printResult(result);
+        int totalProfit = lottoResult.calculateProfit();
+        int profitRatio = profit.calculateProfitRatio(totalProfit, lottoCount);
+
+        OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(profitRatio);
     }
 

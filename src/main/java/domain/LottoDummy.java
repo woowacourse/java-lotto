@@ -3,7 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class LottoDummy {
     private static List<Lotto> lottoDummy = new ArrayList<>();
@@ -14,17 +13,11 @@ public class LottoDummy {
         }
     }
 
-    public void countWinningLottoRank(WinningNumber winningNumber, Map<LottoRank, Integer> result) {
+    public void countWinningLottoRank(WinningNumber winningNumber, LottoResult lottoResult) {
         for (Lotto lotto : lottoDummy){
             LottoRank rank = LottoRank.findRank(winningNumber.countWinningMatch(lotto),
                                             winningNumber.isBonusMatch(lotto));
-            countNotNullRank(result, rank);
-        }
-    }
-
-    private void countNotNullRank(Map<LottoRank, Integer> result, LottoRank rank) {
-        if (rank != null){
-            result.put(rank, result.get(rank) + 1);
+            lottoResult.addWinningRankCount(rank);
         }
     }
 

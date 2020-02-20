@@ -5,7 +5,6 @@ import domain.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
     public static final String NEW_LINE = System.lineSeparator();
@@ -47,7 +46,7 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printResult(Map<LottoRank, Integer> result) {
+    public static void printResult(LottoResult lottoResult) {
         System.out.println("당첨 통계" + NEW_LINE + "------------");
 
         List<LottoRank> keys = Arrays.asList(LottoRank.values());
@@ -55,7 +54,7 @@ public class OutputView {
         for (LottoRank rank : keys){
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(rank.getResultMessage())
-                        .append(result.get(rank))
+                        .append(lottoResult.getCount(rank))
                         .append("개");
             System.out.println(stringBuilder);
         }
