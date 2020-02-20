@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.Exception.NotPositiveNumberException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -7,30 +9,34 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PurchaseAmountTest {
     @Test
-    void 로또_개수_반환() {
+    @DisplayName("로또 티켓수 반환 테스트")
+    void give_lotto_ticket_test() {
         PurchaseAmount purchaseAmount = new PurchaseAmount("1500");
         assertThat(purchaseAmount.lottoTicket()).isEqualTo(1);
     }
 
     @Test
-    void 남은_돈_반환() {
+    @DisplayName("거스름돈 반환 테스트")
+    void give_change_money_test() {
         PurchaseAmount purchaseAmount = new PurchaseAmount("1500");
         assertThat(purchaseAmount.giveChangeMoney()).isEqualTo(500);
     }
 
     @Test
-    void 숫자_외_다른_값_입력_시_재입력() {
+    @DisplayName("구입금액이 숫자가 아닐 경우 테스트")
+    void not_number_test() {
         String purchaseAmount = "1a가A";
         assertThatThrownBy(() -> new PurchaseAmount(purchaseAmount))
                 .isInstanceOf(NumberFormatException.class)
-                .hasMessage("숫자가 아닙니다.");
+                .hasMessage("숫자가 아닙니다. 재입력 해주세요.");
     }
 
     @Test
-    void 음수인경우() {
+    @DisplayName("구입금액이 음수일 경우 테스트")
+    void negative_number_test() {
         String purchaseAmount = "-3";
         assertThatThrownBy(() -> new PurchaseAmount(purchaseAmount))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("음수입니다.");
+                .isInstanceOf(NotPositiveNumberException.class)
+                .hasMessage("음수입니다. 재입력 해주세요.");
     }
 }
