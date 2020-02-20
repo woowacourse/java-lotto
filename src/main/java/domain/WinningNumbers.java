@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumbers {
-	private static final String DELIMITER = ", ";
-	private static final int SIX = 6;
 	private final Lotto winningLottoTicket;
 	private final LottoNumber bonusNumber;
 

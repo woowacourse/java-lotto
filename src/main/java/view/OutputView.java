@@ -9,9 +9,6 @@ import domain.Profit;
 import domain.Rank;
 
 public class OutputView {
-
-	private static final int HUNDRED = 100;
-
 	public static void printLottos(List<Lotto> lottos) {
 		System.out.println(String.format("%d개를 구매했습니다.", lottos.size()));
 		for (Lotto lotto : lottos) {
