@@ -10,7 +10,7 @@ import lotto.view.OutputView;
 import java.util.List;
 
 public class Application {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         NumberGenerator numberGenerator = new UserInputNumberGenerator();
         Payment payment = new Payment(InputView.getPayment());
         OutputView.printLottoCount(payment);
@@ -24,6 +24,7 @@ public class Application {
 
         WinningLotto winningLotto = new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
 
-        OutputView.printResults();
+        Results results = new Results(lottoList, winningLotto);
+        OutputView.printResults(results);
     }
 }

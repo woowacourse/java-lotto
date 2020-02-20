@@ -3,9 +3,7 @@ package lotto.utils;
 import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class UserInputNumberGenerator implements NumberGenerator {
 

@@ -3,6 +3,13 @@ package lotto.domain;
 public class Result {
     private WinningInfo winningInfo;
 
+    public Result() {
+    }
+
+    public Result(WinningInfo winningInfo) {
+        this.winningInfo = winningInfo;
+    }
+
     void calculate(WinningLotto winningLotto, Lotto userLotto) {
         int winningCount = 0;
         boolean hasBonus = false;
@@ -16,7 +23,6 @@ public class Result {
                 }
             }
         }
-
         winningInfo = WinningInfo.valueOf(winningCount, hasBonus);
     }
 

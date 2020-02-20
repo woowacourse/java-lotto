@@ -8,6 +8,7 @@ import java.util.List;
 public class LottoNumberFactory {
     private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
     private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
+
     public static List<LottoNumber> createLottoNumberList() {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
 

@@ -13,7 +13,7 @@ public class RandomNumberGenerator implements NumberGenerator {
 
         List<LottoNumber> randomNumbers = LottoNumberFactory.createLottoNumberList();
         Collections.shuffle(randomNumbers, new Random(seed));
-        return randomNumbers.subList(0,6);
+        return randomNumbers.subList(0, 6);
     }
 
     @Override

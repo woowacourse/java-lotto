@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface NumberGenerator {
     List<LottoNumber> generateNumbers();
+
     List<LottoNumber> generateNumbers(String Input);
 }
