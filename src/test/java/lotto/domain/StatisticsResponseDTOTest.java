@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.result.win.prize.PrizeGroup;
-import lotto.view.dto.StatisticsDTO;
+import lotto.view.dto.StatisticsResponseDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ import static lotto.domain.result.win.prize.PrizeGroup.FIFTH;
 import static lotto.domain.result.win.prize.PrizeGroup.SIXTH;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class StatisticsDTOTest {
+class StatisticsResponseDTOTest {
 
     @DisplayName("상금결과로 통계결과 만들기")
     @Test
@@ -22,8 +22,8 @@ class StatisticsDTOTest {
         double expect = 3.0D;
 
         //when
-        StatisticsDTO statisticsDTO = new StatisticsDTO(prizeGroups);
-        double result = statisticsDTO.getRate();
+        StatisticsResponseDTO statisticsResponseDTO = new StatisticsResponseDTO(prizeGroups);
+        double result = statisticsResponseDTO.getRate();
 
         //then
         assertThat(result).isEqualTo(expect);

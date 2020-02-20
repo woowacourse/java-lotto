@@ -1,23 +1,23 @@
 package lotto.view;
 
-import lotto.view.dto.StatisticsDTO;
+import lotto.view.dto.StatisticsResponseDTO;
 
 public class OutputView {
     private static final String MESSAGE_FOR_BONUS_CASE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String MESSAGE_FOR_DEFAULT_CASE = "%d개 일치 (%d원)- %d개";
     private static final String SECOND = "SECOND";
 
-    public static void printResult(StatisticsDTO statisticsDTO) {
+    public static void printResult(StatisticsResponseDTO statisticsResponseDTO) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (int i = 0; i < statisticsDTO.size(); i++) {
-            int matchCount = statisticsDTO.getMatchCount(i);
-            int defaultPrize = statisticsDTO.getDefaultPrize(i);
-            int matchTicketCount = statisticsDTO.getMatchTicketCount(i);
-            String message = String.format(findMessage(statisticsDTO.getName(i)), matchCount, defaultPrize, matchTicketCount);
+        for (int i = 0; i < statisticsResponseDTO.size(); i++) {
+            int matchCount = statisticsResponseDTO.getMatchCount(i);
+            int defaultPrize = statisticsResponseDTO.getDefaultPrize(i);
+            int matchTicketCount = statisticsResponseDTO.getMatchTicketCount(i);
+            String message = String.format(findMessage(statisticsResponseDTO.getName(i)), matchCount, defaultPrize, matchTicketCount);
             System.out.println(message);
         }
-        System.out.println(String.format("총 수익률은 %f입니다.", statisticsDTO.getRate()));
+        System.out.println(String.format("총 수익률은 %f입니다.", statisticsResponseDTO.getRate()));
     }
 
     private static String findMessage(String name) {

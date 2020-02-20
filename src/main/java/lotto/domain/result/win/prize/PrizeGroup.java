@@ -1,7 +1,7 @@
 package lotto.domain.result.win.prize;
 
 import lotto.domain.result.LottoResult;
-import lotto.view.dto.StatisticsDTO;
+import lotto.view.dto.StatisticsResponseDTO;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,8 +38,8 @@ public enum PrizeGroup {
         return this == SECOND && !lottoResult.isBonusMatch();
     }
 
-    public static StatisticsDTO toDtos(List<PrizeGroup> prizeGroups) {
-        return new StatisticsDTO(prizeGroups);
+    public static StatisticsResponseDTO toDtos(List<PrizeGroup> prizeGroups) {
+        return new StatisticsResponseDTO(prizeGroups);
     }
 
     public int getDefaultPrize() {

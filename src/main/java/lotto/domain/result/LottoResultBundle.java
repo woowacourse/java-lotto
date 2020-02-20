@@ -1,7 +1,7 @@
 package lotto.domain.result;
 
 import lotto.domain.result.win.prize.PrizeGroup;
-import lotto.view.dto.StatisticsDTO;
+import lotto.view.dto.StatisticsResponseDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,8 +13,8 @@ public class LottoResultBundle {
         this.lottoResults = lottoResults;
     }
 
-    public StatisticsDTO getStatistics() {
-        return new StatisticsDTO(getPrizeGroup());
+    public StatisticsResponseDTO getStatistics() {
+        return new StatisticsResponseDTO(getPrizeGroup());
     }
 
     private List<PrizeGroup> getPrizeGroup() {

@@ -4,13 +4,13 @@ import lotto.domain.result.win.prize.PrizeGroup;
 
 import java.util.List;
 
-public class PrizeDTO {
+public class PrizeResponseDTO {
     private final String name;
     private final int matchCount;
     private final int defaultPrize;
     private final int matchTicketCount;
 
-    public PrizeDTO(PrizeGroup criteria, List<PrizeGroup> prizeResults) {
+    public PrizeResponseDTO(PrizeGroup criteria, List<PrizeGroup> prizeResults) {
         this.name = criteria.name();
         this.matchCount = criteria.getMatchCount();
         this.defaultPrize = criteria.getDefaultPrize();
