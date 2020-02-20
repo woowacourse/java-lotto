@@ -8,10 +8,10 @@ public class LottoMoney {
 
     public LottoMoney(int lottoMoney) {
         if (lottoMoney < MINIMUM_COST) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 최소 구매 금액은 1000원입니다.");
         }
         if (lottoMoney % MINIMUM_COST != REMINDER) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 구매는 1000원 단위로만 가능합니다.");
         }
         this.lottoMoney = lottoMoney;
     }

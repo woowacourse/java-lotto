@@ -1,11 +1,10 @@
 package parser;
 
-import static org.assertj.core.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
 import domain.lotto.WinningLotto;
 import domain.money.LottoMoney;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class GameParserTest {
 

@@ -1,13 +1,13 @@
 package domain.result;
 
-import static domain.result.RankTest.*;
-import static org.assertj.core.api.Assertions.*;
+import domain.money.LottoMoney;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
-import domain.money.LottoMoney;
+import static domain.result.RankTest.getRanksFixture;
+import static domain.result.RankTest.getRanksFromThirdToFifthFixture;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
 

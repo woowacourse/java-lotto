@@ -1,10 +1,10 @@
 package domain.lotto;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import domain.result.LottoResult;
 import domain.result.Rank;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 

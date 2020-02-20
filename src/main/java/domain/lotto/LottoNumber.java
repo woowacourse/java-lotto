@@ -2,19 +2,18 @@ package domain.lotto;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable {
+public class LottoNumber implements Comparable<LottoNumber> {
+
+    static final int MINIMUM_LOTTO_NUMBER = 1;
+    static final int MAXIMUM_LOTTO_NUMBER = 45;
 
     private int number;
 
-    public LottoNumber(int number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException();
+    LottoNumber(int number) {
+        if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또는 1부터 45까지의 숫자만 가능합니다.");
         }
         this.number = number;
-    }
-
-    public int getNumber() {
-        return number;
     }
 
     @Override
@@ -38,11 +37,7 @@ public class LottoNumber implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        if (o == null || !(o instanceof LottoNumber)) {
-            return 1;
-        }
-        LottoNumber targetNumber = (LottoNumber)o;
+    public int compareTo(LottoNumber targetNumber) {
         return this.number - targetNumber.number;
     }
 }

@@ -1,5 +1,9 @@
 package domain.result;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Rank {
 
     FIRST(6, 2000000000),
@@ -8,6 +12,17 @@ public enum Rank {
     FOURTH(4, 50000),
     FIFTH(3, 5000),
     MISS(0, 0);
+
+    private static final Map<Integer, Rank> RANK_MATCHER_WITHOUT_BONUS;
+
+    static {
+        RANK_MATCHER_WITHOUT_BONUS = new HashMap<>();
+
+        Arrays.stream(values())
+                .filter(rank -> rank.isNot(SECOND))
+                .forEach(rank ->
+                        RANK_MATCHER_WITHOUT_BONUS.put(rank.countOfMatches, rank));
+    }
 
     private int countOfMatches;
     private int winningMoney;
@@ -18,22 +33,21 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatches, boolean matchBonusNumber) {
-        if (countOfMatches == FIRST.countOfMatches) {
-            return FIRST;
+        if (countOfMatches > FIRST.countOfMatches || countOfMatches < MISS.countOfMatches) {
+            throw new IllegalArgumentException("당첨 번호 일치 수는 0이상 6이하로만 가능합니다.");
         }
-        if (countOfMatches == 5 && matchBonusNumber) {
+        if (countOfMatches == SECOND.countOfMatches && matchBonusNumber) {
             return SECOND;
         }
-        if (countOfMatches == 5) {
-            return THIRD;
+        if (countOfMatches < FIFTH.countOfMatches) {
+            return RANK_MATCHER_WITHOUT_BONUS.get(MISS.countOfMatches);
         }
-        if (countOfMatches == 4) {
-            return FOURTH;
-        }
-        if (countOfMatches == 3) {
-            return FIFTH;
-        }
-        return MISS;
+
+        return RANK_MATCHER_WITHOUT_BONUS.get(countOfMatches);
+    }
+
+    public boolean isNot(Rank rank) {
+        return this != rank;
     }
 
     public int getCountOfMatches() {
@@ -43,5 +57,4 @@ public enum Rank {
     public int getWinningMoney() {
         return winningMoney;
     }
-
 }

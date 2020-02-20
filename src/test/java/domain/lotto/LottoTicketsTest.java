@@ -1,20 +1,17 @@
 package domain.lotto;
 
-import static domain.lotto.LottoTicketTest.*;
-import static domain.lotto.WinningLottoTest.*;
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.Arrays;
-import java.util.List;
-
-import javax.swing.*;
-
+import domain.result.LottoResult;
+import domain.result.Rank;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import domain.result.LottoResult;
-import domain.result.Rank;
+import java.util.Arrays;
+import java.util.List;
+
+import static domain.lotto.LottoTicketTest.getLottoTicketListFixture;
+import static domain.lotto.WinningLottoTest.getWinningLottoFixture;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
 

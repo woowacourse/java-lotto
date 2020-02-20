@@ -1,13 +1,20 @@
 package domain.lotto;
 
-import static domain.lotto.LottoNumberTest.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.jupiter.api.Test;
+import static domain.lotto.LottoNumberTest.getFromOneToSevenWithoutSixFixture;
+import static domain.lotto.LottoNumberTest.getLottoNumberFromFiveToTenFixture;
+import static domain.lotto.LottoNumberTest.getLottoNumberFromFourToNineFixture;
+import static domain.lotto.LottoNumberTest.getLottoNumberFromThreeToEightFixture;
+import static domain.lotto.LottoNumberTest.getLottoNumberFromTwoToEightWithoutSevenFixture;
+import static domain.lotto.LottoNumberTest.getNotProperLottoNumbersFixture;
+import static domain.lotto.LottoNumberTest.getProperLottoNumbersFixture;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
 

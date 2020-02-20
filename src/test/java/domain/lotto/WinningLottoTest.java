@@ -1,17 +1,23 @@
 package domain.lotto;
 
-import static domain.lotto.LottoNumberTest.*;
-import static domain.lotto.LottoTicketTest.*;
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.stream.Stream;
-
+import domain.result.Rank;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import domain.result.Rank;
+import java.util.stream.Stream;
+
+import static domain.lotto.LottoNumberTest.getLottoNumberOneFixture;
+import static domain.lotto.LottoNumberTest.getLottoNumberSevenFixture;
+import static domain.lotto.LottoTicketTest.getLottoTicketFromFiveToTenFixture;
+import static domain.lotto.LottoTicketTest.getLottoTicketFromFourToNineFixture;
+import static domain.lotto.LottoTicketTest.getLottoTicketFromOneToSevenWithoutSixFixture;
+import static domain.lotto.LottoTicketTest.getLottoTicketFromOneToSixFixture;
+import static domain.lotto.LottoTicketTest.getLottoTicketFromThreeToEightFixture;
+import static domain.lotto.LottoTicketTest.getLottoTicketFromTwoToEightWithoutSevenFixture;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTest {
 

@@ -1,10 +1,9 @@
 package domain.lotto;
 
-import static domain.money.LottoMoneyTest.*;
-
+import domain.money.LottoMoney;
 import org.junit.jupiter.api.Test;
 
-import domain.money.LottoMoney;
+import static domain.money.LottoMoneyTest.getLottoMoneyFixture;
 
 public class LottoFactoryTest {
 

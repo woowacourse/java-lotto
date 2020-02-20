@@ -12,7 +12,7 @@ public class LottoTicket {
 
     public LottoTicket(Set<LottoNumber> lottoTicket) {
         if (lottoTicket.size() != LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또는 중복되지 않는 6개의 숫자로 이뤄져야 합니다.");
         }
         this.lottoTicket = lottoTicket;
     }
@@ -22,7 +22,7 @@ public class LottoTicket {
     }
 
     public int countMatches(LottoTicket targetTicket) {
-        return (int)lottoTicket.stream()
+        return (int) lottoTicket.stream()
                 .filter(targetTicket::contains)
                 .count();
     }

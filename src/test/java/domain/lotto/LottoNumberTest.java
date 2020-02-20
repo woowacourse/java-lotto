@@ -1,13 +1,13 @@
 package domain.lotto;
 
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
 
@@ -15,7 +15,6 @@ public class LottoNumberTest {
     void testLottoNumber() {
         int expected = 3;
         LottoNumber lottoNumber = new LottoNumber(expected);
-        assertThat(lottoNumber.getNumber()).isEqualTo(expected);
     }
 
     @ParameterizedTest

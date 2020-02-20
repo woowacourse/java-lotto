@@ -1,28 +1,32 @@
 package view.output;
 
-import java.util.List;
-
 import domain.lotto.LottoTicket;
 import domain.lotto.LottoTickets;
 import domain.money.LottoMoney;
 import domain.result.LottoResult;
 import domain.result.Rank;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class OutputView {
+
     public static void printLottoTickets(LottoTickets lottoTickets) {
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
-        System.out.println("로또를 구매했습니다.");
+        System.out.println("로또를 " + lottoTicketList.size() + "장 구매했습니다.");
 
         lottoTicketList.forEach(System.out::println);
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
-        for (Rank rank : Rank.values()) {
-            if (rank == Rank.MISS) {
-                continue;
-            }
-            System.out.println(rankToString(rank) + lottoResult.count(rank) + "개");
-        }
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank.isNot(Rank.MISS))
+                .forEach(rank ->
+                        System.out.println(rankToFullString(lottoResult, rank)));
+    }
+
+    private static String rankToFullString(LottoResult lottoResult, Rank rank) {
+        return rankToString(rank) + lottoResult.count(rank) + "개";
     }
 
     private static String rankToString(Rank rank) {
