@@ -50,4 +50,8 @@ public class PurchaseMoney {
 	public int hashCode() {
 		return Objects.hash(purchaseMoney);
 	}
+
+	public double divideBy(double totalEarning) {
+		return totalEarning / purchaseMoney;
+	}
 }

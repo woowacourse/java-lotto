@@ -28,23 +28,23 @@ public enum WinningType {
 				.orElse(NONE);
 	}
 
-	public int getSameNumberCount() {
-		return sameNumberCount;
-	}
-
-	public BonusRequirement getBonusRequirement() {
-		return bonusRequirement;
-	}
-
-	public int getWinningAmount() {
-		return winningAmount;
-	}
-
 	public boolean isBonusTRUE() {
 		return bonusRequirement == BonusRequirement.TRUE;
 	}
 
 	public boolean isNONE() {
 		return this == NONE;
+	}
+
+	public double calculateEarning(int num) {
+		return winningAmount * num;
+	}
+
+	public int getSameNumberCount() {
+		return sameNumberCount;
+	}
+
+	public int getWinningAmount() {
+		return winningAmount;
 	}
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PurchasedLottoTicketsFactory {
 	public static PurchasedLottoTickets create(PurchaseMoney purchaseMoney) {
-		List<SerialLottoNumber> purchasedLottoTickets  = new ArrayList<>();
+		List<SerialLottoNumber> purchasedLottoTickets = new ArrayList<>();
 		RandomLottoTicketFactory randomLottoTicketFactory = new RandomLottoTicketFactory();
 
 		int count = purchaseMoney.countPurchasedTickets();
