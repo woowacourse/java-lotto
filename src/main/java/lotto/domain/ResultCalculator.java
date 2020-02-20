@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public class ResultCalculator {
-    private static final int DECIMAL_TO_PERCENT_RATE = 100;
+    private static final long DECIMAL_TO_PERCENT_RATE = 100;
     private static final int ORIGINAL_PERCENT = 100;
     private static final int LOTTO_PRICE = 1000;
 
@@ -17,7 +17,7 @@ public class ResultCalculator {
         return rank.correctLottoNumber == correctLottoNumber && rank.isCorrectBonusNumber == isCorrectBonusNumber;
     }
 
-    public static int calculateEarningRate(PurchaseAmount purchaseAmount) {
+    public static long calculateEarningRate(PurchaseAmount purchaseAmount) {
         int purchaseMoney = purchaseAmount.getPurchaseNumber() * LOTTO_PRICE;
         int totalPrize = 0;
         for (Rank rank : Rank.values()) {
