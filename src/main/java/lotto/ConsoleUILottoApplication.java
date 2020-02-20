@@ -6,8 +6,8 @@ import lotto.controller.LottoController;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.exception.InvalidMoneyException;
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.view.ConsoleInputView;
+import lotto.view.ConsoleOutputView;
 
 public class ConsoleUILottoApplication {
 	public static void main(String[] args) {
@@ -15,16 +15,16 @@ public class ConsoleUILottoApplication {
 		LottoController lottoController = new LottoController();
 
 		int numberOfLotto = inputLottoMoney.purchaseLotto();
-		OutputView.printPurchaseCompleteMessage(numberOfLotto);
+		ConsoleOutputView.printPurchaseCompleteMessage(numberOfLotto);
 		List<Lotto> lottos = lottoController.start(numberOfLotto);
-		OutputView.printPurchasedLotto(lottos);
+		ConsoleOutputView.printPurchasedLotto(lottos);
 	}
 
 	private static LottoMoney receiveInputMoney() {
 		try {
-			return new LottoMoney(InputView.inputMoney());
+			return new LottoMoney(ConsoleInputView.inputMoney());
 		} catch (InvalidMoneyException ime) {
-			OutputView.printExceptionMessage(ime.getMessage());
+			ConsoleOutputView.printExceptionMessage(ime.getMessage());
 			return receiveInputMoney();
 		}
 	}

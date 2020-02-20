@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
-public class OutputView {
+public class ConsoleOutputView {
 	public static final String PURCHASE_COMPLETE_MESSAGE = "%d개를 구매했습니다.\n";
 	public static final String DELIMITER = ",";
 
