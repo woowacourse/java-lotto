@@ -34,4 +34,25 @@ public class StatisticsDTO {
                 .mapToDouble(PrizeDTO::getSum)
                 .sum();
     }
+
+    public int size() {
+        return this.prizeDTOs.size();
+    }
+
+    public int getMatchCount(int index) {
+        return this.prizeDTOs.get(index).getMatchCount();
+    }
+
+
+    public int getDefaultPrize(int i) {
+        return this.prizeDTOs.get(i).getDefaultPrize();
+    }
+
+    public int getMatchTicketCount(int i) {
+        return this.prizeDTOs.get(i).getMatchTicketCount();
+    }
+
+    public String getName(int i) {
+        return this.prizeDTOs.get(i).getName();
+    }
 }
