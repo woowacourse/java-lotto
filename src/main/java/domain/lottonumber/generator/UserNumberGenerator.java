@@ -10,7 +10,7 @@ public class UserNumberGenerator implements NumberGenerator {
 
     public void init(List<Integer> inputNumbers) {
         numbers.clear();
-        for(int number : inputNumbers){
+        for (int number : inputNumbers) {
             numbers.add(LottoNumber.of(number));
         }
     }
