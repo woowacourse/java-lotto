@@ -55,7 +55,7 @@ public class OutputView {
     }
 
     private static void printMatchResultDetail(MatchResult result) {
-        if (result == MatchResult.FIVE_MATCH_WITH_BONUSBALL) {
+        if (result == MatchResult.FIVE_MATCH_WITH_BONUS_BALL) {
             System.out.print(String.format("%d개 일치, 보너스 볼 일치", result.getMatchCount()));
             return;
         }

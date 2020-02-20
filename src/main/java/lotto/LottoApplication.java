@@ -4,30 +4,18 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-import java.util.Map;
-
 public class LottoApplication {
     public static void main(String[] args) {
-        String purchasePriceInput = InputView.requestPurchasePriceInput();
-        PurchasePrice purchasePrice = new PurchasePrice(purchasePriceInput);
-
+        PurchasePrice purchasePrice = new PurchasePrice(InputView.requestPurchasePriceInput());
         int lottoCount = purchasePrice.calculateLottoCount();
         OutputView.printLottoCount(lottoCount);
-
-        List<Lotto> randomLottos = LottoGenerator.generate(lottoCount);
-        Lottos lottos = new Lottos(randomLottos);
+        Lottos lottos = new Lottos(LottoGenerator.generate(lottoCount));
         OutputView.printLottos(lottos);
 
-        String winningNumbersInput = InputView.requestWinningNumbersInput();
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumbersInput);
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.requestWinningNumbersInput());
+        BonusNumber bonusNumber = new BonusNumber(InputView.requestBonusNumberInput());
 
-        String bonusNumberInput = InputView.requestBonusNumberInput();
-        BonusNumber bonusNumber = new BonusNumber(bonusNumberInput);
-
-        Map<MatchResult, Integer> matchResults = lottos.createMatchResults(winningNumbers, bonusNumber);
-        LottoResults lottoResults = new LottoResults(matchResults);
-
+        LottoResults lottoResults = new LottoResults(lottos.createMatchResults(winningNumbers, bonusNumber));
         OutputView.printLottoResult(lottoResults, purchasePrice);
     }
 }

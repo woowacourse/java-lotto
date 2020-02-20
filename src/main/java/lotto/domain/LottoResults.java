@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Map;
 
 public class LottoResults {
+    private static final int PERCENT = 100;
 
     private final Map<MatchResult, Integer> lottoResults;
 
@@ -17,7 +18,7 @@ public class LottoResults {
         for (MatchResult matchResult : matchResults) {
             total += lottoResults.get(matchResult) * matchResult.getPrize();
         }
-        return (int) Math.round(total / purchasePrice.getPrice() * 100);
+        return (int) Math.round(total / purchasePrice.getPrice() * PERCENT);
     }
 
     public Map<MatchResult, Integer> getLottoResults() {

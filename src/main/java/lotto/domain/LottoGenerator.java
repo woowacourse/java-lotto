@@ -15,14 +15,6 @@ public class LottoGenerator {
         allLottoNumbers = gatherAllNumbers();
     }
 
-    public static List<Lotto> generate(int lottoCount) {
-        List<Lotto> randomLottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            randomLottos.add(new Lotto(generateLottoNumbers()));
-        }
-        return randomLottos;
-    }
-
     private static List<Integer> gatherAllNumbers() {
         List<Integer> allLottoNumbers = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
@@ -31,8 +23,17 @@ public class LottoGenerator {
         return allLottoNumbers;
     }
 
+    public static List<Lotto> generate(int lottoCount) {
+        List<Lotto> randomLottos = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            randomLottos.add(new Lotto(generateLottoNumbers()));
+        }
+        return randomLottos;
+    }
+
     private static List<Integer> generateLottoNumbers() {
-        List<Integer> cloneAllLottoNumbers = new ArrayList<>(allLottoNumbers);
+        List<Integer> cloneAllLottoNumbers = new ArrayList<>();
+        cloneAllLottoNumbers.addAll(allLottoNumbers);
         Collections.shuffle(cloneAllLottoNumbers);
         List<Integer> resultNumbers = pickLottoNumbers(cloneAllLottoNumbers);
         Collections.sort(resultNumbers);

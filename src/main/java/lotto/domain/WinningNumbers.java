@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
-
     private static final String WINNING_NUMBERS_DELIMITER = ",";
     private static final int NUMBER_COUNT_PER_LOTTO = 6;
     private static final int MIN_NUMBER = 1;
@@ -37,9 +36,7 @@ public class WinningNumbers {
         List<String> splittedNumbers = split(winningNumbersInput);
         checkCount(splittedNumbers);
         checkType(splittedNumbers);
-        List<Integer> winningNumbers = splittedNumbers.stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        List<Integer> winningNumbers = parseToNumbers(splittedNumbers);
         checkRange(winningNumbers);
         checkDuplicatedNumber(winningNumbers);
         return winningNumbers;
@@ -68,6 +65,12 @@ public class WinningNumbers {
         } catch (NumberFormatException e) {
             throw new RuntimeException("숫자만 입력하시기 바랍니다.");
         }
+    }
+
+    private List<Integer> parseToNumbers(List<String> splittedNumbers) {
+        return splittedNumbers.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     private void checkRange(List<Integer> winningNumbers) {

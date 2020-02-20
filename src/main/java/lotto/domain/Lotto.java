@@ -17,14 +17,14 @@ public class Lotto {
     }
 
     public MatchResult findMatchResult(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        int sameNumberCount = calculateSameNumberCount(winningNumbers);
+        int sameNumberCount = calculateSameNumberCountWith(winningNumbers);
         if (sameNumberCount == FIVE_MATCH && bonusNumber.isIncluded(numbers)) {
-            return MatchResult.FIVE_MATCH_WITH_BONUSBALL;
+            return MatchResult.FIVE_MATCH_WITH_BONUS_BALL;
         }
         return MatchResult.of(sameNumberCount);
     }
 
-    private int calculateSameNumberCount(WinningNumbers winningNumbers) {
+    private int calculateSameNumberCountWith(WinningNumbers winningNumbers) {
         Set<Integer> numbers = new HashSet<Integer>(this.numbers);
         numbers.addAll(winningNumbers.getWinningNumbers());
         int differentNumbersCount = numbers.size();

@@ -14,7 +14,7 @@ public class PurchasePrice {
     }
 
     private static void checkNoInput(String purchasePriceInput) {
-        if (null == purchasePriceInput || purchasePriceInput.trim().isEmpty()) {
+        if (purchasePriceInput == null || purchasePriceInput.trim().isEmpty()) {
             throw new RuntimeException("구입금액을 입력해 주세요.");
         }
     }

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
+    private static final int INITIAL_COUNT = 0;
+
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
@@ -25,7 +27,7 @@ public class Lottos {
         Map<MatchResult, Integer> matchResults = new HashMap<>();
         MatchResult[] results = MatchResult.values();
         for (MatchResult result : results) {
-            matchResults.put(result, 0);
+            matchResults.put(result, INITIAL_COUNT);
         }
         return matchResults;
     }

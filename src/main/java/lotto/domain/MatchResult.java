@@ -6,7 +6,7 @@ public enum MatchResult {
     THREE_MATCH(3, 5_000),
     FOUR_MATCH(4, 50_000),
     FIVE_MATCH(5, 1_500_000),
-    FIVE_MATCH_WITH_BONUSBALL(5, 30_000_000),
+    FIVE_MATCH_WITH_BONUS_BALL(5, 30_000_000),
     SIX_MATCH(6, 2_000_000_000);
 
     private int matchCount;
