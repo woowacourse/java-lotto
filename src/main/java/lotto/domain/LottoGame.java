@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import lotto.view.OutputView;
+
 public class LottoGame {
 
     public static void main(String[] args) {
@@ -14,6 +16,11 @@ public class LottoGame {
     public void play() {
         int purchaseAmount = 14000;
         int lottosSize = Lotto.convertMoneyToLottosSize(purchaseAmount);
+        int firstNumber = 0;
+        int secondNumber = 0;
+        int thirdNumber = 0;
+        int fourthNumber = 0;
+        int fifthNumber = 0;
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<List<Integer>> lottosNumbersList = new ArrayList<>(new ArrayList<>());
         for (int i = 0; i < lottosSize; i++) {
@@ -31,6 +38,27 @@ public class LottoGame {
             }
 
             Rank rank = Rank.valueOf(matchingNumber, lotto.matchBonusBall(bonusBall));
+            if (rank.equals(Rank.FIRST)) {
+                firstNumber += 1;
+            }
+
+            if (rank.equals(Rank.SECOND)) {
+                secondNumber += 1;
+            }
+
+            if (rank.equals(Rank.THIRD)) {
+                thirdNumber += 1;
+            }
+
+            if (rank.equals(Rank.FOURTH)) {
+                fourthNumber += 1;
+            }
+
+            if (rank.equals(Rank.FIFTH)) {
+                fifthNumber += 1;
+            }
+
+
             int winningMoney = rank.calculateWinningMoney();
             winningMoneys.add(winningMoney);
         }
@@ -38,6 +66,8 @@ public class LottoGame {
         int totalWinningMoney = TotalWinningMoneyCalculator.calculate(winningMoneys);
 
         int earningRate = EarningRateCalculator.calculate(totalWinningMoney, purchaseAmount);
+
+        OutputView.printStatistic(firstNumber, secondNumber, thirdNumber, fourthNumber, fifthNumber);
 
     }
 
