@@ -49,15 +49,10 @@ public class Lotto {
 
     private static void printCorrectResults() {
         OutputView.printResult();
-        OutputView.printCorrectResult(LottoResult.THREE.getCorrect(), LottoResult.THREE.getPrize(),
-            LottoResult.THREE.getCount());
-        OutputView.printCorrectResult(LottoResult.FOUR.getCorrect(), LottoResult.FOUR.getPrize(),
-            LottoResult.FOUR.getCount());
-        OutputView.printCorrectResult(LottoResult.FIVE.getCorrect(), LottoResult.FIVE.getPrize(),
-            LottoResult.FIVE.getCount());
-        OutputView.printBonusCorrectResult(LottoResult.FIVE_BONUS.getCorrect(),
-            LottoResult.FIVE_BONUS.getPrize(), LottoResult.FIVE_BONUS.getCount());
-        OutputView.printCorrectResult(LottoResult.SIX.getCorrect(), LottoResult.SIX.getPrize(),
-            LottoResult.SIX.getCount());
+        for (String key : LottoResultMap.resultCount.keySet()) {
+            LottoResult lottoResult = LottoResultMap.resultCount.get(key);
+            OutputView.printCorrectResult(lottoResult.getCorrect(), lottoResult.getPrize(),
+                lottoResult.getCount());
+        }
     }
 }
