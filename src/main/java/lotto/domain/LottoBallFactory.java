@@ -24,6 +24,7 @@ public class LottoBallFactory {
     public static LottoBall findByLottoBall(int lottoBallNumber) {
         return lottoBalls.stream()
                 .filter(x -> x.getLottoNumber() == lottoBallNumber)
-                .findFirst().get();
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }
