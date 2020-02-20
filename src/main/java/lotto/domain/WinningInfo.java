@@ -54,8 +54,9 @@ public enum WinningInfo {
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(winningCount);
-        if (hasBonus)
+        if (hasBonus) {
             stringBuilder.append(", 보너스 볼 일치");
+        }
         stringBuilder.append(winningPrice);
         return stringBuilder.toString();
     }

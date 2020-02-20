@@ -14,11 +14,10 @@ public class Application {
         initUserLottos();
         initWinnerLotto();
 
-        Results results = new Results(lottos, winningLotto);
-        results.calculateResults();
+        ResultsDTO resultsDTO = ResultCalculator.getResults(lottos, winningLotto);
 
         System.out.println();
-        OutputView.printResults(results);
+        OutputView.printResults(resultsDTO);
     }
 
     private static void initUserLottos() {

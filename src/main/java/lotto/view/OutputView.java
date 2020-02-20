@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lottos;
-import lotto.domain.PaidPrice;
-import lotto.domain.Results;
-import lotto.domain.WinningInfo;
+import lotto.domain.*;
 
 public class OutputView {
     public static void printLottoCount(PaidPrice paidPrice) {
@@ -17,26 +14,26 @@ public class OutputView {
         }
     }
 
-    public static void printResults(Results results) {
+    public static void printResults(ResultsDTO resultsDTO) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        printWinningResults(results);
-        printEarningRate(results);
+        printWinningResults(resultsDTO);
+        printEarningRate(resultsDTO);
     }
 
-    public static void printWinningResults(Results results) {
+    public static void printWinningResults(ResultsDTO resultsDTO) {
         for (WinningInfo winningInfo : WinningInfo.values()) {
             if (winningInfo == WinningInfo.FAIL) {
                 continue;
             }
-            int winningCount = results.getWinningCount(winningInfo);
+            int winningCount = resultsDTO.getWinningCount(winningInfo);
             String result = String.format("%s - %s개", winningInfo.toString(), winningCount);
             System.out.println(result);
         }
     }
 
-    public static void printEarningRate(Results results) {
-        String earningRate = String.format("총 수익률은 %s%%입니다.", results.getEarningRate());
+    public static void printEarningRate(ResultsDTO resultsDTO) {
+        String earningRate = String.format("총 수익률은 %s%%입니다.", resultsDTO.getEarningRate());
         System.out.println(earningRate);
     }
 }
