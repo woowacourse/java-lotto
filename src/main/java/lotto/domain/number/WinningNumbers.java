@@ -23,4 +23,10 @@ public class WinningNumbers extends LottoRound {
             throw new IllegalArgumentException("중복이 존재합니다.");
         }
     }
+
+    public int calculateCollectNumberSize(LottoNumbers lottoNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lottoNumbers::isHave)
+                .count();
+    }
 }
