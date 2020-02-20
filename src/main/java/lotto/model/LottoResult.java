@@ -19,8 +19,6 @@ public enum LottoResult {
         return count * this.prize;
     }
 
-    ;
-
     public int getPrize() {
         return prize;
     }
