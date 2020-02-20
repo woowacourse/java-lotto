@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.errors.ErrorMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -18,7 +19,7 @@ public class LottoNumberTest {
         String invalidNumberUnderScope = "-11";
         assertThatThrownBy(() -> new LottoNumber(invalidNumberUnderScope))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호의 범위가 잘못되었습니다.");
+                .hasMessage(ErrorMessage.OVER_SCOPE.getMessage());
     }
 
     @Test
@@ -26,7 +27,7 @@ public class LottoNumberTest {
         String invalidNumberOverScope = "50";
         assertThatThrownBy(() -> new LottoNumber(invalidNumberOverScope))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호의 범위가 잘못되었습니다.");
+                .hasMessage(ErrorMessage.OVER_SCOPE.getMessage());
     }
 
     @ParameterizedTest
@@ -34,6 +35,6 @@ public class LottoNumberTest {
     void validateNumber_정수로_입력하지_않았을_때(String invalidInputMoney) {
         assertThatThrownBy(() -> new LottoNumber(invalidInputMoney))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("정수로 입력하셔야 합니다.");
+                .hasMessage(ErrorMessage.NOT_NUMBER.getMessage());
     }
 }

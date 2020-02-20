@@ -29,8 +29,8 @@ public class Application {
         while (true) {
             try {
                 return new Payment(InputView.getPayment());
-            } catch (NotNumberException e) {
-                OutputView.printErrorMessage(e.toString());
+            } catch (NotNumberException exception) {
+                OutputView.printErrorMessage(exception.getMessage());
             }
         }
     }
@@ -40,8 +40,8 @@ public class Application {
         while (true) {
             try {
                 return new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
-            } catch (NotNumberException | NotInScopeException | DuplicatedNumberException | NotEnoughNumberException e) {
-                OutputView.printErrorMessage(e.toString());
+            } catch (NotNumberException | NotInScopeException | DuplicatedNumberException | NotEnoughNumberException exception) {
+                OutputView.printErrorMessage(exception.getMessage());
             }
         }
     }

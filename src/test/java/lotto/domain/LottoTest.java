@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.errors.ErrorMessage;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class LottoTest {
                 new LottoNumber("5")));
         assertThatThrownBy(() -> new Lotto(invalidNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("중복되는 로또 번호가 존재합니다.");
+                .hasMessage(ErrorMessage.DUPLICATE_NUMBER.getMessage());
     }
 
 

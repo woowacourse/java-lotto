@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.errors.ErrorMessage;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -34,6 +35,6 @@ public class WinningLottoTest {
         LottoNumber invalidBonusNumber = new LottoNumber("6");
         assertThatThrownBy(() -> new WinningLotto(winningNumbers, invalidBonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("보너스 번호가 당첨번호와 중복됩니다.");
+                .hasMessage(ErrorMessage.DUPLICATE_NUMBER.getMessage());
     }
 }
