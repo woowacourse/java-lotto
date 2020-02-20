@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoBallFactory {
-
     private static List<LottoBall> lottoBalls;
 
     private LottoBallFactory() {
@@ -20,5 +19,11 @@ public class LottoBallFactory {
 
     public static List<LottoBall> getInstance() {
         return lottoBalls;
+    }
+
+    public static LottoBall findByLottoBall(int lottoBallNumber) {
+        return lottoBalls.stream()
+                .filter(x -> x.getLottoNumber() == lottoBallNumber)
+                .findFirst().get();
     }
 }

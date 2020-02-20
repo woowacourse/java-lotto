@@ -3,6 +3,7 @@ package lotto.util;
 import lotto.Exception.DuplicationException;
 import lotto.Exception.NumberOutOfRangeException;
 import lotto.domain.LottoBall;
+import lotto.domain.LottoBallFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class WinningBallsUtils {
         validateDuplicatedWinningBalls(winningBalls);
         this.winningBalls = Arrays.stream(winningBalls)
                 .map(Integer::parseInt)
-                .map(LottoBall::new)
+                .map(LottoBallFactory::findByLottoBall)
                 .collect(Collectors.toList());
         Collections.sort(this.winningBalls);
     }

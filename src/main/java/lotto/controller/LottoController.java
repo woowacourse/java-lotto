@@ -9,41 +9,26 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoController {
-    public static final int MAX_LOTTO_BALL_COUNT = 6;
-    private static PurchaseAmount purchaseAmount;
+    private static final int MAX_LOTTO_BALL_COUNT = 6;
 
-    public static void play() {
+    private PurchaseAmount purchaseAmount;
+
+    public void play() {
         startInputPurchaseAmount();
         generateLottoTickets();
-
         WinningBalls winningBalls = generateWinningBalls();
-        List<WinningRank> winningRanks = generateWinningRAnd(winningBalls);
-        generateEarningRate(winningRanks);
+        List<WinningRank> winningRanks = generateWinningRank(winningBalls);
+        OutputView.printEarningRate(new EarningRate(winningRanks, purchaseAmount));
     }
 
-    private static void generateEarningRate(List<WinningRank> winningRanks) {
-        EarningRate earningRate = new EarningRate();
-        for (WinningRank winningRank1 : WinningRank.values()) {
-            int count = (int) winningRanks.stream()
-                    .filter(winningRank -> winningRank == winningRank1)
-                    .count();
-            OutputView.printWinningResult(winningRank1, count);
-            earningRate.sumWinningMoney(winningRank1.getWinningMoney() * count);
-        }
-        earningRate.calculateEarningRate(purchaseAmount);
-        OutputView.printEarningRate(earningRate);
-    }
-
-    private static WinningBalls generateWinningBalls() {
-        OutputView.printAnswerWinningBalls();
+    private WinningBalls generateWinningBalls() {
         List<LottoBall> winningBallsInput = InputView.InputWinningBalls();
-        OutputView.printAnswerBonusBall();
         int bonusBall = InputView.InputBonusBall();
 
         return new WinningBalls(winningBallsInput, bonusBall);
     }
 
-    private static void generateLottoTickets() {
+    private void generateLottoTickets() {
         for (int i = 0; i < purchaseAmount.lottoTicket(); i++) {
             Collections.shuffle(LottoBallFactory.getInstance());
             new LottoTickets(generateLottoTicket());
@@ -51,14 +36,14 @@ public class LottoController {
         OutputView.printLottoTicket();
     }
 
-    private static void startInputPurchaseAmount() {
+    private void startInputPurchaseAmount() {
         OutputView.printStartGuide();
         purchaseAmount = InputView.inputPurchaseAmount();
         OutputView.printLottePieces(purchaseAmount.lottoTicket());
         OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
     }
 
-    private static LottoTicket generateLottoTicket() {
+    private LottoTicket generateLottoTicket() {
         List<LottoBall> lottoTicket = new ArrayList<>();
         for (int i = 0; i < MAX_LOTTO_BALL_COUNT; i++) {
             lottoTicket.add(LottoBallFactory.getInstance().get(i));
@@ -66,7 +51,7 @@ public class LottoController {
         return new LottoTicket(lottoTicket);
     }
 
-    private static List<WinningRank> generateWinningRAnd(WinningBalls winningBalls) {
+    private List<WinningRank> generateWinningRank(WinningBalls winningBalls) {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (LottoTicket lottoTicket : LottoTickets.getLottoTickets()) {
             int correctNumber = winningBalls.hitLottoBalls(lottoTicket);

@@ -7,10 +7,9 @@ public class WinningBalls {
     private final LottoBall hitBonusBall;
 
     public WinningBalls(List<LottoBall> winningBalls, int hitBonusBall) {
-        this.hitBonusBall = new LottoBall(hitBonusBall);
+        this.hitBonusBall = LottoBallFactory.getInstance().get(hitBonusBall);
         this.winningBalls = winningBalls;
     }
-
 
     public int hitLottoBalls(LottoTicket lottoTicket) {
         return (int) lottoTicket.getLottoTicket()

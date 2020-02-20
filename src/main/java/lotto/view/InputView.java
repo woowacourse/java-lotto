@@ -23,6 +23,7 @@ public class InputView {
 
     public static List<LottoBall> InputWinningBalls() {
         try {
+            OutputView.printAnswerWinningBalls();
             String winningBalls = scanner.nextLine();
             WinningBallsUtils winningBallsUtils = new WinningBallsUtils(winningBalls);
             return winningBallsUtils.getWinningBalls();
@@ -34,6 +35,7 @@ public class InputView {
 
     public static int InputBonusBall() {
         try{
+            OutputView.printAnswerBonusBall();
             String bonusBall = scanner.nextLine();
             return InputValidationUtil.returnNumberWithNumberCheck(bonusBall);
         }catch (RuntimeException e){

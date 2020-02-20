@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    List<LottoBall> lottoTicket;
+    private List<LottoBall> lottoTicket;
 
     public LottoTicket(List<LottoBall> lottoTicket) {
         if (lottoTicket.isEmpty()) {
