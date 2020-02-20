@@ -10,6 +10,7 @@ import lotto.domain.ProfitCalculator;
 import lotto.domain.PurchasingAmount;
 import lotto.domain.Rank;
 import lotto.domain.Ranks;
+import lotto.domain.TicketComparator;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -22,6 +23,7 @@ public class ConsoleLottoApplication {
 		final LottoTickets lottoTickets =
 			LottoTicketFactory.create(purchasingAmount, new CreateRandomTicketsStrategy());
 
+		OutputView.printLottoAmount(lottoTickets);
 		OutputView.printLottoState(lottoTickets);
 
 		final WinningNumbers winningNumbers =
@@ -29,7 +31,11 @@ public class ConsoleLottoApplication {
 
 		final Ranks results = new Ranks(
 			lottoTickets.stream()
-				.map(lottoTicket -> Rank.of(lottoTicket, winningNumbers))
+				.map(lottoTicket ->
+					Rank.of(
+						TicketComparator.getMatchCount(lottoTicket, winningNumbers),
+						TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers))
+				)
 				.collect(Collectors.toList())
 		);
 

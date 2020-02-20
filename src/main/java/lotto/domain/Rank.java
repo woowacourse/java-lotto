@@ -31,16 +31,8 @@ public enum Rank {
 		return this.amount;
 	}
 
-	public static Ranks getOrderReversed() {
-		final Rank[] rankValues = Rank.values();
-		List<Rank> rankResults = Arrays.asList(rankValues);
-		Collections.reverse(rankResults);
-		return new Ranks(rankResults);
-	}
-
-	public static Rank of(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
-		final int matchCount = getMatchCount(lottoTicket, winningNumbers);
-		if (matchCount == SECOND_OR_THIRD_MATCH && isThirdPrizeCondition(lottoTicket, winningNumbers)) {
+	public static Rank of(final int matchCount, final boolean isBonusNotMatch) {
+		if (matchCount == SECOND_OR_THIRD_MATCH && isBonusNotMatch) {
 			return THIRD;
 		}
 		return Stream.of(Rank.values())
@@ -49,18 +41,10 @@ public enum Rank {
 			.orElse(NONE);
 	}
 
-	private static int getMatchCount(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
-		return (int)lottoTicket.stream()
-			.filter(lottoNumber -> isMatch(winningNumbers, lottoNumber))
-			.count();
-	}
-
-	private static boolean isMatch(final WinningNumbers winningNumbers, final LottoNumber lottoNumber) {
-		return winningNumbers.getOrdinaries().contains(lottoNumber);
-	}
-
-	private static boolean isThirdPrizeCondition(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
-		return lottoTicket.stream()
-				.noneMatch(winningNumbers::isMatchWithBonus);
+	public static Ranks getOrderReversed() {
+		final Rank[] rankValues = Rank.values();
+		List<Rank> rankResults = Arrays.asList(rankValues);
+		Collections.reverse(rankResults);
+		return new Ranks(rankResults);
 	}
 }
