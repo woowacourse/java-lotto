@@ -20,15 +20,15 @@ public class OutputView {
         });
     }
 
-    public static void printWinningStatistics(HashMap<String, Integer> map, int money) {
+    public static void printWinningStatistics(HashMap<String, Integer> winningCountMap, int money) {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        for (Map.Entry<String, Integer> entry: map.entrySet()) {
+        for (Map.Entry<String, Integer> entry: winningCountMap.entrySet()) {
             System.out.println(LottoType.valueOf(entry.getKey()).getPrintStr() + String.format("%d", entry.getValue()) + "개");
-        }
+    }
 
-        System.out.println("총 수익률은 " + LottoCalculator.getProfit(map, money) + "%입니다.");
+        System.out.println("총 수익률은 " + LottoCalculator.getProfit(winningCountMap, money) + "%입니다.");
     }
 
 }

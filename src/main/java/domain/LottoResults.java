@@ -22,12 +22,12 @@ public class LottoResults {
     }
 
     public HashMap<String, Integer> getCountMap() {
-        HashMap<String, Integer> map = new HashMap<>();
+        HashMap<String, Integer> winningCountMap = new HashMap<>();
 
         for (LottoType lottoType : LottoType.values()) {
-            map.put(lottoType.name(), Math.toIntExact(getCountSameLottoNumber(lottoType.getNumber())));
+            winningCountMap.put(lottoType.name(), Math.toIntExact(getCountSameLottoNumber(lottoType.getNumber())));
         }
 
-        return map;
+        return winningCountMap;
     }
 }

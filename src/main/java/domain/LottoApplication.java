@@ -21,8 +21,8 @@ public class LottoApplication {
         LottoTickets lottoTickets = new LottoTickets(originalLottoTickets);
 
         LottoResults lottoResults = lottoTickets.match(winningLottoTicket);
-        HashMap<String, Integer> map = lottoResults.getCountMap();
+        HashMap<String, Integer> winningCountMap = lottoResults.getCountMap();
 
-        OutputView.printWinningStatistics(map, money.getMoney());
+        OutputView.printWinningStatistics(winningCountMap, money.getMoney());
     }
 }

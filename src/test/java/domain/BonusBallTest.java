@@ -15,13 +15,13 @@ public class BonusBallTest {
     List<Integer> winningNumber = new ArrayList<>();
 
     private static Stream<String> bonusBallSetUp() {
-        return Stream.of("", " ", null, "askjfakl", "60", "0");
+        return Stream.of("", " ", null, "test", "60", "0");
     }
 
-    @DisplayName("BonusBall 생성자 테스트")
+    @DisplayName("BonusBall 생성자 유효성 테스트")
     @ParameterizedTest
     @MethodSource("bonusBallSetUp")
-    public void bonusBallConstructorTest(String input) {
+    void bonusBallConstructorTest(String input) {
         Assertions.assertThatThrownBy(() -> {
             new BonusBall(this.winningNumber, input);
         }).isInstanceOf(IllegalArgumentException.class);

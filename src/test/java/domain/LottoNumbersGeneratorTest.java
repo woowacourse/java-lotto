@@ -15,7 +15,7 @@ public class LottoNumbersGeneratorTest {
 
     @DisplayName("셔플 기능 테스트")
     @Test
-    public void shuffleLottoNumbersTest() {
+    void shuffleLottoNumbersTest() {
         List<Integer> lottoNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
         List<Integer> expectedLottoNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
         Collections.shuffle(lottoNumber);
@@ -25,7 +25,7 @@ public class LottoNumbersGeneratorTest {
     @DisplayName("로또 번호 생성 테스트")
     @ParameterizedTest
     @CsvSource(value = {"1,1", "10,10", "15,15"}, delimiter = ',')
-    public void generateLottoTicketsTest(String input, String expected) {
+    void generateLottoTicketsTest(String input, String expected) {
         List<LottoTicket> lottoTickets = LottoNumbersGenerator.generateLottoTickets(Integer.parseInt(input));
         Assertions.assertThat(lottoTickets.size()).isEqualTo(Integer.parseInt(expected));
     }

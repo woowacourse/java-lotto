@@ -23,8 +23,8 @@ public class WinningLottoTicket {
         return winningTicket;
     }
 
-    public boolean isMatchBonusBall() {
-        return winningTicket.getLottoTicket()
+    public boolean isMatchBonusBall(LottoTicket lottoTicket) {
+        return lottoTicket.getLottoTicket()
                 .contains(bonusBall.getBonusNumber());
     }
 
