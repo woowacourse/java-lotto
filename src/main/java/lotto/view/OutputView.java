@@ -31,7 +31,8 @@ public class OutputView {
     }
 
     public static void prizeStatistics(Map<Rank, Integer> results) {
-        String sb = "\n당첨 통계\n---------\n" + prizeStatistic(results, Rank.FOURTH)
+        String sb = "\n당첨 통계\n---------\n"
+            + prizeStatistic(results, Rank.FOURTH)
             + prizeStatistic(results, Rank.THIRD)
             + prizeStatistic(results, Rank.SECOND)
             + prizeStatistic(results, Rank.BONUS)
