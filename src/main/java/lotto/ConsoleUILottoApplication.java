@@ -20,6 +20,7 @@ public class ConsoleUILottoApplication {
 		ConsoleOutputView.printPurchasedLotto(lottos);
 
 		String inputWinningLottoNumber = ConsoleInputView.inputWinningLottoNumber();
+		String inputBonusLottoNumber = ConsoleInputView.inputBonusLottoNumber();
 	}
 
 	private static LottoMoney receiveInputMoney() {
