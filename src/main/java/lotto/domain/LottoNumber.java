@@ -1,13 +1,12 @@
 package lotto.domain;
 
+import lotto.domain.errors.ErrorMessage;
 import lotto.exception.NotInScopeException;
 import lotto.exception.NotNumberException;
 
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final String NOT_IN_SCOPE_NUMBERS_ERROR_MSG = "로또 번호의 범위가 잘못되었습니다.";
-    private static final String NOT_NUMBER_MSG = "정수로 입력하셔야 합니다.";
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
@@ -28,7 +27,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         try {
             Integer.parseInt(lottoNumber);
         } catch (NumberFormatException e) {
-            throw new NotNumberException(NOT_NUMBER_MSG);
+            throw new NotNumberException(ErrorMessage.NOT_NUMBER.getMessage());
         }
     }
 
@@ -52,7 +51,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private void validateNumberScope(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER
                 || lottoNumber > MAX_LOTTO_NUMBER) {
-            throw new NotInScopeException(NOT_IN_SCOPE_NUMBERS_ERROR_MSG);
+            throw new NotInScopeException(ErrorMessage.OVER_SCOPE.getMessage());
         }
     }
 

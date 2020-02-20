@@ -1,6 +1,10 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.exception.DuplicatedNumberException;
+import lotto.exception.NotEnoughNumberException;
+import lotto.exception.NotInScopeException;
+import lotto.exception.NotNumberException;
 import lotto.utils.LottoFactory;
 import lotto.utils.NumberGenerator;
 import lotto.utils.UserInputNumberGenerator;
@@ -11,17 +15,34 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        NumberGenerator numberGenerator = new UserInputNumberGenerator();
-        Payment payment = new Payment(InputView.getPayment());
+        Payment payment = generatePayment();
         OutputView.printLottoCount(payment);
 
-        Lottos lottos = new Lottos(LottoFactory.createLottoList(payment));
-
-        List<Lotto> lottoList = lottos.getLottos();
+        List<Lotto> lottoList = new Lottos(LottoFactory.createLottoList(payment)).getLottos();
         OutputView.printLottoList(lottoList);
 
-        WinningLotto winningLotto = new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
-
+        WinningLotto winningLotto = generateWinningLotto();
         OutputView.printResults(new Results(lottoList, winningLotto));
+    }
+
+    private static Payment generatePayment() {
+        while (true) {
+            try {
+                return new Payment(InputView.getPayment());
+            } catch (NotNumberException e) {
+                OutputView.printErrorMessage(e.toString());
+            }
+        }
+    }
+
+    private static WinningLotto generateWinningLotto() {
+        NumberGenerator numberGenerator = new UserInputNumberGenerator();
+        while (true) {
+            try {
+                return new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
+            } catch (NotNumberException | NotInScopeException | DuplicatedNumberException | NotEnoughNumberException e) {
+                OutputView.printErrorMessage(e.toString());
+            }
+        }
     }
 }

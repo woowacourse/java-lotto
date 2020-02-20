@@ -1,11 +1,11 @@
 package lotto.domain;
 
+import lotto.domain.errors.ErrorMessage;
 import lotto.exception.DuplicatedNumberException;
 
 import java.util.List;
 
 public class WinningLotto extends Lotto {
-    private static final String BONUS_NUMBER_ALREADY_EXIST_ERROR_MSG = "보너스 번호가 당첨번호와 중복됩니다.";
     private LottoNumber bonusNumber;
 
     public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
@@ -18,7 +18,7 @@ public class WinningLotto extends Lotto {
         if (super.lottoNumbers.stream()
                 .mapToInt(LottoNumber::getNumber)
                 .anyMatch(winningNumber -> winningNumber == bonusNumber.getNumber())) {
-            throw new DuplicatedNumberException(BONUS_NUMBER_ALREADY_EXIST_ERROR_MSG);
+            throw new DuplicatedNumberException(ErrorMessage.DUPLICATE_NUMBER.getMessage());
         }
     }
 

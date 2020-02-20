@@ -35,4 +35,7 @@ public class OutputView {
         System.out.println("총 수익률을 " + results.getEarningRate() + "%입니다.");
     }
 
+    public static void printErrorMessage(String errorMessage) {
+        System.out.println(errorMessage);
+    }
 }
