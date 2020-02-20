@@ -13,6 +13,9 @@ public class WinningLotto {
 	}
 
 	private void validate(Lotto winningLotto, LottoNumber bonus) {
+		if (winningLotto == null || bonus == null) {
+			throw new IllegalArgumentException();
+		}
 		if (winningLotto.contains(bonus)) {
 			throw new InvalidWinningLottoException("로또 번호와 보너스가 겹치면 안됩니다.");
 		}

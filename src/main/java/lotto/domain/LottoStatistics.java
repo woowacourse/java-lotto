@@ -12,8 +12,15 @@ public class LottoStatistics {
 	private final LottoResults lottoResults;
 
 	public LottoStatistics(LottoPurchaseMoney lottoPurchaseMoney, LottoResults lottoResults) {
+		validate(lottoPurchaseMoney, lottoResults);
 		this.lottoPurchaseMoney = lottoPurchaseMoney;
 		this.lottoResults = lottoResults;
+	}
+
+	private void validate(LottoPurchaseMoney lottoPurchaseMoney, LottoResults lottoResults) {
+		if (lottoPurchaseMoney == null || lottoResults == null) {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	public Map<LottoRank, Long> getLottoRanksCount() {
