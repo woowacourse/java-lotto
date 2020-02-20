@@ -8,9 +8,11 @@ public class InputView {
 
     public static int inputMoney() {
         try {
+            System.out.println("구입금액을 입력해주세요.");
             return scanner.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("숫자를 입력해주세요.");
+            scanner.nextLine();
             return inputMoney();
         }
     }
@@ -25,6 +27,7 @@ public class InputView {
             return scanner.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("숫자를 입력해주세요.");
+            scanner.nextLine();
             return inputBonusNumber();
         }
     }
