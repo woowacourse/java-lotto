@@ -17,6 +17,10 @@ public class Money {
 		return lottoCount.getLottoCount() * LOTTO_PRICE;
 	}
 
+	public LottoCount getCount() {
+		return new LottoCount(money / LOTTO_PRICE);
+	}
+
 	private void validatePositive(int money) {
 		if (money <= ZERO) {
 			throw new IllegalArgumentException(MONEY_EXCEPTION_MESSAGE);
