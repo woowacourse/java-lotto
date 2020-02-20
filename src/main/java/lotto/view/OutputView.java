@@ -10,7 +10,7 @@ public class OutputView {
     private static final String LOTTO_COUNT_MESSAGE = "%d개를 구입했습니다.";
     private static final String INPUT_WIN_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String RESULT_MESSAGE = "당첨 통계\n---------";
+    private static final String RESULT_MESSAGE = "\n당첨 통계\n---------";
     private static final String RESULT_DETAIL_MESSAGE = "%d개 일치 (%d원)- %d개";
     private static final String RESULT_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
     private static final String YIELD_MESSAGE = "총 수익률은 %d%%입니다.";
@@ -47,7 +47,7 @@ public class OutputView {
         if (prize == SECOND_PRIZE) {
             System.out.printf(RESULT_BONUS_MESSAGE, correct, prize, count);
             System.out.println();
-            return ;
+            return;
         }
         System.out.printf(RESULT_DETAIL_MESSAGE, correct, prize, count);
         System.out.println();

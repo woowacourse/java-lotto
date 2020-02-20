@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class AutoTicket {
+
     private static final int LOTTO_NUMBER_LENGTH = 6;
     private List<Integer> autoNumber = new ArrayList<>();
 

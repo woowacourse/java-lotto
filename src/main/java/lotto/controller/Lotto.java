@@ -14,7 +14,8 @@ public class Lotto {
             checkCountOverThree(autoTicket, count);
         }
         printCorrectResults();
-        OutputView.printYield(YieldMoney.countYieldMoney(Prize.sumPrize()));
+        new Prize();
+        OutputView.printYield(Prize.countYieldMoney());
     }
 
     public static int isInWinNumber(AutoTicket autoTicket) {

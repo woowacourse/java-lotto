@@ -4,6 +4,7 @@ import lotto.exception.NotNumberException;
 import lotto.exception.OverlapWinNumberException;
 
 public class BonusBall {
+
     private static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자가 아닙니다.";
     private static final String IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE = "당첨번호와 중복되는 숫자가 있습니다.";
     public static int bonusNo;
@@ -11,7 +12,7 @@ public class BonusBall {
     public BonusBall(String input) {
         int inputNumber = isNumber(input);
         isContainsWinNumber(inputNumber);
-        this.bonusNo = inputNumber;
+        bonusNo = inputNumber;
     }
 
     private int isNumber(String input) {

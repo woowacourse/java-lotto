@@ -9,11 +9,15 @@ public class Initializer {
     private static final int PAYMENT_UNIT = 1000;
 
     public static void initialize() {
-        LottoNumbers.lottoNumbersCreate();
+        initializeLottoNumbers();
         initializePayment();
         initializeAutoTickets(Payment.payment / PAYMENT_UNIT);
         initializeWinNumber();
         initializeBonusBallNumber();
+    }
+
+    private static void initializeLottoNumbers() {
+        new LottoNumbers();
     }
 
     private static void initializePayment() {

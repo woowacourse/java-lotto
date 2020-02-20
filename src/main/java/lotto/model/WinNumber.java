@@ -11,8 +11,8 @@ public class WinNumber {
 
     private static final String COMMA = ",";
     private static final int LOTTO_NUMBER_LENGTH = 6;
-    private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
     private static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하셔야 합니다.";
+    private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
 
     public static List<Integer> winNumbers;
 

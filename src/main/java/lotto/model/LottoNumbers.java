@@ -10,10 +10,6 @@ public class LottoNumbers {
 
     private static List<Integer> lottoNumbers = new ArrayList<>();
 
-    public static void lottoNumbersCreate() {
-        new LottoNumbers();
-    }
-
     public LottoNumbers() {
         for (int i = FIRST_LOTTO_NUMBER; i <= LAST_LOTTO_NUMBER; i++) {
             lottoNumbers.add(i);

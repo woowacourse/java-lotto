@@ -5,6 +5,7 @@ import lotto.exception.NotNumberException;
 import lotto.exception.OverRangeException;
 
 public class Payment {
+
     private static final int MINIMUM_PAYMENT = 1000;
     private static final int MAXINUM_PAYMENT = 100000;
     private static final int PAYMENT_UNIT = 1000;
