@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.List;
 
-
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private List<LottoNumber> lotto;

@@ -9,10 +9,14 @@ public class LottoFactory {
 
     public static Lotto createOneLotto() {
         Set<LottoNumber> lotto = new HashSet<>();
+        createLotto(lotto);
+        return new Lotto(lotto);
+    }
+
+    private static void createLotto(Set<LottoNumber> lotto) {
         while (lotto.size() < LOTTO_SIZE) {
             int number = RandomNumberGenerator.generate();
             lotto.add(new LottoNumber(number));
         }
-        return new Lotto(lotto);
     }
 }

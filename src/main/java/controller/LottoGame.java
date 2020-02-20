@@ -7,24 +7,39 @@ import view.OutputView;
 public class LottoGame {
 
     public static void main(String[] args) {
-        PurchaseAmount amount = inputPurchaseAmount();
-        int lottoCount = amount.getCount();
-        OutputView.printPurchaseCountMessage(lottoCount);
+        int lottoCount = purchaseLotto();
 
-        LottoDummy lottoDummy = new LottoDummy(lottoCount);
-        OutputView.printLottoDummy(lottoDummy);
+        LottoDummy lottoDummy = createLottoDummy(lottoCount);
 
         WinningNumber winningNumber = inputWinningNumber();
 
-        LottoResult lottoResult = new LottoResult();
-        lottoDummy.countWinningLotto(winningNumber, lottoResult);
+        LottoResult lottoResult = countWinningLottos(lottoDummy, winningNumber);
 
-        Profit profit = new Profit();
-        int totalProfit = lottoResult.calculateProfit();
-        int profitRatio = profit.calculateProfitRatio(totalProfit, lottoCount);
+        int profitRatio = calculateProfitRatio(lottoCount, lottoResult);
 
-        OutputView.printResult(lottoResult);
-        OutputView.printProfitRatio(profitRatio);
+        printFinalResult(lottoResult, profitRatio);
+    }
+
+    private static int purchaseLotto() {
+        PurchaseAmount amount = inputPurchaseAmount();
+        int lottoCount = amount.getCount();
+        OutputView.printPurchaseCountMessage(lottoCount);
+        return lottoCount;
+    }
+
+    private static PurchaseAmount inputPurchaseAmount() {
+        try {
+            return new PurchaseAmount(InputView.inputPurchaseAmount());
+        } catch (IllegalArgumentException e) {
+            OutputView.printExceptionMessage(e);
+        }
+        return inputPurchaseAmount();
+    }
+
+    private static LottoDummy createLottoDummy(int lottoCount) {
+        LottoDummy lottoDummy = new LottoDummy(lottoCount);
+        OutputView.printLottoDummy(lottoDummy);
+        return lottoDummy;
     }
 
     private static WinningNumber inputWinningNumber() {
@@ -36,12 +51,19 @@ public class LottoGame {
         return inputWinningNumber();
     }
 
-    private static PurchaseAmount inputPurchaseAmount() {
-        try {
-            return new PurchaseAmount(InputView.inputPurchaseAmount());
-        } catch (IllegalArgumentException e) {
-            OutputView.printExceptionMessage(e);
-        }
-        return inputPurchaseAmount();
+    private static LottoResult countWinningLottos(LottoDummy lottoDummy, WinningNumber winningNumber) {
+        LottoResult lottoResult = new LottoResult();
+        lottoDummy.countWinningLotto(winningNumber, lottoResult);
+        return lottoResult;
+    }
+
+    private static int calculateProfitRatio(int lottoCount, LottoResult lottoResult) {
+        Profit profit = new Profit();
+        return profit.calculateProfitRatio(lottoResult.calculateProfit(), lottoCount);
+    }
+
+    private static void printFinalResult(LottoResult lottoResult, int profitRatio) {
+        OutputView.printResult(lottoResult);
+        OutputView.printProfitRatio(profitRatio);
     }
 }
