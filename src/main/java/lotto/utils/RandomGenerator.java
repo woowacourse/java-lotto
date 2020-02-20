@@ -14,6 +14,7 @@ public class RandomGenerator {
 
     public RandomGenerator() {
         this.random = new Random();
+        this.totalRandomNumbers = new ArrayList<>();
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             this.totalRandomNumbers.add(i);
         }

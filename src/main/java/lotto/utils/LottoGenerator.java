@@ -10,13 +10,13 @@ import java.util.List;
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static RandomGenerator randomGenerator = new RandomGenerator();
-    public static List<Lotto> createLotties(PaidPrice paidPrice) {
-        List<Lotto> lotties = new ArrayList<>();
 
+    public static List<Lotto> createLottos(PaidPrice paidPrice) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < paidPrice.getLottoCount(); i++) {
-            lotties.add(new Lotto(createLottoNumbers()));
+            lottos.add(new Lotto(createLottoNumbers()));
         }
-        return lotties;
+        return lottos;
     }
 
     public static List<LottoNumber> createLottoNumbers() {
