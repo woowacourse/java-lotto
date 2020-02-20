@@ -17,7 +17,8 @@ public class Lotto {
         }
     }
 
-    protected List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
+
 }

@@ -15,6 +15,11 @@ public class LottoNumber {
         this.number = Integer.parseInt(number);
     }
 
+    public LottoNumber(int number) {
+        validateNumberScope(number);
+        this.number = number;
+    }
+
     private void validateNumber(String lottoNumber) {
         try {
             Integer.parseInt(lottoNumber);
