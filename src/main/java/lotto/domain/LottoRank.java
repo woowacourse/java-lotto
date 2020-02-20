@@ -3,11 +3,12 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-	FIRST(6, LottoMoney.FIRST_RANK),
-	SECOND(5, LottoMoney.SECOND_RANK),
-	THIRD(5, LottoMoney.THIRD_RANK),
-	FOURTH(4, LottoMoney.FOURTH_RANK),
-	FIFTH(3, LottoMoney.FIFTH_RANK);
+	FIRST(6, LottoMoney.FIRST_PRIZE),
+	SECOND(5, LottoMoney.SECOND_PRIZE),
+	THIRD(5, LottoMoney.THIRD_PRIZE),
+	FOURTH(4, LottoMoney.FOURTH_PRIZE),
+	FIFTH(3, LottoMoney.FIFTH_PRIZE),
+	MISS(0, LottoMoney.MISS_PRIZE);
 
 	private int matchCount;
 	private LottoMoney winningMoney;
@@ -17,15 +18,26 @@ public enum LottoRank {
 		this.winningMoney = winningMoney;
 	}
 
-	public static LottoMoney getWinningMoney(int matchCount, boolean hasBonusNumber) {
+	public static LottoRank of(int matchCount, boolean hasBonusNumber) {
 		if (hasBonusNumber && LottoRank.SECOND.matchCount == matchCount) {
-			return LottoRank.SECOND.winningMoney;
+			return LottoRank.SECOND;
 		}
 
-		return Arrays.stream(LottoRank.values())
+		return Arrays.stream(values())
 			.filter(lottoRank -> lottoRank.matchCount == matchCount)
-			.map(lottoRank -> lottoRank.winningMoney)
 			.findFirst()
-			.orElse(LottoMoney.ZERO_MONEY);
+			.orElse(MISS);
+	}
+
+	public boolean isLottoRankOf(LottoRank lottoRank) {
+		return this == lottoRank;
+	}
+
+	public LottoMoney getWinningMoney() {
+		return winningMoney;
+	}
+
+	public int getMatchCount() {
+		return matchCount;
 	}
 }
