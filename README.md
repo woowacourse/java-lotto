@@ -24,7 +24,7 @@
 
 ## 클래스 구조
 
-## Model
+## Domain(Model)
 
 - **PurchaseAmount**
     - int amount
@@ -32,39 +32,64 @@
         - checkNotNumber 숫자인지 아닌지 검증
         - checkNegativeNumber 음수인지 검증
         - checkUnderLottoPrice 로또 한 장 가격보다 낮은 금액인지 검증
-- **Lotto**
-    - List<LottoNumber> lotto
-    - [예외 처리] checkLottoSizeSix 6개의 숫자가 만들어졌는 지 검증
-    - [예외 처리] checkDuplicatedNumber 중복된 숫자가 있는 로또인지 검증
-- **LottoResult**
-    - FIRST(6, 0, 2000000000, "6개 일치(2000000000원) - ")
-    - SECOND(5, 1, 30000000, "5개 일치, 보너스볼 일치(30000000원) - ")
-    - THIRD(5, 0, 1500000, "5개 일치(1500000원) - ")
-    - FOURTH(4, 0, 50000, "4개 일치(50000원) - ")
-    - FIFTH(3, 0, 5000, "3개 일치(5000원) - ")
-- **LottoNumber**
-    - int number
-    - [예외 처리] checkLottoNumber 1부터 45까지 숫자인지 검증
-- **WinningNumber**
-    - List<LottoNumber> winningNumber
-    - int bonusNumber
-    - [예외 처리] checkLottoNull  lotto가 null인지 검증
-    - [예외 처리] checkNotNumber  입력된 번호 중 숫자가 아닌 문자가 들어왔을 경우 검증
-    - [예외 처리] checkWinningNumberSize  당첨 번호의 개수 검증
-    - [예외 처리] checkDuplicatedNumber 중복된 번호가 있는지 검증
 - **LottoFactory**
     - [예외 처리] 난수가 1~45까지 수 인지 검증
 - **RandomNumberGenerator**
-
+    - 1부터 45 사이의 난수 생성
+- **LottoNumber**
+    - int number
+    - [예외 처리] checkLottoNumber 1부터 45까지 숫자인지 검증
+    - [예외 처리] checkNotNumber  입력된 번호 중 숫자가 아닌 문자가 들어왔을 경우 검증
+- **Lotto**
+    - List<LottoNumber> lotto
+    - [예외 처리] checkLottoSizeSix 6개의 숫자가 만들어졌는 지 검증
+- **LottoDummy**
+    - List<Lotto> lottoDummy
+    - 모든 로또 당첨 결과 카운트
+- **LottoRank**
+    - FIRST(6, false, 2000000000, "6개 일치(2000000000원) - ")
+    - SECOND(5, true, 30000000, "5개 일치, 보너스볼 일치(30000000원) - ")
+    - THIRD(5, false, 1500000, "5개 일치(1500000원) - ")
+    - FOURTH(4, false, 50000, "4개 일치(50000원) - ")
+    - FIFTH(3, false, 5000, "3개 일치(5000원) - ")
+    - 당첨번호 매칭갯수와, 보너스볼 매칭여부 결과로 Enum 반환
+- **LottoResult**
+    - Map<LottoRank, Integer> result
+    - 로또 한 개별 당첨 결과 카운트 증가
+    - 총 수익 계산 및 반환 
+- **WinningNumber**
+    - List<LottoNumber> winningNumber
+    - int bonusNumber
+    - [예외 처리] checkLottoNull 파라미터로 들어온 lotto가 null인지 검증
+    - [예외 처리] checkDuplicatedLottoNumber 당첨번호에 보너스볼과 중복된 번호가 있는지 검증
+- **Profit**
+    - int LOTTO_PRICE
+    - 로또가격을 기준으로 수익률 계산
+    
+    
 ## Controller
 
 - **LottoGame**
-    - List<Lotto> lottoDummy
-
+    - main
+    - 입력 예외 발생 시 재입력 요청
+    
+    
 ## View
 
 - InputView
     - inputPurchaseAmount
+        - String 으로 반환
     - inputWinningNumbers
+        - ","로 split 후 String[] 반환
     - inputBonusNumber
+        - String 으로 반환
 - OutputView
+    - 구매 금액 입력 메세지 출력
+    - 로또 구매 확인 메세지 출력
+    - 구매한 모든 로또 번호 출력
+    - 당청 번호 입력 메세지 출력
+    - 보너스 번호 입력 메세지 출력
+    - 당첨 결과 출력
+    - 최종 수익률 출력
+    - 예외 발생시 에러 메세지 출력
+    
