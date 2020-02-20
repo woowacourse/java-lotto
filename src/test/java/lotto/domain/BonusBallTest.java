@@ -18,5 +18,4 @@ public class BonusBallTest {
 		bonusBall = new BonusBall("9");
 		assertThat(bonusBall.isContainBonusBall(lotto)).isFalse();
 	}
-
 }
