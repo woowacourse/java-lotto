@@ -31,7 +31,7 @@ public class ConsoleUILottoApplication {
 		Map<LottoRank, Integer> lottoRankCount =
 			lottoController.getLottoRankCount(lottos, winningLotto, bonusLottoNumber);
 		printStatisticsMessage();
-		printStatisticsResult(lottoRankCount);
+		printWinningResult(lottoRankCount);
 
 		int winningRatio = lottoController.getWinningRatio(lottoRankCount, inputLottoMoney);
 		printWinningRatio(winningRatio);
