@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.*;
 
 public class WinningRankResult {
-    private Map<WinningValue, Integer> winningValueResult = new HashMap<>();
+    private Map<WinningValue, Integer> winningValueResult = new LinkedHashMap<>();
 
     public WinningRankResult() {
         Arrays.stream(WinningValue.values())
@@ -38,6 +38,7 @@ public class WinningRankResult {
     }
 
     public Map<WinningValue, Integer> getWinningValueResult() {
+        winningValueResult.remove(WinningValue.ZERO);
         return Collections.unmodifiableMap(winningValueResult);
     }
 

@@ -10,5 +10,6 @@ public class LottoMain {
         OutputView.printPurchaseCount(lottoManager.moneyManager.purchase());
         OutputView.printLottoNumbers(lottoManager.buyer.getLottos());
         lottoManager.setWinningLotto(InputView.inputWinningLottoNumbers(), InputView.inputBonusNumber());
+        OutputView.printLottoResults(lottoManager.analyzeLotto());
     }
 }
