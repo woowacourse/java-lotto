@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoStore {
-    public static List<Ticket> generateTickets(int number) {
+    public static List<Ticket> generateTickets(long number) {
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             tickets.add(new Ticket(LottoNumbersDtoGenerator.generateRandomTicketDto()));
@@ -17,20 +17,20 @@ public class LottoStore {
         return tickets;
     }
 
-    public static List<Ticket> generateTickets(int number, List<Set<Integer>> myNumbers) {
+    public static List<Ticket> generateTickets(long number, List<Set<Integer>> myNumbers) {
         List<Ticket> tickets = myNumbers.stream()
                 .map(numbers -> LottoNumbersDtoGenerator.generateFixedNumberDto(numbers, -1))
                 .map(dto -> new Ticket(dto))
                 .collect(Collectors.toList());
 
-        int randomTicketsNumber = getRandomTicketsNumber(number, myNumbers);
+        long randomTicketsNumber = getRandomTicketsNumber(number, myNumbers);
         for (int i = 0; i < randomTicketsNumber; i++) {
             tickets.add(new Ticket(LottoNumbersDtoGenerator.generateRandomTicketDto()));
         }
         return tickets;
     }
 
-    private static int getRandomTicketsNumber(int number, List<Set<Integer>> myNumbers) {
+    private static long getRandomTicketsNumber(long number, List<Set<Integer>> myNumbers) {
         return number - myNumbers.size();
     }
 }

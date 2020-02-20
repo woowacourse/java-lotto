@@ -33,7 +33,7 @@ public class UserTest {
     @DisplayName("수익률 계산")
     void test2() {
         User user = new User();
-        Money money = new Money(10000);
+        Money money = new Money(10000L);
         user.buyTicketsManually(money, createMyNumbers());
 
         Set<Integer> sixNumbers = createSixNumbersSet(3, 4, 5, 6, 7, 8);

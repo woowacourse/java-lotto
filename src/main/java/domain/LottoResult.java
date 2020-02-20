@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum LottoResult {
-    NO_WIN(-1, -1, false),
+    NO_WIN(0, -1, false),
     FIRST(2000000000, 6, false),
     SECOND(30000000, 5, false),
     THIRD(1500000, 5, false),
@@ -35,7 +35,7 @@ public enum LottoResult {
         return lottoResult;
     }
 
-    public double getPrize() {
+    public int getPrize() {
         return prize;
     }
 

@@ -1,19 +1,19 @@
 package domain;
 
 public class Money {
-    private final int money;
+    private final long money;
 
-    public Money(int money) {
+    public Money(long money) {
         validateMoney(money);
         this.money = money;
     }
 
-    private void validateMoney(int money) {
+    private void validateMoney(long money) {
         validateMoneyRange(money);
         validateMoneyUnit(money);
     }
 
-    public int getNumberOfTickets() {
+    public long getNumberOfTickets() {
         return this.money / 1000;
     }
 
