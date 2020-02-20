@@ -17,6 +17,8 @@ public class WinningNumber {
 		this.winningNumber = winningNumber.stream()
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
+
+		validateBonusNumber(bonusNumber);
 		this.bonusNumber = bonusNumber;
 	}
 
@@ -52,6 +54,16 @@ public class WinningNumber {
 			.findFirst()
 			.isPresent()) {
 			throw new IllegalArgumentException("범위를 벗어난 번호가 포함되어 있습니다.");
+		}
+	}
+
+	private void validateBonusNumber(int bonusNumber) {
+		validateDuplicateBonus(bonusNumber);
+	}
+
+	private void validateDuplicateBonus(int bonusNumber) {
+		if (winningNumber.stream().anyMatch(number -> number == bonusNumber)) {
+			throw new IllegalArgumentException("중복된 보너스 번호가 있습니다.");
 		}
 	}
 }
