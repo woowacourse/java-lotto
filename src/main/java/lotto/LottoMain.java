@@ -9,5 +9,6 @@ public class LottoMain {
         LottoManager lottoManager = new LottoManager(InputView.inputMoney());
         OutputView.printPurchaseCount(lottoManager.moneyManager.purchase());
         OutputView.printLottoNumbers(lottoManager.buyer.getLottos());
+        lottoManager.setWinningLotto(InputView.inputWinningLottoNumbers(), InputView.inputBonusNumber());
     }
 }
