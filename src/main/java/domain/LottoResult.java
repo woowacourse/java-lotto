@@ -13,7 +13,7 @@ public class LottoResult {
         }
     }
 
-    public void addWinningRankCount(LottoRank rank) {
+    public void addWinningRankCount(final LottoRank rank) {
         if (rank != null){
             result.put(rank, result.get(rank) + 1);
         }
@@ -31,7 +31,7 @@ public class LottoResult {
         return result.size();
     }
 
-    public int getCount(LottoRank rank) {
+    public int getCount(final LottoRank rank) {
         return result.get(rank);
     }
 }

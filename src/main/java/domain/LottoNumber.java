@@ -6,7 +6,7 @@ import java.util.Objects;
 public class LottoNumber implements Comparable {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
-    private int number;
+    private final int number;
 
     public LottoNumber(String number) {
         number = number.trim();
@@ -16,22 +16,22 @@ public class LottoNumber implements Comparable {
         this.number = numberIntegerValue;
     }
 
-    public LottoNumber(int number) {
+    public LottoNumber(final int number) {
         checkLottoRange(number);
         this.number = number;
     }
 
-    private void checkLottoRange(int number) {
+    private void checkLottoRange(final int number) {
         if (isNotLottoNumber(number)) {
             throw new IllegalArgumentException("로또 숫자 범위를 넘어섰습니다.");
         }
     }
 
-    private boolean isNotLottoNumber(int number) {
+    private boolean isNotLottoNumber(final int number) {
         return number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER;
     }
 
-    private void checkNotNumber(String number) {
+    private void checkNotNumber(final String number) {
         try {
             Integer.parseInt(number);
         } catch (IllegalArgumentException e) {
@@ -40,7 +40,7 @@ public class LottoNumber implements Comparable {
     }
 
     @Override
-    public boolean equals(Object lottoNumber) {
+    public boolean equals(final Object lottoNumber) {
         return (lottoNumber instanceof LottoNumber) &&  this.number == ((LottoNumber)lottoNumber).number;
     }
 

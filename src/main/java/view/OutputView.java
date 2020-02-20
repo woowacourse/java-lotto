@@ -15,17 +15,17 @@ public class OutputView {
         System.out.println("구매금액을 입력해 주세요");
     }
 
-    public static void printPurchaseCountMessage(int calculateCount) {
+    public static void printPurchaseCountMessage(final int calculateCount) {
         System.out.printf("%d개를 구매했습니다." + NEW_LINE, calculateCount);
     }
 
-    public static void printLottoDummy(LottoDummy lottoDummy) {
+    public static void printLottoDummy(final LottoDummy lottoDummy) {
         for (Lotto eachLotto : lottoDummy.getLottoDummy()){
             printEachLotto(eachLotto);
         }
     }
 
-    private static void printEachLotto(Lotto eachLotto) {
+    private static void printEachLotto(final Lotto eachLotto) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");
         List<LottoNumber> lotto = eachLotto.getLotto();
@@ -46,7 +46,7 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printResult(LottoResult lottoResult) {
+    public static void printResult(final LottoResult lottoResult) {
         System.out.println("당첨 통계" + NEW_LINE + "------------");
 
         List<LottoRank> keys = Arrays.asList(LottoRank.values());
@@ -60,7 +60,7 @@ public class OutputView {
         }
     }
 
-    public static void printProfitRatio(int profitRatio) {
+    public static void printProfitRatio(final int profitRatio) {
         System.out.printf("총 수익률은 %d%%입니다.", profitRatio);
     }
 

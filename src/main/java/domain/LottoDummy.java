@@ -5,15 +5,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoDummy {
-    private static List<Lotto> lottoDummy = new ArrayList<>();
+    private static final List<Lotto> lottoDummy = new ArrayList<>();
 
-    public LottoDummy(int lottoCount) {
+    public LottoDummy(final int lottoCount) {
         for (int index = 0; index < lottoCount; index++){
             lottoDummy.add(LottoFactory.createOneLotto());
         }
     }
 
-    public LottoResult countWinningLotto(WinningNumber winningNumber) {
+    public LottoResult countWinningLotto(final WinningNumber winningNumber) {
         LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottoDummy){
             LottoRank rank = LottoRank.findRank(winningNumber.countWinningMatch(lotto),

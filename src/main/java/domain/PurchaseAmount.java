@@ -17,7 +17,7 @@ public class PurchaseAmount {
         }
     }
 
-    private void checkNotNumber(String inputMoney) {
+    private void checkNotNumber(final String inputMoney) {
         try {
             Integer.parseInt(inputMoney);
         } catch (IllegalArgumentException e) {
@@ -25,7 +25,7 @@ public class PurchaseAmount {
         }
     }
 
-    private void checkNegativeAmount(int amount) {
+    private void checkNegativeAmount(final int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("구매 금액은 음수일 수 없습니다.");
         }
@@ -35,7 +35,7 @@ public class PurchaseAmount {
         return amount / LOTTO_PRICE;
     }
 
-    public int getActualAmount(int lottoCount) {
+    public int getActualAmount(final int lottoCount) {
         return lottoCount * LOTTO_PRICE;
     }
 }

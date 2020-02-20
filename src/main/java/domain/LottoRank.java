@@ -21,7 +21,7 @@ public enum LottoRank {
         this.resultMessage = resultMessage;
     }
 
-    public static LottoRank findRank(int winningMatchCount, boolean bonusMatchCount) {
+    public static LottoRank findRank(final int winningMatchCount, final boolean bonusMatchCount) {
         if (winningMatchCount < 5) {
             return Arrays.stream(LottoRank.values())
                     .filter(result -> result.winningMatchCount == winningMatchCount)
