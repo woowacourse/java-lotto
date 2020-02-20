@@ -15,7 +15,7 @@ class ResultTest {
         //given
         Result result = new Result(new HashMap<>());
         //when
-        Map<Rank, Integer> winningResults = result.addWinningResult(Rank.FIFTH, 1);
+        Map<Rank, Integer> winningResults = result.addWinningResult(Rank.FIFTH);
         //then
         assertThat(winningResults.size()).isEqualTo(1);
         assertThat(winningResults).isEqualTo(Collections.singletonMap(Rank.FIFTH, 1));
