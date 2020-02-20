@@ -6,6 +6,7 @@ import lotto.domain.CreateRandomTicketsStrategy;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.ProfitCalculator;
 import lotto.domain.PurchasingAmount;
 import lotto.domain.Rank;
 import lotto.domain.Ranks;
@@ -20,17 +21,17 @@ public class ConsoleLottoApplication {
 
 		final LottoTickets lottoTickets =
 			LottoTicketFactory.create(purchasingAmount, new CreateRandomTicketsStrategy());
+
 		OutputView.printLottoState(lottoTickets);
 
 		final WinningNumbers winningNumbers =
 			new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 
-		final Ranks results =
-			new Ranks(
-				lottoTickets.stream()
-					.map(lottoTicket -> Rank.of(lottoTicket, winningNumbers))
-					.collect(Collectors.toList())
-			);
+		final Ranks results = new Ranks(
+			lottoTickets.stream()
+				.map(lottoTicket -> Rank.of(lottoTicket, winningNumbers))
+				.collect(Collectors.toList())
+		);
 
 		OutputView.printResult(results);
 		OutputView.printProfit(ProfitCalculator.calculate(inputMoney, results));

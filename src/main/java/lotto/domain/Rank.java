@@ -39,11 +39,6 @@ public enum Rank {
 			.orElse(NONE);
 	}
 
-	private static boolean isThirdPrizeCondition(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
-		return lottoTicket.stream()
-				.noneMatch(winningNumbers::isMatchWithBonus);
-	}
-
 	private static int getMatchCount(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
 		return (int)lottoTicket.stream()
 			.filter(lottoNumber -> isMatch(winningNumbers, lottoNumber))
@@ -52,5 +47,10 @@ public enum Rank {
 
 	private static boolean isMatch(final WinningNumbers winningNumbers, final LottoNumber lottoNumber) {
 		return winningNumbers.getOrdinaries().contains(lottoNumber);
+	}
+
+	private static boolean isThirdPrizeCondition(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
+		return lottoTicket.stream()
+				.noneMatch(winningNumbers::isMatchWithBonus);
 	}
 }

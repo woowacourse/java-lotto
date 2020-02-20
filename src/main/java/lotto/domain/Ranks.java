@@ -11,7 +11,9 @@ public class Ranks {
 	}
 
 	public int getCountOf(final Rank input) {
-		return (int) ranks.stream().filter(rank -> rank.equals(input)).count();
+		return (int)ranks.stream()
+			.filter(rank -> rank.equals(input))
+			.count();
 	}
 
 	public Stream<Rank> stream() {
