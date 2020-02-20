@@ -39,7 +39,7 @@ public class Lotto {
 		return Collections.unmodifiableList(numbers);
 	}
 
-	public Rank compare(Lotto winningLotto, int bonusNumber) {
+	public Rank compare(Lotto winningLotto, LottoNumber bonusNumber) {
 		int count = (int)this.numbers.stream()
 			.filter(number -> winningLotto.numbers.contains(number))
 			.count();
