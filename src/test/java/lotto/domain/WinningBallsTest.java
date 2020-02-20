@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -21,15 +22,21 @@ public class WinningBallsTest {
     }
 
     @Test
-    void 보너스번호가_있는경우() {
+    @DisplayName("보너스번호가 있는경우 테스트")
+    void present_bonus_balls() {
         int bonusBall = 10;
-        int[] value = {3, 4, 5, 6, 7, 8};
-        int[] value2 = {3, 4, 5, 6, 7, 10};
+        int[] winningBallInputs = {3, 4, 5, 6, 7, 8};
+        int[] lottoTicketNumbers = {3, 4, 5, 6, 7, 10};
 
-        List<LottoBall> winningBallValues = Arrays.stream(value).mapToObj(LottoBall::new).collect(Collectors.toList());
-        List<LottoBall> lottoTicketValues = Arrays.stream(value2).mapToObj(LottoBall::new).collect(Collectors.toList());
+        List<LottoBall> winningBallValues = Arrays.stream(winningBallInputs)
+                .mapToObj(LottoBallFactory::findByLottoBall)
+                .collect(Collectors.toList());
+        List<LottoBall> lottoTicket = Arrays.stream(lottoTicketNumbers)
+                .mapToObj(LottoBallFactory::findByLottoBall)
+                .collect(Collectors.toList());
+
         WinningBalls winningBalls = new WinningBalls(winningBallValues, bonusBall);
 
-        Assertions.assertThat(winningBalls.hitBonusBall(new LottoTicket(lottoTicketValues))).isTrue();
+        Assertions.assertThat(winningBalls.hitBonusBall(new LottoTicket(lottoTicket))).isTrue();
     }
 }

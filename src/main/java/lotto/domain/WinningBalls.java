@@ -7,8 +7,8 @@ public class WinningBalls {
     private final LottoBall hitBonusBall;
 
     public WinningBalls(List<LottoBall> winningBalls, int hitBonusBall) {
-        this.hitBonusBall = LottoBallFactory.getInstance().get(hitBonusBall);
         this.winningBalls = winningBalls;
+        this.hitBonusBall = LottoBallFactory.findByLottoBall(hitBonusBall);
     }
 
     public int hitLottoBalls(LottoTicket lottoTicket) {
@@ -19,6 +19,7 @@ public class WinningBalls {
     }
 
     public boolean hitBonusBall(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoTicket().contains(hitBonusBall);
+        return lottoTicket.getLottoTicket()
+                .contains(hitBonusBall);
     }
 }
