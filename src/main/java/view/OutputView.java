@@ -3,6 +3,7 @@ package view;
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.LottoResult;
+import domain.Profit;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,5 +62,9 @@ public class OutputView {
                         .append("개");
             System.out.println(stringBuilder);
         }
+    }
+
+    public static void printProfitRatio(double profitRatio) {
+        System.out.printf("총 수익률은 %f%%입니다.", profitRatio);
     }
 }

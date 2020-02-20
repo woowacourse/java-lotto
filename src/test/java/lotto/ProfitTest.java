@@ -1,17 +1,28 @@
 package lotto;
 
+import domain.LottoResult;
 import domain.Profit;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProfitTest {
+
     @Test
-    void 수익_누적_테스트() {
+    void 총_수익_계산_테스트() {
+        Map<LottoResult, Integer> result = new HashMap<LottoResult, Integer>(){{
+            put(LottoResult.FIRST, 0);
+            put(LottoResult.SECOND, 0);
+            put(LottoResult.THIRD, 1);
+            put(LottoResult.FOURTH, 1);
+            put(LottoResult.FIFTH, 2);
+        }};
+
         Profit profit = new Profit();
-        profit.addWinningMoney(50000);
-        assertThat(profit.getProfit()).isEqualTo(50000);
-        profit.addWinningMoney(30000000);
-        assertThat(profit.getProfit()).isEqualTo(30050000);
+        int profitRatio = profit.calculateProfitRatio(result, 4);
+        assertThat(profitRatio).isEqualTo(390);
     }
 }

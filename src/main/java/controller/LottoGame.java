@@ -9,9 +9,6 @@ import java.util.*;
 public class LottoGame {
     private static PurchaseAmount amount;
     private static List<Lotto> lottoDummy = new ArrayList<>();
-
-    private int profit = 0;
-
     private static Map<LottoResult, Integer> result = new HashMap<LottoResult, Integer>(){{
         put(LottoResult.FIRST, 0);
         put(LottoResult.SECOND, 0);
@@ -23,7 +20,7 @@ public class LottoGame {
     public static void main(String[] args) {
 
         amount = new PurchaseAmount(InputView.inputPurchaseAmount());
-        int lottoCount = amount.calculateCount();
+        int lottoCount = amount.getCount();
         OutputView.printPurchaseCountMessage(lottoCount);
 
         for (int index = 0; index < lottoCount; index++){
@@ -32,12 +29,14 @@ public class LottoGame {
         OutputView.printLottoDummy(lottoDummy);
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 
+        Profit profit = new Profit();
         for (Lotto lotto : lottoDummy){
             LottoResult rank = winningNumber.findRank(lotto);
-            //profit += rank.getWinningMoney();
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
+
+        double profitRatio = profit.calculateProfitRatio(result, amount.getCount());
         OutputView.printResult(result);
-        //OutputView.printProfitRatio(profit);
+        OutputView.printProfitRatio(profitRatio);
     }
 }
