@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.AllLottoNumbers;
-import lotto.domain.LottoNumberGroup;
-import lotto.domain.LottoNumbers;
-import lotto.domain.PurchaseNumber;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,24 +8,41 @@ import java.util.stream.Collectors;
 public class OutputView {
     private static final String PURCHASE_NUMBER_POSTFIX = "개를 구입했습니다.";
 
-    public static void printPurchaseNumber(PurchaseNumber purchaseNumber) {
-        System.out.println(purchaseNumber.getPurchaseNumber() + PURCHASE_NUMBER_POSTFIX);
+    public static void printPurchaseNumber(PurchaseAmount purchaseAmount) {
+        System.out.println(purchaseAmount.getPurchaseNumber() + PURCHASE_NUMBER_POSTFIX);
+        System.out.println();
     }
 
-    // TODO : 일급 컬렉션의 책임이 어느정도인지 의견을 물어봅시다!
-    public static void printAllLottoNumbers(AllLottoNumbers allLottoNumbers) {
-        List<LottoNumbers> allLottoNumbersList = allLottoNumbers.getAllLottoNumbers();
-        for (int i = 0; i < allLottoNumbersList.size(); i++) {
-            printLottoNumbers(allLottoNumbersList.get(i));
+    public static void printPurchaseLottoNumbers(PurchaseLottos purchaseLottos) {
+        for (Lotto lotto : purchaseLottos.getPurchaseLottos()) {
+            printLottoNumbers(lotto);
         }
+        System.out.println();
     }
 
-    private static void printLottoNumbers(LottoNumbers lottoNumbers) {
-        List<LottoNumberGroup> lottoNumberGroups = lottoNumbers.getLottoNumbers();
+    private static void printLottoNumbers(Lotto lotto) {
+        List<LottoNumber> lottoNumberGroups = lotto.getLottoNumbers();
         String output = lottoNumberGroups.stream()
-                .map(LottoNumberGroup::getValue)
+                .map(LottoNumber::getLottoNumber)
                 .map(Object::toString)
                 .collect(Collectors.joining(", ", "[", "]"));
         System.out.println(output);
+    }
+
+    public static void printResult(PurchaseAmount purchaseAmount) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (Rank rank : Rank.values()) {
+            printRankResult(rank);
+        }
+        System.out.println("총 수익률은 " + ResultCalculator.calculateEarningRate(purchaseAmount) + "%입니다.");
+    }
+
+    private static void printRankResult(Rank rank) {
+        System.out.printf("%d개 일치", rank.correctLottoNumber);
+        if (rank.isCorrectBonusNumber == true) {
+            System.out.printf(", 보너스 볼 일치");
+        }
+        System.out.printf(" (%d원) - %d개 \n", rank.prize, rank.count);
     }
 }
