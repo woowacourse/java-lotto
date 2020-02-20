@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.InvalidMoneyException;
-
 public class LottoMoney {
 	private static final int ZERO = 0;
 	private static final int UNIT = 1000;
@@ -25,7 +23,7 @@ public class LottoMoney {
 
 	private void validateNullOrEmpty(String money) {
 		if (money == null || money.isEmpty()) {
-			throw new InvalidMoneyException(InvalidMoneyException.NULL_OR_EMPTY);
+			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.NULL_OR_EMPTY);
 		}
 	}
 
@@ -33,25 +31,25 @@ public class LottoMoney {
 		try {
 			return Integer.parseInt(money);
 		} catch (NumberFormatException ne) {
-			throw new InvalidMoneyException(InvalidMoneyException.NOT_INTEGER);
+			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.NOT_INTEGER);
 		}
 	}
 
 	private void validatePositive(int parsedMoney) {
 		if (parsedMoney <= ZERO) {
-			throw new InvalidMoneyException(InvalidMoneyException.NOT_POSITIVE);
+			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.NOT_POSITIVE);
 		}
 	}
 
 	private void validateUnit(int parsedMoney) {
 		if (parsedMoney % UNIT != ZERO) {
-			throw new InvalidMoneyException(InvalidMoneyException.INVALID_UNIT);
+			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.INVALID_UNIT);
 		}
 	}
 
 	private void validateMaxBound(int parsedMoney) {
 		if (parsedMoney > MAX_BOUND) {
-			throw new InvalidMoneyException(InvalidMoneyException.OUT_OF_BOUND);
+			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.OUT_OF_BOUND);
 		}
 	}
 

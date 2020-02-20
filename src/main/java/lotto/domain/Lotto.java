@@ -2,8 +2,6 @@ package lotto.domain;
 
 import java.util.List;
 
-import lotto.exception.InvalidLottoException;
-
 public class Lotto {
 	public static final int CORRECT_SIZE = 6;
 
