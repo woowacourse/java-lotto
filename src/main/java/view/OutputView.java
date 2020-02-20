@@ -63,4 +63,9 @@ public class OutputView {
     public static void printProfitRatio(int profitRatio) {
         System.out.printf("총 수익률은 %d%%입니다.", profitRatio);
     }
+
+    public static void printExceptionMessage(RuntimeException e) {
+        System.out.println(e.getMessage());
+        System.out.println("다시 입력해 주세요.");
+    }
 }

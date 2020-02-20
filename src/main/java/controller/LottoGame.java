@@ -31,7 +31,7 @@ public class LottoGame {
         try {
             return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         } catch(IllegalArgumentException | NullPointerException e){
-            System.out.println(e.getMessage());
+            OutputView.printExceptionMessage(e);
         }
         return inputWinningNumber();
     }
@@ -40,7 +40,7 @@ public class LottoGame {
         try {
             return new PurchaseAmount(InputView.inputPurchaseAmount());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.printExceptionMessage(e);
         }
         return inputPurchaseAmount();
     }
