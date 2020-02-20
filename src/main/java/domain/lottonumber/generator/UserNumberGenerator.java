@@ -16,7 +16,7 @@ public class UserNumberGenerator implements NumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> create(){
+    public List<LottoNumber> create() {
         return numbers;
     }
 }

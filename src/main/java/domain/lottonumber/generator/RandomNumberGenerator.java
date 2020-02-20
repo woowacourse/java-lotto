@@ -20,6 +20,6 @@ public class RandomNumberGenerator implements NumberGenerator {
     @Override
     public List<LottoNumber> create() {
         Collections.shuffle(numbers);
-        return new ArrayList<>(numbers.subList(0,6));
+        return new ArrayList<>(numbers.subList(0, 6));
     }
 }
