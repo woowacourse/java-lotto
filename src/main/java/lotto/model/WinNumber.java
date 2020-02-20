@@ -1,5 +1,8 @@
 package lotto.model;
 
+import lotto.exception.NotNumberException;
+import lotto.exception.NotSixNumbersException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +26,7 @@ public class WinNumber {
 
     private void hasSix(List<Integer> inputs) {
         if (inputs.size() != LOTTO_NUMBER_LENGTH) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
+            throw new NotSixNumbersException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
@@ -39,7 +42,7 @@ public class WinNumber {
         try {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
+            throw new NotNumberException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 }

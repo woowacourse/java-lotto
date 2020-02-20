@@ -1,5 +1,9 @@
 package lotto.model;
 
+import lotto.exception.NotMultipleOfThousandException;
+import lotto.exception.NotNumberException;
+import lotto.exception.OverRangeException;
+
 public class Payment {
     public static final int MINIMUM_PAYMENT = 1000;
     public static final int MAXINUM_PAYMENT = 100000;
@@ -20,19 +24,19 @@ public class Payment {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
+            throw new NotNumberException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 
     private static void isValueRange(int payment) {
         if (!(payment >= MINIMUM_PAYMENT && payment <= MAXINUM_PAYMENT)) {
-            throw new IllegalArgumentException(OVER_RANGE_EXCEPTION_MESSAGE);
+            throw new OverRangeException(OVER_RANGE_EXCEPTION_MESSAGE);
         }
     }
 
     private static void isUnitK(int payment) {
         if (!(payment % PAYMENT_UNIT == 0)) {
-            throw new IllegalArgumentException(UNIT_EXCEPTION_MESSAGE);
+            throw new NotMultipleOfThousandException(UNIT_EXCEPTION_MESSAGE);
         }
     }
 }

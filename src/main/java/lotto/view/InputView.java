@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.exception.NullOrEmptyException;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -15,7 +17,7 @@ public class InputView {
 
     public static void getWinNumbers(String input) {
         if (input == null || input.equals(EMPTY_STRING)) {
-            throw new NullPointerException(NULL_OR_EMPTY_EXCEPTION_MESSAGE);
+            throw new NullOrEmptyException(NULL_OR_EMPTY_EXCEPTION_MESSAGE);
         }
     }
 }
