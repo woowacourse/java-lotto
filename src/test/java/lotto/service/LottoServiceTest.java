@@ -5,6 +5,8 @@ import lotto.domain.ticket.LottoStore;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketBundle;
 import lotto.domain.ticket.StubLottoStore;
+import lotto.domain.ticket.ball.LottoBall;
+import lotto.domain.ticket.ball.LottoFactory;
 import lotto.view.dto.BettingMoneyRequestDTO;
 import lotto.view.dto.StatisticsResponseDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
@@ -17,7 +19,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,9 +33,19 @@ class LottoServiceTest {
 
     private static Stream<Arguments> ticketProvider() {
         return Stream.of(
-                Arguments.of(1000, Arrays.asList(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)))),
-                Arguments.of(2000, Arrays.asList(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6))))
+                Arguments.of(1000, Arrays.asList(new LottoTicket(aLottoBalls()))),
+                Arguments.of(2000, Arrays.asList(new LottoTicket(aLottoBalls()), new LottoTicket(aLottoBalls())))
         );
+    }
+
+    private static Set<LottoBall> aLottoBalls() {
+        LottoBall one = LottoFactory.findLottoBallByNumber(1);
+        LottoBall two = LottoFactory.findLottoBallByNumber(2);
+        LottoBall three = LottoFactory.findLottoBallByNumber(3);
+        LottoBall four = LottoFactory.findLottoBallByNumber(4);
+        LottoBall five = LottoFactory.findLottoBallByNumber(5);
+        LottoBall six = LottoFactory.findLottoBallByNumber(6);
+        return new HashSet<>(Arrays.asList(one, two, three, four, five, six));
     }
 
     @BeforeEach
@@ -59,12 +73,12 @@ class LottoServiceTest {
     @Test
     void getStatisticsDTO() {
         //given
-        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoTicket lottoTicket = new LottoTicket(aLottoBalls());
         String winningNumber = "12,22,33,4,5,6";
         int bonusNumber = 7;
         String rate = "500.0%";
 
-        LottoTicketBundle lottoTicketBundle = new LottoTicketBundle(Collections.singletonList(new LottoTicket(lottoNumbers)));
+        LottoTicketBundle lottoTicketBundle = new LottoTicketBundle(Collections.singletonList(lottoTicket));
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO(winningNumber, bonusNumber);
 
         //when
