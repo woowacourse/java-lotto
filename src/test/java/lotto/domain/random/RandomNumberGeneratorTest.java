@@ -9,8 +9,12 @@ public class RandomNumberGeneratorTest {
     @SuppressWarnings("NonAsciiCharacters")
     void generate_범위_안에_랜덤_값을_도출하는지_확인() {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-        Assertions.assertThat(randomNumberGenerator.generate().getNumber())
-                .isBetween(1, 45);
+        for (int i = 0; i < 100; i++) {
+            int j = randomNumberGenerator.generate().getNumber();
+            System.out.println(j);
+            Assertions.assertThat(j)
+                    .isBetween(1, 45);
+        }
     }
 
     @Test
