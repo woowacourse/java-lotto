@@ -15,7 +15,7 @@ class LottoBallTest {
     @ValueSource(ints = {0, 46})
     void test1(int number) {
         assertThatThrownBy(() -> {
-            new LottoBall(number);
+            LottoBall.from(number);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값: " + number + ": 범위 이외 숫자");
     }
@@ -24,7 +24,7 @@ class LottoBallTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
     void test2(int number) {
-        assertThat(new LottoBall(number)).isEqualTo(new LottoBall(number));
+        assertThat(LottoBall.from(number)).isEqualTo(LottoBall.from(number));
     }
 
 }
