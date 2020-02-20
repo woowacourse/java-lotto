@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.DuplicatedNumberException;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -10,6 +11,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateDistinctNumbers(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 

@@ -3,12 +3,13 @@ package lotto.domain;
 import lotto.exception.NotInScopeException;
 import lotto.exception.NotNumberException;
 
-public class LottoNumber {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+import java.util.Objects;
 
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final String NOT_IN_SCOPE_NUMBERS_ERROR_MSG = "로또 번호의 범위가 잘못되었습니다.";
     private static final String NOT_NUMBER_MSG = "정수로 입력하셔야 합니다.";
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     private int number;
 
@@ -31,6 +32,23 @@ public class LottoNumber {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+
     private void validateNumberScope(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER
                 || lottoNumber > MAX_LOTTO_NUMBER) {
@@ -45,6 +63,17 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        if (this.number > lottoNumber.number) {
+            return 1;
+        }
+        if (this.number < lottoNumber.number) {
+            return -1;
+        }
+        return 0;
     }
 }
 

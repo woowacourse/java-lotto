@@ -18,9 +18,7 @@ public class Application {
         Lottos lottos = new Lottos(LottoFactory.createLottoList(payment));
 
         List<Lotto> lottoList = lottos.getLottos();
-        for (int i = 0; i < lottoList.size(); i++) {
-            System.out.println(lottoList.get(i).getLottoNumbers().toString());
-        }
+        OutputView.printLottoList(lottoList);
 
         WinningLotto winningLotto = new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
 

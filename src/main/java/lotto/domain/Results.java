@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Results {
+    private static final int MONEY_PER_LOTTO = 1000;
+    private static final int HUNDRED_PERCENT = 100;
     private List<Result> results;
     private List<Lotto> userLottos;
     private WinningLotto winningLotto;
@@ -16,7 +18,7 @@ public class Results {
         this.results = new ArrayList<>();
     }
 
-    private void calculateResults() {
+    public void calculateResults() {
         addBlankResults();
         for (Lotto userLotto : userLottos) {
             Result result = new Result();
@@ -46,7 +48,7 @@ public class Results {
     }
 
     public int getEarningRate() {
-        return (getTotalEarning()) / (userLottos.size() * 1000) * 100;
+        return (getTotalEarning()) / (userLottos.size() * MONEY_PER_LOTTO) * HUNDRED_PERCENT;
     }
 
 

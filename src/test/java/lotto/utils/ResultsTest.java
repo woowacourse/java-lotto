@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ResultsTest {
     private static final String[] WINNING_LOTTO_NUMBERS = {"1", "2", "3", "4", "5", "6"};
     private static final String BONUS_NUMBER = "7";
+    private static final int RESULT_BASE = 5;
     List<LottoNumber> winningNumbers = new ArrayList<LottoNumber>(Arrays.asList(
             new LottoNumber(WINNING_LOTTO_NUMBERS[0]),
             new LottoNumber(WINNING_LOTTO_NUMBERS[1]),
@@ -45,21 +46,21 @@ public class ResultsTest {
     void calculateResults_당첨되지_않았을_때() {
         Results results = new Results(Arrays.asList(notWinningUserLotto), winningLotto);
         results.calculateResults();
-        assertThat(results.getResults().get(0).getWinningInfo()).isEqualTo(WinningInfo.FAIL);
+        assertThat(results.getResults().get(0 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.FAIL.name());
     }
 
     @Test
     void calculateResults_당첨이_존재할_때() {
         Results results = new Results(Arrays.asList(notWinningUserLotto, secondWinningUserLotto), winningLotto);
         results.calculateResults();
-        assertThat(results.getResults().get(0).getWinningInfo()).isEqualTo(WinningInfo.FAIL);
-        assertThat(results.getResults().get(1).getWinningInfo()).isEqualTo(WinningInfo.SECOND);
+        assertThat(results.getResults().get(0 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.FAIL.name());
+        assertThat(results.getResults().get(1 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.SECOND.name());
     }
 
     @Test
     void getEarningRate() {
         Results results = new Results(Arrays.asList(notWinningUserLotto, secondWinningUserLotto), winningLotto);
         results.calculateResults();
-        assertThat(results.getEarningRate()).isEqualTo(15000);
+        assertThat(results.getEarningRate()).isEqualTo(1500000);
     }
 }

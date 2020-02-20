@@ -1,15 +1,23 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.Payment;
 import lotto.domain.Results;
 import lotto.domain.WinningInfo;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeMap;
 
 public class OutputView {
     public static void printLottoCount(Payment payment) {
         System.out.println(payment.getLottoCount() + "개를 구매했습니다");
+    }
+
+    public static void printLottoList(List<Lotto> lottoList) {
+        for (int i = 0; i < lottoList.size(); i++) {
+            System.out.println(lottoList.get(i).getLottoNumbers().toString());
+        }
     }
 
     public static void printResults(Results results) {
@@ -26,4 +34,5 @@ public class OutputView {
         }
         System.out.println("총 수익률을 " + results.getEarningRate() + "%입니다.");
     }
+
 }

@@ -7,13 +7,16 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomNumberGenerator implements NumberGenerator {
+    private static final int LOTTO_INDEX_INIT = 0;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
+    @Override
     public List<LottoNumber> generateNumbers() {
         long seed = System.nanoTime();
 
         List<LottoNumber> randomNumbers = LottoNumberFactory.createLottoNumberList();
         Collections.shuffle(randomNumbers, new Random(seed));
-        return randomNumbers.subList(0, 6);
+        return randomNumbers.subList(LOTTO_INDEX_INIT, LOTTO_NUMBER_COUNT);
     }
 
     @Override

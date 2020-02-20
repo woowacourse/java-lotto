@@ -38,10 +38,6 @@ public class Payment {
         }
     }
 
-    public int getPayment() {
-        return payment;
-    }
-
     public int getLottoCount() {
         return payment / MONEY_PER_LOTTO;
     }

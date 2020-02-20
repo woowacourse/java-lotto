@@ -11,19 +11,12 @@ public class Result {
     }
 
     void calculate(WinningLotto winningLotto, Lotto userLotto) {
-        int winningCount = 0;
-        boolean hasBonus = false;
-        for (LottoNumber userLottoNumber : userLotto.getLottoNumbers()) {
-            for (LottoNumber winningLottoNumber : winningLotto.getLottoNumbers()) {
-                if (userLottoNumber.getNumber() == winningLottoNumber.getNumber()) {
-                    winningCount++;
-                }
-                if (userLottoNumber.getNumber() == winningLotto.getBonusNumber().getNumber()) {
-                    hasBonus = true;
-                }
-            }
-        }
-        winningInfo = WinningInfo.valueOf(winningCount, hasBonus);
+        boolean hasBonus = userLotto.getLottoNumbers().stream()
+                .anyMatch(x -> winningLotto.getBonusNumber().equals(x));
+        long winningCount = userLotto.getLottoNumbers().stream()
+                .filter(x -> winningLotto.getLottoNumbers().contains(x))
+                .count();
+        winningInfo = WinningInfo.valueOf(Math.toIntExact(winningCount), hasBonus);
     }
 
     public WinningInfo getWinningInfo() {
