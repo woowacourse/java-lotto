@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class Results {
     private static final int MONEY_PER_LOTTO = 1000;
     private static final int HUNDRED_PERCENT = 100;
+    private static final int RESULT_BASE = 5;
     private List<Result> results;
     private List<Lotto> userLottos;
     private WinningLotto winningLotto;
@@ -41,7 +42,7 @@ public class Results {
 
     public int getTotalEarning() {
         int totalEarning = 0;
-        for (int i = 5; i < results.size(); i++) {
+        for (int i = RESULT_BASE; i < results.size(); i++) {
             totalEarning += results.get(i).getWinningInfo().getWinningPrice();
         }
         return totalEarning;

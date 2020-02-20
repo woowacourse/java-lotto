@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
+    private static final int LOTTO_NUMBER_SIZE = 6;
     protected List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -24,7 +25,7 @@ public class Lotto {
     }
 
     private void validateNumberCount(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new NotEnoughNumberException(ErrorMessage.NUMBER_COUNT_NOT_SIX.getMessage());
         }
     }
