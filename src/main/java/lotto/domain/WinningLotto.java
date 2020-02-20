@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WinningLotto {
@@ -20,12 +20,16 @@ public class WinningLotto {
 	}
 
 	public TotalResult getResult(Lottos lottos) {
-		Map<LottoRank, Integer> result = new HashMap<>();
+		Map<LottoRank, Integer> result = new LinkedHashMap<>();
 		for(LottoRank lottoRank : LottoRank.values()) {
 			result.put(lottoRank, 0);
 		}
 		for (Lotto lot: lottos) {
-			LottoRank rank = LottoRank.getRank(lot.countCommonBalls(lotto));
+			int matchCount = lot.countCommonBalls(lotto);
+			if (!LottoRank.isPrizeCount(matchCount)) {
+				continue;
+			}
+			LottoRank rank = LottoRank.getRank(matchCount);
 			if(rank == LottoRank.THIRD && lot.contains(ball)) {
 				rank = LottoRank.SECOND;
 			}
