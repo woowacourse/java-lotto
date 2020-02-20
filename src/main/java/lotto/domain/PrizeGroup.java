@@ -10,17 +10,17 @@ public enum PrizeGroup {
     FIFTH(3, 5_000),
     SIXTH(0, 0);
 
-    private final int matchNumberCount;
-    private final int money;
+    private final int matchCount;
+    private final int defaultPrize;
 
-    PrizeGroup(int matchNumberCount, int money) {
-        this.matchNumberCount = matchNumberCount;
-        this.money = money;
+    PrizeGroup(int matchCount, int defaultPrize) {
+        this.matchCount = matchCount;
+        this.defaultPrize = defaultPrize;
     }
 
     public static PrizeGroup findPrizeByLottoResult(LottoResult result) {
         PrizeGroup prize = Arrays.stream(PrizeGroup.values())
-                .filter(aPrize -> result.isEqualToMatchCount(aPrize.matchNumberCount))
+                .filter(aPrize -> result.isEqualToMatchCount(aPrize.matchCount))
                 .findFirst()
                 .orElse(SIXTH);
 
@@ -34,7 +34,11 @@ public enum PrizeGroup {
         return this == SECOND && !lottoResult.isBonusMatch();
     }
 
-    public int getMoney() {
-        return money;
+    public int getDefaultPrize() {
+        return defaultPrize;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 }
