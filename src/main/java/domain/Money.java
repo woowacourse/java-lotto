@@ -3,6 +3,7 @@ package domain;
 import spark.utils.StringUtils;
 
 public class Money {
+    private static final int TICKET_PRICE = 1000;
 
     private int money;
 
@@ -30,12 +31,12 @@ public class Money {
     }
 
     private void validateMoneyRange(int money) {
-        if (money < 1000) {
+        if (money < TICKET_PRICE) {
             throw new IllegalArgumentException("input 값이 1000원보다 작습니다.");
         }
     }
 
     public int calculateLottoTicket() {
-        return this.money / 1000;
+        return this.money / TICKET_PRICE;
     }
 }
