@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 import lotto.exceptions.InvalidLottoNumberException;
 
 public enum LottoNumber {
@@ -59,6 +61,14 @@ public enum LottoNumber {
     }
 
     public static LottoNumber find(String value) {
+        int parsedValue = getParsedValue(value);
+        return Arrays.stream(LottoNumber.values())
+            .filter(number -> number.getValue() == parsedValue)
+            .findFirst()
+            .orElse(INVALID);
+    }
+
+    private static int getParsedValue(String value) {
         int parsedValue;
         try {
             parsedValue = Integer.parseInt(value);
@@ -68,12 +78,7 @@ public enum LottoNumber {
         if (parsedValue < LOWER_LIMIT || parsedValue > UPPER_LIMIT) {
             throw new InvalidLottoNumberException();
         }
-        for (LottoNumber number : LottoNumber.values()) {
-            if (number.getValue() == parsedValue) {
-                return number;
-            }
-        }
-        return INVALID;
+        return parsedValue;
     }
 
     public int getValue() {

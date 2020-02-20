@@ -54,8 +54,6 @@ public class LottoTicket {
         }
     }
 
-    // TODO: 테스트 리팩토링할 것 (public만 테스트)
-
     public int compare(LottoTicket other) {
         Set<LottoNumber> winnerSet = new HashSet<>(this.lottoTicket);
         Set<LottoNumber> otherSet = new HashSet<>(other.lottoTicket);
