@@ -18,14 +18,18 @@ public class WinningRule {
     }
 
     private void validateDuplicate(List<Integer> winningNumbers, int bonusBall) {
-        List<Integer> tempWinningNumbers = new ArrayList<>(winningNumbers);
-        tempWinningNumbers.add(bonusBall);
-        boolean isDuplicate = tempWinningNumbers.stream()
-                .distinct()
-                .count() != WINNING_NUMBER_SIZE;
-        if (isDuplicate) {
+        List<Integer> mergedNumbers = new ArrayList<>(winningNumbers);
+        mergedNumbers.add(bonusBall);
+        if (isDuplicate(mergedNumbers)) {
             throw new IllegalArgumentException(DUPLICATE_EXIST_EXCEPTION_MESSAGE);
         }
+    }
+
+    private boolean isDuplicate(List<Integer> tempWinningNumbers) {
+        return tempWinningNumbers.stream()
+                .distinct()
+                .count()
+                != WINNING_NUMBER_SIZE;
     }
 
     public void calculateWinningResult(PurchaseLottos purchaseLottos) {
