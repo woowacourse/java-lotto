@@ -1,11 +1,12 @@
-package domain.factory;
+package util;
 
 import domain.LottoNumber;
 import domain.numberscontainer.LottoNumbersDto;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-public class LottoNumberFactory {
+public class LottoNumbersDtoGenerator {
 
     private static final int FIRST_INDEX = 0;
     private static final int SIXTH_INDEX = 6;
@@ -24,7 +25,10 @@ public class LottoNumberFactory {
         return lottoNumbers;
     }
 
-    public static LottoNumbersDto generateFixedNumberDto(Set<LottoNumber> sixNumbers, LottoNumber bonusNumber) {
-        return new LottoNumbersDto(sixNumbers, bonusNumber);
+    public static LottoNumbersDto generateFixedNumberDto(Set<Integer> sixNumbers, int bonusNumber) {
+        Set<LottoNumber> sixNumbersSet = sixNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toSet());
+        return new LottoNumbersDto(sixNumbersSet, LottoNumber.getLottoNumber(bonusNumber));
     }
 }

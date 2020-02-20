@@ -1,5 +1,6 @@
 package domain;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,5 +33,24 @@ public enum LottoResult {
             lottoResult = THIRD;
         }
         return lottoResult;
+    }
+
+    public double getPrize() {
+        return prize;
+    }
+
+    public String toString() {
+        if (this == NO_WIN) return "";
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(this.matchingNumbers);
+        stringBuilder.append("개 일치 ");
+        if (this == SECOND) {
+            stringBuilder.append(", 보너스 볼 일치 ");
+        }
+        stringBuilder.append("(");
+        stringBuilder.append(this.prize);
+        stringBuilder.append("원) - ");
+
+        return stringBuilder.toString();
     }
 }

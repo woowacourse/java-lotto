@@ -41,6 +41,5 @@ public class WinningNumbers extends LottoNumbersContainer {
         int matchingNumber = findDuplicatedNumbers(ticket);
         boolean isBonus = ticket.contains(bonusNumber);
         return LottoResult.findLottoResult(matchingNumber, isBonus);
-        //return LottoResult.FIRST;
     }
 }

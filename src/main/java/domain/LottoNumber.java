@@ -51,9 +51,6 @@ public enum LottoNumber {
     FORTY_FOUR(44),
     FORTY_FIVE(45);
 
-//    private static final int MIN_LOTTO_NUMBER = 1;
-//    private static final int MAX_LOTTO_NUMBER = 45;
-
     private final int number;
 
     LottoNumber(int number) {
@@ -72,10 +69,4 @@ public enum LottoNumber {
     public int getValue() {
         return this.number;
     }
-//
-//    private static void validateNumber(int number) {
-//        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-//            throw new IllegalArgumentException("1부터 45사이의 숫자를 입력해주세요.");
-//        }
-//    }
 }

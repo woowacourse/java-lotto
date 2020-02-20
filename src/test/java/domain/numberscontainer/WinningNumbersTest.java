@@ -7,8 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -59,27 +60,13 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("당첨 결과 확인")
     void getLottoResultTest() {
-        List<Ticket> tickets = Arrays.asList(
-                new Ticket(createLottoNumberDto(3, 4, 5, 6, 7, 8, -1)), // 1등
-                new Ticket(createLottoNumberDto(3, 4, 5, 6, 7, 9, -1)), // 2등
-                new Ticket(createLottoNumberDto(3, 4, 5, 6, 7, 10, -1)), // 3등
-                new Ticket(createLottoNumberDto(3, 4, 5, 6, 10, 11, -1)), // 4등
-                new Ticket(createLottoNumberDto(3, 4, 5, 10, 11, 12, -1)), // 5등
-                new Ticket(createLottoNumberDto(4, 5, 6, 7, 8, 9, -1)), // 2등
-                new Ticket(createLottoNumberDto(4, 5, 6, 7, 8, 10, -1)), // 3등
-                new Ticket(createLottoNumberDto(4, 5, 6, 7, 10, 11, -1)), // 4등
-                new Ticket(createLottoNumberDto(10, 11, 12, 13, 14, 15, -1))); // 당첨X
-
         WinningNumbers winningNumbers = new WinningNumbers(createLottoNumberDto(3, 4, 5, 6, 7, 8, 9));
 
-        Map<LottoResult, Long> map = tickets.stream()
-                .collect(Collectors.groupingBy(ticket -> winningNumbers.getLottoResult(ticket), Collectors.counting()));
-
-        assertThat(map.get(LottoResult.FIRST)).isEqualTo(1);
-        assertThat(map.get(LottoResult.SECOND)).isEqualTo(2);
-        assertThat(map.get(LottoResult.THIRD)).isEqualTo(2);
-        assertThat(map.get(LottoResult.FOURTH)).isEqualTo(2);
-        assertThat(map.get(LottoResult.FIFTH)).isEqualTo(1);
-        assertThat(map.get(LottoResult.NO_WIN)).isEqualTo(1);
+        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumberDto(3, 4, 5, 6, 7, 8, -1)))).isEqualTo(LottoResult.FIRST);
+        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumberDto(3, 4, 5, 6, 7, 9, -1)))).isEqualTo(LottoResult.SECOND);
+        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumberDto(3, 4, 5, 6, 7, 10, -1)))).isEqualTo(LottoResult.THIRD);
+        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumberDto(3, 4, 5, 6, 10, 11, -1)))).isEqualTo(LottoResult.FOURTH);
+        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumberDto(3, 4, 5, 10, 11, 12, -1)))).isEqualTo(LottoResult.FIFTH);
+        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumberDto(10, 11, 12, 13, 14, 15, -1)))).isEqualTo(LottoResult.NO_WIN);
     }
 }
