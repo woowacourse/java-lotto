@@ -9,8 +9,8 @@ public class InputView {
 	public static int inputPurchaseMoney() {
 		System.out.println("구입 금액을 입력해 주세요.");
 		try {
-			return scanner.nextInt();
-		} catch (InputMismatchException e) {
+			return Integer.parseInt(scanner.nextLine());
+		} catch (NumberFormatException e) {
 			return inputPurchaseMoney();
 		}
 	}
@@ -23,8 +23,8 @@ public class InputView {
 	public static int inputBonusNumber() {
 		System.out.println("보너스 볼을 입력해주세요.");
 		try {
-			return scanner.nextInt();
-		} catch (InputMismatchException e) {
+			return Integer.parseInt(scanner.nextLine());
+		} catch (NumberFormatException e) {
 			return inputBonusNumber();
 		}
 	}

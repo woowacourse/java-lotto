@@ -2,7 +2,11 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.stream.Collectors;
+
 public class OutputView {
+	private static final String NEW_LINE = System.lineSeparator();
+
 	public static void printPurchasedLottoTicketsCount(PurchaseMoney purchaseMoney) {
 		System.out.println(purchaseMoney.countPurchasedTickets() + "개를 구매했습니다.");
 	}
@@ -15,8 +19,11 @@ public class OutputView {
 	public static void printLottoResult(LottoResult lottoResult) {
 		System.out.println("당첨통계");
 		System.out.println("----------");
-		for (WinningType winningType : lottoResult.getLottoResult().keySet()) {
-			StringBuilder stringBuilder = new StringBuilder();
+		StringBuilder stringBuilder = new StringBuilder();
+		for (WinningType winningType : lottoResult.getLottoResult().keySet().stream().sorted().collect(Collectors.toList())) {
+			if (winningType.isNONE()) {
+				continue;
+			}
 			stringBuilder.append(winningType.getSameNumberCount())
 					.append("개 일치");
 			if (winningType.isBonusTRUE()) {
@@ -26,7 +33,13 @@ public class OutputView {
 					.append(winningType.getWinningAmount())
 					.append("원)- ")
 					.append(lottoResult.getLottoResult().get(winningType))
-					.append("개");
+					.append("개")
+					.append(NEW_LINE);
 		}
+		System.out.println(stringBuilder.toString());
+	}
+
+	public static void printWarningMessage(String message) {
+		System.out.println(message);
 	}
 }

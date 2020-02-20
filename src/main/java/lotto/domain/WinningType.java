@@ -41,9 +41,10 @@ public enum WinningType {
 	}
 
 	public boolean isBonusTRUE() {
-		if (bonusRequirement == BonusRequirement.TRUE) {
-			return true;
-		}
-		return false;
+		return bonusRequirement == BonusRequirement.TRUE;
+	}
+
+	public boolean isNONE() {
+		return this == NONE;
 	}
 }

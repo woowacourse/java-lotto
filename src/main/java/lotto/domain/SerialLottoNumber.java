@@ -10,7 +10,7 @@ public class SerialLottoNumber {
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public SerialLottoNumber(final List<LottoNumber> lottoNumbers) {
+	public SerialLottoNumber(final List<LottoNumber> lottoNumbers) throws LottoTicketIllegalArgumentException {
 		checkIsSizeSix(lottoNumbers);
 		checkIsDuplicated(lottoNumbers);
 
