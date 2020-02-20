@@ -11,16 +11,17 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoApplication {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CloneNotSupportedException {
 		Money money = new Money(InputView.inputBuyMoney());
 		List<Lotto> lotteris = LottoFactory.createLotteries(money);
 		OutputView.printLotteris(lotteris);
 
-		WinLotto winLotto = new WinLotto(InputView.inputWinNumber(), InputView.inputBounsBall());
+		WinLotto winLotto = new WinLotto(InputView.inputWinNumber(), InputView.inputBonusBall());
 		LottoManager lottoManager = new LottoManager(lotteris, winLotto);
 
 		lottoManager.compareLotto();
-		OutputView.printResult(money);
+		OutputView.printResult();
+		OutputView.printIncomeRate(money);
 	}
 
 }

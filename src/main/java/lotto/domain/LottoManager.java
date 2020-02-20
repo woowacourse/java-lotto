@@ -1,16 +1,17 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManager {
-	public static final int MIN_WIN_COUNT = 3;
+	private static final int MIN_WIN_COUNT = 3;
 
-	private List<Lotto> lotteries;
-	private WinLotto winLotto;
+	private final List<Lotto> lotteries;
+	private final WinLotto winLotto;
 
-	public LottoManager(List<Lotto> lotteris, WinLotto winLotto) {
-		this.lotteries = lotteris;
-		this.winLotto = winLotto;
+	public LottoManager(List<Lotto> lotteris, WinLotto winLotto) throws CloneNotSupportedException {
+		this.lotteries = new ArrayList<>(lotteris);
+		this.winLotto = (WinLotto)winLotto.clone();
 	}
 
 	public void compareLotto() {

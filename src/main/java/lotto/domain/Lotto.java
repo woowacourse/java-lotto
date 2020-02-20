@@ -1,16 +1,38 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
-import lotto.validator.Validator;
+import lotto.exception.DuplicateNumberException;
+import lotto.exception.InvalidSizeException;
 
 public class Lotto {
-	protected List<LottoNo> lottoNumbers;
+	private static final int LOTTO_SIZE = 6;
+
+	protected final List<LottoNo> lottoNumbers;
 
 	public Lotto(List<LottoNo> lottoNumbers) {
-		Validator.validateLottoSize(lottoNumbers);
-		this.lottoNumbers = lottoNumbers;
+		validateLottoSize(lottoNumbers);
+		validateDuplicateNumbers(lottoNumbers);
+		this.lottoNumbers = new ArrayList<>(lottoNumbers);
+	}
+
+	private void validateLottoSize(List<LottoNo> lottoNumbers) {
+		if (lottoNumbers.size() != LOTTO_SIZE) {
+			throw new InvalidSizeException();
+		}
+	}
+
+	private void validateDuplicateNumbers(List<LottoNo> lottoNumbers) {
+		if (isDuplicated(lottoNumbers)) {
+			throw new DuplicateNumberException();
+		}
+	}
+
+	private boolean isDuplicated(List<LottoNo> lottoNumbers) {
+		return new HashSet<>(lottoNumbers).size() != LOTTO_SIZE;
 	}
 
 	protected boolean isContain(LottoNo lottoNo) {

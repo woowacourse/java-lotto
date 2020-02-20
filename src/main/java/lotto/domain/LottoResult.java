@@ -10,10 +10,11 @@ public enum LottoResult {
 	FIRST(0, 2000000000, 6);
 
 	public static final String ERROR_MESSAGE_NOT_FOUND_RANK = "당첨되지 않았습니다.";
+	private static final String RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원) - %d개";
 
 	private int count;
-	private long reward;
-	private int hitCount;
+	private final long reward;
+	private final int hitCount;
 
 	LottoResult(int count, long reward, int hitCount) {
 		this.count = count;
@@ -39,15 +40,8 @@ public enum LottoResult {
 		this.count++;
 	}
 
-	public int getCount() {
-		return count;
-	}
-
-	public long getReward() {
-		return reward;
-	}
-
-	public int getHitCount() {
-		return hitCount;
+	@Override
+	public String toString() {
+		return String.format(RESULT_MESSAGE_FORMAT, hitCount, reward, count);
 	}
 }

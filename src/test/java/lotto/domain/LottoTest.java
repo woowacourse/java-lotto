@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.exception.DuplicateNumberException;
+import lotto.exception.InvalidSizeException;
+
 public class LottoTest {
 	List<LottoNo> numbers;
 
@@ -29,10 +32,20 @@ public class LottoTest {
 
 	@DisplayName("로또 번호의 개수가 6개인지 검사")
 	@Test
-	void Lotto1() {
+	void validateLottoSizeTest() {
 		numbers.add(new LottoNo(8));
 		assertThatThrownBy(() -> new Lotto(numbers))
-			.isInstanceOf(IllegalArgumentException.class)
+			.isInstanceOf(InvalidSizeException.class)
 			.hasMessage("6개의 숫자가 아닙니다.");
+	}
+
+	@DisplayName("로또 번호에 중복된 숫자가 있는지 검사")
+	@Test
+	void validateDuplicateNumbersTest() {
+		numbers.remove(0);
+		numbers.add(new LottoNo(6));
+		assertThatThrownBy(() -> new Lotto(numbers))
+			.isInstanceOf(DuplicateNumberException.class);
+
 	}
 }

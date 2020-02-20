@@ -2,14 +2,27 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import lotto.validator.Validator;
+import lotto.exception.InvalidRangeException;
 
 public class LottoNo implements Comparable<LottoNo> {
+	private static final int MIN_LOTTO_NO = 1;
+	private static final int MAX_LOTTO_NO = 45;
+
 	private final int number;
 
 	public LottoNo(int number) {
-		Validator.validateLottoRange(number);
+		validateLottoRange(number);
 		this.number = number;
+	}
+
+	private void validateLottoRange(int number) {
+		if (isLottoRange(number)) {
+			throw new InvalidRangeException();
+		}
+	}
+
+	private boolean isLottoRange(int number) {
+		return number < MIN_LOTTO_NO || number > MAX_LOTTO_NO;
 	}
 
 	@Override
@@ -34,6 +47,6 @@ public class LottoNo implements Comparable<LottoNo> {
 
 	@Override
 	public String toString() {
-		return number + "";
+		return String.valueOf(number);
 	}
 }

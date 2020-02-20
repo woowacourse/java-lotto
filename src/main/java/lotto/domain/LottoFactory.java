@@ -3,19 +3,19 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoFactory {
-	private static final int START_LOTTO_NO = 1;
-	private static final int END_LOTTO_NO = 45;
 	private static final int LOTTO_FROM_INDEX = 0;
 	private static final int LOTTO_TO_INDEX = 6;
-
-	private static List<LottoNo> lottoBox = new ArrayList<>();
+	private static final List<LottoNo> lottoBox;
 
 	static {
-		for (int count = START_LOTTO_NO; count <= END_LOTTO_NO; count++) {
-			lottoBox.add(new LottoNo(count));
-		}
+		lottoBox = IntStream.range(LottoNo.MIN_LOTTO_NO, LottoNo.MAX_LOTTO_NO)
+			.boxed()
+			.map(LottoNo::new)
+			.collect(Collectors.toList());
 	}
 
 	public static List<Lotto> createLotteries(Money money) {

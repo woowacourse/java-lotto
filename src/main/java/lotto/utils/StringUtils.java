@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoNo;
-import lotto.validator.Validator;
+import lotto.exception.NotIntegerException;
 
 public class StringUtils {
 	private static String COMMA = ",";
@@ -18,7 +18,7 @@ public class StringUtils {
 				.map(LottoNo::new)
 				.collect(Collectors.toList());
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(Validator.ERROR_MESSAGE_NOT_INTEGER);
+			throw new NotIntegerException();
 		}
 	}
 }

@@ -2,8 +2,8 @@ package lotto.domain;
 
 import lotto.utils.StringUtils;
 
-public class WinLotto extends Lotto {
-	private BonusBall bonusBall;
+public class WinLotto extends Lotto implements Cloneable {
+	private final BonusBall bonusBall;
 
 	public WinLotto(String winLotto, String bonusBall) {
 		super(StringUtils.split(winLotto));
@@ -18,5 +18,10 @@ public class WinLotto extends Lotto {
 
 	public boolean isMatchBonus(Lotto lotto) {
 		return bonusBall.isContainBonusBall(lotto);
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }

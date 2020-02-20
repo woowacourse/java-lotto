@@ -5,19 +5,22 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.exception.InvalidMoneyException;
+import lotto.exception.NotIntegerException;
+
 public class MoneyTest {
 	@DisplayName("숫자가 아닌 구입금액을 입력한 경우")
 	@Test
 	void validateInteger() {
 		assertThatThrownBy(() -> new Money("학성"))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(NotIntegerException.class);
 	}
 
 	@DisplayName("1000원 미만의 금액을 입력한 경우")
 	@Test
 	void validateOverThousand() {
 		assertThatThrownBy(() -> new Money("999"))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(InvalidMoneyException.class);
 	}
 
 	@DisplayName("1000원으로 나누기")
