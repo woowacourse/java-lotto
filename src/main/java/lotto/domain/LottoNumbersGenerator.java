@@ -9,7 +9,7 @@ public class LottoNumbersGenerator {
 
     static List<Integer> generate() {
         List<Integer> lottoNumbers = new ArrayList<>();
-        while (lottoNumbers.size() < LottoNumberConfig.SIZE) {
+        while (lottoNumbers.size() != LottoNumberConfig.SIZE) {
             int lottoNumber = random.nextInt(LottoNumberConfig.MAX - LottoNumberConfig.MIN) + LottoNumberConfig.MIN;
             if (!lottoNumbers.contains(lottoNumber)) {
                 lottoNumbers.add(lottoNumber);
