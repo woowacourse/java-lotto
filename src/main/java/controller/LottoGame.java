@@ -7,7 +7,6 @@ import view.OutputView;
 import java.util.*;
 
 public class LottoGame {
-    private static PurchaseAmount amount;
     private static List<Lotto> lottoDummy = new ArrayList<>();
     private static Map<LottoResult, Integer> result = new HashMap<LottoResult, Integer>(){{
         put(LottoResult.FIRST, 0);
@@ -18,8 +17,7 @@ public class LottoGame {
     }};
 
     public static void main(String[] args) {
-
-        amount = new PurchaseAmount(InputView.inputPurchaseAmount());
+        PurchaseAmount amount = inputPurchaseAmount();
         int lottoCount = amount.getCount();
         OutputView.printPurchaseCountMessage(lottoCount);
 
@@ -40,5 +38,14 @@ public class LottoGame {
         int profitRatio = profit.calculateProfitRatio(result, amount.getCount());
         OutputView.printResult(result);
         OutputView.printProfitRatio(profitRatio);
+    }
+
+    private static PurchaseAmount inputPurchaseAmount() {
+        try {
+            return new PurchaseAmount(InputView.inputPurchaseAmount());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        return inputPurchaseAmount();
     }
 }
