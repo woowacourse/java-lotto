@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.LottoBall;
 import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningBalls;
 import lotto.util.InputValidationUtil;
 import lotto.util.WinningBallsUtils;
 
@@ -36,7 +35,7 @@ public class InputView {
     public static int InputBonusBall() {
         try{
             String bonusBall = scanner.nextLine();
-            return InputValidationUtil.isNumber(bonusBall);
+            return InputValidationUtil.returnNumberWithNumberCheck(bonusBall);
         }catch (RuntimeException e){
             OutputView.printErrorMessage(e.getMessage());
             return InputBonusBall();

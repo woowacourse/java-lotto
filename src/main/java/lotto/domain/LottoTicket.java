@@ -8,8 +8,8 @@ import java.util.List;
 public class LottoTicket {
     List<LottoBall> lottoTicket;
 
-    public LottoTicket(List<LottoBall> lottoTicket){
-        if(lottoTicket.isEmpty()){
+    public LottoTicket(List<LottoBall> lottoTicket) {
+        if (lottoTicket.isEmpty()) {
             throw new LottoTicketEmptyException("로또 티켓에 로또볼이 비었습니다. 다시 드리겠습니다.");
         }
         Collections.sort(lottoTicket);

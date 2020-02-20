@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.Exception.NotBuyLottoTicketException;
 import lotto.util.InputValidationUtil;
 
 public class PurchaseAmount {
@@ -24,7 +25,7 @@ public class PurchaseAmount {
 
     public void underLottoUnit() {
         if (this.purchaseAmount < LOTTO_PURCHASE_UNIT) {
-            throw new IllegalArgumentException("한개도 구매할 수 없습니다." + this.purchaseAmount + "원을 반환합니다.");
+            throw new NotBuyLottoTicketException("한개도 구매할 수 없습니다." + this.purchaseAmount + "원을 반환합니다.");
         }
     }
 }

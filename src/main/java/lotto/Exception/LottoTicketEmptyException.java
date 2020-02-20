@@ -1,7 +1,7 @@
 package lotto.Exception;
 
 public class LottoTicketEmptyException extends RuntimeException {
-    public LottoTicketEmptyException(String messace){
-        super(messace);
+    public LottoTicketEmptyException(String message){
+        super(message);
     }
 }

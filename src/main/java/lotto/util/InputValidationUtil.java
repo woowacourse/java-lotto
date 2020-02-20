@@ -1,6 +1,10 @@
 package lotto.util;
 
+import lotto.Exception.NotPositiveNumberException;
+
 public class InputValidationUtil {
+
+    private static final int ZERO = 0;
 
     private InputValidationUtil() {
     }
@@ -14,8 +18,8 @@ public class InputValidationUtil {
     }
 
     public static void isPositiveNumber(long inputValue) {
-        if(inputValue < 0){
-            throw new IllegalArgumentException("음수입니다.");
+        if(inputValue < ZERO){
+            throw new NotPositiveNumberException("음수입니다.");
         }
     }
 }

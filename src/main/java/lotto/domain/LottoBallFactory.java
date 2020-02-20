@@ -8,9 +8,10 @@ public class LottoBallFactory {
 
     private static List<LottoBall> lottoBalls;
 
-    private LottoBallFactory(){ }
+    private LottoBallFactory() {
+    }
 
-    static{
+    static {
         lottoBalls = IntStream.rangeClosed(1, 45)
                 .mapToObj(LottoBall::new)
                 .collect(Collectors
@@ -19,9 +20,5 @@ public class LottoBallFactory {
 
     public static List<LottoBall> getInstance() {
         return lottoBalls;
-    }
-
-    public static LottoBall findByLottoBall(int LottoNumber) {
-        return lottoBalls.get(LottoNumber);
     }
 }
