@@ -12,7 +12,7 @@ public class StringUtil {
 		return value.replaceAll(BLANK, NO_BLANK);
 	}
 
-	public static List<String> parseByComma(String value) {
+	public static List<String> parseToNumbers(String value) {
 		return Arrays.asList(value.split(DELIMITER));
 	}
 }

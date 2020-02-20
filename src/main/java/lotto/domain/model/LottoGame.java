@@ -50,6 +50,4 @@ public class LottoGame {
 	public GameResultDto getResult() {
 		return new GameResultDto(makeStatistics(), calculateProfit());
 	}
-
-	;
 }

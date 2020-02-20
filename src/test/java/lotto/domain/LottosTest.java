@@ -14,15 +14,4 @@ public class LottosTest {
 		Lottos lottos = LottoFactory.create(3);
 		assertThat(lottos.getSize()).isEqualTo(3);
 	}
-
-	@Test
-	@DisplayName("불변객체임을 증")
-	void immutableTest() {
-		Lottos lottos = LottoFactory.create(3);
-		Iterator<Lotto> iterator = lottos.iterator();
-		iterator.next();
-		iterator.remove();
-		assertThat(lottos.getSize()).isEqualTo(2);
-	}
-
 }

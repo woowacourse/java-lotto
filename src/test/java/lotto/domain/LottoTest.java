@@ -95,4 +95,24 @@ public class LottoTest {
 			new Lotto(numbers).contains(Number.of("3"))
 		).isTrue();
 	}
+
+	@Test
+	@DisplayName("getNumbers가 정확한 값을 반환하는 지")
+	void getNumber() {
+		List<Number> numbers = Arrays.asList(
+			Number.of("3"),
+			Number.of("4"),
+			Number.of("5"),
+			Number.of("6"),
+			Number.of("7"),
+			Number.of("8")
+		);
+		assertThat(new Lotto(numbers).getNumbers())
+			.containsExactly(Number.of("3"),
+				Number.of("4"),
+				Number.of("5"),
+				Number.of("6"),
+				Number.of("7"),
+				Number.of("8"));
+	}
 }

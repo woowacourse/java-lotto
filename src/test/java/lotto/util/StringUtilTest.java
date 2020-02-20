@@ -16,6 +16,6 @@ public class StringUtilTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"6,8,10"})
 	void shouldGetDataBit(String value) {
-		assertThat(StringUtil.parseByComma(value)).contains("6");
+		assertThat(StringUtil.parseToNumbers(value)).contains("6");
 	}
 }

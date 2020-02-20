@@ -29,7 +29,7 @@ public class LottoFactory {
 	 */
 	public static Lotto create(String winningNumbers) {
 		List<String> numbers
-			= StringUtil.parseByComma(StringUtil.removeBlank(winningNumbers));
+			= StringUtil.parseToNumbers(StringUtil.removeBlank(winningNumbers));
 		List<Number> lotto = numbers.stream()
 			.map(Number::of)
 			.collect(Collectors.toList());
