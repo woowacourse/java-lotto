@@ -12,8 +12,8 @@ public enum LottoResult {
 	public static final String ERROR_MESSAGE_NOT_FOUND_RANK = "당첨되지 않았습니다.";
 
 	private int ticketCount;
-	private long reward;
-	private int hitCount;
+	private final long reward;
+	private final int hitCount;
 
 	LottoResult(int ticketCount, long reward, int hitCount) {
 		this.ticketCount = ticketCount;

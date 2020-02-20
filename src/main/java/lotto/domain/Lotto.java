@@ -1,16 +1,17 @@
 package lotto.domain;
 
+import lotto.validator.Validator;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import lotto.validator.Validator;
-
 public class Lotto {
-	protected List<LottoNo> lottoNumbers;
+	protected final List<LottoNo> lottoNumbers;
 
 	public Lotto(List<LottoNo> lottoNumbers) {
 		Validator.validateLottoSize(lottoNumbers);
-		this.lottoNumbers = lottoNumbers;
+		this.lottoNumbers = new ArrayList<>(lottoNumbers);
 	}
 
 	protected boolean isContain(LottoNo lottoNo) {

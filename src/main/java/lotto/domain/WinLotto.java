@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.utils.StringUtils;
 
 public class WinLotto extends Lotto {
-    private BonusBall bonusBall;
+    private final BonusBall bonusBall;
 
     public WinLotto(String winLotto, String bonusBall) {
         super(StringUtils.toLottoNoList(winLotto));

@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.validator.Validator;
 
 public class BonusBall {
-	private LottoNo bonusBall;
+	private final LottoNo bonusBall;
 
 	public BonusBall(String bonusBall) {
 		Validator.validateInteger(bonusBall);
