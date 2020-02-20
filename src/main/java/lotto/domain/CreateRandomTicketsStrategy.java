@@ -15,8 +15,9 @@ public class CreateRandomTicketsStrategy implements CreateNumbersStrategy {
 	}
 
 	private void createLottoTicket(List<LottoTicket> lottoTickets) {
+		final List<LottoNumber> randomNumbers = LottoNumberRepository.shuffledLottoNumbers();
 		lottoTickets.add(new LottoTicket(
-			LottoNumberRepository.shuffledLottoNumbers().stream()
+			randomNumbers.stream()
 				.limit(LOTTO_NUMBER_SIZE)
 				.collect(Collectors.toList())
 		));

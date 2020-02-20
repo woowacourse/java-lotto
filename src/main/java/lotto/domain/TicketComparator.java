@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class TicketComparator {
 	public static int getMatchCount(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
 		return (int)lottoTicket.stream()
@@ -8,7 +10,8 @@ public class TicketComparator {
 	}
 
 	private static boolean isMatch(final WinningNumbers winningNumbers, final LottoNumber lottoNumber) {
-		return winningNumbers.getOrdinaries().contains(lottoNumber);
+		final List<LottoNumber> ordinaries = winningNumbers.getOrdinaries();
+		return ordinaries.contains(lottoNumber);
 	}
 
 	public static boolean isBonusNotMatch(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
