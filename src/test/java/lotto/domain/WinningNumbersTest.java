@@ -17,7 +17,6 @@ public class WinningNumbersTest {
                 .hasMessage("당첨 번호를 입력하지 않으셨습니다.");
     }
 
-
     @DisplayName("구분자를 입력하지 않았을 때 예외가 발생하는지 확인")
     @ParameterizedTest
     @ValueSource(strings = {"1-2-3", "123", "1 2 3", "1과 2 그리고 3"})

@@ -30,7 +30,7 @@ public class LottoResultTest {
         expectedMatchResults.put(MatchResult.THREE_MATCH, 1);
         expectedMatchResults.put(MatchResult.FOUR_MATCH, 1);
         expectedMatchResults.put(MatchResult.FIVE_MATCH, 1);
-        expectedMatchResults.put(MatchResult.FIVE_MATCH_WITH_BONUSBALL, 1);
+        expectedMatchResults.put(MatchResult.FIVE_MATCH_WITH_BONUS_BALL, 1);
         expectedMatchResults.put(MatchResult.SIX_MATCH, 1);
     }
 
@@ -38,7 +38,7 @@ public class LottoResultTest {
     @Test
     void findMatchResultTest() {
         assertThat(lottos.get(0).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.SIX_MATCH);
-        assertThat(lottos.get(1).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.FIVE_MATCH_WITH_BONUSBALL);
+        assertThat(lottos.get(1).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.FIVE_MATCH_WITH_BONUS_BALL);
         assertThat(lottos.get(2).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.FIVE_MATCH);
         assertThat(lottos.get(3).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.FOUR_MATCH);
         assertThat(lottos.get(4).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.THREE_MATCH);
