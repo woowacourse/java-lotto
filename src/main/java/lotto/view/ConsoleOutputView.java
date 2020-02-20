@@ -31,4 +31,9 @@ public class ConsoleOutputView {
 	private static String wrapSquareBracket(String lottoNumber) {
 		return "[" + lottoNumber + "]";
 	}
+
+	public static void printStatisticsMessage() {
+		System.out.println("당첨 통계");
+		System.out.println("---------");
+	}
 }

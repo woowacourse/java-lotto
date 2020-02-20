@@ -24,7 +24,7 @@ public class ConsoleUILottoApplication {
 		ConsoleOutputView.printPurchasedLotto(lottos);
 
 		WinningLotto winningLotto = receiveWinningLotto();
-
+		ConsoleOutputView.printStatisticsMessage();
 	}
 
 	private static WinningLotto receiveWinningLotto() {
