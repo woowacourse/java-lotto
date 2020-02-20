@@ -47,12 +47,12 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printResult(Map<LottoResult, Integer> result) {
+    public static void printResult(Map<LottoRank, Integer> result) {
         System.out.println("당첨 통계" + NEW_LINE + "------------");
 
-        List<LottoResult> keys = Arrays.asList(LottoResult.values());
+        List<LottoRank> keys = Arrays.asList(LottoRank.values());
         Collections.reverse(keys);
-        for (LottoResult rank : keys){
+        for (LottoRank rank : keys){
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(rank.getResultMessage())
                         .append(result.get(rank))

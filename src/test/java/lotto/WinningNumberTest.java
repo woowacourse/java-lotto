@@ -2,7 +2,7 @@ package lotto;
 
 import domain.Lotto;
 import domain.LottoNumber;
-import domain.LottoResult;
+import domain.LottoRank;
 import domain.WinningNumber;
 import org.junit.jupiter.api.Test;
 
@@ -83,7 +83,8 @@ public class WinningNumberTest {
         myLotto.add(new LottoNumber(7));
         Lotto myLottoNumbers = new Lotto(myLotto);
 
-        LottoResult result = winningNumber.findRank(myLottoNumbers);
-        assertThat(result).isEqualTo(LottoResult.FIFTH);
+        LottoRank result = LottoRank.findRank(winningNumber.countWinningMatch(myLottoNumbers),
+                                            winningNumber.isBonusMatch(myLottoNumbers));
+        assertThat(result).isEqualTo(LottoRank.FIFTH);
     }
 }

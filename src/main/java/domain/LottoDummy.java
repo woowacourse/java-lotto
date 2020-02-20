@@ -14,14 +14,15 @@ public class LottoDummy {
         }
     }
 
-    public void countWinningLottoRank(WinningNumber winningNumber, Map<LottoResult, Integer> result) {
+    public void countWinningLottoRank(WinningNumber winningNumber, Map<LottoRank, Integer> result) {
         for (Lotto lotto : lottoDummy){
-            LottoResult rank = winningNumber.findRank(lotto);
+            LottoRank rank = LottoRank.findRank(winningNumber.countWinningMatch(lotto),
+                                            winningNumber.isBonusMatch(lotto));
             countNotNullRank(result, rank);
         }
     }
 
-    private void countNotNullRank(Map<LottoResult, Integer> result, LottoResult rank) {
+    private void countNotNullRank(Map<LottoRank, Integer> result, LottoRank rank) {
         if (rank != null){
             result.put(rank, result.get(rank) + 1);
         }

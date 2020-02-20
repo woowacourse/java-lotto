@@ -7,12 +7,12 @@ import view.OutputView;
 import java.util.*;
 
 public class LottoGame {
-    private static Map<LottoResult, Integer> result = new HashMap<LottoResult, Integer>(){{
-        put(LottoResult.FIRST, 0);
-        put(LottoResult.SECOND, 0);
-        put(LottoResult.THIRD, 0);
-        put(LottoResult.FOURTH, 0);
-        put(LottoResult.FIFTH, 0);
+    private static Map<LottoRank, Integer> result = new HashMap<LottoRank, Integer>(){{
+        put(LottoRank.FIRST, 0);
+        put(LottoRank.SECOND, 0);
+        put(LottoRank.THIRD, 0);
+        put(LottoRank.FOURTH, 0);
+        put(LottoRank.FIFTH, 0);
     }};
 
     public static void main(String[] args) {

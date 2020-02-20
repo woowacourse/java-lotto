@@ -1,6 +1,6 @@
 package lotto;
 
-import domain.LottoResult;
+import domain.LottoRank;
 import domain.Profit;
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +13,12 @@ public class ProfitTest {
 
     @Test
     void 총_수익_계산_테스트() {
-        Map<LottoResult, Integer> result = new HashMap<LottoResult, Integer>(){{
-            put(LottoResult.FIRST, 0);
-            put(LottoResult.SECOND, 0);
-            put(LottoResult.THIRD, 1);
-            put(LottoResult.FOURTH, 1);
-            put(LottoResult.FIFTH, 2);
+        Map<LottoRank, Integer> result = new HashMap<LottoRank, Integer>(){{
+            put(LottoRank.FIRST, 0);
+            put(LottoRank.SECOND, 0);
+            put(LottoRank.THIRD, 1);
+            put(LottoRank.FOURTH, 1);
+            put(LottoRank.FIFTH, 2);
         }};
 
         Profit profit = new Profit();

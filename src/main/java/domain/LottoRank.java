@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Arrays;
 
-public enum LottoResult {
+public enum LottoRank {
     FIRST(6, false, 2_000_000_000, "6개 일치(2000000000원) - "),
     SECOND(5, true, 30_000_000, "5개 일치, 보너스볼 일치(30000000원) - "),
     THIRD(5, false, 1_500_000, "5개 일치(1500000원) - "),
@@ -14,21 +14,21 @@ public enum LottoResult {
     private int winningMoney;
     private String resultMessage;
 
-    LottoResult (int winningMatchCount, boolean isBonusMatch, int winningMoney, String resultMessage){
+    LottoRank(int winningMatchCount, boolean isBonusMatch, int winningMoney, String resultMessage){
         this.winningMatchCount = winningMatchCount;
         this.isBonusMatch = isBonusMatch;
         this.winningMoney = winningMoney;
         this.resultMessage = resultMessage;
     }
 
-    public static LottoResult findResult(int winningMatchCount, boolean bonusMatchCount) {
+    public static LottoRank findRank(int winningMatchCount, boolean bonusMatchCount) {
         if (winningMatchCount < 5) {
-            return Arrays.stream(LottoResult.values())
+            return Arrays.stream(LottoRank.values())
                     .filter(result -> result.winningMatchCount == winningMatchCount)
                     .findFirst()
                     .orElse(null);
         }
-        return Arrays.stream(LottoResult.values())
+        return Arrays.stream(LottoRank.values())
                 .filter(result -> result.winningMatchCount == winningMatchCount)
                 .filter(result -> result.isBonusMatch == bonusMatchCount)
                 .findFirst()
