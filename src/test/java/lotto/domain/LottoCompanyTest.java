@@ -4,6 +4,7 @@ import lotto.domain.result.win.WinningLotto;
 import lotto.domain.ticket.LottoCompany;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoFactory;
+import lotto.view.dto.WinningLottoRequestDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,8 +24,10 @@ class LottoCompanyTest {
         LottoBall bonusBall = LottoFactory.findLottoBallByNumber(7);
         WinningLotto expectedLotto = new WinningLotto(lottoBalls, bonusBall);
 
+        WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO("1,2,3,4,5,6", 7);
+
         //when
-        WinningLotto winningLotto = LottoCompany.makeWinningLotto(7, 1, 2, 3, 4, 5, 6);
+        WinningLotto winningLotto = LottoCompany.makeWinningLotto(winningLottoRequestDTO);
 
         //then
         assertThat(winningLotto).isEqualTo(expectedLotto);
