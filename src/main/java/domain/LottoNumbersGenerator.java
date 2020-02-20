@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumbers {
+public class LottoNumbersGenerator {
     private static List<Integer> lottoNumbers;
 
     static {

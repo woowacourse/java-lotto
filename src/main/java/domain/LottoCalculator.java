@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoCalculator {
-    private static double getTotalWinningPrice(HashMap<String, Integer> map) {
+    public static double getTotalWinningPrice(HashMap<String, Integer> map) {
         double sum = 0;
         for (Map.Entry<String, Integer> entry: map.entrySet()) {
             sum += LottoType.valueOf(entry.getKey()).calculate(entry.getValue());

@@ -1,4 +1,4 @@
-package domain.view;
+package view;
 
 import java.util.Scanner;
 

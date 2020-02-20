@@ -15,11 +15,10 @@ public class LottoCalculatorTest {
     @CsvSource(value = {"MATCH_THREE,1,5000", "MATCH_FOUR,2,100000", "MATCH_FIVE,3,4500000"})
     void 총합계를_계산하는_메서드(String winningStr, int winningCount, int expected) {
         HashMap<String, Integer> map = new HashMap<>();
-        LottoCalculator lottoCalculator = new LottoCalculator();
 
         map.put(winningStr, winningCount);
 
-        Assertions.assertThat(lottoCalculator.getTotalWinningPrice(map)).isEqualTo(expected);
+        Assertions.assertThat(LottoCalculator.getTotalWinningPrice(map)).isEqualTo(expected);
     }
 
     @DisplayName("수익률을 리턴해주는 메서드 테스트")
@@ -27,11 +26,10 @@ public class LottoCalculatorTest {
     @CsvSource(value = {"MATCH_THREE,1,1000,500", "MATCH_FOUR,2,1000,10000", "MATCH_FIVE,3,4500,100000"})
     void 수익률_계산_메서드(String winningStr, int winningCount, int money, int expected) {
         HashMap<String, Integer> map = new HashMap<>();
-        LottoCalculator lottoCalculator = new LottoCalculator();
 
         map.put(winningStr, winningCount);
 
-        Assertions.assertThat(lottoCalculator.getProfit(map, money)).isEqualTo(expected);
+        Assertions.assertThat(LottoCalculator.getProfit(map, money)).isEqualTo(expected);
     }
 
 

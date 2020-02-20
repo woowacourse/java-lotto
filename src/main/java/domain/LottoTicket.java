@@ -47,7 +47,7 @@ public class LottoTicket {
     public int getCorrectCount(List<Integer> winningTicket) {
         int correctCount = 0;
         for (int i = 0; i < lottoTicket.size(); i++) {
-            if (lottoTicket.get(i) == winningTicket.get(i)) {
+            if (winningTicket.contains(lottoTicket.get(i))) {
                 correctCount++;
             }
         }

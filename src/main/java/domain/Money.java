@@ -13,6 +13,10 @@ public class Money {
         this.money = money;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     private void validateNullOrEmpty(String input) {
         if (StringUtils.isBlank(input)) {
             throw new IllegalArgumentException("input 값이 Null이거나 공백입니다.");

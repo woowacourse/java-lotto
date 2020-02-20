@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -34,7 +35,7 @@ public class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(lottoTicket)));
         LottoResults lottoResults = lottoTickets.match(winningLottoTicket);
 
-//        Assertions.assertThat(lottoResults.size()).isEqualTo(1);
+//        Assertions.assertThat(lottoResults.getCountSameLottoNumber()).isEqualTo(1);
 
     }
 
