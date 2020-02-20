@@ -1,6 +1,9 @@
 package lotto.view;
 
+import lotto.view.dto.LottoTicketResponseDTO;
 import lotto.view.dto.StatisticsResponseDTO;
+
+import java.util.List;
 
 public class OutputView {
     private static final String MESSAGE_FOR_BONUS_CASE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
@@ -8,6 +11,13 @@ public class OutputView {
     private static final String SECOND = "SECOND";
     private static final String RATE_MESSAGE = "총 수익률은 %s입니다.";
     private static final String RESULT_HEADER = "당첨 통계\n-----------";
+    private static final String LOTTO_NUMBERS_FORMAT = "[ %d %d %d %d %d %d ]";
+
+    public static void printBuyTickets(List<LottoTicketResponseDTO> lottoTicketResponseDTOs) {
+        for (LottoTicketResponseDTO lottoTicketResponseDTO : lottoTicketResponseDTOs) {
+            System.out.println(String.format(LOTTO_NUMBERS_FORMAT, lottoTicketResponseDTO.getNumbers()));
+        }
+    }
 
     public static void printResult(StatisticsResponseDTO statisticsResponseDTO) {
         System.out.println(RESULT_HEADER);
@@ -35,5 +45,4 @@ public class OutputView {
     private static boolean isSecond(String name) {
         return SECOND.equals(name);
     }
-
 }
