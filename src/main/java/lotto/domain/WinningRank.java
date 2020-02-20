@@ -7,7 +7,7 @@ public enum WinningRank {
     ,SECOND_RANK(30_000_000,5)
     , THIRD_RANK(1_500_000,5)
     , FOURTH_RANK(50_000,4)
-    , FIFTH_RANK(5_000,3),
+    , FIFTH_RANK(5_000,3)
     ,NO_RANK(0,0);
 
     private final int winningMoney;

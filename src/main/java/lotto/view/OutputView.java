@@ -40,4 +40,11 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
+    public static void printWinningResult(WinningRank winningRank, int count) {
+        System.out.println(winningRank.getWinningBallCount() + "개 일치 (" + winningRank.getWinningMoney() + "원) - " + count + "개");
+    }
+
+    public static void printEarningRate(EarningRate earningRate) {
+        System.out.println("총 수익률은 " + earningRate.getEarningRate() + "% 입니다.");
+    }
 }

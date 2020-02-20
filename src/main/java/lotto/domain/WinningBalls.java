@@ -19,8 +19,7 @@ public class WinningBalls {
                 .count();
     }
 
-    public boolean hitBonus(LottoTicket lottoTicket) {
+    public boolean hitBonusBall(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket().contains(hitBonusBall);
     }
-
 }

@@ -28,4 +28,8 @@ public class PurchaseAmount {
             throw new NotBuyLottoTicketException("한개도 구매할 수 없습니다." + this.purchaseAmount + "원을 반환합니다.");
         }
     }
+
+    public long getPurchaseAmount() {
+        return purchaseAmount;
+    }
 }

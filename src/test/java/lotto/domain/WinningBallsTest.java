@@ -30,6 +30,6 @@ public class WinningBallsTest {
         List<LottoBall> lottoTicketValues = Arrays.stream(value2).mapToObj(LottoBall::new).collect(Collectors.toList());
         WinningBalls winningBalls = new WinningBalls(winningBallValues, bonusBall);
 
-        Assertions.assertThat(winningBalls.hitBonus(new LottoTicket(lottoTicketValues))).isTrue();
+        Assertions.assertThat(winningBalls.hitBonusBall(new LottoTicket(lottoTicketValues))).isTrue();
     }
 }
