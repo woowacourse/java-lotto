@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.InvalidLottoPurchaseMoneyException;
+
 public class LottoPurchaseMoney {
 	private static final int LOTTO_PRICE = 1000;
 
@@ -12,10 +14,10 @@ public class LottoPurchaseMoney {
 
 	private void validate(String lottoPurchaseMoney) {
 		if (isNotNumber(lottoPurchaseMoney)) {
-			throw new IllegalArgumentException("숫자가 아닌 값을 입력하면 안됩니다.");
+			throw new NumberFormatException("숫자가 아닌 값을 입력하면 안됩니다.");
 		}
 		if (canNotBought(lottoPurchaseMoney)) {
-			throw new IllegalArgumentException("로또를 구입하기에 충분하지 않은 값입니다.");
+			throw new InvalidLottoPurchaseMoneyException("로또 한 장의 가격 1000원 보다 적습니다.");
 		}
 	}
 
