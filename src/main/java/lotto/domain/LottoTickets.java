@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
     private static final int BONUS_CONDITION = 5;
+    private static final String DELIMITER = "\n";
     private List<LottoTicket> lottoTickets;
 
     LottoTickets(List<LottoTicket> lottoTickets) {
@@ -52,6 +53,6 @@ public class LottoTickets {
     public String toString() {
         return lottoTickets.stream()
             .map(LottoTicket::toString)
-            .collect(Collectors.joining("\n"));
+            .collect(Collectors.joining(DELIMITER));
     }
 }

@@ -12,9 +12,12 @@ import lotto.exceptions.InvalidLottoTicketException;
 
 public class LottoTicket {
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final String DELIMITER = ", ";
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
     private final List<LottoNumber> lottoTicket;
 
-    public LottoTicket(final List<LottoNumber> lottoTicket) {
+    private LottoTicket(final List<LottoNumber> lottoTicket) {
         validate(lottoTicket);
         this.lottoTicket = Collections.unmodifiableList(lottoTicket);
     }
@@ -29,16 +32,23 @@ public class LottoTicket {
     }
 
     private void validate(List<LottoNumber> lottoTicket) {
-        if (lottoTicket.size() != LOTTO_NUMBER_COUNT) {
-            throw new InvalidLottoTicketException();
-        }
-        if (lottoTicket.size() != lottoTicket.stream().distinct().count()) {
-            throw new InvalidLottoTicketException();
-        }
-
+        validateLottoSize(lottoTicket);
+        validateDuplicate(lottoTicket);
     }
 
-    public static LottoTicket create() {
+    private void validateDuplicate(List<LottoNumber> lottoTicket) {
+        if (lottoTicket.size() != lottoTicket.stream().distinct().count()) {
+            throw new InvalidLottoTicketException("유효하지 않은 당첨 번호 값입니다.");
+        }
+    }
+
+    private void validateLottoSize(List<LottoNumber> lottoTicket) {
+        if (lottoTicket.size() != LOTTO_NUMBER_COUNT) {
+            throw new InvalidLottoTicketException("유효하지 않은 당첨 번호 값입니다.");
+        }
+    }
+
+    static LottoTicket create() {
         List<LottoNumber> numbers = Arrays.asList(LottoNumber.values());
         List<LottoNumber> randomNumbers = new ArrayList<>();
         Collections.shuffle(numbers);
@@ -54,14 +64,14 @@ public class LottoTicket {
         }
     }
 
-    public int compare(LottoTicket other) {
+    int compare(LottoTicket other) {
         Set<LottoNumber> winnerSet = new HashSet<>(this.lottoTicket);
         Set<LottoNumber> otherSet = new HashSet<>(other.lottoTicket);
         winnerSet.retainAll(otherSet);
         return winnerSet.size();
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    boolean contains(LottoNumber lottoNumber) {
         return lottoTicket.contains(lottoNumber);
     }
 
@@ -71,6 +81,6 @@ public class LottoTicket {
             .map(LottoNumber::getValue)
             .sorted()
             .map(String::valueOf)
-            .collect(Collectors.joining(", ", "[", "]"));
+            .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
     }
 }
