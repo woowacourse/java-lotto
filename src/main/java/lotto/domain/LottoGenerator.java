@@ -1,15 +1,18 @@
 package lotto.domain;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoGenerator {
 	public static Lotto generate() {
-		return new Lotto(new Random().ints(LottoNumber.MIN_BOUND, LottoNumber.MAX_BOUND + 1)
-			.distinct()
+		List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.values());
+		Collections.shuffle(lottoNumbers);
+
+		return new Lotto(lottoNumbers.stream()
 			.limit(Lotto.CORRECT_SIZE)
 			.sorted()
-			.mapToObj(LottoNumber::valueOf)
 			.collect(Collectors.toList()));
 	}
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 import lotto.exception.InvalidLottoException;
 
@@ -20,13 +20,17 @@ public class LottoTest {
 		List<LottoNumber> lottoNumbers = Arrays.asList(
 			LottoNumber.valueOf(1),
 			LottoNumber.valueOf(2),
-			LottoNumber.valueOf(3));
+			LottoNumber.valueOf(3),
+			LottoNumber.valueOf(4),
+			LottoNumber.valueOf(5),
+			LottoNumber.valueOf(6)
+		);
 		assertThat(new Lotto(lottoNumbers)).isInstanceOf(Lotto.class);
 	}
 
 	@DisplayName("Lotto 생성자에 null 입력이 들어올 때 InvalidLottoException 발생")
 	@ParameterizedTest
-	@NullAndEmptySource
+	@NullSource
 	void validateNull_NullNumberList_ExceptionThrown(List<LottoNumber> lottoNumbers) {
 		assertThatThrownBy(() -> new Lotto(lottoNumbers))
 			.isInstanceOf(InvalidLottoException.class)
@@ -48,7 +52,11 @@ public class LottoTest {
 		List<LottoNumber> lottoNumbers = Arrays.asList(
 			LottoNumber.valueOf(1),
 			LottoNumber.valueOf(1),
-			LottoNumber.valueOf(3));
+			LottoNumber.valueOf(3),
+			LottoNumber.valueOf(4),
+			LottoNumber.valueOf(5),
+			LottoNumber.valueOf(6)
+		);
 		assertThatThrownBy(() -> new Lotto(lottoNumbers))
 			.isInstanceOf(InvalidLottoException.class)
 			.hasMessage(InvalidLottoException.DUPLICATION);
