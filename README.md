@@ -85,12 +85,12 @@
     - [x] WinningNumbers
         - [x] 상속받고 있고 (Lotto) : 로직이 같고, 로또와 의미를 구분하기 위함
         
-- Result
+- [x] Result
     - 인자 : WinningLotto, Lottos
     - 기능
-        - 맞힌 갯수별로 장수 + 수익금 계산
-        - 수익률
-        - OutputView 보내기         
+        - [x] 맞힌 갯수별로 장수 + 수익금 계산
+        - [x] 수익률
+        - [x] OutputView 보내기         
         
 ### 프로그래밍 요구사항
 

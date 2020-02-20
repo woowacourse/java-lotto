@@ -3,12 +3,11 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 
 import lotto.exception.InvalidLottoException;
 
-public class Lotto implements Iterable<Number> {
+public class Lotto {
 	private final List<Number> numbers;
 
 	public Lotto(List<Number> numbers) {
@@ -34,20 +33,10 @@ public class Lotto implements Iterable<Number> {
 		}
 	}
 
-	public Iterator<Number> iterator() {
-		return numbers.iterator();
-	}
-
 	public int compare(Lotto winningNumbers) {
-		Iterator<Number> lottoIterator = iterator();
-		int matchingNumber = 0;
-		while (lottoIterator.hasNext()) {
-			Number number = lottoIterator.next();
-			if (winningNumbers.contains(number)) {
-				matchingNumber++;
-			}
-		}
-		return matchingNumber;
+		return (int)numbers.stream()
+			.filter(winningNumbers::contains)
+			.count();
 	}
 
 	public boolean contains(Number number) {
@@ -57,5 +46,4 @@ public class Lotto implements Iterable<Number> {
 	public List<Number> getNumbers() {
 		return Collections.unmodifiableList(numbers);
 	}
-
 }

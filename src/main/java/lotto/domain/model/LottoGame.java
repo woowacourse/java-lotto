@@ -37,7 +37,6 @@ public class LottoGame {
 			Statistic statistic = winningLotto.isWinningLotto(lotto);
 			statistic.count();
 		} catch (Exception e) {
-			throw new InvalidRankException("당첨되지 않은 번호입니다.");
 		}
 	}
 

@@ -5,12 +5,10 @@ import java.util.Objects;
 import lotto.exception.IllegalMoneyUnitException;
 
 public class PurchaseMoney {
-	public static final int MONEY_UNIT = 1000;
-	public static final int ZERO = 0;
-	public static final int MIN = 1000;
-	public static final int LOWER_BOUND = MIN;
-	public static final int UPPER_BOUND = 100000;
 	public static final int LOTTO_PIECE_PRICE = 1000;
+	public static final int MIN = 1000;
+	public static final int MAX = 100000;
+	public static final int ZERO = 0;
 
 	private int purchaseMoney;
 
@@ -36,7 +34,7 @@ public class PurchaseMoney {
 	}
 
 	private void checkMoneyRange(int money) {
-		if (money > UPPER_BOUND || money < LOWER_BOUND) {
+		if (money > MAX || money < MIN) {
 			throw new IllegalArgumentException("로또는 1000원에서 100,000원 까지만 구입 할 수 있습니다.");
 		}
 	}
@@ -48,7 +46,7 @@ public class PurchaseMoney {
 	}
 
 	private void checkMoneyUnit(int purchaseMoney) {
-		if (purchaseMoney % MONEY_UNIT != ZERO) {
+		if (purchaseMoney % LOTTO_PIECE_PRICE != ZERO) {
 			throw new IllegalMoneyUnitException("구입금액은 1000원단위로만 가능합니다.");
 		}
 	}

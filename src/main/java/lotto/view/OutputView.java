@@ -44,14 +44,6 @@ public class OutputView {
 		System.out.println(sb.toString());
 	}
 
-	private static boolean checkBonus(Statistic statistic) {
-		if (Statistic.BONUS == statistic) {
-			printSecond(statistic);
-			return true;
-		}
-		return false;
-	}
-
 	private static void printSecond(Statistic statistic) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(statistic.getMatchingNumbers())
@@ -61,6 +53,14 @@ public class OutputView {
 			.append(statistic.getCount())
 			.append("개");
 		System.out.println(sb.toString());
+	}
+
+	private static boolean checkBonus(Statistic statistic) {
+		if (Statistic.BONUS == statistic) {
+			printSecond(statistic);
+			return true;
+		}
+		return false;
 	}
 
 	private static void printProfit(double profit) {

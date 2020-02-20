@@ -1,9 +1,6 @@
 package lotto.exception;
 
-public class InvalidWinningLottoException extends RuntimeException{
-	public InvalidWinningLottoException() {
-	}
-
+public class InvalidWinningLottoException extends RuntimeException {
 	public InvalidWinningLottoException(String message) {
 		super(message);
 	}

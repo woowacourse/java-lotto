@@ -2,11 +2,10 @@ package lotto.domain.result;
 
 import java.util.Arrays;
 
-
 public enum Statistic {
 	THREE(3, 5000),
 	FOUR(4, 50000),
-	FIVE(5, 150000),
+	FIVE(5, 1500000),
 	BONUS(5, 3000000),
 	SIX(6, 2000000000);
 

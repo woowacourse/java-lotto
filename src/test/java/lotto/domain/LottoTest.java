@@ -5,19 +5,12 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.exception.InvalidLottoException;
 
 public class LottoTest {
-
-	@BeforeEach
-	void init() {
-		System.out.println("핀 뻑유");
-	}
-
 	@Test
 	@DisplayName("정상작동 : 로또 하나의 사이즈 6")
 	void size() {
@@ -66,6 +59,7 @@ public class LottoTest {
 	}
 
 	@Test
+	@DisplayName("로또 두개를 비교하여 같은 수의 개수를 반환하는 ")
 	void win() {
 		List<Number> numbers = Arrays.asList(
 			Number.of("3"),
@@ -87,6 +81,7 @@ public class LottoTest {
 	}
 
 	@Test
+	@DisplayName("contains에 인자로 들어온 값이 있는지를 잘 반환")
 	void bonus() {
 		List<Number> numbers = Arrays.asList(
 			Number.of("3"),
@@ -99,7 +94,5 @@ public class LottoTest {
 		assertThat(
 			new Lotto(numbers).contains(Number.of("3"))
 		).isTrue();
-
 	}
-
 }
