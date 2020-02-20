@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
 public class StatisticsResponseDTO {
+    private static final String RATE_PERCENT = "%";
     private final List<PrizeResponseDTO> prizeResponseDTOS;
 
     public StatisticsResponseDTO(List<PrizeGroup> prizeResults) {
@@ -17,10 +18,10 @@ public class StatisticsResponseDTO {
                 .collect(Collectors.toList());
     }
 
-    public double getRate() {
+    public String getRate() {
         double bettingMoney = getBettingMoney();
         double totalPrize = getPrize();
-        return totalPrize / bettingMoney;
+        return (totalPrize / bettingMoney * 100) + RATE_PERCENT;
     }
 
     private int getBettingMoney() {

@@ -18,11 +18,11 @@ class StatisticsResponseDTOTest {
     void getPrizeCount() {
         //given
         List<PrizeGroup> prizeGroups = Arrays.asList(FIFTH, FIFTH, FIFTH, FIFTH, FIFTH, FIFTH, SIXTH, SIXTH, SIXTH, SIXTH);
-        double expect = 3.0D;
+        String expect = "300.0%";
 
         //when
         StatisticsResponseDTO statisticsResponseDTO = new StatisticsResponseDTO(prizeGroups);
-        double result = statisticsResponseDTO.getRate();
+        String result = statisticsResponseDTO.getRate();
 
         //then
         assertThat(result).isEqualTo(expect);

@@ -60,9 +60,9 @@ class LottoServiceTest {
     void getStatisticsDTO() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        String winningNumber = "1,2,3,4,5,6";
+        String winningNumber = "12,22,33,4,5,6";
         int bonusNumber = 7;
-        double rate = 2000000;
+        String rate = "500.0%";
 
         LottoTicketBundle lottoTicketBundle = new LottoTicketBundle(Collections.singletonList(new LottoTicket(lottoNumbers)));
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO(winningNumber, bonusNumber);
@@ -74,10 +74,10 @@ class LottoServiceTest {
         assertAll(
                 "통계 생성시 전체 사이즈는 6으로 고정",
                 () -> assertThat(statisticsDTO.size()).isEqualTo(6),
-                () -> assertThat(statisticsDTO.getDefaultPrize(0)).isEqualTo(2000000000),
-                () -> assertThat(statisticsDTO.getMatchCount(0)).isEqualTo(6),
-                () -> assertThat(statisticsDTO.getMatchTicketCount(0)).isEqualTo(1),
-                () -> assertThat(statisticsDTO.getName(0)).isEqualTo(PrizeGroup.FIRST.name()),
+                () -> assertThat(statisticsDTO.getDefaultPrize(4)).isEqualTo(5000),
+                () -> assertThat(statisticsDTO.getMatchCount(4)).isEqualTo(3),
+                () -> assertThat(statisticsDTO.getMatchTicketCount(4)).isEqualTo(1),
+                () -> assertThat(statisticsDTO.getName(4)).isEqualTo(PrizeGroup.FIFTH.name()),
                 () -> assertThat(statisticsDTO.getRate()).isEqualTo(rate)
         );
 

@@ -17,7 +17,7 @@ public class OutputView {
             String message = String.format(findMessage(statisticsResponseDTO.getName(i)), matchCount, defaultPrize, matchTicketCount);
             System.out.println(message);
         }
-        System.out.println(String.format("총 수익률은 %f입니다.", statisticsResponseDTO.getRate()));
+        System.out.println(String.format("총 수익률은 %s입니다.", statisticsResponseDTO.getRate()));
     }
 
     private static String findMessage(String name) {

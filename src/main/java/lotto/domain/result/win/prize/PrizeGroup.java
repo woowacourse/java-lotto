@@ -1,10 +1,8 @@
 package lotto.domain.result.win.prize;
 
 import lotto.domain.result.LottoResult;
-import lotto.view.dto.StatisticsResponseDTO;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum PrizeGroup {
     FIRST(6, 2_000_000_000),
@@ -36,10 +34,6 @@ public enum PrizeGroup {
 
     private boolean isThird(LottoResult lottoResult) {
         return this == SECOND && !lottoResult.isBonusMatch();
-    }
-
-    public static StatisticsResponseDTO toDtos(List<PrizeGroup> prizeGroups) {
-        return new StatisticsResponseDTO(prizeGroups);
     }
 
     public int getDefaultPrize() {
