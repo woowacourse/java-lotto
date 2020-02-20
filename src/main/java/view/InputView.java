@@ -8,9 +8,10 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    private InputView(){
+    private InputView() {
         throw new AssertionError();
     }
+
     public static int inputMoney() {
         OutputView.printMoneyFormat();
         try {
