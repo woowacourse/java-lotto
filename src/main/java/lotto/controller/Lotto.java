@@ -16,6 +16,7 @@ public class Lotto {
     public static final int WINNING_COUNT = 1;
 
     public static void lottoGame() {
+
         List<AutoNumber> autoNumbers = new ArrayList<>();
         HashMap<String, Integer> resultCount = new HashMap<>();
         Initializer.initialize(autoNumbers, resultCount);
@@ -23,6 +24,7 @@ public class Lotto {
             int count = isInWinNumber(autoNum);
             checkCountOverThree(resultCount, autoNum, count);
         }
+        OutputView.printResult();
         printCorrectResults(resultCount);
         OutputView.printYield(YieldMoney.countYieldMoney(Prize.sumPrize(resultCount)));
     }
@@ -57,7 +59,7 @@ public class Lotto {
         resultCount.put(correctCount, resultCount.get(correctCount) + WINNING_COUNT);
     }
 
-    private static void printCorrectResults(HashMap<String, Integer> resultCount) {
+    public static void printCorrectResults(HashMap<String, Integer> resultCount) {
         OutputView.printCorrectResult(resultCount.get(THREE), LottoResult.THREE.getCorrect(), LottoResult.THREE.getPrize());
         OutputView.printCorrectResult(resultCount.get(FOUR), LottoResult.FOUR.getCorrect(), LottoResult.FOUR.getPrize());
         OutputView.printCorrectResult(resultCount.get(FIVE), LottoResult.FIVE.getCorrect(), LottoResult.FIVE.getPrize());

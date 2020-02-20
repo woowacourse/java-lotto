@@ -14,7 +14,6 @@ public class AutoNumber {
         for (int i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
             autoNumber.add(LottoNumbers.getLottoNumbers().get(i));
         }
-        //autoNumber.sort(Comparator.naturalOrder());
         Collections.sort(autoNumber);
     }
 
