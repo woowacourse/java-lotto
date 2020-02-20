@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoManager {
-    public MoneyManager moneyManager;
+    public Money money;
     public Buyer buyer;
-    public WinningLotto winningLotto;
-    public WinningRankResult winningRankResult;
+    private WinningLotto winningLotto;
+    private LottoResult lottoResult;
 
     public LottoManager(int money) {
-        this.moneyManager = new MoneyManager(money);
-        this.buyer = new Buyer(moneyManager.purchase());
+        this.money = new Money(money);
+        this.buyer = new Buyer(this.money.calculateLottoTicketCount());
     }
 
     public void setWinningLotto(String numbers, int bonusNumber) {
@@ -22,12 +22,12 @@ public class LottoManager {
     }
 
     public Map<WinningValue, Integer> analyzeLotto() {
-        winningRankResult = new WinningRankResult();
-        winningRankResult.checkRank(buyer.getLottos(), winningLotto);
-        return winningRankResult.getWinningValueResult();
+        lottoResult = new LottoResult();
+        lottoResult.calculateLottoResult(buyer.getLottos(), winningLotto);
+        return lottoResult.getLottoResult();
     }
 
     public int analyzeRewardRate() {
-        return RewardRate.calculateRewardRate(moneyManager.getMoney(), winningRankResult.getWinningValueResult());
+        return lottoResult.calculateRewardRate(money.getMoney(), lottoResult.getLottoResult());
     }
 }

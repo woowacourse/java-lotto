@@ -11,7 +11,9 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RewardRateTest {
+public class LottoResultTest {
+
+
     static Stream<Arguments> generateLottos() {
         return Stream.of(
                 Arguments.of(Arrays.asList(
@@ -24,13 +26,28 @@ public class RewardRateTest {
     }
 
     @ParameterizedTest
+    @DisplayName("등수 계산")
+    @MethodSource("generateLottos")
+    void checkRankTest(List<Lotto> lottos) {
+        LottoResult lottoResult = new LottoResult();
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+
+        lottoResult.calculateLottoResult(lottos, winningLotto);
+
+        assertThat(lottoResult.getLottoResult().get(WinningValue.FIRST)).isEqualTo(1);
+        assertThat(lottoResult.getLottoResult().get(WinningValue.SECOND)).isEqualTo(1);
+        assertThat(lottoResult.getLottoResult().get(WinningValue.THIRD)).isEqualTo(1);
+        assertThat(lottoResult.getLottoResult().get(WinningValue.FORTH)).isEqualTo(0);
+    }
+
+    @ParameterizedTest
     @DisplayName("수익률 계산")
     @MethodSource("generateLottos")
     void calculateRewardRateTest(List<Lotto> lottos, WinningLotto winningLotto) {
-        WinningRankResult winningRankResult = new WinningRankResult();
-        winningRankResult.checkRank(lottos, winningLotto);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.calculateLottoResult(lottos, winningLotto);
 
-        assertThat(RewardRate.calculateRewardRate(25000, winningRankResult.getWinningValueResult()))
-                .isEqualTo(812);
+        assertThat(lottoResult.calculateRewardRate(25000, lottoResult.getLottoResult()))
+                .isEqualTo(8126000);
     }
 }

@@ -7,9 +7,12 @@ import lotto.view.OutputView;
 public class LottoMain {
     public static void main(String[] args) {
         LottoManager lottoManager = new LottoManager(InputView.inputMoney());
-        OutputView.printPurchaseCount(lottoManager.moneyManager.purchase());
+
+        OutputView.printPurchaseCount(lottoManager.money.calculateLottoTicketCount());
         OutputView.printLottoNumbers(lottoManager.buyer.getLottos());
+
         lottoManager.setWinningLotto(InputView.inputWinningLottoNumbers(), InputView.inputBonusNumber());
+
         OutputView.printLottoResults(lottoManager.analyzeLotto());
         OutputView.printRewardRate(lottoManager.analyzeRewardRate());
     }

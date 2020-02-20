@@ -4,30 +4,37 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputView {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final String MONEY_INPUT_MESSAGE = "구입금액을 입력해주세요.";
+    private static final String INPUT_ERROR_MESSAGE = "문자가 입력되었습니다. 숫자를 입력해주세요.";
+    private static final String WINNING_LOTTO_NUMBER_INPUT_MESSAGE = "당첨번호를 입력해주세요.";
+    private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 번호를 입력해주세요.";
+    private static final String SPACE = " ";
+    private static final String BLANK = "";
+
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int inputMoney() {
-        System.out.println("구입금액을 입력해주세요.");
+        System.out.println(MONEY_INPUT_MESSAGE);
         try {
-            return Integer.parseInt(scanner.nextLine());
+            return Integer.parseInt(SCANNER.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println("숫자를 입력해주세요.");
+            System.out.println(INPUT_ERROR_MESSAGE);
             return inputMoney();
         }
     }
 
     public static String inputWinningLottoNumbers() {
-        System.out.println("당첨번호를 입력해주세요.");
-        return scanner.nextLine()
-                .replace(" ", "");
+        System.out.println(WINNING_LOTTO_NUMBER_INPUT_MESSAGE);
+        return SCANNER.nextLine()
+                .replace(SPACE, BLANK);
     }
 
     public static int inputBonusNumber() {
-        System.out.println("보너스 번호를 입력해주세요.");
+        System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
         try {
-            return Integer.parseInt(scanner.nextLine());
+            return Integer.parseInt(SCANNER.nextLine());
         } catch (InputMismatchException e) {
-            System.out.println("숫자를 입력해주세요.");
+            System.out.println(INPUT_ERROR_MESSAGE);
             return inputBonusNumber();
         }
     }

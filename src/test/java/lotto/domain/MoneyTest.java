@@ -8,19 +8,19 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class MoneyManagerTest {
+public class MoneyTest {
     @ParameterizedTest
     @DisplayName("로또 구매 매수 계산")
     @CsvSource(value = {"1000,1", "2000,2", "3333,3"})
-    void purchaseTest(int money, int result) {
-        MoneyManager moneyManager = new MoneyManager(money);
-        assertThat(moneyManager.purchase()).isEqualTo(result);
+    void purchaseTest(int input, int result) {
+        Money money = new Money(input);
+        assertThat(money.calculateLottoTicketCount()).isEqualTo(result);
     }
 
     @DisplayName("금액 1000원 미만 예외처리 테스트")
     @Test
     void purchaseExceptionTest() {
-        assertThatThrownBy(() -> MoneyManager.purchaseException(999))
+        assertThatThrownBy(() -> Money.validateMoney(999))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
