@@ -1,5 +1,7 @@
-package lotto;
-
+import domain.Lotto;
+import domain.LottoFactory;
+import domain.Rank;
+import domain.WinningNumbers;
 import view.InputView;
 import view.OutputView;
 

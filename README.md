@@ -1,4 +1,4 @@
-# java-lotto
+# java-domain
 로또 미션 진행을 위한 저장소
 
 # 구현할 기능 목록
