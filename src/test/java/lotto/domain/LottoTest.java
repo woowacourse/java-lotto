@@ -21,20 +21,6 @@ public class LottoTest {
 			.hasMessageContaining("null이나 빈 값");
 	}
 
-	static Stream<Arguments> generateInput_잘못된_갯수() {
-		return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
-	}
-
-	static Stream<Arguments> generateInput_당첨번호() {
-		return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7, 6),    // 1등
-			Arguments.of(Arrays.asList(1, 3, 4, 5, 6, 7), 2, 5),
-			Arguments.of(Arrays.asList(1, 3, 4, 5, 6, 7), 14, 3),
-			Arguments.of(Arrays.asList(1, 4, 5, 6, 7, 8), 14, 4),
-			Arguments.of(Arrays.asList(1, 5, 6, 7, 8, 9), 14, 5),
-			Arguments.of(Arrays.asList(1, 6, 7, 8, 9, 10), 14, 0));            // 미당첨
-	}
-
 	@Test
 	void 중복_숫자() {
 		assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5)))
@@ -56,5 +42,19 @@ public class LottoTest {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 		assertThat(lotto.findLottoPrize(winningNumbers, bonusNumber)).isEqualTo(expectedPrize);
+	}
+
+	static Stream<Arguments> generateInput_잘못된_갯수() {
+		return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+	}
+
+	static Stream<Arguments> generateInput_당첨번호() {
+		return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7, 6),    // 1등
+			Arguments.of(Arrays.asList(1, 3, 4, 5, 6, 7), 2, 5),
+			Arguments.of(Arrays.asList(1, 3, 4, 5, 6, 7), 14, 3),
+			Arguments.of(Arrays.asList(1, 4, 5, 6, 7, 8), 14, 4),
+			Arguments.of(Arrays.asList(1, 5, 6, 7, 8, 9), 14, 5),
+			Arguments.of(Arrays.asList(1, 6, 7, 8, 9, 10), 14, 0));            // 미당첨
 	}
 }
