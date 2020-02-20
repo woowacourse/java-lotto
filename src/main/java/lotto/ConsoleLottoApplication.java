@@ -8,16 +8,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleLottoApplication {
-    private static RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-
     public static void main(String[] args) {
-        PurchaseNumber purchaseNumber = InputView.inputPurchaseMoney();
-        OutputView.printPurchaseNumber(purchaseNumber);
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (int i = 0; i < purchaseNumber.getPurchaseNumber(); i++) {
-            List<LottoNumberGroup> randomNumbers = randomNumberGenerator.generateNumbers();
-            lottoNumbersList.add(new LottoNumbers(randomNumbers));
+        try {
+            lottoGame();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
-        AllLottoNumbers allLottoNumbers = new AllLottoNumbers(lottoNumbersList);
+    }
+
+    private static void lottoGame() {
+        PurchaseAmount purchaseAmount = InputView.inputPurchaseMoney();
+        OutputView.printPurchaseNumber(purchaseAmount);
+
+        PurchaseLottos purchaseLottos = makePurchaseLottos(purchaseAmount);
+        OutputView.printPurchaseLottoNumbers(purchaseLottos);
+
+        WinningRule winningNumbers = InputView.inputWinningNumbers();
+        winningNumbers.calculateWinningResult(purchaseLottos);
+
+        OutputView.printResult(purchaseAmount);
+    }
+
+    private static PurchaseLottos makePurchaseLottos(PurchaseAmount purchaseAmount) {
+        List<Lotto> purchaseLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < purchaseAmount.getPurchaseNumber(); i++) {
+            List<Integer> randomNumbers = RandomNumberGenerator.generateNumbers();
+            purchaseLottoNumbers.add(new Lotto(randomNumbers));
+        }
+        return new PurchaseLottos(purchaseLottoNumbers);
     }
 }
