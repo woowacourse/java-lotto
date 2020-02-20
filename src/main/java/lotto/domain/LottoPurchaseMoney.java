@@ -1,28 +1,39 @@
 package lotto.domain;
 
 public class LottoPurchaseMoney {
-	private static final int LOTTO_PURCHASE_UNIT = 1000;
-	private static final String INVALID_PURCHASE_MONEY_MESSAGE = "잘못된 구입 금액을 입력하셨습니다.";
+	private static final int LOTTO_PRICE = 1000;
 
 	private final int lottoPurchaseMoney;
 
-	public LottoPurchaseMoney(int lottoPurchaseMoney) {
+	public LottoPurchaseMoney(String lottoPurchaseMoney) {
 		validate(lottoPurchaseMoney);
-		this.lottoPurchaseMoney = lottoPurchaseMoney;
+		this.lottoPurchaseMoney = Integer.parseInt(lottoPurchaseMoney);
 	}
 
-	private void validate(int lottoPurchaseMoney) {
-		if (isUnitFit(lottoPurchaseMoney)) {
-			throw new IllegalArgumentException(INVALID_PURCHASE_MONEY_MESSAGE);
+	private void validate(String lottoPurchaseMoney) {
+		if (isNotNumber(lottoPurchaseMoney)) {
+			throw new IllegalArgumentException("숫자가 아닌 값을 입력하면 안됩니다.");
+		}
+		if (canNotBought(lottoPurchaseMoney)) {
+			throw new IllegalArgumentException("로또를 구입하기에 충분하지 않은 값입니다.");
 		}
 	}
 
-	private boolean isUnitFit(int lottoPurchaseMoney) {
-		return lottoPurchaseMoney % LOTTO_PURCHASE_UNIT != 0;
+	private boolean isNotNumber(String lottoPurchaseMoney) {
+		try {
+			Integer.parseInt(lottoPurchaseMoney);
+			return false;
+		} catch (NumberFormatException e) {
+			return true;
+		}
+	}
+
+	private boolean canNotBought(String lottoPurchaseMoney) {
+		return Integer.parseInt(lottoPurchaseMoney) < LOTTO_PRICE;
 	}
 
 	public int getBuyCount() {
-		return lottoPurchaseMoney / LOTTO_PURCHASE_UNIT;
+		return lottoPurchaseMoney / LOTTO_PRICE;
 	}
 
 	public int getValue() {
