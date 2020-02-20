@@ -5,7 +5,6 @@ import lotto.domain.*;
 import java.util.stream.Collectors;
 
 public class OutputView {
-
     public static void printErrorMessage(String errorMessage) {
         System.err.println(errorMessage);
     }
@@ -40,10 +39,32 @@ public class OutputView {
     }
 
     public static void printWinningResult(WinningRank winningRank, int count) {
-        System.out.println(winningRank.getWinningBallCount() + "개 일치 (" + winningRank.getWinningMoney() + "원) - " + count + "개");
+        StringBuilder stringBuilder = new StringBuilder();
+        printWinningResultGuide(winningRank);
+        stringBuilder.append(winningRank.getWinningBallCount())
+                .append("개 일치");
+        printBonusBall(winningRank, stringBuilder);
+        stringBuilder.append(" (")
+                .append(winningRank.getWinningMoney())
+                .append("원) - ")
+                .append(count)
+                .append("개");
+        System.out.println(stringBuilder);
+    }
+
+    private static void printBonusBall(WinningRank winningRank, StringBuilder stringBuilder) {
+        if (winningRank == WinningRank.SECOND_RANK) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+    }
+
+    private static void printWinningResultGuide(WinningRank winningRank) {
+        if (winningRank == WinningRank.FIRST_RANK) {
+            System.out.println("당첨 통계\n---------");
+        }
     }
 
     public static void printEarningRate(EarningRate earningRate) {
-        System.out.println("총 수익률은 " + earningRate.getEarningRate() + "% 입니다.");
+        System.out.println("\n총 수익률은 " + earningRate.getEarningRate() + "% 입니다.");
     }
 }

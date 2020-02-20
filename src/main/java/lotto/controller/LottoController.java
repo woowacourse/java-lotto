@@ -21,15 +21,11 @@ public class LottoController {
         OutputView.printEarningRate(new EarningRate(winningRanks, purchaseAmount));
     }
 
-    private WinningBalls generateWinningBalls() {
-        try {
-            List<LottoBall> winningBallsInput = InputView.InputWinningBalls();
-            int bonusBall = InputView.InputBonusBall();
-            return new WinningBalls(winningBallsInput, bonusBall);
-        } catch (RuntimeException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return generateWinningBalls();
-        }
+    private void startInputPurchaseAmount() {
+        OutputView.printStartGuide();
+        purchaseAmount = InputView.inputPurchaseAmount();
+        OutputView.printLottePieces(purchaseAmount.lottoTicket());
+        OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
     }
 
     private void generateLottoTickets() {
@@ -40,19 +36,23 @@ public class LottoController {
         OutputView.printLottoTicket();
     }
 
-    private void startInputPurchaseAmount() {
-        OutputView.printStartGuide();
-        purchaseAmount = InputView.inputPurchaseAmount();
-        OutputView.printLottePieces(purchaseAmount.lottoTicket());
-        OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
-    }
-
     private LottoTicket generateLottoTicket() {
         List<LottoBall> lottoTicket = new ArrayList<>();
         for (int i = 0; i < MAX_LOTTO_BALL_COUNT; i++) {
             lottoTicket.add(LottoBallFactory.getInstance().get(i));
         }
         return new LottoTicket(lottoTicket);
+    }
+
+    private WinningBalls generateWinningBalls() {
+        try {
+            List<LottoBall> winningBallsInput = InputView.InputWinningBalls();
+            int bonusBall = InputView.InputBonusBall();
+            return new WinningBalls(winningBallsInput, bonusBall);
+        } catch (RuntimeException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return generateWinningBalls();
+        }
     }
 
     private List<WinningRank> generateWinningRank(WinningBalls winningBalls) {
