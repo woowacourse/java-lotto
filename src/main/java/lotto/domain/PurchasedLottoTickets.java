@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class PurchasedLottoTickets {
 	private final List<SerialLottoNumber> purchasedLottoTickets;
@@ -26,5 +27,11 @@ public class PurchasedLottoTickets {
 	@Override
 	public int hashCode() {
 		return Objects.hash(purchasedLottoTickets);
+	}
+
+	public List<WinningType> findMatchingWinningTypesWith(WinningLottoNumbers winningLottoNumbers) {
+		return purchasedLottoTickets.stream()
+				.map(winningLottoNumbers::findMatchingWinningTypeWith)
+				.collect(Collectors.toUnmodifiableList());
 	}
 }
