@@ -58,4 +58,9 @@ public class SerialLottoNumber {
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
 	}
+
+	@Override
+	public String toString() {
+		return String.join(", ", lottoNumbers.toString());
+	}
 }
