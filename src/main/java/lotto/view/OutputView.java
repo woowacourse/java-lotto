@@ -2,49 +2,64 @@ package lotto.view;
 
 import java.util.Map;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoRank;
-import lotto.domain.Lottos;
-import lotto.domain.TotalResult;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+import lotto.domain.Money;
+import lotto.util.StringUtil;
 
 public class OutputView {
-
 	private static final String STATISTICS_MESSAGE = "\n당첨 통계\n---------";
-	private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
+	private static final String LOTTO_COUNT_MESSAGE = "%s개를 구매했습니다.\n";
+	private static final char LOTTO_NUMBER_OPENER = '[';
+	private static final char LOTTO_NUMBER_CLOSER = ']';
 	private static final String TOTAL_PROFIT_MESSAGE = "총 수익률은 %d%% 입니다.";
-	private static final String BONUS_BALL_MESSAGE = ", 보너스 볼 일치";
-	private static final String TOTAL_PRIZE_AND_COUNT_MESSAGE = " (%d원) - %d개\n";
-	private static final String MATCH_COUNT_MESSAGE = "%d개 일치";
 
 	private OutputView() {
 	}
 
 	public static void printLottoCount(LottoCount count) {
-		System.out.printf(LOTTO_COUNT_MESSAGE, count.getLottoCount());
+		System.out.printf(LOTTO_COUNT_MESSAGE, count);
 	}
 
-	public static void printLottos(Lottos lottos) {
-		for (Lotto lotto : lottos) {
-			System.out.println(lotto.getLotto());
+	public static void printLottos(LottoTickets lottoTickets) {
+		StringBuffer stringBuffer = new StringBuffer();
+		for (LottoTicket lottoTicket : lottoTickets) {
+			String lottoData = StringUtil.parseBalls(lottoTicket.getBalls());
+			stringBuffer.append(LOTTO_NUMBER_OPENER);
+			stringBuffer.append(lottoData);
+			stringBuffer.append(LOTTO_NUMBER_CLOSER);
+			stringBuffer.append(System.lineSeparator());
 		}
+		System.out.println(stringBuffer);
 	}
 
-	public static void printStatistics(TotalResult totalResult) {
+	public static void printStatistics(LottoResult lottoResult, Money money) {
+		printResultIntro();
+		printMatchingResult(lottoResult);
+		printProfitsResult(lottoResult, money);
+	}
+
+	private static void printResultIntro() {
 		System.out.println(STATISTICS_MESSAGE);
-		Map<LottoRank, Integer> lottoResult = totalResult.getLottoResult();
-		for (LottoRank lottoRank : lottoResult.keySet()) {
-			printStatisticsOneLine(lottoRank, lottoResult.get(lottoRank));
-		}
-		System.out.printf(TOTAL_PROFIT_MESSAGE, totalResult.getProfitRate());
 	}
 
-	private static void printStatisticsOneLine(LottoRank lottoRank, Integer count) {
-		System.out.printf(MATCH_COUNT_MESSAGE, lottoRank.getMatchCount());
-		if (lottoRank == LottoRank.SECOND) {
-			System.out.print(BONUS_BALL_MESSAGE);
+	private static void printMatchingResult(LottoResult lottoResult) {
+		Map<LottoRank, Long> result = lottoResult.getLottoResult();
+		for (LottoRank lottoRank : result.keySet()) {
+			printStatisticsOneLine(lottoRank, result.get(lottoRank));
 		}
-		System.out.printf(TOTAL_PRIZE_AND_COUNT_MESSAGE, lottoRank.getPrize(), count);
+	}
+
+	private static void printStatisticsOneLine(LottoRank lottoRank, Long count) {
+		String oneLineMatchingResult = StringUtil.parseLottoMatchingResult(lottoRank, count);
+		System.out.print(oneLineMatchingResult);
+	}
+
+	private static void printProfitsResult(LottoResult lottoResult, Money money) {
+		System.out.printf(TOTAL_PROFIT_MESSAGE, lottoResult.getProfitRate(money));
 	}
 
 	public static void printExceptionMessage(String message) {

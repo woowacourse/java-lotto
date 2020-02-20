@@ -1,56 +1,44 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
 	private static final String DUPLICATE_EXCEPTION_MESSAGE = "당첨 번호와 보너스 볼이 중복되었습니다.";
 
-	private final Lotto winningLotto;
+	private final LottoTicket winningLottoTicket;
 	private final Ball bonusBall;
 
-	public WinningLotto(Lotto winningLotto, Ball bonusBall) {
-		validateDuplication(winningLotto, bonusBall);
-		this.winningLotto = winningLotto;
+	public WinningLotto(LottoTicket winningLottoTicket, Ball bonusBall) {
+		validateDuplication(winningLottoTicket, bonusBall);
+		this.winningLottoTicket = winningLottoTicket;
 		this.bonusBall = bonusBall;
 	}
 
-	private void validateDuplication(Lotto winningLotto, Ball bonusBall) {
-		if (winningLotto.contains(bonusBall)) {
+	private void validateDuplication(LottoTicket winningLottoTicket, Ball bonusBall) {
+		if (winningLottoTicket.contains(bonusBall)) {
 			throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
 		}
 	}
 
-	public TotalResult getResult(Lottos lottos) {
-		Map<LottoRank, Integer> result = getInitialResult();
-		for (Lotto lotto : lottos) {
-			putLottoRankResult(result, lotto);
-		}
-		return new TotalResult(new LottoResult(result), lottos.getCount());
+	public LottoResult getResult(LottoTickets lottoTickets) {
+		Map<LottoRank, Long> result = initializeRankResult(lottoTickets);
+		putRankResultIfAbsent(result);
+		return new LottoResult(result);
 	}
 
-	private void putLottoRankResult(Map<LottoRank, Integer> result, Lotto lotto) {
-		int matchCount = lotto.countCommonBalls(winningLotto);
-		if (!LottoRank.isPrizeCount(matchCount)) {
-			return;
-		}
-		LottoRank rank = getLottoRank(lotto, matchCount);
-		result.put(rank, result.get(rank) + 1);
+	private Map<LottoRank, Long> initializeRankResult(LottoTickets lottoTickets) {
+		return lottoTickets.getLottoTickets().stream()
+			.filter(lotto -> LottoRank.isValidMatchCount(lotto.findMatchBallCount(winningLottoTicket)))
+			.map(lotto -> LottoRank.findRank(lotto.findMatchBallCount(winningLottoTicket), lotto.contains(bonusBall)))
+			.collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()));
 	}
 
-	private LottoRank getLottoRank(Lotto lotto, int matchCount) {
-		LottoRank rank = LottoRank.getRank(matchCount);
-		if (rank == LottoRank.THIRD && lotto.contains(bonusBall)) {
-			rank = LottoRank.SECOND;
-		}
-		return rank;
-	}
-
-	private Map<LottoRank, Integer> getInitialResult() {
-		Map<LottoRank, Integer> result = new LinkedHashMap<>();
-		for (LottoRank lottoRank : LottoRank.values()) {
-			result.put(lottoRank, 0);
-		}
-		return result;
+	private void putRankResultIfAbsent(Map<LottoRank, Long> result) {
+		Arrays.stream(LottoRank.values())
+			.forEach(rank -> result.putIfAbsent(rank, 0L));
 	}
 }

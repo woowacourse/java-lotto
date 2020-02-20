@@ -10,11 +10,12 @@ import org.junit.jupiter.api.Test;
 public class LottoResultTest {
 	@Test
 	void calculateTotalPrize() {
-		Map<LottoRank, Integer> rankResult = new HashMap<>();
-		rankResult.put(LottoRank.FIRST, 10);
-		rankResult.put(LottoRank.FIFTH, 10);
-		rankResult.put(LottoRank.FOURTH, 10);
+		Map<LottoRank, Long> rankResult = new HashMap<>();
+		rankResult.put(LottoRank.FIRST, 10L);
+		rankResult.put(LottoRank.FIFTH, 10L);
+		rankResult.put(LottoRank.FOURTH, 10L);
 		LottoResult result = new LottoResult(rankResult);
-		assertThat(result.calculateTotalPrize()).isEqualTo((2_000_000_000L + 5_000 + 50_000) * 10);
+		long expected = (2_000_000_000L + 5_000L + 50_000L) * 10L;
+		assertThat(result.calculateTotalPrize()).extracting("prize").isEqualTo(expected);
 	}
 }

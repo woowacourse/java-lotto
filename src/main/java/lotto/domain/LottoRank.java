@@ -1,45 +1,59 @@
 package lotto.domain;
 
+import static lotto.domain.BonusBallStatus.*;
+import static lotto.domain.MatchCount.*;
+
 import java.util.Arrays;
 
 public enum LottoRank {
-	FIFTH(new MatchCount(3), new Prize(5000)),
-	FOURTH(new MatchCount(4), new Prize(50000)),
-	THIRD(new MatchCount(5), new Prize(1_500_000)),
-	SECOND(new MatchCount(5), new Prize(30_000_000)),
-	FIRST(new MatchCount(6), new Prize(2_000_000_000));
+	FIFTH(THREE, INCLUDING_OR_NOT, Prize.of(5000)),
+	FOURTH(FOUR, INCLUDING_OR_NOT, Prize.of(50000)),
+	THIRD(FIVE, NOT_INCLUDING, Prize.of(1_500_000)),
+	SECOND(FIVE, INCLUDING, Prize.of(30_000_000)),
+	FIRST(SIX, NOT_INCLUDING, Prize.of(2_000_000_000));
 
 	private static final String THERE_IS_NON_RANK_EXCEPTION_MESSAGE = "꽝!";
 
 	private final MatchCount matchCount;
+	private final BonusBallStatus bonusBallStatus;
 	private final Prize prize;
 
-	LottoRank(MatchCount matchCount, Prize prize) {
+	LottoRank(MatchCount matchCount, BonusBallStatus bonusBallStatus, Prize prize) {
 		this.matchCount = matchCount;
+		this.bonusBallStatus = bonusBallStatus;
 		this.prize = prize;
 	}
 
-	public static LottoRank getRank(int matchCount) {
+	public static boolean isValidMatchCount(int matchCount) {
 		return Arrays.stream(values())
-			.filter(lottoRank -> lottoRank.matchCount.getMatchCount() == matchCount)
+			.anyMatch(rank -> rank.isMatch(matchCount));
+	}
+
+	public static LottoRank findRank(int matchCount, boolean isBonusBall) {
+		return Arrays.stream(values())
+			.filter(rank -> rank.isMatch(matchCount))
+			.filter(rank -> rank.isRightBonusBallStatus(isBonusBall))
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(THERE_IS_NON_RANK_EXCEPTION_MESSAGE));
 	}
 
-	public static boolean isPrizeCount(int matchCount) {
-		return Arrays.stream(values())
-			.anyMatch(rank -> rank.matchCount.getMatchCount() == matchCount);
+	private boolean isMatch(int count) {
+		return matchCount.isSameMatch(count);
 	}
 
-	public long getTotal(int count) {
-		return this.prize.multiply(count);
+	private boolean isRightBonusBallStatus(boolean isBonusBall) {
+		return bonusBallStatus.contains(isBonusBall);
 	}
 
-	public int getMatchCount() {
-		return this.matchCount.getMatchCount();
+	public Prize calculateTotalPrize(long count) {
+		return prize.multiply(count);
 	}
 
-	public long getPrize() {
-		return this.prize.getPrize();
+	public MatchCount getMatchCount() {
+		return matchCount;
+	}
+
+	public Prize getPrize() {
+		return prize;
 	}
 }

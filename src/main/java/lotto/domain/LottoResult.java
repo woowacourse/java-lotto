@@ -2,23 +2,26 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
 
 public class LottoResult {
-	private final Map<LottoRank, Integer> rankResult;
+	private final Map<LottoRank, Long> lottoResult;
 
-	public LottoResult(Map<LottoRank, Integer> rankResult) {
-		this.rankResult = Collections.unmodifiableMap(rankResult);
+	public LottoResult(Map<LottoRank, Long> lottoResult) {
+		this.lottoResult = Collections.unmodifiableMap(lottoResult);
 	}
 
-	public long calculateTotalPrize() {
-		Set<LottoRank> lottoRanks = rankResult.keySet();
-		return lottoRanks.stream()
-			.mapToLong(lottoRank -> lottoRank.getTotal(rankResult.get(lottoRank)))
-			.sum();
+	Prize calculateTotalPrize() {
+		return lottoResult.keySet().stream()
+			.map(rank -> rank.calculateTotalPrize(lottoResult.get(rank)))
+			.reduce(Prize.of(0), Prize::plus);
 	}
 
-	public Map<LottoRank, Integer> getRankResult() {
-		return rankResult;
+	public long getProfitRate(Money money) {
+		Prize totalPrize = calculateTotalPrize();
+		return totalPrize.findProfits(money);
+	}
+
+	public Map<LottoRank, Long> getLottoResult() {
+		return lottoResult;
 	}
 }

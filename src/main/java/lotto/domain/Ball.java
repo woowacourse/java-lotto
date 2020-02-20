@@ -42,12 +42,12 @@ public class Ball implements Comparable<Ball> {
 	}
 
 	@Override
-	public String toString() {
-		return Integer.toString(number);
+	public int compareTo(Ball o) {
+		return Integer.compare(number, o.number);
 	}
 
 	@Override
-	public int compareTo(Ball o) {
-		return Integer.compare(number, o.number);
+	public String toString() {
+		return Integer.toString(number);
 	}
 }

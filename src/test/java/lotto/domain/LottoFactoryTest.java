@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.factory.LottoFactory;
+
 public class LottoFactoryTest {
 
 	@ParameterizedTest
@@ -15,7 +17,7 @@ public class LottoFactoryTest {
 	void makeLotto(int ball) {
 		LottoFactory lottoFactory = () -> {
 			List<Ball> balls = Arrays.asList(Ball.of(1), Ball.of(12), Ball.of(23), Ball.of(4), Ball.of(5), Ball.of(6));
-			return new Lotto(balls);
+			return new LottoTicket(balls);
 		};
 		assertThat(lottoFactory.create().contains(Ball.of(ball))).isTrue();
 	}
