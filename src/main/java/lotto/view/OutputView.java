@@ -19,11 +19,11 @@ public class OutputView {
     }
 
     public static void lottoTicketList(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets);
+        System.out.println(lottoTickets + "\n");
     }
 
     public static void inputWinningNumberInstruction() {
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
     public static void inputBonusNumberInstruction() {
@@ -40,14 +40,21 @@ public class OutputView {
     }
 
     private static String prizeStatistic(Map<Rank, Integer> results, Rank rank) {
+        return format(rank) + results.getOrDefault(rank, 0) + "개\n";
+    }
+
+    private static String format(Rank rank) {
         if (rank == Rank.BONUS) {
-            return "5개 일치, 보너스 볼 일치 (" + rank.getPrize() + "원)- " + results.getOrDefault(
-                rank, 0) + "개\n";
+            return "5개 일치, 보너스 볼 일치 (" + rank.getPrize() + "원)- ";
         }
-        return rank.getMatchCount() + "개 일치 (" + rank.getPrize() + "원)- " + results.getOrDefault(rank, 0) + "개\n";
+        return rank.getMatchCount() + "개 일치 (" + rank.getPrize() + "원)- ";
     }
 
     public static void profitRate(String rate) {
         System.out.println("총 수익률은 " + rate + "%입니다.");
+    }
+
+    public static void errorMessage(String message) {
+        System.out.println(message);
     }
 }
