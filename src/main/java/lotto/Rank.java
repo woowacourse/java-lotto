@@ -26,7 +26,7 @@ public enum Rank {
     }
 
     public static double sumWinningMoney(List<Rank> ranks) {
-        return Arrays.stream(values())
+        return ranks.stream()
                 .mapToDouble(rank -> rank.winningMoney)
                 .sum();
     }

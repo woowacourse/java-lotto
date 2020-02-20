@@ -27,7 +27,7 @@ public class OutputView {
 
     public static void printProfit(int purchaseMoney, List<Rank> ranks) {
         double totalWinningMoney = Rank.sumWinningMoney(ranks);
-        double profit = totalWinningMoney / purchaseMoney;
-        System.out.println(String.format("총 수익률은 %d%입니다.", profit));
+        double profit = totalWinningMoney / purchaseMoney * 100;
+        System.out.println(String.format("총 수익률은 %d%%입니다.", (int)profit));
     }
 }
