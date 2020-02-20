@@ -11,6 +11,6 @@ public class MoneyTest {
         Assertions.assertThatThrownBy(() -> {
             Money.generatePurchaseMoney(500);
         }).isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("구매금액은 1000원 이상이어야 합니다.");
+                .hasMessage("구매금액은 1000원 이상이어야 합니다.");
     }
 }
