@@ -5,7 +5,6 @@ import java.util.Arrays;
 import lotto.exceptions.InvalidLottoNumberException;
 
 public enum LottoNumber {
-    INVALID(-1),
     ONE(1),
     TWO(2),
     THREE(3),
@@ -62,21 +61,34 @@ public enum LottoNumber {
 
     public static LottoNumber find(String value) {
         int parsedValue = getParsedValue(value);
-        return Arrays.stream(LottoNumber.values())
+        LottoNumber found = Arrays.stream(LottoNumber.values())
             .filter(number -> number.getValue() == parsedValue)
             .findFirst()
-            .orElse(INVALID);
+            .orElse(null);
+        if (found == null) {
+            throw new InvalidLottoNumberException("잘못된 로또 번호입니다.");
+        }
+        return found;
     }
 
     private static int getParsedValue(String value) {
+        int parsedValue = validNumber(value);
+        validateLimit(parsedValue);
+        return parsedValue;
+    }
+
+    private static void validateLimit(int parsedValue) {
+        if (parsedValue < LOWER_LIMIT || parsedValue > UPPER_LIMIT) {
+            throw new InvalidLottoNumberException("잘못된 로또 번호를 입력하셨습니다.");
+        }
+    }
+
+    private static int validNumber(String value) {
         int parsedValue;
         try {
             parsedValue = Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new InvalidLottoNumberException();
-        }
-        if (parsedValue < LOWER_LIMIT || parsedValue > UPPER_LIMIT) {
-            throw new InvalidLottoNumberException();
+            throw new InvalidLottoNumberException("잘못된 로또 번호를 입력하셨습니다.");
         }
         return parsedValue;
     }
