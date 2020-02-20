@@ -4,37 +4,57 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Initializer {
-    public static void initializePayment() {
+
+    public static final String THREE = "3";
+    public static final String FOUR = "4";
+    public static final String FIVE = "5";
+    public static final String FIVE_BONUS = "5+";
+    public static final String SIX = "6";
+    public static final int PAYMENT_UNIT = 1000;
+    public static final int INITIAL_NUMBER = 0;
+
+    public static void initialize(List<AutoNumber> autoNumbers, HashMap<String, Integer> resultCount) {
+        LottoNumbers.lottoNumbersCreate();
+        initializePayment();
+        int tryCount = Payment.payment / PAYMENT_UNIT;
+        OutputView.printLottoCount(tryCount);
+        initializeResultCount(resultCount);
+        initializeAutoNumbers(autoNumbers, tryCount);
+        OutputView.printAutoNumbers(autoNumbers);
+        initializeWinNumber();
+        initializeBonusNumber();
+    }
+
+    private static void initializePayment() {
         OutputView.printinput();
         new Payment(InputView.input());
     }
 
-    public static void initializeBonusNumber() {
+    private static void initializeBonusNumber() {
         OutputView.printInputBonusNumber();
         new BonusBall(InputView.input());
     }
 
-    public static void initializeWinNumber() {
+    private static void initializeWinNumber() {
         OutputView.printInputWinNumber();
         new WinNumber(InputView.input());
     }
 
-    public static void initializeAutoNumbers(List<AutoNumbers> autoNumbers, int tryCount) {
+    private static void initializeAutoNumbers(List<AutoNumber> autoNumbers, int tryCount) {
         for (int i = 0; i < tryCount; i++) {
-            autoNumbers.add(new AutoNumbers());
+            autoNumbers.add(new AutoNumber());
         }
     }
 
-    public static void initializeResultCount(HashMap<String, Integer> resultCount) {
-        resultCount.put("3", 0);
-        resultCount.put("4", 0);
-        resultCount.put("5", 0);
-        resultCount.put("5+", 0);
-        resultCount.put("6", 0);
+    private static void initializeResultCount(HashMap<String, Integer> resultCount) {
+        resultCount.put(THREE, INITIAL_NUMBER);
+        resultCount.put(FOUR, INITIAL_NUMBER);
+        resultCount.put(FIVE, INITIAL_NUMBER);
+        resultCount.put(FIVE_BONUS, INITIAL_NUMBER);
+        resultCount.put(SIX, INITIAL_NUMBER);
     }
 }

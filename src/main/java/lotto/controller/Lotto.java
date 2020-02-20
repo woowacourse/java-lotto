@@ -8,88 +8,60 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Lotto {
+    public static final String THREE = "3";
+    public static final String FOUR = "4";
+    public static final String FIVE = "5";
+    public static final String FIVE_BONUS = "5+";
+    public static final String SIX = "6";
+    public static final int WINNING_COUNT = 1;
 
     public static void lottoGame() {
-        List<AutoNumbers> autoNumbers = new ArrayList<>();
+        List<AutoNumber> autoNumbers = new ArrayList<>();
         HashMap<String, Integer> resultCount = new HashMap<>();
-        initialize(autoNumbers, resultCount);
-        for (AutoNumbers autoNum : autoNumbers) {
+        Initializer.initialize(autoNumbers, resultCount);
+        for (AutoNumber autoNum : autoNumbers) {
             int count = isInWinNumber(autoNum);
             checkCountOverThree(resultCount, autoNum, count);
         }
         printCorrectResults(resultCount);
-
-        double cnt = 0;
-        cnt += LottoResult.THREE.result(resultCount.get("3"));
-        cnt += LottoResult.FOUR.result(resultCount.get("4"));
-        cnt += LottoResult.FIVE.result(resultCount.get("5"));
-        cnt += LottoResult.FIVE_BONUS.result(resultCount.get("5+"));
-        cnt += LottoResult.SIX.result(resultCount.get("6"));
-
-        int yieldMoney = YieldMoney.countYieldMoney(cnt);
-        OutputView.printYield(yieldMoney);
+        OutputView.printYield(YieldMoney.countYieldMoney(Prize.sumPrize(resultCount)));
     }
 
-    private static void checkCountOverThree(HashMap<String, Integer> resultCount, AutoNumbers autoNum, int count) {
-        if (count >= 3) {
-            String key = Integer.toString(count);
-            checkCount(resultCount, autoNum, count, key);
+    public static int isInWinNumber(AutoNumber autoNumbers) {
+        return (int) autoNumbers.getAutoNumber()
+                .stream()
+                .filter(x -> WinNumber.winNumbers.contains(x))
+                .count();
+    }
+
+    private static void checkCountOverThree(HashMap<String, Integer> resultCount, AutoNumber autoNum, int count) {
+        if (count >= LottoResult.THREE.getCorrect()) {
+            String correctCount = Integer.toString(count);
+            checkCount(resultCount, autoNum, count, correctCount);
         }
+    }
+
+    private static void checkCount(HashMap<String, Integer> resultCount, AutoNumber autoNumber, int count, String correctCount) {
+        if (count == LottoResult.FIVE.getCorrect()) {
+            isSecondWin(resultCount, autoNumber, correctCount);
+            return;
+        }
+        resultCount.put(correctCount, resultCount.get(correctCount) + WINNING_COUNT);
+    }
+
+    private static void isSecondWin(HashMap<String, Integer> resultCount, AutoNumber autoNumber, String correctCount) {
+        if (autoNumber.getAutoNumber().contains(BonusBall.bonusNo)) {
+            resultCount.put(FIVE_BONUS, resultCount.get(FIVE_BONUS) + WINNING_COUNT);
+            return;
+        }
+        resultCount.put(correctCount, resultCount.get(correctCount) + WINNING_COUNT);
     }
 
     private static void printCorrectResults(HashMap<String, Integer> resultCount) {
-        OutputView.printCorrectResult(resultCount.get("3"), LottoResult.THREE);
-        OutputView.printCorrectResult(resultCount.get("4"), LottoResult.FOUR);
-        OutputView.printCorrectResult(resultCount.get("5"), LottoResult.FIVE);
-        OutputView.printBonusCorrectResult(resultCount.get("5+"));
-        OutputView.printCorrectResult(resultCount.get("6"), LottoResult.SIX);
-    }
-
-    private static void initialize(List<AutoNumbers> autoNumbers, HashMap<String, Integer> resultCount) {
-        LottoNumbers.lottoNumbersCreate();
-        Initializer.initializePayment();
-        int tryCount = Payment.payment / 1000;
-        OutputView.printLottoCount(tryCount);
-        Initializer.initializeResultCount(resultCount);
-        Initializer.initializeAutoNumbers(autoNumbers, tryCount);
-        OutputView.printAutoNumbers(autoNumbers);
-        Initializer.initializeWinNumber();
-        Initializer.initializeBonusNumber();
-    }
-
-    private static void checkCount(HashMap<String, Integer> resultCount, AutoNumbers autoNum, int count, String key) {
-        if (count == 5) {
-            isFivePlusBonus(resultCount, autoNum, key);
-            return;
-        }
-        resultCount.put(key, resultCount.get(key) + 1);
-    }
-
-    private static void isFivePlusBonus(HashMap<String, Integer> resultCount, AutoNumbers autoNum, String key) {
-        if (hasBonusBall(autoNum)) {
-            resultCount.put("5+", resultCount.get("5+") + 1);
-            return;
-        }
-        resultCount.put(key, resultCount.get(key) + 1);
-    }
-
-    public static int isInWinNumber(AutoNumbers autonumbers) {
-        int count = 0;
-        for (int autoNumber : autonumbers.getAutoNumbers()) {
-            count += checkInWinNumber(autoNumber);
-        }
-        return count;
-    }
-
-    private static int checkInWinNumber(int autoNumber) {
-        int count = 0;
-        if (WinNumber.winNumbers.contains(autoNumber)) {
-            count = 1;
-        }
-        return count;
-    }
-
-    public static boolean hasBonusBall(AutoNumbers autonumbers) {
-        return autonumbers.getAutoNumbers().contains(BonusBall.bonusNo);
+        OutputView.printCorrectResult(resultCount.get(THREE), LottoResult.THREE.getCorrect(), LottoResult.THREE.getPrize());
+        OutputView.printCorrectResult(resultCount.get(FOUR), LottoResult.FOUR.getCorrect(), LottoResult.FOUR.getPrize());
+        OutputView.printCorrectResult(resultCount.get(FIVE), LottoResult.FIVE.getCorrect(), LottoResult.FIVE.getPrize());
+        OutputView.printBonusCorrectResult(resultCount.get(FIVE_BONUS));
+        OutputView.printCorrectResult(resultCount.get(SIX), LottoResult.SIX.getCorrect(), LottoResult.SIX.getPrize());
     }
 }

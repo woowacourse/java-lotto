@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
+    public static final int LAST_LOTTO_NUMBER = 45;
+    public static final int FIRST_LOTTO_NUMBER = 1;
     private static List<Integer> lottoNumbers = new ArrayList<>();
 
     public static void lottoNumbersCreate() {
@@ -11,12 +13,12 @@ public class LottoNumbers {
     }
 
     private LottoNumbers() {
-        for (int i = 1; i <= 45; i++) {
+        for (int i = FIRST_LOTTO_NUMBER; i <= LAST_LOTTO_NUMBER; i++) {
             lottoNumbers.add(i);
         }
     }
 
-    public static List<Integer> getLottoNumbers(){
+    public static List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
 }

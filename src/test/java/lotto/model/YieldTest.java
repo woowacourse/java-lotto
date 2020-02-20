@@ -12,7 +12,6 @@ public class YieldTest {
     @DisplayName("수익률 확인")
     void yieldCorrectTest() {
         new Payment("14000");
-        int payment = Payment.payment;
-        assertThat(countYieldMoney(payment, 5000)).isEqualTo(35);
+        assertThat(countYieldMoney(5000)).isEqualTo(35);
     }
 }

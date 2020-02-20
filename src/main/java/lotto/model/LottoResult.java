@@ -1,29 +1,26 @@
 package lotto.model;
 
 public enum LottoResult {
-    THREE(3,5000) {
-        public double result(int count) { return count * price; }},
-    FOUR(4,50000) {
-        public double result(int count) { return count * price; }},
-    FIVE(5,150000) {
-        public double result(int count) { return count * price; }},
-    FIVE_BONUS(5,30000000) {
-        public double result(int count) { return count * price; }},
-    SIX(6,2000000000) {
-        public double result(int count) { return count * price; }};
+    THREE(3, 5000),
+    FOUR(4, 50000),
+    FIVE(5, 150000),
+    FIVE_BONUS(5, 30000000),
+    SIX(6, 2000000000);
 
-    protected final int price;
+    protected final int prize;
     private final int correct;
 
-    LottoResult(int correct, int price) {
+    LottoResult(int correct, int prize) {
         this.correct = correct;
-        this.price = price;
+        this.prize = prize;
     }
 
-    public abstract double result(int count);
+    public double prizeResult(int count) {
+        return count * this.prize;
+    }
 
-    public int getPrice() {
-        return price;
+    public int getPrize() {
+        return prize;
     }
 
     public int getCorrect() {
