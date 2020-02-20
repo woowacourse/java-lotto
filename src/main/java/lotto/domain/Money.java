@@ -3,10 +3,27 @@ package lotto.domain;
 import lotto.exceptions.InvalidMoneyException;
 
 public class Money {
-    private int amount;
+    static final int TICKET_PRICE = 1000;
+    private final int amount;
 
-    public Money(String amount) {
-        this.amount = validNumber(amount);
+    Money(final String amount) {
+        this.amount = validMoney(amount);
+    }
+
+    public static Money create(String amount) {
+        return new Money(amount);
+    }
+
+    private int validMoney(String amount) {
+        int parsedAmount = validNumber(amount);
+        validateAmount(parsedAmount);
+        return parsedAmount;
+    }
+
+    private void validateAmount(int parsedAmount) {
+        if (isInvalid(parsedAmount)) {
+            throw new InvalidMoneyException("로또 구입금액은 1000원부터 가능합니다.");
+        }
     }
 
     private int validNumber(String amount) {
@@ -16,13 +33,18 @@ public class Money {
         } catch (NumberFormatException e) {
             throw new InvalidMoneyException("올바른 형식의 입력이 아닙니다.");
         }
-        if (isInvalid(parsedAmount)) {
-            throw new InvalidMoneyException("로또 구입금액은 1000원 단위로 가능합니다.");
-        }
         return parsedAmount;
     }
 
     private boolean isInvalid(int amount) {
-        return amount % 1000 != 0 || amount < 1000;
+        return amount < TICKET_PRICE;
+    }
+
+    public int ticketQuantity() {
+        return this.amount / TICKET_PRICE;
+    }
+
+    public int change() {
+        return amount - ticketQuantity() * TICKET_PRICE;
     }
 }
