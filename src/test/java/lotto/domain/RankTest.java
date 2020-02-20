@@ -5,13 +5,14 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class RankTest {
-	@Test
-	void ofTestWhenAllMatches() {
-		List<LottoNumber> lottoNumbers =
-			Arrays.asList(
+	private List<LottoNumber> lottoNumbers;
+	@BeforeEach
+	void init() {
+		lottoNumbers = Arrays.asList(
 				new LottoNumber(1),
 				new LottoNumber(2),
 				new LottoNumber(3),
@@ -19,7 +20,10 @@ public class RankTest {
 				new LottoNumber(5),
 				new LottoNumber(6)
 			);
+	}
 
+	@Test
+	void ofTestWhenAllMatches() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", "7");
 
@@ -34,16 +38,6 @@ public class RankTest {
 
 	@Test
 	void ofTestWhenSecondPrize() {
-		List<LottoNumber> lottoNumbers =
-			Arrays.asList(
-				new LottoNumber(1),
-				new LottoNumber(2),
-				new LottoNumber(3),
-				new LottoNumber(4),
-				new LottoNumber(5),
-				new LottoNumber(6)
-			);
-
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 7", "6");
 
@@ -58,16 +52,6 @@ public class RankTest {
 
 	@Test
 	void ofTestWhenThirdPrize() {
-		List<LottoNumber> lottoNumbers =
-			Arrays.asList(
-				new LottoNumber(1),
-				new LottoNumber(2),
-				new LottoNumber(3),
-				new LottoNumber(4),
-				new LottoNumber(5),
-				new LottoNumber(6)
-			);
-
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 7", "8");
 
@@ -82,16 +66,6 @@ public class RankTest {
 
 	@Test
 	void ofTestWhenFourthPrize() {
-		List<LottoNumber> lottoNumbers =
-			Arrays.asList(
-				new LottoNumber(1),
-				new LottoNumber(2),
-				new LottoNumber(3),
-				new LottoNumber(4),
-				new LottoNumber(5),
-				new LottoNumber(6)
-			);
-
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 8, 9", "7");
 
@@ -106,16 +80,6 @@ public class RankTest {
 
 	@Test
 	void ofTestWhenFifthPrize() {
-		List<LottoNumber> lottoNumbers =
-			Arrays.asList(
-				new LottoNumber(1),
-				new LottoNumber(2),
-				new LottoNumber(3),
-				new LottoNumber(4),
-				new LottoNumber(5),
-				new LottoNumber(6)
-			);
-
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 8, 9, 10", "7");
 
@@ -130,16 +94,6 @@ public class RankTest {
 
 	@Test
 	void ofTestWhenUnderThreeMatches() {
-		List<LottoNumber> lottoNumbers =
-			Arrays.asList(
-				new LottoNumber(1),
-				new LottoNumber(2),
-				new LottoNumber(3),
-				new LottoNumber(4),
-				new LottoNumber(5),
-				new LottoNumber(6)
-			);
-
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 11, 8, 9, 10", "7");
 
