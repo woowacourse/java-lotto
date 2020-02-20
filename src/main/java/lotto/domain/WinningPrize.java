@@ -10,6 +10,8 @@ public enum WinningPrize {
 	SECOND(5, 30_000_000, "2등(보너스볼 일치)"),
 	FIRST(6, 2_000_000_000, "1등");
 
+	private static final int SECOND_MATCH_COUNT = 5;
+
 	private int matchCount;
 	private int prize;
 	private String prizeName;
@@ -21,13 +23,17 @@ public enum WinningPrize {
 	}
 
 	public static WinningPrize of(int matchCount, boolean bonusMatch) {
-		if (matchCount == 5 && bonusMatch) {
+		if (isSecond(matchCount, bonusMatch)) {
 			return SECOND;
 		}
 		return Arrays.stream(values())
 			.filter(prize -> prize.matchCount == matchCount)
 			.findFirst()
 			.orElse(NO_PRIZE);
+	}
+
+	private static boolean isSecond(int matchCount, boolean bonusMatch) {
+		return bonusMatch && (matchCount == SECOND_MATCH_COUNT);
 	}
 
 	public int getPrize() {
