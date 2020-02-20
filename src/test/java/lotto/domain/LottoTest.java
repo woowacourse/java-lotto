@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.exception.InvalidLottoException;
+
 public class LottoTest {
 	@Test
 	@DisplayName("선택된 로또 번호 리스트가 정상적으로 생성된 경우")
@@ -54,7 +56,8 @@ public class LottoTest {
 	@DisplayName("로또 번호 리스트의 크기가 올바르지 않은 경우")
 	@MethodSource("invalidSize")
 	void constructor_로또_번호_리스트의_크기가_올바르지_않은_경우(List<LottoNumber> lottoNumbers) {
-		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(lottoNumbers));
+		assertThatExceptionOfType(InvalidLottoException.class).isThrownBy(() -> new Lotto(lottoNumbers))
+				.withMessage("로또는 6개의 로또 번호가 필요합니다.");
 	}
 
 	@Test
@@ -68,7 +71,8 @@ public class LottoTest {
 				LottoNumber.of(44),
 				LottoNumber.of(45)
 		);
-		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(lottoNumbers));
+		assertThatExceptionOfType(InvalidLottoException.class).isThrownBy(() -> new Lotto(lottoNumbers))
+				.withMessage("로또 번호는 중복될 수 없습니다.");
 	}
 
 	@Test

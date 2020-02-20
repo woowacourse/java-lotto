@@ -9,10 +9,10 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import lotto.domain.exception.InvalidLottoException;
+
 public class Lotto {
 	public static final int SIZE = 6;
-	private static final String DUPLICATED_NUMBER_MESSAGE = "로또 번호가 중복됩니다.";
-	private static final String INVALID_SIZE_MESSAGE = "로또 번호가 존재하지 않습니다.";
 
 	private final List<LottoNumber> lotto;
 
@@ -29,14 +29,14 @@ public class Lotto {
 
 	private void validateSize(List<LottoNumber> lotto) {
 		if (lotto == null || lotto.size() != SIZE) {
-			throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
+			throw new InvalidLottoException("로또는 6개의 로또 번호가 필요합니다.");
 		}
 	}
 
 	private void validateDuplicate(List<LottoNumber> lotto) {
 		Set<LottoNumber> distinct = new HashSet<>(lotto);
 		if (distinct.size() != lotto.size()) {
-			throw new IllegalArgumentException(DUPLICATED_NUMBER_MESSAGE);
+			throw new InvalidLottoException("로또 번호는 중복될 수 없습니다.");
 		}
 	}
 
