@@ -1,19 +1,35 @@
 package lotto.domain;
 
 import lotto.Exception.LottoTicketEmptyException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
     @Test
-    @DisplayName("로또 볼이 비어있을 경우 테스트")
+    @DisplayName("로또 티켓에 로또 볼이 비어있을 경우 테스트")
     void throw_empty_lotto_ball_test() {
         List<LottoBall> lottoTicket = new ArrayList<>();
-        Assertions.assertThatThrownBy(()->new LottoTicket(lottoTicket))
+
+        assertThatThrownBy(()->new LottoTicket(lottoTicket))
                 .isInstanceOf(LottoTicketEmptyException.class);
+    }
+
+    @Test
+    @DisplayName("로또 티켓이 제대로 생성되었을 경우 테스트")
+    void not_empty_lotto_ball_test() {
+        List<LottoBall> lottoTicket = IntStream.rangeClosed(1,6)
+                .mapToObj(LottoBall::new)
+                .collect(Collectors.toList());
+
+        assertThatCode(() -> new LottoTicket(lottoTicket))
+                .doesNotThrowAnyException();
     }
 }
