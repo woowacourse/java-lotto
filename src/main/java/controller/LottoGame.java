@@ -13,7 +13,9 @@ public class LottoGame {
 
         LottoDummy lottoDummy = new LottoDummy(lottoCount);
         OutputView.printLottoDummy(lottoDummy);
-        WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+
+        WinningNumber winningNumber = inputWinningNumber();
+
         LottoResult lottoResult = new LottoResult();
         lottoDummy.countWinningLottoRank(winningNumber, lottoResult);
 
@@ -23,6 +25,15 @@ public class LottoGame {
 
         OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(profitRatio);
+    }
+
+    private static WinningNumber inputWinningNumber() {
+        try {
+            return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+        } catch(IllegalArgumentException | NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+        return inputWinningNumber();
     }
 
     private static PurchaseAmount inputPurchaseAmount() {
