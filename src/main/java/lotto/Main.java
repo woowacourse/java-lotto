@@ -1,16 +1,19 @@
 package lotto;
 
+import view.InputView;
+import view.OutputView;
+
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        int money = InputView.inputPurchaseMoney();
-        List<Lotto> lottos =  LottoFactory.createLottos();
+        int purchaseMoney = InputView.inputPurchaseMoney();
+        List<Lotto> lottos =  LottoFactory.createLottos(purchaseMoney);
         OutputView.printLottos(lottos);
 
-        WinnigNumbers winnigNumbers = new WinnigNumbers(InputView.inputSixNumbers(), InputView.inputBonusNumber());
-        List<Rank> ranks = winnigNumbers.compare(lottos);
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.inputSixNumbers(), InputView.inputBonusNumber());
+        List<Rank> ranks = winningNumbers.compareLottos(lottos);
         OutputView.printResult(ranks);
-        OutputView.printProfit(money, ranks);
+        OutputView.printProfit(purchaseMoney, ranks);
     }
 }
