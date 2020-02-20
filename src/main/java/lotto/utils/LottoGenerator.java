@@ -6,9 +6,12 @@ import lotto.domain.PaidPrice;
 import lotto.domain.WinningLotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGenerator {
+    private static final String SPLIT_DELIMETER =",";
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final String INCORRECT_LOTTO_NUMBER_MSG = "로또 번호는 6개입니다.";
     private static RandomGenerator randomGenerator = new RandomGenerator();
@@ -23,7 +26,8 @@ public class LottoGenerator {
 
     public static WinningLotto createWinningLottoByUserInput (String winningNumbersInput,
                                                               String bonusNumberInput) {
-        List<LottoNumber> winningLottoNumbers = createLottoNumbersByUserInput(winningNumbersInput);
+        String [] splitedWinningNumbersInput = getSplitedWinningLottoNumbers(winningNumbersInput);
+        List<LottoNumber> winningLottoNumbers = createLottoNumbersByUserInput(splitedWinningNumbersInput);
         return new WinningLotto(winningLottoNumbers, new LottoNumber(bonusNumberInput));
     }
 
@@ -36,9 +40,8 @@ public class LottoGenerator {
         return lottoNumbers;
     }
 
-    public static List<LottoNumber> createLottoNumbersByUserInput(String lottoNumbersInput) {
-        String[] splitedWinningLottoNumbers = lottoNumbersInput.split(",");
-        if (splitedWinningLottoNumbers.length != LOTTO_NUMBER_SIZE)
+    public static List<LottoNumber> createLottoNumbersByUserInput(String[] splitedWinningLottoNumbers) {
+        if (splitedWinningLottoNumbers.length != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(INCORRECT_LOTTO_NUMBER_MSG);
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -46,5 +49,9 @@ public class LottoGenerator {
             lottoNumbers.add(new LottoNumber(splitedWinningLottoNumbers[i]));
         }
         return lottoNumbers;
+    }
+
+    public static String[] getSplitedWinningLottoNumbers(String lottoNumbersInput) {
+        return lottoNumbersInput.split(SPLIT_DELIMETER);
     }
 }

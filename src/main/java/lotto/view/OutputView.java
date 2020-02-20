@@ -20,14 +20,22 @@ public class OutputView {
     public static void printResults(Results results) {
         System.out.println("당첨 통계");
         System.out.println("---------");
+        printWinningResults(results);
+        printEarningRate(results);
+    }
 
+    public static void printWinningResults(Results results) {
         for (WinningInfo winningInfo : WinningInfo.values()) {
+            if (winningInfo == WinningInfo.FAIL) {
+                continue;
+            }
             int winningCount = results.getWinningCount(winningInfo);
-            String result = String.format("%s - %s개",
-                    winningInfo.toString(), winningCount);
+            String result = String.format("%s - %s개", winningInfo.toString(), winningCount);
             System.out.println(result);
         }
+    }
 
+    public static void printEarningRate(Results results) {
         String earningRate = String.format("총 수익률은 %s%%입니다.", results.getEarningRate());
         System.out.println(earningRate);
     }
