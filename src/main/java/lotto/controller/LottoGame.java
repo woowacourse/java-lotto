@@ -11,18 +11,18 @@ import java.util.List;
 
 public class LottoGame {
     public static void main(String[] args) {
-        int purchaseMoney = InputView.inputPurchaseMoney();
-        List<LottoTicket> lottoTickets =  LottoFactory.createLottos(purchaseMoney);
-
-        OutputView.printLottos(lottoTickets);
-
-        List<Integer> sixNumbers = InputView.inputSixNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
-        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, bonusNumber);
-
-        List<Rank> ranks = winningNumbers.compareLottos(lottoTickets);
-
-        OutputView.printResult(ranks);
-        OutputView.printProfit(purchaseMoney, ranks);
+//        int purchaseMoney = InputView.inputPurchaseMoney();
+//        List<LottoTicket> lottoTickets =  LottoFactory.createLottos(purchaseMoney);
+//
+//        OutputView.printLottos(lottoTickets);
+//
+//        List<Integer> sixNumbers = InputView.inputSixNumbers();
+//        int bonusNumber = InputView.inputBonusNumber();
+//        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, bonusNumber);
+//
+//        List<Rank> ranks = winningNumbers.compareLottos(lottoTickets);
+//
+//        OutputView.printResult(ranks);
+//        OutputView.printProfit(purchaseMoney, ranks);
     }
 }

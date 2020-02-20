@@ -4,59 +4,45 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoTicket(List<Integer> numbers) {
+    public LottoTicket(List<LottoNumber> numbers) {
         validate(numbers);
         Collections.sort(numbers);
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validate(List<LottoNumber> numbers) {
         validateNumbersCount(numbers);
-        validateNumbersRange(numbers);
         validateNumbersDuplication(numbers);
     }
 
-    private void validateNumbersCount(List<Integer> numbers) {
+    private void validateNumbersCount(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또의 숫자는 6개여야 합니다.");
         }
     }
 
-    private void validateNumbersRange(List<Integer> numbers) {
-        if (getOutOfRangeCount(numbers) > 0) {
-            throw new IllegalArgumentException("로또의 숫자는 1~45이어야 합니다.");
-        }
-    }
-
-    private long getOutOfRangeCount(List<Integer> numbers) {
-        return numbers.stream()
-                .filter(number -> number < 1)
-                .filter(number -> number > 45)
-                .count();
-    }
-
-    private void validateNumbersDuplication(List<Integer> numbers) {
+    private void validateNumbersDuplication(List<LottoNumber> numbers) {
         if (getDistinctCount(numbers) != numbers.size()) {
             throw new IllegalArgumentException("로또의 숫자는 중복될 수 없습니다.");
         }
     }
 
-    private long getDistinctCount(List<Integer> numbers) {
+    private long getDistinctCount(List<LottoNumber> numbers) {
         return numbers.stream()
                 .distinct()
                 .count();
     }
 
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 
-    public Rank compare(LottoTicket winningLottoTicket, int bonusNumber) {
+    public Rank compare(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
         int count = (int) this.numbers.stream()
-                .filter(number -> winningLottoTicket.numbers.contains(number))
+                .filter(winningLottoTicket.numbers::contains)
                 .count();
 
         if (count == 5 && this.numbers.contains(bonusNumber)) {

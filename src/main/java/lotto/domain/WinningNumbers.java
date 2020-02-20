@@ -5,9 +5,9 @@ import java.util.List;
 
 public class WinningNumbers {
     private final LottoTicket winningLottoTicket;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumbers(List<Integer> sixNumbers, int bonusNumber) {
+    public WinningNumbers(List<LottoNumber> sixNumbers, LottoNumber bonusNumber) {
         this.winningLottoTicket = new LottoTicket(sixNumbers);
         this.bonusNumber = bonusNumber;
     }

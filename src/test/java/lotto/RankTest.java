@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
-
     @ParameterizedTest
     @MethodSource("createCountAndRank")
     void of(int count, Rank expected) {
