@@ -32,6 +32,9 @@ public class ConsoleUILottoApplication {
 			lottoController.getLottoRankCount(lottos, winningLotto, bonusLottoNumber);
 		printStatisticsMessage();
 		printStatisticsResult(lottoRankCount);
+
+		int winningRatio = lottoController.getWinningRatio(lottoRankCount, inputLottoMoney);
+		printWinningRatio(winningRatio);
 	}
 
 	private static LottoMoney receiveInputMoney() {

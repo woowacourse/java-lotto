@@ -15,6 +15,7 @@ public class ConsoleOutputView {
 	public static final String STATISTICS_MESSAGE_2 = "---------";
 	public static final String STATISTICS_RESULT = "%d개 일치 (%d원) - %d개\n";
 	public static final String STATISTICS_SECOND_RANK_RESULT = "%d개 일치, 보너스 볼 일치(%d원) - %d개\n";
+	public static final String WINNING_RATIO_MESSAGE = "총 수익률은 %d%%입니다.\n";
 
 	public static void printExceptionMessage(String exceptionMessage) {
 		System.out.println(exceptionMessage);
@@ -68,4 +69,7 @@ public class ConsoleOutputView {
 			lottoRankEntry.getValue());
 	}
 
+	public static void printWinningRatio(int winningRatio) {
+		System.out.printf(WINNING_RATIO_MESSAGE, winningRatio);
+	}
 }

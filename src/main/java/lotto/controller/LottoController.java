@@ -8,6 +8,7 @@ import java.util.TreeMap;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
+import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 
@@ -36,5 +37,13 @@ public class LottoController {
 			lottoRankCount.replace(lottoRank, lottoRankCount.get(lottoRank) + SUM_UNIT);
 		}
 		return lottoRankCount;
+	}
+
+	public int getWinningRatio(Map<LottoRank, Integer> lottoRankCount, LottoMoney inputLottoMoney) {
+		LottoMoney initLottoMoney = LottoMoney.MISS_PRIZE;
+		for (Map.Entry<LottoRank, Integer> lottoEntry : lottoRankCount.entrySet()) {
+			initLottoMoney = initLottoMoney.add(lottoEntry.getKey().getWinningMoney().multiply(lottoEntry.getValue()));
+		}
+		return initLottoMoney.getWinningRatio(inputLottoMoney);
 	}
 }
