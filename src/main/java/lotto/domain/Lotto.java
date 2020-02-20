@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -38,6 +39,12 @@ public class Lotto {
 
 	public boolean isContains(LottoNumber bonusNumber) {
 		return lottoNumbers.contains(bonusNumber);
+	}
+
+	public int getMatchCount(Lotto winningLotto) {
+		List<LottoNumber> matchLottoNumbers = new ArrayList<>(lottoNumbers);
+		matchLottoNumbers.retainAll(winningLotto.lottoNumbers);
+		return matchLottoNumbers.size();
 	}
 
 	public List<LottoNumber> getLottoNumbers() {

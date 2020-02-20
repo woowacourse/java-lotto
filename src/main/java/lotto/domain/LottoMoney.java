@@ -1,20 +1,31 @@
 package lotto.domain;
 
 public class LottoMoney {
-	private static final int ZERO = 0;
-	private static final int UNIT = 1000;
-	private static final int MAX_BOUND = 100000;
-	public static final int LOTTO_PRICE = 1000;
+	public static final LottoMoney FIRST_RANK = new LottoMoney(2_000_000_000);
+	public static final LottoMoney SECOND_RANK = new LottoMoney(30_000_000);
+	public static final LottoMoney THIRD_RANK = new LottoMoney(1_500_000);
+	public static final LottoMoney FOURTH_RANK = new LottoMoney(50_000);
+	public static final LottoMoney FIFTH_RANK = new LottoMoney(5_000);
+	public static final LottoMoney ZERO_MONEY = new LottoMoney(0);
 
-	private final int money;
+	private static final long ZERO = 0;
+	private static final long UNIT = 1000;
+	private static final long MAX_BOUND = 100000;
+	public static final long LOTTO_PRICE = 1000;
+
+	private final long money;
 
 	public LottoMoney(String money) {
 		this.money = validate(money);
 	}
 
-	private int validate(String money) {
+	private LottoMoney(long money) {
+		this.money = money;
+	}
+
+	private long validate(String money) {
 		validateNullOrEmpty(money);
-		int parsedMoney = parseToInteger(money);
+		long parsedMoney = parseToLong(money);
 		validatePositive(parsedMoney);
 		validateUnit(parsedMoney);
 		validateMaxBound(parsedMoney);
@@ -27,33 +38,33 @@ public class LottoMoney {
 		}
 	}
 
-	private int parseToInteger(String money) {
+	private long parseToLong(String money) {
 		try {
-			return Integer.parseInt(money);
+			return Long.parseLong(money);
 		} catch (NumberFormatException ne) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.NOT_INTEGER);
 		}
 	}
 
-	private void validatePositive(int parsedMoney) {
+	private void validatePositive(long parsedMoney) {
 		if (parsedMoney <= ZERO) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.NOT_POSITIVE);
 		}
 	}
 
-	private void validateUnit(int parsedMoney) {
+	private void validateUnit(long parsedMoney) {
 		if (parsedMoney % UNIT != ZERO) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.INVALID_UNIT);
 		}
 	}
 
-	private void validateMaxBound(int parsedMoney) {
+	private void validateMaxBound(long parsedMoney) {
 		if (parsedMoney > MAX_BOUND) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.OUT_OF_BOUND);
 		}
 	}
 
 	public int purchaseLotto() {
-		return money / LOTTO_PRICE;
+		return (int)(money / LOTTO_PRICE);
 	}
 }
