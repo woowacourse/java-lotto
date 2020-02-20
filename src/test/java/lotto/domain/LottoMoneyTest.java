@@ -64,4 +64,32 @@ public class LottoMoneyTest {
 		LottoMoney lottoMoney = new LottoMoney("2000");
 		assertThat(lottoMoney.getNumberOfLotto()).isEqualTo(2);
 	}
+
+	@Test
+	void add_AddedMoney_ReturnSum() {
+		LottoMoney lottoMoney = new LottoMoney("3000");
+		LottoMoney addedLottoMoney = new LottoMoney("5000");
+
+		LottoMoney expectedLottoMoney = new LottoMoney("8000");
+		assertThat(lottoMoney.add(addedLottoMoney)).isEqualTo(expectedLottoMoney);
+	}
+
+	@DisplayName("곱한만큼의 돈을 반환하는 함수")
+	@Test
+	void multiply_MultipliedCount_ReturnCalculatedMoney() {
+		LottoMoney lottoMoney = new LottoMoney("3000");
+		int multiplyCount = 3;
+		LottoMoney expectedLottoMoney = new LottoMoney("9000");
+		assertThat(lottoMoney.multiply(multiplyCount)).isEqualTo(expectedLottoMoney);
+	}
+
+	@DisplayName("총 수익금을 낸 돈으로 나눠서 수익률을 계산하는 함수")
+	@Test
+	void getWinningRatio_PaidLottoMoney_ReturnWinningRatio() {
+		LottoMoney paidLottoMoney = new LottoMoney("5000");
+		LottoMoney winningLottoMoney = new LottoMoney("15000");
+
+		int expectedRatio = 300;
+		assertThat(winningLottoMoney.getWinningRatio(paidLottoMoney)).isEqualTo(expectedRatio);
+	}
 }

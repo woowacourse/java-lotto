@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoMoney {
 	public static final LottoMoney FIRST_PRIZE = new LottoMoney(2_000_000_000);
 	public static final LottoMoney SECOND_PRIZE = new LottoMoney(30_000_000);
@@ -12,6 +14,7 @@ public class LottoMoney {
 	private static final long UNIT = 1000;
 	private static final long MAX_BOUND = 100000;
 	public static final long LOTTO_PRICE = 1000;
+	public static final int PERCENT = 100;
 
 	private final long money;
 
@@ -70,5 +73,35 @@ public class LottoMoney {
 
 	public long getMoney() {
 		return money;
+	}
+
+	public LottoMoney add(LottoMoney addedLottoMoney) {
+		return new LottoMoney(this.money + addedLottoMoney.money);
+	}
+
+	public LottoMoney multiply(int multiplyCount) {
+		return new LottoMoney(this.money * multiplyCount);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		LottoMoney that = (LottoMoney)o;
+		return money == that.money;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(money);
+	}
+
+	public int getWinningRatio(LottoMoney inputLottoMoney) {
+		if (inputLottoMoney.money == 0) {
+			return 0;
+		}
+		return (int)((this.money * PERCENT) / inputLottoMoney.money);
 	}
 }
