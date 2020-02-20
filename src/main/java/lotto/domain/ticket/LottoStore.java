@@ -6,11 +6,27 @@ import lotto.domain.ticket.ball.LottoFactory;
 import lotto.view.dto.BettingMoneyRequestDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
+
 public abstract class LottoStore {
+    public List<LottoTicket> buyTicket(BettingMoneyRequestDTO bettingMoney) {
+        int ticketCount = bettingMoney.getBettingMoney() / LOTTO_PRICE;
+
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            lottoTickets.add(getTicket());
+        }
+
+        return lottoTickets;
+    }
+
+    protected abstract LottoTicket getTicket();
+
     public static WinningLotto makeWinningLotto(WinningLottoRequestDTO winningLottoRequestDTO) {
         Set<LottoBall> winningLotto = new HashSet<>();
         for (int number : winningLottoRequestDTO.getWinningNumbers()) {
@@ -18,6 +34,4 @@ public abstract class LottoStore {
         }
         return new WinningLotto(winningLotto, LottoFactory.findLottoBallByNumber(winningLottoRequestDTO.getBonusNumber()));
     }
-
-    public abstract List<LottoTicket> buyTicket(BettingMoneyRequestDTO bettingMoney);
 }
