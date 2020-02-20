@@ -1,17 +1,17 @@
 package lotto.domain;
 
+import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import lotto.domain.exception.InvalidLottosException;
 
-public class Lottos {
+public class Lottos implements Iterable<Lotto> {
 	private final List<Lotto> lottos;
 
 	public Lottos(List<Lotto> lottos) {
 		validate(lottos);
-		this.lottos = lottos;
+		this.lottos = List.copyOf(lottos);
 	}
 
 	private void validate(List<Lotto> lottos) {
@@ -26,7 +26,8 @@ public class Lottos {
 				.collect(Collectors.collectingAndThen(Collectors.toList(), LottoResults::new));
 	}
 
-	public void forEach(Consumer<Lotto> action) {
-		lottos.forEach(action);
+	@Override
+	public Iterator<Lotto> iterator() {
+		return lottos.iterator();
 	}
 }
