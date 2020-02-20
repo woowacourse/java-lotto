@@ -18,7 +18,7 @@ public class AutoLottosGenerator implements LottosGenerator {
 	@Override
 	public Lottos generate(int count) {
 		List<Lotto> lottos = new ArrayList<>();
-		for (; count > 0; --count) {
+		while (count-- > 0) {
 			lottos.add(create());
 		}
 		return new Lottos(lottos);
