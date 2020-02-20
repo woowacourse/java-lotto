@@ -14,18 +14,18 @@ public class PurchaseAmount {
         underLottoUnit();
     }
 
+    private void underLottoUnit() {
+        if (this.purchaseAmount < LOTTO_PURCHASE_UNIT) {
+            throw new NotBuyLottoTicketException("한개도 구매할 수 없습니다." + this.purchaseAmount + "원을 반환합니다.");
+        }
+    }
+
     public int lottoTicket() {
         return (int) (this.purchaseAmount / LOTTO_PURCHASE_UNIT);
     }
 
     public int giveChangeMoney() {
         return (int) (this.purchaseAmount % LOTTO_PURCHASE_UNIT);
-    }
-
-    public void underLottoUnit() {
-        if (this.purchaseAmount < LOTTO_PURCHASE_UNIT) {
-            throw new NotBuyLottoTicketException("한개도 구매할 수 없습니다." + this.purchaseAmount + "원을 반환합니다.");
-        }
     }
 
     public long getPurchaseAmount() {

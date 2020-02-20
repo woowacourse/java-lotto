@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.Exception.NotBuyLottoTicketException;
 import lotto.Exception.NotPositiveNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,5 +39,13 @@ public class PurchaseAmountTest {
         assertThatThrownBy(() -> new PurchaseAmount(purchaseAmount))
                 .isInstanceOf(NotPositiveNumberException.class)
                 .hasMessage("음수입니다. 재입력 해주세요.");
+    }
+
+    @Test
+    @DisplayName("천원 미안의 값이 구입금액으로 들어왔을때 반환 테스트")
+    void under_one_thousand_won() {
+        String purchaseAmountInput = "999";
+        assertThatThrownBy(() -> new PurchaseAmount(purchaseAmountInput)).isInstanceOf(NotBuyLottoTicketException.class)
+        .hasMessage("한개도 구매할 수 없습니다." + purchaseAmountInput + "원을 반환합니다.");
     }
 }
