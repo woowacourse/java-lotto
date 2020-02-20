@@ -27,4 +27,23 @@ public enum WinningType {
 				.findFirst()
 				.orElse(NONE);
 	}
+
+	public int getSameNumberCount() {
+		return sameNumberCount;
+	}
+
+	public BonusRequirement getBonusRequirement() {
+		return bonusRequirement;
+	}
+
+	public int getWinningAmount() {
+		return winningAmount;
+	}
+
+	public boolean isBonusTRUE() {
+		if (bonusRequirement == BonusRequirement.TRUE) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -8,4 +8,8 @@ public class LottoResult {
 	public LottoResult(final Map<WinningType, Integer> lottoResult) {
 		this.lottoResult = lottoResult;
 	}
+
+	public Map<WinningType, Integer> getLottoResult() {
+		return lottoResult;
+	}
 }
