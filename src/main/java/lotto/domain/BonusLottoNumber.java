@@ -21,4 +21,8 @@ public class BonusLottoNumber {
 			throw new WrongLottoNumberException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
 		}
 	}
+
+	public LottoNumber getBonusLottoNumber() {
+		return this.bonusLottoNumber;
+	}
 }

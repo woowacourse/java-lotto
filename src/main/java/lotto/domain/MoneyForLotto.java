@@ -27,7 +27,7 @@ public class MoneyForLotto {
 		return this.moneyForLotto;
 	}
 
-	public int getAmountOfLottos() {
+	public int getAmountOfLottos() { // TODO : cal로 바꾸기??????
 		return this.moneyForLotto / LOTTO_PRICE;
 	}
 }

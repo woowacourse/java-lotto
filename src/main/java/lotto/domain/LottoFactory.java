@@ -19,7 +19,7 @@ public class LottoFactory {
 		creators.put(LottoType.WINNING_LOTTO, new WinningLottoCreator());
 	}
 
-	public static Lotto getLottoAuto(LottoType lottoType) {
+	public static Lotto getLottoAuto(LottoType lottoType) {  // TODO : Create로 하기
 		Objects.requireNonNull(lottoType);
 		LottoCreator lottoCreator = creators.get(lottoType);
 

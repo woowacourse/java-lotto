@@ -16,4 +16,10 @@ public class PaidLotto extends Lotto {
 		super(inputLottoNumbers);
 	}
 
+	public Rank getRank(final WinningLotto winningLotto, final BonusLottoNumber bonusLottoNumber) {
+		int numberOfContain = winningLotto.getHowManyContain(this);
+		boolean hasBonusLottoNumber = this.isContain(bonusLottoNumber.getBonusLottoNumber());
+
+		return Rank.getRank(numberOfContain, hasBonusLottoNumber);
+	}
 }

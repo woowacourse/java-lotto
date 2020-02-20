@@ -48,6 +48,11 @@ public class Lotto {
 		}
 	}
 
+	public boolean isContain(LottoNumber lottoNumber) {
+		return lottoNumbers.stream()
+				.anyMatch(value -> value == lottoNumber);
+	}
+
 	public List<LottoNumber> getLottoNumbers() {
 		return this.lottoNumbers;
 	}

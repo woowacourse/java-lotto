@@ -16,11 +16,7 @@ public class WinningLotto extends Lotto {
 		super(inputLottoNumbers);
 	}
 
-	public boolean isContain(LottoNumber lottoNumber) {
-		return lottoNumbers.stream().anyMatch(value -> value == lottoNumber);
-	}
-
-	public int getHowManyContain(PaidLotto paidLotto) {
+	public int getHowManyContain(PaidLotto paidLotto) { // TODO get은 로직이 들어가며 ㄴ안된다 ->그래서 cal or match로하자
 		Objects.requireNonNull(paidLotto, "매개변수가 null 입니다.");
 		return (int) paidLotto.getLottoNumbers()
 				.stream()
