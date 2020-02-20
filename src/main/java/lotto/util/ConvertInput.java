@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.util;
+
+import lotto.domain.lottoTicket.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +25,7 @@ public class ConvertInput {
                 .collect(Collectors.toList());
     }
 
-    private static String removeBlank(String input) {
+    static String removeBlank(String input) {
         return input.replace(" ", "");
     }
 }

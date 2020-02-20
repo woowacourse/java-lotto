@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.lottoTicket;
 
+import lotto.util.ConvertInput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
