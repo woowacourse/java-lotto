@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.view.dto.BettingMoneyRequestDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,7 +16,7 @@ class LottoFactoryTest {
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "1500,1", "2000,2"})
     void test1(int money, int expect) {
-        List<LottoTicket> lottoTickets = LottoCompany.buyTicket(money);
+        List<LottoTicket> lottoTickets = LottoCompany.buyTicket(new BettingMoneyRequestDTO(money));
 
         assertThat(lottoTickets).hasSize(expect);
     }

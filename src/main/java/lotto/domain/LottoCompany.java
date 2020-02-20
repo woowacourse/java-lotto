@@ -1,10 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import lotto.view.dto.BettingMoneyRequestDTO;
+import lotto.view.dto.WinningLottoRequestDTO;
+
+import java.util.*;
 
 import static lotto.domain.LottoTicket.LOTTO_PRICE;
 
@@ -12,23 +11,23 @@ public class LottoCompany {
     private static final int BALL_COUNT = 6;
     private static final List<LottoBall> balls = LottoFactory.getInstance();
 
-    public static List<LottoTicket> buyTicket(int money) {
-        int amount = money / LOTTO_PRICE;
+    public static List<LottoTicket> buyTicket(BettingMoneyRequestDTO bettingMoney) {
+        int ticketCount = bettingMoney.getBettingMoney() / LOTTO_PRICE;
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < ticketCount; i++) {
             lottoTickets.add(getTicket());
         }
 
         return lottoTickets;
     }
 
-    public static WinningLotto makeWinningLotto(int bonusNumber, int... numbers) {
+    public static WinningLotto makeWinningLotto(WinningLottoRequestDTO winningLottoRequestDTO) {
         Set<LottoBall> winningLotto = new HashSet<>();
-        for (int number : numbers) {
+        for (int number : winningLottoRequestDTO.getWinningNumbers()) {
             winningLotto.add(LottoFactory.findLottoBallByNumber(number));
         }
-        return new WinningLotto(winningLotto, LottoFactory.findLottoBallByNumber(bonusNumber));
+        return new WinningLotto(winningLotto, LottoFactory.findLottoBallByNumber(winningLottoRequestDTO.getBonusNumber()));
     }
 
     private static LottoTicket getTicket() {
