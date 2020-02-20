@@ -16,12 +16,10 @@ public class LottoGame {
 
         WinningNumber winningNumber = inputWinningNumber();
         LottoResult lottoResult = lottoDummy.countWinningLotto(winningNumber);
+        OutputView.printResult(lottoResult);
 
         int profit = lottoResult.calculateProfit();
-        int profitRatio = profit / (amount.getActualAmount(lottoCount));
-
-        OutputView.printResult(lottoResult);
-        OutputView.printProfitRatio(profitRatio);
+        OutputView.printProfitRatio(profit / amount.getActualAmount(lottoCount));
     }
 
     private static WinningNumber inputWinningNumber() {
