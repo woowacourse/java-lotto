@@ -30,10 +30,10 @@ public class LottoController {
     }
 
     private static void startInputPurchaseAmount() {
-            OutputView.printStartGuide();
-            purchaseAmount = InputView.inputPurchaseAmount();
-            OutputView.printLottePieces(purchaseAmount.lottoTicket());
-            OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
+        OutputView.printStartGuide();
+        purchaseAmount = InputView.inputPurchaseAmount();
+        OutputView.printLottePieces(purchaseAmount.lottoTicket());
+        OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
     }
 
     public static LottoTicket generateLottoTicket() {

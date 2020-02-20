@@ -12,9 +12,9 @@ public class WinningBalls {
         this.winningBalls = winningBalls;
     }
 
-    public List<LottoBall> getWinningBalls() {
-        return Collections.unmodifiableList(winningBalls);
-    }
+//    public List<LottoBall> getWinningBalls() {
+//        return Collections.unmodifiableList(winningBalls);
+//    }
 
 
     public int hitLottoBalls(LottoTicket lottoTicket) {
@@ -24,11 +24,8 @@ public class WinningBalls {
                 .count();
     }
 
-    public boolean hitBonus(LottoTicket lottoTicket){
+    public boolean hitBonus(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket().contains(bonusBall);
     }
-
-
-
 
 }

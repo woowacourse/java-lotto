@@ -15,4 +15,6 @@ public class LottoTickets {
         return Collections.unmodifiableList(LottoTickets);
     }
 
+
+
 }

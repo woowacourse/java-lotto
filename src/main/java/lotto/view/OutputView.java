@@ -1,10 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoBall;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -35,10 +32,12 @@ public class OutputView {
     }
 
     public static void printAnswerWinningBalls() {
+        System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
     public static void printAnswerBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
+
 }
