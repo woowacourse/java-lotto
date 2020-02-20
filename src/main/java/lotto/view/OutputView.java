@@ -8,7 +8,7 @@ import lotto.domain.Rank;
 import lotto.domain.Ranks;
 
 public class OutputView {
-	public static final int MULTIPLIER_FOR_PERCENT = 100;
+	private static final int MULTIPLIER_FOR_PERCENT = 100;
 
 	public static void printResult(final Ranks ranks) {
 		Rank.getOrderReversed().stream()

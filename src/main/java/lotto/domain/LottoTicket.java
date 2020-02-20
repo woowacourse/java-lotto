@@ -7,9 +7,9 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public class LottoTicket {
-	public static final String DELIMITER = ", ";
-	public static final String START_BRACKET = "[";
-	public static final String END_BRACKET = "]";
+	private static final String DELIMITER = ", ";
+	private static final String START_BRACKET = "[";
+	private static final String END_BRACKET = "]";
 
 	private final List<LottoNumber> lottoNumbers;
 

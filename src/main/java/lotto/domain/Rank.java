@@ -13,7 +13,7 @@ public enum Rank {
 	FIFTH(3, 5000),
 	NONE(0, 0);
 
-	public static final int SECOND_OR_THIRD_MATCH = 5;
+	private static final int SECOND_OR_THIRD_MATCH = 5;
 
 	private final int matchCount;
 	private final int amount;
