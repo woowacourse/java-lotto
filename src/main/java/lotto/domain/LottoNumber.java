@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber>{
+    private static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
     private final int number;
 
     public LottoNumber(int number) {
@@ -17,11 +19,11 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     private static boolean isGreaterThanMax(int number) {
-        return number > 45;
+        return number > MAX_NUMBER;
     }
 
     private static boolean isLessThanMin(int number) {
-        return number < 1;
+        return number < MIN_NUMBER;
     }
 
     @Override

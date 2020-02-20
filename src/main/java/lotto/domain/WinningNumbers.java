@@ -7,14 +7,14 @@ public class WinningNumbers {
     private final LottoTicket winningLottoTicket;
     private final LottoNumber bonusNumber;
 
-    public WinningNumbers(List<LottoNumber> sixNumbers, LottoNumber bonusNumber) {
-        validateDuplication(sixNumbers, bonusNumber);
-        this.winningLottoTicket = new LottoTicket(sixNumbers);
+    public WinningNumbers(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
+        validateDuplication(winningLottoTicket, bonusNumber);
+        this.winningLottoTicket = winningLottoTicket;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateDuplication(List<LottoNumber> sixNumbers, LottoNumber bonusNumber) {
-        if (sixNumbers.contains(bonusNumber)) {
+    private void validateDuplication(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
+        if (winningLottoTicket.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }
     }

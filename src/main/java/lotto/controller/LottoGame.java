@@ -10,13 +10,9 @@ public class LottoGame {
     public static void main(String[] args) {
         Money purchaseMoney = InputDTO.inputPurchaseMoney();
         List<LottoTicket> lottoTickets =  LottoFactory.createLottos(purchaseMoney);
-
         OutputView.printLottos(lottoTickets);
 
-        List<LottoNumber> sixNumbers = InputDTO.inputSixNumbers();
-        LottoNumber bonusNumber = InputDTO.inputBonusNumber();
-        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, bonusNumber);
-
+        WinningNumbers winningNumbers = InputDTO.inputWinningNumbers();
         List<Rank> ranks = winningNumbers.compareLottos(lottoTickets);
 
         OutputView.printResult(ranks);

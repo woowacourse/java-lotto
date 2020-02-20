@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
+    private static final int COUNT_FOR_SECOND_RANK = 5;
     private final List<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
@@ -35,6 +36,10 @@ public class LottoTicket {
                 .count();
     }
 
+    public boolean contains(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
@@ -44,7 +49,7 @@ public class LottoTicket {
                 .filter(winningLottoTicket.numbers::contains)
                 .count();
 
-        if (count == 5 && this.numbers.contains(bonusNumber)) {
+        if (count == COUNT_FOR_SECOND_RANK && this.numbers.contains(bonusNumber)) {
             return Rank.SECOND;
         }
 

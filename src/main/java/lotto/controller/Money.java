@@ -3,10 +3,23 @@ package lotto.controller;
 import java.util.Objects;
 
 public class Money {
+    private static final int MIN_PURCHASE_MONEY = 1000;
+
     private final int money;
 
     public Money(int money) {
         this.money = money;
+    }
+
+    public static Money generatePurchaseMoney(int moneyValue) {
+        validateMoneyRange(moneyValue);
+        return new Money(moneyValue);
+    }
+
+    private static void validateMoneyRange(int moneyValue) {
+        if (moneyValue < MIN_PURCHASE_MONEY) {
+            throw new IllegalArgumentException("구매금액은 1000원 이상이어야 합니다.");
+        }
     }
 
     public Money plus(Money anotherMoney) {
