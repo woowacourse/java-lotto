@@ -50,7 +50,7 @@ public class ConsoleOutputView {
 				continue;
 			}
 			if (lottoRankEntry.getKey().isLottoRankOf(LottoRank.MISS)) {
-				return;
+				continue;
 			}
 			printRankResult(lottoRankEntry);
 		}
