@@ -1,23 +1,18 @@
 package lotto.utils;
 
-import java.util.ArrayList;
+import lotto.domain.LottoNumber;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class RandomGenerator {
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int LOTTO_NUMBER_SIZE = 6;
-    private Random random;
+public class RandomGenerator implements NumberGenerator {
 
-    public RandomGenerator() {
-        this.random = new Random();
-    }
+    public List<LottoNumber> generateNumbers() {
+        long seed = System.nanoTime();
 
-    public List<Integer> getRandomNumbers(){
-        List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
-            randomNumbers.add(random.nextInt(MAX_LOTTO_NUMBER) + 1);
-        }
-        return randomNumbers;
+        List<LottoNumber> randomNumbers = LottoNumberFactory.createLottoNumberList();
+        Collections.shuffle(randomNumbers, new Random(seed));
+        return randomNumbers.subList(0,6);
     }
 }
