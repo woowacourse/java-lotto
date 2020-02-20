@@ -1,10 +1,17 @@
 package lotto.model;
 
+import lotto.exception.NotNumberException;
+import lotto.exception.NotSixNumbersException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class WinNumber {
+
+    public static final int LOTTO_NUMBER_LENGTH = 6;
+    public static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
+    public static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하셔야 합니다.";
     public static List<Integer> winNumbers;
 
     public WinNumber(String winNumber) {
@@ -18,8 +25,8 @@ public class WinNumber {
     }
 
     private void hasSix(List<Integer> inputs) {
-        if (inputs.size() != 6) {
-            throw new IllegalArgumentException("6개의 숫자를 입력하셔야 합니다.");
+        if (inputs.size() != LOTTO_NUMBER_LENGTH) {
+            throw new NotSixNumbersException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
@@ -35,7 +42,7 @@ public class WinNumber {
         try {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자가 아니야");
+            throw new NotNumberException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 }
