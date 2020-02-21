@@ -24,7 +24,7 @@ public class LottoController {
 
     private LottoWinner makeWinnerNumbers() {
         LottoNumbers winnerNumbers = LottoNumbersFactory.createLottoNumbers(InputView.inputWinnerNumbers());
-        LottoNumber bonus = LottoNumber.of(InputView.inputBonusNumber());
+        LottoNumber bonus = LottoNumberFactory.getInstance(InputView.inputBonusNumber());
         return new LottoWinner(winnerNumbers, bonus);
     }
 }

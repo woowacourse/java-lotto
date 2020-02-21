@@ -9,15 +9,15 @@ public class LottoNumbersTest {
     @Test
     void 생성_테스트() {
         SortedSet<LottoNumber> numbers = new TreeSet<>(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+                LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(2), LottoNumberFactory.getInstance(3),
+                LottoNumberFactory.getInstance(4), LottoNumberFactory.getInstance(5), LottoNumberFactory.getInstance(6)));
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(1))).isTrue();
-        Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(2))).isTrue();
-        Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(3))).isTrue();
-        Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(4))).isTrue();
-        Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(5))).isTrue();
-        Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(6))).isTrue();
+        Assertions.assertThat(lottoNumbers.contains(LottoNumberFactory.getInstance(1))).isTrue();
+        Assertions.assertThat(lottoNumbers.contains(LottoNumberFactory.getInstance(2))).isTrue();
+        Assertions.assertThat(lottoNumbers.contains(LottoNumberFactory.getInstance(3))).isTrue();
+        Assertions.assertThat(lottoNumbers.contains(LottoNumberFactory.getInstance(4))).isTrue();
+        Assertions.assertThat(lottoNumbers.contains(LottoNumberFactory.getInstance(5))).isTrue();
+        Assertions.assertThat(lottoNumbers.contains(LottoNumberFactory.getInstance(6))).isTrue();
     }
 
     @Test
@@ -33,16 +33,16 @@ public class LottoNumbersTest {
         Assertions.assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("인자의 갯수가 올바르지 않습니다.");
-        lottoNumbers.add(LottoNumber.of(1));
-        lottoNumbers.add(LottoNumber.of(2));
+        lottoNumbers.add(LottoNumberFactory.getInstance(1));
+        lottoNumbers.add(LottoNumberFactory.getInstance(2));
         Assertions.assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("인자의 갯수가 올바르지 않습니다.");
-        lottoNumbers.add(LottoNumber.of(3));
-        lottoNumbers.add(LottoNumber.of(4));
-        lottoNumbers.add(LottoNumber.of(5));
-        lottoNumbers.add(LottoNumber.of(6));
-        lottoNumbers.add(LottoNumber.of(7));
+        lottoNumbers.add(LottoNumberFactory.getInstance(3));
+        lottoNumbers.add(LottoNumberFactory.getInstance(4));
+        lottoNumbers.add(LottoNumberFactory.getInstance(5));
+        lottoNumbers.add(LottoNumberFactory.getInstance(6));
+        lottoNumbers.add(LottoNumberFactory.getInstance(7));
         Assertions.assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("인자의 갯수가 올바르지 않습니다.");
@@ -51,11 +51,11 @@ public class LottoNumbersTest {
     @Test
     void 비교_테스트() {
         SortedSet<LottoNumber> numbers = new TreeSet<>(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+                LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(2), LottoNumberFactory.getInstance(3),
+                LottoNumberFactory.getInstance(4), LottoNumberFactory.getInstance(5), LottoNumberFactory.getInstance(6)));
         SortedSet<LottoNumber> numbers2 = new TreeSet<>(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(9), LottoNumber.of(45), LottoNumber.of(8)));
+                LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(2), LottoNumberFactory.getInstance(3),
+                LottoNumberFactory.getInstance(9), LottoNumberFactory.getInstance(45), LottoNumberFactory.getInstance(8)));
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         LottoNumbers lottoNumbers2 = new LottoNumbers(numbers);
         LottoNumbers lottoNumbers3 = new LottoNumbers(numbers2);

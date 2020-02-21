@@ -1,9 +1,6 @@
 package domain.lotto.lottoresult;
 
-import domain.lotto.TestNumberGenerator;
-import domain.lotto.LottoNumber;
-import domain.lotto.LottoNumbers;
-import domain.lotto.LottoNumbersFactory;
+import domain.lotto.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +18,7 @@ public class LottoWinnerTest {
     @Test
     void 보너스볼_중복_예외_확인() {
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
-        LottoNumber bonus = LottoNumber.of(6);
+        LottoNumber bonus = LottoNumberFactory.getInstance(6);
         Assertions.assertThatThrownBy(() -> new LottoWinner(lottoNumbers, bonus))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("보너스 숫자가 중복되었습니다.");
@@ -31,7 +28,7 @@ public class LottoWinnerTest {
     void 등수_1등_반환_확인() {
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
-        LottoNumber bonus = LottoNumber.of(7);
+        LottoNumber bonus = LottoNumberFactory.getInstance(7);
         LottoWinner winner = new LottoWinner(lottoNumbers, bonus);
         Assertions.assertThat(winner.createRank(checkNumbers)).isEqualTo(LottoRank.FIRST);
     }
@@ -41,7 +38,7 @@ public class LottoWinnerTest {
         List<Integer> value = Arrays.asList(1, 2, 3, 4, 6, 7);
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator(value));
-        LottoNumber bonus = LottoNumber.of(7);
+        LottoNumber bonus = LottoNumberFactory.getInstance(7);
         LottoWinner winner = new LottoWinner(lottoNumbers, bonus);
         Assertions.assertThat(winner.createRank(checkNumbers)).isEqualTo(LottoRank.SECOND);
     }
@@ -51,7 +48,7 @@ public class LottoWinnerTest {
         List<Integer> value = Arrays.asList(1, 2, 3, 4, 6, 8);
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator(value));
-        LottoNumber bonus = LottoNumber.of(7);
+        LottoNumber bonus = LottoNumberFactory.getInstance(7);
         LottoWinner winner = new LottoWinner(lottoNumbers, bonus);
         Assertions.assertThat(winner.createRank(checkNumbers)).isEqualTo(LottoRank.THIRD);
     }
@@ -61,7 +58,7 @@ public class LottoWinnerTest {
         List<Integer> value = Arrays.asList(1, 2, 3, 4, 7, 8);
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator(value));
-        LottoNumber bonus = LottoNumber.of(7);
+        LottoNumber bonus = LottoNumberFactory.getInstance(7);
         LottoWinner winner = new LottoWinner(lottoNumbers, bonus);
         Assertions.assertThat(winner.createRank(checkNumbers)).isEqualTo(LottoRank.FOURTH);
     }
@@ -71,7 +68,7 @@ public class LottoWinnerTest {
         List<Integer> value = Arrays.asList(1, 2, 3, 8, 9, 10);
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator(value));
-        LottoNumber bonus = LottoNumber.of(7);
+        LottoNumber bonus = LottoNumberFactory.getInstance(7);
         LottoWinner winner = new LottoWinner(lottoNumbers, bonus);
         Assertions.assertThat(winner.createRank(checkNumbers)).isEqualTo(LottoRank.FIFTH);
     }
@@ -81,7 +78,7 @@ public class LottoWinnerTest {
         List<Integer> value = Arrays.asList(11, 21, 13, 14, 16, 17);
         LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
         LottoNumbers checkNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator(value));
-        LottoNumber bonus = LottoNumber.of(7);
+        LottoNumber bonus = LottoNumberFactory.getInstance(7);
         LottoWinner winner = new LottoWinner(lottoNumbers, bonus);
         Assertions.assertThat(winner.createRank(checkNumbers)).isEqualTo(LottoRank.NOTHING);
     }

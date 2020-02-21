@@ -17,7 +17,7 @@ public class LottoNumbersFactory {
 
     public static LottoNumbers createLottoNumbers(List<Integer> ints) {
         return ints.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumberFactory::getInstance)
                 .collect(Collectors.collectingAndThen(Collectors.toCollection(TreeSet::new), LottoNumbers::new));
     }
 }

@@ -14,7 +14,7 @@ public class TestNumberGenerator implements NumberGenerator {
 
     public TestNumberGenerator() {
         numbers = IntStream.range(1, 7)
-                .mapToObj(LottoNumber::of)
+                .mapToObj(LottoNumberFactory::getInstance)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
@@ -23,7 +23,7 @@ public class TestNumberGenerator implements NumberGenerator {
             throw new IllegalArgumentException("null값은 입력할 수 없습니다.");
         }
         this.numbers = values.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumberFactory::getInstance)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 

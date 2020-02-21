@@ -26,7 +26,7 @@ public class LottoGameTest {
     @Test
     void Result생성_확인() {
         LottoGame lottoGame = LottoGame.create(new TestNumberGenerator(), 2);
-        LottoWinner winner = new LottoWinner(LottoNumbersFactory.createLottoNumbers(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(7));
+        LottoWinner winner = new LottoWinner(LottoNumbersFactory.createLottoNumbers(Arrays.asList(1,2,3,4,5,6)), LottoNumberFactory.getInstance(7));
         LottoResult result = lottoGame.createGameResult(winner);
         Assertions.assertThat(result.getResult().get(LottoRank.FIRST)).isEqualTo(new ResultCount(2));
     }

@@ -1,6 +1,7 @@
 package domain.lotto.generator;
 
 import domain.lotto.LottoNumber;
+import domain.lotto.LottoNumberFactory;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +19,7 @@ public class RandomNumberGenerator implements NumberGenerator {
 
     static {
         numbers = IntStream.rangeClosed(LOTTO_UNDER_BOUND, LOTTO_UPPER_BOUND)
-                .mapToObj(LottoNumber::of)
+                .mapToObj(LottoNumberFactory::getInstance)
                 .collect(Collectors.toList());
     }
 
