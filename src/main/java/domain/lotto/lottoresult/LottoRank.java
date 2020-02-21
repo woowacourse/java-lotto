@@ -31,7 +31,7 @@ public enum LottoRank {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.bonus == bonus && rank.hitCount == hitCount)
                 .findAny()
-                .orElse(calculateRankWithoutBonus(hitCount));
+                .orElseGet(() -> calculateRankWithoutBonus(hitCount));
     }
 
     public int getHitCount() {
