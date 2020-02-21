@@ -66,6 +66,10 @@ public class LottoMoney {
 		}
 	}
 
+	public int getNumberOfLotto() {
+		return (int)(money / LOTTO_PRICE);
+	}
+
 	public LottoMoney add(LottoMoney addedLottoMoney) {
 		return new LottoMoney(this.money + addedLottoMoney.money);
 	}
@@ -74,18 +78,11 @@ public class LottoMoney {
 		return new LottoMoney(this.money * multiplyCount);
 	}
 
-	public int getNumberOfLotto() {
-		return (int)(money / LOTTO_PRICE);
-	}
-
 	public long getMoney() {
 		return money;
 	}
 
 	public int getWinningRatio(LottoMoney inputLottoMoney) {
-		if (inputLottoMoney.money == ZERO) {
-			return 0;
-		}
 		return (int)((this.money * PERCENT) / inputLottoMoney.money);
 	}
 

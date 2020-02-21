@@ -59,14 +59,16 @@ class LottoMoneyTest {
 			.hasMessage(InvalidLottoMoneyException.OUT_OF_BOUND);
 	}
 
+	@DisplayName("getNumberOfLotto에 LottoMoney를 입력하면 로또 가격으로 나눈 값이 반환")
 	@Test
-	void purchaseLotto_Money_NumberOfLotto() {
+	void getNumberOfLotto_LottoMoney_NumberOfLotto() {
 		LottoMoney lottoMoney = new LottoMoney("2000");
 		assertThat(lottoMoney.getNumberOfLotto()).isEqualTo(2);
 	}
 
+	@DisplayName("add에 더할 LottoMoney를 입력하면 더한 LottoMoney 반환")
 	@Test
-	void add_AddedMoney_ReturnSum() {
+	void add_AddedLottoMoney_ReturnSumLottoMoney() {
 		LottoMoney lottoMoney = new LottoMoney("3000");
 		LottoMoney addedLottoMoney = new LottoMoney("5000");
 
@@ -74,20 +76,21 @@ class LottoMoneyTest {
 		assertThat(lottoMoney.add(addedLottoMoney)).isEqualTo(expectedLottoMoney);
 	}
 
-	@DisplayName("곱한만큼의 돈을 반환하는 함수")
+	@DisplayName("multiply에 곱할 LottoMoney를 입력하면 곱한 LottoMoney 반환")
 	@Test
 	void multiply_MultipliedCount_ReturnCalculatedMoney() {
 		LottoMoney lottoMoney = new LottoMoney("3000");
 		int multiplyCount = 3;
+
 		LottoMoney expectedLottoMoney = new LottoMoney("9000");
 		assertThat(lottoMoney.multiply(multiplyCount)).isEqualTo(expectedLottoMoney);
 	}
 
-	@DisplayName("총 수익금을 낸 돈으로 나눠서 수익률을 계산하는 함수")
+	@DisplayName("getWinningRatio에 구입한 로또 금액을 입력하면 총 수익률 반환")
 	@Test
 	void getWinningRatio_PaidLottoMoney_ReturnWinningRatio() {
-		LottoMoney paidLottoMoney = new LottoMoney("5000");
 		LottoMoney winningLottoMoney = new LottoMoney("15000");
+		LottoMoney paidLottoMoney = new LottoMoney("5000");
 
 		int expectedRatio = 300;
 		assertThat(winningLottoMoney.getWinningRatio(paidLottoMoney)).isEqualTo(expectedRatio);
