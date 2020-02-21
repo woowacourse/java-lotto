@@ -21,7 +21,7 @@ public class Lotto {
     }
 
     public static void checkDuplicatedLottoNumbers(List<LottoNumber> lotto) {
-        Set<LottoNumber> lottoSet = new HashSet<>();
+        Set<LottoNumber> lottoSet = new HashSet<>(lotto);
         if (lottoSet.size() != lotto.size()){
             throw new IllegalArgumentException("중복된 로또 번호가 입력되었습니다.");
         }
@@ -32,13 +32,9 @@ public class Lotto {
     }
 
     public int countMatchNumbers(final Lotto myLotto) {
-        int count = 0;
-        for(LottoNumber number : lotto){
-            if (myLotto.contains(number)){
-                count ++;
-            }
-        }
-        return count;
+        return (int)lotto.stream()
+                    .filter(t -> myLotto.contains(t))
+                    .count();
     }
 
     public boolean contains(final LottoNumber number) {
