@@ -1,13 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import lotto.domain.exception.InvalidLottoException;
 
@@ -23,21 +19,20 @@ public class Lotto {
 	}
 
 	private void validate(List<LottoNumber> lotto) {
-		validateSize(lotto);
-		validateDuplicate(lotto);
-	}
-
-	private void validateSize(List<LottoNumber> lotto) {
-		if (lotto == null || lotto.size() != SIZE) {
+		if (isIncorrectSize(lotto)) {
 			throw new InvalidLottoException("로또는 6개의 로또 번호가 필요합니다.");
 		}
-	}
-
-	private void validateDuplicate(List<LottoNumber> lotto) {
-		Set<LottoNumber> distinct = new HashSet<>(lotto);
-		if (distinct.size() != lotto.size()) {
+		if (isDuplicate(lotto)) {
 			throw new InvalidLottoException("로또 번호는 중복될 수 없습니다.");
 		}
+	}
+
+	private boolean isIncorrectSize(List<LottoNumber> lotto) {
+		return lotto == null || lotto.size() != SIZE;
+	}
+
+	private boolean isDuplicate(List<LottoNumber> lotto) {
+		return lotto.stream().distinct().count() != lotto.size();
 	}
 
 	public boolean contains(LottoNumber lottoNumber) {
