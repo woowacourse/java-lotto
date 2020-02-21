@@ -14,7 +14,6 @@ public class Buyer {
     }
 
     private void createLottos(int lottoTicketCount) {
-        new LottoFactory();
         for (int i = 0; i < lottoTicketCount; i++) {
             this.lottos.add(new Lotto(LottoFactory.createLottoNumbers()));
         }
