@@ -1,22 +1,22 @@
 package lotto.controller;
 
+import lotto.domain.ticket.AutoLottoMachine;
 import lotto.domain.ticket.LottoTicketBundle;
-import lotto.domain.ticket.RealLottoCompany;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.dto.BettingMoneyRequestDTO;
-import lotto.view.dto.LottoTicketBundleResponseDTO;
+import lotto.view.dto.LottoTicketResponseDTO;
 import lotto.view.dto.StatisticsResponseDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
 
 public class LottoController {
-    private LottoService service = new LottoService(new RealLottoCompany());
+    private LottoService service = new LottoService(new AutoLottoMachine());
 
     public void run() {
         LottoTicketBundle lottoTicketBundle = getLottoTicketBundle();
 
-        OutputView.printLottoTicket(new LottoTicketBundleResponseDTO(lottoTicketBundle));
+        OutputView.printLottoTicket(LottoTicketResponseDTO.getLottoTicketResponseDTOS(lottoTicketBundle));
 
         StatisticsResponseDTO statisticsResponseDTO = getStatisticsDTO(lottoTicketBundle);
 

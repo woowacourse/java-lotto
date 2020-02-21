@@ -24,13 +24,13 @@ public class WinningLottoRequestDTO {
 
     private Set<Integer> collectNumber(String winningNumbers) {
         try {
-            return getSet(winningNumbers);
+            return convertToIntegerSet(winningNumbers);
         } catch (NumberFormatException e) {
             throw new ConvertFailException(String.format(PARSE_FAIL_EXCEPTION_MESSAGE, winningNumbers));
         }
     }
 
-    private Set<Integer> getSet(String winningNumbers) {
+    private Set<Integer> convertToIntegerSet(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(COMMA))
                 .map(String::trim)
                 .map(Integer::parseInt)

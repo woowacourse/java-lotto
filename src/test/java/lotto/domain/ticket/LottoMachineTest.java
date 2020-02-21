@@ -17,14 +17,14 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoCompanyTest {
+class LottoMachineTest {
 
     @DisplayName("가격에 해당하는 티켓을 발급하는지 확인")
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "1500,1", "2000,2"})
     void test1(int money, int expect) {
-        LottoCompany lottoCompany = new RealLottoCompany();
-        List<LottoTicket> lottoTickets = lottoCompany.buyTicket(new BettingMoneyRequestDTO(money));
+        LottoMachine realMachine = new AutoLottoMachine();
+        List<LottoTicket> lottoTickets = realMachine.buyTickets(new BettingMoneyRequestDTO(money));
 
         assertThat(lottoTickets).hasSize(expect);
     }
@@ -33,7 +33,7 @@ class LottoCompanyTest {
     @Test
     void makeWinningLotto() {
         //given
-        LottoCompany lottoCompany = new RealLottoCompany();
+        LottoMachine lottoMachine = new AutoLottoMachine();
         Set<LottoBall> lottoBalls = aLottoBalls(1, 2, 3, 4, 5, 6);
         LottoBall bonusBall = LottoFactory.getLottoBallByNumber(7);
         WinningLotto expectedLotto = new WinningLotto(lottoBalls, bonusBall);
@@ -41,7 +41,7 @@ class LottoCompanyTest {
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO("1,2,3,4,5,6", 7);
 
         //when
-        WinningLotto winningLotto = lottoCompany.makeWinningLotto(winningLottoRequestDTO);
+        WinningLotto winningLotto = lottoMachine.createWinningLotto(winningLottoRequestDTO);
 
         //then
         assertThat(winningLotto).isEqualTo(expectedLotto);
@@ -51,13 +51,13 @@ class LottoCompanyTest {
     @Test
     void test2() {
         //given
-        LottoCompany testLottoCompany = new TestLottoCompany();
+        LottoMachine testLottoMachine = new LottoMachineForTest();
         BettingMoneyRequestDTO bettingMoneyRequestDTO = new BettingMoneyRequestDTO(1000);
 
         LottoTicket expectedTicket = new LottoTicket(aLottoBalls(1, 2, 3, 4, 5, 6));
 
         //when
-        List<LottoTicket> tickets = testLottoCompany.buyTicket(bettingMoneyRequestDTO);
+        List<LottoTicket> tickets = testLottoMachine.buyTickets(bettingMoneyRequestDTO);
 
         //then
         assertThat(tickets.get(0)).isEqualTo(expectedTicket);

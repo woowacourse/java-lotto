@@ -8,9 +8,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+//TODO: 티켓값보다 적은 금액 입력시, null 혹은 empty, 숫자 아닌 값 입력시
 class BettingMoneyRequestDTOTest {
 
-    @DisplayName("잘못된 입력값 주입시")
+    @DisplayName("예외 테스트: 로또 한 장 가격보다 작은 값 입력시 Exception 발생")
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 999})
     void test1(int money) {

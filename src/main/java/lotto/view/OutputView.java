@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.view.dto.LottoTicketBundleResponseDTO;
 import lotto.view.dto.LottoTicketResponseDTO;
 import lotto.view.dto.StatisticsResponseDTO;
 
@@ -15,8 +14,7 @@ public class OutputView {
     private static final String SECOND = "SECOND";
     private static final String MESSAGE_FOR_RETURN_RATE = "총 수익률은 %.1f입니다.";
 
-    public static void printLottoTicket(LottoTicketBundleResponseDTO lottoTicketBundleResponseDTO) {
-        List<LottoTicketResponseDTO> lottoTicketResponseDTOS = lottoTicketBundleResponseDTO.getLottoTicketResponseDTOS();
+    public static void printLottoTicket(List<LottoTicketResponseDTO> lottoTicketResponseDTOS) {
         System.out.println(String.format(MESSAGE_FOR_LOTTO_TICKET_NUMBER, lottoTicketResponseDTOS.size()));
         for (LottoTicketResponseDTO dto : lottoTicketResponseDTOS) {
             System.out.println(String.format(MESSAGE_FOR_LOTTO_TICKET_INFO, dto.getNumbers()));

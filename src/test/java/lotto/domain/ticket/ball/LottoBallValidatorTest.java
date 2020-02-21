@@ -14,6 +14,6 @@ class LottoBallValidatorTest {
     void validateNumber(int number) {
         assertThatThrownBy(() -> LottoBallValidator.validateNumber(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format("%d: 로또 범위 이외 숫자입니다", number));
+                .hasMessage("%d: 로또 범위 이외 숫자입니다", number);
     }
 }

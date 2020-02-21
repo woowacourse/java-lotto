@@ -2,19 +2,16 @@ package lotto.domain.ticket;
 
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoFactory;
-import lotto.view.dto.BettingMoneyRequestDTO;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class TestLottoCompany extends LottoCompany {
+public class LottoMachineForTest extends LottoMachine {
+
     @Override
-    public List<LottoTicket> buyTicket(BettingMoneyRequestDTO bettingMoney) {
-        LottoTicket testTicket = new LottoTicket(getTestBalls());
-        return new ArrayList<LottoTicket>(Arrays.asList(testTicket));
+    public LottoTicket createOneTicket() {
+        return new LottoTicket(getTestBalls());
     }
 
     private Set<LottoBall> getTestBalls() {

@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketTest {
 
-    @DisplayName("잘못된 갯수의 로또 번호를 입력받은 티켓은 Exception 발생")
+    @DisplayName("예외 테스트: 잘못된 갯수의 로또 번호를 입력받은 티켓은 Exception 발생")
     @Test
     void test1() {
         int[] ballNumbers = {1, 2, 3, 4, 5, 5};
@@ -31,16 +31,15 @@ class LottoTicketTest {
                 .hasMessage("로또 번호의 갯수가 %d개로 올바르지 않습니다.", wrongSize);
     }
 
-
     @DisplayName("로또 티켓이 지정 번호를 포함하는지 확인 테스트")
     @ParameterizedTest
     @CsvSource(value = {"1,true", "7,false"})
     void name(int number, boolean expectedResult) {
-        LottoCompany testLottoCompany = new TestLottoCompany();
-        LottoTicket ticket = testLottoCompany.buyTicket(new BettingMoneyRequestDTO(1000)).get(0);
+        LottoMachine testMachine = new LottoMachineForTest();       // {1, 2, 3, 4, 5, 6} 숫자를 가지는 로또 생성기
+        LottoTicket ticket = testMachine.buyTickets(new BettingMoneyRequestDTO(1000)).get(0);
 
-        LottoBall ballNumber = LottoFactory.getLottoBallByNumber(number);
+        LottoBall lottoBall = LottoFactory.getLottoBallByNumber(number);
 
-        assertThat(ticket.has(ballNumber)).isEqualTo(expectedResult);
+        assertThat(ticket.has(lottoBall)).isEqualTo(expectedResult);
     }
 }

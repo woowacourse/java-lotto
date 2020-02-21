@@ -4,6 +4,7 @@ import lotto.domain.result.win.prize.PrizeGroup;
 import lotto.view.dto.StatisticsResponseDTO;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoResultBundle {
@@ -21,5 +22,18 @@ public class LottoResultBundle {
         return this.lottoResults.stream()
                 .map(PrizeGroup::findPrizeByLottoResult)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResultBundle that = (LottoResultBundle) o;
+        return Objects.equals(lottoResults, that.lottoResults);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoResults);
     }
 }

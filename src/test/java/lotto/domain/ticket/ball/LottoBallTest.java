@@ -16,7 +16,7 @@ class LottoBallTest {
         assertThatThrownBy(() -> {
             new LottoBall(number);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format("%d: 로또 범위 이외 숫자입니다", number));
+                .hasMessage("%d: 로또 범위 이외 숫자입니다", number);
     }
 
     @DisplayName("같은 번호의 LottoBall 이 같은 LottoBall 인지 확인 테스트")
