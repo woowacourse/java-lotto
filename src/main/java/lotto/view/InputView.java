@@ -16,7 +16,7 @@ public class InputView {
     public static List<Integer> inputLastWeekWinningNumbers() {
         System.out.println("지난주 당첨번호을 입력해주세요");
         String input = scanner.nextLine();
-        return StringUtils.parseWithStandard(input);
+        return StringUtils.parseWithDelimiter(input);
     }
 
     public static int inputBonusBall() {

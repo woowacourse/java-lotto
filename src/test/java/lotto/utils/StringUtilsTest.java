@@ -15,7 +15,7 @@ class StringUtilsTest {
         String input = "1, 2, 3, 4, 5, 6";
         List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
         //when
-        List<Integer> parsedInput = StringUtils.parseWithStandard(input);
+        List<Integer> parsedInput = StringUtils.parseWithDelimiter(input);
         //then
         assertThat(parsedInput).isEqualTo(expected);
     }
