@@ -23,7 +23,7 @@ public class LottoFactory {
         return new ArrayList<>(instance.values());
     }
 
-    public static LottoBall findLottoBallByNumber(int number) {
+    public static LottoBall getLottoBallByNumber(int number) {
         return instance.get(number);
     }
 }

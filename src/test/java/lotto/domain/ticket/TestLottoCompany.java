@@ -20,7 +20,7 @@ public class TestLottoCompany extends LottoCompany {
     private Set<LottoBall> getTestBalls() {
         int[] fixedNumber = new int[]{1, 2, 3, 4, 5, 6};
         return Arrays.stream(fixedNumber)
-                .mapToObj(LottoFactory::findLottoBallByNumber)
+                .mapToObj(LottoFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());
     }
 }

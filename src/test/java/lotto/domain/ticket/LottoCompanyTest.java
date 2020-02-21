@@ -35,7 +35,7 @@ class LottoCompanyTest {
         //given
         LottoCompany lottoCompany = new RealLottoCompany();
         Set<LottoBall> lottoBalls = aLottoBalls(1, 2, 3, 4, 5, 6);
-        LottoBall bonusBall = LottoFactory.findLottoBallByNumber(7);
+        LottoBall bonusBall = LottoFactory.getLottoBallByNumber(7);
         WinningLotto expectedLotto = new WinningLotto(lottoBalls, bonusBall);
 
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO("1,2,3,4,5,6", 7);
@@ -65,7 +65,7 @@ class LottoCompanyTest {
 
     private Set<LottoBall> aLottoBalls(int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(LottoFactory::findLottoBallByNumber)
+                .mapToObj(LottoFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());
     }
 }

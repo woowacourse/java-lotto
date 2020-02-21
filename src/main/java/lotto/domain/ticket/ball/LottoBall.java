@@ -7,13 +7,9 @@ public final class LottoBall {
     public static final int UPPER_BOUND = 45;
     private final int number;
 
-    public LottoBall(int number) {
+    LottoBall(int number) {
         validateNumber(number);
         this.number = number;
-    }
-
-    public static LottoBall of(int number) {
-        return new LottoBall(number);
     }
 
     private void validateNumber(int number) {

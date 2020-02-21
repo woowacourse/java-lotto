@@ -17,9 +17,9 @@ public abstract class LottoCompany {
     public static WinningLotto makeWinningLotto(WinningLottoRequestDTO winningLottoRequestDTO) {
         Set<LottoBall> winningLotto = new HashSet<>();
         for (int number : winningLottoRequestDTO.getWinningNumbers()) {
-            winningLotto.add(LottoFactory.findLottoBallByNumber(number));
+            winningLotto.add(LottoFactory.getLottoBallByNumber(number));
         }
-        return new WinningLotto(winningLotto, LottoFactory.findLottoBallByNumber(winningLottoRequestDTO.getBonusNumber()));
+        return new WinningLotto(winningLotto, LottoFactory.getLottoBallByNumber(winningLottoRequestDTO.getBonusNumber()));
     }
 
 
