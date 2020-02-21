@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.view.dto.LottoTicketResponseDTO;
-import lotto.view.dto.StatisticsResponseDTO;
+import lotto.view.dto.PrizeResponseBundleDTO;
 
 import java.util.List;
 
@@ -12,6 +12,11 @@ public class OutputView {
     private static final String RATE_MESSAGE = "총 수익률은 %s입니다.";
     private static final String RESULT_HEADER = "당첨 통계\n-----------";
     private static final String LOTTO_NUMBERS_FORMAT = "[ %d %d %d %d %d %d ]";
+    private static final String BUY_LOTTO_TICKET_COUNT_MESSAGE = "%d개를 구매하였습니다.";
+
+    public static void printBuyTicketCount(int count) {
+        System.out.println(String.format(BUY_LOTTO_TICKET_COUNT_MESSAGE, count));
+    }
 
     public static void printBuyTickets(List<LottoTicketResponseDTO> lottoTicketResponseDTOs) {
         for (LottoTicketResponseDTO lottoTicketResponseDTO : lottoTicketResponseDTOs) {
@@ -19,18 +24,18 @@ public class OutputView {
         }
     }
 
-    public static void printResult(StatisticsResponseDTO statisticsResponseDTO) {
+    public static void printResult(PrizeResponseBundleDTO prizeResponseBundleDTO) {
         System.out.println(RESULT_HEADER);
-        printStatistics(statisticsResponseDTO);
-        System.out.println(String.format(RATE_MESSAGE, statisticsResponseDTO.getRate()));
+        printStatistics(prizeResponseBundleDTO);
+        System.out.println(String.format(RATE_MESSAGE, prizeResponseBundleDTO.getRate()));
     }
 
-    private static void printStatistics(StatisticsResponseDTO statisticsResponseDTO) {
-        for (int i = 0; i < statisticsResponseDTO.size(); i++) {
-            int matchCount = statisticsResponseDTO.getMatchCount(i);
-            int defaultPrize = statisticsResponseDTO.getDefaultPrize(i);
-            int matchTicketCount = statisticsResponseDTO.getMatchTicketCount(i);
-            String message = String.format(findMessage(statisticsResponseDTO.getName(i)), matchCount, defaultPrize, matchTicketCount);
+    private static void printStatistics(PrizeResponseBundleDTO prizeResponseBundleDTO) {
+        for (int i = 0; i < prizeResponseBundleDTO.size(); i++) {
+            int matchCount = prizeResponseBundleDTO.getMatchCount(i);
+            int defaultPrize = prizeResponseBundleDTO.getDefaultPrize(i);
+            int matchTicketCount = prizeResponseBundleDTO.getMatchTicketCount(i);
+            String message = String.format(findMessage(prizeResponseBundleDTO.getName(i)), matchCount, defaultPrize, matchTicketCount);
             System.out.println(message);
         }
     }

@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -19,26 +20,26 @@ class WinningLottoTest {
 
     private static Stream<Arguments> numberProvider() {
         return Stream.of(
-                Arguments.of(new int[]{11, 12, 13, 18, 19, 20}, new LottoResult(0, false)),
-                Arguments.of(new int[]{1, 12, 13, 18, 19, 20}, new LottoResult(1, false)),
-                Arguments.of(new int[]{1, 2, 13, 18, 19, 20}, new LottoResult(2, false)),
-                Arguments.of(new int[]{1, 2, 3, 8, 9, 10}, new LottoResult(3, false)),
-                Arguments.of(new int[]{1, 2, 3, 4, 9, 10}, new LottoResult(4, false)),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 10}, new LottoResult(5, false)),
-                Arguments.of(new int[]{1, 2, 3, 4, 7, 10}, new LottoResult(5, true)),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new LottoResult(6, false))
+                Arguments.of(Arrays.asList(11, 12, 13, 18, 19, 20), new LottoResult(0, false)),
+                Arguments.of(Arrays.asList(1, 12, 13, 18, 19, 20), new LottoResult(1, false)),
+                Arguments.of(Arrays.asList(1, 2, 13, 18, 19, 20), new LottoResult(2, false)),
+                Arguments.of(Arrays.asList(1, 2, 3, 8, 9, 10), new LottoResult(3, false)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 9, 10), new LottoResult(4, false)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 10), new LottoResult(5, false)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 10), new LottoResult(5, true)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), new LottoResult(6, false))
         );
     }
 
     @DisplayName("우승 로또 티켓과 비교하기")
     @ParameterizedTest
     @MethodSource("numberProvider")
-    void name(int[] numbers, LottoResult expectedResult) {
+    void name(List<Integer> numbers, LottoResult expectedResult) {
         //given
-        Set<LottoBall> winBalls = aLottoTicket(1, 2, 3, 4, 5, 6);
+        Set<LottoBall> winBalls = oneLottoBalls(1, 2, 3, 4, 5, 6);
         WinningLotto winningLotto = new WinningLotto(winBalls, LottoBall.from(7));
 
-        LottoTicket buyLottoTicket = new LottoTicket(aLottoTicket(numbers));
+        LottoTicket buyLottoTicket = new LottoTicket(numbers);
 
         //when
         LottoResult lottoResult = winningLotto.getResult(buyLottoTicket);
@@ -47,7 +48,7 @@ class WinningLottoTest {
         assertThat(lottoResult).isEqualTo(expectedResult);
     }
 
-    private Set<LottoBall> aLottoTicket(int... numbers) {
+    private Set<LottoBall> oneLottoBalls(int... numbers) {
         return new HashSet<>(Arrays.asList(
                 LottoBall.from(numbers[0]),
                 LottoBall.from(numbers[1]),

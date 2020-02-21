@@ -1,5 +1,7 @@
 package lotto.domain.ticket;
 
+import lotto.domain.ticket.strategy.LottoMachine;
+import lotto.domain.ticket.strategy.RandomLottoMachine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,8 +17,8 @@ class LottoBallFactoryTest {
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "1500,1", "2000,2"})
     void test1(int money, int expect) {
-        LottoStore lottoStore = new RealLottoStore();
-        List<LottoTicket> lottoTickets = lottoStore.buyTicket(new BettingMoney(money));
+        LottoMachine randomLottoStore = new RandomLottoMachine();
+        List<LottoTicket> lottoTickets = randomLottoStore.buyTicket(new BettingMoney(money));
 
         assertThat(lottoTickets).hasSize(expect);
     }

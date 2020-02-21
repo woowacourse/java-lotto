@@ -23,10 +23,10 @@ public class LottoTicketResponseDTO {
     }
 
     public Integer[] getNumbers() {
-        Integer[] integerArray = new Integer[6];
+        Integer[] numbers = new Integer[6];
         for (int index = 0; index < this.numbers.size(); index++) {
-            integerArray[index] = this.numbers.get(index);
+            numbers[index] = this.numbers.get(index);
         }
-        return integerArray;
+        return numbers;
     }
 }

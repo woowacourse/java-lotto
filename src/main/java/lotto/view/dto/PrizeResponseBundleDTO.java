@@ -2,17 +2,20 @@ package lotto.view.dto;
 
 import lotto.domain.result.win.prize.PrizeGroup;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
-public class StatisticsResponseDTO {
+public class PrizeResponseBundleDTO {
     private static final String RATE_PERCENT = "%";
+    private static final String CUT_DIGIT_FORMAT = "0";
+    private static final int PERCENTAGE = 100;
     private final List<PrizeResponseDTO> prizeResponseDTOS;
 
-    public StatisticsResponseDTO(List<PrizeGroup> prizeResults) {
+    public PrizeResponseBundleDTO(List<PrizeGroup> prizeResults) {
         this.prizeResponseDTOS = Arrays.stream(PrizeGroup.values())
                 .map(criteria -> new PrizeResponseDTO(criteria, prizeResults))
                 .collect(Collectors.toList());
@@ -21,7 +24,10 @@ public class StatisticsResponseDTO {
     public String getRate() {
         double bettingMoney = getBettingMoney();
         double totalPrize = getPrize();
-        return (totalPrize / bettingMoney * 100) + RATE_PERCENT;
+
+        DecimalFormat decimalFormat = new DecimalFormat(CUT_DIGIT_FORMAT);
+        String rate = decimalFormat.format(totalPrize / bettingMoney * PERCENTAGE);
+        return rate + RATE_PERCENT;
     }
 
     private int getBettingMoney() {
@@ -45,15 +51,15 @@ public class StatisticsResponseDTO {
     }
 
 
-    public int getDefaultPrize(int i) {
-        return this.prizeResponseDTOS.get(i).getDefaultPrize();
+    public int getDefaultPrize(int index) {
+        return this.prizeResponseDTOS.get(index).getDefaultPrize();
     }
 
-    public int getMatchTicketCount(int i) {
-        return this.prizeResponseDTOS.get(i).getMatchTicketCount();
+    public int getMatchTicketCount(int index) {
+        return this.prizeResponseDTOS.get(index).getMatchTicketCount();
     }
 
-    public String getName(int i) {
-        return this.prizeResponseDTOS.get(i).getName();
+    public String getName(int index) {
+        return this.prizeResponseDTOS.get(index).getName();
     }
 }

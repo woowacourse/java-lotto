@@ -6,7 +6,7 @@ import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.dto.LottoTicketResponseDTO;
-import lotto.view.dto.StatisticsResponseDTO;
+import lotto.view.dto.PrizeResponseBundleDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
 
 import java.util.Scanner;
@@ -21,20 +21,21 @@ public class LottoController {
     }
 
     public void run() {
-        LottoTicketBundle lottoTicketBundle = getLottoTicketBundle();
+        BettingMoney bettingMoney = new BettingMoney(inputView.inputBettingMoney());
+        OutputView.printBuyTicketCount(bettingMoney.getTicketCount());
+
+        LottoTicketBundle lottoTicketBundle = getLottoTicketBundle(bettingMoney);
         OutputView.printBuyTickets(LottoTicketResponseDTO.ofList(lottoTicketBundle));
 
-        StatisticsResponseDTO statisticsResponseDTO = getStatisticsDTO(lottoTicketBundle);
-        OutputView.printResult(statisticsResponseDTO);
+        PrizeResponseBundleDTO prizeResponseBundleDTO = getStatisticsDTO(lottoTicketBundle);
+        OutputView.printResult(prizeResponseBundleDTO);
     }
 
-    private LottoTicketBundle getLottoTicketBundle() {
-        BettingMoney bettingMoney = new BettingMoney(inputView.inputBettingMoney());
-
+    private LottoTicketBundle getLottoTicketBundle(BettingMoney bettingMoney) {
         return lottoService.getLottoTicketBundle(bettingMoney);
     }
 
-    private StatisticsResponseDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle) {
+    private PrizeResponseBundleDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle) {
         String winningNumber = inputView.inputWinningNumber();
         int bonusNumber = inputView.inputBonusNumber();
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO(winningNumber, bonusNumber);

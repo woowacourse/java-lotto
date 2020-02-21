@@ -1,12 +1,17 @@
 package lotto.view.dto;
 
+import lotto.domain.result.win.WinningLotto;
+import lotto.domain.ticket.ball.LottoBall;
+import lotto.domain.ticket.ball.LottoBallFactory;
 import lotto.exception.ConvertFailException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -46,5 +51,28 @@ class WinningLottoRequestDTOTest {
 
         //then
         assertThat(winningNumbers).contains(1, 2, 3, 4, 5, 6);
+    }
+
+    @DisplayName("우승 로또 만들기")
+    @Test
+    void makeWinningLotto() {
+        //given
+        Set<LottoBall> lottoBalls = aLottoBalls(1, 2, 3, 4, 5, 6);
+        LottoBall bonusBall = LottoBallFactory.findLottoBallByNumber(7);
+        WinningLotto expectedLotto = new WinningLotto(lottoBalls, bonusBall);
+
+        WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO("1,2,3,4,5,6", 7);
+
+        //when
+        WinningLotto winningLotto = winningLottoRequestDTO.toWinningLotto();
+
+        //then
+        assertThat(winningLotto).isEqualTo(expectedLotto);
+    }
+
+    private Set<LottoBall> aLottoBalls(int... numbers) {
+        return Arrays.stream(numbers)
+                .mapToObj(LottoBallFactory::findLottoBallByNumber)
+                .collect(Collectors.toSet());
     }
 }

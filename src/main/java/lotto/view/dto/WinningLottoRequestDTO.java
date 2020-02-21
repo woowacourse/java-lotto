@@ -1,8 +1,12 @@
 package lotto.view.dto;
 
+import lotto.domain.result.win.WinningLotto;
+import lotto.domain.ticket.ball.LottoBall;
+import lotto.domain.ticket.ball.LottoBallFactory;
 import lotto.exception.ConvertFailException;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,6 +43,14 @@ public class WinningLottoRequestDTO {
         if (winningNumbers.size() != LOTTO_BALL_SIZE) {
             throw new IllegalArgumentException(String.format(MESSAGE_INVALID_BALL_SIZE, winningNumbers.size()));
         }
+    }
+
+    public WinningLotto toWinningLotto() {
+        Set<LottoBall> winningLotto = new HashSet<>();
+        for (int number : this.winningNumbers) {
+            winningLotto.add(LottoBallFactory.findLottoBallByNumber(number));
+        }
+        return new WinningLotto(winningLotto, LottoBallFactory.findLottoBallByNumber(this.bonusNumber));
     }
 
     public Set<Integer> getWinningNumbers() {
