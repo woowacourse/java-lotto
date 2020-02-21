@@ -18,8 +18,10 @@ public class BonusBallTest {
 				.map(LottoNo::new)
 				.collect(Collectors.toList());
 		Lotto lotto = new Lotto(numbers);
+
 		assertThat(bonusBall.isContainBonusBall(lotto)).isTrue();
 		bonusBall = new BonusBall("9");
 		assertThat(bonusBall.isContainBonusBall(lotto)).isFalse();
+		assertThat(bonusBall.isContainBonusBall(null)).isFalse();
 	}
 }

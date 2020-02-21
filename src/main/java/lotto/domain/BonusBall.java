@@ -11,6 +11,9 @@ public class BonusBall {
 	}
 
 	public boolean isContainBonusBall(Lotto lotto) {
-		return lotto.isContain(this.bonusBall);
+		if (lotto == null) {
+			return false;
+		}
+		return lotto.contains(this.bonusBall);
 	}
 }

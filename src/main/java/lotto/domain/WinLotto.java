@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.validator.Validator;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,10 +18,14 @@ public class WinLotto {
     }
 
     public List<LottoNo> toLottoNoList(String[] winLotto) {
-        return Arrays.stream(winLotto)
-                .map(Integer::parseInt)
-                .map(LottoNo::new)
-                .collect(Collectors.toList());
+        try {
+            return Arrays.stream(winLotto)
+                    .map(Integer::parseInt)
+                    .map(LottoNo::new)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(Validator.ERROR_MESSAGE_NOT_INTEGER);
+        }
     }
 
     public int compare(Lotto lotto) {

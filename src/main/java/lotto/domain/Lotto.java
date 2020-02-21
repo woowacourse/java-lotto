@@ -14,13 +14,13 @@ public class Lotto {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public boolean isContain(LottoNo lottoNo) {
+    public boolean contains(LottoNo lottoNo) {
         return lottoNumbers.contains(lottoNo);
     }
 
     public int compare(Lotto winLotto) {
         return (int) lottoNumbers.stream()
-                .filter(x -> winLotto.isContain(x))
+                .filter(x -> winLotto.contains(x))
                 .count();
     }
 
