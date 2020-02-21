@@ -7,14 +7,14 @@ import lotto.domain.Money;
 import java.util.List;
 
 public class OutputView {
-	public static final String NEW_LINE = "\n";
-	public static final String INCOME_RATE_MESSAGE_FORMAT = "총 수익률은 %d %s 입니다.";
-	public static final String BUY_MESSAGE_FORMAT = "%d개를 구매했습니다";
-	public static final String PERCENT = "%";
+    public static final String NEW_LINE = "\n";
+    public static final String INCOME_RATE_MESSAGE_FORMAT = "총 수익률은 %d %s 입니다.";
+    public static final String BUY_MESSAGE_FORMAT = "%d개를 구매했습니다";
+    public static final String PERCENT = "%";
 
-	public static void printLotteris(List<Lotto> lotteris) {
-		printLottoAmounts(lotteris.size());
-		StringBuilder builder = new StringBuilder();
+    public static void printLotteries(List<Lotto> lotteris) {
+        printLottoAmounts(lotteris.size());
+        StringBuilder builder = new StringBuilder();
         for (Lotto lotto : lotteris) {
             builder.append(lotto + NEW_LINE);
         }
@@ -26,7 +26,7 @@ public class OutputView {
     }
 
     public static void printResult(Money money, LottoManager lottoManager) {
-        lottoManager.getResult();
+        System.out.println(lottoManager.getResult());
         printIncomeRate(money, lottoManager);
     }
 

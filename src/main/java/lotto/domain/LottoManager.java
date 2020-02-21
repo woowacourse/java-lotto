@@ -35,8 +35,8 @@ public class LottoManager {
         lottoResult.plusTicketCount(lottoRank);
     }
 
-    public void getResult() {
-        lottoResult.getResult();
+    public String getResult() {
+        return lottoResult.getResult();
     }
 
     public long calculateTotalReward() {

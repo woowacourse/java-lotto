@@ -14,7 +14,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputBuyMoney());
         List<Lotto> lotteries = LottoFactory.createLotteries(money);
-        OutputView.printLotteris(lotteries);
+        OutputView.printLotteries(lotteries);
 
         WinLotto winLotto = new WinLotto(InputView.inputWinNumber(), InputView.inputBounsBall());
 

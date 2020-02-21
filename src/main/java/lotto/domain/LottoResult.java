@@ -25,16 +25,11 @@ public class LottoResult {
                 .get();
     }
 
-    public void getResult() {
+    public String getResult() {
         StringBuilder builder = new StringBuilder();
         for (Rank rank : ranks) {
             builder.append(rank.toString() + "\n");
         }
-        System.out.println(builder);
-    }
-
-    @Override
-    public String toString() {
-        return ranks + "\n";
+        return builder.toString();
     }
 }
