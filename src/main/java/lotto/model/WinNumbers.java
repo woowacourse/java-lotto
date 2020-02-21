@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class WinNumber {
+public class WinNumbers {
 
     private static final String COMMA = ",";
     private static final int LOTTO_NUMBER_LENGTH = 6;
     private static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하셔야 합니다.";
     private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
 
-    public static List<Integer> winNumbers;
+    private List<Integer> winNumbers;
 
-    public WinNumber(String winNumber) {
+    public WinNumbers(String winNumber) {
         List<Integer> winNumbers = makeWinNumbers(makeSplitNumbers(winNumber));
         checkLottoNumbersLength(winNumbers);
         this.winNumbers = winNumbers;
@@ -46,5 +46,9 @@ public class WinNumber {
         if (inputs.size() != LOTTO_NUMBER_LENGTH) {
             throw new NotSixNumbersException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
+    }
+
+    public boolean isContainNumber(int number) {
+        return winNumbers.contains(number);
     }
 }

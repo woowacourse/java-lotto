@@ -1,57 +1,48 @@
 package lotto.controller;
 
 import lotto.model.*;
+import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Lotto {
+    public static void lotto() {
+        Money money = setMoney();
+        AutoTickets autoTickets = getAutoTickets(money.getMoney() / 1000);
+        WinNumbers winNumbers = getWinNumbers();
+        BonusBallNo bonusBallNo = getBonusBallNo(winNumbers);
 
-    private static final String BONUS_KEY = "5+";
+        autoTickets.matchNumberResult(winNumbers, bonusBallNo);
 
-    public static void lottoGame() {
-        Initializer.initialize();
-        for (AutoTicket autoTicket : AutoTickets.getAutoTickets()) {
-            int count = isInWinNumber(autoTicket);
-            checkCountOverThree(autoTicket, count);
-        }
         printCorrectResults();
-        new Prize();
-        OutputView.printYield(Prize.countYieldMoney());
+        OutputView.printYield(money.getYield());
     }
 
-    public static int isInWinNumber(AutoTicket autoTicket) {
-        return (int) autoTicket.getAutoTicket()
-            .stream()
-            .filter(x -> WinNumber.winNumbers.contains(x))
-            .count();
+    private static Money setMoney() {
+        OutputView.printInput();
+        return new Money(InputView.input());
     }
 
-    private static void checkCountOverThree(AutoTicket autoTicket, int count) {
-        if (count >= LottoResult.THREE.getCorrect()) {
-            String correctCount = Integer.toString(count);
-            checkCount(autoTicket, count, correctCount);
-        }
+    private static AutoTickets getAutoTickets(int ticketsCount) {
+        new LottoNumbers();
+        OutputView.printHowManyTicketsPurchase(ticketsCount);
+        AutoTickets autoTickets = new AutoTickets(ticketsCount);
+        OutputView.printAutoNumbers(autoTickets.getAutoTickets());
+        return autoTickets;
     }
 
-    private static void checkCount(AutoTicket autoTicket, int count, String correctCount) {
-        if (count == LottoResult.FIVE.getCorrect()) {
-            isSecondWin(autoTicket, correctCount);
-            return;
-        }
-        LottoResultMap.resultCount.get(correctCount).setCount();
+    private static WinNumbers getWinNumbers() {
+        OutputView.printInputWinNumber();
+        return new WinNumbers(InputView.input());
     }
 
-    private static void isSecondWin(AutoTicket autoTicket, String correctCount) {
-        if (autoTicket.getAutoTicket().contains(BonusBall.bonusNo)) {
-            LottoResultMap.resultCount.get(BONUS_KEY).setCount();
-            return;
-        }
-        LottoResultMap.resultCount.get(correctCount).setCount();
+    private static BonusBallNo getBonusBallNo(WinNumbers winNumbers) {
+        OutputView.printInputBonusNumber();
+        return new BonusBallNo(InputView.input(), winNumbers);
     }
 
     private static void printCorrectResults() {
         OutputView.printResult();
-        for (String key : LottoResultMap.resultCount.keySet()) {
-            LottoResult lottoResult = LottoResultMap.resultCount.get(key);
+        for (LottoResult lottoResult : LottoResult.values()) {
             OutputView.printCorrectResult(lottoResult.getCorrect(), lottoResult.getPrize(),
                 lottoResult.getCount());
         }

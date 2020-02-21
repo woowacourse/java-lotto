@@ -9,6 +9,7 @@ public class AutoTicket {
 
     private static final int LOTTO_NUMBER_LENGTH = 6;
     private List<Integer> autoNumber = new ArrayList<>();
+    private String matchCountResult = "";
 
     public AutoTicket() {
         Collections.shuffle(LottoNumbers.getLottoNumbers());
@@ -24,5 +25,31 @@ public class AutoTicket {
 
     public List<Integer> getAutoTicket() {
         return autoNumber;
+    }
+
+    public void setMatchCountResult(WinNumbers winNumbers, BonusBallNo bonusBallNo) {
+        int count = (int) autoNumber.stream().filter(winNumbers::isContainNumber).count();
+        if (count == LottoResult.THREE.getCorrect()) {
+            matchCountResult = "THREE";
+        }
+        if (count == LottoResult.FOUR.getCorrect()) {
+            matchCountResult = "FOUR";
+        }
+        if (count == LottoResult.FIVE.getCorrect()) {
+            if (winNumbers.isContainNumber(bonusBallNo.getBonusBallNo())) {
+                matchCountResult = "FIVE_BONUS";
+            } else {
+                matchCountResult = "FIVE";
+            }
+        }
+        if (count == LottoResult.SIX.getCorrect()) {
+            matchCountResult = "SIX";
+        }
+    }
+
+    public void setLottoResultCount() {
+        if (!matchCountResult.isEmpty()) {
+            LottoResult.valueOf(matchCountResult).setCount();
+        }
     }
 }
