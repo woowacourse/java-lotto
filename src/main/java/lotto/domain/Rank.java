@@ -17,7 +17,7 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static boolean isExists(int matchingNumber) {
+    static boolean isValid(int matchingNumber) {
         return Arrays.stream(Rank.values()).anyMatch(rank -> rank.getMatchNumber() == matchingNumber);
     }
 

@@ -61,4 +61,15 @@ class RankTest {
             Arguments.arguments(Rank.FIFTH, 5_000)
         );
     }
+
+    @Test
+    void enum의_valueOf_학습테스트_정상() {
+        assertThat(Rank.valueOf("FIRST")).isEqualTo(Rank.FIRST);
+    }
+
+    @Test
+    void enum의_valueOf_학습테스트_비정상() {
+        assertThatThrownBy(() -> assertThat(Rank.valueOf("INVALID")))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }
