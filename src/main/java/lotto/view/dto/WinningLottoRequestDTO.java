@@ -35,6 +35,7 @@ public class WinningLottoRequestDTO {
 
     private Set<Integer> getSet(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(COMMA))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
     }
