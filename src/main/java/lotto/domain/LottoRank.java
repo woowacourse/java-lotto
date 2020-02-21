@@ -38,7 +38,7 @@ public enum LottoRank {
 	}
 
 	public static boolean isNotRightResultSize(int size) {
-		return values().length == size;
+		return values().length != size;
 	}
 
 	private boolean isMatch(int count) {

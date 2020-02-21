@@ -15,6 +15,8 @@ public class WinningResultTest {
 	void setup() {
 		Map<LottoRank, Long> rankResult = new HashMap<>();
 		rankResult.put(LottoRank.FIRST, 10L);
+		rankResult.put(LottoRank.SECOND, 0L);
+		rankResult.put(LottoRank.THIRD, 0L);
 		rankResult.put(LottoRank.FIFTH, 10L);
 		rankResult.put(LottoRank.FOURTH, 10L);
 		result = new WinningResult(rankResult);
