@@ -27,13 +27,9 @@ public class LottoManager {
             return;
         }
         LottoResult lottoRank = LottoResult.findRank(hitCount);
-        if (isSecondRank(lottoRank, isBonus)) {
+        if (lottoRank.isSecondRank(isBonus)) {
             lottoRank = LottoResult.SECOND;
         }
         lottoRank.TicketCountPlus();
-    }
-
-    private boolean isSecondRank(LottoResult lottoResult, boolean isBonus) {
-        return lottoResult == LottoResult.THIRD && isBonus;
     }
 }

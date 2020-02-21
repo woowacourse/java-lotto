@@ -50,4 +50,8 @@ public enum LottoResult {
 	public int getHitCount() {
 		return hitCount;
 	}
+
+	public boolean isSecondRank(boolean isBonus) {
+		return this.equals(THIRD) && isBonus;
+	}
 }

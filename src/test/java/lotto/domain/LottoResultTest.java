@@ -16,11 +16,17 @@ public class LottoResultTest {
         assertThat(lottoResult == values).isTrue();
     }
 
-	@DisplayName("최종 수익 계산")
-	@Test
-	void calculateTotalReward() {
+    @DisplayName("최종 수익 계산")
+    @Test
+    void calculateTotalReward() {
         LottoResult.FIFTH.TicketCountPlus();
         LottoResult.FOURTH.TicketCountPlus();
         assertThat(LottoResult.calculateTotalReward()).isEqualTo(55000);
+    }
+
+    @Test
+    void isSecondRank() {
+        LottoResult result = LottoResult.THIRD;
+        assertThat(result.isSecondRank(true)).isTrue();
     }
 }
