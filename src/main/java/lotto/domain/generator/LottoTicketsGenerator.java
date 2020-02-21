@@ -2,6 +2,7 @@ package lotto.domain.generator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import lotto.domain.LottoCount;
 import lotto.domain.LottoTicket;
@@ -13,7 +14,7 @@ public class LottoTicketsGenerator {
 	private final LottoTicketGenerator lottoTicketGenerator;
 
 	public LottoTicketsGenerator(LottoTicketGenerator lottoTicketGenerator) {
-		this.lottoTicketGenerator = lottoTicketGenerator;
+		this.lottoTicketGenerator = Objects.requireNonNull(lottoTicketGenerator);
 	}
 
 	public LottoTickets createLottosByCount(LottoCount count) {

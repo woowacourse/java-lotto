@@ -15,7 +15,7 @@ class LottoTicketFactoryTest {
 	@ValueSource(strings = {"1, 2, 3, 4, 5, ", "1, 2, 3, 4, 5, 6.", "1, 2, 3, 4, 5"})
 	void constructFailByRawNumber(String rawNumbers) {
 		assertThatThrownBy(() -> LottoTicketFactory.of(rawNumbers))
-		.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("문자열로 직접 로또 발급 기능 테스트")

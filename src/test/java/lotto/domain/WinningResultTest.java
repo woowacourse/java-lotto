@@ -8,8 +8,8 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class LottoResultTest {
-	private LottoResult result;
+public class WinningResultTest {
+	private WinningResult result;
 
 	@BeforeEach
 	void setup() {
@@ -17,7 +17,7 @@ public class LottoResultTest {
 		rankResult.put(LottoRank.FIRST, 10L);
 		rankResult.put(LottoRank.FIFTH, 10L);
 		rankResult.put(LottoRank.FOURTH, 10L);
-		result = new LottoResult(rankResult);
+		result = new WinningResult(rankResult);
 	}
 
 	@Test

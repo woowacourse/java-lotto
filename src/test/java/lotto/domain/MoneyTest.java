@@ -33,7 +33,7 @@ public class MoneyTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"1000,1000,2000","10000,90000,100000","5000,1000,6000"})
+	@CsvSource(value = {"1000,1000,2000", "10000,90000,100000", "5000,1000,6000"})
 	void plusTest(long firstOperand, long secondOperand, long expected) {
 		Money firstMoney = Money.of(firstOperand);
 		Money secondMoney = Money.of(secondOperand);
@@ -41,7 +41,7 @@ public class MoneyTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"10000,10000,100","2000,10000,20"})
+	@CsvSource(value = {"10000,10000,100", "2000,10000,20"})
 	void findProfits(long prize, int money, long expected) {
 		Money prizeValue = Money.of(prize);
 		Money moneyValue = Money.of(money);

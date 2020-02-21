@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.generator;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.generator.LottoTicketGenerator;
-import lotto.domain.generator.LottoTicketsGenerator;
+import lotto.domain.Ball;
+import lotto.domain.LottoCount;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 public class LottoTicketsGeneratorTest {
 

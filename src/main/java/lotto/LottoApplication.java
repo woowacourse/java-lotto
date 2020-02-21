@@ -2,12 +2,12 @@ package lotto;
 
 import lotto.domain.Ball;
 import lotto.domain.LottoCount;
-import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
+import lotto.domain.WinningResult;
 import lotto.domain.generator.LottoTicketsGenerator;
 import lotto.domain.generator.RandomLottoTicketGenerator;
 import lotto.view.InputView;
@@ -28,7 +28,7 @@ public class LottoApplication {
 			LottoTicket winningLottoTicket = LottoTicketFactory.of(InputView.inputWinningLotto());
 			Ball bonusBall = Ball.of(InputView.inputWinningBonusBall());
 			WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusBall);
-			LottoResult result = winningLotto.getResult(lottos);
+			WinningResult result = winningLotto.getResult(lottos);
 			OutputView.printStatistics(result, money);
 		} catch (RuntimeException ex) {
 			OutputView.printExceptionMessage(ex.getMessage());

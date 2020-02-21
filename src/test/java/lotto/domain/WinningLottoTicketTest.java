@@ -42,8 +42,8 @@ public class WinningLottoTicketTest {
 		LottoTicketsGenerator lottosFactory = new LottoTicketsGenerator(lottoTicketGenerator);
 		LottoTickets lottoTickets = lottosFactory.createLottosByCount(LottoCount.of(2));
 
-		LottoResult result = winningLotto.getResult(lottoTickets);
-		Map<LottoRank, Long> lottoResult = result.getLottoResult();
+		WinningResult result = winningLotto.getResult(lottoTickets);
+		Map<LottoRank, Long> lottoResult = result.getWinningResult();
 		assertThat(lottoResult)
 			.extractingByKeys(LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST)
 			.containsExactly(0L, 0L, 0L, 0L, 2L);

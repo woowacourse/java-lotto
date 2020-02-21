@@ -3,50 +3,49 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-	private static final int MONEY_ZERO = 0;
-	private static final int LOTTO_PRICE = 1000;
-
+	private static final int ZERO = 0;
+	private static final long LOTTO_PRICE = 1000;
 	private static final String MONEY_EXCEPTION_MESSAGE = String.format("금액을 %d원 단위로 입력해주세요.", LOTTO_PRICE);
-	public static final int PROFIT_PERCENTAGE = 100;
+	private static final int PROFIT_PERCENTAGE = 100;
 
 	private final long money;
 
 	private Money(long money) {
+		validate(money);
+		this.money = money;
+	}
+
+	private void validate(long money) {
 		validatePositive(money);
 		validateDivideByThousand(money);
-		this.money = money;
+	}
+
+	private void validatePositive(long money) {
+		if (money < ZERO) {
+			throw new IllegalArgumentException(MONEY_EXCEPTION_MESSAGE);
+		}
+	}
+
+	private void validateDivideByThousand(long money) {
+		if (money % LOTTO_PRICE != ZERO) {
+			throw new IllegalArgumentException(MONEY_EXCEPTION_MESSAGE);
+		}
 	}
 
 	public static Money of(long money) {
 		return new Money(money);
 	}
 
-	private void validatePositive(long money) {
-		if (money < MONEY_ZERO) {
-			throw new IllegalArgumentException(MONEY_EXCEPTION_MESSAGE);
-		}
-	}
-
-	private void validateDivideByThousand(long money) {
-		if (money % LOTTO_PRICE != MONEY_ZERO) {
-			throw new IllegalArgumentException(MONEY_EXCEPTION_MESSAGE);
-		}
-	}
-
 	public LottoCount findLottoTicketCount() {
-		return LottoCount.of((int)money / LOTTO_PRICE);
-	}
-
-	public long getMoney() {
-		return money;
+		return LottoCount.of((int)(money / LOTTO_PRICE));
 	}
 
 	public Money multiply(long multiplier) {
-		return new Money(money * multiplier);
+		return Money.of(money * multiplier);
 	}
 
 	public Money plus(Money otherMoney) {
-		return new Money(money + otherMoney.money);
+		return Money.of(money + otherMoney.money);
 	}
 
 	public long findProfits(Money lottoPrice) {

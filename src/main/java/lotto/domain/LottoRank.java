@@ -37,6 +37,10 @@ public enum LottoRank {
 			.orElseThrow(() -> new IllegalArgumentException(THERE_IS_NON_RANK_EXCEPTION_MESSAGE));
 	}
 
+	public static boolean isNotRightResultSize(int size) {
+		return values().length == size;
+	}
+
 	private boolean isMatch(int count) {
 		return matchCount.isSameMatch(count);
 	}
