@@ -5,12 +5,12 @@ import lotto.domain.LottoMoney.LottoMoney;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST(6, LottoMoney.FIRST_PRIZE),
-    SECOND(5, LottoMoney.SECOND_PRIZE),
-    THIRD(5, LottoMoney.THIRD_PRIZE),
-    FOURTH(4, LottoMoney.FOURTH_PRIZE),
-    FIFTH(3, LottoMoney.FIFTH_PRIZE),
-    MISS(0, LottoMoney.MISS_PRIZE);
+    FIRST(6, new LottoMoney(2_000_000_000)),
+    SECOND(5, new LottoMoney(30_000_000)),
+    THIRD(5, new LottoMoney(1_500_000)),
+    FOURTH(4, new LottoMoney(50_000)),
+    FIFTH(3, new LottoMoney(5_000)),
+    MISS(0, new LottoMoney(0));
 
     private int matchCount;
     private LottoMoney winningMoney;

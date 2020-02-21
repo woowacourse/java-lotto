@@ -40,10 +40,10 @@ public class LottoController {
     }
 
     public int getWinningRatio(Map<LottoRank, Integer> lottoRankCount, LottoMoney inputLottoMoney) {
-        LottoMoney initLottoMoney = LottoMoney.MISS_PRIZE;
+        LottoMoney totalWinningMoney = LottoRank.MISS.getWinningMoney();
         for (Map.Entry<LottoRank, Integer> lottoEntry : lottoRankCount.entrySet()) {
-            initLottoMoney = initLottoMoney.add(lottoEntry.getKey().getWinningMoney().multiply(lottoEntry.getValue()));
+            totalWinningMoney = totalWinningMoney.add(lottoEntry.getKey().getWinningMoney().multiply(lottoEntry.getValue()));
         }
-        return initLottoMoney.getWinningRate(inputLottoMoney);
+        return totalWinningMoney.getWinningRate(inputLottoMoney);
     }
 }
