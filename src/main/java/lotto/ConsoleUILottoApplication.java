@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.domain.LottoStore.*;
 import static lotto.domain.WinningLottoParser.*;
 import static lotto.view.ConsoleInputView.*;
 import static lotto.view.ConsoleOutputView.*;
@@ -7,7 +8,6 @@ import static lotto.view.ConsoleOutputView.*;
 import java.util.List;
 import java.util.Map;
 
-import lotto.controller.LottoController;
 import lotto.domain.InvalidLottoMoneyException;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
@@ -17,13 +17,11 @@ import lotto.domain.WinningLotto;
 
 public class ConsoleUILottoApplication {
 	public static void main(String[] args) {
-		LottoController lottoController = new LottoController();
-
 		LottoMoney inputLottoMoney = receiveInputMoney();
 		int numberOfLotto = inputLottoMoney.getNumberOfLotto();
 		printPurchaseCompleteMessage(numberOfLotto);
 
-		List<Lotto> lottos = lottoController.purchaseLotto(numberOfLotto);
+		List<Lotto> lottos = purchaseLotto(numberOfLotto);
 		printPurchasedLotto(lottos);
 
 		Lotto winningLottoNumber = new Lotto(parseToLottoNumberList(inputWinningLottoNumber()));
