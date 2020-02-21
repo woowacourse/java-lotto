@@ -21,7 +21,7 @@ public class WinningLotto {
 
 	private void validateDuplicate(Lotto winningLotto, LottoNumber bonusLottoNumber) {
 		if (winningLotto.isContains(bonusLottoNumber)) {
-			throw new WinningLottoException(WinningLottoException.DUPLICATE_NUMBER);
+			throw new InvalidWinningLottoException(InvalidWinningLottoException.DUPLICATE_NUMBER);
 		}
 	}
 
