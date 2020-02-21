@@ -27,19 +27,19 @@ public class WinningLottoTest {
 	void setUp() {
 		winningLotto = new WinningLotto(new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THREE,
-						LottoNumber.TEN,
-						LottoNumber.EIGHT,
-						LottoNumber.FORTY_FOUR
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(3),
+						LottoNumber.of(10),
+						LottoNumber.of(8),
+						LottoNumber.of(44)
 				)
 		));
 	}
 
 	@Test
 	void isContain_주어진_로또번호_포함시_true_반환() {
-		assertThat(winningLotto.isContain(LottoNumber.TEN)).isTrue();
+		assertThat(winningLotto.isContain(LottoNumber.of(10))).isTrue();
 	}
 
 

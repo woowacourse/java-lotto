@@ -28,40 +28,40 @@ public class ResultStatisticTest {
 		List<Lotto> tempLottos = new ArrayList<>();
 
 		List<LottoNumber> winningLottoNumbers = Arrays.asList(
-				LottoNumber.ONE,
-				LottoNumber.TWO,
-				LottoNumber.THREE,
-				LottoNumber.FOUR,
-				LottoNumber.FIVE,
-				LottoNumber.SIX
+				LottoNumber.of(1),
+				LottoNumber.of(2),
+				LottoNumber.of(3),
+				LottoNumber.of(4),
+				LottoNumber.of(5),
+				LottoNumber.of(6)
 		);
 
 		winningLotto = (WinningLotto) LottoFactory.createLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers);
 
 		List<LottoNumber> lottoNumbersFistPrize = Arrays.asList(
-				LottoNumber.ONE,
-				LottoNumber.TWO,
-				LottoNumber.THREE,
-				LottoNumber.FOUR,
-				LottoNumber.FIVE,
-				LottoNumber.SIX
+				LottoNumber.of(1),
+				LottoNumber.of(2),
+				LottoNumber.of(3),
+				LottoNumber.of(4),
+				LottoNumber.of(5),
+				LottoNumber.of(6)
 		);
 		List<LottoNumber> lottoNumbersForthPrize = Arrays.asList(
-				LottoNumber.ONE,
-				LottoNumber.TWO,
-				LottoNumber.THREE,
-				LottoNumber.FOUR,
-				LottoNumber.EIGHT,
-				LottoNumber.NINE
+				LottoNumber.of(1),
+				LottoNumber.of(2),
+				LottoNumber.of(3),
+				LottoNumber.of(4),
+				LottoNumber.of(8),
+				LottoNumber.of(9)
 		);
 
 		List<LottoNumber> lottoNumbersSixthPrize = Arrays.asList(
-				LottoNumber.TEN,
-				LottoNumber.ELEVEN,
-				LottoNumber.TWELVE,
-				LottoNumber.THIRTEEN,
-				LottoNumber.EIGHT,
-				LottoNumber.NINE
+				LottoNumber.of(10),
+				LottoNumber.of(11),
+				LottoNumber.of(12),
+				LottoNumber.of(13),
+				LottoNumber.of(8),
+				LottoNumber.of(9)
 		);
 
 		tempLottos.add(LottoFactory.createLottoManual(LottoType.PAID_LOTTO, lottoNumbersFistPrize));

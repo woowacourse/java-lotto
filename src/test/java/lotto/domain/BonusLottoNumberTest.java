@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,18 +20,13 @@ public class BonusLottoNumberTest {
 
 	@Test
 	void BonusLottoNumber_올바른_동작_확인() {
-		WinningLotto winningLotto = new WinningLotto(new ArrayList<>(
-				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THREE,
-						LottoNumber.TEN,
-						LottoNumber.EIGHT,
-						LottoNumber.FORTY_FOUR
-				)
-		));
+		WinningLotto winningLotto = new WinningLotto(
+				LottoNumber.getCache().stream()
+						.limit(6)
+						.collect(Collectors.toList())
+		);
 
-		BonusLottoNumber bonusLottoNumber = new BonusLottoNumber(4, winningLotto);
+		BonusLottoNumber bonusLottoNumber = new BonusLottoNumber(7, winningLotto);
 		assertThat(bonusLottoNumber).isInstanceOf(BonusLottoNumber.class);
 	}
 }

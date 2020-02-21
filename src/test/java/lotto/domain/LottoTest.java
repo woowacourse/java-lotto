@@ -25,12 +25,12 @@ public class LottoTest {
 	void Lotto_올바른_동작_확인() {
 		List<LottoNumber> lottoNumbers = new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THREE,
-						LottoNumber.TEN,
-						LottoNumber.EIGHT,
-						LottoNumber.FORTY_FOUR
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(3),
+						LottoNumber.of(10),
+						LottoNumber.of(8),
+						LottoNumber.of(44)
 				)
 		);
 
@@ -57,11 +57,11 @@ public class LottoTest {
 	void Lotto_로또번호가_6개_미만인_경우_예외처리() {
 		List<LottoNumber> inputLengthNotEnough = new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THIRTEEN,
-						LottoNumber.TEN,
-						LottoNumber.EIGHT
+						LottoNumber.of(3),
+						LottoNumber.of(2),
+						LottoNumber.of(1),
+						LottoNumber.of(10),
+						LottoNumber.of(8)
 				)
 		);
 
@@ -74,16 +74,16 @@ public class LottoTest {
 	void Lotto_로또번호가_6개_초과인_경우_예외처리() {
 		List<LottoNumber> inputLengthOverSix = new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THIRTEEN,
-						LottoNumber.TEN,
-						LottoNumber.EIGHT,
-						LottoNumber.TWENTY_ONE,
-						LottoNumber.TWENTY_TWO,
-						LottoNumber.TWENTY,
-						LottoNumber.FORTY_FOUR,
-						LottoNumber.THREE
+						LottoNumber.of(3),
+						LottoNumber.of(2),
+						LottoNumber.of(1),
+						LottoNumber.of(10),
+						LottoNumber.of(8),
+						LottoNumber.of(21),
+						LottoNumber.of(22),
+						LottoNumber.of(20),
+						LottoNumber.of(44),
+						LottoNumber.of(3)
 				)
 		);
 
@@ -96,12 +96,12 @@ public class LottoTest {
 	void Lotto_중복번호_입력시_예외처리() {
 		List<LottoNumber> overlappedInput = new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THIRTEEN,
-						LottoNumber.TEN,
-						LottoNumber.TEN,
-						LottoNumber.THREE
+						LottoNumber.of(3),
+						LottoNumber.of(2),
+						LottoNumber.of(1),
+						LottoNumber.of(10),
+						LottoNumber.of(10),
+						LottoNumber.of(3)
 				)
 		);
 

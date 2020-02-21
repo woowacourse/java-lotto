@@ -21,7 +21,6 @@ public class LottoController { // TODO 변수들을 클래스변수로 뺴고 �
 	public static void run() {
 		MoneyForLotto moneyForLotto = InputView.getMoneyForLotto(); // TODO 로또 인풋 받는 메서드
 		int amountOfLottos = moneyForLotto.calculateAmountOfLottos();
-
 		Lottos lottos = LottosFactory.createLottosAuto(amountOfLottos);
 
 		OutputView.printPurchasedLottos(amountOfLottos, lottos);

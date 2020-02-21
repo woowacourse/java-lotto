@@ -21,7 +21,7 @@ public class InputView {
 		try {
 			OutputView.askEnterMoneyForLotto();
 			return new MoneyForLotto(Integer.parseInt(SCANNER.nextLine()));
-		} catch (Exception e) {
+		} catch (Exception e) { // TODO runtime으로
 			OutputView.printExceptionMessage(e);
 			return getMoneyForLotto();
 		}

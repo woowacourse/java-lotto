@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 클래스 이름 : LottoFactory.java
@@ -11,11 +12,9 @@ import java.util.*;
  * 날짜 : 2020/02/19
  */
 public class LottoFactory {
-	private static final int FROM_INDEX = 0;
-	private static final int TO_INDEX = 6;
 
 	private static Map<LottoType, LottoCreator> creators = new HashMap<>();
-	private static List<LottoNumber> allLottoNumbers = Arrays.asList(LottoNumber.values());
+	private static List<LottoNumber> allLottoNumbers = LottoNumber.getCache();
 
 	static {
 		creators.put(LottoType.PAID_LOTTO, new PaidLottoCreator());
@@ -25,11 +24,12 @@ public class LottoFactory {
 	public static Lotto createLottoAuto(final LottoType lottoType) {
 		Objects.requireNonNull(lottoType);
 		LottoCreator lottoCreator = creators.get(lottoType);
-
-		List<LottoNumber> lottoNumbers;
 		Collections.shuffle(allLottoNumbers);
-		lottoNumbers = allLottoNumbers.subList(FROM_INDEX, TO_INDEX);
 
+		List<LottoNumber> lottoNumbers = allLottoNumbers.stream()
+				.limit(6)
+				.sorted()
+				.collect(Collectors.toList());
 		return lottoCreator.create(lottoNumbers);
 	}
 

@@ -26,10 +26,10 @@ public class LottoNumberTest {
 
 	private static Stream<Arguments> getRightTestCase() {
 		return Stream.of(
-				Arguments.of(1, LottoNumber.ONE),
-				Arguments.of(20, LottoNumber.TWENTY),
-				Arguments.of(45, LottoNumber.FORTY_FIVE),
-				Arguments.of(40, LottoNumber.FORTY)
+				Arguments.of(1, LottoNumber.of(1)),
+				Arguments.of(20, LottoNumber.of(20)),
+				Arguments.of(45, LottoNumber.of(45)),
+				Arguments.of(40, LottoNumber.of(40))
 		);
 	}
 
