@@ -6,15 +6,15 @@ import java.util.List;
 public class LottoNumbers {
     private static final int LAST_LOTTO_NUMBER = 45;
     private static final int FIRST_LOTTO_NUMBER = 1;
-    private List<Integer> lottoNumbers = new ArrayList<>();
+    private static final List<Integer> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers() {
+    static {
         for (int i = FIRST_LOTTO_NUMBER; i <= LAST_LOTTO_NUMBER; i++) {
-            this.lottoNumbers.add(i);
+            lottoNumbers.add(i);
         }
     }
 
-    public List<Integer> getLottoNumbers() {
+    public static List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
 }
