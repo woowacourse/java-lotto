@@ -34,7 +34,7 @@ public class LottoStatistics {
 	}
 
 	public long getProfitRate() {
-		return sumWinnings() / lottoPurchaseMoney.getValue() * 100;
+		return sumWinnings() * 100 / lottoPurchaseMoney.getValue();
 	}
 
 	private long sumWinnings() {
