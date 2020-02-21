@@ -33,7 +33,14 @@ public class LottoTest {
 	void Lotto1() {
 		numbers.add(new LottoNo(8));
 		assertThatThrownBy(() -> new Lotto(numbers))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage("6개의 숫자가 아닙니다.");
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("6개의 숫자가 아닙니다.");
 	}
+
+//	@DisplayName("로또 객체 생성시 null 전달 테스트")
+//	@Test
+//	void Lotto2() {
+//		assertThatThrownBy(() -> new Lotto(null))
+//			.isInstanceOf(IllegalArgumentException.class);
+//	}
 }

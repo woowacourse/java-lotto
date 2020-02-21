@@ -1,17 +1,24 @@
 package lotto.domain;
 
-import lotto.validator.Validator;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    private static final int LOTTO_SIZE = 6;
+    private static final String ERROR_MESSAGE_LOTTO_SIZE = "6개의 숫자가 아닙니다.";
+
     private final List<LottoNo> lottoNumbers;
 
     public Lotto(List<LottoNo> lottoNumbers) {
-        Validator.validateLottoSize(lottoNumbers);
+        validateLottoSize(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    }
+
+    private void validateLottoSize(List<LottoNo> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_LOTTO_SIZE);
+        }
     }
 
     public boolean contains(LottoNo lottoNo) {

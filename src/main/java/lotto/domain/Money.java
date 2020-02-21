@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.validator.Validator;
+import lotto.validator.InputValidator;
 
 public class Money {
 	private static final int LOTTO_PRICE = 1000;
@@ -10,7 +10,7 @@ public class Money {
 	private final int inputMoney;
 
 	public Money(String inputMoney) {
-		Validator.validateInteger(inputMoney);
+		InputValidator.validateInteger(inputMoney);
 		this.inputMoney = Integer.parseInt(inputMoney);
 		validateOverThousand();
 	}

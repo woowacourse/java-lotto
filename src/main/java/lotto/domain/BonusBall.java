@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import lotto.validator.Validator;
+import lotto.validator.InputValidator;
 
 public class BonusBall {
 	private final LottoNo bonusBall;
 
 	public BonusBall(String bonusBall) {
-		Validator.validateInteger(bonusBall);
+		InputValidator.validateInteger(bonusBall);
 		this.bonusBall = new LottoNo(Integer.parseInt(bonusBall));
 	}
 

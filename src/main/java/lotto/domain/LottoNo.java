@@ -2,14 +2,22 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import lotto.validator.Validator;
-
 public class LottoNo implements Comparable<LottoNo> {
+	private static final String ERROR_MESSAGE_LOTTO_RANGE = "1이상 45이하의 숫자를 입력하세요.";
+	private static final int MIN_LOTTO_NO = 1;
+	private static final int MAX_LOTTO_NO = 45;
+
 	private final int number;
 
 	public LottoNo(int number) {
-		Validator.validateLottoRange(number);
+		validateLottoNo(number);
 		this.number = number;
+	}
+
+	private void validateLottoNo(int i) {
+		if (i < MIN_LOTTO_NO || i > MAX_LOTTO_NO) {
+			throw new IllegalArgumentException(ERROR_MESSAGE_LOTTO_RANGE);
+		}
 	}
 
 	@Override

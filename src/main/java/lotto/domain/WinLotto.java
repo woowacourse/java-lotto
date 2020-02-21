@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.validator.Validator;
+import lotto.validator.InputValidator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +24,7 @@ public class WinLotto {
                     .map(LottoNo::new)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(Validator.ERROR_MESSAGE_NOT_INTEGER);
+            throw new IllegalArgumentException(InputValidator.ERROR_MESSAGE_NOT_INTEGER);
         }
     }
 
