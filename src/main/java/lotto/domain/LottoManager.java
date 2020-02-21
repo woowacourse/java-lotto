@@ -7,9 +7,9 @@ public class LottoManager {
 	private final List<Lotto> lotteries;
 	private final WinLotto winLotto;
 
-	public LottoManager(List<Lotto> lotteris, WinLotto winLotto) throws CloneNotSupportedException {
+	public LottoManager(List<Lotto> lotteris, WinLotto winLotto) {
 		this.lotteries = new ArrayList<>(lotteris);
-		this.winLotto = (WinLotto)winLotto.clone();
+		this.winLotto = winLotto;
 	}
 
 	public List<Rank> compareLotteries() {

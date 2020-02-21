@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.utils.LottoNoUtils;
 
-public class WinLotto extends Lotto implements Cloneable {
+public class WinLotto extends Lotto {
 	private static final int MIN_WIN_VALUE = 3;
 	private static final int NO_WIN_VALUE = 0;
 
@@ -27,8 +27,4 @@ public class WinLotto extends Lotto implements Cloneable {
 		return bonusBall.isContainBonusBall(lotto);
 	}
 
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
 }

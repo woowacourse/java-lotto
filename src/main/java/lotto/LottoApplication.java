@@ -12,7 +12,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoApplication {
-	public static void main(String[] args) throws CloneNotSupportedException {
+	public static void main(String[] args) {
 		Money money = new Money(InputView.inputBuyMoney());
 		List<Lotto> lotteris = LottoFactory.createLotteries(money);
 		OutputView.printLotteris(lotteris);
