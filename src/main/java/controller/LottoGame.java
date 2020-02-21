@@ -11,11 +11,11 @@ public class LottoGame {
         int lottoCount = amount.getCount();
         OutputView.printPurchaseCountMessage(lottoCount);
 
-        LottoDummy lottoDummy = new LottoDummy(lottoCount);
-        OutputView.printLottoDummy(lottoDummy);
+        Lottos lottos = new Lottos(lottoCount);
+        OutputView.printLottos(lottos);
 
         WinningNumber winningNumber = inputWinningNumber();
-        LottoResult lottoResult = lottoDummy.countWinningLotto(winningNumber);
+        LottoResult lottoResult = lottos.countWinningLotto(winningNumber);
         OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(Money.calculateProfitRatio(lottoResult));
     }

@@ -43,8 +43,8 @@
 - **Lotto**
     - List<LottoNumber> lotto
     - [예외 처리] checkLottoSizeSix 6개의 숫자가 만들어졌는 지 검증
-- **LottoDummy**
-    - List<Lotto> lottoDummy
+- **Lottos**
+    - List<Lotto> lottos
     - 모든 로또 당첨 결과 카운트
 - **LottoRank**
     - FIRST(6, false, 2000000000, "6개 일치(2000000000원) - ")

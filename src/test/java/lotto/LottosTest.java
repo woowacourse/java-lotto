@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoDummyTest {
+public class LottosTest {
 
     @Test
     void 구매금액으로_로또더미의_사이즈_확인(){
         Money amount = new Money("10800");
         int lottoCount = amount.getCount();
-        LottoDummy lottoDummy = new LottoDummy(lottoCount);
-        assertThat(lottoDummy.getDummySize()).isEqualTo(10);
+        Lottos lottos = new Lottos(lottoCount);
+        assertThat(lottos.getDummySize()).isEqualTo(10);
     }
 }

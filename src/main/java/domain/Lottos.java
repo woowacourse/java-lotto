@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoDummy {
-    private static final List<Lotto> lottoDummy = new ArrayList<>();
+public class Lottos {
+    private static final List<Lotto> lottos = new ArrayList<>();
 
-    public LottoDummy(final int lottoCount) {
+    public Lottos(final int lottoCount) {
         for (int index = 0; index < lottoCount; index++){
-            lottoDummy.add(LottoFactory.createOneLotto());
+            lottos.add(LottoFactory.createOneLotto());
         }
     }
 
     public LottoResult countWinningLotto(final WinningNumber winningNumber) {
         LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottoDummy){
+        for (Lotto lotto : lottos){
             LottoRank rank = LottoRank.findRank(winningNumber.countWinningMatch(lotto),
                                             winningNumber.isBonusMatch(lotto));
             lottoResult.addWinningRankCount(rank);
@@ -24,10 +24,10 @@ public class LottoDummy {
     }
 
     public int getDummySize() {
-        return lottoDummy.size();
+        return lottos.size();
     }
 
-    public List<Lotto> getLottoDummy() {
-        return Collections.unmodifiableList(lottoDummy);
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }
