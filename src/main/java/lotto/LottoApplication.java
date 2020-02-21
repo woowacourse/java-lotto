@@ -14,9 +14,8 @@ import lotto.view.OutputView;
 public class LottoApplication {
 	public static void main(String[] args) {
 		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(InputView.inputPurchaseMoney());
-		LottosGenerator lottosGenerator = new AutoLottosGenerator();
 		int buyCount = lottoPurchaseMoney.getBuyCount();
-		Lottos lottos = lottosGenerator.generate(buyCount);
+		Lottos lottos = new AutoLottosGenerator().generate(buyCount);
 		OutputView.printBuyCount(buyCount);
 		OutputView.printLottos(lottos);
 		WinningLotto winningLotto = new WinningLotto(LottoFactory.create(InputView.inputWinningLotto()),
