@@ -1,7 +1,7 @@
 package lotto.domain;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : WrongLottoNumberException.java
  *
  * @author
  * @version 1.0

@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import static org.assertj.core.api.Assertions.*;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : MoneyForLottoTest.java
  *
  * @author
  * @version 1.0

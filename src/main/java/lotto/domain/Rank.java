@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : Rank.java
  *
  * @author
  * @version 1.0

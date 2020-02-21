@@ -1,7 +1,7 @@
 package lotto.domain;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : LottoType.java
  *
  * @author
  * @version 1.0

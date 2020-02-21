@@ -11,7 +11,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : ResultStatisticTest.java
  *
  * @author
  * @version 1.0

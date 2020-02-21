@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : ResultStatistic.java
  *
  * @author
  * @version 1.0

@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.*;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : LottoNumber.java
  *
  * @author
  * @version 1.0

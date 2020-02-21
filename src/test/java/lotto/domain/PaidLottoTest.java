@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : PaidLottoTest.java
  *
  * @author
  * @version 1.0

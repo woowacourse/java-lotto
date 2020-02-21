@@ -12,7 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : LottoTest.java
  *
  * @author
  * @version 1.0
