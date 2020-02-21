@@ -39,7 +39,7 @@ public class LottoController {
     private void generateLottoTickets() {
         for (int i = 0; i < purchaseAmount.lottoTicket(); i++) {
             Collections.shuffle(LottoBallFactory.getInstance());
-            new LottoTickets(generateLottoTicket());
+            LottoTickets.insertLottoTicket(generateLottoTicket());
         }
         OutputView.printLottoTicket();
     }

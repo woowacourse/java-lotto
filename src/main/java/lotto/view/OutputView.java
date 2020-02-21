@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -24,12 +24,13 @@ public class OutputView {
     }
 
     public static void printLottoTicket() {
-        for (LottoTicket lottoTicket : LottoTickets.getLottoTickets()) {
-            System.out.println(lottoTicket.getLottoTicket()
-                    .stream()
-                    .map(LottoBall::getLottoNumber)
-                    .collect(Collectors.toList()));
-        }
+        List<LottoTicket> lottoTickets = LottoTickets.getLottoTickets();
+
+        lottoTickets.forEach(lottoTicket ->
+                System.out.println(lottoTicket.getLottoTicket()
+                        .stream()
+                        .map(LottoBall::getLottoNumber)
+                        .collect(Collectors.toList())));
     }
 
     public static void printAnswerWinningBalls() {
@@ -41,23 +42,26 @@ public class OutputView {
     }
 
 
+    public static void printResultAllOfRank(List<WinningRank> winningRanks, EarningRate earningRate) {
+        List<WinningRank> winningRankSet = new ArrayList<>(Arrays.asList(WinningRank.values()));
+        winningRankSet.remove(WinningRank.NO_RANK);
+
+        winningRankSet.forEach(winningRank ->
+                OutputView.printEachWinningResult(winningRank, earningRate.countRankPeople(winningRanks, winningRank)));
+    }
+
     public static void printRankConstant() {
         System.out.println("당첨통계");
         System.out.println("---------");
     }
+
     public static void printEachWinningResult(WinningRank winningRank, int count) {
-        System.out.printf("%d개 일치",winningRank.getWinningBallCount());
+        System.out.printf("%d개 일치", winningRank.getWinningBallCount());
         if (winningRank.getWinningMoney() == WinningRank.SECOND_RANK.getWinningMoney()) {
             System.out.print(", 보너스 볼 일치");
         }
         System.out.printf(" (%d원) - %d개\n",
-                winningRank.getWinningMoney(),count);
-    }
-
-    public static void printResultAllOfRank(List<WinningRank> winningRanks, EarningRate earningRate) {
-        for (WinningRank winningRank : WinningRank.values()) {
-            OutputView.printEachWinningResult(winningRank, earningRate.countRankPeople(winningRanks, winningRank));
-        }
+                winningRank.getWinningMoney(), count);
     }
 
     public static void printEarningRate(EarningRate earningRate) {

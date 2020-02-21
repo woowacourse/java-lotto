@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
-    private final static List<LottoTicket> LOTTO_TICKETS = new ArrayList<>();
+    private static final List<LottoTicket> LOTTO_TICKETS = new ArrayList<>();
 
-    public LottoTickets(LottoTicket lottoTicket) {
+    public static void insertLottoTicket(LottoTicket lottoTicket) {
         LOTTO_TICKETS.add(lottoTicket);
     }
 
