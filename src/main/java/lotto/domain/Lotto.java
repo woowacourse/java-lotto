@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-	public static final int CORRECT_SIZE = 6;
+	static final int CORRECT_SIZE = 6;
 
 	private final List<LottoNumber> lottoNumbers;
 
@@ -37,11 +37,11 @@ public class Lotto {
 		}
 	}
 
-	public boolean isContains(LottoNumber bonusNumber) {
+	boolean isContains(LottoNumber bonusNumber) {
 		return lottoNumbers.contains(bonusNumber);
 	}
 
-	public int getMatchCount(Lotto winningLotto) {
+	int getMatchCount(Lotto winningLotto) {
 		List<LottoNumber> matchLottoNumbers = new ArrayList<>(lottoNumbers);
 		matchLottoNumbers.retainAll(winningLotto.lottoNumbers);
 		return matchLottoNumbers.size();

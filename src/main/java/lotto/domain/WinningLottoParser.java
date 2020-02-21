@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLottoParser {
-	public static final String DELIMITER = ",";
+	private static final String DELIMITER = ",";
 
 	public static List<LottoNumber> parseToLottoNumberList(String inputWinningLotto) {
 		return Arrays.stream(inputWinningLotto.split(DELIMITER))

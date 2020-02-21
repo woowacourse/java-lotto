@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class WinningLottoParserTest {
+class WinningLottoParserTest {
 	@Test
 	void parser_StringInputWinningLotto_CreateWinningLotto() {
 		String inputWinningLotto = "1, 2, 3, 4, 5, 6";

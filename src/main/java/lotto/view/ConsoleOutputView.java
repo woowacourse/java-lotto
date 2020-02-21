@@ -9,13 +9,13 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 
 public class ConsoleOutputView {
-	public static final String PURCHASE_COMPLETE_MESSAGE = "%d개를 구매했습니다.\n";
-	public static final String DELIMITER = ",";
-	public static final String STATISTICS_NOTICE_MESSAGE = "당첨 통계";
-	public static final String SEPARATION_LINE = "---------";
-	public static final String WINNING_RESULT = "%d개 일치 (%d원) - %d개";
-	public static final String WINNING_SECOND_RANK_RESULT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
-	public static final String WINNING_RATIO_MESSAGE = "총 수익률은 %d%%입니다.\n";
+	private static final String PURCHASE_COMPLETE_MESSAGE = "%d개를 구매했습니다.\n";
+	private static final String DELIMITER = ",";
+	private static final String STATISTICS_NOTICE_MESSAGE = "당첨 통계";
+	private static final String SEPARATION_LINE = "---------";
+	private static final String WINNING_RESULT = "%d개 일치 (%d원) - %d개";
+	private static final String WINNING_SECOND_RANK_RESULT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+	private static final String WINNING_RATIO_MESSAGE = "총 수익률은 %d%%입니다.\n";
 
 	public static void printExceptionMessage(String exceptionMessage) {
 		System.out.println(exceptionMessage);

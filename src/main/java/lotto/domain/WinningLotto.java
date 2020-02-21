@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class WinningLotto {
-	public static final int SUM_UNIT = 1;
-	public static final int INIT_COUNT = 0;
+	private static final int SUM_UNIT = 1;
+	private static final int INIT_COUNT = 0;
 
 	private Lotto winningLotto;
 	private LottoNumber bonusLottoNumber;
