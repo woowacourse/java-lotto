@@ -25,12 +25,14 @@ class RankTest {
             "1,false,SIXTH",
             "0,false,SIXTH",
     })
-    void name(int matchCount, boolean isBonusMatch, Rank expected) {
+    void name(int matchCount, boolean isBonusMatch, Rank resultRank) {
         //given
         MatchResult result = new MatchResult(matchCount, isBonusMatch);
+
         //when
-        Rank prize = Rank.findPrizeByLottoResult(result);
+        Rank expectResult = Rank.findPrizeByLottoResult(result);
+
         //then
-        assertThat(prize).isEqualTo(expected);
+        assertThat(expectResult).isEqualTo(resultRank);
     }
 }

@@ -21,15 +21,15 @@ public enum Rank {
     }
 
     public static Rank findPrizeByLottoResult(MatchResult result) {
-        Rank prize = Arrays.stream(Rank.values())
+        Rank rank = Arrays.stream(Rank.values())
                 .filter(aRank -> result.isEqualToMatchCount(aRank.matchCount))
                 .findFirst()
                 .orElse(SIXTH);
 
-        if (prize.isThird(result)) {
+        if (rank.isThird(result)) {
             return THIRD;
         }
-        return prize;
+        return rank;
     }
 
     private boolean isThird(MatchResult matchResult) {

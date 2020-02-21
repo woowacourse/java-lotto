@@ -32,15 +32,15 @@ public class OutputView {
                 .toArray();
     }
 
-    public static void printResult(LottoResultBundle lottoResultBundle) {
+    public static void printLottoResult(LottoResultBundle lottoResultBundle) {
         System.out.println(RESULT_HEADER);
-        printStatistics(lottoResultBundle);
+        printResults(lottoResultBundle);
         System.out.println(String.format(RATE_MESSAGE, lottoResultBundle.getRate()));
     }
 
-    private static void printStatistics(LottoResultBundle lottoResultBundle) {
+    private static void printResults(LottoResultBundle lottoResultBundle) {
         for (Rank rank : Rank.values()) {
-            int matchCount = lottoResultBundle.getMatchCount(rank);
+            int matchCount = rank.getMatchCount();
             int defaultPrize = rank.getDefaultPrize();
             int matchTicketCount = lottoResultBundle.getMatchTicketCount(rank);
             String message = String.format(findMessage(rank.name()), matchCount, defaultPrize, matchTicketCount);

@@ -14,6 +14,7 @@ public class RandomLottoMachine implements LottoMachine {
 
     private static final int START_LOTTO_BALL = 1;
     private static final int END_LOTTO_BALL = 6;
+    private static final List<LottoBall> lottoBalls = LottoBallFactory.getInstance();
 
     @Override
     public List<LottoTicket> buyTickets(BettingMoney bettingMoney) {
@@ -25,7 +26,6 @@ public class RandomLottoMachine implements LottoMachine {
     }
 
     private LottoTicket makeTicket() {
-        List<LottoBall> lottoBalls = LottoBallFactory.getInstance();
         Collections.shuffle(lottoBalls);
 
         return IntStream.rangeClosed(START_LOTTO_BALL, END_LOTTO_BALL)

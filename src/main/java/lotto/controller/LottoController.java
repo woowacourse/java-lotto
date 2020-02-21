@@ -29,7 +29,7 @@ public class LottoController {
         OutputView.printBuyTickets(lottoTicketBundle);
 
         LottoResultBundle lottoResultBundle = makeLottoResultBundle(lottoTicketBundle);
-        OutputView.printResult(lottoResultBundle);
+        OutputView.printLottoResult(lottoResultBundle);
     }
 
     private LottoResultBundle makeLottoResultBundle(LottoTicketBundle lottoTicketBundle) {
