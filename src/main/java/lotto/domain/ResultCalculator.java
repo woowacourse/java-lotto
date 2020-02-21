@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ResultCalculator {
@@ -17,18 +16,11 @@ public class ResultCalculator {
     public static ArrayList<WinningInfo> getResult(Lottos lottos, WinningLotto winningLotto) {
         ArrayList<WinningInfo> results = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            int winningCount = getWinningCount(lotto, winningLotto);
+            int winningCount = winningLotto.getWinningCount(lotto);
             boolean hasBonus = getHasBonus(lotto, winningLotto);
             results.add(WinningInfo.valueOf(winningCount, hasBonus));
         }
         return results;
-    }
-
-    public static int getWinningCount(Lotto lotto, WinningLotto winningLotto) {
-        return (int) lotto.getLottoNumbers()
-                .stream()
-                .filter(userLottoNumber -> winningLotto.lottoNumbers.stream().anyMatch(Predicate.isEqual(userLottoNumber)))
-                .count();
     }
 
     public static boolean getHasBonus(Lotto lotto, WinningLotto winningLotto) {
