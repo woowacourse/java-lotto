@@ -41,7 +41,7 @@ public class WinningRule {
     private void calculateRank(Lotto lotto) {
         List<LottoNumber> mergedLottoNumbers = new ArrayList<>(lotto.getLottoNumbers());
         mergedLottoNumbers.addAll(winningNumbers.getLottoNumbers());
-        ResultCalculator.findRank(countCorrectLottoNumber(mergedLottoNumbers), isCorrectBonusNumber(lotto));
+        Rank.findRank(countCorrectLottoNumber(mergedLottoNumbers), isCorrectBonusNumber(lotto));
     }
 
     private int countCorrectLottoNumber(List<LottoNumber> mergedLottoNumbers) {

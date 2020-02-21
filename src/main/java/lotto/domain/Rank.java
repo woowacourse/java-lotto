@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIFTH_RANK(5000, 3),
     FOURTH_RANK(50000, 4),
@@ -31,5 +33,13 @@ public enum Rank {
         this.count++;
     }
 
+    public static void findRank(int rightNumber, boolean isCorrectBonusNumber) {
+        Arrays.stream(Rank.values())
+                .filter(rank -> isSameRank(rank, rightNumber, isCorrectBonusNumber))
+                .forEach(Rank::countUp);
+    }
 
+    private static boolean isSameRank(Rank rank, int correctLottoNumber, boolean isCorrectBonusNumber) {
+        return rank.correctLottoNumber == correctLottoNumber && rank.isCorrectBonusNumber == isCorrectBonusNumber;
+    }
 }
