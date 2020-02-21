@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-
     public static void printBuyTicketCount(int number) {
         System.out.println(String.format("%d", number) + "개를 구매했습니다.");
     }
@@ -24,11 +23,10 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        for (Map.Entry<String, Integer> entry: winningCountMap.entrySet()) {
+        for (Map.Entry<String, Integer> entry : winningCountMap.entrySet()) {
             System.out.println(LottoType.valueOf(entry.getKey()).getPrintStr() + String.format("%d", entry.getValue()) + "개");
-    }
+        }
 
         System.out.println("총 수익률은 " + LottoCalculator.getProfit(winningCountMap, money) + "%입니다.");
     }
-
 }

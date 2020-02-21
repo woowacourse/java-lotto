@@ -14,11 +14,9 @@ public class LottoTickets {
 
         lottoTickets.stream()
                 .map(lottoTicket -> new LottoResult(lottoTicket.getCorrectCount(
-                                winningLottoTicket.getWinningTicket().getLottoTicket()), winningLottoTicket.isMatchBonusBall(lottoTicket)))
+                        winningLottoTicket.getWinningTicket().getLottoTicket()), winningLottoTicket.isMatchBonusBall(lottoTicket)))
                 .forEach(lottoResults::add);
 
         return lottoResults;
     }
-
-
 }

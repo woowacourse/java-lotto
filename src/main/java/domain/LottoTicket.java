@@ -6,7 +6,6 @@ public class LottoTicket {
     private static final int MAX_LOTTO_TICKET_SIZE = 6;
     private static final int MIN_LOTTO_NUMBER_RANGE = 1;
     private static final int MAX_LOTTO_NUMBER_RANGE = 45;
-    public static final int INIT_CORRECT_COUNT = 0;
 
     private List<Integer> lottoTicket;
 
@@ -30,12 +29,12 @@ public class LottoTicket {
     }
 
     private void validateLottoTicketNumberRange(List<Integer> lottoTicket) {
-        if (lottoTicket.stream().anyMatch(this::isLottoNumberRange)) {
+        if (lottoTicket.stream().anyMatch(LottoTicket::isLottoNumberRange)) {
             throw new IllegalArgumentException("범위를 벗어나는 로또 숫자를 입력하였습니다.");
         }
     }
 
-    private boolean isLottoNumberRange(int number) {
+    private static boolean isLottoNumberRange(int number) {
         return number < MIN_LOTTO_NUMBER_RANGE || number > MAX_LOTTO_NUMBER_RANGE;
     }
 
@@ -46,12 +45,8 @@ public class LottoTicket {
     }
 
     public int getCorrectCount(List<Integer> winningTicket) {
-        int correctCount = INIT_CORRECT_COUNT;
-        for (int i = 0; i < lottoTicket.size(); i++) {
-            if (winningTicket.contains(lottoTicket.get(i))) {
-                correctCount++;
-            }
-        }
-        return correctCount;
+        return Math.toIntExact(lottoTicket.stream()
+                .filter(winningTicket::contains)
+                .count());
     }
 }
