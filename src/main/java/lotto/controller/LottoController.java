@@ -20,7 +20,7 @@ public class LottoController {
         List<WinningRank> winningRanks = generateWinningRank(winningBalls);
 
         EarningRate earningRate = new EarningRate(winningRanks, purchaseAmount);
-        OutputView.printRankPrintedConstant();
+        OutputView.printRankConstant();
         OutputView.printResultAllOfRank(winningRanks, earningRate);
         OutputView.printEarningRate(earningRate);
     }

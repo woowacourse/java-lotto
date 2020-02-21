@@ -41,17 +41,17 @@ public class OutputView {
     }
 
 
+    public static void printRankConstant() {
+        System.out.println("당첨통계");
+        System.out.println("---------");
+    }
     public static void printEachWinningResult(WinningRank winningRank, int count) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(winningRank.getWinningBallCount()).append("개 일치(");
-
+        System.out.printf("%d개 일치",winningRank.getWinningBallCount());
         if (winningRank.getWinningMoney() == WinningRank.SECOND_RANK.getWinningMoney()) {
-            stringBuilder.append(", 보너스 볼 일치 (");
+            System.out.print(", 보너스 볼 일치");
         }
-        stringBuilder.append(+winningRank.getWinningMoney()).append("원) - ").append(count).append("개");
-
-        System.out.println(stringBuilder);
+        System.out.printf(" (%d원) - %d개\n",
+                winningRank.getWinningMoney(),count);
     }
 
     public static void printResultAllOfRank(List<WinningRank> winningRanks, EarningRate earningRate) {
@@ -59,12 +59,6 @@ public class OutputView {
             OutputView.printEachWinningResult(winningRank, earningRate.countRankPeople(winningRanks, winningRank));
         }
     }
-
-    public static void printRankPrintedConstant() {
-        System.out.println("당첨통계");
-        System.out.println("---------");
-    }
-
 
     public static void printEarningRate(EarningRate earningRate) {
         System.out.println("총 수익률은 " + earningRate.getEarningRate() + "% 입니다.");
