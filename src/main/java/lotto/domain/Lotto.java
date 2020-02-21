@@ -25,15 +25,14 @@ public class Lotto {
     }
 
     public int compare(Lotto lotto) {
-        return (int) lotto.getLottoNumbers()
+        return Math.toIntExact(lotto.getLottoNumbers()
                 .stream()
-                .filter(userLottoNumber -> this.lottoNumbers.stream().anyMatch(Predicate.isEqual(userLottoNumber)))
-                .count();
+                .filter(lottoNumber -> this.hasLottoNumber(lottoNumber))
+                .count());
     }
 
     public boolean hasLottoNumber(LottoNumber compareLottoNumber) {
         return this.getLottoNumbers()
-                .stream()
-                .anyMatch(lottoNumber -> lottoNumber.equals(compareLottoNumber));
+                .contains(compareLottoNumber);
     }
 }
