@@ -19,8 +19,8 @@ public class LottoResultTest {
     @DisplayName("최종 수익 계산")
     @Test
     void calculateTotalReward() {
-        LottoResult.FIFTH.TicketCountPlus();
-        LottoResult.FOURTH.TicketCountPlus();
+        LottoResult.FIFTH.plusTicketCount();
+        LottoResult.FOURTH.plusTicketCount();
         assertThat(LottoResult.calculateTotalReward()).isEqualTo(55000);
     }
 

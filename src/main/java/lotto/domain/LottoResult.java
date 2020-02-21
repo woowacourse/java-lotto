@@ -9,7 +9,7 @@ public enum LottoResult {
 	SECOND(0, 30000000, 5),
 	FIRST(0, 2000000000, 6);
 
-	public static final String ERROR_MESSAGE_NOT_FOUND_RANK = "당첨되지 않았습니다.";
+	public static final String MESSAGE_NOT_FOUND_RANK = "당첨되지 않았습니다.";
 
 	private int ticketCount;
 	private final long reward;
@@ -25,17 +25,17 @@ public enum LottoResult {
 		return Arrays.stream(values())
 				.filter(x -> x.hitCount == count)
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE_NOT_FOUND_RANK));
+				.orElseThrow(() -> new IllegalArgumentException(MESSAGE_NOT_FOUND_RANK));
 	}
 
 	public static long calculateTotalReward() {
 		return Arrays.stream(values())
 				.map(x -> x.reward * x.ticketCount)
-				.reduce((x, y) -> x + y)
+				.reduce(Long::sum)
 				.get();
 	}
 
-	public void TicketCountPlus() {
+	public void plusTicketCount() {
 		this.ticketCount++;
 	}
 

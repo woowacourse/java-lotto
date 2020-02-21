@@ -30,6 +30,6 @@ public class LottoManager {
         if (lottoRank.isSecondRank(isBonus)) {
             lottoRank = LottoResult.SECOND;
         }
-        lottoRank.TicketCountPlus();
+        lottoRank.plusTicketCount();
     }
 }
