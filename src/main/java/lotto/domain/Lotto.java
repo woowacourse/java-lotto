@@ -1,9 +1,10 @@
 package lotto.domain;
 
+import lotto.dto.LottoDto;
+
 import java.util.HashSet;
 import java.util.List;
-
-import lotto.dto.LottoDto;
+import java.util.Set;
 
 public class Lotto {
 	private static final int LOTTO_SIZE = 6;
@@ -40,7 +41,7 @@ public class Lotto {
 	}
 
 	public WinningPrize findLottoPrize(WinningNumber winningNumber) {
-		HashSet<Integer> concatenatedSet = new HashSet<>(lottoNumber);
+		Set<Integer> concatenatedSet = new HashSet<>(lottoNumber);
 		concatenatedSet.addAll(winningNumber.getWinningNumber());
 
 		int matchCount = (lottoNumber.size() * 2) - concatenatedSet.size();
