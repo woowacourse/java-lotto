@@ -7,7 +7,7 @@ import view.OutputView;
 public class LottoGame {
 
     public static void main(String[] args) {
-        PurchaseAmount amount = inputPurchaseAmount();
+        Money amount = inputPurchaseAmount();
         int lottoCount = amount.getCount();
         OutputView.printPurchaseCountMessage(lottoCount);
 
@@ -17,9 +17,7 @@ public class LottoGame {
         WinningNumber winningNumber = inputWinningNumber();
         LottoResult lottoResult = lottoDummy.countWinningLotto(winningNumber);
         OutputView.printResult(lottoResult);
-
-        int profit = lottoResult.calculateProfit();
-        OutputView.printProfitRatio(profit / amount.getActualAmount(lottoCount));
+        OutputView.printProfitRatio(Money.calculateProfitRatio(lottoResult));
     }
 
     private static WinningNumber inputWinningNumber() {
@@ -31,9 +29,9 @@ public class LottoGame {
         return inputWinningNumber();
     }
 
-    private static PurchaseAmount inputPurchaseAmount() {
+    private static Money inputPurchaseAmount() {
         try {
-            return new PurchaseAmount(InputView.inputPurchaseAmount());
+            return new Money(InputView.inputPurchaseAmount());
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
         }

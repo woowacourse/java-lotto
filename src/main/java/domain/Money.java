@@ -1,14 +1,18 @@
 package domain;
 
-public class PurchaseAmount {
+public class Money {
     public static final int LOTTO_PRICE = 1000;
     private int amount;
 
-    public PurchaseAmount(String inputMoney) {
+    public Money(String inputMoney) {
         checkNotNumber(inputMoney);
         this.amount = Integer.parseInt(inputMoney);
         checkNegativeAmount(amount);
         checkUnderLottoPrice();
+    }
+
+    public static int calculateProfitRatio(LottoResult lottoResult) {
+        return lottoResult.calculateProfit() / LOTTO_PRICE;
     }
 
     private void checkUnderLottoPrice() {
