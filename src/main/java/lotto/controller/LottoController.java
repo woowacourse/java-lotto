@@ -20,7 +20,6 @@ public class LottoController {
         List<WinningRank> winningRanks = generateWinningRank(winningBalls);
 
         EarningRate earningRate = new EarningRate(winningRanks, purchaseAmount);
-        OutputView.printRankConstant();
         OutputView.printResultAllOfRank(winningRanks, earningRate);
         OutputView.printEarningRate(earningRate);
     }
@@ -64,7 +63,7 @@ public class LottoController {
         for (LottoTicket lottoTicket : LottoTickets.getLottoTickets()) {
             int correctNumber = winningBalls.hitLottoBalls(lottoTicket);
             boolean isBonusNumber = winningBalls.hitBonusBall(lottoTicket);
-            winningRanks.add(WinningRank.selectRank(correctNumber, isBonusNumber));
+            winningRanks.add(WinningRank.determineRank(correctNumber, isBonusNumber));
         }
         return winningRanks;
     }

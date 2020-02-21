@@ -46,6 +46,7 @@ public class OutputView {
         List<WinningRank> winningRankSet = new ArrayList<>(Arrays.asList(WinningRank.values()));
         winningRankSet.remove(WinningRank.NO_RANK);
 
+        OutputView.printRankConstant();
         winningRankSet.forEach(winningRank ->
                 OutputView.printEachWinningResult(winningRank, earningRate.countRankPeople(winningRanks, winningRank)));
     }

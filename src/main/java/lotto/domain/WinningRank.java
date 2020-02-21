@@ -18,7 +18,7 @@ public enum WinningRank {
         this.winningBallCount = winningBallCount;
     }
 
-    public static WinningRank selectRank(int correctNumber, boolean isBonusNumber){
+    public static WinningRank determineRank(int correctNumber, boolean isBonusNumber){
         WinningRank winningRank = Arrays.stream(values())
                 .filter(result -> result.winningBallCount == correctNumber)
                 .findFirst()
@@ -28,8 +28,8 @@ public enum WinningRank {
     }
 
     private static WinningRank compareSecondRankOrThirdRank(boolean isBonusNumber, WinningRank winningRank) {
-        if (winningRank == SECOND_RANK && !isBonusNumber){
-            return THIRD_RANK;
+        if (winningRank == THIRD_RANK && isBonusNumber){
+            return SECOND_RANK;
         }
         return winningRank;
     }

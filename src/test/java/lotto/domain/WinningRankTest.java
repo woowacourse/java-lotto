@@ -31,6 +31,6 @@ class WinningRankTest {
         WinningBalls winningBalls = new WinningBalls(winningBallValues, bonus);
         int correctCount = winningBalls.hitLottoBalls(new LottoTicket(lottoTicket));
         boolean correctBonusNumber = winningBalls.hitBonusBall(new LottoTicket(lottoTicket));
-        Assertions.assertThat(WinningRank.selectRank(correctCount, correctBonusNumber)).isEqualTo(winningRank);
+        Assertions.assertThat(winningRank).isEqualTo(WinningRank.determineRank(correctCount, correctBonusNumber));
     }
 }
