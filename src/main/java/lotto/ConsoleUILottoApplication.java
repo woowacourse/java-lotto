@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.domain.WinningLottoParser.*;
 import static lotto.view.ConsoleInputView.*;
 import static lotto.view.ConsoleOutputView.*;
 
@@ -12,7 +13,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
-import lotto.domain.WinningLottoParser;
+import lotto.domain.WinningLotto;
 
 public class ConsoleUILottoApplication {
 	public static void main(String[] args) {
@@ -25,15 +26,15 @@ public class ConsoleUILottoApplication {
 		List<Lotto> lottos = lottoController.purchaseLotto(numberOfLotto);
 		printPurchasedLotto(lottos);
 
-		Lotto winningLotto = new Lotto(WinningLottoParser.parser(inputWinningLottoNumber()));
+		Lotto winningLottoNumber = new Lotto(parseToLottoNumberList(inputWinningLottoNumber()));
 		LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputBonusLottoNumber());
-
-		Map<LottoRank, Integer> lottoRankCount =
-			lottoController.getLottoRankCount(lottos, winningLotto, bonusLottoNumber);
 		printStatisticsMessage();
-		printWinningResult(lottoRankCount);
 
-		int winningRatio = lottoController.getWinningRatio(lottoRankCount, inputLottoMoney);
+		WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonusLottoNumber);
+		Map<LottoRank, Integer> winningLottoCount = winningLotto.getWinningLottoCount(lottos);
+		printWinningResult(winningLottoCount);
+
+		int winningRatio = winningLotto.getWinningRatio(winningLottoCount, inputLottoMoney);
 		printWinningRatio(winningRatio);
 	}
 
