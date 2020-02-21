@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class MoneyTest {
@@ -16,10 +17,10 @@ public class MoneyTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
-	// @DisplayName("로또 개수 받아서 구입 금액을 돌려주는지 확인")
-	// @Test
-	// void getBuyMoney() {
-	// 	assertThat(Money.getBuyMoney(new LottoCount(5))).isEqualTo(5000);
-	// }
-
+	@ParameterizedTest
+	@CsvSource(value = {"1000,1", "10000,10"})
+	void calculateLottoCount(int moneyValue, int expected) {
+		Money money = new Money(moneyValue);
+		assertThat(money.findLottoTicketCount()).extracting("lottoCount").isEqualTo(expected);
+	}
 }

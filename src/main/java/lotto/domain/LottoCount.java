@@ -5,18 +5,18 @@ public class LottoCount {
 	private static final String INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE = String.format("로또 구입 갯수는 최소 %d개 이상",
 		MINIMUM_LOTTO_COUNT);
 
-	private final long lottoCount;
+	private final int lottoCount;
 
-	private LottoCount(long lottoCount) {
+	private LottoCount(int lottoCount) {
 		validateCount(lottoCount);
 		this.lottoCount = lottoCount;
 	}
 
-	public static LottoCount of(long lottoCount) {
+	public static LottoCount of(int lottoCount) {
 		return new LottoCount(lottoCount);
 	}
 
-	private void validateCount(long count) {
+	private void validateCount(int count) {
 		if (count < MINIMUM_LOTTO_COUNT) {
 			throw new IllegalArgumentException(INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE);
 		}
