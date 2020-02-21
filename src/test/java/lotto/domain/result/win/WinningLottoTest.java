@@ -10,31 +10,31 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static lotto.LottoHelper.lottoBalls;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottoTest {
 
     private static Stream<Arguments> numberProvider() {
         return Stream.of(
-                Arguments.of(Arrays.asList(11, 12, 13, 18, 19, 20), new LottoResult(0, false)),
-                Arguments.of(Arrays.asList(1, 12, 13, 18, 19, 20), new LottoResult(1, false)),
-                Arguments.of(Arrays.asList(1, 2, 13, 18, 19, 20), new LottoResult(2, false)),
-                Arguments.of(Arrays.asList(1, 2, 3, 8, 9, 10), new LottoResult(3, false)),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 9, 10), new LottoResult(4, false)),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 10), new LottoResult(5, false)),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 10), new LottoResult(5, true)),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), new LottoResult(6, false))
+                Arguments.of(lottoBalls(Arrays.asList(11, 12, 13, 18, 19, 20)), new LottoResult(0, false)),
+                Arguments.of(lottoBalls(Arrays.asList(1, 12, 13, 18, 19, 20)), new LottoResult(1, false)),
+                Arguments.of(lottoBalls(Arrays.asList(1, 2, 13, 18, 19, 20)), new LottoResult(2, false)),
+                Arguments.of(lottoBalls(Arrays.asList(1, 2, 3, 8, 9, 10)), new LottoResult(3, false)),
+                Arguments.of(lottoBalls(Arrays.asList(1, 2, 3, 4, 9, 10)), new LottoResult(4, false)),
+                Arguments.of(lottoBalls(Arrays.asList(1, 2, 3, 4, 5, 10)), new LottoResult(5, false)),
+                Arguments.of(lottoBalls(Arrays.asList(1, 2, 3, 4, 7, 10)), new LottoResult(5, true)),
+                Arguments.of(lottoBalls(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoResult(6, false))
         );
     }
 
     @DisplayName("우승 로또 티켓과 비교하기")
     @ParameterizedTest
     @MethodSource("numberProvider")
-    void name(List<Integer> numbers, LottoResult expectedResult) {
+    void name(Set<LottoBall> numbers, LottoResult expectedResult) {
         //given
         Set<LottoBall> winBalls = oneLottoBalls(1, 2, 3, 4, 5, 6);
         WinningLotto winningLotto = new WinningLotto(winBalls, LottoBall.from(7));

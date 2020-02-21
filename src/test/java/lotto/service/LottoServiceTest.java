@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.LottoHelper.lottoBalls;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -30,7 +31,7 @@ class LottoServiceTest {
     private static final int SIXTH = 5;
 
     private static Stream<Arguments> ticketProvider() {
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = new LottoTicket(lottoBalls(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         return Stream.of(
                 Arguments.of(1000, Arrays.asList(lottoTicket)),
@@ -61,7 +62,7 @@ class LottoServiceTest {
     @Test
     void winLotteryFirst() {
         //given
-        LottoMachine lottoMachine = bettingMoney -> Arrays.asList(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoMachine lottoMachine = bettingMoney -> Arrays.asList(new LottoTicket(lottoBalls(Arrays.asList(1, 2, 3, 4, 5, 6))));
         LottoService lottoService = new LottoService(lottoMachine);
 
         BettingMoney bettingMoney = new BettingMoney(1000);
@@ -90,8 +91,8 @@ class LottoServiceTest {
     void winLotterySecondAndThird() {
         //given
         LottoMachine lottoMachine = bettingMoney -> Arrays.asList(
-                new LottoTicket(Arrays.asList(1, 2, 3, 4, 7, 45)),
-                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45)));
+                new LottoTicket(lottoBalls(Arrays.asList(1, 2, 3, 4, 7, 45))),
+                new LottoTicket(lottoBalls(Arrays.asList(1, 2, 3, 4, 5, 45))));
 
         LottoService lottoService = new LottoService(lottoMachine);
 

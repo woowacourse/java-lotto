@@ -1,7 +1,6 @@
 package lotto.domain.ticket.ball;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -29,9 +28,4 @@ public final class LottoBallFactory {
                 .orElseThrow(() -> new IllegalArgumentException(String.format(NOT_EXIST_NUMBER_EXCEPTION_MESSAGE, number)));
     }
 
-    public static Set<LottoBall> collectLottoBalls(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoBallFactory::findLottoBallByNumber)
-                .collect(Collectors.toSet());
-    }
 }

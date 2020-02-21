@@ -1,10 +1,8 @@
 package lotto.domain.ticket;
 
 import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoBallFactory;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,11 +17,7 @@ public class LottoTicket {
         validateSize(balls);
         this.lottoBalls = balls;
     }
-
-    public LottoTicket(List<Integer> numbers) {
-        this(LottoBallFactory.collectLottoBalls(numbers));
-    }
-
+    
     private void validateSize(Set<LottoBall> lottoBalls) {
         int size = lottoBalls.size();
         if (size != LOTTO_TICKET_SIZE) {
