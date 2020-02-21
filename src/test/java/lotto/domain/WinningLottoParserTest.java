@@ -2,8 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,15 +12,15 @@ class WinningLottoParserTest {
 	void parser_StringInputWinningLotto_CreateWinningLotto() {
 		String inputWinningLotto = "1, 2, 3, 4, 5, 6";
 
-		List<LottoNumber> winningLottoNumbers = WinningLottoParser.parseToLottoNumberList(inputWinningLotto);
+		Set<LottoNumber> winningLottoNumbers = WinningLottoParser.parseToLottoNumberSet(inputWinningLotto);
 
-		List<LottoNumber> expected = Arrays.asList(
-			LottoNumber.valueOf("1"),
-			LottoNumber.valueOf("2"),
-			LottoNumber.valueOf("3"),
-			LottoNumber.valueOf("4"),
-			LottoNumber.valueOf("5"),
-			LottoNumber.valueOf("6"));
+		Set<LottoNumber> expected = new HashSet<>();
+		expected.add(LottoNumber.valueOf(1));
+		expected.add(LottoNumber.valueOf(2));
+		expected.add(LottoNumber.valueOf(3));
+		expected.add(LottoNumber.valueOf(4));
+		expected.add(LottoNumber.valueOf(5));
+		expected.add(LottoNumber.valueOf(6));
 
 		assertThat(winningLottoNumbers).isEqualTo(expected);
 	}

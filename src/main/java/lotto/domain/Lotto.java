@@ -2,38 +2,28 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 	static final int CORRECT_SIZE = 6;
 
-	private final List<LottoNumber> lottoNumbers;
+	private final Set<LottoNumber> lottoNumbers;
 
-	public Lotto(List<LottoNumber> lottoNumbers) {
+	public Lotto(Set<LottoNumber> lottoNumbers) {
 		validateNull(lottoNumbers);
 		validateSize(lottoNumbers);
-		validateDuplication(lottoNumbers);
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	private void validateNull(List<LottoNumber> lottoNumbers) {
+	private void validateNull(Set<LottoNumber> lottoNumbers) {
 		if (null == lottoNumbers) {
 			throw new InvalidLottoException(InvalidLottoException.NULL);
 		}
 	}
 
-	private void validateSize(List<LottoNumber> lottoNumbers) {
+	private void validateSize(Set<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != CORRECT_SIZE) {
 			throw new InvalidLottoException(InvalidLottoException.WRONG_SIZE);
-		}
-	}
-
-	private void validateDuplication(List<LottoNumber> lottoNumbers) {
-		long distinctSize = lottoNumbers.stream()
-			.distinct()
-			.count();
-
-		if (distinctSize != lottoNumbers.size()) {
-			throw new InvalidLottoException(InvalidLottoException.DUPLICATION);
 		}
 	}
 
@@ -47,7 +37,7 @@ public class Lotto {
 		return matchLottoNumbers.size();
 	}
 
-	public List<LottoNumber> getLottoNumbers() {
+	public Set<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
 	}
 }

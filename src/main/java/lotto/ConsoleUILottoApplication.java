@@ -24,7 +24,7 @@ public class ConsoleUILottoApplication {
 		List<Lotto> lottos = purchaseLotto(numberOfLotto);
 		printPurchasedLotto(lottos);
 
-		Lotto winningLottoNumber = new Lotto(parseToLottoNumberList(inputWinningLottoNumber()));
+		Lotto winningLottoNumber = new Lotto(parseToLottoNumberSet(inputWinningLottoNumber()));
 		LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputBonusLottoNumber());
 		printStatisticsMessage();
 
