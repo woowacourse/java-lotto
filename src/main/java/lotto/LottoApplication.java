@@ -12,14 +12,14 @@ import java.util.List;
 
 public class LottoApplication {
 	public static void main(String[] args) {
-		Money money = new Money(InputView.inputBuyMoney());
-		List<Lotto> lotteris = LottoFactory.createLotteries(money);
-		OutputView.printLotteris(lotteris);
+        Money money = new Money(InputView.inputBuyMoney());
+        List<Lotto> lotteries = LottoFactory.createLotteries(money);
+        OutputView.printLotteris(lotteries);
 
-		WinLotto winLotto = new WinLotto(InputView.inputWinNumber(), InputView.inputBounsBall());
+        WinLotto winLotto = new WinLotto(InputView.inputWinNumber(), InputView.inputBounsBall());
 
-		LottoManager lottoManager = new LottoManager(lotteris, winLotto);
-		lottoManager.compareLotto();
-		OutputView.printResult(money);
-	}
+        LottoManager lottoManager = new LottoManager(lotteries, winLotto);
+        lottoManager.compareLotto();
+        OutputView.printResult(money);
+    }
 }
