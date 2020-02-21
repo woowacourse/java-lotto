@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private OutputView(){
+    private OutputView() {
         throw new AssertionError();
     }
 
@@ -45,12 +45,12 @@ public class OutputView {
 
     private static void printEachResult(LottoRank rank, ResultCount resultCount) {
         StringBuilder sb = new StringBuilder();
-        if(rank == LottoRank.NOTHING){
+        if (rank == LottoRank.NOTHING) {
             return;
         }
         sb.append(rank.getHitCount());
         sb.append("개 일치");
-        if(rank.hasBonus()) {
+        if (rank.hasBonus()) {
             sb.append(", 보너스 볼 일치");
         }
         sb.append("(");
@@ -61,8 +61,8 @@ public class OutputView {
         System.out.println(sb.toString());
     }
 
-    public static void printResult(LottoResult result){
-        for(LottoRank rank : LottoRank.values()) {
+    public static void printResult(LottoResult result) {
+        for (LottoRank rank : LottoRank.values()) {
             printEachResult(rank, result.get(rank));
         }
     }

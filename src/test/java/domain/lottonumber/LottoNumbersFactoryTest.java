@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class LottoNumbersFactoryTest {
     @Test
     void 팩토리_생성_테스트() {
-        LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestNumberGenerator());
+        LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(new TestLottoGenerator());
         Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(1))).isTrue();
         Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(2))).isTrue();
         Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(3))).isTrue();

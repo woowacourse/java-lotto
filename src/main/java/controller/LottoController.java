@@ -2,9 +2,9 @@ package controller;
 
 import domain.*;
 import domain.lottonumber.*;
-import domain.lottonumber.generator.NumberGenerator;
-import domain.lottonumber.generator.RandomNumberGenerator;
-import domain.lottonumber.generator.UserNumberGenerator;
+import domain.lottonumber.generator.LottoGenerator;
+import domain.lottonumber.generator.RandomLottoGenerator;
+import domain.lottonumber.generator.UserLottoGenerator;
 import domain.lottoresult.LottoResult;
 import domain.lottoresult.LottoWinner;
 import view.InputView;
@@ -29,7 +29,7 @@ public class LottoController {
     }
 
     private LottoWinner makeWinnerNumbers() {
-        UserNumberGenerator userNumberGenerator = new UserNumberGenerator();
+        UserLottoGenerator userNumberGenerator = new UserLottoGenerator();
         userNumberGenerator.init(InputView.inputWinnerNumbers());
         LottoNumbers winnerNumbers = LottoNumbersFactory.createLottoNumbers(userNumberGenerator);
         LottoNumber bonus = LottoNumber.of(InputView.inputBonusNumber());
@@ -38,10 +38,10 @@ public class LottoController {
     }
 
     private void makeLottoNumbers(int repeat) {
-        NumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        LottoGenerator randomLottoGenerator = new RandomLottoGenerator();
         OutputView.printRepeat(repeat);
         for (int i = 0; i < repeat; i++) {
-            LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(randomNumberGenerator);
+            LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(randomLottoGenerator);
             OutputView.printLottoNumbers(lottoNumbers);
             lottoGame.add(lottoNumbers);
         }

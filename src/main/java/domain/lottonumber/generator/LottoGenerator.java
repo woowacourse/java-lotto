@@ -4,6 +4,6 @@ import domain.lottonumber.LottoNumber;
 
 import java.util.SortedSet;
 
-public interface NumberGenerator {
+public interface LottoGenerator {
     SortedSet<LottoNumber> create();
 }

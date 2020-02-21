@@ -30,7 +30,7 @@ public class LottoResult {
         return result.get(lottoRank);
     }
 
-    public long calculateEarning(){
+    public long calculateEarning() {
         long earning = 0;
         for (LottoRank rank : LottoRank.values()) {
             earning += result.get(rank).multiply(rank.getWinning());

@@ -4,7 +4,7 @@ import domain.lottonumber.LottoNumber;
 
 import java.util.*;
 
-public class UserNumberGenerator implements NumberGenerator {
+public class UserLottoGenerator implements LottoGenerator {
     SortedSet<LottoNumber> numbers = new TreeSet<>();
 
     public void init(List<Integer> inputNumbers) {
