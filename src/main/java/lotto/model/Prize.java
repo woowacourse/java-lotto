@@ -3,20 +3,14 @@ package lotto.model;
 import java.util.HashMap;
 
 public class Prize {
-    public static final String THREE = "3";
-    public static final String FOUR = "4";
-    public static final String FIVE = "5";
-    public static final String FIVE_BONUS = "5+";
-    public static final String SIX = "6";
+    private double prize = 0;
 
-    private static double prize = 0;
-
-    public static double sumPrize(HashMap<String, Integer> resultCount) {
-        prize += LottoResult.THREE.prizeResult(resultCount.get(THREE));
-        prize += LottoResult.FOUR.prizeResult(resultCount.get(FOUR));
-        prize += LottoResult.FIVE.prizeResult(resultCount.get(FIVE));
-        prize += LottoResult.FIVE_BONUS.prizeResult(resultCount.get(FIVE_BONUS));
-        prize += LottoResult.SIX.prizeResult(resultCount.get(SIX));
-        return prize;
+    public double sumPrize(HashMap<String, Integer> resultCount) {
+        this.prize += LottoResult.FIFTH_GRADE.prizeResult(resultCount.get(LottoResult.FIFTH_GRADE.getGrade()));
+        this.prize += LottoResult.FOURTH_GRADE.prizeResult(resultCount.get(LottoResult.FOURTH_GRADE.getGrade()));
+        this.prize += LottoResult.THIRD_GRADE.prizeResult(resultCount.get(LottoResult.THIRD_GRADE.getGrade()));
+        this.prize += LottoResult.SECOND_GRADE.prizeResult(resultCount.get(LottoResult.SECOND_GRADE.getGrade()));
+        this.prize += LottoResult.FIRST_GRADE.prizeResult(resultCount.get(LottoResult.FIRST_GRADE.getGrade()));
+        return this.prize;
     }
 }
