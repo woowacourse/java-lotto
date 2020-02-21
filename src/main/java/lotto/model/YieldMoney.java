@@ -1,11 +1,9 @@
 package lotto.model;
 
 public class YieldMoney {
-    public static final int PERCENT = 100;
+    private static final int PERCENT = 100;
 
-    public static int yieldMoney = 0;
-
-    public static int countYieldMoney(double i) {
-        return (int)(i / Payment.payment * PERCENT);
+    public static int countYieldMoney(Payment payment, double i) {
+        return (int)(i / payment.getPayment() * PERCENT);
     }
 }
