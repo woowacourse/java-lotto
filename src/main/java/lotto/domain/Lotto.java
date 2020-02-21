@@ -1,23 +1,25 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
-    private static final String NOT_DISTINCT_NUMBERS_ERROR_MSG = "중복되는 로또 번호가 존재합니다.";
-    protected List<LottoNumber> lottoNumbers;
+    private static final String INVALIDATE_LOTTO_NUMBERS_ERROR_MSG = ".";
+    private final int  LOTTO_NUMBERS_SIZE = 6;
+    protected Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
         validateDistinctNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateDistinctNumbers(List<LottoNumber> inputNumbers) {
-        if (inputNumbers.stream().mapToInt(LottoNumber::getNumber).distinct().count() != inputNumbers.size()) {
-            throw new IllegalArgumentException(NOT_DISTINCT_NUMBERS_ERROR_MSG);
+    private void validateDistinctNumbers(Set<LottoNumber> inputNumbers) {
+        if (inputNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(INVALIDATE_LOTTO_NUMBERS_ERROR_MSG);
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 }

@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final String NOT_IN_SCOPE_NUMBERS_ERROR_MSG = "로또 번호의 범위가 잘못되었습니다.";
@@ -11,7 +11,7 @@ public class LottoNumber {
     private int number;
 
     public LottoNumber(String number) {
-        this(validateNumber(number));
+        this(validateNumber(number.trim()));
     }
 
     public LottoNumber(int number) {
@@ -21,11 +21,10 @@ public class LottoNumber {
 
     private static int validateNumber(String lottoNumber) {
         try {
-            Integer.parseInt(lottoNumber);
+            return Integer.parseInt(lottoNumber);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NOT_NUMBER_MSG);
         }
-        return Integer.parseInt(lottoNumber);
     }
 
     private void validateNumberScope(int lottoNumber) {
@@ -57,5 +56,9 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 
+    @Override
+    public int compareTo(LottoNumber compareLottoNumber) {
+        return this.number - compareLottoNumber.number;
+    }
 }
 

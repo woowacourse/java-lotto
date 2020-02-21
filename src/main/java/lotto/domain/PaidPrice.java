@@ -10,9 +10,10 @@ public class PaidPrice {
 
     public PaidPrice(String inputMoney) {
         validateNumber(inputMoney);
-        validateUnderLottoPrice(Integer.parseInt(inputMoney));
-        validatePricePerLotto(Integer.parseInt(inputMoney));
-        this.payment = Integer.parseInt(inputMoney);
+        int money = Integer.parseInt(inputMoney);
+        validateUnderLottoPrice(money);
+        validatePricePerLotto(money);
+        this.payment = money;
     }
 
     private void validateNumber(String inputMoney) {

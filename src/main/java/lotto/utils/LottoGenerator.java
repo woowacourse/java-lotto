@@ -5,14 +5,11 @@ import lotto.domain.LottoNumber;
 import lotto.domain.PaidPrice;
 import lotto.domain.WinningLotto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGenerator {
-    private static final String SPLIT_DELIMETER =",";
+    private static final String SPLIT_DELIMETER = ",";
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final String INCORRECT_LOTTO_NUMBER_MSG = "로또 번호는 6개입니다.";
     private static RandomGenerator randomGenerator = new RandomGenerator();
@@ -25,37 +22,30 @@ public class LottoGenerator {
         return lottos;
     }
 
-    public static WinningLotto createWinningLottoByUserInput (String winningNumbersInput,
-                                                              String bonusNumberInput) {
-        String [] splitedWinningNumbersInput = getSplitedWinningLottoNumbers(winningNumbersInput);
-        List<LottoNumber> winningLottoNumbers = createLottoNumbersByUserInput(splitedWinningNumbersInput);
+    public static WinningLotto createWinningLottoByUserInput(String winningNumbersInput,
+                                                             String bonusNumberInput) {
+        String[] splitedWinningNumbersInput = getSplitedWinningLottoNumbers(winningNumbersInput);
+        Set<LottoNumber> winningLottoNumbers = createLottoNumbersByUserInput(splitedWinningNumbersInput);
         return new WinningLotto(winningLottoNumbers, new LottoNumber(bonusNumberInput));
     }
 
-    public static List<LottoNumber> createRandomLottoNumbers() {
+    public static Set<LottoNumber> createRandomLottoNumbers() {
         List<Integer> randomNumbers = randomGenerator.getRandomNumbers();
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
         for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
             lottoNumbers.add(new LottoNumber(randomNumbers.get(i)));
         }
-        return sortLottoNumbers(lottoNumbers);
-    }
-
-    public static List<LottoNumber> sortLottoNumbers(List<LottoNumber> lottoNumbers) {
-        Collections.sort(lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.getNumber())
-                .collect(Collectors.toList()));
         return lottoNumbers;
     }
 
-    public static List<LottoNumber> createLottoNumbersByUserInput(String[] splitedWinningLottoNumbers) {
+    public static Set<LottoNumber> createLottoNumbersByUserInput(String[] splitedWinningLottoNumbers) {
         if (splitedWinningLottoNumbers.length != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(INCORRECT_LOTTO_NUMBER_MSG);
         }
 
-        List<LottoNumber> lottoNumbers = Arrays.stream(splitedWinningLottoNumbers)
+        Set<LottoNumber> lottoNumbers = Arrays.stream(splitedWinningLottoNumbers)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(TreeSet::new));
         return lottoNumbers;
     }
 
