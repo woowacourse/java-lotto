@@ -43,7 +43,7 @@ public class Lotto {
 		return lottoNumbers.contains(bonusNumber);
 	}
 
-	public int getMatchCount(Lotto winningLotto) {
+	public int calculateMatchCount(Lotto winningLotto) {
 		List<LottoNumber> matchLottoNumbers = new ArrayList<>(lottoNumbers);
 		matchLottoNumbers.retainAll(winningLotto.lottoNumbers);
 		return matchLottoNumbers.size();

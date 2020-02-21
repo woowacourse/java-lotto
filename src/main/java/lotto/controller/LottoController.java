@@ -24,8 +24,8 @@ public class LottoController {
         return lottos;
     }
 
-    public Map<LottoRank, Integer> getLottoRankCount(List<Lotto> lottos, Lotto winningLotto,
-                                                     LottoNumber bonusLottoNumber) {
+    public Map<LottoRank, Integer> calculateLottoRankCount(List<Lotto> lottos, Lotto winningLotto,
+                                                           LottoNumber bonusLottoNumber) {
         Map<LottoRank, Integer> lottoRankCount = new TreeMap<>(Collections.reverseOrder());
 
         for (LottoRank lottoRank : LottoRank.values()) {
@@ -33,13 +33,13 @@ public class LottoController {
         }
 
         for (Lotto lotto : lottos) {
-            LottoRank lottoRank = LottoRank.of(lotto.getMatchCount(winningLotto), lotto.isContains(bonusLottoNumber));
+            LottoRank lottoRank = LottoRank.of(lotto.calculateMatchCount(winningLotto), lotto.isContains(bonusLottoNumber));
             lottoRankCount.replace(lottoRank, lottoRankCount.get(lottoRank) + SUM_UNIT);
         }
         return lottoRankCount;
     }
 
-    public int getWinningRatio(Map<LottoRank, Integer> lottoRankCount, LottoMoney inputLottoMoney) {
+    public int calculateWinningRatio(Map<LottoRank, Integer> lottoRankCount, LottoMoney inputLottoMoney) {
         LottoMoney totalWinningMoney = LottoRank.MISS.getWinningMoney();
         for (Map.Entry<LottoRank, Integer> lottoEntry : lottoRankCount.entrySet()) {
             totalWinningMoney = totalWinningMoney.add(lottoEntry.getKey().getWinningMoney().multiply(lottoEntry.getValue()));

@@ -27,11 +27,11 @@ public class ConsoleUILottoApplication {
 		Lotto winningLotto = new Lotto(LottoParser.parser(inputWinningLottoNumber()));
 		LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputBonusLottoNumber());
 		Map<LottoRank, Integer> lottoRankCount =
-				lottoController.getLottoRankCount(lottos, winningLotto, bonusLottoNumber);
+				lottoController.calculateLottoRankCount(lottos, winningLotto, bonusLottoNumber);
 		printStatisticsMessage();
 		printWinningResult(lottoRankCount);
 
-		int winningRatio = lottoController.getWinningRatio(lottoRankCount, inputLottoMoney);
+		int winningRatio = lottoController.calculateWinningRatio(lottoRankCount, inputLottoMoney);
 		printWinningRatio(winningRatio);
 	}
 
