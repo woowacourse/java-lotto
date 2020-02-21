@@ -26,6 +26,6 @@ public class ConvertInput {
     }
 
     static String removeBlank(String input) {
-        return input.replace(" ", "");
+        return input.replace(SPACE, BLANK);
     }
 }
