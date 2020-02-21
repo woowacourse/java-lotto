@@ -11,9 +11,13 @@ public class WinLotto extends Lotto implements Cloneable {
 	}
 
 	public int compare(Lotto lotto) {
-		return (int)this.lottoNumbers.stream()
+		int count = (int)this.lottoNumbers.stream()
 			.filter(x -> lotto.isContain(x))
 			.count();
+		if (count < 3) {
+			count = 0;
+		}
+		return count;
 	}
 
 	public boolean isMatchBonus(Lotto lotto) {

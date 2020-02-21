@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManager {
-	private static final int MIN_WIN_COUNT = 3;
-
 	private final List<Lotto> lotteries;
 	private final WinLotto winLotto;
 
@@ -14,26 +12,24 @@ public class LottoManager {
 		this.winLotto = (WinLotto)winLotto.clone();
 	}
 
-	public void compareLotto() {
+	public List<Rank> compareLotteries() {
+		List<Rank> ranks = new ArrayList<>();
+
 		for (Lotto lotto : lotteries) {
 			int count = winLotto.compare(lotto);
 			boolean isBonus = winLotto.isMatchBonus(lotto);
-			resultCountPlus(count, isBonus);
+			ranks.add(findRank(count, isBonus));
 		}
+		return ranks;
 	}
 
-	private void resultCountPlus(int count, boolean isBonus) {
-		if (count < MIN_WIN_COUNT) {
-			return;
+	private Rank findRank(int count, boolean isBonus) {
+		Rank lottoResult = Rank.findRank(count);
+		if (lottoResult.isSecond(isBonus)) {
+			lottoResult = Rank.SECOND;
 		}
-		LottoResult lottoResult = LottoResult.findRank(count);
-		if (isSecond(isBonus, lottoResult)) {
-			lottoResult = LottoResult.SECOND;
-		}
-		lottoResult.countPlus();
+		return lottoResult;
+
 	}
 
-	private boolean isSecond(boolean isBonus, LottoResult lottoResult) {
-		return lottoResult == LottoResult.THIRD && isBonus;
-	}
 }

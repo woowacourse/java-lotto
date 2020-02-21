@@ -5,8 +5,8 @@ import java.util.Objects;
 import lotto.exception.InvalidRangeException;
 
 public class LottoNo implements Comparable<LottoNo> {
-	private static final int MIN_LOTTO_NO = 1;
-	private static final int MAX_LOTTO_NO = 45;
+	public static final int MIN_LOTTO_NO = 1;
+	public static final int MAX_LOTTO_NO = 45;
 
 	private final int number;
 
