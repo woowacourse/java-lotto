@@ -13,38 +13,41 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoApplication {
-	public static void main(String[] args) {
-		LottoCount count = getCountByMoney();
-		OutputView.printLottoCount(count);
 
-		LottosFactory lottosFactory = new LottosFactory(new RandomLottoFactory());
-		Lottos lottos = lottosFactory.createLottosByCount(count);
-		OutputView.printLottos(lottos);
+    public static void main(String[] args) {
+        LottoCount count = getCountByMoney();
+        OutputView.printLottoCount(count);
 
-		WinningLotto winningLotto = getWinningLotto();
-		TotalResult result = winningLotto.getResult(lottos);
-		OutputView.printStatistics(result);
-	}
+        LottosFactory lottosFactory = new LottosFactory(new RandomLottoFactory());
+        Lottos lottos = lottosFactory.createLottosByCount(count);
+        OutputView.printLottos(lottos);
 
-	private static LottoCount getCountByMoney() {
-		try {
-			int inputMoney = InputView.inputMoney();
-			Money money = new Money(inputMoney);
-			return money.getCount();
-		} catch (RuntimeException re) {
-			OutputView.printExceptionMessage(re.getMessage());
-			return getCountByMoney();
+        WinningLotto winningLotto = getWinningLotto();
+        TotalResult result = winningLotto.getResult(lottos);
+        OutputView.printStatistics(result);
+    }
+
+    private static LottoCount getCountByMoney() {
+    	while(true) {
+			try {
+				int inputMoney = InputView.inputMoney();
+				Money money = new Money(inputMoney);
+				return money.getCount();
+			} catch (RuntimeException re) {
+				OutputView.printExceptionMessage(re.getMessage());
+			}
 		}
-	}
+    }
 
-	private static WinningLotto getWinningLotto() {
-		try {
-			Lotto winningLotto = Lotto.of(InputView.inputWinningLotto());
-			Ball bonusBall = Ball.of(InputView.inputWinningBonusBall());
-			return new WinningLotto(winningLotto, bonusBall);
-		} catch (RuntimeException re) {
-			OutputView.printExceptionMessage(re.getMessage());
-			return getWinningLotto();
+    private static WinningLotto getWinningLotto() {
+    	while(true) {
+			try {
+				Lotto winningLotto = Lotto.of(InputView.inputWinningLotto());
+				Ball bonusBall = Ball.of(InputView.inputWinningBonusBall());
+				return new WinningLotto(winningLotto, bonusBall);
+			} catch (RuntimeException re) {
+				OutputView.printExceptionMessage(re.getMessage());
+			}
 		}
-	}
+    }
 }

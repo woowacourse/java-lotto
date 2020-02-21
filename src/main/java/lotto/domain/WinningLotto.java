@@ -4,53 +4,54 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WinningLotto {
-	private static final String DUPLICATE_EXCEPTION_MESSAGE = "당첨 번호와 보너스 볼이 중복되었습니다.";
 
-	private final Lotto winningLotto;
-	private final Ball bonusBall;
+    private static final String DUPLICATE_EXCEPTION_MESSAGE = "당첨 번호와 보너스 볼이 중복되었습니다.";
 
-	public WinningLotto(Lotto winningLotto, Ball bonusBall) {
-		validateDuplication(winningLotto, bonusBall);
-		this.winningLotto = winningLotto;
-		this.bonusBall = bonusBall;
-	}
+    private final Lotto winningLotto;
+    private final Ball bonusBall;
 
-	private void validateDuplication(Lotto winningLotto, Ball bonusBall) {
-		if (winningLotto.contains(bonusBall)) {
-			throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
-		}
-	}
+    public WinningLotto(Lotto winningLotto, Ball bonusBall) {
+        validateDuplication(winningLotto, bonusBall);
+        this.winningLotto = winningLotto;
+        this.bonusBall = bonusBall;
+    }
 
-	public TotalResult getResult(Lottos lottos) {
-		Map<LottoRank, Integer> result = getInitialResult();
-		for (Lotto lotto : lottos) {
-			putLottoRankResult(result, lotto);
-		}
-		return new TotalResult(new LottoResult(result), lottos.getCount());
-	}
+    private void validateDuplication(Lotto winningLotto, Ball bonusBall) {
+        if (winningLotto.contains(bonusBall)) {
+            throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
+        }
+    }
 
-	private void putLottoRankResult(Map<LottoRank, Integer> result, Lotto lotto) {
-		int matchCount = lotto.countCommonBalls(winningLotto);
-		if (!LottoRank.isPrizeCount(matchCount)) {
-			return;
-		}
-		LottoRank rank = getLottoRank(lotto, matchCount);
-		result.put(rank, result.get(rank) + 1);
-	}
+    public TotalResult getResult(Lottos lottos) {
+        Map<LottoRank, Integer> result = getInitialResult();
+        for (Lotto lotto : lottos) {
+            putLottoRankResult(result, lotto);
+        }
+        return new TotalResult(new LottoResult(result), lottos.getCount());
+    }
 
-	private LottoRank getLottoRank(Lotto lotto, int matchCount) {
-		LottoRank rank = LottoRank.getRank(matchCount);
-		if (rank == LottoRank.THIRD && lotto.contains(bonusBall)) {
-			rank = LottoRank.SECOND;
-		}
-		return rank;
-	}
+    private void putLottoRankResult(Map<LottoRank, Integer> result, Lotto lotto) {
+        int matchCount = lotto.countCommonBalls(winningLotto);
+        if (!LottoRank.isPrizeCount(matchCount)) {
+            return;
+        }
+        LottoRank rank = getLottoRank(lotto, matchCount);
+        result.put(rank, result.get(rank) + 1);
+    }
 
-	private Map<LottoRank, Integer> getInitialResult() {
-		Map<LottoRank, Integer> result = new LinkedHashMap<>();
-		for (LottoRank lottoRank : LottoRank.values()) {
-			result.put(lottoRank, 0);
-		}
-		return result;
-	}
+    private LottoRank getLottoRank(Lotto lotto, int matchCount) {
+        LottoRank rank = LottoRank.getRank(matchCount);
+        if (rank == LottoRank.THIRD && lotto.contains(bonusBall)) {
+            rank = LottoRank.SECOND;
+        }
+        return rank;
+    }
+
+    private Map<LottoRank, Integer> getInitialResult() {
+        Map<LottoRank, Integer> result = new LinkedHashMap<>();
+        for (LottoRank lottoRank : LottoRank.values()) {
+            result.put(lottoRank, 0);
+        }
+        return result;
+    }
 }
