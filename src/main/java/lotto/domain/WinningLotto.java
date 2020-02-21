@@ -14,8 +14,15 @@ public class WinningLotto {
 	private LottoNumber bonusLottoNumber;
 
 	public WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+		validateDuplicate(winningLotto, bonusLottoNumber);
 		this.winningLotto = winningLotto;
 		this.bonusLottoNumber = bonusLottoNumber;
+	}
+
+	private void validateDuplicate(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+		if (winningLotto.isContains(bonusLottoNumber)) {
+			throw new WinningLottoException(WinningLottoException.DUPLICATE_NUMBER);
+		}
 	}
 
 	public Map<LottoRank, Integer> getWinningLottoCount(List<Lotto> lottos) {
