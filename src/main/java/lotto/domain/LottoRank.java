@@ -5,7 +5,7 @@ import java.util.function.BiPredicate;
 
 public enum LottoRank {
 	FIRST(6, 2_000_000_000),
-	SECOND(5, 30_000_000, (matchCount, hasBonus) -> matchCount == 5 && hasBonus),
+	SECOND(5, 30_000_000),
 	THIRD(5, 1_500_000),
 	FOURTH(4, 50_000),
 	FIFTH(3, 5_000),
@@ -13,21 +13,16 @@ public enum LottoRank {
 
 	private final int matchCount;
 	private final int winnings;
-	private final BiPredicate<Integer, Boolean> predicate;
 
 	LottoRank(int matchCount, int winnings) {
-		this(matchCount, winnings, (count, hasBonus) -> count == matchCount);
-	}
-
-	LottoRank(int matchCount, int winnings, BiPredicate<Integer, Boolean> predicate) {
 		this.matchCount = matchCount;
 		this.winnings = winnings;
-		this.predicate = predicate;
 	}
 
 	public static LottoRank of(int matchCount, boolean hasBonus) {
 		return Arrays.stream(values())
-				.filter(rank -> rank.predicate.test(matchCount, hasBonus))
+				.filter(rank -> rank.matchCount == matchCount)
+				.filter(rank -> rank != SECOND || hasBonus)
 				.findFirst()
 				.orElse(MISS);
 	}
