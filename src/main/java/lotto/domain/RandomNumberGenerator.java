@@ -6,22 +6,26 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class RandomNumberGenerator {
-    public static List<Integer> generateNumbers() {
-        List<Integer> lottoNumberPool = generateNumberPool();
-        List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < Lotto.LOTTO_NUMBER_AMOUNT; i++) {
-            randomNumbers.add(lottoNumberPool.remove(lottoNumberPool.size() - 1));
+    private List<Integer> numberPool = new ArrayList<>();
+
+    private void makeNumberPool() {
+        for (int i = 1; i <= 45; i++) {
+            numberPool.add(i);
         }
-        Collections.sort(randomNumbers);
-        return randomNumbers;
     }
 
-    private static List<Integer> generateNumberPool() {
-        List<Integer> lottoNumberPool = new LinkedList<>();
-        for (int i = 1; i <= 45; i++) {
-            lottoNumberPool.add(i);
+    private List<Integer> getInstance() {
+        if (numberPool.isEmpty()) {
+            makeNumberPool();
         }
-        Collections.shuffle(lottoNumberPool);
-        return lottoNumberPool;
+        Collections.shuffle(numberPool);
+        return numberPool;
+    }
+
+    public List<Integer> generateNumbers() {
+        List<Integer> randomNumbers = this.getInstance();
+        randomNumbers = randomNumbers.subList(0,6);
+        Collections.sort(randomNumbers);
+        return randomNumbers;
     }
 }
