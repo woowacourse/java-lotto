@@ -7,42 +7,40 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.controller.LottoController;
-import lotto.domain.InvalidLottoMoneyException;
-import lotto.domain.Lotto;
-import lotto.domain.LottoMoney;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoMoney.InvalidLottoMoneyException;
+import lotto.domain.Lotto.Lotto;
+import lotto.domain.LottoMoney.LottoMoney;
+import lotto.domain.LottoNumber.LottoNumber;
 import lotto.domain.LottoRank;
-import lotto.domain.WinningLottoParser;
+import lotto.domain.Lotto.LottoParser;
 
 public class ConsoleUILottoApplication {
-	public static void main(String[] args) {
-		LottoController lottoController = new LottoController();
+    public static void main(String[] args) {
+        LottoController lottoController = new LottoController();
+        LottoMoney inputLottoMoney = receiveInputMoney();
+        int numberOfLotto = inputLottoMoney.calculateNumberOfLotto();
+        printPurchaseCompleteMessage(numberOfLotto);
 
-		LottoMoney inputLottoMoney = receiveInputMoney();
-		int numberOfLotto = inputLottoMoney.getNumberOfLotto();
-		printPurchaseCompleteMessage(numberOfLotto);
+        List<Lotto> lottos = lottoController.purchaseLotto(numberOfLotto);
+        printPurchasedLotto(lottos);
 
-		List<Lotto> lottos = lottoController.purchaseLotto(numberOfLotto);
-		printPurchasedLotto(lottos);
+        Lotto winningLotto = new Lotto(LottoParser.parser(inputWinningLottoNumber()));
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputBonusLottoNumber());
+        Map<LottoRank, Integer> lottoRankCount =
+                lottoController.getLottoRankCount(lottos, winningLotto, bonusLottoNumber);
+        printStatisticsMessage();
+        printWinningResult(lottoRankCount);
 
-		Lotto winningLotto = new Lotto(WinningLottoParser.parser(inputWinningLottoNumber()));
-		LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputBonusLottoNumber());
+        int winningRatio = lottoController.getWinningRatio(lottoRankCount, inputLottoMoney);
+        printWinningRatio(winningRatio);
+    }
 
-		Map<LottoRank, Integer> lottoRankCount =
-			lottoController.getLottoRankCount(lottos, winningLotto, bonusLottoNumber);
-		printStatisticsMessage();
-		printWinningResult(lottoRankCount);
-
-		int winningRatio = lottoController.getWinningRatio(lottoRankCount, inputLottoMoney);
-		printWinningRatio(winningRatio);
-	}
-
-	private static LottoMoney receiveInputMoney() {
-		try {
-			return new LottoMoney(inputMoney());
-		} catch (InvalidLottoMoneyException ime) {
-			printExceptionMessage(ime.getMessage());
-			return receiveInputMoney();
-		}
-	}
+    private static LottoMoney receiveInputMoney() {
+        try {
+            return new LottoMoney(inputMoney());
+        } catch (InvalidLottoMoneyException ime) {
+            printExceptionMessage(ime.getMessage());
+            return receiveInputMoney();
+        }
+    }
 }
