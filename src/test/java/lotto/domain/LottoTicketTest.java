@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.Exception.LottoTicketEmptyException;
+import lotto.Exception.NumberOutOfRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,5 +32,16 @@ public class LottoTicketTest {
 
         assertThatCode(() -> new LottoTicket(lottoTicket))
                 .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("7개 이상의 로또 볼이 생성되었을 경우 예외처리 테스트")
+    void out_of_range_for_seven_test() {
+        List<LottoBall> lottoTicket = IntStream.rangeClosed(1, 7)
+                .mapToObj(LottoBall::new)
+                .collect(Collectors.toList());
+
+        assertThatThrownBy(() -> new LottoTicket(lottoTicket)).isInstanceOf(NumberOutOfRangeException.class)
+                .hasMessage("7개의 숫자가 들어갔습니다.");
     }
 }

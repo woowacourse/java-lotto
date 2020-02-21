@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.Exception.DuplicationException;
+import lotto.Exception.NotBuyLottoTicketException;
+import lotto.Exception.NumberOutOfRangeException;
 import lotto.domain.LottoBall;
 import lotto.domain.PurchaseAmount;
 import lotto.util.InputValidationUtil;
@@ -15,7 +18,7 @@ public class InputView {
         try {
             String purchaseAmountInput = scanner.nextLine();
             return new PurchaseAmount(purchaseAmountInput);
-        } catch (RuntimeException e) {
+        } catch (NotBuyLottoTicketException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputPurchaseAmount();
         }
@@ -27,7 +30,7 @@ public class InputView {
             String winningBalls = scanner.nextLine();
             WinningBallsUtils winningBallsUtils = new WinningBallsUtils(winningBalls);
             return winningBallsUtils.getWinningBalls();
-        } catch (RuntimeException e) {
+        } catch (NumberOutOfRangeException | DuplicationException e) {
             OutputView.printErrorMessage(e.getMessage());
             return InputWinningBalls();
         }

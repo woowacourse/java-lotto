@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.Exception.DuplicationException;
 import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -50,7 +51,7 @@ public class LottoController {
             List<LottoBall> winningBallsInput = InputView.InputWinningBalls();
             int bonusBall = InputView.InputBonusBall();
             return new WinningBalls(winningBallsInput, bonusBall);
-        } catch (RuntimeException e) {
+        } catch (DuplicationException e) {
             OutputView.printErrorMessage(e.getMessage());
             return generateWinningBalls();
         }
