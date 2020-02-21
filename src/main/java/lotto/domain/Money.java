@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.domain;
 
 import java.util.Objects;
 
@@ -7,8 +7,12 @@ public class Money {
 
     private final int money;
 
-    public Money(int money) {
+    private Money(int money) {
         this.money = money;
+    }
+
+    public static Money of(int winningMoney) {
+        return new Money(winningMoney);
     }
 
     public static Money generatePurchaseMoney(int moneyValue) {
@@ -21,6 +25,8 @@ public class Money {
             throw new IllegalArgumentException("구매금액은 1000원 이상이어야 합니다.");
         }
     }
+
+
 
     public Money plus(Money anotherMoney) {
         return new Money(this.money + anotherMoney.money);
