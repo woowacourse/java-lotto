@@ -11,7 +11,8 @@ public class OutputView {
 	private static final int MULTIPLIER_FOR_PERCENT = 100;
 
 	public static void printResult(final Ranks ranks) {
-		Rank.getOrderReversed().stream()
+		final Ranks reversed = Rank.getOrderReversed();
+		reversed.stream()
 			.filter(hasPrize())
 			.forEach(rank -> printEachResult(rank, ranks));
 	}
