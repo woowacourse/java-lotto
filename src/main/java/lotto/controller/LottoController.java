@@ -52,6 +52,7 @@ public class LottoController {
 
     private LottoTicket generateLottoTicket() {
         List<LottoBall> lottoTicket = new ArrayList<>();
+
         for (int i = 0; i < MAX_LOTTO_BALL_COUNT; i++) {
             lottoTicket.add(LottoBallFactory.getInstance().get(i));
         }
@@ -59,10 +60,14 @@ public class LottoController {
     }
 
     private List<WinningRank> generateWinningRank(WinningBalls winningBalls) {
+        int correctNumber;
+        boolean isBonusNumber;
         List<WinningRank> winningRanks = new ArrayList<>();
-        for (LottoTicket lottoTicket : LottoTickets.getLottoTickets()) {
-            int correctNumber = winningBalls.hitLottoBalls(lottoTicket);
-            boolean isBonusNumber = winningBalls.hitBonusBall(lottoTicket);
+        List<LottoTicket> lottoTickets = LottoTickets.getLottoTickets();
+
+        for (LottoTicket lottoTicket : lottoTickets) {
+            correctNumber = winningBalls.hitLottoBalls(lottoTicket);
+            isBonusNumber = winningBalls.hitBonusBall(lottoTicket);
             winningRanks.add(WinningRank.determineRank(correctNumber, isBonusNumber));
         }
         return winningRanks;

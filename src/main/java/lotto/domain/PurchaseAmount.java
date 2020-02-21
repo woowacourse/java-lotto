@@ -11,10 +11,10 @@ public class PurchaseAmount {
     public PurchaseAmount(String purchaseAmount) {
         this.purchaseAmount = InputValidationUtil.returnNumberWithNumberCheck(purchaseAmount);
         InputValidationUtil.isPositiveNumber(this.purchaseAmount);
-        underLottoUnit();
+        validateLottoUnit();
     }
 
-    private void underLottoUnit() {
+    private void validateLottoUnit() {
         if (this.purchaseAmount < LOTTO_PURCHASE_UNIT) {
             throw new NotBuyLottoTicketException("한개도 구매할 수 없습니다." + this.purchaseAmount + "원을 반환합니다.");
         }

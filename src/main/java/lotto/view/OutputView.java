@@ -66,6 +66,6 @@ public class OutputView {
     }
 
     public static void printEarningRate(EarningRate earningRate) {
-        System.out.println("총 수익률은 " + earningRate.getEarningRate() + "% 입니다.");
+        System.out.printf("총 수익률은 %.1f%% 입니다.",earningRate.getEarningRate());
     }
 }

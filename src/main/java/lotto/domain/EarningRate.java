@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.Exception.IllegalPurchaseAmount;
 import lotto.view.OutputView;
 
 import java.util.List;
@@ -7,17 +8,27 @@ import java.util.List;
 public class EarningRate {
     public static final int RATE_NUMBER = 100;
 
-    private int earningRate;
-    private long totalWinningMoney = 0;
+    private double earningRate;
+    private double totalWinningMoney = 0.0;
 
     public EarningRate(List<WinningRank> winningRanks, PurchaseAmount purchaseAmount) {
         generateWinningRank(winningRanks);
-        this.earningRate = (int) (totalWinningMoney / purchaseAmount.getPurchaseAmount() * RATE_NUMBER);
+        if (Double.isInfinite(calculateEarningRate(purchaseAmount))
+                || Double.isNaN(calculateEarningRate(purchaseAmount))) {
+            throw new IllegalPurchaseAmount("계산 오류입니다.Nan 또는 Infinite 발생");
+        }
+        this.earningRate = calculateEarningRate(purchaseAmount);
+    }
+
+    private int calculateEarningRate(PurchaseAmount purchaseAmount) {
+        return (int) (totalWinningMoney / purchaseAmount.getPurchaseAmount() * RATE_NUMBER);
     }
 
     private void generateWinningRank(List<WinningRank> winningRanks) {
+        int count;
+
         for (WinningRank winningRank : WinningRank.values()) {
-            int count = countRankPeople(winningRanks, winningRank);
+            count = countRankPeople(winningRanks, winningRank);
 
             sumWinningMoney(winningRank.getWinningMoney() * count);
         }
@@ -27,11 +38,11 @@ public class EarningRate {
         return (int) winningRanks.stream().filter(Rank -> winningRank == Rank).count();
     }
 
-    private void sumWinningMoney(int totalWinningMoney) {
+    private void sumWinningMoney(double totalWinningMoney) {
         this.totalWinningMoney += totalWinningMoney;
     }
 
-    public long getEarningRate() {
+    public double getEarningRate() {
         return earningRate;
     }
 }
