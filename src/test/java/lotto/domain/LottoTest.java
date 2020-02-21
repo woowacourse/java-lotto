@@ -55,6 +55,7 @@ public class LottoTest {
 	@ParameterizedTest
 	@DisplayName("로또 번호 리스트의 크기가 올바르지 않은 경우")
 	@MethodSource("invalidSize")
+	@SuppressWarnings("NonAsciiCharacters")
 	void constructor_로또_번호_리스트의_크기가_올바르지_않은_경우(List<LottoNumber> lottoNumbers) {
 		assertThatExceptionOfType(InvalidLottoException.class).isThrownBy(() -> new Lotto(lottoNumbers))
 				.withMessage("로또는 6개의 로또 번호가 필요합니다.");
@@ -62,6 +63,7 @@ public class LottoTest {
 
 	@Test
 	@DisplayName("중복된 수가 있는 경우")
+	@SuppressWarnings("NonAsciiCharacters")
 	void constructor_중복된_수가_있는_경우() {
 		List<LottoNumber> lottoNumbers = Arrays.asList(
 				LottoNumber.of(1),
@@ -77,6 +79,7 @@ public class LottoTest {
 
 	@Test
 	@DisplayName("수가 정렬되어 있는지 확인")
+	@SuppressWarnings("NonAsciiCharacters")
 	void constructor_수가_정렬되어_있는지_확인() {
 		Lotto lotto = new Lotto(Arrays.asList(
 				LottoNumber.of(45),

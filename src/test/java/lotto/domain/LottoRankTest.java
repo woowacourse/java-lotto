@@ -20,6 +20,7 @@ public class LottoRankTest {
 	@ParameterizedTest
 	@DisplayName("로또 순위권내에 없는 경우")
 	@ValueSource(ints = {-1, 7})
+	@SuppressWarnings("NonAsciiCharacters")
 	void of_순위권내에_없는_경우(int rank) {
 		assertThat(LottoRank.of(rank, false)).isEqualTo(LottoRank.MISS);
 	}

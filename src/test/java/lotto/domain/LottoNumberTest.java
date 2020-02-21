@@ -19,6 +19,7 @@ public class LottoNumberTest {
 	@ParameterizedTest
 	@DisplayName("로또 번호 범위에서 벗어나는 경우")
 	@ValueSource(ints = {-1, 0, 46})
+	@SuppressWarnings("NonAsciiCharacters")
 	void of_범위에서_벗어나는_경우(int actual) {
 		assertThatExceptionOfType(InvalidLottoNumberException.class).isThrownBy(() -> LottoNumber.of(actual));
 	}

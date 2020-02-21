@@ -16,6 +16,7 @@ public class LottoPurchaseMoneyTest {
 
 	@Test
 	@DisplayName("구입 금액이 로또 가격보다 적은 경우")
+	@SuppressWarnings("NonAsciiCharacters")
 	void constructor_구입_금액이_로또_가격보다_적은_경우() {
 		assertThatExceptionOfType(InvalidLottoPurchaseMoneyException.class).isThrownBy(
 				() -> new LottoPurchaseMoney("500")).withMessage("로또 한 장의 가격 1000원 보다 적습니다.");
@@ -23,6 +24,7 @@ public class LottoPurchaseMoneyTest {
 
 	@Test
 	@DisplayName("숫자가 아닌 값을 입력 받은 경우")
+	@SuppressWarnings("NonAsciiCharacters")
 	void constructor_숫자가_아닌_값을_입력_받은_경우() {
 		assertThatExceptionOfType(NumberFormatException.class).isThrownBy(
 				() -> new LottoPurchaseMoney("abc")).withMessage("숫자가 아닌 값을 입력하면 안됩니다.");
