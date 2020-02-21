@@ -2,11 +2,10 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class AutoNumber {
-    public static final int LOTTO_NUMBER_LENGTH = 6;
+    private static final int LOTTO_NUMBER_LENGTH = 6;
     private List<Integer> autoNumber = new ArrayList<>();
 
     public AutoNumber() {
@@ -17,8 +16,8 @@ public class AutoNumber {
         Collections.sort(autoNumber);
     }
 
-    public AutoNumber(List<Integer> input) {
-        this.autoNumber = input;
+    public AutoNumber(List<Integer> customizedAutoNumber) {
+        this.autoNumber = customizedAutoNumber;
     }
 
     public List<Integer> getAutoNumber() {
