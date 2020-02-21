@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.function.BiPredicate;
 
 public enum LottoRank {
 	FIRST(6, 2_000_000_000),
