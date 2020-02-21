@@ -13,7 +13,7 @@ public class WinningLottoTest {
 
 	@BeforeEach
 	void setup() {
-		lotto = Lotto.of(1, 2, 5, 43, 44, 45);
+		lotto = LottoFactory.create("1,2,5,43,44,45");
 	}
 
 	@Test
@@ -33,6 +33,6 @@ public class WinningLottoTest {
 	@DisplayName("로또 결과 확인")
 	void match() {
 		WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.of(9));
-		assertThat(winningLotto.match(Lotto.of(1, 2, 5, 43, 44, 45))).isEqualTo(LottoRank.FIRST);
+		assertThat(winningLotto.match(LottoFactory.create("1,2,5,43,44,45"))).isEqualTo(LottoRank.FIRST);
 	}
 }

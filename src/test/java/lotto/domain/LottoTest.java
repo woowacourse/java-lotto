@@ -96,34 +96,4 @@ public class LottoTest {
 		));
 		assertThat(lotto).isEqualTo(expected);
 	}
-
-	@Test
-	@DisplayName("of 정수 가변 배열")
-	void of_정수() {
-		Lotto actual = Lotto.of(1, 2, 3, 4, 5, 6);
-		Lotto expected = new Lotto(Arrays.asList(
-				LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(3),
-				LottoNumber.of(4),
-				LottoNumber.of(5),
-				LottoNumber.of(6)
-		));
-		assertThat(actual).isEqualTo(expected);
-	}
-
-	@Test
-	@DisplayName("of 문자열 가변 배열")
-	void of_문자열() {
-		Lotto actual = Lotto.of("1", "2", "3", "4", "5", "6");
-		Lotto expected = new Lotto(Arrays.asList(
-				LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(3),
-				LottoNumber.of(4),
-				LottoNumber.of(5),
-				LottoNumber.of(6)
-		));
-		assertThat(actual).isEqualTo(expected);
-	}
 }
