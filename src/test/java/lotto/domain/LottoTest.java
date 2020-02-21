@@ -55,6 +55,6 @@ public class LottoTest {
 	void 몇등_당첨(List<String> winningNumbers, int bonusNumber, String expectedPrize) {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 		WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
-		assertThat(lotto.findLottoPrize(winningNumber).getPrizeName()).isEqualTo(expectedPrize);
+		assertThat(lotto.findLottoPrize(winningNumber).getPrizeDescription()).isEqualTo(expectedPrize);
 	}
 }

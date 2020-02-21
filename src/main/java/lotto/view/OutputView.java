@@ -33,7 +33,7 @@ public class OutputView {
 	public static void printLottoResult(List<WinningPrize> winningPrizes) {
 		HashMap<WinningPrize, Integer> winningInformation = makeWinningInformation(winningPrizes);
 		for (WinningPrize winningPrize : WinningPrize.values()) {
-			System.out.println(winningPrize.getPrizeName()
+			System.out.println(winningPrize.getPrizeDescription()
 				+ "("
 				+ winningPrize.getPrize() + "원): "
 				+ winningInformation.get(winningPrize) + "개");

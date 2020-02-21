@@ -10,6 +10,6 @@ public class WinningPrizeTest {
 	@CsvSource(value = {"6,false,1등", "5,true,2등(보너스볼 일치)", "3,true,5등", "2,false,미당첨"})
 	void 등수_확인(int matchCount, boolean bonusMatch, String expected) {
 		WinningPrize prize = WinningPrize.of(matchCount, bonusMatch);
-		assertEquals(expected, prize.getPrizeName());
+		assertEquals(expected, prize.getPrizeDescription());
 	}
 }

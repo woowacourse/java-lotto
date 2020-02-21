@@ -14,12 +14,12 @@ public enum WinningPrize {
 
 	private int matchCount;
 	private int prize;
-	private String prizeName;
+	private String prizeDescription;
 
-	WinningPrize(int matchCount, int prize, String prizeName) {
+	WinningPrize(int matchCount, int prize, String prizeDescription) {
 		this.matchCount = matchCount;
 		this.prize = prize;
-		this.prizeName = prizeName;
+		this.prizeDescription = prizeDescription;
 	}
 
 	public static WinningPrize of(int matchCount, boolean bonusMatch) {
@@ -40,7 +40,7 @@ public enum WinningPrize {
 		return prize;
 	}
 
-	public String getPrizeName() {
-		return prizeName;
+	public String getPrizeDescription() {
+		return prizeDescription;
 	}
 }
