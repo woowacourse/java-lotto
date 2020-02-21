@@ -2,6 +2,7 @@ package domain.lotto.lottoresult;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoResult {
     private static final String ERROR_NULL_MESSAGE = "null값이 입력되었습니다.";
@@ -21,11 +22,9 @@ public class LottoResult {
     }
 
     public long calculateEarning() {
-        long earning = 0;
-        for (LottoRank lottoRank : result.keySet()) {
-            earning += result.get(lottoRank).multiply(lottoRank.getWinning());
-        }
-        return earning;
+        return result.keySet().stream()
+                .mapToLong(rank -> result.get(rank).multiply(rank.getWinning()))
+                .sum();
     }
 
     public ResultCount countRank(LottoRank rank) {

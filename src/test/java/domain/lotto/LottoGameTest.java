@@ -17,6 +17,13 @@ public class LottoGameTest {
     }
 
     @Test
+    void null방어_확인() {
+        Assertions.assertThatThrownBy(() -> new LottoGame(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("null값이 입력되었습니다.");
+    }
+
+    @Test
     void Result생성_확인() {
         LottoGame lottoGame = LottoGame.create(new TestNumberGenerator(), 2);
         LottoWinner winner = new LottoWinner(LottoNumbersFactory.createLottoNumbers(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(7));

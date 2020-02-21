@@ -19,13 +19,7 @@ public class LottoController {
         LottoWinner lottoWinner = makeWinnerNumbers();
         LottoResult lottoResult = lottoGame.createGameResult(lottoWinner);
 
-        printResult(money, lottoResult);
-    }
-
-    private void printResult(Money money, LottoResult lottoResult) {
-        OutputView.printResultTitle();
-        OutputView.printLottoResult(lottoResult);
-        OutputView.printEarning(money.calculateEarningRate(lottoResult.calculateEarning()));
+        OutputView.printResultAll(money, lottoResult);
     }
 
     private LottoWinner makeWinnerNumbers() {

@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGame {
     private static final int COUNT_NUMBER = 1;
-    private static final String ERROR_NULL_MESSAGE = "1부터 45 사이의 숫자만 입력 가능합니다.";
+    private static final String ERROR_NULL_MESSAGE = "null값이 입력되었습니다.";
 
     List<LottoNumbers> lottoGame;
 
@@ -33,11 +34,9 @@ public class LottoGame {
     }
 
     public static LottoGame create(NumberGenerator numberGenerator, int repeat) {
-        List<LottoNumbers> lotto = new ArrayList<>();
-        for (int i = 0; i < repeat; i++) {
-            lotto.add(LottoNumbersFactory.createLottoNumbers(numberGenerator));
-        }
-        return new LottoGame(lotto);
+        return IntStream.range(0, repeat)
+                .mapToObj(i -> LottoNumbersFactory.createLottoNumbers(numberGenerator))
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoGame::new));
     }
 
     public List<LottoNumbers> getLottoGame() {

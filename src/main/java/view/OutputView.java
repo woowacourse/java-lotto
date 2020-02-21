@@ -50,12 +50,24 @@ public class OutputView {
         System.out.println(sb.toString());
     }
 
-    public static void printResultTitle() {
+    public static void printResultAll(Money money, LottoResult lottoResult) {
+        OutputView.printResultTitle();
+        OutputView.printLottoResult(lottoResult);
+        OutputView.printEarning(money.calculateEarningRate(lottoResult.calculateEarning()));
+    }
+
+    private static void printResultTitle() {
         System.out.println("\n당첨 통계");
         System.out.println("--------");
     }
 
-    public static void printRankResult(LottoRank rank, ResultCount resultCount) {
+    private static void printLottoResult(LottoResult lottoResult) {
+        Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != LottoRank.NOTHING)
+                .forEach(rank -> printRankResult(rank, lottoResult.countRank(rank)));
+    }
+
+    private static void printRankResult(LottoRank rank, ResultCount resultCount) {
         StringBuilder sb = new StringBuilder();
         sb.append(rank.getHitCount());
         sb.append("개 일치");
@@ -69,13 +81,7 @@ public class OutputView {
         System.out.println(sb.toString());
     }
 
-    public static void printLottoResult(LottoResult lottoResult) {
-        Arrays.stream(LottoRank.values())
-                .filter(rank -> rank != LottoRank.NOTHING)
-                .forEach(rank -> printRankResult(rank, lottoResult.countRank(rank)));
-    }
-
-    public static void printEarning(long rating) {
+    private static void printEarning(long rating) {
         System.out.println("총 수익률은 " + rating + "%입니다.");
     }
 }

@@ -11,13 +11,13 @@ import java.util.stream.IntStream;
 
 public class RandomNumberGenerator implements NumberGenerator {
     private static final List<LottoNumber> numbers;
-    private static final int START_LOTTO_INCLUSIVE = 1;
-    private static final int END_LOTTO_EXCLUSIVE = 46;
+    private static final int LOTTO_UNDER_BOUND = 1;
+    private static final int LOTTO_UPPER_BOUND = 45;
     private static final int START_INDEX = 0;
     private static final int END_INDEX = 6;
 
     static {
-        numbers = IntStream.range(START_LOTTO_INCLUSIVE, END_LOTTO_EXCLUSIVE)
+        numbers = IntStream.rangeClosed(LOTTO_UNDER_BOUND, LOTTO_UPPER_BOUND)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }
