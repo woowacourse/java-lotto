@@ -4,7 +4,7 @@ import lotto.exception.InvalidMoneyException;
 import lotto.validator.Validator;
 
 public class Money {
-	private static final int PRICE_ONE_LOTTO = 1000;
+	private static final int PRICE_ONE_LOTTO = 1_000;
 	private static final int TO_PERCENT_VALUE = 100;
 
 	private final int inputMoney;
