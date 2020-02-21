@@ -12,10 +12,17 @@ public class LottoController {
     public void run() {
         Money money = new Money(InputView.inputMoney());
         LottoGame lottoGame = LottoGame.create(new RandomNumberGenerator(), money.countGames());
+
         OutputView.printLottoNumbersCount(money);
         OutputView.printLottoGame(lottoGame);
+
         LottoWinner lottoWinner = makeWinnerNumbers();
         LottoResult lottoResult = lottoGame.createGameResult(lottoWinner);
+
+        printResult(money, lottoResult);
+    }
+
+    private void printResult(Money money, LottoResult lottoResult) {
         OutputView.printResultTitle();
         OutputView.printLottoResult(lottoResult);
         OutputView.printEarning(money.calculateEarningRate(lottoResult.calculateEarning()));

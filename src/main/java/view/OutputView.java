@@ -58,11 +58,14 @@ public class OutputView {
     public static void printRankResult(LottoRank rank, ResultCount resultCount) {
         StringBuilder sb = new StringBuilder();
         sb.append(rank.getHitCount());
-        sb.append("개 일치 (");
+        sb.append("개 일치");
+        if (rank.hasBonus()) {
+            sb.append(", 보너스볼 일치");
+        }
+        sb.append(" (");
         sb.append(rank.getWinning());
         sb.append("원)- ");
-        sb.append(resultCount.toString());
-        sb.append("개");
+        sb.append(resultCount.toString() + "개");
         System.out.println(sb.toString());
     }
 
