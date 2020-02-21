@@ -29,8 +29,8 @@ public class RankTest {
 
 		Rank expected = Rank.FIRST;
 		Rank actual = Rank.of(
-			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
-			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+			lottoTicket.getMatchCount(winningNumbers),
+			lottoTicket.isBonusNotMatch(winningNumbers)
 		);
 
 		assertThat(actual).isEqualTo(expected);
@@ -43,8 +43,8 @@ public class RankTest {
 
 		Rank expected = Rank.SECOND;
 		Rank actual = Rank.of(
-			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
-			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+			lottoTicket.getMatchCount(winningNumbers),
+			lottoTicket.isBonusNotMatch(winningNumbers)
 		);
 
 		assertThat(actual).isEqualTo(expected);
@@ -57,8 +57,8 @@ public class RankTest {
 
 		Rank expected = Rank.THIRD;
 		Rank actual = Rank.of(
-			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
-			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+			lottoTicket.getMatchCount(winningNumbers),
+			lottoTicket.isBonusNotMatch(winningNumbers)
 		);
 
 		assertThat(actual).isEqualTo(expected);
@@ -71,8 +71,8 @@ public class RankTest {
 
 		Rank expected = Rank.FOURTH;
 		Rank actual = Rank.of(
-			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
-			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+			lottoTicket.getMatchCount(winningNumbers),
+			lottoTicket.isBonusNotMatch(winningNumbers)
 		);
 
 		assertThat(actual).isEqualTo(expected);
@@ -85,8 +85,8 @@ public class RankTest {
 
 		Rank expected = Rank.FIFTH;
 		Rank actual = Rank.of(
-			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
-			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+			lottoTicket.getMatchCount(winningNumbers),
+			lottoTicket.isBonusNotMatch(winningNumbers)
 		);
 
 		assertThat(actual).isEqualTo(expected);
@@ -99,8 +99,8 @@ public class RankTest {
 
 		Rank expected = Rank.NONE;
 		Rank actual = Rank.of(
-			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
-			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+			lottoTicket.getMatchCount(winningNumbers),
+			lottoTicket.isBonusNotMatch(winningNumbers)
 		);
 
 		assertThat(actual).isEqualTo(expected);

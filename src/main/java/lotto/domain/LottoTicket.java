@@ -21,6 +21,22 @@ public class LottoTicket {
 		return lottoNumbers.stream();
 	}
 
+	public int getMatchCount(final WinningNumbers winningNumbers) {
+		return (int)lottoNumbers.stream()
+			.filter(lottoNumber -> isMatch(winningNumbers, lottoNumber))
+			.count();
+	}
+
+	private boolean isMatch(final WinningNumbers winningNumbers, final LottoNumber lottoNumber) {
+		final List<LottoNumber> ordinaries = winningNumbers.getOrdinaries();
+		return ordinaries.contains(lottoNumber);
+	}
+
+	public boolean isBonusNotMatch(final WinningNumbers winningNumbers) {
+		return lottoNumbers.stream()
+			.noneMatch(winningNumbers::isMatchWithBonus);
+	}
+
 	@Override
 	public String toString() {
 		return START_BRACKET +

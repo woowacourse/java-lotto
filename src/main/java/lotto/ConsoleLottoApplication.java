@@ -12,7 +12,6 @@ import lotto.domain.ProfitCalculator;
 import lotto.domain.PurchasingAmount;
 import lotto.domain.Rank;
 import lotto.domain.Ranks;
-import lotto.domain.TicketComparator;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -43,8 +42,8 @@ public class ConsoleLottoApplication {
 
 	private static Function<LottoTicket, Rank> getRankBy(WinningNumbers winningNumbers) {
 		return lottoTicket -> Rank.of(
-			TicketComparator.getMatchCount(lottoTicket, winningNumbers),
-			TicketComparator.isBonusNotMatch(lottoTicket, winningNumbers)
+			lottoTicket.getMatchCount(winningNumbers),
+			lottoTicket.isBonusNotMatch(winningNumbers)
 		);
 	}
 }
