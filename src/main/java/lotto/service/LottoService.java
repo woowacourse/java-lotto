@@ -10,14 +10,14 @@ import lotto.view.dto.WinningLottoRequestDTO;
 
 public class LottoService {
 
-    private final LottoMachine randomLottoStore;
+    private final LottoMachine lottoMachine;
 
-    public LottoService(LottoMachine randomLottoStore) {
-        this.randomLottoStore = randomLottoStore;
+    public LottoService(LottoMachine lottoMachine) {
+        this.lottoMachine = lottoMachine;
     }
 
     public LottoTicketBundle getLottoTicketBundle(BettingMoney bettingMoney) {
-        return new LottoTicketBundle(randomLottoStore.buyTicket(bettingMoney));
+        return new LottoTicketBundle(lottoMachine.buyTicket(bettingMoney));
     }
 
     public PrizeResponseBundleDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle, WinningLottoRequestDTO winningLottoRequestDTO) {

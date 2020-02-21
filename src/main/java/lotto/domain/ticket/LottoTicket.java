@@ -15,10 +15,13 @@ public class LottoTicket {
 
     private final Set<LottoBall> lottoBalls;
 
-    public LottoTicket(List<Integer> numbers) {
-        Set<LottoBall> lottoBalls = LottoBallFactory.collectLottoBalls(numbers);
-        validateSize(lottoBalls);
-        this.lottoBalls = lottoBalls;
+    public LottoTicket(Set<LottoBall> balls) {
+        validateSize(balls);
+        this.lottoBalls = balls;
+    }
+
+    LottoTicket(List<Integer> numbers) {
+        this(LottoBallFactory.collectLottoBalls(numbers));
     }
 
     private void validateSize(Set<LottoBall> lottoBalls) {

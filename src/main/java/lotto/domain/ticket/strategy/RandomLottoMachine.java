@@ -31,7 +31,7 @@ public class RandomLottoMachine implements LottoMachine {
         Collections.shuffle(lottoBalls);
 
         return IntStream.rangeClosed(START_LOTTO_BALL, END_LOTTO_BALL)
-                .boxed()
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
+                .mapToObj(lottoBalls::get)
+                .collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));
     }
 }

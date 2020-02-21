@@ -21,6 +21,10 @@ public final class LottoBall {
         }
     }
 
+    public boolean isEqualNumber(int number) {
+        return this.number == number;
+    }
+
     public int getNumber() {
         return number;
     }

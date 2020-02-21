@@ -17,7 +17,7 @@ public class PrizeResponseBundleDTO {
 
     public PrizeResponseBundleDTO(List<PrizeGroup> prizeResults) {
         this.prizeResponseDTOS = Arrays.stream(PrizeGroup.values())
-                .map(criteria -> new PrizeResponseDTO(criteria, prizeResults))
+                .map(prizeGroup -> new PrizeResponseDTO(prizeGroup, prizeResults))
                 .collect(Collectors.toList());
     }
 
