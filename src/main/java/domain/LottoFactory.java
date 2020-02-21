@@ -1,18 +1,16 @@
 package domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoFactory {
 
-    public static final int LOTTO_SIZE = 6;
+    public static final int START_INDEX = 0;
+    public static final int LAST_INDEX = 6;
 
     public static Lotto createOneLotto() {
-        Set<LottoNumber> lotto = new HashSet<>();
-        while (lotto.size() < LOTTO_SIZE) {
-            int number = RandomNumberGenerator.generate();
-            lotto.add(new LottoNumber(number));
-        }
-        return new Lotto(lotto);
+        List<LottoNumber> allLottoNumbers = AllLottoNumbers.getAllLottoNumbers();
+        Collections.shuffle(allLottoNumbers);
+        return new Lotto(allLottoNumbers.subList(START_INDEX, LAST_INDEX));
     }
 }

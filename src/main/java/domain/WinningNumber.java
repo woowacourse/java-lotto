@@ -1,14 +1,14 @@
 package domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WinningNumber {
     private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
     public WinningNumber(String[] numbers, String bonusNumber) {
-        Set<LottoNumber> winningNumbers = new HashSet<>();
+        List<LottoNumber> winningNumbers = new ArrayList<>();
         for (String number : numbers) {
             winningNumbers.add(new LottoNumber(number));
         }

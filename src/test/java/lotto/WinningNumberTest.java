@@ -6,8 +6,8 @@ import domain.LottoRank;
 import domain.WinningNumber;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -74,7 +74,7 @@ public class WinningNumberTest {
         String bonusNumber = "7";
         WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
 
-        Set<LottoNumber> myLotto = new HashSet<>();
+        List<LottoNumber> myLotto = new ArrayList<>();
         myLotto.add(new LottoNumber(1));
         myLotto.add(new LottoNumber(20));
         myLotto.add(new LottoNumber(30));
