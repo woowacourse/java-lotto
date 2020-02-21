@@ -11,10 +11,11 @@ import java.util.stream.Collectors;
 public class WinningBallsTest {
 
     @Test
-    void 로또번호와_당첨결과_비교() {
+    @DisplayName("자동 생성된 로또볼과 당첨 로또볼과 비교하는 테스트")
+    void compare_lotto_ball_and_winning_ball() {
         int[] value = {1, 2, 3, 4, 5, 6};
         List<LottoBall> winningBallValues = Arrays.stream(value).mapToObj(LottoBall::new).collect(Collectors.toList());
-        WinningBalls winningBalls = new WinningBalls(winningBallValues, 7);
+        WinningBalls winningBalls = new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(7));
 
         LottoTicket lottoTicket = new LottoTicket(winningBallValues);
 
@@ -35,7 +36,7 @@ public class WinningBallsTest {
                 .mapToObj(LottoBallFactory::findByLottoBall)
                 .collect(Collectors.toList());
 
-        WinningBalls winningBalls = new WinningBalls(winningBallValues, bonusBall);
+        WinningBalls winningBalls = new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(bonusBall));
 
         Assertions.assertThat(winningBalls.hitBonusBall(new LottoTicket(lottoTicket))).isTrue();
     }

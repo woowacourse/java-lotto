@@ -28,7 +28,7 @@ class WinningRankTest {
         List<LottoBall> winningBallValues = Arrays.stream(winningBallInputs)
                 .mapToObj(LottoBallFactory::findByLottoBall)
                 .collect(Collectors.toList());
-        WinningBalls winningBalls = new WinningBalls(winningBallValues, bonus);
+        WinningBalls winningBalls = new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(bonus));
         int correctCount = winningBalls.hitLottoBalls(new LottoTicket(lottoTicket));
         boolean correctBonusNumber = winningBalls.hitBonusBall(new LottoTicket(lottoTicket));
         Assertions.assertThat(WinningRank.selectRank(correctCount, correctBonusNumber)).isEqualTo(winningRank);

@@ -13,16 +13,9 @@ public class LottoStore {
     private PurchaseAmount purchaseAmount;
     private LottoTickets lottoTickets;
 
-    public LottoStore() {
-        startInputPurchaseAmount();
+    public LottoStore(PurchaseAmount purchaseAmount) {
+        this.purchaseAmount = purchaseAmount;
         generateLottoTickets();
-    }
-
-    private void startInputPurchaseAmount() {
-        OutputView.printStartGuide();
-        purchaseAmount = InputView.inputPurchaseAmount();
-        OutputView.printLottePieces(purchaseAmount.lottoTicket());
-        OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
     }
 
     private LottoTicket generateLottoTicket() {

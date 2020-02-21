@@ -12,24 +12,15 @@ public class WinningBalls {
     private List<LottoBall> winningBalls;
     private LottoBall bonusBall;
 
-    public WinningBalls() {
-        generateWinningBalls();
+    public WinningBalls(List<LottoBall> winningBalls, LottoBall bonusBall) {
+        this.winningBalls = winningBalls;
+        this.bonusBall = bonusBall;
+        validateWinningBallsWithDuplicatedBonusBall();
     }
 
     private void validateWinningBallsWithDuplicatedBonusBall() {
         if (winningBalls.contains(this.bonusBall)) {
             throw new DuplicationException("보너스 볼이 중복입니다. 당첨 번호를 다시 입력해주세요.");
-        }
-    }
-
-    public void generateWinningBalls() {
-        try {
-            this.winningBalls = InputView.InputWinningBalls();
-            this.bonusBall = LottoBallFactory.findByLottoBall(InputView.InputBonusBall());
-            validateWinningBallsWithDuplicatedBonusBall();
-        } catch (DuplicationException | NumberOutOfRangeException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            generateWinningBalls();
         }
     }
 

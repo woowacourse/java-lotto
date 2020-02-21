@@ -14,10 +14,9 @@ import java.util.Scanner;
 public class InputView {
     static Scanner scanner = new Scanner(System.in);
 
-    public static PurchaseAmount inputPurchaseAmount() {
+    public static String inputPurchaseAmount() {
         try {
-            String purchaseAmountInput = scanner.nextLine();
-            return new PurchaseAmount(purchaseAmountInput);
+            return scanner.nextLine();
         } catch (NotBuyLottoTicketException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputPurchaseAmount();
