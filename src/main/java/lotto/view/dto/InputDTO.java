@@ -1,6 +1,6 @@
 package lotto.view.dto;
 
-import lotto.controller.Money;
+import lotto.domain.Money;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumbers;

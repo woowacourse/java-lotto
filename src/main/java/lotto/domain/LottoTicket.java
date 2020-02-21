@@ -5,6 +5,7 @@ import java.util.List;
 
 public class LottoTicket {
     private static final int COUNT_FOR_SECOND_RANK = 5;
+    private static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
@@ -19,7 +20,7 @@ public class LottoTicket {
     }
 
     private void validateNumbersCount(List<LottoNumber> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또의 숫자는 6개여야 합니다.");
         }
     }
@@ -45,11 +46,11 @@ public class LottoTicket {
     }
 
     public Rank compare(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
-        int count = (int) this.numbers.stream()
+        int count = (int) numbers.stream()
                 .filter(winningLottoTicket.numbers::contains)
                 .count();
 
-        if (count == COUNT_FOR_SECOND_RANK && this.numbers.contains(bonusNumber)) {
+        if (count == COUNT_FOR_SECOND_RANK && numbers.contains(bonusNumber)) {
             return Rank.SECOND;
         }
 

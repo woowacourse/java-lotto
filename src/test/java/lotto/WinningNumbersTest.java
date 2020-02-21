@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,13 +17,7 @@ class WinningNumbersTest {
     @Test
     void 당첨번호와_보너스번호가_중복될_경우_예외_발생() {
         Assertions.assertThatThrownBy(() -> {
-            List<LottoNumber> sixNumbers = Arrays.asList(new LottoNumber(1),
-                    new LottoNumber(2),
-                    new LottoNumber(3),
-                    new LottoNumber(4),
-                    new LottoNumber(5),
-                    new LottoNumber(6));
-            LottoTicket lottoTicket = new LottoTicket(sixNumbers);
+            LottoTicket lottoTicket = createLottoTicket("1,2,3,4,5,6");
             LottoNumber bonusNumber = new LottoNumber(6);
             new WinningNumbers(lottoTicket, bonusNumber);
         }).isInstanceOf(IllegalArgumentException.class)
@@ -30,35 +25,14 @@ class WinningNumbersTest {
     }
 
     @Test
-    void compareLottos() {
-        List<LottoNumber> sixNumbers = Arrays.asList(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6));
-        LottoTicket lottoTicket = new LottoTicket(sixNumbers);
+    void 로또티켓들을_당첨번호와_비교해서_해당_순위들을_반환() {
+        LottoTicket lottoTicket = createLottoTicket("1,2,3,4,5,6");
         LottoNumber bonusNumber = new LottoNumber(7);
         WinningNumbers winningNumbers = new WinningNumbers(lottoTicket, bonusNumber);
 
-        LottoTicket lottoTicketForFirstRank = new LottoTicket(Arrays.asList(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(10),
-                new LottoNumber(11),
-                new LottoNumber(12)));
-        LottoTicket lottoTicketForThirdRank = new LottoTicket(Arrays.asList(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(12)));
-        LottoTicket lottoTicketForFifthRank = new LottoTicket(Arrays.asList(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
+        LottoTicket lottoTicketForFirstRank = createLottoTicket("1,2,3,10,11,12");
+        LottoTicket lottoTicketForThirdRank = createLottoTicket("1,2,3,4,5,12");
+        LottoTicket lottoTicketForFifthRank = createLottoTicket("1,2,3,4,5,6");
         List<LottoTicket> lottoTickets = Arrays.asList(lottoTicketForFirstRank, lottoTicketForThirdRank, lottoTicketForFifthRank);
 
         List<Rank> givenRanks = winningNumbers.compareLottos(lottoTickets);
@@ -67,5 +41,13 @@ class WinningNumbersTest {
         for (Rank givenRank : givenRanks) {
             assertThat(expectedRanks).contains(givenRank);
         }
+    }
+
+    private static LottoTicket createLottoTicket(String numbers) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers.split(","))
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new LottoTicket(lottoNumbers);
     }
 }

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.controller.Money;
+import lotto.domain.Money;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 

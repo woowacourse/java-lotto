@@ -21,7 +21,6 @@ public class WinningNumbers {
 
     public List<Rank> compareLottos(List<LottoTicket> lottoTickets) {
         List<Rank> ranks = new ArrayList<>();
-
         for (LottoTicket lottoTicket : lottoTickets) {
             compareLotto(ranks, lottoTicket);
         }

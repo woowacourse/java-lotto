@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.controller.Money;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RankTest {
     @ParameterizedTest
     @MethodSource("createCountAndRank")
-    void of(int count, Rank expected) {
+    void 일치하는_개수에_해당하는_순위를_반(int count, Rank expected) {
         assertThat(Rank.of(count)).isEqualTo(expected);
     }
 
@@ -29,9 +29,9 @@ class RankTest {
     }
 
     @Test
-    void sumWinningMoney() {
+    void 순위들의_당첨금액을_모두_더함() {
         List<Rank> ranks = Arrays.asList(Rank.FIFTH, Rank.SECOND, Rank.FOURTH);
-        Money expected = new Money(30055000);
+        Money expected = Money.of(30055000);
         assertThat(Rank.sumWinningMoney(ranks)).isEqualTo(expected);
     }
 }
