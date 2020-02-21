@@ -8,6 +8,7 @@ import domain.lotto.lottoresult.LottoRank;
 import domain.lotto.lottoresult.LottoResult;
 import domain.lotto.lottoresult.ResultCount;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -71,9 +72,9 @@ public class OutputView {
 
     public static void printLottoResult(LottoResult lottoResult) {
         Map<LottoRank, ResultCount> result = lottoResult.getResult();
-        result.keySet().stream()
+        Arrays.stream(LottoRank.values())
                 .filter(rank -> rank != LottoRank.NOTHING)
-                .forEach(lottoRank -> printRankResult(lottoRank, result.get(lottoRank)));
+                .forEach(rank -> printRankResult(rank, lottoResult.countRank(rank)));
     }
 
     public static void printEarning(long rating) {

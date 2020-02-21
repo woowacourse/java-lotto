@@ -4,7 +4,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoResult {
-    public static final String ERROR_NULL_MESSAGE = "null값이 입력되었습니다.";
+    private static final String ERROR_NULL_MESSAGE = "null값이 입력되었습니다.";
+    private static final int INIT_RESULTCOUNT_NUMBER = 0;
 
     private Map<LottoRank, ResultCount> result;
 
@@ -29,5 +30,12 @@ public class LottoResult {
 
     public Map<LottoRank, ResultCount> getResult() {
         return result;
+    }
+
+    public ResultCount countRank(LottoRank rank) {
+        if (result.containsKey(rank)) {
+            return result.get(rank);
+        }
+        return new ResultCount(INIT_RESULTCOUNT_NUMBER);
     }
 }
