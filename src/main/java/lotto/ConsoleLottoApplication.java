@@ -4,7 +4,6 @@ import lotto.domain.CreateRandomTicketsStrategy;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
-import lotto.domain.ProfitCalculator;
 import lotto.domain.PurchasingAmount;
 import lotto.domain.Ranks;
 import lotto.domain.WinningNumbers;
@@ -28,6 +27,6 @@ public class ConsoleLottoApplication {
 		final Ranks results = lottoTickets.getRanksBy(winningNumbers);
 
 		OutputView.printResult(results);
-		OutputView.printProfit(ProfitCalculator.calculate(inputMoney, results));
+		OutputView.printProfit(results.getTotalProfitComparedTo(inputMoney));
 	}
 }

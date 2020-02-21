@@ -2,7 +2,8 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Ranks {
 	private final List<Rank> ranks;
@@ -17,8 +18,20 @@ public class Ranks {
 			.count();
 	}
 
-	public Stream<Rank> stream() {
-		return ranks.stream();
+	public List<Rank> getHavePrizes() {
+		return ranks.stream()
+			.filter(hasPrize())
+			.collect(Collectors.toList());
+	}
+
+	private static Predicate<Rank> hasPrize() {
+		return rank -> !rank.equals(Rank.NONE);
+	}
+
+	public double getTotalProfitComparedTo(Money inputMoney) {
+		return (double)ranks.stream()
+			.mapToLong(Rank::getAmount)
+			.sum() / inputMoney.getLottoMoneyValue();
 	}
 
 	@Override

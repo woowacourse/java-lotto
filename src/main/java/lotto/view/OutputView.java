@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import lotto.domain.Rank;
 import lotto.domain.Ranks;
@@ -11,13 +10,8 @@ public class OutputView {
 
 	public static void printResult(final Ranks ranks) {
 		final Ranks reversed = Rank.getOrderReversed();
-		reversed.stream()
-			.filter(hasPrize())
-			.forEach(rank -> printEachResult(rank, ranks));
-	}
-
-	private static Predicate<Rank> hasPrize() {
-		return rank -> !rank.equals(Rank.NONE);
+		final List<Rank> havePrizes = reversed.getHavePrizes();
+		havePrizes.forEach(rank -> printEachResult(rank, ranks));
 	}
 
 	private static void printEachResult(final Rank rank, final Ranks ranks) {
