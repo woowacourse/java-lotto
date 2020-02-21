@@ -21,7 +21,7 @@ class RandomLottoMachineTest {
         BettingMoney bettingMoney = new BettingMoney(inputMoney);
 
         //when
-        List<LottoTicket> lottoTickets = lottoMachine.buyTicket(bettingMoney);
+        List<LottoTicket> lottoTickets = lottoMachine.buyTickets(bettingMoney);
 
         //then
         assertThat(lottoTickets).hasSize(result);

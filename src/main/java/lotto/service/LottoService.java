@@ -17,7 +17,7 @@ public class LottoService {
     }
 
     public LottoTicketBundle getLottoTicketBundle(BettingMoney bettingMoney) {
-        return new LottoTicketBundle(lottoMachine.buyTicket(bettingMoney));
+        return new LottoTicketBundle(lottoMachine.buyTickets(bettingMoney));
     }
 
     public PrizeResponseBundleDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle, WinningLottoRequestDTO winningLottoRequestDTO) {

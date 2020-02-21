@@ -15,7 +15,8 @@ public class RandomLottoMachine implements LottoMachine {
     private static final int START_LOTTO_BALL = 1;
     private static final int END_LOTTO_BALL = 6;
 
-    public List<LottoTicket> buyTicket(BettingMoney bettingMoney) {
+    @Override
+    public List<LottoTicket> buyTickets(BettingMoney bettingMoney) {
         int ticketCount = bettingMoney.getTicketCount();
 
         return IntStream.range(0, ticketCount)

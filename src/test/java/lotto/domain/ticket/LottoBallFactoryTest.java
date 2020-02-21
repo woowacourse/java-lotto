@@ -18,7 +18,7 @@ class LottoBallFactoryTest {
     @CsvSource(value = {"1000,1", "1500,1", "2000,2"})
     void test1(int money, int expect) {
         LottoMachine randomLottoStore = new RandomLottoMachine();
-        List<LottoTicket> lottoTickets = randomLottoStore.buyTicket(new BettingMoney(money));
+        List<LottoTicket> lottoTickets = randomLottoStore.buyTickets(new BettingMoney(money));
 
         assertThat(lottoTickets).hasSize(expect);
     }
