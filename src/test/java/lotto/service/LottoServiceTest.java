@@ -44,7 +44,7 @@ class LottoServiceTest {
     @MethodSource("ticketProvider")
     void getLottoTicketBundle(int bettingMoney, List<LottoTicket> resultTickets) {
         //given
-        BettingMoney bettingMoneyRequestDTO = new BettingMoney(bettingMoney);
+        BettingMoney bettingMoneyRequestDTO = BettingMoney.valueOf(bettingMoney);
 
         LottoMachine lottoMachine = money -> resultTickets;
         LottoService lottoService = new LottoService(lottoMachine);
@@ -65,7 +65,7 @@ class LottoServiceTest {
         LottoMachine lottoMachine = bettingMoney -> Arrays.asList(new LottoTicket(lottoBalls(Arrays.asList(1, 2, 3, 4, 5, 6))));
         LottoService lottoService = new LottoService(lottoMachine);
 
-        BettingMoney bettingMoney = new BettingMoney(1000);
+        BettingMoney bettingMoney = BettingMoney.valueOf(1000);
         String winningNumber = "1,2,3,4,5,6";
         int bonusNumber = 7;
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO(winningNumber, bonusNumber);
@@ -96,7 +96,7 @@ class LottoServiceTest {
 
         LottoService lottoService = new LottoService(lottoMachine);
 
-        BettingMoney bettingMoney = new BettingMoney(2000);
+        BettingMoney bettingMoney = BettingMoney.valueOf(2000);
         String winningNumber = "1,2,3,4,5,6";
         int bonusNumber = 7;
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO(winningNumber, bonusNumber);

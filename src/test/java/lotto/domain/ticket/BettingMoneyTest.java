@@ -14,7 +14,7 @@ class BettingMoneyTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 999})
     void test1(int bettingMoney) {
-        assertThatThrownBy(() -> new BettingMoney(bettingMoney))
+        assertThatThrownBy(() -> BettingMoney.valueOf(bettingMoney))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("%d는 최소 구매 금액보다 작습니다.", bettingMoney);
     }
@@ -23,7 +23,7 @@ class BettingMoneyTest {
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "1500,1", "2000,2"})
     void test2(int inputBettingMoney, int result) {
-        BettingMoney bettingMoney = new BettingMoney(inputBettingMoney);
+        BettingMoney bettingMoney = BettingMoney.valueOf(inputBettingMoney);
 
         assertThat(bettingMoney.getTicketCount()).isEqualTo(result);
     }

@@ -18,7 +18,7 @@ class RandomLottoMachineTest {
     void buyTicket(int inputMoney, int result) {
         //given
         LottoMachine lottoMachine = new RandomLottoMachine();
-        BettingMoney bettingMoney = new BettingMoney(inputMoney);
+        BettingMoney bettingMoney = BettingMoney.valueOf(inputMoney);
 
         //when
         List<LottoTicket> lottoTickets = lottoMachine.buyTickets(bettingMoney);

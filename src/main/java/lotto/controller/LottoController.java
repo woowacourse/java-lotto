@@ -21,7 +21,7 @@ public class LottoController {
     }
 
     public void run() {
-        BettingMoney bettingMoney = new BettingMoney(inputView.inputBettingMoney());
+        BettingMoney bettingMoney = BettingMoney.valueOf(inputView.inputBettingMoney());
         OutputView.printBuyTicketCount(bettingMoney.getTicketCount());
 
         LottoTicketBundle lottoTicketBundle = lottoService.getLottoTicketBundle(bettingMoney);
