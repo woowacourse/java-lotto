@@ -2,9 +2,12 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +19,7 @@ class LottosGeneratorTest {
         int expectedLottosSize = 1;
         //when
         List<Lotto> lottos = LottosGenerator.generate(expectedLottosSize,
-            new ArrayList<>(Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6))));
+            new ArrayList<>(Arrays.asList(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)))));
         //then
         assertThat(lottos.size()).isEqualTo(expectedLottosSize);
     }
