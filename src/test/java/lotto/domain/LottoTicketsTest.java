@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class LottoTicketsTest {
 
-	@DisplayName("개수를 넣었을 때 개수만큼 로또를 생성해줌")
+	@DisplayName("로또 묶음이 입력받은 로또들 가지고 있는지 테스트")
 	@Test
 	void makeLottos() {
 		List<Ball> balls = Arrays.asList(Ball.of(1), Ball.of(2), Ball.of(3), Ball.of(4), Ball.of(5), Ball.of(6));
@@ -18,7 +18,7 @@ public class LottoTicketsTest {
 		LottoTicket secondLottoTicket = new LottoTicket(balls);
 
 		LottoTickets lottoTickets = new LottoTickets(Arrays.asList(firstLottoTicket, secondLottoTicket));
-		assertThat(lottoTickets.size()).isEqualTo(2);
+		assertThat(lottoTickets.getLottoTickets()).containsExactly(firstLottoTicket, secondLottoTicket);
 	}
 
 }
