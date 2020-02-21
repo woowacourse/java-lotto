@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
-    private static final int MINIMUM_NUMBER = 1;
-    private static final int MAXIMUM_NUMBER = 45;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
     private static final String LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION_MESSAGE = "Lotto number out of range.";
 
     private final int lottoNumber;
@@ -15,7 +15,7 @@ public class LottoNumber {
     }
 
     private void validateRange(int lottoNumber) {
-        if (lottoNumber < MINIMUM_NUMBER || lottoNumber > MAXIMUM_NUMBER) {
+        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION_MESSAGE);
         }
     }
