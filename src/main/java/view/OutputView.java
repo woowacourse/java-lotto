@@ -45,7 +45,10 @@ public class OutputView {
     public static void printResult(LottoRank rank, ResultCount resultCount) {
         StringBuilder sb = new StringBuilder();
         sb.append(rank.getHitCount());
-        sb.append("개 일치 (");
+        sb.append("개 일치");
+        if(rank.getBonus())
+            sb.append(", 보너스 볼 일치");
+        sb.append("(");
         sb.append(rank.getWinning());
         sb.append("원)- ");
         sb.append(resultCount.toString());
@@ -55,5 +58,9 @@ public class OutputView {
 
     public static void printEarning(long rating) {
         System.out.println("총 수익률은 " + rating + "%입니다.");
+    }
+
+    public static void printRepeat(int repeat) {
+        System.out.println(repeat + "개를 구매했습니다.");
     }
 }

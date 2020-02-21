@@ -74,6 +74,7 @@ public class LottoController {
 
     private void makeLottoNumbers(int repeat) {
         NumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        OutputView.printRepeat(repeat);
         for (int i = 0; i < repeat; i++) {
             LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(randomNumberGenerator);
             OutputView.printLottoNumbers(lottoNumbers);
