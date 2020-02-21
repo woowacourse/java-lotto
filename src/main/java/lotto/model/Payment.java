@@ -5,38 +5,43 @@ import lotto.exception.NotNumberException;
 import lotto.exception.OverRangeException;
 
 public class Payment {
-    public static final int MINIMUM_PAYMENT = 1000;
-    public static final int MAXINUM_PAYMENT = 100000;
-    public static final int PAYMENT_UNIT = 1000;
-    public static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하세요.";
-    public static final String OVER_RANGE_EXCEPTION_MESSAGE = "범위를 벗어났습니다.";
-    public static final String UNIT_EXCEPTION_MESSAGE = "천 단위로 입력하세요.";
-    public static int payment = 0;
+    private final int MINIMUM_PAYMENT = 1000;
+    private final int MAXINUM_PAYMENT = 100000;
+    private final int PAYMENT_UNIT = 1000;
+    private final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하세요.";
+    private final String OVER_RANGE_EXCEPTION_MESSAGE = "범위를 벗어났습니다.";
+    private final String UNIT_EXCEPTION_MESSAGE = "천 단위로 입력하세요.";
+    private int payment;
 
     public Payment(String input) {
-        int payment = isNotNumber(input);
-        isValueRange(payment);
-        isUnitK(payment);
+        isNotNumber(input);
+        int payment = Integer.parseInt(input);
+        checkOverRange(payment);
+        checkMultipleOfThousand(payment);
         this.payment = payment;
     }
 
-    private static int isNotNumber(String input) {
+    private void isNotNumber(String input) {
         try {
-            return Integer.parseInt(input);
+            Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new NotNumberException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 
-    private static void isValueRange(int payment) {
-        if (!(payment >= MINIMUM_PAYMENT && payment <= MAXINUM_PAYMENT)) {
+    private void checkOverRange(int payment) {
+        if (payment < MINIMUM_PAYMENT || payment >= MAXINUM_PAYMENT) {
             throw new OverRangeException(OVER_RANGE_EXCEPTION_MESSAGE);
         }
     }
 
-    private static void isUnitK(int payment) {
-        if (!(payment % PAYMENT_UNIT == 0)) {
+    private void checkMultipleOfThousand(int payment) {
+        if (payment % PAYMENT_UNIT != 0) {
             throw new NotMultipleOfThousandException(UNIT_EXCEPTION_MESSAGE);
         }
+    }
+
+    public int getPayment() {
+        return payment;
     }
 }
