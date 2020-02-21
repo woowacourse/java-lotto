@@ -9,8 +9,8 @@ public class ResultCalculator {
 
     public static ResultsDTO getResults(Lottos lottos, WinningLotto winningLotto) {
         List<WinningInfo> results = calculateResults(lottos, winningLotto);
-        int totalEarning = getTotalEarning(results);
-        int earningRate = getEarningRate(totalEarning, results.size());
+        long totalEarning = getTotalEarning(results);
+        long earningRate = getEarningRate(totalEarning, results.size());
         return new ResultsDTO(results, earningRate);
     }
 
@@ -24,13 +24,13 @@ public class ResultCalculator {
         return results;
     }
 
-    public static int getTotalEarning(List<WinningInfo> results) {
+    public static long getTotalEarning(List<WinningInfo> results) {
         return results.stream()
                 .map(result -> result.getWinningPrice())
-                .collect(Collectors.summingInt(Integer::intValue));
+                .collect(Collectors.summingLong(Integer::intValue));
     }
 
-    public static int getEarningRate(int totalEarning, int lottoSize) {
+    public static long getEarningRate(long totalEarning, int lottoSize) {
         return totalEarning / (lottoSize * MONEY_PER_LOTTO);
     }
 }

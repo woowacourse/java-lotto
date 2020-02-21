@@ -5,14 +5,14 @@ import java.util.stream.Collectors;
 
 public class ResultsDTO {
     private List<WinningInfo> results;
-    private int earningRate;
+    private long earningRate;
 
-    public ResultsDTO(List <WinningInfo> results, int earningRate) {
+    public ResultsDTO(List <WinningInfo> results, long earningRate) {
         this.results = results;
         this.earningRate = earningRate;
     }
 
-    public int getEarningRate() {
+    public long getEarningRate() {
         return earningRate;
     }
 
