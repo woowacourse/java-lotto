@@ -7,6 +7,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoResults {
+	private static final long DEFAULT_COUNT = 0;
+
 	private final Map<LottoRank, Long> lottoResults;
 
 	public LottoResults(List<LottoRank> lottoRanks) {
@@ -14,7 +16,7 @@ public class LottoResults {
 		lottoResults = lottoRanks.stream()
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		Arrays.stream(LottoRank.values())
-				.forEach(rank -> lottoResults.putIfAbsent(rank, 0L));
+				.forEach(rank -> lottoResults.putIfAbsent(rank, DEFAULT_COUNT));
 	}
 
 	private void validate(List<LottoRank> lottoRanks) {
