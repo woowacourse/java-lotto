@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class MoneyTest {
     @Test
@@ -26,5 +27,13 @@ public class MoneyTest {
             new Money("9999");
         }).isInstanceOf(NotMultipleOfThousandException.class)
         .hasMessage("천 단위로 입력하세요.");
+    }
+
+    @Test
+    @DisplayName("상금계산")
+    void getYield() {
+        Money money = new Money("10000");
+        LottoResult.THREE.setCount();
+        assertThat(money.getYield()).isEqualTo(50);
     }
 }

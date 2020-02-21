@@ -5,6 +5,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Lotto {
+
     public static void lotto() {
         Money money = setMoney();
         AutoTickets autoTickets = getAutoTickets(money.getMoney() / 1000);
