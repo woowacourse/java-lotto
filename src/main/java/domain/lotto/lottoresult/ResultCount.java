@@ -13,6 +13,10 @@ public class ResultCount {
         return (long) count * operand;
     }
 
+    public static ResultCount sum(ResultCount count1, ResultCount count2) {
+        return new ResultCount(count1.count + count2.count);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -33,9 +37,5 @@ public class ResultCount {
     @Override
     public String toString() {
         return String.valueOf(count);
-    }
-
-    public static ResultCount sum(ResultCount count1, ResultCount count2) {
-        return new ResultCount(count1.count + count2.count);
     }
 }

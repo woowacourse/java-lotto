@@ -34,6 +34,10 @@ public enum LottoRank {
                 .orElseGet(() -> calculateRankWithoutBonus(hitCount));
     }
 
+    public long multiplyCount(ResultCount resultCount) {
+        return resultCount.multiply(winning);
+    }
+
     public int getHitCount() {
         return hitCount;
     }

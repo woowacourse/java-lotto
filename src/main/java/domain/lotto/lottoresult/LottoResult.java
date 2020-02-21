@@ -23,15 +23,12 @@ public class LottoResult {
 
     public long calculateEarning() {
         return result.keySet().stream()
-                .mapToLong(rank -> result.get(rank).multiply(rank.getWinning()))
+                .mapToLong(rank -> rank.multiplyCount(result.get(rank)))
                 .sum();
     }
 
     public ResultCount countRank(LottoRank rank) {
-        if (result.containsKey(rank)) {
-            return result.get(rank);
-        }
-        return new ResultCount(INIT_RESULTCOUNT_NUMBER);
+        return result.getOrDefault(rank, new ResultCount(INIT_RESULTCOUNT_NUMBER));
     }
 
     public Map<LottoRank, ResultCount> getResult() {

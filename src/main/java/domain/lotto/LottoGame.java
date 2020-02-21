@@ -30,7 +30,9 @@ public class LottoGame {
 
     public LottoResult createGameResult(LottoWinner winner) {
         return new LottoResult(lottoGame.stream()
-                .collect(Collectors.toMap(winner::createRank, count -> new ResultCount(COUNT_NUMBER), ResultCount::sum)));
+                .collect(Collectors.toMap(winner::createRank,
+                        count -> new ResultCount(COUNT_NUMBER),
+                        ResultCount::sum)));
     }
 
     public static LottoGame create(NumberGenerator numberGenerator, int repeat) {
