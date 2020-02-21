@@ -64,7 +64,6 @@ public class LottoController {
         boolean isBonusNumber;
         List<WinningRank> winningRanks = new ArrayList<>();
         List<LottoTicket> lottoTickets = LottoTickets.getLottoTickets();
-
         for (LottoTicket lottoTicket : lottoTickets) {
             correctNumber = winningBalls.hitLottoBalls(lottoTicket);
             isBonusNumber = winningBalls.hitBonusBall(lottoTicket);
