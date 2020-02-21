@@ -2,11 +2,15 @@ package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * 클래스 이름 : .java
@@ -25,12 +29,12 @@ public class PaidLottoTest {
 	void setUp() {
 		winningLotto = new WinningLotto(new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THREE,
-						LottoNumber.FOUR,
-						LottoNumber.FIVE,
-						LottoNumber.SIX
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(3),
+						LottoNumber.of(4),
+						LottoNumber.of(5),
+						LottoNumber.of(6)
 				)
 		));
 
@@ -40,13 +44,13 @@ public class PaidLottoTest {
 	@Test
 	void getRank_올바른_1등_확인() {
 		paidLotto = new PaidLotto(new ArrayList<>(
-				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THREE,
-						LottoNumber.FOUR,
-						LottoNumber.FIVE,
-						LottoNumber.SIX
+				Arrays.asList( // TODO 이부분들 뺄 방법이 있을까?
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(3),
+						LottoNumber.of(4),
+						LottoNumber.of(5),
+						LottoNumber.of(6)
 				)
 		));
 
@@ -58,12 +62,12 @@ public class PaidLottoTest {
 	void getRank_올바른_2등_확인() {
 		paidLotto = new PaidLotto(new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THREE,
-						LottoNumber.FOUR,
-						LottoNumber.FIVE,
-						LottoNumber.SEVEN
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(3),
+						LottoNumber.of(4),
+						LottoNumber.of(5),
+						LottoNumber.of(7)
 				)
 		));
 
@@ -75,12 +79,12 @@ public class PaidLottoTest {
 	void getRank_올바른_3등_확인() {
 		paidLotto = new PaidLotto(new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THREE,
-						LottoNumber.FOUR,
-						LottoNumber.FIVE,
-						LottoNumber.EIGHT
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(3),
+						LottoNumber.of(4),
+						LottoNumber.of(5),
+						LottoNumber.of(8)
 				)
 		));
 
@@ -92,12 +96,12 @@ public class PaidLottoTest {
 	void getRank_올바른_4등_확인() {
 		paidLotto = new PaidLotto(new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THREE,
-						LottoNumber.FOUR,
-						LottoNumber.EIGHT,
-						LottoNumber.NINE
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(3),
+						LottoNumber.of(4),
+						LottoNumber.of(8),
+						LottoNumber.of(9)
 				)
 		));
 
@@ -109,12 +113,12 @@ public class PaidLottoTest {
 	void getRank_올바른_5등_확인() {
 		paidLotto = new PaidLotto(new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THREE,
-						LottoNumber.EIGHT,
-						LottoNumber.NINE,
-						LottoNumber.SEVEN
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(3),
+						LottoNumber.of(8),
+						LottoNumber.of(9),
+						LottoNumber.of(7)
 				)
 		));
 
@@ -126,16 +130,56 @@ public class PaidLottoTest {
 	void getRank_올바른_6등_확인() {
 		paidLotto = new PaidLotto(new ArrayList<>(
 				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.EIGHT,
-						LottoNumber.NINE,
-						LottoNumber.TEN,
-						LottoNumber.ELEVEN
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(8),
+						LottoNumber.of(9),
+						LottoNumber.of(10),
+						LottoNumber.of(11)
 				)
 		));
 
 		Rank lottoRank = paidLotto.getRank(winningLotto, bonusLottoNumber);
 		assertThat(lottoRank).isEqualTo(Rank.SIXTH);
+	}
+
+	@Test
+	void calculateMatchCount_올바른_동작_확인() {
+		List<LottoNumber> lottoNumbers = new ArrayList<>(
+				Arrays.asList(
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(3),
+						LottoNumber.of(8),
+						LottoNumber.of(10),
+						LottoNumber.of(44)
+				)
+		);
+
+		PaidLotto paidLotto = new PaidLotto(lottoNumbers);
+
+		assertThat(paidLotto.calculateMatchCount(winningLotto)).isEqualTo(3);
+	}
+
+	@ParameterizedTest
+	@NullSource
+	void calculateMatchCount_매개변수_null_예외처리(WinningLotto nullLotto) {
+		List<LottoNumber> lottoNumbers = new ArrayList<>(
+				Arrays.asList(
+						LottoNumber.of(1),
+						LottoNumber.of(2),
+						LottoNumber.of(3),
+						LottoNumber.of(8),
+						LottoNumber.of(10),
+						LottoNumber.of(44)
+				)
+		);
+
+		paidLotto = new PaidLotto(lottoNumbers);
+
+		assertThatThrownBy(() -> {
+			paidLotto.calculateMatchCount(nullLotto);
+		}).isInstanceOf(NullPointerException.class)
+				.hasMessage("매개변수가 null 입니다.");
 	}
 }

@@ -18,18 +18,18 @@ public class OutputView {
 	private static final String ENTER_MONEY_FOR_LOTTO_GUIDE_MESSAGE = "구매금액을 입력해 주세요.";
 	private static final String PURCHASED_LOTTO_NUMBER_IS = "%d개를 구매했습니다.\n";
 	private static final String ENTER_WINNING_LOTTO_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-	private static final String ENTER_BONUS_BALL_NUMBER_GUIDE_MESSAGE = "보너스 볼을 입력해 주세요.\n";
-	public static final String RESULT_STATISTIC_MESSAGE = "당첨 통계\n--------";
+	private static final String ENTER_BONUS_BALL_NUMBER_GUIDE_MESSAGE = "보너스 볼을 입력해 주세요.";
+	public static final String RESULT_STATISTIC_MESSAGE = "\n당첨 통계\n--------";
 
 	public static void askEnterMoneyForLotto() {
 		System.out.println(ENTER_MONEY_FOR_LOTTO_GUIDE_MESSAGE);
 	}
 
-	public static void printExceptionMessage(String exceptionMessage) {
-		System.out.println(exceptionMessage);
+	public static void printExceptionMessage(Exception e) {
+		System.out.println(e.getMessage());
 	}
 
-	public static void printPurchasedLottos(int numberOfLottos, Lottos lottos) {
+	public static void printPurchasedLottos(int numberOfLottos, Lottos lottos) { //TODO
 		System.out.printf(PURCHASED_LOTTO_NUMBER_IS, numberOfLottos);
 
 		List<String> purchasedLottos = new ArrayList<>();

@@ -26,12 +26,12 @@ public class LottoFactoryTest {
 	@Test
 	void createLottoManual_올바른_동작_확인() {
 		List<LottoNumber> winningLottoNumbers = Arrays.asList(
-				LottoNumber.THREE,
-				LottoNumber.TWO,
-				LottoNumber.ONE,
-				LottoNumber.TEN,
-				LottoNumber.EIGHT,
-				LottoNumber.FORTY_FOUR
+				LottoNumber.of(3),
+				LottoNumber.of(2),
+				LottoNumber.of(1),
+				LottoNumber.of(10),
+				LottoNumber.of(8),
+				LottoNumber.of(44)
 		);
 
 		assertThat(LottoFactory.createLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers))
@@ -41,17 +41,17 @@ public class LottoFactoryTest {
 	@Test
 	void createLottoManual_중복된_로또번호_예외처리() {
 		List<LottoNumber> winningLottoNumbers = Arrays.asList(
-				LottoNumber.THREE,
-				LottoNumber.TWO,
-				LottoNumber.ONE,
-				LottoNumber.TEN,
-				LottoNumber.EIGHT,
-				LottoNumber.TEN
+				LottoNumber.of(3),
+				LottoNumber.of(2),
+				LottoNumber.of(1),
+				LottoNumber.of(10),
+				LottoNumber.of(8),
+				LottoNumber.of(10)
 		);
 
 		assertThatThrownBy(() -> {
 			LottoFactory.createLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers);
 		}).isInstanceOf(IllegalArgumentException.class)
-		.hasMessage("입력 리스트에 중복이 있습니다.");
+				.hasMessage("입력 리스트에 중복이 있습니다.");
 	}
 }

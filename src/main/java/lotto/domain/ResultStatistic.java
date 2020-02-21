@@ -53,7 +53,7 @@ public class ResultStatistic {
 	}
 
 	public int calculateRevenueRate(MoneyForLotto moneyForLotto) {
-		return (int) (((double) getTotalRevenue() / moneyForLotto.getMoneyForLotto()) * 100);
+		return (100 * getTotalRevenue() / moneyForLotto.getMoneyForLotto());
 	}
 
 	private int getTotalRevenue() {
@@ -62,7 +62,6 @@ public class ResultStatistic {
 		for (Rank rank : Rank.values()) {
 			totalRevenue += results.get(rank) * rank.getReward();
 		}
-
 		return totalRevenue;
 	}
 }

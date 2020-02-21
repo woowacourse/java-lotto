@@ -15,14 +15,14 @@ import java.util.Scanner;
  * 날짜 : 2020/02/20
  */
 public class InputView {
-	private static Scanner scanner = new Scanner(System.in);
+	private static final Scanner SCANNER = new Scanner(System.in);
 
-	public static MoneyForLotto getMoneyForLotto() {
+	public static MoneyForLotto getMoneyForLotto() { // TODO 고려를 해보자
 		try {
 			OutputView.askEnterMoneyForLotto();
-			return new MoneyForLotto(Integer.parseInt(scanner.nextLine()));
-		} catch (Exception e) {
-			OutputView.printExceptionMessage(e.getMessage());
+			return new MoneyForLotto(Integer.parseInt(SCANNER.nextLine()));
+		} catch (Exception e) { // TODO runtime으로
+			OutputView.printExceptionMessage(e);
 			return getMoneyForLotto();
 		}
 	}
@@ -30,14 +30,14 @@ public class InputView {
 	public static WinningLotto getWinningLotto() {
 		try {
 			OutputView.askEnterWinningLotto();
-			List<LottoNumber> winningLottoNumbers = StringUtils.splitIntoLottoNumbers(scanner.nextLine());
+			List<LottoNumber> winningLottoNumbers = StringUtils.splitIntoLottoNumbers(SCANNER.nextLine());
 
 			return (WinningLotto) LottoFactory.createLottoManual(
 					LottoType.WINNING_LOTTO,
 					winningLottoNumbers
 			);
 		} catch (Exception e) {
-			OutputView.printExceptionMessage(e.getMessage());
+			OutputView.printExceptionMessage(e);
 			return getWinningLotto();
 		}
 	}
@@ -45,9 +45,9 @@ public class InputView {
 	public static BonusLottoNumber getBonusLottoNumber(WinningLotto winningLotto) {
 		try {
 			OutputView.askEnterBonusLottoNumber();
-			return new BonusLottoNumber(Integer.parseInt(scanner.nextLine()), winningLotto);
+			return new BonusLottoNumber(Integer.parseInt(SCANNER.nextLine()), winningLotto);
 		} catch (Exception e) {
-			OutputView.printExceptionMessage(e.getMessage());
+			OutputView.printExceptionMessage(e);
 			return getBonusLottoNumber(winningLotto);
 		}
 	}

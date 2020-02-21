@@ -1,4 +1,5 @@
 import lotto.controller.LottoController;
+import lotto.view.OutputView;
 
 /**
  * 클래스 이름 : .java
@@ -12,5 +13,4 @@ public class Application {
 	public static void main(String[] args) {
 		LottoController.run();
 	}
-
 }
