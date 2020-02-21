@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +13,7 @@ public class Lottos implements Iterable<Lotto> {
 
 	public Lottos(List<Lotto> lottos) {
 		validate(lottos);
-		this.lottos = List.copyOf(lottos);
+		this.lottos = Collections.unmodifiableList(new ArrayList<>(lottos));
 	}
 
 	private void validate(List<Lotto> lottos) {
