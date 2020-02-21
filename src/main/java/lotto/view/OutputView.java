@@ -1,11 +1,11 @@
 package lotto.view;
 
-import java.util.HashMap;
-import java.util.List;
-
 import lotto.domain.WinningPrize;
 import lotto.dto.LottoDto;
 import lotto.dto.LottoDtos;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class OutputView {
 	public static void printWrongMoneyInput() {
@@ -33,10 +33,10 @@ public class OutputView {
 	public static void printLottoResult(List<WinningPrize> winningPrizes) {
 		HashMap<WinningPrize, Integer> winningInformation = makeWinningInformation(winningPrizes);
 		for (WinningPrize winningPrize : WinningPrize.values()) {
-			System.out.println(winningPrize.getPrizeName()
-				+ "("
-				+ winningPrize.getPrize() + "원): "
-				+ winningInformation.get(winningPrize) + "개");
+			System.out.println(winningPrize.getDescription()
+					+ "("
+					+ winningPrize.getPrize() + "원): "
+					+ winningInformation.get(winningPrize) + "개");
 		}
 		printEarningRate(winningInformation);
 	}

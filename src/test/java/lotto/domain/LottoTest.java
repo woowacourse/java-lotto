@@ -1,24 +1,25 @@
 package lotto.domain;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThatThrownBy;
+
 public class LottoTest {
 	@ParameterizedTest
 	@NullAndEmptySource
 	void 로또가_null이나_빈값인_경우(List<Integer> value) {
 		assertThatThrownBy(() -> new Lotto(value))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("null이나 빈 값");
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessageContaining("null이나 빈 값");
 	}
 
 	@Test
@@ -55,6 +56,6 @@ public class LottoTest {
 	void 몇등_당첨(List<String> winningNumbers, int bonusNumber, String expectedPrize) {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 		WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
-		assertThat(lotto.findLottoPrize(winningNumber).getPrizeName()).isEqualTo(expectedPrize);
+		assertThat(lotto.findLottoPrize(winningNumber).getDescription()).isEqualTo(expectedPrize);
 	}
 }
