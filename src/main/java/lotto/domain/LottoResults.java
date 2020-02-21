@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -27,5 +28,20 @@ public class LottoResults {
 
 	public long getRankCount(LottoRank lottoRank) {
 		return lottoResults.get(lottoRank);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		LottoResults that = (LottoResults)o;
+		return Objects.equals(lottoResults, that.lottoResults);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoResults);
 	}
 }

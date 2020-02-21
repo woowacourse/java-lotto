@@ -25,7 +25,22 @@ public class LottosTest {
 	void constructor_로또가_없는_경우() {
 		assertThatExceptionOfType(InvalidLottosException.class).isThrownBy(() -> {
 			new Lottos(null);
-			new Lotto(Collections.emptyList());
+			new Lottos(Collections.emptyList());
 		}).withMessage("하나 이상의 로또가 필요합니다.");
+	}
+
+	@Test
+	@DisplayName("로또들의 당첨 결과 확인")
+	void match() {
+		Lottos lottos = new Lottos(Arrays.asList(
+				LottoFactory.create("1,2,3,4,5,6"),
+				LottoFactory.create("2,3,4,5,6,7")
+		));
+		WinningLotto winningLotto = new WinningLotto(LottoFactory.create("1,2,3,4,5,6"), LottoNumber.of(7));
+		LottoResults expected = new LottoResults(Arrays.asList(
+				LottoRank.FIRST,
+				LottoRank.SECOND
+		));
+		assertThat(lottos.match(winningLotto)).isEqualTo(expected);
 	}
 }
