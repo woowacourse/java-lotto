@@ -2,11 +2,15 @@ package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * 클래스 이름 : .java
@@ -40,7 +44,7 @@ public class PaidLottoTest {
 	@Test
 	void getRank_올바른_1등_확인() {
 		paidLotto = new PaidLotto(new ArrayList<>(
-				Arrays.asList(
+				Arrays.asList( // TODO 이부분들 뺄 방법이 있을까?
 						LottoNumber.ONE,
 						LottoNumber.TWO,
 						LottoNumber.THREE,
@@ -137,5 +141,45 @@ public class PaidLottoTest {
 
 		Rank lottoRank = paidLotto.getRank(winningLotto, bonusLottoNumber);
 		assertThat(lottoRank).isEqualTo(Rank.SIXTH);
+	}
+
+	@Test
+	void calculateMatchCount_올바른_동작_확인() {
+		List<LottoNumber> lottoNumbers = new ArrayList<>(
+				Arrays.asList(
+						LottoNumber.ONE,
+						LottoNumber.TWO,
+						LottoNumber.THREE,
+						LottoNumber.TEN,
+						LottoNumber.EIGHT,
+						LottoNumber.FORTY_FOUR
+				)
+		);
+
+		PaidLotto paidLotto = new PaidLotto(lottoNumbers);
+
+		assertThat(paidLotto.calculateMatchCount(winningLotto)).isEqualTo(3);
+	}
+
+	@ParameterizedTest
+	@NullSource
+	void calculateMatchCount_매개변수_null_예외처리(WinningLotto nullLotto) {
+		List<LottoNumber> lottoNumbers = new ArrayList<>(
+				Arrays.asList(
+						LottoNumber.ONE,
+						LottoNumber.TWO,
+						LottoNumber.THREE,
+						LottoNumber.TEN,
+						LottoNumber.EIGHT,
+						LottoNumber.FORTY_FOUR
+				)
+		);
+
+		paidLotto = new PaidLotto(lottoNumbers);
+
+		assertThatThrownBy(() -> {
+			paidLotto.calculateMatchCount(nullLotto);
+		}).isInstanceOf(NullPointerException.class)
+				.hasMessage("매개변수가 null 입니다.");
 	}
 }

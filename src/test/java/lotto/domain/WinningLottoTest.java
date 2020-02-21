@@ -38,34 +38,9 @@ public class WinningLottoTest {
 	}
 
 	@Test
-	void isContain_포함시_true_반환() {
+	void isContain_주어진_로또번호_포함시_true_반환() {
 		assertThat(winningLotto.isContain(LottoNumber.TEN)).isTrue();
 	}
 
-	@Test
-	void calculateMatchCount_올바른_동작_확인() {
-		List<LottoNumber> lottoNumbers = new ArrayList<>(
-				Arrays.asList(
-						LottoNumber.ONE,
-						LottoNumber.TWO,
-						LottoNumber.THREE,
-						LottoNumber.TEN,
-						LottoNumber.EIGHT,
-						LottoNumber.FORTY_FOUR
-				)
-		);
 
-		PaidLotto paidLotto = new PaidLotto(lottoNumbers);
-
-		assertThat(winningLotto.calculateMatchCount(paidLotto)).isEqualTo(6);
-	}
-
-	@ParameterizedTest
-	@NullSource
-	void calculateMatchCount_매개변수_null_예외처리(PaidLotto nullLotto) {
-		assertThatThrownBy(() -> {
-			winningLotto.calculateMatchCount(nullLotto);
-		}).isInstanceOf(NullPointerException.class)
-				.hasMessage("매개변수가 null 입니다.");
-	}
 }

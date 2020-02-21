@@ -1,4 +1,5 @@
 import lotto.controller.LottoController;
+import lotto.view.OutputView;
 
 /**
  * 클래스 이름 : .java
@@ -10,7 +11,10 @@ import lotto.controller.LottoController;
  */
 public class Application {
 	public static void main(String[] args) {
-		LottoController.run();
+		try {
+			LottoController.run();
+		} catch (Exception e) {
+			OutputView.printExceptionMessage(e);
+		}
 	}
-
 }

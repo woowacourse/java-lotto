@@ -65,7 +65,6 @@ public class LottoTest {
 				)
 		);
 
-
 		assertThatThrownBy(() -> new Lotto(inputLengthNotEnough))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("입력 리스트의 길이가 6이어야 합니다.");

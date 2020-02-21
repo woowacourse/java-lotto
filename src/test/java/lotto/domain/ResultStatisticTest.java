@@ -83,7 +83,7 @@ public class ResultStatisticTest {
 		ResultStatistic resultStatistic = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
 		Map<Rank, Integer> resultMap = resultStatistic.getResults();
 
-		assertThat(resultMap.get(Rank.FIRST)).isEqualTo(1);
+		assertThat(resultMap.get(Rank.FIRST)).isEqualTo(1); // TODO 이거 한번에 안되나??
 		assertThat(resultMap.get(Rank.SECOND)).isEqualTo(0);
 		assertThat(resultMap.get(Rank.THIRD)).isEqualTo(0);
 		assertThat(resultMap.get(Rank.FOURTH)).isEqualTo(1);

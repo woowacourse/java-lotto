@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * 날짜 : 2020/02/20
  */
 public class StringUtils {
-	private static final String DELIMITER = ", ";
+	private static final String DELIMITER = ",";
 
 	private StringUtils() {}
 
@@ -24,8 +24,9 @@ public class StringUtils {
 		Objects.requireNonNull(lottoNumbersInput, "로또번호로 null 이 입력될 수 없습니다.");
 
 		return Arrays.stream(lottoNumbersInput.split(DELIMITER))
-						.map(str -> Integer.parseInt(str))
-						.map(LottoNumber::of)
-						.collect(Collectors.toList());
+				.map(String::trim)
+				.map(Integer::parseInt)
+				.map(LottoNumber::of)
+				.collect(Collectors.toList());
 	}
 }

@@ -10,30 +10,26 @@ import java.util.List;
 import lotto.domain.LottoFactory;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : LottoController.java
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/20
  */
-public class LottoController {
+public class LottoController { // TODO 변수들을 클래스변수로 뺴고 메서드들을 나누기
 	public static void run() {
-		MoneyForLotto moneyForLotto = InputView.getMoneyForLotto();
+		MoneyForLotto moneyForLotto = InputView.getMoneyForLotto(); // TODO 로또 인풋 받는 메서드
 		int amountOfLottos = moneyForLotto.calculateAmountOfLottos();
 
-		List<Lotto> paidLotto = new ArrayList<>();
-		for (int index = 0; index < amountOfLottos; index++) {
-			paidLotto.add(LottoFactory.createLottoAuto(LottoType.PAID_LOTTO));
-		}
-		Lottos lottos = new Lottos(paidLotto);
+		Lottos lottos = LottosFactory.createLottosAuto(amountOfLottos);
 
 		OutputView.printPurchasedLottos(amountOfLottos, lottos);
 
-		WinningLotto winningLotto = InputView.getWinningLotto();
+		WinningLotto winningLotto = InputView.getWinningLotto(); // TODO 결과 뽑는 메서드
 		BonusLottoNumber bonusLottoNumber = InputView.getBonusLottoNumber(winningLotto);
 
 		ResultStatistic result = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
-		OutputView.printResultStatistic(result, moneyForLotto);
+		OutputView.printResultStatistic(result, moneyForLotto); // TODO 여기까지 결과 뽑는 메서드
 	}
 }
