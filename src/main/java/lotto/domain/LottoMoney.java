@@ -11,7 +11,6 @@ public class LottoMoney {
 	public static final LottoMoney MISS_PRIZE = new LottoMoney(0);
 
 	private static final long ZERO = 0;
-	private static final long UNIT = 1000;
 	private static final long MAX_BOUND = 100000;
 	public static final long LOTTO_PRICE = 1000;
 	public static final int PERCENT = 100;
@@ -56,7 +55,7 @@ public class LottoMoney {
 	}
 
 	private void validateUnit(long parsedMoney) {
-		if (parsedMoney % UNIT != ZERO) {
+		if (parsedMoney % LOTTO_PRICE != ZERO) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.INVALID_UNIT);
 		}
 	}
@@ -67,6 +66,14 @@ public class LottoMoney {
 		}
 	}
 
+	public LottoMoney add(LottoMoney addedLottoMoney) {
+		return new LottoMoney(this.money + addedLottoMoney.money);
+	}
+
+	public LottoMoney multiply(int multiplyCount) {
+		return new LottoMoney(this.money * multiplyCount);
+	}
+
 	public int getNumberOfLotto() {
 		return (int)(money / LOTTO_PRICE);
 	}
@@ -75,12 +82,11 @@ public class LottoMoney {
 		return money;
 	}
 
-	public LottoMoney add(LottoMoney addedLottoMoney) {
-		return new LottoMoney(this.money + addedLottoMoney.money);
-	}
-
-	public LottoMoney multiply(int multiplyCount) {
-		return new LottoMoney(this.money * multiplyCount);
+	public int getWinningRatio(LottoMoney inputLottoMoney) {
+		if (inputLottoMoney.money == ZERO) {
+			return 0;
+		}
+		return (int)((this.money * PERCENT) / inputLottoMoney.money);
 	}
 
 	@Override
@@ -96,12 +102,5 @@ public class LottoMoney {
 	@Override
 	public int hashCode() {
 		return Objects.hash(money);
-	}
-
-	public int getWinningRatio(LottoMoney inputLottoMoney) {
-		if (inputLottoMoney.money == 0) {
-			return 0;
-		}
-		return (int)((this.money * PERCENT) / inputLottoMoney.money);
 	}
 }

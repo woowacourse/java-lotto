@@ -12,7 +12,7 @@ public class WinningLottoParserTest {
 	void parser_StringInputWinningLotto_CreateWinningLotto() {
 		String inputWinningLotto = "1, 2, 3, 4, 5, 6";
 
-		List<LottoNumber> winningLottoNumbers = WinningLottoParser.parser(inputWinningLotto);
+		List<LottoNumber> winningLottoNumbers = WinningLottoParser.parseToLottoNumberList(inputWinningLotto);
 
 		List<LottoNumber> expected = Arrays.asList(
 			LottoNumber.valueOf("1"),
