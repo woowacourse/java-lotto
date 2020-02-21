@@ -25,11 +25,4 @@ public class WinningLotto extends Lotto {
     public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
-
-    public int getWinningCount(Lotto lotto) {
-        return (int) lotto.getLottoNumbers()
-                .stream()
-                .filter(userLottoNumber -> this.lottoNumbers.stream().anyMatch(Predicate.isEqual(userLottoNumber)))
-                .count();
-    }
 }

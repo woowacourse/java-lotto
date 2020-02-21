@@ -1,16 +1,14 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultsDTO {
-    private ArrayList<WinningInfo> results;
-    private int totalEarning;
+    private List<WinningInfo> results;
     private int earningRate;
 
-    public ResultsDTO(ArrayList<WinningInfo> results, int totalEarning, int earningRate) {
+    public ResultsDTO(List <WinningInfo> results, int earningRate) {
         this.results = results;
-        this.totalEarning = totalEarning;
         this.earningRate = earningRate;
     }
 
