@@ -24,15 +24,11 @@ public class LottoController {
         BettingMoney bettingMoney = new BettingMoney(inputView.inputBettingMoney());
         OutputView.printBuyTicketCount(bettingMoney.getTicketCount());
 
-        LottoTicketBundle lottoTicketBundle = getLottoTicketBundle(bettingMoney);
+        LottoTicketBundle lottoTicketBundle = lottoService.getLottoTicketBundle(bettingMoney);
         OutputView.printBuyTickets(LottoTicketResponseDTO.ofList(lottoTicketBundle));
 
         PrizeResponseBundleDTO prizeResponseBundleDTO = getPrizeResponseBundleDTO(lottoTicketBundle);
         OutputView.printResult(prizeResponseBundleDTO);
-    }
-
-    private LottoTicketBundle getLottoTicketBundle(BettingMoney bettingMoney) {
-        return lottoService.getLottoTicketBundle(bettingMoney);
     }
 
     private PrizeResponseBundleDTO getPrizeResponseBundleDTO(LottoTicketBundle lottoTicketBundle) {

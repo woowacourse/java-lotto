@@ -20,7 +20,7 @@ public class LottoTicket {
         this.lottoBalls = balls;
     }
 
-    LottoTicket(List<Integer> numbers) {
+    public LottoTicket(List<Integer> numbers) {
         this(LottoBallFactory.collectLottoBalls(numbers));
     }
 

@@ -5,7 +5,6 @@ import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,12 +17,10 @@ public class RandomLottoMachine implements LottoMachine {
 
     public List<LottoTicket> buyTicket(BettingMoney bettingMoney) {
         int ticketCount = bettingMoney.getTicketCount();
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int count = 0; count < ticketCount; count++) {
-            LottoTicket lottoTicket = makeTickets();
-            lottoTickets.add(lottoTicket);
-        }
-        return lottoTickets;
+
+        return IntStream.range(0, ticketCount)
+                .mapToObj(count -> this.makeTickets())
+                .collect(Collectors.toList());
     }
 
     private LottoTicket makeTickets() {

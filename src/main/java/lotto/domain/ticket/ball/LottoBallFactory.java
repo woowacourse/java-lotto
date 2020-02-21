@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoBallFactory {
+public final class LottoBallFactory {
     private static final List<LottoBall> ballInstance;
     private static final String NOT_EXIST_NUMBER_EXCEPTION_MESSAGE = "%d : 존재하지 않는 번호입니다.";
 

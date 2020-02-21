@@ -57,7 +57,4 @@ public class WinningLottoRequestDTO {
         return winningNumbers;
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
-    }
 }
