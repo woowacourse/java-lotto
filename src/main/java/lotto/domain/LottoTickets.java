@@ -2,7 +2,8 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 	private final List<LottoTicket> lottoTickets;
@@ -11,8 +12,29 @@ public class LottoTickets {
 		this.lottoTickets = lottoTickets;
 	}
 
-	public Stream<LottoTicket> stream() {
-		return lottoTickets.stream();
+	public Ranks getRanksBy(WinningNumbers winningNumbers) {
+		return new Ranks(
+			lottoTickets.stream()
+			.map(getRank(winningNumbers))
+			.collect(Collectors.toList())
+		);
+	}
+
+	private static Function<LottoTicket, Rank> getRank(WinningNumbers winningNumbers) {
+		return lottoTicket -> Rank.of(
+			lottoTicket.getMatchCount(winningNumbers),
+			lottoTicket.isBonusNotMatch(winningNumbers)
+		);
+	}
+
+	public int size() {
+		return lottoTickets.size();
+	}
+
+	public List<String> getTicketLogs() {
+		return lottoTickets.stream()
+			.map(LottoTicket::toString)
+			.collect(Collectors.toList());
 	}
 
 	@Override
@@ -24,9 +46,9 @@ public class LottoTickets {
 		LottoTickets that = (LottoTickets)o;
 		return Objects.equals(lottoTickets, that.lottoTickets);
 	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoTickets);
 	}
+
 }

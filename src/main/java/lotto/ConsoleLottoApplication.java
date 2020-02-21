@@ -1,16 +1,11 @@
 package lotto;
 
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 import lotto.domain.CreateRandomTicketsStrategy;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.ProfitCalculator;
 import lotto.domain.PurchasingAmount;
-import lotto.domain.Rank;
 import lotto.domain.Ranks;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
@@ -24,26 +19,15 @@ public class ConsoleLottoApplication {
 		final LottoTickets lottoTickets =
 			LottoTicketFactory.create(purchasingAmount, new CreateRandomTicketsStrategy());
 
-		OutputView.printLottoAmount(lottoTickets);
-		OutputView.printLottoState(lottoTickets);
+		OutputView.printLottoAmount(lottoTickets.size());
+		OutputView.printLottoState(lottoTickets.getTicketLogs());
 
 		final WinningNumbers winningNumbers =
 			new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 
-		final Ranks results = new Ranks(
-			lottoTickets.stream()
-				.map(getRankBy(winningNumbers))
-				.collect(Collectors.toList())
-		);
+		final Ranks results = lottoTickets.getRanksBy(winningNumbers);
 
 		OutputView.printResult(results);
 		OutputView.printProfit(ProfitCalculator.calculate(inputMoney, results));
-	}
-
-	private static Function<LottoTicket, Rank> getRankBy(WinningNumbers winningNumbers) {
-		return lottoTicket -> Rank.of(
-			lottoTicket.getMatchCount(winningNumbers),
-			lottoTicket.isBonusNotMatch(winningNumbers)
-		);
 	}
 }

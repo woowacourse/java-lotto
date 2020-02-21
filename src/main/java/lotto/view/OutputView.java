@@ -1,9 +1,8 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.function.Predicate;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
 import lotto.domain.Ranks;
 
@@ -34,15 +33,13 @@ public class OutputView {
 		emptyLine();
 	}
 
-	public static void printLottoAmount(final LottoTickets lottoTickets) {
-		System.out.printf("%d개를 구매했습니다.", lottoTickets.stream().count());
+	public static void printLottoAmount(final int size) {
+		System.out.printf("%d개를 구매했습니다.", size);
 		emptyLine();
 	}
 
-	public static void printLottoState(final LottoTickets lottoTickets) {
-		lottoTickets.stream()
-			.map(LottoTicket::toString)
-			.forEach(System.out::println);
+	public static void printLottoState(final List<String> ticketLogs) {
+		ticketLogs.forEach(System.out::println);
 	}
 
 	public static void printProfit(double calculate) {

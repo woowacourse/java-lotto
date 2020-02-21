@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.*;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class LottoTicket {
 	private static final String DELIMITER = ", ";
@@ -15,10 +14,6 @@ public class LottoTicket {
 
 	public LottoTicket(final List<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
-	}
-
-	public Stream<LottoNumber> stream() {
-		return lottoNumbers.stream();
 	}
 
 	public int getMatchCount(final WinningNumbers winningNumbers) {

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class RankTest {
 	private List<LottoNumber> lottoNumbers;
+
 	@BeforeEach
 	void init() {
 		lottoNumbers = Arrays.asList(

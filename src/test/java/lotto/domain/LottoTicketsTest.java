@@ -1,0 +1,71 @@
+package lotto.domain;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class LottoTicketsTest {
+	private List<LottoNumber> lottoNumbers;
+
+	@BeforeEach
+	void init() {
+		lottoNumbers = Arrays.asList(
+			new LottoNumber(1),
+			new LottoNumber(2),
+			new LottoNumber(3),
+			new LottoNumber(4),
+			new LottoNumber(5),
+			new LottoNumber(6)
+		);
+	}
+
+	@Test
+	void checkGetRanksByWhenFirstState() {
+		List<Rank> values = new ArrayList<>();
+		values.add(Rank.FIRST);
+
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		List<LottoTicket> tickets = new ArrayList<>();
+		tickets.add(lottoTicket);
+		LottoTickets lottoTickets = new LottoTickets(tickets);
+		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", "7");
+
+		Ranks expected = new Ranks(values);
+		Ranks actual = lottoTickets.getRanksBy(winningNumbers);
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	void checkSize() {
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		List<LottoTicket> tickets = new ArrayList<>();
+		tickets.add(lottoTicket);
+		tickets.add(lottoTicket);
+		LottoTickets lottoTickets = new LottoTickets(tickets);
+
+		int expected = 2;
+		int actual = lottoTickets.size();
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	void checkGetTicketLogs() {
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		List<LottoTicket> tickets = new ArrayList<>();
+		tickets.add(lottoTicket);
+		LottoTickets lottoTickets = new LottoTickets(tickets);
+
+		List<String> expected = Collections.singletonList("[1, 2, 3, 4, 5, 6]");
+		List<String> actual = lottoTickets.getTicketLogs();
+
+		assertEquals(expected, actual);
+	}
+}
