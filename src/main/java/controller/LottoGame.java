@@ -15,7 +15,7 @@ public class LottoGame {
         OutputView.printLottos(lottos);
 
         WinningNumber winningNumber = inputWinningNumber();
-        LottoResult lottoResult = lottos.countWinningLotto(winningNumber);
+        LottoResult lottoResult = winningNumber.countWinningLotto(lottos);
         OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(Money.calculateProfitRatio(lottoResult));
     }

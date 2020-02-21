@@ -17,12 +17,21 @@ public class WinningNumber {
         checkDuplicatedLottoNumber();
     }
 
-    public int countWinningMatch(final Lotto myLotto) {
+    public LottoResult countWinningLotto(final Lottos lottos) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : lottos.getLottos()){
+            LottoRank rank = LottoRank.findRank(countWinningMatch(lotto), isBonusMatch(lotto));
+            lottoResult.addWinningRankCount(rank);
+        }
+        return lottoResult;
+    }
+
+    private int countWinningMatch(final Lotto myLotto) {
         checkLottoNull(myLotto);
         return winningNumbers.countMatchNumbers(myLotto);
     }
 
-    public boolean isBonusMatch(final Lotto myLotto) {
+    private boolean isBonusMatch(final Lotto myLotto) {
         checkLottoNull(myLotto);
         return myLotto.contains(bonusNumber);
     }

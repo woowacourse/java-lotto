@@ -7,20 +7,16 @@ import java.util.List;
 public class Lottos {
     private static final List<Lotto> lottos = new ArrayList<>();
 
+    public Lottos(){};
+
     public Lottos(final int lottoCount) {
-        for (int index = 0; index < lottoCount; index++){
+        for (int index = 0; index < lottoCount; index++) {
             lottos.add(LottoFactory.createOneLotto());
         }
     }
 
-    public LottoResult countWinningLotto(final WinningNumber winningNumber) {
-        LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottos){
-            LottoRank rank = LottoRank.findRank(winningNumber.countWinningMatch(lotto),
-                                            winningNumber.isBonusMatch(lotto));
-            lottoResult.addWinningRankCount(rank);
-        }
-        return lottoResult;
+    public void addLotto(Lotto lotto){
+        lottos.add(lotto);
     }
 
     public int getDummySize() {

@@ -1,9 +1,6 @@
 package lotto;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.LottoRank;
-import domain.WinningNumber;
+import domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -74,17 +71,18 @@ public class WinningNumberTest {
         String bonusNumber = "7";
         WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
 
-        List<LottoNumber> myLotto = new ArrayList<>();
-        myLotto.add(new LottoNumber(1));
-        myLotto.add(new LottoNumber(20));
-        myLotto.add(new LottoNumber(30));
-        myLotto.add(new LottoNumber(4));
-        myLotto.add(new LottoNumber(5));
-        myLotto.add(new LottoNumber(7));
-        Lotto myLottoNumbers = new Lotto(myLotto);
+        List<LottoNumber> myLottoNumbers = new ArrayList<>();
+        myLottoNumbers.add(new LottoNumber(1));
+        myLottoNumbers.add(new LottoNumber(2));
+        myLottoNumbers.add(new LottoNumber(3));
+        myLottoNumbers.add(new LottoNumber(4));
+        myLottoNumbers.add(new LottoNumber(5));
+        myLottoNumbers.add(new LottoNumber(7));
+        Lotto myLotto = new Lotto(myLottoNumbers);
+        Lottos lottos = new Lottos();
+        lottos.addLotto(myLotto);
 
-        LottoRank result = LottoRank.findRank(winningNumber.countWinningMatch(myLottoNumbers),
-                                            winningNumber.isBonusMatch(myLottoNumbers));
-        assertThat(result).isEqualTo(LottoRank.FIFTH);
+        LottoResult result = winningNumber.countWinningLotto(lottos);
+        assertThat(result.getCount(LottoRank.SECOND)).isEqualTo(1);
     }
 }
