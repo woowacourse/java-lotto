@@ -21,8 +21,8 @@ public class OutputView {
         System.out.println("거스름돈은 " + changeMoney + "원 입니다.");
     }
 
-    public static void printLottoTicket() {
-        for (LottoTicket lottoTicket : LottoTickets.getLottoTickets()) {
+    public static void printLottoTicket(LottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(lottoTicket.getLottoTicket()
                     .stream()
                     .map(LottoBall::getLottoNumber)

@@ -11,6 +11,7 @@ import java.util.List;
 public class LottoController {
     private static final int MAX_LOTTO_BALL_COUNT = 6;
 
+    private LottoTickets lottoTickets;
     private PurchaseAmount purchaseAmount;
 
     public void play() {
@@ -31,9 +32,9 @@ public class LottoController {
     private void generateLottoTickets() {
         for (int i = 0; i < purchaseAmount.lottoTicket(); i++) {
             Collections.shuffle(LottoBallFactory.getInstance());
-            new LottoTickets(generateLottoTicket());
+            lottoTickets = new LottoTickets(generateLottoTicket());
         }
-        OutputView.printLottoTicket();
+        OutputView.printLottoTicket(lottoTickets);
     }
 
     private LottoTicket generateLottoTicket() {
@@ -57,7 +58,7 @@ public class LottoController {
 
     private List<WinningRank> generateWinningRank(WinningBalls winningBalls) {
         List<WinningRank> winningRanks = new ArrayList<>();
-        for (LottoTicket lottoTicket : LottoTickets.getLottoTickets()) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             int correctNumber = winningBalls.hitLottoBalls(lottoTicket);
             boolean isBonusNumber = winningBalls.hitBonusBall(lottoTicket);
             winningRanks.add(WinningRank.selectRank(correctNumber, isBonusNumber));
