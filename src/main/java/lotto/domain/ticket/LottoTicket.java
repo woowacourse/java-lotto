@@ -17,7 +17,7 @@ public class LottoTicket {
         validateSize(balls);
         this.lottoBalls = balls;
     }
-    
+
     private void validateSize(Set<LottoBall> lottoBalls) {
         int size = lottoBalls.size();
         if (size != LOTTO_TICKET_SIZE) {

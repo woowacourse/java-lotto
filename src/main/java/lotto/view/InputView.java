@@ -2,7 +2,10 @@ package lotto.view;
 
 import lotto.exception.ConvertFailException;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final String INPUT_MONEY_MESSAGE = "구입 금액을 입력해 주세요.";
@@ -10,6 +13,8 @@ public class InputView {
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String CONVERT_FAIL_EXCEPTION_MESSAGE = "%s : 잘못된 숫자 입력";
     private static final String EMPTY_EXCEPTION_MESSAGE = "입력값이 비어있습니다.";
+
+    private static final String COMMA = ",";
 
     private final Scanner scanner;
 
@@ -21,21 +26,27 @@ public class InputView {
         System.out.println(INPUT_MONEY_MESSAGE);
         String bettingMoney = scanner.nextLine();
         validateEmpty(bettingMoney);
+
         return convertToInteger(bettingMoney);
     }
 
 
-    public String inputWinningNumber() {
+    public Set<Integer> inputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String winningNumber = scanner.nextLine();
         validateEmpty(winningNumber);
-        return winningNumber;
+
+        return Arrays.stream(winningNumber.split(COMMA))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
     }
 
     public int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         String bonusNumber = scanner.nextLine();
         validateEmpty(bonusNumber);
+
         return convertToInteger(bonusNumber);
     }
 

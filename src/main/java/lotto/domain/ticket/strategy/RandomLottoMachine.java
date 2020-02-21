@@ -20,11 +20,11 @@ public class RandomLottoMachine implements LottoMachine {
         int ticketCount = bettingMoney.getTicketCount();
 
         return IntStream.range(0, ticketCount)
-                .mapToObj(count -> this.makeTickets())
+                .mapToObj(count -> this.makeTicket())
                 .collect(Collectors.toList());
     }
 
-    private LottoTicket makeTickets() {
+    private LottoTicket makeTicket() {
         List<LottoBall> lottoBalls = LottoBallFactory.getInstance();
         Collections.shuffle(lottoBalls);
 
@@ -32,4 +32,5 @@ public class RandomLottoMachine implements LottoMachine {
                 .mapToObj(lottoBalls::get)
                 .collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));
     }
+
 }

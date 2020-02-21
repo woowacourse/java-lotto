@@ -1,10 +1,10 @@
-package lotto.domain.result.win.prize;
+package lotto.domain.result.win.rank;
 
-import lotto.domain.result.LottoResult;
+import lotto.domain.result.MatchResult;
 
 import java.util.Arrays;
 
-public enum PrizeGroup {
+public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
@@ -15,14 +15,14 @@ public enum PrizeGroup {
     private final int matchCount;
     private final int defaultPrize;
 
-    PrizeGroup(int matchCount, int defaultPrize) {
+    Rank(int matchCount, int defaultPrize) {
         this.matchCount = matchCount;
         this.defaultPrize = defaultPrize;
     }
 
-    public static PrizeGroup findPrizeByLottoResult(LottoResult result) {
-        PrizeGroup prize = Arrays.stream(PrizeGroup.values())
-                .filter(aPrize -> result.isEqualToMatchCount(aPrize.matchCount))
+    public static Rank findPrizeByLottoResult(MatchResult result) {
+        Rank prize = Arrays.stream(Rank.values())
+                .filter(aRank -> result.isEqualToMatchCount(aRank.matchCount))
                 .findFirst()
                 .orElse(SIXTH);
 
@@ -32,8 +32,8 @@ public enum PrizeGroup {
         return prize;
     }
 
-    private boolean isThird(LottoResult lottoResult) {
-        return this == SECOND && !lottoResult.isBonusMatch();
+    private boolean isThird(MatchResult matchResult) {
+        return this == SECOND && !matchResult.isBonusMatch();
     }
 
     public int getDefaultPrize() {

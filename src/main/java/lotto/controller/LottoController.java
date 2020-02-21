@@ -1,15 +1,16 @@
 package lotto.controller;
 
+import lotto.domain.result.LottoResultBundle;
+import lotto.domain.result.MatchResultBundle;
+import lotto.domain.result.win.WinningLotto;
 import lotto.domain.ticket.BettingMoney;
 import lotto.domain.ticket.LottoTicketBundle;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.view.dto.LottoTicketResponseDTO;
-import lotto.view.dto.PrizeResponseBundleDTO;
-import lotto.view.dto.WinningLottoRequestDTO;
 
 import java.util.Scanner;
+import java.util.Set;
 
 public class LottoController {
 
@@ -25,18 +26,20 @@ public class LottoController {
         OutputView.printBuyTicketCount(bettingMoney.getTicketCount());
 
         LottoTicketBundle lottoTicketBundle = lottoService.getLottoTicketBundle(bettingMoney);
-        OutputView.printBuyTickets(LottoTicketResponseDTO.ofList(lottoTicketBundle));
+        OutputView.printBuyTickets(lottoTicketBundle);
 
-        PrizeResponseBundleDTO prizeResponseBundleDTO = getPrizeResponseBundleDTO(lottoTicketBundle);
-        OutputView.printResult(prizeResponseBundleDTO);
+        LottoResultBundle lottoResultBundle = makeLottoResultBundle(lottoTicketBundle);
+        OutputView.printResult(lottoResultBundle);
     }
 
-    private PrizeResponseBundleDTO getPrizeResponseBundleDTO(LottoTicketBundle lottoTicketBundle) {
-        String winningNumber = inputView.inputWinningNumber();
+    private LottoResultBundle makeLottoResultBundle(LottoTicketBundle lottoTicketBundle) {
+        Set<Integer> winningNumber = inputView.inputWinningNumber();
         int bonusNumber = inputView.inputBonusNumber();
-        WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO(winningNumber, bonusNumber);
 
-        return lottoService.getStatisticsDTO(lottoTicketBundle, winningLottoRequestDTO);
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+        MatchResultBundle matchResultBundle = lottoTicketBundle.getMatchResultBundle(winningLotto);
+
+        return matchResultBundle.getPrizeBundle();
     }
 
 }

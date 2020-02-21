@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -70,10 +71,10 @@ class InputViewTest {
         InputView inputView = new InputView(new Scanner(input));
 
         //when
-        String expect = inputView.inputWinningNumber();
+        Set<Integer> expect = inputView.inputWinningNumber();
 
         //then
-        assertThat(expect).isEqualTo(winningNumber);
+        assertThat(expect).contains(1, 2, 3, 4, 4, 5, 6);
     }
 
     @DisplayName("입력받은 보너스 번호가 숫자가 아닌 문자일 경우")

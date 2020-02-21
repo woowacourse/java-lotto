@@ -2,11 +2,11 @@ package lotto.domain.result;
 
 import java.util.Objects;
 
-public class LottoResult {
+public class MatchResult {
     private final int matchCount;
     private final boolean isBonusMatch;
 
-    public LottoResult(int matchCount, boolean isBonusMatch) {
+    public MatchResult(int matchCount, boolean isBonusMatch) {
         this.matchCount = matchCount;
         this.isBonusMatch = isBonusMatch;
     }
@@ -23,7 +23,7 @@ public class LottoResult {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoResult that = (LottoResult) o;
+        MatchResult that = (MatchResult) o;
         return matchCount == that.matchCount &&
                 isBonusMatch == that.isBonusMatch;
     }

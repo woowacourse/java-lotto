@@ -1,9 +1,10 @@
 package lotto.view;
 
-import lotto.view.dto.LottoTicketResponseDTO;
-import lotto.view.dto.PrizeResponseBundleDTO;
-
-import java.util.List;
+import lotto.domain.result.LottoResultBundle;
+import lotto.domain.result.win.rank.Rank;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTicketBundle;
+import lotto.domain.ticket.ball.LottoBall;
 
 public class OutputView {
     private static final String MESSAGE_FOR_BONUS_CASE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
@@ -18,24 +19,31 @@ public class OutputView {
         System.out.println(String.format(BUY_LOTTO_TICKET_COUNT_MESSAGE, count));
     }
 
-    public static void printBuyTickets(List<LottoTicketResponseDTO> lottoTicketResponseDTOs) {
-        for (LottoTicketResponseDTO lottoTicketResponseDTO : lottoTicketResponseDTOs) {
-            System.out.println(String.format(LOTTO_NUMBERS_FORMAT, lottoTicketResponseDTO.getNumbers()));
+    public static void printBuyTickets(LottoTicketBundle lottoTicketBundle) {
+        for (LottoTicket lottoTicket : lottoTicketBundle.getLottoTickets()) {
+            System.out.println(String.format(LOTTO_NUMBERS_FORMAT, makeLottoNumberArguments(lottoTicket)));
         }
     }
 
-    public static void printResult(PrizeResponseBundleDTO prizeResponseBundleDTO) {
-        System.out.println(RESULT_HEADER);
-        printStatistics(prizeResponseBundleDTO);
-        System.out.println(String.format(RATE_MESSAGE, prizeResponseBundleDTO.getRate()));
+    private static Object[] makeLottoNumberArguments(LottoTicket lottoTicket) {
+        return lottoTicket.getLottoBalls()
+                .stream()
+                .map(LottoBall::getNumber)
+                .toArray();
     }
 
-    private static void printStatistics(PrizeResponseBundleDTO prizeResponseBundleDTO) {
-        for (int i = 0; i < prizeResponseBundleDTO.size(); i++) {
-            int matchCount = prizeResponseBundleDTO.getMatchCount(i);
-            int defaultPrize = prizeResponseBundleDTO.getDefaultPrize(i);
-            int matchTicketCount = prizeResponseBundleDTO.getMatchTicketCount(i);
-            String message = String.format(findMessage(prizeResponseBundleDTO.getName(i)), matchCount, defaultPrize, matchTicketCount);
+    public static void printResult(LottoResultBundle lottoResultBundle) {
+        System.out.println(RESULT_HEADER);
+        printStatistics(lottoResultBundle);
+        System.out.println(String.format(RATE_MESSAGE, lottoResultBundle.getRate()));
+    }
+
+    private static void printStatistics(LottoResultBundle lottoResultBundle) {
+        for (Rank rank : Rank.values()) {
+            int matchCount = lottoResultBundle.getMatchCount(rank);
+            int defaultPrize = rank.getDefaultPrize();
+            int matchTicketCount = lottoResultBundle.getMatchTicketCount(rank);
+            String message = String.format(findMessage(rank.name()), matchCount, defaultPrize, matchTicketCount);
             System.out.println(message);
         }
     }
