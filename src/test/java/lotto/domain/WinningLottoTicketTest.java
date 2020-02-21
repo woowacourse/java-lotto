@@ -10,8 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.factory.LottoFactory;
-import lotto.domain.factory.LottosFactory;
+import lotto.domain.generator.LottoTicketGenerator;
+import lotto.domain.generator.LottoTicketsGenerator;
 
 public class WinningLottoTicketTest {
 	private List<Ball> balls;
@@ -37,9 +37,9 @@ public class WinningLottoTicketTest {
 		LottoTicket lottoTicket = new LottoTicket(balls);
 		Ball ball = Ball.of(40);
 		WinningLotto winningLotto = new WinningLotto(lottoTicket, ball);
-		LottoFactory lottoFactory = () -> new LottoTicket(balls);
+		LottoTicketGenerator lottoTicketGenerator = () -> new LottoTicket(balls);
 
-		LottosFactory lottosFactory = new LottosFactory(lottoFactory);
+		LottoTicketsGenerator lottosFactory = new LottoTicketsGenerator(lottoTicketGenerator);
 		LottoTickets lottoTickets = lottosFactory.createLottosByCount(LottoCount.of(2));
 
 		LottoResult result = winningLotto.getResult(lottoTickets);

@@ -10,15 +10,15 @@ public class LottoResult {
 		this.lottoResult = Collections.unmodifiableMap(lottoResult);
 	}
 
-	Prize calculateTotalPrize() {
+	Money calculateTotalMoney() {
 		return lottoResult.keySet().stream()
-			.map(rank -> rank.calculateTotalPrize(lottoResult.get(rank)))
-			.reduce(Prize.of(0), Prize::plus);
+			.map(rank -> rank.calculateTotalMoney(lottoResult.get(rank)))
+			.reduce(Money.of(0), Money::plus);
 	}
 
 	public long getProfitRate(Money money) {
-		Prize totalPrize = calculateTotalPrize();
-		return totalPrize.findProfits(money);
+		Money totalMoney = calculateTotalMoney();
+		return totalMoney.findProfits(money);
 	}
 
 	public Map<LottoRank, Long> getLottoResult() {

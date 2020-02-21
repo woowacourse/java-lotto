@@ -1,4 +1,4 @@
-package lotto.domain.factory;
+package lotto.domain.generator;
 
 import java.util.Collections;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import lotto.domain.Ball;
 import lotto.domain.LottoTicket;
 
-public class RandomLottoFactory implements LottoFactory {
+public class RandomLottoTicketGenerator implements LottoTicketGenerator {
 	private static final int FROM_INDEX = 0;
 	private static final int TO_INDEX = 6;
 

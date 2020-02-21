@@ -16,18 +16,22 @@ public class Ball implements Comparable<Ball> {
 	}
 
 	private static void initBallCaches() {
-		for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
-			ballCaches.put(i, new Ball(i));
+		for (int number = MINIMUM_NUMBER; number <= MAXIMUM_NUMBER; number++) {
+			ballCaches.put(number, new Ball(number));
 		}
 	}
 
 	private final int number;
 
 	private Ball(int number) {
+		validateNumberRange(number);
+		this.number = number;
+	}
+
+	private void validateNumberRange(int number) {
 		if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
 			throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE);
 		}
-		this.number = number;
 	}
 
 	public static Ball of(int number) {

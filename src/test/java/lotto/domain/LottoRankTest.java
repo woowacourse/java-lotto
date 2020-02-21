@@ -53,34 +53,34 @@ public class LottoRankTest {
 	@CsvSource(value = {"1,2000000000", "2,4000000000", "3,6000000000", "4,8000000000"})
 	void calculateFirstPrize(int count, long expected) {
 		LottoRank rank = LottoRank.FIRST;
-		assertThat(rank.calculateTotalPrize(count)).extracting("prize").isEqualTo(expected);
+		assertThat(rank.calculateTotalMoney(count)).extracting("money").isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"1,30000000", "2,60000000", "3,90000000", "4,120000000"})
 	void calculateSecondPrize(int count, long expected) {
 		LottoRank rank = LottoRank.SECOND;
-		assertThat(rank.calculateTotalPrize(count)).extracting("prize").isEqualTo(expected);
+		assertThat(rank.calculateTotalMoney(count)).extracting("money").isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"1,1500000", "2,3000000", "3,4500000", "4,6000000"})
 	void calculateThirdPrize(int count, long expected) {
 		LottoRank rank = LottoRank.THIRD;
-		assertThat(rank.calculateTotalPrize(count)).extracting("prize").isEqualTo(expected);
+		assertThat(rank.calculateTotalMoney(count)).extracting("money").isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"1,50000", "2,100000", "3,150000", "4,200000"})
 	void calculateFourthPrize(int count, long expected) {
 		LottoRank rank = LottoRank.FOURTH;
-		assertThat(rank.calculateTotalPrize(count)).extracting("prize").isEqualTo(expected);
+		assertThat(rank.calculateTotalMoney(count)).extracting("money").isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"1,5000", "2,10000", "3,15000", "4,20000"})
 	void name(int count, long expected) {
 		LottoRank rank = LottoRank.FIFTH;
-		assertThat(rank.calculateTotalPrize(count)).extracting("prize").isEqualTo(expected);
+		assertThat(rank.calculateTotalMoney(count)).extracting("money").isEqualTo(expected);
 	}
 }

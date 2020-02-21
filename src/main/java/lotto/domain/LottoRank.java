@@ -6,22 +6,22 @@ import static lotto.domain.MatchCount.*;
 import java.util.Arrays;
 
 public enum LottoRank {
-	FIFTH(THREE, INCLUDING_OR_NOT, Prize.of(5000)),
-	FOURTH(FOUR, INCLUDING_OR_NOT, Prize.of(50000)),
-	THIRD(FIVE, NOT_INCLUDING, Prize.of(1_500_000)),
-	SECOND(FIVE, INCLUDING, Prize.of(30_000_000)),
-	FIRST(SIX, NOT_INCLUDING, Prize.of(2_000_000_000));
+	FIFTH(THREE, INCLUDING_OR_NOT, Money.of(5000)),
+	FOURTH(FOUR, INCLUDING_OR_NOT, Money.of(50000)),
+	THIRD(FIVE, NOT_INCLUDING, Money.of(1_500_000)),
+	SECOND(FIVE, INCLUDING, Money.of(30_000_000)),
+	FIRST(SIX, NOT_INCLUDING, Money.of(2_000_000_000));
 
 	private static final String THERE_IS_NON_RANK_EXCEPTION_MESSAGE = "꽝!";
 
 	private final MatchCount matchCount;
 	private final BonusBallStatus bonusBallStatus;
-	private final Prize prize;
+	private final Money money;
 
-	LottoRank(MatchCount matchCount, BonusBallStatus bonusBallStatus, Prize prize) {
+	LottoRank(MatchCount matchCount, BonusBallStatus bonusBallStatus, Money money) {
 		this.matchCount = matchCount;
 		this.bonusBallStatus = bonusBallStatus;
-		this.prize = prize;
+		this.money = money;
 	}
 
 	public static boolean isValidMatchCount(int matchCount) {
@@ -45,15 +45,15 @@ public enum LottoRank {
 		return bonusBallStatus.contains(isBonusBall);
 	}
 
-	public Prize calculateTotalPrize(long count) {
-		return prize.multiply(count);
+	public Money calculateTotalMoney(long count) {
+		return money.multiply(count);
 	}
 
 	public MatchCount getMatchCount() {
 		return matchCount;
 	}
 
-	public Prize getPrize() {
-		return prize;
+	public Money getMoney() {
+		return money;
 	}
 }

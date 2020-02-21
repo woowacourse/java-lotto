@@ -23,12 +23,12 @@ public class LottoResultTest {
 	@Test
 	void calculateTotalPrize() {
 		long expected = (2_000_000_000L + 5_000L + 50_000L) * 10L;
-		assertThat(result.calculateTotalPrize()).extracting("prize").isEqualTo(expected);
+		assertThat(result.calculateTotalMoney()).extracting("money").isEqualTo(expected);
 	}
 
 	@Test
 	void calculateProfitsRate() {
-		Money money = new Money(2_000_000_000);
+		Money money = Money.of(2_000_000_000);
 		long expected = (2_000_000_000L + 5_000L + 50_000L) * 10L * 100 / 2_000_000_000;
 		assertThat(result.getProfitRate(money)).isEqualTo(expected);
 	}

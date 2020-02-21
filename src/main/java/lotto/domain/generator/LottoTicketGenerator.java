@@ -1,8 +1,8 @@
-package lotto.domain.factory;
+package lotto.domain.generator;
 
 import lotto.domain.LottoTicket;
 
 @FunctionalInterface
-public interface LottoFactory {
+public interface LottoTicketGenerator {
 	LottoTicket create();
 }

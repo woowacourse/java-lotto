@@ -46,12 +46,4 @@ public class LottoTicketTest {
 		LottoTicket lottoTicket2 = new LottoTicket(balls2);
 		assertThat(lottoTicket.findMatchBallCount(lottoTicket2)).isEqualTo(4);
 	}
-
-	@DisplayName("문자열로 직접 로또 발급 기능 테스트")
-	@Test
-	void constructByRawNumber() {
-		LottoTicket lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
-		List<Ball> balls = lottoTicket.getBalls();
-		assertThat(balls).containsExactly(Ball.of(1), Ball.of(2), Ball.of(3), Ball.of(4), Ball.of(5), Ball.of(6));
-	}
 }

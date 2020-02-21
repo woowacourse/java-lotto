@@ -13,6 +13,10 @@ public class StringUtil {
 	private static final String BONUS_BALL_MESSAGE = ", 보너스 볼 일치";
 	private static final String TOTAL_PRIZE_AND_COUNT_MESSAGE = " (%s원) - %s개\n";
 
+	public static String[] splitRawLottoNumbers(String rawWinningLotto) {
+		return rawWinningLotto.split(LOTTO_NUMBERS_DELIMITER);
+	}
+
 	public static String parseBalls(List<Ball> balls) {
 		return balls.stream()
 			.map(Ball::toString)
@@ -36,6 +40,6 @@ public class StringUtil {
 	}
 
 	private static String getTotalPrizeAndCountMessage(LottoRank lottoRank, Long count) {
-		return String.format(TOTAL_PRIZE_AND_COUNT_MESSAGE, lottoRank.getPrize(), count);
+		return String.format(TOTAL_PRIZE_AND_COUNT_MESSAGE, lottoRank.getMoney(), count);
 	}
 }

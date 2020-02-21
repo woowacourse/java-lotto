@@ -8,18 +8,18 @@ import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.domain.factory.LottoFactory;
+import lotto.domain.generator.LottoTicketGenerator;
 
-public class LottoFactoryTest {
+public class LottoTicketGeneratorTest {
 
 	@ParameterizedTest
 	@ValueSource(ints = {1, 12, 23, 4, 5, 6})
 	void makeLotto(int ball) {
-		LottoFactory lottoFactory = () -> {
+		LottoTicketGenerator lottoTicketGenerator = () -> {
 			List<Ball> balls = Arrays.asList(Ball.of(1), Ball.of(12), Ball.of(23), Ball.of(4), Ball.of(5), Ball.of(6));
 			return new LottoTicket(balls);
 		};
-		assertThat(lottoFactory.create().contains(Ball.of(ball))).isTrue();
+		assertThat(lottoTicketGenerator.create().contains(Ball.of(ball))).isTrue();
 	}
 
 }
