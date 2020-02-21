@@ -28,14 +28,14 @@ public class LottoResult {
         return earning;
     }
 
-    public Map<LottoRank, ResultCount> getResult() {
-        return result;
-    }
-
     public ResultCount countRank(LottoRank rank) {
         if (result.containsKey(rank)) {
             return result.get(rank);
         }
         return new ResultCount(INIT_RESULTCOUNT_NUMBER);
+    }
+
+    public Map<LottoRank, ResultCount> getResult() {
+        return result;
     }
 }

@@ -7,15 +7,24 @@ import domain.lotto.lottoresult.ResultCount;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoGame {
     private static final int COUNT_NUMBER = 1;
+    private static final String ERROR_NULL_MESSAGE = "1부터 45 사이의 숫자만 입력 가능합니다.";
 
     List<LottoNumbers> lottoGame;
 
     public LottoGame(List<LottoNumbers> lottoGame) {
+        validateNullValue(lottoGame);
         this.lottoGame = lottoGame;
+    }
+
+    private void validateNullValue(List<LottoNumbers> lottoGame) {
+        if (Objects.isNull(lottoGame)) {
+            throw new IllegalArgumentException(ERROR_NULL_MESSAGE);
+        }
     }
 
     public LottoResult createGameResult(LottoWinner winner) {
