@@ -15,32 +15,32 @@ import lotto.domain.LottoRank;
 import lotto.domain.Lotto.LottoParser;
 
 public class ConsoleUILottoApplication {
-    public static void main(String[] args) {
-        LottoController lottoController = new LottoController();
-        LottoMoney inputLottoMoney = receiveInputMoney();
-        int numberOfLotto = inputLottoMoney.calculateNumberOfLotto();
-        printPurchaseCompleteMessage(numberOfLotto);
+	public static void main(String[] args) {
+		LottoController lottoController = new LottoController();
+		LottoMoney inputLottoMoney = receiveInputMoney();
+		int numberOfLotto = inputLottoMoney.calculateNumberOfLotto();
+		printPurchaseCompleteMessage(numberOfLotto);
 
-        List<Lotto> lottos = lottoController.purchaseLotto(numberOfLotto);
-        printPurchasedLotto(lottos);
+		List<Lotto> lottos = lottoController.purchaseLotto(numberOfLotto);
+		printPurchasedLotto(lottos);
 
-        Lotto winningLotto = new Lotto(LottoParser.parser(inputWinningLottoNumber()));
-        LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputBonusLottoNumber());
-        Map<LottoRank, Integer> lottoRankCount =
-                lottoController.getLottoRankCount(lottos, winningLotto, bonusLottoNumber);
-        printStatisticsMessage();
-        printWinningResult(lottoRankCount);
+		Lotto winningLotto = new Lotto(LottoParser.parser(inputWinningLottoNumber()));
+		LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputBonusLottoNumber());
+		Map<LottoRank, Integer> lottoRankCount =
+				lottoController.getLottoRankCount(lottos, winningLotto, bonusLottoNumber);
+		printStatisticsMessage();
+		printWinningResult(lottoRankCount);
 
-        int winningRatio = lottoController.getWinningRatio(lottoRankCount, inputLottoMoney);
-        printWinningRatio(winningRatio);
-    }
+		int winningRatio = lottoController.getWinningRatio(lottoRankCount, inputLottoMoney);
+		printWinningRatio(winningRatio);
+	}
 
-    private static LottoMoney receiveInputMoney() {
-        try {
-            return new LottoMoney(inputMoney());
-        } catch (InvalidLottoMoneyException ime) {
-            printExceptionMessage(ime.getMessage());
-            return receiveInputMoney();
-        }
-    }
+	private static LottoMoney receiveInputMoney() {
+		try {
+			return new LottoMoney(inputMoney());
+		} catch (InvalidLottoMoneyException ime) {
+			printExceptionMessage(ime.getMessage());
+			return receiveInputMoney();
+		}
+	}
 }
