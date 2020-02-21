@@ -11,11 +11,20 @@ public class LottoFactory {
 
     private static List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoFactory() {
+    private LottoFactory() {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
     }
+
+    private static class LottoFactoryHolder{
+        public static final LottoFactory instance = new LottoFactory();
+    }
+
+    public static LottoFactory getInstance(){
+        return LottoFactoryHolder.instance;
+    }
+
 
     public static List<LottoNumber> createLottoNumbers() {
         List<LottoNumber> lotto = new ArrayList<>();

@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Buyer;
 import lotto.domain.Money;
+import lotto.domain.lottoTicket.LottoFactory;
 import lotto.domain.lottoTicket.LottoNumber;
 import lotto.domain.lottoTicket.WinningLotto;
 import lotto.domain.result.LottoResult;
@@ -18,6 +19,7 @@ public class LottoManager {
     private LottoResult lottoResult;
 
     public LottoManager(int money) {
+        LottoFactory.getInstance();
         this.money = new Money(money);
         this.buyer = new Buyer(this.money.calculateLottoTicketCount());
     }
