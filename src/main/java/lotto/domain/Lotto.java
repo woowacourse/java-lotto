@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lotto.dto.LottoDto;
 
@@ -40,10 +41,10 @@ public class Lotto {
 	}
 
 	public WinningPrize findLottoPrize(WinningNumber winningNumber) {
-		HashSet<Integer> concatenatedSet = new HashSet<>(lottoNumber);
-		concatenatedSet.addAll(winningNumber.getWinningNumber());
+		Set<Integer> overlapNumbers = new HashSet<>(lottoNumber);
+		overlapNumbers.addAll(winningNumber.getWinningNumber());
 
-		int matchCount = (lottoNumber.size() * 2) - concatenatedSet.size();
+		int matchCount = (lottoNumber.size() * 2) - overlapNumbers.size();
 		boolean bonusMatch = lottoNumber.contains(winningNumber.getBonusNumber());
 
 		return WinningPrize.of(matchCount, bonusMatch);
