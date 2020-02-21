@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoNo;
 import lotto.exception.NotIntegerException;
 
-public class StringUtils {
+public class LottoNoUtils {
 	private static String COMMA = ",";
 
 	public static List<LottoNo> split(String input) {

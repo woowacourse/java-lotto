@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
 
-public class StringUtilsTest {
+public class LottoNoUtilsTest {
 
-	@DisplayName("split하고 Lotto객체를 잘 생성하는 지 확인")
+	@DisplayName("split하고 LottoNo객체를 잘 생성하는 지 확인")
 	@Test
 	void split() {
 		List<LottoNo> numbers = IntStream.range(1, 7)
@@ -22,7 +22,7 @@ public class StringUtilsTest {
 			.map(LottoNo::new)
 			.collect(Collectors.toList());
 		Lotto excepts = new Lotto(numbers);
-		Lotto lotto = new Lotto(StringUtils.split("1,2,3,4,5,6"));
+		Lotto lotto = new Lotto(LottoNoUtils.split("1,2,3,4,5,6"));
 		assertThat(lotto).isEqualTo(excepts);
 	}
 }

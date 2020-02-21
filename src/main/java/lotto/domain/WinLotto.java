@@ -1,12 +1,15 @@
 package lotto.domain;
 
-import lotto.utils.StringUtils;
+import lotto.utils.LottoNoUtils;
 
 public class WinLotto extends Lotto implements Cloneable {
+	private static final int MIN_WIN_VALUE = 3;
+	private static final int NO_WIN_VALUE = 0;
+
 	private final BonusBall bonusBall;
 
 	public WinLotto(String winLotto, String bonusBall) {
-		super(StringUtils.split(winLotto));
+		super(LottoNoUtils.split(winLotto));
 		this.bonusBall = new BonusBall(bonusBall);
 	}
 
@@ -14,8 +17,8 @@ public class WinLotto extends Lotto implements Cloneable {
 		int count = (int)this.lottoNumbers.stream()
 			.filter(x -> lotto.isContain(x))
 			.count();
-		if (count < 3) {
-			count = 0;
+		if (count < MIN_WIN_VALUE) {
+			count = NO_WIN_VALUE;
 		}
 		return count;
 	}

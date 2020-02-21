@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-	private List<Rank> ranks;
-	private Money money;
+	private final List<Rank> ranks;
+	private final Money money;
 
 	public LottoResult(List<Rank> ranks, Money money) {
 		this.ranks = ranks;
