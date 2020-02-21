@@ -9,16 +9,16 @@ public class LottoManager {
     private final List<Lotto> lotteries;
     private WinLotto winLotto;
 
-    public LottoManager(List<Lotto> lotteris, WinLotto winLotto) {
-        this.lotteries = new ArrayList<>(lotteris);
+    public LottoManager(List<Lotto> lotteries, WinLotto winLotto) {
+        this.lotteries = new ArrayList<>(lotteries);
         this.winLotto = winLotto;
     }
 
-    public void compareLotto() {
+    public void findHitLotto() {
         for (Lotto lotto : lotteries) {
             int hitCount = winLotto.compare(lotto);
-            boolean isBonusHit = winLotto.isMatchBonus(lotto);
-            lottoResultUpdate(hitCount, isBonusHit);
+            boolean bonus = winLotto.isMatchBonus(lotto);
+            lottoResultUpdate(hitCount, bonus);
         }
     }
 
