@@ -8,10 +8,12 @@ public class LottoManager {
 
     private final List<Lotto> lotteries;
     private WinLotto winLotto;
+    private LottoResult lottoResult;
 
     public LottoManager(List<Lotto> lotteries, WinLotto winLotto) {
         this.lotteries = new ArrayList<>(lotteries);
         this.winLotto = winLotto;
+        this.lottoResult = new LottoResult();
     }
 
     public void findHitLotto() {
@@ -26,10 +28,18 @@ public class LottoManager {
         if (hitCount < MIN_WIN_COUNT) {
             return;
         }
-        LottoResult lottoRank = LottoResult.findRank(hitCount);
+        Rank lottoRank = Rank.findRank(hitCount);
         if (lottoRank.isSecondRank(isBonus)) {
-            lottoRank = LottoResult.SECOND;
+            lottoRank = Rank.SECOND;
         }
-        lottoRank.plusTicketCount();
+        lottoResult.plusTicketCount(lottoRank);
+    }
+
+    public void getResult() {
+        lottoResult.getResult();
+    }
+
+    public long calculateTotalReward() {
+        return lottoResult.calculateTotalReward();
     }
 }

@@ -1,57 +1,40 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
-public enum LottoResult {
-	FIFTH(0, 5000, 3),
-	FOURTH(0, 50000, 4),
-	THIRD(0, 1500000, 5),
-	SECOND(0, 30000000, 5),
-	FIRST(0, 2000000000, 6);
+public class LottoResult {
+    private final List<Rank> ranks;
 
-	public static final String MESSAGE_NOT_FOUND_RANK = "당첨되지 않았습니다.";
+    public LottoResult() {
+        this.ranks = Arrays.asList(Rank.values());
+    }
 
-	private int ticketCount;
-	private final long reward;
-	private final int hitCount;
+    public void plusTicketCount(Rank rankToPlusCount) {
+        for (Rank rank : ranks) {
+            if (rank == rankToPlusCount) {
+                rank.plusTicketCount();
+            }
+        }
+    }
 
-	LottoResult(int ticketCount, long reward, int hitCount) {
-		this.ticketCount = ticketCount;
-		this.reward = reward;
-		this.hitCount = hitCount;
-	}
+    public long calculateTotalReward() {
+        return ranks.stream()
+                .map(x -> x.getTicketCount() * x.getReward())
+                .reduce(Long::sum)
+                .get();
+    }
 
-	public static LottoResult findRank(int count) {
-		return Arrays.stream(values())
-				.filter(x -> x.hitCount == count)
-				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException(MESSAGE_NOT_FOUND_RANK));
-	}
+    public void getResult() {
+        StringBuilder builder = new StringBuilder();
+        for (Rank rank : ranks) {
+            builder.append(rank.toString() + "\n");
+        }
+        System.out.println(builder);
+    }
 
-	public static long calculateTotalReward() {
-		return Arrays.stream(values())
-				.map(x -> x.reward * x.ticketCount)
-				.reduce(Long::sum)
-				.get();
-	}
-
-	public void plusTicketCount() {
-		this.ticketCount++;
-	}
-
-	public int getTicketCount() {
-		return ticketCount;
-	}
-
-	public long getReward() {
-		return reward;
-	}
-
-	public int getHitCount() {
-		return hitCount;
-	}
-
-	public boolean isSecondRank(boolean isBonus) {
-		return this.equals(THIRD) && isBonus;
-	}
+    @Override
+    public String toString() {
+        return ranks + "\n";
+    }
 }

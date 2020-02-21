@@ -11,7 +11,7 @@ import lotto.view.OutputView;
 import java.util.List;
 
 public class LottoApplication {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         Money money = new Money(InputView.inputBuyMoney());
         List<Lotto> lotteries = LottoFactory.createLotteries(money);
         OutputView.printLotteris(lotteries);
@@ -20,6 +20,6 @@ public class LottoApplication {
 
         LottoManager lottoManager = new LottoManager(lotteries, winLotto);
         lottoManager.findHitLotto();
-            OutputView.printResult(money);
+        OutputView.printResult(money, lottoManager);
     }
 }

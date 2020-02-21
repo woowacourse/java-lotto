@@ -7,25 +7,25 @@ public class Money {
 	private static final int TO_PERCENT_VALUE = 100;
 	private static final String ERROR_MESSAGE_MIN_MONEY = "천원 이상의 금액만 가능합니다.";
 
-	private final int inputMoney;
+	private final int money;
 
 	public Money(String inputMoney) {
 		InputValidator.validateInteger(inputMoney);
-		this.inputMoney = Integer.parseInt(inputMoney);
+		this.money = Integer.parseInt(inputMoney);
 		validateOverThousand();
 	}
 
 	private void validateOverThousand() {
-		if (this.inputMoney < LOTTO_PRICE) {
+		if (this.money < LOTTO_PRICE) {
 			throw new IllegalArgumentException(ERROR_MESSAGE_MIN_MONEY);
 		}
 	}
 
 	public int divideThousand() {
-		return inputMoney / LOTTO_PRICE;
+		return money / LOTTO_PRICE;
 	}
 
 	public int calculateIncomeRate(long income) {
-		return (int)(income * TO_PERCENT_VALUE / inputMoney);
+		return (int) (income * TO_PERCENT_VALUE / money);
 	}
 }
