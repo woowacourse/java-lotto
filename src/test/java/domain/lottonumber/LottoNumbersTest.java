@@ -8,8 +8,10 @@ import java.util.*;
 public class LottoNumbersTest {
     @Test
     void 생성_테스트() {
-        TestNumberGenerator testNumberGenerator = new TestNumberGenerator();
-        LottoNumbers lottoNumbers = LottoNumbersFactory.createLottoNumbers(testNumberGenerator);
+        SortedSet<LottoNumber> numbers = new TreeSet(Arrays.asList(
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(1))).isTrue();
         Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(2))).isTrue();
         Assertions.assertThat(lottoNumbers.contains(LottoNumber.of(3))).isTrue();

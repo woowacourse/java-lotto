@@ -1,12 +1,12 @@
 package domain.lottoresult;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class LottoResult {
     public static final String ERROR_NULL_MESSAGE = "null값이 입력되었습니다.";
-    Map<LottoRank, ResultCount> result = new HashMap<>();
+    Map<LottoRank, ResultCount> result = new EnumMap<>(LottoRank.class);
 
     public LottoResult() {
         for (LottoRank rank : LottoRank.values()) {
