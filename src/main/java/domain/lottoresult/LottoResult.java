@@ -29,4 +29,12 @@ public class LottoResult {
         validateNull(lottoRank);
         return result.get(lottoRank);
     }
+
+    public long calculateEarning(){
+        long earning = 0;
+        for (LottoRank rank : LottoRank.values()) {
+            earning += result.get(rank).multiply(rank.getWinning());
+        }
+        return earning;
+    }
 }

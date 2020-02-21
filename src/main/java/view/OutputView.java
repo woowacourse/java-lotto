@@ -3,6 +3,7 @@ package view;
 import domain.lottonumber.LottoNumber;
 import domain.lottonumber.LottoNumbers;
 import domain.lottoresult.LottoRank;
+import domain.lottoresult.LottoResult;
 import domain.lottoresult.ResultCount;
 
 import java.util.stream.Collectors;
@@ -42,18 +43,28 @@ public class OutputView {
         System.out.println("--------");
     }
 
-    public static void printResult(LottoRank rank, ResultCount resultCount) {
+    private static void printEachResult(LottoRank rank, ResultCount resultCount) {
         StringBuilder sb = new StringBuilder();
+        if(rank == LottoRank.NOTHING){
+            return;
+        }
         sb.append(rank.getHitCount());
         sb.append("개 일치");
-        if(rank.hasBonus())
+        if(rank.hasBonus()) {
             sb.append(", 보너스 볼 일치");
+        }
         sb.append("(");
         sb.append(rank.getWinning());
         sb.append("원)- ");
         sb.append(resultCount.toString());
         sb.append("개");
         System.out.println(sb.toString());
+    }
+
+    public static void printResult(LottoResult result){
+        for(LottoRank rank : LottoRank.values()) {
+            printEachResult(rank, result.get(rank));
+        }
     }
 
     public static void printEarning(long rating) {
