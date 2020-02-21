@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RankTest {
     @ParameterizedTest
     @MethodSource("createCountAndRank")
-    void 일치하는_개수에_해당하는_순위를_반(int count, Rank expected) {
+    void 일치하는_개수에_해당하는_순위를_반환(int count, Rank expected) {
         assertThat(Rank.of(count)).isEqualTo(expected);
     }
 

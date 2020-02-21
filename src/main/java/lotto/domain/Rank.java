@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
+    LOSE(-1,0),
     FIFTH(3, 5000),
     FOURTH(4, 50000),
     THIRD(5, 1500000),
@@ -23,7 +24,7 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchedCount == count)
                 .findFirst()
-                .orElse(null);
+                .orElse(LOSE);
     }
 
     public static Money sumWinningMoney(List<Rank> ranks) {
