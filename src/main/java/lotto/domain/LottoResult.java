@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
+	private static final int INIT_VALUE = 0;
+	private static final int COUNT_ADDITIONAL_VALUE = 1;
+
 	private final List<Rank> ranks;
 	private final Money money;
 
@@ -17,10 +20,10 @@ public class LottoResult {
 	public Map<Rank, Integer> getResult() {
 		Map<Rank, Integer> counts = new HashMap<>();
 		Arrays.stream(Rank.values())
-			.forEach(rank -> counts.put(rank, 0));
+			.forEach(rank -> counts.put(rank, INIT_VALUE));
 
 		ranks.stream()
-			.forEach(rank -> counts.replace(rank, counts.get(rank) + 1));
+			.forEach(rank -> counts.replace(rank, counts.get(rank) + COUNT_ADDITIONAL_VALUE));
 		return counts;
 	}
 
