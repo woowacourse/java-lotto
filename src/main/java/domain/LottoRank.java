@@ -9,6 +9,7 @@ public enum LottoRank {
     FOURTH(4, false, 50_000, "4개 일치(50000원) - "),
     FIFTH(3, false, 5_000, "3개 일치(5000원) - ");
 
+    public static final int WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD = 5;
     private int winningMatchCount;
     private boolean isBonusMatch;
     private int winningMoney;
@@ -38,7 +39,7 @@ public enum LottoRank {
     }
 
     private static boolean isRankSecondOrThird(boolean bonusMatchCount, LottoRank result) {
-        return isWinningMatchCountSame(5, result) && result.isBonusMatch == bonusMatchCount;
+        return isWinningMatchCountSame(WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD, result) && result.isBonusMatch == bonusMatchCount;
     }
 
     public String getResultMessage(){
