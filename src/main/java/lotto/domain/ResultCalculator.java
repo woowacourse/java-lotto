@@ -1,37 +1,32 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultCalculator {
     private static final int MONEY_PER_LOTTO = 1000;
 
     public static ResultsDTO getResults(Lottos lottos, WinningLotto winningLotto) {
-        ArrayList<WinningInfo> results = getResult(lottos, winningLotto);
+        List<WinningInfo> results = calculateResults(lottos, winningLotto);
         int totalEarning = getTotalEarning(results);
         int earningRate = getEarningRate(totalEarning, results.size());
-        return new ResultsDTO(results, totalEarning, earningRate);
+        return new ResultsDTO(results, earningRate);
     }
 
-    public static ArrayList<WinningInfo> getResult(Lottos lottos, WinningLotto winningLotto) {
-        ArrayList<WinningInfo> results = new ArrayList<>();
+    public static List<WinningInfo> calculateResults(Lottos lottos, WinningLotto winningLotto) {
+        List<WinningInfo> results = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            int winningCount = winningLotto.getWinningCount(lotto);
-            boolean hasBonus = getHasBonus(lotto, winningLotto);
+            int winningCount = lotto.compare(winningLotto);
+            boolean hasBonus = lotto.hasLottoNumber(winningLotto.getBonusNumber());
             results.add(WinningInfo.valueOf(winningCount, hasBonus));
         }
         return results;
     }
 
-    public static boolean getHasBonus(Lotto lotto, WinningLotto winningLotto) {
-        return lotto.getLottoNumbers()
-                .stream()
-                .anyMatch(lottoNumber -> lottoNumber.equals(winningLotto.getBonusNumber()));
-    }
-
-    public static int getTotalEarning(ArrayList<WinningInfo> results) {
+    public static int getTotalEarning(List<WinningInfo> results) {
         return results.stream()
-                .map(o -> o.getWinningPrice())
+                .map(result -> result.getWinningPrice())
                 .collect(Collectors.summingInt(Integer::intValue));
     }
 
