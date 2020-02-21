@@ -8,7 +8,6 @@ import static lotto.view.ConsoleOutputView.*;
 import java.util.List;
 import java.util.Map;
 
-import lotto.domain.InvalidLottoMoneyException;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
@@ -17,7 +16,7 @@ import lotto.domain.WinningLotto;
 
 public class ConsoleUILottoApplication {
 	public static void main(String[] args) {
-		LottoMoney inputLottoMoney = receiveInputMoney();
+		LottoMoney inputLottoMoney = continuousInputMoney();
 		int numberOfLotto = inputLottoMoney.getNumberOfLotto();
 		printPurchaseCompleteMessage(numberOfLotto);
 
@@ -34,14 +33,5 @@ public class ConsoleUILottoApplication {
 
 		int winningRatio = winningLotto.getWinningRatio(winningLottoCount, inputLottoMoney);
 		printWinningRatio(winningRatio);
-	}
-
-	private static LottoMoney receiveInputMoney() {
-		try {
-			return new LottoMoney(inputMoney());
-		} catch (InvalidLottoMoneyException ime) {
-			printExceptionMessage(ime.getMessage());
-			return receiveInputMoney();
-		}
 	}
 }
