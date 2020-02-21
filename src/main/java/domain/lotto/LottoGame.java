@@ -5,7 +5,6 @@ import domain.lotto.lottoresult.LottoResult;
 import domain.lotto.lottoresult.LottoWinner;
 import domain.lotto.lottoresult.ResultCount;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;

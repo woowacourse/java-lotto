@@ -1,6 +1,6 @@
 package controller;
 
-import domain.*;
+import domain.Money;
 import domain.lotto.*;
 import domain.lotto.generator.RandomNumberGenerator;
 import domain.lotto.lottoresult.LottoResult;

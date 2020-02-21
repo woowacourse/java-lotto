@@ -32,6 +32,15 @@ public class LottoRankTest {
 
         lottoRank = LottoRank.calculateRank(2, true);
         Assertions.assertThat(lottoRank).isEqualTo(LottoRank.NOTHING);
+    }
 
+    @Test
+    void ResultCount_곱셈_확인() {
+        Assertions.assertThat(LottoRank.FIRST.multiplyCount(new ResultCount(1))).isEqualTo(2_000_000_000);
+        Assertions.assertThat(LottoRank.SECOND.multiplyCount(new ResultCount(2))).isEqualTo(60_000_000);
+        Assertions.assertThat(LottoRank.THIRD.multiplyCount(new ResultCount(2))).isEqualTo(3_000_000);
+        Assertions.assertThat(LottoRank.FOURTH.multiplyCount(new ResultCount(2))).isEqualTo(100_000);
+        Assertions.assertThat(LottoRank.FIFTH.multiplyCount(new ResultCount(2))).isEqualTo(10_000);
+        Assertions.assertThat(LottoRank.NOTHING.multiplyCount(new ResultCount(2))).isEqualTo(0);
     }
 }

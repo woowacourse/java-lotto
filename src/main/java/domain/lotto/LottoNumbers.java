@@ -1,8 +1,8 @@
 package domain.lotto;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.Objects;
 
 public class LottoNumbers {
     private static final String ERROR_NULL_MESSAGE = "null값이 입력되었습니다.";
