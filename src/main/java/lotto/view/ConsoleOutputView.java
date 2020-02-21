@@ -17,6 +17,8 @@ public class ConsoleOutputView {
 	private static final String WINNING_SECOND_RANK_RESULT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
 	private static final String WINNING_RATIO_MESSAGE = "총 수익률은 %d%%입니다.\n";
 
+	private ConsoleOutputView() {}
+
 	public static void printExceptionMessage(String exceptionMessage) {
 		System.out.println(exceptionMessage);
 	}
