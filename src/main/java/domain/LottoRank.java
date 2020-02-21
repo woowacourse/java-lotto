@@ -7,7 +7,7 @@ public enum LottoRank {
     SECOND(5, true, 30_000_000, "5개 일치, 보너스볼 일치(30000000원) - "),
     THIRD(5, false, 1_500_000, "5개 일치(1500000원) - "),
     FOURTH(4, false, 50_000, "4개 일치(50000원) - "),
-    FIFTH(3, false, 5000, "3개 일치(5000원) - ");
+    FIFTH(3, false, 5_000, "3개 일치(5000원) - ");
 
     private int winningMatchCount;
     private boolean isBonusMatch;
@@ -22,17 +22,23 @@ public enum LottoRank {
     }
 
     public static LottoRank findRank(final int winningMatchCount, final boolean bonusMatchCount) {
-        if (winningMatchCount < 5) {
             return Arrays.stream(LottoRank.values())
-                    .filter(result -> result.winningMatchCount == winningMatchCount)
+                    .filter(result -> isRankSecondOrThird(bonusMatchCount, result) || isRankOneOrFourthOrFifth(result))
+                    .filter(result -> isWinningMatchCountSame(winningMatchCount, result))
                     .findFirst()
                     .orElse(null);
-        }
-        return Arrays.stream(LottoRank.values())
-                .filter(result -> result.winningMatchCount == winningMatchCount)
-                .filter(result -> result.isBonusMatch == bonusMatchCount)
-                .findFirst()
-                .orElse(null);
+    }
+
+    private static boolean isWinningMatchCountSame(int winningMatchCount, LottoRank result) {
+        return result.winningMatchCount == winningMatchCount;
+    }
+
+    private static boolean isRankOneOrFourthOrFifth(LottoRank result) {
+        return !result.isBonusMatch;
+    }
+
+    private static boolean isRankSecondOrThird(boolean bonusMatchCount, LottoRank result) {
+        return isWinningMatchCountSame(5, result) && result.isBonusMatch == bonusMatchCount;
     }
 
     public String getResultMessage(){
