@@ -3,19 +3,12 @@ package lotto.domain.ticket.ball;
 import java.util.Objects;
 
 public final class LottoBall {
-    public static final int LOWER_BOUND = 1;
-    public static final int UPPER_BOUND = 45;
+
     private final int number;
 
     LottoBall(int number) {
-        validateNumber(number);
+        LottoBallValidator.validateNumber(number);
         this.number = number;
-    }
-
-    private void validateNumber(int number) {
-        if (number < LOWER_BOUND || number > UPPER_BOUND) {
-            throw new IllegalArgumentException("입력값: " + number + ": 범위 이외 숫자");
-        }
     }
 
     public int getNumber() {

@@ -7,8 +7,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.ticket.ball.LottoBall.LOWER_BOUND;
-import static lotto.domain.ticket.ball.LottoBall.UPPER_BOUND;
+import static lotto.domain.ticket.ball.LottoBallValidator.LOWER_BOUND;
+import static lotto.domain.ticket.ball.LottoBallValidator.UPPER_BOUND;
 
 public class LottoFactory {
     private static final Map<Integer, LottoBall> instance;
@@ -24,6 +24,7 @@ public class LottoFactory {
     }
 
     public static LottoBall getLottoBallByNumber(int number) {
+        LottoBallValidator.validateNumber(number);
         return instance.get(number);
     }
 }
