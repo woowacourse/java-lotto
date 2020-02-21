@@ -1,18 +1,20 @@
 package lotto.model;
 
 public enum LottoResult {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 150000),
-    FIVE_BONUS(5, 30000000),
-    SIX(6, 2000000000);
+    FIFTH_GRADE(3, 5000, "FIFTH"),
+    FOURTH_GRADE(4, 50000, "FOURTH"),
+    THIRD_GRADE(5, 150000, "THIRD"),
+    SECOND_GRADE(5, 30000000, "SECOND"),
+    FIRST_GRADE(6, 2000000000, "FIRST");
 
-    protected final int prize;
+    private final int prize;
     private final int correct;
+    private final String grade;
 
-    LottoResult(int correct, int prize) {
+    LottoResult(int correct, int prize, String grade) {
         this.correct = correct;
         this.prize = prize;
+        this.grade = grade;
     }
 
     public double prizeResult(int count) {
@@ -25,5 +27,9 @@ public enum LottoResult {
 
     public int getCorrect() {
         return correct;
+    }
+
+    public String getGrade() {
+        return grade;
     }
 }
