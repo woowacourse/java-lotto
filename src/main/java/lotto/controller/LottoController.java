@@ -17,18 +17,18 @@ import lotto.domain.LottoFactory;
  * <p>
  * 날짜 : 2020/02/20
  */
-public class LottoController { // TODO 변수들을 클래스변수로 뺴고 메서드들을 나누기
+public class LottoController {
 	public static void run() {
-		MoneyForLotto moneyForLotto = InputView.getMoneyForLotto(); // TODO 로또 인풋 받는 메서드
+		MoneyForLotto moneyForLotto = InputView.getMoneyForLotto();
 		int amountOfLottos = moneyForLotto.calculateAmountOfLottos();
 		Lottos lottos = LottosFactory.createLottosAuto(amountOfLottos);
 
 		OutputView.printPurchasedLottos(amountOfLottos, lottos);
 
-		WinningLotto winningLotto = InputView.getWinningLotto(); // TODO 결과 뽑는 메서드
+		WinningLotto winningLotto = InputView.getWinningLotto();
 		BonusLottoNumber bonusLottoNumber = InputView.getBonusLottoNumber(winningLotto);
 
 		ResultStatistic result = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
-		OutputView.printResultStatistic(result, moneyForLotto); // TODO 여기까지 결과 뽑는 메서드
+		OutputView.printResultStatistic(result, moneyForLotto);
 	}
 }

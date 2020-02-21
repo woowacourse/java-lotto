@@ -24,7 +24,7 @@ public enum Rank {
 	private static final int MATCH_COUNT_RELATED_TO_BONUS = 5;
 
 	private List<Integer> matchCounts;
-	private boolean hasBonus; // TODO: 마지막까지도 안쓰이면 지우기
+	private boolean hasBonus;
 	private int reward;
 
 	Rank(List<Integer> matchCounts, boolean hasBonus, final int reward) {
