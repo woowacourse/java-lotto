@@ -22,7 +22,9 @@ public class WinningLottoParser {
 
 	private static void validateInteger(String inputWinningLotto) {
 		try {
-			Arrays.stream(inputWinningLotto.split(DELIMITER)).forEach(Integer::parseInt);
+			Arrays.stream(inputWinningLotto.split(DELIMITER))
+				.map(String::trim)
+				.forEach(Integer::parseInt);
 		} catch (NumberFormatException ne) {
 			throw new InvalidWinningLottoException(InvalidWinningLottoException.NOT_INTEGER);
 		}

@@ -39,7 +39,7 @@ public class WinningLotto {
 	}
 
 	public int getWinningRatio(Map<LottoRank, Integer> lottoRankCount, LottoMoney inputLottoMoney) {
-		LottoMoney initLottoMoney = LottoMoney.MISS_PRIZE;
+		LottoMoney initLottoMoney = LottoRank.MISS.getWinningMoney();
 		for (Map.Entry<LottoRank, Integer> lottoEntry : lottoRankCount.entrySet()) {
 			initLottoMoney = initLottoMoney.add(lottoEntry.getKey().getWinningMoney().multiply(lottoEntry.getValue()));
 		}

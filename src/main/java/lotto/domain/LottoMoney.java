@@ -3,13 +3,6 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoMoney {
-	static final LottoMoney FIRST_PRIZE = new LottoMoney(2_000_000_000);
-	static final LottoMoney SECOND_PRIZE = new LottoMoney(30_000_000);
-	static final LottoMoney THIRD_PRIZE = new LottoMoney(1_500_000);
-	static final LottoMoney FOURTH_PRIZE = new LottoMoney(50_000);
-	static final LottoMoney FIFTH_PRIZE = new LottoMoney(5_000);
-	static final LottoMoney MISS_PRIZE = new LottoMoney(0);
-
 	private static final long ZERO = 0;
 	private static final long MAX_BOUND = 100000;
 	private static final long LOTTO_PRICE = 1000;
@@ -21,7 +14,7 @@ public class LottoMoney {
 		this.money = validate(money);
 	}
 
-	private LottoMoney(long money) {
+	LottoMoney(long money) {
 		this.money = money;
 	}
 
