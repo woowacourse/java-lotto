@@ -1,23 +1,35 @@
 package lotto.domain;
 
 import lotto.Exception.DuplicationException;
+import lotto.Exception.NumberOutOfRangeException;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.Collections;
 import java.util.List;
 
 public class WinningBalls {
-    private final List<LottoBall> winningBalls;
-    private final LottoBall bonusBall;
+    private List<LottoBall> winningBalls;
+    private LottoBall bonusBall;
 
-    public WinningBalls(List<LottoBall> winningBalls, int BonusBall) {
-        this.winningBalls = Collections.unmodifiableList(winningBalls);
-        this.bonusBall = LottoBallFactory.findByLottoBall(BonusBall);
-        validateWinningBallsWithDuplicatedBonusBall();
+    public WinningBalls() {
+        generateWinningBalls();
     }
 
     private void validateWinningBallsWithDuplicatedBonusBall() {
         if (winningBalls.contains(this.bonusBall)) {
             throw new DuplicationException("보너스 볼이 중복입니다. 당첨 번호를 다시 입력해주세요.");
+        }
+    }
+
+    public void generateWinningBalls() {
+        try {
+            this.winningBalls = InputView.InputWinningBalls();
+            this.bonusBall = LottoBallFactory.findByLottoBall(InputView.InputBonusBall());
+            validateWinningBallsWithDuplicatedBonusBall();
+        } catch (DuplicationException | NumberOutOfRangeException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            generateWinningBalls();
         }
     }
 

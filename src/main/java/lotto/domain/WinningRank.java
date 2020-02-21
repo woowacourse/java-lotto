@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public enum WinningRank {
     FIRST_RANK(2_000_000_000, 6),
@@ -25,6 +27,16 @@ public enum WinningRank {
                 .orElse(NO_RANK);
 
         return compareSecondRankOrThirdRank(isBonusNumber, winningRank);
+    }
+
+    public static List<WinningRank> generateWinningRank(WinningBalls winningBalls, LottoTickets lottoTickets) {
+        List<WinningRank> winningRanks = new ArrayList<>();
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+            int correctNumber = winningBalls.hitLottoBalls(lottoTicket);
+            boolean isBonusNumber = winningBalls.hitBonusBall(lottoTicket);
+            winningRanks.add(WinningRank.selectRank(correctNumber, isBonusNumber));
+        }
+        return winningRanks;
     }
 
     private static WinningRank compareSecondRankOrThirdRank(boolean isBonusNumber, WinningRank winningRank) {
