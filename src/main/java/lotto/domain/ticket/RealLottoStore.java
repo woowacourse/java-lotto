@@ -1,7 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoFactory;
+import lotto.domain.ticket.ball.LottoBallFactory;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class RealLottoStore extends LottoStore {
     private static final int BALL_COUNT = 6;
-    private static final List<LottoBall> balls = LottoFactory.getInstance();
+    private static final List<LottoBall> balls = LottoBallFactory.getInstance();
 
     @Override
     protected LottoTicket getTicket() {

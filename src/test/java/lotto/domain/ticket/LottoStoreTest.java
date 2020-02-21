@@ -2,7 +2,7 @@ package lotto.domain.ticket;
 
 import lotto.domain.result.win.WinningLotto;
 import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoFactory;
+import lotto.domain.ticket.ball.LottoBallFactory;
 import lotto.view.dto.WinningLottoRequestDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class LottoStoreTest {
     void makeWinningLotto() {
         //given
         Set<LottoBall> lottoBalls = aLottoBalls(1, 2, 3, 4, 5, 6);
-        LottoBall bonusBall = LottoFactory.findLottoBallByNumber(7);
+        LottoBall bonusBall = LottoBallFactory.findLottoBallByNumber(7);
         WinningLotto expectedLotto = new WinningLotto(lottoBalls, bonusBall);
 
         WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO("1,2,3,4,5,6", 7);
@@ -34,7 +34,7 @@ class LottoStoreTest {
 
     private Set<LottoBall> aLottoBalls(int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(LottoFactory::findLottoBallByNumber)
+                .mapToObj(LottoBallFactory::findLottoBallByNumber)
                 .collect(Collectors.toSet());
     }
 }

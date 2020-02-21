@@ -5,34 +5,30 @@ import lotto.domain.result.win.prize.PrizeGroup;
 import java.util.List;
 
 public class PrizeResponseDTO {
-    private final String name;
-    private final int matchCount;
-    private final int defaultPrize;
+    private final PrizeGroup prizeGroup;
     private final int matchTicketCount;
 
-    public PrizeResponseDTO(PrizeGroup criteria, List<PrizeGroup> prizeResults) {
-        this.name = criteria.name();
-        this.matchCount = criteria.getMatchCount();
-        this.defaultPrize = criteria.getDefaultPrize();
+    public PrizeResponseDTO(PrizeGroup prizeGroup, List<PrizeGroup> prizeResults) {
+        this.prizeGroup = prizeGroup;
         this.matchTicketCount = (int) prizeResults.stream()
-                .filter(criteria::equals)
+                .filter(prizeGroup::equals)
                 .count();
     }
 
     public double getSum() {
-        return defaultPrize * matchTicketCount;
+        return prizeGroup.getDefaultPrize() * matchTicketCount;
     }
 
     public String getName() {
-        return name;
+        return prizeGroup.name();
     }
 
     public int getMatchCount() {
-        return matchCount;
+        return prizeGroup.getMatchCount();
     }
 
     public int getDefaultPrize() {
-        return defaultPrize;
+        return prizeGroup.getDefaultPrize();
     }
 
     public int getMatchTicketCount() {

@@ -12,11 +12,10 @@ class LottoBallTest {
     @DisplayName("생성된 ball들이 범위내의 숫자인지")
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
-    void test1(int number) {
-        assertThatThrownBy(() -> {
-            LottoBall.from(number);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("입력값: " + number + ": 범위 이외 숫자");
+    void test1(int invalidNumber) {
+        assertThatThrownBy(() -> LottoBall.from(invalidNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("%d 로또 번호는 1부터 45까지 허용됩니다.", invalidNumber);
     }
 
     @DisplayName("볼 생성시 번호가 같은지 확인")

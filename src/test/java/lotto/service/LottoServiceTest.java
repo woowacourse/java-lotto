@@ -1,13 +1,13 @@
 package lotto.service;
 
 import lotto.domain.result.win.prize.PrizeGroup;
+import lotto.domain.ticket.BettingMoney;
 import lotto.domain.ticket.LottoStore;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketBundle;
 import lotto.domain.ticket.StubLottoStore;
 import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoFactory;
-import lotto.view.dto.BettingMoneyRequestDTO;
+import lotto.domain.ticket.ball.LottoBallFactory;
 import lotto.view.dto.StatisticsResponseDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,12 +39,12 @@ class LottoServiceTest {
     }
 
     private static Set<LottoBall> aLottoBalls() {
-        LottoBall one = LottoFactory.findLottoBallByNumber(1);
-        LottoBall two = LottoFactory.findLottoBallByNumber(2);
-        LottoBall three = LottoFactory.findLottoBallByNumber(3);
-        LottoBall four = LottoFactory.findLottoBallByNumber(4);
-        LottoBall five = LottoFactory.findLottoBallByNumber(5);
-        LottoBall six = LottoFactory.findLottoBallByNumber(6);
+        LottoBall one = LottoBallFactory.findLottoBallByNumber(1);
+        LottoBall two = LottoBallFactory.findLottoBallByNumber(2);
+        LottoBall three = LottoBallFactory.findLottoBallByNumber(3);
+        LottoBall four = LottoBallFactory.findLottoBallByNumber(4);
+        LottoBall five = LottoBallFactory.findLottoBallByNumber(5);
+        LottoBall six = LottoBallFactory.findLottoBallByNumber(6);
         return new HashSet<>(Arrays.asList(one, two, three, four, five, six));
     }
 
@@ -59,7 +59,7 @@ class LottoServiceTest {
     @MethodSource("ticketProvider")
     void getLottoTicketBundle(int bettingMoney, List<LottoTicket> expectTickets) {
         //given
-        BettingMoneyRequestDTO bettingMoneyRequestDTO = new BettingMoneyRequestDTO(bettingMoney);
+        BettingMoney bettingMoneyRequestDTO = new BettingMoney(bettingMoney);
 
         //when
         LottoTicketBundle lottoTicketBundle = lottoService.getLottoTicketBundle(bettingMoneyRequestDTO);

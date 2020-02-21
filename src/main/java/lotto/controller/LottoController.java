@@ -1,10 +1,10 @@
 package lotto.controller;
 
+import lotto.domain.ticket.BettingMoney;
 import lotto.domain.ticket.LottoTicketBundle;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.view.dto.BettingMoneyRequestDTO;
 import lotto.view.dto.LottoTicketResponseDTO;
 import lotto.view.dto.StatisticsResponseDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
@@ -12,7 +12,6 @@ import lotto.view.dto.WinningLottoRequestDTO;
 import java.util.Scanner;
 
 public class LottoController {
-
 
     private static final InputView inputView = new InputView(new Scanner(System.in));
     private final LottoService lottoService;
@@ -30,7 +29,7 @@ public class LottoController {
     }
 
     private LottoTicketBundle getLottoTicketBundle() {
-        BettingMoneyRequestDTO bettingMoney = new BettingMoneyRequestDTO(inputView.inputBettingMoney());
+        BettingMoney bettingMoney = new BettingMoney(inputView.inputBettingMoney());
 
         return lottoService.getLottoTicketBundle(bettingMoney);
     }

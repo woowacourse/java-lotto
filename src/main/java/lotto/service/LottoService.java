@@ -2,10 +2,10 @@ package lotto.service;
 
 import lotto.domain.result.LottoResultBundle;
 import lotto.domain.result.win.WinningLotto;
+import lotto.domain.ticket.BettingMoney;
 import lotto.domain.ticket.LottoStore;
 import lotto.domain.ticket.LottoTicketBundle;
 import lotto.domain.ticket.RealLottoStore;
-import lotto.view.dto.BettingMoneyRequestDTO;
 import lotto.view.dto.StatisticsResponseDTO;
 import lotto.view.dto.WinningLottoRequestDTO;
 
@@ -17,8 +17,8 @@ public class LottoService {
         this.lottoStore = lottoStore;
     }
 
-    public LottoTicketBundle getLottoTicketBundle(BettingMoneyRequestDTO bettingMoneyRequestDTO) {
-        return new LottoTicketBundle(lottoStore.buyTicket(bettingMoneyRequestDTO));
+    public LottoTicketBundle getLottoTicketBundle(BettingMoney bettingMoney) {
+        return new LottoTicketBundle(lottoStore.buyTicket(bettingMoney));
     }
 
     public StatisticsResponseDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle, WinningLottoRequestDTO winningLottoRequestDTO) {
