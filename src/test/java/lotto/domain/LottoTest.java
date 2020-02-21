@@ -99,4 +99,40 @@ public class LottoTest {
 		));
 		assertThat(lotto).isEqualTo(expected);
 	}
+
+	@Test
+	@DisplayName("로또에 해당 번호가 존재하는지 확인")
+	void contains() {
+		Lotto lotto = new Lotto(Arrays.asList(
+				LottoNumber.of(10),
+				LottoNumber.of(13),
+				LottoNumber.of(29),
+				LottoNumber.of(33),
+				LottoNumber.of(37),
+				LottoNumber.of(42)
+		));
+		assertThat(lotto.contains(LottoNumber.of(33))).isTrue();
+	}
+
+	@Test
+	@DisplayName("로또를 비교해서 일치하는 번호 개수 확인")
+	void countOfMatch() {
+		Lotto lotto = new Lotto(Arrays.asList(
+				LottoNumber.of(10),
+				LottoNumber.of(13),
+				LottoNumber.of(29),
+				LottoNumber.of(33),
+				LottoNumber.of(37),
+				LottoNumber.of(42)
+		));
+		Lotto other = new Lotto(Arrays.asList(
+				LottoNumber.of(10),
+				LottoNumber.of(23),
+				LottoNumber.of(28),
+				LottoNumber.of(32),
+				LottoNumber.of(37),
+				LottoNumber.of(41)
+		));
+		assertThat(lotto.countOfMatch(other)).isEqualTo(2);
+	}
 }
