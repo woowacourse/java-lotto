@@ -2,9 +2,10 @@ package domain.lotto.generator;
 
 import domain.lotto.LottoNumber;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,8 +23,8 @@ public class RandomNumberGenerator implements NumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> create() {
+    public SortedSet<LottoNumber> create() {
         Collections.shuffle(numbers);
-        return new ArrayList<>(numbers.subList(START_INDEX, END_INDEX));
+        return new TreeSet<>(numbers.subList(START_INDEX, END_INDEX));
     }
 }

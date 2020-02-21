@@ -9,7 +9,6 @@ import domain.lotto.lottoresult.LottoResult;
 import domain.lotto.lottoresult.ResultCount;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -71,7 +70,6 @@ public class OutputView {
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
-        Map<LottoRank, ResultCount> result = lottoResult.getResult();
         Arrays.stream(LottoRank.values())
                 .filter(rank -> rank != LottoRank.NOTHING)
                 .forEach(rank -> printRankResult(rank, lottoResult.countRank(rank)));

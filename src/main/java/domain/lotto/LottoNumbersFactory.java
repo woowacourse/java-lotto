@@ -3,6 +3,7 @@ package domain.lotto;
 import domain.lotto.generator.NumberGenerator;
 
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoNumbersFactory {
@@ -17,6 +18,6 @@ public class LottoNumbersFactory {
     public static LottoNumbers createLottoNumbers(List<Integer> ints) {
         return ints.stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
+                .collect(Collectors.collectingAndThen(Collectors.toCollection(TreeSet::new), LottoNumbers::new));
     }
 }
