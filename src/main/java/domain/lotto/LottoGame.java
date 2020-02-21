@@ -15,7 +15,7 @@ public class LottoGame {
     private static final int COUNT_NUMBER = 1;
     private static final String ERROR_NULL_MESSAGE = "null값이 입력되었습니다.";
 
-    List<LottoNumbers> lottoGame;
+    private List<LottoNumbers> lottoGame;
 
     public LottoGame(List<LottoNumbers> lottoGame) {
         validateNullValue(lottoGame);
