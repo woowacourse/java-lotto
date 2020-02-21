@@ -16,7 +16,6 @@ public class Application {
 
         ResultsDTO resultsDTO = ResultCalculator.getResults(lottos, winningLotto);
 
-        System.out.println();
         OutputView.printResults(resultsDTO);
     }
 
