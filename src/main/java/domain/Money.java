@@ -1,7 +1,8 @@
 package domain;
 
 public class Money {
-    public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1_000;
+    public static final int NEGATIVE_CRITERIA_POINT = 0;
     private int amount;
 
     public Money(String inputMoney) {
@@ -30,7 +31,7 @@ public class Money {
     }
 
     private void checkNegativeAmount(final int amount) {
-        if (amount < 0) {
+        if (amount < NEGATIVE_CRITERIA_POINT) {
             throw new IllegalArgumentException("구매 금액은 음수일 수 없습니다.");
         }
     }
