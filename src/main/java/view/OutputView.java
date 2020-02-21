@@ -46,7 +46,7 @@ public class OutputView {
         StringBuilder sb = new StringBuilder();
         sb.append(rank.getHitCount());
         sb.append("개 일치");
-        if(rank.getBonus())
+        if(rank.hasBonus())
             sb.append(", 보너스 볼 일치");
         sb.append("(");
         sb.append(rank.getWinning());

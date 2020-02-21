@@ -2,11 +2,10 @@ package domain.lottonumber.generator;
 
 import domain.lottonumber.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class UserNumberGenerator implements NumberGenerator {
-    List<LottoNumber> numbers = new ArrayList<>();
+    SortedSet<LottoNumber> numbers = new TreeSet<>();
 
     public void init(List<Integer> inputNumbers) {
         numbers.clear();
@@ -16,7 +15,7 @@ public class UserNumberGenerator implements NumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> create() {
+    public SortedSet<LottoNumber> create() {
         return numbers;
     }
 }

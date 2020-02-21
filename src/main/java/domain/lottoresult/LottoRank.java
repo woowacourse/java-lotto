@@ -42,7 +42,7 @@ public enum LottoRank {
         return winning;
     }
 
-    public boolean getBonus() {
+    public boolean hasBonus() {
         return bonus;
     }
 }
