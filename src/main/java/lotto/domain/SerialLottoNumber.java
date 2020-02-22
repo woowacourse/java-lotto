@@ -3,30 +3,23 @@ package lotto.domain;
 import lotto.exceptions.LottoTicketIllegalArgumentException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SerialLottoNumber {
 	public static final int LOTTO_TICKET_SIZE = 6;
 
-	private final List<LottoNumber> lottoNumbers;
+	private final Set<LottoNumber> lottoNumbers;
 
 	public SerialLottoNumber(final List<LottoNumber> lottoNumbers) throws LottoTicketIllegalArgumentException {
+		this(new HashSet<>(lottoNumbers));
+	}
+
+	public SerialLottoNumber(final Set<LottoNumber> lottoNumbers) throws LottoTicketIllegalArgumentException {
 		checkIsSizeSix(lottoNumbers);
-		checkIsDuplicated(lottoNumbers);
 
-		this.lottoNumbers = lottoNumbers.stream()
-				.sorted(LottoNumber::compare)
-				.collect(Collectors.toUnmodifiableList());
+		this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
 	}
 
-	private void checkIsDuplicated(List<LottoNumber> lottoNumbers) {
-		Set<LottoNumber> distinctLottoNumbers = new HashSet<>(lottoNumbers);
-		if (distinctLottoNumbers.size() != lottoNumbers.size()) {
-			throw new LottoTicketIllegalArgumentException();
-		}
-	}
-
-	private void checkIsSizeSix(List<LottoNumber> lottoNumbers) {
+	private void checkIsSizeSix(Set<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
 			throw new LottoTicketIllegalArgumentException();
 		}
@@ -42,8 +35,8 @@ public class SerialLottoNumber {
 				.count();
 	}
 
-	public List<LottoNumber> getLottoNumbers() {
-		return Collections.unmodifiableList(lottoNumbers);
+	public Set<LottoNumber> getLottoNumbers() {
+		return Collections.unmodifiableSet(lottoNumbers);
 	}
 
 	@Override

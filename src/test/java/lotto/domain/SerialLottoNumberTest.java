@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,9 +27,9 @@ public class SerialLottoNumberTest {
 
 		// then
 		int[] sortedInput = {1, 3, 5, 6, 10, 11};
-		List<LottoNumber> expected = Arrays.stream(sortedInput)
+		Set<LottoNumber> expected = Arrays.stream(sortedInput)
 				.mapToObj(LottoNumber::new)
-				.collect(Collectors.toList());
+				.collect(Collectors.toSet());
 
 		Assertions.assertThat(lottoTicket.getLottoNumbers())
 				.isEqualTo(expected);
