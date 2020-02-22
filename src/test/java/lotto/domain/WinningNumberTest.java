@@ -1,24 +1,37 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import lotto.exceptions.LottoNumberDuplicatedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.exceptions.LottoNumberDuplicatedException;
+class WinningNumberTest {
+    private Lotto winningNumber;
 
-public class WinningNumberTest {
-	@Test
-	public void initWinningNumberTest() {
-		Lotto winningNumber = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		BonusNumber bonusNumber = new BonusNumber(7);
-		BonusNumber duplicatedBonusNumber = new BonusNumber(4);
+    @BeforeEach
+    void setUp() {
+        winningNumber = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
 
-		assertThat(new WinningNumber(winningNumber, bonusNumber)).isNotNull();
 
-		assertThatThrownBy(() -> new WinningNumber(winningNumber, duplicatedBonusNumber))
-			.isInstanceOf(LottoNumberDuplicatedException.class)
-			.hasMessageContaining("중복");
-	}
+    @Test
+    void initWinningNumberTest() {
+        BonusNumber bonusNumber = new BonusNumber(7);
+
+        assertThat(new WinningNumber(winningNumber, bonusNumber)).isNotNull();
+    }
+
+    @Test
+    void initExceptionWinningNumberTest() {
+        BonusNumber duplicatedBonusNumber = new BonusNumber(4);
+
+        assertThatThrownBy(() -> new WinningNumber(winningNumber, duplicatedBonusNumber))
+                .isInstanceOf(LottoNumberDuplicatedException.class)
+                .hasMessageContaining("중복");
+    }
+
 }
