@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -28,7 +29,7 @@ public class LottoResults {
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		Arrays.stream(LottoRank.values())
 				.forEach(rank -> lottoResults.putIfAbsent(rank, DEFAULT_COUNT));
-		return lottoResults;
+		return Collections.unmodifiableMap(lottoResults);
 	}
 
 	public long getRankCount(LottoRank lottoRank) {
