@@ -8,7 +8,7 @@ public class LottoTicketFactoryTest {
     void 팩토리_생성_테스트() {
         LottoTicket lottoTicket = LottoTicketFactory.createLottoNumbers(new TestLottoGenerator());
         for(int i = 1; i<= 6; i++) {
-            Assertions.assertThat(lottoTicket.contains(LottoNumber.of(i))).isTrue();
+            Assertions.assertThat(lottoTicket.contains(LottoNumberFactory.getInstance(i))).isTrue();
         }
     }
 }

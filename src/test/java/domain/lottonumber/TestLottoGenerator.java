@@ -12,7 +12,7 @@ public class TestLottoGenerator implements LottoGenerator {
 
     public TestLottoGenerator() {
         for (int i = 1; i <= 6; i++) {
-            numbers.add(LottoNumber.of(i));
+            numbers.add(LottoNumberFactory.getInstance(i));
         }
     }
 
@@ -21,7 +21,7 @@ public class TestLottoGenerator implements LottoGenerator {
             throw new IllegalArgumentException("null값은 입력할 수 없습니다.");
         }
         for (int number : values) {
-            numbers.add(LottoNumber.of(number));
+            numbers.add(LottoNumberFactory.getInstance(number));
         }
     }
 

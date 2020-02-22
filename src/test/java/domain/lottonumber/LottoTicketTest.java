@@ -11,15 +11,15 @@ public class LottoTicketTest {
     @Test
     void 생성_테스트() {
         SortedSet<LottoNumber> numbers = new TreeSet(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+                LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(2), LottoNumberFactory.getInstance(3),
+                LottoNumberFactory.getInstance(4), LottoNumberFactory.getInstance(5), LottoNumberFactory.getInstance(6)));
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        Assertions.assertThat(lottoTicket.contains(LottoNumber.of(1))).isTrue();
-        Assertions.assertThat(lottoTicket.contains(LottoNumber.of(2))).isTrue();
-        Assertions.assertThat(lottoTicket.contains(LottoNumber.of(3))).isTrue();
-        Assertions.assertThat(lottoTicket.contains(LottoNumber.of(4))).isTrue();
-        Assertions.assertThat(lottoTicket.contains(LottoNumber.of(5))).isTrue();
-        Assertions.assertThat(lottoTicket.contains(LottoNumber.of(6))).isTrue();
+        Assertions.assertThat(lottoTicket.contains(LottoNumberFactory.getInstance(1))).isTrue();
+        Assertions.assertThat(lottoTicket.contains(LottoNumberFactory.getInstance(2))).isTrue();
+        Assertions.assertThat(lottoTicket.contains(LottoNumberFactory.getInstance(3))).isTrue();
+        Assertions.assertThat(lottoTicket.contains(LottoNumberFactory.getInstance(4))).isTrue();
+        Assertions.assertThat(lottoTicket.contains(LottoNumberFactory.getInstance(5))).isTrue();
+        Assertions.assertThat(lottoTicket.contains(LottoNumberFactory.getInstance(6))).isTrue();
     }
 
     @Test
@@ -34,7 +34,7 @@ public class LottoTicketTest {
     void 인자가_6개가_아니면_예외처리(int value) {
         SortedSet<LottoNumber> lottoNumbers = new TreeSet<>();
         for (int i = 0; i < value; i++) {
-            lottoNumbers.add(LottoNumber.of(i + 1));
+            lottoNumbers.add(LottoNumberFactory.getInstance(i + 1));
         }
         Assertions.assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -44,11 +44,11 @@ public class LottoTicketTest {
     @Test
     void 비교_테스트() {
         SortedSet<LottoNumber> numbers = new TreeSet(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+                LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(2), LottoNumberFactory.getInstance(3),
+                LottoNumberFactory.getInstance(4), LottoNumberFactory.getInstance(5), LottoNumberFactory.getInstance(6)));
         SortedSet<LottoNumber> numbers2 = new TreeSet(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(9), LottoNumber.of(45), LottoNumber.of(8)));
+                LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(2), LottoNumberFactory.getInstance(3),
+                LottoNumberFactory.getInstance(9), LottoNumberFactory.getInstance(45), LottoNumberFactory.getInstance(8)));
         LottoTicket lottoTicket = new LottoTicket(numbers);
         LottoTicket lottoTicket2 = new LottoTicket(numbers);
         LottoTicket lottoTicket3 = new LottoTicket(numbers2);
@@ -60,8 +60,8 @@ public class LottoTicketTest {
     @Test
     void 중복이_있으면_예외_처리() {
         SortedSet<LottoNumber> numbers = new TreeSet(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(1), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+                LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(3),
+                LottoNumberFactory.getInstance(4), LottoNumberFactory.getInstance(5), LottoNumberFactory.getInstance(6)));
         Assertions.assertThatThrownBy(() -> new LottoTicket(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("인자의 갯수가 올바르지 않습니다.");

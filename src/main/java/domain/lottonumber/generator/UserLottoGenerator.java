@@ -1,6 +1,7 @@
 package domain.lottonumber.generator;
 
 import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumberFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,7 +11,7 @@ public class UserLottoGenerator implements LottoGenerator {
 
     public void init(List<Integer> inputNumbers) {
         numbers = inputNumbers.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumberFactory::getInstance)
                 .collect(Collectors.toCollection(TreeSet::new)
                 );
     }
