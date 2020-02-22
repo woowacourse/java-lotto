@@ -9,11 +9,11 @@ public class LottoGame {
     public static void main(String[] args) {
         int lottoCount = purchaseLotto();
 
-        LottoDummy lottoDummy = createLottoDummy(lottoCount);
+        LottoTickets lottoTickets = createLottoTickets(lottoCount);
 
         WinningNumber winningNumber = inputWinningNumber();
 
-        LottoResult lottoResult = countWinningLottos(lottoDummy, winningNumber);
+        LottoResult lottoResult = countWinningLottos(lottoTickets, winningNumber);
 
         int profitRatio = calculateProfitRatio(lottoCount, lottoResult);
 
@@ -36,10 +36,10 @@ public class LottoGame {
         return inputPurchaseAmount();
     }
 
-    private static LottoDummy createLottoDummy(int lottoCount) {
-        LottoDummy lottoDummy = new LottoDummy(lottoCount);
-        OutputView.printLottoDummy(lottoDummy);
-        return lottoDummy;
+    private static LottoTickets createLottoTickets(int lottoCount) {
+        LottoTickets lottoTickets = new LottoTickets(lottoCount);
+        OutputView.printLottoTickets(lottoTickets);
+        return lottoTickets;
     }
 
     private static WinningNumber inputWinningNumber() {
@@ -51,9 +51,9 @@ public class LottoGame {
         return inputWinningNumber();
     }
 
-    private static LottoResult countWinningLottos(LottoDummy lottoDummy, WinningNumber winningNumber) {
+    private static LottoResult countWinningLottos(LottoTickets lottoTickets, WinningNumber winningNumber) {
         LottoResult lottoResult = new LottoResult();
-        lottoDummy.countWinningLotto(winningNumber, lottoResult);
+        lottoTickets.countWinningLotto(winningNumber, lottoResult);
         return lottoResult;
     }
 

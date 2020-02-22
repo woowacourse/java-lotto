@@ -19,8 +19,8 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다." + NEW_LINE, calculateCount);
     }
 
-    public static void printLottoDummy(LottoDummy lottoDummy) {
-        for (Lotto eachLotto : lottoDummy.getLottoDummy()){
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        for (Lotto eachLotto : lottoTickets.getLottoTickets()){
             printEachLotto(eachLotto);
         }
     }
