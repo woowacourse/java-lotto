@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Money {
+public final class Money {
 	private static final long UNIT = 1000;
 	private static final String MONEY_EXCEPTION_MESSAGE = String.format("금액을 %d원 단위로 입력해주세요.", UNIT);
 	private static final int PROFIT_PERCENTAGE = 100;

@@ -4,8 +4,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class LottoBall implements Comparable<LottoBall> {
+public final class LottoBall implements Comparable<LottoBall> {
 	private static final int MINIMUM_NUMBER = 1;
 	private static final int MAXIMUM_NUMBER = 45;
 	private static final Map<Integer, LottoBall> BALL_CACHE = new HashMap<>();
@@ -38,7 +39,7 @@ public class LottoBall implements Comparable<LottoBall> {
 		if (BALL_CACHE.containsKey(number)) {
 			return BALL_CACHE.get(number);
 		}
-		return new LottoBall(number);
+		throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE);
 	}
 
 	static Collection<LottoBall> values() {
@@ -48,6 +49,23 @@ public class LottoBall implements Comparable<LottoBall> {
 	@Override
 	public int compareTo(LottoBall that) {
 		return Integer.compare(this.number, that.number);
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+		if (object == null || getClass() != object.getClass()) {
+			return false;
+		}
+		LottoBall that = (LottoBall)object;
+		return this.number == that.number;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(number);
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package lotto.domain;
 
-public class LottoCount {
+import java.util.Objects;
+
+public final class LottoCount {
 	private static final int MINIMUM_LOTTO_COUNT = 1;
 	private static final String INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE = String.format("로또 구입 갯수는 최소 %d개 이상",
 		MINIMUM_LOTTO_COUNT);
@@ -28,6 +30,23 @@ public class LottoCount {
 			throw new IllegalArgumentException(INVALID_CURRENT_COUNT_VALUE_EXCEPTION_MESSAGE);
 		}
 		return lottoCount > currentCount;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+		if (object == null || getClass() != object.getClass()) {
+			return false;
+		}
+		LottoCount that = (LottoCount)object;
+		return this.lottoCount == that.lottoCount;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoCount);
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public enum MatchCount {
+public enum MatchNumberCount {
 	ZERO(0),
 	THREE(3),
 	FOUR(4),
@@ -9,7 +9,7 @@ public enum MatchCount {
 
 	private final int matchCount;
 
-	MatchCount(int matchCount) {
+	MatchNumberCount(int matchCount) {
 		this.matchCount = matchCount;
 	}
 
