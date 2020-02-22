@@ -22,6 +22,7 @@ public enum Rank {
 	SIXTH(new ArrayList<Integer>(Arrays.asList(0, 1, 2)), false, 0);
 
 	private static final int MATCH_COUNT_RELATED_TO_BONUS = 5;
+	private static final String CAN_NOT_GET_RANK_EXCEPTION_MESSAGE = "로또의 등수를 구할 수 없습니다.";
 
 	private List<Integer> matchCounts;
 	private boolean hasBonus; // TODO: 마지막까지도 안쓰이면 지우기
@@ -48,7 +49,7 @@ public enum Rank {
 		return Arrays.stream(Rank.values())
 				.filter(value -> value.matchCounts.contains(matchCount))
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("로또의 등수를 구할 수 없습니다."));
+				.orElseThrow(() -> new IllegalArgumentException(CAN_NOT_GET_RANK_EXCEPTION_MESSAGE));
 	}
 
 	public int getReward() {

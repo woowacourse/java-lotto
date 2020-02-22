@@ -37,7 +37,7 @@ public class LottoNumberTest {
 	@MethodSource("getWrongTestCase")
 	void of_잘못된_입력_예외처리 (int inputLottoNumber) {
 		assertThatThrownBy(() -> LottoNumber.of(inputLottoNumber))
-				.isInstanceOf(WrongLottoNumberException.class)
+				.isInstanceOf(InvalidLottoNumberException.class)
 				.hasMessage("유효한 로또 번호가 아닙니다.");
 	}
 

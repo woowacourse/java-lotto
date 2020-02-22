@@ -12,6 +12,7 @@ import java.util.Objects;
  * 날짜 : 2020/02/19
  */
 public class PaidLotto extends Lotto {
+	private static final String NULL_INPUT_EXCEPTION_MESSAGE = "매개변수가 null 입니다.";
 
 	public PaidLotto(final List<LottoNumber> inputLottoNumbers) {
 		super(inputLottoNumbers);
@@ -25,7 +26,7 @@ public class PaidLotto extends Lotto {
 	}
 
 	public int calculateMatchCount(WinningLotto winningLotto) {
-		Objects.requireNonNull(winningLotto, "매개변수가 null 입니다.");
+		Objects.requireNonNull(winningLotto, NULL_INPUT_EXCEPTION_MESSAGE);
 		return (int) winningLotto.getLottoNumbers()
 				.stream()
 				.filter(this::isContain)

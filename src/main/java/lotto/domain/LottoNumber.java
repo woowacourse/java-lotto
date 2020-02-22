@@ -12,6 +12,8 @@ import java.util.*;
  */
 public class LottoNumber implements Comparable<LottoNumber>{
 	private static final List<LottoNumber> CACHE;
+	private static final String INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE = "유효한 로또 번호가 아닙니다.";
+
 
 	private final int lottoNumber;
 
@@ -31,7 +33,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
 		return CACHE.stream()
 				.filter(value -> value.lottoNumber == lottoNumber)
 				.findFirst()
-				.orElseThrow(() -> new WrongLottoNumberException("유효한 로또 번호가 아닙니다."));
+				.orElseThrow(() -> new InvalidLottoNumberException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE));
 	}
 
 	public static List<LottoNumber> getCache() {

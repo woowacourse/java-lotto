@@ -12,13 +12,14 @@ import java.util.Objects;
  */
 public class MoneyForLotto {
 	private static final int LOTTO_PRICE = 1000;
+	private static final String MIN_PRICE_EXCEPTION_MESSAGE = "1000원 이상 입력해주세요.";
 
 	private final int moneyForLotto;
 
 	public MoneyForLotto(final Integer inputMoney) {
 		Objects.requireNonNull(inputMoney);
 		if (inputMoney < LOTTO_PRICE) {
-			throw new IllegalArgumentException("1000원 이상 입력해주세요.");
+			throw new IllegalArgumentException(MIN_PRICE_EXCEPTION_MESSAGE);
 		}
 		this.moneyForLotto = inputMoney;
 	}
