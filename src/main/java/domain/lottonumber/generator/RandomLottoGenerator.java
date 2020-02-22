@@ -12,7 +12,7 @@ public class RandomLottoGenerator implements LottoGenerator {
     private static final int LOTTO_UPPER_BOUND = 45;
 
     static {
-        numbers = IntStream.range(LOTTO_UNDER_BOUND, LOTTO_UPPER_BOUND + 1)
+        numbers = IntStream.rangeClosed(LOTTO_UNDER_BOUND, LOTTO_UPPER_BOUND)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }

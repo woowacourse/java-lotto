@@ -2,7 +2,7 @@ package view;
 
 import domain.Money;
 import domain.lottonumber.LottoNumber;
-import domain.lottonumber.LottoNumbers;
+import domain.lottonumber.LottoTicket;
 import domain.lottoresult.LottoRank;
 import domain.lottoresult.LottoResult;
 import domain.lottoresult.ResultCount;
@@ -27,10 +27,10 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printLottoNumbers(LottoNumbers lottoNumbers) {
+    public static void printLottoNumbers(LottoTicket lottoTicket) {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        sb.append(lottoNumbers.getLottoNumbers()
+        sb.append(lottoTicket.getLottoNumbers()
                 .stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(", "))

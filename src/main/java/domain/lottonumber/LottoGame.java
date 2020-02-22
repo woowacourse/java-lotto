@@ -11,14 +11,14 @@ import java.util.List;
  * LottoNumbers를 추가하는 메서드와 결과값 생성 메서드를 가진다.
  */
 public class LottoGame {
-    List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    List<LottoTicket> lottoNumbers = new ArrayList<>();
 
-    public void add(LottoNumbers lotto) {
+    public void add(LottoTicket lotto) {
         lottoNumbers.add(lotto);
     }
 
     public void makeResult(LottoResult lottoResult, LottoWinner lottoWinner) {
-        for (LottoNumbers lotto : lottoNumbers) {
+        for (LottoTicket lotto : lottoNumbers) {
             lottoResult.add(lottoWinner.createRank(lotto));
         }
     }
