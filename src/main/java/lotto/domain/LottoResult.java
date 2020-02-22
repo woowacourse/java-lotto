@@ -20,7 +20,7 @@ public class LottoResult {
 	public List<WinningType> getWinningKeys() {
 		return lottoResult.keySet()
 				.stream()
-				.filter((t) -> !t.isNONE())
+				.filter((t) -> !t.isNone())
 				.sorted()
 				.collect(Collectors.toUnmodifiableList());
 	}

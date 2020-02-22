@@ -28,11 +28,11 @@ public enum WinningType {
 				.orElse(NONE);
 	}
 
-	public boolean isBonusTRUE() {
+	public boolean isBonusTrue() {
 		return bonusRequirement == BonusRequirement.TRUE;
 	}
 
-	public boolean isNONE() {
+	public boolean isNone() {
 		return this == NONE;
 	}
 
