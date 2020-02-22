@@ -1,18 +1,26 @@
-package lotto.controller;
+package lotto;
 
-import lotto.model.*;
+import lotto.controller.LottoManager;
+import lotto.model.AutoTickets;
+import lotto.model.BonusBallNo;
+import lotto.model.LottoNumbers;
+import lotto.model.LottoResult;
+import lotto.model.Money;
+import lotto.model.WinNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class Lotto {
+import static spark.Spark.get;
 
-    public static void lotto() {
+public class LottoApplication {
+
+    public static void main(String[] args) {
         Money money = setMoney();
         AutoTickets autoTickets = getAutoTickets(money.getMoney() / 1000);
         WinNumbers winNumbers = getWinNumbers();
         BonusBallNo bonusBallNo = getBonusBallNo(winNumbers);
 
-        autoTickets.matchNumberResult(winNumbers, bonusBallNo);
+        LottoManager.lotto(autoTickets, winNumbers, bonusBallNo);
 
         printCorrectResults();
         OutputView.printYield(money.getYield());
