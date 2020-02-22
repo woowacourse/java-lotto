@@ -13,19 +13,16 @@ import lotto.exceptions.NotAllowedMoneyAmountException;
 public class MoneyTest {
 	@ParameterizedTest
 	@MethodSource("generateMoneyInput")
-	public void initTest(String moneyInput, boolean expected) {
+	public void initTest(int inputMoneyParsed) {
 		assertThatThrownBy(() -> {
-			Money money = new Money(moneyInput);
+			Money money = new Money(inputMoneyParsed);
 		}).isInstanceOf(NotAllowedMoneyAmountException.class)
 			.hasMessageContaining("자연수");
 	}
 
 	private static Stream<Arguments> generateMoneyInput() {
 		return Stream.of(
-			Arguments.of("a", false),
-			Arguments.of("-1", false),
-			Arguments.of(null, false),
-			Arguments.of("", false),
-			Arguments.of(" ", false));
+			Arguments.of(0),
+			Arguments.of(-10));
 	}
 }

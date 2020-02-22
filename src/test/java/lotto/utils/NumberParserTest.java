@@ -29,7 +29,7 @@ public class NumberParserTest {
 	@ParameterizedTest
 	@MethodSource("generateWrongInput")
 	@DisplayName("파싱 안되는것만 테스트")
-	public void wrongWinningNumberParseTest(String input) {
+	public void wrongWinningNumberParseTest(String input, boolean result) {
 		assertThatThrownBy(() -> NumberParser.winningNumberParse(input))
 			.isInstanceOf(NotNumberException.class)
 			.hasMessageContaining("숫자만 입력하세요");
@@ -37,9 +37,11 @@ public class NumberParserTest {
 
 	static Stream<Arguments> generateWrongInput() {
 		return Stream.of(
-			Arguments.of("1,2,3,4,5,6a"),
-			Arguments.of(""),
-			Arguments.of("1,,2,,3,,4")
+			Arguments.of("1,2,3,4,5,6a", false),
+			Arguments.of("1,,2,,3,,4", false),
+			Arguments.of("a", false),
+			Arguments.of("", false),
+			Arguments.of(" ", false)
 		);
 	}
 }

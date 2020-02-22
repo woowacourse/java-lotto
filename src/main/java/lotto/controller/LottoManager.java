@@ -6,23 +6,22 @@ import java.util.stream.IntStream;
 
 import lotto.domain.Lotto;
 import lotto.domain.Money;
-import lotto.utils.LottoNumberGenerator;
+import lotto.utils.NumberGenerator;
 
 public class LottoManager {
-	private static final int LOTTO_PRICE = 1000;
-	private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+	private static final Money LOTTO_PRICE = new Money(1_000);
 
 	public static int calculateLottoAmount(Money money) {
-		return money.getMoney() / LOTTO_PRICE;
+		return money.getQuotient(LOTTO_PRICE);
 	}
 
-	public static Lotto generateSingleLotto() {
+	public static Lotto generateSingleLotto(NumberGenerator lottoNumberGenerator) {
 		return new Lotto(lottoNumberGenerator.generate());
 	}
 
-	public static List<Lotto> generateLottoByAmount(int amount) {
+	public static List<Lotto> generateLottoByAmount(int amount, NumberGenerator lottoNumberGenerator) {
 		return IntStream.range(0, amount)
-			.mapToObj(x -> generateSingleLotto())
+			.mapToObj(x -> generateSingleLotto(lottoNumberGenerator))
 			.collect(Collectors.toList());
 	}
 }

@@ -3,16 +3,16 @@ package lotto.domain;
 import java.util.stream.Stream;
 
 public enum Rank {
-	FIRST(6, 2_000_000_000),
-	SECOND(5, 30_000_000),
-	THIRD(5, 1_500_000),
-	FOURTH(4, 50_000),
-	FIFTH(3, 5_000);
+	FIRST(6, new Money(2_000_000_000)),
+	SECOND(5, new Money(30_000_000)),
+	THIRD(5, new Money(1_500_000)),
+	FOURTH(4, new Money(50_000)),
+	FIFTH(3, new Money(5_000));
 
 	private int hitCount;
-	private int reward;
+	private Money reward;
 
-	Rank(int hitCount, int reward) {
+	Rank(int hitCount, Money reward) {
 		this.hitCount = hitCount;
 		this.reward = reward;
 	}
@@ -38,7 +38,7 @@ public enum Rank {
 		return hitCount;
 	}
 
-	public int getReward() {
+	public Money getReward() {
 		return reward;
 	}
 }

@@ -9,28 +9,14 @@ import lotto.domain.WinningNumber;
 
 public class RankCalculator {
 	public static List<Rank> calculateMultiple(List<Lotto> lottos, WinningNumber winningNumber) {
-		final List<Integer> winningNumbers = winningNumber.getWinningNumber().getNumbers();
-		final int bonusNumber = winningNumber.getBonusNumber().getBonusNumber();
-
 		return lottos.stream()
-			.map(x -> calculateSingle(x, winningNumbers, bonusNumber))
+			.map(x -> calculateSingle(x, winningNumber))
 			.collect(Collectors.toList());
 	}
 
-	public static Rank calculateSingle(Lotto lotto, List<Integer> winningNumbers, int bonusNumber) {
-		int hitNumber = countHitNumber(lotto, winningNumbers);
-		boolean bonusNumberExist = hasBonusNumber(lotto, bonusNumber);
+	public static Rank calculateSingle(Lotto lotto, WinningNumber winningNumber) {
+		int hitNumber = winningNumber.countHitNumber(lotto);
+		boolean bonusNumberExist = winningNumber.hasBonusNumber(lotto);
 		return Rank.getRank(hitNumber, bonusNumberExist);
-	}
-
-	private static boolean hasBonusNumber(Lotto lotto, int bonusNumber) {
-		return lotto.getNumbers().contains(bonusNumber);
-	}
-
-	private static int countHitNumber(Lotto lotto, List<Integer> winningNumbers) {
-		return (int)lotto.getNumbers()
-			.stream()
-			.filter(winningNumbers::contains)
-			.count();
 	}
 }

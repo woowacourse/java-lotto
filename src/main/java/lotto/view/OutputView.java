@@ -10,19 +10,24 @@ import lotto.domain.Money;
 import lotto.domain.Rank;
 
 public class OutputView {
+	private static final int PERCENTAGE_MULTIPLE = 100;
 	private static final String EMPTY_STRING = "";
-	private static final String EARNING_RATE_MESSAGE = "총 수익률은 %.3f %%입니다.";
+	private static final String EARNING_RATE_MESSAGE = "총 수익률은 %d %%입니다.";
 	private static final String SECOND_RANK_ADDITIONAL_MESSAGE = "보너스 볼 일치 ";
 	private static final String PURCHASED_LOTTO_MESSAGE = "개를 구매했습니다.";
 	private static final String NEW_LINE = "\n";
-	private static final String STATISTICS_FORMAT = "%d개 일치 %s%d원 - %d개%s";
+	private static final String STATISTICS_FORMAT = "%d개 일치 %s%s원 - %d개%s";
 
-	public static void showEarningRate(Money money, List<Rank> ranks) {
-		int sum = ranks.stream()
+	public static void showEarningRate(Money boughtLottoMoney, List<Rank> ranks) {
+		int earningRate = ranks.stream()
 			.filter(Objects::nonNull)
-			.mapToInt(Rank::getReward)
-			.sum();
-		System.out.printf(EARNING_RATE_MESSAGE, (double)sum / money.getMoney() * 100);
+			.map(Rank::getReward)
+			.reduce(Money::sum)
+			.map(sum -> sum.multiple(PERCENTAGE_MULTIPLE))
+			.map(sum -> sum.getQuotient(boughtLottoMoney))
+			.orElse(0);
+
+		System.out.printf(EARNING_RATE_MESSAGE, earningRate);
 	}
 
 	public static void showStatistics(List<Rank> ranks) {

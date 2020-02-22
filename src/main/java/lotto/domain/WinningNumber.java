@@ -6,9 +6,9 @@ public class WinningNumber {
 	private static final String LOTTO_NUMBER_DUPLICATED_MESSAGE = "보너스 넘버와 중복될수 없습니다.";
 
 	private Lotto winningNumber;
-	private BonusNumber bonusNumber;
+	private LottoNumber bonusNumber;
 
-	public WinningNumber(Lotto winningNumber, BonusNumber bonusNumber) {
+	public WinningNumber(Lotto winningNumber, LottoNumber bonusNumber) {
 		this.winningNumber = winningNumber;
 
 		if (bonusNumberDuplicatedWithWinningNumber(bonusNumber)) {
@@ -17,15 +17,15 @@ public class WinningNumber {
 		this.bonusNumber = bonusNumber;
 	}
 
-	private boolean bonusNumberDuplicatedWithWinningNumber(BonusNumber bonusNumber) {
-		return winningNumber.getNumbers().contains(bonusNumber.getBonusNumber());
+	private boolean bonusNumberDuplicatedWithWinningNumber(LottoNumber bonusNumber) {
+		return winningNumber.contains(bonusNumber);
 	}
 
-	public Lotto getWinningNumber() {
-		return winningNumber;
+	public int countHitNumber(Lotto lotto) {
+		return winningNumber.containCount(lotto);
 	}
 
-	public BonusNumber getBonusNumber() {
-		return bonusNumber;
+	public boolean hasBonusNumber(Lotto lotto) {
+		return lotto.contains(bonusNumber);
 	}
 }

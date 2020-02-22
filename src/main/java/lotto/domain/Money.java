@@ -10,9 +10,9 @@ public class Money {
 
 	private int money;
 
-	public Money(String money) {
+	public Money(int money) {
 		try {
-			this.money = Optional.of(Integer.parseInt(money))
+			this.money = Optional.of(money)
 				.filter(this::isNaturalNumber)
 				.orElseThrow(NumberFormatException::new);
 		} catch (NumberFormatException e) {
@@ -20,11 +20,24 @@ public class Money {
 		}
 	}
 
-	public int getMoney() {
-		return money;
-	}
-
 	private boolean isNaturalNumber(int money) {
 		return money > MIN_MONEY;
+	}
+
+	public int getQuotient(Money money) {
+		return this.money / money.money;
+	}
+
+	public Money sum(Money money) {
+		return new Money(this.money + money.money);
+	}
+
+	public Money multiple(int operand) {
+		return new Money(this.money * operand);
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(money);
 	}
 }
