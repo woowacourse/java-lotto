@@ -3,17 +3,17 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.domain.exception.InvalidLottoNumberException;
 
 public class LottoNumberTest {
-	@Test
+	@ParameterizedTest
 	@DisplayName("로또 번호 범위가 정상인 경우")
-	void of() {
-		assertThat(LottoNumber.of(3)).isInstanceOf(LottoNumber.class);
+	@ValueSource(ints = {1, 22, 23, 24, 45})
+	void of(int actual) {
+		assertThat(LottoNumber.of(actual)).isInstanceOf(LottoNumber.class);
 	}
 
 	@ParameterizedTest
