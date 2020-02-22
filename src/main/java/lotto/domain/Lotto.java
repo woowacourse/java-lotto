@@ -14,38 +14,40 @@ import java.util.stream.Collectors;
 public class Lotto {
 	public static final int LOTTO_LENGTH = 6;
 
-	protected final List<LottoNumber> lottoNumbers;
+	protected final Set<LottoNumber> lottoNumbers;
 
 	public Lotto(final List<LottoNumber> inputLottoNumbers) {
-		validateLottoNumbers(inputLottoNumbers);
-		this.lottoNumbers = inputLottoNumbers.stream()
-				.sorted(Comparator.comparing(LottoNumber::getLottoNumber))
-				.collect(Collectors.toList());
-	}
-
-	private void validateLottoNumbers(final List<LottoNumber> inputLottoNumbers) {
 		Objects.requireNonNull(inputLottoNumbers, "입력이 null 입니다.");
-		validateEmptyInput(inputLottoNumbers);
-		validateInputLength(inputLottoNumbers);
+		this.lottoNumbers = inputLottoNumbers.stream()
+				.collect(
+						Collectors.toCollection(
+								() -> new TreeSet<>((Comparator.comparing(LottoNumber::getLottoNumber)))
+						)
+				);
+		validateLottoNumbers(inputLottoNumbers);
+	}
+
+	private void validateLottoNumbers(List<LottoNumber> inputLottoNumbers) {
+		validateEmptyInput();
 		validateDuplicatedInput(inputLottoNumbers);
+		validateInputLength();
 	}
 
-	private void validateDuplicatedInput(final List<LottoNumber> inputLottoNumbers) {
-		Set<LottoNumber> deDuplicatedLottoNumbers = new HashSet<>(inputLottoNumbers);
-		if (deDuplicatedLottoNumbers.size() != inputLottoNumbers.size()) {
-			throw new IllegalArgumentException("입력 리스트에 중복이 있습니다.");
+	private void validateEmptyInput() {
+		if (lottoNumbers.isEmpty()) {
+			throw new IllegalArgumentException("로또번호가 입력되지 않았습니다.");
 		}
 	}
 
-	private void validateInputLength(final List<LottoNumber> inputLottoNumbers) {
-		if (inputLottoNumbers.size() != LOTTO_LENGTH) {
-			throw new IllegalArgumentException("입력 리스트의 길이가 6이어야 합니다.");
+	private void validateDuplicatedInput(List<LottoNumber> inputLottoNumbers) {
+		if (lottoNumbers.size() != inputLottoNumbers.size()) {
+			throw new IllegalArgumentException("입력 로또번호에 중복이 있습니다.");
 		}
 	}
 
-	private void validateEmptyInput(final List<LottoNumber> inputLottoNumbers) {
-		if (inputLottoNumbers.isEmpty()) {
-			throw new IllegalArgumentException("리스트에 요소가 없습니다.");
+	private void validateInputLength() {
+		if (lottoNumbers.size() != LOTTO_LENGTH) {
+			throw new IllegalArgumentException("입력 로또번호는 6개가 입력되어야 합니다.");
 		}
 	}
 
@@ -54,7 +56,7 @@ public class Lotto {
 				.anyMatch(value -> value == lottoNumber);
 	}
 
-	public List<LottoNumber> getLottoNumbers() {
+	public Set<LottoNumber> getLottoNumbers() {
 		return this.lottoNumbers;
 	}
 }

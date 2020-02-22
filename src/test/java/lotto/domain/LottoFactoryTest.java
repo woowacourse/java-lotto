@@ -52,6 +52,6 @@ public class LottoFactoryTest {
 		assertThatThrownBy(() -> {
 			LottoFactory.createLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers);
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("입력 리스트에 중복이 있습니다.");
+				.hasMessage("입력 로또번호에 중복이 있습니다.");
 	}
 }

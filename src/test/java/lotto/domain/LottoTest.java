@@ -50,7 +50,7 @@ public class LottoTest {
 	void Lotto_빈_리스트_예외처리(List<LottoNumber> input) {
 		assertThatThrownBy(() -> new Lotto(input))
 				.isInstanceOfAny(IllegalArgumentException.class)
-				.hasMessage("리스트에 요소가 없습니다.");
+				.hasMessage("로또번호가 입력되지 않았습니다.");
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class LottoTest {
 
 		assertThatThrownBy(() -> new Lotto(inputLengthNotEnough))
 				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("입력 리스트의 길이가 6이어야 합니다.");
+				.hasMessage("입력 로또번호는 6개가 입력되어야 합니다.");
 	}
 
 	@Test
@@ -83,13 +83,13 @@ public class LottoTest {
 						LottoNumber.of(22),
 						LottoNumber.of(20),
 						LottoNumber.of(44),
-						LottoNumber.of(3)
+						LottoNumber.of(7)
 				)
 		);
 
 		assertThatThrownBy(() -> new Lotto(inputLengthOverSix))
 				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("입력 리스트의 길이가 6이어야 합니다.");
+				.hasMessage("입력 로또번호는 6개가 입력되어야 합니다.");
 	}
 
 	@Test
@@ -107,6 +107,6 @@ public class LottoTest {
 
 		assertThatThrownBy(() -> new Lotto(overlappedInput))
 				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("입력 리스트에 중복이 있습니다.");
+				.hasMessage("입력 로또번호에 중복이 있습니다.");
 	}
 }
