@@ -37,6 +37,14 @@ public class Money {
         return new LottoCount(money / LOTTO_PRICE);
     }
 
+    public long multiply(int count) {
+        return (long) money * count;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

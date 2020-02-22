@@ -22,4 +22,13 @@ public class MoneyTest {
 	void getBuyMoney() {
 		assertThat(Money.getBuyMoney(new LottoCount(5))).isEqualTo(5000);
 	}
+
+	@DisplayName("금액 받아서 카운트만큼 곱해주는지 확인")
+	@Test
+	void getTotal() {
+		Money money = new Money(2_000_000_000);
+		long expected = 2_000_000_000 * 3L;
+
+		assertThat(money.multiply(3)).isEqualTo(expected);
+	}
 }

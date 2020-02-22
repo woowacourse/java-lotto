@@ -44,7 +44,7 @@ public class OutputView {
         if (lottoRank == LottoRank.SECOND) {
             System.out.print(BONUS_BALL_MESSAGE);
         }
-        System.out.printf(TOTAL_PRIZE_AND_COUNT_MESSAGE, lottoRank.getPrize(), count);
+        System.out.printf(TOTAL_PRIZE_AND_COUNT_MESSAGE, lottoRank.getMoney(), count);
     }
 
     public static void printExceptionMessage(String message) {
