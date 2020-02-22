@@ -5,11 +5,13 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.Ball;
 
 class StringUtilTest {
+	@DisplayName("하나의 문자열을 구분자를 기준으로 분리하는 기능 확인")
 	@Test
 	void splitNameTest() {
 		List<Ball> balls = Arrays.asList(Ball.valueOf(1), Ball.valueOf(2), Ball.valueOf(3));

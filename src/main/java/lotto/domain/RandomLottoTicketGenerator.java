@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RandomLottoTicketGenerator implements LottoTicketGenerator {
-
 	@Override
 	public LottoTicket create() {
 		return new LottoTicket(createRandomBalls());

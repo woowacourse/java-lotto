@@ -2,26 +2,21 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
-import lotto.domain.Ball;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketGenerator;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class LottoTicketGeneratorTest {
+	@DisplayName("로또 생성기를 통해 로또 티켓이 생성되는지 테스트")
+	@Test
+	void createLottoTest() {
+		LottoTicketGenerator lottoTicketGenerator = () -> LottoTicket.of(1, 12, 23, 4, 5, 6);
+		LottoTicket lottoTicket = lottoTicketGenerator.create();
+		List<Ball> balls = lottoTicket.getBalls();
 
-	@ParameterizedTest
-	@ValueSource(ints = {1, 12, 23, 4, 5, 6})
-	void makeLotto(int ball) {
-		LottoTicketGenerator lottoTicketGenerator = () -> {
-			List<Ball> balls = Arrays.asList(Ball.valueOf(1), Ball.valueOf(12), Ball.valueOf(23), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
-			return new LottoTicket(balls);
-		};
-		assertThat(lottoTicketGenerator.create().contains(Ball.valueOf(ball))).isTrue();
+		assertThat(balls).containsExactly(Ball.valueOf(1), Ball.valueOf(12), Ball.valueOf(23),
+			Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
 	}
 
 }

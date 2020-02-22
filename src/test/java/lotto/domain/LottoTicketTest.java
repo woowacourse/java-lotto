@@ -14,7 +14,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import lotto.util.StringUtil;
 
 public class LottoTicketTest {
-
 	@DisplayName("로또 중복 생성 불가 테스트")
 	@Test
 	void makeLottoDuplication() {
@@ -35,22 +34,19 @@ public class LottoTicketTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1,true", "19,false"})
 	void hasBall(int ballNo, boolean expected) {
-		List<Ball> balls = Arrays.asList(Ball.valueOf(1), Ball.valueOf(2), Ball.valueOf(3), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
-		LottoTicket lottoTicket = new LottoTicket(balls);
+		LottoTicket lottoTicket = LottoTicket.of(1, 2, 3, 4, 5, 6);
 		assertThat(lottoTicket.contains(Ball.valueOf(ballNo))).isEqualTo(expected);
 	}
 
 	@DisplayName("보내준 로또와 얼마나 일치하는지 확인")
 	@Test
 	void hasLottoBall() {
-		List<Ball> balls = Arrays.asList(Ball.valueOf(1), Ball.valueOf(2), Ball.valueOf(3), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
-		LottoTicket lottoTicket = new LottoTicket(balls);
-		List<Ball> balls2 = Arrays.asList(Ball.valueOf(1), Ball.valueOf(12), Ball.valueOf(7), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
-		LottoTicket lottoTicket2 = new LottoTicket(balls2);
+		LottoTicket lottoTicket = LottoTicket.of(1, 2, 3, 4, 5, 6);
+		LottoTicket lottoTicket2 = LottoTicket.of(1, 12, 7, 4, 5, 6);
 		assertThat(lottoTicket.findMatchingBall(lottoTicket2)).isEqualTo(4);
 	}
 
-	@DisplayName("부적합한 번호 문자열 입력시 로또 발급 실패")
+	@DisplayName("부적합한 번호 자열 입력시 로또 발급 실패")
 	@ParameterizedTest
 	@ValueSource(strings = {"1, 2, 3, 4, 5, ", "1, 2, 3, 4, 5, 6.", "1, 2, 3, 4, 5"})
 	void constructFailByRawNumber(String rawNumbers) {
@@ -62,6 +58,35 @@ public class LottoTicketTest {
 	@Test
 	void constructByStrings() {
 		LottoTicket lottoTicket = LottoTicket.of("1", "2", "3", "4", "5", "6");
+		List<Ball> balls = lottoTicket.getBalls();
+		assertThat(balls).containsExactly(Ball.valueOf(1), Ball.valueOf(2), Ball.valueOf(3), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
+	}
+
+	@DisplayName("부족한 번호 갯수 정수 인자 입력시 로또 발급 실패")
+	@Test
+	void failToConstructByNotEnoughSizeNumbers() {
+		assertThatThrownBy(() -> LottoTicket.of(1, 2, 3, 4, 5))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("과도한 번호 갯수 정수 인자 입력시 로또 발급 실패")
+	@Test
+	void failToConstructByTooManySizeNumbers() {
+		assertThatThrownBy(() -> LottoTicket.of(1, 2, 3, 4, 5, 6, 7))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("과도한 번호 갯수 정수 인자 입력시 로또 발급 실패")
+	@Test
+	void failToConstructByDuplicatedNumbers() {
+		assertThatThrownBy(() -> LottoTicket.of(1, 2, 3, 4, 5, 5))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("정수형 목록으로 로또 발급 기능 테스트")
+	@Test
+	void constructByInts() {
+		LottoTicket lottoTicket = LottoTicket.of(1, 2, 3, 4, 5, 6);
 		List<Ball> balls = lottoTicket.getBalls();
 		assertThat(balls).containsExactly(Ball.valueOf(1), Ball.valueOf(2), Ball.valueOf(3), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
 	}

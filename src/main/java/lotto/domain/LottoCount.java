@@ -13,14 +13,14 @@ public class LottoCount {
 		this.lottoCount = lottoCount;
 	}
 
-	public static LottoCount of(int lottoCount) {
-		return new LottoCount(lottoCount);
-	}
-
 	private void validateCount(int count) {
 		if (count < MINIMUM_LOTTO_COUNT) {
 			throw new IllegalArgumentException(INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE);
 		}
+	}
+
+	public static LottoCount valueOf(int lottoCount) {
+		return new LottoCount(lottoCount);
 	}
 
 	public boolean isNonFullCount(int currentCount) {

@@ -36,7 +36,7 @@ public class Money {
 	}
 
 	public LottoCount calculatePurchaseCount() {
-		return LottoCount.of((int)(money / UNIT));
+		return LottoCount.valueOf((int)(money / UNIT));
 	}
 
 	public Money multiply(long multiplier) {

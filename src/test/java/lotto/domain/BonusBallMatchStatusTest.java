@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 public class BonusBallMatchStatusTest {
-
 	@DisplayName("보너스볼을 가질 수 있는 경우)")
 	@ParameterizedTest
 	@EnumSource(value = BonusBallMatchStatus.class, names = {"INCLUDING_OR_NOT", "INCLUDING"})

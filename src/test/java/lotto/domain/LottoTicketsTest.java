@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketsTest {
-
 	@DisplayName("로또 묶음이 입력받은 로또들 가지고 있는지 테스트")
 	@Test
 	void makeLottos() {

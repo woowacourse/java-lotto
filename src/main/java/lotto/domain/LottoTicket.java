@@ -9,8 +9,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lotto.util.StringUtil;
-
 public class LottoTicket {
 	private static final String DUPLICATED_NUMBER_EXCEPTION_MESSAGE = "중복된 볼이 포함";
 	private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 갯수가 적절하지 않습니다.";
@@ -50,11 +48,16 @@ public class LottoTicket {
 	}
 
 	public static LottoTicket of(String ... lottoNumbers) {
-		List<Ball> collect = Arrays.stream(lottoNumbers)
+		return Arrays.stream(lottoNumbers)
 			.mapToInt(Integer::parseInt)
 			.mapToObj(Ball::valueOf)
-			.collect(Collectors.toList());
-		return new LottoTicket(collect);
+			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
+	}
+
+	static LottoTicket of(int ... lottoNumbers) {
+		return Arrays.stream(lottoNumbers)
+			.mapToObj(Ball::valueOf)
+			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
 	}
 
 	public boolean contains(Ball ball) {
