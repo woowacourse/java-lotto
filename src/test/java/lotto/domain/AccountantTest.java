@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 class AccountantTest {
     private LottoTickets lottoTickets;
+    private LottoResult lottoResult;
+    private LottoTicket winningTicket;
 
     @BeforeEach
     void setUp() {
@@ -26,13 +28,14 @@ class AccountantTest {
             sampleTickets.add(new LottoTicket(number));
         }
         lottoTickets = new LottoTickets(sampleTickets);
+        winningTicket = new LottoTicket(LottoTicketTest.WINNING_NUMBER);
+        lottoResult = LottoResult.create();
     }
 
     @Test
     @DisplayName("수익률이 정상적으로 계산되는지")
     void calculate() {
-        LottoTicket winningTicket = new LottoTicket(LottoTicketTest.WINNING_NUMBER);
-        lottoTickets.matchResult(winningTicket, LottoNumber.SEVEN);
-        assertThat(Accountant.calculate(Money.create("5000"))).isEqualTo("100.00");
+        lottoResult.match(lottoTickets, winningTicket, LottoNumber.SEVEN);
+        assertThat(Accountant.calculate(Money.create("5000"), lottoResult)).isEqualTo("100.00");
     }
 }
