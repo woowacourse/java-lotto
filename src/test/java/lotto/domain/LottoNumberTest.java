@@ -23,4 +23,12 @@ public class LottoNumberTest {
 	void of_범위에서_벗어나는_경우(int actual) {
 		assertThatExceptionOfType(InvalidLottoNumberException.class).isThrownBy(() -> LottoNumber.of(actual));
 	}
+
+	@ParameterizedTest
+	@DisplayName("숫자가 아닌 값을 입력한 경우")
+	@ValueSource(strings = {"a", "ab", "a1", "ab1", "1a", "1ab", "1a1", "1ab1"})
+	@SuppressWarnings("NonAsciiCharacters")
+	void of_숫자가_아닌_값을_입력한_경우(String actual) {
+		assertThatExceptionOfType(NumberFormatException.class).isThrownBy(() -> LottoNumber.of(actual));
+	}
 }
