@@ -33,6 +33,10 @@ public class PurchaseMoney {
 		return purchaseMoney / LOTTO_PRICE;
 	}
 
+	public double divideBy(double totalEarning) {
+		return totalEarning / purchaseMoney;
+	}
+
 	public int getPurchaseMoney() {
 		return purchaseMoney;
 	}
@@ -48,9 +52,5 @@ public class PurchaseMoney {
 	@Override
 	public int hashCode() {
 		return Objects.hash(purchaseMoney);
-	}
-
-	public double divideBy(double totalEarning) {
-		return totalEarning / purchaseMoney;
 	}
 }
