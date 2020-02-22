@@ -48,4 +48,8 @@ public class Money {
     public int change() {
         return amount - ticketQuantity() * TICKET_PRICE;
     }
+
+    public boolean changeExists() {
+        return change() != 0;
+    }
 }

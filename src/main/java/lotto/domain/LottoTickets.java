@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-    private static final int BONUS_CONDITION = 5;
     private static final String DELIMITER = System.lineSeparator();
+    private static final int BONUS_CONDITION = 5;
     public static final int DEFAULT_VALUE = 0;
 
     private List<LottoTicket> lottoTickets;

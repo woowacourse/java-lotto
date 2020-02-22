@@ -20,16 +20,14 @@ public class LottoTicket {
 
     private LottoTicket(final List<LottoNumber> lottoTicket) {
         validate(lottoTicket);
-        this.lottoTicket = Collections.unmodifiableList(lottoTicket);
+        this.lottoTicket = Collections.unmodifiableList(new ArrayList<>(lottoTicket));
     }
 
     public LottoTicket(String[] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : numbers) {
-            lottoNumbers.add(LottoNumber.find(number.trim()));
-        }
-        validate(lottoNumbers);
-        this.lottoTicket = lottoNumbers;
+        this(Arrays.stream(numbers)
+            .map(LottoNumber::find)
+            .collect(Collectors.toList())
+        );
     }
 
     private void validate(List<LottoNumber> lottoTicket) {
@@ -66,11 +64,11 @@ public class LottoTicket {
         }
     }
 
-    int compare(LottoTicket other) {
-        Set<LottoNumber> winnerSet = new HashSet<>(this.lottoTicket);
-        Set<LottoNumber> otherSet = new HashSet<>(other.lottoTicket);
-        winnerSet.retainAll(otherSet);
-        return winnerSet.size();
+    int compare(LottoTicket otherTicket) {
+        Set<LottoNumber> winner = new HashSet<>(this.lottoTicket);
+        Set<LottoNumber> other = new HashSet<>(otherTicket.lottoTicket);
+        winner.retainAll(other);
+        return winner.size();
     }
 
     boolean contains(LottoNumber lottoNumber) {

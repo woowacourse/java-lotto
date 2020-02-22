@@ -20,7 +20,7 @@ class MoneyTest {
     @DisplayName("정상적이지 않은 Money 값 입력 시 예외를 발생시키는지")
     void moneyUnder1000(String amount, String message) {
         assertThatThrownBy(() -> {
-            new Money(amount);
+            Money.create(amount);
         }).isInstanceOf(InvalidMoneyException.class);
     }
 

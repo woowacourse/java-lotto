@@ -17,6 +17,8 @@ class LottoTicketsTest {
     @BeforeEach
     void setUp() {
         String[][] numbers = {
+            LottoTicketTest.MATCH_SIX,
+            LottoTicketTest.MATCH_SIX,
             LottoTicketTest.MATCH_BONUS,
             LottoTicketTest.MATCH_FIVE,
         };
@@ -34,6 +36,7 @@ class LottoTicketsTest {
         Map<Rank, Integer> result = lottoTickets.matchResult(winningTicket, LottoNumber.SEVEN);
         assertThat(result.get(Rank.BONUS)).isEqualTo(1);
         assertThat(result.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
+        assertThat(result.get(Rank.FIRST)).isEqualTo(2);
     }
 
     @AfterEach
