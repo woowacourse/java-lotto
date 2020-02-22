@@ -18,7 +18,7 @@ public class LottoController {
 
 		WinningInformation winningInformation = createWinningInformation();
 
-		LottoResult lottoResult = LottoResultFactory.create(purchasedLottoTickets, winningInformation);
+		LottoResult lottoResult = new LottoResult(purchasedLottoTickets, winningInformation);
 		OutputView.printLottoResult(lottoResult);
 
 		OutputView.printEarningRate(lottoResult.calculateEarningRate(purchaseMoney));
