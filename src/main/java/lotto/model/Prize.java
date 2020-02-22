@@ -1,16 +1,14 @@
 package lotto.model;
 
-import java.util.HashMap;
-
 public class Prize {
     private static double prize = 0;
 
-    public static double sumPrize(HashMap<String, Integer> resultCount) {
-        prize += LottoResult.FIRST_GRADE.prizeResult(resultCount.get(LottoResult.FIRST_GRADE.getGrade()));
-        prize += LottoResult.SECOND_GRADE.prizeResult(resultCount.get(LottoResult.SECOND_GRADE.getGrade()));
-        prize += LottoResult.THIRD_GRADE.prizeResult(resultCount.get(LottoResult.THIRD_GRADE.getGrade()));
-        prize += LottoResult.FOURTH_GRADE.prizeResult(resultCount.get(LottoResult.FOURTH_GRADE.getGrade()));
-        prize += LottoResult.FIFTH_GRADE.prizeResult(resultCount.get(LottoResult.FIFTH_GRADE.getGrade()));
+    public static double sumPrize(LottoResult lottoResult) {
+        prize += LottoRank.FIRST.prizeResult(lottoResult.getKey(LottoRank.FIRST.getRank()));
+        prize += LottoRank.SECOND.prizeResult(lottoResult.getKey(LottoRank.SECOND.getRank()));
+        prize += LottoRank.THIRD.prizeResult(lottoResult.getKey(LottoRank.THIRD.getRank()));
+        prize += LottoRank.FOURTH.prizeResult(lottoResult.getKey(LottoRank.FOURTH.getRank()));
+        prize += LottoRank.FIFTH.prizeResult(lottoResult.getKey(LottoRank.FIFTH.getRank()));
         return prize;
     }
 

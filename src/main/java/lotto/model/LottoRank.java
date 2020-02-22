@@ -1,20 +1,20 @@
 package lotto.model;
 
-public enum LottoResult {
-    FIFTH_GRADE(3, 5000, "FIFTH"),
-    FOURTH_GRADE(4, 50000, "FOURTH"),
-    THIRD_GRADE(5, 150000, "THIRD"),
-    SECOND_GRADE(5, 30000000, "SECOND"),
-    FIRST_GRADE(6, 2000000000, "FIRST");
+public enum LottoRank {
+    FIFTH(3, 5000, "FIFTH"),
+    FOURTH(4, 50000, "FOURTH"),
+    THIRD(5, 150000, "THIRD"),
+    SECOND(5, 30000000, "SECOND"),
+    FIRST(6, 2000000000, "FIRST");
 
     private final int prize;
     private final int correct;
-    private final String grade;
+    private final String rank;
 
-    LottoResult(int correct, int prize, String grade) {
+    LottoRank(int correct, int prize, String rank) {
         this.correct = correct;
         this.prize = prize;
-        this.grade = grade;
+        this.rank = rank;
     }
 
     public double prizeResult(int count) {
@@ -29,7 +29,15 @@ public enum LottoResult {
         return correct;
     }
 
-    public String getGrade() {
-        return grade;
+    public String getRank() {
+        return rank;
+    }
+
+    public static boolean isCorrectNumberOverThree(int count){
+        return count >= FIFTH.correct;
+    }
+
+    public static boolean isCorrectNumberFive(int count) {
+        return count == THIRD.correct;
     }
 }

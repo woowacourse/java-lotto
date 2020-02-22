@@ -12,15 +12,15 @@ public class WinNumber {
     private final int LOTTO_NUMBER_LENGTH = 6;
     private final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
     private final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하셔야 합니다.";
-    private static List<Integer> winNumbers;
+    private List<Integer> winNumbers;
 
     public WinNumber(String winNumber) { // TODO : 생성자에서 예외처리를 해야 하는가, 입력단에서 예외처리를 해야 하는가.
         List<Integer> winningNumbers = makeWinNumbers(makeNumbers(winNumber));
-        isSizeSix(winNumbers);
+        isSizeSix(winningNumbers);
         winNumbers = winningNumbers;
     }
 
-    public static boolean contains(int inputNumber) {
+    public boolean contains(int inputNumber) {
         return winNumbers.contains(inputNumber);
     }
 
@@ -50,7 +50,7 @@ public class WinNumber {
         }
     }
 
-    public static List<Integer> getWinNumbers() {
+    public List<Integer> getWinNumbers() {
         return winNumbers;
     }
 }

@@ -30,7 +30,7 @@ public class Payment {
     }
 
     private void checkOverRange(int payment) {
-        if (payment < MINIMUM_PAYMENT || payment >= MAXINUM_PAYMENT) {
+        if (payment < MINIMUM_PAYMENT || payment > MAXINUM_PAYMENT) {
             throw new OverRangeException(OVER_RANGE_EXCEPTION_MESSAGE);
         }
     }
@@ -43,5 +43,9 @@ public class Payment {
 
     public int getPayment() {
         return payment;
+    }
+
+    public int getPaymentCount() {
+        return payment / PAYMENT_UNIT;
     }
 }

@@ -11,7 +11,8 @@ import static spark.Spark.get;
 
 public class Application {
     public static void main(String[] args) {
-            Lotto.lottoGame();
+        Lotto lotto = new Lotto();
+        lotto.lottoGame();
 //        get("/", (req, res) -> {
 //            Map<String, Object> model = new HashMap<>();
 //            return render(model, "index.html");

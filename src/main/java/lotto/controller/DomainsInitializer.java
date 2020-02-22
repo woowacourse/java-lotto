@@ -4,48 +4,34 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 public class DomainsInitializer {
-    public static final int INITIAL_NUMBER = 0;
+    private static final int INITIAL_NUMBER = 0;
 
-    public static void initialize(List<AutoNumber> autoNumbers, Map<String, Integer> resultCount) {
-        Payment payment = initializePayment();
-        OutputView.printLottoCount(payment.getPayment());
-        initializeResultCount(resultCount);
-        initializeAutoNumbers(autoNumbers, payment.getPayment());
-        OutputView.printAutoNumbers(autoNumbers);
-        initializeWinNumber();
-        initializeBonusNumber();
-    }
-
-    private static Payment initializePayment() {
+    public static Payment initializePayment() {
         OutputView.printinput();
         return new Payment(InputView.input());
     }
 
-    private static void initializeBonusNumber() {
+    public static BonusBall initializeBonusNumber(WinNumber winNumber) {
         OutputView.printInputBonusNumber();
-        new BonusBall(InputView.input());
+        return new BonusBall(winNumber, InputView.input());
     }
 
-    private static void initializeWinNumber() {
+    public static WinNumber initializeWinNumber() {
         OutputView.printInputWinNumber();
-        new WinNumber(InputView.input());
+        return new WinNumber(InputView.input());
     }
 
-    private static void initializeAutoNumbers(List<AutoNumber> autoNumbers, int tryCount) {
-        for (int i = 0; i < tryCount; i++) {
-            autoNumbers.add(new AutoNumber());
-        }
-    }
-
-    private static void initializeResultCount(Map<String, Integer> resultCount) {
-        resultCount.put(LottoRank.FIFTH.getRank(), INITIAL_NUMBER);
-        resultCount.put(LottoRank.FOURTH.getRank(), INITIAL_NUMBER);
-        resultCount.put(LottoRank.THIRD.getRank(), INITIAL_NUMBER);
-        resultCount.put(LottoRank.SECOND.getRank(), INITIAL_NUMBER);
-        resultCount.put(LottoRank.FIRST.getRank(), INITIAL_NUMBER);
+    public static LottoResult initializeResultCount() {
+        Map<String, Integer> lottoResult = new HashMap<>();
+        lottoResult.put(LottoRank.FIFTH.getRank(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.FOURTH.getRank(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.THIRD.getRank(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.SECOND.getRank(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.FIRST.getRank(), INITIAL_NUMBER);
+        return new LottoResult(lottoResult);
     }
 }

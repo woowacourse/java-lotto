@@ -8,10 +8,10 @@ public class BonusBall {
     private static final String IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE = "당첨번호와 중복되는 숫자가 있습니다.";
     private static int bonusball;
 
-    public BonusBall(String input) {
+    public BonusBall(WinNumber winNumber, String input) {
         isNumber(input);
         int bonusNumber = Integer.parseInt(input);
-        isContainsWinNumber(bonusNumber);
+        isContainsWinNumber(winNumber, bonusNumber);
         bonusball = bonusNumber;
     }
 
@@ -23,13 +23,13 @@ public class BonusBall {
         }
     }
 
-    private void isContainsWinNumber(int bonusNumber) {
-        if (WinNumber.contains(bonusNumber)) {
+    private void isContainsWinNumber(WinNumber winNumber,int bonusNumber) {
+        if (winNumber.contains(bonusNumber)) {
             throw new OverlapWinNumberException(IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
-    public static int getBonusNumber() {
+    public int getBonusNumber() {
         return bonusball;
     }
 }

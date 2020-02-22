@@ -23,4 +23,8 @@ public class AutoNumber {
     public List<Integer> getAutoNumber() {
         return autoNumber;
     }
+
+    public boolean contains(int bonusBall) {
+        return autoNumber.contains(bonusBall);
+    }
 }

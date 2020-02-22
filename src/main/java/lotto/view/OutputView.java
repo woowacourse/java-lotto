@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.AutoNumber;
+import lotto.model.AutoNumbers;
 
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class OutputView {
         System.out.println(count + LOTTO_COUNT_MESSAGE);
     }
 
-    public static void printAutoNumbers(List<AutoNumber> autoNumbers) {
-        for (AutoNumber autoNumber : autoNumbers) {
+    public static void printAutoNumbers(AutoNumbers autoNumbers) {
+        for (AutoNumber autoNumber : autoNumbers.getAutoNumbers()) {
             System.out.println(autoNumber.getAutoNumber());
         }
     }
