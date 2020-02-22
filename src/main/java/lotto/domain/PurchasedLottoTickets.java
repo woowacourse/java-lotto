@@ -12,6 +12,12 @@ public class PurchasedLottoTickets {
 		this.purchasedLottoTickets = Collections.unmodifiableList(purchasedLottoTickets);
 	}
 
+	public List<WinningType> findMatchingWinningTypesWith(WinningInformation winningInformation) {
+		return purchasedLottoTickets.stream()
+				.map(winningInformation::findMatchingWinningTypeWith)
+				.collect(Collectors.toUnmodifiableList());
+	}
+
 	public List<SerialLottoNumber> getPurchasedLottoTickets() {
 		return Collections.unmodifiableList(purchasedLottoTickets);
 	}
@@ -27,11 +33,5 @@ public class PurchasedLottoTickets {
 	@Override
 	public int hashCode() {
 		return Objects.hash(purchasedLottoTickets);
-	}
-
-	public List<WinningType> findMatchingWinningTypesWith(WinningInformation winningInformation) {
-		return purchasedLottoTickets.stream()
-				.map(winningInformation::findMatchingWinningTypeWith)
-				.collect(Collectors.toUnmodifiableList());
 	}
 }
