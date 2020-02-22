@@ -16,7 +16,7 @@ public class LottoController {
 				= PurchasedLottoTicketsFactory.create(purchaseMoney);
 		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 
-		WinningInformation winningInformation = createWinningLottoNumbers();
+		WinningInformation winningInformation = createWinningInformation();
 
 		LottoResult lottoResult = LottoResultFactory.create(purchasedLottoTickets, winningInformation);
 		OutputView.printLottoResult(lottoResult);
@@ -24,12 +24,12 @@ public class LottoController {
 		OutputView.printEarningRate(lottoResult.calculateEarningRate(purchaseMoney));
 	}
 
-	private static WinningInformation createWinningLottoNumbers() {
+	private static WinningInformation createWinningInformation() {
 		try {
 			return new WinningInformation(createWinningNumbers(), createBonusNumber());
 		} catch (WinningLottoNumbersIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
-			return createWinningLottoNumbers();
+			return createWinningInformation();
 		}
 	}
 
@@ -44,7 +44,7 @@ public class LottoController {
 
 	private static SerialLottoNumber createWinningNumbers() {
 		try {
-			return SerialLottoNumberFactory.create(InputView.inputWinningNumbers());
+			return WinningLottoNumbersFactory.create(InputView.inputWinningNumbers());
 		} catch (IllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return createWinningNumbers();
