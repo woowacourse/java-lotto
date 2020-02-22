@@ -1,56 +1,42 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import lotto.dto.LottoDto;
 
 public class Lotto {
-	private static final int LOTTO_SIZE = 6;
+	public static final int SIZE = 6;
 
-	private final List<Integer> lottoNumber;
+	private final LottoNumbers lottoNumbers;
 
-	public Lotto(final List<Integer> lottoNumber) {
-		validate(lottoNumber);
-		this.lottoNumber = lottoNumber;
+	public Lotto(final LottoNumbers lottoNumbers) {
+		validate(lottoNumbers);
+		this.lottoNumbers = lottoNumbers;
 	}
 
-	private void validate(List<Integer> lottoNumber) {
-		validateNullAndEmpty(lottoNumber);
-		validateSizeMismatch(lottoNumber);
-		validateDuplicateNumber(lottoNumber);
+	private void validate(LottoNumbers lottoNumbers) {
+		validateNull(lottoNumbers);
+		validateSizeMismatch(lottoNumbers);
 	}
 
-	private void validateNullAndEmpty(List<Integer> lottoNumber) {
-		if (lottoNumber == null || lottoNumber.isEmpty()) {
-			throw new IllegalArgumentException("null이나 빈 값은 들어올 수 없습니다!");
+	private void validateNull(LottoNumbers lottoNumbers) {
+		if (lottoNumbers == null) {
+			throw new IllegalArgumentException("null은 들어올 수 없습니다!");
 		}
 	}
 
-	private void validateSizeMismatch(List<Integer> lottoNumber) {
-		if (lottoNumber.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException("로또 번호는 " + LOTTO_SIZE + "개여야 합니다!");
-		}
-	}
-
-	private void validateDuplicateNumber(List<Integer> lottoNumber) {
-		if (lottoNumber.size() != new HashSet<>(lottoNumber).size()) {
-			throw new IllegalArgumentException("중복된 번호가 존재합니다!");
+	private void validateSizeMismatch(LottoNumbers lottoNumbers) {
+		if (lottoNumbers.size() != SIZE) {
+			throw new IllegalArgumentException("로또 번호는 " + SIZE + "개여야 합니다!");
 		}
 	}
 
 	public WinningPrize findLottoPrize(WinningNumber winningNumber) {
-		Set<Integer> overlapNumbers = new HashSet<>(lottoNumber);
-		overlapNumbers.addAll(winningNumber.getWinningNumber());
-
-		int matchCount = (lottoNumber.size() * 2) - overlapNumbers.size();
-		boolean bonusMatch = lottoNumber.contains(winningNumber.getBonusNumber());
+		int matchCount = lottoNumbers.matchCount(winningNumber.getWinningNumber());
+		boolean bonusMatch = lottoNumbers.contains(winningNumber.getBonusNumber());
 
 		return WinningPrize.of(matchCount, bonusMatch);
 	}
 
 	public LottoDto makeLottoDto() {
-		return new LottoDto(this.lottoNumber);
+		return new LottoDto(this.lottoNumbers);
 	}
 }

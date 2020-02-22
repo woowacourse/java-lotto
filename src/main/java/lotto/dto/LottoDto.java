@@ -1,15 +1,15 @@
 package lotto.dto;
 
-import java.util.List;
+import lotto.domain.LottoNumbers;
 
 public class LottoDto {
-	private final List<Integer> lottoNumber;
+	private final LottoNumbers lottoNumbers;
 
-	public LottoDto(List<Integer> lottoNumber) {
-		this.lottoNumber = lottoNumber;
+	public LottoDto(LottoNumbers lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
 	}
 
-	public List<Integer> getLottoNumber() {
-		return lottoNumber;
+	public LottoNumbers getLottoNumbers() {
+		return lottoNumbers;
 	}
 }
