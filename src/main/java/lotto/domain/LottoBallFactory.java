@@ -1,28 +1,42 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoBallFactory {
-    private static List<LottoBall> lottoBalls;
+    private static final int START_BALL_NUMBER = 1;
+    private static final int END_BALL_NUMBER = 45;
+
+    private static final List<LottoBall> LOTTO_BALLS;
 
     private LottoBallFactory() {
     }
 
     static {
-        lottoBalls = IntStream.rangeClosed(1, 45)
+        LOTTO_BALLS = IntStream.rangeClosed(START_BALL_NUMBER, END_BALL_NUMBER)
                 .mapToObj(LottoBall::new)
-                .collect(Collectors
-                        .toList());
+                .collect(Collectors.toList());
     }
 
-    public static List<LottoBall> getInstance() {
-        return lottoBalls;
+
+    public static void shuffle() {
+        Collections.shuffle(LOTTO_BALLS);
+    }
+
+    public static List<LottoBall> getInstance(int startIndex, int endIndex) {
+        List<LottoBall> lottoTicket = new ArrayList<>();
+
+        for (int i = startIndex; i < endIndex; i++) {
+            lottoTicket.add(LOTTO_BALLS.get(i));
+        }
+        return lottoTicket;
     }
 
     public static LottoBall findByLottoBall(int lottoBallNumber) {
-        return lottoBalls.stream()
+        return LOTTO_BALLS.stream()
                 .filter(x -> x.getLottoNumber() == lottoBallNumber)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);

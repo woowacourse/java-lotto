@@ -16,11 +16,11 @@ public class OutputView {
     }
 
     public static void printLottePieces(int lottoPieces) {
-        System.out.println(lottoPieces + "개를 구매했습니다.");
+        System.out.printf("%d개를 구매했습니다.", lottoPieces);
     }
 
     public static void printChangeMoney(int changeMoney) {
-        System.out.println("거스름돈은 " + changeMoney + "원 입니다.");
+        System.out.printf("거스름돈은 %d원 입니다.", changeMoney);
     }
 
     public static void printLottoTicket() {
@@ -66,6 +66,6 @@ public class OutputView {
     }
 
     public static void printEarningRate(EarningRate earningRate) {
-        System.out.printf("총 수익률은 %.1f%% 입니다.",earningRate.getEarningRate());
+        System.out.printf("총 수익률은 %.1f%% 입니다.", earningRate.getEarningRate());
     }
 }

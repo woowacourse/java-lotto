@@ -8,17 +8,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningBallsTest {
+public class WinningTicketTest {
 
     @Test
     void 로또번호와_당첨결과_비교() {
         int[] value = {1, 2, 3, 4, 5, 6};
         List<LottoBall> winningBallValues = Arrays.stream(value).mapToObj(LottoBall::new).collect(Collectors.toList());
-        WinningBalls winningBalls = new WinningBalls(winningBallValues, 7);
+        WinningTicket winningTicket = new WinningTicket(winningBallValues, 7);
 
         LottoTicket lottoTicket = new LottoTicket(winningBallValues);
 
-        Assertions.assertThat(winningBalls.hitLottoBalls(lottoTicket)).isEqualTo(6);
+        Assertions.assertThat(winningTicket.hitLottoBalls(lottoTicket)).isEqualTo(6);
     }
 
     @Test
@@ -35,8 +35,8 @@ public class WinningBallsTest {
                 .mapToObj(LottoBallFactory::findByLottoBall)
                 .collect(Collectors.toList());
 
-        WinningBalls winningBalls = new WinningBalls(winningBallValues, bonusBall);
+        WinningTicket winningTicket = new WinningTicket(winningBallValues, bonusBall);
 
-        Assertions.assertThat(winningBalls.hitBonusBall(new LottoTicket(lottoTicket))).isTrue();
+        Assertions.assertThat(winningTicket.hitBonusBall(new LottoTicket(lottoTicket))).isTrue();
     }
 }

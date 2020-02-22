@@ -20,7 +20,7 @@ class WinningRankTest {
             "1,2,3,4,44,45:FOURTH_RANK",
             "1,2,3,43,44,45:FIFTH_RANK",
             "1,2,40,41,42,43:NO_RANK"}, delimiter = ':')
-    void select_rank_test(String input,WinningRank winningRank) {
+    void select_rank_test(String input,WinningRank winningRankExpected) {
         String[] lottoTicketNumbers = input.split(",");
         int[] winningBallInputs = {1, 2, 3, 4, 5, 6};
         int bonus = 7;
@@ -31,9 +31,10 @@ class WinningRankTest {
         List<LottoBall> winningBallValues = Arrays.stream(winningBallInputs)
                 .mapToObj(LottoBallFactory::findByLottoBall)
                 .collect(Collectors.toList());
-        WinningBalls winningBalls = new WinningBalls(winningBallValues, bonus);
-        int correctCount = winningBalls.hitLottoBalls(new LottoTicket(lottoTicket));
-        boolean correctBonusNumber = winningBalls.hitBonusBall(new LottoTicket(lottoTicket));
-        Assertions.assertThat(winningRank).isEqualTo(WinningRank.determineRank(correctCount, correctBonusNumber));
+        WinningTicket winningTicket = new WinningTicket(winningBallValues, bonus);
+        int correctCount = winningTicket.hitLottoBalls(new LottoTicket(lottoTicket));
+        boolean correctBonusNumber = winningTicket.hitBonusBall(new LottoTicket(lottoTicket));
+
+        Assertions.assertThat(WinningRank.determineRank(correctCount, correctBonusNumber)).isEqualTo(winningRankExpected);
     }
 }

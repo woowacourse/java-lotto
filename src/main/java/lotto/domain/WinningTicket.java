@@ -1,30 +1,30 @@
 package lotto.domain;
 
-import lotto.Exception.DuplicationException;
-
 import java.util.Collections;
 import java.util.List;
 
-public class WinningBalls {
-    private final List<LottoBall> winningBalls;
+public class WinningTicket {
+    private static final String ERROR_ILLEGAL_ARGUMENT_EXCEPTION = "해당 볼이 중복되어 입력됐습니다. 당첨 번호를 다시 입력해주세요.";
+
+    private final List<LottoBall> winningTicket;
     private final LottoBall BonusBall;
 
-    public WinningBalls(List<LottoBall> winningBalls, int BonusBall) {
-        this.winningBalls = Collections.unmodifiableList(winningBalls);
+    public WinningTicket(List<LottoBall> winningTicket, int BonusBall) {
+        this.winningTicket = Collections.unmodifiableList(winningTicket);
         this.BonusBall = LottoBallFactory.findByLottoBall(BonusBall);
         validateWinningBallsWithDuplicatedBonusBall();
     }
 
     private void validateWinningBallsWithDuplicatedBonusBall() {
-        if (winningBalls.contains(this.BonusBall)) {
-            throw new DuplicationException("보너스 볼이 중복입니다. 당첨 번호를 다시 입력해주세요.");
+        if (winningTicket.contains(this.BonusBall)) {
+            throw new IllegalArgumentException(ERROR_ILLEGAL_ARGUMENT_EXCEPTION);
         }
     }
 
     public int hitLottoBalls(LottoTicket lottoTicket) {
         return (int) lottoTicket.getLottoTicket()
                 .stream()
-                .filter(winningBalls::contains)
+                .filter(winningTicket::contains)
                 .count();
     }
 

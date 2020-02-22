@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public enum WinningRank {
     FIFTH_RANK(5_000, 3, false),
-    FOURTH_RANK(50_000, 4, true),
+    FOURTH_RANK(50_000, 4, false),
     THIRD_RANK(1_500_000, 5, false),
-    SECOND_RANK(30_000_000, 5, false),
+    SECOND_RANK(30_000_000, 5, true),
     FIRST_RANK(2_000_000_000, 6, false),
     NO_RANK(0, 0, false);
 
@@ -22,10 +22,19 @@ public enum WinningRank {
 
     public static WinningRank determineRank(int correctNumber, boolean isBonusNumber) {
         return Arrays.stream(values())
-                .filter(result -> result.winningBallCount == correctNumber && result.isBonusBall == isBonusNumber)
+                .filter(result -> findRank(correctNumber, result)
+                        && determineSecondAndThird(isBonusNumber, result))
                 .findFirst()
                 .orElse(NO_RANK);
 
+    }
+
+    private static boolean findRank(int correctNumber, WinningRank result) {
+        return result.winningBallCount == correctNumber;
+    }
+
+    private static boolean determineSecondAndThird(boolean isBonusNumber, WinningRank result) {
+        return result.isBonusBall == isBonusNumber;
     }
 
 
@@ -35,9 +44,5 @@ public enum WinningRank {
 
     public int getWinningBallCount() {
         return winningBallCount;
-    }
-
-    public boolean isBonusBall() {
-        return isBonusBall;
     }
 }

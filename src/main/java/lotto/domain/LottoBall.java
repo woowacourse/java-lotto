@@ -5,12 +5,13 @@ import lotto.Exception.NumberOutOfRangeException;
 public class LottoBall implements Comparable<LottoBall> {
     private static final int MIN_BALL_NUMBER = 0;
     private static final int MAX_BALL_NUMBER = 45;
+    private static final String NUMBER_OUT_OF_RANGE_EXCEPTION = "로또 볼 범위를 벗어났습니다.";
 
     private int lottoNumber;
 
     public LottoBall(int lottoNumber) {
         if (lottoNumber < MIN_BALL_NUMBER || lottoNumber > MAX_BALL_NUMBER) {
-            throw new NumberOutOfRangeException("로또 볼 범위를 벗어났습니다.");
+            throw new NumberOutOfRangeException(NUMBER_OUT_OF_RANGE_EXCEPTION);
         }
         this.lottoNumber = lottoNumber;
     }

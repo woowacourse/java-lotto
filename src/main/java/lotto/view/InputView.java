@@ -2,8 +2,8 @@ package lotto.view;
 
 import lotto.domain.LottoBall;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningTicketFactory;
 import lotto.util.InputValidationUtil;
-import lotto.util.WinningBallsUtils;
 
 import java.util.List;
 import java.util.Scanner;
@@ -21,15 +21,15 @@ public class InputView {
         }
     }
 
-    public static List<LottoBall> InputWinningBalls() {
+    public static List<LottoBall> InputWinningTicket() {
         try {
             OutputView.printAnswerWinningBalls();
-            String winningBalls = scanner.nextLine();
-            WinningBallsUtils winningBallsUtils = new WinningBallsUtils(winningBalls);
-            return winningBallsUtils.getWinningBalls();
+            String winningTicket = scanner.nextLine();
+            WinningTicketFactory winningTicketFactory = new WinningTicketFactory(winningTicket);
+            return winningTicketFactory.getWinningTicket();
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return InputWinningBalls();
+            return InputWinningTicket();
         }
     }
 
