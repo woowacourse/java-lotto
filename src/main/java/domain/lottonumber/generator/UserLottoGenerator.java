@@ -3,15 +3,16 @@ package domain.lottonumber.generator;
 import domain.lottonumber.LottoNumber;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class UserLottoGenerator implements LottoGenerator {
-    SortedSet<LottoNumber> numbers = new TreeSet<>();
+    private SortedSet<LottoNumber> numbers;
 
     public void init(List<Integer> inputNumbers) {
-        numbers.clear();
-        for (int number : inputNumbers) {
-            numbers.add(LottoNumber.of(number));
-        }
+        numbers = inputNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toCollection(TreeSet::new)
+                );
     }
 
     @Override

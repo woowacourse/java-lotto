@@ -2,6 +2,8 @@ package domain.lottonumber;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 
@@ -27,22 +29,13 @@ public class LottoNumbersTest {
                 .hasMessage("null값이 입력되었습니다.");
     }
 
-    @Test
-    void 인자가_6개가_아니면_예외처리() {
+    @ParameterizedTest
+    @ValueSource(ints = {0, 5, 7})
+    void 인자가_6개가_아니면_예외처리(int value) {
         SortedSet<LottoNumber> lottoNumbers = new TreeSet<>();
-        Assertions.assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("인자의 갯수가 올바르지 않습니다.");
-        lottoNumbers.add(LottoNumber.of(1));
-        lottoNumbers.add(LottoNumber.of(2));
-        Assertions.assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("인자의 갯수가 올바르지 않습니다.");
-        lottoNumbers.add(LottoNumber.of(3));
-        lottoNumbers.add(LottoNumber.of(4));
-        lottoNumbers.add(LottoNumber.of(5));
-        lottoNumbers.add(LottoNumber.of(6));
-        lottoNumbers.add(LottoNumber.of(7));
+        for (int i = 0; i < value; i++) {
+            lottoNumbers.add(LottoNumber.of(i + 1));
+        }
         Assertions.assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("인자의 갯수가 올바르지 않습니다.");
