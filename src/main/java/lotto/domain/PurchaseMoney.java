@@ -6,8 +6,7 @@ import java.util.Objects;
 
 public class PurchaseMoney {
 	public static final int POSITIVE_THRESHOLD = 0;
-	private static final int DIVISOR = 1000;
-	private static final int REMAINDER = 0;
+	private static final int LOTTO_PRICE = 1000;
 
 	private final int purchaseMoney;
 
@@ -19,7 +18,7 @@ public class PurchaseMoney {
 	}
 
 	private void checkIsMultipleOfThousand(int purchaseMoney) {
-		if (purchaseMoney % DIVISOR != REMAINDER) {
+		if (purchaseMoney % LOTTO_PRICE != 0) {
 			throw new PurchaseMoneyIllegalArgumentException(purchaseMoney);
 		}
 	}
@@ -31,7 +30,7 @@ public class PurchaseMoney {
 	}
 
 	public int countPurchasedTickets() {
-		return purchaseMoney / DIVISOR;
+		return purchaseMoney / LOTTO_PRICE;
 	}
 
 	public int getPurchaseMoney() {
