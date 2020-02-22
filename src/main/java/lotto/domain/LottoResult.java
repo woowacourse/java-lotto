@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 	public static final int PERCENT_MULTIPLIER = 100;
+
 	private final Map<WinningType, Integer> lottoResult;
 
 	public LottoResult(final Map<WinningType, Integer> lottoResult) {
