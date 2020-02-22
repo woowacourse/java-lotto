@@ -15,7 +15,7 @@ public class SerialLottoNumber {
 		checkIsDuplicated(lottoNumbers);
 
 		this.lottoNumbers = lottoNumbers.stream()
-				.sorted(LottoNumber::compare)
+				.sorted(LottoNumber::compareTo)
 				.collect(Collectors.toUnmodifiableList());
 	}
 
