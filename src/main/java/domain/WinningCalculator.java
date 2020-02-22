@@ -7,7 +7,7 @@ public class WinningCalculator {
     private static final int INITIAL_COUNT = 0;
     private static final int HAS_BONUS = 5;
 
-    Map<PrizeType, Integer> prizeInfo;
+    private Map<PrizeType, Integer> prizeInfo;
 
     public WinningCalculator() {
         initializePrizeInfo();

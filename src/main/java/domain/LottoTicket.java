@@ -7,7 +7,7 @@ public class LottoTicket {
     private static final int MIN_LOTTO_NUMBER_RANGE = 1;
     private static final int MAX_LOTTO_NUMBER_RANGE = 45;
 
-    List<Integer> lottoTicket;
+    private List<Integer> lottoTicket;
 
     public LottoTicket(List<Integer> lottoTicket) {
         validateLottoTicketSize(lottoTicket);
