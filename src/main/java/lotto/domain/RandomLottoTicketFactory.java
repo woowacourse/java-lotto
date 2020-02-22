@@ -8,7 +8,7 @@ public class RandomLottoTicketFactory {
 	public static final int ZERO_INDEX = 0;
 	public static final int SIX_INDEX = 6;
 
-	public static SerialLottoNumber createLottoTicket() {
+	public static SerialLottoNumber create() {
 		List<LottoNumber> allLottoNumbers = new ArrayList<>(AllLottoNumbers.getAll());
 		Collections.shuffle(allLottoNumbers);
 
