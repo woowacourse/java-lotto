@@ -23,11 +23,11 @@ public class WinningLottoTest {
 	}
 
 	@Test
-	@DisplayName("로또 번호와 보너스가 겹칠 경우")
+	@DisplayName("로또 번호와 보너스 번가 겹칠 경우")
 	@SuppressWarnings("NonAsciiCharacters")
-	void constructor_로또_번호와_겹칠_경우() {
+	void constructor_로또_번호와_보너스_번호가_겹칠_경우() {
 		assertThatExceptionOfType(InvalidWinningLottoException.class).isThrownBy(
-				() -> new WinningLotto(lotto, LottoNumber.of(45))).withMessage("로또 번호와 보너스가 겹치면 안됩니다.");
+				() -> new WinningLotto(lotto, LottoNumber.of(45))).withMessage("로또 번호와 보너스 번호가 겹치면 안됩니다.");
 	}
 
 	@Test
