@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 class WinningRankTest {
@@ -21,19 +22,15 @@ class WinningRankTest {
             "5등_테스트 1,2,3,43,44,45 FIFTH_RANK",
             "미당첨_테스트 1,2,40,41,42,43 NO_RANK"}, delimiter = ' ')
     void select_rank_test( String header, String input, WinningRank winningRank) {
-        String[] lottoTicketNumbers = input.split(",");
-        int[] winningBallInputs = {1, 2, 3, 4, 5, 6};
+        String winningBallInputs = "1,2,3,4,5,6";
         int bonus = 7;
-
-        List<LottoBall> lottoTicket = Arrays.stream(lottoTicketNumbers)
-                .map(lottoTicketNumber -> LottoBallFactory.findByLottoBall(Integer.parseInt(lottoTicketNumber)))
-                .collect(Collectors.toList());
-        List<LottoBall> winningBallValues = Arrays.stream(winningBallInputs)
-                .mapToObj(LottoBallFactory::findByLottoBall)
-                .collect(Collectors.toList());
+        LottoBalls lottoBalls = new LottoBalls(input, winningBallInputs);
+        Set<LottoBall> lottoTicket = lottoBalls.generateLottoTicket();
+        List<LottoBall> winningBallValues = lottoBalls.generateWinningBalls();
         WinningBalls winningBalls = new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(bonus));
         int correctCount = winningBalls.hitLottoBalls(new LottoTicket(lottoTicket));
         boolean correctBonusNumber = winningBalls.hitBonusBall(new LottoTicket(lottoTicket));
+
         Assertions.assertThat(WinningRank.selectRank(correctCount, correctBonusNumber)).isEqualTo(winningRank);
     }
 }

@@ -6,7 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -17,7 +19,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 티켓에 로또 볼이 비어있을 경우 테스트")
     void throw_empty_lotto_ball_test() {
-        List<LottoBall> lottoTicket = new ArrayList<>();
+        Set<LottoBall> lottoTicket = new HashSet<>();
 
         assertThatThrownBy(()->new LottoTicket(lottoTicket))
                 .isInstanceOf(LottoTicketEmptyException.class);
@@ -26,9 +28,9 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 티켓이 제대로 생성되었을 경우 테스트")
     void not_empty_lotto_ball_test() {
-        List<LottoBall> lottoTicket = IntStream.rangeClosed(1,6)
+        Set<LottoBall> lottoTicket = IntStream.rangeClosed(1,6)
                 .mapToObj(LottoBall::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
         assertThatCode(() -> new LottoTicket(lottoTicket))
                 .doesNotThrowAnyException();
@@ -37,9 +39,9 @@ public class LottoTicketTest {
     @Test
     @DisplayName("7개 이상의 로또 볼이 생성되었을 경우 예외처리 테스트")
     void out_of_range_for_seven_test() {
-        List<LottoBall> lottoTicket = IntStream.rangeClosed(1, 7)
+        Set<LottoBall> lottoTicket = IntStream.rangeClosed(1, 7)
                 .mapToObj(LottoBall::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
         assertThatThrownBy(() -> new LottoTicket(lottoTicket)).isInstanceOf(NumberOutOfRangeException.class)
                 .hasMessage("7개의 숫자가 들어갔습니다.");

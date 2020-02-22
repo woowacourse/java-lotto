@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningBallsUtils {
-    private List<LottoBall> winningBalls;
+    private Set<LottoBall> winningBalls;
 
     public WinningBallsUtils(String input) {
         String[] winningBalls = input.split(",");
@@ -19,8 +19,7 @@ public class WinningBallsUtils {
         this.winningBalls = Arrays.stream(winningBalls)
                 .map(Integer::parseInt)
                 .map(LottoBallFactory::findByLottoBall)
-                .collect(Collectors.toList());
-        Collections.sort(this.winningBalls);
+                .collect(Collectors.toSet());
     }
 
     private void validateWinningBallsNumber(String[] winningBalls) {
@@ -43,6 +42,6 @@ public class WinningBallsUtils {
     }
 
     public List<LottoBall> getWinningBalls() {
-        return Collections.unmodifiableList(this.winningBalls);
+        return Collections.unmodifiableList(new ArrayList<>(this.winningBalls));
     }
 }

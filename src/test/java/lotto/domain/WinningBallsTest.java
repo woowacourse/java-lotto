@@ -4,8 +4,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningBallsTest {
@@ -14,10 +16,10 @@ public class WinningBallsTest {
     @DisplayName("자동 생성된 로또볼과 당첨 로또볼과 비교하는 테스트")
     void compare_lotto_ball_and_winning_ball() {
         int[] value = {1, 2, 3, 4, 5, 6};
-        List<LottoBall> winningBallValues = Arrays.stream(value).mapToObj(LottoBall::new).collect(Collectors.toList());
-        WinningBalls winningBalls = new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(7));
+        Set<LottoBall> lottoBalls = Arrays.stream(value).mapToObj(LottoBall::new).collect(Collectors.toSet());
+        WinningBalls winningBalls = new WinningBalls(new ArrayList<>(lottoBalls), LottoBallFactory.findByLottoBall(7));
 
-        LottoTicket lottoTicket = new LottoTicket(winningBallValues);
+        LottoTicket lottoTicket = new LottoTicket(lottoBalls);
 
         Assertions.assertThat(winningBalls.hitLottoBalls(lottoTicket)).isEqualTo(6);
     }
@@ -32,9 +34,9 @@ public class WinningBallsTest {
         List<LottoBall> winningBallValues = Arrays.stream(winningBallInputs)
                 .mapToObj(LottoBallFactory::findByLottoBall)
                 .collect(Collectors.toList());
-        List<LottoBall> lottoTicket = Arrays.stream(lottoTicketNumbers)
+        Set<LottoBall> lottoTicket = Arrays.stream(lottoTicketNumbers)
                 .mapToObj(LottoBallFactory::findByLottoBall)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
         WinningBalls winningBalls = new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(bonusBall));
 

@@ -2,9 +2,7 @@ package lotto.domain;
 
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoStore {
     private static final int MAX_LOTTO_BALL_COUNT = 6;
@@ -18,7 +16,7 @@ public class LottoStore {
     }
 
     private LottoTicket generateLottoTicket() {
-        List<LottoBall> lottoTicket = new ArrayList<>();
+        Set<LottoBall> lottoTicket = new TreeSet<>();
         for (int i = 0; i < MAX_LOTTO_BALL_COUNT; i++) {
             lottoTicket.add(LottoBallFactory.getInstance().get(i));
         }
