@@ -8,9 +8,9 @@ import java.util.Arrays;
 public enum LottoRank {
 	FIFTH(THREE, NO_MATTER, Money.valueOf(5_000)),
 	FOURTH(FOUR, NO_MATTER, Money.valueOf(50_000)),
-	THIRD(FIVE, NONE_INCLUDE, Money.valueOf(1_500_000)),
-	SECOND(FIVE, INCLUDE, Money.valueOf(30_000_000)),
-	FIRST(SIX, NONE_INCLUDE, Money.valueOf(2_000_000_000));
+	THIRD(FIVE, MUST_NOT_INCLUDE, Money.valueOf(1_500_000)),
+	SECOND(FIVE, MUST_INCLUDE, Money.valueOf(30_000_000)),
+	FIRST(SIX, MUST_NOT_INCLUDE, Money.valueOf(2_000_000_000));
 
 	private static final String THERE_IS_NON_RANK_EXCEPTION_MESSAGE = "꽝!";
 

@@ -6,8 +6,8 @@ import java.util.List;
 
 public enum IncludingBonusBallCondition {
 	NO_MATTER(Arrays.asList(true, false)),
-	INCLUDE(Collections.singletonList(true)),
-	NONE_INCLUDE(Collections.singletonList(false));
+	MUST_INCLUDE(Collections.singletonList(true)),
+	MUST_NOT_INCLUDE(Collections.singletonList(false));
 
 	private final List<Boolean> acceptableBonusConditions;
 
