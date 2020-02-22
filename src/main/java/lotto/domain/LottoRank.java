@@ -1,26 +1,26 @@
 package lotto.domain;
 
-import static lotto.domain.BonusBallMatchStatus.*;
+import static lotto.domain.IncludingBonusBallCondition.*;
 import static lotto.domain.MatchCount.*;
 
 import java.util.Arrays;
 
 public enum LottoRank {
-	FIFTH(THREE, INCLUDING_OR_NOT, Money.valueOf(5_000)),
-	FOURTH(FOUR, INCLUDING_OR_NOT, Money.valueOf(50_000)),
-	THIRD(FIVE, NOT_INCLUDING, Money.valueOf(1_500_000)),
-	SECOND(FIVE, INCLUDING, Money.valueOf(30_000_000)),
-	FIRST(SIX, NOT_INCLUDING, Money.valueOf(2_000_000_000));
+	FIFTH(THREE, NO_MATTER, Money.valueOf(5_000)),
+	FOURTH(FOUR, NO_MATTER, Money.valueOf(50_000)),
+	THIRD(FIVE, NONE_INCLUDE, Money.valueOf(1_500_000)),
+	SECOND(FIVE, INCLUDE, Money.valueOf(30_000_000)),
+	FIRST(SIX, NONE_INCLUDE, Money.valueOf(2_000_000_000));
 
 	private static final String THERE_IS_NON_RANK_EXCEPTION_MESSAGE = "꽝!";
 
 	private final MatchCount matchCount;
-	private final BonusBallMatchStatus bonusBallMatchStatus;
+	private final IncludingBonusBallCondition includingBonusBallCondition;
 	private final Money money;
 
-	LottoRank(MatchCount matchCount, BonusBallMatchStatus bonusBallMatchStatus, Money money) {
+	LottoRank(MatchCount matchCount, IncludingBonusBallCondition includingBonusBallCondition, Money money) {
 		this.matchCount = matchCount;
-		this.bonusBallMatchStatus = bonusBallMatchStatus;
+		this.includingBonusBallCondition = includingBonusBallCondition;
 		this.money = money;
 	}
 
@@ -31,8 +31,7 @@ public enum LottoRank {
 
 	public static LottoRank findRank(int matchCount, boolean isBonusBall) {
 		return Arrays.stream(values())
-			.filter(rank -> rank.isMatch(matchCount))
-			.filter(rank -> rank.isRightBonusBallStatus(isBonusBall))
+			.filter(rank -> rank.isMatch(matchCount) && rank.isRightBonusBallCondition(isBonusBall))
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(THERE_IS_NON_RANK_EXCEPTION_MESSAGE));
 	}
@@ -45,8 +44,8 @@ public enum LottoRank {
 		return matchCount.isSameMatch(count);
 	}
 
-	private boolean isRightBonusBallStatus(boolean isBonusBall) {
-		return bonusBallMatchStatus.contains(isBonusBall);
+	private boolean isRightBonusBallCondition(boolean isBonusBall) {
+		return includingBonusBallCondition.isAcceptableBonusCondition(isBonusBall);
 	}
 
 	public Money calculateTotalMoney(long count) {
