@@ -50,7 +50,7 @@ public class LottoTest {
 		Lotto lotto = new Lotto(new LottoNumbers(
 			Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
 				new LottoNumber(5), new LottoNumber(6))));
-		WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
-		assertThat(lotto.findLottoPrize(winningNumber).getPrizeDescription()).isEqualTo(expectedPrize);
+		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+		assertThat(lotto.findLottoPrize(winningLotto).getPrizeDescription()).isEqualTo(expectedPrize);
 	}
 }

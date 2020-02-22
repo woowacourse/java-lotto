@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningNumber {
+public class WinningLotto {
 	private final LottoNumbers winningNumber;
 	private final LottoNumber bonusNumber;
 
-	public WinningNumber(final List<String> winningNumber, final int bonusNumber) {
+	public WinningLotto(final List<String> winningNumber, final int bonusNumber) {
 		validateWinningNumber(winningNumber);
 		this.winningNumber = new LottoNumbers(winningNumber.stream()
 			.map(number -> new LottoNumber(Integer.parseInt(number)))

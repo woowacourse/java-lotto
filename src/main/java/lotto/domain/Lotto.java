@@ -29,9 +29,9 @@ public class Lotto {
 		}
 	}
 
-	public WinningPrize findLottoPrize(WinningNumber winningNumber) {
-		int matchCount = lottoNumbers.matchCount(winningNumber.getWinningNumber());
-		boolean bonusMatch = lottoNumbers.contains(winningNumber.getBonusNumber());
+	public WinningPrize findLottoPrize(WinningLotto winningLotto) {
+		int matchCount = lottoNumbers.matchCount(winningLotto.getWinningNumber());
+		boolean bonusMatch = lottoNumbers.contains(winningLotto.getBonusNumber());
 
 		return WinningPrize.of(matchCount, bonusMatch);
 	}

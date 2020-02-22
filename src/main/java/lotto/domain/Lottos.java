@@ -25,9 +25,9 @@ public class Lottos {
 			.collect(Collectors.toList()));
 	}
 
-	public List<WinningPrize> findAllLottoPrizes(WinningNumber winningNumber) {
+	public List<WinningPrize> findAllLottoPrizes(WinningLotto winningLotto) {
 		return lottos.stream()
-			.map(lotto -> lotto.findLottoPrize(winningNumber))
+			.map(lotto -> lotto.findLottoPrize(winningLotto))
 			.collect(Collectors.toList());
 	}
 }
