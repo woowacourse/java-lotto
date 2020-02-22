@@ -1,8 +1,7 @@
 package util;
 
-import domain.LottoNumber;
-import domain.numberscontainer.Ticket;
-import domain.numberscontainer.WinningNumbers;
+import domain.lottonumber.LottoTicket;
+import domain.lottonumber.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +17,7 @@ class LottoNumbersDtoGeneratorTest {
     @Test
     @DisplayName("랜덤 티켓 생성")
     void generateRandomTicket() {
-        LottoNumbersDtoGenerator lottoNumbersDtoGenerator = new LottoNumbersDtoGenerator();
-        assertThatCode(() -> new Ticket(lottoNumbersDtoGenerator.generateRandomTicketDto()))
+        assertThatCode(() -> new LottoTicket(LottoNumbersDtoGenerator.generateRandomTicketDto()))
                 .doesNotThrowAnyException();
     }
 
@@ -27,7 +25,7 @@ class LottoNumbersDtoGeneratorTest {
     @DisplayName("고정값 당첨 번호 생성")
     void generateFixedWinningNumber() {
         LottoNumbersDtoGenerator lottoNumbersDtoGenerator = new LottoNumbersDtoGenerator();
-        assertThatCode(() -> new WinningNumbers(lottoNumbersDtoGenerator.generateFixedNumberDto(createSixNumbers(1, 2, 3, 4, 5, 6), 7)))
+        assertThatCode(() -> new WinningNumbers(lottoNumbersDtoGenerator.generateManualNumbersDto(createSixNumbers(1, 2, 3, 4, 5, 6), 7)))
                 .doesNotThrowAnyException();
     }
 

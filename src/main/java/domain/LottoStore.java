@@ -1,6 +1,6 @@
 package domain;
 
-import domain.numberscontainer.Ticket;
+import domain.lottonumber.LottoTicket;
 import util.LottoNumbersDtoGenerator;
 
 import java.util.ArrayList;
@@ -9,28 +9,30 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoStore {
-    public static List<Ticket> generateTickets(long number) {
-        List<Ticket> tickets = new ArrayList<>();
+    public static List<LottoTicket> generateTickets(int number) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
         for (int i = 0; i < number; i++) {
-            tickets.add(new Ticket(LottoNumbersDtoGenerator.generateRandomTicketDto()));
+            lottoTickets.add(new LottoTicket(LottoNumbersDtoGenerator.generateRandomTicketDto()));
         }
-        return tickets;
+
+        return lottoTickets;
     }
 
-    public static List<Ticket> generateTickets(long number, List<Set<Integer>> myNumbers) {
-        List<Ticket> tickets = myNumbers.stream()
-                .map(numbers -> LottoNumbersDtoGenerator.generateFixedNumberDto(numbers, -1))
-                .map(dto -> new Ticket(dto))
+    public static List<LottoTicket> generateTickets(int number, List<Set<Integer>> myNumbers) {
+        List<LottoTicket> manualTickets = myNumbers.stream()
+                .map(numbers -> LottoNumbersDtoGenerator.generateManualNumbersDto(numbers, -1))
+                .map(LottoTicket::new)
                 .collect(Collectors.toList());
 
-        long randomTicketsNumber = getRandomTicketsNumber(number, myNumbers);
-        for (int i = 0; i < randomTicketsNumber; i++) {
-            tickets.add(new Ticket(LottoNumbersDtoGenerator.generateRandomTicketDto()));
-        }
-        return tickets;
+        int randomTicketsNumber = getRandomTicketsNumber(number, myNumbers);
+        List<LottoTicket> randomTickets = generateTickets(randomTicketsNumber);
+        manualTickets.addAll(randomTickets);
+
+        return manualTickets;
     }
 
-    private static long getRandomTicketsNumber(long number, List<Set<Integer>> myNumbers) {
+    private static int getRandomTicketsNumber(int number, List<Set<Integer>> myNumbers) {
         return number - myNumbers.size();
     }
 }

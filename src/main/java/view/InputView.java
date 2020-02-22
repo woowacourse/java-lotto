@@ -1,8 +1,7 @@
 package view;
 
-import domain.LottoNumber;
 import domain.Money;
-import domain.numberscontainer.LottoNumbersDto;
+import domain.lottonumber.LottoNumbersDto;
 import util.LottoNumbersDtoGenerator;
 
 import java.util.*;
@@ -10,12 +9,14 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final String NUMBER_REGEX = "^[0-9]+$";
+    private static final String NUMBER_DELIMITER = ",";
 
     private static Scanner scanner = new Scanner(System.in);
 
     public static Money enterMoney() {
         System.out.println("구입 금액을 입력해주세요.");
         int money = parseInt(scanner.nextLine());
+
         return new Money(money);
     }
 
@@ -31,20 +32,22 @@ public class InputView {
     }
 
     public static LottoNumbersDto enterWinningNumbers() {
-        return LottoNumbersDtoGenerator.generateFixedNumberDto(enterLastWeekWinningNumbers(), enterBonusNumber());
+        return LottoNumbersDtoGenerator.generateManualNumbersDto(enterLastWeekWinningNumbers(), enterBonusNumber());
     }
 
     private static Set<Integer> enterLastWeekWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Set<Integer> lastWeekWinningNumbers = parseWinningNumbers(scanner.nextLine());
+
         return lastWeekWinningNumbers;
     }
 
     private static Set<Integer> parseWinningNumbers(String input) {
-        List<Integer> lottoNumbers = Arrays.asList(input.split(",")).stream()
+        List<Integer> lottoNumbers = Arrays.asList(input.split(NUMBER_DELIMITER)).stream()
                 .map(String::trim)
                 .map(InputView::parseInt)
                 .collect(Collectors.toList());
+
         return new HashSet<>(lottoNumbers);
     }
 

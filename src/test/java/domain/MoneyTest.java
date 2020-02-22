@@ -1,7 +1,6 @@
 package domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -14,7 +13,7 @@ class MoneyTest {
     @DisplayName("돈 객체 생성자")
     void moneyConstructorTest(int money) {
         assertThatThrownBy(() -> new Money(money))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageEndingWith("만 구매 가능합니다.");
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageEndingWith("만 구매 가능합니다.");
     }
 }

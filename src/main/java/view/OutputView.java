@@ -1,48 +1,30 @@
 package view;
 
-import domain.LottoProfit;
-import domain.LottoResult;
-import domain.Money;
-import domain.numberscontainer.Ticket;
+import domain.lottonumber.LottoTicket;
+import domain.result.LottoResult;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
-
     public static void printNumberOfTickets(int size) {
         System.out.println(size + "개를 구매했습니다.");
     }
 
-    public static void printTickets(List<Ticket> tickets) {
+    public static void printTickets(List<LottoTicket> lottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Ticket ticket : tickets) {
-            stringBuilder.append(ticket.toString());
+        for (LottoTicket lottoTicket : lottoTickets) {
+            stringBuilder.append(StringConverter.convertLottoNumbers(lottoTicket.getLottoNumbers()));
             stringBuilder.append("\n");
         }
+
         System.out.println(stringBuilder.toString());
     }
 
-    public static void printLottoResults(Map<LottoResult, Long> lottoResults) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("당첨 통계\n-------------\n");
-        List<LottoResult> results = Arrays.asList(LottoResult.values()).subList(1, LottoResult.values().length);
-        results.stream()
-                .forEach(result -> {
-                    stringBuilder.append(result.toString());
-                    stringBuilder.append(convertNullToZero(lottoResults.get(result)));
-                    stringBuilder.append("개\n");
-                });
-        System.out.println(stringBuilder.toString());
+    public static void printLottoResults(LottoResult lottoResult) {
+        System.out.println(StringConverter.convertLottoResults(lottoResult));
     }
 
-    private static long convertNullToZero(Long number) {
-        if (number == null) return 0;
-        return number;
-    }
-
-    public static void printProfit(LottoProfit profit) {
-        System.out.println("총 수익률은 " + (long)profit.getProfit() + "%입니다.");
+    public static void printProfit(double profit) {
+        System.out.println("총 수익률은 " + (long) profit + "%입니다.");
     }
 }

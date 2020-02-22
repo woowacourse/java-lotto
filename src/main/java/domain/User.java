@@ -1,46 +1,39 @@
 package domain;
 
-import domain.numberscontainer.Ticket;
-import domain.numberscontainer.WinningNumbers;
+import domain.lottonumber.LottoTicket;
+import domain.lottonumber.WinningNumbers;
+import domain.result.LottoResult;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class User {
-
-    private Money spentMoney;
-    private List<Ticket> tickets;
-    private Map<LottoResult, Long> lottoResults;
+    private Money spentMoney = new Money(0);
+    private List<LottoTicket> lottoTickets = new ArrayList<>();
 
     public User() {
-        this.spentMoney = new Money(0);
-        this.tickets = new ArrayList<>();
     }
 
     public void buyTickets(Money money) {
         this.spentMoney = money;
-        this.tickets = LottoStore.generateTickets(money.getNumberOfTickets());
+        this.lottoTickets = LottoStore.generateTickets(money.getNumberOfTickets());
     }
 
-    public void buyTicketsManually(Money money, List<Set<Integer>> myNumbers) {
+    public void buyTickets(Money money, List<Set<Integer>> myNumbers) {
         this.spentMoney = money;
-        this.tickets = LottoStore.generateTickets(money.getNumberOfTickets(), myNumbers);
+        this.lottoTickets = LottoStore.generateTickets(money.getNumberOfTickets(), myNumbers);
     }
 
-    public Map<LottoResult, Long> confirmResult(WinningNumbers winningNumbers) {
-        this.lottoResults = tickets.stream()
-                .collect(Collectors.groupingBy(ticket -> winningNumbers.getLottoResult(ticket), Collectors.counting()));
-        return lottoResults;
+    public LottoResult confirmResult(WinningNumbers winningNumbers) {
+        return LottoResult.confirmResult(this.lottoTickets, winningNumbers);
     }
 
-    public LottoProfit calculateProfit() {
-        return LottoProfit.getProfit(this.lottoResults, this.spentMoney);
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
+    public Money getSpentMoney() {
+        return this.spentMoney;
     }
 }

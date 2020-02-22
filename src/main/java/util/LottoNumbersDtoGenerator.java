@@ -1,34 +1,40 @@
 package util;
 
-import domain.LottoNumber;
-import domain.numberscontainer.LottoNumbersDto;
+import domain.lottonumber.LottoNumber;
+import domain.lottonumber.LottoNumbers;
+import domain.lottonumber.LottoNumbersDto;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbersDtoGenerator {
-
-    private static final int FIRST_INDEX = 0;
-    private static final int SIXTH_INDEX = 6;
-    private static final int EXCEPT_ERROR_FIRST_INDEX = 1;
+    private static final int NUMBER_OF_NUMBERS = 6;
 
     public static LottoNumbersDto generateRandomTicketDto() {
-        List<LottoNumber> lottoNumbers = getShuffledList();
-        Set<LottoNumber> sixNumbers = new HashSet<>(lottoNumbers.subList(FIRST_INDEX, SIXTH_INDEX));
+        Set<LottoNumber> randomNumbers = new HashSet<>(generateShuffledNumbers().subList(0, NUMBER_OF_NUMBERS));
+        LottoNumbers randomLottoNumbers = new LottoNumbers(randomNumbers);
 
-        return new LottoNumbersDto(sixNumbers);
+        return new LottoNumbersDto(randomLottoNumbers);
     }
 
-    private static List<LottoNumber> getShuffledList() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.values()).subList(EXCEPT_ERROR_FIRST_INDEX, LottoNumber.values().length);
+    private static List<LottoNumber> generateShuffledNumbers() {
+        List<LottoNumber> lottoNumbers = LottoNumber.getAllValues();
         Collections.shuffle(lottoNumbers);
         return lottoNumbers;
     }
 
-    public static LottoNumbersDto generateFixedNumberDto(Set<Integer> sixNumbers, int bonusNumber) {
-        Set<LottoNumber> sixNumbersSet = sixNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
+    public static LottoNumbersDto generateManualNumbersDto(Set<Integer> numbers, int bonusNumber) {
+        Set<LottoNumber> numbersSet = parseIntegersToLottoNumbers(numbers);
+
+        return new LottoNumbersDto(new LottoNumbers(numbersSet), LottoNumber.valueOf(bonusNumber));
+    }
+
+    private static Set<LottoNumber> parseIntegersToLottoNumbers(Set<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
-        return new LottoNumbersDto(sixNumbersSet, LottoNumber.getLottoNumber(bonusNumber));
     }
 }

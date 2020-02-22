@@ -1,6 +1,10 @@
 package domain;
 
 public class Money {
+    private static final int TICKET_PRICE = 1000;
+    private static final int MIN_MONEY = 0;
+    private static final int MAX_MONEY = 50000;
+
     private final long money;
 
     public Money(long money) {
@@ -13,18 +17,19 @@ public class Money {
         validateMoneyUnit(money);
     }
 
-    public long getNumberOfTickets() {
-        return this.money / 1000;
+    public int getNumberOfTickets() {
+        return (int) this.money / TICKET_PRICE;
     }
 
+    /* 금액 제한 현실 반영 */
     private void validateMoneyRange(long money) {
-        if (money < 0 || money > 50000) {
+        if (money < MIN_MONEY || money > MAX_MONEY) {
             throw new IllegalArgumentException("0원 이상, 5만원 이하 금액만 구매 가능합니다.");
         }
     }
 
     private void validateMoneyUnit(long money) {
-        if (money % 1000 != 0) {
+        if (money % TICKET_PRICE != 0) {
             throw new IllegalArgumentException("천 원 단위로만 구매 가능합니다.");
         }
     }

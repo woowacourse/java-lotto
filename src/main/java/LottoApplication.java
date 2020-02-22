@@ -1,7 +1,7 @@
 import domain.Money;
 import domain.User;
-import domain.numberscontainer.LottoNumbersDto;
-import domain.numberscontainer.WinningNumbers;
+import domain.lottonumber.WinningNumbers;
+import domain.result.LottoResult;
 import view.InputView;
 import view.OutputView;
 
@@ -9,14 +9,13 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         User user = new User();
-        user.buyTickets(enterMoney());
 
-        OutputView.printNumberOfTickets(user.getTickets().size());
-        OutputView.printTickets(user.getTickets());
+        user.buyTickets(enterMoney());
+        printTicketInformation(user);
 
         WinningNumbers winningNumbers = enterWinningNumbers();
-        OutputView.printLottoResults(user.confirmResult(winningNumbers));
-        OutputView.printProfit(user.calculateProfit());
+
+        printResult(user, winningNumbers);
     }
 
     private static Money enterMoney() {
@@ -28,13 +27,23 @@ public class LottoApplication {
         }
     }
 
+    private static void printTicketInformation(User user) {
+        OutputView.printNumberOfTickets(user.getLottoTickets().size());
+        OutputView.printTickets(user.getLottoTickets());
+    }
+
     private static WinningNumbers enterWinningNumbers() {
         try {
-            LottoNumbersDto lottoNumbersDto = InputView.enterWinningNumbers();
-            return new WinningNumbers(lottoNumbersDto);
+            return new WinningNumbers(InputView.enterWinningNumbers());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             throw new IllegalArgumentException();
         }
+    }
+
+    private static void printResult(User user, WinningNumbers winningNumbers) {
+        LottoResult lottoResult = user.confirmResult(winningNumbers);
+        OutputView.printLottoResults(lottoResult);
+        OutputView.printProfit(lottoResult.calculateProfit(user.getSpentMoney()));
     }
 }
