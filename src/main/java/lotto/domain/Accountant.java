@@ -8,7 +8,7 @@ public class Accountant {
         double total = 0;
         Map<Rank, Integer> lottoResult = result.getLottoResult();
         for (Rank rank : lottoResult.keySet()) {
-            total += rank.getPrize() * lottoResult.get(rank);
+            total += (double)rank.getPrize() * lottoResult.get(rank);
         }
         double rate = total * 100 / (money.ticketQuantity() * Money.TICKET_PRICE);
         return String.format("%.2f", rate);

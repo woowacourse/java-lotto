@@ -17,11 +17,12 @@ class AccountantTest {
     @BeforeEach
     void setUp() {
         String[][] numbers = {
-            LottoTicketTest.MATCH_THREE,
+            LottoTicketTest.MATCH_NONE,
+            LottoTicketTest.MATCH_ONE,
+            LottoTicketTest.MATCH_ONE,
             LottoTicketTest.MATCH_TWO,
-            LottoTicketTest.MATCH_ONE,
-            LottoTicketTest.MATCH_ONE,
-            LottoTicketTest.MATCH_NONE
+            LottoTicketTest.MATCH_SIX,
+            LottoTicketTest.MATCH_SIX
         };
         List<LottoTicket> sampleTickets = new ArrayList<>();
         for (String[] number : numbers) {
@@ -36,6 +37,6 @@ class AccountantTest {
     @DisplayName("수익률이 정상적으로 계산되는지")
     void calculate() {
         lottoResult.match(lottoTickets, winningTicket, LottoNumber.SEVEN);
-        assertThat(Accountant.calculate(Money.create("5000"), lottoResult)).isEqualTo("100.00");
+        assertThat(Accountant.calculate(Money.create("40000000"), lottoResult)).isEqualTo("10000.00");
     }
 }
