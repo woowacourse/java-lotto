@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.BonusRequirement.BonusRequirement;
+
 import java.util.Arrays;
 
 public enum WinningType {

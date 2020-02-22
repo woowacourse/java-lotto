@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.BonusRequirement;
 
 import java.util.function.Function;
 

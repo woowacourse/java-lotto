@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.BonusRequirement;
 
 public class BonusRequirementExpressions {
 	public static boolean isSatisfiedWhenNoMatter(boolean bonus) {
