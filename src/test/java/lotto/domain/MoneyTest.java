@@ -20,7 +20,7 @@ public class MoneyTest {
 	@DisplayName("로또 개수 받아서 구입 금액을 돌려주는지 확인")
 	@Test
 	void getBuyMoney() {
-		assertThat(Money.getBuyMoney(new LottoCount(5))).isEqualTo(5000);
+		assertThat(Money.getBuyMoney(new LottoCount(5)).getMoney()).isEqualTo(5000);
 	}
 
 	@DisplayName("금액 받아서 카운트만큼 곱해주는지 확인")

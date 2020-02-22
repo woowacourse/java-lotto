@@ -29,8 +29,8 @@ public class Money {
         }
     }
 
-    public static int getBuyMoney(LottoCount lottoCount) {
-        return lottoCount.getLottoCount() * LOTTO_PRICE;
+    public static Money getBuyMoney(LottoCount lottoCount) {
+        return new Money(lottoCount.getLottoCount() * LOTTO_PRICE);
     }
 
     public LottoCount getLottoCount() {

@@ -16,8 +16,8 @@ public class TotalResult {
 
     public long getProfitRate() {
         long totalPrize = lottoResult.calculateTotalPrize();
-        int buyMoney = Money.getBuyMoney(count);
-        return totalPrize * PERCENTAGE / buyMoney;
+        Money buyMoney = Money.getBuyMoney(count);
+        return totalPrize * PERCENTAGE / buyMoney.getMoney();
     }
 
     public Map<LottoRank, Integer> getLottoResult() {
