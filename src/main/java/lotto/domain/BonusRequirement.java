@@ -1,20 +1,19 @@
 package lotto.domain;
 
+import java.util.function.Function;
+
 public enum BonusRequirement {
-	NO_MATTER,
-	TRUE,
-	FALSE;
+	NO_MATTER(bonus -> true),
+	TRUE(bonus -> bonus),
+	FALSE(bonus -> !bonus);
+
+	private Function<Boolean, Boolean> bonusRequirement;
+
+	BonusRequirement(Function<Boolean, Boolean> bonusRequirement) {
+		this.bonusRequirement = bonusRequirement;
+	}
 
 	public boolean isSatisfiedBy(boolean bonus) {
-		if (this == NO_MATTER) {
-			return true;
-		}
-		if (this == TRUE && bonus) {
-			return true;
-		}
-		if (this == FALSE && !bonus) {
-			return true;
-		}
-		return false;
+		return bonusRequirement.apply(bonus);
 	}
 }
