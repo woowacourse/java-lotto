@@ -49,7 +49,7 @@ public class LottoResult {
 	public List<WinningType> getWinningKeys() {
 		return lottoResult.keySet()
 				.stream()
-				.filter((t) -> !t.isNONE())
+				.filter(WinningType::isWinning)
 				.sorted()
 				.collect(Collectors.toUnmodifiableList());
 	}

@@ -32,8 +32,8 @@ public enum WinningType {
 		return bonusRequirement == BonusRequirement.TRUE;
 	}
 
-	public boolean isNONE() {
-		return this == NONE;
+	public boolean isWinning() {
+		return this != NONE;
 	}
 
 	public double calculateEarning(int num) {
