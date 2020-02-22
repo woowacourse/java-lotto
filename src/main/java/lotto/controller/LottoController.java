@@ -32,7 +32,7 @@ public class LottoController {
 
 	private static Lottos buyLottos() {
 		try {
-			LottoMachine lottoMachine = new LottoMachine();
+			LottoMachine lottoMachine = LottoMachine.getInstance();
 			LottoCountDto lottoCountDto = new LottoCountDto(readMoney());
 
 			OutputView.printLottoCount(lottoCountDto.getLottoCount());
