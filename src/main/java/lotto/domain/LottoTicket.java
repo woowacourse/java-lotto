@@ -20,15 +20,23 @@ public class LottoTicket {
     }
 
     private void validateNumbersCount(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
+        if (hasWrongSize(numbers)) {
             throw new IllegalArgumentException("로또의 숫자는 6개여야 합니다.");
         }
     }
 
+    private boolean hasWrongSize(List<LottoNumber> numbers) {
+        return numbers.size() != LOTTO_SIZE;
+    }
+
     private void validateNumbersDuplication(List<LottoNumber> numbers) {
-        if (getDistinctCount(numbers) != numbers.size()) {
+        if (hasDuplicatedNumbers(numbers)) {
             throw new IllegalArgumentException("로또의 숫자는 중복될 수 없습니다.");
         }
+    }
+
+    private boolean hasDuplicatedNumbers(List<LottoNumber> numbers) {
+        return getDistinctCount(numbers) != numbers.size();
     }
 
     private long getDistinctCount(List<LottoNumber> numbers) {

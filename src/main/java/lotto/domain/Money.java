@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-    private static final int MIN_PURCHASE_MONEY = 1000;
+    private static final int MIN_PURCHASE_MONEY = 1_000;
 
     private final int money;
 
@@ -26,18 +26,16 @@ public class Money {
         }
     }
 
-
-
-    public Money plus(Money anotherMoney) {
-        return new Money(this.money + anotherMoney.money);
+    public Money plus(Money other) {
+        return new Money(this.money + other.money);
     }
 
-    public int calculateQuotient(Money anotherMoney) {
-        return this.money / anotherMoney.money;
+    public int calculateQuotient(Money other) {
+        return this.money / other.money;
     }
 
     public int calculateProfit(Money purchaseMoney) {
-        return (int)((double)this.money / purchaseMoney.money * 100);
+        return (int) ((double) this.money / purchaseMoney.money * 100);
     }
 
     public int getValue() {
@@ -59,6 +57,6 @@ public class Money {
 
     @Override
     public String toString() {
-        return money+"원";
+        return money + "원";
     }
 }

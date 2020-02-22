@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoFactory {
     private static final List<LottoNumber> numbers = new ArrayList<>();
-    private static final Money TICKET_PRICE = Money.of(1000);
+    private static final Money TICKET_PRICE = Money.of(1_000);
 
     static {
         for (int i = 1; i <= 45; i++) {
