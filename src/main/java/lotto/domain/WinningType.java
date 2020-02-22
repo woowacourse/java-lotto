@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum WinningType {
-	FIRST_PLACE(6, BonusRequirement.NO_MATTER, 2000000000),
-	SECOND_PLACE(5, BonusRequirement.TRUE, 30000000),
-	THIRD_PLACE(5, BonusRequirement.FALSE, 1500000),
-	FOURTH_PLACE(4, BonusRequirement.NO_MATTER, 50000),
-	FIFTH_PLACE(3, BonusRequirement.NO_MATTER, 5000),
+	FIRST_PLACE(6, BonusRequirement.NO_MATTER, 2_000_000_000),
+	SECOND_PLACE(5, BonusRequirement.TRUE, 30_000_000),
+	THIRD_PLACE(5, BonusRequirement.FALSE, 1_500_000),
+	FOURTH_PLACE(4, BonusRequirement.NO_MATTER, 50_000),
+	FIFTH_PLACE(3, BonusRequirement.NO_MATTER, 5_000),
 	NONE(-1, BonusRequirement.NO_MATTER, 0);
 
 	private int sameNumberCount;
