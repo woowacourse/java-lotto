@@ -1,68 +1,48 @@
 package lotto.view;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
+import lotto.domain.lottoTicket.LottoTickets;
+import lotto.domain.result.WinningResult;
+import lotto.util.StringUtil;
 
 public class ConsoleOutputView {
-	public static final String PURCHASE_COMPLETE_MESSAGE = "%d개를 구매했습니다.\n";
-	public static final String DELIMITER = ",";
-	public static final String STATISTICS_NOTICE_MESSAGE = "당첨 통계";
-	public static final String SEPARATION_LINE = "---------";
-	public static final String WINNING_RESULT = "%d개 일치 (%d원) - %d개";
-	public static final String WINNING_SECOND_RANK_RESULT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
-	public static final String WINNING_RATIO_MESSAGE = "총 수익률은 %d%%입니다.\n";
+	private static final String PURCHASE_LOTTO_COMPLETE_MESSAGE = "%d개를 구매했습니다.";
+	private static final String WINNING_RESULT_NOTICE_MESSAGE = "당첨 통계";
+	private static final String DIVIDING_LINE = "---------";
+	private static final String TOTAL_WINNING_RATE_MESSAGE = "총 수익률은 %d%%입니다.";
 
-	public static void printExceptionMessage(String exceptionMessage) {
+	private ConsoleOutputView() {
+	}
+
+	public static void printException(String exceptionMessage) {
 		System.out.println(exceptionMessage);
 	}
 
-	public static void printPurchaseCompleteMessage(int numberOfLotto) {
-		System.out.printf(PURCHASE_COMPLETE_MESSAGE, numberOfLotto);
+	public static void printNumberOfPurchasedLottoTicket(long numberOfPurchasedLotto) {
+		System.out.println(String.format(PURCHASE_LOTTO_COMPLETE_MESSAGE, numberOfPurchasedLotto));
 	}
 
-	public static void printPurchasedLotto(List<Lotto> lottos) {
-		for (Lotto lotto : lottos) {
-			String lottoNumber = lotto.getLottoNumbers().stream()
-				.map(LottoNumber::getNumber)
-				.map(Object::toString)
-				.collect(Collectors.joining(DELIMITER));
-			System.out.println(wrapSquareBracket(lottoNumber));
-		}
-	}
-
-	private static String wrapSquareBracket(String lottoNumber) {
-		return "[" + lottoNumber + "]";
-	}
-
-	public static void printStatisticsMessage() {
-		System.out.println(STATISTICS_NOTICE_MESSAGE);
-		System.out.println(SEPARATION_LINE);
-	}
-
-	public static void printWinningResult(Map<LottoRank, Integer> lottoRankCount) {
-		lottoRankCount.entrySet().stream()
-			.filter(entry -> !entry.getKey().isLottoRankOf(LottoRank.MISS))
-			.map(entry -> getWinningResultMessage(entry.getKey(), entry.getValue()))
+	public static void printPurchasedLottoTickets(LottoTickets purchasedLottoTickets) {
+		purchasedLottoTickets.getLottoTickets().stream()
+			.map(StringUtil::joiningLottoNumbersAt)
 			.forEach(System.out::println);
+		System.out.println();
 	}
 
-	private static String getWinningResultMessage(LottoRank lottoRank, int winningLottoCount) {
-		String resultMessage = WINNING_RESULT;
-		if (lottoRank.isLottoRankOf(LottoRank.SECOND)) {
-			resultMessage = WINNING_SECOND_RANK_RESULT;
-		}
-		return String.format(resultMessage,
-			lottoRank.getMatchCount(),
-			lottoRank.getWinningMoney().getMoney(),
-			winningLottoCount);
+	public static void printWinningResult(WinningResult winningResult) {
+		System.out.println();
+		System.out.println(WINNING_RESULT_NOTICE_MESSAGE);
+		System.out.println(DIVIDING_LINE);
+		printWinningLottoTicketByLottoRank(winningResult);
+		printWinningRate(winningResult);
+
 	}
 
-	public static void printWinningRatio(int winningRatio) {
-		System.out.printf(WINNING_RATIO_MESSAGE, winningRatio);
+	private static void printWinningLottoTicketByLottoRank(WinningResult winningResult) {
+		winningResult.getWinningResult().forEach((lottoRank, lottoRankCount) ->
+			System.out.println(StringUtil.generateFormOfLottoRank(lottoRank, lottoRankCount)));
+	}
+
+	private static void printWinningRate(WinningResult winningResult) {
+		System.out.println(String.format(TOTAL_WINNING_RATE_MESSAGE, winningResult.getWinningRate()));
 	}
 }
