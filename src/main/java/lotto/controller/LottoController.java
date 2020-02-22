@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.util.StringUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -24,7 +25,7 @@ public class LottoController { // TODO 변수들을 클래스변수로 뺴고 �
 		Lottos lottos = LottosFactory.createLottosAuto(amountOfLottos);
 		OutputView.printPurchasedLottos(amountOfLottos, lottos);
 
-		WinningLotto winningLotto = InputView.getWinningLotto(); // TODO 결과 뽑는 메서드
+		WinningLotto winningLotto = receiveWinningLotto(); // TODO 결과 뽑는 메서드
 		BonusLottoNumber bonusLottoNumber = InputView.getBonusLottoNumber(winningLotto);
 
 		ResultStatistic result = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
@@ -37,6 +38,19 @@ public class LottoController { // TODO 변수들을 클래스변수로 뺴고 �
 		} catch (Exception e) {
 			OutputView.printExceptionMessage(e);
 			return receiveMoneyForLotto();
+		}
+	}
+
+	private static WinningLotto receiveWinningLotto() {
+		try {
+			String inputWinningLotto = InputView.getWinningLotto();
+			return (WinningLotto) LottoFactory.createLottoManual(
+					LottoType.WINNING_LOTTO,
+					StringUtils.splitIntoLottoNumbers(inputWinningLotto)
+			);
+		} catch (Exception e) {
+			OutputView.printExceptionMessage(e);
+			return receiveWinningLotto();
 		}
 	}
 }

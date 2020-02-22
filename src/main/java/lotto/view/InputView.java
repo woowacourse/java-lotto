@@ -22,19 +22,9 @@ public class InputView {
 		return SCANNER.nextLine();
 	}
 
-	public static WinningLotto getWinningLotto() {
-		try {
-			OutputView.askEnterWinningLotto();
-			List<LottoNumber> winningLottoNumbers = StringUtils.splitIntoLottoNumbers(SCANNER.nextLine());
-
-			return (WinningLotto) LottoFactory.createLottoManual(
-					LottoType.WINNING_LOTTO,
-					winningLottoNumbers
-			);
-		} catch (Exception e) {
-			OutputView.printExceptionMessage(e);
-			return getWinningLotto();
-		}
+	public static String getWinningLotto() {
+		OutputView.askEnterWinningLotto();
+		return SCANNER.nextLine();
 	}
 
 	public static BonusLottoNumber getBonusLottoNumber(WinningLotto winningLotto) {
