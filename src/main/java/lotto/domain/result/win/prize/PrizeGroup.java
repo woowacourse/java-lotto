@@ -14,8 +14,8 @@ public enum PrizeGroup {
     FIFTH(3, 5_000),
     SIXTH(0, 0);
 
-    private final int matchCount;
-    private final int defaultPrize;
+    private final int matchCount;       // 우승 로또 번호와 일치하는 번호 갯수
+    private final int defaultPrize;     // 등수 별 상금
 
     PrizeGroup(int matchCount, int defaultPrize) {
         this.matchCount = matchCount;
