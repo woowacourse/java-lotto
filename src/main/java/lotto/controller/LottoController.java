@@ -38,7 +38,7 @@ public class LottoController {
 	private static MoneyForLotto receiveMoneyForLotto() {
 		try {
 			return new MoneyForLotto(InputView.getMoneyForLotto());
-		} catch (Exception e) {
+		} catch (InvalidMoneyForLottoException | NullPointerException e) {
 			OutputView.printExceptionMessage(e);
 			return receiveMoneyForLotto();
 		}
@@ -51,7 +51,7 @@ public class LottoController {
 					LottoType.WINNING_LOTTO,
 					StringUtils.splitIntoLottoNumbers(inputWinningLotto)
 			);
-		} catch (Exception e) {
+		} catch (InvalidLottoException | NullPointerException e) {
 			OutputView.printExceptionMessage(e);
 			return receiveWinningLotto();
 		}

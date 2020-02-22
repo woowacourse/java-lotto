@@ -33,8 +33,17 @@ public class MoneyForLottoTest {
 		assertThatThrownBy(() -> {
 			String inputMoney = "500";
 			new MoneyForLotto(inputMoney);
-		}).isInstanceOf(IllegalArgumentException.class)
+		}).isInstanceOf(InvalidMoneyForLottoException.class)
 				.hasMessage("1000원 이상 입력해주세요.");
+	}
+
+	@Test
+	void MoneyForLotto_정수_이외의_값_입력시_예외처리() {
+		assertThatThrownBy(() -> {
+			String inputMoney = "로또";
+			new MoneyForLotto(inputMoney);
+		}).isInstanceOf(InvalidMoneyForLottoException.class)
+				.hasMessage("입력금액이 정수가 아닙니다.");
 	}
 
 	@Test

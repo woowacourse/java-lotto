@@ -26,13 +26,13 @@ public class MoneyForLotto {
 		try {
 			return Integer.parseInt(inputMoney);
 		} catch (NumberFormatException nfe) {
-			throw new NumberFormatException(NONE_INTEGER_INPUT_EXCEPTION_MESSAGE);
+			throw new InvalidMoneyForLottoException(NONE_INTEGER_INPUT_EXCEPTION_MESSAGE);
 		}
 	}
 
 	private void validateMinimunPrice(int inputMoney) {
 		if (inputMoney < LOTTO_PRICE) {
-			throw new IllegalArgumentException(MIN_PRICE_EXCEPTION_MESSAGE);
+			throw new InvalidMoneyForLottoException(MIN_PRICE_EXCEPTION_MESSAGE);
 		}
 	}
 
