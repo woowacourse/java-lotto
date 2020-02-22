@@ -12,27 +12,27 @@ public class WinningLotto {
 	private static final String NULL_WINNING_LOTTO_EXCEPTION_MESSAGE = "객체에 NULL 이 들어갈 수 없습니다.";
 
 	private final LottoTicket winningLottoTicket;
-	private final Ball bonusBall;
+	private final LottoBall bonusLottoBall;
 
-	public WinningLotto(LottoTicket winningLottoTicket, Ball bonusBall) {
-		validate(winningLottoTicket, bonusBall);
+	public WinningLotto(LottoTicket winningLottoTicket, LottoBall bonusLottoBall) {
+		validate(winningLottoTicket, bonusLottoBall);
 		this.winningLottoTicket = winningLottoTicket;
-		this.bonusBall = bonusBall;
+		this.bonusLottoBall = bonusLottoBall;
 	}
 
-	private void validate(LottoTicket winningLottoTicket, Ball bonusBall) {
-		validateNull(winningLottoTicket, bonusBall);
-		validateDuplication(winningLottoTicket, bonusBall);
+	private void validate(LottoTicket winningLottoTicket, LottoBall bonusLottoBall) {
+		validateNull(winningLottoTicket, bonusLottoBall);
+		validateDuplication(winningLottoTicket, bonusLottoBall);
 	}
 
-	private void validateNull(LottoTicket winningLottoTicket, Ball bonusBall) {
-		if (Objects.isNull(winningLottoTicket) || Objects.isNull(bonusBall)) {
+	private void validateNull(LottoTicket winningLottoTicket, LottoBall bonusLottoBall) {
+		if (Objects.isNull(winningLottoTicket) || Objects.isNull(bonusLottoBall)) {
 			throw new NullPointerException(NULL_WINNING_LOTTO_EXCEPTION_MESSAGE);
 		}
 	}
 
-	private void validateDuplication(LottoTicket winningLottoTicket, Ball bonusBall) {
-		if (winningLottoTicket.contains(bonusBall)) {
+	private void validateDuplication(LottoTicket winningLottoTicket, LottoBall bonusLottoBall) {
+		if (winningLottoTicket.contains(bonusLottoBall)) {
 			throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
 		}
 	}
@@ -45,8 +45,9 @@ public class WinningLotto {
 
 	private Map<LottoRank, Long> initializeRankResult(LottoTickets lottoTickets) {
 		return lottoTickets.getLottoTickets().stream()
-			.filter(lotto -> LottoRank.isValidMatchCount(lotto.findMatchingBall(winningLottoTicket)))
-			.map(lotto -> LottoRank.findRank(lotto.findMatchingBall(winningLottoTicket), lotto.contains(bonusBall)))
+			.filter(lotto -> LottoRank.isValidMatchCount(lotto.countMatchingBall(winningLottoTicket)))
+			.map(lotto -> LottoRank.findRank(lotto.countMatchingBall(winningLottoTicket),
+				lotto.contains(bonusLottoBall)))
 			.collect(Collectors.groupingBy(Function.identity(), TreeMap::new, Collectors.counting()));
 	}
 

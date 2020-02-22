@@ -3,7 +3,7 @@ package lotto.util;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.Ball;
+import lotto.domain.LottoBall;
 import lotto.domain.LottoRank;
 
 public class StringUtil {
@@ -17,9 +17,9 @@ public class StringUtil {
 		return rawWinningLotto.split(LOTTO_NUMBERS_DELIMITER);
 	}
 
-	public static String parseBalls(List<Ball> balls) {
-		return balls.stream()
-			.map(Ball::toString)
+	public static String parseBalls(List<LottoBall> lottoBalls) {
+		return lottoBalls.stream()
+			.map(LottoBall::toString)
 			.collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER));
 	}
 

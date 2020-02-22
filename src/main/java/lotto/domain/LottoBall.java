@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Ball implements Comparable<Ball> {
+public class LottoBall implements Comparable<LottoBall> {
 	private static final int MINIMUM_NUMBER = 1;
 	private static final int MAXIMUM_NUMBER = 45;
-	private static final Map<Integer, Ball> BALL_CACHE = new HashMap<>();
+	private static final Map<Integer, LottoBall> BALL_CACHE = new HashMap<>();
 	private static final String INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE = "유효한 로또 번호가 아닙니다.";
 
 	static {
@@ -17,13 +17,13 @@ public class Ball implements Comparable<Ball> {
 
 	private static void initBallCaches() {
 		for (int number = MINIMUM_NUMBER; number <= MAXIMUM_NUMBER; number++) {
-			BALL_CACHE.put(number, new Ball(number));
+			BALL_CACHE.put(number, new LottoBall(number));
 		}
 	}
 
 	private final int number;
 
-	private Ball(int number) {
+	private LottoBall(int number) {
 		validateNumberRange(number);
 		this.number = number;
 	}
@@ -34,19 +34,19 @@ public class Ball implements Comparable<Ball> {
 		}
 	}
 
-	public static Ball valueOf(int number) {
+	public static LottoBall valueOf(int number) {
 		if (BALL_CACHE.containsKey(number)) {
 			return BALL_CACHE.get(number);
 		}
-		return new Ball(number);
+		return new LottoBall(number);
 	}
 
-	public static Collection<Ball> values() {
+	public static Collection<LottoBall> values() {
 		return Collections.unmodifiableCollection(BALL_CACHE.values());
 	}
 
 	@Override
-	public int compareTo(Ball that) {
+	public int compareTo(LottoBall that) {
 		return Integer.compare(this.number, that.number);
 	}
 

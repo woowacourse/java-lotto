@@ -13,10 +13,10 @@ public class LottoTicketGeneratorTest {
 	void createLottoTest() {
 		LottoTicketGenerator lottoTicketGenerator = () -> LottoTicket.of(1, 12, 23, 4, 5, 6);
 		LottoTicket lottoTicket = lottoTicketGenerator.create();
-		List<Ball> balls = lottoTicket.getBalls();
+		List<LottoBall> balls = lottoTicket.getLottoBalls();
 
-		assertThat(balls).containsExactly(Ball.valueOf(1), Ball.valueOf(12), Ball.valueOf(23),
-			Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
+		assertThat(balls).contains(LottoBall.valueOf(1), LottoBall.valueOf(12), LottoBall.valueOf(23),
+			LottoBall.valueOf(4), LottoBall.valueOf(5), LottoBall.valueOf(6));
 	}
 
 }

@@ -27,7 +27,7 @@ public class OutputView {
 	public static void printLottos(LottoTickets lottoTickets) {
 		StringBuffer stringBuffer = new StringBuffer();
 		for (LottoTicket lottoTicket : lottoTickets) {
-			String lottoData = StringUtil.parseBalls(lottoTicket.getBalls());
+			String lottoData = StringUtil.parseBalls(lottoTicket.getLottoBalls());
 			stringBuffer.append(LOTTO_NUMBER_OPENER);
 			stringBuffer.append(lottoData);
 			stringBuffer.append(LOTTO_NUMBER_CLOSER);

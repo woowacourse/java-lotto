@@ -20,7 +20,7 @@ public class MoneyTest {
 	@ValueSource(longs = {1_000, 10_000, 50_000, 1_000_000, 2_100_000_000})
 	void calculateLottoCount(long moneyValue) {
 		Money money = Money.valueOf(moneyValue);
-		int expected = (int) moneyValue / 1000;
+		int expected = (int)moneyValue / 1000;
 		assertThat(money.calculatePurchaseCount()).extracting("lottoCount").isEqualTo(expected);
 	}
 

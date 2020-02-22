@@ -19,7 +19,7 @@ public class WinningLottoTicketTest {
 	@DisplayName("당첨 번호와 보너스볼 중복시 예외")
 	@Test
 	void duplicateBonusBallAndLotto() {
-		Ball ball = Ball.valueOf(6);
+		LottoBall ball = LottoBall.valueOf(6);
 
 		assertThatThrownBy(() -> new WinningLotto(lottoTicket, ball))
 			.isInstanceOf(IllegalArgumentException.class);
@@ -28,7 +28,7 @@ public class WinningLottoTicketTest {
 	@DisplayName("로또 당첨 내역 랭크 반환")
 	@Test
 	void getResult() {
-		Ball ball = Ball.valueOf(40);
+		LottoBall ball = LottoBall.valueOf(40);
 		WinningLotto winningLotto = new WinningLotto(lottoTicket, ball);
 		LottoTicketGenerator lottoTicketGenerator = () -> lottoTicket;
 

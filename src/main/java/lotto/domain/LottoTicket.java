@@ -7,70 +7,62 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-	private static final String DUPLICATED_NUMBER_EXCEPTION_MESSAGE = "중복된 볼이 포함";
 	private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 갯수가 적절하지 않습니다.";
-	private static final String NULL_LOTTO_EXCEPTION_MESSAGE = "객체에 null인 값은 들어갈수 없다네";
+	private static final String NULL_LOTTO_EXCEPTION_MESSAGE = "null 데이터는 허용되지 않습니다.";
 	static final int BALL_COUNT = 6;
 
-	private final List<Ball> balls;
+	private final Set<LottoBall> lottoBalls;
 
-	public LottoTicket(List<Ball> balls) {
-		validate(balls);
-		this.balls = Collections.unmodifiableList(new ArrayList<>(balls));
+	public LottoTicket(Set<LottoBall> lottoBalls) {
+		validate(lottoBalls);
+		this.lottoBalls = Collections.unmodifiableSet(new TreeSet<>(lottoBalls));
 	}
 
-	private void validate(List<Ball> balls) {
-		validateNull(balls);
-		validateDuplication(balls);
-		validateBallCount(balls);
+	private void validate(Set<LottoBall> lottoBalls) {
+		validateNull(lottoBalls);
+		validateBallCount(lottoBalls);
 	}
 
-	private void validateNull(List<Ball> balls) {
-		if (Objects.isNull(balls)) {
+	private void validateNull(Set<LottoBall> lottoBalls) {
+		if (Objects.isNull(lottoBalls)) {
 			throw new NullPointerException(NULL_LOTTO_EXCEPTION_MESSAGE);
 		}
 	}
 
-	private void validateDuplication(List<Ball> balls) {
-		Set<Ball> distinctBalls = new HashSet<>(balls);
-		if (distinctBalls.size() != balls.size()) {
-			throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION_MESSAGE);
-		}
-	}
-
-	private void validateBallCount(List<Ball> balls) {
-		if (balls.size() != BALL_COUNT) {
+	private void validateBallCount(Set<LottoBall> lottoBalls) {
+		if (lottoBalls.size() != BALL_COUNT) {
 			throw new IllegalArgumentException(BALL_COUNT_EXCEPTION_MESSAGE);
 		}
 	}
 
-	public static LottoTicket of(String ... lottoNumbers) {
+	public static LottoTicket of(String... lottoNumbers) {
 		return Arrays.stream(lottoNumbers)
 			.mapToInt(Integer::parseInt)
-			.mapToObj(Ball::valueOf)
-			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
+			.mapToObj(LottoBall::valueOf)
+			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));
 	}
 
-	static LottoTicket of(int ... lottoNumbers) {
+	static LottoTicket of(int... lottoNumbers) {
 		return Arrays.stream(lottoNumbers)
-			.mapToObj(Ball::valueOf)
-			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
+			.mapToObj(LottoBall::valueOf)
+			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));
 	}
 
-	public boolean contains(Ball ball) {
-		return balls.contains(ball);
+	public boolean contains(LottoBall lottoBall) {
+		return lottoBalls.contains(lottoBall);
 	}
 
-	public int findMatchingBall(LottoTicket lottoTicket) {
-		List<Ball> sameBalls = new ArrayList<>(balls);
-		sameBalls.retainAll(lottoTicket.balls);
+	public int countMatchingBall(LottoTicket lottoTicket) {
+		Set<LottoBall> sameBalls = new HashSet<>(lottoBalls);
+		sameBalls.retainAll(lottoTicket.lottoBalls);
 		return sameBalls.size();
 	}
 
-	public List<Ball> getBalls() {
-		return Collections.unmodifiableList(new ArrayList<>(balls));
+	public List<LottoBall> getLottoBalls() {
+		return Collections.unmodifiableList(new ArrayList<>(lottoBalls));
 	}
 }
