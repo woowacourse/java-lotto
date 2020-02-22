@@ -15,6 +15,7 @@ public class LottoTicket {
     private static final String DELIMITER = ", ";
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
+
     private final List<LottoNumber> lottoTicket;
 
     private LottoTicket(final List<LottoNumber> lottoTicket) {
@@ -37,7 +38,8 @@ public class LottoTicket {
     }
 
     private void validateDuplicate(List<LottoNumber> lottoTicket) {
-        if (lottoTicket.size() != lottoTicket.stream().distinct().count()) {
+        long distinctCount = lottoTicket.stream().distinct().count();
+        if (lottoTicket.size() != distinctCount) {
             throw new InvalidLottoTicketException("유효하지 않은 당첨 번호 값입니다.");
         }
     }

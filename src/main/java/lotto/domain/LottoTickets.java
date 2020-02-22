@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
     private static final int BONUS_CONDITION = 5;
-    private static final String DELIMITER = "\n";
+    private static final String DELIMITER = System.lineSeparator();
+    public static final int DEFAULT_VALUE = 0;
+
     private List<LottoTicket> lottoTickets;
 
     LottoTickets(List<LottoTicket> lottoTickets) {
@@ -17,16 +19,16 @@ public class LottoTickets {
 
     public static LottoTickets createLottoTickets(Money money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < money.ticketQuantity(); i++) {
+        int ticketQuantity = money.ticketQuantity();
+        for (int i = 0; i < ticketQuantity; i++) {
             lottoTickets.add(LottoTicket.create());
         }
         return new LottoTickets(lottoTickets);
     }
 
     public Map<Rank, Integer> matchResult(LottoTicket winner, LottoNumber bonus) {
-        int matchCount;
         for (LottoTicket lotto : lottoTickets) {
-            matchCount = winner.compare(lotto);
+            int matchCount = winner.compare(lotto);
             addBonus(bonus, matchCount, lotto);
             Rank rank = Rank.find(matchCount);
             updateResult(Rank.result, rank);
@@ -42,11 +44,11 @@ public class LottoTickets {
     }
 
     private void updateResult(Map<Rank, Integer> result, Rank rank) {
-        result.put(rank, result.getOrDefault(rank, 0) + 1);
+        result.put(rank, result.getOrDefault(rank, DEFAULT_VALUE) + 1);
     }
 
     private void removeBonusAddedFromResult(Map<Rank, Integer> result) {
-        result.put(Rank.SECOND, result.getOrDefault(Rank.SECOND, 0) - 1);
+        result.put(Rank.SECOND, result.getOrDefault(Rank.SECOND, DEFAULT_VALUE) - 1);
     }
 
     @Override

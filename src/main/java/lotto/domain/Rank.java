@@ -5,15 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Rank {
-    FIRST(6, 2000000000),
-    BONUS(-1, 30000000),
-    SECOND(5, 150000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    BONUS(-1, 30_000_000),
+    SECOND(5, 150_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
     NONE(0, 0);
 
     private int matchCount;
     private int prizeAmount;
+
     public static Map<Rank, Integer> result = new HashMap<>();
 
     Rank(int matchCount, int prizeAmount) {

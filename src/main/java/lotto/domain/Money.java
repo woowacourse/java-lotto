@@ -4,9 +4,10 @@ import lotto.exceptions.InvalidMoneyException;
 
 public class Money {
     static final int TICKET_PRICE = 1000;
+
     private final int amount;
 
-    Money(final String amount) {
+    private Money(final String amount) {
         this.amount = validMoney(amount);
     }
 

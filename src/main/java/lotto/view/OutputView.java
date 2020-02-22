@@ -7,6 +7,7 @@ import lotto.domain.Money;
 import lotto.domain.Rank;
 
 public class OutputView {
+
     public static void inputMoneyInstruction() {
         System.out.println("구입금액을 입력해 주세요.");
     }
@@ -31,12 +32,11 @@ public class OutputView {
     }
 
     public static void prizeStatistics(Map<Rank, Integer> results) {
-        String sb = "\n당첨 통계\n---------\n" + prizeStatistic(results, Rank.FOURTH)
+        System.out.println("\n당첨 통계\n---------\n" + prizeStatistic(results, Rank.FOURTH)
             + prizeStatistic(results, Rank.THIRD)
             + prizeStatistic(results, Rank.SECOND)
             + prizeStatistic(results, Rank.BONUS)
-            + prizeStatistic(results, Rank.FIRST);
-        System.out.println(sb);
+            + prizeStatistic(results, Rank.FIRST));
     }
 
     private static String prizeStatistic(Map<Rank, Integer> results, Rank rank) {

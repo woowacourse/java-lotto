@@ -53,6 +53,7 @@ public enum LottoNumber {
 
     public static final int UPPER_LIMIT = 45;
     public static final int LOWER_LIMIT = 1;
+
     private final int value;
 
     LottoNumber(int value) {
@@ -61,14 +62,12 @@ public enum LottoNumber {
 
     public static LottoNumber find(String value) {
         int parsedValue = getParsedValue(value);
-        LottoNumber found = Arrays.stream(LottoNumber.values())
+        return Arrays.stream(LottoNumber.values())
             .filter(number -> number.getValue() == parsedValue)
             .findFirst()
-            .orElse(null);
-        if (found == null) {
-            throw new InvalidLottoNumberException("잘못된 로또 번호입니다.");
-        }
-        return found;
+            .orElseThrow(() ->
+                new InvalidLottoNumberException("잘못된 로또 번호입니다.")
+            );
     }
 
     private static int getParsedValue(String value) {
