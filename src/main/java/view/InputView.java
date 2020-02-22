@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
+    public static final String ERROR_NUMBER_FORMAT_MESSAGE = "정수가 아닌 값이 입력되었습니다.";
 
     private InputView() {
         throw new AssertionError();
@@ -17,7 +18,7 @@ public class InputView {
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수가 아닌 값이 입력되었습니다.");
+            throw new IllegalArgumentException(ERROR_NUMBER_FORMAT_MESSAGE);
         }
     }
 
@@ -33,7 +34,7 @@ public class InputView {
         try {
             return splitAndParse(scanner.nextLine());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 번호가 입력되었습니다.");
+            throw new IllegalArgumentException(ERROR_NUMBER_FORMAT_MESSAGE);
         }
     }
 
@@ -42,7 +43,7 @@ public class InputView {
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수가 아닌 값이 입력되었습니다.");
+            throw new IllegalArgumentException(ERROR_NUMBER_FORMAT_MESSAGE);
         }
     }
 }
