@@ -1,6 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.domain.PurchasedLottoTicketsFactory;
+import lotto.domain.LottoTicketFactory.RandomLottoTicketFactory;
 import lotto.exceptions.LottoTicketIllegalArgumentException;
 import lotto.exceptions.PurchaseMoneyIllegalArgumentException;
 import lotto.exceptions.WinningLottoNumbersIllegalArgumentException;
@@ -31,7 +33,8 @@ public class LottoController {
 			PurchaseMoney purchaseMoney) {
 
 		PurchasedLottoTickets purchasedLottoTickets
-				= PurchasedLottoTicketsFactory.create(purchaseMoney);
+				= PurchasedLottoTicketsFactory.create(purchaseMoney,
+				new RandomLottoTicketFactory());
 		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 		return purchasedLottoTickets;
 	}
