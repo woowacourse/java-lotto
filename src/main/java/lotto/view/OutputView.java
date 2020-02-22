@@ -7,6 +7,7 @@ import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.TotalResult;
+import lotto.util.PrintTextUtil;
 import lotto.util.StringUtil;
 
 public class OutputView {
@@ -53,7 +54,7 @@ public class OutputView {
 	}
 
 	private static void printStatisticsOneLine(LottoRank lottoRank, Long count) {
-		String oneLineMatchingResult = StringUtil.parseLottoMatchingResult(lottoRank, count);
+		String oneLineMatchingResult = PrintTextUtil.parseLottoMatchingResult(lottoRank, count);
 		System.out.print(oneLineMatchingResult);
 	}
 

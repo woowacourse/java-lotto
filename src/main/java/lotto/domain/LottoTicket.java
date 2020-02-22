@@ -41,6 +41,7 @@ public class LottoTicket {
 
 	public static LottoTicket of(String... lottoNumbers) {
 		return Arrays.stream(lottoNumbers)
+			.map(String::trim)
 			.mapToInt(Integer::parseInt)
 			.mapToObj(LottoBall::valueOf)
 			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));

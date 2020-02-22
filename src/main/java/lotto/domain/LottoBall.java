@@ -41,7 +41,7 @@ public class LottoBall implements Comparable<LottoBall> {
 		return new LottoBall(number);
 	}
 
-	public static Collection<LottoBall> values() {
+	static Collection<LottoBall> values() {
 		return Collections.unmodifiableCollection(BALL_CACHE.values());
 	}
 
