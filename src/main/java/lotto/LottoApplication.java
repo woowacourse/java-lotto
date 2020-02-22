@@ -32,7 +32,7 @@ public class LottoApplication {
 			try {
 				int inputMoney = InputView.inputMoney();
 				Money money = new Money(inputMoney);
-				return money.getCount();
+				return money.getLottoCount();
 			} catch (RuntimeException re) {
 				OutputView.printExceptionMessage(re.getMessage());
 			}

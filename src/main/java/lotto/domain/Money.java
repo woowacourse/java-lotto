@@ -31,7 +31,7 @@ public class Money {
         return lottoCount.getLottoCount() * LOTTO_PRICE;
     }
 
-    public LottoCount getCount() {
+    public LottoCount getLottoCount() {
         return new LottoCount(money / LOTTO_PRICE);
     }
 }
