@@ -33,4 +33,11 @@ class LottoFactoryTest {
 		Lotto winningLotto = new Lotto(numbers);
 		assertThat(lotto.compare(winningLotto)).isEqualTo(expected);
 	}
+
+	@Test
+	@DisplayName("로또 장수 만큼 로또를 반환하는지")
+	void lottos_생성_Test() {
+		Lottos lottos = LottoFactory.create(3);
+		assertThat(lottos.getSize()).isEqualTo(3);
+	}
 }

@@ -59,7 +59,7 @@ public class LottoTest {
 	}
 
 	@Test
-	@DisplayName("로또 두개를 비교하여 같은 수의 개수를 반환하는 ")
+	@DisplayName("로또 두개를 비교하여 같은 수의 개수를 반환하는지")
 	void win() {
 		List<Number> numbers = Arrays.asList(
 			Number.of("3"),

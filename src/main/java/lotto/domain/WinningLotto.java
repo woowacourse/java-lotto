@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.result.Statistic;
 import lotto.exception.InvalidWinningLottoException;
+import lotto.exception.LottoMismatchException;
 
 public class WinningLotto {
 	public static final int SECOND = 5;
@@ -15,11 +16,10 @@ public class WinningLotto {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public Statistic isWinningLotto(Lotto lotto) throws Exception {
+	public Statistic isWinningLotto(Lotto lotto) throws LottoMismatchException {
 		int numberOfMatch = lotto.compare(winningNumbers);
-		if (checkSecond(lotto, numberOfMatch))
-			return Statistic.BONUS;
-		return Statistic.getRank(numberOfMatch);
+		boolean isBonus = lotto.contains(bonusNumber);
+		return Statistic.getRank(numberOfMatch, isBonus);
 	}
 
 	private boolean checkSecond(Lotto lotto, int numberOfMatch) {
