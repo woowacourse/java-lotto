@@ -38,7 +38,7 @@ public class PurchaseMoney {
 		return totalEarning / purchaseMoney;
 	}
 
-	public int getPurchaseMoney() {
+	public int getMoney() {
 		return purchaseMoney;
 	}
 

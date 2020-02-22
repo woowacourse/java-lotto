@@ -16,7 +16,7 @@ public class PurchaseMoneyTest {
 		PurchaseMoney purchaseMoney = new PurchaseMoney(1000);
 
 		// then
-		Assertions.assertThat(purchaseMoney.getPurchaseMoney())
+		Assertions.assertThat(purchaseMoney.getMoney())
 				.isEqualTo(1000);
 	}
 
