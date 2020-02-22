@@ -14,8 +14,13 @@ public class Lotto {
 
 	public Lotto(List<LottoNumber> lotto) {
 		validate(lotto);
-		this.lotto = new ArrayList<>(lotto);
-		Collections.sort(this.lotto);
+		this.lotto = copyAndSort(lotto);
+	}
+
+	private List<LottoNumber> copyAndSort(List<LottoNumber> lotto) {
+		List<LottoNumber> copiedLotto = new ArrayList<>(lotto);
+		Collections.sort(copiedLotto);
+		return copiedLotto;
 	}
 
 	private void validate(List<LottoNumber> lotto) {
