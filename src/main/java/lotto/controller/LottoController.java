@@ -26,7 +26,7 @@ public class LottoController { // TODO 변수들을 클래스변수로 뺴고 �
 		OutputView.printPurchasedLottos(amountOfLottos, lottos);
 
 		WinningLotto winningLotto = receiveWinningLotto(); // TODO 결과 뽑는 메서드
-		BonusLottoNumber bonusLottoNumber = InputView.getBonusLottoNumber(winningLotto);
+		BonusLottoNumber bonusLottoNumber = receiveBonusLottoNumber(winningLotto);
 
 		ResultStatistic result = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
 		OutputView.printResultStatistic(result, moneyForLotto); // TODO 여기까지 결과 뽑는 메서드
@@ -51,6 +51,16 @@ public class LottoController { // TODO 변수들을 클래스변수로 뺴고 �
 		} catch (Exception e) {
 			OutputView.printExceptionMessage(e);
 			return receiveWinningLotto();
+		}
+	}
+
+	private static BonusLottoNumber receiveBonusLottoNumber(WinningLotto winningLotto) {
+		try {
+			String inputBonusLottoNumber = InputView.getBonusLottoNumber();
+			return new BonusLottoNumber(Integer.parseInt(inputBonusLottoNumber), winningLotto);
+		} catch (Exception e) {
+			OutputView.printExceptionMessage(e);
+			return receiveBonusLottoNumber(winningLotto);
 		}
 	}
 }

@@ -27,13 +27,8 @@ public class InputView {
 		return SCANNER.nextLine();
 	}
 
-	public static BonusLottoNumber getBonusLottoNumber(WinningLotto winningLotto) {
-		try {
-			OutputView.askEnterBonusLottoNumber();
-			return new BonusLottoNumber(Integer.parseInt(SCANNER.nextLine()), winningLotto);
-		} catch (Exception e) {
-			OutputView.printExceptionMessage(e);
-			return getBonusLottoNumber(winningLotto);
-		}
+	public static String getBonusLottoNumber() {
+		OutputView.askEnterBonusLottoNumber();
+		return SCANNER.nextLine();
 	}
 }
