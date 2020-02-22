@@ -1,52 +1,42 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
+import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class WinningResult {
-	private static final String NULL_RESULT_EXCEPTION_MESSAGE = "결과 데이터가 null 이라네";
-	private static final String INVALID_RESULT_SIZE_EXCEPTION_MESSAGE = "일부 추첨 결과 정보가 누락되어있습니다.";
-
 	private final Map<LottoRank, Long> winningResult;
 
-	public WinningResult(Map<LottoRank, Long> winningResult) {
-		validate(winningResult);
-		this.winningResult = Collections.unmodifiableMap(new LinkedHashMap<>(winningResult));
+	public WinningResult(List<LottoRank> lottoRanks) {
+		this.winningResult = initializeRankResult(Objects.requireNonNull(lottoRanks));
 	}
 
-	private void validate(Map<LottoRank, Long> winningResult) {
-		validateNull(winningResult);
-		validateResultSize(winningResult);
+	private Map<LottoRank, Long> initializeRankResult(List<LottoRank> lottoRanks) {
+		Map<LottoRank, Long> result = lottoRanks.stream()
+			.filter(LottoRank::isPrizingRank)
+			.collect(Collectors.groupingBy(Function.identity(), TreeMap::new, Collectors.counting()));
+		putRankResultIfAbsent(result);
+		return result;
 	}
 
-	private void validateResultSize(Map<LottoRank, Long> winningResult) {
-		Set<LottoRank> lottoRanks = winningResult.keySet();
-		if (LottoRank.isNotRightResultSize(lottoRanks.size())) {
-			throw new IllegalArgumentException(INVALID_RESULT_SIZE_EXCEPTION_MESSAGE);
-		}
+	private void putRankResultIfAbsent(Map<LottoRank, Long> result) {
+		Arrays.stream(LottoRank.values())
+			.filter(LottoRank::isPrizingRank)
+			.forEach(rank -> result.putIfAbsent(rank, 0L));
 	}
 
-	private void validateNull(Map<LottoRank, Long> winningResult) {
-		if (Objects.isNull(winningResult)) {
-			throw new NullPointerException(NULL_RESULT_EXCEPTION_MESSAGE);
-		}
-	}
-
-	Money calculateTotalMoney() {
+	public Money calculateTotalMoney() {
 		return winningResult.keySet().stream()
 			.map(rank -> rank.calculateTotalMoney(winningResult.get(rank)))
 			.reduce(Money.valueOf(0), Money::plus);
 	}
 
-	public long getProfitRate(Money money) {
-		Money totalMoney = calculateTotalMoney();
-		return totalMoney.calculateProfitRate(money);
-	}
-
 	public Map<LottoRank, Long> getWinningResult() {
-		return winningResult;
+		return Collections.unmodifiableMap(new TreeMap<>(winningResult));
 	}
 }

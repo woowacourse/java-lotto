@@ -7,6 +7,7 @@ import lotto.domain.LottoTickets;
 import lotto.domain.LottoTicketsGenerator;
 import lotto.domain.Money;
 import lotto.domain.RandomLottoTicketGenerator;
+import lotto.domain.TotalResult;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
 import lotto.util.StringUtil;
@@ -29,8 +30,8 @@ public class LottoApplication {
 				StringUtil.splitRawLottoNumbers(InputView.inputWinningLotto()));
 			LottoBall bonusBall = LottoBall.valueOf(InputView.inputWinningBonusBall());
 			WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusBall);
-			WinningResult result = winningLotto.getResult(lottos);
-			OutputView.printStatistics(result, money);
+			WinningResult result = winningLotto.calculateResult(lottos);
+			OutputView.printStatistics(new TotalResult(result, money));
 		} catch (RuntimeException ex) {
 			OutputView.printExceptionMessage(ex.getMessage());
 		}

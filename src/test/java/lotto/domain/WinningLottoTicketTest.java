@@ -35,10 +35,20 @@ public class WinningLottoTicketTest {
 		LottoTicketsGenerator lottosFactory = new LottoTicketsGenerator(lottoTicketGenerator);
 		LottoTickets lottoTickets = lottosFactory.createLottosByCount(LottoCount.valueOf(2));
 
-		WinningResult result = winningLotto.getResult(lottoTickets);
+		WinningResult result = winningLotto.calculateResult(lottoTickets);
 		Map<LottoRank, Long> lottoResult = result.getWinningResult();
 		assertThat(lottoResult)
 			.extractingByKeys(LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST)
 			.containsExactly(0L, 0L, 0L, 0L, 2L);
+	}
+
+	@DisplayName("입력받은 로또로부터 당첨 등수 반환 확인")
+	@Test
+	public void calculateRankTest() {
+		WinningLotto winningLotto = new WinningLotto(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoBall.valueOf(10));
+		LottoTicket lottoTicket = LottoTicket.of(1, 2, 3, 11, 12, 13);
+
+		LottoRank rank = winningLotto.calculateRank(lottoTicket);
+		assertThat(rank).isEqualTo(LottoRank.FIFTH);
 	}
 }

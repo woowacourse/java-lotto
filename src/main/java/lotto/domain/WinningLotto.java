@@ -1,10 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
@@ -37,22 +33,15 @@ public class WinningLotto {
 		}
 	}
 
-	public WinningResult getResult(LottoTickets lottoTickets) {
-		Map<LottoRank, Long> result = initializeRankResult(lottoTickets);
-		putRankResultIfAbsent(result);
-		return new WinningResult(result);
-	}
-
-	private Map<LottoRank, Long> initializeRankResult(LottoTickets lottoTickets) {
+	public WinningResult calculateResult(LottoTickets lottoTickets) {
 		return lottoTickets.getLottoTickets().stream()
-			.filter(lotto -> LottoRank.isValidMatchCount(lotto.countMatchingBall(winningLottoTicket)))
-			.map(lotto -> LottoRank.findRank(lotto.countMatchingBall(winningLottoTicket),
-				lotto.contains(bonusLottoBall)))
-			.collect(Collectors.groupingBy(Function.identity(), TreeMap::new, Collectors.counting()));
+			.map(this::calculateRank)
+			.collect(Collectors.collectingAndThen(Collectors.toList(), WinningResult::new));
 	}
 
-	private void putRankResultIfAbsent(Map<LottoRank, Long> result) {
-		Arrays.stream(LottoRank.values())
-			.forEach(rank -> result.putIfAbsent(rank, 0L));
+	LottoRank calculateRank(LottoTicket lottoTicket) {
+		int matchCount = lottoTicket.countMatchingBall(winningLottoTicket);
+		boolean hasBonusBall = lottoTicket.contains(bonusLottoBall);
+		return LottoRank.findRank(matchCount, hasBonusBall);
 	}
 }

@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoRankTest {
@@ -49,13 +48,6 @@ public class LottoRankTest {
 	@Test
 	void getFirstRankTest() {
 		assertThat(LottoRank.findRank(6, false)).isEqualTo(LottoRank.FIRST);
-	}
-
-	@DisplayName("입력받은 로또 숫자가 당첨권에 해당하는지 테스트")
-	@ParameterizedTest
-	@CsvSource(value = {"-1,false", "0,false", "2,false", "4,true", "6,true", "7,false"})
-	void validMatchCountTest(int matchCount, boolean expected) {
-		assertThat(LottoRank.isValidMatchCount(matchCount)).isEqualTo(expected);
 	}
 
 	@DisplayName("1등에 해당하는 당첨 매수 만큼 상금 계산이 이뤄지는지 테스트")

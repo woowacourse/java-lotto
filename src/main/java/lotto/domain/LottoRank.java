@@ -6,13 +6,12 @@ import static lotto.domain.MatchCount.*;
 import java.util.Arrays;
 
 public enum LottoRank {
+	MISSING(ZERO, NO_MATTER, Money.valueOf(0)),
 	FIFTH(THREE, NO_MATTER, Money.valueOf(5_000)),
 	FOURTH(FOUR, NO_MATTER, Money.valueOf(50_000)),
 	THIRD(FIVE, MUST_NOT_INCLUDE, Money.valueOf(1_500_000)),
 	SECOND(FIVE, MUST_INCLUDE, Money.valueOf(30_000_000)),
 	FIRST(SIX, MUST_NOT_INCLUDE, Money.valueOf(2_000_000_000));
-
-	private static final String THERE_IS_NON_RANK_EXCEPTION_MESSAGE = "꽝!";
 
 	private final MatchCount matchCount;
 	private final IncludingBonusBallCondition includingBonusBallCondition;
@@ -24,20 +23,11 @@ public enum LottoRank {
 		this.money = money;
 	}
 
-	public static boolean isValidMatchCount(int matchCount) {
-		return Arrays.stream(values())
-			.anyMatch(rank -> rank.isMatch(matchCount));
-	}
-
 	public static LottoRank findRank(int matchCount, boolean isBonusBall) {
 		return Arrays.stream(values())
 			.filter(rank -> rank.isMatch(matchCount) && rank.isRightBonusBallCondition(isBonusBall))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(THERE_IS_NON_RANK_EXCEPTION_MESSAGE));
-	}
-
-	public static boolean isNotRightResultSize(int size) {
-		return values().length != size;
+			.orElse(MISSING);
 	}
 
 	private boolean isMatch(int count) {
@@ -46,6 +36,10 @@ public enum LottoRank {
 
 	private boolean isRightBonusBallCondition(boolean isBonusBall) {
 		return includingBonusBallCondition.isAcceptableBonusCondition(isBonusBall);
+	}
+
+	public boolean isPrizingRank() {
+		return this != MISSING;
 	}
 
 	public Money calculateTotalMoney(long count) {
