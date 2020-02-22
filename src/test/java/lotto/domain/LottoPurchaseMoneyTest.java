@@ -15,11 +15,11 @@ public class LottoPurchaseMoneyTest {
 	}
 
 	@Test
-	@DisplayName("구입 금액이 로또 가격보다 적은 경우")
+	@DisplayName("구입 금액이 1000원 보다 작은 경우")
 	@SuppressWarnings("NonAsciiCharacters")
-	void constructor_구입_금액이_로또_가격보다_적은_경우() {
+	void constructor_구입_금액이_1000원_보다_작은_경() {
 		assertThatExceptionOfType(InvalidLottoPurchaseMoneyException.class).isThrownBy(
-				() -> new LottoPurchaseMoney("500")).withMessage("로또 한 장의 가격 1000원 보다 적습니다.");
+				() -> new LottoPurchaseMoney("500")).withMessage("로또 구입 금액이 로또 한 장의 가격인 1000원 보다 작습니다.");
 	}
 
 	@Test

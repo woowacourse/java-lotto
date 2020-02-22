@@ -17,7 +17,7 @@ public class LottoPurchaseMoney {
 			throw new NumberFormatException("숫자가 아닌 값을 입력하면 안됩니다.");
 		}
 		if (canNotBought(lottoPurchaseMoney)) {
-			throw new InvalidLottoPurchaseMoneyException("로또 한 장의 가격 1000원 보다 적습니다.");
+			throw new InvalidLottoPurchaseMoneyException();
 		}
 	}
 
