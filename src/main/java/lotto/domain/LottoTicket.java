@@ -49,13 +49,13 @@ public class LottoTicket {
 		return balls.contains(ball);
 	}
 
-	public int findMatchBallCount(LottoTicket lottoTicket) {
+	public int countMatch(LottoTicket lottoTicket) {
 		List<Ball> sameBalls = new ArrayList<>(balls);
 		sameBalls.retainAll(lottoTicket.balls);
 		return sameBalls.size();
 	}
 
 	public List<Ball> getBalls() {
-		return balls;
+		return Collections.unmodifiableList(new ArrayList<>(balls));
 	}
 }

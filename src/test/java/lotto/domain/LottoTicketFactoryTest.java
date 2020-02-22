@@ -23,6 +23,6 @@ class LottoTicketFactoryTest {
 	void constructByRawNumber() {
 		LottoTicket lottoTicket = LottoTicketFactory.of("1, 2, 3, 4, 5, 6");
 		List<Ball> balls = lottoTicket.getBalls();
-		assertThat(balls).containsExactly(Ball.of(1), Ball.of(2), Ball.of(3), Ball.of(4), Ball.of(5), Ball.of(6));
+		assertThat(balls).containsExactly(Ball.valueOf(1), Ball.valueOf(2), Ball.valueOf(3), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
 	}
 }

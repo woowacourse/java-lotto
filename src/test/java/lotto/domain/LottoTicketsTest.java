@@ -13,7 +13,7 @@ public class LottoTicketsTest {
 	@DisplayName("로또 묶음이 입력받은 로또들 가지고 있는지 테스트")
 	@Test
 	void makeLottos() {
-		List<Ball> balls = Arrays.asList(Ball.of(1), Ball.of(2), Ball.of(3), Ball.of(4), Ball.of(5), Ball.of(6));
+		List<Ball> balls = Arrays.asList(Ball.valueOf(1), Ball.valueOf(2), Ball.valueOf(3), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
 		LottoTicket firstLottoTicket = new LottoTicket(balls);
 		LottoTicket secondLottoTicket = new LottoTicket(balls);
 

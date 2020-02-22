@@ -10,22 +10,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.generator.LottoTicketGenerator;
-import lotto.domain.generator.LottoTicketsGenerator;
-
 public class WinningLottoTicketTest {
 	private List<Ball> balls;
 
 	@BeforeEach
 	void setup() {
-		balls = Arrays.asList(Ball.of(1), Ball.of(2), Ball.of(3), Ball.of(4), Ball.of(5), Ball.of(6));
+		balls = Arrays.asList(Ball.valueOf(1), Ball.valueOf(2), Ball.valueOf(3), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
 	}
 
 	@DisplayName("당첨 번호와 보너스볼 중복시 예외")
 	@Test
 	void duplicateBonusBallAndLotto() {
 		LottoTicket lottoTicket = new LottoTicket(balls);
-		Ball ball = Ball.of(6);
+		Ball ball = Ball.valueOf(6);
 
 		assertThatThrownBy(() -> new WinningLotto(lottoTicket, ball))
 			.isInstanceOf(IllegalArgumentException.class);
@@ -35,7 +32,7 @@ public class WinningLottoTicketTest {
 	@Test
 	void getResult() {
 		LottoTicket lottoTicket = new LottoTicket(balls);
-		Ball ball = Ball.of(40);
+		Ball ball = Ball.valueOf(40);
 		WinningLotto winningLotto = new WinningLotto(lottoTicket, ball);
 		LottoTicketGenerator lottoTicketGenerator = () -> new LottoTicket(balls);
 

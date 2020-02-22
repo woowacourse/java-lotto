@@ -13,7 +13,7 @@ class BallTest {
 	@ParameterizedTest
 	@ValueSource(ints = {0, 46})
 	void getBallOutOfRange(int number) {
-		assertThatThrownBy(() -> Ball.of(number))
+		assertThatThrownBy(() -> Ball.valueOf(number))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -21,8 +21,8 @@ class BallTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1,1,true", "40,40,true", "1,30,false", "40,45,false"})
 	void vsBall(int firstBallNo, int secondBallNo, boolean expected) {
-		Ball firstBall = Ball.of(firstBallNo);
-		Ball secondBall = Ball.of(secondBallNo);
+		Ball firstBall = Ball.valueOf(firstBallNo);
+		Ball secondBall = Ball.valueOf(secondBallNo);
 		assertThat(firstBall.equals(secondBall)).isEqualTo(expected);
 	}
 }

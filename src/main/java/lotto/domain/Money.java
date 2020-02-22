@@ -3,9 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-	private static final int ZERO = 0;
-	private static final long LOTTO_PRICE = 1000;
-	private static final String MONEY_EXCEPTION_MESSAGE = String.format("금액을 %d원 단위로 입력해주세요.", LOTTO_PRICE);
+	private static final long UNIT = 1000;
+	private static final String MONEY_EXCEPTION_MESSAGE = String.format("금액을 %d원 단위로 입력해주세요.", UNIT);
 	private static final int PROFIT_PERCENTAGE = 100;
 
 	private final long money;
@@ -21,45 +20,47 @@ public class Money {
 	}
 
 	private void validatePositive(long money) {
-		if (money < ZERO) {
+		if (money < 0) {
 			throw new IllegalArgumentException(MONEY_EXCEPTION_MESSAGE);
 		}
 	}
 
 	private void validateDivideByThousand(long money) {
-		if (money % LOTTO_PRICE != ZERO) {
+		if (money % UNIT != 0) {
 			throw new IllegalArgumentException(MONEY_EXCEPTION_MESSAGE);
 		}
 	}
 
-	public static Money of(long money) {
+	public static Money valueOf(long money) {
 		return new Money(money);
 	}
 
-	public LottoCount findLottoTicketCount() {
-		return LottoCount.of((int)(money / LOTTO_PRICE));
+	public LottoCount calculatePurchaseCount() {
+		return LottoCount.of((int)(money / UNIT));
 	}
 
 	public Money multiply(long multiplier) {
-		return Money.of(money * multiplier);
+		return Money.valueOf(money * multiplier);
 	}
 
 	public Money plus(Money otherMoney) {
-		return Money.of(money + otherMoney.money);
+		return Money.valueOf(money + otherMoney.money);
 	}
 
-	public long findProfits(Money lottoPrice) {
+	public long calculateProfitRate(Money lottoPrice) {
 		return money * PROFIT_PERCENTAGE / lottoPrice.money;
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object object) {
+		if (this == object) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (object == null || getClass() != object.getClass()) {
 			return false;
-		Money money1 = (Money)o;
-		return money == money1.money;
+		}
+		Money that = (Money)object;
+		return this.money == that.money;
 	}
 
 	@Override

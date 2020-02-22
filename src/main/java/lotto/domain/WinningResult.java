@@ -38,12 +38,12 @@ public class WinningResult {
 	Money calculateTotalMoney() {
 		return winningResult.keySet().stream()
 			.map(rank -> rank.calculateTotalMoney(winningResult.get(rank)))
-			.reduce(Money.of(0), Money::plus);
+			.reduce(Money.valueOf(0), Money::plus);
 	}
 
 	public long getProfitRate(Money money) {
 		Money totalMoney = calculateTotalMoney();
-		return totalMoney.findProfits(money);
+		return totalMoney.calculateProfitRate(money);
 	}
 
 	public Map<LottoRank, Long> getWinningResult() {

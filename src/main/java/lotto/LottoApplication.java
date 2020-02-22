@@ -8,8 +8,8 @@ import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
-import lotto.domain.generator.LottoTicketsGenerator;
-import lotto.domain.generator.RandomLottoTicketGenerator;
+import lotto.domain.LottoTicketsGenerator;
+import lotto.domain.RandomLottoTicketGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,8 +17,8 @@ public class LottoApplication {
 	public static void main(String[] args) {
 		try {
 			int inputMoney = InputView.inputMoney();
-			Money money = Money.of(inputMoney);
-			LottoCount count = money.findLottoTicketCount();
+			Money money = Money.valueOf(inputMoney);
+			LottoCount count = money.calculatePurchaseCount();
 			OutputView.printLottoCount(count);
 
 			LottoTicketsGenerator lottoTicketsGenerator = new LottoTicketsGenerator(new RandomLottoTicketGenerator());
@@ -26,7 +26,7 @@ public class LottoApplication {
 			OutputView.printLottos(lottos);
 
 			LottoTicket winningLottoTicket = LottoTicketFactory.of(InputView.inputWinningLotto());
-			Ball bonusBall = Ball.of(InputView.inputWinningBonusBall());
+			Ball bonusBall = Ball.valueOf(InputView.inputWinningBonusBall());
 			WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusBall);
 			WinningResult result = winningLotto.getResult(lottos);
 			OutputView.printStatistics(result, money);

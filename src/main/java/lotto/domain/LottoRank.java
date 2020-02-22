@@ -1,26 +1,26 @@
 package lotto.domain;
 
-import static lotto.domain.BonusBallStatus.*;
+import static lotto.domain.BonusBallMatchStatus.*;
 import static lotto.domain.MatchCount.*;
 
 import java.util.Arrays;
 
 public enum LottoRank {
-	FIFTH(THREE, INCLUDING_OR_NOT, Money.of(5000)),
-	FOURTH(FOUR, INCLUDING_OR_NOT, Money.of(50000)),
-	THIRD(FIVE, NOT_INCLUDING, Money.of(1_500_000)),
-	SECOND(FIVE, INCLUDING, Money.of(30_000_000)),
-	FIRST(SIX, NOT_INCLUDING, Money.of(2_000_000_000));
+	FIFTH(THREE, INCLUDING_OR_NOT, Money.valueOf(5_000)),
+	FOURTH(FOUR, INCLUDING_OR_NOT, Money.valueOf(50_000)),
+	THIRD(FIVE, NOT_INCLUDING, Money.valueOf(1_500_000)),
+	SECOND(FIVE, INCLUDING, Money.valueOf(30_000_000)),
+	FIRST(SIX, NOT_INCLUDING, Money.valueOf(2_000_000_000));
 
 	private static final String THERE_IS_NON_RANK_EXCEPTION_MESSAGE = "꽝!";
 
 	private final MatchCount matchCount;
-	private final BonusBallStatus bonusBallStatus;
+	private final BonusBallMatchStatus bonusBallMatchStatus;
 	private final Money money;
 
-	LottoRank(MatchCount matchCount, BonusBallStatus bonusBallStatus, Money money) {
+	LottoRank(MatchCount matchCount, BonusBallMatchStatus bonusBallMatchStatus, Money money) {
 		this.matchCount = matchCount;
-		this.bonusBallStatus = bonusBallStatus;
+		this.bonusBallMatchStatus = bonusBallMatchStatus;
 		this.money = money;
 	}
 
@@ -46,7 +46,7 @@ public enum LottoRank {
 	}
 
 	private boolean isRightBonusBallStatus(boolean isBonusBall) {
-		return bonusBallStatus.contains(isBonusBall);
+		return bonusBallMatchStatus.contains(isBonusBall);
 	}
 
 	public Money calculateTotalMoney(long count) {

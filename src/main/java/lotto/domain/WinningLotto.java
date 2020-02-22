@@ -45,8 +45,8 @@ public class WinningLotto {
 
 	private Map<LottoRank, Long> initializeRankResult(LottoTickets lottoTickets) {
 		return lottoTickets.getLottoTickets().stream()
-			.filter(lotto -> LottoRank.isValidMatchCount(lotto.findMatchBallCount(winningLottoTicket)))
-			.map(lotto -> LottoRank.findRank(lotto.findMatchBallCount(winningLottoTicket), lotto.contains(bonusBall)))
+			.filter(lotto -> LottoRank.isValidMatchCount(lotto.countMatch(winningLottoTicket)))
+			.map(lotto -> LottoRank.findRank(lotto.countMatch(winningLottoTicket), lotto.contains(bonusBall)))
 			.collect(Collectors.groupingBy(Function.identity(), TreeMap::new, Collectors.counting()));
 	}
 

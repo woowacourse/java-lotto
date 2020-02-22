@@ -10,7 +10,7 @@ public class LottoTicketFactory {
 	public static LottoTicket of(String rawWinningLotto) {
 		List<Ball> collect = Arrays.stream(StringUtil.splitRawLottoNumbers(rawWinningLotto))
 			.mapToInt(Integer::parseInt)
-			.mapToObj(Ball::of)
+			.mapToObj(Ball::valueOf)
 			.collect(Collectors.toList());
 		return new LottoTicket(collect);
 	}
