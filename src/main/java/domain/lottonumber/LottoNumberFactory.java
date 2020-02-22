@@ -21,7 +21,7 @@ public class LottoNumberFactory {
         }
     }
 
-    public static LottoNumber getInstance(int index) {
+    public static LottoNumber getLottoNumber(int index) {
         validateBound(index);
         return cache.get(index);
     }

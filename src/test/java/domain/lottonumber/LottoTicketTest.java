@@ -10,8 +10,8 @@ import java.util.*;
 public class LottoTicketTest {
     private TreeSet makeTestTicket() {
         return new TreeSet(Arrays.asList(
-                LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(2), LottoNumberFactory.getInstance(3),
-                LottoNumberFactory.getInstance(4), LottoNumberFactory.getInstance(5), LottoNumberFactory.getInstance(6))
+                LottoNumberFactory.getLottoNumber(1), LottoNumberFactory.getLottoNumber(2), LottoNumberFactory.getLottoNumber(3),
+                LottoNumberFactory.getLottoNumber(4), LottoNumberFactory.getLottoNumber(5), LottoNumberFactory.getLottoNumber(6))
         );
     }
 
@@ -20,7 +20,7 @@ public class LottoTicketTest {
         SortedSet<LottoNumber> numbers = makeTestTicket();
         LottoTicket lottoTicket = new LottoTicket(numbers);
         for (int i = 1; i <= 6; i++) {
-            Assertions.assertThat(lottoTicket.contains(LottoNumberFactory.getInstance(i))).isTrue();
+            Assertions.assertThat(lottoTicket.contains(LottoNumberFactory.getLottoNumber(i))).isTrue();
         }
     }
 
@@ -36,7 +36,7 @@ public class LottoTicketTest {
     void 인자가_6개가_아니면_예외처리(int value) {
         SortedSet<LottoNumber> lottoNumbers = new TreeSet<>();
         for (int i = 0; i < value; i++) {
-            lottoNumbers.add(LottoNumberFactory.getInstance(i + 1));
+            lottoNumbers.add(LottoNumberFactory.getLottoNumber(i + 1));
         }
         Assertions.assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -47,8 +47,8 @@ public class LottoTicketTest {
     void 비교_테스트() {
         SortedSet<LottoNumber> numbers = makeTestTicket();
         SortedSet<LottoNumber> numbers2 = new TreeSet(Arrays.asList(
-                LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(2), LottoNumberFactory.getInstance(3),
-                LottoNumberFactory.getInstance(7), LottoNumberFactory.getInstance(8), LottoNumberFactory.getInstance(9))
+                LottoNumberFactory.getLottoNumber(1), LottoNumberFactory.getLottoNumber(2), LottoNumberFactory.getLottoNumber(3),
+                LottoNumberFactory.getLottoNumber(7), LottoNumberFactory.getLottoNumber(8), LottoNumberFactory.getLottoNumber(9))
         );;
         LottoTicket lottoTicket = new LottoTicket(numbers);
         LottoTicket lottoTicket2 = new LottoTicket(numbers);
@@ -61,8 +61,8 @@ public class LottoTicketTest {
     @Test
     void 중복이_있으면_예외_처리() {
         SortedSet<LottoNumber> numbers = new TreeSet(Arrays.asList(
-                LottoNumberFactory.getInstance(1), LottoNumberFactory.getInstance(2), LottoNumberFactory.getInstance(3),
-                LottoNumberFactory.getInstance(3), LottoNumberFactory.getInstance(4), LottoNumberFactory.getInstance(5))
+                LottoNumberFactory.getLottoNumber(1), LottoNumberFactory.getLottoNumber(2), LottoNumberFactory.getLottoNumber(3),
+                LottoNumberFactory.getLottoNumber(3), LottoNumberFactory.getLottoNumber(4), LottoNumberFactory.getLottoNumber(5))
         );
         Assertions.assertThatThrownBy(() -> new LottoTicket(numbers))
                 .isInstanceOf(IllegalArgumentException.class)

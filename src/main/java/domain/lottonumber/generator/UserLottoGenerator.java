@@ -11,7 +11,7 @@ public class UserLottoGenerator implements LottoGenerator {
 
     public void init(List<Integer> inputNumbers) {
         numbers = inputNumbers.stream()
-                .map(LottoNumberFactory::getInstance)
+                .map(LottoNumberFactory::getLottoNumber)
                 .collect(Collectors.toCollection(TreeSet::new)
                 );
     }

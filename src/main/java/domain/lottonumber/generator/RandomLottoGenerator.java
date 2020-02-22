@@ -14,7 +14,7 @@ public class RandomLottoGenerator implements LottoGenerator {
 
     static {
         numbers = IntStream.rangeClosed(LOTTO_UNDER_BOUND, LOTTO_UPPER_BOUND)
-                .mapToObj(LottoNumberFactory::getInstance)
+                .mapToObj(LottoNumberFactory::getLottoNumber)
                 .collect(Collectors.toList());
     }
 
