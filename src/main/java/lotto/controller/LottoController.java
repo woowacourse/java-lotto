@@ -51,7 +51,7 @@ public class LottoController {
 					LottoType.WINNING_LOTTO,
 					StringUtils.splitIntoLottoNumbers(inputWinningLotto)
 			);
-		} catch (InvalidLottoException | NullPointerException e) {
+		} catch (InvalidLottoException | NullPointerException | IllegalArgumentException e) {
 			OutputView.printExceptionMessage(e);
 			return receiveWinningLotto();
 		}
@@ -61,7 +61,8 @@ public class LottoController {
 		try {
 			Objects.requireNonNull(winningLotto, WINNING_LOTTO_NULL_CASE_EXCEPTION_MESSAGE);
 			String inputBonusLottoNumber = InputView.getBonusLottoNumber();
-			return new BonusLottoNumber(inputBonusLottoNumber, winningLotto);
+			BonusLottoNumber.validateBonusLottoNumber(inputBonusLottoNumber, winningLotto);
+			return new BonusLottoNumber(inputBonusLottoNumber);
 		} catch (InvalidLottoNumberException | NullPointerException e) {
 			OutputView.printExceptionMessage(e);
 			return receiveBonusLottoNumber(winningLotto);

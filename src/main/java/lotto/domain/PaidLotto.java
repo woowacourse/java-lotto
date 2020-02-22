@@ -21,7 +21,6 @@ public class PaidLotto extends Lotto {
 	public Rank getRank(final WinningLotto winningLotto, final BonusLottoNumber bonusLottoNumber) {
 		int numberOfContain = this.calculateMatchCount(winningLotto);
 		boolean hasBonusLottoNumber = this.isContain(bonusLottoNumber.getBonusLottoNumber());
-
 		return Rank.getRank(numberOfContain, hasBonusLottoNumber);
 	}
 

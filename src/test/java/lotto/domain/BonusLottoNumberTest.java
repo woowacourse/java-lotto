@@ -31,23 +31,31 @@ public class BonusLottoNumberTest {
 
 	@Test
 	void BonusLottoNumber_올바른_동작_확인() {
-		BonusLottoNumber bonusLottoNumber = new BonusLottoNumber("7", winningLotto);
+		BonusLottoNumber bonusLottoNumber = new BonusLottoNumber("7");
 		assertThat(bonusLottoNumber).isInstanceOf(BonusLottoNumber.class);
 	}
 
 	@Test
 	void BonusLottoNumber_중복_입력시_예외처리() {
 		assertThatThrownBy(() -> {
-			BonusLottoNumber bonusLottoNumber = new BonusLottoNumber("6", winningLotto);
+			BonusLottoNumber.validateBonusLottoNumber("6", winningLotto);
 		}).isInstanceOf(InvalidLottoNumberException.class)
 				.hasMessage("보너스 번호는 당첨번호와 중복될 수 없습니다.");
 	}
 
 	@Test
-	void BonusLottoNumber_잘못된_입력시_예외처리() {
+	void BonusLottoNumber_문자_입력시_예외처리() {
 		assertThatThrownBy(() -> {
-			BonusLottoNumber bonusLottoNumber = new BonusLottoNumber("a", winningLotto);
+			BonusLottoNumber bonusLottoNumber = new BonusLottoNumber("a");
 		}).isInstanceOf(InvalidLottoNumberException.class)
 				.hasMessage("입력 보너스 번호가 정수가 아닙니다.");
+	}
+
+	@Test
+	void BonusLottoNumber_범위_초과_입력시_예외처리() {
+		assertThatThrownBy(() -> {
+			BonusLottoNumber bonusLottoNumber = new BonusLottoNumber("100");
+		}).isInstanceOf(InvalidLottoNumberException.class)
+				.hasMessage("유효한 로또 번호가 아닙니다.");
 	}
 }

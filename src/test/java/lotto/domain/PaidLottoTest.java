@@ -37,8 +37,8 @@ public class PaidLottoTest {
 						LottoNumber.of(6)
 				)
 		));
-
-		bonusLottoNumber = new BonusLottoNumber("7", winningLotto);
+		BonusLottoNumber.validateBonusLottoNumber("7", winningLotto);
+		bonusLottoNumber = new BonusLottoNumber("7");
 	}
 
 	@Test
