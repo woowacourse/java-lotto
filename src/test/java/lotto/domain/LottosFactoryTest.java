@@ -5,10 +5,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosFactoryTest {
 
+    @DisplayName("수동 로또 생성 테스트")
     @Test
     void makeLottos() {
         LottoFactory lottoFactory = () -> {

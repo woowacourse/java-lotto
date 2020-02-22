@@ -40,10 +40,7 @@ public class WinningLotto {
     }
 
     private LottoRank getLottoRank(Lotto lotto, int matchCount) {
-        LottoRank rank = LottoRank.getRank(matchCount);
-        if (rank == LottoRank.THIRD && lotto.contains(bonusBall)) {
-            rank = LottoRank.SECOND;
-        }
+        LottoRank rank = LottoRank.getRank(matchCount, lotto.contains(bonusBall));
         return rank;
     }
 

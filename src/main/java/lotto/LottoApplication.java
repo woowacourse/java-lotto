@@ -28,26 +28,26 @@ public class LottoApplication {
     }
 
     private static LottoCount getCountByMoney() {
-    	while(true) {
-			try {
-				int inputMoney = InputView.inputMoney();
-				Money money = new Money(inputMoney);
-				return money.getLottoCount();
-			} catch (RuntimeException re) {
-				OutputView.printExceptionMessage(re.getMessage());
-			}
-		}
+        while (true) {
+            try {
+                int inputMoney = InputView.inputMoney();
+                Money money = new Money(inputMoney);
+                return money.getLottoCount();
+            } catch (RuntimeException re) {
+                OutputView.printExceptionMessage(re.getMessage());
+            }
+        }
     }
 
     private static WinningLotto getWinningLotto() {
-    	while(true) {
-			try {
-				Lotto winningLotto = Lotto.of(InputView.inputWinningLotto());
-				Ball bonusBall = Ball.of(InputView.inputWinningBonusBall());
-				return new WinningLotto(winningLotto, bonusBall);
-			} catch (RuntimeException re) {
-				OutputView.printExceptionMessage(re.getMessage());
-			}
-		}
+        while (true) {
+            try {
+                Lotto winningLotto = Lotto.of(InputView.inputWinningLotto());
+                Ball bonusBall = Ball.of(InputView.inputWinningBonusBall());
+                return new WinningLotto(winningLotto, bonusBall);
+            } catch (RuntimeException re) {
+                OutputView.printExceptionMessage(re.getMessage());
+            }
+        }
     }
 }

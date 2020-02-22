@@ -5,11 +5,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoFactoryTest {
 
+    @DisplayName("로또 볼 비교")
     @ParameterizedTest
     @ValueSource(ints = {1, 12, 23, 4, 5, 6})
     void makeLotto(int ball) {

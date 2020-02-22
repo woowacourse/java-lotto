@@ -45,6 +45,7 @@ public class LottoTest {
         assertThat(lotto.countCommonBalls(lotto2)).isEqualTo(4);
     }
 
+    @DisplayName("로또 가져오기 확인")
     @Test
     void getLotto() {
         Set<Ball> balls = new HashSet<>(Arrays
@@ -54,6 +55,7 @@ public class LottoTest {
         assertThat(lottoData).containsExactly("1", "2", "3", "4", "5", "6");
     }
 
+    @DisplayName("로또 수동으로 생성 확인")
     @Test
     void constructByRawNumber() {
         Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
