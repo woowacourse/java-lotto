@@ -3,7 +3,7 @@ package domain;
 import spark.utils.StringUtils;
 
 public class Money {
-    private static final int TICKET_PRICE = 1000;
+    private static final int TICKET_PRICE = 1_000;
 
     private int money;
 
