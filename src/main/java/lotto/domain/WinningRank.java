@@ -24,8 +24,7 @@ public enum WinningRank {
 
     public static WinningRank selectRank(int correctNumber, boolean isBonusNumber) {
         return Arrays.stream(values())
-                .filter(result -> result.winningBallCount == correctNumber)
-                .filter(result -> result.existingBonusBall == isBonusNumber)
+                .filter(result -> result.winningBallCount == correctNumber && result.existingBonusBall == isBonusNumber)
                 .findFirst()
                 .orElse(NO_RANK);
     }
