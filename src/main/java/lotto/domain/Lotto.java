@@ -20,7 +20,7 @@ public class Lotto {
 	private List<LottoNumber> copyAndSort(List<LottoNumber> lotto) {
 		List<LottoNumber> copiedLotto = new ArrayList<>(lotto);
 		Collections.sort(copiedLotto);
-		return copiedLotto;
+		return Collections.unmodifiableList(copiedLotto);
 	}
 
 	private void validate(List<LottoNumber> lotto) {
@@ -51,7 +51,7 @@ public class Lotto {
 	}
 
 	public List<LottoNumber> getValue() {
-		return Collections.unmodifiableList(lotto);
+		return lotto;
 	}
 
 	@Override
