@@ -80,23 +80,23 @@
     
 ## 코드 리뷰
 ### 첫번째 피드백
-- [ ] 사용하지 않는 변수는 삭제.
-- [ ] Initializer의 이름 변경.
-- [ ] String constant를 LottoResult enum에서 처리.
-- [ ] 맞은 갯수에 대한 네이밍.
-- [ ] 일급 콜렉션을 사용하라. Map은 더욱 유용하다.
-- [ ] HashMap을 Map으로 변경하라.
-- [ ] LottoNumbers에서의 상수의 접근 제어자를 변경하라.
-- [ ] Initializer의 횟수에 대한 로직을 Payment로 옮겨라.
-- [ ] 객체 사용을 하라.
-- [ ] 게임 결과를 관리하는 일급 콜렉션을 만들어라.
-- [ ] AutoNumber에 대한 콜렉션을 담는 클래스를 만들어라.
-- [ ] 인스턴스 변수에 직접 접근하지 마라.
-- [ ] LottoResult에 Lotto 클래스에 있는 로직을 여럿 이동하라.
-- [ ] 당첨 번호를 인스턴스 변수로 만들어라.
-- [ ] 메소드는 한 가지 기능만을 해야 한다.
-- [ ] 연산자는 최대한 적게 사용하라.
-- [ ] PAYMENT_UNIT를 변수 대신 클래스로 관리.
-- [ ] 도메인 클래스에서 입력에 대한 예외 메세지를 InputView로 이동.
-- [ ] hasSix 메소드 명을 isSizeSix와 같이 변경.
-- [ ] 문자열 split은 InputView에서 처리.
+- [x] 사용하지 않는 변수는 삭제.
+- [x] Initializer의 이름 변경.
+- [x] String constant를 LottoResult enum에서 처리.
+- [x] 맞은 갯수에 대한 네이밍.
+- [x] 일급 콜렉션을 사용하라. Map은 더욱 유용하다.
+- [x] HashMap을 Map으로 변경하라.
+- [x] LottoNumbers에서의 상수의 접근 제어자를 변경하라.
+- [x] Initializer의 횟수에 대한 로직을 Payment로 옮겨라.
+- [x] 객체 사용을 하라.
+- [x] 게임 결과를 관리하는 일급 콜렉션을 만들어라.
+- [x] AutoNumber에 대한 콜렉션을 담는 클래스를 만들어라.
+- [x] 인스턴스 변수에 직접 접근하지 마라.
+- [x] LottoResult에 Lotto 클래스에 있는 로직을 여럿 이동하라.
+- [x] 당첨 번호를 인스턴스 변수로 만들어라.
+- [x] 메소드는 한 가지 기능만을 해야 한다.
+- [x] 연산자는 최대한 적게 사용하라.
+- [x] PAYMENT_UNIT를 변수 대신 클래스로 관리.
+- [x] 도메인 클래스에서 입력에 대한 예외 메세지를 InputView로 이동.
+- [x] hasSix 메소드 명을 isSizeSix와 같이 변경.
+- [x] 문자열 split은 InputView에서 처리.
