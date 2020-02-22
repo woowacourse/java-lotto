@@ -4,13 +4,22 @@ import java.util.Scanner;
 
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
+	private static final int INVALID_NUMBER = Integer.MIN_VALUE;
 
 	public static int inputPurchaseMoney() {
+		int purchaseMoney = inputPurchaseMoneyIfValid();
+		while (purchaseMoney == INVALID_NUMBER) {
+			purchaseMoney = inputPurchaseMoneyIfValid();
+		}
+		return purchaseMoney;
+	}
+
+	public static int inputPurchaseMoneyIfValid() {
 		System.out.println("구입 금액을 입력해 주세요.");
 		try {
 			return Integer.parseInt(scanner.nextLine());
 		} catch (NumberFormatException e) {
-			return inputPurchaseMoney();
+			return INVALID_NUMBER;
 		}
 	}
 
@@ -20,6 +29,14 @@ public class InputView {
 	}
 
 	public static int inputBonusNumber() {
+		int bonusNumber = inputBonusNumberIfValid();
+		while (bonusNumber == INVALID_NUMBER) {
+			bonusNumber = inputBonusNumberIfValid();
+		}
+		return bonusNumber;
+	}
+
+	public static int inputBonusNumberIfValid() {
 		System.out.println("보너스 볼을 입력해주세요.");
 		try {
 			return Integer.parseInt(scanner.nextLine());
