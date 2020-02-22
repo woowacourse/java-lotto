@@ -12,20 +12,14 @@ import view.OutputView;
 
 public class LottoController {
     LottoGame lottoGame = new LottoGame();
-    LottoResult lottoResult = new LottoResult();
 
     public void run() {
         Money money = new Money(InputView.inputMoney());
+        LottoResult lottoResult = new LottoResult();
+
         makeLottoNumbers(money.calculateGames());
         lottoGame.makeResult(lottoResult, makeWinnerNumbers());
-        printResult(money);
-    }
-
-    private void printResult(Money money) {
-        OutputView.printResultTitle();
-        OutputView.printResult(lottoResult);
-        long earning = lottoResult.calculateEarning();
-        OutputView.printEarning(money.calculateEarnings(earning));
+        OutputView.printResult(money, lottoResult);
     }
 
     private LottoWinner makeWinnerNumbers() {

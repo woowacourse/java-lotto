@@ -1,5 +1,6 @@
 package view;
 
+import domain.Money;
 import domain.lottonumber.LottoNumber;
 import domain.lottonumber.LottoNumbers;
 import domain.lottoresult.LottoRank;
@@ -38,11 +39,6 @@ public class OutputView {
         System.out.println(sb.toString());
     }
 
-    public static void printResultTitle() {
-        System.out.println("\n당첨 통계");
-        System.out.println("--------");
-    }
-
     private static void printEachResult(LottoRank rank, ResultCount resultCount) {
         StringBuilder sb = new StringBuilder();
         if (rank == LottoRank.NOTHING) {
@@ -61,14 +57,13 @@ public class OutputView {
         System.out.println(sb.toString());
     }
 
-    public static void printResult(LottoResult result) {
+    public static void printResult(Money money, LottoResult result) {
+        System.out.println("\n당첨 통계");
+        System.out.println("--------");
         for (LottoRank rank : LottoRank.values()) {
             printEachResult(rank, result.get(rank));
         }
-    }
-
-    public static void printEarning(long rating) {
-        System.out.println("총 수익률은 " + rating + "%입니다.");
+        System.out.println("총 수익률은 " + money.calculateEarnings(result.calculateEarning()) + "%입니다.");
     }
 
     public static void printRepeat(int repeat) {
