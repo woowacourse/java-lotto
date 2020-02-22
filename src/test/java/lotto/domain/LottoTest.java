@@ -6,37 +6,31 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 public class LottoTest {
-	@ParameterizedTest
-	@NullAndEmptySource
-	void 로또가_null이나_빈값인_경우(List<Integer> value) {
-		assertThatThrownBy(() -> new Lotto(value))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("null이나 빈 값");
-	}
-
-	@Test
-	void 중복_숫자() {
-		assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5)))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("중복");
-	}
-
 	static Stream<Arguments> generateInput_잘못된_갯수() {
-		return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+		return Stream.of(Arguments.of(new LottoNumbers(Arrays.asList(new LottoNumber(1)))),
+			Arguments.of(new LottoNumbers(
+				Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+					new LottoNumber(5), new LottoNumber(6), new LottoNumber(7)))));
+	}
+
+	@ParameterizedTest
+	@NullSource
+	void 로또번호가_null인_경우(LottoNumbers lottoNumbers) {
+		assertThatThrownBy(() -> new Lotto(lottoNumbers))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("null");
 	}
 
 	@ParameterizedTest
 	@MethodSource("generateInput_잘못된_갯수")
-	void 로또_공_갯수가_맞지_않는_경우(List<Integer> value) {
-		assertThatThrownBy(() -> new Lotto(value))
+	void 로또_공_갯수가_맞지_않는_경우(LottoNumbers lottoNumbers) {
+		assertThatThrownBy(() -> new Lotto(lottoNumbers))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("개여야 합니다");
 	}
@@ -53,7 +47,9 @@ public class LottoTest {
 	@ParameterizedTest
 	@MethodSource("generateInput_당첨번호")
 	void 몇등_당첨(List<String> winningNumbers, int bonusNumber, String expectedPrize) {
-		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lotto lotto = new Lotto(new LottoNumbers(
+			Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+				new LottoNumber(5), new LottoNumber(6))));
 		WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
 		assertThat(lotto.findLottoPrize(winningNumber).getPrizeDescription()).isEqualTo(expectedPrize);
 	}

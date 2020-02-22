@@ -10,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class WinningNumberTest {
 	@ParameterizedTest
@@ -73,13 +72,5 @@ public class WinningNumberTest {
 		assertThatThrownBy(() -> new WinningNumber(value, bonus))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("중복된 보너스");
-	}
-
-	@ParameterizedTest
-	@ValueSource(ints = {-1000, 0, 46, 10000})
-	void 보너스_번호_범위를_벗어나는_경우(int bonus) {
-		assertThatThrownBy(() -> new WinningNumber(Arrays.asList("1", "2", "3", "4", "5", "6"), bonus))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("보너스 번호가 범위");
 	}
 }
