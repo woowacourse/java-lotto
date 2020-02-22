@@ -53,8 +53,7 @@ public class LottoGame {
 
     private static LottoResult countWinningLottos(LottoTickets lottoTickets, WinningNumber winningNumber) {
         LottoResult lottoResult = new LottoResult();
-        lottoTickets.countWinningLotto(winningNumber, lottoResult);
-        return lottoResult;
+        return lottoResult = lottoTickets.countWinningLotto(winningNumber, lottoResult);
     }
 
     private static int calculateProfitRatio(int lottoCount, LottoResult lottoResult) {

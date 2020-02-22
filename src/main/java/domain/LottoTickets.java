@@ -13,12 +13,13 @@ public class LottoTickets {
         }
     }
 
-    public void countWinningLotto(WinningNumber winningNumber, LottoResult lottoResult) {
+    public LottoResult countWinningLotto(WinningNumber winningNumber, LottoResult lottoResult) {
         for (Lotto lotto : lottoTickets){
             LottoRank rank = LottoRank.findRank(winningNumber.countWinningMatch(lotto),
                                             winningNumber.isBonusMatch(lotto));
             lottoResult.addWinningRankCount(rank);
         }
+        return lottoResult;
     }
 
     public int getTicketsSize() {
