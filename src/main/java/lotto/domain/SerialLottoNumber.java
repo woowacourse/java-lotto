@@ -10,13 +10,13 @@ public class SerialLottoNumber {
 	private final Set<LottoNumber> lottoNumbers;
 
 	public SerialLottoNumber(final List<LottoNumber> lottoNumbers) throws LottoTicketIllegalArgumentException {
-		this(new HashSet<>(lottoNumbers));
+		this(new TreeSet<>(lottoNumbers));
 	}
 
 	public SerialLottoNumber(final Set<LottoNumber> lottoNumbers) throws LottoTicketIllegalArgumentException {
 		checkIsSizeSix(lottoNumbers);
 
-		this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+		this.lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(lottoNumbers));
 	}
 
 	private void checkIsSizeSix(Set<LottoNumber> lottoNumbers) {

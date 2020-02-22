@@ -4,7 +4,7 @@ import lotto.exceptions.LottoNumberIllegalArgumentException;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 	static final int MIN = 1;
 	static final int MAX = 45;
 
@@ -19,10 +19,6 @@ public class LottoNumber {
 		if (number < MIN || number > MAX) {
 			throw new LottoNumberIllegalArgumentException(number);
 		}
-	}
-
-	public static int compare(LottoNumber a, LottoNumber b) {
-		return a.lottoNumber - b.lottoNumber;
 	}
 
 	@Override
@@ -41,5 +37,10 @@ public class LottoNumber {
 	@Override
 	public String toString() {
 		return Integer.toString(lottoNumber);
+	}
+
+	@Override
+	public int compareTo(LottoNumber o) {
+		return lottoNumber - o.lottoNumber;
 	}
 }
