@@ -11,6 +11,7 @@ public class RandomLottoTicketFactory {
 	public static SerialLottoNumber createLottoTicket() {
 		List<LottoNumber> allLottoNumbers = new ArrayList<>(AllLottoNumbers.getAll());
 		Collections.shuffle(allLottoNumbers);
+
 		return new SerialLottoNumber(allLottoNumbers.subList(ZERO_INDEX, SIX_INDEX));
 	}
 }

@@ -7,13 +7,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class WinningLottoNumbersTest {
+public class WinningInformationTest {
 	@Test
 	void WinningLottoNumbers() {
 		// given
@@ -24,12 +23,12 @@ public class WinningLottoNumbersTest {
 		LottoNumber bonus = new LottoNumber(7);
 
 		// when
-		WinningLottoNumbers result = new WinningLottoNumbers(winningLottoNumbers, bonus);
+		WinningInformation result = new WinningInformation(winningLottoNumbers, bonus);
 
 		// then
 		Assertions.assertThat(result.getWinningLottoNumbers())
 				.isEqualTo(winningLottoNumbers);
-		Assertions.assertThat(result.getBonus())
+		Assertions.assertThat(result.getBonusLottoNumber())
 				.isEqualTo(bonus);
 	}
 
@@ -47,7 +46,7 @@ public class WinningLottoNumbersTest {
 		Assertions.assertThatThrownBy(() -> {
 
 			// when
-			new WinningLottoNumbers(winningLottoNumbers, bonus);
+			new WinningInformation(winningLottoNumbers, bonus);
 		}).isInstanceOf(WinningLottoNumbersIllegalArgumentException.class)
 				.hasMessageMatching(WinningLottoNumbersIllegalArgumentException.MESSAGE);
 	}
@@ -61,7 +60,7 @@ public class WinningLottoNumbersTest {
 				.collect(Collectors.toUnmodifiableList());
 		SerialLottoNumber winningNumbers = new SerialLottoNumber(winning);
 		LottoNumber bonus = new LottoNumber(7);
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonus);
+		WinningInformation winningInformation = new WinningInformation(winningNumbers, bonus);
 
 		List<LottoNumber> lottoNumbers = input.stream()
 				.map(LottoNumber::new)
@@ -69,7 +68,7 @@ public class WinningLottoNumbersTest {
 		SerialLottoNumber lottoTicket = new SerialLottoNumber(lottoNumbers);
 
 		// when
-		WinningType winningType = winningLottoNumbers.findMatchingWinningTypeWith(lottoTicket);
+		WinningType winningType = winningInformation.findMatchingWinningTypeWith(lottoTicket);
 
 		// then
 		Assertions.assertThat(winningType)

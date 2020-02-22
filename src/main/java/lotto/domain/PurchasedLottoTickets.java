@@ -29,9 +29,9 @@ public class PurchasedLottoTickets {
 		return Objects.hash(purchasedLottoTickets);
 	}
 
-	public List<WinningType> findMatchingWinningTypesWith(WinningLottoNumbers winningLottoNumbers) {
+	public List<WinningType> findMatchingWinningTypesWith(WinningInformation winningInformation) {
 		return purchasedLottoTickets.stream()
-				.map(winningLottoNumbers::findMatchingWinningTypeWith)
+				.map(winningInformation::findMatchingWinningTypeWith)
 				.collect(Collectors.toUnmodifiableList());
 	}
 }

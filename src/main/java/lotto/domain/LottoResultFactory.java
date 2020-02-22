@@ -9,10 +9,10 @@ public class LottoResultFactory {
 	public static final int DEFAULT = 0;
 
 	public static LottoResult create(PurchasedLottoTickets purchasedLottoTickets,
-									 WinningLottoNumbers winningLottoNumbers) {
+									 WinningInformation winningInformation) {
 		Map<WinningType, Integer> lottoResult = init();
 		List<WinningType> winningTypes =
-				purchasedLottoTickets.findMatchingWinningTypesWith(winningLottoNumbers);
+				purchasedLottoTickets.findMatchingWinningTypesWith(winningInformation);
 
 		lottoResult.replaceAll((k, v) -> Collections.frequency(winningTypes, k));
 

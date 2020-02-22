@@ -16,17 +16,17 @@ public class LottoController {
 				= PurchasedLottoTicketsFactory.create(purchaseMoney);
 		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 
-		WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbers();
+		WinningInformation winningInformation = createWinningLottoNumbers();
 
-		LottoResult lottoResult = LottoResultFactory.create(purchasedLottoTickets, winningLottoNumbers);
+		LottoResult lottoResult = LottoResultFactory.create(purchasedLottoTickets, winningInformation);
 		OutputView.printLottoResult(lottoResult);
 
 		OutputView.printEarningRate(lottoResult.calculateEarningRate(purchaseMoney));
 	}
 
-	private static WinningLottoNumbers createWinningLottoNumbers() {
+	private static WinningInformation createWinningLottoNumbers() {
 		try {
-			return new WinningLottoNumbers(createWinningNumbers(), createBonusNumber());
+			return new WinningInformation(createWinningNumbers(), createBonusNumber());
 		} catch (WinningLottoNumbersIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return createWinningLottoNumbers();
