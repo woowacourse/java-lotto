@@ -63,7 +63,7 @@ public class OutputView {
         for (LottoRank rank : LottoRank.values()) {
             printEachResult(rank, result.get(rank));
         }
-        System.out.println("총 수익률은 " + money.calculateEarnings(result.calculateEarning()) + "%입니다.");
+        System.out.println("총 수익률은 " + money.calculateEarnings(result.calculateGamesEarning()) + "%입니다.");
     }
 
     public static void printRepeat(int repeat) {

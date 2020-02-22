@@ -15,6 +15,10 @@ public class LottoNumberFactory {
         }
     }
 
+    private LottoNumberFactory(){
+        throw new AssertionError();
+    }
+
     private static void validateBound(int number) {
         if (number < LOTTO_UNDER_BOUND || number > LOTTO_UPPER_BOUND) {
             throw new IllegalArgumentException(ERROR_BOUND_MESSAGE);
