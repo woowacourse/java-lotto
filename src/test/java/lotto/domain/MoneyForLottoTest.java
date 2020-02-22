@@ -17,12 +17,12 @@ import static org.assertj.core.api.Assertions.*;
 public class MoneyForLottoTest {
 	@Test
 	void MoneyForLotto_생성자_올바른_동작_확인() {
-		assertThat(new MoneyForLotto(5000)).isInstanceOf(MoneyForLotto.class);
+		assertThat(new MoneyForLotto("5000")).isInstanceOf(MoneyForLotto.class);
 	}
 
 	@ParameterizedTest
 	@NullSource
-	void MoneyForLotto_null_입력시_예외처리(Integer nullInput) {
+	void MoneyForLotto_null_입력시_예외처리(String nullInput) {
 		assertThatThrownBy(() -> {
 			new MoneyForLotto(nullInput);
 		}).isInstanceOf(NullPointerException.class);
@@ -31,7 +31,7 @@ public class MoneyForLottoTest {
 	@Test
 	void MoneyForLotto_1000원_미만_입력시_예외처리() {
 		assertThatThrownBy(() -> {
-			Integer inputMoney = 500;
+			String inputMoney = "500";
 			new MoneyForLotto(inputMoney);
 		}).isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("1000원 이상 입력해주세요.");
@@ -39,6 +39,6 @@ public class MoneyForLottoTest {
 
 	@Test
 	void calculateAmountOfLottos_올바른_동작_확인() {
-		assertThat(new MoneyForLotto(5253).calculateAmountOfLottos()).isEqualTo(5);
+		assertThat(new MoneyForLotto("5253").calculateAmountOfLottos()).isEqualTo(5);
 	}
 }

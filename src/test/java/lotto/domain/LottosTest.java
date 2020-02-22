@@ -44,7 +44,7 @@ public class LottosTest {
 	void Lottos_빈_리스트_입력시_예외처리(List<Lotto> emptyInput) {
 		assertThatThrownBy(() -> {
 			new Lottos(emptyInput);
-		}).isInstanceOf(IllegalArgumentException.class)
+		}).isInstanceOf(InvalidLottosException.class)
 				.hasMessage("로또는 한 장 이상 사야합니다.");
 	}
 }

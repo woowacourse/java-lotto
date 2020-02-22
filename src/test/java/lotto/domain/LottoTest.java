@@ -49,7 +49,7 @@ public class LottoTest {
 	@EmptySource
 	void Lotto_빈_리스트_예외처리(List<LottoNumber> input) {
 		assertThatThrownBy(() -> new Lotto(input))
-				.isInstanceOfAny(IllegalArgumentException.class)
+				.isInstanceOfAny(InvalidLottoException.class)
 				.hasMessage("로또번호가 입력되지 않았습니다.");
 	}
 
@@ -66,7 +66,7 @@ public class LottoTest {
 		);
 
 		assertThatThrownBy(() -> new Lotto(inputLengthNotEnough))
-				.isInstanceOf(IllegalArgumentException.class)
+				.isInstanceOf(InvalidLottoException.class)
 				.hasMessage("입력 로또번호는 6개가 입력되어야 합니다.");
 	}
 
@@ -88,7 +88,7 @@ public class LottoTest {
 		);
 
 		assertThatThrownBy(() -> new Lotto(inputLengthOverSix))
-				.isInstanceOf(IllegalArgumentException.class)
+				.isInstanceOf(InvalidLottoException.class)
 				.hasMessage("입력 로또번호는 6개가 입력되어야 합니다.");
 	}
 
@@ -106,7 +106,7 @@ public class LottoTest {
 		);
 
 		assertThatThrownBy(() -> new Lotto(overlappedInput))
-				.isInstanceOf(IllegalArgumentException.class)
+				.isInstanceOf(InvalidLottoException.class)
 				.hasMessage("입력 로또번호에 중복이 있습니다.");
 	}
 }

@@ -19,10 +19,9 @@ import lotto.domain.LottoFactory;
  */
 public class LottoController { // TODO 변수들을 클래스변수로 뺴고 메서드들을 나누기
 	public static void run() {
-		MoneyForLotto moneyForLotto = InputView.getMoneyForLotto(); // TODO 로또 인풋 받는 메서드
+		MoneyForLotto moneyForLotto = receiveMoneyForLotto(); // TODO 로또 인풋 받는 메서드
 		int amountOfLottos = moneyForLotto.calculateAmountOfLottos();
 		Lottos lottos = LottosFactory.createLottosAuto(amountOfLottos);
-
 		OutputView.printPurchasedLottos(amountOfLottos, lottos);
 
 		WinningLotto winningLotto = InputView.getWinningLotto(); // TODO 결과 뽑는 메서드
@@ -30,5 +29,14 @@ public class LottoController { // TODO 변수들을 클래스변수로 뺴고 �
 
 		ResultStatistic result = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
 		OutputView.printResultStatistic(result, moneyForLotto); // TODO 여기까지 결과 뽑는 메서드
+	}
+
+	private static MoneyForLotto receiveMoneyForLotto() {
+		try {
+			return new MoneyForLotto(InputView.getMoneyForLotto());
+		} catch (Exception e) {
+			OutputView.printExceptionMessage(e);
+			return receiveMoneyForLotto();
+		}
 	}
 }

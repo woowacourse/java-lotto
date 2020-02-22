@@ -17,14 +17,9 @@ import java.util.Scanner;
 public class InputView {
 	private static final Scanner SCANNER = new Scanner(System.in);
 
-	public static MoneyForLotto getMoneyForLotto() { // TODO 고려를 해보자
-		try {
-			OutputView.askEnterMoneyForLotto();
-			return new MoneyForLotto(Integer.parseInt(SCANNER.nextLine()));
-		} catch (Exception e) { // TODO runtime으로
-			OutputView.printExceptionMessage(e);
-			return getMoneyForLotto();
-		}
+	public static String getMoneyForLotto() {
+		OutputView.askEnterMoneyForLotto();
+		return SCANNER.nextLine();
 	}
 
 	public static WinningLotto getWinningLotto() {
