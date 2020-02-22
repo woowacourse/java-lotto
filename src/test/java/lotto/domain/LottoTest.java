@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 
+@SuppressWarnings("NonAsciiCharacters")
 public class LottoTest {
 	static Stream<Arguments> generateInput_잘못된_갯수() {
 		return Stream.of(Arguments.of(new LottoNumbers(Arrays.asList(new LottoNumber(1)))),

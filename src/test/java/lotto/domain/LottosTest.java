@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+@SuppressWarnings("NonAsciiCharacters")
 public class LottosTest {
 	@ParameterizedTest
 	@NullAndEmptySource

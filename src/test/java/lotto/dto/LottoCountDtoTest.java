@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@SuppressWarnings("NonAsciiCharacters")
 public class LottoCountDtoTest {
 	@ParameterizedTest
 	@ValueSource(ints = {1500, 4310, 3404, 7146, 10200})
