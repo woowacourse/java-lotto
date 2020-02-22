@@ -31,11 +31,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static LottoNumber of(String number) {
-		try {
-			return of(Integer.parseInt(number));
-		} catch (NumberFormatException e) {
-			throw e;
-		}
+		return of(Integer.parseInt(number));
 	}
 
 	public static Collection<LottoNumber> values() {
