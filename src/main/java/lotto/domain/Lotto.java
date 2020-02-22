@@ -9,27 +9,18 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final String DUPLICATED_NUMBER_EXCEPTION_MESSAGE = "중복된 볼이 포함";
     private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 갯수가 적절하지 않습니다.";
     private static final String SPLIT_DELIMITER = ", ";
     static final int BALL_COUNT = 6;
 
-    private final List<Ball> balls;
+    private final Set<Ball> balls;
 
-    public Lotto(List<Ball> balls) {
-        validateDuplication(balls);
+    public Lotto(Set<Ball> balls) {
         validateBallCount(balls);
-        this.balls = Collections.unmodifiableList(new ArrayList<>(balls));
+        this.balls = Collections.unmodifiableSet(new HashSet<>(balls));
     }
 
-    private void validateDuplication(List<Ball> balls) {
-        Set<Ball> distinctBalls = new HashSet<>(balls);
-        if (distinctBalls.size() != balls.size()) {
-            throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION_MESSAGE);
-        }
-    }
-
-    private void validateBallCount(List<Ball> balls) {
+    private void validateBallCount(Set<Ball> balls) {
         if (balls.size() != BALL_COUNT) {
             throw new IllegalArgumentException(BALL_COUNT_EXCEPTION_MESSAGE);
         }
@@ -37,7 +28,7 @@ public class Lotto {
 
     public static Lotto of(String rawWinningLotto) {
         String[] numbers = rawWinningLotto.split(SPLIT_DELIMITER);
-        List<Ball> balls = new ArrayList<>();
+        Set<Ball> balls = new HashSet<>();
         for (String number : numbers) {
             balls.add(Ball.of(Integer.parseInt(number)));
         }
@@ -49,7 +40,7 @@ public class Lotto {
     }
 
     public int countCommonBalls(Lotto lotto) {
-        List<Ball> sameBalls = new ArrayList<>(balls);
+        Set<Ball> sameBalls = new HashSet<>(balls);
         sameBalls.retainAll(lotto.balls);
         return sameBalls.size();
     }
