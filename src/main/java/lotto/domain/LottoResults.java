@@ -14,16 +14,21 @@ public class LottoResults {
 
 	public LottoResults(List<LottoRank> lottoRanks) {
 		validate(lottoRanks);
-		lottoResults = lottoRanks.stream()
-				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-		Arrays.stream(LottoRank.values())
-				.forEach(rank -> lottoResults.putIfAbsent(rank, DEFAULT_COUNT));
+		lottoResults = build(lottoRanks);
 	}
 
 	private void validate(List<LottoRank> lottoRanks) {
 		if (lottoRanks == null) {
 			throw new IllegalArgumentException();
 		}
+	}
+
+	private Map<LottoRank, Long> build(List<LottoRank> lottoRanks) {
+		Map<LottoRank, Long> lottoResults = lottoRanks.stream()
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		Arrays.stream(LottoRank.values())
+				.forEach(rank -> lottoResults.putIfAbsent(rank, DEFAULT_COUNT));
+		return lottoResults;
 	}
 
 	public long getRankCount(LottoRank lottoRank) {
