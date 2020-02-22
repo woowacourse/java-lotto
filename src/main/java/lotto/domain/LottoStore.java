@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
@@ -27,15 +26,12 @@ public class LottoStore {
     }
 
     private void generateLottoTickets() {
-        for (int i = 0; i < purchaseAmount.lottoTicket(); i++) {
+        lottoTickets = new LottoTickets();
+        for (int i = 0; i < purchaseAmount.giveLottoTicketNumber(); i++) {
             Collections.shuffle(LottoBallFactory.getInstance());
-            lottoTickets = new LottoTickets(generateLottoTicket());
+            lottoTickets.addLottoTicket(generateLottoTicket());
         }
         OutputView.printLottoTicket(lottoTickets);
-    }
-
-    public PurchaseAmount getPurchaseAmount() {
-        return purchaseAmount;
     }
 
     public LottoTickets getLottoTickets() {

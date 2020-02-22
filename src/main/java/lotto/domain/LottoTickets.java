@@ -7,7 +7,7 @@ import java.util.List;
 public class LottoTickets {
     private final List<LottoTicket> LOTTO_TICKETS = new ArrayList<>();
 
-    public LottoTickets(LottoTicket lottoTicket) {
+    public void addLottoTicket(LottoTicket lottoTicket){
         LOTTO_TICKETS.add(lottoTicket);
     }
 

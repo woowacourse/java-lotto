@@ -13,7 +13,7 @@ public class PurchaseAmountTest {
     @DisplayName("로또 티켓수 반환 테스트")
     void give_lotto_ticket_test() {
         PurchaseAmount purchaseAmount = new PurchaseAmount("1500");
-        assertThat(purchaseAmount.lottoTicket()).isEqualTo(1);
+        assertThat(purchaseAmount.giveLottoTicketNumber()).isEqualTo(1);
     }
 
     @Test
