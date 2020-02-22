@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class MatchCount {
 
     private static final int MINIMUM_MATCH_COUNT = 1;
@@ -16,5 +18,22 @@ public class MatchCount {
 
     public int getMatchCount() {
         return matchCount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        MatchCount that = (MatchCount) o;
+        return matchCount == that.matchCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matchCount);
     }
 }

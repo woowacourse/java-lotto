@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Prize {
 
     private static final long MINIMUM_PRIZE = 0L;
@@ -20,5 +22,22 @@ public class Prize {
 
     public long multiply(int count) {
         return prize * count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Prize prize1 = (Prize) o;
+        return prize == prize1.prize;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prize);
     }
 }
