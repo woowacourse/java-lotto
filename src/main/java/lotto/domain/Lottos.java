@@ -18,7 +18,7 @@ public class Lottos implements Iterable<Lotto> {
 
 	private void validate(List<Lotto> lottos) {
 		if (lottos == null || lottos.isEmpty()) {
-			throw new InvalidLottosException("하나 이상의 로또가 필요합니다.");
+			throw new InvalidLottosException();
 		}
 	}
 
