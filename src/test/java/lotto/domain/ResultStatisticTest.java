@@ -69,7 +69,7 @@ public class ResultStatisticTest {
 		tempLottos.add(LottoFactory.createLottoManual(LottoType.PAID_LOTTO, lottoNumbersSixthPrize));
 		lottos = new Lottos(tempLottos);
 
-		bonusLottoNumber = new BonusLottoNumber(7, winningLotto);
+		bonusLottoNumber = new BonusLottoNumber("7", winningLotto);
 	}
 
 	@Test
