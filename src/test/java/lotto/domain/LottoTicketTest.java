@@ -9,6 +9,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import lotto.util.StringUtil;
 
 public class LottoTicketTest {
 
@@ -44,6 +47,22 @@ public class LottoTicketTest {
 		LottoTicket lottoTicket = new LottoTicket(balls);
 		List<Ball> balls2 = Arrays.asList(Ball.valueOf(1), Ball.valueOf(12), Ball.valueOf(7), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
 		LottoTicket lottoTicket2 = new LottoTicket(balls2);
-		assertThat(lottoTicket.countMatch(lottoTicket2)).isEqualTo(4);
+		assertThat(lottoTicket.findMatchingBall(lottoTicket2)).isEqualTo(4);
+	}
+
+	@DisplayName("부적합한 번호 문자열 입력시 로또 발급 실패")
+	@ParameterizedTest
+	@ValueSource(strings = {"1, 2, 3, 4, 5, ", "1, 2, 3, 4, 5, 6.", "1, 2, 3, 4, 5"})
+	void constructFailByRawNumber(String rawNumbers) {
+		assertThatThrownBy(() -> LottoTicket.of(StringUtil.splitRawLottoNumbers(rawNumbers)))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("문자열 목록으 로또 발급 기능 테스트")
+	@Test
+	void constructByStrings() {
+		LottoTicket lottoTicket = LottoTicket.of("1", "2", "3", "4", "5", "6");
+		List<Ball> balls = lottoTicket.getBalls();
+		assertThat(balls).containsExactly(Ball.valueOf(1), Ball.valueOf(2), Ball.valueOf(3), Ball.valueOf(4), Ball.valueOf(5), Ball.valueOf(6));
 	}
 }

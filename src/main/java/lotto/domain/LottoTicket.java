@@ -1,11 +1,15 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import lotto.util.StringUtil;
 
 public class LottoTicket {
 	private static final String DUPLICATED_NUMBER_EXCEPTION_MESSAGE = "중복된 볼이 포함";
@@ -45,11 +49,19 @@ public class LottoTicket {
 		}
 	}
 
+	public static LottoTicket of(String ... lottoNumbers) {
+		List<Ball> collect = Arrays.stream(lottoNumbers)
+			.mapToInt(Integer::parseInt)
+			.mapToObj(Ball::valueOf)
+			.collect(Collectors.toList());
+		return new LottoTicket(collect);
+	}
+
 	public boolean contains(Ball ball) {
 		return balls.contains(ball);
 	}
 
-	public int countMatch(LottoTicket lottoTicket) {
+	public int findMatchingBall(LottoTicket lottoTicket) {
 		List<Ball> sameBalls = new ArrayList<>(balls);
 		sameBalls.retainAll(lottoTicket.balls);
 		return sameBalls.size();

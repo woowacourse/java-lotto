@@ -11,7 +11,7 @@ import lotto.domain.Ball;
 
 class StringUtilTest {
 	@Test
-	void name() {
+	void splitNameTest() {
 		List<Ball> balls = Arrays.asList(Ball.valueOf(1), Ball.valueOf(2), Ball.valueOf(3));
 		String result = StringUtil.parseBalls(balls);
 		assertThat(result).isEqualTo("1, 2, 3");
