@@ -8,11 +8,12 @@ import java.util.Objects;
 public class LottoNumber implements Comparable {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
+    private static final Map<Integer, LottoNumber> lottoNumber = new HashMap<>();
+
     private int number;
-    private static final Map<Integer, LottoNumber> a = new HashMap<>();
     static {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            a.put(i, new LottoNumber(i));
+            lottoNumber.put(i, new LottoNumber(i));
         }
     }
 
@@ -22,7 +23,7 @@ public class LottoNumber implements Comparable {
 
     public static LottoNumber valueOf(int number) {
         checkLottoRange(number);
-        return a.get(number);
+        return lottoNumber.get(number);
     }
 
     public static LottoNumber valueOf(String number) {
@@ -30,7 +31,7 @@ public class LottoNumber implements Comparable {
         checkNotNumber(number);
         int numberIntegerValue = Integer.parseInt(number);
         checkLottoRange(numberIntegerValue);
-        return a.get(numberIntegerValue);
+        return lottoNumber.get(numberIntegerValue);
     }
 
     private static void checkLottoRange(int number) {
