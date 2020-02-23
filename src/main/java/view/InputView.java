@@ -1,5 +1,7 @@
 package view;
 
+import domain.Lotto;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -14,6 +16,11 @@ public class InputView {
     public static String inputManualCount() {
         OutputView.printInputManualCountMessage();
         return scanner.nextLine();
+    }
+
+    public static String[] inputManualLottoNumbers() {
+        return scanner.nextLine()
+                    .split(COMMA);
     }
 
     public static String[] inputWinningNumbers() {

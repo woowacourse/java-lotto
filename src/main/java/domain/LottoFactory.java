@@ -17,4 +17,10 @@ public class LottoFactory {
                                     .collect(toList());
         return new Lotto(lotto);
     }
+
+    public static Lotto createOneManualLotto(String[] manualLotto) {
+        return new Lotto(Arrays.stream(manualLotto)
+                    .map(value -> AllLottoNumbers.get(Integer.parseInt(value)))
+                    .collect(toList()));
+    }
 }

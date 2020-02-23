@@ -4,22 +4,35 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoGame {
 
     public static void main(String[] args) {
         Money amount = inputPurchaseAmount();
         int lottoCount = amount.getCount();
-        OutputView.printPurchaseCountMessage(lottoCount);
-
         ManualCount manualCount = inputManualCount(lottoCount);
 
-        Lottos lottos = LottosFactory.createLottos(lottoCount);
+        Lottos lottos = LottosFactory.createAutoLottos(lottoCount - manualCount.getManualCount());
+        OutputView.printInputManualLottoNumbers();
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int index = 0; index < manualCount.getManualCount(); index++) {
+            String[] manualLottoNumbers = inputManualLottoNumbers();
+            manualLottos.add(LottoFactory.createOneManualLotto(manualLottoNumbers));
+        }
+        lottos.addLottos(manualLottos);
+        OutputView.printPurchaseCountMessage(manualCount, lottoCount);
         OutputView.printLottos(lottos);
 
         WinningNumber winningNumber = inputWinningNumber();
         LottoResult lottoResult = winningNumber.countWinningLotto(lottos);
         OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(Money.calculateProfitRatio(lottoResult, lottoCount));
+    }
+
+    private static String[] inputManualLottoNumbers() {
+        return InputView.inputManualLottoNumbers();
     }
 
     private static ManualCount inputManualCount(int lottoCount) {

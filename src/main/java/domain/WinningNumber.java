@@ -10,7 +10,7 @@ public class WinningNumber {
     public WinningNumber(String[] numbers, String bonusNumber) {
         List<LottoNumber> winningNumbers = new ArrayList<>();
         for (String number : numbers) {
-            winningNumbers.add(new LottoNumber(number));
+            winningNumbers.add(AllLottoNumbers.get(Integer.parseInt(number)));
         }
         this.winningNumbers = new Lotto(winningNumbers);
         checkNotNumber(bonusNumber);

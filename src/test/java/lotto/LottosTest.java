@@ -11,7 +11,7 @@ public class LottosTest {
     void 구매금액으로_로또더미의_사이즈_확인(){
         Money amount = new Money("10800");
         int lottoCount = amount.getCount();
-        Lottos lottos = LottosFactory.createLottos(lottoCount);
+        Lottos lottos = LottosFactory.createAutoLottos(lottoCount);
         assertThat(lottos.getDummySize()).isEqualTo(10);
     }
 }

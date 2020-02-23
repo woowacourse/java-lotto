@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 public class ManualCount {
     public static final int NEGATIVE_CRITERIA_POINT = 0;
     private int manualCount;
@@ -26,5 +28,9 @@ public class ManualCount {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(String.format("문자는 입력될 수 없습니다. 현재 입력 : %s ", "수동"));
         }
+    }
+
+    public int getManualCount() {
+        return manualCount;
     }
 }

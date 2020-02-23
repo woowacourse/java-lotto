@@ -15,7 +15,11 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public void addLotto(Lotto lotto){
+    public void addLottos(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
+    }
+
+    public void addLotto(Lotto lotto) {
         lottos.add(lotto);
     }
 
