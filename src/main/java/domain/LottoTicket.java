@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class LottoTicket {
     private static final int LOTTO_TICKET_SIZE = 6;
@@ -32,6 +29,14 @@ public class LottoTicket {
     public boolean containLottoNumber(LottoNumber lottoNumber) {
         return this.lottoTicket.stream()
                 .anyMatch(ln -> ln.equals(lottoNumber));
+    }
+
+    public List<String> lottoTicketNumberToString() {
+        List<String> ticketNumbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : this.lottoTicket) {
+            ticketNumbers.add(lottoNumber.toString());
+        }
+        return ticketNumbers;
     }
 
     public List<LottoNumber> getLottoTicket() {

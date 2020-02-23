@@ -4,7 +4,6 @@
 !gradle/wrapper/gradle-wrapper.jar
 /out/
 /target/
-/src/main/java/Test.java
 
 ### STS ###
 .apt_generated

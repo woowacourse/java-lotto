@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
@@ -17,6 +17,22 @@ public class LottoNumber {
         if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("잘못된 범위의 로또 번호를 입력했습니다.");
         }
+    }
+
+    @Override
+    public int compareTo(LottoNumber compare) {
+        if (this.lottoNumber < compare.lottoNumber) {
+            return -1;
+        }
+        if (this.lottoNumber > compare.lottoNumber) {
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(lottoNumber);
     }
 
     @Override

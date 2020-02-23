@@ -23,4 +23,9 @@ public class Money {
     public int getMoney() {
         return this.money;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(this.money / MIN_MONEY);
+    }
 }

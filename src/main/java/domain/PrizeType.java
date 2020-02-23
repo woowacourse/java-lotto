@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.function.Function;
 
 public enum PrizeType {
-    THREE(3, false, "3개 일치 (5_000원)- ", (value -> value * 5_000)),
-    FOUR(4, false, "4개 일치 (50_000원)- ", (value -> value * 50_000)),
-    FIVE(5, false, "5개 일치 (1_500_000원)- ", (value -> value * 1_500_000)),
-    FIVE_WITH_BONUS(5, true, "5개 일치, 보너스 볼 일치 (30_000_000원)- ", (value -> value * 30_000_000)),
-    SIX(6, false, "6개 일치 (2_000_000_000원)- ", (value -> value * 2_000_000_000));
+    THREE(3, false, "3개 일치 (5000원)- ", (value -> value * 5_000)),
+    FOUR(4, false, "4개 일치 (50000원)- ", (value -> value * 50_000)),
+    FIVE(5, false, "5개 일치 (1500000원)- ", (value -> value * 1_500_000)),
+    FIVE_WITH_BONUS(5, true, "5개 일치, 보너스 볼 일치 (30000000원)- ", (value -> value * 30_000_000)),
+    SIX(6, false, "6개 일치 (2000000000원)- ", (value -> value * 2_000_000_000));
 
     private int type;
     private boolean isBonus;
