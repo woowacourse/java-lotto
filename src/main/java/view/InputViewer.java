@@ -10,7 +10,12 @@ public class InputViewer {
 
     public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            OutputViewer.printErrorMessage("숫자를 입력해주세요.");
+            return inputMoney();
+        }
     }
 
     public static String inputWinningLottoTicketNumber() {
