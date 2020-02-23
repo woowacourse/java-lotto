@@ -15,9 +15,9 @@ public class LottoTicketBundle {
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoResultBundle getLottoResults(WinningLotto winningLotto) {
+    public LottoResultBundle createLottoResultBundle(WinningLotto winningLotto) {
         return lottoTickets.stream()
-                .map(winningLotto::getResult)
+                .map(winningLotto::createLottoResult)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResultBundle::new));
     }
 

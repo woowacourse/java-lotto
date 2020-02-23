@@ -2,9 +2,9 @@ package lotto.domain.ticket;
 
 import lotto.domain.result.win.WinningLotto;
 import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoFactory;
-import lotto.view.dto.BettingMoneyRequestDTO;
-import lotto.view.dto.WinningLottoRequestDTO;
+import lotto.domain.ticket.ball.LottoBallFactory;
+import lotto.view.dto.BettingMoneyDTO;
+import lotto.view.dto.WinningLottoDTO;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,15 +15,7 @@ import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
 public abstract class LottoMachine {
 
-    public final WinningLotto createWinningLotto(WinningLottoRequestDTO winningLottoRequestDTO) {
-        Set<LottoBall> winningLotto = new HashSet<>();
-        for (int number : winningLottoRequestDTO.getWinningNumbers()) {
-            winningLotto.add(LottoFactory.getLottoBallByNumber(number));
-        }
-        return new WinningLotto(winningLotto, LottoFactory.getLottoBallByNumber(winningLottoRequestDTO.getBonusNumber()));
-    }
-
-    public final List<LottoTicket> buyTickets(BettingMoneyRequestDTO bettingMoney) {
+    public final List<LottoTicket> buyTickets(BettingMoneyDTO bettingMoney) {
         int ticketCount = bettingMoney.getBettingMoney() / LOTTO_PRICE;
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -35,4 +27,12 @@ public abstract class LottoMachine {
     }
 
     public abstract LottoTicket createOneTicket();
+
+    public final WinningLotto createWinningLotto(WinningLottoDTO winningLottoDTO) {
+        Set<LottoBall> winningLotto = new HashSet<>();
+        for (int number : winningLottoDTO.getWinningNumbers()) {
+            winningLotto.add(LottoBallFactory.getLottoBallByNumber(number));
+        }
+        return new WinningLotto(winningLotto, LottoBallFactory.getLottoBallByNumber(winningLottoDTO.getBonusNumber()));
+    }
 }

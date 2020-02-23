@@ -1,21 +1,21 @@
 package lotto.view.dto;
 
-import lotto.domain.result.win.prize.PrizeGroup;
+import lotto.domain.result.win.rank.Rank;
 
 import java.util.List;
 
-public class PrizeResponseDTO {
+public class RankDTO {
     private final String name;
     private final int matchCount;
     private final int defaultPrize;
     private final int matchTicketCount;
 
-    public PrizeResponseDTO(PrizeGroup criteria, List<PrizeGroup> prizeResults) {
-        this.name = criteria.name();
-        this.matchCount = criteria.getMatchCount();
-        this.defaultPrize = criteria.getDefaultPrize();
-        this.matchTicketCount = (int) prizeResults.stream()
-                .filter(criteria::equals)
+    public RankDTO(Rank rank, List<Rank> lottoRankResult) {
+        this.name = rank.name();
+        this.matchCount = rank.getMatchCount();
+        this.defaultPrize = rank.getDefaultPrize();
+        this.matchTicketCount = (int) lottoRankResult.stream()
+                .filter(rank::equals)
                 .count();
     }
 

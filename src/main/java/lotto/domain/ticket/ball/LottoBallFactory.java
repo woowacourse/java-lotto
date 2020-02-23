@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import static lotto.domain.ticket.ball.LottoBallValidator.LOWER_BOUND;
 import static lotto.domain.ticket.ball.LottoBallValidator.UPPER_BOUND;
 
-public class LottoFactory {
+public class LottoBallFactory {
     private static final Map<Integer, LottoBall> instance;
 
     static {

@@ -13,31 +13,31 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTicketResponseDTOTest {
+class LottoTicketDTOTest {
     private static LottoTicket ticket;
-    private static LottoTicketResponseDTO lottoTicketResponseDTO;
+    private static LottoTicketDTO lottoTicketDTO;
 
     @BeforeAll
     static void setUpLottoTicket() {
         ticket = new LottoMachineForTest().createOneTicket();
-        lottoTicketResponseDTO = new LottoTicketResponseDTO(ticket);
+        lottoTicketDTO = new LottoTicketDTO(ticket);
     }
 
 
     @DisplayName("로또 티켓 출력용 DTO 생성 확인")
     @Test
-    void getLottoTicketResponseDTOS() {
+    void getLottoTicketDTOS() {
         //given
         LottoTicketBundle ticketBundle = new LottoTicketBundle(Arrays.asList(ticket));
 
-        List<LottoTicketResponseDTO> expectedDTOS = new ArrayList<>();
-        expectedDTOS.add(lottoTicketResponseDTO);
+        List<LottoTicketDTO> expectedDTOS = new ArrayList<>();
+        expectedDTOS.add(lottoTicketDTO);
 
         //when
-        List<LottoTicketResponseDTO> lottoTicketResponseDTOS = LottoTicketResponseDTO.getLottoTicketResponseDTOS(ticketBundle);
+        List<LottoTicketDTO> lottoTicketDTOS = LottoTicketDTO.createLottoTicketDTOS(ticketBundle);
 
         //then
-        assertThat(lottoTicketResponseDTOS).isEqualTo(expectedDTOS);
+        assertThat(lottoTicketDTOS).isEqualTo(expectedDTOS);
     }
 
     @DisplayName("로또 티켓이 가지고 있는 숫자 Integer[]배열로 리턴 확인")
@@ -46,7 +46,7 @@ class LottoTicketResponseDTOTest {
         Integer[] expected = {1, 2, 3, 4, 5, 6};
 
         //when
-        Integer[] numbers = lottoTicketResponseDTO.getNumbers();
+        Integer[] numbers = lottoTicketDTO.getNumbers();
 
         //then
         assertThat(numbers).isEqualTo(expected);

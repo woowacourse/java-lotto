@@ -4,8 +4,8 @@ import lotto.domain.result.LottoResult;
 import lotto.domain.result.LottoResultBundle;
 import lotto.domain.result.win.WinningLotto;
 import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoFactory;
-import lotto.view.dto.BettingMoneyRequestDTO;
+import lotto.domain.ticket.ball.LottoBallFactory;
+import lotto.view.dto.BettingMoneyDTO;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -19,18 +19,18 @@ class LottoTicketBundleTest {
     @Test
     void getLottoResults() {
         //given
-        LottoTicketBundle ticketBundle = new LottoTicketBundle(new LottoMachineForTest().buyTickets(new BettingMoneyRequestDTO(1000)));
+        LottoTicketBundle ticketBundle = new LottoTicketBundle(new LottoMachineForTest().buyTickets(new BettingMoneyDTO(1000)));
 
         Set<LottoBall> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
-                .mapToObj(LottoFactory::getLottoBallByNumber)
+                .mapToObj(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());
-        LottoBall bonusNumber = LottoFactory.getLottoBallByNumber(7);
+        LottoBall bonusNumber = LottoBallFactory.getLottoBallByNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         LottoResultBundle expectedResultBundle = new LottoResultBundle(Arrays.asList(new LottoResult(6, false)));
 
         //when
-        LottoResultBundle resultBundle = ticketBundle.getLottoResults(winningLotto);
+        LottoResultBundle resultBundle = ticketBundle.createLottoResultBundle(winningLotto);
         resultBundle.toString();
 
         //then

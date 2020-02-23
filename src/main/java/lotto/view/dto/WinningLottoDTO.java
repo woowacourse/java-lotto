@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WinningLottoRequestDTO {
+public class WinningLottoDTO {
     private static final String MESSAGE_INVALID_BALL_SIZE = "볼 %d개, 입력한 볼의 갯수가 6개가 아닙니다.";
     private static final String PARSE_FAIL_EXCEPTION_MESSAGE = "%s : 숫자가 아닌 문자가 존재합니다.";
     private static final String COMMA = ",";
@@ -15,7 +15,7 @@ public class WinningLottoRequestDTO {
     private final Set<Integer> winningNumbers;
     private final int bonusNumber;
 
-    public WinningLottoRequestDTO(String winningNumbers, int bonusNumber) {
+    public WinningLottoDTO(String winningNumbers, int bonusNumber) {
         Set<Integer> numbers = collectNumber(winningNumbers);
         validateSize(numbers);
         this.bonusNumber = bonusNumber;
@@ -24,13 +24,13 @@ public class WinningLottoRequestDTO {
 
     private Set<Integer> collectNumber(String winningNumbers) {
         try {
-            return convertToIntegerSet(winningNumbers);
+            return splitAndConvertToIntegerSet(winningNumbers);
         } catch (NumberFormatException e) {
             throw new ConvertFailException(String.format(PARSE_FAIL_EXCEPTION_MESSAGE, winningNumbers));
         }
     }
 
-    private Set<Integer> convertToIntegerSet(String winningNumbers) {
+    private Set<Integer> splitAndConvertToIntegerSet(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(COMMA))
                 .map(String::trim)
                 .map(Integer::parseInt)

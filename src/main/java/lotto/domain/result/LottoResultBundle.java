@@ -1,7 +1,7 @@
 package lotto.domain.result;
 
-import lotto.domain.result.win.prize.PrizeGroup;
-import lotto.view.dto.StatisticsResponseDTO;
+import lotto.domain.result.win.rank.Rank;
+import lotto.view.dto.ResultDTO;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,13 +14,13 @@ public class LottoResultBundle {
         this.lottoResults = lottoResults;
     }
 
-    public StatisticsResponseDTO getStatistics() {
-        return new StatisticsResponseDTO(getPrizeGroup());
+    public ResultDTO createResultDTO() {
+        return new ResultDTO(convertLottoResultsToRanks());
     }
 
-    private List<PrizeGroup> getPrizeGroup() {
+    private List<Rank> convertLottoResultsToRanks() {
         return this.lottoResults.stream()
-                .map(PrizeGroup::findPrizeByLottoResult)
+                .map(Rank::findRankByLottoResult)
                 .collect(Collectors.toList());
     }
 

@@ -3,7 +3,7 @@ package lotto.domain.result;
 import lotto.domain.result.win.WinningLotto;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoFactory;
+import lotto.domain.ticket.ball.LottoBallFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -37,12 +37,12 @@ class WinningLottoTest {
     void name(int[] numbers, LottoResult expectedResult) {
         //given
         Set<LottoBall> winBalls = aLottoTicket(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(winBalls, LottoFactory.getLottoBallByNumber(7));
+        WinningLotto winningLotto = new WinningLotto(winBalls, LottoBallFactory.getLottoBallByNumber(7));
 
         LottoTicket buyLottoTicket = new LottoTicket(aLottoTicket(numbers));
 
         //when
-        LottoResult lottoResult = winningLotto.getResult(buyLottoTicket);
+        LottoResult lottoResult = winningLotto.createLottoResult(buyLottoTicket);
 
         //then
         assertThat(lottoResult).isEqualTo(expectedResult);
@@ -50,7 +50,7 @@ class WinningLottoTest {
 
     private Set<LottoBall> aLottoTicket(int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(LottoFactory::getLottoBallByNumber)
+                .mapToObj(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());
     }
 }

@@ -1,8 +1,8 @@
 package lotto.domain.ticket;
 
 import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoFactory;
-import lotto.view.dto.BettingMoneyRequestDTO;
+import lotto.domain.ticket.ball.LottoBallFactory;
+import lotto.view.dto.BettingMoneyDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +22,7 @@ class LottoTicketTest {
     void test1() {
         int[] ballNumbers = {1, 2, 3, 4, 5, 5};
         Set<LottoBall> lottoBalls = Arrays.stream(ballNumbers)
-                .mapToObj(LottoFactory::getLottoBallByNumber)
+                .mapToObj(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());
         int wrongSize = lottoBalls.size();
 
@@ -36,9 +36,9 @@ class LottoTicketTest {
     @CsvSource(value = {"1,true", "7,false"})
     void name(int number, boolean expectedResult) {
         LottoMachine testMachine = new LottoMachineForTest();       // {1, 2, 3, 4, 5, 6} 숫자를 가지는 로또 생성기
-        LottoTicket ticket = testMachine.buyTickets(new BettingMoneyRequestDTO(1000)).get(0);
+        LottoTicket ticket = testMachine.buyTickets(new BettingMoneyDTO(1000)).get(0);
 
-        LottoBall lottoBall = LottoFactory.getLottoBallByNumber(number);
+        LottoBall lottoBall = LottoBallFactory.getLottoBallByNumber(number);
 
         assertThat(ticket.has(lottoBall)).isEqualTo(expectedResult);
     }

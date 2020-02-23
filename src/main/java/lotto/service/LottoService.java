@@ -4,9 +4,9 @@ import lotto.domain.result.LottoResultBundle;
 import lotto.domain.result.win.WinningLotto;
 import lotto.domain.ticket.LottoMachine;
 import lotto.domain.ticket.LottoTicketBundle;
-import lotto.view.dto.BettingMoneyRequestDTO;
-import lotto.view.dto.StatisticsResponseDTO;
-import lotto.view.dto.WinningLottoRequestDTO;
+import lotto.view.dto.BettingMoneyDTO;
+import lotto.view.dto.ResultDTO;
+import lotto.view.dto.WinningLottoDTO;
 
 public class LottoService {
     private final LottoMachine lottoMachine;
@@ -15,14 +15,19 @@ public class LottoService {
         this.lottoMachine = lottoMachine;
     }
 
-    public LottoTicketBundle getLottoTicketBundle(BettingMoneyRequestDTO bettingMoneyRequestDTO) {
-        return new LottoTicketBundle(lottoMachine.buyTickets(bettingMoneyRequestDTO));
+    public LottoTicketBundle createLottoTicketBundle(BettingMoneyDTO bettingMoneyDTO) {
+        return new LottoTicketBundle(lottoMachine.buyTickets(bettingMoneyDTO));
     }
 
-    public StatisticsResponseDTO getStatisticsDTO(LottoTicketBundle lottoTicketBundle, WinningLottoRequestDTO winningLottoRequestDTO) {
-        WinningLotto winningLotto = lottoMachine.createWinningLotto(winningLottoRequestDTO);
-        LottoResultBundle lottoResultBundle = lottoTicketBundle.getLottoResults(winningLotto);
+    public ResultDTO getResult(WinningLottoDTO winningLottoDTO, LottoTicketBundle lottoTicketBundle) {
+        WinningLotto winningLotto = getWinningLotto(winningLottoDTO);
 
-        return lottoResultBundle.getStatistics();
+        LottoResultBundle lottoResultBundle = lottoTicketBundle.createLottoResultBundle(winningLotto);
+
+        return lottoResultBundle.createResultDTO();
+    }
+
+    private WinningLotto getWinningLotto(WinningLottoDTO winningLottoDTO) {
+        return lottoMachine.createWinningLotto(winningLottoDTO);
     }
 }

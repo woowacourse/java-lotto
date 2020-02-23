@@ -9,21 +9,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoTicketResponseDTO {
+public class LottoTicketDTO {
     private final List<Integer> numbers;
 
-    LottoTicketResponseDTO(LottoTicket lottoTicket) {
+    LottoTicketDTO(LottoTicket lottoTicket) {
         this.numbers = lottoTicket.getLottoBalls().stream()
                 .map(LottoBall::getNumber)
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoTicketResponseDTO> getLottoTicketResponseDTOS(LottoTicketBundle lottoTicketBundle) {
-        List<LottoTicketResponseDTO> lottoTicketResponseDTOS = new ArrayList<>();
+    public static List<LottoTicketDTO> createLottoTicketDTOS(LottoTicketBundle lottoTicketBundle) {
+        List<LottoTicketDTO> lottoTicketDTOS = new ArrayList<>();
+
         for (LottoTicket lottoTicket : lottoTicketBundle.getLottoTickets()) {
-            lottoTicketResponseDTOS.add(new LottoTicketResponseDTO(lottoTicket));
+            lottoTicketDTOS.add(new LottoTicketDTO(lottoTicket));
         }
-        return lottoTicketResponseDTOS;
+
+        return lottoTicketDTOS;
     }
 
     public Integer[] getNumbers() {
@@ -34,7 +36,7 @@ public class LottoTicketResponseDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoTicketResponseDTO that = (LottoTicketResponseDTO) o;
+        LottoTicketDTO that = (LottoTicketDTO) o;
         return Objects.equals(numbers, that.numbers);
     }
 

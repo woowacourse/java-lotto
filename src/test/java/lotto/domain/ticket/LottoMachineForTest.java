@@ -1,7 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoFactory;
+import lotto.domain.ticket.ball.LottoBallFactory;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -17,7 +17,7 @@ public class LottoMachineForTest extends LottoMachine {
     private Set<LottoBall> getTestBalls() {
         int[] fixedNumber = new int[]{1, 2, 3, 4, 5, 6};
         return Arrays.stream(fixedNumber)
-                .mapToObj(LottoFactory::getLottoBallByNumber)
+                .mapToObj(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());
     }
 }

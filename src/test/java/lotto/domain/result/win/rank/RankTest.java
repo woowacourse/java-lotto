@@ -1,4 +1,4 @@
-package lotto.domain.result.win.prize;
+package lotto.domain.result.win.rank;
 
 import lotto.domain.result.LottoResult;
 import org.junit.jupiter.api.DisplayName;
@@ -7,8 +7,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO: findPrizeByLottoResult
-class PrizeGroupTest {
+//TODO: findrankByLottoResult
+class RankTest {
     @DisplayName("로또 결과에 따른 상금정보 찾기")
     @ParameterizedTest
     @CsvSource(value = {
@@ -25,12 +25,12 @@ class PrizeGroupTest {
             "1,false,SIXTH",
             "0,false,SIXTH",
     })
-    void name(int matchCount, boolean isBonusMatch, PrizeGroup expected) {
+    void name(int matchCount, boolean isBonusMatch, Rank expected) {
         //given
         LottoResult result = new LottoResult(matchCount, isBonusMatch);
         //when
-        PrizeGroup prize = PrizeGroup.findPrizeByLottoResult(result);
+        Rank rank = Rank.findRankByLottoResult(result);
         //then
-        assertThat(prize).isEqualTo(expected);
+        assertThat(rank).isEqualTo(expected);
     }
 }

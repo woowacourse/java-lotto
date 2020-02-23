@@ -11,7 +11,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class WinningLottoRequestDTOTest {
+class WinningLottoDTOTest {
 
     private static final int DONT_CARE_NUMBER = 45;
 
@@ -19,7 +19,7 @@ class WinningLottoRequestDTOTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5|5", "1,2,3,4,5,6,7|7"}, delimiter = '|')
     void getWinningNumbers(String winningNumbers, int size) {
-        assertThatThrownBy(() -> new WinningLottoRequestDTO(winningNumbers, DONT_CARE_NUMBER))
+        assertThatThrownBy(() -> new WinningLottoDTO(winningNumbers, DONT_CARE_NUMBER))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("볼 %d개, 입력한 볼의 갯수가 6개가 아닙니다.", size);
     }
@@ -29,7 +29,7 @@ class WinningLottoRequestDTOTest {
     void getWinningNumbers1() {
         String winningNumbers = "1,2,3,4,5,a";
 
-        assertThatThrownBy(() -> new WinningLottoRequestDTO(winningNumbers, DONT_CARE_NUMBER))
+        assertThatThrownBy(() -> new WinningLottoDTO(winningNumbers, DONT_CARE_NUMBER))
                 .isInstanceOf(ConvertFailException.class)
                 .hasMessage("%s : 숫자가 아닌 문자가 존재합니다.", winningNumbers);
     }
@@ -41,8 +41,8 @@ class WinningLottoRequestDTOTest {
         String inputWinningNumbers = "1,2,3,4,5,6";
 
         //when
-        WinningLottoRequestDTO winningLottoRequestDTO = new WinningLottoRequestDTO(inputWinningNumbers, DONT_CARE_NUMBER);
-        Set<Integer> winningNumbers = winningLottoRequestDTO.getWinningNumbers();
+        WinningLottoDTO winningLottoDTO = new WinningLottoDTO(inputWinningNumbers, DONT_CARE_NUMBER);
+        Set<Integer> winningNumbers = winningLottoDTO.getWinningNumbers();
 
         //then
         assertThat(winningNumbers).contains(1, 2, 3, 4, 5, 6);

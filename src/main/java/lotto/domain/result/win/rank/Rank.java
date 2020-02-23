@@ -1,12 +1,12 @@
-package lotto.domain.result.win.prize;
+package lotto.domain.result.win.rank;
 
 import lotto.domain.result.LottoResult;
-import lotto.view.dto.StatisticsResponseDTO;
+import lotto.view.dto.ResultDTO;
 
 import java.util.Arrays;
 import java.util.List;
 
-public enum PrizeGroup {
+public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
@@ -17,29 +17,29 @@ public enum PrizeGroup {
     private final int matchCount;       // 우승 로또 번호와 일치하는 번호 갯수
     private final int defaultPrize;     // 등수 별 상금
 
-    PrizeGroup(int matchCount, int defaultPrize) {
+    Rank(int matchCount, int defaultPrize) {
         this.matchCount = matchCount;
         this.defaultPrize = defaultPrize;
     }
 
-    public static PrizeGroup findPrizeByLottoResult(LottoResult result) {
-        PrizeGroup prize = Arrays.stream(PrizeGroup.values())
-                .filter(aPrize -> result.isEqualToMatchCount(aPrize.matchCount))
+    public static Rank findRankByLottoResult(LottoResult result) {
+        Rank rank = Arrays.stream(Rank.values())
+                .filter(aRank -> result.isEqualToMatchCount(aRank.matchCount))
                 .findFirst()
                 .orElse(SIXTH);
 
-        if (prize.isThird(result)) {
+        if (rank.isThird(result)) {
             return THIRD;
         }
-        return prize;
+        return rank;
     }
 
     private boolean isThird(LottoResult lottoResult) {
         return this == SECOND && !lottoResult.isBonusMatch();
     }
 
-    public static StatisticsResponseDTO toDtos(List<PrizeGroup> prizeGroups) {
-        return new StatisticsResponseDTO(prizeGroups);
+    public static ResultDTO toDtos(List<Rank> ranks) {
+        return new ResultDTO(ranks);
     }
 
     public int getDefaultPrize() {

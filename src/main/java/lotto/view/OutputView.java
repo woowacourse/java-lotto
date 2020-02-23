@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.view.dto.LottoTicketResponseDTO;
-import lotto.view.dto.StatisticsResponseDTO;
+import lotto.view.dto.LottoTicketDTO;
+import lotto.view.dto.ResultDTO;
 
 import java.util.List;
 
@@ -14,24 +14,24 @@ public class OutputView {
     private static final String SECOND = "SECOND";
     private static final String MESSAGE_FOR_RETURN_RATE = "총 수익률은 %.1f입니다.";
 
-    public static void printLottoTicket(List<LottoTicketResponseDTO> lottoTicketResponseDTOS) {
-        System.out.println(String.format(MESSAGE_FOR_LOTTO_TICKET_NUMBER, lottoTicketResponseDTOS.size()));
-        for (LottoTicketResponseDTO dto : lottoTicketResponseDTOS) {
+    public static void printLottoTickets(List<LottoTicketDTO> lottoTicketDTOS) {
+        System.out.println(String.format(MESSAGE_FOR_LOTTO_TICKET_NUMBER, lottoTicketDTOS.size()));
+        for (LottoTicketDTO dto : lottoTicketDTOS) {
             System.out.println(String.format(MESSAGE_FOR_LOTTO_TICKET_INFO, dto.getNumbers()));
         }
         System.out.println();
     }
 
-    public static void printResult(StatisticsResponseDTO statisticsResponseDTO) {
+    public static void printResult(ResultDTO resultDTO) {
         System.out.println(MESSAGE_FOR_RESULT_ANNOUNCE);
-        for (int i = 0; i < statisticsResponseDTO.size(); i++) {
-            int matchCount = statisticsResponseDTO.getMatchCount(i);
-            int defaultPrize = statisticsResponseDTO.getDefaultPrize(i);
-            int matchTicketCount = statisticsResponseDTO.getMatchTicketCount(i);
-            String message = String.format(findMessage(statisticsResponseDTO.getName(i)), matchCount, defaultPrize, matchTicketCount);
+        for (int i = 0; i < resultDTO.size(); i++) {
+            int matchCount = resultDTO.getMatchCount(i);
+            int defaultPrize = resultDTO.getDefaultPrize(i);
+            int matchTicketCount = resultDTO.getMatchTicketCount(i);
+            String message = String.format(findMessage(resultDTO.getName(i)), matchCount, defaultPrize, matchTicketCount);
             System.out.println(message);
         }
-        System.out.println(String.format(MESSAGE_FOR_RETURN_RATE, statisticsResponseDTO.getRate()));
+        System.out.println(String.format(MESSAGE_FOR_RETURN_RATE, resultDTO.getRate()));
     }
 
     private static String findMessage(String name) {

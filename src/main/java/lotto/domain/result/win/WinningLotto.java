@@ -11,16 +11,16 @@ public class WinningLotto {
     private final WinningBalls winningBalls;
     private final LottoBall bonusBall;
 
-    public WinningLotto(Set<LottoBall> lottoBalls, LottoBall bonusBall) {
-        this.winningBalls = new WinningBalls(lottoBalls, bonusBall);
+    public WinningLotto(Set<LottoBall> winningLottoBalls, LottoBall bonusBall) {
+        this.winningBalls = new WinningBalls(winningLottoBalls, bonusBall);
         this.bonusBall = bonusBall;
     }
 
-    public LottoResult getResult(LottoTicket buyLottoTicket) {
-        int matchCount = winningBalls.getMatchCount(buyLottoTicket);
-        boolean isBonusMatch = buyLottoTicket.has(bonusBall);
+    public LottoResult createLottoResult(LottoTicket lottoTicket) {
+        int numberOfMatch = winningBalls.countMatchNumber(lottoTicket);
+        boolean isBonusMatch = lottoTicket.has(bonusBall);
 
-        return new LottoResult(matchCount, isBonusMatch);
+        return new LottoResult(numberOfMatch, isBonusMatch);
     }
 
     @Override
