@@ -9,11 +9,18 @@ public class PaidPrice {
     private int payment;
 
     public PaidPrice(String inputMoney) {
+        validateEmpty(inputMoney);
         validateNumber(inputMoney);
         int money = Integer.parseInt(inputMoney);
         validateUnderLottoPrice(money);
         validatePricePerLotto(money);
         this.payment = money;
+    }
+
+    private void validateEmpty (String inputMoney) {
+        if (inputMoney.isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_INPUT_MSG);
+        }
     }
 
     private void validateNumber(String inputMoney) {
