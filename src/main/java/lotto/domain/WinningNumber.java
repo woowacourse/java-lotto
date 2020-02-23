@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,7 +76,7 @@ public class WinningNumber {
 	}
 
 	public List<Integer> getWinningNumber() {
-		return winningNumber;
+		return Collections.unmodifiableList(winningNumber);
 	}
 
 	public int getBonusNumber() {
