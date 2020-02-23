@@ -37,13 +37,13 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("7개 이상의 로또 볼이 생성되었을 경우 예외처리 테스트")
+    @DisplayName("지정된 숫자 이상의 로또 볼이 생성되었을 경우 예외처리 테스트")
     void out_of_range_for_seven_test() {
         Set<LottoBall> lottoTicket = IntStream.rangeClosed(1, 7)
                 .mapToObj(LottoBall::new)
                 .collect(Collectors.toSet());
 
         assertThatThrownBy(() -> new LottoTicket(lottoTicket)).isInstanceOf(NumberOutOfRangeException.class)
-                .hasMessage("7개의 숫자가 들어갔습니다.");
+                .hasMessage(LottoTicket.LOTTO_TICKET_SIZE + "개 이상의 숫자가 들어갔습니다.");
     }
 }

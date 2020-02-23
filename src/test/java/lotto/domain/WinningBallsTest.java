@@ -1,10 +1,13 @@
 package lotto.domain;
 
+import lotto.util.InputValidationUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningBallsTest {
@@ -24,9 +27,9 @@ public class WinningBallsTest {
     @Test
     @DisplayName("보너스번호가 있는경우 테스트")
     void present_bonus_balls() {
-        int bonusBall = 10;
-        String winningBallInputs = "3, 4, 5, 6, 7, 8";
-        String lottoTicketNumbers = "3, 4, 5, 6, 7, 10";
+        int bonusBall = InputValidationUtil.returnNumberWithNumberCheck( "10");
+        String winningBallInputs = "3,4,5,6,7,8";
+        String lottoTicketNumbers = "3,4,5,6,7,10";
 
         Set<LottoBall> winningBallValues = LottoBalls.generateLottoBalls(winningBallInputs);
         Set<LottoBall> lottoTicket = LottoBalls.generateLottoBalls(lottoTicketNumbers);

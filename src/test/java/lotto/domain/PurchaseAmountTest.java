@@ -46,6 +46,6 @@ public class PurchaseAmountTest {
     void under_one_thousand_won() {
         String purchaseAmountInput = "999";
         assertThatThrownBy(() -> new PurchaseAmount(purchaseAmountInput)).isInstanceOf(NotBuyLottoTicketException.class)
-        .hasMessage("한개도 구매할 수 없습니다." + purchaseAmountInput + "원을 반환합니다.");
+        .hasMessage("한개도 구매할 수 없습니다. " + purchaseAmountInput + "원을 반환합니다.");
     }
 }
