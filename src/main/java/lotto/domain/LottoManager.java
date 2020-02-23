@@ -24,12 +24,12 @@ public class LottoManager {
         }
     }
 
-    private void lottoResultUpdate(int hitCount, boolean isBonus) {
+    private void lottoResultUpdate(int hitCount, boolean bonus) {
         if (hitCount < MIN_WIN_COUNT) {
             return;
         }
         Rank lottoRank = Rank.findRank(hitCount);
-        if (lottoRank.isSecondRank(isBonus)) {
+        if (lottoRank.isSecondRank(bonus)) {
             lottoRank = Rank.SECOND;
         }
         lottoResult.plusTicketCount(lottoRank);
