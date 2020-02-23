@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.errors.ErrorMessage;
+import lotto.utils.NumberUtils;
 
 import java.util.Objects;
 
@@ -11,9 +12,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private int number;
 
     public LottoNumber(String number) {
-        validateNumber(number);
-        validateNumberScope(Integer.parseInt(number));
-        this.number = Integer.parseInt(number);
+        this(NumberUtils.parseNumber(number));
     }
 
     public LottoNumber(int number) {
@@ -21,13 +20,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    private void validateNumber(String lottoNumber) {
-        try {
-            Integer.parseInt(lottoNumber);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER.getMessage());
-        }
-    }
 
     @Override
     public boolean equals(Object o) {
