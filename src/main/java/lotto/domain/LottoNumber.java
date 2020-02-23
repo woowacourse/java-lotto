@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumberException;
+
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_NUMBER = 45;
     private static final int MIN_NUMBER = 1;
     private final int number;
@@ -13,9 +15,13 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     private static void validateNumberRange(int number) {
-        if (isLessThanMin(number) || isGreaterThanMax(number)) {
-            throw new IllegalArgumentException("로또 숫자는 1~45사이어야 합니다.");
+        if (isOutOfRange(number)) {
+            throw new LottoNumberException("로또 숫자는 1~45사이어야 합니다.");
         }
+    }
+
+    private static boolean isOutOfRange(int number) {
+        return isLessThanMin(number) || isGreaterThanMax(number);
     }
 
     private static boolean isGreaterThanMax(int number) {

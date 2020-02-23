@@ -4,6 +4,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
+import lotto.exception.WinningNumbersException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ class WinningNumbersTest {
             LottoTicket lottoTicket = createLottoTicket("1,2,3,4,5,6");
             LottoNumber bonusNumber = new LottoNumber(6);
             new WinningNumbers(lottoTicket, bonusNumber);
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(WinningNumbersException.class)
                 .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 

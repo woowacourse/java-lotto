@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoTicketException;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class LottoTicket {
 
     private void validateNumbersCount(List<LottoNumber> numbers) {
         if (hasWrongSize(numbers)) {
-            throw new IllegalArgumentException("로또의 숫자는 6개여야 합니다.");
+            throw new LottoTicketException("로또의 숫자는 6개여야 합니다.");
         }
     }
 
@@ -31,7 +33,7 @@ public class LottoTicket {
 
     private void validateNumbersDuplication(List<LottoNumber> numbers) {
         if (hasDuplicatedNumbers(numbers)) {
-            throw new IllegalArgumentException("로또의 숫자는 중복될 수 없습니다.");
+            throw new LottoTicketException("로또의 숫자는 중복될 수 없습니다.");
         }
     }
 

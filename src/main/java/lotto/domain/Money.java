@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.MoneyException;
+
 import java.util.Objects;
 
 public class Money {
@@ -22,7 +24,7 @@ public class Money {
 
     private static void validateMoneyRange(int moneyValue) {
         if (moneyValue < MIN_PURCHASE_MONEY) {
-            throw new IllegalArgumentException("구매금액은 1000원 이상이어야 합니다.");
+            throw new MoneyException("구매금액은 1000원 이상이어야 합니다.");
         }
     }
 

@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
+import lotto.exception.LottoTicketException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class LottoTicketTest {
     void 로또숫자들이_6개가_아닐_경우_예외_발생() {
         Assertions.assertThatThrownBy(() -> {
             createLottoTicket("1,2,3,4,5");
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(LottoTicketException.class)
                 .hasMessage("로또의 숫자는 6개여야 합니다.");
     }
 
@@ -25,7 +26,7 @@ class LottoTicketTest {
     void 로또숫자들이_중복될_경우_예외_발생() {
         Assertions.assertThatThrownBy(() -> {
             createLottoTicket("1,2,3,4,5,5");
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(LottoTicketException.class)
                 .hasMessage("로또의 숫자는 중복될 수 없습니다.");
     }
 
