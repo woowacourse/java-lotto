@@ -1,8 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.view.dto.InputDTO;
 
 import java.util.List;
 
@@ -11,11 +11,11 @@ public class LottoGame {
     }
 
     public static void main(String[] args) {
-        Money purchaseMoney = InputDTO.inputPurchaseMoney();
+        Money purchaseMoney = InputView.inputPurchaseMoney();
         List<LottoTicket> lottoTickets =  LottoFactory.createLottos(purchaseMoney);
         OutputView.printLottos(lottoTickets);
 
-        WinningNumbers winningNumbers = InputDTO.inputWinningNumbers();
+        WinningNumbers winningNumbers = InputView.inputWinningNumbers();
         List<Rank> ranks = winningNumbers.checkOutLottos(lottoTickets);
         Profit profit = new Profit(purchaseMoney, ranks);
 
