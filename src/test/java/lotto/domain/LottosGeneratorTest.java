@@ -1,10 +1,7 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +9,16 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class LottosGeneratorTest {
+
+    @Test
+    void 로또티켓_중복_검사() {
+        //given
+        int lottosSize = 14;
+        //when
+        List<Lotto> lottoNumbersList = LottosGenerator.generate(lottosSize);
+        Set<Lotto> lottoNumbersSet = new HashSet<>(lottoNumbersList);
+        assertThat(lottoNumbersList.size()).isEqualTo(lottoNumbersSet.size());
+    }
 
     @Test
     void 로또_갯수만큼_로또_생성() {

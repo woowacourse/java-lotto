@@ -1,20 +1,28 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class LottosGenerator {
+    private static final List<LottoNumber> lottoNumbersInBox = LottoNumberBox.get();
+    static final int LOTTO_NUMBER_SIZE = 6;
+    private static final int ONE = 1;
 
-    static List<Lotto> generate(int lottosSize, List<Set<LottoNumber>> lottoNumbersList) {
-        //질문: final을 붙이는 것이 의미가 있는 것인 지 궁금합니다. 제 생각에는 이후에 초기화를 더 하지 못하게 막음으로써 메모리 누수를 막을 수 있다고 생각하는데요. 어떻게 생각하시나요?
-        final List<Lotto> lottos = new ArrayList<>();
-
+    static List<Lotto> generate(int lottosSize) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottosSize; i++) {
-            Lotto lotto = new Lotto(lottoNumbersList.get(i));
-            lottos.add(lotto);
+            Set<LottoNumber> lottoNumbers = generateLottoNumbers();
+            lottos.add(new Lotto(lottoNumbers));
         }
-
         return lottos;
+    }
+
+    private static Set<LottoNumber> generateLottoNumbers() {
+        Collections.shuffle(lottoNumbersInBox);
+        return new HashSet<>(
+            Collections.unmodifiableCollection(lottoNumbersInBox.subList(ONE, ONE + LOTTO_NUMBER_SIZE)));
     }
 }
