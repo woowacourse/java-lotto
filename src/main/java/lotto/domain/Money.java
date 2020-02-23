@@ -17,15 +17,19 @@ public class Money {
         return new Money(winningMoney);
     }
 
-    public static Money generatePurchaseMoney(int moneyValue) {
+    public static Money createPurchaseMoney(int moneyValue) {
         validateMoneyRange(moneyValue);
         return new Money(moneyValue);
     }
 
     private static void validateMoneyRange(int moneyValue) {
-        if (moneyValue < MIN_PURCHASE_MONEY) {
+        if (isUnderMinPurchaseMoney(moneyValue)) {
             throw new MoneyException("구매금액은 1000원 이상이어야 합니다.");
         }
+    }
+
+    private static boolean isUnderMinPurchaseMoney(int moneyValue) {
+        return moneyValue < MIN_PURCHASE_MONEY;
     }
 
     public Money plus(Money other) {

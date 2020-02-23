@@ -11,7 +11,7 @@ class MoneyTest {
     @Test
     void minimumMoney() {
         Assertions.assertThatThrownBy(() -> {
-            Money.generatePurchaseMoney(999);
+            Money.createPurchaseMoney(999);
         }).isInstanceOf(MoneyException.class)
                 .hasMessage("구매금액은 1000원 이상이어야 합니다.");
     }

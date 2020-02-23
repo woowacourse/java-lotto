@@ -31,8 +31,12 @@ public class WinningNumbers {
 
     private void compareLotto(List<Rank> ranks, LottoTicket lottoTicket) {
         Rank rank = lottoTicket.compare(winningLottoTicket, bonusNumber);
-        if (rank != Rank.LOSE) {
+        if (isInvalidRank(rank)) {
             ranks.add(rank);
         }
+    }
+
+    private boolean isInvalidRank(Rank rank) {
+        return rank != Rank.LOSE;
     }
 }

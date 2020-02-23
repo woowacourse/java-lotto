@@ -1,8 +1,8 @@
 package lotto.view.dto;
 
-import lotto.domain.Money;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 
@@ -14,13 +14,17 @@ public class InputDTO {
 
     public static Money inputPurchaseMoney() {
         try {
-            String inputForPurchaseMoney = InputView.inputPurchaseMoney();
-            int valueForPurchaseMoney = Integer.parseInt(inputForPurchaseMoney);
-            return Money.generatePurchaseMoney(valueForPurchaseMoney);
+            return generateMoneyFromInput();
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return inputPurchaseMoney();
         }
+    }
+
+    private static Money generateMoneyFromInput() {
+        String inputForPurchaseMoney = InputView.inputPurchaseMoney();
+        int valueForPurchaseMoney = Integer.parseInt(inputForPurchaseMoney);
+        return Money.createPurchaseMoney(valueForPurchaseMoney);
     }
 
     public static WinningNumbers inputWinningNumbers() {
@@ -34,25 +38,33 @@ public class InputDTO {
 
     private static LottoTicket inputWinningLottoTicket() {
         try {
-            List<LottoNumber> sixNumbers = Arrays.stream(InputView.inputSixNumbers().split(","))
-                    .map(Integer::parseInt)
-                    .map(LottoNumber::new)
-                    .collect(Collectors.toList());
-            return new LottoTicket(sixNumbers);
+            return generateLottoTicketFromNumbers();
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return inputWinningLottoTicket();
         }
     }
 
+    private static LottoTicket generateLottoTicketFromNumbers() {
+        List<LottoNumber> sixNumbers = Arrays.stream(InputView.inputSixNumbers().split(","))
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new LottoTicket(sixNumbers);
+    }
+
     private static LottoNumber inputBonusNumber() {
         try {
-            String inputForBonusNumber = InputView.inputBonusNumber();
-            int valueForBonusNumber = Integer.parseInt(inputForBonusNumber);
-            return new LottoNumber(valueForBonusNumber);
+            return generateBonusNumberFromInput();
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return inputBonusNumber();
         }
+    }
+
+    private static LottoNumber generateBonusNumberFromInput() {
+        String inputForBonusNumber = InputView.inputBonusNumber();
+        int valueForBonusNumber = Integer.parseInt(inputForBonusNumber);
+        return new LottoNumber(valueForBonusNumber);
     }
 }
