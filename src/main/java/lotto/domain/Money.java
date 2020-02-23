@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import lotto.util.InvalidMoneyException;
+
 public class Money {
     private static final int LOTTO_PRICE = 1000;
-    private static final String LACK_OF_MONEY_MESSAGE = "돈이 부족해 로또를 살 수 없습니다.";
 
     private int money;
 
@@ -13,7 +14,7 @@ public class Money {
 
     static void validateMoney(int money) {
         if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(LACK_OF_MONEY_MESSAGE);
+            throw new InvalidMoneyException();
         }
     }
 
