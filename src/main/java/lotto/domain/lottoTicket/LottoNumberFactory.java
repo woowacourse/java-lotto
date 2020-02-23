@@ -11,7 +11,7 @@ public class LottoNumberFactory {
 
     private static List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoNumberFactory() {
+    static {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
