@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.dto.LottosDto;
-
 public class Lottos {
 	private final List<Lotto> lottos;
 

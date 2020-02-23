@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.LottoDto;
-
 public class Lotto {
 	public static final int SIZE = 6;
 

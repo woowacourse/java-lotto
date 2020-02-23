@@ -19,7 +19,9 @@ public class InputUtil {
 	}
 
 	public static List<String> inputWinningNumber() throws IOException {
-		return Arrays.asList(bufferedReader.readLine().replace(SPACE, EMPTY).split(SPLIT_DELIMITER, SPLIT_LIMIT));
+		return Arrays.asList(bufferedReader.readLine()
+			.replace(SPACE, EMPTY)
+			.split(SPLIT_DELIMITER, SPLIT_LIMIT));
 	}
 
 	public static int inputBonusNumber() throws IOException {
