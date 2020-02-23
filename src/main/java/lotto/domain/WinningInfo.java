@@ -47,17 +47,7 @@ public enum WinningInfo {
         return winningPrice;
     }
 
-    @Override
-    public String toString() {
-        String winningCount = String.format("%d 개 일치", this.winningCount);
-        String winningPrice = String.format("(%d원)", this.winningPrice);
+    public int getWinningCount() { return  winningCount; }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(winningCount);
-        if (hasBonus) {
-            stringBuilder.append(", 보너스 볼 일치");
-        }
-        stringBuilder.append(winningPrice);
-        return stringBuilder.toString();
-    }
+    public boolean getHasBonus() {return hasBonus; }
 }

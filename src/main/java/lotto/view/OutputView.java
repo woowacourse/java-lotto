@@ -28,13 +28,26 @@ public class OutputView {
                 continue;
             }
             int winningCount = resultsDTO.getWinningCount(winningInfo);
-            String result = String.format("%s - %s개", winningInfo.toString(), winningCount);
-            System.out.println(result);
+            printWinnigInfo(winningInfo);
+            System.out.println(winningCount+"개");
         }
     }
 
     public static void printEarningRate(ResultsDTO resultsDTO) {
         String earningRate = String.format("총 수익률은 %s%%입니다.", resultsDTO.getEarningRate());
         System.out.println(earningRate);
+    }
+
+    public static void printWinnigInfo(WinningInfo winningInfo) {
+        String winningCount = String.format("%d 개 일치", winningInfo.getWinningCount());
+        String winningPrice = String.format("(%d원) - ", winningInfo.getWinningPrice());
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(winningCount);
+        if (winningInfo.getHasBonus()) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        stringBuilder.append(winningPrice);
+        System.out.print(stringBuilder);
     }
 }
