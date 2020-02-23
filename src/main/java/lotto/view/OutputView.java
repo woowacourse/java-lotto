@@ -8,7 +8,8 @@ import lotto.dto.LottoDto;
 import lotto.dto.LottoDtos;
 
 public class OutputView {
-	public static void printWrongMoneyInput() {
+	public static void printWrongMoneyInput(Exception e) {
+		System.out.println(e.getMessage());
 		System.out.println("금액이 정수가 아닙니다. 다시 입력해주세요.");
 	}
 
@@ -22,7 +23,8 @@ public class OutputView {
 		}
 	}
 
-	public static void printWrongBonusNumberInput() {
+	public static void printWrongBonusNumberInput(Exception e) {
+		System.out.println(e.getMessage());
 		System.out.println("정수가 아닌 보너스 번호입니다.");
 	}
 

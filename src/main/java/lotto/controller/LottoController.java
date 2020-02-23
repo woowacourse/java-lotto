@@ -25,7 +25,7 @@ public class LottoController {
 			InputView.printInsertBonusNumber();
 			return InputUtil.inputBonusNumber();
 		} catch (NumberFormatException | IOException e) {
-			OutputView.printWrongBonusNumberInput();
+			OutputView.printWrongBonusNumberInput(e);
 			return readBonusNumber();
 		}
 	}
@@ -48,7 +48,7 @@ public class LottoController {
 			InputView.printInsertMoney();
 			return InputUtil.inputMoney();
 		} catch (NumberFormatException | IOException e) {
-			OutputView.printWrongMoneyInput();
+			OutputView.printWrongMoneyInput(e);
 			return readMoney();
 		}
 	}
