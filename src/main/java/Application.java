@@ -12,7 +12,7 @@ public class Application {
     private static GameParser gameParser = new GameParser();
 
     public static void main(String[] args) {
-        LottoMoney lottoMoney = gameParser.createMoney(InputView.inputLottoMoney());
+        LottoMoney lottoMoney = new LottoMoney(gameParser.parseInputToInt(InputView.inputLottoMoney()));
         LottoTickets lottoTickets = LottoFactory.publishLottoTickets(lottoMoney);
         OutputView.printLottoTickets(lottoTickets);
         WinningLotto winningLotto = gameParser.createWinningLotto(InputView.inputWinningLotto(),

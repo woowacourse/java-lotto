@@ -2,7 +2,6 @@ package parser;
 
 import domain.lotto.LottoFactory;
 import domain.lotto.WinningLotto;
-import domain.money.LottoMoney;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -11,11 +10,6 @@ import java.util.stream.Collectors;
 public class GameParser {
 
     private static final String DELIMITER = ",";
-
-    public LottoMoney createMoney(String moneyInput) {
-        int money = parseInputToInt(moneyInput);
-        return new LottoMoney(money);
-    }
 
     public WinningLotto createWinningLotto(String winningLottoInput, String bonusNumberInput) {
         Set<Integer> numbers = parseInputToNumbers(winningLottoInput);
@@ -30,11 +24,11 @@ public class GameParser {
                 .collect(Collectors.toSet());
     }
 
-    private int parseInputToInt(String input) {
+    public int parseInputToInt(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException ne) {
-            throw new IllegalArgumentException("로또 번호는 숫자만 입력 가능합니다.");
+            throw new IllegalArgumentException("숫자만 입력해주세요");
         }
     }
 }
