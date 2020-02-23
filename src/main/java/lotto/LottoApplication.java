@@ -5,6 +5,7 @@ import lotto.domain.LottoFactory;
 import lotto.domain.LottoManager;
 import lotto.domain.Money;
 import lotto.domain.WinLotto;
+import lotto.util.StringUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,7 +17,8 @@ public class LottoApplication {
         List<Lotto> lotteries = LottoFactory.createLotteries(money);
         OutputView.printLotteries(lotteries);
 
-        WinLotto winLotto = new WinLotto(InputView.inputWinNumber(), InputView.inputBonusBall());
+        String[] inputWinNumbers = StringUtils.split(InputView.inputWinNumber());
+        WinLotto winLotto = new WinLotto(inputWinNumbers, InputView.inputBonusBall());
 
         LottoManager lottoManager = new LottoManager(lotteries, winLotto);
         lottoManager.checkLotto();

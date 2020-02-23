@@ -15,7 +15,8 @@ public class WinLottoTest {
 
 	@BeforeEach
 	void setUp() {
-		winLotto = new WinLotto("1,2,3,4,5,6", "7");
+		String[] winNumbers = new String[]{"1", "2", "3", "4", "5", "6"};
+		winLotto = new WinLotto(winNumbers, "7");
 	}
 
 	@DisplayName("당첨 로또와 비교하여 맞은 개수 테스트")

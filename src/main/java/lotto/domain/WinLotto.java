@@ -1,19 +1,18 @@
 package lotto.domain;
 
-import lotto.validator.InputValidator;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinLotto {
-    public static final String COMMA = ",";
+    public static final String ERROR_MESSAGE_NOT_INTEGER = "숫자가 아닌 문자를 입력하였습니다.";
+
 
     private final Lotto winLotto;
     private final BonusBall bonusBall;
 
-    public WinLotto(String winLotto, String bonusBall) {
-        this.winLotto = new Lotto(toLottoNoList(winLotto.split(COMMA)));
+    public WinLotto(String[] winLotto, String bonusBall) {
+        this.winLotto = new Lotto(toLottoNoList(winLotto));
         this.bonusBall = new BonusBall(bonusBall);
     }
 
@@ -24,7 +23,7 @@ public class WinLotto {
                     .map(LottoNo::new)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(InputValidator.ERROR_MESSAGE_NOT_INTEGER);
+            throw new IllegalArgumentException(ERROR_MESSAGE_NOT_INTEGER);
         }
     }
 
