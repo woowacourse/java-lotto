@@ -19,10 +19,6 @@ public class LottoNumber {
         }
     }
 
-    public boolean isSameLottoNumber(int number) {
-        return this.lottoNumber == number;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

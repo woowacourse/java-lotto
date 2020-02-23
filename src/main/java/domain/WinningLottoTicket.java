@@ -9,7 +9,7 @@ public class WinningLottoTicket {
     private static final String DELIMITER = ",";
 
     private LottoTicket winningLottoTicket;
-    private BonusBall bonusBall;
+    private LottoNumber bonusBall;
 
     public WinningLottoTicket(String input) {
         validateBlank(input);
@@ -40,10 +40,18 @@ public class WinningLottoTicket {
         }
     }
 
-    public void initializeBonusBall(int bonusNumber) {
-        if (this.winningLottoTicket.contains(bonusNumber)) {
+    public void initializeBonusBall(LottoNumber bonusNumber) {
+        if (this.winningLottoTicket.containLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 로또 숫자는 당첨 숫자와 중복될 수 없습니다.");
         }
-        this.bonusBall = new BonusBall(bonusNumber);
+        this.bonusBall = bonusNumber;
+    }
+
+    public List<LottoNumber> getWinningLottoTicket() {
+        return this.winningLottoTicket.getLottoTicket();
+    }
+
+    public LottoNumber getBonusNumber() {
+        return this.bonusBall;
     }
 }

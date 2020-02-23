@@ -53,6 +53,6 @@ public class LottoTicketTest {
                 new LottoNumber(6)
         ));
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        Assertions.assertThat(lottoTicket.contains(5)).isTrue();
+        Assertions.assertThat(lottoTicket.containLottoNumber(new LottoNumber(5))).isTrue();
     }
 }

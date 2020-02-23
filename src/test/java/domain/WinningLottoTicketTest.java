@@ -21,7 +21,7 @@ public class WinningLottoTicketTest {
     void initializeBonusBallTest() {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6");
         Assertions.assertThatThrownBy(() -> {
-            winningLottoTicket.initializeBonusBall(5);
+            winningLottoTicket.initializeBonusBall(new LottoNumber(5));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

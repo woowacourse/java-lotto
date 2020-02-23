@@ -29,9 +29,13 @@ public class LottoTicket {
         }
     }
 
-    public boolean contains(int bonusNumber) {
+    public boolean containLottoNumber(LottoNumber lottoNumber) {
         return this.lottoTicket.stream()
-                .anyMatch(ln -> ln.isSameLottoNumber(bonusNumber));
+                .anyMatch(ln -> ln.equals(lottoNumber));
+    }
+
+    public List<LottoNumber> getLottoTicket() {
+        return this.lottoTicket;
     }
 
     @Override
