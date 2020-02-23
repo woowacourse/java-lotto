@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public enum LottoRank {
     FIRST(6, false, 2_000_000_000, "6개 일치(2000000000원) - "),
@@ -9,7 +10,7 @@ public enum LottoRank {
     FOURTH(4, false, 50_000, "4개 일치(50000원) - "),
     FIFTH(3, false, 5_000, "3개 일치(5000원) - ");
 
-    public static final int WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD = 5;
+    private static final int WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD = 5;
     private int winningMatchCount;
     private boolean isBonusMatch;
     private int winningMoney;
@@ -22,24 +23,22 @@ public enum LottoRank {
         this.resultMessage = resultMessage;
     }
 
-    public static LottoRank findRank(final int winningMatchCount, final boolean bonusMatchCount) {
-            return Arrays.stream(LottoRank.values())
-                    .filter(result -> isRankSecondOrThird(bonusMatchCount, result) || isRankOneOrFourthOrFifth(result))
-                    .filter(result -> isWinningMatchCountSame(winningMatchCount, result))
-                    .findFirst()
-                    .orElse(null);
+    public static LottoRank findRank(final int winningMatchCount, final boolean isBonusMatch) {
+        if (isSecondRank(winningMatchCount, isBonusMatch)){
+            return SECOND;
+        }
+        return Arrays.stream(LottoRank.values())
+                .filter(getLottoRankPredicate(winningMatchCount))
+                .findFirst()
+                .orElse(null);
     }
 
-    private static boolean isWinningMatchCountSame(int winningMatchCount, LottoRank result) {
-        return result.winningMatchCount == winningMatchCount;
+    private static Predicate<LottoRank> getLottoRankPredicate(int winningMatchCount) {
+        return result -> result.winningMatchCount == winningMatchCount;
     }
 
-    private static boolean isRankOneOrFourthOrFifth(LottoRank result) {
-        return !result.isBonusMatch;
-    }
-
-    private static boolean isRankSecondOrThird(boolean bonusMatchCount, LottoRank result) {
-        return isWinningMatchCountSame(WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD, result) && result.isBonusMatch == bonusMatchCount;
+    private static boolean isSecondRank(int winningMatchCount, boolean isBonusMatch) {
+        return winningMatchCount == WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD && isBonusMatch;
     }
 
     public String getResultMessage(){
