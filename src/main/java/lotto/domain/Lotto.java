@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.InvalidInputSizeException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.Objects;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_AMOUNT = 6;
-    private static final String LOTTO_NUMBER_AMOUNT_EXCEPTION_MESSAGE = "Lotto number amount must be 6.";
+    private static final String INVALID_INPUT_SIZE_EXCEPTION_MESSAGE = "Lotto number amount must be 6.";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -23,7 +25,7 @@ public class Lotto {
 
     private void validateSize(List<Integer> inputNumbers) {
         if (inputNumbers.size() != LOTTO_NUMBER_AMOUNT) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_AMOUNT_EXCEPTION_MESSAGE);
+            throw new InvalidInputSizeException(INVALID_INPUT_SIZE_EXCEPTION_MESSAGE);
         }
     }
 

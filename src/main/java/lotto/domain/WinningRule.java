@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.DuplicateExistException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class WinningRule {
         List<Integer> mergedNumbers = new ArrayList<>(winningNumbers);
         mergedNumbers.add(bonusBall);
         if (isDuplicate(mergedNumbers)) {
-            throw new IllegalArgumentException(DUPLICATE_EXIST_EXCEPTION_MESSAGE);
+            throw new DuplicateExistException(DUPLICATE_EXIST_EXCEPTION_MESSAGE);
         }
     }
 

@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import lotto.domain.exception.OutOfRangeException;
+
 public class PurchaseAmount {
     private static final int MINIMUM_MONEY = 1000;
     private static final int LOTTO_PRICE = 1000;
-    private static final String INVALID_PURCHASE_MONEY_EXCEPTION_MESSAGE = "Input money out of range (minimum - 1000).";
+    private static final String OUT_OF_RANGE_PURCHASE_MONEY_EXCEPTION_MESSAGE = "Input money out of range (minimum - 1000).";
 
     private final int purchaseAmount;
 
@@ -18,7 +20,7 @@ public class PurchaseAmount {
 
     private static void validatePurchaseMoney(int purchaseMoney) {
         if (purchaseMoney < MINIMUM_MONEY) {
-            throw new IllegalArgumentException(INVALID_PURCHASE_MONEY_EXCEPTION_MESSAGE);
+            throw new OutOfRangeException(OUT_OF_RANGE_PURCHASE_MONEY_EXCEPTION_MESSAGE);
         }
     }
 

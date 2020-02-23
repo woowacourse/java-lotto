@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.EmptyOrNullException;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +18,7 @@ public class PurchaseLottos {
 
     private void validateEmptyOrNull(List<Lotto> purchaseLottos) {
         if (Objects.isNull(purchaseLottos) || purchaseLottos.isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_OR_NULL_INPUT_EXCEPTION_MESSAGE);
+            throw new EmptyOrNullException(EMPTY_OR_NULL_INPUT_EXCEPTION_MESSAGE);
         }
     }
 
