@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 클래스 이름 : Rank.java
+ * Rank 클래스
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/19

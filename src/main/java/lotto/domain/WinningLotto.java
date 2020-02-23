@@ -1,12 +1,11 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 클래스 이름 : WinningLotto.java
  *
- * @author
+ * @author 히히, 토니
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/19

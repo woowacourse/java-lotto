@@ -1,7 +1,7 @@
 package lotto.domain;
 
 /**
- * 클래스 이름 : BonusLottoNumber.java
+ * BonusLottoNumber.java
  *
  * @author 토니, 히히
  * @version 1.0
@@ -9,7 +9,7 @@ package lotto.domain;
  * 날짜 : 2020/02/19
  */
 public class BonusLottoNumber {
-	LottoNumber bonusLottoNumber;
+	private LottoNumber bonusLottoNumber;
 
 	public BonusLottoNumber(final int inputBonusLottoNumber, final WinningLotto winningLotto) {
 		this.bonusLottoNumber = LottoNumber.of(inputBonusLottoNumber);

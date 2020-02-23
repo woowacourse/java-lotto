@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 클래스 이름 : Lotto.java
+ * Lotto.java
  *
  * @author 토니, 히히
  * @version 1.0
@@ -13,11 +13,9 @@ import java.util.stream.Collectors;
  */
 public class Lotto {
 
-	public static final int LOTTO_NUMBER_AMOUNT = 6;
+	public static final int LOTTO_LENGTH = 6;
 	public static final int MINIMUM_LOTTO_NUMBER = 1;
 	public static final int MAXIMUM_LOTTO_NUMBER = 45;
-
-	public static final int LOTTO_LENGTH = 6;
 
 	protected final List<LottoNumber> lottoNumbers;
 

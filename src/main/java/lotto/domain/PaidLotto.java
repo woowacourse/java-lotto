@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 클래스 이름 : PaidLotto.java
+ * PaidLotto 클래스
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/19

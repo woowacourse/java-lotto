@@ -4,13 +4,10 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lotto.domain.LottoFactory;
 
 /**
- * 클래스 이름 : LottoController.java
+ * LottoController.java
  *
  * @author 토니, 히히
  * @version 1.0
