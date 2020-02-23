@@ -10,7 +10,7 @@ public class LottoResultTest {
     @Test
     void calculateTotalReward() {
         LottoResult lottoResult = new LottoResult();
-        lottoResult.plusTicketCount(Rank.FIFTH);
+        lottoResult.updateResult(Rank.FIFTH);
         assertThat(lottoResult.calculateTotalReward()).isEqualTo(5000);
     }
 }

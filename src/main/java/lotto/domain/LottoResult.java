@@ -10,11 +10,15 @@ public class LottoResult {
         this.ranks = Arrays.asList(Rank.values());
     }
 
-    public void plusTicketCount(Rank rankToPlusCount) {
+    public void updateResult(Rank rankToPlusCount) {
         for (Rank rank : ranks) {
-            if (rank == rankToPlusCount) {
-                rank.plusTicketCount();
-            }
+            updateTicketCount(rankToPlusCount, rank);
+        }
+    }
+
+    private void updateTicketCount(Rank rankToPlusCount, Rank rank) {
+        if (rank == rankToPlusCount) {
+            rank.plusTicketCount();
         }
     }
 

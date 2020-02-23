@@ -20,17 +20,16 @@ public class LottoManager {
         for (Lotto lotto : lotteries) {
             int hitCount = winLotto.compare(lotto);
             boolean bonus = winLotto.isMatchBonus(lotto);
-            lottoResultUpdate(hitCount, bonus);
+            updateLottoResult(hitCount, bonus);
         }
     }
 
-    private void lottoResultUpdate(int hitCount, boolean bonus) {
+    private void updateLottoResult(int hitCount, boolean bonus) {
         if (hitCount < MIN_WIN_COUNT) {
             return;
         }
-        Rank lottoRank = Rank.findRank(hitCount);
-        lottoRank = lottoRank.isSecondRank(bonus);
-        lottoResult.plusTicketCount(lottoRank);
+        Rank rank = Rank.findRank(hitCount, bonus);
+        lottoResult.updateResult(rank);
     }
 
     public String getResult() {

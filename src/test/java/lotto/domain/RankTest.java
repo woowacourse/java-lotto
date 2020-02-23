@@ -19,9 +19,9 @@ public class RankTest {
     @Test
     void isSecondRank() {
         Rank result = Rank.THIRD;
-        assertThat(result.isSecondRank(true)).isEqualTo(Rank.SECOND);
+        assertThat(result.checkSecondOrNot(true)).isEqualTo(Rank.SECOND);
 
         result = Rank.FIFTH;
-        assertThat(result.isSecondRank(true)).isEqualTo(Rank.FIFTH);
+        assertThat(result.checkSecondOrNot(true)).isEqualTo(Rank.FIFTH);
     }
 }

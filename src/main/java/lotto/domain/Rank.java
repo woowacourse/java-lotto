@@ -21,14 +21,16 @@ public enum Rank {
 		this.hitCount = hitCount;
 	}
 
-	public static Rank findRank(int count) {
-		return Arrays.stream(values())
+	public static Rank findRank(int count, boolean bonus) {
+		Rank rank = Arrays.stream(values())
 				.filter(x -> x.hitCount == count)
 				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(MESSAGE_NOT_FOUND_RANK));
+		return rank.checkSecondOrNot(bonus);
+
 	}
 
-	public Rank isSecondRank(boolean bonus) {
+	public Rank checkSecondOrNot(boolean bonus) {
 		if (this.equals(THIRD) && bonus) {
 			return SECOND;
 		}
