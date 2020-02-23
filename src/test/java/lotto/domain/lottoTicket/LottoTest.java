@@ -1,6 +1,8 @@
 package lotto.domain.lottoTicket;
 
 import lotto.util.ConvertInput;
+import lotto.util.DuplicationLottoException;
+import lotto.util.InvalidSizeLottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +30,7 @@ public class LottoTest {
         List<LottoNumber> input2 = ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 6");
 
         assertThatThrownBy(() -> Lotto.validateDuplication(input1))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(DuplicationLottoException.class);
         assertThatCode(() -> Lotto.validateDuplication(input2))
                 .doesNotThrowAnyException();
     }
@@ -39,7 +41,7 @@ public class LottoTest {
         List<LottoNumber> input = ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 6, 7");
 
         assertThatThrownBy(() -> Lotto.validateSize(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(InvalidSizeLottoException.class);
     }
 
     @ParameterizedTest

@@ -1,6 +1,7 @@
 package lotto.domain.lottoTicket;
 
 import lotto.util.ConvertInput;
+import lotto.util.InvalidBonusNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ public class WinningLottoTest {
     @DisplayName("보너스볼 중복 확인")
     void validateBonusNumberDuplicationTest() {
         assertThatThrownBy(() -> new WinningLotto(ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 6"), 6))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(InvalidBonusNumberException.class);
     }
 
     @Test
