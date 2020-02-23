@@ -15,20 +15,17 @@ public class LottoController {
 
     public void run() {
         Money money = new Money(InputView.inputMoney());
-        LottoResult lottoResult = new LottoResult();
 
         makeLottoNumbers(money.calculateGames());
-        lottoGame.makeResult(lottoResult, makeWinnerNumbers());
-        OutputView.printResult(money, lottoResult);
+        OutputView.printResult(money, makeResult());
     }
 
-    private LottoWinner makeWinnerNumbers() {
-        UserLottoGenerator userNumberGenerator = new UserLottoGenerator();
-        userNumberGenerator.init(InputView.inputWinnerNumbers());
+    private LottoResult makeResult() {
+        UserLottoGenerator userNumberGenerator = new UserLottoGenerator(InputView.inputWinnerNumbers());
         LottoTicket winnerNumbers = LottoTicketFactory.createLottoNumbers(userNumberGenerator);
         LottoNumber bonus = LottoNumberFactory.getLottoNumber(InputView.inputBonusNumber());
 
-        return new LottoWinner(winnerNumbers, bonus);
+        return lottoGame.makeResult(new LottoWinner(winnerNumbers, bonus));
     }
 
     private void makeLottoNumbers(int repeat) {

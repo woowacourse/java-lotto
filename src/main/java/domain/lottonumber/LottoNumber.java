@@ -4,6 +4,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final String ERROR_BOUND_MESSAGE = "1부터 45 사이의 숫자만 입력 가능합니다.";
     private static final int LOTTO_UNDER_BOUND = 1;
     private static final int LOTTO_UPPER_BOUND = 45;
+
     private int number;
 
     public LottoNumber(int number) {

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class UserLottoGenerator implements LottoGenerator {
     private SortedSet<LottoNumber> numbers;
 
-    public void init(List<Integer> inputNumbers) {
+    public UserLottoGenerator(List<Integer> inputNumbers) {
         numbers = inputNumbers.stream()
                 .map(LottoNumberFactory::getLottoNumber)
                 .collect(Collectors.toCollection(TreeSet::new)
