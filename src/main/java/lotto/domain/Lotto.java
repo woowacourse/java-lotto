@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.dto.LottoDto;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +14,7 @@ public class Lotto {
 
 	public Lotto(final List<Integer> lottoNumber) {
 		validate(lottoNumber);
-		this.lottoNumber = lottoNumber;
+		this.lottoNumber = Collections.unmodifiableList(lottoNumber);
 	}
 
 	private void validate(List<Integer> lottoNumber) {
