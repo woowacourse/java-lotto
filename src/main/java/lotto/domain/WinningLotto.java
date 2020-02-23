@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningNumber {
+public class WinningLotto {
 	private static final int LOTTO_SIZE = 6;
 	private static final int MIN_LOTTO_NUMBER = 1;
 	private static final int MAX_LOTTO_NUMBER = 45;
@@ -13,11 +13,11 @@ public class WinningNumber {
 	private final List<Integer> winningNumber;
 	private final int bonusNumber;
 
-	public WinningNumber(final List<String> winningNumber, final int bonusNumber) {
+	public WinningLotto(final List<String> winningNumber, final int bonusNumber) {
 		validateWinningNumber(winningNumber);
 		this.winningNumber = winningNumber.stream()
-			.map(Integer::parseInt)
-			.collect(Collectors.toList());
+				.map(Integer::parseInt)
+				.collect(Collectors.toList());
 
 		validateBonusNumber(bonusNumber);
 		this.bonusNumber = bonusNumber;

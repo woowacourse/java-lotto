@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoMachine;
 import lotto.domain.Lottos;
-import lotto.domain.WinningNumber;
+import lotto.domain.WinningLotto;
 import lotto.domain.WinningPrize;
 import lotto.dto.LottoCountDto;
 import lotto.utils.InputUtil;
@@ -50,9 +50,9 @@ public class LottoController {
 		}
 	}
 
-	public static WinningNumber receiveWinningNumber() {
+	public static WinningLotto receiveWinningNumber() {
 		try {
-			return new WinningNumber(readWinningNumber(), readBonusNumber());
+			return new WinningLotto(readWinningNumber(), readBonusNumber());
 		} catch (IllegalArgumentException e) {
 			OutputView.printExceptionMessage(e);
 			return receiveWinningNumber();

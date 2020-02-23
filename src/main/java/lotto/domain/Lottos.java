@@ -1,9 +1,9 @@
 package lotto.domain;
 
+import lotto.dto.LottoDtos;
+
 import java.util.List;
 import java.util.stream.Collectors;
-
-import lotto.dto.LottoDtos;
 
 public class Lottos {
 	private final List<Lotto> lottos;
@@ -21,13 +21,13 @@ public class Lottos {
 
 	public LottoDtos makeLottoDtos() {
 		return new LottoDtos(lottos.stream()
-			.map(Lotto::makeLottoDto)
-			.collect(Collectors.toList()));
+				.map(Lotto::makeLottoDto)
+				.collect(Collectors.toList()));
 	}
 
-	public List<WinningPrize> findAllLottoPrizes(WinningNumber winningNumber) {
+	public List<WinningPrize> findAllLottoPrizes(WinningLotto winningNumber) {
 		return lottos.stream()
-			.map(lotto -> lotto.findLottoPrize(winningNumber))
-			.collect(Collectors.toList());
+				.map(lotto -> lotto.findLottoPrize(winningNumber))
+				.collect(Collectors.toList());
 	}
 }

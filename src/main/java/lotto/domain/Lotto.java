@@ -41,7 +41,7 @@ public class Lotto {
 		}
 	}
 
-	public WinningPrize findLottoPrize(WinningNumber winningNumber) {
+	public WinningPrize findLottoPrize(WinningLotto winningNumber) {
 		Set<Integer> concatenatedSet = new HashSet<>(lottoNumber);
 		concatenatedSet.addAll(winningNumber.getWinningNumber());
 

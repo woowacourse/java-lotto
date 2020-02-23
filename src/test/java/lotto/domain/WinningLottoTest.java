@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class WinningNumberTest {
+public class WinningLottoTest {
 	static Stream<Arguments> generateInput_numberAmount() {
 		return Stream.of(Arguments.of(Arrays.asList("1", "2", "3", "4", "5")),
 				Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6", "7")));
@@ -40,7 +40,7 @@ public class WinningNumberTest {
 	@NullAndEmptySource
 	@DisplayName("널이나 빈 값이 들어올 경우")
 	void checkIfNullOrEmpty(List<String> value) {
-		assertThatThrownBy(() -> new WinningNumber(value, 5))
+		assertThatThrownBy(() -> new WinningLotto(value, 5))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("널이나 빈 값");
 	}
@@ -49,7 +49,7 @@ public class WinningNumberTest {
 	@MethodSource("generateInput_numberAmount")
 	@DisplayName("번호 갯수가 틀린 경우")
 	void checkNumberAmountMismatch(List<String> value) {
-		assertThatThrownBy(() -> new WinningNumber(value, 21))
+		assertThatThrownBy(() -> new WinningLotto(value, 21))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("개여야 합니다");
 	}
@@ -58,7 +58,7 @@ public class WinningNumberTest {
 	@MethodSource("generateInput_duplicateNumber")
 	@DisplayName("중복 번호가 있는 경우")
 	void checkDuplicateNumber(List<String> value) {
-		assertThatThrownBy(() -> new WinningNumber(value, 34))
+		assertThatThrownBy(() -> new WinningLotto(value, 34))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("중복");
 	}
@@ -67,7 +67,7 @@ public class WinningNumberTest {
 	@MethodSource("generateInput_numberRange")
 	@DisplayName("번호 범위를 벗어나는 경우")
 	void checkNumberRange(List<String> value) {
-		assertThatThrownBy(() -> new WinningNumber(value, 34))
+		assertThatThrownBy(() -> new WinningLotto(value, 34))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("범위");
 	}
@@ -76,7 +76,7 @@ public class WinningNumberTest {
 	@MethodSource("generateInput_duplicateBonusNumber")
 	@DisplayName("보너스 번호가 중복되는 경우")
 	void checkDuplicateBonusNumber(List<String> value, int bonus) {
-		assertThatThrownBy(() -> new WinningNumber(value, bonus))
+		assertThatThrownBy(() -> new WinningLotto(value, bonus))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("중복된 보너스");
 	}
@@ -85,7 +85,7 @@ public class WinningNumberTest {
 	@ValueSource(ints = {-1000, 0, 46, 10000})
 	@DisplayName("보너스 번호 범위를 벗어나는 경우")
 	void checkBonusNumberIsOutOfRange(int bonus) {
-		assertThatThrownBy(() -> new WinningNumber(Arrays.asList("1", "2", "3", "4", "5", "6"), bonus))
+		assertThatThrownBy(() -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "5", "6"), bonus))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("보너스 번호가 범위");
 	}

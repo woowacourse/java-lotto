@@ -45,9 +45,7 @@ public class OutputView {
 		HashMap<WinningPrize, Integer> winningInformation = new HashMap<>();
 
 		initializeWinningInformation(winningInformation);
-		for (WinningPrize winningPrize : winningPrizes) {
-			winningInformation.put(winningPrize, winningInformation.get(winningPrize) + 1);
-		}
+		winningPrizes.forEach(winningPrize -> winningInformation.put(winningPrize, winningInformation.get(winningPrize) + 1));
 		return winningInformation;
 	}
 

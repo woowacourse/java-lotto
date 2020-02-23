@@ -60,7 +60,7 @@ public class LottoTest {
 	@DisplayName("당첨 등수를 제대로 맞추는지 체크")
 	void checkWiningPrize(List<String> winningNumbers, int bonusNumber, String expectedPrize) {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
+		WinningLotto winningNumber = new WinningLotto(winningNumbers, bonusNumber);
 		assertThat(lotto.findLottoPrize(winningNumber).getDescription()).isEqualTo(expectedPrize);
 	}
 }
