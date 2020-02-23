@@ -1,9 +1,10 @@
 import lotto.controller.LottoController;
+import lotto.util.RandomUtils;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : Application.java
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/18

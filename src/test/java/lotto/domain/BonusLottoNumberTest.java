@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : BonusLottoNumberTest.java
  *
- * @author
+ * @author 히히, 토니
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/19

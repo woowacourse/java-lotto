@@ -9,9 +9,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : LottoFactoryTest.java
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/19
@@ -25,14 +25,7 @@ public class LottoFactoryTest {
 
 	@Test
 	void createLottoManual_올바른_동작_확인() {
-		List<LottoNumber> winningLottoNumbers = Arrays.asList(
-				LottoNumber.of(3),
-				LottoNumber.of(2),
-				LottoNumber.of(1),
-				LottoNumber.of(10),
-				LottoNumber.of(8),
-				LottoNumber.of(44)
-		);
+		List<Integer> winningLottoNumbers = Arrays.asList(3, 2, 1, 10, 8, 44);
 
 		assertThat(LottoFactory.createLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers))
 				.isInstanceOf(WinningLotto.class);
@@ -40,14 +33,7 @@ public class LottoFactoryTest {
 
 	@Test
 	void createLottoManual_중복된_로또번호_예외처리() {
-		List<LottoNumber> winningLottoNumbers = Arrays.asList(
-				LottoNumber.of(3),
-				LottoNumber.of(2),
-				LottoNumber.of(1),
-				LottoNumber.of(10),
-				LottoNumber.of(8),
-				LottoNumber.of(10)
-		);
+		List<Integer> winningLottoNumbers = Arrays.asList(3, 2, 1, 10, 8, 10);
 
 		assertThatThrownBy(() -> {
 			LottoFactory.createLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers);

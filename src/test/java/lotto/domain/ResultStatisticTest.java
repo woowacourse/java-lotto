@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * 클래스 이름 : ResultStatisticTest.java
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/20
@@ -27,42 +27,14 @@ public class ResultStatisticTest {
 	void setUp() {
 		List<Lotto> tempLottos = new ArrayList<>();
 
-		List<LottoNumber> winningLottoNumbers = Arrays.asList(
-				LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(3),
-				LottoNumber.of(4),
-				LottoNumber.of(5),
-				LottoNumber.of(6)
+		List<Integer> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		winningLotto = (WinningLotto) LottoFactory.createLottoManual(
+			LottoType.WINNING_LOTTO,
+			winningLottoNumbers
 		);
-
-		winningLotto = (WinningLotto) LottoFactory.createLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers);
-
-		List<LottoNumber> lottoNumbersFistPrize = Arrays.asList(
-				LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(3),
-				LottoNumber.of(4),
-				LottoNumber.of(5),
-				LottoNumber.of(6)
-		);
-		List<LottoNumber> lottoNumbersForthPrize = Arrays.asList(
-				LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(3),
-				LottoNumber.of(4),
-				LottoNumber.of(8),
-				LottoNumber.of(9)
-		);
-
-		List<LottoNumber> lottoNumbersSixthPrize = Arrays.asList(
-				LottoNumber.of(10),
-				LottoNumber.of(11),
-				LottoNumber.of(12),
-				LottoNumber.of(13),
-				LottoNumber.of(8),
-				LottoNumber.of(9)
-		);
+		List<Integer> lottoNumbersFistPrize = Arrays.asList(1, 2, 3, 4, 5, 6);
+		List<Integer> lottoNumbersForthPrize = Arrays.asList(1, 2, 3, 4, 8, 9);
+		List<Integer> lottoNumbersSixthPrize = Arrays.asList(10, 11, 12, 13, 8, 9);
 
 		tempLottos.add(LottoFactory.createLottoManual(LottoType.PAID_LOTTO, lottoNumbersFistPrize));
 		tempLottos.add(LottoFactory.createLottoManual(LottoType.PAID_LOTTO, lottoNumbersForthPrize));
@@ -83,7 +55,7 @@ public class ResultStatisticTest {
 		ResultStatistic resultStatistic = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
 		Map<Rank, Integer> resultMap = resultStatistic.getResults();
 
-		assertThat(resultMap.get(Rank.FIRST)).isEqualTo(1); // TODO 이거 한번에 안되나??
+		assertThat(resultMap.get(Rank.FIRST)).isEqualTo(1);
 		assertThat(resultMap.get(Rank.SECOND)).isEqualTo(0);
 		assertThat(resultMap.get(Rank.THIRD)).isEqualTo(0);
 		assertThat(resultMap.get(Rank.FOURTH)).isEqualTo(1);

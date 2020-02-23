@@ -52,11 +52,11 @@ public class ResultStatistic {
 		return this.results;
 	}
 
-	public int calculateRevenueRate(MoneyForLotto moneyForLotto) {
+	public long calculateRevenueRate(MoneyForLotto moneyForLotto) {
 		return (100 * getTotalRevenue() / moneyForLotto.getMoneyForLotto());
 	}
 
-	private int getTotalRevenue() {
+	private long getTotalRevenue() {
 		int totalRevenue = 0;
 
 		for (Rank rank : Rank.values()) {

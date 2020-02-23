@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
+import lotto.util.RandomUtils;
 
 /**
  * 클래스 이름 : LottoFactory.java
@@ -24,17 +24,25 @@ public class LottoFactory {
 	public static Lotto createLottoAuto(final LottoType lottoType) {
 		Objects.requireNonNull(lottoType);
 		LottoCreator lottoCreator = creators.get(lottoType);
-		Collections.shuffle(allLottoNumbers);
 
-		List<LottoNumber> lottoNumbers = allLottoNumbers.stream()
-				.limit(6)
-				.sorted()
-				.collect(Collectors.toList());
-		return lottoCreator.create(lottoNumbers);
+		List<Integer> randomLottoNumbers = RandomUtils.getRandomIntList(
+			Lotto.LOTTO_NUMBER_AMOUNT,
+			Lotto.MINIMUM_LOTTO_NUMBER,
+			Lotto.MAXIMUM_LOTTO_NUMBER
+		);
+		return lottoCreator.create(randomLottoNumbers);
 	}
-
+/*
 	public static Lotto createLottoManual(final LottoType lottoType, final List<LottoNumber> inputLottoNumbers) {
 		Objects.requireNonNull(lottoType);
+		LottoCreator lottoCreator = creators.get(lottoType);
+		return lottoCreator.create(inputLottoNumbers);
+	}
+*/
+	public static Lotto createLottoManual(final LottoType lottoType, final List<Integer> inputLottoNumbers) {
+		Objects.requireNonNull(lottoType);
+		Objects.requireNonNull(inputLottoNumbers);
+
 		LottoCreator lottoCreator = creators.get(lottoType);
 		return lottoCreator.create(inputLottoNumbers);
 	}
@@ -42,14 +50,26 @@ public class LottoFactory {
 
 class PaidLottoCreator implements LottoCreator {
 	@Override
-	public Lotto create(final List<LottoNumber> lottoNumbers) {
-		return new PaidLotto(lottoNumbers);
+	public Lotto create(final List<Integer> lottoNumbers) {
+		List<LottoNumber> lottoNumberList = new ArrayList<>();
+
+		for (int lottoNumber : lottoNumbers) {
+			lottoNumberList.add(LottoNumber.of(lottoNumber));
+		}
+
+		return new PaidLotto(lottoNumberList);
 	}
 }
 
 class WinningLottoCreator implements LottoCreator {
 	@Override
-	public Lotto create(final List<LottoNumber> lottoNumbers) {
-		return new WinningLotto(lottoNumbers);
+	public Lotto create(final List<Integer> lottoNumbers) {
+		List<LottoNumber> lottoNumberList = new ArrayList<>();
+
+		for (int lottoNumber : lottoNumbers) {
+			lottoNumberList.add(LottoNumber.of(lottoNumber));
+		}
+
+		return new WinningLotto(lottoNumberList);
 	}
 }

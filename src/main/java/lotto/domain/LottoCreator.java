@@ -11,5 +11,5 @@ import java.util.List;
  * 날짜 : 2020/02/19
  */
 public interface LottoCreator {
-	Lotto create(List<LottoNumber> lottoNumbers);
+	Lotto create(List<Integer> lottoNumbers);
 }

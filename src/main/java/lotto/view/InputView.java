@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * 클래스 이름 : .java
+ * 클래스 이름 : InputView.java
  *
- * @author
+ * @author 히히, 토니
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/20
@@ -17,17 +17,12 @@ import java.util.Scanner;
 public class InputView {
 	private static final Scanner SCANNER = new Scanner(System.in);
 
-	public static MoneyForLotto getMoneyForLotto() { // TODO 고려를 해보자
-		try {
-			OutputView.askEnterMoneyForLotto();
-			return new MoneyForLotto(Integer.parseInt(SCANNER.nextLine()));
-		} catch (Exception e) { // TODO runtime으로
-			OutputView.printExceptionMessage(e);
-			return getMoneyForLotto();
-		}
+	public static int getMoneyForLotto() { // TODO 고려를 해보자
+		OutputView.askEnterMoneyForLotto();
+		return Integer.parseInt(SCANNER.nextLine());
 	}
-
-	public static WinningLotto getWinningLotto() {
+/*
+	public static WinningLotto getWinningLotto() { // Todo: 로또번호 말고 int 리스트로!!
 		try {
 			OutputView.askEnterWinningLotto();
 			List<LottoNumber> winningLottoNumbers = StringUtils.splitIntoLottoNumbers(SCANNER.nextLine());
@@ -41,14 +36,15 @@ public class InputView {
 			return getWinningLotto();
 		}
 	}
+*/
 
-	public static BonusLottoNumber getBonusLottoNumber(WinningLotto winningLotto) {
-		try {
-			OutputView.askEnterBonusLottoNumber();
-			return new BonusLottoNumber(Integer.parseInt(SCANNER.nextLine()), winningLotto);
-		} catch (Exception e) {
-			OutputView.printExceptionMessage(e);
-			return getBonusLottoNumber(winningLotto);
-		}
+	public static List<Integer> getWinningLotto() {
+		OutputView.askEnterWinningLotto();
+		return StringUtils.splitIntoIntList((SCANNER.nextLine()));
+	}
+
+	public static int getBonusLottoNumber() {
+		OutputView.askEnterBonusLottoNumber();
+		return Integer.parseInt(SCANNER.nextLine());
 	}
 }
