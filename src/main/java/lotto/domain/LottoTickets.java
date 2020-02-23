@@ -22,11 +22,11 @@ public class LottoTickets implements Iterable<LottoTicket> {
 		}
 	}
 
-	public int size() {
+	int size() {
 		return lottoTickets.size();
 	}
 
-	public List<LottoTicket> getLottoTickets() {
+	List<LottoTicket> getLottoTickets() {
 		return lottoTickets;
 	}
 

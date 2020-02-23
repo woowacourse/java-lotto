@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Map;
+import java.util.Set;
 
 import lotto.domain.LottoCount;
 import lotto.domain.LottoRank;
@@ -48,7 +49,9 @@ public class OutputView {
 
 	private static void printMatchingResult(TotalResult totalResult) {
 		Map<LottoRank, Long> result = totalResult.getWinningResult();
-		for (LottoRank lottoRank : result.keySet()) {
+		Set<LottoRank> lottoRanks = result.keySet();
+
+		for (LottoRank lottoRank : lottoRanks) {
 			printStatisticsOneLine(lottoRank, result.get(lottoRank));
 		}
 	}

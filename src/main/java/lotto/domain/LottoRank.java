@@ -38,7 +38,7 @@ public enum LottoRank {
 		return includingBonusBallCondition.isAcceptableBonusCondition(isBonusBall);
 	}
 
-	public boolean isPrizingRank() {
+	boolean isPrizingRank() {
 		return this != MISSING;
 	}
 

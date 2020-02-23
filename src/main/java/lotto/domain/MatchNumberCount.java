@@ -13,7 +13,7 @@ public enum MatchNumberCount {
 		this.matchCount = matchCount;
 	}
 
-	public boolean isSameMatch(int count) {
+	boolean isSameMatch(int count) {
 		return matchCount == count;
 	}
 

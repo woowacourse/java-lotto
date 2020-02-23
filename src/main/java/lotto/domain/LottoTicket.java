@@ -53,11 +53,11 @@ public class LottoTicket {
 			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));
 	}
 
-	public boolean contains(LottoBall lottoBall) {
+	boolean contains(LottoBall lottoBall) {
 		return lottoBalls.contains(lottoBall);
 	}
 
-	public int countMatchingBall(LottoTicket lottoTicket) {
+	int countMatchingBall(LottoTicket lottoTicket) {
 		Set<LottoBall> sameBalls = new HashSet<>(lottoBalls);
 		sameBalls.retainAll(lottoTicket.lottoBalls);
 		return sameBalls.size();
