@@ -14,12 +14,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    private static void validateNumber(int number) {
-        if (number < MIN_BOUND || number >= MAX_BOUND) {
-            throw new IllegalArgumentException("1부터 45까지의 숫자만 가능합니다.");
-        }
-    }
-
     @Override
     public int compareTo(LottoNumber number) {
         return this.number - number.number;
@@ -30,12 +24,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber valueOf(int number) {
-        validateNumber(number);
-
         return NumberCache.cache.stream()
                 .filter(cache -> cache.getValue() == number)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException());
+                .orElseThrow(() -> new IllegalArgumentException("1부터 45까지의 숫자만 가능합니다."));
     }
 
     public int getValue() {
