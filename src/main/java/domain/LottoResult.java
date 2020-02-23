@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class LottoResult {
     private static final Map<LottoRank, Integer> result = new HashMap<>();
-    public static final int INITIAL_PROFIT = 0;
-    public static final int RESULT_INCREMENT = 1;
-    public static final int INITIAL_RESULT = 0;
+    private static final int INITIAL_PROFIT = 0;
+    private static final int RESULT_INCREMENT = 1;
+    private static final int INITIAL_RESULT = 0;
 
     public LottoResult() {
         for (LottoRank rank : LottoRank.values()) {
