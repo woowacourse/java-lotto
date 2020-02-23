@@ -1,8 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
 import lotto.exception.LottoTicketException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +12,19 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketTest {
+    @DisplayName("6개의 로또숫자들이 검증될 경우, 로또티켓을 생성")
+    @Test
+    void create() {
+        LottoTicket lottoTicket = createLottoTicket("1,2,3,4,5,6");
+
+        assertThat(lottoTicket.getNumbers()).contains(new LottoNumber(1))
+                .contains(new LottoNumber(2))
+                .contains(new LottoNumber(3))
+                .contains(new LottoNumber(4))
+                .contains(new LottoNumber(5))
+                .contains(new LottoNumber(6));
+    }
+
     @DisplayName("로또숫자들이 6개가 아닐 경우 예외 발생")
     @Test
     void wrongSizeOfLottoNumbers() {
@@ -35,13 +45,16 @@ class LottoTicketTest {
 
     @DisplayName("로또티켓을 당첨번호와 비교해서 순위를 반환")
     @Test
-    void compareLottoTicket() {
+    void checkOutLottoTicket() {
         LottoTicket lottoTicket = createLottoTicket("1,2,3,4,5,6");
 
         LottoTicket winningLottoTicket = createLottoTicket("1,2,3,10,11,12");
         LottoNumber bonusNumber = new LottoNumber(13);
 
-        assertThat(lottoTicket.compare(winningLottoTicket, bonusNumber)).isEqualTo(Rank.FIFTH);
+        Rank actual = lottoTicket.checkOut(winningLottoTicket, bonusNumber);
+        Rank expected = Rank.FIFTH;
+
+        assertThat(actual).isEqualTo(expected);
     }
 
     private static LottoTicket createLottoTicket(String numbers) {

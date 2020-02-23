@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.LottoNumber;
 import lotto.exception.LottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +13,10 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
     void inRange(int number) {
-        assertThat(new LottoNumber(number).toString()).isEqualTo(String.valueOf(number));
+        String actual = new LottoNumber(number).toString();
+        String expected = String.valueOf(number);
+
+        assertThat(actual).isEqualTo(expected);
     }
 
     @DisplayName("로또숫자가 범위를 벗어날 경우 예외 발생")

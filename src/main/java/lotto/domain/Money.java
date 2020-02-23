@@ -40,8 +40,8 @@ public class Money {
         return this.money / other.money;
     }
 
-    public int calculateProfit(Money purchaseMoney) {
-        return (int) ((double) this.money / purchaseMoney.money * 100);
+    public int calculatePercentage(Money other) {
+        return (int) ((double) this.money / other.money * 100);
     }
 
     public int getValue() {

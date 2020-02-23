@@ -1,7 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.Money;
-import lotto.domain.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,7 +24,8 @@ class RankTest {
         return Stream.of(
                 Arguments.of(5, Rank.THIRD),
                 Arguments.of(6, Rank.FIRST),
-                Arguments.of(3, Rank.FIFTH)
+                Arguments.of(3, Rank.FIFTH),
+                Arguments.of(2, Rank.LOSE)
         );
     }
 
@@ -34,7 +33,21 @@ class RankTest {
     @Test
     void sumWinningMoney() {
         List<Rank> ranks = Arrays.asList(Rank.FIFTH, Rank.SECOND, Rank.FOURTH);
+
+        Money actual = Rank.sumWinningMoney(ranks);
         Money expected = Money.of(30055000);
-        assertThat(Rank.sumWinningMoney(ranks)).isEqualTo(expected);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("해당하는 Rank의 개수를 반환")
+    @Test
+    void getContainingCount() {
+        List<Rank> ranks = Arrays.asList(Rank.FOURTH, Rank.FIFTH, Rank.SECOND, Rank.FOURTH, Rank.FOURTH);
+
+        int actual = Rank.FOURTH.getContainingCount(ranks);
+        int expected = 3;
+
+        assertThat(actual).isEqualTo(expected);
     }
 }

@@ -55,7 +55,7 @@ public class LottoTicket {
         return Collections.unmodifiableList(numbers);
     }
 
-    public Rank compare(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
+    public Rank checkOut(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
         int count = (int) numbers.stream()
                 .filter(winningLottoTicket.numbers::contains)
                 .count();

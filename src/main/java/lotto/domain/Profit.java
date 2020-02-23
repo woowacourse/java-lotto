@@ -7,7 +7,7 @@ public class Profit {
 
     public Profit(Money purchaseMoney, List<Rank> ranks) {
         Money totalWinningMoney = Rank.sumWinningMoney(ranks);
-        this.profit = totalWinningMoney.calculateProfit(purchaseMoney);
+        this.profit = totalWinningMoney.calculatePercentage(purchaseMoney);
     }
 
     public int getProfitWithoutDecimalPoint() {

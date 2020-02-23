@@ -1,9 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
-import lotto.domain.WinningNumbers;
 import lotto.exception.WinningNumbersException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
