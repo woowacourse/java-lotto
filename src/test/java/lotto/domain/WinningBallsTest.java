@@ -7,12 +7,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class WinningNumbersTest {
+public class WinningBallsTest {
     @DisplayName("null또는 공백을 입력했을때 예외가 발생하는지 확인")
     @NullAndEmptySource
     @ParameterizedTest
     void nullOrBlankTest(String input) {
-        assertThatThrownBy(() -> new WinningNumbers(input))
+        assertThatThrownBy(() -> new WinningBalls(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("당첨 번호를 입력하지 않으셨습니다.");
     }
@@ -21,7 +21,7 @@ public class WinningNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"1-2-3", "123", "1 2 3", "1과 2 그리고 3"})
     void noDelimiterInputTest(String input) {
-        assertThatThrownBy(() -> new WinningNumbers(input))
+        assertThatThrownBy(() -> new WinningBalls(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageEndingWith("나누어 입력해 주세요.");
     }
@@ -30,7 +30,7 @@ public class WinningNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
     void inputCountTest(String input) {
-        assertThatThrownBy(() -> new WinningNumbers(input))
+        assertThatThrownBy(() -> new WinningBalls(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageEndingWith("개만 가능합니다.");
     }
@@ -39,7 +39,7 @@ public class WinningNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"일, 이, 삼, 사, 오, 육", "one, two, three, four, five, six", "i, 2, 3, 4, v,6"})
     void notNumberInputTest(String input) {
-        assertThatThrownBy(() -> new WinningNumbers(input))
+        assertThatThrownBy(() -> new WinningBalls(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("숫자만 입력하시기 바랍니다.");
     }
@@ -48,7 +48,7 @@ public class WinningNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"0, 1, 2, 3, 4, 5", "41, 42, 43, 44, 45, 46"})
     void exceedRangeInputTest(String input) {
-        assertThatThrownBy(() -> new WinningNumbers(input))
+        assertThatThrownBy(() -> new WinningBalls(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageEndingWith("이하의 숫자만 입력 가능합니다.");
     }
@@ -57,7 +57,7 @@ public class WinningNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 1", "23, 36, 40, 41, 36, 17"})
     void duplicatedInputTest(String input) {
-        assertThatThrownBy(() -> new WinningNumbers(input))
+        assertThatThrownBy(() -> new WinningBalls(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("중복된 숫자가 입력되었습니다.");
     }

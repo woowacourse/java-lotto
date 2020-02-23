@@ -10,8 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
     private List<Lotto> lottos;
-    private WinningNumbers winningNumbers;
-    private BonusNumber bonusNumber;
+    private WinningBalls winningBalls;
+    private BonusBall bonusBall;
     private Map<MatchResult, Integer> expectedMatchResults;
 
     @BeforeEach
@@ -23,8 +23,8 @@ public class LottoResultTest {
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 44, 45)));
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45)));
 
-        winningNumbers = new WinningNumbers("1,2,3,4,5,7");
-        bonusNumber = new BonusNumber("6");
+        winningBalls = new WinningBalls("1,2,3,4,5,7");
+        bonusBall = new BonusBall("6");
 
         expectedMatchResults = new HashMap<>();
         expectedMatchResults.put(MatchResult.THREE_MATCH, 1);
@@ -37,18 +37,18 @@ public class LottoResultTest {
     @DisplayName("로또 한 줄과 당첨번호를 비교했을때 올바른 당첨 결과를 반환하는지 확인")
     @Test
     void findMatchResultTest() {
-        assertThat(lottos.get(0).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.SIX_MATCH);
-        assertThat(lottos.get(1).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.FIVE_MATCH_WITH_BONUS_BALL);
-        assertThat(lottos.get(2).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.FIVE_MATCH);
-        assertThat(lottos.get(3).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.FOUR_MATCH);
-        assertThat(lottos.get(4).findMatchResult(winningNumbers, bonusNumber)).isEqualTo(MatchResult.THREE_MATCH);
+        assertThat(lottos.get(0).findMatchResult(winningBalls, bonusBall)).isEqualTo(MatchResult.SIX_MATCH);
+        assertThat(lottos.get(1).findMatchResult(winningBalls, bonusBall)).isEqualTo(MatchResult.FIVE_MATCH_WITH_BONUS_BALL);
+        assertThat(lottos.get(2).findMatchResult(winningBalls, bonusBall)).isEqualTo(MatchResult.FIVE_MATCH);
+        assertThat(lottos.get(3).findMatchResult(winningBalls, bonusBall)).isEqualTo(MatchResult.FOUR_MATCH);
+        assertThat(lottos.get(4).findMatchResult(winningBalls, bonusBall)).isEqualTo(MatchResult.THREE_MATCH);
     }
 
     @DisplayName("생성된 로또들과 당첨번호를 비교했을 때 올바른 당첨 결과를 반환하는지 확인")
     @Test
     void createMatchResultsTest() {
         Lottos lottos = new Lottos(this.lottos);
-        Map<MatchResult, Integer> matchResults = lottos.createMatchResults(winningNumbers, bonusNumber);
+        Map<MatchResult, Integer> matchResults = lottos.createMatchResults(winningBalls, bonusBall);
         assertThat(matchResults).isEqualTo(expectedMatchResults);
     }
 

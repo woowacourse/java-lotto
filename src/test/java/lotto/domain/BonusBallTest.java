@@ -7,13 +7,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class BonusNumberTest {
+public class BonusBallTest {
 
     @DisplayName("입력값이 없을 때 예외 발생 확인")
     @NullAndEmptySource
     @ParameterizedTest
     void nullOrBlankTest(String input) {
-        assertThatThrownBy(() -> new BonusNumber(input))
+        assertThatThrownBy(() -> new BonusBall(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("보너스 번호를 입력하지 않으셨습니다.");
     }
@@ -22,7 +22,7 @@ public class BonusNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"3입니다.", "three", "I", "1~"})
     void notNumberInputTest(String input) {
-        assertThatThrownBy(() -> new BonusNumber(input))
+        assertThatThrownBy(() -> new BonusBall(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("숫자만 입력하시기 바랍니다.");
     }
@@ -31,7 +31,7 @@ public class BonusNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"0", "46"})
     void exceedRangeInputTest(String input) {
-        assertThatThrownBy(() -> new BonusNumber(input))
+        assertThatThrownBy(() -> new BonusBall(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageEndingWith("이하의 숫자만 입력 가능합니다.");
     }

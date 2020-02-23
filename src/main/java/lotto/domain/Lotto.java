@@ -6,32 +6,32 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private static final int LOTTO_NUMBERS_COUNT = 6;
-    private static final int WINNING_NUMBERS_COUNT = 6;
+    private static final int BALLS_COUNT = 6;
+    private static final int WINNING_BALLS_COUNT = 6;
     private static final int FIVE_MATCH = 5;
 
-    private final List<Integer> numbers;
+    private final List<Ball> balls;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+    public Lotto(List<Ball> balls) {
+        this.balls = balls;
     }
 
-    public MatchResult findMatchResult(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        int sameNumberCount = calculateSameNumberCountWith(winningNumbers);
-        if (sameNumberCount == FIVE_MATCH && bonusNumber.isIncluded(numbers)) {
+    public MatchResult findMatchResult(WinningBalls winningBalls, BonusBall bonusBall) {
+        int sameNumberCount = calculateSameNumberCountWith(winningBalls);
+        if (sameNumberCount == FIVE_MATCH && bonusBall.isIncluded(balls)) {
             return MatchResult.FIVE_MATCH_WITH_BONUS_BALL;
         }
         return MatchResult.of(sameNumberCount);
     }
 
-    private int calculateSameNumberCountWith(WinningNumbers winningNumbers) {
-        Set<Integer> numbers = new HashSet<Integer>(this.numbers);
-        numbers.addAll(winningNumbers.getWinningNumbers());
+    private int calculateSameNumberCountWith(WinningBalls winningBalls) {
+        Set<Ball> numbers = new HashSet<Ball>(this.balls);
+        numbers.addAll(winningBalls.getWinningBalls());
         int differentNumbersCount = numbers.size();
-        return LOTTO_NUMBERS_COUNT + WINNING_NUMBERS_COUNT - differentNumbersCount;
+        return BALLS_COUNT + WINNING_BALLS_COUNT - differentNumbersCount;
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public List<Ball> getBalls() {
+        return Collections.unmodifiableList(balls);
     }
 }

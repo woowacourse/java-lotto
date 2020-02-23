@@ -12,10 +12,10 @@ public class LottoApplication {
         Lottos lottos = new Lottos(LottoGenerator.generate(lottoCount));
         OutputView.printLottos(lottos);
 
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.requestWinningNumbersInput());
-        BonusNumber bonusNumber = new BonusNumber(InputView.requestBonusNumberInput());
+        WinningBalls winningBalls = new WinningBalls(InputView.requestWinningNumbersInput());
+        BonusBall bonusBall = new BonusBall(InputView.requestBonusNumberInput());
 
-        LottoResults lottoResults = new LottoResults(lottos.createMatchResults(winningNumbers, bonusNumber));
+        LottoResults lottoResults = new LottoResults(lottos.createMatchResults(winningBalls, bonusBall));
         OutputView.printLottoResult(lottoResults, purchasePrice);
     }
 }

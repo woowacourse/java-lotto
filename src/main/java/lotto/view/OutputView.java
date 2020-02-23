@@ -24,16 +24,12 @@ public class OutputView {
     }
 
     private static void printLottoNumbers(Lotto lotto) {
-        List<Integer> numbers = lotto.getNumbers();
-        String result = numbers.stream()
-                .map(String::valueOf)
+        List<Ball> balls = lotto.getBalls();
+        String numbers = balls.stream()
+                .map(ball -> String.valueOf(ball.getNumber()))
                 .collect(joining(COMMA));
-        StringBuilder sb = new StringBuilder();
-        sb.append("[")
-                .append(result)
-                .append("]");
-
-        System.out.println(sb.toString());
+        String result = "[" + numbers + "]";
+        System.out.println(result);
     }
 
     public static void printLottoResult(LottoResults lottoResults, PurchasePrice purchasePrice) {

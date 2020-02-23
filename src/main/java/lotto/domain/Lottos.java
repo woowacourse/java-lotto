@@ -14,10 +14,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Map<MatchResult, Integer> createMatchResults(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    public Map<MatchResult, Integer> createMatchResults(WinningBalls winningBalls, BonusBall bonusBall) {
         Map<MatchResult, Integer> matchResults = setUpMatchResults();
         for (Lotto lotto : lottos) {
-            MatchResult lottoMatchResult = lotto.findMatchResult(winningNumbers, bonusNumber);
+            MatchResult lottoMatchResult = lotto.findMatchResult(winningBalls, bonusBall);
             updateMatchResults(matchResults, lottoMatchResult);
         }
         return matchResults;

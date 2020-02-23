@@ -6,16 +6,27 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WinningNumbers {
+public class WinningBalls {
     private static final String WINNING_NUMBERS_DELIMITER = ",";
     private static final int NUMBER_COUNT_PER_LOTTO = 6;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
-    private final List<Integer> winningNumbers;
+    private final List<Ball> winningBalls;
 
-    public WinningNumbers(String winningNumbersInput) {
-        this.winningNumbers = getValidatedWinningNumbers(winningNumbersInput);
+    public WinningBalls(String winningBalls) {
+        validate(winningBalls);
+        this.winningBalls = parseToBalls(split(winningBalls));
+    }
+
+    private void validate(String winningBallsInput) {
+        checkNoInput(winningBallsInput);
+        checkDelimiter(winningBallsInput);
+        List<String> splittedNumbers = split(winningBallsInput);
+        checkCount(splittedNumbers);
+        checkType(splittedNumbers);
+        List<Ball> winningBalls = parseToBalls(splittedNumbers);
+        checkDuplicatedNumber(winningBalls);
     }
 
     private static void checkNoInput(String winningNumbersInput) {
@@ -30,23 +41,11 @@ public class WinningNumbers {
         }
     }
 
-    private List<Integer> getValidatedWinningNumbers(String winningNumbersInput) {
-        checkNoInput(winningNumbersInput);
-        checkDelimiter(winningNumbersInput);
-        List<String> splittedNumbers = split(winningNumbersInput);
-        checkCount(splittedNumbers);
-        checkType(splittedNumbers);
-        List<Integer> winningNumbers = parseToNumbers(splittedNumbers);
-        checkRange(winningNumbers);
-        checkDuplicatedNumber(winningNumbers);
-        return winningNumbers;
-    }
-
     private List<String> split(String winningNumbersInput) {
         List<String> splittedNumbers = new ArrayList<>();
         String[] winningNumbers = winningNumbersInput.split(WINNING_NUMBERS_DELIMITER);
-        for (int i = 0; i < winningNumbers.length; i++) {
-            splittedNumbers.add(winningNumbers[i].trim());
+        for (String winningNumber : winningNumbers) {
+            splittedNumbers.add(winningNumber.trim());
         }
         return splittedNumbers;
     }
@@ -67,30 +66,21 @@ public class WinningNumbers {
         }
     }
 
-    private List<Integer> parseToNumbers(List<String> splittedNumbers) {
+    private List<Ball> parseToBalls(List<String> splittedNumbers) {
         return splittedNumbers.stream()
                 .map(Integer::parseInt)
+                .map(Ball::valueOf)
                 .collect(Collectors.toList());
     }
 
-    private void checkRange(List<Integer> winningNumbers) {
-        int validNumberCount = winningNumbers.stream()
-                .filter(integer -> MIN_NUMBER <= integer && integer <= MAX_NUMBER)
-                .collect(Collectors.toList())
-                .size();
-        if (validNumberCount != NUMBER_COUNT_PER_LOTTO) {
-            throw new RuntimeException(String.format("%d 이상 %d 이하의 숫자만 입력 가능합니다.", MIN_NUMBER, MAX_NUMBER));
-        }
-    }
-
-    private void checkDuplicatedNumber(List<Integer> winningNumbers) {
-        Set<Integer> numbers = new HashSet<>(winningNumbers);
-        if (numbers.size() != winningNumbers.size()) {
+    private void checkDuplicatedNumber(List<Ball> winningBalls) {
+        Set<Ball> numbers = new HashSet<>(winningBalls);
+        if (numbers.size() != winningBalls.size()) {
             throw new RuntimeException("중복된 숫자가 입력되었습니다.");
         }
     }
 
-    public List<Integer> getWinningNumbers() {
-        return this.winningNumbers;
+    public List<Ball> getWinningBalls() {
+        return this.winningBalls;
     }
 }

@@ -9,42 +9,41 @@ public class LottoGenerator {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
-    private static final List<Integer> allLottoNumbers;
+    private static final List<Ball> allLottoBalls;
 
     static {
-        allLottoNumbers = gatherAllNumbers();
+        allLottoBalls = gatherAllBalls();
     }
 
-    private static List<Integer> gatherAllNumbers() {
-        List<Integer> allLottoNumbers = new ArrayList<>();
+    private static List<Ball> gatherAllBalls() {
+        List<Ball> allLottoBalls = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            allLottoNumbers.add(i);
+            allLottoBalls.add(Ball.valueOf(i));
         }
-        return allLottoNumbers;
+        return allLottoBalls;
     }
 
     public static List<Lotto> generate(int lottoCount) {
         List<Lotto> randomLottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            randomLottos.add(new Lotto(generateLottoNumbers()));
+            randomLottos.add(new Lotto(generateLottoBalls()));
         }
         return randomLottos;
     }
 
-    private static List<Integer> generateLottoNumbers() {
-        List<Integer> cloneAllLottoNumbers = new ArrayList<>();
-        cloneAllLottoNumbers.addAll(allLottoNumbers);
-        Collections.shuffle(cloneAllLottoNumbers);
-        List<Integer> resultNumbers = pickLottoNumbers(cloneAllLottoNumbers);
-        Collections.sort(resultNumbers);
-        return resultNumbers;
+    private static List<Ball> generateLottoBalls() {
+        List<Ball> cloneAllLottoBalls = new ArrayList<>(allLottoBalls);
+        Collections.shuffle(cloneAllLottoBalls);
+        List<Ball> resultBalls = pickLottoBalls(cloneAllLottoBalls);
+        Collections.sort(resultBalls);
+        return resultBalls;
     }
 
-    private static List<Integer> pickLottoNumbers(List<Integer> cloneAllLottoNumbers) {
-        List<Integer> resultNumbers = new ArrayList<>();
+    private static List<Ball> pickLottoBalls(List<Ball> cloneAllLottoBalls) {
+        List<Ball> resultBalls = new ArrayList<>();
         for (int i = 0; i < NUMBER_COUNT_PER_LOTTO; i++) {
-            resultNumbers.add(cloneAllLottoNumbers.get(i));
+            resultBalls.add(cloneAllLottoBalls.get(i));
         }
-        return resultNumbers;
+        return resultBalls;
     }
 }
