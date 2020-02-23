@@ -30,7 +30,7 @@ public class InputView {
         System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
         try {
             return Integer.parseInt(SCANNER.nextLine());
-        } catch (InputMismatchException e) {
+        } catch (NumberFormatException e) {
             System.out.println(INPUT_ERROR_MESSAGE);
             return inputBonusNumber();
         }

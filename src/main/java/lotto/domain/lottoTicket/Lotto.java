@@ -1,5 +1,8 @@
 package lotto.domain.lottoTicket;
 
+import lotto.util.DuplicationLottoException;
+import lotto.util.InvalidSizeLottoException;
+
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -7,8 +10,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
-    private static final String LOTTO_NUMBER_DUPLICATION_ERROR_MESSAGE = "중복된 로또 번호가 있습니다.";
-    private static final String LOTTO_SIZE_ERROR_MESSAGE = "로또 번호의 개수가 올바르지 않습니다.";
 
     protected List<LottoNumber> lottoNumbers;
 
@@ -21,13 +22,13 @@ public class Lotto {
     static void validateDuplication(List<LottoNumber> numbers) {
         LinkedHashSet<LottoNumber> duplicationNumbers = new LinkedHashSet<>(numbers);
         if (duplicationNumbers.size() != numbers.size()) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATION_ERROR_MESSAGE);
+            throw new DuplicationLottoException();
         }
     }
 
     static void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(LOTTO_SIZE_ERROR_MESSAGE);
+            throw new InvalidSizeLottoException(numbers.size());
         }
     }
 
