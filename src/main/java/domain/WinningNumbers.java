@@ -1,7 +1,8 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import exception.LottoInputException;
 
@@ -27,19 +28,18 @@ public class WinningNumbers {
 			.contains(bonusNumber);
 	}
 
-	public List<Rank> compareLottos(List<Lotto> lottos) {
-		List<Rank> ranks = new ArrayList<>();
-
+	public Map<Rank, Integer> compareLottos(List<Lotto> lottos) {
+		Map<Rank, Integer> ranks = new HashMap<>();
 		for (Lotto lotto : lottos) {
 			compareLotto(ranks, lotto);
 		}
 		return ranks;
 	}
 
-	private void compareLotto(List<Rank> ranks, Lotto lotto) {
+	private void compareLotto(Map<Rank, Integer> ranks, Lotto lotto) {
 		Rank rank = lotto.compare(winningLottoTicket, bonusNumber);
 		if (rank != null) {
-			ranks.add(rank);
+			ranks.put(rank, ranks.getOrDefault(rank, 0));
 		}
 	}
 }

@@ -3,6 +3,7 @@ package view;
 import java.util.List;
 import java.util.StringJoiner;
 
+import domain.GameResult;
 import domain.Lotto;
 import domain.Money;
 import domain.Rank;
@@ -18,14 +19,14 @@ public class OutputView {
 		}
 	}
 
-	public static void printResult(List<Rank> ranks) {
+	public static void printResult(GameResult gameResult) {
 		System.out.println("당첨 통계");
 		System.out.println("-------");
 
 		for (Rank rank : Rank.values()) {
 			int matchedCount = rank.getMatchedCount();
 			Money winningMoney = rank.getWinningMoney();
-			int containingCount = rank.getContainingCount(ranks);
+			int containingCount = gameResult.getMatched(rank);
 			System.out.println(
 				String.format("%d개 일치 (%.0f원) - %d개", matchedCount, winningMoney.getMoney(), containingCount));
 		}

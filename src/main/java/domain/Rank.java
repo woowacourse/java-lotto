@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum Rank {
 	FIFTH(3, new Money(5_000)),
@@ -25,24 +24,11 @@ public enum Rank {
 			.orElse(null);
 	}
 
-	public static Money sumWinningMoney(List<Rank> ranks) {
-		Money money = new Money(ranks.stream()
-			.mapToDouble(rank -> rank.winningMoney.getMoney())
-			.sum());
-		return money;
-	}
-
 	public int getMatchedCount() {
 		return matchedCount;
 	}
 
 	public Money getWinningMoney() {
 		return winningMoney;
-	}
-
-	public int getContainingCount(List<Rank> ranks) {
-		return (int)ranks.stream()
-			.filter(rank -> rank.equals(this))
-			.count();
 	}
 }
