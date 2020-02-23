@@ -60,7 +60,7 @@ public enum LottoNumber {
     public static LottoNumber find(String value) {
         int parsedValue = getParsedValue(value.trim());
         return Arrays.stream(LottoNumber.values())
-            .filter(number -> number.getValue() == parsedValue)
+            .filter(number -> number.value == parsedValue)
             .findFirst()
             .orElseThrow(() ->
                 new InvalidLottoNumberException("잘못된 로또 번호입니다.")

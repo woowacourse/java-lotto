@@ -34,25 +34,17 @@ public class LottoResult {
         return String.format("%.2f", rate);
     }
 
-    private void handleBonus(LottoNumber bonus, LottoTicket ticket, int matchCount) {
-        if (isBonus(bonus, ticket, matchCount)) {
-            lottoResult.put(Rank.BONUS, lottoResult.get(Rank.BONUS) + 1);
-            lottoResult.put(Rank.SECOND, lottoResult.get(Rank.SECOND) - 1);
+    private Map<Rank, Integer> match(LottoTickets tickets, LottoTicket winningTicket, LottoNumber bonus) {
+        for (LottoTicket ticket : tickets) {
+            int matchCount = winningTicket.compare(ticket);
+            Rank rankFound = Rank.find(matchCount, isBonus(bonus, ticket, matchCount));
+            lottoResult.put(rankFound, lottoResult.get(rankFound) + 1);
         }
+        return Collections.unmodifiableMap(lottoResult);
     }
 
     private boolean isBonus(LottoNumber bonus, LottoTicket ticket, int matchCount) {
         return matchCount == BONUS_COUNT && ticket.contains(bonus);
-    }
-
-    private Map<Rank, Integer> match(LottoTickets tickets, LottoTicket winningTicket, LottoNumber bonus) {
-        for (LottoTicket ticket : tickets) {
-            int matchCount = winningTicket.compare(ticket);
-            Rank rankFound = Rank.find(matchCount);
-            lottoResult.put(rankFound, lottoResult.get(rankFound) + 1);
-            handleBonus(bonus, ticket, matchCount);
-        }
-        return Collections.unmodifiableMap(lottoResult);
     }
 
     public Map<Rank, Integer> getLottoResult() {

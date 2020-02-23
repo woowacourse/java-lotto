@@ -15,14 +15,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoResultTest {
     private LottoResult result;
 
-    static Stream<Arguments> matchParameters() {
-        return Stream.of(
-            Arguments.of(Rank.FIRST, 2),
-            Arguments.of(Rank.SECOND, 1),
-            Arguments.of(Rank.BONUS, 1)
-        );
-    }
-
     @BeforeEach
     void setUp() {
         String[][] numbers = {
@@ -46,5 +38,13 @@ class LottoResultTest {
     @MethodSource("matchParameters")
     void match(Rank rank, int expected) {
         assertThat(result.getLottoResult().get(rank)).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> matchParameters() {
+        return Stream.of(
+            Arguments.of(Rank.FIRST, 2),
+            Arguments.of(Rank.SECOND, 1),
+            Arguments.of(Rank.BONUS, 1)
+        );
     }
 }
