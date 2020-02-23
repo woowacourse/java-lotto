@@ -9,11 +9,11 @@ package lotto.domain;
  * 날짜 : 2020/02/18
  */
 public class WrongLottoNumberException extends IllegalArgumentException {
-	public WrongLottoNumberException() {
-		super();
-	}
+    public WrongLottoNumberException() {
+        super();
+    }
 
-	public WrongLottoNumberException(final String message) {
-		super(message);
-	}
+    public WrongLottoNumberException(final String message) {
+        super(message);
+    }
 }

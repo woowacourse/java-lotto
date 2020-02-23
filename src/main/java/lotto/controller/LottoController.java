@@ -53,7 +53,6 @@ public class LottoController {
 			return new BonusLottoNumber(InputView.getBonusLottoNumber(), winningLotto);
 		} catch (Exception e) {
 			OutputView.printExceptionMessage(e);
-			System.out.println("여기");
 			return getBonusLottoNumber(winningLotto);
 		}
 	}

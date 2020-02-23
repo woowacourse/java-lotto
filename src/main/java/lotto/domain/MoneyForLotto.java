@@ -11,14 +11,14 @@ import java.util.Objects;
  * 날짜 : 2020/02/19
  */
 public class MoneyForLotto {
-	private static final int LOTTO_PRICE = 1000;
+	private static final int LOTTO_PRICE = 1_000;
 
 	private final int moneyForLotto;
 
 	public MoneyForLotto(final Integer inputMoney) {
 		Objects.requireNonNull(inputMoney);
 		if (inputMoney < LOTTO_PRICE) {
-			throw new IllegalArgumentException("1000원 이상 입력해주세요.");
+			throw new IllegalArgumentException(LOTTO_PRICE + "원 이상 입력해주세요.");
 		}
 		this.moneyForLotto = inputMoney;
 	}
