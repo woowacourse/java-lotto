@@ -14,9 +14,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoResultTest {
     private LottoResult result;
-    private LottoTickets tickets;
-    private LottoTicket winningTicket;
-    private LottoNumber bonus;
 
     static Stream<Arguments> matchParameters() {
         return Stream.of(
@@ -34,20 +31,20 @@ class LottoResultTest {
             LottoTicketTest.MATCH_BONUS,
             LottoTicketTest.MATCH_FIVE,
         };
-        tickets = new LottoTickets(
+        LottoTickets tickets = new LottoTickets(
             Arrays.stream(numbers)
                 .map(LottoTicket::new)
                 .collect(Collectors.toList())
         );
-        winningTicket = new LottoTicket(LottoTicketTest.WINNING_NUMBER);
-        bonus = LottoNumber.SEVEN;
-        result = LottoResult.create();
+        LottoTicket winningTicket = new LottoTicket(LottoTicketTest.WINNING_NUMBER);
+        LottoNumber bonus = LottoNumber.SEVEN;
+        result = LottoResult.create(tickets, winningTicket, bonus);
     }
 
     @ParameterizedTest
     @DisplayName("정상적으로 통계가 반환되는지")
     @MethodSource("matchParameters")
     void match(Rank rank, int expected) {
-        assertThat(result.match(tickets, winningTicket, bonus).get(rank)).isEqualTo(expected);
+        assertThat(result.getLottoResult().get(rank)).isEqualTo(expected);
     }
 }

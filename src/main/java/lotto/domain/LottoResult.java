@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class LottoResult {
     public static final int BONUS_COUNT = 5;
+
     private Map<Rank, Integer> lottoResult;
 
     private LottoResult() {
@@ -15,18 +16,22 @@ public class LottoResult {
             .forEach(rank -> lottoResult.put(rank, 0));
     }
 
-    public static LottoResult create() {
-        return new LottoResult();
+    private LottoResult(Map<Rank, Integer> lottoResult) {
+        this.lottoResult = lottoResult;
     }
 
-    public Map<Rank, Integer> match(LottoTickets tickets, LottoTicket winningTicket, LottoNumber bonus) {
-        for (LottoTicket ticket : tickets) {
-            int matchCount = winningTicket.compare(ticket);
-            Rank rankFound = Rank.find(matchCount);
-            lottoResult.put(rankFound, lottoResult.get(rankFound) + 1);
-            handleBonus(bonus, ticket, matchCount);
+    public static LottoResult create(LottoTickets tickets, LottoTicket winningTicket, LottoNumber bonus) {
+        LottoResult lottoResult = new LottoResult();
+        return new LottoResult(lottoResult.match(tickets, winningTicket, bonus));
+    }
+
+    public static String calculate(Money money, Map<Rank, Integer> result) {
+        double total = 0;
+        for (Rank rank : result.keySet()) {
+            total += (double)rank.getPrize() * result.get(rank);
         }
-        return Collections.unmodifiableMap(lottoResult);
+        double rate = total * 100 / (money.ticketQuantity() * Money.TICKET_PRICE);
+        return String.format("%.2f", rate);
     }
 
     private void handleBonus(LottoNumber bonus, LottoTicket ticket, int matchCount) {
@@ -38,6 +43,16 @@ public class LottoResult {
 
     private boolean isBonus(LottoNumber bonus, LottoTicket ticket, int matchCount) {
         return matchCount == BONUS_COUNT && ticket.contains(bonus);
+    }
+
+    private Map<Rank, Integer> match(LottoTickets tickets, LottoTicket winningTicket, LottoNumber bonus) {
+        for (LottoTicket ticket : tickets) {
+            int matchCount = winningTicket.compare(ticket);
+            Rank rankFound = Rank.find(matchCount);
+            lottoResult.put(rankFound, lottoResult.get(rankFound) + 1);
+            handleBonus(bonus, ticket, matchCount);
+        }
+        return Collections.unmodifiableMap(lottoResult);
     }
 
     public Map<Rank, Integer> getLottoResult() {

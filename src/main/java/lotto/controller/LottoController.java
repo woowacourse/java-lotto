@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.Accountant;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
@@ -14,13 +13,13 @@ import lotto.view.OutputView;
 
 public class LottoController {
     public static void run() {
-        LottoResult lottoResult = LottoResult.create();
         Money money = getMoney();
         LottoTickets tickets = getLottoTickets(money);
         LottoTicket winningLotto = getLottoTicket();
         LottoNumber bonus = getBonusNumber(winningLotto);
-        OutputView.prizeStatistics(lottoResult.match(tickets, winningLotto, bonus));
-        OutputView.profitRate(Accountant.calculate(money, lottoResult));
+        LottoResult result = LottoResult.create(tickets, winningLotto, bonus);
+        OutputView.prizeStatistics(result.getLottoResult());
+        OutputView.profitRate(LottoResult.calculate(money, result.getLottoResult()));
     }
 
     private static LottoNumber getBonusNumber(LottoTicket winningLotto) {
