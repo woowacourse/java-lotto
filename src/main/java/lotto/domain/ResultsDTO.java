@@ -1,26 +1,21 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class ResultsDTO {
-    private List<WinningInfo> results;
+    private Map<WinningInfo, Integer> matchCount;
     private long earningRate;
 
-    public ResultsDTO(List <WinningInfo> results, long earningRate) {
-        this.results = results;
+    public ResultsDTO(Map<WinningInfo, Integer> matchCount, long earningRate) {
+        this.matchCount = matchCount;
         this.earningRate = earningRate;
+    }
+
+    public int getMatchCount(WinningInfo winningInfo) {
+        return matchCount.get(winningInfo);
     }
 
     public long getEarningRate() {
         return earningRate;
-    }
-
-    public int getWinningCount(WinningInfo winningInfo) {
-        return results
-                .stream()
-                .filter(result -> result.equals(winningInfo))
-                .collect(Collectors.toList())
-                .size();
     }
 }

@@ -32,4 +32,12 @@ public class ResultCalculator {
         return totalEarning / (lottoCount * Lottos.PRICE_PER_LOTTO);
     }
 
+    // 로또의 등수 별로 몇 개의 로또가 당첨되었는지 계산
+    public static Map<WinningInfo, Integer> computeMatchCount(List<WinningInfo> results) {
+        Map<WinningInfo, Integer> map = new HashMap<>();
+        for (WinningInfo winningInfo : results) {
+            map.compute(winningInfo, (k, v) -> (v == null) ? 1 : v + 1);
+        }
+        return map;
+    }
 }
