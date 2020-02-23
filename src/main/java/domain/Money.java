@@ -2,8 +2,12 @@ package domain;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Map;
+
 public class Money {
-    public static final int MIN_MONEY = 1_000;
+    private static final int PERCENT = 100;
+    private static final int INIT_SUM_VALUE = 0;
+    private static final int MIN_MONEY = 1_000;
 
     private int money;
 
@@ -42,5 +46,18 @@ public class Money {
 
     public int calculateLottoTicket() {
         return this.money / MIN_MONEY;
+    }
+
+
+    private static double getTotalWinningPrice(Map<RankType, Integer> map) {
+        double sum = INIT_SUM_VALUE;
+        for (Map.Entry<RankType, Integer> entry : map.entrySet()) {
+            sum += entry.getKey().calculate(entry.getValue());
+        }
+        return sum;
+    }
+
+    public static long getProfit(Map<RankType, Integer> map, int money) {
+        return Math.round((getTotalWinningPrice(map) / money) * PERCENT);
     }
 }

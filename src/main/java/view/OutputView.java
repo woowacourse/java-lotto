@@ -1,7 +1,7 @@
 package view;
 
-import domain.LottoCalculator;
 import domain.LottoTicket;
+import domain.Money;
 import domain.RankType;
 
 import java.util.List;
@@ -26,6 +26,6 @@ public class OutputView {
             System.out.println(entry.getKey().getPrintStr() + String.format("%d", entry.getValue()) + "개");
         }
 
-        System.out.println("총 수익률은 " + LottoCalculator.getProfit(winningCountMap, money) + "%입니다.");
+        System.out.println("총 수익률은 " + Money.getProfit(winningCountMap, money) + "%입니다.");
     }
 }
