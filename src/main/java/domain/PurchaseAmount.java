@@ -8,14 +8,8 @@ public class PurchaseAmount {
     public PurchaseAmount(String inputMoney) {
         checkNotNumber(inputMoney);
         this.amount = Integer.parseInt(inputMoney);
-        checkNegativeAmount(amount);
+        checkNegativeAmount();
         checkUnderLottoPrice();
-    }
-
-    private void checkUnderLottoPrice() {
-        if (amount < LOTTO_PRICE){
-            throw new IllegalArgumentException("로또 한장 가격보다 낮은 금액을 입력하셨습니다.");
-        }
     }
 
     private void checkNotNumber(String inputMoney) {
@@ -26,9 +20,15 @@ public class PurchaseAmount {
         }
     }
 
-    private void checkNegativeAmount(int amount) {
-        if (amount < NO_LOTTO) {
+    private void checkNegativeAmount() {
+        if (this.amount < NO_LOTTO) {
             throw new IllegalArgumentException("구매 금액은 음수일 수 없습니다.");
+        }
+    }
+
+    private void checkUnderLottoPrice() {
+        if (this.amount < LOTTO_PRICE){
+            throw new IllegalArgumentException("로또 한장 가격보다 낮은 금액을 입력하셨습니다.");
         }
     }
 
