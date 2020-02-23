@@ -6,19 +6,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private Set<Integer> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
-    Lotto(Set<Integer> lottoNumbers) {
+    Lotto(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
-    int matchWinningNumbers(Set<Integer> winningNumbers) {
+    int matchWinningNumbers(Set<LottoNumber> winningNumbers) {
         return (int)lottoNumbers.stream()
             .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
             .count();
     }
 
-    public boolean matchBonusBall(int bonusBall) {
-        return lottoNumbers.contains(bonusBall);
+    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override

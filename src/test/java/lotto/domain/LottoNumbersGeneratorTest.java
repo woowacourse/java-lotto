@@ -16,25 +16,11 @@ class LottoNumbersGeneratorTest {
         //given
         int lottosSize = 14;
         //when
-        List<List<Integer>> lottoNumbersNumbers = LottoNumbersGenerator.generate(lottosSize);
+        List<List<LottoNumber>> lottoNumbersNumbers = LottoNumbersGenerator.generate(lottosSize);
         //then
 
-        for(List<Integer> lottoNumbers : lottoNumbersNumbers) {
+        for (List<LottoNumber> lottoNumbers : lottoNumbersNumbers) {
             assertThat(lottoNumbers.size()).isEqualTo(LottoNumbersGenerator.LOTTO_NUMBER_SIZE);
-        }
-    }
-
-    @Test
-    void 로또숫자_유효범위() {
-        //given
-        int lottosSize = 14;
-        //when
-        List<List<Integer>> lottoNumbersNumbers = LottoNumbersGenerator.generate(lottosSize);
-        //then
-        for (List<Integer> lottoNumbers : lottoNumbersNumbers) {
-            for (Integer lottoNumber : lottoNumbers) {
-                assertThat(lottoNumber).isGreaterThanOrEqualTo(1).isLessThanOrEqualTo(45);
-            }
         }
     }
 
@@ -43,8 +29,8 @@ class LottoNumbersGeneratorTest {
         //given
         int lottosSize = 14;
         //when
-        List<List<Integer>> lottoNumbersList = LottoNumbersGenerator.generate(lottosSize);
-        Set<List<Integer>> lottoNumbersSet = new HashSet<>(lottoNumbersList);
+        List<List<LottoNumber>> lottoNumbersList = LottoNumbersGenerator.generate(lottosSize);
+        Set<List<LottoNumber>> lottoNumbersSet = new HashSet<>(lottoNumbersList);
         assertThat(lottoNumbersList.size()).isEqualTo(lottoNumbersSet.size());
     }
 }
