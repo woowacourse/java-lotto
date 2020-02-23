@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -18,7 +21,7 @@ public enum Rank {
     }
 
     static boolean isValid(int matchingNumber) {
-        return Arrays.stream(Rank.values()).anyMatch(rank -> rank.getMatchNumber() == matchingNumber);
+        return Arrays.stream(Rank.values()).anyMatch(rank -> rank.isSameMatchNumber(matchingNumber));
     }
 
     public int getMatchNumber() {
@@ -30,20 +33,18 @@ public enum Rank {
     }
 
     public static Rank valueOf(int matchNumber, boolean matchBonusBall) {
-        for (Rank rank : Rank.values()) {
-            if (matchNumber == SECOND.matchNumber && matchBonusBall) {
-                return SECOND;
-            }
-
-            if (rank.equals(Rank.SECOND) && !matchBonusBall) {
-                continue;
-            }
-
-            if (rank.matchNumber == matchNumber) {
-                return rank;
-            }
+        if (SECOND.isSameMatchNumber(matchNumber) && matchBonusBall) {
+            return SECOND;
         }
 
-        throw new IllegalArgumentException("당첨된 갯수에 해당하는 순위가 없습니다.");
+        return Arrays.stream(Rank.values())
+            .filter(rank -> !SECOND.equals(rank))
+            .filter(rank -> rank.isSameMatchNumber(matchNumber))
+            .findAny()
+            .orElseThrow(() -> new IllegalArgumentException("당첨된 갯수에 해당하는 순위가 없습니다."));
+    }
+
+    private boolean isSameMatchNumber(int matchNumber) {
+        return this.matchNumber == matchNumber;
     }
 }
