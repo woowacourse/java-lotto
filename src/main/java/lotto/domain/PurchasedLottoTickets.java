@@ -16,7 +16,7 @@ public class PurchasedLottoTickets {
 	}
 
 	public static PurchasedLottoTickets of(PurchaseMoney purchaseMoney,
-											   LottoTicketFactory LottoTicketFactory) {
+										   LottoTicketFactory LottoTicketFactory) {
 		List<SerialLottoNumber> purchasedLottoTickets = new ArrayList<>();
 
 		int count = purchaseMoney.countPurchasedTickets();

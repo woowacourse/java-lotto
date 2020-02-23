@@ -15,6 +15,6 @@ class LottoNumberTest {
 			// when
 			LottoNumber lottoNumber = new LottoNumber(input);
 		}).isInstanceOf(LottoNumberIllegalArgumentException.class)
-				.hasMessageMatching("-?[0-9]+" + LottoNumberIllegalArgumentException.MESSAGE );
+				.hasMessageMatching("-?[0-9]+" + LottoNumberIllegalArgumentException.MESSAGE);
 	}
 }

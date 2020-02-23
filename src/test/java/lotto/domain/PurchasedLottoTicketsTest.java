@@ -13,7 +13,7 @@ class PurchasedLottoTicketsTest {
 		// given
 		List<SerialLottoNumber> purchasedLottoTickets = new ArrayList<>();
 		int[][] input = {{1, 10, 3, 11, 5, 6}, {5, 10, 45, 3, 17, 2}, {4, 7, 13, 19, 22, 37}};
-		for (int[] element: input) {
+		for (int[] element : input) {
 			List<LottoNumber> lottoNumbers = Arrays.stream(element)
 					.mapToObj(LottoNumber::new)
 					.collect(Collectors.toList());
