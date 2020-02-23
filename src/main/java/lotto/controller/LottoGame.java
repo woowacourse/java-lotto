@@ -13,7 +13,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 /**
- * 입출력과 도메인 사이의
+ * 입출력과 도메인 사이의 중재 역할을 수행하는 컨트롤러 클래스
  *
  * @version 1.0.0
  * @author K.S.KIM
