@@ -3,6 +3,8 @@ package domain.result;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
 
 public enum Rank {
 
@@ -33,17 +35,18 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatches, boolean matchBonusNumber) {
-        if (countOfMatches > FIRST.countOfMatches || countOfMatches < MISS.countOfMatches) {
-            throw new IllegalArgumentException("당첨 번호 일치 수는 0이상 6이하로만 가능합니다.");
-        }
+        validateCountOfMatches(countOfMatches);
         if (countOfMatches == SECOND.countOfMatches && matchBonusNumber) {
             return SECOND;
         }
-        if (countOfMatches < FIFTH.countOfMatches) {
-            return RANK_MATCHER_WITHOUT_BONUS.get(MISS.countOfMatches);
-        }
+        Optional<Rank> rank = Optional.ofNullable(RANK_MATCHER_WITHOUT_BONUS.get(countOfMatches));
+        return rank.orElse(MISS);
+    }
 
-        return RANK_MATCHER_WITHOUT_BONUS.get(countOfMatches);
+    private static void validateCountOfMatches(int countOfMatches) {
+        if (countOfMatches > FIRST.countOfMatches || countOfMatches < MISS.countOfMatches) {
+            throw new IllegalArgumentException("당첨 번호 일치 수는 0이상 6이하로만 가능합니다.");
+        }
     }
 
     public boolean isNot(Rank rank) {
