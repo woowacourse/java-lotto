@@ -7,14 +7,14 @@ public class Payment {
 
     private int payment;
 
-    public Payment(String inputMoney) {
+    public Payment(final String inputMoney) {
         validateNumber(inputMoney);
         validateUnderLottoPrice(Integer.parseInt(inputMoney));
         validatePricePerLotto(Integer.parseInt(inputMoney));
         this.payment = Integer.parseInt(inputMoney);
     }
 
-    private void validateNumber(String inputMoney) {
+    private void validateNumber(final String inputMoney) {
         try {
             Integer.parseInt(inputMoney);
         } catch (NumberFormatException e) {
@@ -23,14 +23,14 @@ public class Payment {
         }
     }
 
-    private void validatePricePerLotto(int inputMoney) {
+    private void validatePricePerLotto(final int inputMoney) {
         if (inputMoney % MONEY_PER_LOTTO != 0) {
             throw new IllegalArgumentException(ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT
                     .getMessage());
         }
     }
 
-    private void validateUnderLottoPrice(int inputMoney) {
+    private void validateUnderLottoPrice(final int inputMoney) {
         if (inputMoney < MONEY_PER_LOTTO) {
             throw new IllegalArgumentException(ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT
                     .getMessage());

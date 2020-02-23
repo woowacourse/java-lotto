@@ -10,13 +10,13 @@ public class Results {
     private static final int MONEY_PER_LOTTO = 1000;
     private static final int HUNDRED_PERCENT = 100;
     private static final int RESULT_BASE = 5;
-    private List<Result> results;
-    private List<LottoTicket> userLottoTickets;
-    private WinningLottoTicket winningLotto;
+    private final List<Result> results;
+    private final List<LottoTicket> userLottoTickets;
+    private final WinningLottoTicket winningLotto;
 
-    public Results(List<LottoTicket> userlottos, WinningLottoTicket winningLotto) {
+    public Results(final List<LottoTicket> userLottoTickets, final WinningLottoTicket winningLotto) {
         this.winningLotto = winningLotto;
-        this.userLottoTickets = userlottos;
+        this.userLottoTickets = userLottoTickets;
         this.results = new ArrayList<>();
     }
 

@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.TreeMap;
 
 public class OutputView {
-    public static void printLottoCount(Payment payment) {
+    public static void printLottoCount(final Payment payment) {
         System.out.println(payment.getLottoCount() + "개를 구매했습니다");
     }
 
-    public static void printLottoList(List<LottoTicket> lottoTicketList) {
+    public static void printLottoList(final List<LottoTicket> lottoTicketList) {
         for (int i = 0; i < lottoTicketList.size(); i++) {
             System.out.println(lottoTicketList
                     .get(i)
@@ -23,7 +23,7 @@ public class OutputView {
         }
     }
 
-    public static void printResults(Results results) {
+    public static void printResults(final Results results) {
         TreeMap<WinningInfo, Long> summary = new TreeMap<>(results.getSummary());
         Iterator<WinningInfo> iteratorKey = summary.keySet()
                 .iterator();
@@ -39,7 +39,7 @@ public class OutputView {
         System.out.println("총 수익률을 " + results.getEarningRate() + "%입니다.");
     }
 
-    public static String winningString(WinningInfo key) {
+    public static String winningString(final WinningInfo key) {
         String bonusString = "";
         if (key.hasBonus()) {
             bonusString = ", 보너스 볼 일치";

@@ -10,7 +10,7 @@ public class Result {
         this.winningInfo = winningInfo;
     }
 
-    void calculate(WinningLottoTicket winningLotto, LottoTicket userLottoTicket) {
+    void calculate(final WinningLottoTicket winningLotto, final LottoTicket userLottoTicket) {
         boolean hasBonus = winningLotto.isBonusMatched(userLottoTicket);
         long winningCount = winningLotto.countMatched(winningLotto, userLottoTicket);
 

@@ -10,7 +10,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoTicket> getLottoTickets() {
+    public final List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
 }

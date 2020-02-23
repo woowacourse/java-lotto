@@ -7,9 +7,9 @@ import java.util.List;
 
 public class LottoTicket {
     private static final int LOTTO_NUMBER_SIZE = 6;
-    protected List<LottoNumber> lottoNumbers;
+    protected final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(final List<LottoNumber> lottoNumbers) {
         validateNumberCount(lottoNumbers);
         validateDistinctNumbers(lottoNumbers);
         Collections.sort(lottoNumbers);
@@ -23,21 +23,21 @@ public class LottoTicket {
         }
     }
 
-    private void validateDistinctNumbers(List<LottoNumber> inputNumbers) {
+    private void validateDistinctNumbers(final List<LottoNumber> inputNumbers) {
         if (getDistinctSize(inputNumbers) != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER
                     .getMessage());
         }
     }
 
-    private long getDistinctSize(List<LottoNumber> inputNumbers) {
+    private long getDistinctSize(final List<LottoNumber> inputNumbers) {
         return inputNumbers.stream()
                 .mapToInt(LottoNumber::getNumber)
                 .distinct()
                 .count();
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public final List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

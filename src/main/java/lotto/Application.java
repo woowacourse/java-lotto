@@ -11,13 +11,13 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        Payment payment = generatePayment();
+        final Payment payment = generatePayment();
         OutputView.printLottoCount(payment);
 
-        List<LottoTicket> lottoList = new LottoTickets(LottoFactory.createLottoList(payment)).getLottoTickets();
+        final List<LottoTicket> lottoList = new LottoTickets(LottoFactory.createLottoList(payment)).getLottoTickets();
         OutputView.printLottoList(lottoList);
 
-        WinningLottoTicket winningLotto = generateWinningLotto();
+        final WinningLottoTicket winningLotto = generateWinningLotto();
         OutputView.printResults(new Results(lottoList, winningLotto));
     }
 
