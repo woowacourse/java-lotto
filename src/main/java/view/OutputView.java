@@ -15,6 +15,10 @@ public class OutputView {
         System.out.println("구매금액을 입력해 주세요");
     }
 
+    public static void printInputManualCountMessage() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
     public static void printPurchaseCountMessage(final int calculateCount) {
         System.out.printf("%d개를 구매했습니다." + NEW_LINE, calculateCount);
     }

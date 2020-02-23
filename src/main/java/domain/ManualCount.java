@@ -1,7 +1,7 @@
 package domain;
 
 public class ManualCount {
-    public static final int NEGATIVR_CRITERIA_POINT = 0;
+    public static final int NEGATIVE_CRITERIA_POINT = 0;
     private int manualCount;
 
     public ManualCount(String manualCount, int lottoCount) {
@@ -17,7 +17,7 @@ public class ManualCount {
     }
 
     private boolean isManualAvailableRange(int lottoCount) {
-        return manualCount < NEGATIVR_CRITERIA_POINT || manualCount > lottoCount;
+        return manualCount < NEGATIVE_CRITERIA_POINT || manualCount > lottoCount;
     }
 
     private void checkNotNumber(final String number) {

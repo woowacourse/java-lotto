@@ -6,8 +6,13 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String COMMA = ",";
 
-    public static String inputPurchaseAmount(){
+    public static String inputPurchaseAmount() {
         OutputView.printInputPurchaseAmountMessage();
+        return scanner.nextLine();
+    }
+
+    public static String inputManualCount() {
+        OutputView.printInputManualCountMessage();
         return scanner.nextLine();
     }
 

@@ -11,6 +11,8 @@ public class LottoGame {
         int lottoCount = amount.getCount();
         OutputView.printPurchaseCountMessage(lottoCount);
 
+        ManualCount manualCount = inputManualCount(lottoCount);
+
         Lottos lottos = LottosFactory.createLottos(lottoCount);
         OutputView.printLottos(lottos);
 
@@ -18,6 +20,15 @@ public class LottoGame {
         LottoResult lottoResult = winningNumber.countWinningLotto(lottos);
         OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(Money.calculateProfitRatio(lottoResult, lottoCount));
+    }
+
+    private static ManualCount inputManualCount(int lottoCount) {
+        try {
+            return new ManualCount(InputView.inputManualCount(), lottoCount);
+        } catch(IllegalArgumentException e){
+            OutputView.printExceptionMessage(e);
+            return inputManualCount(lottoCount);
+        }
     }
 
     private static WinningNumber inputWinningNumber() {
