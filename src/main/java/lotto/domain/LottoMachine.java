@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.LottoCountDto;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,8 +20,9 @@ public class LottoMachine {
 		}
 	}
 
-	public List<Lotto> makeRandomLottos(int lottoCount) {
+	public List<Lotto> makeRandomLottos(LottoCountDto lottoCountDto) {
 		List<Lotto> lottos = new ArrayList<>();
+		int lottoCount = lottoCountDto.getLottoCount();
 
 		for (int i = 0; i < lottoCount; i++) {
 			lottos.add(new Lotto(pickRandomBalls()));
