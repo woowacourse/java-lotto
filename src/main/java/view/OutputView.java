@@ -2,7 +2,6 @@ package view;
 
 import domain.LottoProfit;
 import domain.LottoResult;
-import domain.Money;
 import domain.numberscontainer.Ticket;
 
 import java.util.Arrays;
@@ -38,11 +37,13 @@ public class OutputView {
     }
 
     private static long convertNullToZero(Long number) {
-        if (number == null) return 0;
+        if (number == null) {
+            return 0;
+        }
         return number;
     }
 
     public static void printProfit(LottoProfit profit) {
-        System.out.println("총 수익률은 " + (long)profit.getProfit() + "%입니다.");
+        System.out.println("총 수익률은 " + (long)profit.getValue() + "%입니다.");
     }
 }

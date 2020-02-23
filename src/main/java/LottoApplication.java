@@ -1,6 +1,7 @@
 import domain.Money;
 import domain.User;
-import domain.numberscontainer.LottoNumbersDto;
+import domain.numberscontainer.BonusNumberDTO;
+import domain.numberscontainer.SixLottoNumbersDTO;
 import domain.numberscontainer.WinningNumbers;
 import view.InputView;
 import view.OutputView;
@@ -11,7 +12,7 @@ public class LottoApplication {
         User user = new User();
         user.buyTickets(enterMoney());
 
-        OutputView.printNumberOfTickets(user.getTickets().size());
+        OutputView.printNumberOfTickets(user.getTicketsSize());
         OutputView.printTickets(user.getTickets());
 
         WinningNumbers winningNumbers = enterWinningNumbers();
@@ -26,13 +27,13 @@ public class LottoApplication {
             System.out.println(e.getMessage());
             return enterMoney();
         }
-
     }
 
     private static WinningNumbers enterWinningNumbers() {
         try {
-            LottoNumbersDto lottoNumbersDto = InputView.enterWinningNumbers();
-            return new WinningNumbers(lottoNumbersDto);
+            SixLottoNumbersDTO sixLottoNumbersDTO = InputView.enterLastWeekWinningNumbers();
+            BonusNumberDTO bonusNumberDTO = InputView.enterBonusNumber();
+            return new WinningNumbers(sixLottoNumbersDTO, bonusNumberDTO);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return enterWinningNumbers();

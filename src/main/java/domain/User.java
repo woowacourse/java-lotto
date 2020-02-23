@@ -21,13 +21,14 @@ public class User {
     }
 
     public void buyTickets(Money money) {
+        //this.spentMoney = spentMoney.getMoney() + money;
         this.spentMoney = money;
         this.tickets = LottoStore.generateTickets(money.getNumberOfTickets());
     }
 
-    public void buyTicketsManually(Money money, List<Set<Integer>> myNumbers) {
+    public void buyTicketsManually(Money money, List<Set<Integer>> fixedNumbers) {
         this.spentMoney = money;
-        this.tickets = LottoStore.generateTickets(money.getNumberOfTickets(), myNumbers);
+        this.tickets = LottoStore.generateTickets(money.getNumberOfTickets(), fixedNumbers);
     }
 
     public Map<LottoResult, Long> confirmResult(WinningNumbers winningNumbers) {
@@ -42,5 +43,9 @@ public class User {
 
     public List<Ticket> getTickets() {
         return tickets;
+    }
+
+    public int getTicketsSize() {
+        return tickets.size();
     }
 }

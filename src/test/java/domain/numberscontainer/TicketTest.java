@@ -1,8 +1,5 @@
 package domain.numberscontainer;
 
-import domain.LottoNumber;
-import domain.numberscontainer.LottoNumbersDto;
-import domain.numberscontainer.Ticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +14,8 @@ public class TicketTest {
     @Test
     @DisplayName("티켓 생성")
     void ticketConstructor() {
-        LottoNumbersDto lottoNumbersDto = createLottoNumberDto(1, 2, 3, 4, 5, 5);
-        assertThatThrownBy(() -> new Ticket(lottoNumbersDto))
+        SixLottoNumbersDTO sixLottoNumbersDTO = createLottoNumberDto(1, 2, 3, 4, 5, 5);
+        assertThatThrownBy(() -> new Ticket(sixLottoNumbersDTO))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("6개의 숫자를 입력해주세요.");
     }
@@ -26,13 +23,13 @@ public class TicketTest {
     @Test
     @DisplayName("두 티켓의 같은 숫자 비교")
     void compareTwoTickets() {
-        LottoNumbersDto lottoNumbersDto = createLottoNumberDto(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(lottoNumbersDto);
+        SixLottoNumbersDTO sixLottoNumbersDTO = createLottoNumberDto(1, 2, 3, 4, 5, 6);
+        Ticket ticket = new Ticket(sixLottoNumbersDTO);
         assertThat(ticket.contains(LottoNumber.THREE)).isTrue();
     }
 
-    private LottoNumbersDto createLottoNumberDto(int number1, int number2, int number3, int number4, int number5, int number6) {
-        return new LottoNumbersDto(new HashSet<>(Arrays.asList(LottoNumber.getLottoNumber(number1),
+    private SixLottoNumbersDTO createLottoNumberDto(int number1, int number2, int number3, int number4, int number5, int number6) {
+        return new SixLottoNumbersDTO(new HashSet<>(Arrays.asList(LottoNumber.getLottoNumber(number1),
                 LottoNumber.getLottoNumber(number2),
                 LottoNumber.getLottoNumber(number3),
                 LottoNumber.getLottoNumber(number4),

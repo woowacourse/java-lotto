@@ -1,33 +1,30 @@
 package domain;
 
-import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
 public enum LottoResult {
-    NO_WIN(0, -1, false),
-    FIRST(2000000000, 6, false),
-    SECOND(30000000, 5, false),
-    THIRD(1500000, 5, false),
-    FOURTH(50000, 4, true),
-    FIFTH(5000, 3, false);
+    FAILED(0, -1),
+    FIRST(2000000000, 6),
+    SECOND(30000000, 5),
+    THIRD(1500000, 5),
+    FOURTH(50000, 4),
+    FIFTH(5000, 3);
 
-    private int prize;
-    private int matchingNumbers;
-    private boolean isBonus;
+    private final int prize;
+    private final int matchCount;
 
-    LottoResult(int prize, int matchingNumbers, boolean isBonus) {
+    LottoResult(int prize, int matchCount) {
         this.prize = prize;
-        this.matchingNumbers = matchingNumbers;
-        this.isBonus = isBonus;
+        this.matchCount = matchCount;
     }
 
-    public static LottoResult findLottoResult(int matchingNumbers, boolean isBonus) {
+    public static LottoResult findLottoResult(int matchCount, boolean isBonus) {
         List<LottoResult> lottoResults = Arrays.asList(LottoResult.values());
         LottoResult lottoResult = lottoResults.stream()
-                .filter(result -> result.matchingNumbers == matchingNumbers)
+                .filter(result -> result.matchCount == matchCount)
                 .findFirst()
-                .orElse(NO_WIN);
+                .orElse(FAILED);
 
         if (lottoResult == SECOND && !isBonus) {
             lottoResult = THIRD;
@@ -41,11 +38,11 @@ public enum LottoResult {
 
     @Override
     public String toString() {
-        if (this == NO_WIN) {
+        if (this == FAILED) {
             return "";
         }
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(this.matchingNumbers);
+        stringBuilder.append(this.matchCount);
         stringBuilder.append("개 일치 ");
         if (this == SECOND) {
             stringBuilder.append(", 보너스 볼 일치 ");

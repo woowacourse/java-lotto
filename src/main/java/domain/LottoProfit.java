@@ -3,9 +3,10 @@ package domain;
 import java.util.Map;
 
 public class LottoProfit {
+    public static final int TO_PERCENTAGE = 100;
     private double profit;
 
-    public LottoProfit(double profit) {
+    private LottoProfit(double profit) {
         this.profit = profit;
     }
 
@@ -14,10 +15,10 @@ public class LottoProfit {
                 .mapToLong(object -> object.getPrize() * lottoResults.get(object))
                 .sum();
 
-        return new LottoProfit(totalPrize * 100 / money.getMoney());
+        return new LottoProfit(totalPrize / money.getMoney() * TO_PERCENTAGE);
     }
 
-    public double getProfit() {
+    public double getValue() {
         return profit;
     }
 }

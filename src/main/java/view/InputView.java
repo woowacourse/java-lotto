@@ -1,9 +1,10 @@
 package view;
 
-import domain.LottoNumber;
+import domain.numberscontainer.LottoNumber;
 import domain.Money;
-import domain.numberscontainer.LottoNumbersDto;
-import util.LottoNumbersDtoGenerator;
+import domain.numberscontainer.BonusNumberDTO;
+import domain.numberscontainer.SixLottoNumbersDTO;
+import util.SixLottoNumbersFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -30,14 +31,10 @@ public class InputView {
         }
     }
 
-    public static LottoNumbersDto enterWinningNumbers() {
-        return LottoNumbersDtoGenerator.generateFixedNumberDto(enterLastWeekWinningNumbers(), enterBonusNumber());
-    }
-
-    private static Set<Integer> enterLastWeekWinningNumbers() {
+    public static SixLottoNumbersDTO enterLastWeekWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Set<Integer> lastWeekWinningNumbers = parseWinningNumbers(scanner.nextLine());
-        return lastWeekWinningNumbers;
+        return new SixLottoNumbersDTO(SixLottoNumbersFactory.createFixed(lastWeekWinningNumbers));
     }
 
     private static Set<Integer> parseWinningNumbers(String input) {
@@ -48,8 +45,9 @@ public class InputView {
         return new HashSet<>(lottoNumbers);
     }
 
-    private static int enterBonusNumber() {
+    public static BonusNumberDTO enterBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return parseInt(scanner.nextLine());
+        int bonusNumber = parseInt(scanner.nextLine());
+        return new BonusNumberDTO(LottoNumber.getLottoNumber(bonusNumber));
     }
 }

@@ -1,10 +1,9 @@
-package domain;
+package domain.numberscontainer;
 
 import java.util.Arrays;
 import java.util.List;
 
 public enum LottoNumber {
-    ERROR(-1),
     ONE(1),
     TWO(2),
     THREE(3),
@@ -63,7 +62,7 @@ public enum LottoNumber {
         return lottoNumbers.stream()
                 .filter(lottoNumber -> lottoNumber.number == number)
                 .findFirst()
-                .orElse(LottoNumber.ERROR);
+                .orElseThrow(() -> new IllegalArgumentException(String.format("%d이(가) 입력되었습니다. 1부터 45까지의 숫자를 입력해주세요.", number)));
     }
 
     public int getValue() {

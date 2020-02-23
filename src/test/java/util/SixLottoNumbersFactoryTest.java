@@ -1,6 +1,8 @@
 package util;
 
-import domain.LottoNumber;
+import domain.numberscontainer.LottoNumber;
+import domain.numberscontainer.BonusNumberDTO;
+import domain.numberscontainer.SixLottoNumbersDTO;
 import domain.numberscontainer.Ticket;
 import domain.numberscontainer.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
@@ -13,21 +15,21 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 @DisplayName("Dto 생성 테스트")
-class LottoNumbersDtoGeneratorTest {
+class SixLottoNumbersFactoryTest {
 
     @Test
     @DisplayName("랜덤 티켓 생성")
     void generateRandomTicket() {
-        LottoNumbersDtoGenerator lottoNumbersDtoGenerator = new LottoNumbersDtoGenerator();
-        assertThatCode(() -> new Ticket(lottoNumbersDtoGenerator.generateRandomTicketDto()))
+        SixLottoNumbersFactory sixLottoNumbersFactory = new SixLottoNumbersFactory();
+        assertThatCode(() -> new Ticket(new SixLottoNumbersDTO(sixLottoNumbersFactory.createRandom())))
                 .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("고정값 당첨 번호 생성")
     void generateFixedWinningNumber() {
-        LottoNumbersDtoGenerator lottoNumbersDtoGenerator = new LottoNumbersDtoGenerator();
-        assertThatCode(() -> new WinningNumbers(lottoNumbersDtoGenerator.generateFixedNumberDto(createSixNumbers(1, 2, 3, 4, 5, 6), 7)))
+        SixLottoNumbersFactory sixLottoNumbersFactory = new SixLottoNumbersFactory();
+        assertThatCode(() -> new WinningNumbers(new SixLottoNumbersDTO(sixLottoNumbersFactory.createFixed(createSixNumbers(1, 2, 3, 4, 5, 6))), new BonusNumberDTO(LottoNumber.SEVEN)))
                 .doesNotThrowAnyException();
     }
 

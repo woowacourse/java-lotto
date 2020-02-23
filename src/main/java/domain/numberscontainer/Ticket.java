@@ -1,12 +1,11 @@
 package domain.numberscontainer;
 
-import domain.LottoNumber;
-
 import java.util.stream.Collectors;
 
-public class Ticket extends LottoNumbersContainer {
-    public Ticket(LottoNumbersDto lottoNumbersDto) {
-        super(lottoNumbersDto);
+public class Ticket extends SixLottoNumbers {
+
+    public Ticket(SixLottoNumbersDTO sixLottoNumbersDTO) {
+        super(sixLottoNumbersDTO);
     }
 
     public boolean contains(LottoNumber number) {
