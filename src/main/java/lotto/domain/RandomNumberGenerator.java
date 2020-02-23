@@ -16,17 +16,12 @@ public class RandomNumberGenerator {
         }
     }
 
-    private List<Integer> getInstance() {
+    public List<Integer> generateNumbers() {
         if (numberPool.isEmpty()) {
             makeNumberPool();
         }
         Collections.shuffle(numberPool);
-        return numberPool;
-    }
-
-    public List<Integer> generateNumbers() {
-        List<Integer> randomNumbers = this.getInstance();
-        randomNumbers = randomNumbers.subList(0, Lotto.LOTTO_NUMBER_AMOUNT);
+        List<Integer> randomNumbers = numberPool.subList(0, Lotto.LOTTO_NUMBER_AMOUNT);
         Collections.sort(randomNumbers);
         return randomNumbers;
     }
