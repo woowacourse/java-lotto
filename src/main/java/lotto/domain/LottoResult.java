@@ -22,7 +22,7 @@ public class LottoResult {
         return ranks.stream()
                 .map(x -> x.getTicketCount() * x.getReward())
                 .reduce(Long::sum)
-                .get();
+                .orElse(0L);
     }
 
     public String getResult() {

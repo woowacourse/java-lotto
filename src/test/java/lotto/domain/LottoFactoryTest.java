@@ -27,7 +27,7 @@ public class LottoFactoryTest {
 		String userInputMoneyZero = "0";
 		assertThatThrownBy(() -> LottoFactory.createLotteries(new Money(userInputMoneyZero)))
 				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessage(Money.ERROR_MESSAGE_MIN_MONEY);
+				.hasMessage("천원 이상의 금액만 가능합니다.");
 	}
 
 	@DisplayName("입력값이 비었을 경우")
@@ -35,6 +35,6 @@ public class LottoFactoryTest {
 	void nullTest() {
 		assertThatThrownBy(() -> LottoFactory.createLotteries(new Money(null)))
 				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessage(Money.ERROR_MESSAGE_NULL_POINT_MONEY);
+				.hasMessage("입력값이 비었습니다.");
 	}
 }

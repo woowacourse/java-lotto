@@ -9,8 +9,8 @@ public enum Rank {
 	SECOND(0, 30000000, 5),
 	FIRST(0, 2000000000, 6);
 
-	public static final String MESSAGE_NOT_FOUND_RANK = "당첨되지 않았습니다.";
-	public static final String RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원) - %d개";
+	private static final String MESSAGE_NOT_FOUND_RANK = "당첨되지 않았습니다.";
+	private static final String RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원) - %d개";
 	private final long reward;
 	private final int hitCount;
 	private int ticketCount;
