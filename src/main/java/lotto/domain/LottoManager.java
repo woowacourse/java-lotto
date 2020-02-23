@@ -16,7 +16,7 @@ public class LottoManager {
         this.lottoResult = new LottoResult();
     }
 
-    public void findHitLotto() {
+    public void checkLotto() {
         for (Lotto lotto : lotteries) {
             int hitCount = winLotto.compare(lotto);
             boolean bonus = winLotto.isMatchBonus(lotto);
@@ -29,9 +29,7 @@ public class LottoManager {
             return;
         }
         Rank lottoRank = Rank.findRank(hitCount);
-        if (lottoRank.isSecondRank(bonus)) {
-            lottoRank = Rank.SECOND;
-        }
+        lottoRank = lottoRank.isSecondRank(bonus);
         lottoResult.plusTicketCount(lottoRank);
     }
 

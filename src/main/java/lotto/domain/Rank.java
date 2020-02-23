@@ -28,8 +28,11 @@ public enum Rank {
 				.orElseThrow(() -> new IllegalArgumentException(MESSAGE_NOT_FOUND_RANK));
 	}
 
-	public boolean isSecondRank(boolean isBonus) {
-		return this.equals(THIRD) && isBonus;
+	public Rank isSecondRank(boolean bonus) {
+		if (this.equals(THIRD) && bonus) {
+			return SECOND;
+		}
+		return this;
 	}
 
 	public void plusTicketCount() {

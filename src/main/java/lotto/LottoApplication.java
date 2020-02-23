@@ -19,7 +19,7 @@ public class LottoApplication {
         WinLotto winLotto = new WinLotto(InputView.inputWinNumber(), InputView.inputBonusBall());
 
         LottoManager lottoManager = new LottoManager(lotteries, winLotto);
-        lottoManager.findHitLotto();
+        lottoManager.checkLotto();
         OutputView.printResult(money, lottoManager);
     }
 }
