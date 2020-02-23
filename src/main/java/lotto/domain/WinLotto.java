@@ -28,8 +28,8 @@ public class WinLotto {
         }
     }
 
-    public int compare(Lotto lotto) {
-        return lotto.compare(winLotto);
+    public int findHitCount(Lotto lotto) {
+        return lotto.findHitCount(winLotto);
     }
 
     public boolean isMatchBonus(Lotto lotto) {

@@ -18,7 +18,7 @@ public class LottoManager {
 
     public void checkLotto() {
         for (Lotto lotto : lotteries) {
-            int hitCount = winLotto.compare(lotto);
+            int hitCount = winLotto.findHitCount(lotto);
             boolean bonus = winLotto.isMatchBonus(lotto);
             updateLottoResult(hitCount, bonus);
         }
