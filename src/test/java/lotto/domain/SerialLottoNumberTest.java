@@ -78,4 +78,20 @@ public class SerialLottoNumberTest {
 				Arguments.of(new int[]{1, 3, 2, 3, 4, 3}),
 				Arguments.of(new int[]{1, 2, 3, 1, 2, 3}));
 	}
+
+	@Test
+	void of() {
+		// given
+		String input = "1, 45, 3, 4, 5, 6";
+
+		// when
+		SerialLottoNumber result = SerialLottoNumber.of(input);
+
+		//then
+		SerialLottoNumber expected = new SerialLottoNumber(Stream.of(1, 3, 4, 5, 6, 45)
+				.map(LottoNumber::new)
+				.collect(Collectors.toUnmodifiableList()));
+		Assertions.assertThat(result)
+				.isEqualTo(expected);
+	}
 }

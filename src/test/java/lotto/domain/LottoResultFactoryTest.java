@@ -15,7 +15,7 @@ class LottoResultFactoryTest {
 	void create() {
 		// when
 		WinningLottoNumbers winningLottoNumbers
-				= new WinningLottoNumbers(SerialLottoNumberFactory.create("1,2,3,4,5,6"), new LottoNumber(7));
+				= new WinningLottoNumbers(SerialLottoNumber.of("1,2,3,4,5,6"), new LottoNumber(7));
 
 		PurchasedLottoTickets purchasedLottoTickets = PurchasedLottoTicketsFactory.create(
 				new PurchaseMoney(14000), new TestLottoTicketFactory());

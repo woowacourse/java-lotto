@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exceptions.LottoTicketIllegalArgumentException;
+import lotto.utils.StringParser;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,6 +18,18 @@ public class SerialLottoNumber {
 		this.lottoNumbers = lottoNumbers.stream()
 				.sorted(LottoNumber::compareTo)
 				.collect(Collectors.toUnmodifiableList());
+	}
+
+	/**
+	 * @param input 예시) "1,2,3,4,5,6"
+	 */
+	public static SerialLottoNumber of(String input) throws IllegalArgumentException {
+		List<Integer> integers = StringParser.stringToIntegerList(input);
+		List<LottoNumber> lottoNumbers = integers.stream()
+				.map(LottoNumber::new)
+				.collect(Collectors.toUnmodifiableList());
+
+		return new SerialLottoNumber(lottoNumbers);
 	}
 
 	private void checkIsDuplicated(List<LottoNumber> lottoNumbers) {

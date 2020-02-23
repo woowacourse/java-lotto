@@ -91,7 +91,7 @@ public class LottoController {
 
 	private static SerialLottoNumber createWinningNumbersIfValid() {
 		try {
-			return SerialLottoNumberFactory.create(InputView.inputWinningNumbers());
+			return SerialLottoNumber.of(InputView.inputWinningNumbers());
 		} catch (IllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;

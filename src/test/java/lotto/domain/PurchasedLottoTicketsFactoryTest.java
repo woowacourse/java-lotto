@@ -20,7 +20,7 @@ class PurchasedLottoTicketsFactoryTest {
 		// then
 		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>();
 		for (int i = 0; i < 14; i++) {
-			serialLottoNumbers.add(SerialLottoNumberFactory.create("1,2,3,4,5,6"));
+			serialLottoNumbers.add(SerialLottoNumber.of("1,2,3,4,5,6"));
 		}
 		PurchasedLottoTickets expected = new PurchasedLottoTickets(serialLottoNumbers);
 
