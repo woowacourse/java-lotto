@@ -1,21 +1,25 @@
 import domain.Money;
-import domain.User;
+import domain.lottonumber.LottoTicket;
 import domain.lottonumber.WinningNumbers;
+import domain.lottostore.RandomLottoStore;
 import domain.result.LottoResult;
 import view.InputView;
 import view.OutputView;
 
+import java.util.List;
+
 public class LottoApplication {
 
     public static void main(String[] args) {
-        User user = new User();
+        Money money = enterMoney();
+        List<LottoTicket> randomTickets = new RandomLottoStore().generateTickets(money);
 
-        user.buyTickets(enterMoney());
-        printTicketInformation(user);
+        printTickets(randomTickets);
 
         WinningNumbers winningNumbers = enterWinningNumbers();
+        LottoResult lottoResult = LottoResult.confirmResult(randomTickets, winningNumbers);
 
-        printResult(user, winningNumbers);
+        printResult(lottoResult, money);
     }
 
     private static Money enterMoney() {
@@ -23,13 +27,13 @@ public class LottoApplication {
             return InputView.enterMoney();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            throw new IllegalArgumentException();
+            throw e;
         }
     }
 
-    private static void printTicketInformation(User user) {
-        OutputView.printNumberOfTickets(user.getLottoTickets().size());
-        OutputView.printTickets(user.getLottoTickets());
+    private static void printTickets(List<LottoTicket> tickets) {
+        OutputView.printNumberOfTickets(tickets.size());
+        OutputView.printTickets(tickets);
     }
 
     private static WinningNumbers enterWinningNumbers() {
@@ -37,13 +41,12 @@ public class LottoApplication {
             return new WinningNumbers(InputView.enterWinningNumbers());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            throw new IllegalArgumentException();
+            throw e;
         }
     }
 
-    private static void printResult(User user, WinningNumbers winningNumbers) {
-        LottoResult lottoResult = user.confirmResult(winningNumbers);
+    private static void printResult(LottoResult lottoResult, Money money) {
         OutputView.printLottoResults(lottoResult);
-        OutputView.printProfit(lottoResult.calculateProfit(user.getSpentMoney()));
+        OutputView.printProfit(lottoResult.calculateProfit(money));
     }
 }

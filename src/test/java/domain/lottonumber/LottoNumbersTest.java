@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("번호 일급 컬렉션 테스트")
 public class LottoNumbersTest {
+
     @Test
     @DisplayName("번호 컬렉션끼리 겹치는 번호 개수 확인")
     void findNumberOfMatchingNumbers() {

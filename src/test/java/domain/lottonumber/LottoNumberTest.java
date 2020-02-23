@@ -10,18 +10,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("로또 번호 테스트")
 public class LottoNumberTest {
+
     @Test
     @DisplayName("로또 번호 범위 확인")
     void lottoNumberConstructorTest() {
         assertThatThrownBy(() -> LottoNumber.valueOf(46))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("1부터 45까지의 숫자만 가능합니다.");
-    }
-
-    @Test
-    @DisplayName("로또 번호 더미 값 확인")
-    void lottoNumberDummyTest() {
-        assertThat(LottoNumber.valueOf(-1).getValue()).isEqualTo(-1);
     }
 
     @ParameterizedTest

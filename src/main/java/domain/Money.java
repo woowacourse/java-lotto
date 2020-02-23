@@ -1,6 +1,7 @@
 package domain;
 
 public class Money {
+
     private static final int TICKET_PRICE = 1000;
     private static final int MIN_MONEY = 0;
     private static final int MAX_MONEY = 50000;

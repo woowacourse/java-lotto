@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
+
     private static final String NUMBER_REGEX = "^[0-9]+$";
     private static final String NUMBER_DELIMITER = ",";
 

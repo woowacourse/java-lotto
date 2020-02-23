@@ -3,19 +3,22 @@ package domain.result;
 import java.util.Arrays;
 
 public enum LottoRank {
-    NO_WIN(0, -1),
-    FIRST(2000000000, 6),
-    SECOND(30000000, 5),
-    THIRD(1500000, 5),
-    FOURTH(50000, 4),
-    FIFTH(5000, 3);
+
+    NO_WIN(0, -1, false),
+    FIRST(2000000000, 6, false),
+    SECOND(30000000, 5, true),
+    THIRD(1500000, 5, false),
+    FOURTH(50000, 4, false),
+    FIFTH(5000, 3, false);
 
     private final int prize;
     private final int matchingNumbers;
+    private final boolean hasBonus;
 
-    LottoRank(int prize, int matchingNumbers) {
+    LottoRank(int prize, int matchingNumbers, boolean hasBonus) {
         this.prize = prize;
         this.matchingNumbers = matchingNumbers;
+        this.hasBonus = hasBonus;
     }
 
     public static LottoRank valueOf(int matchingNumbers, boolean hasBonus) {

@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("최종결과 테스트")
 class LottoResultTest {
+
     private List<LottoTicket> testTickets;
     private WinningNumbers winningNumbers;
 
@@ -35,7 +36,7 @@ class LottoResultTest {
                 createSixNumbersSet(16, 17, 18, 19, 20, 21));
 
         this.testTickets = testNumbers.stream()
-                .map(numbers -> LottoNumbersDtoGenerator.generateManualNumbersDto(numbers, -1))
+                .map(numbers -> LottoNumbersDtoGenerator.generateManualNumbersDto(numbers, 1))
                 .map(LottoTicket::new)
                 .collect(toList());
 

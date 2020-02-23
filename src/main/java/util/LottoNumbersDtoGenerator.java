@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbersDtoGenerator {
+
     private static final int NUMBER_OF_NUMBERS = 6;
 
     public static LottoNumbersDto generateRandomTicketDto() {

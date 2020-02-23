@@ -6,6 +6,7 @@ import domain.result.LottoResult;
 import java.util.List;
 
 public class OutputView {
+
     public static void printNumberOfTickets(int size) {
         System.out.println(size + "개를 구매했습니다.");
     }

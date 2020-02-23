@@ -5,6 +5,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class LottoNumbers {
+
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final SortedSet<LottoNumber> lottoNumbers;
@@ -25,10 +26,9 @@ public class LottoNumbers {
     }
 
     public int findNumberOfMatchingNumbers(LottoNumbers comparingNumber) {
-        return this.lottoNumbers.stream()
+        return (int) this.lottoNumbers.stream()
                 .filter(comparingNumber::contains)
-                .mapToInt(number -> 1)
-                .sum();
+                .count();
     }
 
     public Set<LottoNumber> getValue() {

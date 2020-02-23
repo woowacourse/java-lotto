@@ -11,6 +11,7 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingInt;
 
 public class LottoResult {
+
     private static final int NOTHING_EXIST = 0;
 
     private final Map<LottoRank, Integer> lottoResult;

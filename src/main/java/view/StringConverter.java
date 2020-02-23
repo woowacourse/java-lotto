@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StringConverter {
+
     private static final int START_INDEX_EXCEPT_NO_WIN = 1;
 
     public static String convertLottoNumbers(LottoNumbers lottoNumbers) {

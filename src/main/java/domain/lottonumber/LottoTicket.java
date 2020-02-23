@@ -1,6 +1,7 @@
 package domain.lottonumber;
 
 public class LottoTicket {
+
     private final LottoNumbers lottoNumbers;
 
     public LottoTicket(LottoNumbersDto lottoNumbersDto) {
