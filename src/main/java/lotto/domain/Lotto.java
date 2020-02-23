@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,12 +22,13 @@ public class Lotto {
 	private static final String INVALID_SIZE_MESSAGE = "로또 번호가 존재하지 않습니다.";
 	private static final String NUMBER_DELIMITER = ",";
 
-	private final List<LottoNumber> numbers = new ArrayList<>();
+	private final List<LottoNumber> numbers;
 
 	public Lotto(List<LottoNumber> numbers) {
 		validate(numbers);
-		this.numbers.addAll(numbers);
-		Collections.sort(this.numbers);
+		this.numbers = numbers.stream()
+				.sorted()
+				.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
 	}
 
 	static Lotto of(int... numbers) {
@@ -74,7 +74,7 @@ public class Lotto {
 	}
 
 	public List<LottoNumber> getLotto() {
-		return Collections.unmodifiableList(numbers);
+		return numbers;
 	}
 
 	@Override
