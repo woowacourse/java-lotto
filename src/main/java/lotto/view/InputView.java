@@ -15,7 +15,7 @@ public class InputView {
 		return purchaseMoney;
 	}
 
-	public static int inputPurchaseMoneyIfValid() {
+	private static int inputPurchaseMoneyIfValid() {
 		System.out.println("구입 금액을 입력해 주세요.");
 		try {
 			return Integer.parseInt(scanner.nextLine());
@@ -38,7 +38,7 @@ public class InputView {
 		return bonusNumber;
 	}
 
-	public static int inputBonusNumberIfValid() {
+	private static int inputBonusNumberIfValid() {
 		System.out.println("보너스 볼을 입력해주세요.");
 		try {
 			return Integer.parseInt(scanner.nextLine());
