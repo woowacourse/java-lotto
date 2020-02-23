@@ -17,26 +17,14 @@ import java.util.Scanner;
 public class InputView {
 	private static final Scanner SCANNER = new Scanner(System.in);
 
-	public static int getMoneyForLotto() { // TODO 고려를 해보자
+	public static int getMoneyForLotto() {
 		OutputView.askEnterMoneyForLotto();
-		return Integer.parseInt(SCANNER.nextLine());
-	}
-/*
-	public static WinningLotto getWinningLotto() { // Todo: 로또번호 말고 int 리스트로!!
 		try {
-			OutputView.askEnterWinningLotto();
-			List<LottoNumber> winningLottoNumbers = StringUtils.splitIntoLottoNumbers(SCANNER.nextLine());
-
-			return (WinningLotto) LottoFactory.createLottoManual(
-					LottoType.WINNING_LOTTO,
-					winningLottoNumbers
-			);
-		} catch (Exception e) {
-			OutputView.printExceptionMessage(e);
-			return getWinningLotto();
-		}
+            return Integer.parseInt(SCANNER.nextLine());
+        } catch (NumberFormatException e) {
+		    throw new WrongMoneyForLottoException("금액은 정수여야 합니다.");
+        }
 	}
-*/
 
 	public static List<Integer> getWinningLotto() {
 		OutputView.askEnterWinningLotto();
