@@ -44,7 +44,7 @@ public class PaidLottoTest {
 	@Test
 	void getRank_올바른_1등_확인() {
 		paidLotto = new PaidLotto(new ArrayList<>(
-				Arrays.asList( // TODO 이부분들 뺄 방법이 있을까?
+				Arrays.asList(
 						LottoNumber.of(1),
 						LottoNumber.of(2),
 						LottoNumber.of(3),

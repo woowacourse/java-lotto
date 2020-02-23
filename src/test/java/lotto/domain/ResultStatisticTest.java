@@ -22,6 +22,7 @@ public class ResultStatisticTest {
 	private Lottos lottos;
 	private WinningLotto winningLotto;
 	private BonusLottoNumber bonusLottoNumber;
+	private ResultStatistic resultStatistic;
 
 	@BeforeEach
 	void setUp() {
@@ -70,24 +71,30 @@ public class ResultStatisticTest {
 		lottos = new Lottos(tempLottos);
 
 		bonusLottoNumber = new BonusLottoNumber("7");
+
+		resultStatistic = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
 	}
 
 	@Test
 	void calculate_ResultStatistic_생성_확인() {
-		ResultStatistic resultStatistic = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
 		assertThat(resultStatistic).isInstanceOf(ResultStatistic.class);
 	}
 
 	@Test
 	void calculate_올바른_리턴_결과_확인() {
-		ResultStatistic resultStatistic = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
 		Map<Rank, Integer> resultMap = resultStatistic.getResults();
-
-		assertThat(resultMap.get(Rank.FIRST)).isEqualTo(1); // TODO 이거 한번에 안되나??
+		assertThat(resultMap.get(Rank.FIRST)).isEqualTo(1);
 		assertThat(resultMap.get(Rank.SECOND)).isEqualTo(0);
 		assertThat(resultMap.get(Rank.THIRD)).isEqualTo(0);
 		assertThat(resultMap.get(Rank.FOURTH)).isEqualTo(1);
 		assertThat(resultMap.get(Rank.FIFTH)).isEqualTo(0);
 		assertThat(resultMap.get(Rank.SIXTH)).isEqualTo(1);
+	}
+
+	@Test
+	void calculateRevenueRate_올바른_리턴_결과_확인() {
+		MoneyForLotto moneyForLotto = new MoneyForLotto("3000");
+		assertThat(resultStatistic.calculateRevenueRate(moneyForLotto))
+				.isEqualTo(66668333);
 	}
 }

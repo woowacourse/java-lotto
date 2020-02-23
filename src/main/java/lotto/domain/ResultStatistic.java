@@ -48,10 +48,6 @@ public class ResultStatistic {
 		return initialResult;
 	}
 
-	public Map<Rank, Integer> getResults() {
-		return this.results;
-	}
-
 	public long calculateRevenueRate(MoneyForLotto moneyForLotto) {
 		return (100 * getTotalRevenue() / moneyForLotto.getMoneyForLotto());
 	}
@@ -63,5 +59,9 @@ public class ResultStatistic {
 			totalRevenue += results.get(rank) * rank.getReward();
 		}
 		return totalRevenue;
+	}
+
+	public Map<Rank, Integer> getResults() {
+		return this.results;
 	}
 }
