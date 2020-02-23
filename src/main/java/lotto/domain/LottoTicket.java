@@ -30,13 +30,25 @@ public class LottoTicket {
         );
     }
 
+    static LottoTicket create() {
+        List<LottoNumber> numbers = Arrays.asList(LottoNumber.values());
+        List<LottoNumber> randomNumbers = new ArrayList<>();
+        Collections.shuffle(numbers);
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+            randomNumbers.add(numbers.get(i));
+        }
+        return new LottoTicket(randomNumbers);
+    }
+
     private void validate(List<LottoNumber> lottoTicket) {
         validateLottoSize(lottoTicket);
         validateDuplicate(lottoTicket);
     }
 
     private void validateDuplicate(List<LottoNumber> lottoTicket) {
-        long distinctCount = lottoTicket.stream().distinct().count();
+        long distinctCount = lottoTicket.stream()
+            .distinct()
+            .count();
         if (lottoTicket.size() != distinctCount) {
             throw new InvalidLottoTicketException("유효하지 않은 당첨 번호 값입니다.");
         }
@@ -46,16 +58,6 @@ public class LottoTicket {
         if (lottoTicket.size() != LOTTO_NUMBER_COUNT) {
             throw new InvalidLottoTicketException("유효하지 않은 당첨 번호 값입니다.");
         }
-    }
-
-    static LottoTicket create() {
-        List<LottoNumber> numbers = Arrays.asList(LottoNumber.values());
-        List<LottoNumber> randomNumbers = new ArrayList<>();
-        Collections.shuffle(numbers);
-        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-            randomNumbers.add(numbers.get(i));
-        }
-        return new LottoTicket(randomNumbers);
     }
 
     public void validateBonusNumber(LottoNumber number) {

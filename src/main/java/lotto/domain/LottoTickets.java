@@ -17,8 +17,7 @@ public class LottoTickets implements Iterable<LottoTicket> {
 
     public static LottoTickets createLottoTickets(Money money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        int ticketQuantity = money.ticketQuantity();
-        for (int i = 0; i < ticketQuantity; i++) {
+        for (int i = 0, end = money.ticketQuantity(); i < end; i++) {
             lottoTickets.add(LottoTicket.create());
         }
         return new LottoTickets(lottoTickets);
