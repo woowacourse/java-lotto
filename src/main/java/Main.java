@@ -4,6 +4,7 @@ import domain.Lotto;
 import domain.LottoFactory;
 import domain.Money;
 import domain.Profit;
+import domain.PurchaseMoney;
 import domain.Rank;
 import domain.WinningNumbers;
 import view.InputView;
@@ -12,7 +13,7 @@ import view.OutputView;
 public class Main {
 	public static void main(String[] args) {
 		try {
-			Money purchaseMoney = new Money(InputView.inputPurchaseMoney());
+			Money purchaseMoney = new PurchaseMoney(InputView.inputPurchaseMoney());
 			List<Lotto> lottos = LottoFactory.createLottos(purchaseMoney);
 
 			OutputView.printLottos(lottos);

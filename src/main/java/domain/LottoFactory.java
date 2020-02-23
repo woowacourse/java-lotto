@@ -27,7 +27,6 @@ public class LottoFactory {
 	}
 
 	public static List<Lotto> createLottos(Money purchaseMoney) {
-		validate(purchaseMoney);
 		int lottoCount = purchaseMoney.getMoney() / LOTTO_PRICE;
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < lottoCount; i++) {
