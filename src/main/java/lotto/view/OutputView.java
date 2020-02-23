@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
+import lotto.domain.Profit;
 import lotto.domain.Rank;
 
 import java.util.List;
@@ -26,13 +27,11 @@ public class OutputView {
             int matchedCount = rank.getMatchedCount();
             Money winningMoney = rank.getWinningMoney();
             int containingCount = rank.getContainingCount(ranks);
-            System.out.println(String.format("%d개 일치 (%d원) - %d개",matchedCount, winningMoney.getValue(), containingCount));
+            System.out.println(String.format("%d개 일치 (%d원) - %d개", matchedCount, winningMoney.getValue(), containingCount));
         }
     }
 
-    public static void printProfit(Money purchaseMoney, List<Rank> ranks) {
-        Money totalWinningMoney = Rank.sumWinningMoney(ranks);
-        int profit = totalWinningMoney.calculateProfit(purchaseMoney);
-        System.out.println(String.format("총 수익률은 %d%%입니다.", profit));
+    public static void printProfit(Profit profit) {
+        System.out.println(String.format("총 수익률은 %d%%입니다.", profit.getProfitWithoutDecimalPoint()));
     }
 }
