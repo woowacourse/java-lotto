@@ -7,10 +7,8 @@ import java.util.List;
 public class LottoTickets {
     private static List<Lotto> lottoTickets = new ArrayList<>();
 
-    public LottoTickets(int lottoCount) {
-        for (int index = 0; index < lottoCount; index++){
-            lottoTickets.add(LottoFactory.createOneLotto());
-        }
+    public void addLotto(Lotto oneLotto) {
+        lottoTickets.add(oneLotto);
     }
 
     public LottoResult countWinningLotto(WinningNumber winningNumber, LottoResult lottoResult) {
