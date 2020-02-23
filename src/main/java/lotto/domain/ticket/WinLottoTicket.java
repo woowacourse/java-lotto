@@ -6,12 +6,21 @@ import lotto.domain.ticket.ball.LottoBall;
 import java.util.Objects;
 
 public class WinLottoTicket {
+    private static final String MESSAGE_FOR_OVERLAP_NUMBERS = "로또 당첨 번호와 보너스 번호는 중복될 수 없습니다.";
+
     private final LottoTicket winningTicket;
     private final LottoBall bonusBall;
 
     public WinLottoTicket(LottoTicket winningTicket, LottoBall bonusBall) {
+        validateBonusBall(winningTicket, bonusBall);
         this.winningTicket = winningTicket;
         this.bonusBall = bonusBall;
+    }
+
+    private void validateBonusBall(LottoTicket winningTicket, LottoBall bonusBall) {
+        if (winningTicket.has(bonusBall)) {
+            throw new IllegalArgumentException(MESSAGE_FOR_OVERLAP_NUMBERS);
+        }
     }
 
     public LottoResult createLottoResult(LottoTicket lottoTicket) {
