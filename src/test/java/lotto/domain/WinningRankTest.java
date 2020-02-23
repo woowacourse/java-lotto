@@ -25,11 +25,10 @@ class WinningRankTest {
         String winningBallInputs = "1,2,3,4,5,6";
         int bonus = 7;
         LottoBalls lottoBalls = new LottoBalls(input, winningBallInputs);
-        Set<LottoBall> lottoTicket = lottoBalls.generateLottoTicket();
-        List<LottoBall> winningBallValues = lottoBalls.generateWinningBalls();
-        WinningBalls winningBalls = new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(bonus));
-        int correctCount = winningBalls.hitLottoBalls(new LottoTicket(lottoTicket));
-        boolean correctBonusNumber = winningBalls.hitBonusBall(new LottoTicket(lottoTicket));
+        LottoTicket lottoTicket = new LottoTicket(lottoBalls.generateLottoTicket());
+        WinningBalls winningBalls = new WinningBalls(lottoBalls.generateWinningBalls(), LottoBallFactory.findByLottoBall(bonus));
+        int correctCount = winningBalls.hitLottoBalls(lottoTicket);
+        boolean correctBonusNumber = winningBalls.hitBonusBall(lottoTicket);
 
         Assertions.assertThat(WinningRank.selectRank(correctCount, correctBonusNumber)).isEqualTo(winningRank);
     }

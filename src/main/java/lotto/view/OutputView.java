@@ -39,23 +39,12 @@ public class OutputView {
     }
 
     public static void printWinningResult(WinningRank winningRank, int count) {
-        StringBuilder stringBuilder = new StringBuilder();
         printWinningResultGuide(winningRank);
-        stringBuilder.append(winningRank.getWinningBallCount())
-                .append("개 일치");
-        printBonusBall(winningRank, stringBuilder);
-        stringBuilder.append(" (")
-                .append(winningRank.getWinningMoney())
-                .append("원) - ")
-                .append(count)
-                .append("개");
-        System.out.println(stringBuilder);
-    }
-
-    private static void printBonusBall(WinningRank winningRank, StringBuilder stringBuilder) {
         if (winningRank == WinningRank.SECOND_RANK) {
-            stringBuilder.append(", 보너스 볼 일치");
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개 %n", winningRank.getWinningBallCount(), winningRank.getWinningMoney(), count);
+            return;
         }
+        System.out.printf("%d개 일치 (%d원) - %d개 %n", winningRank.getWinningBallCount(), winningRank.getWinningMoney(), count);
     }
 
     private static void printWinningResultGuide(WinningRank winningRank) {
