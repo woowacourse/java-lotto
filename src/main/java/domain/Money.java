@@ -19,4 +19,8 @@ public class Money {
     public int getLottoTicketCount() {
         return this.money / MIN_MONEY;
     }
+
+    public int getMoney() {
+        return this.money;
+    }
 }
