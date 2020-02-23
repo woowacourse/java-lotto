@@ -28,8 +28,8 @@ public class WinningBallsTest {
         String winningBallInputs = "3, 4, 5, 6, 7, 8";
         String lottoTicketNumbers = "3, 4, 5, 6, 7, 10";
 
-        Set<LottoBall> winningBallValues = LottoBalls.generateWinningBalls(winningBallInputs);
-        Set<LottoBall> lottoTicket = LottoBalls.generateLottoTicket(lottoTicketNumbers);
+        Set<LottoBall> winningBallValues = LottoBalls.generateLottoBalls(winningBallInputs);
+        Set<LottoBall> lottoTicket = LottoBalls.generateLottoBalls(lottoTicketNumbers);
         WinningBalls winningBalls = new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(bonusBall));
 
         Assertions.assertThat(winningBalls.hitBonusBall(new LottoTicket(lottoTicket))).isTrue();

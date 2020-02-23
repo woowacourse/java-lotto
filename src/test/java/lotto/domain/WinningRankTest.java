@@ -24,8 +24,8 @@ class WinningRankTest {
     void select_rank_test( String header, String input, WinningRank winningRank) {
         String winningBallInputs = "1,2,3,4,5,6";
         int bonus = 7;
-        LottoTicket lottoTicket = new LottoTicket(LottoBalls.generateLottoTicket(input));
-        WinningBalls winningBalls = new WinningBalls(LottoBalls.generateWinningBalls(winningBallInputs), LottoBallFactory.findByLottoBall(bonus));
+        LottoTicket lottoTicket = new LottoTicket(LottoBalls.generateLottoBalls(input));
+        WinningBalls winningBalls = new WinningBalls(LottoBalls.generateLottoBalls(winningBallInputs), LottoBallFactory.findByLottoBall(bonus));
         int correctCount = winningBalls.hitLottoBalls(lottoTicket);
         boolean correctBonusNumber = winningBalls.hitBonusBall(lottoTicket);
 

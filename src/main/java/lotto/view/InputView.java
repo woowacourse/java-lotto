@@ -4,20 +4,21 @@ import lotto.Exception.DuplicationException;
 import lotto.Exception.NotBuyLottoTicketException;
 import lotto.Exception.NumberOutOfRangeException;
 import lotto.domain.LottoBall;
+import lotto.domain.LottoBalls;
 import lotto.domain.PurchaseAmount;
 import lotto.util.InputValidationUtil;
-import lotto.util.WinningBallsUtils;
 
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
 public class InputView {
     static Scanner scanner = new Scanner(System.in);
 
-    public static String inputPurchaseAmount() {
+    public static PurchaseAmount inputPurchaseAmount() {
         try {
-            return scanner.nextLine();
+            OutputView.printStartGuide();
+            String purchaseAmount = scanner.nextLine();
+            return new PurchaseAmount(purchaseAmount);
         } catch (NotBuyLottoTicketException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputPurchaseAmount();
@@ -28,8 +29,7 @@ public class InputView {
         try {
             OutputView.printAnswerWinningBalls();
             String winningBalls = scanner.nextLine();
-            WinningBallsUtils winningBallsUtils = new WinningBallsUtils(winningBalls);
-            return winningBallsUtils.getWinningBalls();
+            return LottoBalls.generateLottoBalls(winningBalls);
         } catch (NumberOutOfRangeException | DuplicationException e) {
             OutputView.printErrorMessage(e.getMessage());
             return InputWinningBalls();

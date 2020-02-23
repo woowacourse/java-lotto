@@ -21,8 +21,7 @@ public class LottoController {
     }
 
     private void startInputPurchaseAmount() {
-        OutputView.printStartGuide();
-        purchaseAmount = new PurchaseAmount(InputView.inputPurchaseAmount());
+        purchaseAmount = InputView.inputPurchaseAmount();
         OutputView.printLottePieces(purchaseAmount.giveLottoTicketNumber());
         OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
     }
