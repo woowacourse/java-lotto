@@ -1,14 +1,14 @@
 package lotto.domain;
 
 public class LottoCount {
-	private static final int MONEY_UNIT = 1000;
+	public static final int LOTTO_PRICE = 1000;
 	private static final int MINIMUM_MONEY = 1000;
 
 	private final int lottoCount;
 
 	public LottoCount(int money) {
 		validate(money);
-		this.lottoCount = money / MONEY_UNIT;
+		this.lottoCount = money / LOTTO_PRICE;
 	}
 
 	private void validate(int money) {
@@ -23,7 +23,7 @@ public class LottoCount {
 	}
 
 	private void validateMoneyUnit(int money) {
-		if (money % MONEY_UNIT != 0) {
+		if (money % LOTTO_PRICE != 0) {
 			throw new IllegalArgumentException("천 원 단위로 입력하셔야 합니다.");
 		}
 	}

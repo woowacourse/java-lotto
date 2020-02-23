@@ -5,9 +5,9 @@ import java.util.List;
 
 import lotto.domain.LottoCount;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
-import lotto.domain.WinningPrize;
 import lotto.dto.LottoCountDto;
 import lotto.dto.LottosDto;
 import lotto.utils.InputUtil;
@@ -18,8 +18,8 @@ public class LottoController {
 	public static void run() {
 		Lottos lottos = buyLottos();
 		OutputView.printLottos(LottosDto.from(lottos));
-		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(readWinningLotto());
-		OutputView.printLottoResult(winningPrizes);
+		LottoResult lottoResult = new LottoResult(lottos.findAllLottoPrizes(readWinningLotto()));
+		OutputView.printLottoResult(lottoResult);
 	}
 
 	private static Lottos buyLottos() {
