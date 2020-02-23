@@ -1,21 +1,20 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class ResultCalculator {
     public static ResultsDTO getResults(Lottos lottos, WinningLotto winningLotto) {
-        List<WinningInfo> results = calculateResults(lottos, winningLotto);
-        long totalEarning = getTotalEarning(results);
-        long earningRate = getEarningRate(totalEarning, results.size());
-        return new ResultsDTO(results, earningRate);
+        List<WinningInfo> results = computeResults(lottos, winningLotto);
+        long totalEarning = computeTotalEarning(results);
+        long earningRate = computeEarningRate(totalEarning, results.size());
+        Map<WinningInfo, Integer> matchCount = computeMatchCount(results);
+        return new ResultsDTO(matchCount, earningRate);
     }
 
-    public static List<WinningInfo> calculateResults(Lottos lottos, WinningLotto winningLotto) {
+    public static List<WinningInfo> computeResults(Lottos lottos, WinningLotto winningLotto) {
         List<WinningInfo> results = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            int winningCount = lotto.compare(winningLotto);
+            int winningCount = winningLotto.computeMatchCount(lotto);
             boolean hasBonus = lotto.hasLottoNumber(winningLotto.getBonusNumber());
             results.add(WinningInfo.valueOf(winningCount, hasBonus));
         }
