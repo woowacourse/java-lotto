@@ -14,12 +14,12 @@ public class WinningNumbers {
 	}
 
 	private void duplicationValidate(Lotto winningLottoTicket, String bonusNumber) {
-		if (bonusNumberContain(winningLottoTicket, bonusNumber)) {
+		if (isBonusNumberContain(winningLottoTicket, bonusNumber)) {
 			throw new IllegalArgumentException("당첨번호와 보너스번호가 중복됩니다.");
 		}
 	}
 
-	private boolean bonusNumberContain(Lotto winningLottoTicket, String bonusNumber) {
+	private boolean isBonusNumberContain(Lotto winningLottoTicket, String bonusNumber) {
 		return winningLottoTicket
 			.getNumbers()
 			.contains(bonusNumber);
