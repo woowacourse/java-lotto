@@ -1,18 +1,20 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.List;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottosTest {
 	@ParameterizedTest
 	@NullAndEmptySource
-	void Lottos가_null이_아닌지_체크(List<Lotto> value) {
+	@DisplayName("Lottos가 null이 아닌지 체크")
+	void checkIfLottosIsNotNull(List<Lotto> value) {
 		assertThatThrownBy(() -> new Lottos(value))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("null이나 빈 값");
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessageContaining("null이나 빈 값");
 	}
 }

@@ -1,12 +1,14 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
 	@Test
-	void 주어진_개수만큼_자동_로또_사기() {
+	@DisplayName("주어진 개수만큼 자동 로또 사기")
+	void buyAutoLotto() {
 		LottoMachine lottoMachine = new LottoMachine();
 		assertThat(lottoMachine.makeRandomLottos(6).size()).isEqualTo(6);
 	}
