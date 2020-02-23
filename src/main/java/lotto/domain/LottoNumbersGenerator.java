@@ -1,47 +1,41 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumbersGenerator {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
     static final int LOTTO_NUMBER_SIZE = 6;
+    private static final int ONE = 1;
+    private static final List<Integer> LOTTO_NUMBERS_BOX = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER + ONE)
+        .boxed()
+        .collect(Collectors.toList());
 
-    private static Random random = new Random();
-
-    /**
-     * 질문: fillUpLottoNumber(lottoNumbers, lottoNumber)의 리턴 형식을 void로 할 지, List<Integer>로 할 지 고민이 됐습니다. 아래 이유 때문입니다.
-     * 1. List<Integer>로 둘 경우, 메모리 문제나 성능 상 문제가 생기지 않을까 걱정이 됐습니다.
-     * 2. 가독성 측면에서 void가 나은 지, List<Integer>가 나은 지 헷갈렸습니다.
-     * 이에 대해 가르침 주시면 감사하겠습니다.
-     */
-    static List<Integer> generate() {
-        List<Integer> lottoNumbers = new ArrayList<>();
-        while (isFulfilled(lottoNumbers)) {
-            int lottoNumber = pickLottoNumber();
-            lottoNumbers = fillUpLottoNumber(lottoNumbers, lottoNumber);
+    static List<List<Integer>> generate(int lottosSize) {
+        List<List<Integer>> lottoNumbers = new ArrayList<>(new ArrayList<>());
+        for (int i = 0; i < lottosSize; i++ ) {
+            List<Integer> lottoNumber = generateLottoNumbers();
+            if (!lottoNumbers.contains(lottoNumber)) {
+                lottoNumbers.add(lottoNumber);
+            }
         }
         return lottoNumbers;
     }
 
-    private static List<Integer> fillUpLottoNumber(List<Integer> lottoNumbers, int lottoNumber) {
-        if (!isDuplicated(lottoNumbers, lottoNumber)) {
-            lottoNumbers.add(lottoNumber);
-        }
-        return lottoNumbers;
-    }
-
-    private static boolean isFulfilled(List<Integer> lottoNumbers) {
-        return lottoNumbers.size() != LOTTO_NUMBER_SIZE;
+    private static List<Integer> generateLottoNumbers() {
+        Collections.shuffle(LOTTO_NUMBERS_BOX);
+        return new ArrayList<>(
+            Collections.unmodifiableCollection(LOTTO_NUMBERS_BOX.subList(ONE, ONE + LOTTO_NUMBER_SIZE)));
     }
 
     private static boolean isDuplicated(List<Integer> lottoNumbers, int lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    private static int pickLottoNumber() {
-        return random.nextInt(LOTTO_MAX_NUMBER - LOTTO_MIN_NUMBER) + LOTTO_MIN_NUMBER;
-    }
 }
