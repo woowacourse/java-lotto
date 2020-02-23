@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -13,21 +13,22 @@ import java.util.stream.Collectors;
  * @since 2020/02/19
  */
 public class RandomLottosFactory implements LottoGeneratable {
-	private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>(LottoNumber.values());
+	private static final Random RANDOM = new Random();
 
 	@Override
-	public Lottos generate(long totalCount) {
+	public Lottos generate(Money money) {
 		List<Lotto> lottos = new ArrayList<>();
-		for (long count = 0; count < totalCount; count++) {
+		for (long count = money.calculateBuyCount(); count > 0; --count) {
 			lottos.add(generate());
 		}
 		return new Lottos(lottos);
 	}
 
 	private Lotto generate() {
-		Collections.shuffle(LOTTO_NUMBERS);
-		return new Lotto(LOTTO_NUMBERS.stream()
+		return RANDOM.ints(LottoNumber.MIN_VALUE, LottoNumber.MAX_VAULE + 1)
+				.distinct()
 				.limit(Lotto.SIZE)
-				.collect(Collectors.toList()));
+				.mapToObj(LottoNumber::of)
+				.collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
 	}
 }

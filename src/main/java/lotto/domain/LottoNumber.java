@@ -14,8 +14,8 @@ import java.util.Objects;
  * @since 2020/02/19
  */
 public class LottoNumber implements Comparable<LottoNumber> {
-	private static final int MIN_VALUE = 1;
-	private static final int MAX_VAULE = 45;
+	public static final int MIN_VALUE = 1;
+	public static final int MAX_VAULE = 45;
 	private static final String INVALID_NUMBER_MESSAGE = "생성할 수 없는 수입니다.";
 	private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
