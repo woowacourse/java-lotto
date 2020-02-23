@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import exception.LottoInputException;
+
 public class WinningNumbers {
 	private final Lotto winningLottoTicket;
 	private final LottoNumber bonusNumber;
@@ -15,7 +17,7 @@ public class WinningNumbers {
 
 	private void duplicationValidate(Lotto winningLottoTicket, String bonusNumber) {
 		if (isBonusNumberContain(winningLottoTicket, bonusNumber)) {
-			throw new IllegalArgumentException("당첨번호와 보너스번호가 중복됩니다.");
+			throw new LottoInputException("당첨번호와 보너스번호가 중복됩니다.");
 		}
 	}
 

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import exception.LottoInputException;
+
 public class Lotto {
 	private static final int FIVE = 5;
 	private static final String DELIMITER = ", ";
@@ -28,7 +30,7 @@ public class Lotto {
 
 	private void duplicationValidate(Set<LottoNumber> numbers) {
 		if (numbers.size() != LOTTO_LENGTH) {
-			throw new IllegalArgumentException("로또 번호가 중복되거나, 6개를 입력하지 않았습니다.");
+			throw new LottoInputException("로또 번호가 중복되거나, 6개를 입력하지 않았습니다.");
 		}
 	}
 

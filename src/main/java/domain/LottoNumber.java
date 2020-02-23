@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import exception.LottoNumberRangeException;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 	private static final int LOTTO_MINIMUM_NUMBER = 1;
 	private static final int LOTTO_MAXIMUM_NUMBER = 45;
@@ -31,7 +33,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private static void validate(int number) {
 		if (number < LOTTO_MINIMUM_NUMBER || number > LOTTO_MAXIMUM_NUMBER) {
-			throw new IllegalArgumentException("로또번호는 1~45의 수가 필요합니다.");
+			throw new LottoNumberRangeException("로또번호는 1~45의 수가 필요합니다.");
 		}
 	}
 
