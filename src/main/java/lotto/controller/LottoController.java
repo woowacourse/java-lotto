@@ -6,7 +6,6 @@ import lotto.domain.WinningNumber;
 import lotto.domain.WinningPrize;
 import lotto.dto.LottoCountDto;
 import lotto.utils.InputUtil;
-import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.io.IOException;
@@ -22,7 +21,6 @@ public class LottoController {
 
 	private static int readBonusNumber() {
 		try {
-			InputView.printInsertBonusNumber();
 			return InputUtil.inputBonusNumber();
 		} catch (NumberFormatException | IOException e) {
 			OutputView.printWrongBonusNumberInput();
@@ -45,7 +43,6 @@ public class LottoController {
 
 	public static int readMoney() {
 		try {
-			InputView.printInsertMoney();
 			return InputUtil.inputMoney();
 		} catch (NumberFormatException | IOException e) {
 			OutputView.printWrongMoneyInput();
@@ -64,7 +61,6 @@ public class LottoController {
 
 	public static List<String> readWinningNumber() {
 		try {
-			InputView.printInsertWinningNumber();
 			return InputUtil.inputWinningNumber();
 		} catch (IOException e) {
 			e.printStackTrace();
