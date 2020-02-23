@@ -25,7 +25,19 @@ public class WinningLotto extends Lotto {
                 .anyMatch(winningNumber -> winningNumber == bonusNumber.getNumber());
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+
+    public boolean isBonusMatched(Lotto userLotto) {
+        return userLotto.getLottoNumbers().stream()
+                .anyMatch(userLottoNumber -> bonusNumber.equals(userLottoNumber));
+    }
+
+    public long countMatched(WinningLotto winningLotto, Lotto userLotto) {
+        return userLotto.getLottoNumbers().stream()
+                .filter(userLottoNumber -> winningLotto.isMatched(userLottoNumber))
+                .count();
+    }
+
+    private boolean isMatched(LottoNumber userLottoNumber) {
+        return lottoNumbers.contains(userLottoNumber);
     }
 }

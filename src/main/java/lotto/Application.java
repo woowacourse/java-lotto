@@ -22,23 +22,21 @@ public class Application {
     }
 
     private static Payment generatePayment() {
-        while (true) {
-            try {
-                return new Payment(InputView.getPayment());
-            } catch (IllegalArgumentException exception) {
-                OutputView.printErrorMessage(exception.getMessage());
-            }
+        try {
+            return new Payment(InputView.getPayment());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception.getMessage());
+            return generatePayment();
         }
     }
 
     private static WinningLotto generateWinningLotto() {
         NumberGenerator numberGenerator = new UserInputNumberGenerator();
-        while (true) {
-            try {
-                return new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
-            } catch (IllegalArgumentException exception) {
-                OutputView.printErrorMessage(exception.getMessage());
-            }
+        try {
+            return new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception.getMessage());
+            return generateWinningLotto();
         }
     }
 }
