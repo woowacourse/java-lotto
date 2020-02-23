@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.LottoTicketFactory.TestLottoTicketFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -50,5 +51,24 @@ public class LottoResultTest {
 		double expected = (double)prizeMoney / purchaseMoney.getPurchaseMoney() * 100;
 		Assertions.assertThat(result)
 				.isEqualTo(expected);
+	}
+
+	@Test
+	void of() {
+		// given
+		PurchasedLottoTickets purchasedLottoTickets
+				= PurchasedLottoTickets.of(new PurchaseMoney(14000),
+				new TestLottoTicketFactory());
+		SerialLottoNumber serialLottoNumber = SerialLottoNumber.of("1, 2, 3, 4, 5, 6");
+		LottoNumber bonusNumber = new LottoNumber(7);
+		WinningLottoNumbers winningLottoNumbers
+				= new WinningLottoNumbers(serialLottoNumber, bonusNumber);
+
+		// when
+		LottoResult result = LottoResult.of(purchasedLottoTickets, winningLottoNumbers);
+
+		// then
+		Assertions.assertThat(result.getLottoResult().get(WinningType.FIRST_PLACE))
+				.isEqualTo(14);
 	}
 }

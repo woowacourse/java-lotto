@@ -1,17 +1,35 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
+	public static final int DEFAULT_VALUE = 0;
 	public static final int PERCENT_MULTIPLIER = 100;
 
 	private final Map<WinningType, Integer> lottoResult;
 
 	public LottoResult(final Map<WinningType, Integer> lottoResult) {
 		this.lottoResult = lottoResult;
+	}
+
+	public static LottoResult of(PurchasedLottoTickets purchasedLottoTickets,
+								 WinningLottoNumbers winningLottoNumbers) {
+		Map<WinningType, Integer> lottoResult = createDefaultMap();
+		List<WinningType> winningTypes =
+				purchasedLottoTickets.findMatchingWinningTypesWith(winningLottoNumbers);
+
+		lottoResult.replaceAll((key, value) -> Collections.frequency(winningTypes, key));
+
+		return new LottoResult(lottoResult);
+	}
+
+	private static Map<WinningType, Integer> createDefaultMap() {
+		Map<WinningType, Integer> lottoResult = new HashMap<>();
+		for (WinningType winningType : WinningType.values()) {
+			lottoResult.put(winningType, DEFAULT_VALUE);
+		}
+		return lottoResult;
 	}
 
 	public double calculateEarningPercentage(PurchaseMoney purchaseMoney) {
