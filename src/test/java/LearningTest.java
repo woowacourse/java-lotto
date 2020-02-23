@@ -1,3 +1,5 @@
+import lotto.domain.LottoNumber;
+import lotto.domain.SerialLottoNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -19,5 +21,21 @@ public class LearningTest {
 		unmodifiableList.sort(Comparator.naturalOrder());
 
 		System.out.println(unmodifiableList);
+	}
+
+	@Test
+	void 일급컬렉션() {
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		lottoNumbers.add(new LottoNumber(1));
+		lottoNumbers.add(new LottoNumber(2));
+		lottoNumbers.add(new LottoNumber(3));
+		lottoNumbers.add(new LottoNumber(4));
+		lottoNumbers.add(new LottoNumber(5));
+		lottoNumbers.add(new LottoNumber(6));
+
+		SerialLottoNumber serialLottoNumber = new SerialLottoNumber(lottoNumbers);
+		System.out.println(serialLottoNumber.getLottoNumbers());
+		lottoNumbers.add(new LottoNumber(7));
+		System.out.println(serialLottoNumber.getLottoNumbers());
 	}
 }

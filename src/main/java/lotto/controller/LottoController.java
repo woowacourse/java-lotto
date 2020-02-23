@@ -46,11 +46,11 @@ public class LottoController {
 	}
 
 	private static WinningLottoNumbers createWinningLottoNumbers() {
-		WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbersIfValid();
-		while (winningLottoNumbers == null) {
+		WinningLottoNumbers winningLottoNumbers;
+		do {
 			winningLottoNumbers = createWinningLottoNumbersIfValid();
+		} while (winningLottoNumbers == null);
 
-		}
 		return winningLottoNumbers;
 	}
 
@@ -64,10 +64,11 @@ public class LottoController {
 	}
 
 	private static PurchaseMoney createPurchaseMoney() {
-		PurchaseMoney purchaseMoney = createPurchaseMoneyIfValid();
-		while (purchaseMoney == null) {
+		PurchaseMoney purchaseMoney;
+		do {
 			purchaseMoney = createPurchaseMoneyIfValid();
-		}
+		} while (purchaseMoney == null);
+
 		return createPurchaseMoneyIfValid();
 	}
 
@@ -81,10 +82,11 @@ public class LottoController {
 	}
 
 	private static SerialLottoNumber createWinningNumber() {
-		SerialLottoNumber winningNumber = createWinningNumbersIfValid();
-		while (winningNumber == null) {
+		SerialLottoNumber winningNumber;
+		do {
 			winningNumber = createWinningNumbersIfValid();
-		}
+		} while (winningNumber == null);
+
 		return winningNumber;
 	}
 
@@ -98,10 +100,11 @@ public class LottoController {
 	}
 
 	private static LottoNumber createBonusNumber() {
-		LottoNumber bonusNumber = createBonusNumberIfValid();
-		while (bonusNumber == null) {
+		LottoNumber bonusNumber;
+		do {
 			bonusNumber = createBonusNumberIfValid();
-		}
+		} while (bonusNumber == null);
+
 		return bonusNumber;
 	}
 
