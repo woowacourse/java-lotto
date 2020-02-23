@@ -2,13 +2,14 @@ package lotto.domain;
 
 import java.util.Arrays;
 
+import lotto.exceptions.InvalidRankException;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     BONUS(-1, 30_000_000),
     SECOND(5, 150_000),
     THIRD(4, 50_000),
-    FOURTH(3, 5_000),
-    NONE(0, 0);
+    FOURTH(3, 5_000);
 
     private int matchCount;
     private int prizeAmount;
@@ -22,7 +23,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
             .filter(rank -> rank.matchCount == matchCount)
             .findFirst()
-            .orElse(NONE);
+            .orElseThrow(() -> new InvalidRankException("올바르지 않은 랭크 값입니다."));
     }
 
     public int getPrize() {
