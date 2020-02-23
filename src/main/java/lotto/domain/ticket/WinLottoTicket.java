@@ -1,39 +1,43 @@
-package lotto.domain.result.win;
+package lotto.domain.ticket;
 
 import lotto.domain.result.LottoResult;
-import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.ball.LottoBall;
 
 import java.util.Objects;
-import java.util.Set;
 
-public class WinningLotto {
-    private final WinningBalls winningBalls;
+public class WinLottoTicket {
+    private final LottoTicket winningTicket;
     private final LottoBall bonusBall;
 
-    public WinningLotto(Set<LottoBall> winningLottoBalls, LottoBall bonusBall) {
-        this.winningBalls = new WinningBalls(winningLottoBalls, bonusBall);
+    public WinLottoTicket(LottoTicket winningTicket, LottoBall bonusBall) {
+        this.winningTicket = winningTicket;
         this.bonusBall = bonusBall;
     }
 
     public LottoResult createLottoResult(LottoTicket lottoTicket) {
-        int numberOfMatch = winningBalls.countMatchNumber(lottoTicket);
+        int numberOfMatch = countMatchNumber(lottoTicket);
         boolean isBonusMatch = lottoTicket.has(bonusBall);
 
         return new LottoResult(numberOfMatch, isBonusMatch);
+    }
+
+    public int countMatchNumber(LottoTicket lottoTicket) {
+        return (int) this.winningTicket.getLottoBalls().stream()
+                .filter(lottoTicket::has)
+                .count();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WinningLotto that = (WinningLotto) o;
-        return Objects.equals(winningBalls, that.winningBalls) &&
+        WinLottoTicket that = (WinLottoTicket) o;
+        return Objects.equals(winningTicket, that.winningTicket) &&
                 Objects.equals(bonusBall, that.bonusBall);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningBalls, bonusBall);
+        return Objects.hash(winningTicket, bonusBall);
     }
 }

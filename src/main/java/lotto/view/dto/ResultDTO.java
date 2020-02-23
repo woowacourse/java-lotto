@@ -1,6 +1,6 @@
 package lotto.view.dto;
 
-import lotto.domain.result.win.rank.Rank;
+import lotto.domain.result.rank.Rank;
 
 import java.util.Arrays;
 import java.util.List;

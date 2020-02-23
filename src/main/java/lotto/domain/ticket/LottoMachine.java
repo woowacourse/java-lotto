@@ -1,10 +1,9 @@
 package lotto.domain.ticket;
 
-import lotto.domain.result.win.WinningLotto;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
 import lotto.view.dto.BettingMoneyDTO;
-import lotto.view.dto.WinningLottoDTO;
+import lotto.view.dto.WinLottoTicketDTO;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,11 +27,11 @@ public abstract class LottoMachine {
 
     public abstract LottoTicket createOneTicket();
 
-    public final WinningLotto createWinningLotto(WinningLottoDTO winningLottoDTO) {
-        Set<LottoBall> winningLotto = new HashSet<>();
-        for (int number : winningLottoDTO.getWinningNumbers()) {
-            winningLotto.add(LottoBallFactory.getLottoBallByNumber(number));
+    public final WinLottoTicket createWinLottoTicket(WinLottoTicketDTO winLottoTicketDTO) {
+        Set<LottoBall> winBalls = new HashSet<>();
+        for (int number : winLottoTicketDTO.getWinningNumbers()) {
+            winBalls.add(LottoBallFactory.getLottoBallByNumber(number));
         }
-        return new WinningLotto(winningLotto, LottoBallFactory.getLottoBallByNumber(winningLottoDTO.getBonusNumber()));
+        return new WinLottoTicket(new LottoTicket(winBalls), LottoBallFactory.getLottoBallByNumber(winLottoTicketDTO.getBonusNumber()));
     }
 }

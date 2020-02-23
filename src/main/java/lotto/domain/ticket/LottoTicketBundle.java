@@ -1,7 +1,6 @@
 package lotto.domain.ticket;
 
 import lotto.domain.result.LottoResultBundle;
-import lotto.domain.result.win.WinningLotto;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,9 +14,9 @@ public class LottoTicketBundle {
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoResultBundle createLottoResultBundle(WinningLotto winningLotto) {
+    public LottoResultBundle createLottoResultBundle(WinLottoTicket winLottoTicket) {
         return lottoTickets.stream()
-                .map(winningLotto::createLottoResult)
+                .map(winLottoTicket::createLottoResult)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResultBundle::new));
     }
 

@@ -1,10 +1,9 @@
 package lotto.domain.ticket;
 
-import lotto.domain.result.win.WinningLotto;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
 import lotto.view.dto.BettingMoneyDTO;
-import lotto.view.dto.WinningLottoDTO;
+import lotto.view.dto.WinLottoTicketDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,20 +30,20 @@ class LottoMachineTest {
 
     @DisplayName("우승 로또 만들기")
     @Test
-    void makeWinningLotto() {
+    void makeWinLottoTicket() {
         //given
         LottoMachine lottoMachine = new AutoLottoMachine();
-        Set<LottoBall> lottoBalls = aLottoBalls(1, 2, 3, 4, 5, 6);
+        Set<LottoBall> winBalls = aLottoBalls(1, 2, 3, 4, 5, 6);
         LottoBall bonusBall = LottoBallFactory.getLottoBallByNumber(7);
-        WinningLotto expectedLotto = new WinningLotto(lottoBalls, bonusBall);
+        WinLottoTicket expectedLotto = new WinLottoTicket(new LottoTicket(winBalls), bonusBall);
 
-        WinningLottoDTO winningLottoDTO = new WinningLottoDTO("1,2,3,4,5,6", 7);
+        WinLottoTicketDTO winLottoTicketDTO = new WinLottoTicketDTO("1,2,3,4,5,6", 7);
 
         //when
-        WinningLotto winningLotto = lottoMachine.createWinningLotto(winningLottoDTO);
+        WinLottoTicket winLottoTicket = lottoMachine.createWinLottoTicket(winLottoTicketDTO);
 
         //then
-        assertThat(winningLotto).isEqualTo(expectedLotto);
+        assertThat(winLottoTicket).isEqualTo(expectedLotto);
     }
 
     @DisplayName("테스트용 고정 번호 로또 티켓 생성하기")

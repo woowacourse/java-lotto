@@ -1,6 +1,6 @@
 package lotto.domain.result;
 
-import lotto.domain.result.win.rank.Rank;
+import lotto.domain.result.rank.Rank;
 import lotto.view.dto.ResultDTO;
 
 import java.util.List;

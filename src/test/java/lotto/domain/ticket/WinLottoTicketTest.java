@@ -1,7 +1,6 @@
-package lotto.domain.result;
+package lotto.domain.ticket;
 
-import lotto.domain.result.win.WinningLotto;
-import lotto.domain.ticket.LottoTicket;
+import lotto.domain.result.LottoResult;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +15,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinningLottoTest {
+class WinLottoTicketTest {
 
     private static Stream<Arguments> numberProvider() {
         return Stream.of(
@@ -26,7 +25,7 @@ class WinningLottoTest {
                 Arguments.of(new int[]{1, 2, 3, 8, 9, 10}, new LottoResult(3, false)),
                 Arguments.of(new int[]{1, 2, 3, 4, 9, 10}, new LottoResult(4, false)),
                 Arguments.of(new int[]{1, 2, 3, 4, 5, 10}, new LottoResult(5, false)),
-                Arguments.of(new int[]{1, 2, 3, 4, 7, 10}, new LottoResult(5, true)),
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 7}, new LottoResult(5, true)),
                 Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new LottoResult(6, false))
         );
     }
@@ -36,19 +35,19 @@ class WinningLottoTest {
     @MethodSource("numberProvider")
     void name(int[] numbers, LottoResult expectedResult) {
         //given
-        Set<LottoBall> winBalls = aLottoTicket(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(winBalls, LottoBallFactory.getLottoBallByNumber(7));
+        Set<LottoBall> winBalls = aLottoBalls(1, 2, 3, 4, 5, 6);
+        WinLottoTicket winLottoTicket = new WinLottoTicket(new LottoTicket(winBalls), LottoBallFactory.getLottoBallByNumber(7));
 
-        LottoTicket buyLottoTicket = new LottoTicket(aLottoTicket(numbers));
+        LottoTicket buyLottoTicket = new LottoTicket(aLottoBalls(numbers));
 
         //when
-        LottoResult lottoResult = winningLotto.createLottoResult(buyLottoTicket);
+        LottoResult lottoResult = winLottoTicket.createLottoResult(buyLottoTicket);
 
         //then
         assertThat(lottoResult).isEqualTo(expectedResult);
     }
 
-    private Set<LottoBall> aLottoTicket(int... numbers) {
+    private Set<LottoBall> aLottoBalls(int... numbers) {
         return Arrays.stream(numbers)
                 .mapToObj(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());

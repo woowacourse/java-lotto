@@ -1,14 +1,14 @@
 package lotto.view.dto;
 
-import lotto.domain.result.win.rank.Rank;
+import lotto.domain.result.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.result.win.rank.Rank.FIFTH;
-import static lotto.domain.result.win.rank.Rank.SIXTH;
+import static lotto.domain.result.rank.Rank.FIFTH;
+import static lotto.domain.result.rank.Rank.SIXTH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultDTOTest {

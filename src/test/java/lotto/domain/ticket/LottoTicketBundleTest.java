@@ -2,10 +2,10 @@ package lotto.domain.ticket;
 
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.LottoResultBundle;
-import lotto.domain.result.win.WinningLotto;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
 import lotto.view.dto.BettingMoneyDTO;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -16,21 +16,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketBundleTest {
 
+    @DisplayName("winLottoTicket로 결과 번들 생성 테스트")
     @Test
-    void getLottoResults() {
+    void createLottoResultBundle() {
         //given
         LottoTicketBundle ticketBundle = new LottoTicketBundle(new LottoMachineForTest().buyTickets(new BettingMoneyDTO(1000)));
 
-        Set<LottoBall> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+        Set<LottoBall> winBalls = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
                 .mapToObj(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());
-        LottoBall bonusNumber = LottoBallFactory.getLottoBallByNumber(7);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        LottoBall bonusBall = LottoBallFactory.getLottoBallByNumber(7);
+        WinLottoTicket winLottoTicket = new WinLottoTicket(new LottoTicket(winBalls), bonusBall);
 
         LottoResultBundle expectedResultBundle = new LottoResultBundle(Arrays.asList(new LottoResult(6, false)));
 
         //when
-        LottoResultBundle resultBundle = ticketBundle.createLottoResultBundle(winningLotto);
+        LottoResultBundle resultBundle = ticketBundle.createLottoResultBundle(winLottoTicket);
         resultBundle.toString();
 
         //then

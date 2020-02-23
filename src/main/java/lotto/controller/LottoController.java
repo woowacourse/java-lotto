@@ -8,7 +8,7 @@ import lotto.view.OutputView;
 import lotto.view.dto.BettingMoneyDTO;
 import lotto.view.dto.LottoTicketDTO;
 import lotto.view.dto.ResultDTO;
-import lotto.view.dto.WinningLottoDTO;
+import lotto.view.dto.WinLottoTicketDTO;
 
 public class LottoController {
     private LottoService service = new LottoService(new AutoLottoMachine());
@@ -20,14 +20,14 @@ public class LottoController {
 
         OutputView.printLottoTickets(LottoTicketDTO.createLottoTicketDTOS(lottoTicketBundle));
 
-        ResultDTO resultDTO = service.getResult(createWinningLottoDTO(), lottoTicketBundle);
+        ResultDTO resultDTO = service.getResult(createWinLottoTicketDTO(), lottoTicketBundle);
 
         OutputView.printResult(resultDTO);
     }
 
-    private WinningLottoDTO createWinningLottoDTO() {
+    private WinLottoTicketDTO createWinLottoTicketDTO() {
         String winningNumber = InputView.inputWinningNumber();
         int bonusNumber = InputView.inputBonusNumber();
-        return new WinningLottoDTO(winningNumber, bonusNumber);
+        return new WinLottoTicketDTO(winningNumber, bonusNumber);
     }
 }
