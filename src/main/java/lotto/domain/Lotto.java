@@ -25,7 +25,7 @@ public class Lotto {
     public int compare(Lotto lotto) {
         return Math.toIntExact(lotto.getLottoNumbers()
                 .stream()
-                .filter(lottoNumber -> this.hasLottoNumber(lottoNumber))
+                .filter(this::hasLottoNumber)
                 .count());
     }
 

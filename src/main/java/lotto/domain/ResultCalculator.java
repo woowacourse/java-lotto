@@ -26,11 +26,13 @@ public class ResultCalculator {
 
     public static long getTotalEarning(List<WinningInfo> results) {
         return results.stream()
-                .map(result -> result.getWinningPrice())
-                .collect(Collectors.summingLong(Integer::intValue));
+                .map(WinningInfo::getWinningPrice)
+                .mapToLong(Integer::intValue)
+                .sum();
     }
 
     public static long getEarningRate(long totalEarning, int lottoSize) {
         return totalEarning / (lottoSize * MONEY_PER_LOTTO);
     }
+
 }
