@@ -12,8 +12,8 @@ public class Money {
         checkUnderLottoPrice();
     }
 
-    public static int calculateProfitRatio(LottoResult lottoResult) {
-        return lottoResult.calculateProfit() / LOTTO_PRICE;
+    public static int calculateProfitRatio(LottoResult lottoResult, int lottoCount) {
+        return lottoResult.calculateProfit() / (lottoCount * LOTTO_PRICE);
     }
 
     private void checkUnderLottoPrice() {
