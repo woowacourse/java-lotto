@@ -23,4 +23,15 @@ public class LottoNumberTest {
         LottoNumber expected = new LottoNumber(1);
         Assertions.assertThat(input.equals(expected)).isTrue();
     }
+
+    @DisplayName("입력한 int 값이 LottoNumber 와 같은 숫자인지 확인하는 테스트")
+    @Test
+    void isSameNumberTest() {
+        LottoNumber lottoNumber = new LottoNumber(10);
+        boolean same = lottoNumber.isSameLottoNumber(10);
+        boolean different = lottoNumber.isSameLottoNumber(9) == false;
+
+        Assertions.assertThat(same).isTrue();
+        Assertions.assertThat(different).isTrue();
+    }
 }

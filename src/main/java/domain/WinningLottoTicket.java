@@ -9,6 +9,7 @@ public class WinningLottoTicket {
     private static final String DELIMITER = ",";
 
     private LottoTicket winningLottoTicket;
+    private BonusBall bonusBall;
 
     public WinningLottoTicket(String input) {
         validateBlank(input);
@@ -27,7 +28,7 @@ public class WinningLottoTicket {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         try {
             getLottoNumber(numbers, lottoNumbers);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 숫자를 입력하였습니다.");
         }
         return lottoNumbers;
@@ -35,7 +36,14 @@ public class WinningLottoTicket {
 
     private void getLottoNumber(String[] numbers, List<LottoNumber> lottoNumbers) {
         for (int i = 0; i < numbers.length; i++) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(numbers[i])));
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(numbers[i].trim())));
         }
+    }
+
+    public void initializeBonusBall(int bonusNumber) {
+        if (this.winningLottoTicket.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 로또 숫자는 당첨 숫자와 중복될 수 없습니다.");
+        }
+        this.bonusBall = new BonusBall(bonusNumber);
     }
 }
