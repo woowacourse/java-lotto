@@ -5,7 +5,6 @@ import java.util.StringJoiner;
 
 import domain.Lotto;
 import domain.Money;
-import domain.Profit;
 import domain.Rank;
 
 public class OutputView {
@@ -28,11 +27,11 @@ public class OutputView {
 			Money winningMoney = rank.getWinningMoney();
 			int containingCount = rank.getContainingCount(ranks);
 			System.out.println(
-				String.format("%d개 일치 (%d원) - %d개", matchedCount, winningMoney.getMoney(), containingCount));
+				String.format("%d개 일치 (%.0f원) - %d개", matchedCount, winningMoney.getMoney(), containingCount));
 		}
 	}
 
-	public static void printProfit(Profit profit) {
-		System.out.println(String.format("총 수익률은 %d%%입니다.", profit.getMoney()));
+	public static void printProfit(Money money) {
+		System.out.println(String.format("총 수익률은 %.0f%%입니다.", money.getMoney()));
 	}
 }

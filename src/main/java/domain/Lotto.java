@@ -2,7 +2,9 @@ package domain;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -10,12 +12,11 @@ public class Lotto {
 	private static final String DELIMITER = ", ";
 	private static final int LOTTO_LENGTH = 6;
 
-	private final List<LottoNumber> numbers;
+	private final Set<LottoNumber> numbers;
 
 	public Lotto(List<LottoNumber> numbers) {
-		validate(numbers);
-		Collections.sort(numbers);
-		this.numbers = numbers;
+		this.numbers = new HashSet<>(numbers);
+		duplicationValidate(this.numbers);
 	}
 
 	public Lotto(String input) {
@@ -25,31 +26,14 @@ public class Lotto {
 			.collect(Collectors.toList()));
 	}
 
-	private void validate(List<LottoNumber> numbers) {
-		validateNumbersCount(numbers);
-		validateNumbersDuplication(numbers);
-	}
-
-	private void validateNumbersCount(List<LottoNumber> numbers) {
+	private void duplicationValidate(Set<LottoNumber> numbers) {
 		if (numbers.size() != LOTTO_LENGTH) {
-			throw new IllegalArgumentException("로또의 숫자는 6개여야 합니다.");
+			throw new IllegalArgumentException("로또 번호가 중복되거나, 6개를 입력하지 않았습니다.");
 		}
 	}
 
-	private void validateNumbersDuplication(List<LottoNumber> numbers) {
-		if (getDistinctCount(numbers) != numbers.size()) {
-			throw new IllegalArgumentException("로또의 숫자는 중복될 수 없습니다.");
-		}
-	}
-
-	private long getDistinctCount(List<LottoNumber> numbers) {
-		return numbers.stream()
-			.distinct()
-			.count();
-	}
-
-	public List<LottoNumber> getNumbers() {
-		return Collections.unmodifiableList(numbers);
+	public Set<LottoNumber> getNumbers() {
+		return Collections.unmodifiableSet(numbers);
 	}
 
 	public Rank compare(Lotto winningLotto, LottoNumber bonusNumber) {

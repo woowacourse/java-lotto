@@ -20,25 +20,19 @@ public class LottoFactory {
 
 	public static Lotto createSelfNumberLotto(int... number) {
 		List<LottoNumber> numbers = new ArrayList<>();
-		for (int i = 0; i < number.length; i++) {
-			numbers.add(LottoNumber.get(number[i]));
+		for (int value : number) {
+			numbers.add(LottoNumber.get(value));
 		}
 		return new Lotto(numbers);
 	}
 
 	public static List<Lotto> createLottos(Money purchaseMoney) {
-		int lottoCount = purchaseMoney.getMoney() / LOTTO_PRICE;
+		int lottoCount = (int)purchaseMoney.getMoney() / LOTTO_PRICE;
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < lottoCount; i++) {
 			lottos.add(createLotto());
 		}
 		return lottos;
-	}
-
-	private static void validate(Money purchaseMoney) {
-		if (purchaseMoney.getMoney() < LOTTO_PRICE) {
-			throw new IllegalArgumentException("가격은 1000원 이상 입력해야합니다.");
-		}
 	}
 
 	private static Lotto createLotto() {

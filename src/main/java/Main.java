@@ -3,7 +3,7 @@ import java.util.List;
 import domain.Lotto;
 import domain.LottoFactory;
 import domain.Money;
-import domain.Profit;
+import domain.ProfitCalculator;
 import domain.PurchaseMoney;
 import domain.Rank;
 import domain.WinningNumbers;
@@ -23,7 +23,7 @@ public class Main {
 			List<Rank> ranks = winningNumbers.compareLottos(lottos);
 
 			OutputView.printResult(ranks);
-			OutputView.printProfit(new Profit(purchaseMoney, ranks));
+			OutputView.printProfit(ProfitCalculator.getProfit(purchaseMoney, ranks));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -1,13 +1,13 @@
 package domain;
 
 public class Money {
-	private final int money;
+	private final double money;
 
-	public Money(int money) {
+	public Money(double money) {
 		this.money = money;
 	}
 
-	public int getMoney() {
+	public double getMoney() {
 		return money;
 	}
 }
