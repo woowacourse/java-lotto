@@ -32,10 +32,10 @@ public class OutputView {
         System.out.println(result);
     }
 
-    public static void printLottoResult(LottoResults lottoResults, PurchasePrice purchasePrice) {
+    public static void printLottoResult(Results results, PurchasePrice purchasePrice) {
         printHead();
-        printMatchResults(lottoResults.getLottoResults());
-        printEarningRate(lottoResults.calculateEarningRate(purchasePrice));
+        printMatchResults(results.getLottoResults());
+        printEarningRate(results.calculateEarningRate(purchasePrice));
     }
 
     private static void printHead() {
@@ -45,14 +45,21 @@ public class OutputView {
     private static void printMatchResults(Map<MatchResult, Integer> matchResult) {
         MatchResult[] matchResults = MatchResult.values();
         for (MatchResult result : matchResults) {
-            printMatchResultDetail(result);
-            System.out.println(String.format("(%d원)- %d개", result.getPrize(), matchResult.get(result)));
+            printMatchResult(matchResult, result);
         }
+    }
+
+    private static void printMatchResult(Map<MatchResult, Integer> matchResult, MatchResult result) {
+        if (result == MatchResult.NONE) {
+            return;
+        }
+        printMatchResultDetail(result);
+        System.out.println(String.format("(%d원)- %d개", result.getPrize(), matchResult.get(result)));
     }
 
     private static void printMatchResultDetail(MatchResult result) {
         if (result == MatchResult.FIVE_MATCH_WITH_BONUS_BALL) {
-            System.out.print(String.format("%d개 일치, 보너스 볼 일치", result.getMatchCount()));
+            System.out.print(String.format("%d개 일치, 보너스 볼 일치 ", result.getMatchCount()));
             return;
         }
         System.out.print(String.format("%d개 일치 ", result.getMatchCount()));
@@ -61,5 +68,4 @@ public class OutputView {
     private static void printEarningRate(int earningRate) {
         System.out.println(String.format("총 수익률은 %d%%입니다.", earningRate));
     }
-
 }

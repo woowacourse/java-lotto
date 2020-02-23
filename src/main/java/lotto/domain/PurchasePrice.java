@@ -6,28 +6,33 @@ public class PurchasePrice {
 
     private final int price;
 
-    public PurchasePrice(String purchasePriceInput) {
-        checkNoInput(purchasePriceInput);
-        int price = convertToInt(purchasePriceInput);
+    public PurchasePrice(String purchasePrice) {
+        checkNoInput(purchasePrice);
+        checkType(purchasePrice);
+        int price = convertToInt(purchasePrice);
         validateMinimumPrice(price);
         this.price = price;
     }
 
-    private static void checkNoInput(String purchasePriceInput) {
+    private void checkNoInput(String purchasePriceInput) {
         if (purchasePriceInput == null || purchasePriceInput.trim().isEmpty()) {
             throw new RuntimeException("구입금액을 입력해 주세요.");
         }
     }
 
-    private static int convertToInt(String purchasePriceInput) {
+    private void checkType(String purchasePrice) {
         try {
-            return Integer.parseInt(purchasePriceInput);
+            Integer.parseInt(purchasePrice);
         } catch (NumberFormatException e) {
             throw new RuntimeException("구입금액은 숫자만 입력 가능합니다.");
         }
     }
 
-    private static void validateMinimumPrice(int price) {
+    private int convertToInt(String purchasePrice) {
+        return Integer.parseInt(purchasePrice);
+    }
+
+    private void validateMinimumPrice(int price) {
         if (price < MINIMUM_PRICE) {
             throw new RuntimeException(String.format("최소 %d원 이상 구매하셔야 합니다.", MINIMUM_PRICE));
         }

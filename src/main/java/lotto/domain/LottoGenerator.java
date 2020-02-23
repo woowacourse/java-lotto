@@ -6,21 +6,10 @@ import java.util.List;
 
 public class LottoGenerator {
     private static final int NUMBER_COUNT_PER_LOTTO = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-
     private static final List<Ball> allLottoBalls;
 
     static {
-        allLottoBalls = gatherAllBalls();
-    }
-
-    private static List<Ball> gatherAllBalls() {
-        List<Ball> allLottoBalls = new ArrayList<>();
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            allLottoBalls.add(Ball.valueOf(i));
-        }
-        return allLottoBalls;
+        allLottoBalls = Ball.generateAllBalls();
     }
 
     public static List<Lotto> generate(int lottoCount) {

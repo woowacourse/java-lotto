@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 public class WinningBalls {
     private static final String WINNING_NUMBERS_DELIMITER = ",";
     private static final int NUMBER_COUNT_PER_LOTTO = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
 
     private final List<Ball> winningBalls;
 
@@ -58,9 +56,7 @@ public class WinningBalls {
 
     private void checkType(List<String> splittedNumbers) {
         try {
-            splittedNumbers.stream()
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+            splittedNumbers.forEach(Integer::parseInt);
         } catch (NumberFormatException e) {
             throw new RuntimeException("숫자만 입력하시기 바랍니다.");
         }

@@ -50,7 +50,7 @@ public class WinningBallsTest {
     void exceedRangeInputTest(String input) {
         assertThatThrownBy(() -> new WinningBalls(input))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageEndingWith("이하의 숫자만 입력 가능합니다.");
+                .hasMessageEndingWith("이하의 숫자만 가능합니다.");
     }
 
     @DisplayName("중복된 숫자를 입력했을 때 예외가 발생하는지 확인")

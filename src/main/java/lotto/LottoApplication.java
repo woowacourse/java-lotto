@@ -13,9 +13,9 @@ public class LottoApplication {
         OutputView.printLottos(lottos);
 
         WinningBalls winningBalls = new WinningBalls(InputView.requestWinningNumbersInput());
-        BonusBall bonusBall = new BonusBall(InputView.requestBonusNumberInput());
+        BonusBall bonusBall = new BonusBall(InputView.requestBonusNumberInput(), winningBalls);
 
-        LottoResults lottoResults = new LottoResults(lottos.createMatchResults(winningBalls, bonusBall));
-        OutputView.printLottoResult(lottoResults, purchasePrice);
+        Results results = new Results(lottos, winningBalls, bonusBall);
+        OutputView.printLottoResult(results, purchasePrice);
     }
 }

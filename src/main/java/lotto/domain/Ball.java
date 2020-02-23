@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Ball implements Comparable<Ball> {
@@ -13,14 +15,22 @@ public class Ball implements Comparable<Ball> {
         this.number = number;
     }
 
-    public static Ball valueOf(int number) {
-        return new Ball(number);
-    }
-
     private void validate(int number) {
         if (number < MIN_NUMBER || MAX_NUMBER < number) {
             throw new RuntimeException(String.format("%d 이상 %d 이하의 숫자만 가능합니다.", MIN_NUMBER, MAX_NUMBER));
         }
+    }
+
+    public static Ball valueOf(int number) {
+        return new Ball(number);
+    }
+
+    public static List<Ball> generateAllBalls() {
+        List<Ball> result = new ArrayList<>();
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            result.add(new Ball(i));
+        }
+        return result;
     }
 
     public int getNumber() {
