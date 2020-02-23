@@ -13,9 +13,7 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printLottePieces(int lottoPieces) {
-        System.out.printf("%d개를 구매했습니다.%n", lottoPieces);
-    }
+    public static void printLottePieces(int lottoPieces) { System.out.printf("%d개를 구매했습니다.%n", lottoPieces); }
 
     public static void printChangeMoney(int changeMoney) {
         System.out.printf("거스름돈은 %d원 입니다.%n", changeMoney);

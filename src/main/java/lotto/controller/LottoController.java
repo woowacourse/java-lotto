@@ -10,10 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoController {
-    private PurchaseAmount purchaseAmount;
 
     public void play() {
-        startInputPurchaseAmount();
+        PurchaseAmount purchaseAmount = startInputPurchaseAmount();
         LottoStore lottoStore = new LottoStore(purchaseAmount);
         LottoTickets lottoTickets = lottoStore.getLottoTickets();
         WinningBalls winningBalls = generateWinningBalls();
@@ -21,10 +20,11 @@ public class LottoController {
         OutputView.printEarningRate(new EarningRate(winningRanks, purchaseAmount));
     }
 
-    private void startInputPurchaseAmount() {
-        purchaseAmount = InputView.inputPurchaseAmount();
+    private PurchaseAmount startInputPurchaseAmount() {
+        PurchaseAmount purchaseAmount = InputView.inputPurchaseAmount();
         OutputView.printLottePieces(purchaseAmount.giveLottoTicketNumber());
         OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
+        return purchaseAmount;
     }
 
     private WinningBalls generateWinningBalls() {

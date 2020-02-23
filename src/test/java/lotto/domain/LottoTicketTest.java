@@ -5,9 +5,7 @@ import lotto.Exception.NumberOutOfRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -21,14 +19,14 @@ public class LottoTicketTest {
     void throw_empty_lotto_ball_test() {
         Set<LottoBall> lottoTicket = new HashSet<>();
 
-        assertThatThrownBy(()->new LottoTicket(lottoTicket))
+        assertThatThrownBy(() -> new LottoTicket(lottoTicket))
                 .isInstanceOf(LottoTicketEmptyException.class);
     }
 
     @Test
     @DisplayName("로또 티켓이 제대로 생성되었을 경우 테스트")
     void not_empty_lotto_ball_test() {
-        Set<LottoBall> lottoTicket = IntStream.rangeClosed(1,6)
+        Set<LottoBall> lottoTicket = IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoBall::new)
                 .collect(Collectors.toSet());
 

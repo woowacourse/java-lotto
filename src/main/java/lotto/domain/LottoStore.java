@@ -2,7 +2,9 @@ package lotto.domain;
 
 import lotto.view.OutputView;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoStore {
     private static final int MAX_LOTTO_BALL_COUNT = 6;

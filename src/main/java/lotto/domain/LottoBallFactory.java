@@ -12,6 +12,7 @@ public class LottoBallFactory {
     public static final String NOT_FIND_BY_LOTTO_BALL_ERROR_MESSAGE = "찾는 로또볼이 없습니다. 다시 시도해주세요.";
 
     private static List<LottoBall> lottoBalls;
+
     static {
         lottoBalls = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .mapToObj(LottoBall::new)
@@ -19,8 +20,8 @@ public class LottoBallFactory {
                         .toList());
     }
 
-    private LottoBallFactory() { }
-
+    private LottoBallFactory() {
+    }
 
     public static List<LottoBall> getInstance() {
         return lottoBalls;

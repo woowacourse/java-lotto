@@ -23,12 +23,11 @@ class WinningRankTest {
             "미당첨_테스트 1,2,40,41,42,43 NO_RANK"}, delimiter = ' ')
     void select_rank_test( String header, String input, WinningRank winningRank) {
         String winningBallInputs = "1,2,3,4,5,6";
-        int bonus = 7;
-        LottoTicket lottoTicket = new LottoTicket(LottoBalls.generateLottoBalls(input));
-        WinningBalls winningBalls = new WinningBalls(LottoBalls.generateLottoBalls(winningBallInputs), LottoBallFactory.findByLottoBall(bonus));
-        int correctCount = winningBalls.hitLottoBalls(lottoTicket);
-        boolean correctBonusNumber = winningBalls.hitBonusBall(lottoTicket);
+        LottoBall bonusBall = LottoBallFactory.findByLottoBall(7);
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.addLottoTicket(new LottoTicket(LottoBalls.generateLottoBalls(input)));
+        WinningBalls winningBalls = new WinningBalls(LottoBalls.generateLottoBalls(winningBallInputs),bonusBall);
 
-        Assertions.assertThat(WinningRank.selectRank(correctCount, correctBonusNumber)).isEqualTo(winningRank);
+        Assertions.assertThat(WinningRank.generateWinningRank(winningBalls, lottoTickets)).contains(winningRank);
     }
 }

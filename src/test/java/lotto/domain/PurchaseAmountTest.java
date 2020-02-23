@@ -13,6 +13,7 @@ public class PurchaseAmountTest {
     @DisplayName("로또 티켓수 반환 테스트")
     void give_lotto_ticket_test() {
         PurchaseAmount purchaseAmount = new PurchaseAmount("1500");
+
         assertThat(purchaseAmount.giveLottoTicketNumber()).isEqualTo(1);
     }
 
@@ -20,6 +21,7 @@ public class PurchaseAmountTest {
     @DisplayName("거스름돈 반환 테스트")
     void give_change_money_test() {
         PurchaseAmount purchaseAmount = new PurchaseAmount("1500");
+
         assertThat(purchaseAmount.giveChangeMoney()).isEqualTo(500);
     }
 
@@ -27,6 +29,7 @@ public class PurchaseAmountTest {
     @DisplayName("구입금액이 숫자가 아닐 경우 테스트")
     void not_number_test() {
         String purchaseAmount = "1a가A";
+
         assertThatThrownBy(() -> new PurchaseAmount(purchaseAmount))
                 .isInstanceOf(NumberFormatException.class)
                 .hasMessage("숫자가 아닙니다. 재입력 해주세요.");
@@ -36,6 +39,7 @@ public class PurchaseAmountTest {
     @DisplayName("구입금액이 음수일 경우 테스트")
     void negative_number_test() {
         String purchaseAmount = "-3";
+
         assertThatThrownBy(() -> new PurchaseAmount(purchaseAmount))
                 .isInstanceOf(NotPositiveNumberException.class)
                 .hasMessage("음수입니다. 재입력 해주세요.");
@@ -45,7 +49,8 @@ public class PurchaseAmountTest {
     @DisplayName("천원 미안의 값이 구입금액으로 들어왔을때 반환 테스트")
     void under_one_thousand_won() {
         String purchaseAmountInput = "999";
+
         assertThatThrownBy(() -> new PurchaseAmount(purchaseAmountInput)).isInstanceOf(NotBuyLottoTicketException.class)
-        .hasMessage("한개도 구매할 수 없습니다. " + purchaseAmountInput + "원을 반환합니다.");
+                .hasMessage("한개도 구매할 수 없습니다. " + purchaseAmountInput + "원을 반환합니다.");
     }
 }

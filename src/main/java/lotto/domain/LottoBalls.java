@@ -13,7 +13,7 @@ public class LottoBalls {
     public static final String NUMBER_OUT_OF_RANGE_ERROR_MESSAGE = String.format("%d개의 숫자를 입력해주세요",
             WINNING_BALLS_LENGTH);
 
-    public static Set<LottoBall> generateLottoBalls(String lottoBallsInput){
+    public static Set<LottoBall> generateLottoBalls(String lottoBallsInput) {
         String[] lottoBalls = lottoBallsInput.split(DELIMITER);
         validateWinningBallsNumber(lottoBalls);
         validateWinningBallsLength(lottoBalls);
