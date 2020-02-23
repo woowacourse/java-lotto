@@ -17,6 +17,13 @@ class LottoFactoryTest {
 		assertThat(LottoFactory.create());
 	}
 
+	@Test
+	@DisplayName("로또 장수 만큼 로또를 반환하는지")
+	void LottosTest() {
+		Lottos lottos = LottoFactory.create(3);
+		assertThat(lottos.getSize()).isEqualTo(3);
+	}
+
 	@ParameterizedTest
 	@DisplayName("수동으로 생성된 로또를 비교할 수 있다.")
 	@CsvSource(value = {"1,2,3,4,5,6:4", "4,7,44,42,33,13:2"}, delimiter = ':')

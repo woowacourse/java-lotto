@@ -18,9 +18,9 @@ class StatisticTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"5,1500000.0", "4,50000.0"})
+	@CsvSource(value = {"5,1500000", "4,50000"})
 	@DisplayName("수익을 정상적으로 반환하는 지")
-	void profitTest(int match, double profit) {
+	void profitTest(int match, int profit) {
 		Optional<Statistic> rank = Statistic.getRank(match);
 		assertThat(rank.get().getPrize()).isEqualTo(profit);
 	}
