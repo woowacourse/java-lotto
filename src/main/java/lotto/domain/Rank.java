@@ -18,20 +18,23 @@ public enum Rank {
 		this.hitCount = hitCount;
 	}
 
-	public static Rank findRank(int count) {
-		return Arrays.stream(values())
+	public static Rank findRank(int count, boolean isMatchBonus) {
+		Rank rank = Arrays.stream(values())
 			.filter(x -> x.hitCount == count)
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException());
+		if (rank.isSecond(isMatchBonus)) {
+			rank = SECOND;
+		}
+		return rank;
+	}
 
+	private boolean isSecond(boolean isMatchBonus) {
+		return this == THIRD && isMatchBonus;
 	}
 
 	public static Rank[] valuesOnlyWin() {
 		return new Rank[] {FIFTH, FOURTH, THIRD, SECOND, FIRST};
-	}
-
-	public boolean isSecond(boolean isMatchBonus) {
-		return this == THIRD && isMatchBonus;
 	}
 
 	public long getReward() {

@@ -23,6 +23,7 @@ public class WinLottoTest {
 	void compareTest() {
 		List<LottoNo> numbers = IntStream.range(1, 7)
 			.boxed()
+			.map(String::valueOf)
 			.map(LottoNo::new)
 			.collect(Collectors.toList());
 		Lotto lotto = new Lotto(numbers);
@@ -30,6 +31,7 @@ public class WinLottoTest {
 
 		numbers = IntStream.range(7, 13)
 			.boxed()
+			.map(String::valueOf)
 			.map(LottoNo::new)
 			.collect(Collectors.toList());
 		lotto = new Lotto(numbers);
@@ -41,6 +43,7 @@ public class WinLottoTest {
 	void isMatchBonus() {
 		List<LottoNo> numbers = IntStream.range(7, 13)
 			.boxed()
+			.map(String::valueOf)
 			.map(LottoNo::new)
 			.collect(Collectors.toList());
 		Lotto lotto = new Lotto(numbers);

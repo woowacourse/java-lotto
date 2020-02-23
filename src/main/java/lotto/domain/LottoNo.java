@@ -3,26 +3,29 @@ package lotto.domain;
 import java.util.Objects;
 
 import lotto.exception.InvalidRangeException;
+import lotto.validator.Validator;
 
 public class LottoNo implements Comparable<LottoNo> {
-	public static final int MIN_LOTTO_NO = 1;
-	public static final int MAX_LOTTO_NO = 45;
+	public static final int MIN = 1;
+	public static final int MAX = 45;
 
 	private final int number;
 
-	public LottoNo(int number) {
+	public LottoNo(String numberString) {
+		Validator.validateInteger(numberString);
+		int number = Integer.parseInt(numberString);
 		validateLottoRange(number);
 		this.number = number;
 	}
 
 	private void validateLottoRange(int number) {
-		if (isLottoRange(number)) {
+		if (isNotLottoRange(number)) {
 			throw new InvalidRangeException();
 		}
 	}
 
-	private boolean isLottoRange(int number) {
-		return number < MIN_LOTTO_NO || number > MAX_LOTTO_NO;
+	private boolean isNotLottoRange(int number) {
+		return number < MIN || number > MAX;
 	}
 
 	@Override

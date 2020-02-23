@@ -11,7 +11,7 @@ import lotto.exception.InvalidSizeException;
 public class Lotto {
 	private static final int LOTTO_SIZE = 6;
 
-	protected final List<LottoNo> lottoNumbers;
+	private final List<LottoNo> lottoNumbers;
 
 	public Lotto(List<LottoNo> lottoNumbers) {
 		validateLottoSize(lottoNumbers);

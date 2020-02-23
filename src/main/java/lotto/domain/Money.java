@@ -11,8 +11,9 @@ public class Money {
 
 	public Money(String inputMoney) {
 		Validator.validateInteger(inputMoney);
-		validateOverThousand(Integer.parseInt(inputMoney));
-		this.inputMoney = Integer.parseInt(inputMoney);
+		int money = Integer.parseInt(inputMoney);
+		validateOverThousand(money);
+		this.inputMoney = money;
 	}
 
 	private void validateOverThousand(int inputMoney) {

@@ -14,7 +14,7 @@ public class LottoNoUtils {
 		String[] inputs = input.split(COMMA);
 		try {
 			return Arrays.stream(inputs)
-				.map(Integer::parseInt)
+				.map(String::trim)
 				.map(LottoNo::new)
 				.collect(Collectors.toList());
 		} catch (NumberFormatException e) {

@@ -22,8 +22,7 @@ public class LottoResult {
 		Arrays.stream(Rank.values())
 			.forEach(rank -> counts.put(rank, INIT_VALUE));
 
-		ranks.stream()
-			.forEach(rank -> counts.replace(rank, counts.get(rank) + COUNT_ADDITIONAL_VALUE));
+		ranks.forEach(rank -> counts.replace(rank, counts.get(rank) + COUNT_ADDITIONAL_VALUE));
 		return counts;
 	}
 
@@ -34,7 +33,7 @@ public class LottoResult {
 	private long getTotalReward() {
 		return ranks.stream()
 			.map(Rank::getReward)
-			.reduce((x, y) -> x + y)
+			.reduce(Long::sum)
 			.get();
 	}
 

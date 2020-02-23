@@ -15,7 +15,7 @@ public class BonusBallTest {
 	void isContainBonusBall() {
 		List<LottoNo> numbers = new ArrayList<>();
 		for (int cnt = 1; cnt <= 6; cnt++) {
-			numbers.add(new LottoNo(cnt));
+			numbers.add(new LottoNo(String.valueOf(cnt)));
 		}
 		Lotto lotto = new Lotto(numbers);
 

@@ -19,6 +19,7 @@ public class LottoNoUtilsTest {
 	void split() {
 		List<LottoNo> numbers = IntStream.range(1, 7)
 			.boxed()
+			.map(String::valueOf)
 			.map(LottoNo::new)
 			.collect(Collectors.toList());
 		Lotto excepts = new Lotto(numbers);

@@ -12,8 +12,9 @@ public class LottoFactory {
 	private static final List<LottoNo> lottoBox;
 
 	static {
-		lottoBox = IntStream.range(LottoNo.MIN_LOTTO_NO, LottoNo.MAX_LOTTO_NO)
+		lottoBox = IntStream.range(LottoNo.MIN, LottoNo.MAX)
 			.boxed()
+			.map(String::valueOf)
 			.map(LottoNo::new)
 			.collect(Collectors.toList());
 	}
