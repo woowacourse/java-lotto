@@ -14,11 +14,11 @@ import java.util.List;
  * 날짜 : 2020/02/19
  */
 public enum Rank {
-	FIRST(new ArrayList<Integer>(Collections.singletonList(6)), false, 2000000000),
-	SECOND(new ArrayList<Integer>(Collections.singletonList(5)), true, 30000000),
-	THIRD(new ArrayList<Integer>(Collections.singletonList(5)), false, 1500000),
-	FOURTH(new ArrayList<Integer>(Collections.singletonList(4)), false, 50000),
-	FIFTH(new ArrayList<Integer>(Collections.singletonList(3)), false, 5000),
+	FIRST(new ArrayList<Integer>(Collections.singletonList(6)), false, 2_000_000_000),
+	SECOND(new ArrayList<Integer>(Collections.singletonList(5)), true, 30_000_000),
+	THIRD(new ArrayList<Integer>(Collections.singletonList(5)), false, 1_500_000),
+	FOURTH(new ArrayList<Integer>(Collections.singletonList(4)), false, 50_000),
+	FIFTH(new ArrayList<Integer>(Collections.singletonList(3)), false, 5_000),
 	SIXTH(new ArrayList<Integer>(Arrays.asList(0, 1, 2)), false, 0);
 
 	private static final int MATCH_COUNT_RELATED_TO_BONUS = 5;
