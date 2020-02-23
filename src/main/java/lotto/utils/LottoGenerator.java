@@ -25,7 +25,7 @@ public class LottoGenerator {
     public static WinningLotto createWinningLottoByUserInput(String winningNumbersInput,
                                                              String bonusNumberInput) {
         String[] splitedWinningNumbersInput = getSplitedWinningLottoNumbers(winningNumbersInput);
-        Set<LottoNumber> winningLottoNumbers = createLottoNumbersByUserInput(splitedWinningNumbersInput);
+        Set<LottoNumber> winningLottoNumbers = createLottoNumbers(splitedWinningNumbersInput);
         return new WinningLotto(winningLottoNumbers, new LottoNumber(bonusNumberInput));
     }
 
@@ -38,15 +38,14 @@ public class LottoGenerator {
         return lottoNumbers;
     }
 
-    public static Set<LottoNumber> createLottoNumbersByUserInput(String[] splitedWinningLottoNumbers) {
+    public static Set<LottoNumber> createLottoNumbers(String[] splitedWinningLottoNumbers) {
         if (splitedWinningLottoNumbers.length != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(INCORRECT_LOTTO_NUMBER_MSG);
         }
 
-        Set<LottoNumber> lottoNumbers = Arrays.stream(splitedWinningLottoNumbers)
+        return Arrays.stream(splitedWinningLottoNumbers)
                 .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));
-        return lottoNumbers;
     }
 
     public static String[] getSplitedWinningLottoNumbers(String lottoNumbersInput) {
