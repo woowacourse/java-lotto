@@ -1,7 +1,5 @@
 package lotto.util;
 
-import lotto.Exception.DuplicationException;
-import lotto.Exception.NumberOutOfRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +40,7 @@ class ValidateWinningTicketUtilsTest {
         String[] inputValue = { "1","2","3","4","5"};
 
         assertThatThrownBy(()->ValidateWinningTicketUtils.validateWinningBallsLength(inputValue))
-                .isInstanceOf(NumberOutOfRangeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -60,6 +58,6 @@ class ValidateWinningTicketUtilsTest {
         String[] inputValue = { "1","2","3","4","5","5"};
 
         assertThatThrownBy(()->ValidateWinningTicketUtils.validateDuplicatedWinningBalls(inputValue))
-                .isInstanceOf(DuplicationException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

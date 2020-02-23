@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class LottoBallFactory {
     private static final int START_BALL_NUMBER = 1;
     private static final int END_BALL_NUMBER = 45;
-
+    private static final int LOTTO_TICKET_SIZE = 6;
     private static final List<LottoBall> LOTTO_BALLS;
 
     private LottoBallFactory() {
@@ -26,13 +26,13 @@ public class LottoBallFactory {
         Collections.shuffle(LOTTO_BALLS);
     }
 
-    public static List<LottoBall> getInstance(int startIndex, int endIndex) {
+    public static List<LottoBall> generateLottoTicket() {
         List<LottoBall> lottoTicket = new ArrayList<>();
 
-        for (int i = startIndex; i < endIndex; i++) {
+        for (int i = 0; i < LOTTO_TICKET_SIZE; i++) {
             lottoTicket.add(LOTTO_BALLS.get(i));
         }
-        return lottoTicket;
+        return Collections.unmodifiableList(lottoTicket);
     }
 
     public static LottoBall findByLottoBall(int lottoBallNumber) {

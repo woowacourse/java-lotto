@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.Exception.LottoTicketEmptyException;
-import lotto.Exception.LottoTicketOutOfRange;
-import lotto.Exception.NumberOutOfRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +18,7 @@ public class LottoTicketTest {
         List<LottoBall> lottoTicket = new ArrayList<>();
 
         assertThatThrownBy(() -> new LottoTicket(lottoTicket))
-                .isInstanceOf(LottoTicketEmptyException.class);
+                .isInstanceOf(NullPointerException.class);
     }
 
     @Test
@@ -44,6 +41,6 @@ public class LottoTicketTest {
                     .mapToObj(LottoBall::new)
                     .collect(Collectors.toList());
             new LottoTicket(lottoTicket);
-        }).isInstanceOf(LottoTicketOutOfRange.class);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

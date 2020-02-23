@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.Exception.NotBuyLottoTicketException;
 import lotto.util.InputValidationUtil;
 
 public class PurchaseAmount {
@@ -17,7 +16,7 @@ public class PurchaseAmount {
 
     private void validateLottoUnit() {
         if (this.purchaseAmount < LOTTO_PURCHASE_UNIT) {
-            throw new NotBuyLottoTicketException(String.format(NOT_BUY_LOTTO_TICKET_EXCEPTION,this.purchaseAmount));
+            throw new IllegalArgumentException(String.format(NOT_BUY_LOTTO_TICKET_EXCEPTION,this.purchaseAmount));
         }
     }
 

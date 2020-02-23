@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.domain.LottoBall;
+import lotto.domain.LottoTicket;
 import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningTicketFactory;
 import lotto.util.InputValidationUtil;
 
 import java.util.List;
@@ -25,8 +25,8 @@ public class InputView {
         try {
             OutputView.printAnswerWinningBalls();
             String winningTicket = scanner.nextLine();
-            WinningTicketFactory winningTicketFactory = new WinningTicketFactory(winningTicket);
-            return winningTicketFactory.getWinningTicket();
+            LottoTicket winningTicketFactory = new LottoTicket(winningTicket);
+            return winningTicketFactory.getLottoTicket();
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
             return InputWinningTicket();

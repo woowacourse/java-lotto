@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
-    private static final int END_INDEX = 6;
-    private static final int START_INDEX = 0;
 
     private PurchaseAmount purchaseAmount;
 
@@ -51,7 +49,7 @@ public class LottoController {
     }
 
     private LottoTicket generateLottoTicket() {
-        List<LottoBall> lottoTicket = LottoBallFactory.getInstance(START_INDEX,END_INDEX);
+        List<LottoBall> lottoTicket = LottoBallFactory.generateLottoTicket();
 
         return new LottoTicket(lottoTicket);
     }

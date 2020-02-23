@@ -1,7 +1,5 @@
 package lotto.util;
 
-import lotto.Exception.NotPositiveNumberException;
-
 public class InputValidationUtil {
 
     private static final int ZERO = 0;
@@ -21,7 +19,7 @@ public class InputValidationUtil {
 
     public static void isPositiveNumber(long inputValue) {
         if (inputValue < ZERO) {
-            throw new NotPositiveNumberException(NOT_POSITIVE_NUMBER_EXCEPTION);
+            throw new IllegalArgumentException(NOT_POSITIVE_NUMBER_EXCEPTION);
         }
     }
 }

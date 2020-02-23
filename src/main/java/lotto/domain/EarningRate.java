@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.Exception.IllegalPurchaseAmount;
-
 import java.util.List;
 
 public class EarningRate {
@@ -33,7 +31,7 @@ public class EarningRate {
         generateWinningRank(winningRanks);
         if (Double.isInfinite(calculateEarningRate(purchaseAmount))
                 || Double.isNaN(calculateEarningRate(purchaseAmount))) {
-            throw new IllegalPurchaseAmount(ILLEGAL_PURCHASE_AMOUNT);
+            throw new IllegalArgumentException(ILLEGAL_PURCHASE_AMOUNT);
         }
         this.earningRate = calculateEarningRate(purchaseAmount);
     }
