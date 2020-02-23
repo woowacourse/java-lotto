@@ -15,4 +15,8 @@ public class Money {
             throw new IllegalArgumentException("금액은 1000원 미만으로 입력할 수 없습니다.");
         }
     }
+
+    public int getLottoTicketCount() {
+        return this.money / MIN_MONEY;
+    }
 }
