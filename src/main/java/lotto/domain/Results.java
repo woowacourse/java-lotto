@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,20 +11,20 @@ public class Results {
     private static final int HUNDRED_PERCENT = 100;
     private static final int RESULT_BASE = 5;
     private List<Result> results;
-    private List<Lotto> userLottos;
-    private WinningLotto winningLotto;
+    private List<LottoTicket> userLottoTickets;
+    private WinningLottoTicket winningLotto;
 
-    public Results(List<Lotto> userlottos, WinningLotto winningLotto) {
+    public Results(List<LottoTicket> userlottos, WinningLottoTicket winningLotto) {
         this.winningLotto = winningLotto;
-        this.userLottos = userlottos;
+        this.userLottoTickets = userlottos;
         this.results = new ArrayList<>();
     }
 
     public void calculateResults() {
         addBlankResults();
-        for (Lotto userLotto : userLottos) {
+        for (LottoTicket userLottoTicket : userLottoTickets) {
             Result result = new Result();
-            result.calculate(winningLotto, userLotto);
+            result.calculate(winningLotto, userLottoTicket);
             results.add(result);
         }
     }
@@ -37,7 +38,7 @@ public class Results {
     }
 
     public List<Result> getResults() {
-        return results;
+        return Collections.unmodifiableList(results);
     }
 
     public int getTotalEarning() {
@@ -51,7 +52,7 @@ public class Results {
     }
 
     public int getEarningRate() {
-        return (getTotalEarning()) / (userLottos.size() * MONEY_PER_LOTTO) * HUNDRED_PERCENT;
+        return (getTotalEarning()) / (userLottoTickets.size() * MONEY_PER_LOTTO) * HUNDRED_PERCENT;
     }
 
 

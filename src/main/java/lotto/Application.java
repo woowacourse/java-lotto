@@ -14,10 +14,10 @@ public class Application {
         Payment payment = generatePayment();
         OutputView.printLottoCount(payment);
 
-        List<Lotto> lottoList = new Lottos(LottoFactory.createLottoList(payment)).getLottos();
+        List<LottoTicket> lottoList = new LottoTickets(LottoFactory.createLottoList(payment)).getLottoTickets();
         OutputView.printLottoList(lottoList);
 
-        WinningLotto winningLotto = generateWinningLotto();
+        WinningLottoTicket winningLotto = generateWinningLotto();
         OutputView.printResults(new Results(lottoList, winningLotto));
     }
 
@@ -30,10 +30,10 @@ public class Application {
         }
     }
 
-    private static WinningLotto generateWinningLotto() {
+    private static WinningLottoTicket generateWinningLotto() {
         NumberGenerator numberGenerator = new UserInputNumberGenerator();
         try {
-            return new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
+            return new WinningLottoTicket(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return generateWinningLotto();

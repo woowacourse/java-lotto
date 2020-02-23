@@ -10,9 +10,9 @@ public class Result {
         this.winningInfo = winningInfo;
     }
 
-    void calculate(WinningLotto winningLotto, Lotto userLotto) {
-        boolean hasBonus = winningLotto.isBonusMatched(userLotto);
-        long winningCount = winningLotto.countMatched(winningLotto, userLotto);
+    void calculate(WinningLottoTicket winningLotto, LottoTicket userLottoTicket) {
+        boolean hasBonus = winningLotto.isBonusMatched(userLottoTicket);
+        long winningCount = winningLotto.countMatched(winningLotto, userLottoTicket);
 
         winningInfo = WinningInfo.valueOf(Math.toIntExact(winningCount), hasBonus);
     }

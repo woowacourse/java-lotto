@@ -4,10 +4,10 @@ import lotto.domain.errors.ErrorMessage;
 
 import java.util.List;
 
-public class WinningLotto extends Lotto {
+public class WinningLottoTicket extends LottoTicket {
     private LottoNumber bonusNumber;
 
-    public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public WinningLottoTicket(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         super(winningNumbers);
         validateDistinctBonus(bonusNumber);
         this.bonusNumber = bonusNumber;
@@ -26,13 +26,13 @@ public class WinningLotto extends Lotto {
     }
 
 
-    public boolean isBonusMatched(Lotto userLotto) {
-        return userLotto.getLottoNumbers().stream()
+    public boolean isBonusMatched(LottoTicket userLottoTicket) {
+        return userLottoTicket.getLottoNumbers().stream()
                 .anyMatch(userLottoNumber -> bonusNumber.equals(userLottoNumber));
     }
 
-    public long countMatched(WinningLotto winningLotto, Lotto userLotto) {
-        return userLotto.getLottoNumbers().stream()
+    public long countMatched(WinningLottoTicket winningLotto, LottoTicket userLottoTicket) {
+        return userLottoTicket.getLottoNumbers().stream()
                 .filter(userLottoNumber -> winningLotto.isMatched(userLottoNumber))
                 .count();
     }

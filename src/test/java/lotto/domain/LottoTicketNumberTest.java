@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoNumberTest {
+public class LottoTicketNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"1", "45"})
     void validateNumber_정상적인_숫자일_때(String validNumber) {

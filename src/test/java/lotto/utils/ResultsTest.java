@@ -21,7 +21,7 @@ public class ResultsTest {
             new LottoNumber(WINNING_LOTTO_NUMBERS[4]),
             new LottoNumber(WINNING_LOTTO_NUMBERS[5])));
     LottoNumber bonusNumber = new LottoNumber(BONUS_NUMBER);
-    WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+    WinningLottoTicket winningLotto = new WinningLottoTicket(winningNumbers, bonusNumber);
 
     List<LottoNumber> notWinningUserLottoNumbers = new ArrayList<LottoNumber>(Arrays.asList(
             new LottoNumber("7"),
@@ -30,7 +30,7 @@ public class ResultsTest {
             new LottoNumber("10"),
             new LottoNumber("11"),
             new LottoNumber("12")));
-    Lotto notWinningUserLotto = new Lotto(notWinningUserLottoNumbers);
+    LottoTicket notWinningUserLottoTicket = new LottoTicket(notWinningUserLottoNumbers);
 
     List<LottoNumber> secondWinningUserLottoNumbers = new ArrayList<LottoNumber>(Arrays.asList(
             new LottoNumber(WINNING_LOTTO_NUMBERS[0]),
@@ -39,19 +39,19 @@ public class ResultsTest {
             new LottoNumber(WINNING_LOTTO_NUMBERS[3]),
             new LottoNumber(WINNING_LOTTO_NUMBERS[4]),
             new LottoNumber(BONUS_NUMBER)));
-    Lotto secondWinningUserLotto = new Lotto(secondWinningUserLottoNumbers);
+    LottoTicket secondWinningUserLottoTicket = new LottoTicket(secondWinningUserLottoNumbers);
 
 
     @Test
     void calculateResults_당첨되지_않았을_때() {
-        Results results = new Results(Arrays.asList(notWinningUserLotto), winningLotto);
+        Results results = new Results(Arrays.asList(notWinningUserLottoTicket), winningLotto);
         results.calculateResults();
         assertThat(results.getResults().get(0 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.FAIL.name());
     }
 
     @Test
     void calculateResults_당첨이_존재할_때() {
-        Results results = new Results(Arrays.asList(notWinningUserLotto, secondWinningUserLotto), winningLotto);
+        Results results = new Results(Arrays.asList(notWinningUserLottoTicket, secondWinningUserLottoTicket), winningLotto);
         results.calculateResults();
         assertThat(results.getResults().get(0 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.FAIL.name());
         assertThat(results.getResults().get(1 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.SECOND.name());
@@ -59,7 +59,7 @@ public class ResultsTest {
 
     @Test
     void getEarningRate() {
-        Results results = new Results(Arrays.asList(notWinningUserLotto, secondWinningUserLotto), winningLotto);
+        Results results = new Results(Arrays.asList(notWinningUserLottoTicket, secondWinningUserLottoTicket), winningLotto);
         results.calculateResults();
         assertThat(results.getEarningRate()).isEqualTo(1500000);
     }

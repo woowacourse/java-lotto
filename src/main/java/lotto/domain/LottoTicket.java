@@ -5,11 +5,11 @@ import lotto.domain.errors.ErrorMessage;
 import java.util.Collections;
 import java.util.List;
 
-public class Lotto {
+public class LottoTicket {
     private static final int LOTTO_NUMBER_SIZE = 6;
     protected List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateNumberCount(lottoNumbers);
         validateDistinctNumbers(lottoNumbers);
         Collections.sort(lottoNumbers);

@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoTest {
+public class LottoTicketTest {
     @Test
     void validateDistinctNumberTest_중복숫자가_없을_때() {
         List<LottoNumber> invalidNumbers = new ArrayList<LottoNumber>(Arrays.asList(
@@ -19,7 +19,7 @@ public class LottoTest {
                 new LottoNumber("4"),
                 new LottoNumber("5"),
                 new LottoNumber("45")));
-        new Lotto(invalidNumbers);
+        new LottoTicket(invalidNumbers);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class LottoTest {
                 new LottoNumber("4"),
                 new LottoNumber("5"),
                 new LottoNumber("5")));
-        assertThatThrownBy(() -> new Lotto(invalidNumbers))
+        assertThatThrownBy(() -> new LottoTicket(invalidNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.DUPLICATE_NUMBER.getMessage());
     }
