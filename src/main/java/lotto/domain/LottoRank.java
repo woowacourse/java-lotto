@@ -1,24 +1,23 @@
 package lotto.domain;
 
 import static lotto.domain.IncludingBonusBallCondition.*;
-import static lotto.domain.MatchNumberCount.*;
 
 import java.util.Arrays;
 
 public enum LottoRank {
-	MISSING(ZERO, NO_MATTER, Money.valueOf(0)),
-	FIFTH(THREE, NO_MATTER, Money.valueOf(5_000)),
-	FOURTH(FOUR, NO_MATTER, Money.valueOf(50_000)),
-	THIRD(FIVE, MUST_NOT_INCLUDE, Money.valueOf(1_500_000)),
-	SECOND(FIVE, MUST_INCLUDE, Money.valueOf(30_000_000)),
-	FIRST(SIX, MUST_NOT_INCLUDE, Money.valueOf(2_000_000_000));
+	MISSING(0, NO_MATTER, Money.valueOf(0)),
+	FIFTH(3, NO_MATTER, Money.valueOf(5_000)),
+	FOURTH(4, NO_MATTER, Money.valueOf(50_000)),
+	THIRD(5, MUST_NOT_INCLUDE, Money.valueOf(1_500_000)),
+	SECOND(5, MUST_INCLUDE, Money.valueOf(30_000_000)),
+	FIRST(6, MUST_NOT_INCLUDE, Money.valueOf(2_000_000_000));
 
-	private final MatchNumberCount matchNumberCount;
+	private final int matchCount;
 	private final IncludingBonusBallCondition includingBonusBallCondition;
 	private final Money money;
 
-	LottoRank(MatchNumberCount matchNumberCount, IncludingBonusBallCondition includingBonusBallCondition, Money money) {
-		this.matchNumberCount = matchNumberCount;
+	LottoRank(int matchCount, IncludingBonusBallCondition includingBonusBallCondition, Money money) {
+		this.matchCount = matchCount;
 		this.includingBonusBallCondition = includingBonusBallCondition;
 		this.money = money;
 	}
@@ -31,7 +30,7 @@ public enum LottoRank {
 	}
 
 	private boolean isMatch(int count) {
-		return matchNumberCount.isSameMatch(count);
+		return matchCount == count;
 	}
 
 	private boolean isRightBonusBallCondition(boolean isBonusBall) {
@@ -46,8 +45,8 @@ public enum LottoRank {
 		return money.multiply(count);
 	}
 
-	public MatchNumberCount getMatchNumberCount() {
-		return matchNumberCount;
+	public int getMatchCount() {
+		return matchCount;
 	}
 
 	public Money getMoney() {

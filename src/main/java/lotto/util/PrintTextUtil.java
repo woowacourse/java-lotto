@@ -14,7 +14,7 @@ public class PrintTextUtil {
 	}
 
 	private static String getMatchCountMessage(LottoRank lottoRank) {
-		return String.format(MATCH_COUNT_MESSAGE, lottoRank.getMatchNumberCount());
+		return String.format(MATCH_COUNT_MESSAGE, lottoRank.getMatchCount());
 	}
 
 	private static String getBonusBallMessageOrEmpty(LottoRank lottoRank) {
