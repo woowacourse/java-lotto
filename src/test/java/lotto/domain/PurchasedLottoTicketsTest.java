@@ -34,13 +34,13 @@ class PurchasedLottoTicketsTest {
 
 	@ParameterizedTest
 	@ValueSource(ints = {1000, 10000, 50000})
-	void PurchasedLottoTickets(int input) {
+	void of(int input) {
 		// given
 		MockLottoNumberGenerator lottoNumberGenerator = new MockLottoNumberGenerator();
 
 		// when
 		PurchasedLottoTickets result
-				= new PurchasedLottoTickets(new PurchaseMoney(input), lottoNumberGenerator);
+				= PurchasedLottoTickets.of(new PurchaseMoney(input), lottoNumberGenerator);
 
 		// then
 		List<SerialLottoNumber> expected = new ArrayList<>();

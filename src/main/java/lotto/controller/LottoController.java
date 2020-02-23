@@ -13,12 +13,12 @@ public class LottoController {
 		OutputView.printPurchasedLottoTicketsCount(purchaseMoney);
 
 		PurchasedLottoTickets purchasedLottoTickets
-				= new PurchasedLottoTickets(purchaseMoney, new RandomLottoNumbersGenerator());
+				= PurchasedLottoTickets.of(purchaseMoney, new RandomLottoNumbersGenerator());
 		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 
 		WinningInformation winningInformation = createWinningInformation();
 
-		LottoResult lottoResult = new LottoResult(purchasedLottoTickets, winningInformation);
+		LottoResult lottoResult = LottoResult.of(purchasedLottoTickets, winningInformation);
 		OutputView.printLottoResult(lottoResult);
 
 		OutputView.printEarningRate(lottoResult.calculateEarningRate(purchaseMoney));

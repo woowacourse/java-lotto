@@ -13,12 +13,8 @@ public class PurchasedLottoTickets {
 		this.purchasedLottoTickets = Collections.unmodifiableList(purchasedLottoTickets);
 	}
 
-	public PurchasedLottoTickets(PurchaseMoney purchaseMoney, RandomGenerator randomGenerator) {
-		this(generatePurchasedLottoTickets(purchaseMoney, randomGenerator));
-	}
-
-	private static List<SerialLottoNumber> generatePurchasedLottoTickets(PurchaseMoney purchaseMoney,
-																		 RandomGenerator randomGenerator) {
+	public static PurchasedLottoTickets of(PurchaseMoney purchaseMoney,
+										   RandomGenerator randomGenerator) {
 		List<SerialLottoNumber> purchasedLottoTickets = new ArrayList<>();
 
 		for (int i = 0; i < purchaseMoney.countPurchasedTickets(); i++) {
@@ -26,7 +22,7 @@ public class PurchasedLottoTickets {
 					SerialLottoNumberFactory.createRandomLottoTicket(randomGenerator));
 		}
 
-		return purchasedLottoTickets;
+		return new PurchasedLottoTickets(purchasedLottoTickets);
 	}
 
 	public List<WinningType> findMatchingWinningTypesWith(WinningInformation winningInformation) {
