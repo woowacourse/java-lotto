@@ -65,3 +65,4 @@ public class LottoFactory {
         return new WinningLotto(lottoTicket, lottoNumber);
     }
 }
+

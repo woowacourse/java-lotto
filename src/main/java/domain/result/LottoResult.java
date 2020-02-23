@@ -7,6 +7,7 @@ import java.util.List;
 public class LottoResult {
 
     private static final int HUNDRED_PERCENTAGE = 100;
+
     private List<Rank> ranks;
 
     public LottoResult(List<Rank> ranks) {
