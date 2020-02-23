@@ -8,9 +8,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 @SuppressWarnings("NonAsciiCharacters")
 public class WinningPrizeTest {
 	@ParameterizedTest
-	@CsvSource(value = {"6,false,1등", "5,true,2등(보너스볼 일치)", "3,true,5등", "2,false,미당첨"})
+	@CsvSource(value = {"6,false,FIRST", "5,true,SECOND", "3,true,FIFTH", "2,false,NO_PRIZE"})
 	void 등수_확인(int matchCount, boolean bonusMatch, String expected) {
 		WinningPrize prize = WinningPrize.of(matchCount, bonusMatch);
-		assertEquals(expected, prize.getPrizeDescription());
+		assertEquals(expected, prize.name());
 	}
 }
