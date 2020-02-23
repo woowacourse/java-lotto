@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * @author K.S.KIM
  * @since 2020/02/19
  */
-public class RandomLottosFactory implements LottoGeneratable {
+public class AutoLottoTicketFactory implements LottoGeneratable {
 	private static final Random RANDOM = new Random();
 
 	@Override

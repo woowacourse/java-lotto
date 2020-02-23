@@ -20,15 +20,15 @@ import lotto.view.OutputView;
  * @since 2020/02/23
  */
 public class LottoGame {
-	private final LottoGeneratable lottosFactory;
+	private final LottoGeneratable lottoTicketFactory;
 
-	public LottoGame(LottoGeneratable lottosFactory) {
-		this.lottosFactory = Objects.requireNonNull(lottosFactory);
+	public LottoGame(LottoGeneratable lottoTicketFactory) {
+		this.lottoTicketFactory = Objects.requireNonNull(lottoTicketFactory);
 	}
 
 	public void run() {
 		Money purchaseMoney = new Money(InputView.inputLottoMoney());
-		LottoTicket lottoTicket = lottosFactory.generate(purchaseMoney);
+		LottoTicket lottoTicket = lottoTicketFactory.generate(purchaseMoney);
 		OutputView.printLottos(lottoTicket);
 
 		WinningLotto winningLotto = generateWinningLotto();
