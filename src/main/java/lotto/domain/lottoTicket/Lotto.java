@@ -19,14 +19,14 @@ public class Lotto {
         this.lottoNumbers = numbers;
     }
 
-    static void validateDuplication(List<LottoNumber> numbers) {
+    private void validateDuplication(List<LottoNumber> numbers) {
         LinkedHashSet<LottoNumber> duplicationNumbers = new LinkedHashSet<>(numbers);
         if (duplicationNumbers.size() != numbers.size()) {
             throw new DuplicationLottoException();
         }
     }
 
-    static void validateSize(List<LottoNumber> numbers) {
+    private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new InvalidSizeLottoException(numbers.size());
         }

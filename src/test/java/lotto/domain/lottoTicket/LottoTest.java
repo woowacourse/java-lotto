@@ -29,9 +29,9 @@ public class LottoTest {
         List<LottoNumber> input1 = ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 5");
         List<LottoNumber> input2 = ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 6");
 
-        assertThatThrownBy(() -> Lotto.validateDuplication(input1))
+        assertThatThrownBy(() -> new Lotto(input1))
                 .isInstanceOf(DuplicationLottoException.class);
-        assertThatCode(() -> Lotto.validateDuplication(input2))
+        assertThatCode(() -> new Lotto(input2))
                 .doesNotThrowAnyException();
     }
 
@@ -40,7 +40,7 @@ public class LottoTest {
     void validateSizeTest() {
         List<LottoNumber> input = ConvertInput.convertLottoNumbers("1, 2, 3, 4, 5, 6, 7");
 
-        assertThatThrownBy(() -> Lotto.validateSize(input))
+        assertThatThrownBy(() -> new Lotto(input))
                 .isInstanceOf(InvalidSizeLottoException.class);
     }
 

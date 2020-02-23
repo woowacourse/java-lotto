@@ -15,7 +15,7 @@ public class WinningLotto extends Lotto {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    void validateBonusNumberDuplication(int bonusNumber) {
+    private void validateBonusNumberDuplication(int bonusNumber) {
         if (lottoNumbers.contains(new LottoNumber(bonusNumber))) {
             throw new InvalidBonusNumberException();
         }
