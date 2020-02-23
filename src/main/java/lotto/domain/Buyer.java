@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lottoTicket.Lotto;
-import lotto.domain.lottoTicket.LottoFactory;
+import lotto.domain.lottoTicket.LottoNumberFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +14,9 @@ public class Buyer {
     }
 
     private void createLottos(int lottoTicketCount) {
-        new LottoFactory();
+        new LottoNumberFactory();
         for (int i = 0; i < lottoTicketCount; i++) {
-            this.lottos.add(new Lotto(LottoFactory.createLottoNumbers()));
+            this.lottos.add(new Lotto(LottoNumberFactory.createLottoNumbers()));
         }
     }
 

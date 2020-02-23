@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoFactory {
+/**
+ * 로또번호 6자리를 생성하는 객체
+ */
+
+public class LottoNumberFactory {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_LENGTH = 6;
 
     private static List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoFactory() {
+    public LottoNumberFactory() {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }

@@ -7,13 +7,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoFactoryTest {
+public class LottoNumberFactoryTest {
 
     @Test
     @DisplayName("로또 번호 생성")
     void createLottoNumbersTest(){
-        new LottoFactory();
-        List<LottoNumber> lotto = LottoFactory.createLottoNumbers();
+        new LottoNumberFactory();
+        List<LottoNumber> lotto = LottoNumberFactory.createLottoNumbers();
         assertThat(lotto.size()).isEqualTo(6);
     }
 }
