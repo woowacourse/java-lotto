@@ -6,27 +6,29 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class PurchaseMoneyTest {
+import java.math.BigInteger;
+
+public class MoneyTest {
 	@Test
 	void PurchaseMoney() {
 		// given
-		int input = 1000;
+		String input = "1000";
 
 		// when
-		PurchaseMoney purchaseMoney = new PurchaseMoney(1000);
+		Money purchaseMoney = new Money(new BigInteger(input));
 
 		// then
 		Assertions.assertThat(purchaseMoney.getMoney())
-				.isEqualTo(1000);
+				.isEqualTo(new BigInteger("1000"));
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, -1, -5, Integer.MIN_VALUE})
+	@ValueSource(ints = {-1, -5, Integer.MIN_VALUE})
 	void PurchaseMoney_LessOrEqualThanZero_ShouldThrowException(int input) {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
-			new PurchaseMoney(input);
+			new Money(new BigInteger(Integer.toString(input)));
 		}).isInstanceOf(PurchaseMoneyIllegalArgumentException.class)
 				.hasMessageMatching("-?[0-9]+" + PurchaseMoneyIllegalArgumentException.MESSAGE);
 	}
@@ -37,7 +39,7 @@ public class PurchaseMoneyTest {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
-			new PurchaseMoney(input);
+			new Money(new BigInteger(Integer.toString(input)));
 		}).isInstanceOf(PurchaseMoneyIllegalArgumentException.class)
 				.hasMessageMatching("-?[0-9]+" + PurchaseMoneyIllegalArgumentException.MESSAGE);
 	}

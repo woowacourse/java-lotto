@@ -1,14 +1,15 @@
 package lotto.view;
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static int inputPurchaseMoney() {
+	public static BigInteger inputPurchaseMoney() {
 		System.out.println("구입 금액을 입력해 주세요.");
 		try {
-			return Integer.parseInt(scanner.nextLine());
+			return new BigInteger(scanner.nextLine());
 		} catch (NumberFormatException e) {
 			return inputPurchaseMoney();
 		}

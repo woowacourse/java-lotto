@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,11 +14,13 @@ public class PurchasedLottoTickets {
 		this.purchasedLottoTickets = Collections.unmodifiableList(purchasedLottoTickets);
 	}
 
-	public static PurchasedLottoTickets of(PurchaseMoney purchaseMoney,
+	public static PurchasedLottoTickets of(Money purchaseMoney,
 										   RandomGenerator randomGenerator) {
 		List<SerialLottoNumber> purchasedLottoTickets = new ArrayList<>();
 
-		for (int i = 0; i < purchaseMoney.countPurchasedTickets(); i++) {
+		for (BigInteger i = BigInteger.ZERO;
+			 i.compareTo(purchaseMoney.countPurchasedTickets()) < 0;
+			 i = i.add(BigInteger.ONE)) {
 			purchasedLottoTickets.add(
 					SerialLottoNumberFactory.createRandomLottoTicket(randomGenerator));
 		}

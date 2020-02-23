@@ -1,20 +1,21 @@
 package lotto.domain;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public enum WinningType {
-	FIRST_PLACE(6, BonusType.NO_MATTER, 2000000000),
-	SECOND_PLACE(5, BonusType.TRUE, 30000000),
-	THIRD_PLACE(5, BonusType.FALSE, 1500000),
-	FOURTH_PLACE(4, BonusType.NO_MATTER, 50000),
-	FIFTH_PLACE(3, BonusType.NO_MATTER, 5000),
-	NONE(-1, BonusType.NO_MATTER, 0);
+	FIRST_PLACE(6, BonusType.NO_MATTER, new BigInteger(Integer.toString(2_000_000_000))),
+	SECOND_PLACE(5, BonusType.TRUE, new BigInteger(Integer.toString(30_000_000))),
+	THIRD_PLACE(5, BonusType.FALSE, new BigInteger(Integer.toString(1_500_000))),
+	FOURTH_PLACE(4, BonusType.NO_MATTER, new BigInteger(Integer.toString(50_000))),
+	FIFTH_PLACE(3, BonusType.NO_MATTER, new BigInteger(Integer.toString(5_000))),
+	NONE(-1, BonusType.NO_MATTER, new BigInteger(Integer.toString(0)));
 
 	private int sameNumberCount;
 	private BonusType bonusType;
-	private int winningAmount;
+	private BigInteger winningAmount;
 
-	WinningType(int sameNumberCount, BonusType bonusType, int winningAmount) {
+	WinningType(int sameNumberCount, BonusType bonusType, BigInteger winningAmount) {
 		this.sameNumberCount = sameNumberCount;
 		this.bonusType = bonusType;
 		this.winningAmount = winningAmount;
@@ -36,15 +37,15 @@ public enum WinningType {
 		return this != NONE;
 	}
 
-	public double calculateEarning(int num) {
-		return winningAmount * num;
+	public BigInteger calculateEarning(int num) {
+		return winningAmount.multiply(new BigInteger(Integer.toString(num)));
 	}
 
 	public int getSameNumberCount() {
 		return sameNumberCount;
 	}
 
-	public int getWinningAmount() {
+	public BigInteger getWinningAmount() {
 		return winningAmount;
 	}
 }
