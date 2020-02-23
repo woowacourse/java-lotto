@@ -1,21 +1,21 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoNumberBundle {
-    private static List<Integer> lottoNumberBundle;
+    private static List<LottoNumber> lottoNumberBundle;
 
     private LottoNumberBundle() {}
 
     static {
-        lottoNumberBundle = IntStream.rangeClosed(1, 45)
-                .boxed()
-                .collect(Collectors.toList());
+        lottoNumberBundle = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            lottoNumberBundle.add(new LottoNumber(i));
+        }
     }
 
-    public static boolean contains(int number) {
-        return lottoNumberBundle.contains(number);
+    public static boolean contains(LottoNumber lottoNumber) {
+        return lottoNumberBundle.contains(lottoNumber);
     }
 }
