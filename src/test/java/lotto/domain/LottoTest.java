@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,7 +35,7 @@ public class LottoTest {
 	@DisplayName("로또가 null이나 빈값인 경우")
 	void checkIfLottoIsNullOrEmpty(List<Integer> value) {
 		assertThatThrownBy(() -> new Lotto(value))
-				.isInstanceOf(IllegalArgumentException.class)
+				.isInstanceOf(LottoException.class)
 				.hasMessageContaining("null이나 빈 값");
 	}
 
@@ -42,7 +43,7 @@ public class LottoTest {
 	@DisplayName("숫자가 중복되는 경우")
 	void checkDuplicateNumber() {
 		assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5)))
-				.isInstanceOf(IllegalArgumentException.class)
+				.isInstanceOf(LottoException.class)
 				.hasMessageContaining("중복");
 	}
 
@@ -51,7 +52,7 @@ public class LottoTest {
 	@DisplayName("로또 공 갯수가 맞지 않는 경우")
 	void checkLottoBallAmountMismatch(List<Integer> value) {
 		assertThatThrownBy(() -> new Lotto(value))
-				.isInstanceOf(IllegalArgumentException.class)
+				.isInstanceOf(LottoException.class)
 				.hasMessageContaining("개여야 합니다");
 	}
 

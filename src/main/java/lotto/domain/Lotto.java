@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.LottoDto;
+import lotto.exception.LottoException;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -25,19 +26,19 @@ public class Lotto {
 
 	private void validateNullAndEmpty(List<Integer> lottoNumber) {
 		if (lottoNumber == null || lottoNumber.isEmpty()) {
-			throw new IllegalArgumentException("null이나 빈 값은 들어올 수 없습니다!");
+			throw new LottoException("null이나 빈 값은 들어올 수 없습니다!");
 		}
 	}
 
 	private void validateSizeMismatch(List<Integer> lottoNumber) {
 		if (lottoNumber.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException("로또 번호는 " + LOTTO_SIZE + "개여야 합니다!");
+			throw new LottoException("로또 번호는 " + LOTTO_SIZE + "개여야 합니다!");
 		}
 	}
 
 	private void validateDuplicateNumber(List<Integer> lottoNumber) {
 		if (lottoNumber.size() != new HashSet<>(lottoNumber).size()) {
-			throw new IllegalArgumentException("중복된 번호가 존재합니다!");
+			throw new LottoException("중복된 번호가 존재합니다!");
 		}
 	}
 

@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.dto.LottoCountDto;
+import lotto.exception.LottoException;
 import lotto.utils.InputUtil;
 import lotto.view.OutputView;
 
@@ -34,7 +35,7 @@ public class LottoController {
 
 			OutputView.printLottoCount(lottoCountDto.getLottoCount());
 			return new Lottos(lottoMachine.makeRandomLottos(lottoCountDto));
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException | LottoException e) {
 			OutputView.printExceptionMessage(e);
 			return buyLottos();
 		}
