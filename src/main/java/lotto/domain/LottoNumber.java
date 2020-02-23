@@ -11,13 +11,16 @@ import java.util.*;
  * 날짜 : 2020/02/21
  */
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int MINIMUM_LOTTO_NUMBER = 1;
+    public static final int MAXIMUM_LOTTO_NUMBER = 45;
+
     private static final List<LottoNumber> CACHE;
 
     private final int lottoNumber;
 
     static {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
         CACHE = Collections.unmodifiableList(lottoNumbers);

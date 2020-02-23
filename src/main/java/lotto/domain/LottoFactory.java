@@ -25,8 +25,8 @@ public class LottoFactory {
 
         List<Integer> randomLottoNumbers = RandomUtils.getRandomIntList(
             Lotto.LOTTO_LENGTH,
-            Lotto.MINIMUM_LOTTO_NUMBER,
-            Lotto.MAXIMUM_LOTTO_NUMBER
+            LottoNumber.MINIMUM_LOTTO_NUMBER,
+            LottoNumber.MAXIMUM_LOTTO_NUMBER
         );
         return lottoCreator.create(randomLottoNumbers);
     }

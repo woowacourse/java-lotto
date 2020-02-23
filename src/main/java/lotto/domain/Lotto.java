@@ -12,10 +12,7 @@ import java.util.stream.Collectors;
  * 날짜 : 2020/02/19
  */
 public class Lotto {
-
 	public static final int LOTTO_LENGTH = 6;
-	public static final int MINIMUM_LOTTO_NUMBER = 1;
-	public static final int MAXIMUM_LOTTO_NUMBER = 45;
 
 	protected final List<LottoNumber> lottoNumbers;
 
