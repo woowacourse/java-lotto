@@ -7,14 +7,12 @@ import java.util.*;
 
 public class LottoResult {
     private static final int RATE = 100;
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
 
     private Map<WinningValue, Integer> lottoResult = new LinkedHashMap<>();
 
     public LottoResult() {
         Arrays.stream(WinningValue.values())
-                .forEach(winningValue -> this.lottoResult.put(winningValue, ZERO));
+                .forEach(winningValue -> this.lottoResult.put(winningValue, 0));
     }
 
     public void calculateLottoResult(List<Lotto> lottos, WinningLotto winningLotto) {
@@ -30,7 +28,7 @@ public class LottoResult {
     }
 
     private void putWinningResult(WinningValue winningValue) {
-        lottoResult.put(winningValue, lottoResult.get(winningValue) + ONE);
+        lottoResult.put(winningValue, lottoResult.get(winningValue) + 1);
     }
 
     public int calculateRewardRate(int money, Map<WinningValue, Integer> winningValueResult) {
