@@ -44,7 +44,7 @@ public class Lotto {
 		Set<Integer> concatenatedSet = new HashSet<>(lottoNumber);
 		concatenatedSet.addAll(winningNumber.getWinningNumber());
 
-		int matchCount = (lottoNumber.size() * 2) - concatenatedSet.size();
+		int matchCount = (LOTTO_SIZE * 2) - concatenatedSet.size();
 		boolean bonusMatch = lottoNumber.contains(winningNumber.getBonusNumber());
 
 		return WinningPrize.of(matchCount, bonusMatch);
