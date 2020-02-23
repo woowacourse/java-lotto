@@ -14,7 +14,7 @@ public class Money {
 
     static void validateMoney(int money) {
         if (money < LOTTO_PRICE) {
-            throw new InvalidMoneyException();
+            throw new InvalidMoneyException(money);
         }
     }
 
