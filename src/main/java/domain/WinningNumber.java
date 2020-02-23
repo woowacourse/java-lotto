@@ -13,7 +13,8 @@ public class WinningNumber {
             winningNumbers.add(new LottoNumber(number));
         }
         this.winningNumbers = new Lotto(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        checkNotNumber(bonusNumber);
+        this.bonusNumber = AllLottoNumbers.get(Integer.parseInt(bonusNumber));
         checkDuplicatedLottoNumber();
     }
 
@@ -45,6 +46,14 @@ public class WinningNumber {
     private void checkDuplicatedLottoNumber() {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
+        }
+    }
+
+    private void checkNotNumber(final String number) {
+        try {
+            Integer.parseInt(number);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(String.format("보너스 넘버는 숫자여야 합니다. 입력한 문자 : %s", number));
         }
     }
 }

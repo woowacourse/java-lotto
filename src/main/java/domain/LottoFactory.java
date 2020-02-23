@@ -1,16 +1,20 @@
 package domain;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoFactory {
 
-    public static final int START_INDEX = 0;
-    public static final int LAST_INDEX = 6;
+    public static final int LOTTO_SIZE = 6;
 
     public static Lotto createOneLotto() {
-        List<LottoNumber> allLottoNumbers = AllLottoNumbers.getAllLottoNumbers();
-        Collections.shuffle(allLottoNumbers);
-        return new Lotto(allLottoNumbers.subList(START_INDEX, LAST_INDEX));
+        List<Integer> keys = AllLottoNumbers.getLottoNumbersKeySet();
+        Collections.shuffle(keys);
+        List<LottoNumber> lotto = keys.stream()
+                                    .limit(LOTTO_SIZE)
+                                    .map(AllLottoNumbers::get)
+                                    .collect(toList());
+        return new Lotto(lotto);
     }
 }
