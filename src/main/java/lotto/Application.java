@@ -6,32 +6,29 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Application {
-    private static PaidPrice paidPrice;
-    private static Lottos lottos;
-    private static WinningLotto winningLotto;
-
     public static void main(String args[]) {
-        initUserLottos();
-        initWinnerLotto();
+        Lottos lottos = initUserLottos();
+        WinningLotto winningLotto = initWinnerLotto();
 
         ResultsDTO resultsDTO = ResultCalculator.getResults(lottos, winningLotto);
 
         OutputView.printResults(resultsDTO);
     }
 
-    private static void initUserLottos() {
-        paidPrice = new PaidPrice(InputView.getPayment());
+    private static Lottos initUserLottos() {
+        PaidPrice paidPrice = new PaidPrice(InputView.getPayment());
         OutputView.printLottoCount(paidPrice);
 
-        lottos = new Lottos(LottoGenerator.createLottos(paidPrice));
+        Lottos lottos = new Lottos(LottoGenerator.createLottos(paidPrice));
         OutputView.printLottiesNumbers(lottos);
+        return lottos;
     }
 
-    private static void initWinnerLotto() {
+    private static WinningLotto initWinnerLotto() {
         String winningNumberInputByUser = InputView.getWinningLottoNumbers();
         String bonusNumberInputByUser = InputView.getBonusNumber();
-        winningLotto =
+        WinningLotto winningLotto =
                 LottoGenerator.createWinningLottoByUserInput(winningNumberInputByUser, bonusNumberInputByUser);
-
+        return winningLotto;
     }
 }
