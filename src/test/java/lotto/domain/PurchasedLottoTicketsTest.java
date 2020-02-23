@@ -1,13 +1,11 @@
 package lotto.domain;
 
+import lotto.domain.LottoTicketFactory.TestLottoTicketFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class PurchasedLottoTicketsTest {
 	@Test
@@ -31,4 +29,25 @@ class PurchasedLottoTicketsTest {
 				.isEqualTo(purchasedLottoTickets);
 	}
 
+	@Test
+	void of() {
+		// when
+		WinningLottoNumbers winningLottoNumbers
+				= new WinningLottoNumbers(SerialLottoNumber.of("1,2,3,4,5,6"), new LottoNumber(7));
+
+		PurchasedLottoTickets purchasedLottoTickets = PurchasedLottoTickets.of(
+				new PurchaseMoney(14000), new TestLottoTicketFactory());
+
+		LottoResult result = LottoResult.of(purchasedLottoTickets, winningLottoNumbers);
+
+		// then
+		Map<WinningType, Integer> expected = new HashMap<>();
+		for (WinningType key : WinningType.values()) {
+			expected.put(key, 0);
+		}
+		expected.put(WinningType.FIRST_PLACE, 14);
+
+		Assertions.assertThat(result.getLottoResult())
+				.isEqualTo(expected);
+	}
 }

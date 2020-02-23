@@ -23,7 +23,7 @@ public class LottoController {
 			PurchaseMoney purchaseMoney,
 			PurchasedLottoTickets purchasedLottoTickets,
 			WinningLottoNumbers winningLottoNumbers) {
-		LottoResult lottoResult = LottoResultFactory.create(purchasedLottoTickets, winningLottoNumbers);
+		LottoResult lottoResult = LottoResult.of(purchasedLottoTickets, winningLottoNumbers);
 		OutputView.printLottoResult(lottoResult);
 		OutputView.printEarningRate(lottoResult.calculateEarningPercentage(purchaseMoney));
 	}
@@ -32,7 +32,7 @@ public class LottoController {
 			PurchaseMoney purchaseMoney) {
 
 		PurchasedLottoTickets purchasedLottoTickets
-				= PurchasedLottoTicketsFactory.create(purchaseMoney,
+				= PurchasedLottoTickets.of(purchaseMoney,
 				new RandomLottoTicketFactory());
 		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 		return purchasedLottoTickets;

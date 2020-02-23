@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.LottoTicketFactory.LottoTicketFactory;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -10,6 +13,18 @@ public class PurchasedLottoTickets {
 
 	public PurchasedLottoTickets(final List<SerialLottoNumber> purchasedLottoTickets) {
 		this.purchasedLottoTickets = Collections.unmodifiableList(purchasedLottoTickets);
+	}
+
+	public static PurchasedLottoTickets of(PurchaseMoney purchaseMoney,
+											   LottoTicketFactory LottoTicketFactory) {
+		List<SerialLottoNumber> purchasedLottoTickets = new ArrayList<>();
+
+		int count = purchaseMoney.countPurchasedTickets();
+		for (int i = 0; i < count; i++) {
+			purchasedLottoTickets.add(LottoTicketFactory.createLottoTicket());
+		}
+
+		return new PurchasedLottoTickets(purchasedLottoTickets);
 	}
 
 	public List<SerialLottoNumber> getPurchasedLottoTickets() {
