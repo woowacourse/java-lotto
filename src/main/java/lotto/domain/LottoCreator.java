@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 /**
- * 클래스 이름 : LottoCreator.java
+ * LottoCreator 인터페이스
  *
  * @author 토니, 히히
  * @version 1.0

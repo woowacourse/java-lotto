@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 클래스 이름 : .java
+ * 로또를 상속받은 구매한 로또 객체, 우승한 로또/ 보너스 번호와 구매한 로또 객체를 비교해서 등수를 얻을 수 있다
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/19

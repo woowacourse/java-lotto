@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 클래스 이름 : LottoFactory.java
+ * 로또 타입에 맞는 로또를 생성해주는 팩토리, 예외처리 포함
  *
  * @author 토니, 히히
  * @version 1.0

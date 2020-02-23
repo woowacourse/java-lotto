@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 클래스 이름 : .java
+ * Lotto들을 List형태로 가지고 있는 일급 컬랙션
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/19

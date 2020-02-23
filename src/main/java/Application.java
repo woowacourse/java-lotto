@@ -1,9 +1,9 @@
 import lotto.controller.LottoController;
 
 /**
- * 클래스 이름 : .java
+ * 로또 어플리케이션의 메인
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/18

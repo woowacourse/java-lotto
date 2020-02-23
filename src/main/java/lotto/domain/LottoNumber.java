@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.*;
 
 /**
- * 클래스 이름 : .java
+ * 지정된 범위의 로또 번호를 캐시로 가지고 있는 클래스
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/21

@@ -1,9 +1,9 @@
 package lotto.domain;
 
 /**
- * 클래스 이름 : .java
+ * 로또를 위한 돈과 관련된 커스텀 예외
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/22

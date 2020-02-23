@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 클래스 이름 : .java
+ * 로또 결과를 Map 형태로 포함하는 객체
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/20
@@ -58,6 +58,7 @@ public class ResultStatistic {
 		for (Rank rank : Rank.values()) {
 			totalRevenue += results.get(rank) * rank.getReward();
 		}
+
 		return totalRevenue;
 	}
 

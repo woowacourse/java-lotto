@@ -8,9 +8,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * 클래스 이름 : .java
+ * 사용자가 입력한 문자열을 나눠주는 유틸, 나눠서 LottoNumber 리스트로 반환하는 메서드가 있다
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/20

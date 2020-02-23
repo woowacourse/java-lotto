@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 클래스 이름 : LottosFactory.java
+ * Lottos를 만드는 팩토리
  *
  * @author 토니, 히히
  * @version 1.0

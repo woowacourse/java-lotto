@@ -7,7 +7,7 @@ import lotto.view.OutputView;
 import lotto.domain.LottoFactory;
 
 /**
- * 클래스 이름 : LottoController.java
+ * 로또 실행을 담당, View와 Domain을 연결, 예외처리 담당
  *
  * @author 토니, 히히
  * @version 1.0

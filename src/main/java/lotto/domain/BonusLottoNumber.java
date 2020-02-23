@@ -1,7 +1,7 @@
 package lotto.domain;
 
 /**
- * 클래스 이름 : BonusLottoNumber.java
+ * LottoNumber의 하위 클래스로서 사용자가 입력하는 보너스 로또 번호 클래스
  *
  * @author 토니, 히히
  * @version 1.0

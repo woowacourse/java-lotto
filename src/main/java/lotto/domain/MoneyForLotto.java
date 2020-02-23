@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.Objects;
 
 /**
- * 클래스 이름 : .java
+ * 로또를 위한 돈을 래핑한 객체, 예외를 던진다
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/19

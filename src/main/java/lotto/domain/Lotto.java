@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 클래스 이름 : Lotto.java
+ * 6개의 로또 번호를 가지고 있는 로또 클래스
  *
  * @author 토니, 히히
  * @version 1.0

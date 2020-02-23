@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.List;
 
 /**
- * 클래스 이름 : .java
+ * 로또를 상속받은 우승로또, 사용자로부터 입력을 받은대로 생성
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/19
