@@ -11,9 +11,9 @@ public enum Statistic {
 	SIX(6, 2_000_000_000);
 
 	private final int matchingNumbers;
-	private final double prize;
+	private final int prize;
 
-	Statistic(int matchingNumbers, double prize) {
+	Statistic(int matchingNumbers, int prize) {
 		this.matchingNumbers = matchingNumbers;
 		this.prize = prize;
 	}
@@ -28,7 +28,7 @@ public enum Statistic {
 		return matchingNumbers;
 	}
 
-	public double getPrize() {
+	public int getPrize() {
 		return prize;
 	}
 }

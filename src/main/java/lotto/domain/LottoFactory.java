@@ -42,11 +42,9 @@ public class LottoFactory {
 	 * @return Lottos
 	 */
 	public static Lottos create(int count) {
-		List<Number> numbers = Number.getNumbers();
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			Collections.shuffle(numbers);
-			lottos.add(new Lotto(numbers.subList(LOWER_BOUND, UPPER_BOUND)));
+			lottos.add(create());
 		}
 		return new Lottos(lottos);
 	}
