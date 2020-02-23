@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class PaidPrice {
-    private static final int MONEY_PER_LOTTO = 1000;
+    private static final String EMPTY_INPUT_MSG = "가격을 입력하지 않았습니다.";
     private static final String PRICE_PER_LOTTO_ERROR_MSG = "가격은 1000원 단위로 입력해야 합니다.";
     private static final String UNDER_LOTTO_PRICE_MSG = "1000원 이상으로 입력해야 합니다.";
     private static final String NOT_NUMBER_MSG = "정수로 입력하셔야 합니다.";
@@ -25,13 +25,13 @@ public class PaidPrice {
     }
 
     private void validatePricePerLotto(int inputMoney) {
-        if (inputMoney % MONEY_PER_LOTTO != 0) {
+        if (inputMoney % Lottos.PRICE_PER_LOTTO != 0) {
             throw new IllegalArgumentException(PRICE_PER_LOTTO_ERROR_MSG);
         }
     }
 
     private void validateUnderLottoPrice(int inputMoney) {
-        if (inputMoney < MONEY_PER_LOTTO) {
+        if (inputMoney < Lottos.PRICE_PER_LOTTO) {
             throw new IllegalArgumentException(UNDER_LOTTO_PRICE_MSG);
         }
     }
@@ -41,6 +41,6 @@ public class PaidPrice {
     }
 
     public int getLottoCount() {
-        return payment / MONEY_PER_LOTTO;
+        return payment / Lottos.PRICE_PER_LOTTO;
     }
 }

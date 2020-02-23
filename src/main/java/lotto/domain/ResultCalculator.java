@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultCalculator {
-    private static final int MONEY_PER_LOTTO = 1000;
-
     public static ResultsDTO getResults(Lottos lottos, WinningLotto winningLotto) {
         List<WinningInfo> results = calculateResults(lottos, winningLotto);
         long totalEarning = getTotalEarning(results);
@@ -24,15 +22,15 @@ public class ResultCalculator {
         return results;
     }
 
-    public static long getTotalEarning(List<WinningInfo> results) {
+    public static long computeTotalEarning(List<WinningInfo> results) {
         return results.stream()
                 .map(WinningInfo::getWinningPrice)
                 .mapToLong(Integer::intValue)
                 .sum();
     }
 
-    public static long getEarningRate(long totalEarning, int lottoSize) {
-        return totalEarning / (lottoSize * MONEY_PER_LOTTO);
+    public static long computeEarningRate(long totalEarning, int lottoCount) {
+        return totalEarning / (lottoCount * Lottos.PRICE_PER_LOTTO);
     }
 
 }
