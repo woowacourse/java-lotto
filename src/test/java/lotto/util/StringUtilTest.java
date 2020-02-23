@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@SuppressWarnings("NonAsciiCharacters")
 public class StringUtilTest {
 	@ParameterizedTest
 	@CsvSource(value = {"6, 8, 0 :6,8,0", "1,  3,   4 :1,3,4"}, delimiter = ':')

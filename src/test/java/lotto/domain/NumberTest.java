@@ -2,6 +2,9 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,6 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.exception.InvalidNumberException;
 
+@SuppressWarnings("NonAsciiCharacters")
 public class NumberTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"1", "45", "33"})
@@ -52,5 +56,10 @@ public class NumberTest {
 			Number.of(null);
 		}).isInstanceOf(InvalidNumberException.class)
 			.hasMessageMatching("Null문자열은 사용이 불가능합니다.");
+	}
+
+	@Test
+	void toStringTest() {
+		assertThat(Number.of("3").toString()).isEqualTo("3");
 	}
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Optional;
+
 import lotto.domain.result.Statistic;
 import lotto.exception.InvalidWinningLottoException;
 
@@ -15,14 +17,14 @@ public class WinningLotto {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public Statistic isWinningLotto(Lotto lotto) throws Exception {
+	public Optional<Statistic> isWinningLotto(Lotto lotto) {
 		int numberOfMatch = lotto.compare(winningNumbers);
 		if (checkSecond(lotto, numberOfMatch))
-			return Statistic.BONUS;
+			return Optional.of(Statistic.BONUS);
 		return Statistic.getRank(numberOfMatch);
 	}
 
-	private boolean checkSecond(Lotto lotto, int numberOfMatch) {
+	public boolean checkSecond(Lotto lotto, int numberOfMatch) {
 		return numberOfMatch == SECOND && lotto.contains(bonusNumber);
 	}
 

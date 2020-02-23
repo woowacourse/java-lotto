@@ -1,10 +1,10 @@
 package lotto.view;
 
-import java.util.List;
-
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.result.GameResult;
 import lotto.domain.result.GameResultDto;
+import lotto.domain.result.RankCount;
 import lotto.domain.result.Statistic;
 
 public class OutputView {
@@ -21,43 +21,44 @@ public class OutputView {
 
 	public static void printResult(GameResultDto gameResult) {
 		System.out.println("당첨 통계 \n ==============");
-		printRank(gameResult.getStatistics());
+		printRank(gameResult.getGameResult());
 		printProfit(gameResult.getProfit());
 	}
 
-	private static void printRank(List<Statistic> statistics) {
-		for (Statistic statistic : statistics) {
-			printEachRank(statistic);
+	private static void printRank(GameResult gameResult) {
+		for (RankCount rankCount : gameResult.getResult()) {
+			printEachRank(rankCount);
 		}
 	}
 
-	private static void printEachRank(Statistic statistic) {
+	private static void printEachRank(RankCount rankCount) {
 		StringBuilder sb = new StringBuilder();
-		if (checkBonus(statistic))
+		Statistic statistic = rankCount.getStatistic();
+		if (checkBonus(rankCount))
 			return;
 		sb.append(statistic.getMatchingNumbers())
 			.append("개 일치 (")
 			.append(statistic.getPrize())
 			.append("원) --")
-			.append(statistic.getCount())
+			.append(rankCount.getCount())
 			.append("개");
 		System.out.println(sb.toString());
 	}
 
-	private static void printSecond(Statistic statistic) {
+	private static void printSecond(RankCount rankCount) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(statistic.getMatchingNumbers())
+		sb.append(rankCount.getStatistic().getMatchingNumbers())
 			.append("개 일치, 보너스 볼 일치 (")
-			.append(statistic.getPrize())
+			.append(rankCount.getStatistic().getPrize())
 			.append("원) --")
-			.append(statistic.getCount())
+			.append(rankCount.getCount())
 			.append("개");
 		System.out.println(sb.toString());
 	}
 
-	private static boolean checkBonus(Statistic statistic) {
-		if (Statistic.BONUS == statistic) {
-			printSecond(statistic);
+	private static boolean checkBonus(RankCount rankCount) {
+		if (Statistic.BONUS == rankCount.getStatistic()) {
+			printSecond(rankCount);
 			return true;
 		}
 		return false;

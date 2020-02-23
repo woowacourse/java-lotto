@@ -8,12 +8,14 @@ import java.util.List;
 import lotto.exception.InvalidLottoException;
 
 public class Lotto {
+	public static final int LOTTO_SIZE = 6;
+
 	private final List<Number> numbers;
 
 	public Lotto(List<Number> numbers) {
 		validate(numbers);
-		Collections.sort(numbers);
 		this.numbers = new ArrayList<>(numbers);
+		Collections.sort(this.numbers);
 	}
 
 	private void validate(List<Number> numbers) {
@@ -28,14 +30,15 @@ public class Lotto {
 	}
 
 	private void checkSize(List<Number> numbers) {
-		if (numbers.size() != 6) {
-			throw new InvalidLottoException("로또는 6개의 수를 가져야 합니다.");
+		if (numbers.size() != LOTTO_SIZE) {
+			throw new InvalidLottoException(
+				"로또는 " + LOTTO_SIZE + "개의 수를 가져야 합니다.");
 		}
 	}
 
-	public int compare(Lotto winningNumbers) {
+	public int compare(Lotto anotherLotto) {
 		return (int)numbers.stream()
-			.filter(winningNumbers::contains)
+			.filter(anotherLotto::contains)
 			.count();
 	}
 

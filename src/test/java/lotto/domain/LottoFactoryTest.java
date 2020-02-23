@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+@SuppressWarnings("NonAsciiCharacters")
 class LottoFactoryTest {
 	@Test
 	void 생성_테스트() {
 		assertThat(LottoFactory.create());
-
 	}
 
 	@ParameterizedTest

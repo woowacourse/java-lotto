@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.exception.IllegalMoneyUnitException;
 
+@SuppressWarnings("NonAsciiCharacters")
 public class PurchaseMoneyTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"1500", "3200", "7500"})
@@ -53,7 +54,7 @@ public class PurchaseMoneyTest {
 		assertThatThrownBy(() -> {
 			new PurchaseMoney(value);
 		}).isInstanceOf(IllegalArgumentException.class)
-			.hasMessageMatching("로또는 1000원에서 100,000원 까지만 구입 할 수 있습니다.");
+			.hasMessageMatching("로또는 1000원에서 100000원 까지만 구입 할 수 있습니다.");
 	}
 
 	@ParameterizedTest
@@ -63,4 +64,12 @@ public class PurchaseMoneyTest {
 			new PurchaseMoney(money).parseToPiece()
 		).isEqualTo(expected);
 	}
+
+	@Test
+	void getPurchaseMoney() {
+		assertThat(
+			new PurchaseMoney("5000").getPurchaseMoney()
+		).isEqualTo(5000);
+	}
+
 }

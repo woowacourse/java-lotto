@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import lotto.util.StringUtil;
 
 public class LottoFactory {
-
 	public static final int LOWER_BOUND = 0;
 	public static final int UPPER_BOUND = 6;
 

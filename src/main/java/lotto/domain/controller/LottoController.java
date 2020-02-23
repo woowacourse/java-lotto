@@ -27,6 +27,6 @@ public class LottoController {
 
 	private void createResult(PurchaseMoney money, Lottos lottos, WinningLotto winningLotto) {
 		LottoGame game = new LottoGame(lottos, winningLotto, money);
-		OutputView.printResult(game.getResult());
+		OutputView.printResult(game.getGameResult());
 	}
 }

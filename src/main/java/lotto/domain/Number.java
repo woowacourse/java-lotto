@@ -21,17 +21,13 @@ public class Number implements Comparable<Number> {
 		}
 	}
 
-	public static List<Number> getNumbers() {
-		return new ArrayList<>(numbers.values());
+	private Number(int value) {
+		this.number = value;
 	}
 
 	public static Number of(String number) {
 		validate(number);
 		return numbers.get(Integer.parseInt(number));
-	}
-
-	private Number(int value) {
-		this.number = value;
 	}
 
 	private static void validate(String value) {
@@ -66,6 +62,10 @@ public class Number implements Comparable<Number> {
 		if (Objects.isNull(value)) {
 			throw new InvalidNumberException("Null문자열은 사용이 불가능합니다.");
 		}
+	}
+
+	public static List<Number> getNumbers() {
+		return new ArrayList<>(numbers.values());
 	}
 
 	@Override
