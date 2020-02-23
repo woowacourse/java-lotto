@@ -16,7 +16,7 @@ public class LottoGame {
         OutputView.printLottos(lottoTickets);
 
         WinningNumbers winningNumbers = InputDTO.inputWinningNumbers();
-        List<Rank> ranks = winningNumbers.compareLottos(lottoTickets);
+        List<Rank> ranks = winningNumbers.checkOutLottos(lottoTickets);
         Profit profit = new Profit(purchaseMoney, ranks);
 
         OutputView.printResult(ranks);

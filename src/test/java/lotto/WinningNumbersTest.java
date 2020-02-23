@@ -39,7 +39,7 @@ class WinningNumbersTest {
         LottoTicket lottoTicketForFifthRank = createLottoTicket("1,2,3,4,5,6");
         List<LottoTicket> lottoTickets = Arrays.asList(lottoTicketForFirstRank, lottoTicketForThirdRank, lottoTicketForFifthRank);
 
-        List<Rank> givenRanks = winningNumbers.compareLottos(lottoTickets);
+        List<Rank> givenRanks = winningNumbers.checkOutLottos(lottoTickets);
         List<Rank> expectedRanks = Arrays.asList(Rank.FIRST, Rank.THIRD, Rank.FIFTH);
 
         for (Rank givenRank : givenRanks) {

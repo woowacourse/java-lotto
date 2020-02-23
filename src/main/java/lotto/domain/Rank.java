@@ -27,6 +27,10 @@ public enum Rank {
                 .orElse(LOSE);
     }
 
+    public boolean isValidRank() {
+        return this != LOSE;
+    }
+
     public static Money sumWinningMoney(List<Rank> ranks) {
         Money totalWinningMoney = Money.of(DEFAULT_SUM);
         for (Rank rank : ranks) {

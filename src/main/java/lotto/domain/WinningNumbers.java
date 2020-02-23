@@ -2,8 +2,8 @@ package lotto.domain;
 
 import lotto.exception.WinningNumbersException;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningNumbers {
     private final LottoTicket winningLottoTicket;
@@ -21,22 +21,10 @@ public class WinningNumbers {
         }
     }
 
-    public List<Rank> compareLottos(List<LottoTicket> lottoTickets) {
-        List<Rank> ranks = new ArrayList<>();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            compareLotto(ranks, lottoTicket);
-        }
-        return ranks;
-    }
-
-    private void compareLotto(List<Rank> ranks, LottoTicket lottoTicket) {
-        Rank rank = lottoTicket.compare(winningLottoTicket, bonusNumber);
-        if (isInvalidRank(rank)) {
-            ranks.add(rank);
-        }
-    }
-
-    private boolean isInvalidRank(Rank rank) {
-        return rank != Rank.LOSE;
+    public List<Rank> checkOutLottos(List<LottoTicket> lottoTickets) {
+        return lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.compare(winningLottoTicket, bonusNumber))
+                .filter(Rank::isValidRank)
+                .collect(Collectors.toList());
     }
 }
