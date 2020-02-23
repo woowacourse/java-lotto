@@ -12,7 +12,8 @@ import java.util.List;
  * 날짜 : 2020/02/21
  */
 public class LottosFactory {
-	private LottosFactory() {}
+	private LottosFactory() {
+	}
 
 	public static Lottos createLottosAuto(int amountOfLottos) {
 		List<Lotto> paidLotto = new ArrayList<>();

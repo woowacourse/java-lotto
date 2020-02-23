@@ -10,5 +10,5 @@ package lotto.domain;
  */
 public enum LottoType {
 	PAID_LOTTO,
-	WINNING_LOTTO;
+	WINNING_LOTTO
 }

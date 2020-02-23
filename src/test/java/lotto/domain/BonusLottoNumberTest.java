@@ -28,7 +28,6 @@ public class BonusLottoNumberTest {
 		);
 	}
 
-
 	@Test
 	void BonusLottoNumber_올바른_동작_확인() {
 		BonusLottoNumber bonusLottoNumber = new BonusLottoNumber("7");

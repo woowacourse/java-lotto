@@ -18,7 +18,7 @@ public class ResultStatistic {
 	private Map<Rank, Integer> results;
 
 	private ResultStatistic(final Map<Rank, Integer> input) {
-		results = input;
+		this.results = input;
 	}
 
 	public static ResultStatistic calculate(

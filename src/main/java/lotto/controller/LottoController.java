@@ -4,11 +4,6 @@ import lotto.domain.*;
 import lotto.util.StringUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 import lotto.domain.LottoFactory;
 
 /**
@@ -20,19 +15,17 @@ import lotto.domain.LottoFactory;
  * 날짜 : 2020/02/20
  */
 public class LottoController {
-	private static final String WINNING_LOTTO_NULL_CASE_EXCEPTION_MESSAGE = "WinningLotto는 null일 수 없습니다.";
-
 	public static void run() {
-		MoneyForLotto moneyForLotto = receiveMoneyForLotto(); // TODO 로또 인풋 받는 메서드
+		MoneyForLotto moneyForLotto = receiveMoneyForLotto();
 		int amountOfLottos = moneyForLotto.calculateAmountOfLottos();
 		Lottos lottos = LottosFactory.createLottosAuto(amountOfLottos);
 		OutputView.printPurchasedLottos(amountOfLottos, lottos);
 
-		WinningLotto winningLotto = receiveWinningLotto(); // TODO 결과 뽑는 메서드
+		WinningLotto winningLotto = receiveWinningLotto();
 		BonusLottoNumber bonusLottoNumber = receiveBonusLottoNumber(winningLotto);
 
 		ResultStatistic result = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
-		OutputView.printResultStatistic(result, moneyForLotto); // TODO 여기까지 결과 뽑는 메서드
+		OutputView.printResultStatistic(result, moneyForLotto);
 	}
 
 	private static MoneyForLotto receiveMoneyForLotto() {
@@ -59,7 +52,6 @@ public class LottoController {
 
 	private static BonusLottoNumber receiveBonusLottoNumber(WinningLotto winningLotto) {
 		try {
-			Objects.requireNonNull(winningLotto, WINNING_LOTTO_NULL_CASE_EXCEPTION_MESSAGE);
 			String inputBonusLottoNumber = InputView.getBonusLottoNumber();
 			BonusLottoNumber.validateBonusLottoNumber(inputBonusLottoNumber, winningLotto);
 			return new BonusLottoNumber(inputBonusLottoNumber);

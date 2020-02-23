@@ -30,7 +30,7 @@ public class MoneyForLotto {
 		}
 	}
 
-	private void validateMinimunPrice(int inputMoney) {
+	private void validateMinPrice(int inputMoney) {
 		if (inputMoney < LOTTO_PRICE) {
 			throw new InvalidMoneyForLottoException(MIN_PRICE_EXCEPTION_MESSAGE);
 		}
@@ -39,7 +39,7 @@ public class MoneyForLotto {
 	private int validateMoneyForLotto(final String inputMoney) {
 		Objects.requireNonNull(inputMoney, NULL_INPUT_EXCEPTION_MESSAGE);
 		int integerMoney = parseToInteger(inputMoney);
-		validateMinimunPrice(integerMoney);
+		validateMinPrice(integerMoney);
 		return integerMoney;
 	}
 

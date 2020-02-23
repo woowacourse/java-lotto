@@ -2,15 +2,11 @@ package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * 클래스 이름 : .java
@@ -41,6 +37,4 @@ public class WinningLottoTest {
 	void isContain_주어진_로또번호_포함시_true_반환() {
 		assertThat(winningLotto.isContain(LottoNumber.of(10))).isTrue();
 	}
-
-
 }

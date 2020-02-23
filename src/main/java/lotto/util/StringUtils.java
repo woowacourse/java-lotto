@@ -23,7 +23,8 @@ public class StringUtils {
 	private static final String INVALID_INPUT_EXCEPTION_MESSAGE = "잘못된 형식으로 입력하셨습니다.";
 
 
-	private StringUtils() {}
+	private StringUtils() {
+	}
 
 	public static List<LottoNumber> splitIntoLottoNumbers(final String inputLottoNumbers) {
 		Objects.requireNonNull(inputLottoNumbers, NULL_INPUT_EXCEPTION_MESSAGE);

@@ -1,9 +1,5 @@
 package lotto.view;
 
-import lotto.domain.*;
-import lotto.util.StringUtils;
-
-import java.util.List;
 import java.util.Scanner;
 
 /**

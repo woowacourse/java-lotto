@@ -14,23 +14,21 @@ import java.util.List;
  * 날짜 : 2020/02/19
  */
 public enum Rank {
-	FIRST(new ArrayList<Integer>(Collections.singletonList(6)), false, 2_000_000_000),
-	SECOND(new ArrayList<Integer>(Collections.singletonList(5)), true, 30_000_000),
-	THIRD(new ArrayList<Integer>(Collections.singletonList(5)), false, 1_500_000),
-	FOURTH(new ArrayList<Integer>(Collections.singletonList(4)), false, 50_000),
-	FIFTH(new ArrayList<Integer>(Collections.singletonList(3)), false, 5_000),
-	SIXTH(new ArrayList<Integer>(Arrays.asList(0, 1, 2)), false, 0);
+	FIRST(new ArrayList<Integer>(Collections.singletonList(6)),2_000_000_000),
+	SECOND(new ArrayList<Integer>(Collections.singletonList(5)), 30_000_000),
+	THIRD(new ArrayList<Integer>(Collections.singletonList(5)), 1_500_000),
+	FOURTH(new ArrayList<Integer>(Collections.singletonList(4)), 50_000),
+	FIFTH(new ArrayList<Integer>(Collections.singletonList(3)), 5_000),
+	SIXTH(new ArrayList<Integer>(Arrays.asList(0, 1, 2)), 0);
 
 	private static final int MATCH_COUNT_RELATED_TO_BONUS = 5;
 	private static final String CAN_NOT_GET_RANK_EXCEPTION_MESSAGE = "로또의 등수를 구할 수 없습니다.";
 
 	private List<Integer> matchCounts;
-	private boolean hasBonus; // TODO: 마지막까지도 안쓰이면 지우기
 	private int reward;
 
-	Rank(List<Integer> matchCounts, boolean hasBonus, final int reward) {
+	Rank(List<Integer> matchCounts, final int reward) {
 		this.matchCounts = matchCounts;
-		this.hasBonus = hasBonus;
 		this.reward = reward;
 	}
 
