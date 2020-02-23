@@ -22,6 +22,8 @@ class LottoResultTest {
             LottoTicketTest.MATCH_SIX,
             LottoTicketTest.MATCH_BONUS,
             LottoTicketTest.MATCH_FIVE,
+            LottoTicketTest.MATCH_TWO,
+            LottoTicketTest.MATCH_ONE,
         };
         LottoTickets tickets = new LottoTickets(
             Arrays.stream(numbers)
