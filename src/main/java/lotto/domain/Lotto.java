@@ -17,17 +17,23 @@ public class Lotto {
     }
 
     private void validateDistinctNumbers(List<LottoNumber> inputNumbers) {
-        if (inputNumbers.stream()
+        if (getDistinctSize(inputNumbers) != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER
+                    .getMessage());
+        }
+    }
+
+    private long getDistinctSize(List<LottoNumber> inputNumbers) {
+        return inputNumbers.stream()
                 .mapToInt(LottoNumber::getNumber)
                 .distinct()
-                .count() != inputNumbers.size()) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER.getMessage());
-        }
+                .count();
     }
 
     private void validateNumberCount(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT_NOT_SIX.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT_NOT_SIX
+                    .getMessage());
         }
     }
 

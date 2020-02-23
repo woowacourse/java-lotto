@@ -53,7 +53,7 @@ public enum WinningInfo {
         return winningPrice;
     }
 
-    public boolean isHasBonus() {
+    public boolean hasBonus() {
         return hasBonus;
     }
 }

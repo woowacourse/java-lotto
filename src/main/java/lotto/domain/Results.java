@@ -43,7 +43,9 @@ public class Results {
     public int getTotalEarning() {
         int totalEarning = 0;
         for (int i = RESULT_BASE; i < results.size(); i++) {
-            totalEarning += results.get(i).getWinningInfo().getWinningPrice();
+            totalEarning += results.get(i)
+                    .getWinningInfo()
+                    .getWinningPrice();
         }
         return totalEarning;
     }
@@ -59,6 +61,5 @@ public class Results {
                 .collect(Collectors.groupingBy(Result::getWinningInfo, Collectors.counting()));
         summary.remove(WinningInfo.FAIL);
         return summary;
-
     }
 }

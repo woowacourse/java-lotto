@@ -41,7 +41,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private void validateNumberScope(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER
                 || lottoNumber > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ErrorMessage.OVER_SCOPE.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.OVER_SCOPE
+                    .getMessage());
         }
     }
 

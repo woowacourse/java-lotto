@@ -16,13 +16,17 @@ public class OutputView {
 
     public static void printLottoList(List<Lotto> lottoList) {
         for (int i = 0; i < lottoList.size(); i++) {
-            System.out.println(lottoList.get(i).getLottoNumbers().toString());
+            System.out.println(lottoList
+                    .get(i)
+                    .getLottoNumbers()
+                    .toString());
         }
     }
 
     public static void printResults(Results results) {
         TreeMap<WinningInfo, Long> summary = new TreeMap<>(results.getSummary());
-        Iterator<WinningInfo> iteratorKey = summary.keySet().iterator();
+        Iterator<WinningInfo> iteratorKey = summary.keySet()
+                .iterator();
 
         System.out.println("\n당첨 통계");
         System.out.println("---------");
@@ -37,7 +41,7 @@ public class OutputView {
 
     public static String winningString(WinningInfo key) {
         String bonusString = "";
-        if (key.isHasBonus()) {
+        if (key.hasBonus()) {
             bonusString = ", 보너스 볼 일치";
         }
         return key.getWinningCount() + "개 일치" + bonusString + "(" + key.getWinningPrice() + "원)- ";

@@ -14,11 +14,15 @@ public class WinningLotto extends Lotto {
     }
 
     private void validateDistinctBonus(LottoNumber bonusNumber) {
-        if (super.lottoNumbers.stream()
-                .mapToInt(LottoNumber::getNumber)
-                .anyMatch(winningNumber -> winningNumber == bonusNumber.getNumber())) {
+        if (isBonusNumberAlreadyExist(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER.getMessage());
         }
+    }
+
+    private boolean isBonusNumberAlreadyExist(LottoNumber bonusNumber) {
+        return super.lottoNumbers.stream()
+                .mapToInt(LottoNumber::getNumber)
+                .anyMatch(winningNumber -> winningNumber == bonusNumber.getNumber());
     }
 
     public LottoNumber getBonusNumber() {
