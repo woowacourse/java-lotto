@@ -12,7 +12,9 @@ import java.util.Objects;
  * @since 2020/02/19
  */
 public class MatchResult {
-	public static final String LOTTO_RESULT_NOT_FOUND_EXCEPTION = "통계를 수행할 로또 결과가 없습니다.";
+	private static final String LOTTO_RESULT_NOT_FOUND_EXCEPTION = "통계를 수행할 로또 결과가 없습니다.";
+	private static final long DEFAULT_VALUE = 0L;
+	private static final int MULTIPLY_PERCENTAGE = 100;
 
 	private final Map<LottoRank, Long> matchResult;
 
@@ -29,7 +31,7 @@ public class MatchResult {
 
 	public long calculateTotalProfits(Money money) {
 		long totalWinning = calculateTotalWinnings();
-		return totalWinning * 100 / money.get();
+		return totalWinning * MULTIPLY_PERCENTAGE / money.get();
 	}
 
 	private long calculateTotalWinnings() {
@@ -40,7 +42,7 @@ public class MatchResult {
 	}
 
 	public Long findMatchCountByLottoRank(LottoRank rank) {
-		return matchResult.getOrDefault(rank, 0L);
+		return matchResult.getOrDefault(rank, DEFAULT_VALUE);
 	}
 
 	@Override
