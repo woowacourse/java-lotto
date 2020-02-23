@@ -1,35 +1,29 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoResults {
-    private List<LottoResult> lottoResults;
+    private Map<RankType, Integer> lottoResults;
 
     public LottoResults() {
-        this.lottoResults = new ArrayList<>();
+        this.lottoResults = new HashMap<>();
     }
 
-    public void add(LottoResult lottoResult) {
-        lottoResults.add(lottoResult);
+    public Map<RankType, Integer> getLottoResults() {
+        return lottoResults;
     }
 
-    public int size() {
-        return lottoResults.size();
-    }
-
-    private int getCountSameLottoNumber(int number) {
-        return Math.toIntExact(lottoResults.stream()
-                .filter(lottoResult -> lottoResult.isCorrectCount(number))
+    private int getCountSameLottoNumber(List<LottoCount> lottoCounts, int number) {
+        return Math.toIntExact(lottoCounts.stream()
+                .filter(lottoCount -> lottoCount.isCorrectCount(number))
                 .count());
     }
 
-    public HashMap<String, Integer> getCountMap() {
-        HashMap<String, Integer> winningCountMap = new HashMap<>();
+    public void putLottoResults(List<LottoCount> lottoCounts) {
         for (RankType rankType : RankType.values()) {
-            winningCountMap.put(rankType.name(), getCountSameLottoNumber(rankType.getNumber()));
+            this.lottoResults.put(rankType, getCountSameLottoNumber(lottoCounts, rankType.getNumber()));
         }
-        return winningCountMap;
     }
 }

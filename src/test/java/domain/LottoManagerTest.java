@@ -6,9 +6,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
-public class LottoResultsTest {
+public class LottoManagerTest {
     private List<LottoTicket> originalLottoTickets = new ArrayList<>();
 
     @BeforeEach
@@ -23,12 +26,11 @@ public class LottoResultsTest {
     @DisplayName("로또 당첨갯수 확인 메서드 테스트")
     @ParameterizedTest
     @CsvSource(value = {"MATCH_THREE,1", "MATCH_FOUR,1", "MATCH_FIVE,1", "MATCH_FIVE_WITH_BONUS,1", "MATCH_SIX,1"})
-    void countWinningTickets(String lottoTypeStr, int expected) {
+    void countWinningTickets(RankType rankType, int expected) {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6", "7");
         LottoTickets lottoTickets = new LottoTickets(originalLottoTickets);
-        LottoResults lottoResults = lottoTickets.match(winningLottoTicket);
-        HashMap<String, Integer> map = lottoResults.getCountMap();
+        Map<RankType, Integer> map = LottoManager.match(lottoTickets, winningLottoTicket);
 
-        Assertions.assertThat(map.get(lottoTypeStr)).isEqualTo(expected);
+        Assertions.assertThat(map.get(rankType)).isEqualTo(expected);
     }
 }

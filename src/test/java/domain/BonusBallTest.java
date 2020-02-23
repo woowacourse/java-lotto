@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class BonusBallTest {
-    List<Integer> winningNumber = new ArrayList<>();
-
     private static Stream<String> bonusBallSetUp() {
         return Stream.of("", " ", null, "test", "60", "0");
     }
@@ -22,8 +20,10 @@ public class BonusBallTest {
     @ParameterizedTest
     @MethodSource("bonusBallSetUp")
     void bonusBallConstructorTest(String input) {
+        List<Integer> winningNumber = new ArrayList<>();
+
         Assertions.assertThatThrownBy(() -> {
-            new BonusBall(this.winningNumber, input);
+            new BonusBall(winningNumber, input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

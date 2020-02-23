@@ -30,21 +30,4 @@ public class LottoTicketTest {
             new LottoTicket(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
-
-    private static Stream<Arguments> winningTicketSetUp() {
-        return Stream.of(
-                Arguments.of(new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 6)), 6),
-                Arguments.of(new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 8)), 5),
-                Arguments.of(new ArrayList(Arrays.asList(1, 2, 3, 4, 8, 9)), 4),
-                Arguments.of(new ArrayList(Arrays.asList(1, 2, 3, 8, 9, 10)), 3)
-        );
-    }
-
-    @DisplayName("당첨 복권 번호와 얼마나 맞는지 카운트해주는 메서드 테스트")
-    @ParameterizedTest
-    @MethodSource("winningTicketSetUp")
-    void 당첨_복권_카운트_메서드(List<Integer> winningTicket, int expected) {
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Assertions.assertThat(lottoTicket.getCorrectCount(winningTicket)).isEqualTo(expected);
-    }
 }

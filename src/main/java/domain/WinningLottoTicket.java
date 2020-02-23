@@ -21,23 +21,6 @@ public class WinningLottoTicket {
         this.bonusBall = new BonusBall(this.winningTicket.getLottoTicket(), inputBonusBall);
     }
 
-    public LottoTicket getWinningTicket() {
-        return winningTicket;
-    }
-
-    public boolean isMatchBonusBall(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoTicket()
-                .contains(bonusBall.getBonusNumber());
-    }
-
-    private void addTicketNumber(List<Integer> winningTicket, String input) {
-        for (String number : splitInputNumber(input)) {
-            validateBlank(number);
-            validateNumber(number);
-            winningTicket.add(Integer.parseInt(number));
-        }
-    }
-
     private String[] splitInputNumber(String input) {
         return input.split(DELIMITER);
     }
@@ -53,6 +36,25 @@ public class WinningLottoTicket {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("input값이 숫자가 아닙니다.");
+        }
+    }
+
+    public int getCorrectCount(LottoTicket lottoTicket) {
+        return Math.toIntExact(lottoTicket.getLottoTicket().stream()
+                .filter(this.winningTicket.getLottoTicket()::contains)
+                .count());
+    }
+
+    public boolean isMatchBonusBall(LottoTicket lottoTicket) {
+        return lottoTicket.getLottoTicket()
+                .contains(bonusBall.getBonusNumber());
+    }
+
+    private void addTicketNumber(List<Integer> winningTicket, String input) {
+        for (String number : splitInputNumber(input)) {
+            validateBlank(number);
+            validateNumber(number);
+            winningTicket.add(Integer.parseInt(number));
         }
     }
 }

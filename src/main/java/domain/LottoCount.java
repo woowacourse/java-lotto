@@ -1,13 +1,13 @@
 package domain;
 
-public class LottoResult {
+public class LottoCount {
     private static final int BONUS_BALL_MATCH_COUNT = 5;
     private static final int BONUS_BALL_VALUE = 10;
 
-    private int correctCount;
+    private int ballCount;
 
-    public LottoResult(int correctCount, boolean matchBonusBall) {
-        this.correctCount = validateFiveWIthBonusBall(correctCount, matchBonusBall);
+    public LottoCount(int ballCount, boolean matchBonusBall) {
+        this.ballCount = validateFiveWIthBonusBall(ballCount, matchBonusBall);
     }
 
     private int validateFiveWIthBonusBall(int correctCount, boolean matchBonusBall) {
@@ -18,7 +18,7 @@ public class LottoResult {
     }
 
     public boolean isCorrectCount(int maybeCorrectCount) {
-        return maybeCorrectCount == correctCount;
+        return maybeCorrectCount == ballCount;
     }
 
 }
