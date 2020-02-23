@@ -6,16 +6,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000);
+    FIRST(6, new Money(2_000_000_000)),
+    SECOND(5, new Money(30_000_000)),
+    THIRD(5, new Money(1_500_000)),
+    FOURTH(4, new Money(50_000)),
+    FIFTH(3, new Money(5_000));
 
     private int matchNumber;
-    private int winningMoney;
+    private Money winningMoney;
 
-    Rank(int matchNumber, int winningMoney) {
+    Rank(int matchNumber, Money winningMoney) {
         this.matchNumber = matchNumber;
         this.winningMoney = winningMoney;
     }
@@ -28,7 +28,7 @@ public enum Rank {
         return matchNumber;
     }
 
-    public int calculateWinningMoney() {
+    public Money calculateWinningMoney() {
         return winningMoney;
     }
 

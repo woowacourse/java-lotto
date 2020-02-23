@@ -10,18 +10,9 @@ import org.junit.jupiter.api.Test;
 class WinningResultCalculatorTest {
 
     @Test
-    void 수익률_계산() {
-        //given
-        double totalWinningMoney = 5_000;
-        int purchaseAmount = 14_000;
-        //when & then
-        assertThat(WinningResultCalculator.calculateEarningRate(totalWinningMoney, purchaseAmount)).isEqualTo(35);
-    }
-
-    @Test
     void 당첨금액_총합() {
         //given
-        List<Integer> winningMoneys = Arrays.asList(5_000, 50_000);
+        List<Money> winningMoneys = Arrays.asList(new Money(5_000), new Money(50_000));
         //when & then
         assertThat(WinningResultCalculator.calculateTotalWinningMoney(winningMoneys)).isEqualTo(55_000);
     }

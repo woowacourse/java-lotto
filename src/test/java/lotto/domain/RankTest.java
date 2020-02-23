@@ -46,17 +46,17 @@ class RankTest {
 
     @ParameterizedTest
     @MethodSource("provideRank")
-    void 순위에_따른_당첨금액_산출(Rank rank, int winningMoney) {
+    void 순위에_따른_당첨금액_산출(Rank rank, Money winningMoney) {
         assertThat(rank.calculateWinningMoney()).isEqualTo(winningMoney);
     }
 
     private static Stream<Arguments> provideRank() {
         return Stream.of(
-            Arguments.arguments(Rank.FIRST, 2_000_000_000),
-            Arguments.arguments(Rank.SECOND, 30_000_000),
-            Arguments.arguments(Rank.THIRD, 1_500_000),
-            Arguments.arguments(Rank.FOURTH, 50_000),
-            Arguments.arguments(Rank.FIFTH, 5_000)
+            Arguments.arguments(Rank.FIRST, new Money(2_000_000_000)),
+            Arguments.arguments(Rank.SECOND, new Money(30_000_000)),
+            Arguments.arguments(Rank.THIRD, new Money(1_500_000)),
+            Arguments.arguments(Rank.FOURTH, new Money(50_000)),
+            Arguments.arguments(Rank.FIFTH, new Money(5_000))
         );
     }
 

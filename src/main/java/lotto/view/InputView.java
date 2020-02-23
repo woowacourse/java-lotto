@@ -3,14 +3,16 @@ package lotto.view;
 import java.util.List;
 import java.util.Scanner;
 
+import lotto.domain.Money;
 import lotto.utils.StringUtils;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int inputPurchaseAmount() {
+    public static Money inputPurchaseAmount() {
         System.out.println("구입금액을 입력해주세요");
-        return StringUtils.parseInt(scanner.nextLine());
+
+        return new Money(StringUtils.parseInt(scanner.nextLine()));
     }
 
     public static List<Integer> inputLastWeekWinningNumbers() {
