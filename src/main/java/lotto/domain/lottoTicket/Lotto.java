@@ -42,11 +42,8 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public List<Integer> getLotto() {
-        return Collections.unmodifiableList(
-                lottoNumbers.stream()
-                        .map(LottoNumber::getLottoNumber)
-                        .collect(Collectors.toList())
-        );
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }
