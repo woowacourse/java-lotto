@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -10,6 +11,22 @@ public class PurchasedLottoTickets {
 
 	public PurchasedLottoTickets(final List<SerialLottoNumber> purchasedLottoTickets) {
 		this.purchasedLottoTickets = Collections.unmodifiableList(purchasedLottoTickets);
+	}
+
+	public PurchasedLottoTickets(PurchaseMoney purchaseMoney, RandomGenerator randomGenerator) {
+		this(generatePurchasedLottoTickets(purchaseMoney, randomGenerator));
+	}
+
+	private static List<SerialLottoNumber> generatePurchasedLottoTickets(PurchaseMoney purchaseMoney,
+																		 RandomGenerator randomGenerator) {
+		List<SerialLottoNumber> purchasedLottoTickets = new ArrayList<>();
+
+		for (int i = 0; i < purchaseMoney.countPurchasedTickets(); i++) {
+			purchasedLottoTickets.add(
+					SerialLottoNumberFactory.createRandomLottoTicket(randomGenerator));
+		}
+
+		return purchasedLottoTickets;
 	}
 
 	public List<WinningType> findMatchingWinningTypesWith(WinningInformation winningInformation) {
