@@ -1,37 +1,49 @@
 package domain;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private int number;
+    private static final Map<Integer, LottoNumber> a = new HashMap<>();
+    static {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            a.put(i, new LottoNumber(i));
+        }
+    }
 
-    public LottoNumber(String number) {
+    private LottoNumber(int number) {
+        this.number = number;
+    }
+
+    public static LottoNumber valueOf(int number) {
+        checkLottoRange(number);
+        return a.get(number);
+    }
+
+    public static LottoNumber valueOf(String number) {
         number = number.trim();
         checkNotNumber(number);
         int numberIntegerValue = Integer.parseInt(number);
         checkLottoRange(numberIntegerValue);
-        this.number = numberIntegerValue;
+        return a.get(numberIntegerValue);
     }
 
-    public LottoNumber(int number) {
-        checkLottoRange(number);
-        this.number = number;
-    }
-
-    private void checkLottoRange(int number) {
+    private static void checkLottoRange(int number) {
         if (isNotLottoNumber(number)) {
             throw new IllegalArgumentException("로또 숫자 범위를 넘어섰습니다.");
         }
     }
 
-    private boolean isNotLottoNumber(int number) {
+    private static boolean isNotLottoNumber(int number) {
         return number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER;
     }
 
-    private void checkNotNumber(String number) {
+    private static void checkNotNumber(String number) {
         try {
             Integer.parseInt(number);
         } catch (IllegalArgumentException e) {

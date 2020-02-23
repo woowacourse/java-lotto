@@ -16,7 +16,7 @@ public class LottoFactory {
     private static void createLotto(Set<LottoNumber> lotto) {
         while (lotto.size() < LOTTO_SIZE) {
             int number = RandomNumberGenerator.generate();
-            lotto.add(new LottoNumber(number));
+            lotto.add(LottoNumber.valueOf(number));
         }
     }
 }

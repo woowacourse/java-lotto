@@ -75,12 +75,12 @@ public class WinningNumberTest {
         WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
 
         Set<LottoNumber> myLotto = new HashSet<>();
-        myLotto.add(new LottoNumber(1));
-        myLotto.add(new LottoNumber(20));
-        myLotto.add(new LottoNumber(30));
-        myLotto.add(new LottoNumber(4));
-        myLotto.add(new LottoNumber(5));
-        myLotto.add(new LottoNumber(7));
+        myLotto.add(LottoNumber.valueOf(1));
+        myLotto.add(LottoNumber.valueOf(20));
+        myLotto.add(LottoNumber.valueOf(30));
+        myLotto.add(LottoNumber.valueOf(4));
+        myLotto.add(LottoNumber.valueOf(5));
+        myLotto.add(LottoNumber.valueOf(7));
         Lotto myLottoNumbers = new Lotto(myLotto);
 
         LottoRank result = LottoRank.findRank(winningNumber.countWinningMatch(myLottoNumbers),

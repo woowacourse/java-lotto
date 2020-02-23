@@ -10,10 +10,10 @@ public class WinningNumber {
     public WinningNumber(String[] numbers, String bonusNumber) {
         Set<LottoNumber> winningNumbers = new HashSet<>();
         for (String number : numbers) {
-            winningNumbers.add(new LottoNumber(number));
+            winningNumbers.add(LottoNumber.valueOf(number));
         }
         this.winningNumbers = new Lotto(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
         checkDuplicatedLottoNumber();
     }
 
