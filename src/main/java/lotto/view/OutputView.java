@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Payment;
-import lotto.domain.Results;
-import lotto.domain.WinningInfo;
+import lotto.domain.*;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.errors.ErrorMessage;
-import lotto.exception.DuplicatedNumberException;
-import lotto.exception.NotEnoughNumberException;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,14 +17,17 @@ public class Lotto {
     }
 
     private void validateDistinctNumbers(List<LottoNumber> inputNumbers) {
-        if (inputNumbers.stream().mapToInt(LottoNumber::getNumber).distinct().count() != inputNumbers.size()) {
-            throw new DuplicatedNumberException(ErrorMessage.DUPLICATE_NUMBER.getMessage());
+        if (inputNumbers.stream()
+                .mapToInt(LottoNumber::getNumber)
+                .distinct()
+                .count() != inputNumbers.size()) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER.getMessage());
         }
     }
 
     private void validateNumberCount(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new NotEnoughNumberException(ErrorMessage.NUMBER_COUNT_NOT_SIX.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT_NOT_SIX.getMessage());
         }
     }
 

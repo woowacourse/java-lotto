@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.exception.*;
 import lotto.utils.LottoFactory;
 import lotto.utils.NumberGenerator;
 import lotto.utils.UserInputNumberGenerator;
@@ -26,7 +25,7 @@ public class Application {
         while (true) {
             try {
                 return new Payment(InputView.getPayment());
-            } catch (NotNumberException | InvalidPriceException exception) {
+            } catch (IllegalArgumentException exception) {
                 OutputView.printErrorMessage(exception.getMessage());
             }
         }
@@ -37,7 +36,7 @@ public class Application {
         while (true) {
             try {
                 return new WinningLotto(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
-            } catch (NotNumberException | NotInScopeException | DuplicatedNumberException | NotEnoughNumberException exception) {
+            } catch (IllegalArgumentException exception) {
                 OutputView.printErrorMessage(exception.getMessage());
             }
         }

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.errors.ErrorMessage;
-import lotto.exception.DuplicatedNumberException;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class WinningLotto extends Lotto {
         if (super.lottoNumbers.stream()
                 .mapToInt(LottoNumber::getNumber)
                 .anyMatch(winningNumber -> winningNumber == bonusNumber.getNumber())) {
-            throw new DuplicatedNumberException(ErrorMessage.DUPLICATE_NUMBER.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER.getMessage());
         }
     }
 

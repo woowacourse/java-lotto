@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.errors.ErrorMessage;
-import lotto.exception.NotInScopeException;
-import lotto.exception.NotNumberException;
 
 import java.util.Objects;
 
@@ -27,7 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         try {
             Integer.parseInt(lottoNumber);
         } catch (NumberFormatException e) {
-            throw new NotNumberException(ErrorMessage.NOT_NUMBER.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER.getMessage());
         }
     }
 
@@ -51,7 +49,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private void validateNumberScope(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER
                 || lottoNumber > MAX_LOTTO_NUMBER) {
-            throw new NotInScopeException(ErrorMessage.OVER_SCOPE.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.OVER_SCOPE.getMessage());
         }
     }
 
