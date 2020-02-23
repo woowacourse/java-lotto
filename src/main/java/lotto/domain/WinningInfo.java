@@ -53,11 +53,7 @@ public enum WinningInfo {
         return winningPrice;
     }
 
-    public String toString() {
-        String bonusString = "";
-        if (hasBonus) {
-            bonusString = ", 보너스 볼 일치";
-        }
-        return getWinningCount() + "개 일치" + bonusString + "(" + getWinningPrice() + "원)- ";
+    public boolean isHasBonus() {
+        return hasBonus;
     }
 }
