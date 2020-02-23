@@ -6,6 +6,7 @@ import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 import lotto.exception.WinningNumbersException;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -15,8 +16,9 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningNumbersTest {
+    @DisplayName("당첨번호와 보너스번호가 중복될 경우 예외 발생")
     @Test
-    void 당첨번호와_보너스번호가_중복될_경우_예외_발생() {
+    void duplicatedWinningNumbers() {
         Assertions.assertThatThrownBy(() -> {
             LottoTicket lottoTicket = createLottoTicket("1,2,3,4,5,6");
             LottoNumber bonusNumber = new LottoNumber(6);
@@ -25,8 +27,9 @@ class WinningNumbersTest {
                 .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 
+    @DisplayName("로또티켓들을 당첨번호와 비교해서 해당 순위들을 반환")
     @Test
-    void 로또티켓들을_당첨번호와_비교해서_해당_순위들을_반환() {
+    void returnRanks() {
         LottoTicket lottoTicket = createLottoTicket("1,2,3,4,5,6");
         LottoNumber bonusNumber = new LottoNumber(7);
         WinningNumbers winningNumbers = new WinningNumbers(lottoTicket, bonusNumber);

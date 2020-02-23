@@ -5,6 +5,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.exception.LottoTicketException;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -14,24 +15,27 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketTest {
+    @DisplayName("로또숫자들이 6개가 아닐 경우 예외 발생")
     @Test
-    void 로또숫자들이_6개가_아닐_경우_예외_발생() {
+    void wrongSizeOfLottoNumbers() {
         Assertions.assertThatThrownBy(() -> {
             createLottoTicket("1,2,3,4,5");
         }).isInstanceOf(LottoTicketException.class)
                 .hasMessage("로또의 숫자는 6개여야 합니다.");
     }
 
+    @DisplayName("로또숫자들이 중복될 경우 예외 발")
     @Test
-    void 로또숫자들이_중복될_경우_예외_발생() {
+    void duplicatedLottoNumbers() {
         Assertions.assertThatThrownBy(() -> {
             createLottoTicket("1,2,3,4,5,5");
         }).isInstanceOf(LottoTicketException.class)
                 .hasMessage("로또의 숫자는 중복될 수 없습니다.");
     }
 
+    @DisplayName("로또티켓을 당첨번호와 비교해서 순위를 반환")
     @Test
-    void 로또티켓을_당첨번호와_비교해서_순위를_반환() {
+    void compareLottoTicket() {
         LottoTicket lottoTicket = createLottoTicket("1,2,3,4,5,6");
 
         LottoTicket winningLottoTicket = createLottoTicket("1,2,3,10,11,12");
