@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private static final Map<LottoRank, Integer> result = new HashMap<>();
+    private final Map<LottoRank, Integer> result = new HashMap<>();
     public static final int INITIAL_PROFIT = 0;
 
     public LottoResult() {
