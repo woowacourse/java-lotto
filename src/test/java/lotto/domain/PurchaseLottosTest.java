@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.exception.EmptyOrNullException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -36,7 +37,7 @@ public class PurchaseLottosTest {
     void purchaseLottos_empty() {
         Assertions.assertThatThrownBy(() -> {
             new PurchaseLottos(new ArrayList<>());
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(EmptyOrNullException.class)
                 .hasMessage("Null or empty input to PurchaseLottos.");
     }
 
@@ -45,7 +46,7 @@ public class PurchaseLottosTest {
     void purchaseLottos_null() {
         Assertions.assertThatThrownBy(() -> {
             new PurchaseLottos(null);
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(EmptyOrNullException.class)
                 .hasMessage("Null or empty input to PurchaseLottos.");
     }
 }

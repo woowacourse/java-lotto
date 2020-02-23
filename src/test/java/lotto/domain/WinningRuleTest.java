@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.DuplicateExistException;
+import lotto.domain.exception.OutOfRangeException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -36,7 +38,7 @@ public class WinningRuleTest {
     @ValueSource(ints = {0, 46})
     void winningRule_outOfRange(int bonusBall) {
         Assertions.assertThatThrownBy(() -> new WinningRule(inputNumbers, bonusBall))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(OutOfRangeException.class)
                 .hasMessage("Lotto number out of range.");
     }
 
@@ -44,7 +46,7 @@ public class WinningRuleTest {
     @DisplayName("중복된 숫자가 들어간 경우")
     void winningRule_duplicate() {
         Assertions.assertThatThrownBy(() -> new WinningRule(inputNumbers, 1))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(DuplicateExistException.class)
                 .hasMessage("Duplicate exist.");
     }
 

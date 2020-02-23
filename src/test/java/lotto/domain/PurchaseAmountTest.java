@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.exception.OutOfRangeException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class PurchaseAmountTest {
     @ValueSource(ints = {999, 0})
     void calcuate_less(int value) {
         Assertions.assertThatThrownBy(() -> PurchaseAmount.calculate(value))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(OutOfRangeException.class)
                 .hasMessage("Input money out of range (minimum - 1000).");
     }
 }

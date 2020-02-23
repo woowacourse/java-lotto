@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.InvalidInputSizeException;
+import lotto.domain.exception.OutOfRangeException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,7 @@ public class LottoNumberGroupTest {
     @DisplayName("로또 숫자 범위 밖의 입력이 들어온 경우 테스트")
     void getInstance_outOfRange(int i) {
         Assertions.assertThatThrownBy(() -> LottoNumberGroup.getInstance(i))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(OutOfRangeException.class)
                 .hasMessage("Lotto number out of range.");
     }
 }

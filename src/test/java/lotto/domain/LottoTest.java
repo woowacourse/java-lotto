@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.EmptyOrNullException;
+import lotto.domain.exception.InvalidInputSizeException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +36,7 @@ public class LottoTest {
     void lotto_more() {
         Assertions.assertThatThrownBy(() -> { inputNumbers.add(7);
             new Lotto(inputNumbers);
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(InvalidInputSizeException.class)
                 .hasMessage("Lotto number amount must be 6.");
     }
 
@@ -44,7 +46,7 @@ public class LottoTest {
         inputNumbers.remove(0);
         Assertions.assertThatThrownBy(() -> {
             new Lotto(inputNumbers);
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(InvalidInputSizeException.class)
                 .hasMessage("Lotto number amount must be 6.");
     }
 
@@ -53,6 +55,16 @@ public class LottoTest {
     void lotto_null() {
         Assertions.assertThatThrownBy(() -> {
             new Lotto(null);
-        }).isInstanceOf(NullPointerException.class);
+        }).isInstanceOf(EmptyOrNullException.class)
+                .hasMessage("Empty or null lotto exception.");
+    }
+
+    @Test
+    @DisplayName("size가 0인 입력이 들어온 경우")
+    void lotto_empty() {
+        Assertions.assertThatThrownBy(() -> {
+            new Lotto(new ArrayList<>());
+        }).isInstanceOf(EmptyOrNullException.class)
+                .hasMessage("Empty or null lotto exception.");
     }
 }
