@@ -48,13 +48,13 @@ public class WinningNumber {
 	}
 
 	private void validateRange(List<String> winningNumber) {
-		if (winningNumber.stream()
-			.mapToInt(Integer::parseInt)
-			.filter(number -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER)
-			.findFirst()
-			.isPresent()) {
-			throw new IllegalArgumentException("범위를 벗어난 번호가 포함되어 있습니다.");
-		}
+		winningNumber.stream()
+				.mapToInt(Integer::parseInt)
+				.filter(number -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER)
+				.findFirst()
+				.ifPresent(x -> {
+					throw new IllegalArgumentException("범위를 벗어난 번호가 포함되어 있습니다.");
+				});
 	}
 
 	private void validateBonusNumber(int bonusNumber) {
