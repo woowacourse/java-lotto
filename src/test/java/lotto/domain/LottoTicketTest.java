@@ -15,10 +15,10 @@ import org.junit.jupiter.api.Test;
  * @author K.S.KIM
  * @since 2020/02/19
  */
-public class LottosTest {
+public class LottoTicketTest {
 	@Test
 	void calculate() {
-		Lottos lottos = new Lottos(Arrays.asList(
+		LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
 				Lotto.of(1, 2, 5, 43, 44, 45),
 				Lotto.of(1, 2, 5, 43, 44, 45),
 				Lotto.of(1, 2, 3, 43, 44, 45)));
@@ -29,6 +29,6 @@ public class LottosTest {
 		matchResult.put(LottoRank.THIRD, 1L);
 		MatchResult expected = new MatchResult(matchResult);
 
-		assertThat(lottos.matchAll(winningLotto)).isEqualTo(expected);
+		assertThat(lottoTicket.matchAll(winningLotto)).isEqualTo(expected);
 	}
 }

@@ -5,7 +5,7 @@ import java.util.Objects;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGeneratable;
 import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
+import lotto.domain.LottoTicket;
 import lotto.domain.MatchResult;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
@@ -28,11 +28,11 @@ public class LottoGame {
 
 	public void run() {
 		Money purchaseMoney = new Money(InputView.inputLottoMoney());
-		Lottos lottos = lottosFactory.generate(purchaseMoney);
-		OutputView.printLottos(lottos);
+		LottoTicket lottoTicket = lottosFactory.generate(purchaseMoney);
+		OutputView.printLottos(lottoTicket);
 
 		WinningLotto winningLotto = generateWinningLotto();
-		MatchResult matchResult = lottos.matchAll(winningLotto);
+		MatchResult matchResult = lottoTicket.matchAll(winningLotto);
 		OutputView.printStatistics(matchResult);
 		OutputView.printTotalProfits(matchResult.calculateTotalProfits(purchaseMoney));
 	}

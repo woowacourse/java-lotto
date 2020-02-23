@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.LottoTicket;
 import lotto.domain.MatchResult;
 import lotto.util.TextUtil;
 
@@ -21,9 +21,9 @@ public class OutputView {
 	private OutputView() {
 	}
 
-	public static void printLottos(Lottos lottos) {
-		System.out.printf(TOTAL_BUY_FORMAT_MESSAGE, lottos.size());
-		for (Lotto lotto : lottos.getLottos()) {
+	public static void printLottos(LottoTicket lottoTicket) {
+		System.out.printf(TOTAL_BUY_FORMAT_MESSAGE, lottoTicket.size());
+		for (Lotto lotto : lottoTicket.getLottos()) {
 			printLotto(lotto);
 		}
 		System.out.println();

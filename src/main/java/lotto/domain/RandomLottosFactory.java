@@ -16,12 +16,12 @@ public class RandomLottosFactory implements LottoGeneratable {
 	private static final Random RANDOM = new Random();
 
 	@Override
-	public Lottos generate(Money money) {
+	public LottoTicket generate(Money money) {
 		List<Lotto> lottos = new ArrayList<>();
 		for (long count = money.calculateBuyCount(); count > 0; --count) {
 			lottos.add(generate());
 		}
-		return new Lottos(lottos);
+		return new LottoTicket(lottos);
 	}
 
 	private Lotto generate() {
