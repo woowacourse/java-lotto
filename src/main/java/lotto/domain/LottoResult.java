@@ -14,6 +14,15 @@ public class LottoResult {
 		this.lottoResult = lottoResult;
 	}
 
+	public double calculateEarningPercentage(PurchaseMoney purchaseMoney) {
+		double totalEarning = 0;
+		for (WinningType winningType : lottoResult.keySet()) {
+			totalEarning += winningType.calculateEarning(lottoResult.get(winningType));
+		}
+
+		return purchaseMoney.divideBy(totalEarning) * PERCENT_MULTIPLIER;
+	}
+
 	public Map<WinningType, Integer> getLottoResult() {
 		return lottoResult;
 	}
@@ -24,15 +33,6 @@ public class LottoResult {
 				.filter(WinningType::isWin)
 				.sorted()
 				.collect(Collectors.toUnmodifiableList());
-	}
-
-	public double calculateEarningRate(PurchaseMoney purchaseMoney) {
-		double totalEarning = 0;
-		for (WinningType winningType : lottoResult.keySet()) {
-			totalEarning += winningType.calculateEarning(lottoResult.get(winningType));
-		}
-
-		return purchaseMoney.divideBy(totalEarning) * PERCENT_MULTIPLIER;
 	}
 
 	@Override
