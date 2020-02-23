@@ -30,7 +30,7 @@ public enum LottoRank {
      * 그렇지 않다면(즉, rank의 보너스가 true라면) 파라미터 보너스도 true여야만 조건을 통과한다.
      *
      * @param hitCount 당첨번호의 개수를 전달하는 정수형 변수이다.
-     * @param bonus 보너스 번호가 포함되었는지 여부를 전달하는 boolean형 변수이다.
+     * @param bonus    보너스 번호가 포함되었는지 여부를 전달하는 boolean형 변수이다.
      * @return 전달받은 값을 바탕으로 몇 등인지를 LottoRank 값으로 반환한다.
      */
     public static LottoRank calculateRank(int hitCount, boolean bonus) {

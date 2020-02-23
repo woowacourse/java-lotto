@@ -20,14 +20,6 @@ public class LottoController {
         OutputView.printResult(money, makeResult());
     }
 
-    private LottoResult makeResult() {
-        UserLottoGenerator userNumberGenerator = new UserLottoGenerator(InputView.inputWinnerNumbers());
-        LottoTicket winnerNumbers = LottoTicketFactory.createLottoNumbers(userNumberGenerator);
-        LottoNumber bonus = LottoNumberFactory.getLottoNumber(InputView.inputBonusNumber());
-
-        return lottoGame.makeResult(new LottoWinner(winnerNumbers, bonus));
-    }
-
     private void makeLottoNumbers(int repeat) {
         LottoGenerator randomLottoGenerator = new RandomLottoGenerator();
         OutputView.printRepeat(repeat);
@@ -36,5 +28,13 @@ public class LottoController {
             OutputView.printLottoNumbers(lottoTicket);
             lottoGame.add(lottoTicket);
         }
+    }
+
+    private LottoResult makeResult() {
+        UserLottoGenerator userNumberGenerator = new UserLottoGenerator(InputView.inputWinnerNumbers());
+        LottoTicket winnerNumbers = LottoTicketFactory.createLottoNumbers(userNumberGenerator);
+        LottoNumber bonus = LottoNumberFactory.getLottoNumber(InputView.inputBonusNumber());
+
+        return lottoGame.makeResult(new LottoWinner(winnerNumbers, bonus));
     }
 }

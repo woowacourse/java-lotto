@@ -15,7 +15,7 @@ public class LottoNumberFactory {
         }
     }
 
-    private LottoNumberFactory(){
+    private LottoNumberFactory() {
         throw new AssertionError();
     }
 
