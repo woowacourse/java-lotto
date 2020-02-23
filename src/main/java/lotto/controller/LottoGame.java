@@ -7,6 +7,9 @@ import lotto.view.dto.InputDTO;
 import java.util.List;
 
 public class LottoGame {
+    private LottoGame() {
+    }
+
     public static void main(String[] args) {
         Money purchaseMoney = InputDTO.inputPurchaseMoney();
         List<LottoTicket> lottoTickets =  LottoFactory.createLottos(purchaseMoney);

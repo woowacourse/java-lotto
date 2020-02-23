@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class InputDTO {
+    private InputDTO() {
+    }
 
     public static Money inputPurchaseMoney() {
         try {

@@ -1,12 +1,16 @@
 package lotto.view;
 
-import lotto.domain.Money;
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 
 import java.util.List;
 
 public class OutputView {
+
+    private OutputView() {
+    }
+
     public static void printLottos(List<LottoTicket> lottoTickets) {
         System.out.println(String.format("%d개를 구매했습니다.", lottoTickets.size()));
         for (LottoTicket lottoTicket : lottoTickets) {
