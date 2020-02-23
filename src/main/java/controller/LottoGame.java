@@ -11,7 +11,7 @@ public class LottoGame {
         int lottoCount = amount.getCount();
         OutputView.printPurchaseCountMessage(lottoCount);
 
-        Lottos lottos = new Lottos(lottoCount);
+        Lottos lottos = LottosFactory.createLottos(lottoCount);
         OutputView.printLottos(lottos);
 
         WinningNumber winningNumber = inputWinningNumber();

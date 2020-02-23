@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-    private static final List<Lotto> lottos = new ArrayList<>();
+    private static List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(){};
+    public Lottos(){
 
-    public Lottos(final int lottoCount) {
-        for (int index = 0; index < lottoCount; index++) {
-            lottos.add(LottoFactory.createOneLotto());
-        }
+    }
+
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public void addLotto(Lotto lotto){
