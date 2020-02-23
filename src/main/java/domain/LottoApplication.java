@@ -20,8 +20,6 @@ public class LottoApplication {
     }
 
     public static WinningLottoTicket inputWinningLottoTicket() {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(InputView.inputWinningNumber());
-        winningLottoTicket.initializeBonusBall(InputView.inputBonusNumber());
-        return winningLottoTicket;
+        return new WinningLottoTicket(InputView.inputWinningNumber(), InputView.inputBonusNumber());
     }
 }

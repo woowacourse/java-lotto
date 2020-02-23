@@ -9,12 +9,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.*;
 
 public class LottoResultsTest {
-    private WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6");
     private List<LottoTicket> originalLottoTickets = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
-        winningLottoTicket.initializeBonusBall("7");
         originalLottoTickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 12, 13, 14)));
         originalLottoTickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 13, 14)));
         originalLottoTickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 14)));
@@ -26,6 +24,7 @@ public class LottoResultsTest {
     @ParameterizedTest
     @CsvSource(value = {"MATCH_THREE,1", "MATCH_FOUR,1", "MATCH_FIVE,1", "MATCH_FIVE_WITH_BONUS,1", "MATCH_SIX,1"})
     void countWinningTickets(String lottoTypeStr, int expected) {
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6", "7");
         LottoTickets lottoTickets = new LottoTickets(originalLottoTickets);
         LottoResults lottoResults = lottoTickets.match(winningLottoTicket);
         HashMap<String, Integer> map = lottoResults.getCountMap();

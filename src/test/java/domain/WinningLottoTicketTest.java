@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -26,15 +25,14 @@ public class WinningLottoTicketTest {
     @MethodSource("winningNumberSetUp")
     void winningNumberConstructorTest(String input) {
         Assertions.assertThatThrownBy(() -> {
-            new WinningLottoTicket(input);
+            new WinningLottoTicket(input, "7");
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또 티켓 안에 보너스볼이 있는지 테스트")
     @Test
     void isMatchBonusBallTest() {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6");
-        winningLottoTicket.initializeBonusBall("7");
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6", "7");
 
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
 
