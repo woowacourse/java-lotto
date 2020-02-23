@@ -32,8 +32,8 @@ public class LottoGame {
             return new PurchaseAmount(InputView.inputPurchaseAmount());
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
+            return inputPurchaseAmount();
         }
-        return inputPurchaseAmount();
     }
 
     private static LottoTickets createLottoTickets(int lottoCount) {
@@ -47,8 +47,8 @@ public class LottoGame {
             return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         } catch(IllegalArgumentException | NullPointerException e){
             OutputView.printExceptionMessage(e);
+            return inputWinningNumber();
         }
-        return inputWinningNumber();
     }
 
     private static LottoResult countWinningLottos(LottoTickets lottoTickets, WinningNumber winningNumber) {
