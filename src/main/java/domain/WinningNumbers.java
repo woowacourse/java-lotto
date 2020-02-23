@@ -9,7 +9,7 @@ public class WinningNumbers {
 
 	public WinningNumbers(String sixNumbers, String bonusNumber) {
 		this.winningLottoTicket = new Lotto(sixNumbers);
-		this.bonusNumber = new LottoNumber(bonusNumber);
+		this.bonusNumber = LottoNumber.get(Integer.parseInt(bonusNumber));
 		duplicationValidate(winningLottoTicket, bonusNumber);
 	}
 

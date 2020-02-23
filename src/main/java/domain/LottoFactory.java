@@ -14,14 +14,14 @@ public class LottoFactory {
 
 	static {
 		for (int i = ONE; i <= LOTTO_NUMBER_RANGE; i++) {
-			numbers.add(new LottoNumber(i));
+			numbers.add(LottoNumber.get(i));
 		}
 	}
 
 	public static Lotto createSelfNumberLotto(int... number) {
 		List<LottoNumber> numbers = new ArrayList<>();
 		for (int i = 0; i < number.length; i++) {
-			numbers.add(new LottoNumber(number[i]));
+			numbers.add(LottoNumber.get(number[i]));
 		}
 		return new Lotto(numbers);
 	}

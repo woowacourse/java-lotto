@@ -11,7 +11,7 @@ class LottoTest {
 		//given
 		Lotto lotto = LottoFactory.createSelfNumberLotto(1, 2, 3, 4, 5, 6);
 		Lotto winningTicket = LottoFactory.createSelfNumberLotto(1, 2, 3, 7, 8, 9);
-		LottoNumber bonus = new LottoNumber(13);
+		LottoNumber bonus = LottoNumber.get(13);
 		//when
 		//then
 		assertThat(lotto.compare(winningTicket, bonus)).isEqualTo(Rank.FIFTH);

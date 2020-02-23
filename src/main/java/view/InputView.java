@@ -16,7 +16,7 @@ public class InputView {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String input = scanner.nextLine();
 		validate(input);
-		return scanner.nextLine();
+		return input;
 	}
 
 	public static String inputBonusNumber() {
