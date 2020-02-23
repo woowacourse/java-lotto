@@ -36,8 +36,8 @@ public class LottoGame {
             return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         } catch(IllegalArgumentException | NullPointerException e){
             OutputView.printExceptionMessage(e);
+            return inputWinningNumber();
         }
-        return inputWinningNumber();
     }
 
     private static Money inputPurchaseAmount() {
@@ -45,7 +45,7 @@ public class LottoGame {
             return new Money(InputView.inputPurchaseAmount());
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
+            return inputPurchaseAmount();
         }
-        return inputPurchaseAmount();
     }
 }
