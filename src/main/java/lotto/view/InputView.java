@@ -7,10 +7,11 @@ public class InputView {
 	private static final int INVALID_NUMBER = Integer.MIN_VALUE;
 
 	public static int inputPurchaseMoney() {
-		int purchaseMoney = inputPurchaseMoneyIfValid();
-		while (purchaseMoney == INVALID_NUMBER) {
+		int purchaseMoney;
+		do {
 			purchaseMoney = inputPurchaseMoneyIfValid();
-		}
+		} while (purchaseMoney == INVALID_NUMBER);
+
 		return purchaseMoney;
 	}
 
@@ -29,10 +30,11 @@ public class InputView {
 	}
 
 	public static int inputBonusNumber() {
-		int bonusNumber = inputBonusNumberIfValid();
-		while (bonusNumber == INVALID_NUMBER) {
+		int bonusNumber;
+		do {
 			bonusNumber = inputBonusNumberIfValid();
-		}
+		} while (bonusNumber == INVALID_NUMBER);
+
 		return bonusNumber;
 	}
 
