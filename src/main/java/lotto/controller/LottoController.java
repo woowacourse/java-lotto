@@ -7,6 +7,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottoController {
     private PurchaseAmount purchaseAmount;
@@ -28,7 +29,7 @@ public class LottoController {
 
     private WinningBalls generateWinningBalls() {
         try {
-            List<LottoBall> winningBalls = InputView.InputWinningBalls();
+            Set<LottoBall> winningBalls = InputView.InputWinningBalls();
             LottoBall bonusBall = LottoBallFactory.findByLottoBall(InputView.InputBonusBall());
             return new WinningBalls(winningBalls, bonusBall);
         } catch (DuplicationException | NumberOutOfRangeException e) {

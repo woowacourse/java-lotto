@@ -4,10 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningBallsTest {
@@ -17,7 +14,7 @@ public class WinningBallsTest {
     void compare_lotto_ball_and_winning_ball() {
         int[] value = {1, 2, 3, 4, 5, 6};
         Set<LottoBall> lottoBalls = Arrays.stream(value).mapToObj(LottoBall::new).collect(Collectors.toSet());
-        WinningBalls winningBalls = new WinningBalls(new ArrayList<>(lottoBalls), LottoBallFactory.findByLottoBall(7));
+        WinningBalls winningBalls = new WinningBalls(new HashSet<>(lottoBalls), LottoBallFactory.findByLottoBall(7));
 
         LottoTicket lottoTicket = new LottoTicket(lottoBalls);
 
@@ -28,16 +25,11 @@ public class WinningBallsTest {
     @DisplayName("보너스번호가 있는경우 테스트")
     void present_bonus_balls() {
         int bonusBall = 10;
-        int[] winningBallInputs = {3, 4, 5, 6, 7, 8};
-        int[] lottoTicketNumbers = {3, 4, 5, 6, 7, 10};
+        String winningBallInputs = "3, 4, 5, 6, 7, 8";
+        String lottoTicketNumbers = "3, 4, 5, 6, 7, 10";
 
-        List<LottoBall> winningBallValues = Arrays.stream(winningBallInputs)
-                .mapToObj(LottoBallFactory::findByLottoBall)
-                .collect(Collectors.toList());
-        Set<LottoBall> lottoTicket = Arrays.stream(lottoTicketNumbers)
-                .mapToObj(LottoBallFactory::findByLottoBall)
-                .collect(Collectors.toSet());
-
+        Set<LottoBall> winningBallValues = LottoBalls.generateWinningBalls(winningBallInputs);
+        Set<LottoBall> lottoTicket = LottoBalls.generateLottoTicket(lottoTicketNumbers);
         WinningBalls winningBalls = new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(bonusBall));
 
         Assertions.assertThat(winningBalls.hitBonusBall(new LottoTicket(lottoTicket))).isTrue();

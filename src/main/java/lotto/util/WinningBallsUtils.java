@@ -1,21 +1,24 @@
 package lotto.util;
 
-import lotto.Exception.DuplicationException;
 import lotto.Exception.NumberOutOfRangeException;
 import lotto.domain.LottoBall;
 import lotto.domain.LottoBallFactory;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningBallsUtils {
+    public static final String DELIMITER = ",";
+
     private Set<LottoBall> winningBalls;
 
     public WinningBallsUtils(String input) {
-        String[] winningBalls = input.split(",");
+        String[] winningBalls = input.split(DELIMITER);
         validateWinningBallsNumber(winningBalls);
         validateWinningBallsLength(winningBalls);
-        validateDuplicatedWinningBalls(winningBalls);
         this.winningBalls = Arrays.stream(winningBalls)
                 .map(Integer::parseInt)
                 .map(LottoBallFactory::findByLottoBall)
@@ -34,14 +37,7 @@ public class WinningBallsUtils {
         }
     }
 
-    private void validateDuplicatedWinningBalls(String[] winningBalls) {
-        Set<String> DuplicatedValidation = new HashSet<>(Arrays.asList(winningBalls));
-        if (DuplicatedValidation.size() != winningBalls.length) {
-            throw new DuplicationException("중복값을 제거하고 입력해주세요.");
-        }
-    }
-
-    public List<LottoBall> getWinningBalls() {
-        return Collections.unmodifiableList(new ArrayList<>(this.winningBalls));
+    public Set<LottoBall> getWinningBalls() {
+        return Collections.unmodifiableSet(new HashSet<>(this.winningBalls));
     }
 }

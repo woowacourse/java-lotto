@@ -10,6 +10,7 @@ import lotto.util.WinningBallsUtils;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
     static Scanner scanner = new Scanner(System.in);
@@ -23,7 +24,7 @@ public class InputView {
         }
     }
 
-    public static List<LottoBall> InputWinningBalls() {
+    public static Set<LottoBall> InputWinningBalls() {
         try {
             OutputView.printAnswerWinningBalls();
             String winningBalls = scanner.nextLine();

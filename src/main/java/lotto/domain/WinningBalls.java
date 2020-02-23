@@ -7,12 +7,13 @@ import lotto.view.OutputView;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class WinningBalls {
-    private List<LottoBall> winningBalls;
+    private Set<LottoBall> winningBalls;
     private LottoBall bonusBall;
 
-    public WinningBalls(List<LottoBall> winningBalls, LottoBall bonusBall) {
+    public WinningBalls(Set<LottoBall> winningBalls, LottoBall bonusBall) {
         this.winningBalls = winningBalls;
         this.bonusBall = bonusBall;
         validateWinningBallsWithDuplicatedBonusBall();
