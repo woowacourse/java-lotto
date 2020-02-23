@@ -34,20 +34,19 @@ public class Lotto {
 
     public int countCorrectNumber(WinningLotto winningLotto) {
         return (int) lottoNumbers.stream()
-                .filter(winningLotto.getLottoNumbers()::contains)
+                .filter(winningLotto::contains)
                 .count();
     }
 
-    //출력을 위해 Integer로 변환해서 반환
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public List<Integer> getLotto() {
         return Collections.unmodifiableList(
                 lottoNumbers.stream()
                         .map(LottoNumber::getLottoNumber)
                         .collect(Collectors.toList())
         );
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
     }
 }
