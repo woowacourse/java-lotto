@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.Objects;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoGeneratable;
 import lotto.domain.LottoNumber;
@@ -21,7 +23,7 @@ public class LottoGame {
 	private final LottoGeneratable lottosFactory;
 
 	public LottoGame(LottoGeneratable lottosFactory) {
-		this.lottosFactory = lottosFactory;
+		this.lottosFactory = Objects.requireNonNull(lottosFactory);
 	}
 
 	public void run() {
