@@ -10,7 +10,7 @@ public class BonusBall {
 		this.bonusBall = new LottoNo(Integer.parseInt(bonusBall));
 	}
 
-	public boolean isContainBonusBall(Lotto lotto) {
+	public boolean contains(Lotto lotto) {
 		if (lotto == null) {
 			return false;
 		}

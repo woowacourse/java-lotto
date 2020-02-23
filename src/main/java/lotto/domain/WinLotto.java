@@ -33,6 +33,6 @@ public class WinLotto {
     }
 
     public boolean isMatchBonus(Lotto lotto) {
-        return bonusBall.isContainBonusBall(lotto);
+        return bonusBall.contains(lotto);
     }
 }

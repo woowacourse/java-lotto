@@ -12,16 +12,16 @@ public class BonusBallTest {
 
 	@Test
 	void isContainBonusBall() {
-		BonusBall bonusBall = new BonusBall("3");
-		List<LottoNo> numbers = IntStream.range(1, 7)
-				.boxed()
-				.map(LottoNo::new)
-				.collect(Collectors.toList());
-		Lotto lotto = new Lotto(numbers);
+        BonusBall bonusBall = new BonusBall("3");
+        List<LottoNo> numbers = IntStream.range(1, 7)
+                .boxed()
+                .map(LottoNo::new)
+                .collect(Collectors.toList());
+        Lotto lotto = new Lotto(numbers);
 
-		assertThat(bonusBall.isContainBonusBall(lotto)).isTrue();
-		bonusBall = new BonusBall("9");
-		assertThat(bonusBall.isContainBonusBall(lotto)).isFalse();
-		assertThat(bonusBall.isContainBonusBall(null)).isFalse();
-	}
+        assertThat(bonusBall.contains(lotto)).isTrue();
+        bonusBall = new BonusBall("9");
+        assertThat(bonusBall.contains(lotto)).isFalse();
+        assertThat(bonusBall.contains(null)).isFalse();
+    }
 }
