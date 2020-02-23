@@ -4,8 +4,7 @@ import lotto.domain.WinningPrize;
 import lotto.dto.LottoDto;
 import lotto.dto.LottoDtos;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class OutputView {
 	public static void printWrongMoneyInput() {
@@ -30,39 +29,15 @@ public class OutputView {
 		System.out.println(e.getMessage());
 	}
 
-	public static void printLottoResult(List<WinningPrize> winningPrizes) {
-		HashMap<WinningPrize, Integer> winningInformation = makeWinningInformation(winningPrizes);
-		for (WinningPrize winningPrize : WinningPrize.values()) {
-			System.out.println(winningPrize.getDescription()
-					+ "("
-					+ winningPrize.getPrize() + "원): "
-					+ winningInformation.get(winningPrize) + "개");
-		}
-		printEarningRate(winningInformation);
+	public static void printLottoResult(Map<WinningPrize, Integer> winningInformation) {
+		winningInformation.forEach((winningPrize, amount) ->
+				System.out.println(winningPrize.getDescription()
+						+ "("
+						+ winningPrize.getPrize() + "원): "
+						+ amount + "개"));
 	}
 
-	private static HashMap<WinningPrize, Integer> makeWinningInformation(List<WinningPrize> winningPrizes) {
-		HashMap<WinningPrize, Integer> winningInformation = new HashMap<>();
-
-		initializeWinningInformation(winningInformation);
-		winningPrizes.forEach(winningPrize -> winningInformation.put(winningPrize, winningInformation.get(winningPrize) + 1));
-		return winningInformation;
-	}
-
-	private static void initializeWinningInformation(HashMap<WinningPrize, Integer> winningInformation) {
-		for (WinningPrize winningPrize : WinningPrize.values()) {
-			winningInformation.put(winningPrize, 0);
-		}
-	}
-
-	private static void printEarningRate(HashMap<WinningPrize, Integer> winningInformation) {
-		long totalEarning = 0;
-		int totalCount = 0;
-
-		for (WinningPrize winningPrize : WinningPrize.values()) {
-			totalCount += winningInformation.get(winningPrize);
-			totalEarning += (winningPrize.getPrize() * winningInformation.get(winningPrize));
-		}
-		System.out.println("총 수익률: " + totalEarning / (totalCount * 10) + "%");
+	public static void printEarningRate(long earningRate) {
+		System.out.println("총 수익률: " + earningRate + "%");
 	}
 }

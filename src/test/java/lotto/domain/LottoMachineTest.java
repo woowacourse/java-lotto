@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.LottoCountDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,6 @@ public class LottoMachineTest {
 	@DisplayName("주어진 개수만큼 자동 로또 사기")
 	void buyAutoLotto() {
 		LottoMachine lottoMachine = new LottoMachine();
-		assertThat(lottoMachine.makeRandomLottos(6).size()).isEqualTo(6);
+		assertThat(lottoMachine.makeRandomLottos(new LottoCountDto(6000)).size()).isEqualTo(6);
 	}
 }

@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.Lottos;
-import lotto.domain.WinningLotto;
-import lotto.domain.WinningPrize;
+import lotto.domain.*;
 import lotto.dto.LottoCountDto;
 import lotto.utils.InputUtil;
 import lotto.view.OutputView;
@@ -16,7 +13,9 @@ public class LottoController {
 		Lottos lottos = buyLottos();
 		OutputView.printLottos(lottos.makeLottoDtos());
 		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(receiveWinningNumber());
-		OutputView.printLottoResult(winningPrizes);
+		LottoResult lottoResult = new LottoResult(winningPrizes);
+		OutputView.printLottoResult(lottoResult.getWinningInformation());
+		OutputView.printEarningRate(lottoResult.calculateEarningRate());
 	}
 
 	private static int readBonusNumber() {
