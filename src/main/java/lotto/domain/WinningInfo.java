@@ -30,7 +30,6 @@ public enum WinningInfo {
                 .orElse(FAIL);
     }
 
-
     public int getWinningCount() {
         return winningCount;
     }

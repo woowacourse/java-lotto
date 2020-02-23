@@ -55,7 +55,6 @@ public class Results {
         return (getTotalEarning()) / (userLottoTickets.size() * MONEY_PER_LOTTO) * HUNDRED_PERCENT;
     }
 
-
     public Map<WinningInfo, Long> getSummary() {
         calculateResults();
         Map<WinningInfo, Long> summary = results.stream()

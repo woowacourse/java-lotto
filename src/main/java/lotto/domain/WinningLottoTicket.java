@@ -25,7 +25,6 @@ public class WinningLottoTicket extends LottoTicket {
                 .anyMatch(winningNumber -> winningNumber == bonusNumber.getNumber());
     }
 
-
     public boolean isBonusMatched(LottoTicket userLottoTicket) {
         return userLottoTicket.getLottoNumbers().stream()
                 .anyMatch(userLottoNumber -> bonusNumber.equals(userLottoNumber));
