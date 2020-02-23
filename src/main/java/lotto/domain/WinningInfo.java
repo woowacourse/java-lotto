@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum WinningInfo {
     FAIL(0, false, 0),
     FIFTH(3, false, 5000),
@@ -19,26 +21,13 @@ public enum WinningInfo {
     }
 
     public static WinningInfo valueOf(int winningCount, boolean hasBonus) {
-        WinningInfo winningInfo = null;
-        switch (winningCount) {
-            case 3:
-                winningInfo = WinningInfo.FIFTH;
-                break;
-            case 4:
-                winningInfo = WinningInfo.FOURTH;
-                break;
-            case 5:
-                if (hasBonus) {
-                    winningInfo = WinningInfo.SECOND;
-                    break;
-                }
-                winningInfo = WinningInfo.THIRD;
-                break;
-            case 6:
-                winningInfo = WinningInfo.FIRST;
-                break;
-            default:
-                winningInfo = WinningInfo.FAIL;
+        WinningInfo winningInfo = Arrays.stream(values())
+                .filter(x -> x.winningCount == winningCount)
+                .findFirst()
+                .orElse(FAIL);
+
+        if (hasBonus && (winningInfo == SECOND || winningInfo == THIRD)) {
+            winningInfo = SECOND;
         }
         return winningInfo;
     }
