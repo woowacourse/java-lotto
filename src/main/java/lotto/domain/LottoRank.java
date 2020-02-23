@@ -43,13 +43,17 @@ public enum LottoRank {
 
 	public static LottoRank of(MatchCount matchCount, boolean isBonus) {
 		return Arrays.stream(values())
-				.filter(rank -> rank.match.test(matchCount, isBonus))
+				.filter(rank -> rank.isMatch(matchCount, isBonus))
 				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(INVALID_RANK_MESSAGE));
 	}
 
 	public static List<LottoRank> valuesAsReverse() {
 		return Lists.reverse(Stream.of(values()).collect(Collectors.toList()));
+	}
+
+	private boolean isMatch(MatchCount matchCount, boolean isBonus) {
+		return match.test(matchCount, isBonus);
 	}
 
 	public long calculateTotalWinnings(long amount) {
