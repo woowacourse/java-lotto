@@ -6,7 +6,7 @@ public class Money {
     public static final String ERROR_MESSAGE_NULL_POINT_MONEY = "입력값이 비었습니다.";
     private static final int LOTTO_PRICE = 1000;
     private static final int TO_PERCENT_VALUE = 100;
-    private static final String ERROR_MESSAGE_MIN_MONEY = "천원 이상의 금액만 가능합니다.";
+    public static final String ERROR_MESSAGE_MIN_MONEY = "천원 이상의 금액만 가능합니다.";
     private final int money;
 
     public Money(String inputMoney) {
