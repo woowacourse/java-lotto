@@ -14,7 +14,7 @@ public class LottoResultFactory {
 		List<WinningType> winningTypes =
 				purchasedLottoTickets.findMatchingWinningTypesWith(winningLottoNumbers);
 
-		lottoResult.replaceAll((k, v) -> Collections.frequency(winningTypes, k));
+		lottoResult.replaceAll((key, value) -> Collections.frequency(winningTypes, key));
 
 		return new LottoResult(lottoResult);
 	}

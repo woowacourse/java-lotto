@@ -21,7 +21,7 @@ public class LottoResult {
 	public List<WinningType> getWinningKeys() {
 		return lottoResult.keySet()
 				.stream()
-				.filter((t) -> !t.isNone())
+				.filter(WinningType::isWin)
 				.sorted()
 				.collect(Collectors.toUnmodifiableList());
 	}

@@ -22,10 +22,10 @@ public enum WinningType {
 		this.winningAmount = winningAmount;
 	}
 
-	public static WinningType getWinningType(int sameNumberCount, boolean isContainsBonus) {
+	public static WinningType getWinningType(int sameNumberCount, boolean bonus) {
 		return Arrays.stream(WinningType.values())
-				.filter(t -> (t.sameNumberCount == sameNumberCount)
-						&& (t.bonusRequirement.isSatisfiedBy(isContainsBonus)))
+				.filter(winningType -> (winningType.sameNumberCount == sameNumberCount)
+						&& (winningType.bonusRequirement.isSatisfiedBy(bonus)))
 				.findFirst()
 				.orElse(NONE);
 	}
@@ -34,8 +34,8 @@ public enum WinningType {
 		return bonusRequirement == BonusRequirement.TRUE;
 	}
 
-	public boolean isNone() {
-		return this == NONE;
+	public boolean isWin() {
+		return this != NONE;
 	}
 
 	public double calculateEarning(int num) {
