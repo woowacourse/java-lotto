@@ -2,7 +2,7 @@ package view;
 
 import domain.LottoCalculator;
 import domain.LottoTicket;
-import domain.LottoType;
+import domain.RankType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,7 @@ public class OutputView {
         System.out.println("--------");
 
         for (Map.Entry<String, Integer> entry : winningCountMap.entrySet()) {
-            System.out.println(LottoType.valueOf(entry.getKey()).getPrintStr() + String.format("%d", entry.getValue()) + "개");
+            System.out.println(RankType.valueOf(entry.getKey()).getPrintStr() + String.format("%d", entry.getValue()) + "개");
         }
 
         System.out.println("총 수익률은 " + LottoCalculator.getProfit(winningCountMap, money) + "%입니다.");

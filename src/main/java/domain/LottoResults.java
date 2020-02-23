@@ -27,8 +27,8 @@ public class LottoResults {
 
     public HashMap<String, Integer> getCountMap() {
         HashMap<String, Integer> winningCountMap = new HashMap<>();
-        for (LottoType lottoType : LottoType.values()) {
-            winningCountMap.put(lottoType.name(), getCountSameLottoNumber(lottoType.getNumber()));
+        for (RankType rankType : RankType.values()) {
+            winningCountMap.put(rankType.name(), getCountSameLottoNumber(rankType.getNumber()));
         }
         return winningCountMap;
     }

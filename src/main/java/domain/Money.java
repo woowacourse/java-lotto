@@ -3,7 +3,7 @@ package domain;
 import org.apache.commons.lang3.StringUtils;
 
 public class Money {
-    public static final int MIN_MONEY = 1000;
+    public static final int MIN_MONEY = 1_000;
 
     private int money;
 

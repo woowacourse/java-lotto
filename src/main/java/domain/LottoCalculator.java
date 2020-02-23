@@ -10,7 +10,7 @@ public class LottoCalculator {
     private static double getTotalWinningPrice(HashMap<String, Integer> map) {
         double sum = INIT_SUM_VALUE;
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            sum += LottoType.valueOf(entry.getKey()).calculate(entry.getValue());
+            sum += RankType.valueOf(entry.getKey()).calculate(entry.getValue());
         }
         return sum;
     }
