@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
-	FIFTH(3, new Money(5000)),
-	FOURTH(4, new Money(50000)),
-	THIRD(5, new Money(1500000)),
-	SECOND(5, new Money(30000000)),
-	FIRST(6, new Money(2000000000));
+	FIFTH(3, new Money(5_000)),
+	FOURTH(4, new Money(50_000)),
+	THIRD(5, new Money(1_500_000)),
+	SECOND(5, new Money(30_000_000)),
+	FIRST(6, new Money(2_000_000_000));
 
 	private int matchedCount;
 	private Money winningMoney;
