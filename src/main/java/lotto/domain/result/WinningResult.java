@@ -10,7 +10,6 @@ import lotto.domain.lottoRank.LottoRank;
 
 public class WinningResult {
 	private final Map<LottoRank, Long> winningResult = new TreeMap<>(Collections.reverseOrder());
-	private long winningRate;
 
 	public WinningResult(Map<LottoRank, Long> winningResult) {
 		validate(winningResult);
@@ -32,9 +31,9 @@ public class WinningResult {
 		return winningResult;
 	}
 
-	public void produceWinningStatistics(LottoMoney lottoMoney) {
+	public long calculateWinningRate(LottoMoney lottoMoney) {
 		LottoMoney totalLottoMoney = calculateTotalWinningLottoMoney();
-		winningRate = totalLottoMoney.measureWinningRate(lottoMoney);
+		return totalLottoMoney.measureWinningRate(lottoMoney);
 	}
 
 	private LottoMoney calculateTotalWinningLottoMoney() {
@@ -51,9 +50,5 @@ public class WinningResult {
 
 	public Map<LottoRank, Long> getWinningResult() {
 		return winningResult;
-	}
-
-	public long getWinningRate() {
-		return winningRate;
 	}
 }

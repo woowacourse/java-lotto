@@ -15,9 +15,6 @@ import lotto.view.ConsoleInputView;
 import lotto.view.ConsoleOutputView;
 
 public class LottoController {
-	public LottoController() {
-	}
-
 	public void play() {
 		LottoMoney lottoMoney = receiveInputLottoMoney();
 		LottoTickets lottoTickets = purchaseLottoTicket(lottoMoney);
@@ -25,9 +22,10 @@ public class LottoController {
 
 		WinningLotto winningLotto = generateWinningLotto();
 		WinningResult winningResult = lottoTickets.produceWinningResultBy(winningLotto);
-		winningResult.produceWinningStatistics(lottoMoney);
+		ConsoleOutputView.printWinningLottoResult(winningResult);
 
-		ConsoleOutputView.printWinningResult(winningResult);
+		long winningRate = winningResult.calculateWinningRate(lottoMoney);
+		ConsoleOutputView.printWinningRate(winningRate);
 	}
 
 	private static LottoMoney receiveInputLottoMoney() {

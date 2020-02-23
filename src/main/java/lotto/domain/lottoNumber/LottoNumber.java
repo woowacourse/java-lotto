@@ -1,25 +1,14 @@
 package lotto.domain.lottoNumber;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 	public static final int MIN_LOTTO_NUMBER = 1;
 	public static final int MAX_LOTTO_NUMBER = 45;
-	private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
 	private final int lottoNumber;
 
-	static {
-		for (int lottoNumber = MIN_LOTTO_NUMBER; lottoNumber <= MAX_LOTTO_NUMBER; lottoNumber++) {
-			CACHE.put(lottoNumber, new LottoNumber(lottoNumber));
-		}
-	}
-
-	private LottoNumber(int lottoNumber) {
+	public LottoNumber(int lottoNumber) {
 		validate(lottoNumber);
 		this.lottoNumber = lottoNumber;
 	}
@@ -32,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	public static LottoNumber valueOf(int number) {
 		if (number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER) {
-			return CACHE.get(number);
+			return LottoNumberFactory.generate(number);
 		}
 		return new LottoNumber(number);
 	}
@@ -47,10 +36,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		} catch (NumberFormatException e) {
 			throw new InvalidLottoNumberException(InvalidLottoNumberException.NOT_INTEGER);
 		}
-	}
-
-	public static Collection<LottoNumber> values() {
-		return Collections.unmodifiableCollection(CACHE.values());
 	}
 
 	public int getLottoNumber() {

@@ -28,13 +28,11 @@ public class ConsoleOutputView {
 		System.out.println();
 	}
 
-	public static void printWinningResult(WinningResult winningResult) {
+	public static void printWinningLottoResult(WinningResult winningResult) {
 		System.out.println();
 		System.out.println(WINNING_RESULT_NOTICE_MESSAGE);
 		System.out.println(DIVIDING_LINE);
 		printWinningLottoTicketByLottoRank(winningResult);
-		printWinningRate(winningResult);
-
 	}
 
 	private static void printWinningLottoTicketByLottoRank(WinningResult winningResult) {
@@ -42,7 +40,7 @@ public class ConsoleOutputView {
 			System.out.println(StringUtil.generateFormOfLottoRank(lottoRank, lottoRankCount)));
 	}
 
-	private static void printWinningRate(WinningResult winningResult) {
-		System.out.println(String.format(TOTAL_WINNING_RATE_MESSAGE, winningResult.getWinningRate()));
+	public static void printWinningRate(long winningResult) {
+		System.out.println(String.format(TOTAL_WINNING_RATE_MESSAGE, winningResult));
 	}
 }

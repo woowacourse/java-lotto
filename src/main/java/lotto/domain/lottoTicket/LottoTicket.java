@@ -60,10 +60,10 @@ public class LottoTicket {
 		return lottoNumbers.contains(bonusLottoNumber);
 	}
 
-	public MatchCount countMatchingWith(LottoTicket winningLotto) {
+	public MatchCount countMatchingWith(LottoTicket winningLottoTicket) {
 		List<LottoNumber> matchingLottoNumbers = new ArrayList<>(lottoNumbers);
-		matchingLottoNumbers.retainAll(winningLotto.lottoNumbers);
-		return MatchCount.valueOf(matchingLottoNumbers.size());
+		matchingLottoNumbers.retainAll(winningLottoTicket.lottoNumbers);
+		return new MatchCount(matchingLottoNumbers.size());
 	}
 
 	public Set<LottoNumber> getLottoNumbers() {

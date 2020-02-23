@@ -17,7 +17,7 @@ public class LottoMoneyTest {
 
 	@Test
 	void validateNegative_NegativeNumber_InvalidLottoMoneyExceptionThrown() {
-		long value = -1;
+		long value = -1L;
 
 		assertThatThrownBy(() -> new LottoMoney(value))
 			.isInstanceOf(InvalidLottoMoneyException.class)
@@ -86,13 +86,13 @@ public class LottoMoneyTest {
 	@ParameterizedTest
 	@ValueSource(longs = {5_000, 15_000, 100_000})
 	void measureWinningRate_AmountOfPurchaseLottoMoney_WinningRateByPercentage(long value) {
-		long winningLottoMoney = 3_000_000;
+		long winningLottoMoney = 3_000_000L;
 		LottoMoney lottoMoney = new LottoMoney(winningLottoMoney);
 		LottoMoney amountOfPurchaseLottoMoney = new LottoMoney(value);
 
 		long actual = lottoMoney.measureWinningRate(amountOfPurchaseLottoMoney);
 
-		long expected = (winningLottoMoney / value) * 100;
+		long expected = (winningLottoMoney / value) * 100L;
 		assertThat(actual).isEqualTo(expected);
 	}
 }

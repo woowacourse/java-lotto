@@ -7,9 +7,10 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import lotto.domain.lottoNumber.LottoNumber;
+import lotto.domain.lottoNumber.LottoNumberFactory;
 
 public class AutoLottoTicketsFactory {
-	private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>(LottoNumber.values());
+	private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>(LottoNumberFactory.values());
 
 	public static LottoTickets generate(long numberOfLottoTicket) {
 		return LongStream.range(0, numberOfLottoTicket)

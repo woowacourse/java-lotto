@@ -5,30 +5,38 @@ import java.util.Arrays;
 import lotto.domain.lottoMoney.LottoMoney;
 
 public enum LottoRank {
-	FIRST(MatchCount.SIX, new LottoMoney(2_000_000_000)),
-	SECOND(MatchCount.FIVE, new LottoMoney(30_000_000)),
-	THIRD(MatchCount.FIVE, new LottoMoney(1_500_000)),
-	FOURTH(MatchCount.FOUR, new LottoMoney(50_000)),
-	FIFTH(MatchCount.THREE, new LottoMoney(5_000)),
-	MISS(MatchCount.MISS, new LottoMoney(0));
+	FIRST(new MatchCount(6), false, new LottoMoney(2_000_000_000)),
+	SECOND(new MatchCount(5), true, new LottoMoney(30_000_000)),
+	THIRD(new MatchCount(5), false, new LottoMoney(1_500_000)),
+	FOURTH(new MatchCount(4), false, new LottoMoney(50_000)),
+	FIFTH(new MatchCount(3), false, new LottoMoney(5_000)),
+	MISS(new MatchCount(0), false, new LottoMoney(0));
 
 	private MatchCount matchCount;
+	private boolean hasBonusLottoNumber;
 	private LottoMoney winningLottoMoney;
 
-	LottoRank(MatchCount matchCount, LottoMoney winningLottoMoney) {
+	LottoRank(MatchCount matchCount, boolean hasBonusLottoNumber, LottoMoney winningLottoMoney) {
 		this.matchCount = matchCount;
+		this.hasBonusLottoNumber = hasBonusLottoNumber;
 		this.winningLottoMoney = winningLottoMoney;
 	}
 
 	public static LottoRank of(MatchCount matchCount, boolean hasBonusLottoNumber) {
-		if (hasBonusLottoNumber && SECOND.matchCount.equals(matchCount)) {
+		if (isSecond(matchCount, hasBonusLottoNumber)) {
 			return LottoRank.SECOND;
 		}
-
 		return Arrays.stream(values())
 			.filter(lottoRank -> lottoRank.matchCount.equals(matchCount))
 			.findFirst()
 			.orElse(MISS);
+	}
+
+	private static boolean isSecond(MatchCount matchCount, boolean hasBonusLottoNumber) {
+		if (SECOND.hasBonusLottoNumber != hasBonusLottoNumber) {
+			return false;
+		}
+		return SECOND.matchCount.equals(matchCount);
 	}
 
 	public LottoMoney calculateWinningLottoMoneyBy(long lottoRankCount) {

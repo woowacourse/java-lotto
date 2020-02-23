@@ -3,9 +3,9 @@ package lotto.domain.lottoMoney;
 import java.util.Objects;
 
 public class LottoMoney {
-	public static final LottoMoney ZERO = new LottoMoney(0);
+	public static final LottoMoney ZERO = new LottoMoney(0L);
 
-	private static final long UNIT = 1000;
+	private static final long UNIT = 1_000L;
 
 	private final long lottoMoney;
 
@@ -20,7 +20,7 @@ public class LottoMoney {
 	}
 
 	private void validateNegative(long lottoMoney) {
-		if (lottoMoney < 0) {
+		if (lottoMoney < 0L) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.NEGATIVE);
 		}
 	}
@@ -32,7 +32,7 @@ public class LottoMoney {
 	}
 
 	private boolean isDivideByUnit(long lottoMoney) {
-		return (lottoMoney % UNIT) != 0;
+		return (lottoMoney % UNIT) != 0L;
 	}
 
 	public static LottoMoney valueOf(String inputLottoMoney) {

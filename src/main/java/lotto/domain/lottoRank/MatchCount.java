@@ -1,28 +1,41 @@
 package lotto.domain.lottoRank;
 
-import java.util.Arrays;
+import java.util.Objects;
 
-public enum MatchCount {
-	SIX(6),
-	FIVE(5),
-	FOUR(4),
-	THREE(3),
-	MISS(0);
+import lotto.domain.lottoTicket.LottoTicket;
 
+public class MatchCount {
 	private final int matchCount;
 
-	MatchCount(int matchCount) {
+	public MatchCount(int matchCount) {
+		validate(matchCount);
 		this.matchCount = matchCount;
 	}
 
-	public static MatchCount valueOf(int matchCount) {
-		return Arrays.stream(values())
-			.filter(value -> value.matchCount == matchCount)
-			.findFirst()
-			.orElse(MISS);
+	private void validate(int matchCount) {
+		if (0 > matchCount || LottoTicket.TOTAL_SIZE < matchCount) {
+			throw new InvalidMatchCountException(InvalidMatchCountException.OUT_OF_BOUND);
+		}
 	}
 
 	public int getMatchCount() {
 		return matchCount;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+		if (object == null || getClass() != object.getClass()) {
+			return false;
+		}
+		MatchCount that = (MatchCount)object;
+		return matchCount == that.matchCount;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(matchCount);
 	}
 }

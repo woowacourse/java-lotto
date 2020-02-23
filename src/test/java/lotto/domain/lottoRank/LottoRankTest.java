@@ -12,7 +12,7 @@ import lotto.domain.lottoMoney.LottoMoney;
 class LottoRankTest {
 	@Test
 	void of_WithinRankMatchCountAndHasBonusNumber_ReturnInstance() {
-		MatchCount matchCount = MatchCount.valueOf(5);
+		MatchCount matchCount = new MatchCount(5);
 		boolean hasBonusLottoNumber = true;
 
 		LottoRank actual = LottoRank.of(matchCount, hasBonusLottoNumber);
@@ -23,7 +23,7 @@ class LottoRankTest {
 	@ParameterizedTest
 	@ValueSource(ints = {0, 1, 2})
 	void of_OutOfRankMatchCountAndHasBonusNumber_ReturnMissInstance(int value) {
-		MatchCount matchCount = MatchCount.valueOf(value);
+		MatchCount matchCount = new MatchCount(value);
 		boolean hasBonusLottoNumber = false;
 
 		LottoRank actual = LottoRank.of(matchCount, hasBonusLottoNumber);
