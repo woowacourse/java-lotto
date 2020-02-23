@@ -9,7 +9,7 @@ public class PurchasedLottoTicketsFactory {
 
 		int count = purchaseMoney.countPurchasedTickets();
 		for (int i = 0; i < count; i++) {
-			purchasedLottoTickets.add(RandomLottoTicketFactory.create());
+			purchasedLottoTickets.add(SerialLottoNumberFactory.createRandomLottoTicket());
 		}
 
 		return new PurchasedLottoTickets(purchasedLottoTickets);
