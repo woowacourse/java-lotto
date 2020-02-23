@@ -6,6 +6,7 @@ import java.util.Map;
 public class LottoResult {
     private final Map<LottoRank, Integer> result = new HashMap<>();
     public static final int INITIAL_PROFIT = 0;
+    public static final int LOTTO_PRICE = 1000;
 
     public LottoResult() {
         for (LottoRank rank : LottoRank.values()) {
@@ -19,7 +20,11 @@ public class LottoResult {
         }
     }
 
-    public int calculateProfit() {
+    public int calculateProfitRatio(int lottoCount) {
+        return calculateProfit() / (LOTTO_PRICE * lottoCount);
+    }
+
+    private int calculateProfit() {
         int profit = INITIAL_PROFIT;
         for (LottoRank rank : result.keySet()) {
             profit += rank.getWinningMoney() * result.get(rank);

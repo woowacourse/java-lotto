@@ -16,4 +16,17 @@ public class LottoResultTest {
             assertThat(lottoResult.getCount(rank)).isEqualTo(0);
         }
     }
+
+    @Test
+    void 총_수익_계산_테스트() {
+        int lottoCount = 4;
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.addWinningRankCount(LottoRank.THIRD);
+        lottoResult.addWinningRankCount(LottoRank.FOURTH);
+        lottoResult.addWinningRankCount(LottoRank.FIFTH);
+        lottoResult.addWinningRankCount(LottoRank.FIFTH);
+
+        int profitRatio = lottoResult.calculateProfitRatio(4);
+        assertThat(profitRatio).isEqualTo(390);
+    }
 }

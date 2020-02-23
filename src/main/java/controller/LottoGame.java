@@ -57,8 +57,7 @@ public class LottoGame {
     }
 
     private static int calculateProfitRatio(int lottoCount, LottoResult lottoResult) {
-        Profit profit = new Profit();
-        return profit.calculateProfitRatio(lottoResult.calculateProfit(), lottoCount);
+        return lottoResult.calculateProfitRatio(lottoCount);
     }
 
     private static void printFinalResult(LottoResult lottoResult, int profitRatio) {
