@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 
 public class WinningLotto extends Lotto {
     private static final String BONUS_NUMBER_ALREADY_EXIST_ERROR_MSG = "보너스 번호가 당첨번호와 중복됩니다.";
