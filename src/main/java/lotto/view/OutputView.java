@@ -14,6 +14,7 @@ public class OutputView {
 	private static final String BUY_MESSAGE_FORMAT = "%d개를 구매했습니다";
 	private static final String RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원) - %d개";
 	private static final String SECOND_WIN_ADDITIONAL_MESSAGE = ", 보너스볼 일치";
+	private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계%s---------";
 	private static final int INSERT_OFFSET = 5;
 
 	public static void printLotteris(List<Lotto> lotteris) {
@@ -32,7 +33,7 @@ public class OutputView {
 
 	public static void printResult(LottoResult result) {
 		Map<Rank, Integer> results = result.getResult();
-		System.out.println("당첨 통계" + System.lineSeparator() + "---------");
+		System.out.println(String.format(WINNING_STATISTICS_MESSAGE, System.lineSeparator()));
 		for (Rank rank : Rank.valuesOnlyWin()) {
 			System.out.println(getResultMessage(results, rank));
 		}
