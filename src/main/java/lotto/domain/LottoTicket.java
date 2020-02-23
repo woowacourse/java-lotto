@@ -9,6 +9,11 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
+    public static final int LOTTO_TICKET_SIZE = 6;
+    public static final String NUMBER_OUT_OF_RANGE_ERROR_MESSAGE = String.format("%d개 이상의 숫자가 들어갔습니다.",
+            LOTTO_TICKET_SIZE);
+    public static final String LOTTO_TICKET_EMPTY_ERROR_MESSAGE = "로또 티켓에 로또볼이 비었습니다. 다시 드리겠습니다.";
+
     private List<LottoBall> lottoTicket;
 
     public LottoTicket(Set<LottoBall> lottoTicket) {
@@ -17,12 +22,12 @@ public class LottoTicket {
         Collections.sort(this.lottoTicket);
     }
 
-    private void validateLottoTicket(Set<LottoBall> lottoTicket){
+    private void validateLottoTicket(Set<LottoBall> lottoTicket) {
         if (lottoTicket.isEmpty()) {
-            throw new LottoTicketEmptyException("로또 티켓에 로또볼이 비었습니다. 다시 드리겠습니다.");
+            throw new LottoTicketEmptyException(LOTTO_TICKET_EMPTY_ERROR_MESSAGE);
         }
-        if(lottoTicket.size() > 6){
-            throw new NumberOutOfRangeException("7개의 숫자가 들어갔습니다.");
+        if (lottoTicket.size() > LOTTO_TICKET_SIZE) {
+            throw new NumberOutOfRangeException(NUMBER_OUT_OF_RANGE_ERROR_MESSAGE);
         }
     }
 

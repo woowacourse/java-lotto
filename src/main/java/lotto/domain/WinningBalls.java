@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class WinningBalls {
+    public static final String DUPLICATION_ERROR_MESSAGE = "보너스 볼이 중복입니다. 당첨 번호를 다시 입력해주세요.";
     private Set<LottoBall> winningBalls;
     private LottoBall bonusBall;
 
@@ -21,7 +22,7 @@ public class WinningBalls {
 
     private void validateWinningBallsWithDuplicatedBonusBall() {
         if (winningBalls.contains(this.bonusBall)) {
-            throw new DuplicationException("보너스 볼이 중복입니다. 당첨 번호를 다시 입력해주세요.");
+            throw new DuplicationException(DUPLICATION_ERROR_MESSAGE);
         }
     }
 

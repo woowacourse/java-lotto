@@ -11,6 +11,7 @@ import java.util.Set;
 
 public class LottoController {
     private PurchaseAmount purchaseAmount;
+
     public void play() {
         startInputPurchaseAmount();
         LottoStore lottoStore = new LottoStore(purchaseAmount);
@@ -29,7 +30,7 @@ public class LottoController {
     private WinningBalls generateWinningBalls() {
         try {
             Set<LottoBall> winningBalls = InputView.InputWinningBalls();
-            LottoBall bonusBall = LottoBallFactory.findByLottoBall(InputView.InputBonusBall());
+            LottoBall bonusBall = InputView.InputBonusBall();
             return new WinningBalls(winningBalls, bonusBall);
         } catch (DuplicationException | NumberOutOfRangeException e) {
             OutputView.printErrorMessage(e.getMessage());

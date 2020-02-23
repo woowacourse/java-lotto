@@ -4,6 +4,7 @@ import lotto.Exception.DuplicationException;
 import lotto.Exception.NotBuyLottoTicketException;
 import lotto.Exception.NumberOutOfRangeException;
 import lotto.domain.LottoBall;
+import lotto.domain.LottoBallFactory;
 import lotto.domain.LottoBalls;
 import lotto.domain.PurchaseAmount;
 import lotto.util.InputValidationUtil;
@@ -36,12 +37,12 @@ public class InputView {
         }
     }
 
-    public static int InputBonusBall() {
+    public static LottoBall InputBonusBall() {
         try {
             OutputView.printAnswerBonusBall();
             String bonusBall = scanner.nextLine();
-            return InputValidationUtil.returnNumberWithNumberCheck(bonusBall);
-        } catch (RuntimeException e) {
+            return LottoBallFactory.findByLottoBall(InputValidationUtil.returnNumberWithNumberCheck(bonusBall));
+        } catch (NumberFormatException e) {
             OutputView.printErrorMessage(e.getMessage());
             return InputBonusBall();
         }

@@ -7,7 +7,7 @@ import java.util.List;
 public class EarningRate {
     public static final int RATE_NUMBER = 100;
 
-    private int earningRate;
+    private long earningRate;
     private long totalWinningMoney = 0;
 
     public EarningRate(List<WinningRank> winningRanks, PurchaseAmount purchaseAmount) {
@@ -18,7 +18,7 @@ public class EarningRate {
             OutputView.printWinningResult(winningRank, count);
             sumWinningMoney(winningRank.getWinningMoney() * count);
         }
-        this.earningRate = (int) (totalWinningMoney / purchaseAmount.getPurchaseAmount() * RATE_NUMBER);
+        this.earningRate = totalWinningMoney / purchaseAmount.getPurchaseAmount() * RATE_NUMBER;
     }
 
     private void sumWinningMoney(int totalWinningMoney) {

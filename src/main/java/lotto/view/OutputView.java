@@ -14,11 +14,11 @@ public class OutputView {
     }
 
     public static void printLottePieces(int lottoPieces) {
-        System.out.println(lottoPieces + "개를 구매했습니다.");
+        System.out.printf("%d개를 구매했습니다.%n", lottoPieces);
     }
 
     public static void printChangeMoney(int changeMoney) {
-        System.out.println("거스름돈은 " + changeMoney + "원 입니다.");
+        System.out.printf("거스름돈은 %d원 입니다.%n", changeMoney);
     }
 
     public static void printLottoTicket(LottoTickets lottoTickets) {
@@ -41,10 +41,12 @@ public class OutputView {
     public static void printWinningResult(WinningRank winningRank, int count) {
         printWinningResultGuide(winningRank);
         if (winningRank == WinningRank.SECOND_RANK) {
-            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개 %n", winningRank.getWinningBallCount(), winningRank.getWinningMoney(), count);
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개 %n", winningRank.getWinningBallCount(),
+                    winningRank.getWinningMoney(), count);
             return;
         }
-        System.out.printf("%d개 일치 (%d원) - %d개 %n", winningRank.getWinningBallCount(), winningRank.getWinningMoney(), count);
+        System.out.printf("%d개 일치 (%d원) - %d개 %n", winningRank.getWinningBallCount(),
+                winningRank.getWinningMoney(), count);
     }
 
     private static void printWinningResultGuide(WinningRank winningRank) {
@@ -54,6 +56,6 @@ public class OutputView {
     }
 
     public static void printEarningRate(EarningRate earningRate) {
-        System.out.println("\n총 수익률은 " + earningRate.getEarningRate() + "% 입니다.");
+        System.out.printf("%n총 수익률은 %d%% 입니다.", earningRate.getEarningRate());
     }
 }
