@@ -17,18 +17,8 @@ public class LottoController {
 	public static void run() {
 		Lottos lottos = buyLottos();
 		OutputView.printLottos(LottosDto.from(lottos));
-		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(receiveWinningNumber());
+		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(readWinningLotto());
 		OutputView.printLottoResult(winningPrizes);
-	}
-
-	private static int readBonusNumber() {
-		try {
-			InputView.printInsertBonusNumber();
-			return InputUtil.inputBonusNumber();
-		} catch (NumberFormatException | IOException e) {
-			OutputView.printWrongBonusNumberInput(e);
-			return readBonusNumber();
-		}
 	}
 
 	private static Lottos buyLottos() {
@@ -44,7 +34,7 @@ public class LottoController {
 		}
 	}
 
-	public static int readMoney() {
+	private static int readMoney() {
 		try {
 			InputView.printInsertMoney();
 			return InputUtil.inputMoney();
@@ -54,22 +44,32 @@ public class LottoController {
 		}
 	}
 
-	public static WinningLotto receiveWinningNumber() {
+	private static WinningLotto readWinningLotto() {
 		try {
 			return new WinningLotto(readWinningNumber(), readBonusNumber());
 		} catch (IllegalArgumentException e) {
 			OutputView.printExceptionMessage(e);
-			return receiveWinningNumber();
+			return readWinningLotto();
 		}
 	}
 
-	public static List<String> readWinningNumber() {
+	private static List<String> readWinningNumber() {
 		try {
 			InputView.printInsertWinningNumber();
 			return InputUtil.inputWinningNumber();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return readWinningNumber();
+		}
+	}
+
+	private static int readBonusNumber() {
+		try {
+			InputView.printInsertBonusNumber();
+			return InputUtil.inputBonusNumber();
+		} catch (NumberFormatException | IOException e) {
+			OutputView.printWrongBonusNumberInput(e);
+			return readBonusNumber();
 		}
 	}
 }
