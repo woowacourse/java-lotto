@@ -2,15 +2,19 @@ package lotto;
 
 import domain.LottoNumber;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
-    @Test
-    void 범위_밖의_로또_번호_생성_시_예외_발생() {
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    void 범위_밖의_로또_번호_생성_시_예외_발생(int number) {
         assertThatThrownBy(() -> {
-            new LottoNumber(0);
+            new LottoNumber(number);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 숫자 범위를 넘어섰습니다.");
     }
