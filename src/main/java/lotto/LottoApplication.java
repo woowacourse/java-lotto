@@ -1,7 +1,8 @@
 package lotto;
 
 import lotto.controller.LottoGame;
-import lotto.view.InputView;
+import lotto.domain.LottoGeneratable;
+import lotto.domain.RandomLottosFactory;
 import lotto.view.OutputView;
 
 /**
@@ -14,14 +15,11 @@ import lotto.view.OutputView;
 public class LottoApplication {
 	public static void main(String[] args) {
 		try {
-			long money = InputView.inputLottoMoney();
-			String winningLotto = InputView.inputWinningLotto();
-			int bonusNumber = InputView.inputBonusBall();
-			LottoGame lottoGame = new LottoGame(money, winningLotto, bonusNumber);
-			lottoGame.play();
-		} catch (IllegalArgumentException | NullPointerException e) {
+			LottoGeneratable lottosFactory = new RandomLottosFactory();
+			LottoGame lottoGame = new LottoGame(lottosFactory);
+			lottoGame.run();
+		} catch (Exception e) {
 			OutputView.printError(e.getMessage());
 		}
-
 	}
 }
