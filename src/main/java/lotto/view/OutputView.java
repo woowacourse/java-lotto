@@ -5,7 +5,7 @@ import java.util.List;
 
 import lotto.domain.WinningPrize;
 import lotto.dto.LottoDto;
-import lotto.dto.LottoDtos;
+import lotto.dto.LottosDto;
 
 public class OutputView {
 	public static void printWrongMoneyInput(Exception e) {
@@ -17,8 +17,8 @@ public class OutputView {
 		System.out.println(lottoCount + "개를 구매했습니다.");
 	}
 
-	public static void printLottos(LottoDtos lottoDtos) {
-		for (LottoDto lotto : lottoDtos.getLottoDtos()) {
+	public static void printLottos(LottosDto lottosDto) {
+		for (LottoDto lotto : lottosDto.getLottosDto()) {
 			System.out.println(lotto.getLottoNumbers().getLottoNumbers());
 		}
 	}

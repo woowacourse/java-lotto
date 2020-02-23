@@ -8,6 +8,7 @@ import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningPrize;
 import lotto.dto.LottoCountDto;
+import lotto.dto.LottosDto;
 import lotto.utils.InputUtil;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -15,7 +16,7 @@ import lotto.view.OutputView;
 public class LottoController {
 	public static void run() {
 		Lottos lottos = buyLottos();
-		OutputView.printLottos(lottos.makeLottoDtos());
+		OutputView.printLottos(LottosDto.from(lottos));
 		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(receiveWinningNumber());
 		OutputView.printLottoResult(winningPrizes);
 	}

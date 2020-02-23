@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.dto.LottoDtos;
+import lotto.dto.LottosDto;
 
 public class Lottos {
 	private final List<Lotto> lottos;
@@ -19,15 +19,13 @@ public class Lottos {
 		}
 	}
 
-	public LottoDtos makeLottoDtos() {
-		return new LottoDtos(lottos.stream()
-			.map(Lotto::makeLottoDto)
-			.collect(Collectors.toList()));
-	}
-
 	public List<WinningPrize> findAllLottoPrizes(WinningLotto winningLotto) {
 		return lottos.stream()
 			.map(lotto -> lotto.findLottoPrize(winningLotto))
 			.collect(Collectors.toList());
+	}
+
+	public List<Lotto> getLottos() {
+		return lottos;
 	}
 }

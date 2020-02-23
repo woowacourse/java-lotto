@@ -36,7 +36,7 @@ public class Lotto {
 		return WinningPrize.of(matchCount, bonusMatch);
 	}
 
-	public LottoDto makeLottoDto() {
-		return new LottoDto(this.lottoNumbers);
+	public LottoNumbers getLottoNumbers() {
+		return lottoNumbers;
 	}
 }
