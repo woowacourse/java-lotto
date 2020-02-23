@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 public class LottoNumbersGenerator {
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_MIN_NUMBER = 1;
+    static final int LOTTO_NUMBER_SIZE = 6;
+
     private static Random random = new Random();
 
     /**
@@ -30,7 +34,7 @@ public class LottoNumbersGenerator {
     }
 
     private static boolean isFulfilled(List<Integer> lottoNumbers) {
-        return lottoNumbers.size() != LottoNumberConfig.SIZE;
+        return lottoNumbers.size() != LOTTO_NUMBER_SIZE;
     }
 
     private static boolean isDuplicated(List<Integer> lottoNumbers, int lottoNumber) {
@@ -38,6 +42,6 @@ public class LottoNumbersGenerator {
     }
 
     private static int pickLottoNumber() {
-        return random.nextInt(LottoNumberConfig.MAX - LottoNumberConfig.MIN) + LottoNumberConfig.MIN;
+        return random.nextInt(LOTTO_MAX_NUMBER - LOTTO_MIN_NUMBER) + LOTTO_MIN_NUMBER;
     }
 }

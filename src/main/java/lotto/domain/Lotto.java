@@ -12,9 +12,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
     int matchWinningNumbers(Set<Integer> winningNumbers) {
-        // 질문: List구현체가 ArrayList일 경우, parallel을 쓰면 속도가 빨라진다고 해서 써 봤는데요. 혹시 잘못 쓴 것은 아닌지, parallel을 언제 쓰면 좋은 지 궁금합니다.
         return (int)lottoNumbers.stream()
-            .parallel()
             .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
             .count();
     }
