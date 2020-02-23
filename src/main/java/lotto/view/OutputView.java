@@ -66,7 +66,12 @@ public class OutputView {
 
 
     private static void printEachRankResult(Rank rank, ResultStatistic result) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n",
+        String rankResultFormat = "%d개 일치 (%d원)- %d개\n";
+        if (rank == Rank.SECOND) {
+            rankResultFormat = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
+        }
+
+        System.out.printf(rankResultFormat,
             rank.getMatchCounts().get(0),
             rank.getReward(),
             result.getResults().get(rank)
