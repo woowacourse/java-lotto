@@ -14,7 +14,6 @@ import lotto.util.TextUtil;
  */
 public class OutputView {
 	public static final String TOTAL_BUY_FORMAT_MESSAGE = "%d개를 구입했습니다.\n";
-	public static final String LOTTO_FORMAT_MESSAGE = "[%s]\n";
 	public static final String STATISTICS_TITLE_MESSAGE = "당첨 통계\n---------";
 	public static final String TOTAL_PROFIT_FORMAT_MESSAGE = "총 수익률은 %d%%입니다.\n";
 
@@ -30,7 +29,7 @@ public class OutputView {
 	}
 
 	private static void printLotto(Lotto lotto) {
-		System.out.printf(LOTTO_FORMAT_MESSAGE, TextUtil.generateLottoTextWithComma(lotto));
+		System.out.println(TextUtil.generateLottoText(lotto));
 	}
 
 	public static void printStatistics(MatchResult matchResult) {

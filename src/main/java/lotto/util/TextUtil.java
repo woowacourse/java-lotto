@@ -19,15 +19,17 @@ public class TextUtil {
 	public static final String EMPTY_TEXT = "";
 	public static final String SECOND_WINNING_MESSAGE = "%s개 일치, 보너스 볼 일치(%s원) - %d개\n";
 	public static final String WINNING_MESSAGE = "%s개 일치(%s원) - %d개\n";
+	private static final String START_BRACKET = "[";
+	private static final String END_BRACKET = "]";
 
 	private TextUtil() {
 	}
 
-	public static String generateLottoTextWithComma(Lotto lotto) {
+	public static String generateLottoText(Lotto lotto) {
 		return lotto.getLotto()
 				.stream()
 				.map(LottoNumber::toString)
-				.collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
+				.collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, START_BRACKET, END_BRACKET));
 	}
 
 	public static String generateMatchResultText(MatchResult matchResult) {
