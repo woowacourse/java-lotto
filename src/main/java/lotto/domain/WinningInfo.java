@@ -22,13 +22,14 @@ public enum WinningInfo {
 
     public static WinningInfo valueOf(int winningCount, boolean hasBonus) {
         if (winningCount == 5 && hasBonus) {
-            return WinningInfo.SECOND;
+            return SECOND;
         }
         return Arrays.stream(values())
                 .filter(o -> o.winningCount == winningCount)
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(FAIL);
     }
+
 
     public int getWinningCount() {
         return winningCount;

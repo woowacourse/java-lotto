@@ -10,10 +10,17 @@ public class Lotto {
     protected List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        validateDistinctNumbers(lottoNumbers);
         validateNumberCount(lottoNumbers);
+        validateDistinctNumbers(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validateNumberCount(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT_NOT_SIX
+                    .getMessage());
+        }
     }
 
     private void validateDistinctNumbers(List<LottoNumber> inputNumbers) {
@@ -28,13 +35,6 @@ public class Lotto {
                 .mapToInt(LottoNumber::getNumber)
                 .distinct()
                 .count();
-    }
-
-    private void validateNumberCount(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT_NOT_SIX
-                    .getMessage());
-        }
     }
 
     public List<LottoNumber> getLottoNumbers() {
