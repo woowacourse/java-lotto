@@ -1,27 +1,43 @@
 package lotto.model;
 
+import lotto.utils.LottoRules;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
     private final int INITIAL_NUMBER = 0;
-    private Map<Integer, Integer> lottoResult;
+    private Map<String, Integer> lottoResult;
 
     public LottoResult() {
-        Map<Integer, Integer> lottoResult = new HashMap<>();
-        lottoResult.put(LottoRank.FIFTH.getRank(), INITIAL_NUMBER);
-        lottoResult.put(LottoRank.FOURTH.getRank(), INITIAL_NUMBER);
-        lottoResult.put(LottoRank.THIRD.getRank(), INITIAL_NUMBER);
-        lottoResult.put(LottoRank.SECOND.getRank(), INITIAL_NUMBER);
-        lottoResult.put(LottoRank.FIRST.getRank(), INITIAL_NUMBER);
+        Map<String, Integer> lottoResult = new HashMap<>();
+        lottoResult.put(LottoRank.FIFTH.name(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.FOURTH.name(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.THIRD.name(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.SECOND.name(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.FIRST.name(), INITIAL_NUMBER);
         this.lottoResult = lottoResult;
     }
 
-    public int getKey(int key) {
-        return lottoResult.get(key);
+    // TODO : 매치된 갯수와 LottoRank 이름을 연결
+    public void checkCount(LottoTicket lottoTicket, WinNumber winNumber, BonusBall bonusBall) {
+        int matchNumber = lottoTicket.matchNumber(winNumber);
+        if (LottoRank.checkThirdWinner(matchNumber)) {
+            isSecondWin(lottoTicket, matchNumber, bonusBall);
+            return;
+        }
+        lottoResult.put(LottoRank.getNameByRank(matchNumber), lottoResult.get(LottoRank.getNameByRank(matchNumber)) + LottoRules.WINNING_COUNT.getNumber());
     }
 
-    public void putValue(int key, int value) {
-        this.lottoResult.put(key, value);
+    private void isSecondWin(LottoTicket lottoTicket, int matchNumber, BonusBall bonusBall) {
+        if (lottoTicket.matchesWithBonusBall(bonusBall.getBonusNumber())) {
+            lottoResult.put(LottoRank.SECOND.name(), lottoResult.get(LottoRank.SECOND.getRank()) + LottoRules.WINNING_COUNT.getNumber());
+            return;
+        }
+        lottoResult.put(LottoRank.getNameByRank(matchNumber), lottoResult.get(LottoRank.getNameByRank(matchNumber)) + LottoRules.WINNING_COUNT.getNumber());
+    }
+
+    public int getKey(String rank) {
+        return lottoResult.get(rank);
     }
 }

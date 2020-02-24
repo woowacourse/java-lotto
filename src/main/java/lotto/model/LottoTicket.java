@@ -7,25 +7,34 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    private List<Integer> autoNumber = new ArrayList<>();
+    private static final int LAST_LOTTO_NUMBER = 45;
+    private static final int FIRST_LOTTO_NUMBER = 1;
+    private List<Integer> lottoTicket = new ArrayList<>();
 
     public LottoTicket() {
-        Collections.shuffle(LottoNumbers.getLottoNumbers());
-        for (int i = 0; i < LottoRules.LOTTO_NUMBER_LENGTH.getNumber(); i++) {
-            autoNumber.add(LottoNumbers.getLottoNumber(i));
+        for (int i = FIRST_LOTTO_NUMBER; i <= LAST_LOTTO_NUMBER; i++) {
+            lottoTicket.add(i);
         }
-        Collections.sort(autoNumber);
+        Collections.shuffle(lottoTicket);
+        lottoTicket = lottoTicket.subList(0, 6);
+        Collections.sort(lottoTicket);
     }
 
     public LottoTicket(List<Integer> customizedAutoNumber) {
-        this.autoNumber = customizedAutoNumber;
+        this.lottoTicket = customizedAutoNumber;
     }
 
-    public List<Integer> getAutoNumber() {
-        return autoNumber;
+    public List<Integer> getLottoTicket() {
+        return lottoTicket;
     }
 
-    public boolean contains(int bonusBall) {
-        return autoNumber.contains(bonusBall);
+    public int matchNumber(WinNumber winNumber) {
+        return (int) lottoTicket.stream()
+                .filter(winNumber::contains)
+                .count();
+    }
+
+    public boolean matchesWithBonusBall(int bonusBall) {
+        return lottoTicket.contains(bonusBall);
     }
 }

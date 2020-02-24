@@ -27,7 +27,7 @@ public class OutputView {
 
     public static void printAutoNumbers(LottoTickets lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            System.out.println(lottoTicket.getAutoNumber());
+            System.out.println(lottoTicket.getLottoTicket());
         }
     }
 

@@ -1,5 +1,9 @@
 package lotto.model;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 public enum LottoRank {
     FIFTH(3, 5000),
     FOURTH(4, 50000),
@@ -10,8 +14,8 @@ public enum LottoRank {
     private final int rank;
     private final int prize;
 
-    LottoRank(int correct, int prize) {
-        this.rank = correct;
+    LottoRank(int rank, int prize) {
+        this.rank = rank;
         this.prize = prize;
     }
 
@@ -19,12 +23,16 @@ public enum LottoRank {
         return count * this.prize;
     }
 
-    public int getPrize() {
-        return prize;
+    public static String getNameByRank(int rank) {
+        return LottoRank.values()[rank-3].name();
     }
 
     public int getRank() {
         return rank;
+    }
+
+    public int getPrize() {
+        return prize;
     }
 
     public static boolean checkNoPrize(int count){
