@@ -13,11 +13,15 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoManager {
+    private Money money;
+    private Buyer buyer;
     private WinningLotto winningLotto;
     private LottoResult lottoResult;
 
-    public LottoManager() {
+    public LottoManager(int money) {
         LottoFactory.getInstance();
+        this.money = new Money(money);
+        this.buyer = new Buyer(this.money.calculateLottoTicketCount());
     }
 
     public void setWinningLotto(String numbers, int bonusNumber) {
@@ -25,14 +29,22 @@ public class LottoManager {
         this.winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
     }
 
-    public Map<WinningValue, Integer> analyzeLotto(Buyer buyer) {
+    public Map<WinningValue, Integer> analyzeLotto() {
         lottoResult = new LottoResult();
         lottoResult.calculateLottoResult(buyer.getLottos(), winningLotto);
         return lottoResult.getLottoResult();
     }
 
 
-    public int analyzeRewardRate(Money money) {
+    public int analyzeRewardRate() {
         return lottoResult.calculateRewardRate(money.getMoney(), lottoResult.getLottoResult());
+    }
+
+    public Money getMoney() {
+        return money;
+    }
+
+    public Buyer getBuyer() {
+        return buyer;
     }
 }
