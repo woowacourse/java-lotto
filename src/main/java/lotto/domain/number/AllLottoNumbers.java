@@ -19,7 +19,7 @@ public class AllLottoNumbers {
 
     private void validateEmpty(List<LottoNumbers> allLottoNumbers) {
         if (allLottoNumbers.isEmpty()) {
-            throw new IllegalStateException(EMPTY_OR_NULL_INPUT_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EMPTY_OR_NULL_INPUT_EXCEPTION_MESSAGE);
         }
     }
 

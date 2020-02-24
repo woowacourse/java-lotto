@@ -2,11 +2,12 @@ package lotto;
 
 import lotto.domain.exception.DuplicateLottoNumberException;
 import lotto.domain.exception.LottoNumberSizeException;
-import lotto.domain.number.*;
+import lotto.domain.number.AllLottoNumbers;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
+import lotto.domain.number.WinningNumbers;
 import lotto.domain.random.RandomNumberGenerator;
-import lotto.domain.result.GameResult;
-import lotto.domain.result.GameResults;
-import lotto.domain.result.Yield;
+import lotto.domain.result.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,27 +16,26 @@ import java.util.List;
 
 public class ConsoleLottoApplication {
     public static void main(String[] args) {
-        PurchaseNumber purchaseNumber = inputPurchaseNumber();
-        AllLottoNumbers allLottoNumbers = createAllLottoNumbers(purchaseNumber);
+        Money money = inputPurchaseNumber();
+        AllLottoNumbers allLottoNumbers = createAllLottoNumbers(money);
         OutputView.printAllLottoNumbers(allLottoNumbers);
         WinningNumbers winningNumbers = inputWinningNumbers();
 
         GameResults gameResults = createGameResults(allLottoNumbers, winningNumbers);
         OutputView.printGameResults(gameResults);
 
-        Yield yield = Yield.calculateYield(purchaseNumber, gameResults);
-        OutputView.printYield(yield);
+        OutputView.printYield(money.calculateYield(gameResults));
     }
 
-    private static PurchaseNumber inputPurchaseNumber() {
-        PurchaseNumber purchaseNumber = InputView.inputPurchaseMoney();
-        OutputView.printPurchaseNumber(purchaseNumber);
-        return purchaseNumber;
+    private static Money inputPurchaseNumber() {
+        Money money = InputView.inputPurchaseMoney();
+        OutputView.printPurchaseNumber(money);
+        return money;
     }
 
-    private static AllLottoNumbers createAllLottoNumbers(PurchaseNumber purchaseNumber) {
+    private static AllLottoNumbers createAllLottoNumbers(Money money) {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (int i = 0; i < purchaseNumber.getPurchaseNumber(); i++) {
+        for (int i = 0; i < money.calculateRound(); i++) {
             RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
             List<LottoNumber> randomNumbers = randomNumberGenerator.generateNumbers();
             lottoNumbersList.add(new LottoNumbers(randomNumbers));

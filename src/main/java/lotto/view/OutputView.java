@@ -3,10 +3,7 @@ package lotto.view;
 import lotto.domain.number.AllLottoNumbers;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
-import lotto.domain.number.PurchaseNumber;
-import lotto.domain.result.GameResult;
-import lotto.domain.result.GameResults;
-import lotto.domain.result.Yield;
+import lotto.domain.result.*;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -20,8 +17,8 @@ public class OutputView {
     private static final String GAME_RESULTS_HEADER = "당첨 통계\n" + "---------";
     private static final String CORRECT_BONUS_BALL_MESSAGE = "보너스 볼 일치";
 
-    public static void printPurchaseNumber(PurchaseNumber purchaseNumber) {
-        System.out.println(purchaseNumber.getPurchaseNumber() + PURCHASE_NUMBER_POSTFIX);
+    public static void printPurchaseNumber(Money money) {
+        System.out.println(money.calculateRound() + PURCHASE_NUMBER_POSTFIX);
     }
 
     public static void printAllLottoNumbers(AllLottoNumbers allLottoNumbers) {
@@ -66,8 +63,8 @@ public class OutputView {
         }
     }
 
-    public static void printYield(Yield yield) {
-        BigDecimal bigDecimal = new BigDecimal(Math.round(yield.getYield()));
+    public static void printYield(double yield) {
+        BigDecimal bigDecimal = new BigDecimal(Math.round(yield));
         System.out.println("총 수익률은 " + bigDecimal.toString() + "% 입니다.");
     }
 

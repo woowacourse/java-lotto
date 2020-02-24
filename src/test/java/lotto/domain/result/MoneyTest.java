@@ -1,25 +1,36 @@
 package lotto.domain.result;
 
-import lotto.domain.number.PurchaseNumber;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class YieldTest {
+public class MoneyTest {
 
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void 생성자테스트() {
-        assertThat(new Yield(10)).isInstanceOf(Yield.class);
+        assertThat(new Money(1000)).isInstanceOf(Money.class);
+    }
+
+    @ParameterizedTest
+    @SuppressWarnings("NonAsciiCharacters")
+    @ValueSource(ints = {999, 0})
+    void 최소_구매_금액보다_작은_입력의_생성자가_실행될_경우(int value) {
+        Assertions.assertThatThrownBy(() -> {
+            Money money = new Money(value);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void 수익률_계산하기() {
-        PurchaseNumber purchaseNumber = PurchaseNumber.calculate(5000);
+        Money money = new Money(7000);
         // given
         GameResult round1 = GameResult.FIRST_RANK; // 2000000000
         GameResult round2 = GameResult.FIFTH_RANK; // 5000
@@ -39,8 +50,17 @@ public class YieldTest {
         rounds.add(round7);
         GameResults gameResults = new GameResults(rounds);
         // when
-        Yield result = Yield.calculateYield(purchaseNumber, gameResults);
+        double result = money.calculateYield(gameResults);
+        double sumOfBenefit = 6030005000.0;
         // then
-        assertThat(result).extracting("yield").isEqualTo((6030005000.0 / 5000) * 100.0);
+        assertThat(result).isEqualTo((sumOfBenefit / (7 * Money.TICKET_PRICE)) * Money.MULTIPLE_PERCENTAGE);
+    }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void calculateRound_테스트() {
+        Money money = new Money(9400);
+        Assertions.assertThat(money.calculateRound())
+                .isEqualTo(9);
     }
 }
