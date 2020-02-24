@@ -16,7 +16,7 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> randomNumbers) {
-        validateSize(randomNumbers);
+        validateInput(randomNumbers);
         List<LottoNumber> tempLottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBER_AMOUNT; i++) {
             tempLottoNumbers.add(LottoNumberGroup.getInstance(randomNumbers.get(i)));
@@ -24,7 +24,7 @@ public class Lotto {
         this.lottoNumbers = Collections.unmodifiableList(tempLottoNumbers);
     }
 
-    private void validateSize(List<Integer> inputNumbers) {
+    private void validateInput(List<Integer> inputNumbers) {
         if (Objects.isNull(inputNumbers) || inputNumbers.isEmpty()) {
             throw new EmptyOrNullException(EMPTY_OR_NULL_EXCEPTION_MESSAGE);
         }
