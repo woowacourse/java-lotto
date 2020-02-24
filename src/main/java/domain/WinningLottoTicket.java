@@ -48,6 +48,13 @@ public class WinningLottoTicket {
         }
     }
 
+    private void addTicketNumber(List<Integer> winningTicket, String input) {
+        for (String number : splitInputNumber(input)) {
+            validateBlank(number);
+            winningTicket.add(validateNumber(number));
+        }
+    }
+
     public int getCorrectCount(LottoTicket lottoTicket) {
         return Math.toIntExact(lottoTicket.getLottoTicket().stream()
                 .filter(this.winningTicket.getLottoTicket()::contains)
@@ -59,10 +66,7 @@ public class WinningLottoTicket {
                 .contains(bonusBall.getBonusNumber());
     }
 
-    private void addTicketNumber(List<Integer> winningTicket, String input) {
-        for (String number : splitInputNumber(input)) {
-            validateBlank(number);
-            winningTicket.add(validateNumber(number));
-        }
+    public LottoTicket getWinningTicket() {
+        return winningTicket;
     }
 }

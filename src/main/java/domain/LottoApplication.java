@@ -9,7 +9,7 @@ public class LottoApplication {
         LottoTickets lottoTickets = generateLottoTicketsByMoney(money);
         OutputView.printBuyTicketCount(money.calculateLottoTicket());
         OutputView.printLottoTickets(lottoTickets.getLottoTickets());
-        OutputView.printWinningStatistics(LottoManager.match(lottoTickets, inputWinningLottoTicket()), money.getMoney());
+        OutputView.printWinningStatistics(LottoManager.match(lottoTickets, inputWinningLottoTicket()).getLottoResults(), money.getMoney());
     }
 
     public static LottoTickets generateLottoTicketsByMoney(Money money) {

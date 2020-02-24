@@ -29,7 +29,7 @@ public class LottoManagerTest {
     void countWinningTickets(RankType rankType, int expected) {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6", "7");
         LottoTickets lottoTickets = new LottoTickets(originalLottoTickets);
-        Map<RankType, Integer> map = LottoManager.match(lottoTickets, winningLottoTicket);
+        Map<RankType, Integer> map = LottoManager.match(lottoTickets, winningLottoTicket).getLottoResults();
 
         Assertions.assertThat(map.get(rankType)).isEqualTo(expected);
     }
