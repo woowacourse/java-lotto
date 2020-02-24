@@ -38,12 +38,11 @@ public class OutputView {
     }
 
     private static void printEachLotto(final Lotto eachLotto) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(eachLotto.getLotto()
+        String lotto = eachLotto.getLotto()
                 .stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.joining(COMMA, PREFIX, SUFFIX)));
-        System.out.println(stringBuilder);
+                .collect(Collectors.joining(COMMA, PREFIX, SUFFIX));
+        System.out.println(lotto);
     }
 
     public static void printInputWinningNumbersMessage() {
@@ -56,7 +55,6 @@ public class OutputView {
 
     public static void printResult(final LottoResult lottoResult) {
         System.out.println("당첨 통계" + NEW_LINE + "------------");
-
         List<LottoRank> keys = Arrays.asList(LottoRank.values());
         Collections.reverse(keys);
         for (LottoRank rank : keys){
