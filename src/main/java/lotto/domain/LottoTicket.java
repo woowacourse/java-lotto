@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 public class LottoTicket {
 	private static final String INVALID_LOTTO_NUMBERS_SIZE_MESSAGE = "로또 숫자가 없습니다.";
 
-	private final List<Lotto> lottos;
+	private final List<Lotto> lottoTicket;
 
-	public LottoTicket(List<Lotto> lottos) {
-		validate(lottos);
-		this.lottos = lottos;
+	public LottoTicket(List<Lotto> lottoTicket) {
+		validate(lottoTicket);
+		this.lottoTicket = lottoTicket;
 	}
 
 	private void validate(List<Lotto> lottos) {
@@ -29,16 +29,16 @@ public class LottoTicket {
 	}
 
 	public MatchResult matchAll(WinningLotto winningLotto) {
-		return new MatchResult(lottos.stream()
+		return new MatchResult(lottoTicket.stream()
 				.map(winningLotto::match)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
 	}
 
 	public int size() {
-		return lottos.size();
+		return lottoTicket.size();
 	}
 
-	public List<Lotto> getLottos() {
-		return lottos;
+	public List<Lotto> getLottoTicket() {
+		return lottoTicket;
 	}
 }

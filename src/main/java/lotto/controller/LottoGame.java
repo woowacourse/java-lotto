@@ -29,7 +29,7 @@ public class LottoGame {
 	public void run() {
 		Money purchaseMoney = new Money(InputView.inputLottoMoney());
 		LottoTicket lottoTicket = lottoTicketFactory.generate(purchaseMoney);
-		OutputView.printLottos(lottoTicket);
+		OutputView.printLottoTicket(lottoTicket);
 
 		WinningLotto winningLotto = generateWinningLotto();
 		MatchResult matchResult = lottoTicket.matchAll(winningLotto);

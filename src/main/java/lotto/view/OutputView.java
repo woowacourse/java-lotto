@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
 import lotto.domain.MatchResult;
 import lotto.util.TextUtil;
@@ -20,16 +19,9 @@ public class OutputView {
 	private OutputView() {
 	}
 
-	public static void printLottos(LottoTicket lottoTicket) {
+	public static void printLottoTicket(LottoTicket lottoTicket) {
 		System.out.printf(TOTAL_BUY_FORMAT_MESSAGE, lottoTicket.size());
-		for (Lotto lotto : lottoTicket.getLottos()) {
-			printLotto(lotto);
-		}
-		System.out.println();
-	}
-
-	private static void printLotto(Lotto lotto) {
-		System.out.println(TextUtil.generateLottoText(lotto));
+		System.out.println(TextUtil.generateLottoTicketText(lottoTicket));
 	}
 
 	public static void printStatistics(MatchResult matchResult) {
