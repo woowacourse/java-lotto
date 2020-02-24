@@ -6,11 +6,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoBallFactoryTest {
+class LottoNumberFactoryTest {
 
 
     @DisplayName("가격에 해당하는 티켓을 발급하는지 확인")
@@ -18,7 +19,9 @@ class LottoBallFactoryTest {
     @CsvSource(value = {"1000,1", "1500,1", "2000,2"})
     void test1(int money, int expect) {
         LottoMachine randomLottoStore = new RandomLottoMachine();
-        List<LottoTicket> lottoTickets = randomLottoStore.buyTickets(BettingMoney.valueOf(money));
+        BettingMoney bettingMoney = BettingMoney.valueOf(money);
+
+        List<LottoTicket> lottoTickets = randomLottoStore.buyTickets(bettingMoney.getTicketCount(), Collections.emptyList());
 
         assertThat(lottoTickets).hasSize(expect);
     }

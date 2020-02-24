@@ -54,10 +54,6 @@ public class LottoResultBundle {
                 .reduce(0, Double::sum);
     }
 
-    public int getMatchCount(Rank rank) {
-        return this.results.get(rank);
-    }
-
     public int getMatchTicketCount(Rank rank) {
         return this.results.get(rank);
     }

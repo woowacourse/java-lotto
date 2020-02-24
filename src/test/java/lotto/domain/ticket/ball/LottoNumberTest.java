@@ -7,13 +7,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoBallTest {
+class LottoNumberTest {
 
     @DisplayName("생성된 ball들이 범위내의 숫자인지")
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void test1(int invalidNumber) {
-        assertThatThrownBy(() -> LottoBall.from(invalidNumber))
+        assertThatThrownBy(() -> LottoNumber.from(invalidNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("%d 로또 번호는 1부터 45까지 허용됩니다.", invalidNumber);
     }
@@ -22,7 +22,7 @@ class LottoBallTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
     void test2(int number) {
-        assertThat(LottoBall.from(number)).isEqualTo(LottoBall.from(number));
+        assertThat(LottoNumber.from(number)).isEqualTo(LottoNumber.from(number));
     }
 
 }

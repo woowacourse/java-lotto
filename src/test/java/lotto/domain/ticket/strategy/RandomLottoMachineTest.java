@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +22,7 @@ class RandomLottoMachineTest {
         BettingMoney bettingMoney = BettingMoney.valueOf(inputMoney);
 
         //when
-        List<LottoTicket> lottoTickets = lottoMachine.buyTickets(bettingMoney);
+        List<LottoTicket> lottoTickets = lottoMachine.buyTickets(bettingMoney.getTicketCount(), Collections.emptyList());
 
         //then
         assertThat(lottoTickets).hasSize(result);

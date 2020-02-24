@@ -2,21 +2,21 @@ package lotto.domain.result.win;
 
 import lotto.domain.result.MatchResult;
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoBallFactory;
+import lotto.domain.ticket.ball.LottoNumber;
+import lotto.domain.ticket.ball.LottoNumberFactory;
 
 import java.util.Objects;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
-import static lotto.domain.ticket.ball.LottoBallFactory.findLottoBallByNumber;
+import static lotto.domain.ticket.ball.LottoNumberFactory.findLottoBallByNumber;
 
 public class WinningLotto {
     private static final String WINNING_NUMBER_SIZE_EXCEPTION_MESSAGE = "입력받은 갯수 %d : 우승 번호는 6개입니다.";
     private static final String DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE = "보너스 번호 %d는 중복된 번호입니다.";
 
     private final WinningBalls winningBalls;
-    private final LottoBall bonusBall;
+    private final LottoNumber bonusBall;
 
     public WinningLotto(Set<Integer> winningNumbers, int bonusNumber) {
         validateWinningNumbers(winningNumbers);
@@ -37,9 +37,9 @@ public class WinningLotto {
         }
     }
 
-    private WinningBalls makeWinningBalls(Set<Integer> winningNumber, LottoBall bonusBall) {
-        Set<LottoBall> collectBalls = winningNumber.stream()
-                .map(LottoBallFactory::findLottoBallByNumber)
+    private WinningBalls makeWinningBalls(Set<Integer> winningNumber, LottoNumber bonusBall) {
+        Set<LottoNumber> collectBalls = winningNumber.stream()
+                .map(LottoNumberFactory::findLottoBallByNumber)
                 .collect(toSet());
         return new WinningBalls(collectBalls, bonusBall);
     }

@@ -26,4 +26,11 @@ public final class BettingMoney {
         return this.bettingMoney / LOTTO_PRICE;
     }
 
+    public int getRandomTicketAmount(int manualTicketAmount) {
+        return bettingMoney / LOTTO_PRICE - manualTicketAmount;
+    }
+
+    public int getMoney() {
+        return this.bettingMoney;
+    }
 }

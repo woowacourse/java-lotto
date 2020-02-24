@@ -1,17 +1,17 @@
 package lotto;
 
-import lotto.domain.ticket.ball.LottoBall;
-import lotto.domain.ticket.ball.LottoBallFactory;
+import lotto.domain.ticket.ball.LottoNumber;
+import lotto.domain.ticket.ball.LottoNumberFactory;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoHelper {
-    public static Set<LottoBall> lottoBalls(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoBallFactory::findLottoBallByNumber)
+    public static Set<LottoNumber> lottoNumbers(int... numbers) {
+        return Arrays.stream(numbers)
+                .boxed()
+                .map(LottoNumberFactory::findLottoBallByNumber)
                 .collect(Collectors.toSet());
     }
 

@@ -4,7 +4,7 @@ import lotto.domain.result.LottoResultBundle;
 import lotto.domain.result.win.rank.Rank;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketBundle;
-import lotto.domain.ticket.ball.LottoBall;
+import lotto.domain.ticket.ball.LottoNumber;
 
 public class OutputView {
     private static final String MESSAGE_FOR_BONUS_CASE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
@@ -13,10 +13,10 @@ public class OutputView {
     private static final String RATE_MESSAGE = "총 수익률은 %s입니다.";
     private static final String RESULT_HEADER = "당첨 통계\n-----------";
     private static final String LOTTO_NUMBERS_FORMAT = "[ %d %d %d %d %d %d ]";
-    private static final String BUY_LOTTO_TICKET_COUNT_MESSAGE = "%d개를 구매하였습니다.";
+    private static final String BUY_LOTTO_TICKET_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
-    public static void printBuyTicketCount(int count) {
-        System.out.println(String.format(BUY_LOTTO_TICKET_COUNT_MESSAGE, count));
+    public static void printBuyTicketCount(int randomCount, int manualCount) {
+        System.out.println(String.format(BUY_LOTTO_TICKET_COUNT_MESSAGE, manualCount, randomCount));
     }
 
     public static void printBuyTickets(LottoTicketBundle lottoTicketBundle) {
@@ -26,9 +26,9 @@ public class OutputView {
     }
 
     private static Object[] makeLottoNumberArguments(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoBalls()
+        return lottoTicket.getLottoNumbers()
                 .stream()
-                .map(LottoBall::getNumber)
+                .map(LottoNumber::getNumber)
                 .toArray();
     }
 

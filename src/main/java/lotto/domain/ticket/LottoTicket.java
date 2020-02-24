@@ -1,6 +1,6 @@
 package lotto.domain.ticket;
 
-import lotto.domain.ticket.ball.LottoBall;
+import lotto.domain.ticket.ball.LottoNumber;
 
 import java.util.Collections;
 import java.util.Objects;
@@ -11,26 +11,26 @@ public class LottoTicket {
     public static final int LOTTO_PRICE = 1000;
     private static final String WRONG_SIZE_EXCEPTION_MESSAGE = "로또 번호의 갯수가 %d개로 올바르지 않습니다.";
 
-    private final Set<LottoBall> lottoBalls;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(Set<LottoBall> balls) {
+    public LottoTicket(Set<LottoNumber> balls) {
         validateSize(balls);
-        this.lottoBalls = balls;
+        this.lottoNumbers = balls;
     }
 
-    private void validateSize(Set<LottoBall> lottoBalls) {
-        int size = lottoBalls.size();
+    private void validateSize(Set<LottoNumber> lottoNumbers) {
+        int size = lottoNumbers.size();
         if (size != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(String.format(WRONG_SIZE_EXCEPTION_MESSAGE, size));
         }
     }
 
-    public boolean has(LottoBall bonusBall) {
-        return this.lottoBalls.contains(bonusBall);
+    public boolean has(LottoNumber bonusBall) {
+        return this.lottoNumbers.contains(bonusBall);
     }
 
-    public Set<LottoBall> getLottoBalls() {
-        return Collections.unmodifiableSet(lottoBalls);
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     @Override
@@ -38,18 +38,18 @@ public class LottoTicket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTicket that = (LottoTicket) o;
-        return Objects.equals(lottoBalls, that.lottoBalls);
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoBalls);
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
     public String toString() {
         return "LottoTicket{" +
-                "lottoBalls=" + lottoBalls +
+                "lottoBalls=" + lottoNumbers +
                 '}';
     }
 }

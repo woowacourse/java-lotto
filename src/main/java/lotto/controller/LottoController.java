@@ -3,8 +3,10 @@ package lotto.controller;
 import lotto.domain.result.LottoResultBundle;
 import lotto.domain.result.MatchResultBundle;
 import lotto.domain.result.win.WinningLotto;
+import lotto.domain.ticket.BettingInfo;
 import lotto.domain.ticket.BettingMoney;
 import lotto.domain.ticket.LottoTicketBundle;
+import lotto.domain.ticket.manual.ManualNumberBundle;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -22,24 +24,22 @@ public class LottoController {
     }
 
     public void run() {
-        BettingMoney bettingMoney = BettingMoney.valueOf(inputView.inputBettingMoney());
-        OutputView.printBuyTicketCount(bettingMoney.getTicketCount());
+        BettingMoney randomBettingMoney = BettingMoney.valueOf(inputView.inputBettingMoney());
+        BettingInfo bettingInfo = new BettingInfo(randomBettingMoney, inputView.inputManualTicketAmount());
+        ManualNumberBundle manualNumberBundle = new ManualNumberBundle(inputView.inputManualNumbers(bettingInfo.getManualAmount()));
+        OutputView.printBuyTicketCount(bettingInfo.getRandomAmount(), bettingInfo.getManualAmount());
 
-        LottoTicketBundle lottoTicketBundle = lottoService.getLottoTicketBundle(bettingMoney);
+        LottoTicketBundle lottoTicketBundle = lottoService.getLottoTicketBundle(bettingInfo, manualNumberBundle);
         OutputView.printBuyTickets(lottoTicketBundle);
 
-        LottoResultBundle lottoResultBundle = makeLottoResultBundle(lottoTicketBundle);
-        OutputView.printLottoResult(lottoResultBundle);
-    }
-
-    private LottoResultBundle makeLottoResultBundle(LottoTicketBundle lottoTicketBundle) {
         Set<Integer> winningNumber = inputView.inputWinningNumber();
         int bonusNumber = inputView.inputBonusNumber();
 
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
         MatchResultBundle matchResultBundle = lottoTicketBundle.getMatchResultBundle(winningLotto);
+        LottoResultBundle lottoResultBundle = matchResultBundle.getPrizeBundle();
 
-        return matchResultBundle.getPrizeBundle();
+        OutputView.printLottoResult(lottoResultBundle);
     }
 
 }
