@@ -12,17 +12,9 @@ import lotto.util.RandomUtils;
  * 날짜 : 2020/02/19
  */
 public class LottoFactory {
-    private static Map<LottoType, LottoCreator> creators = new HashMap<>();
+    private static LottoCreator lottoCreator = new LottoCreator();
 
-    static {
-        creators.put(LottoType.PAID_LOTTO, new PaidLottoCreator());
-        creators.put(LottoType.WINNING_LOTTO, new WinningLottoCreator());
-    }
-
-    public static Lotto createLottoAuto(final LottoType lottoType) {
-        Objects.requireNonNull(lottoType);
-        LottoCreator lottoCreator = creators.get(lottoType);
-
+    public static Lotto createLottoAuto() {
         List<Integer> randomLottoNumbers = RandomUtils.getRandomIntList(
             Lotto.LOTTO_LENGTH,
             LottoNumber.MINIMUM_LOTTO_NUMBER,
@@ -31,18 +23,13 @@ public class LottoFactory {
         return lottoCreator.create(randomLottoNumbers);
     }
 
-    public static Lotto createLottoManual(final LottoType lottoType,
-        final List<Integer> inputLottoNumbers) {
-        Objects.requireNonNull(lottoType);
+    public static Lotto createLottoManual(final List<Integer> inputLottoNumbers) {
         Objects.requireNonNull(inputLottoNumbers);
-
-        LottoCreator lottoCreator = creators.get(lottoType);
         return lottoCreator.create(inputLottoNumbers);
     }
 }
 
-class PaidLottoCreator implements LottoCreator {
-    @Override
+class LottoCreator {
     public Lotto create(final List<Integer> lottoNumbers) {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
 
@@ -50,19 +37,6 @@ class PaidLottoCreator implements LottoCreator {
             lottoNumberList.add(LottoNumber.of(lottoNumber));
         }
 
-        return new PaidLotto(lottoNumberList);
-    }
-}
-
-class WinningLottoCreator implements LottoCreator {
-    @Override
-    public Lotto create(final List<Integer> lottoNumbers) {
-        List<LottoNumber> lottoNumberList = new ArrayList<>();
-
-        for (int lottoNumber : lottoNumbers) {
-            lottoNumberList.add(LottoNumber.of(lottoNumber));
-        }
-
-        return new WinningLotto(lottoNumberList);
+        return new Lotto(lottoNumberList);
     }
 }

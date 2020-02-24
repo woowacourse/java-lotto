@@ -18,12 +18,13 @@ public class LottoController {
 	public static void run() {
 		MoneyForLotto moneyForLotto = getMoneyForLotto();
 		int amountOfLottos = moneyForLotto.calculateAmountOfLottos();
+
 		Lottos lottos = LottosFactory.createLottosAuto(amountOfLottos);
 		OutputView.printPurchasedLottos(amountOfLottos, lottos);
-		WinningLotto winningLotto = getWinningLotto();
-		BonusLottoNumber bonusLottoNumber = getBonusLottoNumber(winningLotto);
 
-		ResultStatistic result = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
+		WinningInformation winningInformation = getWinningInformation();
+
+		ResultStatistic result = ResultStatistic.calculate(lottos, winningInformation);
 		OutputView.printResultStatistic(result, moneyForLotto);
 	}
 
@@ -36,24 +37,14 @@ public class LottoController {
 		}
 	}
 
-	private static WinningLotto getWinningLotto() {
+	private static WinningInformation getWinningInformation() {
 		try {
-			return (WinningLotto) LottoFactory.createLottoManual(
-				LottoType.WINNING_LOTTO,
-				InputView.getWinningLotto()
-			);
+			Lotto winningLotto = LottoFactory.createLottoManual(InputView.getWinningLotto());
+			LottoNumber bonus = LottoNumber.of(InputView.getBonusLottoNumber());
+			return new WinningInformation(winningLotto, bonus);
 		} catch (Exception e) {
 			OutputView.printExceptionMessage(e);
-			return getWinningLotto();
-		}
-	}
-
-	private static BonusLottoNumber getBonusLottoNumber(WinningLotto winningLotto) {
-		try {
-			return new BonusLottoNumber(InputView.getBonusLottoNumber(), winningLotto);
-		} catch (Exception e) {
-			OutputView.printExceptionMessage(e);
-			return getBonusLottoNumber(winningLotto);
+			return getWinningInformation();
 		}
 	}
 }

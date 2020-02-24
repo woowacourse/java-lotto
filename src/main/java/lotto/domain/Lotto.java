@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * <p>
  * 날짜 : 2020/02/19
  */
-public abstract class Lotto {
+public class Lotto {
 	public static final int LOTTO_LENGTH = 6;
 
 	protected final List<LottoNumber> lottoNumbers;
@@ -51,11 +51,10 @@ public abstract class Lotto {
 
 	public boolean isContain(final LottoNumber lottoNumber) {
 		return lottoNumbers.stream()
-				.anyMatch(value -> value == lottoNumber);
+				.anyMatch(value -> value.equals(lottoNumber));
 	}
 
 	public List<LottoNumber> getLottoNumbers() {
 		return this.lottoNumbers;
 	}
 }
-

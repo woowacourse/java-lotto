@@ -33,7 +33,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static LottoNumber of(final int lottoNumber) {
         return CACHE.stream()
             .filter(value -> value.lottoNumber == lottoNumber)
-            .findFirst()
+            .findAny()
             .orElseThrow(() -> new WrongLottoNumberException("유효한 로또 번호가 아닙니다."));
     }
 
@@ -49,4 +49,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int compareTo(LottoNumber lottoNumber) {
         return this.lottoNumber - lottoNumber.lottoNumber;
     }
+
+
 }

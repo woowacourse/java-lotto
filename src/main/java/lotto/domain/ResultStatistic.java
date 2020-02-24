@@ -23,14 +23,12 @@ public class ResultStatistic {
 
 	public static ResultStatistic calculate(
 			final Lottos lottos,
-			final WinningLotto winningLotto,
-			final BonusLottoNumber bonus
+			final WinningInformation winningInformation
 	) {
 		Map<Rank, Integer> results = createInitialResult();
 
 		for (Lotto lotto : lottos.getLottos()) {
-			PaidLotto paidLotto = (PaidLotto) lotto;
-			Rank rank = paidLotto.getRank(winningLotto, bonus);
+			Rank rank = winningInformation.calculateRank(lotto);
 			int count = results.get(rank) + ONE;
 			results.put(rank, count);
 		}
