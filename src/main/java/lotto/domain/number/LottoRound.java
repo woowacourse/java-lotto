@@ -14,7 +14,7 @@ public class LottoRound extends LottoRoundFormat {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
-    public boolean isHave(LottoNumber lottoNumber) {
+    public boolean has(LottoNumber lottoNumber) {
         return this.lottoNumbers.stream()
                 .anyMatch(containsLottoNumber -> containsLottoNumber.equals(lottoNumber));
     }

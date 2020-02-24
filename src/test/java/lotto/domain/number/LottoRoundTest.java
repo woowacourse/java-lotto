@@ -69,8 +69,8 @@ public class LottoRoundTest {
         lottoNumberList.add(LottoNumber.of(6));
         LottoRound lottoRound = new LottoRound(lottoNumberList);
         // when
-        boolean isHave = lottoRound.isHave(LottoNumber.of(6));
-        boolean isNotHave = lottoRound.isHave(LottoNumber.of(45));
+        boolean isHave = lottoRound.has(LottoNumber.of(6));
+        boolean isNotHave = lottoRound.has(LottoNumber.of(45));
         // then
         assertThat(isHave).isTrue();
         assertThat(isNotHave).isFalse();

@@ -29,11 +29,11 @@ public class WinningNumbers extends LottoRoundFormat {
 
     public int calculateCollectNumberSize(LottoRound lottoRound) {
         return (int) this.lottoNumbers.stream()
-                .filter(lottoRound::isHave)
+                .filter(lottoRound::has)
                 .count();
     }
 
-    public boolean isCorrectBonusNumber(LottoRound lottoNumb2ers) {
-        return lottoNumb2ers.isHave(bonusBall);
+    public boolean hasBonusNumber(LottoRound lottoNumbers) {
+        return lottoNumbers.has(bonusBall);
     }
 }

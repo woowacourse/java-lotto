@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ConsoleLottoApplication {
     public static void main(String[] args) {
+        Money money1 = inputPurchaseNumber();
         Money money = inputPurchaseNumber();
         LottoRounds lottoRounds = createAllLottoNumbers(money);
         OutputView.printAllLottoNumbers(lottoRounds);
@@ -36,7 +37,7 @@ public class ConsoleLottoApplication {
     }
 
     private static GameResults createGameResults(LottoRounds lottoRounds, WinningNumbers winningNumbers) {
-        List<GameResult> gameResults = lottoRounds.calcurateGameResult(winningNumbers);
+        List<GameResult> gameResults = lottoRounds.calculateGameResult(winningNumbers);
         return new GameResults(gameResults);
     }
 

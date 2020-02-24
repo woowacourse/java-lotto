@@ -70,7 +70,7 @@ public class WinningNumbersTest {
         WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
         LottoRound lottoRound = new LottoRound(inputNumbers);
         // when
-        boolean result = winningNumbers.isCorrectBonusNumber(lottoRound);
+        boolean result = winningNumbers.hasBonusNumber(lottoRound);
         // then
         assertThat(result).isTrue();
     }
@@ -83,7 +83,7 @@ public class WinningNumbersTest {
         WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
         LottoRound lottoRound = new LottoRound(inputNumbers);
         // when
-        boolean result = winningNumbers.isCorrectBonusNumber(lottoRound);
+        boolean result = winningNumbers.hasBonusNumber(lottoRound);
         // then
         assertThat(result).isFalse();
     }

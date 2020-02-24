@@ -23,12 +23,12 @@ public class LottoRounds {
         }
     }
 
-    public List<GameResult> calcurateGameResult(WinningNumbers winningNumbers) {
+    public List<GameResult> calculateGameResult(WinningNumbers winningNumbers) {
         List<GameResult> gameResultList = new ArrayList<>();
         for (int i = 0; i < allLottoNumbers.size(); i++) {
             LottoRound presentLottoRound = allLottoNumbers.get(i);
             int correctNumber = winningNumbers.calculateCollectNumberSize(presentLottoRound);
-            boolean isCorrectBonusNumber = winningNumbers.isCorrectBonusNumber(presentLottoRound);
+            boolean isCorrectBonusNumber = winningNumbers.hasBonusNumber(presentLottoRound);
             GameResult gameResult = GameResult.calculateRank(correctNumber, isCorrectBonusNumber);
             gameResultList.add(gameResult);
         }
