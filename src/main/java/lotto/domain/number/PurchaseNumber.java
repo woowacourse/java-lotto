@@ -3,7 +3,7 @@ package lotto.domain.number;
 import lotto.domain.exception.PurchaseMoneyLackException;
 
 public class PurchaseNumber {
-    private static final int TICKET_PRICE = 1000;
+    private static final int TICKET_PRICE = 1_000;
     private static final int MINIMUM_NUMBER = 1;
     private static final String INVALID_PURCHASE_NUMBER_EXCEPTION_MESSAGE = "최소 구매 금액 이하의 입력이 들어왔습니다.";
 

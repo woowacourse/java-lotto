@@ -3,10 +3,10 @@ package lotto.domain.result;
 import java.util.Arrays;
 
 public enum GameResult {
-    FIRST_RANK(2000000000, 6),
-    SECOND_RANK(30000000, 5),
-    THIRD_RANK(1500000, 5),
-    FOURTH_RANK(50000, 4),
+    FIRST_RANK(2_000_000_000, 6),
+    SECOND_RANK(30_000_000, 5),
+    THIRD_RANK(1_500_000, 5),
+    FOURTH_RANK(50_000, 4),
     FIFTH_RANK(5000, 3),
     NO_RANK(0, 0);
 
