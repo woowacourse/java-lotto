@@ -1,10 +1,10 @@
 package lotto.controller;
 
 import lotto.model.*;
+import lotto.utils.LottoRules;
 import lotto.view.OutputView;
 
 public class Lotto {
-    public static final int WINNING_COUNT = 1;
     private Payment payment;
     private LottoResult lottoResult;
     private AutoNumbers autoNumbers;
@@ -49,15 +49,15 @@ public class Lotto {
             isSecondWin(autoNumber, count);
             return;
         }
-        lottoResult.putValue(count, lottoResult.getKey(count) + WINNING_COUNT);
+        lottoResult.putValue(count, lottoResult.getKey(count) + LottoRules.WINNING_COUNT.getNumber());
     }
 
     private void isSecondWin(AutoNumber autoNumber, int count) {
         if (autoNumber.contains(bonusBall.getBonusNumber())) {
-            lottoResult.putValue(LottoRank.SECOND.getCorrect(), lottoResult.getKey(LottoRank.SECOND.getCorrect()) + WINNING_COUNT);
+            lottoResult.putValue(LottoRank.SECOND.getCorrect(), lottoResult.getKey(LottoRank.SECOND.getCorrect()) + LottoRules.WINNING_COUNT.getNumber());
             return;
         }
-        lottoResult.putValue(count, lottoResult.getKey(count) + WINNING_COUNT);
+        lottoResult.putValue(count, lottoResult.getKey(count) + LottoRules.WINNING_COUNT.getNumber());
     }
 
     public void printCorrectResults() {
