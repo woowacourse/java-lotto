@@ -10,7 +10,7 @@ class PurchaseMoneyTest {
 	@Test
 	void validate() {
 		assertThatThrownBy(() -> {
-			new PurchaseMoney(999);
+			PurchaseMoney.create(999);
 		}).isInstanceOf(LackOfMoneyException.class)
 			.hasMessage("로또 비용이 부족합니다.");
 	}

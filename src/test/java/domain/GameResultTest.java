@@ -47,4 +47,15 @@ class GameResultTest {
 		// then
 		assertThat(givenCount).isEqualTo(expected);
 	}
+
+	@Test
+	void profit() {
+		// given
+		Money purchaseMoney = new Money(10000);
+		double expected = 30150.0d;
+		// when
+		double result = gameResult.calculateProfit(purchaseMoney);
+		//then
+		assertThat(result).isEqualTo(expected);
+	}
 }
