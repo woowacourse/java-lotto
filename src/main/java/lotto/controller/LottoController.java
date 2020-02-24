@@ -1,11 +1,11 @@
 package lotto.controller;
 
+import lotto.domain.LottoRank;
+import lotto.domain.WinningLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoGenerator;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottomoney.LottoMoney;
-import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.LottoRank;
 
 import java.util.*;
 
@@ -21,8 +21,7 @@ public class LottoController {
 		return new Lottos(lottos);
 	}
 
-	public Map<LottoRank, Integer> calculateLottoRankCount(Lottos lottos, Lotto winningLotto,
-														   LottoNumber bonusLottoNumber) {
+	public Map<LottoRank, Integer> calculateLottoRankCount(Lottos lottos, WinningLotto winningLotto) {
 		Map<LottoRank, Integer> lottoRankCount = new TreeMap<>(Collections.reverseOrder());
 
 		for (LottoRank lottoRank : LottoRank.values()) {
@@ -30,7 +29,7 @@ public class LottoController {
 		}
 
 		for (Lotto lotto : lottos) {
-			LottoRank lottoRank = LottoRank.of(lotto.calculateMatchCount(winningLotto), lotto.isContains(bonusLottoNumber));
+			LottoRank lottoRank = LottoRank.of(lotto.calculateMatchCount(winningLotto.getLotto()), lotto.isContains(winningLotto.getBonusNumber()));
 			lottoRankCount.replace(lottoRank, lottoRankCount.get(lottoRank) + SUM_UNIT);
 		}
 		return lottoRankCount;

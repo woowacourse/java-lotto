@@ -5,6 +5,7 @@ import java.util.*;
 public class LottoNumber implements Comparable<LottoNumber> {
 	private static final int MIN_BOUND = 1;
 	private static final int MAX_BOUND = 45;
+	// TODO: 2020-02-24 상수니까 대문자로 바꾸자 캐시는 팩토리로 만들자 일립시스?를 이용하여 파라미터를 받아보자
 	private static final Map<Integer, LottoNumber> cache = new HashMap<>();
 
 	private final int number;

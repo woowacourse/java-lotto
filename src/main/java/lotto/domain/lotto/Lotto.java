@@ -29,6 +29,7 @@ public class Lotto {
 		}
 	}
 
+	// TODO: 2020-02-24 is없애는 게 관례상 더 맞다 
 	public boolean isContains(LottoNumber bonusNumber) {
 		return lottoNumbers.contains(bonusNumber);
 	}
