@@ -11,12 +11,12 @@ public enum LottoRank {
     FIFTH(3, false, 5_000, "3개 일치(5000원) - ");
 
     private static final int WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD = 5;
-    private int winningMatchCount;
-    private boolean isBonusMatch;
-    private int winningMoney;
-    private String resultMessage;
+    private final int winningMatchCount;
+    private final boolean isBonusMatch;
+    private final int winningMoney;
+    private final String resultMessage;
 
-    LottoRank(int winningMatchCount, boolean isBonusMatch, int winningMoney, String resultMessage){
+    LottoRank(int winningMatchCount, boolean isBonusMatch, int winningMoney, String resultMessage) {
         this.winningMatchCount = winningMatchCount;
         this.isBonusMatch = isBonusMatch;
         this.winningMoney = winningMoney;
@@ -24,7 +24,7 @@ public enum LottoRank {
     }
 
     public static LottoRank findRank(final int winningMatchCount, final boolean isBonusMatch) {
-        if (isSecondRank(winningMatchCount, isBonusMatch)){
+        if (isSecondRank(winningMatchCount, isBonusMatch)) {
             return SECOND;
         }
         return Arrays.stream(LottoRank.values())
@@ -41,11 +41,15 @@ public enum LottoRank {
         return winningMatchCount == WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD && isBonusMatch;
     }
 
-    public String getResultMessage(){
+    public String getResultMessage() {
         return resultMessage;
     }
 
-    public int getWinningMoney(){
+    public int getWinningMatchCount() {
+        return winningMatchCount;
+    }
+
+    public int getWinningMoney() {
         return winningMoney;
     }
 }
