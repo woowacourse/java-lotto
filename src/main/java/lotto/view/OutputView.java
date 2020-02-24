@@ -13,9 +13,9 @@ public class OutputView {
 
     public static void printLottoList(final LottoTickets lottoTickets) {
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
-        for (int i = 0; i < lottoTicketList.size(); i++) {
-            System.out.println(lottoTicketList
-                    .get(i)
+
+        for (LottoTicket lottoTicket : lottoTicketList) {
+            System.out.println(lottoTicket
                     .getLottoNumbers()
                     .toString());
         }
@@ -28,7 +28,6 @@ public class OutputView {
 
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-
         while (iteratorKey.hasNext()) {
             WinningInfo key = iteratorKey.next();
 
@@ -41,6 +40,7 @@ public class OutputView {
         String bonusString = "";
         int matchCount = key.getWinningCount();
         int reward = key.getWinningPrice();
+
         if (key.hasBonus()) {
             bonusString = ", 보너스 볼 일치";
         }
