@@ -8,7 +8,7 @@ package lotto.domain;
  * @since 2020/02/19
  */
 public class Money {
-	private static final long MONEY_UNIT = 1000;
+	private static final long MONEY_UNIT = 1_000;
 	private static final String INVALID_PURCHASE_MONEY_MESSAGE = "잘못된 구입 금액을 입력하셨습니다.";
 
 	private final long lottoMoney;
