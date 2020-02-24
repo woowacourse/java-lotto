@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CountTest {
     @Test
     @DisplayName("Count가 정상적으로 작동하는지 테스트")
-    void countTest(){
+    void countTest() {
         Count count = new Count();
         count.addCount();
         assertThat(count.getCount()).isEqualTo(1);

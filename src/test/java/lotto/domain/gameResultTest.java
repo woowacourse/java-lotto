@@ -40,6 +40,6 @@ public class gameResultTest {
     void calculateProfitTest() {
         PurchaseMoney money = new PurchaseMoney("6000");
         gameResult.calculateProfit(money);
-        assertThat(gameResult.getProfit()).isEqualTo(PROFIT/6000*100);
+        assertThat(gameResult.getProfit()).isEqualTo(PROFIT / 6000 * 100);
     }
 }

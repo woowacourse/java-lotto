@@ -30,8 +30,8 @@ public class OutputView {
 
     private static void printRank(Map<Rank, Count> statistic) {
         Arrays.stream(Rank.values())
-				.filter(Rank::isNotDefault)
-				.forEach(rank -> printEachRank(rank, statistic.get(rank)));
+                .filter(Rank::isNotDefault)
+                .forEach(rank -> printEachRank(rank, statistic.get(rank)));
     }
 
     private static void printEachRank(Rank rank, Count count) {

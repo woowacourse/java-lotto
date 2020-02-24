@@ -16,7 +16,7 @@ public class Number implements Comparable<Number> {
 
     private final int number;
 
-    public Number(String number){
+    public Number(String number) {
         validate(number);
         this.number = Integer.parseInt(number);
     }
@@ -76,7 +76,7 @@ public class Number implements Comparable<Number> {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Number) {
+        if (obj instanceof Number) {
             return this.number == ((Number) obj).number;
         }
         return false;

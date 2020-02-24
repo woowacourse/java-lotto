@@ -49,7 +49,7 @@ public enum Rank {
         return matchingNumbers != 0;
     }
 
-    public boolean isBonusMatching(){
-        return matchingNumbers==FIVE_MATCH && bonusMatching;
+    public boolean isBonusMatching() {
+        return matchingNumbers == FIVE_MATCH && bonusMatching;
     }
 }
