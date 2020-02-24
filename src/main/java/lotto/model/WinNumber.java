@@ -1,11 +1,10 @@
 package lotto.model;
 
 import lotto.exception.NotSixNumbersException;
-import lotto.utils.LottoRules;
 
 import java.util.List;
 
-public class WinNumber {
+public class WinNumber extends LottoTicket {
     private final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
     private List<Integer> winNumbers;
 
@@ -19,7 +18,7 @@ public class WinNumber {
     }
 
     private void checkLottoLength(List<Integer> inputs) {
-        if (inputs.size() != LottoRules.LOTTO_NUMBER_LENGTH.getNumber()) {
+        if (inputs.size() != LOTTO_NUMBER_LENGTH) {
             throw new NotSixNumbersException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }

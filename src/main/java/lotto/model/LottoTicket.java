@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.utils.LottoRules;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +7,8 @@ import java.util.List;
 public class LottoTicket {
     private static final int LAST_LOTTO_NUMBER = 45;
     private static final int FIRST_LOTTO_NUMBER = 1;
-    public static final int FIRST_INDEX = 0;
+    private static final int FIRST_INDEX = 0;
+    protected static final int LOTTO_NUMBER_LENGTH = 6;
     private List<Integer> lottoTicket = new ArrayList<>();
 
     public LottoTicket() {
@@ -17,7 +16,7 @@ public class LottoTicket {
             lottoTicket.add(i);
         }
         Collections.shuffle(lottoTicket);
-        lottoTicket = lottoTicket.subList(FIRST_INDEX, LottoRules.LOTTO_NUMBER_LENGTH.getNumber());
+        lottoTicket = lottoTicket.subList(FIRST_INDEX, LOTTO_NUMBER_LENGTH);
         Collections.sort(lottoTicket);
     }
 
@@ -36,7 +35,7 @@ public class LottoTicket {
                 .count();
     }
 
-    public boolean matchesWithBonusBall(int bonusBall) {
-        return lottoTicket.contains(bonusBall);
+    public boolean matchesWithBonusBall(BonusBall bonusBall) {
+        return lottoTicket.contains(bonusBall.getBonusNumber());
     }
 }

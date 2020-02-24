@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoRankTest {
     @Test
-    @DisplayName("세개 미만 숫자 맞췄을 경우 false 반환")
-    void isCorrectNumberOverThree() {
-        assertFalse(LottoRank.checkNoPrize(2));
-        assertTrue(LottoRank.checkNoPrize(3));
+    @DisplayName("세개 미만 숫자 맞췄을 경우 ture 반환")
+    void checkNoPrize() {
+        assertTrue(LottoRank.checkNoPrize(2));
+        assertFalse(LottoRank.checkNoPrize(3));
     }
 }
