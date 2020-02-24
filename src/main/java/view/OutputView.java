@@ -5,11 +5,14 @@ import domain.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
     public static final String NEW_LINE = System.lineSeparator();
     public static final java.lang.String COMMA = ", ";
     public static final int LAST_COMMA_REMOVER = 2;
+    public static final String PREFIX = "[";
+    public static final String SUFFIX = "]";
 
     public static void printInputPurchaseAmountMessage() {
         System.out.println("구매금액을 입력해 주세요");
@@ -24,8 +27,8 @@ public class OutputView {
     }
 
     public static void printPurchaseCountMessage(ManualCount manualCount, int lottoCount) {
-        System.out.println(String.format("수동으로 %d장 자동으로 %d개를 구매했습니다." + NEW_LINE
-                , manualCount.getManualCount(), lottoCount - manualCount.getManualCount()));
+        System.out.println(String.format("수동으로 %d장 자동으로 %d개를 구매했습니다." + NEW_LINE,
+                manualCount.getManualCount(), lottoCount - manualCount.getManualCount()));
     }
 
     public static void printLottos(final Lottos lottos) {
@@ -36,14 +39,10 @@ public class OutputView {
 
     private static void printEachLotto(final Lotto eachLotto) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        List<LottoNumber> lotto = eachLotto.getLotto();
-        for (LottoNumber number : lotto){
-            stringBuilder.append(number)
-                            .append(COMMA);
-        }
-        stringBuilder.setLength(stringBuilder.length()- LAST_COMMA_REMOVER);
-        stringBuilder.append("]");
+        stringBuilder.append(eachLotto.getLotto()
+                .stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(COMMA, PREFIX, SUFFIX)));
         System.out.println(stringBuilder);
     }
 
