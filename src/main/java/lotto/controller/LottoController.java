@@ -12,8 +12,10 @@ public class LottoController {
 		PurchaseMoney purchaseMoney = createPurchaseMoney();
 		OutputView.printPurchasedLottoTicketsCount(purchaseMoney);
 
+		RandomLottoTicketFactory randomLottoTicketFactory =
+				new RandomLottoTicketFactory(new RandomLottoNumbersGenerator());
 		PurchasedLottoTickets purchasedLottoTickets
-				= PurchasedLottoTicketsFactory.of(purchaseMoney, new RandomLottoNumbersGenerator());
+				= PurchasedLottoTicketsFactory.of(purchaseMoney, randomLottoTicketFactory);
 		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 
 		WinningInformation winningInformation = createWinningInformation();
@@ -44,7 +46,7 @@ public class LottoController {
 
 	private static SerialLottoNumber createWinningNumbers() {
 		try {
-			return SerialLottoNumberFactory.createWinningLottoNumbers(InputView.inputWinningNumbers());
+			return WinningLottoNumbersFactory.createWinningLottoNumbers(InputView.inputWinningNumbers());
 		} catch (NumberFormatException | LottoTicketIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return createWinningNumbers();

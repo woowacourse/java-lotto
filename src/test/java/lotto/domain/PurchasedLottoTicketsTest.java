@@ -37,10 +37,11 @@ class PurchasedLottoTicketsTest {
 	void of(int input) {
 		// given
 		MockLottoNumberGenerator lottoNumberGenerator = new MockLottoNumberGenerator();
+		RandomLottoTicketFactory randomLottoTicketFactory = new RandomLottoTicketFactory(lottoNumberGenerator);
 
 		// when
 		PurchasedLottoTickets result
-				= PurchasedLottoTicketsFactory.of(new PurchaseMoney(input), lottoNumberGenerator);
+				= PurchasedLottoTicketsFactory.of(new PurchaseMoney(input), randomLottoTicketFactory);
 
 		// then
 		List<SerialLottoNumber> expected = new ArrayList<>();
