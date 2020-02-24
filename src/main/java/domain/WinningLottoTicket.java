@@ -14,9 +14,8 @@ public class WinningLottoTicket {
     public WinningLottoTicket(String inputWinningTicket, String inputBonusBall) {
         validateBlank(inputWinningTicket);
         validateBlank(inputBonusBall);
-        List<Integer> winningTicket = new ArrayList<>();
 
-        addTicketNumber(winningTicket, inputWinningTicket);
+        List<Integer> winningTicket = createWinningTicket(inputWinningTicket);
         validateDuplicate(winningTicket, inputBonusBall);
 
         this.winningTicket = new LottoTicket(winningTicket);
@@ -48,11 +47,13 @@ public class WinningLottoTicket {
         }
     }
 
-    private void addTicketNumber(List<Integer> winningTicket, String input) {
+    private List<Integer> createWinningTicket(String input) {
+        List<Integer> winningTicket = new ArrayList<>();
         for (String number : splitInputNumber(input)) {
             validateBlank(number);
             winningTicket.add(validateNumber(number));
         }
+        return winningTicket;
     }
 
     public int getCorrectCount(LottoTicket lottoTicket) {
@@ -64,9 +65,5 @@ public class WinningLottoTicket {
     public boolean isMatchBonusBall(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket()
                 .contains(bonusBall.getBonusNumber());
-    }
-
-    public LottoTicket getWinningTicket() {
-        return winningTicket;
     }
 }
