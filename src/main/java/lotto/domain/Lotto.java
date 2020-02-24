@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
 	static final int CORRECT_SIZE = 6;
@@ -12,7 +13,7 @@ public class Lotto {
 	public Lotto(Set<LottoNumber> lottoNumbers) {
 		validateNull(lottoNumbers);
 		validateSize(lottoNumbers);
-		this.lottoNumbers = lottoNumbers;
+		this.lottoNumbers = new TreeSet<>(lottoNumbers);
 	}
 
 	private void validateNull(Set<LottoNumber> lottoNumbers) {
