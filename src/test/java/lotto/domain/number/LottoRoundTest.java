@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoNumbersTest {
+public class LottoRoundTest {
     List<LottoNumber> lottoNumberList;
 
     @BeforeEach
@@ -26,8 +26,8 @@ public class LottoNumbersTest {
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void 정상_입력_생성자_테스트() {
-        assertThat(new LottoNumbers(lottoNumberList))
-                .isInstanceOf(LottoNumbers.class);
+        assertThat(new LottoRound(lottoNumberList))
+                .isInstanceOf(LottoRound.class);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class LottoNumbersTest {
     void 정상_범위보다_입력의_수가_많은_경우() {
         Assertions.assertThatThrownBy(() -> {
             lottoNumberList.add(LottoNumber.of(30));
-            new LottoNumbers(lottoNumberList);
+            new LottoRound(lottoNumberList);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -44,7 +44,7 @@ public class LottoNumbersTest {
     void 정상_범위보다_부족한_경우() {
         Assertions.assertThatThrownBy(() -> {
             lottoNumberList.remove(0);
-            new LottoNumbers(lottoNumberList);
+            new LottoRound(lottoNumberList);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -52,7 +52,7 @@ public class LottoNumbersTest {
     @SuppressWarnings("NonAsciiCharacters")
     void 생성자에_null이_들어온_경우() {
         Assertions.assertThatThrownBy(() -> {
-            new LottoNumbers(null);
+            new LottoRound(null);
         }).isInstanceOf(NullPointerException.class);
     }
 
@@ -67,10 +67,10 @@ public class LottoNumbersTest {
         lottoNumberList.add(LottoNumber.of(4));
         lottoNumberList.add(LottoNumber.of(5));
         lottoNumberList.add(LottoNumber.of(6));
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoRound lottoRound = new LottoRound(lottoNumberList);
         // when
-        boolean isHave = lottoNumbers.isHave(LottoNumber.of(6));
-        boolean isNotHave = lottoNumbers.isHave(LottoNumber.of(45));
+        boolean isHave = lottoRound.isHave(LottoNumber.of(6));
+        boolean isNotHave = lottoRound.isHave(LottoNumber.of(45));
         // then
         assertThat(isHave).isTrue();
         assertThat(isNotHave).isFalse();

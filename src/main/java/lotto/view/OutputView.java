@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.number.AllLottoNumbers;
+import lotto.domain.number.LottoRounds;
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoNumbers;
+import lotto.domain.number.LottoRound;
 import lotto.domain.result.*;
 
 import java.math.BigDecimal;
@@ -21,15 +21,15 @@ public class OutputView {
         System.out.println(money.calculateRound() + PURCHASE_NUMBER_POSTFIX);
     }
 
-    public static void printAllLottoNumbers(AllLottoNumbers allLottoNumbers) {
-        List<LottoNumbers> allLottoNumbersList = allLottoNumbers.getAllLottoNumbers();
-        for (LottoNumbers anAllLottoNumbersList : allLottoNumbersList) {
-            printLottoNumbers(anAllLottoNumbersList);
+    public static void printAllLottoNumbers(LottoRounds lottoRounds) {
+        List<LottoRound> allLottoRoundList = lottoRounds.getAllLottoNumbers();
+        for (LottoRound anAllLottoRoundList : allLottoRoundList) {
+            printLottoNumbers(anAllLottoRoundList);
         }
     }
 
-    private static void printLottoNumbers(LottoNumbers lottoNumbers) {
-        List<LottoNumber> lottoNumberGroups = lottoNumbers.getLottoNumbers();
+    private static void printLottoNumbers(LottoRound lottoRound) {
+        List<LottoNumber> lottoNumberGroups = lottoRound.getLottoNumbers();
         String output = lottoNumberGroups.stream()
                 .map(LottoNumber::getNumber)
                 .map(Object::toString)

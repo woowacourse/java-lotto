@@ -2,9 +2,9 @@ package lotto;
 
 import lotto.domain.exception.DuplicateLottoNumberException;
 import lotto.domain.exception.LottoNumberSizeException;
-import lotto.domain.number.AllLottoNumbers;
+import lotto.domain.number.LottoRounds;
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoNumbers;
+import lotto.domain.number.LottoRound;
 import lotto.domain.number.WinningNumbers;
 import lotto.domain.random.RandomNumberGenerator;
 import lotto.domain.result.*;
@@ -17,11 +17,11 @@ import java.util.List;
 public class ConsoleLottoApplication {
     public static void main(String[] args) {
         Money money = inputPurchaseNumber();
-        AllLottoNumbers allLottoNumbers = createAllLottoNumbers(money);
-        OutputView.printAllLottoNumbers(allLottoNumbers);
+        LottoRounds lottoRounds = createAllLottoNumbers(money);
+        OutputView.printAllLottoNumbers(lottoRounds);
         WinningNumbers winningNumbers = inputWinningNumbers();
 
-        GameResults gameResults = createGameResults(allLottoNumbers, winningNumbers);
+        GameResults gameResults = createGameResults(lottoRounds, winningNumbers);
         OutputView.printGameResults(gameResults);
 
         OutputView.printYield(money.calculateYield(gameResults));
@@ -33,18 +33,18 @@ public class ConsoleLottoApplication {
         return money;
     }
 
-    private static AllLottoNumbers createAllLottoNumbers(Money money) {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+    private static LottoRounds createAllLottoNumbers(Money money) {
+        List<LottoRound> lottoRoundList = new ArrayList<>();
         for (int i = 0; i < money.calculateRound(); i++) {
             RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
             List<LottoNumber> randomNumbers = randomNumberGenerator.generateNumbers();
-            lottoNumbersList.add(new LottoNumbers(randomNumbers));
+            lottoRoundList.add(new LottoRound(randomNumbers));
         }
-        return new AllLottoNumbers(lottoNumbersList);
+        return new LottoRounds(lottoRoundList);
     }
 
-    private static GameResults createGameResults(AllLottoNumbers allLottoNumbers, WinningNumbers winningNumbers) {
-        List<GameResult> gameResults = allLottoNumbers.calcurateGameResult(winningNumbers);
+    private static GameResults createGameResults(LottoRounds lottoRounds, WinningNumbers winningNumbers) {
+        List<GameResult> gameResults = lottoRounds.calcurateGameResult(winningNumbers);
         return new GameResults(gameResults);
     }
 

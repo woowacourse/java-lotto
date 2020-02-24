@@ -55,9 +55,9 @@ public class WinningNumbersTest {
         // given
         LottoNumber bonusNumber = LottoNumber.of(45);
         WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
-        LottoNumbers lottoNumbers = new LottoNumbers(inputNumbers);
+        LottoRound lottoRound = new LottoRound(inputNumbers);
         // when
-        int correctSize = winningNumbers.calculateCollectNumberSize(lottoNumbers);
+        int correctSize = winningNumbers.calculateCollectNumberSize(lottoRound);
         // then
         assertThat(correctSize).isEqualTo(3);
     }
@@ -68,9 +68,9 @@ public class WinningNumbersTest {
         // given
         LottoNumber bonusNumber = LottoNumber.of(1);
         WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
-        LottoNumbers lottoNumbers = new LottoNumbers(inputNumbers);
+        LottoRound lottoRound = new LottoRound(inputNumbers);
         // when
-        boolean result = winningNumbers.isCorrectBonusNumber(lottoNumbers);
+        boolean result = winningNumbers.isCorrectBonusNumber(lottoRound);
         // then
         assertThat(result).isTrue();
     }
@@ -81,9 +81,9 @@ public class WinningNumbersTest {
         // given
         LottoNumber bonusNumber = LottoNumber.of(45);
         WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
-        LottoNumbers lottoNumbers = new LottoNumbers(inputNumbers);
+        LottoRound lottoRound = new LottoRound(inputNumbers);
         // when
-        boolean result = winningNumbers.isCorrectBonusNumber(lottoNumbers);
+        boolean result = winningNumbers.isCorrectBonusNumber(lottoRound);
         // then
         assertThat(result).isFalse();
     }

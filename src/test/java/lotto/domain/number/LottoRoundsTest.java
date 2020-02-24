@@ -6,19 +6,19 @@ import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class AllLottoNumbersTest {
+class LottoRoundsTest {
 
     @Test
     void 생성자에_Null_입력() {
         assertThatThrownBy(() -> {
-            AllLottoNumbers allLottoNumbers = new AllLottoNumbers(null);
+            LottoRounds lottoRounds = new LottoRounds(null);
         }).isInstanceOf(NullPointerException.class);
     }
 
     @Test
     void 생성자에_empty_list_입력() {
         assertThatThrownBy(() -> {
-            AllLottoNumbers allLottoNumbers = new AllLottoNumbers(Collections.emptyList());
+            LottoRounds lottoRounds = new LottoRounds(Collections.emptyList());
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

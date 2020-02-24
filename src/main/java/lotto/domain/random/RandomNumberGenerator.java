@@ -1,7 +1,7 @@
 package lotto.domain.random;
 
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoNumbers;
+import lotto.domain.number.LottoRound;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -24,7 +24,7 @@ public class RandomNumberGenerator {
 
     public List<LottoNumber> generateNumbers() {
         List<LottoNumber> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < LottoNumbers.LOTTO_NUMBER_AMOUNT; i++) {
+        for (int i = 0; i < LottoRound.LOTTO_NUMBER_AMOUNT; i++) {
             randomNumbers.add(generate());
         }
         return randomNumbers;
