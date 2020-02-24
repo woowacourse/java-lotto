@@ -19,7 +19,7 @@ public class PaidPrice {
 
     private void validateEmpty (String inputMoney) {
         if (inputMoney.isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_INPUT_MSG);
+            throw new NullPointerException(EMPTY_INPUT_MSG);
         }
     }
 
