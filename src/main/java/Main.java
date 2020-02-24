@@ -11,7 +11,7 @@ public class Main {
 		try {
 			Money purchaseMoney = new PurchaseMoney(InputView.inputPurchaseMoney());
 			LottoGame lottoGame = new LottoGame(purchaseMoney);
-			OutputView.printLottos(lottoGame.getLottos());
+			OutputView.printLottos(lottoGame);
 
 			GameResult gameResult = lottoGame.play(InputView.inputSixNumbers(),
 				InputView.inputBonusNumber());

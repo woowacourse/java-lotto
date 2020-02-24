@@ -5,11 +5,13 @@ import java.util.StringJoiner;
 
 import domain.GameResult;
 import domain.Lotto;
+import domain.LottoGame;
 import domain.Money;
 import domain.Rank;
 
 public class OutputView {
-	public static void printLottos(List<Lotto> lottos) {
+	public static void printLottos(LottoGame lottoGame) {
+		List<Lotto> lottos = lottoGame.getLottos();
 		System.out.println(String.format("%d개를 구매했습니다.", lottos.size()));
 		for (Lotto lotto : lottos) {
 			StringJoiner stringJoiner = new StringJoiner(", ", "[", "]");
