@@ -33,7 +33,7 @@ public enum Rank {
     }
 
     private boolean isThird(LottoResult lottoResult) {
-        return this == SECOND && !lottoResult.isBonusMatch();
+        return (this == SECOND || this == THIRD) && !lottoResult.isBonusMatch();
     }
 
     public int getDefaultPrize() {
