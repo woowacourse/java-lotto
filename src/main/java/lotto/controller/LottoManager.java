@@ -16,7 +16,6 @@ public class LottoManager {
     private Money money;
     private Buyer buyer;
     private WinningLotto winningLotto;
-    private LottoResult lottoResult;
 
     public LottoManager(int money) {
         LottoFactory.getInstance();
@@ -29,22 +28,15 @@ public class LottoManager {
         this.winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
     }
 
-    public Map<WinningValue, Integer> analyzeLotto() {
-        lottoResult = new LottoResult();
-        lottoResult.calculateLottoResult(buyer.getLottos(), winningLotto);
-        return lottoResult.getLottoResult();
-    }
-
-
-    public int analyzeRewardRate() {
-        return lottoResult.calculateRewardRate(money.getMoney(), lottoResult.getLottoResult());
-    }
-
     public Money getMoney() {
         return money;
     }
 
     public Buyer getBuyer() {
         return buyer;
+    }
+
+    public WinningLotto getWinningLotto() {
+        return winningLotto;
     }
 }

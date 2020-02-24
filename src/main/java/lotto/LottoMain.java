@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.controller.LottoAnalyzeManager;
 import lotto.controller.LottoManager;
 import lotto.domain.Buyer;
 import lotto.domain.Money;
@@ -16,7 +17,8 @@ public class LottoMain {
 
         lottoManager.setWinningLotto(InputView.inputWinningLottoNumbers(), InputView.inputBonusNumber());
 
-        OutputView.printLottoResults(lottoManager.analyzeLotto());
-        OutputView.printRewardRate(lottoManager.analyzeRewardRate());
+        LottoAnalyzeManager lottoAnalyzeManager = new LottoAnalyzeManager(lottoManager.getBuyer(), lottoManager.getWinningLotto());
+        OutputView.printLottoResults(lottoAnalyzeManager.getLottoResult());
+        OutputView.printRewardRate(lottoAnalyzeManager.analyzeRewardRate(lottoManager.getMoney()));
     }
 }
