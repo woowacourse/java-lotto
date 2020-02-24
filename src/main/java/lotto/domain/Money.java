@@ -40,11 +40,11 @@ public class Money {
         return amount < TICKET_PRICE;
     }
 
-    public int ticketQuantity() {
+    public int calculateTicketQuantity() {
         return this.amount / TICKET_PRICE;
     }
 
     public int change() {
-        return amount - ticketQuantity() * TICKET_PRICE;
+        return amount - calculateTicketQuantity() * TICKET_PRICE;
     }
 }

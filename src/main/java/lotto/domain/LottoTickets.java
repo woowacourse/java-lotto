@@ -17,16 +17,15 @@ public class LottoTickets {
 
     public static LottoTickets createLottoTickets(Money money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < money.ticketQuantity(); i++) {
+        for (int i = 0; i < money.calculateTicketQuantity(); i++) {
             lottoTickets.add(LottoTicket.create());
         }
         return new LottoTickets(lottoTickets);
     }
 
     public Map<Rank, Integer> matchResult(LottoTicket winner, LottoNumber bonus) {
-        int matchCount;
         for (LottoTicket lotto : lottoTickets) {
-            matchCount = winner.compare(lotto);
+            int matchCount = winner.compare(lotto);
             addBonus(bonus, matchCount, lotto);
             Rank rank = Rank.find(matchCount);
             updateResult(Rank.result, rank);

@@ -18,7 +18,7 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoTicket;
 
-    private LottoTicket(final List<LottoNumber> lottoTicket) {
+    private LottoTicket(List<LottoNumber> lottoTicket) {
         validate(lottoTicket);
         this.lottoTicket = Collections.unmodifiableList(lottoTicket);
     }
@@ -28,8 +28,7 @@ public class LottoTicket {
         for (String number : numbers) {
             lottoNumbers.add(LottoNumber.find(number.trim()));
         }
-        validate(lottoNumbers);
-        this.lottoTicket = lottoNumbers;
+        this.lottoTicket = new LottoTicket(lottoNumbers).lottoTicket;
     }
 
     private void validate(List<LottoNumber> lottoTicket) {

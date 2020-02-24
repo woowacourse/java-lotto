@@ -34,7 +34,7 @@ class MoneyTest {
     @Test
     @DisplayName("입력 받은 금액으로 로또를 몇 개 살 수 있는지")
     void lottoTicketNumber() {
-        assertThat(Money.create("5000").ticketQuantity()).isEqualTo(5);
+        assertThat(Money.create("5000").calculateTicketQuantity()).isEqualTo(5);
     }
 
     @ParameterizedTest

@@ -60,19 +60,14 @@ public enum LottoNumber {
     }
 
     public static LottoNumber find(String value) {
-        int parsedValue = getParsedValue(value);
-        LottoNumber found = Arrays.stream(LottoNumber.values())
-            .filter(number -> number.getValue() == parsedValue)
+        return Arrays.stream(LottoNumber.values())
+            .filter(number -> number.getValue() == getParsedValue(value))
             .findFirst()
-            .orElse(null);
-        if (found == null) {
-            throw new InvalidLottoNumberException("잘못된 로또 번호입니다.");
-        }
-        return found;
+            .orElseThrow(() -> new InvalidLottoNumberException("잘못된 로또 번호입니다."));
     }
 
     private static int getParsedValue(String value) {
-        int parsedValue = validNumber(value);
+        int parsedValue = validateNumberFormat(value);
         validateLimit(parsedValue);
         return parsedValue;
     }
@@ -83,14 +78,12 @@ public enum LottoNumber {
         }
     }
 
-    private static int validNumber(String value) {
-        int parsedValue;
+    private static int validateNumberFormat(String value) {
         try {
-            parsedValue = Integer.parseInt(value);
+            return Integer.parseInt(value);
         } catch (NumberFormatException e) {
             throw new InvalidLottoNumberException("잘못된 로또 번호를 입력하셨습니다.");
         }
-        return parsedValue;
     }
 
     public int getValue() {
