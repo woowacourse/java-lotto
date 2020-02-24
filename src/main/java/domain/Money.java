@@ -3,6 +3,7 @@ package domain;
 public class Money {
     public static final int LOTTO_PRICE = 1_000;
     public static final int NEGATIVE_CRITERIA_POINT = 0;
+    public static final int PERCENTAGE = 100;
     private int amount;
 
     public Money(String inputMoney) {
@@ -13,7 +14,7 @@ public class Money {
     }
 
     public static int calculateProfitRatio(int lottoCount) {
-        return LottoResult.calculateTotalProfit() / (lottoCount * LOTTO_PRICE);
+        return LottoResult.calculateTotalProfit() / (lottoCount * LOTTO_PRICE) * PERCENTAGE;
     }
 
     private void checkUnderLottoPrice() {
