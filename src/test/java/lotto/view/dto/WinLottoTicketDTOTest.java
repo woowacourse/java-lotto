@@ -3,10 +3,9 @@ package lotto.view.dto;
 import lotto.exception.ConvertFailException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Set;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,15 +13,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class WinLottoTicketDTOTest {
 
     private static final int DONT_CARE_NUMBER = 45;
-
-    @DisplayName("입력받은 우승번호가 6개가 아닌경우")
-    @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5|5", "1,2,3,4,5,6,7|7"}, delimiter = '|')
-    void getWinningNumbers(String winningNumbers, int size) {
-        assertThatThrownBy(() -> new WinLottoTicketDTO(winningNumbers, DONT_CARE_NUMBER))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("볼 %d개, 입력한 볼의 갯수가 6개가 아닙니다.", size);
-    }
 
     @DisplayName("입력받은 우승번호에 숫자가 아닌 문자가 존재하는 경우")
     @Test
@@ -34,17 +24,18 @@ class WinLottoTicketDTOTest {
                 .hasMessage("%s : 숫자가 아닌 문자가 존재합니다.", winningNumbers);
     }
 
-    @DisplayName("입력받은 우승번호를 Set 으로 반환")
+    @DisplayName("String으로 입력받은 우승번호를 List로 set / get 테스트")
     @Test
     void getWinningNumbers2() {
         //given
         String inputWinningNumbers = "1,2,3,4,5,6";
+        List<Integer> expectedData = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         //when
         WinLottoTicketDTO winLottoTicketDTO = new WinLottoTicketDTO(inputWinningNumbers, DONT_CARE_NUMBER);
-        Set<Integer> winningNumbers = winLottoTicketDTO.getWinningNumbers();
+        List<Integer> winNumbers = winLottoTicketDTO.getWinNumbers();
 
         //then
-        assertThat(winningNumbers).contains(1, 2, 3, 4, 5, 6);
+        assertThat(winNumbers).isEqualTo(expectedData);
     }
 }

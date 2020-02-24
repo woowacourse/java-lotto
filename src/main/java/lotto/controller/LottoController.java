@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
+
+
     private LottoService service = new LottoService(new AutoLottoMachine());
 
     public void run() {
@@ -40,8 +42,8 @@ public class LottoController {
     }
 
     private WinLottoTicketDTO createWinLottoTicketDTO() {
-        String winningNumber = InputView.inputWinningNumber();
+        String winNumbers = InputView.inputWinningNumber();
         int bonusNumber = InputView.inputBonusNumber();
-        return new WinLottoTicketDTO(winningNumber, bonusNumber);
+        return new WinLottoTicketDTO(winNumbers, bonusNumber);
     }
 }

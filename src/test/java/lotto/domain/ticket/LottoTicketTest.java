@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketTest {
 
-    @DisplayName("예외 테스트: 잘못된 갯수의 로또 번호를 입력받은 티켓은 Exception 발생")
+    @DisplayName("예외 테스트: 중복 제외 6개가 아닌 숫자로 티켓을 생성하는 경우 Exception 발생")
     @Test
     void test1() {
         int[] ballNumbers = {1, 2, 3, 4, 5, 5};

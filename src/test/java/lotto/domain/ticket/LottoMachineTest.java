@@ -2,7 +2,6 @@ package lotto.domain.ticket;
 
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
-import lotto.view.dto.WinLottoTicketDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -48,10 +47,8 @@ class LottoMachineTest {
         LottoBall bonusBall = LottoBallFactory.getLottoBallByNumber(7);
         WinLottoTicket expectedLotto = new WinLottoTicket(new LottoTicket(winBalls), bonusBall);
 
-        WinLottoTicketDTO winLottoTicketDTO = new WinLottoTicketDTO("1,2,3,4,5,6", 7);
-
         //when
-        WinLottoTicket winLottoTicket = lottoMachine.createWinLottoTicket(winLottoTicketDTO);
+        WinLottoTicket winLottoTicket = lottoMachine.createWinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         //then
         assertThat(winLottoTicket).isEqualTo(expectedLotto);

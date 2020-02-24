@@ -8,6 +8,8 @@ import lotto.view.dto.BettingMoneyDTO;
 import lotto.view.dto.ResultDTO;
 import lotto.view.dto.WinLottoTicketDTO;
 
+import java.util.List;
+
 public class LottoService {
     private final LottoMachine lottoMachine;
 
@@ -16,18 +18,23 @@ public class LottoService {
     }
 
     public LottoTicketBundle createLottoTicketBundle(BettingMoneyDTO bettingMoneyDTO) {
-        return new LottoTicketBundle(lottoMachine.buyTickets(bettingMoneyDTO.getBettingMoney()));
+        int bettingMoney = bettingMoneyDTO.getBettingMoney();
+
+        return new LottoTicketBundle(lottoMachine.buyTickets(bettingMoney));
     }
 
     public ResultDTO getResult(WinLottoTicketDTO winLottoTicketDTO, LottoTicketBundle lottoTicketBundle) {
-        WinLottoTicket winLottoTicket = getWinLottoTicket(winLottoTicketDTO);
+        WinLottoTicket winLottoTicket = createWinLottoTicket(winLottoTicketDTO);
 
         LottoResultBundle lottoResultBundle = lottoTicketBundle.createLottoResultBundle(winLottoTicket);
 
         return lottoResultBundle.createResultDTO();
     }
 
-    private WinLottoTicket getWinLottoTicket(WinLottoTicketDTO winLottoTicketDTO) {
-        return lottoMachine.createWinLottoTicket(winLottoTicketDTO);
+    private WinLottoTicket createWinLottoTicket(WinLottoTicketDTO winLottoTicketDTO) {
+        List<Integer> winNumbers = winLottoTicketDTO.getWinNumbers();
+        int bonusNumber = winLottoTicketDTO.getBonusNumber();
+
+        return lottoMachine.createWinLottoTicket(winNumbers, bonusNumber);
     }
 }

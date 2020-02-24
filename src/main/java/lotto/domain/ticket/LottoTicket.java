@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class LottoTicket {
     public static final int LOTTO_PRICE = 1000;
-    public static final int BALL_COUNT = 6;
+    public static final int LOTTO_BALL_COUNT = 6;
     private static final String WRONG_SIZE_EXCEPTION_MESSAGE = "로또 번호의 갯수가 %d개로 올바르지 않습니다.";
 
     private final Set<LottoBall> lottoBalls;
@@ -20,7 +20,7 @@ public class LottoTicket {
 
     private void validateSize(Set<LottoBall> lottoBalls) {
         int size = lottoBalls.size();
-        if (size != BALL_COUNT) {
+        if (size != LOTTO_BALL_COUNT) {
             throw new IllegalArgumentException(String.format(WRONG_SIZE_EXCEPTION_MESSAGE, size));
         }
     }

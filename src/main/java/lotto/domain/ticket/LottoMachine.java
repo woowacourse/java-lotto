@@ -2,12 +2,11 @@ package lotto.domain.ticket;
 
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
-import lotto.view.dto.WinLottoTicketDTO;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
@@ -39,11 +38,13 @@ public abstract class LottoMachine {
 
     public abstract LottoTicket createOneTicket();
 
-    public final WinLottoTicket createWinLottoTicket(WinLottoTicketDTO winLottoTicketDTO) {
-        Set<LottoBall> winBalls = new HashSet<>();
-        for (int number : winLottoTicketDTO.getWinningNumbers()) {
-            winBalls.add(LottoBallFactory.getLottoBallByNumber(number));
-        }
-        return new WinLottoTicket(new LottoTicket(winBalls), LottoBallFactory.getLottoBallByNumber(winLottoTicketDTO.getBonusNumber()));
+    public final WinLottoTicket createWinLottoTicket(List<Integer> winNumbers, int bonusNumber) {
+        Set<LottoBall> winBalls = winNumbers.stream()
+                .map(LottoBallFactory::getLottoBallByNumber)
+                .collect(Collectors.toSet());
+
+        LottoBall bonusBall = LottoBallFactory.getLottoBallByNumber(bonusNumber);
+
+        return new WinLottoTicket(new LottoTicket(winBalls), bonusBall);
     }
 }
