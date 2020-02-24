@@ -15,6 +15,7 @@ public class LottoTicket {
     private static final String DELIMITER = ", ";
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
+
     private final List<LottoNumber> lottoTicket;
 
     private LottoTicket(final List<LottoNumber> lottoTicket) {
