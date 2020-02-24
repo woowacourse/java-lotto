@@ -11,38 +11,38 @@ public class LottoGame {
 
     // public void play() {
     //     List<Lotto> lottos = purchaseLottos();
-    //     Result result = produceResult(lottos);
+    //     WinningRanks winningRanks = produceResult(lottos);
     //
     //     //통계하기
-    //     int totalWinningMoney = TotalWinningMoneyCalculator.calculate(winningMoneys);
-    //     OutputView.printStatistics(result);
+    //     int totalWinningMoney = WinningResultCalculator.calculateTotalWinningMoney(winningRanks);
+    //     OutputView.printStatistics(winningRanks);
     //     int earningRate = EarningRateCalculator.calculate(totalWinningMoney, purchaseAmount);
     //     OutputView.printEarningRate(earningRate);
     //
     // }
     //
-    // private Result produceResult(List<Lotto> lottos) {
+    // private WinningRanks produceResult(List<Lotto> lottos) {
     //     List<Integer> winningNumbers = InputView.inputLastWeekWinningNumbers();
     //     int bonusBall = InputView.inputBonusBall();
     //     return compareWithWinningNumbers(lottos, winningNumbers, bonusBall);
     // }
     //
-    // private Result compareWithWinningNumbers(List<Lotto> lottos, List<Integer> winningNumbers, int bonusBall) {
+    // private WinningRanks compareWithWinningNumbers(List<Lotto> lottos, List<Integer> winningNumbers, int bonusBall) {
     //     //당첨 하기
     //     List<Integer> winningMoneys = new ArrayList<>();
-    //     Result result = new Result(new HashMap<>());
+    //     WinningRanks winningRanks = new WinningRanks(new HashMap<>());
     //     //todo: 함수를 더 간결하게 정리
     //     for (Lotto lotto : lottos) {
     //         int matchingNumber = LottoComparator.compare(lotto, winningNumbers);
     //         if (Rank.isValid(matchingNumber)) {
     //             Rank rank = Rank.valueOf(matchingNumber, lotto.matchBonusBall(bonusBall));
-    //             result.addWinningResult(rank);
+    //             winningRanks.addWinningRanks(rank);
     //
     //             int winningMoney = rank.calculateWinningMoney();
     //             winningMoneys.add(winningMoney);
     //         }
     //     }
-    //     return result;
+    //     return winningRanks;
     // }
     //
     // private List<Lotto> purchaseLottos() {

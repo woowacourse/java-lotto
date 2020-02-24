@@ -14,14 +14,6 @@ class MoneyTest {
     }
 
     @Test
-    void 돈이_양수이고_타입이_double일_때() {
-        //given
-        double value = 1;
-        //when & then
-        assertThat(new Money(value)).isNotNull();
-    }
-
-    @Test
     void 돈이_0보다_작거나_같을_때() {
         //given
         int value = 0;

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
-import lotto.domain.Result;
+import lotto.domain.WinningRanks;
 
 public class OutputView {
 
@@ -16,8 +16,8 @@ public class OutputView {
         System.out.println(lotto);
     }
 
-    public static void printStatistics(Result result) {
-        Map<Rank, Integer> winningResults = result.getWinningResults();
+    public static void printStatistics(WinningRanks winningRanks) {
+        Map<Rank, Integer> winningResults = winningRanks.getWinningRanks();
         for (Rank rank : winningResults.keySet()) {
             System.out.println(String.format("%d개 일치(%d원)- %d개", rank.getMatchNumber(), rank.calculateWinningMoney(),
                 winningResults.get(rank)));

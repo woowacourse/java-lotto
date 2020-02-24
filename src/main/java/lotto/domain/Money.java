@@ -7,13 +7,13 @@ public class Money {
     private static final int PERCENT = 100;
     private final int value;
 
+    Money() {
+        this.value = 0;
+    }
+
     public Money(int value) {
         validateMoney(value);
         this.value = value;
-    }
-
-    Money(double value) {
-        this.value = (int) value;
     }
 
     int toLottosSize() {
@@ -24,6 +24,14 @@ public class Money {
         if (value <= 0) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다");
         }
+    }
+
+    Money add(Money money) {
+        return new Money(this.value + money.value);
+    }
+
+    Money multiply(int size) {
+        return new Money(this.value * size);
     }
 
     public int getValue() {
@@ -46,6 +54,6 @@ public class Money {
     }
 
     int toEarningRate(Money purchaseAmount) {
-        return (int )(((double) value / purchaseAmount.value) * PERCENT);
+        return (int)(((double)value / purchaseAmount.value) * PERCENT);
     }
 }
