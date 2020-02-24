@@ -1,10 +1,8 @@
 package lotto.domain.result.rank;
 
 import lotto.domain.result.LottoResult;
-import lotto.view.dto.ResultDTO;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -36,10 +34,6 @@ public enum Rank {
 
     private boolean isThird(LottoResult lottoResult) {
         return this == SECOND && !lottoResult.isBonusMatch();
-    }
-
-    public static ResultDTO toDtos(List<Rank> ranks) {
-        return new ResultDTO(ranks);
     }
 
     public int getDefaultPrize() {

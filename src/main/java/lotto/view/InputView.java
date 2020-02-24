@@ -15,7 +15,7 @@ public class InputView {
     public static int inputBettingMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String bettingMoney = scanner.nextLine();
-        validate(bettingMoney);
+        isNullOrEmpty(bettingMoney);
         return convertToInteger(bettingMoney);
     }
 
@@ -23,30 +23,26 @@ public class InputView {
     public static String inputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String winningNumber = scanner.nextLine();
-        validate(winningNumber);
+        isNullOrEmpty(winningNumber);
         return winningNumber;
     }
 
     public static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         String bonusNumber = scanner.nextLine();
-        validate(bonusNumber);
+        isNullOrEmpty(bonusNumber);
         return convertToInteger(bonusNumber);
     }
 
-    private static void validate(String input) {
-        if (isEmpty(input)) {
+    private static void isNullOrEmpty(String input) {
+        if (input == null || (input.trim()).isEmpty()) {
             throw new IllegalArgumentException(NULL_OR_EMPTY_INPUT_MESSAGE);
         }
     }
 
-    private static boolean isEmpty(String input) {
-        return input == null || (input.trim()).isEmpty();
-    }
-
     private static int convertToInteger(String input) {
         try {
-            return Integer.parseInt(input);
+            return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
             throw new ConvertFailException(INVALID_NUMBER_INPUT_MESSAGE);
         }
