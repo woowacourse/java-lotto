@@ -5,7 +5,6 @@ import static lotto.view.ConsoleOutputView.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoGenerator;
@@ -14,8 +13,7 @@ import lotto.domain.lotto.Lottos;
 import lotto.domain.lottomoney.InvalidLottoMoneyException;
 import lotto.domain.lottomoney.LottoMoney;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.result.LottoRank;
-import lotto.domain.result.LottoRankRecord;
+import lotto.domain.result.LottoWinningResult;
 import lotto.domain.result.WinningLotto;
 
 public class LottoController {
@@ -32,11 +30,11 @@ public class LottoController {
 		LottoNumber inputBonusNumber = LottoNumber.valueOf(inputBonusLottoNumber());
 		WinningLotto winningLotto = new WinningLotto(inputWinningLotto, inputBonusNumber);
 
-		LottoRankRecord lottoRankCount = new LottoRankRecord(lottos, winningLotto);
+		LottoWinningResult winningResult = new LottoWinningResult(lottos, winningLotto);
 		printStatisticsMessage();
-		printWinningResult(lottoRankCount.getLottoRankCount());
+		printWinningResult(winningResult.getLottoRankCount());
 
-		int winningRatio = lottoController.calculateWinningRatio(lottoRankCount.getLottoRankCount(), inputLottoMoney);
+		int winningRatio = winningResult.calculateWinningRatio(winningResult.getLottoRankCount(), inputLottoMoney);
 		printWinningRatio(winningRatio);
 	}
 
@@ -55,14 +53,5 @@ public class LottoController {
 			lottos.add(LottoGenerator.generate());
 		}
 		return new Lottos(lottos);
-	}
-
-	private int calculateWinningRatio(Map<LottoRank, Integer> lottoRankCount, LottoMoney inputLottoMoney) {
-		LottoMoney totalWinningMoney = LottoRank.MISS.getWinningMoney();
-		for (Map.Entry<LottoRank, Integer> lottoEntry : lottoRankCount.entrySet()) {
-			totalWinningMoney = totalWinningMoney.add(
-				lottoEntry.getKey().getWinningMoney().multiply(lottoEntry.getValue()));
-		}
-		return totalWinningMoney.getWinningRate(inputLottoMoney);
 	}
 }

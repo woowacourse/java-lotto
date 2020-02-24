@@ -14,7 +14,7 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottonumber.LottoNumber;
 
-class LottoRankRecordTest {
+class LottoWinningResultTest {
 	private static Lottos lottos;
 	private static WinningLotto winningLotto;
 
@@ -53,9 +53,9 @@ class LottoRankRecordTest {
 		winningLotto = new WinningLotto(lotto, bonusNumber);
 	}
 
-	@DisplayName("LottoRankRecord 생성자에 구매한 로또들과 당첨 로또가 입력되었을 때 유효한 값일시 객체 생성 ")
+	@DisplayName("LottoWinningResult 생성자에 구매한 로또들과 당첨 로또가 입력되었을 때 유효한 값일시 객체 생성 ")
 	@Test
 	void constructor_validRankCount_createLottoRankRecode() {
-		assertThat(new LottoRankRecord(lottos, winningLotto)).isInstanceOf(LottoRankRecord.class);
+		assertThat(new LottoWinningResult(lottos, winningLotto)).isInstanceOf(LottoWinningResult.class);
 	}
 }
