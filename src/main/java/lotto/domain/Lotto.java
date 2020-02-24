@@ -1,37 +1,78 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
-    private static final int LOTTO_NUMBERS_COUNT = 6;
-    private static final int WINNING_NUMBERS_COUNT = 6;
-    private static final int FIVE_MATCH = 5;
+    public static final int LOTTO_NUMBERS_COUNT = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        Collections.sort(this.lottoNumbers);
     }
 
-    public MatchResult findMatchResult(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        int sameNumberCount = calculateSameNumberCountWith(winningNumbers);
-        if (sameNumberCount == FIVE_MATCH && bonusNumber.isIncluded(numbers)) {
-            return MatchResult.FIVE_MATCH_WITH_BONUS_BALL;
+    Lotto() {
+        this(createLottoNumbers());
+    }
+
+    public static Lotto from(String[] numbers) {
+        validateEmptyValue(numbers);
+        validateNumbersCount(numbers);
+        List<LottoNumber> lottoNumbers = createLottoNumbers(numbers);
+        validateDuplicatedNumbers(lottoNumbers);
+        return new Lotto(lottoNumbers);
+    }
+
+    private static List<LottoNumber> createLottoNumbers() {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        while (lottoNumbers.size() != LOTTO_NUMBERS_COUNT) {
+            lottoNumbers.add(LottoNumber.randomBy());
         }
-        return MatchResult.of(sameNumberCount);
+        return new ArrayList<>(lottoNumbers);
     }
 
-    private int calculateSameNumberCountWith(WinningNumbers winningNumbers) {
-        Set<Integer> numbers = new HashSet<Integer>(this.numbers);
-        numbers.addAll(winningNumbers.getWinningNumbers());
-        int differentNumbersCount = numbers.size();
-        return LOTTO_NUMBERS_COUNT + WINNING_NUMBERS_COUNT - differentNumbersCount;
+    private static void validateEmptyValue(String[] number) {
+        if (number == null || number.length == 0) {
+            throw new RuntimeException("번호를 입력하지 않으셨습니다.");
+        }
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    private static void validateNumbersCount(String[] number) {
+        if (number.length != LOTTO_NUMBERS_COUNT) {
+            throw new RuntimeException(String.format("번호는 %d개를 입력하셔야 합니다.", LOTTO_NUMBERS_COUNT));
+        }
+    }
+
+    private static List<LottoNumber> createLottoNumbers(String[] numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (String number : numbers) {
+            lottoNumbers.add(LottoNumber.of(number.trim()));
+        }
+        return lottoNumbers;
+    }
+
+    private static void validateDuplicatedNumbers(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> numbers = new HashSet<>(lottoNumbers);
+        if (numbers.size() != LOTTO_NUMBERS_COUNT) {
+            throw new RuntimeException("중복된 숫자가 입력되었습니다.");
+        }
+    }
+
+    public MatchResult createResult(Lotto winningLotto, LottoNumber bonusNumber) {
+        int sameNumbersCount = countSameNumbers(winningLotto);
+        boolean containsBonusNumber = lottoNumbers.contains(bonusNumber);
+        return MatchResult.of(sameNumbersCount, containsBonusNumber);
+    }
+
+    public int countSameNumbers(Lotto winningLotto) {
+        Set<LottoNumber> numbers = new HashSet<>(this.lottoNumbers);
+        return (int) winningLotto.get().stream()
+                .filter(numbers::contains)
+                .count();
+    }
+
+    public List<LottoNumber> get() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }
