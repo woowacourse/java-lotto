@@ -45,7 +45,7 @@ public class LottoController {
 	private static SerialLottoNumber createWinningNumbers() {
 		try {
 			return SerialLottoNumberFactory.createWinningLottoNumbers(InputView.inputWinningNumbers());
-		} catch (IllegalArgumentException e) {
+		} catch (NumberFormatException | LottoTicketIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return createWinningNumbers();
 		}
