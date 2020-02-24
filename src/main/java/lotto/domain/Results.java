@@ -5,7 +5,7 @@ import java.util.*;
 public class Results {
     private static final int MONEY_PER_LOTTO = 1000;
     private static final int HUNDRED_PERCENT = 100;
-    private static final int RESULT_BASE = 5;
+    private static final int RESULT_BASE = 6;
     private final List<Result> results;
     private final List<LottoTicket> userLottoTickets;
     private final WinningLottoTicket winningLotto;

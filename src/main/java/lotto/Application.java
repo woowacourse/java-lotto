@@ -38,6 +38,7 @@ public class Application {
             return new WinningLottoTicket(numberGenerator.generateNumbers(WinningLottoInput), new LottoNumber(bonusNumberInput));
         } catch (IllegalArgumentException exception) {
             String errorMessage = exception.getMessage();
+            
             OutputView.printErrorMessage(errorMessage);
             return generateWinningLotto();
         }
