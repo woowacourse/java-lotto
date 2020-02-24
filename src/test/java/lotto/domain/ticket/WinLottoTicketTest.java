@@ -1,6 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.result.LottoResult;
+import lotto.domain.result.rank.Rank;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -19,15 +20,14 @@ class WinLottoTicketTest {
 
     private static Stream<Arguments> numberProvider() {
         return Stream.of(
-                Arguments.of(new int[]{11, 12, 13, 18, 19, 20}, new LottoResult(0, false)),
-                Arguments.of(new int[]{1, 12, 13, 18, 19, 20}, new LottoResult(1, false)),
-                Arguments.of(new int[]{1, 2, 13, 18, 19, 20}, new LottoResult(2, false)),
-                Arguments.of(new int[]{1, 2, 3, 8, 9, 10}, new LottoResult(3, false)),
-                Arguments.of(new int[]{1, 2, 3, 4, 9, 10}, new LottoResult(4, false)),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 10}, new LottoResult(5, false)),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 7}, new LottoResult(5, true)),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new LottoResult(6, false))
-        );
+                Arguments.of(new int[]{11, 12, 13, 18, 19, 20}, new LottoResult(Rank.SIXTH)),
+                Arguments.of(new int[]{1, 12, 13, 18, 19, 20}, new LottoResult(Rank.SIXTH)),
+                Arguments.of(new int[]{1, 2, 13, 18, 19, 20}, new LottoResult(Rank.SIXTH)),
+                Arguments.of(new int[]{1, 2, 3, 8, 9, 10}, new LottoResult(Rank.FIFTH)),
+                Arguments.of(new int[]{1, 2, 3, 4, 9, 10}, new LottoResult(Rank.FOURTH)),
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 10}, new LottoResult(Rank.THIRD)),
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 7}, new LottoResult(Rank.SECOND)),
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new LottoResult(Rank.FIRST)));
     }
 
     @DisplayName("우승 로또 티켓과 비교하기")

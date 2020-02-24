@@ -2,57 +2,32 @@ package lotto.view.dto;
 
 import lotto.domain.result.rank.Rank;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
-
 public class ResultDTO {
-    private final List<RankDTO> rankDTOS;
+    private final String name;
+    private final int numberOfMatch;
+    private final int prize;
+    private final int numberOfMatchTickets;
 
-    public ResultDTO(List<Rank> rankResults) {
-        this.rankDTOS = Arrays.stream(Rank.values())
-                .map(criteria -> new RankDTO(criteria, rankResults))
-                .collect(Collectors.toList());
+    public ResultDTO(Rank rank, int numberOfMatchTickets) {
+        this.name = rank.name();
+        this.numberOfMatch = rank.getNumberOfMatch();
+        this.prize = rank.getPrize();
+        this.numberOfMatchTickets = numberOfMatchTickets;
     }
 
-    public double getRate() {
-        double bettingMoney = getBettingMoney();
-        double totalPrize = getPrize();
-        return totalPrize / bettingMoney;
+    public String getName() {
+        return name;
     }
 
-    private int getBettingMoney() {
-        return this.rankDTOS.stream()
-                .mapToInt(RankDTO::getMatchTicketCount)
-                .sum() * LOTTO_PRICE;
+    public int getNumberOfMatch() {
+        return numberOfMatch;
     }
 
-    private double getPrize() {
-        return this.rankDTOS.stream()
-                .mapToDouble(RankDTO::getSum)
-                .sum();
+    public int getPrize() {
+        return prize;
     }
 
-    public int size() {
-        return this.rankDTOS.size();
-    }
-
-    public int getMatchCount(int index) {
-        return this.rankDTOS.get(index).getMatchCount();
-    }
-
-
-    public int getDefaultPrize(int i) {
-        return this.rankDTOS.get(i).getDefaultPrize();
-    }
-
-    public int getMatchTicketCount(int i) {
-        return this.rankDTOS.get(i).getMatchTicketCount();
-    }
-
-    public String getName(int i) {
-        return this.rankDTOS.get(i).getName();
+    public int getNumberOfMatchTickets() {
+        return numberOfMatchTickets;
     }
 }

@@ -1,22 +1,18 @@
 package lotto.domain.result;
 
+import lotto.domain.result.rank.Rank;
+
 import java.util.Objects;
 
 public class LottoResult {
-    private final int numberOfMatch;
-    private final boolean isBonusMatch;
+    private final Rank rank;
 
-    public LottoResult(int numberOfMatch, boolean isBonusMatch) {
-        this.numberOfMatch = numberOfMatch;
-        this.isBonusMatch = isBonusMatch;
+    public LottoResult(Rank rank) {
+        this.rank = rank;
     }
 
-    public boolean isEqualToMatchCount(int matchCount) {
-        return this.numberOfMatch == matchCount;
-    }
-
-    public boolean isBonusMatch() {
-        return isBonusMatch;
+    public boolean has(Rank rank) {
+        return this.rank == rank;
     }
 
     @Override
@@ -24,12 +20,18 @@ public class LottoResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResult that = (LottoResult) o;
-        return numberOfMatch == that.numberOfMatch &&
-                isBonusMatch == that.isBonusMatch;
+        return rank == that.rank;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberOfMatch, isBonusMatch);
+        return Objects.hash(rank);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoResult{" +
+                "rank=" + rank +
+                '}';
     }
 }

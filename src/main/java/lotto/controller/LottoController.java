@@ -26,9 +26,11 @@ public class LottoController {
 
         OutputView.printLottoTickets(convertToLottoTicketDTOS(lottoTicketBundle));
 
-        ResultDTO resultDTO = service.getResult(createWinLottoTicketDTO(), lottoTicketBundle);
+        List<ResultDTO> resultDTOS = service.computeOverallWinResult(createWinLottoTicketDTO(), lottoTicketBundle);
 
-        OutputView.printResult(resultDTO);
+        double rate = service.computeAnalysis(resultDTOS);
+
+        OutputView.printResult(resultDTOS, rate);
     }
 
     private List<LottoTicketDTO> convertToLottoTicketDTOS(LottoTicketBundle lottoTicketBundle) {
@@ -44,6 +46,7 @@ public class LottoController {
     private WinLottoTicketDTO createWinLottoTicketDTO() {
         String winNumbers = InputView.inputWinningNumber();
         int bonusNumber = InputView.inputBonusNumber();
+
         return new WinLottoTicketDTO(winNumbers, bonusNumber);
     }
 }

@@ -1,7 +1,5 @@
 package lotto.domain.result.rank;
 
-import lotto.domain.result.LottoResult;
-
 import java.util.Arrays;
 
 public enum Rank {
@@ -12,35 +10,43 @@ public enum Rank {
     FIFTH(3, 5_000),
     SIXTH(0, 0);
 
-    private final int matchCount;       // 우승 로또 번호와 일치하는 번호 갯수
-    private final int defaultPrize;     // 등수 별 상금
+    private final int numberOfMatch;       // 우승 로또 번호와 일치하는 번호 갯수
+    private final int prize;     // 등수 별 상금
 
-    Rank(int matchCount, int defaultPrize) {
-        this.matchCount = matchCount;
-        this.defaultPrize = defaultPrize;
+    Rank(int numberOfMatch, int prize) {
+        this.numberOfMatch = numberOfMatch;
+        this.prize = prize;
     }
 
-    public static Rank findRankByLottoResult(LottoResult result) {
+    public static Rank findRankByMatchInfo(int numberOfMatch, boolean bonusMatch) {
         Rank rank = Arrays.stream(Rank.values())
-                .filter(aRank -> result.isEqualToMatchCount(aRank.matchCount))
+                .filter(aRank -> aRank.numberOfMatch == numberOfMatch)
                 .findFirst()
                 .orElse(SIXTH);
 
-        if (rank.isThird(result)) {
+        if (rank.isThird(bonusMatch)) {
             return THIRD;
         }
         return rank;
     }
 
-    private boolean isThird(LottoResult lottoResult) {
-        return (this == SECOND || this == THIRD) && !lottoResult.isBonusMatch();
+    private boolean isThird(boolean bonusMatch) {
+        return (this == SECOND || this == THIRD) && !bonusMatch;
     }
 
-    public int getDefaultPrize() {
-        return defaultPrize;
+    public int getPrize() {
+        return prize;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public int getNumberOfMatch() {
+        return numberOfMatch;
+    }
+
+    @Override
+    public String toString() {
+        return "Rank{" +
+                "numberOfMatch=" + numberOfMatch +
+                ", prize=" + prize +
+                '}';
     }
 }

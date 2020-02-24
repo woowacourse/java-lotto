@@ -1,6 +1,5 @@
 package lotto.domain.result.rank;
 
-import lotto.domain.result.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -26,10 +25,8 @@ class RankTest {
             "0,false,SIXTH",
     })
     void name(int matchCount, boolean isBonusMatch, Rank expected) {
-        //given
-        LottoResult result = new LottoResult(matchCount, isBonusMatch);
         //when
-        Rank rank = Rank.findRankByLottoResult(result);
+        Rank rank = Rank.findRankByMatchInfo(matchCount, isBonusMatch);
         //then
         assertThat(rank).isEqualTo(expected);
     }

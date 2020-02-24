@@ -1,6 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.result.LottoResult;
+import lotto.domain.result.rank.Rank;
 import lotto.domain.ticket.ball.LottoBall;
 
 import java.util.Objects;
@@ -27,7 +28,8 @@ public class WinLottoTicket {
         int numberOfMatch = countMatchNumber(lottoTicket);
         boolean isBonusMatch = lottoTicket.has(bonusBall);
 
-        return new LottoResult(numberOfMatch, isBonusMatch);
+        Rank rank = Rank.findRankByMatchInfo(numberOfMatch, isBonusMatch);
+        return new LottoResult(rank);
     }
 
     public int countMatchNumber(LottoTicket lottoTicket) {

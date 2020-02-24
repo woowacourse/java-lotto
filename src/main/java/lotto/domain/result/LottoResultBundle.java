@@ -1,11 +1,11 @@
 package lotto.domain.result;
 
 import lotto.domain.result.rank.Rank;
-import lotto.view.dto.ResultDTO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoResultBundle {
     private final List<LottoResult> lottoResults;
@@ -14,14 +14,26 @@ public class LottoResultBundle {
         this.lottoResults = lottoResults;
     }
 
-    public ResultDTO createResultDTO() {
-        return new ResultDTO(convertLottoResultsToRanks());
+    public Map<Rank, Integer> computeOverallWinResult() {
+        Map<Rank, Integer> overallResult = initializeOverallWinResult();
+
+        overallResult.replaceAll((key, value) -> countMatchTickets(key));
+
+        return overallResult;
     }
 
-    private List<Rank> convertLottoResultsToRanks() {
-        return this.lottoResults.stream()
-                .map(Rank::findRankByLottoResult)
-                .collect(Collectors.toList());
+    private Map<Rank, Integer> initializeOverallWinResult() {
+        Map<Rank, Integer> overallWinResult = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            overallWinResult.put(rank, 0);
+        }
+        return overallWinResult;
+    }
+
+    private int countMatchTickets(Rank rank) {
+        return (int) lottoResults.stream()
+                .filter(lottoResult -> lottoResult.has(rank))
+                .count();
     }
 
     @Override
@@ -35,5 +47,12 @@ public class LottoResultBundle {
     @Override
     public int hashCode() {
         return Objects.hash(lottoResults);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoResultBundle{" +
+                "lottoResults=" + lottoResults +
+                '}';
     }
 }

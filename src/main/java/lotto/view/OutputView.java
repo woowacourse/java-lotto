@@ -22,16 +22,16 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printResult(ResultDTO resultDTO) {
+    public static void printResult(List<ResultDTO> resultDTOS, double rate) {
         System.out.println(MESSAGE_FOR_RESULT_ANNOUNCE);
-        for (int i = 0; i < resultDTO.size(); i++) {
-            int matchCount = resultDTO.getMatchCount(i);
-            int defaultPrize = resultDTO.getDefaultPrize(i);
-            int matchTicketCount = resultDTO.getMatchTicketCount(i);
-            String message = String.format(findMessage(resultDTO.getName(i)), matchCount, defaultPrize, matchTicketCount);
+        for (ResultDTO resultDTO : resultDTOS) {
+            int numberOfMatch = resultDTO.getNumberOfMatch();
+            int prize = resultDTO.getPrize();
+            int numberOfMatchTickets = resultDTO.getNumberOfMatchTickets();
+            String message = String.format(findMessage(resultDTO.getName()), numberOfMatch, prize, numberOfMatchTickets);
             System.out.println(message);
         }
-        System.out.println(String.format(MESSAGE_FOR_RETURN_RATE, resultDTO.getRate()));
+        System.out.println(String.format(MESSAGE_FOR_RETURN_RATE, rate));
     }
 
     private static String findMessage(String name) {
