@@ -8,6 +8,7 @@ import lotto.domain.PurchaseMoney;
 
 public class GameResult {
 	public static final int PERCENTAGE = 100;
+
 	private List<RankCount> result = new ArrayList<>();
 
 	public GameResult() {

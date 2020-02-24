@@ -11,6 +11,7 @@ public enum Statistic {
 	SIX(6, 2_000_000_000);
 
 	public static final int BONUS_MATCH = 5;
+
 	private final int matchingNumbers;
 	private final int prize;
 

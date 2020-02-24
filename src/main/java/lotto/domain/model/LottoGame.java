@@ -30,8 +30,7 @@ public class LottoGame {
 	public GameResult makeStatistics() {
 		Iterator<Lotto> lottoIterator = lottos.iterator();
 		while (lottoIterator.hasNext()) {
-			Lotto lotto = lottoIterator.next();
-			plusCount(getRank(lotto));
+			plusCount(getRank(lottoIterator.next()));
 		}
 		return gameResult;
 	}
