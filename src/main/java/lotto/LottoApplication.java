@@ -6,16 +6,20 @@ import lotto.view.OutputView;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        PurchasePrice purchasePrice = new PurchasePrice(InputView.requestPurchasePriceInput());
-        int lottoCount = purchasePrice.calculateLottoCount();
-        OutputView.printLottoCount(lottoCount);
-        Lottos lottos = new Lottos(LottoGenerator.generate(lottoCount));
-        OutputView.printLottos(lottos);
+        LottoMoney lottoMoney = new LottoMoney(InputView.requestLottoMoneyInput());
+        Lottos lottos = new Lottos(lottoMoney);
+        OutputView.printLottoCountAndLottos(lottos);
 
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.requestWinningNumbersInput());
-        BonusNumber bonusNumber = new BonusNumber(InputView.requestBonusNumberInput());
+        Lotto winningLotto = Lotto.from(InputView.requestWinningLottoInput());
+        LottoNumber bonusNumber = LottoNumber.of(InputView.requestBonusNumberInput());
 
-        LottoResults lottoResults = new LottoResults(lottos.createMatchResults(winningNumbers, bonusNumber));
-        OutputView.printLottoResult(lottoResults, purchasePrice);
+        MatchResults matchResults = lottos.toMatchResults(winningLotto, bonusNumber);
+        int earningsRate = calculateEarningsRate(matchResults, lottoMoney);
+        OutputView.printLottoResultAndEarningsRate(matchResults, earningsRate);
+    }
+
+    private static int calculateEarningsRate(MatchResults matchResults, LottoMoney lottoMoney) {
+        int totalEarnings = matchResults.calculateTotalEarnings();
+        return lottoMoney.calculateEarningsRate(totalEarnings);
     }
 }
