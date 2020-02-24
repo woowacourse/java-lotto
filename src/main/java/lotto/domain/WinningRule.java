@@ -37,12 +37,12 @@ public class WinningRule {
     }
 
     public Optional<Rank> findRank(Lotto lotto) {
-        List<LottoNumber> mergedLottoNumbers = new ArrayList<>(lotto.getLottoNumbers());
-        mergedLottoNumbers.addAll(winningNumbers.getLottoNumbers());
-        return Rank.findRank(countCorrectLottoNumber(mergedLottoNumbers), isCorrectBonusNumber(lotto));
+        return Rank.findRank(countCorrectLottoNumber(lotto), isCorrectBonusNumber(lotto));
     }
 
-    private int countCorrectLottoNumber(List<LottoNumber> mergedLottoNumbers) {
+    private int countCorrectLottoNumber(Lotto lotto) {
+        List<LottoNumber> mergedLottoNumbers = new ArrayList<>(lotto.getLottoNumbers());
+        mergedLottoNumbers.addAll(winningNumbers.getLottoNumbers());
         return NON_DUPLICATE_SIZE - (int) mergedLottoNumbers.stream().
                 map(LottoNumber::getLottoNumber).
                 distinct().
