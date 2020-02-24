@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * LottoNumber 클래스
@@ -16,16 +16,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
 
-    private static final List<LottoNumber> CACHE;
+    private static final Map<Integer, LottoNumber> CACHE;
 
     private final int lottoNumber;
 
     static {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
         for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.put(i, new LottoNumber(i));
         }
-        CACHE = Collections.unmodifiableList(lottoNumbers);
+        CACHE = Collections.unmodifiableMap(lottoNumbers);
     }
 
     private LottoNumber(int inputLottoNumber) {
@@ -33,14 +33,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(final int lottoNumber) {
-        return CACHE.stream()
-            .filter(value -> value.lottoNumber == lottoNumber)
-            .findAny()
-            .orElseThrow(() -> new WrongLottoNumberException("유효한 로또 번호가 아닙니다."));
-    }
-
-    public static List<LottoNumber> getCache() {
-        return new ArrayList<>(CACHE);
+        if (!CACHE.containsKey(lottoNumber)) {
+            throw new WrongLottoNumberException("유효한 로또 번호가 아닙니다.");
+        }
+        return CACHE.get(lottoNumber);
     }
 
     public int getLottoNumber() {
