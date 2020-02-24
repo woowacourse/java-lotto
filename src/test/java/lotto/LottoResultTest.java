@@ -24,11 +24,11 @@ public class LottoResultTest {
 
         String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
         Lotto lotto = LottoFactory.createOneManualLotto(inputLottoNumbers);
-        Lottos lottos = new Lottos();
-        lottos.addLotto(lotto);
+        LottoBundle lottoBundle = new LottoBundle();
+        lottoBundle.addLotto(lotto);
 
         LottoResult lottoResult = new LottoResult();
-        lottoResult.countWinningLotto(lottos, winningNumber);
+        lottoResult.countWinningLotto(lottoBundle, winningNumber);
         assertThat(lottoResult.getRankCount(LottoRank.SECOND)).isEqualTo(1);
     }
 
@@ -42,11 +42,11 @@ public class LottoResultTest {
 
         String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
         Lotto lotto = LottoFactory.createOneManualLotto(inputLottoNumbers);
-        Lottos lottos = new Lottos();
-        lottos.addLotto(lotto);
+        LottoBundle lottoBundle = new LottoBundle();
+        lottoBundle.addLotto(lotto);
 
         LottoResult lottoResult = new LottoResult();
-        lottoResult.countWinningLotto(lottos, winningNumber);
+        lottoResult.countWinningLotto(lottoBundle, winningNumber);
         int totalProfit = lottoResult.calculateTotalProfit();
         assertThat(totalProfit).isEqualTo(30_000_000);
     }

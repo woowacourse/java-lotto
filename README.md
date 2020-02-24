@@ -47,7 +47,7 @@
     - List<LottoNumber> lotto
     - [예외 처리] checkLottoSizeSix 6개의 숫자가 만들어졌는 지 검증
 - **Lottos**
-    - List<Lotto> lottos
+    - List<Lotto> lottoBundle
 - **LottosFactory**
     - Lottos 생
 - **LottoRank**

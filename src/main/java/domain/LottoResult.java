@@ -15,8 +15,8 @@ public class LottoResult {
         }
     }
 
-    public void countWinningLotto(final Lottos lottos, final WinningNumber winningNumber) {
-        for (Lotto lotto : lottos.getLottos()) {
+    public void countWinningLotto(final LottoBundle lottoBundle, final WinningNumber winningNumber) {
+        for (Lotto lotto : lottoBundle.getLottoBundle()) {
             addWinningRankCount(LottoRank
                     .findRank(winningNumber.countWinningMatch(lotto),
                             winningNumber.isBonusMatch(lotto))

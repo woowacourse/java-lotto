@@ -18,13 +18,13 @@ public class LottoGame {
 
         // 수동 및 자동 로또 번호 입력
         OutputView.printInputManualLottoNumbersMessage();
-        Lottos lottos = new Lottos();
-        createManualLottosWithValidation(lottos, manualCount);
-        createAutoLottosWithValidation(lottos, lottoCount, manualCount);
+        LottoBundle lottoBundle = new LottoBundle();
+        createManualLottoBundleWithValidation(lottoBundle, manualCount);
+        createAutoLottoBundleWithValidation(lottoBundle, lottoCount, manualCount);
 
         // 구매 결과
         OutputView.printLottoCountMessage(lottoCount, manualCount);
-        OutputView.printLottos(lottos);
+        OutputView.printLottoBundle(lottoBundle);
 
         // 당첨 번호 및 보너스 번호 입력
         WinningNumber winningNumber = new WinningNumber();
@@ -33,7 +33,7 @@ public class LottoGame {
 
         // 당첨 결과 계산
         LottoResult lottoResult = new LottoResult();
-        lottoResult.countWinningLotto(lottos, winningNumber);
+        lottoResult.countWinningLotto(lottoBundle, winningNumber);
 
         // 결과 및 수익률 출력
         OutputView.printResult(lottoResult);
@@ -58,28 +58,28 @@ public class LottoGame {
         }
     }
 
-    private static void createAutoLottosWithValidation(final Lottos lottos, final LottoCount lottoCount, final ManualCount manualCount) {
+    private static void createAutoLottoBundleWithValidation(final LottoBundle lottoBundle, final LottoCount lottoCount, final ManualCount manualCount) {
         try {
-            lottos.addLottos(LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount(manualCount)));
+            lottoBundle.addLottoBundle(LottoBundleFactory.createAutoLottoBundle(lottoCount.getAutoLottoCount(manualCount)));
         } catch (IllegalArgumentException | NullPointerException e) {
             OutputView.printExceptionMessage(e);
-            createAutoLottosWithValidation(lottos, lottoCount, manualCount);
+            createAutoLottoBundleWithValidation(lottoBundle, lottoCount, manualCount);
         }
     }
 
-    private static void createManualLottosWithValidation(final Lottos lottos, final ManualCount manualCount) {
+    private static void createManualLottoBundleWithValidation(final LottoBundle lottoBundle, final ManualCount manualCount) {
         for (int index = START_INDEX; index < manualCount.getManualCount(); index++) {
-            addOneManualLottoToLottos(lottos);
+            addOneManualLottoToLottoBundle(lottoBundle);
         }
     }
 
-    private static void addOneManualLottoToLottos(Lottos lottos) {
+    private static void addOneManualLottoToLottoBundle(LottoBundle lottoBundle) {
         try {
-            lottos.addLotto(LottoFactory
+            lottoBundle.addLotto(LottoFactory
                     .createOneManualLotto(InputView.inputManualLottoNumbers()));
         } catch (IllegalArgumentException | NullPointerException e) {
             OutputView.printExceptionMessage(e);
-            addOneManualLottoToLottos(lottos);
+            addOneManualLottoToLottoBundle(lottoBundle);
         }
     }
 

@@ -43,8 +43,8 @@ public class OutputView {
                 manualCount.getManualCount(), lottoCount.getAutoLottoCount(manualCount)));
     }
 
-    public static void printLottos(final Lottos lottos) {
-        for (Lotto eachLotto : lottos.getLottos()) {
+    public static void printLottoBundle(final LottoBundle lottoBundle) {
+        for (Lotto eachLotto : lottoBundle.getLottoBundle()) {
             printEachLotto(eachLotto);
         }
     }
