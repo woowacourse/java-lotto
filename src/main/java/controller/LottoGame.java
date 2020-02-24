@@ -10,10 +10,10 @@ public class LottoGame {
         // 구매 금액
         inputPurchaseAmountWithValidation();
 
-        // 수동 구매 갯수
+        // 수동 구매 개수
         inputManualCountWithValidation();
 
-        // 수동 및 자동 로또 번호 입
+        // 수동 및 자동 로또 번호 입력
         OutputView.printInputManualLottoNumbersMessage();
         createManualLottosWithValidation();
         createAutoLottosWithValidation();
