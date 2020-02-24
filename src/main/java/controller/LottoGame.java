@@ -7,8 +7,8 @@ import view.OutputView;
 public class LottoGame {
 
     public static void main(String[] args) {
-        Money amount = inputPurchaseAmount();
-        int lottoCount = amount.getLottoCount();
+        inputPurchaseAmountWithValidation();
+        int lottoCount = Money.getLottoCount();
 
         inputManualCountWithValidation(lottoCount);
         OutputView.printInputManualLottoNumbersMessage();
@@ -29,12 +29,12 @@ public class LottoGame {
         OutputView.printProfitRatio(Money.calculateProfitRatio(lottoCount));
     }
 
-    private static Money inputPurchaseAmount() {
+    private static void inputPurchaseAmountWithValidation() {
         try {
-            return new Money(InputView.inputPurchaseAmount());
-        } catch (IllegalArgumentException e) {
+            Money.inputPurchaseAmount(InputView.inputPurchaseAmount());
+        } catch (IllegalArgumentException | NullPointerException e) {
             OutputView.printExceptionMessage(e);
-            return inputPurchaseAmount();
+            inputPurchaseAmountWithValidation();
         }
     }
 
