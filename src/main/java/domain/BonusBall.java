@@ -3,30 +3,21 @@ package domain;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-
 public class BonusBall {
     private static final int MIN_LOTTO_NUMBER_RANGE = 1;
     private static final int MAX_LOTTO_NUMBER_RANGE = 45;
 
     private int bonusNumber;
 
-    public BonusBall(List<Integer> winningNumber, String input) {
+    public BonusBall(String input) {
         validateNullOrBlank(input);
         int parseNumber = validateParseInteger(input);
         validateBonusNumberRange(parseNumber);
-        validateDuplicate(winningNumber, parseNumber);
         this.bonusNumber = parseNumber;
     }
 
     public int getBonusNumber() {
         return bonusNumber;
-    }
-
-    private void validateDuplicate(List<Integer> winningNumber, int parseNumber) {
-        if (winningNumber.contains(parseNumber)) {
-            throw new IllegalArgumentException("중복된 보너스 숫자를 입력하였습니다.");
-        }
     }
 
     private void validateBonusNumberRange(int parseNumber) {

@@ -20,10 +20,8 @@ public class BonusBallTest {
     @ParameterizedTest
     @MethodSource("bonusBallSetUp")
     void bonusBallConstructorTest(String input) {
-        List<Integer> winningNumber = new ArrayList<>();
-
         Assertions.assertThatThrownBy(() -> {
-            new BonusBall(winningNumber, input);
+            new BonusBall(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

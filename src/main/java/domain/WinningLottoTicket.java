@@ -17,8 +17,10 @@ public class WinningLottoTicket {
         List<Integer> winningTicket = new ArrayList<>();
 
         addTicketNumber(winningTicket, inputWinningTicket);
+        validateDuplicate(winningTicket, inputBonusBall);
+
         this.winningTicket = new LottoTicket(winningTicket);
-        this.bonusBall = new BonusBall(this.winningTicket.getLottoTicket(), inputBonusBall);
+        this.bonusBall = new BonusBall(inputBonusBall);
     }
 
     private String[] splitInputNumber(String input) {
@@ -31,11 +33,18 @@ public class WinningLottoTicket {
         }
     }
 
-    private void validateNumber(String input) {
+    private int validateNumber(String input) {
         try {
-            Integer.parseInt(input);
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("input값이 숫자가 아닙니다.");
+        }
+    }
+
+    private void validateDuplicate(List<Integer> winningNumber, String inputBonusBall) {
+        int parseNumber = validateNumber(inputBonusBall);
+        if (winningNumber.contains(parseNumber)) {
+            throw new IllegalArgumentException("중복된 보너스 숫자를 입력하였습니다.");
         }
     }
 
@@ -53,8 +62,7 @@ public class WinningLottoTicket {
     private void addTicketNumber(List<Integer> winningTicket, String input) {
         for (String number : splitInputNumber(input)) {
             validateBlank(number);
-            validateNumber(number);
-            winningTicket.add(Integer.parseInt(number));
+            winningTicket.add(validateNumber(number));
         }
     }
 }
