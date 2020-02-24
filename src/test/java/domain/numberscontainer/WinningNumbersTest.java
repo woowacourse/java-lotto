@@ -56,16 +56,6 @@ public class WinningNumbersTest {
         assertThat((winningNumbers.findDuplicatedNumbers(ticket))).isEqualTo(3);
     }
 
-    private SixLottoNumbersDTO createSixNumbersDto(int number1, int number2, int number3, int number4, int number5, int number6) {
-        Set<LottoNumber> sixNumbers = new HashSet<>(Arrays.asList(LottoNumber.getLottoNumber(number1),
-                LottoNumber.getLottoNumber(number2),
-                LottoNumber.getLottoNumber(number3),
-                LottoNumber.getLottoNumber(number4),
-                LottoNumber.getLottoNumber(number5),
-                LottoNumber.getLottoNumber(number6)));
-        return new SixLottoNumbersDTO(sixNumbers);
-    }
-
     @Test
     @DisplayName("당첨 결과 확인")
     void getLottoResultTest() {
@@ -77,5 +67,15 @@ public class WinningNumbersTest {
         assertThat(winningNumbers.getLottoResult(new Ticket(createSixNumbersDto(3, 4, 5, 6, 10, 11)))).isEqualTo(LottoResult.FOURTH);
         assertThat(winningNumbers.getLottoResult(new Ticket(createSixNumbersDto(3, 4, 5, 10, 11, 12)))).isEqualTo(LottoResult.FIFTH);
         assertThat(winningNumbers.getLottoResult(new Ticket(createSixNumbersDto(10, 11, 12, 13, 14, 15)))).isEqualTo(LottoResult.FAILED);
+    }
+
+    private SixLottoNumbersDTO createSixNumbersDto(int number1, int number2, int number3, int number4, int number5, int number6) {
+        Set<LottoNumber> sixNumbers = new HashSet<>(Arrays.asList(LottoNumber.getLottoNumber(number1),
+                LottoNumber.getLottoNumber(number2),
+                LottoNumber.getLottoNumber(number3),
+                LottoNumber.getLottoNumber(number4),
+                LottoNumber.getLottoNumber(number5),
+                LottoNumber.getLottoNumber(number6)));
+        return new SixLottoNumbersDTO(sixNumbers);
     }
 }

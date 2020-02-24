@@ -4,7 +4,7 @@ import domain.numberscontainer.LottoNumber;
 import domain.Money;
 import domain.numberscontainer.BonusNumberDTO;
 import domain.numberscontainer.SixLottoNumbersDTO;
-import util.SixLottoNumbersFactory;
+import strategy.TicketFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -33,16 +33,17 @@ public class InputView {
 
     public static SixLottoNumbersDTO enterLastWeekWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Set<Integer> lastWeekWinningNumbers = parseWinningNumbers(scanner.nextLine());
-        return new SixLottoNumbersDTO(SixLottoNumbersFactory.createFixed(lastWeekWinningNumbers));
+        SixLottoNumbersDTO lastWeekWinningNumbers = parseWinningNumbers(scanner.nextLine());
+        return lastWeekWinningNumbers;
     }
 
-    private static Set<Integer> parseWinningNumbers(String input) {
-        List<Integer> lottoNumbers = Arrays.asList(input.split(",")).stream()
+    private static SixLottoNumbersDTO parseWinningNumbers(String input) {
+        Set<LottoNumber> lottoNumbers = Arrays.asList(input.split(",")).stream()
                 .map(String::trim)
-                .map(InputView::parseInt)
-                .collect(Collectors.toList());
-        return new HashSet<>(lottoNumbers);
+                .map(Integer::new)
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toSet());
+        return new SixLottoNumbersDTO(new HashSet<>(lottoNumbers));
     }
 
     public static BonusNumberDTO enterBonusNumber() {

@@ -4,21 +4,25 @@ import java.util.Map;
 
 public class LottoProfit {
     public static final int TO_PERCENTAGE = 100;
-    private double profit;
 
-    private LottoProfit(double profit) {
+    private int profit;
+
+    private LottoProfit(int profit) {
         this.profit = profit;
     }
 
-    public static LottoProfit getProfit(Map<LottoResult, Long> lottoResults, Money money) {
-        Long totalPrize = lottoResults.keySet().stream()
-                .mapToLong(object -> object.getPrize() * lottoResults.get(object))
-                .sum();
+    public static LottoProfit ofProfit(Map<LottoResult, Integer> lottoResults, Money money) {
+        int totalPrize = 0;
+        for (LottoResult result : lottoResults.keySet()) {
+            int key = result.getPrize();
+            int value = (int) (long) lottoResults.get(result);
+            totalPrize += key * value;
+        }
 
         return new LottoProfit(totalPrize / money.getMoney() * TO_PERCENTAGE);
     }
 
-    public double getValue() {
+    public int getValue() {
         return profit;
     }
 }

@@ -14,12 +14,8 @@ public class Ticket extends SixLottoNumbers {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        String numbers = this.sixLottoNumbers.stream()
+        return this.sixLottoNumbers.stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
                 .collect(Collectors.joining(", ", "[", "]"));
-
-        stringBuilder.append(numbers);
-        return stringBuilder.toString();
     }
 }

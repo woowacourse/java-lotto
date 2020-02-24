@@ -1,18 +1,18 @@
-package util;
+package strategy;
 
 import domain.numberscontainer.LottoNumber;
+import domain.numberscontainer.SixLottoNumbersDTO;
+import domain.numberscontainer.Ticket;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class SixLottoNumbersFactory {
+public class RandomTicketFactory {
     private static final int FIRST_INDEX = 0;
     private static final int SIXTH_INDEX = 6;
 
-    public static Set<LottoNumber> createRandom() {
+    public static Ticket createTicket() {
         Set<LottoNumber> sixNumbers = new HashSet<>(getShuffledList().subList(FIRST_INDEX, SIXTH_INDEX));
-
-        return sixNumbers;
+        return new Ticket(new SixLottoNumbersDTO(sixNumbers));
     }
 
     private static List<LottoNumber> getShuffledList() {
@@ -20,12 +20,5 @@ public class SixLottoNumbersFactory {
         Collections.shuffle(lottoNumbers);
 
         return lottoNumbers;
-    }
-
-    public static Set<LottoNumber> createFixed(Set<Integer> givenNumbers) {
-        Set<LottoNumber> sixNumbers = givenNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toSet());
-        return sixNumbers;
     }
 }

@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum LottoResult {
-    FAILED(0, -1),
-    FIRST(2000000000, 6),
-    SECOND(30000000, 5),
-    THIRD(1500000, 5),
-    FOURTH(50000, 4),
-    FIFTH(5000, 3);
+    FAILED(0, 0),
+    FIRST(2_000_000_000, 6),
+    SECOND(30_000_000, 5),
+    THIRD(1_500_000, 5),
+    FOURTH(50_000, 4),
+    FIFTH(5_000, 3);
 
     private final int prize;
     private final int matchCount;
@@ -27,7 +27,7 @@ public enum LottoResult {
                 .orElse(FAILED);
 
         if (lottoResult == SECOND && !isBonus) {
-            lottoResult = THIRD;
+            return THIRD;
         }
         return lottoResult;
     }
@@ -36,21 +36,7 @@ public enum LottoResult {
         return prize;
     }
 
-    @Override
-    public String toString() {
-        if (this == FAILED) {
-            return "";
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(this.matchCount);
-        stringBuilder.append("개 일치 ");
-        if (this == SECOND) {
-            stringBuilder.append(", 보너스 볼 일치 ");
-        }
-        stringBuilder.append("(");
-        stringBuilder.append(this.prize);
-        stringBuilder.append("원) - ");
-
-        return stringBuilder.toString();
+    public int getMatchCount() {
+        return matchCount;
     }
 }
