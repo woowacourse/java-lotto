@@ -3,6 +3,9 @@ package lotto.utils;
 import lotto.domain.errors.ErrorMessage;
 
 public class NumberUtils {
+    private NumberUtils() {
+    }
+
     public static int parseNumber(String number) {
         try {
             return Integer.parseInt(number);

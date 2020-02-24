@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoFactory {
+    private LottoFactory() {
+    }
+
     public static LottoTickets createLottoList(final Payment payment) {
         NumberGenerator randomGenerator = new RandomNumberGenerator();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
