@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Lottos {
     public static int PRICE_PER_LOTTO = 1000;
+
     private List<Lotto> lottos;
-    private static String INCORRECT_INDEX_MSG = "Lottos에 잘못된 index 접근입니다.";
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;

@@ -48,37 +48,4 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
         assertThat(lotto.hasLottoNumber(new LottoNumber(1))).isTrue();
     }
-//    @Test
-//    void compare_두_로또_사이에_6개_로또_번호가_일치할_때() {
-//        int expected = 6;
-//        Set<LottoNumber> lottoNumbers = new HashSet<>();
-//        int length = LottoNumber.MIN_LOTTO_NUMBER + Lotto.LOTTO_NUMBERS_SIZE;
-//        for (int i = LottoNumber.MIN_LOTTO_NUMBER; i < length; i++) {
-//            lottoNumbers.add(new LottoNumber(i));
-//        }
-//        Lotto lotto = new Lotto(lottoNumbers);
-//        Lotto compareLotto = new Lotto(lottoNumbers);
-//        assertThat(lotto.compare(compareLotto) == expected);
-//    }
-//
-//    @Test
-//    void compare_두_로또_사이에_일치하는_로또번호가_없을_때() {
-//        int expected = 0;
-//        Set<LottoNumber> lottoNumbers = new HashSet<>();
-//        int length = LottoNumber.MIN_LOTTO_NUMBER + Lotto.LOTTO_NUMBERS_SIZE;
-//        for (int i = LottoNumber.MIN_LOTTO_NUMBER; i < length; i++) {
-//            lottoNumbers.add(new LottoNumber(i));
-//        }
-//
-//        int startNumber = 10;
-//        length = startNumber + Lotto.LOTTO_NUMBERS_SIZE;
-//        Set<LottoNumber> compareLottoNumbers = new HashSet<>();
-//        for (int i = startNumber; i < length; i++) {
-//            compareLottoNumbers.add(new LottoNumber(i));
-//        }
-//
-//        Lotto lotto = new Lotto(lottoNumbers);
-//        Lotto compareLotto = new Lotto(compareLottoNumbers);
-//        assertThat(lotto.compare(compareLotto) == expected);
-//    }
 }

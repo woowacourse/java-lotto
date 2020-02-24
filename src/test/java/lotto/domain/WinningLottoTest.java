@@ -4,12 +4,11 @@ import lotto.generator.LottoNumberSelectedGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTest {
@@ -49,5 +48,22 @@ public class WinningLottoTest {
         assertThatThrownBy(() -> new WinningLotto(lotto, emptyValue))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("보너스 번호가 입력되지 않았습니다.");
+    }
+
+    @Test
+    void computeMatchCount_두_로또_사이에_6개_로또_번호가_일치할_때() {
+        int expected = 6;
+
+        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
+        assertThat(winningLotto.computeMatchCount(lotto) == expected);
+    }
+
+    @Test
+    void computeMatchCount_두_로또_사이에_일치하는_로또번호가_없을_때() {
+        int expected = 0;
+        Set<LottoNumber> lottoNumbers = new LottoNumberSelectedGenerator("11, 12, 13, 14, 15, 16").create();
+        WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber("45"));
+
+        assertThat(winningLotto.computeMatchCount(lotto) == expected);
     }
 }
