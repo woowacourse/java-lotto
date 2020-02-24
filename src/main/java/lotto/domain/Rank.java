@@ -10,9 +10,9 @@ public enum Rank {
     SECOND_RANK(30000000, 5, true),
     FIRST_RANK(2000000000, 6);
 
-    public int prize;
-    public int correctLottoNumber;
-    public boolean isCorrectBonusNumber;
+    public final int prize;
+    public final int correctLottoNumber;
+    public final boolean isCorrectBonusNumber;
 
     Rank(int prize, int correctLottoNumber) {
         this(prize, correctLottoNumber, false);
