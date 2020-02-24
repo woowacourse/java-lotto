@@ -15,8 +15,7 @@ public class OutputView {
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
 
         for (LottoTicket lottoTicket : lottoTicketList) {
-            System.out.println(lottoTicket
-                    .getLottoNumbers()
+            System.out.println(lottoTicket.getLottoNumbers()
                     .toString());
         }
     }
