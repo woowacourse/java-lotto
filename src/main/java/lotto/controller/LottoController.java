@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lotto.Lotto;
 import lotto.domain.Lotto.LottoGenerator;
+import lotto.domain.Lotto.Lottos;
 import lotto.domain.LottoMoney.LottoMoney;
 import lotto.domain.LottoNumber.LottoNumber;
 import lotto.domain.LottoRank;
@@ -12,15 +13,15 @@ public class LottoController {
 	private static final int SUM_UNIT = 1;
 	private static final int INIT_COUNT = 0;
 
-	public List<Lotto> purchaseLotto(int numberOfLotto) {
+	public Lottos purchaseLotto(int numberOfLotto) {
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < numberOfLotto; i++) {
 			lottos.add(LottoGenerator.generate());
 		}
-		return lottos;
+		return new Lottos(lottos);
 	}
 
-	public Map<LottoRank, Integer> calculateLottoRankCount(List<Lotto> lottos, Lotto winningLotto,
+	public Map<LottoRank, Integer> calculateLottoRankCount(Lottos lottos, Lotto winningLotto,
 														   LottoNumber bonusLottoNumber) {
 		Map<LottoRank, Integer> lottoRankCount = new TreeMap<>(Collections.reverseOrder());
 

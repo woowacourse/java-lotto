@@ -1,10 +1,10 @@
 package lotto.view;
 
 import lotto.domain.Lotto.Lotto;
+import lotto.domain.Lotto.Lottos;
 import lotto.domain.LottoNumber.LottoNumber;
 import lotto.domain.LottoRank;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -28,7 +28,7 @@ public class ConsoleOutputView {
 		System.out.printf(PURCHASE_COMPLETE_MESSAGE, numberOfLotto);
 	}
 
-	public static void printPurchasedLotto(List<Lotto> lottos) {
+	public static void printPurchasedLotto(Lottos lottos) {
 		for (Lotto lotto : lottos) {
 			String lottoNumber = lotto.getLottoNumbers().stream()
 					.map(LottoNumber::getNumber)
