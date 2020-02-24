@@ -7,7 +7,7 @@ import java.util.Map;
 public class LottoResult {
 	private static final int INITIAL_PRIZE_COUNT = 0;
 	private static final int PLUS_COUNT = 1;
-	private static final int INITIAL_EARNING = 0;
+	private static final double INITIAL_EARNING = 0D;
 	private static final int INITIAL_COUNT = 0;
 	private static final int PERCENT = 100;
 
@@ -39,14 +39,14 @@ public class LottoResult {
 	}
 
 	public long calculateEarningRate() {
-		long totalEarning = INITIAL_EARNING;
+		double totalEarning = INITIAL_EARNING;
 		int totalCount = INITIAL_COUNT;
 
 		for (WinningPrize winningPrize : WinningPrize.values()) {
 			totalCount += lottoResult.get(winningPrize);
 			totalEarning += (winningPrize.getPrize() * lottoResult.get(winningPrize));
 		}
-		return totalEarning / (totalCount * LottoCount.LOTTO_PRICE) * PERCENT;
+		return (long)(totalEarning / (totalCount * LottoCount.LOTTO_PRICE) * PERCENT);
 	}
 
 	public Map<WinningPrize, Integer> getLottoResult() {
