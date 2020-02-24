@@ -33,7 +33,7 @@ public class Lotto {
 
     public int countCorrectNumber(WinningLotto winningLotto) {
         return (int) lottoNumbers.stream()
-                .filter(winningLotto.getLottoNumbers()::contains)
+                .filter(winningLotto.getWinningLotto()::contains)
                 .count();
     }
 
