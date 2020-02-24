@@ -8,8 +8,8 @@ public class LottoMain {
     public static void main(String[] args) {
         LottoManager lottoManager = new LottoManager(InputView.inputMoney());
 
-        OutputView.printPurchaseCount(lottoManager.money.calculateLottoTicketCount());
-        OutputView.printLottoNumbers(lottoManager.buyer.getLottos());
+        OutputView.printPurchaseCount(lottoManager.getLottoTicketCount());
+        OutputView.printLottoNumbers(lottoManager.getLottos());
 
         lottoManager.setWinningLotto(InputView.inputWinningLottoNumbers(), InputView.inputBonusNumber());
 

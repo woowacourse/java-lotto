@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Buyer;
 import lotto.domain.Money;
+import lotto.domain.lottoTicket.Lotto;
 import lotto.domain.lottoTicket.LottoNumber;
 import lotto.domain.lottoTicket.WinningLotto;
 import lotto.domain.result.LottoResult;
@@ -12,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoManager {
-    public Money money;
-    public Buyer buyer;
+    private final Money money;
+    private final Buyer buyer;
     private WinningLotto winningLotto;
     private LottoResult lottoResult;
 
@@ -35,5 +36,13 @@ public class LottoManager {
 
     public int analyzeRewardRate() {
         return lottoResult.calculateRewardRate(money.getMoney(), lottoResult.getLottoResult());
+    }
+
+    public int getLottoTicketCount() {
+        return money.calculateLottoTicketCount();
+    }
+
+    public List<Lotto> getLottos(){
+        return buyer.getLottos();
     }
 }
