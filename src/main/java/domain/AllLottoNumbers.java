@@ -19,7 +19,7 @@ public class AllLottoNumbers {
         return allLottoNumbersKeySet;
     }
 
-    public static LottoNumber get(int bonusNumber) {
+    public static LottoNumber get(final int bonusNumber) {
         return allLottoNumbers.get(bonusNumber);
     }
 }

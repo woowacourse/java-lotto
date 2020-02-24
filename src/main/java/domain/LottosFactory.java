@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LottosFactory {
 
-    public static List<Lotto> createAutoLottos(int autoLottoCount) {
+    public static List<Lotto> createAutoLottos(final int autoLottoCount) {
         List<Lotto> autoLottos = new ArrayList<>();
         for (int index = 0; index < autoLottoCount; index++) {
             autoLottos.add(LottoFactory.createOneLotto());

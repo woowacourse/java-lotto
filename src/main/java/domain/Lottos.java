@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Lottos {
     private static final List<Lotto> lottos = new ArrayList<>();
@@ -10,6 +11,7 @@ public class Lottos {
     public Lottos(){ }
 
     public static void addLottos(List<Lotto> targetLottos) {
+        Objects.requireNonNull(targetLottos);
         lottos.addAll(targetLottos);
     }
 

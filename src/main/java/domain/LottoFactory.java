@@ -17,7 +17,7 @@ public class LottoFactory {
                         .collect(toList()));
     }
 
-    public static Lotto createOneManualLotto(String[] manualLotto) {
+    public static Lotto createOneManualLotto(final String[] manualLotto) {
         return new Lotto(Arrays.stream(manualLotto)
                     .map(String::trim)
                     .mapToInt(Integer::parseInt)
