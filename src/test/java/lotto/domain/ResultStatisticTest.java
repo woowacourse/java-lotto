@@ -59,7 +59,7 @@ public class ResultStatisticTest {
 	}
 
 	@Test
-	void calculate_수익률_계산() {
+    void 수익률_계산() {
 		final int MONEY_FOR_LOTTO = 1_000;
 
 		ResultStatistic resultStatistic = ResultStatistic.calculate(lottos, winningInformation);
