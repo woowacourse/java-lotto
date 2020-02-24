@@ -28,7 +28,7 @@ public class PurchaseMoneyTest {
 			// when
 			new PurchaseMoney(input);
 		}).isInstanceOf(PurchaseMoneyIllegalArgumentException.class)
-				.hasMessageMatching("-?[0-9]+" + PurchaseMoneyIllegalArgumentException.MESSAGE);
+				.hasMessageMatching("-?[0-9]+는 유효한 금액이 아닙니다. 금액은 0보다 큰 1000의 배수여야 합니다.");
 	}
 
 	@ParameterizedTest
@@ -39,6 +39,6 @@ public class PurchaseMoneyTest {
 			// when
 			new PurchaseMoney(input);
 		}).isInstanceOf(PurchaseMoneyIllegalArgumentException.class)
-				.hasMessageMatching("-?[0-9]+" + PurchaseMoneyIllegalArgumentException.MESSAGE);
+				.hasMessageMatching("-?[0-9]+는 유효한 금액이 아닙니다. 금액은 0보다 큰 1000의 배수여야 합니다.");
 	}
 }

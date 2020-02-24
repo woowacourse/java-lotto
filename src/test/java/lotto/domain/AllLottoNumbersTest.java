@@ -35,6 +35,6 @@ class AllLottoNumbersTest {
 			// when
 			AllLottoNumbers.getLottoNumber(input);
 		}).isInstanceOf(LottoNumberIllegalArgumentException.class)
-				.hasMessageMatching("-?[0-9]+" + LottoNumberIllegalArgumentException.MESSAGE );
+				.hasMessageMatching("-?[0-9]+ 번호는 유효한 숫자가 아닙니다. 공의 숫자는 1 이상 60 이하여야합니다." );
 	}
 }

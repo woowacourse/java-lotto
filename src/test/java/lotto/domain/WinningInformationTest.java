@@ -48,7 +48,7 @@ public class WinningInformationTest {
 			// when
 			new WinningInformation(winningLottoNumbers, bonus);
 		}).isInstanceOf(WinningLottoNumbersIllegalArgumentException.class)
-				.hasMessageMatching(WinningLottoNumbersIllegalArgumentException.MESSAGE);
+				.hasMessageMatching("보너스 번호가 당첨 번호에 포함되지 않아야 합니다.");
 	}
 
 	@ParameterizedTest

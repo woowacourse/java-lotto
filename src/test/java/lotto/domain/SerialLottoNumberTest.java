@@ -49,7 +49,9 @@ public class SerialLottoNumberTest {
 			// when
 			new SerialLottoNumber(lottoNumbers);
 		}).isInstanceOf(LottoTicketIllegalArgumentException.class)
-				.hasMessageMatching(LottoTicketIllegalArgumentException.MESSAGE);
+				.hasMessageMatching("로또 티켓은 다음을 만족해야합니다." +
+						"\n - 로또 번호는 6개로 이루어져야 합니다." +
+						"\n - 중복되는 숫자가 없어야합니다.");
 	}
 
 	static Stream<Arguments> generateNotSizeSixInput() {
@@ -71,7 +73,9 @@ public class SerialLottoNumberTest {
 			// when
 			new SerialLottoNumber(lottoNumbers);
 		}).isInstanceOf(LottoTicketIllegalArgumentException.class)
-				.hasMessageMatching(LottoTicketIllegalArgumentException.MESSAGE);
+				.hasMessageMatching("로또 티켓은 다음을 만족해야합니다." +
+						"\n - 로또 번호는 6개로 이루어져야 합니다." +
+						"\n - 중복되는 숫자가 없어야합니다.");
 	}
 
 	static Stream<Arguments> generateDuplicatedInput() {
