@@ -14,11 +14,11 @@ public class LottoResult {
             result.put(rank, INITIAL_RESULT);
         }
     }
-    public void countWinningLotto(Lottos lottos) {
+    public void countWinningLotto(Lottos lottos, WinningNumber winningNumber) {
         for (Lotto lotto : lottos.getLottos()) {
             addWinningRankCount(LottoRank
-                    .findRank(WinningNumber.countWinningMatch(lotto),
-                            WinningNumber.isBonusMatch(lotto))
+                    .findRank(winningNumber.countWinningMatch(lotto),
+                            winningNumber.isBonusMatch(lotto))
             );
         }
     }

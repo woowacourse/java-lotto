@@ -41,8 +41,9 @@ public class MoneyTest {
     void 수익률_계산_테스트(){
         String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
         String bonusNumber = "7";
-        WinningNumber.inputWinningNumbers(winningNumbers);
-        WinningNumber.inputBonusNumber(bonusNumber);
+        WinningNumber winningNumber = new WinningNumber();
+        winningNumber.inputWinningNumbers(winningNumbers);
+        winningNumber.inputBonusNumber(bonusNumber);
 
         String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
         Lotto lotto = LottoFactory.createOneManualLotto(inputLottoNumbers);
@@ -53,7 +54,7 @@ public class MoneyTest {
         LottoCount lottoCount = new LottoCount(money.getLottoCount());
 
         LottoResult lottoResult = new LottoResult();
-        lottoResult.countWinningLotto(lottos);
+        lottoResult.countWinningLotto(lottos, winningNumber);
         int profitRatio = money.calculateProfitRatio(lottoResult, lottoCount);
         assertThat(profitRatio).isEqualTo(3_000_000);
     }

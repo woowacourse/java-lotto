@@ -32,7 +32,7 @@ public enum LottoRank {
     }
 
     private static Predicate<LottoRank> getLottoRankPredicate(final int winningMatchCount) {
-        return result -> result.winningMatchCount == winningMatchCount;
+        return result -> result.winningMatchCount == winningMatchCount && !result.isBonusMatch;
     }
 
     private static boolean isSecondRank(final int winningMatchCount, final boolean isBonusMatch) {

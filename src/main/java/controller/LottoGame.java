@@ -25,12 +25,13 @@ public class LottoGame {
         OutputView.printLottos(lottos);
 
         // 당첨 번호 및 보너스 번호 입력
-        inputWinningNumbersWithValidation();
-        inputBonusNumberWithValidation();
+        WinningNumber winningNumber = new WinningNumber();
+        inputWinningNumbersWithValidation(winningNumber);
+        inputBonusNumberWithValidation(winningNumber);
 
         // 당첨 결과 계산 및 출력
         LottoResult lottoResult = new LottoResult();
-        lottoResult.countWinningLotto(lottos);
+        lottoResult.countWinningLotto(lottos, winningNumber);
         OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult, lottoCount));
     }
@@ -71,21 +72,21 @@ public class LottoGame {
         }
     }
 
-    private static void inputWinningNumbersWithValidation() {
+    private static void inputWinningNumbersWithValidation(WinningNumber winningNumber) {
         try {
-            WinningNumber.inputWinningNumbers(InputView.inputWinningNumbers());
+            winningNumber.inputWinningNumbers(InputView.inputWinningNumbers());
         } catch (IllegalArgumentException | NullPointerException e) {
             OutputView.printExceptionMessage(e);
-            inputWinningNumbersWithValidation();
+            inputWinningNumbersWithValidation(winningNumber);
         }
     }
 
-    private static void inputBonusNumberWithValidation() {
+    private static void inputBonusNumberWithValidation(WinningNumber winningNumber) {
         try {
-            WinningNumber.inputBonusNumber(InputView.inputBonusNumber());
+            winningNumber.inputBonusNumber(InputView.inputBonusNumber());
         } catch (IllegalArgumentException | NullPointerException e) {
             OutputView.printExceptionMessage(e);
-            inputBonusNumberWithValidation();
+            inputBonusNumberWithValidation(winningNumber);
         }
     }
 }
