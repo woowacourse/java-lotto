@@ -7,7 +7,7 @@ public class LottoNumber {
     private static final int MIN = 1;
     private int value;
 
-    LottoNumber(int value) {
+    public LottoNumber(int value) {
         validateValue(value);
         this.value = value;
     }
@@ -31,5 +31,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

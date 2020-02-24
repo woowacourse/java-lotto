@@ -44,8 +44,10 @@ class LottoTest {
         Set<LottoNumber> winningNumbers = new HashSet<>(
             Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
                 new LottoNumber(5), new LottoNumber(40)));
+
+        Lotto winningLotto = new Lotto(winningNumbers);
         //when
-        int matchSize = lotto.matchWinningNumbers(winningNumbers);
+        int matchSize = lotto.matchWinningNumbers(winningLotto);
         //then
         assertThat(matchSize).isEqualTo(5);
     }

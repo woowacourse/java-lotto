@@ -11,4 +11,12 @@ public class Result {
         totalWinningMoney = winningRanks.calculateTotalWinningMoney();
         earningRate = totalWinningMoney.toEarningRate(purchaseAmount);
     }
+
+    public WinningRanks getWinningRanks() {
+        return winningRanks;
+    }
+
+    public int getEarningRate() {
+        return earningRate;
+    }
 }

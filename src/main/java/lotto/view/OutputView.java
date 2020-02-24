@@ -4,6 +4,7 @@ import java.util.Map;
 
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
+import lotto.domain.Result;
 import lotto.domain.WinningRanks;
 
 public class OutputView {
@@ -16,11 +17,12 @@ public class OutputView {
         System.out.println(lotto);
     }
 
-    public static void printStatistics(WinningRanks winningRanks) {
+    private static void printStatistics(WinningRanks winningRanks) {
         Map<Rank, Integer> winningResults = winningRanks.getWinningRanks();
         for (Rank rank : winningResults.keySet()) {
-            System.out.println(String.format("%d개 일치(%d원)- %d개", rank.getMatchNumber(), rank.calculateWinningMoney(),
-                winningResults.get(rank)));
+            System.out.println(
+                String.format("%d개 일치(%d원)- %d개", rank.getMatchNumber(), rank.calculateWinningMoney().getValue(),
+                    winningResults.get(rank)));
         }
     }
 
@@ -28,4 +30,9 @@ public class OutputView {
         System.out.println(String.format("총 수익률은 %d%%입니다.", earningRate));
     }
 
+    public static void printResult(Result result) {
+        System.out.println("당첨 통계\n---------");
+        printStatistics(result.getWinningRanks());
+        printEarningRate(result.getEarningRate());
+    }
 }

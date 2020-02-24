@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,74 +8,56 @@ import lotto.view.OutputView;
 
 public class LottoGame {
 
-    // public void play() {
-    //     List<Lotto> lottos = purchaseLottos();
-    //     WinningRanks winningRanks = produceResult(lottos);
-    //
-    //     //통계하기
-    //     int totalWinningMoney = WinningResultCalculator.calculateTotalWinningMoney(winningRanks);
-    //     OutputView.printStatistics(winningRanks);
-    //     int earningRate = EarningRateCalculator.calculate(totalWinningMoney, purchaseAmount);
-    //     OutputView.printEarningRate(earningRate);
-    //
-    // }
-    //
-    // private WinningRanks produceResult(List<Lotto> lottos) {
-    //     List<Integer> winningNumbers = InputView.inputLastWeekWinningNumbers();
-    //     int bonusBall = InputView.inputBonusBall();
-    //     return compareWithWinningNumbers(lottos, winningNumbers, bonusBall);
-    // }
-    //
-    // private WinningRanks compareWithWinningNumbers(List<Lotto> lottos, List<Integer> winningNumbers, int bonusBall) {
-    //     //당첨 하기
-    //     List<Integer> winningMoneys = new ArrayList<>();
-    //     WinningRanks winningRanks = new WinningRanks(new HashMap<>());
-    //     //todo: 함수를 더 간결하게 정리
-    //     for (Lotto lotto : lottos) {
-    //         int matchingNumber = LottoComparator.compare(lotto, winningNumbers);
-    //         if (Rank.isValid(matchingNumber)) {
-    //             Rank rank = Rank.valueOf(matchingNumber, lotto.matchBonusBall(bonusBall));
-    //             winningRanks.addWinningRanks(rank);
-    //
-    //             int winningMoney = rank.calculateWinningMoney();
-    //             winningMoneys.add(winningMoney);
-    //         }
-    //     }
-    //     return winningRanks;
-    // }
-    //
-    // private List<Lotto> purchaseLottos() {
-    //     int purchaseAmount = inputPurchaseAmount();
-    //     int lottosSize = Lotto.convertMoneyToLottosSize(purchaseAmount);
-    //     return generateLottos(lottosSize);
-    // }
-    //
-    // private List<Lotto> generateLottos(int lottosSize) {
-    //     List<List<Integer>> lottosNumbersList = convertToLottosNumbersList(lottosSize);
-    //     List<Lotto> lottos = LottosGenerator.generate(lottosSize, lottosNumbersList);
-    //     printLottos(lottos);
-    //     return lottos;
-    // }
-    //
-    // private void printLottos(List<Lotto> lottos) {
-    //     for (Lotto lotto : lottos) {
-    //         OutputView.printLotto(lotto);
-    //     }
-    // }
-    //
-    // private List<List<Integer>> convertToLottosNumbersList(int lottosSize) {
-    //     List<List<Integer>> lottosNumbersList = new ArrayList<>(new ArrayList<>());
-    //     for (int i = 0; i < lottosSize; i++) {
-    //         lottosNumbersList.add(LottoNumbersGenerator.generate());
-    //     }
-    //     return lottosNumbersList;
-    // }
-    //
-    // private int inputPurchaseAmount() {
-    //     // 구매금액 받아서 받은거 보여주기
-    //     int purchaseAmount = InputView.inputPurchaseAmount();
-    //     OutputView.printLottosSize(purchaseAmount);
-    //     return purchaseAmount;
-    // }
+    public void play() {
+        Money purchaseAmount = inputPurchaseAmount();
+        List<Lotto> lottos = purchaseLottos(purchaseAmount);
+        Result result = produceResult(lottos, purchaseAmount);
+        OutputView.printResult(result);
+
+    }
+
+    private Result produceResult(List<Lotto> lottos, Money purchaseMoney) {
+        Lotto winningLotto = InputView.inputLastWeekWinningNumbers();
+        LottoNumber bonusNumber = InputView.inputBonusNumber();
+        WinningRanks winningRanks = compareWithWinningNumbers(lottos, winningLotto, bonusNumber);
+        return new Result(winningRanks, purchaseMoney);
+    }
+
+    private WinningRanks compareWithWinningNumbers(List<Lotto> lottos, Lotto winningLotto, LottoNumber bonusNumber) {
+        //당첨 하기
+        WinningRanks winningRanks = new WinningRanks(new HashMap<>());
+        //todo: 함수를 더 간결하게 정리
+        for (Lotto lotto : lottos) {
+            int matchingNumber = lotto.matchWinningNumbers(winningLotto);
+            if (Rank.isValid(matchingNumber)) {
+                Rank rank = Rank.valueOf(matchingNumber, lotto.matchBonusNumber(bonusNumber));
+                winningRanks.addWinningRanks(rank);
+            }
+        }
+        return winningRanks;
+    }
+
+    private List<Lotto> purchaseLottos(Money purchaseAmount) {
+        return generateLottos(purchaseAmount.toLottosSize());
+    }
+
+    private List<Lotto> generateLottos(int lottosSize) {
+        List<Lotto> lottos = LottosGenerator.generate(lottosSize);
+        printLottos(lottos);
+        return lottos;
+    }
+
+    private void printLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            OutputView.printLotto(lotto);
+        }
+    }
+
+    private Money inputPurchaseAmount() {
+        // 구매금액 받아서 받은거 보여주기
+        Money purchaseAmount = InputView.inputPurchaseAmount();
+        OutputView.printLottosSize(purchaseAmount.toLottosSize());
+        return purchaseAmount;
+    }
 
 }

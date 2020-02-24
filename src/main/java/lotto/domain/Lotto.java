@@ -8,9 +8,15 @@ public class Lotto {
     private Set<LottoNumber> lottoNumbers;
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    Lotto(Set<LottoNumber> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto createWinningLotto(List<Integer> winningNumbers) {
+        return new Lotto(winningNumbers.stream()
+            .map(integer -> new LottoNumber(integer))
+            .collect(Collectors.toSet()));
     }
 
     private void validateLottoNumbers(Set<LottoNumber> lottoNumbers) {
@@ -19,9 +25,9 @@ public class Lotto {
         }
     }
 
-    int matchWinningNumbers(Set<LottoNumber> winningNumbers) {
+    int matchWinningNumbers(Lotto winningLotto) {
         return (int)lottoNumbers.stream()
-            .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
+            .filter(lottoNumber -> winningLotto.lottoNumbers.contains(lottoNumber))
             .count();
     }
 
