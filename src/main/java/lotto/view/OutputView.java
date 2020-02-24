@@ -24,7 +24,7 @@ public class OutputView {
 		for (WinningType winningType : lottoResult.getWinningKeys()) {
 			stringBuilder.append(winningType.getSameNumberCount())
 					.append("개 일치");
-			if (winningType.isBonusTRUE()) {
+			if (winningType.isBonusTrue()) {
 				stringBuilder.append(", 보너스 볼 일치");
 			}
 			stringBuilder.append("(")

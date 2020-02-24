@@ -28,7 +28,7 @@ public enum WinningType {
 				.orElse(NONE);
 	}
 
-	public boolean isBonusTRUE() {
+	public boolean isBonusTrue() {
 		return bonusType == BonusType.TRUE;
 	}
 
