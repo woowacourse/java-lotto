@@ -19,7 +19,7 @@ public class SerialLottoNumberFactoryTest {
 
 		// then
 		List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::new)
+				.map(AllLottoNumbers::getLottoNumber)
 				.collect(Collectors.toList());
 		Assertions.assertThat(randomLottoTicket).isEqualTo(new SerialLottoNumber(lottoNumbers));
 	}
@@ -34,7 +34,7 @@ public class SerialLottoNumberFactoryTest {
 
 		// then
 		List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::new)
+				.map(AllLottoNumbers::getLottoNumber)
 				.collect(Collectors.toList());
 		Assertions.assertThat(winningLottoNumbers).isEqualTo(new SerialLottoNumber(lottoNumbers));
 	}

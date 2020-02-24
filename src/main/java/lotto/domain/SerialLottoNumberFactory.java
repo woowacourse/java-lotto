@@ -16,7 +16,7 @@ public class SerialLottoNumberFactory {
 			throws IllegalArgumentException {
 		List<Integer> integers = StringParser.stringToIntegerList(input);
 		List<LottoNumber> lottoNumbers = integers.stream()
-				.map(LottoNumber::new)
+				.map(AllLottoNumbers::getLottoNumber)
 				.collect(Collectors.toUnmodifiableList());
 
 		return new SerialLottoNumber(lottoNumbers);

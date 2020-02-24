@@ -53,7 +53,7 @@ public class LottoController {
 
 	private static LottoNumber createBonusNumber() {
 		try {
-			return new LottoNumber(InputView.inputBonusNumber());
+			return AllLottoNumbers.getLottoNumber(InputView.inputBonusNumber());
 		} catch (LottoTicketIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return createBonusNumber();
