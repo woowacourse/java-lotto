@@ -4,9 +4,8 @@ import java.util.Objects;
 
 public class LottoMoney {
 	private static final long ZERO = 0;
-	private static final long UNIT = 1000;
-	private static final long MAX_BOUND = 100000;
-	private static final long LOTTO_PRICE = 1000;
+	private static final long UNIT = 1_000;
+	private static final long LOTTO_PRICE = 1_000;
 	private static final int PERCENT = 100;
 
 	private final long money;
@@ -24,7 +23,6 @@ public class LottoMoney {
 		long parsedMoney = parseToLong(money);
 		validatePositive(parsedMoney);
 		validateUnit(parsedMoney);
-		validateMaxBound(parsedMoney);
 		return parsedMoney;
 	}
 
@@ -51,12 +49,6 @@ public class LottoMoney {
 	private void validateUnit(long parsedMoney) {
 		if (parsedMoney % UNIT != ZERO) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.INVALID_UNIT);
-		}
-	}
-
-	private void validateMaxBound(long parsedMoney) {
-		if (parsedMoney > MAX_BOUND) {
-			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.OUT_OF_BOUND);
 		}
 	}
 
