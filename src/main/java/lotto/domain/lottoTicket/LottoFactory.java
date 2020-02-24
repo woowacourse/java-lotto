@@ -21,7 +21,6 @@ public class LottoFactory {
         public static final LottoFactory instance = new LottoFactory();
     }
 
-
     public static LottoFactory getInstance() {
         return LottoFactoryHolder.instance;
     }
