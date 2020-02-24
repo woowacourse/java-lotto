@@ -26,11 +26,9 @@ public class Results {
     }
 
     private void addBlankResults() {
-        results.add(new Result(WinningInfo.FIFTH));
-        results.add(new Result(WinningInfo.FOURTH));
-        results.add(new Result(WinningInfo.THIRD));
-        results.add(new Result(WinningInfo.SECOND));
-        results.add(new Result(WinningInfo.FIRST));
+        for(WinningInfo winningInfo : WinningInfo.values()){
+            results.add(new Result(winningInfo));
+        }
     }
 
     public List<Result> getResults() {
