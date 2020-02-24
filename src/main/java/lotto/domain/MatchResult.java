@@ -17,11 +17,24 @@ public enum MatchResult {
         this.prize = prize;
     }
 
-    static MatchResult of(int matchCount) {
+    static MatchResult of(int matchCount, boolean containsBonusNumber) {
+        if (matchCount != 5) {
+            return Arrays.stream(values())
+                    .filter(v -> matchCount == v.matchCount)
+                    .findFirst()
+                    .orElseThrow(RuntimeException::new);
+        }
+
+        if (containsBonusNumber) {
+            return FIVE_MATCH_WITH_BONUS_BALL;
+        }
+
+        return FIVE_MATCH;
+    }
+
+    static boolean hasMatchCount(int matchCount) {
         return Arrays.stream(values())
-                .filter(v -> matchCount == v.matchCount)
-                .findFirst()
-                .orElse(null);
+                .anyMatch(v -> matchCount == v.matchCount);
     }
 
     public int getMatchCount() {
