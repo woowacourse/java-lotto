@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.generator.LottoNumberSelectedGenerator;
+import lotto.generator.LottoSelectedGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -44,8 +44,7 @@ public class LottoTest {
     @Test
     void hasLottoNumber_해당_로또번호를_가지고_있을_때() {
         boolean expected = true;
-        Set<LottoNumber> lottoNumbers = new LottoNumberSelectedGenerator("1, 2, 3, 4, 5, 6").create();
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new LottoSelectedGenerator("1, 2, 3, 4, 5, 6").create();
         assertThat(lotto.hasLottoNumber(new LottoNumber(1))).isTrue();
     }
 }

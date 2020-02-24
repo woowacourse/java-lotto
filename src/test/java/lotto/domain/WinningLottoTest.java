@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.generator.LottoNumberSelectedGenerator;
+import lotto.generator.LottoSelectedGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,8 +16,7 @@ public class WinningLottoTest {
 
     @BeforeAll
     static void init() {
-        Set<LottoNumber> lottoNumbers = new LottoNumberSelectedGenerator("1, 2, 3, 4, 5, 6").create();
-        lotto = new Lotto(lottoNumbers);
+        lotto =  new LottoSelectedGenerator("1, 2, 3, 4, 5, 6").create();
     }
 
     @Test
@@ -61,8 +60,8 @@ public class WinningLottoTest {
     @Test
     void computeMatchCount_두_로또_사이에_일치하는_로또번호가_없을_때() {
         int expected = 0;
-        Set<LottoNumber> lottoNumbers = new LottoNumberSelectedGenerator("11, 12, 13, 14, 15, 16").create();
-        WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber("45"));
+        Lotto lotto = new LottoSelectedGenerator("11, 12, 13, 14, 15, 16").create();
+        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber("45"));
 
         assertThat(winningLotto.computeMatchCount(lotto) == expected);
     }

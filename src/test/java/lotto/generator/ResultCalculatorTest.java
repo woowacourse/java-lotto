@@ -9,12 +9,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultCalculatorTest {
     MatchResults getResult() {
-        Set<LottoNumber> lottoNumbers = new LottoNumberSelectedGenerator("1,2,3,4,5,6").create();
-        Lottos lottos = new Lottos(Arrays.asList(new Lotto(lottoNumbers)));
+        Lotto lotto = new LottoSelectedGenerator("1,2,3,4,5,6").create();
 
         LottoNumber bonusNumber = new LottoNumber(7);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), bonusNumber);
-        return  ResultCalculator.computeMatchResults(lottos, winningLotto);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+        return  ResultCalculator.computeMatchResults(new Lottos(Arrays.asList(lotto)), winningLotto);
     }
 
     @Test
