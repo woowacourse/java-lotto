@@ -1,6 +1,6 @@
-package lotto.domain.Lotto;
+package lotto.domain.lotto;
 
-import lotto.domain.LottoNumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumber;
 
 import java.util.HashSet;
 import java.util.Set;

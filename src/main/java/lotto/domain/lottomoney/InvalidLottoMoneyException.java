@@ -1,4 +1,4 @@
-package lotto.domain.LottoMoney;
+package lotto.domain.lottomoney;
 
 public class InvalidLottoMoneyException extends IllegalArgumentException {
 	public static final String NULL_OR_EMPTY = "null 또는 빈 문자열은 입력할 수 없습니다.";

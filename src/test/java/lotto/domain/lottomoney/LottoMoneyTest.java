@@ -1,7 +1,5 @@
-package lotto.domain.LottoMoney;
+package lotto.domain.lottomoney;
 
-import lotto.domain.LottoMoney.InvalidLottoMoneyException;
-import lotto.domain.LottoMoney.LottoMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,4 +1,4 @@
-package lotto.domain.Lotto;
+package lotto.domain.lotto;
 
 public class InvalidLottoException extends IllegalArgumentException {
 	public static final String NULL = "null은 입력할 수 없습니다.";

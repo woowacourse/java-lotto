@@ -1,4 +1,4 @@
-package lotto.domain.Lotto;
+package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.Iterator;

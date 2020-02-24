@@ -1,12 +1,12 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.domain.Lotto.Lotto;
-import lotto.domain.Lotto.LottoParser;
-import lotto.domain.Lotto.Lottos;
-import lotto.domain.LottoMoney.InvalidLottoMoneyException;
-import lotto.domain.LottoMoney.LottoMoney;
-import lotto.domain.LottoNumber.LottoNumber;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoParser;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lottomoney.InvalidLottoMoneyException;
+import lotto.domain.lottomoney.LottoMoney;
+import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.LottoRank;
 
 import java.util.Map;

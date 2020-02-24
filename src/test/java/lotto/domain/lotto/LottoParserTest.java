@@ -1,7 +1,6 @@
-package lotto.domain.Lotto;
+package lotto.domain.lotto;
 
-import lotto.domain.Lotto.LottoParser;
-import lotto.domain.LottoNumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoParserTest {
-	@DisplayName("WinningLottoParser에 정상값을 입력하면 LottoNumber list 반환")
+	@DisplayName("WinningLottoParser에 정상값을 입력하면 lottonumber list 반환")
 	@Test
 	void parser_StringInputWinningLotto_CreateWinningLotto() {
 		String inputWinningLotto = "1, 2, 3, 4, 5, 6";

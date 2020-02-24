@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.LottoMoney.LottoMoney;
+import lotto.domain.lottomoney.LottoMoney;
 
 import java.util.Arrays;
 

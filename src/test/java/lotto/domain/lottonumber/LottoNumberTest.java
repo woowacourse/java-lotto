@@ -1,7 +1,5 @@
-package lotto.domain.LottoNumber;
+package lotto.domain.lottonumber;
 
-import lotto.domain.LottoNumber.InvalidLottoNumberException;
-import lotto.domain.LottoNumber.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
-	@DisplayName("LottoNumber 생성자에 1이상 45이하의 정수 입력이 들어올 때 객체 생성")
+	@DisplayName("lottonumber 생성자에 1이상 45이하의 정수 입력이 들어올 때 객체 생성")
 	@ParameterizedTest
 	@ValueSource(ints = {1, 45})
 	void constructor_WithinBoundNumber_CreatedNumber(int number) {
@@ -19,7 +17,7 @@ class LottoNumberTest {
 				.isInstanceOf(LottoNumber.class);
 	}
 
-	@DisplayName("LottoNumber 생성자에 0이하 46이상의 정수 입력이 들어올 때 InvalidLottoNumberException 발생")
+	@DisplayName("lottonumber 생성자에 0이하 46이상의 정수 입력이 들어올 때 InvalidLottoNumberException 발생")
 	@ParameterizedTest
 	@ValueSource(ints = {0, 46})
 	void constructor_OutOfBoundNumber_ExceptionThrown(int number) {
@@ -27,7 +25,7 @@ class LottoNumberTest {
 				.isInstanceOf(InvalidLottoNumberException.class);
 	}
 
-	@DisplayName("valueOf 메소드에 1이상 45이하의 정수 입력이 들어올 때 캐싱된 LottoNumber 객체를 반환")
+	@DisplayName("valueOf 메소드에 1이상 45이하의 정수 입력이 들어올 때 캐싱된 lottonumber 객체를 반환")
 	@Test
 	void valueOf_Number_GetNumber() {
 		assertThat(LottoNumber.valueOf(3) == LottoNumber.valueOf(3)).isTrue();
