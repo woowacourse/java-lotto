@@ -22,7 +22,7 @@ public class OutputView {
     }
 
     public static void printResults(final Results results) {
-        TreeMap<WinningInfo, Long> summary = new TreeMap<>(results.getSummary());
+        TreeMap<WinningInfo, Integer> summary = new TreeMap<>(results.getSummary());
         Iterator<WinningInfo> iteratorKey = summary.keySet()
                 .iterator();
 

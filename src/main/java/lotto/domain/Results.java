@@ -1,10 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Results {
     private static final int MONEY_PER_LOTTO = 1000;
@@ -55,13 +51,24 @@ public class Results {
         return (getTotalEarning()) / (userLottoTickets.size() * MONEY_PER_LOTTO) * HUNDRED_PERCENT;
     }
 
-    public Map<WinningInfo, Long> getSummary() {
+    public Map<WinningInfo, Integer> getSummary() {
+        Map<WinningInfo, Integer> summary = new HashMap<>();
+
         calculateResults();
-        Map<WinningInfo, Long> summary = results.stream()
-                .collect(Collectors
-                        .groupingBy(Result::getWinningInfo, Collectors
-                                .counting()));
+        for (Result result : results) {
+            int count = getCount(summary, result);
+            WinningInfo winningInfo = result.getWinningInfo();
+            summary.put(winningInfo, count + 1);
+        }
         summary.remove(WinningInfo.FAIL);
         return summary;
+    }
+
+    private int getCount(Map<WinningInfo, Integer> summary, Result result) {
+        WinningInfo winningInfo = result.getWinningInfo();
+        if (summary.containsKey(winningInfo)) {
+            return summary.get(winningInfo);
+        }
+        return 0;
     }
 }
