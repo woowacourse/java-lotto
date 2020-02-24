@@ -12,7 +12,7 @@ public class ResultsDTO {
     }
 
     public int getMatchCount(WinningInfo winningInfo) {
-        return matchCount.get(winningInfo);
+        return matchCount.getOrDefault(winningInfo, 0);
     }
 
     public long getEarningRate() {
