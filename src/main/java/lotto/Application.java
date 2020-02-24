@@ -22,7 +22,7 @@ public class Application {
         PaidPrice paidPrice = new PaidPrice(InputView.getPayment());
         OutputView.printLottoCount(paidPrice);
 
-        Lottos lottos = new Lottos(LottoGenerator.createLottos(paidPrice, new LottoNumberRandomGenerator()));
+        Lottos lottos = LottoGenerator.createLottos(paidPrice, new LottoNumberRandomGenerator());
         OutputView.printLottosNumbers(lottos);
         return lottos;
     }

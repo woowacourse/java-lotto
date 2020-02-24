@@ -4,6 +4,7 @@ public class WinningLotto {
     private static final String EMPTY_LOTTO_MSG = "로또 번호가 입력되지 않았습니다.";
     private static final String EMPTY_BONUS_MSG = "보너스 번호가 입력되지 않았습니다.";
     private static final String BONUS_NUMBER_ALREADY_EXIST_ERROR_MSG = "보너스 번호가 당첨번호와 중복됩니다.";
+
     private Lotto lotto;
     private LottoNumber bonusNumber;
 
@@ -23,9 +24,8 @@ public class WinningLotto {
         }
     }
     private void validateDistinctBonus(Lotto lotto, LottoNumber bonusNumber) {
-        boolean bonusNumberMatchWithLottoNumbers = lotto.lottoNumbers.stream()
-                .mapToInt(LottoNumber::getNumber)
-                .anyMatch(winningNumber -> winningNumber == bonusNumber.getNumber());
+        boolean bonusNumberMatchWithLottoNumbers = lotto.hasLottoNumber(bonusNumber);
+
         if (bonusNumberMatchWithLottoNumbers) {
             throw new IllegalArgumentException(BONUS_NUMBER_ALREADY_EXIST_ERROR_MSG);
         }
