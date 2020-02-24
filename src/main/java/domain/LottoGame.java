@@ -7,6 +7,8 @@ import java.util.Map;
 import exception.LottoInputException;
 
 public class LottoGame {
+	private static final int DEFAULT_VALUE = 0;
+	private static final int ONE = 1;
 	private final List<Lotto> lottos;
 
 	public LottoGame(Money purchaseMoney) {
@@ -31,7 +33,7 @@ public class LottoGame {
 		Map<Rank, Integer> ranks = new HashMap<>();
 		for (Lotto lotto : lottos) {
 			Rank rank = lotto.compare(winningNumbers, bonusNumber);
-			ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
+			ranks.put(rank, ranks.getOrDefault(rank, DEFAULT_VALUE) + ONE);
 		}
 		return new GameResult(ranks);
 	}

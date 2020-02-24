@@ -3,6 +3,7 @@ package domain;
 import java.util.Map;
 
 public class GameResult {
+	private static final int DEFAULT_VALUE = 0;
 	private final Map<Rank, Integer> ranks;
 
 	public GameResult(Map<Rank, Integer> ranks) {
@@ -18,6 +19,6 @@ public class GameResult {
 	}
 
 	public int getMatched(Rank rank) {
-		return ranks.getOrDefault(rank, 0);
+		return ranks.getOrDefault(rank, DEFAULT_VALUE);
 	}
 }
