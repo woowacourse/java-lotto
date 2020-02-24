@@ -24,12 +24,8 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    private static List<LottoNumber> createLottoNumbers() {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        while (lottoNumbers.size() != LOTTO_NUMBERS_COUNT) {
-            lottoNumbers.add(LottoNumber.randomBy());
-        }
-        return new ArrayList<>(lottoNumbers);
+    public static Lotto create() {
+        return new Lotto(LottoFactory.createLottoNumbers());
     }
 
     private static void validateEmptyValue(String[] number) {
