@@ -3,11 +3,6 @@ package lotto.controller;
 import lotto.model.*;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Lotto {
     public static final int WINNING_COUNT = 1;
     private Payment payment;
@@ -17,13 +12,13 @@ public class Lotto {
     private BonusBall bonusBall;
 
     public Lotto() {
-        payment = DomainsInitializer.initializePayment();
+        payment = LottoMembersInitializer.initializePayment();
         OutputView.printLottoCount(payment.getPayment());
-        lottoResult = DomainsInitializer.initializeResultCount();
+        lottoResult = LottoMembersInitializer.initializeResultCount();
         autoNumbers = new AutoNumbers(payment.getPaymentCount());
         OutputView.printAutoNumbers(autoNumbers);
-        winNumber = DomainsInitializer.initializeWinNumber();
-        bonusBall = DomainsInitializer.initializeBonusNumber(winNumber);
+        winNumber = LottoMembersInitializer.initializeWinNumber();
+        bonusBall = LottoMembersInitializer.initializeBonusNumber(winNumber);
     }
 
     public void lottoGame() {
@@ -50,27 +45,26 @@ public class Lotto {
     }
 
     private void checkCount(AutoNumber autoNumber, int count) {
-        String correctCount = Integer.toString(count);
         if (LottoRank.isCorrectNumberFive(count)) {
-            isSecondWin(autoNumber, correctCount);
+            isSecondWin(autoNumber, count);
             return;
         }
-        lottoResult.putValue(correctCount, lottoResult.getKey(correctCount) + WINNING_COUNT);
+        lottoResult.putValue(count, lottoResult.getKey(count) + WINNING_COUNT);
     }
 
-    private void isSecondWin(AutoNumber autoNumber, String correctCount) {
+    private void isSecondWin(AutoNumber autoNumber, int count) {
         if (autoNumber.contains(bonusBall.getBonusNumber())) {
-            lottoResult.putValue(LottoRank.SECOND.getRank(), lottoResult.getKey(LottoRank.SECOND.getRank()) + WINNING_COUNT);
+            lottoResult.putValue(LottoRank.SECOND.getCorrect(), lottoResult.getKey(LottoRank.SECOND.getCorrect()) + WINNING_COUNT);
             return;
         }
-        lottoResult.putValue(correctCount, lottoResult.getKey(correctCount) + WINNING_COUNT);
+        lottoResult.putValue(count, lottoResult.getKey(count) + WINNING_COUNT);
     }
 
     public void printCorrectResults() {
-        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FIFTH.getRank()), LottoRank.FIFTH.getCorrect(), LottoRank.FIFTH.getPrize());
-        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FOURTH.getRank()), LottoRank.FOURTH.getCorrect(), LottoRank.FOURTH.getPrize());
-        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.THIRD.getRank()), LottoRank.THIRD.getCorrect(), LottoRank.THIRD.getPrize());
-        OutputView.printBonusCorrectResult(lottoResult.getKey(LottoRank.SECOND.getRank()));
-        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FIRST.getRank()), LottoRank.FIRST.getCorrect(), LottoRank.FIRST.getPrize());
+        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FIFTH.getCorrect()), LottoRank.FIFTH.getCorrect(), LottoRank.FIFTH.getPrize());
+        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FOURTH.getCorrect()), LottoRank.FOURTH.getCorrect(), LottoRank.FOURTH.getPrize());
+        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.THIRD.getCorrect()), LottoRank.THIRD.getCorrect(), LottoRank.THIRD.getPrize());
+        OutputView.printBonusCorrectResult(lottoResult.getKey(LottoRank.SECOND.getCorrect()));
+        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FIRST.getCorrect()), LottoRank.FIRST.getCorrect(), LottoRank.FIRST.getPrize());
     }
 }

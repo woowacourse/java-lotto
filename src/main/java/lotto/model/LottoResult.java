@@ -1,19 +1,27 @@
 package lotto.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private Map<String, Integer> resultCount;
+    private final int INITIAL_NUMBER = 0;
+    private Map<Integer, Integer> lottoResult;
 
-    public LottoResult(Map<String, Integer> resultCount) {
-        this.resultCount = resultCount;
+    public LottoResult() {
+        Map<Integer, Integer> lottoResult = new HashMap<>();
+        lottoResult.put(LottoRank.FIFTH.getCorrect(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.FOURTH.getCorrect(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.THIRD.getCorrect(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.SECOND.getCorrect(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.FIRST.getCorrect(), INITIAL_NUMBER);
+        this.lottoResult = lottoResult;
     }
 
-    public int getKey(String key) {
-        return resultCount.get(key);
+    public int getKey(int key) {
+        return lottoResult.get(key);
     }
 
-    public void putValue(String key, int value) {
-        this.resultCount.put(key, value);
+    public void putValue(int key, int value) {
+        this.lottoResult.put(key, value);
     }
 }

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoTest {
     private AutoNumber autonumbers = new AutoNumber(Arrays.asList(1, 2, 5, 7, 9, 11));
-    private WinNumber winNumber = new WinNumber("3, 4, 5, 6, 7, 8");
+    private WinNumber winNumber = new WinNumber(Arrays.asList(3, 4, 5, 6, 7, 8));
 
 //    @Test
 //    @DisplayName("당첨 번호 안에 있는 값이 몇 개인지")

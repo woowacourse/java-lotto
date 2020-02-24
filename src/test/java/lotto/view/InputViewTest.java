@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.exception.NotNumberException;
 import lotto.exception.NullOrEmptyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ public class InputViewTest {
         String winNumber1 = null;
 
         assertThatThrownBy(() -> {
-            InputView.getWinNumbers(winNumber1);
+            InputView.checkNullorEmptyInput(winNumber1);
         }).isInstanceOf(NullOrEmptyException.class)
                 .hasMessage("null 혹은 빈문자열을 입력할 수 없습니다.");
     }
@@ -23,8 +24,18 @@ public class InputViewTest {
         String winNumber2 = "";
 
         assertThatThrownBy(() -> {
-            InputView.getWinNumbers(winNumber2);
+            InputView.checkNullorEmptyInput(winNumber2);
         }).isInstanceOf(NullOrEmptyException.class)
                 .hasMessage("null 혹은 빈문자열을 입력할 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("입력값이 숫자가 아닐 때")
+    void isNumberFormat() {
+        assertThatThrownBy(() -> {
+            InputView.checkNumberFormat("a");
+        }).isInstanceOf(NotNumberException.class)
+                .hasMessage("숫자를 입력하세요.");
+    }
+
 }
