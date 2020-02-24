@@ -49,6 +49,6 @@ public class LottoResultTest {
         lottoResult.calculateLottoResult(lottos, winningLotto);
 
         assertThat(lottoResult.calculateRewardRate(25000, lottoResult.getLottoResult()))
-                .isEqualTo(8126000);
+                .isEqualTo(51461);
     }
 }
