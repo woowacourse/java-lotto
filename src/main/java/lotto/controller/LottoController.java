@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.ticket.AutoLottoMachine;
+import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketBundle;
 import lotto.service.LottoService;
 import lotto.view.InputView;
@@ -10,6 +11,9 @@ import lotto.view.dto.LottoTicketDTO;
 import lotto.view.dto.ResultDTO;
 import lotto.view.dto.WinLottoTicketDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoController {
     private LottoService service = new LottoService(new AutoLottoMachine());
 
@@ -18,11 +22,21 @@ public class LottoController {
 
         LottoTicketBundle lottoTicketBundle = service.createLottoTicketBundle(bettingMoney);
 
-        OutputView.printLottoTickets(LottoTicketDTO.createLottoTicketDTOS(lottoTicketBundle));
+        OutputView.printLottoTickets(convertToLottoTicketDTOS(lottoTicketBundle));
 
         ResultDTO resultDTO = service.getResult(createWinLottoTicketDTO(), lottoTicketBundle);
 
         OutputView.printResult(resultDTO);
+    }
+
+    private List<LottoTicketDTO> convertToLottoTicketDTOS(LottoTicketBundle lottoTicketBundle) {
+        List<LottoTicketDTO> lottoTicketDTOS = new ArrayList<>();
+
+        for (LottoTicket lottoTicket : lottoTicketBundle.getLottoTickets()) {
+            lottoTicketDTOS.add(new LottoTicketDTO(lottoTicket));
+        }
+
+        return lottoTicketDTOS;
     }
 
     private WinLottoTicketDTO createWinLottoTicketDTO() {
