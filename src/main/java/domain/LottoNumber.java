@@ -1,6 +1,5 @@
 package domain;
 
-
 import java.util.Objects;
 
 public class LottoNumber implements Comparable {

@@ -15,9 +15,8 @@ public class LottoResult {
             result.put(rank, INITIAL_RESULT);
         }
     }
-    public static void countWinningLotto(final Lottos lottos) {
-        Objects.requireNonNull(lottos);
-        for (Lotto lotto : lottos.getLottos()) {
+    public static void countWinningLotto() {
+        for (Lotto lotto : Lottos.getLottos()) {
             addWinningRankCount(LottoRank
                     .findRank(WinningNumber.countWinningMatch(lotto),
                             WinningNumber.isBonusMatch(lotto))

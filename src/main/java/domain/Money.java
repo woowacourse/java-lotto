@@ -37,7 +37,7 @@ public class Money {
         }
     }
 
-    public int getCount() {
+    public int getLottoCount() {
         return amount / LOTTO_PRICE;
     }
 }

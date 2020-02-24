@@ -1,8 +1,8 @@
 package domain;
 
 public class ManualCount {
-    public static final int NEGATIVE_CRITERIA_POINT = 0;
-    private int manualCount;
+    private static final int NEGATIVE_CRITERIA_POINT = 0;
+    private static int manualCount;
 
     public ManualCount(String manualCount, int lottoCount) {
         checkNotNumber(manualCount);
@@ -10,17 +10,23 @@ public class ManualCount {
         checkManualAvailableRange(lottoCount);
     }
 
-    private void checkManualAvailableRange(int lottoCount) {
+    public static void inputManualCount(String count, int lottoCount) {
+        checkNotNumber(count);
+        manualCount = Integer.parseInt(count);
+        checkManualAvailableRange(lottoCount);
+    }
+
+    private static void checkManualAvailableRange(int lottoCount) {
         if (isManualAvailableRange(lottoCount)) {
             throw new IllegalArgumentException(String.format("수동으로 구매 가능한 로또 개수가 아닙니다. 현재 입력 : %s ", manualCount));
         }
     }
 
-    private boolean isManualAvailableRange(int lottoCount) {
+    private static boolean isManualAvailableRange(int lottoCount) {
         return manualCount < NEGATIVE_CRITERIA_POINT || manualCount > lottoCount;
     }
 
-    private void checkNotNumber(final String number) {
+    private static void checkNotNumber(final String number) {
         try {
             Integer.parseInt(number);
         } catch (IllegalArgumentException e) {
@@ -28,7 +34,7 @@ public class ManualCount {
         }
     }
 
-    public int getManualCount() {
+    public static int getManualCount() {
         return manualCount;
     }
 }

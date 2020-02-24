@@ -4,31 +4,27 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoGame {
 
     public static void main(String[] args) {
         Money amount = inputPurchaseAmount();
-        int lottoCount = amount.getCount();
-        ManualCount manualCount = inputManualCount(lottoCount);
+        int lottoCount = amount.getLottoCount();
 
-        Lottos lottos = LottosFactory.createAutoLottos(lottoCount - manualCount.getManualCount());
-        OutputView.printInputManualLottoNumbers();
-        List<Lotto> manualLottos = new ArrayList<>();
-        for (int index = 0; index < manualCount.getManualCount(); index++) {
-            String[] manualLottoNumbers = inputManualLottoNumbers();
-            manualLottos.add(LottoFactory.createOneManualLotto(manualLottoNumbers));
-        }
-        lottos.addLottos(manualLottos);
-        OutputView.printPurchaseCountMessage(manualCount, lottoCount);
-        OutputView.printLottos(lottos);
+        inputManualCountWithValidation(lottoCount);
+        OutputView.printInputManualLottoNumbersMessage();
+        createManualLottosWithValidation();
+        createAutoLottosWithValidation(lottoCount);
 
+        // 구매 결과
+        OutputView.printPurchaseCountMessage(lottoCount);
+        OutputView.printLottos();
+
+        // 당첨 번호 및 보너스 번호 입력
         inputWinningNumbersWithValidation();
         inputBonusNumberWithValidation();
-        LottoResult.countWinningLotto(lottos);
 
+        // 당첨 결과 계산 및 출
+        LottoResult.countWinningLotto();
         OutputView.printResult();
         OutputView.printProfitRatio(Money.calculateProfitRatio(lottoCount));
     }
@@ -42,16 +38,30 @@ public class LottoGame {
         }
     }
 
-    private static String[] inputManualLottoNumbers() {
-        return InputView.inputManualLottoNumbers();
-    }
-
-    private static ManualCount inputManualCount(int lottoCount) {
+    private static void inputManualCountWithValidation(int lottoCount) {
         try {
-            return new ManualCount(InputView.inputManualCount(), lottoCount);
+            ManualCount.inputManualCount(InputView.inputManualCount(), lottoCount);
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
-            return inputManualCount(lottoCount);
+            inputManualCountWithValidation(lottoCount);
+        }
+    }
+
+    private static void createAutoLottosWithValidation(int lottoCount) {
+        try {
+            Lottos.addLottos(LottosFactory.createAutoLottos(lottoCount - ManualCount.getManualCount()));
+        } catch (IllegalArgumentException | NullPointerException e) {
+            OutputView.printExceptionMessage(e);
+            createAutoLottosWithValidation(lottoCount);
+        }
+    }
+
+    private static void createManualLottosWithValidation() {
+        try {
+            Lottos.addLottos(LottosFactory.createManualLottos());
+        } catch (IllegalArgumentException | NullPointerException e) {
+            OutputView.printExceptionMessage(e);
+            createManualLottosWithValidation();
         }
     }
 

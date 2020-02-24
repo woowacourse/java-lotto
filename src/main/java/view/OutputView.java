@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public static final String NEW_LINE = System.lineSeparator();
-    public static final java.lang.String COMMA = ", ";
-    public static final String PREFIX = "[";
-    public static final String SUFFIX = "]";
-    public static final String COUNT_UNIT = "개";
-    public static final String DASHES = "------------";
+    private static final String NEW_LINE = System.lineSeparator();
+    private static final java.lang.String COMMA = ", ";
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
+    private static final String COUNT_UNIT = "개";
+    private static final String DASHES = "------------";
 
     public static void printInputPurchaseAmountMessage() {
         System.out.println("구매금액을 입력해 주세요");
@@ -23,17 +23,17 @@ public class OutputView {
         System.out.println(NEW_LINE + "수동으로 구매할 로또 수를 입력해 주세요.");
     }
 
-    public static void printInputManualLottoNumbers() {
+    public static void printInputManualLottoNumbersMessage() {
         System.out.println(NEW_LINE + "수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public static void printPurchaseCountMessage(ManualCount manualCount, int lottoCount) {
+    public static void printPurchaseCountMessage(int lottoCount) {
         System.out.println(NEW_LINE + String.format("수동으로 %d장 자동으로 %d개를 구매했습니다.",
-                manualCount.getManualCount(), lottoCount - manualCount.getManualCount()));
+                ManualCount.getManualCount(), lottoCount - ManualCount.getManualCount()));
     }
 
-    public static void printLottos(final Lottos lottos) {
-        for (Lotto eachLotto : lottos.getLottos()){
+    public static void printLottos() {
+        for (Lotto eachLotto : Lottos.getLottos()){
             printEachLotto(eachLotto);
         }
     }

@@ -5,28 +5,23 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-    public static final int HEAD_INDEX = 0;
-    private static List<Lotto> lottos = new ArrayList<>();
+    private static final List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(){ }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public static void addLottos(List<Lotto> targetLottos) {
+        lottos.addAll(targetLottos);
     }
 
-    public void addLottos(List<Lotto> lottos) {
-        this.lottos.addAll(HEAD_INDEX, lottos);
-    }
-
-    public void addLotto(Lotto lotto) {
+    public static void addLotto(Lotto lotto) {
         lottos.add(lotto);
     }
 
-    public int getDummySize() {
+    public static int getDummySize() {
         return lottos.size();
     }
 
-    public List<Lotto> getLottos() {
+    public static List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 }

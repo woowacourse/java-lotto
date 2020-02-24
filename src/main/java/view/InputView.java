@@ -1,7 +1,5 @@
 package view;
 
-import domain.Lotto;
-
 import java.util.Scanner;
 
 public class InputView {

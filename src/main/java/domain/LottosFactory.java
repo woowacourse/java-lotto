@@ -7,11 +7,21 @@ import java.util.List;
 
 public class LottosFactory {
 
-    public static Lottos createAutoLottos(int lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int index = 0; index < lottoCount; index++) {
-            lottos.add(LottoFactory.createOneLotto());
+    public static List<Lotto> createAutoLottos(int autoLottoCount) {
+        List<Lotto> autoLottos = new ArrayList<>();
+        for (int index = 0; index < autoLottoCount; index++) {
+            autoLottos.add(LottoFactory.createOneLotto());
         }
-        return new Lottos(lottos);
+        return autoLottos;
     }
+
+    public static List<Lotto> createManualLottos() {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int index = 0; index < ManualCount.getManualCount(); index++) {
+            manualLottos.add(LottoFactory
+                    .createOneManualLotto(InputView.inputManualLottoNumbers()));
+        }
+        return manualLottos;
+    }
+
 }
