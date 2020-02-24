@@ -44,7 +44,7 @@ class WinningLottoTest {
 			Number.of("8")
 		);
 		Lotto winLotto = new Lotto(winningNumbers);
-		assertThat(winningLotto.isWinningLotto(winLotto)).isEqualTo(Optional.of(Statistic.SIX));
+		assertThat(winningLotto.isWinningLotto(winLotto)).isEqualTo(Statistic.SIX);
 	}
 
 	@Test
@@ -59,7 +59,7 @@ class WinningLottoTest {
 			Number.of("45")
 		);
 		Lotto winLotto = new Lotto(winningNumbers);
-		assertThat(winningLotto.isWinningLotto(winLotto)).isEqualTo(Optional.of(Statistic.BONUS));
+		assertThat(winningLotto.isWinningLotto(winLotto)).isEqualTo(Statistic.BONUS);
 	}
 
 	@Test

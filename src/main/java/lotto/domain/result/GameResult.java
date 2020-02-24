@@ -2,8 +2,8 @@ package lotto.domain.result;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import lotto.domain.IllegalRankException;
 import lotto.domain.PurchaseMoney;
 
 public class GameResult {
@@ -11,6 +11,7 @@ public class GameResult {
 	private List<RankCount> result = new ArrayList<>();
 
 	public GameResult() {
+		result.add(new RankCount(Statistic.NOTHING));
 		result.add(new RankCount(Statistic.THREE));
 		result.add(new RankCount(Statistic.FOUR));
 		result.add(new RankCount(Statistic.FIVE));
@@ -18,11 +19,11 @@ public class GameResult {
 		result.add(new RankCount(Statistic.SIX));
 	}
 
-	public Optional<RankCount> of(Optional<Statistic> statistic) {
-		Optional<RankCount> rank = result.stream()
-			.filter(s -> s.getStatistic() == statistic.get())
-			.findFirst();
-		return rank;
+	public RankCount of(Statistic statistic) {
+		return result.stream()
+			.filter(s -> s.getStatistic() == statistic)
+			.findFirst()
+			.orElseThrow(() -> new IllegalRankException("프로그램 오류가 발생하였습니다."));
 	}
 
 	public double getEarningMoney(PurchaseMoney money) {

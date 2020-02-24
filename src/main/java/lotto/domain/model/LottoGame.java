@@ -1,8 +1,6 @@
 package lotto.domain.model;
 
 import java.util.Iterator;
-import java.util.Objects;
-import java.util.Optional;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
@@ -10,7 +8,6 @@ import lotto.domain.PurchaseMoney;
 import lotto.domain.WinningLotto;
 import lotto.domain.result.GameResult;
 import lotto.domain.result.GameResultDto;
-import lotto.domain.result.RankCount;
 import lotto.domain.result.Statistic;
 
 public class LottoGame {
@@ -34,24 +31,17 @@ public class LottoGame {
 		Iterator<Lotto> lottoIterator = lottos.iterator();
 		while (lottoIterator.hasNext()) {
 			Lotto lotto = lottoIterator.next();
-			getRankAndCount(lotto);
+			plusCount(getRank(lotto));
 		}
 		return gameResult;
 	}
 
-	private void getRankAndCount(Lotto lotto) {
-		Optional<Statistic> statistic = this.winningLotto.isWinningLotto(lotto);
-		plusCount(statistic);
+	private Statistic getRank(Lotto lotto) {
+		return this.winningLotto.isWinningLotto(lotto);
 	}
 
-	private void plusCount(Optional<Statistic> statistic) {
-		Optional<RankCount> rank = null;
-		if (Objects.nonNull(statistic) && statistic.isPresent()) {
-			rank = gameResult.of(statistic);
-		}
-		if (Objects.nonNull(rank) && rank.isPresent()) {
-			rank.get().plusCount();
-		}
+	private void plusCount(Statistic statistic) {
+		gameResult.of(statistic).plusCount();
 	}
 
 	private double calculateProfit() {
