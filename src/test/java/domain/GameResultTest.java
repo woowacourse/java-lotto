@@ -43,7 +43,7 @@ class GameResultTest {
 	@MethodSource("createRankAndCount")
 	void getMatched(Rank rank, int expected) {
 		// given
-		int givenCount = gameResult.getMatched(rank);
+		int givenCount = gameResult.numberOfRank(rank);
 		// then
 		assertThat(givenCount).isEqualTo(expected);
 	}

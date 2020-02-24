@@ -11,14 +11,17 @@ public class GameResult {
 	}
 
 	public Money getResultMoney() {
-		Money money = new Money(ranks.keySet()
-			.stream()
-			.mapToDouble(rank -> rank.getWinningMoney().getMoney() * ranks.get(rank))
-			.sum());
-		return money;
+		return new Money(prizeMoneyCalculation());
 	}
 
-	public int getMatched(Rank rank) {
+	private double prizeMoneyCalculation() {
+		return ranks.keySet()
+			.stream()
+			.mapToDouble(rank -> rank.getWinningMoney().getMoney() * ranks.get(rank))
+			.sum();
+	}
+
+	public int numberOfRank(Rank rank) {
 		return ranks.getOrDefault(rank, DEFAULT_VALUE);
 	}
 }
