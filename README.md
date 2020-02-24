@@ -30,15 +30,17 @@
 ## Domain(Model)
 
 - **PurchaseAmount**
-    - int amount
+    - int purchaseAmount
     - [예외처리] 구매 금액
         - checkNotNumber 숫자인지 아닌지 검증
         - checkNegativeNumber 음수인지 검증
         - checkUnderLottoPrice 로또 한 장 가격보다 낮은 금액인지 검증
 - **LottoFactory**
-    - [예외 처리] 난수가 1~45까지 수 인지 검증
-- **RandomNumberGenerator**
-    - 1부터 45 사이의 난수 생성
+    - createOneLotto();
+    - createOneManualLotto(String[] manualLotto);
+- **AllLottoNumber**
+    - 1부터 45 사이의 수 Map<Integer, LottoNumber> 형태 보관
+    - 필요할 때 캐싱하여 사용
 - **LottoNumber**
     - int number
     - [예외 처리] checkLottoNumber 1부터 45까지 숫자인지 검증
@@ -46,16 +48,16 @@
 - **Lotto**
     - List<LottoNumber> lotto
     - [예외 처리] checkLottoSizeSix 6개의 숫자가 만들어졌는 지 검증
-- **Lottos**
+- **LottoBundle**
     - List<Lotto> lottoBundle
-- **LottosFactory**
-    - Lottos 생
+- **LottoBundleFactory**
+    - LottoBundle 생성 (only for auto lotto)
 - **LottoRank**
-    - FIRST(6, false, 2000000000, "6개 일치(2000000000원) - ")
-    - SECOND(5, true, 30000000, "5개 일치, 보너스볼 일치(30000000원) - ")
-    - THIRD(5, false, 1500000, "5개 일치(1500000원) - ")
-    - FOURTH(4, false, 50000, "4개 일치(50000원) - ")
-    - FIFTH(3, false, 5000, "3개 일치(5000원) - ")
+    - FIRST(6, false, 2000000000)
+    - SECOND(5, true, 30000000)
+    - THIRD(5, false, 1500000)
+    - FOURTH(4, false, 50000)
+    - FIFTH(3, false, 5000)
     - 당첨번호 매칭갯수와, 보너스볼 매칭여부 결과로 Enum 반환
 - **LottoResult**
     - Map<LottoRank, Integer> result
@@ -66,9 +68,10 @@
     - int bonusNumber
     - [예외 처리] checkLottoNull 파라미터로 들어온 lotto가 null인지 검증
     - [예외 처리] checkDuplicatedLottoNumber 당첨번호에 보너스볼과 중복된 번호가 있는지 검증
-- **Profit**
+- **Money**
     - int LOTTO_PRICE
-    - 로또가격을 기준으로 수익률 계산
+    - 구매가격으로 lottoCount 반환
+    - 로또 가격을 기준으로 수익률 계산
     
     
 ## Controller
@@ -85,7 +88,7 @@
         - String 으로 반환
     - inputManualCount
         - 수동으로 구매할 로또 갯수 입력
-        - String으로 반환
+        - String 으로 반환
     - inputManualLottoNumbers
         - 수동으로 구매할 로또 번호 입력
         - ","로 split 후 String[] 반
