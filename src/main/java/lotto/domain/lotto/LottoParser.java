@@ -1,10 +1,10 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lottonumber.LottoNumber;
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import lotto.domain.lottonumber.LottoNumber;
 
 public class LottoParser {
 	private static final String DELIMITER = ",";
@@ -16,5 +16,4 @@ public class LottoParser {
 				.map(LottoNumber::valueOf)
 				.collect(Collectors.toSet());
 	}
-
 }

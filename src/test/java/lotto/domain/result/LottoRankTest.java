@@ -1,10 +1,10 @@
 package lotto.domain.result;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoRankTest {
 	@DisplayName("맞춘 갯수와 보너스 번호 일치 유무를 받아 LottoRank 객체 반환")

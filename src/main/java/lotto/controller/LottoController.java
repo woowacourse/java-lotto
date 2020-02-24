@@ -1,14 +1,14 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoGenerator;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottomoney.LottoMoney;
 import lotto.domain.result.LottoRank;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class LottoController {
 	public Lottos purchaseLotto(int numberOfLotto) {

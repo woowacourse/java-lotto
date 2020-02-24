@@ -1,12 +1,12 @@
 package lotto.view;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.result.LottoRank;
-
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ConsoleOutputView {
 	private static final String PURCHASE_COMPLETE_MESSAGE = "%d개를 구매했습니다.\n";
@@ -31,9 +31,9 @@ public class ConsoleOutputView {
 	public static void printPurchasedLotto(Lottos lottos) {
 		for (Lotto lotto : lottos) {
 			String lottoNumber = lotto.getLottoNumbers().stream()
-					.map(LottoNumber::getNumber)
-					.map(Object::toString)
-					.collect(Collectors.joining(DELIMITER));
+				.map(LottoNumber::getNumber)
+				.map(Object::toString)
+				.collect(Collectors.joining(DELIMITER));
 			System.out.println(wrapSquareBracket(lottoNumber));
 		}
 	}
@@ -49,9 +49,9 @@ public class ConsoleOutputView {
 
 	public static void printWinningResult(Map<LottoRank, Integer> lottoRankCount) {
 		lottoRankCount.entrySet().stream()
-				.filter(entry -> !entry.getKey().isLottoRankOf(LottoRank.MISS))
-				.map(entry -> getWinningResultMessage(entry.getKey(), entry.getValue()))
-				.forEach(System.out::println);
+			.filter(entry -> !entry.getKey().isLottoRankOf(LottoRank.MISS))
+			.map(entry -> getWinningResultMessage(entry.getKey(), entry.getValue()))
+			.forEach(System.out::println);
 	}
 
 	private static String getWinningResultMessage(LottoRank lottoRank, int winningLottoCount) {
@@ -60,9 +60,9 @@ public class ConsoleOutputView {
 			resultMessage = WINNING_SECOND_RANK_RESULT;
 		}
 		return String.format(resultMessage,
-				lottoRank.getMatchCount(),
-				lottoRank.getWinningMoney().getMoney(),
-				winningLottoCount);
+			lottoRank.getMatchCount(),
+			lottoRank.getWinningMoney().getMoney(),
+			winningLottoCount);
 	}
 
 	public static void printWinningRatio(int winningRatio) {

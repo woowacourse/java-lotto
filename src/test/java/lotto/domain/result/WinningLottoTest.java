@@ -1,16 +1,17 @@
 package lotto.domain.result;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lottonumber.LottoNumber;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lottonumber.LottoNumber;
 
 class WinningLottoTest {
 	private static Lotto lotto;
@@ -18,12 +19,12 @@ class WinningLottoTest {
 	@BeforeAll
 	static void setUp() {
 		Set<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(
-				LottoNumber.valueOf(1),
-				LottoNumber.valueOf(2),
-				LottoNumber.valueOf(3),
-				LottoNumber.valueOf(4),
-				LottoNumber.valueOf(5),
-				LottoNumber.valueOf(6)
+			LottoNumber.valueOf(1),
+			LottoNumber.valueOf(2),
+			LottoNumber.valueOf(3),
+			LottoNumber.valueOf(4),
+			LottoNumber.valueOf(5),
+			LottoNumber.valueOf(6)
 		));
 		lotto = new Lotto(lottoNumbers);
 	}
@@ -43,7 +44,7 @@ class WinningLottoTest {
 	void constructor_InvalidLottoAndBonus_ExceptionThrown() {
 		LottoNumber bonusNumber = LottoNumber.valueOf(1);
 		assertThatThrownBy(() -> new WinningLotto(lotto, bonusNumber))
-				.isInstanceOf(InvalidWinningLottoException.class)
-				.hasMessage(InvalidWinningLottoException.DUPLICATION);
+			.isInstanceOf(InvalidWinningLottoException.class)
+			.hasMessage(InvalidWinningLottoException.DUPLICATION);
 	}
 }

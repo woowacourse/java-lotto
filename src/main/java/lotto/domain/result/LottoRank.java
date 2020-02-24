@@ -1,8 +1,8 @@
 package lotto.domain.result;
 
-import lotto.domain.lottomoney.LottoMoney;
-
 import java.util.Arrays;
+
+import lotto.domain.lottomoney.LottoMoney;
 
 public enum LottoRank {
 	FIRST(6, new LottoMoney(2_000_000_000)),
@@ -26,9 +26,9 @@ public enum LottoRank {
 		}
 
 		return Arrays.stream(values())
-				.filter(lottoRank -> lottoRank.matchCount == matchCount)
-				.findFirst()
-				.orElse(MISS);
+			.filter(lottoRank -> lottoRank.matchCount == matchCount)
+			.findFirst()
+			.orElse(MISS);
 	}
 
 	public boolean isLottoRankOf(LottoRank lottoRank) {

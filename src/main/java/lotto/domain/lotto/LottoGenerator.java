@@ -1,12 +1,12 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottonumber.LottoNumberCache;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumberCache;
 
 public class LottoGenerator {
 	public static Lotto generate() {

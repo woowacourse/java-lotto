@@ -1,5 +1,8 @@
 package lotto;
 
+import static lotto.view.ConsoleInputView.*;
+import static lotto.view.ConsoleOutputView.*;
+
 import lotto.controller.LottoController;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoParser;
@@ -9,9 +12,6 @@ import lotto.domain.lottomoney.LottoMoney;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.result.LottoRankRecord;
 import lotto.domain.result.WinningLotto;
-
-import static lotto.view.ConsoleInputView.*;
-import static lotto.view.ConsoleOutputView.*;
 
 public class ConsoleUILottoApplication {
 	public static void main(String[] args) {
