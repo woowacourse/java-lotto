@@ -34,4 +34,12 @@ public class WinningLotto {
     public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
+
+    public int computeMatchCount(Lotto lotto) {
+        long count = lotto.getLottoNumbers()
+                .stream()
+                .filter(this.lotto::hasLottoNumber)
+                .count();
+        return Math.toIntExact(count);
+    }
 }

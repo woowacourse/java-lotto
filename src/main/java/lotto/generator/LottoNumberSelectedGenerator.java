@@ -1,6 +1,5 @@
 package lotto.generator;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
 import java.util.*;
@@ -14,7 +13,7 @@ public class LottoNumberSelectedGenerator implements LottoNumberGenerator {
         String[] splitedLottoNumbers = getSplitedLottoNumbers(lottoNumbersInput);
         lottoNumbers = createLottoNumbers(splitedLottoNumbers);
     }
-    
+
     private String[] getSplitedLottoNumbers(String lottoNumbers) {
         return lottoNumbers.split(SPLIT_DELIMETER);
     }

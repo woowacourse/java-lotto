@@ -39,7 +39,7 @@ public class OutputView {
     }
 
     public static void printWinnigInfo(WinningInfo winningInfo) {
-        String winningCount = String.format("%d 개 일치", winningInfo.getWinningCount());
+        String winningCount = String.format("%d 개 일치", winningInfo.getMatchCount());
         String winningPrice = String.format("(%d원) - ", winningInfo.getWinningPrice());
 
         StringBuilder stringBuilder = new StringBuilder();

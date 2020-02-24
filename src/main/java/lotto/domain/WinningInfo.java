@@ -10,19 +10,19 @@ public enum WinningInfo {
     SECOND(5, true, 30000000),
     FIRST(6, false, 2000000000);
 
-    private int winningCount;
+    private int matchCount;
     private boolean hasBonus;
     private int winningPrice;
 
-    WinningInfo(int winningCount, boolean hasBonus, int winningPrice) {
-        this.winningCount = winningCount;
+    WinningInfo(int matchCount, boolean hasBonus, int winningPrice) {
+        this.matchCount = matchCount;
         this.hasBonus = hasBonus;
         this.winningPrice = winningPrice;
     }
 
-    public static WinningInfo valueOf(int winningCount, boolean hasBonus) {
+    public static WinningInfo valueOf(int matchCount, boolean hasBonus) {
         WinningInfo winningInfo = Arrays.stream(values())
-                .filter(x -> x.winningCount == winningCount)
+                .filter(x -> x.matchCount == matchCount)
                 .findFirst()
                 .orElse(FAIL);
 
@@ -36,7 +36,7 @@ public enum WinningInfo {
         return winningPrice;
     }
 
-    public int getWinningCount() { return  winningCount; }
+    public int getMatchCount() { return matchCount; }
 
     public boolean getHasBonus() {return hasBonus; }
 }
