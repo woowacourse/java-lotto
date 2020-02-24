@@ -4,9 +4,9 @@ import static lotto.view.ConsoleInputView.*;
 import static lotto.view.ConsoleOutputView.*;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottosGenerator;
 import lotto.domain.lotto.LottoParser;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.LottosGenerator;
 import lotto.domain.lottomoney.InvalidLottoMoneyException;
 import lotto.domain.lottomoney.LottoMoney;
 import lotto.domain.lottonumber.LottoNumber;
@@ -22,9 +22,7 @@ public class LottoController {
 		Lottos lottos = LottosGenerator.generateLottos(numberOfLotto);
 		printPurchasedLotto(lottos);
 
-		Lotto inputWinningLotto = new Lotto(LottoParser.parser(inputWinningLottoNumber()));
-		LottoNumber inputBonusNumber = LottoNumber.valueOf(inputBonusLottoNumber());
-		WinningLotto winningLotto = new WinningLotto(inputWinningLotto, inputBonusNumber);
+		WinningLotto winningLotto = receiveWinningLotto();
 
 		LottoWinningResult winningResult = new LottoWinningResult(lottos, winningLotto);
 		printStatisticsMessage();
@@ -42,4 +40,11 @@ public class LottoController {
 			return receiveInputMoney();
 		}
 	}
+
+	private static WinningLotto receiveWinningLotto() {
+		Lotto inputWinningLotto = new Lotto(LottoParser.parser(inputWinningLottoNumber()));
+		LottoNumber inputBonusNumber = LottoNumber.valueOf(inputBonusLottoNumber());
+		return new WinningLotto(inputWinningLotto, inputBonusNumber);
+	}
+
 }
