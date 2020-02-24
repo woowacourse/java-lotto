@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StringParser {
-	public static List<Integer> stringToIntegerList(String input) throws NumberFormatException {
+	public static List<Integer> stringToIntegerList(String input) {
 		return Arrays.stream(input.replace(" ", "")
 				.split(","))
 				.map(Integer::valueOf)

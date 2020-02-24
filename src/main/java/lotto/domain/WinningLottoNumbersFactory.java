@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLottoNumbersFactory {
-	public static SerialLottoNumber createWinningLottoNumbers(String input)
-			throws IllegalArgumentException {
+	public static SerialLottoNumber createWinningLottoNumbers(String input) {
 		List<Integer> integers = StringParser.stringToIntegerList(input);
 		List<LottoNumber> lottoNumbers = integers.stream()
 				.map(AllLottoNumbers::getLottoNumber)

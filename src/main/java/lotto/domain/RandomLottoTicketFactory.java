@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.exceptions.LottoTicketIllegalArgumentException;
-
 public class RandomLottoTicketFactory {
 	private final RandomGenerator randomGenerator;
 
@@ -9,8 +7,7 @@ public class RandomLottoTicketFactory {
 		this.randomGenerator = randomGenerator;
 	}
 
-	public SerialLottoNumber create()
-			throws LottoTicketIllegalArgumentException {
+	public SerialLottoNumber create() {
 		return new SerialLottoNumber(randomGenerator.generateSixNumbers());
 	}
 }

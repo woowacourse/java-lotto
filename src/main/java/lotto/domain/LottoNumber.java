@@ -1,13 +1,11 @@
 package lotto.domain;
 
-import lotto.exceptions.LottoNumberIllegalArgumentException;
-
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 	private final int lottoNumber;
 
-	LottoNumber(final int lottoNumber) throws LottoNumberIllegalArgumentException {
+	LottoNumber(final int lottoNumber) {
 		this.lottoNumber = lottoNumber;
 	}
 

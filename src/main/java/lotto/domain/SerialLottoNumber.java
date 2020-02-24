@@ -9,11 +9,11 @@ public class SerialLottoNumber {
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	public SerialLottoNumber(final List<LottoNumber> lottoNumbers) throws LottoTicketIllegalArgumentException {
+	public SerialLottoNumber(final List<LottoNumber> lottoNumbers) {
 		this(new TreeSet<>(lottoNumbers));
 	}
 
-	public SerialLottoNumber(final Set<LottoNumber> lottoNumbers) throws LottoTicketIllegalArgumentException {
+	public SerialLottoNumber(final Set<LottoNumber> lottoNumbers) {
 		checkIsSizeSix(lottoNumbers);
 
 		this.lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(lottoNumbers));
