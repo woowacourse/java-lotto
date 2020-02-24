@@ -25,8 +25,10 @@ public class LottoGame {
         OutputView.printPurchaseCountMessage(manualCount, lottoCount);
         OutputView.printLottos(lottos);
 
-        WinningNumber winningNumber = inputWinningNumber();
-        winningNumber.countWinningLotto(lottos);
+        WinningNumber.inputWinningNumbers(InputView.inputWinningNumbers());
+        WinningNumber.inputBonusNumber(InputView.inputBonusNumber());
+        WinningNumber.countWinningLotto(lottos);
+
         OutputView.printResult();
         OutputView.printProfitRatio(Money.calculateProfitRatio(lottoCount));
     }
@@ -44,14 +46,14 @@ public class LottoGame {
         }
     }
 
-    private static WinningNumber inputWinningNumber() {
-        try {
-            return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
-        } catch(IllegalArgumentException | NullPointerException e){
-            OutputView.printExceptionMessage(e);
-            return inputWinningNumber();
-        }
-    }
+//    private static Lotto inputWinningNumbers() {
+//        try {
+//            return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+//        } catch(IllegalArgumentException | NullPointerException e){
+//            OutputView.printExceptionMessage(e);
+//            return inputWinningNumbers();
+//        }
+//    }
 
     private static Money inputPurchaseAmount() {
         try {

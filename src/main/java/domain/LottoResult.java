@@ -9,7 +9,7 @@ public class LottoResult {
     private static final int RESULT_INCREMENT = 1;
     private static final int INITIAL_RESULT = 0;
 
-    public LottoResult() {
+    static {
         for (LottoRank rank : LottoRank.values()) {
             result.put(rank, INITIAL_RESULT);
         }
