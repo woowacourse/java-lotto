@@ -39,7 +39,7 @@ public class LottoResult {
                 .mapToInt(result ->
                         result.getKey().getReward()
                                 * result.getValue())
-                .sum() / money * RATE;
+                .sum() * RATE / money;
     }
 
     public Map<WinningValue, Integer> getLottoResult() {
