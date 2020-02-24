@@ -10,9 +10,10 @@ import java.util.stream.Collectors;
 public class OutputView {
     public static final String NEW_LINE = System.lineSeparator();
     public static final java.lang.String COMMA = ", ";
-    public static final int LAST_COMMA_REMOVER = 2;
     public static final String PREFIX = "[";
     public static final String SUFFIX = "]";
+    public static final String COUNT_UNIT = "개";
+    public static final String DASHES = "------------";
 
     public static void printInputPurchaseAmountMessage() {
         System.out.println("구매금액을 입력해 주세요");
@@ -54,16 +55,24 @@ public class OutputView {
     }
 
     public static void printResult(final LottoResult lottoResult) {
-        System.out.println("당첨 통계" + NEW_LINE + "------------");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("당첨 통계")
+                    .append(NEW_LINE)
+                    .append(DASHES)
+                    .append(NEW_LINE);
+        printResultDetail(lottoResult, stringBuilder);
+    }
+
+    private static void printResultDetail(LottoResult lottoResult, StringBuilder stringBuilder) {
         List<LottoRank> keys = Arrays.asList(LottoRank.values());
         Collections.reverse(keys);
         for (LottoRank rank : keys){
-            StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(rank.getResultMessage())
-                        .append(lottoResult.getCount(rank))
-                        .append("개");
-            System.out.println(stringBuilder);
+                    .append(lottoResult.getCount(rank))
+                    .append(COUNT_UNIT)
+                    .append(NEW_LINE);
         }
+        System.out.println(stringBuilder);
     }
 
     public static void printProfitRatio(final int profitRatio) {
