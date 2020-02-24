@@ -9,10 +9,17 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(LottoMoney money) {
+        validateNull(money);
         int lottoCount = money.calculateLottoCount();
         this.lottos = IntStream.range(0, lottoCount)
-                .mapToObj(index -> new Lotto())
+                .mapToObj(index -> Lotto.create())
                 .collect(Collectors.toList());
+    }
+
+    private static void validateNull(LottoMoney money) {
+        if (money == null) {
+            throw new RuntimeException("null이 입력되었습니다.");
+        }
     }
 
     public MatchResults toMatchResults(Lotto winningLotto, LottoNumber bonusNumber) {
