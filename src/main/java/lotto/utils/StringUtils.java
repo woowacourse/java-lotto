@@ -9,7 +9,7 @@ public class StringUtils {
 
     public static List<Integer> parseWithDelimiter(String input) {
         return Arrays.stream(input.split(DELIMITER))
-            .mapToInt(number -> Integer.parseInt(number))
+            .mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
     }

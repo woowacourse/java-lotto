@@ -24,7 +24,6 @@ public class LottoGame {
     }
 
     private WinningRanks compareWithWinningNumbers(List<Lotto> lottos, Lotto winningLotto, LottoNumber bonusNumber) {
-        //당첨 하기
         WinningRanks winningRanks = new WinningRanks(new HashMap<>());
         //todo: 함수를 더 간결하게 정리
         for (Lotto lotto : lottos) {
@@ -54,7 +53,6 @@ public class LottoGame {
     }
 
     private Money inputPurchaseAmount() {
-        // 구매금액 받아서 받은거 보여주기
         Money purchaseAmount = InputView.inputPurchaseAmount();
         OutputView.printLottosSize(purchaseAmount.toLottosSize());
         return purchaseAmount;

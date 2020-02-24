@@ -16,14 +16,14 @@ public class Money {
         this.value = value;
     }
 
-    int toLottosSize() {
-        return this.value / PRICE;
-    }
-
     private void validateMoney(int value) {
         if (value <= 0) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다");
         }
+    }
+
+    int toLottosSize() {
+        return this.value / PRICE;
     }
 
     Money add(Money money) {
