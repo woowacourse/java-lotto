@@ -23,8 +23,7 @@ public class Application {
         try {
             return new Payment(InputView.getPayment());
         } catch (IllegalArgumentException exception) {
-            String errorMessage = exception.getMessage();
-            OutputView.printErrorMessage(errorMessage);
+            OutputView.printErrorMessage(exception);
             return generatePayment();
         }
     }
@@ -37,9 +36,7 @@ public class Application {
         try {
             return new WinningLottoTicket(numberGenerator.generateNumbers(WinningLottoInput), new LottoNumber(bonusNumberInput));
         } catch (IllegalArgumentException exception) {
-            String errorMessage = exception.getMessage();
-
-            OutputView.printErrorMessage(errorMessage);
+            OutputView.printErrorMessage(exception);
             return generateWinningLotto();
         }
     }

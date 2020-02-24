@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.domain.errors.ErrorMessage;
 
 import java.util.Iterator;
 import java.util.List;
@@ -46,7 +47,7 @@ public class OutputView {
         return matchCount + "개 일치" + bonusString + "(" + reward + "원)- ";
     }
 
-    public static void printErrorMessage(String errorMessage) {
-        System.out.println(errorMessage);
+    public static void printErrorMessage(Exception exception) {
+        System.out.println(exception.getMessage());
     }
 }
