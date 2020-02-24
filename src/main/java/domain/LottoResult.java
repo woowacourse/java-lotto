@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class LottoResult {
     private static final Map<LottoRank, Integer> result = new HashMap<>();
-    private static final int INITIAL_PROFIT = 0;
     private static final int RESULT_INCREMENT = 1;
     private static final int INITIAL_RESULT = 0;
 
@@ -31,11 +30,10 @@ public class LottoResult {
     }
 
     public static int calculateTotalProfit() {
-        int profit = INITIAL_PROFIT;
-        for (LottoRank rank : result.keySet()) {
-            profit += rank.getWinningMoney() * result.get(rank);
-        }
-        return profit;
+        return result.keySet()
+                .stream()
+                .mapToInt(rank -> rank.getWinningMoney() * getRankCount(rank))
+                .sum();
     }
 
     public static int getSize() {
