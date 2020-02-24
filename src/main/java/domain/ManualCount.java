@@ -4,12 +4,6 @@ public class ManualCount {
     private static final int NEGATIVE_CRITERIA_POINT = 0;
     private static int manualCount;
 
-    public ManualCount(String manualCount, int lottoCount) {
-        checkNotNumber(manualCount);
-        this.manualCount = Integer.parseInt(manualCount);
-        checkManualAvailableRange(lottoCount);
-    }
-
     public static void inputManualCount(String count, int lottoCount) {
         checkNotNumber(count);
         manualCount = Integer.parseInt(count);
