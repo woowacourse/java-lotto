@@ -25,12 +25,21 @@ public class LottoGame {
         OutputView.printPurchaseCountMessage(manualCount, lottoCount);
         OutputView.printLottos(lottos);
 
-        WinningNumber.inputWinningNumbers(InputView.inputWinningNumbers());
-        WinningNumber.inputBonusNumber(InputView.inputBonusNumber());
-        WinningNumber.countWinningLotto(lottos);
+        inputWinningNumbersWithValidation();
+        inputBonusNumberWithValidation();
+        LottoResult.countWinningLotto(lottos);
 
         OutputView.printResult();
         OutputView.printProfitRatio(Money.calculateProfitRatio(lottoCount));
+    }
+
+    private static Money inputPurchaseAmount() {
+        try {
+            return new Money(InputView.inputPurchaseAmount());
+        } catch (IllegalArgumentException e) {
+            OutputView.printExceptionMessage(e);
+            return inputPurchaseAmount();
+        }
     }
 
     private static String[] inputManualLottoNumbers() {
@@ -40,27 +49,27 @@ public class LottoGame {
     private static ManualCount inputManualCount(int lottoCount) {
         try {
             return new ManualCount(InputView.inputManualCount(), lottoCount);
-        } catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             return inputManualCount(lottoCount);
         }
     }
 
-//    private static Lotto inputWinningNumbers() {
-//        try {
-//            return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
-//        } catch(IllegalArgumentException | NullPointerException e){
-//            OutputView.printExceptionMessage(e);
-//            return inputWinningNumbers();
-//        }
-//    }
-
-    private static Money inputPurchaseAmount() {
+    private static void inputWinningNumbersWithValidation() {
         try {
-            return new Money(InputView.inputPurchaseAmount());
-        } catch (IllegalArgumentException e) {
+            WinningNumber.inputWinningNumbers(InputView.inputWinningNumbers());
+        } catch (IllegalArgumentException | NullPointerException e) {
             OutputView.printExceptionMessage(e);
-            return inputPurchaseAmount();
+            inputWinningNumbersWithValidation();
+        }
+    }
+
+    private static void inputBonusNumberWithValidation() {
+        try {
+            WinningNumber.inputBonusNumber(InputView.inputBonusNumber());
+        } catch (IllegalArgumentException | NullPointerException e) {
+            OutputView.printExceptionMessage(e);
+            inputBonusNumberWithValidation();
         }
     }
 }

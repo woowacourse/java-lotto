@@ -20,7 +20,8 @@ public class LottoFactory {
     public static Lotto createOneManualLotto(String[] manualLotto) {
         return new Lotto(Arrays.stream(manualLotto)
                     .map(String::trim)
-                    .map(value -> AllLottoNumbers.get(Integer.parseInt(value)))
+                    .mapToInt(Integer::parseInt)
+                    .mapToObj(AllLottoNumbers::get)
                     .collect(toList()));
     }
 }

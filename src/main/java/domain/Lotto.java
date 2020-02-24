@@ -2,16 +2,28 @@ package domain;
 
 import java.util.*;
 
-
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lotto;
 
     public Lotto(final List<LottoNumber> lotto) {
         checkLottoSizeSix(lotto.size());
+        checkLottoNumberRange(lotto);
         checkDuplicatedLottoNumbers(lotto);
         Collections.sort(lotto);
         this.lotto = lotto;
+    }
+
+    private void checkLottoNumberRange(List<LottoNumber> lotto) {
+        for (LottoNumber number : lotto){
+            checkLottoNumberNull(number);
+        }
+    }
+
+    private void checkLottoNumberNull(LottoNumber number) {
+        if (number == null){
+            throw new IllegalArgumentException("로또 번호는 1부터 45까지 수여야 합니다.");
+        }
     }
 
     public static void checkLottoSizeSix(final int size) {

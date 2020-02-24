@@ -24,7 +24,7 @@ public class ManualCount {
         try {
             Integer.parseInt(number);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format("문자는 입력될 수 없습니다. 현재 입력 : %s ", "수동"));
+            throw new IllegalArgumentException(String.format("문자는 입력될 수 없습니다. 현재 입력 : %s ", number));
         }
     }
 

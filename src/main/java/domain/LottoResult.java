@@ -2,6 +2,7 @@ package domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoResult {
     private static final Map<LottoRank, Integer> result = new HashMap<>();
@@ -14,8 +15,17 @@ public class LottoResult {
             result.put(rank, INITIAL_RESULT);
         }
     }
+    public static void countWinningLotto(final Lottos lottos) {
+        Objects.requireNonNull(lottos);
+        for (Lotto lotto : lottos.getLottos()) {
+            addWinningRankCount(LottoRank
+                    .findRank(WinningNumber.countWinningMatch(lotto),
+                            WinningNumber.isBonusMatch(lotto))
+            );
+        }
+    }
 
-    public static void addWinningRankCount(final LottoRank rank) {
+    private static void addWinningRankCount(final LottoRank rank) {
         if (rank != null){
             result.put(rank, result.get(rank) + RESULT_INCREMENT);
         }
@@ -34,6 +44,7 @@ public class LottoResult {
     }
 
     public static int getRankCount(final LottoRank rank) {
+        Objects.requireNonNull(rank);
         return result.get(rank);
     }
 }
