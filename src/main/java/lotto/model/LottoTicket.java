@@ -9,6 +9,7 @@ import java.util.List;
 public class LottoTicket {
     private static final int LAST_LOTTO_NUMBER = 45;
     private static final int FIRST_LOTTO_NUMBER = 1;
+    public static final int FIRST_INDEX = 0;
     private List<Integer> lottoTicket = new ArrayList<>();
 
     public LottoTicket() {
@@ -16,12 +17,13 @@ public class LottoTicket {
             lottoTicket.add(i);
         }
         Collections.shuffle(lottoTicket);
-        lottoTicket = lottoTicket.subList(0, 6);
+        lottoTicket = lottoTicket.subList(FIRST_INDEX, LottoRules.LOTTO_NUMBER_LENGTH.getNumber());
         Collections.sort(lottoTicket);
     }
 
-    public LottoTicket(List<Integer> customizedAutoNumber) {
-        this.lottoTicket = customizedAutoNumber;
+    // 수동
+    public LottoTicket(List<Integer> lottoTicket) {
+        this.lottoTicket = lottoTicket;
     }
 
     public List<Integer> getLottoTicket() {

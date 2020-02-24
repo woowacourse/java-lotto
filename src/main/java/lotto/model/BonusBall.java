@@ -11,7 +11,7 @@ public class BonusBall {
         bonusball = bonusNumber;
     }
 
-    private void checkContainsWinNumber(WinNumber winNumber,int bonusNumber) {
+    private void checkContainsWinNumber(WinNumber winNumber, int bonusNumber) {
         if (winNumber.contains(bonusNumber)) {
             throw new OverlapWinNumberException(IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE);
         }

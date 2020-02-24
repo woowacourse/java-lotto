@@ -19,25 +19,28 @@ public class LottoResult {
         this.lottoResult = lottoResult;
     }
 
-    // TODO : 매치된 갯수와 LottoRank 이름을 연결
+    // TODO : 매치된 갯수와 LottoRank 이름을 연결 , Test 코드 구현
     public void checkCount(LottoTicket lottoTicket, WinNumber winNumber, BonusBall bonusBall) {
         int matchNumber = lottoTicket.matchNumber(winNumber);
+        if (LottoRank.checkNoPrize(matchNumber)) {
+            return ;
+        }
         if (LottoRank.checkThirdWinner(matchNumber)) {
-            isSecondWin(lottoTicket, matchNumber, bonusBall);
+            checkSecondWinner(lottoTicket, matchNumber, bonusBall);
             return;
         }
         lottoResult.put(LottoRank.getNameByRank(matchNumber), lottoResult.get(LottoRank.getNameByRank(matchNumber)) + LottoRules.WINNING_COUNT.getNumber());
     }
 
-    private void isSecondWin(LottoTicket lottoTicket, int matchNumber, BonusBall bonusBall) {
+    private void checkSecondWinner(LottoTicket lottoTicket, int matchNumber, BonusBall bonusBall) {
         if (lottoTicket.matchesWithBonusBall(bonusBall.getBonusNumber())) {
-            lottoResult.put(LottoRank.SECOND.name(), lottoResult.get(LottoRank.SECOND.getRank()) + LottoRules.WINNING_COUNT.getNumber());
+            lottoResult.put(LottoRank.SECOND.name(), lottoResult.get(LottoRank.SECOND.name()) + LottoRules.WINNING_COUNT.getNumber());
             return;
         }
-        lottoResult.put(LottoRank.getNameByRank(matchNumber), lottoResult.get(LottoRank.getNameByRank(matchNumber)) + LottoRules.WINNING_COUNT.getNumber());
+        lottoResult.put(LottoRank.THIRD.name(), lottoResult.get(LottoRank.THIRD.name()) + LottoRules.WINNING_COUNT.getNumber());
     }
 
-    public int getKey(String rank) {
+    public int rankResult(String rank) {
         return lottoResult.get(rank);
     }
 }

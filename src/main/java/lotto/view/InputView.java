@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.exception.*;
-import lotto.utils.LottoRules;
+import lotto.exception.NotNumberException;
+import lotto.exception.NullOrEmptyException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,10 +15,34 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static String input() {
+    public static int inputPayment() {
         String input = scanner.nextLine();
         checkNullorEmptyInput(input);
-        return input;
+        checkNumberFormat(input);
+        int payment = Integer.parseInt(input);
+        return payment;
+    }
+
+    public static int inputBonusBall() {
+        String input = scanner.nextLine();
+        checkNullorEmptyInput(input);
+        checkNumberFormat(input);
+        return Integer.parseInt(input);
+    }
+
+    // 수동
+    public static List<Integer> inputLottoTicket() {
+        String input = scanner.nextLine();
+        checkNullorEmptyInput(input);
+        List<Integer> lottoTicket = makeNumbers(splitInput(input));
+        return lottoTicket;
+    }
+
+    public static List<Integer> inputWinNumber() {
+        String inputs = scanner.nextLine();
+        checkNullorEmptyInput(inputs);
+        List<Integer> winningNumbers = makeNumbers(splitInput(inputs));
+        return winningNumbers;
     }
 
     public static void checkNullorEmptyInput(String input) {
@@ -27,30 +51,11 @@ public class InputView {
         }
     }
 
-    public static int inputPayment() {
-        String input = scanner.nextLine();
-        checkNumberFormat(input);
-        int payment = Integer.parseInt(input);
-        return payment;
+    public static List<String> splitInput(String numbers) {
+        return Arrays.asList(numbers.split(","));
     }
 
-    public static int inputBonusBall() {
-        String input = scanner.nextLine();
-        checkNumberFormat(input);
-        return Integer.parseInt(input);
-    }
-
-    public static List<Integer> inputWinNumber() {
-        String inputs = scanner.nextLine();
-        List<Integer> winningNumbers = makeWinNumbers(makeNumbers(inputs));
-        return winningNumbers;
-    }
-
-    public static List<String> makeNumbers(String winNumber) {
-        return Arrays.asList(winNumber.split(","));
-    }
-
-    public static List<Integer> makeWinNumbers(List<String> inputs) {
+    public static List<Integer> makeNumbers(List<String> inputs) {
         List<Integer> numbers = new ArrayList<>();
         for (String input : inputs) {
             input = input.trim();
