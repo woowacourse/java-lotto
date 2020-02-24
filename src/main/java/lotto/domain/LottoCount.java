@@ -1,12 +1,12 @@
-package lotto.dto;
+package lotto.domain;
 
-public class LottoCountDto {
+public class LottoCount {
 	private static final int MONEY_UNIT = 1000;
 	private static final int MINIMUM_MONEY = 1000;
 
 	private final int lottoCount;
 
-	public LottoCountDto(int money) {
+	public LottoCount(int money) {
 		validate(money);
 		this.lottoCount = money / MONEY_UNIT;
 	}

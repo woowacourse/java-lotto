@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.dto.LottoCountDto;
 import lotto.exception.LottoException;
 import lotto.utils.InputUtil;
 import lotto.view.OutputView;
@@ -31,10 +30,10 @@ public class LottoController {
 	private static Lottos buyLottos() {
 		try {
 			LottoMachine lottoMachine = new LottoMachine();
-			LottoCountDto lottoCountDto = new LottoCountDto(readMoney());
+			LottoCount lottoCount = new LottoCount(readMoney());
 
-			OutputView.printLottoCount(lottoCountDto.getLottoCount());
-			return new Lottos(lottoMachine.makeRandomLottos(lottoCountDto));
+			OutputView.printLottoCount(lottoCount.getLottoCount());
+			return new Lottos(lottoMachine.makeRandomLottos(lottoCount));
 		} catch (IllegalArgumentException | LottoException e) {
 			OutputView.printExceptionMessage(e);
 			return buyLottos();
