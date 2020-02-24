@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class Money {
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1_000;
     private static final String LACK_OF_MONEY_MESSAGE = "돈이 부족해 로또를 살 수 없습니다.";
 
     private int money;
