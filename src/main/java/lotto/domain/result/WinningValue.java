@@ -25,9 +25,13 @@ public enum WinningValue {
 
     public static WinningValue valueOf(int hitCount, boolean hitBonus) {
         return Arrays.stream(WinningValue.values())
-                .filter(winningValue -> winningValue.hitCount == hitCount && winningValue.isBonus == hitBonus)
+                .filter(winningValue -> winningValue.hitCount == hitCount && isSecond(hitBonus, winningValue))
                 .findFirst()
                 .orElse(ZERO);
+    }
+
+    private static boolean isSecond(boolean hitBonus, WinningValue winningValue) {
+        return winningValue.isBonus == hitBonus;
     }
 
     public int getReward() {
