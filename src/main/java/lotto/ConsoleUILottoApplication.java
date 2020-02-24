@@ -1,18 +1,18 @@
 package lotto;
 
-import static lotto.view.ConsoleInputView.*;
-import static lotto.view.ConsoleOutputView.*;
+import lotto.controller.LottoController;
+import lotto.domain.Lotto.Lotto;
+import lotto.domain.Lotto.LottoParser;
+import lotto.domain.LottoMoney.InvalidLottoMoneyException;
+import lotto.domain.LottoMoney.LottoMoney;
+import lotto.domain.LottoNumber.LottoNumber;
+import lotto.domain.LottoRank;
 
 import java.util.List;
 import java.util.Map;
 
-import lotto.controller.LottoController;
-import lotto.domain.LottoMoney.InvalidLottoMoneyException;
-import lotto.domain.Lotto.Lotto;
-import lotto.domain.LottoMoney.LottoMoney;
-import lotto.domain.LottoNumber.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.Lotto.LottoParser;
+import static lotto.view.ConsoleInputView.*;
+import static lotto.view.ConsoleOutputView.*;
 
 public class ConsoleUILottoApplication {
 	public static void main(String[] args) {

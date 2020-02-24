@@ -9,7 +9,8 @@ public class ConsoleInputView {
 
 	private static Scanner SCANNER = new Scanner(System.in);
 
-	private ConsoleInputView() {}
+	private ConsoleInputView() {
+	}
 
 	public static String inputMoney() {
 		System.out.println(INPUT_MONEY_MESSAGE);

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
 import lotto.domain.LottoMoney.InvalidLottoMoneyException;
 import lotto.domain.LottoMoney.LottoMoney;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoMoneyTest {
 	@DisplayName("money 생성자에 null이나 빈 스트링 입력이 들어올 때 InvalidLottoMoneyException 발생")
@@ -51,14 +52,6 @@ class LottoMoneyTest {
 		assertThatThrownBy(() -> new LottoMoney("1001"))
 				.isInstanceOf(InvalidLottoMoneyException.class)
 				.hasMessage(InvalidLottoMoneyException.INVALID_UNIT);
-	}
-
-	@DisplayName("money 생성자에 최대금액 이상의 정수 입력이 들어올 때 InvalidLottoMoneyException 발생")
-	@Test
-	void validateMaxBound_OutOfMaxBoundInteger_ExceptionThrown() {
-		assertThatThrownBy(() -> new LottoMoney("200000"))
-				.isInstanceOf(InvalidLottoMoneyException.class)
-				.hasMessage(InvalidLottoMoneyException.OUT_OF_BOUND);
 	}
 
 	@Test
