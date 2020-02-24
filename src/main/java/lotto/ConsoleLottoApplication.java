@@ -2,16 +2,13 @@ package lotto;
 
 import lotto.domain.exception.DuplicateLottoNumberException;
 import lotto.domain.exception.LottoNumberSizeException;
-import lotto.domain.number.LottoRounds;
-import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoRound;
-import lotto.domain.number.WinningNumbers;
-import lotto.domain.random.RandomNumberGenerator;
-import lotto.domain.result.*;
+import lotto.domain.number.*;
+import lotto.domain.result.GameResult;
+import lotto.domain.result.GameResults;
+import lotto.domain.result.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleLottoApplication {
@@ -34,12 +31,7 @@ public class ConsoleLottoApplication {
     }
 
     private static LottoRounds createAllLottoNumbers(Money money) {
-        List<LottoRound> lottoRoundList = new ArrayList<>();
-        for (int i = 0; i < money.calculateRound(); i++) {
-            RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-            List<LottoNumber> randomNumbers = randomNumberGenerator.generateNumbers();
-            lottoRoundList.add(new LottoRound(randomNumbers));
-        }
+        List<LottoRound> lottoRoundList = LottoRoundsGenerator.createLottoRounds(money);
         return new LottoRounds(lottoRoundList);
     }
 
