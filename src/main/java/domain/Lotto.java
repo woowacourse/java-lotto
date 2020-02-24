@@ -14,35 +14,35 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    private void checkLottoNumberRange(List<LottoNumber> lotto) {
-        for (LottoNumber number : lotto){
+    private void checkLottoNumberRange(final List<LottoNumber> lotto) {
+        for (LottoNumber number : lotto) {
             checkLottoNumberNull(number);
         }
     }
 
-    private void checkLottoNumberNull(LottoNumber number) {
-        if (number == null){
+    private void checkLottoNumberNull(final LottoNumber number) {
+        if (number == null) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지 수여야 합니다.");
         }
     }
 
     private void checkLottoSizeSix(final int size) {
-        if (size != LOTTO_SIZE){
+        if (size != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또의 번호는 6개의 숫자로 이루어져 있어야 합니다.");
         }
     }
 
-    private void checkDuplicatedLottoNumbers(List<LottoNumber> lotto) {
+    private void checkDuplicatedLottoNumbers(final List<LottoNumber> lotto) {
         Set<LottoNumber> lottoSet = new HashSet<>(lotto);
-        if (lottoSet.size() != lotto.size()){
+        if (lottoSet.size() != lotto.size()) {
             throw new IllegalArgumentException("중복된 로또 번호가 입력되었습니다.");
         }
     }
 
     public int countMatchNumbers(final Lotto myLotto) {
-        return (int)lotto.stream()
-                    .filter(myLotto::contains)
-                    .count();
+        return (int) lotto.stream()
+                .filter(myLotto::contains)
+                .count();
     }
 
     public boolean contains(final LottoNumber number) {

@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningNumberTest {
     @Test
-    void 입력된_번호가_문자인지_확인(){
+    void 입력된_번호가_문자인지_확인() {
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "4", "d", "6"};
             WinningNumber winningNumber = new WinningNumber();
@@ -17,7 +17,7 @@ public class WinningNumberTest {
     }
 
     @Test
-    void 당첨_로또_번호가_로또의_범위_안_인지_확인(){
+    void 당첨_로또_번호가_로또의_범위_안_인지_확인() {
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "4", "55", "6"};
             WinningNumber winningNumber = new WinningNumber();
@@ -27,7 +27,7 @@ public class WinningNumberTest {
     }
 
     @Test
-    void 당첨_로또_번호의_개수가_6개인지_확인(){
+    void 당첨_로또_번호의_개수가_6개인지_확인() {
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "4", "6"};
             WinningNumber winningNumber = new WinningNumber();
@@ -37,7 +37,7 @@ public class WinningNumberTest {
     }
 
     @Test
-    void 보너스_번호_유효성검증(){
+    void 보너스_번호_유효성검증() {
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "5", "4", "6"};
             String bonusNumber = "가";

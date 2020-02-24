@@ -13,7 +13,7 @@ public class ManualCount {
         checkManualAvailableRange(lottoCount);
     }
 
-    private void checkManualAvailableRange(LottoCount lottoCount) {
+    private void checkManualAvailableRange(final LottoCount lottoCount) {
         if (isManualAvailableRange(lottoCount.getLottoCount())) {
             throw new IllegalArgumentException(String.format("수동으로 구매 가능한 로또 개수가 아닙니다. 현재 입력 : %s ", manualCount));
         }

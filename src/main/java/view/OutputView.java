@@ -38,13 +38,13 @@ public class OutputView {
         System.out.println(NEW_LINE + INPUT_MANUAL_LOTTO_NUMBER_GUIDE_MESSAGE);
     }
 
-    public static void printLottoCountMessage(LottoCount lottoCount, ManualCount manualCount) {
+    public static void printLottoCountMessage(final LottoCount lottoCount, final ManualCount manualCount) {
         System.out.println(NEW_LINE + String.format(PURCHASE_COUNT_RESULT_MESSAGE,
                 manualCount.getManualCount(), lottoCount.getAutoLottoCount(manualCount)));
     }
 
-    public static void printLottos(Lottos lottos) {
-        for (Lotto eachLotto : lottos.getLottos()){
+    public static void printLottos(final Lottos lottos) {
+        for (Lotto eachLotto : lottos.getLottos()) {
             printEachLotto(eachLotto);
         }
     }
@@ -65,31 +65,31 @@ public class OutputView {
         System.out.println(INPUT_BONUS_NUMBER_GUIDE_MESSAGE);
     }
 
-    public static void printResult(LottoResult lottoResult) {
+    public static void printResult(final LottoResult lottoResult) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(NEW_LINE)
-                    .append(RESULT_HEADING_MESSAGE)
-                    .append(NEW_LINE)
-                    .append(DASHES)
-                    .append(NEW_LINE);
+                .append(RESULT_HEADING_MESSAGE)
+                .append(NEW_LINE)
+                .append(DASHES)
+                .append(NEW_LINE);
         printResultDetail(lottoResult, stringBuilder);
     }
 
-    private static void printResultDetail(LottoResult lottoResult, StringBuilder stringBuilder) {
+    private static void printResultDetail(final LottoResult lottoResult, final StringBuilder stringBuilder) {
         List<LottoRank> keys = Arrays.asList(LottoRank.values());
         Collections.reverse(keys);
-        for (LottoRank rank : keys){
+        for (LottoRank rank : keys) {
             stringBuilder.append(rank.getWinningMatchCount());
             resultMessageByRank(stringBuilder, rank);
             stringBuilder.append(lottoResult.getRankCount(rank))
-                        .append(COUNT_UNIT)
-                        .append(NEW_LINE);
+                    .append(COUNT_UNIT)
+                    .append(NEW_LINE);
         }
         System.out.println(stringBuilder);
     }
 
-    private static void resultMessageByRank(StringBuilder stringBuilder, LottoRank rank) {
-        if (rank == LottoRank.SECOND){
+    private static void resultMessageByRank(final StringBuilder stringBuilder, final LottoRank rank) {
+        if (rank == LottoRank.SECOND) {
             stringBuilder.append(String.format(RESULT_MESSAGE_FOR_SECOND, rank.getWinningMoney()));
             return;
         }
@@ -100,7 +100,7 @@ public class OutputView {
         System.out.printf(PROFIT_RATIO_GUIDE_MESSAGE, profitRatio);
     }
 
-    public static void printExceptionMessage(RuntimeException e) {
+    public static void printExceptionMessage(final RuntimeException e) {
         System.out.println(e.getMessage());
         System.out.println(REQUEST_RE_ENTER_MESSAGE);
     }

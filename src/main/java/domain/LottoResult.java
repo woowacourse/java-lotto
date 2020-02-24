@@ -14,7 +14,8 @@ public class LottoResult {
             result.put(rank, INITIAL_RESULT);
         }
     }
-    public void countWinningLotto(Lottos lottos, WinningNumber winningNumber) {
+
+    public void countWinningLotto(final Lottos lottos, final WinningNumber winningNumber) {
         for (Lotto lotto : lottos.getLottos()) {
             addWinningRankCount(LottoRank
                     .findRank(winningNumber.countWinningMatch(lotto),
@@ -24,7 +25,7 @@ public class LottoResult {
     }
 
     private void addWinningRankCount(final LottoRank rank) {
-        if (rank != null){
+        if (rank != null) {
             result.put(rank, result.get(rank) + RESULT_INCREMENT);
         }
     }

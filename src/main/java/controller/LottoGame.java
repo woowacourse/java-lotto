@@ -29,9 +29,11 @@ public class LottoGame {
         inputWinningNumbersWithValidation(winningNumber);
         inputBonusNumberWithValidation(winningNumber);
 
-        // 당첨 결과 계산 및 출력
+        // 당첨 결과 계산
         LottoResult lottoResult = new LottoResult();
         lottoResult.countWinningLotto(lottos, winningNumber);
+
+        // 결과 및 수익률 출력
         OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult, lottoCount));
     }
@@ -45,7 +47,7 @@ public class LottoGame {
         }
     }
 
-    private static ManualCount inputManualCountWithValidation(LottoCount lottoCount) {
+    private static ManualCount inputManualCountWithValidation(final LottoCount lottoCount) {
         try {
             return new ManualCount(InputView.inputManualCount(), lottoCount);
         } catch (IllegalArgumentException e) {
@@ -54,7 +56,7 @@ public class LottoGame {
         }
     }
 
-    private static void createAutoLottosWithValidation(Lottos lottos, LottoCount lottoCount, ManualCount manualCount) {
+    private static void createAutoLottosWithValidation(final Lottos lottos, final LottoCount lottoCount, final ManualCount manualCount) {
         try {
             lottos.addLottos(LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount(manualCount)));
         } catch (IllegalArgumentException | NullPointerException e) {
@@ -63,7 +65,7 @@ public class LottoGame {
         }
     }
 
-    private static void createManualLottosWithValidation(Lottos lottos, ManualCount manualCount) {
+    private static void createManualLottosWithValidation(final Lottos lottos, final ManualCount manualCount) {
         try {
             lottos.addLottos(LottosFactory.createManualLottos(manualCount));
         } catch (IllegalArgumentException | NullPointerException e) {
@@ -72,7 +74,7 @@ public class LottoGame {
         }
     }
 
-    private static void inputWinningNumbersWithValidation(WinningNumber winningNumber) {
+    private static void inputWinningNumbersWithValidation(final WinningNumber winningNumber) {
         try {
             winningNumber.inputWinningNumbers(InputView.inputWinningNumbers());
         } catch (IllegalArgumentException | NullPointerException e) {
@@ -81,7 +83,7 @@ public class LottoGame {
         }
     }
 
-    private static void inputBonusNumberWithValidation(WinningNumber winningNumber) {
+    private static void inputBonusNumberWithValidation(final WinningNumber winningNumber) {
         try {
             winningNumber.inputBonusNumber(InputView.inputBonusNumber());
         } catch (IllegalArgumentException | NullPointerException e) {

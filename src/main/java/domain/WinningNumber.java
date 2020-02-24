@@ -38,7 +38,7 @@ public class WinningNumber {
     }
 
     private void checkLottoNumberRange(final int bonusIntegerValue) {
-        if (bonusIntegerValue < MIN_LOTTO_NUMBER || bonusIntegerValue > MAX_LOTTO_NUMBER){
+        if (bonusIntegerValue < MIN_LOTTO_NUMBER || bonusIntegerValue > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지 수여야 합니다.");
         }
     }

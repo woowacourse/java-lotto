@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
     @Test
-    void 구매금액이_숫자인지_검증(){
+    void 구매금액이_숫자인지_검증() {
         assertThatThrownBy(() -> {
             new Money("돈");
         }).isInstanceOf(IllegalArgumentException.class)
@@ -24,7 +24,7 @@ public class MoneyTest {
     }
 
     @Test
-    void 구매금액이_로또_한_장_가격_보다_낮은지_검증(){
+    void 구매금액이_로또_한_장_가격_보다_낮은지_검증() {
         assertThatThrownBy(() -> {
             new Money("500");
         }).isInstanceOf(IllegalArgumentException.class)
@@ -32,13 +32,13 @@ public class MoneyTest {
     }
 
     @Test
-    void 구매금액에_따른_로또_갯수_반환_테스트(){
+    void 구매금액에_따른_로또_갯수_반환_테스트() {
         Money money = new Money("14800");
         assertThat(money.getLottoCount()).isEqualTo(14);
     }
 
     @Test
-    void 수익률_계산_테스트(){
+    void 수익률_계산_테스트() {
         String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
         String bonusNumber = "7";
         WinningNumber winningNumber = new WinningNumber();

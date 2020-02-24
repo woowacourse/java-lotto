@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     @Test
-    void 로또_번호_갯수_6개인지_확인(){
+    void 로또_번호_갯수_6개인지_확인() {
         assertThatThrownBy(() -> {
             List<LottoNumber> lotto = new ArrayList<>();
             lotto.add(new LottoNumber(1));
@@ -25,7 +25,7 @@ public class LottoTest {
     }
 
     @Test
-    void 중복된_로또_번호가_있는지_확인(){
+    void 중복된_로또_번호가_있는지_확인() {
         assertThatThrownBy(() -> {
             List<LottoNumber> lotto = new ArrayList<>();
             lotto.add(new LottoNumber(1));
@@ -36,7 +36,7 @@ public class LottoTest {
             lotto.add(new LottoNumber(5));
             new Lotto(lotto);
         }).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("중복된 로또 번호가 입력되었습니다.");
+                .hasMessage("중복된 로또 번호가 입력되었습니다.");
     }
 
     @Test

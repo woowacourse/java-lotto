@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRankTest {
     @Test
-    void 로또_등수_확인(){
+    void 로또_등수_확인() {
         assertThat(LottoRank.findRank(6, false)).isEqualTo(LottoRank.FIRST);
         assertThat(LottoRank.findRank(5, true)).isEqualTo(LottoRank.SECOND);
         assertThat(LottoRank.findRank(5, false)).isEqualTo(LottoRank.THIRD);

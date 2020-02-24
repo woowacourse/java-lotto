@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
 
     @Test
-    void 구매금액으로_자동구매만_할_경우_로또의_사이즈_확인(){
+    void 구매금액으로_자동구매만_할_경우_로또의_사이즈_확인() {
         Money money = new Money("10800");
         int lottoCount = money.getLottoCount();
         Lottos lottos = new Lottos();

@@ -6,14 +6,14 @@ public class Money {
     private static final int PERCENTAGE = 100;
     private int purchaseAmount;
 
-    public Money(String inputPurchaseAmount) {
+    public Money(final String inputPurchaseAmount) {
         checkNotNumber(inputPurchaseAmount);
         this.purchaseAmount = Integer.parseInt(inputPurchaseAmount);
         checkNegativeAmount();
         checkUnderLottoPrice();
     }
 
-    public int calculateProfitRatio(LottoResult lottoResult, LottoCount lottoCount) {
+    public int calculateProfitRatio(final LottoResult lottoResult, final LottoCount lottoCount) {
         return lottoResult.calculateTotalProfit() / (lottoCount.getLottoCount() * LOTTO_PRICE) * PERCENTAGE;
     }
 

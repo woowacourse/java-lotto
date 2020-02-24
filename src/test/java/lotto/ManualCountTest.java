@@ -18,13 +18,13 @@ public class ManualCountTest {
         assertThatThrownBy(() -> {
             new ManualCount("수동", new LottoCount(1));
         }).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(String.format("문자는 입력될 수 없습니다. 현재 입력 : %s ", "수동"));
+                .hasMessage(String.format("문자는 입력될 수 없습니다. 현재 입력 : %s ", "수동"));
     }
 
     @ParameterizedTest
     @DisplayName("0이상 lottoCount 보다 작은 범위 벗어나면 예외 발생")
     @ValueSource(strings = {"-1", "11", "5"})
-    void 수동_구매_로또_입력_범위_테스트(String manualCount){
+    void 수동_구매_로또_입력_범위_테스트(String manualCount) {
         assertThatThrownBy(() -> {
             Money money = new Money("4000");
             LottoCount lottoCount = new LottoCount(money.getLottoCount());

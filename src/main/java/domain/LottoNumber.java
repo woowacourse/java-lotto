@@ -40,17 +40,17 @@ public class LottoNumber implements Comparable {
 
     @Override
     public boolean equals(final Object lottoNumber) {
-        return (lottoNumber instanceof LottoNumber) &&  this.number == ((LottoNumber)lottoNumber).number;
+        return (lottoNumber instanceof LottoNumber) && this.number == ((LottoNumber) lottoNumber).number;
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(number);
     }
 
     @Override
     public int compareTo(Object o) {
-        if (this.number > ((LottoNumber)o).number){
+        if (this.number > ((LottoNumber) o).number) {
             return 1;
         } else {
             return -1;
@@ -58,7 +58,7 @@ public class LottoNumber implements Comparable {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return Integer.toString(number);
     }
 }

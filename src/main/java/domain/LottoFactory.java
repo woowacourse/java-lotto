@@ -12,20 +12,20 @@ public class LottoFactory {
         List<Integer> keys = AllLottoNumbers.getLottoNumbersKeySet();
         Collections.shuffle(keys);
         return new Lotto(keys.stream()
-                        .limit(LOTTO_SIZE)
-                        .map(AllLottoNumbers::get)
-                        .collect(toList()));
+                .limit(LOTTO_SIZE)
+                .map(AllLottoNumbers::get)
+                .collect(toList()));
     }
 
     public static Lotto createOneManualLotto(final String[] manualLotto) {
-            try {
-                return new Lotto(Arrays.stream(manualLotto)
-                        .map(String::trim)
-                        .mapToInt(Integer::parseInt)
-                        .mapToObj(AllLottoNumbers::get)
-                        .collect(toList()));
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException(String.format("로또 넘버는 숫자여야 합니다."));
-            }
+        try {
+            return new Lotto(Arrays.stream(manualLotto)
+                    .map(String::trim)
+                    .mapToInt(Integer::parseInt)
+                    .mapToObj(AllLottoNumbers::get)
+                    .collect(toList()));
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(String.format("로또 넘버는 숫자여야 합니다."));
+        }
     }
 }
