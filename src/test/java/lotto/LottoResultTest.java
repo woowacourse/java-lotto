@@ -8,9 +8,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoResultTest {
     @Test
     void 로또_결과의_초기값_확인() {
-        assertThat(LottoResult.getSize()).isEqualTo(5);
+        LottoResult lottoResult = new LottoResult();
         for (LottoRank rank : LottoRank.values()) {
-            assertThat(LottoResult.getRankCount(rank)).isEqualTo(0);
+            assertThat(lottoResult.getRankCount(rank)).isEqualTo(0);
         }
     }
 
@@ -25,8 +25,10 @@ public class LottoResultTest {
         Lotto lotto = LottoFactory.createOneManualLotto(inputLottoNumbers);
         Lottos lottos = new Lottos();
         lottos.addLotto(lotto);
-        LottoResult.countWinningLotto(lottos);
-        assertThat(LottoResult.getRankCount(LottoRank.SECOND)).isEqualTo(1);
+
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.countWinningLotto(lottos);
+        assertThat(lottoResult.getRankCount(LottoRank.SECOND)).isEqualTo(1);
     }
 
     @Test
@@ -40,8 +42,10 @@ public class LottoResultTest {
         Lotto lotto = LottoFactory.createOneManualLotto(inputLottoNumbers);
         Lottos lottos = new Lottos();
         lottos.addLotto(lotto);
-        LottoResult.countWinningLotto(lottos);
-        int totalProfit = LottoResult.calculateTotalProfit();
+
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.countWinningLotto(lottos);
+        int totalProfit = lottoResult.calculateTotalProfit();
         assertThat(totalProfit).isEqualTo(30_000_000);
     }
 }

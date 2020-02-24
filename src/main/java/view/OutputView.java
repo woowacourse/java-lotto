@@ -65,23 +65,23 @@ public class OutputView {
         System.out.println(INPUT_BONUS_NUMBER_GUIDE_MESSAGE);
     }
 
-    public static void printResult() {
+    public static void printResult(LottoResult lottoResult) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(NEW_LINE)
                     .append(RESULT_HEADING_MESSAGE)
                     .append(NEW_LINE)
                     .append(DASHES)
                     .append(NEW_LINE);
-        printResultDetail(stringBuilder);
+        printResultDetail(lottoResult, stringBuilder);
     }
 
-    private static void printResultDetail(StringBuilder stringBuilder) {
+    private static void printResultDetail(LottoResult lottoResult, StringBuilder stringBuilder) {
         List<LottoRank> keys = Arrays.asList(LottoRank.values());
         Collections.reverse(keys);
         for (LottoRank rank : keys){
             stringBuilder.append(rank.getWinningMatchCount());
             resultMessageByRank(stringBuilder, rank);
-            stringBuilder.append(LottoResult.getRankCount(rank))
+            stringBuilder.append(lottoResult.getRankCount(rank))
                         .append(COUNT_UNIT)
                         .append(NEW_LINE);
         }

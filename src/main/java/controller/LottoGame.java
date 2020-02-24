@@ -29,9 +29,10 @@ public class LottoGame {
         inputBonusNumberWithValidation();
 
         // 당첨 결과 계산 및 출력
-        LottoResult.countWinningLotto(lottos);
-        OutputView.printResult();
-        OutputView.printProfitRatio(money.calculateProfitRatio(lottoCount));
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.countWinningLotto(lottos);
+        OutputView.printResult(lottoResult);
+        OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult, lottoCount));
     }
 
     private static Money inputPurchaseAmountWithValidation() {

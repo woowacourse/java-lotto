@@ -51,9 +51,11 @@ public class MoneyTest {
 
         Money money = new Money("1500");
         LottoCount lottoCount = new LottoCount(money.getLottoCount());
-        LottoResult.countWinningLotto(lottos);
-        int profitRatio = money.calculateProfitRatio(lottoCount);
-        assertThat(profitRatio).isEqualTo(3000000);
+
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.countWinningLotto(lottos);
+        int profitRatio = money.calculateProfitRatio(lottoResult, lottoCount);
+        assertThat(profitRatio).isEqualTo(3_000_000);
     }
 
 }
