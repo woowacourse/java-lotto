@@ -1,18 +1,17 @@
 package lotto;
 
-import lotto.controller.Lotto;
+import lotto.controller.LottoController;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static spark.Spark.get;
 
 public class Application {
     public static void main(String[] args) {
-        Lotto lotto = new Lotto();
-        lotto.lottoGame();
+        LottoController lottoController = new LottoController();
+        lottoController.lottoGame();
 //        get("/", (req, res) -> {
 //            Map<String, Object> model = new HashMap<>();
 //            return render(model, "index.html");

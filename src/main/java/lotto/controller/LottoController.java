@@ -1,23 +1,27 @@
 package lotto.controller;
 
 import lotto.model.*;
+import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class Lotto {
+public class LottoController {
     private Payment payment;
     private LottoResult lottoResult;
     private LottoTickets lottoTickets;
     private WinNumber winNumber;
     private BonusBall bonusBall;
 
-    public Lotto() {
-        payment = LottoMembersInitializer.initializePayment();
+    public LottoController() {
+        OutputView.printinput();
+        payment = new Payment(InputView.inputPayment());
         OutputView.printLottoCount(payment.getPayment());
-        lottoResult = LottoMembersInitializer.initializeResultCount();
+        lottoResult = new LottoResult();
         lottoTickets = new LottoTickets(payment.countLottoTickets());
         OutputView.printAutoNumbers(lottoTickets);
-        winNumber = LottoMembersInitializer.initializeWinNumber();
-        bonusBall = LottoMembersInitializer.initializeBonusNumber(winNumber);
+        OutputView.printInputWinNumber();
+        winNumber = new WinNumber(InputView.inputWinNumber());
+        OutputView.printInputBonusNumber();
+        bonusBall = new BonusBall(winNumber, InputView.inputBonusBall());
     }
 
     public void lottoGame() {
@@ -30,6 +34,9 @@ public class Lotto {
     }
 
     public void printCorrectResults() {
+//        for (LottoRank lottoRank : LottoRank.values()) {
+//            OutputView.printCorrectResult();
+//        }
         OutputView.printCorrectResult(lottoResult.rankResult(LottoRank.FIFTH.name()), LottoRank.FIFTH.getRank(), LottoRank.FIFTH.getPrize());
         OutputView.printCorrectResult(lottoResult.rankResult(LottoRank.FOURTH.name()), LottoRank.FOURTH.getRank(), LottoRank.FOURTH.getPrize());
         OutputView.printCorrectResult(lottoResult.rankResult(LottoRank.THIRD.name()), LottoRank.THIRD.getRank(), LottoRank.THIRD.getPrize());

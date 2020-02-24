@@ -26,13 +26,13 @@ public class LottoResult {
             return ;
         }
         if (LottoRank.checkThirdWinner(matchNumber)) {
-            checkSecondWinner(lottoTicket, matchNumber, bonusBall);
+            checkSecondWinner(lottoTicket, bonusBall);
             return;
         }
         lottoResult.put(LottoRank.getNameByRank(matchNumber), lottoResult.get(LottoRank.getNameByRank(matchNumber)) + LottoRules.WINNING_COUNT.getNumber());
     }
 
-    private void checkSecondWinner(LottoTicket lottoTicket, int matchNumber, BonusBall bonusBall) {
+    private void checkSecondWinner(LottoTicket lottoTicket, BonusBall bonusBall) {
         if (lottoTicket.matchesWithBonusBall(bonusBall.getBonusNumber())) {
             lottoResult.put(LottoRank.SECOND.name(), lottoResult.get(LottoRank.SECOND.name()) + LottoRules.WINNING_COUNT.getNumber());
             return;
