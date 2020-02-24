@@ -10,7 +10,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningRuleTest {
     List<Integer> inputNumbers;
@@ -51,13 +54,10 @@ public class WinningRuleTest {
     }
 
     @Test
-    @DisplayName("당첨 결과 계산하는 테스트")
-    void calculateRank() {
-        WinningRule winningRule = new WinningRule(inputNumbers, 7);
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(inputNumbers));
-        winningRule.calculateRank(new PurchaseLottos(lottos));
-        Assertions.assertThat(Rank.FIRST_RANK.count)
-                .isEqualTo(1);
+    @DisplayName("당첨 순위 선정 테스트")
+    void findRank() {
+        Lotto lotto = new Lotto(inputNumbers);
+        WinningRule winningRule = new WinningRule(inputNumbers,7);
+        assertThat(winningRule.findRank(lotto).get()).isEqualTo(Rank.FIRST_RANK);
     }
 }

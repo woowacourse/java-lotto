@@ -35,20 +35,20 @@ public class OutputView {
         System.out.println(output);
     }
 
-    public static void printResult(PurchaseAmount purchaseAmount) {
+    public static void printResult(PurchaseAmount purchaseAmount, Result result) {
         System.out.println(PRINT_WINNING_STATISTICS_MESSAGE);
         System.out.println(PRINT_DIVISION_LINE);
         for (Rank rank : Rank.values()) {
-            printRankResult(rank);
+            printRankResult(rank, result);
         }
-        System.out.printf(PRINT_EARNING_RATE_FORMAT, ResultCalculator.calculateEarningRate(purchaseAmount));
+        System.out.printf(PRINT_EARNING_RATE_FORMAT, result.calculateEarningRate(purchaseAmount));
     }
 
-    private static void printRankResult(Rank rank) {
+    private static void printRankResult(Rank rank, Result result) {
         System.out.printf(PRINT_CORRECT_LOTTO_NUMBER_FORMAT, rank.correctLottoNumber);
         if (rank.isCorrectBonusNumber) {
             System.out.print(PRINT_BONUS_CORRECT_MESSAGE);
         }
-        System.out.printf(PRINT_RANK_INFO_FORMAT, rank.prize, rank.count);
+        System.out.printf(PRINT_RANK_INFO_FORMAT, rank.prize, result.getRankCount(rank));
     }
 }

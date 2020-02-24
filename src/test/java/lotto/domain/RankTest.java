@@ -7,10 +7,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
     @Test
-    @DisplayName("순위 계산 테스트")
-    void calculateRank() {
-        Rank.findRank(3, false);
-        assertThat(Rank.FIFTH_RANK.count)
-                .isEqualTo(1);
+    @DisplayName("순위 찾기 테스트")
+    void findRank() {
+        assertThat(Rank.findRank(3,false).get())
+                .isEqualTo(Rank.FIFTH_RANK);
     }
 }

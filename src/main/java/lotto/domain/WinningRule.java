@@ -2,8 +2,10 @@ package lotto.domain;
 
 import lotto.domain.exception.DuplicateExistException;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class WinningRule {
     private static final int WINNING_NUMBER_SIZE = 7;
@@ -34,16 +36,10 @@ public class WinningRule {
                 != WINNING_NUMBER_SIZE;
     }
 
-    public void calculateRank(PurchaseLottos purchaseLottos) {
-        for (Lotto lotto : purchaseLottos.getPurchaseLottos()) {
-            calculateRank(lotto);
-        }
-    }
-
-    private void calculateRank(Lotto lotto) {
+    public Optional<Rank> findRank(Lotto lotto) {
         List<LottoNumber> mergedLottoNumbers = new ArrayList<>(lotto.getLottoNumbers());
         mergedLottoNumbers.addAll(winningNumbers.getLottoNumbers());
-        Rank.findRank(countCorrectLottoNumber(mergedLottoNumbers), isCorrectBonusNumber(lotto));
+        return Rank.findRank(countCorrectLottoNumber(mergedLottoNumbers), isCorrectBonusNumber(lotto));
     }
 
     private int countCorrectLottoNumber(List<LottoNumber> mergedLottoNumbers) {
