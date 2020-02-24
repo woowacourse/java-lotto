@@ -20,6 +20,7 @@ import static org.assertj.core.api.Assertions.*;
  * 날짜 : 2020/02/19
  */
 public class LottoTest {
+	private Lotto lotto;
 
 	@Test
 	void Lotto_올바른_동작_확인() {
@@ -34,13 +35,13 @@ public class LottoTest {
 				)
 		);
 
-		assertThat(new Lotto(lottoNumbers)).isInstanceOf(Lotto.class);
+		assertThat(new LottoChild(lottoNumbers)).isInstanceOf(Lotto.class);
 	}
 
 	@ParameterizedTest
 	@NullSource
 	void Lotto_null_예외처리(List<LottoNumber> input) {
-		assertThatThrownBy(() -> new Lotto(input))
+		assertThatThrownBy(() -> new LottoChild(input))
 				.isInstanceOfAny(NullPointerException.class)
 				.hasMessage("입력이 null 입니다.");
 	}
@@ -48,7 +49,7 @@ public class LottoTest {
 	@ParameterizedTest
 	@EmptySource
 	void Lotto_빈_리스트_예외처리(List<LottoNumber> input) {
-		assertThatThrownBy(() -> new Lotto(input))
+		assertThatThrownBy(() -> new LottoChild(input))
 				.isInstanceOfAny(IllegalArgumentException.class)
 				.hasMessage("리스트에 요소가 없습니다.");
 	}
@@ -65,7 +66,7 @@ public class LottoTest {
 				)
 		);
 
-		assertThatThrownBy(() -> new Lotto(inputLengthNotEnough))
+		assertThatThrownBy(() -> new LottoChild(inputLengthNotEnough))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("입력 리스트의 길이가 6이어야 합니다.");
 	}
@@ -87,7 +88,7 @@ public class LottoTest {
 				)
 		);
 
-		assertThatThrownBy(() -> new Lotto(inputLengthOverSix))
+		assertThatThrownBy(() -> new LottoChild(inputLengthOverSix))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("입력 리스트의 길이가 6이어야 합니다.");
 	}
@@ -105,8 +106,14 @@ public class LottoTest {
 				)
 		);
 
-		assertThatThrownBy(() -> new Lotto(overlappedInput))
+		assertThatThrownBy(() -> new LottoChild(overlappedInput))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("입력 리스트에 중복이 있습니다.");
+	}
+
+	private static class LottoChild extends Lotto {
+		public LottoChild(List<LottoNumber> inputLottoNumbers) {
+			super(inputLottoNumbers);
+		}
 	}
 }

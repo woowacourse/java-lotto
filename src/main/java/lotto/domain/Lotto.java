@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * <p>
  * 날짜 : 2020/02/19
  */
-public class Lotto {
+public abstract class Lotto {
 	public static final int LOTTO_LENGTH = 6;
 
 	protected final List<LottoNumber> lottoNumbers;

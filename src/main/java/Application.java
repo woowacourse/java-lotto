@@ -1,5 +1,4 @@
 import lotto.controller.LottoController;
-import lotto.util.RandomUtils;
 
 /**
  * 클래스 이름 : Application.java
