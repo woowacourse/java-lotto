@@ -31,7 +31,7 @@ public class Payment {
         return payment;
     }
 
-    public int getPaymentCount() {
+    public int countLottoTickets() {
         return payment / LottoRules.PAYMENT_UNIT.getNumber();
     }
 }

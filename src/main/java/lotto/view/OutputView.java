@@ -1,9 +1,7 @@
 package lotto.view;
 
-import lotto.model.AutoNumber;
-import lotto.model.AutoNumbers;
-
-import java.util.List;
+import lotto.model.LottoTicket;
+import lotto.model.LottoTickets;
 
 public class OutputView {
 
@@ -27,9 +25,9 @@ public class OutputView {
         System.out.println(count + LOTTO_COUNT_MESSAGE);
     }
 
-    public static void printAutoNumbers(AutoNumbers autoNumbers) {
-        for (AutoNumber autoNumber : autoNumbers.getAutoNumbers()) {
-            System.out.println(autoNumber.getAutoNumber());
+    public static void printAutoNumbers(LottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+            System.out.println(lottoTicket.getAutoNumber());
         }
     }
 

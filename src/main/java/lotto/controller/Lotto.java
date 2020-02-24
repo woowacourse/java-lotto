@@ -7,7 +7,7 @@ import lotto.view.OutputView;
 public class Lotto {
     private Payment payment;
     private LottoResult lottoResult;
-    private AutoNumbers autoNumbers;
+    private LottoTickets lottoTickets;
     private WinNumber winNumber;
     private BonusBall bonusBall;
 
@@ -15,14 +15,14 @@ public class Lotto {
         payment = LottoMembersInitializer.initializePayment();
         OutputView.printLottoCount(payment.getPayment());
         lottoResult = LottoMembersInitializer.initializeResultCount();
-        autoNumbers = new AutoNumbers(payment.getPaymentCount());
-        OutputView.printAutoNumbers(autoNumbers);
+        lottoTickets = new LottoTickets(payment.countLottoTickets());
+        OutputView.printAutoNumbers(lottoTickets);
         winNumber = LottoMembersInitializer.initializeWinNumber();
         bonusBall = LottoMembersInitializer.initializeBonusNumber(winNumber);
     }
 
     public void lottoGame() {
-        for (AutoNumber autoNum : autoNumbers.getAutoNumbers()) {
+        for (LottoTicket autoNum : lottoTickets.getLottoTickets()) {
             int count = isInWinNumber(autoNum);
             checkCountOverThree(autoNum, count);
         }
@@ -31,29 +31,29 @@ public class Lotto {
         OutputView.printYield(YieldMoney.countYieldMoney(payment, Prize.sumPrize(lottoResult)));
     }
 
-    private int isInWinNumber(AutoNumber autoNumber) {
-        return (int) autoNumber.getAutoNumber()
+    private int isInWinNumber(LottoTicket lottoTicket) {
+        return (int) lottoTicket.getAutoNumber()
                 .stream()
                 .filter(x -> winNumber.contains(x))
                 .count();
     }
 
-    private void checkCountOverThree(AutoNumber autoNum, int count) {
+    private void checkCountOverThree(LottoTicket autoNum, int count) {
         if (LottoRank.checkNoPrize(count)) {
             checkCount(autoNum, count);
         }
     }
 
-    private void checkCount(AutoNumber autoNumber, int count) {
+    private void checkCount(LottoTicket lottoTicket, int count) {
         if (LottoRank.checkThirdWinner(count)) {
-            isSecondWin(autoNumber, count);
+            isSecondWin(lottoTicket, count);
             return;
         }
         lottoResult.putValue(count, lottoResult.getKey(count) + LottoRules.WINNING_COUNT.getNumber());
     }
 
-    private void isSecondWin(AutoNumber autoNumber, int count) {
-        if (autoNumber.contains(bonusBall.getBonusNumber())) {
+    private void isSecondWin(LottoTicket lottoTicket, int count) {
+        if (lottoTicket.contains(bonusBall.getBonusNumber())) {
             lottoResult.putValue(LottoRank.SECOND.getRank(), lottoResult.getKey(LottoRank.SECOND.getRank()) + LottoRules.WINNING_COUNT.getNumber());
             return;
         }

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoNumber {
+public class LottoTicket {
     private List<Integer> autoNumber = new ArrayList<>();
 
-    public AutoNumber() {
+    public LottoTicket() {
         Collections.shuffle(LottoNumbers.getLottoNumbers());
         for (int i = 0; i < LottoRules.LOTTO_NUMBER_LENGTH.getNumber(); i++) {
             autoNumber.add(LottoNumbers.getLottoNumber(i));
@@ -17,7 +17,7 @@ public class AutoNumber {
         Collections.sort(autoNumber);
     }
 
-    public AutoNumber(List<Integer> customizedAutoNumber) {
+    public LottoTicket(List<Integer> customizedAutoNumber) {
         this.autoNumber = customizedAutoNumber;
     }
 

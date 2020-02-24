@@ -1,10 +1,7 @@
 package lotto.controller;
 
-import lotto.model.AutoNumber;
-import lotto.model.BonusBall;
+import lotto.model.LottoTicket;
 import lotto.model.WinNumber;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
@@ -12,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoTest {
-    private AutoNumber autonumbers = new AutoNumber(Arrays.asList(1, 2, 5, 7, 9, 11));
+    private LottoTicket autonumbers = new LottoTicket(Arrays.asList(1, 2, 5, 7, 9, 11));
     private WinNumber winNumber = new WinNumber(Arrays.asList(3, 4, 5, 6, 7, 8));
 
 //    @Test
