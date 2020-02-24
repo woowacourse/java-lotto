@@ -8,11 +8,7 @@ public class WinningNumber {
     private final LottoNumber bonusNumber;
 
     public WinningNumber(String[] numbers, String bonusNumber) {
-        List<LottoNumber> winningNumbers = new ArrayList<>();
-        for (String number : numbers) {
-            winningNumbers.add(AllLottoNumbers.get(Integer.parseInt(number)));
-        }
-        this.winningNumbers = new Lotto(winningNumbers);
+        this.winningNumbers = LottoFactory.createOneManualLotto(numbers);
         checkNotNumber(bonusNumber);
         this.bonusNumber = AllLottoNumbers.get(Integer.parseInt(bonusNumber));
         checkDuplicatedLottoNumber();
