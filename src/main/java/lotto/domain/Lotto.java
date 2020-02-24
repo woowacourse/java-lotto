@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.dto.LottoDto;
 import lotto.exception.LottoException;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
 	private static final int LOTTO_SIZE = 6;
@@ -54,5 +51,18 @@ public class Lotto {
 
 	public LottoDto makeLottoDto() {
 		return new LottoDto(this.lottoNumber);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Lotto lotto = (Lotto) o;
+		return Objects.equals(lottoNumber, lotto.lottoNumber);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoNumber);
 	}
 }

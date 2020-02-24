@@ -5,6 +5,7 @@ import lotto.dto.LottoCountDto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
@@ -33,8 +34,21 @@ public class LottoMachine {
 	private List<Integer> pickRandomBalls() {
 		Collections.shuffle(lottoBalls);
 		return lottoBalls.stream()
-			.limit(6)
-			.sorted()
-			.collect(Collectors.toList());
+				.limit(6)
+				.sorted()
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		LottoMachine that = (LottoMachine) o;
+		return Objects.equals(lottoBalls, that.lottoBalls);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoBalls);
 	}
 }

@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
@@ -81,5 +82,19 @@ public class WinningLotto {
 
 	public int getBonusNumber() {
 		return bonusNumber;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		WinningLotto that = (WinningLotto) o;
+		return bonusNumber == that.bonusNumber &&
+				Objects.equals(winningNumber, that.winningNumber);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(winningNumber, bonusNumber);
 	}
 }

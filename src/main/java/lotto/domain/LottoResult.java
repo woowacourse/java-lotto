@@ -30,4 +30,17 @@ public class LottoResult {
     public Map<WinningPrize, Integer> getWinningInformation() {
         return this.winningInformation;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(winningInformation, that.winningInformation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningInformation);
+    }
 }
