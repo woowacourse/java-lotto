@@ -14,10 +14,4 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return this.lottos;
     }
-
-    public Lotto getLottoByIndex(int index) {
-        if (index < 0 || index > lottos.size())
-            throw new IllegalArgumentException(INCORRECT_INDEX_MSG);
-        return this.lottos.get(index);
-    }
 }

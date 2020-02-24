@@ -7,10 +7,10 @@ public class OutputView {
         System.out.println(paidPrice.getLottoCount() + "개를 구매했습니다");
     }
 
-    public static void printLottiesNumbers(Lottos lottos) {
+    public static void printLottosNumbers(Lottos lottos) {
         int lottosLength = lottos.getLottos().size();
         for (int i = 0; i < lottosLength; i++) {
-            System.out.println(lottos.getLottoByIndex(i).getLottoNumbers().toString());
+            System.out.println(lottos.getLottos().get(i).getLottoNumbers());
         }
     }
 
@@ -27,7 +27,7 @@ public class OutputView {
             if (winningInfo == WinningInfo.FAIL) {
                 continue;
             }
-            int winningCount = resultsDTO.getWinningCount(winningInfo);
+            int winningCount = resultsDTO.getMatchCount(winningInfo);
             printWinnigInfo(winningInfo);
             System.out.println(winningCount+"개");
         }
