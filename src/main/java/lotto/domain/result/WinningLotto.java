@@ -8,7 +8,7 @@ public class WinningLotto {
 	private final LottoNumber bonusNumber;
 
 	public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
-		if (lotto.isContains(bonusNumber)) {
+		if (lotto.contains(bonusNumber)) {
 			throw new InvalidWinningLottoException(InvalidWinningLottoException.DUPLICATION);
 		}
 		this.lotto = lotto;
@@ -19,7 +19,7 @@ public class WinningLotto {
 		return lotto;
 	}
 
-	public LottoNumber getBonusNumber() {
+	LottoNumber getBonusNumber() {
 		return bonusNumber;
 	}
 }

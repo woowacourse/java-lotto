@@ -1,10 +1,10 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lottonumber.LottoNumber;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+
+import lotto.domain.lottonumber.LottoNumber;
 
 public class Lotto {
 	static final int CORRECT_SIZE = 6;
@@ -29,8 +29,7 @@ public class Lotto {
 		}
 	}
 
-	// TODO: 2020-02-24 is없애는 게 관례상 더 맞다 
-	public boolean isContains(LottoNumber bonusNumber) {
+	public boolean contains(LottoNumber bonusNumber) {
 		return lottoNumbers.contains(bonusNumber);
 	}
 

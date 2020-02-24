@@ -1,22 +1,14 @@
 package lotto.domain.lottonumber;
 
-import java.util.*;
+import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-	private static final int MIN_BOUND = 1;
-	private static final int MAX_BOUND = 45;
-	// TODO: 2020-02-24 상수니까 대문자로 바꾸자 캐시는 팩토리로 만들자 일립시스?를 이용하여 파라미터를 받아보자
-	private static final Map<Integer, LottoNumber> cache = new HashMap<>();
+	static final int MIN_BOUND = 1;
+	static final int MAX_BOUND = 45;
 
 	private final int number;
 
-	static {
-		for (int i = MIN_BOUND; i <= MAX_BOUND; i++) {
-			cache.put(i, new LottoNumber(i));
-		}
-	}
-
-	private LottoNumber(int number) {
+	LottoNumber(int number) {
 		validateBound(number);
 		this.number = number;
 	}
@@ -28,18 +20,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static LottoNumber valueOf(int number) {
-		if (number >= MIN_BOUND && number <= MAX_BOUND) {
-			return cache.get(number);
-		}
-		return new LottoNumber(number);
+		return LottoNumberCache.getNumber(number);
 	}
 
 	public static LottoNumber valueOf(String inputNumber) {
-		int number = parseToInt(inputNumber);
-		if (number >= MIN_BOUND && number <= MAX_BOUND) {
-			return cache.get(number);
-		}
-		return new LottoNumber(number);
+		return valueOf(parseToInt(inputNumber));
 	}
 
 	private static int parseToInt(String inputNumber) {
@@ -48,10 +33,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		} catch (NumberFormatException nfe) {
 			throw new InvalidLottoNumberException(InvalidLottoNumberException.NOT_INTEGER);
 		}
-	}
-
-	public static List<LottoNumber> values() {
-		return Collections.unmodifiableList(new ArrayList<>(cache.values()));
 	}
 
 	public int getNumber() {
@@ -69,7 +50,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		LottoNumber lottoNumber = (LottoNumber) o;
+		LottoNumber lottoNumber = (LottoNumber)o;
 		return this.number == lottoNumber.number;
 	}
 

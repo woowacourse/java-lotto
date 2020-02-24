@@ -1,11 +1,11 @@
 package lotto.domain.result;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
-
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
+
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
 
 public class LottoRankRecord {
 	private static final int SUM_UNIT = 1;
@@ -24,7 +24,7 @@ public class LottoRankRecord {
 		}
 
 		for (Lotto lotto : lottos) {
-			LottoRank lottoRank = LottoRank.of(lotto.calculateMatchCount(winningLotto.getLotto()), lotto.isContains(winningLotto.getBonusNumber()));
+			LottoRank lottoRank = LottoRank.of(lotto.calculateMatchCount(winningLotto.getLotto()), lotto.contains(winningLotto.getBonusNumber()));
 			lottoRankCount.replace(lottoRank, lottoRankCount.get(lottoRank) + SUM_UNIT);
 		}
 	}
