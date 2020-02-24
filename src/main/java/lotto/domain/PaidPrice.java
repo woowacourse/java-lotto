@@ -11,6 +11,7 @@ public class PaidPrice {
     public PaidPrice(String inputMoney) {
         validateEmpty(inputMoney);
         validateNumber(inputMoney);
+
         int money = Integer.parseInt(inputMoney);
         validateUnderLottoPrice(money);
         validatePricePerLotto(money);
@@ -18,8 +19,8 @@ public class PaidPrice {
     }
 
     private void validateEmpty (String inputMoney) {
-        if (inputMoney.isEmpty()) {
-            throw new NullPointerException(EMPTY_INPUT_MSG);
+        if (inputMoney == null || inputMoney.trim().isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_INPUT_MSG);
         }
     }
 
@@ -41,10 +42,6 @@ public class PaidPrice {
         if (inputMoney < Lottos.PRICE_PER_LOTTO) {
             throw new IllegalArgumentException(UNDER_LOTTO_PRICE_MSG);
         }
-    }
-
-    public int getPayment() {
-        return payment;
     }
 
     public int getLottoCount() {

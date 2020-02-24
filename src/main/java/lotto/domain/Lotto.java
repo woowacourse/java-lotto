@@ -15,10 +15,11 @@ public class Lotto {
     }
 
     private void validateEmpty(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null) {
-            throw new NullPointerException(EMPTY_INPUT_MSG);
+        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_INPUT_MSG);
         }
     }
+
     private void validateDistinctNumbers(Set<LottoNumber> inputNumbers) {
         if (inputNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(INVALIDATE_LOTTO_NUMBERS_ERROR_MSG);
