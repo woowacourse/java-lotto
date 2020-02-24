@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * LottoNumber 클래스
@@ -49,6 +51,4 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int compareTo(LottoNumber lottoNumber) {
         return this.lottoNumber - lottoNumber.lottoNumber;
     }
-
-
 }

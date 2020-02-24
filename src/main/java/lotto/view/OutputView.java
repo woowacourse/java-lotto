@@ -1,10 +1,14 @@
 package lotto.view;
 
-import lotto.domain.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
+import lotto.domain.MoneyForLotto;
+import lotto.domain.Rank;
+import lotto.domain.ResultStatistic;
 
 /**
  * OutputView 클래스
@@ -72,7 +76,7 @@ public class OutputView {
         }
 
         System.out.printf(rankResultFormat,
-            rank.getMatchCounts().get(0),
+            rank.getMatchCounts(),
             rank.getReward(),
             result.getResults().get(rank)
         );

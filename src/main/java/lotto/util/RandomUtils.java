@@ -3,7 +3,6 @@ package lotto.util;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 /**
  * RandomUtils 클래스

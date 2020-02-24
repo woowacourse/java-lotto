@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * 클래스 이름 : ResultStatisticTest.java
@@ -56,7 +55,7 @@ public class ResultStatisticTest {
 		assertThat(resultMap.get(Rank.THIRD)).isEqualTo(0);
 		assertThat(resultMap.get(Rank.FOURTH)).isEqualTo(1);
 		assertThat(resultMap.get(Rank.FIFTH)).isEqualTo(0);
-		assertThat(resultMap.get(Rank.SIXTH)).isEqualTo(1);
+        assertThat(resultMap.get(Rank.EIGHTH)).isEqualTo(1);
 	}
 
 	@Test

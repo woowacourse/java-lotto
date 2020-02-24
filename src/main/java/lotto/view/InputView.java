@@ -1,10 +1,9 @@
 package lotto.view;
 
-import lotto.domain.*;
-import lotto.util.StringUtils;
-
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.WrongMoneyForLottoException;
+import lotto.util.StringUtils;
 
 /**
  * 클래스 이름 : InputView.java
