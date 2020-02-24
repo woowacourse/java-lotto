@@ -11,11 +11,10 @@ public class LottoFactory {
     public static Lotto createOneLotto() {
         List<Integer> keys = AllLottoNumbers.getLottoNumbersKeySet();
         Collections.shuffle(keys);
-        List<LottoNumber> lotto = keys.stream()
-                                    .limit(LOTTO_SIZE)
-                                    .map(AllLottoNumbers::get)
-                                    .collect(toList());
-        return new Lotto(lotto);
+        return new Lotto(keys.stream()
+                        .limit(LOTTO_SIZE)
+                        .map(AllLottoNumbers::get)
+                        .collect(toList()));
     }
 
     public static Lotto createOneManualLotto(String[] manualLotto) {

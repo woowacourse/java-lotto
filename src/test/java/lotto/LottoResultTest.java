@@ -13,7 +13,7 @@ public class LottoResultTest {
         assertThat(lottoResult.getSize()).isEqualTo(5);
 
         for (LottoRank rank : LottoRank.values()) {
-            assertThat(lottoResult.getCount(rank)).isEqualTo(0);
+            assertThat(lottoResult.getRankCount(rank)).isEqualTo(0);
         }
     }
 }

@@ -10,8 +10,8 @@ public class Lotto {
     public Lotto(final List<LottoNumber> lotto) {
         checkLottoSizeSix(lotto.size());
         checkDuplicatedLottoNumbers(lotto);
-        this.lotto = new ArrayList<>(lotto);
-        Collections.sort(this.lotto);
+        Collections.sort(lotto);
+        this.lotto = lotto;
     }
 
     public static void checkLottoSizeSix(final int size) {
@@ -33,7 +33,7 @@ public class Lotto {
 
     public int countMatchNumbers(final Lotto myLotto) {
         return (int)lotto.stream()
-                    .filter(t -> myLotto.contains(t))
+                    .filter(myLotto::contains)
                     .count();
     }
 

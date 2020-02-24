@@ -14,13 +14,11 @@ public class WinningNumber {
         checkDuplicatedLottoNumber();
     }
 
-    public LottoResult countWinningLotto(final Lottos lottos) {
-        LottoResult lottoResult = new LottoResult();
+    public void countWinningLotto(final Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()){
             LottoRank rank = LottoRank.findRank(countWinningMatch(lotto), isBonusMatch(lotto));
-            lottoResult.addWinningRankCount(rank);
+            LottoResult.addWinningRankCount(rank);
         }
-        return lottoResult;
     }
 
     private int countWinningMatch(final Lotto myLotto) {

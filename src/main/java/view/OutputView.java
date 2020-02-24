@@ -54,22 +54,22 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printResult(final LottoResult lottoResult) {
+    public static void printResult() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(NEW_LINE)
                     .append("당첨 통계")
                     .append(NEW_LINE)
                     .append(DASHES)
                     .append(NEW_LINE);
-        printResultDetail(lottoResult, stringBuilder);
+        printResultDetail(stringBuilder);
     }
 
-    private static void printResultDetail(LottoResult lottoResult, StringBuilder stringBuilder) {
+    private static void printResultDetail(StringBuilder stringBuilder) {
         List<LottoRank> keys = Arrays.asList(LottoRank.values());
         Collections.reverse(keys);
         for (LottoRank rank : keys){
             stringBuilder.append(rank.getResultMessage())
-                    .append(lottoResult.getCount(rank))
+                    .append(LottoResult.getRankCount(rank))
                     .append(COUNT_UNIT)
                     .append(NEW_LINE);
         }

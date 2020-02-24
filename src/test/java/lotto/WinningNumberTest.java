@@ -83,6 +83,6 @@ public class WinningNumberTest {
         lottos.addLotto(myLotto);
 
         LottoResult result = winningNumber.countWinningLotto(lottos);
-        assertThat(result.getCount(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(result.getRankCount(LottoRank.SECOND)).isEqualTo(1);
     }
 }

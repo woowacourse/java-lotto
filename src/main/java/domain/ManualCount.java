@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.List;
-
 public class ManualCount {
     public static final int NEGATIVE_CRITERIA_POINT = 0;
     private int manualCount;
