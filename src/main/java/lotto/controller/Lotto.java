@@ -39,13 +39,13 @@ public class Lotto {
     }
 
     private void checkCountOverThree(AutoNumber autoNum, int count) {
-        if (LottoRank.isCorrectNumberOverThree(count)) {
+        if (LottoRank.checkNoPrize(count)) {
             checkCount(autoNum, count);
         }
     }
 
     private void checkCount(AutoNumber autoNumber, int count) {
-        if (LottoRank.isCorrectNumberFive(count)) {
+        if (LottoRank.checkThirdWinner(count)) {
             isSecondWin(autoNumber, count);
             return;
         }
@@ -54,17 +54,17 @@ public class Lotto {
 
     private void isSecondWin(AutoNumber autoNumber, int count) {
         if (autoNumber.contains(bonusBall.getBonusNumber())) {
-            lottoResult.putValue(LottoRank.SECOND.getCorrect(), lottoResult.getKey(LottoRank.SECOND.getCorrect()) + LottoRules.WINNING_COUNT.getNumber());
+            lottoResult.putValue(LottoRank.SECOND.getRank(), lottoResult.getKey(LottoRank.SECOND.getRank()) + LottoRules.WINNING_COUNT.getNumber());
             return;
         }
         lottoResult.putValue(count, lottoResult.getKey(count) + LottoRules.WINNING_COUNT.getNumber());
     }
 
     public void printCorrectResults() {
-        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FIFTH.getCorrect()), LottoRank.FIFTH.getCorrect(), LottoRank.FIFTH.getPrize());
-        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FOURTH.getCorrect()), LottoRank.FOURTH.getCorrect(), LottoRank.FOURTH.getPrize());
-        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.THIRD.getCorrect()), LottoRank.THIRD.getCorrect(), LottoRank.THIRD.getPrize());
-        OutputView.printBonusCorrectResult(lottoResult.getKey(LottoRank.SECOND.getCorrect()));
-        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FIRST.getCorrect()), LottoRank.FIRST.getCorrect(), LottoRank.FIRST.getPrize());
+        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FIFTH.getRank()), LottoRank.FIFTH.getRank(), LottoRank.FIFTH.getPrize());
+        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FOURTH.getRank()), LottoRank.FOURTH.getRank(), LottoRank.FOURTH.getPrize());
+        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.THIRD.getRank()), LottoRank.THIRD.getRank(), LottoRank.THIRD.getPrize());
+        OutputView.printBonusCorrectResult(lottoResult.getKey(LottoRank.SECOND.getRank()));
+        OutputView.printCorrectResult(lottoResult.getKey(LottoRank.FIRST.getRank()), LottoRank.FIRST.getRank(), LottoRank.FIRST.getPrize());
     }
 }

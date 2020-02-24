@@ -10,7 +10,7 @@ public class LottoRankTest {
     @Test
     @DisplayName("세개 미만 숫자 맞췄을 경우 false 반환")
     void isCorrectNumberOverThree() {
-        assertFalse(LottoRank.isCorrectNumberOverThree(2));
-        assertTrue(LottoRank.isCorrectNumberOverThree(3));
+        assertFalse(LottoRank.checkNoPrize(2));
+        assertTrue(LottoRank.checkNoPrize(3));
     }
 }

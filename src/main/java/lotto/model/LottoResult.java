@@ -9,11 +9,11 @@ public class LottoResult {
 
     public LottoResult() {
         Map<Integer, Integer> lottoResult = new HashMap<>();
-        lottoResult.put(LottoRank.FIFTH.getCorrect(), INITIAL_NUMBER);
-        lottoResult.put(LottoRank.FOURTH.getCorrect(), INITIAL_NUMBER);
-        lottoResult.put(LottoRank.THIRD.getCorrect(), INITIAL_NUMBER);
-        lottoResult.put(LottoRank.SECOND.getCorrect(), INITIAL_NUMBER);
-        lottoResult.put(LottoRank.FIRST.getCorrect(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.FIFTH.getRank(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.FOURTH.getRank(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.THIRD.getRank(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.SECOND.getRank(), INITIAL_NUMBER);
+        lottoResult.put(LottoRank.FIRST.getRank(), INITIAL_NUMBER);
         this.lottoResult = lottoResult;
     }
 
