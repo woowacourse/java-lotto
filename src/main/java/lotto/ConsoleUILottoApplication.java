@@ -1,16 +1,14 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.domain.result.WinningLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoParser;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottomoney.InvalidLottoMoneyException;
 import lotto.domain.lottomoney.LottoMoney;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.result.LottoRank;
-
-import java.util.Map;
+import lotto.domain.result.LottoRankRecord;
+import lotto.domain.result.WinningLotto;
 
 import static lotto.view.ConsoleInputView.*;
 import static lotto.view.ConsoleOutputView.*;
@@ -29,12 +27,11 @@ public class ConsoleUILottoApplication {
 		LottoNumber inputBonusNumber = LottoNumber.valueOf(inputBonusLottoNumber());
 		WinningLotto winningLotto = new WinningLotto(inputWinningLotto, inputBonusNumber);
 
-		Map<LottoRank, Integer> lottoRankCount =
-				lottoController.calculateLottoRankCount(lottos, winningLotto);
+		LottoRankRecord lottoRankCount = new LottoRankRecord(lottos, winningLotto);
 		printStatisticsMessage();
-		printWinningResult(lottoRankCount);
+		printWinningResult(lottoRankCount.getLottoRankCount());
 
-		int winningRatio = lottoController.calculateWinningRatio(lottoRankCount, inputLottoMoney);
+		int winningRatio = lottoController.calculateWinningRatio(lottoRankCount.getLottoRankCount(), inputLottoMoney);
 		printWinningRatio(winningRatio);
 	}
 
