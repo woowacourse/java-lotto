@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /* 각 등수 별로 몇 개의 우승 로또가 있는지 나타내는 클래스 */
