@@ -6,12 +6,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinningRanksTest {
 
     @Test
-    void 랭크별_당첨된_티켓_수_추가() {
+    @DisplayName("랭크별 당첨된 티켓 수 추가")
+    void addWinningRanks() {
         //given
         WinningRanks winningRanks = new WinningRanks(new HashMap<>());
         //when
@@ -22,7 +24,8 @@ class WinningRanksTest {
     }
 
     @Test
-    void 랭크별_당첨된_티켓_수_조회() {
+    @DisplayName("랭크별 당첨된 티켓 수 조회")
+    void getWinningRanks() {
         //given
         Map<Rank, Integer> winningResult = Collections.singletonMap(Rank.FIFTH, 1);
         WinningRanks winningRanks = new WinningRanks(winningResult);
@@ -32,7 +35,8 @@ class WinningRanksTest {
     }
 
     @Test
-    void 총_상금_계산() {
+    @DisplayName("총 상금 계산")
+    void calculateTotalWinningMoney() {
 
         WinningRanks winningRanks = new WinningRanks(new HashMap() {{
             put(Rank.FIFTH, 3);

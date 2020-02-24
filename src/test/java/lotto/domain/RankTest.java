@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,7 +16,8 @@ class RankTest {
 
     @ParameterizedTest
     @MethodSource("provideWinningNumberAndBonusBall")
-    void 당첨갯수에_해당하는_순위_산출(int mathNumber, boolean matchBonus, Rank expected) {
+    @DisplayName("당첨갯수에 해당하는 순위 산출")
+    void valueOfWithValidMatchNumber(int mathNumber, boolean matchBonus, Rank expected) {
         assertThat(Rank.valueOf(mathNumber, matchBonus)).isEqualTo(expected);
     }
 
@@ -33,11 +35,11 @@ class RankTest {
     }
 
     @Test
-    void 당첨된_갯수에_해당하는_순위가_없음() {
+    @DisplayName("당첨된 갯수에 해당하는 순위가 없음")
+    void valueOfWithInvalidMatchNumber() {
         //given
+        // 2는 순위에 해당되지 않는 숫자입니다.
         int invalidWinningNumber = 2;
-        //질문: 제 생각에는 다른 사람이 보기에 invalidWinningNumber가 어떤 의미인지 알기 어려울 것 같아, rank에 없는 값이라는 것을 알려주고 싶어 아래 assertTrue를 넣었습니다. 이게 필요 없는 것일 지 궁금합니다.
-        assertTrue(Arrays.stream(Rank.values()).allMatch(rank -> rank.getMatchNumber() != invalidWinningNumber));
 
         //when & then
         assertThatThrownBy(() -> Rank.valueOf(invalidWinningNumber, true)).isInstanceOf(
@@ -46,7 +48,8 @@ class RankTest {
 
     @ParameterizedTest
     @MethodSource("provideRank")
-    void 순위에_따른_당첨금액_산출(Rank rank, Money winningMoney) {
+    @DisplayName("순위에 따른 당첨금액 산출")
+    void calculateWinningMoney(Rank rank, Money winningMoney) {
         assertThat(rank.calculateWinningMoney()).isEqualTo(winningMoney);
     }
 
@@ -61,12 +64,14 @@ class RankTest {
     }
 
     @Test
-    void enum의_valueOf_학습테스트_정상() {
+    @DisplayName("enum의 valueOf 학습테스트 정상")
+    void valueOfDefaultEnumWithNormalCase() {
         assertThat(Rank.valueOf("FIRST")).isEqualTo(Rank.FIRST);
     }
 
     @Test
-    void enum의_valueOf_학습테스트_비정상() {
+    @DisplayName("enum의 valueOf 학습테스트 비정상")
+    void valueOfDefaultEnumWithAbnormalCase() {
         assertThatThrownBy(() -> assertThat(Rank.valueOf("INVALID")))
             .isInstanceOf(IllegalArgumentException.class);
     }

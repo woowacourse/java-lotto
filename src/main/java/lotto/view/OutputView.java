@@ -1,11 +1,10 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import lotto.domain.Lotto;
-import lotto.domain.Rank;
-import lotto.domain.Result;
-import lotto.domain.WinningRanks;
+import lotto.domain.*;
 
 public class OutputView {
 
@@ -14,16 +13,11 @@ public class OutputView {
     }
 
     public static void printLotto(Lotto lotto) {
-        System.out.println(lotto);
-    }
+        List<String> stringifiedLottoNumbers = lotto.getLottoNumbers().stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.toList());
 
-    private static void printStatistics(WinningRanks winningRanks) {
-        Map<Rank, Integer> winningResults = winningRanks.getWinningRanks();
-        for (Rank rank : winningResults.keySet()) {
-            System.out.println(
-                String.format("%d개 일치(%d원)- %d개", rank.getMatchNumber(), rank.calculateWinningMoney().getValue(),
-                    winningResults.get(rank)));
-        }
+        System.out.println("[" + String.join(",", stringifiedLottoNumbers) + "]");
     }
 
     public static void printEarningRate(int earningRate) {
@@ -34,5 +28,14 @@ public class OutputView {
         System.out.println("당첨 통계\n---------");
         printStatistics(result.getWinningRanks());
         printEarningRate(result.getEarningRate());
+    }
+
+    private static void printStatistics(WinningRanks winningRanks) {
+        Map<Rank, Integer> winningResults = winningRanks.getWinningRanks();
+        for (Rank rank : winningResults.keySet()) {
+            System.out.println(
+                    String.format("%d개 일치(%d원)- %d개", rank.getMatchNumber(), rank.calculateWinningMoney().getValue(),
+                            winningResults.get(rank)));
+        }
     }
 }

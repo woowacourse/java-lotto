@@ -13,6 +13,10 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     public static Lotto createWinningLotto(List<Integer> winningNumbers) {
         return new Lotto(winningNumbers.stream()
             .map(integer -> new LottoNumber(integer))
@@ -33,14 +37,5 @@ public class Lotto {
 
     public boolean matchBonusNumber(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
-    }
-
-    @Override
-    public String toString() {
-        List<String> stringifiedLottoNumbers = lottoNumbers.stream()
-            .map(lottoNumber -> lottoNumber.toString())
-            .collect(Collectors.toList());
-
-        return "[" + String.join(",", stringifiedLottoNumbers) + "]";
     }
 }

@@ -7,13 +7,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 
 class LottoTest {
 
     @Test
-    void 유효한_로또번호로_로또_생성() {
+    @DisplayName("유효한 로또번호로 로또 생성")
+    void createWithValidLottoNumbers() {
         //given
         Set<LottoNumber> lottoNumbers = new HashSet<>(
             Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
@@ -23,7 +25,8 @@ class LottoTest {
     }
 
     @Test
-    void 유효하지_않은_로또번호로_로또_생성() {
+    @DisplayName("유효하지_않은_로또번호로_로또_생성")
+    void createWithInvalidLottoNumbers() {
         //given
         Set<LottoNumber> lottoNumbers = new HashSet<>(
             Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
@@ -35,7 +38,8 @@ class LottoTest {
     }
 
     @Test
-    void 당첨숫자와_일치하는_로또번호_갯수_반환() {
+    @DisplayName("당첨숫자와 일치하는 로또번호 갯수 반환")
+    void matchWinningNumbers() {
         //given
         Set<LottoNumber> lottoNumbers = new HashSet<>(
             Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
@@ -53,7 +57,8 @@ class LottoTest {
     }
 
     @Test
-    void 당첨숫자와_보너스볼_일치() {
+    @DisplayName("당첨숫자와 보너스볼 일치")
+    void matchBonusNumber() {
         //given
         LottoNumber bonusBall = new LottoNumber(1);
         Set<LottoNumber> lottoNumbers = new HashSet<>(
