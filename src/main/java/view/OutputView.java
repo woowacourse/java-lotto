@@ -35,4 +35,8 @@ public class OutputView {
 	public static void printProfit(Money money) {
 		System.out.println(String.format("총 수익률은 %.0f%%입니다.", money.getMoney()));
 	}
+
+	public static void printErrorMessage(String message) {
+		System.out.println(message);
+	}
 }

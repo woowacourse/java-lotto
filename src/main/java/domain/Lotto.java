@@ -42,9 +42,7 @@ public class Lotto {
 	}
 
 	public boolean isContains(LottoNumber lottoNumber) {
-		if (numbers.contains(lottoNumber))
-			return true;
-		return false;
+		return numbers.contains(lottoNumber);
 	}
 
 	public Rank compare(Lotto winningLotto, LottoNumber bonusNumber) {

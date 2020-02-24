@@ -31,6 +31,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return lottoNumbers.get(number - INDEX);
 	}
 
+	public static LottoNumber get(String originNumber) {
+		int number = Integer.parseInt(originNumber);
+		return get(number);
+	}
+
 	private static void validate(int number) {
 		if (number < LOTTO_MINIMUM_NUMBER || number > LOTTO_MAXIMUM_NUMBER) {
 			throw new LottoNumberRangeException("로또번호는 1~45의 수가 필요합니다.");
