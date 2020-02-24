@@ -37,7 +37,7 @@ public class LottoResult {
     private Map<Rank, Integer> match(LottoTickets tickets, LottoTicket winningTicket, LottoNumber bonus) {
         for (LottoTicket ticket : tickets) {
             int matchCount = winningTicket.compare(ticket);
-            Rank rankFound = Rank.find(ticket, bonus, matchCount);
+            Rank rankFound = Rank.find(matchCount, ticket.contains(bonus));
             lottoResult.put(rankFound, lottoResult.get(rankFound) + 1);
         }
         return Collections.unmodifiableMap(lottoResult);

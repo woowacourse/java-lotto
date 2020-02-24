@@ -20,18 +20,14 @@ public enum Rank {
         this.prizeAmount = prizeAmount;
     }
 
-    public static Rank find(LottoTicket ticket, LottoNumber bonus, int matchCount) {
-        if (isBonus(bonus, ticket, matchCount)) {
+    public static Rank find(int matchCount, boolean isBonus) {
+        if (matchCount == BONUS_COUNT && isBonus) {
             return BONUS;
         }
         return Arrays.stream(Rank.values())
             .filter(rank -> rank.getMatchCount() == matchCount)
             .findFirst()
             .orElse(NONE);
-    }
-
-    private static boolean isBonus(LottoNumber bonus, LottoTicket ticket, int matchCount) {
-        return matchCount == BONUS_COUNT && ticket.contains(bonus);
     }
 
     public int getPrize() {
