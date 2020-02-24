@@ -18,7 +18,7 @@ public enum MatchResult {
     }
 
     static MatchResult of(int matchCount, boolean containsBonusNumber) {
-        if (matchCount != 5) {
+        if (matchCount != FIVE_MATCH.matchCount) {
             return Arrays.stream(values())
                     .filter(v -> matchCount == v.matchCount)
                     .findFirst()
