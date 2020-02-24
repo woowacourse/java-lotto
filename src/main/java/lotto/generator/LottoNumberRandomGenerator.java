@@ -13,7 +13,7 @@ public class LottoNumberRandomGenerator implements LottoNumberGenerator {
 
     static {
         random = new Random();
-        totalRandomNumbers = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER + 1)
+        totalRandomNumbers = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
