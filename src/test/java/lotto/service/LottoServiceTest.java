@@ -25,7 +25,7 @@ public class LottoServiceTest {
     @Test
     void name() {
         //given
-        List<LottoTicket> lottoTickets = new LottoMachineForTest().buyTickets(new BettingMoneyDTO(1000));
+        List<LottoTicket> lottoTickets = new LottoMachineForTest().buyTickets(1000);
         LottoTicketBundle expectedTicketBundle = new LottoTicketBundle(lottoTickets);
 
         //when

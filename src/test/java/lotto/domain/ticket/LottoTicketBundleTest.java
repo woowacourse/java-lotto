@@ -4,7 +4,6 @@ import lotto.domain.result.LottoResult;
 import lotto.domain.result.LottoResultBundle;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
-import lotto.view.dto.BettingMoneyDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +19,7 @@ class LottoTicketBundleTest {
     @Test
     void createLottoResultBundle() {
         //given
-        LottoTicketBundle ticketBundle = new LottoTicketBundle(new LottoMachineForTest().buyTickets(new BettingMoneyDTO(1000)));
+        LottoTicketBundle ticketBundle = new LottoTicketBundle(new LottoMachineForTest().buyTickets(1000));
 
         Set<LottoBall> winBalls = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
                 .mapToObj(LottoBallFactory::getLottoBallByNumber)

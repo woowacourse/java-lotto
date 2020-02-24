@@ -16,7 +16,7 @@ public class LottoService {
     }
 
     public LottoTicketBundle createLottoTicketBundle(BettingMoneyDTO bettingMoneyDTO) {
-        return new LottoTicketBundle(lottoMachine.buyTickets(bettingMoneyDTO));
+        return new LottoTicketBundle(lottoMachine.buyTickets(bettingMoneyDTO.getBettingMoney()));
     }
 
     public ResultDTO getResult(WinLottoTicketDTO winLottoTicketDTO, LottoTicketBundle lottoTicketBundle) {
