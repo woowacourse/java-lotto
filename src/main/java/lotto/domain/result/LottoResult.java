@@ -34,12 +34,12 @@ public class LottoResult {
     }
 
     public int calculateRewardRate(int money, Map<WinningValue, Integer> winningValueResult) {
-        return winningValueResult.entrySet()
+        return (winningValueResult.entrySet()
                 .stream()
                 .mapToInt(result ->
                         result.getKey().getReward()
                                 * result.getValue())
-                .sum() * RATE / money;
+                .sum() / money) * RATE;
     }
 
     public Map<WinningValue, Integer> getLottoResult() {
