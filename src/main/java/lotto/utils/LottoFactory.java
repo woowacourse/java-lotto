@@ -13,8 +13,8 @@ public class LottoFactory {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
 
         for (int i = 0; i < payment.getLottoCount(); i++) {
-            lottoTicketList.add(new LottoTicket(randomGenerator
-                    .generateNumbers()));
+            LottoTicket randomLottoTicket = new LottoTicket(randomGenerator.generateNumbers());
+            lottoTicketList.add(randomLottoTicket);
         }
         return new LottoTickets(lottoTicketList);
     }

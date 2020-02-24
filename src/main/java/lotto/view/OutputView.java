@@ -39,10 +39,12 @@ public class OutputView {
 
     public static String winningString(final WinningInfo key) {
         String bonusString = "";
+        int matchCount = key.getWinningCount();
+        int reward = key.getWinningPrice();
         if (key.hasBonus()) {
             bonusString = ", 보너스 볼 일치";
         }
-        return key.getWinningCount() + "개 일치" + bonusString + "(" + key.getWinningPrice() + "원)- ";
+        return matchCount + "개 일치" + bonusString + "(" + reward + "원)- ";
     }
 
     public static void printErrorMessage(String errorMessage) {

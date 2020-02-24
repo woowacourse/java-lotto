@@ -7,8 +7,8 @@ public class NumberUtils {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER
-                    .getMessage());
+            ErrorMessage nowErrorMessage = ErrorMessage.NOT_NUMBER;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 }

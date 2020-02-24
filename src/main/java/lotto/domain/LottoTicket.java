@@ -18,15 +18,15 @@ public class LottoTicket {
 
     private void validateNumberCount(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT_NOT_SIX
-                    .getMessage());
+            ErrorMessage nowErrorMessage = ErrorMessage.NUMBER_COUNT_NOT_SIX;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 
     private void validateDistinctNumbers(final List<LottoNumber> inputNumbers) {
         if (getDistinctSize(inputNumbers) != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER
-                    .getMessage());
+            ErrorMessage nowErrorMessage = ErrorMessage.DUPLICATE_NUMBER;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 

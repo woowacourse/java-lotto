@@ -12,10 +12,9 @@ public class Result {
 
     void calculate(final WinningLottoTicket winningLotto, final LottoTicket userLottoTicket) {
         boolean hasBonus = winningLotto.isBonusMatched(userLottoTicket);
-        long winningCount = winningLotto.countMatched(winningLotto, userLottoTicket);
+        int winningCount = Math.toIntExact(winningLotto.countMatched(winningLotto, userLottoTicket));
 
-        winningInfo = WinningInfo.valueOf(Math
-                .toIntExact(winningCount), hasBonus);
+        winningInfo = WinningInfo.valueOf(winningCount, hasBonus);
     }
 
     public WinningInfo getWinningInfo() {

@@ -8,32 +8,34 @@ public class Payment {
     private int payment;
 
     public Payment(final String inputMoney) {
+        int parsedInputMoney;
         validateNumber(inputMoney);
-        validateUnderLottoPrice(Integer.parseInt(inputMoney));
-        validatePricePerLotto(Integer.parseInt(inputMoney));
-        this.payment = Integer.parseInt(inputMoney);
+        parsedInputMoney = Integer.parseInt(inputMoney);
+        validateUnderLottoPrice(parsedInputMoney);
+        validatePricePerLotto(parsedInputMoney);
+        this.payment = parsedInputMoney;
     }
 
     private void validateNumber(final String inputMoney) {
         try {
             Integer.parseInt(inputMoney);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER
-                    .getMessage());
+            ErrorMessage nowErrorMessage = ErrorMessage.NOT_NUMBER;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 
     private void validatePricePerLotto(final int inputMoney) {
         if (inputMoney % MONEY_PER_LOTTO != 0) {
-            throw new IllegalArgumentException(ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT
-                    .getMessage());
+            ErrorMessage nowErrorMessage = ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 
     private void validateUnderLottoPrice(final int inputMoney) {
         if (inputMoney < MONEY_PER_LOTTO) {
-            throw new IllegalArgumentException(ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT
-                    .getMessage());
+            ErrorMessage nowErrorMessage = ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 

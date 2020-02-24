@@ -20,6 +20,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
+    private void validateNumberScope(int lottoNumber) {
+        if (lottoNumber < MIN_LOTTO_NUMBER
+                || lottoNumber > MAX_LOTTO_NUMBER) {
+            ErrorMessage nowErrorMessage = ErrorMessage.OVER_SCOPE;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -35,14 +43,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    private void validateNumberScope(int lottoNumber) {
-        if (lottoNumber < MIN_LOTTO_NUMBER
-                || lottoNumber > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ErrorMessage.OVER_SCOPE
-                    .getMessage());
-        }
     }
 
     public int getNumber() {

@@ -15,8 +15,8 @@ public class WinningLottoTicket extends LottoTicket {
 
     private void validateDistinctBonus(final LottoNumber bonusNumber) {
         if (isBonusNumberAlreadyExist(bonusNumber)) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER
-                    .getMessage());
+            ErrorMessage nowErrorMessage = ErrorMessage.DUPLICATE_NUMBER;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 

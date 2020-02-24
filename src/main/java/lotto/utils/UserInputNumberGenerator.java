@@ -19,8 +19,8 @@ public class UserInputNumberGenerator implements NumberGenerator {
         String[] userInputs = userInput.split(DELIMITER);
 
         for (int i = 0; i < userInputs.length; i++) {
-            winningNumbers.add(new LottoNumber(userInputs[i]
-                    .trim()));
+            LottoNumber userNumber = new LottoNumber(userInputs[i].trim());
+            winningNumbers.add(userNumber);
         }
         return winningNumbers;
     }
