@@ -115,4 +115,3 @@
 - [x] Prize 클래스 내 sumPrize 메서드 구조를 for문으로 변경하라.
 - [x] YieldMoney 클래스 내 countYieldMoney 메서드 인자명을 간략화하지마라.
 - [x] AutoNumber 클래스 내 멤버변수를 LottoNumbers로 변경하라.
-- [ ]
