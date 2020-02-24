@@ -1,7 +1,7 @@
 package lotto;
 
 import domain.Lotto;
-import domain.LottoFactory;
+import domain.AutoLottoFactory;
 import domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTest {
     @Test
     void 로또_번호_갯수_6개인지_확인(){
-        Lotto lotto = LottoFactory.createOneLotto();
+        Lotto lotto = AutoLottoFactory.createOneLotto();
         assertThat(lotto.getSize()).isEqualTo(6);
 
         assertThatThrownBy(() -> {

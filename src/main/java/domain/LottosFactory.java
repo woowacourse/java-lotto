@@ -7,9 +7,11 @@ import java.util.List;
 
 public class LottosFactory {
 
+    public static final int START_INDEX = 0;
+
     public static List<Lotto> createAutoLottos(final int autoLottoCount) {
         List<Lotto> autoLottos = new ArrayList<>();
-        for (int index = 0; index < autoLottoCount; index++) {
+        for (int index = START_INDEX; index < autoLottoCount; index++) {
             autoLottos.add(LottoFactory.createOneLotto());
         }
         return autoLottos;
@@ -17,7 +19,7 @@ public class LottosFactory {
 
     public static List<Lotto> createManualLottos() {
         List<Lotto> manualLottos = new ArrayList<>();
-        for (int index = 0; index < ManualCount.getManualCount(); index++) {
+        for (int index = START_INDEX; index < ManualCount.getManualCount(); index++) {
             manualLottos.add(LottoFactory
                     .createOneManualLotto(InputView.inputManualLottoNumbers()));
         }

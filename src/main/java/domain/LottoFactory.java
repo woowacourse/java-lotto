@@ -19,9 +19,9 @@ public class LottoFactory {
 
     public static Lotto createOneManualLotto(final String[] manualLotto) {
         return new Lotto(Arrays.stream(manualLotto)
-                    .map(String::trim)
-                    .mapToInt(Integer::parseInt)
-                    .mapToObj(AllLottoNumbers::get)
-                    .collect(toList()));
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .mapToObj(AllLottoNumbers::get)
+                .collect(toList()));
     }
 }
