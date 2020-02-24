@@ -21,8 +21,15 @@ public class MoneyTest {
 
 	@Test
 	@DisplayName("생성자에서 구입 금액이 1000으로 나누어 떨어지지 않는 경우")
-	void constructor_구입_금액이_1000_단위로_나누어_떨어지지_않는_경우() {
+	void constructor_MoneyDivideByUnit() {
 		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Money(14500));
+	}
+
+	@Test
+	@DisplayName("곱셈 테스트")
+	void multiply() {
+		Money money = new Money(14000);
+		assertThat(money.multiply(100L)).isEqualTo(1_400_000L);
 	}
 
 	@Test

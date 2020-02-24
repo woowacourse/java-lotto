@@ -53,13 +53,13 @@ public class LottoTest {
 	@ParameterizedTest
 	@DisplayName("로또 번호 리스트의 크기가 올바르지 않은 경우")
 	@MethodSource("invalidSize")
-	void constructor_로또_번호_리스트의_크기가_올바르지_않은_경우(List<LottoNumber> lottoNumbers) {
+	void constructor_InvalidLottoNumbersSize(List<LottoNumber> lottoNumbers) {
 		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(lottoNumbers));
 	}
 
 	@Test
 	@DisplayName("중복된 수가 있는 경우")
-	void constructor_중복된_수가_있는_경우() {
+	void constructor_HasDuplicatedNumber() {
 		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.of(1),
 				LottoNumber.of(2),
 				LottoNumber.of(2),
@@ -71,7 +71,7 @@ public class LottoTest {
 
 	@Test
 	@DisplayName("수가 정렬되어 있는지 확인")
-	void constructor_수가_정렬되어_있는지_확인() {
+	void constructor_SortedValues() {
 		Lotto lotto = new Lotto(Arrays.asList(LottoNumber.of(45),
 				LottoNumber.of(44),
 				LottoNumber.of(43),
@@ -85,5 +85,13 @@ public class LottoTest {
 				LottoNumber.of(44),
 				LottoNumber.of(45)));
 		assertThat(lotto).isEqualTo(expected);
+	}
+
+	@Test
+	@DisplayName("일치하는 로또 수를 정확히 계산하는지 확인")
+	void calculateMatchCount() {
+		Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
+		Lotto winningLotto = Lotto.of(2, 3, 4, 6, 7, 8);
+		assertThat(lotto.calculateMatchCount(winningLotto)).isEqualTo(MatchCount.of(4));
 	}
 }

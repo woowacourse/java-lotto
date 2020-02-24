@@ -24,7 +24,7 @@ public class MatchCountTest {
 	@ParameterizedTest
 	@DisplayName("로또 일치 개수의 범위에서 벗어나는 경우")
 	@ValueSource(ints = {-1, 7})
-	void of_범위에서_벗어나는_경우(int matchCount) {
+	void of_OutOfRange(int matchCount) {
 		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> MatchCount.of(matchCount));
 	}
 }

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -17,7 +18,8 @@ import org.junit.jupiter.api.Test;
  */
 public class LottoTicketTest {
 	@Test
-	void calculate() {
+	@DisplayName("우승 로또와 비교하여 통계를 정확히 만들어내는지 확인")
+	void matchAll() {
 		LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
 				Lotto.of(1, 2, 5, 43, 44, 45),
 				Lotto.of(1, 2, 5, 43, 44, 45),

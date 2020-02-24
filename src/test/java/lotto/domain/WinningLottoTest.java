@@ -29,7 +29,7 @@ public class WinningLottoTest {
 
 	@Test
 	@DisplayName("로또 번호와 보너스가 중복될 경우")
-	void constructor_로또_번호와_보너스가_중복() {
+	void constructor_LottoNumberAndBonusNumberDuplicated() {
 		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(
 				() -> new WinningLotto(lotto, LottoNumber.of(45)));
 	}

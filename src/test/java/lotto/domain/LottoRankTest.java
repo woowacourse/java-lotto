@@ -15,25 +15,25 @@ import org.junit.jupiter.api.Test;
 public class LottoRankTest {
 	@Test
 	@DisplayName("로또 1등을 정상적으로 반환한 경우")
-	void of_1등() {
+	void of_First() {
 		assertThat(LottoRank.of(MatchCount.of(6), false)).isEqualTo(LottoRank.FIRST);
 	}
 
 	@Test
 	@DisplayName("로또 2등을 정상적으로 반환한 경우")
-	void of_2등() {
+	void of_Second() {
 		assertThat(LottoRank.of(MatchCount.of(5), true)).isEqualTo(LottoRank.SECOND);
 	}
 
 	@Test
 	@DisplayName("로또 3등을 정상적으로 반환한 경우")
-	void of_3등() {
+	void of_Third() {
 		assertThat(LottoRank.of(MatchCount.of(5), false)).isEqualTo(LottoRank.THIRD);
 	}
 
 	@Test
 	@DisplayName("로또 불일치를 정상적으로 반환한 경우")
-	void of_MISS() {
+	void of_Miss() {
 		assertThat(LottoRank.of(MatchCount.of(2), true)).isEqualTo(LottoRank.MISS);
 	}
 }

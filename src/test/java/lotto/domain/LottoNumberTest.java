@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -15,7 +14,7 @@ import org.junit.jupiter.params.provider.ValueSource;
  * @since 2020/02/19
  */
 public class LottoNumberTest {
-	@Test
+	@ParameterizedTest
 	@DisplayName("로또 번호 범위가 정상인 경우")
 	@ValueSource(ints = {1, 10, 45})
 	void of(int value) {
