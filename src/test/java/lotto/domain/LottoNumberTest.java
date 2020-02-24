@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -35,5 +36,13 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(invalidInputMoney))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("정수로 입력하셔야 합니다.");
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void validateEmpty_빈_문자_또는_NULL(String emptyValue) {
+        assertThatThrownBy(() -> new LottoNumber(emptyValue))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호가 입력되지 않았습니다.");
     }
 }

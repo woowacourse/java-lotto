@@ -2,7 +2,10 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -11,6 +14,14 @@ public class PaidPriceTest {
     void validatePayment_로또_가격_정상적으로_입력했을_때() {
         String validMoney = "1000";
         new PaidPrice(validMoney);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void validateEmpty_로또번호_빈_문자_또는_NULL(String emptyValue) {
+        assertThatThrownBy(() -> new PaidPrice(emptyValue))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("가격을 입력하지 않았습니다.");
     }
 
     @Test
