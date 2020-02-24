@@ -2,6 +2,7 @@ package lotto.domain.number;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class LottoRound extends LottoRoundFormat {
 
@@ -9,8 +10,8 @@ public class LottoRound extends LottoRoundFormat {
         super(randomNumbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     public boolean isHave(LottoNumber lottoNumber) {

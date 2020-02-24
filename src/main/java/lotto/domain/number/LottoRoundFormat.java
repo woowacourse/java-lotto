@@ -2,21 +2,19 @@ package lotto.domain.number;
 
 import lotto.domain.exception.LottoNumberSizeException;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoRoundFormat {
     public static final int LOTTO_NUMBER_AMOUNT = 6;
     private static final String LOTTO_NUMBER_AMOUNT_EXCEPTION_MESSAGE = "로또 번호의 갯수가 6개가 아닙니다.";
 
-    List<LottoNumber> lottoNumbers;
+    Set<LottoNumber> lottoNumbers;
 
     public LottoRoundFormat(List<LottoNumber> randomNumbers) {
         Objects.requireNonNull(randomNumbers);
         validateSize(randomNumbers);
         Collections.sort(randomNumbers);
-        this.lottoNumbers = randomNumbers;
+        this.lottoNumbers = new LinkedHashSet<>(randomNumbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
@@ -25,7 +23,7 @@ public class LottoRoundFormat {
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 }

@@ -8,6 +8,7 @@ import lotto.domain.result.*;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -29,7 +30,7 @@ public class OutputView {
     }
 
     private static void printLottoNumbers(LottoRound lottoRound) {
-        List<LottoNumber> lottoNumberGroups = lottoRound.getLottoNumbers();
+        Set<LottoNumber> lottoNumberGroups = lottoRound.getLottoNumbers();
         String output = lottoNumberGroups.stream()
                 .map(LottoNumber::getNumber)
                 .map(Object::toString)
