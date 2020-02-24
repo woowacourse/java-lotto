@@ -23,14 +23,12 @@ public class WinningLottoTicket extends LottoTicket {
     private boolean isBonusNumberAlreadyExist(final LottoNumber bonusNumber) {
         return super.lottoNumbers.stream()
                 .mapToInt(LottoNumber::getNumber)
-                .anyMatch(winningNumber -> winningNumber == bonusNumber
-                        .getNumber());
+                .anyMatch(winningNumber -> winningNumber == bonusNumber.getNumber());
     }
 
     public boolean isBonusMatched(final LottoTicket userLottoTicket) {
         return userLottoTicket.getLottoNumbers().stream()
-                .anyMatch(userLottoNumber -> bonusNumber
-                        .equals(userLottoNumber));
+                .anyMatch(userLottoNumber -> bonusNumber.equals(userLottoNumber));
     }
 
     public long countMatched(final WinningLottoTicket winningLotto, final LottoTicket userLottoTicket) {
