@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.result;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumber;

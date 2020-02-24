@@ -1,14 +1,14 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.domain.WinningLotto;
+import lotto.domain.result.WinningLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoParser;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottomoney.InvalidLottoMoneyException;
 import lotto.domain.lottomoney.LottoMoney;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.LottoRank;
+import lotto.domain.result.LottoRank;
 
 import java.util.Map;
 

@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.LottoRank;
+import lotto.domain.result.LottoRank;
 
 import java.util.Map;
 import java.util.stream.Collectors;

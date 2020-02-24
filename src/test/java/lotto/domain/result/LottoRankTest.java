@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.result;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,7 @@ class LottoRankTest {
 	@DisplayName("맞춘 갯수와 보너스 번호 일치 유무를 받아 LottoRank 객체 반환")
 	@Test
 	void of_MatchCountAndHasBonusNumber_ReturnLottoRank() {
-		assertThat(LottoRank.of(5, true)).isEqualTo(LottoRank.SECOND);
+		Assertions.assertThat(LottoRank.of(5, true)).isEqualTo(LottoRank.SECOND);
 		assertThat(LottoRank.of(4, false)).isEqualTo(LottoRank.FOURTH);
 		assertThat(LottoRank.of(4, true)).isEqualTo(LottoRank.FOURTH);
 	}
