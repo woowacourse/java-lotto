@@ -18,10 +18,14 @@ public class LottoFactory {
     }
 
     public static Lotto createOneManualLotto(final String[] manualLotto) {
-        return new Lotto(Arrays.stream(manualLotto)
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .mapToObj(AllLottoNumbers::get)
-                .collect(toList()));
+            try {
+                return new Lotto(Arrays.stream(manualLotto)
+                        .map(String::trim)
+                        .mapToInt(Integer::parseInt)
+                        .mapToObj(AllLottoNumbers::get)
+                        .collect(toList()));
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException(String.format("로또 넘버는 숫자여야 합니다."));
+            }
     }
 }
