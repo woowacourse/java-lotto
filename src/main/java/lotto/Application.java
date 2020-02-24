@@ -7,18 +7,16 @@ import lotto.utils.UserInputNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-
 public class Application {
     public static void main(String[] args) {
         final Payment payment = generatePayment();
         OutputView.printLottoCount(payment);
 
-        final List<LottoTicket> lottoList = new LottoTickets(LottoFactory.createLottoList(payment)).getLottoTickets();
-        OutputView.printLottoList(lottoList);
+        final LottoTickets lottoTickets = LottoFactory.createLottoList(payment);
+        OutputView.printLottoList(lottoTickets);
 
         final WinningLottoTicket winningLotto = generateWinningLotto();
-        OutputView.printResults(new Results(lottoList, winningLotto));
+        OutputView.printResults(new Results(lottoTickets, winningLotto));
     }
 
     private static Payment generatePayment() {

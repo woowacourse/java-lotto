@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.Payment;
-import lotto.domain.Results;
-import lotto.domain.WinningInfo;
+import lotto.domain.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +11,8 @@ public class OutputView {
         System.out.println(payment.getLottoCount() + "개를 구매했습니다");
     }
 
-    public static void printLottoList(final List<LottoTicket> lottoTicketList) {
+    public static void printLottoList(final LottoTickets lottoTickets) {
+        List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
         for (int i = 0; i < lottoTicketList.size(); i++) {
             System.out.println(lottoTicketList
                     .get(i)

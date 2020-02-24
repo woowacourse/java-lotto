@@ -14,9 +14,9 @@ public class Results {
     private final List<LottoTicket> userLottoTickets;
     private final WinningLottoTicket winningLotto;
 
-    public Results(final List<LottoTicket> userLottoTickets, final WinningLottoTicket winningLotto) {
+    public Results(final LottoTickets lottoTickets, final WinningLottoTicket winningLotto) {
         this.winningLotto = winningLotto;
-        this.userLottoTickets = userLottoTickets;
+        this.userLottoTickets = lottoTickets.getLottoTickets();
         this.results = new ArrayList<>();
     }
 
