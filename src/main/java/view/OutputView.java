@@ -38,9 +38,9 @@ public class OutputView {
         System.out.println(NEW_LINE + INPUT_MANUAL_LOTTO_NUMBER_GUIDE_MESSAGE);
     }
 
-    public static void printPurchaseCountMessage(int lottoCount) {
+    public static void printPurchaseCountMessage() {
         System.out.println(NEW_LINE + String.format(PURCHASE_COUNT_RESULT_MESSAGE,
-                ManualCount.getManualCount(), lottoCount - ManualCount.getManualCount()));
+                ManualCount.getManualCount(), LottoCount.getAutoLottoCount()));
     }
 
     public static void printLottos() {
