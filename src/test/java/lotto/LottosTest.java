@@ -11,15 +11,17 @@ public class LottosTest {
     void 구매금액으로_자동구매만_할_경우_로또의_사이즈_확인(){
         Money money = new Money("10800");
         int lottoCount = money.getLottoCount();
-        Lottos.addLottos(LottosFactory.createAutoLottos(lottoCount));
-        assertThat(Lottos.getLottos().size()).isEqualTo(10);
+        Lottos lottos = new Lottos();
+        lottos.addLottos(LottosFactory.createAutoLottos(lottoCount));
+        assertThat(lottos.getLottos().size()).isEqualTo(10);
     }
 
     @Test
     void 로또_한_개_추가_테스트() {
         String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "6"};
         Lotto lotto = LottoFactory.createOneManualLotto(inputLottoNumbers);
-        Lottos.addLotto(lotto);
-        assertThat(Lottos.getLottos().size()).isEqualTo(1);
+        Lottos lottos = new Lottos();
+        lottos.addLotto(lotto);
+        assertThat(lottos.getLottos().size()).isEqualTo(1);
     }
 }

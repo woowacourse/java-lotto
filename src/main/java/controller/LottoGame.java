@@ -16,19 +16,20 @@ public class LottoGame {
 
         // 수동 및 자동 로또 번호 입력
         OutputView.printInputManualLottoNumbersMessage();
-        createManualLottosWithValidation(manualCount);
-        createAutoLottosWithValidation(lottoCount, manualCount);
+        Lottos lottos = new Lottos();
+        createManualLottosWithValidation(lottos, manualCount);
+        createAutoLottosWithValidation(lottos, lottoCount, manualCount);
 
         // 구매 결과
-        OutputView.printPurchaseCountMessage(lottoCount, manualCount);
-        OutputView.printLottos();
+        OutputView.printLottoCountMessage(lottoCount, manualCount);
+        OutputView.printLottos(lottos);
 
         // 당첨 번호 및 보너스 번호 입력
         inputWinningNumbersWithValidation();
         inputBonusNumberWithValidation();
 
         // 당첨 결과 계산 및 출력
-        LottoResult.countWinningLotto();
+        LottoResult.countWinningLotto(lottos);
         OutputView.printResult();
         OutputView.printProfitRatio(money.calculateProfitRatio(lottoCount));
     }
@@ -51,21 +52,21 @@ public class LottoGame {
         }
     }
 
-    private static void createAutoLottosWithValidation(LottoCount lottoCount, ManualCount manualCount) {
+    private static void createAutoLottosWithValidation(Lottos lottos, LottoCount lottoCount, ManualCount manualCount) {
         try {
-            Lottos.addLottos(LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount(manualCount)));
+            lottos.addLottos(LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount(manualCount)));
         } catch (IllegalArgumentException | NullPointerException e) {
             OutputView.printExceptionMessage(e);
-            createAutoLottosWithValidation(lottoCount, manualCount);
+            createAutoLottosWithValidation(lottos, lottoCount, manualCount);
         }
     }
 
-    private static void createManualLottosWithValidation(ManualCount manualCount) {
+    private static void createManualLottosWithValidation(Lottos lottos, ManualCount manualCount) {
         try {
-            Lottos.addLottos(LottosFactory.createManualLottos(manualCount));
+            lottos.addLottos(LottosFactory.createManualLottos(manualCount));
         } catch (IllegalArgumentException | NullPointerException e) {
             OutputView.printExceptionMessage(e);
-            createManualLottosWithValidation(manualCount);
+            createManualLottosWithValidation(lottos, manualCount);
         }
     }
 

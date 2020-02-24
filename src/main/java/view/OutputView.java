@@ -38,13 +38,13 @@ public class OutputView {
         System.out.println(NEW_LINE + INPUT_MANUAL_LOTTO_NUMBER_GUIDE_MESSAGE);
     }
 
-    public static void printPurchaseCountMessage(LottoCount lottoCount, ManualCount manualCount) {
+    public static void printLottoCountMessage(LottoCount lottoCount, ManualCount manualCount) {
         System.out.println(NEW_LINE + String.format(PURCHASE_COUNT_RESULT_MESSAGE,
                 manualCount.getManualCount(), lottoCount.getAutoLottoCount(manualCount)));
     }
 
-    public static void printLottos() {
-        for (Lotto eachLotto : Lottos.getLottos()){
+    public static void printLottos(Lottos lottos) {
+        for (Lotto eachLotto : lottos.getLottos()){
             printEachLotto(eachLotto);
         }
     }

@@ -3,9 +3,6 @@ package lotto;
 import domain.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -49,11 +46,12 @@ public class MoneyTest {
 
         String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
         Lotto lotto = LottoFactory.createOneManualLotto(inputLottoNumbers);
-        Lottos.addLotto(lotto);
+        Lottos lottos = new Lottos();
+        lottos.addLotto(lotto);
 
         Money money = new Money("1500");
         LottoCount lottoCount = new LottoCount(money.getLottoCount());
-        LottoResult.countWinningLotto();
+        LottoResult.countWinningLotto(lottos);
         int profitRatio = money.calculateProfitRatio(lottoCount);
         assertThat(profitRatio).isEqualTo(3000000);
     }
