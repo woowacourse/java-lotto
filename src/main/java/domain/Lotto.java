@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -34,8 +35,10 @@ public class Lotto {
 		}
 	}
 
-	public Set<LottoNumber> getNumbers() {
-		return Collections.unmodifiableSet(numbers);
+	public List<LottoNumber> getNumbers() {
+		List<LottoNumber> numbers = new ArrayList<>(this.numbers);
+		Collections.sort(numbers);
+		return numbers;
 	}
 
 	public Rank compare(Lotto winningLotto, LottoNumber bonusNumber) {
