@@ -1,54 +1,73 @@
 package lotto.model;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
 import lotto.exception.NotNumberException;
 import lotto.exception.NotSixNumbersException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import lotto.exception.OverlapWinNumberException;
 
 public class WinNumbers {
 
+    public static final int LOTTO_NUMBER_LENGTH = 6;
     private static final String COMMA = ",";
-    private static final int LOTTO_NUMBER_LENGTH = 6;
-    private static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하셔야 합니다.";
     private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
+    private static final String IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE = "당첨번호와 중복되는 숫자가 있습니다.";
 
-    private List<Integer> winNumbers;
+    private Ticket winNumbers;
+    private LottoNumber bonusBallNumber;
 
     public WinNumbers(String winNumber) {
-        List<Integer> winNumbers = makeWinNumbers(makeSplitNumbers(winNumber));
-        checkLottoNumbersLength(winNumbers);
-        this.winNumbers = winNumbers;
+        List<LottoNumber> winNumbers = makeWinNumbers(splitInput(winNumber));
+        validateLottoNumbersLength(winNumbers);
+        this.winNumbers = new Ticket(winNumbers);
     }
 
-    private List<String> makeSplitNumbers(String winNumber) {
+    private List<String> splitInput(String winNumber) {
         return Arrays.asList(winNumber.split(COMMA));
     }
 
-    private List<Integer> makeWinNumbers(List<String> inputs) {
-        List<Integer> numbers = new ArrayList<>();
+    public void setBonusBallNumber(String input) {
+        int bonusBallNumber = validateNumberFormat(input);
+        validateContainsWinNumber(bonusBallNumber);
+        this.bonusBallNumber = new LottoNumber(bonusBallNumber);
+    }
+
+    private List<LottoNumber> makeWinNumbers(List<String> inputs) {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (String input : inputs) {
-            numbers.add(isNumberFormat(input));
+            numbers.add(new LottoNumber(validateNumberFormat(input)));
         }
         return numbers;
     }
 
-    private int isNumberFormat(String input) {
+    private int validateNumberFormat(String input) {
         try {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new NotNumberException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
+            throw new NotNumberException(Money.NUMBER_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 
-    private void checkLottoNumbersLength(List<Integer> inputs) {
+    private void validateLottoNumbersLength(List<LottoNumber> inputs) {
         if (inputs.size() != LOTTO_NUMBER_LENGTH) {
             throw new NotSixNumbersException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
-    public boolean isContainNumber(int number) {
-        return winNumbers.contains(number);
+    private void validateContainsWinNumber(int bonusBallNumber) {
+        if (winNumbers.contains(LottoNumber.getLottoNumber(bonusBallNumber))) {
+            throw new OverlapWinNumberException(IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public int matchCount(Ticket ticket) {
+        return (int) ticket.getTicket().stream().filter(x -> winNumbers.contains(x))
+            .count();
+    }
+
+    public LottoNumber getBonusBallNumber() {
+        return bonusBallNumber;
     }
 }

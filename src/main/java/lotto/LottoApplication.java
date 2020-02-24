@@ -1,26 +1,25 @@
 package lotto;
 
+import java.util.List;
 import lotto.controller.LottoManager;
-import lotto.model.AutoTickets;
-import lotto.model.BonusBallNo;
-import lotto.model.LottoNumbers;
+import lotto.model.Ticket;
+import lotto.model.Tickets;
+import lotto.model.TicketsGenerator;
 import lotto.model.LottoResult;
 import lotto.model.Money;
 import lotto.model.WinNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import static spark.Spark.get;
-
 public class LottoApplication {
 
     public static void main(String[] args) {
         Money money = setMoney();
-        AutoTickets autoTickets = getAutoTickets(money.getMoney() / 1000);
-        WinNumbers winNumbers = getWinNumbers();
-        BonusBallNo bonusBallNo = getBonusBallNo(winNumbers);
+        Tickets tickets = new Tickets(getAutoTickets(money.getMoney() / Money.PAYMENT_UNIT));
+        WinNumbers winNumbers = getWinNumbersAndBonusBallNumber();
+        getBonusBallNumber(winNumbers);
 
-        LottoManager.lotto(autoTickets, winNumbers, bonusBallNo);
+        LottoManager.lotto(tickets, winNumbers);
 
         printCorrectResults();
         OutputView.printYield(money.getYield());
@@ -31,29 +30,28 @@ public class LottoApplication {
         return new Money(InputView.input());
     }
 
-    private static AutoTickets getAutoTickets(int ticketsCount) {
-        new LottoNumbers();
+    private static List<Ticket> getAutoTickets(int ticketsCount) {
         OutputView.printHowManyTicketsPurchase(ticketsCount);
-        AutoTickets autoTickets = new AutoTickets(ticketsCount);
-        OutputView.printAutoNumbers(autoTickets.getAutoTickets());
-        return autoTickets;
+        List<Ticket> tickets = TicketsGenerator.createAutoTickets(ticketsCount);
+        OutputView.printAutoNumbers(tickets);
+        return tickets;
     }
 
-    private static WinNumbers getWinNumbers() {
+    private static WinNumbers getWinNumbersAndBonusBallNumber() {
         OutputView.printInputWinNumber();
         return new WinNumbers(InputView.input());
     }
 
-    private static BonusBallNo getBonusBallNo(WinNumbers winNumbers) {
+    private static void getBonusBallNumber(WinNumbers winNumbers) {
         OutputView.printInputBonusNumber();
-        return new BonusBallNo(InputView.input(), winNumbers);
+        winNumbers.setBonusBallNumber(InputView.input());
     }
 
     private static void printCorrectResults() {
         OutputView.printResult();
         for (LottoResult lottoResult : LottoResult.values()) {
             OutputView.printCorrectResult(lottoResult.getCorrect(), lottoResult.getPrize(),
-                lottoResult.getCount());
+                LottoManager.lottoResultMap.get(lottoResult.name()));
         }
     }
 }

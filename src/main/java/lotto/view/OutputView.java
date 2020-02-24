@@ -1,6 +1,8 @@
 package lotto.view;
 
-import lotto.model.AutoTicket;
+import java.util.stream.Collectors;
+import lotto.model.LottoNumber;
+import lotto.model.Ticket;
 
 import java.util.List;
 
@@ -25,9 +27,10 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printAutoNumbers(List<AutoTicket> autoTickets) {
-        for (AutoTicket autoTicket : autoTickets) {
-            System.out.println(autoTicket.getAutoTicket());
+    public static void printAutoNumbers(List<Ticket> tickets) {
+        for (Ticket ticket : tickets) {
+            System.out.println(ticket.getTicket().stream().mapToInt(LottoNumber::getNumber).boxed()
+                .collect(Collectors.toList()));
         }
     }
 

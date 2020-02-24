@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.controller.LottoManager;
 import lotto.exception.NotMultipleOfThousandException;
 import lotto.exception.NotNumberException;
 import lotto.exception.OverRangeException;
@@ -41,7 +42,8 @@ public class MoneyTest {
     @DisplayName("상금계산")
     void getYield() {
         Money money = new Money("10000");
-        LottoResult.THREE.setCount();
+        LottoManager.lottoResultMap.put("THREE", 1);
+        System.out.println(LottoManager.lottoResultMap);
         assertThat(money.getYield()).isEqualTo(50);
     }
 }

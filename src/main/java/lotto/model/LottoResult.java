@@ -9,19 +9,10 @@ public enum LottoResult {
 
     private final int prize;
     private final int correct;
-    private int count = 0;
 
     LottoResult(int correct, int prize) {
         this.correct = correct;
         this.prize = prize;
-    }
-
-    public void setCount() {
-        count++;
-    }
-
-    public double prizeResult() {
-        return count * prize;
     }
 
     public int getPrize() {
@@ -30,9 +21,5 @@ public enum LottoResult {
 
     public int getCorrect() {
         return correct;
-    }
-
-    public int getCount() {
-        return count;
     }
 }
