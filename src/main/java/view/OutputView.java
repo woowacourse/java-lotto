@@ -21,7 +21,11 @@ public class OutputView {
 		}
 	}
 
-	public static void printResult(GameResult gameResult) {
+	public static void printErrorMessage(String message) {
+		System.out.println(message);
+	}
+
+	public static void printStatistics(GameResult gameResult, Money purchaseMoney) {
 		System.out.println("당첨 통계");
 		System.out.println("-------");
 
@@ -32,13 +36,7 @@ public class OutputView {
 			System.out.println(
 				String.format("%d개 일치 (%.0f원) - %d개", matchedCount, winningMoney.getMoney(), containingCount));
 		}
-	}
 
-	public static void printProfit(double profit) {
-		System.out.println(String.format("총 수익률은 %.0f%%입니다.", profit));
-	}
-
-	public static void printErrorMessage(String message) {
-		System.out.println(message);
+		System.out.println(String.format("총 수익률은 %.0f%%입니다.", gameResult.calculateProfit(purchaseMoney)));
 	}
 }
