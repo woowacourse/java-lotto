@@ -29,7 +29,7 @@ public class OutputView {
         System.out.println(e.getMessage());
     }
 
-    public static void printPurchasedLottos(int numberOfLottos, Lottos lottos) { //TODO
+    public static void printPurchasedLottos(int numberOfLottos, Lottos lottos) {
         System.out.printf(PURCHASED_LOTTO_NUMBER_IS, numberOfLottos);
 
         List<String> purchasedLottos = new ArrayList<>();

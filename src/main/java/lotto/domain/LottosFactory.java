@@ -15,7 +15,6 @@ public class LottosFactory {
 	private LottosFactory() {}
 
 	public static Lottos createLottosAuto(int amountOfLottos) {
-		// Todo: 로또가 중복되지 않도록 해줄 것
 		List<Lotto> paidLotto = new ArrayList<>();
 
 		for (int i = 0; i < amountOfLottos; i++) {
