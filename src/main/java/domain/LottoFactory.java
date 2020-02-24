@@ -18,14 +18,6 @@ public class LottoFactory {
 		}
 	}
 
-	public static Lotto createSelfNumberLotto(int... number) {
-		List<LottoNumber> numbers = new ArrayList<>();
-		for (int value : number) {
-			numbers.add(LottoNumber.get(value));
-		}
-		return new Lotto(numbers);
-	}
-
 	public static List<Lotto> createLottos(Money purchaseMoney) {
 		int lottoCount = (int)purchaseMoney.getMoney() / LOTTO_PRICE;
 		List<Lotto> lottos = new ArrayList<>();
