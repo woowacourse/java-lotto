@@ -1,7 +1,5 @@
 package domain;
 
-import view.InputView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +14,4 @@ public class LottosFactory {
         }
         return autoLottos;
     }
-
-    public static List<Lotto> createManualLottos(final ManualCount manualCount) {
-        List<Lotto> manualLottos = new ArrayList<>();
-        for (int index = START_INDEX; index < manualCount.getManualCount(); index++) {
-            manualLottos.add(LottoFactory
-                    .createOneManualLotto(InputView.inputManualLottoNumbers()));
-        }
-        return manualLottos;
-    }
-
 }

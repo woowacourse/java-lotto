@@ -6,6 +6,8 @@ import view.OutputView;
 
 public class LottoGame {
 
+    public static final int START_INDEX = 0;
+
     public static void main(String[] args) {
         // 구매 금액
         Money money = inputPurchaseAmountWithValidation();
@@ -66,11 +68,18 @@ public class LottoGame {
     }
 
     private static void createManualLottosWithValidation(final Lottos lottos, final ManualCount manualCount) {
+        for (int index = START_INDEX; index < manualCount.getManualCount(); index++) {
+            addOneManualLottoToLottos(lottos);
+        }
+    }
+
+    private static void addOneManualLottoToLottos(Lottos lottos) {
         try {
-            lottos.addLottos(LottosFactory.createManualLottos(manualCount));
+            lottos.addLotto(LottoFactory
+                    .createOneManualLotto(InputView.inputManualLottoNumbers()));
         } catch (IllegalArgumentException | NullPointerException e) {
             OutputView.printExceptionMessage(e);
-            createManualLottosWithValidation(lottos, manualCount);
+            addOneManualLottoToLottos(lottos);
         }
     }
 
