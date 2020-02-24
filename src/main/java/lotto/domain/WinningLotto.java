@@ -25,7 +25,7 @@ public class WinningLotto {
 		}
 	}
 
-	public Map<LottoRank, Integer> getWinningLottoCount(List<Lotto> lottos) {
+	public Map<LottoRank, Integer> getWinningLottoCount(Lottos lottos) {
 		Map<LottoRank, Integer> lottoRankCount = new TreeMap<>(Collections.reverseOrder());
 
 		Arrays.stream(LottoRank.values())

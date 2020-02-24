@@ -12,6 +12,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
+import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 
 public class ConsoleUILottoApplication {
@@ -20,7 +21,7 @@ public class ConsoleUILottoApplication {
 		int numberOfLotto = inputLottoMoney.getNumberOfLotto();
 		printPurchaseCompleteMessage(numberOfLotto);
 
-		List<Lotto> lottos = purchaseLotto(numberOfLotto);
+		Lottos lottos = purchaseLotto(numberOfLotto);
 		printPurchasedLotto(lottos);
 
 		Lotto winningLottoNumber = new Lotto(parseToLottoNumberSet(inputWinningLottoNumber()));

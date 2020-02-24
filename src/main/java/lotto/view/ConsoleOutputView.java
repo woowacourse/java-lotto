@@ -1,12 +1,12 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
+import lotto.domain.Lottos;
 
 public class ConsoleOutputView {
 	private static final String PURCHASE_COMPLETE_MESSAGE = "%d개를 구매했습니다.\n";
@@ -17,7 +17,7 @@ public class ConsoleOutputView {
 	private static final String WINNING_SECOND_RANK_RESULT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
 	private static final String WINNING_RATIO_MESSAGE = "총 수익률은 %d%%입니다.\n";
 
-	public static void printExceptionMessage(String exceptionMessage) {
+	static void printExceptionMessage(String exceptionMessage) {
 		System.out.println(exceptionMessage);
 	}
 
@@ -25,7 +25,7 @@ public class ConsoleOutputView {
 		System.out.printf(PURCHASE_COMPLETE_MESSAGE, numberOfLotto);
 	}
 
-	public static void printPurchasedLotto(List<Lotto> lottos) {
+	public static void printPurchasedLotto(Lottos lottos) {
 		for (Lotto lotto : lottos) {
 			String lottoNumber = lotto.getLottoNumbers().stream()
 				.map(LottoNumber::getNumber)
