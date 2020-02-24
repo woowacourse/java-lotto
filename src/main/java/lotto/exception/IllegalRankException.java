@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.exception;
 
 public class IllegalRankException extends RuntimeException {
 	public IllegalRankException(String message) {

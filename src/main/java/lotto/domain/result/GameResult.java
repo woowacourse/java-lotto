@@ -1,41 +1,38 @@
 package lotto.domain.result;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-import lotto.domain.IllegalRankException;
 import lotto.domain.PurchaseMoney;
 
 public class GameResult {
 	public static final int PERCENTAGE = 100;
 
-	private List<RankCount> result = new ArrayList<>();
+	private Map<Statistic, RankCount> result = new LinkedHashMap<>();
 
 	public GameResult() {
-		result.add(new RankCount(Statistic.NOTHING));
-		result.add(new RankCount(Statistic.THREE));
-		result.add(new RankCount(Statistic.FOUR));
-		result.add(new RankCount(Statistic.FIVE));
-		result.add(new RankCount(Statistic.BONUS));
-		result.add(new RankCount(Statistic.SIX));
+		result.put(Statistic.NOTHING, new RankCount(Statistic.NOTHING));
+		result.put(Statistic.THREE, new RankCount(Statistic.THREE));
+		result.put(Statistic.FOUR, new RankCount(Statistic.FOUR));
+		result.put(Statistic.FIVE, new RankCount(Statistic.FIVE));
+		result.put(Statistic.BONUS, new RankCount(Statistic.BONUS));
+		result.put(Statistic.SIX, new RankCount(Statistic.SIX));
 	}
 
 	public RankCount of(Statistic statistic) {
-		return result.stream()
-			.filter(s -> s.getStatistic() == statistic)
-			.findFirst()
-			.orElseThrow(() -> new IllegalRankException("프로그램 오류가 발생하였습니다."));
+		return result.get(statistic);
 	}
 
 	public double getEarningMoney(PurchaseMoney money) {
 		double profit = 0;
-		for (RankCount rankCount : result) {
+		for (RankCount rankCount : result.values()) {
 			profit += rankCount.getProfit();
 		}
 		return (profit / money.getPurchaseMoney()) * PERCENTAGE;
 	}
 
-	public List<RankCount> getResult() {
-		return result;
+	public Collection<RankCount> getResult() {
+		return result.values();
 	}
 }
