@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.LottoNumber;
 
 import lotto.domain.LottoNumber.InvalidLottoNumberException;
 import lotto.domain.LottoNumber.LottoNumber;
