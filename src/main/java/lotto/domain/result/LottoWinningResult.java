@@ -30,7 +30,7 @@ public class LottoWinningResult {
 		}
 	}
 
-	public int calculateWinningRatio(Map<LottoRank, Integer> lottoRankCount, LottoMoney inputLottoMoney) {
+	public int calculateWinningRatio(LottoMoney inputLottoMoney) {
 		LottoMoney totalWinningMoney = LottoRank.MISS.getWinningMoney();
 		for (Map.Entry<LottoRank, Integer> lottoEntry : lottoRankCount.entrySet()) {
 			totalWinningMoney = totalWinningMoney.add(
