@@ -16,14 +16,13 @@ public class WinningLotto {
     }
 
     void validateBonusNumberDuplication(int bonusNumber) {
-        if (winningLotto.lottoNumbers.contains(new LottoNumber(bonusNumber))) {
+        if (winningLotto.getLottoNumbers().contains(new LottoNumber(bonusNumber))) {
             throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATION_ERROR_MESSAGE);
         }
     }
 
     public boolean isBonusNumber(Lotto lotto) {
-        return lotto.getLottoNumbers()
-                .contains(this.bonusNumber);
+        return lotto.isContainBonusNumber(bonusNumber);
     }
 
     public List<LottoNumber> getWinningLotto() {

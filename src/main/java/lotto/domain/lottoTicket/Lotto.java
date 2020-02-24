@@ -10,7 +10,7 @@ public class Lotto {
     private static final String LOTTO_NUMBER_DUPLICATION_ERROR_MESSAGE = "중복된 로또 번호가 있습니다.";
     private static final String LOTTO_SIZE_ERROR_MESSAGE = "로또 번호의 개수가 올바르지 않습니다.";
 
-    protected List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> numbers) {
         validateDuplication(numbers);
@@ -35,6 +35,10 @@ public class Lotto {
         return (int) lottoNumbers.stream()
                 .filter(winningLotto.getWinningLotto()::contains)
                 .count();
+    }
+
+    public boolean isContainBonusNumber(LottoNumber bonusNumber){
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
     //출력을 위해 Integer로 변환해서 반환

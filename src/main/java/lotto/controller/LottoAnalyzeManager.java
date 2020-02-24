@@ -17,10 +17,9 @@ public class LottoAnalyzeManager {
         lottoResult.calculateLottoResult(buyer.getLottos(), winningLotto);
     }
 
-    public Map<WinningValue, Integer> getLottoResult() {
+    public Map<WinningValue, Integer> analyzeLotto() {
         return lottoResult.getLottoResult();
     }
-
 
     public int analyzeRewardRate(Money money) {
         return lottoResult.calculateRewardRate(money.getMoney(), lottoResult.getLottoResult());
