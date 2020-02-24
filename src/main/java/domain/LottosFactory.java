@@ -17,9 +17,9 @@ public class LottosFactory {
         return autoLottos;
     }
 
-    public static List<Lotto> createManualLottos() {
+    public static List<Lotto> createManualLottos(ManualCount manualCount) {
         List<Lotto> manualLottos = new ArrayList<>();
-        for (int index = START_INDEX; index < ManualCount.getManualCount(); index++) {
+        for (int index = START_INDEX; index < manualCount.getManualCount(); index++) {
             manualLottos.add(LottoFactory
                     .createOneManualLotto(InputView.inputManualLottoNumbers()));
         }

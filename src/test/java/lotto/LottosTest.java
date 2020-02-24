@@ -9,8 +9,8 @@ public class LottosTest {
 
     @Test
     void 구매금액으로_자동구매만_할_경우_로또의_사이즈_확인(){
-        Money.inputPurchaseAmount("10800");
-        int lottoCount = Money.getLottoCount();
+        Money money = new Money("10800");
+        int lottoCount = money.getLottoCount();
         Lottos.addLottos(LottosFactory.createAutoLottos(lottoCount));
         assertThat(Lottos.getLottos().size()).isEqualTo(10);
     }

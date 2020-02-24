@@ -1,5 +1,6 @@
 package lotto;
 
+import domain.LottoCount;
 import domain.ManualCount;
 import domain.Money;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +16,7 @@ public class ManualCountTest {
     @DisplayName("문자 입력 시 예외 발생")
     void 수동_구매_로또_수_테스트() {
         assertThatThrownBy(() -> {
-            ManualCount.inputManualCount("수동");
+            new ManualCount("수동", new LottoCount(1));
         }).isInstanceOf(IllegalArgumentException.class)
             .hasMessage(String.format("문자는 입력될 수 없습니다. 현재 입력 : %s ", "수동"));
     }
@@ -25,8 +26,9 @@ public class ManualCountTest {
     @ValueSource(strings = {"-1", "11", "5"})
     void 수동_구매_로또_입력_범위_테스트(String manualCount){
         assertThatThrownBy(() -> {
-            Money.inputPurchaseAmount("4000");
-            ManualCount.inputManualCount(manualCount);
+            Money money = new Money("4000");
+            LottoCount lottoCount = new LottoCount(money.getLottoCount());
+            new ManualCount(manualCount, lottoCount);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(String.format("수동으로 구매 가능한 로또 개수가 아닙니다. 현재 입력 : %s ", manualCount));
     }

@@ -4,26 +4,26 @@ import java.util.Objects;
 
 public class ManualCount {
     private static final int NEGATIVE_CRITERIA_POINT = 0;
-    private static int manualCount;
+    private final int manualCount;
 
-    public static void inputManualCount(final String count) {
-        Objects.requireNonNull(count);
-        checkNotNumber(count);
-        manualCount = Integer.parseInt(count);
-        checkManualAvailableRange();
+    public ManualCount(final String inputManualCount, final LottoCount lottoCount) {
+        Objects.requireNonNull(inputManualCount);
+        checkNotNumber(inputManualCount);
+        this.manualCount = Integer.parseInt(inputManualCount);
+        checkManualAvailableRange(lottoCount);
     }
 
-    private static void checkManualAvailableRange() {
-        if (isManualAvailableRange(LottoCount.getLottoCount())) {
+    private void checkManualAvailableRange(LottoCount lottoCount) {
+        if (isManualAvailableRange(lottoCount.getLottoCount())) {
             throw new IllegalArgumentException(String.format("수동으로 구매 가능한 로또 개수가 아닙니다. 현재 입력 : %s ", manualCount));
         }
     }
 
-    private static boolean isManualAvailableRange(final int lottoCount) {
+    private boolean isManualAvailableRange(final int lottoCount) {
         return manualCount < NEGATIVE_CRITERIA_POINT || manualCount > lottoCount;
     }
 
-    private static void checkNotNumber(final String number) {
+    private void checkNotNumber(final String number) {
         Objects.requireNonNull(number);
         try {
             Integer.parseInt(number);
@@ -32,7 +32,7 @@ public class ManualCount {
         }
     }
 
-    public static int getManualCount() {
+    public int getManualCount() {
         return manualCount;
     }
 }
