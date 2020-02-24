@@ -19,10 +19,6 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public static int getDummySize() {
-        return lottos.size();
-    }
-
     public static List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }

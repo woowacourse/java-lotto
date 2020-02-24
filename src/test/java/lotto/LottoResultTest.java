@@ -4,9 +4,6 @@ import domain.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
@@ -18,15 +15,9 @@ public class LottoResultTest {
         WinningNumber.inputWinningNumbers(winningNumbers);
         WinningNumber.inputBonusNumber(bonusNumber);
 
-        List<LottoNumber> myLottoNumbers = new ArrayList<>();
-        myLottoNumbers.add(new LottoNumber(1));
-        myLottoNumbers.add(new LottoNumber(2));
-        myLottoNumbers.add(new LottoNumber(3));
-        myLottoNumbers.add(new LottoNumber(4));
-        myLottoNumbers.add(new LottoNumber(5));
-        myLottoNumbers.add(new LottoNumber(7));
-        Lotto myLotto = new Lotto(myLottoNumbers);
-        Lottos.addLotto(myLotto);
+        String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
+        Lotto lotto = LottoFactory.createOneManualLotto(inputLottoNumbers);
+        Lottos.addLotto(lotto);
     }
 
     @Test

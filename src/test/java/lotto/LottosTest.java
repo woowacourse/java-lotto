@@ -8,10 +8,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
 
     @Test
-    void 구매금액으로_로또더미의_사이즈_확인(){
-        Money amount = new Money("10800");
-        int lottoCount = amount.getLottoCount();
-//        Lottos lottos = LottosFactory.createAutoLottos(lottoCount);
-//        assertThat(lottos.getDummySize()).isEqualTo(10);
+    void 구매금액으로_자동구매만_할_경우_로또의_사이즈_확인(){
+        Money.inputPurchaseAmount("10800");
+        int lottoCount = Money.getLottoCount();
+        Lottos.addLottos(LottosFactory.createAutoLottos(lottoCount));
+        assertThat(Lottos.getLottos().size()).isEqualTo(10);
+    }
+
+    @Test
+    void 로또_한_개_추가_테스트() {
+        String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "6"};
+        Lotto lotto = LottoFactory.createOneManualLotto(inputLottoNumbers);
+        Lottos.addLotto(lotto);
+        assertThat(Lottos.getLottos().size()).isEqualTo(1);
     }
 }
