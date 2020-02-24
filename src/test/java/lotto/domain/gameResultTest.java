@@ -2,13 +2,9 @@ package lotto.domain;
 
 import lotto.domain.result.GameResult;
 import lotto.domain.result.Rank;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +14,7 @@ public class gameResultTest {
 
     @BeforeEach
     void initGameResult() {
-        gameResult = new GameResult(Arrays.asList(Rank.values()));
+        gameResult = new GameResult();
         gameResult.count(Rank.THREE);
         gameResult.count(Rank.THREE);
         gameResult.count(Rank.THREE);
@@ -39,7 +35,6 @@ public class gameResultTest {
     @DisplayName("수익률을 잘 계산하는지 테스트")
     void calculateProfitTest() {
         PurchaseMoney money = new PurchaseMoney("6000");
-        gameResult.calculateProfit(money);
-        assertThat(gameResult.getProfit()).isEqualTo(PROFIT / 6000 * 100);
+        assertThat(gameResult.calculateProfit(money)).isEqualTo(PROFIT / 6000 * 100);
     }
 }

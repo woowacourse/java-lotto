@@ -24,13 +24,12 @@ public class LottoGame {
 
     public GameResult getResult() {
         List<Rank> ranks = Arrays.asList(Rank.values());
-        GameResult gameResult = new GameResult(ranks);
+        GameResult gameResult = new GameResult();
 
         for (Lotto lotto : lottos) {
             Rank rank = winningLotto.isWinningLotto(lotto);
             gameResult.count(rank);
         }
-        gameResult.calculateProfit(money);
         return gameResult;
     }
 }

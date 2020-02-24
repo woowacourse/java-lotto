@@ -1,7 +1,6 @@
 package lotto.domain.result;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public enum Rank {
     DEFAULT(0, 0, false),
@@ -11,7 +10,6 @@ public enum Rank {
     BONUS(5, 30_000_000, true),
     SIX(6, 2_000_000_000, false);
 
-    public static final int FIVE_MATCH = 5;
     private final int matchingNumbers;
     private final int prize;
     private final boolean bonusMatching;
@@ -23,16 +21,9 @@ public enum Rank {
     }
 
     public static Rank getRank(int numberOfMatch, boolean isBonus) {
-        Stream<Rank> rankStream = Arrays.stream(values())
-                .filter(statistic -> statistic.matchingNumbers == numberOfMatch);
-
-        if (numberOfMatch != FIVE_MATCH) {
-            return rankStream
-                    .findFirst()
-                    .orElse(DEFAULT);
-        }
-        return rankStream
-                .filter(statistic -> statistic.bonusMatching == isBonus)
+         return Arrays.stream(values())
+                .filter(rank -> rank.matchingNumbers == numberOfMatch)
+                .filter(rank->rank.checkBonus(isBonus))
                 .findFirst()
                 .orElse(DEFAULT);
     }
@@ -49,7 +40,17 @@ public enum Rank {
         return matchingNumbers != 0;
     }
 
-    public boolean isBonusMatching() {
-        return matchingNumbers == FIVE_MATCH && bonusMatching;
+    public boolean checkBonus(boolean isBonus) {
+        if (this == BONUS || this == FIVE) {
+            return bonusMatching == isBonus;
+        }
+        return true;
+    }
+
+    public boolean isBonus(){
+        if(this==BONUS){
+            return true;
+        }
+        return false;
     }
 }

@@ -21,11 +21,11 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printResult(GameResult gameResult) {
+    public static void printResult(GameResult gameResult, double profit) {
         System.out.println("\n당첨 통계 \n ==============");
 
         printRank(gameResult.getStatistic());
-        printProfit(gameResult.getProfit());
+        printProfit(profit);
     }
 
     private static void printRank(Map<Rank, Count> statistic) {
@@ -59,7 +59,7 @@ public class OutputView {
     }
 
     private static boolean checkBonus(Rank rank, Count count) {
-        if (rank.isBonusMatching()) {
+        if (rank.isBonus()) {
             printSecond(rank, count);
             return true;
         }
