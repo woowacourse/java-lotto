@@ -40,7 +40,7 @@ class PurchasedLottoTicketsTest {
 
 		// when
 		PurchasedLottoTickets result
-				= PurchasedLottoTickets.of(new PurchaseMoney(input), lottoNumberGenerator);
+				= PurchasedLottoTicketsFactory.of(new PurchaseMoney(input), lottoNumberGenerator);
 
 		// then
 		List<SerialLottoNumber> expected = new ArrayList<>();

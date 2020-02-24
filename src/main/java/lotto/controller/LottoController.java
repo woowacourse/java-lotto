@@ -13,7 +13,7 @@ public class LottoController {
 		OutputView.printPurchasedLottoTicketsCount(purchaseMoney);
 
 		PurchasedLottoTickets purchasedLottoTickets
-				= PurchasedLottoTickets.of(purchaseMoney, new RandomLottoNumbersGenerator());
+				= PurchasedLottoTicketsFactory.of(purchaseMoney, new RandomLottoNumbersGenerator());
 		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 
 		WinningInformation winningInformation = createWinningInformation();
