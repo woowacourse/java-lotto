@@ -22,11 +22,15 @@ public enum WinningValue {
     }
 
     public static WinningValue valueOf(int hitCount, boolean hitBonus) {
-        if (hitCount == SECOND.hitCount && hitBonus) return SECOND;
+        if (isSecond(hitCount, hitBonus)) return SECOND;
         return Arrays.stream(WinningValue.values())
                 .filter(winningValue -> winningValue.hitCount == hitCount)
                 .findFirst()
                 .orElse(ZERO);
+    }
+
+    private static boolean isSecond(int hitCount, boolean hitBonus) {
+        return hitCount == SECOND.hitCount && hitBonus;
     }
 
     public int getReward() {
