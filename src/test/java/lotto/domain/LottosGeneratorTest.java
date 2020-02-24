@@ -21,4 +21,5 @@ class LottosGeneratorTest {
         Set<Lotto> lottoNumbersSet = new HashSet<>(lottoNumbersList);
         assertThat(lottoNumbersList.size()).isEqualTo(lottoNumbersSet.size());
     }
+
 }

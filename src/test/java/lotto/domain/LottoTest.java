@@ -2,14 +2,12 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 class LottoTest {
 

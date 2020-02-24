@@ -1,12 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class WinningRanks {
     private static final int WINNING_AMOUNT = 1;
-    // todo: 이게 무슨 의미인 지 조금 더 명확하면 좋겠다.
     private static final int DEFAULT_WINNING_TICKET_SIZE = 0;
     private Map<Rank, Integer> winningRanks;
 
