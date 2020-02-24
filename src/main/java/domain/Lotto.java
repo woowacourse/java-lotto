@@ -39,10 +39,6 @@ public class Lotto {
         }
     }
 
-    public int getSize() {
-        return lotto.size();
-    }
-
     public int countMatchNumbers(final Lotto myLotto) {
         return (int)lotto.stream()
                     .filter(myLotto::contains)
