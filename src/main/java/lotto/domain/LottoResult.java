@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.stream.Collectors;
 public class LottoResult {
 	private static final int PERCENT_MULTIPLIER = 100;
 	private static final int INITIAL_COUNT = 0;
-	private static final BigInteger INITIAL_EARNING = new BigInteger("0");
+	private static final int INITIAL_EARNING = 0;
 
 	private final Map<WinningType, Integer> lottoResult;
 
@@ -33,13 +32,13 @@ public class LottoResult {
 		return new LottoResult(initialLottoResult);
 	}
 
-	public double calculateEarningRate(Money money) {
-		BigInteger totalEarning = INITIAL_EARNING;
+	public double calculateEarningRate(PurchaseMoney purchaseMoney) {
+		double totalEarning = INITIAL_EARNING;
 		for (WinningType winningType : lottoResult.keySet()) {
-			totalEarning = totalEarning.add(winningType.calculateEarning(lottoResult.get(winningType)));
+			totalEarning += winningType.calculateEarning(lottoResult.get(winningType));
 		}
 
-		return money.divideBy(totalEarning) * PERCENT_MULTIPLIER;
+		return purchaseMoney.divideBy(totalEarning) * PERCENT_MULTIPLIER;
 	}
 
 	public List<WinningType> getWinningKeys() {

@@ -1,14 +1,14 @@
 package lotto.view;
 
 import lotto.domain.LottoResult;
-import lotto.domain.Money;
+import lotto.domain.PurchaseMoney;
 import lotto.domain.PurchasedLottoTickets;
 import lotto.domain.WinningType;
 
 public class OutputView {
 	private static final String NEW_LINE = System.lineSeparator();
 
-	public static void printPurchasedLottoTicketsCount(Money purchaseMoney) {
+	public static void printPurchasedLottoTicketsCount(PurchaseMoney purchaseMoney) {
 		System.out.println(purchaseMoney.countPurchasedTickets() + "개를 구매했습니다.");
 	}
 

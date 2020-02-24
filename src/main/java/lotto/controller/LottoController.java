@@ -9,7 +9,7 @@ import lotto.view.OutputView;
 
 public class LottoController {
 	public static void run() {
-		Money purchaseMoney = createPurchaseMoney();
+		PurchaseMoney purchaseMoney = createPurchaseMoney();
 		OutputView.printPurchasedLottoTicketsCount(purchaseMoney);
 
 		PurchasedLottoTickets purchasedLottoTickets
@@ -33,9 +33,9 @@ public class LottoController {
 		}
 	}
 
-	private static Money createPurchaseMoney() {
+	private static PurchaseMoney createPurchaseMoney() {
 		try {
-			return new Money(InputView.inputPurchaseMoney());
+			return new PurchaseMoney(InputView.inputPurchaseMoney());
 		} catch (PurchaseMoneyIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return createPurchaseMoney();
