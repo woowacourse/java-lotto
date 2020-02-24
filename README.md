@@ -106,3 +106,12 @@
 - [x] 클래스명을 변경하라.
 - [x] LottoResult 생성을 클래스 내로 옮겨라.
 - [x] AutoNumber 생성자의 숫자 가져오는 메소드를 변경하라.
+- [x] BonusBall 클래스 내 변수 static을 제거하라.
+- [x] is~ 이름을 가진 메서드는 boolean을 반환해야 한다. 명칭을 변경.
+- [x] LottoRank enum 내 rank 변수는 불필요하므로 제거하라.
+- [x] LottoRank enum 내 correct 변수명을 변경하라.
+- [x] LottoRank enum 내 메서드명을 변경하라.
+- [x] Payment 클래스 내 getPaymentCount 메서드명을 변경하라.
+- [x] Prize 클래스 내 sumPrize 메서드 구조를 for문으로 변경하라.
+- [x] YieldMoney 클래스 내 countYieldMoney 메서드 인자명을 간략화하지마라.
+ 
