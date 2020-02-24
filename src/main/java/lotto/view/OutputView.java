@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.LottoRank;
 import lotto.model.LottoTicket;
 import lotto.model.LottoTickets;
 
@@ -43,12 +44,12 @@ public class OutputView {
         System.out.println(RESULT_MESSAGE);
     }
 
-    public static void printCorrectResult(int count, int correct, int prize) {
-        System.out.println(correct + CORRECT_MESSAGE + prize + PRIZE_MESSAGE + count + COUNT_MESSAGE);
-    }
-
-    public static void printBonusCorrectResult(int count) {
-        System.out.println(FIVE_BONUS_CORRECT_RESULT_MESSAGE + count + COUNT_MESSAGE);
+    public static void printCorrectResult(int count, LottoRank lottoRank) {
+        if (lottoRank == LottoRank.SECOND) {
+            System.out.println(FIVE_BONUS_CORRECT_RESULT_MESSAGE + count + COUNT_MESSAGE);
+            return;
+        }
+        System.out.println(lottoRank.getRank() + CORRECT_MESSAGE + lottoRank.getPrize() + PRIZE_MESSAGE + count + COUNT_MESSAGE);
     }
 
     public static void printYield(int yield) {

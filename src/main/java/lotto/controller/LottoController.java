@@ -34,13 +34,8 @@ public class LottoController {
     }
 
     public void printCorrectResults() {
-//        for (LottoRank lottoRank : LottoRank.values()) {
-//            OutputView.printCorrectResult();
-//        }
-        OutputView.printCorrectResult(lottoResult.rankResult(LottoRank.FIFTH.name()), LottoRank.FIFTH.getRank(), LottoRank.FIFTH.getPrize());
-        OutputView.printCorrectResult(lottoResult.rankResult(LottoRank.FOURTH.name()), LottoRank.FOURTH.getRank(), LottoRank.FOURTH.getPrize());
-        OutputView.printCorrectResult(lottoResult.rankResult(LottoRank.THIRD.name()), LottoRank.THIRD.getRank(), LottoRank.THIRD.getPrize());
-        OutputView.printBonusCorrectResult(lottoResult.rankResult(LottoRank.SECOND.name()));
-        OutputView.printCorrectResult(lottoResult.rankResult(LottoRank.FIRST.name()), LottoRank.FIRST.getRank(), LottoRank.FIRST.getPrize());
+        for (LottoRank lottoRank : LottoRank.values()) {
+            OutputView.printCorrectResult(lottoResult.rankResult(lottoRank), lottoRank);
+        }
     }
 }

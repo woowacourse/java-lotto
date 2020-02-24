@@ -9,6 +9,7 @@ public class Payment {
     private static final int THOUSAND = 1000;
     private static final int MINIMUM_PAYMENT = 1000;
     private static final int MAXIMUM_PAYMENT = 100000;
+
     private int payment;
 
     public Payment(int payment) {

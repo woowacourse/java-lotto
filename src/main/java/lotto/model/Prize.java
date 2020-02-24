@@ -5,7 +5,7 @@ public class Prize {
 
     public static double sumPrize(LottoResult lottoResult) {
         for (LottoRank lottoRank : LottoRank.values()) {
-            prize += lottoRank.prizeResult(lottoResult.rankResult(lottoRank.name()));
+            prize += lottoRank.prizeResult(lottoResult.rankResult(lottoRank));
         }
         return prize;
     }

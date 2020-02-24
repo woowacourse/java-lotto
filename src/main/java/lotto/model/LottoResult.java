@@ -18,28 +18,17 @@ public class LottoResult {
         this.lottoResult = lottoResult;
     }
 
-    // TODO : 매치된 갯수와 LottoRank 이름을 연결 , Test 코드 구현
     public void checkCount(LottoTicket lottoTicket, WinNumber winNumber, BonusBall bonusBall) {
         int matchNumber = lottoTicket.matchNumber(winNumber);
         if (LottoRank.checkNoPrize(matchNumber)) {
-            return ;
-        }
-        if (LottoRank.checkThirdWinner(matchNumber)) {
-            checkSecondWinner(lottoTicket, bonusBall);
             return;
         }
-        lottoResult.put(LottoRank.getNameByRank(matchNumber), lottoResult.get(LottoRank.getNameByRank(matchNumber)) + WINNING_COUNT);
+
+        LottoRank lottoRank = LottoRank.of(matchNumber, lottoTicket.matchesWithBonusBall(bonusBall));
+        lottoResult.put(lottoRank, lottoResult.get(lottoRank) + WINNING_COUNT);
     }
 
-    private void checkSecondWinner(LottoTicket lottoTicket, BonusBall bonusBall) {
-        if (lottoTicket.matchesWithBonusBall(bonusBall)) {
-            lottoResult.put(LottoRank.SECOND, lottoResult.get(LottoRank.SECOND) + WINNING_COUNT);
-            return;
-        }
-        lottoResult.put(LottoRank.THIRD, lottoResult.get(LottoRank.THIRD) + WINNING_COUNT);
-    }
-
-    public int rankResult(String rank) {
+    public int rankResult(LottoRank rank) {
         return lottoResult.get(rank);
     }
 }

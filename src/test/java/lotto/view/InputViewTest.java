@@ -14,7 +14,7 @@ public class InputViewTest {
         String winNumber1 = null;
 
         assertThatThrownBy(() -> {
-            InputView.checkNullorEmptyInput(winNumber1);
+            InputView.checkNullOrEmptyInput(winNumber1);
         }).isInstanceOf(NullOrEmptyException.class)
                 .hasMessage("null 혹은 빈문자열을 입력할 수 없습니다.");
     }
@@ -24,7 +24,7 @@ public class InputViewTest {
         String winNumber2 = "";
 
         assertThatThrownBy(() -> {
-            InputView.checkNullorEmptyInput(winNumber2);
+            InputView.checkNullOrEmptyInput(winNumber2);
         }).isInstanceOf(NullOrEmptyException.class)
                 .hasMessage("null 혹은 빈문자열을 입력할 수 없습니다.");
     }

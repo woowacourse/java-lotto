@@ -17,7 +17,7 @@ public class InputView {
 
     public static int inputPayment() {
         String input = scanner.nextLine();
-        checkNullorEmptyInput(input);
+        checkNullOrEmptyInput(input);
         checkNumberFormat(input);
         int payment = Integer.parseInt(input);
         return payment;
@@ -25,7 +25,7 @@ public class InputView {
 
     public static int inputBonusBall() {
         String input = scanner.nextLine();
-        checkNullorEmptyInput(input);
+        checkNullOrEmptyInput(input);
         checkNumberFormat(input);
         return Integer.parseInt(input);
     }
@@ -33,19 +33,19 @@ public class InputView {
     // 수동
     public static List<Integer> inputLottoTicket() {
         String input = scanner.nextLine();
-        checkNullorEmptyInput(input);
+        checkNullOrEmptyInput(input);
         List<Integer> lottoTicket = makeNumbers(splitInput(input));
         return lottoTicket;
     }
 
     public static List<Integer> inputWinNumber() {
         String inputs = scanner.nextLine();
-        checkNullorEmptyInput(inputs);
+        checkNullOrEmptyInput(inputs);
         List<Integer> winningNumbers = makeNumbers(splitInput(inputs));
         return winningNumbers;
     }
 
-    public static void checkNullorEmptyInput(String input) {
+    public static void checkNullOrEmptyInput(String input) {
         if (input == null || input.equals(EMPTY_STRING)) {
             throw new NullOrEmptyException(NULL_OR_EMPTY_EXCEPTION_MESSAGE);
         }
