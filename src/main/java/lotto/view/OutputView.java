@@ -3,6 +3,8 @@ package lotto.view;
 import lotto.domain.*;
 
 public class OutputView {
+    public static final String SPLIT_DELIMETER = ",";
+
     public static void printLottoCount(PaidPrice paidPrice) {
         System.out.println(paidPrice.getLottoCount() + "개를 구매했습니다");
     }
