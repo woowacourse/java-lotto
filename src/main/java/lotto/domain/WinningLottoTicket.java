@@ -20,18 +20,17 @@ public class WinningLottoTicket extends LottoTicket {
         }
     }
 
-    private boolean isBonusNumberAlreadyExist(final LottoNumber bonusNumber) {
+    private boolean isBonusNumberAlreadyExist(final LottoNumber inputBonusNumber) {
         return super.lottoNumbers.stream()
-                .mapToInt(LottoNumber::getNumber)
-                .anyMatch(winningNumber -> winningNumber == bonusNumber.getNumber());
+                .anyMatch(inputBonusNumber::equals);
     }
 
     public boolean isBonusMatched(final LottoTicket userLottoTicket) {
         return userLottoTicket.getLottoNumbers().stream()
-                .anyMatch(userLottoNumber -> bonusNumber.equals(userLottoNumber));
+                .anyMatch(bonusNumber::equals);
     }
 
-    public long countMatched(final WinningLottoTicket winningLotto, final LottoTicket userLottoTicket) {
+    public long countMatchedNumber(final WinningLottoTicket winningLotto, final LottoTicket userLottoTicket) {
         return userLottoTicket.getLottoNumbers().stream()
                 .filter(winningLotto::isMatched)
                 .count();

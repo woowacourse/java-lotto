@@ -12,7 +12,7 @@ public class Result {
 
     void calculate(final WinningLottoTicket winningLotto, final LottoTicket userLottoTicket) {
         boolean hasBonus = winningLotto.isBonusMatched(userLottoTicket);
-        int winningCount = Math.toIntExact(winningLotto.countMatched(winningLotto, userLottoTicket));
+        int winningCount = Math.toIntExact(winningLotto.countMatchedNumber(winningLotto, userLottoTicket));
 
         winningInfo = WinningInfo.valueOf(winningCount, hasBonus);
     }
