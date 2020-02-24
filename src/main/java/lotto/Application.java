@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.controller.GameController;
 import lotto.domain.*;
 import lotto.generator.LottoGenerator;
 import lotto.generator.LottoNumberRandomGenerator;
@@ -12,7 +13,7 @@ public class Application {
         Lottos lottos = initUserLottos();
         WinningLotto winningLotto = initWinnerLotto();
 
-        ResultsDTO resultsDTO = ResultCalculator.getResults(lottos, winningLotto);
+        ResultsDTO resultsDTO = GameController.run(lottos, winningLotto);
 
         OutputView.printResults(resultsDTO);
     }

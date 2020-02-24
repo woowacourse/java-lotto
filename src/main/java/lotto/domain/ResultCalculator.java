@@ -3,14 +3,7 @@ package lotto.domain;
 import java.util.*;
 
 public class ResultCalculator {
-    public static ResultsDTO getResults(Lottos lottos, WinningLotto winningLotto) {
-        List<WinningInfo> results = computeResults(lottos, winningLotto);
-        long totalEarning = computeTotalEarning(results);
-        long earningRate = computeEarningRate(totalEarning, results.size());
-        Map<WinningInfo, Integer> matchCount = computeMatchCount(results);
-        return new ResultsDTO(matchCount, earningRate);
-    }
-
+    
     public static List<WinningInfo> computeResults(Lottos lottos, WinningLotto winningLotto) {
         List<WinningInfo> results = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
