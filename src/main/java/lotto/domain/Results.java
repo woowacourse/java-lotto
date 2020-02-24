@@ -1,10 +1,11 @@
 package lotto.domain;
 
+import java.math.BigInteger;
 import java.util.*;
 
 public class Results {
-    private static final int MONEY_PER_LOTTO = 1000;
-    private static final int HUNDRED_PERCENT = 100;
+    private static final String MONEY_PER_LOTTO = "1000";
+    private static final String HUNDRED_PERCENT = "100";
     private static final int RESULT_BASE = 6;
     private final List<Result> results;
     private final List<LottoTicket> userLottoTickets;
@@ -26,7 +27,7 @@ public class Results {
     }
 
     private void addBlankResults() {
-        for(WinningInfo winningInfo : WinningInfo.values()){
+        for (WinningInfo winningInfo : WinningInfo.values()) {
             results.add(new Result(winningInfo));
         }
     }
@@ -35,18 +36,26 @@ public class Results {
         return Collections.unmodifiableList(results);
     }
 
-    public int getTotalEarning() {
-        int totalEarning = 0;
+    public BigInteger getTotalEarning() {
+        BigInteger totalEarning = new BigInteger("0");
         for (int i = RESULT_BASE; i < results.size(); i++) {
-            totalEarning += results.get(i)
+            int nowEarning = results.get(i)
                     .getWinningInfo()
                     .getWinningPrice();
+            totalEarning = totalEarning.add(new BigInteger(String.valueOf(nowEarning)));
         }
         return totalEarning;
     }
 
-    public int getEarningRate() {
-        return (getTotalEarning()) / (userLottoTickets.size() * MONEY_PER_LOTTO) * HUNDRED_PERCENT;
+    public BigInteger getEarningRate() {
+        BigInteger totalEarning = getTotalEarning();
+        BigInteger percent = new BigInteger(HUNDRED_PERCENT);
+        BigInteger userLottoTicketsSize = new BigInteger(String.valueOf(userLottoTickets.size()));
+        BigInteger moneyPerLotto = new BigInteger(MONEY_PER_LOTTO);
+        BigInteger purchaseAmount = userLottoTicketsSize.multiply(moneyPerLotto);
+
+        return totalEarning.multiply(percent)
+                .divide(purchaseAmount);
     }
 
     public Map<WinningInfo, Integer> getSummary() {
