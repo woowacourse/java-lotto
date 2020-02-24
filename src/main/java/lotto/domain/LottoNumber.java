@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -35,10 +33,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	public static LottoNumber of(int number) {
 		validate(number);
 		return CACHE.get(number);
-	}
-
-	public static Collection<LottoNumber> values() {
-		return Collections.unmodifiableCollection(CACHE.values());
 	}
 
 	private static void validate(int number) {
