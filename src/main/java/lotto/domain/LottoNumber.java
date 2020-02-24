@@ -15,14 +15,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
-    static LottoNumber randomBy() {
-        int value = (int) (Math.random() * MAX_VALUE + 1);
-        return new LottoNumber(value);
-    }
-
     public static LottoNumber of(String value) {
         validate(value);
         return new LottoNumber(Integer.parseInt(value));
+    }
+
+    public static LottoNumber of(int value) {
+        return new LottoNumber(value);
     }
 
     private static void validate(String number) {
