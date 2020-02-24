@@ -12,7 +12,7 @@ public class LottoFactoryTest {
     @Test
     @DisplayName("로또 번호 생성")
     void createLottoNumbersTest(){
-        new LottoFactory();
+        LottoFactory.getInstance();
         List<LottoNumber> lotto = LottoFactory.createLottoNumbers();
         assertThat(lotto.size()).isEqualTo(6);
     }

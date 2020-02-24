@@ -11,7 +11,7 @@ public class Money {
         this.money = money;
     }
 
-    static void validateMoney(int money) {
+    void validateMoney(int money) {
         if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException(LACK_OF_MONEY_MESSAGE);
         }

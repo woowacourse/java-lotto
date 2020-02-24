@@ -20,7 +20,7 @@ public class MoneyTest {
     @DisplayName("금액 1000원 미만 예외처리 테스트")
     @Test
     void purchaseExceptionTest() {
-        assertThatThrownBy(() -> Money.validateMoney(999))
+        assertThatThrownBy(() -> new Money(999))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
