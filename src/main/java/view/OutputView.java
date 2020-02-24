@@ -10,11 +10,16 @@ import domain.Money;
 import domain.Rank;
 
 public class OutputView {
+
+	private static final String DELIMITER = ", ";
+	private static final String PREFIX = "[";
+	private static final String SUFFIX = "]";
+
 	public static void printLottos(LottoGame lottoGame) {
 		List<Lotto> lottos = lottoGame.getLottos();
 		System.out.println(String.format("%d개를 구매했습니다.", lottos.size()));
 		for (Lotto lotto : lottos) {
-			StringJoiner stringJoiner = new StringJoiner(", ", "[", "]");
+			StringJoiner stringJoiner = new StringJoiner(DELIMITER, PREFIX, SUFFIX);
 			lotto.getNumbers()
 				.forEach(lottoNumber -> stringJoiner.add(Integer.toString(lottoNumber.getNumber())));
 			System.out.println(stringJoiner.toString());

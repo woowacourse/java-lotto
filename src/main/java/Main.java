@@ -8,7 +8,7 @@ import view.OutputView;
 public class Main {
 	public static void main(String[] args) {
 		try {
-			Money purchaseMoney = new PurchaseMoney(InputView.inputPurchaseMoney());
+			Money purchaseMoney = PurchaseMoney.create(InputView.inputPurchaseMoney());
 			LottoGame lottoGame = new LottoGame(purchaseMoney);
 			OutputView.printLottos(lottoGame);
 
