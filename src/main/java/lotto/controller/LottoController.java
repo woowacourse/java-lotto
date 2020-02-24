@@ -1,10 +1,12 @@
 package lotto.controller;
 
-import lotto.domain.Accountant;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoRule.LottoBalls;
+import lotto.domain.LottoRule.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.WinningTicket;
 import lotto.exceptions.InvalidLottoNumberException;
 import lotto.exceptions.InvalidLottoTicketException;
 import lotto.exceptions.InvalidMoneyException;
@@ -12,19 +14,22 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
+
     public static void run() {
         Money money = getMoney();
         LottoTickets lottoTickets = getLottoTickets(money);
         LottoTicket winningLotto = getLottoTicket();
         LottoNumber bonusNumber = getBonusNumber(winningLotto);
-        OutputView.prizeStatistics(lottoTickets.matchResult(winningLotto, bonusNumber));
-        OutputView.profitRate(Accountant.calculate(money));
+        WinningTicket winningTicket = new WinningTicket(winningLotto, bonusNumber);
+        LottoResult lottoResult = new LottoResult();
+        OutputView.prizeStatistics(lottoResult.matchResult(winningTicket, lottoTickets));
+        OutputView.profitRate(lottoResult.calculateRate(money));
     }
 
     private static LottoNumber getBonusNumber(LottoTicket winningLotto) {
         try {
             OutputView.inputBonusNumberInstruction();
-            LottoNumber bonusNumber = LottoNumber.find(InputView.getInput());
+            LottoNumber bonusNumber = LottoBalls.find(InputView.getInput());
             winningLotto.validateBonusNumber(bonusNumber);
             return bonusNumber;
         } catch (InvalidLottoNumberException | InvalidLottoTicketException e) {

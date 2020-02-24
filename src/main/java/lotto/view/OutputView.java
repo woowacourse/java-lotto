@@ -13,7 +13,7 @@ public class OutputView {
 
     public static void ticketAmountInstruction(Money money) {
         if (money.change() != 0) {
-            System.out.println("거스름돈 " + money.change() + "원은 돌려드립니다.");
+            System.out.println("거스름돈은 " + money.change() + "원입니다.");
         }
         System.out.println(money.calculateTicketQuantity() + "개를 구매했습니다.");
     }

@@ -11,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.LottoRule.LottoNumber;
 import lotto.exceptions.InvalidLottoTicketException;
 
 class LottoTicketTest {
@@ -57,7 +58,7 @@ class LottoTicketTest {
     @DisplayName("특정 로또 숫자가 포함되어 있지 않은지")
     void notSpecificNum() {
         assertThatThrownBy(() -> {
-            winningTicket.validateBonusNumber(LottoNumber.ONE);
+            winningTicket.validateBonusNumber(new LottoNumber(1));
         }).isInstanceOf(InvalidLottoTicketException.class);
     }
 
@@ -80,6 +81,6 @@ class LottoTicketTest {
     @Test
     @DisplayName("만들어진 로또 티켓 안에 특정 숫자가 포함되어 있으면 true 반환하는지")
     void contains() {
-        assertThat(winningTicket.contains(LottoNumber.SIX)).isTrue();
+        assertThat(winningTicket.contains(new LottoNumber(6))).isTrue();
     }
 }

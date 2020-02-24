@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public enum Rank {
     FIRST(6, 2000000000),
@@ -14,7 +12,6 @@ public enum Rank {
 
     private int matchCount;
     private int prizeAmount;
-    public static Map<Rank, Integer> result = new HashMap<>();
 
     Rank(int matchCount, int prizeAmount) {
         this.matchCount = matchCount;
@@ -36,7 +33,4 @@ public enum Rank {
         return matchCount;
     }
 
-    public static void reset() {
-        result.clear();
-    }
 }
