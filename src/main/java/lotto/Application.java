@@ -2,9 +2,9 @@ package lotto;
 
 import lotto.controller.GameController;
 import lotto.domain.*;
-import lotto.generator.LottoGenerator;
-import lotto.generator.LottoNumberRandomGenerator;
-import lotto.generator.LottoNumberSelectedGenerator;
+import lotto.generator.LottoGenerateManager;
+import lotto.generator.LottoRandomGenerator;
+import lotto.generator.LottoSelectedGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -22,7 +22,7 @@ public class Application {
         PaidPrice paidPrice = new PaidPrice(InputView.getPayment());
         OutputView.printLottoCount(paidPrice);
 
-        Lottos lottos = LottoGenerator.createLottos(paidPrice, new LottoNumberRandomGenerator());
+        Lottos lottos = LottoGenerateManager.createLottos(paidPrice, new LottoRandomGenerator());
         OutputView.printLottosNumbers(lottos);
         return lottos;
     }
@@ -31,7 +31,7 @@ public class Application {
         String winningNumber = InputView.getWinningLottoNumbers();
         String bonusNumber = InputView.getBonusNumber();
         WinningLotto winningLotto =
-                LottoGenerator.createWinningLotto(new LottoNumberSelectedGenerator(winningNumber), bonusNumber);
+                LottoGenerateManager.createWinningLotto(new LottoSelectedGenerator(winningNumber), bonusNumber);
         return winningLotto;
     }
 }

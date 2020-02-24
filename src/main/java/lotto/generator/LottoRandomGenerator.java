@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumberRandomGenerator implements LottoNumberGenerator {
+public class LottoRandomGenerator implements LottoGenerator {
     private static Random random;
     private static List<LottoNumber> totalRandomNumbers;
 
@@ -19,13 +19,13 @@ public class LottoNumberRandomGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public Set<LottoNumber> create() {
+    public Lotto create() {
         Collections.shuffle(totalRandomNumbers);
         Set<LottoNumber> randomNumbers = new TreeSet<>();
         int length = Lotto.LOTTO_NUMBERS_SIZE;
         for (int i = 0; i < length; i++) {
             randomNumbers.add(totalRandomNumbers.get(i));
         }
-        return randomNumbers;
+        return new Lotto(randomNumbers);
     }
 }

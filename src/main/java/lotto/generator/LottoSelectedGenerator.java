@@ -1,21 +1,22 @@
 package lotto.generator;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.view.OutputView;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoNumberSelectedGenerator implements LottoNumberGenerator {
-    private static final String SPLIT_DELIMETER = ",";
+public class LottoSelectedGenerator implements LottoGenerator {
     private Set<LottoNumber> lottoNumbers;
 
-    public LottoNumberSelectedGenerator(String lottoNumbersInput) {
+    public LottoSelectedGenerator(String lottoNumbersInput) {
         String[] splitedLottoNumbers = getSplitedLottoNumbers(lottoNumbersInput);
         lottoNumbers = createLottoNumbers(splitedLottoNumbers);
     }
 
     private String[] getSplitedLottoNumbers(String lottoNumbers) {
-        return lottoNumbers.split(SPLIT_DELIMETER);
+        return lottoNumbers.split(OutputView.SPLIT_DELIMETER);
     }
 
     private Set<LottoNumber> createLottoNumbers(String[] splitedLottoNumbers) {
@@ -25,7 +26,7 @@ public class LottoNumberSelectedGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public Set<LottoNumber> create() {
-        return lottoNumbers;
+    public Lotto create() {
+        return new Lotto(lottoNumbers);
     }
 }
