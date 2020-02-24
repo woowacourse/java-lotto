@@ -41,6 +41,12 @@ public class Lotto {
 		return numbers;
 	}
 
+	public boolean isContains(LottoNumber lottoNumber) {
+		if (numbers.contains(lottoNumber))
+			return true;
+		return false;
+	}
+
 	public Rank compare(Lotto winningLotto, LottoNumber bonusNumber) {
 		int count = (int)this.numbers.stream()
 			.filter(winningLotto.numbers::contains)
