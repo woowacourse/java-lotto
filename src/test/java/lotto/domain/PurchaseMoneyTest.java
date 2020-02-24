@@ -14,7 +14,7 @@ public class PurchaseMoneyTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"1500", "3200", "7500"})
 	@DisplayName("구입 금액이 1000원 단위가 아닌 경우")
-	void 구입_금액_1000_단위_검증(String purchaseMoney) {
+	void moneyUnitTest(String purchaseMoney) {
 		assertThatThrownBy(() -> {
 			new PurchaseMoney(purchaseMoney);
 		}).isInstanceOf(IllegalMoneyUnitException.class)
@@ -23,7 +23,7 @@ public class PurchaseMoneyTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"asd", "문자열", "100a"})
-	void 문자열_포함(String money) {
+	void moneyFormatTest(String money) {
 		assertThatThrownBy(() -> {
 			new PurchaseMoney(money);
 		}).isInstanceOf(NumberFormatException.class)
@@ -32,7 +32,7 @@ public class PurchaseMoneyTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"", " ", "     "})
-	void 공백_테스트(String money) {
+	void blankTest(String money) {
 		assertThatThrownBy(() -> {
 			new PurchaseMoney(money);
 		}).isInstanceOf(IllegalArgumentException.class)
@@ -40,7 +40,7 @@ public class PurchaseMoneyTest {
 	}
 
 	@Test
-	void NULL_테스트() {
+	void nullTest() {
 		assertThatThrownBy(() -> {
 			new PurchaseMoney(null);
 		}).isInstanceOf(NullPointerException.class)
@@ -49,7 +49,7 @@ public class PurchaseMoneyTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"-1000", "101000"})
-	void 구입_금액_범위(String value) {
+	void moneyRangeTest(String value) {
 		assertThatThrownBy(() -> {
 			new PurchaseMoney(value);
 		}).isInstanceOf(IllegalArgumentException.class)
@@ -58,7 +58,7 @@ public class PurchaseMoneyTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {"1000,1", "5000,5", "17000,17"})
-	void 금액_장수_변환(String money, int expected) {
+	void moneyToNumberOfLottoTest(String money, int expected) {
 		assertThat(
 			new PurchaseMoney(money).parseToPiece()
 		).isEqualTo(expected);

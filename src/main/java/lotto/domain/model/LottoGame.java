@@ -8,10 +8,8 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseMoney;
 import lotto.domain.WinningLotto;
-import lotto.domain.result.GameResultDto;
-import lotto.domain.result.Statistic;
-import lotto.exception.InvalidRankException;
-import lotto.exception.LottoMismatchException;
+import lotto.domain.result.GameResult;
+import lotto.domain.result.Rank;
 
 public class LottoGame {
     private final Lottos lottos;
@@ -24,33 +22,15 @@ public class LottoGame {
         this.money = money;
     }
 
-    public List<Statistic> makeStatistics() {
-        Iterator<Lotto> lottoIterator = lottos.iterator();
-        while (lottoIterator.hasNext()) {
-            Lotto lotto = lottoIterator.next();
-            compareToWinningLotto(lotto);
-        }
-        return Arrays.asList(Statistic.values());
-    }
+    public GameResult getResult() {
+        List<Rank> ranks = Arrays.asList(Rank.values());
+        GameResult gameResult = new GameResult(ranks);
 
-    private void compareToWinningLotto(Lotto lotto) {
-        try {
-            Statistic statistic = winningLotto.isWinningLotto(lotto);
-            statistic.count();
-        } catch (LottoMismatchException e) {
-            System.out.println("?");
+        for (Lotto lotto : lottos) {
+            Rank rank = winningLotto.isWinningLotto(lotto);
+            gameResult.count(rank);
         }
-    }
-
-    public double calculateProfit() {
-        double profit = 0;
-        for (Statistic statistic : Statistic.values()) {
-            profit += statistic.getProfit();
-        }
-        return (profit / money.getPurchaseMoney()) * 100;
-    }
-
-    public GameResultDto getResult() {
-        return new GameResultDto(makeStatistics(), calculateProfit());
+        gameResult.calculateProfit(money);
+        return gameResult;
     }
 }
