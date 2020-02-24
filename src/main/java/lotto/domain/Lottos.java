@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,7 +9,7 @@ public class Lottos {
 
 	public Lottos(final List<Lotto> lottos) {
 		validateNullAndEmpty(lottos);
-		this.lottos = lottos;
+		this.lottos = new ArrayList<>(lottos);
 	}
 
 	private void validateNullAndEmpty(List<Lotto> lottos) {
