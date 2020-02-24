@@ -10,7 +10,7 @@ public class GameController {
         List<WinningInfo> results = ResultCalculator.computeResults(lottos, winningLotto);
         long totalEarning = ResultCalculator.computeTotalEarning(results);
         long earningRate = ResultCalculator.computeEarningRate(totalEarning, results.size());
-        Map<WinningInfo, Integer> matchCount = ResultCalculator.computeMatchCount(results);
+        Map<WinningInfo, Integer> matchCount = ResultCalculator.computeTotalMatchCount(results);
         return new ResultsDTO(matchCount, earningRate);
     }
 }
