@@ -4,33 +4,30 @@ import java.util.Arrays;
 
 public enum WinningValue {
 
-    ZERO(0, 0, ""),
-    FIFTH(3, 5_000, "3개 일치"),
-    FORTH(4, 50_000, "4개 일치"),
-    THIRD(5, 1_500_000, "5개 일치"),
-    SECOND(5, 30_000_000, "5개 일치, 보너스번호 일치"),
-    FIRST(6, 2_000_000_000, "6개 일치");
+    ZERO(0, 0, " ", false),
+    FIFTH(3, 5_000, "3개 일치",false),
+    FORTH(4, 50_000, "4개 일치",false),
+    THIRD(5, 1_500_000, "5개 일치",false),
+    SECOND(5, 30_000_000, "5개 일치, 보너스번호 일치",true),
+    FIRST(6, 2_000_000_000, "6개 일치",false);
 
     private final int hitCount;
     private final int reward;
     private final String message;
+    private final boolean isBonus;
 
-    WinningValue(int hitCount, int reward, String message) {
+    WinningValue(int hitCount, int reward, String message, boolean isBonus) {
         this.message = message;
+        this.isBonus = isBonus;
         this.hitCount = hitCount;
         this.reward = reward;
     }
 
     public static WinningValue valueOf(int hitCount, boolean hitBonus) {
-        if (isSecond(hitCount, hitBonus)) return SECOND;
         return Arrays.stream(WinningValue.values())
-                .filter(winningValue -> winningValue.hitCount == hitCount)
+                .filter(winningValue -> winningValue.hitCount == hitCount && winningValue.isBonus == hitBonus)
                 .findFirst()
                 .orElse(ZERO);
-    }
-
-    private static boolean isSecond(int hitCount, boolean hitBonus) {
-        return hitCount == SECOND.hitCount && hitBonus;
     }
 
     public int getReward() {
