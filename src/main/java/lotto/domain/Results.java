@@ -58,7 +58,9 @@ public class Results {
     public Map<WinningInfo, Long> getSummary() {
         calculateResults();
         Map<WinningInfo, Long> summary = results.stream()
-                .collect(Collectors.groupingBy(Result::getWinningInfo, Collectors.counting()));
+                .collect(Collectors
+                        .groupingBy(Result::getWinningInfo, Collectors
+                                .counting()));
         summary.remove(WinningInfo.FAIL);
         return summary;
     }

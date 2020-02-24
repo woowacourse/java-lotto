@@ -14,7 +14,8 @@ public class Result {
         boolean hasBonus = winningLotto.isBonusMatched(userLottoTicket);
         long winningCount = winningLotto.countMatched(winningLotto, userLottoTicket);
 
-        winningInfo = WinningInfo.valueOf(Math.toIntExact(winningCount), hasBonus);
+        winningInfo = WinningInfo.valueOf(Math
+                .toIntExact(winningCount), hasBonus);
     }
 
     public WinningInfo getWinningInfo() {

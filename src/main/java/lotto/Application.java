@@ -25,7 +25,8 @@ public class Application {
         try {
             return new Payment(InputView.getPayment());
         } catch (IllegalArgumentException exception) {
-            OutputView.printErrorMessage(exception.getMessage());
+            OutputView.printErrorMessage(exception
+                    .getMessage());
             return generatePayment();
         }
     }
@@ -33,9 +34,12 @@ public class Application {
     private static WinningLottoTicket generateWinningLotto() {
         NumberGenerator numberGenerator = new UserInputNumberGenerator();
         try {
-            return new WinningLottoTicket(numberGenerator.generateNumbers(InputView.getWinningLottoNumber()), new LottoNumber(InputView.getBonusNumber()));
+            return new WinningLottoTicket(numberGenerator.generateNumbers(InputView
+                    .getWinningLottoNumber()), new LottoNumber(InputView
+                    .getBonusNumber()));
         } catch (IllegalArgumentException exception) {
-            OutputView.printErrorMessage(exception.getMessage());
+            OutputView.printErrorMessage(exception
+                    .getMessage());
             return generateWinningLotto();
         }
     }
