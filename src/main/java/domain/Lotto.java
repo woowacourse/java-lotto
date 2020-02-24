@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import exception.LottoInputException;
 
 public class Lotto {
-	private static final int FIVE = 5;
+	private static final int LOTTO_NUMBER_FIVE_MATCHED = 5;
 	private static final String DELIMITER = ", ";
 	private static final int LOTTO_LENGTH = 6;
 
@@ -50,7 +50,7 @@ public class Lotto {
 			.filter(winningLotto.numbers::contains)
 			.count();
 
-		if (count == FIVE && this.numbers.contains(bonusNumber)) {
+		if (count == LOTTO_NUMBER_FIVE_MATCHED && this.numbers.contains(bonusNumber)) {
 			return Rank.SECOND;
 		}
 
