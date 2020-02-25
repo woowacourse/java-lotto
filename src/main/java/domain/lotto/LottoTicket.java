@@ -22,10 +22,6 @@ public class LottoTicket {
         }
     }
 
-    public boolean has(LottoNumber bonusNumber) {
-        return lottoTicket.contains(bonusNumber);
-    }
-
     public int countMatches(LottoTicket targetTicket) {
         return (int) lottoTicket.stream()
                 .filter(targetTicket::contains)
