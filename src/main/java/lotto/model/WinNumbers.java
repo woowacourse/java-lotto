@@ -21,11 +21,10 @@ public class WinNumbers {
     public WinNumbers(String winNumber, String bonusBall) {
         List<LottoNumber> winNumbers = makeWinNumbers(splitInput(winNumber));
         validateLottoNumbersLength(winNumbers);
+        this.winNumbers = new Ticket(winNumbers);
 
         int bonusBallNumber = validateNumberFormat(bonusBall);
         validateContainsWinNumber(bonusBallNumber);
-
-        this.winNumbers = new Ticket(winNumbers);
         this.bonusBallNumber = new LottoNumber(bonusBallNumber);
     }
 
