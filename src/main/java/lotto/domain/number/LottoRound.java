@@ -33,13 +33,14 @@ public class LottoRound {
                 .anyMatch(containsLottoNumber -> containsLottoNumber.equals(lottoNumber));
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableSet(lottoNumbers);
-    }
-
     public int calculateCorrectNumberCount(LottoRound lottoRound) {
         return (int) this.lottoNumbers.stream()
                 .filter(lottoRound::has)
                 .count();
     }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
+    }
+
 }

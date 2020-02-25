@@ -12,7 +12,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
-
     @Test
     void 로또게임생성() {
         Money money = new Money(3000);

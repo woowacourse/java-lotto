@@ -11,7 +11,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoneyTest {
-
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void 생성자테스트() {

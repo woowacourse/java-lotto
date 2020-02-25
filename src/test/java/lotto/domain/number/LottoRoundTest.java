@@ -51,9 +51,8 @@ public class LottoRoundTest {
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void 생성자에_null이_들어온_경우() {
-        Assertions.assertThatThrownBy(() -> {
-            new LottoRound(null);
-        }).isInstanceOf(NullPointerException.class);
+        Assertions.assertThatThrownBy(() -> new LottoRound(null))
+                .isInstanceOf(NullPointerException.class);
     }
 
     @Test

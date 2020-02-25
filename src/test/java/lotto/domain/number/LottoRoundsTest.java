@@ -11,7 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoRoundsTest {
-
     @Test
     void 생성자에_Null_입력() {
         assertThatThrownBy(() -> {
