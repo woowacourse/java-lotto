@@ -27,6 +27,10 @@ public class Lottos {
 		}
 	}
 
+	public int getAmountOfLottos() {
+		return this.lottos.size();
+	}
+
 	public List<Lotto> getLottos() {
 		return this.lottos;
 	}

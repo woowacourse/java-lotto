@@ -27,8 +27,4 @@ public class Money {
 	public int getMoney() {
 		return this.money;
 	}
-
-	public int calculateAmountOfLottos() {
-		return this.money / LOTTO_PRICE;
-	}
 }

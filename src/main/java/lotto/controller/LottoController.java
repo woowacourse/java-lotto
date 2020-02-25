@@ -21,10 +21,8 @@ import lotto.view.OutputView;
 public class LottoController {
 	public static void run() {
 		Money money = getMoneyForLotto();
-		int amountOfLottos = money.calculateAmountOfLottos();
-
 		Lottos lottos = LottosFactory.createLottosAuto(money);
-		OutputView.printPurchasedLottos(amountOfLottos, lottos);
+        OutputView.printPurchasedLottos(lottos.getAmountOfLottos(), lottos);
 
 		WinningInformation winningInformation = getWinningInformation();
 
