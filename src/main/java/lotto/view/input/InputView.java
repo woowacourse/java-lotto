@@ -1,8 +1,10 @@
 package lotto.view.input;
 
+import lotto.dto.request.WinningLottoDto;
 import lotto.parser.GameParser;
 
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
 
@@ -21,13 +23,21 @@ public class InputView {
         return gameParser.parseInputToInt(input);
     }
 
-    public static String inputWinningLotto() {
-        System.out.println("지난주 당첨 번호를 입력하세요");
-        return scanner.nextLine();
+    public static WinningLottoDto inputWinningLotto() {
+        Set<Integer> numbers = inputWinningLottoNumber();
+        int number = inputBonusNumber();
+        return new WinningLottoDto(numbers, number);
     }
 
-    public static String inputBonusNumber() {
+    private static Set<Integer> inputWinningLottoNumber() {
+        System.out.println("지난주 당첨 번호를 입력하세요");
+        String input = scanner.nextLine();
+        return gameParser.parseInputToNumbers(input);
+    }
+
+    private static int inputBonusNumber() {
         System.out.println("보너스 번호를 입력해주세요");
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        return gameParser.parseInputToInt(input);
     }
 }

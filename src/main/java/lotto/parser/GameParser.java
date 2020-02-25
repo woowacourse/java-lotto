@@ -1,8 +1,5 @@
 package lotto.parser;
 
-import lotto.domain.lotto.LottoTicketFactory;
-import lotto.domain.lotto.WinningLotto;
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,13 +8,7 @@ public class GameParser {
 
     private static final String DELIMITER = ",";
 
-    public WinningLotto createWinningLotto(String winningLottoInput, String bonusNumberInput) {
-        Set<Integer> numbers = parseInputToNumbers(winningLottoInput);
-        Integer bonusNumber = parseInputToInt(bonusNumberInput);
-        return LottoTicketFactory.publishWinningLotto(numbers, bonusNumber);
-    }
-
-    private Set<Integer> parseInputToNumbers(String winningLottoInput) {
+    public Set<Integer> parseInputToNumbers(String winningLottoInput) {
         return Arrays.stream(winningLottoInput.split(DELIMITER))
                 .map(String::trim)
                 .map(this::parseInputToInt)

@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.count.Count;
+import lotto.dto.request.WinningLottoDto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,9 +60,9 @@ public class LottoTicketFactory {
         return LOTTO_NUMBER_MATCHER.get(number);
     }
 
-    public static WinningLotto publishWinningLotto(Set<Integer> numbers, Integer bonusNumber) {
-        LottoTicket lottoTicket = publishLottoTicketFrom(numbers);
-        LottoNumber lottoNumber = publishLottoNumberFrom(bonusNumber);
+    public static WinningLotto publishWinningLotto(WinningLottoDto winningLottoDto) {
+        LottoTicket lottoTicket = publishLottoTicketFrom(winningLottoDto.getNumbers());
+        LottoNumber lottoNumber = publishLottoNumberFrom(winningLottoDto.getNumber());
         return new WinningLotto(lottoTicket, lottoNumber);
     }
 }
