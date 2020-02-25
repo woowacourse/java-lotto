@@ -2,7 +2,6 @@ package domain;
 
 import domain.numberscontainer.SixLottoNumbersDTO;
 import domain.numberscontainer.Ticket;
-import strategy.RandomTicketFactory;
 
 import java.util.ArrayList;
 import java.util.List;

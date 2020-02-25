@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoApplication {
-
     public static void main(String[] args) {
-        Money money = enterMoney();
+        Money money = new Money(enterMoney());
         List<Ticket> tickets = LottoStore.generateTickets(money.getNumberOfTickets());
-
         OutputView.printNumberOfTickets(tickets.size());
         OutputView.printTickets(tickets);
 
@@ -24,7 +22,7 @@ public class LottoApplication {
         OutputView.printProfit(LottoProfit.ofProfit(result, money));
     }
 
-    private static Money enterMoney() {
+    private static String enterMoney() {
         try {
             return InputView.enterMoney();
         } catch (Exception e) {
@@ -35,8 +33,8 @@ public class LottoApplication {
 
     private static WinningNumbers enterWinningNumbers() {
         try {
-            SixLottoNumbersDTO sixLottoNumbersDTO = InputView.enterLastWeekWinningNumbers();
-            BonusNumberDTO bonusNumberDTO = InputView.enterBonusNumber();
+            SixLottoNumbersDTO sixLottoNumbersDTO = new SixLottoNumbersDTO(InputView.enterLastWeekWinningNumbers());
+            BonusNumberDTO bonusNumberDTO = new BonusNumberDTO(InputView.enterBonusNumber());
             return new WinningNumbers(sixLottoNumbersDTO, bonusNumberDTO);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

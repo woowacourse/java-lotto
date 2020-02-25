@@ -29,11 +29,6 @@ public class TicketTest {
     }
 
     private SixLottoNumbersDTO createLottoNumberDto(int number1, int number2, int number3, int number4, int number5, int number6) {
-        return new SixLottoNumbersDTO(new HashSet<>(Arrays.asList(LottoNumber.getLottoNumber(number1),
-                LottoNumber.getLottoNumber(number2),
-                LottoNumber.getLottoNumber(number3),
-                LottoNumber.getLottoNumber(number4),
-                LottoNumber.getLottoNumber(number5),
-                LottoNumber.getLottoNumber(number6))));
+        return new SixLottoNumbersDTO(String.format("%d, %d, %d, %d, %d, %d", number1, number2, number3, number4, number5, number6));
     }
 }

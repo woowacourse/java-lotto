@@ -1,26 +1,29 @@
 package domain;
 
 public class Money {
+    private static final String NUMBER_REGEX = "^[+-]?[0-9]+$";
+
     private final int money;
 
-    public Money(int money) {
-        validateMoney(money);
+    public Money(String moneyInput) {
+        int money = parseInt(moneyInput);
+        validateMoneyUnit(money);
         this.money = money;
     }
 
-    private void validateMoney(int money) {
-        validateMoneyRange(money);
-        validateMoneyUnit(money);
+    private static int parseInt(String input) {
+        validateNumber(input);
+        return Integer.parseInt(input);
+    }
+
+    private static void validateNumber(String input) {
+        if (!input.matches(NUMBER_REGEX)) {
+            throw new NumberFormatException("0원 이상 숫자를 입력해주세요.");
+        }
     }
 
     public int getNumberOfTickets() {
         return this.money / 1000;
-    }
-
-    private void validateMoneyRange(int money) {
-        if (money < 0 || money > 50000) {
-            throw new IllegalArgumentException("0원 이상, 5만원 이하 금액만 구매 가능합니다.");
-        }
     }
 
     private void validateMoneyUnit(int money) {

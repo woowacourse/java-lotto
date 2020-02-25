@@ -3,26 +3,25 @@ package domain;
 import java.util.Map;
 
 public class LottoProfit {
-    public static final int TO_PERCENTAGE = 100;
+    private static final int TO_PERCENTAGE = 100;
 
-    private int profit;
+    private long profit;
 
-    private LottoProfit(int profit) {
+    private LottoProfit(long profit) {
         this.profit = profit;
     }
 
     public static LottoProfit ofProfit(Map<LottoResult, Integer> lottoResults, Money money) {
-        int totalPrize = 0;
+        long totalPrize = 0;
         for (LottoResult result : lottoResults.keySet()) {
-            int key = result.getPrize();
-            int value = (int) (long) lottoResults.get(result);
-            totalPrize += key * value;
+            long prize = result.getPrize();
+            long matchCount = lottoResults.get(result);
+            totalPrize += prize * matchCount;
         }
-
         return new LottoProfit(totalPrize / money.getMoney() * TO_PERCENTAGE);
     }
 
-    public int getValue() {
+    public long getValue() {
         return profit;
     }
 }

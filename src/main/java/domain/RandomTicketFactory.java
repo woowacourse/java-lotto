@@ -1,4 +1,4 @@
-package strategy;
+package domain;
 
 import domain.numberscontainer.LottoNumber;
 import domain.numberscontainer.SixLottoNumbersDTO;
@@ -11,14 +11,13 @@ public class RandomTicketFactory {
     private static final int SIXTH_INDEX = 6;
 
     public static Ticket createTicket() {
-        Set<LottoNumber> sixNumbers = new HashSet<>(getShuffledList().subList(FIRST_INDEX, SIXTH_INDEX));
-        return new Ticket(new SixLottoNumbersDTO(sixNumbers));
+        return new Ticket(new SixLottoNumbersDTO(getShuffledList()));
     }
 
-    private static List<LottoNumber> getShuffledList() {
+    private static Set<LottoNumber> getShuffledList() {
         List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.values());
         Collections.shuffle(lottoNumbers);
 
-        return lottoNumbers;
+        return new HashSet<>(lottoNumbers.subList(FIRST_INDEX, SIXTH_INDEX));
     }
 }

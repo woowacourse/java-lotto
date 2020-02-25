@@ -3,7 +3,6 @@ package domain;
 import domain.numberscontainer.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import strategy.TicketFactory;
 
 import java.util.*;
 
@@ -13,11 +12,11 @@ public class LottoResultMachineTest {
     @Test
     @DisplayName("당첨 결과 계산")
     void test1() {
-        Money money = new Money(10000);
+        Money money = new Money("10000");
         List<Ticket> tickets = LottoStore.generateTickets(money.getNumberOfTickets(), createFixedNumbersList());
 
         SixLottoNumbersDTO sixNumbers = createFixedNumbers(3, 4, 5, 6, 7, 8);
-        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, new BonusNumberDTO(LottoNumber.NINE));
+        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, new BonusNumberDTO("9"));
         Map<LottoResult, Integer> lottoResults = LottoResultMachine.confirmResult(tickets, winningNumbers);
 
         assertThat(lottoResults.get(LottoResult.FIRST)).isEqualTo(1);
@@ -31,11 +30,11 @@ public class LottoResultMachineTest {
     @Test
     @DisplayName("수익률 계산")
     void test2() {
-        Money money = new Money(10000);
+        Money money = new Money("10000");
         List<Ticket> tickets = LottoStore.generateTickets(money.getNumberOfTickets(), createFixedNumbersList());
 
         SixLottoNumbersDTO sixNumbers = createFixedNumbers(3, 4, 5, 6, 7, 8);
-        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, new BonusNumberDTO(LottoNumber.NINE));
+        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, new BonusNumberDTO("9"));
         Map<LottoResult, Integer> lottoResults = LottoResultMachine.confirmResult(tickets, winningNumbers);
         LottoProfit profit = LottoProfit.ofProfit(lottoResults, money);
         assertThat(profit.getValue()).isEqualTo(20631000);
@@ -55,11 +54,6 @@ public class LottoResultMachineTest {
     }
 
     private SixLottoNumbersDTO createFixedNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
-        return new SixLottoNumbersDTO(new HashSet<>(Arrays.asList(LottoNumber.getLottoNumber(number1),
-                LottoNumber.getLottoNumber(number2),
-                LottoNumber.getLottoNumber(number3),
-                LottoNumber.getLottoNumber(number4),
-                LottoNumber.getLottoNumber(number5),
-                LottoNumber.getLottoNumber(number6))));
+        return new SixLottoNumbersDTO(String.format("%d, %d, %d, %d, %d, %d", number1, number2, number3, number4, number5, number6));
     }
 }

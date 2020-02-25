@@ -21,8 +21,8 @@ public class OutputView {
     public static void printTickets(List<Ticket> tickets) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Ticket ticket : tickets) {
-            stringBuilder.append(ticket.toString());
-            stringBuilder.append("\n");
+            System.out.println(ticket.toString());
+            System.lineSeparator();
         }
         System.out.println(stringBuilder.toString());
     }
