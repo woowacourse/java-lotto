@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
-    private static final int MAX = 45;
-    private static final int MIN = 1;
     private int value;
+    static final int MAX = 45;
+    static final int MIN = 1;
 
     public LottoNumber(int value) {
         validateValue(value);

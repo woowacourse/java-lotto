@@ -38,6 +38,10 @@ public class Money {
         return value;
     }
 
+    int toEarningRate(Money purchaseAmount) {
+        return (int)(((double)value / purchaseAmount.value) * PERCENT);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -53,7 +57,4 @@ public class Money {
         return Objects.hash(value);
     }
 
-    int toEarningRate(Money purchaseAmount) {
-        return (int)(((double)value / purchaseAmount.value) * PERCENT);
-    }
 }

@@ -12,7 +12,6 @@ public class InputView {
 
     public static Money inputPurchaseAmount() {
         System.out.println("구입금액을 입력해주세요");
-
         return new Money(StringUtils.parseInt(scanner.nextLine()));
     }
 
