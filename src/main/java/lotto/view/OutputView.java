@@ -12,7 +12,7 @@ public class OutputView {
 	}
 
 	public static void printLottoCount(int lottoCount) {
-		System.out.println(lottoCount + "개를 구매했습니다.");
+		System.out.println(String.format("%,d개를 구매했습니다.", lottoCount));
 	}
 
 	public static void printLottos(LottosDto lottosDto) {
@@ -32,11 +32,10 @@ public class OutputView {
 
 	public static void printLottoResult(LottoResultDto lottoResultDto) {
 		for (WinningPrize winningPrize : WinningPrize.values()) {
-			System.out.println(winningPrize.getPrizeDescription()
-				+ "("
-				+ winningPrize.getPrize() + "원): "
-				+ lottoResultDto.getWinnerCountMapper().get(winningPrize) + "개");
+			System.out.println(
+				String.format("%s(%,d원): %d개", winningPrize.getPrizeDescription(), winningPrize.getPrize(),
+					lottoResultDto.getWinnerCountMapper().get(winningPrize)));
 		}
-		System.out.println("총 수익률: " + lottoResultDto.getEarningRate() + "%");
+		System.out.println(String.format("총 수익률: %,d%%", lottoResultDto.getEarningRate()));
 	}
 }
