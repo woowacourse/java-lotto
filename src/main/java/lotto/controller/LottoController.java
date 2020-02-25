@@ -16,6 +16,8 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
+	private static LottoMachine lottoMachine = LottoMachine.getInstance();
+
 	public static void run() {
 		Lottos lottos = buyLottos();
 		OutputView.printLottos(LottosDto.from(lottos));
@@ -25,9 +27,7 @@ public class LottoController {
 
 	private static Lottos buyLottos() {
 		try {
-			LottoMachine lottoMachine = LottoMachine.getInstance();
 			LottoCount lottoCount = new LottoCount(readMoney());
-
 			OutputView.printLottoCount(LottoCountDto.from(lottoCount).getLottoCount());
 			return new Lottos(lottoMachine.makeRandomLottos(lottoCount.getLottoCount()));
 		} catch (IllegalArgumentException e) {
