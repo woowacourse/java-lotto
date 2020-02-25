@@ -2,22 +2,15 @@ package domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoResult {
-    private final Map<LottoRank, Integer> result = new HashMap<>();
+    private final Map<LottoRank, Integer> rankCount;
     public static final int INITIAL_PROFIT = 0;
     public static final int LOTTO_PRICE = 1000;
 
-    public LottoResult() {
-        for (LottoRank rank : LottoRank.values()) {
-            result.put(rank, 0);
-        }
-    }
-
-    public void addWinningRankCount(LottoRank rank) {
-        if (rank != null){
-            result.put(rank, result.get(rank) + 1);
-        }
+    public LottoResult(Map<LottoRank, Integer> rankCount) {
+        this.rankCount = rankCount;
     }
 
     public int calculateProfitRatio(int lottoCount) {
@@ -26,17 +19,26 @@ public class LottoResult {
 
     private int calculateProfit() {
         int profit = INITIAL_PROFIT;
-        for (LottoRank rank : result.keySet()) {
-            profit += rank.getWinningMoney() * result.get(rank);
+        for (LottoRank rank : rankCount.keySet()) {
+            profit += rank.getWinningMoney() * rankCount.get(rank);
         }
         return profit;
     }
 
-    public int getSize() {
-        return result.size();
+    public int getCount(LottoRank rank) {
+        return rankCount.get(rank);
     }
 
-    public int getCount(LottoRank rank) {
-        return result.get(rank);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(rankCount, that.rankCount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rankCount);
     }
 }

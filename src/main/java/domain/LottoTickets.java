@@ -1,7 +1,9 @@
 package domain;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoTickets {
     private final List<Lotto> lottoTickets;
@@ -11,13 +13,19 @@ public class LottoTickets {
     }
 
     public LottoResult countWinningLotto(WinningNumber winningNumber) {
-        LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottoTickets){
-            LottoRank rank = LottoRank.findRank(winningNumber.countWinningMatch(lotto),
-                                            winningNumber.isBonusMatch(lotto));
-            lottoResult.addWinningRankCount(rank);
+        Map<LottoRank, Integer> rankCount = new HashMap<>();
+        initRankCount(rankCount);
+        for (Lotto lotto : lottoTickets) {
+            LottoRank.countRank(winningNumber.countWinningMatch(lotto), winningNumber.isBonusMatch(lotto), rankCount);
         }
+        LottoResult lottoResult = new LottoResult(rankCount);
         return lottoResult;
+    }
+
+    private void initRankCount(Map<LottoRank, Integer> rankCount) {
+        for (LottoRank rank : LottoRank.values()) {
+            rankCount.put(rank, 0);
+        }
     }
 
     public int getTicketsSize() {

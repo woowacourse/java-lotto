@@ -67,24 +67,4 @@ public class WinningNumberTest {
                 .hasMessage("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
 
     }
-
-    @Test
-    void 당첨_번호_개수에_따른_등수_결과_반환() {
-        String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
-        String bonusNumber = "7";
-        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
-
-        Set<LottoNumber> myLotto = new HashSet<>();
-        myLotto.add(LottoNumber.valueOf(1));
-        myLotto.add(LottoNumber.valueOf(20));
-        myLotto.add(LottoNumber.valueOf(30));
-        myLotto.add(LottoNumber.valueOf(4));
-        myLotto.add(LottoNumber.valueOf(5));
-        myLotto.add(LottoNumber.valueOf(7));
-        Lotto myLottoNumbers = new Lotto(myLotto);
-
-        LottoRank result = LottoRank.findRank(winningNumber.countWinningMatch(myLottoNumbers),
-                                            winningNumber.isBonusMatch(myLottoNumbers));
-        assertThat(result).isEqualTo(LottoRank.FIFTH);
-    }
 }

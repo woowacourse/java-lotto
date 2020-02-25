@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public enum LottoRank {
     FIRST(6, BonusNeed.DONT_CARE, 2_000_000_000, "6개 일치(2000000000원) - "),
@@ -21,12 +22,15 @@ public enum LottoRank {
         this.resultMessage = resultMessage;
     }
 
-    public static LottoRank findRank(int winningBalls, boolean isBonusMatch) {
-        return Arrays.stream(LottoRank.values())
-                .filter(o -> o.winningMatchCount == winningBalls)
-                .filter(o -> o.bonusNeed.isNeedBonus(isBonusMatch))
-                .findFirst()
-                .orElse(null);
+    public static void countRank(int winningBalls, boolean isBonusMatch, Map<LottoRank, Integer> rankCount) {
+        LottoRank rank = Arrays.stream(LottoRank.values())
+                            .filter(o -> o.winningMatchCount == winningBalls)
+                            .filter(o -> o.bonusNeed.isNeedBonus(isBonusMatch))
+                            .findFirst()
+                            .orElse(null);
+        if (rank != null) {
+            rankCount.put(rank, rankCount.get(rank) + 1);
+        }
     }
 
     public String getResultMessage(){
