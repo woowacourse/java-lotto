@@ -45,8 +45,4 @@ public enum RankType {
     public String getPrintStr() {
         return printStr;
     }
-
-    public int getNumber() {
-        return number;
-    }
 }

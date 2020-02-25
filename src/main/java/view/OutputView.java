@@ -22,9 +22,9 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        winningCountMap.forEach((key, value) -> {
-            System.out.println(key.getPrintStr() + String.format("%d", value) + "개");
-        });
+        for(RankType rankType : RankType.values()) {
+            System.out.println(rankType.getPrintStr() + String.format("%d", winningCountMap.get(rankType)) + "개");
+        }
         System.out.println("총 수익률은 " + Money.getProfit(winningCountMap, money) + "%입니다.");
     }
 }

@@ -15,7 +15,7 @@ public class WinningLottoTicket {
         validateBlank(inputWinningTicket);
         validateBlank(inputBonusBall);
 
-        List<Integer> winningTicket = createWinningTicket(inputWinningTicket);
+        List<LottoNumber> winningTicket = createWinningTicket(inputWinningTicket);
         validateDuplicate(winningTicket, inputBonusBall);
 
         this.winningTicket = new LottoTicket(winningTicket);
@@ -40,18 +40,18 @@ public class WinningLottoTicket {
         }
     }
 
-    private void validateDuplicate(List<Integer> winningNumber, String inputBonusBall) {
+    private void validateDuplicate(List<LottoNumber> winningNumber, String inputBonusBall) {
         int parseNumber = validateNumber(inputBonusBall);
-        if (winningNumber.contains(parseNumber)) {
+        if (winningNumber.contains(LottoNumbersGenerator.getOriginLottoNumber(parseNumber))) {
             throw new IllegalArgumentException("중복된 보너스 숫자를 입력하였습니다.");
         }
     }
 
-    private List<Integer> createWinningTicket(String input) {
-        List<Integer> winningTicket = new ArrayList<>();
+    private List<LottoNumber> createWinningTicket(String input) {
+        List<LottoNumber> winningTicket = new ArrayList<>();
         for (String number : splitInputNumber(input)) {
             validateBlank(number);
-            winningTicket.add(validateNumber(number));
+            winningTicket.add(LottoNumbersGenerator.getOriginLottoNumber(validateNumber(number)));
         }
         return winningTicket;
     }

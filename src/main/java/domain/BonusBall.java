@@ -7,16 +7,16 @@ public class BonusBall {
     private static final int MIN_LOTTO_NUMBER_RANGE = 1;
     private static final int MAX_LOTTO_NUMBER_RANGE = 45;
 
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
     public BonusBall(String input) {
         validateNullOrBlank(input);
         int parseNumber = validateParseInteger(input);
         validateBonusNumberRange(parseNumber);
-        this.bonusNumber = parseNumber;
+        this.bonusNumber = new LottoNumber(parseNumber);
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 
