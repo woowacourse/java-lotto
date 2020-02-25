@@ -12,7 +12,6 @@ import exception.LottoLengthException;
 import exception.LottoNumberDuplicateException;
 
 public class Lotto {
-	private static final int LOTTO_NUMBER_FIVE_MATCHED = 5;
 	private static final String DELIMITER = ", ";
 	private static final int LOTTO_LENGTH = 6;
 
@@ -58,10 +57,9 @@ public class Lotto {
 			.filter(winningLotto.numbers::contains)
 			.count();
 
-		if (count == LOTTO_NUMBER_FIVE_MATCHED && this.numbers.contains(bonusNumber)) {
-			return Rank.SECOND;
-		}
+		boolean bonusNumberMatch = numbers.stream()
+			.anyMatch(lottoNumber -> lottoNumber == bonusNumber);
 
-		return Rank.of(count);
+		return Rank.of(count, bonusNumberMatch);
 	}
 }

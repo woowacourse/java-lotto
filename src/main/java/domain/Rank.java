@@ -10,6 +10,7 @@ public enum Rank {
 	SECOND(5, new Money(30_000_000)),
 	FIRST(6, new Money(2_000_000_000));
 
+	private static final int FIVE_MATCHED = 5;
 	private int matchedCount;
 	private Money winningMoney;
 
@@ -18,7 +19,11 @@ public enum Rank {
 		this.winningMoney = winningMoney;
 	}
 
-	public static Rank of(int count) {
+	public static Rank of(int count, boolean bonusNumberMatch) {
+		if (count == FIVE_MATCHED && bonusNumberMatch) {
+			return Rank.SECOND;
+		}
+
 		return Arrays.stream(values())
 			.filter(rank -> rank.matchedCount == count)
 			.findFirst()
