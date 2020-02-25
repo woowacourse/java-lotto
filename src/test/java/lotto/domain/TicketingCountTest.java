@@ -15,27 +15,21 @@ public class TicketingCountTest {
         Assertions.assertThatCode(() ->new TicketingCount(input)).doesNotThrowAnyException();
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"-1", "가", " ", ""})
     @DisplayName("TicketingCount 객체가 제대로 생성이 안될 경우")
-    void throw_construct_ticket_count() {
-        String input = "-1";
+    void throw_construct_ticket_count(String input) {
+
         Assertions.assertThatThrownBy(() -> new TicketingCount(input));
     }
 
-//    @Test
-//    @DisplayName("수동 로또 발급 개수를 정상적으로 받은 경우")
-//    void manual_ticketing_count() {
-//        TicketingCount ticketingCount = new TicketingCount(10);
-//
-//        Assertions.assertThatCode(() ->ticketingCount.getManualTicketCount(input)).doesNotThrowAnyException();
-//    }
-//
-//    @ParameterizedTest
-//    @ValueSource(strings = {"-1", "가", " ", ""})
-//    @DisplayName("수동 로또 발급 개수를 비정상적으로 받은 경우")
-//    void throw_manual_ticketing_count(String input) {
-//        TicketingCount ticketingCount = new TicketingCount(10);
-//
-//        Assertions.assertThatThrownBy(() -> ticketingCount.getManualTicketCount(input));
-//    }
+    @Test
+    @DisplayName("수동 로또 발급 개수와 전체 카운를 빼는 기능")
+    void manual_ticketing_count() {
+        TicketingCount ticketingCount = new TicketingCount("10");
+        TicketingCount input = new TicketingCount("5");
+        ticketingCount.calculateCount(input);
+
+        Assertions.assertThat(ticketingCount.getTicketingCount()).isEqualTo(5);
+    }
 }

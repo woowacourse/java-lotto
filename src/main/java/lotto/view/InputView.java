@@ -46,7 +46,7 @@ public class InputView {
 
     public static List<LottoBall> InputManualLottoTicket(){
         try{
-            OutputView.printManualLottoTicketingMessage();
+            OutputView.printManualLottoTicketing();
             LottoTicket manualLottoTicket = generateLottoTicket();
             return manualLottoTicket.getLottoTicket();
         }catch(RuntimeException e){

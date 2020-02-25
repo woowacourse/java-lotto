@@ -11,6 +11,10 @@ public class TicketingCount {
     }
 
     public int getTicketingCount() {
-        return ticketingCount;
+        return this.ticketingCount;
+    }
+
+    public int calculateCount(TicketingCount manualTicketCount) {
+        return this.ticketingCount -= manualTicketCount.getTicketingCount();
     }
 }
