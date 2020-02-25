@@ -3,7 +3,9 @@ package domain.lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class LottoNumbersTest {
     @Test

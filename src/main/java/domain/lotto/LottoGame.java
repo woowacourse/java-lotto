@@ -1,10 +1,10 @@
 package domain.lotto;
 
 import domain.RepeatCount;
-import domain.lotto.generator.NumberGenerator;
 import domain.lotto.lottoresult.LottoResult;
 import domain.lotto.lottoresult.LottoWinner;
 import domain.lotto.lottoresult.ResultCount;
+import generator.NumberGenerator;
 
 import java.util.Arrays;
 import java.util.List;

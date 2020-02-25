@@ -1,6 +1,6 @@
 package domain.lotto;
 
-import domain.lotto.generator.NumberGenerator;
+import generator.NumberGenerator;
 
 import java.util.List;
 import java.util.TreeSet;
@@ -12,7 +12,7 @@ public class LottoNumbersFactory {
     }
 
     public static LottoNumbers createLottoNumbers(NumberGenerator numberGenerator) {
-        return new LottoNumbers(numberGenerator.create());
+        return createLottoNumbers(numberGenerator.create());
     }
 
     public static LottoNumbers createLottoNumbers(List<Integer> ints) {

@@ -3,10 +3,10 @@ package controller;
 import domain.Money;
 import domain.RepeatCount;
 import domain.lotto.*;
-import domain.lotto.generator.RandomNumberGenerator;
-import domain.lotto.generator.UserNumberGenerator;
 import domain.lotto.lottoresult.LottoResult;
 import domain.lotto.lottoresult.LottoWinner;
+import generator.RandomNumberGenerator;
+import generator.UserNumberGenerator;
 import view.InputView;
 import view.OutputView;
 

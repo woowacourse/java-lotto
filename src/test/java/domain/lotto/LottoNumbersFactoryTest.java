@@ -1,5 +1,6 @@
 package domain.lotto;
 
+import generator.TestNumberGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
