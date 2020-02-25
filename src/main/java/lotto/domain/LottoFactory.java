@@ -35,9 +35,11 @@ public class LottoFactory {
     }
 
     public static Set<LottoNumber> createManualLottoNumbers(List<Integer> manualLottoNumbers) {
+        Set<Integer> duplicationManualLottoNumbers = new HashSet<>(manualLottoNumbers);
+        Iterator<Integer> iterator = duplicationManualLottoNumbers.iterator();
         Set<LottoNumber> lotto = new HashSet<>();
-        for (Integer manualLottoNumber : manualLottoNumbers) {
-            lotto.add(new LottoNumber(manualLottoNumber));
+        while(iterator.hasNext()){
+            lotto.add(new LottoNumber(iterator.next()));
         }
         return lotto;
     }
