@@ -12,11 +12,11 @@ public class InputView {
 
     public static String input() {
         String input = sc.nextLine();
-        getWinNumbers(input);
+        validateNullOrBlank(input);
         return input;
     }
 
-    public static void getWinNumbers(String input) {
+    private static void validateNullOrBlank(String input) {
         if (input == null || input.equals(EMPTY_STRING)) {
             throw new NullOrEmptyException(NULL_OR_EMPTY_EXCEPTION_MESSAGE);
         }
