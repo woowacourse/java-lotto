@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import exception.LottoInputException;
+import exception.LottoNumberDuplicateException;
 
 public class LottoGame {
 	private static final int DEFAULT_VALUE = 0;
@@ -25,7 +25,7 @@ public class LottoGame {
 
 	private void bonusNumberValidate(Lotto winningNumbers, LottoNumber lottoNumber) {
 		if (winningNumbers.isContains(lottoNumber)) {
-			throw new LottoInputException("로또번호와 보너스번호가 중복됩니다.");
+			throw new LottoNumberDuplicateException();
 		}
 	}
 

@@ -37,7 +37,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private static void validate(int number) {
 		if (number < LOTTO_MINIMUM_NUMBER || number > LOTTO_MAXIMUM_NUMBER) {
-			throw new LottoNumberRangeException("로또번호는 1~45의 수가 필요합니다.");
+			throw new LottoNumberRangeException();
 		}
 	}
 

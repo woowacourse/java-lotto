@@ -9,7 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import exception.LottoInputException;
+import exception.LottoNumberDuplicateException;
 
 class LottoTest {
 
@@ -29,7 +29,7 @@ class LottoTest {
 		assertThatThrownBy(() -> {
 			new Lotto(numbers);
 		})
-			.isInstanceOf(LottoInputException.class)
+			.isInstanceOf(LottoNumberDuplicateException.class)
 			.hasMessage("로또 번호가 중복되거나, 6개를 입력하지 않았습니다.");
 	}
 

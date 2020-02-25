@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import exception.LottoInputException;
+import exception.LottoLengthException;
+import exception.LottoNumberDuplicateException;
 
 public class Lotto {
 	private static final int LOTTO_NUMBER_FIVE_MATCHED = 5;
@@ -18,6 +19,7 @@ public class Lotto {
 	private final Set<LottoNumber> numbers;
 
 	public Lotto(List<LottoNumber> numbers) {
+		lengthValidate(numbers);
 		this.numbers = new HashSet<>(numbers);
 		duplicationValidate(this.numbers);
 	}
@@ -29,9 +31,15 @@ public class Lotto {
 			.collect(Collectors.toList()));
 	}
 
+	private void lengthValidate(List<LottoNumber> numbers) {
+		if (numbers.size() != LOTTO_LENGTH) {
+			throw new LottoLengthException();
+		}
+	}
+
 	private void duplicationValidate(Set<LottoNumber> numbers) {
 		if (numbers.size() != LOTTO_LENGTH) {
-			throw new LottoInputException("로또 번호가 중복되거나, 6개를 입력하지 않았습니다.");
+			throw new LottoNumberDuplicateException();
 		}
 	}
 
