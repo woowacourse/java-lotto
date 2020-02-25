@@ -11,7 +11,7 @@ public class WinningInformationTest {
 
     @Test
     void WinningInformation_올바른_생성() {
-        Lotto lotto = LottoFactory.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonus = LottoNumber.of(7);
         assertThat(new WinningInformation(lotto, bonus))
             .isInstanceOf(WinningInformation.class);
@@ -19,7 +19,7 @@ public class WinningInformationTest {
 
     @Test
     void WinningInformation_보너스번호와_정답에_중복이_있을_시() {
-        Lotto lotto = LottoFactory.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonus = LottoNumber.of(2);
         assertThatThrownBy(() -> new WinningInformation(lotto, bonus))
             .isInstanceOf(IllegalArgumentException.class)
@@ -28,7 +28,7 @@ public class WinningInformationTest {
 
     @Test
     void WinningInformation_1등_계산 () {
-        Lotto winningLotto = LottoFactory.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = Lotto.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonus = LottoNumber.of(7);
 
         WinningInformation winningInformation = new WinningInformation(winningLotto, bonus);
@@ -37,10 +37,10 @@ public class WinningInformationTest {
 
     @Test
     void WinningInformation_2등_계산 () {
-        Lotto winningLotto = LottoFactory.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = Lotto.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonus = LottoNumber.of(7);
 
-        Lotto secondRankLotto = LottoFactory.createLottoManual(Arrays.asList(1, 2, 3, 7, 5, 4));
+        Lotto secondRankLotto = Lotto.createLottoManual(Arrays.asList(1, 2, 3, 7, 5, 4));
 
         WinningInformation winningInformation = new WinningInformation(winningLotto, bonus);
         assertThat(winningInformation.calculateRank(secondRankLotto)).isEqualTo(Rank.SECOND);
@@ -48,10 +48,10 @@ public class WinningInformationTest {
 
     @Test
     void WinningInformation_3등_계산 () {
-        Lotto winningLotto = LottoFactory.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = Lotto.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonus = LottoNumber.of(7);
 
-        Lotto thirdRankLotto = LottoFactory.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 10));
+        Lotto thirdRankLotto = Lotto.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 10));
 
         WinningInformation winningInformation = new WinningInformation(winningLotto, bonus);
         assertThat(winningInformation.calculateRank(thirdRankLotto)).isEqualTo(Rank.THIRD);

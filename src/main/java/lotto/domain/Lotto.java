@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.util.RandomUtils;
 
 /**
  * Lotto.java
@@ -56,6 +58,37 @@ public class Lotto {
 	public boolean isContain(final LottoNumber lottoNumber) {
 		return lottoNumbers.stream()
 				.anyMatch(value -> value.equals(lottoNumber));
+	}
+
+	public static Lotto createLottoAuto() {
+		List<Integer> randomLottoNumbers = RandomUtils.getRandomIntList(
+			LOTTO_LENGTH,
+			LottoNumber.MINIMUM_LOTTO_NUMBER,
+			LottoNumber.MAXIMUM_LOTTO_NUMBER
+		);
+		return createLotto(randomLottoNumbers);
+	}
+
+	public static Lotto createLottoManual(final List<Integer> inputLottoNumbers) {
+		Objects.requireNonNull(inputLottoNumbers);
+		return createLotto(inputLottoNumbers);
+	}
+
+	private static Lotto createLotto(final List<Integer> lottoNumbers) {
+		checkLottoNumberLength(lottoNumbers);
+		List<LottoNumber> lottoNumberList = new ArrayList<>();
+
+		for (int lottoNumber : lottoNumbers) {
+			lottoNumberList.add(LottoNumber.of(lottoNumber));
+		}
+
+		return new Lotto(lottoNumberList);
+	}
+
+	private static void checkLottoNumberLength(List<Integer> lottoNumbers) {
+		if (lottoNumbers.size() != LOTTO_LENGTH) {
+			throw new IllegalArgumentException("로또 한 장에는 6개의 로또번호가 있어야 합니다.");
+		}
 	}
 
 	public List<LottoNumber> getLottoNumbers() {

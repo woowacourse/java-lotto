@@ -1,10 +1,14 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
+import lotto.domain.LottosFactory;
+import lotto.domain.MoneyForLotto;
+import lotto.domain.ResultStatistic;
+import lotto.domain.WinningInformation;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import lotto.domain.LottoFactory;
 
 /**
  * LottoController.java
@@ -39,7 +43,7 @@ public class LottoController {
 
 	private static WinningInformation getWinningInformation() {
 		try {
-			Lotto winningLotto = LottoFactory.createLottoManual(InputView.getWinningLotto());
+            Lotto winningLotto = Lotto.createLottoManual(InputView.getWinningLotto());
 			LottoNumber bonus = LottoNumber.of(InputView.getBonusLottoNumber());
 			return new WinningInformation(winningLotto, bonus);
 		} catch (Exception e) {

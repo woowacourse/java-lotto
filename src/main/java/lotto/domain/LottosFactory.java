@@ -18,7 +18,7 @@ public class LottosFactory {
 		List<Lotto> paidLotto = new ArrayList<>();
 
 		for (int i = 0; i < amountOfLottos; i++) {
-			paidLotto.add(LottoFactory.createLottoAuto());
+			paidLotto.add(Lotto.createLottoAuto());
 		}
 		return new Lottos(paidLotto);
 	}

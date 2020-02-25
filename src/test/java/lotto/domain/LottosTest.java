@@ -20,11 +20,11 @@ import org.junit.jupiter.params.provider.NullSource;
  */
 public class LottosTest {
 	@Test
-	void Lottos_생성자_올바른_동작_확인() {
+	void Lottos_정상_입력에_대한_생성자_동작_확인() {
 		List<Lotto> inputLottos = Arrays.asList(
-				LottoFactory.createLottoAuto(),
-				LottoFactory.createLottoAuto(),
-				LottoFactory.createLottoAuto()
+			Lotto.createLottoAuto(),
+			Lotto.createLottoAuto(),
+			Lotto.createLottoAuto()
 		);
 		assertThat(new Lottos(inputLottos)).isInstanceOf(Lottos.class);
 	}
