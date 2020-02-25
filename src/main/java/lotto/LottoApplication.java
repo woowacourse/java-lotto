@@ -17,7 +17,7 @@ public class LottoApplication {
         List<Lotto> lotteries = LottoFactory.createLotteries(money);
         OutputView.printLotteries(lotteries);
 
-        String[] inputWinNumbers = StringUtils.split(InputView.inputWinNumber());
+        String[] inputWinNumbers = StringUtils.splitNumber(InputView.inputWinNumber());
         WinLotto winLotto = new WinLotto(inputWinNumbers, InputView.inputBonusBall());
 
         LottoManager lottoManager = new LottoManager(lotteries, winLotto);
