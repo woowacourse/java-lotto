@@ -57,7 +57,7 @@ public class WinningNumbersTest {
         WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
         LottoRound lottoRound = new LottoRound(inputNumbers);
         // when
-        int correctSize = winningNumbers.calculateCollectNumberSize(lottoRound);
+        int correctSize = winningNumbers.calculateCollectNumberCount(lottoRound);
         // then
         assertThat(correctSize).isEqualTo(3);
     }

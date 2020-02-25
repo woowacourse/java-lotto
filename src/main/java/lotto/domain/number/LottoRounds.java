@@ -27,7 +27,7 @@ public class LottoRounds {
         List<GameResult> gameResultList = new ArrayList<>();
         for (int i = 0; i < allLottoNumbers.size(); i++) {
             LottoRound presentLottoRound = allLottoNumbers.get(i);
-            int correctNumber = winningNumbers.calculateCollectNumberSize(presentLottoRound);
+            int correctNumber = winningNumbers.calculateCollectNumberCount(presentLottoRound);
             boolean isCorrectBonusNumber = winningNumbers.hasBonusNumber(presentLottoRound);
             GameResult gameResult = GameResult.calculateRank(correctNumber, isCorrectBonusNumber);
             gameResultList.add(gameResult);

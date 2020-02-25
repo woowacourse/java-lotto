@@ -5,14 +5,16 @@ import lotto.domain.exception.DuplicateLottoNumberException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WinningNumbers extends LottoRoundFormat {
+public class WinningNumbers {
     private static final int WINNING_NUMBER_SIZE = 7;
     private static final String DUPLICATE_LOTTO_NUMBER_EXCEPTION_MESSAGE = "중복이 존재합니다.";
+
+    private final LottoRound winningNumbers;
     private final LottoNumber bonusBall;
 
     public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
-        super(winningNumbers);
         validateDuplicate(winningNumbers, bonusBall);
+        this.winningNumbers = new LottoRound(winningNumbers);
         this.bonusBall = bonusBall;
     }
 
@@ -27,10 +29,8 @@ public class WinningNumbers extends LottoRoundFormat {
         }
     }
 
-    public int calculateCollectNumberSize(LottoRound lottoRound) {
-        return (int) this.lottoNumbers.stream()
-                .filter(lottoRound::has)
-                .count();
+    public int calculateCollectNumberCount(LottoRound lottoRound) {
+        return winningNumbers.calculateCorrectNumberCount(lottoRound);
     }
 
     public boolean hasBonusNumber(LottoRound lottoNumbers) {
