@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -23,5 +25,20 @@ public class LottoCountTest {
     void validateManualCount(int total, int manual) {
         assertThatThrownBy(() -> new LottoCount(total, manual))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("수동 로또 갯수는, 전체 로또 갯수보다 클 수 없음")
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2", "2, 3"})
+    void validateCountByTotal(int total, int manual) {
+        assertThatThrownBy(() -> new LottoCount(total, manual))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("자동 로또 개수를 가져옴")
+    @Test
+    void getAutoLottoCount() {
+        LottoCount count = new LottoCount(10, 2);
+        assertThat(count.getAutoLottoCount()).isEqualTo(8);
     }
 }

@@ -6,7 +6,10 @@ public class LottoCount {
 
     private static final int MINIMUM_MANUAL_LOTTO_COUNT = 0;
     private static final int MINIMUM_LOTTO_COUNT = 1;
-    private static final String INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE = ("로또 구입 갯수는 최소 %d개 이상");
+    private static final String INVALID_MINIMUM_LOTTO_COUNT_EXCEPTION_MESSAGE
+        = "로또 구입 갯수는 최소 %d개 이상";
+    private static final String INVALID_MAXIMUM_MANUAL_LOTTO_COUNT_EXCEPTION_MESSAGE
+        = "수동 로또 갯수(%d)는 구매하려는 갯수(%d)보다 많을 수 없습니다.";
 
     private final int manualLottoCount;
     private final int lottoCount;
@@ -16,21 +19,38 @@ public class LottoCount {
     }
 
     public LottoCount(int lottoCount, int manualLottoCount) {
-        validateCount(lottoCount, MINIMUM_LOTTO_COUNT);
-        validateCount(manualLottoCount, MINIMUM_MANUAL_LOTTO_COUNT);
+        validateMinimumCount(lottoCount, MINIMUM_LOTTO_COUNT);
+        validateMinimumCount(manualLottoCount, MINIMUM_MANUAL_LOTTO_COUNT);
+        validateMaximumManualCount(lottoCount, manualLottoCount);
         this.lottoCount = lottoCount;
         this.manualLottoCount = manualLottoCount;
     }
 
-    private void validateCount(int count, int criteriaLottoCount) {
+    private void validateMaximumManualCount(int lottoCount, int manualLottoCount) {
+        if (lottoCount < manualLottoCount) {
+            throw new IllegalArgumentException(String.format(
+                INVALID_MAXIMUM_MANUAL_LOTTO_COUNT_EXCEPTION_MESSAGE, manualLottoCount,
+                lottoCount));
+        }
+    }
+
+    private void validateMinimumCount(int count, int criteriaLottoCount) {
         if (count < criteriaLottoCount) {
             throw new IllegalArgumentException(
-                String.format(INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE, criteriaLottoCount));
+                String.format(INVALID_MINIMUM_LOTTO_COUNT_EXCEPTION_MESSAGE, criteriaLottoCount));
         }
     }
 
     public int getLottoCount() {
         return lottoCount;
+    }
+
+    public int getManualLottoCount() {
+        return manualLottoCount;
+    }
+
+    public int getAutoLottoCount() {
+        return lottoCount - manualLottoCount;
     }
 
     @Override
