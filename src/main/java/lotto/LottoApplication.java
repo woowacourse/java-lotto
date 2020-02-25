@@ -47,7 +47,7 @@ public class LottoApplication {
     private static LottoCount getCountByMoney() {
         int inputMoney = InputView.inputMoney();
         Money money = new Money(inputMoney);
-        return money.getLottoCount(InputView.inputManualCount());
+        return money.getLottoCount(InputView.inputManualLottoCount());
     }
 
     private static WinningLotto getWinningLotto() {

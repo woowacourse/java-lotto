@@ -25,7 +25,7 @@ public class LottosFactoryTest {
     void makeManualLottos() {
         List<String> strings = new ArrayList<>();
         strings.add("1, 2, 3, 4, 5, 6");
-        strings.add("2, 3, 4, 5, 6, 7");
+        strings.add("22, 3, 4, 5, 6, 7");
         LottoCount lottoCount = new LottoCount(2, 2);
         Lottos manualLotto = LottosFactory.createLottos(strings, lottoCount);
         assertThat(manualLotto.getCount())
