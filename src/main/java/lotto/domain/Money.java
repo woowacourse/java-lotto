@@ -27,13 +27,11 @@ public class Money {
     }
 
     private int parseAmountToInteger(String amount) {
-        int parsedAmount;
         try {
-            parsedAmount = Integer.parseInt(amount);
+            return Integer.parseInt(amount);
         } catch (NumberFormatException e) {
             throw new InvalidMoneyException("올바른 형식의 입력이 아닙니다.");
         }
-        return parsedAmount;
     }
 
     private boolean isInvalid(int amount) {
