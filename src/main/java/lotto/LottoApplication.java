@@ -16,6 +16,14 @@ import lotto.view.OutputView;
 public class LottoApplication {
 
     public static void main(String[] args) {
+        try {
+            start();
+        } catch (Exception e) {
+            OutputView.printExceptionMessage(e.getMessage());
+        }
+    }
+
+    private static void start() {
         LottoCount count = getCountByMoney();
         List<String> rawManualLottos = getRawManualLottos(count);
         OutputView.printLottoCount(count);
@@ -37,26 +45,14 @@ public class LottoApplication {
     }
 
     private static LottoCount getCountByMoney() {
-        while (true) {
-            try {
-                int inputMoney = InputView.inputMoney();
-                Money money = new Money(inputMoney);
-                return money.getLottoCount(InputView.inputManualCount());
-            } catch (RuntimeException re) {
-                OutputView.printExceptionMessage(re.getMessage());
-            }
-        }
+        int inputMoney = InputView.inputMoney();
+        Money money = new Money(inputMoney);
+        return money.getLottoCount(InputView.inputManualCount());
     }
 
     private static WinningLotto getWinningLotto() {
-        while (true) {
-            try {
-                Lotto winningLotto = Lotto.of(InputView.inputWinningLotto());
-                Ball bonusBall = Ball.of(InputView.inputWinningBonusBall());
-                return new WinningLotto(winningLotto, bonusBall);
-            } catch (RuntimeException re) {
-                OutputView.printExceptionMessage(re.getMessage());
-            }
-        }
+        Lotto winningLotto = Lotto.of(InputView.inputWinningLotto());
+        Ball bonusBall = Ball.of(InputView.inputWinningBonusBall());
+        return new WinningLotto(winningLotto, bonusBall);
     }
 }
