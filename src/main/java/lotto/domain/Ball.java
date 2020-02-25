@@ -11,6 +11,7 @@ public class Ball implements Comparable<Ball> {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
     private static final String INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE = "유효한 로또 번호가 아닙니다.";
+    private static final String NOT_FIND_LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호를 찾을 수 없습니다.";
     private static final Map<Integer, Ball> BALL_CACHES = new HashMap<>();
 
     static {
@@ -36,7 +37,7 @@ public class Ball implements Comparable<Ball> {
         if (BALL_CACHES.containsKey(number)) {
             return BALL_CACHES.get(number);
         }
-        return new Ball(number);
+        throw new IllegalArgumentException(NOT_FIND_LOTTO_NUMBER_EXCEPTION_MESSAGE);
     }
 
     public static List<Ball> getBalls() {
