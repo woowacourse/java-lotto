@@ -18,20 +18,19 @@ public class WinNumbers {
     private Ticket winNumbers;
     private LottoNumber bonusBallNumber;
 
-    public WinNumbers(String winNumber) {
+    public WinNumbers(String winNumber, String bonusBall) {
         List<LottoNumber> winNumbers = makeWinNumbers(splitInput(winNumber));
         validateLottoNumbersLength(winNumbers);
+
+        int bonusBallNumber = validateNumberFormat(bonusBall);
+        validateContainsWinNumber(bonusBallNumber);
+
         this.winNumbers = new Ticket(winNumbers);
+        this.bonusBallNumber = new LottoNumber(bonusBallNumber);
     }
 
     private List<String> splitInput(String winNumber) {
         return Arrays.asList(winNumber.split(COMMA));
-    }
-
-    public void setBonusBallNumber(String input) {
-        int bonusBallNumber = validateNumberFormat(input);
-        validateContainsWinNumber(bonusBallNumber);
-        this.bonusBallNumber = new LottoNumber(bonusBallNumber);
     }
 
     private List<LottoNumber> makeWinNumbers(List<String> inputs) {

@@ -17,7 +17,6 @@ public class LottoApplication {
         Money money = setMoney();
         Tickets tickets = new Tickets(getAutoTickets(money.getMoney() / Money.PAYMENT_UNIT));
         WinNumbers winNumbers = getWinNumbersAndBonusBallNumber();
-        getBonusBallNumber(winNumbers);
 
         LottoManager.lotto(tickets, winNumbers);
 
@@ -39,12 +38,10 @@ public class LottoApplication {
 
     private static WinNumbers getWinNumbersAndBonusBallNumber() {
         OutputView.printInputWinNumber();
-        return new WinNumbers(InputView.input());
-    }
-
-    private static void getBonusBallNumber(WinNumbers winNumbers) {
+        String winNumber = InputView.input();
         OutputView.printInputBonusNumber();
-        winNumbers.setBonusBallNumber(InputView.input());
+        String bonusBallNumber = InputView.input();
+        return new WinNumbers(winNumber, bonusBallNumber);
     }
 
     private static void printCorrectResults() {
