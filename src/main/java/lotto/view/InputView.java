@@ -24,13 +24,17 @@ public class InputView {
     public static List<LottoBall> InputWinningTicket() {
         try {
             OutputView.printAnswerWinningBalls();
-            String winningTicket = scanner.nextLine();
-            LottoTicket winningTicketFactory = new LottoTicket(winningTicket);
+            LottoTicket winningTicketFactory = generateLottoTicket();
             return winningTicketFactory.getLottoTicket();
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
             return InputWinningTicket();
         }
+    }
+
+    private static LottoTicket generateLottoTicket() {
+        String winningTicket = scanner.nextLine();
+        return new LottoTicket(winningTicket);
     }
 
     public static int InputBonusBall() {
