@@ -1,4 +1,4 @@
-package lotto.domain.ticket.ball;
+package lotto.domain.ticket.number;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,6 +1,6 @@
 package lotto.domain.ticket;
 
-import lotto.domain.ticket.ball.LottoNumber;
+import lotto.domain.ticket.number.LottoNumber;
 
 import java.util.Collections;
 import java.util.Objects;

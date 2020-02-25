@@ -2,14 +2,14 @@ package lotto.domain.result.win;
 
 import lotto.domain.result.MatchResult;
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.ball.LottoNumber;
-import lotto.domain.ticket.ball.LottoNumberFactory;
+import lotto.domain.ticket.number.LottoNumber;
+import lotto.domain.ticket.number.LottoNumberFactory;
 
 import java.util.Objects;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
-import static lotto.domain.ticket.ball.LottoNumberFactory.findLottoBallByNumber;
+import static lotto.domain.ticket.number.LottoNumberFactory.findLottoBallByNumber;
 
 public class WinningLotto {
     private final WinningBalls winningBalls;

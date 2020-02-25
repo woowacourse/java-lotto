@@ -1,8 +1,8 @@
 package lotto.domain.ticket.strategy;
 
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.ball.LottoNumberFactory;
 import lotto.domain.ticket.manual.ManualNumber;
+import lotto.domain.ticket.number.LottoNumberFactory;
 
 import java.util.List;
 import java.util.Set;
@@ -15,7 +15,7 @@ public class ManualLottoMachine implements LottoMachine {
         validateTicketAmount(ticketCount, numberBundle);
         return numberBundle.stream()
                 .map(ManualNumber::getNumbers)
-                .map(this::aLottoTicket)
+                .map(this::makeLottoTicket)
                 .collect(Collectors.toList());
     }
 
@@ -26,7 +26,7 @@ public class ManualLottoMachine implements LottoMachine {
         }
     }
 
-    private LottoTicket aLottoTicket(Set<Integer> numbers) {
+    private LottoTicket makeLottoTicket(Set<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumberFactory::findLottoBallByNumber)
                 .collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));

@@ -3,7 +3,7 @@ package lotto.domain.result.win;
 import lotto.LottoHelper;
 import lotto.domain.result.MatchResult;
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.ball.LottoNumber;
+import lotto.domain.ticket.number.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

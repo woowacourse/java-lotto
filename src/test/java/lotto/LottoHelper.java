@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.ticket.ball.LottoNumber;
-import lotto.domain.ticket.ball.LottoNumberFactory;
+import lotto.domain.ticket.number.LottoNumber;
+import lotto.domain.ticket.number.LottoNumberFactory;
 
 import java.util.Arrays;
 import java.util.Set;

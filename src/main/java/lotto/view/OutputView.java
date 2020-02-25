@@ -5,7 +5,7 @@ import lotto.domain.result.win.rank.Rank;
 import lotto.domain.ticket.BettingInfo;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketBundle;
-import lotto.domain.ticket.ball.LottoNumber;
+import lotto.domain.ticket.number.LottoNumber;
 
 public class OutputView {
     private static final String SECOND = "SECOND";
