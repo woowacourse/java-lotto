@@ -19,6 +19,7 @@ import lotto.util.RandomUtils;
  */
 public class Lotto {
 	public static final int LOTTO_LENGTH = 6;
+	public static final int LOTTO_PRICE = 1_000;
 
 	protected final List<LottoNumber> lottoNumbers;
 

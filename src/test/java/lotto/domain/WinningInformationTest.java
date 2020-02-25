@@ -7,10 +7,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 public class WinningInformationTest {
-    private WinningInformation winningInformation;
-
     @Test
-    void WinningInformation_올바른_생성() {
+    void WinningInformation_정상_입력에_대한_생성자_동작_확인() {
         Lotto lotto = Lotto.createLottoManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonus = LottoNumber.of(7);
         assertThat(new WinningInformation(lotto, bonus))

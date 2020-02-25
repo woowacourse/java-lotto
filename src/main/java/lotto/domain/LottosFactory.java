@@ -14,12 +14,25 @@ import java.util.List;
 public class LottosFactory {
 	private LottosFactory() {}
 
-	public static Lottos createLottosAuto(int amountOfLottos) {
+	public static Lottos createLottosAuto(Money money) {
+		validateMoney(money);
+
+		int amountOfLottos = calculateAmountOfLottos(money);
 		List<Lotto> paidLotto = new ArrayList<>();
 
 		for (int i = 0; i < amountOfLottos; i++) {
 			paidLotto.add(Lotto.createLottoAuto());
 		}
 		return new Lottos(paidLotto);
+	}
+
+	private static void validateMoney(Money inputMoney) {
+		if (inputMoney.getMoney() < Lotto.LOTTO_PRICE) {
+			throw new IllegalArgumentException(Lotto.LOTTO_PRICE + "원 이상 입력해주세요.");
+		}
+	}
+
+	private static int calculateAmountOfLottos(Money money) {
+		return money.getMoney() / Lotto.LOTTO_PRICE;
 	}
 }

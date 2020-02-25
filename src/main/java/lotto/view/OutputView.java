@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
-import lotto.domain.MoneyForLotto;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.ResultStatistic;
 
@@ -58,7 +58,7 @@ public class OutputView {
         System.out.println(ENTER_BONUS_BALL_NUMBER_GUIDE_MESSAGE);
     }
 
-    public static void printResultStatistic(ResultStatistic result, MoneyForLotto money) {
+    public static void printResultStatistic(ResultStatistic result, Money money) {
         System.out.println(RESULT_STATISTIC_MESSAGE);
         printEachRankResult(Rank.FIFTH, result);
         printEachRankResult(Rank.FOURTH, result);

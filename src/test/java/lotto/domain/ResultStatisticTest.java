@@ -64,7 +64,7 @@ public class ResultStatisticTest {
 
 		ResultStatistic resultStatistic = ResultStatistic.calculate(lottos, winningInformation);
 
-		long revenueRate = resultStatistic.calculateRevenueRate(new MoneyForLotto(MONEY_FOR_LOTTO));
+		long revenueRate = resultStatistic.calculateRevenueRate(new Money(MONEY_FOR_LOTTO));
 		assertThat(revenueRate).isEqualTo(
 			(long) ((Rank.FIRST.getReward() + Rank.FOURTH.getReward())) * 100 / MONEY_FOR_LOTTO
 		);

@@ -20,10 +20,8 @@ import org.junit.jupiter.params.provider.NullSource;
  * 날짜 : 2020/02/19
  */
 public class LottoTest {
-	private lotto.domain.Lotto lotto;
-
 	@Test
-	void Lotto_올바른_동작_확인() {
+	void Lotto_정상_입력에_대한_생성자_동작_확인() {
 		List<LottoNumber> lottoNumbers = new ArrayList<>(
 				Arrays.asList(
 						LottoNumber.of(1),
@@ -34,7 +32,6 @@ public class LottoTest {
 						LottoNumber.of(44)
 				)
 		);
-
 		assertThat(new Lotto(lottoNumbers)).isInstanceOf(lotto.domain.Lotto.class);
 	}
 

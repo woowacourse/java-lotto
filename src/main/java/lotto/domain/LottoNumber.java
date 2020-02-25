@@ -16,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
 
-    private static final Map<Integer, LottoNumber> CACHE;
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS;
 
     private final int lottoNumber;
 
@@ -25,7 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
             lottoNumbers.put(i, new LottoNumber(i));
         }
-        CACHE = Collections.unmodifiableMap(lottoNumbers);
+        LOTTO_NUMBERS = Collections.unmodifiableMap(lottoNumbers);
     }
 
     private LottoNumber(int inputLottoNumber) {
@@ -33,10 +33,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(final int lottoNumber) {
-        if (!CACHE.containsKey(lottoNumber)) {
+        if (!LOTTO_NUMBERS.containsKey(lottoNumber)) {
             throw new WrongLottoNumberException("유효한 로또 번호가 아닙니다.");
         }
-        return CACHE.get(lottoNumber);
+        return LOTTO_NUMBERS.get(lottoNumber);
     }
 
     public int getLottoNumber() {

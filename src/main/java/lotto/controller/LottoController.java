@@ -4,7 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.LottosFactory;
-import lotto.domain.MoneyForLotto;
+import lotto.domain.Money;
 import lotto.domain.ResultStatistic;
 import lotto.domain.WinningInformation;
 import lotto.view.InputView;
@@ -20,21 +20,21 @@ import lotto.view.OutputView;
  */
 public class LottoController {
 	public static void run() {
-		MoneyForLotto moneyForLotto = getMoneyForLotto();
-		int amountOfLottos = moneyForLotto.calculateAmountOfLottos();
+		Money money = getMoneyForLotto();
+		int amountOfLottos = money.calculateAmountOfLottos();
 
-		Lottos lottos = LottosFactory.createLottosAuto(amountOfLottos);
+		Lottos lottos = LottosFactory.createLottosAuto(money);
 		OutputView.printPurchasedLottos(amountOfLottos, lottos);
 
 		WinningInformation winningInformation = getWinningInformation();
 
 		ResultStatistic result = ResultStatistic.calculate(lottos, winningInformation);
-		OutputView.printResultStatistic(result, moneyForLotto);
+		OutputView.printResultStatistic(result, money);
 	}
 
-	private static MoneyForLotto getMoneyForLotto() {
+	private static Money getMoneyForLotto() {
 		try {
-			return new MoneyForLotto(InputView.getMoneyForLotto());
+			return new Money(InputView.getMoneyForLotto());
 		} catch (Exception e) {
 			OutputView.printExceptionMessage(e);
 			return getMoneyForLotto();

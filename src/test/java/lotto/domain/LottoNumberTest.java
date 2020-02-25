@@ -19,7 +19,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class LottoNumberTest {
 	@ParameterizedTest
 	@MethodSource("getRightTestCase")
-	void of_올바른_동작_확인(int inputLottoNumber, LottoNumber expected) {
+	void of_정상적인_입력시_올바른_결과가_나오는지(int inputLottoNumber, LottoNumber expected) {
 		assertThat(LottoNumber.of(inputLottoNumber)).isEqualTo(expected);
 	}
 
