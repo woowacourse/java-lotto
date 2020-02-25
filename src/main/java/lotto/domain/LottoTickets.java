@@ -15,11 +15,18 @@ public class LottoTickets implements Iterable<LottoTicket> {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public static LottoTickets createLottoTickets(Money money) {
+    public static LottoTickets createLottoTickets(Money money, LottoTickets manualTickets) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0, end = money.ticketQuantity(); i < end; i++) {
             lottoTickets.add(LottoTicket.create());
         }
+        for (LottoTicket manualTicket : manualTickets) {
+            lottoTickets.add(manualTicket);
+        }
+        return new LottoTickets(lottoTickets);
+    }
+
+    public static LottoTickets createLottoTickets(List<LottoTicket> lottoTickets) {
         return new LottoTickets(lottoTickets);
     }
 
