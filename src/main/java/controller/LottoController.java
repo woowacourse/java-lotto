@@ -16,7 +16,7 @@ public class LottoController {
         RepeatCount repeatCount = money.createRepeatCount();
         RepeatCount userRepeatCount = repeatCount.split(InputView.inputNumber(OutputView::printUserRepeatCountFormat));
 
-        OutputView.printRequestUserNumbers(userRepeatCount);
+        OutputView.printRequestUserNumbers(userRepeatCount.isNotZero());
         LottoGame userLottoGame = LottoGame.create(new UserNumberGenerator(), userRepeatCount);
         LottoGame autoLottoGame = LottoGame.create(new RandomNumberGenerator(), repeatCount);
         LottoGame lottoGame = LottoGame.merge(userLottoGame, autoLottoGame);
