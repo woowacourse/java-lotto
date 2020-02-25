@@ -21,7 +21,7 @@ public class LottoTicket {
 
     private LottoTicket(List<LottoNumber> lottoTicket) {
         validate(lottoTicket);
-        this.lottoTicket = Collections.unmodifiableList(lottoTicket);
+        this.lottoTicket = lottoTicket;
     }
 
     public LottoTicket(String[] numbers) {
@@ -79,7 +79,6 @@ public class LottoTicket {
     @Override
     public String toString() {
         return lottoTicket.stream()
-            .map(LottoNumber::getValue)
             .sorted()
             .map(String::valueOf)
             .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));

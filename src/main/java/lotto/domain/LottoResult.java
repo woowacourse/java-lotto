@@ -10,7 +10,7 @@ public class LottoResult {
 
     public Map<Rank, Integer> matchResult(WinningTicket winningTicket, LottoTickets lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            int matchCount = winningTicket.getWinningTicket().compare(lottoTicket);
+            int matchCount = winningTicket.compare(lottoTicket);
             addBonus(winningTicket, lottoTicket, matchCount);
             Rank rank = Rank.find(matchCount);
             updateResult(rank);

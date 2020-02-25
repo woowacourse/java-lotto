@@ -13,7 +13,7 @@ public class LottoBalls {
     private static final int UPPER_LIMIT = 45;
 
     static {
-        lottoBalls = IntStream.range(LOWER_LIMIT, UPPER_LIMIT + 1)
+        lottoBalls = IntStream.rangeClosed(LOWER_LIMIT, UPPER_LIMIT)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
     }

@@ -18,4 +18,8 @@ public class WinningTicket {
     LottoTicket getWinningTicket() {
         return winningTicket;
     }
+
+    int compare(LottoTicket other) {
+        return winningTicket.compare(other);
+    }
 }
