@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import javafx.scene.effect.SepiaTone;
-
 import java.util.*;
 
 public class LottoFactory {
@@ -36,10 +34,10 @@ public class LottoFactory {
 
     public static Set<LottoNumber> createManualLottoNumbers(List<Integer> manualLottoNumbers) {
         Set<Integer> duplicationManualLottoNumbers = new HashSet<>(manualLottoNumbers);
-        Iterator<Integer> iterator = duplicationManualLottoNumbers.iterator();
+        Iterator<Integer> duplicationManualLottoNumbersIterator = duplicationManualLottoNumbers.iterator();
         Set<LottoNumber> lotto = new HashSet<>();
-        while(iterator.hasNext()){
-            lotto.add(new LottoNumber(iterator.next()));
+        while (duplicationManualLottoNumbersIterator.hasNext()) {
+            lotto.add(new LottoNumber(duplicationManualLottoNumbersIterator.next()));
         }
         return lotto;
     }
