@@ -1,6 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.ticket.ball.LottoBall;
+import lotto.util.NullOrEmptyValidator;
 
 import java.util.Collections;
 import java.util.Objects;
@@ -14,7 +15,9 @@ public class LottoTicket {
     private final Set<LottoBall> lottoBalls;
 
     public LottoTicket(Set<LottoBall> lottoBalls) {
+        NullOrEmptyValidator.isNullOrEmpty(lottoBalls);
         validateSize(lottoBalls);
+
         this.lottoBalls = lottoBalls;
     }
 
@@ -26,6 +29,8 @@ public class LottoTicket {
     }
 
     public boolean has(LottoBall lottoBall) {
+        NullOrEmptyValidator.isNull(lottoBall);
+
         return this.lottoBalls.contains(lottoBall);
     }
 

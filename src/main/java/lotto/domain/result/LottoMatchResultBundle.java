@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import lotto.domain.result.rank.Rank;
+import lotto.util.NullOrEmptyValidator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,8 @@ public class LottoMatchResultBundle {
     private final List<LottoMatchResult> lottoMatchResults;
 
     public LottoMatchResultBundle(List<LottoMatchResult> lottoMatchResults) {
+        NullOrEmptyValidator.isNullOrEmpty(lottoMatchResults);
+
         this.lottoMatchResults = lottoMatchResults;
     }
 

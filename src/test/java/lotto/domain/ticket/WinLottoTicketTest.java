@@ -41,7 +41,7 @@ class WinLottoTicketTest {
         LottoTicket buyLottoTicket = new LottoTicket(aLottoBalls(numbers));
 
         //when
-        LottoMatchResult lottoMatchResult = winLottoTicket.createLottoResult(buyLottoTicket);
+        LottoMatchResult lottoMatchResult = winLottoTicket.createLottoMatchResult(buyLottoTicket);
 
         //then
         assertThat(lottoMatchResult).isEqualTo(expectedResult);

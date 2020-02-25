@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import lotto.domain.result.rank.Rank;
+import lotto.util.NullOrEmptyValidator;
 
 import java.util.Objects;
 
@@ -8,6 +9,8 @@ public class LottoMatchResult {
     private final Rank rank;
 
     public LottoMatchResult(Rank rank) {
+        NullOrEmptyValidator.isNull(rank);
+
         this.rank = rank;
     }
 

@@ -2,6 +2,7 @@ package lotto.domain.ticket;
 
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
+import lotto.util.NullOrEmptyValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,8 @@ public abstract class LottoMachine {
     public abstract LottoTicket createOneTicket();
 
     public final WinLottoTicket createWinLottoTicket(List<Integer> winNumbers, int bonusNumber) {
+        NullOrEmptyValidator.isNullOrEmpty(winNumbers);
+
         Set<LottoBall> winBalls = winNumbers.stream()
                 .map(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());

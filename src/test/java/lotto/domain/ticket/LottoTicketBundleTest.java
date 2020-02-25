@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketBundleTest {
 
@@ -35,5 +36,13 @@ class LottoTicketBundleTest {
 
         //then
         assertThat(resultBundle).isEqualTo(expectedResultBundle);
+    }
+
+    @DisplayName("예외 케이스 테스트: 생성자에 null이 입력된 경우 Exception 발생")
+    @Test
+    void name() {
+        assertThatThrownBy(() -> new LottoTicketBundle(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("전달받은 값이 null 혹은 empty 입니다.");
     }
 }

@@ -3,6 +3,7 @@ package lotto.domain.ticket;
 import lotto.domain.result.LottoMatchResult;
 import lotto.domain.result.rank.Rank;
 import lotto.domain.ticket.ball.LottoBall;
+import lotto.util.NullOrEmptyValidator;
 
 import java.util.Objects;
 
@@ -13,7 +14,10 @@ public class WinLottoTicket {
     private final LottoBall bonusBall;
 
     public WinLottoTicket(LottoTicket winningTicket, LottoBall bonusBall) {
+        NullOrEmptyValidator.isNull(winningTicket);
+        NullOrEmptyValidator.isNull(bonusBall);
         validateBonusBall(winningTicket, bonusBall);
+
         this.winningTicket = winningTicket;
         this.bonusBall = bonusBall;
     }
@@ -24,7 +28,9 @@ public class WinLottoTicket {
         }
     }
 
-    public LottoMatchResult createLottoResult(LottoTicket lottoTicket) {
+    public LottoMatchResult createLottoMatchResult(LottoTicket lottoTicket) {
+        NullOrEmptyValidator.isNull(lottoTicket);
+
         int numberOfMatch = countMatchNumber(lottoTicket);
         boolean isBonusMatch = lottoTicket.has(bonusBall);
 
@@ -33,6 +39,8 @@ public class WinLottoTicket {
     }
 
     public int countMatchNumber(LottoTicket lottoTicket) {
+        NullOrEmptyValidator.isNull(lottoTicket);
+
         return (int) this.winningTicket.getLottoBalls().stream()
                 .filter(lottoTicket::has)
                 .count();

@@ -1,6 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.result.LottoMatchResultBundle;
+import lotto.util.NullOrEmptyValidator;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,12 +12,16 @@ public class LottoTicketBundle {
     private final List<LottoTicket> lottoTickets;
 
     public LottoTicketBundle(List<LottoTicket> lottoTickets) {
+        NullOrEmptyValidator.isNullOrEmpty(lottoTickets);
+
         this.lottoTickets = lottoTickets;
     }
 
     public LottoMatchResultBundle createLottoMatchResultBundle(WinLottoTicket winLottoTicket) {
+        NullOrEmptyValidator.isNull(winLottoTicket);
+
         return lottoTickets.stream()
-                .map(winLottoTicket::createLottoResult)
+                .map(winLottoTicket::createLottoMatchResult)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoMatchResultBundle::new));
     }
 
