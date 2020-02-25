@@ -4,36 +4,34 @@ import lotto.exception.ExceedMoneyException;
 import lotto.util.StringUtil;
 
 public class LottoCount {
-    private final int manualLottoCount;
+    private final int manualLotto;
+    private final int autoLotto;
 
-    private LottoCount(String input) {
-        this.manualLottoCount = Integer.parseInt(input);
+    public LottoCount(String manualLotto, int totalLotto) {
+        validate(manualLotto);
+        validateMoney(manualLotto, totalLotto);
+        this.manualLotto = Integer.parseInt(manualLotto);
+        this.autoLotto = totalLotto - this.manualLotto;
     }
 
-    private static void validate(String input) {
+    private void validate(String input) {
         StringUtil.checkNull(input);
         StringUtil.checkBlank(input);
         StringUtil.checkNumberFormat(input);
         StringUtil.checkRange(input);
     }
 
-    public static LottoCount create(String input, PurchaseMoney money){
-        validate(input);
-        validateMoney(input,money);
-        return new LottoCount(input);
-    }
-
-    private static void validateMoney(String input, PurchaseMoney money) {
-        if(money.parseToPiece() < Integer.parseInt(input)){
-            throw new ExceedMoneyException(money.parseToPiece()+"장 이하만 구매가 가능합니다.");
+    private void validateMoney(String input, int totalLotto) {
+        if (totalLotto < Integer.parseInt(input)) {
+            throw new ExceedMoneyException(totalLotto + "장 이하만 구매가 가능합니다.");
         }
     }
 
-    public int getManualLottoCount() {
-        return manualLottoCount;
+    public int getManualLotto() {
+        return manualLotto;
     }
 
-    public int getAutoLottoCount(PurchaseMoney money) {
-        return money.parseToPiece() - this.manualLottoCount;
+    public int getAutoLottoCount() {
+        return autoLotto;
     }
 }

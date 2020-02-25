@@ -7,16 +7,18 @@ import lotto.domain.result.GameResult;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
     public void run() {
         PurchaseMoney money = new PurchaseMoney(InputView.getMoney());
-        LottoCount count = LottoCount.create(InputView.getCount(), money);
-        Lottos lottos =
-                LottoFactory.create(InputView.getManualLottosNumber(
-                        count.getManualLottoCount()), count.getAutoLottoCount(money)
-                );
-        OutputView.printPieces(count.getManualLottoCount(), count.getAutoLottoCount(money));
+        LottoCount count = new LottoCount(InputView.getCount(), money.parseToPiece());
+        List<String> manual = InputView.getManualLottosNumber(count.getManualLotto());
+        Lottos lottos = LottoFactory.create(manual, count.getAutoLottoCount());
+
+        OutputView.printPieces(count.getManualLotto(), count.getAutoLottoCount());
         OutputView.printLottos(lottos);
+
         createResult(money, lottos, createWinningLotto());
     }
 

@@ -14,38 +14,38 @@ public class LottoCountTest {
     private PurchaseMoney money;
 
     @BeforeEach
-    void init(){
+    void init() {
         this.money = new PurchaseMoney("15000");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"-1", "-3"})
-    void negativeInputTest(String input){
-        assertThatThrownBy(()->{
-            LottoCount.create(input, money);
+    void negativeInputTest(String input) {
+        assertThatThrownBy(() -> {
+            new LottoCount(input, money.parseToPiece());
         }).isInstanceOf(InvalidRangeException.class)
                 .hasMessageMatching("음수는 입력할 수 없습니다.");
     }
 
     @Test
-    void overNumberManual(){
-        assertThatThrownBy(()->{
-            LottoCount.create("16",money);
+    void overNumberManual() {
+        assertThatThrownBy(() -> {
+            new LottoCount("16", money.parseToPiece());
         }).isInstanceOf(ExceedMoneyException.class)
                 .hasMessageMatching("15장 이하만 구매가 가능합니다.");
     }
 
     @Test
-    void manualCountTest(){
-        assertThat(LottoCount.create("2",money)
-                .getManualLottoCount())
+    void manualCountTest() {
+        assertThat(new LottoCount("2", money.parseToPiece())
+                .getManualLotto())
                 .isEqualTo(2);
     }
 
     @Test
-    void autoCountTest(){
-        assertThat(LottoCount.create("2",money)
-                .getAutoLottoCount(money))
+    void autoCountTest() {
+        assertThat(new LottoCount("2", money.parseToPiece())
+                .getAutoLottoCount())
                 .isEqualTo(13);
     }
 }
