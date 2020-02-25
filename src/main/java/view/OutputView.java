@@ -25,8 +25,10 @@ public class OutputView {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
     }
 
-    public static void printUserNumbersFormat() {
-        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    public static void printRequestUserNumbers(RepeatCount repeatCount) {
+        if (repeatCount.isNotZero()) {
+            System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        }
     }
 
     public static void printWinnerNumbersFormat() {

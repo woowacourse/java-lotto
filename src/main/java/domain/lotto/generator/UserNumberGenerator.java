@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class UserNumberGenerator implements NumberGenerator {
     @Override
     public SortedSet<LottoNumber> create() {
-        List<Integer> userInput = InputView.inputNumbers(OutputView::printUserNumbersFormat);
+        List<Integer> userInput = InputView.inputNumbers();
         return userInput.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));

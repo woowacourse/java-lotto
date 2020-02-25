@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 public class RepeatCount {
     private static final String ERROR_NEGATIVE_MESSAGE = "반복 횟수는 음수일 수 없습니다.";
     private static final String ERROR_EXCEED_MESSAGE = "수동 횟수가 총 횟수를 초과할 수 없습니다.";
+
     private int repeatCount;
 
     public RepeatCount(int repeatCount) {
@@ -37,5 +38,9 @@ public class RepeatCount {
     @Override
     public String toString() {
         return String.valueOf(repeatCount);
+    }
+
+    public boolean isNotZero() {
+        return repeatCount != 0;
     }
 }

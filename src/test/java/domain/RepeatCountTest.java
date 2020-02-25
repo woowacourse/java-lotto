@@ -1,6 +1,7 @@
 package domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -39,5 +40,13 @@ public class RepeatCountTest {
         Assertions.assertThatThrownBy(() -> count.split(userCount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("수동 횟수가 총 횟수를 초과할 수 없습니다.");
+    }
+
+    @Test
+    void 반복이_0인지_확인() {
+        RepeatCount repeatCount1 = new RepeatCount(0);
+        RepeatCount repeatCount2 = new RepeatCount(1);
+        Assertions.assertThat(repeatCount1.isNotZero()).isFalse();
+        Assertions.assertThat(repeatCount2.isNotZero()).isTrue();
     }
 }
