@@ -31,7 +31,6 @@ public class GameResult {
 		}
 		return (profit / money.getPurchaseMoney()) * PERCENTAGE;
 	}
-
 	public Collection<RankCount> getResult() {
 		return result.values();
 	}

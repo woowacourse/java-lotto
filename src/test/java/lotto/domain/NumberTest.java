@@ -37,7 +37,7 @@ public class NumberTest {
 	void numberFormatTest(String value) {
 		assertThatThrownBy(() -> {
 			Number.of(value);
-		}).isInstanceOf(InvalidNumberException.class)
+		}).isInstanceOf(NumberFormatException.class)
 			.hasMessageMatching("문자는 사용이 불가능합니다.");
 	}
 
@@ -47,7 +47,7 @@ public class NumberTest {
 		assertThatThrownBy(() -> {
 			Number.of(value);
 		}).isInstanceOf(InvalidNumberException.class)
-			.hasMessageMatching("공백은 사용이 불가능합니다.");
+			.hasMessageMatching("공백은 사용할 수 없습니다.");
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class NumberTest {
 		assertThatThrownBy(() -> {
 			Number.of(null);
 		}).isInstanceOf(InvalidNumberException.class)
-			.hasMessageMatching("Null문자열은 사용이 불가능합니다.");
+			.hasMessageMatching("널은 입력되지 않습니다.");
 	}
 
 	@Test

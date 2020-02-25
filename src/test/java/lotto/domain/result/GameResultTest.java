@@ -20,7 +20,7 @@ class GameResultTest {
 	@Test
 	void getEarningMoney() {
 		GameResult gameResult = new GameResult();
-		gameResult.getResult().get(SECOND).plusCount();
+		// gameResult.getResult()..plusCount();
 
 		assertThat(
 			gameResult.getEarningMoney(new PurchaseMoney("1000"))

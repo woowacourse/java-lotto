@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import lotto.exception.InvalidNumberException;
+import lotto.util.StringUtil;
 
 public class Number implements Comparable<Number> {
 	public static final int MAX_LOTTO_NUMBER = 45;
@@ -38,11 +38,7 @@ public class Number implements Comparable<Number> {
 	}
 
 	private static void checkNumberFormat(String value) {
-		try {
-			Integer.parseInt(value);
-		} catch (NumberFormatException e) {
-			throw new InvalidNumberException("문자는 사용이 불가능합니다.");
-		}
+		StringUtil.checkNumberFormat(value);
 	}
 
 	private static void checkRange(String value) {
@@ -53,15 +49,11 @@ public class Number implements Comparable<Number> {
 	}
 
 	private static void checkBlank(String value) {
-		if (value.trim().isEmpty()) {
-			throw new InvalidNumberException("공백은 사용이 불가능합니다.");
-		}
+		StringUtil.checkBlank(value);
 	}
 
 	private static void checkNull(String value) {
-		if (Objects.isNull(value)) {
-			throw new InvalidNumberException("Null문자열은 사용이 불가능합니다.");
-		}
+		StringUtil.checkNull(value);
 	}
 
 	public static List<Number> getNumbers() {
