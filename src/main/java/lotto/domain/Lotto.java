@@ -6,7 +6,7 @@ import lotto.exception.LottoException;
 import java.util.*;
 
 public class Lotto {
-	private static final int LOTTO_SIZE = 6;
+	public static final int SIZE = 6;
 
 	private final List<Integer> lottoNumber;
 
@@ -28,8 +28,8 @@ public class Lotto {
 	}
 
 	private void validateSizeMismatch(List<Integer> lottoNumber) {
-		if (lottoNumber.size() != LOTTO_SIZE) {
-			throw new LottoException("로또 번호는 " + LOTTO_SIZE + "개여야 합니다!");
+		if (lottoNumber.size() != SIZE) {
+			throw new LottoException("로또 번호는 " + SIZE + "개여야 합니다!");
 		}
 	}
 
@@ -43,7 +43,7 @@ public class Lotto {
 		Set<Integer> concatenatedSet = new HashSet<>(lottoNumber);
 		concatenatedSet.addAll(winningNumber.getWinningNumber());
 
-		int matchCount = (LOTTO_SIZE * 2) - concatenatedSet.size();
+		int matchCount = (SIZE * 2) - concatenatedSet.size();
 		boolean bonusMatch = lottoNumber.contains(winningNumber.getBonusNumber());
 
 		return WinningPrize.of(matchCount, bonusMatch);

@@ -34,7 +34,7 @@ public class LottoMachine {
 	private List<Integer> pickRandomBalls() {
 		Collections.shuffle(lottoBalls);
 		return lottoBalls.stream()
-				.limit(6)
+				.limit(Lotto.SIZE)
 				.sorted()
 				.collect(Collectors.toList());
 	}

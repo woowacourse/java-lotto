@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
-	private static final int LOTTO_SIZE = 6;
 	private static final int MIN_LOTTO_NUMBER = 1;
 	private static final int MAX_LOTTO_NUMBER = 45;
 
@@ -38,8 +37,8 @@ public class WinningLotto {
 	}
 
 	private void validateNumberAmount(List<String> winningNumber) {
-		if (winningNumber.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException(String.format("로또 변호는 %s개여야 합니다.", LOTTO_SIZE));
+		if (winningNumber.size() != Lotto.SIZE) {
+			throw new IllegalArgumentException(String.format("로또 변호는 %s개여야 합니다.", Lotto.SIZE));
 		}
 	}
 
