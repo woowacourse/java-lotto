@@ -13,10 +13,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
     void inRange(int number) {
-        String actual = new LottoNumber(number).toString();
-        String expected = String.valueOf(number);
-
-        assertThat(actual).isEqualTo(expected);
+        assertThat(new LottoNumber(number)).isNotNull();
     }
 
     @DisplayName("로또숫자가 범위를 벗어날 경우 예외 발생")

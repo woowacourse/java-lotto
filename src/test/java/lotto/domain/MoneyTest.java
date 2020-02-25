@@ -11,17 +11,13 @@ class MoneyTest {
     @DisplayName("Money 객체 생성")
     @Test
     void of() {
-        Money money = Money.of(100);
-
-        assertThat(money.toString()).isEqualTo("100원");
+        assertThat(Money.of(100)).isNotNull();
     }
 
     @DisplayName("최소값이상의 금액으로 Money 객체 생성")
     @Test
     void createPurchaseMoney() {
-        Money money = Money.createPurchaseMoney(1000);
-
-        assertThat(money.toString()).isEqualTo("1000원");
+        assertThat(Money.createPurchaseMoney(1000)).isNotNull();
     }
 
     @DisplayName("최소값보다 적은 금액일 경우 예외 발생")
