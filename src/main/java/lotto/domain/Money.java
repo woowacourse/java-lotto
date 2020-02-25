@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Money {
     private static final int MIN_PURCHASE_MONEY = 1_000;
+    private static final Money TICKET_PRICE = Money.of(1_000);
 
     private final int money;
 
@@ -17,7 +18,7 @@ public class Money {
         return new Money(winningMoney);
     }
 
-    public static Money createPurchaseMoney(int moneyValue) {
+    public static Money ofPurchaseMoney(int moneyValue) {
         validateMoneyRange(moneyValue);
         return new Money(moneyValue);
     }
@@ -26,6 +27,10 @@ public class Money {
         if (moneyValue < MIN_PURCHASE_MONEY) {
             throw new MoneyException();
         }
+    }
+
+    public static Money ofTicketPrice() {
+        return TICKET_PRICE;
     }
 
     public Money plus(Money other) {
