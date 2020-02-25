@@ -13,7 +13,7 @@ class LottoNumberTest {
 	@ValueSource(ints = {0, 46, 100})
 	void rangeValidate(int number) {
 		assertThatThrownBy(() -> {
-			LottoNumber.get(number);
+			LottoNumber.createNumber(number);
 		}).isInstanceOf(LottoNumberRangeException.class)
 			.hasMessage("로또번호는 1~45의 수가 필요합니다.");
 	}

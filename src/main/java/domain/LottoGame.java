@@ -17,7 +17,7 @@ public class LottoGame {
 
 	public GameResult play(String inputSixNumbers, String inputBonusNumber) {
 		Lotto winningNumbers = new Lotto(inputSixNumbers);
-		LottoNumber bonusNumber = LottoNumber.get(inputBonusNumber);
+		LottoNumber bonusNumber = LottoNumber.createNumber(inputBonusNumber);
 		bonusNumberValidate(winningNumbers, bonusNumber);
 
 		return lottosCompare(winningNumbers, bonusNumber);

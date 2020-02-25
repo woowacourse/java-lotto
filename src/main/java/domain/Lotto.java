@@ -25,7 +25,7 @@ public class Lotto {
 	public Lotto(String input) {
 		this(Arrays.stream(input.split(DELIMITER))
 			.map(Integer::parseInt)
-			.map(LottoNumber::get)
+			.map(LottoNumber::createNumber)
 			.collect(Collectors.toList()));
 	}
 

@@ -37,7 +37,7 @@ class LottoTest {
 	void isContains() {
 		// given
 		Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-		LottoNumber containNumber = LottoNumber.get(1);
+		LottoNumber containNumber = LottoNumber.createNumber(1);
 		// then
 		assertThat(lotto.isContains(containNumber)).isTrue();
 	}
@@ -47,7 +47,7 @@ class LottoTest {
 		// given
 		Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
 		Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 7");
-		LottoNumber bonusNumber = LottoNumber.get(6);
+		LottoNumber bonusNumber = LottoNumber.createNumber(6);
 		// then
 		assertThat(lotto.compare(winningLotto, bonusNumber)).isEqualTo(Rank.SECOND);
 	}

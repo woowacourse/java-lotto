@@ -14,7 +14,7 @@ public class LottoFactory {
 
 	static {
 		for (int i = LOTTO_NUMBER_FRONT; i <= LOTTO_NUMBER_RANGE; i++) {
-			numbers.add(LottoNumber.get(i));
+			numbers.add(LottoNumber.createNumber(i));
 		}
 	}
 
