@@ -32,11 +32,11 @@ public class LottoTicket {
         ValidateWinningTicketUtils.validateWinningBallsLength(winningBalls);
         ValidateWinningTicketUtils.validateDuplicatedWinningBalls(winningBalls);
 
-        this.lottoTicket = generateWinningLottoTicket(winningBalls);
+        this.lottoTicket = generateCustomLottoTicket(winningBalls);
         Collections.sort(this.lottoTicket);
     }
 
-    private List<LottoBall> generateWinningLottoTicket(String[] winningBalls) {
+    private List<LottoBall> generateCustomLottoTicket(String[] winningBalls) {
         return Arrays.stream(winningBalls)
                 .map(Integer::parseInt)
                 .map(LottoBallFactory::findByLottoBall)

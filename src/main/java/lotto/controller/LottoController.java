@@ -13,6 +13,12 @@ public class LottoController {
 
     public void play() {
         startInputPurchaseAmount();
+
+        ManualTicketingCount manualTicketingCount = InputView.inputManualTicketingCount();
+        for (int i = 0; i < manualTicketingCount.getManualTicketingCount(); i++) {
+            LottoTickets.insertLottoTicket(new LottoTicket(InputView.InputManualLottoTicket()));
+        }
+
         generateLottoTickets();
         WinningTicket winningTicket = generateWinningBalls();
         List<WinningRank> winningRanks = generateWinningRank(winningTicket);

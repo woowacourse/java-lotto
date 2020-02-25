@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoBall;
 import lotto.domain.LottoTicket;
+import lotto.domain.ManualTicketingCount;
 import lotto.domain.PurchaseAmount;
 import lotto.util.InputValidationUtil;
 
@@ -21,6 +22,17 @@ public class InputView {
         }
     }
 
+    public static ManualTicketingCount inputManualTicketingCount(){
+        try{
+            String manualTicketingCount = scanner.nextLine();
+            return new ManualTicketingCount(manualTicketingCount);
+        }
+        catch (RuntimeException e){
+            OutputView.printErrorMessage(e.getMessage());
+            return inputManualTicketingCount();
+        }
+    }
+
     public static List<LottoBall> InputWinningTicket() {
         try {
             OutputView.printAnswerWinningBalls();
@@ -34,7 +46,7 @@ public class InputView {
 
     public static List<LottoBall> InputManualLottoTicket(){
         try{
-            OutputView.printManualLottoIssueMessage();
+            OutputView.printManualLottoTicketingMessage();
             LottoTicket manualLottoTicket = generateLottoTicket();
             return manualLottoTicket.getLottoTicket();
         }catch(RuntimeException e){
