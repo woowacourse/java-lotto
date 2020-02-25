@@ -20,33 +20,23 @@ import lotto.view.OutputView;
  */
 public class LottoController {
 	public static void run() {
-		Money money = getMoneyForLotto();
-		Lottos lottos = LottosFactory.createLottosAuto(money);
-        OutputView.printPurchasedLottos(lottos.getAmountOfLottos(), lottos);
+        try {
+            Money money = new Money(InputView.getMoneyForLotto());
+            Lottos lottos = LottosFactory.createLottosAuto(money);
+            OutputView.printPurchasedLottos(lottos.getAmountOfLottos(), lottos);
 
-		WinningInformation winningInformation = getWinningInformation();
+            WinningInformation winningInformation = getWinningInformation();
 
-		ResultStatistic result = ResultStatistic.calculate(lottos, winningInformation);
-		OutputView.printResultStatistic(result, money);
-	}
-
-	private static Money getMoneyForLotto() {
-		try {
-			return new Money(InputView.getMoneyForLotto());
-		} catch (Exception e) {
-			OutputView.printExceptionMessage(e);
-			return getMoneyForLotto();
-		}
+            ResultStatistic result = ResultStatistic.calculate(lottos, winningInformation);
+            OutputView.printResultStatistic(result, money);
+        } catch (Exception e) {
+            OutputView.printExceptionMessage(e);
+        }
 	}
 
 	private static WinningInformation getWinningInformation() {
-		try {
-            Lotto winningLotto = Lotto.createLottoManual(InputView.getWinningLotto());
-			LottoNumber bonus = LottoNumber.of(InputView.getBonusLottoNumber());
-			return new WinningInformation(winningLotto, bonus);
-		} catch (Exception e) {
-			OutputView.printExceptionMessage(e);
-			return getWinningInformation();
-		}
+        Lotto winningLotto = Lotto.createLottoManual(InputView.getWinningLotto());
+        LottoNumber bonus = LottoNumber.of(InputView.getBonusLottoNumber());
+        return new WinningInformation(winningLotto, bonus);
 	}
 }

@@ -2,7 +2,6 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.WrongMoneyForLottoException;
 import lotto.util.StringUtils;
 
 /**
@@ -21,7 +20,7 @@ public class InputView {
 		try {
             return Integer.parseInt(SCANNER.nextLine());
         } catch (NumberFormatException e) {
-		    throw new WrongMoneyForLottoException("금액은 정수여야 합니다.");
+            throw new NumberFormatException("금액은 정수여야 합니다.");
         }
 	}
 
@@ -31,7 +30,11 @@ public class InputView {
 	}
 
 	public static int getBonusLottoNumber() {
-		OutputView.askEnterBonusLottoNumber();
-		return Integer.parseInt(SCANNER.nextLine());
+        try {
+            OutputView.askEnterBonusLottoNumber();
+            return Integer.parseInt(SCANNER.nextLine());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("보너스 번호는 정수여야 합니다.");
+        }
 	}
 }
