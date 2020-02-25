@@ -3,10 +3,16 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.List;
 
+import lotto.LottoNumberShuffler;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoGame {
+    private LottosGenerator lottosGenerator;
+
+    public LottoGame(LottosGenerator lottosGenerator) {
+        this.lottosGenerator = lottosGenerator;
+    }
 
     public void play() {
         Money purchaseAmount = inputPurchaseAmount();
@@ -37,7 +43,7 @@ public class LottoGame {
     }
 
     private Lottos generateLottos(int lottosSize) {
-        Lottos lottos = LottosGenerator.generate(lottosSize);
+        Lottos lottos = lottosGenerator.generate(lottosSize);
         printLottos(lottos);
         return lottos;
     }

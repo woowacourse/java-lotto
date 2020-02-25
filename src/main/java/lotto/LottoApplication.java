@@ -1,10 +1,13 @@
 package lotto;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottosGenerator;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame();
+        LottoNumberShuffler lottoNumberShuffler = new CollectionLottoNumberShuffler();
+        LottosGenerator lottosGenerator = new LottosGenerator(lottoNumberShuffler);
+        LottoGame lottoGame = new LottoGame(lottosGenerator);
         try {
             lottoGame.play();
         } catch (RuntimeException e) {
