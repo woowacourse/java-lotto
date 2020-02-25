@@ -33,4 +33,12 @@ public class LottoFactory {
         }
         return lotto;
     }
+
+    public static List<LottoNumber> createManualLottoNumbers(List<Integer> manualLottoNumbers) {
+        List<LottoNumber> lotto = new ArrayList<>();
+        for (Integer manualLottoNumber : manualLottoNumbers) {
+            lotto.add(new LottoNumber(manualLottoNumber));
+        }
+        return lotto;
+    }
 }
