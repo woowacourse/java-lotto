@@ -34,6 +34,10 @@ public enum Rank {
             return SECOND;
         }
 
+        if (matchNumber < FIFTH.matchNumber) {
+            return null;
+        }
+
         return Arrays.stream(Rank.values())
             .filter(rank -> !SECOND.equals(rank))
             .filter(rank -> rank.isSameMatchNumber(matchNumber))

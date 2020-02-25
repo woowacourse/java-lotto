@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_SIZE = 6;
-    private Set<LottoNumber> lottoNumbers;
+    Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
@@ -29,13 +29,4 @@ public class Lotto {
             .collect(Collectors.toSet()));
     }
 
-    int matchWinningNumbers(Lotto winningLotto) {
-        return (int)lottoNumbers.stream()
-            .filter(lottoNumber -> winningLotto.lottoNumbers.contains(lottoNumber))
-            .count();
-    }
-
-    public boolean matchBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
-    }
 }

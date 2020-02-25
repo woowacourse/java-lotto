@@ -17,6 +17,10 @@ public class WinningRanks {
 
     /* winningTicketSize은 각 Rank별 당첨된 티켓 수를 의미한다. */
     Map<Rank, Integer> addWinningRanks(Rank rank) {
+        if (rank == null) {
+            return winningRanks;
+        }
+
         Integer winningTicketSize = winningRanks.get(rank);
         if (winningTicketSize == null) {
             winningTicketSize = DEFAULT_WINNING_TICKET_SIZE;
