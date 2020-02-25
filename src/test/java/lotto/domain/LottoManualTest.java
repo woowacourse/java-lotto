@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoManualCreateTest {
+public class LottoManualTest {
     @Test
     void create() {
         String[] manualLotto = new String[]{"1,2,3,4,5,6", "7,8,9,10,11,12"};
@@ -25,6 +25,6 @@ public class LottoManualCreateTest {
                 .map(LottoNo::new)
                 .collect(Collectors.toList())));
 
-        assertThat(LottoManualCreate.create(manualLotto)).isEqualTo(result);
+        assertThat(LottoManual.create(manualLotto)).isEqualTo(result);
     }
 }

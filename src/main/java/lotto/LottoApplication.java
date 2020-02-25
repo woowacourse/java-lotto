@@ -14,8 +14,11 @@ import java.util.List;
 public class LottoApplication {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputBuyMoney());
-        List<Lotto> lotteries = LottoFactory.createLotteries(money);
-        OutputView.printLotteries(lotteries);
+        int manualCount = StringUtils.ToInt(InputView.inputManualCount());
+        String manualLotto = InputView.inputManualLotto(manualCount);
+
+        List<Lotto> lotteries = LottoFactory.createLotteries(money, manualLotto);
+        OutputView.printLotteries(lotteries, manualCount);
 
         String[] inputWinNumbers = StringUtils.splitNumber(InputView.inputWinNumber());
         WinLotto winLotto = new WinLotto(inputWinNumbers, InputView.inputBonusBall());

@@ -6,7 +6,13 @@ import lotto.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoManualCreate {
+public class LottoManual {
+    private List<Lotto> lottoManual;
+
+    public LottoManual(String lottoManual) {
+        this.lottoManual = create(StringUtils.splitLotto(lottoManual));
+    }
+
     public static List<Lotto> create(String[] manualLotteries) {
         List<Lotto> manualLotto = new ArrayList<>();
         for (String numbers : manualLotteries) {

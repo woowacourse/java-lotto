@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,10 +21,11 @@ public class LottoFactory {
         }
     }
 
-    public static List<Lotto> createLotteries(Money money) {
+    public static List<Lotto> createLotteries(Money money, String manualLotto) {
         validate(money);
-        List<Lotto> lotteries = new ArrayList<>();
-        int createCount = money.divideThousand();
+        String[] manualLotteries = StringUtils.splitLotto(manualLotto);
+        List<Lotto> lotteries = LottoManual.create(manualLotteries);
+        int createCount = money.divideThousand() - manualLotteries.length;
         for (int i = 0; i < createCount; i++) {
             lotteries.add(createLotto());
         }
