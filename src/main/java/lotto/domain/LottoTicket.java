@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.util.ValidateWinningTicketUtils;
+import lotto.util.ValidateTicketUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,9 +28,9 @@ public class LottoTicket {
     public LottoTicket(String inputValue){
         String[] winningBalls = inputValue.split(DELIMITER);
 
-        ValidateWinningTicketUtils.validateWinningBallsNumber(winningBalls);
-        ValidateWinningTicketUtils.validateWinningBallsLength(winningBalls);
-        ValidateWinningTicketUtils.validateDuplicatedWinningBalls(winningBalls);
+        ValidateTicketUtils.validateWinningBallsNumber(winningBalls);
+        ValidateTicketUtils.validateWinningBallsLength(winningBalls);
+        ValidateTicketUtils.validateDuplicatedWinningBalls(winningBalls);
 
         this.lottoTicket = generateCustomLottoTicket(winningBalls);
         Collections.sort(this.lottoTicket);

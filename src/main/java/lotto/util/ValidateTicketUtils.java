@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ValidateWinningTicketUtils {
+public class ValidateTicketUtils {
 
     public static final int LOTTO_TICKET_SIZE = 6;
 
-    private ValidateWinningTicketUtils(){
+    private ValidateTicketUtils(){
     }
 
     public static void validateWinningBallsNumber(String[] winningBalls) {

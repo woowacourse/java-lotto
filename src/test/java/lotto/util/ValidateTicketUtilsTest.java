@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class ValidateWinningTicketUtilsTest {
+class ValidateTicketUtilsTest {
 
     @Test
     @DisplayName("당첨 번호가 숫자인지 확인")
     void validate_winning_balls_number() {
         String[] inputValue = { "1","2","3","4","5","6"};
 
-        assertThatCode(()->ValidateWinningTicketUtils.validateWinningBallsNumber(inputValue))
+        assertThatCode(()-> ValidateTicketUtils.validateWinningBallsNumber(inputValue))
                 .doesNotThrowAnyException();
     }
     @Test
@@ -21,7 +21,7 @@ class ValidateWinningTicketUtilsTest {
     void throw_validate_winning_balls_number() {
         String[] inputValue = { "1","2","3","4","5","가"};
 
-        assertThatThrownBy(()->ValidateWinningTicketUtils.validateWinningBallsNumber(inputValue))
+        assertThatThrownBy(()-> ValidateTicketUtils.validateWinningBallsNumber(inputValue))
                 .isInstanceOf(NumberFormatException.class);
     }
 
@@ -30,7 +30,7 @@ class ValidateWinningTicketUtilsTest {
     void validate_winning_balls_length() {
         String[] inputValue = { "1","2","3","4","5","6"};
 
-        assertThatCode(()->ValidateWinningTicketUtils.validateWinningBallsLength(inputValue))
+        assertThatCode(()-> ValidateTicketUtils.validateWinningBallsLength(inputValue))
                 .doesNotThrowAnyException();
     }
 
@@ -39,7 +39,7 @@ class ValidateWinningTicketUtilsTest {
     void throw_validate_winning_balls_length() {
         String[] inputValue = { "1","2","3","4","5"};
 
-        assertThatThrownBy(()->ValidateWinningTicketUtils.validateWinningBallsLength(inputValue))
+        assertThatThrownBy(()-> ValidateTicketUtils.validateWinningBallsLength(inputValue))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -48,7 +48,7 @@ class ValidateWinningTicketUtilsTest {
     void validate_duplicated_winning_balls() {
         String[] inputValue = { "1","2","3","4","5","6"};
 
-        assertThatCode(()->ValidateWinningTicketUtils.validateDuplicatedWinningBalls(inputValue))
+        assertThatCode(()-> ValidateTicketUtils.validateDuplicatedWinningBalls(inputValue))
                 .doesNotThrowAnyException();
     }
 
@@ -57,7 +57,7 @@ class ValidateWinningTicketUtilsTest {
     void throw_validate_duplicated_winning_balls() {
         String[] inputValue = { "1","2","3","4","5","5"};
 
-        assertThatThrownBy(()->ValidateWinningTicketUtils.validateDuplicatedWinningBalls(inputValue))
+        assertThatThrownBy(()-> ValidateTicketUtils.validateDuplicatedWinningBalls(inputValue))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
