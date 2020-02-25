@@ -9,7 +9,7 @@ public class WinningLottoNumbersFactory {
 	public static SerialLottoNumber createWinningLottoNumbers(String input) {
 		List<Integer> integers = StringParser.stringToIntegerList(input);
 		List<LottoNumber> lottoNumbers = integers.stream()
-				.map(AllLottoNumbers::getLottoNumber)
+				.map(LottoNumber::getLottoNumber)
 				.collect(Collectors.toUnmodifiableList());
 
 		return new SerialLottoNumber(lottoNumbers);

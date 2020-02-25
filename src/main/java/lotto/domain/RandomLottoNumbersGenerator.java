@@ -9,7 +9,7 @@ public class RandomLottoNumbersGenerator implements RandomGenerator {
 	private static final int SIX_INDEX = 6;
 
 	private static final List<LottoNumber> allLottoNumbers
-			= new ArrayList<>(AllLottoNumbers.getAll());
+			= new ArrayList<>(LottoNumber.getAll());
 
 	@Override
 	public List<LottoNumber> generateSixNumbers() {

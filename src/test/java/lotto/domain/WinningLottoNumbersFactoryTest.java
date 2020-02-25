@@ -18,7 +18,7 @@ class WinningLottoNumbersFactoryTest {
 
 		// then
 		List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-				.map(AllLottoNumbers::getLottoNumber)
+				.map(LottoNumber::getLottoNumber)
 				.collect(Collectors.toList());
 		Assertions.assertThat(winningLottoNumbers).isEqualTo(new SerialLottoNumber(lottoNumbers));
 	}

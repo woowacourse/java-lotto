@@ -13,12 +13,12 @@ class AllLottoNumbersTest {
 	@Test
 	void get() {
 		// when
-		List<LottoNumber> allLottoNumbers = AllLottoNumbers.getAll();
+		List<LottoNumber> allLottoNumbers = LottoNumber.getAll();
 
 		// then
 		List<LottoNumber> expected = new ArrayList<>();
 		for (int i = 1; i <= 45; i++) {
-			expected.add(AllLottoNumbers.getLottoNumber(i));
+			expected.add(LottoNumber.getLottoNumber(i));
 		}
 
 		Assertions.assertThat(allLottoNumbers)
@@ -33,7 +33,7 @@ class AllLottoNumbersTest {
 		Assertions.assertThatThrownBy(() -> {
 
 			// when
-			AllLottoNumbers.getLottoNumber(input);
+			LottoNumber.getLottoNumber(input);
 		}).isInstanceOf(LottoNumberIllegalArgumentException.class)
 				.hasMessageMatching("-?[0-9]+ 번호는 유효한 숫자가 아닙니다. 공의 숫자는 1 이상 60 이하여야합니다." );
 	}

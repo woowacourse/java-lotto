@@ -18,7 +18,7 @@ class PurchasedLottoTicketsTest {
 		int[][] input = {{1, 10, 3, 11, 5, 6}, {5, 10, 45, 3, 17, 2}, {4, 7, 13, 19, 22, 37}};
 		for (int[] element : input) {
 			List<LottoNumber> lottoNumbers = Arrays.stream(element)
-					.mapToObj(AllLottoNumbers::getLottoNumber)
+					.mapToObj(LottoNumber::getLottoNumber)
 					.collect(Collectors.toList());
 			SerialLottoNumber lottoTicket = new SerialLottoNumber(lottoNumbers);
 			purchasedLottoTickets.add(lottoTicket);

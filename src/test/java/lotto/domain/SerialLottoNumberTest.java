@@ -19,7 +19,7 @@ public class SerialLottoNumberTest {
 		// given
 		int[] input = {1, 10, 3, 11, 5, 6};
 		List<LottoNumber> lottoNumbers = Arrays.stream(input)
-				.mapToObj(AllLottoNumbers::getLottoNumber)
+				.mapToObj(LottoNumber::getLottoNumber)
 				.collect(Collectors.toList());
 
 		// when
@@ -28,7 +28,7 @@ public class SerialLottoNumberTest {
 		// then
 		int[] sortedInput = {1, 3, 5, 6, 10, 11};
 		Set<LottoNumber> expected = Arrays.stream(sortedInput)
-				.mapToObj(AllLottoNumbers::getLottoNumber)
+				.mapToObj(LottoNumber::getLottoNumber)
 				.collect(Collectors.toSet());
 
 		Assertions.assertThat(lottoTicket.getLottoNumbers())
@@ -40,7 +40,7 @@ public class SerialLottoNumberTest {
 	void LottoTicket_NotSizeSix_ShouldThrowException(int[] input) {
 		// given
 		List<LottoNumber> lottoNumbers = Arrays.stream(input)
-				.mapToObj(AllLottoNumbers::getLottoNumber)
+				.mapToObj(LottoNumber::getLottoNumber)
 				.collect(Collectors.toList());
 
 		// then
@@ -64,7 +64,7 @@ public class SerialLottoNumberTest {
 	void LottoTicket_DuplicatedNumbers_ShouldThrowException(int[] input) {
 		// given
 		List<LottoNumber> lottoNumbers = Arrays.stream(input)
-				.mapToObj(AllLottoNumbers::getLottoNumber)
+				.mapToObj(LottoNumber::getLottoNumber)
 				.collect(Collectors.toList());
 
 		// then
