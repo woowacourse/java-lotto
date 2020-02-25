@@ -12,18 +12,6 @@ import org.junit.jupiter.api.Test;
 class WinningRanksTest {
 
     @Test
-    @DisplayName("랭크별 당첨된 티켓 수 추가")
-    void addWinningRanks() {
-        //given
-        WinningRanks winningRanks = new WinningRanks(new HashMap<>());
-        //when
-        Map<Rank, Integer> winningResults = winningRanks.addWinningRanks(Rank.FIFTH);
-        //then
-        assertThat(winningResults.size()).isEqualTo(1);
-        assertThat(winningResults).isEqualTo(Collections.singletonMap(Rank.FIFTH, 1));
-    }
-
-    @Test
     @DisplayName("랭크별 당첨된 티켓 수 조회")
     void getWinningRanks() {
         //given

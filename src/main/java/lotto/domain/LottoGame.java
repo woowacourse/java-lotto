@@ -17,23 +17,19 @@ public class LottoGame {
     }
 
     private Result produceResult(List<Lotto> lottos, Money purchaseMoney) {
-        Lotto winningLotto = InputView.inputLastWeekWinningNumbers();
-        LottoNumber bonusNumber = InputView.inputBonusNumber();
-        WinningRanks winningRanks = compareWithWinningNumbers(lottos, winningLotto, bonusNumber);
+        WinningLotto winningLotto = InputView.inputWinningLotto();
+        WinningRanks winningRanks = compareWithWinningNumbers(lottos, winningLotto);
         return new Result(winningRanks, purchaseMoney);
     }
 
-    private WinningRanks compareWithWinningNumbers(List<Lotto> lottos, Lotto winningLotto, LottoNumber bonusNumber) {
-        WinningRanks winningRanks = new WinningRanks(new HashMap<>());
+    private WinningRanks compareWithWinningNumbers(List<Lotto> lottos, WinningLotto winningLotto) {
+        Ranks ranks = new Ranks();
         //todo: 함수를 더 간결하게 정리
         for (Lotto lotto : lottos) {
-            int matchingNumber = lotto.matchWinningNumbers(winningLotto);
-            if (Rank.isValid(matchingNumber)) {
-                Rank rank = Rank.valueOf(matchingNumber, lotto.matchBonusNumber(bonusNumber));
-                winningRanks.addWinningRanks(rank);
-            }
+            Rank rank = winningLotto.match(lotto);
+            ranks.add(rank);
         }
-        return winningRanks;
+        return WinningRanksFactory.create(ranks);
     }
 
     private List<Lotto> purchaseLottos(Money purchaseAmount) {
