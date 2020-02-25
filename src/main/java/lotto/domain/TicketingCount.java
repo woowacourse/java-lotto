@@ -5,8 +5,8 @@ import lotto.util.InputValidationUtil;
 public class TicketingCount {
     private int ticketingCount;
 
-    public TicketingCount(int TicketingCount) {
-        this.ticketingCount = InputValidationUtil.returnNumberWithNumberCheck(TicketingCount);
+    public TicketingCount(String ticketingCount) {
+        this.ticketingCount = InputValidationUtil.returnNumberWithNumberCheck(ticketingCount);
         InputValidationUtil.isPositiveNumber(this.ticketingCount);
     }
 

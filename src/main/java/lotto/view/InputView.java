@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.LottoBall;
 import lotto.domain.LottoTicket;
 import lotto.domain.TicketingCount;
-import lotto.domain.PurchaseAmount;
+import lotto.domain.Money;
 import lotto.util.InputValidationUtil;
 
 import java.util.List;
@@ -12,10 +12,10 @@ import java.util.Scanner;
 public class InputView {
     static Scanner scanner = new Scanner(System.in);
 
-    public static PurchaseAmount inputPurchaseAmount() {
+    public static Money inputPurchaseAmount() {
         try {
             String purchaseAmountInput = scanner.nextLine();
-            return new PurchaseAmount(purchaseAmountInput);
+            return new Money(purchaseAmountInput);
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputPurchaseAmount();

@@ -9,7 +9,8 @@ import java.util.List;
 
 public class LottoController {
 
-    private PurchaseAmount purchaseAmount;
+    private Money money;
+    private TicketingCount ticketingCount;
 
     public void play() {
         startInputPurchaseAmount();
@@ -23,7 +24,7 @@ public class LottoController {
         WinningTicket winningTicket = generateWinningBalls();
         List<WinningRank> winningRanks = generateWinningRank(winningTicket);
 
-        EarningRate earningRate = new EarningRate(winningRanks, purchaseAmount);
+        EarningRate earningRate = new EarningRate(winningRanks, money);
         OutputView.printResultAllOfRank(winningRanks, earningRate);
         OutputView.printEarningRate(earningRate);
     }
@@ -40,18 +41,18 @@ public class LottoController {
     }
 
     private void generateLottoTickets() {
-        for (int i = 0; i < purchaseAmount.lottoTicketCount(); i++) {
-            LottoBallFactory.shuffle();
-            LottoTickets.insertLottoTicket(generateLottoTicket());
-        }
+//        for (int i = 0; i < money.lottoTicketCount(); i++) {
+//            LottoBallFactory.shuffle();
+//            LottoTickets.insertLottoTicket(generateLottoTicket());
+//        }
         OutputView.printLottoTicket();
     }
 
     private void startInputPurchaseAmount() {
         OutputView.printStartGuide();
-        purchaseAmount = InputView.inputPurchaseAmount();
-        OutputView.printLottePieces(purchaseAmount.lottoTicketCount());
-        OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
+        money = InputView.inputPurchaseAmount();
+//        OutputView.printLottePieces(money.lottoTicketCount());
+        OutputView.printChangeMoney(money.giveChangeMoney());
     }
 
     private LottoTicket generateLottoTicket() {

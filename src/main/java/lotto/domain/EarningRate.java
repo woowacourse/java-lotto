@@ -9,8 +9,8 @@ public class EarningRate {
     private double earningRate;
     private double totalWinningMoney = 0.0;
 
-    private int calculateEarningRate(PurchaseAmount purchaseAmount) {
-        return (int) (totalWinningMoney / purchaseAmount.getPurchaseAmount() * RATE_NUMBER);
+    private int calculateEarningRate(Money money) {
+        return (int) (totalWinningMoney / money.getMoney() * RATE_NUMBER);
     }
 
     private void generateWinningRank(List<WinningRank> winningRanks) {
@@ -27,13 +27,13 @@ public class EarningRate {
         this.totalWinningMoney += totalWinningMoney;
     }
 
-    public EarningRate(List<WinningRank> winningRanks, PurchaseAmount purchaseAmount) {
+    public EarningRate(List<WinningRank> winningRanks, Money money) {
         generateWinningRank(winningRanks);
-        if (Double.isInfinite(calculateEarningRate(purchaseAmount))
-                || Double.isNaN(calculateEarningRate(purchaseAmount))) {
+        if (Double.isInfinite(calculateEarningRate(money))
+                || Double.isNaN(calculateEarningRate(money))) {
             throw new IllegalArgumentException(ILLEGAL_PURCHASE_AMOUNT);
         }
-        this.earningRate = calculateEarningRate(purchaseAmount);
+        this.earningRate = calculateEarningRate(money);
     }
 
     public int countRankPeople(List<WinningRank> winningRanks, WinningRank winningRank) {
