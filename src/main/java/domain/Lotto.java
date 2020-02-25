@@ -23,10 +23,10 @@ public class Lotto {
 		duplicationValidate(this.numbers);
 	}
 
-	public Lotto(String input) {
-		this(Arrays.stream(input.split(DELIMITER))
-			.map(Integer::parseInt)
-			.map(LottoNumber::createNumber)
+	public Lotto(String[] numbers) {
+		this(Arrays.stream(numbers)
+			.mapToInt(Integer::parseInt)
+			.mapToObj(LottoNumber::createNumber)
 			.collect(Collectors.toList()));
 	}
 

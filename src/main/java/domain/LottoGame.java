@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,18 +16,22 @@ public class LottoGame {
 		lottos = LottoFactory.createLottos(purchaseMoney);
 	}
 
-	public GameResult play(String inputSixNumbers, String inputBonusNumber) {
+	public GameResult play(String[] inputSixNumbers, String inputBonusNumber) {
+		duplicationValidate(inputSixNumbers, inputBonusNumber);
 		Lotto winningNumbers = new Lotto(inputSixNumbers);
 		LottoNumber bonusNumber = LottoNumber.createNumber(inputBonusNumber);
-		bonusNumberValidate(winningNumbers, bonusNumber);
 
 		return lottosCompare(winningNumbers, bonusNumber);
 	}
 
-	private void bonusNumberValidate(Lotto winningNumbers, LottoNumber lottoNumber) {
-		if (winningNumbers.isContains(lottoNumber)) {
+	private void duplicationValidate(String[] inputSixNumbers, String inputBonusNumber) {
+		if (isContains(inputSixNumbers, inputBonusNumber)) {
 			throw new LottoNumberDuplicateException();
 		}
+	}
+
+	private boolean isContains(String[] inputSixNumbers, String inputBonusNumber) {
+		return Arrays.asList(inputSixNumbers).contains(inputBonusNumber);
 	}
 
 	private GameResult lottosCompare(Lotto winningNumbers, LottoNumber bonusNumber) {
