@@ -24,10 +24,10 @@ public class LottoController {
     }
 
     public void run() {
-        BettingMoney randomBettingMoney = BettingMoney.valueOf(inputView.inputBettingMoney());
-        BettingInfo bettingInfo = new BettingInfo(randomBettingMoney, inputView.inputManualTicketAmount());
+        BettingMoney bettingMoney = BettingMoney.valueOf(inputView.inputBettingMoney());
+        BettingInfo bettingInfo = new BettingInfo(bettingMoney, inputView.inputManualTicketAmount());
         ManualNumberBundle manualNumberBundle = new ManualNumberBundle(inputView.inputManualNumbers(bettingInfo.getManualAmount()));
-        OutputView.printBuyTicketCount(bettingInfo.getRandomAmount(), bettingInfo.getManualAmount());
+        OutputView.printBuyTicketCount(bettingInfo);
 
         LottoTicketBundle lottoTicketBundle = lottoService.getLottoTicketBundle(bettingInfo, manualNumberBundle);
         OutputView.printBuyTickets(lottoTicketBundle);

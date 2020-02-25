@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.result.LottoResultBundle;
 import lotto.domain.result.win.rank.Rank;
+import lotto.domain.ticket.BettingInfo;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketBundle;
 import lotto.domain.ticket.ball.LottoNumber;
@@ -9,8 +10,8 @@ import lotto.domain.ticket.ball.LottoNumber;
 public class OutputView {
     private static final String SECOND = "SECOND";
 
-    public static void printBuyTicketCount(int randomCount, int manualCount) {
-        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualCount, randomCount));
+    public static void printBuyTicketCount(BettingInfo bettingInfo) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", bettingInfo.getManualAmount(), bettingInfo.getRandomAmount()));
     }
 
     public static void printBuyTickets(LottoTicketBundle lottoTicketBundle) {

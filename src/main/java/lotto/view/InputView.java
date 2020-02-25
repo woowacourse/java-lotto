@@ -26,7 +26,6 @@ public class InputView {
         return convertToInteger(bettingMoney);
     }
 
-
     public Set<Integer> inputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumber = scanner.nextLine();

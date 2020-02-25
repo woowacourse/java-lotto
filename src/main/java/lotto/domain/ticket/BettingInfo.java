@@ -18,7 +18,7 @@ public class BettingInfo {
     }
 
     public int getRandomAmount() {
-        return bettingMoney.getRandomTicketAmount(manualAmount);
+        return bettingMoney.getTicketCount() - manualAmount;
     }
 
     public int getManualAmount() {

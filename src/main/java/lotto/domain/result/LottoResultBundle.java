@@ -28,7 +28,7 @@ public class LottoResultBundle {
 
     private void addResult(Rank rank, List<Rank> ranks) {
         int matchTicketCount = (int) ranks.stream()
-                .filter(aRank -> aRank.equals(rank))
+                .filter(rank::equals)
                 .count();
         this.results.put(rank, matchTicketCount);
     }
@@ -56,5 +56,4 @@ public class LottoResultBundle {
     public int getMatchTicketCount(Rank rank) {
         return this.results.get(rank);
     }
-
 }
