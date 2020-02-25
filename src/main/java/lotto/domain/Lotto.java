@@ -7,6 +7,9 @@ import java.util.*;
 
 public class Lotto {
 	public static final int SIZE = 6;
+	public static final String LOTTOBALL_AMOUNT_ERROR = "로또 번호는 " + SIZE + "개여야 합니다!";
+	public static final String NULL_OR_EMPTY_VALUE_ERROR = "null이나 빈 값은 들어올 수 없습니다!";
+	public static final String DUPLICATE_BALL_ERROR = "중복된 번호가 존재합니다!";
 
 	private final List<Integer> lottoNumber;
 
@@ -23,19 +26,19 @@ public class Lotto {
 
 	private void validateNullAndEmpty(List<Integer> lottoNumber) {
 		if (lottoNumber == null || lottoNumber.isEmpty()) {
-			throw new LottoException("null이나 빈 값은 들어올 수 없습니다!");
+			throw new LottoException(NULL_OR_EMPTY_VALUE_ERROR);
 		}
 	}
 
 	private void validateSizeMismatch(List<Integer> lottoNumber) {
 		if (lottoNumber.size() != SIZE) {
-			throw new LottoException("로또 번호는 " + SIZE + "개여야 합니다!");
+			throw new LottoException(LOTTOBALL_AMOUNT_ERROR);
 		}
 	}
 
 	private void validateDuplicateNumber(List<Integer> lottoNumber) {
 		if (lottoNumber.size() != new HashSet<>(lottoNumber).size()) {
-			throw new LottoException("중복된 번호가 존재합니다!");
+			throw new LottoException(DUPLICATE_BALL_ERROR);
 		}
 	}
 
