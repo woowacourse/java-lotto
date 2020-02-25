@@ -1,17 +1,18 @@
 package lotto;
 
-import static lotto.domain.LottoStore.*;
 import static lotto.domain.WinningLottoParser.*;
 import static lotto.view.ConsoleInputView.*;
 import static lotto.view.ConsoleOutputView.*;
 
-import java.util.List;
 import java.util.Map;
 
+import lotto.domain.AutoLottoPurchaseStrategy;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPurchaseStrategy;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 
@@ -21,7 +22,9 @@ public class ConsoleUILottoApplication {
 		int numberOfLotto = inputLottoMoney.getNumberOfLotto();
 		printPurchaseCompleteMessage(numberOfLotto);
 
-		Lottos lottos = purchaseLotto(numberOfLotto);
+		LottoPurchaseStrategy lottoPurchaseStrategy = new AutoLottoPurchaseStrategy();
+		LottoStore lottoStore = new LottoStore(lottoPurchaseStrategy);
+		Lottos lottos = lottoStore.purchaseLotto(numberOfLotto);
 		printPurchasedLotto(lottos);
 
 		Lotto winningLottoNumber = new Lotto(parseToLottoNumberSet(inputWinningLottoNumber()));
