@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import javafx.scene.effect.SepiaTone;
+
+import java.util.*;
 
 public class LottoFactory {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -25,8 +25,8 @@ public class LottoFactory {
         return LottoFactoryHolder.instance;
     }
 
-    public static List<LottoNumber> createRandomLottoNumbers() {
-        List<LottoNumber> lotto = new ArrayList<>();
+    public static Set<LottoNumber> createRandomLottoNumbers() {
+        Set<LottoNumber> lotto = new HashSet<>();
         Collections.shuffle(lottoNumbers);
         for (int i = 0; i < LOTTO_LENGTH; i++) {
             lotto.add(lottoNumbers.get(i));
@@ -34,8 +34,8 @@ public class LottoFactory {
         return lotto;
     }
 
-    public static List<LottoNumber> createManualLottoNumbers(List<Integer> manualLottoNumbers) {
-        List<LottoNumber> lotto = new ArrayList<>();
+    public static Set<LottoNumber> createManualLottoNumbers(List<Integer> manualLottoNumbers) {
+        Set<LottoNumber> lotto = new HashSet<>();
         for (Integer manualLottoNumber : manualLottoNumbers) {
             lotto.add(new LottoNumber(manualLottoNumber));
         }
