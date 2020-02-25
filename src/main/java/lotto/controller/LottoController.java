@@ -40,7 +40,7 @@ public class LottoController {
     }
 
     private void generateLottoTickets() {
-        for (int i = 0; i < purchaseAmount.lottoTicket(); i++) {
+        for (int i = 0; i < purchaseAmount.lottoTicketCount(); i++) {
             LottoBallFactory.shuffle();
             LottoTickets.insertLottoTicket(generateLottoTicket());
         }
@@ -50,7 +50,7 @@ public class LottoController {
     private void startInputPurchaseAmount() {
         OutputView.printStartGuide();
         purchaseAmount = InputView.inputPurchaseAmount();
-        OutputView.printLottePieces(purchaseAmount.lottoTicket());
+        OutputView.printLottePieces(purchaseAmount.lottoTicketCount());
         OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
     }
 

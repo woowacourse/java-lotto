@@ -20,7 +20,7 @@ public class PurchaseAmount {
         }
     }
 
-    public int lottoTicket() {
+    public int lottoTicketCount() {
         return (int) (this.purchaseAmount / LOTTO_PURCHASE_UNIT);
     }
 
