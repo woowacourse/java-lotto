@@ -7,15 +7,15 @@ public class Money {
     private final int amount;
 
     Money(final String amount) {
-        this.amount = validMoney(amount);
+        this.amount = getValidatedMoney(amount);
     }
 
     public static Money create(String amount) {
         return new Money(amount);
     }
 
-    private int validMoney(String amount) {
-        int parsedAmount = validNumber(amount);
+    private int getValidatedMoney(String amount) {
+        int parsedAmount = parseAmountToInteger(amount);
         validateAmount(parsedAmount);
         return parsedAmount;
     }
@@ -26,7 +26,7 @@ public class Money {
         }
     }
 
-    private int validNumber(String amount) {
+    private int parseAmountToInteger(String amount) {
         int parsedAmount;
         try {
             parsedAmount = Integer.parseInt(amount);
