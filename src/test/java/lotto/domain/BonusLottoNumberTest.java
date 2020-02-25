@@ -22,7 +22,7 @@ public class BonusLottoNumberTest {
 	@BeforeEach
 	void setUp() {
 		winningLotto = new WinningLotto(
-				LottoNumber.getCache().stream()
+				LottoNumber.getLottoNumberCache().stream()
 						.limit(6)
 						.collect(Collectors.toList())
 		);

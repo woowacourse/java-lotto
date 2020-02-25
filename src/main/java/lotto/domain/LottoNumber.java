@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * 지정된 범위의 로또 번호를 캐시로 가지고 있는 클래스
@@ -15,16 +16,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	private static final int MAXIMUM_LOTTO_VALUE = 45;
 	private static final String INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE = "유효한 로또 번호가 아닙니다.";
 	private static final String NONE_INTEGER_INPUT_EXCEPTION_MESSAGE = "입력 보너스 번호가 정수가 아닙니다.";
-	private static final List<LottoNumber> CACHE;
+	private static final List<LottoNumber> LOTTO_NUMBER_CACHE = new ArrayList<>();
 
 	private final int lottoNumber;
 
 	static {
-		List<LottoNumber> lottoNumbers = new ArrayList<>();
-		for (int i = MINIMAL_LOTTO_VALUE; i <= MAXIMUM_LOTTO_VALUE; i++) {
-			lottoNumbers.add(new LottoNumber(i));
-		}
-		CACHE = Collections.unmodifiableList(lottoNumbers);
+		IntStream.rangeClosed(MINIMAL_LOTTO_VALUE, MAXIMUM_LOTTO_VALUE)
+				.mapToObj(LottoNumber::new)
+				.forEach(LOTTO_NUMBER_CACHE::add);
 	}
 
 	private LottoNumber(int inputLottoNumber) {
@@ -44,7 +43,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static LottoNumber of(final int lottoNumber) {
-		return CACHE.stream()
+		return LOTTO_NUMBER_CACHE.stream()
 				.filter(value -> value.lottoNumber == lottoNumber)
 				.findFirst()
 				.orElseThrow(() -> new InvalidLottoNumberException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE));
@@ -58,8 +57,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		}
 	}
 
-	public static List<LottoNumber> getCache() {
-		return new ArrayList<>(CACHE);
+	public static List<LottoNumber> getLottoNumberCache() {
+		return new ArrayList<>(LOTTO_NUMBER_CACHE);
 	}
 
 	public int getLottoNumber() {

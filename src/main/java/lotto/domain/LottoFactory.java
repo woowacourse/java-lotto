@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class LottoFactory {
 
 	private static Map<LottoType, LottoCreator> creators = new HashMap<>();
-	private static List<LottoNumber> allLottoNumbers = LottoNumber.getCache();
+	private static List<LottoNumber> allLottoNumbers = LottoNumber.getLottoNumberCache();
 
 	static {
 		creators.put(LottoType.PAID_LOTTO, new PaidLottoCreator());
