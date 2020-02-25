@@ -10,7 +10,7 @@ public class ResultCount {
     }
 
     public long multiply(int operand) {
-        return (long) count * operand;
+        return count * operand;
     }
 
     public static ResultCount sum(ResultCount count1, ResultCount count2) {

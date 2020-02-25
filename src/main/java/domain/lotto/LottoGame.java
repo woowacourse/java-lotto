@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGame {
-    private static final int COUNT_NUMBER = 1;
     private static final String ERROR_NULL_MESSAGE = "null값이 입력되었습니다.";
 
     private List<LottoNumbers> lottoGame;
@@ -19,6 +18,12 @@ public class LottoGame {
     public LottoGame(List<LottoNumbers> lottoGame) {
         validateNullValue(lottoGame);
         this.lottoGame = lottoGame;
+    }
+
+    public static LottoGame create(NumberGenerator numberGenerator, int repeat) {
+        return IntStream.range(0, repeat)
+                .mapToObj(i -> LottoNumbersFactory.createLottoNumbers(numberGenerator))
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoGame::new));
     }
 
     private void validateNullValue(List<LottoNumbers> lottoGame) {
@@ -29,15 +34,9 @@ public class LottoGame {
 
     public LottoResult createGameResult(LottoWinner winner) {
         return new LottoResult(lottoGame.stream()
-                .collect(Collectors.toMap(winner::createRank,
-                        count -> new ResultCount(COUNT_NUMBER),
-                        ResultCount::sum)));
-    }
-
-    public static LottoGame create(NumberGenerator numberGenerator, int repeat) {
-        return IntStream.range(0, repeat)
-                .mapToObj(i -> LottoNumbersFactory.createLottoNumbers(numberGenerator))
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoGame::new));
+                .collect(Collectors.groupingBy(winner::createRank,
+                        Collectors.collectingAndThen(Collectors.counting(),
+                                ResultCount::new))));
     }
 
     public List<LottoNumbers> getLottoGame() {

@@ -8,7 +8,6 @@ public class ResultCountTest {
     @Test
     void 생성_테스트() {
         ResultCount resultCount = new ResultCount(0);
-
         Assertions.assertThat(resultCount).hasFieldOrPropertyWithValue("count", 0L);
     }
 
@@ -16,9 +15,7 @@ public class ResultCountTest {
     void sum_테스트() {
         ResultCount resultCount = new ResultCount(1);
         ResultCount resultCount1 = new ResultCount(2);
-
         ResultCount resultCount2 = ResultCount.sum(resultCount, resultCount1);
-
         Assertions.assertThat(resultCount2).hasFieldOrPropertyWithValue("count", 3L);
     }
 
@@ -26,7 +23,6 @@ public class ResultCountTest {
     void equals_테스트() {
         ResultCount resultCount1 = new ResultCount(1);
         ResultCount resultCount2 = new ResultCount(1);
-
         Assertions.assertThat(resultCount1).isEqualTo(resultCount2);
     }
 
