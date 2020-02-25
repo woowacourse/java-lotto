@@ -21,6 +21,7 @@ public enum Rank {
 
         Arrays.stream(values())
                 .filter(rank -> rank.isNot(SECOND))
+                .filter(rank -> rank.isNot(MISS))
                 .forEach(rank ->
                         RANK_MATCHER_WITHOUT_BONUS.put(rank.countOfMatches, rank));
     }
