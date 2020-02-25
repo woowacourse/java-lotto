@@ -19,12 +19,12 @@ public class LottoPurchaseMoney {
 	}
 
 	private void validate(long lottoMoney) {
-		if (isUnitFit(lottoMoney)) {
+		if (canNotDivideByUnit(lottoMoney)) {
 			throw new IllegalArgumentException(INVALID_PURCHASE_MONEY_MESSAGE);
 		}
 	}
 
-	private boolean isUnitFit(long lottoMoney) {
+	private boolean canNotDivideByUnit(long lottoMoney) {
 		return lottoMoney % MONEY_UNIT != 0;
 	}
 
