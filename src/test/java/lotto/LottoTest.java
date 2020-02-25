@@ -4,14 +4,16 @@ import domain.Lotto;
 import domain.LottoFactory;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     @Test
     void 로또_번호_갯수_6개인지_확인(){
-        Lotto lotto = LottoFactory.createOneLotto();
-        assertThat(lotto.getSize()).isEqualTo(6);
+        List<Lotto> lotto = LottoFactory.createLottoTickets(1);
+        assertThat(lotto.get(0).getSize()).isEqualTo(6);
 
         assertThatThrownBy(() -> {
             Lotto.checkLottoSizeSix(7);

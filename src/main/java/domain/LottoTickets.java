@@ -1,14 +1,13 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
-    private List<Lotto> lottoTickets = new ArrayList<>();
+    private final List<Lotto> lottoTickets;
 
-    public void addLotto(Lotto oneLotto) {
-        lottoTickets.add(oneLotto);
+    public LottoTickets(List<Lotto> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
     public LottoResult countWinningLotto(WinningNumber winningNumber) {
