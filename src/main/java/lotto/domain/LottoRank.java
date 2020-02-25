@@ -16,26 +16,26 @@ import com.google.common.collect.Lists;
  * @since 2020/02/19
  */
 public enum LottoRank {
-	FIRST(MatchCount.of(6), new Money(2_000_000_000L),
+	FIRST(MatchCount.of(6), new LottoPurchaseMoney(2_000_000_000L),
 			(matchCount, isBonus) -> MatchCount.of(6).equals(matchCount) && !isBonus),
-	SECOND(MatchCount.of(5), new Money(30_000_000L),
+	SECOND(MatchCount.of(5), new LottoPurchaseMoney(30_000_000L),
 			(matchCount, isBonus) -> MatchCount.of(5).equals(matchCount) && isBonus),
-	THIRD(MatchCount.of(5), new Money(1_500_000L)),
-	FOURTH(MatchCount.of(4), new Money(50_000L)),
-	FIFTH(MatchCount.of(3), new Money(5_000L)),
-	MISS(MatchCount.of(0), new Money(0), (matchCount, isBonus) -> true);
+	THIRD(MatchCount.of(5), new LottoPurchaseMoney(1_500_000L)),
+	FOURTH(MatchCount.of(4), new LottoPurchaseMoney(50_000L)),
+	FIFTH(MatchCount.of(3), new LottoPurchaseMoney(5_000L)),
+	MISS(MatchCount.of(0), new LottoPurchaseMoney(0), (matchCount, isBonus) -> true);
 
 	public static final String INVALID_RANK_MESSAGE = "식별할 수 없는 순위입니다.";
 
 	private final MatchCount matchCount;
-	private final Money winnings;
+	private final LottoPurchaseMoney winnings;
 	private final BiPredicate<MatchCount, Boolean> match;
 
-	LottoRank(MatchCount matchCount, Money winnings) {
+	LottoRank(MatchCount matchCount, LottoPurchaseMoney winnings) {
 		this(matchCount, winnings, (count, isBonus) -> matchCount.equals(count));
 	}
 
-	LottoRank(MatchCount matchCount, Money winnings, BiPredicate<MatchCount, Boolean> match) {
+	LottoRank(MatchCount matchCount, LottoPurchaseMoney winnings, BiPredicate<MatchCount, Boolean> match) {
 		this.matchCount = matchCount;
 		this.winnings = winnings;
 		this.match = match;
@@ -64,7 +64,7 @@ public enum LottoRank {
 		return matchCount;
 	}
 
-	public Money getWinnings() {
+	public LottoPurchaseMoney getWinnings() {
 		return winnings;
 	}
 }

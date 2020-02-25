@@ -29,9 +29,9 @@ public class MatchResult {
 		}
 	}
 
-	public long calculateTotalProfits(Money money) {
+	public long calculateTotalProfits(LottoPurchaseMoney lottoPurchaseMoney) {
 		long totalWinning = calculateTotalWinnings();
-		return totalWinning * MULTIPLY_PERCENTAGE / money.get();
+		return totalWinning * MULTIPLY_PERCENTAGE / lottoPurchaseMoney.get();
 	}
 
 	private long calculateTotalWinnings() {

@@ -5,9 +5,9 @@ import java.util.Objects;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGeneratable;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.LottoTicket;
 import lotto.domain.MatchResult;
-import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -27,14 +27,14 @@ public class LottoGame {
 	}
 
 	public void run() {
-		Money purchaseMoney = new Money(InputView.inputLottoMoney());
-		LottoTicket lottoTicket = lottoTicketFactory.generate(purchaseMoney);
+		LottoPurchaseMoney purchaseLottoPurchaseMoney = new LottoPurchaseMoney(InputView.inputLottoMoney());
+		LottoTicket lottoTicket = lottoTicketFactory.generate(purchaseLottoPurchaseMoney);
 		OutputView.printLottoTicket(lottoTicket);
 
 		WinningLotto winningLotto = generateWinningLotto();
 		MatchResult matchResult = lottoTicket.matchAll(winningLotto);
 		OutputView.printStatistics(matchResult);
-		OutputView.printTotalProfits(matchResult.calculateTotalProfits(purchaseMoney));
+		OutputView.printTotalProfits(matchResult.calculateTotalProfits(purchaseLottoPurchaseMoney));
 	}
 
 	private WinningLotto generateWinningLotto() {

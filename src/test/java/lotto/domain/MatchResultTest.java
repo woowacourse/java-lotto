@@ -43,7 +43,7 @@ public class MatchResultTest {
 	@Test
 	@DisplayName("총 수익률 연산 테스트")
 	void calculateTotalProfits() {
-		assertThat(matchResult.calculateTotalProfits(new Money(100_000L))).isEqualTo(2_004_510L);
+		assertThat(matchResult.calculateTotalProfits(new LottoPurchaseMoney(100_000L))).isEqualTo(2_004_510L);
 	}
 
 	@Test

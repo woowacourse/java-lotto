@@ -12,30 +12,30 @@ import org.junit.jupiter.api.Test;
  * @author K.S.KIM
  * @since 2020/02/19
  */
-public class MoneyTest {
+public class LottoPurchaseMoneyTest {
 	@Test
 	@DisplayName("생성자 테스트")
 	void constructor() {
-		assertThat(new Money(14000)).isExactlyInstanceOf(Money.class);
+		assertThat(new LottoPurchaseMoney(14000)).isExactlyInstanceOf(LottoPurchaseMoney.class);
 	}
 
 	@Test
 	@DisplayName("생성자에서 구입 금액이 1000으로 나누어 떨어지지 않는 경우")
 	void constructor_MoneyDivideByUnit() {
-		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Money(14500));
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new LottoPurchaseMoney(14500));
 	}
 
 	@Test
 	@DisplayName("곱셈 테스트")
 	void multiply() {
-		Money money = new Money(14000);
-		assertThat(money.multiply(100L)).isEqualTo(1_400_000L);
+		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(14000);
+		assertThat(lottoPurchaseMoney.multiply(100L)).isEqualTo(1_400_000L);
 	}
 
 	@Test
 	@DisplayName("구입할 수 있는 개수 테스트")
 	void calculateBuyCount() {
-		Money money = new Money(14000);
-		assertThat(money.calculateBuyCount()).isEqualTo(14);
+		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(14000);
+		assertThat(lottoPurchaseMoney.calculateBuyCount()).isEqualTo(14);
 	}
 }

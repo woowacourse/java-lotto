@@ -8,5 +8,5 @@ package lotto.domain;
  * @since 2020/02/19
  */
 public interface LottoGeneratable {
-	LottoTicket generate(Money money);
+	LottoTicket generate(LottoPurchaseMoney lottoPurchaseMoney);
 }
