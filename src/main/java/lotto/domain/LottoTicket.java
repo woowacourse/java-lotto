@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
@@ -16,10 +14,12 @@ public class LottoTicket {
     }
 
     private void validateLottoLength(Set<LottoNumber> lottoNumbers) {
-        if(lottoNumbers.size() != LOTTO_LENGTH){
+        if (lottoNumbers.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException(LOTTO_NUMBER_ERROR_MESSAGE);
         }
     }
 
-
+    boolean isContain(LottoNumber bonusNumber) {
+        return LottoTicket.contains(bonusNumber);
+    }
 }
