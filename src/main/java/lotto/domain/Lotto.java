@@ -12,10 +12,6 @@ public class Lotto {
         Collections.sort(this.lottoNumbers);
     }
 
-    Lotto() {
-        this(createLottoNumbers());
-    }
-
     public static Lotto from(String[] numbers) {
         validateEmptyValue(numbers);
         validateNumbersCount(numbers);
