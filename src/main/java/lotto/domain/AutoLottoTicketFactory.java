@@ -25,7 +25,7 @@ public class AutoLottoTicketFactory implements LottoGeneratable {
 	}
 
 	private Lotto generate() {
-		return RANDOM.ints(LottoNumber.MIN_VALUE, LottoNumber.MAX_VAULE + 1)
+		return RANDOM.ints(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
 				.distinct()
 				.limit(Lotto.SIZE)
 				.mapToObj(LottoNumber::of)

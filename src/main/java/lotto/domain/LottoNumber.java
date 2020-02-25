@@ -13,13 +13,13 @@ import java.util.Objects;
  */
 public class LottoNumber implements Comparable<LottoNumber> {
 	public static final int MIN_VALUE = 1;
-	public static final int MAX_VAULE = 45;
+	public static final int MAX_VALUE = 45;
 	private static final String INVALID_NUMBER_MESSAGE = "생성할 수 없는 수입니다.";
-	private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+	private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
 
 	static {
-		for (int number = MIN_VALUE; number <= MAX_VAULE; ++number) {
-			CACHE.put(number, new LottoNumber(number));
+		for (int number = MIN_VALUE; number <= MAX_VALUE; ++number) {
+			LOTTO_NUMBER_CACHE.put(number, new LottoNumber(number));
 		}
 	}
 
@@ -32,11 +32,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	public static LottoNumber of(int number) {
 		validate(number);
-		return CACHE.get(number);
+		return LOTTO_NUMBER_CACHE.get(number);
 	}
 
 	private static void validate(int number) {
-		if (number < MIN_VALUE || number > MAX_VAULE) {
+		if (number < MIN_VALUE || number > MAX_VALUE) {
 			throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
 		}
 	}
