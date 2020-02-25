@@ -1,6 +1,5 @@
 package lotto.parser;
 
-import lotto.domain.lotto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,11 +22,4 @@ public class GameParserTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void createWinningLotto() {
-        String winningLottoInput = "1,2,3,4,5,6";
-        String bonusNumberInput = "7";
-        GameParser gameParser = new GameParser();
-        WinningLotto winningLotto = gameParser.createWinningLotto(winningLottoInput, bonusNumberInput);
-    }
 }

@@ -17,8 +17,7 @@ public class Application {
         LottoMoney lottoMoney = new LottoMoney(gameParser.parseInputToInt(InputView.inputLottoMoney()));
         LottoTickets lottoTickets = LottoTicketFactory.publishLottoTickets(lottoMoney);
         OutputView.printLottoTickets(lottoTickets);
-        WinningLotto winningLotto = gameParser.createWinningLotto(InputView.inputWinningLotto(),
-                InputView.inputBonusNumber());
+        WinningLotto winningLotto = LottoTicketFactory.publishWinningLotto(InputView.inputWinningLotto(), InputView.inputBonusNumber());
         LottoResult lottoResult = lottoTickets.getLottoResults(winningLotto);
         OutputView.printLottoResult(lottoResult);
         OutputView.printProfit(lottoResult, lottoMoney);
