@@ -5,6 +5,9 @@ import lotto.domain.*;
 import java.util.stream.Collectors;
 
 public class OutputView {
+
+    private OutputView(){ }
+
     public static void printErrorMessage(String errorMessage) {
         System.err.println(errorMessage);
     }
@@ -13,7 +16,7 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printManualTicketsGuide() {
+    public static void printManualTicketNumberGuide() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 

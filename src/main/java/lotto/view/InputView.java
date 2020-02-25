@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.Exception.DuplicationException;
 import lotto.Exception.NotBuyLottoTicketException;
+import lotto.Exception.NotPositiveNumberException;
 import lotto.Exception.NumberOutOfRangeException;
 import lotto.domain.LottoBall;
 import lotto.domain.LottoBallFactory;
@@ -15,6 +16,8 @@ import java.util.Set;
 public class InputView {
     static Scanner scanner = new Scanner(System.in);
 
+    private InputView() { }
+
     public static PurchaseAmount inputPurchaseAmount() {
         try {
             OutputView.printStartGuide();
@@ -23,6 +26,18 @@ public class InputView {
         } catch (NotBuyLottoTicketException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputPurchaseAmount();
+        }
+    }
+
+    public static int inputManualTicketNumber() {
+        try {
+            OutputView.printManualTicketNumberGuide();
+            int manualTicketNumber = InputValidationUtil.returnNumberWithNumberCheck(scanner.nextLine());
+            InputValidationUtil.isPositiveNumber(manualTicketNumber);
+            return manualTicketNumber;
+        }catch (NumberFormatException | NotPositiveNumberException e){
+            OutputView.printErrorMessage(e.getMessage());
+            return inputManualTicketNumber();
         }
     }
 
