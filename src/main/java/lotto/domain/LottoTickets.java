@@ -30,6 +30,10 @@ public class LottoTickets implements Iterable<LottoTicket> {
         return new LottoTickets(lottoTickets);
     }
 
+    public int getQuantity() {
+        return lottoTickets.size() * Money.TICKET_PRICE;
+    }
+
     @Override
     public String toString() {
         return lottoTickets.stream()

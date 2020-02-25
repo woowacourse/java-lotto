@@ -56,4 +56,8 @@ public class Money {
     public void reduceAmountForAutoTicket(LottoQuantity quantity) {
         amount -= quantity.getQuantity() * TICKET_PRICE;
     }
+
+    public boolean isEnough(int price) {
+        return amount >= price;
+    }
 }

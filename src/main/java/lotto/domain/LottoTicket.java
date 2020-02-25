@@ -50,13 +50,13 @@ public class LottoTicket {
             .distinct()
             .count();
         if (lottoTicket.size() != distinctCount) {
-            throw new InvalidLottoTicketException("유효하지 않은 당첨 번호 값입니다.");
+            throw new InvalidLottoTicketException("유효하지 않은 로또 형식입니다.");
         }
     }
 
     private void validateLottoSize(List<LottoNumber> lottoTicket) {
         if (lottoTicket.size() != LOTTO_NUMBER_COUNT) {
-            throw new InvalidLottoTicketException("유효하지 않은 당첨 번호 값입니다.");
+            throw new InvalidLottoTicketException("유효하지 않은 로또 형식입니다.");
         }
     }
 

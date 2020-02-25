@@ -10,6 +10,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.exceptions.InvalidLottoNumberException;
+import lotto.exceptions.InvalidLottoQuantityException;
 import lotto.exceptions.InvalidLottoTicketException;
 import lotto.exceptions.InvalidMoneyException;
 import lotto.view.InputView;
@@ -18,8 +19,9 @@ import lotto.view.OutputView;
 public class LottoController {
     public static void run() {
         Money money = getMoney();
-        LottoQuantity quantity = getLottoQuantity();
+        LottoQuantity quantity = getLottoQuantity(money);
         money.reduceAmountForAutoTicket(quantity);
+        OutputView.inputManualNumberInstruction();
         LottoTickets tickets = getLottoTickets(money, getManualTickets(quantity));
         LottoTicket winningLotto = getWinnerTicket();
         LottoNumber bonus = getBonusNumber(winningLotto);
@@ -28,9 +30,14 @@ public class LottoController {
         OutputView.profitRate(LottoResult.calculate(money, result.getLottoResult()));
     }
 
-    private static LottoQuantity getLottoQuantity() {
-        OutputView.manualLottoTicketQuantityInstruction();
-        return LottoQuantity.create(InputView.getInput());
+    private static LottoQuantity getLottoQuantity(Money money) {
+        try {
+            OutputView.manualLottoTicketQuantityInstruction();
+            return LottoQuantity.create(InputView.getInput(), money);
+        } catch (InvalidLottoQuantityException e) {
+            OutputView.errorMessage(e.getMessage());
+            return getLottoQuantity(money);
+        }
     }
 
     private static LottoNumber getBonusNumber(LottoTicket winningLotto) {
@@ -56,7 +63,7 @@ public class LottoController {
     }
 
     private static LottoTickets getLottoTickets(Money money, LottoTickets manualTickets) {
-        OutputView.ticketAmountInstruction(money);
+        OutputView.ticketAmountInstruction(money, manualTickets.getQuantity());
         LottoTickets tickets = LottoTickets.createLottoTickets(money, manualTickets);
         OutputView.lottoTicketList(tickets);
         return tickets;
@@ -72,7 +79,6 @@ public class LottoController {
 
     private static LottoTicket getManualTicket() {
         try {
-            OutputView.inputManualNumberInstruction();
             return new LottoTicket(InputView.getWinningNumbers());
         } catch (InvalidLottoNumberException | InvalidLottoTicketException e) {
             OutputView.errorMessage(e.getMessage());
