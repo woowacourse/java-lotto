@@ -3,7 +3,8 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
 
@@ -16,4 +17,12 @@ public class LottoNumberTest {
                 .doesNotThrowAnyException();
     }
 
+    @Test
+    @DisplayName("유효 범위 밖의 로또 숫자 예외처리 테스트")
+    void validateLottoNumber() {
+        assertThatThrownBy(() -> new LottoNumber(0))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoNumber(46))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
