@@ -16,7 +16,7 @@ public class OutputView {
     private static final String RESULT_DETAIL_MESSAGE = "%d개 일치 (%d원)- %d개";
     private static final String RESULT_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
     private static final String YIELD_MESSAGE = "총 수익률은 %d%%입니다.";
-    private static final int SECOND_PRIZE = 30000000;
+    private static final int SECOND_PRIZE = 30_000_000;
 
     public static void printInput() {
         System.out.println(INPUT_MESSAGE);

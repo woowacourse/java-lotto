@@ -1,11 +1,11 @@
 package lotto.model;
 
 public enum LottoResult {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 150000),
-    FIVE_BONUS(5, 30000000),
-    SIX(6, 2000000000);
+    THREE(3, 5_000),
+    FOUR(4, 50_000),
+    FIVE(5, 150_000),
+    FIVE_BONUS(5, 30_000_000),
+    SIX(6, 2_000_000_000);
 
     private final int prize;
     private final int correct;

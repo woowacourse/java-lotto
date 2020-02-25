@@ -7,9 +7,9 @@ import lotto.exception.OverRangeException;
 
 public class Money {
 
-    public static final int PAYMENT_UNIT = 1000;
-    private static final int MINIMUM_PAYMENT = 1000;
-    private static final int MAXIMUM_PAYMENT = 100000;
+    public static final int PAYMENT_UNIT = 1_000;
+    private static final int MINIMUM_PAYMENT = 1_000;
+    private static final int MAXIMUM_PAYMENT = 100_000;
     private static final int PERCENT = 100;
     private static final int ZERO = 0;
     public static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력하세요.";
