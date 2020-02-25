@@ -11,7 +11,8 @@ public class LottoTickets {
         lottoTickets.add(oneLotto);
     }
 
-    public LottoResult countWinningLotto(WinningNumber winningNumber, LottoResult lottoResult) {
+    public LottoResult countWinningLotto(WinningNumber winningNumber) {
+        LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottoTickets){
             LottoRank rank = LottoRank.findRank(winningNumber.countWinningMatch(lotto),
                                             winningNumber.isBonusMatch(lotto));
