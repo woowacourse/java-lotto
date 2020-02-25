@@ -37,15 +37,13 @@ public class WinningResult {
 	}
 
 	private LottoMoney calculateTotalWinningLottoMoney() {
-		LottoMoney totalLottoMoney = LottoMoney.ZERO;
-
-		for (Map.Entry<LottoRank, Long> entry : winningResult.entrySet()) {
-			LottoRank lottoRank = entry.getKey();
-			Long lottoRankCount = entry.getValue();
-
-			totalLottoMoney = totalLottoMoney.addBy(lottoRank.calculateWinningLottoMoneyBy(lottoRankCount));
-		}
-		return totalLottoMoney;
+		return winningResult.entrySet().stream()
+			.map(entry -> {
+				LottoRank lottoRank = entry.getKey();
+				Long lottoRankCount = entry.getValue();
+				return lottoRank.calculateWinningLottoMoneyBy(lottoRankCount);
+			})
+			.reduce(LottoMoney.ZERO, LottoMoney::addBy);
 	}
 
 	public Map<LottoRank, Long> getWinningResult() {

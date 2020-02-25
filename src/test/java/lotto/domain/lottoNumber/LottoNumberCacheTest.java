@@ -9,18 +9,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class LottoNumberFactoryTest {
+class LottoNumberCacheTest {
 	@ParameterizedTest
 	@ValueSource(ints = {1, 45})
 	void generate_ValidNumber_ReturnLottoNumberInstanceFromCache(int value) {
-		assertThat(LottoNumberFactory.generate(value)).isInstanceOf(LottoNumber.class);
+		assertThat(LottoNumberCache.asLottoNumber(value)).isInstanceOf(LottoNumber.class);
 	}
 
 	@Test
 	void generate_ValidNumbers_ReturnListOfLottoNumbers() {
 		int[] numbers = {1, 2, 3, 4, 5, 6};
 
-		List<LottoNumber> actual = LottoNumberFactory.generate(numbers);
+		List<LottoNumber> actual = LottoNumberCache.asLottoNumber(numbers);
 
 		List<LottoNumber> expected = Arrays.asList(
 			LottoNumber.valueOf(1),
@@ -36,7 +36,7 @@ class LottoNumberFactoryTest {
 	@ParameterizedTest
 	@ValueSource(ints = {0, 46})
 	void generate_InvalidLottoNumber_InvalidLottoNumberExceptionThrown(int value) {
-		assertThatThrownBy(() -> LottoNumberFactory.generate(value))
+		assertThatThrownBy(() -> LottoNumberCache.asLottoNumber(value))
 			.isInstanceOf(InvalidLottoNumberException.class)
 			.hasMessage(InvalidLottoNumberException.OUT_OF_BOUND_LOTTO_NUMBER);
 	}

@@ -2,6 +2,7 @@ package lotto.util;
 
 import java.util.stream.Collectors;
 
+import lotto.domain.lottoNumber.LottoNumber;
 import lotto.domain.lottoRank.LottoRank;
 import lotto.domain.lottoTicket.LottoTicket;
 
@@ -14,7 +15,7 @@ public class StringUtil {
 
 	public static String joiningLottoNumbersAt(LottoTicket lottoTicket) {
 		return lottoTicket.getLottoNumbers().stream()
-			.map(lottoNumber -> Integer.toString(lottoNumber.getLottoNumber()))
+			.map(LottoNumber::toString)
 			.collect(Collectors.joining(JOINING_DELIMITER, PREFIX, SUFFIX));
 	}
 
