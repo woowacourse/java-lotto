@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Set;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
@@ -26,13 +23,9 @@ public class Lotto {
     }
 
     public int countMatchNumbers(Lotto myLottoNumbers) {
-        int count = 0;
-        for(LottoNumber number : lotto){
-            if (myLottoNumbers.contains(number)){
-                count ++;
-            }
-        }
-        return count;
+        return (int) lotto.stream()
+                .filter(o -> myLottoNumbers.contains(o))
+                .count();
     }
 
     public boolean contains(LottoNumber number) {
