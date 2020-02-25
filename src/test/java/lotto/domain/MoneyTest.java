@@ -64,8 +64,8 @@ class MoneyTest {
         Money money = Money.of(5000);
         Money dividingMoney = Money.of(14000);
 
-        int actual = money.calculatePercentage(dividingMoney);
-        int expected = 35;
+        double actual = money.calculatePercentage(dividingMoney);
+        double expected = (double) 5000 / 14000 * 100;
 
         assertThat(actual).isEqualTo(expected);
     }

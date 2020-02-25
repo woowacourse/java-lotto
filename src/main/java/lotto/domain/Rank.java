@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
-    LOSE(-1,0),
+    LOSE(-1, 0),
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
@@ -40,7 +40,7 @@ public enum Rank {
     }
 
     public int getContainingCount(List<Rank> ranks) {
-        return (int)ranks.stream()
+        return (int) ranks.stream()
                 .filter(rank -> rank.equals(this))
                 .count();
     }

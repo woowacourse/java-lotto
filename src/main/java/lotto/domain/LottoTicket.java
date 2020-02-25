@@ -22,13 +22,9 @@ public class LottoTicket {
     }
 
     private void validateNumbersCount(List<LottoNumber> numbers) {
-        if (hasWrongSize(numbers)) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new LottoTicketException("로또의 숫자는 6개여야 합니다.");
         }
-    }
-
-    private boolean hasWrongSize(List<LottoNumber> numbers) {
-        return numbers.size() != LOTTO_SIZE;
     }
 
     private void validateNumbersDuplication(List<LottoNumber> numbers) {

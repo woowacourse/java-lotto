@@ -27,7 +27,7 @@ public class OutputView {
             int matchedCount = rank.getMatchedCount();
             Money winningMoney = rank.getWinningMoney();
             int containingCount = rank.getContainingCount(ranks);
-            System.out.println(String.format("%d개 일치 (%d원) - %d개", matchedCount, winningMoney.getValue(), containingCount));
+            System.out.printf("%d개 일치 (%d원) - %d개", matchedCount, winningMoney.getValue(), containingCount);
         }
     }
 

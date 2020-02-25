@@ -23,13 +23,9 @@ public class Money {
     }
 
     private static void validateMoneyRange(int moneyValue) {
-        if (isUnderMinPurchaseMoney(moneyValue)) {
+        if (moneyValue < MIN_PURCHASE_MONEY) {
             throw new MoneyException("구매금액은 1000원 이상이어야 합니다.");
         }
-    }
-
-    private static boolean isUnderMinPurchaseMoney(int moneyValue) {
-        return moneyValue < MIN_PURCHASE_MONEY;
     }
 
     public Money plus(Money other) {
@@ -40,8 +36,8 @@ public class Money {
         return this.money / other.money;
     }
 
-    public int calculatePercentage(Money other) {
-        return (int) ((double) this.money / other.money * 100);
+    public double calculatePercentage(Money other) {
+        return (double) this.money / other.money * 100;
     }
 
     public int getValue() {
