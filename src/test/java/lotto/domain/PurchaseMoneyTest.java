@@ -21,7 +21,7 @@ public class PurchaseMoneyTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, -1, -5, Integer.MIN_VALUE})
+	@ValueSource(ints = {-1, -5, Integer.MIN_VALUE})
 	void PurchaseMoney_LessOrEqualThanZero_ShouldThrowException(int input) {
 		// then
 		Assertions.assertThatThrownBy(() -> {
