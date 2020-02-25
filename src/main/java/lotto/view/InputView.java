@@ -32,6 +32,17 @@ public class InputView {
         }
     }
 
+    public static List<LottoBall> InputManualLottoTicket(){
+        try{
+            OutputView.printManualLottoIssueMessage();
+            LottoTicket manualLottoTicket = generateLottoTicket();
+            return manualLottoTicket.getLottoTicket();
+        }catch(RuntimeException e){
+            OutputView.printErrorMessage(e.getMessage());
+            return InputManualLottoTicket();
+        }
+    }
+
     private static LottoTicket generateLottoTicket() {
         String winningTicket = scanner.nextLine();
         return new LottoTicket(winningTicket);
