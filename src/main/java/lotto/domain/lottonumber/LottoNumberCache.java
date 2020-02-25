@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoNumberCache {
-	private static Map<Integer, LottoNumber> CACHE = new HashMap<>();
+	private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
 
 	static {
 		for (int i = LottoNumber.MIN_BOUND; i <= LottoNumber.MAX_BOUND; i++) {
-			CACHE.put(i, new LottoNumber(i));
+			LOTTO_NUMBER_CACHE.put(i, new LottoNumber(i));
 		}
 	}
 
@@ -20,12 +20,12 @@ public class LottoNumberCache {
 
 	public static LottoNumber getNumber(int number) {
 		if (LottoNumber.MIN_BOUND < number && LottoNumber.MAX_BOUND > number) {
-			return CACHE.get(number);
+			return LOTTO_NUMBER_CACHE.get(number);
 		}
 		return new LottoNumber(number);
 	}
 
 	public static List<LottoNumber> values() {
-		return Collections.unmodifiableList(new ArrayList<>(CACHE.values()));
+		return Collections.unmodifiableList(new ArrayList<>(LOTTO_NUMBER_CACHE.values()));
 	}
 }
