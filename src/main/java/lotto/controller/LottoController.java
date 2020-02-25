@@ -21,18 +21,22 @@ import lotto.view.OutputView;
 public class LottoController {
 	public static void run() {
         try {
-            Money money = new Money(InputView.getMoneyForLotto());
-            Lottos lottos = LottosFactory.createLottosAuto(money);
-            OutputView.printPurchasedLottos(lottos.getAmountOfLottos(), lottos);
-
-            WinningInformation winningInformation = getWinningInformation();
-
-            ResultStatistic result = ResultStatistic.calculate(lottos, winningInformation);
-            OutputView.printResultStatistic(result, money);
+            runWithoutExceptionCatch();
         } catch (Exception e) {
             OutputView.printExceptionMessage(e);
         }
 	}
+
+    private static void runWithoutExceptionCatch() {
+        Money money = new Money(InputView.getMoneyForLotto());
+        Lottos lottos = LottosFactory.createLottosAuto(money);
+        OutputView.printPurchasedLottos(lottos.getAmountOfLottos(), lottos);
+
+        WinningInformation winningInformation = getWinningInformation();
+
+        ResultStatistic result = ResultStatistic.calculate(lottos, winningInformation);
+        OutputView.printResultStatistic(result, money);
+    }
 
 	private static WinningInformation getWinningInformation() {
         Lotto winningLotto = Lotto.createLottoManual(InputView.getWinningLotto());
