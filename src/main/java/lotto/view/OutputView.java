@@ -39,7 +39,7 @@ public class OutputView {
             + prizeStatistic(results, Rank.SECOND)
             + prizeStatistic(results, Rank.BONUS)
             + prizeStatistic(results, Rank.FIRST);
-        System.out.println(sb);
+        System.out.print(sb);
     }
 
     private static String prizeStatistic(Map<Rank, Integer> results, Rank rank) {
