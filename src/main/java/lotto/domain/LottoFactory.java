@@ -22,7 +22,7 @@ public class LottoFactory {
 	}
 
 	/**
-	 * 당첨 로또를 생성하는 메소
+	 * 당첨 로또를 생성하는 메소드
 	 * @param winningNumbers
 	 * @return Lotto
 	 */

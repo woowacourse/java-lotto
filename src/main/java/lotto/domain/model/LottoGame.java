@@ -1,7 +1,5 @@
 package lotto.domain.model;
 
-import java.util.Iterator;
-
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseMoney;
@@ -28,9 +26,8 @@ public class LottoGame {
 	}
 
 	public GameResult makeStatistics() {
-		Iterator<Lotto> lottoIterator = lottos.iterator();
-		while (lottoIterator.hasNext()) {
-			plusCount(getRank(lottoIterator.next()));
+		for(Lotto lotto : lottos) {
+			plusCount(getRank(lotto));
 		}
 		return gameResult;
 	}
