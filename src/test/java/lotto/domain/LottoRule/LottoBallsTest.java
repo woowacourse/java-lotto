@@ -11,7 +11,7 @@ import lotto.exceptions.InvalidLottoNumberException;
 
 class LottoBallsTest {
 
-    private static final int LOTTOBALLS_LENGTGH = 45;
+    private static final int LOTTO_BALLS_LENGTH = 45;
 
     @Test
     @DisplayName("당첨 번호 입력이 유효한 경우 잘 찾아내는지")
@@ -30,6 +30,6 @@ class LottoBallsTest {
     @Test
     @DisplayName("로또 볼이 정확한 갯수대로 생성되었는지")
     void lottoBallSize() {
-        assertThat(LottoBalls.getLottoBalls().size()).isEqualTo(LOTTOBALLS_LENGTGH);
+        assertThat(LottoBalls.getLottoBalls().size()).isEqualTo(LOTTO_BALLS_LENGTH);
     }
 }

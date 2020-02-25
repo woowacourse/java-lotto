@@ -21,14 +21,23 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
+    public LottoResult match(WinningTicket winningTicket) {
+        LottoResult lottoResult = new LottoResult();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            Rank rank = winningTicket.match(lottoTicket);
+            lottoResult.updateResult(rank);
+        }
+        return lottoResult;
+    }
+
+    List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
+
     @Override
     public String toString() {
         return lottoTickets.stream()
             .map(LottoTicket::toString)
             .collect(Collectors.joining(DELIMITER));
-    }
-
-    List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
     }
 }

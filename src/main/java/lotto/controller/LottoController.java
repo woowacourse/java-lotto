@@ -10,6 +10,7 @@ import lotto.domain.WinningTicket;
 import lotto.exceptions.InvalidLottoNumberException;
 import lotto.exceptions.InvalidLottoTicketException;
 import lotto.exceptions.InvalidMoneyException;
+import lotto.exceptions.InvalidWinningTicketException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,33 +19,31 @@ public class LottoController {
     public static void run() {
         Money money = getMoney();
         LottoTickets lottoTickets = getLottoTickets(money);
-        LottoTicket winningLotto = getLottoTicket();
-        LottoNumber bonusNumber = getBonusNumber(winningLotto);
-        WinningTicket winningTicket = new WinningTicket(winningLotto, bonusNumber);
-        LottoResult lottoResult = new LottoResult();
-        OutputView.prizeStatistics(lottoResult.matchResult(winningTicket, lottoTickets));
+        LottoTicket winningNumbers = getWinningNumbers();
+        WinningTicket winningTicket = getWinningTicketWithBonusNumber(winningNumbers);
+        LottoResult lottoResult = lottoTickets.match(winningTicket);
+        OutputView.prizeStatistics(lottoResult);
         OutputView.profitRate(lottoResult.calculateRate(money));
     }
 
-    private static LottoNumber getBonusNumber(LottoTicket winningLotto) {
+    private static WinningTicket getWinningTicketWithBonusNumber(LottoTicket winningLotto) {
         try {
             OutputView.inputBonusNumberInstruction();
             LottoNumber bonusNumber = LottoBalls.find(InputView.getInput());
-            winningLotto.validateBonusNumber(bonusNumber);
-            return bonusNumber;
-        } catch (InvalidLottoNumberException | InvalidLottoTicketException e) {
+            return new WinningTicket(winningLotto, bonusNumber);
+        } catch (InvalidLottoNumberException | InvalidWinningTicketException e) {
             OutputView.errorMessage(e.getMessage());
-            return getBonusNumber(winningLotto);
+            return getWinningTicketWithBonusNumber(winningLotto);
         }
     }
 
-    private static LottoTicket getLottoTicket() {
+    private static LottoTicket getWinningNumbers() {
         try {
             OutputView.inputWinningNumberInstruction();
             return new LottoTicket(InputView.getWinningNumbers());
         } catch (InvalidLottoNumberException | InvalidLottoTicketException e) {
             OutputView.errorMessage(e.getMessage());
-            return getLottoTicket();
+            return getWinningNumbers();
         }
     }
 

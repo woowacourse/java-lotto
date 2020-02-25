@@ -59,12 +59,6 @@ public class LottoTicket {
         return new LottoTicket(randomNumbers);
     }
 
-    public void validateBonusNumber(LottoNumber number) {
-        if (this.lottoTicket.contains(number)) {
-            throw new InvalidLottoTicketException("보너스 숫자는 당첨 번호와 중복될 수 없습니다.");
-        }
-    }
-
     int compare(LottoTicket other) {
         Set<LottoNumber> winnerSet = new HashSet<>(this.lottoTicket);
         Set<LottoNumber> otherSet = new HashSet<>(other.lottoTicket);
@@ -73,7 +67,8 @@ public class LottoTicket {
     }
 
     boolean contains(LottoNumber lottoNumber) {
-        return lottoTicket.contains(lottoNumber);
+        String lottoNumberValue = String.valueOf(lottoNumber.getValue());
+        return lottoTicket.contains(LottoBalls.find(lottoNumberValue));
     }
 
     @Override

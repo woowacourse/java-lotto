@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.Map;
 
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.Rank;
@@ -30,7 +31,8 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void prizeStatistics(Map<Rank, Integer> results) {
+    public static void prizeStatistics(LottoResult lottoResult) {
+        Map<Rank, Integer> results = lottoResult.getResult();
         String sb = "\n당첨 통계\n---------\n"
             + prizeStatistic(results, Rank.FOURTH)
             + prizeStatistic(results, Rank.THIRD)
