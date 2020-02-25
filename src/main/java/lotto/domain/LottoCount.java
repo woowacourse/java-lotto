@@ -4,20 +4,28 @@ import java.util.Objects;
 
 public class LottoCount {
 
+    private static final int MINIMUM_MANUAL_LOTTO_COUNT = 0;
     private static final int MINIMUM_LOTTO_COUNT = 1;
-    private static final String INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE = String
-        .format("로또 구입 갯수는 최소 %d개 이상", MINIMUM_LOTTO_COUNT);
+    private static final String INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE = ("로또 구입 갯수는 최소 %d개 이상");
 
+    private final int manualLottoCount;
     private final int lottoCount;
 
     public LottoCount(int lottoCount) {
-        validateCount(lottoCount);
-        this.lottoCount = lottoCount;
+        this(lottoCount, MINIMUM_MANUAL_LOTTO_COUNT);
     }
 
-    private void validateCount(int count) {
-        if (count < MINIMUM_LOTTO_COUNT) {
-            throw new IllegalArgumentException(INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE);
+    public LottoCount(int lottoCount, int manualLottoCount) {
+        validateCount(lottoCount, MINIMUM_LOTTO_COUNT);
+        validateCount(manualLottoCount, MINIMUM_MANUAL_LOTTO_COUNT);
+        this.lottoCount = lottoCount;
+        this.manualLottoCount = manualLottoCount;
+    }
+
+    private void validateCount(int count, int criteriaLottoCount) {
+        if (count < criteriaLottoCount) {
+            throw new IllegalArgumentException(
+                String.format(INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE, criteriaLottoCount));
         }
     }
 
@@ -34,11 +42,12 @@ public class LottoCount {
             return false;
         }
         LottoCount that = (LottoCount) o;
-        return lottoCount == that.lottoCount;
+        return manualLottoCount == that.manualLottoCount &&
+            lottoCount == that.lottoCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoCount);
+        return Objects.hash(manualLottoCount, lottoCount);
     }
 }
