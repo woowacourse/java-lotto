@@ -14,7 +14,7 @@ public enum LottoRank {
     private final boolean bonus;
     private final int winning;
 
-    private LottoRank(int hitCount, boolean bonus, int winning) {
+    LottoRank(int hitCount, boolean bonus, int winning) {
         this.hitCount = hitCount;
         this.bonus = bonus;
         this.winning = winning;

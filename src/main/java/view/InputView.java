@@ -3,12 +3,11 @@ package view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String DELIMETER = ",";
+    private static final String DELIMITER = ",";
 
     private InputView() {
         throw new AssertionError();
@@ -24,7 +23,7 @@ public class InputView {
     }
 
     private static List<Integer> splitAndParse(String input) {
-        return Arrays.stream(input.split(DELIMETER))
+        return Arrays.stream(input.split(DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());

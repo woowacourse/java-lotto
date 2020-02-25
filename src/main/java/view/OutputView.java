@@ -40,13 +40,7 @@ public class OutputView {
     }
 
     public static void printLottoNumbersCount(RepeatCount userResultCount, RepeatCount autoResultCount) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n수동으로 ");
-        sb.append(userResultCount);
-        sb.append("장, 자동으로 ");
-        sb.append(autoResultCount);
-        sb.append("장 구매했습니다.");
-        System.out.println(sb.toString());
+        System.out.println(String.format("\n수동으로 %s장, 자동으로 %s장 구입하였습니다.", userResultCount, autoResultCount));
     }
 
     public static void printLottoGame(LottoGame lottogame) {
@@ -94,7 +88,8 @@ public class OutputView {
         sb.append(" (");
         sb.append(rank.getWinning());
         sb.append("원)- ");
-        sb.append(resultCount.toString() + "개");
+        sb.append(resultCount.toString());
+        sb.append("개");
         System.out.println(sb.toString());
     }
 

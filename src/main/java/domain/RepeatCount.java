@@ -35,12 +35,12 @@ public class RepeatCount {
         return IntStream.range(0, repeatCount);
     }
 
+    public boolean isNotZero() {
+        return repeatCount != 0;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(repeatCount);
-    }
-
-    public boolean isNotZero() {
-        return repeatCount != 0;
     }
 }
