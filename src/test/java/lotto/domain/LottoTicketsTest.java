@@ -57,14 +57,14 @@ class LottoTicketsTest {
 	}
 
 	@Test
-	void checkGetTicketLogs() {
+	void checkGetTickets() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		List<LottoTicket> tickets = new ArrayList<>();
 		tickets.add(lottoTicket);
 		LottoTickets lottoTickets = new LottoTickets(tickets);
 
-		List<String> expected = Collections.singletonList("[1, 2, 3, 4, 5, 6]");
-		List<String> actual = lottoTickets.getTicketLogs();
+		List<LottoTicket> expected = Collections.singletonList(lottoTicket);
+		List<LottoTicket> actual = lottoTickets.tickets();
 
 		assertEquals(expected, actual);
 	}

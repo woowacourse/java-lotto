@@ -19,7 +19,7 @@ public class ConsoleLottoApplication {
 			LottoTicketFactory.create(purchasingAmount, new CreateRandomTicketsStrategy());
 
 		OutputView.printLottoAmount(lottoTickets.size());
-		OutputView.printLottoState(lottoTickets.getTicketLogs());
+		OutputView.printLottoState(lottoTickets.tickets());
 
 		final WinningNumbers winningNumbers =
 			new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusNumber());

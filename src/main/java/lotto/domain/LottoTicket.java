@@ -6,10 +6,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-	private static final String DELIMITER = ", ";
-	private static final String START_BRACKET = "[";
-	private static final String END_BRACKET = "]";
-
 	private final List<LottoNumber> lottoNumbers;
 
 	public LottoTicket(final List<LottoNumber> lottoNumbers) {
@@ -23,8 +19,12 @@ public class LottoTicket {
 	}
 
 	private boolean isMatch(final WinningNumbers winningNumbers, final LottoNumber lottoNumber) {
-		final List<LottoNumber> ordinaries = winningNumbers.getOrdinaries();
-		return ordinaries.contains(lottoNumber);
+		final LottoTicket winningTicket = winningNumbers.getWinningTicket();
+		return winningTicket.contains(lottoNumber);
+	}
+
+	private boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
 	}
 
 	public boolean isBonusNotMatch(final WinningNumbers winningNumbers) {
@@ -32,13 +32,10 @@ public class LottoTicket {
 			.noneMatch(winningNumbers::isMatchWithBonus);
 	}
 
-	@Override
-	public String toString() {
-		return START_BRACKET +
-			lottoNumbers.stream()
+	public List<String> getNumbers() {
+		return lottoNumbers.stream()
 			.map(LottoNumber::toString)
-			.collect(joining(DELIMITER)) +
-			END_BRACKET;
+			.collect(toList());
 	}
 
 	@Override

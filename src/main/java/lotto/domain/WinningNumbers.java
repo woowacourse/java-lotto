@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
@@ -12,17 +13,17 @@ public class WinningNumbers {
 	private static final String DELIMITER = ", ";
 	private static final int WINNING_NUMBER_SIZE = 6;
 
-	private final List<LottoNumber> winningNumbers;
+	private final LottoTicket winningTicket;
 	private final LottoNumber bonusNumber;
 
-	public WinningNumbers(String winningNumbers, String bonusNumber) {
-		final List<String> winningNumbersValues = Arrays.asList(winningNumbers.split(DELIMITER));
+	public WinningNumbers(String winningTicket, String bonusNumber) {
+		final List<String> winningNumbersValues = Arrays.asList(winningTicket.split(DELIMITER));
 		checkValidationOf(winningNumbersValues, bonusNumber);
 
-		this.winningNumbers = winningNumbersValues.stream()
+		this.winningTicket = winningNumbersValues.stream()
 			.mapToInt(Integer::parseInt)
 			.mapToObj(LottoNumber::new)
-			.collect(Collectors.toList());
+			.collect(Collectors.collectingAndThen(toList(), LottoTicket::new));
 
 		this.bonusNumber = new LottoNumber(Integer.parseInt(bonusNumber));
 	}
@@ -65,15 +66,15 @@ public class WinningNumbers {
 
 	private Predicate<String> isNotDigit() {
 		return str -> str.chars()
-				.anyMatch(ch -> !Character.isDigit(ch));
+			.anyMatch(ch -> !Character.isDigit(ch));
 	}
 
 	private boolean isNotMatchSize(final List<String> winningNumbersValue) {
 		return winningNumbersValue.size() != WINNING_NUMBER_SIZE;
 	}
 
-	public List<LottoNumber> getOrdinaries() {
-		return Collections.unmodifiableList(winningNumbers);
+	public LottoTicket getWinningTicket() {
+		return winningTicket;
 	}
 
 	public boolean isMatchWithBonus(final LottoNumber lottoNumber) {

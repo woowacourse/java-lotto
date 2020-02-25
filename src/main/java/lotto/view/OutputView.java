@@ -1,12 +1,20 @@
 package lotto.view;
 
-import java.util.List;
+import static java.util.Comparator.*;
+import static java.util.stream.Collectors.*;
 
+import java.util.List;
+import java.util.function.Function;
+
+import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.Ranks;
 
 public class OutputView {
 	private static final int MULTIPLIER_FOR_PERCENT = 100;
+	private static final String DELIMITER = ", ";
+	private static final String START_BRACKET = "[";
+	private static final String END_BRACKET = "]";
 
 	public static void printResult(final Ranks ranks) {
 		final Ranks reversed = Rank.getOrderReversed();
@@ -32,8 +40,17 @@ public class OutputView {
 		emptyLine();
 	}
 
-	public static void printLottoState(final List<String> ticketLogs) {
-		ticketLogs.forEach(System.out::println);
+	public static void printLottoState(final List<LottoTicket> tickets) {
+		tickets.stream()
+			.map(LottoTicket::getNumbers)
+			.map(getNumbersState())
+			.forEach(System.out::println);
+	}
+
+	private static Function<List<String>, String> getNumbersState() {
+		return numbers -> numbers.stream()
+			.sorted(comparingInt(Integer::parseInt))
+			.collect(joining(DELIMITER, START_BRACKET, END_BRACKET));
 	}
 
 	public static void printProfit(double calculate) {

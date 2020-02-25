@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
 	@Test
-	void LottoTicketToStringTest() {
+	void checkGetNumbers() {
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
 		lottoNumbers.add(new LottoNumber(1));
 		lottoNumbers.add(new LottoNumber(2));
@@ -20,8 +20,8 @@ public class LottoTicketTest {
 		lottoNumbers.add(new LottoNumber(34));
 
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-		String expected = "[1, 2, 13, 14, 21, 34]";
-		String actual = lottoTicket.toString();
+		List<String> expected = Arrays.asList("1", "2", "13", "14", "21", "34");
+		List<String> actual = lottoTicket.getNumbers();
 
 		assertThat(actual).isEqualTo(expected);
 	}

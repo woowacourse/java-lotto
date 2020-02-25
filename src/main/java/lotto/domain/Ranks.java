@@ -24,7 +24,7 @@ public class Ranks {
 			.collect(Collectors.toList());
 	}
 
-	private static Predicate<Rank> hasPrize() {
+	private Predicate<Rank> hasPrize() {
 		return rank -> !rank.equals(Rank.NONE);
 	}
 
