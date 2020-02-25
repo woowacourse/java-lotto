@@ -57,4 +57,12 @@ public class OutputView {
     public static void errorMessage(String message) {
         System.out.println(message);
     }
+
+    public static void inputManualNumberInstruction() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void manualLottoTicketQuantityInstruction() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
 }
