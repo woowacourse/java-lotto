@@ -42,8 +42,7 @@ public class MoneyTest {
     @DisplayName("상금계산")
     void getYield() {
         Money money = new Money("10000");
-        LottoManager.lottoResultMap.put("THREE", 1);
-        System.out.println(LottoManager.lottoResultMap);
+        LottoResultCount.lottoResultCount.put(LottoResult.THREE, 1);
         assertThat(money.getYield()).isEqualTo(50);
     }
 }

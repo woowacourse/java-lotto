@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Arrays;
 import lotto.controller.LottoManager;
 import lotto.exception.NotMultipleOfThousandException;
 import lotto.exception.NotNumberException;
@@ -50,11 +51,9 @@ public class Money {
     }
 
     private double getRevenue() {
-        double prize = 0;
-        for (LottoResult lottoResult : LottoResult.values()) {
-            prize += lottoResult.getPrize() * LottoManager.lottoResultMap.get(lottoResult.name());
-        }
-        return prize;
+        return Arrays.stream(LottoResult.values())
+            .mapToDouble(x -> x.getPrize() * LottoResultCount.lottoResultCount.get(x))
+            .sum();
     }
 
     public int getYield() {

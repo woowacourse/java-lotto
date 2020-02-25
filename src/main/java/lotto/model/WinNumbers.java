@@ -10,9 +10,7 @@ import lotto.exception.OverlapWinNumberException;
 
 public class WinNumbers {
 
-    public static final int LOTTO_NUMBER_LENGTH = 6;
     private static final String COMMA = ",";
-    private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
     private static final String IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE = "당첨번호와 중복되는 숫자가 있습니다.";
 
     private Ticket winNumbers;
@@ -49,8 +47,8 @@ public class WinNumbers {
     }
 
     private void validateLottoNumbersLength(List<LottoNumber> inputs) {
-        if (inputs.size() != LOTTO_NUMBER_LENGTH) {
-            throw new NotSixNumbersException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
+        if (inputs.size() != Ticket.LOTTO_NUMBER_LENGTH) {
+            throw new NotSixNumbersException(Ticket.LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 

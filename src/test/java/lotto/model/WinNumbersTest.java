@@ -25,7 +25,7 @@ public class WinNumbersTest {
         assertThatThrownBy(() -> {
             new WinNumbers("1, 3, 5, 7, 9, 11, 13", "2");
         }).isInstanceOf(NotSixNumbersException.class)
-                .hasMessage("6개의 숫자를 입력하셔야 합니다.");
+                .hasMessage("6개의 숫자가 아닙니다.");
     }
 
     @Test

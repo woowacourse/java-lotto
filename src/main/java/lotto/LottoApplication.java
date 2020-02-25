@@ -1,7 +1,9 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import lotto.controller.LottoManager;
+import lotto.model.LottoResultCount;
 import lotto.model.Ticket;
 import lotto.model.Tickets;
 import lotto.model.TicketsGenerator;
@@ -46,9 +48,9 @@ public class LottoApplication {
 
     private static void printCorrectResults() {
         OutputView.printResult();
-        for (LottoResult lottoResult : LottoResult.values()) {
-            OutputView.printCorrectResult(lottoResult.getCorrect(), lottoResult.getPrize(),
-                LottoManager.lottoResultMap.get(lottoResult.name()));
-        }
+        Arrays.stream(LottoResult.values())
+            .filter(x -> x != LottoResult.NONE)
+            .forEach(x -> OutputView.printCorrectResult(x.getCorrect(), x.getPrize(),
+                LottoResultCount.lottoResultCount.get(x)));
     }
 }
