@@ -10,7 +10,6 @@ import java.util.Map;
 import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
 public class LottoResultBundle {
-    private static final String RATE_PERCENT = "%";
     private static final String CUT_DIGIT_FORMAT = "0";
     private static final int PERCENTAGE = 100;
 
@@ -40,7 +39,7 @@ public class LottoResultBundle {
 
         DecimalFormat decimalFormat = new DecimalFormat(CUT_DIGIT_FORMAT);
         String rate = decimalFormat.format(totalPrize / bettingMoney * PERCENTAGE);
-        return rate + RATE_PERCENT;
+        return rate + "%";
     }
 
     private int getBettingMoney() {

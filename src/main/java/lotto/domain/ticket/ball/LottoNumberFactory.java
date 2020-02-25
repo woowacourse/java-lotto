@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 
 public final class LottoNumberFactory {
     private static final List<LottoNumber> lottoNumberInstance;
-    private static final String NOT_EXIST_NUMBER_EXCEPTION_MESSAGE = "%d : 존재하지 않는 번호입니다.";
 
     static {
         lottoNumberInstance = IntStream.rangeClosed(1, 45)
@@ -25,7 +24,7 @@ public final class LottoNumberFactory {
         return lottoNumberInstance.stream()
                 .filter(lottoBall -> lottoBall.isEqualNumber(number))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format(NOT_EXIST_NUMBER_EXCEPTION_MESSAGE, number)));
+                .orElseThrow(() -> new IllegalArgumentException(String.format("%d : 존재하지 않는 번호입니다.", number)));
     }
 
 }

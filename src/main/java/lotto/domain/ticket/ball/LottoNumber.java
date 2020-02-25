@@ -3,7 +3,6 @@ package lotto.domain.ticket.ball;
 import java.util.Objects;
 
 public final class LottoNumber {
-    private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "%d 로또 번호는 1부터 45까지 허용됩니다.";
     private final int number;
 
     private LottoNumber(int number) {
@@ -17,7 +16,7 @@ public final class LottoNumber {
 
     private void validateNumber(int number) {
         if (number < 1 || number > 45) {
-            throw new IllegalArgumentException(String.format(LOTTO_NUMBER_EXCEPTION_MESSAGE, number));
+            throw new IllegalArgumentException(String.format("%d 로또 번호는 1부터 45까지 허용됩니다.", number));
         }
     }
 

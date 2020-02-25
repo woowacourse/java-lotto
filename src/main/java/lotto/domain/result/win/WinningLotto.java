@@ -12,9 +12,6 @@ import static java.util.stream.Collectors.toSet;
 import static lotto.domain.ticket.ball.LottoNumberFactory.findLottoBallByNumber;
 
 public class WinningLotto {
-    private static final String WINNING_NUMBER_SIZE_EXCEPTION_MESSAGE = "입력받은 갯수 %d : 우승 번호는 6개입니다.";
-    private static final String DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE = "보너스 번호 %d는 중복된 번호입니다.";
-
     private final WinningBalls winningBalls;
     private final LottoNumber bonusBall;
 
@@ -27,13 +24,13 @@ public class WinningLotto {
 
     private void validateWinningNumbers(Set<Integer> winningNumbers) {
         if (winningNumbers.size() != 6) {
-            throw new IllegalArgumentException(String.format(WINNING_NUMBER_SIZE_EXCEPTION_MESSAGE, winningNumbers.size()));
+            throw new IllegalArgumentException(String.format("입력받은 갯수 %d : 우승 번호는 6개입니다.", winningNumbers.size()));
         }
     }
 
     private void validateBonusNumber(Set<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(String.format(DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE, bonusNumber));
+            throw new IllegalArgumentException(String.format("보너스 번호 %d는 중복된 번호입니다.", bonusNumber));
         }
     }
 
