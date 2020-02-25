@@ -15,11 +15,11 @@ public class MatchCount {
 	public static final String MATCH_COUNT_OUT_OF_RANGE_MESSAGE = "일치하는 로또 수가 범위를 벗어났습니다";
 	private static final int MIN_MATCH = 0;
 	private static final int MAX_MATCH = 6;
-	private static final Map<Integer, MatchCount> CACHE = new HashMap<>();
+	private static final Map<Integer, MatchCount> MATCH_COUNT_CACHE = new HashMap<>();
 
 	static {
 		for (int matchCount = MIN_MATCH; matchCount <= MAX_MATCH; matchCount++) {
-			CACHE.put(matchCount, new MatchCount(matchCount));
+			MATCH_COUNT_CACHE.put(matchCount, new MatchCount(matchCount));
 		}
 	}
 
@@ -32,7 +32,7 @@ public class MatchCount {
 
 	public static MatchCount of(int count) {
 		validate(count);
-		return CACHE.get(count);
+		return MATCH_COUNT_CACHE.get(count);
 	}
 
 	private static void validate(int count) {
