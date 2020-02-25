@@ -8,9 +8,11 @@ import java.util.List;
 public class Lottos implements Iterable<Lotto> {
 
     private final List<Lotto> lottos;
+    private final LottoCount lottoCount;
 
-    public Lottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos, LottoCount lottoCount) {
         this.lottos = Collections.unmodifiableList(new ArrayList<>(lottos));
+        this.lottoCount = lottoCount;
     }
 
     public boolean isSameCount(int count) {
@@ -23,6 +25,6 @@ public class Lottos implements Iterable<Lotto> {
     }
 
     public LottoCount getCount() {
-        return new LottoCount(lottos.size());
+        return lottoCount;
     }
 }

@@ -18,7 +18,7 @@ public class LottosTest {
         Lotto firstLotto = new Lotto(balls);
         Lotto secondLotto = new Lotto(balls);
 
-        Lottos lottos = new Lottos(Arrays.asList(firstLotto, secondLotto));
+        Lottos lottos = new Lottos(Arrays.asList(firstLotto, secondLotto), new LottoCount(2));
         assertThat(lottos.isSameCount(2)).isTrue();
     }
 
