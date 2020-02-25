@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exceptions.PurchaseManualTicketIllegalArgumentException;
 import lotto.exceptions.PurchaseMoneyIllegalArgumentException;
 
 import java.util.Objects;
@@ -36,6 +37,17 @@ public class PurchaseMoney {
 
 	public double divideBy(double totalEarning) {
 		return totalEarning / purchaseMoney;
+	}
+
+	public PurchaseMoney subtractByTicketNumber(int num) {
+		if (num < POSITIVE_THRESHOLD) {
+			throw new PurchaseManualTicketIllegalArgumentException();
+		}
+		try {
+			return new PurchaseMoney(purchaseMoney - num * TICKET_PRICE);
+		} catch (PurchaseMoneyIllegalArgumentException e) {
+			throw new PurchaseManualTicketIllegalArgumentException();
+		}
 	}
 
 	public int getMoney() {
