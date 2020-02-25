@@ -14,12 +14,13 @@ import lotto.domain.LottoPurchaseStrategy;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
+import lotto.domain.ManualLottoCount;
 import lotto.domain.WinningLotto;
 
 public class ConsoleUILottoApplication {
 	public static void main(String[] args) {
 		LottoMoney inputLottoMoney = continuousInputMoney();
-		printPurchaseCompleteMessage(inputLottoMoney);
+		ManualLottoCount manualLottoCount = new ManualLottoCount(inputManuaLottoCount(), inputLottoMoney);
 
 		LottoPurchaseStrategy lottoPurchaseStrategy = new AutoLottoPurchaseStrategy();
 		LottoStore lottoStore = new LottoStore(lottoPurchaseStrategy);

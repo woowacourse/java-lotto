@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoMoney {
-	private static final long ZERO = 0;
+	static final long ZERO = 0;
 	private static final long MAX_BOUND = 100000;
 	private static final long LOTTO_PRICE = 1000;
 	private static final int PERCENT = 100;
