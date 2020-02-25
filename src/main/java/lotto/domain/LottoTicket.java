@@ -4,8 +4,8 @@ import java.util.Set;
 
 public class LottoTicket {
 
-    public static final int LOTTO_LENGTH = 6;
-    public static final String LOTTO_NUMBER_ERROR_MESSAGE = "로또의 숫자가 중복되었거나, 6개가 아닙니다.";
+    private static final int LOTTO_LENGTH = 6;
+    private static final String LOTTO_NUMBER_ERROR_MESSAGE = "로또의 숫자가 중복되었거나, 6개가 아닙니다.";
     private Set<LottoNumber> LottoTicket;
 
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
