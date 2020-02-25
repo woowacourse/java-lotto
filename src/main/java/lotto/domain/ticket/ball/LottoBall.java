@@ -3,12 +3,21 @@ package lotto.domain.ticket.ball;
 import java.util.Objects;
 
 public final class LottoBall {
+    public static final int LOWER_BOUND = 1;
+    public static final int UPPER_BOUND = 45;
+    public static final String MESSAGE_FOR_INVALID_LOTTO_BALL_NUMBER = "%d: 로또 범위 이외 숫자입니다";
 
     private final int number;
 
     LottoBall(int number) {
-        LottoBallValidator.validateNumber(number);
+        validateNumber(number);
         this.number = number;
+    }
+
+    public static void validateNumber(int number) {
+        if (number < LOWER_BOUND || number > UPPER_BOUND) {
+            throw new IllegalArgumentException(String.format(MESSAGE_FOR_INVALID_LOTTO_BALL_NUMBER, number));
+        }
     }
 
     public int getNumber() {

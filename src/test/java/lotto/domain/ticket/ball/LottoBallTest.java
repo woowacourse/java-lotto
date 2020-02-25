@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoBallTest {
 
-    @DisplayName("예외 테스트: 로또 범위 이외의 숫자로 LottoBall 생성하는 경우")
+    @DisplayName("예외 테스트: 로또 범위 이외의 숫자로 LottoBall 생성하는 경우 Exception 발생")
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     void test1(int number) {
