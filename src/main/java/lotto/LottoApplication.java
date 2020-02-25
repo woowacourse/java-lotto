@@ -30,7 +30,7 @@ public class LottoApplication {
 
     private static List<String> getRawManualLottos(LottoCount count) {
         List<String> rawManualLottos = new ArrayList<>();
-        if (count.getManualLottoCount() != 0) {
+        if (count.hasManualLottoCount()) {
             rawManualLottos.addAll(InputView.inputManualLottos(count));
         }
         return rawManualLottos;

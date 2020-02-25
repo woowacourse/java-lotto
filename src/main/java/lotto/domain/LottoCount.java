@@ -53,6 +53,10 @@ public class LottoCount {
         return lottoCount - manualLottoCount;
     }
 
+    public boolean hasManualLottoCount() {
+        return manualLottoCount != 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
