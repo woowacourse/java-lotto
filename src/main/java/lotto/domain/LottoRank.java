@@ -24,6 +24,7 @@ public enum LottoRank {
 		}
 
 		return Arrays.stream(values())
+			.filter(lottoRank -> lottoRank != LottoRank.SECOND)
 			.filter(lottoRank -> lottoRank.matchCount == matchCount)
 			.findFirst()
 			.orElse(MISS);
