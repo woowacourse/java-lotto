@@ -30,7 +30,7 @@ public enum Rank {
 
 	}
 
-	public Rank checkSecondOrNot(boolean bonus) {
+	private Rank checkSecondOrNot(boolean bonus) {
 		if (this.equals(THIRD) && bonus) {
 			return SECOND;
 		}

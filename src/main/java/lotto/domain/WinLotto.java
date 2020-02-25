@@ -16,7 +16,7 @@ public class WinLotto {
         this.bonusBall = new BonusBall(bonusBall);
     }
 
-    public List<LottoNo> toLottoNoList(String[] winLotto) {
+    private List<LottoNo> toLottoNoList(String[] winLotto) {
         try {
             return Arrays.stream(winLotto)
                     .map(Integer::parseInt)

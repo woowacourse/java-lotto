@@ -9,7 +9,7 @@ public class LottoFactory {
     private static final int END_LOTTO_NO = 45;
     private static final int LOTTO_FROM_INDEX = 0;
     private static final int LOTTO_TO_INDEX = 6;
-    public static final String ERROR_MESSAGE_NULL_POINT_LOTTO_FACTORY = "입력값이 비었습니다.";
+    private static final String ERROR_MESSAGE_NULL_POINT_LOTTO_FACTORY = "입력값이 비었습니다.";
 
     private static List<LottoNo> lottoNumberBox = new ArrayList<>();
 

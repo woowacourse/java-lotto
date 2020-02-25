@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManager {
-    public static final int MIN_WIN_COUNT = 3;
+    private static final int MIN_WIN_COUNT = 3;
 
     private final List<Lotto> lotteries;
     private WinLotto winLotto;
