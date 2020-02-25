@@ -39,9 +39,10 @@ public class MoneyTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"100000,100", "200000,200", "1000,1"})
-    void 금액에_대한_게임수_계산_확인(int value, int expected) {
+    @CsvSource(value = {"100000,100,50", "200000,200,100", "1000,1,0"})
+    void 금액에_대한_게임수_계산_확인(int value, int totalRepeat, int userRepeat) {
         Money money = new Money(value);
-        Assertions.assertThat(money.countGames()).isEqualTo(expected);
+        Assertions.assertThat(money.createRepeatCount())
+                .hasFieldOrPropertyWithValue("repeatCount", totalRepeat);
     }
 }
