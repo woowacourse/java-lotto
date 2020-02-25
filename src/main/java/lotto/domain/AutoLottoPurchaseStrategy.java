@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class AutoLottoPurchaseStrategy implements LottoPurchaseStrategy {
 	@Override
 	public Lotto generate() {
-		List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.values());
+		List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumberFactory.values());
 		Collections.shuffle(lottoNumbers);
 
 		return new Lotto(lottoNumbers.stream()

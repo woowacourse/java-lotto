@@ -1,26 +1,14 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-	private static final int MIN_BOUND = 1;
-	private static final int MAX_BOUND = 45;
-	private static final Map<Integer, LottoNumber> cache = new HashMap<>();
+	static final int MIN_BOUND = 1;
+	static final int MAX_BOUND = 45;
 
 	private final int number;
 
-	static {
-		for (int i = MIN_BOUND; i <= MAX_BOUND; i++) {
-			cache.put(i, new LottoNumber(i));
-		}
-	}
-
-	private LottoNumber(int number) {
+	LottoNumber(int number) {
 		validateBound(number);
 		this.number = number;
 	}
@@ -33,17 +21,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	public static LottoNumber valueOf(int number) {
 		if (number >= MIN_BOUND && number <= MAX_BOUND) {
-			return cache.get(number);
+			return LottoNumberFactory.of(number);
 		}
 		return new LottoNumber(number);
 	}
 
 	public static LottoNumber valueOf(String inputNumber) {
-		int number = parseToInt(inputNumber);
-		if (number >= MIN_BOUND && number <= MAX_BOUND) {
-			return cache.get(number);
-		}
-		return new LottoNumber(number);
+		return valueOf(parseToInt(inputNumber));
 	}
 
 	private static int parseToInt(String inputNumber) {
@@ -52,10 +36,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		} catch (NumberFormatException nfe) {
 			throw new InvalidLottoNumberException(InvalidLottoNumberException.NOT_INTEGER);
 		}
-	}
-
-	public static List<LottoNumber> values() {
-		return Collections.unmodifiableList(new ArrayList<>(cache.values()));
 	}
 
 	public int getNumber() {
