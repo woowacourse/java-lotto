@@ -22,4 +22,12 @@ public class LottoCountTest {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("부족합니다");
 	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {-1, 2})
+	void 수동_로또_수_범위(int manualLottoCount) {
+		assertThatThrownBy(() -> new LottoCount(1000, manualLottoCount))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("범위");
+	}
 }

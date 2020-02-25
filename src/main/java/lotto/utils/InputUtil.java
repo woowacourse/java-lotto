@@ -18,6 +18,10 @@ public class InputUtil {
 		return Integer.parseInt(bufferedReader.readLine());
 	}
 
+	public static int inputManualLottoCount() throws IOException {
+		return Integer.parseInt(bufferedReader.readLine());
+	}
+
 	public static List<String> inputWinningNumber() throws IOException {
 		return Arrays.asList(bufferedReader.readLine()
 			.replace(SPACE, EMPTY)

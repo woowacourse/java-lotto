@@ -3,17 +3,26 @@ package lotto.domain;
 public class LottoCount {
 	public static final int LOTTO_PRICE = 1000;
 	private static final int MINIMUM_MONEY = 1000;
+	private static final int MINIMUM_MANUAL_LOTTO_COUNT = 0;
 
-	private final int lottoCount;
+	private final int manualLottoCount;
+	private final int autoLottoCount;
 
-	public LottoCount(int money) {
-		validate(money);
-		this.lottoCount = money / LOTTO_PRICE;
+	public LottoCount(int money, int manualLottoCount) {
+		validate(money, manualLottoCount);
+
+		this.manualLottoCount = manualLottoCount;
+		this.autoLottoCount = calculateTotalLottoCount(money) - this.manualLottoCount;
 	}
 
-	private void validate(int money) {
+	public LottoCount(int money) {
+		this(money, MINIMUM_MANUAL_LOTTO_COUNT);
+	}
+
+	private void validate(int money, int manualLottoCount) {
 		validateLackOf(money);
 		validateMoneyUnit(money);
+		validateRangeOfManualLottoCount(money, manualLottoCount);
 	}
 
 	private void validateLackOf(int money) {
@@ -28,7 +37,25 @@ public class LottoCount {
 		}
 	}
 
-	public int getLottoCount() {
-		return lottoCount;
+	private void validateRangeOfManualLottoCount(int money, int manualLottoCount) {
+		if (isInvalidRange(money, manualLottoCount)) {
+			throw new IllegalArgumentException("구매할 수 있는 수동 로또 범위가 아닙니다!");
+		}
+	}
+
+	private boolean isInvalidRange(int money, int manualLottoCount) {
+		return manualLottoCount < MINIMUM_MANUAL_LOTTO_COUNT || manualLottoCount > calculateTotalLottoCount(money);
+	}
+
+	public int calculateTotalLottoCount(int money) {
+		return money / LOTTO_PRICE;
+	}
+
+	public int getManualLottoCount() {
+		return manualLottoCount;
+	}
+
+	public int getAutoLottoCount() {
+		return autoLottoCount;
 	}
 }

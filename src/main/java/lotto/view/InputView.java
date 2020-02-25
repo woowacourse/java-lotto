@@ -12,4 +12,8 @@ public class InputView {
 	public static void printInsertBonusNumber() {
 		System.out.println("보너스 번호를 입력해 주세요.");
 	}
+
+	public static void printInsertManualLottoCount() {
+		System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+	}
 }

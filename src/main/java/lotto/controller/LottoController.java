@@ -27,12 +27,23 @@ public class LottoController {
 
 	private static Lottos buyLottos() {
 		try {
-			LottoCount lottoCount = new LottoCount(readMoney());
-			OutputView.printLottoCount(LottoCountDto.from(lottoCount).getLottoCount());
-			return new Lottos(lottoMachine.makeRandomLottos(lottoCount.getLottoCount()));
+			LottoCount lottoCount = new LottoCount(readMoney(), readManualLottoCount());
+
+			OutputView.printLottoCount(LottoCountDto.from(lottoCount));
+			return new Lottos(lottoMachine.makeRandomLottos(lottoCount.getAutoLottoCount()));
 		} catch (IllegalArgumentException e) {
 			OutputView.printExceptionMessage(e);
 			return buyLottos();
+		}
+	}
+
+	private static int readManualLottoCount() {
+		try {
+			InputView.printInsertManualLottoCount();
+			return InputUtil.inputManualLottoCount();
+		} catch (NumberFormatException | IOException e) {
+			OutputView.printWrongManualLottoCount(e);
+			return readManualLottoCount();
 		}
 	}
 
