@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -47,5 +48,28 @@ class LottoFactoryTest {
     void makeLottosTest() {
         Lottos lottos = LottoFactory.create(3);
         assertThat(lottos.getSize()).isEqualTo(3);
+    }
+
+    @Test
+    void makeMaualLottosTest(){
+        List<String> manual = Arrays.asList("1,2,3,4,5,6", "3,4,5,6,7,8");
+        Lottos lottos = LottoFactory.create(manual, 10);
+        Iterator<Lotto> iter = lottos.iterator();
+
+        Lotto next = iter.next();
+        assertThat(lottos.getSize()).isEqualTo(12);
+        assertThat(next.contains(new Number(1))).isTrue();
+        assertThat(next.contains(new Number(2))).isTrue();
+        assertThat(next.contains(new Number(3))).isTrue();
+        assertThat(next.contains(new Number(4))).isTrue();
+        assertThat(next.contains(new Number(5))).isTrue();
+        assertThat(next.contains(new Number(6))).isTrue();
+        Lotto next2 = iter.next();
+        assertThat(next2.contains(new Number(3))).isTrue();
+        assertThat(next2.contains(new Number(4))).isTrue();
+        assertThat(next2.contains(new Number(5))).isTrue();
+        assertThat(next2.contains(new Number(6))).isTrue();
+        assertThat(next2.contains(new Number(7))).isTrue();
+        assertThat(next2.contains(new Number(8))).isTrue();
     }
 }

@@ -70,4 +70,15 @@ public class LottoFactory {
         }
         return new Lottos(lottos);
     }
+
+    public static Lottos create(List<String> list, int autoCount){
+        List<Lotto> lottos = new ArrayList<>();
+        for (String input : list) {
+            lottos.add(create(input));
+        }
+        for(int i =0; i< autoCount;i++) {
+            lottos.add(create());
+        }
+        return new Lottos(lottos);
+    }
 }
