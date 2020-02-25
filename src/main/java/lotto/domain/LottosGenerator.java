@@ -11,14 +11,13 @@ public class LottosGenerator {
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final List<LottoNumber> lottoNumbersInBox = LottoNumberBox.create();
 
-    static List<Lotto> generate(int lottosSize) {
-        List<Lotto> lottos = new ArrayList<>();
-        // todo: lottos를 Set<Lotto>로 만들어서 중복된 것 없게 만들기
+    static Lottos generate(int lottosSize) {
+        Set<Lotto> lottos = new HashSet<>();
         for (int i = 0; i < lottosSize; i++) {
             Set<LottoNumber> lottoNumbers = generateLottoNumbers();
             lottos.add(new Lotto(lottoNumbers));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     private static Set<LottoNumber> generateLottoNumbers() {

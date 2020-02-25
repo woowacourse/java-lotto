@@ -17,9 +17,9 @@ class LottosGeneratorTest {
         //given
         int lottosSize = 14;
         //when
-        List<Lotto> lottoNumbersList = LottosGenerator.generate(lottosSize);
-        Set<Lotto> lottoNumbersSet = new HashSet<>(lottoNumbersList);
-        assertThat(lottoNumbersList.size()).isEqualTo(lottoNumbersSet.size());
+        Lottos lottos = LottosGenerator.generate(lottosSize);
+        Set<Lotto> lottoNumbersSet = new HashSet<>(lottos.getLottos());
+        assertThat(lottos.getLottos().size()).isEqualTo(lottoNumbersSet.size());
     }
 
 }
