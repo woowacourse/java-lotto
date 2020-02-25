@@ -5,10 +5,11 @@ import java.util.Objects;
 public class Money {
     private static final int PRICE = 1_000;
     private static final int PERCENT = 100;
+    private static final int ZERO = 0;
     private final int value;
 
     Money() {
-        this.value = 0;
+        this.value = ZERO;
     }
 
     public Money(int value) {
@@ -17,7 +18,7 @@ public class Money {
     }
 
     private void validateMoney(int value) {
-        if (value <= 0) {
+        if (value <= ZERO) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다");
         }
     }
