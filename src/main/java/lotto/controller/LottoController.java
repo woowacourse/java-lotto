@@ -14,8 +14,8 @@ public class LottoController {
     public void play() {
         startInputPurchaseAmount();
 
-        ManualTicketingCount manualTicketingCount = InputView.inputManualTicketingCount();
-        for (int i = 0; i < manualTicketingCount.getManualTicketingCount(); i++) {
+        TicketingCount ticketingCount = InputView.inputManualTicketingCount();
+        for (int i = 0; i < ticketingCount.getTicketingCount(); i++) {
             LottoTickets.insertLottoTicket(new LottoTicket(InputView.InputManualLottoTicket()));
         }
 
