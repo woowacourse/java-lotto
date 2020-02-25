@@ -32,10 +32,7 @@ public class WinningLottoTest {
         Ball ball = Ball.of(40);
         WinningLotto winningLotto = new WinningLotto(lotto, ball);
 
-        LottoFactory lottoFactory = () -> new Lotto(balls);
-
-        LottosFactory lottosFactory = new LottosFactory(lottoFactory);
-        Lottos lottos = lottosFactory.createLottosByCount(new LottoCount(2));
+        Lottos lottos = LottosFactory.createLottosByCount(new LottoCount(2));
 
         TotalResult totalResult = winningLotto.getResult(lottos);
         assertThat(totalResult.getProfitRate()).isEqualTo(200000000);

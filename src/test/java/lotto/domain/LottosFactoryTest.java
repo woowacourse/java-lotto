@@ -1,26 +1,34 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottosFactoryTest {
 
     @DisplayName("수동 로또 생성 테스트")
-    @Test
-    void makeLottos() {
-        LottoFactory lottoFactory = () -> {
-            Set<Ball> balls = new HashSet<>(Arrays
-                .asList(Ball.of(1), Ball.of(12), Ball.of(23), Ball.of(4), Ball.of(5), Ball.of(6)));
-            return new Lotto(balls);
-        };
-        LottosFactory lottosFactory = new LottosFactory(lottoFactory);
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6", "43, 23, 36, 12, 10, 05"})
+    void makeLottos(int one, int two, int three, int four, int five, int six) {
+        Lotto lotto = LottoFactory
+            .createManual(one + ", " + two + ", " + three + ", " + four + ", " + five + ", " + six);
+        assertThat(lotto.contains(Ball.of(one))).isTrue();
+        assertThat(lotto.contains(Ball.of(two))).isTrue();
+        assertThat(lotto.contains(Ball.of(three))).isTrue();
+        assertThat(lotto.contains(Ball.of(four))).isTrue();
+        assertThat(lotto.contains(Ball.of(five))).isTrue();
+        assertThat(lotto.contains(Ball.of(six))).isTrue();
+    }
 
-        Lottos lottos = lottosFactory.createLottosByCount(new LottoCount(5));
-        assertThat(lottos.isSameCount(5)).isTrue();
+    @DisplayName("수동 로또 생성 실패 - 개수 초과")
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6, 7", "1, 2, 3, 4, 5"})
+    void differentCount(String string) {
+        assertThatThrownBy(() -> LottoFactory.createManual(string))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("개수");
     }
 }
