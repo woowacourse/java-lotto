@@ -20,8 +20,12 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputManualLotto() {
+    public static String inputManualLotto(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        return scanner.next();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            builder.append(scanner.next() + '\n');
+        }
+        return builder.toString();
     }
 }
