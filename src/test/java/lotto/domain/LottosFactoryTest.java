@@ -15,7 +15,8 @@ public class LottosFactoryTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5})
     void makeAutoLottos(int count) {
-        Lottos autoLottos = LottosFactory.createAutoLottos(new LottoCount(count));
+        List<String> strings = new ArrayList<>();
+        Lottos autoLottos = LottosFactory.createLottos(strings, new LottoCount(count));
         assertThat(autoLottos.getCount()).isEqualTo(new LottoCount(count));
     }
 

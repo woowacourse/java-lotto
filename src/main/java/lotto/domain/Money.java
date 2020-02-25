@@ -33,8 +33,8 @@ public class Money {
         return new Money(lottoCount.getLottoCount() * LOTTO_PRICE);
     }
 
-    public LottoCount getLottoCount() {
-        return new LottoCount(money / LOTTO_PRICE);
+    public LottoCount getLottoCount(int manualLottoCount) {
+        return new LottoCount(money / LOTTO_PRICE, manualLottoCount);
     }
 
     public long multiply(int count) {

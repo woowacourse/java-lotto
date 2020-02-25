@@ -5,7 +5,8 @@ import java.util.List;
 
 public class LottosFactory {
 
-    public static final String INVALID_MANUAL_LOTTOS_COUNT = "수동 로또 개수(%d)와 정보 개수(%d)가 일치하지 않습니다.";
+    private static final String INVALID_MANUAL_LOTTOS_COUNT
+        = "수동 로또 개수(%d)와 정보 개수(%d)가 일치하지 않습니다.";
 
     public static Lottos createLottos(List<String> manualLotto, LottoCount count) {
         List<Lotto> lottos = new ArrayList<>();
@@ -30,10 +31,6 @@ public class LottosFactory {
                 .format(INVALID_MANUAL_LOTTOS_COUNT, manualLotto.size(),
                     count.getManualLottoCount()));
         }
-    }
-
-    public static Lottos createAutoLottos(LottoCount count) {
-        return new Lottos(createRandomLottos(count), count);
     }
 
     private static List<Lotto> createRandomLottos(LottoCount count) {
