@@ -21,8 +21,8 @@ public class PurchaseMoneyTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, -1, -5, Integer.MIN_VALUE})
-	void PurchaseMoney_LessOrEqualThanZero_ShouldThrowException(int input) {
+	@ValueSource(ints = {-1, -5, Integer.MIN_VALUE})
+	void PurchaseMoney_LessThanZero_ShouldThrowException(int input) {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
@@ -40,5 +40,20 @@ public class PurchaseMoneyTest {
 			new PurchaseMoney(input);
 		}).isInstanceOf(PurchaseMoneyIllegalArgumentException.class)
 				.hasMessageMatching("-?[0-9]+" + PurchaseMoneyIllegalArgumentException.MESSAGE);
+	}
+
+	@Test
+	void subtractByTicketNumber() {
+		// given
+		int amount = 10000;
+		PurchaseMoney purchaseMoney = new PurchaseMoney(amount);
+
+		// when
+		int input = 4;
+		PurchaseMoney result = purchaseMoney.subtractByTicketNumber(input);
+
+		// then
+		Assertions.assertThat(result)
+				.isEqualTo(new PurchaseMoney(amount - 4 * 1000));
 	}
 }

@@ -11,7 +11,7 @@ public class PurchaseMoney {
 	private final int purchaseMoney;
 
 	public PurchaseMoney(final int purchaseMoney) {
-		checkIsLessOrEqualThanZero(purchaseMoney);
+		checkIsLessThanZero(purchaseMoney);
 		checkIsMultipleOfThousand(purchaseMoney);
 
 		this.purchaseMoney = purchaseMoney;
@@ -23,10 +23,15 @@ public class PurchaseMoney {
 		}
 	}
 
-	private void checkIsLessOrEqualThanZero(int purchaseMoney) {
-		if (purchaseMoney <= POSITIVE_THRESHOLD) {
+	private void checkIsLessThanZero(int purchaseMoney) {
+		if (purchaseMoney < POSITIVE_THRESHOLD) {
 			throw new PurchaseMoneyIllegalArgumentException(purchaseMoney);
 		}
+	}
+
+	public PurchaseMoney subtractByTicketNumber(int num) {
+		int amount = num * LOTTO_PRICE;
+		return null;
 	}
 
 	public int countPurchasedTickets() {
