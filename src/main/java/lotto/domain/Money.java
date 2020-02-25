@@ -5,7 +5,7 @@ import lotto.exceptions.InvalidMoneyException;
 public class Money {
     static final int TICKET_PRICE = 1000;
 
-    private final int amount;
+    private int amount;
 
     private Money(final String amount) {
         this.amount = validMoney(amount);
@@ -51,5 +51,9 @@ public class Money {
 
     public boolean changeExists() {
         return change() != 0;
+    }
+
+    public void reduceAmountForAutoTicket(LottoQuantity quantity) {
+        amount -= quantity.getQuantity() * TICKET_PRICE;
     }
 }
