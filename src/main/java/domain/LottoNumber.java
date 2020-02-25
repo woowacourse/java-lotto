@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Objects;
 
-public class LottoNumber implements  Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER_RANGE = 1;
     private static final int MAX_LOTTO_NUMBER_RANGE = 45;
     private static final String MAKE_STR = "";
@@ -15,7 +15,7 @@ public class LottoNumber implements  Comparable<LottoNumber>{
     }
 
     private static void validateLottoNumberRange(int number) {
-        if(number < MIN_LOTTO_NUMBER_RANGE || number > MAX_LOTTO_NUMBER_RANGE) {
+        if (number < MIN_LOTTO_NUMBER_RANGE || number > MAX_LOTTO_NUMBER_RANGE) {
             throw new IllegalArgumentException("범위를 벗어나는 로또 숫자입니다.");
         }
     }

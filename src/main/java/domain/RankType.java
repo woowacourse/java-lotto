@@ -25,7 +25,7 @@ public enum RankType {
 
     public static RankType of(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket) {
         int correctCount = winningLottoTicket.getCorrectCount(lottoTicket);
-        if(correctCount == BONUS_BALL_MATCH_COUNT && isBonusCondition(lottoTicket, winningLottoTicket)){
+        if (correctCount == BONUS_BALL_MATCH_COUNT && isBonusCondition(lottoTicket, winningLottoTicket)) {
             return MATCH_FIVE_WITH_BONUS;
         }
         return Stream.of(RankType.values())

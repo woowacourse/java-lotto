@@ -15,7 +15,7 @@ public class LottoResults {
     }
 
     private void setUpLottoResults() {
-        for(RankType rankType : RankType.values()){
+        for (RankType rankType : RankType.values()) {
             lottoResults.put(rankType, INIT_RANK_COUNT);
         }
     }
