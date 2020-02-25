@@ -1,14 +1,15 @@
 package domain.lotto;
 
+import domain.RepeatCount;
 import domain.lotto.generator.NumberGenerator;
 import domain.lotto.lottoresult.LottoResult;
 import domain.lotto.lottoresult.LottoWinner;
 import domain.lotto.lottoresult.ResultCount;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoGame {
     private static final String ERROR_NULL_MESSAGE = "null값이 입력되었습니다.";
@@ -20,9 +21,15 @@ public class LottoGame {
         this.lottoGame = lottoGame;
     }
 
-    public static LottoGame create(NumberGenerator numberGenerator, int repeat) {
-        return IntStream.range(0, repeat)
+    public static LottoGame create(NumberGenerator numberGenerator, RepeatCount repeatCount) {
+        return repeatCount.toIntStream()
                 .mapToObj(i -> LottoNumbersFactory.createLottoNumbers(numberGenerator))
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoGame::new));
+    }
+
+    public static LottoGame merge(LottoGame... lottoGames) {
+        return Arrays.stream(lottoGames)
+                .flatMap(game -> game.lottoGame.stream())
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoGame::new));
     }
 
