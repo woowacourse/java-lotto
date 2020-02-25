@@ -13,6 +13,10 @@ public class OverallResult {
         this.overallResult = overallResult;
     }
 
+    public int getNumberOfMatchTickets(Rank rank) {
+        return overallResult.get(rank);
+    }
+
     public double calculateWinRate() {
         return calculateTotalPrize() / calculateBettingMoney();
     }

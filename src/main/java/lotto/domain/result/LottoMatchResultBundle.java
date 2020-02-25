@@ -7,19 +7,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoResultBundle {
-    private final List<LottoResult> lottoResults;
+public class LottoMatchResultBundle {
+    private final List<LottoMatchResult> lottoMatchResults;
 
-    public LottoResultBundle(List<LottoResult> lottoResults) {
-        this.lottoResults = lottoResults;
+    public LottoMatchResultBundle(List<LottoMatchResult> lottoMatchResults) {
+        this.lottoMatchResults = lottoMatchResults;
     }
 
-    public Map<Rank, Integer> computeOverallWinResult() {
+    public OverallResult createOverallResult() {
         Map<Rank, Integer> overallResult = initializeOverallWinResult();
 
         overallResult.replaceAll((key, value) -> countMatchTickets(key));
 
-        return overallResult;
+        return new OverallResult(overallResult);
     }
 
     private Map<Rank, Integer> initializeOverallWinResult() {
@@ -31,7 +31,7 @@ public class LottoResultBundle {
     }
 
     private int countMatchTickets(Rank rank) {
-        return (int) lottoResults.stream()
+        return (int) lottoMatchResults.stream()
                 .filter(lottoResult -> lottoResult.has(rank))
                 .count();
     }
@@ -40,19 +40,19 @@ public class LottoResultBundle {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoResultBundle that = (LottoResultBundle) o;
-        return Objects.equals(lottoResults, that.lottoResults);
+        LottoMatchResultBundle that = (LottoMatchResultBundle) o;
+        return Objects.equals(lottoMatchResults, that.lottoMatchResults);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoResults);
+        return Objects.hash(lottoMatchResults);
     }
 
     @Override
     public String toString() {
         return "LottoResultBundle{" +
-                "lottoResults=" + lottoResults +
+                "lottoResults=" + lottoMatchResults +
                 '}';
     }
 }

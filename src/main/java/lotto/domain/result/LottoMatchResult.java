@@ -4,10 +4,10 @@ import lotto.domain.result.rank.Rank;
 
 import java.util.Objects;
 
-public class LottoResult {
+public class LottoMatchResult {
     private final Rank rank;
 
-    public LottoResult(Rank rank) {
+    public LottoMatchResult(Rank rank) {
         this.rank = rank;
     }
 
@@ -19,7 +19,7 @@ public class LottoResult {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoResult that = (LottoResult) o;
+        LottoMatchResult that = (LottoMatchResult) o;
         return rank == that.rank;
     }
 

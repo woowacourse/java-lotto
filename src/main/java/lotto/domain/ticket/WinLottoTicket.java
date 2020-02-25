@@ -1,6 +1,6 @@
 package lotto.domain.ticket;
 
-import lotto.domain.result.LottoResult;
+import lotto.domain.result.LottoMatchResult;
 import lotto.domain.result.rank.Rank;
 import lotto.domain.ticket.ball.LottoBall;
 
@@ -24,12 +24,12 @@ public class WinLottoTicket {
         }
     }
 
-    public LottoResult createLottoResult(LottoTicket lottoTicket) {
+    public LottoMatchResult createLottoResult(LottoTicket lottoTicket) {
         int numberOfMatch = countMatchNumber(lottoTicket);
         boolean isBonusMatch = lottoTicket.has(bonusBall);
 
         Rank rank = Rank.findRankByMatchInfo(numberOfMatch, isBonusMatch);
-        return new LottoResult(rank);
+        return new LottoMatchResult(rank);
     }
 
     public int countMatchNumber(LottoTicket lottoTicket) {

@@ -1,7 +1,7 @@
 package lotto.domain.ticket;
 
-import lotto.domain.result.LottoResult;
-import lotto.domain.result.LottoResultBundle;
+import lotto.domain.result.LottoMatchResult;
+import lotto.domain.result.LottoMatchResultBundle;
 import lotto.domain.result.rank.Rank;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
@@ -28,10 +28,10 @@ class LottoTicketBundleTest {
         LottoBall bonusBall = LottoBallFactory.getLottoBallByNumber(7);
         WinLottoTicket winLottoTicket = new WinLottoTicket(new LottoTicket(winBalls), bonusBall);
 
-        LottoResultBundle expectedResultBundle = new LottoResultBundle(Arrays.asList(new LottoResult(Rank.FIRST)));
+        LottoMatchResultBundle expectedResultBundle = new LottoMatchResultBundle(Arrays.asList(new LottoMatchResult(Rank.FIRST)));
 
         //when
-        LottoResultBundle resultBundle = ticketBundle.createLottoResultBundle(winLottoTicket);
+        LottoMatchResultBundle resultBundle = ticketBundle.createLottoMatchResultBundle(winLottoTicket);
 
         //then
         assertThat(resultBundle).isEqualTo(expectedResultBundle);

@@ -1,6 +1,6 @@
 package lotto.domain.ticket;
 
-import lotto.domain.result.LottoResult;
+import lotto.domain.result.LottoMatchResult;
 import lotto.domain.result.rank.Rank;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
@@ -20,20 +20,20 @@ class WinLottoTicketTest {
 
     private static Stream<Arguments> numberProvider() {
         return Stream.of(
-                Arguments.of(new int[]{11, 12, 13, 18, 19, 20}, new LottoResult(Rank.SIXTH)),
-                Arguments.of(new int[]{1, 12, 13, 18, 19, 20}, new LottoResult(Rank.SIXTH)),
-                Arguments.of(new int[]{1, 2, 13, 18, 19, 20}, new LottoResult(Rank.SIXTH)),
-                Arguments.of(new int[]{1, 2, 3, 8, 9, 10}, new LottoResult(Rank.FIFTH)),
-                Arguments.of(new int[]{1, 2, 3, 4, 9, 10}, new LottoResult(Rank.FOURTH)),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 10}, new LottoResult(Rank.THIRD)),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 7}, new LottoResult(Rank.SECOND)),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new LottoResult(Rank.FIRST)));
+                Arguments.of(new int[]{11, 12, 13, 18, 19, 20}, new LottoMatchResult(Rank.SIXTH)),
+                Arguments.of(new int[]{1, 12, 13, 18, 19, 20}, new LottoMatchResult(Rank.SIXTH)),
+                Arguments.of(new int[]{1, 2, 13, 18, 19, 20}, new LottoMatchResult(Rank.SIXTH)),
+                Arguments.of(new int[]{1, 2, 3, 8, 9, 10}, new LottoMatchResult(Rank.FIFTH)),
+                Arguments.of(new int[]{1, 2, 3, 4, 9, 10}, new LottoMatchResult(Rank.FOURTH)),
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 10}, new LottoMatchResult(Rank.THIRD)),
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 7}, new LottoMatchResult(Rank.SECOND)),
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new LottoMatchResult(Rank.FIRST)));
     }
 
     @DisplayName("우승 로또 티켓과 비교하기")
     @ParameterizedTest
     @MethodSource("numberProvider")
-    void name(int[] numbers, LottoResult expectedResult) {
+    void name(int[] numbers, LottoMatchResult expectedResult) {
         //given
         Set<LottoBall> winBalls = aLottoBalls(1, 2, 3, 4, 5, 6);
         WinLottoTicket winLottoTicket = new WinLottoTicket(new LottoTicket(winBalls), LottoBallFactory.getLottoBallByNumber(7));
@@ -41,10 +41,10 @@ class WinLottoTicketTest {
         LottoTicket buyLottoTicket = new LottoTicket(aLottoBalls(numbers));
 
         //when
-        LottoResult lottoResult = winLottoTicket.createLottoResult(buyLottoTicket);
+        LottoMatchResult lottoMatchResult = winLottoTicket.createLottoResult(buyLottoTicket);
 
         //then
-        assertThat(lottoResult).isEqualTo(expectedResult);
+        assertThat(lottoMatchResult).isEqualTo(expectedResult);
     }
 
     private Set<LottoBall> aLottoBalls(int... numbers) {
