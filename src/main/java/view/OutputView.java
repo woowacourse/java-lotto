@@ -87,13 +87,13 @@ public class OutputView {
         }
         sb.append(" (");
         sb.append(rank.getWinning());
-        sb.append("원)- ");
-        sb.append(resultCount.toString());
+        sb.append("원) - ");
+        sb.append(resultCount);
         sb.append("개");
         System.out.println(sb.toString());
     }
 
     private static void printEarning(long rating) {
-        System.out.println("총 수익률은 " + rating + "%입니다.");
+        System.out.printf("총 수익률은 %d%%입니다.\n", rating);
     }
 }

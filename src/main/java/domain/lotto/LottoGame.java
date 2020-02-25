@@ -7,6 +7,7 @@ import domain.lotto.lottoresult.ResultCount;
 import generator.NumberGenerator;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -29,7 +30,8 @@ public class LottoGame {
 
     public static LottoGame merge(LottoGame... lottoGames) {
         return Arrays.stream(lottoGames)
-                .flatMap(game -> game.lottoGame.stream())
+                .map(game -> game.lottoGame)
+                .flatMap(Collection::stream)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoGame::new));
     }
 
@@ -42,8 +44,7 @@ public class LottoGame {
     public LottoResult createGameResult(LottoWinner winner) {
         return new LottoResult(lottoGame.stream()
                 .collect(Collectors.groupingBy(winner::createRank,
-                        Collectors.collectingAndThen(Collectors.counting(),
-                                ResultCount::new))));
+                        Collectors.collectingAndThen(Collectors.counting(), ResultCount::new))));
     }
 
     public List<LottoNumbers> getLottoGame() {
