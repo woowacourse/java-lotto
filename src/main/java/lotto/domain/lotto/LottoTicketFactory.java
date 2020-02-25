@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.domain.money.LottoMoney;
+import lotto.domain.count.Count;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,9 +31,9 @@ public class LottoTicketFactory {
         }
     }
 
-    public static LottoTickets publishLottoTickets(LottoMoney lottoMoney) {
+    public static LottoTickets publishLottoTickets(Count count) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        int lottoPurchaseCounts = lottoMoney.getLottoPurchaseCounts();
+        int lottoPurchaseCounts = count.getAutoCounts();
 
         for (int i = START_INDEX; i < lottoPurchaseCounts; i++) {
             lottoTickets.add(publishLottoTicketOfRandom());
