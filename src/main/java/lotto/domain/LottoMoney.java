@@ -59,7 +59,7 @@ public class LottoMoney {
 		}
 	}
 
-	public int getNumberOfLotto() {
+	public int getPurchasedLottoCount() {
 		return (int)(money / LOTTO_PRICE);
 	}
 

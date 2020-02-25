@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
@@ -21,11 +22,11 @@ public class ConsoleOutputView {
 		System.out.println(exceptionMessage);
 	}
 
-	public static void printPurchaseCompleteMessage(int numberOfLotto) {
-		System.out.printf(PURCHASE_COMPLETE_MESSAGE, numberOfLotto);
+	public static void printPurchaseCompleteMessage(LottoMoney lottoMoney) {
+		System.out.printf(PURCHASE_COMPLETE_MESSAGE, lottoMoney.getPurchasedLottoCount());
 	}
 
-	public static void printPurchasedLotto(Lottos lottos) {
+	public static void printPurchasedAutoLotto(Lottos lottos) {
 		for (Lotto lotto : lottos) {
 			String lottoNumber = lotto.getLottoNumbers().stream()
 				.map(LottoNumber::getNumber)

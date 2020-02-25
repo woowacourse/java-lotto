@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.WinningLottoParser.*;
+import static lotto.domain.LottoNumberParser.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashSet;
@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class WinningLottoParserTest {
+class LottoNumberParserTest {
 	@DisplayName("parseToLottoNumberSet에 번호 6개를 입력하면 LottoNumberSet 생성")
 	@Test
 	void parseToLottoNumberSet_StringInputWinningLotto_WinningLottoNumberSet() {

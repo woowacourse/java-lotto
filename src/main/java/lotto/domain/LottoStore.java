@@ -10,9 +10,11 @@ public class LottoStore {
 		this.lottoPurchaseStrategy = lottoPurchaseStrategy;
 	}
 
-	public Lottos purchaseLotto(int numberOfLotto) {
+	public Lottos purchaseLotto(LottoMoney lottoMoney) {
 		List<Lotto> lottos = new ArrayList<>();
-		for (int i = 0; i < numberOfLotto; i++) {
+		int lottoCount = lottoMoney.getPurchasedLottoCount();
+
+		for (int i = 0; i < lottoCount; i++) {
 			lottos.add(lottoPurchaseStrategy.generate());
 		}
 		return new Lottos(lottos);

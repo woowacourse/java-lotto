@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WinningLottoParser {
+public class LottoNumberParser {
 	private static final String DELIMITER = ",";
 	private static final int LOTTO_NUMBER_COUNT = 6;
 

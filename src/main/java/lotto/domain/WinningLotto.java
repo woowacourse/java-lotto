@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -20,7 +19,7 @@ public class WinningLotto {
 	}
 
 	private void validateDuplicate(Lotto winningLotto, LottoNumber bonusLottoNumber) {
-		if (winningLotto.isContains(bonusLottoNumber)) {
+		if (winningLotto.contains(bonusLottoNumber)) {
 			throw new InvalidWinningLottoException(InvalidWinningLottoException.DUPLICATE_NUMBER);
 		}
 	}
@@ -32,7 +31,7 @@ public class WinningLotto {
 			.forEach(lottoRank -> lottoRankCount.put(lottoRank, INIT_COUNT));
 
 		for (Lotto lotto : lottos) {
-			LottoRank lottoRank = LottoRank.of(lotto.getMatchCount(winningLotto), lotto.isContains(bonusLottoNumber));
+			LottoRank lottoRank = LottoRank.of(lotto.getMatchCount(winningLotto), lotto.contains(bonusLottoNumber));
 			lottoRankCount.replace(lottoRank, lottoRankCount.get(lottoRank) + SUM_UNIT);
 		}
 		return lottoRankCount;

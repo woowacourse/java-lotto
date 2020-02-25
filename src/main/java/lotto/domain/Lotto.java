@@ -28,7 +28,7 @@ public class Lotto {
 		}
 	}
 
-	boolean isContains(LottoNumber bonusNumber) {
+	boolean contains(LottoNumber bonusNumber) {
 		return lottoNumbers.contains(bonusNumber);
 	}
 

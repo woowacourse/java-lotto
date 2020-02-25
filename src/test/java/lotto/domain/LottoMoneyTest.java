@@ -63,7 +63,7 @@ class LottoMoneyTest {
 	@Test
 	void getNumberOfLotto_LottoMoney_NumberOfLotto() {
 		LottoMoney lottoMoney = new LottoMoney("2000");
-		assertThat(lottoMoney.getNumberOfLotto()).isEqualTo(2);
+		assertThat(lottoMoney.getPurchasedLottoCount()).isEqualTo(2);
 	}
 
 	@DisplayName("add에 더할 LottoMoney를 입력하면 더한 LottoMoney 반환")
