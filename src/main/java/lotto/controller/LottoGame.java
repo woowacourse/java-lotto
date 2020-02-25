@@ -12,7 +12,7 @@ public class LottoGame {
 
     public static void main(String[] args) {
         Money purchaseMoney = InputView.inputPurchaseMoney();
-        List<LottoTicket> lottoTickets =  LottoFactory.createLottos(purchaseMoney);
+        List<LottoTicket> lottoTickets = LottoTicketFactory.createLottoTickets(purchaseMoney);
         OutputView.printLottos(lottoTickets);
 
         WinningNumbers winningNumbers = InputView.inputWinningNumbers();
