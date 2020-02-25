@@ -11,12 +11,14 @@ public class LottoResult {
 	private static final int INITIAL_COUNT = 0;
 	private static final int PERCENT = 100;
 
-	private Map<WinningPrize, Integer> lottoResult;
+	private Map<WinningPrize, Integer> winnerCountMapper;
+	private long earningRate;
 
 	public LottoResult(List<WinningPrize> winningPrizes) {
 		validateNullAndEmpty(winningPrizes);
 		initialize();
 		countWinning(winningPrizes);
+		this.earningRate = calculateEarningRate();
 	}
 
 	private void validateNullAndEmpty(List<WinningPrize> winningPrizes) {
@@ -26,30 +28,34 @@ public class LottoResult {
 	}
 
 	private void initialize() {
-		lottoResult = new HashMap<>();
+		winnerCountMapper = new HashMap<>();
 		for (WinningPrize winningPrize : WinningPrize.values()) {
-			lottoResult.put(winningPrize, INITIAL_PRIZE_COUNT);
+			winnerCountMapper.put(winningPrize, INITIAL_PRIZE_COUNT);
 		}
 	}
 
 	private void countWinning(List<WinningPrize> winningPrizes) {
 		for (WinningPrize winningPrize : winningPrizes) {
-			lottoResult.put(winningPrize, lottoResult.get(winningPrize) + PLUS_COUNT);
+			winnerCountMapper.put(winningPrize, winnerCountMapper.get(winningPrize) + PLUS_COUNT);
 		}
 	}
 
-	public long calculateEarningRate() {
+	private long calculateEarningRate() {
 		double totalEarning = INITIAL_EARNING;
 		int totalCount = INITIAL_COUNT;
 
 		for (WinningPrize winningPrize : WinningPrize.values()) {
-			totalCount += lottoResult.get(winningPrize);
-			totalEarning += (winningPrize.getPrize() * lottoResult.get(winningPrize));
+			totalCount += winnerCountMapper.get(winningPrize);
+			totalEarning += (winningPrize.getPrize() * winnerCountMapper.get(winningPrize));
 		}
 		return (long)(totalEarning / (totalCount * LottoCount.LOTTO_PRICE) * PERCENT);
 	}
 
-	public Map<WinningPrize, Integer> getLottoResult() {
-		return lottoResult;
+	public Map<WinningPrize, Integer> getWinnerCountMapper() {
+		return winnerCountMapper;
+	}
+
+	public long getEarningRate() {
+		return earningRate;
 	}
 }

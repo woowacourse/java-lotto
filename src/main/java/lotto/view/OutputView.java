@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoResult;
 import lotto.domain.WinningPrize;
 import lotto.dto.LottoDto;
+import lotto.dto.LottoResultDto;
 import lotto.dto.LottosDto;
 
 public class OutputView {
@@ -30,13 +30,13 @@ public class OutputView {
 		System.out.println(e.getMessage());
 	}
 
-	public static void printLottoResult(LottoResult lottoResult) {
+	public static void printLottoResult(LottoResultDto lottoResultDto) {
 		for (WinningPrize winningPrize : WinningPrize.values()) {
 			System.out.println(winningPrize.getPrizeDescription()
 				+ "("
 				+ winningPrize.getPrize() + "원): "
-				+ lottoResult.getLottoResult().get(winningPrize) + "개");
+				+ lottoResultDto.getWinnerCountMapper().get(winningPrize) + "개");
 		}
-		System.out.println("총 수익률: " + lottoResult.calculateEarningRate() + "%");
+		System.out.println("총 수익률: " + lottoResultDto.getEarningRate() + "%");
 	}
 }
