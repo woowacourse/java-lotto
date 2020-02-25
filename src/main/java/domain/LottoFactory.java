@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import exception.LackOfMoneyException;
+
 public class LottoFactory {
 	private static final List<LottoNumber> numbers = new ArrayList<>();
 	private static final int LOTTO_LENGTH_FRONT = 0;
@@ -19,12 +21,19 @@ public class LottoFactory {
 	}
 
 	public static List<Lotto> createLottos(Money purchaseMoney) {
+		moneyValidate(purchaseMoney);
 		int lottoCount = (int)purchaseMoney.getMoney() / LOTTO_PRICE;
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < lottoCount; i++) {
 			lottos.add(createLotto());
 		}
 		return lottos;
+	}
+
+	private static void moneyValidate(Money purchaseMoney) {
+		if (purchaseMoney.getMoney() < LOTTO_PRICE) {
+			throw new LackOfMoneyException();
+		}
 	}
 
 	private static Lotto createLotto() {

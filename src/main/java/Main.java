@@ -1,14 +1,13 @@
 import domain.GameResult;
 import domain.LottoGame;
 import domain.Money;
-import domain.PurchaseMoney;
 import view.InputView;
 import view.OutputView;
 
 public class Main {
 	public static void main(String[] args) {
 		try {
-			Money purchaseMoney = PurchaseMoney.create(InputView.inputPurchaseMoney());
+			Money purchaseMoney = new Money(InputView.inputPurchaseMoney());
 			LottoGame lottoGame = new LottoGame(purchaseMoney);
 			OutputView.printLottos(lottoGame);
 
