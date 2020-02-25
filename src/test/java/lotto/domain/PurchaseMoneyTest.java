@@ -4,6 +4,7 @@ import lotto.exceptions.PurchaseMoneyIllegalArgumentException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class PurchaseMoneyTest {
@@ -42,18 +43,31 @@ public class PurchaseMoneyTest {
 				.hasMessageMatching("-?[0-9]+" + PurchaseMoneyIllegalArgumentException.MESSAGE);
 	}
 
-	@Test
-	void subtractByTicketNumber() {
+	@ParameterizedTest
+	@CsvSource(value = {"10000,10", "10000,9", "10000,0"})
+	void subtractByTicketNumber(int amount, int input) {
 		// given
-		int amount = 10000;
 		PurchaseMoney purchaseMoney = new PurchaseMoney(amount);
 
 		// when
-		int input = 4;
 		PurchaseMoney result = purchaseMoney.subtractByTicketNumber(input);
 
 		// then
 		Assertions.assertThat(result)
-				.isEqualTo(new PurchaseMoney(amount - 4 * 1000));
+				.isEqualTo(new PurchaseMoney(amount - input * 1000));
+	}
+
+	@Test
+	void subtractByTicketNumber_BiggerThanPurchaseMoney_ShouldThrowException() {
+		// given
+		int amount = 10000;
+		PurchaseMoney purchaseMoney = new PurchaseMoney(amount);
+
+		// then
+		Assertions.assertThatThrownBy(() -> {
+			// when
+			int input = 11;
+			PurchaseMoney result = purchaseMoney.subtractByTicketNumber(input);
+		});
 	}
 }
