@@ -21,7 +21,10 @@ public class InputUtil {
 
 	public static List<String> inputWinningNumber() throws IOException {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-		return Arrays.asList(bufferedReader.readLine().replace(SPACE, EMPTY).split(SPLIT_DELIMITER, SPLIT_LIMIT));
+		return Arrays.asList(bufferedReader
+				.readLine()
+				.replace(SPACE, EMPTY)
+				.split(SPLIT_DELIMITER, SPLIT_LIMIT));
 	}
 
 	public static int inputBonusNumber() throws IOException {

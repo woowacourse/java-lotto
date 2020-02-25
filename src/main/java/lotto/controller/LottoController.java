@@ -29,11 +29,10 @@ public class LottoController {
 
 	private static Lottos buyLottos() {
 		try {
-			LottoMachine lottoMachine = new LottoMachine();
 			LottoCount lottoCount = new LottoCount(readMoney());
 
 			OutputView.printLottoCount(lottoCount.getLottoCount());
-			return new Lottos(lottoMachine.makeRandomLottos(lottoCount));
+			return new Lottos(LottoMachine.getInstance().makeRandomLottos(lottoCount.getLottoCount()));
 		} catch (IllegalArgumentException | LottoException e) {
 			OutputView.printExceptionMessage(e);
 			return buyLottos();

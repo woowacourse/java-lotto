@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
@@ -12,17 +11,21 @@ public class LottoMachine {
 
 	private final List<Integer> lottoBalls;
 
-	public LottoMachine() {
+	private LottoMachine() {
 		lottoBalls = new ArrayList<>();
 		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
 			lottoBalls.add(i);
 		}
 	}
 
-	public List<Lotto> makeRandomLottos(LottoCount lottoCount) {
+	public static LottoMachine getInstance() {
+		return LottoMachineSingletonHolder.instance;
+	}
+
+	public List<Lotto> makeRandomLottos(int lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 
-		for (int i = 0; i < lottoCount.getLottoCount(); i++) {
+		for (int i = 0; i < lottoCount; i++) {
 			lottos.add(new Lotto(pickRandomBalls()));
 		}
 		return lottos;
@@ -36,16 +39,7 @@ public class LottoMachine {
 				.collect(Collectors.toList());
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		LottoMachine that = (LottoMachine) o;
-		return Objects.equals(lottoBalls, that.lottoBalls);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(lottoBalls);
+	private static class LottoMachineSingletonHolder {
+		private static final LottoMachine instance = new LottoMachine();
 	}
 }
