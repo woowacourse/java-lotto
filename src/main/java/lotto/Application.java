@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.count.Count;
 import lotto.domain.lotto.LottoTicketFactory;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinningLotto;
@@ -14,8 +15,9 @@ public class Application {
     private static GameParser gameParser = new GameParser();
 
     public static void main(String[] args) {
-        LottoMoney lottoMoney = new LottoMoney(gameParser.parseInputToInt(InputView.inputLottoMoney()));
-        LottoTickets lottoTickets = LottoTicketFactory.publishLottoTickets(lottoMoney);
+        LottoMoney lottoMoney = new LottoMoney(InputView.inputLottoMoney());
+        Count count = new Count(lottoMoney.getLottoPurchaseCounts(), InputView.inputManualCounts());
+        LottoTickets lottoTickets = LottoTicketFactory.publishLottoTickets(count);
         OutputView.printLottoTickets(lottoTickets);
         WinningLotto winningLotto = gameParser.createWinningLotto(InputView.inputWinningLotto(),
                 InputView.inputBonusNumber());

@@ -1,15 +1,15 @@
 package lotto.domain.lotto;
 
-import lotto.domain.money.LottoMoney;
+import lotto.domain.count.Count;
 import org.junit.jupiter.api.Test;
 
-import static lotto.domain.money.LottoMoneyTest.getLottoMoneyFixture;
+import static lotto.domain.count.CountTest.getCountFixture;
 
 public class LottoTicketFactoryTest {
 
     @Test
     void testLottoFactoryTest() {
-        LottoMoney lottoMoney = getLottoMoneyFixture();
-        LottoTickets lottoTickets = LottoTicketFactory.publishLottoTickets(lottoMoney);
+        Count count = getCountFixture();
+        LottoTickets lottoTickets = LottoTicketFactory.publishLottoTickets(count);
     }
 }
