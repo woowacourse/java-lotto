@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoFactory {
+public class LottoTicketFactory {
 
     private static final List<LottoNumber> LOTTO_NUMBERS;
     private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MATCHER;
@@ -50,7 +50,7 @@ public class LottoFactory {
 
     public static LottoTicket publishLottoTicketFrom(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoFactory::publishLottoNumberFrom)
+                .map(LottoTicketFactory::publishLottoNumberFrom)
                 .collect(Collectors.toSet());
         return new LottoTicket(lottoNumbers);
     }

@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static lotto.domain.money.LottoMoneyTest.getLottoMoneyFixture;
 
-public class LottoFactoryTest {
+public class LottoTicketFactoryTest {
 
     @Test
     void testLottoFactoryTest() {
         LottoMoney lottoMoney = getLottoMoneyFixture();
-        LottoTickets lottoTickets = LottoFactory.publishLottoTickets(lottoMoney);
+        LottoTickets lottoTickets = LottoTicketFactory.publishLottoTickets(lottoMoney);
     }
 }

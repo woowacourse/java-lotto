@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.lotto.LottoFactory;
+import lotto.domain.lotto.LottoTicketFactory;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.money.LottoMoney;
@@ -15,7 +15,7 @@ public class Application {
 
     public static void main(String[] args) {
         LottoMoney lottoMoney = new LottoMoney(gameParser.parseInputToInt(InputView.inputLottoMoney()));
-        LottoTickets lottoTickets = LottoFactory.publishLottoTickets(lottoMoney);
+        LottoTickets lottoTickets = LottoTicketFactory.publishLottoTickets(lottoMoney);
         OutputView.printLottoTickets(lottoTickets);
         WinningLotto winningLotto = gameParser.createWinningLotto(InputView.inputWinningLotto(),
                 InputView.inputBonusNumber());

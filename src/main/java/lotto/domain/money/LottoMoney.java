@@ -2,7 +2,7 @@ package lotto.domain.money;
 
 public class LottoMoney {
 
-    private static final int MINIMUM_COST = 1000;
+    private static final int MINIMUM_COST = 1_000;
     private static final int REMINDER = 0;
 
     private final int money;

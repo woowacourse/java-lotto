@@ -1,6 +1,6 @@
 package lotto.parser;
 
-import lotto.domain.lotto.LottoFactory;
+import lotto.domain.lotto.LottoTicketFactory;
 import lotto.domain.lotto.WinningLotto;
 
 import java.util.Arrays;
@@ -14,7 +14,7 @@ public class GameParser {
     public WinningLotto createWinningLotto(String winningLottoInput, String bonusNumberInput) {
         Set<Integer> numbers = parseInputToNumbers(winningLottoInput);
         Integer bonusNumber = parseInputToInt(bonusNumberInput);
-        return LottoFactory.publishWinningLotto(numbers, bonusNumber);
+        return LottoTicketFactory.publishWinningLotto(numbers, bonusNumber);
     }
 
     private Set<Integer> parseInputToNumbers(String winningLottoInput) {
