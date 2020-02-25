@@ -24,8 +24,8 @@ public enum LottoRank {
 		if (hasBonusNumber && LottoRank.SECOND.matchCount == matchCount) {
 			return LottoRank.SECOND;
 		}
-
 		return Arrays.stream(values())
+			.filter(lottoRank -> lottoRank != LottoRank.SECOND)
 			.filter(lottoRank -> lottoRank.matchCount == matchCount)
 			.findFirst()
 			.orElse(MISS);
