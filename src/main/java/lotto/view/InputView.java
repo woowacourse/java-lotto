@@ -6,12 +6,8 @@ public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static int inputPurchaseMoney() {
-		System.out.println("구입 금액을 입력해 주세요.");
-		try {
-			return Integer.parseInt(scanner.nextLine());
-		} catch (NumberFormatException e) {
-			return inputPurchaseMoney();
-		}
+		String message = "구입 금액을 입력해 주세요.";
+		return getValidInteger(message);
 	}
 
 	public static String inputWinningNumbers() {
@@ -20,11 +16,21 @@ public class InputView {
 	}
 
 	public static int inputBonusNumber() {
-		System.out.println("보너스 볼을 입력해주세요.");
+		String message = "보너스 볼을 입력해주세요.";
+		return getValidInteger(message);
+	}
+
+	public static int inputManualTicketNumber() {
+		String message = "수동으로 구매할 로또 수를 입력해주세요";
+		return getValidInteger(message);
+	}
+
+	private static int getValidInteger(String message) {
+		System.out.println(message);
 		try {
 			return Integer.parseInt(scanner.nextLine());
 		} catch (NumberFormatException e) {
-			return inputBonusNumber();
+			return getValidInteger(message);
 		}
 	}
 }
