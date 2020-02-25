@@ -14,6 +14,10 @@ public class LottoNumberFactory {
         }
     }
 
+    private LottoNumberFactory() {
+        throw new AssertionError();
+    }
+
     public static LottoNumber getInstance(int number) {
         if (number >= LOTTO_UNDER_BOUND && number <= LOTTO_UPPER_BOUND) {
             return cache.get(number);
