@@ -2,17 +2,16 @@ package lotto;
 
 import domain.LottoRank;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRankTest {
-    @Test
-    void 로또_등수_확인(){
-        assertThat(LottoRank.findRank(6, false)).isEqualTo(LottoRank.FIRST);
-        assertThat(LottoRank.findRank(5, true)).isEqualTo(LottoRank.SECOND);
-        assertThat(LottoRank.findRank(5, false)).isEqualTo(LottoRank.THIRD);
-        assertThat(LottoRank.findRank(4, false)).isEqualTo(LottoRank.FOURTH);
-        assertThat(LottoRank.findRank(3, false)).isEqualTo(LottoRank.FIFTH);
-        assertThat(LottoRank.findRank(2, false)).isEqualTo(null);
+    @ParameterizedTest
+    @CsvSource({"6,false,FIRST", "5,true,SECOND", "5,false,THIRD", "4,false,FOURTH", "3,false,FIFTH"})
+    void 로또_등수_확인(int winningBalls, boolean isBonusMatch, LottoRank lottoRank){
+        assertThat(LottoRank.findRank(winningBalls, isBonusMatch)).isEqualTo(lottoRank);
     }
 }
