@@ -15,7 +15,10 @@ public class LottoApplication {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputBuyMoney());
         int manualCount = StringUtils.ToInt(InputView.inputManualCount());
-        String manualLotto = InputView.inputManualLotto(manualCount);
+        String manualLotto = "";
+        if (manualCount > 0) {
+            manualLotto = InputView.inputManualLotto(manualCount);
+        }
 
         List<Lotto> lotteries = LottoFactory.createLotteries(money, manualLotto);
         OutputView.printLotteries(lotteries, manualCount);

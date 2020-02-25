@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.LottoUtils;
 import lotto.util.StringUtils;
 
 import java.util.ArrayList;
@@ -23,13 +24,23 @@ public class LottoFactory {
 
     public static List<Lotto> createLotteries(Money money, String manualLotto) {
         validate(money);
-        String[] manualLotteries = StringUtils.splitLotto(manualLotto);
-        List<Lotto> lotteries = LottoManual.create(manualLotteries);
-        int createCount = money.divideThousand() - manualLotteries.length;
-        for (int i = 0; i < createCount; i++) {
-            lotteries.add(createLotto());
+        List<Lotto> lotteries = new ArrayList<>();
+        int lottoCount = money.divideThousand();
+        if (manualLotto == null || manualLotto.isEmpty()) {
+            createAutoLotto(lotteries, lottoCount);
+            return lotteries;
         }
+
+        String[] manualLotteries = StringUtils.splitLotto(manualLotto);
+        lotteries = createLottoManual(manualLotteries);
+        createAutoLotto(lotteries, lottoCount - manualLotteries.length);
         return lotteries;
+    }
+
+    private static void createAutoLotto(List<Lotto> lotteries, int autoLottoCount) {
+        for (int i = 0; i < autoLottoCount; i++) {
+            lotteries.add(createLottoAuto());
+        }
     }
 
     private static void validate(Money money) {
@@ -38,7 +49,16 @@ public class LottoFactory {
         }
     }
 
-    private static Lotto createLotto() {
+    public static List<Lotto> createLottoManual(String[] manualLotteries) {
+        List<Lotto> manualLotto = new ArrayList<>();
+        for (String numbers : manualLotteries) {
+            List<LottoNo> lotto = LottoUtils.toLottoNoList(StringUtils.splitNumber(numbers));
+            manualLotto.add(new Lotto(lotto));
+        }
+        return manualLotto;
+    }
+
+    private static Lotto createLottoAuto() {
         List<LottoNo> lotto = pickSixRandomNo();
         Collections.sort(lotto);
         return new Lotto(lotto);
