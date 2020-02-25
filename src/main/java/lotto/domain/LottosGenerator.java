@@ -1,14 +1,9 @@
 package lotto.domain;
 
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import lotto.CollectionLottoNumberShuffler;
-import lotto.LottoNumberShuffler;
 
 public class LottosGenerator {
     private static final int ONE = 1;

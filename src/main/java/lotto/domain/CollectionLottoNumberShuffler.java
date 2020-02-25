@@ -1,9 +1,7 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-
-import lotto.domain.LottoNumber;
 
 public class CollectionLottoNumberShuffler implements LottoNumberShuffler {
 

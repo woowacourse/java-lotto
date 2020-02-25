@@ -1,6 +1,8 @@
 package lotto;
 
+import lotto.domain.CollectionLottoNumberShuffler;
 import lotto.domain.LottoGame;
+import lotto.domain.LottoNumberShuffler;
 import lotto.domain.LottosGenerator;
 
 public class LottoApplication {

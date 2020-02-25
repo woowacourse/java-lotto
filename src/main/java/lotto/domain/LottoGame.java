@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
-
-import lotto.LottoNumberShuffler;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
