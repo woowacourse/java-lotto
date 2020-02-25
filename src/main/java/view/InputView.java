@@ -3,6 +3,7 @@ package view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -29,8 +30,7 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> inputWinnerNumbers() {
-        OutputView.printWinnerNumbersFormat();
+    public static List<Integer> inputNumbers() {
         try {
             return splitAndParse(scanner.nextLine());
         } catch (NumberFormatException e) {
@@ -38,8 +38,13 @@ public class InputView {
         }
     }
 
-    public static int inputBonusNumber() {
-        OutputView.printBonusNumberFormat();
+    public static List<Integer> inputNumbers(Runnable message) {
+        message.run();
+        return inputNumbers();
+    }
+
+    public static int inputNumber(Runnable message) {
+        message.run();
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {

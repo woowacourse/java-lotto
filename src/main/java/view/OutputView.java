@@ -1,6 +1,7 @@
 package view;
 
 import domain.Money;
+import domain.RepeatCount;
 import domain.lotto.LottoGame;
 import domain.lotto.LottoNumber;
 import domain.lotto.LottoNumbers;
@@ -20,16 +21,30 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
+    public static void printUserRepeatCountFormat() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printUserNumbersFormat() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    }
+
     public static void printWinnerNumbersFormat() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     }
 
     public static void printBonusNumberFormat() {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printLottoNumbersCount(Money money) {
-        System.out.println(money.countGames() + "개를 구매습니다.");
+    public static void printLottoNumbersCount(RepeatCount userResultCount, RepeatCount autoResultCount) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n수동으로 ");
+        sb.append(userResultCount);
+        sb.append("장, 자동으로 ");
+        sb.append(autoResultCount);
+        sb.append("장 구매했습니다.");
+        System.out.println(sb.toString());
     }
 
     public static void printLottoGame(LottoGame lottogame) {
