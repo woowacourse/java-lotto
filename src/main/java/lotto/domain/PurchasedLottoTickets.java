@@ -41,6 +41,10 @@ public class PurchasedLottoTickets {
 		return new PurchasedLottoTickets(serialLottoNumbers);
 	}
 
+	public int size() {
+		return purchasedLottoTickets.size();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -56,8 +60,6 @@ public class PurchasedLottoTickets {
 
 	@Override
 	public String toString() {
-		return "PurchasedLottoTickets{" +
-				"purchasedLottoTickets=" + purchasedLottoTickets +
-				'}';
+		return purchasedLottoTickets.toString();
 	}
 }

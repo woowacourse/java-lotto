@@ -12,9 +12,13 @@ public class OutputView {
 		System.out.println(purchaseMoney.countPurchasedTickets() + "개를 구매했습니다.");
 	}
 
-	public static void printPurchasedLottoTickets(PurchasedLottoTickets purchasedLottoTickets) {
-		purchasedLottoTickets.getPurchasedLottoTickets()
-				.forEach(System.out::println);
+	public static void printPurchasedLottoTickets(
+			PurchasedLottoTickets manual, PurchasedLottoTickets auto) {
+
+		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n",
+				manual.size(), auto.size());
+		manual.getPurchasedLottoTickets().forEach(System.out::println);
+		auto.getPurchasedLottoTickets().forEach(System.out::println);
 	}
 
 	public static void printLottoResult(LottoResult lottoResult) {

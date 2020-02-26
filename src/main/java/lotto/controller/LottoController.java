@@ -32,6 +32,7 @@ public class LottoController {
 
 		PurchasedLottoTickets manualTickets = purchaseManualLotto(manualTicketMoney);
 		PurchasedLottoTickets autoLottoTickets = purchaseAutoLotto(autoTicketMoney);
+		OutputView.printPurchasedLottoTickets(manualTickets, autoLottoTickets);
 		return manualTickets.addAll(autoLottoTickets);
 	}
 
@@ -64,11 +65,8 @@ public class LottoController {
 	private static PurchasedLottoTickets purchaseAutoLotto(
 			PurchaseMoney purchaseMoney) {
 
-		PurchasedLottoTickets purchasedLottoTickets
-				= PurchasedLottoTickets.of(purchaseMoney,
+		return PurchasedLottoTickets.of(purchaseMoney,
 				new RandomLottoTicketFactory());
-		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
-		return purchasedLottoTickets;
 	}
 
 	private static PurchaseMoney prepareLotto() {
