@@ -19,4 +19,18 @@ class LottoTicketsTest {
 
 		assertThat(lottoTickets.produceWinningResultBy(winningLotto)).isInstanceOf(WinningResult.class);
 	}
+
+	@Test
+	void concat_concatenateTwoLottoTickets_GenerateConcatenatedLottoTickets() {
+		LottoTickets firstLottoTickets = new LottoTickets(Arrays.asList(LottoTicket.valueOf("1, 2, 3, 4, 5, 6")));
+		LottoTickets secondLottoTickets = new LottoTickets(Arrays.asList(LottoTicket.valueOf("2, 3, 4, 5, 6, 7")));
+
+		LottoTickets actual = firstLottoTickets.concat(secondLottoTickets);
+
+		LottoTickets expected = new LottoTickets(Arrays.asList(
+			LottoTicket.valueOf("1, 2, 3, 4, 5, 6"),
+			LottoTicket.valueOf("2, 3, 4, 5, 6, 7")
+		));
+		assertThat(actual).isEqualTo(expected);
+	}
 }

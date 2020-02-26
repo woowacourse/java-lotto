@@ -69,4 +69,21 @@ public class LottoTicket {
 	public Set<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
 	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+		if (object == null || getClass() != object.getClass()) {
+			return false;
+		}
+		LottoTicket that = (LottoTicket)object;
+		return Objects.equals(lottoNumbers, that.lottoNumbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoNumbers);
+	}
 }

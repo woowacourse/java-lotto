@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
+import lotto.domain.lottoMoney.PurchasingCount;
 import lotto.domain.lottoNumber.LottoNumber;
 import lotto.domain.lottoNumber.LottoNumberCache;
 
 public class AutoLottoTicketsFactory {
 	private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>(LottoNumberCache.values());
 
-	public static LottoTickets generate(long numberOfLottoTicket) {
-		return LongStream.range(0, numberOfLottoTicket)
-			.mapToObj(i -> generate())
-			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
+	public static LottoTickets generate(PurchasingCount purchasingCount) {
+		List<LottoTicket> lottoTickets = new ArrayList<>();
+		purchasingCount.forEachRemaining(e -> lottoTickets.add(generate()));
+		return new LottoTickets(lottoTickets);
 	}
 
 	private static LottoTicket generate() {
