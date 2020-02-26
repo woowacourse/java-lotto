@@ -1,4 +1,6 @@
-package domain.lottonumber;
+package domain.lottonumbers;
+
+import domain.lottonumbers.lottonumber.LottoNumber;
 
 import java.util.Set;
 import java.util.SortedSet;
@@ -6,7 +8,7 @@ import java.util.TreeSet;
 
 public class LottoNumbers {
 
-    private static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int SIZE = 6;
 
     private final SortedSet<LottoNumber> lottoNumbers;
 
@@ -16,7 +18,7 @@ public class LottoNumbers {
     }
 
     private void validateSize(Set<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_NUMBERS_SIZE) {
+        if (numbers.size() != SIZE) {
             throw new IllegalArgumentException("6개의 중복되지 않는 숫자를 입력해주세요.");
         }
     }

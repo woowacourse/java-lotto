@@ -1,6 +1,6 @@
 import domain.Money;
-import domain.lottonumber.LottoTicket;
-import domain.lottonumber.WinningNumbers;
+import domain.lottonumbers.LottoTicket;
+import domain.lottonumbers.WinningNumbers;
 import domain.lottostore.RandomLottoStore;
 import domain.result.LottoResult;
 import view.InputView;

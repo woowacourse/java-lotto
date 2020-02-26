@@ -1,6 +1,6 @@
 package view;
 
-import domain.lottonumber.LottoNumbers;
+import domain.lottonumbers.LottoNumbers;
 import domain.result.LottoRank;
 import domain.result.LottoResult;
 

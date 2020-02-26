@@ -1,7 +1,7 @@
 package view;
 
 import domain.Money;
-import domain.lottonumber.LottoNumbersDto;
+import domain.lottonumbers.LottoNumbersDto;
 import util.LottoNumbersDtoGenerator;
 
 import java.util.*;

@@ -1,5 +1,6 @@
-package domain.lottonumber;
+package domain.lottonumbers;
 
+import domain.lottonumbers.lottonumber.LottoNumber;
 import domain.result.LottoRank;
 
 public class WinningNumbers {

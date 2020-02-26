@@ -1,4 +1,6 @@
-package domain.lottonumber;
+package domain.lottonumbers;
+
+import domain.lottonumbers.lottonumber.LottoNumber;
 
 public class LottoNumbersDto {
 
@@ -8,7 +10,7 @@ public class LottoNumbersDto {
     private final LottoNumber bonusNumber;
 
     public LottoNumbersDto(LottoNumbers lottoNumbers) {
-        this(lottoNumbers, LottoNumber.valueOf(DEFAULT_BONUS_NUMBER));
+        this(lottoNumbers, LottoNumber.of(DEFAULT_BONUS_NUMBER));
     }
 
     public LottoNumbersDto(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {

@@ -1,8 +1,8 @@
 package util;
 
-import domain.lottonumber.LottoNumber;
-import domain.lottonumber.LottoNumbers;
-import domain.lottonumber.LottoNumbersDto;
+import domain.lottonumbers.lottonumber.LottoNumber;
+import domain.lottonumbers.LottoNumbers;
+import domain.lottonumbers.LottoNumbersDto;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,30 +12,15 @@ import java.util.stream.Collectors;
 
 public class LottoNumbersDtoGenerator {
 
-    private static final int NUMBER_OF_NUMBERS = 6;
-
-    public static LottoNumbersDto generateRandomTicketDto() {
-        Set<LottoNumber> randomNumbers = new HashSet<>(generateShuffledNumbers().subList(0, NUMBER_OF_NUMBERS));
-        LottoNumbers randomLottoNumbers = new LottoNumbers(randomNumbers);
-
-        return new LottoNumbersDto(randomLottoNumbers);
-    }
-
-    private static List<LottoNumber> generateShuffledNumbers() {
-        List<LottoNumber> lottoNumbers = LottoNumber.getAllValues();
-        Collections.shuffle(lottoNumbers);
-        return lottoNumbers;
-    }
-
     public static LottoNumbersDto generateManualNumbersDto(Set<Integer> numbers, int bonusNumber) {
         Set<LottoNumber> numbersSet = parseIntegersToLottoNumbers(numbers);
 
-        return new LottoNumbersDto(new LottoNumbers(numbersSet), LottoNumber.valueOf(bonusNumber));
+        return new LottoNumbersDto(new LottoNumbers(numbersSet), LottoNumber.of(bonusNumber));
     }
 
     private static Set<LottoNumber> parseIntegersToLottoNumbers(Set<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::valueOf)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 }

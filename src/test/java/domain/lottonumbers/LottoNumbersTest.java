@@ -1,5 +1,6 @@
-package domain.lottonumber;
+package domain.lottonumbers;
 
+import domain.lottonumbers.lottonumber.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ public class LottoNumbersTest {
 
     private LottoNumbers createLottoNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
         Set<LottoNumber> numbers = Arrays.asList(number1, number2, number3, number4, number5, number6).stream()
-                .map(LottoNumber::valueOf)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
         return new LottoNumbers(numbers);

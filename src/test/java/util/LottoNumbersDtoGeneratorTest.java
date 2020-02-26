@@ -1,7 +1,7 @@
 package util;
 
-import domain.lottonumber.LottoTicket;
-import domain.lottonumber.WinningNumbers;
+import domain.lottonumbers.LottoTicket;
+import domain.lottonumbers.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,13 +13,6 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 @DisplayName("Dto 생성 테스트")
 class LottoNumbersDtoGeneratorTest {
-
-    @Test
-    @DisplayName("랜덤 티켓 생성")
-    void generateRandomTicket() {
-        assertThatCode(() -> new LottoTicket(LottoNumbersDtoGenerator.generateRandomTicketDto()))
-                .doesNotThrowAnyException();
-    }
 
     @Test
     @DisplayName("고정값 당첨 번호 생성")

@@ -1,8 +1,8 @@
 package domain.result;
 
 import domain.Money;
-import domain.lottonumber.LottoTicket;
-import domain.lottonumber.WinningNumbers;
+import domain.lottonumbers.LottoTicket;
+import domain.lottonumbers.WinningNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,6 @@
-package domain.lottonumber;
+package domain.lottonumbers;
+
+import domain.lottonumbers.lottonumber.LottoNumber;
 
 public class LottoTicket {
 

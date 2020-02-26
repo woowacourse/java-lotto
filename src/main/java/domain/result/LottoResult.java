@@ -1,8 +1,8 @@
 package domain.result;
 
 import domain.Money;
-import domain.lottonumber.LottoTicket;
-import domain.lottonumber.WinningNumbers;
+import domain.lottonumbers.LottoTicket;
+import domain.lottonumbers.WinningNumbers;
 
 import java.util.List;
 import java.util.Map;
