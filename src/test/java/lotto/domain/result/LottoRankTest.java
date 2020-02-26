@@ -11,43 +11,43 @@ public class LottoRankTest {
 	@DisplayName("3개의 볼 매칭, 보녀스볼 일치하는 경우 5등 확인")
 	@Test
 	void getFifthRankTest_true() {
-		assertThat(LottoRank.findRank(3, true)).isEqualTo(LottoRank.FIFTH);
+		assertThat(LottoRank.ofValue(3, true)).isEqualTo(LottoRank.FIFTH);
 	}
 
 	@DisplayName("3개의 볼 매칭, 보녀스볼 일치하지 않는 경우 5등 확인")
 	@Test
 	void getFifthRankTest_false() {
-		assertThat(LottoRank.findRank(3, false)).isEqualTo(LottoRank.FIFTH);
+		assertThat(LottoRank.ofValue(3, false)).isEqualTo(LottoRank.FIFTH);
 	}
 
 	@DisplayName("4개의 볼 매칭, 보녀스볼 일치하는 경우 4등 확인")
 	@Test
 	void getFourthRankTest_true() {
-		assertThat(LottoRank.findRank(4, true)).isEqualTo(LottoRank.FOURTH);
+		assertThat(LottoRank.ofValue(4, true)).isEqualTo(LottoRank.FOURTH);
 	}
 
 	@DisplayName("4개의 볼 매칭, 보녀스볼 일치하지 않는 경우 4등 확인")
 	@Test
 	void getFourthRankTest_false() {
-		assertThat(LottoRank.findRank(4, false)).isEqualTo(LottoRank.FOURTH);
+		assertThat(LottoRank.ofValue(4, false)).isEqualTo(LottoRank.FOURTH);
 	}
 
 	@DisplayName("5개의 볼 매칭, 보녀스볼 일치하지 않는 경우 3등 확인")
 	@Test
 	void getThirdRankTest() {
-		assertThat(LottoRank.findRank(5, false)).isEqualTo(LottoRank.THIRD);
+		assertThat(LottoRank.ofValue(5, false)).isEqualTo(LottoRank.THIRD);
 	}
 
 	@DisplayName("5개의 볼 매칭, 보녀스볼 일치하는 경우 2등 확인")
 	@Test
 	void getSecondRankTest() {
-		assertThat(LottoRank.findRank(5, true)).isEqualTo(LottoRank.SECOND);
+		assertThat(LottoRank.ofValue(5, true)).isEqualTo(LottoRank.SECOND);
 	}
 
 	@DisplayName("6개의 볼 매칭, 보녀스볼 일치하지 않는 경우 1등 확인")
 	@Test
 	void getFirstRankTest() {
-		assertThat(LottoRank.findRank(6, false)).isEqualTo(LottoRank.FIRST);
+		assertThat(LottoRank.ofValue(6, false)).isEqualTo(LottoRank.FIRST);
 	}
 
 	@DisplayName("1등에 해당하는 당첨 매수 만큼 상금 계산이 이뤄지는지 테스트")

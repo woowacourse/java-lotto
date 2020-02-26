@@ -25,22 +25,18 @@ public final class LottoCount {
 		return new LottoCount(lottoCount);
 	}
 
-	public boolean isNonFullCount(int currentCount) {
+	public LottoCount minus(LottoCount otherLottoCount) {
+		return LottoCount.valueOf(this.lottoCount - otherLottoCount.lottoCount);
+	}
+
+	boolean isNonFullCount(int currentCount) {
 		if (lottoCount < currentCount) {
 			throw new IllegalArgumentException(INVALID_CURRENT_COUNT_VALUE_EXCEPTION_MESSAGE);
 		}
 		return lottoCount > currentCount;
 	}
 
-	public boolean isBiggerThan(LottoCount otherLottoCount) {
-		return this.lottoCount > otherLottoCount.lottoCount;
-	}
-
-	public LottoCount minus(LottoCount otherLottoCount) {
-		return LottoCount.valueOf(this.lottoCount - otherLottoCount.lottoCount);
-	}
-
-	public boolean isNonRightCount(int lottoCount) {
+	boolean isNonRightCount(int lottoCount) {
 		return this.lottoCount != lottoCount;
 	}
 

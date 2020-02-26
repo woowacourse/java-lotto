@@ -42,7 +42,7 @@ public final class LottoBall implements Comparable<LottoBall> {
 		throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE);
 	}
 
-	public static Collection<LottoBall> values() {
+	static Collection<LottoBall> values() {
 		return Collections.unmodifiableCollection(BALL_CACHE.values());
 	}
 

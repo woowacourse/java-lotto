@@ -1,7 +1,7 @@
 package lotto.domain.result;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import lotto.domain.ticket.LottoBall;
 import lotto.domain.ticket.LottoTicket;
@@ -38,14 +38,13 @@ public class WinningLotto {
 	}
 
 	public WinningResult calculateResult(LottoTickets lottoTickets) {
-		return lottoTickets.getLottoTickets().stream()
-			.map(this::calculateRank)
-			.collect(Collectors.collectingAndThen(Collectors.toList(), WinningResult::new));
+		List<LottoRank> result = lottoTickets.findLottoRanks(this);
+		return new WinningResult(result);
 	}
 
 	public LottoRank calculateRank(LottoTicket lottoTicket) {
 		int matchCount = lottoTicket.countMatchingBall(winningLottoTicket);
 		boolean hasBonusBall = lottoTicket.contains(bonusLottoBall);
-		return LottoRank.findRank(matchCount, hasBonusBall);
+		return LottoRank.ofValue(matchCount, hasBonusBall);
 	}
 }

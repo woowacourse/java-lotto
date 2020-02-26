@@ -13,6 +13,7 @@ public class InputView {
 	private static final String WINNING_LOTTO_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
 	private static final String WINNING_LOTTO_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 	private static final String INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+	private static final int MINIMUM_COUNT_ABLE_TO_INPUT_BY_CONSOLE = 1;
 
 	private InputView() {
 	}
@@ -24,7 +25,9 @@ public class InputView {
 
 	public static List<String> inputManualLotto(int count) {
 		List<String> result = new ArrayList<>();
-		System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
+		if (count >= MINIMUM_COUNT_ABLE_TO_INPUT_BY_CONSOLE) {
+			System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
+		}
 		for (int i = 0; i < count; i++) {
 			result.add(SCANNER.nextLine());
 		}

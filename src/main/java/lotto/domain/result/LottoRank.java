@@ -22,10 +22,9 @@ public enum LottoRank {
 		this.prize = prize;
 	}
 
-	public static LottoRank findRank(int matchCount, boolean hasBonusBall) {
+	static LottoRank ofValue(int matchCount, boolean hasBonusBall) {
 		return Arrays.stream(values())
-			.filter(rank -> rank.isMatch(matchCount))
-			.filter(rank -> rank.isRightBonusBallCondition(hasBonusBall))
+			.filter(rank -> rank.isMatch(matchCount) && rank.hasRightBonusCondition(hasBonusBall))
 			.findFirst()
 			.orElse(MISSING);
 	}
@@ -34,18 +33,18 @@ public enum LottoRank {
 		return matchCount == count;
 	}
 
-	private boolean isRightBonusBallCondition(boolean hasBonusBall) {
+	private boolean hasRightBonusCondition(boolean hasBonusBall) {
 		if (this == SECOND || this == THIRD) {
 			return this.hasToHaveBonusBall == hasBonusBall;
 		}
 		return true;
 	}
 
-	public boolean isPrizingRank() {
+	boolean isPrizingRank() {
 		return this != MISSING;
 	}
 
-	public Money calculateTotalMoney(long count) {
+	Money calculateTotalMoney(long count) {
 		return prize.multiply(count);
 	}
 
