@@ -3,11 +3,11 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import lotto.controller.LottoManager;
-import lotto.model.LottoResultCount;
+import lotto.model.LottoResult;
 import lotto.model.Ticket;
 import lotto.model.Tickets;
 import lotto.model.TicketsGenerator;
-import lotto.model.LottoResult;
+import lotto.model.RankType;
 import lotto.model.Money;
 import lotto.model.WinNumbers;
 import lotto.view.InputView;
@@ -48,9 +48,9 @@ public class LottoApplication {
 
     private static void printCorrectResults() {
         OutputView.printResult();
-        Arrays.stream(LottoResult.values())
-            .filter(x -> x != LottoResult.NONE)
+        Arrays.stream(RankType.values())
+            .filter(x -> x != RankType.NONE)
             .forEach(x -> OutputView.printCorrectResult(x.getCorrect(), x.getPrize(),
-                LottoResultCount.lottoResultCount.get(x)));
+                LottoResult.lottoResultCount.get(x)));
     }
 }
