@@ -1,11 +1,11 @@
-package lotto.domain.factory;
+package lotto.factory;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.ManualPurchase;
 import lotto.domain.Payment;
-import lotto.domain.generator.NumberGenerator;
-import lotto.domain.generator.RandomNumberGenerator;
+import lotto.generator.NumberGenerator;
+import lotto.generator.RandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package lotto.domain.generator;
+package lotto.generator;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.factory.LottoNumberFactory;
+import lotto.factory.LottoNumberFactory;
 
 import java.util.Collections;
 import java.util.List;

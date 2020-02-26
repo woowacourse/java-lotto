@@ -1,11 +1,11 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.factory.LottoFactory;
-import lotto.domain.generator.NumberGenerator;
-import lotto.domain.generator.UserInputNumberGenerator;
-import lotto.domain.validator.Validator;
+import lotto.factory.LottoFactory;
+import lotto.generator.NumberGenerator;
+import lotto.generator.UserInputNumberGenerator;
 import lotto.utils.NumberUtils;
+import lotto.validator.Validator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -28,9 +28,10 @@ public class Application {
     private static ManualPurchase generateManualPurchase(Payment payment) {
         try {
             int parsedManualCount = NumberUtils.parseNumber(InputView.getManualCount());
+
             validateManualCount(parsedManualCount, payment);
             List<String> manualLottoInput = InputView.getManualLottoNumbers(parsedManualCount);
-            return new ManualPurchase(parsedManualCount, manualLottoInput, payment);
+            return new ManualPurchase(parsedManualCount, manualLottoInput);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             return generateManualPurchase(payment);

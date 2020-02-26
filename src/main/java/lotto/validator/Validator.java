@@ -1,4 +1,4 @@
-package lotto.domain.validator;
+package lotto.validator;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.Payment;

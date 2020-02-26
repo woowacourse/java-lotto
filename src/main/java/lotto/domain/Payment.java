@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.validator.Validator;
+import lotto.validator.Validator;
 
 public class Payment {
     private static final int MONEY_PER_LOTTO = 1000;

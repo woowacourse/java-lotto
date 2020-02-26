@@ -1,4 +1,4 @@
-package lotto.domain.factory;
+package lotto.factory;
 
 import lotto.domain.LottoNumber;
 

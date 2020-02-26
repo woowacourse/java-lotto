@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.generator.NumberGenerator;
-import lotto.domain.generator.UserInputNumberGenerator;
-import lotto.domain.validator.Validator;
+import lotto.generator.NumberGenerator;
+import lotto.generator.UserInputNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +11,8 @@ public class ManualPurchase {
 
     private List<LottoTicket> manualTickets = new ArrayList<>();
 
-    public ManualPurchase(int manualCount, List<String> manualNumbers, Payment payment) {
+    public ManualPurchase(int manualCount, List<String> manualNumbers) {
         NumberGenerator numberGenerator = new UserInputNumberGenerator();
-
-        Validator.validatePositiveNumber(manualCount);
         generateManualTicketList(manualNumbers, numberGenerator);
         this.manualCount = manualCount;
     }
