@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoResultsTest {
-
     private List<LottoTicket> originalLottoTickets = new ArrayList<>();
 
     @BeforeEach

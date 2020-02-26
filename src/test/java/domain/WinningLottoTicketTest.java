@@ -13,7 +13,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class WinningLottoTicketTest {
-
     private static Stream<String> winningNumberSetUp() {
         return Stream.of(
                 "1, 2, 3, 4, 5, f",
@@ -51,7 +50,7 @@ public class WinningLottoTicketTest {
         );
     }
 
-    @DisplayName("당첨 복권 번호와 얼마나 맞는지 카운트해주는 메서드 테스트")
+    @DisplayName("로또 티켓이 당첨 복권 번호와 얼마나 맞는지 카운트해주는 메서드 테스트")
     @ParameterizedTest
     @MethodSource("LottoTicketSetUp")
     void winningLottoCount(List<LottoNumber> originalLottoTicket, int expected) {

@@ -24,7 +24,7 @@ public class LottoManagerTest {
         originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 6).mapToObj(LottoNumber::new).collect(Collectors.toList())));
     }
 
-    @DisplayName("로또 당첨갯수 확인 메서드 테스트")
+    @DisplayName("로또티켓들과 당첨티켓 매칭한 결과값 테스트")
     @ParameterizedTest
     @CsvSource(value = {"MATCH_THREE,1", "MATCH_FOUR,1", "MATCH_FIVE,1", "MATCH_FIVE_WITH_BONUS,1", "MATCH_SIX,1"})
     void countWinningTickets(RankType rankType, int expected) {

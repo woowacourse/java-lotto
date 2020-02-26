@@ -11,7 +11,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoTicketTest {
-
     private static Stream<List<LottoNumber>> lottoTicketSetUp() {
         return Stream.of(
                 IntStream.of(1, 2, 3, 4, 5).mapToObj(LottoNumber::new).collect(Collectors.toList()),
@@ -20,10 +19,10 @@ public class LottoTicketTest {
         );
     }
 
-    @DisplayName("LottoTicket 생성자 테스트")
+    @DisplayName("LottoTicket 생성자 유효성 테스트")
     @ParameterizedTest
     @MethodSource("lottoTicketSetUp")
-    public void lottoTicketConstructorTest(List<LottoNumber> input) {
+    void lottoTicketConstructorTest(List<LottoNumber> input) {
         Assertions.assertThatThrownBy(() -> {
             new LottoTicket(input);
         }).isInstanceOf(IllegalArgumentException.class);
