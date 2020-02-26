@@ -29,7 +29,7 @@ public class LottoController {
 		Lottos manualLottos = receiveManualLottos(lottoCount);
 		Lottos autoLottos = LottosFactory.createAutoLottos(lottoCount.getTotalLottoCount() - lottoCount.getManualLottoCount());
 		Lottos lottos = manualLottos.add(autoLottos);
-		OutputView.printPurchasedLottos(lottoCount.getTotalLottoCount(), lottos);
+		OutputView.printPurchasedLottos(lottoCount, lottos);
 
 		WinningLotto winningLotto = receiveWinningLotto();
 		BonusLottoNumber bonusLottoNumber = receiveBonusLottoNumber(winningLotto);
