@@ -46,7 +46,7 @@ public class LottoController {
     }
 
     private WinLottoTicketDTO createWinLottoTicketDTO() {
-        String winNumbers = InputView.inputWinningNumber();
+        List<Integer> winNumbers = InputView.inputWinningNumber();
         int bonusNumber = InputView.inputBonusNumber();
 
         return new WinLottoTicketDTO(winNumbers, bonusNumber);
