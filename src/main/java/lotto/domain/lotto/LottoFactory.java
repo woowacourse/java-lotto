@@ -1,7 +1,6 @@
 package lotto.domain.lotto;
 
 import lotto.domain.count.Count;
-import lotto.dto.request.WinningLottoDto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoTicketFactory {
+public class LottoFactory {
 
     private static final List<LottoNumber> LOTTO_NUMBERS;
     private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MATCHER;
@@ -51,7 +50,7 @@ public class LottoTicketFactory {
 
     public static LottoTicket publishLottoTicketFrom(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoTicketFactory::publishLottoNumberFrom)
+                .map(LottoFactory::publishLottoNumberFrom)
                 .collect(Collectors.toSet());
         return new LottoTicket(lottoNumbers);
     }

@@ -22,12 +22,12 @@ class LottoTicketsTest {
         Set<Integer> fourthNumbers = Arrays.stream(new int[]{3, 4, 5, 6, 7, 8}).boxed().collect(Collectors.toSet());
         Set<Integer> fifthNumbers = Arrays.stream(new int[]{4, 5, 6, 7, 8, 9}).boxed().collect(Collectors.toSet());
         Set<Integer> missNumbers = Arrays.stream(new int[]{5, 6, 7, 8, 9, 10}).boxed().collect(Collectors.toSet());
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(firstLotto));
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(secondNumbers));
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(thirdNumbers));
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(fourthNumbers));
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(fifthNumbers));
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(missNumbers));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(firstLotto));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(secondNumbers));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(thirdNumbers));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(fourthNumbers));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(fifthNumbers));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(missNumbers));
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
     }
 
@@ -41,16 +41,16 @@ class LottoTicketsTest {
         Set<Integer> fourthNumbers = Arrays.stream(new int[]{3, 4, 5, 6, 7, 8}).boxed().collect(Collectors.toSet());
         Set<Integer> fifthNumbers = Arrays.stream(new int[]{4, 5, 6, 7, 8, 9}).boxed().collect(Collectors.toSet());
         Set<Integer> missNumbers = Arrays.stream(new int[]{5, 6, 7, 8, 9, 10}).boxed().collect(Collectors.toSet());
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(firstLotto));
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(secondNumbers));
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(thirdNumbers));
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(fourthNumbers));
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(fifthNumbers));
-        lottoTicketList.add(LottoTicketFactory.publishLottoTicketFrom(missNumbers));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(firstLotto));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(secondNumbers));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(thirdNumbers));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(fourthNumbers));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(fifthNumbers));
+        lottoTicketList.add(LottoFactory.publishLottoTicketFrom(missNumbers));
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
 
-        LottoTicket winningLottoTicket = LottoTicketFactory.publishLottoTicketFrom(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toSet()));
-        LottoNumber bonusLottoNumber = LottoTicketFactory.publishLottoNumberFrom(7);
+        LottoTicket winningLottoTicket = LottoFactory.publishLottoTicketFrom(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toSet()));
+        LottoNumber bonusLottoNumber = LottoFactory.publishLottoNumberFrom(7);
         WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusLottoNumber);
         LottoResult lottoResult = lottoTickets.getLottoResults(winningLotto);
     }
