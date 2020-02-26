@@ -35,7 +35,6 @@ public class LottoController {
 		final int manualCount = manualLottoCount.getCount();
 		final int autoCount = purchasedLottoCount - manualCount;
 
-		printInputManualLottoMessage();
 		final Lottos totalLottos = mergeManualAndAuto(manualCount, autoCount);
 
 		printPurchaseCompleteMessage(manualCount, autoCount);
@@ -46,8 +45,13 @@ public class LottoController {
 	private Lottos mergeManualAndAuto(int manualCount, int autoCount) {
 		final LottoStore lottoStore = new LottoStore();
 
-		final Lottos manualLottos = lottoStore.purchaseManualLotto(manualCount);
 		final Lottos autoLottos = lottoStore.purchaseAutoLotto(autoCount);
+		if (manualCount == 0) {
+			return autoLottos;
+		}
+
+		printInputManualLottoMessage();
+		final Lottos manualLottos = lottoStore.purchaseManualLotto(manualCount);
 
 		return Lottos.merge(manualLottos, autoLottos);
 	}
