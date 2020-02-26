@@ -5,24 +5,19 @@ import java.util.Objects;
 import lotto.domain.exception.InvalidLottoMoneyException;
 
 public class LottoMoney {
-	public static final long ZERO = 0;
-	private static final long MAX_BOUND = 100000;
-	private static final long LOTTO_PRICE = 1000;
-	private static final int PERCENT = 100;
+	public static final int ZERO = 0;
+	private static final int MAX_BOUND = 100_000;
+	private static final int LOTTO_PRICE = 1_000;
 
-	private final long money;
+	private final int money;
 
 	public LottoMoney(String money) {
 		this.money = validate(money);
 	}
 
-	public LottoMoney(long money) {
-		this.money = money;
-	}
-
-	private long validate(String money) {
+	private int validate(String money) {
 		validateNullOrEmpty(money);
-		long parsedMoney = parseToLong(money);
+		int parsedMoney = parseToInteger(money);
 		validatePositive(parsedMoney);
 		validateUnit(parsedMoney);
 		validateMaxBound(parsedMoney);
@@ -35,9 +30,9 @@ public class LottoMoney {
 		}
 	}
 
-	private long parseToLong(String money) {
+	private int parseToInteger(String money) {
 		try {
-			return Long.parseLong(money);
+			return Integer.parseInt(money);
 		} catch (NumberFormatException ne) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.NOT_INTEGER);
 		}
@@ -62,23 +57,11 @@ public class LottoMoney {
 	}
 
 	public int getPurchasedLottoCount() {
-		return (int)(money / LOTTO_PRICE);
+		return money / LOTTO_PRICE;
 	}
 
-	public LottoMoney add(LottoMoney addedLottoMoney) {
-		return new LottoMoney(this.money + addedLottoMoney.money);
-	}
-
-	public LottoMoney multiply(int multiplyCount) {
-		return new LottoMoney(this.money * multiplyCount);
-	}
-
-	public long getMoney() {
+	public int getMoney() {
 		return money;
-	}
-
-	public int getWinningRatio(LottoMoney inputLottoMoney) {
-		return (int)((this.money * PERCENT) / inputLottoMoney.money);
 	}
 
 	@Override
