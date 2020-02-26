@@ -30,7 +30,7 @@ public class LottoGameRepeat {
         return count < repeat;
     }
 
-    public LottoGameRepeat splitLottoGameCount(int repeat) {
+    public LottoGameRepeat splitLottoGameRepeat(int repeat) {
         validateRepeatCount(repeat);
         validateSplitValue(repeat);
         this.repeat -= repeat;

@@ -19,7 +19,7 @@ public class LottoController {
 
     private LottoGame makeLottoGame(LottoGameRepeat autoGameRepeat) {
         LottoGame lottoGame = new LottoGame();
-        LottoGameRepeat userGameRepeat = autoGameRepeat.splitLottoGameCount(InputView.inputUserRepeat());
+        LottoGameRepeat userGameRepeat = autoGameRepeat.splitLottoGameRepeat(InputView.inputUserRepeat());
 
         OutputView.printRepeat(userGameRepeat, autoGameRepeat);
         if(userGameRepeat.checkRepeatPositive()){

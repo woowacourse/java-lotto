@@ -27,4 +27,13 @@ public class LottoGameRepeatTest {
         LottoGameRepeat lottoGameRepeat = new LottoGameRepeat(5);
         Assertions.assertThat(lottoGameRepeat.checkLoopTerminate(value)).isEqualTo(exp);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3,1", "5,0", "10,5"})
+    void 횟수_분할_예외_테스트(int value, int size) {
+        LottoGameRepeat lottoGameRepeat = new LottoGameRepeat(size);
+        Assertions.assertThatThrownBy(()->lottoGameRepeat.splitLottoGameRepeat(value))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력은 가능 횟수를 초과할 수 없습니다.");
+    }
 }
