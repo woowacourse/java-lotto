@@ -37,4 +37,8 @@ public class ManualLottoTicketNumber {
 			throw new InvalidManualLottoTicketException(InvalidManualLottoTicketException.NOT_PURCHASABLE);
 		}
 	}
+
+	public int getManualLottoTicketNumber() {
+		return manualLottoTicketNumber;
+	}
 }
