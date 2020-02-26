@@ -1,8 +1,8 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lottonumber.InvalidLottoNumberException;
-
 import java.util.Objects;
+
+import lotto.domain.lottonumber.InvalidLottoNumberException;
 
 /**
  * 클래스 이름 : .java
@@ -16,11 +16,11 @@ public class LottoCount {
 	private static final String NONE_INTEGER_INPUT_EXCEPTION_MESSAGE = "입력금액이 정수가 아닙니다.";
 
 	private final int totalLottoCount;
-	private final int manaualLottoCount;
+	private final int manualLottoCount;
 
 	public LottoCount(int inputTotalLottoCount, String inputManualLottoCount) {
 		this.totalLottoCount = inputTotalLottoCount;
-		this.manaualLottoCount = validateManualLottoCount(inputManualLottoCount);
+		this.manualLottoCount = validateManualLottoCount(inputManualLottoCount);
 	}
 
 
@@ -45,8 +45,8 @@ public class LottoCount {
 		return this.totalLottoCount;
 	}
 
-	public int getManaualLottoCount() {
-		return this.manaualLottoCount;
+	public int getManualLottoCount() {
+		return this.manualLottoCount;
 	}
 
 }

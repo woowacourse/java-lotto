@@ -59,4 +59,17 @@ public class StringUtilsTest {
 				.isThrownBy(() -> StringUtils.splitIntoLottoNumbers(input))
 				.withMessage("잘못된 형식으로 입력하셨습니다.");
 	}
+
+	@Test
+	void splitIntoStringLottoNumbers_올바른_동작_확인() {
+		String input = "1,2,3,4,5,6  \n  7,8,9,10,11,12\n 13,14,15,16,17,18 ";
+		assertThat(StringUtils.splitIntoStringLottoNumbers(input))
+				.isEqualTo(
+						Arrays.asList(
+								"1,2,3,4,5,6",
+								"7,8,9,10,11,12",
+								"13,14,15,16,17,18"
+						)
+				);
+	}
 }

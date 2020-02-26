@@ -27,7 +27,7 @@ public class StringUtils {
 	}
 
 	public static List<LottoNumber> splitIntoLottoNumbers(final String inputLottoNumbers) {
-		Objects.requireNonNull(inputLottoNumbers, NULL_INPUT_EXCEPTION_MESSAGE);
+		validateInputString(inputLottoNumbers);
 		validateInputLottoNumber(inputLottoNumbers);
 		return Arrays.stream(inputLottoNumbers.split(DELIMITER))
 				.map(String::trim)
@@ -36,10 +36,25 @@ public class StringUtils {
 				.collect(Collectors.toList());
 	}
 
-	private static void validateInputLottoNumber(final String inputLottoNumbers) {
+	public static List<String> splitIntoStringLottoNumbers(final String inputLottoNumbers) {
+		validateInputString(inputLottoNumbers);
+		return Arrays.stream(inputLottoNumbers.split("\n"))
+				.map(String::trim)
+				.collect(Collectors.toList());
+	}
+
+	private static void validateInputString(final String inputString) {
+		Objects.requireNonNull(inputString, NULL_INPUT_EXCEPTION_MESSAGE);
+		validateInputStringEmpty(inputString);
+	}
+
+	private static void validateInputStringEmpty(final String inputLottoNumbers) {
 		if (inputLottoNumbers.isEmpty()) {
 			throw new IllegalArgumentException(EMPTY_INPUT_EXCEPTION_MESSAGE);
 		}
+	}
+
+	private static void validateInputLottoNumber(final String inputLottoNumbers) {
 		if (!inputLottoNumbers.matches(INPUT_LOTTO_NUMBER_VALIDATION_PATTERN)) {
 			throw new IllegalArgumentException(INVALID_INPUT_EXCEPTION_MESSAGE);
 		}
