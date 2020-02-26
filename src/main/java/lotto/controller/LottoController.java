@@ -27,7 +27,7 @@ public class LottoController {
 
         LottoTicket winningNumbers = getWinningNumbers();
         WinningTicket winningTicket = getWinningTicketWithBonusNumber(winningNumbers);
-        LottoResult lottoResult = lottoTickets.match(winningTicket);
+        LottoResult lottoResult = lottoTickets.getMatchedResult(winningTicket);
         OutputView.prizeStatistics(lottoResult);
         OutputView.profitRate(lottoResult.calculateRate(money));
     }

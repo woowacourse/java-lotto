@@ -31,7 +31,7 @@ class LottoTicketsTest {
     @Test
     @DisplayName("당첨 번호에 따른 로또 매칭 결과가 제대로 계산되는지")
     void matchCount() {
-        LottoResult lottoResult = lottoTickets.match(LottoTicketTest.WINNING_TICKET);
+        LottoResult lottoResult = lottoTickets.getMatchedResult(LottoTicketTest.WINNING_TICKET);
         assertThat(lottoResult.countSpecificRank(Rank.FOURTH)).isEqualTo(1);
     }
 

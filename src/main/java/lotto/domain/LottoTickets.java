@@ -22,7 +22,7 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public LottoResult match(WinningTicket winningTicket) {
+    public LottoResult getMatchedResult(WinningTicket winningTicket) {
         LottoResult lottoResult = new LottoResult();
         for (LottoTicket lottoTicket : lottoTickets) {
             Rank rank = winningTicket.match(lottoTicket);
