@@ -20,10 +20,10 @@ public class LottoController {
         OutputView.printResult(money, makeResult());
     }
 
-    private void makeLottoNumbers(int repeat) {
+    private void makeLottoNumbers(LottoGameRepeat repeat) {
         LottoGenerator randomLottoGenerator = new RandomLottoGenerator();
         OutputView.printRepeat(repeat);
-        for (int i = 0; i < repeat; i++) {
+        for (int count = 0; repeat.checkLoopTerminate(count); count++) {
             LottoTicket lottoTicket = LottoTicketFactory.createLottoNumbers(randomLottoGenerator);
             OutputView.printLottoNumbers(lottoTicket);
             lottoGame.add(lottoTicket);

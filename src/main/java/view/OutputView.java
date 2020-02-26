@@ -1,6 +1,7 @@
 package view;
 
 import domain.Money;
+import domain.LottoGameRepeat;
 import domain.lottonumber.LottoNumber;
 import domain.lottonumber.LottoTicket;
 import domain.lottoresult.LottoRank;
@@ -66,7 +67,7 @@ public class OutputView {
         System.out.println("총 수익률은 " + money.calculateEarnings(result.calculateGamesEarning()) + "%입니다.");
     }
 
-    public static void printRepeat(int repeat) {
-        System.out.println(repeat + "개를 구매했습니다.");
+    public static void printRepeat(LottoGameRepeat repeat) {
+        System.out.println(repeat.toString() + "개를 구매했습니다.");
     }
 }
