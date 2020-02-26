@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.domain.LottoTicketFactory.RandomLottoTicketFactory;
 import lotto.exceptions.LottoNumberIllegalArgumentException;
+import lotto.exceptions.PurchaseManualTicketIllegalArgumentException;
 import lotto.exceptions.PurchaseMoneyIllegalArgumentException;
 import lotto.exceptions.WinningLottoNumbersIllegalArgumentException;
 import lotto.view.InputView;
@@ -15,9 +16,9 @@ public class LottoController {
 	public static void run() {
 		PurchaseMoney purchaseMoney = prepareLotto();
 
-		PurchaseMoney manualTicketMoney = createManualTicketMoney();
+		PurchaseMoney manualTicketMoney = createManualTicketMoney(purchaseMoney);
 		PurchaseMoney autoTicketMoney
-				= purchaseMoney.subtract(manualTicketMoney);
+				= createAutoTicketMoney(purchaseMoney, manualTicketMoney);
 
 		PurchasedLottoTickets purchasedLottoTickets
 				= purchaseLottoTickets(manualTicketMoney, autoTicketMoney);
@@ -25,6 +26,27 @@ public class LottoController {
 		WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbers();
 
 		produceLottoResult(purchaseMoney, purchasedLottoTickets, winningLottoNumbers);
+	}
+
+	private static PurchaseMoney createAutoTicketMoney(
+			PurchaseMoney purchaseMoney, PurchaseMoney manualTicketMoney) {
+
+		PurchaseMoney autoTicketMoney;
+		do {
+			autoTicketMoney = createAutoTicketMoneyIfValid(
+					purchaseMoney, manualTicketMoney);
+		} while (autoTicketMoney == null);
+		return autoTicketMoney;
+	}
+
+	private static PurchaseMoney createAutoTicketMoneyIfValid(
+			PurchaseMoney purchaseMoney, PurchaseMoney manualTicketMoney) {
+
+		try {
+			return purchaseMoney.subtract(manualTicketMoney);
+		} catch (PurchaseManualTicketIllegalArgumentException e) {
+			return null;
+		}
 	}
 
 	private static PurchasedLottoTickets purchaseLottoTickets(
@@ -36,9 +58,32 @@ public class LottoController {
 		return manualTickets.addAll(autoLottoTickets);
 	}
 
-	private static PurchaseMoney createManualTicketMoney() {
+	private static PurchaseMoney createManualTicketMoney(
+			PurchaseMoney purchaseMoney) {
+
+		PurchaseMoney manualTicketMoney;
+		do {
+			manualTicketMoney = createManualTicketMoneyIfValid(purchaseMoney);
+		} while (manualTicketMoney == null);
+		return manualTicketMoney;
+	}
+
+	private static PurchaseMoney createManualTicketMoneyIfValid(
+			PurchaseMoney purchaseMoney) {
+
 		int manualTicketNumber = InputView.inputManualTicketNumber();
-		return PurchaseMoney.of(manualTicketNumber);
+
+		if (purchaseMoney.isLessThan(manualTicketNumber)) {
+			OutputView.printWhenManualMoneyIsMoreThanTotalMoney();
+			return null;
+		}
+
+		try {
+			return PurchaseMoney.of(manualTicketNumber);
+		} catch (PurchaseManualTicketIllegalArgumentException e) {
+			OutputView.printWarningMessage(e.getMessage());
+			return null;
+		}
 	}
 
 	private static void produceLottoResult(

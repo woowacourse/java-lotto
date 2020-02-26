@@ -8,6 +8,10 @@ import lotto.domain.WinningType;
 public class OutputView {
 	private static final String NEW_LINE = System.lineSeparator();
 
+	public static void printWhenManualMoneyIsMoreThanTotalMoney() {
+		System.out.println("수동으로 구입할 티켓은 구입할 수 있는 개수보다 클 수 없습니다.");
+	}
+
 	public static void printPurchasedLottoTicketsCount(PurchaseMoney purchaseMoney) {
 		System.out.println(purchaseMoney.countPurchasedTickets() + "개를 구매했습니다.");
 	}

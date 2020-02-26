@@ -19,7 +19,11 @@ public class PurchaseMoney {
 	}
 
 	public static PurchaseMoney of(int lottoTicketNumber) {
-		return new PurchaseMoney(LOTTO_PRICE * lottoTicketNumber);
+		try {
+			return new PurchaseMoney(LOTTO_PRICE * lottoTicketNumber);
+		} catch (PurchaseMoneyIllegalArgumentException e) {
+			throw new PurchaseManualTicketIllegalArgumentException();
+		}
 	}
 
 	private void checkIsMultipleOfThousand(int purchaseMoney) {
@@ -49,6 +53,10 @@ public class PurchaseMoney {
 
 	public double divideBy(double totalEarning) {
 		return totalEarning / purchaseMoney;
+	}
+
+	public boolean isLessThan(int manualTicketNumber) {
+		return purchaseMoney < manualTicketNumber * LOTTO_PRICE;
 	}
 
 	public int getPurchaseMoney() {
