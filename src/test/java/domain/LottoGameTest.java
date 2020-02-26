@@ -2,6 +2,8 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.stream.IntStream;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +19,13 @@ class LottoGameTest {
 	}
 
 	@Test
-	void bonusNumberDuplicateException() {
+	void playException() {
+		String[] numbers = IntStream.of(1, 2, 3, 4, 5, 6)
+			.mapToObj(Integer::toString)
+			.toArray(String[]::new);
+
 		assertThatThrownBy(() -> {
-			lottoGame.play("1, 2, 3, 4, 5, 6", "1");
+			lottoGame.play(numbers, "1");
 		}).isInstanceOf(LottoNumberDuplicateException.class)
 			.hasMessage("로또번호와 보너스번호가 중복됩니다.");
 	}
