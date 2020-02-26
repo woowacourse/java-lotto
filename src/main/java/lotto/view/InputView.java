@@ -27,5 +27,4 @@ public class InputView {
     public static String[] getWinningNumbers() {
         return scanner.nextLine().split(COMMA);
     }
-
 }

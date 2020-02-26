@@ -65,5 +65,4 @@ class MoneyTest {
             Arguments.of(EXCEED_MONEY_QUANTITY, "입력받은 수동 로또 개수가 금액을 초과할 때")
         );
     }
-
 }
