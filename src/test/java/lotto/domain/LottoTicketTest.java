@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
  */
 public class LottoTicketTest {
 	@Test
-	@DisplayName("우승 로또와 비교하여 통계를 정확히 만들어내는지 확인")
+	@DisplayName("우승 로또와 로또 티켓을 비교하여 각 순위별로 맞춘 로또의 개수를 계산한다")
 	void matchAll() {
 		LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
 				Lotto.of(1, 2, 5, 43, 44, 45),

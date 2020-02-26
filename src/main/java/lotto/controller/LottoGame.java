@@ -34,7 +34,7 @@ public class LottoGame {
 		WinningLotto winningLotto = generateWinningLotto();
 		MatchResult matchResult = lottoTicket.matchAll(winningLotto);
 		OutputView.printStatistics(matchResult);
-		OutputView.printTotalProfits(matchResult.calculateTotalProfits(purchaseLottoPurchaseMoney));
+		OutputView.printTotalProfits(matchResult.calculateTotalProfits());
 	}
 
 	private WinningLotto generateWinningLotto() {

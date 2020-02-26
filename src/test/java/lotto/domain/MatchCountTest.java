@@ -16,13 +16,13 @@ import org.junit.jupiter.params.provider.ValueSource;
  */
 public class MatchCountTest {
 	@Test
-	@DisplayName("로또 일치 개수의 범위가 정상인 경우")
+	@DisplayName("로또 일치 개수의 범위 안에 드는 경우 인스턴스를 생성한다")
 	void of() {
 		assertThat(MatchCount.of(5)).isInstanceOf(MatchCount.class);
 	}
 
 	@ParameterizedTest
-	@DisplayName("로또 일치 개수의 범위에서 벗어나는 경우")
+	@DisplayName("로또 일치 개수의 범위 안에 들지 않는 경우 예외가 발생한다")
 	@ValueSource(ints = {-1, 7})
 	void of_OutOfRange(int matchCount) {
 		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> MatchCount.of(matchCount));

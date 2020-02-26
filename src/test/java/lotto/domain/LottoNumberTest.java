@@ -15,14 +15,14 @@ import org.junit.jupiter.params.provider.ValueSource;
  */
 public class LottoNumberTest {
 	@ParameterizedTest
-	@DisplayName("로또 번호 범위가 정상인 경우")
+	@DisplayName("로또 번호 범위가 정상인 경우 인스턴스를 반환한다")
 	@ValueSource(ints = {1, 10, 45})
 	void of(int value) {
 		assertThat(LottoNumber.of(value)).isInstanceOf(LottoNumber.class);
 	}
 
 	@ParameterizedTest
-	@DisplayName("로또 번호 범위에서 벗어나는 경우")
+	@DisplayName("로또 번호 범위에서 벗어나는 경우 예외가 발생한다")
 	@ValueSource(ints = {-1, 0, 46})
 	void of_OutOfRange(int actual) {
 		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> LottoNumber.of(actual));

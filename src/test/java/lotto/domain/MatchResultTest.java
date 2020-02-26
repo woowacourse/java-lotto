@@ -25,7 +25,7 @@ public class MatchResultTest {
 		statistics.put(LottoRank.FIRST, 1L);
 		statistics.put(LottoRank.THIRD, 3L);
 		statistics.put(LottoRank.FIFTH, 2L);
-		statistics.put(LottoRank.MISS, 5L);
+		statistics.put(LottoRank.MISS, 4L);
 		matchResult = new MatchResult(statistics);
 	}
 
@@ -43,7 +43,7 @@ public class MatchResultTest {
 	@Test
 	@DisplayName("총 수익률 연산 테스트")
 	void calculateTotalProfits() {
-		assertThat(matchResult.calculateTotalProfits(new LottoPurchaseMoney(100_000L))).isEqualTo(2_004_510L);
+		assertThat(matchResult.calculateTotalProfits()).isEqualTo(20045100L);
 	}
 
 	@Test
