@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class LottoNumbers {
 	public LottoNumbers(List<LottoNumber> lottoNumbers) {
 		validateNullAndEmpty(lottoNumbers);
 		validateDuplicateNumber(lottoNumbers);
+		Collections.sort(lottoNumbers);
 		this.lottoNumbers = new ArrayList<>(lottoNumbers);
 	}
 
@@ -34,14 +36,14 @@ public class LottoNumbers {
 		return lottoNumbers.contains(lottoNumber);
 	}
 
-	public List<LottoNumber> getLottoNumbers() {
-		return lottoNumbers;
-	}
-
 	public int matchCount(LottoNumbers lottoNumbers) {
 		return (int)lottoNumbers.getLottoNumbers()
 			.stream()
 			.filter(lottoNumber -> this.lottoNumbers.contains(lottoNumber))
 			.count();
+	}
+
+	public List<LottoNumber> getLottoNumbers() {
+		return lottoNumbers;
 	}
 }

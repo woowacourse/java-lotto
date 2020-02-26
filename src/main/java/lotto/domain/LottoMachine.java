@@ -21,7 +21,7 @@ public class LottoMachine {
 		return LottoMachineSingletonHolder.instance;
 	}
 
-	public List<Lotto> makeRandomLottos(int lottoCount) {
+	public List<Lotto> makeAutoLottos(int lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 
 		for (int i = 0; i < lottoCount; i++) {
@@ -32,10 +32,15 @@ public class LottoMachine {
 
 	private List<LottoNumber> pickRandomNumbers() {
 		Collections.shuffle(allLottoNumbers.getLottoNumbers());
-		return allLottoNumbers.getLottoNumbers()
-			.stream()
+		return allLottoNumbers.getLottoNumbers().stream()
 			.limit(Lotto.SIZE)
 			.sorted()
+			.collect(Collectors.toList());
+	}
+
+	public List<Lotto> makeManualLottos(List<LottoNumbers> lottoNumbers) {
+		return lottoNumbers.stream()
+			.map(Lotto::new)
 			.collect(Collectors.toList());
 	}
 

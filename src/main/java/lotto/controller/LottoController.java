@@ -1,10 +1,15 @@
 package lotto.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
@@ -28,22 +33,36 @@ public class LottoController {
 	private static Lottos buyLottos() {
 		try {
 			LottoCount lottoCount = new LottoCount(readMoney(), readManualLottoCount());
-
 			OutputView.printLottoCount(LottoCountDto.from(lottoCount));
-			return new Lottos(lottoMachine.makeRandomLottos(lottoCount.getAutoLottoCount()));
+			return new Lottos(makeLottos(lottoCount));
 		} catch (IllegalArgumentException e) {
 			OutputView.printExceptionMessage(e);
 			return buyLottos();
 		}
 	}
 
-	private static int readManualLottoCount() {
+	private static List<Lotto> makeLottos(LottoCount lottoCount) {
+		List<Lotto> lottos = new ArrayList<>();
+		List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
+
+		for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
+			manualLottoNumbers.add(readManualLottoNumbers());
+		}
+
+		lottos.addAll(lottoMachine.makeManualLottos(manualLottoNumbers));
+		lottos.addAll(lottoMachine.makeAutoLottos(lottoCount.getAutoLottoCount()));
+		return lottos;
+	}
+
+	private static LottoNumbers readManualLottoNumbers() {
 		try {
-			InputView.printInsertManualLottoCount();
-			return InputUtil.inputManualLottoCount();
-		} catch (NumberFormatException | IOException e) {
-			OutputView.printWrongManualLottoCount(e);
-			return readManualLottoCount();
+			InputView.printInsertManualLottoNumbers();
+			return InputUtil.inputManualLottoNumbers().stream()
+				.map(value -> new LottoNumber(Integer.parseInt(value)))
+				.collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
+		} catch (IllegalArgumentException | IOException e) {
+			OutputView.printExceptionMessage(e);
+			return readManualLottoNumbers();
 		}
 	}
 
@@ -54,6 +73,16 @@ public class LottoController {
 		} catch (NumberFormatException | IOException e) {
 			OutputView.printWrongMoneyInput(e);
 			return readMoney();
+		}
+	}
+
+	private static int readManualLottoCount() {
+		try {
+			InputView.printInsertManualLottoCount();
+			return InputUtil.inputManualLottoCount();
+		} catch (NumberFormatException | IOException e) {
+			OutputView.printWrongManualLottoCount(e);
+			return readManualLottoCount();
 		}
 	}
 
