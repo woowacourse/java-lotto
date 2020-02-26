@@ -1,19 +1,24 @@
 package domain.lotto;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberFactoryTest {
     @Test
-    void 팩토리_생성_테스트() {
-        LottoNumber lottoNumber = LottoNumberFactory.getInstance(1);
-        Assertions.assertThat(lottoNumber).hasFieldOrPropertyWithValue("number", 1);
+    @DisplayName("팩토리 생성 테스트")
+    void test1() {
+        Assertions.assertThatCode(() -> LottoNumberFactory.getInstance(1)).doesNotThrowAnyException();
     }
 
-    @Test
-    void 캐시를_이용해_값이_같으면_동일한_객체_생성() {
-        LottoNumber lottoNumber1 = LottoNumberFactory.getInstance(1);
-        LottoNumber lottoNumber2 = LottoNumberFactory.getInstance(1);
+    @ParameterizedTest
+    @ValueSource(ints = {1, 10, 45})
+    @DisplayName("캐시를 이용해 값이 같으면 동일한 객체 생성")
+    void test2(int value) {
+        LottoNumber lottoNumber1 = LottoNumberFactory.getInstance(value);
+        LottoNumber lottoNumber2 = LottoNumberFactory.getInstance(value);
         Assertions.assertThat(lottoNumber1).isEqualTo(lottoNumber2);
     }
 }

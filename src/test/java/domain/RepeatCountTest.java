@@ -1,6 +1,7 @@
 package domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -8,17 +9,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class RepeatCountTest {
     @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3})
-    void RepeatCount생성_확인(int repeatCount) {
-        RepeatCount count = new RepeatCount(repeatCount);
-        Assertions.assertThat(count)
-                .isNotNull()
-                .hasFieldOrPropertyWithValue("repeatCount", repeatCount);
+    @ValueSource(ints = {0, 1, 2, 3})
+    @DisplayName("RepeatCount생성 확인")
+    void test1(int repeatCount) {
+        Assertions.assertThatCode(() -> new RepeatCount(repeatCount)).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, -10})
-    void 잘못된생성_예외처리_확인(int totalRepeatCount) {
+    @DisplayName("음수입력 예외처리")
+    void test2(int totalRepeatCount) {
         Assertions.assertThatThrownBy(() -> new RepeatCount(totalRepeatCount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("반복 횟수는 음수일 수 없습니다.");
@@ -26,7 +26,8 @@ public class RepeatCountTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1,1,0", "2,0,2", "3,1,2"})
-    void 자동_구매수_반환_확인(int totalCount, int userCount, int expected) {
+    @DisplayName("자동 구매수 반환 확인")
+    void test3(int totalCount, int userCount, int expected) {
         RepeatCount count = new RepeatCount(totalCount);
         RepeatCount userRepeatCount = count.split(userCount);
         Assertions.assertThat(count).hasFieldOrPropertyWithValue("repeatCount", expected);
@@ -35,7 +36,8 @@ public class RepeatCountTest {
 
     @ParameterizedTest
     @CsvSource(value = {"0,1", "2,3", "10, 20"})
-    void 자동_구매수_예외_확인(int totalCount, int userCount) {
+    @DisplayName("자동 구매수 예외 확인")
+    void test4(int totalCount, int userCount) {
         RepeatCount count = new RepeatCount(totalCount);
         Assertions.assertThatThrownBy(() -> count.split(userCount))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -43,7 +45,8 @@ public class RepeatCountTest {
     }
 
     @Test
-    void 반복이_0인지_확인() {
+    @DisplayName("반복이 0인지 확인")
+    void test5() {
         RepeatCount repeatCount1 = new RepeatCount(0);
         RepeatCount repeatCount2 = new RepeatCount(1);
         Assertions.assertThat(repeatCount1.isNotZero()).isFalse();
