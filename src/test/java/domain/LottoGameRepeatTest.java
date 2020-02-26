@@ -14,11 +14,11 @@ public class LottoGameRepeatTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1, 0, -200})
+    @ValueSource(ints = {-1, -200})
     void 생성_예외_테스트(int value) {
         Assertions.assertThatThrownBy(() -> new LottoGameRepeat(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("횟수는 0 이하로 입력될 수 없습니다.");
+                .hasMessage("횟수는 0 미만으로 입력될 수 없습니다.");
     }
 
     @ParameterizedTest
