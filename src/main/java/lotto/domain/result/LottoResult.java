@@ -2,22 +2,20 @@ package lotto.domain.result;
 
 import lotto.domain.money.LottoMoney;
 
-import java.util.List;
+import java.util.Map;
 
 public class LottoResult {
 
     private static final int HUNDRED_PERCENTAGE = 100;
 
-    private List<Rank> ranks;
+    private Map<Rank, Integer> rankMap;
 
-    public LottoResult(List<Rank> ranks) {
-        this.ranks = ranks;
+    public LottoResult(Map<Rank, Integer> rankMap) {
+        this.rankMap = rankMap;
     }
 
     public int count(Rank rank) {
-        return (int) ranks.stream()
-                .filter(has -> has.equals(rank))
-                .count();
+        return rankMap.get(rank);
     }
 
     public double getProfit(LottoMoney lottoMoney) {
@@ -27,8 +25,12 @@ public class LottoResult {
     }
 
     private double getTotalPrize() {
-        return ranks.stream()
-                .mapToLong(Rank::getWinningMoney)
-                .sum();
+        long totalPrize = 0;
+
+        for (Rank rank : rankMap.keySet()) {
+            totalPrize += rank.getWinningMoney() * rankMap.get(rank);
+        }
+
+        return totalPrize;
     }
 }
