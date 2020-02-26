@@ -8,22 +8,29 @@ import lotto.exceptions.WinningLottoNumbersIllegalArgumentException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoController {
 	public static void run() {
 		PurchaseMoney purchaseMoney = prepareLotto();
 
-		int manualTicketNumber = InputView.inputManualTicketNumber();
-		PurchaseMoney manualTicketMoney = PurchaseMoney.of(manualTicketNumber);
+		PurchaseMoney manualTicketMoney = createManualTicketMoney();
 		PurchaseMoney autoTicketMoney
 				= purchaseMoney.subtract(manualTicketMoney);
 
-		PurchasedLottoTickets manualTickets = purchaseLotto(autoTicketMoney);
-
-		PurchasedLottoTickets purchasedLottoTickets = purchaseLotto(purchaseMoney);
+		PurchasedLottoTickets manualTickets = purchaseManualLotto(manualTicketMoney);
+		PurchasedLottoTickets autoLottoTickets = purchaseAutoLotto(autoTicketMoney);
+		PurchasedLottoTickets purchasedLottoTickets = manualTickets.addAll(autoLottoTickets);
 
 		WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbers();
 
 		produceLottoResult(purchaseMoney, purchasedLottoTickets, winningLottoNumbers);
+	}
+
+	private static PurchaseMoney createManualTicketMoney() {
+		int manualTicketNumber = InputView.inputManualTicketNumber();
+		return PurchaseMoney.of(manualTicketNumber);
 	}
 
 	private static void produceLottoResult(
@@ -35,7 +42,19 @@ public class LottoController {
 		OutputView.printEarningRate(lottoResult.calculateEarningPercentage(purchaseMoney));
 	}
 
-	private static PurchasedLottoTickets purchaseLotto(
+	private static PurchasedLottoTickets purchaseManualLotto(
+			PurchaseMoney manualTicketMoney) {
+
+		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>();
+		for (int i = 0; i < manualTicketMoney.countPurchasedTickets(); i++) {
+			String input = InputView.inputManualLottoNumbers(i == 0);
+			serialLottoNumbers.add(SerialLottoNumber.of(input));
+		}
+
+		return new PurchasedLottoTickets(serialLottoNumbers);
+	}
+
+	private static PurchasedLottoTickets purchaseAutoLotto(
 			PurchaseMoney purchaseMoney) {
 
 		PurchasedLottoTickets purchasedLottoTickets

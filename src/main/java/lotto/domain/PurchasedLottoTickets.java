@@ -34,6 +34,13 @@ public class PurchasedLottoTickets {
 				.collect(Collectors.toUnmodifiableList());
 	}
 
+	public PurchasedLottoTickets addAll(PurchasedLottoTickets other) {
+		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>(purchasedLottoTickets);
+		serialLottoNumbers.addAll(other.purchasedLottoTickets);
+
+		return new PurchasedLottoTickets(serialLottoNumbers);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -45,5 +52,12 @@ public class PurchasedLottoTickets {
 	@Override
 	public int hashCode() {
 		return Objects.hash(purchasedLottoTickets);
+	}
+
+	@Override
+	public String toString() {
+		return "PurchasedLottoTickets{" +
+				"purchasedLottoTickets=" + purchasedLottoTickets +
+				'}';
 	}
 }

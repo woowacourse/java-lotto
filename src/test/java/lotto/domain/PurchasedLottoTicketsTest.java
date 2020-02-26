@@ -50,4 +50,43 @@ class PurchasedLottoTicketsTest {
 		Assertions.assertThat(result.getLottoResult())
 				.isEqualTo(expected);
 	}
+
+	@Test
+	void add() {
+		// given
+		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>();
+		serialLottoNumbers.add(SerialLottoNumber.of("1,2,3,4,5,6"));
+		serialLottoNumbers.add(SerialLottoNumber.of("7,2,3,4,5,6"));
+		serialLottoNumbers.add(SerialLottoNumber.of("1,7,3,4,5,6"));
+		serialLottoNumbers.add(SerialLottoNumber.of("1,2,7,4,5,6"));
+
+		List<SerialLottoNumber> serialLottoNumbers2 = new ArrayList<>();
+		serialLottoNumbers2.add(SerialLottoNumber.of("1,2,3,4,7,6"));
+		serialLottoNumbers2.add(SerialLottoNumber.of("1,2,3,4,5,7"));
+
+		PurchasedLottoTickets purchasedLottoTickets
+				= new PurchasedLottoTickets(serialLottoNumbers);
+
+		PurchasedLottoTickets purchasedLottoTickets2
+				= new PurchasedLottoTickets(serialLottoNumbers2);
+
+		// when
+		PurchasedLottoTickets result
+				= purchasedLottoTickets.addAll(purchasedLottoTickets2);
+
+		// then
+		List<SerialLottoNumber> serialLottoNumbers3 = new ArrayList<>();
+		serialLottoNumbers3.add(SerialLottoNumber.of("1,2,3,4,5,6"));
+		serialLottoNumbers3.add(SerialLottoNumber.of("7,2,3,4,5,6"));
+		serialLottoNumbers3.add(SerialLottoNumber.of("1,7,3,4,5,6"));
+		serialLottoNumbers3.add(SerialLottoNumber.of("1,2,7,4,5,6"));
+		serialLottoNumbers3.add(SerialLottoNumber.of("1,2,3,4,7,6"));
+		serialLottoNumbers3.add(SerialLottoNumber.of("1,2,3,4,5,7"));
+
+		PurchasedLottoTickets expected
+				= new PurchasedLottoTickets(serialLottoNumbers3);
+
+		Assertions.assertThat(result)
+				.isEqualTo(expected);
+	}
 }
