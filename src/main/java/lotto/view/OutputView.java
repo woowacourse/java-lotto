@@ -35,8 +35,8 @@ public class OutputView {
 		emptyLine();
 	}
 
-	public static void printLottoAmount(final int size) {
-		System.out.printf("%d개를 구매했습니다.", size);
+	public static void printLottoAmount(final int sizeOfManual, final int sizeOfAuto) {
+		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", sizeOfManual, sizeOfAuto);
 		emptyLine();
 	}
 

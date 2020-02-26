@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.CreateRandomTicketsStrategy;
-import lotto.domain.LottoTicketFactory;
+import lotto.domain.AutoTicketsFactory;
+import lotto.domain.ManualTicketsFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.PurchasingAmount;
@@ -13,18 +13,22 @@ import lotto.view.OutputView;
 public class ConsoleLottoApplication {
 	public static void main(String[] args) {
 		final Money inputMoney = new Money(InputView.inputPayment());
-		PurchasingAmount purchasingAmount = new PurchasingAmount(inputMoney.getLottoMoneyValue());
+		final int manualLottoCount = Integer.parseInt(InputView.inputManualLottoCount());
+		final Money auto = inputMoney.minus(Money.ticketPriceOf(manualLottoCount));
 
-		final LottoTickets lottoTickets =
-			LottoTicketFactory.create(purchasingAmount, new CreateRandomTicketsStrategy());
+		PurchasingAmount amountOfAuto = new PurchasingAmount(auto.getMoney());
 
-		OutputView.printLottoAmount(lottoTickets.size());
-		OutputView.printLottoState(lottoTickets.tickets());
+		LottoTickets manualTickets = ManualTicketsFactory.create(InputView.inputManualNumbers(manualLottoCount));
+		LottoTickets autoTickets = AutoTicketsFactory.create(amountOfAuto);
+		LottoTickets allTickets = manualTickets.add(autoTickets);
+
+		OutputView.printLottoAmount(manualTickets.size(), autoTickets.size());
+		OutputView.printLottoState(allTickets.tickets());
 
 		final WinningNumbers winningNumbers =
 			new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 
-		final Ranks results = lottoTickets.getRanksBy(winningNumbers);
+		final Ranks results = allTickets.getRanksBy(winningNumbers);
 
 		OutputView.printResult(results);
 		OutputView.printProfit(results.getTotalProfitComparedTo(inputMoney));
