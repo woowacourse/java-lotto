@@ -32,7 +32,7 @@ public class LottoTicketTest {
         );
     }
 
-    @DisplayName("LottoTicket 생성자 테스트")
+    @DisplayName("비정상적인 값으로 LottoTicket 을 생성할 때 예외가 출력되는지 테스트")
     @ParameterizedTest
     @MethodSource("setUpLottoTicket")
     void lottoTicketConstructorTest(List<LottoNumber> lottoNumbers) {
@@ -53,6 +53,13 @@ public class LottoTicketTest {
                 new LottoNumber(6)
         ));
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        Assertions.assertThat(lottoTicket.containLottoNumber(new LottoNumber(5))).isTrue();
+        Assertions.assertThat(lottoTicket.getLottoTicket()).containsExactly(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        );
     }
 }

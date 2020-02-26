@@ -10,6 +10,6 @@ public class LottoTicketGeneratorTest {
     void equalsTest() {
         LottoTicket input = LottoTicketGenerator.generateLottoTicket();
         LottoTicket expected = LottoTicketGenerator.generateLottoTicket();
-        Assertions.assertThat(!input.equals(expected)).isTrue();
+        Assertions.assertThat(input).isNotEqualTo(expected);
     }
 }

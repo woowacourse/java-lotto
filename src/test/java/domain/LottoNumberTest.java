@@ -20,10 +20,8 @@ public class LottoNumberTest {
     @Test
     void isSameNumberTest() {
         LottoNumber lottoNumber = new LottoNumber(10);
-        boolean same = lottoNumber.equals(new LottoNumber(10));
-        boolean different = lottoNumber.equals(new LottoNumber(9)) == false;
 
-        Assertions.assertThat(same).isTrue();
-        Assertions.assertThat(different).isTrue();
+        Assertions.assertThat(lottoNumber).isEqualTo(new LottoNumber(10));
+        Assertions.assertThat(lottoNumber).isNotEqualTo(new LottoNumber(9));
     }
 }
