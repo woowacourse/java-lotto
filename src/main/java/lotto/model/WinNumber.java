@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.exception.NotSixNumbersException;
-
 import java.util.List;
 
 public class WinNumber extends LottoTicket {
@@ -9,6 +7,9 @@ public class WinNumber extends LottoTicket {
 
     public WinNumber(List<Integer> winningNumbers) {
         checkLottoLength(winningNumbers);
+        for (int number : winningNumbers) {
+            checkLottoNumberRange(number);
+        }
         winNumbers = winningNumbers;
     }
 
