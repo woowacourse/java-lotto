@@ -24,7 +24,7 @@ public class Money {
 
     private void validateNullOrEmpty(String input) {
         if (StringUtils.isBlank(input)) {
-            throw new IllegalArgumentException("input 값이 Null이거나 공백입니다.");
+            throw new IllegalArgumentException("input 값이 Null 이거나 공백입니다.");
         }
     }
 
@@ -48,15 +48,15 @@ public class Money {
         return this.money / MIN_MONEY;
     }
 
-    private static double getTotalWinningPrice(Map<RankType, Integer> map) {
-        double sum = INIT_SUM_VALUE;
-        for (Map.Entry<RankType, Integer> entry : map.entrySet()) {
-            sum += entry.getKey().calculate(entry.getValue());
+    private static double getTotalWinningPrice(Map<RankType, Integer> lottoResults) {
+        double totalWinningPrice = INIT_SUM_VALUE;
+        for(RankType rankType : lottoResults.keySet()) {
+            totalWinningPrice += rankType.calculate(lottoResults.get(rankType));
         }
-        return sum;
+        return totalWinningPrice;
     }
 
-    public static long getProfit(Map<RankType, Integer> map, int money) {
-        return Math.round((getTotalWinningPrice(map) / money) * PERCENT);
+    public static long getProfit(Map<RankType, Integer> lottoResults, int money) {
+        return Math.round((getTotalWinningPrice(lottoResults) / money) * PERCENT);
     }
 }
