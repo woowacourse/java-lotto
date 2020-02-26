@@ -2,6 +2,9 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
@@ -13,19 +16,28 @@ import exception.LottoNumberDuplicateException;
 
 class LottoTest {
 
+	private final static Lotto lotto = new Lotto(intsToLottoNumbers(1, 2, 3, 4, 5, 6));
+	;
+
+	private static List<LottoNumber> intsToLottoNumbers(int... numbers) {
+		return Arrays.stream(numbers)
+			.mapToObj(LottoNumber::createNumber)
+			.collect(Collectors.toList());
+	}
+
 	private static Stream<Arguments> createNumbers() {
 		return Stream.of(
 			Arguments.of(
-				"1, 2, 2, 3, 4, 5"
+				intsToLottoNumbers(1, 2, 3, 4, 5, 5)
 			), Arguments.of(
-				"1, 2, 3, 4, 5"
+				intsToLottoNumbers(1, 2, 3, 4, 5)
 			)
 		);
 	}
 
 	@ParameterizedTest
 	@MethodSource("createNumbers")
-	void createTest(String numbers) {
+	void createTest(List<LottoNumber> numbers) {
 		assertThatThrownBy(() -> {
 			new Lotto(numbers);
 		})
@@ -36,7 +48,6 @@ class LottoTest {
 	@Test
 	void isContains() {
 		// given
-		Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
 		LottoNumber containNumber = LottoNumber.createNumber(1);
 		// then
 		assertThat(lotto.isContains(containNumber)).isTrue();
@@ -45,8 +56,7 @@ class LottoTest {
 	@Test
 	void compare() {
 		// given
-		Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-		Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 7");
+		Lotto winningLotto = new Lotto(intsToLottoNumbers(1, 2, 3, 4, 5, 7));
 		LottoNumber bonusNumber = LottoNumber.createNumber(6);
 		// then
 		assertThat(lotto.compare(winningLotto, bonusNumber)).isEqualTo(Rank.SECOND);
