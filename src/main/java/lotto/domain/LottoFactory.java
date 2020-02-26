@@ -49,6 +49,10 @@ public class LottoFactory {
 		return new Lottos(lottos);
 	}
 
+	/**
+	 * 수동 + 자동으로 로또 여러장을 생성하는 메소드
+	 * @return Lottos
+	 */
 	public static Lottos create(List<String> manualLottoInput, int autoLottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 		for (String manual : manualLottoInput) {

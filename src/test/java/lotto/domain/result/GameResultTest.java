@@ -20,11 +20,11 @@ class GameResultTest {
 	@Test
 	void getEarningMoney() {
 		GameResult gameResult = new GameResult();
-		// gameResult.getResult()..plusCount();
+		gameResult.of(Statistic.FIVE).plusCount();
 
 		assertThat(
 			gameResult.getEarningMoney(new PurchaseMoney("1000"))
-		).isEqualTo((Statistic.BONUS.getPrize() / 1000) * 100);
+		).isEqualTo((Statistic.FIVE.getPrize() / 1000) * 100);
 	}
 
 	@Test

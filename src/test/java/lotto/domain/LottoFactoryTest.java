@@ -45,14 +45,14 @@ class LottoFactoryTest {
 	@Test
 	@DisplayName("로또묶음을 생성했을 때 수동과 자동이 합쳐져서 만들어지는지")
 	void manualWithAutoLotto() {
-		List<String> manualInput = Arrays.asList("1,2,3,4,5,6","3,4,5,6,7,8");
+		List<String> manualInput = Arrays.asList("1,2,3,4,5,6", "3,4,5,6,7,8");
 		assertThat(LottoFactory.create(manualInput, 7)).hasSize(9);
 	}
 
 	@Test
 	@DisplayName("수동으로 생성한 로또가 정상적으로 로또 묶음에 들어 있는지")
 	void lottosHasManualLotto() {
-		List<String> manualInput = Arrays.asList("1,2,3,4,5,6","3,4,5,6,7,8");
+		List<String> manualInput = Arrays.asList("1,2,3,4,5,6", "3,4,5,6,7,8");
 		Lotto manualLotto = new Lotto(Arrays.asList(
 			Number.of("1"),
 			Number.of("2"),

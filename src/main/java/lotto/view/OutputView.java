@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.result.GameResult;
 import lotto.domain.result.GameResultDto;
@@ -8,8 +9,15 @@ import lotto.domain.result.RankCount;
 import lotto.domain.result.Statistic;
 
 public class OutputView {
-	public static void printPieces(int parseToPiece) {
-		System.out.println(parseToPiece + "개를 구매했습니다.");
+	public static void printPieces(LottoCount count) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("수동 ")
+			.append(count.getManualLotto())
+			.append("개 ")
+			.append("자동 ")
+			.append(count.getAutoLotto())
+			.append("개를 구매하였습니다.");
+		System.out.println(sb.toString());
 	}
 
 	public static void printLottos(Lottos lottos) {

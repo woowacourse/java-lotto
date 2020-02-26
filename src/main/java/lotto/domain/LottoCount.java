@@ -18,7 +18,7 @@ public class LottoCount {
 	}
 
 	private void validateManualRange(String manual, int total) {
-		if (total - Integer.parseInt(manual) < 0) {
+		if (total - Integer.parseInt(manual) < ZERO) {
 			throw new ManualRangeException("수동입력은" + total + "이하로만 가능합니다.");
 		}
 	}
@@ -34,5 +34,13 @@ public class LottoCount {
 		if (Integer.parseInt(input) < ZERO) {
 			throw new InvalidRangeException("음수는 사용할 수 없습니다.");
 		}
+	}
+
+	public int getManualLotto() {
+		return manualLotto;
+	}
+
+	public int getAutoLotto() {
+		return autoLotto;
 	}
 }
