@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import lotto.domain.lottoMoney.LottoMoney;
-import lotto.domain.lottoRank.LottoRank;
+import lotto.domain.purchase.LottoMoney;
 
 class WinningResultTest {
 	@Test

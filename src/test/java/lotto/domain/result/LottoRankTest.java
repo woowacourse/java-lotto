@@ -1,4 +1,4 @@
-package lotto.domain.lottoRank;
+package lotto.domain.result;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.domain.lottoMoney.LottoMoney;
+import lotto.domain.purchase.LottoMoney;
 
 class LottoRankTest {
 	@Test

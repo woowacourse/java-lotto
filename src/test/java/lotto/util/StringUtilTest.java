@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import lotto.domain.lottoRank.LottoRank;
 import lotto.domain.lottoTicket.LottoTicket;
+import lotto.domain.result.LottoRank;
 
 class StringUtilTest {
 	@Test

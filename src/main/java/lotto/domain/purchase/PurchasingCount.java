@@ -1,9 +1,7 @@
-package lotto.domain.lottoMoney;
+package lotto.domain.purchase;
 
 import java.util.Iterator;
 import java.util.Objects;
-
-import lotto.domain.lottoTicket.ManualLottoTicketCount;
 
 public class PurchasingCount implements Iterator<PurchasingCount> {
 	private long purchasingCount;

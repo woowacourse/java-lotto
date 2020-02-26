@@ -1,8 +1,6 @@
 package lotto.domain.result;
 
 import lotto.domain.lottoNumber.LottoNumber;
-import lotto.domain.lottoRank.LottoRank;
-import lotto.domain.lottoRank.MatchCount;
 import lotto.domain.lottoTicket.LottoTicket;
 
 public class WinningLotto {

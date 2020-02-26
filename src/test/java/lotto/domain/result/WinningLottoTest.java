@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.lottoNumber.LottoNumber;
-import lotto.domain.lottoRank.LottoRank;
 import lotto.domain.lottoTicket.LottoTicket;
 
 class WinningLottoTest {

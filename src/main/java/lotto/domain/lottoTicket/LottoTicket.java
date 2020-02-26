@@ -10,7 +10,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import lotto.domain.lottoNumber.LottoNumber;
-import lotto.domain.lottoRank.MatchCount;
+import lotto.domain.result.MatchCount;
 
 public class LottoTicket {
 	public static final int TOTAL_SIZE = 6;

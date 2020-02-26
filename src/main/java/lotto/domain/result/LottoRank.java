@@ -1,8 +1,8 @@
-package lotto.domain.lottoRank;
+package lotto.domain.result;
 
 import java.util.Arrays;
 
-import lotto.domain.lottoMoney.LottoMoney;
+import lotto.domain.purchase.LottoMoney;
 
 public enum LottoRank {
 	FIRST(new MatchCount(6), false, new LottoMoney(2_000_000_000)),

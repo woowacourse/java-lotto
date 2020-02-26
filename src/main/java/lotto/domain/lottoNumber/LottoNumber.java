@@ -13,12 +13,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		this.lottoNumber = lottoNumber;
 	}
 
-	private void validate(int number) {
-		if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-			throw new InvalidLottoNumberException(InvalidLottoNumberException.OUT_OF_BOUND_LOTTO_NUMBER);
-		}
-	}
-
 	public static LottoNumber valueOf(int number) {
 		if (number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER) {
 			return LottoNumberCache.asLottoNumber(number);
@@ -35,6 +29,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 			return Integer.parseInt(inputNumber);
 		} catch (NumberFormatException e) {
 			throw new InvalidLottoNumberException(InvalidLottoNumberException.NOT_INTEGER);
+		}
+	}
+
+	private void validate(int number) {
+		if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+			throw new InvalidLottoNumberException(InvalidLottoNumberException.OUT_OF_BOUND_LOTTO_NUMBER);
 		}
 	}
 

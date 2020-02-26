@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.lottoMoney.PurchasingCount;
 import lotto.domain.lottoNumber.LottoNumber;
 import lotto.domain.lottoNumber.LottoNumberCache;
+import lotto.domain.purchase.PurchasingCount;
 
 public class AutoLottoTicketsFactory {
 	private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>(LottoNumberCache.values());

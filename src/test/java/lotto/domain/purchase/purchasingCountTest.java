@@ -1,10 +1,8 @@
-package lotto.domain.lottoMoney;
+package lotto.domain.purchase;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-
-import lotto.domain.lottoTicket.ManualLottoTicketCount;
 
 class purchasingCountTest {
 	@Test

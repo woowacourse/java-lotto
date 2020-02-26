@@ -3,8 +3,8 @@ package lotto.util;
 import java.util.stream.Collectors;
 
 import lotto.domain.lottoNumber.LottoNumber;
-import lotto.domain.lottoRank.LottoRank;
 import lotto.domain.lottoTicket.LottoTicket;
+import lotto.domain.result.LottoRank;
 
 public class StringUtil {
 	private static final String JOINING_DELIMITER = ", ";

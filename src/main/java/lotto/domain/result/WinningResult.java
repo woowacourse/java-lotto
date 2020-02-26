@@ -5,8 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import lotto.domain.lottoMoney.LottoMoney;
-import lotto.domain.lottoRank.LottoRank;
+import lotto.domain.purchase.LottoMoney;
 
 public class WinningResult {
 	private final Map<LottoRank, Long> winningResult = new TreeMap<>(Collections.reverseOrder());

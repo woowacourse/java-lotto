@@ -3,18 +3,18 @@ package lotto.controller;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.domain.lottoMoney.InvalidLottoMoneyException;
-import lotto.domain.lottoMoney.LottoMoney;
-import lotto.domain.lottoMoney.PurchasingCount;
 import lotto.domain.lottoNumber.InvalidLottoNumberException;
 import lotto.domain.lottoNumber.LottoNumber;
 import lotto.domain.lottoTicket.AutoLottoTicketsFactory;
 import lotto.domain.lottoTicket.InvalidLottoTicketException;
-import lotto.domain.lottoTicket.InvalidManualLottoTicketCountException;
 import lotto.domain.lottoTicket.LottoTicket;
 import lotto.domain.lottoTicket.LottoTickets;
-import lotto.domain.lottoTicket.ManualLottoTicketCount;
 import lotto.domain.lottoTicket.ManualLottoTicketsFactory;
+import lotto.domain.purchase.InvalidLottoMoneyException;
+import lotto.domain.purchase.InvalidManualLottoTicketCountException;
+import lotto.domain.purchase.LottoMoney;
+import lotto.domain.purchase.ManualLottoTicketCount;
+import lotto.domain.purchase.PurchasingCount;
 import lotto.domain.result.InvalidWinningLottoException;
 import lotto.domain.result.WinningLotto;
 import lotto.domain.result.WinningResult;
@@ -22,6 +22,36 @@ import lotto.view.ConsoleInputView;
 import lotto.view.ConsoleOutputView;
 
 public class LottoController {
+	private static LottoMoney receiveInputLottoMoney() {
+		try {
+			String inputLottoMoney = ConsoleInputView.inputLottoMoney();
+			return LottoMoney.valueOf(inputLottoMoney);
+		} catch (InvalidLottoMoneyException e) {
+			ConsoleOutputView.printException(e.getMessage());
+			return receiveInputLottoMoney();
+		}
+	}
+
+	private static LottoTicket receiveInputWinningLottoTicket() {
+		try {
+			String inputWinningLottoNumbers = ConsoleInputView.inputWinningLottoNumbers();
+			return LottoTicket.valueOf(inputWinningLottoNumbers);
+		} catch (InvalidLottoTicketException | InvalidLottoNumberException e) {
+			ConsoleOutputView.printException(e.getMessage());
+			return receiveInputWinningLottoTicket();
+		}
+	}
+
+	private static LottoNumber receiveInputBonusLottoNumber() {
+		try {
+			String inputBonusLottoNumber = ConsoleInputView.inputBonusLottoNumber();
+			return LottoNumber.valueOf(inputBonusLottoNumber);
+		} catch (InvalidLottoNumberException e) {
+			ConsoleOutputView.printException(e.getMessage());
+			return receiveInputBonusLottoNumber();
+		}
+	}
+
 	public void play() {
 		LottoMoney lottoMoney = receiveInputLottoMoney();
 		LottoTickets lottoTickets = purchaseLottoTicketsFor(lottoMoney);
@@ -33,16 +63,6 @@ public class LottoController {
 
 		long winningRate = winningResult.calculateWinningRate(lottoMoney);
 		ConsoleOutputView.printWinningRate(winningRate);
-	}
-
-	private static LottoMoney receiveInputLottoMoney() {
-		try {
-			String inputLottoMoney = ConsoleInputView.inputLottoMoney();
-			return LottoMoney.valueOf(inputLottoMoney);
-		} catch (InvalidLottoMoneyException e) {
-			ConsoleOutputView.printException(e.getMessage());
-			return receiveInputLottoMoney();
-		}
 	}
 
 	private LottoTickets purchaseLottoTicketsFor(LottoMoney lottoMoney) {
@@ -88,26 +108,6 @@ public class LottoController {
 		} catch (InvalidWinningLottoException e) {
 			ConsoleOutputView.printException(e.getMessage());
 			return generateWinningLotto();
-		}
-	}
-
-	private static LottoTicket receiveInputWinningLottoTicket() {
-		try {
-			String inputWinningLottoNumbers = ConsoleInputView.inputWinningLottoNumbers();
-			return LottoTicket.valueOf(inputWinningLottoNumbers);
-		} catch (InvalidLottoTicketException | InvalidLottoNumberException e) {
-			ConsoleOutputView.printException(e.getMessage());
-			return receiveInputWinningLottoTicket();
-		}
-	}
-
-	private static LottoNumber receiveInputBonusLottoNumber() {
-		try {
-			String inputBonusLottoNumber = ConsoleInputView.inputBonusLottoNumber();
-			return LottoNumber.valueOf(inputBonusLottoNumber);
-		} catch (InvalidLottoNumberException e) {
-			ConsoleOutputView.printException(e.getMessage());
-			return receiveInputBonusLottoNumber();
 		}
 	}
 }

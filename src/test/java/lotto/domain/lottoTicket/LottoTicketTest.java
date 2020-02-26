@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.domain.lottoNumber.LottoNumber;
 import lotto.domain.lottoNumber.LottoNumberCache;
-import lotto.domain.lottoRank.MatchCount;
+import lotto.domain.result.MatchCount;
 
 class LottoTicketTest {
 	@Test

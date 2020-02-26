@@ -1,4 +1,4 @@
-package lotto.domain.lottoTicket;
+package lotto.domain.purchase;
 
 public class InvalidManualLottoTicketCountException extends IllegalArgumentException {
 	public static final String NOT_INTEGER = "입력이 숫자가 아닙니다.";

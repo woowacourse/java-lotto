@@ -1,6 +1,4 @@
-package lotto.domain.lottoTicket;
-
-import lotto.domain.lottoMoney.PurchasingCount;
+package lotto.domain.purchase;
 
 public class ManualLottoTicketCount {
 	private int manualLottoTicketCount;
