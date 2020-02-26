@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.ManualPurchaseCount;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,10 +19,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static List<String> getManualLottoNumbers(int manualCount) {
+    public static List<String> getManualLottoNumbers(ManualPurchaseCount manualCount) {
         List<String> inputList = new ArrayList<>();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        for (int i = 0; i < manualCount; i++) {
+        for (int i = 0; i < manualCount.getPurchasedCount(); i++) {
             inputList.add(scanner.nextLine());
         }
         return inputList;

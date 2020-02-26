@@ -17,7 +17,7 @@ public class LottoFactory {
     public static LottoTickets createLottoList(ManualPurchase manualPurchase, Payment payment) {
         NumberGenerator randomGenerator = new RandomNumberGenerator();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        int alreadyPurchased = manualPurchase.getManualCount();
+        int alreadyPurchased = manualPurchase.getManualPurchaseCount();
         int haveToPurchase = payment.getPurchasedCount() - alreadyPurchased;
 
         for (int i = 0; i < haveToPurchase; i++) {

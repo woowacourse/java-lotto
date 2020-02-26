@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.validator.Validator;
+import lotto.domain.errors.ErrorMessage;
 
 import java.util.List;
 
@@ -9,8 +9,20 @@ public class WinningLottoTicket extends LottoTicket {
 
     public WinningLottoTicket(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         super(winningNumbers);
-        Validator.validateDistinctBonus(super.lottoNumbers, bonusNumber);
+        validateDistinctBonus(super.lottoNumbers, bonusNumber);
         this.bonusNumber = bonusNumber;
+    }
+
+    public static void validateDistinctBonus(List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
+        if (isBonusNumberAlreadyExist(lottoNumbers, bonusNumber)) {
+            ErrorMessage nowErrorMessage = ErrorMessage.DUPLICATE_NUMBER;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
+        }
+    }
+
+    private static boolean isBonusNumberAlreadyExist(List<LottoNumber> lottoNumbers, LottoNumber inputBonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(inputBonusNumber::equals);
     }
 
     public boolean isBonusMatched(final LottoTicket userLottoTicket) {

@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import lotto.domain.errors.ErrorMessage;
 import lotto.utils.NumberUtils;
-import lotto.validator.Validator;
 
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
     private int number;
 
     public LottoNumber(String number) {
@@ -14,10 +15,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public LottoNumber(int number) {
-        Validator.validateNumberScope(number);
+        validateNumberScope(number);
         this.number = number;
     }
 
+    public static void validateNumberScope(int lottoNumber) {
+        if (lottoNumber < MIN_LOTTO_NUMBER
+                || lottoNumber > MAX_LOTTO_NUMBER) {
+            ErrorMessage nowErrorMessage = ErrorMessage.OVER_SCOPE;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

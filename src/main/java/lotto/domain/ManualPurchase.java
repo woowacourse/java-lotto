@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManualPurchase {
-    private int manualCount;
+    private ManualPurchaseCount manualPurchaseCount;
 
     private List<LottoTicket> manualTickets = new ArrayList<>();
 
-    public ManualPurchase(int manualCount, List<String> manualNumbers) {
+    public ManualPurchase(ManualPurchaseCount manualPurchaseCount, List<String> manualNumbers) {
         NumberGenerator numberGenerator = new UserInputNumberGenerator();
         generateManualTicketList(manualNumbers, numberGenerator);
-        this.manualCount = manualCount;
+        this.manualPurchaseCount = manualPurchaseCount;
     }
 
     private void generateManualTicketList(List<String> manualNumbers, NumberGenerator numberGenerator) {
@@ -23,8 +23,8 @@ public class ManualPurchase {
         }
     }
 
-    public int getManualCount() {
-        return manualCount;
+    public int getManualPurchaseCount() {
+        return manualPurchaseCount.getPurchasedCount();
     }
 
     public List<LottoTicket> getManualTickets() {

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.validator.Validator;
+import lotto.domain.errors.ErrorMessage;
 
 public class Payment {
     private static final int MONEY_PER_LOTTO = 1000;
@@ -8,15 +8,37 @@ public class Payment {
 
     public Payment(final String inputMoney) {
         int parsedInputMoney;
-        Validator.validateNumber(inputMoney);
+        validateNumber(inputMoney);
         parsedInputMoney = Integer.parseInt(inputMoney);
-        Validator.validateUnderLottoPrice(parsedInputMoney);
-        Validator.validatePricePerLotto(parsedInputMoney);
+        validateUnderLottoPrice(parsedInputMoney);
+        validatePricePerLotto(parsedInputMoney);
         this.payment = parsedInputMoney;
+    }
+
+    public static void validateNumber(final String inputMoney) {
+        try {
+            Integer.parseInt(inputMoney);
+        } catch (NumberFormatException e) {
+            ErrorMessage nowErrorMessage = ErrorMessage.NOT_NUMBER;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
+        }
+    }
+
+    public static void validateUnderLottoPrice(final int inputMoney) {
+        if (inputMoney < MONEY_PER_LOTTO) {
+            ErrorMessage nowErrorMessage = ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
+        }
+    }
+
+    public static void validatePricePerLotto(final int inputMoney) {
+        if (inputMoney % MONEY_PER_LOTTO != 0) {
+            ErrorMessage nowErrorMessage = ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT;
+            throw new IllegalArgumentException(nowErrorMessage.getMessage());
+        }
     }
 
     public int getPurchasedCount() {
         return payment / MONEY_PER_LOTTO;
     }
-
 }
