@@ -61,6 +61,6 @@ public class LottoFactoryTest {
                 .map(LottoNo::new)
                 .collect(Collectors.toSet())));
 
-        assertThat(LottoFactory.createLottoManual(manualLotto)).isEqualTo(result);
+        assertThat(LottoFactory.createUserLotto(manualLotto)).isEqualTo(result);
     }
 }

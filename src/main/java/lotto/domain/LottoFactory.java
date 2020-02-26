@@ -19,24 +19,20 @@ public class LottoFactory {
     private static List<LottoNo> lottoNumberBox = new ArrayList<>();
 
     static {
-        for (int count = START_LOTTO_NO; count <= END_LOTTO_NO; count++) {
-            lottoNumberBox.add(new LottoNo(count));
+        for (int number = START_LOTTO_NO; number <= END_LOTTO_NO; number++) {
+            lottoNumberBox.add(new LottoNo(number));
         }
     }
 
-    public static List<Lotto> createLotteries(Money money, String manualLotto) {
+    public static List<Lotto> createLotteries(Money money, String userLottoNumbers) {
         validate(money);
         List<Lotto> lotteries = new ArrayList<>();
-        int lottoCount = money.divideThousand();
-        if (manualLotto == null || manualLotto.isEmpty()) {
-            createAutoLotto(lotteries, lottoCount);
-            return lotteries;
+        if (userLottoNumbers == null || userLottoNumbers.isEmpty()) {
+            return addAutoLotto(lotteries, money.findBuyAmount());
         }
-
-        String[] manualLotteries = StringUtils.splitLotto(manualLotto);
-        lotteries = createLottoManual(manualLotteries);
-        createAutoLotto(lotteries, lottoCount - manualLotteries.length);
-        return lotteries;
+        String[] manualLotteries = StringUtils.splitLotto(userLottoNumbers);
+        lotteries = createUserLotto(manualLotteries);
+        return addAutoLotto(lotteries, money.findBuyAmount() - manualLotteries.length);
     }
 
     private static void validate(Money money) {
@@ -45,7 +41,7 @@ public class LottoFactory {
         }
     }
 
-    public static List<Lotto> createLottoManual(String[] manualLotteries) {
+    public static List<Lotto> createUserLotto(String[] manualLotteries) {
         List<Lotto> manualLotto = new ArrayList<>();
         for (String numbers : manualLotteries) {
             Set<LottoNo> lotto = LottoUtils.toLottoNoSet(StringUtils.splitNumber(numbers));
@@ -54,10 +50,11 @@ public class LottoFactory {
         return manualLotto;
     }
 
-    private static void createAutoLotto(List<Lotto> lotteries, int autoLottoCount) {
+    private static List<Lotto> addAutoLotto(List<Lotto> lotteries, int autoLottoCount) {
         for (int i = 0; i < autoLottoCount; i++) {
             lotteries.add(createLottoAuto());
         }
+        return lotteries;
     }
 
     private static Lotto createLottoAuto() {

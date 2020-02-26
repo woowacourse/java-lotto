@@ -6,9 +6,9 @@ public class BonusBall {
 	private final LottoNo bonusBall;
 
 	public BonusBall(String bonusBall) {
-		InputValidator.validateInteger(bonusBall);
-		this.bonusBall = new LottoNo(Integer.parseInt(bonusBall));
-	}
+        InputValidator.validateNumber(bonusBall);
+        this.bonusBall = new LottoNo(Integer.parseInt(bonusBall));
+    }
 
 	public boolean contains(Lotto lotto) {
 		if (lotto == null) {

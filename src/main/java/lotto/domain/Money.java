@@ -7,6 +7,7 @@ public class Money {
     private static final int LOTTO_PRICE = 1000;
     private static final int TO_PERCENT_VALUE = 100;
     private static final String ERROR_MESSAGE_MIN_MONEY = "천원 이상의 금액만 가능합니다.";
+
     private final int money;
 
     public Money(String inputMoney) {
@@ -19,7 +20,7 @@ public class Money {
         if (inputMoney == null || inputMoney.isEmpty()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NULL_POINT_MONEY);
         }
-        InputValidator.validateInteger(inputMoney);
+        InputValidator.validateNumber(inputMoney);
     }
 
     private void validateOverThousand() {
@@ -28,7 +29,7 @@ public class Money {
         }
     }
 
-    public int divideThousand() {
+    public int findBuyAmount() {
         return money / LOTTO_PRICE;
     }
 

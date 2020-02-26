@@ -7,13 +7,13 @@ import lotto.domain.Money;
 import java.util.List;
 
 public class OutputView {
-    public static final String NEW_LINE = "\n";
-    public static final String INCOME_RATE_MESSAGE_FORMAT = "총 수익률은 %d %s 입니다.";
-    public static final String BUY_MESSAGE_FORMAT = "수동으로 %d개, 자동으로 %d개를 구매했습니다";
-    public static final String PERCENT = "%";
+    private static final String NEW_LINE = "\n";
+    private static final String INCOME_RATE_MESSAGE_FORMAT = "총 수익률은 %d %s 입니다.";
+    private static final String BUY_MESSAGE_FORMAT = "수동으로 %d개, 자동으로 %d개를 구매했습니다";
+    private static final String PERCENT = "%";
 
-    public static void printLotteries(List<Lotto> lotteries, int manualCount) {
-        printLottoAmounts(lotteries.size(), manualCount);
+    public static void printLotteries(List<Lotto> lotteries, int userLottoCount) {
+        printLottoAmounts(lotteries.size(), userLottoCount);
         StringBuilder builder = new StringBuilder();
         for (Lotto lotto : lotteries) {
             builder.append(lotto + NEW_LINE);
@@ -21,9 +21,9 @@ public class OutputView {
         System.out.println(builder.toString());
     }
 
-    private static void printLottoAmounts(int totalLottoCount, int manualCount) {
-        int autoLottoCount = totalLottoCount - manualCount;
-        System.out.println(String.format(BUY_MESSAGE_FORMAT, manualCount, autoLottoCount));
+    private static void printLottoAmounts(int totalLottoCount, int userLottoCount) {
+        int autoLottoCount = totalLottoCount - userLottoCount;
+        System.out.println(String.format(BUY_MESSAGE_FORMAT, userLottoCount, autoLottoCount));
     }
 
     public static void printResult(Money money, LottoManager lottoManager) {

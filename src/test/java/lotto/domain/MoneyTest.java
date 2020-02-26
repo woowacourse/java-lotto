@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
 
 public class MoneyTest {
 	@DisplayName("숫자가 아닌 구입금액을 입력한 경우")
@@ -24,7 +24,7 @@ public class MoneyTest {
 	@Test
 	void divideThousand() {
 		Money money = new Money("14000");
-		assertThat(money.divideThousand()).isEqualTo(14);
+		assertThat(money.findBuyAmount()).isEqualTo(14);
 	}
 
 	@DisplayName("수익률 계산")
