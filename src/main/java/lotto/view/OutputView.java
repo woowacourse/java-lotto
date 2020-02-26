@@ -64,7 +64,7 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    public static void printEachWinningResult(WinningRank winningRank, int count) {
+    public static void printEachWinningResult(WinningRank winningRank, long count) {
         System.out.printf("%d개 일치", winningRank.getWinningBallCount());
         if (winningRank.getWinningMoney() == WinningRank.SECOND_RANK.getWinningMoney()) {
             System.out.print(", 보너스 볼 일치");

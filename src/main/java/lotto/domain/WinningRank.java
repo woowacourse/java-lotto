@@ -10,11 +10,11 @@ public enum WinningRank {
     FIRST_RANK(2_000_000_000, 6, false),
     NO_RANK(0, 0, false);
 
-    private final int winningMoney;
+    private final long winningMoney;
     private final int winningBallCount;
     private boolean isBonusBall;
 
-    private WinningRank(int winningMoney, int winningBallCount, boolean isBonusBall) {
+    private WinningRank(long winningMoney, int winningBallCount, boolean isBonusBall) {
         this.winningMoney = winningMoney;
         this.winningBallCount = winningBallCount;
         this.isBonusBall = isBonusBall;
@@ -38,7 +38,7 @@ public enum WinningRank {
     }
 
 
-    public int getWinningMoney() {
+    public long getWinningMoney() {
         return winningMoney;
     }
 

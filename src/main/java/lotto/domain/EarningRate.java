@@ -9,24 +9,6 @@ public class EarningRate {
     private double earningRate;
     private double totalWinningMoney = 0.0;
 
-    private int calculateEarningRate(Money money) {
-        return (int) (totalWinningMoney / money.getMoney() * RATE_NUMBER);
-    }
-
-    private void generateWinningRank(List<WinningRank> winningRanks) {
-        int count;
-
-        for (WinningRank winningRank : WinningRank.values()) {
-            count = countRankPeople(winningRanks, winningRank);
-
-            sumWinningMoney(winningRank.getWinningMoney() * count);
-        }
-    }
-
-    private void sumWinningMoney(double totalWinningMoney) {
-        this.totalWinningMoney += totalWinningMoney;
-    }
-
     public EarningRate(List<WinningRank> winningRanks, Money money) {
         generateWinningRank(winningRanks);
         if (Double.isInfinite(calculateEarningRate(money))
@@ -36,11 +18,29 @@ public class EarningRate {
         this.earningRate = calculateEarningRate(money);
     }
 
-    public int countRankPeople(List<WinningRank> winningRanks, WinningRank winningRank) {
-        return (int) winningRanks.stream().filter(rank -> winningRank == rank).count();
+    public long countRankPeople(List<WinningRank> winningRanks, WinningRank winningRank) {
+        return winningRanks.stream().filter(rank -> winningRank == rank).count();
     }
 
     public double getEarningRate() {
         return earningRate;
+    }
+
+    private double calculateEarningRate(Money money) {
+        return ((totalWinningMoney / money.getMoney()) * RATE_NUMBER);
+    }
+
+    private void sumWinningMoney(double totalWinningMoney) {
+        this.totalWinningMoney += totalWinningMoney;
+    }
+
+    private void generateWinningRank(List<WinningRank> winningRanks) {
+        long count;
+
+        for (WinningRank winningRank : WinningRank.values()) {
+            count = countRankPeople(winningRanks, winningRank);
+
+            sumWinningMoney(winningRank.getWinningMoney() * count);
+        }
     }
 }
