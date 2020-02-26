@@ -2,10 +2,7 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.domain.LottoTicketFactory.RandomLottoTicketFactory;
-import lotto.exceptions.LottoNumberIllegalArgumentException;
-import lotto.exceptions.PurchaseManualTicketIllegalArgumentException;
-import lotto.exceptions.PurchaseMoneyIllegalArgumentException;
-import lotto.exceptions.WinningLottoNumbersIllegalArgumentException;
+import lotto.exceptions.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -99,12 +96,31 @@ public class LottoController {
 			PurchaseMoney manualTicketMoney) {
 
 		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>();
+		OutputView.printInputManualLottoNumbersMessage();
 		for (int i = 0; i < manualTicketMoney.countPurchasedTickets(); i++) {
-			String input = InputView.inputManualLottoNumbers(i == 0);
-			serialLottoNumbers.add(SerialLottoNumber.of(input));
+			SerialLottoNumber serialLottoNumber = prepareManualLottoTicket();
+			serialLottoNumbers.add(serialLottoNumber);
 		}
 
 		return new PurchasedLottoTickets(serialLottoNumbers);
+	}
+
+	private static SerialLottoNumber prepareManualLottoTicket() {
+		SerialLottoNumber serialLottoNumber;
+		do {
+			String input = InputView.inputManualLottoNumbers();
+			serialLottoNumber = prepareManualLottoTicketIfValid(input);
+		} while (serialLottoNumber == null);
+		return serialLottoNumber;
+	}
+
+	private static SerialLottoNumber prepareManualLottoTicketIfValid(String input) {
+		try {
+			return SerialLottoNumber.of(input);
+		} catch (LottoTicketIllegalArgumentException | LottoNumberIllegalArgumentException e) {
+			OutputView.printWarningMessage(e.getMessage());
+			return null;
+		}
 	}
 
 	private static PurchasedLottoTickets purchaseAutoLotto(

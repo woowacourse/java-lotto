@@ -12,6 +12,10 @@ public class OutputView {
 		System.out.println("수동으로 구입할 티켓은 구입할 수 있는 개수보다 클 수 없습니다.");
 	}
 
+	public static void printInputManualLottoNumbersMessage() {
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+	}
+
 	public static void printPurchasedLottoTicketsCount(PurchaseMoney purchaseMoney) {
 		System.out.println(purchaseMoney.countPurchasedTickets() + "개를 구매했습니다.");
 	}

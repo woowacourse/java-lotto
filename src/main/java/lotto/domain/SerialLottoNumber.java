@@ -23,7 +23,7 @@ public class SerialLottoNumber {
 	/**
 	 * @param input 예시) "1,2,3,4,5,6"
 	 */
-	public static SerialLottoNumber of(String input) throws IllegalArgumentException {
+	public static SerialLottoNumber of(String input) {
 		List<Integer> integers = StringParser.stringToIntegerList(input);
 		List<LottoNumber> lottoNumbers = integers.stream()
 				.map(LottoNumber::new)
