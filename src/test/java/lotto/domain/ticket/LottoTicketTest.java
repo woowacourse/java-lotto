@@ -34,8 +34,12 @@ class LottoTicketTest {
     @ParameterizedTest
     @CsvSource(value = {"1,true", "7,false"})
     void name(int number, boolean expectedResult) {
-        LottoMachine testMachine = new LottoMachineForTest();       // {1, 2, 3, 4, 5, 6} 숫자를 가지는 로또 생성기
-        LottoTicket ticket = testMachine.buyTickets(1000).get(0);
+        LottoMachine lottoMachine = new LottoMachine();
+
+        Set<Integer> manualNumbers = Arrays.stream(new Integer[]{1, 2, 3, 4, 5, 6})
+                .collect(Collectors.toSet());
+
+        LottoTicket ticket = lottoMachine.createOneTicket(manualNumbers);
 
         LottoBall lottoBall = LottoBallFactory.getLottoBallByNumber(number);
 

@@ -5,14 +5,17 @@ import lotto.domain.ticket.ball.LottoBallFactory;
 import lotto.util.NullOrEmptyValidator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.domain.ticket.LottoTicket.LOTTO_BALL_COUNT;
 import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
-public abstract class LottoMachine {
+public class LottoMachine {
     private static final String MESSAGE_FOR_NOT_ENOUGH_MONEY = "%d는 최소 구매 금액보다 작습니다.";
+    private static final List<LottoBall> balls = LottoBallFactory.getInstance();
 
     public final List<LottoTicket> buyTickets(int bettingMoney) {
         validateMoney(bettingMoney);
@@ -37,8 +40,23 @@ public abstract class LottoMachine {
         return bettingMoney / LOTTO_PRICE;
     }
 
-    public abstract LottoTicket createOneTicket();
+    public LottoTicket createOneTicket() {
+        Collections.shuffle(balls);
 
+        Set<LottoBall> lottoBalls = balls.stream()
+                .limit(LOTTO_BALL_COUNT)
+                .collect(Collectors.toSet());
+
+        return new LottoTicket(lottoBalls);
+    }
+
+    public LottoTicket createOneTicket(Set<Integer> manualNumber) {
+        Set<LottoBall> manualBalls = manualNumber.stream()
+                .map(LottoBallFactory::getLottoBallByNumber)
+                .collect(Collectors.toSet());
+
+        return new LottoTicket(manualBalls);
+    }
     public final WinLottoTicket createWinLottoTicket(List<Integer> winNumbers, int bonusNumber) {
         NullOrEmptyValidator.isNullOrEmpty(winNumbers);
 

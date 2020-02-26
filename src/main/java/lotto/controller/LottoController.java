@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.result.OverallResult;
 import lotto.domain.result.rank.Rank;
-import lotto.domain.ticket.AutoLottoMachine;
+import lotto.domain.ticket.LottoMachine;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketBundle;
 import lotto.service.LottoService;
@@ -19,9 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoController {
-
-
-    private LottoService service = new LottoService(new AutoLottoMachine());
+    private LottoService service = new LottoService(new LottoMachine());
 
     public void run() {
         BettingMoneyDTO bettingMoney = new BettingMoneyDTO(InputView.inputBettingMoney());
