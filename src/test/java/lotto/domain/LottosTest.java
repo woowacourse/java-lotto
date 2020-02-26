@@ -29,9 +29,9 @@ public class LottosTest {
         assertInvokeExceptionWithMessageWhenCreateLottos(input, "수동으로 구매할 로또 수는 숫자만 입력 가능합니다.");
     }
 
-    @DisplayName("수동으로 구매할 로또 수의 입력값이 1 이상 구매한 총 로또 수 이하가 아닐 때 예외가 발생하는지 확인")
+    @DisplayName("수동으로 구매할 로또 수의 입력값이 0 이상 구매한 총 로또 수 이하가 아닐 때 예외가 발생하는지 확인")
     @ParameterizedTest
-    @ValueSource(strings = {"0", "11"})
+    @ValueSource(strings = {"-1", "11"})
     void notInRangeExceptionTest(String input) {
         assertInvokeExceptionWithMessageWhenCreateLottos(input, "(=구매한 총 로또 수) 이하여야 합니다.");
     }

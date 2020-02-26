@@ -9,7 +9,7 @@ import static lotto.domain.NumberValidator.validateIfEmptyValueThenInvokeExcepti
 import static lotto.domain.NumberValidator.validateIfNotNumberThenInvokeException;
 
 public class Lottos {
-    public static final int MIN_LOTTO_COUNT = 1;
+    public static final int MIN_MANUAL_LOTTO_COUNT = 0;
 
     private final List<Lotto> lottos;
 
@@ -35,14 +35,14 @@ public class Lottos {
         validateIfNotInRangeThenInvokeException(manualLottoCount, lottoCount, String.format("수동으로 구매할 로또 수는 %d 이상 %d" +
                                                                                                     "(=구매한 총 로또 수) " +
                                                                                                     "이하여야 합니다.",
-                                                                                            MIN_LOTTO_COUNT,
+                                                                                            MIN_MANUAL_LOTTO_COUNT,
                                                                                             lottoCount));
     }
 
     private static void validateIfNotInRangeThenInvokeException(String manualLottoCount, int lottoCount,
                                                                 String message) {
         int manualLottoCountValue = Integer.parseInt(manualLottoCount);
-        if (manualLottoCountValue < MIN_LOTTO_COUNT || lottoCount < manualLottoCountValue) {
+        if (manualLottoCountValue < MIN_MANUAL_LOTTO_COUNT || lottoCount < manualLottoCountValue) {
             throw new RuntimeException(message);
         }
     }
