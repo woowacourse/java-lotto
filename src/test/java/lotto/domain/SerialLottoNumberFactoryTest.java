@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class WinningLottoNumbersFactoryTest {
+class SerialLottoNumberFactoryTest {
 	@Test
 	void createWinningLottoNumbers() {
 		// given
 		String input = "1, 2, 3, 4, 5, 6";
 
 		// when
-		SerialLottoNumber winningLottoNumbers = WinningLottoNumbersFactory.createWinningLottoNumbers(input);
+		SerialLottoNumber winningLottoNumbers = SerialLottoNumberFactory.create(input);
 
 		// then
 		List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
