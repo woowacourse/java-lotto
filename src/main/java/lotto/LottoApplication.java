@@ -7,7 +7,7 @@ import lotto.view.OutputView;
 public class LottoApplication {
     public static void main(String[] args) {
         LottoMoney lottoMoney = new LottoMoney(InputView.requestLottoMoneyInput());
-        Lottos lottos = new Lottos(lottoMoney);
+        Lottos lottos = new Lottos(lottoMoney, InputView.requestManualLottoCount());
         OutputView.printLottoCountAndLottos(lottos);
 
         Lotto winningLotto = Lotto.from(InputView.requestWinningLottoInput());
