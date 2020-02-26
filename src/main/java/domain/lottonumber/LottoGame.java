@@ -1,5 +1,7 @@
 package domain.lottonumber;
 
+import domain.LottoGameRepeat;
+import domain.lottonumber.generator.LottoGenerator;
 import domain.lottoresult.LottoResult;
 import domain.lottoresult.LottoWinner;
 
@@ -11,21 +13,27 @@ import java.util.List;
  * LottoNumbers를 추가하는 메서드와 결과값 생성 메서드를 가진다.
  */
 public class LottoGame {
-    private List<LottoTicket> lottoNumbers = new ArrayList<>();
+    private List<LottoTicket> lottoTickets = new ArrayList<>();
 
     public void add(LottoTicket lotto) {
-        lottoNumbers.add(lotto);
+        lottoTickets.add(lotto);
     }
 
     public LottoResult makeResult(LottoWinner lottoWinner) {
         LottoResult lottoResult = new LottoResult();
-        for (LottoTicket lotto : lottoNumbers) {
+        for (LottoTicket lotto : lottoTickets) {
             lottoResult.add(lottoWinner.createRank(lotto));
         }
         return lottoResult;
     }
 
-    public List<LottoTicket> getLottoGame(){
-        return lottoNumbers;
+    public void makeLottoTickets(LottoGameRepeat autoGameRepeat, LottoGenerator randomLottoGenerator) {
+        for (int count = 0; autoGameRepeat.checkLoopTerminate(count); count++) {
+            lottoTickets.add(LottoTicketFactory.createLottoTicket(randomLottoGenerator));
+        }
+    }
+
+    public List<LottoTicket> getLottoGame() {
+        return lottoTickets;
     }
 }

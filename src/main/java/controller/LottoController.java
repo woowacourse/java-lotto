@@ -2,7 +2,6 @@ package controller;
 
 import domain.*;
 import domain.lottonumber.*;
-import domain.lottonumber.generator.LottoGenerator;
 import domain.lottonumber.generator.RandomLottoGenerator;
 import domain.lottonumber.generator.UserLottoGenerator;
 import domain.lottoresult.LottoResult;
@@ -21,13 +20,13 @@ public class LottoController {
         LottoGame lottoGame = new LottoGame();
         LottoGameRepeat userGameRepeat = autoGameRepeat.splitLottoGameRepeat(InputView.inputUserRepeat());
 
-        OutputView.printRepeat(userGameRepeat, autoGameRepeat);
-        if(userGameRepeat.checkRepeatPositive()){
+        if (userGameRepeat.checkRepeatPositive()) {
             makeUserLottoTicket(lottoGame, userGameRepeat);
         }
-        makeAutoLottoTicket(lottoGame, autoGameRepeat);
-        OutputView.printLottoNumbers(lottoGame);
+        lottoGame.makeLottoTickets(autoGameRepeat, new RandomLottoGenerator());
 
+        OutputView.printRepeat(userGameRepeat, autoGameRepeat);
+        OutputView.printLottoGame(lottoGame);
         return lottoGame;
     }
 
@@ -36,20 +35,13 @@ public class LottoController {
         OutputView.printUserLottoNumbersFormat();
         for (int count = 0; userGameRepeat.checkLoopTerminate(count); count++) {
             UserLottoGenerator userNumberGenerator = new UserLottoGenerator(InputView.inputUserLottoNumbers());
-            lottoGame.add(LottoTicketFactory.createLottoNumbers(userNumberGenerator));
-        }
-    }
-
-    private void makeAutoLottoTicket(LottoGame lottoGame, LottoGameRepeat autoGameRepeat) {
-        LottoGenerator randomLottoGenerator = new RandomLottoGenerator();
-        for (int count = 0; autoGameRepeat.checkLoopTerminate(count); count++) {
-            lottoGame.add(LottoTicketFactory.createLottoNumbers(randomLottoGenerator));
+            lottoGame.add(LottoTicketFactory.createLottoTicket(userNumberGenerator));
         }
     }
 
     private LottoResult makeResult(LottoGame lottoGame) {
         UserLottoGenerator userNumberGenerator = new UserLottoGenerator(InputView.inputWinnerNumbers());
-        LottoTicket winnerNumbers = LottoTicketFactory.createLottoNumbers(userNumberGenerator);
+        LottoTicket winnerNumbers = LottoTicketFactory.createLottoTicket(userNumberGenerator);
         LottoNumber bonus = LottoNumberFactory.getLottoNumber(InputView.inputBonusNumber());
 
         return lottoGame.makeResult(new LottoWinner(winnerNumbers, bonus));

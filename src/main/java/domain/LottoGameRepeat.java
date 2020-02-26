@@ -22,7 +22,7 @@ public class LottoGameRepeat {
         }
     }
 
-    public boolean checkRepeatPositive(){
+    public boolean checkRepeatPositive() {
         return repeat > 0;
     }
 
