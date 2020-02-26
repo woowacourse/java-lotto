@@ -20,7 +20,8 @@ import lotto.domain.WinningLotto;
 public class ConsoleUILottoApplication {
 	public static void main(String[] args) {
 		LottoMoney inputLottoMoney = continuousInputMoney();
-		ManualLottoCount manualLottoCount = new ManualLottoCount(inputManuaLottoCount(), inputLottoMoney);
+		ManualLottoCount manualLottoCount = new ManualLottoCount(inputManualLottoCount(), inputLottoMoney);
+		Lotto manualLotto = new Lotto(parseToLottoNumberSet(inputManualLotto()));
 
 		LottoPurchaseStrategy lottoPurchaseStrategy = new AutoLottoPurchaseStrategy();
 		LottoStore lottoStore = new LottoStore(lottoPurchaseStrategy);
