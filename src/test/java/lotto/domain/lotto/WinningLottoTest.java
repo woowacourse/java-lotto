@@ -36,6 +36,8 @@ public class WinningLottoTest {
 
 	@Test
 	void isContain_주어진_로또번호_포함시_true_반환() {
-		assertThat(winningLotto.isContain(LottoNumber.of(10))).isTrue();
+		assertThat(
+				winningLotto.isContain(LottoNumber.of(10))
+		).isTrue();
 	}
 }

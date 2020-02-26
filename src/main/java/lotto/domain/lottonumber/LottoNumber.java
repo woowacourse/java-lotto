@@ -50,7 +50,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static int parseToInteger(final String inputBonusLottoNumber) {
-		try {
+		try { // TODO: 2020/02/26 이것도 수정해야할듯 책임이 이게 맞냐는 거지.
 			return Integer.parseInt(inputBonusLottoNumber);
 		} catch (NumberFormatException nfe) {
 			throw new InvalidLottoNumberException(NONE_INTEGER_INPUT_EXCEPTION_MESSAGE);

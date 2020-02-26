@@ -19,13 +19,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  */
 public class LottoFactoryTest {
 	@Test
-	void createLottoAuto_올바른_동작_확인() {
+	void createAutoLotto_올바른_동작_확인() {
 		assertThat(LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO))
 				.isInstanceOf(PaidLotto.class);
 	}
 
 	@Test
-	void createLottoManual_올바른_동작_확인() {
+	void createManualLotto_올바른_동작_확인() {
 		List<LottoNumber> winningLottoNumbers = Arrays.asList(
 				LottoNumber.of(3),
 				LottoNumber.of(2),
@@ -40,7 +40,7 @@ public class LottoFactoryTest {
 	}
 
 	@Test
-	void createLottoManual_중복된_로또번호_예외처리() {
+	void createManualLotto_중복된_로또번호_예외처리() {
 		List<LottoNumber> winningLottoNumbers = Arrays.asList(
 				LottoNumber.of(3),
 				LottoNumber.of(2),

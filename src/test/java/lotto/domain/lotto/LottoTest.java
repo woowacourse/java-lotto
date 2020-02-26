@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
@@ -109,5 +110,23 @@ public class LottoTest {
 		assertThatThrownBy(() -> new Lotto(overlappedInput))
 				.isInstanceOf(InvalidLottoException.class)
 				.hasMessage("입력 로또번호에 중복이 있습니다.");
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1,true", "7,false"})
+	void isContain_포함시_true_미포함시_false_반환(int number, boolean expected) {
+		Lotto lotto = new Lotto(
+				new ArrayList<>(
+						Arrays.asList(
+								LottoNumber.of(1),
+								LottoNumber.of(2),
+								LottoNumber.of(3),
+								LottoNumber.of(4),
+								LottoNumber.of(5),
+								LottoNumber.of(6)
+						)
+				));
+
+		assertThat(lotto.isContain(LottoNumber.of(number))).isEqualTo(expected);
 	}
 }
