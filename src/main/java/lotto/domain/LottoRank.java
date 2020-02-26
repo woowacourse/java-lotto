@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 import lotto.domain.lotto.LottoMoney;
 
@@ -12,6 +15,17 @@ public enum LottoRank {
 	FIFTH(3, new LottoMoney(5_000)),
 	MISS(0, new LottoMoney(0));
 
+	private final static Map<Integer, LottoRank> LOTTO_RANK_MAP_WITHOUT_SECOND;
+
+	static {
+		LOTTO_RANK_MAP_WITHOUT_SECOND = new HashMap<>();
+
+		Arrays.stream(values())
+			.filter(lottoRank -> lottoRank.isNot(SECOND))
+			.filter(lottoRank -> lottoRank.isNot(MISS))
+			.forEach(lottoRank -> LOTTO_RANK_MAP_WITHOUT_SECOND.put(lottoRank.matchCount, lottoRank));
+	}
+
 	private int matchCount;
 	private LottoMoney winningMoney;
 
@@ -21,19 +35,20 @@ public enum LottoRank {
 	}
 
 	public static LottoRank of(int matchCount, boolean hasBonusNumber) {
-		if (hasBonusNumber && LottoRank.SECOND.matchCount == matchCount) {
-			return LottoRank.SECOND;
+		if (hasBonusNumber && SECOND.matchCount == matchCount) {
+			return SECOND;
 		}
 
-		return Arrays.stream(values())
-			.filter(lottoRank -> lottoRank != LottoRank.SECOND)
-			.filter(lottoRank -> lottoRank.matchCount == matchCount)
-			.findFirst()
-			.orElse(MISS);
+		Optional<LottoRank> lottoRank = Optional.of(LOTTO_RANK_MAP_WITHOUT_SECOND.get(matchCount));
+		return lottoRank.orElse(MISS);
 	}
 
 	public boolean isLottoRankOf(LottoRank lottoRank) {
 		return this == lottoRank;
+	}
+
+	private boolean isNot(LottoRank lottoRank) {
+		return lottoRank != LottoRank.SECOND;
 	}
 
 	public LottoMoney getWinningMoney() {
