@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -39,5 +40,28 @@ class LottoFactoryTest {
 		);
 		Lotto winningLotto = new Lotto(numbers);
 		assertThat(lotto.compare(winningLotto)).isEqualTo(expected);
+	}
+
+	@Test
+	@DisplayName("로또묶음을 생성했을 때 수동과 자동이 합쳐져서 만들어지는지")
+	void manualWithAutoLotto() {
+		List<String> manualInput = Arrays.asList("1,2,3,4,5,6","3,4,5,6,7,8");
+		assertThat(LottoFactory.create(manualInput, 7)).hasSize(9);
+	}
+
+	@Test
+	@DisplayName("수동으로 생성한 로또가 정상적으로 로또 묶음에 들어 있는지")
+	void lottosHasManualLotto() {
+		List<String> manualInput = Arrays.asList("1,2,3,4,5,6","3,4,5,6,7,8");
+		Lotto manualLotto = new Lotto(Arrays.asList(
+			Number.of("1"),
+			Number.of("2"),
+			Number.of("3"),
+			Number.of("4"),
+			Number.of("5"),
+			Number.of("6")));
+		Iterator<Lotto> iter = LottoFactory.create(manualInput, 7).iterator();
+
+		assertThat(iter.next().compare(manualLotto)).isEqualTo(6);
 	}
 }

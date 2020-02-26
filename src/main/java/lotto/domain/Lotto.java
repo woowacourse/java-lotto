@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 import lotto.exception.InvalidLottoException;
 
@@ -48,5 +49,20 @@ public class Lotto {
 
 	public List<Number> getNumbers() {
 		return Collections.unmodifiableList(numbers);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lotto lotto = (Lotto)o;
+		return Objects.equals(numbers, lotto.numbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numbers);
 	}
 }

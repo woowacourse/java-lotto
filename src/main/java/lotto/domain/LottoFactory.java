@@ -48,4 +48,15 @@ public class LottoFactory {
 		}
 		return new Lottos(lottos);
 	}
+
+	public static Lottos create(List<String> manualLottoInput, int autoLottoCount) {
+		List<Lotto> lottos = new ArrayList<>();
+		for (String manual : manualLottoInput) {
+			lottos.add(create(manual));
+		}
+		for (int i = 0; i < autoLottoCount; i++) {
+			lottos.add(create());
+		}
+		return new Lottos(lottos);
+	}
 }
