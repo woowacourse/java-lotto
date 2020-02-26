@@ -6,6 +6,8 @@ import lotto.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoFactory {
     private static final int START_LOTTO_NO = 1;
@@ -37,12 +39,6 @@ public class LottoFactory {
         return lotteries;
     }
 
-    private static void createAutoLotto(List<Lotto> lotteries, int autoLottoCount) {
-        for (int i = 0; i < autoLottoCount; i++) {
-            lotteries.add(createLottoAuto());
-        }
-    }
-
     private static void validate(Money money) {
         if (money == null) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NULL_POINT_LOTTO_FACTORY);
@@ -52,15 +48,20 @@ public class LottoFactory {
     public static List<Lotto> createLottoManual(String[] manualLotteries) {
         List<Lotto> manualLotto = new ArrayList<>();
         for (String numbers : manualLotteries) {
-            List<LottoNo> lotto = LottoUtils.toLottoNoList(StringUtils.splitNumber(numbers));
+            Set<LottoNo> lotto = LottoUtils.toLottoNoSet(StringUtils.splitNumber(numbers));
             manualLotto.add(new Lotto(lotto));
         }
         return manualLotto;
     }
 
+    private static void createAutoLotto(List<Lotto> lotteries, int autoLottoCount) {
+        for (int i = 0; i < autoLottoCount; i++) {
+            lotteries.add(createLottoAuto());
+        }
+    }
+
     private static Lotto createLottoAuto() {
-        List<LottoNo> lotto = pickSixRandomNo();
-        Collections.sort(lotto);
+        Set<LottoNo> lotto = new TreeSet<>(pickSixRandomNo());
         return new Lotto(lotto);
     }
 

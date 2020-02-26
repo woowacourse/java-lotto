@@ -1,27 +1,27 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
-    private static final String ERROR_MESSAGE_LOTTO_SIZE = "6개의 숫자가 아닙니다.";
+    private static final String ERROR_MESSAGE_REPEAT_NUMBER = "숫자는 중복될수 없습니다.";
     private static final String ERROR_MESSAGE_NULL_POINT_LOTTO = "입력값이 비어있습니다.";
 
-    private final List<LottoNo> lottoNumbers;
+    private final Set<LottoNo> lottoNumbers;
 
-    public Lotto(List<LottoNo> lottoNumbers) {
+    public Lotto(Set<LottoNo> lottoNumbers) {
         validate(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
     }
 
-    private void validate(List<LottoNo> lottoNumbers) {
+    private void validate(Set<LottoNo> lottoNumbers) {
         if (lottoNumbers == null) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NULL_POINT_LOTTO);
         }
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_LOTTO_SIZE);
+            throw new IllegalArgumentException(ERROR_MESSAGE_REPEAT_NUMBER);
         }
     }
 

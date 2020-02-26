@@ -54,12 +54,12 @@ public class LottoFactoryTest {
                 .range(1, 7)
                 .boxed()
                 .map(LottoNo::new)
-                .collect(Collectors.toList())));
+                .collect(Collectors.toSet())));
         result.add(new Lotto(IntStream
                 .range(7, 13)
                 .boxed()
                 .map(LottoNo::new)
-                .collect(Collectors.toList())));
+                .collect(Collectors.toSet())));
 
         assertThat(LottoFactory.createLottoManual(manualLotto)).isEqualTo(result);
     }
