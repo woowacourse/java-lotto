@@ -8,15 +8,17 @@ import lotto.validator.Validator;
 public class Money implements Iterator<Integer> {
 	private static final int PRICE_ONE_LOTTO = 1_000;
 	private static final int TO_PERCENT_VALUE = 100;
-	private static final int MIN_MONEY = 0;
+	private static final int MIN_COUNT = 1;
 
-	private int inputMoney;
+	private final int inputMoney;
+	private int ableBuyLottoCount;
 
 	public Money(String inputMoney) {
 		Validator.validateInteger(inputMoney);
 		int money = Integer.parseInt(inputMoney);
 		validateOverThousand(money);
 		this.inputMoney = money;
+		this.ableBuyLottoCount = this.inputMoney / PRICE_ONE_LOTTO;
 	}
 
 	private void validateOverThousand(int inputMoney) {
@@ -26,11 +28,7 @@ public class Money implements Iterator<Integer> {
 	}
 
 	public boolean isBuyLotto(int lottoCount) {
-		return this.inputMoney >= (PRICE_ONE_LOTTO * lottoCount);
-	}
-
-	public int divideThousand() {
-		return inputMoney / PRICE_ONE_LOTTO;
+		return this.ableBuyLottoCount >= lottoCount;
 	}
 
 	public int calculateIncomeRate(long income) {
@@ -39,11 +37,14 @@ public class Money implements Iterator<Integer> {
 
 	@Override
 	public boolean hasNext() {
-		return inputMoney - PRICE_ONE_LOTTO >= MIN_MONEY;
+		return ableBuyLottoCount >= MIN_COUNT;
 	}
 
 	@Override
 	public Integer next() {
-		return inputMoney -= PRICE_ONE_LOTTO;
+		if (!hasNext()) {
+			throw new IllegalArgumentException();
+		}
+		return --ableBuyLottoCount;
 	}
 }

@@ -23,13 +23,6 @@ public class MoneyTest {
 			.isInstanceOf(InvalidMoneyException.class);
 	}
 
-	@DisplayName("1000원으로 나누기")
-	@Test
-	void divideThousand() {
-		Money money = new Money("14000");
-		assertThat(money.divideThousand()).isEqualTo(14);
-	}
-
 	@DisplayName("수익률 계산")
 	@Test
 	void calculateIncomeRate() {
@@ -41,6 +34,13 @@ public class MoneyTest {
 
 		money = new Money("10000");
 		assertThat(money.calculateIncomeRate(5000)).isEqualTo(50);
+	}
+
+	@Test
+	void isBuyLottoTest() {
+		Money money = new Money("1000");
+		assertThat(money.isBuyLotto(1)).isTrue();
+		assertThat(money.isBuyLotto(2)).isFalse();
 	}
 
 	@Test
