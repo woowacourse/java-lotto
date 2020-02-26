@@ -12,19 +12,26 @@ public class LottoManager {
 
     public void lotto() {
         Money money = setMoney();
-        Tickets tickets = new Tickets(getAutoTickets(money.getMoney() / Money.PAYMENT_UNIT));
-        WinNumbers winNumbers = getWinNumbersAndBonusBallNumber();
+        ManualCount manualCount = getManualNumber(money.getTicketCount());
+
+        Tickets tickets = new Tickets(getAutoTickets(money.getTicketCount()));
+        WinLottoNumbers winLottoNumbers = getWinNumbersAndBonusBallNumber();
         LottoResult lottoResult = new LottoResult();
 
-        confirmLottoResult(tickets, winNumbers, lottoResult);
+        confirmLottoResult(tickets, winLottoNumbers, lottoResult);
 
         printCorrectResults(lottoResult);
         OutputView.printYield(money.getYield(lottoResult));
     }
 
     private Money setMoney() {
-        OutputView.printInput();
+        OutputView.printInputMoney();
         return new Money(InputView.input());
+    }
+
+    private ManualCount getManualNumber(int ticketCount) {
+        OutputView.printInputManualNumber();
+        return new ManualCount(InputView.input(), ticketCount);
     }
 
     private List<Ticket> getAutoTickets(int ticketsCount) {
@@ -34,18 +41,18 @@ public class LottoManager {
         return tickets;
     }
 
-    private WinNumbers getWinNumbersAndBonusBallNumber() {
+    private WinLottoNumbers getWinNumbersAndBonusBallNumber() {
         OutputView.printInputWinNumber();
         String winNumber = InputView.input();
         OutputView.printInputBonusNumber();
         String bonusBallNumber = InputView.input();
-        return new WinNumbers(winNumber, bonusBallNumber);
+        return new WinLottoNumbers(winNumber, bonusBallNumber);
     }
 
-    private void confirmLottoResult(Tickets tickets, WinNumbers winNumbers, LottoResult lottoResult) {
+    private void confirmLottoResult(Tickets tickets, WinLottoNumbers winLottoNumbers, LottoResult lottoResult) {
         for (Ticket ticket : tickets.getTickets()) {
-            RankType rankType = RankType.findLottoResult(winNumbers.matchCount(ticket),
-                ticket.contains(winNumbers.getBonusBallNumber()));
+            RankType rankType = RankType.findLottoResult(winLottoNumbers.matchCount(ticket),
+                ticket.contains(winLottoNumbers.getBonusBallNumber()));
             lottoResult.updateResultCount(rankType);
         }
     }

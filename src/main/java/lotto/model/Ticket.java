@@ -9,7 +9,7 @@ import lotto.exception.OverlapSizeException;
 public class Ticket {
 
     public static final int LOTTO_NUMBER_LENGTH = 6;
-    public static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자가 아닙니다.";
+    public static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "숫자 6개를 입력해주세요.";
     private static final String OVERLAP_SIZE_EXCEPTION = "중복된 숫자를 가지고 있습니다.";
 
     private List<LottoNumber> autoTicket;

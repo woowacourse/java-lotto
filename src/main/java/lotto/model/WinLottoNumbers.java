@@ -8,18 +8,18 @@ import lotto.exception.NotNumberException;
 import lotto.exception.NotSixNumbersException;
 import lotto.exception.OverlapWinNumberException;
 
-public class WinNumbers {
+public class WinLottoNumbers {
 
-    private static final String COMMA = ",";
+    public static final String COMMA = ",";
     private static final String IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE = "당첨번호와 중복되는 숫자가 있습니다.";
 
-    private Ticket winNumbers;
+    private Ticket winLottoNumbers;
     private LottoNumber bonusBallNumber;
 
-    public WinNumbers(String winNumber, String bonusBall) {
+    public WinLottoNumbers(String winNumber, String bonusBall) {
         List<LottoNumber> winNumbers = makeWinNumbers(splitInput(winNumber));
         validateLottoNumbersLength(winNumbers);
-        this.winNumbers = new Ticket(winNumbers);
+        this.winLottoNumbers = new Ticket(winNumbers);
 
         int bonusBallNumber = validateNumberFormat(bonusBall);
         validateContainsWinNumber(bonusBallNumber);
@@ -53,13 +53,13 @@ public class WinNumbers {
     }
 
     private void validateContainsWinNumber(int bonusBallNumber) {
-        if (winNumbers.contains(LottoNumber.getLottoNumber(bonusBallNumber))) {
+        if (winLottoNumbers.contains(LottoNumber.getLottoNumber(bonusBallNumber))) {
             throw new OverlapWinNumberException(IS_CONTAIN_WIN_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
     public int matchCount(Ticket ticket) {
-        return (int) ticket.getTicket().stream().filter(x -> winNumbers.contains(x))
+        return (int) ticket.getTicket().stream().filter(x -> winLottoNumbers.contains(x))
             .count();
     }
 

@@ -35,8 +35,8 @@ public class Money {
         }
     }
 
-    public int getMoney() {
-        return money;
+    public int getTicketCount() {
+        return money / PAYMENT_UNIT;
     }
 
     private double getRevenue(LottoResult lottoResultCount) {
