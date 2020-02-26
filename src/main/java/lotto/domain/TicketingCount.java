@@ -14,7 +14,7 @@ public class TicketingCount {
         return this.ticketingCount;
     }
 
-    public int calculateCount(TicketingCount manualTicketCount) {
-        return this.ticketingCount -= manualTicketCount.getTicketingCount();
+    public void calculateCount(TicketingCount manualTicketCount) {
+        this.ticketingCount -= manualTicketCount.getTicketingCount();
     }
 }

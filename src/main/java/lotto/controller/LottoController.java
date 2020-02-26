@@ -10,7 +10,7 @@ import java.util.List;
 public class LottoController {
 
     private Money money;
-    private TicketingCount ticketingCount;
+    private TicketingCount ticketingTotalCount;
     private TicketingCount manualTicketingCount;
 
     public void play() {
@@ -26,24 +26,30 @@ public class LottoController {
         OutputView.printEarningRate(earningRate);
     }
 
+    private void startInputMoney() {
+        OutputView.printStartGuide();
+        money = InputView.inputPurchaseAmount();
+        generateTicketCount();
+    }
+
+    private void generateTicketCount() {
+        try {
+            ticketingTotalCount = new TicketingCount(money.lottoTicketCount());
+        } catch (RuntimeException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            generateTicketCount();
+        }
+    }
+
     private void generateManualLottoTickets() {
         OutputView.printManualLottoTicketingCount();
-        manualTicketingCount = InputView.inputManualTicketingCount(ticketingCount);
+        manualTicketingCount = InputView.inputManualTicketingCount(ticketingTotalCount);
 
         for (int i = 0; i < manualTicketingCount.getTicketingCount(); i++) {
             LottoTickets.insertLottoTicket(new LottoTicket(InputView.InputManualLottoTicket()));
         }
     }
 
-
-    private void generateTicketCount() {
-        try {
-            ticketingCount = new TicketingCount(money.lottoTicketCount());
-        } catch (RuntimeException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            generateTicketCount();
-        }
-    }
 
     private WinningTicket generateWinningBalls() {
         try {
@@ -57,20 +63,14 @@ public class LottoController {
     }
 
     private void generateLottoTickets() {
-        ticketingCount.calculateCount(manualTicketingCount);
+        ticketingTotalCount.calculateCount(manualTicketingCount);
 
-        for (int i = 0; i < ticketingCount.getTicketingCount(); i++) {
+        for (int i = 0; i < ticketingTotalCount.getTicketingCount(); i++) {
             LottoBallFactory.shuffle();
             LottoTickets.insertLottoTicket(generateLottoTicket());
         }
-        OutputView.printLottoTicket(ticketingCount, manualTicketingCount);
+        OutputView.printLottoTicket(ticketingTotalCount, manualTicketingCount);
         OutputView.printChangeMoney(money.giveChangeMoney());
-    }
-
-    private void startInputMoney() {
-        OutputView.printStartGuide();
-        money = InputView.inputPurchaseAmount();
-        generateTicketCount();
     }
 
     private LottoTicket generateLottoTicket() {
