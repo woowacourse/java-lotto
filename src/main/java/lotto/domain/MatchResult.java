@@ -29,15 +29,23 @@ public class MatchResult {
 		}
 	}
 
-	public long calculateTotalProfits(LottoPurchaseMoney lottoPurchaseMoney) {
+	public long calculateTotalProfits() {
 		long totalWinning = calculateTotalWinnings();
-		return totalWinning * MULTIPLY_PERCENTAGE / lottoPurchaseMoney.get();
+		long totalPurchaseMoney = calculateTotalPurchaseMoney();
+		return totalWinning * MULTIPLY_PERCENTAGE / totalPurchaseMoney;
 	}
 
 	private long calculateTotalWinnings() {
 		return matchResult.entrySet()
 				.stream()
 				.mapToLong(result -> result.getKey().calculateTotalWinnings(result.getValue()))
+				.sum();
+	}
+
+	private long calculateTotalPurchaseMoney() {
+		return matchResult.values()
+				.stream()
+				.mapToLong(purchaseCount -> purchaseCount * LottoPurchaseMoney.MONEY_UNIT)
 				.sum();
 	}
 
