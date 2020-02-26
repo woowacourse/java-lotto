@@ -20,12 +20,11 @@ public class LottoApplication {
 			LottoCount count = money.calculatePurchaseCount();
 			OutputView.printLottoCount(count);
 
-			LottoTicketsGenerator lottoTicketsGenerator = new LottoTicketsGenerator(new RandomLottoTicketGenerator());
-			LottoTickets lottos = lottoTicketsGenerator.createLottosByCount(count);
+			LottoTicketsGenerator autoLottoTicketsGenerator = new LottoTicketsGenerator(new RandomLottoTicketGenerator());
+			LottoTickets lottos = autoLottoTicketsGenerator.createLottosByCount(count);
 			OutputView.printLottos(lottos);
 
-			LottoTicket winningLottoTicket = LottoTicket.of(
-				StringUtil.splitRawLottoNumbers(InputView.inputWinningLotto()));
+			LottoTicket winningLottoTicket = LottoTicket.of(InputView.inputWinningLotto());
 			LottoBall bonusBall = LottoBall.valueOf(InputView.inputWinningBonusBall());
 			WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusBall);
 			TotalResult totalResult = new TotalResult(winningLotto.calculateResult(lottos), money);

@@ -2,6 +2,8 @@ package lotto.view;
 
 import java.util.Scanner;
 
+import lotto.util.StringUtil;
+
 public class InputView {
 	private static final Scanner SCANNER = new Scanner(System.in);
 	private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
@@ -16,9 +18,9 @@ public class InputView {
 		return Integer.parseInt(SCANNER.nextLine());
 	}
 
-	public static String inputWinningLotto() {
+	public static String[] inputWinningLotto() {
 		System.out.println(WINNING_LOTTO_MESSAGE);
-		return SCANNER.nextLine();
+		return StringUtil.splitRawLottoNumbers(SCANNER.nextLine());
 	}
 
 	public static int inputWinningBonusBall() {
