@@ -17,6 +17,10 @@ public class OutputView {
 	private static final String END_BRACKET = "]";
 
 	public static void printResult(final Ranks ranks) {
+		emptyLine();
+		System.out.println("당첨 통계");
+		System.out.println("---------");
+
 		final Ranks reversed = Rank.getOrderReversed();
 		final List<Rank> havePrizes = reversed.getHavePrizes();
 		havePrizes.forEach(rank -> printEachResult(rank, ranks));
@@ -45,6 +49,7 @@ public class OutputView {
 			.map(LottoTicket::getNumbers)
 			.map(getNumbersState())
 			.forEach(System.out::println);
+		emptyLine();
 	}
 
 	private static Function<List<String>, String> getNumbersState() {
