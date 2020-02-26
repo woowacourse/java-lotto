@@ -10,10 +10,9 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-public class LottoTicketFactoryTest {
+public class ManualTicketsFactoryTest {
 	@Test
 	void createLottoTicketWhenInputPurchasingAmount() {
-		PurchasingAmount purchasingAmount = new PurchasingAmount(2000);
 		List<LottoNumber> lottoNumbers1 = new ArrayList<>();
 		List<LottoNumber> lottoNumbers2 = new ArrayList<>();
 		List<LottoTicket> lottos = new ArrayList<>();
@@ -37,17 +36,10 @@ public class LottoTicketFactoryTest {
 		lottos.add(lottoTicket1);
 		lottos.add(lottoTicket2);
 
-		Map<Integer, List<Integer>> ticketNumbers = new HashMap<>();
+		List<String> values = Arrays.asList("1, 22, 31, 4, 15, 6", "7, 8, 9, 12, 25, 36");
 
-		List<Integer> values1 = Arrays.asList(1, 22, 31, 4, 15, 6);
-		List<Integer> values2 = Arrays.asList(7, 8, 9, 12, 25, 36);
-
-		ticketNumbers.put(0, values1);
-		ticketNumbers.put(1, values2);
-
-		CreateSelectedNumbersStrategy createSelectedStrategy = new CreateSelectedNumbersStrategy(ticketNumbers);
 		LottoTickets expected = new LottoTickets(lottos);
-		LottoTickets actual = LottoTicketFactory.create(purchasingAmount, createSelectedStrategy);
+		LottoTickets actual = ManualTicketsFactory.create(values);
 		assertEquals(expected, actual);
 	}
 }
