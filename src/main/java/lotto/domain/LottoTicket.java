@@ -32,6 +32,14 @@ public class LottoTicket {
         this.lottoTicket = new LottoTicket(lottoNumbers).lottoTicket;
     }
 
+    public static List<LottoTicket> createManualLottoTickets(List<String[]> manualNumbers) {
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        for (String[] manualNumber : manualNumbers) {
+            manualTickets.add(new LottoTicket(manualNumber));
+        }
+        return manualTickets;
+    }
+
     private void validate(List<LottoNumber> lottoTicket) {
         validateLottoSize(lottoTicket);
         validateDuplicate(lottoTicket);

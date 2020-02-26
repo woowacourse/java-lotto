@@ -1,5 +1,9 @@
 package lotto.controller;
 
+import static lotto.view.InputView.*;
+
+import java.util.List;
+
 import lotto.domain.LottoResult;
 import lotto.domain.LottoRule.LottoBalls;
 import lotto.domain.LottoRule.LottoNumber;
@@ -20,8 +24,7 @@ public class LottoController {
     public static void run() {
         Money money = getMoney();
         int manualQuantity = getManualQuantity(money);
-        // OutputView.inputManualNumbersInstruction();
-        // InputView.getManualNumbers(manualQuantity);
+        List<LottoTicket> manualTickets = getManualTickets(manualQuantity);
         LottoTickets lottoTickets = getLottoTickets(money);
         LottoTicket winningNumbers = getWinningNumbers();
         WinningTicket winningTicket = getWinningTicketWithBonusNumber(winningNumbers);
@@ -30,14 +33,14 @@ public class LottoController {
         OutputView.profitRate(lottoResult.calculateRate(money));
     }
 
-    private static int getManualQuantity(Money money) {
+    private static List<LottoTicket> getManualTickets(int manualQuantity) {
         try {
-            OutputView.changeInstruction(money);
-            OutputView.inputManualQuantityInstruction();
-            return money.getValidatedManualQuantity(InputView.getManualQuantity());
-        } catch (InvalidManualQuantityException e) {
+            OutputView.inputManualNumbersInstruction();
+            List<String[]> manualNumbers = InputView.getManualNumbers(manualQuantity);
+            return LottoTicket.createManualLottoTickets(manualNumbers);
+        } catch (InvalidLottoTicketException | InvalidLottoNumberException e) {
             OutputView.errorMessage(e.getMessage());
-            return getManualQuantity(money);
+            return getManualTickets(manualQuantity);
         }
     }
 
@@ -67,6 +70,17 @@ public class LottoController {
         LottoTickets lottoTickets = LottoTickets.createLottoTickets(money);
         OutputView.lottoTicketList(lottoTickets);
         return lottoTickets;
+    }
+
+    private static int getManualQuantity(Money money) {
+        try {
+            OutputView.changeInstruction(money);
+            OutputView.inputManualQuantityInstruction();
+            return money.getValidatedManualQuantity(InputView.getManualQuantity());
+        } catch (InvalidManualQuantityException e) {
+            OutputView.errorMessage(e.getMessage());
+            return getManualQuantity(money);
+        }
     }
 
     private static Money getMoney() {

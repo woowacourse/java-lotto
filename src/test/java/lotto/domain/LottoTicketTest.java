@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
@@ -75,5 +77,15 @@ class LottoTicketTest {
     @DisplayName("만들어진 로또 티켓 안에 특정 숫자가 포함되어 있으면 true를 반환하고, 그렇지 않으면 false를 반환하는지")
     void contains(int value, boolean expected) {
         assertThat(WINNING_TICKET_NUMBERS.contains(new LottoNumber(value))).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("입력받은 수동로또 번호가 제대로 로또티켓 리스트로 반환되는지")
+    void createManualLottoTicket() {
+        List<String[]> manualNumbers = new ArrayList<>();
+        manualNumbers.add(MATCH_FIVE);
+        manualNumbers.add(MATCH_THREE);
+        manualNumbers.add(MATCH_BONUS);
+        assertThat(LottoTicket.createManualLottoTickets(manualNumbers).size()).isEqualTo(3);
     }
 }
