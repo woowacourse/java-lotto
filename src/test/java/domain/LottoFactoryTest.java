@@ -6,11 +6,16 @@ import org.junit.jupiter.api.Test;
 
 import exception.LackOfMoneyException;
 
-class PurchaseMoneyTest {
+class LottoFactoryTest {
+
 	@Test
-	void validate() {
+	void createLottos() {
+		// given
+		Money purchaseMoney = new Money(999);
+		// when
+		// then
 		assertThatThrownBy(() -> {
-			PurchaseMoney.create(999);
+			LottoFactory.createLottos(purchaseMoney);
 		}).isInstanceOf(LackOfMoneyException.class)
 			.hasMessage("로또 비용이 부족합니다.");
 	}
