@@ -21,8 +21,9 @@ public class OutputView {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 
-    public static void inputManualNumbersInstruction() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    public static void inputManualNumbersInstruction(int manualQuantity) {
+        if (manualQuantity != 0)
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
     public static void ticketAmountInstruction(Money money, int manualQuantity) {

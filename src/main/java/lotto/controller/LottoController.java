@@ -34,7 +34,7 @@ public class LottoController {
 
     private static List<LottoTicket> getManualTickets(int manualQuantity) {
         try {
-            OutputView.inputManualNumbersInstruction();
+            OutputView.inputManualNumbersInstruction(manualQuantity);
             List<String[]> manualNumbers = InputView.getManualNumbers(manualQuantity);
             return LottoTicket.createManualLottoTickets(manualNumbers);
         } catch (InvalidLottoTicketException | InvalidLottoNumberException e) {
