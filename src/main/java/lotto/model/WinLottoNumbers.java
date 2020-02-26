@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.exception.NotNumberException;
-import lotto.exception.NotSixNumbersException;
 import lotto.exception.OverlapWinNumberException;
 
 public class WinLottoNumbers {
@@ -18,7 +17,6 @@ public class WinLottoNumbers {
 
     public WinLottoNumbers(String winNumber, String bonusBall) {
         List<LottoNumber> winNumbers = makeWinNumbers(splitInput(winNumber));
-        validateLottoNumbersLength(winNumbers);
         this.winLottoNumbers = new Ticket(winNumbers);
 
         int bonusBallNumber = validateNumberFormat(bonusBall);
@@ -43,12 +41,6 @@ public class WinLottoNumbers {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
             throw new NotNumberException(Money.NUMBER_FORMAT_EXCEPTION_MESSAGE);
-        }
-    }
-
-    private void validateLottoNumbersLength(List<LottoNumber> inputs) {
-        if (inputs.size() != Ticket.LOTTO_NUMBER_LENGTH) {
-            throw new NotSixNumbersException(Ticket.LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 

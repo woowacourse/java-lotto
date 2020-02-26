@@ -20,15 +20,6 @@ public class WinLottoNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨번호 6개를 입력했는지")
-    void validateLottoNumbersLength() {
-        assertThatThrownBy(() -> {
-            new WinLottoNumbers("1, 3, 5, 7, 9, 11, 13", "2");
-        }).isInstanceOf(NotSixNumbersException.class)
-                .hasMessage("숫자 6개를 입력해주세요.");
-    }
-
-    @Test
     @DisplayName("보너스볼 입력시 당첨번호에 있는 숫자이면 오류 메시지 호출")
     void validateContainsWinNumber() {
         assertThatThrownBy(() -> {

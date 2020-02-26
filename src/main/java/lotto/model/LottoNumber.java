@@ -13,7 +13,7 @@ public class LottoNumber {
     private final static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     static {
-        for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++ ) {
+        for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
             lottoNumbers.put(i, new LottoNumber(i));
         }
     }

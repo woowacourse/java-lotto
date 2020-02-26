@@ -9,14 +9,15 @@ import java.util.List;
 public class OutputView {
 
     private static final String MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String MANUAL_NUMBER_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구입했습니다.";
-    private static final String INPUT_WIN_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String MANUAL_NUMBER_MESSAGE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_NUMBER = "\n수동으로 구매할 번호를 입력해 주세요.";
+    private static final String LOTTO_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구입했습니다.\n";
+    private static final String INPUT_WIN_NUMBER_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String RESULT_MESSAGE = "\n당첨 통계\n---------";
-    private static final String RESULT_DETAIL_MESSAGE = "%d개 일치 (%d원)- %d개";
-    private static final String RESULT_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
-    private static final String YIELD_MESSAGE = "총 수익률은 %d%%입니다.";
+    private static final String RESULT_DETAIL_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+    private static final String RESULT_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개\n";
+    private static final String YIELD_MESSAGE = "총 수익률은 %d%%입니다.\n";
     private static final int SECOND_PRIZE = 30_000_000;
 
     public static void printInputMoney() {
@@ -27,9 +28,12 @@ public class OutputView {
         System.out.println(MANUAL_NUMBER_MESSAGE);
     }
 
-    public static void printHowManyTicketsPurchase(int count) {
-        System.out.printf(LOTTO_COUNT_MESSAGE, count);
-        System.out.println();
+    public static void printInputManualLottoNumber() {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBER);
+    }
+
+    public static void printHowManyTicketsPurchase(int manualCount, int autoCount) {
+        System.out.printf(LOTTO_COUNT_MESSAGE, manualCount, autoCount);
     }
 
     public static void printAutoNumbers(List<Ticket> tickets) {
@@ -54,15 +58,12 @@ public class OutputView {
     public static void printCorrectResult(int correct, int prize, int count) {
         if (prize == SECOND_PRIZE) {
             System.out.printf(RESULT_BONUS_MESSAGE, correct, prize, count);
-            System.out.println();
             return;
         }
         System.out.printf(RESULT_DETAIL_MESSAGE, correct, prize, count);
-        System.out.println();
     }
 
     public static void printYield(int yield) {
         System.out.printf(YIELD_MESSAGE, yield);
-        System.out.println();
     }
 }

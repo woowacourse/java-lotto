@@ -27,4 +27,8 @@ public class ManualCount {
             throw new OverRangeException(MAXIMUM_MANUAL_NUMBER);
         }
     }
+
+    public int getManualCount() {
+        return manualCount;
+    }
 }

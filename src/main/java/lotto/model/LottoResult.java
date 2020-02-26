@@ -19,4 +19,8 @@ public class LottoResult {
     public int getResultCount(RankType rankType) {
         return lottoResultCount.get(rankType);
     }
+
+    public Map<RankType, Integer> getLottoResultCount() {
+        return lottoResultCount;
+    }
 }
