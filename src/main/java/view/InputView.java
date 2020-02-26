@@ -23,7 +23,7 @@ public class InputView {
     }
 
     public static int inputUserRepeat() {
-        OutputView.printUserLottoGameCountFormat();
+        OutputView.printUserLottoGameRepeatFormat();
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
@@ -32,7 +32,6 @@ public class InputView {
     }
 
     public static List<Integer> inputUserLottoNumbers() {
-        OutputView.printUserLottoNumbersFormat();
         try {
             return splitAndParse(scanner.nextLine());
         } catch (NumberFormatException e) {

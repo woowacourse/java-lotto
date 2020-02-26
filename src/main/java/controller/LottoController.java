@@ -16,18 +16,28 @@ public class LottoController {
     public void run() {
         Money money = new Money(InputView.inputMoney());
 
-        makeLottoNumbers(money.calculateGames());
+        makeLottoTicket(money.calculateGames());
         OutputView.printResult(money, makeResult());
     }
 
-    private void makeLottoNumbers(LottoGameRepeat repeat) {
-        LottoGenerator randomLottoGenerator = new RandomLottoGenerator();
-        OutputView.printRepeat(repeat);
-        for (int count = 0; repeat.checkLoopTerminate(count); count++) {
-            LottoTicket lottoTicket = LottoTicketFactory.createLottoNumbers(randomLottoGenerator);
-            OutputView.printLottoNumbers(lottoTicket);
-            lottoGame.add(lottoTicket);
+    private void makeUserLottoTicket(LottoGameRepeat userGameCount) {
+        OutputView.printUserLottoNumbersFormat();
+        for (int count = 0; userGameCount.checkLoopTerminate(count); count++) {
+            UserLottoGenerator userNumberGenerator = new UserLottoGenerator(InputView.inputUserLottoNumbers());
+            lottoGame.add(LottoTicketFactory.createLottoNumbers(userNumberGenerator));
         }
+    }
+
+    private void makeLottoTicket(LottoGameRepeat autoGameCount) {
+        LottoGenerator randomLottoGenerator = new RandomLottoGenerator();
+        LottoGameRepeat userGameCount = autoGameCount.splitLottoGameCount(InputView.inputUserRepeat());
+        OutputView.printRepeat(userGameCount, autoGameCount);
+
+        makeUserLottoTicket(userGameCount);
+        for (int count = 0; autoGameCount.checkLoopTerminate(count); count++) {
+            lottoGame.add(LottoTicketFactory.createLottoNumbers(randomLottoGenerator));
+        }
+        OutputView.printLottoNumbers(lottoGame);
     }
 
     private LottoResult makeResult() {
