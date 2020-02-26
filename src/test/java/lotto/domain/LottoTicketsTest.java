@@ -68,4 +68,22 @@ class LottoTicketsTest {
 
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	void checkAdd() {
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		List<LottoTicket> tickets = new ArrayList<>();
+		tickets.add(lottoTicket);
+		LottoTickets lottoTickets = new LottoTickets(tickets);
+
+		LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers);
+		List<LottoTicket> tickets2 = new ArrayList<>();
+		tickets2.add(lottoTicket2);
+		LottoTickets lottoTickets2 = new LottoTickets(tickets);
+
+		tickets.add(lottoTicket2);
+		LottoTickets expected = new LottoTickets(tickets);
+		LottoTickets actual = lottoTickets.add(lottoTickets2);
+		assertEquals(expected, actual);
+	}
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +11,7 @@ public class LottoTickets {
 	private final List<LottoTicket> lottoTickets;
 
 	public LottoTickets(final List<LottoTicket> lottoTickets) {
-		this.lottoTickets = lottoTickets;
+		this.lottoTickets = new ArrayList<>(lottoTickets);
 	}
 
 	public Ranks getRanksBy(WinningNumbers winningNumbers) {
@@ -34,6 +35,12 @@ public class LottoTickets {
 
 	public List<LottoTicket> tickets() {
 		return Collections.unmodifiableList(lottoTickets);
+	}
+
+	public LottoTickets add(LottoTickets others) {
+		List<LottoTicket> result = new ArrayList<>(this.lottoTickets);
+		result.addAll(others.lottoTickets);
+		return new LottoTickets(result);
 	}
 
 	@Override
