@@ -11,24 +11,19 @@ public class OutputView {
 
 	private static final String PERCENT = "%";
 	private static final String INCOME_RATE_MESSAGE_FORMAT = "총 수익률은 %d%s 입니다.";
-	private static final String BUY_MESSAGE_FORMAT = "%d개를 구매했습니다";
 	private static final String RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원) - %d개";
 	private static final String SECOND_WIN_ADDITIONAL_MESSAGE = ", 보너스볼 일치";
 	private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계%s---------";
+	private static final String BUY_LOTTO_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	private static final int INSERT_OFFSET = 5;
 
 	public static void printLotteris(List<Lotto> lotteris) {
-		printLottoCount(lotteris.size());
 		StringBuilder builder = new StringBuilder();
 		lotteris.forEach(lotto -> {
 			builder.append(lotto);
 			builder.append(System.lineSeparator());
 		});
 		System.out.println(builder);
-	}
-
-	private static void printLottoCount(int count) {
-		System.out.println(String.format(BUY_MESSAGE_FORMAT, count));
 	}
 
 	public static void printResult(LottoResult result) {
@@ -52,5 +47,9 @@ public class OutputView {
 
 	private static void printIncomeRate(LottoResult result) {
 		System.out.println(String.format(INCOME_RATE_MESSAGE_FORMAT, result.getIncomeRate(), PERCENT));
+	}
+
+	public static void printLottoCount(int manualCount, int automaticCount) {
+		System.out.println(String.format(BUY_LOTTO_COUNT_MESSAGE, manualCount, automaticCount));
 	}
 }

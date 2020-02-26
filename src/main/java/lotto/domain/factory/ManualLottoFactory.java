@@ -1,6 +1,7 @@
 package lotto.domain.factory;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ public class ManualLottoFactory implements MakeAbleLotto {
 				.map(String::trim)
 				.map(LottoNo::new)
 				.collect(Collectors.toList());
+			Collections.sort(lottoNos);
 			return new Lotto(lottoNos);
 		} catch (NumberFormatException e) {
 			throw new NotIntegerException();

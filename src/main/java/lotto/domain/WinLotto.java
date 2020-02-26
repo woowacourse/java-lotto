@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.LottoNoUtils;
+import lotto.domain.factory.ManualLottoFactory;
 
 public class WinLotto {
 	private static final int MIN_WIN_VALUE = 3;
@@ -10,7 +10,7 @@ public class WinLotto {
 	private final BonusBall bonusBall;
 
 	public WinLotto(String winLotto, String bonusBall) {
-		this.lotto = new Lotto(LottoNoUtils.split(winLotto));
+		this.lotto = new ManualLottoFactory(winLotto).create();
 		this.bonusBall = new BonusBall(bonusBall);
 	}
 

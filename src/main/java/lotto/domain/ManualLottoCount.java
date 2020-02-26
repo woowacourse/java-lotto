@@ -6,6 +6,7 @@ import lotto.exception.InvalidLottoCountException;
 import lotto.validator.Validator;
 
 public class ManualLottoCount implements Iterator<Integer> {
+	private static final int MIN_COUNT = 1;
 	private final Money money;
 	private int count;
 
@@ -18,14 +19,14 @@ public class ManualLottoCount implements Iterator<Integer> {
 	}
 
 	private void validProperCount(int lottoCount) {
-		if (lottoCount < 1 || !this.money.isBuyLotto(lottoCount)) {
+		if (lottoCount < MIN_COUNT || !this.money.isBuyLotto(lottoCount)) {
 			throw new InvalidLottoCountException();
 		}
 	}
 
 	@Override
 	public boolean hasNext() {
-		return count > 0;
+		return count >= MIN_COUNT;
 	}
 
 	@Override
@@ -33,6 +34,7 @@ public class ManualLottoCount implements Iterator<Integer> {
 		if (!hasNext()) {
 			throw new IllegalArgumentException();
 		}
+		money.next();
 		return --count;
 	}
 }
