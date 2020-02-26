@@ -1,24 +1,21 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(LottoMoney money) {
-        validate(money);
-        int lottoCount = money.calculateLottoCount();
-        this.lottos = IntStream.range(0, lottoCount)
-                .mapToObj(index -> Lotto.create())
-                .collect(Collectors.toList());
+    public Lottos(LottoCount lottoCount, List<String[]> manualLottos) {
+        validate(lottoCount, manualLottos);
+        this.lottos = createLottos(lottoCount, manualLottos);
     }
 
-    private static void validate(LottoMoney money) {
-        if (money == null) {
-            throw new RuntimeException("LottoMoney로 null이 입력되었습니다.");
+    private static void validate(LottoCount lottoCount, List<String[]> manualLottos) {
+        if (lottoCount == null || manualLottos.isEmpty()) {
+            throw new RuntimeException("Lottos 생성자의 매개변수로 null이 입력되었습니다.");
         }
     }
 

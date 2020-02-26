@@ -4,11 +4,14 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoApplication {
     public static void main(String[] args) {
         LottoMoney lottoMoney = new LottoMoney(InputView.requestLottoMoneyInput());
         LottoCount lottoCount = new LottoCount(lottoMoney, InputView.requestManualLottoCount());
-        Lottos lottos = new Lottos(lottoMoney);
+        List<String[]> manualLottos = InputView.requestManualLottoInput(lottoCount);
+        Lottos lottos = new Lottos(lottoCount, manualLottos);
         OutputView.printLottoCountAndLottos(lottos);
 
         Lotto winningLotto = Lotto.from(InputView.requestWinningLottoInput());
