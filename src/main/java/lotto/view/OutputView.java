@@ -12,10 +12,24 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void ticketAmountInstruction(Money money) {
-        if (money.change() != 0) {
+    public static void changeInstruction(Money money) {
+        if (money.change() != 0)
             System.out.println("거스름돈은 " + money.change() + "원입니다.");
-        }
+    }
+
+    public static void inputManualQuantityInstruction() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void inputManualNumbersInstruction() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void ticketAmountInstruction(Money money, int manualQuantity) {
+        System.out.println("수동으로 " + manualQuantity + "장, 수동으로 " + money.calculateTicketQuantity() + "개를 구매했습니다.");
+    }
+
+    public static void ticketAmountInstruction(Money money) {
         System.out.println(money.calculateTicketQuantity() + "개를 구매했습니다.");
     }
 
