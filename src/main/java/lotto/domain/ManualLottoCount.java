@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import static lotto.domain.LottoMoney.*;
+import static lotto.domain.lotto.LottoMoney.*;
+
+import lotto.domain.exception.InvalidManualLottoException;
 
 public class ManualLottoCount {
 	private final int count;

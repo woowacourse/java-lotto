@@ -1,14 +1,16 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import lotto.domain.exception.InvalidLottosException;
+
 public class Lottos implements Iterable<Lotto> {
 	private final List<Lotto> lottos;
 
-	Lottos(List<Lotto> lottos) {
+	public Lottos(List<Lotto> lottos) {
 		validateNullOrEmpty(lottos);
 		this.lottos = new ArrayList<>(lottos);
 	}

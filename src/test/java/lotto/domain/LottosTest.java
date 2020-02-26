@@ -12,6 +12,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import lotto.domain.exception.InvalidLottosException;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.Lottos;
+
 class LottosTest {
 	@DisplayName("Lottos 생성자에 Lotto List 입력이 들어올 때 객체 생성")
 	@Test

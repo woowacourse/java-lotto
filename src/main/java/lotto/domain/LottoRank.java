@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Arrays;
 
+import lotto.domain.lotto.LottoMoney;
+
 public enum LottoRank {
 	FIRST(6, new LottoMoney(2_000_000_000)),
 	SECOND(5, new LottoMoney(30_000_000)),

@@ -6,12 +6,12 @@ import static lotto.view.ConsoleOutputView.*;
 
 import java.util.Map;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMoney;
-import lotto.domain.LottoNumber;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoMoney;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStore;
-import lotto.domain.Lottos;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.ManualLottoCount;
 import lotto.domain.WinningLotto;
 
@@ -24,7 +24,7 @@ public class LottoController {
 		final int autoLottoCount = purchasedLottoCount - manualLottoCount.getCount();
 
 		printInputManualLottoMessage();
-		final Lottos totalLottos = mergeAutoAndManual(autoLottoCount, manualLottoCount.getCount());
+		final Lottos totalLottos = mergeManualAndAuto(autoLottoCount, manualLottoCount.getCount());
 
 		printPurchaseCompleteMessage(manualLottoCount.getCount(), autoLottoCount);
 		printPurchasedLotto(totalLottos);
@@ -41,7 +41,7 @@ public class LottoController {
 		printWinningRatio(winningRatio);
 	}
 
-	private Lottos mergeAutoAndManual(int autoLottoCount, int manualLottoCount) {
+	private Lottos mergeManualAndAuto(int manualLottoCount, int autoLottoCount) {
 		LottoStore lottoStore = new LottoStore();
 		Lottos manualLottos = lottoStore.purchaseManualLotto(manualLottoCount);
 		Lottos autoLottos = lottoStore.purchaseAutoLotto(autoLottoCount);

@@ -5,6 +5,12 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
+import lotto.domain.exception.InvalidWinningLottoException;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoMoney;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.Lottos;
+
 public class WinningLotto {
 	private static final int SUM_UNIT = 1;
 	private static final int INIT_COUNT = 0;

@@ -1,6 +1,8 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.Objects;
+
+import lotto.domain.exception.InvalidLottoNumberException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 	static final int MIN_BOUND = 1;

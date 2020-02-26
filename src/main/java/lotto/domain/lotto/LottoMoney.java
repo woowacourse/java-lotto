@@ -1,9 +1,11 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.Objects;
 
+import lotto.domain.exception.InvalidLottoMoneyException;
+
 public class LottoMoney {
-	static final long ZERO = 0;
+	public static final long ZERO = 0;
 	private static final long MAX_BOUND = 100000;
 	private static final long LOTTO_PRICE = 1000;
 	private static final int PERCENT = 100;
@@ -14,7 +16,7 @@ public class LottoMoney {
 		this.money = validate(money);
 	}
 
-	LottoMoney(long money) {
+	public LottoMoney(long money) {
 		this.money = money;
 	}
 

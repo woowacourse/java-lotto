@@ -3,10 +3,10 @@ package lotto.view;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.LottoRank;
-import lotto.domain.Lottos;
+import lotto.domain.lotto.Lottos;
 
 public class ConsoleOutputView {
 	private static final String INPUT_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해주세요.";

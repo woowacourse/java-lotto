@@ -12,6 +12,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.exception.InvalidWinningLottoException;
+import lotto.domain.lotto.LottoNumber;
+
 class LottoNumberParserTest {
 	@DisplayName("parseToLottoNumberSet에 번호 6개를 입력하면 LottoNumberSet 생성")
 	@Test

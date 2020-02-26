@@ -4,8 +4,8 @@ import static lotto.view.ConsoleOutputView.*;
 
 import java.util.Scanner;
 
-import lotto.domain.InvalidLottoMoneyException;
-import lotto.domain.LottoMoney;
+import lotto.domain.exception.InvalidLottoMoneyException;
+import lotto.domain.lotto.LottoMoney;
 
 public class ConsoleInputView {
 	private static final String INPUT_MONEY_MESSAGE = "구입 금액을 입력해주세요.";

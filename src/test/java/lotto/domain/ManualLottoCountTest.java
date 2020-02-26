@@ -7,19 +7,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.exception.InvalidManualLottoException;
+import lotto.domain.lotto.LottoMoney;
+
 class ManualLottoCountTest {
-	private LottoMoney lottoMoney;
+	private int purchasedLottoCount;
 
 	@BeforeEach
 	void setUp() {
-		lottoMoney = new LottoMoney("5000");
+		LottoMoney lottoMoney = new LottoMoney("5000");
+		purchasedLottoCount = lottoMoney.getPurchasedLottoCount();
 	}
 
 	@DisplayName("ManualLottoCount 생성자에 범위 내의 정수 입력이 들어올 때 객체 생성")
 	@ParameterizedTest
 	@ValueSource(strings = {"5"})
 	void constructor_WithinBoundInteger_CreateInstance(String input) {
-		assertThat(new ManualLottoCount(input, lottoMoney))
+		assertThat(new ManualLottoCount(input, purchasedLottoCount))
 			.isInstanceOf(ManualLottoCount.class);
 	}
 
@@ -27,7 +31,7 @@ class ManualLottoCountTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"a", "1.1"})
 	void constructor_NotInteger_ExceptionThrown(String input) {
-		assertThatThrownBy(() -> new ManualLottoCount(input, lottoMoney))
+		assertThatThrownBy(() -> new ManualLottoCount(input, purchasedLottoCount))
 			.isInstanceOf(InvalidManualLottoException.class)
 			.hasMessage(InvalidManualLottoException.NOT_INTEGER);
 	}
@@ -36,7 +40,7 @@ class ManualLottoCountTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"-1"})
 	void constructor_NegativeInteger_ExceptionThrown(String input) {
-		assertThatThrownBy(() -> new ManualLottoCount(input, lottoMoney))
+		assertThatThrownBy(() -> new ManualLottoCount(input, purchasedLottoCount))
 			.isInstanceOf(InvalidManualLottoException.class)
 			.hasMessage(InvalidManualLottoException.NOT_POSITIVE);
 	}
@@ -45,7 +49,7 @@ class ManualLottoCountTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"6"})
 	void constructor_BiggerThanPurchasedLottoCount_ExceptionThrown(String input) {
-		assertThatThrownBy(() -> new ManualLottoCount(input, lottoMoney))
+		assertThatThrownBy(() -> new ManualLottoCount(input, purchasedLottoCount))
 			.isInstanceOf(InvalidManualLottoException.class)
 			.hasMessage(InvalidManualLottoException.OUT_OF_BOUND);
 	}

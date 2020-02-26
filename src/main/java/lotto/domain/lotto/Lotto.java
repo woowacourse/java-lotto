@@ -1,12 +1,14 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import lotto.domain.exception.InvalidLottoException;
+
 public class Lotto {
-	static final int CORRECT_SIZE = 6;
+	public static final int CORRECT_SIZE = 6;
 
 	private final Set<LottoNumber> lottoNumbers;
 
@@ -28,11 +30,11 @@ public class Lotto {
 		}
 	}
 
-	boolean contains(LottoNumber bonusNumber) {
+	public boolean contains(LottoNumber bonusNumber) {
 		return lottoNumbers.contains(bonusNumber);
 	}
 
-	int getMatchCount(Lotto winningLotto) {
+	public int getMatchCount(Lotto winningLotto) {
 		List<LottoNumber> matchLottoNumbers = new ArrayList<>(lottoNumbers);
 		matchLottoNumbers.retainAll(winningLotto.lottoNumbers);
 		return matchLottoNumbers.size();

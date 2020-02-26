@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import static lotto.domain.LottoNumber.*;
+import static lotto.domain.lotto.LottoNumber.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class LottoNumberFactory {
+public class LottoNumberFactory {
 	private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
 	static {
@@ -27,7 +27,7 @@ class LottoNumberFactory {
 		return new LottoNumber(number);
 	}
 
-	static List<LottoNumber> values() {
+	public static List<LottoNumber> values() {
 		return Collections.unmodifiableList(new ArrayList<>(CACHE.values()));
 	}
 }

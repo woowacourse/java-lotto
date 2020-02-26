@@ -3,6 +3,12 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.strategy.AutoLottoPurchaseStrategy;
+import lotto.domain.strategy.LottoPurchaseStrategy;
+import lotto.domain.strategy.ManualLottoPurchaseStrategy;
+
 public class LottoStore {
 	private LottoPurchaseStrategy lottoPurchaseStrategy;
 
