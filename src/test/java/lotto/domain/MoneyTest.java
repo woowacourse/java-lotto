@@ -19,9 +19,7 @@ class MoneyTest {
     @MethodSource("invalidMoneyParameters")
     @DisplayName("정상적이지 않은 Money 값 입력 시 예외를 발생시키는지")
     void moneyUnder1000(String amount, String message) {
-        assertThatThrownBy(() -> {
-            Money.create(amount);
-        }).isInstanceOf(InvalidMoneyException.class);
+        assertThatThrownBy(() -> Money.create(amount)).isInstanceOf(InvalidMoneyException.class);
     }
 
     static Stream<Arguments> invalidMoneyParameters() {
@@ -42,5 +40,12 @@ class MoneyTest {
     @CsvSource({"5200,200", "5000,0"})
     void change(String amount, int expectedChange) {
         assertThat(Money.create(amount).change()).isEqualTo(expectedChange);
+    }
+
+    @ParameterizedTest
+    @DisplayName("지불한 금액이 충분한지")
+    @CsvSource({"1000,1200,false", "2000,1200,true"})
+    void isEnough(String amount, int price, boolean expected) {
+        assertThat(Money.create(amount).isEnough(price)).isEqualTo(expected);
     }
 }

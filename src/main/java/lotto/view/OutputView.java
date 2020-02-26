@@ -12,11 +12,19 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void ticketAmountInstruction(Money money) {
+    public static void manualLottoTicketQuantityInstruction() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void inputManualNumberInstruction() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void ticketAmountInstruction(Money money, int manualTicketQuantity) {
         if (money.changeExists()) {
-            System.out.println("거스름돈 " + money.change() + "원은 돌려드립니다.");
+            System.out.println("\n거스름돈 " + money.change() + "원은 돌려드립니다.");
         }
-        System.out.println(money.ticketQuantity() + "개를 구매했습니다.");
+        System.out.println("\n수동으로 " + manualTicketQuantity + "장, 자동으로 " + money.ticketQuantity() + "장을 구매했습니다.");
     }
 
     public static void lottoTicketList(LottoTickets lottoTickets) {
