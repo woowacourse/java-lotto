@@ -28,6 +28,22 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
+    public static void printUserLottoGameCountFormat(){
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printUserLottoNumbersFormat(){
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printRepeat(LottoGameRepeat repeat) {
+        System.out.println(repeat.toString() + "개를 구매했습니다.");
+    }
+
+    public static void printRepeat(LottoGameRepeat userRepeat, LottoGameRepeat autoRepeat) {
+        System.out.println("수동으로 " + userRepeat.toString() + "장, 자동으로 " + autoRepeat.toString() + "개를 구매했습니다.");
+    }
+
     public static void printLottoNumbers(LottoTicket lottoTicket) {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -65,9 +81,5 @@ public class OutputView {
             printEachResult(rank, result.get(rank));
         }
         System.out.println("총 수익률은 " + money.calculateEarnings(result.calculateGamesEarning()) + "%입니다.");
-    }
-
-    public static void printRepeat(LottoGameRepeat repeat) {
-        System.out.println(repeat.toString() + "개를 구매했습니다.");
     }
 }

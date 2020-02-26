@@ -22,6 +22,24 @@ public class InputView {
         }
     }
 
+    public static int inputUserRepeat() {
+        OutputView.printUserLottoGameCountFormat();
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_NUMBER_FORMAT_MESSAGE);
+        }
+    }
+
+    public static List<Integer> inputUserLottoNumbers() {
+        OutputView.printUserLottoNumbersFormat();
+        try {
+            return splitAndParse(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_NUMBER_FORMAT_MESSAGE);
+        }
+    }
+
     private static List<Integer> splitAndParse(String input) {
         return Arrays.stream(input.split(","))
                 .map(String::trim)
