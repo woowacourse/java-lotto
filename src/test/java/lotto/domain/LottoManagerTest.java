@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,15 +7,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.Lotto;
-import lotto.domain.Money;
-
 public class LottoManagerTest {
 	@Test
-	public void calculateLottoAmountTest(){
-		int amount = LottoManager.calculateLottoAmount(new Money(10_000));
+	public void calculateLottoAmountTest() {
+		long amount = LottoManager.calculateLottoAmount(new Money(10_000));
 
-		assertThat(amount).isEqualTo(10);
+		assertThat(amount).isEqualTo(10L);
 	}
 	@Test
 	public void generateLottoByAmountTest() {

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.controller;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -11,7 +11,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.controller.RankCalculator;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Rank;
+import lotto.domain.WinningNumber;
 
 public class RankCalculatorTest {
 	@ParameterizedTest

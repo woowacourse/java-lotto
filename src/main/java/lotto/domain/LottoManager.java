@@ -1,11 +1,9 @@
-package lotto.controller;
+package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.domain.Lotto;
-import lotto.domain.Money;
 import lotto.utils.NumberGenerator;
 import lotto.utils.NumberParser;
 import lotto.view.InputView;

@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.controller.LottoManager.*;
+import static lotto.domain.LottoManager.*;
 
 import java.util.List;
 
