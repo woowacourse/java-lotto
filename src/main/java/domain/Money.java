@@ -48,7 +48,6 @@ public class Money {
         return this.money / MIN_MONEY;
     }
 
-
     private static double getTotalWinningPrice(Map<RankType, Integer> map) {
         double sum = INIT_SUM_VALUE;
         for (Map.Entry<RankType, Integer> entry : map.entrySet()) {
