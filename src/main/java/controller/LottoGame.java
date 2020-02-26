@@ -37,7 +37,8 @@ public class LottoGame {
     }
 
     private static LottoTickets createLottoTickets(int lottoCount) {
-        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount));
+        Generator randomGenerator = new RandomNumberGenerator();
+        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomGenerator));
         OutputView.printLottoTickets(lottoTickets);
         return lottoTickets;
     }
