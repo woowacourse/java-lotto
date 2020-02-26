@@ -24,13 +24,14 @@ public class OutputView {
 	private static final String PURCHASED_LOTTO_NUMBER_IS = "%d개를 구매했습니다.\n";
 	private static final String ENTER_WINNING_LOTTO_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 	private static final String ENTER_BONUS_BALL_NUMBER_GUIDE_MESSAGE = "보너스 볼을 입력해 주세요.";
-	public static final String RESULT_STATISTIC_MESSAGE = "\n당첨 통계\n--------";
+	private static final String RESULT_STATISTIC_MESSAGE = "\n당첨 통계\n--------";
 	private static final String LOTTO_DELIMITER = ", ";
 	private static final String LOTTO_PREFIX = "[";
 	private static final String LOTTO_SUFFIX = "]";
 	private static final String TOTAL_REVENUE_RATE_IS = "총 수익률은 %d%%입니다.\n";
 	private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
 	private static final String SECOND_WINNING_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개\n";
+	private static final String ENTER_MANUAL_LOTTO_COUNT_GUIDE_MESSAGE = "수동으로 구매할 로또 수를 입력해주세요.";
 
 	public static void askEnterMoneyForLotto() {
 		System.out.println(ENTER_MONEY_FOR_LOTTO_GUIDE_MESSAGE);
@@ -52,6 +53,11 @@ public class OutputView {
 			);
 		}
 		purchasedLottos.forEach(System.out::println);
+	}
+
+
+	public static void askManualLottoCount() {
+		System.out.println(ENTER_MANUAL_LOTTO_COUNT_GUIDE_MESSAGE);
 	}
 
 	public static void askEnterWinningLotto() {

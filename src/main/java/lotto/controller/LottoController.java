@@ -21,9 +21,9 @@ import lotto.view.OutputView;
 public class LottoController {
 	public static void run() {
 		MoneyForLotto moneyForLotto = receiveMoneyForLotto();
-		int amountOfLottos = moneyForLotto.calculateAmountOfLottos();
-		Lottos lottos = LottosFactory.createLottosAuto(amountOfLottos);
-		OutputView.printPurchasedLottos(amountOfLottos, lottos);
+		LottoCount lottoCount = receiveLottoCount(moneyForLotto);
+		Lottos lottos = LottosFactory.createLottosAuto(lottoCount.getTotalLottoCount());
+		OutputView.printPurchasedLottos(lottoCount.getTotalLottoCount(), lottos);
 
 		WinningLotto winningLotto = receiveWinningLotto();
 		BonusLottoNumber bonusLottoNumber = receiveBonusLottoNumber(winningLotto);
@@ -38,6 +38,15 @@ public class LottoController {
 		} catch (InvalidMoneyForLottoException | NullPointerException e) {
 			OutputView.printExceptionMessage(e);
 			return receiveMoneyForLotto();
+		}
+	}
+
+	private static LottoCount receiveLottoCount(MoneyForLotto moneyForLotto) {
+		try {
+			return new LottoCount(moneyForLotto.calculateAmountOfLottos(), InputView.getManualLottoCount());
+		} catch (IllegalArgumentException | NullPointerException | InvalidLottoNumberException e) {
+			OutputView.printExceptionMessage(e);
+			return receiveLottoCount(moneyForLotto);
 		}
 	}
 

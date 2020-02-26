@@ -41,4 +41,12 @@ public class LottoCount {
 		}
 	}
 
+	public int getTotalLottoCount() {
+		return this.totalLottoCount;
+	}
+
+	public int getManaualLottoCount() {
+		return this.manaualLottoCount;
+	}
+
 }

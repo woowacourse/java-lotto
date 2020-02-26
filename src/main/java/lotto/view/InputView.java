@@ -18,6 +18,11 @@ public class InputView {
 		return SCANNER.nextLine();
 	}
 
+	public static String getManualLottoCount() {
+		OutputView.askManualLottoCount();
+		return SCANNER.nextLine();
+	}
+
 	public static String getWinningLotto() {
 		OutputView.askEnterWinningLotto();
 		return SCANNER.nextLine();
