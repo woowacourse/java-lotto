@@ -19,7 +19,7 @@ public class LottoController {
 		RandomLottoTicketFactory randomLottoTicketFactory =
 				new RandomLottoTicketFactory(new RandomLottoNumbersGenerator());
 		PurchasedLottoTickets purchasedLottoTickets
-				= PurchasedLottoTicketsFactory.of(purchaseMoney, randomLottoTicketFactory);
+				= PurchasedLottoTicketsFactory.of(autoTicketNumber, randomLottoTicketFactory);
 		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 
 		WinningInformation winningInformation = createWinningInformation();
