@@ -29,9 +29,10 @@ public class LottoTicket {
 	}
 
 	public MatchResult matchAll(WinningLotto winningLotto) {
-		return new MatchResult(lottoTicket.stream()
+		return lottoTicket.stream()
 				.map(winningLotto::match)
-				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+				.collect(Collectors.collectingAndThen(Collectors.groupingBy(Function.identity(), Collectors.counting()),
+						MatchResult::new));
 	}
 
 	public int size() {
