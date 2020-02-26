@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoController {
-
     public void play() {
         PurchaseAmount purchaseAmount = generatePurchaseAmount();
         LottoTicketNumber lottoTicketNumber = InputView.inputManualTicketNumber(purchaseAmount);
@@ -30,6 +29,7 @@ public class LottoController {
 
     private LottoTickets generateLottoTickets(int manualLottoTicketNumber, LottoStore lottoStore){
         List<String> manualLottoBallsInputs = new ArrayList<>();
+        OutputView.printManualLottoBallsGuide();
         for (int i = 0; i < manualLottoTicketNumber; i++){
             manualLottoBallsInputs.add(InputView.InputWinningBallsAndManualLottoBalls());
         }

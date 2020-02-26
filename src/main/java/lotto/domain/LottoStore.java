@@ -38,7 +38,6 @@ public class LottoStore {
     }
 
     private void generateManualLottoTickets(List<String> manualLottoBallsInputs) {
-        OutputView.printManualLottoBallsGuide();
         manualLottoBallsInputs.stream().map(this::generateManualLottoTicket).forEach(lottoTickets::addLottoTicket);
     }
 
