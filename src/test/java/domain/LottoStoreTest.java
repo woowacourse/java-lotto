@@ -10,6 +10,6 @@ public class LottoStoreTest {
     @Test
     @DisplayName("티켓들 생성")
     void generateRandomTicket() {
-        assertThat(LottoStore.generateTickets(10).size()).isEqualTo(10);
+        assertThat(LottoStore.createTickets(10).size()).isEqualTo(10);
     }
 }

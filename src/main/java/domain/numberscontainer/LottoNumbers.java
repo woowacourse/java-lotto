@@ -2,14 +2,14 @@ package domain.numberscontainer;
 
 import java.util.Set;
 
-public class SixLottoNumbers {
+public class LottoNumbers {
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    protected final Set<LottoNumber> sixLottoNumbers;
+    protected final Set<LottoNumber> lottoNumbers;
 
-    public SixLottoNumbers(SixLottoNumbersDTO sixLottoNumbersDTO) {
-        validateSize(sixLottoNumbersDTO.getSixNumbers());
-        this.sixLottoNumbers = sixLottoNumbersDTO.getSixNumbers();
+    public LottoNumbers(LottoNumbersDto lottoNumbersDto) {
+        validateSize(lottoNumbersDto.getLottoNumbers());
+        this.lottoNumbers = lottoNumbersDto.getLottoNumbers();
     }
 
     protected void validateSize(Set<LottoNumber> lottoNumbers) {

@@ -6,10 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -18,9 +14,9 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("당첨 번호 객체 생성")
     void winningNumberConstructor() {
-        SixLottoNumbersDTO sixLottoNumbersDTO = createSixNumbersDto(1, 2, 3, 4, 5, 5);
+        LottoNumbersDto lottoNumbersDto = createSixNumbersDto(1, 2, 3, 4, 5, 5);
         BonusNumberDTO bonusNumberDTO = new BonusNumberDTO("7");
-        assertThatThrownBy(() -> new WinningNumbers(sixLottoNumbersDTO, bonusNumberDTO))
+        assertThatThrownBy(() -> new WinningNumbers(lottoNumbersDto, bonusNumberDTO))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("6개의 숫자를 입력해주세요.");
     }
@@ -29,9 +25,9 @@ public class WinningNumbersTest {
     @ValueSource(strings = {"1", "5"})
     @DisplayName("중복 없는 보너스 번호인지 검증")
     void validateBonusNumber(String input) {
-        SixLottoNumbersDTO sixLottoNumbersDTO = createSixNumbersDto(1, 2, 3, 4, 5, 6);
+        LottoNumbersDto lottoNumbersDto = createSixNumbersDto(1, 2, 3, 4, 5, 6);
         BonusNumberDTO bonusNumberDTO = new BonusNumberDTO(input);
-        assertThatThrownBy(() -> new WinningNumbers(sixLottoNumbersDTO, bonusNumberDTO))
+        assertThatThrownBy(() -> new WinningNumbers(lottoNumbersDto, bonusNumberDTO))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageEndingWith("보너스 번호를 입력해주세요.");
     }
@@ -48,11 +44,11 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("Ticket과 당첨 번호 비교")
     void findDuplicatedNumbers() {
-        SixLottoNumbersDTO sixLottoNumbersDTO1 = createSixNumbersDto(1, 2, 3, 4, 5, 6);
+        LottoNumbersDto lottoNumbersDto1 = createSixNumbersDto(1, 2, 3, 4, 5, 6);
         BonusNumberDTO bonusNumberDTO = new BonusNumberDTO("7");
-        SixLottoNumbersDTO sixLottoNumbersDTO2 = createSixNumbersDto(4, 5, 6, 7, 8, 9);
-        WinningNumbers winningNumbers = new WinningNumbers(sixLottoNumbersDTO1, bonusNumberDTO);
-        Ticket ticket = new Ticket(sixLottoNumbersDTO2);
+        LottoNumbersDto lottoNumbersDto2 = createSixNumbersDto(4, 5, 6, 7, 8, 9);
+        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbersDto1, bonusNumberDTO);
+        Ticket ticket = new Ticket(lottoNumbersDto2);
         assertThat((winningNumbers.findDuplicatedNumbers(ticket))).isEqualTo(3);
     }
 
@@ -69,7 +65,7 @@ public class WinningNumbersTest {
         assertThat(winningNumbers.getLottoResult(new Ticket(createSixNumbersDto(10, 11, 12, 13, 14, 15)))).isEqualTo(LottoResult.FAILED);
     }
 
-    private SixLottoNumbersDTO createSixNumbersDto(int number1, int number2, int number3, int number4, int number5, int number6) {
-        return new SixLottoNumbersDTO(String.format("%d, %d, %d, %d, %d, %d", number1, number2, number3, number4, number5, number6));
+    private LottoNumbersDto createSixNumbersDto(int number1, int number2, int number3, int number4, int number5, int number6) {
+        return new LottoNumbersDto(String.format("%d, %d, %d, %d, %d, %d", number1, number2, number3, number4, number5, number6));
     }
 }

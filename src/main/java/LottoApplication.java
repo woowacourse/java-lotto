@@ -1,6 +1,6 @@
 import domain.*;
 import domain.numberscontainer.BonusNumberDTO;
-import domain.numberscontainer.SixLottoNumbersDTO;
+import domain.numberscontainer.LottoNumbersDto;
 import domain.numberscontainer.Ticket;
 import domain.numberscontainer.WinningNumbers;
 import view.InputView;
@@ -8,12 +8,13 @@ import view.OutputView;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        Money money = new Money(enterMoney());
-        List<Ticket> tickets = LottoStore.generateTickets(money.getNumberOfTickets());
-        OutputView.printNumberOfTickets(tickets.size());
+        final Money money = new Money(InputView.enterMoney());
+        final List<Ticket> tickets = LottoStore.createTickets(money.getTotalTicketSize(), parseDTO());
+        OutputView.printNumberOfTickets(LottoStore.getRandomTicketSize(), 수동티켓사이즈);
         OutputView.printTickets(tickets);
 
         WinningNumbers winningNumbers = enterWinningNumbers();
@@ -22,20 +23,17 @@ public class LottoApplication {
         OutputView.printProfit(LottoProfit.ofProfit(result, money));
     }
 
-    private static String enterMoney() {
-        try {
-            return InputView.enterMoney();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return enterMoney();
-        }
+    private static List<LottoNumbersDto> parseDTO() {
+        return InputView.enterManualTickets(Integer.parseInt(InputView.enterManualTicketSize())).stream()
+                .map(LottoNumbersDto::new)
+                .collect(Collectors.toList());
     }
 
     private static WinningNumbers enterWinningNumbers() {
         try {
-            SixLottoNumbersDTO sixLottoNumbersDTO = new SixLottoNumbersDTO(InputView.enterLastWeekWinningNumbers());
+            LottoNumbersDto lottoNumbersDto = new LottoNumbersDto(InputView.enterLastWeekWinningNumbers());
             BonusNumberDTO bonusNumberDTO = new BonusNumberDTO(InputView.enterBonusNumber());
-            return new WinningNumbers(sixLottoNumbersDTO, bonusNumberDTO);
+            return new WinningNumbers(lottoNumbersDto, bonusNumberDTO);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return enterWinningNumbers();

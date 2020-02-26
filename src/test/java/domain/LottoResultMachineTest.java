@@ -13,9 +13,9 @@ public class LottoResultMachineTest {
     @DisplayName("당첨 결과 계산")
     void test1() {
         Money money = new Money("10000");
-        List<Ticket> tickets = LottoStore.generateTickets(money.getNumberOfTickets(), createFixedNumbersList());
+        List<Ticket> tickets = LottoStore.createTickets(money.getTotalTicketSize(), createFixedNumbersList());
 
-        SixLottoNumbersDTO sixNumbers = createFixedNumbers(3, 4, 5, 6, 7, 8);
+        LottoNumbersDto sixNumbers = createFixedNumbers(3, 4, 5, 6, 7, 8);
         WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, new BonusNumberDTO("9"));
         Map<LottoResult, Integer> lottoResults = LottoResultMachine.confirmResult(tickets, winningNumbers);
 
@@ -31,16 +31,16 @@ public class LottoResultMachineTest {
     @DisplayName("수익률 계산")
     void test2() {
         Money money = new Money("10000");
-        List<Ticket> tickets = LottoStore.generateTickets(money.getNumberOfTickets(), createFixedNumbersList());
+        List<Ticket> tickets = LottoStore.createTickets(money.getTotalTicketSize(), createFixedNumbersList());
 
-        SixLottoNumbersDTO sixNumbers = createFixedNumbers(3, 4, 5, 6, 7, 8);
+        LottoNumbersDto sixNumbers = createFixedNumbers(3, 4, 5, 6, 7, 8);
         WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, new BonusNumberDTO("9"));
         Map<LottoResult, Integer> lottoResults = LottoResultMachine.confirmResult(tickets, winningNumbers);
         LottoProfit profit = LottoProfit.ofProfit(lottoResults, money);
         assertThat(profit.getValue()).isEqualTo(20631000);
     }
 
-    private List<SixLottoNumbersDTO> createFixedNumbersList() {
+    private List<LottoNumbersDto> createFixedNumbersList() {
         return Arrays.asList(createFixedNumbers(3, 4, 5, 6, 7, 8),  //1등
                 createFixedNumbers(3, 4, 5, 6, 7, 9),               //2등
                 createFixedNumbers(3, 4, 5, 6, 7, 10),              //3등
@@ -53,7 +53,7 @@ public class LottoResultMachineTest {
                 createFixedNumbers(16, 17, 18, 19, 20, 21));        //당첨 x
     }
 
-    private SixLottoNumbersDTO createFixedNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
-        return new SixLottoNumbersDTO(String.format("%d, %d, %d, %d, %d, %d", number1, number2, number3, number4, number5, number6));
+    private LottoNumbersDto createFixedNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
+        return new LottoNumbersDto(String.format("%d, %d, %d, %d, %d, %d", number1, number2, number3, number4, number5, number6));
     }
 }

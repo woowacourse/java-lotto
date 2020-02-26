@@ -2,6 +2,7 @@ package domain;
 
 public class Money {
     private static final String NUMBER_REGEX = "^[+-]?[0-9]+$";
+    public static final int MONEY_UNIT = 1000;
 
     private final int money;
 
@@ -22,12 +23,12 @@ public class Money {
         }
     }
 
-    public int getNumberOfTickets() {
+    public int getTotalTicketSize() {
         return this.money / 1000;
     }
 
     private void validateMoneyUnit(int money) {
-        if (money % 1000 != 0) {
+        if (money % MONEY_UNIT != 0) {
             throw new IllegalArgumentException("천 원 단위로만 구매 가능합니다.");
         }
     }

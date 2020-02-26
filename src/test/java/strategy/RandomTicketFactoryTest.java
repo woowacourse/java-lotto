@@ -12,7 +12,7 @@ class RandomTicketFactoryTest {
     @Test
     @DisplayName("랜덤 티켓 생성")
     void generateRandomTicket() {
-        assertThatCode(() -> RandomTicketFactory.createTicket())
+        assertThatCode(RandomTicketFactory::createTicket)
                 .doesNotThrowAnyException();
     }
 }

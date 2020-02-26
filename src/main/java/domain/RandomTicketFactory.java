@@ -1,7 +1,7 @@
 package domain;
 
 import domain.numberscontainer.LottoNumber;
-import domain.numberscontainer.SixLottoNumbersDTO;
+import domain.numberscontainer.LottoNumbersDto;
 import domain.numberscontainer.Ticket;
 
 import java.util.*;
@@ -11,13 +11,13 @@ public class RandomTicketFactory {
     private static final int SIXTH_INDEX = 6;
 
     public static Ticket createTicket() {
-        return new Ticket(new SixLottoNumbersDTO(getShuffledList()));
+        return new Ticket(getShuffledList());
     }
 
-    private static Set<LottoNumber> getShuffledList() {
+    private static LottoNumbersDto getShuffledList() {
         List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.values());
         Collections.shuffle(lottoNumbers);
 
-        return new HashSet<>(lottoNumbers.subList(FIRST_INDEX, SIXTH_INDEX));
+        return new LottoNumbersDto(new LinkedHashSet<>(lottoNumbers.subList(FIRST_INDEX, SIXTH_INDEX)));
     }
 }

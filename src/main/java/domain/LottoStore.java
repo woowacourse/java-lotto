@@ -1,6 +1,6 @@
 package domain;
 
-import domain.numberscontainer.SixLottoNumbersDTO;
+import domain.numberscontainer.LottoNumbersDto;
 import domain.numberscontainer.Ticket;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  */
 public class LottoStore {
 
-    public static List<Ticket> generateTickets(int ticketSize) {
+    public static List<Ticket> createTickets(int ticketSize) {
         List<Ticket> tickets = new ArrayList<>();
 
         for (int i = 0; i < ticketSize; i++) {
@@ -21,18 +21,18 @@ public class LottoStore {
         return tickets;
     }
 
-    public static List<Ticket> generateTickets(int ticketSize, List<SixLottoNumbersDTO> givenNumbers) {
+    public static List<Ticket> createTickets(int totalTicketSize, List<LottoNumbersDto> givenNumbers) {
         List<Ticket> tickets = givenNumbers.stream()
                 .map(Ticket::new)
                 .collect(Collectors.toList());
 
-        int randomTicketsSize = getRandomTicketSize(ticketSize, givenNumbers.size());
-        tickets.addAll(generateTickets(randomTicketsSize));
+        int randomTicketsSize = getRandomTicketSize(totalTicketSize, givenNumbers.size());
+        tickets.addAll(createTickets(randomTicketsSize));
 
         return tickets;
     }
 
-    private static int getRandomTicketSize(int totalTicketSize, int manualTicketSize) {
+    public static int getRandomTicketSize(int totalTicketSize, int manualTicketSize) {
         return totalTicketSize - manualTicketSize;
     }
 }
