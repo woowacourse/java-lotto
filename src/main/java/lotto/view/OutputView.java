@@ -17,7 +17,7 @@ public class OutputView {
     public static void printLottoTickets(List<LottoTicketDTO> lottoTicketDTOS) {
         System.out.println(String.format(MESSAGE_FOR_LOTTO_TICKET_NUMBER, lottoTicketDTOS.size()));
         for (LottoTicketDTO dto : lottoTicketDTOS) {
-            System.out.println(String.format(MESSAGE_FOR_LOTTO_TICKET_INFO, dto.getNumbers()));
+            System.out.println(String.format(MESSAGE_FOR_LOTTO_TICKET_INFO, dto.getNumbers().toArray()));
         }
         System.out.println();
     }
