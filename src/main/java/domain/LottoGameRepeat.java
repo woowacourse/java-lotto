@@ -16,14 +16,18 @@ public class LottoGameRepeat {
         }
     }
 
-    public boolean checkLoopTerminate(int count) {
-        return count < repeat;
-    }
-
     private void validateSplitValue(int repeat) {
         if (repeat > this.repeat) {
             throw new IllegalArgumentException(ERROR_OUTBOUND_MESSAGE);
         }
+    }
+
+    public boolean checkRepeatPositive(){
+        return repeat > 0;
+    }
+
+    public boolean checkLoopTerminate(int count) {
+        return count < repeat;
     }
 
     public LottoGameRepeat splitLottoGameCount(int repeat) {

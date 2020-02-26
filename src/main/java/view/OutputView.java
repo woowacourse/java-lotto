@@ -48,8 +48,7 @@ public class OutputView {
     }
 
     public static void printLottoTicket(LottoTicket lottoTicket) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
+        StringBuilder stringBuilder = new StringBuilder("[");
         stringBuilder.append(lottoTicket.getLottoNumbers()
                 .stream()
                 .map(LottoNumber::toString)
