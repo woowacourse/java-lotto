@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static lotto.domain.count.CountTest.getCountFixture;
 
-public class LottoTicketFactoryTest {
+public class LottoFactoryTest {
 
     @Test
     void testLottoFactoryTest() {
         Count count = getCountFixture();
-        LottoTickets lottoTickets = LottoTicketFactory.publishLottoTickets(count);
+        LottoTickets lottoTickets = LottoFactory.publishLottoTickets(count);
     }
 }

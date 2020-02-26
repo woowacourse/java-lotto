@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.count.Count;
-import lotto.domain.lotto.LottoTicketFactory;
+import lotto.domain.lotto.LottoFactory;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.money.LottoMoney;
@@ -17,8 +17,7 @@ public class Application {
     public static void main(String[] args) {
         LottoMoney lottoMoney = new LottoMoney(InputView.inputLottoMoney());
         Count count = new Count(lottoMoney.getLottoPurchaseCounts(), InputView.inputManualCounts());
-
-        LottoTickets lottoTickets = LottoTicketFactory.publishLottoTickets(count);
+        LottoTickets lottoTickets = LottoFactory.publishLottoTickets(count);
         OutputView.printLottoTickets(lottoTickets);
         WinningLotto winningLotto = lottoService.createWinningLotto(InputView.inputWinningLotto());
         LottoResult lottoResult = lottoTickets.getLottoResults(winningLotto);
