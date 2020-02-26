@@ -1,5 +1,6 @@
 package lotto.domain.result;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,11 +13,12 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class RankTest {
+class RankTest {
 
     @ParameterizedTest
     @MethodSource("createRank")
-    void testRank(Rank rank, Rank rankExpected) {
+    @DisplayName("Rank는 일치하는 번호 수와 보너스 일치 여부를 받아서 Rank 반환")
+    void rankValueOf(Rank rank, Rank rankExpected) {
         assertThat(rank).isEqualTo(rankExpected);
     }
 
@@ -33,7 +35,8 @@ public class RankTest {
 
     @ParameterizedTest
     @MethodSource("getRank")
-    void testRankGetMatches(int counOfMatches, Rank rank) {
+    @DisplayName("각 rank는 몇개가 일치하는지 반환")
+    void getCountOfMatches(int counOfMatches, Rank rank) {
         assertThat(rank.getCountOfMatches()).isEqualTo(counOfMatches);
     }
 
@@ -50,7 +53,8 @@ public class RankTest {
 
     @ParameterizedTest
     @MethodSource("getWinningMoney")
-    void testRankGetWinningMoneyTest(int winningMoney, Rank rank) {
+    @DisplayName("Rank의 우승 상금을 반환")
+    void getWinningMoney(int winningMoney, Rank rank) {
         assertThat(rank.getWinningMoney()).isEqualTo(winningMoney);
     }
 
@@ -66,26 +70,16 @@ public class RankTest {
     }
 
     @Test
-    void testRankException() {
+    @DisplayName("rank 반환시 일치하는 개수가 6개를 초과하면 예외 발생")
+    void rankValueOfCountOverSixThrowsException() {
         assertThatThrownBy(() -> Rank.valueOf(10, false))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    public static List<Rank> getRanksFixture() {
-        List<Rank> ranks = new ArrayList<>();
-        for (int i = 0; i < 1000000; i++) {
-            ranks.add(Rank.FIRST);
-        }
-        return ranks;
-    }
-
-    public static List<Rank> getRanksFromThirdToFifthFixture() {
-        List<Rank> ranks = new ArrayList<>();
-
-        ranks.add(Rank.THIRD);
-        ranks.add(Rank.FOURTH);
-        ranks.add(Rank.FIFTH);
-
-        return ranks;
+    @Test
+    @DisplayName("rank 반환시 일치하는 개수가 0개 미만이면 예외 발생")
+    void rankValueOfCountUnderZeroThrowsException() {
+        assertThatThrownBy(() -> Rank.valueOf(-1, false))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
