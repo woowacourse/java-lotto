@@ -60,9 +60,9 @@ public class LottoTicketFactory {
         return LOTTO_NUMBER_MATCHER.get(number);
     }
 
-    public static WinningLotto publishWinningLotto(WinningLottoDto winningLottoDto) {
-        LottoTicket lottoTicket = publishLottoTicketFrom(winningLottoDto.getNumbers());
-        LottoNumber lottoNumber = publishLottoNumberFrom(winningLottoDto.getNumber());
+    public static WinningLotto publishWinningLotto(Set<Integer> lottoNumbers, Integer bonusNumber) {
+        LottoTicket lottoTicket = publishLottoTicketFrom(lottoNumbers);
+        LottoNumber lottoNumber = publishLottoNumberFrom(bonusNumber);
         return new WinningLotto(lottoTicket, lottoNumber);
     }
 }
