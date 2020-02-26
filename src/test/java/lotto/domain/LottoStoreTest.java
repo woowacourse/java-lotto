@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoStoreTest {
@@ -10,8 +12,9 @@ public class LottoStoreTest {
     @DisplayName("로또가 자동으로 생성되는지 확인하는 테스트")
     void correct_lotto_ticket_test() {
         PurchaseAmount purchaseAmount = new PurchaseAmount("5000");
-        LottoStore lottoStore = new LottoStore(purchaseAmount);
-        LottoTickets lottoTickets = lottoStore.getLottoTickets();
+        LottoTicketNumber lottoTicketNumber = new LottoTicketNumber(purchaseAmount.giveLottoTicketNumber(), 0);
+        LottoStore lottoStore = new LottoStore(lottoTicketNumber);
+        LottoTickets lottoTickets = lottoStore.generateLottoTickets(new ArrayList<>());
         assertThat(lottoTickets.getLottoTickets()).hasSize(5);
     }
 }

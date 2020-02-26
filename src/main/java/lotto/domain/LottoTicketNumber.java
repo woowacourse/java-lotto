@@ -21,4 +21,12 @@ public class LottoTicketNumber {
             throw new NumberOutOfRangeException(OUT_OF_LOTTO_TICKET_NUMBER_ERROR_MESSAGE);
         }
     }
+
+    public int getAutomaticLottoTicketNumber() {
+        return automaticLottoTicketNumber;
+    }
+
+    public int getManualLottoTicketNumber() {
+        return manualLottoTicketNumber;
+    }
 }

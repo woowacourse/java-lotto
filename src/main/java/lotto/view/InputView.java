@@ -1,55 +1,47 @@
 package lotto.view;
 
-import lotto.Exception.DuplicationException;
 import lotto.Exception.NotBuyLottoTicketException;
 import lotto.Exception.NotPositiveNumberException;
 import lotto.Exception.NumberOutOfRangeException;
 import lotto.domain.LottoBall;
 import lotto.domain.LottoBallFactory;
-import lotto.domain.LottoBalls;
+import lotto.domain.LottoTicketNumber;
 import lotto.domain.PurchaseAmount;
 import lotto.util.InputValidationUtil;
 
 import java.util.Scanner;
-import java.util.Set;
 
 public class InputView {
     static Scanner scanner = new Scanner(System.in);
 
-    private InputView() { }
+    private InputView() {
+    }
 
     public static PurchaseAmount inputPurchaseAmount() {
         try {
             OutputView.printStartGuide();
             String purchaseAmount = scanner.nextLine();
             return new PurchaseAmount(purchaseAmount);
-        } catch (NotBuyLottoTicketException e) {
+        } catch (NotBuyLottoTicketException | NumberFormatException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputPurchaseAmount();
         }
     }
 
-    public static int inputManualTicketNumber() {
+    public static LottoTicketNumber inputManualTicketNumber(PurchaseAmount purchaseAmount) {
         try {
             OutputView.printManualTicketNumberGuide();
             int manualTicketNumber = InputValidationUtil.returnNumberWithNumberCheck(scanner.nextLine());
             InputValidationUtil.isPositiveNumber(manualTicketNumber);
-            return manualTicketNumber;
-        }catch (NumberFormatException | NotPositiveNumberException e){
+            return new LottoTicketNumber(purchaseAmount.giveLottoTicketNumber(), manualTicketNumber);
+        } catch (NumberFormatException | NotPositiveNumberException | NumberOutOfRangeException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return inputManualTicketNumber();
+            return inputManualTicketNumber(purchaseAmount);
         }
     }
 
-    public static Set<LottoBall> InputWinningBalls() {
-        try {
-            OutputView.printAnswerWinningBalls();
-            String winningBalls = scanner.nextLine();
-            return LottoBalls.generateLottoBalls(winningBalls);
-        } catch (NumberOutOfRangeException | DuplicationException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return InputWinningBalls();
-        }
+    public static String InputWinningBallsAndManualLottoBalls() {
+        return scanner.nextLine();
     }
 
     public static LottoBall InputBonusBall() {

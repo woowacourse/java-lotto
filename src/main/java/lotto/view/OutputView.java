@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private OutputView(){ }
+    private OutputView() {
+    }
 
     public static void printErrorMessage(String errorMessage) {
         System.err.println(errorMessage);
@@ -20,7 +21,13 @@ public class OutputView {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 
-    public static void printLottePieces(int lottoPieces) { System.out.printf("%d개를 구매했습니다.%n", lottoPieces); }
+    public static void printManualLottoBallsGuide() {
+        System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
+    }
+
+    public static void printAnswerLottoTicketNumber(LottoTicketNumber lottoTicketNumber) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다. \n", lottoTicketNumber.getManualLottoTicketNumber(), lottoTicketNumber.getAutomaticLottoTicketNumber());
+    }
 
     public static void printChangeMoney(int changeMoney) {
         System.out.printf("거스름돈은 %d원 입니다.%n", changeMoney);
