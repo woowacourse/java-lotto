@@ -44,7 +44,7 @@ public class Money {
         }
     }
 
-    public int calculateLottoTicket() {
+    public int countLottoTicket() {
         return this.money / MIN_MONEY;
     }
 

@@ -6,15 +6,13 @@ import java.util.stream.IntStream;
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER_RANGE = 1;
     private static final int MAX_LOTTO_NUMBER_RANGE = 45;
-    private static final int START_LOTTO_RANGE = 1;
-    private static final int END_LOTTO_RANGE = 45;
-
     private static final String MAKE_STR = "";
-    private static final Map<Integer, LottoNumber> originalLottoMap = new HashMap<>();
+
+    private static final Map<Integer, LottoNumber> lottoNumberPool = new HashMap<>();
 
     static {
-        IntStream.rangeClosed(START_LOTTO_RANGE, END_LOTTO_RANGE)
-                .forEach(number -> originalLottoMap.put(number, new LottoNumber(number)));
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER_RANGE, MAX_LOTTO_NUMBER_RANGE)
+                .forEach(number -> lottoNumberPool.put(number, new LottoNumber(number)));
     }
 
     private int lottoNumber;
@@ -54,6 +52,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber getLottoNumber(int number) {
-        return originalLottoMap.get(number);
+        return lottoNumberPool.get(number);
     }
 }

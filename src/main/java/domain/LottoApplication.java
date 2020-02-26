@@ -7,13 +7,22 @@ public class LottoApplication {
     public static void run() {
         Money money = inputMoney();
         LottoTickets lottoTickets = generateLottoTicketsByMoney(money);
-        OutputView.printBuyTicketCount(money.calculateLottoTicket());
-        OutputView.printLottoTickets(lottoTickets.getLottoTickets());
-        OutputView.printWinningStatistics(LottoManager.match(lottoTickets, inputWinningLottoTicket()).getLottoResults(), money.getMoney());
+        LottoTicketsStatus(money, lottoTickets);
+        LottoTicketsResult(money, lottoTickets);
+    }
+
+    public static void LottoTicketsResult(Money money, LottoTickets lottoTickets) {
+        OutputView.printWinningStatistics(LottoManager.match(lottoTickets, inputWinningLottoTicket()), money);
+
+    }
+
+    public static void LottoTicketsStatus(Money money, LottoTickets lottoTickets) {
+        OutputView.printBuyTicketCount(money.countLottoTicket());
+        OutputView.printLottoTickets(lottoTickets);
     }
 
     public static LottoTickets generateLottoTicketsByMoney(Money money) {
-        return new LottoTickets(LottoNumbersGenerator.generateLottoTickets(money.calculateLottoTicket()));
+        return new LottoTickets(LottoNumbersGenerator.generateLottoTickets(money.countLottoTicket()));
     }
 
     public static Money inputMoney() {

@@ -17,7 +17,7 @@ public class MoneyTest {
     @CsvSource(value = {"1500,1", "11000,11", "12345,12"}, delimiter = ',')
     public void calculateLottoTicketTest(String input, int expected) {
         Money money = new Money(input);
-        Assertions.assertThat(money.calculateLottoTicket()).isEqualTo(expected);
+        Assertions.assertThat(money.countLottoTicket()).isEqualTo(expected);
     }
 
     private static Stream<String> MoneySetUp() {
