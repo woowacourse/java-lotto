@@ -26,8 +26,8 @@ public class LottoStore {
 
 	public static List<Lotto> buy(LottoPurchaseMoney lottoPurchaseMoney, List<String> manual) {
 		lottoPurchaseMoney.spend(manual.size());
-		return manual.stream().
-				map(LottoFactory::create)
+		return manual.stream()
+				.map(LottoFactory::create)
 				.collect(Collectors.toList());
 	}
 }
