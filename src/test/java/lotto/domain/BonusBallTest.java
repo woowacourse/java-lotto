@@ -20,9 +20,9 @@ public class BonusBallTest {
 		Lotto lotto = new Lotto(numbers);
 
 		BonusBall bonusBall = new BonusBall("3");
-		assertThat(bonusBall.isContainBonusBall(lotto)).isTrue();
+		assertThat(bonusBall.isMatch(lotto)).isTrue();
 
 		bonusBall = new BonusBall("9");
-		assertThat(bonusBall.isContainBonusBall(lotto)).isFalse();
+		assertThat(bonusBall.isMatch(lotto)).isFalse();
 	}
 }

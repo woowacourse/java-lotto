@@ -35,13 +35,13 @@ public class Lotto {
 		return new HashSet<>(lottoNumbers).size() != LOTTO_SIZE;
 	}
 
-	public boolean isContain(LottoNo lottoNo) {
+	public boolean contain(LottoNo lottoNo) {
 		return lottoNumbers.contains(lottoNo);
 	}
 
 	public int compare(Lotto lotto) {
 		return (int)this.lottoNumbers.stream()
-			.filter(x -> lotto.isContain(x))
+			.filter(x -> lotto.contain(x))
 			.count();
 	}
 

@@ -26,8 +26,8 @@ public class LottoTest {
 	@Test
 	void isContain() {
 		Lotto lotto = new Lotto(numbers);
-		assertThat(lotto.isContain(new LottoNo("1"))).isTrue();
-		assertThat(lotto.isContain(new LottoNo("7"))).isFalse();
+		assertThat(lotto.contain(new LottoNo("1"))).isTrue();
+		assertThat(lotto.contain(new LottoNo("7"))).isFalse();
 	}
 
 	@DisplayName("로또 번호의 개수가 6개인지 검사")

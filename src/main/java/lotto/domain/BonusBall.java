@@ -7,7 +7,7 @@ public class BonusBall {
 		this.bonusBall = new LottoNo(bonusBall);
 	}
 
-	public boolean isContainBonusBall(Lotto lotto) {
-		return lotto.isContain(this.bonusBall);
+	public boolean isMatch(Lotto lotto) {
+		return lotto.contain(this.bonusBall);
 	}
 }
