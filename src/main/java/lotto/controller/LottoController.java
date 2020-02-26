@@ -9,6 +9,7 @@ import lotto.domain.Money;
 import lotto.domain.WinningTicket;
 import lotto.exceptions.InvalidLottoNumberException;
 import lotto.exceptions.InvalidLottoTicketException;
+import lotto.exceptions.InvalidManualQuantityException;
 import lotto.exceptions.InvalidMoneyException;
 import lotto.exceptions.InvalidWinningTicketException;
 import lotto.view.InputView;
@@ -18,12 +19,26 @@ public class LottoController {
 
     public static void run() {
         Money money = getMoney();
+        int manualQuantity = getManualQuantity(money);
+        // OutputView.inputManualNumbersInstruction();
+        // InputView.getManualNumbers(manualQuantity);
         LottoTickets lottoTickets = getLottoTickets(money);
         LottoTicket winningNumbers = getWinningNumbers();
         WinningTicket winningTicket = getWinningTicketWithBonusNumber(winningNumbers);
         LottoResult lottoResult = lottoTickets.match(winningTicket);
         OutputView.prizeStatistics(lottoResult);
         OutputView.profitRate(lottoResult.calculateRate(money));
+    }
+
+    private static int getManualQuantity(Money money) {
+        try {
+            OutputView.changeInstruction(money);
+            OutputView.inputManualQuantityInstruction();
+            return money.getValidatedManualQuantity(InputView.getManualQuantity());
+        } catch (InvalidManualQuantityException e) {
+            OutputView.errorMessage(e.getMessage());
+            return getManualQuantity(money);
+        }
     }
 
     private static WinningTicket getWinningTicketWithBonusNumber(LottoTicket winningLotto) {

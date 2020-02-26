@@ -47,7 +47,7 @@ public class Money {
         return amount - calculateTicketQuantity() * TICKET_PRICE;
     }
 
-    int getValidatedManualQuantity(String manualQuantity) {
+    public int getValidatedManualQuantity(String manualQuantity) {
         int parsedQuantity = parseQuantityToInteger(manualQuantity);
         validateQuantity(parsedQuantity);
         return parsedQuantity;
