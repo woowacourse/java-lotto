@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import lotto.domain.exception.InvalidLottoException;
 
 public class Lotto {
+	private static final String DELIMITER = ",";
 	public static final int CORRECT_SIZE = 6;
 
 	private final Set<LottoNumber> lottoNumbers;
@@ -40,7 +42,10 @@ public class Lotto {
 		return matchLottoNumbers.size();
 	}
 
-	public Set<LottoNumber> getLottoNumbers() {
-		return lottoNumbers;
+	@Override
+	public String toString() {
+		return "[" + lottoNumbers.stream()
+			.map(LottoNumber::toString)
+			.collect(Collectors.joining(DELIMITER)) + "]";
 	}
 }
