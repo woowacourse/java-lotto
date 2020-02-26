@@ -6,8 +6,8 @@ import static lotto.view.ConsoleOutputView.*;
 
 import lotto.domain.LottoStore;
 import lotto.domain.ManualLottoCount;
-import lotto.domain.WinningLotto;
-import lotto.domain.WinningResult;
+import lotto.domain.result.WinningLotto;
+import lotto.domain.result.WinningResult;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoMoney;
 import lotto.domain.lotto.LottoNumber;
