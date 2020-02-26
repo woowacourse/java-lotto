@@ -44,17 +44,18 @@ public class PurchaseMoneyTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"10000,10", "10000,9", "10000,0"})
+	@CsvSource(value = {"10000,10000", "10000,9000", "10000,0"})
 	void subtractByTicketNumber(int amount, int input) {
 		// given
 		PurchaseMoney purchaseMoney = new PurchaseMoney(amount);
 
 		// when
-		PurchaseMoney result = purchaseMoney.subtractByTicketNumber(input);
+		PurchaseMoney other = new PurchaseMoney(input);
+		PurchaseMoney result = purchaseMoney.subtract(other);
 
 		// then
 		Assertions.assertThat(result)
-				.isEqualTo(new PurchaseMoney(amount - input * 1000));
+				.isEqualTo(new PurchaseMoney(amount - input));
 	}
 
 	@Test
@@ -66,8 +67,13 @@ public class PurchaseMoneyTest {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
-			int input = 11;
-			PurchaseMoney result = purchaseMoney.subtractByTicketNumber(input);
+			PurchaseMoney other = new PurchaseMoney(11000);
+			PurchaseMoney result = purchaseMoney.subtract(other);
 		});
 	}
+
+	@Test
+	void of() {
+	}
+
 }

@@ -12,6 +12,13 @@ public class LottoController {
 	public static void run() {
 		PurchaseMoney purchaseMoney = prepareLotto();
 
+		int manualTicketNumber = InputView.inputManualTicketNumber();
+		PurchaseMoney manualTicketMoney = PurchaseMoney.of(manualTicketNumber);
+		PurchaseMoney autoTicketMoney
+				= purchaseMoney.subtract(manualTicketMoney);
+
+		PurchasedLottoTickets manualTickets = purchaseLotto(autoTicketMoney);
+
 		PurchasedLottoTickets purchasedLottoTickets = purchaseLotto(purchaseMoney);
 
 		WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbers();
