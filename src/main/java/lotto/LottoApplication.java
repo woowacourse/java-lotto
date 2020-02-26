@@ -41,10 +41,8 @@ public class LottoApplication {
 	private static List<Lotto> createManualLotto(ManualLottoCount manualLottoCount) {
 		InputView.inputManualLotto();
 		List<Lotto> lotteris = new ArrayList<>();
-		manualLottoCount.forEachRemaining(count -> {
-			String lottoNumbers = InputView.input();
-			lotteris.add(new ManualLottoFactory(lottoNumbers).create());
-		});
+		manualLottoCount.forEachRemaining(count -> lotteris.add(
+			new ManualLottoFactory(InputView.input()).create()));
 		return lotteris;
 	}
 
