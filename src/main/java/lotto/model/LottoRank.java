@@ -1,6 +1,8 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum LottoRank {
     FIRST(6, 2000000000),
@@ -9,6 +11,7 @@ public enum LottoRank {
     FOURTH(4, 50000),
     FIFTH(3, 5000);
 
+    private static final int INITIAL_NUMBER = 0;
     private final int rank;
     private final int prize;
 
@@ -24,7 +27,7 @@ public enum LottoRank {
     public static LottoRank of(int matchNumber, boolean hasBonusNumber) {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.isSameMatchCount(matchNumber))
-                .filter(rank -> !rank.equals(SECOND) || hasBonusNumber) // 2등 확인 로직
+                .filter(rank -> !rank.equals(SECOND) || hasBonusNumber)
                 .findFirst()
                 .orElse(null);
     }
@@ -32,7 +35,6 @@ public enum LottoRank {
     private boolean isSameMatchCount(int matchNumber) {
         return this.rank == matchNumber;
     }
-
 
     public int getRank() {
         return rank;
@@ -46,7 +48,11 @@ public enum LottoRank {
         return count < FIFTH.rank;
     }
 
-    public static boolean checkThirdWinner(int count) {
-        return count == THIRD.rank;
+    public static Map<LottoRank, Integer> makeLottoResult() {
+        Map<LottoRank, Integer> lottoResult = new HashMap<>();
+        for (LottoRank lottoRank : LottoRank.values()) {
+            lottoResult.put(lottoRank, INITIAL_NUMBER);
+        }
+        return lottoResult;
     }
 }
