@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Lottos implements Iterable<Lotto> {
@@ -16,6 +17,12 @@ public class Lottos implements Iterable<Lotto> {
 		if (lottos == null || lottos.isEmpty()) {
 			throw new InvalidLottosException(InvalidLottosException.NULL_OR_EMPTY);
 		}
+	}
+
+	public static Lottos merge(Lottos lottos1, Lottos lottos2) {
+		List<Lotto> newLottos = new LinkedList<>(lottos1.lottos);
+		newLottos.addAll(lottos2.lottos);
+		return new Lottos(newLottos);
 	}
 
 	@Override
