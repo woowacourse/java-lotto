@@ -11,9 +11,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.exceptions.InvalidManualQuantityException;
 import lotto.exceptions.InvalidMoneyException;
 
 class MoneyTest {
+
+    public static final String AMOUNT = "5000";
+    public static final String EXCEED_MONEY_QUANTITY = "6";
 
     @ParameterizedTest(name = "{1}")
     @MethodSource("invalidMoneyParameters")
@@ -43,4 +47,26 @@ class MoneyTest {
     void change(String amount, int expectedChange) {
         assertThat(Money.create(amount).change()).isEqualTo(expectedChange);
     }
+
+
+
+    @ParameterizedTest(name = "{1}")
+    @MethodSource("invalidManualQuantityParameters")
+    @DisplayName("정상적이지 않은 수동 로또 갯수 입력 시 예외를 발생시키는지")
+    void InvalidManualQuantity(String amount, String message) {
+        Money money = new Money(AMOUNT);
+        assertThatThrownBy(() -> {
+            money.getValidatedManualQuantity(amount);
+        }).isInstanceOf(InvalidManualQuantityException.class);
+    }
+
+    static Stream<Arguments> invalidManualQuantityParameters() {
+        return Stream.of(
+            Arguments.of("abc", "입력이 숫자가 아닌 것을 포함할 때"),
+            Arguments.of("-1", "입력 받은 수동 로또 개수가 음수일 때"),
+            Arguments.of(EXCEED_MONEY_QUANTITY, "입력받은 수동 로또 개수가 금액을 초과할 때")
+        );
+    }
+
+
 }

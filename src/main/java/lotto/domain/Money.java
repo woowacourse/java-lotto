@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exceptions.InvalidManualQuantityException;
 import lotto.exceptions.InvalidMoneyException;
 
 public class Money {
@@ -44,5 +45,29 @@ public class Money {
 
     public int change() {
         return amount - calculateTicketQuantity() * TICKET_PRICE;
+    }
+
+    int getValidatedManualQuantity(String manualQuantity) {
+        int parsedQuantity = parseQuantityToInteger(manualQuantity);
+        validateQuantity(parsedQuantity);
+        return parsedQuantity;
+    }
+
+    private void validateQuantity(int parsedQuantity) {
+        if (parsedQuantity < 0) {
+            throw new InvalidManualQuantityException("구입 가능한 수동 로또의 최소 개수는 0개 이상입니다.");
+        }
+        int ticketQuantity = this.calculateTicketQuantity();
+        if (parsedQuantity > ticketQuantity) {
+            throw new InvalidManualQuantityException("지불하신 금액으로 살 수 있는 총 로또의 수는 " + ticketQuantity + "개입니다.");
+        }
+    }
+
+    private int parseQuantityToInteger(String manualQuantity) {
+        try {
+            return Integer.parseInt(manualQuantity);
+        } catch (NumberFormatException e) {
+            throw new InvalidManualQuantityException("올바른 형식의 입력이 아닙니다.");
+        }
     }
 }
