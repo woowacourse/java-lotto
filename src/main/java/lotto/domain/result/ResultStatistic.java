@@ -1,10 +1,8 @@
 package lotto.domain.result;
 
-import lotto.domain.lottonumber.BonusLottoNumber;
 import lotto.domain.money.MoneyForLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.PaidLotto;
 import lotto.domain.lotto.WinningLotto;
 
 import java.util.HashMap;
@@ -30,14 +28,12 @@ public class ResultStatistic {
 
 	public static ResultStatistic calculate(
 			final Lottos lottos,
-			final WinningLotto winningLotto,
-			final BonusLottoNumber bonus
+			final WinningLotto winningLotto
 	) {
 		Map<Rank, Integer> results = createInitialResult();
 
 		for (Lotto lotto : lottos.getLottos()) {
-			PaidLotto paidLotto = (PaidLotto) lotto;
-			Rank rank = paidLotto.getRank(winningLotto, bonus);
+			Rank rank = winningLotto.getRank(lotto);
 			int count = results.get(rank) + ONE;
 			results.put(rank, count);
 		}

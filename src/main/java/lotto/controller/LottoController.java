@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.lotto.*;
-import lotto.domain.lottonumber.BonusLottoNumber;
 import lotto.domain.lottonumber.InvalidLottoNumberException;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.money.InvalidMoneyForLottoException;
@@ -28,13 +27,12 @@ public class LottoController {
 
 		Lottos manualLottos = receiveManualLottos(lottoCount);
 		Lottos autoLottos = LottosFactory.createAutoLottos(lottoCount.getTotalLottoCount() - lottoCount.getManualLottoCount());
-		Lottos lottos = manualLottos.add(autoLottos);
-		OutputView.printPurchasedLottos(lottoCount, lottos);
+		Lottos purchasedLottos = manualLottos.add(autoLottos);
+		OutputView.printPurchasedLottos(lottoCount, purchasedLottos);
 
 		WinningLotto winningLotto = receiveWinningLotto();
-		BonusLottoNumber bonusLottoNumber = receiveBonusLottoNumber(winningLotto);
 
-		ResultStatistic result = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
+		ResultStatistic result = ResultStatistic.calculate(purchasedLottos, winningLotto);
 		OutputView.printResultStatistic(result, moneyForLotto);
 	}
 
@@ -68,25 +66,33 @@ public class LottoController {
 
 	private static WinningLotto receiveWinningLotto() {
 		try {
-			String inputWinningLotto = InputView.getWinningLotto();
-			return (WinningLotto) LottoFactory.createManualLotto(
-					LottoType.WINNING_LOTTO,
-					StringUtils.splitIntoLottoNumbers(inputWinningLotto)
-			);
-		} catch (InvalidLottoException | NullPointerException | IllegalArgumentException e) {
+			List<LottoNumber> winningLottoNumbers = receiveWinningLottoNumbers();
+			LottoNumber bonusLottoNumber = receiveBonusLottoNumber();
+			return new WinningLotto(winningLottoNumbers, bonusLottoNumber);
+		} catch (InvalidLottoNumberException e) {
 			OutputView.printExceptionMessage(e);
 			return receiveWinningLotto();
 		}
 	}
 
-	private static BonusLottoNumber receiveBonusLottoNumber(WinningLotto winningLotto) {
+	private static List<LottoNumber> receiveWinningLottoNumbers() {
+		try {
+			String inputWinningLotto = InputView.getWinningLotto();
+			return StringUtils.splitIntoLottoNumbers(inputWinningLotto);
+		} catch (InvalidLottoNumberException | NullPointerException | IllegalArgumentException e) {
+			OutputView.printExceptionMessage(e);
+			return receiveWinningLottoNumbers();
+		}
+	}
+
+	private static LottoNumber receiveBonusLottoNumber() {
 		try {
 			String inputBonusLottoNumber = InputView.getBonusLottoNumber();
-			BonusLottoNumber.validateBonusLottoNumber(inputBonusLottoNumber, winningLotto);
-			return new BonusLottoNumber(inputBonusLottoNumber);
+			LottoNumber bonusLottoNumber = LottoNumber.of(LottoNumber.parseToInteger(inputBonusLottoNumber));
+			return bonusLottoNumber;
 		} catch (InvalidLottoNumberException | NullPointerException e) {
 			OutputView.printExceptionMessage(e);
-			return receiveBonusLottoNumber(winningLotto);
+			return receiveBonusLottoNumber();
 		}
 	}
 }

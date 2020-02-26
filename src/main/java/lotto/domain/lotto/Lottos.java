@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class Lottos {
 	private static final String NULL_INPUT_EXCEPTION_MESSAGE = "입력이 null일 수 없습니다.";
-	private static final String SHOUD_BUY_MORE_THAN_ONE_LOTTO_EXCEPTION_MESSAGE = "로또는 한 장 이상 사야합니다.";
+	private static final String SHOULD_BUY_MORE_THAN_ONE_LOTTO_EXCEPTION_MESSAGE = "로또는 한 장 이상 사야합니다.";
 	private final List<Lotto> lottos;
 
 	public Lottos(final List<Lotto> inputLottos) {
@@ -26,7 +26,7 @@ public class Lottos {
 
 	private void validateEmptyInput(final List<Lotto> inputLottos) {
 		if (inputLottos.isEmpty()) {
-			throw new InvalidLottosException(SHOUD_BUY_MORE_THAN_ONE_LOTTO_EXCEPTION_MESSAGE);
+			throw new InvalidLottosException(SHOULD_BUY_MORE_THAN_ONE_LOTTO_EXCEPTION_MESSAGE);
 		}
 	}
 

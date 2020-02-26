@@ -1,6 +1,5 @@
 package lotto.domain.result;
 
-import lotto.domain.lottonumber.BonusLottoNumber;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.money.MoneyForLotto;
 import lotto.domain.lotto.*;
@@ -25,7 +24,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ResultStatisticTest {
 	private Lottos lottos;
 	private WinningLotto winningLotto;
-	private BonusLottoNumber bonusLottoNumber;
 	private ResultStatistic resultStatistic;
 
 	@BeforeEach
@@ -41,7 +39,9 @@ public class ResultStatisticTest {
 				LottoNumber.of(6)
 		);
 
-		winningLotto = (WinningLotto) LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, winningLottoNumbers);
+		LottoNumber bonus = LottoNumber.of(7);
+
+		winningLotto = new WinningLotto(winningLottoNumbers, bonus);
 
 		List<LottoNumber> lottoNumbersFistPrize = Arrays.asList(
 				LottoNumber.of(1),
@@ -73,10 +73,7 @@ public class ResultStatisticTest {
 		tempLottos.add(LottoFactory.createManualLotto(LottoType.AUTO_LOTTO, lottoNumbersForthPrize));
 		tempLottos.add(LottoFactory.createManualLotto(LottoType.AUTO_LOTTO, lottoNumbersSixthPrize));
 		lottos = new Lottos(tempLottos);
-
-		bonusLottoNumber = new BonusLottoNumber("7");
-
-		resultStatistic = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
+		resultStatistic = ResultStatistic.calculate(lottos, winningLotto);
 	}
 
 	@Test

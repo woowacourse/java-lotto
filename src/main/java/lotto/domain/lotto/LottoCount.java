@@ -48,5 +48,4 @@ public class LottoCount {
 	public int getManualLottoCount() {
 		return this.manualLottoCount;
 	}
-
 }

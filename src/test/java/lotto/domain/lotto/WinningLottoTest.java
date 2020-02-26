@@ -31,7 +31,8 @@ public class WinningLottoTest {
 						LottoNumber.of(8),
 						LottoNumber.of(44)
 				)
-		));
+		),
+				LottoNumber.of(4));
 	}
 
 	@Test

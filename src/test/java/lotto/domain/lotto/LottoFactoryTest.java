@@ -21,12 +21,12 @@ public class LottoFactoryTest {
 	@Test
 	void createAutoLotto_올바른_동작_확인() {
 		assertThat(LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO))
-				.isInstanceOf(PaidLotto.class);
+				.isInstanceOf(Lotto.class);
 	}
 
 	@Test
 	void createManualLotto_올바른_동작_확인() {
-		List<LottoNumber> winningLottoNumbers = Arrays.asList(
+		List<LottoNumber> manualLottoNumber = Arrays.asList(
 				LottoNumber.of(3),
 				LottoNumber.of(2),
 				LottoNumber.of(1),
@@ -35,8 +35,8 @@ public class LottoFactoryTest {
 				LottoNumber.of(44)
 		);
 
-		assertThat(LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, winningLottoNumbers))
-				.isInstanceOf(WinningLotto.class);
+		assertThat(LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, manualLottoNumber))
+				.isInstanceOf(Lotto.class);
 	}
 
 	@Test

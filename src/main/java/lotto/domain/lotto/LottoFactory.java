@@ -19,8 +19,8 @@ public class LottoFactory {
 
 	static {
 		creators.put(LottoType.MANUAL_LOTTO, new ManualLottoCreator());
-		creators.put(LottoType.AUTO_LOTTO, new PaidLottoCreator());
-		creators.put(LottoType.WINNING_LOTTO, new WinningLottoCreator());
+		creators.put(LottoType.AUTO_LOTTO, new AutoLottoCreator());
+		creators.put(LottoType.WINNING_LOTTO, new ManualLottoCreator());
 	}
 
 
@@ -39,27 +39,27 @@ public class LottoFactory {
 	public static Lotto createManualLotto(final LottoType lottoType, final List<LottoNumber> inputLottoNumbers) {
 		Objects.requireNonNull(lottoType);
 		LottoCreator lottoCreator = creators.get(lottoType);
-		return lottoCreator.create(inputLottoNumbers);
+		return lottoCreator.create(inputLottoNumbers);  // TODO: 2020/02/26 뭔가 여기가 문제ㅐ
 	}
 }
 
 class ManualLottoCreator implements LottoCreator {
 	@Override
 	public Lotto create(List<LottoNumber> lottoNumbers) {
-		return new PaidLotto(lottoNumbers); // TODO 수정 예상
+		return new Lotto(lottoNumbers); // TODO 수정 예상
 	}
 }
 
-class PaidLottoCreator implements LottoCreator {
+class AutoLottoCreator implements LottoCreator {
 	@Override
 	public Lotto create(final List<LottoNumber> lottoNumbers) {
-		return new PaidLotto(lottoNumbers);
+		return new Lotto(lottoNumbers);
 	}
 }
-
-class WinningLottoCreator implements LottoCreator {
-	@Override
-	public Lotto create(final List<LottoNumber> lottoNumbers) {
-		return new WinningLotto(lottoNumbers);
-	}
-}
+//
+//class WinningLottoCreator implements LottoCreator {
+//	@Override
+//	public Lotto create(final List<LottoNumber> lottoNumbers) {
+//		return new WinningLotto(lottoNumbers);
+//	}
+//}

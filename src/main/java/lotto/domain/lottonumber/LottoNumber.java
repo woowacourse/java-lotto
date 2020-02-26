@@ -71,7 +71,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public boolean equals(LottoNumber o) {
-		if (this.getLottoNumber() == o.getLottoNumber())
+		if (this.lottoNumber == o.lottoNumber)
 			return true;
 		return false;
 	}
