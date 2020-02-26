@@ -29,4 +29,14 @@ public class Lotto {
     public boolean hasBonusNumber(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
+
+    public int countMatchingAmountWith(Lotto inputLotto) {
+        return (int)lottoNumbers.stream()
+                .filter(inputLotto::contains)
+                .count();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }

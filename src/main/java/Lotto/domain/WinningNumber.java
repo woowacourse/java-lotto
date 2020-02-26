@@ -15,4 +15,12 @@ public class WinningNumber {
     private boolean bonusNumberDuplicatedWithWinningNumber(Lotto winningLotto, LottoNumber bonusNumber) {
         return winningLotto.hasBonusNumber(bonusNumber);
     }
+
+    public int countHit(Lotto lotto) {
+        return winningLotto.countMatchingAmountWith(lotto);
+    }
+
+    public boolean checkBonusNumber(Lotto lotto) {
+        return lotto.contains(bonusNumber);
+    }
 }
