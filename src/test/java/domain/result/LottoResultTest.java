@@ -2,11 +2,12 @@ package domain.result;
 
 import domain.Money;
 import domain.lottonumbers.LottoTicket;
+import domain.lottonumbers.LottoTicketDto;
 import domain.lottonumbers.WinningNumbers;
+import domain.lottonumbers.WinningNumbersDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import util.LottoNumbersDtoGenerator;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -36,12 +37,12 @@ class LottoResultTest {
                 createSixNumbersSet(16, 17, 18, 19, 20, 21));
 
         this.testTickets = testNumbers.stream()
-                .map(numbers -> LottoNumbersDtoGenerator.generateManualNumbersDto(numbers, 1))
+                .map(LottoTicketDto::new)
                 .map(LottoTicket::new)
                 .collect(toList());
 
         Set<Integer> sixNumbers = createSixNumbersSet(3, 4, 5, 6, 7, 8);
-        this.winningNumbers = new WinningNumbers(LottoNumbersDtoGenerator.generateManualNumbersDto(sixNumbers, 9));
+        this.winningNumbers = new WinningNumbers(new WinningNumbersDto(sixNumbers, 9));
     }
 
     @Test

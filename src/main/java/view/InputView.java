@@ -1,8 +1,7 @@
 package view;
 
 import domain.Money;
-import domain.lottonumbers.LottoNumbersDto;
-import util.LottoNumbersDtoGenerator;
+import domain.lottonumbers.WinningNumbersDto;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,8 +31,8 @@ public class InputView {
         }
     }
 
-    public static LottoNumbersDto enterWinningNumbers() {
-        return LottoNumbersDtoGenerator.generateManualNumbersDto(enterLastWeekWinningNumbers(), enterBonusNumber());
+    public static WinningNumbersDto enterWinningNumbers() {
+        return new WinningNumbersDto(enterLastWeekWinningNumbers(), enterBonusNumber());
     }
 
     private static Set<Integer> enterLastWeekWinningNumbers() {

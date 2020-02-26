@@ -12,12 +12,6 @@ public class StringConverter {
 
     private static final int START_INDEX_EXCEPT_NO_WIN = 1;
 
-    public static String convertLottoNumbers(LottoNumbers lottoNumbers) {
-        return lottoNumbers.getValue().stream()
-                .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
-                .collect(Collectors.joining(", ", "[", "]"));
-    }
-
     public static String convertLottoResults(LottoResult lottoResult) {
         StringBuilder stringBuilder = new StringBuilder();
 

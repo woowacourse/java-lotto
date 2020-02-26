@@ -5,12 +5,13 @@ import domain.lottonumbers.lottonumber.LottoNumber;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     public static final int SIZE = 6;
 
-    private final SortedSet<LottoNumber> lottoNumbers;
+    protected final SortedSet<LottoNumber> lottoNumbers;
 
     public LottoNumbers(Set<LottoNumber> numbers) {
         validateSize(numbers);
@@ -27,13 +28,10 @@ public class LottoNumbers {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public int findNumberOfMatchingNumbers(LottoNumbers comparingNumber) {
-        return (int) this.lottoNumbers.stream()
-                .filter(comparingNumber::contains)
-                .count();
-    }
-
-    public Set<LottoNumber> getValue() {
-        return this.lottoNumbers;
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 }

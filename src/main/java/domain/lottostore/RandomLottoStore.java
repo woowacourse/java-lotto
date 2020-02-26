@@ -2,16 +2,15 @@ package domain.lottostore;
 
 import domain.Money;
 import domain.lottonumbers.LottoNumbers;
-import domain.lottonumbers.LottoNumbersDto;
 import domain.lottonumbers.LottoTicket;
+import domain.lottonumbers.LottoTicketDto;
 import domain.lottonumbers.lottonumber.LottoNumber;
-import util.LottoNumbersDtoGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
-import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toSet;
 
 public class RandomLottoStore implements LottoStore<Money> {
@@ -24,18 +23,18 @@ public class RandomLottoStore implements LottoStore<Money> {
         int numberOfTickets = money.getNumberOfTickets();
 
         for (int i = 0; i < numberOfTickets; i++) {
-            LottoNumbersDto randomDto = new LottoNumbersDto(generateRandomLottoNumbers());
+            LottoTicketDto randomDto = new LottoTicketDto(generateRandomLottoNumbers());
             lottoTickets.add(new LottoTicket(randomDto));
         }
 
         return lottoTickets;
     }
 
-    private LottoNumbers generateRandomLottoNumbers() {
-        return random.ints(LottoNumber.MIN_BOUND, LottoNumber.MAX_BOUND)
+    private Set<Integer> generateRandomLottoNumbers() {
+        return random.ints(LottoNumber.MIN_BOUND, LottoNumber.MAX_BOUND + 1)
                 .distinct()
                 .limit(LottoNumbers.SIZE)
-                .mapToObj(LottoNumber::of)
-                .collect(collectingAndThen(toSet(),LottoNumbers::new));
+                .boxed()
+                .collect(toSet());
     }
 }
