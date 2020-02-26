@@ -13,8 +13,8 @@ public class LottoController {
 		PurchaseMoney purchaseMoney = createPurchaseMoney();
 		OutputView.printPurchasedLottoTicketsCount(purchaseMoney);
 
-		int manualTicketNumber = InputView.inputManualTicketNumber();
-		PurchaseMoney manualPurchaseMoney = purchaseMoney.subtractByTicketNumber(manualTicketNumber);
+		int manualTicketNumber = validManualTicketNumber(purchaseMoney);
+		int autoTicketNumber = purchaseMoney.countPurchasedTickets() - manualTicketNumber;
 
 		RandomLottoTicketFactory randomLottoTicketFactory =
 				new RandomLottoTicketFactory(new RandomLottoNumbersGenerator());
@@ -30,21 +30,32 @@ public class LottoController {
 		OutputView.printEarningRate(lottoResult.calculateEarningRate(purchaseMoney));
 	}
 
-	private static WinningInformation createWinningInformation() {
-		try {
-			return new WinningInformation(createWinningNumbers(), createBonusNumber());
-		} catch (WinningLottoNumbersIllegalArgumentException e) {
-			OutputView.printWarningMessage(e.getMessage());
-			return createWinningInformation();
-		}
-	}
-
 	private static PurchaseMoney createPurchaseMoney() {
 		try {
 			return new PurchaseMoney(InputView.inputPurchaseMoney());
 		} catch (PurchaseMoneyIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return createPurchaseMoney();
+		}
+	}
+
+	private static int validManualTicketNumber(PurchaseMoney purchaseMoney) {
+		try {
+			int manualTicketNumber = InputView.inputManualTicketNumber();
+			purchaseMoney.checkCanBuy(manualTicketNumber);
+			return manualTicketNumber;
+		} catch (PurchaseManualTicketIllegalArgumentException e) {
+			OutputView.printWarningMessage(e.getMessage());
+			return validManualTicketNumber(purchaseMoney);
+		}
+	}
+
+	private static WinningInformation createWinningInformation() {
+		try {
+			return new WinningInformation(createWinningNumbers(), createBonusNumber());
+		} catch (WinningLottoNumbersIllegalArgumentException e) {
+			OutputView.printWarningMessage(e.getMessage());
+			return createWinningInformation();
 		}
 	}
 

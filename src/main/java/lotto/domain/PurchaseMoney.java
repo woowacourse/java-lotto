@@ -39,13 +39,8 @@ public class PurchaseMoney {
 		return totalEarning / purchaseMoney;
 	}
 
-	public PurchaseMoney subtractByTicketNumber(int num) {
-		if (num < POSITIVE_THRESHOLD) {
-			throw new PurchaseManualTicketIllegalArgumentException();
-		}
-		try {
-			return new PurchaseMoney(purchaseMoney - num * TICKET_PRICE);
-		} catch (PurchaseMoneyIllegalArgumentException e) {
+	public void checkCanBuy(int ticketCount) {
+		if (ticketCount < POSITIVE_THRESHOLD || ticketCount > countPurchasedTickets()) {
 			throw new PurchaseManualTicketIllegalArgumentException();
 		}
 	}
