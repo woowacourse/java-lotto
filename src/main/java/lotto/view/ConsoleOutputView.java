@@ -2,10 +2,11 @@ package lotto.view;
 
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import lotto.domain.LottoRank;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.LottoRank;
 import lotto.domain.lotto.Lottos;
 
 public class ConsoleOutputView {
@@ -49,11 +50,8 @@ public class ConsoleOutputView {
 		System.out.println(SEPARATION_LINE);
 	}
 
-	public static void printWinningResult(Map<LottoRank, Integer> lottoRankCount) {
-		lottoRankCount.entrySet().stream()
-			.filter(entry -> !entry.getKey().isLottoRankOf(LottoRank.MISS))
-			.map(entry -> getWinningResultMessage(entry.getKey(), entry.getValue()))
-			.forEach(System.out::println);
+	public static void printWinningResult(Stream<Map.Entry<LottoRank, Integer>> result) {
+		result.map(e -> getWinningResultMessage(e.getKey(), e.getValue())).forEach(System.out::println);
 	}
 
 	private static String getWinningResultMessage(LottoRank lottoRank, int winningLottoCount) {

@@ -4,22 +4,32 @@ import static lotto.domain.LottoNumberParser.*;
 import static lotto.view.ConsoleInputView.*;
 import static lotto.view.ConsoleOutputView.*;
 
-import java.util.Map;
-
+import lotto.domain.LottoStore;
+import lotto.domain.ManualLottoCount;
+import lotto.domain.WinningLotto;
+import lotto.domain.WinningResult;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoMoney;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoStore;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.ManualLottoCount;
-import lotto.domain.WinningLotto;
 
 public class LottoController {
 	public void run() {
 		final LottoMoney inputLottoMoney = continuousInputMoney();
-		final int purchasedLottoCount = inputLottoMoney.getPurchasedLottoCount();
+		final Lottos totalLottos = purchaseLotto(inputLottoMoney);
 
+		final Lotto winningLottoNumber = new Lotto(parseToLottoNumberSet(inputWinningLottoNumber()));
+		final LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputBonusLottoNumber());
+		printStatisticsMessage();
+
+		final WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonusLottoNumber);
+		final WinningResult winningResult = winningLotto.getWinningResult(totalLottos);
+		printWinningResult(winningResult.exceptMiss());
+		printWinningRatio(winningResult.getWinningRatio(inputLottoMoney));
+	}
+
+	private Lottos purchaseLotto(LottoMoney inputLottoMoney) {
+		final int purchasedLottoCount = inputLottoMoney.getPurchasedLottoCount();
 		final ManualLottoCount manualLottoCount = new ManualLottoCount(inputManualLottoCount(), purchasedLottoCount);
 		final int autoLottoCount = purchasedLottoCount - manualLottoCount.getCount();
 
@@ -28,17 +38,7 @@ public class LottoController {
 
 		printPurchaseCompleteMessage(manualLottoCount.getCount(), autoLottoCount);
 		printPurchasedLotto(totalLottos);
-
-		final Lotto winningLottoNumber = new Lotto(parseToLottoNumberSet(inputWinningLottoNumber()));
-		final LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputBonusLottoNumber());
-		printStatisticsMessage();
-
-		final WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonusLottoNumber);
-		final Map<LottoRank, Integer> winningLottoCount = winningLotto.getWinningLottoCount(totalLottos);
-		printWinningResult(winningLottoCount);
-
-		final int winningRatio = winningLotto.getWinningRatio(winningLottoCount, inputLottoMoney);
-		printWinningRatio(winningRatio);
+		return totalLottos;
 	}
 
 	private Lottos mergeManualAndAuto(int manualLottoCount, int autoLottoCount) {

@@ -7,7 +7,6 @@ import java.util.TreeMap;
 
 import lotto.domain.exception.InvalidWinningLottoException;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoMoney;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 
@@ -30,7 +29,7 @@ public class WinningLotto {
 		}
 	}
 
-	public Map<LottoRank, Integer> getWinningLottoCount(Lottos lottos) {
+	public WinningResult getWinningResult(Lottos lottos) {
 		Map<LottoRank, Integer> lottoRankCount = new TreeMap<>(Collections.reverseOrder());
 
 		Arrays.stream(LottoRank.values())
@@ -40,14 +39,6 @@ public class WinningLotto {
 			LottoRank lottoRank = LottoRank.of(lotto.getMatchCount(winningLotto), lotto.contains(bonusLottoNumber));
 			lottoRankCount.replace(lottoRank, lottoRankCount.get(lottoRank) + SUM_UNIT);
 		}
-		return lottoRankCount;
-	}
-
-	public int getWinningRatio(Map<LottoRank, Integer> lottoRankCount, LottoMoney inputLottoMoney) {
-		LottoMoney initLottoMoney = LottoRank.MISS.getWinningMoney();
-		for (Map.Entry<LottoRank, Integer> lottoEntry : lottoRankCount.entrySet()) {
-			initLottoMoney = initLottoMoney.add(lottoEntry.getKey().getWinningMoney().multiply(lottoEntry.getValue()));
-		}
-		return initLottoMoney.getWinningRatio(inputLottoMoney);
+		return new WinningResult(lottoRankCount);
 	}
 }
