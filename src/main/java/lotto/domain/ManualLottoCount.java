@@ -5,15 +5,15 @@ import static lotto.domain.LottoMoney.*;
 public class ManualLottoCount {
 	private final int count;
 
-	public ManualLottoCount(String inputCount, LottoMoney inputLottoMoney) {
+	public ManualLottoCount(String inputCount, int purchasedLottoCount) {
 		int count = parseToInt(inputCount);
 		validateNegative(count);
-		validateBound(count, inputLottoMoney);
+		validateBound(count, purchasedLottoCount);
 		this.count = count;
 	}
 
-	private void validateBound(int count, LottoMoney inputLottoMoney) {
-		if (count > inputLottoMoney.getPurchasedLottoCount()) {
+	private void validateBound(int count, int purchasedLottoCount) {
+		if (count > purchasedLottoCount) {
 			throw new InvalidManualLottoException(InvalidManualLottoException.OUT_OF_BOUND);
 		}
 	}

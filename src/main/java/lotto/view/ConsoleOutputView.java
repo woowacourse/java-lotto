@@ -9,7 +9,7 @@ import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 
 public class ConsoleOutputView {
-	private static final String MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해주세요.";
+	private static final String INPUT_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해주세요.";
 	private static final String PURCHASE_COMPLETE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 	private static final String DELIMITER = ",";
 	private static final String STATISTICS_NOTICE_MESSAGE = "당첨 통계";
@@ -22,8 +22,8 @@ public class ConsoleOutputView {
 		System.out.println(exceptionMessage);
 	}
 
-	public static void printManualLottoMessage() {
-		System.out.println(MANUAL_LOTTO_MESSAGE);
+	public static void printInputManualLottoMessage() {
+		System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
 	}
 
 	public static void printPurchaseCompleteMessage(int manualLottoCount, int autoLottoCount) {
