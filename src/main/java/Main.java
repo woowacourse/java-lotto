@@ -11,8 +11,9 @@ public class Main {
 			LottoGame lottoGame = new LottoGame(purchaseMoney);
 			OutputView.printLottos(lottoGame);
 
-			GameResult gameResult = lottoGame.play(InputView.inputSixNumbers(),
+			lottoGame.play(InputView.inputSixNumbers(),
 				InputView.inputBonusNumber());
+			GameResult gameResult = GameResult.create(lottoGame);
 
 			OutputView.printStatistics(gameResult, purchaseMoney);
 		} catch (Exception e) {

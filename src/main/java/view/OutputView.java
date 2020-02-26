@@ -10,7 +10,6 @@ import domain.Money;
 import domain.Rank;
 
 public class OutputView {
-
 	private static final String DELIMITER = ", ";
 	private static final String PREFIX = "[";
 	private static final String SUFFIX = "]";

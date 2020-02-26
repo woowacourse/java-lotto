@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,17 +10,17 @@ public class LottoGame {
 	private static final int DEFAULT_VALUE = 0;
 	private static final int ONE = 1;
 	private final List<Lotto> lottos;
+	private Lotto winningNumbers;
+	private LottoNumber bonusNumber;
 
 	public LottoGame(Money purchaseMoney) {
 		lottos = LottoFactory.createLottos(purchaseMoney);
 	}
 
-	public GameResult play(String[] inputSixNumbers, String inputBonusNumber) {
+	public void play(String[] inputSixNumbers, String inputBonusNumber) {
 		duplicationValidate(inputSixNumbers, inputBonusNumber);
-		Lotto winningNumbers = new Lotto(inputSixNumbers);
-		LottoNumber bonusNumber = LottoNumber.createNumber(inputBonusNumber);
-
-		return lottosCompare(winningNumbers, bonusNumber);
+		winningNumbers = new Lotto(inputSixNumbers);
+		bonusNumber = LottoNumber.createNumber(inputBonusNumber);
 	}
 
 	private void duplicationValidate(String[] inputSixNumbers, String inputBonusNumber) {
@@ -34,13 +33,11 @@ public class LottoGame {
 		return Arrays.asList(inputSixNumbers).contains(inputBonusNumber);
 	}
 
-	private GameResult lottosCompare(Lotto winningNumbers, LottoNumber bonusNumber) {
-		Map<Rank, Integer> ranks = new HashMap<>();
+	public void addRanks(Map<Rank, Integer> ranks) {
 		for (Lotto lotto : lottos) {
 			Rank rank = lotto.compare(winningNumbers, bonusNumber);
 			ranks.put(rank, ranks.getOrDefault(rank, DEFAULT_VALUE) + ONE);
 		}
-		return new GameResult(ranks);
 	}
 
 	public List<Lotto> getLottos() {

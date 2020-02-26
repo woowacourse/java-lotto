@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class GameResult {
@@ -7,8 +8,14 @@ public class GameResult {
 	private static final int HUNDRED = 100;
 	private final Map<Rank, Integer> ranks;
 
-	public GameResult(Map<Rank, Integer> ranks) {
+	private GameResult(Map<Rank, Integer> ranks) {
 		this.ranks = ranks;
+	}
+
+	public static GameResult create(LottoGame lottoGame) {
+		Map<Rank, Integer> ranks = new HashMap<>();
+		lottoGame.addRanks(ranks);
+		return new GameResult(ranks);
 	}
 
 	public double calculateProfit(Money purchaseMoney) {
