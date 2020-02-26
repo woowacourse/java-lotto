@@ -18,9 +18,9 @@ public class ConsoleLottoApplication {
 
 		PurchasingAmount amountOfAuto = new PurchasingAmount(auto.getMoney());
 
-		LottoTickets manualTickets = ManualTicketsFactory.create(InputView.inputManualNumbers(manualLottoCount));
-		LottoTickets autoTickets = AutoTicketsFactory.create(amountOfAuto);
-		LottoTickets allTickets = manualTickets.add(autoTickets);
+		final LottoTickets manualTickets = ManualTicketsFactory.create(InputView.inputManualNumbers(manualLottoCount));
+		final LottoTickets autoTickets = AutoTicketsFactory.create(amountOfAuto);
+		final LottoTickets allTickets = manualTickets.add(autoTickets);
 
 		OutputView.printLottoAmount(manualTickets.size(), autoTickets.size());
 		OutputView.printLottoState(allTickets.tickets());
