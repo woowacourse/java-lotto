@@ -17,9 +17,15 @@ public class TicketsGenerator {
     }
 
     private static List<LottoNumber> createAutoTicket() {
-        List<Integer> lottoNumbers = IntStream.range(1, 46).boxed().collect(Collectors.toList());
+        List<Integer> lottoNumbers = IntStream
+            .range(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER + 1)
+            .boxed()
+            .collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.stream().limit(6).sorted().map(LottoNumber::getLottoNumber)
+        return lottoNumbers.stream()
+            .limit(Ticket.LOTTO_NUMBER_LENGTH)
+            .sorted()
+            .map(LottoNumber::getLottoNumber)
             .collect(Collectors.toList());
     }
 }

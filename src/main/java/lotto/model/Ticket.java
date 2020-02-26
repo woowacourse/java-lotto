@@ -3,7 +3,6 @@ package lotto.model;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import lotto.exception.NotSixNumbersException;
 import lotto.exception.OverlapSizeException;
 
@@ -17,7 +16,7 @@ public class Ticket {
 
     public Ticket(List<LottoNumber> ticket) {
         validateLottoNumbersLength(ticket);
-        getValidateOverlap(ticket);
+        validateOverlap(ticket);
         autoTicket = ticket;
     }
 
@@ -27,9 +26,9 @@ public class Ticket {
         }
     }
 
-    private void getValidateOverlap(List<LottoNumber> ticket) {
+    private void validateOverlap(List<LottoNumber> ticket) {
         Set<LottoNumber> ticketValidation = new HashSet<>(ticket);
-        if (ticketValidation.size() != 6) {
+        if (ticketValidation.size() != LOTTO_NUMBER_LENGTH) {
             throw new OverlapSizeException(OVERLAP_SIZE_EXCEPTION);
         }
     }

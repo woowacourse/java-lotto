@@ -38,7 +38,7 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("상금계산")
+    @DisplayName("수익률 계산")
     void getYield() {
         Money money = new Money("10000");
         LottoResult.lottoResultCount.put(RankType.THREE, 1);
