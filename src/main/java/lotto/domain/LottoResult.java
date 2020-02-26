@@ -20,12 +20,8 @@ public class LottoResult {
         return String.format("%.2f", rate);
     }
 
-    int countSpecificRank(Rank rank) {
-        return result.get(rank);
-    }
-
-    public Map<Rank, Integer> getResult() {
-        return result;
+    public int countSpecificRank(Rank rank) {
+        return result.getOrDefault(rank, 0);
     }
 
 }

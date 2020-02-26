@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.Map;
 
 import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.Rank;
@@ -44,18 +45,17 @@ public class OutputView {
     }
 
     public static void prizeStatistics(LottoResult lottoResult) {
-        Map<Rank, Integer> results = lottoResult.getResult();
         String sb = "\n당첨 통계\n---------\n"
-            + prizeStatistic(results, Rank.FOURTH)
-            + prizeStatistic(results, Rank.THIRD)
-            + prizeStatistic(results, Rank.SECOND)
-            + prizeStatistic(results, Rank.BONUS)
-            + prizeStatistic(results, Rank.FIRST);
+            + prizeStatistic(lottoResult, Rank.FOURTH)
+            + prizeStatistic(lottoResult, Rank.THIRD)
+            + prizeStatistic(lottoResult, Rank.SECOND)
+            + prizeStatistic(lottoResult, Rank.BONUS)
+            + prizeStatistic(lottoResult, Rank.FIRST);
         System.out.print(sb);
     }
 
-    private static String prizeStatistic(Map<Rank, Integer> results, Rank rank) {
-        return format(rank) + results.getOrDefault(rank, 0) + "개\n";
+    private static String prizeStatistic(LottoResult lottoResult, Rank rank) {
+        return format(rank) + lottoResult.countSpecificRank(rank) + "개\n";
     }
 
     private static String format(Rank rank) {
