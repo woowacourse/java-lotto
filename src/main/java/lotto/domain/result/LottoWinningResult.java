@@ -16,16 +16,19 @@ public class LottoWinningResult {
 
 	public LottoWinningResult(Lottos lottos, WinningLotto winningLotto) {
 		lottoRankCount = new TreeMap<>(Collections.reverseOrder());
-		calculate(lottos, winningLotto);
-	}
 
-	private void calculate(Lottos lottos, WinningLotto winningLotto) {
 		for (LottoRank lottoRank : LottoRank.values()) {
 			lottoRankCount.put(lottoRank, INIT_COUNT);
 		}
 
+		calculate(lottos, winningLotto);
+	}
+
+	private void calculate(Lottos lottos, WinningLotto winningLotto) {
 		for (Lotto lotto : lottos) {
-			LottoRank lottoRank = LottoRank.of(lotto.calculateMatchCount(winningLotto.getLotto()), lotto.contains(winningLotto.getBonusNumber()));
+			LottoRank lottoRank = LottoRank.of(
+					lotto.calculateMatchCount(winningLotto.getLotto()),
+					lotto.contains(winningLotto.getBonusNumber()));
 			lottoRankCount.replace(lottoRank, lottoRankCount.get(lottoRank) + SUM_UNIT);
 		}
 	}

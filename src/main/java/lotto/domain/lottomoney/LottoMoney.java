@@ -26,7 +26,7 @@ public class LottoMoney {
 	}
 
 	private void validateNullOrEmpty(String money) {
-		if (money == null || money.isEmpty()) {
+		if (Objects.isNull(money) || money.isEmpty()) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.NULL_OR_EMPTY);
 		}
 	}

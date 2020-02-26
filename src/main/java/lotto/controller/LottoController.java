@@ -23,13 +23,9 @@ public class LottoController {
 		printPurchasedLotto(lottos);
 
 		WinningLotto winningLotto = receiveWinningLotto();
-
 		LottoWinningResult winningResult = new LottoWinningResult(lottos, winningLotto);
-		printStatisticsMessage();
 		printWinningResult(winningResult.getLottoRankCount());
-
-		int winningRatio = winningResult.calculateWinningRatio(inputLottoMoney);
-		printWinningRatio(winningRatio);
+		printWinningRatio(winningResult.calculateWinningRatio(inputLottoMoney));
 	}
 
 	private static LottoMoney receiveInputMoney() {
@@ -46,5 +42,4 @@ public class LottoController {
 		LottoNumber inputBonusNumber = LottoNumber.valueOf(inputBonusLottoNumber());
 		return new WinningLotto(inputWinningLotto, inputBonusNumber);
 	}
-
 }

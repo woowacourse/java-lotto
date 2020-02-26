@@ -42,16 +42,17 @@ public class ConsoleOutputView {
 		return "[" + lottoNumber + "]";
 	}
 
-	public static void printStatisticsMessage() {
-		System.out.println(STATISTICS_NOTICE_MESSAGE);
-		System.out.println(SEPARATION_LINE);
-	}
-
 	public static void printWinningResult(Map<LottoRank, Integer> lottoRankCount) {
+		printStatisticsMessage();
 		lottoRankCount.entrySet().stream()
 			.filter(entry -> !entry.getKey().isLottoRankOf(LottoRank.MISS))
 			.map(entry -> getWinningResultMessage(entry.getKey(), entry.getValue()))
 			.forEach(System.out::println);
+	}
+
+	private static void printStatisticsMessage() {
+		System.out.println(STATISTICS_NOTICE_MESSAGE);
+		System.out.println(SEPARATION_LINE);
 	}
 
 	private static String getWinningResultMessage(LottoRank lottoRank, int winningLottoCount) {
