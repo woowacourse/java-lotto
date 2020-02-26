@@ -30,6 +30,7 @@ public class LottoFactory {
         if (userLottoNumbers == null || userLottoNumbers.isEmpty()) {
             return addAutoLotto(lotteries, money.findBuyAmount());
         }
+
         String[] manualLotteries = StringUtils.splitLotto(userLottoNumbers);
         lotteries = createUserLotto(manualLotteries);
         return addAutoLotto(lotteries, money.findBuyAmount() - manualLotteries.length);

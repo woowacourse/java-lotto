@@ -35,14 +35,17 @@ public class LottoApplication {
     }
 
     private static String setUserLottoNumbers(int userLottoCount, Money money) {
-        if (userLottoCount > money.findBuyAmount()) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_OVER_COUNT);
-        }
-
+        validateUserLottoCount(userLottoCount, money);
         String inputUserLottoNumbers = "";
         if (userLottoCount > MIN_USER_LOTTO_COUNT) {
             inputUserLottoNumbers = InputView.inputUserLotto(userLottoCount);
         }
         return inputUserLottoNumbers;
+    }
+
+    private static void validateUserLottoCount(int userLottoCount, Money money) {
+        if (userLottoCount > money.findBuyAmount()) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_OVER_COUNT);
+        }
     }
 }
