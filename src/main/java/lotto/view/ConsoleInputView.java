@@ -16,6 +16,11 @@ public class ConsoleInputView {
 		return SCANNER.nextLine();
 	}
 
+	public static String inputManualLottoTicketNumber() {
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+		return SCANNER.nextLine();
+	}
+
 	public static String inputWinningLottoNumbers() {
 		System.out.println(INPUT_WINNING_LOTTO_NUMBER_MESSAGE);
 		return SCANNER.nextLine();

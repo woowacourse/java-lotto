@@ -50,7 +50,7 @@ public class LottoMoney {
 		}
 	}
 
-	public long calculatePurchasedLottoTicket() {
+	public long calculatePurchasableLottoTicket() {
 		return lottoMoney / UNIT;
 	}
 
