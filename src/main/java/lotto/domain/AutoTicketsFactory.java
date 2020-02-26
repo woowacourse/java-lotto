@@ -9,11 +9,11 @@ public class AutoTicketsFactory {
 
 	public static LottoTickets create(PurchasingAmount purchasingAmount) {
 		List<LottoTicket> lottoTickets = new ArrayList<>();
-		purchasingAmount.forEachRemaining(count -> createLottoTicket(lottoTickets));
+		purchasingAmount.forEachRemaining(count -> addRandomTicketTo(lottoTickets));
 		return new LottoTickets(lottoTickets);
 	}
 
-	private static void createLottoTicket(List<LottoTicket> lottoTickets) {
+	private static void addRandomTicketTo(List<LottoTicket> lottoTickets) {
 		final List<LottoNumber> randomNumbers = LottoNumberRepository.shuffledLottoNumbers();
 		lottoTickets.add(new LottoTicket(
 			randomNumbers.stream()
