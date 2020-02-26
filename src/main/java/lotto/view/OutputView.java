@@ -26,11 +26,8 @@ public class OutputView {
     }
 
     public static void ticketAmountInstruction(Money money, int manualQuantity) {
-        System.out.println("수동으로 " + manualQuantity + "장, 수동으로 " + money.calculateTicketQuantity() + "개를 구매했습니다.");
-    }
-
-    public static void ticketAmountInstruction(Money money) {
-        System.out.println(money.calculateTicketQuantity() + "개를 구매했습니다.");
+        System.out.println(
+            "수동으로 " + manualQuantity + "장, 자동으로 " + (money.calculateTicketQuantity() - manualQuantity) + "개를 구매했습니다.");
     }
 
     public static void lottoTicketList(LottoTickets lottoTickets) {

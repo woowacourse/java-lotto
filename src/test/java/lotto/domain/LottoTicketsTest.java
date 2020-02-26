@@ -29,17 +29,21 @@ class LottoTicketsTest {
     }
 
     @Test
-    @DisplayName("입력받은 돈에 따른 올바른 티켓 갯수를 생성하는지")
-    void ticketQuantity() {
-        LottoTickets lottoTickets = LottoTickets.createLottoTickets(new Money("5000"));
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(5);
-    }
-
-    @Test
-    @DisplayName("당첨 번호와 매칭되는 로또티켓 갯수가 제대로 계산되는지")
+    @DisplayName("당첨 번호에 따른 로또 매칭 결과가 제대로 계산되는지")
     void matchCount() {
         LottoResult lottoResult = lottoTickets.match(LottoTicketTest.WINNING_TICKET);
         assertThat(lottoResult.countSpecificRank(Rank.FOURTH)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("입력받은 돈과 수동로또의 개수에 따라 올바르게 자동 티켓을 생성하는지")
+    void addManualAndAutoLottoTickets() {
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        manualTickets.add(new LottoTicket(LottoTicketTest.MATCH_NONE));
+        manualTickets.add(new LottoTicket(LottoTicketTest.MATCH_FIVE));
+        manualTickets.add(new LottoTicket(LottoTicketTest.MATCH_THREE));
+        assertThat(LottoTickets.createAutoAndAdd(new Money("5000"), manualTickets).getLottoTickets().size()).isEqualTo(
+            5);
     }
 
 }

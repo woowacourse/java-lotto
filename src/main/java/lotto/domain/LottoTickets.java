@@ -13,9 +13,10 @@ public class LottoTickets {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public static LottoTickets createLottoTickets(Money money) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < money.calculateTicketQuantity(); i++) {
+    public static LottoTickets createAutoAndAdd(Money money, List<LottoTicket> manualTickets) {
+        List<LottoTicket> lottoTickets = new ArrayList<>(manualTickets);
+        int autoTicketsQuantity = money.calculateTicketQuantity() - manualTickets.size();
+        for (int i = 0; i < autoTicketsQuantity; i++) {
             lottoTickets.add(LottoTicket.create());
         }
         return new LottoTickets(lottoTickets);

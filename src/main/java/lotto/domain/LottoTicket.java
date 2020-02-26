@@ -32,6 +32,16 @@ public class LottoTicket {
         this.lottoTicket = new LottoTicket(lottoNumbers).lottoTicket;
     }
 
+    static LottoTicket create() {
+        List<LottoNumber> numbers = LottoBalls.getLottoBalls();
+        List<LottoNumber> randomNumbers = new ArrayList<>();
+        Collections.shuffle(numbers);
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+            randomNumbers.add(numbers.get(i));
+        }
+        return new LottoTicket(randomNumbers);
+    }
+
     public static List<LottoTicket> createManualLottoTickets(List<String[]> manualNumbers) {
         List<LottoTicket> manualTickets = new ArrayList<>();
         for (String[] manualNumber : manualNumbers) {
@@ -55,16 +65,6 @@ public class LottoTicket {
         if (lottoTicket.size() != LOTTO_NUMBER_COUNT) {
             throw new InvalidLottoTicketException("당첨 번호는 여섯 개의 숫자로 이루어져 있어야 합니다.");
         }
-    }
-
-    static LottoTicket create() {
-        List<LottoNumber> numbers = LottoBalls.getLottoBalls();
-        List<LottoNumber> randomNumbers = new ArrayList<>();
-        Collections.shuffle(numbers);
-        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-            randomNumbers.add(numbers.get(i));
-        }
-        return new LottoTicket(randomNumbers);
     }
 
     int compare(LottoTicket other) {

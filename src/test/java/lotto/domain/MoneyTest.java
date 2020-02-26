@@ -16,8 +16,8 @@ import lotto.exceptions.InvalidMoneyException;
 
 class MoneyTest {
 
-    public static final String AMOUNT = "5000";
-    public static final String EXCEED_MONEY_QUANTITY = "6";
+    private static final String AMOUNT = "5000";
+    private static final String EXCEED_MONEY_QUANTITY = "6";
 
     @ParameterizedTest(name = "{1}")
     @MethodSource("invalidMoneyParameters")
@@ -48,8 +48,6 @@ class MoneyTest {
         assertThat(Money.create(amount).change()).isEqualTo(expectedChange);
     }
 
-
-
     @ParameterizedTest(name = "{1}")
     @MethodSource("invalidManualQuantityParameters")
     @DisplayName("정상적이지 않은 수동 로또 갯수 입력 시 예외를 발생시키는지")
@@ -67,6 +65,5 @@ class MoneyTest {
             Arguments.of(EXCEED_MONEY_QUANTITY, "입력받은 수동 로또 개수가 금액을 초과할 때")
         );
     }
-
 
 }

@@ -12,11 +12,13 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String getManualQuantity() { return scanner.nextLine();}
+    public static String getManualQuantity() {
+        return scanner.nextLine();
+    }
 
     public static List<String[]> getManualNumbers(int quantity) {
         List<String[]> manualNumbers = new ArrayList<>();
-        for (int i=0; i<quantity; i++) {
+        for (int i = 0; i < quantity; i++) {
             manualNumbers.add(getInput().split(COMMA));
         }
         return manualNumbers;

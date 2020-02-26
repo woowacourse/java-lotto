@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import static lotto.view.InputView.*;
-
 import java.util.List;
 
 import lotto.domain.LottoResult;
@@ -25,7 +23,8 @@ public class LottoController {
         Money money = getMoney();
         int manualQuantity = getManualQuantity(money);
         List<LottoTicket> manualTickets = getManualTickets(manualQuantity);
-        LottoTickets lottoTickets = getLottoTickets(money);
+        LottoTickets lottoTickets = getLottoTickets(money, manualTickets);
+
         LottoTicket winningNumbers = getWinningNumbers();
         WinningTicket winningTicket = getWinningTicketWithBonusNumber(winningNumbers);
         LottoResult lottoResult = lottoTickets.match(winningTicket);
@@ -65,9 +64,9 @@ public class LottoController {
         }
     }
 
-    private static LottoTickets getLottoTickets(Money money) {
-        OutputView.ticketAmountInstruction(money);
-        LottoTickets lottoTickets = LottoTickets.createLottoTickets(money);
+    private static LottoTickets getLottoTickets(Money money, List<LottoTicket> manualTickets) {
+        OutputView.ticketAmountInstruction(money, manualTickets.size());
+        LottoTickets lottoTickets = LottoTickets.createAutoAndAdd(money, manualTickets);
         OutputView.lottoTicketList(lottoTickets);
         return lottoTickets;
     }
