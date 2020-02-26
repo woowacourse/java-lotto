@@ -32,6 +32,23 @@ public class LottoTicket {
         this.lottoTicket = new LottoTicket(lottoNumbers).lottoTicket;
     }
 
+    private void validate(List<LottoNumber> lottoTicket) {
+        validateLottoSize(lottoTicket);
+        validateDuplicate(lottoTicket);
+    }
+
+    private void validateDuplicate(List<LottoNumber> lottoTicket) {
+        if (lottoTicket.size() != lottoTicket.stream().distinct().count()) {
+            throw new InvalidLottoTicketException("당첨 번호는 중복될 수 없습니다.");
+        }
+    }
+
+    private void validateLottoSize(List<LottoNumber> lottoTicket) {
+        if (lottoTicket.size() != LOTTO_NUMBER_COUNT) {
+            throw new InvalidLottoTicketException("당첨 번호는 여섯 개의 숫자로 이루어져 있어야 합니다.");
+        }
+    }
+
     static LottoTicket create() {
         List<LottoNumber> numbers = LottoBalls.getLottoBalls();
         List<LottoNumber> randomNumbers = new ArrayList<>();
@@ -48,23 +65,6 @@ public class LottoTicket {
             manualTickets.add(new LottoTicket(manualNumber));
         }
         return manualTickets;
-    }
-
-    private void validate(List<LottoNumber> lottoTicket) {
-        validateLottoSize(lottoTicket);
-        validateDuplicate(lottoTicket);
-    }
-
-    private void validateDuplicate(List<LottoNumber> lottoTicket) {
-        if (lottoTicket.size() != lottoTicket.stream().distinct().count()) {
-            throw new InvalidLottoTicketException("당첨 번호는 중복될 수 없습니다.");
-        }
-    }
-
-    private void validateLottoSize(List<LottoNumber> lottoTicket) {
-        if (lottoTicket.size() != LOTTO_NUMBER_COUNT) {
-            throw new InvalidLottoTicketException("당첨 번호는 여섯 개의 숫자로 이루어져 있어야 합니다.");
-        }
     }
 
     int compare(LottoTicket other) {
