@@ -8,6 +8,9 @@ import lotto.exceptions.WinningLottoNumbersIllegalArgumentException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoController {
 	public static void run() {
 		PurchaseMoney purchaseMoney = createPurchaseMoney();
@@ -16,10 +19,8 @@ public class LottoController {
 		int manualTicketNumber = validManualTicketNumber(purchaseMoney);
 		int autoTicketNumber = purchaseMoney.countPurchasedTickets() - manualTicketNumber;
 
-		RandomLottoTicketFactory randomLottoTicketFactory =
-				new RandomLottoTicketFactory(new RandomLottoNumbersGenerator());
 		PurchasedLottoTickets purchasedLottoTickets
-				= PurchasedLottoTicketsFactory.of(autoTicketNumber, randomLottoTicketFactory);
+				= createLottoTickets(manualTicketNumber, autoTicketNumber);
 		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 
 		WinningInformation winningInformation = createWinningInformation();
@@ -47,6 +48,31 @@ public class LottoController {
 		} catch (PurchaseManualTicketIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return validManualTicketNumber(purchaseMoney);
+		}
+	}
+
+	private static PurchasedLottoTickets createLottoTickets(int manualTicketNumber,
+															int autoTicketNumber) {
+		RandomLottoTicketFactory randomLottoTicketFactory =
+				new RandomLottoTicketFactory(new RandomLottoNumbersGenerator());
+
+		List<SerialLottoNumber> lottoTickets = new ArrayList<>();
+
+		for (int i = 0; i < manualTicketNumber; i++) {
+			lottoTickets.add(validManualTicket());
+		}
+		for (int i = 0; i < autoTicketNumber; i++) {
+			lottoTickets.add(randomLottoTicketFactory.create());
+		}
+		return new PurchasedLottoTickets(lottoTickets);
+	}
+
+	private static SerialLottoNumber validManualTicket() {
+		try {
+			return SerialLottoNumberFactory.create(InputView.inputManualTicket());
+		} catch (NumberFormatException | LottoTicketIllegalArgumentException e) {
+			OutputView.printWarningMessage(e.getMessage());
+			return validManualTicket();
 		}
 	}
 

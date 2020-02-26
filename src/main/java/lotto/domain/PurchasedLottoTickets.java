@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class PurchasedLottoTickets {
 	private final List<SerialLottoNumber> purchasedLottoTickets;
 
-	PurchasedLottoTickets(final List<SerialLottoNumber> purchasedLottoTickets) {
+	public PurchasedLottoTickets(final List<SerialLottoNumber> purchasedLottoTickets) {
 		this.purchasedLottoTickets = Collections.unmodifiableList(purchasedLottoTickets);
 	}
 

@@ -31,26 +31,4 @@ class PurchasedLottoTicketsTest {
 		Assertions.assertThat(result.getPurchasedLottoTickets())
 				.isEqualTo(purchasedLottoTickets);
 	}
-
-	@ParameterizedTest
-	@ValueSource(ints = {1, 10, 50})
-	void of(int input) {
-		// given
-		MockLottoNumberGenerator lottoNumberGenerator = new MockLottoNumberGenerator();
-		RandomLottoTicketFactory randomLottoTicketFactory = new RandomLottoTicketFactory(lottoNumberGenerator);
-
-		// when
-		PurchasedLottoTickets result
-				= PurchasedLottoTicketsFactory.of(input, randomLottoTicketFactory);
-
-		// then
-		List<SerialLottoNumber> expected = new ArrayList<>();
-		List<LottoNumber> lottoNumbers = lottoNumberGenerator.generateSixNumbers();
-
-		for (int i = 0; i < input; i++) {
-			expected.add(new SerialLottoNumber(lottoNumbers));
-		}
-
-		Assertions.assertThat(result.getPurchasedLottoTickets()).isEqualTo(expected);
-	}
 }
