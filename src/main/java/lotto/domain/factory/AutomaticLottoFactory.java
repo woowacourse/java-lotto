@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
 
-public class AutomaticLottoFactory implements MakeAbleLotto {
+public class AutomaticLottoFactory implements LottoMakeAble {
 	private static final int LOTTO_FROM_INDEX = 0;
 	private static final int LOTTO_TO_INDEX = 6;
 
