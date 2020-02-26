@@ -25,6 +25,13 @@ public enum Rank {
             .orElse(NONE);
     }
 
+    public Rank getRightRank(boolean isContainingBonusNumber) {
+        if (this.equals(Rank.SECOND) && isContainingBonusNumber) {
+            return Rank.BONUS;
+        }
+        return this;
+    }
+
     public int getPrize() {
         return prizeAmount;
     }
