@@ -4,15 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    public static final Map<RankType, Integer> lottoResultCount = new HashMap<>();
+    private final Map<RankType, Integer> lottoResultCount = new HashMap<>();
 
-    static {
+    {
         for (RankType rankType : RankType.values()) {
             lottoResultCount.put(rankType, 0);
         }
     }
 
-    public static void updateCount(RankType rankType) {
+    public void updateResultCount(RankType rankType) {
         lottoResultCount.put(rankType, lottoResultCount.get(rankType) + 1);
+    }
+
+    public int getResultCount(RankType rankType) {
+        return lottoResultCount.get(rankType);
     }
 }

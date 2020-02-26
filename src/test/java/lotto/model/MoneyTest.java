@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.controller.LottoManager;
 import lotto.exception.NotMultipleOfThousandException;
 import lotto.exception.NotNumberException;
 import lotto.exception.OverRangeException;
@@ -20,15 +21,6 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("범위 안에 숫자를 입력 안할때")
-    void Payment_Over_Range() {
-        assertThatThrownBy(() -> {
-            new Money("0");
-        }).isInstanceOf(OverRangeException.class)
-            .hasMessage("범위를 벗어났습니다.");
-    }
-
-    @Test
     @DisplayName("천 단위 입력이 안될때")
     void Payment_Not_Unit_K() {
         assertThatThrownBy(() -> {
@@ -41,7 +33,7 @@ public class MoneyTest {
     @DisplayName("수익률 계산")
     void getYield() {
         Money money = new Money("10000");
-        LottoResult.lottoResultCount.put(RankType.THREE, 1);
+        LottoManager.lottoResultCount.put(RankType.THREE, 1);
         assertThat(money.getYield()).isEqualTo(50);
     }
 }

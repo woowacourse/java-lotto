@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.Map;
 import lotto.exception.NotMultipleOfThousandException;
 import lotto.exception.NotNumberException;
 
@@ -39,13 +40,14 @@ public class Money {
         return money;
     }
 
-    private double getRevenue() {
+    private double getRevenue(LottoResult lottoResultCount) {
         return Arrays.stream(RankType.values())
-            .mapToDouble(x -> x.getPrize() * LottoResult.lottoResultCount.get(x))
+            .mapToDouble(
+                rankType -> rankType.getPrize() * lottoResultCount.getResultCount(rankType))
             .sum();
     }
 
-    public int getYield() {
-        return (int) (getRevenue() / money * PERCENT);
+    public int getYield(LottoResult lottoResultCount) {
+        return (int) (getRevenue(lottoResultCount) / money * PERCENT);
     }
 }
