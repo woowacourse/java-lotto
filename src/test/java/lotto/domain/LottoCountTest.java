@@ -2,9 +2,11 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoCountTest {
@@ -34,5 +36,15 @@ public class LottoCountTest {
     @ValueSource(strings = {"-1", "11"})
     void notInRangeExceptionTest(String input) {
         assertInvokeExceptionWithMessageWhenCreateLottoCount(input, "(=구매한 총 로또 수) 이하여야 합니다.");
+    }
+
+    @DisplayName("자동 구매 로또의 수를 올바르게 계산하는지 확인")
+    @ParameterizedTest
+    @CsvSource(value = {"5000:0:5", "20000:20:0", "10000:3:7", "10000:5:5"}, delimiter = ':')
+    void calculateAutoLottoCountValueTest(String money, String manualLottoCount, int expectedAutoLottoCount) {
+        LottoMoney lottoMoney = new LottoMoney(money);
+        LottoCount lottoCount = new LottoCount(lottoMoney, manualLottoCount);
+        int result = lottoCount.calculateAutoLottoCount();
+        assertThat(result).isEqualTo(expectedAutoLottoCount);
     }
 }
