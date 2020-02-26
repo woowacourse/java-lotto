@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 public class OutputView {
     public static void printLottoCount(final Payment payment) {
-        System.out.println(payment.getLottoCount() + "개를 구매했습니다");
+        System.out.println(payment.getPurchasedCount() + "개를 구매했습니다");
     }
 
     public static void printLottoList(final LottoTickets lottoTickets) {

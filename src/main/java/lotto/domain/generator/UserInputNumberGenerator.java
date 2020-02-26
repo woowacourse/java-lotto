@@ -1,8 +1,9 @@
-package lotto.utils;
+package lotto.domain.generator;
 
 import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserInputNumberGenerator implements NumberGenerator {
@@ -10,7 +11,7 @@ public class UserInputNumberGenerator implements NumberGenerator {
 
     @Override
     public List<LottoNumber> generateNumbers() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
