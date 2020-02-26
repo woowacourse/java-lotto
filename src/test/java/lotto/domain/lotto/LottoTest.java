@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import static lotto.domain.mock.LottoMock.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashSet;
@@ -11,22 +12,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 
 import lotto.domain.exception.InvalidLottoException;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 
 class LottoTest {
 	@DisplayName("Lotto 생성자에 LottoNumber List 입력이 들어올 때 객체 생성")
 	@Test
 	void constructor_NumberList_CreateLotto() {
-		Set<LottoNumber> lottoNumbers = new HashSet<>();
-		lottoNumbers.add(LottoNumber.valueOf(1));
-		lottoNumbers.add(LottoNumber.valueOf(2));
-		lottoNumbers.add(LottoNumber.valueOf(3));
-		lottoNumbers.add(LottoNumber.valueOf(4));
-		lottoNumbers.add(LottoNumber.valueOf(5));
-		lottoNumbers.add(LottoNumber.valueOf(6));
-
-		assertThat(new Lotto(lottoNumbers)).isInstanceOf(Lotto.class);
+		Lotto lotto = getLottoMock();
+		assertThat(lotto).isInstanceOf(Lotto.class);
 	}
 
 	@DisplayName("Lotto 생성자에 null 입력이 들어올 때 InvalidLottoException 발생")
