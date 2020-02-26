@@ -12,19 +12,19 @@ import lotto.domain.strategy.ManualLottoPurchaseStrategy;
 public class LottoStore {
 	private LottoPurchaseStrategy lottoPurchaseStrategy;
 
-	public Lottos purchaseAutoLotto(int purchaseCount) {
+	public Lottos purchaseAutoLotto(int purchasedCount) {
 		lottoPurchaseStrategy = new AutoLottoPurchaseStrategy();
-		return purchaseLotto(purchaseCount);
+		return purchaseLotto(purchasedCount);
 	}
 
-	public Lottos purchaseManualLotto(int purchaseCount) {
+	public Lottos purchaseManualLotto(int purchasedCount) {
 		lottoPurchaseStrategy = new ManualLottoPurchaseStrategy();
-		return purchaseLotto(purchaseCount);
+		return purchaseLotto(purchasedCount);
 	}
 
-	private Lottos purchaseLotto(int purchaseCount) {
+	private Lottos purchaseLotto(int purchasedCount) {
 		List<Lotto> lottos = new ArrayList<>();
-		for (int i = 0; i < purchaseCount; i++) {
+		for (int i = 0; i < purchasedCount; i++) {
 			lottos.add(lottoPurchaseStrategy.generate());
 		}
 		return new Lottos(lottos);

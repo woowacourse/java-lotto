@@ -11,11 +11,11 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 
 public class WinningLotto {
-	private static final int SUM_UNIT = 1;
 	private static final int INIT_COUNT = 0;
+	private static final int SUM_UNIT = 1;
 
-	private Lotto winningLotto;
-	private LottoNumber bonusLottoNumber;
+	private final Lotto winningLotto;
+	private final LottoNumber bonusLottoNumber;
 
 	public WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
 		validateDuplicate(winningLotto, bonusLottoNumber);
@@ -30,15 +30,16 @@ public class WinningLotto {
 	}
 
 	public WinningResult getWinningResult(Lottos lottos) {
-		Map<LottoRank, Integer> lottoRankCount = new TreeMap<>(Collections.reverseOrder());
+		Map<LottoRank, Integer> lottoRankMap = new TreeMap<>(Collections.reverseOrder());
 
 		Arrays.stream(LottoRank.values())
-			.forEach(lottoRank -> lottoRankCount.put(lottoRank, INIT_COUNT));
+			.forEach(rank -> lottoRankMap.put(rank, INIT_COUNT));
 
 		for (Lotto lotto : lottos) {
-			LottoRank lottoRank = LottoRank.of(lotto.getMatchCount(winningLotto), lotto.contains(bonusLottoNumber));
-			lottoRankCount.replace(lottoRank, lottoRankCount.get(lottoRank) + SUM_UNIT);
+			LottoRank rank = LottoRank.of(lotto.getMatchCount(winningLotto), lotto.contains(bonusLottoNumber));
+			lottoRankMap.replace(rank, lottoRankMap.get(rank) + SUM_UNIT);
 		}
-		return new WinningResult(lottoRankCount);
+
+		return new WinningResult(lottoRankMap);
 	}
 }

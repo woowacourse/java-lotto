@@ -15,6 +15,9 @@ public class ConsoleInputView {
 
 	private static Scanner scanner = new Scanner(System.in);
 
+	private ConsoleInputView() {
+	}
+
 	public static LottoMoney continuousInputMoney() {
 		try {
 			return new LottoMoney(inputMoney());

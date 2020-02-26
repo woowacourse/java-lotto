@@ -23,28 +23,32 @@ public class LottoController {
 		printStatisticsMessage();
 
 		final WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonusLottoNumber);
-		final WinningResult winningResult = winningLotto.getWinningResult(totalLottos);
-		printWinningResult(winningResult.exceptMiss());
-		printWinningRatio(winningResult.getWinningRatio(inputLottoMoney));
+		final WinningResult result = winningLotto.getWinningResult(totalLottos);
+		printWinningResult(result);
+		printWinningRatio(result, inputLottoMoney);
 	}
 
-	private Lottos purchaseLotto(LottoMoney inputLottoMoney) {
-		final int purchasedLottoCount = inputLottoMoney.getPurchasedLottoCount();
+	private Lottos purchaseLotto(LottoMoney lottoMoney) {
+		final int purchasedLottoCount = lottoMoney.getPurchasedLottoCount();
 		final ManualLottoCount manualLottoCount = new ManualLottoCount(inputManualLottoCount(), purchasedLottoCount);
-		final int autoLottoCount = purchasedLottoCount - manualLottoCount.getCount();
+
+		final int manualCount = manualLottoCount.getCount();
+		final int autoCount = purchasedLottoCount - manualCount;
 
 		printInputManualLottoMessage();
-		final Lottos totalLottos = mergeManualAndAuto(autoLottoCount, manualLottoCount.getCount());
+		final Lottos totalLottos = mergeManualAndAuto(manualCount, autoCount);
 
-		printPurchaseCompleteMessage(manualLottoCount.getCount(), autoLottoCount);
+		printPurchaseCompleteMessage(manualCount, autoCount);
 		printPurchasedLotto(totalLottos);
 		return totalLottos;
 	}
 
-	private Lottos mergeManualAndAuto(int manualLottoCount, int autoLottoCount) {
-		LottoStore lottoStore = new LottoStore();
-		Lottos manualLottos = lottoStore.purchaseManualLotto(manualLottoCount);
-		Lottos autoLottos = lottoStore.purchaseAutoLotto(autoLottoCount);
+	private Lottos mergeManualAndAuto(int manualCount, int autoCount) {
+		final LottoStore lottoStore = new LottoStore();
+
+		final Lottos manualLottos = lottoStore.purchaseManualLotto(manualCount);
+		final Lottos autoLottos = lottoStore.purchaseAutoLotto(autoCount);
+
 		return Lottos.merge(manualLottos, autoLottos);
 	}
 }

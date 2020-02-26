@@ -1,9 +1,8 @@
 package lotto.view;
 
-import java.util.Map;
-import java.util.stream.Stream;
-
 import lotto.domain.LottoRank;
+import lotto.domain.WinningResult;
+import lotto.domain.lotto.LottoMoney;
 import lotto.domain.lotto.Lottos;
 
 public class ConsoleOutputView {
@@ -14,6 +13,9 @@ public class ConsoleOutputView {
 	private static final String WINNING_RESULT = "%d개 일치 (%d원) - %d개";
 	private static final String WINNING_SECOND_RANK_RESULT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
 	private static final String WINNING_RATIO_MESSAGE = "총 수익률은 %d%%입니다.\n";
+
+	private ConsoleOutputView() {
+	}
 
 	static void printExceptionMessage(String exceptionMessage) {
 		System.out.println(exceptionMessage);
@@ -36,8 +38,8 @@ public class ConsoleOutputView {
 		System.out.println(SEPARATION_LINE);
 	}
 
-	public static void printWinningResult(Stream<Map.Entry<LottoRank, Integer>> result) {
-		result.forEach(e -> System.out.println(getWinningResultMessage(e.getKey(), e.getValue())));
+	public static void printWinningResult(WinningResult result) {
+		result.exceptMiss().forEach(e -> System.out.println(getWinningResultMessage(e.getKey(), e.getValue())));
 	}
 
 	private static String getWinningResultMessage(LottoRank lottoRank, int winningLottoCount) {
@@ -45,11 +47,10 @@ public class ConsoleOutputView {
 		if (lottoRank.isLottoRankOf(LottoRank.SECOND)) {
 			resultMessage = WINNING_SECOND_RANK_RESULT;
 		}
-		return String.format(resultMessage, lottoRank.getMatchCount(), lottoRank.getWinningMoney().getMoney(),
-			winningLottoCount);
+		return String.format(resultMessage, lottoRank.getMatchCount(), lottoRank.getWinningMoney(), winningLottoCount);
 	}
 
-	public static void printWinningRatio(int winningRatio) {
-		System.out.printf(WINNING_RATIO_MESSAGE, winningRatio);
+	public static void printWinningRatio(WinningResult result, LottoMoney lottoMoney) {
+		System.out.printf(WINNING_RATIO_MESSAGE, result.getWinningRatio(lottoMoney));
 	}
 }
