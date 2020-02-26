@@ -11,9 +11,8 @@ public class LottoCountTest {
 	@DisplayName("음수 범위로 로또 구매 횟수 객체 생성시 예외 발생 확인")
 	@Test
 	void validateCount() {
-		assertThatThrownBy(() -> {
-			LottoCount lottoCount = LottoCount.valueOf(-1);
-		}).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> LottoCount.valueOf(-1))
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("카운트 객체의 현재 마지막 계수 상태 여부 확인")
@@ -22,5 +21,24 @@ public class LottoCountTest {
 	void fullCountTest(int fullCount, int currentCount, boolean expected) {
 		LottoCount count = LottoCount.valueOf(fullCount);
 		assertThat(count.isNonFullCount(currentCount)).isEqualTo(expected);
+	}
+
+	@DisplayName("두 카운트 객체간 대소 비교 확인")
+	@ParameterizedTest
+	@CsvSource({"10,9,true", "10,10,false", "10,11,false"})
+	void checkBiggerCountTest(int firstCountValue, int secondCountValue, boolean expected) {
+		LottoCount firstCount = LottoCount.valueOf(firstCountValue);
+		LottoCount secondCount = LottoCount.valueOf(secondCountValue);
+		assertThat(firstCount.isBiggerThan(secondCount)).isEqualTo(expected);
+	}
+
+	@DisplayName("두 카운트 객체간 뺄셈연산")
+	@ParameterizedTest
+	@CsvSource({"10,9,1", "10,10,0"})
+	void minusBetweenTwoLottoCountsTest(int firstCountValue, int secondCountValue, int expectedCountValue) {
+		LottoCount firstCount = LottoCount.valueOf(firstCountValue);
+		LottoCount secondCount = LottoCount.valueOf(secondCountValue);
+		LottoCount expected = LottoCount.valueOf(expectedCountValue);
+		assertThat(firstCount.minus(secondCount)).isEqualTo(expected);
 	}
 }

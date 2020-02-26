@@ -24,7 +24,8 @@ public class LottoApplication {
 			LottoTickets lottos = lottoTicketsGenerator.createLottosByCount(count);
 			OutputView.printLottos(lottos);
 
-			LottoTicket winningLottoTicket = LottoTicket.of(StringUtil.splitRawLottoNumbers(InputView.inputWinningLotto()));
+			LottoTicket winningLottoTicket = LottoTicket.of(
+				StringUtil.splitRawLottoNumbers(InputView.inputWinningLotto()));
 			LottoBall bonusBall = LottoBall.valueOf(InputView.inputWinningBonusBall());
 			WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusBall);
 			TotalResult totalResult = new TotalResult(winningLotto.calculateResult(lottos), money);
