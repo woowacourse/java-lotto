@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.Collection;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
@@ -27,14 +29,14 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printResult(GameResultDto gameResult) {
+	public static void printResult(GameResult result) {
 		System.out.println("당첨 통계 \n ==============");
-		printRank(gameResult.getGameResult());
-		printProfit(gameResult.getProfit());
+		printRank(result.getResult());
 	}
 
-	private static void printRank(GameResult gameResult) {
-		for (RankCount rankCount : gameResult.getResult()) {
+
+	private static void printRank(Collection<RankCount> result) {
+		for (RankCount rankCount : result) {
 			printEachRank(rankCount);
 		}
 	}

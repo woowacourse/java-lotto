@@ -4,20 +4,24 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.PurchaseMoney;
+import lotto.domain.WinningLotto;
 
 public class GameResult {
 	public static final int PERCENTAGE = 100;
 
 	private Map<Statistic, RankCount> result = new LinkedHashMap<>();
 
-	public GameResult() {
-		result.put(Statistic.NOTHING, new RankCount(Statistic.NOTHING));
-		result.put(Statistic.THREE, new RankCount(Statistic.THREE));
-		result.put(Statistic.FOUR, new RankCount(Statistic.FOUR));
-		result.put(Statistic.FIVE, new RankCount(Statistic.FIVE));
-		result.put(Statistic.BONUS, new RankCount(Statistic.BONUS));
-		result.put(Statistic.SIX, new RankCount(Statistic.SIX));
+	public GameResult(WinningLotto winningLotto, Lottos lottos) {
+		for(Statistic statistic : Statistic.values()) {
+			result.put(statistic, new RankCount(statistic));
+		}
+		for (Lotto lotto : lottos) {
+			Statistic statistic = winningLotto.countMatch(lotto);
+			result.get(statistic).plusCount();
+		}
 	}
 
 	public RankCount of(Statistic statistic) {

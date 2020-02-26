@@ -9,7 +9,7 @@ import lotto.domain.Lottos;
 import lotto.domain.Number;
 import lotto.domain.PurchaseMoney;
 import lotto.domain.WinningLotto;
-import lotto.domain.model.LottoGame;
+import lotto.domain.result.GameResult;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -33,7 +33,8 @@ public class LottoController {
 	}
 
 	private void createResult(PurchaseMoney money, Lottos lottos, WinningLotto winningLotto) {
-		LottoGame game = new LottoGame(lottos, winningLotto, money);
-		OutputView.printResult(game.getGameResult());
+		GameResult result = new GameResult(winningLotto, lottos);
+		OutputView.printResult(result);
+		OutputView.printProfit(result.getEarningMoney(money));
 	}
 }

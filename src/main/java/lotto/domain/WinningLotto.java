@@ -13,7 +13,7 @@ public class WinningLotto {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public Statistic isWinningLotto(Lotto lotto) {
+	public Statistic countMatch(Lotto lotto) {
 		int numberOfMatch = lotto.compare(winningNumbers);
 		return Statistic.getRank(numberOfMatch, lotto.contains(bonusNumber));
 	}
