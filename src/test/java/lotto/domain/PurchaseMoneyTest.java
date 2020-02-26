@@ -74,6 +74,16 @@ public class PurchaseMoneyTest {
 
 	@Test
 	void of() {
+		// given
+		int input = 10;
+
+		// when
+		PurchaseMoney result = PurchaseMoney.of(input);
+
+		// then
+		PurchaseMoney expected = new PurchaseMoney(input * PurchaseMoney.LOTTO_PRICE);
+		Assertions.assertThat(result)
+				.isEqualTo(expected);
 	}
 
 }

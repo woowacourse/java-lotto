@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class PurchaseMoney {
 	public static final int POSITIVE_THRESHOLD = 0;
-	private static final int LOTTO_PRICE = 1000;
+	public static final int LOTTO_PRICE = 1000;
 
 	private final int purchaseMoney;
 
