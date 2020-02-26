@@ -15,7 +15,6 @@ public class LottoController {
         OutputView.printinput();
         payment = new Payment(InputView.inputPayment());
         OutputView.printLottoCount(payment.getPayment());
-        lottoResult = new LottoResult();
         lottoTickets = new LottoTickets(payment.countLottoTickets());
         OutputView.printAutoNumbers(lottoTickets);
         OutputView.printInputWinNumber();
@@ -25,9 +24,7 @@ public class LottoController {
     }
 
     public void lottoGame() {
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            lottoResult.checkCount(lottoTicket, winNumber, bonusBall);
-        }
+        lottoResult = lottoTickets.matchLottoResult(winNumber, bonusBall);
         OutputView.printResult();
         printCorrectResults();
         OutputView.printYield(YieldMoney.countYieldMoney(payment, Prize.sumPrize(lottoResult)));

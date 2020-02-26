@@ -15,4 +15,12 @@ public class LottoTickets {
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
+
+    public LottoResult matchLottoResult(WinNumber winNumber, BonusBall bonusBall) {
+        LottoResult lottoResult = new LottoResult();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            lottoResult.checkCount(lottoTicket, winNumber, bonusBall);
+        }
+        return lottoResult;
+    }
 }
