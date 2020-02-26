@@ -18,6 +18,14 @@ import lotto.view.OutputView;
 public class LottoApplication {
 	public static void main(String[] args) {
 		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(InputView.inputPurchaseMoney());
+		Lottos lottos = buyLottos(lottoPurchaseMoney);
+		WinningLotto winningLotto = new WinningLotto(LottoFactory.create(InputView.inputWinningLotto()),
+				LottoNumber.of(InputView.inputWinningLottoBonus()));
+		LottoStatistics lottoStatistics = new LottoStatistics(lottoPurchaseMoney, lottos.match(winningLotto));
+		OutputView.printStatistics(lottoStatistics);
+	}
+
+	private static Lottos buyLottos(LottoPurchaseMoney lottoPurchaseMoney) {
 		List<Lotto> manualLottos = LottoStore.buy(lottoPurchaseMoney,
 				InputView.inputManualLotto(Integer.parseInt(InputView.inputManualLottoCount())));
 		List<Lotto> autoLottos = LottoStore.buy(lottoPurchaseMoney);
@@ -25,9 +33,6 @@ public class LottoApplication {
 				.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 		OutputView.printBuyCount(manualLottos.size(), autoLottos.size());
 		OutputView.printLottos(lottos);
-		WinningLotto winningLotto = new WinningLotto(LottoFactory.create(InputView.inputWinningLotto()),
-				LottoNumber.of(InputView.inputWinningLottoBonus()));
-		LottoStatistics lottoStatistics = new LottoStatistics(lottoPurchaseMoney, lottos.match(winningLotto));
-		OutputView.printStatistics(lottoStatistics);
+		return lottos;
 	}
 }
