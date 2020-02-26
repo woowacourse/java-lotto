@@ -31,7 +31,7 @@ public class Ranks {
 	public double getTotalProfitComparedTo(Money inputMoney) {
 		return (double)ranks.stream()
 			.mapToLong(Rank::getAmount)
-			.sum() / inputMoney.getLottoMoneyValue();
+			.sum() / inputMoney.getMoney();
 	}
 
 	@Override
