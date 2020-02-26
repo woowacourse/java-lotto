@@ -19,13 +19,20 @@ public class LottoController {
 		PurchaseMoney autoTicketMoney
 				= purchaseMoney.subtract(manualTicketMoney);
 
-		PurchasedLottoTickets manualTickets = purchaseManualLotto(manualTicketMoney);
-		PurchasedLottoTickets autoLottoTickets = purchaseAutoLotto(autoTicketMoney);
-		PurchasedLottoTickets purchasedLottoTickets = manualTickets.addAll(autoLottoTickets);
+		PurchasedLottoTickets purchasedLottoTickets
+				= purchaseLottoTickets(manualTicketMoney, autoTicketMoney);
 
 		WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbers();
 
 		produceLottoResult(purchaseMoney, purchasedLottoTickets, winningLottoNumbers);
+	}
+
+	private static PurchasedLottoTickets purchaseLottoTickets(
+			PurchaseMoney manualTicketMoney, PurchaseMoney autoTicketMoney) {
+
+		PurchasedLottoTickets manualTickets = purchaseManualLotto(manualTicketMoney);
+		PurchasedLottoTickets autoLottoTickets = purchaseAutoLotto(autoTicketMoney);
+		return manualTickets.addAll(autoLottoTickets);
 	}
 
 	private static PurchaseMoney createManualTicketMoney() {
