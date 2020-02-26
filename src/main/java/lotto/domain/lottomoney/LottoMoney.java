@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class LottoMoney {
 	private static final long ZERO = 0;
-	private static final long UNIT = 1_000;
 	private static final long LOTTO_PRICE = 1_000;
 	private static final int PERCENT = 100;
 
@@ -47,7 +46,7 @@ public class LottoMoney {
 	}
 
 	private void validateUnit(long parsedMoney) {
-		if (parsedMoney % UNIT != ZERO) {
+		if (parsedMoney % LOTTO_PRICE != ZERO) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.INVALID_UNIT);
 		}
 	}

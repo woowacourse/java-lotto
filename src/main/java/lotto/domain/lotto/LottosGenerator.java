@@ -9,15 +9,15 @@ import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberCache;
 
 public class LottosGenerator {
-	public static Lottos generateLottos(int numberOfLotto) {
+	public static Lottos generate(int numberOfLotto) {
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < numberOfLotto; i++) {
-			lottos.add(generateLotto());
+			lottos.add(createLotto());
 		}
 		return new Lottos(lottos);
 	}
 
-	private static Lotto generateLotto() {
+	private static Lotto createLotto() {
 		List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumberCache.values());
 		Collections.shuffle(lottoNumbers);
 		return lottoNumbers.stream()

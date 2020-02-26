@@ -19,7 +19,7 @@ public class LottoController {
 		int numberOfLotto = inputLottoMoney.calculateNumberOfLotto();
 		printPurchaseCompleteMessage(numberOfLotto);
 
-		Lottos lottos = LottosGenerator.generateLottos(numberOfLotto);
+		Lottos lottos = LottosGenerator.generate(numberOfLotto);
 		printPurchasedLotto(lottos);
 
 		WinningLotto winningLotto = receiveWinningLotto();
