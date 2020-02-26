@@ -11,7 +11,8 @@ public class RankTypeCountTest {
     @Test
     @DisplayName("key에 맞게 카운트를 올려주는지 테스트")
     void update() {
-        LottoManager.updateCount(RankType.FOUR);
-        assertThat(LottoManager.lottoResultCount.get(RankType.FOUR)).isEqualTo(1);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.updateResultCount(RankType.FOUR);
+        assertThat(lottoResult.getResultCount(RankType.FOUR)).isEqualTo(1);
     }
 }

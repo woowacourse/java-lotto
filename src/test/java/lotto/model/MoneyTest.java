@@ -33,7 +33,8 @@ public class MoneyTest {
     @DisplayName("수익률 계산")
     void getYield() {
         Money money = new Money("10000");
-        LottoManager.lottoResultCount.put(RankType.THREE, 1);
-        assertThat(money.getYield()).isEqualTo(50);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.updateResultCount(RankType.THREE);
+        assertThat(money.getYield(lottoResult)).isEqualTo(50);
     }
 }

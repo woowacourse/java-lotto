@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.Arrays;
-import java.util.Map;
 import lotto.exception.NotMultipleOfThousandException;
 import lotto.exception.NotNumberException;
 
@@ -17,12 +16,12 @@ public class Money {
     private int money;
 
     public Money(String input) {
-        int money = validateNotNumber(input);
+        int money = validateNumber(input);
         validateUnitThousand(money);
         this.money = money;
     }
 
-    private int validateNotNumber(String input) {
+    private int validateNumber(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
