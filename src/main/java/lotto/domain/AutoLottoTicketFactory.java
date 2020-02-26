@@ -18,7 +18,8 @@ public class AutoLottoTicketFactory implements LottoGeneratable {
 	@Override
 	public LottoTicket generate(LottoPurchaseMoney lottoPurchaseMoney) {
 		List<Lotto> lottos = new ArrayList<>();
-		for (long count = lottoPurchaseMoney.calculateBuyCount(); count > 0; --count) {
+		while (lottoPurchaseMoney.hasBalance()) {
+			lottoPurchaseMoney.pay();
 			lottos.add(generate());
 		}
 		return new LottoTicket(lottos);
