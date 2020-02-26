@@ -27,4 +27,19 @@ public class LottoNumberTest {
                 .hasMessageContaining("범위");
     }
 
+    @Test
+    @DisplayName("같은 입력으로 생성된 로또 넘버가 같은 객채로 인식되는지 확인")
+    void sameInputSameObject() {
+        LottoNumber l1 = new LottoNumber(2);
+        LottoNumber l2 = new LottoNumber(2);
+        assertThat(l1.equals(l2)).isTrue();
+    }
+
+    @Test
+    @DisplayName("디른 입력으로 생성된 로또 넘버는 다른 객체로 인식됨을 확인")
+    void diffInputDiffObject() {
+        LottoNumber l1 = new LottoNumber(2);
+        LottoNumber l2 = new LottoNumber(6);
+        assertThat(l1.equals(l2)).isFalse();
+    }
 }
