@@ -10,8 +10,8 @@ import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
 
 public class OutputView {
-	public static void printBuyCount(int buyCount) {
-		System.out.println(buyCount + "개를 구매했습니다.");
+	public static void printBuyCount(int manualBuyCount, int autoBuyCount) {
+		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualBuyCount, autoBuyCount);
 	}
 
 	public static void printLottos(Lottos lottos) {
