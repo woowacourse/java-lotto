@@ -1,15 +1,17 @@
 package lotto;
 
+import java.util.Arrays;
+
+import lotto.domain.CompositeLottoTicketsGenerator;
 import lotto.domain.LottoBall;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
-import lotto.domain.LottoTicketsGenerator;
+import lotto.domain.ManualLottoTicketGenerator;
 import lotto.domain.Money;
 import lotto.domain.RandomLottoTicketGenerator;
 import lotto.domain.TotalResult;
 import lotto.domain.WinningLotto;
-import lotto.util.StringUtil;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,11 +19,16 @@ public class LottoApplication {
 	public static void main(String[] args) {
 		try {
 			Money money = Money.valueOf(InputView.inputMoney());
-			LottoCount count = money.calculatePurchaseCount();
-			OutputView.printLottoCount(count);
+			LottoCount totalCount = money.calculatePurchaseCount();
+			LottoCount manualCount = LottoCount.valueOf(InputView.inputManualTicketSize());
+			LottoCount autoCount = totalCount.minus(manualCount);
+			//OutputView.printLottoCount(totalCount);
+			CompositeLottoTicketsGenerator compositeLottoTicketsGenerator = new CompositeLottoTicketsGenerator(
+				(Arrays.asList(new ManualLottoTicketGenerator(), new RandomLottoTicketGenerator())),
+				(Arrays.asList(manualCount, autoCount))
+			);
 
-			LottoTicketsGenerator autoLottoTicketsGenerator = new LottoTicketsGenerator(new RandomLottoTicketGenerator());
-			LottoTickets lottos = autoLottoTicketsGenerator.createLottosByCount(count);
+			LottoTickets lottos = compositeLottoTicketsGenerator.create();
 			OutputView.printLottos(lottos);
 
 			LottoTicket winningLottoTicket = LottoTicket.of(InputView.inputWinningLotto());

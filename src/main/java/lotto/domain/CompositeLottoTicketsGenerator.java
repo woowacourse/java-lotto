@@ -43,7 +43,8 @@ public class CompositeLottoTicketsGenerator {
 	public LottoTickets create() {
 		List<LottoTickets> tickets = new ArrayList<>();
 		for (int i = 0, createSize = lottoCounts.size(); i < createSize; i++) {
-			tickets.add(new LottoTicketsGenerator(lottoTicketGenerators.get(i)).createLottosByCount(lottoCounts.get(i)));
+			tickets.add(
+				new LottoTicketsGenerator(lottoTicketGenerators.get(i)).createLottosByCount(lottoCounts.get(i)));
 		}
 
 		return tickets.stream()
