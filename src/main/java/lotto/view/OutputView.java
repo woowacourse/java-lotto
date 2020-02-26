@@ -60,7 +60,7 @@ public class OutputView {
         System.out.println(YIELD_MESSAGE + yield + YIELD_PERCENT_MESSAGE);
     }
 
-    public static void printManualCount() {
+    public static void printInputManualCount() {
         System.out.println(INPUT_MANUAL_COUNT_MESSAGE);
     }
 

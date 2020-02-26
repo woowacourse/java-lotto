@@ -34,7 +34,7 @@ public class Payment {
         return payment;
     }
 
-    public int countLottoTickets() {
-        return payment / THOUSAND;
+    public int countAutoTickets(int manualCount) {
+        return payment / THOUSAND - manualCount;
     }
 }

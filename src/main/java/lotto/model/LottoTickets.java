@@ -4,12 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
-    private List<LottoTicket> lottoTickets = new ArrayList<>();
+    private List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int tryCount) {
+    public LottoTickets() {
+        lottoTickets = new ArrayList<>();
+    }
+
+    public void autoTickets(int tryCount) {
         for (int i = 0; i < tryCount; i++) {
             lottoTickets.add(new LottoTicket());
         }
+    }
+
+    public void manualTickets(LottoTicket manualTicket) {
+        lottoTickets.add(manualTicket);
     }
 
     public List<LottoTicket> getLottoTickets() {
