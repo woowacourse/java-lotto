@@ -13,8 +13,9 @@ import java.util.stream.Collectors;
 public class LottoApplication {
     public static void main(String[] args) {
         final Money money = new Money(InputView.enterMoney());
-        final List<Ticket> tickets = LottoStore.createTickets(money.getTotalTicketSize(), parseDTO());
-        OutputView.printNumberOfTickets(LottoStore.getRandomTicketSize(), 수동티켓사이즈);
+        final int manualTicketSize = Integer.parseInt(InputView.enterManualTicketSize());
+        final List<Ticket> tickets = LottoStore.createTickets(money.getTotalTicketSize(), manualTicketSize, parseDTO(manualTicketSize));
+        OutputView.printNumberOfTickets(manualTicketSize, money.getTotalTicketSize() - manualTicketSize);
         OutputView.printTickets(tickets);
 
         WinningNumbers winningNumbers = enterWinningNumbers();
@@ -23,8 +24,8 @@ public class LottoApplication {
         OutputView.printProfit(LottoProfit.ofProfit(result, money));
     }
 
-    private static List<LottoNumbersDto> parseDTO() {
-        return InputView.enterManualTickets(Integer.parseInt(InputView.enterManualTicketSize())).stream()
+    private static List<LottoNumbersDto> parseDTO(int manualTicketSize) {
+        return InputView.enterManualTickets(manualTicketSize).stream()
                 .map(LottoNumbersDto::new)
                 .collect(Collectors.toList());
     }

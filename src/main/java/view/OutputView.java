@@ -15,8 +15,8 @@ public class OutputView {
     public static final String LOTTO_RESULT_SEPARATOR = "---------------";
     public static final String LOTTO_PROFIT_MESSAGE = "총 수익률은 %d%%입니다.";
 
-    public static void printNumberOfTickets(int autoTicketSize, int manualTicketSize) {
-        System.out.println(String.format(AUTO_AND_MANUAL_TICKET_SIZE, autoTicketSize, manualTicketSize));
+    public static void printNumberOfTickets(int manualTicketSize, int autoTicketSize) {
+        System.out.println(String.format(AUTO_AND_MANUAL_TICKET_SIZE, manualTicketSize, autoTicketSize));
     }
 
     public static void printTickets(List<Ticket> tickets) {
