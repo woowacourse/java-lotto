@@ -38,6 +38,13 @@ public class InputView {
         return lottoTicket;
     }
 
+    public static int inputManualCount() {
+        String input = scanner.nextLine();
+        checkNullOrEmptyInput(input);
+        checkNumberFormat(input);
+        return Integer.parseInt(input);
+    }
+
     public static List<Integer> inputWinNumber() {
         String inputs = scanner.nextLine();
         checkNullOrEmptyInput(inputs);
