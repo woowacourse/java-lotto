@@ -2,7 +2,6 @@ package lotto;
 
 import java.util.Arrays;
 
-import lotto.domain.CompositeLottoTicketsGenerator;
 import lotto.domain.LottoBall;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoTicket;
@@ -23,19 +22,16 @@ public class LottoApplication {
 			LottoCount manualCount = LottoCount.valueOf(InputView.inputManualTicketSize());
 			LottoCount autoCount = totalCount.minus(manualCount);
 			//OutputView.printLottoCount(totalCount);
-			CompositeLottoTicketsGenerator compositeLottoTicketsGenerator = new CompositeLottoTicketsGenerator(
-				(Arrays.asList(new ManualLottoTicketGenerator(), new RandomLottoTicketGenerator())),
-				(Arrays.asList(manualCount, autoCount))
-			);
 
-			LottoTickets lottos = compositeLottoTicketsGenerator.create();
-			OutputView.printLottos(lottos);
+
+			//LottoTickets lottos = compositeLottoTicketsGenerator.create();
+			//OutputView.printLottos(lottos);
 
 			LottoTicket winningLottoTicket = LottoTicket.of(InputView.inputWinningLotto());
 			LottoBall bonusBall = LottoBall.valueOf(InputView.inputWinningBonusBall());
 			WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusBall);
-			TotalResult totalResult = new TotalResult(winningLotto.calculateResult(lottos), money);
-			OutputView.printStatistics(totalResult);
+			//TotalResult totalResult = new TotalResult(winningLotto.calculateResult(lottos), money);
+			//OutputView.printStatistics(totalResult);
 		} catch (RuntimeException ex) {
 			OutputView.printExceptionMessage(ex.getMessage());
 		}

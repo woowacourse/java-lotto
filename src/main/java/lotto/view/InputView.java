@@ -19,6 +19,10 @@ public class InputView {
 		return Integer.parseInt(SCANNER.nextLine());
 	}
 
+	public static String[] inputManualLotto() {
+		return StringUtil.splitRawLottoNumbers(SCANNER.nextLine());
+	}
+
 	public static String[] inputWinningLotto() {
 		System.out.println(WINNING_LOTTO_MESSAGE);
 		return StringUtil.splitRawLottoNumbers(SCANNER.nextLine());

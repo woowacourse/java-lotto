@@ -40,6 +40,10 @@ public final class LottoCount {
 		return LottoCount.valueOf(this.lottoCount - otherLottoCount.lottoCount);
 	}
 
+	public boolean isNonRightCount(int lottoCount) {
+		return this.lottoCount != lottoCount;
+	}
+
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
