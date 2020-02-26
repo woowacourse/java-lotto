@@ -14,14 +14,10 @@ import java.util.List;
 public class LottoController {
 	public static void run() {
 		PurchaseMoney purchaseMoney = createPurchaseMoney();
-		OutputView.printPurchasedLottoTicketsCount(purchaseMoney);
-
 		int manualTicketNumber = validManualTicketNumber(purchaseMoney);
 		int autoTicketNumber = purchaseMoney.countPurchasedTickets() - manualTicketNumber;
 
-		PurchasedLottoTickets purchasedLottoTickets
-				= createLottoTickets(manualTicketNumber, autoTicketNumber);
-		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
+		PurchasedLottoTickets purchasedLottoTickets = purchaseLottoTickets(manualTicketNumber, autoTicketNumber);
 
 		WinningInformation winningInformation = createWinningInformation();
 
@@ -49,6 +45,15 @@ public class LottoController {
 			OutputView.printWarningMessage(e.getMessage());
 			return validManualTicketNumber(purchaseMoney);
 		}
+	}
+
+	private static PurchasedLottoTickets purchaseLottoTickets(int manualTicketNumber, int autoTicketNumber) {
+		PurchasedLottoTickets purchasedLottoTickets
+				= createLottoTickets(manualTicketNumber, autoTicketNumber);
+
+		OutputView.printPurchasedLottoTicketsCount(manualTicketNumber, autoTicketNumber);
+		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
+		return purchasedLottoTickets;
 	}
 
 	private static PurchasedLottoTickets createLottoTickets(int manualTicketNumber,
