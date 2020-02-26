@@ -22,7 +22,7 @@ public class LottoFactory {
 
 	public static List<Lotto> createLottos(Money purchaseMoney) {
 		moneyValidate(purchaseMoney);
-		int lottoCount = (int)purchaseMoney.getMoney() / LOTTO_PRICE;
+		int lottoCount = (int)purchaseMoney.division(LOTTO_PRICE);
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < lottoCount; i++) {
 			lottos.add(createLotto());
@@ -31,7 +31,7 @@ public class LottoFactory {
 	}
 
 	private static void moneyValidate(Money purchaseMoney) {
-		if (purchaseMoney.getMoney() < LOTTO_PRICE) {
+		if (purchaseMoney.isLessThan(LOTTO_PRICE)) {
 			throw new LackOfMoneyException();
 		}
 	}

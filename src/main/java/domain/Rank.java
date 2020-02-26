@@ -30,6 +30,10 @@ public enum Rank {
 			.orElse(NO_RANK);
 	}
 
+	public double totalMoneyByRank(int count) {
+		return winningMoney.multiply(count);
+	}
+
 	public int getMatchedCount() {
 		return matchedCount;
 	}

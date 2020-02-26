@@ -12,17 +12,18 @@ public class GameResult {
 	}
 
 	public double calculateProfit(Money purchaseMoney) {
-		return getResultMoney().getMoney() / purchaseMoney.getMoney() * HUNDRED;
+		Money resultMoney = calculateResultMoney();
+		return resultMoney.division(purchaseMoney) * HUNDRED;
 	}
 
-	public Money getResultMoney() {
+	public Money calculateResultMoney() {
 		return new Money(prizeMoneyCalculation());
 	}
 
 	private double prizeMoneyCalculation() {
 		return ranks.keySet()
 			.stream()
-			.mapToDouble(rank -> rank.getWinningMoney().getMoney() * ranks.get(rank))
+			.mapToDouble(rank -> rank.totalMoneyByRank(ranks.get(rank)))
 			.sum();
 	}
 

@@ -3,14 +3,26 @@ package domain;
 import java.util.Objects;
 
 public class Money implements Comparable<Money> {
-	private final double money;
+	private double money;
 
 	public Money(double money) {
 		this.money = money;
 	}
 
-	public double getMoney() {
-		return money;
+	public boolean isLessThan(int other) {
+		return this.money < other;
+	}
+
+	public double division(int other) {
+		return money / other;
+	}
+
+	public double division(Money other) {
+		return money / other.money;
+	}
+
+	public double multiply(int other) {
+		return money * other;
 	}
 
 	@Override
@@ -31,5 +43,9 @@ public class Money implements Comparable<Money> {
 	@Override
 	public int hashCode() {
 		return Objects.hash(money);
+	}
+
+	public double getMoney() {
+		return money;
 	}
 }

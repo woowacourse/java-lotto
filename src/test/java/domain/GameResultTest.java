@@ -33,7 +33,7 @@ class GameResultTest {
 	@Test
 	void getResultMoney() {
 		// given
-		Money resultMoney = gameResult.getResultMoney();
+		Money resultMoney = gameResult.calculateResultMoney();
 		Money expected = new Money(3015000);
 		// then
 		assertThat(resultMoney).isEqualTo(expected);

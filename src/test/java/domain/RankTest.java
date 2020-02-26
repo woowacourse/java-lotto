@@ -42,6 +42,6 @@ class RankTest {
 	@ParameterizedTest
 	@MethodSource("createCountAndRank")
 	void of(int count, Rank expected) {
-		assertThat(Rank.of(count)).isEqualTo(expected);
+		assertThat(Rank.of(count, bonusNumberMatch)).isEqualTo(expected);
 	}
 }
