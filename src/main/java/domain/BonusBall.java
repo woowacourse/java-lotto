@@ -13,7 +13,7 @@ public class BonusBall {
         validateNullOrBlank(input);
         int parseNumber = validateParseInteger(input);
         validateBonusNumberRange(parseNumber);
-        this.bonusNumber = new LottoNumber(parseNumber);
+        this.bonusNumber = LottoNumber.getLottoNumber(parseNumber);
     }
 
     public LottoNumber getBonusNumber() {
