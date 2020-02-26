@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class RankTest {
@@ -23,6 +24,7 @@ public class RankTest {
 			);
 	}
 
+	@DisplayName("1등 조건 만족시 FIRST를 반환")
 	@Test
 	void ofTestWhenAllMatches() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -37,6 +39,7 @@ public class RankTest {
 		assertThat(actual).isEqualTo(expected);
 	}
 
+	@DisplayName("2등 조건 만족시 SECOND를 반환")
 	@Test
 	void ofTestWhenSecondPrize() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -51,6 +54,7 @@ public class RankTest {
 		assertThat(actual).isEqualTo(expected);
 	}
 
+	@DisplayName("3등 조건 만족시 THIRD를 반환")
 	@Test
 	void ofTestWhenThirdPrize() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -65,6 +69,7 @@ public class RankTest {
 		assertThat(actual).isEqualTo(expected);
 	}
 
+	@DisplayName("4등 조건 만족시 FOURTH를 반환")
 	@Test
 	void ofTestWhenFourthPrize() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -79,6 +84,7 @@ public class RankTest {
 		assertThat(actual).isEqualTo(expected);
 	}
 
+	@DisplayName("5등 조건 만족시 FIFTH를 반환")
 	@Test
 	void ofTestWhenFifthPrize() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -93,6 +99,7 @@ public class RankTest {
 		assertThat(actual).isEqualTo(expected);
 	}
 
+	@DisplayName("당참 조건이 아닐 경우 NONE을 반환")
 	@Test
 	void ofTestWhenUnderThreeMatches() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);

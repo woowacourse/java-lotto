@@ -8,11 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ManualTicketsFactoryTest {
+	@DisplayName("수동 생성 기능 테스트")
 	@Test
-	void createLottoTicketWhenInputPurchasingAmount() {
+	void createLottoTickets() {
 		List<LottoNumber> lottoNumbers1 = new ArrayList<>();
 		List<LottoNumber> lottoNumbers2 = new ArrayList<>();
 		List<LottoTicket> lottos = new ArrayList<>();

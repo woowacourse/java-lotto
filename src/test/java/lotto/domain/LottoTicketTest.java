@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
+	@DisplayName("getter 테스트")
 	@Test
 	void checkGetNumbers() {
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -26,6 +28,7 @@ public class LottoTicketTest {
 		assertThat(actual).isEqualTo(expected);
 	}
 
+	@DisplayName("로또 번호 일치 개수 테스트")
 	@Test
 	void checkGetMatchCountWhenAllMatch() {
 		List<LottoNumber> lottoNumbers =
@@ -43,6 +46,7 @@ public class LottoTicketTest {
 		assertThat(lottoTicket.getMatchCount(winningNumbers)).isEqualTo(6);
 	}
 
+	@DisplayName("보너스 번호 일치 여부 테스트")
 	@Test
 	void checkIsBonusNotMatchWhenSecondPrizeState() {
 		List<LottoNumber> lottoNumbers =

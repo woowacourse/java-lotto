@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTicketsTest {
@@ -25,6 +26,7 @@ class LottoTicketsTest {
 		);
 	}
 
+	@DisplayName("1등, getRanks 테스트")
 	@Test
 	void checkGetRanksByWhenFirstState() {
 		List<Rank> values = new ArrayList<>();
@@ -42,6 +44,7 @@ class LottoTicketsTest {
 		assertEquals(expected, actual);
 	}
 
+	@DisplayName("size 테스트")
 	@Test
 	void checkSize() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -56,6 +59,7 @@ class LottoTicketsTest {
 		assertEquals(expected, actual);
 	}
 
+	@DisplayName("getter 테스트")
 	@Test
 	void checkGetTickets() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -69,6 +73,7 @@ class LottoTicketsTest {
 		assertEquals(expected, actual);
 	}
 
+	@DisplayName("add 테스트 (방어적 복사)")
 	@Test
 	void checkAdd() {
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
