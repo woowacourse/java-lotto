@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -42,7 +42,7 @@ public final class LottoBall implements Comparable<LottoBall> {
 		throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE);
 	}
 
-	static Collection<LottoBall> values() {
+	public static Collection<LottoBall> values() {
 		return Collections.unmodifiableCollection(BALL_CACHE.values());
 	}
 

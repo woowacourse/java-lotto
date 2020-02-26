@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class RandomLottoTicketGenerator implements LottoTicketGenerator {
+public class RandomLottoTicketFactory implements LottoTicketFactory {
 	@Override
 	public LottoTicket create() {
 		return new LottoTicket(createRandomBalls());

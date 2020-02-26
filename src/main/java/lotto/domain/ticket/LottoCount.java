@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import java.util.Objects;
 
@@ -44,6 +44,10 @@ public final class LottoCount {
 		return this.lottoCount != lottoCount;
 	}
 
+	public int getCount() {
+		return lottoCount;
+	}
+
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
@@ -65,4 +69,5 @@ public final class LottoCount {
 	public String toString() {
 		return String.valueOf(lottoCount);
 	}
+
 }

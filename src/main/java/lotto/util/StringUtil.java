@@ -3,7 +3,7 @@ package lotto.util;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.LottoBall;
+import lotto.domain.ticket.LottoBall;
 
 public class StringUtil {
 	private static final String LOTTO_NUMBERS_DELIMITER = ", ";

@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.domain.LottoRank;
+import lotto.domain.result.LottoRank;
 
 public class PrintTextUtil {
 	private static final String ONE_RANK_MATCH_RESULT_MESSAGE = "%s %s %s";
@@ -25,6 +25,6 @@ public class PrintTextUtil {
 	}
 
 	private static String getTotalPrizeAndCountMessage(LottoRank lottoRank, Long count) {
-		return String.format(TOTAL_PRIZE_AND_COUNT_MESSAGE, lottoRank.getMoney(), count);
+		return String.format(TOTAL_PRIZE_AND_COUNT_MESSAGE, lottoRank.getPrize(), count);
 	}
 }

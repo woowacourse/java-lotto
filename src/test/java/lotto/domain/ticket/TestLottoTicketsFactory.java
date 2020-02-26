@@ -1,18 +1,13 @@
-package lotto.domain.generator;
+package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.domain.LottoCount;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketGenerator;
-import lotto.domain.LottoTickets;
-
-public class FixedLottoTicketsGenerator implements LottoTicketsGenerator {
-	private final LottoTicketGenerator ticketGenerator;
+public class TestLottoTicketsFactory implements LottoTicketsFactory {
+	private final LottoTicketFactory ticketGenerator;
 	private final LottoCount lottoCount;
 
-	public FixedLottoTicketsGenerator(LottoTicketGenerator ticketGenerator, LottoCount lottoCount) {
+	public TestLottoTicketsFactory(LottoTicketFactory ticketGenerator, LottoCount lottoCount) {
 		this.ticketGenerator = ticketGenerator;
 		this.lottoCount = lottoCount;
 	}

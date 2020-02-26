@@ -1,4 +1,4 @@
-package lotto.domain.generator;
+package lotto.domain.ticket;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -9,17 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.domain.LottoCount;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketGenerator;
-import lotto.domain.LottoTickets;
-
-class LottoTicketsGeneratorTest {
+class LottoTicketsFactoryTest {
 	@Test
 	void createLottoTicketsTest() {
 		LottoCount lottoCount = LottoCount.valueOf(5);
-		LottoTicketGenerator ticketGenerator = () -> LottoTicket.of("1", "2", "3", "4", "5", "6");
-		LottoTicketsGenerator generator = new FixedLottoTicketsGenerator(ticketGenerator, lottoCount);
+		LottoTicketFactory ticketGenerator = () -> LottoTicket.of("1", "2", "3", "4", "5", "6");
+		LottoTicketsFactory generator = new TestLottoTicketsFactory(ticketGenerator, lottoCount);
 		LottoTickets lottoTickets = generator.create();
 		assertThat(lottoTickets.getLottoTickets()).containsExactly(
 			LottoTicket.of("1", "2", "3", "4", "5", "6"),
@@ -40,7 +35,7 @@ class LottoTicketsGeneratorTest {
 			"2, 5, 6, 7, 8, 9",
 			"2, 5, 6, 7, 8, 9"
 		);
-		assertThatThrownBy(() -> new ManualLottoTicketsGenerator(manualTicketNumbers, lottoCount))
+		assertThatThrownBy(() -> new ManualLottoTicketsFactory(manualTicketNumbers, lottoCount))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -53,9 +48,9 @@ class LottoTicketsGeneratorTest {
 			"2, 5, 6, 7, 8, 9"
 		);
 		LottoCount lottoCount = LottoCount.valueOf(4);
-		LottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualTicketNumbers,
+		LottoTicketsFactory manualLottoTicketsFactory = new ManualLottoTicketsFactory(manualTicketNumbers,
 			lottoCount);
-		LottoTickets lottoTickets = manualLottoTicketsGenerator.create();
+		LottoTickets lottoTickets = manualLottoTicketsFactory.create();
 
 		assertThat(lottoTickets.getLottoTickets()).containsExactly(
 			LottoTicket.of("1", "2", "3", "4", "5", "6"),
@@ -67,12 +62,14 @@ class LottoTicketsGeneratorTest {
 
 	@Test
 	void CompositedTicketsGeneratorTest() {
-		List<LottoTicketsGenerator> ticketsGenerators = Arrays.asList(
-			new FixedLottoTicketsGenerator(() -> LottoTicket.of("1", "2", "3", "4", "5", "6"), LottoCount.valueOf(3)),
-			new FixedLottoTicketsGenerator(() -> LottoTicket.of("11", "12", "13", "14", "15", "16"), LottoCount.valueOf(2)),
-			new FixedLottoTicketsGenerator(() -> LottoTicket.of("21", "22", "23", "24", "25", "26"), LottoCount.valueOf(1))
+		List<LottoTicketsFactory> ticketsGenerators = Arrays.asList(
+			new TestLottoTicketsFactory(() -> LottoTicket.of("1", "2", "3", "4", "5", "6"), LottoCount.valueOf(3)),
+			new TestLottoTicketsFactory(() -> LottoTicket.of("11", "12", "13", "14", "15", "16"),
+				LottoCount.valueOf(2)),
+			new TestLottoTicketsFactory(() -> LottoTicket.of("21", "22", "23", "24", "25", "26"),
+				LottoCount.valueOf(1))
 		);
-		LottoTicketsGenerator generator = new CompositeLottoTicketsGenerator(ticketsGenerators);
+		LottoTicketsFactory generator = new CompositeLottoTicketsFactory(ticketsGenerators);
 		LottoTickets lottoTickets = generator.create();
 
 		assertThat(lottoTickets.getLottoTickets()).containsExactly(

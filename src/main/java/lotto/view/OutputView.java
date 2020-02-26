@@ -3,11 +3,11 @@ package lotto.view;
 import java.util.Map;
 import java.util.Set;
 
-import lotto.domain.LottoCount;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.TotalResult;
+import lotto.domain.result.LottoRank;
+import lotto.domain.result.TotalResult;
+import lotto.domain.ticket.LottoCount;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 import lotto.util.PrintTextUtil;
 import lotto.util.StringUtil;
 

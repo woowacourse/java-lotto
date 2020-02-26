@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,17 +47,17 @@ public class LottoTicket {
 			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));
 	}
 
-	static LottoTicket of(int... lottoNumbers) {
+	public static LottoTicket of(int... lottoNumbers) {
 		return Arrays.stream(lottoNumbers)
 			.mapToObj(LottoBall::valueOf)
 			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));
 	}
 
-	boolean contains(LottoBall lottoBall) {
+	public boolean contains(LottoBall lottoBall) {
 		return lottoBalls.contains(lottoBall);
 	}
 
-	int countMatchingBall(LottoTicket lottoTicket) {
+	public int countMatchingBall(LottoTicket lottoTicket) {
 		Set<LottoBall> sameBalls = new HashSet<>(lottoBalls);
 		sameBalls.retainAll(lottoTicket.lottoBalls);
 		return sameBalls.size();

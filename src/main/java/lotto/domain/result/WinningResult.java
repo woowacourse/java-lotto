@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.result;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import lotto.domain.ticket.Money;
 
 public class WinningResult {
 	private final Map<LottoRank, Long> winningResult;

@@ -1,20 +1,17 @@
-package lotto.domain.generator;
+package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import lotto.domain.LottoCount;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.util.StringUtil;
 
-public class ManualLottoTicketsGenerator implements LottoTicketsGenerator {
+public class ManualLottoTicketsFactory implements LottoTicketsFactory {
 	private final List<String> manualLottoNumbers;
 	private final LottoCount lottoCount;
 
-	public ManualLottoTicketsGenerator(List<String> manualLottoNumbers, LottoCount lottoCount) {
+	public ManualLottoTicketsFactory(List<String> manualLottoNumbers, LottoCount lottoCount) {
 		validate(manualLottoNumbers, lottoCount);
 		this.manualLottoNumbers = Collections.unmodifiableList(new ArrayList<>(manualLottoNumbers));
 		this.lottoCount = lottoCount;

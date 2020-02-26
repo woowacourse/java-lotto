@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.LottoBall;
+import lotto.domain.ticket.LottoBall;
 
 class StringUtilTest {
 	@DisplayName("하나의 문자열을 구분자를 기준으로 분리하는 기능 확인")

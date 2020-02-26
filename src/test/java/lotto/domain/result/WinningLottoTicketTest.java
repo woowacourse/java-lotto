@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.result;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -8,8 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.generator.FixedLottoTicketsGenerator;
-import lotto.domain.generator.LottoTicketsGenerator;
+import lotto.domain.ticket.LottoBall;
+import lotto.domain.ticket.LottoCount;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTicketFactory;
+import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.LottoTicketsFactory;
+import lotto.domain.ticket.TestLottoTicketsFactory;
 
 public class WinningLottoTicketTest {
 	private LottoTicket lottoTicket;
@@ -33,10 +38,10 @@ public class WinningLottoTicketTest {
 	void getResult() {
 		LottoBall ball = LottoBall.valueOf(40);
 		WinningLotto winningLotto = new WinningLotto(lottoTicket, ball);
-		LottoTicketGenerator lottoTicketGenerator = () -> lottoTicket;
+		LottoTicketFactory lottoTicketFactory = () -> lottoTicket;
 		LottoCount count = LottoCount.valueOf(2);
 
-		LottoTicketsGenerator generator = new FixedLottoTicketsGenerator(lottoTicketGenerator, count);
+		LottoTicketsFactory generator = new TestLottoTicketsFactory(lottoTicketFactory, count);
 		LottoTickets lottoTickets = generator.create();
 
 		WinningResult result = winningLotto.calculateResult(lottoTickets);

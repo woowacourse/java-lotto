@@ -1,6 +1,8 @@
-package lotto.domain;
+package lotto.domain.result;
 
 import java.util.Map;
+
+import lotto.domain.ticket.Money;
 
 public class TotalResult {
 	private final WinningResult winningResult;

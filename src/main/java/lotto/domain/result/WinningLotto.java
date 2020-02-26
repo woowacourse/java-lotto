@@ -1,7 +1,11 @@
-package lotto.domain;
+package lotto.domain.result;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import lotto.domain.ticket.LottoBall;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 
 public class WinningLotto {
 	private static final String DUPLICATE_EXCEPTION_MESSAGE = "당첨 번호와 보너스 볼이 중복되었습니다.";
@@ -39,7 +43,7 @@ public class WinningLotto {
 			.collect(Collectors.collectingAndThen(Collectors.toList(), WinningResult::new));
 	}
 
-	LottoRank calculateRank(LottoTicket lottoTicket) {
+	public LottoRank calculateRank(LottoTicket lottoTicket) {
 		int matchCount = lottoTicket.countMatchingBall(winningLottoTicket);
 		boolean hasBonusBall = lottoTicket.contains(bonusLottoBall);
 		return LottoRank.findRank(matchCount, hasBonusBall);
