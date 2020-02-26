@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lottonumber;
 
 import java.util.*;
 import java.util.stream.IntStream;

@@ -1,5 +1,9 @@
-package lotto.domain;
+package lotto.domain.lottonumber;
 
+import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lottonumber.BonusLottoNumber;
+import lotto.domain.lottonumber.InvalidLottoNumberException;
+import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

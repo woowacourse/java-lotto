@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.lottonumber;
+
+import lotto.domain.lotto.WinningLotto;
 
 /**
  * LottoNumber의 하위 클래스로서 사용자가 입력하는 보너스 로또 번호 클래스

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.money;
 
 /**
  * 로또를 위한 돈과 관련된 커스텀 예외

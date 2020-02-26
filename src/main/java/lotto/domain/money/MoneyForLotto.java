@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.money;
 
 import java.util.Objects;
 

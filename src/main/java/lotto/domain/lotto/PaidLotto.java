@@ -1,4 +1,8 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import lotto.domain.lottonumber.BonusLottoNumber;
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.result.Rank;
 
 import java.util.List;
 import java.util.Objects;

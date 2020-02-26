@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 /**
  * Lottos 일급 컬랙션과 관련된 커스텀 예외

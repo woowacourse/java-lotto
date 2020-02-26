@@ -1,6 +1,11 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.money.MoneyForLotto;
+import lotto.domain.result.Rank;
+import lotto.domain.result.ResultStatistic;
 
 import java.util.ArrayList;
 import java.util.List;

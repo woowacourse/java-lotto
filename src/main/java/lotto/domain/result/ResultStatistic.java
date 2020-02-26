@@ -1,4 +1,11 @@
-package lotto.domain;
+package lotto.domain.result;
+
+import lotto.domain.lottonumber.BonusLottoNumber;
+import lotto.domain.money.MoneyForLotto;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.PaidLotto;
+import lotto.domain.lotto.WinningLotto;
 
 import java.util.HashMap;
 import java.util.Map;

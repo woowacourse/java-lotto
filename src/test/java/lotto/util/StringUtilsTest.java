@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;

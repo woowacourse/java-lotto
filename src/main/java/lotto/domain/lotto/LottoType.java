@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 /**
  * 로또 타입 이넘

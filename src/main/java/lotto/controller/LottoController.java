@@ -1,10 +1,14 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.lotto.*;
+import lotto.domain.lottonumber.BonusLottoNumber;
+import lotto.domain.lottonumber.InvalidLottoNumberException;
+import lotto.domain.money.InvalidMoneyForLottoException;
+import lotto.domain.money.MoneyForLotto;
+import lotto.domain.result.ResultStatistic;
 import lotto.util.StringUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.domain.LottoFactory;
 
 /**
  * 로또 실행을 담당, View와 Domain을 연결, 예외처리 담당
