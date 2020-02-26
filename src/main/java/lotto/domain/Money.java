@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import lotto.exceptions.NotAllowedMoneyAmountException;
@@ -34,6 +35,25 @@ public class Money {
 
 	public Money multiple(int operand) {
 		return new Money(this.money * operand);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		Money money1 = (Money)o;
+		return money == money1.money;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(money);
 	}
 
 	@Override
