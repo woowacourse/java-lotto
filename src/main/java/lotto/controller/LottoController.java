@@ -8,6 +8,7 @@ public class LottoController {
     private Payment payment;
     private LottoResult lottoResult;
     private LottoTickets lottoTickets;
+    private TicketNumber ticketNumber;
     private WinNumber winNumber;
     private BonusBall bonusBall;
 
@@ -15,7 +16,6 @@ public class LottoController {
         OutputView.printinput();
         payment = new Payment(InputView.inputPayment());
         lottoTickets = new LottoTickets();
-        OutputView.printInputManualCount();
         makeLottoTickets();
         OutputView.printAutoNumbers(lottoTickets);
         OutputView.printInputWinNumber();
@@ -25,14 +25,15 @@ public class LottoController {
     }
 
     public void makeLottoTickets() {
-        int manualCount = InputView.inputManualCount();
+        OutputView.printInputManualCount();
+        ticketNumber = new TicketNumber(payment.countAutoTickets(), InputView.inputManualCount());
         OutputView.printInputManualTicket();
-        for (int i = 0; i <manualCount; i++) {
+        for (int i = 0; i < ticketNumber.getManualTicket(); i++) {
             LottoTicket lottoTicket = new LottoTicket(InputView.inputLottoTicket());
             lottoTickets.manualTickets(lottoTicket);
         }
-        OutputView.printTicketCount(manualCount, payment.countAutoTickets(manualCount));
-        lottoTickets.autoTickets(payment.countAutoTickets(manualCount));
+        OutputView.printTicketCount(ticketNumber.getManualTicket(), ticketNumber.getAutoTicket());
+        lottoTickets.autoTickets(ticketNumber.getAutoTicket());
     }
 
     public void lottoGame() {
