@@ -42,4 +42,19 @@ public class MoneyTest {
 		money = new Money("10000");
 		assertThat(money.calculateIncomeRate(5000)).isEqualTo(50);
 	}
+
+	@Test
+	void hasNextTest() {
+		Money money = new Money("1000");
+		assertThat(money.hasNext()).isTrue();
+
+		money.next();
+		assertThat(money.hasNext()).isFalse();
+	}
+
+	@Test
+	void nextTest() {
+		Money money = new Money("1000");
+		assertThat(money.next()).isEqualTo(0);
+	}
 }

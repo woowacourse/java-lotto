@@ -45,7 +45,6 @@ public class ManualLottoCountTest {
 	@Test
 	void nextTest() {
 		ManualLottoCount manualLottoCount = new ManualLottoCount("1", money);
-		assertThat(manualLottoCount.next()).isEqualTo(1);
 		assertThat(manualLottoCount.next()).isEqualTo(0);
 	}
 }
