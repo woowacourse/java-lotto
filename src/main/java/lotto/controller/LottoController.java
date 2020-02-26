@@ -25,25 +25,13 @@ public class LottoController {
 		MoneyForLotto moneyForLotto = receiveMoneyForLotto();
 		LottoCount lottoCount = receiveLottoCount(moneyForLotto);
 
-		Lottos manualLottos = receiveManualLottos(lottoCount);
-		Lottos autoLottos = LottosFactory.createAutoLottos(lottoCount.getTotalLottoCount() - lottoCount.getManualLottoCount());
-		Lottos purchasedLottos = manualLottos.add(autoLottos);
+		Lottos purchasedLottos = receivePurchasedLottos(lottoCount);
 		OutputView.printPurchasedLottos(lottoCount, purchasedLottos);
 
 		WinningLotto winningLotto = receiveWinningLotto();
 
 		ResultStatistic result = ResultStatistic.calculate(purchasedLottos, winningLotto);
 		OutputView.printResultStatistic(result, moneyForLotto);
-	}
-
-	private static Lottos receiveManualLottos(LottoCount lottoCount) {
-		try {
-			List<String> manualLottoNumbers = InputView.getManualLottoNumbers(lottoCount.getManualLottoCount());
-			return LottosFactory.createManualLottos(manualLottoNumbers);
-		} catch (NullPointerException | IllegalArgumentException |  InvalidLottoNumberException | InvalidLottosException | InvalidLottoException e) {
-			OutputView.printExceptionMessage(e);
-			return receiveManualLottos(lottoCount);
-		}
 	}
 
 	private static MoneyForLotto receiveMoneyForLotto() {
@@ -61,6 +49,22 @@ public class LottoController {
 		} catch (IllegalArgumentException | NullPointerException | InvalidLottoNumberException e) {
 			OutputView.printExceptionMessage(e);
 			return receiveLottoCount(moneyForLotto);
+		}
+	}
+
+	private static Lottos receivePurchasedLottos(LottoCount lottoCount) {
+		Lottos manualLottos = receiveManualLottos(lottoCount);
+		Lottos autoLottos = LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount());
+		return manualLottos.add(autoLottos);
+	}
+
+	private static Lottos receiveManualLottos(LottoCount lottoCount) {
+		try {
+			List<String> manualLottoNumbers = InputView.getManualLottoNumbers(lottoCount.getManualLottoCount());
+			return LottosFactory.createManualLottos(manualLottoNumbers);
+		} catch (NullPointerException | IllegalArgumentException |  InvalidLottoNumberException | InvalidLottoException | InvalidLottosException e) {
+			OutputView.printExceptionMessage(e);
+			return receiveManualLottos(lottoCount);
 		}
 	}
 
