@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class RankCountTest {
-
 	@Test
 	void plusCount() {
 		RankCount rankCount = new RankCount(Statistic.SIX);

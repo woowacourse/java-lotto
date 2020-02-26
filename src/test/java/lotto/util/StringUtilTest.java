@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import lotto.exception.EmptyInputException;
 
+import lotto.exception.EmptyInputException;
 
 @SuppressWarnings("NonAsciiCharacters")
 public class StringUtilTest {
@@ -25,17 +25,17 @@ public class StringUtilTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"","  ","    "})
+	@ValueSource(strings = {"", "  ", "    "})
 	void empty(String value) {
-		assertThatThrownBy(()->{
+		assertThatThrownBy(() -> {
 			StringUtil.checkBlank(value);
 		}).isInstanceOf(EmptyInputException.class)
 			.hasMessageMatching("공백은 사용할 수 없습니다.");
 	}
 
 	@Test
-	void nullTest(){
-		assertThatThrownBy(()->{
+	void nullTest() {
+		assertThatThrownBy(() -> {
 			StringUtil.checkNull(null);
 		}).isInstanceOf(NullPointerException.class)
 			.hasMessageMatching("널은 입력되지 않습니다.");

@@ -6,7 +6,6 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.result.GameResult;
-import lotto.domain.result.GameResultDto;
 import lotto.domain.result.RankCount;
 import lotto.domain.result.Statistic;
 
@@ -27,6 +26,10 @@ public class OutputView {
 			System.out.println(lotto.getNumbers());
 		}
 		System.out.println();
+	}
+
+	public static void printProfit(double profit) {
+		System.out.println("총 수익률은 " + profit + "% 입니다.");
 	}
 
 	public static void printResult(GameResult result) {
@@ -72,9 +75,5 @@ public class OutputView {
 			return true;
 		}
 		return false;
-	}
-
-	private static void printProfit(double profit) {
-		System.out.println("총 수익률은 " + profit + "% 입니다.");
 	}
 }

@@ -11,7 +11,7 @@ public class LottoCountTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"-3", "-1"})
 	void nagativeTest(String input) {
-		assertThatThrownBy(() -> new LottoCount(input,10)).isInstanceOf(InvalidRangeException.class)
+		assertThatThrownBy(() -> new LottoCount(input, 10)).isInstanceOf(InvalidRangeException.class)
 			.hasMessageMatching("음수는 사용할 수 없습니다.");
 	}
 }

@@ -16,7 +16,7 @@ import lotto.view.OutputView;
 public class LottoController {
 	public void run() {
 		PurchaseMoney money = new PurchaseMoney(InputView.getMoney());
-		LottoCount count = new LottoCount(InputView.getManualCount(),money.parseToPiece());
+		LottoCount count = new LottoCount(InputView.getManualCount(), money.parseToPiece());
 		List<String> manualLottoInput = InputView.getManualLottos(count.getManualLotto());
 		Lottos lottos = LottoFactory.create(manualLottoInput, count.getAutoLotto());
 
