@@ -3,12 +3,15 @@ package lotto.controller;
 import lotto.domain.lotto.*;
 import lotto.domain.lottonumber.BonusLottoNumber;
 import lotto.domain.lottonumber.InvalidLottoNumberException;
+import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.money.InvalidMoneyForLottoException;
 import lotto.domain.money.MoneyForLotto;
 import lotto.domain.result.ResultStatistic;
 import lotto.util.StringUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.List;
 
 /**
  * 로또 실행을 담당, View와 Domain을 연결, 예외처리 담당
@@ -22,7 +25,10 @@ public class LottoController {
 	public static void run() {
 		MoneyForLotto moneyForLotto = receiveMoneyForLotto();
 		LottoCount lottoCount = receiveLottoCount(moneyForLotto);
-		Lottos lottos = LottosFactory.createLottosAuto(lottoCount.getTotalLottoCount());
+
+		Lottos manualLottos = receiveManualLottos(lottoCount);
+		Lottos autoLottos = LottosFactory.createAutoLottos(lottoCount.getTotalLottoCount() - lottoCount.getManualLottoCount());
+		Lottos lottos = manualLottos.add(autoLottos);
 		OutputView.printPurchasedLottos(lottoCount.getTotalLottoCount(), lottos);
 
 		WinningLotto winningLotto = receiveWinningLotto();
@@ -30,6 +36,16 @@ public class LottoController {
 
 		ResultStatistic result = ResultStatistic.calculate(lottos, winningLotto, bonusLottoNumber);
 		OutputView.printResultStatistic(result, moneyForLotto);
+	}
+
+	private static Lottos receiveManualLottos(LottoCount lottoCount) {
+		try {
+			List<String> manualLottoNumbers = InputView.getManualLottoNumbers(lottoCount.getManualLottoCount());
+			return LottosFactory.createManualLottos(manualLottoNumbers);
+		} catch (NullPointerException | IllegalArgumentException |  InvalidLottoNumberException | InvalidLottosException | InvalidLottoException e) {
+			OutputView.printExceptionMessage(e);
+			return receiveManualLottos(lottoCount);
+		}
 	}
 
 	private static MoneyForLotto receiveMoneyForLotto() {
@@ -53,7 +69,7 @@ public class LottoController {
 	private static WinningLotto receiveWinningLotto() {
 		try {
 			String inputWinningLotto = InputView.getWinningLotto();
-			return (WinningLotto) LottoFactory.createLottoManual(
+			return (WinningLotto) LottoFactory.createManualLotto(
 					LottoType.WINNING_LOTTO,
 					StringUtils.splitIntoLottoNumbers(inputWinningLotto)
 			);

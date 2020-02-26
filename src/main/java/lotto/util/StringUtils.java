@@ -35,13 +35,13 @@ public class StringUtils {
 				.map(LottoNumber::of)
 				.collect(Collectors.toList());
 	}
-
-	public static List<String> splitIntoStringLottoNumbers(final String inputLottoNumbers) {
-		validateInputString(inputLottoNumbers);
-		return Arrays.stream(inputLottoNumbers.split("\n"))
-				.map(String::trim)
-				.collect(Collectors.toList());
-	}
+//
+//	public static List<String> splitIntoManualLottoNumbers(final List<String> inputLottoNumbers) {
+//		validateInputString(inputLottoNumbers);
+//		return Arrays.stream(inputLottoNumbers.split("\n"))
+//				.map(String::trim)
+//				.collect(Collectors.toList());
+//	}
 
 	private static void validateInputString(final String inputString) {
 		Objects.requireNonNull(inputString, NULL_INPUT_EXCEPTION_MESSAGE);

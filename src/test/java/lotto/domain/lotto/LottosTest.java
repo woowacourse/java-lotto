@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -24,9 +23,9 @@ public class LottosTest {
 	@Test
 	void Lottos_생성자_올바른_동작_확인() {
 		List<Lotto> inputLottos = Arrays.asList(
-				LottoFactory.createLottoAuto(LottoType.PAID_LOTTO),
-				LottoFactory.createLottoAuto(LottoType.PAID_LOTTO),
-				LottoFactory.createLottoAuto(LottoType.PAID_LOTTO)
+				LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO),
+				LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO),
+				LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO)
 		);
 		assertThat(new Lottos(inputLottos)).isInstanceOf(Lottos.class);
 	}

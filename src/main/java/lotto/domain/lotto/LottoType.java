@@ -9,6 +9,7 @@ package lotto.domain.lotto;
  * 날짜 : 2020/02/19
  */
 public enum LottoType {
-	PAID_LOTTO,
+	MANUAL_LOTTO,
+	AUTO_LOTTO,
 	WINNING_LOTTO
 }

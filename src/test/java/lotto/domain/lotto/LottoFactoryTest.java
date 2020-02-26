@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoFactoryTest {
 	@Test
 	void createLottoAuto_올바른_동작_확인() {
-		assertThat(LottoFactory.createLottoAuto(LottoType.PAID_LOTTO))
+		assertThat(LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO))
 				.isInstanceOf(PaidLotto.class);
 	}
 
@@ -35,7 +35,7 @@ public class LottoFactoryTest {
 				LottoNumber.of(44)
 		);
 
-		assertThat(LottoFactory.createLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers))
+		assertThat(LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, winningLottoNumbers))
 				.isInstanceOf(WinningLotto.class);
 	}
 
@@ -51,7 +51,7 @@ public class LottoFactoryTest {
 		);
 
 		assertThatThrownBy(() -> {
-			LottoFactory.createLottoManual(LottoType.WINNING_LOTTO, winningLottoNumbers);
+			LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, winningLottoNumbers);
 		}).isInstanceOf(InvalidLottoException.class)
 				.hasMessage("입력 로또번호에 중복이 있습니다.");
 	}

@@ -32,6 +32,7 @@ public class OutputView {
 	private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
 	private static final String SECOND_WINNING_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개\n";
 	private static final String ENTER_MANUAL_LOTTO_COUNT_GUIDE_MESSAGE = "수동으로 구매할 로또 수를 입력해주세요.";
+	private static final String ENTER_MANUAL_LOTTO_NUMBERS_GUIDE_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
 	public static void askEnterMoneyForLotto() {
 		System.out.println(ENTER_MONEY_FOR_LOTTO_GUIDE_MESSAGE);
@@ -89,5 +90,9 @@ public class OutputView {
 				rank.getReward(),
 				result.getResults().get(rank)
 		);
+	}
+
+	public static void askEnterManualLottoNumbers() {
+		System.out.println(ENTER_MANUAL_LOTTO_NUMBERS_GUIDE_MESSAGE);
 	}
 }

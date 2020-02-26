@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -27,6 +28,12 @@ public class Lottos {
 		if (inputLottos.isEmpty()) {
 			throw new InvalidLottosException(SHOUD_BUY_MORE_THAN_ONE_LOTTO_EXCEPTION_MESSAGE);
 		}
+	}
+
+	public Lottos add(final Lottos tailLottos) {
+		List<Lotto> lottos = new ArrayList<>(this.lottos);
+		lottos.addAll(tailLottos.lottos);
+		return new Lottos(lottos);
 	}
 
 	public List<Lotto> getLottos() {
