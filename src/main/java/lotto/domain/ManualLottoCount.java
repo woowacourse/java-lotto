@@ -31,4 +31,8 @@ public class ManualLottoCount {
 			throw new InvalidManualLottoException(InvalidManualLottoException.NOT_INTEGER);
 		}
 	}
+
+	public int getCount() {
+		return count;
+	}
 }

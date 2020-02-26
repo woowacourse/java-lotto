@@ -6,15 +6,19 @@ import java.util.List;
 public class LottoStore {
 	private LottoPurchaseStrategy lottoPurchaseStrategy;
 
-	public LottoStore(LottoPurchaseStrategy lottoPurchaseStrategy) {
-		this.lottoPurchaseStrategy = lottoPurchaseStrategy;
+	public Lottos purchaseAutoLotto(int purchaseCount) {
+		lottoPurchaseStrategy = new AutoLottoPurchaseStrategy();
+		return purchaseLotto(purchaseCount);
 	}
 
-	public Lottos purchaseLotto(LottoMoney lottoMoney) {
-		List<Lotto> lottos = new ArrayList<>();
-		int lottoCount = lottoMoney.getPurchasedLottoCount();
+	public Lottos purchaseManualLotto(int purchaseCount) {
+		lottoPurchaseStrategy = new ManualLottoPurchaseStrategy();
+		return purchaseLotto(purchaseCount);
+	}
 
-		for (int i = 0; i < lottoCount; i++) {
+	private Lottos purchaseLotto(int purchaseCount) {
+		List<Lotto> lottos = new ArrayList<>();
+		for (int i = 0; i < purchaseCount; i++) {
 			lottos.add(lottoPurchaseStrategy.generate());
 		}
 		return new Lottos(lottos);
