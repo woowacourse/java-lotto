@@ -1,15 +1,22 @@
 package lotto.domain;
 
-public class Money {
-	private final int lottoMoneyValue;
+import java.util.Objects;
 
-	public Money(final String lottoMoneyValue) {
-		checkValidationOf(lottoMoneyValue);
-		this.lottoMoneyValue = Integer.parseInt(lottoMoneyValue);
+public class Money {
+	private static final int PRICE_OF_LOTTO_TICKET = 1000;
+	private final int money;
+
+	public Money(final String money) {
+		checkValidationOf(money);
+		this.money = Integer.parseInt(money);
 	}
 
-	public int getLottoMoneyValue() {
-		return this.lottoMoneyValue;
+	public static Money ticketPriceOf(int ticketCount) {
+		return new Money(String.valueOf(ticketCount * PRICE_OF_LOTTO_TICKET));
+	}
+
+	public int getMoney() {
+		return money;
 	}
 
 	private void checkValidationOf(final String lottoMoneyValue) {
@@ -28,5 +35,24 @@ public class Money {
 
 	private boolean isEmpty(final String lottoMoneyValue) {
 		return lottoMoneyValue.equals("");
+	}
+
+	public Money minus(Money another) {
+		return new Money(String.valueOf(this.money - another.money));
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Money money1 = (Money)o;
+		return money == money1.money;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(money);
 	}
 }
