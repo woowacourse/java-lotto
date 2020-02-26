@@ -27,6 +27,6 @@ class LottoGameTest {
 		assertThatThrownBy(() -> {
 			lottoGame.play(numbers, "1");
 		}).isInstanceOf(LottoNumberDuplicateException.class)
-			.hasMessage("로또번호와 보너스번호가 중복됩니다.");
+			.hasMessage("로또 번호가 중복됩니다.");
 	}
 }

@@ -12,8 +12,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import exception.LottoNumberDuplicateException;
-
 class LottoTest {
 
 	private final static Lotto lotto = new Lotto(intsToLottoNumbers(1, 2, 3, 4, 5, 6));
@@ -25,24 +23,24 @@ class LottoTest {
 			.collect(Collectors.toList());
 	}
 
-	private static Stream<Arguments> createNumbers() {
+	private static Stream<Arguments> createNumbersAndMessage() {
 		return Stream.of(
 			Arguments.of(
-				intsToLottoNumbers(1, 2, 3, 4, 5, 5)
+				intsToLottoNumbers(1, 2, 3, 4, 5, 5), "로또 번호가 중복됩니다."
 			), Arguments.of(
-				intsToLottoNumbers(1, 2, 3, 4, 5)
+				intsToLottoNumbers(1, 2, 3, 4, 5), "로또 번호 갯수가 6개가 아닙니다."
 			)
 		);
 	}
 
 	@ParameterizedTest
-	@MethodSource("createNumbers")
-	void createTest(List<LottoNumber> numbers) {
+	@MethodSource("createNumbersAndMessage")
+	void createTest(List<LottoNumber> numbers, String message) {
 		assertThatThrownBy(() -> {
 			new Lotto(numbers);
 		})
-			.isInstanceOf(LottoNumberDuplicateException.class)
-			.hasMessage("로또 번호가 중복되거나, 6개를 입력하지 않았습니다.");
+			.isInstanceOf(RuntimeException.class)
+			.hasMessage(message);
 	}
 
 	@Test

@@ -12,7 +12,6 @@ import exception.LottoLengthException;
 import exception.LottoNumberDuplicateException;
 
 public class Lotto {
-	private static final String DELIMITER = ", ";
 	private static final int LOTTO_LENGTH = 6;
 
 	private final Set<LottoNumber> numbers;
