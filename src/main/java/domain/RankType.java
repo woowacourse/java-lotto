@@ -35,7 +35,7 @@ public enum RankType {
     }
 
     private static boolean isBonusCondition(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket) {
-        return winningLottoTicket.isMatchBonusBall(lottoTicket);
+        return winningLottoTicket.isMatchBonusNumber(lottoTicket);
     }
 
     public int calculate(int value) {

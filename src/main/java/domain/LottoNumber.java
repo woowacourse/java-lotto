@@ -1,5 +1,7 @@
 package domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -22,6 +24,35 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = input;
     }
 
+    LottoNumber(String input) {
+        validateNullOrBlank(input);
+        int parseNumber = validateParseInteger(input);
+        validateBonusNumberRange(parseNumber);
+        this.lottoNumber = parseNumber;
+    }
+
+    private void validateBonusNumberRange(int parseNumber) {
+        if (parseNumber < MIN_LOTTO_NUMBER_RANGE || parseNumber > MAX_LOTTO_NUMBER_RANGE) {
+            throw new IllegalArgumentException("잘못된 범위의 숫자를 입력하였습니다.");
+        }
+    }
+
+    private int validateParseInteger(String input) {
+        int parseNumber;
+        try {
+            parseNumber = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 문자를 입력하였습니다.");
+        }
+        return parseNumber;
+    }
+
+    private void validateNullOrBlank(String input) {
+        if (StringUtils.isBlank(input)) {
+            throw new IllegalArgumentException("null 또는 빈 문자를 입력하였습니다.");
+        }
+    }
+
     private static void validateLottoNumberRange(int number) {
         if (number < MIN_LOTTO_NUMBER_RANGE || number > MAX_LOTTO_NUMBER_RANGE) {
             throw new IllegalArgumentException("범위를 벗어나는 로또 숫자입니다.");
@@ -42,13 +73,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public String toString() {
-        return lottoNumber + MAKE_STR;
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumber);
+    public String toString() {
+        return lottoNumber + MAKE_STR;
     }
 
     public static LottoNumber getLottoNumber(int number) {

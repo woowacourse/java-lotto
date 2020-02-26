@@ -9,17 +9,17 @@ public class WinningLottoTicket {
     private static final String DELIMITER = ", ";
 
     private LottoTicket winningTicket;
-    private BonusBall bonusBall;
+    private LottoNumber bonusNumber;
 
-    public WinningLottoTicket(String inputWinningTicket, String inputBonusBall) {
+    public WinningLottoTicket(String inputWinningTicket, String inputBonusNumber) {
         validateBlank(inputWinningTicket);
-        validateBlank(inputBonusBall);
+        validateBlank(inputBonusNumber);
 
         List<LottoNumber> winningTicket = createWinningTicket(inputWinningTicket);
-        validateDuplicate(winningTicket, inputBonusBall);
+        validateDuplicate(winningTicket, inputBonusNumber);
 
         this.winningTicket = new LottoTicket(winningTicket);
-        this.bonusBall = new BonusBall(inputBonusBall);
+        this.bonusNumber = new LottoNumber(inputBonusNumber);
     }
 
     private String[] splitInputNumber(String input) {
@@ -40,8 +40,8 @@ public class WinningLottoTicket {
         }
     }
 
-    private void validateDuplicate(List<LottoNumber> winningNumber, String inputBonusBall) {
-        int parseNumber = validateNumber(inputBonusBall);
+    private void validateDuplicate(List<LottoNumber> winningNumber, String inputBonusNumber) {
+        int parseNumber = validateNumber(inputBonusNumber);
         if (winningNumber.contains(LottoNumber.getLottoNumber(parseNumber))) {
             throw new IllegalArgumentException("중복된 보너스 숫자를 입력하였습니다.");
         }
@@ -62,8 +62,8 @@ public class WinningLottoTicket {
                 .count());
     }
 
-    public boolean isMatchBonusBall(LottoTicket lottoTicket) {
+    public boolean isMatchBonusNumber(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket()
-                .contains(bonusBall.getBonusNumber());
+                .contains(bonusNumber);
     }
 }

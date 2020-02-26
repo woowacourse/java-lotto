@@ -38,7 +38,7 @@ public class WinningLottoTicketTest {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6", "7");
         LottoTicket lottoTicket = new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::new).collect(Collectors.toList()));
 
-        Assertions.assertThat(winningLottoTicket.isMatchBonusBall(lottoTicket)).isTrue();
+        Assertions.assertThat(winningLottoTicket.isMatchBonusNumber(lottoTicket)).isTrue();
     }
 
     private static Stream<Arguments> LottoTicketSetUp() {
