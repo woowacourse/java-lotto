@@ -12,7 +12,7 @@ public class LottoApplication {
         LottoCount lottoCount = new LottoCount(lottoMoney, InputView.requestManualLottoCount());
         List<String[]> manualLottos = InputView.requestManualLottoInput(lottoCount);
         Lottos lottos = new Lottos(lottoCount, manualLottos);
-        OutputView.printLottoCountAndLottos(lottos);
+        OutputView.printLottoCountAndLottos(lottoCount, lottos);
 
         Lotto winningLotto = Lotto.from(InputView.requestWinningLottoInput());
         LottoNumber bonusNumber = LottoNumber.of(InputView.requestBonusNumberInput());

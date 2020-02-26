@@ -19,6 +19,17 @@ public class Lottos {
         }
     }
 
+    private static List<Lotto> createLottos(LottoCount lottoCount, List<String[]> manualLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String[] manualLotto : manualLottos) {
+            lottos.add(Lotto.from(manualLotto));
+        }
+        for (int i = 0; i < lottoCount.calculateAutoLottoCount(); i++) {
+            lottos.add(Lotto.create());
+        }
+        return lottos;
+    }
+
     public MatchResults toMatchResults(Lotto winningLotto, LottoNumber bonusNumber) {
         List<MatchResult> matchResults = lottos.stream()
                 .filter(lotto -> MatchResult.hasMatchCount(lotto.countSameNumbers(winningLotto)))

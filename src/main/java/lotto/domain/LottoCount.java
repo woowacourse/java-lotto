@@ -4,17 +4,17 @@ import static lotto.domain.NumberValidator.validateIfEmptyValueThenInvokeExcepti
 import static lotto.domain.NumberValidator.validateIfNotNumberThenInvokeException;
 
 public class LottoCount {
-    public static final int MIN_MANUAL_LOTTO_COUNT = 0;
+    private static final int MIN_MANUAL_LOTTO_COUNT = 0;
 
+    private final int lottoCountValue;
     private final int manualLottoCountValue;
-    private final int autoLottoCountValue;
 
     public LottoCount(LottoMoney lottoMoney, String manualLottoCount) {
         validate(lottoMoney);
         int lottoCount = lottoMoney.calculateLottoCount();
         validate(manualLottoCount, lottoCount);
+        this.lottoCountValue = lottoCount;
         this.manualLottoCountValue = Integer.parseInt(manualLottoCount);
-        this.autoLottoCountValue = lottoCount - this.manualLottoCountValue;
     }
 
     private static void validate(LottoMoney money) {
@@ -43,5 +43,9 @@ public class LottoCount {
 
     public int getManualLottoCountValue() {
         return manualLottoCountValue;
+    }
+
+    public int calculateAutoLottoCount() {
+        return lottoCountValue - manualLottoCountValue;
     }
 }
