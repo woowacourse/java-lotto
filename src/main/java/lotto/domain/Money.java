@@ -4,7 +4,7 @@ import lotto.util.InputValidationUtil;
 
 public class Money {
     private static final int LOTTO_PURCHASE_UNIT = 1000;
-    private static final String NOT_BUY_LOTTO_TICKET_EXCEPTION = "한개도 구매할 수 없습니다. %d원을 반환합니다.";
+    private static final String NOT_BUY_LOTTO_TICKET_EXCEPTION = "한개도 구매할 수 없습니다. %d원을 반환합니다. 재입력 해주세요.";
 
     private long money;
 

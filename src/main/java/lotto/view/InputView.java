@@ -22,14 +22,16 @@ public class InputView {
         }
     }
 
-    public static TicketingCount inputManualTicketingCount(){
+    public static TicketingCount inputManualTicketingCount(TicketingCount ticketingCount){
         try{
-            String manualTicketingCount = scanner.nextLine();
-            return new TicketingCount(manualTicketingCount);
+            String manualTicketingCountInput = scanner.nextLine();
+            TicketingCount manualTicketingCount = new TicketingCount(manualTicketingCountInput);
+            InputValidationUtil.validateOverTicketingCount(ticketingCount,manualTicketingCount);
+            return manualTicketingCount;
         }
         catch (RuntimeException e){
             OutputView.printErrorMessage(e.getMessage());
-            return inputManualTicketingCount();
+            return inputManualTicketingCount(ticketingCount);
         }
     }
 

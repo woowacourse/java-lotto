@@ -28,7 +28,7 @@ public class LottoController {
 
     private void generateManualLottoTickets() {
         OutputView.printManualLottoTicketingCount();
-        manualTicketingCount = InputView.inputManualTicketingCount();
+        manualTicketingCount = InputView.inputManualTicketingCount(ticketingCount);
 
         for (int i = 0; i < manualTicketingCount.getTicketingCount(); i++) {
             LottoTickets.insertLottoTicket(new LottoTicket(InputView.InputManualLottoTicket()));

@@ -1,5 +1,7 @@
 package lotto.util;
 
+import lotto.domain.TicketingCount;
+
 public class InputValidationUtil {
 
     private static final int ZERO = 0;
@@ -20,6 +22,12 @@ public class InputValidationUtil {
     public static void isPositiveNumber(long inputValue) {
         if (inputValue < ZERO) {
             throw new IllegalArgumentException(NOT_POSITIVE_NUMBER_EXCEPTION);
+        }
+    }
+
+    public static void validateOverTicketingCount(TicketingCount ticketingCount, TicketingCount manualTicketingCount){
+        if(ticketingCount.getTicketingCount()< manualTicketingCount.getTicketingCount()){
+            throw new IllegalArgumentException("구매할수 있는 티켓을 초과하였습니다. 재입력 해주세요.");
         }
     }
 }
