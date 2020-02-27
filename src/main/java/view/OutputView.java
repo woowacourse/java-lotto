@@ -3,8 +3,13 @@ package view;
 import domain.*;
 
 public class OutputView {
-    public static void printBuyTicketCount(int number) {
-        System.out.println(String.format("%d", number) + "개를 구매했습니다.");
+    public static void printBuyTicketCount(Money money, ManualLottoTicketQuantity manualLottoTicketQuantity) {
+        System.out.println("수동으로 "
+                + String.format("%d", manualLottoTicketQuantity.getManualLottoTicketQuantity())
+                + "장, 자동으로 "
+                + String.format("%d", manualLottoTicketQuantity.getAutoLottoTicketQuantity(money))
+                + "장을 구매했습니다."
+        );
     }
 
     public static void printLottoTickets(LottoTickets lottoTickets) {

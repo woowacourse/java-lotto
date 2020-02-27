@@ -29,8 +29,8 @@ public class LottoTicketsGenerator {
         lottoTickets.add(LottoTicketGenerator.createLottoTicket(manualLottoTicket));
     }
 
-    public static List<LottoTicket> generateAutoLottoTickets(int buyCount) {
-        for (int i = START_LOTTO_INDEX; i < buyCount; i++) {
+    public static List<LottoTicket> generateAutoLottoTickets(int autoLottoTicketQuantity) {
+        for (int i = START_LOTTO_INDEX; i < autoLottoTicketQuantity; i++) {
             Collections.shuffle(shuffleLottoNumbers);
             lottoTickets.add(new LottoTicket(createLottoTicketBySize()));
         }

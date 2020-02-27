@@ -44,13 +44,9 @@ public class Money {
         }
     }
 
-    public int countLottoTicket() {
-        return this.money / LOTTO_TICKET_PRICE;
-    }
-
     private static double getTotalWinningPrice(Map<RankType, Integer> lottoResults) {
         double totalWinningPrice = INIT_SUM_VALUE;
-        for(RankType rankType : lottoResults.keySet()) {
+        for (RankType rankType : lottoResults.keySet()) {
             totalWinningPrice += rankType.calculate(lottoResults.get(rankType));
         }
         return totalWinningPrice;
