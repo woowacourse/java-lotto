@@ -40,14 +40,8 @@ public class LottoGame {
 
     private Lottos generateLottos(int lottosSize) {
         Lottos lottos = lottosGenerator.generate(lottosSize);
-        printLottos(lottos);
+        OutputView.printLottos(lottos);
         return lottos;
-    }
-
-    private void printLottos(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
-            OutputView.printLotto(lotto);
-        }
     }
 
     private Money inputPurchaseAmount() {
