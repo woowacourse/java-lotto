@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import lotto.exception.InvalidRankException;
 
 class RankTest {
 
@@ -43,7 +43,7 @@ class RankTest {
 
         //when & then
         assertThatThrownBy(() -> Rank.valueOf(invalidWinningNumber, true)).isInstanceOf(
-            IllegalArgumentException.class);
+            InvalidRankException.class);
     }
 
     @ParameterizedTest

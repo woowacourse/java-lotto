@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.exception.InvalidMoneyException;
+
 class MoneyTest {
     @Test
     @DisplayName("돈이 양수일 때")
@@ -22,7 +24,7 @@ class MoneyTest {
         int value = -1;
         //when & then
         assertThatThrownBy(() -> new Money(value))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(InvalidMoneyException.class)
             .hasMessage("음수는 입력할 수 없습니다");
     }
 

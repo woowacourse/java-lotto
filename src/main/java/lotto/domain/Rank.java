@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Arrays;
 
+import lotto.exception.InvalidRankException;
+
 public enum Rank {
     FIRST(6, new Money(2_000_000_000)),
     SECOND(5, new Money(30_000_000)),
@@ -42,7 +44,7 @@ public enum Rank {
             .filter(rank -> !SECOND.equals(rank))
             .filter(rank -> rank.isSameMatchNumber(matchNumber))
             .findAny()
-            .orElseThrow(() -> new IllegalArgumentException("당첨된 갯수에 해당하는 순위가 없습니다."));
+            .orElseThrow(() -> new InvalidRankException("당첨된 갯수에 해당하는 순위가 없습니다."));
     }
 
     private boolean isSameMatchNumber(int matchNumber) {

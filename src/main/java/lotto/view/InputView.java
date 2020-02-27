@@ -5,8 +5,6 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.swing.*;
-
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;

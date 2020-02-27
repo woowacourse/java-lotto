@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import lotto.exception.InvalidLottoNumberException;
+
 public class LottoNumber {
     private int value;
     static final int MAX = 45;
@@ -14,7 +16,7 @@ public class LottoNumber {
 
     private void validateValue(int value) {
         if (value < MIN || MAX < value) {
-            throw new IllegalArgumentException("유효하지 않은 로또 번호입니다");
+            throw new InvalidLottoNumberException("유효하지 않은 로또 번호입니다");
         }
     }
 

@@ -9,6 +9,8 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.exception.InvalidLottoSizeException;
+
 class LottoTest {
 
     @Test
@@ -31,7 +33,7 @@ class LottoTest {
                 new LottoNumber(5)));
 
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(InvalidLottoSizeException.class)
             .hasMessage("로또 번호의 개수는 6개여야 합니다");
     }
 }
