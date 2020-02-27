@@ -25,9 +25,9 @@ import lotto.view.InputView;
  */
 public class LottoGame {
 	public void run() {
-		LottoPurchaseMoney purchaseLottoPurchaseMoney = new LottoPurchaseMoney(inputLottoMoney());
-		LottoTicket manualLottoTicket = purchaseManualLottoTicket(purchaseLottoPurchaseMoney);
-		LottoTicket autoLottoTicket = purchaseAutoLottoTicket(purchaseLottoPurchaseMoney);
+		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(inputLottoMoney());
+		LottoTicket manualLottoTicket = purchaseManualLottoTicket(lottoPurchaseMoney);
+		LottoTicket autoLottoTicket = purchaseAutoLottoTicket(lottoPurchaseMoney);
 		printLottoTicket(manualLottoTicket, autoLottoTicket);
 
 		LottoTicket lottoTicket = LottoTicket.concat(manualLottoTicket, autoLottoTicket);
