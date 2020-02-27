@@ -16,13 +16,7 @@ public class Lotto {
 
     private void checkLottoNumberRange(final List<LottoNumber> lotto) {
         for (LottoNumber number : lotto) {
-            checkLottoNumberNull(number);
-        }
-    }
-
-    private void checkLottoNumberNull(final LottoNumber number) {
-        if (number == null) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45까지 수여야 합니다.");
+            LottoNumber.checkLottoNumberNull(number);
         }
     }
 
