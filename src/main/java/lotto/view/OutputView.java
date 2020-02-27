@@ -34,4 +34,15 @@ public class OutputView {
 					.collect(Collectors.joining(", ")));
 		}
 	}
+
+	public static void printLottoResult(LottoResult lottoResult) {
+		Map<Rank, Integer> raceCount = lottoResult.getWinningRankCount();
+		for (Map.Entry<Rank, Integer> entry : raceCount.entrySet()) {
+			StringBuilder stringBuilder = new StringBuilder(entry.getKey().getInformation());
+			stringBuilder.append(" - ")
+					.append(entry.getValue())
+					.append("개");
+			System.out.println(stringBuilder.toString());
+		}
+	}
 }
