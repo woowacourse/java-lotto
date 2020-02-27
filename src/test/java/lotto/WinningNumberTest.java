@@ -1,23 +1,26 @@
 package lotto;
 
 import domain.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningNumberTest {
     @Test
-    void 입력된_번호가_문자인지_확인() {
+    @DisplayName("당첨번호 중 문자가 입력되었는지 확인")
+    void checkNotNumberTest() {
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "4", "d", "6"};
             WinningNumber winningNumber = new WinningNumber();
             winningNumber.inputWinningNumbers(numbers);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(String.format("로또 넘버는 숫자여야 합니다."));
+                .hasMessage("로또 넘버는 숫자여야 합니다.");
     }
 
     @Test
-    void 당첨_로또_번호가_로또의_범위_안_인지_확인() {
+    @DisplayName("당첨 번호 중 1~45까지 범위를 벗어난 번호가 있는지 확인")
+    void checkLottoNumberRangeTest() {
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "4", "55", "6"};
             WinningNumber winningNumber = new WinningNumber();
@@ -27,7 +30,8 @@ public class WinningNumberTest {
     }
 
     @Test
-    void 당첨_로또_번호의_개수가_6개인지_확인() {
+    @DisplayName("당첨 번호가 6개 입력되었는지 확인")
+    void checkLottoSizeSix() {
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "4", "6"};
             WinningNumber winningNumber = new WinningNumber();
@@ -37,7 +41,8 @@ public class WinningNumberTest {
     }
 
     @Test
-    void 보너스_번호_유효성검증() {
+    @DisplayName("보너스 번호가 문자가 입력되었는지 확인")
+    void checkBonusBallNotNumber() {
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "5", "4", "6"};
             String bonusNumber = "가";
@@ -45,7 +50,11 @@ public class WinningNumberTest {
             winningNumber.inputBonusNumber(bonusNumber);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(String.format("보너스 넘버는 숫자여야 합니다. 입력한 문자 : %s", "가"));
+    }
 
+    @Test
+    @DisplayName("보너스 번호가 1~45까지 범위를 벗어났는지 확인")
+    void checkBonusBallLottoNumberRangeTest(){
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "5", "4", "6"};
             String bonusNumber = "50";
@@ -56,7 +65,8 @@ public class WinningNumberTest {
     }
 
     @Test
-    void 당첨_번호와_보너스_번호가_중복되는_경우_예외_처리() {
+    @DisplayName("당첨 번호와 보너스 번호가 중복되었는지 확인")
+    void checkDuplicatedLottoNumberTest() {
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "5", "4", "6"};
             String bonusNumber = "1";

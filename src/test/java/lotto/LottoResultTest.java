@@ -1,13 +1,15 @@
 package lotto;
 
 import domain.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
     @Test
-    void 로또_결과의_초기값_확인() {
+    @DisplayName("로또 결과의 초기값 0인지 확인")
+    void initialValueOfLottoResultTest() {
         LottoResult lottoResult = new LottoResult();
         for (LottoRank rank : LottoRank.values()) {
             assertThat(lottoResult.getRankCount(rank)).isEqualTo(0);
@@ -15,7 +17,8 @@ public class LottoResultTest {
     }
 
     @Test
-    void 당첨결과_누적_테스트() {
+    @DisplayName("로또 매칭 계산 후 당첨 결과 누적 테스트")
+    void accumulateLottoResultAfterCountingWinningNumbersTest() {
         String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
         String bonusNumber = "7";
         WinningNumber winningNumber = new WinningNumber();
@@ -33,7 +36,8 @@ public class LottoResultTest {
     }
 
     @Test
-    void 총_수익_계산_테스트() {
+    @DisplayName("로또 결과 계산 이후 최종 수익 계산")
+    void calculateTotalProfitUsingResultTest() {
         String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
         String bonusNumber = "7";
         WinningNumber winningNumber = new WinningNumber();

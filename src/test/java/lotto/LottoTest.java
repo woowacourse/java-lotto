@@ -2,6 +2,7 @@ package lotto;
 
 import domain.Lotto;
 import domain.LottoNumber;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,7 +12,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     @Test
-    void 로또_번호_갯수_6개인지_확인() {
+    @DisplayName("생성된 로또 번호가 6개인지 확인")
+    void checkLottoSizeSixTest() {
         assertThatThrownBy(() -> {
             List<LottoNumber> lotto = new ArrayList<>();
             lotto.add(new LottoNumber(1));
@@ -25,7 +27,8 @@ public class LottoTest {
     }
 
     @Test
-    void 중복된_로또_번호가_있는지_확인() {
+    @DisplayName("생성된 로또 번호 중 중복된 번호가 있는지 확인")
+    void checkDuplicatedNumberTest() {
         assertThatThrownBy(() -> {
             List<LottoNumber> lotto = new ArrayList<>();
             lotto.add(new LottoNumber(1));
@@ -40,7 +43,8 @@ public class LottoTest {
     }
 
     @Test
-    void 로또_숫자_범위_벗어난_경우_예외_발생() {
+    @DisplayName("생성된 로또 번호 중 1~45까지의 범위를 벗어난 번호가 있는 지 확인")
+    void checkLottoNumberRangeTest() {
         assertThatThrownBy(() -> {
             List<LottoNumber> lotto = new ArrayList<>();
             lotto.add(new LottoNumber(0));
