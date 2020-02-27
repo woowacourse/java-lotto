@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.domain.LottoGeneratable.*;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -45,7 +47,7 @@ public class MatchResult {
 	private long calculateTotalPurchaseMoney() {
 		return matchResult.values()
 				.stream()
-				.mapToLong(purchaseCount -> purchaseCount * LottoPurchaseMoney.MONEY_UNIT)
+				.mapToLong(purchaseCount -> purchaseCount * LOTTO_PRICE)
 				.sum();
 	}
 

@@ -8,8 +8,9 @@ package lotto.domain;
  * @since 2020/02/19
  */
 public class LottoPurchaseMoney {
-	public static final long MONEY_UNIT = 1_000;
+	private static final long MONEY_UNIT = 1_000;
 	private static final String INVALID_PURCHASE_MONEY_MESSAGE = "잘못된 구입 금액을 입력하셨습니다.";
+	private static final String CAN_NOT_PAYABLE_MESSAGE = "지불할 수 없는 금액입니다.";
 
 	private long lottoMoney;
 
@@ -24,20 +25,23 @@ public class LottoPurchaseMoney {
 		}
 	}
 
-	private boolean isNegative(long lottoMoney) {
-		return lottoMoney < 0;
-	}
-
 	private boolean canNotDivideByUnit(long lottoMoney) {
 		return lottoMoney % MONEY_UNIT != 0;
 	}
 
-	public boolean hasBalance() {
-		return lottoMoney > 0;
+	private boolean isNegative(long lottoMoney) {
+		return lottoMoney < 0;
 	}
 
-	public void pay() {
-		lottoMoney -= MONEY_UNIT;
+	public boolean canPayable(long amount) {
+		return lottoMoney - amount >= 0;
+	}
+
+	public void pay(long amount) {
+		if (!canPayable(amount)) {
+			throw new IllegalArgumentException(CAN_NOT_PAYABLE_MESSAGE);
+		}
+		lottoMoney -= amount;
 	}
 
 	public long multiply(long count) {
