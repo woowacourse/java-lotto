@@ -33,7 +33,7 @@ public class LottoController {
 
 	private static Lottos buyLottos() {
 		try {
-			LottoCount lottoCount = new LottoCount(readMoney(), readManualLottoCount());
+			LottoCount lottoCount = readLottoCount(readMoney());
 			OutputView.printLottoCount(LottoCountDto.from(lottoCount));
 			return new Lottos(makeLottos(lottoCount));
 		} catch (IllegalArgumentException e) {
@@ -52,6 +52,15 @@ public class LottoController {
 		}
 	}
 
+	private static LottoCount readLottoCount(Money money) {
+		try {
+			return new LottoCount(money, readManualLottoCount());
+		} catch (IllegalArgumentException e) {
+			OutputView.printExceptionMessage(e);
+			return readLottoCount(money);
+		}
+	}
+
 	private static int readManualLottoCount() {
 		try {
 			InputView.printInsertManualLottoCount();
@@ -66,8 +75,8 @@ public class LottoController {
 		List<Lotto> lottos = new ArrayList<>();
 		List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
 
-		for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
-			manualLottoNumbers.add(readManualLottoNumbers());
+		for (int i = 1; i <= lottoCount.getManualLottoCount(); i++) {
+			manualLottoNumbers.add(readManualLottoNumbers(i));
 		}
 
 		lottos.addAll(lottoMachine.makeManualLottos(manualLottoNumbers));
@@ -75,15 +84,15 @@ public class LottoController {
 		return lottos;
 	}
 
-	private static LottoNumbers readManualLottoNumbers() {
+	private static LottoNumbers readManualLottoNumbers(int lottoIndex) {
 		try {
-			InputView.printInsertManualLottoNumbers();
+			InputView.printInsertManualLottoNumbers(lottoIndex);
 			return InputUtil.inputManualLottoNumbers().stream()
 				.map(value -> new LottoNumber(Integer.parseInt(value)))
 				.collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
 		} catch (IllegalArgumentException | IOException e) {
 			OutputView.printExceptionMessage(e);
-			return readManualLottoNumbers();
+			return readManualLottoNumbers(lottoIndex);
 		}
 	}
 
