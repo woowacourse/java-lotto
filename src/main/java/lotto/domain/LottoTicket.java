@@ -2,8 +2,10 @@ package lotto.domain;
 
 import lotto.exception.LottoTicketException;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final int COUNT_FOR_SECOND_RANK = 5;
@@ -11,37 +13,54 @@ public class LottoTicket {
 
     private final List<LottoNumber> numbers;
 
-    public LottoTicket(List<LottoNumber> numbers) {
-        validate(numbers);
-        Collections.sort(numbers);
+    private LottoTicket(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    private void validate(List<LottoNumber> numbers) {
+    public static LottoTicket fromSixNumbers(List<LottoNumber> numbers) {
+        validate(numbers);
+        Collections.sort(numbers);
+        return new LottoTicket(numbers);
+    }
+
+    public static LottoTicket fromInput(String input) {
+        List<LottoNumber> numbers = generateSixNumbersFromInput(input);
+        return fromSixNumbers(numbers);
+    }
+
+    private static void validate(List<LottoNumber> numbers) {
         validateNumbersCount(numbers);
         validateNumbersDuplication(numbers);
     }
 
-    private void validateNumbersCount(List<LottoNumber> numbers) {
+    private static void validateNumbersCount(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new LottoTicketException("로또의 숫자는 6개여야 합니다.");
         }
     }
 
-    private void validateNumbersDuplication(List<LottoNumber> numbers) {
+    private static void validateNumbersDuplication(List<LottoNumber> numbers) {
         if (hasDuplicatedNumbers(numbers)) {
             throw new LottoTicketException("로또의 숫자는 중복될 수 없습니다.");
         }
     }
 
-    private boolean hasDuplicatedNumbers(List<LottoNumber> numbers) {
+    private static boolean hasDuplicatedNumbers(List<LottoNumber> numbers) {
         return getDistinctCount(numbers) != numbers.size();
     }
 
-    private long getDistinctCount(List<LottoNumber> numbers) {
+    private static long getDistinctCount(List<LottoNumber> numbers) {
         return numbers.stream()
                 .distinct()
                 .count();
+    }
+
+    private static List<LottoNumber> generateSixNumbersFromInput(String inputForNumbers) {
+        return Arrays.stream(inputForNumbers.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public Rank checkOut(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {

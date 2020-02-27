@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.exception.LottoStoreException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +30,7 @@ public class LottoTickets {
         List<LottoNumber> copiedNumbers = new ArrayList<>(LottoNumber.values());
         Collections.shuffle(copiedNumbers);
         List<LottoNumber> subNumbers = copiedNumbers.subList(SUBLIST_FROM_INDEX, SUBLIST_TO_INDEX);
-        return new LottoTicket(subNumbers);
+        return LottoTicket.fromSixNumbers(subNumbers);
     }
 
     public static LottoTickets ofManualLottoTickets(int manualTicketCount, List<String> inputsForNumbers) {
@@ -40,19 +39,12 @@ public class LottoTickets {
         }
 
         List<LottoTicket> manualLottoTicket = inputsForNumbers.stream()
-                .map(LottoTickets::generateSixNumbersFromInput)
-                .map(LottoTicket::new)
+                .map(LottoTicket::fromInput)
                 .collect(Collectors.toList());
         return new LottoTickets(manualLottoTicket);
     }
 
-    private static List<LottoNumber> generateSixNumbersFromInput(String inputForNumbers) {
-        return Arrays.stream(inputForNumbers.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
+
 
     public static LottoTickets add(LottoTickets manualLottoTickets, LottoTickets randomLottoTickets) {
         List<LottoTicket> allLottoTickets = new ArrayList<>();

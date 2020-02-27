@@ -48,6 +48,6 @@ class WinningNumbersTest {
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-        return new LottoTicket(lottoNumbers);
+        return LottoTicket.fromSixNumbers(lottoNumbers);
     }
 }

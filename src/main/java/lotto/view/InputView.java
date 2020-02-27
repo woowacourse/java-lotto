@@ -91,7 +91,7 @@ public class InputView {
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-        return new LottoTicket(sixNumbers);
+        return LottoTicket.fromSixNumbers(sixNumbers);
     }
 
     private static String inputSixNumbersWithMessage() {
