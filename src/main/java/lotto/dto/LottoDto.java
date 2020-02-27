@@ -3,6 +3,7 @@ package lotto.dto;
 import lotto.domain.LottoNumber;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoDto {
     private final List<LottoNumber> lottoNumbers;
@@ -11,7 +12,11 @@ public class LottoDto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.toList())
+                .toString();
     }
 }
