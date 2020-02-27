@@ -16,14 +16,7 @@ public class WinningResult {
 	private final Map<LottoRank, Long> winningResult;
 
 	public WinningResult(List<LottoRank> lottoRanks) {
-		validateNull(lottoRanks);
-		this.winningResult = initializeRankResult(new ArrayList<>(lottoRanks));
-	}
-
-	private void validateNull(List<LottoRank> lottoRanks) {
-		if (Objects.isNull(lottoRanks)) {
-			throw new NullPointerException();
-		}
+		this.winningResult = initializeRankResult(new ArrayList<>(Objects.requireNonNull(lottoRanks)));
 	}
 
 	private Map<LottoRank, Long> initializeRankResult(List<LottoRank> lottoRanks) {

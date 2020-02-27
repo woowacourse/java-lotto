@@ -10,25 +10,13 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 	private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 갯수가 적절하지 않습니다.";
-	private static final String NULL_LOTTO_EXCEPTION_MESSAGE = "null 데이터는 허용되지 않습니다.";
 	static final int BALL_COUNT = 6;
 
 	private final Set<LottoBall> lottoBalls;
 
 	public LottoTicket(Set<LottoBall> lottoBalls) {
-		validate(lottoBalls);
-		this.lottoBalls = Collections.unmodifiableSet(new TreeSet<>(lottoBalls));
-	}
-
-	private void validate(Set<LottoBall> lottoBalls) {
-		validateNull(lottoBalls);
 		validateBallCount(lottoBalls);
-	}
-
-	private void validateNull(Set<LottoBall> lottoBalls) {
-		if (Objects.isNull(lottoBalls)) {
-			throw new NullPointerException(NULL_LOTTO_EXCEPTION_MESSAGE);
-		}
+		this.lottoBalls = Collections.unmodifiableSet(new TreeSet<>(Objects.requireNonNull(lottoBalls)));
 	}
 
 	private void validateBallCount(Set<LottoBall> lottoBalls) {

@@ -8,6 +8,9 @@ import java.util.Objects;
 import lotto.util.StringUtil;
 
 public class ManualLottoTicketsFactory implements LottoTicketsFactory {
+	private static final String MANUAL_LOTTO_COUNT_NOT_EQUAL_EXPECTED_EXCEPTION_MESSAGE = "입력하신 번호의 사이즈가 일치하지 않습니다.";
+	private static final String NULL_REFERENCE_EXCEPTION_MESSAGE = "NULL 객체가 허용되지 않습니다.";
+
 	private final List<String> manualLottoNumbers;
 	private final LottoCount lottoCount;
 
@@ -24,13 +27,13 @@ public class ManualLottoTicketsFactory implements LottoTicketsFactory {
 
 	private void validateNull(List<String> manualLottoNumbers, LottoCount lottoCount) {
 		if (Objects.isNull(manualLottoNumbers) || Objects.isNull(lottoCount)) {
-			throw new NullPointerException();
+			throw new NullPointerException(NULL_REFERENCE_EXCEPTION_MESSAGE);
 		}
 	}
 
 	private void validateSameLength(List<String> manualLottoNumbers, LottoCount lottoCount) {
 		if (lottoCount.isNonRightCount(manualLottoNumbers.size())) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(MANUAL_LOTTO_COUNT_NOT_EQUAL_EXPECTED_EXCEPTION_MESSAGE);
 		}
 	}
 
