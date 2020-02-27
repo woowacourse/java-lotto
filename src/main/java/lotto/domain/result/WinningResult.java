@@ -1,5 +1,6 @@
 package lotto.domain.result;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +16,14 @@ public class WinningResult {
 	private final Map<LottoRank, Long> winningResult;
 
 	public WinningResult(List<LottoRank> lottoRanks) {
-		this.winningResult = initializeRankResult(Objects.requireNonNull(lottoRanks));
+		validateNull(lottoRanks);
+		this.winningResult = initializeRankResult(new ArrayList<>(lottoRanks));
+	}
+
+	private void validateNull(List<LottoRank> lottoRanks) {
+		if (Objects.isNull(lottoRanks)) {
+			throw new NullPointerException();
+		}
 	}
 
 	private Map<LottoRank, Long> initializeRankResult(List<LottoRank> lottoRanks) {
@@ -23,7 +31,7 @@ public class WinningResult {
 			.filter(LottoRank::isPrizingRank)
 			.collect(Collectors.groupingBy(Function.identity(), TreeMap::new, Collectors.counting()));
 		putRankResultIfAbsent(result);
-		return result;
+		return Collections.unmodifiableMap(result);
 	}
 
 	private void putRankResultIfAbsent(Map<LottoRank, Long> result) {
@@ -39,6 +47,6 @@ public class WinningResult {
 	}
 
 	public Map<LottoRank, Long> getWinningResult() {
-		return Collections.unmodifiableMap(new TreeMap<>(winningResult));
+		return winningResult;
 	}
 }

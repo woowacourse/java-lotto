@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
@@ -54,7 +53,7 @@ public class LottoTicketTest {
 	@Test
 	void constructByStrings() {
 		LottoTicket lottoTicket = LottoTicket.of("1", "2", "3", "4", "5", "6");
-		List<LottoBall> balls = lottoTicket.getLottoBalls();
+		Set<LottoBall> balls = lottoTicket.getLottoBalls();
 		assertThat(balls).contains(LottoBall.valueOf(1), LottoBall.valueOf(2), LottoBall.valueOf(3),
 			LottoBall.valueOf(4), LottoBall
 				.valueOf(5),
@@ -86,7 +85,7 @@ public class LottoTicketTest {
 	@Test
 	void constructByInts() {
 		LottoTicket lottoTicket = LottoTicket.of(1, 2, 3, 4, 5, 6);
-		List<LottoBall> balls = lottoTicket.getLottoBalls();
+		Set<LottoBall> balls = lottoTicket.getLottoBalls();
 		assertThat(balls).contains(LottoBall.valueOf(1), LottoBall.valueOf(2), LottoBall.valueOf(3),
 			LottoBall.valueOf(4), LottoBall
 				.valueOf(5),

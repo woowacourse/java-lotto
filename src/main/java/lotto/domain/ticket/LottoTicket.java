@@ -1,10 +1,8 @@
 package lotto.domain.ticket;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
@@ -63,8 +61,8 @@ public class LottoTicket {
 		return sameBalls.size();
 	}
 
-	public List<LottoBall> getLottoBalls() {
-		return Collections.unmodifiableList(new ArrayList<>(lottoBalls));
+	public Set<LottoBall> getLottoBalls() {
+		return lottoBalls;
 	}
 
 	@Override

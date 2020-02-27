@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import lotto.domain.ticket.Money;
 
@@ -19,7 +20,7 @@ public enum LottoRank {
 	LottoRank(int matchCount, boolean hasToHaveBonusBall, Money prize) {
 		this.matchCount = matchCount;
 		this.hasToHaveBonusBall = hasToHaveBonusBall;
-		this.prize = prize;
+		this.prize = Objects.requireNonNull(prize);
 	}
 
 	static LottoRank ofValue(int matchCount, boolean hasBonusBall) {

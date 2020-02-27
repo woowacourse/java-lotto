@@ -1,8 +1,8 @@
 package lotto.domain.ticket;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -42,8 +42,8 @@ public final class LottoBall implements Comparable<LottoBall> {
 		throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE);
 	}
 
-	static Collection<LottoBall> values() {
-		return Collections.unmodifiableCollection(BALL_CACHE.values());
+	static List<LottoBall> values() {
+		return new ArrayList<>(BALL_CACHE.values());
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import java.util.Map;
+import java.util.Objects;
 
 import lotto.domain.ticket.Money;
 
@@ -9,8 +10,8 @@ public class TotalResult {
 	private final Money money;
 
 	public TotalResult(WinningResult winningResult, Money money) {
-		this.winningResult = winningResult;
-		this.money = money;
+		this.winningResult = Objects.requireNonNull(winningResult);
+		this.money = Objects.requireNonNull(money);
 	}
 
 	public long getProfitRate() {

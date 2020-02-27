@@ -2,6 +2,7 @@ package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AutoLottoTicketsFactory implements LottoTicketsFactory {
 	private final LottoTicketFactory ticketGenerator;
@@ -9,7 +10,7 @@ public class AutoLottoTicketsFactory implements LottoTicketsFactory {
 
 	public AutoLottoTicketsFactory(LottoCount lottoCount) {
 		this.ticketGenerator = new RandomLottoTicketFactory();
-		this.lottoCount = lottoCount;
+		this.lottoCount = Objects.requireNonNull(lottoCount);
 	}
 
 	@Override

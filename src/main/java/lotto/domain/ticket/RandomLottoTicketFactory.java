@@ -1,6 +1,5 @@
 package lotto.domain.ticket;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +12,7 @@ public class RandomLottoTicketFactory implements LottoTicketFactory {
 	}
 
 	private Set<LottoBall> createRandomBalls() {
-		List<LottoBall> balls = new ArrayList<>(LottoBall.values());
+		List<LottoBall> balls = LottoBall.values();
 		Collections.shuffle(balls);
 
 		return balls.stream()
