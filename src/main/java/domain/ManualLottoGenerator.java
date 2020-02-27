@@ -4,21 +4,20 @@ import java.util.Arrays;
 
 import static java.util.stream.Collectors.toList;
 
-public class ManualLottoFactory implements LottoFactory{
-
+public class ManualLottoGenerator implements LottoGenerator {
     private String[] manualLotto;
 
-    public ManualLottoFactory(String[] manualLotto) {
+    public ManualLottoGenerator(String[] manualLotto) {
         this.manualLotto = manualLotto;
     }
 
     @Override
-    public Lotto createOneLotto() {
+    public Lotto generateLotto() {
         try {
             return new Lotto(Arrays.stream(manualLotto)
                     .map(String::trim)
                     .mapToInt(Integer::parseInt)
-                    .mapToObj(AllLottoNumbers::get)
+                    .mapToObj(LottoGenerator.allLottoNumbers::get)
                     .collect(toList()));
         } catch (NumberFormatException e) {
             throw new NumberFormatException("로또 넘버는 숫자여야 합니다.");

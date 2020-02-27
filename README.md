@@ -49,7 +49,7 @@
     - List<LottoNumber> lotto
     - [예외 처리] checkLottoSizeSix 6개의 숫자가 만들어졌는 지 검증
 - **LottoBundle**
-    - List<Lotto> lottoBundle
+    - List<Lotto> lottos
 - **LottoBundleFactory**
     - LottoBundle 생성 (only for auto lotto)
 - **LottoRank**

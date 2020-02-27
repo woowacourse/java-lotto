@@ -1,17 +1,23 @@
 package domain;
 
 public class LottoCount {
-    private final int lottoCount;
+    private int autoCount;
+    private int manualCount;
 
-    public LottoCount(final int lottoCount) {
-        this.lottoCount = lottoCount;
+    public LottoCount(final int lottoCount, final int manualCount) {
+        this.autoCount = lottoCount - manualCount;
+        this.manualCount = manualCount;
     }
 
-    public int getLottoCount() {
-        return lottoCount;
+    public int getAutoCount() {
+        return autoCount;
     }
 
-    public int getAutoLottoCount(final ManualCount manualCount) {
-        return lottoCount - manualCount.getManualCount();
+    public int getManualCount() {
+        return manualCount;
+    }
+
+    public int getTotalCount() {
+        return autoCount + manualCount;
     }
 }
