@@ -25,12 +25,7 @@ public class LottoGame {
     }
 
     private WinningRanks compareWithWinningNumbers(Lottos lottos, WinningLotto winningLotto) {
-        Ranks ranks = new Ranks();
-        //todo: 함수를 더 간결하게 정리
-        for (Lotto lotto : lottos.getLottos()) {
-            Rank rank = winningLotto.match(lotto);
-            ranks.add(rank);
-        }
+        Ranks ranks = winningLotto.match(lottos);
         return WinningRanksFactory.create(ranks);
     }
 

@@ -12,4 +12,11 @@ public class Lottos {
     public Set<Lotto> getLottos() {
         return lottos;
     }
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+            "lottos=" + lottos +
+            '}';
+    }
 }

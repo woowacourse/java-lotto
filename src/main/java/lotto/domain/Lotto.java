@@ -21,4 +21,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    @Override
+    public String toString() {
+        return "Lotto{" +
+            "lottoNumbers=" + lottoNumbers +
+            '}';
+    }
 }
