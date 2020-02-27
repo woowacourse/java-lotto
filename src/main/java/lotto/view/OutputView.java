@@ -2,11 +2,21 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class OutputView {
     public static final String SPLIT_DELIMETER = ",";
 
-    public static void printLottoCount(PaidPrice paidPrice) {
-        System.out.println(paidPrice.getLottoCount() + "개를 구매했습니다");
+    public static void printLottoSize(PaidPrice paidPrice) {
+        System.out.println(paidPrice.getTotalLottoCount() + "개를 구매했습니다");
+    }
+
+    public static void printLottoSize(LottoSize manualLottoSize, LottoSize autoLottoSize) {
+        String result = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
+        System.out.println(String.format(result,
+                manualLottoSize.getLottoSize(),
+                autoLottoSize.getLottoSize()));
     }
 
     public static void printLottosNumbers(Lottos lottos) {
@@ -25,13 +35,14 @@ public class OutputView {
     }
 
     public static void printWinningResults(ResultsDTO resultsDTO) {
+        Arrays.stream(WinningInfo.values()).filter(x -> x != WinningInfo.FAIL).collect(Collectors.toList());
         for (WinningInfo winningInfo : WinningInfo.values()) {
             if (winningInfo == WinningInfo.FAIL) {
                 continue;
             }
             int winningCount = resultsDTO.getMatchCount(winningInfo);
             printWinnigInfo(winningInfo);
-            System.out.println(winningCount+"개");
+            System.out.println(winningCount + "개");
         }
     }
 
