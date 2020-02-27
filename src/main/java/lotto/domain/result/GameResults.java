@@ -3,6 +3,8 @@ package lotto.domain.result;
 import java.util.List;
 
 public class GameResults {
+    static final int MULTIPLE_PERCENTAGE = 100;
+
     private final List<GameResult> gameResults;
 
     public GameResults(List<GameResult> results) {
@@ -15,9 +17,15 @@ public class GameResults {
                 .count();
     }
 
-    public double calculateBenefit() {
+    private double calculateBenefit() {
         return gameResults.stream()
                 .mapToDouble(GameResult::getPrize)
                 .sum();
+    }
+
+    public double calculateYield(Money money) {
+        double purchaseMoney = money.getMoney();
+        double benefit = calculateBenefit();
+        return (benefit / purchaseMoney) * MULTIPLE_PERCENTAGE;
     }
 }
