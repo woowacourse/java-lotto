@@ -12,8 +12,9 @@ public class OutputView {
 
     private OutputView() { /* prevent creating OutputView instance */ }
 
-    public static void printLottoCount(int lottoCount) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
+    public static void printLottoCount(LottoCount lottoCount) {
+        System.out.println(
+                String.format("\n수동으로 %d장, 자동으로 %d장을 구매했습니다.", lottoCount.getManualCount(), lottoCount.getAutomaticCount()));
     }
 
     public static void printLottos(Lottos lottos) {
@@ -67,5 +68,9 @@ public class OutputView {
 
     private static void printEarningRate(int earningRate) {
         System.out.println(String.format("총 수익률은 %d%%입니다.", earningRate));
+    }
+
+    public static void requestManualLottoMessage() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
     }
 }
