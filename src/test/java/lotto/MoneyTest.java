@@ -47,12 +47,11 @@ public class MoneyTest {
     void calculateProfitRatioByLottoResultTest() {
         String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
         String bonusNumber = "7";
-        WinningNumber winningNumber = new WinningNumber();
-        winningNumber.inputWinningNumbers(winningNumbers);
-        winningNumber.inputBonusNumber(bonusNumber);
+        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
 
         String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
-        Lotto lotto = LottoFactory.createOneManualLotto(inputLottoNumbers);
+        LottoFactory lottoFactory = new ManualLottoFactory(inputLottoNumbers);
+        Lotto lotto = lottoFactory.createOneLotto();
         LottoBundle lottoBundle = new LottoBundle();
         lottoBundle.addLotto(lotto);
 

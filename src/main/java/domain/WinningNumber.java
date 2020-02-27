@@ -8,11 +8,9 @@ public class WinningNumber {
     private Lotto winningNumbers;
     private LottoNumber bonusNumber;
 
-    public void inputWinningNumbers(final String[] winningNumbers) {
-        this.winningNumbers = LottoFactory.createOneManualLotto(winningNumbers);
-    }
-
-    public void inputBonusNumber(String bonusNumber) {
+    public WinningNumber(final String[] winningNumbers, String bonusNumber) {
+        LottoFactory lottoFactory = new ManualLottoFactory(winningNumbers);
+        this.winningNumbers = lottoFactory.createOneLotto();
         checkNotNumber(bonusNumber);
         bonusNumber = bonusNumber.trim();
         int bonusIntegerValue = Integer.parseInt(bonusNumber);

@@ -6,30 +6,21 @@ import view.OutputView;
 
 public class LottoGameApplication {
 
-    public static final int START_INDEX = 0;
-
     public static void main(String[] args) {
         // 구매 금액
         Money money = inputPurchaseAmountWithValidation();
         LottoCount lottoCount = new LottoCount(money.getLottoCount());
 
-        // 수동 구매 개수
+        // 수동 구매 및 로또 번들 생성
         ManualCount manualCount = inputManualCountWithValidation(lottoCount);
-
-        // 수동 및 자동 로또 번호 입력
-        OutputView.printInputManualLottoNumbersMessage();
-        LottoBundle lottoBundle = new LottoBundle();
-        createManualLottoBundleWithValidation(lottoBundle, manualCount);
-        createAutoLottoBundleWithValidation(lottoBundle, lottoCount, manualCount);
+        LottoBundle lottoBundle = createLottoBundleWithValidation(lottoCount, manualCount);
 
         // 구매 결과
         OutputView.printLottoCountMessage(lottoCount, manualCount);
         OutputView.printLottoBundle(lottoBundle);
 
         // 당첨 번호 및 보너스 번호 입력
-        WinningNumber winningNumber = new WinningNumber();
-        inputWinningNumbersWithValidation(winningNumber);
-        inputBonusNumberWithValidation(winningNumber);
+        WinningNumber winningNumber = inputWinningNumberWithValidation();
 
         // 당첨 결과 계산
         LottoResult lottoResult = new LottoResult();
@@ -38,6 +29,24 @@ public class LottoGameApplication {
         // 결과 및 수익률 출력
         OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult, lottoCount));
+    }
+
+    private static WinningNumber inputWinningNumberWithValidation() {
+        try {
+            return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+        } catch (IllegalArgumentException | NullPointerException e) {
+            OutputView.printExceptionMessage(e);
+            return inputWinningNumberWithValidation();
+        }
+    }
+
+    private static LottoBundle createLottoBundleWithValidation(LottoCount lottoCount, ManualCount manualCount) {
+        try {
+            return LottoBundleFactory.generate(lottoCount, manualCount, InputView.inputManualLottoNumbers(manualCount.getManualCount()));
+        } catch (IllegalArgumentException | NullPointerException e) {
+            OutputView.printExceptionMessage(e);
+            return createLottoBundleWithValidation(lottoCount, manualCount);
+        }
     }
 
     private static Money inputPurchaseAmountWithValidation() {
@@ -58,46 +67,4 @@ public class LottoGameApplication {
         }
     }
 
-    private static void createAutoLottoBundleWithValidation(final LottoBundle lottoBundle, final LottoCount lottoCount, final ManualCount manualCount) {
-        try {
-            lottoBundle.addLottoBundle(LottoBundleFactory.createAutoLottoBundle(lottoCount.getAutoLottoCount(manualCount)));
-        } catch (IllegalArgumentException | NullPointerException e) {
-            OutputView.printExceptionMessage(e);
-            createAutoLottoBundleWithValidation(lottoBundle, lottoCount, manualCount);
-        }
-    }
-
-    private static void createManualLottoBundleWithValidation(final LottoBundle lottoBundle, final ManualCount manualCount) {
-        for (int index = START_INDEX; index < manualCount.getManualCount(); index++) {
-            addOneManualLottoToLottoBundle(lottoBundle);
-        }
-    }
-
-    private static void addOneManualLottoToLottoBundle(LottoBundle lottoBundle) {
-        try {
-            lottoBundle.addLotto(LottoFactory
-                    .createOneManualLotto(InputView.inputManualLottoNumbers()));
-        } catch (IllegalArgumentException | NullPointerException e) {
-            OutputView.printExceptionMessage(e);
-            addOneManualLottoToLottoBundle(lottoBundle);
-        }
-    }
-
-    private static void inputWinningNumbersWithValidation(final WinningNumber winningNumber) {
-        try {
-            winningNumber.inputWinningNumbers(InputView.inputWinningNumbers());
-        } catch (IllegalArgumentException | NullPointerException e) {
-            OutputView.printExceptionMessage(e);
-            inputWinningNumbersWithValidation(winningNumber);
-        }
-    }
-
-    private static void inputBonusNumberWithValidation(final WinningNumber winningNumber) {
-        try {
-            winningNumber.inputBonusNumber(InputView.inputBonusNumber());
-        } catch (IllegalArgumentException | NullPointerException e) {
-            OutputView.printExceptionMessage(e);
-            inputBonusNumberWithValidation(winningNumber);
-        }
-    }
 }
