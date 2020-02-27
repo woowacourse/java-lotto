@@ -3,6 +3,8 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputView {
+    public static final int MIN_MANUAL_LOTTO_COUNT = 0;
+
     private static final Scanner scanner = new Scanner(System.in);
 
     public static String inputMoney() {
@@ -26,7 +28,9 @@ public class InputView {
     }
 
     public static String inputUserLotto(int count) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        if (count > MIN_MANUAL_LOTTO_COUNT) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        }
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < count; i++) {
             builder.append(scanner.next() + '\n');

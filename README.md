@@ -2,7 +2,7 @@
 로또 미션 진행을 위한 저장소
 
 ## 클래스 목록
-- money
+- customer
   - 구입 금액 
 - Lotto
 - LottoNo

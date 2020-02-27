@@ -1,8 +1,8 @@
 package lotto.view;
 
+import lotto.domain.Customer;
 import lotto.domain.Lotto;
 import lotto.domain.LottoManager;
-import lotto.domain.Money;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ public class OutputView {
     private static final String BUY_MESSAGE_FORMAT = "수동으로 %d개, 자동으로 %d개를 구매했습니다";
     private static final String PERCENT = "%";
 
-    public static void printLotteries(List<Lotto> lotteries, Money money) {
-        printLottoAmounts(money.getUserLottoCount(), money.calculatorAutoLottoCount());
+    public static void printLotteries(List<Lotto> lotteries, Customer customer) {
+        printLottoAmounts(customer.getManualLottoCount(), customer.calculatorAutoLottoCount());
         StringBuilder builder = new StringBuilder();
         for (Lotto lotto : lotteries) {
             builder.append(lotto + NEW_LINE);
@@ -25,13 +25,13 @@ public class OutputView {
         System.out.println(String.format(BUY_MESSAGE_FORMAT, userLottoCount, autoLottoCount));
     }
 
-    public static void printResult(Money money, LottoManager lottoManager) {
+    public static void printResult(Customer customer, LottoManager lottoManager) {
         System.out.println(lottoManager.getResult());
-        printIncomeRate(money, lottoManager);
+        printIncomeRate(customer, lottoManager);
     }
 
-    private static void printIncomeRate(Money money, LottoManager lottoManager) {
-        int incomeRate = money.calculateIncomeRate(lottoManager.calculateTotalReward());
+    private static void printIncomeRate(Customer customer, LottoManager lottoManager) {
+        int incomeRate = customer.calculateIncomeRate(lottoManager.calculateTotalReward());
         System.out.println(String.format(INCOME_RATE_MESSAGE_FORMAT, incomeRate, PERCENT));
     }
 }

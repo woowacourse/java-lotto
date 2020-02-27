@@ -17,12 +17,12 @@ public class LottoFactoryTest {
 	void createLotteries1() {
         int userInputMoney = 13000;
         List<Lotto> lottoList = LottoFactory
-                .createLotteries(new Money(userInputMoney, 0), "");
+                .createLotteries(new Customer(userInputMoney, 0, ""), "");
         assertThat(lottoList.size()).isEqualTo(13);
 
         userInputMoney = 5000;
         List<Lotto> lottoList2 = LottoFactory
-                .createLotteries(new Money(userInputMoney, 0), "");
+                .createLotteries(new Customer(userInputMoney, 0, ""), "");
         assertThat(lottoList2.size()).isEqualTo(5);
     }
 
@@ -31,7 +31,7 @@ public class LottoFactoryTest {
 	void createLotteries2() {
         int userInputMoneyZero = 0;
         assertThatThrownBy(() -> LottoFactory
-                .createLotteries(new Money(userInputMoneyZero, 0), ""))
+                .createLotteries(new Customer(userInputMoneyZero, 0, ""), ""))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("천원 이상의 금액만 가능합니다.");
     }
