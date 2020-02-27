@@ -15,6 +15,16 @@ public class InputView {
 		return inputValidInteger();
 	}
 
+	public static String inputManualLottoTicket() {
+		System.out.println("수동으로 구입할 로또 번호를 입력해주세요.");
+		return scanner.nextLine();
+	}
+
+	public static String inputWinningNumbers() {
+		System.out.println("지난 주 당첨 번호를 입력해주세요.");
+		return scanner.nextLine();
+	}
+
 	private static int inputValidInteger() {
 		try {
 			return Integer.parseInt(scanner.nextLine());
