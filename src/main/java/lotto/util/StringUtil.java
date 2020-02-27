@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import lotto.exception.EmptyInputException;
+
 public class StringUtil {
 	public static final String BLANK = " ";
 	public static final String NO_BLANK = "";
@@ -18,21 +20,21 @@ public class StringUtil {
 	}
 
 	public static void checkBlank(String value) {
-		if(value.trim().isEmpty()) {
+		if (value.trim().isEmpty()) {
 			throw new EmptyInputException("공백은 사용할 수 없습니다.");
 		}
 	}
 
 	public static void checkNull(Object o) {
-		if(Objects.isNull(o)) {
+		if (Objects.isNull(o)) {
 			throw new NullPointerException("널은 입력되지 않습니다.");
-	}
+		}
 	}
 
 	public static void checkNumberFormat(String value) {
-		try{
+		try {
 			Integer.parseInt(value);
-		}catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
 			throw new NumberFormatException("문자는 사용이 불가능합니다.");
 		}
 	}

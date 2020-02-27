@@ -31,10 +31,7 @@ public enum Statistic {
 	}
 
 	private static boolean isSecond(boolean isBonus, Statistic rank) {
-		if (rank.matchingNumbers == BONUS_MATCH && isBonus) {
-			return true;
-		}
-		return false;
+		return rank.matchingNumbers == BONUS_MATCH && isBonus;
 	}
 
 	public int getMatchingNumbers() {

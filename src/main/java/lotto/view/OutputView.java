@@ -1,15 +1,24 @@
 package lotto.view;
 
+import java.util.Collection;
+
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.result.GameResult;
-import lotto.domain.result.GameResultDto;
 import lotto.domain.result.RankCount;
 import lotto.domain.result.Statistic;
 
 public class OutputView {
-	public static void printPieces(int parseToPiece) {
-		System.out.println(parseToPiece + "개를 구매했습니다.");
+	public static void printPieces(LottoCount count) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("수동 ")
+			.append(count.getManualLotto())
+			.append("개 ")
+			.append("자동 ")
+			.append(count.getAutoLotto())
+			.append("개를 구매하였습니다.");
+		System.out.println(sb.toString());
 	}
 
 	public static void printLottos(Lottos lottos) {
@@ -19,14 +28,18 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printResult(GameResultDto gameResult) {
-		System.out.println("당첨 통계 \n ==============");
-		printRank(gameResult.getGameResult());
-		printProfit(gameResult.getProfit());
+	public static void printProfit(double profit) {
+		System.out.println("총 수익률은 " + profit + "% 입니다.");
 	}
 
-	private static void printRank(GameResult gameResult) {
-		for (RankCount rankCount : gameResult.getResult()) {
+	public static void printResult(GameResult result) {
+		System.out.println("당첨 통계 \n ==============");
+		printRank(result.getResultCount());
+	}
+
+
+	private static void printRank(Collection<RankCount> result) {
+		for (RankCount rankCount : result) {
 			printEachRank(rankCount);
 		}
 	}
@@ -62,9 +75,5 @@ public class OutputView {
 			return true;
 		}
 		return false;
-	}
-
-	private static void printProfit(double profit) {
-		System.out.println("총 수익률은 " + profit + "% 입니다.");
 	}
 }

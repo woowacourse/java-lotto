@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -44,7 +43,7 @@ class WinningLottoTest {
 			Number.of("8")
 		);
 		Lotto winLotto = new Lotto(winningNumbers);
-		assertThat(winningLotto.isWinningLotto(winLotto)).isEqualTo(Statistic.SIX);
+		assertThat(winningLotto.countMatch(winLotto)).isEqualTo(Statistic.SIX);
 	}
 
 	@Test
@@ -59,7 +58,7 @@ class WinningLottoTest {
 			Number.of("45")
 		);
 		Lotto winLotto = new Lotto(winningNumbers);
-		assertThat(winningLotto.isWinningLotto(winLotto)).isEqualTo(Statistic.BONUS);
+		assertThat(winningLotto.countMatch(winLotto)).isEqualTo(Statistic.BONUS);
 	}
 
 	@Test
