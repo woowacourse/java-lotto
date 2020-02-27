@@ -17,8 +17,10 @@ public class LottoApplication {
     public static void main(String[] args) {
         int inputMoney = StringUtils.ToInt(InputView.inputMoney());
         int inputUserLottoCount = StringUtils.ToInt(InputView.inputUserLottoCount());
-        String userLottoNumbers = InputView.inputUserLotto(inputUserLottoCount);
-        Customer customer = new Customer(inputMoney, inputUserLottoCount, userLottoNumbers);
+        Customer customer = new Customer(inputMoney, inputUserLottoCount);
+
+        String userLottoNumbers = InputView.inputUserLotto(customer);
+        customer.setManualLottoNumber(userLottoNumbers);
 
         List<Lotto> lottos = createUserLottos(customer);
 
@@ -34,7 +36,6 @@ public class LottoApplication {
     private static List<Lotto> createUserLottos(Customer customer) {
         LottoGame manualLottoGame = new LottoGame(customer, new LottoGeneratorManual());
         LottoGame AutoLottoGame = new LottoGame(customer, new LottoGeneratorAuto());
-
         List<Lotto> lottos = manualLottoGame.lottoGenerate();
         AutoLottoGame.lottoGenerate().stream().forEach(x -> lottos.add(x));
         return lottos;

@@ -27,12 +27,12 @@ public class InputView {
         return scanner.next();
     }
 
-    public static String inputUserLotto(int count) {
-        if (count > Customer.MIN_MANUAL_LOTTO_COUNT) {
+    public static String inputUserLotto(Customer customer) {
+        if (customer.isUserLottoCountOverZero()) {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         }
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < customer.getManualLottoCount(); i++) {
             builder.append(scanner.next() + '\n');
         }
         return builder.toString();

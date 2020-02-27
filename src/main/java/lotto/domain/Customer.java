@@ -12,19 +12,11 @@ public class Customer {
     private final int manualLottoCount;
     private String manualLottoNumber;
 
-    public Customer(int inputMoney, int manualLottoCount, String manualLottoNumber) {
+    public Customer(int inputMoney, int manualLottoCount) {
         validateMoneyOverThousand(inputMoney);
         validateUserLottoCount(inputMoney, manualLottoCount);
-        validateManualLottoNumbers(manualLottoNumber);
         this.money = inputMoney;
         this.manualLottoCount = manualLottoCount;
-        this.manualLottoNumber = manualLottoNumber;
-    }
-
-    private void validateManualLottoNumbers(String manualLottoNumbers) {
-        if (manualLottoNumbers == null) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_NULL_POINT);
-        }
     }
 
     private static void validateUserLottoCount(int inputMoney, int userLottoCount) {
@@ -61,5 +53,16 @@ public class Customer {
 
     public String getManualLottoNumber() {
         return manualLottoNumber;
+    }
+
+    public void setManualLottoNumber(String manualLottoNumber) {
+        validateManualLottoNumbers(manualLottoNumber);
+        this.manualLottoNumber = manualLottoNumber;
+    }
+
+    private void validateManualLottoNumbers(String manualLottoNumbers) {
+        if (manualLottoNumbers == null) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_NULL_POINT);
+        }
     }
 }
