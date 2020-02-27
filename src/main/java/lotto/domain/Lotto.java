@@ -44,12 +44,18 @@ public class Lotto {
 
 	public WinningPrize findLottoPrize(WinningLotto winningLotto) {
 		Set<LottoNumber> concatenatedSet = new HashSet<>(lottoNumbers);
-		concatenatedSet.addAll(winningLotto.getWinningNumber());
+		concatenatedSet.addAll(winningLotto.getWinningLotto().lottoNumbers);
 
 		int matchCount = (SIZE * 2) - concatenatedSet.size();
 		boolean bonusMatch = lottoNumbers.contains(winningLotto.getBonusNumber());
 
 		return WinningPrize.of(matchCount, bonusMatch);
+	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.stream()
+				.anyMatch(x -> x.equals(lottoNumber));
+
 	}
 
 	public LottoDto makeLottoDto() {

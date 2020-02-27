@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -15,32 +14,32 @@ public class WinningLotto {
     public static final String BALLNUMBER_OUT_OF_RANGE = "범위를 벗어난 번호가 포함되어 있습니다.";
     public static final String DUPLICATE_BONUSBALL_NUMBER = "중복된 보너스 번호가 있습니다.";
 
-    private final List<LottoNumber> winningNumber;
+    private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(final List<String> winningNumber, final LottoNumber bonusNumber) {
-        validateWinningNumber(winningNumber);
-        this.winningNumber = winningNumber.stream()
+    public WinningLotto(final List<String> winningNumberString, final LottoNumber bonusNumber) {
+        validateWinningNumber(winningNumberString);
+        this.winningLotto = new Lotto(winningNumberString.stream()
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .map(LottoMachine.getInstance()::pickBall)
+                .collect(Collectors.toList()));
 
         validateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-	private void validateWinningNumber(List<String> winningNumber) {
-		validateNullAndEmpty(winningNumber);
-		validateNumberAmount(winningNumber);
-		validateDuplicate(winningNumber);
-		validateRange(winningNumber);
-	}
+    private void validateWinningNumber(List<String> winningNumber) {
+        validateNullAndEmpty(winningNumber);
+        validateNumberAmount(winningNumber);
+        validateDuplicate(winningNumber);
+        validateRange(winningNumber);
+    }
 
-	private void validateNullAndEmpty(List<String> winningNumber) {
-		if (winningNumber == null || winningNumber.isEmpty()) {
-			throw new IllegalArgumentException(NULL_OR_EMPTY_VALUE_ERROR);
-		}
-	}
+    private void validateNullAndEmpty(List<String> winningNumber) {
+        if (winningNumber == null || winningNumber.isEmpty()) {
+            throw new IllegalArgumentException(NULL_OR_EMPTY_VALUE_ERROR);
+        }
+    }
 
 	private void validateNumberAmount(List<String> winningNumber) {
 		if (winningNumber.size() != Lotto.SIZE) {
@@ -69,14 +68,14 @@ public class WinningLotto {
     }
 
     private void validateBonusDuplicate(LottoNumber bonusNumber) {
-        if (winningNumber.stream().anyMatch(number -> number == bonusNumber)) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_BONUSBALL_NUMBER);
         }
     }
 
 
-    public List<LottoNumber> getWinningNumber() {
-        return Collections.unmodifiableList(winningNumber);
+    public Lotto getWinningLotto() {
+        return winningLotto;
     }
 
     public LottoNumber getBonusNumber() {
@@ -89,11 +88,11 @@ public class WinningLotto {
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
         return bonusNumber == that.bonusNumber &&
-                Objects.equals(winningNumber, that.winningNumber);
+                Objects.equals(winningLotto, that.winningLotto);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(winningNumber, bonusNumber);
-	}
+        return Objects.hash(winningLotto, bonusNumber);
+    }
 }

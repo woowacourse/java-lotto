@@ -40,7 +40,7 @@ public class WinningLottoTest {
 	@NullAndEmptySource
 	@DisplayName("널이나 빈 값이 들어올 경우")
 	void checkIfNullOrEmpty(List<String> value) {
-		assertThatThrownBy(() -> new WinningLotto(value, 5))
+		assertThatThrownBy(() -> new WinningLotto(value, new LottoNumber(5)))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("널이나 빈 값");
 	}
@@ -49,7 +49,7 @@ public class WinningLottoTest {
 	@MethodSource("generateInput_numberAmount")
 	@DisplayName("번호 갯수가 틀린 경우")
 	void checkNumberAmountMismatch(List<String> value) {
-		assertThatThrownBy(() -> new WinningLotto(value, 21))
+		assertThatThrownBy(() -> new WinningLotto(value, new LottoNumber(21)))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("개여야 합니다");
 	}
@@ -58,7 +58,7 @@ public class WinningLottoTest {
 	@MethodSource("generateInput_duplicateNumber")
 	@DisplayName("중복 번호가 있는 경우")
 	void checkDuplicateNumber(List<String> value) {
-		assertThatThrownBy(() -> new WinningLotto(value, 34))
+		assertThatThrownBy(() -> new WinningLotto(value, new LottoNumber(34)))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("중복");
 	}
@@ -67,7 +67,7 @@ public class WinningLottoTest {
 	@MethodSource("generateInput_numberRange")
 	@DisplayName("번호 범위를 벗어나는 경우")
 	void checkNumberRange(List<String> value) {
-		assertThatThrownBy(() -> new WinningLotto(value, 34))
+		assertThatThrownBy(() -> new WinningLotto(value, new LottoNumber(34)))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("범위");
 	}
@@ -84,8 +84,8 @@ public class WinningLottoTest {
 	@ParameterizedTest
 	@ValueSource(ints = {-1000, 0, 46, 10000})
 	@DisplayName("보너스 번호 범위를 벗어나는 경우")
-	void checkBonusNumberIsOutOfRange(LottoNumber bonus) {
-		assertThatThrownBy(() -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "5", "6"), bonus))
+	void checkBonusNumberIsOutOfRange(int bonus) {
+		assertThatThrownBy(() -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "5", "6"), LottoMachine.getInstance().pickBall(bonus)))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("보너스 번호가 범위");
 	}

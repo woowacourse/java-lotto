@@ -18,9 +18,11 @@ public class LottoController {
 		OutputView.printEarningRate(lottoResult.calculateEarningRate());
 	}
 
-	private static int readBonusNumber() {
+	private static LottoNumber readBonusNumber() {
 		try {
-			return InputUtil.inputBonusNumber();
+			LottoMachine lottoMachine = LottoMachine.getInstance();
+
+			return lottoMachine.pickBall(InputUtil.inputBonusNumber());
 		} catch (NumberFormatException | IOException e) {
 			OutputView.printWrongBonusNumberInput();
 			return readBonusNumber();
