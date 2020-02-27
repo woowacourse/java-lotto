@@ -2,6 +2,9 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -38,19 +41,27 @@ public class LottoGame {
     }
 
     private List<Lotto> purchaseLottos(Money purchaseAmount) {
-        return generateLottos(purchaseAmount.toLottosSize());
+        List<Lotto> lottosManual = purchaseLottosManually();
+        List<Lotto> lottosAutomatic = generateLottosAutomatically(purchaseAmount.toLottosSize() - lottosManual.size());
+        printLottos(lottosManual, lottosAutomatic);
+        return Stream.concat(lottosManual.stream(), lottosAutomatic.stream()).collect(Collectors.toList());
     }
 
-    private List<Lotto> generateLottos(int lottosSize) {
+    private List<Lotto> purchaseLottosManually() {
+        int numberToBuyManually = InputView.inputNumberToBuyManually();
+        List<Set<LottoNumber>> lottoNumbersBasket = InputView.inputManualLottos(numberToBuyManually);
+        return LottosGenerator.generateManually(lottoNumbersBasket);
+    }
+
+    private List<Lotto> generateLottosAutomatically(int lottosSize) {
         List<Lotto> lottos = LottosGenerator.generateAutomatically(lottosSize);
-        printLottos(lottos);
+
         return lottos;
     }
 
-    private void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            OutputView.printLotto(lotto);
-        }
+    private void printLottos(List<Lotto> lottosManual, List<Lotto> lottosAutomatic) {
+        OutputView.printLottos(lottosManual, lottosAutomatic);
+
     }
 
     private Money inputPurchaseAmount() {

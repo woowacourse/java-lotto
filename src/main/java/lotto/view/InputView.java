@@ -22,7 +22,7 @@ public class InputView {
     }
 
     public static Lotto inputLastWeekWinningNumbers() {
-        System.out.println("지난주 당첨번호을 입력해주세요");
+        System.out.println("지난주 당첨번호을 입력해주세요.");
         String input = scanner.nextLine();
         return Lotto.createWinningLotto(StringUtils.parseWithDelimiter(input));
     }
@@ -33,7 +33,7 @@ public class InputView {
     }
 
     public static List<Set<LottoNumber>> inputManualLottos(int numberToBuy) {
-        System.out.println("지난주 당첨번호을 입력해주세요");
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Set<LottoNumber>> lottoNumbersBasket = new ArrayList<>();
         for (int i = 0; i < numberToBuy; i++) {
             Set<LottoNumber> lottoNumbers = StringUtils.parseWithDelimiter(scanner.nextLine()).stream().map(LottoNumber::new).collect(Collectors.toSet());

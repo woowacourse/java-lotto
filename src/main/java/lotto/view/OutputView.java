@@ -12,12 +12,24 @@ public class OutputView {
         System.out.println(String.format("%d개를 구매했습니다.", lottosSize));
     }
 
-    public static void printLotto(Lotto lotto) {
+    public static void printLottos(List<Lotto> lottosManual, List<Lotto> lottosAutomatic) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottosManual.size(), lottosAutomatic.size()));
+        for (Lotto lottoManual : lottosManual) {
+            printLoto(lottoManual);
+        }
+
+        for (Lotto lottoAutomatic : lottosAutomatic) {
+            printLoto(lottoAutomatic);
+        }
+    }
+
+    private static void printLoto(Lotto lotto) {
         List<String> stringifiedLottoNumbers = lotto.getLottoNumbers().stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.toList());
 
         System.out.println("[" + String.join(",", stringifiedLottoNumbers) + "]");
+
     }
 
     public static void printEarningRate(int earningRate) {
