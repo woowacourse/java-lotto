@@ -1,7 +1,9 @@
 package Lotto.domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Ranks {
     private List<Rank> ranks;
@@ -15,6 +17,17 @@ public class Ranks {
                 .filter(Objects::nonNull)
                 .mapToInt(Rank::getRankReward)
                 .sum();
+    }
+
+    public Map<Rank, Long> countRanks() {
+        Map<Rank, Long> rankCounts = ranks.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+
+        for (Rank rank : Rank.values()) {
+            rankCounts.putIfAbsent(rank, 0L);
+        }
+        return rankCounts;
     }
 
     @Override
