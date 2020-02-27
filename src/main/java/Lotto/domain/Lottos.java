@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottos {
+    private static final String NEW_LINE = "\n";
+
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
@@ -20,5 +22,11 @@ public class Lottos {
         int hitCount = winningNumber.countHit(lotto);
         boolean bonusNumberExist = winningNumber.checkBonusNumber(lotto);
         return Rank.getRank(hitCount, bonusNumberExist);
+    }
+
+    public String getLottos() {
+        return lottos.stream()
+                .map(Lotto::getLotto)
+                .collect(Collectors.joining(NEW_LINE));
     }
 }

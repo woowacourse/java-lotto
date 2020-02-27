@@ -17,4 +17,7 @@ public class OutputView {
         System.out.println(purchasedLottoCount + PURCHASED_LOTTO_MESSAGE);
     }
 
+    public static void showPurchasedAutoLottos(Lottos purchasedAutoLottos) {
+        System.out.println(purchasedAutoLottos.getLottos());
+    }
 }

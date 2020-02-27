@@ -3,9 +3,11 @@ package Lotto.domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final String LOTTO_NUMBER_DUPLICATED_MESSAGE = "잘못된 로또 번호입니다. 중복 안됨, 갯수는 6개";
+    private static final String COMMA = ",";
     private static final int LOTTO_NUMBER_AMOUNT = 6;
 
     private List<LottoNumber> lottoNumbers;
@@ -38,5 +40,11 @@ public class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public String getLotto() {
+        return this.lottoNumbers.stream()
+                .map(t -> String.valueOf(t.getLottoNumber()))
+                .collect(Collectors.joining(COMMA));
     }
 }
