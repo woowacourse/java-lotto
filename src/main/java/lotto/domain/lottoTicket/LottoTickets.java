@@ -1,15 +1,17 @@
 package lotto.domain.lottoTicket;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lotto.domain.result.WinningLotto;
 import lotto.domain.result.WinningResult;
 
 public class LottoTickets {
+
 	private final List<LottoTicket> lottoTickets;
 
 	public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -19,14 +21,14 @@ public class LottoTickets {
 	public WinningResult produceWinningResultBy(WinningLotto winningLotto) {
 		return lottoTickets.stream()
 			.map(winningLotto::match)
-			.collect(Collectors.collectingAndThen(
-				Collectors.groupingBy(Function.identity(), Collectors.counting()),
+			.collect(collectingAndThen(
+				groupingBy(Function.identity(), counting()),
 				WinningResult::new));
 	}
 
 	public LottoTickets concat(LottoTickets concatenatedLottoTickets) {
 		return Stream.concat(lottoTickets.stream(), concatenatedLottoTickets.lottoTickets.stream())
-			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
+			.collect(collectingAndThen(toList(), LottoTickets::new));
 	}
 
 	public List<LottoTicket> getLottoTickets() {
@@ -53,4 +55,5 @@ public class LottoTickets {
 	public int hashCode() {
 		return Objects.hash(lottoTickets);
 	}
+
 }

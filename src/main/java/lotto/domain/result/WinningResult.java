@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import lotto.domain.purchase.LottoMoney;
 
 public class WinningResult {
+
 	private final Map<LottoRank, Long> winningResult = new TreeMap<>(Collections.reverseOrder());
 
 	public WinningResult(Map<LottoRank, Long> winningResult) {
@@ -48,4 +49,5 @@ public class WinningResult {
 	public Map<LottoRank, Long> getWinningResult() {
 		return winningResult;
 	}
+
 }

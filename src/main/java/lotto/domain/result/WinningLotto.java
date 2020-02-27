@@ -4,6 +4,7 @@ import lotto.domain.lottoNumber.LottoNumber;
 import lotto.domain.lottoTicket.LottoTicket;
 
 public class WinningLotto {
+
 	private final LottoTicket winningLottoTicket;
 	private final LottoNumber bonusLottoNumber;
 
@@ -24,4 +25,5 @@ public class WinningLotto {
 		boolean hasBonusLottoNumber = lottoTicket.contains(bonusLottoNumber);
 		return LottoRank.of(matchCount, hasBonusLottoNumber);
 	}
+
 }

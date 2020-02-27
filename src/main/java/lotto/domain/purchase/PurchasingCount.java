@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class PurchasingCount implements Iterator<PurchasingCount> {
+
 	private long purchasingCount;
 
 	public PurchasingCount(long purchasingCount) {
@@ -61,4 +62,5 @@ public class PurchasingCount implements Iterator<PurchasingCount> {
 	public String toString() {
 		return Long.toString(purchasingCount);
 	}
+
 }

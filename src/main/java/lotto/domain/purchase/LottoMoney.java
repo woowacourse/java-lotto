@@ -3,6 +3,7 @@ package lotto.domain.purchase;
 import java.util.Objects;
 
 public class LottoMoney {
+
 	public static final LottoMoney ZERO = new LottoMoney(0L);
 
 	private static final long UNIT = 1_000L;
@@ -89,4 +90,5 @@ public class LottoMoney {
 	public int hashCode() {
 		return Objects.hash(lottoMoney);
 	}
+
 }

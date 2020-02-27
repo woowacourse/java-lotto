@@ -1,14 +1,16 @@
 package lotto.domain.lottoNumber;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoNumberCache {
+
 	public static final int MIN_LOTTO_NUMBER = 1;
 	public static final int MAX_LOTTO_NUMBER = 45;
 	private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
@@ -29,10 +31,11 @@ public class LottoNumberCache {
 	public static List<LottoNumber> asLottoNumber(int... numbers) {
 		return Arrays.stream(numbers)
 			.mapToObj(LottoNumberCache::asLottoNumber)
-			.collect(Collectors.toList());
+			.collect(toList());
 	}
 
 	public static Collection<LottoNumber> values() {
 		return Collections.unmodifiableCollection(CACHE.values());
 	}
+
 }

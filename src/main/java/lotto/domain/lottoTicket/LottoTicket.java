@@ -1,5 +1,7 @@
 package lotto.domain.lottoTicket;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -7,12 +9,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import lotto.domain.lottoNumber.LottoNumber;
 import lotto.domain.result.MatchCount;
 
 public class LottoTicket {
+
 	public static final int TOTAL_SIZE = 6;
 	private static final String DELIMITER = ",";
 
@@ -27,7 +29,7 @@ public class LottoTicket {
 		return Arrays.stream(inputLottoNumbers.split(DELIMITER))
 			.map(String::trim)
 			.map(LottoNumber::valueOf)
-			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
+			.collect(collectingAndThen(toList(), LottoTicket::new));
 	}
 
 	private void validate(List<LottoNumber> lottoNumbers) {
@@ -86,4 +88,5 @@ public class LottoTicket {
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
 	}
+
 }

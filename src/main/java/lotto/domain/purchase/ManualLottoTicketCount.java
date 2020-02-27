@@ -1,6 +1,7 @@
 package lotto.domain.purchase;
 
 public class ManualLottoTicketCount {
+
 	private int manualLottoTicketCount;
 
 	public ManualLottoTicketCount(String manualLottoTicketCount, PurchasingCount purchasingCount) {
@@ -37,4 +38,5 @@ public class ManualLottoTicketCount {
 	public int getManualLottoTicketCount() {
 		return manualLottoTicketCount;
 	}
+
 }

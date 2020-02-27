@@ -5,6 +5,7 @@ import java.util.Objects;
 import lotto.domain.lottoTicket.LottoTicket;
 
 public class MatchCount {
+
 	private final int matchCount;
 
 	public MatchCount(int matchCount) {
@@ -38,4 +39,5 @@ public class MatchCount {
 	public int hashCode() {
 		return Objects.hash(matchCount);
 	}
+
 }

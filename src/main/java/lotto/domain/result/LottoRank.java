@@ -5,6 +5,7 @@ import java.util.Arrays;
 import lotto.domain.purchase.LottoMoney;
 
 public enum LottoRank {
+
 	FIRST(new MatchCount(6), false, new LottoMoney(2_000_000_000)),
 	SECOND(new MatchCount(5), true, new LottoMoney(30_000_000)),
 	THIRD(new MatchCount(5), false, new LottoMoney(1_500_000)),
@@ -50,4 +51,5 @@ public enum LottoRank {
 	public long getWinningLottoMoney() {
 		return winningLottoMoney.getLottoMoney();
 	}
+
 }

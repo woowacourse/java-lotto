@@ -3,6 +3,7 @@ package lotto.domain.lottoNumber;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
 	public static final int MIN_LOTTO_NUMBER = 1;
 	public static final int MAX_LOTTO_NUMBER = 45;
 
@@ -68,4 +69,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	public String toString() {
 		return Integer.toString(lottoNumber);
 	}
+
 }

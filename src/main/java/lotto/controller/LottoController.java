@@ -1,7 +1,8 @@
 package lotto.controller;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lotto.domain.lottoNumber.InvalidLottoNumberException;
@@ -80,7 +81,7 @@ public class LottoController {
 	private List<String> receiveInputManualLottoTickets(ManualLottoTicketCount manualLottoTicketCount) {
 		return IntStream.range(0, manualLottoTicketCount.getManualLottoTicketCount())
 			.mapToObj(i -> ConsoleInputView.inputLottoTicket())
-			.collect(Collectors.toList());
+			.collect(toList());
 	}
 
 	private WinningLotto generateWinningLotto() {
