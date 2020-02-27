@@ -16,8 +16,8 @@ public class EarningRateTest {
     @DisplayName("수익률 계산이 잘 되는지 확인")
     void calculateEarningRate() {
         Ranks ranks = new Ranks(Arrays.asList(Rank.FOURTH, Rank.FIFTH));
-        PurchaseAmount purchaseAmount = new PurchaseAmount(10000);
+        PurchaseAmount purchaseAmount = new PurchaseAmount("10000");
         EarningRate earningRate = new EarningRate(ranks, purchaseAmount);
-        assertThat(earningRate.getEarningRate()).isEqualTo(450.0);
+        assertThat(earningRate.getEarningRate()).isEqualTo(550.0);
     }
 }

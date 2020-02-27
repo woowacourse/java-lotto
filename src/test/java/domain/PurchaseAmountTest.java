@@ -11,16 +11,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class PurchaseAmountTest {
     @ParameterizedTest
     @DisplayName("구입 금액이 올바른 범위 안에 있을 때")
-    @ValueSource(ints = {1, 25, 500000, 39939})
-    void rightInput(int input) {
+    @ValueSource(strings = {"1", "25", "500000", "39939"})
+    void rightInput(String input) {
         PurchaseAmount purchaseAmount = new PurchaseAmount(input);
         assertThat(purchaseAmount).isNotNull();
     }
 
     @ParameterizedTest
     @DisplayName("구입 금액이 0보다 작을 때")
-    @ValueSource(ints = {-1, 0})
-    void inputNotNaturalNumber(int input) {
+    @ValueSource(strings = {"-1", "0"})
+    void inputNotNaturalNumber(String input) {
         assertThatThrownBy(() -> new PurchaseAmount(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("0보다");
