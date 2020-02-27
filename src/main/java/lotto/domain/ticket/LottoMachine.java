@@ -50,8 +50,8 @@ public class LottoMachine {
         return new LottoTicket(lottoBalls);
     }
 
-    public LottoTicket createOneTicket(Set<Integer> manualNumber) {
-        Set<LottoBall> manualBalls = manualNumber.stream()
+    public LottoTicket createOneTicket(List<Integer> manualNumbers) {
+        Set<LottoBall> manualBalls = manualNumbers.stream()
                 .map(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());
 

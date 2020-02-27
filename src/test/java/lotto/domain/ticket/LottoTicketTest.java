@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,8 +37,7 @@ class LottoTicketTest {
     void name(int number, boolean expectedResult) {
         LottoMachine lottoMachine = new LottoMachine();
 
-        Set<Integer> manualNumbers = Arrays.stream(new Integer[]{1, 2, 3, 4, 5, 6})
-                .collect(Collectors.toSet());
+        List<Integer> manualNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         LottoTicket ticket = lottoMachine.createOneTicket(manualNumbers);
 

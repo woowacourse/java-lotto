@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -76,9 +75,9 @@ class LottoMachineTest {
         LottoTicket expectedTicket = new LottoTicket(manualBalls);
 
         //when
-        LottoTicket ticketFromManualMachine = lottoMachine.createOneTicket(new HashSet<>(manualNumbers));
+        LottoTicket manualLotto = lottoMachine.createOneTicket(manualNumbers);
 
         //then
-        assertThat(ticketFromManualMachine).isEqualTo(expectedTicket);
+        assertThat(manualLotto).isEqualTo(expectedTicket);
     }
 }

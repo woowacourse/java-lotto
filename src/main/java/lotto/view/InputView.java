@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.exception.ConvertFailException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -16,6 +17,8 @@ public class InputView {
     private static final String INVALID_NUMBER_INPUT_MESSAGE = "잘못된 숫자 입력";
     private static final String PARSE_FAIL_EXCEPTION_MESSAGE = "%s : 숫자가 아닌 문자가 존재합니다.";
     private static final String COMMA = ",";
+    private static final String INPUT_NUMBER_OF_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_NUMBERS_FOR_MANUAL_LOTTO = "수동으로 구매할 번호를 입력해 주세요.";
 
     public static int inputBettingMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -25,6 +28,26 @@ public class InputView {
         return convertToInteger(bettingMoney);
     }
 
+    public static int inputNumberOfManualLotto() {
+        System.out.println(INPUT_NUMBER_OF_MANUAL_LOTTO_MESSAGE);
+        String numberOfManualLotto = scanner.nextLine();
+        isNullOrEmpty(numberOfManualLotto);
+
+        return convertToInteger(numberOfManualLotto);
+    }
+
+    public static List<List<Integer>> inputManualNumbers(int numberOfManualLotto) {
+        System.out.println(INPUT_NUMBERS_FOR_MANUAL_LOTTO);
+
+        List<List<Integer>> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < numberOfManualLotto; i++) {
+            String numbers = scanner.nextLine();
+            isNullOrEmpty(numbers);
+            manualNumbers.add(collectNumber(numbers));
+        }
+
+        return manualNumbers;
+    }
 
     public static List<Integer> inputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
