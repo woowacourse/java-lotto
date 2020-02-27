@@ -10,11 +10,11 @@ public class LottoCount {
 	private final int manualLotto;
 	private final int autoLotto;
 
-	public LottoCount(String manual, int total) {
-		validate(manual);
-		validateManualRange(manual, total);
-		manualLotto = Integer.parseInt(manual);
-		this.autoLotto = total - manualLotto;
+	public LottoCount(String manualLotto, int total) {
+		validate(manualLotto);
+		validateManualRange(manualLotto, total);
+		this.manualLotto = Integer.parseInt(manualLotto);
+		this.autoLotto = total - this.manualLotto;
 	}
 
 	private void validateManualRange(String manual, int total) {

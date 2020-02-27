@@ -34,7 +34,7 @@ public class OutputView {
 
 	public static void printResult(GameResult result) {
 		System.out.println("당첨 통계 \n ==============");
-		printRank(result.getResult().values());
+		printRank(result.getResultCount());
 	}
 
 

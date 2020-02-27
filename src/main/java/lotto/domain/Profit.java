@@ -9,7 +9,7 @@ public class Profit {
 		profit += input;
 	}
 
-	public double getProfit(PurchaseMoney money) {
+	public double of(PurchaseMoney money) {
 		return (profit / money.getPurchaseMoney()) * PERCENTAGE;
 	}
 }

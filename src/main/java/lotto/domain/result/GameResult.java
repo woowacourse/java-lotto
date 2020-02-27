@@ -1,5 +1,6 @@
 package lotto.domain.result;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -28,10 +29,10 @@ public class GameResult {
 		for (RankCount rankCount : result.values()) {
 			profit.add(rankCount.getProfit());
 		}
-		return profit.getProfit(money);
+		return profit.of(money);
 	}
 
-	public Map<Statistic, RankCount> getResult() {
-		return Collections.unmodifiableMap(result);
+	public Collection getResultCount() {
+		return Collections.unmodifiableCollection(result.values());
 	}
 }
