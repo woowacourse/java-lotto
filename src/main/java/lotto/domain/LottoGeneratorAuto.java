@@ -10,7 +10,6 @@ public class LottoGeneratorAuto implements LottoGenerator {
     private static final int START_LOTTO_NO = 1;
     private static final int END_LOTTO_NO = 45;
     private static final int LOTTO_FROM_INDEX = 0;
-    private static final int LOTTO_TO_INDEX = 6;
     private static final String ERROR_MESSAGE_NULL_POINT_LOTTO_FACTORY = "입력값이 비었습니다.";
 
     private static List<LottoNo> lottoNumberBox = new ArrayList<>();
@@ -45,7 +44,7 @@ public class LottoGeneratorAuto implements LottoGenerator {
     private static List<LottoNo> pickSixRandomNo() {
         List<LottoNo> lotto = new ArrayList<>(lottoNumberBox);
         Collections.shuffle(lotto);
-        lotto = lotto.subList(LOTTO_FROM_INDEX, LOTTO_TO_INDEX);
+        lotto = lotto.subList(LOTTO_FROM_INDEX, Lotto.LOTTO_SIZE);
         return lotto;
     }
 }

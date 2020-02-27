@@ -36,6 +36,7 @@ public class LottoApplication {
     private static List<Lotto> createUserLottos(Customer customer) {
         LottoGame manualLottoGame = new LottoGame(customer, new LottoGeneratorManual());
         LottoGame AutoLottoGame = new LottoGame(customer, new LottoGeneratorAuto());
+
         List<Lotto> lottos = manualLottoGame.lottoGenerate();
         AutoLottoGame.lottoGenerate().stream().forEach(x -> lottos.add(x));
         return lottos;
