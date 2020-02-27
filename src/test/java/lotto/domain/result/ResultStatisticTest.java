@@ -82,8 +82,8 @@ public class ResultStatisticTest {
 	}
 
 	@Test
-	void calculate_올바른_리턴_결과_확인() {
-		Map<Rank, Integer> resultMap = resultStatistic.getResults();
+	void calculate_랭크에_해당하는_장수가_올바르게_저장되는지_확인() {
+		Map<Rank, Long> resultMap = resultStatistic.getResults();
 		assertThat(resultMap.get(Rank.FIRST)).isEqualTo(1);
 		assertThat(resultMap.get(Rank.SECOND)).isEqualTo(0);
 		assertThat(resultMap.get(Rank.THIRD)).isEqualTo(0);

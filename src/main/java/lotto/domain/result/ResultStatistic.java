@@ -18,31 +18,27 @@ import java.util.Map;
  */
 public class ResultStatistic {
 	private static final int ONE = 1;
-	private static final int DEFAULT_COUNT = 0;
+	private static final Long DEFAULT_COUNT = 0L;
 
-	private Map<Rank, Integer> results;
+	private Map<Rank, Long> results;
 
-	private ResultStatistic(final Map<Rank, Integer> input) {
+	private ResultStatistic(final Map<Rank, Long> input) {
 		this.results = input;
 	}
 
-	public static ResultStatistic calculate(
-			final Lottos lottos,
-			final WinningLotto winningLotto
-	) {
-		Map<Rank, Integer> results = createInitialResult();
+	public static ResultStatistic calculate(final Lottos lottos, final WinningLotto winningLotto) {
+		Map<Rank, Long> results = createInitialResult();
 
 		for (Lotto lotto : lottos.getLottos()) {
 			Rank rank = winningLotto.getRank(lotto);
-			int count = results.get(rank) + ONE;
-			results.put(rank, count);
+			results.merge(rank, results.get(rank), (keyRank, count) -> count + 1L);
 		}
 
 		return new ResultStatistic(results);
 	}
 
-	private static Map<Rank, Integer> createInitialResult() {
-		Map<Rank, Integer> initialResult = new HashMap<>();
+	private static Map<Rank, Long> createInitialResult() {
+		Map<Rank, Long> initialResult = new HashMap<>();
 
 		for (Rank rank : Rank.values()) {
 			initialResult.put(rank, DEFAULT_COUNT);
@@ -65,7 +61,7 @@ public class ResultStatistic {
 		return totalRevenue;
 	}
 
-	public Map<Rank, Integer> getResults() {
+	public Map<Rank, Long> getResults() {
 		return this.results;
 	}
 }
