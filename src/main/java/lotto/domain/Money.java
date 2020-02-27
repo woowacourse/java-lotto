@@ -18,7 +18,7 @@ public class Money {
         }
     }
 
-    public int calculateLottoTicketCount() {
+    public int calculateTotalLottoAmount() {
         return money / LOTTO_PRICE;
     }
 

@@ -17,4 +17,12 @@ public class LottoAmount {
             throw new InvalidManualLottoAmountException();
         }
     }
+
+    public int getManualLottoAmount() {
+        return manualLottoAmount;
+    }
+
+    public int getAutoLottoAmount() {
+        return autoLottoAmount;
+    }
 }

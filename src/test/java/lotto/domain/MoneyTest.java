@@ -15,7 +15,7 @@ public class MoneyTest {
     @CsvSource(value = {"1000,1", "2000,2", "3333,3"})
     void purchaseTest(int input, int result) {
         Money money = new Money(input);
-        assertThat(money.calculateLottoTicketCount()).isEqualTo(result);
+        assertThat(money.calculateTotalLottoAmount()).isEqualTo(result);
     }
 
     @DisplayName("금액 1000원 미만 예외처리 테스트")
