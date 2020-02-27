@@ -38,7 +38,7 @@ public class PurchasePrice {
         }
     }
 
-    public int calculateLottoCount() {
+    public int calculateTotalLottoCount() {
         return price / PRICE_PER_LOTTO;
     }
 

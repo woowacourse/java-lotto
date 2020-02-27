@@ -25,6 +25,10 @@ public class Ball implements Comparable<Ball> {
         return new Ball(number);
     }
 
+    public static Ball valueOf(String number) {
+        return new Ball(Integer.parseInt(number));
+    }
+
     public static List<Ball> generateAllBalls() {
         List<Ball> result = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {

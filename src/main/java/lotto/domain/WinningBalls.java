@@ -12,7 +12,9 @@ public class WinningBalls {
 
     public WinningBalls(String winningBalls) {
         validate(winningBalls);
-        this.winningBalls = convertToLotto(split(winningBalls));
+        this.winningBalls = new Lotto(split(winningBalls).stream()
+                .map(Ball::valueOf)
+                .collect(Collectors.toList()));
     }
 
     private void validate(String winningBallsInput) {
@@ -21,7 +23,9 @@ public class WinningBalls {
         List<String> splittedNumbers = split(winningBallsInput);
         checkCount(splittedNumbers);
         checkType(splittedNumbers);
-        Lotto winningBalls = convertToLotto(splittedNumbers);
+        Lotto winningBalls = new Lotto(splittedNumbers.stream()
+                .map(Ball::valueOf)
+                .collect(Collectors.toList()));
         checkDuplicatedNumber(winningBalls);
     }
 
@@ -58,13 +62,6 @@ public class WinningBalls {
         } catch (NumberFormatException e) {
             throw new RuntimeException("숫자만 입력하시기 바랍니다.");
         }
-    }
-
-    private Lotto convertToLotto(List<String> splittedNumbers) {
-        return new Lotto(splittedNumbers.stream()
-                .map(Integer::parseInt)
-                .map(Ball::valueOf)
-                .collect(Collectors.toList()));
     }
 
     private void checkDuplicatedNumber(Lotto winningBalls) {
