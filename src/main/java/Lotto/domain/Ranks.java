@@ -10,6 +10,13 @@ public class Ranks {
         this.ranks = ranks;
     }
 
+    public int addAllRankReward() {
+        return ranks.stream()
+                .filter(Objects::nonNull)
+                .mapToInt(Rank::getRankReward)
+                .sum();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
