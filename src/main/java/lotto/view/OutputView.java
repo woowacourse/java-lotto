@@ -12,9 +12,19 @@ public class OutputView {
     }
 
     public static void printLottos(List<LottoTicket> lottoTickets) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoTickets.size()));
+        System.out.printf("%d개를 구매했습니다.", lottoTickets.size());
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.getNumbers());
+        }
+    }
+
+    public static void printLottos(List<LottoTicket> manualLottoTickets, List<LottoTicket> randomLottoTickets) {
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualLottoTickets.size(), randomLottoTickets.size());
+        for (LottoTicket manualLottoTicket : manualLottoTickets) {
+            System.out.println(manualLottoTicket.getNumbers());
+        }
+        for (LottoTicket randomLottoTicket : randomLottoTickets) {
+            System.out.println(randomLottoTicket.getNumbers());
         }
     }
 
