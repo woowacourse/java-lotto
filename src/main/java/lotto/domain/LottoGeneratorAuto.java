@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class LottoGeneratorAuto implements LottoGenerator {
     private static final int START_LOTTO_NO = 1;
@@ -37,7 +35,7 @@ public class LottoGeneratorAuto implements LottoGenerator {
     }
 
     private static Lotto createLottoAuto() {
-        Set<LottoNo> lotto = new TreeSet<>(pickSixRandomNo());
+        List<LottoNo> lotto = new ArrayList<>(pickSixRandomNo());
         return new Lotto(lotto);
     }
 

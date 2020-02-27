@@ -19,11 +19,11 @@ public class LottoGeneratorManualTest {
         Lotto lotto1 = new Lotto(IntStream.range(1, 7)
                 .boxed()
                 .map(LottoNo::new)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toList()));
         Lotto lotto2 = new Lotto(IntStream.range(11, 17)
                 .boxed()
                 .map(LottoNo::new)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toList()));
         result.add(lotto1);
         result.add(lotto2);
 

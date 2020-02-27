@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,10 +15,10 @@ public class BonusBallTest {
 
     @BeforeEach
     void setUp() {
-        Set<LottoNo> numbers = IntStream.range(1, 7)
+        List<LottoNo> numbers = IntStream.range(1, 7)
                 .boxed()
                 .map(LottoNo::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         lotto = new Lotto(numbers);
     }
 

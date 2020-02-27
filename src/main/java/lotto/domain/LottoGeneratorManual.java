@@ -5,7 +5,6 @@ import lotto.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoGeneratorManual implements LottoGenerator {
@@ -21,18 +20,19 @@ public class LottoGeneratorManual implements LottoGenerator {
     private static List<Lotto> createManualLotto(String[] manualLottoNumbers) {
         List<Lotto> lottos = new ArrayList<>();
         for (String numbers : manualLottoNumbers) {
-            Set<LottoNo> lotto = toLottoNoSet(StringUtils.splitByComma(numbers));
+            String[] winLottoNumbers = StringUtils.splitByComma(numbers);
+            List<LottoNo> lotto = toLottoNoList(winLottoNumbers);
             lottos.add(new Lotto(lotto));
         }
         return lottos;
     }
 
-    private static Set<LottoNo> toLottoNoSet(String[] winLotto) {
+    private static List<LottoNo> toLottoNoList(String[] winLotto) {
         try {
             return Arrays.stream(winLotto)
                     .map(Integer::parseInt)
                     .map(LottoNo::new)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_INTEGER);
         }
