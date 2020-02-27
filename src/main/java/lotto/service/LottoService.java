@@ -3,24 +3,14 @@ package lotto.service;
 import lotto.domain.ticket.BettingInfo;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketBundle;
-import lotto.domain.ticket.manual.ManualNumber;
 import lotto.domain.ticket.manual.ManualNumberBundle;
-import lotto.domain.ticket.strategy.LottoMachine;
+import lotto.domain.ticket.strategy.ManualLottoMachine;
+import lotto.domain.ticket.strategy.RandomLottoMachine;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoService {
-    private static final List<ManualNumber> RANDOM_NUMBERS = Collections.emptyList();
-
-    private final LottoMachine randomLottoMachine;
-    private final LottoMachine manualLottoMachine;
-
-    public LottoService(LottoMachine randomLottoMachine, LottoMachine manualLottoMachine) {
-        this.randomLottoMachine = randomLottoMachine;
-        this.manualLottoMachine = manualLottoMachine;
-    }
 
     public LottoTicketBundle getLottoTicketBundle(BettingInfo bettingInfo, ManualNumberBundle manualNumberBundle) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -31,11 +21,13 @@ public class LottoService {
     }
 
     private List<LottoTicket> makeRandomLottoTickets(BettingInfo bettingInfo) {
-        return randomLottoMachine.buyTickets(bettingInfo.getRandomAmount(), RANDOM_NUMBERS);
+        return new RandomLottoMachine(bettingInfo.getRandomAmount())
+                .buyTickets();
     }
 
     private List<LottoTicket> makeManualLottoTickets(BettingInfo bettingInfo, ManualNumberBundle manualNumberBundle) {
-        return manualLottoMachine.buyTickets(bettingInfo.getManualAmount(), manualNumberBundle.getManualNumbers());
+        return new ManualLottoMachine(bettingInfo.getManualAmount(), manualNumberBundle.getManualNumbers())
+                .buyTickets();
     }
 
 }

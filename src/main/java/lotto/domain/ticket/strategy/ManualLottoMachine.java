@@ -10,10 +10,16 @@ import java.util.stream.Collectors;
 
 public class ManualLottoMachine implements LottoMachine {
 
+    private final List<ManualNumber> manualNumbers;
+
+    public ManualLottoMachine(int ticketCount, List<ManualNumber> manualNumbers) {
+        this.manualNumbers = manualNumbers;
+        validateTicketAmount(ticketCount, manualNumbers);
+    }
+
     @Override
-    public List<LottoTicket> buyTickets(int ticketCount, List<ManualNumber> numberBundle) {
-        validateTicketAmount(ticketCount, numberBundle);
-        return numberBundle.stream()
+    public List<LottoTicket> buyTickets() {
+        return manualNumbers.stream()
                 .map(ManualNumber::getNumbers)
                 .map(this::makeLottoTicket)
                 .collect(Collectors.toList());

@@ -27,15 +27,17 @@ public class LottoController {
         BettingMoney bettingMoney = BettingMoney.valueOf(inputView.inputBettingMoney());
         BettingInfo bettingInfo = new BettingInfo(bettingMoney, inputView.inputManualTicketAmount());
         ManualNumberBundle manualNumberBundle = new ManualNumberBundle(inputView.inputManualNumbers(bettingInfo.getManualAmount()));
+
         OutputView.printBuyTicketCount(bettingInfo);
 
         LottoTicketBundle lottoTicketBundle = lottoService.getLottoTicketBundle(bettingInfo, manualNumberBundle);
+
         OutputView.printBuyTickets(lottoTicketBundle);
 
         Set<Integer> winningNumber = inputView.inputWinningNumber();
         int bonusNumber = inputView.inputBonusNumber();
-
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+
         MatchResultBundle matchResultBundle = lottoTicketBundle.getMatchResultBundle(winningLotto);
         LottoResultBundle lottoResultBundle = matchResultBundle.getPrizeBundle();
 
