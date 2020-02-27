@@ -171,3 +171,10 @@
 6개 일치 (2000000000원)- 0개
 총 수익률은 30%입니다.
 ```
+
+## 코드 리뷰
+### 첫번째 피드백
+- [ ] LottoController 클래스 내 ticketNumber를 지역 변수로 둬라.
+- [ ] WinNumber 클래스의 LottoTicket 상속을 조합으로 변경하라.
+- [ ] Payment 클래스의 countAutoTickets() 메서드 명을 변경하라.
+- [ ] LottoTicket 클래스에서 인터페이스를 활용해 자동, 수동 생성 클래스를 생성하라.
