@@ -28,11 +28,30 @@ public class InputView {
     private static Money generateMoneyFromInput() {
         String inputForPurchaseMoney = inputPurchaseMoneyWithMessage();
         int valueForPurchaseMoney = Integer.parseInt(inputForPurchaseMoney);
-        return Money.createPurchaseMoney(valueForPurchaseMoney);
+        return Money.ofPurchaseMoney(valueForPurchaseMoney);
     }
 
     private static String inputPurchaseMoneyWithMessage() {
         System.out.println("구입금액을 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
+    public static Integer inputManualLottoTicketCount() {
+        try {
+            return generateIntegerFromInput();
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            return inputManualLottoTicketCount();
+        }
+    }
+
+    private static Integer generateIntegerFromInput() {
+        String inputForManualLottoTicketCount = inputManualLottoTicketCountWithMessage();
+        return Integer.parseInt(inputForManualLottoTicketCount);
+    }
+
+    private static String inputManualLottoTicketCountWithMessage() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요");
         return scanner.nextLine();
     }
 
