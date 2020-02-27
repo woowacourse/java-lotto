@@ -18,6 +18,8 @@ public class InputView {
     public static final String DELIMITER = ",";
     private static final String BLANK = " ";
     private static final String NO_BLANK = "";
+    private static final String INPUT_MANUAL_LOTTO_ELEMENTS_HEADER = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_ROUNDS_HEADER = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     public static Money inputPurchaseMoney() {
         try {
@@ -34,10 +36,11 @@ public class InputView {
     }
 
     public static List<LottoRound> inputManualLottoRounds(Money money) {
+        System.out.println(INPUT_MANUAL_LOTTO_ROUNDS_HEADER);
         int manualLottoSize = inputManualLottoSize(money);
         List<LottoRound> lottoRounds = new ArrayList<>();
         for (int i = 0; i < manualLottoSize; i++) {
-            LottoRound lottoRound = new LottoRound(inputLottoNumbers());
+            LottoRound lottoRound = new LottoRound(inputManualLottoNumbers());
             lottoRounds.add(lottoRound);
         }
         return Collections.unmodifiableList(lottoRounds);
@@ -54,17 +57,31 @@ public class InputView {
         }
     }
 
-    public static List<LottoNumber> inputLottoNumbers() {
+    private static List<LottoNumber> inputManualLottoNumbers() {
         try {
-            System.out.println(INPUT_WINNING_NUMBER_HEADER);
-            return Arrays.stream(deleteBlankAndSplit(SCANNER.nextLine()))
-                    .map(Integer::parseInt)
-                    .map(LottoNumber::of)
-                    .collect(Collectors.toList());
+            System.out.println(INPUT_MANUAL_LOTTO_ELEMENTS_HEADER);
+            return inputLottoNumbers();
         } catch (NumberFormatException e) {
             System.out.println(NUMBER_FORMAT_MISMATCH_EXCEPTION_PREFIX_MESSAGE);
-            return inputLottoNumbers();
+            return inputManualLottoNumbers();
         }
+    }
+
+    public static List<LottoNumber> inputWinningLottoNumbers() {
+        try {
+            System.out.println(INPUT_WINNING_NUMBER_HEADER);
+            return inputLottoNumbers();
+        } catch (NumberFormatException e) {
+            System.out.println(NUMBER_FORMAT_MISMATCH_EXCEPTION_PREFIX_MESSAGE);
+            return inputWinningLottoNumbers();
+        }
+    }
+
+    private static List<LottoNumber> inputLottoNumbers() {
+        return Arrays.stream(deleteBlankAndSplit(SCANNER.nextLine()))
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 
     public static LottoNumber inputBonusNumber() {

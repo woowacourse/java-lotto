@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ConsoleLottoApplication {
     public static void main(String[] args) {
-        Money money = inputPurchaseNumber();
+        Money money = InputView.inputPurchaseMoney();
 
         LottoGame lottoGame = LottoGame.initialize(money, InputView.inputManualLottoRounds(money));
         OutputView.printAllLottoNumbers(lottoGame);
@@ -25,15 +25,9 @@ public class ConsoleLottoApplication {
         OutputView.printYield(lottoGame.calculateYield(gameResults));
     }
 
-    private static Money inputPurchaseNumber() {
-        Money money = InputView.inputPurchaseMoney();
-        OutputView.printPurchaseNumber(money);
-        return money;
-    }
-
     private static WinningNumbers inputWinningNumbers() {
         try {
-            List<LottoNumber> lottoNumbers = InputView.inputLottoNumbers();
+            List<LottoNumber> lottoNumbers = InputView.inputWinningLottoNumbers();
             LottoNumber bonusNumber = InputView.inputBonusNumber();
             return new WinningNumbers(lottoNumbers, bonusNumber);
         } catch (DuplicateLottoNumberException | LottoNumberSizeException e) {
