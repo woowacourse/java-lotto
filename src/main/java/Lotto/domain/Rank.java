@@ -34,7 +34,7 @@ public enum Rank {
         return rank.getHitCount() == hitCount;
     }
 
-    private int getHitCount() {
+    public int getHitCount() {
         return this.hitCount;
     }
 
