@@ -1,4 +1,4 @@
-package strategy;
+package domain;
 
 import domain.RandomTicketFactory;
 import org.junit.jupiter.api.DisplayName;

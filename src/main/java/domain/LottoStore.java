@@ -11,10 +11,12 @@ import java.util.stream.Collectors;
  * Ticket 리스트 생성
  */
 public class LottoStore {
+    private static final int MIN_TICKET_SIZE = 1;
+    private static final int MONEY_UNIT = 1000;
 
-    public static final int MIN_TICKET_SIZE = 1;
+    private static int totalTicketSize;
 
-    public static List<Ticket> createTickets(int randomTicketSize) {
+    private static List<Ticket> createRandomTickets(int randomTicketSize) {
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < randomTicketSize; i++) {
             tickets.add(RandomTicketFactory.createTicket());
@@ -22,28 +24,33 @@ public class LottoStore {
         return tickets;
     }
 
-    public static List<Ticket> createTickets(int totalTicketSize, int manualTicketSize, List<LottoNumbersDto> givenNumbers) {
-        validateManualTicketSize(totalTicketSize, manualTicketSize);
-        List<Ticket> tickets = givenNumbers.stream()
-                .map(Ticket::new)
-                .collect(Collectors.toList());
+    public static List<Ticket> createTickets(Money money, int manualTicketSize, List<String> givenNumbers) {
+        totalTicketSize = getTotalTicketSize(money);
+        validateManualTicketSize(manualTicketSize);
+        List<Ticket> tickets = parseTicket(givenNumbers);
+        int randomTicketSize = totalTicketSize - manualTicketSize;
 
-        int randomTicketsSize = getRandomTicketSize(totalTicketSize, givenNumbers.size());
-        tickets.addAll(createTickets(randomTicketsSize));
-
+        tickets.addAll(createRandomTickets(randomTicketSize));
         return tickets;
     }
 
-    private static void validateManualTicketSize(int totalTicketSize, int manualTicketSize) {
+    private static List<Ticket> parseTicket(List<String> givenNumbers) {
+        return givenNumbers.stream()
+                .map(LottoNumbersDto::new)
+                .map(Ticket::new)
+                .collect(Collectors.toList());
+    }
+
+    private static void validateManualTicketSize(int manualTicketSize) {
         if (manualTicketSize < MIN_TICKET_SIZE) {
-            throw new IllegalArgumentException("1장 이상 구매 가능합니다.");
+            throw new IllegalArgumentException(String.format("%d장 이상 구매 가능합니다.", MIN_TICKET_SIZE));
         }
         if (manualTicketSize > totalTicketSize) {
             throw new IllegalArgumentException(String.format("최대 %d장 구매 가능합니다.", totalTicketSize));
         }
     }
 
-    public static int getRandomTicketSize(int totalTicketSize, int manualTicketSize) {
-        return totalTicketSize - manualTicketSize;
+    private static int getTotalTicketSize(Money money) {
+        return money.getValue() / MONEY_UNIT;
     }
 }

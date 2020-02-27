@@ -18,7 +18,7 @@ public class LottoProfit {
             long matchCount = lottoResults.get(result);
             totalPrize += prize * matchCount;
         }
-        return new LottoProfit(totalPrize / money.getMoney() * TO_PERCENTAGE);
+        return new LottoProfit(totalPrize / money.getValue() * TO_PERCENTAGE);
     }
 
     public long getValue() {

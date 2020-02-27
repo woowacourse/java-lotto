@@ -15,7 +15,7 @@ public class WinningNumbersTest {
     @DisplayName("당첨 번호 객체 생성")
     void winningNumberConstructor() {
         LottoNumbersDto lottoNumbersDto = createSixNumbersDto(1, 2, 3, 4, 5, 5);
-        BonusNumberDTO bonusNumberDTO = new BonusNumberDTO("7");
+        BonusNumberDto bonusNumberDTO = new BonusNumberDto("7");
         assertThatThrownBy(() -> new WinningNumbers(lottoNumbersDto, bonusNumberDTO))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("6개의 숫자를 입력해주세요.");
@@ -26,7 +26,7 @@ public class WinningNumbersTest {
     @DisplayName("중복 없는 보너스 번호인지 검증")
     void validateBonusNumber(String input) {
         LottoNumbersDto lottoNumbersDto = createSixNumbersDto(1, 2, 3, 4, 5, 6);
-        BonusNumberDTO bonusNumberDTO = new BonusNumberDTO(input);
+        BonusNumberDto bonusNumberDTO = new BonusNumberDto(input);
         assertThatThrownBy(() -> new WinningNumbers(lottoNumbersDto, bonusNumberDTO))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageEndingWith("보너스 번호를 입력해주세요.");
@@ -36,7 +36,7 @@ public class WinningNumbersTest {
     @ValueSource(strings = {"-1", "46"})
     @DisplayName("1부터 45까지의 보너스 번호인지 검증")
     void validateBonusNumber2(String input) {
-        assertThatThrownBy(() -> new BonusNumberDTO(input))
+        assertThatThrownBy(() -> new BonusNumberDto(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageEndingWith("숫자를 입력해주세요.");
     }
@@ -45,7 +45,7 @@ public class WinningNumbersTest {
     @DisplayName("Ticket과 당첨 번호 비교")
     void findDuplicatedNumbers() {
         LottoNumbersDto lottoNumbersDto1 = createSixNumbersDto(1, 2, 3, 4, 5, 6);
-        BonusNumberDTO bonusNumberDTO = new BonusNumberDTO("7");
+        BonusNumberDto bonusNumberDTO = new BonusNumberDto("7");
         LottoNumbersDto lottoNumbersDto2 = createSixNumbersDto(4, 5, 6, 7, 8, 9);
         WinningNumbers winningNumbers = new WinningNumbers(lottoNumbersDto1, bonusNumberDTO);
         Ticket ticket = new Ticket(lottoNumbersDto2);
@@ -55,7 +55,7 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("당첨 결과 확인")
     void getLottoResultTest() {
-        WinningNumbers winningNumbers = new WinningNumbers(createSixNumbersDto(3, 4, 5, 6, 7, 8), new BonusNumberDTO("9"));
+        WinningNumbers winningNumbers = new WinningNumbers(createSixNumbersDto(3, 4, 5, 6, 7, 8), new BonusNumberDto("9"));
 
         assertThat(winningNumbers.getLottoResult(new Ticket(createSixNumbersDto(3, 4, 5, 6, 7, 8)))).isEqualTo(LottoResult.FIRST);
         assertThat(winningNumbers.getLottoResult(new Ticket(createSixNumbersDto(3, 4, 5, 6, 7, 9)))).isEqualTo(LottoResult.SECOND);

@@ -6,7 +6,7 @@ public class WinningNumbers extends LottoNumbers {
 
     private final LottoNumber bonusNumber;
 
-    public WinningNumbers(LottoNumbersDto lottoNumbersDto, BonusNumberDTO bonusNumberDTO) {
+    public WinningNumbers(LottoNumbersDto lottoNumbersDto, BonusNumberDto bonusNumberDTO) {
         super(lottoNumbersDto);
         validateBonusNumber(bonusNumberDTO.getBonusNumber());
         this.bonusNumber = bonusNumberDTO.getBonusNumber();

@@ -16,8 +16,8 @@ public class LottoResultMachineTest {
         List<Ticket> tickets = LottoStore.createTickets(money.getTotalTicketSize(), createFixedNumbersList());
 
         LottoNumbersDto sixNumbers = createFixedNumbers(3, 4, 5, 6, 7, 8);
-        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, new BonusNumberDTO("9"));
-        Map<LottoResult, Integer> lottoResults = LottoResultMachine.confirmResult(tickets, winningNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, new BonusNumberDto("9"));
+        Map<LottoResult, Integer> lottoResults = LottoResultMachine.calculateResult(tickets, winningNumbers);
 
         assertThat(lottoResults.get(LottoResult.FIRST)).isEqualTo(1);
         assertThat(lottoResults.get(LottoResult.SECOND)).isEqualTo(2);
@@ -34,8 +34,8 @@ public class LottoResultMachineTest {
         List<Ticket> tickets = LottoStore.createTickets(money.getTotalTicketSize(), createFixedNumbersList());
 
         LottoNumbersDto sixNumbers = createFixedNumbers(3, 4, 5, 6, 7, 8);
-        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, new BonusNumberDTO("9"));
-        Map<LottoResult, Integer> lottoResults = LottoResultMachine.confirmResult(tickets, winningNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, new BonusNumberDto("9"));
+        Map<LottoResult, Integer> lottoResults = LottoResultMachine.calculateResult(tickets, winningNumbers);
         LottoProfit profit = LottoProfit.ofProfit(lottoResults, money);
         assertThat(profit.getValue()).isEqualTo(20631000);
     }

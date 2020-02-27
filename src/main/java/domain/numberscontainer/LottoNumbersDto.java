@@ -4,18 +4,20 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbersDto {
+    private static final String SPLIT_REGEX = ",";
+
     private final LinkedHashSet<LottoNumber> lottoNumbers;
 
-    public LottoNumbersDto(String sixNumbersInput) {
-        this.lottoNumbers = new LinkedHashSet<>(parseSet(sixNumbersInput));
+    public LottoNumbersDto(String numbersInput) {
+        this.lottoNumbers = new LinkedHashSet<>(parseSet(numbersInput));
     }
 
     public LottoNumbersDto(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new LinkedHashSet<>(lottoNumbers);
     }
 
-    private Set<LottoNumber> parseSet(String sixNumbersInput) {
-        return Arrays.asList(sixNumbersInput.split(",")).stream()
+    private Set<LottoNumber> parseSet(String numbersInput) {
+        return Arrays.asList(numbersInput.split(SPLIT_REGEX)).stream()
                 .map(String::trim)
                 .map(Integer::new)
                 .map(LottoNumber::getLottoNumber)

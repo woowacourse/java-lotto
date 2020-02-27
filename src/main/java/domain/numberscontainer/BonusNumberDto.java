@@ -1,11 +1,11 @@
 package domain.numberscontainer;
 
-public class BonusNumberDTO {
-    private static final String NUMBER_REGEX = "^[+-]?[0-9]+$";
+public class BonusNumberDto {
+    private static final String NUMBER_REGEX = "^[0-9]+$";
 
     private final LottoNumber bonusNumber;
 
-    public BonusNumberDTO(String bonusNumberInput) {
+    public BonusNumberDto(String bonusNumberInput) {
         this.bonusNumber = LottoNumber.getLottoNumber(parseInt(bonusNumberInput));
     }
 

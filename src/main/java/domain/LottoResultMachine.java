@@ -8,8 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoResultMachine {
-
-    public static Map<LottoResult, Integer> confirmResult(List<Ticket> tickets, WinningNumbers winningNumbers) {
+    public static Map<LottoResult, Integer> calculateResult(List<Ticket> tickets, WinningNumbers winningNumbers) {
         return tickets.stream()
                 .collect(Collectors.groupingBy(winningNumbers::getLottoResult, Collectors.summingInt(x -> 1)));
     }
