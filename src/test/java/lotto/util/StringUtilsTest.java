@@ -21,6 +21,18 @@ import static org.assertj.core.api.Assertions.*;
 public class StringUtilsTest {
 
 	@Test
+	void parseToInteger_올바른_동작_확인() {
+		assertThat(StringUtils.parseToInteger("3")).isEqualTo(3);
+	}
+
+	@Test
+	void parseToInteger_문자_포함시_예외처리() {
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			StringUtils.parseToInteger("a");
+		}).withMessageContaining("입력 로또 번호가 정수가 아닙니다.");
+	}
+
+	@Test
 	void splitIntoLottoNumbers_올바른_동작_확인() {
 		String input = "1,2 ,3, 4, 5 , 6";
 		assertThat(StringUtils.splitIntoLottoNumbers(input))
@@ -59,17 +71,4 @@ public class StringUtilsTest {
 				.isThrownBy(() -> StringUtils.splitIntoLottoNumbers(input))
 				.withMessage("잘못된 형식으로 입력하셨습니다.");
 	}
-//
-//	@Test
-//	void splitIntoStringLottoNumbers_올바른_동작_확인() {
-//		String input = "1,2,3,4,5,6  \n  7,8,9,10,11,12\n 13,14,15,16,17,18 ";
-//		assertThat(StringUtils.splitIntoManualLottoNumbers(input))
-//				.isEqualTo(
-//						Arrays.asList(
-//								"1,2,3,4,5,6",
-//								"7,8,9,10,11,12",
-//								"13,14,15,16,17,18"
-//						)
-//				);
-//	}
 }
