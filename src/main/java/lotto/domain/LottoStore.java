@@ -5,16 +5,12 @@ import lotto.Exception.NumberOutOfRangeException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class LottoStore {
     private static final int MAX_LOTTO_BALL_COUNT = 6;
 
     private LottoTicketNumber lottoTicketNumber;
-    private LottoTickets lottoTickets = new LottoTickets();
 
     public LottoStore(LottoTicketNumber lottoTicketNumber) {
         this.lottoTicketNumber = lottoTicketNumber;
@@ -37,22 +33,24 @@ public class LottoStore {
         return new LottoTicket(lottoTicket);
     }
 
-    private void generateManualLottoTickets(List<String> manualLottoBallsInputs) {
+    private void generateManualLottoTickets(List<String> manualLottoBallsInputs,LottoTickets lottoTickets) {
         manualLottoBallsInputs.stream().map(this::generateManualLottoTicket).forEach(lottoTickets::addLottoTicket);
     }
 
-    private void generateAutomaticLottoTickets() {
+    private void generateAutomaticLottoTickets(LottoTickets lottoTickets) {
         for (int i = 0; i < lottoTicketNumber.getAutomaticLottoTicketNumber(); i++) {
             Collections.shuffle(LottoBallFactory.getInstance());
             lottoTickets.addLottoTicket(generateAutomaticLottoTicket());
         }
         OutputView.printAnswerLottoTicketNumber(lottoTicketNumber);
-        OutputView.printLottoTicket(lottoTickets);
     }
 
-    public LottoTickets generateLottoTickets(List<String> manualLottoBallsInputs) {
-        generateManualLottoTickets(manualLottoBallsInputs);
-        generateAutomaticLottoTickets();
+    public LottoTickets generateLottoTickets() {
+        LottoTickets lottoTickets = new LottoTickets();
+        generateManualLottoTickets(InputView.inputManualLottoTickets(lottoTicketNumber.getManualLottoTicketNumber()),
+                lottoTickets);
+        generateAutomaticLottoTickets(lottoTickets);
+        OutputView.printLottoTicket(lottoTickets);
         return lottoTickets;
     }
 }
