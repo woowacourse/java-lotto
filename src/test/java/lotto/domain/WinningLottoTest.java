@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -50,7 +51,7 @@ public class WinningLottoTest {
 	@DisplayName("번호 갯수가 틀린 경우")
 	void checkNumberAmountMismatch(List<String> value) {
 		assertThatThrownBy(() -> new WinningLotto(value, new LottoNumber(21)))
-				.isInstanceOf(IllegalArgumentException.class)
+				.isInstanceOf(LottoException.class)
 				.hasMessageContaining("개여야 합니다");
 	}
 
@@ -59,7 +60,7 @@ public class WinningLottoTest {
 	@DisplayName("중복 번호가 있는 경우")
 	void checkDuplicateNumber(List<String> value) {
 		assertThatThrownBy(() -> new WinningLotto(value, new LottoNumber(34)))
-				.isInstanceOf(IllegalArgumentException.class)
+				.isInstanceOf(LottoException.class)
 				.hasMessageContaining("중복");
 	}
 
@@ -75,8 +76,8 @@ public class WinningLottoTest {
 	@ParameterizedTest
 	@MethodSource("generateInput_duplicateBonusNumber")
 	@DisplayName("보너스 번호가 중복되는 경우")
-	void checkDuplicateBonusNumber(List<String> value, LottoNumber bonus) {
-		assertThatThrownBy(() -> new WinningLotto(value, bonus))
+	void checkDuplicateBonusNumber(List<String> value, int bonus) {
+		assertThatThrownBy(() -> new WinningLotto(value, LottoMachine.getInstance().pickBall(bonus)))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("중복된 보너스");
 	}
@@ -87,6 +88,6 @@ public class WinningLottoTest {
 	void checkBonusNumberIsOutOfRange(int bonus) {
 		assertThatThrownBy(() -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "5", "6"), LottoMachine.getInstance().pickBall(bonus)))
 				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("보너스 번호가 범위");
+				.hasMessageContaining("범위");
 	}
 }
