@@ -18,7 +18,7 @@ import lotto.view.OutputView;
  * <p>
  * 날짜 : 2020/02/20
  */
-public class LottoController {
+public class AutoLottoController {
 	public static void run() {
         try {
             runWithoutExceptionCatch();
