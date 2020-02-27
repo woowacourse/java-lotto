@@ -7,10 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ConvertInput {
-    private static final String COMMA = ",";
-    private static final String SPACE = " ";
-    private static final String BLANK = "";
-
     public static List<LottoNumber> convertLottoNumbers(String input) {
         input = removeBlank(input);
         return splitLottoNumbers(input)
@@ -20,7 +16,7 @@ public class ConvertInput {
     }
 
     static List<Integer> splitLottoNumbers(String input) {
-        return Arrays.stream(input.split(COMMA))
+        return Arrays.stream(input.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
