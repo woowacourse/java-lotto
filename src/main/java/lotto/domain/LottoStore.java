@@ -12,12 +12,12 @@ import lotto.domain.strategy.ManualLottoPurchaseStrategy;
 public class LottoStore {
 	private LottoPurchaseStrategy lottoPurchaseStrategy;
 
-	public Lottos purchaseAutoLotto(int purchasedCount) {
+	private Lottos purchaseAutoLotto(int purchasedCount) {
 		lottoPurchaseStrategy = new AutoLottoPurchaseStrategy();
 		return purchaseLotto(purchasedCount);
 	}
 
-	public Lottos purchaseManualLotto(int purchasedCount) {
+	private Lottos purchaseManualLotto(int purchasedCount) {
 		lottoPurchaseStrategy = new ManualLottoPurchaseStrategy();
 		return purchaseLotto(purchasedCount);
 	}
@@ -28,5 +28,15 @@ public class LottoStore {
 			lottos.add(lottoPurchaseStrategy.generate());
 		}
 		return new Lottos(lottos);
+	}
+
+	public Lottos mergeManualAndAuto(int manualLottoCount, int autoLottoCount) {
+		final Lottos autoLottos = purchaseAutoLotto(autoLottoCount);
+		if (manualLottoCount == 0) {
+			return autoLottos;
+		}
+		final Lottos manualLottos = purchaseManualLotto(manualLottoCount);
+
+		return Lottos.merge(manualLottos, autoLottos);
 	}
 }

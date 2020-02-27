@@ -6,17 +6,18 @@ import static lotto.view.ConsoleOutputView.*;
 
 import lotto.domain.LottoStore;
 import lotto.domain.ManualLottoCount;
-import lotto.domain.result.WinningLotto;
-import lotto.domain.result.WinningResult;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoMoney;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.result.WinningLotto;
+import lotto.domain.result.WinningResult;
 
 public class LottoController {
 	public void run() {
 		final LottoMoney inputLottoMoney = continuousInputMoney();
 		final Lottos totalLottos = purchaseLotto(inputLottoMoney);
+		printPurchasedLotto(totalLottos);
 
 		final Lotto winningLottoNumber = new Lotto(parseToLottoNumberSet(inputWinningLottoNumber()));
 		final LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputBonusLottoNumber());
@@ -32,27 +33,13 @@ public class LottoController {
 		final int purchasedLottoCount = lottoMoney.getPurchasedLottoCount();
 		final ManualLottoCount manualLottoCount = new ManualLottoCount(inputManualLottoCount(), purchasedLottoCount);
 
-		final int manualCount = manualLottoCount.getCount();
-		final int autoCount = purchasedLottoCount - manualCount;
-
-		final Lottos totalLottos = mergeManualAndAuto(manualCount, autoCount);
-
-		printPurchaseCompleteMessage(manualCount, autoCount);
-		printPurchasedLotto(totalLottos);
-		return totalLottos;
-	}
-
-	private Lottos mergeManualAndAuto(int manualCount, int autoCount) {
-		final LottoStore lottoStore = new LottoStore();
-
-		final Lottos autoLottos = lottoStore.purchaseAutoLotto(autoCount);
-		if (manualCount == 0) {
-			return autoLottos;
-		}
-
 		printInputManualLottoMessage();
-		final Lottos manualLottos = lottoStore.purchaseManualLotto(manualCount);
+		final LottoStore lottoStore = new LottoStore();
+		Lottos totalLottos = lottoStore.mergeManualAndAuto(manualLottoCount.getCount(),
+			purchasedLottoCount - manualLottoCount.getCount());
+		printPurchaseCompleteMessage(manualLottoCount.getCount(),
+			purchasedLottoCount - manualLottoCount.getCount());
 
-		return Lottos.merge(manualLottos, autoLottos);
+		return totalLottos;
 	}
 }
