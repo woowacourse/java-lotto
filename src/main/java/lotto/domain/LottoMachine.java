@@ -8,13 +8,14 @@ import java.util.stream.Collectors;
 public class LottoMachine {
 	private static final int MAX_LOTTO_NUMBER = 45;
 	private static final int MIN_LOTTO_NUMBER = 1;
+	public static final String LOTTO_NUMBER_OUTOF_BOUNDS = "범위를 벗어난 로또 숫자입니다.";
 
-	private final List<Integer> lottoBalls;
+	private final List<LottoNumber> lottoNumbers;
 
 	private LottoMachine() {
-		lottoBalls = new ArrayList<>();
+		lottoNumbers = new ArrayList<>();
 		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-			lottoBalls.add(i);
+			lottoNumbers.add(new LottoNumber(i));
 		}
 	}
 
@@ -31,13 +32,21 @@ public class LottoMachine {
 		return lottos;
 	}
 
-	private List<Integer> pickRandomBalls() {
-		Collections.shuffle(lottoBalls);
-		return lottoBalls.stream()
+	private List<LottoNumber> pickRandomBalls() {
+		Collections.shuffle(lottoNumbers);
+		return lottoNumbers.stream()
 				.limit(Lotto.SIZE)
 				.sorted()
 				.collect(Collectors.toList());
 	}
+
+	public LottoNumber pickBall(int number) {
+		return lottoNumbers.stream()
+				.filter(l -> l.isEqualTo(number))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException(LOTTO_NUMBER_OUTOF_BOUNDS));
+	}
+
 
 	private static class LottoMachineSingletonHolder {
 		private static final LottoMachine instance = new LottoMachine();

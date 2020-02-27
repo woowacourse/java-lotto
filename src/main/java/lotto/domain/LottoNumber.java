@@ -13,4 +13,8 @@ public class LottoNumber {
             throw new IllegalArgumentException("범위를 벗어난 로또 숫자입니다.");
         }
     }
+
+    public boolean isEqualTo(int number) {
+        return lottoNumber == number;
+    }
 }

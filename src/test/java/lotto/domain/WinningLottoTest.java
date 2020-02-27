@@ -75,7 +75,7 @@ public class WinningLottoTest {
 	@ParameterizedTest
 	@MethodSource("generateInput_duplicateBonusNumber")
 	@DisplayName("보너스 번호가 중복되는 경우")
-	void checkDuplicateBonusNumber(List<String> value, int bonus) {
+	void checkDuplicateBonusNumber(List<String> value, LottoNumber bonus) {
 		assertThatThrownBy(() -> new WinningLotto(value, bonus))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("중복된 보너스");
@@ -84,7 +84,7 @@ public class WinningLottoTest {
 	@ParameterizedTest
 	@ValueSource(ints = {-1000, 0, 46, 10000})
 	@DisplayName("보너스 번호 범위를 벗어나는 경우")
-	void checkBonusNumberIsOutOfRange(int bonus) {
+	void checkBonusNumberIsOutOfRange(LottoNumber bonus) {
 		assertThatThrownBy(() -> new WinningLotto(Arrays.asList("1", "2", "3", "4", "5", "6"), bonus))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("보너스 번호가 범위");
