@@ -51,7 +51,7 @@ public class LottoMoney {
 		}
 	}
 
-	public int calculateNumberOfLotto() {
+	public int calculateCountOfLotto() {
 		return (int) (money / LOTTO_PRICE);
 	}
 

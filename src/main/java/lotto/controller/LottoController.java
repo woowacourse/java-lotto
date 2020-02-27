@@ -15,15 +15,15 @@ import static lotto.view.ConsoleOutputView.*;
 
 public class LottoController {
 
-    private static final String NUMBER_OF_MANUAL_IS_WRONG_RANGE_MESSAGE = "수동 로또 갯수는 0보다 작거나 구매한 로또 갯수보다 클 수 없습니다.";
-    private static final String NUMBER_OF_MANUAL_IS_WRONG_TYPE_MESSAGE = "숫자를 입력해주세요";
+    private static final String COUNT_OF_MANUAL_IS_WRONG_RANGE_MESSAGE = "수동 로또 갯수는 0보다 작거나 구매한 로또 갯수보다 클 수 없습니다.";
+    private static final String COUNT_OF_MANUAL_IS_WRONG_TYPE_MESSAGE = "숫자를 입력해주세요";
 
     public void run() {
         LottoMoney inputLottoMoney = receiveInputMoney();
-        int numberOfLotto = inputLottoMoney.calculateNumberOfLotto();
-        int numberOfManualLotto = receiveNumberOfManualLotto(numberOfLotto);
-        printPurchaseCompleteMessage(numberOfLotto);
-        Lottos lottos = LottosGenerator.generate(numberOfLotto);
+        int countOfLotto = inputLottoMoney.calculateCountOfLotto();
+        int countOfManualLotto = receiveCountOfManualLotto(countOfLotto);
+        printPurchaseCompleteMessage(countOfLotto);
+        Lottos lottos = LottosGenerator.generate(countOfLotto);
         printPurchasedLotto(lottos);
 
         WinningLotto winningLotto = receiveWinningLotto();
@@ -41,16 +41,16 @@ public class LottoController {
         }
     }
 
-    private static int receiveNumberOfManualLotto(int numberOfLotto) {
+    private static int receiveCountOfManualLotto(int numberOfLotto) {
         int numberOfManualLotto;
         try {
-            numberOfManualLotto = Integer.parseInt(inputNumberOfManualLotto());
+            numberOfManualLotto = Integer.parseInt(inputCountOfManualLotto());
         } catch (IllegalArgumentException e) {
-            printExceptionMessage(NUMBER_OF_MANUAL_IS_WRONG_TYPE_MESSAGE);
-            return receiveNumberOfManualLotto(numberOfLotto);
+            printExceptionMessage(COUNT_OF_MANUAL_IS_WRONG_TYPE_MESSAGE);
+            return receiveCountOfManualLotto(numberOfLotto);
         }
         if (numberOfManualLotto < 0 || numberOfManualLotto > numberOfLotto) {
-            throw new IllegalArgumentException(NUMBER_OF_MANUAL_IS_WRONG_RANGE_MESSAGE);
+            throw new IllegalArgumentException(COUNT_OF_MANUAL_IS_WRONG_RANGE_MESSAGE);
         }
         return numberOfManualLotto;
     }
