@@ -25,13 +25,15 @@ public class LottoController {
         LottoMoney inputLottoMoney = receiveInputMoney();
         int countOfLotto = inputLottoMoney.calculateCountOfLotto();
         int countOfManualLotto = receiveCountOfManualLotto(countOfLotto);
+        int countOfAutoLotto = countOfLotto - countOfManualLotto;
         Lottos manualLottos = receiveManualLotto(countOfManualLotto);
-        printPurchaseCompleteMessage(countOfLotto);
-        Lottos lottos = LottosGenerator.generate(countOfLotto);
-        printPurchasedLotto(lottos);
+        printPurchaseCompleteMessage(countOfManualLotto, countOfAutoLotto);
+        Lottos autoLottos = LottosGenerator.generate(countOfAutoLotto);
+        printPurchasedLotto(manualLottos);
+        printPurchasedLotto(autoLottos);
 
         WinningLotto winningLotto = receiveWinningLotto();
-        LottoWinningResult winningResult = new LottoWinningResult(lottos, winningLotto);
+        LottoWinningResult winningResult = new LottoWinningResult(autoLottos, winningLotto);
         printWinningResult(winningResult.getLottoRankCount());
         printWinningRatio(winningResult.calculateWinningRatio(inputLottoMoney));
     }
@@ -61,7 +63,7 @@ public class LottoController {
 
     private static Lottos receiveManualLotto(int countOfManualLotto) {
         List<Lotto> manualLottos = new ArrayList<>();
-        while (countOfManualLotto < 0) {
+        while (countOfManualLotto > 0) {
             manualLottos.add(new Lotto(LottoParser.parser(inputManualLottoNumber())));
             countOfManualLotto--;
         }
