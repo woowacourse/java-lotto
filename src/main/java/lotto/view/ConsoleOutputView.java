@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.List;
+
 import lotto.domain.lottoTicket.LottoTickets;
 import lotto.domain.result.WinningResult;
 import lotto.util.StringUtil;
@@ -21,10 +23,10 @@ public class ConsoleOutputView {
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 	}
 
-	public static void printPurchasedLottoTicketCount(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+	public static void printPurchasedLottoTicketCount(List<Long> manualAndAutoLottoTicketsCount) {
 		System.out.println(String.format(PURCHASE_LOTTO_COMPLETE_MESSAGE,
-			manualLottoTickets.getLottoTicketsSize(),
-			autoLottoTickets.getLottoTicketsSize()));
+			manualAndAutoLottoTicketsCount.get(0),
+			manualAndAutoLottoTicketsCount.get(1)));
 	}
 
 	public static void printPurchasedLottoTickets(LottoTickets purchasedLottoTickets) {
