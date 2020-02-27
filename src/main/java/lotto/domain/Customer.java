@@ -5,8 +5,8 @@ public class Customer {
     private static final int LOTTO_PRICE = 1000;
     private static final int TO_PERCENT_VALUE = 100;
     private static final String ERROR_MESSAGE_MIN_MONEY = "천원 이상의 금액만 가능합니다.";
-    public static final int MIN_MANUAL_LOTTO_COUNT = 0;
-    public static final String ERROR_MESSAGE_NULL_POINT = "입력값이 비어있습니다.";
+    private static final int MIN_MANUAL_LOTTO_COUNT = 0;
+    private static final String ERROR_MESSAGE_NULL_POINT = "입력값이 비어있습니다.";
 
     private final int money;
     private final int manualLottoCount;
@@ -19,15 +19,15 @@ public class Customer {
         this.manualLottoCount = manualLottoCount;
     }
 
-    private static void validateUserLottoCount(int inputMoney, int userLottoCount) {
-        if (userLottoCount > inputMoney / LOTTO_PRICE) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_OVER_COUNT);
-        }
-    }
-
     private void validateMoneyOverThousand(int inputMoney) {
         if (inputMoney < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_MIN_MONEY);
+        }
+    }
+
+    private static void validateUserLottoCount(int inputMoney, int userLottoCount) {
+        if (userLottoCount > inputMoney / LOTTO_PRICE) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_OVER_COUNT);
         }
     }
 

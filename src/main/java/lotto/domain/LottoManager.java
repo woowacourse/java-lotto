@@ -6,18 +6,18 @@ import java.util.List;
 public class LottoManager {
     private static final int MIN_WIN_COUNT = 3;
 
-    private final List<Lotto> lotteries;
+    private final List<Lotto> lottos;
     private WinLotto winLotto;
     private LottoResult lottoResult;
 
-    public LottoManager(List<Lotto> lotteries, WinLotto winLotto) {
-        this.lotteries = new ArrayList<>(lotteries);
+    public LottoManager(List<Lotto> lottos, WinLotto winLotto) {
+        this.lottos = new ArrayList<>(lottos);
         this.winLotto = winLotto;
         this.lottoResult = new LottoResult();
     }
 
     public void checkLotto() {
-        for (Lotto lotto : lotteries) {
+        for (Lotto lotto : lottos) {
             int hitCount = winLotto.calculateHitCount(lotto);
             boolean bonus = winLotto.isMatchBonus(lotto);
             updateLottoResult(hitCount, bonus);

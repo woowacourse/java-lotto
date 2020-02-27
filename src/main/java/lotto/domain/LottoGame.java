@@ -14,8 +14,4 @@ public class LottoGame {
     public List<Lotto> lottoGenerate() {
         return lottoGenerator.generator(customer);
     }
-
-    public void setLottoGenerator(LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
-    }
 }

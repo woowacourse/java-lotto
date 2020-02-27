@@ -16,10 +16,10 @@ import java.util.List;
 public class LottoApplication {
     public static void main(String[] args) {
         int inputMoney = StringUtils.ToInt(InputView.inputMoney());
-        int inputUserLottoCount = StringUtils.ToInt(InputView.inputUserLottoCount());
+        int inputUserLottoCount = StringUtils.ToInt(InputView.inputManualLottoCount());
         Customer customer = new Customer(inputMoney, inputUserLottoCount);
 
-        String userLottoNumbers = InputView.inputUserLotto(customer);
+        String userLottoNumbers = InputView.inputManualLottoNumber(customer);
         customer.setManualLottoNumber(userLottoNumbers);
 
         List<Lotto> lottos = createUserLottos(customer);

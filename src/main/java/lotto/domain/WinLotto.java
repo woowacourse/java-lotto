@@ -27,6 +27,12 @@ public class WinLotto {
         }
     }
 
+    private void isBonusOverlap(String bonusBall, String number) {
+        if (number.equals(bonusBall)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_BONUS_OVERLAP);
+        }
+    }
+
     private static Set<LottoNo> toLottoNoSet(String[] winLotto) {
         try {
             return Arrays.stream(winLotto)
@@ -35,12 +41,6 @@ public class WinLotto {
                     .collect(Collectors.toSet());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_INTEGER);
-        }
-    }
-
-    private void isBonusOverlap(String bonusBall, String number) {
-        if (number.equals(bonusBall)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_BONUS_OVERLAP);
         }
     }
 

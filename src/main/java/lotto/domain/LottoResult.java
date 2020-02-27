@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.OutputView;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class LottoResult {
     public String getResult() {
         StringBuilder builder = new StringBuilder();
         for (Rank rank : ranks) {
-            builder.append(rank.toString() + "\n");
+            builder.append(rank.toString() + OutputView.NEW_LINE);
         }
         return builder.toString();
     }
