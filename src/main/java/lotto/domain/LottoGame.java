@@ -29,7 +29,13 @@ public class LottoGame {
             winningLotto = InputView.inputLastWeekWinningNumbers();
         }
 
-        LottoNumber bonusNumber = InputView.inputBonusNumber();
+        LottoNumber bonusNumber;
+        try {
+            bonusNumber = InputView.inputBonusNumber();
+        } catch (InvalidInputException e) {
+            bonusNumber = InputView.inputBonusNumber();
+        }
+
         WinningRanks winningRanks = compareWithWinningNumbers(lottos, winningLotto, bonusNumber);
         return new Result(winningRanks, purchaseMoney);
     }
