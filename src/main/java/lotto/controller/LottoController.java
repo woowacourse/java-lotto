@@ -10,6 +10,9 @@ import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.result.LottoWinningResult;
 import lotto.domain.result.WinningLotto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static lotto.view.ConsoleInputView.*;
 import static lotto.view.ConsoleOutputView.*;
 
@@ -22,6 +25,7 @@ public class LottoController {
         LottoMoney inputLottoMoney = receiveInputMoney();
         int countOfLotto = inputLottoMoney.calculateCountOfLotto();
         int countOfManualLotto = receiveCountOfManualLotto(countOfLotto);
+        Lottos manualLottos = receiveManualLotto(countOfManualLotto);
         printPurchaseCompleteMessage(countOfLotto);
         Lottos lottos = LottosGenerator.generate(countOfLotto);
         printPurchasedLotto(lottos);
@@ -53,6 +57,15 @@ public class LottoController {
             throw new IllegalArgumentException(COUNT_OF_MANUAL_IS_WRONG_RANGE_MESSAGE);
         }
         return numberOfManualLotto;
+    }
+
+    private static Lottos receiveManualLotto(int countOfManualLotto) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        while (countOfManualLotto < 0) {
+            manualLottos.add(new Lotto(LottoParser.parser(inputManualLottoNumber())));
+            countOfManualLotto--;
+        }
+        return new Lottos(manualLottos);
     }
 
     private static WinningLotto receiveWinningLotto() {
