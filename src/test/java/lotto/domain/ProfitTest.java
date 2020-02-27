@@ -12,7 +12,7 @@ public class ProfitTest {
     @DisplayName("구입금액과 당첨결과들을 통해서 수익률을 계산")
     @Test
     void getProfitWithoutDecimalPoint() {
-        Money purchaseMoney = Money.createPurchaseMoney(14000);
+        Money purchaseMoney = Money.ofPurchaseMoney(14000);
         List<Rank> ranks = Arrays.asList(Rank.FIFTH, Rank.FOURTH);
         Profit profit = new Profit(purchaseMoney, ranks);
 

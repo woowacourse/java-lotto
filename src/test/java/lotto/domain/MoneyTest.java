@@ -17,14 +17,14 @@ class MoneyTest {
     @DisplayName("최소값이상의 금액으로 Money 객체 생성")
     @Test
     void createPurchaseMoney() {
-        assertThat(Money.createPurchaseMoney(1000)).isNotNull();
+        assertThat(Money.ofPurchaseMoney(1000)).isNotNull();
     }
 
     @DisplayName("최소값보다 적은 금액일 경우 예외 발생")
     @Test
     void createPurchaseMoneyUnderMinimum() {
         Assertions.assertThatThrownBy(() -> {
-            Money.createPurchaseMoney(999);
+            Money.ofPurchaseMoney(999);
         }).isInstanceOf(MoneyException.class)
                 .hasMessage("구매금액은 1000원 이상이어야 합니다.");
     }
