@@ -1,6 +1,6 @@
 package domain;
 
-import domain.numberscontainer.LottoNumbersDto;
+import domain.numberscontainer.LottoNumbersDtoAssembler;
 import domain.numberscontainer.Ticket;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class LottoStore {
 
     private static List<Ticket> parseTicket(List<String> givenNumbers) {
         return givenNumbers.stream()
-                .map(LottoNumbersDto::new)
+                .map(LottoNumbersDtoAssembler::assemble)
                 .map(Ticket::new)
                 .collect(Collectors.toList());
     }

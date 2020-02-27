@@ -26,6 +26,6 @@ public class TicketTest {
     }
 
     private LottoNumbersDto createLottoNumberDto(int number1, int number2, int number3, int number4, int number5, int number6) {
-        return new LottoNumbersDto(String.format("%d, %d, %d, %d, %d, %d", number1, number2, number3, number4, number5, number6));
+        return LottoNumbersDtoAssembler.assemble(String.format("%d, %d, %d, %d, %d, %d", number1, number2, number3, number4, number5, number6));
     }
 }

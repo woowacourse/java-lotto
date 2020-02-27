@@ -1,14 +1,10 @@
 import domain.*;
-import domain.numberscontainer.BonusNumberDto;
-import domain.numberscontainer.LottoNumbersDto;
-import domain.numberscontainer.Ticket;
-import domain.numberscontainer.WinningNumbers;
+import domain.numberscontainer.*;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -27,8 +23,8 @@ public class LottoApplication {
 
     private static WinningNumbers enterWinningNumbers() {
         try {
-            LottoNumbersDto lottoNumbersDto = new LottoNumbersDto(InputView.enterLastWeekWinningNumbers());
-            BonusNumberDto bonusNumberDTO = new BonusNumberDto(InputView.enterBonusNumber());
+            LottoNumbersDto lottoNumbersDto = LottoNumbersDtoAssembler.assemble(InputView.enterLastWeekWinningNumbers());
+            BonusNumberDto bonusNumberDTO = BonusNumberDtoAssembler.assemble(InputView.enterBonusNumber());
             return new WinningNumbers(lottoNumbersDto, bonusNumberDTO);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

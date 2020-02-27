@@ -2,9 +2,13 @@ package domain;
 
 import domain.numberscontainer.LottoNumber;
 import domain.numberscontainer.LottoNumbersDto;
+import domain.numberscontainer.LottoNumbersDtoAssembler;
 import domain.numberscontainer.Ticket;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 public class RandomTicketFactory {
     private static final int FIRST_INDEX = 0;
@@ -18,6 +22,6 @@ public class RandomTicketFactory {
         List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.values());
         Collections.shuffle(lottoNumbers);
 
-        return new LottoNumbersDto(new LinkedHashSet<>(lottoNumbers.subList(FIRST_INDEX, SIXTH_INDEX)));
+        return LottoNumbersDtoAssembler.assemble(new LinkedHashSet<>(lottoNumbers.subList(FIRST_INDEX, SIXTH_INDEX)));
     }
 }
