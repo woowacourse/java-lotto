@@ -22,7 +22,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String getCount() {
+    public static String getManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return scanner.nextLine();
     }
@@ -30,7 +30,7 @@ public class InputView {
     public static List<String> getManualLottosNumber(int manualLottoCount) {
         List<String> input = new ArrayList<>();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        for(int i=0;i<manualLottoCount;i++){
+        for (int i = 0; i < manualLottoCount; i++) {
             input.add(scanner.nextLine());
         }
         return input;

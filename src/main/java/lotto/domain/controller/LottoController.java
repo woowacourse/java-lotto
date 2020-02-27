@@ -1,7 +1,7 @@
 package lotto.domain.controller;
 
-import lotto.domain.*;
 import lotto.domain.Number;
+import lotto.domain.*;
 import lotto.domain.model.LottoGame;
 import lotto.domain.result.GameResult;
 import lotto.view.InputView;
@@ -12,11 +12,11 @@ import java.util.List;
 public class LottoController {
     public void run() {
         PurchaseMoney money = new PurchaseMoney(InputView.getMoney());
-        LottoCount count = new LottoCount(InputView.getCount(), money.parseToPiece());
-        List<String> manual = InputView.getManualLottosNumber(count.getManualLotto());
+        LottoCount count = new LottoCount(InputView.getManualLottoCount(), money.parseToPiece());
+        List<String> manual = InputView.getManualLottosNumber(count.getManualLottoCount());
         Lottos lottos = LottoFactory.create(manual, count.getAutoLottoCount());
 
-        OutputView.printPieces(count.getManualLotto(), count.getAutoLottoCount());
+        OutputView.printPieces(count.getManualLottoCount(), count.getAutoLottoCount());
         OutputView.printLottos(lottos);
 
         createResult(money, lottos, createWinningLotto());

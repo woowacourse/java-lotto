@@ -1,10 +1,13 @@
 package lotto.domain;
 
-import java.util.*;
+import lotto.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
-
-import lotto.util.StringUtil;
 
 import static lotto.domain.Number.MAX_LOTTO_NUMBER;
 import static lotto.domain.Number.MIN_LOTTO_NUMBER;
@@ -65,20 +68,27 @@ public class LottoFactory {
      */
     public static Lottos create(int count) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(create());
-        }
+        addAutoLottos(count, lottos);
         return new Lottos(lottos);
     }
 
-    public static Lottos create(List<String> list, int autoCount){
-        List<Lotto> lottos = new ArrayList<>();
-        for (String input : list) {
-            lottos.add(create(input));
-        }
-        for(int i =0; i< autoCount;i++) {
+    public static Lottos create(List<String> manualLottoNumbers, int autoCount) {
+        List<Lotto> lottos = addManualLottos(manualLottoNumbers);
+        addAutoLottos(autoCount, lottos);
+        return new Lottos(lottos);
+    }
+
+    private static void addAutoLottos(int autoCount, List<Lotto> lottos) {
+        for (int i = 0; i < autoCount; i++) {
             lottos.add(create());
         }
-        return new Lottos(lottos);
+    }
+
+    private static List<Lotto> addManualLottos(List<String> manualLottoNumbers) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String input : manualLottoNumbers) {
+            lottos.add(create(input));
+        }
+        return lottos;
     }
 }

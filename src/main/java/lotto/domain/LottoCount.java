@@ -27,7 +27,7 @@ public class LottoCount {
         }
     }
 
-    public int getManualLotto() {
+    public int getManualLottoCount() {
         return manualLotto;
     }
 

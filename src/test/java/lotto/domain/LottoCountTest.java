@@ -38,7 +38,7 @@ public class LottoCountTest {
     @Test
     void manualCountTest() {
         assertThat(new LottoCount("2", money.parseToPiece())
-                .getManualLotto())
+                .getManualLottoCount())
                 .isEqualTo(2);
     }
 
