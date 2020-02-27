@@ -8,6 +8,7 @@ import java.util.List;
 public class LottoTicket {
     private static final int COUNT_FOR_SECOND_RANK = 5;
     private static final int LOTTO_SIZE = 6;
+
     private final List<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
@@ -43,14 +44,6 @@ public class LottoTicket {
                 .count();
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
-    }
-
-    public List<LottoNumber> getNumbers() {
-        return Collections.unmodifiableList(numbers);
-    }
-
     public Rank checkOut(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
         int count = (int) numbers.stream()
                 .filter(winningLottoTicket.numbers::contains)
@@ -61,5 +54,13 @@ public class LottoTicket {
         }
 
         return Rank.of(count);
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 }

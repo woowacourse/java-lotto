@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.Money;
-import lotto.domain.Profit;
-import lotto.domain.Rank;
+import lotto.domain.*;
 
 import java.util.List;
 
@@ -11,19 +8,19 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottos(List<LottoTicket> lottoTickets) {
+    public static void printLottos(LottoTickets lottoTickets) {
         System.out.printf("%d개를 구매했습니다.", lottoTickets.size());
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(lottoTicket.getNumbers());
         }
     }
 
-    public static void printLottos(List<LottoTicket> manualLottoTickets, List<LottoTicket> randomLottoTickets) {
+    public static void printLottos(LottoTickets manualLottoTickets, LottoTickets randomLottoTickets) {
         System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualLottoTickets.size(), randomLottoTickets.size());
-        for (LottoTicket manualLottoTicket : manualLottoTickets) {
+        for (LottoTicket manualLottoTicket : manualLottoTickets.getLottoTickets()) {
             System.out.println(manualLottoTicket.getNumbers());
         }
-        for (LottoTicket randomLottoTicket : randomLottoTickets) {
+        for (LottoTicket randomLottoTicket : randomLottoTickets.getLottoTickets()) {
             System.out.println(randomLottoTicket.getNumbers());
         }
     }

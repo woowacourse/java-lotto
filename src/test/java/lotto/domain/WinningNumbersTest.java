@@ -30,10 +30,10 @@ class WinningNumbersTest {
         LottoNumber bonusNumber = new LottoNumber(7);
         WinningNumbers winningNumbers = new WinningNumbers(lottoTicket, bonusNumber);
 
-        LottoTicket lottoTicketForFirstRank = createLottoTicket("1,2,3,10,11,12");
-        LottoTicket lottoTicketForThirdRank = createLottoTicket("1,2,3,4,5,12");
-        LottoTicket lottoTicketForFifthRank = createLottoTicket("1,2,3,4,5,6");
-        List<LottoTicket> lottoTickets = Arrays.asList(lottoTicketForFirstRank, lottoTicketForThirdRank, lottoTicketForFifthRank);
+        List<String> inputsForManualLottoTickets = Arrays.asList("1,2,3,10,11,12",
+                "1,2,3,4,5,12",
+                "1,2,3,4,5,6");
+        LottoTickets lottoTickets = LottoTickets.ofManualLottoTickets(3, inputsForManualLottoTickets);
 
         List<Rank> givenRanks = winningNumbers.checkOutLottos(lottoTickets);
         List<Rank> expectedRanks = Arrays.asList(Rank.FIRST, Rank.THIRD, Rank.FIFTH);

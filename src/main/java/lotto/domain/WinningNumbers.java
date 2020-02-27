@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.exception.WinningNumbersException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningNumbers {
     private final LottoTicket winningLottoTicket;
@@ -21,10 +20,7 @@ public class WinningNumbers {
         }
     }
 
-    public List<Rank> checkOutLottos(List<LottoTicket> lottoTickets) {
-        return lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.checkOut(winningLottoTicket, bonusNumber))
-                .filter(Rank::isValidRank)
-                .collect(Collectors.toList());
+    public List<Rank> checkOutLottos(LottoTickets lottoTickets) {
+        return lottoTickets.checkOutLottos(winningLottoTicket, bonusNumber);
     }
 }

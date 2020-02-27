@@ -87,6 +87,7 @@ public class InputView {
 
     private static LottoTicket generateLottoTicketFromNumbers() {
         List<LottoNumber> sixNumbers = Arrays.stream(inputSixNumbersWithMessage().split(","))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());

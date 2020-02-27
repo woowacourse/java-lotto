@@ -4,7 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -17,15 +16,13 @@ public class LottoGame {
         int manualLottoTicketCount = InputView.inputManualLottoTicketCount();
         List<String> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoTicketCount);
 
-        List<LottoTicket> manualLottoTickets = LottoStore.buyManualLottoTickets(manualLottoTicketCount, manualLottoNumbers);
-        List<LottoTicket> randomLottoTickets = LottoStore.buyRandomLottoTickets(allLottoTicketCount - manualLottoTicketCount);
+        LottoTickets manualLottoTickets = LottoTickets.ofManualLottoTickets(manualLottoTicketCount, manualLottoNumbers);
+        LottoTickets randomLottoTickets = LottoTickets.ofRandomLottoTickets(allLottoTicketCount - manualLottoTicketCount);
 
         OutputView.printLottos(manualLottoTickets, randomLottoTickets);
 
         WinningNumbers winningNumbers = InputView.inputWinningNumbers();
-
-        List<LottoTicket> allLottoTickets = new ArrayList<LottoTicket>(manualLottoTickets);
-        allLottoTickets.addAll(randomLottoTickets);
+        LottoTickets allLottoTickets = LottoTickets.add(manualLottoTickets, randomLottoTickets);
 
         List<Rank> ranks = winningNumbers.checkOutLottos(allLottoTickets);
         Profit profit = new Profit(purchaseMoney, ranks);
