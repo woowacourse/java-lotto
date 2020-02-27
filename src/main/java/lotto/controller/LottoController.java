@@ -12,6 +12,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.dto.LottoCountDto;
 import lotto.dto.LottoResultDto;
@@ -66,10 +67,10 @@ public class LottoController {
 		}
 	}
 
-	private static int readMoney() {
+	private static Money readMoney() {
 		try {
 			InputView.printInsertMoney();
-			return InputUtil.inputMoney();
+			return new Money(InputUtil.inputMoney());
 		} catch (NumberFormatException | IOException e) {
 			OutputView.printWrongMoneyInput(e);
 			return readMoney();

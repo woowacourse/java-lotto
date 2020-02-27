@@ -48,7 +48,7 @@ public class LottoResult {
 			totalCount += winnerCountMapper.get(winningPrize);
 			totalEarning += (winningPrize.getPrize() * winnerCountMapper.get(winningPrize));
 		}
-		return (long)(totalEarning / (totalCount * LottoCount.LOTTO_PRICE) * PERCENT);
+		return (long)(totalEarning / (totalCount * Money.LOTTO_PRICE) * PERCENT);
 	}
 
 	public Map<WinningPrize, Integer> getWinnerCountMapper() {
