@@ -10,6 +10,11 @@ public class InputView {
 		return inputValidInteger();
 	}
 
+	public static int inputManualTicketCount() {
+		System.out.println("수동으로 구입할 로또 티켓 숫자를 입력해주세요.");
+		return inputValidInteger();
+	}
+
 	private static int inputValidInteger() {
 		try {
 			return Integer.parseInt(scanner.nextLine());
