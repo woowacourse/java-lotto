@@ -24,4 +24,14 @@ public class OutputView {
 
 		System.out.println(stringBuilder.toString());
 	}
+
+	public static void printLottoTickets(LottoTickets lottoTickets) {
+		for (SerialLottoNumber lottoTicket : lottoTickets.getLottoTickets()) {
+			System.out.println(lottoTicket.getLottoNumbers()
+					.stream()
+					.map(LottoNumber::getLottoNumber)
+					.map(lottoNumber -> Integer.toString(lottoNumber))
+					.collect(Collectors.joining(", ")));
+		}
+	}
 }
