@@ -1,5 +1,6 @@
 package lotto.domain.result;
 
+import lotto.domain.Buyer;
 import lotto.domain.lottoTicket.Lotto;
 import lotto.domain.lottoTicket.WinningLotto;
 
@@ -10,9 +11,10 @@ public class LottoResult {
 
     private final Map<WinningValue, Integer> lottoResult = new LinkedHashMap<>();
 
-    public LottoResult() {
+    public LottoResult(Buyer buyer, WinningLotto winningLotto) {
         Arrays.stream(WinningValue.values())
                 .forEach(winningValue -> this.lottoResult.put(winningValue, 0));
+        calculateLottoResult(buyer.getLottos(), winningLotto);
     }
 
     public void calculateLottoResult(List<Lotto> lottos, WinningLotto winningLotto) {
@@ -31,8 +33,8 @@ public class LottoResult {
         lottoResult.put(winningValue, lottoResult.get(winningValue) + 1);
     }
 
-    public int calculateRewardRate(int money, Map<WinningValue, Integer> winningValueResult) {
-        return winningValueResult.entrySet()
+    public int calculateRewardRate(int money) {
+        return lottoResult.entrySet()
                 .stream()
                 .mapToInt(result ->
                         result.getKey().getReward()
