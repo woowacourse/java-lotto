@@ -48,6 +48,9 @@ public final class Money {
 	}
 
 	public long calculateProfitRate(Money lottoPrice) {
+		if (lottoPrice.money == 0) {
+			return 0;
+		}
 		return money * PROFIT_PERCENTAGE / lottoPrice.money;
 	}
 

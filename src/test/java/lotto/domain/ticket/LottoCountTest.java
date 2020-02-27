@@ -23,6 +23,15 @@ public class LottoCountTest {
 		assertThat(count.isNonFullCount(currentCount)).isEqualTo(expected);
 	}
 
+	@DisplayName("두 카운트 객체 대소 비교 확인")
+	@ParameterizedTest
+	@CsvSource(value = {"9,10,true", "10,10,false", "11,10,false"})
+	void checkBiggerCountTest(int firstCountValue, int secondCountValue, boolean expected) {
+		LottoCount firstCount = LottoCount.valueOf(firstCountValue);
+		LottoCount secondCount = LottoCount.valueOf(secondCountValue);
+		assertThat(firstCount.isLessThan(secondCount)).isEqualTo(expected);
+	}
+
 	@DisplayName("두 카운트 객체간 뺄셈연산")
 	@ParameterizedTest
 	@CsvSource({"10,9,1", "10,10,0"})

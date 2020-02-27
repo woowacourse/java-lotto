@@ -40,6 +40,10 @@ public final class LottoCount {
 		return this.lottoCount != lottoCount;
 	}
 
+	public boolean isLessThan(LottoCount otherLottoCount) {
+		return this.lottoCount < otherLottoCount.lottoCount;
+	}
+
 	public int getCount() {
 		return lottoCount;
 	}
@@ -65,5 +69,4 @@ public final class LottoCount {
 	public String toString() {
 		return String.valueOf(lottoCount);
 	}
-
 }

@@ -5,15 +5,15 @@ import java.util.Set;
 
 import lotto.domain.result.LottoRank;
 import lotto.domain.result.TotalResult;
-import lotto.domain.ticket.LottoCount;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.PurchaseLottoCount;
 import lotto.util.PrintTextUtil;
 import lotto.util.StringUtil;
 
 public class OutputView {
 	private static final String STATISTICS_MESSAGE = "\n당첨 통계\n---------";
-	private static final String LOTTO_COUNT_MESSAGE = "%s개를 구매했습니다.\n";
+	private static final String LOTTO_COUNT_MESSAGE = "수동 %s개, 자동 %s개를 구매했습니다.\n";
 	private static final char LOTTO_NUMBER_OPENER = '[';
 	private static final char LOTTO_NUMBER_CLOSER = ']';
 	private static final String TOTAL_PROFIT_MESSAGE = "총 수익률은 %d%% 입니다.";
@@ -21,8 +21,8 @@ public class OutputView {
 	private OutputView() {
 	}
 
-	public static void printLottoCount(LottoCount count) {
-		System.out.printf(LOTTO_COUNT_MESSAGE, count);
+	public static void printLottoCount(PurchaseLottoCount purchaseCount) {
+		System.out.printf(LOTTO_COUNT_MESSAGE, purchaseCount.getManualCount(), purchaseCount.calculateAutoCount());
 	}
 
 	public static void printLottos(LottoTickets lottoTickets) {

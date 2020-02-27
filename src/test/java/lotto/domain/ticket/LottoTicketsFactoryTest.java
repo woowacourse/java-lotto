@@ -62,14 +62,13 @@ class LottoTicketsFactoryTest {
 
 	@Test
 	void CompositedTicketsGeneratorTest() {
-		List<LottoTicketsFactory> ticketsGenerators = Arrays.asList(
+		LottoTicketsFactory generator = CompositeLottoTicketsFactory.of(
 			new TestLottoTicketsFactory(() -> LottoTicket.of(1, 2, 3, 4, 5, 6), LottoCount.valueOf(3)),
 			new TestLottoTicketsFactory(() -> LottoTicket.of(11, 12, 13, 14, 15, 16),
 				LottoCount.valueOf(2)),
 			new TestLottoTicketsFactory(() -> LottoTicket.of(21, 22, 23, 24, 25, 26),
 				LottoCount.valueOf(1))
 		);
-		LottoTicketsFactory generator = new CompositeLottoTicketsFactory(ticketsGenerators);
 		LottoTickets lottoTickets = generator.create();
 
 		assertThat(lottoTickets.getLottoTickets()).containsExactly(
