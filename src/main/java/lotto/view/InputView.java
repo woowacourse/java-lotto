@@ -34,6 +34,15 @@ public class InputView {
         }
     }
 
+    private static int inputManualLottoSize() {
+        try {
+            String input = SCANNER.nextLine();
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return inputManualLottoSize();
+        }
+    }
+
     public static List<LottoNumber> inputWinningNumbers() {
         try {
             System.out.println(INPUT_WINNING_NUMBER_HEADER);
