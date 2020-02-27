@@ -12,10 +12,10 @@ public class OutputView {
     private static final String BUY_MESSAGE_FORMAT = "수동으로 %d개, 자동으로 %d개를 구매했습니다";
     private static final String PERCENT = "%";
 
-    public static void printLotteries(List<Lotto> lotteries, Customer customer) {
+    public static void printLotteries(List<Lotto> lottos, Customer customer) {
         printLottoAmounts(customer.getManualLottoCount(), customer.calculatorAutoLottoCount());
         StringBuilder builder = new StringBuilder();
-        for (Lotto lotto : lotteries) {
+        for (Lotto lotto : lottos) {
             builder.append(lotto + NEW_LINE);
         }
         System.out.println(builder.toString());

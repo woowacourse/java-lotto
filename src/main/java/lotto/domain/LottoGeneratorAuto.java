@@ -21,6 +21,16 @@ public class LottoGeneratorAuto implements LottoGenerator {
         }
     }
 
+    @Override
+    public List<Lotto> generator(Customer customer) {
+        validate(customer);
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < customer.calculatorAutoLottoCount(); i++) {
+            lottos.add(createLottoAuto());
+        }
+        return lottos;
+    }
+
     private static void validate(Customer customer) {
         if (customer == null) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NULL_POINT_LOTTO_FACTORY);
@@ -37,15 +47,5 @@ public class LottoGeneratorAuto implements LottoGenerator {
         Collections.shuffle(lotto);
         lotto = lotto.subList(LOTTO_FROM_INDEX, LOTTO_TO_INDEX);
         return lotto;
-    }
-
-    @Override
-    public List<Lotto> generator(Customer customer) {
-        validate(customer);
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < customer.calculatorAutoLottoCount(); i++) {
-            lottos.add(createLottoAuto());
-        }
-        return lottos;
     }
 }

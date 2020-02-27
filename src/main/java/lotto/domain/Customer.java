@@ -10,15 +10,15 @@ public class Customer {
 
     private final int money;
     private final int manualLottoCount;
-    private String manualLottoNumbers;
+    private String manualLottoNumber;
 
-    public Customer(int inputMoney, int manualLottoCount, String manualLottoNumbers) {
+    public Customer(int inputMoney, int manualLottoCount, String manualLottoNumber) {
         validateMoneyOverThousand(inputMoney);
         validateUserLottoCount(inputMoney, manualLottoCount);
-        validateManualLottoNumbers(manualLottoNumbers);
+        validateManualLottoNumbers(manualLottoNumber);
         this.money = inputMoney;
         this.manualLottoCount = manualLottoCount;
-        this.manualLottoNumbers = manualLottoNumbers;
+        this.manualLottoNumber = manualLottoNumber;
     }
 
     private void validateManualLottoNumbers(String manualLottoNumbers) {
@@ -51,11 +51,15 @@ public class Customer {
         return manualLottoCount > MIN_USER_LOTTO_COUNT;
     }
 
+    public int calculatorAutoLottoCount() {
+        return divideThousand() - manualLottoCount;
+    }
+
     public int getManualLottoCount() {
         return manualLottoCount;
     }
 
-    public int calculatorAutoLottoCount() {
-        return divideThousand() - manualLottoCount;
+    public String getManualLottoNumber() {
+        return manualLottoNumber;
     }
 }

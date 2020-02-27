@@ -2,7 +2,9 @@ package lotto;
 
 import lotto.domain.Customer;
 import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoGeneratorAuto;
+import lotto.domain.LottoGeneratorManual;
 import lotto.domain.LottoManager;
 import lotto.domain.WinLotto;
 import lotto.util.StringUtils;
@@ -18,17 +20,15 @@ public class LottoApplication {
         String userLottoNumbers = InputView.inputUserLotto(inputUserLottoCount);
         Customer customer = new Customer(inputMoney, inputUserLottoCount, userLottoNumbers);
 
-//        LottoGame lottoGame = new LottoGame(customer, new LottoGeneratorManual());
-//        List<Lotto> manualLotto = lottoGame.lottoGenerate();
-//
-//        lottoGame.setLottoGenerator(new LottoGeneratorAuto());
-//        List<Lotto> autoLotto = lottoGame.lottoGenerate();
+        LottoGame manualLottoGame = new LottoGame(customer, new LottoGeneratorManual());
+        List<Lotto> lottos = manualLottoGame.lottoGenerate();
+        LottoGame AutoLottoGame = new LottoGame(customer, new LottoGeneratorAuto());
+        AutoLottoGame.lottoGenerate().stream().forEach(x -> lottos.add(x));
 
-        List<Lotto> lotteries = LottoFactory.createLotteries(customer, userLottoNumbers);
-        OutputView.printLotteries(lotteries, customer);
+        OutputView.printLotteries(lottos, customer);
 
         WinLotto winLotto = createWinLotto();
-        LottoManager lottoManager = new LottoManager(lotteries, winLotto);
+        LottoManager lottoManager = new LottoManager(lottos, winLotto);
         lottoManager.checkLotto();
         OutputView.printResult(customer, lottoManager);
     }

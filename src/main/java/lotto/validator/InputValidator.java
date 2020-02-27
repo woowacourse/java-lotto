@@ -6,13 +6,13 @@ public class InputValidator {
 
     public static void validateNumber(String inputMoney) {
         try {
-            checkPositiveInteger(inputMoney);
+            validatePositiveInteger(inputMoney);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_INTEGER);
         }
     }
 
-    private static void checkPositiveInteger(String inputMoney) {
+    private static void validatePositiveInteger(String inputMoney) {
         if (Integer.parseInt(inputMoney) < 0) {
             throw new IllegalArgumentException(ERROR_MESSAGE_UNDER_ZERO);
         }
