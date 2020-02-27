@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.count.Count;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

@@ -14,7 +14,7 @@ public class OutputView {
     private static String PURCHASE_LOTTO_FORMATTED_STRING = "로또를 %d장 구매했습니다.";
     private static String SECOND_RANK_FORMATTED_STRING = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
     private static String RANK_FORMATTED_STRING = "%d개 일치 (%d원) - %d개";
-    private static String PROFIT_FORMATTED_STRING = "총 수익률은 %0.f%%입니다.";
+    private static String PROFIT_FORMATTED_STRING = "총 수익률은 %.2f%%입니다.";
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();

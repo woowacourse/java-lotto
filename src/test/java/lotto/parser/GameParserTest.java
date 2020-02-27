@@ -1,7 +1,6 @@
 package lotto.parser;
 
 import org.junit.jupiter.api.DisplayName;
-import lotto.domain.lotto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;

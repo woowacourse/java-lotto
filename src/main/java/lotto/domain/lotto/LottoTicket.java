@@ -18,7 +18,7 @@ public class LottoTicket {
 
     private void validateSize(Set<LottoNumber> lottoTicket) {
         if (lottoTicket.size() != LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException("로또는 중복되지 않는 6개의 숫자로 이뤄져야 합니다.");
+            throw new LottoTicketException();
         }
     }
 
@@ -28,7 +28,7 @@ public class LottoTicket {
                 .count();
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    boolean contains(LottoNumber lottoNumber) {
         return lottoTicket.contains(lottoNumber);
     }
 

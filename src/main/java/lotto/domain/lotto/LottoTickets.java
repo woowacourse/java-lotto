@@ -3,9 +3,9 @@ package lotto.domain.lotto;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.Rank;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

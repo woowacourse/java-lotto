@@ -19,7 +19,7 @@ public class GameParser {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException ne) {
-            throw new IllegalArgumentException("숫자만 입력해주세요");
+            throw new InvalidNumberInputException();
         }
     }
 }
