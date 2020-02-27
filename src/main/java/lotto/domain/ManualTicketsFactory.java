@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ManualTicketsFactory {
@@ -12,13 +11,13 @@ public class ManualTicketsFactory {
 
 	public static LottoTickets create(List<String> values) {
 		return values.stream()
-			.map(createLottoNumbers())
+			.map(ManualTicketsFactory::createLottoNumbers)
 			.map(LottoTicket::new)
 			.collect(Collectors.collectingAndThen(toList(), LottoTickets::new));
 	}
 
-	private static Function<String, List<LottoNumber>> createLottoNumbers() {
-		return str -> Arrays.stream(str.split(DELIMITER))
+	private static List<LottoNumber> createLottoNumbers(String values) {
+		return Arrays.stream(values.split(DELIMITER))
 			.mapToInt(Integer::parseInt)
 			.mapToObj(LottoNumber::new)
 			.collect(toList());
