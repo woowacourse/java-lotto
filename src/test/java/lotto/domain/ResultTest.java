@@ -29,7 +29,7 @@ public class ResultTest {
     @DisplayName("수익률 계산 테스트")
     void calculateEarningRate() {
         Result result = new Result();
-        PurchaseAmount purchaseAmount = PurchaseAmount.calculate(1000);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(1,0);
         Lotto lotto = new Lotto(inputNumbers);
         PurchaseLottos purchaseLottos = new PurchaseLottos(Arrays.asList(lotto));
         WinningRule winningRule = new WinningRule(inputNumbers,7);
