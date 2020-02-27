@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.List;
+
 import lotto.domain.lotto.*;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.money.MoneyForLotto;
@@ -7,8 +9,6 @@ import lotto.domain.result.ResultStatistic;
 import lotto.util.StringUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.List;
 
 /**
  * 로또 실행을 담당, View와 Domain을 연결
@@ -21,7 +21,7 @@ import java.util.List;
 public class LottoController {
 
 
-	private static final int MININUM_COUNT = 0;
+	private static final int MINIMUM_COUNT = 0;
 
 	public static void run() {
 		MoneyForLotto moneyForLotto = new MoneyForLotto(InputView.getMoneyForLotto());
@@ -51,11 +51,11 @@ public class LottoController {
 	}
 
 	private static boolean isOnlyManual(LottoCount lottoCount) {
-		return lottoCount.getAutoLottoCount() == MININUM_COUNT;
+		return lottoCount.getAutoLottoCount() == MINIMUM_COUNT;
 	}
 
 	private static boolean isManualAndAuto(LottoCount lottoCount) {
-		return lottoCount.getManualLottoCount() != MININUM_COUNT && lottoCount.getAutoLottoCount() != MININUM_COUNT;
+		return lottoCount.getManualLottoCount() != MINIMUM_COUNT && lottoCount.getAutoLottoCount() != MINIMUM_COUNT;
 	}
 
 	private static WinningLotto receiveWinningLotto() {
@@ -63,7 +63,7 @@ public class LottoController {
 		List<LottoNumber> winningLottoNumbers = StringUtils.splitIntoLottoNumbers(inputWinningLotto);
 
 		String inputBonusLottoNumber = InputView.getBonusLottoNumber();
-		LottoNumber bonusLottoNumber = LottoNumber.of(LottoNumber.parseToInteger(inputBonusLottoNumber));
+		LottoNumber bonusLottoNumber = LottoNumber.of(StringUtils.parseToInteger(inputBonusLottoNumber));
 
 		return new WinningLotto(winningLottoNumbers, bonusLottoNumber);
 	}

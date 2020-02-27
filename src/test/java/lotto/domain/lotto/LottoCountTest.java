@@ -9,9 +9,9 @@ import org.junit.jupiter.params.provider.NullSource;
 import static org.assertj.core.api.Assertions.*;
 
 /**
- * 클래스 이름 : .java
+ * Lotto Count 테스트
  *
- * @author
+ * @author 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/26

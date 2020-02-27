@@ -39,14 +39,14 @@ public class LottoFactory {
 	public static Lotto createManualLotto(final LottoType lottoType, final List<LottoNumber> inputLottoNumbers) {
 		Objects.requireNonNull(lottoType);
 		LottoCreator lottoCreator = creators.get(lottoType);
-		return lottoCreator.create(inputLottoNumbers);  // TODO: 2020/02/26 뭔가 여기가 문제ㅐ
+		return lottoCreator.create(inputLottoNumbers);
 	}
 }
 
 class ManualLottoCreator implements LottoCreator {
 	@Override
 	public Lotto create(List<LottoNumber> lottoNumbers) {
-		return new Lotto(lottoNumbers); // TODO 수정 예상
+		return new Lotto(lottoNumbers);
 	}
 }
 

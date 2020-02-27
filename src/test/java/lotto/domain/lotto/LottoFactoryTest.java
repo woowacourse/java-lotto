@@ -27,12 +27,12 @@ public class LottoFactoryTest {
 	@Test
 	void createManualLotto_올바른_동작_확인() {
 		List<LottoNumber> manualLottoNumber = Arrays.asList(
-				LottoNumber.of(3),
-				LottoNumber.of(2),
 				LottoNumber.of(1),
-				LottoNumber.of(10),
-				LottoNumber.of(8),
-				LottoNumber.of(44)
+				LottoNumber.of(2),
+				LottoNumber.of(3),
+				LottoNumber.of(4),
+				LottoNumber.of(5),
+				LottoNumber.of(6)
 		);
 
 		assertThat(LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, manualLottoNumber))
@@ -42,12 +42,12 @@ public class LottoFactoryTest {
 	@Test
 	void createManualLotto_중복된_로또번호_예외처리() {
 		List<LottoNumber> winningLottoNumbers = Arrays.asList(
-				LottoNumber.of(3),
-				LottoNumber.of(2),
 				LottoNumber.of(1),
-				LottoNumber.of(10),
-				LottoNumber.of(8),
-				LottoNumber.of(10)
+				LottoNumber.of(2),
+				LottoNumber.of(3),
+				LottoNumber.of(4),
+				LottoNumber.of(5),
+				LottoNumber.of(5)
 		);
 
 		assertThatThrownBy(() -> {

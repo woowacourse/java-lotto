@@ -1,11 +1,11 @@
 package lotto.domain.lotto;
 
+import java.util.List;
+import java.util.Objects;
+
 import lotto.domain.lottonumber.InvalidLottoNumberException;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.result.Rank;
-
-import java.util.List;
-import java.util.Objects;
 
 /**
  * 로또를 상속받은 우승로또, 사용자로부터 입력을 받은대로 생성
@@ -19,11 +19,12 @@ public class WinningLotto {
 	private static final String BONUS_NUMBER_OVERLAP_EXCEPTION_MESSAGE = "보너스 번호는 당첨번호와 중복될 수 없습니다.";
 	private static final String NULL_INPUT_EXCEPTION_MESSAGE = "매개변수가 null 입니다.";
 
-	Lotto winningLotto;
-	LottoNumber bonusLottoNumber;
+	private Lotto winningLotto;
+	private LottoNumber bonusLottoNumber;
 
 	public WinningLotto(final List<LottoNumber> inputLottoNumbers, LottoNumber inputBonusLottoNumber) {
-		this.winningLotto = LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, inputLottoNumbers);		if (winningLotto.isContain(inputBonusLottoNumber)) {
+		this.winningLotto = LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, inputLottoNumbers);
+		if (this.winningLotto.isContain(inputBonusLottoNumber)) {
 			throw new InvalidLottoNumberException(BONUS_NUMBER_OVERLAP_EXCEPTION_MESSAGE);
 		}
 		this.bonusLottoNumber = inputBonusLottoNumber;
@@ -46,6 +47,5 @@ public class WinningLotto {
 	public boolean isContain(LottoNumber lottoNumber) {
 		return winningLotto.getLottoNumbers().stream()
 				.anyMatch(value -> value.equals(lottoNumber));
-
 	}
 }

@@ -17,8 +17,9 @@ import java.util.Map;
  * 날짜 : 2020/02/20
  */
 public class ResultStatistic {
-	private static final int ONE = 1;
 	private static final Long DEFAULT_COUNT = 0L;
+	private static final Long COUNT_UP_UNIT = 1L;
+	private static final int RATE_UNIT = 100;
 
 	private Map<Rank, Long> results;
 
@@ -31,7 +32,7 @@ public class ResultStatistic {
 
 		for (Lotto lotto : lottos.getLottos()) {
 			Rank rank = winningLotto.getRank(lotto);
-			results.merge(rank, results.get(rank), (keyRank, count) -> count + 1L);
+			results.merge(rank, results.get(rank), (keyRank, count) -> count + COUNT_UP_UNIT);
 		}
 
 		return new ResultStatistic(results);
@@ -48,7 +49,7 @@ public class ResultStatistic {
 	}
 
 	public long calculateRevenueRate(MoneyForLotto moneyForLotto) {
-		return (100 * getTotalRevenue() / moneyForLotto.getMoneyForLotto());
+		return (RATE_UNIT * getTotalRevenue() / moneyForLotto.getMoneyForLotto());
 	}
 
 	private long getTotalRevenue() {

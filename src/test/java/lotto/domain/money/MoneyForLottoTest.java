@@ -1,7 +1,5 @@
 package lotto.domain.money;
 
-import lotto.domain.money.InvalidMoneyForLottoException;
-import lotto.domain.money.MoneyForLotto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;

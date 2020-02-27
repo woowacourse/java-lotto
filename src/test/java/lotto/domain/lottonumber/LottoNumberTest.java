@@ -1,7 +1,5 @@
 package lotto.domain.lottonumber;
 
-import lotto.domain.lottonumber.InvalidLottoNumberException;
-import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

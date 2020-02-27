@@ -5,9 +5,9 @@ import java.util.Objects;
 import lotto.domain.lottonumber.InvalidLottoNumberException;
 
 /**
- * 클래스 이름 : .java
+ * 구매한 로또 장수 정보를 가지는 객체
  *
- * @author
+ * @author 토니, 히히
  * @version 1.0
  * <p>
  * 날짜 : 2020/02/26
@@ -21,19 +21,22 @@ public class LottoCount {
 	private final int totalLottoCount;
 	private final int manualLottoCount;
 
-	public LottoCount(int inputTotalLottoCount, String inputManualLottoCount) {
+	public LottoCount(final int inputTotalLottoCount, final String inputManualLottoCount) {
 		this.totalLottoCount = inputTotalLottoCount;
 		this.manualLottoCount = validateManualLottoCount(inputManualLottoCount);
 	}
 
-
 	private int validateManualLottoCount(String inputManualLottoCount) {
 		Objects.requireNonNull(inputManualLottoCount, MANUAL_LOTTO_COUNT_CAN_NOT_BE_NULL_EXCEPTION_MESSAGE);
 		int integerManualLottoCount = parseToInteger(inputManualLottoCount);
-		if (integerManualLottoCount > this.totalLottoCount || integerManualLottoCount < MINIMUM_MANUAL_LOTTO_COUNT) {
+		if (isValidRange(integerManualLottoCount)) {
 			throw new IllegalArgumentException(MANUAL_LOTTO_COUNT_RANGE_EXCEPTION_MESSAGE);
 		}
 		return integerManualLottoCount;
+	}
+
+	private boolean isValidRange(int integerManualLottoCount) {
+		return integerManualLottoCount > this.totalLottoCount || integerManualLottoCount < MINIMUM_MANUAL_LOTTO_COUNT;
 	}
 
 	private int parseToInteger(final String inputBonusLottoNumber) {
