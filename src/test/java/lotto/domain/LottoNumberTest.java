@@ -10,7 +10,7 @@ public class LottoNumberTest {
 	@Test
 	void IllegalArgumentExceptionWhenOverMaxValue() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
-			new LottoNumber(46)
+			new LottoNumber("46")
 		).withMessage("로또 숫자는 45를 넘기면 안됩니다.");
 	}
 
@@ -18,8 +18,16 @@ public class LottoNumberTest {
 	@Test
 	void IllegalArgumentExceptionWhenUnderMinValue() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
-			new LottoNumber(0)
+			new LottoNumber("0")
 		).withMessage("로또 숫자는 0이하 일 수 없습니다.");
 	}
 
+	@DisplayName("문자 생성자 테스트")
+	@Test
+	void IllegalArgumentExceptionWhenNotNumber() {
+		assertThatThrownBy(() ->
+			new LottoNumber("a")
+		).isInstanceOf(NumberFormatException.class)
+			.hasMessageContaining("로또 숫자는 문자가 될 수 없습니다.");
+	}
 }

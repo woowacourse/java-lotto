@@ -3,7 +3,10 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
+	private static final String NOT_NUMBER = "금액은 숫자이어야 합니다.";
+	private static final String NO_EMPTY = "금액은 공백이 될 수 없습니다.";
 	private static final int PRICE_OF_LOTTO_TICKET = 1000;
+
 	private final int money;
 
 	public Money(final String money) {
@@ -21,10 +24,10 @@ public class Money {
 
 	private void checkValidationOf(final String lottoMoneyValue) {
 		if (isNotNumber(lottoMoneyValue)) {
-			throw new IllegalArgumentException("금액은 숫자이어야 합니다.");
+			throw new IllegalArgumentException(NOT_NUMBER);
 		}
 		if (isEmpty(lottoMoneyValue)) {
-			throw new IllegalArgumentException("금액은 공백이 될 수 없습니다.");
+			throw new IllegalArgumentException(NO_EMPTY);
 		}
 	}
 

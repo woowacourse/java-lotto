@@ -17,12 +17,12 @@ class LottoTicketsTest {
 	@BeforeEach
 	void init() {
 		lottoNumbers = Arrays.asList(
-			new LottoNumber(1),
-			new LottoNumber(2),
-			new LottoNumber(3),
-			new LottoNumber(4),
-			new LottoNumber(5),
-			new LottoNumber(6)
+			new LottoNumber("1"),
+			new LottoNumber("2"),
+			new LottoNumber("3"),
+			new LottoNumber("4"),
+			new LottoNumber("5"),
+			new LottoNumber("6")
 		);
 	}
 
@@ -32,7 +32,7 @@ class LottoTicketsTest {
 		List<Rank> values = new ArrayList<>();
 		values.add(Rank.FIRST);
 
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		List<LottoTicket> tickets = new ArrayList<>();
 		tickets.add(lottoTicket);
 		LottoTickets lottoTickets = new LottoTickets(tickets);
@@ -47,7 +47,7 @@ class LottoTicketsTest {
 	@DisplayName("size 테스트")
 	@Test
 	void checkSize() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		List<LottoTicket> tickets = new ArrayList<>();
 		tickets.add(lottoTicket);
 		tickets.add(lottoTicket);
@@ -62,7 +62,7 @@ class LottoTicketsTest {
 	@DisplayName("getter 테스트")
 	@Test
 	void checkGetTickets() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		List<LottoTicket> tickets = new ArrayList<>();
 		tickets.add(lottoTicket);
 		LottoTickets lottoTickets = new LottoTickets(tickets);
@@ -76,12 +76,12 @@ class LottoTicketsTest {
 	@DisplayName("add 테스트 (방어적 복사)")
 	@Test
 	void checkAdd() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		List<LottoTicket> tickets = new ArrayList<>();
 		tickets.add(lottoTicket);
 		LottoTickets lottoTickets = new LottoTickets(tickets);
 
-		LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket2 = LottoTicket.of(lottoNumbers);
 		List<LottoTicket> tickets2 = new ArrayList<>();
 		tickets2.add(lottoTicket2);
 		LottoTickets lottoTickets2 = new LottoTickets(tickets);

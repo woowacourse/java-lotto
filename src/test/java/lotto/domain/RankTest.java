@@ -15,19 +15,19 @@ public class RankTest {
 	@BeforeEach
 	void init() {
 		lottoNumbers = Arrays.asList(
-				new LottoNumber(1),
-				new LottoNumber(2),
-				new LottoNumber(3),
-				new LottoNumber(4),
-				new LottoNumber(5),
-				new LottoNumber(6)
+				new LottoNumber("1"),
+				new LottoNumber("2"),
+				new LottoNumber("3"),
+				new LottoNumber("4"),
+				new LottoNumber("5"),
+				new LottoNumber("6")
 			);
 	}
 
 	@DisplayName("1등 조건 만족시 FIRST를 반환")
 	@Test
 	void ofTestWhenAllMatches() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", "7");
 
 		Rank expected = Rank.FIRST;
@@ -42,7 +42,7 @@ public class RankTest {
 	@DisplayName("2등 조건 만족시 SECOND를 반환")
 	@Test
 	void ofTestWhenSecondPrize() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 7", "6");
 
 		Rank expected = Rank.SECOND;
@@ -57,7 +57,7 @@ public class RankTest {
 	@DisplayName("3등 조건 만족시 THIRD를 반환")
 	@Test
 	void ofTestWhenThirdPrize() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 7", "8");
 
 		Rank expected = Rank.THIRD;
@@ -72,7 +72,7 @@ public class RankTest {
 	@DisplayName("4등 조건 만족시 FOURTH를 반환")
 	@Test
 	void ofTestWhenFourthPrize() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 8, 9", "7");
 
 		Rank expected = Rank.FOURTH;
@@ -87,7 +87,7 @@ public class RankTest {
 	@DisplayName("5등 조건 만족시 FIFTH를 반환")
 	@Test
 	void ofTestWhenFifthPrize() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 8, 9, 10", "7");
 
 		Rank expected = Rank.FIFTH;
@@ -102,7 +102,7 @@ public class RankTest {
 	@DisplayName("당참 조건이 아닐 경우 NONE을 반환")
 	@Test
 	void ofTestWhenUnderThreeMatches() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		WinningNumbers winningNumbers = new WinningNumbers("1, 2, 11, 8, 9, 10", "7");
 
 		Rank expected = Rank.NONE;

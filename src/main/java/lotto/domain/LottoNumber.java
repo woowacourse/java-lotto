@@ -3,22 +3,32 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
+	private static final String CANNOT_BE_CHARACTER = "로또 숫자는 문자가 될 수 없습니다.";
+	private static final String CANNOT_OVER_MAX_NUMBER = "로또 숫자는 45를 넘기면 안됩니다.";
+	private static final String CANNOT_UNDER_MIN_NUMBER = "로또 숫자는 0이하 일 수 없습니다.";
 	private static final int MAX_NUMBER = 45;
 	private static final int MIN_NUMBER = 1;
 
 	private final int number;
 
-	public LottoNumber(final int number) {
+	public LottoNumber(String number) {
 		checkValidationOf(number);
-		this.number = number;
+		this.number = Integer.parseInt(number);
 	}
 
-	private void checkValidationOf(final int number) {
-		if (number > MAX_NUMBER) {
-			throw new IllegalArgumentException("로또 숫자는 45를 넘기면 안됩니다.");
+	private void checkValidationOf(String number) {
+		int digit;
+
+		try {
+			digit = Integer.parseInt(number);
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException(CANNOT_BE_CHARACTER);
 		}
-		if (number < MIN_NUMBER) {
-			throw new IllegalArgumentException("로또 숫자는 0이하 일 수 없습니다.");
+		if (digit > MAX_NUMBER) {
+			throw new IllegalArgumentException(CANNOT_OVER_MAX_NUMBER);
+		}
+		if (digit < MIN_NUMBER) {
+			throw new IllegalArgumentException(CANNOT_UNDER_MIN_NUMBER);
 		}
 	}
 

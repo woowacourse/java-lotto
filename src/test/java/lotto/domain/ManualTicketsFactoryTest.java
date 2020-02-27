@@ -19,22 +19,22 @@ public class ManualTicketsFactoryTest {
 		List<LottoNumber> lottoNumbers2 = new ArrayList<>();
 		List<LottoTicket> lottos = new ArrayList<>();
 
-		lottoNumbers1.add(new LottoNumber(1));
-		lottoNumbers1.add(new LottoNumber(22));
-		lottoNumbers1.add(new LottoNumber(31));
-		lottoNumbers1.add(new LottoNumber(4));
-		lottoNumbers1.add(new LottoNumber(15));
-		lottoNumbers1.add(new LottoNumber(6));
+		lottoNumbers1.add(new LottoNumber("1"));
+		lottoNumbers1.add(new LottoNumber("22"));
+		lottoNumbers1.add(new LottoNumber("31"));
+		lottoNumbers1.add(new LottoNumber("4"));
+		lottoNumbers1.add(new LottoNumber("15"));
+		lottoNumbers1.add(new LottoNumber("6"));
 
-		lottoNumbers2.add(new LottoNumber(7));
-		lottoNumbers2.add(new LottoNumber(8));
-		lottoNumbers2.add(new LottoNumber(9));
-		lottoNumbers2.add(new LottoNumber(12));
-		lottoNumbers2.add(new LottoNumber(25));
-		lottoNumbers2.add(new LottoNumber(36));
+		lottoNumbers2.add(new LottoNumber("7"));
+		lottoNumbers2.add(new LottoNumber("8"));
+		lottoNumbers2.add(new LottoNumber("9"));
+		lottoNumbers2.add(new LottoNumber("12"));
+		lottoNumbers2.add(new LottoNumber("25"));
+		lottoNumbers2.add(new LottoNumber("36"));
 
-		LottoTicket lottoTicket1 = new LottoTicket(lottoNumbers1);
-		LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers2);
+		LottoTicket lottoTicket1 = LottoTicket.of(lottoNumbers1);
+		LottoTicket lottoTicket2 = LottoTicket.of(lottoNumbers2);
 		lottos.add(lottoTicket1);
 		lottos.add(lottoTicket2);
 
