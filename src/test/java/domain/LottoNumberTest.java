@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
 
-    @DisplayName("LottoNumber 생성자 유효성 테스트")
+    @DisplayName("Should_LottoNumber 유효성 통과_When_LottoNumber 생성")
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void LottoNumberConstructorTest(int input) {
@@ -17,7 +17,7 @@ public class LottoNumberTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("LottoNumber 가 bonusNumber 일 때 생성자 유효성 테스트")
+    @DisplayName("Should_LottoNumber 유효성 통과_When_LottoNumber 가 bonusNumber 일 경우 생성")
     @ParameterizedTest
     @ValueSource(strings = {"0", "46", "", " ", "hello"})
     void LottoNumberConstructorTest(String input) {
@@ -26,7 +26,7 @@ public class LottoNumberTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("LottoNumber 의 getLottoNumber 테스트")
+    @DisplayName("Should_LottoNumber 가 객체로 가져옴_When_LottoNumber 의 getter")
     @ParameterizedTest
     @CsvSource(value = {"1,1", "10,10", "43,43"})
     void getLottoNumberTest(int input, String expected) {

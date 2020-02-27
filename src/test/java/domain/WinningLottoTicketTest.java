@@ -50,7 +50,7 @@ public class WinningLottoTicketTest {
         );
     }
 
-    @DisplayName("로또 티켓이 당첨 복권 번호와 얼마나 맞는지 카운트해주는 메서드 테스트")
+    @DisplayName("Should_당첨 카운트(보너스 볼 포함)_When_로또 티켓과 당첨 복권이 주어졌을 때")
     @ParameterizedTest
     @MethodSource("LottoTicketSetUp")
     void winningLottoCount(List<LottoNumber> originalLottoTicket, int expected) {

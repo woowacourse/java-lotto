@@ -21,7 +21,7 @@ public class LottoTicketTest {
         );
     }
 
-    @DisplayName("LottoTicket 생성자 유효성 테스트")
+    @DisplayName("Should_LottoTicket 유효성 통과_When_LottoTicket 생성")
     @ParameterizedTest
     @MethodSource("lottoTicketSetUp")
     void lottoTicketConstructorTest(List<LottoNumber> input) {
@@ -30,7 +30,7 @@ public class LottoTicketTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또 티켓 안에 해당 로또 번호가 있는지 테스트")
+    @DisplayName("Should_true 반환_When_로또 티켓 안에 로또 번호가 있다면 ")
     @Test
     void containsLottoNumberTest() {
         LottoTicket lottoTicket = new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::new).collect(Collectors.toList()));

@@ -24,7 +24,7 @@ public class LottoResultsTest {
         originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 6).mapToObj(LottoNumber::new).collect(Collectors.toList())));
     }
 
-    @DisplayName("LottoResults 의 계산 결과값 확인")
+    @DisplayName("Sholud_LottoResults 의 결과로 RankType만큼 카운트 증가_When_LottoResults 생성")
     @ParameterizedTest
     @CsvSource(value = {"MATCH_THREE,1", "MATCH_FOUR,1", "MATCH_FIVE,1", "MATCH_FIVE_WITH_BONUS,1", "MATCH_SIX,1"})
     void getLottoResultsTest(RankType rankType, int expected) {
