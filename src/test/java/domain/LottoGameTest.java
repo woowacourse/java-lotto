@@ -15,7 +15,7 @@ class LottoGameTest {
 
 	@BeforeAll
 	static void beforeAll() {
-		lottoGame = new LottoGame(new Money(5000));
+		lottoGame = new LottoGame(new Money(5000), selfLottos);
 	}
 
 	@Test

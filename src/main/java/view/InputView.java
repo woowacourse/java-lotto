@@ -1,9 +1,9 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -15,6 +15,17 @@ public class InputView {
 		String input = scanner.nextLine();
 		validate(input);
 		return Double.parseDouble(input);
+	}
+
+	public static List<String> inputSelfNumbers(int amount) {
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		List<String> numbers = new ArrayList<>();
+		for (int i = 0; i < amount; i++) {
+			String input = scanner.nextLine();
+			validate(input);
+			numbers.add(input);
+		}
+		return numbers;
 	}
 
 	public static List<Integer> inputSixNumbers() {
@@ -40,6 +51,7 @@ public class InputView {
 	}
 
 	public static int inputSelfNumberLottoAmount() {
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 		return Integer.parseInt(scanner.nextLine());
 	}
 }

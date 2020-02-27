@@ -16,7 +16,8 @@ public class OutputView {
 
 	public static void printLottos(LottoGame lottoGame) {
 		List<Lotto> lottos = lottoGame.getLottos();
-		System.out.println(String.format("%d개를 구매했습니다.", lottos.size()));
+		System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoGame.getSelfNumberLottoAmount(),
+			lottoGame.getAutoNumberLottoAmount()));
 		for (Lotto lotto : lottos) {
 			StringJoiner stringJoiner = new StringJoiner(DELIMITER, PREFIX, SUFFIX);
 			lotto.getNumbers()

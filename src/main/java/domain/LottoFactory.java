@@ -1,8 +1,10 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import exception.LackOfMoneyException;
 
@@ -20,18 +22,32 @@ public class LottoFactory {
 		}
 	}
 
-	public static List<Lotto> createLottos(Money purchaseMoney) {
-		moneyValidate(purchaseMoney);
-		int lottoCount = (int)purchaseMoney.division(LOTTO_PRICE);
+	public static List<Lotto> createAutoLottos(int amount) {
+		moneyAmount(amount);
 		List<Lotto> lottos = new ArrayList<>();
-		for (int i = 0; i < lottoCount; i++) {
+		for (int i = 0; i < amount; i++) {
 			lottos.add(createLotto());
 		}
 		return lottos;
 	}
 
-	private static void moneyValidate(Money purchaseMoney) {
-		if (purchaseMoney.isLessThan(LOTTO_PRICE)) {
+	public static List<Lotto> createSelfNumber(List<String> inputSelfNumbers) {
+		List<Lotto> lottos = new ArrayList<>();
+		for (String numbers : inputSelfNumbers) {
+			lottos.add(numbersToLotto(numbers));
+		}
+		return lottos;
+	}
+
+	private static Lotto numbersToLotto(String numbers) {
+		return new Lotto(Arrays.stream(numbers.split(", "))
+			.map(LottoNumber::createNumber)
+			.collect(Collectors.toList()));
+	}
+
+	//todo : exception 변경필요
+	private static void moneyAmount(int amount) {
+		if (amount < 0) {
 			throw new LackOfMoneyException();
 		}
 	}
@@ -41,4 +57,5 @@ public class LottoFactory {
 		ArrayList<LottoNumber> subNumbers = new ArrayList<>(numbers.subList(LOTTO_LENGTH_FRONT, LOTTO_LENGTH));
 		return new Lotto(subNumbers);
 	}
+
 }

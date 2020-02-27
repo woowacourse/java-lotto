@@ -15,7 +15,7 @@ class LottoFactoryTest {
 		// when
 		// then
 		assertThatThrownBy(() -> {
-			LottoFactory.createLottos(purchaseMoney);
+			LottoFactory.createAutoLottos(purchaseMoney);
 		}).isInstanceOf(LackOfMoneyException.class)
 			.hasMessage("로또 비용이 부족합니다.");
 	}
