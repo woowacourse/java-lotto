@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import java.math.BigInteger;
 import java.util.*;
 
 public class Results {
-    private static final String MONEY_PER_LOTTO = "1000";
-    private static final String HUNDRED_PERCENT = "100";
+    private static final long MONEY_PER_LOTTO = 1000;
+    private static final long HUNDRED_PERCENT = 100;
+    private static final long EARNING_BASE = 0;
     private static final int RESULT_BASE = 6;
     private final List<Result> results;
     private final List<LottoTicket> userLottoTickets;
@@ -36,26 +36,23 @@ public class Results {
         return Collections.unmodifiableList(results);
     }
 
-    public BigInteger getTotalEarning() {
-        BigInteger totalEarning = new BigInteger("0");
+    public long getTotalEarning() {
+        long totalEarning = EARNING_BASE;
+
         for (int i = RESULT_BASE; i < results.size(); i++) {
-            int nowEarning = results.get(i)
+            long nowEarning = results.get(i)
                     .getWinningInfo()
                     .getWinningPrice();
-            totalEarning = totalEarning.add(new BigInteger(String.valueOf(nowEarning)));
+            totalEarning += nowEarning;
         }
         return totalEarning;
     }
 
-    public BigInteger getEarningRate() {
-        BigInteger totalEarning = getTotalEarning();
-        BigInteger percent = new BigInteger(HUNDRED_PERCENT);
-        BigInteger userLottoTicketsSize = new BigInteger(String.valueOf(userLottoTickets.size()));
-        BigInteger moneyPerLotto = new BigInteger(MONEY_PER_LOTTO);
-        BigInteger purchaseAmount = userLottoTicketsSize.multiply(moneyPerLotto);
-
-        return totalEarning.multiply(percent)
-                .divide(purchaseAmount);
+    public long getEarningRate() {
+        long totalEarning = getTotalEarning();
+        long userLottoTicketsSize = userLottoTickets.size();
+        long purchaseAmount = userLottoTicketsSize * MONEY_PER_LOTTO;
+        return totalEarning * HUNDRED_PERCENT / purchaseAmount;
     }
 
     public Map<WinningInfo, Integer> getSummary() {
