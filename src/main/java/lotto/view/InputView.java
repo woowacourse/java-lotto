@@ -34,9 +34,22 @@ public class InputView {
         return Lotto.createWinningLotto(StringUtils.parseWithDelimiter(input));
     }
 
-    public static int inputNumberToBuyManually() {
+    public static int inputNumberToBuyManually(int lottosSize) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return StringUtils.parseInt(scanner.nextLine());
+        try {
+            int numberToBuyManually = StringUtils.parseInt(scanner.nextLine());
+
+            if (numberToBuyManually < 0) {
+                throw new InvalidInputException(String.format("%d보다 작은 숫자의 로또를 수동으로 구매할 수 없습니다.", 0));
+            }
+
+            if (lottosSize < numberToBuyManually) {
+                throw new InvalidInputException(String.format("수동으로 구매할 수 있는 로또 개수(%s개)를 초과하였습니다.", lottosSize));
+            }
+            return numberToBuyManually;
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("숫자가 아닌 문자를 입력하였습니다.");
+        }
     }
 
     public static List<Set<LottoNumber>> inputManualLottos(int numberToBuy) {

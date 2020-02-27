@@ -42,14 +42,21 @@ public class LottoGame {
     }
 
     private List<Lotto> purchaseLottos(Money purchaseAmount) {
-        List<Lotto> lottosManual = purchaseLottosManually();
+        List<Lotto> lottosManual = purchaseLottosManually(purchaseAmount.toLottosSize());
         List<Lotto> lottosAutomatic = generateLottosAutomatically(purchaseAmount.toLottosSize() - lottosManual.size());
         printLottos(lottosManual, lottosAutomatic);
         return Stream.concat(lottosManual.stream(), lottosAutomatic.stream()).collect(Collectors.toList());
     }
 
-    private List<Lotto> purchaseLottosManually() {
-        int numberToBuyManually = InputView.inputNumberToBuyManually();
+    private List<Lotto> purchaseLottosManually(int lottosSize) {
+        int numberToBuyManually;
+        try {
+            numberToBuyManually = InputView.inputNumberToBuyManually(lottosSize);
+        } catch (InvalidInputException e) {
+            OutputView.printRetryRequestWithMessage(e.getMessage());
+            numberToBuyManually = InputView.inputNumberToBuyManually(lottosSize);
+        }
+
         List<Set<LottoNumber>> lottoNumbersBasket = InputView.inputManualLottos(numberToBuyManually);
         return LottosGenerator.generateManually(lottoNumbersBasket);
     }
