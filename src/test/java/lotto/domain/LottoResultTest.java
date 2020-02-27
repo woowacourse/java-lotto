@@ -7,7 +7,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,23 +33,18 @@ public class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        List<Ball> balls1 = new ArrayList<>(Arrays.asList(
-                new Ball(1), new Ball(2), new Ball(3), new Ball(4), new Ball(5), new Ball(6)));
-        List<Ball> balls2 = new ArrayList<>(Arrays.asList(
-                new Ball(1), new Ball(2), new Ball(3), new Ball(4), new Ball(5), new Ball(7)));
-        List<Ball> balls3 = new ArrayList<>(Arrays.asList(
-                new Ball(1), new Ball(2), new Ball(3), new Ball(4), new Ball(5), new Ball(45)));
-        List<Ball> balls4 = new ArrayList<>(Arrays.asList(
-                new Ball(1), new Ball(2), new Ball(3), new Ball(4), new Ball(44), new Ball(45)));
-        List<Ball> balls5 = new ArrayList<>(Arrays.asList(
-                new Ball(1), new Ball(2), new Ball(3), new Ball(43), new Ball(44), new Ball(45)));
+        List<Ball> balls1 = Arrays.asList(
+                new Ball(1), new Ball(2), new Ball(3), new Ball(4), new Ball(5), new Ball(6));
+        List<Ball> balls2 = Arrays.asList(
+                new Ball(1), new Ball(2), new Ball(3), new Ball(4), new Ball(5), new Ball(7));
+        List<Ball> balls3 = Arrays.asList(
+                new Ball(1), new Ball(2), new Ball(3), new Ball(4), new Ball(5), new Ball(45));
+        List<Ball> balls4 = Arrays.asList(
+                new Ball(1), new Ball(2), new Ball(3), new Ball(4), new Ball(44), new Ball(45));
+        List<Ball> balls5 = Arrays.asList(
+                new Ball(1), new Ball(2), new Ball(3), new Ball(43), new Ball(44), new Ball(45));
 
-        List<Lotto> lottoBundle = new ArrayList<>();
-        lottoBundle.add(new Lotto(balls1));
-        lottoBundle.add(new Lotto(balls2));
-        lottoBundle.add(new Lotto(balls3));
-        lottoBundle.add(new Lotto(balls4));
-        lottoBundle.add(new Lotto(balls5));
+        List<Lotto> lottoBundle = Arrays.asList(new Lotto(balls1), new Lotto(balls2), new Lotto(balls3), new Lotto(balls4), new Lotto(balls5));
         lottos = new Lottos(lottoBundle);
 
         winningBalls = new WinningBalls("1,2,3,4,5,6");
