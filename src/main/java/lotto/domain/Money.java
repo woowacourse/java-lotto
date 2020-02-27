@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
 public class Money {
@@ -19,16 +21,37 @@ public class Money {
         }
     }
 
-    public void buyManualLotto(int numberOfTickets) {
+    public void spendOnManualLotto(int numberOfTickets) {
         int totalPrice = numberOfTickets * LOTTO_PRICE;
 
         if (!canAfford(totalPrice)) {
             throw new IllegalArgumentException(String.format(MESSAGE_FOR_CANNOT_AFFORD, money, numberOfTickets));
         }
-        money = money - totalPrice;
+        money -= totalPrice;
     }
 
     private boolean canAfford(int totalPrice) {
         return !(money < totalPrice);
+    }
+
+    public int calculateNumberOfAffordableTickets() {
+        return money / LOTTO_PRICE;
+    }
+
+    public void spendOnAutoLotto(int numberOfTickets) {
+        money -= (numberOfTickets * LOTTO_PRICE);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money1 = (Money) o;
+        return money == money1.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }
