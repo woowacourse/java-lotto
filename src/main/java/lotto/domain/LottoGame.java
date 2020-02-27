@@ -19,14 +19,6 @@ public class LottoGame {
         OutputView.printResult(result);
     }
 
-    private Lottos generateManualLottos(Money purchaseAmount, Money manualLottosAmount) {
-        Lottos manualLottos = InputView.inputManualLottos(manualLottosAmount);
-        OutputView.printLottosSize(manualLottosAmount.getValue(),
-            purchaseAmount.toLottosSizeExcept(manualLottosAmount));
-        OutputView.printLottos(manualLottos);
-        return manualLottos;
-    }
-
     private Result produceResult(Lottos lottos, Money purchaseMoney) {
         WinningLotto winningLotto = InputView.inputWinningLotto();
         WinningRanks winningRanks = compareWithWinningNumbers(lottos, winningLotto);
@@ -42,6 +34,14 @@ public class LottoGame {
         Lottos manualLottos = generateManualLottos(purchaseAmount, manualLottosAmount);
         Lottos autoLottos = generateAutoLottos(purchaseAmount.toLottosSizeExcept(manualLottosAmount));
         return manualLottos.add(autoLottos);
+    }
+
+    private Lottos generateManualLottos(Money purchaseAmount, Money manualLottosAmount) {
+        Lottos manualLottos = InputView.inputManualLottos(manualLottosAmount);
+        OutputView.printLottosSize(manualLottosAmount.getValue(),
+            purchaseAmount.toLottosSizeExcept(manualLottosAmount));
+        OutputView.printLottos(manualLottos);
+        return manualLottos;
     }
 
     private Lottos generateAutoLottos(int lottosSize) {

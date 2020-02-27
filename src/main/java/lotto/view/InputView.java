@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.ManualLottoFactory;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.utils.StringUtils;
@@ -30,8 +31,7 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < manualLottoAmount.getValue(); i++) {
             String input = scanner.nextLine();
-            lottos.add(new Lotto(StringUtils.parseWithDelimiter(input).stream().map(LottoNumber::new).collect(
-                Collectors.toSet())));
+            lottos.add(ManualLottoFactory.create(StringUtils.parseWithDelimiter(input)));
         }
         return new Lottos(lottos);
     }

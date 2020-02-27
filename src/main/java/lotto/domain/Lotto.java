@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Set;
 
 import lotto.exception.InvalidLottoSizeException;
@@ -20,7 +21,7 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     @Override
