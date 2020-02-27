@@ -53,9 +53,15 @@ public class LottoController {
 	}
 
 	private static Lottos receivePurchasedLottos(LottoCount lottoCount) {
-		Lottos manualLottos = receiveManualLottos(lottoCount);
-		Lottos autoLottos = LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount());
-		return manualLottos.add(autoLottos);
+		if (lottoCount.getManualLottoCount() != 0 && lottoCount.getAutoLottoCount() != 0) {
+			Lottos manualLottos = receiveManualLottos(lottoCount);
+			Lottos autoLottos = LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount());
+			return manualLottos.add(autoLottos);
+		}
+		if (lottoCount.getAutoLottoCount() == 0) {
+			return receiveManualLottos(lottoCount);
+		}
+		return LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount());
 	}
 
 	private static Lottos receiveManualLottos(LottoCount lottoCount) {
