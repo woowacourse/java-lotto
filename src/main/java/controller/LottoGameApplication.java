@@ -4,7 +4,7 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
-public class LottoGame {
+public class LottoGameApplication {
 
     public static final int START_INDEX = 0;
 
