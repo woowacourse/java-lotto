@@ -29,7 +29,7 @@ public class GameResult {
 		for (RankCount rankCount : result.values()) {
 			profit.add(rankCount.getProfit());
 		}
-		return profit.of(money);
+		return profit.calculate(money);
 	}
 
 	public Collection getResultCount() {
