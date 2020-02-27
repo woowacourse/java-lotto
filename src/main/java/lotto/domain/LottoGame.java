@@ -42,7 +42,7 @@ public class LottoGame {
     }
 
     private List<Lotto> generateLottos(int lottosSize) {
-        List<Lotto> lottos = LottosGenerator.generate(lottosSize);
+        List<Lotto> lottos = LottosGenerator.generateAutomatically(lottosSize);
         printLottos(lottos);
         return lottos;
     }
