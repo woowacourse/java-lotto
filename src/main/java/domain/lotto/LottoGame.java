@@ -17,7 +17,7 @@ public class LottoGame {
 
     private List<LottoNumbers> lottoGame;
 
-    public LottoGame(List<LottoNumbers> lottoGame) {
+    private LottoGame(List<LottoNumbers> lottoGame) {
         validateNullValue(lottoGame);
         this.lottoGame = lottoGame;
     }

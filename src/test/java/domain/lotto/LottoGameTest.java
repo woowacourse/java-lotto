@@ -34,18 +34,10 @@ public class LottoGameTest {
     }
 
     @Test
-    @DisplayName("null방어 확인")
-    void test4() {
-        Assertions.assertThatThrownBy(() -> new LottoGame(null))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("null값이 입력되었습니다.");
-    }
-
-    @Test
     @DisplayName("Result생성 확인")
     void test5() {
         LottoGame lottoGame = LottoGame.create(new TestNumberGenerator(), new RepeatCount(2));
-        LottoWinner winner = new LottoWinner(LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumberFactory.getInstance(7));
+        LottoWinner winner = LottoWinner.create(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         LottoResult result = lottoGame.createGameResult(winner);
         Assertions.assertThat(result.getResult().get(LottoRank.FIRST)).isEqualTo(new ResultCount(2));
     }

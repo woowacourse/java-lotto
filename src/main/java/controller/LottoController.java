@@ -2,7 +2,7 @@ package controller;
 
 import domain.Money;
 import domain.RepeatCount;
-import domain.lotto.*;
+import domain.lotto.LottoGame;
 import domain.lotto.lottoresult.LottoResult;
 import domain.lotto.lottoresult.LottoWinner;
 import generator.RandomNumberGenerator;
@@ -24,15 +24,10 @@ public class LottoController {
         OutputView.printLottoNumbersCount(userRepeatCount, repeatCount);
         OutputView.printLottoGame(lottoGame);
 
-        LottoWinner lottoWinner = makeWinnerNumbers();
+        LottoWinner lottoWinner = LottoWinner.create(InputView.inputNumbers(OutputView::printWinnerNumbersFormat),
+                InputView.inputNumber(OutputView::printBonusNumberFormat));
         LottoResult lottoResult = lottoGame.createGameResult(lottoWinner);
 
         OutputView.printResultAll(money, lottoResult);
-    }
-
-    private LottoWinner makeWinnerNumbers() {
-        LottoNumbers winnerNumbers = LottoNumbersFactory.createLottoNumbers(InputView.inputNumbers(OutputView::printWinnerNumbersFormat));
-        LottoNumber bonus = LottoNumberFactory.getInstance(InputView.inputNumber(OutputView::printBonusNumberFormat));
-        return new LottoWinner(winnerNumbers, bonus);
     }
 }
