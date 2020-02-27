@@ -17,9 +17,7 @@ public class BonusBall {
     }
 
     private void checkDuplicate(String bonusBall, WinningBalls winningBalls) {
-        boolean isDuplicate = winningBalls.getWinningBalls().stream()
-                .anyMatch(ball -> ball.getNumber() == Integer.parseInt(bonusBall));
-        if (isDuplicate) {
+        if (winningBalls.contains(bonusBall)) {
             throw new RuntimeException("당첨 번호와 보너스 볼은 중복될 수 없습니다.");
         }
     }

@@ -9,8 +9,8 @@ public class WinningLotto {
         this.bonusBall = new BonusBall(bonusBall, this.winningBalls);
     }
 
-    public WinningBalls getWinningBalls() {
-        return winningBalls;
+    public Lotto getWinningBalls() {
+        return winningBalls.getWinningBalls();
     }
 
     public BonusBall getBonusBall() {

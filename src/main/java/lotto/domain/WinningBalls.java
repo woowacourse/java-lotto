@@ -1,20 +1,18 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningBalls {
     private static final String WINNING_NUMBERS_DELIMITER = ",";
     private static final int NUMBER_COUNT_PER_LOTTO = 6;
 
-    private final List<Ball> winningBalls;
+    private final Lotto winningBalls;
 
     public WinningBalls(String winningBalls) {
         validate(winningBalls);
-        this.winningBalls = parseToBalls(split(winningBalls));
+        this.winningBalls = convertToLotto(split(winningBalls));
     }
 
     private void validate(String winningBallsInput) {
@@ -23,7 +21,7 @@ public class WinningBalls {
         List<String> splittedNumbers = split(winningBallsInput);
         checkCount(splittedNumbers);
         checkType(splittedNumbers);
-        List<Ball> winningBalls = parseToBalls(splittedNumbers);
+        Lotto winningBalls = convertToLotto(splittedNumbers);
         checkDuplicatedNumber(winningBalls);
     }
 
@@ -62,21 +60,24 @@ public class WinningBalls {
         }
     }
 
-    private List<Ball> parseToBalls(List<String> splittedNumbers) {
-        return splittedNumbers.stream()
+    private Lotto convertToLotto(List<String> splittedNumbers) {
+        return new Lotto(splittedNumbers.stream()
                 .map(Integer::parseInt)
                 .map(Ball::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
-    private void checkDuplicatedNumber(List<Ball> winningBalls) {
-        Set<Ball> numbers = new HashSet<>(winningBalls);
-        if (numbers.size() != winningBalls.size()) {
+    private void checkDuplicatedNumber(Lotto winningBalls) {
+        if (winningBalls.isDuplicated()) {
             throw new RuntimeException("중복된 숫자가 입력되었습니다.");
         }
     }
 
-    public List<Ball> getWinningBalls() {
+    public boolean contains(String bonusBall) {
+        return winningBalls.contains(bonusBall);
+    }
+
+    public Lotto getWinningBalls() {
         return this.winningBalls;
     }
 }

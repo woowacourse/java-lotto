@@ -17,7 +17,7 @@ public class Results {
     public static Map<MatchResult, Integer> createMatchResults(Lottos lottos, WinningLotto winningLotto) {
         Map<MatchResult, Integer> matchResults = setUpMatchResults();
         for (Lotto lotto : lottos.getLottos()) {
-            MatchResult lottoMatchResult = MatchResult.findMatchResult(lotto, winningLotto);
+            MatchResult lottoMatchResult = findMatchResult(lotto, winningLotto);
             updateMatchResults(matchResults, lottoMatchResult);
         }
         return matchResults;
@@ -30,6 +30,16 @@ public class Results {
             matchResults.put(result, INITIAL_COUNT);
         }
         return matchResults;
+    }
+
+    public static MatchResult findMatchResult(Lotto lotto, WinningLotto winningLotto) {
+        int sameNumberCount = Lotto.countsOfDuplicates(lotto, winningLotto.getWinningBalls());
+        boolean isBonus = isFiveMatchWithBonusBall(sameNumberCount, lotto, winningLotto.getBonusBall());
+        return MatchResult.of(sameNumberCount, isBonus);
+    }
+
+    private static boolean isFiveMatchWithBonusBall(int sameNumberCount, Lotto lotto, BonusBall bonusBall) {
+        return sameNumberCount == MatchResult.FIVE_MATCH.getMatchCount() && bonusBall.hasIncluded(lotto.getBalls());
     }
 
     private static void updateMatchResults(Map<MatchResult, Integer> matchResults, MatchResult lottoMatchResult) {
