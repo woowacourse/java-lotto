@@ -59,6 +59,6 @@ public class WinningBallsTest {
     void duplicatedInputTest(String input) {
         assertThatThrownBy(() -> new WinningBalls(input))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessage("중복된 숫자가 입력되었습니다.");
+                .hasMessage("중복되는 숫자가 존재합니다.");
     }
 }

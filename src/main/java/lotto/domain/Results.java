@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Results {
     private static final int PERCENT = 100;
@@ -10,17 +11,17 @@ public class Results {
 
     private final Map<MatchResult, Integer> lottoResults;
 
-    public Results(Lottos lottos, WinningLotto winningLotto) {
-        this.lottoResults = createMatchResults(lottos, winningLotto);
+    Results(Map<MatchResult, Integer> lottoResults) {
+        this.lottoResults = lottoResults;
     }
 
-    public static Map<MatchResult, Integer> createMatchResults(Lottos lottos, WinningLotto winningLotto) {
+    public static Results createMatchResults(Lottos lottos, WinningLotto winningLotto) {
         Map<MatchResult, Integer> matchResults = setUpMatchResults();
         for (Lotto lotto : lottos.getLottos()) {
             MatchResult lottoMatchResult = findMatchResult(lotto, winningLotto);
             updateMatchResults(matchResults, lottoMatchResult);
         }
-        return matchResults;
+        return new Results(matchResults);
     }
 
     private static Map<MatchResult, Integer> setUpMatchResults() {
@@ -33,7 +34,7 @@ public class Results {
     }
 
     public static MatchResult findMatchResult(Lotto lotto, WinningLotto winningLotto) {
-        int sameNumberCount = Lotto.countsOfDuplicates(lotto, winningLotto.getWinningBalls());
+        int sameNumberCount = lotto.countsOfDuplicates(winningLotto.getWinningBalls());
         boolean isBonus = isFiveMatchWithBonusBall(sameNumberCount, lotto, winningLotto.getBonusBall());
         return MatchResult.of(sameNumberCount, isBonus);
     }
@@ -61,5 +62,18 @@ public class Results {
 
     public Map<MatchResult, Integer> getLottoResults() {
         return Collections.unmodifiableMap(lottoResults);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Results results = (Results) o;
+        return Objects.equals(lottoResults, results.lottoResults);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoResults);
     }
 }

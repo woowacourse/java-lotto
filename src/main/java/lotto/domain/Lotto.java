@@ -12,8 +12,16 @@ public class Lotto {
     private final List<Ball> balls;
 
     public Lotto(List<Ball> balls) {
+        checkDuplicate(balls);
         checkEmpty(balls);
         this.balls = balls;
+    }
+
+    private void checkDuplicate(List<Ball> balls) {
+        Set<Ball> result = new HashSet<>(balls);
+        if (result.size() != BALLS_COUNT) {
+            throw new RuntimeException("중복되는 숫자가 존재합니다.");
+        }
     }
 
     private void checkEmpty(List<Ball> balls) {
@@ -22,9 +30,9 @@ public class Lotto {
         }
     }
 
-    public static int countsOfDuplicates(Lotto lotto1, Lotto lotto2) {
-        Set<Ball> balls = new HashSet<>(lotto1.getBalls());
-        balls.addAll(lotto2.getBalls());
+    public int countsOfDuplicates(Lotto lotto) {
+        Set<Ball> balls = new HashSet<>(this.balls);
+        balls.addAll(lotto.getBalls());
         int differentNumbersCount = balls.size();
         return BALLS_COUNT + WINNING_BALLS_COUNT - differentNumbersCount;
     }

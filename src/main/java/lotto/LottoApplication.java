@@ -15,7 +15,7 @@ public class LottoApplication {
         WinningLotto winningLotto =
                 new WinningLotto(InputView.requestWinningNumbers(), InputView.requestBonusNumber());
 
-        Results results = new Results(lottos, winningLotto);
+        Results results = Results.createMatchResults(lottos, winningLotto);
         OutputView.printLottoResult(results, purchasePrice);
     }
 }
