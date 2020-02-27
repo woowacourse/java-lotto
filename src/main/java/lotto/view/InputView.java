@@ -5,10 +5,8 @@ import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -78,20 +76,11 @@ public class InputView {
 
     private static LottoTicket inputWinningLottoTicket() {
         try {
-            return generateLottoTicketFromNumbers();
+            return LottoTicket.fromInput(inputSixNumbersWithMessage());
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return inputWinningLottoTicket();
         }
-    }
-
-    private static LottoTicket generateLottoTicketFromNumbers() {
-        List<LottoNumber> sixNumbers = Arrays.stream(inputSixNumbersWithMessage().split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-        return LottoTicket.fromSixNumbers(sixNumbers);
     }
 
     private static String inputSixNumbersWithMessage() {
