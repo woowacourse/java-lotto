@@ -22,10 +22,10 @@ public class LottoPurchaseMoneyTest {
 	}
 
 	@Test
-	@DisplayName("생성자에서 구입 금액이 1000으로 나누어 떨어지지 않는 경우 예외가 발생한다")
+	@DisplayName("생성하려는 로또 구입 금액이 음수인 경우 예외가 발생한다")
 	void constructor_MoneyDivideByUnit() {
 		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> new LottoPurchaseMoney(14_500));
+				.isThrownBy(() -> new LottoPurchaseMoney(-1_000));
 	}
 
 	@Test
@@ -36,10 +36,10 @@ public class LottoPurchaseMoneyTest {
 	}
 
 	@ParameterizedTest
-	@DisplayName("잔액이 있는지 여부를 반환한다")
+	@DisplayName("금액을 지불할 수 있는지 여부를 반환한다")
 	@CsvSource(value = {"1000,true", "0,false"})
-	void hasBalance(long money, boolean expect) {
+	void canPayable(long money, boolean expect) {
 		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(money);
-		assertThat(lottoPurchaseMoney.hasBalance()).isEqualTo(expect);
+		assertThat(lottoPurchaseMoney.canPayable(1_000L)).isEqualTo(expect);
 	}
 }

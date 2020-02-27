@@ -12,15 +12,20 @@ import lotto.util.TextUtil;
  * @since 2020/02/19
  */
 public class OutputView {
-	public static final String TOTAL_BUY_FORMAT_MESSAGE = "%d개를 구입했습니다.\n";
+	public static final String TOTAL_BUY_FORMAT_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.\n";
 	public static final String STATISTICS_TITLE_MESSAGE = "당첨 통계\n---------";
 	public static final String TOTAL_PROFIT_FORMAT_MESSAGE = "총 수익률은 %d%%입니다.\n";
 
 	private OutputView() {
 	}
 
-	public static void printLottoTicket(LottoTicket lottoTicket) {
-		System.out.printf(TOTAL_BUY_FORMAT_MESSAGE, lottoTicket.size());
+	public static void printLottoTicket(LottoTicket manualTicket, LottoTicket autoTicket) {
+		System.out.printf(TOTAL_BUY_FORMAT_MESSAGE, manualTicket.size(), autoTicket.size());
+		printLottoTicket(manualTicket);
+		printLottoTicket(autoTicket);
+	}
+
+	private static void printLottoTicket(LottoTicket lottoTicket) {
 		System.out.println(TextUtil.generateLottoTicketText(lottoTicket));
 	}
 

@@ -13,7 +13,11 @@ import java.util.stream.Collectors;
  * @since 2020/02/19
  */
 public class AutoLottoTicketFactory implements LottoGeneratable {
-	private static final Random RANDOM = new Random();
+	private final Random random;
+
+	public AutoLottoTicketFactory(Random random) {
+		this.random = random;
+	}
 
 	@Override
 	public LottoTicket generate(LottoPurchaseMoney lottoPurchaseMoney) {
@@ -26,7 +30,7 @@ public class AutoLottoTicketFactory implements LottoGeneratable {
 	}
 
 	private Lotto generate() {
-		return RANDOM.ints(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
+		return random.ints(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
 				.distinct()
 				.limit(Lotto.SIZE)
 				.mapToObj(LottoNumber::of)

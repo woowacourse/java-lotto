@@ -39,7 +39,7 @@ public class LottoTest {
 	}
 
 	@Test
-	@DisplayName("로또 번호 여섯 개를 받아서 로또 클래스를 생성한다")
+	@DisplayName("로또 번호 여섯 개를 받아서 로또 인스턴스를 생성한다")
 	void constructor() {
 		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.of(1),
 				LottoNumber.of(2),

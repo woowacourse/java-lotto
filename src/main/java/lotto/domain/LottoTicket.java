@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 여러 개의 로또를 가지는 클래스
@@ -19,11 +21,17 @@ public class LottoTicket {
 
 	public LottoTicket(List<Lotto> lottoTicket) {
 		validate(lottoTicket);
-		this.lottoTicket = lottoTicket;
+		this.lottoTicket = Collections.unmodifiableList(lottoTicket);
+	}
+
+	public static LottoTicket concat(LottoTicket... tickets) {
+		return Stream.of(tickets)
+				.flatMap(ticket -> ticket.lottoTicket.stream())
+				.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
 	}
 
 	private void validate(List<Lotto> lottos) {
-		if (Objects.isNull(lottos) || lottos.isEmpty()) {
+		if (Objects.isNull(lottos)) {
 			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_SIZE_MESSAGE);
 		}
 	}
