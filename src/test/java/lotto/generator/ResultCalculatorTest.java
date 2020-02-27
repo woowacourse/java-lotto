@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultCalculatorTest {
     MatchResults getResult() {
-        Lotto lotto = new LottoSelectedGenerator("1,2,3,4,5,6").create();
+        Lotto lotto = LottoGenerator.create("1,2,3,4,5,6");
 
         LottoNumber bonusNumber = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);

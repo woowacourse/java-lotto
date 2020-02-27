@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import lotto.generator.LottoSelectedGenerator;
+import lotto.generator.LottoGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
-
-import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -16,7 +14,7 @@ public class WinningLottoTest {
 
     @BeforeAll
     static void init() {
-        lotto =  new LottoSelectedGenerator("1, 2, 3, 4, 5, 6").create();
+        lotto =  LottoGenerator.create("1, 2, 3, 4, 5, 6");
     }
 
     @Test
@@ -60,7 +58,7 @@ public class WinningLottoTest {
     @Test
     void computeMatchCount_두_로또_사이에_일치하는_로또번호가_없을_때() {
         int expected = 0;
-        Lotto lotto = new LottoSelectedGenerator("11, 12, 13, 14, 15, 16").create();
+        Lotto lotto = LottoGenerator.create("11, 12, 13, 14, 15, 16");
         WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber("45"));
 
         assertThat(winningLotto.computeMatchCount(lotto) == expected);

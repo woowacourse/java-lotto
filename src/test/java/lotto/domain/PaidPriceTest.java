@@ -5,11 +5,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PaidPriceTest {
     @Test
-    void validatePayment_로또_가격_정상적으로_입력했을_때() {
+    void validatePayment_로또_가격_정상적으로_입력했을_때_Success() {
         String validMoney = "1000";
         new PaidPrice(validMoney);
     }
@@ -44,5 +45,12 @@ public class PaidPriceTest {
         assertThatThrownBy(() -> new PaidPrice(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("정수로 입력하셔야 합니다.");
+    }
+
+    @Test
+    void getTotalLottoCountTest() {
+        int expected = 5;
+        PaidPrice paidPrice = new PaidPrice("5000");
+        assertThat(paidPrice.getTotalLottoCount()).isEqualTo(expected);
     }
 }
