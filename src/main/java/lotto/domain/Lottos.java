@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Lottos {
     public static final int PRICE_PER_LOTTO = 1_000;
@@ -21,5 +22,9 @@ public class Lottos {
     public Lottos addLottos(Lottos lottosToAdd) {
         this.lottos.addAll(lottosToAdd.getLottos());
         return new Lottos(lottos);
+    }
+
+    public Set<LottoNumber> getLottoNumbers(int index) {
+        return this.lottos.get(index).getLottoNumbers();
     }
 }

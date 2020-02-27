@@ -22,7 +22,7 @@ public class OutputView {
     public static void printLottosNumbers(Lottos lottos) {
         int lottosLength = lottos.getLottos().size();
         for (int i = 0; i < lottosLength; i++) {
-            System.out.println(lottos.getLottos().get(i).getLottoNumbers());
+            System.out.println(lottos.getLottoNumbers(i));
         }
     }
 
@@ -35,11 +35,7 @@ public class OutputView {
     }
 
     public static void printWinningResults(ResultsDTO resultsDTO) {
-        Arrays.stream(WinningInfo.values()).filter(x -> x != WinningInfo.FAIL).collect(Collectors.toList());
-        for (WinningInfo winningInfo : WinningInfo.values()) {
-            if (winningInfo == WinningInfo.FAIL) {
-                continue;
-            }
+        for (WinningInfo winningInfo : WinningInfo.getValuesWithoutFail()){
             int winningCount = resultsDTO.getMatchCount(winningInfo);
             printWinnigInfo(winningInfo);
             System.out.println(winningCount + "개");
