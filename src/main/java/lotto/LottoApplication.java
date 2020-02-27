@@ -19,7 +19,7 @@ public class LottoApplication {
         String userLottoNumbers = inputUserLottoNumbers(money);
 
         List<Lotto> lotteries = LottoFactory.createLotteries(money, userLottoNumbers);
-        OutputView.printLotteries(lotteries, money.getUserLottoCount());
+        OutputView.printLotteries(lotteries, money);
 
         WinLotto winLotto = createWinLotto();
         LottoManager lottoManager = new LottoManager(lotteries, winLotto);

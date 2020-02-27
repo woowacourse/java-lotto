@@ -44,4 +44,8 @@ public class Money {
     public int getUserLottoCount() {
         return userLottoCount;
     }
+
+    public int calculatorAutoLottoCount() {
+        return divideThousand() - userLottoCount;
+    }
 }
