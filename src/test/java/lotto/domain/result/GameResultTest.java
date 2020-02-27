@@ -25,10 +25,10 @@ class GameResultTest {
 	@BeforeEach
 	void init() {
 		money = new PurchaseMoney("4000");
-		winningNumbers = LottoFactory.createManualSingle("1,2,3,4,5,6");
+		winningNumbers = LottoFactory.createManual("1,2,3,4,5,6");
 		bonus = Number.of("7");
 		winningLotto = new WinningLotto(winningNumbers, bonus);
-		lottos = LottoFactory.createManualAndAuto(Arrays.asList("1,2,3,4,5,7"), 0);
+		lottos = LottoFactory.createManualsAndAutos(Arrays.asList("1,2,3,4,5,7"), 0);
 	}
 
 	@Test

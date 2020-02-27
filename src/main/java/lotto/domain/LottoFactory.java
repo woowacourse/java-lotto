@@ -11,13 +11,13 @@ public class LottoFactory {
 	public static final int LOWER_BOUND = 0;
 	public static final int UPPER_BOUND = 6;
 
-	public static Lotto randomlyCreateSingle() {
+	public static Lotto createAuto() {
 		List<Number> numbers = Number.getNumbers();
 		Collections.shuffle(numbers);
 		return new Lotto(numbers.subList(LOWER_BOUND, UPPER_BOUND));
 	}
 
-	public static Lotto createManualSingle(String winningNumbers) {
+	public static Lotto createManual(String winningNumbers) {
 		List<String> numbers
 			= StringUtil.parseToNumbers(StringUtil.removeBlank(winningNumbers));
 		List<Number> lotto = numbers.stream()
@@ -27,21 +27,21 @@ public class LottoFactory {
 		return new Lotto(lotto);
 	}
 
-	public static Lottos randomlyCreateOf(int count) {
+	public static Lottos createAutosOf(int count) {
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			lottos.add(randomlyCreateSingle());
+			lottos.add(createAuto());
 		}
 		return new Lottos(lottos);
 	}
 
-	public static Lottos createManualAndAuto(List<String> manualLottoInput, int autoLottoCount) {
+	public static Lottos createManualsAndAutos(List<String> manualLottoInput, int autoLottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 		for (String manual : manualLottoInput) {
-			lottos.add(createManualSingle(manual));
+			lottos.add(createManual(manual));
 		}
 		for (int i = 0; i < autoLottoCount; i++) {
-			lottos.add(randomlyCreateSingle());
+			lottos.add(createAuto());
 		}
 		return new Lottos(lottos);
 	}
