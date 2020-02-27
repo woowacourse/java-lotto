@@ -9,7 +9,7 @@ public class LottoMachineTest {
 	@Test
 	@DisplayName("주어진 개수만큼 자동 로또 사기")
 	void buyAutoLotto() {
-		LottoMachine lottoMachine = new LottoMachine();
-		assertThat(lottoMachine.makeRandomLottos(new LottoCount(6000)).size()).isEqualTo(6);
+		LottoMachine lottoMachine = LottoMachine.getInstance();
+		assertThat(lottoMachine.makeRandomLottos(6000).size()).isEqualTo(6);
 	}
 }
