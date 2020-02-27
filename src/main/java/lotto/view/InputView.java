@@ -55,12 +55,20 @@ public class InputView {
     public static List<Set<LottoNumber>> inputManualLottos(int numberToBuy) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Set<LottoNumber>> lottoNumbersBasket = new ArrayList<>();
-        for (int i = 0; i < numberToBuy; i++) {
-            Set<LottoNumber> lottoNumbers = StringUtils.parseWithDelimiter(scanner.nextLine()).stream().map(LottoNumber::new).collect(Collectors.toSet());
-            lottoNumbersBasket.add(lottoNumbers);
+        try {
+            for (int i = 0; i < numberToBuy; i++) {
+                Set<LottoNumber> lottoNumbers = StringUtils.parseWithDelimiter(scanner.nextLine()).stream().map(LottoNumber::new).collect(Collectors.toSet());
+                if (lottoNumbers.size() != 6) {
+                    throw new InvalidInputException(String.format("로또 번호의 개수는 %d개여야 합니다.", 6));
+                }
+                lottoNumbersBasket.add(lottoNumbers);
+            }
+
+            return lottoNumbersBasket;
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("숫자가 아닌 문자를 입력하였습니다.");
         }
 
-        return lottoNumbersBasket;
     }
 
     public static LottoNumber inputBonusNumber() {

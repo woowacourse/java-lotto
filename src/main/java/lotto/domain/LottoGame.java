@@ -57,7 +57,16 @@ public class LottoGame {
             numberToBuyManually = InputView.inputNumberToBuyManually(lottosSize);
         }
 
-        List<Set<LottoNumber>> lottoNumbersBasket = InputView.inputManualLottos(numberToBuyManually);
+        List<Set<LottoNumber>> lottoNumbersBasket;
+
+        try {
+            lottoNumbersBasket = InputView.inputManualLottos(numberToBuyManually);
+        } catch (InvalidInputException e) {
+            OutputView.printRetryRequestWithMessage(e.getMessage());
+            lottoNumbersBasket = InputView.inputManualLottos(numberToBuyManually);
+        }
+
+
         return LottosGenerator.generateManually(lottoNumbersBasket);
     }
 
