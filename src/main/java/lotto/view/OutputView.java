@@ -8,8 +8,8 @@ import lotto.domain.*;
 
 public class OutputView {
 
-    public static void printLottosSize(int lottosSize) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottosSize));
+    public static void printLottosSize(int manualLottosSize, int autoLottosSize) {
+        System.out.println(String.format("수동으로 %d, 자동으로 %d개를 구매했습니다.", manualLottosSize, autoLottosSize));
     }
 
     public static void printLottos(Lottos lottos) {

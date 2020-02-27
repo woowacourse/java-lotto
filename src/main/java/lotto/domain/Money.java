@@ -18,13 +18,17 @@ public class Money {
     }
 
     private void validateMoney(int value) {
-        if (value <= ZERO) {
+        if (value < ZERO) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다");
         }
     }
 
     int toLottosSize() {
         return this.value / PRICE;
+    }
+
+    int toLottosSizeExcept(Money manualLottosAmount) {
+        return (this.value - (manualLottosAmount.value * PRICE)) / PRICE;
     }
 
     Money add(Money money) {
