@@ -1,6 +1,6 @@
 package lotto.domain.exception;
 
-public class DuplicateExistException extends IllegalArgumentException{
+public class DuplicateExistException extends IllegalArgumentException {
     private static final String DUPLICATE_EXIST_EXCEPTION_MESSAGE = "Duplicate exist.";
 
     public DuplicateExistException() {

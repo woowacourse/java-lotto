@@ -26,7 +26,7 @@ public class ConsoleLottoApplication {
         Result result = new Result();
         result.calculateRank(purchaseLottos, winningNumbers);
 
-        OutputView.printResult(purchaseAmount,result);
+        OutputView.printResult(purchaseAmount, result);
     }
 
     private static PurchaseLottos makePurchaseLottos(PurchaseAmount purchaseAmount) {
