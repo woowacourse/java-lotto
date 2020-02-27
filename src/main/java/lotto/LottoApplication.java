@@ -20,17 +20,24 @@ public class LottoApplication {
         String userLottoNumbers = InputView.inputUserLotto(inputUserLottoCount);
         Customer customer = new Customer(inputMoney, inputUserLottoCount, userLottoNumbers);
 
-        LottoGame manualLottoGame = new LottoGame(customer, new LottoGeneratorManual());
-        List<Lotto> lottos = manualLottoGame.lottoGenerate();
-        LottoGame AutoLottoGame = new LottoGame(customer, new LottoGeneratorAuto());
-        AutoLottoGame.lottoGenerate().stream().forEach(x -> lottos.add(x));
+        List<Lotto> lottos = createUserLottos(customer);
 
-        OutputView.printLotteries(lottos, customer);
+        OutputView.printLottoAmounts(customer);
+        OutputView.printLottos(lottos);
 
         WinLotto winLotto = createWinLotto();
         LottoManager lottoManager = new LottoManager(lottos, winLotto);
         lottoManager.checkLotto();
         OutputView.printResult(customer, lottoManager);
+    }
+
+    private static List<Lotto> createUserLottos(Customer customer) {
+        LottoGame manualLottoGame = new LottoGame(customer, new LottoGeneratorManual());
+        LottoGame AutoLottoGame = new LottoGame(customer, new LottoGeneratorAuto());
+
+        List<Lotto> lottos = manualLottoGame.lottoGenerate();
+        AutoLottoGame.lottoGenerate().stream().forEach(x -> lottos.add(x));
+        return lottos;
     }
 
     private static WinLotto createWinLotto() {

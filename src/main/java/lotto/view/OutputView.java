@@ -12,8 +12,7 @@ public class OutputView {
     private static final String BUY_MESSAGE_FORMAT = "수동으로 %d개, 자동으로 %d개를 구매했습니다";
     private static final String PERCENT = "%";
 
-    public static void printLotteries(List<Lotto> lottos, Customer customer) {
-        printLottoAmounts(customer.getManualLottoCount(), customer.calculatorAutoLottoCount());
+    public static void printLottos(List<Lotto> lottos) {
         StringBuilder builder = new StringBuilder();
         for (Lotto lotto : lottos) {
             builder.append(lotto + NEW_LINE);
@@ -21,8 +20,9 @@ public class OutputView {
         System.out.println(builder.toString());
     }
 
-    private static void printLottoAmounts(int userLottoCount, int autoLottoCount) {
-        System.out.println(String.format(BUY_MESSAGE_FORMAT, userLottoCount, autoLottoCount));
+    public static void printLottoAmounts(Customer customer) {
+        System.out.println(String.format(
+                BUY_MESSAGE_FORMAT, customer.getManualLottoCount(), customer.calculatorAutoLottoCount()));
     }
 
     public static void printResult(Customer customer, LottoManager lottoManager) {
