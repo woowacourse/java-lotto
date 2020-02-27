@@ -1,4 +1,7 @@
+import java.util.List;
+
 import domain.GameResult;
+import domain.Lotto;
 import domain.LottoGame;
 import domain.Money;
 import view.InputView;
@@ -8,6 +11,11 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			Money purchaseMoney = new Money(InputView.inputPurchaseMoney());
+			int cnt = InputView.inputSelfNumberLottoAmount();
+			for (int i = 0 ; i< cnt;i++){
+				InputView.inputSixNumbers();
+			}
+
 			LottoGame lottoGame = new LottoGame(purchaseMoney);
 			OutputView.printLottos(lottoGame);
 

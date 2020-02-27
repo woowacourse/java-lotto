@@ -3,6 +3,7 @@ package domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import exception.LottoNumberDuplicateException;
 
@@ -17,20 +18,19 @@ public class LottoGame {
 		lottos = LottoFactory.createLottos(purchaseMoney);
 	}
 
-	public void play(String[] inputSixNumbers, String inputBonusNumber) {
+	public void play(List<Integer> inputSixNumbers, int inputBonusNumber) {
 		duplicationValidate(inputSixNumbers, inputBonusNumber);
-		winningNumbers = new Lotto(inputSixNumbers);
+		winningNumbers = new Lotto(inputSixNumbers
+			.stream()
+			.map(LottoNumber::createNumber)
+			.collect(Collectors.toList()));
 		bonusNumber = LottoNumber.createNumber(inputBonusNumber);
 	}
 
-	private void duplicationValidate(String[] inputSixNumbers, String inputBonusNumber) {
-		if (isContains(inputSixNumbers, inputBonusNumber)) {
+	private void duplicationValidate(List<Integer> inputSixNumbers, int inputBonusNumber) {
+		if (inputSixNumbers.contains(inputBonusNumber)) {
 			throw new LottoNumberDuplicateException();
 		}
-	}
-
-	private boolean isContains(String[] inputSixNumbers, String inputBonusNumber) {
-		return Arrays.asList(inputSixNumbers).contains(inputBonusNumber);
 	}
 
 	public void addRanks(Map<Rank, Integer> ranks) {

@@ -22,13 +22,6 @@ public class Lotto {
 		duplicationValidate(this.numbers);
 	}
 
-	public Lotto(String[] numbers) {
-		this(Arrays.stream(numbers)
-			.mapToInt(Integer::parseInt)
-			.mapToObj(LottoNumber::createNumber)
-			.collect(Collectors.toList()));
-	}
-
 	private void lengthValidate(List<LottoNumber> numbers) {
 		if (numbers.size() != LOTTO_LENGTH) {
 			throw new LottoLengthException();
