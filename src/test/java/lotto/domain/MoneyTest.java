@@ -6,37 +6,38 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
 
 public class MoneyTest {
-	@DisplayName("숫자가 아닌 구입금액을 입력한 경우")
-	@Test
-	void validateInteger() {
-		assertThatThrownBy(() -> new Money("학성"))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
-
 	@DisplayName("1000원 미만의 금액을 입력한 경우")
 	@Test
 	void validateOverThousand() {
-		assertThatThrownBy(() -> new Money("999"))
-			.isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> new Money(999, 0))
+				.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("1000원으로 나누기")
 	@Test
 	void divideThousand() {
-		Money money = new Money("14000");
-		assertThat(money.findBuyAmount()).isEqualTo(14);
+		Money money = new Money(14000, 0);
+		assertThat(money.divideThousand()).isEqualTo(14);
 	}
 
 	@DisplayName("수익률 계산")
 	@Test
 	void calculateIncomeRate() {
-		Money money = new Money("1000");
+		Money money = new Money(1000, 0);
 		assertThat(money.calculateIncomeRate(3000)).isEqualTo(300);
 
-		money = new Money("1000");
+		money = new Money(1000, 0);
 		assertThat(money.calculateIncomeRate(0)).isEqualTo(0);
 
-		money = new Money("10000");
+		money = new Money(10000, 0);
 		assertThat(money.calculateIncomeRate(5000)).isEqualTo(50);
+	}
+
+	@DisplayName("구입가능한 로또수 보다 큰수의 수동로또는 구입한 경우")
+	@Test
+	void validateUserLottoCount() {
+		assertThatThrownBy(() -> new Money(3000, 4))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("구입 가능한 수보다 큰 수를 입력하였습니다.");
 	}
 }

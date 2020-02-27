@@ -15,23 +15,23 @@ public class LottoFactoryTest {
 	@DisplayName("사용자가 입력한 돈에 맞게 로또 생성")
 	@Test
 	void createLotteries1() {
-        String userInputMoney = "13000";
+        int userInputMoney = 13000;
         List<Lotto> lottoList = LottoFactory
-                .createLotteries(new Money(userInputMoney), "");
+                .createLotteries(new Money(userInputMoney, 0), "");
         assertThat(lottoList.size()).isEqualTo(13);
 
-        userInputMoney = "5000";
+        userInputMoney = 5000;
         List<Lotto> lottoList2 = LottoFactory
-                .createLotteries(new Money(userInputMoney), "");
+                .createLotteries(new Money(userInputMoney, 0), "");
         assertThat(lottoList2.size()).isEqualTo(5);
     }
 
 	@DisplayName("1000원 이하의 금액을 입력했을 경우")
 	@Test
 	void createLotteries2() {
-        String userInputMoneyZero = "0";
+        int userInputMoneyZero = 0;
         assertThatThrownBy(() -> LottoFactory
-                .createLotteries(new Money(userInputMoneyZero), ""))
+                .createLotteries(new Money(userInputMoneyZero, 0), ""))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("천원 이상의 금액만 가능합니다.");
     }
@@ -40,7 +40,7 @@ public class LottoFactoryTest {
     @Test
     void nullTest() {
         assertThatThrownBy(() -> LottoFactory
-                .createLotteries(new Money(null), ""))
+                .createLotteries(null, ""))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력값이 비었습니다.");
     }

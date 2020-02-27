@@ -14,8 +14,8 @@ public class StringUtils {
         return inputWinNumber.split(LOTTO_DELIMITER);
     }
 
-    public static int ToInt(String inputUserLottoCount) {
-        InputValidator.validateNumber(inputUserLottoCount);
-        return Integer.parseInt(inputUserLottoCount);
+    public static int ToInt(String inputNumber) {
+        InputValidator.validateNumber(inputNumber);
+        return Integer.parseInt(inputNumber);
     }
 }

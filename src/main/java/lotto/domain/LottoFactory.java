@@ -28,12 +28,12 @@ public class LottoFactory {
         validate(money);
         List<Lotto> lotteries = new ArrayList<>();
         if (userLottoNumbers == null || userLottoNumbers.isEmpty()) {
-            return addAutoLotto(lotteries, money.findBuyAmount());
+            return addAutoLotto(lotteries, money.divideThousand());
         }
 
         String[] manualLotteries = StringUtils.splitLotto(userLottoNumbers);
         lotteries = createUserLotto(manualLotteries);
-        return addAutoLotto(lotteries, money.findBuyAmount() - manualLotteries.length);
+        return addAutoLotto(lotteries, money.divideThousand() - manualLotteries.length);
     }
 
     private static void validate(Money money) {

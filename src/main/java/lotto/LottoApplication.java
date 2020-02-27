@@ -12,16 +12,16 @@ import lotto.view.OutputView;
 import java.util.List;
 
 public class LottoApplication {
-    private static final String ERROR_MESSAGE_OVER_COUNT = "구입 가능한 수보다 큰 수를 입력하였습니다.";
     private static final int MIN_USER_LOTTO_COUNT = 0;
 
     public static void main(String[] args) {
-        Money money = new Money(InputView.inputMoney());
-        int userLottoCount = StringUtils.ToInt(InputView.inputUserLottoCount());
-        String userLottoNumbers = setUserLottoNumbers(userLottoCount, money);
+        int inputMoney = StringUtils.ToInt(InputView.inputMoney());
+        int inputUserLottoCount = StringUtils.ToInt(InputView.inputUserLottoCount());
+        Money money = new Money(inputMoney, inputUserLottoCount);
+        String userLottoNumbers = setUserLottoNumbers(money);
 
         List<Lotto> lotteries = LottoFactory.createLotteries(money, userLottoNumbers);
-        OutputView.printLotteries(lotteries, userLottoCount);
+        OutputView.printLotteries(lotteries, money.getUserLottoCount());
 
         WinLotto winLotto = setWinLotto();
         LottoManager lottoManager = new LottoManager(lotteries, winLotto);
@@ -34,18 +34,18 @@ public class LottoApplication {
         return new WinLotto(inputWinNumbers, InputView.inputBonusBall());
     }
 
-    private static String setUserLottoNumbers(int userLottoCount, Money money) {
-        validateUserLottoCount(userLottoCount, money);
+    private static String setUserLottoNumbers(Money money) {
+        validate(money);
         String inputUserLottoNumbers = "";
-        if (userLottoCount > MIN_USER_LOTTO_COUNT) {
-            inputUserLottoNumbers = InputView.inputUserLotto(userLottoCount);
+        if (money.getUserLottoCount() > MIN_USER_LOTTO_COUNT) {
+            inputUserLottoNumbers = InputView.inputUserLotto(money.getUserLottoCount());
         }
         return inputUserLottoNumbers;
     }
 
-    private static void validateUserLottoCount(int userLottoCount, Money money) {
-        if (userLottoCount > money.findBuyAmount()) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_OVER_COUNT);
+    private static void validate(Money money) {
+        if (money == null) {
+            throw new IllegalArgumentException();
         }
     }
 }
