@@ -35,11 +35,11 @@ public class OutputView {
 		System.out.println("-------");
 
 		for (Rank rank : Rank.values()) {
-			int matchedCount = rank.getMatchedCount();
+			String matchedCount = rank.getMessage();
 			Money winningMoney = rank.getWinningMoney();
 			int containingCount = gameResult.numberOfRank(rank);
 			System.out.println(
-				String.format("%d개 일치 (%.0f원) - %d개", matchedCount, winningMoney.getMoney(), containingCount));
+				String.format("%s (%.0f원) - %d개", matchedCount, winningMoney.getMoney(), containingCount));
 		}
 
 		System.out.println(String.format("총 수익률은 %.0f%%입니다.", gameResult.calculateProfit(purchaseMoney)));

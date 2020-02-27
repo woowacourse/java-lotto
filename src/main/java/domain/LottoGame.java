@@ -10,7 +10,7 @@ import exception.LottoNumberDuplicateException;
 
 public class LottoGame {
 	private static final int DEFAULT_VALUE = 0;
-	private static final int ONE = 1;
+	private static final int COUNT = 1;
 	private static final int LOTTO_PRICE = 1000;
 
 	private final int selfNumberLottoAmount;
@@ -22,12 +22,12 @@ public class LottoGame {
 	public LottoGame(Money purchaseMoney, int selfNumberLottoAmount) {
 		amountValidate(purchaseMoney, selfNumberLottoAmount);
 		this.selfNumberLottoAmount = selfNumberLottoAmount;
-		this.autoNumberLottoAmount = (int)(purchaseMoney.getMoney() - (selfNumberLottoAmount * 1000)) / 1000;
+		this.autoNumberLottoAmount = (int)(purchaseMoney.division(LOTTO_PRICE) - selfNumberLottoAmount);
 		this.lottos = new ArrayList<>();
 	}
 
 	public void drawSelfLottos(List<String> inputSelfNumbers) {
-		List<Lotto> selfLottos = LottoFactory.createSelfNumber(inputSelfNumbers);
+		List<Lotto> selfLottos = LottoFactory.createSelfLottos(inputSelfNumbers);
 		lottos.addAll(selfLottos);
 	}
 
@@ -65,7 +65,7 @@ public class LottoGame {
 	public void addRanks(Map<Rank, Integer> ranks) {
 		for (Lotto lotto : lottos) {
 			Rank rank = lotto.compare(winningNumbers, bonusNumber);
-			ranks.put(rank, ranks.getOrDefault(rank, DEFAULT_VALUE) + ONE);
+			ranks.put(rank, ranks.getOrDefault(rank, DEFAULT_VALUE) + COUNT);
 		}
 	}
 

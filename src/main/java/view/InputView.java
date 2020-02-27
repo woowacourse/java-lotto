@@ -44,14 +44,16 @@ public class InputView {
 		return Integer.parseInt(input);
 	}
 
+	public static int inputSelfNumberLottoAmount() {
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+		String input = scanner.nextLine();
+		validate(input);
+		return Integer.parseInt(input);
+	}
+
 	private static void validate(String input) {
 		if (input == null || input.isEmpty()) {
 			throw new IllegalArgumentException("입력이 없습니다.");
 		}
-	}
-
-	public static int inputSelfNumberLottoAmount() {
-		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-		return Integer.parseInt(scanner.nextLine());
 	}
 }
