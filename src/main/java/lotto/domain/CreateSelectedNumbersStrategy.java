@@ -32,3 +32,4 @@ public class CreateSelectedNumbersStrategy implements CreateNumbersStrategy {
 		return selectedLottoTicket;
 	}
 }
+

@@ -1,16 +1,6 @@
 package lotto;
 
-import java.util.stream.Collectors;
-
-import lotto.domain.CreateRandomTicketsStrategy;
-import lotto.domain.LottoTicketFactory;
-import lotto.domain.LottoTickets;
-import lotto.domain.Money;
-import lotto.domain.ProfitCalculator;
-import lotto.domain.PurchasingAmount;
-import lotto.domain.Rank;
-import lotto.domain.Ranks;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -27,13 +17,9 @@ public class ConsoleLottoApplication {
 		final WinningNumbers winningNumbers =
 			new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 
-		final Ranks results = new Ranks(
-			lottoTickets.stream()
-				.map(lottoTicket -> Rank.of(lottoTicket, winningNumbers))
-				.collect(Collectors.toList())
-		);
+		final Ranks results = new Ranks(lottoTickets, winningNumbers);
 
 		OutputView.printResult(results);
-		OutputView.printProfit(ProfitCalculator.calculate(inputMoney, results));
+		OutputView.printProfit(ProfitCalculator.calculate(inputMoney, results.getRanks()));
 	}
 }
