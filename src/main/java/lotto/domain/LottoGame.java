@@ -19,13 +19,13 @@ public class LottoGame {
         this.lottoRounds = lottoRounds;
     }
 
-    public static LottoGame initialize(Money money) {
-        LottoRounds lottoRounds = createAllLottoNumbers(money);
+    public static LottoGame initialize(Money money, List<LottoRound> manualLottos) {
+        LottoRounds lottoRounds = createLottoRounds(money, manualLottos);
         return new LottoGame(money, lottoRounds);
     }
 
-    private static LottoRounds createAllLottoNumbers(Money money) {
-        List<LottoRound> lottoRoundList = LottoRoundsGenerator.createLottoRounds(money);
+    private static LottoRounds createLottoRounds(Money money, List<LottoRound> manualLottos) {
+        List<LottoRound> lottoRoundList = LottoRoundsGenerator.createLottoRounds(money, manualLottos);
         return new LottoRounds(lottoRoundList);
     }
 

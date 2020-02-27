@@ -16,7 +16,7 @@ public class ConsoleLottoApplication {
     public static void main(String[] args) {
         Money money = inputPurchaseNumber();
 
-        LottoGame lottoGame = LottoGame.initialize(money);
+        LottoGame lottoGame = LottoGame.initialize(money, InputView.inputManualLottoRounds(money));
         OutputView.printAllLottoNumbers(lottoGame);
 
         GameResults gameResults = lottoGame.calculateResult(inputWinningNumbers());

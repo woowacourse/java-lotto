@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoRoundsGenerator {
-    public static List<LottoRound> createLottoRounds(Money money) {
-        List<LottoRound> lottoRoundList = new ArrayList<>();
-        for (int i = 0; i < money.calculateRound(); i++) {
+    public static List<LottoRound> createLottoRounds(Money money, List<LottoRound> manualLottoRounds) {
+        List<LottoRound> lottoRounds = new ArrayList<>(manualLottoRounds);
+        int autoLottoSize = money.calculateRound() - manualLottoRounds.size();
+        for (int i = 0; i < autoLottoSize; i++) {
             RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
             List<LottoNumber> randomNumbers = randomNumberGenerator.generateNumbers();
-            lottoRoundList.add(new LottoRound(randomNumbers));
+            lottoRounds.add(new LottoRound(randomNumbers));
         }
-        return lottoRoundList;
+        return lottoRounds;
     }
 }

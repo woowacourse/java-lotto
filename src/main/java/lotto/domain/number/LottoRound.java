@@ -2,11 +2,7 @@ package lotto.domain.number;
 
 import lotto.domain.exception.LottoNumberSizeException;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.LinkedHashSet;
+import java.util.*;
 
 
 public class LottoRound {
@@ -43,4 +39,16 @@ public class LottoRound {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoRound that = (LottoRound) o;
+        return Arrays.equals(lottoNumbers.toArray(), that.lottoNumbers.toArray());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
 }

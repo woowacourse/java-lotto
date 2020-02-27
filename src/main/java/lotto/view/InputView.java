@@ -33,8 +33,8 @@ public class InputView {
         }
     }
 
-    public static List<LottoRound> inputLottoRounds(Money money) {
-        int manualLottoSize = inputManualLottoSize();
+    public static List<LottoRound> inputManualLottoRounds(Money money) {
+        int manualLottoSize = inputManualLottoSize(money);
         List<LottoRound> lottoRounds = new ArrayList<>();
         for (int i = 0; i < manualLottoSize; i++) {
             LottoRound lottoRound = new LottoRound(inputLottoNumbers());
@@ -43,12 +43,14 @@ public class InputView {
         return Collections.unmodifiableList(lottoRounds);
     }
 
-    private static int inputManualLottoSize() {
+    private static int inputManualLottoSize(Money money) {
         try {
             String input = SCANNER.nextLine();
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            return inputManualLottoSize();
+            int manualLottoSize = Integer.parseInt(input);
+            money.validateManualLotoMoney(manualLottoSize);
+            return manualLottoSize;
+        } catch (NumberFormatException | PurchaseMoneyLackException e) {
+            return inputManualLottoSize(money);
         }
     }
 
