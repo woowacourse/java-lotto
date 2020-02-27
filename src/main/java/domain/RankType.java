@@ -11,7 +11,7 @@ public enum RankType {
     MATCH_FIVE_WITH_BONUS(5, "5개 일치, 보너스 볼 일치(30000000원) - ", value -> value * 30_000_000),
     MATCH_SIX(6, "6개 일치 (2000000000원) - ", value -> value * 2_000_000_000);
 
-    private static final int BONUS_BALL_MATCH_COUNT = 5;
+    private static final int BONUS_NUMBER_MATCH_COUNT = 5;
 
     private int number;
     private String printStr;
@@ -25,7 +25,7 @@ public enum RankType {
 
     public static RankType of(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket) {
         int correctCount = winningLottoTicket.getCorrectCount(lottoTicket);
-        if (correctCount == BONUS_BALL_MATCH_COUNT && isBonusCondition(lottoTicket, winningLottoTicket)) {
+        if (correctCount == BONUS_NUMBER_MATCH_COUNT && isBonusCondition(lottoTicket, winningLottoTicket)) {
             return MATCH_FIVE_WITH_BONUS;
         }
         return Stream.of(RankType.values())

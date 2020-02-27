@@ -30,4 +30,8 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 숫자의 개수가 잘못되었습니다.");
         }
     }
+
+    public boolean containsLottoNumber(LottoNumber lottoNumber) {
+        return lottoTicket.contains(lottoNumber);
+    }
 }

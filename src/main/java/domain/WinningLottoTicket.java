@@ -2,12 +2,9 @@ package domain;
 
 import spark.utils.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLottoTicket {
-    private static final String DELIMITER = ", ";
-
     private LottoTicket winningTicket;
     private LottoNumber bonusNumber;
 
@@ -15,15 +12,13 @@ public class WinningLottoTicket {
         validateBlank(inputWinningTicket);
         validateBlank(inputBonusNumber);
 
-        List<LottoNumber> winningTicket = createWinningTicket(inputWinningTicket);
-        validateDuplicate(winningTicket, inputBonusNumber);
+        LottoTicket winningTicket = LottoTicketGenerator.createLottoTicket(inputWinningTicket);
+        LottoNumber bonusNumber = LottoNumber.getLottoNumber(validateNumber(inputBonusNumber));
 
-        this.winningTicket = new LottoTicket(winningTicket);
-        this.bonusNumber = new LottoNumber(inputBonusNumber);
-    }
+        validateDuplicateBonusNumber(winningTicket, bonusNumber);
 
-    private String[] splitInputNumber(String input) {
-        return input.split(DELIMITER);
+        this.winningTicket = winningTicket;
+        this.bonusNumber = bonusNumber;
     }
 
     private void validateBlank(String input) {
@@ -40,20 +35,10 @@ public class WinningLottoTicket {
         }
     }
 
-    private void validateDuplicate(List<LottoNumber> winningNumber, String inputBonusNumber) {
-        int parseNumber = validateNumber(inputBonusNumber);
-        if (winningNumber.contains(LottoNumber.getLottoNumber(parseNumber))) {
+    private void validateDuplicateBonusNumber(LottoTicket winningNumber, LottoNumber bonusNumber) {
+        if (winningNumber.containsLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException("중복된 보너스 숫자를 입력하였습니다.");
         }
-    }
-
-    private List<LottoNumber> createWinningTicket(String input) {
-        List<LottoNumber> winningTicket = new ArrayList<>();
-        for (String number : splitInputNumber(input)) {
-            validateBlank(number);
-            winningTicket.add(LottoNumber.getLottoNumber(validateNumber(number)));
-        }
-        return winningTicket;
     }
 
     public int getCorrectCount(LottoTicket lottoTicket) {
@@ -63,7 +48,6 @@ public class WinningLottoTicket {
     }
 
     public boolean isMatchBonusNumber(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoTicket()
-                .contains(bonusNumber);
+        return lottoTicket.containsLottoNumber(bonusNumber);
     }
 }
