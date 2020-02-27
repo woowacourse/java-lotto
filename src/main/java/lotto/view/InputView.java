@@ -19,8 +19,8 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static Optional<ArrayList<String>> getManualLottoNumbers(LottoSize manulLottoSize) {
-        int lottoSize = manulLottoSize.getLottoSize();
+    public static Optional<ArrayList<String>> getManualLottoNumbers(LottoSize manualLottoSize) {
+        int lottoSize = manualLottoSize.getLottoSize();
         if (lottoSize == 0) {
             return Optional.empty();
         }
