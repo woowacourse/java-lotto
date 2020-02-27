@@ -12,12 +12,18 @@ public class Money {
     private final double money;
 
     public Money(double money) {
-        validateMoney(money);
+        validateMinimumMoney(money);
         this.money = money;
     }
 
-    private void validateMoney(double money) {
+    private void validateMinimumMoney(double money) {
         if (money < TICKET_PRICE) {
+            throw new PurchaseMoneyLackException(INVALID_PURCHASE_NUMBER_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public void validateManualLotoMoney(int manualLottoSize) {
+        if (calculateRound() < manualLottoSize) {
             throw new PurchaseMoneyLackException(INVALID_PURCHASE_NUMBER_EXCEPTION_MESSAGE);
         }
     }

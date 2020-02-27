@@ -1,5 +1,6 @@
 package lotto.domain.result;
 
+import lotto.domain.exception.PurchaseMoneyLackException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
     @Test
@@ -61,5 +63,14 @@ public class MoneyTest {
         Money money = new Money(9400);
         Assertions.assertThat(money.calculateRound())
                 .isEqualTo(9);
+    }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 수동_로또_구매_금액_부족할_경우() {
+        Money money = new Money(5000);
+        assertThatThrownBy(() -> {
+            money.validateManualLotoMoney(6);
+        }).isInstanceOf(PurchaseMoneyLackException.class);
     }
 }
