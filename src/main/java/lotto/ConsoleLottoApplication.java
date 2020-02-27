@@ -33,7 +33,7 @@ public class ConsoleLottoApplication {
 
     private static WinningNumbers inputWinningNumbers() {
         try {
-            List<LottoNumber> lottoNumbers = InputView.inputWinningNumbers();
+            List<LottoNumber> lottoNumbers = InputView.inputLottoNumbers();
             LottoNumber bonusNumber = InputView.inputBonusNumber();
             return new WinningNumbers(lottoNumbers, bonusNumber);
         } catch (DuplicateLottoNumberException | LottoNumberSizeException e) {

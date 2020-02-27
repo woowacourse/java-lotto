@@ -2,11 +2,10 @@ package lotto.view;
 
 import lotto.domain.exception.PurchaseMoneyLackException;
 import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoRound;
 import lotto.domain.result.Money;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -34,6 +33,16 @@ public class InputView {
         }
     }
 
+    public static List<LottoRound> inputLottoRounds(Money money) {
+        int manualLottoSize = inputManualLottoSize();
+        List<LottoRound> lottoRounds = new ArrayList<>();
+        for (int i = 0; i < manualLottoSize; i++) {
+            LottoRound lottoRound = new LottoRound(inputLottoNumbers());
+            lottoRounds.add(lottoRound);
+        }
+        return Collections.unmodifiableList(lottoRounds);
+    }
+
     private static int inputManualLottoSize() {
         try {
             String input = SCANNER.nextLine();
@@ -43,7 +52,7 @@ public class InputView {
         }
     }
 
-    public static List<LottoNumber> inputWinningNumbers() {
+    public static List<LottoNumber> inputLottoNumbers() {
         try {
             System.out.println(INPUT_WINNING_NUMBER_HEADER);
             return Arrays.stream(deleteBlankAndSplit(SCANNER.nextLine()))
@@ -52,7 +61,7 @@ public class InputView {
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             System.out.println(NUMBER_FORMAT_MISMATCH_EXCEPTION_PREFIX_MESSAGE);
-            return inputWinningNumbers();
+            return inputLottoNumbers();
         }
     }
 
