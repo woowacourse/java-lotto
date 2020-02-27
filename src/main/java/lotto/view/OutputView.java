@@ -18,8 +18,13 @@ public class OutputView {
     private static final String SUFFIX = "]";
     private static final String GAME_RESULTS_HEADER = "당첨 통계\n" + "---------";
     private static final String CORRECT_BONUS_BALL_MESSAGE = "보너스 볼 일치";
+    private static final String PURCHASE_NUMBER_NOTICE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
-    public static void printPurchaseNumber(Money money) {
+    public static void printPurchaseNumber(Money money, List<LottoRound> manualLottos) {
+        int manualLottoSize = manualLottos.size();
+        System.out.printf(PURCHASE_NUMBER_NOTICE
+                , manualLottos.size()
+                , money.calculateRound() - manualLottoSize);
         System.out.println(money.calculateRound() + PURCHASE_NUMBER_POSTFIX);
     }
 
