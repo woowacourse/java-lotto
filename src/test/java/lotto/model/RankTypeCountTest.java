@@ -2,7 +2,6 @@ package lotto.model;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import lotto.controller.LottoManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
