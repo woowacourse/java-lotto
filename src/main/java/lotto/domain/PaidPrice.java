@@ -44,7 +44,7 @@ public class PaidPrice {
         }
     }
 
-    public int getTotalLottoCount() {
+    public int getTotalLottoSize() {
         return payment / Lottos.PRICE_PER_LOTTO;
     }
 }

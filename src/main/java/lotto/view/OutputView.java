@@ -9,7 +9,7 @@ public class OutputView {
     public static final String SPLIT_DELIMETER = ",";
 
     public static void printLottoSize(PaidPrice paidPrice) {
-        System.out.println(paidPrice.getTotalLottoCount() + "개를 구매했습니다");
+        System.out.println(paidPrice.getTotalLottoSize() + "개를 구매했습니다");
     }
 
     public static void printLottoSize(LottoSize manualLottoSize, LottoSize autoLottoSize) {

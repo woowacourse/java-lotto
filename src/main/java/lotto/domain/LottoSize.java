@@ -32,7 +32,7 @@ public class LottoSize {
     }
 
     private void validateLottoSize(PaidPrice paidPrice, int lottoSize) {
-        int paidLottoSize = paidPrice.getTotalLottoCount();
+        int paidLottoSize = paidPrice.getTotalLottoSize();
 
         if (paidLottoSize >= lottoSize && lottoSize > 0) {
             return;

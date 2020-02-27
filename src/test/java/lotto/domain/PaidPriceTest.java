@@ -51,6 +51,6 @@ public class PaidPriceTest {
     void getTotalLottoCountTest() {
         int expected = 5;
         PaidPrice paidPrice = new PaidPrice("5000");
-        assertThat(paidPrice.getTotalLottoCount()).isEqualTo(expected);
+        assertThat(paidPrice.getTotalLottoSize()).isEqualTo(expected);
     }
 }

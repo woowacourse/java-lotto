@@ -9,11 +9,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
-    private static Random random;
     private static List<LottoNumber> totalRandomNumbers;
 
     static {
-        random = new Random();
         totalRandomNumbers = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
