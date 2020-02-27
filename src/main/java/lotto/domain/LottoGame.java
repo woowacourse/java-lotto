@@ -21,7 +21,14 @@ public class LottoGame {
     }
 
     private Result produceResult(List<Lotto> lottos, Money purchaseMoney) {
-        Lotto winningLotto = InputView.inputLastWeekWinningNumbers();
+        Lotto winningLotto;
+        try {
+            winningLotto = InputView.inputLastWeekWinningNumbers();
+        } catch (InvalidInputException e) {
+            OutputView.printRetryRequestWithMessage(e.getMessage());
+            winningLotto = InputView.inputLastWeekWinningNumbers();
+        }
+
         LottoNumber bonusNumber = InputView.inputBonusNumber();
         WinningRanks winningRanks = compareWithWinningNumbers(lottos, winningLotto, bonusNumber);
         return new Result(winningRanks, purchaseMoney);

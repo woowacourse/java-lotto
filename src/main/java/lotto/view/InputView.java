@@ -30,8 +30,16 @@ public class InputView {
 
     public static Lotto inputLastWeekWinningNumbers() {
         System.out.println("지난주 당첨번호을 입력해주세요.");
-        String input = scanner.nextLine();
-        return Lotto.createWinningLotto(StringUtils.parseWithDelimiter(input));
+        try {
+            String input = scanner.nextLine();
+            List<Integer> lottoNumbers = StringUtils.parseWithDelimiter(input);
+            if (lottoNumbers.size() != 6) {
+                throw new InvalidInputException(String.format("로또 번호의 개수는 %d개여야 합니다.", 6));
+            }
+            return Lotto.createWinningLotto(lottoNumbers);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("숫자가 아닌 문자를 입력하였습니다.");
+        }
     }
 
     public static int inputNumberToBuyManually(int lottosSize) {
