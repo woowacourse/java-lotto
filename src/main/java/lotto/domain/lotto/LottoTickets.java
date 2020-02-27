@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.Rank;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,13 @@ public class LottoTickets {
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
+    }
+
+    public static LottoTickets createFrom(LottoTickets manual, LottoTickets auto) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.addAll(manual.lottoTickets);
+        lottoTickets.addAll(auto.lottoTickets);
+        return new LottoTickets(lottoTickets);
     }
 
     public LottoResult getLottoResults(WinningLotto winningLotto) {

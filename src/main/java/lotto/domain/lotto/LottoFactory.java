@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.count.Count;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -31,23 +29,6 @@ public class LottoFactory {
         }
     }
 
-    public static LottoTickets publishLottoTickets(Count count) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        int lottoPurchaseCounts = count.getAutoCounts();
-
-        for (int i = START_INDEX; i < lottoPurchaseCounts; i++) {
-            lottoTickets.add(publishLottoTicketOfRandom());
-        }
-
-        return new LottoTickets(lottoTickets);
-    }
-
-    private static LottoTicket publishLottoTicketOfRandom() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        List<LottoNumber> slicedLottoNumbers = LOTTO_NUMBERS.subList(START_INDEX, LOTTO_SIZE);
-        return new LottoTicket(new HashSet<>(slicedLottoNumbers));
-    }
-
     public static LottoTicket publishLottoTicketFrom(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoFactory::publishLottoNumberFrom)
@@ -55,7 +36,13 @@ public class LottoFactory {
         return new LottoTicket(lottoNumbers);
     }
 
-    public static LottoNumber publishLottoNumberFrom(int number) {
+    public static LottoTicket publishLottoTicketOfRandom() {
+        Collections.shuffle(LOTTO_NUMBERS);
+        List<LottoNumber> slicedLottoNumbers = LOTTO_NUMBERS.subList(START_INDEX, LOTTO_SIZE);
+        return new LottoTicket(new HashSet<>(slicedLottoNumbers));
+    }
+
+    private static LottoNumber publishLottoNumberFrom(int number) {
         return LOTTO_NUMBER_MATCHER.get(number);
     }
 
