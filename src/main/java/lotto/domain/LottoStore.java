@@ -15,7 +15,7 @@ public class LottoStore {
     private static final int SUBLIST_FROM_INDEX = 0;
     private static final int SUBLIST_TO_INDEX = 6;
 
-    public List<LottoTicket> buyRandomLottoTickets(int randomTicketCount) {
+    public static List<LottoTicket> buyRandomLottoTickets(int randomTicketCount) {
         return Stream.generate(LottoStore::createRandomLottoTicket).limit(randomTicketCount)
                 .collect(toList());
     }
@@ -27,12 +27,12 @@ public class LottoStore {
         return new LottoTicket(subNumbers);
     }
 
-    public List<LottoTicket> buyManualLottoTickets(int manualTicketCount, String... inputForNumbers) {
-        if (manualTicketCount != inputForNumbers.length) {
+    public static List<LottoTicket> buyManualLottoTickets(int manualTicketCount, List<String> inputsForNumbers) {
+        if (manualTicketCount != inputsForNumbers.size()) {
             throw new LottoStoreException("수동으로 구매할 로또 티켓의 개수와 로또 번호의 개수가 일치하지 않습니다.");
         }
 
-        return Arrays.stream(inputForNumbers)
+        return inputsForNumbers.stream()
                 .map(LottoStore::generateSixNumbersFromInput)
                 .map(LottoTicket::new)
                 .collect(Collectors.toList());
