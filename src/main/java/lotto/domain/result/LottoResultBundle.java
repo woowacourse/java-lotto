@@ -10,7 +10,6 @@ import java.util.Map;
 import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
 public class LottoResultBundle {
-    private static final String RATE_PERCENT = "%";
     private static final String CUT_DIGIT_FORMAT = "0";
     private static final int PERCENTAGE = 100;
 
@@ -29,7 +28,7 @@ public class LottoResultBundle {
 
     private void addResult(Rank rank, List<Rank> ranks) {
         int matchTicketCount = (int) ranks.stream()
-                .filter(aRank -> aRank.equals(rank))
+                .filter(rank::equals)
                 .count();
         this.results.put(rank, matchTicketCount);
     }
@@ -40,7 +39,7 @@ public class LottoResultBundle {
 
         DecimalFormat decimalFormat = new DecimalFormat(CUT_DIGIT_FORMAT);
         String rate = decimalFormat.format(totalPrize / bettingMoney * PERCENTAGE);
-        return rate + RATE_PERCENT;
+        return rate + "%";
     }
 
     private int getBettingMoney() {
@@ -54,12 +53,7 @@ public class LottoResultBundle {
                 .reduce(0, Double::sum);
     }
 
-    public int getMatchCount(Rank rank) {
-        return this.results.get(rank);
-    }
-
     public int getMatchTicketCount(Rank rank) {
         return this.results.get(rank);
     }
-
 }
