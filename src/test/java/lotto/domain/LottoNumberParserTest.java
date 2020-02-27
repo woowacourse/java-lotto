@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import static lotto.domain.WinningLottoParser.*;
+import static lotto.domain.LottoNumberParser.*;
+import static lotto.domain.mock.LottoMock.*;
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
@@ -12,19 +12,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class WinningLottoParserTest {
+import lotto.domain.exception.InvalidWinningLottoException;
+import lotto.domain.lotto.LottoNumber;
+
+class LottoNumberParserTest {
 	@DisplayName("parseToLottoNumberSet에 번호 6개를 입력하면 LottoNumberSet 생성")
 	@Test
 	void parseToLottoNumberSet_StringInputWinningLotto_WinningLottoNumberSet() {
 		Set<LottoNumber> winningLottoNumbers = parseToLottoNumberSet("1, 2, 3, 4, 5, 6");
-
-		Set<LottoNumber> expected = new HashSet<>();
-		expected.add(LottoNumber.valueOf(1));
-		expected.add(LottoNumber.valueOf(2));
-		expected.add(LottoNumber.valueOf(3));
-		expected.add(LottoNumber.valueOf(4));
-		expected.add(LottoNumber.valueOf(5));
-		expected.add(LottoNumber.valueOf(6));
+		Set<LottoNumber> expected = getLottoNumberSet(1, 2, 3, 4, 5, 6);
 
 		assertThat(winningLottoNumbers).isEqualTo(expected);
 	}

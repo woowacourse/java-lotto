@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import lotto.domain.exception.InvalidLottoMoneyException;
+import lotto.domain.lotto.LottoMoney;
 
 class LottoMoneyTest {
 	@DisplayName("money 생성자에 null이나 빈 스트링 입력이 들어올 때 InvalidLottoMoneyException 발생")
@@ -63,7 +66,7 @@ class LottoMoneyTest {
 	@Test
 	void getNumberOfLotto_LottoMoney_NumberOfLotto() {
 		LottoMoney lottoMoney = new LottoMoney("2000");
-		assertThat(lottoMoney.getNumberOfLotto()).isEqualTo(2);
+		assertThat(lottoMoney.getPurchasedLottoCount()).isEqualTo(2);
 	}
 
 	@DisplayName("add에 더할 LottoMoney를 입력하면 더한 LottoMoney 반환")

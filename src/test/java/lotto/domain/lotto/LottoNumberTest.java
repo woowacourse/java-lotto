@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,6 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import lotto.domain.exception.InvalidLottoNumberException;
+import lotto.domain.lotto.LottoNumber;
 
 class LottoNumberTest {
 	@DisplayName("LottoNumber 생성자에 1이상 45이하의 정수 입력이 들어올 때 객체 생성")
