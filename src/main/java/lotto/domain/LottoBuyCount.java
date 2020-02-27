@@ -2,7 +2,11 @@ package lotto.domain;
 
 import java.util.Iterator;
 
+import lotto.domain.exception.InvalidLottoBuyCountException;
+
 public class LottoBuyCount implements Iterator<Integer> {
+	private static final int MIN = 0;
+
 	private final int fixedCount;
 	private int buyCount;
 
@@ -15,9 +19,16 @@ public class LottoBuyCount implements Iterator<Integer> {
 	}
 
 	public LottoBuyCount(LottoPurchaseMoney lottoPurchaseMoney, int buyCount) {
+		validate(buyCount);
 		lottoPurchaseMoney.spend(buyCount);
 		this.fixedCount = buyCount;
 		this.buyCount = buyCount;
+	}
+
+	private void validate(int buyCount) {
+		if (buyCount < MIN) {
+			throw new InvalidLottoBuyCountException();
+		}
 	}
 
 	@Override
