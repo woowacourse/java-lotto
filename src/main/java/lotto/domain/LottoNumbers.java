@@ -6,13 +6,20 @@ import java.util.HashSet;
 import java.util.List;
 
 public class LottoNumbers {
+	public static final int SIZE = 6;
+
 	private List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(List<LottoNumber> lottoNumbers) {
-		validateNullAndEmpty(lottoNumbers);
-		validateDuplicateNumber(lottoNumbers);
+		vailidate(lottoNumbers);
 		Collections.sort(lottoNumbers);
 		this.lottoNumbers = new ArrayList<>(lottoNumbers);
+	}
+
+	private void vailidate(List<LottoNumber> lottoNumbers) {
+		validateNullAndEmpty(lottoNumbers);
+		validateDuplicateNumber(lottoNumbers);
+		validateSizeMismatch(lottoNumbers);
 	}
 
 	private void validateNullAndEmpty(List<LottoNumber> lottoNumbers) {
@@ -21,15 +28,17 @@ public class LottoNumbers {
 		}
 	}
 
-	private void validateDuplicateNumber(List<LottoNumber> lottoNumber) {
-		boolean isDuplicate = lottoNumber.size() != new HashSet<>(lottoNumber).size();
+	private void validateDuplicateNumber(List<LottoNumber> lottoNumbers) {
+		boolean isDuplicate = lottoNumbers.size() != new HashSet<>(lottoNumbers).size();
 		if (isDuplicate) {
 			throw new IllegalArgumentException("중복된 번호가 존재합니다!");
 		}
 	}
 
-	public int size() {
-		return lottoNumbers.size();
+	private void validateSizeMismatch(List<LottoNumber> lottoNumbers) {
+		if (lottoNumbers.size() != SIZE) {
+			throw new IllegalArgumentException("로또 번호는 " + SIZE + "개여야 합니다!");
+		}
 	}
 
 	public boolean contains(LottoNumber lottoNumber) {

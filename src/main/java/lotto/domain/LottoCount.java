@@ -27,7 +27,7 @@ public class LottoCount {
 		return manualLottoCount < MINIMUM_MANUAL_LOTTO_COUNT || manualLottoCount > calculateTotalLottoCount(money);
 	}
 
-	public int calculateTotalLottoCount(Money money) {
+	private int calculateTotalLottoCount(Money money) {
 		return money.getMoney() / Money.LOTTO_PRICE;
 	}
 

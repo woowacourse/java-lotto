@@ -3,6 +3,7 @@ package lotto.domain;
 public class Money {
 	public static final int LOTTO_PRICE = 1_000;
 	private static final int MINIMUM_MONEY = 1_000;
+
 	private int money;
 
 	public Money(int money) {

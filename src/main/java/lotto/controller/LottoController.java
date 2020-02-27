@@ -42,6 +42,26 @@ public class LottoController {
 		}
 	}
 
+	private static Money readMoney() {
+		try {
+			InputView.printInsertMoney();
+			return new Money(InputUtil.inputMoney());
+		} catch (NumberFormatException | IOException e) {
+			OutputView.printWrongMoneyInput(e);
+			return readMoney();
+		}
+	}
+
+	private static int readManualLottoCount() {
+		try {
+			InputView.printInsertManualLottoCount();
+			return InputUtil.inputManualLottoCount();
+		} catch (NumberFormatException | IOException e) {
+			OutputView.printWrongManualLottoCount(e);
+			return readManualLottoCount();
+		}
+	}
+
 	private static List<Lotto> makeLottos(LottoCount lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 		List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
@@ -64,26 +84,6 @@ public class LottoController {
 		} catch (IllegalArgumentException | IOException e) {
 			OutputView.printExceptionMessage(e);
 			return readManualLottoNumbers();
-		}
-	}
-
-	private static Money readMoney() {
-		try {
-			InputView.printInsertMoney();
-			return new Money(InputUtil.inputMoney());
-		} catch (NumberFormatException | IOException e) {
-			OutputView.printWrongMoneyInput(e);
-			return readMoney();
-		}
-	}
-
-	private static int readManualLottoCount() {
-		try {
-			InputView.printInsertManualLottoCount();
-			return InputUtil.inputManualLottoCount();
-		} catch (NumberFormatException | IOException e) {
-			OutputView.printWrongManualLottoCount(e);
-			return readManualLottoCount();
 		}
 	}
 
