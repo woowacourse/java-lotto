@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.InvalidInputException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -16,7 +17,7 @@ public class PurchasePriceTest {
         assertThatThrownBy(() -> {
                     new PurchasePrice(input);
                 }
-        ).isInstanceOf(RuntimeException.class)
+        ).isInstanceOf(InvalidInputException.class)
                 .hasMessage("구입금액을 입력해 주세요.");
     }
 
@@ -27,7 +28,7 @@ public class PurchasePriceTest {
         assertThatThrownBy(() -> {
                     new PurchasePrice(input);
                 }
-        ).isInstanceOf(RuntimeException.class)
+        ).isInstanceOf(InvalidInputException.class)
                 .hasMessage("구입금액은 숫자만 입력 가능합니다.");
     }
 
@@ -38,7 +39,7 @@ public class PurchasePriceTest {
         assertThatThrownBy(() -> {
                     new PurchasePrice(input);
                 }
-        ).isInstanceOf(RuntimeException.class)
+        ).isInstanceOf(InvalidInputException.class)
                 .hasMessageEndingWith("원 이상 구매하셔야 합니다.");
     }
 }

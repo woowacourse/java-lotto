@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InvalidInputException;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -20,13 +22,13 @@ public class Lotto {
     private void checkDuplicate(List<Ball> balls) {
         Set<Ball> result = new HashSet<>(balls);
         if (result.size() != BALLS_COUNT) {
-            throw new RuntimeException("중복되는 숫자가 존재합니다.");
+            throw new InvalidInputException("중복되는 숫자가 존재합니다.");
         }
     }
 
     private void checkEmpty(List<Ball> balls) {
         if (balls.isEmpty()) {
-            throw new RuntimeException("Lotto 내부의 Ball이 존재하지 않습니다.");
+            throw new InvalidInputException("Lotto 내부의 Ball이 존재하지 않습니다.");
         }
     }
 

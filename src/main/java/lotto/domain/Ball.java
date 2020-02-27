@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InvalidInputException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +19,7 @@ public class Ball implements Comparable<Ball> {
 
     private void validate(int number) {
         if (number < MIN_NUMBER || MAX_NUMBER < number) {
-            throw new RuntimeException(String.format("%d 이상 %d 이하의 숫자만 가능합니다.", MIN_NUMBER, MAX_NUMBER));
+            throw new InvalidInputException(String.format("%d 이상 %d 이하의 숫자만 가능합니다.", MIN_NUMBER, MAX_NUMBER));
         }
     }
 

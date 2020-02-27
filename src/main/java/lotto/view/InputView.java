@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
+    private static final String COMMA = ",";
     private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() { /* prevent creating InputView instance */ }
@@ -34,7 +35,7 @@ public class InputView {
 
     public static List<String> requestManualLotto() {
         String input = scanner.nextLine();
-        return Arrays.stream(input.split(","))
+        return Arrays.stream(input.split(COMMA))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
