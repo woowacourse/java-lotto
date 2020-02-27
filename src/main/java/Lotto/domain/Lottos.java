@@ -24,9 +24,13 @@ public class Lottos {
         return Rank.getRank(hitCount, bonusNumberExist);
     }
 
-    public String getLottos() {
+    public String getLottosInOneLine() {
         return lottos.stream()
                 .map(Lotto::getLotto)
                 .collect(Collectors.joining(NEW_LINE));
+    }
+
+    public List<Lotto> getLottos() {
+        return this.lottos;
     }
 }
