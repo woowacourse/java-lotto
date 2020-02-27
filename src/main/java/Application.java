@@ -13,7 +13,7 @@ public class Application {
 	public static void main(String[] args) {
 		try {
 			LottoController.run();
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			OutputView.printExceptionMessage(e);
 		}
 	}
