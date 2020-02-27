@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
     @Test
+    @SuppressWarnings("NonAsciiCharacters")
     void 로또게임생성() {
         Money money = new Money(10000);
         List<LottoNumber> manualLottoRound1 = new ArrayList<>();
@@ -53,6 +54,7 @@ class LottoGameTest {
     }
 
     @Test
+    @SuppressWarnings("NonAsciiCharacters")
     void 로또_결과_생성() {
         LottoGame lottoGame = LottoGame.initialize(new Money(3000), Collections.emptyList());
         List<LottoNumber> winningNumberArguments = new ArrayList<>();

@@ -29,11 +29,11 @@ public class WinningNumbers {
         }
     }
 
-    public int calculateCollectNumberCount(LottoRound lottoRound) {
+    int calculateCollectNumberCount(LottoRound lottoRound) {
         return winningNumbers.calculateCorrectNumberCount(lottoRound);
     }
 
-    public boolean hasBonusNumber(LottoRound lottoNumbers) {
+    boolean hasBonusNumber(LottoRound lottoNumbers) {
         return lottoNumbers.has(bonusBall);
     }
 }

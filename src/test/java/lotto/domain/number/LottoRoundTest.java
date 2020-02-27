@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRoundTest {
-    List<LottoNumber> lottoNumberList;
+    private List<LottoNumber> lottoNumberList;
 
     @BeforeEach
     void initiate() {

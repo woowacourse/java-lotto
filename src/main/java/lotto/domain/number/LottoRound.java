@@ -24,12 +24,12 @@ public class LottoRound {
         }
     }
 
-    public boolean has(LottoNumber lottoNumber) {
+    boolean has(LottoNumber lottoNumber) {
         return this.lottoNumbers.stream()
                 .anyMatch(containsLottoNumber -> containsLottoNumber.equals(lottoNumber));
     }
 
-    public int calculateCorrectNumberCount(LottoRound lottoRound) {
+    int calculateCorrectNumberCount(LottoRound lottoRound) {
         return (int) this.lottoNumbers.stream()
                 .filter(lottoRound::has)
                 .count();

@@ -15,7 +15,7 @@ public class InputView {
     private static final String INPUT_WINNING_NUMBER_HEADER = "지난 주 당첨 번호를 입력해 주세요. \n당첨 번호 사이에 , 를 넣어주세요!";
     private static final String INPUT_BONUS_NUMBER_HEADER = "보너스 볼을 입력해 주세요.";
     private static final String NUMBER_FORMAT_MISMATCH_EXCEPTION_PREFIX_MESSAGE = "숫자를 입력해주세요.";
-    public static final String DELIMITER = ",";
+    static final String DELIMITER = ",";
     private static final String BLANK = " ";
     private static final String NO_BLANK = "";
     private static final String INPUT_MANUAL_LOTTO_ELEMENTS_HEADER = "수동으로 구매할 번호를 입력해 주세요.";
@@ -50,7 +50,7 @@ public class InputView {
         try {
             String input = SCANNER.nextLine();
             int manualLottoSize = Integer.parseInt(input);
-            money.validateManualLotoMoney(manualLottoSize);
+            money.validateManualLottoMoney(manualLottoSize);
             return manualLottoSize;
         } catch (NumberFormatException | PurchaseMoneyLackException e) {
             return inputManualLottoSize(money);

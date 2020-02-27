@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoRoundsTest {
     @Test
+    @SuppressWarnings("NonAsciiCharacters")
     void 생성자에_Null_입력() {
         assertThatThrownBy(() -> {
             LottoRounds lottoRounds = new LottoRounds(null);
@@ -19,6 +20,7 @@ class LottoRoundsTest {
     }
 
     @Test
+    @SuppressWarnings("NonAsciiCharacters")
     void 생성자에_empty_list_입력() {
         assertThatThrownBy(() -> {
             LottoRounds lottoRounds = new LottoRounds(Collections.emptyList());
@@ -26,6 +28,7 @@ class LottoRoundsTest {
     }
 
     @Test
+    @SuppressWarnings("NonAsciiCharacters")
     void 게임_결과_계산_및_출력() {
         // given
         List<LottoNumber> winningNumberArguments = new ArrayList(); // winningNumbers : 1,2,3,4,5,6

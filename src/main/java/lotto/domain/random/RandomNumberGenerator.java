@@ -18,7 +18,7 @@ public class RandomNumberGenerator {
         Collections.shuffle(lottoNumberPool);
     }
 
-    public LottoNumber generate() {
+    LottoNumber generate() {
         return lottoNumberPool.remove(0);
     }
 
