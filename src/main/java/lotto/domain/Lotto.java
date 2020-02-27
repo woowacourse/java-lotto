@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Lotto {
-    private static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
     private static final String ERROR_MESSAGE_REPEAT_NUMBER = "숫자는 중복될수 없습니다.";
     private static final String ERROR_MESSAGE_NULL_POINT_LOTTO = "입력값이 비어있습니다.";
 
@@ -29,7 +29,7 @@ public class Lotto {
         return lottoNumbers.contains(lottoNo);
     }
 
-    public int findHitCount(Lotto winLotto) {
+    public int calculateHitCount(Lotto winLotto) {
         return (int) lottoNumbers.stream()
                 .filter(x -> winLotto.contains(x))
                 .count();

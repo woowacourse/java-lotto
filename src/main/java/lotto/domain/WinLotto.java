@@ -15,7 +15,7 @@ public class WinLotto {
     }
 
     private void validate(String[] winLotto, String bonusBall) {
-        if (winLotto.length != 6) {
+        if (winLotto.length != Lotto.LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_SIZE);
         }
         for (String winNumber : winLotto) {
@@ -29,8 +29,8 @@ public class WinLotto {
         }
     }
 
-    public int findHitCount(Lotto lotto) {
-        return lotto.findHitCount(winLotto);
+    public int calculateHitCount(Lotto lotto) {
+        return lotto.calculateHitCount(winLotto);
     }
 
     public boolean isMatchBonus(Lotto lotto) {

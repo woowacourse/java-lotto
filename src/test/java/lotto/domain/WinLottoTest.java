@@ -24,17 +24,17 @@ public class WinLottoTest {
 	void compareTest() {
         Set<LottoNo> numbers = IntStream.range(1, 7)
                 .boxed()
-                .map(LottoNo::new)
-                .collect(Collectors.toSet());
-        Lotto lotto = new Lotto(numbers);
-        assertThat(winLotto.findHitCount(lotto)).isEqualTo(6);
+				.map(LottoNo::new)
+				.collect(Collectors.toSet());
+		Lotto lotto = new Lotto(numbers);
+		assertThat(winLotto.calculateHitCount(lotto)).isEqualTo(6);
 
-        numbers = IntStream.range(7, 13)
-                .boxed()
-                .map(LottoNo::new)
-                .collect(Collectors.toSet());
-        lotto = new Lotto(numbers);
-		assertThat(winLotto.findHitCount(lotto)).isEqualTo(0);
+		numbers = IntStream.range(7, 13)
+				.boxed()
+				.map(LottoNo::new)
+				.collect(Collectors.toSet());
+		lotto = new Lotto(numbers);
+		assertThat(winLotto.calculateHitCount(lotto)).isEqualTo(0);
 	}
 
 	@DisplayName("전달받은 로또에서 보너스볼과 일치하는게 있는지 테스트")

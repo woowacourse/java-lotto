@@ -28,7 +28,7 @@ public class LottoApplication {
     }
 
     private static WinLotto createWinLotto() {
-        String[] inputWinNumbers = StringUtils.splitNumber(InputView.inputWinNumber());
+        String[] inputWinNumbers = StringUtils.splitByComma(InputView.inputWinNumber());
         return new WinLotto(inputWinNumbers, InputView.inputBonusBall());
     }
 

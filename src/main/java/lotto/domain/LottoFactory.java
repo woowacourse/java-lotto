@@ -31,7 +31,7 @@ public class LottoFactory {
             return addAutoLotto(lotteries, money.divideThousand());
         }
 
-        String[] manualLotteries = StringUtils.splitLotto(userLottoNumbers);
+        String[] manualLotteries = StringUtils.splitByLineSeparator(userLottoNumbers);
         lotteries = createUserLotto(manualLotteries);
         return addAutoLotto(lotteries, money.divideThousand() - manualLotteries.length);
     }
@@ -45,7 +45,7 @@ public class LottoFactory {
     public static List<Lotto> createUserLotto(String[] manualLotteries) {
         List<Lotto> manualLotto = new ArrayList<>();
         for (String numbers : manualLotteries) {
-            Set<LottoNo> lotto = LottoUtils.toLottoNoSet(StringUtils.splitNumber(numbers));
+            Set<LottoNo> lotto = LottoUtils.toLottoNoSet(StringUtils.splitByComma(numbers));
             manualLotto.add(new Lotto(lotto));
         }
         return manualLotto;

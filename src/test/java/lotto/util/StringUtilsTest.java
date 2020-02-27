@@ -12,6 +12,6 @@ public class StringUtilsTest {
         String inputManualLotto = "1,2,3,4,5,6\n7,8,9,10,11,12";
         String[] result = new String[]{"1,2,3,4,5,6", "7,8,9,10,11,12"};
 
-        assertThat(StringUtils.splitLotto(inputManualLotto)).isEqualTo(result);
+        assertThat(StringUtils.splitByLineSeparator(inputManualLotto)).isEqualTo(result);
     }
 }
