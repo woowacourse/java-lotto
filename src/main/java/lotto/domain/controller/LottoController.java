@@ -19,11 +19,11 @@ public class LottoController {
 		LottoCount count = new LottoCount(InputView.getManualCount(), money.parseToPiece());
 		List<String> manualLottoInput = InputView.getManualLottos(count.getManualLotto());
 		Lottos lottos = LottoFactory.create(manualLottoInput, count.getAutoLotto());
-
 		OutputView.printPieces(count);
 		OutputView.printLottos(lottos);
-
-		createResult(money, lottos, createWinningLotto());
+		GameResult result = createResult(lottos, createWinningLotto());
+		OutputView.printResult(result);
+		OutputView.printProfit(result.getEarningMoney(money));
 	}
 
 	private WinningLotto createWinningLotto() {
@@ -32,9 +32,7 @@ public class LottoController {
 		return new WinningLotto(winningNumbers, bonusNumber);
 	}
 
-	private void createResult(PurchaseMoney money, Lottos lottos, WinningLotto winningLotto) {
-		GameResult result = new GameResult(winningLotto, lottos);
-		OutputView.printResult(result);
-		OutputView.printProfit(result.getEarningMoney(money));
+	private GameResult createResult(Lottos lottos, WinningLotto winningLotto) {
+		return new GameResult(winningLotto, lottos);
 	}
 }
