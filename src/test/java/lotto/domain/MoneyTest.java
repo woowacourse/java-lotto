@@ -54,7 +54,7 @@ class MoneyTest {
         Money money = new Money(bettingMoney);
 
         //when
-        int numberOfAffordableTickets = money.calculateNumberOfAffordableTickets();
+        int numberOfAffordableTickets = money.calculateAffordableTicketNumbers();
 
         //then
         assertThat(numberOfAffordableTickets).isEqualTo(expectedNumberOfTickets);

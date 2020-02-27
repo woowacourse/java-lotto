@@ -34,7 +34,7 @@ public class Money {
         return !(money < totalPrice);
     }
 
-    public int calculateNumberOfAffordableTickets() {
+    public int calculateAffordableTicketNumbers() {
         return money / LOTTO_PRICE;
     }
 
