@@ -14,18 +14,18 @@ import java.util.stream.Collectors;
  * 날짜 : 2020/02/19
  */
 public class LottoFactory {
-	private static Map<LottoType, LottoCreator> creators = new HashMap<>();
+	private static Map<LottoType, LottoCreateStrategy> creators = new HashMap<>();
 	private static List<LottoNumber> allLottoNumbers = LottoNumber.getLottoNumberCache();
 
 	static {
-		creators.put(LottoType.MANUAL_LOTTO, new ManualLottoCreator());
-		creators.put(LottoType.AUTO_LOTTO, new AutoLottoCreator());
-		creators.put(LottoType.WINNING_LOTTO, new ManualLottoCreator());
+		creators.put(LottoType.MANUAL_LOTTO, new ManualLottoCreateStrategy());
+		creators.put(LottoType.AUTO_LOTTO, new AutoLottoCreatorStrategy());
+		creators.put(LottoType.WINNING_LOTTO, new ManualLottoCreateStrategy());
 	}
 
 	public static Lotto createAutoLotto(final LottoType lottoType) {
 		Objects.requireNonNull(lottoType);
-		LottoCreator lottoCreator = creators.get(lottoType);
+		LottoCreateStrategy lottoCreator = creators.get(lottoType);
 		Collections.shuffle(allLottoNumbers);
 
 		List<LottoNumber> lottoNumbers = allLottoNumbers.stream()
@@ -37,19 +37,19 @@ public class LottoFactory {
 
 	public static Lotto createManualLotto(final LottoType lottoType, final List<LottoNumber> inputLottoNumbers) {
 		Objects.requireNonNull(lottoType);
-		LottoCreator lottoCreator = creators.get(lottoType);
+		LottoCreateStrategy lottoCreator = creators.get(lottoType);
 		return lottoCreator.create(inputLottoNumbers);
 	}
 }
 
-class ManualLottoCreator implements LottoCreator {
+class ManualLottoCreateStrategy implements LottoCreateStrategy {
 	@Override
 	public Lotto create(List<LottoNumber> lottoNumbers) {
 		return new Lotto(lottoNumbers);
 	}
 }
 
-class AutoLottoCreator implements LottoCreator {
+class AutoLottoCreatorStrategy implements LottoCreateStrategy {
 	@Override
 	public Lotto create(final List<LottoNumber> lottoNumbers) {
 		return new Lotto(lottoNumbers);

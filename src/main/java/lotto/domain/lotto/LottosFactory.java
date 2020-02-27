@@ -30,10 +30,10 @@ public class LottosFactory {
 	}
 
 	public static Lottos createAutoLottos(final int amountOfLottos) {
-		List<Lotto> paidLottos = new ArrayList<>();
+		List<Lotto> autoLottos = new ArrayList<>();
 		for (int i = 0; i < amountOfLottos; i++) {
-			paidLottos.add(LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO));
+			autoLottos.add(LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO));
 		}
-		return new Lottos(paidLottos);
+		return new Lottos(autoLottos);
 	}
 }
