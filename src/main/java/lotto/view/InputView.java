@@ -11,14 +11,21 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottosGenerator;
 import lotto.domain.Money;
 import lotto.utils.StringUtils;
+import lotto.view.errors.InvalidInputException;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static Money inputPurchaseAmount() {
         System.out.println("구입금액을 입력해주세요");
+        try {
+            return new Money(StringUtils.parseInt(scanner.nextLine()));
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("숫자가 아닌 문자를 입력하였습니다.");
+        } catch (IllegalArgumentException e) {
+            throw new InvalidInputException(e.getMessage());
+        }
 
-        return new Money(StringUtils.parseInt(scanner.nextLine()));
     }
 
     public static Lotto inputLastWeekWinningNumbers() {

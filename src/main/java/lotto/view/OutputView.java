@@ -8,6 +8,10 @@ import lotto.domain.*;
 
 public class OutputView {
 
+    public static void printRetryRequestWithMessage(String message) {
+        System.out.println(String.format("다음과 같은 이유로 다시 시도해 주세요 - %s", message));
+    }
+
     public static void printLottosSize(int lottosSize) {
         System.out.println(String.format("%d개를 구매했습니다.", lottosSize));
     }

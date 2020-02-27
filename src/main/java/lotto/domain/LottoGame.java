@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import lotto.view.InputView;
 import lotto.view.OutputView;
+import lotto.view.errors.InvalidInputException;
 
 public class LottoGame {
 
@@ -65,10 +66,14 @@ public class LottoGame {
     }
 
     private Money inputPurchaseAmount() {
-        // 구매금액 받아서 받은거 보여주기
-        Money purchaseAmount = InputView.inputPurchaseAmount();
-        OutputView.printLottosSize(purchaseAmount.toLottosSize());
-        return purchaseAmount;
+        try {
+            Money purchaseAmount = InputView.inputPurchaseAmount();
+            OutputView.printLottosSize(purchaseAmount.toLottosSize());
+            return purchaseAmount;
+        } catch (InvalidInputException e) {
+            OutputView.printRetryRequestWithMessage(e.getMessage());
+            return inputPurchaseAmount();
+        }
     }
 
 }
