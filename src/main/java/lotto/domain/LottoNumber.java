@@ -2,8 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.domain.NumberValidator.validateIfEmptyValueThenInvokeException;
-import static lotto.domain.NumberValidator.validateIfNotNumberThenInvokeException;
+import static lotto.domain.NumberValidator.validateNullAndEmptyValue;
+import static lotto.domain.NumberValidator.validateNumberFormat;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_VALUE = 1;
@@ -25,13 +25,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static void validate(String number) {
-        validateIfEmptyValueThenInvokeException(number, "번호를 입력하지 않으셨습니다.");
-        validateIfNotNumberThenInvokeException(number, "숫자만 입력하시기 바랍니다.");
-        validateIfNotInRangeThenInvokeException(number, String.format("%d 이상 %d 이하의 숫자만 입력 가능합니다.", MIN_VALUE,
-                                                                      MAX_VALUE));
+        validateNullAndEmptyValue(number, "번호를 입력하지 않으셨습니다.");
+        validateNumberFormat(number, "숫자만 입력하시기 바랍니다.");
+        validateNumberRange(number, String.format("%d 이상 %d 이하의 숫자만 입력 가능합니다.", MIN_VALUE,
+                                                  MAX_VALUE));
     }
 
-    private static void validateIfNotInRangeThenInvokeException(String number, String message) {
+    private static void validateNumberRange(String number, String message) {
         int num = Integer.parseInt(number);
         if (num < MIN_VALUE || MAX_VALUE < num) {
             throw new RuntimeException(message);

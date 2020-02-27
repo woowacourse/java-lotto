@@ -13,10 +13,10 @@ public class Lotto {
     }
 
     public static Lotto from(String[] numbers) {
-        validateEmptyValue(numbers);
+        validateNullAndEmptyValue(numbers);
         validateNumbersCount(numbers);
         List<LottoNumber> lottoNumbers = createLottoNumbers(numbers);
-        validateDuplicatedNumbers(lottoNumbers);
+        validateDuplicatedInNumbers(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 
@@ -24,7 +24,7 @@ public class Lotto {
         return new Lotto(LottoFactory.createLottoNumbers());
     }
 
-    private static void validateEmptyValue(String[] number) {
+    private static void validateNullAndEmptyValue(String[] number) {
         if (number == null || number.length == 0) {
             throw new RuntimeException("번호를 입력하지 않으셨습니다.");
         }
@@ -44,7 +44,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    private static void validateDuplicatedNumbers(List<LottoNumber> lottoNumbers) {
+    private static void validateDuplicatedInNumbers(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> numbers = new HashSet<>(lottoNumbers);
         if (numbers.size() != LOTTO_NUMBERS_COUNT) {
             throw new RuntimeException("중복된 숫자가 입력되었습니다.");

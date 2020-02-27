@@ -9,11 +9,11 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(LottoCount lottoCount, List<String[]> manualLottos) {
-        validate(lottoCount, manualLottos);
+        validateNull(lottoCount, manualLottos);
         this.lottos = createLottos(lottoCount, manualLottos);
     }
 
-    private static void validate(LottoCount lottoCount, List<String[]> manualLottos) {
+    private static void validateNull(LottoCount lottoCount, List<String[]> manualLottos) {
         if (lottoCount == null || manualLottos == null) {
             throw new RuntimeException("Lottos 생성자의 매개변수로 null이 입력되었습니다.");
         }
