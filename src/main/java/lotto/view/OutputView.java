@@ -1,0 +1,27 @@
+package lotto.view;
+
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.SerialLottoNumber;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.LottoTickets;
+import lotto.domain.result.Rank;
+
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class OutputView {
+	public static void printExceptionMessage(String message) {
+		System.out.println(message);
+	}
+
+	public static void printLottoTicketsCount(int manualTicketCount, int autoTicketCount) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("수동으로 ")
+				.append(manualTicketCount)
+				.append("장, 자동으로 ")
+				.append(autoTicketCount)
+				.append("장 구매했습니다.");
+
+		System.out.println(stringBuilder.toString());
+	}
+}
