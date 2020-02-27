@@ -1,10 +1,6 @@
 package lotto;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import lotto.domain.Lotto;
+import lotto.domain.LottoBuyCount;
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchaseMoney;
@@ -18,21 +14,14 @@ import lotto.view.OutputView;
 public class LottoApplication {
 	public static void main(String[] args) {
 		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(InputView.inputPurchaseMoney());
-		Lottos lottos = buyLottos(lottoPurchaseMoney);
+		LottoBuyCount manualBuyCount = new LottoBuyCount(lottoPurchaseMoney, InputView.inputManualLottoCount());
+		LottoBuyCount autoBuyCount = new LottoBuyCount(lottoPurchaseMoney);
+		Lottos lottos = new Lottos(LottoStore.buyAutoAndManual(autoBuyCount, manualBuyCount,
+				InputView.inputManualLotto(manualBuyCount.getValue())));
+		OutputView.printBuyLottos(manualBuyCount.getValue(), autoBuyCount.getValue(), lottos);
 		WinningLotto winningLotto = new WinningLotto(LottoFactory.create(InputView.inputWinningLotto()),
 				LottoNumber.of(InputView.inputWinningLottoBonus()));
 		LottoStatistics lottoStatistics = new LottoStatistics(lottoPurchaseMoney, lottos.match(winningLotto));
 		OutputView.printStatistics(lottoStatistics);
-	}
-
-	private static Lottos buyLottos(LottoPurchaseMoney lottoPurchaseMoney) {
-		List<Lotto> manualLottos = LottoStore.buy(lottoPurchaseMoney,
-				InputView.inputManualLotto(Integer.parseInt(InputView.inputManualLottoCount())));
-		List<Lotto> autoLottos = LottoStore.buy(lottoPurchaseMoney);
-		Lottos lottos = Stream.concat(manualLottos.stream(), autoLottos.stream())
-				.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
-		OutputView.printBuyCount(manualLottos.size(), autoLottos.size());
-		OutputView.printLottos(lottos);
-		return lottos;
 	}
 }

@@ -1,11 +1,9 @@
 package lotto.domain;
 
-import java.util.Iterator;
-
 import lotto.domain.exception.InvalidLottoPurchaseMoneyException;
 import lotto.domain.exception.NotEnoughMoneyException;
 
-public class LottoPurchaseMoney implements Iterator<Integer> {
+public class LottoPurchaseMoney {
 	private static final int LOTTO_PRICE = 1_000;
 	private static final int NO_SPEND = 0;
 
@@ -40,6 +38,10 @@ public class LottoPurchaseMoney implements Iterator<Integer> {
 		return Integer.parseInt(lottoPurchaseMoney) < LOTTO_PRICE;
 	}
 
+	public int getRemainingBuyCount() {
+		return (lottoPurchaseMoney - spendMoney) / LOTTO_PRICE;
+	}
+
 	public int getBuyCount() {
 		return lottoPurchaseMoney / LOTTO_PRICE;
 	}
@@ -54,15 +56,5 @@ public class LottoPurchaseMoney implements Iterator<Integer> {
 			throw new NotEnoughMoneyException();
 		}
 		spendMoney += price;
-	}
-
-	@Override
-	public boolean hasNext() {
-		return spendMoney < lottoPurchaseMoney;
-	}
-
-	@Override
-	public Integer next() {
-		return spendMoney += LOTTO_PRICE;
 	}
 }

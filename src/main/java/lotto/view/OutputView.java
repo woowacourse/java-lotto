@@ -41,4 +41,9 @@ public class OutputView {
 		}
 		System.out.printf("%d 개 일치(%d원) - %d개\n", rank.getMatchCount(), rank.getWinnings(), count);
 	}
+
+	public static void printBuyLottos(int manualLottoCount, int autoLottoCount, Lottos lottos) {
+		printBuyCount(manualLottoCount, autoLottoCount);
+		printLottos(lottos);
+	}
 }
