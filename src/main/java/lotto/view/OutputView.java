@@ -1,10 +1,12 @@
 package lotto.view;
 
 import lotto.domain.LottoGame;
-import lotto.domain.number.LottoRounds;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoRound;
-import lotto.domain.result.*;
+import lotto.domain.number.LottoRounds;
+import lotto.domain.result.GameResult;
+import lotto.domain.result.GameResults;
+import lotto.domain.result.Money;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
