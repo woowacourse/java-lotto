@@ -4,16 +4,16 @@ import lotto.domain.errors.ErrorMessage;
 import lotto.utils.NumberUtils;
 
 public class ManualPurchaseCount {
-    private int purchasedCount;
+    private final int purchasedCount;
 
-    public ManualPurchaseCount(String userInputCount, Payment payment) {
+    public ManualPurchaseCount(final String userInputCount, final Payment payment) {
         int purchasedCount = NumberUtils.parseNumber(userInputCount);
         validateLessThanLottoCount(purchasedCount, payment);
         validatePositiveNumber(purchasedCount);
         this.purchasedCount = purchasedCount;
     }
 
-    public static void validateLessThanLottoCount(int manualCount, Payment payment) {
+    public static void validateLessThanLottoCount(final int manualCount, final Payment payment) {
         if (manualCount > payment.getPurchasedCount()) {
             ErrorMessage nowErrorMessage = ErrorMessage.MANUAL_COUNT_OVER_TOTAL;
             throw new IllegalArgumentException(nowErrorMessage.getMessage());

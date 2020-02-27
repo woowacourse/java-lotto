@@ -15,7 +15,7 @@ public class UserInputNumberGenerator implements NumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> generateNumbers(String userInput) {
+    public List<LottoNumber> generateNumbers(final String userInput) {
         List<LottoNumber> winningNumbers = new ArrayList<>();
         String[] userInputs = userInput.split(DELIMITER);
         for (String input : userInputs) {

@@ -68,7 +68,7 @@ public class Results {
         return summary;
     }
 
-    private int getCount(Map<WinningInfo, Integer> summary, Result result) {
+    private int getCount(final Map<WinningInfo, Integer> summary, final Result result) {
         WinningInfo winningInfo = result.getWinningInfo();
 
         if (summary.containsKey(winningInfo)) {

@@ -11,13 +11,13 @@ public class ManualPurchase {
 
     private List<LottoTicket> manualTickets = new ArrayList<>();
 
-    public ManualPurchase(ManualPurchaseCount manualPurchaseCount, List<String> manualNumbers) {
-        NumberGenerator numberGenerator = new UserInputNumberGenerator();
-        generateManualTicketList(manualNumbers, numberGenerator);
+    public ManualPurchase(final ManualPurchaseCount manualPurchaseCount, final List<String> manualNumbers) {
+        generateManualTicketList(manualNumbers);
         this.manualPurchaseCount = manualPurchaseCount;
     }
 
-    private void generateManualTicketList(List<String> manualNumbers, NumberGenerator numberGenerator) {
+    private void generateManualTicketList(final List<String> manualNumbers) {
+        NumberGenerator numberGenerator = new UserInputNumberGenerator();
         for (String manualNumber : manualNumbers) {
             manualTickets.add(new LottoTicket(numberGenerator.generateNumbers(manualNumber)));
         }

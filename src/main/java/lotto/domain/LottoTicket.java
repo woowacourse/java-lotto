@@ -16,7 +16,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static void validateNumberCount(List<LottoNumber> lottoNumbers) {
+    public static void validateNumberCount(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             ErrorMessage nowErrorMessage = ErrorMessage.NUMBER_COUNT_NOT_SIX;
             throw new IllegalArgumentException(nowErrorMessage.getMessage());

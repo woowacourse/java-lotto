@@ -7,5 +7,5 @@ import java.util.List;
 public interface NumberGenerator {
     List<LottoNumber> generateNumbers();
 
-    List<LottoNumber> generateNumbers(String Input);
+    List<LottoNumber> generateNumbers(final String Input);
 }

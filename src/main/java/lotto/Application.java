@@ -23,7 +23,7 @@ public class Application {
         OutputView.printResults(new Results(lottoTickets, winningLotto));
     }
 
-    private static ManualPurchaseCount generateManualPurchaseCount(Payment payment) {
+    private static ManualPurchaseCount generateManualPurchaseCount(final Payment payment) {
         try {
             return new ManualPurchaseCount(InputView.getManualCount(), payment);
         } catch (IllegalArgumentException exception) {
@@ -32,7 +32,7 @@ public class Application {
         }
     }
 
-    private static ManualPurchase generateManualPurchase(ManualPurchaseCount manualPurchaseCount) {
+    private static ManualPurchase generateManualPurchase(final ManualPurchaseCount manualPurchaseCount) {
         try {
             final List<String> manualLottoInput = getManualInput(manualPurchaseCount);
             return new ManualPurchase(manualPurchaseCount, manualLottoInput);
@@ -42,7 +42,7 @@ public class Application {
         }
     }
 
-    private static List<String> getManualInput(ManualPurchaseCount manualPurchaseCount) {
+    private static List<String> getManualInput(final ManualPurchaseCount manualPurchaseCount) {
         if (manualPurchaseCount.getPurchasedCount() > 0) {
             return InputView.getManualLottoNumbers(manualPurchaseCount);
         }

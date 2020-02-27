@@ -21,7 +21,7 @@ public class RandomNumberGenerator implements NumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> generateNumbers(String Input) {
+    public List<LottoNumber> generateNumbers(final String Input) {
         return Collections.emptyList();
     }
 }

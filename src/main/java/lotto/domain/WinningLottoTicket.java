@@ -7,20 +7,20 @@ import java.util.List;
 public class WinningLottoTicket extends LottoTicket {
     private LottoNumber bonusNumber;
 
-    public WinningLottoTicket(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public WinningLottoTicket(final List<LottoNumber> winningNumbers, final LottoNumber bonusNumber) {
         super(winningNumbers);
         validateDistinctBonus(super.lottoNumbers, bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public static void validateDistinctBonus(List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
+    public static void validateDistinctBonus(final List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
         if (isBonusNumberAlreadyExist(lottoNumbers, bonusNumber)) {
             ErrorMessage nowErrorMessage = ErrorMessage.DUPLICATE_NUMBER;
             throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 
-    private static boolean isBonusNumberAlreadyExist(List<LottoNumber> lottoNumbers, LottoNumber inputBonusNumber) {
+    private static boolean isBonusNumberAlreadyExist(final List<LottoNumber> lottoNumbers, final LottoNumber inputBonusNumber) {
         return lottoNumbers.stream()
                 .anyMatch(inputBonusNumber::equals);
     }
