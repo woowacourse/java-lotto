@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.util.InvalidMoneyException;
+import lotto.exception.InvalidMoneyException;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;

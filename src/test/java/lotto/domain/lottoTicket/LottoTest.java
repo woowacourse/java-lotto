@@ -1,8 +1,8 @@
 package lotto.domain.lottoTicket;
 
+import lotto.exception.DuplicationLottoException;
+import lotto.exception.InvalidSizeLottoException;
 import lotto.util.ConvertInput;
-import lotto.util.DuplicationLottoException;
-import lotto.util.InvalidSizeLottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

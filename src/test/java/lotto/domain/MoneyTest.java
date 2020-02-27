@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.util.InvalidMoneyException;
+import lotto.exception.InvalidMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

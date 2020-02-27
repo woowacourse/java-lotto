@@ -1,4 +1,4 @@
-package lotto.util;
+package lotto.exception;
 
 public class InvalidBonusNumberException extends RuntimeException {
     public InvalidBonusNumberException() {

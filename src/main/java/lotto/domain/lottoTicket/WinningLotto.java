@@ -1,6 +1,6 @@
 package lotto.domain.lottoTicket;
 
-import lotto.util.InvalidBonusNumberException;
+import lotto.exception.InvalidBonusNumberException;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package lotto.util;
+package lotto.exception;
 
 public class DuplicationLottoException extends RuntimeException {
     public DuplicationLottoException() {
