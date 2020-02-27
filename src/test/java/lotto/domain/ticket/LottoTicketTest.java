@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -35,11 +36,11 @@ class LottoTicketTest {
     @ParameterizedTest
     @CsvSource(value = {"1,true", "7,false"})
     void name(int number, boolean expectedResult) {
-        LottoMachine lottoMachine = new LottoMachine();
-
         List<Integer> manualNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        LottoTicket ticket = lottoMachine.createOneTicket(manualNumbers);
+        LottoMachine manualMachine = new ManualLottoMachine(new ArrayList<>(Arrays.asList(manualNumbers)));
+
+        LottoTicket ticket = manualMachine.createOneTicket();
 
         LottoBall lottoBall = LottoBallFactory.getLottoBallByNumber(number);
 
