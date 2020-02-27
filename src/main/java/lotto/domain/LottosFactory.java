@@ -12,27 +12,70 @@ import java.util.List;
  * 날짜 : 2020/02/21
  */
 public class LottosFactory {
-	private LottosFactory() {}
 
-	public static Lottos createLottosAuto(Money money) {
-		validateMoney(money);
+    private LottosFactory() {
+    }
 
-		int amountOfLottos = calculateAmountOfLottos(money);
-		List<Lotto> paidLotto = new ArrayList<>();
+    public static Lottos createLottosAuto(Money money) {
+        validateMoney(money);
 
-		for (int i = 0; i < amountOfLottos; i++) {
-			paidLotto.add(Lotto.createLottoAuto());
-		}
-		return new Lottos(paidLotto);
-	}
+        int amountOfLottos = calculateAmountOfLottos(money);
+        List<Lotto> paidLotto = new ArrayList<>();
 
-	private static void validateMoney(Money inputMoney) {
-		if (inputMoney.getMoney() < Lotto.LOTTO_PRICE) {
-			throw new IllegalArgumentException(Lotto.LOTTO_PRICE + "원 이상 입력해주세요.");
-		}
-	}
+        for (int i = 0; i < amountOfLottos; i++) {
+            paidLotto.add(Lotto.createLottoAuto());
+        }
+        return new Lottos(paidLotto);
+    }
 
-	private static int calculateAmountOfLottos(Money money) {
-		return money.getMoney() / Lotto.LOTTO_PRICE;
-	}
+    public static Lottos createLottosManual(Money money, List<Integer>... lottosInput) {
+        validateMoney(money);
+
+        int amountOfLottos = calculateAmountOfLottos(money);
+        int amountOfManualLottos = lottosInput.length;
+        checkNumberOfManualLottosLegal(amountOfLottos, amountOfManualLottos);
+
+        List<Lotto> paidLotto = new ArrayList<>();
+        paidLotto.addAll(makeLottoListManual(lottosInput));
+        paidLotto.addAll(makeLottoListAuto(amountOfLottos - amountOfManualLottos));
+        return new Lottos(paidLotto);
+    }
+
+    private static void checkNumberOfManualLottosLegal(int totalLottosAmount, int manualLottosAmount) {
+        if (manualLottosAmount > totalLottosAmount) {
+            throw new IllegalArgumentException(
+                "수동으로 구매할 로또의 갯수가 총 구매할 로또 갯수보다 클 수 없습니다."
+            );
+        }
+    }
+
+    private static List<Lotto> makeLottoListManual(List<Integer>... lottosInput) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (List<Integer> lotto : lottosInput) {
+            lottos.add(Lotto.createLottoManual(lotto));
+        }
+
+        return lottos;
+    }
+
+    private static List<Lotto> makeLottoListAuto(int amountOfAutoLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < amountOfAutoLottos; i++) {
+            lottos.add(Lotto.createLottoAuto());
+        }
+
+        return lottos;
+    }
+
+    private static void validateMoney(Money inputMoney) {
+        if (inputMoney.getMoney() < Lotto.LOTTO_PRICE) {
+            throw new IllegalArgumentException(Lotto.LOTTO_PRICE + "원 이상 입력해주세요.");
+        }
+    }
+
+    private static int calculateAmountOfLottos(Money money) {
+        return money.getMoney() / Lotto.LOTTO_PRICE;
+    }
 }
