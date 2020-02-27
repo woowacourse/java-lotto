@@ -6,16 +6,16 @@ import lotto.view.OutputView;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        PurchasePrice purchasePrice = new PurchasePrice(InputView.requestPurchasePriceInput());
+        PurchasePrice purchasePrice = new PurchasePrice(InputView.requestPurchasePrice());
         int lottoCount = purchasePrice.calculateLottoCount();
         OutputView.printLottoCount(lottoCount);
         Lottos lottos = new Lottos(LottoGenerator.generate(lottoCount));
         OutputView.printLottos(lottos);
 
-        WinningBalls winningBalls = new WinningBalls(InputView.requestWinningNumbersInput());
-        BonusBall bonusBall = new BonusBall(InputView.requestBonusNumberInput(), winningBalls);
+        WinningLotto winningLotto =
+                new WinningLotto(InputView.requestWinningNumbers(), InputView.requestBonusNumber());
 
-        Results results = new Results(lottos, winningBalls, bonusBall);
+        Results results = new Results(lottos, winningLotto);
         OutputView.printLottoResult(results, purchasePrice);
     }
 }

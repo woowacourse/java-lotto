@@ -7,17 +7,17 @@ public class InputView {
 
     private InputView() { /* prevent creating InputView instance */ }
 
-    public static String requestPurchasePriceInput() {
+    public static String requestPurchasePrice() {
         System.out.println("구입금액을 입력해 주세요.");
         return scanner.nextLine();
     }
 
-    public static String requestWinningNumbersInput() {
+    public static String requestWinningNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
 
-    public static String requestBonusNumberInput() {
+    public static String requestBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextLine();
     }

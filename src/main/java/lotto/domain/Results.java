@@ -10,14 +10,14 @@ public class Results {
 
     private final Map<MatchResult, Integer> lottoResults;
 
-    public Results(Lottos lottos, WinningBalls winningBalls, BonusBall bonusBall) {
-        this.lottoResults = createMatchResults(lottos, winningBalls, bonusBall);
+    public Results(Lottos lottos, WinningLotto winningLotto) {
+        this.lottoResults = createMatchResults(lottos, winningLotto);
     }
 
-    public static Map<MatchResult, Integer> createMatchResults(Lottos lottos, WinningBalls winningBalls, BonusBall bonusBall) {
+    public static Map<MatchResult, Integer> createMatchResults(Lottos lottos, WinningLotto winningLotto) {
         Map<MatchResult, Integer> matchResults = setUpMatchResults();
         for (Lotto lotto : lottos.getLottos()) {
-            MatchResult lottoMatchResult = MatchResult.findMatchResult(lotto, winningBalls, bonusBall);
+            MatchResult lottoMatchResult = MatchResult.findMatchResult(lotto, winningLotto);
             updateMatchResults(matchResults, lottoMatchResult);
         }
         return matchResults;

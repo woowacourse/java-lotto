@@ -25,9 +25,9 @@ public enum MatchResult {
         this.prize = prize;
     }
 
-    public static MatchResult findMatchResult(Lotto lotto, WinningBalls winningBalls, BonusBall bonusBall) {
-        int sameNumberCount = countsOfDuplicates(lotto, winningBalls);
-        boolean isBonus = isFiveMatchWithBonusBall(sameNumberCount, lotto, bonusBall);
+    public static MatchResult findMatchResult(Lotto lotto, WinningLotto winningLotto) {
+        int sameNumberCount = countsOfDuplicates(lotto, winningLotto.getWinningBalls());
+        boolean isBonus = isFiveMatchWithBonusBall(sameNumberCount, lotto, winningLotto.getBonusBall());
         return MatchResult.of(sameNumberCount, isBonus);
     }
 
