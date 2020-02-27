@@ -31,18 +31,7 @@ public class LottoFactory {
         }
     }
 
-    public static LottoTickets publishLottoTickets(Count count) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        int lottoPurchaseCounts = count.getAutoCounts();
-
-        for (int i = START_INDEX; i < lottoPurchaseCounts; i++) {
-            lottoTickets.add(publishLottoTicketOfRandom());
-        }
-
-        return new LottoTickets(lottoTickets);
-    }
-
-    private static LottoTicket publishLottoTicketOfRandom() {
+    public static LottoTicket publishLottoTicketOfRandom() {
         Collections.shuffle(LOTTO_NUMBERS);
         List<LottoNumber> slicedLottoNumbers = LOTTO_NUMBERS.subList(START_INDEX, LOTTO_SIZE);
         return new LottoTicket(new HashSet<>(slicedLottoNumbers));

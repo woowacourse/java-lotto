@@ -11,10 +11,14 @@ import java.util.List;
 
 public class OutputView {
 
+    private static String PURCHASE_LOTTO_FORMATTED_STRING = "로또를 %d장 구매했습니다.";
+    private static String SECOND_RANK_FORMATTED_STRING = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
+    private static String RANK_FORMATTED_STRING = "%d개 일치 (%d원) - %d개";
+    private static String PROFIT_FORMATTED_STRING = "총 수익률은 %0.f%%입니다.";
+
     public static void printLottoTickets(LottoTickets lottoTickets) {
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
-        System.out.println("로또를 " + lottoTicketList.size() + "장 구매했습니다.");
-
+        System.out.println(String.format(PURCHASE_LOTTO_FORMATTED_STRING, lottoTicketList.size()));
         lottoTicketList.forEach(System.out::println);
     }
 
@@ -22,22 +26,19 @@ public class OutputView {
         Arrays.stream(Rank.values())
                 .filter(rank -> rank.isNot(Rank.MISS))
                 .forEach(rank ->
-                        System.out.println(rankToFullString(lottoResult, rank)));
+                        System.out.println(rankToString(lottoResult, rank)));
     }
 
-    private static String rankToFullString(LottoResult lottoResult, Rank rank) {
-        return rankToString(rank) + lottoResult.count(rank) + "개";
-    }
-
-    private static String rankToString(Rank rank) {
+    private static String rankToString(LottoResult lottoResult, Rank rank) {
         if (rank == Rank.SECOND) {
-            return rank.getCountOfMatches() + "개 일치, 보너스볼 일 (" + rank.getWinningMoney() + "원) - ";
+            return String.format(SECOND_RANK_FORMATTED_STRING,
+                    rank.getCountOfMatches(), rank.getWinningMoney(), lottoResult.count(rank));
         }
-        return rank.getCountOfMatches() + "개 일치 (" + rank.getWinningMoney() + "원) - ";
+        return String.format(RANK_FORMATTED_STRING, rank.getCountOfMatches(), rank.getWinningMoney(), lottoResult.count(rank));
     }
 
     public static void printProfit(LottoResult lottoResult, LottoMoney lottoMoney) {
         double profit = lottoResult.getProfit(lottoMoney);
-        System.out.println(String.format("총 수익률은 %.0f%%입니다.", profit));
+        System.out.println(String.format(PROFIT_FORMATTED_STRING, profit));
     }
 }
