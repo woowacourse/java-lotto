@@ -7,6 +7,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Application {
     public static void main(String args[]) {
@@ -22,9 +23,9 @@ public class Application {
         PaidPrice paidPrice = new PaidPrice(InputView.getPayment());
         LottoSize manualLottoSize = new LottoSize(paidPrice, InputView.getManualLottoSize());
         LottoSize autoLottoSize = new LottoSize(paidPrice,
-                paidPrice.getTotalLottoCount() - manualLottoSize.getLottoSize());
+                paidPrice.getTotalLottoSize() - manualLottoSize.getLottoSize());
 
-        ArrayList<String> manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoSize);
+        Optional<ArrayList<String>> manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoSize);
         Lottos lottos = LottoGenerateManager.createLottos(manualLottoNumbers, autoLottoSize);
         OutputView.printLottoSize(manualLottoSize, autoLottoSize);
         OutputView.printLottosNumbers(lottos);

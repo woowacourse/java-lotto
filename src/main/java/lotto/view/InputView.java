@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.LottoSize;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
@@ -18,15 +19,18 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static ArrayList<String> getManualLottoNumbers(LottoSize manulLottoSize) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-
+    public static Optional<ArrayList<String>> getManualLottoNumbers(LottoSize manulLottoSize) {
         int lottoSize = manulLottoSize.getLottoSize();
+        if (lottoSize == 0) {
+            return Optional.empty();
+        }
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         ArrayList<String> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < lottoSize; i++) {
             lottoNumbers.add(scanner.nextLine());
         }
-        return lottoNumbers;
+        return Optional.of(lottoNumbers);
     }
 
     public static String getWinningLottoNumbers() {

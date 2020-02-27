@@ -5,7 +5,7 @@ import lotto.domain.*;
 import java.util.*;
 
 public class LottoGenerateManager {
-    public static Lottos createLottos(ArrayList<String> manualLottoNumbers, LottoSize autoLottoSize) {
+    public static Lottos createLottos(Optional<ArrayList<String>> manualLottoNumbers, LottoSize autoLottoSize) {
         Lottos manuaLottos = createManualLottos(manualLottoNumbers);
         Lottos autoLottos = createRandomLottos(autoLottoSize);
         return manuaLottos.addLottos(autoLottos);
@@ -23,12 +23,12 @@ public class LottoGenerateManager {
         return createRandomLottos(lottoSize.getLottoSize());
     }
 
-    public static Lottos createManualLottos(ArrayList<String> lottoNumbers) {
+    public static Lottos createManualLottos(Optional<ArrayList<String>> lottoNumbers) {
         List<Lotto> lottos = new ArrayList<>();
 
-        int lottoSize = lottoNumbers.size();
+        int lottoSize = lottoNumbers.orElseGet(ArrayList<String>::new).size();
         for (int i = 0; i < lottoSize; i++) {
-            String lottoNumber = lottoNumbers.get(i);
+            String lottoNumber = lottoNumbers.get().get(i);
             lottos.add(LottoGenerator.create(lottoNumber));
         }
         return new Lottos(lottos);
