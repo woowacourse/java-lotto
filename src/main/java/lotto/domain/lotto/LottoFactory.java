@@ -23,7 +23,6 @@ public class LottoFactory {
 		creators.put(LottoType.WINNING_LOTTO, new ManualLottoCreator());
 	}
 
-
 	public static Lotto createAutoLotto(final LottoType lottoType) {
 		Objects.requireNonNull(lottoType);
 		LottoCreator lottoCreator = creators.get(lottoType);
@@ -56,10 +55,3 @@ class AutoLottoCreator implements LottoCreator {
 		return new Lotto(lottoNumbers);
 	}
 }
-//
-//class WinningLottoCreator implements LottoCreator {
-//	@Override
-//	public Lotto create(final List<LottoNumber> lottoNumbers) {
-//		return new WinningLotto(lottoNumbers);
-//	}
-//}
