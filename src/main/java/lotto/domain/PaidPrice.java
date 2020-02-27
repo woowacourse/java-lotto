@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class PaidPrice {
     private static final String EMPTY_INPUT_MSG = "가격을 입력하지 않았습니다.";
     private static final String PRICE_PER_LOTTO_ERROR_MSG = "가격은 1000원 단위로 입력해야 합니다.";
@@ -9,7 +11,7 @@ public class PaidPrice {
     private int payment;
 
     public PaidPrice(String inputMoney) {
-        validateEmpty(inputMoney);
+        validateNotNull(inputMoney);
         validateNumber(inputMoney);
 
         int money = Integer.parseInt(inputMoney);
@@ -18,10 +20,8 @@ public class PaidPrice {
         this.payment = money;
     }
 
-    private void validateEmpty (String inputMoney) {
-        if (inputMoney == null || inputMoney.trim().isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_INPUT_MSG);
-        }
+    private void validateNotNull(String inputMoney) {
+        Objects.requireNonNull(inputMoney, EMPTY_INPUT_MSG);
     }
 
     private void validateNumber(String inputMoney) {

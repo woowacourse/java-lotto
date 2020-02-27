@@ -20,14 +20,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    private static void validateEmpty(String lottoNumber) {
-        if (lottoNumber == null || lottoNumber.isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_INPUT_MSG);
-        }
+    private static void validateNotNull(String lottoNumber) {
+        Objects.requireNonNull(lottoNumber, EMPTY_INPUT_MSG);
     }
 
     private static int validateNumber(String lottoNumber) {
-        validateEmpty(lottoNumber);
+        validateNotNull(lottoNumber);
         try {
             return Integer.parseInt(lottoNumber.trim());
         } catch (NumberFormatException e) {

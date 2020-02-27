@@ -1,18 +1,26 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoSize {
-    private static String NOT_NUMBER_MSG = "잘못된 숫자입니다.";
-    private static String NOT_VALIDATE_LOTTO_SIZE_MSG = "%s는 유효하지 않은 로또 개수입니다.";
+    private static final String EMPTY_INPUT_MSG = "로또 번호가 입력되지 않았습니다.";
+    private static final String NOT_NUMBER_MSG = "잘못된 숫자입니다.";
+    private static final String NOT_VALIDATE_LOTTO_SIZE_MSG = "%s는 유효하지 않은 로또 개수입니다.";
 
     private int lottoSize;
 
     public LottoSize(PaidPrice paidPrice, int lottoSize) {
+        validateNotNull(paidPrice);
         validateLottoSize(paidPrice, lottoSize);
         this.lottoSize = lottoSize;
     }
 
     public LottoSize(PaidPrice paidPrice, String lottoSize) {
         this(paidPrice, validateNumber(lottoSize));
+    }
+
+    private void validateNotNull(PaidPrice paidPrice) {
+        Objects.requireNonNull(paidPrice, EMPTY_INPUT_MSG);
     }
 
     private static int validateNumber(String number) {

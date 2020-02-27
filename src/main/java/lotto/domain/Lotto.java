@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
@@ -10,15 +11,13 @@ public class Lotto {
     private Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
-        validateEmpty(lottoNumbers);
+        validateNotNull(lottoNumbers);
         validateDistinctNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateEmpty(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_INPUT_MSG);
-        }
+    private void validateNotNull(Set<LottoNumber> lottoNumbers) {
+        Objects.requireNonNull(lottoNumbers, EMPTY_INPUT_MSG);
     }
 
     private void validateDistinctNumbers(Set<LottoNumber> inputNumbers) {
