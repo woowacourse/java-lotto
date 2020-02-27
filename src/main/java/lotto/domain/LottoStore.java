@@ -45,10 +45,9 @@ public class LottoStore {
         OutputView.printAnswerLottoTicketNumber(lottoTicketNumber);
     }
 
-    public LottoTickets generateLottoTickets() {
+    public LottoTickets generateLottoTickets(List<String> inputManualLottoTickets) {
         LottoTickets lottoTickets = new LottoTickets();
-        generateManualLottoTickets(InputView.inputManualLottoTickets(lottoTicketNumber.getManualLottoTicketNumber()),
-                lottoTickets);
+        generateManualLottoTickets(inputManualLottoTickets, lottoTickets);
         generateAutomaticLottoTickets(lottoTickets);
         OutputView.printLottoTicket(lottoTickets);
         return lottoTickets;

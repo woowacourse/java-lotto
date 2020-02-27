@@ -41,10 +41,10 @@ public class InputView {
         }
     }
 
-    public static List<String> inputManualLottoTickets(int manualLottoTicketNumber){
+    public static List<String> inputManualLottoTickets(LottoTicketNumber lottoTicketNumber){
         List<String> manualLottoBallsInputs = new ArrayList<>();
         OutputView.printManualLottoBallsGuide();
-        for (int i = 0; i < manualLottoTicketNumber; i++){
+        for (int i = 0; i < lottoTicketNumber.getManualLottoTicketNumber(); i++){
             manualLottoBallsInputs.add(InputView.InputWinningBallsAndManualLottoBalls());
         }
         return manualLottoBallsInputs;
