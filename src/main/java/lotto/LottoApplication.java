@@ -12,32 +12,30 @@ import lotto.view.OutputView;
 import java.util.List;
 
 public class LottoApplication {
-    private static final int MIN_USER_LOTTO_COUNT = 0;
-
     public static void main(String[] args) {
         int inputMoney = StringUtils.ToInt(InputView.inputMoney());
         int inputUserLottoCount = StringUtils.ToInt(InputView.inputUserLottoCount());
         Money money = new Money(inputMoney, inputUserLottoCount);
-        String userLottoNumbers = setUserLottoNumbers(money);
+        String userLottoNumbers = inputUserLottoNumbers(money);
 
         List<Lotto> lotteries = LottoFactory.createLotteries(money, userLottoNumbers);
         OutputView.printLotteries(lotteries, money.getUserLottoCount());
 
-        WinLotto winLotto = setWinLotto();
+        WinLotto winLotto = createWinLotto();
         LottoManager lottoManager = new LottoManager(lotteries, winLotto);
         lottoManager.checkLotto();
         OutputView.printResult(money, lottoManager);
     }
 
-    private static WinLotto setWinLotto() {
+    private static WinLotto createWinLotto() {
         String[] inputWinNumbers = StringUtils.splitNumber(InputView.inputWinNumber());
         return new WinLotto(inputWinNumbers, InputView.inputBonusBall());
     }
 
-    private static String setUserLottoNumbers(Money money) {
+    private static String inputUserLottoNumbers(Money money) {
         validate(money);
         String inputUserLottoNumbers = "";
-        if (money.getUserLottoCount() > MIN_USER_LOTTO_COUNT) {
+        if (money.isUserLottoCountOverZero()) {
             inputUserLottoNumbers = InputView.inputUserLotto(money.getUserLottoCount());
         }
         return inputUserLottoNumbers;

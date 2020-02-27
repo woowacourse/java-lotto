@@ -5,6 +5,7 @@ public class Money {
     private static final int LOTTO_PRICE = 1000;
     private static final int TO_PERCENT_VALUE = 100;
     private static final String ERROR_MESSAGE_MIN_MONEY = "천원 이상의 금액만 가능합니다.";
+    public static final int MIN_USER_LOTTO_COUNT = 0;
 
     private final int money;
     private final int userLottoCount;
@@ -34,6 +35,10 @@ public class Money {
 
     public int calculateIncomeRate(long income) {
         return (int) (income * TO_PERCENT_VALUE / money);
+    }
+
+    public boolean isUserLottoCountOverZero() {
+        return userLottoCount > MIN_USER_LOTTO_COUNT;
     }
 
     public int getUserLottoCount() {
