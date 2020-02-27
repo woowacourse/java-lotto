@@ -21,7 +21,7 @@ public class PurchasingCount implements Iterator<PurchasingCount> {
 		return purchasingCount < comparePurchasingCount;
 	}
 
-	public void useFor(ManualLottoTicketCount manualLottoTicketCount) {
+	public void purchaseFor(ManualLottoTicketCount manualLottoTicketCount) {
 		purchasingCount -= manualLottoTicketCount.getManualLottoTicketCount();
 	}
 

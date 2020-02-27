@@ -32,12 +32,12 @@ class purchasingCountTest {
 	}
 
 	@Test
-	void useFor_ManualLottoTicketCount_MinusManualLottoTicketCount() {
+	void purchaseFor_ManualLottoTicketCount_MinusManualLottoTicketCount() {
 		long purchasingCountValue = 10;
 		PurchasingCount purchasingCount = new PurchasingCount(purchasingCountValue);
 		ManualLottoTicketCount manualLottoTicketCount = new ManualLottoTicketCount("5", purchasingCount);
 
-		purchasingCount.useFor(manualLottoTicketCount);
+		purchasingCount.purchaseFor(manualLottoTicketCount);
 
 		assertThat(purchasingCount.getPurchasingCount()).isEqualTo(
 			purchasingCountValue - manualLottoTicketCount.getManualLottoTicketCount());

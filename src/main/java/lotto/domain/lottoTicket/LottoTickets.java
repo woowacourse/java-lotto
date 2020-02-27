@@ -25,7 +25,7 @@ public class LottoTickets {
 	}
 
 	public LottoTickets concat(LottoTickets concatenatedLottoTickets) {
-		return Stream.concat(lottoTickets.stream(), concatenatedLottoTickets.getLottoTickets().stream())
+		return Stream.concat(lottoTickets.stream(), concatenatedLottoTickets.lottoTickets.stream())
 			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
 	}
 

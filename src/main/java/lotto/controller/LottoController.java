@@ -22,6 +22,19 @@ import lotto.view.ConsoleInputView;
 import lotto.view.ConsoleOutputView;
 
 public class LottoController {
+	public void play() {
+		LottoMoney lottoMoney = receiveInputLottoMoney();
+		LottoTickets lottoTickets = purchaseLottoTicketsFor(lottoMoney);
+		ConsoleOutputView.printPurchasedLottoTickets(lottoTickets);
+
+		WinningLotto winningLotto = generateWinningLotto();
+		WinningResult winningResult = lottoTickets.produceWinningResultBy(winningLotto);
+		ConsoleOutputView.printWinningLottoResult(winningResult);
+
+		long winningRate = winningResult.calculateWinningRate(lottoMoney);
+		ConsoleOutputView.printWinningRate(winningRate);
+	}
+
 	private static LottoMoney receiveInputLottoMoney() {
 		try {
 			String inputLottoMoney = ConsoleInputView.inputLottoMoney();
@@ -52,25 +65,12 @@ public class LottoController {
 		}
 	}
 
-	public void play() {
-		LottoMoney lottoMoney = receiveInputLottoMoney();
-		LottoTickets lottoTickets = purchaseLottoTicketsFor(lottoMoney);
-		ConsoleOutputView.printPurchasedLottoTickets(lottoTickets);
-
-		WinningLotto winningLotto = generateWinningLotto();
-		WinningResult winningResult = lottoTickets.produceWinningResultBy(winningLotto);
-		ConsoleOutputView.printWinningLottoResult(winningResult);
-
-		long winningRate = winningResult.calculateWinningRate(lottoMoney);
-		ConsoleOutputView.printWinningRate(winningRate);
-	}
-
 	private LottoTickets purchaseLottoTicketsFor(LottoMoney lottoMoney) {
 		PurchasingCount purchasingCount = lottoMoney.generatePurchasingLottoTicketCount();
 		ManualLottoTicketCount manualLottoTicketCount = receiveManualLottoTicketCount(purchasingCount);
 
 		LottoTickets manualLottoTickets = purchaseManualLottoTicket(manualLottoTicketCount);
-		purchasingCount.useFor(manualLottoTicketCount);
+		purchasingCount.purchaseFor(manualLottoTicketCount);
 
 		LottoTickets autoLottoTickets = AutoLottoTicketsFactory.generate(purchasingCount);
 		ConsoleOutputView.printPurchasedLottoTicketCount(manualLottoTickets, autoLottoTickets);
