@@ -27,7 +27,7 @@ public class WinLotto {
         }
     }
 
-    public static Set<LottoNo> toLottoNoSet(String[] winLotto) {
+    private static Set<LottoNo> toLottoNoSet(String[] winLotto) {
         try {
             return Arrays.stream(winLotto)
                     .map(Integer::parseInt)

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class LottoGeneratorManual implements LottoGenerator {
     private static final String ERROR_MESSAGE_NOT_INTEGER = "숫자가 아닌 문자를 입력하였습니다.";
 
-    public static List<Lotto> createManualLotto(String[] manualLottoNumbers) {
+    private static List<Lotto> createManualLotto(String[] manualLottoNumbers) {
         List<Lotto> lottos = new ArrayList<>();
         for (String numbers : manualLottoNumbers) {
             Set<LottoNo> lotto = toLottoNoSet(StringUtils.splitByComma(numbers));
@@ -20,7 +20,7 @@ public class LottoGeneratorManual implements LottoGenerator {
         return lottos;
     }
 
-    public static Set<LottoNo> toLottoNoSet(String[] winLotto) {
+    private static Set<LottoNo> toLottoNoSet(String[] winLotto) {
         try {
             return Arrays.stream(winLotto)
                     .map(Integer::parseInt)

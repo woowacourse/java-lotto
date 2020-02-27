@@ -1,10 +1,10 @@
 package lotto.view;
 
+import lotto.domain.Customer;
+
 import java.util.Scanner;
 
 public class InputView {
-    public static final int MIN_MANUAL_LOTTO_COUNT = 0;
-
     private static final Scanner scanner = new Scanner(System.in);
 
     public static String inputMoney() {
@@ -23,12 +23,12 @@ public class InputView {
     }
 
     public static String inputUserLottoCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println("수동으로 구매할 로또의 개수를 입력해 주세요.");
         return scanner.next();
     }
 
     public static String inputUserLotto(int count) {
-        if (count > MIN_MANUAL_LOTTO_COUNT) {
+        if (count > Customer.MIN_MANUAL_LOTTO_COUNT) {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         }
         StringBuilder builder = new StringBuilder();
