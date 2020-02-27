@@ -14,7 +14,7 @@ public class LottoTickets {
     private static final int SUBLIST_FROM_INDEX = 0;
     private static final int SUBLIST_TO_INDEX = 6;
 
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
