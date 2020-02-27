@@ -18,6 +18,7 @@ public class LottoFactory {
     }
 
     public static Lottos generateManualLottos(List<String> manualInputs) {
+        if (manualInputs == null) return null;
         return new Lottos(manualInputs.stream()
                 .map(LottoFactory::generateManualSingleLotto)
                 .collect(Collectors.toList()));
@@ -27,8 +28,8 @@ public class LottoFactory {
         return new Lotto(manualLottoNumberGenerator.generate(manualInput));
     }
 
-    public static Lottos generateAutoLottos(int amount) {
-        return new Lottos(IntStream.range(0, amount)
+    public static Lottos generateAutoLottos(LottoAmount amount) {
+        return new Lottos(IntStream.range(0, amount.getLottoAmount())
                 .mapToObj(t -> generateAutoSingleLotto())
                 .collect(Collectors.toList()));
     }
@@ -39,7 +40,9 @@ public class LottoFactory {
 
     public static Lottos concatLottos(Lottos autoLottos, Lottos manualLottos) {
         List<Lotto> allLotto = autoLottos.getLottos();
-        allLotto.addAll(manualLottos.getLottos());
+        if(manualLottos != null) {
+            allLotto.addAll(manualLottos.getLottos());
+        }
         return new Lottos(allLotto);
     }
 }

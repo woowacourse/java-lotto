@@ -5,8 +5,13 @@ import Lotto.utils.NumberParser;
 public class LottoAmount {
     private int lottoAmount;
 
-    public LottoAmount(String input) {
-        int amount = NumberParser.parseIntoOneNumber(input);
+    public LottoAmount(String inputAsString) {
+        int amount = NumberParser.parseIntoOneNumber(inputAsString);
+        validate(amount);
+        this.lottoAmount = amount;
+    }
+
+    public LottoAmount(int amount) {
         validate(amount);
         this.lottoAmount = amount;
     }

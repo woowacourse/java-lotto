@@ -1,4 +1,6 @@
 package Lotto.views;
+import Lotto.domain.LottoAmount;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,11 +24,14 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static List<String> inputAsManualLotto(int manualLottoAmount) {
-        System.out.printf(INPUT_MANUAL_LOTTO_MESSAGE);
+    public static List<String> inputAsManualLotto(LottoAmount manualLottoAmount) {
+        if(manualLottoAmount.getLottoAmount() == 0) return null;
+        System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
         List<String> manualLottoInput = new ArrayList<>();
-        for(int i = 0; i < manualLottoAmount; i++) {
+        int roundCount = manualLottoAmount.getLottoAmount();
+        while(roundCount > 0) {
             manualLottoInput.add(scanner.nextLine());
+            roundCount--;
         }
         return manualLottoInput;
     }
