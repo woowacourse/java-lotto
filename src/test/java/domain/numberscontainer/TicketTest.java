@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("티켓 객체 테스트")
 public class TicketTest {
     @Test
-    @DisplayName("티켓 생성")
+    @DisplayName("유효한 티켓 생성")
     void ticketConstructor() {
         LottoNumbersDto lottoNumbersDto = createLottoNumberDto(1, 2, 3, 4, 5, 5);
         assertThatThrownBy(() -> new Ticket(lottoNumbersDto))
@@ -18,11 +18,11 @@ public class TicketTest {
     }
 
     @Test
-    @DisplayName("두 티켓의 같은 숫자 비교")
+    @DisplayName("티켓 생성")
     void compareTwoTickets() {
         LottoNumbersDto lottoNumbersDto = createLottoNumberDto(1, 2, 3, 4, 5, 6);
         Ticket ticket = new Ticket(lottoNumbersDto);
-        assertThat(ticket.contains(LottoNumber.THREE)).isTrue();
+        assertThat(ticket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     private LottoNumbersDto createLottoNumberDto(int number1, int number2, int number3, int number4, int number5, int number6) {

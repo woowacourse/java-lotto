@@ -1,11 +1,12 @@
 package domain.numberscontainer;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class LottoNumbers {
     private static final int SIZE = 6;
 
-    protected final Set<LottoNumber> lottoNumbers;
+    protected final LinkedHashSet<LottoNumber> lottoNumbers;
 
     public LottoNumbers(LottoNumbersDto lottoNumbersDto) {
         validateSize(lottoNumbersDto.getLottoNumbers());

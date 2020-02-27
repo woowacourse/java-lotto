@@ -18,11 +18,11 @@ class MoneyTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1700", "-1", "50001"})
+    @ValueSource(strings = {"1700", "50001"})
     @DisplayName("돈 객체 생성자")
     void moneyTest2(String money) {
         assertThatThrownBy(() -> new Money(money))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("천 원 단위로만 구매 가능합니다.");
+                .hasMessage("1000원 단위로만 구매 가능합니다.");
     }
 }

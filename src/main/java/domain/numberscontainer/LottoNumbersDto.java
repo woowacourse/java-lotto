@@ -16,7 +16,7 @@ public class LottoNumbersDto {
         this.lottoNumbers = new LinkedHashSet<>(lottoNumbers);
     }
 
-    private Set<LottoNumber> parseSet(String numbersInput) {
+    private LinkedHashSet<LottoNumber> parseSet(String numbersInput) {
         return Arrays.asList(numbersInput.split(SPLIT_REGEX)).stream()
                 .map(String::trim)
                 .map(Integer::new)
@@ -24,7 +24,7 @@ public class LottoNumbersDto {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
+    public LinkedHashSet<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 }
