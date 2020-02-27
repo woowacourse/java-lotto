@@ -13,7 +13,7 @@ public class AutoLottoNumberGenerator implements NumberGenerator {
     private static final int LOTTO_NUMBER_SIZE = 6;
 
     @Override
-    public List<LottoNumber> generate() {
+    public List<LottoNumber> generate(String input) {
         return ThreadLocalRandom.current()
                 .ints(MIN_LOTTO_NUMBER_START, MAX_LOTTO_NUMBER_END_EXCLUDED)
                 .distinct()
