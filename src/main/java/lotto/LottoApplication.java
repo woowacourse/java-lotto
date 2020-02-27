@@ -14,8 +14,9 @@ public class LottoApplication {
         Lottos lottos = new Lottos(lottoCount, manualLottos);
         OutputView.printLottoCountAndLottos(lottoCount, lottos);
 
-        Lotto winningLotto = Lotto.from(InputView.requestWinningLottoInput());
+        Lotto winningLottoLine = Lotto.from(InputView.requestWinningLottoInput());
         LottoNumber bonusNumber = LottoNumber.of(InputView.requestBonusNumberInput());
+        WinningLotto winningLotto = new WinningLotto(winningLottoLine, bonusNumber);
 
         MatchResults matchResults = lottos.toMatchResults(winningLotto, bonusNumber);
         int earningsRate = calculateEarningsRate(matchResults, lottoMoney);

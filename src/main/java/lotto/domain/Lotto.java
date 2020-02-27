@@ -64,6 +64,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public List<LottoNumber> get() {
         return Collections.unmodifiableList(lottoNumbers);
     }
