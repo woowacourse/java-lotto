@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
-	public static final String DELIMITER = ", ";
-	public static final int WINNING_NUMBER_SIZE = 6;
+	private static final String DELIMITER = ", ";
+	private static final int WINNING_NUMBER_SIZE = 6;
 
 	private final List<LottoNumber> winningNumbers;
 	private final LottoNumber bonusNumber;

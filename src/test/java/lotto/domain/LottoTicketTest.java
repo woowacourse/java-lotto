@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class LottoTicketTest {
+class LottoTicketTest {
 	@Test
 	void LottoTicketToStringTest() {
 		List<LottoNumber> lottoNumbers = new ArrayList<>();

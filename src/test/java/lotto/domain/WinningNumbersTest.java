@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class WinningNumbersTest {
+class WinningNumbersTest {
 	@Test
 	void checkValidationWhenOverNumbersSize() {
 		assertThatIllegalArgumentException().isThrownBy(() ->

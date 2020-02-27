@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class PurchasingAmountTest {
+class PurchasingAmountTest {
 	//TODO : getPrice하는 경우 TestCode를 작성해야 합니다.
 	@Test
 	void IllegalArgumentExceptionWhenInputHasChangeMoney() {

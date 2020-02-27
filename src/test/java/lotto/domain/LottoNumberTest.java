@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class LottoNumberTest {
+class LottoNumberTest {
 	@Test
 	void IllegalArgumentExceptionWhenOverMaxValue() {
 		assertThatIllegalArgumentException().isThrownBy(() -> {

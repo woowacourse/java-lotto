@@ -15,6 +15,10 @@ public class LottoTickets {
 		return lottoTickets.stream();
 	}
 
+	public void add(LottoTicket lottoTicket) {
+		this.lottoTickets.add(lottoTicket);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class RankTest {
+class RankTest {
 	@Test
 	void ofTestWhenAllMatches() {
 		List<LottoNumber> lottoNumbers =
