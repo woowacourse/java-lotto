@@ -1,5 +1,6 @@
 package utils;
 
+import Lotto.domain.LottoNumber;
 import Lotto.utils.NumberParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,14 +18,25 @@ public class NumberParserTest {
     @ParameterizedTest
     @DisplayName("정상 입력 파싱 테스트")
     @MethodSource("generateRightInput")
-    void rightInput(String input, List<Integer> expectedNumbers) {
+    void rightInput(String input, List<LottoNumber> expectedNumbers) {
         assertThat(NumberParser.parseIntoLottoNumbers(input)).isEqualTo(expectedNumbers);
     }
 
     static Stream<Arguments> generateRightInput() {
         return Stream.of(
-                Arguments.of("  1  ,6,   3, 55 ,, 77", Arrays.asList(1,6,3,55,77)),
-                Arguments.of("1 ,2 ,3 ,4 ,5 , 6", Arrays.asList(1,2,3,4,5,6)));
+                Arguments.of("  1  ,6,   3, 36 ,, 45",
+                        Arrays.asList(new LottoNumber(1),
+                                new LottoNumber(6),
+                                new LottoNumber(3),
+                                new LottoNumber(36),
+                                new LottoNumber(45))),
+                Arguments.of("1 ,2 ,3 ,4 ,5 , 6",
+                        Arrays.asList(new LottoNumber(1),
+                                new LottoNumber(2),
+                                new LottoNumber(3),
+                                new LottoNumber(4),
+                                new LottoNumber(5),
+                                new LottoNumber(6))));
     }
 
     @ParameterizedTest

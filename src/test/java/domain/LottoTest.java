@@ -28,7 +28,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 한 줄에 대한 입력에 중복 제거 후 6개일 때 정상")
     void rightInputInit() {
-        List<Integer> numbers = Arrays.asList(1,2,2,3,4,5,6);
+        List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 4, 5, 6);
         List<LottoNumber> lotto = numbers.stream()
                 .map((t) -> new LottoNumber(t))
                 .collect(Collectors.toList());
@@ -39,7 +39,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 한 줄에 대한 입력에 중복 제거 후 6개가 아닐 때")
     void wrongInputInit() {
-        List<Integer> numbers = Arrays.asList(1,2,2,3,4,5);
+        List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 4, 5);
         List<LottoNumber> lotto = numbers.stream()
                 .map((t) -> new LottoNumber(t))
                 .collect(Collectors.toList());

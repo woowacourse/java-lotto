@@ -1,4 +1,5 @@
 package Lotto.views;
+
 import Lotto.domain.LottoAmount;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class InputView {
     private static final String INPUT_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_WINNING_LOTTO_MESSAGE = "지난 주 당첨번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
+    private static final int ZERO = 0;
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -25,11 +27,12 @@ public class InputView {
     }
 
     public static List<String> inputAsManualLotto(LottoAmount manualLottoAmount) {
-        if(manualLottoAmount.getLottoAmount() == 0) return null;
+        if (manualLottoAmount.getLottoAmount() == ZERO) return null;
         System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
+
         List<String> manualLottoInput = new ArrayList<>();
         int roundCount = manualLottoAmount.getLottoAmount();
-        while(roundCount > 0) {
+        while (roundCount > ZERO) {
             manualLottoInput.add(scanner.nextLine());
             roundCount--;
         }

@@ -16,8 +16,7 @@ public class LottoApplication {
         LottoAmount autoLottoAmount = new LottoAmount(totalLottoAmount.getLottoAmount() - manualLottoAmount.getLottoAmount());
         Lottos autoLottos = LottoFactory.generateAutoLottos(autoLottoAmount);
 
-        OutputView.showPurchasedLottoCount(manualLottoAmount, autoLottoAmount);
-        OutputView.showAllLottos(manualLottos ,autoLottos);
+        showPurchasedLottos(manualLottoAmount, manualLottos, autoLottoAmount, autoLottos);
 
         Lottos allLottos = LottoFactory.concatLottos(autoLottos, manualLottos);
 
@@ -26,7 +25,16 @@ public class LottoApplication {
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
 
         Ranks ranksOfAllLottos = allLottos.calculateMultipleRanks(winningNumber);
+        showFinalResult(purchaseAmount, ranksOfAllLottos);
+    }
+
+    private static void showFinalResult(PurchaseAmount purchaseAmount, Ranks ranksOfAllLottos) {
         OutputView.showStatistics(ranksOfAllLottos);
         OutputView.showEarningRate(ranksOfAllLottos, purchaseAmount);
+    }
+
+    private static void showPurchasedLottos(LottoAmount manualLottoAmount, Lottos manualLottos, LottoAmount autoLottoAmount, Lottos autoLottos) {
+        OutputView.showPurchasedLottoCount(manualLottoAmount, autoLottoAmount);
+        OutputView.showAllLottos(manualLottos, autoLottos);
     }
 }

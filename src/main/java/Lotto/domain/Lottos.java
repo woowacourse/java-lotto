@@ -30,7 +30,7 @@ public class Lottos {
                 .collect(Collectors.joining(NEW_LINE));
     }
 
-    public List<Lotto> getLottos() {
+    List<Lotto> getLottos() {
         return this.lottos;
     }
 }

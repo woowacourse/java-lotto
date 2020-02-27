@@ -18,7 +18,7 @@ public class OutputView {
     }
 
     public static void showAllLottos(Lottos manualLottos, Lottos autoLottos) {
-        if(manualLottos != null) {
+        if (manualLottos != null) {
             System.out.println(manualLottos.getLottosInOneLine());
         }
         System.out.println(autoLottos.getLottosInOneLine());

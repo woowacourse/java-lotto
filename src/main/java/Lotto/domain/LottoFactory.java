@@ -2,9 +2,7 @@ package Lotto.domain;
 
 import Lotto.utils.AutoLottoNumberGenerator;
 import Lotto.utils.ManualLottoNumberGenerator;
-import Lotto.utils.NumberParser;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -40,7 +38,7 @@ public class LottoFactory {
 
     public static Lottos concatLottos(Lottos autoLottos, Lottos manualLottos) {
         List<Lotto> allLotto = autoLottos.getLottos();
-        if(manualLottos != null) {
+        if (manualLottos != null) {
             allLotto.addAll(manualLottos.getLottos());
         }
         return new Lottos(allLotto);

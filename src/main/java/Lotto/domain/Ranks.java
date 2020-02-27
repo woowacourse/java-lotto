@@ -12,7 +12,7 @@ public class Ranks {
         this.ranks = ranks;
     }
 
-    public int addAllRankReward() {
+    int addAllRankReward() {
         return ranks.stream()
                 .filter(Objects::nonNull)
                 .mapToInt(Rank::getRankReward)

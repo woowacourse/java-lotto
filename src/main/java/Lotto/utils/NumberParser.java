@@ -11,7 +11,9 @@ public class NumberParser {
     private final static String MESSAGE_ONLY_NUMBER = "숫자만 입력하세요.";
 
     private NumberParser() {
-    };
+    }
+
+    ;
 
     public static int parseIntoOneNumber(String input) {
         return validate(input);

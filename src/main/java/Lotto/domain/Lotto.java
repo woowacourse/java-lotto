@@ -9,6 +9,8 @@ public class Lotto {
     private static final String LOTTO_NUMBER_DUPLICATED_MESSAGE = "잘못된 로또 번호입니다. 중복 안됨, 갯수는 6개";
     private static final String COMMA = ", ";
     private static final int LOTTO_NUMBER_AMOUNT = 6;
+    private static final String OPEN_BRACKET = "[";
+    private static final String CLOSE_BRACKET = "]";
 
     private List<LottoNumber> lottoNumbers;
 
@@ -28,25 +30,25 @@ public class Lotto {
         return lottoNumberWithoutDuplication.size() != LOTTO_NUMBER_AMOUNT;
     }
 
-    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+    boolean hasBonusNumber(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    public int countMatchingAmountWith(Lotto inputLotto) {
-        return (int)lottoNumbers.stream()
+    int countMatchingAmountWith(Lotto inputLotto) {
+        return (int) lottoNumbers.stream()
                 .filter(inputLotto::contains)
                 .count();
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
     public String getLotto() {
-        String result =  this.lottoNumbers.stream()
+        String result = this.lottoNumbers.stream()
                 .sorted((a, b) -> a.getLottoNumber() - b.getLottoNumber())
                 .map(t -> String.valueOf(t.getLottoNumber()))
                 .collect(Collectors.joining(COMMA));
-        return "[" + result + "]";
+        return OPEN_BRACKET + result + CLOSE_BRACKET;
     }
 }

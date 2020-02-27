@@ -1,13 +1,15 @@
 package Lotto.domain;
 
 public class WinningNumber {
+    private static final String BONUS_CANNOT_BE_DUPLICATE_WITH_WINNING_NUMBER = "보너스넘버는 당첨번호와 중복될 수 없습니다.";
+
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
 
     public WinningNumber(Lotto winningLotto, LottoNumber bonusNumber) {
         this.winningLotto = winningLotto;
-        if(bonusNumberDuplicatedWithWinningNumber(winningLotto, bonusNumber)) {
-            throw new IllegalArgumentException("보너스넘버는 당첨번호와 중복될 수 없습니다.");
+        if (bonusNumberDuplicatedWithWinningNumber(winningLotto, bonusNumber)) {
+            throw new IllegalArgumentException(BONUS_CANNOT_BE_DUPLICATE_WITH_WINNING_NUMBER);
         }
         this.bonusNumber = bonusNumber;
     }
@@ -16,11 +18,11 @@ public class WinningNumber {
         return winningLotto.hasBonusNumber(bonusNumber);
     }
 
-    public int countHit(Lotto lotto) {
+    int countHit(Lotto lotto) {
         return winningLotto.countMatchingAmountWith(lotto);
     }
 
-    public boolean checkBonusNumber(Lotto lotto) {
+    boolean checkBonusNumber(Lotto lotto) {
         return lotto.contains(bonusNumber);
     }
 }
