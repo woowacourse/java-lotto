@@ -41,6 +41,10 @@ public class LottoCount {
         }
     }
 
+    public boolean hasMinManualLottoCount() {
+        return manualLottoCountValue == MIN_MANUAL_LOTTO_COUNT;
+    }
+
     public int getManualLottoCountValue() {
         return manualLottoCountValue;
     }
