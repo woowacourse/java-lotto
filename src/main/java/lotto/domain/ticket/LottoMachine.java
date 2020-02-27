@@ -11,33 +11,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static lotto.domain.ticket.LottoTicket.LOTTO_BALL_COUNT;
-import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
 public class LottoMachine {
-    private static final String MESSAGE_FOR_NOT_ENOUGH_MONEY = "%d는 최소 구매 금액보다 작습니다.";
     private static final List<LottoBall> balls = LottoBallFactory.getInstance();
 
-    public final List<LottoTicket> buyTickets(int bettingMoney) {
-        validateMoney(bettingMoney);
-
-        int numberOfTickets = calculateAffordableNumber(bettingMoney);
-
+    public final List<LottoTicket> buyTickets(int numberOfTickets) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < numberOfTickets; i++) {
             lottoTickets.add(createOneTicket());
         }
 
         return lottoTickets;
-    }
-
-    private void validateMoney(int bettingMoney) {
-        if (bettingMoney < LOTTO_PRICE) {
-            throw new IllegalArgumentException(String.format(MESSAGE_FOR_NOT_ENOUGH_MONEY, bettingMoney));
-        }
-    }
-
-    private int calculateAffordableNumber(int bettingMoney) {
-        return bettingMoney / LOTTO_PRICE;
     }
 
     public LottoTicket createOneTicket() {
