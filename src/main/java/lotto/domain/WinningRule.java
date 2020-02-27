@@ -10,7 +10,6 @@ import java.util.Optional;
 public class WinningRule {
     private static final int WINNING_NUMBER_SIZE = 7;
     private static final int NON_DUPLICATE_SIZE = 12;
-    private static final String DUPLICATE_EXIST_EXCEPTION_MESSAGE = "Duplicate exist.";
 
     private final Lotto winningNumbers;
     private final LottoNumber bonusBall;
@@ -25,7 +24,7 @@ public class WinningRule {
         List<Integer> mergedNumbers = new ArrayList<>(winningNumbers);
         mergedNumbers.add(bonusBall);
         if (isDuplicate(mergedNumbers)) {
-            throw new DuplicateExistException(DUPLICATE_EXIST_EXCEPTION_MESSAGE);
+            throw new DuplicateExistException();
         }
     }
 
