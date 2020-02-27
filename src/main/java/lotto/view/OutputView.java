@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final String PURCHASE_NUMBER_POSTFIX = "개를 구입했습니다.";
     public static final String PRINT_EARNING_RATE_FORMAT = "총 수익률은 %d%%입니다.\n";
     public static final String PRINT_CORRECT_LOTTO_NUMBER_FORMAT = "%d개 일치";
     public static final String PRINT_BONUS_CORRECT_MESSAGE = ", 보너스 볼 일치";
     public static final String PRINT_RANK_INFO_FORMAT = " (%d원) - %d개 \n";
     public static final String PRINT_WINNING_STATISTICS_MESSAGE = "당첨 통계";
     public static final String PRINT_DIVISION_LINE = "---------";
+    public static final String PRINT_PURCHASE_AMOUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 
     public static void printPurchaseNumber(PurchaseAmount purchaseAmount) {
-        System.out.println(purchaseAmount.getPurchaseNumber() + PURCHASE_NUMBER_POSTFIX);
+        System.out.printf(PRINT_PURCHASE_AMOUNT_FORMAT, purchaseAmount.getManualLottoAmount(), purchaseAmount.getRandomLottoAmount());
         System.out.println();
     }
 
