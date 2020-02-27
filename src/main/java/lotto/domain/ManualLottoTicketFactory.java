@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * 로또 번호 수동 생성 클래스
  *
  * @version 1.0.0
  * @author K.S.KIM
