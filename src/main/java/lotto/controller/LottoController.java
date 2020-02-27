@@ -29,11 +29,11 @@ public class LottoController {
         Lottos manualLottos = receiveManualLotto(countOfManualLotto);
         printPurchaseCompleteMessage(countOfManualLotto, countOfAutoLotto);
         Lottos autoLottos = LottosGenerator.generate(countOfAutoLotto);
-        printPurchasedLotto(manualLottos);
-        printPurchasedLotto(autoLottos);
+        Lottos totalLottos = manualLottos.add(autoLottos);
+        printPurchasedLotto(totalLottos);
 
         WinningLotto winningLotto = receiveWinningLotto();
-        LottoWinningResult winningResult = new LottoWinningResult(autoLottos, winningLotto);
+        LottoWinningResult winningResult = new LottoWinningResult(totalLottos, winningLotto);
         printWinningResult(winningResult.getLottoRankCount());
         printWinningRatio(winningResult.calculateWinningRatio(inputLottoMoney));
     }
