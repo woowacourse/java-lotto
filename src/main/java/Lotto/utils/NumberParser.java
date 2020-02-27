@@ -1,5 +1,7 @@
 package Lotto.utils;
 
+import Lotto.domain.LottoNumber;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,11 +13,16 @@ public class NumberParser {
     private NumberParser() {
     };
 
-    public static List<Integer> parse(String input) {
+    public static int parseIntoOneNumber(String input) {
+        return validate(input);
+    }
+
+    public static List<LottoNumber> parseIntoLottoNumbers(String input) {
         return Stream.of(input.split(DELIMITER))
                 .map(String::trim)
                 .filter(t -> !t.isEmpty())
                 .map(NumberParser::validate)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 

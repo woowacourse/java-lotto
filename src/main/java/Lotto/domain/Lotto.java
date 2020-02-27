@@ -44,6 +44,7 @@ public class Lotto {
 
     public String getLotto() {
         return this.lottoNumbers.stream()
+                .sorted((a, b) -> a.getLottoNumber() - b.getLottoNumber())
                 .map(t -> String.valueOf(t.getLottoNumber()))
                 .collect(Collectors.joining(COMMA));
     }

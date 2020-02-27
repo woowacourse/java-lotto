@@ -18,7 +18,7 @@ public class NumberParserTest {
     @DisplayName("정상 입력 파싱 테스트")
     @MethodSource("generateRightInput")
     void rightInput(String input, List<Integer> expectedNumbers) {
-        assertThat(NumberParser.parse(input)).isEqualTo(expectedNumbers);
+        assertThat(NumberParser.parseIntoLottoNumbers(input)).isEqualTo(expectedNumbers);
     }
 
     static Stream<Arguments> generateRightInput() {
@@ -31,7 +31,7 @@ public class NumberParserTest {
     @DisplayName("잘못된 입력 파싱 Exception 테스트")
     @MethodSource("generateWrongInput")
     void wrongInput(String input) {
-        assertThatThrownBy(() -> NumberParser.parse(input))
+        assertThatThrownBy(() -> NumberParser.parseIntoLottoNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자");
     }

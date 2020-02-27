@@ -10,7 +10,8 @@ public class OutputView {
     private static final String SECOND_RANK_ADDITIONAL_MESSAGE = "보너스 볼 일치 ";
     private static final String EMPTY_STRING = "";
     private static final String NEW_LINE = "\n";
-    private static final String EARNING_RATE_MESSAGE = "총 수익률은 %.3f %%입니다.";
+    private static final String TOTAL_PROFIT_MESSAGE = "상금 총액은 %d원입니다.\n";
+    private static final String EARNING_RATE_MESSAGE = "총 수익률은 %.3f %%입니다.\n";
 
     public static void showPurchasedLottoCount(int purchasedLottoCount) {
         System.out.println(purchasedLottoCount + PURCHASED_LOTTO_MESSAGE);
@@ -36,8 +37,9 @@ public class OutputView {
         return EMPTY_STRING;
     }
 
-    private static void showEarningRate(Ranks ranks, PurchaseAmount purchaseAmount) {
+    public static void showEarningRate(Ranks ranks, PurchaseAmount purchaseAmount) {
         EarningRate earningRate = new EarningRate(ranks, purchaseAmount);
+        System.out.printf(TOTAL_PROFIT_MESSAGE, earningRate.getProfitAmount());
         System.out.printf(EARNING_RATE_MESSAGE, earningRate.getEarningRate());
     }
 }
