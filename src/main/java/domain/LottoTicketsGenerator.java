@@ -13,6 +13,7 @@ public class LottoTicketsGenerator {
     private static final int LOTTO_SIZE = 6;
 
     private static final List<LottoNumber> shuffleLottoNumbers;
+    private static final List<LottoTicket> lottoTickets = new ArrayList<>();
 
     static {
         shuffleLottoNumbers = createLottoNumbers();
@@ -24,8 +25,11 @@ public class LottoTicketsGenerator {
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoTicket> generateLottoTickets(int buyCount) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+    public static void addManualLottoTicket(String manualLottoTicket) {
+        lottoTickets.add(LottoTicketGenerator.createLottoTicket(manualLottoTicket));
+    }
+
+    public static List<LottoTicket> generateAutoLottoTickets(int buyCount) {
         for (int i = START_LOTTO_INDEX; i < buyCount; i++) {
             Collections.shuffle(shuffleLottoNumbers);
             lottoTickets.add(new LottoTicket(createLottoTicketBySize()));

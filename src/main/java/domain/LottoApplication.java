@@ -22,7 +22,7 @@ public class LottoApplication {
     }
 
     public static LottoTickets generateLottoTicketsByMoney(Money money) {
-        return new LottoTickets(LottoTicketsGenerator.generateLottoTickets(money.countLottoTicket()));
+        return new LottoTickets(LottoTicketsGenerator.generateAutoLottoTickets(money.countLottoTicket()));
     }
 
     public static Money inputMoney() {

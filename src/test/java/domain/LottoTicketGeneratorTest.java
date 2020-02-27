@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoTicketGeneratorTest {
-    @DisplayName("String으로 입력받았을 때 로또티켓 생성해주는 메서드 테스트")
+    @DisplayName("로또 티켓 생성 유효성 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"", "fdsf",})
     void createLottoTicketTest(String input) {
