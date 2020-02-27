@@ -24,6 +24,15 @@ public class InputView {
         }
 	}
 
+	public static int getManualLottoAmount() {
+		OutputView.askEnterManualLottoAmount();
+		try {
+			return Integer.parseInt(SCANNER.nextLine());
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("수동입력할 로또의 갯수는 정수여야 합니다.");
+		}
+	}
+
 	public static List<Integer> getWinningLotto() {
 		OutputView.askEnterWinningLotto();
 		return StringUtils.splitIntoIntList((SCANNER.nextLine()));

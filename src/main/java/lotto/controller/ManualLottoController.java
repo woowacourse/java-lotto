@@ -15,6 +15,7 @@ public class ManualLottoController {
 
     private static void runWithoutExceptionCatch() {
         Money money = new Money(InputView.getMoneyForLotto());
-        // Todo: 수동생성할 로또 갯수 입력받기
+        int amountOfManualLottos = InputView.getManualLottoAmount();
+        // Todo: 수동생성 로또 번호 입력받기 구현
     }
 }

@@ -81,4 +81,8 @@ public class OutputView {
             result.getResults().get(rank)
         );
     }
+
+    public static void askEnterManualLottoAmount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
 }
