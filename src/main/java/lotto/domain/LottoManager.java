@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,22 +18,17 @@ public class LottoManager {
 		return new Lotto(lottoNumberGenerator.generate());
 	}
 
-	public static List<Lotto> generateLottoByAmount(int amount, NumberGenerator lottoNumberGenerator) {
+	public static Lottos generateLottoByAmount(int amount, NumberGenerator lottoNumberGenerator) {
 		return IntStream.range(0, amount)
 			.mapToObj(x -> generateSingleLotto(lottoNumberGenerator))
-			.collect(Collectors.toList());
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 	}
 
-	public static List<Lotto> generateManualLotto(int manualLottoAmount) {
+	public static Lottos generateManualLotto(int manualLottoAmount) {
 		return InputView.inputAsManualLottoNumbers(manualLottoAmount)
 			.stream()
 			.map(NumberParser::lottoNumberParse)
 			.map(Lotto::new)
-			.collect(Collectors.toList());
-	}
-
-	public static List<Lotto> concatTotalLotto(List<Lotto> autoLotto, List<Lotto> manualLotto) {
-		autoLotto.addAll(manualLotto);
-		return autoLotto;
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 	}
 }

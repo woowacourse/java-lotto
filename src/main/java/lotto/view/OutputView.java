@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoAmount;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Rank;
 
@@ -58,7 +58,7 @@ public class OutputView {
 			purchasedLottoAmount.getAutoLottoAmount());
 	}
 
-	public static void showPurchasedLottoNumbers(List<Lotto> purchasedLottoNumbers) {
+	public static void showPurchasedLottoNumbers(Lottos purchasedLottoNumbers) {
 		System.out.println(purchasedLottoNumbers.stream()
 			.map(x -> String.valueOf(x.getNumbers()))
 			.collect(Collectors.joining(NEW_LINE))

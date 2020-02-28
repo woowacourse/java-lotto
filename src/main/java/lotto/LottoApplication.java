@@ -8,6 +8,7 @@ import lotto.controller.RankCalculator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoAmount;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumber;
@@ -25,20 +26,20 @@ public class LottoApplication {
 			manualLottoAmount);
 		OutputView.showPurchasedLottoCount(purchasedLottoAmount);
 
-		List<Lotto> manualLotto = generateManualLotto(purchasedLottoAmount.getManualLottoAmount());
-		List<Lotto> autoLotto = generateAutoLottoByAmount(purchasedLottoAmount);
-		List<Lotto> totalLotto = concatTotalLotto(manualLotto, autoLotto);
+		Lottos manualLotto = generateManualLotto(purchasedLottoAmount.getManualLottoAmount());
+		Lottos autoLotto = generateAutoLottoByAmount(purchasedLottoAmount);
+		Lottos totalLotto = manualLotto.concat(autoLotto);
 
 		OutputView.showPurchasedLottoNumbers(totalLotto);
 		showResultRanks(budget, totalLotto);
 	}
 
-	private static void showResultRanks(Money budget, List<Lotto> totalLotto) {
+	private static void showResultRanks(Money budget, Lottos totalLotto) {
 		List<Rank> resultRanks = RankCalculator.calculateMultiple(totalLotto, produceWinningNumber());
 		OutputView.showResult(budget, resultRanks);
 	}
 
-	private static List<Lotto> generateAutoLottoByAmount(LottoAmount purchasedLottoAmount) {
+	private static Lottos generateAutoLottoByAmount(LottoAmount purchasedLottoAmount) {
 		NumberGenerator autoLottoNumberGenerator = new LottoNumberGenerator();
 		return generateLottoByAmount(purchasedLottoAmount.getAutoLottoAmount(),
 			autoLottoNumberGenerator);

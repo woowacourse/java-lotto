@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumber;
 
@@ -22,7 +23,8 @@ public class RankCalculatorTest {
 	public void calculateTest(List<Integer> lottoNumber, Rank expectedRank) {
 		WinningNumber winningNumber = new WinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
 		Lotto lotto = new Lotto(lottoNumber);
-		List<Rank> ranks = RankCalculator.calculateMultiple(Collections.singletonList(lotto), winningNumber);
+		List<Rank> ranks = RankCalculator.calculateMultiple(new Lottos(Collections.singletonList(lotto)),
+			winningNumber);
 		assertThat(ranks).contains(expectedRank);
 	}
 
