@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.controller.LottoManager;
 import lotto.exception.NotMultipleOfThousandException;
 import lotto.exception.NotNumberException;
 import org.junit.jupiter.api.DisplayName;
@@ -31,8 +32,8 @@ public class MoneyTest {
     @DisplayName("수익률 계산")
     void getYield() {
         Money money = new Money("10000");
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.updateResultCount(RankType.THREE);
-        assertThat(money.getYield(lottoResult)).isEqualTo(50);
+        LottoResultCount lottoResultCount = new LottoResultCount();
+        lottoResultCount.updateResultCount(RankType.THREE);
+        assertThat(money.getYield(lottoResultCount)).isEqualTo(50);
     }
 }

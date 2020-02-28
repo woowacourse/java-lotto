@@ -10,12 +10,12 @@ public enum RankType {
     FIVE_BONUS(5, 30_000_000, true),
     SIX(6, 2_000_000_000, false);
 
+    private final int matchCount;
     private final int prize;
-    private final int correct;
     private final boolean bonusBall;
 
-    RankType(int correct, int prize, boolean bonusBall) {
-        this.correct = correct;
+    RankType(int matchCount, int prize, boolean bonusBall) {
+        this.matchCount = matchCount;
         this.prize = prize;
         this.bonusBall = bonusBall;
     }
@@ -24,13 +24,13 @@ public enum RankType {
         return prize;
     }
 
-    public int getCorrect() {
-        return correct;
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public static RankType findLottoResult(int count, boolean bonusBall) {
         return Arrays.stream(RankType.values())
-            .filter(rankType -> rankType.correct == count && rankType.bonusBall == bonusBall)
+            .filter(rankType -> rankType.matchCount == count && rankType.bonusBall == bonusBall)
             .findFirst()
             .orElse(NONE);
     }

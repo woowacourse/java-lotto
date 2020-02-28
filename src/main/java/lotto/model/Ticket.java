@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import lotto.exception.NotNumberException;
 import lotto.exception.NotSixNumbersException;
@@ -12,6 +11,7 @@ import lotto.exception.OverlapException;
 
 public class Ticket {
 
+    private static final String COMMA = ",";
     public static final int LOTTO_NUMBER_LENGTH = 6;
     public static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "숫자 6개를 입력해주세요.";
     private static final String OVERLAP_SIZE_EXCEPTION = "중복된 숫자를 가지고 있습니다.";
@@ -45,7 +45,7 @@ public class Ticket {
     }
 
     private List<String> splitInput(String winNumber) {
-        return Arrays.asList(winNumber.split(WinLottoNumbers.COMMA));
+        return Arrays.asList(winNumber.split(COMMA));
     }
 
     private List<LottoNumber> makeWinNumbers(List<String> inputs) {
@@ -68,24 +68,11 @@ public class Ticket {
         return ticket.contains(lottoNumber);
     }
 
+    public boolean isCountFiveAndHasBonusBall(int count, LottoNumber bonusBall) {
+        return count == 5 && ticket.contains(bonusBall);
+    }
+
     public List<LottoNumber> getTicket() {
         return ticket;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Ticket ticket1 = (Ticket) o;
-        return Objects.equals(ticket, ticket1.ticket);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ticket);
     }
 }

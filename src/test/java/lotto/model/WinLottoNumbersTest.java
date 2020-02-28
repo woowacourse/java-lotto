@@ -1,13 +1,11 @@
 package lotto.model;
 
 import lotto.exception.NotNumberException;
-import lotto.exception.NotSixNumbersException;
 import lotto.exception.OverlapWinNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class WinLottoNumbersTest {
     @Test
