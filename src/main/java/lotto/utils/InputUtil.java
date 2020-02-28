@@ -22,7 +22,7 @@ public class InputUtil {
 		return Integer.parseInt(bufferedReader.readLine());
 	}
 
-	public static List<String> inputWinningNumber() throws IOException {
+	public static List<String> inputLottoNumber() throws IOException {
 		System.out.println(INPUT_WINNING_NUMBER);
 		return Arrays.asList(bufferedReader
 				.readLine()

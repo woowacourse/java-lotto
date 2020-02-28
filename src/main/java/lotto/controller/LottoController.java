@@ -12,21 +12,10 @@ public class LottoController {
 	public static void run() {
 		Lottos lottos = buyLottos();
 		OutputView.printLottos(lottos.makeLottoDtos());
-		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(receiveWinningNumber());
+		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(readWinningNumber());
 		LottoResult lottoResult = new LottoResult(winningPrizes);
 		OutputView.printLottoResult(lottoResult.getWinningInformation());
 		OutputView.printEarningRate(lottoResult.calculateEarningRate());
-	}
-
-	private static LottoNumber readBonusNumber() {
-		try {
-			LottoMachine lottoMachine = LottoMachine.getInstance();
-
-			return lottoMachine.pickBall(InputUtil.inputBonusNumber());
-		} catch (NumberFormatException | IOException e) {
-			OutputView.printWrongBonusNumberInput();
-			return readBonusNumber();
-		}
 	}
 
 	private static Lottos buyLottos() {
@@ -50,20 +39,29 @@ public class LottoController {
 		}
 	}
 
-	public static WinningLotto receiveWinningNumber() {
+	public static List<String> readLottoNumber() {
 		try {
-			return new WinningLotto(readWinningNumber(), readBonusNumber());
-		} catch (IllegalArgumentException e) {
-			OutputView.printExceptionMessage(e);
-			return receiveWinningNumber();
+			return InputUtil.inputLottoNumber();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return readLottoNumber();
 		}
 	}
 
-	public static List<String> readWinningNumber() {
+	private static LottoNumber readBonusNumber() {
 		try {
-			return InputUtil.inputWinningNumber();
-		} catch (IOException e) {
-			e.printStackTrace();
+			return LottoMachine.getInstance().pickBall(InputUtil.inputBonusNumber());
+		} catch (NumberFormatException | IOException e) {
+			OutputView.printWrongBonusNumberInput();
+			return readBonusNumber();
+		}
+	}
+
+	public static WinningLotto readWinningNumber() {
+		try {
+			return new WinningLotto(readLottoNumber(), readBonusNumber());
+		} catch (IllegalArgumentException e) {
+			OutputView.printExceptionMessage(e);
 			return readWinningNumber();
 		}
 	}
