@@ -9,26 +9,16 @@ import java.util.Map;
 public class LottoApplication {
     public static void main(String[] args) {
         final Money money = new Money(InputView.enterMoney());
+        final int totalTicketSize = Tickets.getTotalTicketSize(money);
         final int manualTicketSize = Integer.parseInt(InputView.enterManualTicketSize());
-        final List<Ticket> tickets = LottoStore.createTickets(money, manualTicketSize, InputView.enterManualTickets(manualTicketSize));
+        final Tickets tickets = Tickets.createTickets(totalTicketSize, manualTicketSize, InputView.enterManualTickets(manualTicketSize));
 
-        OutputView.printNumberOfTickets(manualTicketSize, tickets.size() - manualTicketSize);
+        OutputView.printNumberOfTickets(manualTicketSize, totalTicketSize - manualTicketSize);
         OutputView.printTickets(tickets);
 
-        WinningNumbers winningNumbers = enterWinningNumbers();
+        final WinningNumbers winningNumbers = new WinningNumbers(InputView.enterLastWeekWinningNumbers(), Integer.parseInt(InputView.enterBonusNumber()));
         final Map<LottoResult, Integer> result = LottoResultMachine.calculateResult(tickets, winningNumbers);
         OutputView.printLottoResults(result);
         OutputView.printProfit(LottoProfit.ofProfit(result, money));
-    }
-
-    private static WinningNumbers enterWinningNumbers() {
-        try {
-            LottoNumbersDto lottoNumbersDto = LottoNumbersDtoAssembler.assemble(InputView.enterLastWeekWinningNumbers());
-            BonusNumberDto bonusNumberDTO = BonusNumberDtoAssembler.assemble(InputView.enterBonusNumber());
-            return new WinningNumbers(lottoNumbersDto, bonusNumberDTO);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return enterWinningNumbers();
-        }
     }
 }

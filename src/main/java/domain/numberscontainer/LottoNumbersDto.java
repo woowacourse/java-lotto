@@ -1,17 +1,16 @@
 package domain.numberscontainer;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.List;
 
 public class LottoNumbersDto {
+/*
+    private final List<String> lottoNumbers; //"1, 2, 3, 4, 5, 6"
 
-    private final LinkedHashSet<LottoNumber> lottoNumbers;
-
-    public LottoNumbersDto(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new LinkedHashSet<>(lottoNumbers);
+    public LottoNumbersDto(List<String> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public LinkedHashSet<LottoNumber> getLottoNumbers() {
+    public List<String> getLottoNumbers() {
         return lottoNumbers;
-    }
+    }*/
 }

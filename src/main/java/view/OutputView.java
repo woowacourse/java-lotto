@@ -2,6 +2,7 @@ package view;
 
 import domain.LottoProfit;
 import domain.LottoResult;
+import domain.Tickets;
 import domain.numberscontainer.Ticket;
 
 import java.util.List;
@@ -19,10 +20,8 @@ public class OutputView {
         System.out.println(String.format(MANUAL_AND_RANDOM_TICKET_SIZE_MESSAGE, manualTicketSize, randomTicketSize));
     }
 
-    public static void printTickets(List<Ticket> tickets) {
-        for (Ticket ticket : tickets) {
-            System.out.println(ticket.toString());
-        }
+    public static void printTickets(Tickets tickets) {
+        System.out.println(tickets.toString());
     }
 
     public static void printLottoResults(Map<LottoResult, Integer> lottoResults) {

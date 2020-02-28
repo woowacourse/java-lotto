@@ -2,28 +2,33 @@ package domain.numberscontainer;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/*
- * LottoNumbersDto 생성 담당 클래스
- */
+//dto -> 도메인, 도메인 -> dto로 변환 담당.
 public class LottoNumbersDtoAssembler {
+    /*
     private static final String SPLIT_REGEX = ",";
 
-    public static LottoNumbersDto assemble(String numbers) {
-        return new LottoNumbersDto(parseSet(numbers));
-    }
-
-    public static LottoNumbersDto assemble(Set<LottoNumber> numbers) {
+    public static LottoNumbersDto assemble(List<String> numbers) {
         return new LottoNumbersDto(numbers);
     }
 
-    private static LinkedHashSet<LottoNumber> parseSet(String numbersInput) {
-        return Arrays.asList(numbersInput.split(SPLIT_REGEX)).stream()
+    public static List<LottoNumbers> assemble(LottoNumbersDto numbers) {
+        return numbers.getLottoNumbers().stream()
+                .map(String::trim)
+
+                .collect(Collectors.toList());
+    }
+
+    private static Set<>
+
+    private static Set<LottoNumber> parseSet(String rawNumbers) {
+        return Arrays.asList(rawNumbers.split(SPLIT_REGEX)).stream()
                 .map(String::trim)
                 .map(Integer::new)
                 .map(LottoNumber::get)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
-    }
+    }*/
 }

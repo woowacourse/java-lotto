@@ -1,8 +1,9 @@
 package domain;
 
+import static domain.Tickets.TICKET_PRICE;
+
 public class Money {
     private static final String NUMBER_REGEX = "^[0-9]+$";
-    private static final int MONEY_UNIT = 1000;
 
     private final int money;
 
@@ -24,8 +25,8 @@ public class Money {
     }
 
     private void validateMoneyUnit(int money) {
-        if (money % MONEY_UNIT != 0) {
-            throw new IllegalArgumentException(String.format("%d원 단위로만 구매 가능합니다.", MONEY_UNIT));
+        if (money % TICKET_PRICE != 0) {
+            throw new IllegalArgumentException(String.format("%d원 단위로만 구매 가능합니다.", TICKET_PRICE));
         }
     }
 
