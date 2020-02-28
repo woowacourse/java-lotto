@@ -5,35 +5,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.util.NullValidator.validateNull;
+
 public class Lottos {
-    private final List<Lotto> lottos;
+    private final List<Lotto> elements;
 
-    public Lottos(LottoCount lottoCount, List<String[]> manualLottos) {
-        validateNull(lottoCount, manualLottos);
-        this.lottos = createLottos(lottoCount, manualLottos);
+    public Lottos(List<Lotto> elements) {
+        validateNull(elements);
+        this.elements = elements;
     }
 
-    private static void validateNull(LottoCount lottoCount, List<String[]> manualLottos) {
-        if (lottoCount == null || manualLottos == null) {
-            throw new RuntimeException("Lottos 생성자의 매개변수로 null이 입력되었습니다.");
-        }
-    }
-
-    private static List<Lotto> createLottos(LottoCount lottoCount, List<String[]> manualLottos) {
-        List<Lotto> lottos = new ArrayList<>();
-        if (!manualLottos.isEmpty()) {
-            putManualLotto(lottos, manualLottos);
-        }
-        for (int i = 0; i < lottoCount.calculateAutoLottoCount(); i++) {
-            lottos.add(Lotto.create());
-        }
-        return lottos;
-    }
-
-    private static void putManualLotto(List<Lotto> lottos, List<String[]> manualLottos) {
-        for (String[] manualLotto : manualLottos) {
-            lottos.add(Lotto.from(manualLotto));
-        }
+    public static Lottos combine(Lottos lottos1, Lottos lottos2) {
+        List<Lotto> totalElements = new ArrayList<>(lottos1.elements);
+        totalElements.addAll(lottos2.elements);
+        return new Lottos(totalElements);
     }
 
     public MatchResults toMatchResults(Lotto winningLotto, LottoNumber bonusNumber) {
@@ -45,6 +30,6 @@ public class Lottos {
     }
 
     public List<Lotto> get() {
-        return Collections.unmodifiableList(lottos);
+        return Collections.unmodifiableList(elements);
     }
 }
