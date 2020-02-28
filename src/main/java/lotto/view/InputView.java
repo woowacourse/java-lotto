@@ -82,11 +82,12 @@ public class InputView {
     public static LottoNumber inputBonusNumber() {
         System.out.println("보너스볼을 입력해주세요");
         try {
+
             return new LottoNumber(StringUtils.parseInt(scanner.nextLine()));
         } catch (NumberFormatException e) {
             throw new InvalidInputException("숫자가 아닌 문자를 입력하였습니다.");
         } catch (IllegalArgumentException e) {
-            throw new InvalidInputException(e.getMessage());
+            throw new IllegalArgumentException();
         }
 
     }
