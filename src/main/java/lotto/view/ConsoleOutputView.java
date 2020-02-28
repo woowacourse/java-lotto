@@ -22,8 +22,8 @@ public class ConsoleOutputView {
 	private ConsoleOutputView() {
 	}
 
-	public static void printPurchaseCompleteMessage(CountOfManualLottoTicket countOfManualLottoTicket, LottoMachine lottoMachine) {
-		System.out.printf(PURCHASE_COMPLETE_MESSAGE, countOfManualLottoTicket.getCountOfManualLotto(), lottoMachine.getCountOfAutoLottoTicket());
+	public static void printPurchaseCompleteMessage(CountOfManualLottoTicket countOfManualLottoTicket) {
+		System.out.printf(PURCHASE_COMPLETE_MESSAGE, countOfManualLottoTicket.getCountOfManualLotto(), LottoMachine.getCountOfAutoLottoTicket());
 	}
 
 	public static void printPurchasedLotto(LottoTicket lottoTicket) {

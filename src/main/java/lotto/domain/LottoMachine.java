@@ -9,15 +9,15 @@ import lotto.domain.number.NumberLinesOfManualLotto;
 public class LottoMachine {
 	private static final int DEFAULT_COUNT = 0;
 
-	private LottoTicket allLottoTicket;
-	private int countOfAutoLottoTicket;
+	private static LottoTicket allLottoTicket;
+	private static int countOfAutoLottoTicket;
 
 	public LottoMachine() {
 		allLottoTicket = new LottoTicket();
 		countOfAutoLottoTicket = DEFAULT_COUNT;
 	}
 
-	public LottoTicket buyLottoTicket(int countOfAllLotto, NumberLinesOfManualLotto manualLottoNumbers) {
+	public static LottoTicket buyLottoTicket(int countOfAllLotto, NumberLinesOfManualLotto manualLottoNumbers) {
 		int countOfManualLottoTicket = manualLottoNumbers.size();
 		int countOfAutoLottoTicket = calculateCountOfAutoLottoTicket(countOfAllLotto, countOfManualLottoTicket);
 
@@ -30,11 +30,11 @@ public class LottoMachine {
 		return allLottoTicket;
 	}
 
-	public int calculateCountOfAutoLottoTicket(int countOfAllLotto, int countOfManualLottoTicket) {
+	public static int calculateCountOfAutoLottoTicket(int countOfAllLotto, int countOfManualLottoTicket) {
 		return countOfAllLotto - countOfManualLottoTicket;
 	}
 
-	public int getCountOfAutoLottoTicket() {
+	public static int getCountOfAutoLottoTicket() {
 		return countOfAutoLottoTicket;
 	}
 }

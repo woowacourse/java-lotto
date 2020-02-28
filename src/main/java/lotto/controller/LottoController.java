@@ -22,9 +22,8 @@ public class LottoController {
 		CountOfManualLottoTicket countOfManualLottoTicket = new CountOfManualLottoTicket(inputCountOfManualLotto(), countOfAllLotto);
 		NumberLinesOfManualLotto numberLinesOfManualLotto = receiveManualLotto(countOfManualLottoTicket);
 
-		LottoMachine lottoMachine = new LottoMachine();
-		LottoTicket lottoTicket = lottoMachine.buyLottoTicket(countOfAllLotto, numberLinesOfManualLotto);
-		printPurchaseCompleteMessage(countOfManualLottoTicket, lottoMachine);
+		LottoTicket lottoTicket = LottoMachine.buyLottoTicket(countOfAllLotto, numberLinesOfManualLotto);
+		printPurchaseCompleteMessage(countOfManualLottoTicket);
 		printPurchasedLotto(lottoTicket);
 
 		LottoWinningResult winningResult = new LottoWinningResult(lottoTicket, receiveWinningLotto());
