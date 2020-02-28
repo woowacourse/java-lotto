@@ -36,10 +36,8 @@ public class OutputView {
 		emptyLine();
 	}
 
-	public static void printLottoState(String manualTicketValue,final LottoTickets lottoTickets) {
-		int manualTicketAmount = Integer.parseInt(manualTicketValue);
-		System.out.printf("수동 %d장 자동으로 %d개를 구매했습니다."
-				,manualTicketAmount, lottoTickets.stream().count()-manualTicketAmount);
+	public static void printLottoState(final List<LottoTicket> lottoTickets) {
+		System.out.printf("%d개를 구매했습니다.", lottoTickets.stream().count());
 		emptyLine();
 		lottoTickets.stream()
 			.map(LottoTicket::toString)

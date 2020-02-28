@@ -4,19 +4,22 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ConsoleLottoApplication {
 	public static void main(String[] args) {
-		final Money inputMoney = new Money(InputView.inputPayment());
+		Money inputMoney = new Money(InputView.inputPayment());
 		PurchasingAmount purchasingAmount = new PurchasingAmount(inputMoney.getLottoMoneyValue());
-		LottoTicketFactory lottoTicketFactory = new LottoTicketFactory();
-		LottoTickets lottoTickets = lottoTicketFactory.buyLottoTicket(purchasingAmount);
+		List<LottoTicket> lottoTickets = new ArrayList<>();
+		LottoTicketFactory.buyLottoTickets(purchasingAmount, lottoTickets);
+		OutputView.printLottoState(lottoTickets);
 
-		final WinningNumbers winningNumbers =
+		WinningNumbers winningNumbers =
 			new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 
-		final Ranks results = new Ranks(lottoTickets, winningNumbers);
+		Ranks results = new Ranks(new LottoTickets(lottoTickets), winningNumbers);
 
 		OutputView.printResult(results);
 		OutputView.printProfit(ProfitCalculator.calculate(inputMoney, results.getRanks()));

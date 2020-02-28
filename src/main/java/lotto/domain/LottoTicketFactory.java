@@ -1,18 +1,16 @@
 package lotto.domain;
 
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import java.util.List;
 
 public class LottoTicketFactory {
-    public LottoTickets buyLottoTicket(PurchasingAmount purchasingAmount) {
-        String manualTicketValue = InputView.inputManualTicketValue();
-        ManualLottoTicketFactory manualLottoTicketFactory =
-                new ManualLottoTicketFactory(manualTicketValue, purchasingAmount);
-        RandomLottoTicketFactory randomLottoTicketFactory = new RandomLottoTicketFactory();
+    private static List<LottoTicket> createLottoTickets(PurchasingAmount purchasingAmount,
+                                                        CreateLottoTicketStrategy createLottoTicketStrategy,
+                                                        List<LottoTicket> lottoTickets) {
 
-        LottoTickets lottoTickets = manualLottoTicketFactory.buyManualLottoTickets(purchasingAmount);
-        lottoTickets = randomLottoTicketFactory.buyRandomLottoTickets(purchasingAmount,lottoTickets);
-        OutputView.printLottoState(manualTicketValue, lottoTickets);
-        return lottoTickets;
+        return createLottoTicketStrategy.buyLottoTickets(purchasingAmount, lottoTickets);
+    }
+    public static void buyLottoTickets(PurchasingAmount purchasingAmount, List<LottoTicket> lottoTickets) {
+        LottoTicketFactory.createLottoTickets(purchasingAmount, new CreateManualLottoTicket(), lottoTickets);
+        LottoTicketFactory.createLottoTickets(purchasingAmount, new CreateRandomLottoTicket(), lottoTickets);
     }
 }

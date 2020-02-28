@@ -9,26 +9,21 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class ManualLottoTicketFactory {
-
+public class CreateManualLottoTicket implements CreateLottoTicketStrategy {
 	private static final int WINNING_NUMBER_SIZE = 6;
 	private static final int TICKET_PRICE = 1000;
 
-	private final int manualLottoTicketsAmount;
-	private final LottoTickets lottoTickets;
+	@Override
+	public List<LottoTicket> buyLottoTickets(PurchasingAmount purchasingAmount, List<LottoTicket> manualLottoTickets) {
+		String manualTicketValue = InputView.inputManualTicketValue();
+		int manualLottoTicketsSize = checkValidManualTicketsValue(manualTicketValue, purchasingAmount);
+		purchasingAmount.calculateManualLottoTicketMoney(manualLottoTicketsSize * TICKET_PRICE);
 
-	public ManualLottoTicketFactory(String manualLottoTicketsAmountValue, PurchasingAmount purchasingAmount) {
-		checkValidManualTicketsValue(manualLottoTicketsAmountValue, purchasingAmount);
-		this.manualLottoTicketsAmount = Integer.parseInt(manualLottoTicketsAmountValue);
-		this.lottoTickets = generateManualLottoTickets(manualLottoTicketsAmount);
-	}
-
-	private LottoTickets generateManualLottoTickets(int manualLottoTicketsSize) {
-		List<LottoTicket> manualLottoTickets = new ArrayList<>();
 		for(int ticketIndex=0; ticketIndex<manualLottoTicketsSize; ticketIndex++) {
 			generateManualLottoTickets(manualLottoTickets, ticketIndex);
 		}
-		return new LottoTickets(manualLottoTickets);
+
+		return manualLottoTickets;
 	}
 
 	private void generateManualLottoTickets(List<LottoTicket> manualLottoTickets, int ticketIndex) {
@@ -49,13 +44,13 @@ public class ManualLottoTicketFactory {
 
 	private void checkValidationOf(List<String> manualLottoNumbers) {
 		if (isNotMatchSize(manualLottoNumbers)) {
-			throw new IllegalArgumentException("번호는 6자리 이어야 합니다");
+			throw new IllegalArgumentException("로또 번호는 6자리 이어야 합니다");
 		}
 		if (isNotNumberFormat(manualLottoNumbers)) {
-			throw new IllegalArgumentException("번호는 정수만 가능합니다");
+			throw new IllegalArgumentException("로또 번호는 정수만 가능합니다");
 		}
 		if (isDuplicatedNumber(manualLottoNumbers)) {
-			throw new IllegalArgumentException("번호는 허용하지 않습니다");
+			throw new IllegalArgumentException("중복된 로또 번호는 허용하지 않습니다");
 		}
 	}
 
@@ -78,23 +73,20 @@ public class ManualLottoTicketFactory {
 				.anyMatch(ch -> !Character.isDigit(ch));
 	}
 
-	private void checkValidManualTicketsValue(String manualLottoTicketsAmount, PurchasingAmount purchasingAmount) {
+	private int checkValidManualTicketsValue(String manualLottoTicketsAmount, PurchasingAmount purchasingAmount) {
 		if(isNotNumber(manualLottoTicketsAmount)) {
 			throw new IllegalArgumentException("정수만 입력하십시오");
 		}
 		if(purchasingAmount.isOverPurchasingAmount(Integer.parseInt(manualLottoTicketsAmount) * TICKET_PRICE)) {
 			throw new IllegalArgumentException("구매 금액 초과의 티켓은 구매 불가합니다");
 		}
+
+		return Integer.parseInt(manualLottoTicketsAmount);
 	}
 
 	private boolean isNotNumber(final String lottoMoneyValue) {
 		return lottoMoneyValue.chars()
 				.anyMatch(c -> !Character.isDigit(c));
-	}
-
-	public LottoTickets buyManualLottoTickets(PurchasingAmount purchasingAmount) {
-		purchasingAmount.calculateManualLottoTicketMoney(manualLottoTicketsAmount * TICKET_PRICE);
-		return this.lottoTickets;
 	}
 }
 

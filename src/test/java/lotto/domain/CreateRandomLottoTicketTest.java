@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RandomLottoTicketFactoryTest {
+class CreateRandomLottoTicketTest {
     @Test
     @DisplayName("randomLottoTicketFactory의 로또 생성이 수동 로또 티켓을 포함해서 생성한다")
     void randomLottoTicketTest() {
@@ -22,10 +22,9 @@ class RandomLottoTicketFactoryTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         lottoTicketList.add(lottoTicket);
-        LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
         PurchasingAmount purchasingAmount = new PurchasingAmount(10000);
-        RandomLottoTicketFactory randomLottoTicketFactory = new RandomLottoTicketFactory();
-        LottoTickets result = randomLottoTicketFactory.buyRandomLottoTickets(purchasingAmount, lottoTickets);
+        CreateRandomLottoTicket createRandomLottoTicket = new CreateRandomLottoTicket();
+        List<LottoTicket> result = createRandomLottoTicket.buyLottoTickets(purchasingAmount, lottoTicketList);
 
         assertThat((int) result.stream().count()).isEqualTo(11);
     }

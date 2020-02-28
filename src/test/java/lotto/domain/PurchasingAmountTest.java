@@ -2,11 +2,12 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PurchasingAmountTest {
-	//TODO : getPrice하는 경우 TestCode를 작성해야 합니다.
 	@Test
+	@DisplayName("구입 금액 단위가 1000단위가 아닐경우 익셉션을 발생한다")
 	void IllegalArgumentExceptionWhenInputHasChangeMoney() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 			new PurchasingAmount(1500))
@@ -14,6 +15,7 @@ class PurchasingAmountTest {
 	}
 
 	@Test
+	@DisplayName("구입 금액이 음수 일경우 익셉션을 발생한다")
 	void IllegalArgumentExceptionWhenInputNegativeValue() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 			new PurchasingAmount(-1000))
@@ -21,6 +23,7 @@ class PurchasingAmountTest {
 	}
 
 	@Test
+	@DisplayName("구입 금액이 0원 일경우 익셉션을 발생한다")
 	void IllegalArgumentExceptionWhenInputZeroValue() {
 		assertThatIllegalArgumentException().isThrownBy(() ->
 			new PurchasingAmount(0))
