@@ -15,11 +15,11 @@ public class OutputView {
     public static void printLottos(List<Lotto> lottosManual, List<Lotto> lottosAutomatic) {
         System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottosManual.size(), lottosAutomatic.size()));
         for (Lotto lottoManual : lottosManual) {
-            printLoto(lottoManual);
+            printLotto(lottoManual);
         }
 
         for (Lotto lottoAutomatic : lottosAutomatic) {
-            printLoto(lottoAutomatic);
+            printLotto(lottoAutomatic);
         }
     }
 
@@ -36,18 +36,18 @@ public class OutputView {
     private static void printStatistics(WinningRanks winningRanks) {
         Map<Rank, Integer> winningResults = winningRanks.getWinningRanks();
         for (Rank rank : winningResults.keySet()) {
-            System.out.println(
-                    String.format("%d개 일치(%d원)- %d개", rank.getMatchNumber(), rank.calculateWinningMoney().getValue(),
-                            winningResults.get(rank)));
+            String resultMessage = String.format("%d개 일치(%d원)- %d개", rank.getMatchNumber(),
+                    rank.calculateWinningMoney().getValue(), winningResults.get(rank));
+            System.out.println(resultMessage);
         }
     }
 
-    private static void printLoto(Lotto lotto) {
-        List<String> stringifiedLottoNumbers = lotto.getLottoNumbers().stream()
+    public static void printLotto(Lotto lotto) {
+        String lottoString = lotto.getLottoNumbers().stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.toList());
+                .collect(Collectors.joining(",", "[", "]"));
 
-        System.out.println("[" + String.join(",", stringifiedLottoNumbers) + "]");
-
+        System.out.println(lottoString);
     }
+
 }

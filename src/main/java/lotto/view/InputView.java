@@ -16,10 +16,11 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int MIN_NUMBER_TO_BUY_MANUALLY = 0;
+    private static final String REQUEST_FOR_PURCHASE_AMOUNT = "구입금액을 입력해주세요";
 
 
     public static Money inputPurchaseAmount() {
-        System.out.println("구입금액을 입력해주세요");
+        System.out.println(REQUEST_FOR_PURCHASE_AMOUNT);
         try {
             return new Money(StringUtils.parseInt(scanner.nextLine()));
         } catch (NumberFormatException e) {
