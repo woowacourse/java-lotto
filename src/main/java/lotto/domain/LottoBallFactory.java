@@ -20,8 +20,7 @@ public class LottoBallFactory {
                         .toList());
     }
 
-    private LottoBallFactory() {
-    }
+    private LottoBallFactory() { }
 
     public static List<LottoBall> getInstance() {
         return lottoBalls;

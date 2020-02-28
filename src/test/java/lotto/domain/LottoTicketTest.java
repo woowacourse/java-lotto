@@ -41,7 +41,6 @@ public class LottoTicketTest {
                 .mapToObj(LottoBall::new)
                 .collect(Collectors.toSet());
 
-        assertThatThrownBy(() -> new LottoTicket(lottoTicket)).isInstanceOf(NumberOutOfRangeException.class)
-                .hasMessage(LottoTicket.LOTTO_TICKET_SIZE + "개 이상의 숫자가 들어갔습니다.");
+        assertThatThrownBy(() -> new LottoTicket(lottoTicket)).isInstanceOf(NumberOutOfRangeException.class);
     }
 }
