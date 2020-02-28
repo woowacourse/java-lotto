@@ -1,13 +1,18 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.LottosFactory;
 import lotto.domain.Money;
+import lotto.domain.ResultStatistic;
+import lotto.domain.WinningInformation;
 import lotto.view.IllegalUserInputException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class ManualLottoController {
+
     public static void run() {
         try {
             runWithoutExceptionCatch();
@@ -28,6 +33,11 @@ public class ManualLottoController {
 
         int amountOfAutoLottos = lottos.getAmountOfLottos() - amountOfManualLottos;
         OutputView.printPurchasedLottos(amountOfManualLottos, amountOfAutoLottos, lottos);
+
+        WinningInformation winningInformation = getWinningInformation();
+
+        ResultStatistic result = ResultStatistic.calculate(lottos, winningInformation);
+        OutputView.printResultStatistic(result, money);
     }
 
     private static int getAmountOfManualLottos(Money money) {
@@ -39,5 +49,11 @@ public class ManualLottoController {
             );
         }
         return amountOfManualLottos;
+    }
+
+    private static WinningInformation getWinningInformation() {
+        Lotto winningLotto = Lotto.createLottoManual(InputView.getWinningLotto());
+        LottoNumber bonus = LottoNumber.of(InputView.getBonusLottoNumber());
+        return new WinningInformation(winningLotto, bonus);
     }
 }
