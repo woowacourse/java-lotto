@@ -61,7 +61,7 @@ public class LottoGame {
     private static WinningNumber inputWinningNumber() {
         try {
             return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
-        } catch (IllegalArgumentException | NullPointerException e) {
+        } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             return inputWinningNumber();
         }

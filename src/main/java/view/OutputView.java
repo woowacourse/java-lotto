@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class OutputView {
     public static final String NEW_LINE = System.lineSeparator();
     public static final java.lang.String COMMA = ", ";
-    public static final int LAST_COMMA_REMOVER = 2;
 
     public static void printInputPurchaseAmountMessage() {
         System.out.println("구매금액을 입력해 주세요");
@@ -65,8 +64,8 @@ public class OutputView {
         System.out.printf("총 수익률은 %d%%입니다.", profitRatio);
     }
 
-    public static void printExceptionMessage(RuntimeException e) {
-        System.out.println(e.getMessage());
-        System.out.println("다시 입력해 주세요.");
+    public static void printExceptionMessage(IllegalArgumentException e) {
+        System.err.println(e.getMessage());
+        System.err.println("다시 입력해 주세요.");
     }
 }

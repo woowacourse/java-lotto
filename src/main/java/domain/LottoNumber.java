@@ -34,6 +34,14 @@ public class LottoNumber implements Comparable {
         return lottoNumber.get(numberIntegerValue);
     }
 
+    private static void checkNotNumber(String number) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(String.format("로또 넘버는 숫자여야 합니다. 입력한 문자 : %s", number));
+        }
+    }
+
     private static void checkLottoRange(int number) {
         if (isNotLottoNumber(number)) {
             throw new IllegalArgumentException("로또 숫자 범위를 넘어섰습니다.");
@@ -42,14 +50,6 @@ public class LottoNumber implements Comparable {
 
     private static boolean isNotLottoNumber(int number) {
         return number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER;
-    }
-
-    private static void checkNotNumber(String number) {
-        try {
-            Integer.parseInt(number);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format("로또 넘버는 숫자여야 합니다. 입력한 문자 : %s", number));
-        }
     }
 
     @Override

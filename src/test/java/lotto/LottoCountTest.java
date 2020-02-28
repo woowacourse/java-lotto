@@ -25,4 +25,12 @@ public class LottoCountTest {
         }).isInstanceOf(IllegalArgumentException.class)
         .hasMessage("수동 로또 개수가 전체 로또 개수보다 클 수 없습니다.");
     }
+
+    @Test
+    void 입력한_수동_로또_개수가_음수인_경우_예외_처리() {
+        assertThatThrownBy(() -> {
+            LottoCount lottoCount = new LottoCount(1, "-1");
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("수동 로또 개수는 음수일 수 없습니다.");
+    }
 }
