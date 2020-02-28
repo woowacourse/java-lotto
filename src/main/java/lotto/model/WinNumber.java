@@ -2,19 +2,19 @@ package lotto.model;
 
 import java.util.List;
 
-public class WinNumber extends LottoTicket {
-    private List<Integer> winNumbers;
+public class WinNumber {
+    private LottoTicket winNumbers;
 
     public WinNumber(List<Integer> winningNumbers) {
-        checkLottoLength(winningNumbers);
+        winNumbers = new LottoTicket(winningNumbers);
+        winNumbers.checkLottoLength(winningNumbers);
         for (int number : winningNumbers) {
-            checkLottoNumberRange(number);
+            winNumbers.checkLottoNumberRange(number);
         }
-        winNumbers = winningNumbers;
     }
 
     public boolean contains(int inputNumber) {
-        return winNumbers.contains(inputNumber);
+        return winNumbers.matchesWithNumber(inputNumber);
     }
 
 

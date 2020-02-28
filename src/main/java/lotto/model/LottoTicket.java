@@ -59,4 +59,8 @@ public class LottoTicket {
             throw new NotSixNumbersException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }
+
+    public boolean matchesWithNumber(int inputNumber) {
+        return lottoTicket.contains(inputNumber);
+    }
 }
