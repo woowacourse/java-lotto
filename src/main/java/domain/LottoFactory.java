@@ -24,4 +24,12 @@ public class LottoFactory {
         }
         return new Lotto(lotto);
     }
+
+    public static Lotto createManualLotto(String[] manualLottoNumbers) {
+        Set<LottoNumber> manualLottoSet = new HashSet<>();
+        for (String manualLottoNumber : manualLottoNumbers) {
+            manualLottoSet.add(LottoNumber.valueOf(manualLottoNumber));
+        }
+        return new Lotto(manualLottoSet);
+    }
 }

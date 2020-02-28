@@ -1,10 +1,10 @@
 package lotto;
 
 import domain.*;
+import org.assertj.core.api.HamcrestCondition;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,5 +30,20 @@ public class LottoFactoryTest {
         lotto.add(LottoNumber.valueOf("6"));
 
         assertThat(myLotto.get(0).getLotto()).isEqualTo(lotto);
+    }
+
+    @Test
+    void 수동으로_입력한_로또가_생성되는지_테스트() {
+        Set<LottoNumber> testSet = new HashSet<>();
+        testSet.add(LottoNumber.valueOf("1"));
+        testSet.add(LottoNumber.valueOf("2"));
+        testSet.add(LottoNumber.valueOf("3"));
+        testSet.add(LottoNumber.valueOf("4"));
+        testSet.add(LottoNumber.valueOf("5"));
+        testSet.add(LottoNumber.valueOf("6"));
+        Lotto manualLotto = new Lotto(testSet);
+        String[] manualLottoNumbers = {"1","2","3","4","5","6"};
+
+        assertThat(LottoFactory.createManualLotto(manualLottoNumbers)).isEqualTo(manualLotto);
     }
 }
