@@ -9,7 +9,7 @@ import lotto.domain.LottoAmount;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.Rank;
+import lotto.domain.Ranks;
 import lotto.domain.WinningNumber;
 import lotto.utils.LottoNumberGenerator;
 import lotto.utils.NumberGenerator;
@@ -34,7 +34,7 @@ public class LottoApplication {
 	}
 
 	private static void showResultRanks(Money budget, Lottos totalLotto) {
-		List<Rank> resultRanks = produceWinningNumber().matches(totalLotto);
+		Ranks resultRanks = produceWinningNumber().matches(totalLotto);
 		OutputView.showResult(budget, resultRanks);
 	}
 

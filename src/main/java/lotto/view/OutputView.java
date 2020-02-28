@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -9,6 +8,7 @@ import lotto.domain.LottoAmount;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Rank;
+import lotto.domain.Ranks;
 
 public class OutputView {
 	private static final int PERCENTAGE_MULTIPLE = 100;
@@ -19,7 +19,7 @@ public class OutputView {
 	private static final String NEW_LINE = "\n";
 	private static final String STATISTICS_FORMAT = "%d개 일치 %s%s원 - %d개%s";
 
-	public static void showEarningRate(Money boughtLottoMoney, List<Rank> ranks) {
+	public static void showEarningRate(Money boughtLottoMoney, Ranks ranks) {
 		long earningRate = ranks.stream()
 			.filter(Objects::nonNull)
 			.map(Rank::getReward)
@@ -31,7 +31,7 @@ public class OutputView {
 		System.out.printf(EARNING_RATE_MESSAGE, earningRate);
 	}
 
-	public static void showStatistics(List<Rank> ranks) {
+	public static void showStatistics(Ranks ranks) {
 		Map<Rank, Long> rankCounts = ranks.stream()
 			.filter(Objects::nonNull)
 			.collect(Collectors.groupingBy(x -> x, Collectors.counting()));
@@ -65,7 +65,7 @@ public class OutputView {
 		);
 	}
 
-	public static void showResult(Money money, List<Rank> ranks) {
+	public static void showResult(Money money, Ranks ranks) {
 		showStatistics(ranks);
 		showEarningRate(money, ranks);
 	}

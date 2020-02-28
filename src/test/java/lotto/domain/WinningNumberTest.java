@@ -40,8 +40,8 @@ public class WinningNumberTest {
 	public void matchesTest(List<Integer> lottoNumber, Rank expectedRank) {
 		WinningNumber winningNumber = new WinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
 		Lotto lotto = new Lotto(lottoNumber);
-		List<Rank> ranks = winningNumber.matches(new Lottos(Collections.singletonList(lotto)));
-		assertThat(ranks).contains(expectedRank);
+		Ranks ranks = winningNumber.matches(new Lottos(Collections.singletonList(lotto)));
+		assertThat(ranks.stream()).contains(expectedRank);
 	}
 
 	static Stream<Arguments> generateLottos() {
