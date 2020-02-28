@@ -33,7 +33,7 @@ public class CustomerTest {
 		assertThat(customer.calculateIncomeRate(5000)).isEqualTo(50);
 	}
 
-	@DisplayName("구입가능한 로또수 보다 큰수의 수동로또는 구입한 경우")
+	@DisplayName("구입가능한 로또 수 보다 큰 수의 수동로또를 구입한 경우")
 	@Test
 	void validateUserLottoCount() {
 		assertThatThrownBy(() -> new Customer(3000, 4))

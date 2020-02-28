@@ -13,6 +13,7 @@ public class InputValidatorTest {
 		InputValidator.validateNumber("45");
 
 		assertThatThrownBy(() -> InputValidator.validateNumber("a"))
-				.isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자가 아닌 문자를 입력하였습니다.");
 	}
 }

@@ -14,4 +14,13 @@ public class StringUtilsTest {
 
         assertThat(StringUtils.splitByLineSeparator(inputManualLotto)).isEqualTo(result);
     }
+
+    @DisplayName("숫자가 아닌값을 입력")
+    @Test
+    void notInteger() {
+        String inputMoney = "a";
+        assertThatThrownBy(() -> StringUtils.ToInt(inputMoney))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자가 아닌 문자를 입력하였습니다.");
+    }
 }
