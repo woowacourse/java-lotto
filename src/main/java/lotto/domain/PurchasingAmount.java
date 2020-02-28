@@ -3,14 +3,18 @@ package lotto.domain;
 import java.util.Iterator;
 
 public class PurchasingAmount implements Iterator<Integer> {
-	public static final int PURCHASE_UNIT = 1000;
-	public static final int ZERO = 0;
+	private static final int PURCHASE_UNIT = 1000;
+	private static final int ZERO = 0;
 
 	private int amount;
 
 	public PurchasingAmount(int amount) {
 		checkValidationOf(amount);
 		this.amount = amount;
+	}
+
+	public void calculateManualLottoTicketMoney(int manualMoney) {
+		this.amount = this.amount - manualMoney;
 	}
 
 	private void checkValidationOf(int amount) {
@@ -37,5 +41,12 @@ public class PurchasingAmount implements Iterator<Integer> {
 	@Override
 	public Integer next() {
 		return amount -= PURCHASE_UNIT;
+	}
+
+	public boolean isOverPurchasingAmount(int manualTicketsPrice) {
+		if(amount < manualTicketsPrice){
+			return true;
+		}
+		return false;
 	}
 }

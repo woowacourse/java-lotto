@@ -53,4 +53,5 @@ public enum Rank {
 		return lottoTicket.stream()
 				.noneMatch(winningNumbers::isMatchWithBonus);
 	}
+
 }

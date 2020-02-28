@@ -5,13 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.Rank;
-import lotto.domain.Ranks;
+import lotto.domain.*;
 
 public class OutputView {
-	public static final int PERCENT = 100;
+	private static final int PERCENT = 100;
 
 	public static void printResult(final Ranks ranks) {
 		final Rank[] rankValues = Rank.values();
@@ -39,7 +36,7 @@ public class OutputView {
 		emptyLine();
 	}
 
-	public static void printLottoState(final LottoTickets lottoTickets) {
+	public static void printLottoState(final List<LottoTicket> lottoTickets) {
 		System.out.printf("%d개를 구매했습니다.", lottoTickets.stream().count());
 		emptyLine();
 		lottoTickets.stream()
@@ -55,3 +52,5 @@ public class OutputView {
 		System.out.println();
 	}
 }
+
+

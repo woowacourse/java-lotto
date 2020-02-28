@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTicketTest {
+class LottoTicketTest {
 	@Test
 	void LottoTicketToStringTest() {
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -19,6 +19,7 @@ public class LottoTicketTest {
 		lottoNumbers.add(new LottoNumber(34));
 
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
 		String expected = "[1, 2, 13, 14, 21, 34]";
 		String actual = lottoTicket.toString();
 
