@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoNo implements Comparable<LottoNo> {
     private static final String ERROR_MESSAGE_LOTTO_RANGE = "1이상 45이하의 숫자를 입력하세요.";
-    private static final int MIN_LOTTO_NO = 1;
-    private static final int MAX_LOTTO_NO = 45;
+    public static final int MIN_LOTTO_NO = 1;
+    public static final int MAX_LOTTO_NO = 45;
 
     private final int number;
 
