@@ -1,9 +1,11 @@
-package lotto.domain.lotto;
-
-import lotto.domain.lottonumber.LottoNumber;
+package lotto.domain.lottostrategy;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoType;
+import lotto.domain.lottonumber.LottoNumber;
 
 /**
  * 로또 타입에 맞는 로또를 생성해주는 팩토리, 예외처리 포함
@@ -18,9 +20,9 @@ public class LottoFactory {
 	private static List<LottoNumber> allLottoNumbers = LottoNumber.getLottoNumberCache();
 
 	static {
-		creators.put(LottoType.MANUAL_LOTTO, new ManualLottoCreateStrategy());
-		creators.put(LottoType.AUTO_LOTTO, new AutoLottoCreatorStrategy());
-		creators.put(LottoType.WINNING_LOTTO, new ManualLottoCreateStrategy());
+		creators.put(LottoType.MANUAL_LOTTO, new LottoCreator());
+		creators.put(LottoType.AUTO_LOTTO, new LottoCreator());
+		creators.put(LottoType.WINNING_LOTTO, new LottoCreator());
 	}
 
 	public static Lotto createAutoLotto(final LottoType lottoType) {
@@ -42,14 +44,7 @@ public class LottoFactory {
 	}
 }
 
-class ManualLottoCreateStrategy implements LottoCreateStrategy {
-	@Override
-	public Lotto create(List<LottoNumber> lottoNumbers) {
-		return new Lotto(lottoNumbers);
-	}
-}
-
-class AutoLottoCreatorStrategy implements LottoCreateStrategy {
+class LottoCreator implements LottoCreateStrategy {
 	@Override
 	public Lotto create(final List<LottoNumber> lottoNumbers) {
 		return new Lotto(lottoNumbers);

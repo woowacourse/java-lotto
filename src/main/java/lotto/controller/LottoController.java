@@ -19,11 +19,9 @@ import lotto.view.OutputView;
  * 날짜 : 2020/02/20
  */
 public class LottoController {
+	private final int MINIMUM_COUNT = 0;
 
-
-	private static final int MINIMUM_COUNT = 0;
-
-	public static void run() {
+	public void run() {
 		MoneyForLotto moneyForLotto = new MoneyForLotto(InputView.getMoneyForLotto());
 		LottoCount lottoCount = new LottoCount(moneyForLotto.calculateAmountOfLottos(), InputView.getManualLottoCount());
 
@@ -36,7 +34,7 @@ public class LottoController {
 		OutputView.printResultStatistic(result, moneyForLotto);
 	}
 
-	private static Lottos receivePurchasedLottos(LottoCount lottoCount) {
+	private Lottos receivePurchasedLottos(LottoCount lottoCount) {
 		List<String> manualLottoNumbers = InputView.getManualLottoNumbers(lottoCount.getManualLottoCount());
 
 		if (isManualAndAuto(lottoCount)) {
@@ -50,15 +48,15 @@ public class LottoController {
 		return LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount());
 	}
 
-	private static boolean isOnlyManual(LottoCount lottoCount) {
+	private boolean isOnlyManual(LottoCount lottoCount) {
 		return lottoCount.getAutoLottoCount() == MINIMUM_COUNT;
 	}
 
-	private static boolean isManualAndAuto(LottoCount lottoCount) {
+	private boolean isManualAndAuto(LottoCount lottoCount) {
 		return lottoCount.getManualLottoCount() != MINIMUM_COUNT && lottoCount.getAutoLottoCount() != MINIMUM_COUNT;
 	}
 
-	private static WinningLotto receiveWinningLotto() {
+	private WinningLotto receiveWinningLotto() {
 		String inputWinningLotto = InputView.getWinningLotto();
 		List<LottoNumber> winningLottoNumbers = StringUtils.splitIntoLottoNumbers(inputWinningLotto);
 

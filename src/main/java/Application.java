@@ -12,7 +12,8 @@ import lotto.view.OutputView;
 public class Application {
 	public static void main(String[] args) {
 		try {
-			LottoController.run();
+			LottoController lottoController = new LottoController();
+			lottoController.run();
 		} catch (Exception e) {
 			OutputView.printExceptionMessage(e);
 		}

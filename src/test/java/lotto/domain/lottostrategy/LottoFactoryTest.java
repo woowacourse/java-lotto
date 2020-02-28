@@ -1,6 +1,10 @@
-package lotto.domain.lotto;
+package lotto.domain.lottostrategy;
 
+import lotto.domain.lotto.InvalidLottoException;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoType;
 import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottostrategy.LottoFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

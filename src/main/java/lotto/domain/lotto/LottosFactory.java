@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottostrategy.LottoFactory;
 import lotto.util.StringUtils;
 
 /**

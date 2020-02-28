@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottostrategy.LottoFactory;
 import lotto.domain.money.MoneyForLotto;
 import lotto.domain.lotto.*;
 import org.junit.jupiter.api.BeforeEach;

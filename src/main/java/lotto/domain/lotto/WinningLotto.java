@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import lotto.domain.lottonumber.InvalidLottoNumberException;
 import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottostrategy.LottoFactory;
 import lotto.domain.result.Rank;
 
 /**
