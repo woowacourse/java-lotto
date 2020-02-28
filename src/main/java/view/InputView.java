@@ -21,4 +21,8 @@ public class InputView {
         OutputView.printInputBonusNumberMessage();
         return scanner.nextLine();
     }
+
+    public static String inputManualLottoCount() {
+        return scanner.nextLine();
+    }
 }

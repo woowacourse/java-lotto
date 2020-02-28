@@ -7,15 +7,12 @@ import view.OutputView;
 public class LottoGame {
 
     public static void main(String[] args) {
-        int lottoCount = purchaseLotto();
-
-        LottoTickets lottoTickets = createLottoTickets(lottoCount);
-
+        int totalLottoCount = purchaseLotto();
+        LottoCount lottoCount = createLottoCount(totalLottoCount);
+        LottoTickets lottoTickets = createLottoTickets(totalLottoCount);
         WinningNumber winningNumber = inputWinningNumber();
-
         LottoResult lottoResult = countWinningLottos(lottoTickets, winningNumber);
-
-        int profitRatio = calculateProfitRatio(lottoCount, lottoResult);
+        int profitRatio = calculateProfitRatio(totalLottoCount, lottoResult);
 
         printFinalResult(lottoResult, profitRatio);
     }
@@ -33,6 +30,15 @@ public class LottoGame {
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             return inputPurchaseAmount();
+        }
+    }
+
+    private static LottoCount createLottoCount(int totalLottoCount) {
+        try {
+            return new LottoCount(totalLottoCount, InputView.inputManualLottoCount());
+        } catch (IllegalArgumentException e) {
+            OutputView.printExceptionMessage(e);
+            return createLottoCount(totalLottoCount);
         }
     }
 
