@@ -4,13 +4,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoTicketGenerator {
+public class AutoLottoTicketGenerator {
     private static final int LOTTO_TICKET_SIZE = 6;
 
-    private LottoTicketGenerator() {
+    private AutoLottoTicketGenerator() {
     }
 
-    public static LottoTicket generateLottoTicket() {
+    public static LottoTicket generateAutoLottoTicket() {
         LottoNumbers.shuffleLottoNumbers();
         List<LottoNumber> lottoTicket = LottoNumbers.getInstance().stream()
                 .limit(LOTTO_TICKET_SIZE)

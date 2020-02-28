@@ -6,6 +6,9 @@ import java.util.List;
 public class LottoNumberSplit {
     private static final String DELIMITER = ",";
 
+    private LottoNumberSplit() {
+    }
+
     public static List<LottoNumber> initializeLottoNumbers(String input) {
         String[] numbers = input.split(DELIMITER);
         List<LottoNumber> lottoNumbers = new ArrayList<>();

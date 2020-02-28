@@ -22,4 +22,8 @@ public class ManualLottoTicketCount {
             throw new IllegalArgumentException("수동으로 구매할 로또의 수가 구입금액을 초과합니다.");
         }
     }
+
+    public int getManualLottoTicketCount() {
+        return this.manualLottoTicketCount;
+    }
 }

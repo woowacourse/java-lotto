@@ -10,15 +10,18 @@ public class OutputViewer {
         System.out.println(message);
     }
 
-    public static void printLottoTicketsCount(Money money) {
+    public static void printLottoTicketsCount(int manualLottoTicketCounts, int autoLottoTicketCount) {
         StringBuilder sb = new StringBuilder();
-        sb.append(money.toString());
+        sb.append("\n수동으로 ");
+        sb.append(Integer.toString(manualLottoTicketCounts));
+        sb.append("장, 자동으로 ");
+        sb.append(Integer.toString(autoLottoTicketCount));
         sb.append("개를 구매했습니다.");
         System.out.println(sb.toString());
     }
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+    public static void printLottoTickets(Tickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getTickets()) {
             StringBuilder sb = new StringBuilder();
             String ticketNumbers = String.join(", ", lottoTicket.lottoTicketNumberToString());
             sb.append("[");
@@ -26,7 +29,6 @@ public class OutputViewer {
             sb.append("]");
             System.out.println(sb.toString());
         }
-        System.out.println();
     }
 
     private static void printWinningResult(LottoResult lottoResult) {

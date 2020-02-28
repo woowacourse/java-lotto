@@ -9,10 +9,6 @@ public class LottoTickets implements Tickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoTicket> getLottoTickets() {
-        return this.lottoTickets;
-    }
-
     @Override
     public List<LottoTicket> getTickets() {
         return this.lottoTickets;

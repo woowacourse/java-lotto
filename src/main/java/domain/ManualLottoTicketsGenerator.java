@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottoTicketsGenerator {
+    private ManualLottoTicketsGenerator() {
+    }
 
     public static List<LottoTicket> generateManualLottoTickets(List<String> input) {
         List<LottoTicket> manualLottoTickets = new ArrayList<>();

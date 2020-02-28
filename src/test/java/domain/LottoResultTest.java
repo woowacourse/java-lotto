@@ -17,10 +17,10 @@ public class LottoResultTest {
     @DisplayName("WinningCalculator 가 LottoTickets 와 WinningTicket 을 이용해 당첨된 복권이 몇개인지 계산하는 기능 테스트")
     @Test
     void getPrizeCountTest() {
-        LottoTickets lottoTickets = LottoTicketsFixture.getLottoTickets();
+        AutoLottoTickets autoLottoTickets = LottoTicketsFixture.getAutoLottoTickets();
 
         LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateWinningCount(lottoTickets, winningLottoTicket);
+        lottoResult.calculateWinningCount(autoLottoTickets, winningLottoTicket);
         Assertions.assertThat(lottoResult.getPrizeTypeValue(PrizeType.THREE)).isEqualTo(1);
         Assertions.assertThat(lottoResult.getPrizeTypeValue(PrizeType.FOUR)).isEqualTo(1);
         Assertions.assertThat(lottoResult.getPrizeTypeValue(PrizeType.FIVE)).isEqualTo(1);
@@ -32,9 +32,9 @@ public class LottoResultTest {
     @Test
     void calculateProfitTest() {
         Money money = new Money(14000);
-        LottoTickets lottoTickets = LottoTicketsFixture.getLottoTickets();
+        AutoLottoTickets autoLottoTickets = LottoTicketsFixture.getAutoLottoTickets();
         LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateWinningCount(lottoTickets, winningLottoTicket);
+        lottoResult.calculateWinningCount(autoLottoTickets, winningLottoTicket);
         lottoResult.calculateProfitPercent(money);
 
         Assertions.assertThat(lottoResult.getProfitPercent()).isEqualTo(14511107);

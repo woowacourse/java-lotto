@@ -6,10 +6,21 @@ import view.OutputViewer;
 public class LottoApplication {
     public static void main(String[] args) {
         Money money = LottoController.getMoney(InputViewer.inputMoney());
-        OutputViewer.printLottoTicketsCount(money);
+        int allLottoTicketCount = money.getLottoTicketCount();
 
-        LottoTickets lottoTickets = new LottoTickets(LottoTicketsGenerator.generateLottoTickets(
-                money.getLottoTicketCount()));
+        ManualLottoTicketCount manualLottoTicketCount = LottoController.getManualLottoTicketCount(allLottoTicketCount,
+                InputViewer.inputManualLottoCount());
+        int manualLottoTicketCounts = manualLottoTicketCount.getManualLottoTicketCount();
+        ManualLottoTickets manualLottoTickets = LottoController.getManualLottoTickets(manualLottoTicketCount);
+
+        int autoLottoTicketCount = allLottoTicketCount - manualLottoTicketCounts;
+        AutoLottoTickets autoLottoTickets = new AutoLottoTickets(
+                AutoLottoTicketsGenerator.generateAutoLottoTickets(autoLottoTicketCount));
+
+        LottoTickets lottoTickets = new LottoTickets(
+                LottoController.concatManualTicketsWithAutoTickets(manualLottoTickets, autoLottoTickets));
+
+        OutputViewer.printLottoTicketsCount(manualLottoTicketCounts, autoLottoTicketCount);
         OutputViewer.printLottoTickets(lottoTickets);
 
         WinningLottoTicket winningLottoTicket = LottoController.getWinningLottoTicket(

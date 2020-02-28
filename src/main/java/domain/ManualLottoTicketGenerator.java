@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class ManualLottoTicketGenerator {
+    private ManualLottoTicketGenerator() {
+    }
+
     public static LottoTicket generateManualLottoTicket(String input) {
         validateBlank(input);
         List<LottoNumber> lottoNumbers = LottoNumberSplit.initializeLottoNumbers(input);
