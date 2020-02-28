@@ -7,6 +7,7 @@ import lotto.domain.lottonumber.InvalidLottoNumberException;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottostrategy.LottoFactory;
 import lotto.domain.result.Rank;
+import lotto.util.StringUtils;
 
 /**
  * 로또를 상속받은 우승로또, 사용자로부터 입력을 받은대로 생성
@@ -23,12 +24,14 @@ public class WinningLotto {
 	private Lotto winningLotto;
 	private LottoNumber bonusLottoNumber;
 
-	public WinningLotto(final List<LottoNumber> inputLottoNumbers, LottoNumber inputBonusLottoNumber) {
-		this.winningLotto = LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, inputLottoNumbers);
-		if (this.winningLotto.isContain(inputBonusLottoNumber)) {
+	public WinningLotto(final String inputLottoNumbers, final String inputBonusLottoNumber) {
+		List<LottoNumber> winningLottoNumbers = StringUtils.splitIntoLottoNumbers(inputLottoNumbers);
+		this.winningLotto = LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, winningLottoNumbers);
+		LottoNumber bonusLottoNumber = LottoNumber.of(StringUtils.parseToInteger(inputBonusLottoNumber));
+		if (this.winningLotto.isContain(bonusLottoNumber)) {
 			throw new InvalidLottoNumberException(BONUS_NUMBER_OVERLAP_EXCEPTION_MESSAGE);
 		}
-		this.bonusLottoNumber = inputBonusLottoNumber;
+		this.bonusLottoNumber = bonusLottoNumber;
 	}
 
 	public Rank getRank(final Lotto lotto) {

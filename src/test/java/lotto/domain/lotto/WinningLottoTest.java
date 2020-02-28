@@ -28,17 +28,7 @@ public class WinningLottoTest {
 
 	@BeforeEach
 	void setUp() {
-		winningLotto = new WinningLotto(new ArrayList<>(
-				Arrays.asList(
-						LottoNumber.of(1),
-						LottoNumber.of(2),
-						LottoNumber.of(3),
-						LottoNumber.of(4),
-						LottoNumber.of(5),
-						LottoNumber.of(6)
-				)
-		),
-				LottoNumber.of(7));
+		winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
 	}
 
 	@Test

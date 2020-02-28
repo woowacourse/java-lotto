@@ -1,9 +1,7 @@
 package lotto.domain.result;
 
-import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottostrategy.LottoFactory;
-import lotto.domain.money.MoneyForLotto;
-import lotto.domain.lotto.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoType;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottostrategy.LottoFactory;
+import lotto.domain.money.MoneyForLotto;
 
 /**
  * ResultStatistic 테스트
@@ -23,26 +27,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 날짜 : 2020/02/20
  */
 public class ResultStatisticTest {
-	private Lottos lottos;
-	private WinningLotto winningLotto;
 	private ResultStatistic resultStatistic;
 
 	@BeforeEach
 	void setUp() {
-		List<Lotto> tempLottos = new ArrayList<>();
-
-		List<LottoNumber> winningLottoNumbers = Arrays.asList(
-				LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(3),
-				LottoNumber.of(4),
-				LottoNumber.of(5),
-				LottoNumber.of(6)
-		);
-
-		LottoNumber bonus = LottoNumber.of(7);
-
-		winningLotto = new WinningLotto(winningLottoNumbers, bonus);
+		WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
 
 		List<LottoNumber> lottoNumbersFistPrize = Arrays.asList(
 				LottoNumber.of(1),
@@ -69,12 +58,11 @@ public class ResultStatisticTest {
 				LottoNumber.of(8),
 				LottoNumber.of(9)
 		);
-
-		tempLottos.add(LottoFactory.createManualLotto(LottoType.AUTO_LOTTO, lottoNumbersFistPrize));
-		tempLottos.add(LottoFactory.createManualLotto(LottoType.AUTO_LOTTO, lottoNumbersForthPrize));
-		tempLottos.add(LottoFactory.createManualLotto(LottoType.AUTO_LOTTO, lottoNumbersSixthPrize));
-		lottos = new Lottos(tempLottos);
-		resultStatistic = ResultStatistic.calculate(lottos, winningLotto);
+		List<Lotto> tempLottos = new ArrayList<>();
+		tempLottos.add(LottoFactory.createManualLotto(LottoType.MANUAL_LOTTO, lottoNumbersFistPrize));
+		tempLottos.add(LottoFactory.createManualLotto(LottoType.MANUAL_LOTTO, lottoNumbersForthPrize));
+		tempLottos.add(LottoFactory.createManualLotto(LottoType.MANUAL_LOTTO, lottoNumbersSixthPrize));
+		resultStatistic = ResultStatistic.calculate(new Lottos(tempLottos), winningLotto);
 	}
 
 	@Test

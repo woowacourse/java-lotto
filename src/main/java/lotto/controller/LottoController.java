@@ -28,7 +28,9 @@ public class LottoController {
 		Lottos purchasedLottos = receivePurchasedLottos(lottoCount);
 		OutputView.printPurchasedLottos(lottoCount, purchasedLottos);
 
-		WinningLotto winningLotto = receiveWinningLotto();
+		String inputWinningLottoNumbers = InputView.getWinningLotto();
+		String inputBonusLottoNumber = InputView.getBonusLottoNumber();
+		WinningLotto winningLotto = new WinningLotto(inputWinningLottoNumbers, inputBonusLottoNumber);
 
 		ResultStatistic result = ResultStatistic.calculate(purchasedLottos, winningLotto);
 		OutputView.printResultStatistic(result, moneyForLotto);
@@ -55,15 +57,4 @@ public class LottoController {
 	private boolean isManualAndAuto(LottoCount lottoCount) {
 		return lottoCount.getManualLottoCount() != MINIMUM_COUNT && lottoCount.getAutoLottoCount() != MINIMUM_COUNT;
 	}
-
-	private WinningLotto receiveWinningLotto() {
-		String inputWinningLotto = InputView.getWinningLotto();
-		List<LottoNumber> winningLottoNumbers = StringUtils.splitIntoLottoNumbers(inputWinningLotto);
-
-		String inputBonusLottoNumber = InputView.getBonusLottoNumber();
-		LottoNumber bonusLottoNumber = LottoNumber.of(StringUtils.parseToInteger(inputBonusLottoNumber));
-
-		return new WinningLotto(winningLottoNumbers, bonusLottoNumber);
-	}
-
 }
