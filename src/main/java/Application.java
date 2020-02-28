@@ -1,4 +1,5 @@
 import lotto.controller.AutoLottoController;
+import lotto.controller.ManualLottoController;
 
 /**
  * 클래스 이름 : Application.java
@@ -10,6 +11,6 @@ import lotto.controller.AutoLottoController;
  */
 public class Application {
 	public static void main(String[] args) {
-		AutoLottoController.run();
+		ManualLottoController.run();
 	}
 }

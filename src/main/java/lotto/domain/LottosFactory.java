@@ -78,4 +78,8 @@ public class LottosFactory {
     private static int calculateAmountOfLottos(Money money) {
         return money.getMoney() / Lotto.LOTTO_PRICE;
     }
+
+    public static int getHowMuchCanBuyLottoWith(Money money) {
+        return calculateAmountOfLottos(money);
+    }
 }
