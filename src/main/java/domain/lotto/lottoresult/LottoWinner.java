@@ -1,8 +1,11 @@
 package domain.lotto.lottoresult;
 
 import domain.lotto.LottoNumber;
+import domain.lotto.LottoNumberFactory;
 import domain.lotto.LottoNumbers;
+import domain.lotto.LottoNumbersFactory;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoWinner {
@@ -12,11 +15,15 @@ public class LottoWinner {
     private LottoNumbers lottoNumbers;
     private LottoNumber bonus;
 
-    public LottoWinner(LottoNumbers lottoNumbers, LottoNumber bonus) {
+    private LottoWinner(LottoNumbers lottoNumbers, LottoNumber bonus) {
         validateNullValue(lottoNumbers, bonus);
         validateBonus(lottoNumbers, bonus);
         this.lottoNumbers = lottoNumbers;
         this.bonus = bonus;
+    }
+
+    public static LottoWinner create(List<Integer> winnerNumbers, int bonusNumber) {
+        return new LottoWinner(LottoNumbersFactory.createLottoNumbers(winnerNumbers), LottoNumberFactory.getInstance(bonusNumber));
     }
 
     private void validateBonus(LottoNumbers lottoNumbers, LottoNumber bonus) {

@@ -30,7 +30,7 @@ public class Money {
         return PERCENT_NUMBER * earningMoney / money;
     }
 
-    public int countGames() {
-        return money / LOTTO_PRICE;
+    public RepeatCount createRepeatCount() {
+        return new RepeatCount(money / LOTTO_PRICE);
     }
 }

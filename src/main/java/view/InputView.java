@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String DELIMETER = ",";
+    private static final String DELIMITER = ",";
 
     private InputView() {
         throw new AssertionError();
@@ -23,14 +23,13 @@ public class InputView {
     }
 
     private static List<Integer> splitAndParse(String input) {
-        return Arrays.stream(input.split(DELIMETER))
+        return Arrays.stream(input.split(DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> inputWinnerNumbers() {
-        OutputView.printWinnerNumbersFormat();
+    public static List<Integer> inputNumbers() {
         try {
             return splitAndParse(scanner.nextLine());
         } catch (NumberFormatException e) {
@@ -38,8 +37,13 @@ public class InputView {
         }
     }
 
-    public static int inputBonusNumber() {
-        OutputView.printBonusNumberFormat();
+    public static List<Integer> inputNumbers(Runnable message) {
+        message.run();
+        return inputNumbers();
+    }
+
+    public static int inputNumber(Runnable message) {
+        message.run();
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {

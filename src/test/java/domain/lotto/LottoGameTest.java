@@ -1,32 +1,43 @@
 package domain.lotto;
 
+import domain.RepeatCount;
 import domain.lotto.lottoresult.LottoRank;
 import domain.lotto.lottoresult.LottoResult;
 import domain.lotto.lottoresult.LottoWinner;
 import domain.lotto.lottoresult.ResultCount;
+import generator.TestNumberGenerator;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
 public class LottoGameTest {
-    @Test
-    void 게임생성_확인() {
-        LottoGame actualLottoGame = LottoGame.create(new TestNumberGenerator(), 2);
-        Assertions.assertThat(actualLottoGame).isInstanceOf(LottoGame.class);
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2, 3})
+    @DisplayName("게임생성 테스트")
+    void test1(int value) {
+        Assertions.assertThatCode(() -> LottoGame.create(new TestNumberGenerator(), new RepeatCount(value))).doesNotThrowAnyException();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3", "0,0,0", "0,1,1", "1,0,1"})
+    @DisplayName("게임합치기테스트")
+    void test3(int input1, int input2, int sum) {
+        LottoGame lottoGame1 = LottoGame.create(new TestNumberGenerator(), new RepeatCount(input1));
+        LottoGame lottoGame2 = LottoGame.create(new TestNumberGenerator(), new RepeatCount(input2));
+        LottoGame mergedLottoGame = LottoGame.merge(lottoGame1, lottoGame2);
+        Assertions.assertThat(mergedLottoGame.getLottoGame().size()).isEqualTo(sum);
     }
 
     @Test
-    void null방어_확인() {
-        Assertions.assertThatThrownBy(() -> new LottoGame(null))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("null값이 입력되었습니다.");
-    }
-
-    @Test
-    void Result생성_확인() {
-        LottoGame lottoGame = LottoGame.create(new TestNumberGenerator(), 2);
-        LottoWinner winner = new LottoWinner(LottoNumbersFactory.createLottoNumbers(Arrays.asList(1,2,3,4,5,6)), LottoNumberFactory.getInstance(7));
+    @DisplayName("Result생성 확인")
+    void test5() {
+        LottoGame lottoGame = LottoGame.create(new TestNumberGenerator(), new RepeatCount(2));
+        LottoWinner winner = LottoWinner.create(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         LottoResult result = lottoGame.createGameResult(winner);
         Assertions.assertThat(result.getResult().get(LottoRank.FIRST)).isEqualTo(new ResultCount(2));
     }
