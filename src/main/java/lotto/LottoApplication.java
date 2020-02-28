@@ -25,8 +25,7 @@ public class LottoApplication {
             money.getTicketCount() - manualCount.getManualCount()));
         WinLottoNumbers winLottoNumbers = getWinNumbersAndBonusBallNumber();
 
-        LottoResultCount lottoResultCount = new LottoResultCount();
-        lottoResultCount.resultLotto(tickets, winLottoNumbers);
+        LottoResultCount lottoResultCount = new LottoResultCount(tickets, winLottoNumbers);
 
         printCorrectResults(lottoResultCount);
         OutputView.printYield(money.getYield(lottoResultCount));

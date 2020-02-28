@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.controller.LottoManager;
+import java.util.Arrays;
 import lotto.exception.NotMultipleOfThousandException;
 import lotto.exception.NotNumberException;
 import org.junit.jupiter.api.DisplayName;
@@ -32,8 +32,9 @@ public class MoneyTest {
     @DisplayName("수익률 계산")
     void getYield() {
         Money money = new Money("10000");
-        LottoResultCount lottoResultCount = new LottoResultCount();
-        lottoResultCount.updateResultCount(RankType.THREE);
+        Tickets tickets = new Tickets(Arrays.asList(new Ticket("1, 2, 3, 4, 5, 6")));
+        WinLottoNumbers winLottoNumbers = new WinLottoNumbers("1, 2, 3, 8, 9, 10", "7");
+        LottoResultCount lottoResultCount = new LottoResultCount(tickets, winLottoNumbers);
         assertThat(money.getYield(lottoResultCount)).isEqualTo(50);
     }
 }
