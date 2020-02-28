@@ -1,13 +1,13 @@
 package lotto.domain.lotto;
 
-public class CountOfManualLotto {
+public class CountOfManualLottoTicket {
 	private static final int MIN_BOUND = 0;
 	private static final int LAST_COUNT = 0;
 
 	private int countOfManualLotto;
 	private int loop_count;
 
-	public CountOfManualLotto(String rawCount, int countOfAllLotto) {
+	public CountOfManualLottoTicket(String rawCount, int countOfAllLotto) {
 		validateType(rawCount);
 		validateBound(countOfAllLotto);
 		loop_count = countOfManualLotto;
@@ -17,13 +17,13 @@ public class CountOfManualLotto {
 		try {
 			countOfManualLotto = Integer.parseInt(rawCount);
 		} catch (IllegalArgumentException e) {
-			throw new InvalidCountOfManualLottoException(InvalidCountOfManualLottoException.WRONG_TYPE);
+			throw new InvalidCountOfManualLottoTicketException(InvalidCountOfManualLottoTicketException.WRONG_TYPE);
 		}
 	}
 
 	private void validateBound(int maxBound) {
 		if (countOfManualLotto < MIN_BOUND || countOfManualLotto > maxBound) {
-			throw new InvalidCountOfManualLottoException(InvalidCountOfManualLottoException.WRONG_BOUND);
+			throw new InvalidCountOfManualLottoTicketException(InvalidCountOfManualLottoTicketException.WRONG_BOUND);
 		}
 	}
 

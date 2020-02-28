@@ -11,11 +11,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.number.LottoNumber;
 
 class LottoWinningResultTest {
-	private static Lottos lottos;
+	private static LottoTicket lottoTicket;
 	private static WinningLotto winningLotto;
 
 	@BeforeAll
@@ -45,7 +45,7 @@ class LottoWinningResultTest {
 				LottoNumber.valueOf(5),
 				LottoNumber.valueOf(6)
 		));
-		lottos = new Lottos(Arrays.asList(
+		lottoTicket = new LottoTicket(Arrays.asList(
 				new Lotto(lottoNumbers),
 				new Lotto(lottoNumbers2)));
 		Lotto lotto = new Lotto(lottoNumbers3);
@@ -56,6 +56,6 @@ class LottoWinningResultTest {
 	@DisplayName("LottoWinningResult 생성자에 구매한 로또들과 당첨 로또가 입력되었을 때 유효한 값일시 객체 생성 ")
 	@Test
 	void constructor_validRankCount_createLottoRankRecode() {
-		assertThat(new LottoWinningResult(lottos, winningLotto)).isInstanceOf(LottoWinningResult.class);
+		assertThat(new LottoWinningResult(lottoTicket, winningLotto)).isInstanceOf(LottoWinningResult.class);
 	}
 }

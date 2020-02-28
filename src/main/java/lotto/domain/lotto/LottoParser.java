@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.number.LottoNumber;
 
 public class LottoParser {
 	private static final String DELIMITER = ",";

@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.number.LottoNumber;
 
 class LottoTest {
-	@DisplayName("lotto 생성자에 lottonumber List 입력이 들어올 때 객체 생성")
+	@DisplayName("lotto 생성자에 number List 입력이 들어올 때 객체 생성")
 	@Test
 	void constructor_NumberList_CreateLotto() {
 		Set<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(

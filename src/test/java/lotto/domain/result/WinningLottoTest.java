@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.number.LottoNumber;
 
 class WinningLottoTest {
 	private static Lotto lotto;

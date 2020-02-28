@@ -9,10 +9,10 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.number.LottoNumber;
 
 class LottoParserTest {
-	@DisplayName("WinningLottoParser에 정상값을 입력하면 lottonumber list 반환")
+	@DisplayName("WinningLottoParser에 정상값을 입력하면 number list 반환")
 	@Test
 	void parser_StringInputWinningLotto_CreateWinningLotto() {
 		String inputWinningLotto = "1, 2, 3, 4, 5, 6";

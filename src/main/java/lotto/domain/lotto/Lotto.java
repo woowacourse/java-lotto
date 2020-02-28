@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.number.LottoNumber;
 
 public class Lotto {
 	public static final int CORRECT_SIZE = 6;

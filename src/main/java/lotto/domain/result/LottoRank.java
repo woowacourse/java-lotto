@@ -2,20 +2,20 @@ package lotto.domain.result;
 
 import java.util.Arrays;
 
-import lotto.domain.lottomoney.LottoMoney;
+import lotto.domain.money.Money;
 
 public enum LottoRank {
-	FIRST(6, new LottoMoney(2_000_000_000)),
-	SECOND(5, new LottoMoney(30_000_000)),
-	THIRD(5, new LottoMoney(1_500_000)),
-	FOURTH(4, new LottoMoney(50_000)),
-	FIFTH(3, new LottoMoney(5_000)),
-	MISS(0, new LottoMoney(0));
+	FIRST(6, new Money(2_000_000_000)),
+	SECOND(5, new Money(30_000_000)),
+	THIRD(5, new Money(1_500_000)),
+	FOURTH(4, new Money(50_000)),
+	FIFTH(3, new Money(5_000)),
+	MISS(0, new Money(0));
 
 	private int matchCount;
-	private LottoMoney winningMoney;
+	private Money winningMoney;
 
-	LottoRank(int matchCount, LottoMoney winningMoney) {
+	LottoRank(int matchCount, Money winningMoney) {
 		this.matchCount = matchCount;
 		this.winningMoney = winningMoney;
 	}
@@ -35,7 +35,7 @@ public enum LottoRank {
 		return this == lottoRank;
 	}
 
-	public LottoMoney getWinningMoney() {
+	public Money getWinningMoney() {
 		return winningMoney;
 	}
 

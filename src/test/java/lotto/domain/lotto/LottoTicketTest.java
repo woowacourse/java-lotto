@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.number.LottoNumber;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,8 +11,8 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottosTest {
-    private static Lottos lottos;
+class LottoTicketTest {
+    private static LottoTicket lottoTicket;
     private static Lotto lottoFirst;
     private static Lotto lottoSecond;
 
@@ -36,20 +36,20 @@ class LottosTest {
         ));
         lottoFirst = new Lotto(lottoNumbers);
         lottoSecond = new Lotto(lottoNumbers2);
-        lottos = new Lottos(Arrays.asList(lottoFirst, lottoSecond));
+        lottoTicket = new LottoTicket(Arrays.asList(lottoFirst, lottoSecond));
     }
 
-    @DisplayName("Lottos 생성자 매개변수에 올바른 Lotto 리스트가 들어오면 정상적으로 Lottos객체 생성")
+    @DisplayName("LottoTicket 생성자 매개변수에 올바른 Lotto 리스트가 들어오면 정상적으로 Lottos객체 생성")
     @Test
-    void constructor_validLottoList_createLottos() {
-        assertThat(lottos).isInstanceOf(Lottos.class);
+    void constructor_validLottoList_createLottoTicket() {
+        assertThat(lottoTicket).isInstanceOf(LottoTicket.class);
     }
 
-    @DisplayName("add 메서드를 이용해 lottosFirst에 lottosSeccond를 더하는 기능을 테스트 ")
+    @DisplayName("add 메서드를 이용해 lottoTicketFirst에 lottoTicketSecond를 더하는 기능을 테스트 ")
     @Test
     void add_inputLottoList_addLottoList() {
-        Lottos lottosFirst = new Lottos(Arrays.asList(lottoFirst));
-        Lottos lottosSeccond = new Lottos(Arrays.asList(lottoSecond));
-        assertThat(lottosFirst.add(lottosSeccond)).isEqualTo(lottos);
+        LottoTicket lottoTicketFirst = new LottoTicket(Arrays.asList(lottoFirst));
+        LottoTicket lottoTicketSecond = new LottoTicket(Arrays.asList(lottoSecond));
+        assertThat(lottoTicketFirst.add(lottoTicketSecond)).isEqualTo(lottoTicket);
     }
 }

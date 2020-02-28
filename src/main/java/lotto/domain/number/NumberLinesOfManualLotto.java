@@ -1,11 +1,11 @@
-package lotto.domain.lottonumber;
+package lotto.domain.number;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import lotto.domain.lotto.Generator.ManualLottoGenerator;
+import lotto.domain.lotto.Generator.ManualLottoTicketGenerator;
 import lotto.domain.lotto.Lotto;
 
 public class NumberLinesOfManualLotto {
@@ -21,7 +21,7 @@ public class NumberLinesOfManualLotto {
 	}
 
 	private void validate(String rawLine) {
-		List<String> numbers = Arrays.asList(rawLine.split(ManualLottoGenerator.DELIMITER));
+		List<String> numbers = Arrays.asList(rawLine.split(ManualLottoTicketGenerator.DELIMITER));
 		validateNull(numbers);
 		validateSize(numbers);
 		validateInteger(numbers);

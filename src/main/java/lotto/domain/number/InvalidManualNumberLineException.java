@@ -1,4 +1,4 @@
-package lotto.domain.lottonumber;
+package lotto.domain.number;
 
 class InvalidManualNumberLineException extends IllegalArgumentException {
 	static final String NOT_INTEGER = "정수를 입력해주세요.";

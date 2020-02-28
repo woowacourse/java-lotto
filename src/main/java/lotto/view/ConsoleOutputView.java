@@ -4,10 +4,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoMachine;
-import lotto.domain.lotto.CountOfManualLotto;
+import lotto.domain.lotto.CountOfManualLottoTicket;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.number.LottoNumber;
 import lotto.domain.result.LottoRank;
 
 public class ConsoleOutputView {
@@ -22,12 +22,12 @@ public class ConsoleOutputView {
 	private ConsoleOutputView() {
 	}
 
-	public static void printPurchaseCompleteMessage(CountOfManualLotto countOfManualLotto, LottoMachine countOfAutoLotto) {
-		System.out.printf(PURCHASE_COMPLETE_MESSAGE, countOfManualLotto.getCountOfManualLotto(), countOfAutoLotto.getCountOfAutoLottos());
+	public static void printPurchaseCompleteMessage(CountOfManualLottoTicket countOfManualLottoTicket, LottoMachine countOfAutoLotto) {
+		System.out.printf(PURCHASE_COMPLETE_MESSAGE, countOfManualLottoTicket.getCountOfManualLotto(), countOfAutoLotto.getCountOfAutoLottoTicket());
 	}
 
-	public static void printPurchasedLotto(Lottos lottos) {
-		for (Lotto lotto : lottos) {
+	public static void printPurchasedLotto(LottoTicket lottoTicket) {
+		for (Lotto lotto : lottoTicket) {
 			String lottoNumber = lotto.getLottoNumbers().stream()
 				.map(LottoNumber::getNumber)
 				.map(Object::toString)

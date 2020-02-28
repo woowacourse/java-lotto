@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lottomoney.LottoMoney;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.money.Money;
 
 public class LottoWinningResult {
 	private static final int SUM_UNIT = 1;
@@ -14,18 +14,18 @@ public class LottoWinningResult {
 
 	private Map<LottoRank, Integer> lottoRankCount;
 
-	public LottoWinningResult(Lottos lottos, WinningLotto winningLotto) {
+	public LottoWinningResult(LottoTicket lottoTicket, WinningLotto winningLotto) {
 		lottoRankCount = new TreeMap<>(Collections.reverseOrder());
 
 		for (LottoRank lottoRank : LottoRank.values()) {
 			lottoRankCount.put(lottoRank, INIT_COUNT);
 		}
 
-		calculate(lottos, winningLotto);
+		calculate(lottoTicket, winningLotto);
 	}
 
-	private void calculate(Lottos lottos, WinningLotto winningLotto) {
-		for (Lotto lotto : lottos) {
+	private void calculate(LottoTicket lottoTicket, WinningLotto winningLotto) {
+		for (Lotto lotto : lottoTicket) {
 			LottoRank lottoRank = LottoRank.of(
 					lotto.calculateMatchCount(winningLotto.getLotto()),
 					lotto.contains(winningLotto.getBonusNumber()));
@@ -33,13 +33,13 @@ public class LottoWinningResult {
 		}
 	}
 
-	public int calculateWinningRatio(LottoMoney inputLottoMoney) {
-		LottoMoney totalWinningMoney = LottoRank.MISS.getWinningMoney();
+	public int calculateWinningRatio(Money inputMoney) {
+		Money totalWinningMoney = LottoRank.MISS.getWinningMoney();
 		for (Map.Entry<LottoRank, Integer> lottoEntry : lottoRankCount.entrySet()) {
 			totalWinningMoney = totalWinningMoney.add(
 				lottoEntry.getKey().getWinningMoney().multiply(lottoEntry.getValue()));
 		}
-		return totalWinningMoney.getWinningRate(inputLottoMoney);
+		return totalWinningMoney.getWinningRate(inputMoney);
 	}
 
 	public Map<LottoRank, Integer> getLottoRankCount() {

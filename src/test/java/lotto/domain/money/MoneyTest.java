@@ -1,4 +1,4 @@
-package lotto.domain.lottomoney;
+package lotto.domain.money;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -9,19 +9,19 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class LottoMoneyTest {
+class MoneyTest {
 	@DisplayName("money 생성자에 양수 입력이 들어올 때 객체 생성")
 	@Test
 	void constructor_InputNumber_CreatedMoney() {
-		assertThat(new LottoMoney("14000"))
-			.isInstanceOf(LottoMoney.class);
+		assertThat(new Money("14000"))
+			.isInstanceOf(Money.class);
 	}
 
 	@DisplayName("money 생성자에 null이나 빈 스트링 입력이 들어올 때 InvalidLottoMoneyException 발생")
 	@ParameterizedTest
 	@NullAndEmptySource
 	void validateNullOrEmpty_NullOrBlankInput_ExceptionThrown(String input) {
-		assertThatThrownBy(() -> new LottoMoney(input))
+		assertThatThrownBy(() -> new Money(input))
 			.isInstanceOf(InvalidLottoMoneyException.class)
 			.hasMessage(InvalidLottoMoneyException.NULL_OR_EMPTY);
 	}
@@ -30,7 +30,7 @@ class LottoMoneyTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"abc", "124.1"})
 	void parseToInteger_NotInteger_ExceptionThrown(String input) {
-		assertThatThrownBy(() -> new LottoMoney(input))
+		assertThatThrownBy(() -> new Money(input))
 			.isInstanceOf(InvalidLottoMoneyException.class)
 			.hasMessage(InvalidLottoMoneyException.NOT_INTEGER);
 	}
@@ -39,7 +39,7 @@ class LottoMoneyTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"-1", "0"})
 	void validatePositive_NotPositiveInteger_ExceptionThrown(String input) {
-		assertThatThrownBy(() -> new LottoMoney(input))
+		assertThatThrownBy(() -> new Money(input))
 			.isInstanceOf(InvalidLottoMoneyException.class)
 			.hasMessage(InvalidLottoMoneyException.NOT_POSITIVE);
 	}
@@ -47,7 +47,7 @@ class LottoMoneyTest {
 	@DisplayName("money 생성자에 1000단위가 아닌 정수 입력이 들어올 때 InvalidLottoMoneyException 발생")
 	@Test
 	void validateUnit_NotThousandUnitInteger_ExceptionThrown() {
-		assertThatThrownBy(() -> new LottoMoney("1001"))
+		assertThatThrownBy(() -> new Money("1001"))
 			.isInstanceOf(InvalidLottoMoneyException.class)
 			.hasMessage(InvalidLottoMoneyException.INVALID_UNIT);
 	}
@@ -56,36 +56,36 @@ class LottoMoneyTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1", "14000:14"}, delimiter = ':')
 	void calculateCountOfLotto_ValidUnit_ReturnCountOfLotto(int money, int countOfLotto) {
-		assertThat(new LottoMoney(money).calculateCountOfLotto(1000)).isEqualTo(countOfLotto);
+		assertThat(new Money(money).calculateCountOfLotto(1000)).isEqualTo(countOfLotto);
 	}
 
 	@DisplayName("더한만큼의 돈을 반환하는 함수")
 	@Test
 	void add_AddedMoney_ReturnSum() {
-		LottoMoney lottoMoney = new LottoMoney("3000");
-		LottoMoney addedLottoMoney = new LottoMoney("5000");
+		Money money = new Money("3000");
+		Money addedMoney = new Money("5000");
 
-		LottoMoney expectedLottoMoney = new LottoMoney("8000");
-		assertThat(lottoMoney.add(addedLottoMoney)).isEqualTo(expectedLottoMoney);
+		Money expectedMoney = new Money("8000");
+		assertThat(money.add(addedMoney)).isEqualTo(expectedMoney);
 	}
 
 	@DisplayName("곱한만큼의 돈을 반환하는 함수")
 	@Test
 	void multiply_MultipliedCount_ReturnCalculatedMoney() {
-		LottoMoney lottoMoney = new LottoMoney("3000");
+		Money money = new Money("3000");
 		int multiplyCount = 3;
 
-		LottoMoney expectedLottoMoney = new LottoMoney("9000");
-		assertThat(lottoMoney.multiply(multiplyCount)).isEqualTo(expectedLottoMoney);
+		Money expectedMoney = new Money("9000");
+		assertThat(money.multiply(multiplyCount)).isEqualTo(expectedMoney);
 	}
 
 	@DisplayName("총 수익금을 낸 돈으로 나눠서 수익률을 계산하는 함수")
 	@Test
 	void getWinningRatio_PaidLottoMoney_ReturnWinningRatio() {
-		LottoMoney paidLottoMoney = new LottoMoney("5000");
-		LottoMoney winningLottoMoney = new LottoMoney("15000");
+		Money paidMoney = new Money("5000");
+		Money winningMoney = new Money("15000");
 
 		int expectedRatio = 300;
-		assertThat(winningLottoMoney.getWinningRate(paidLottoMoney)).isEqualTo(expectedRatio);
+		assertThat(winningMoney.getWinningRate(paidMoney)).isEqualTo(expectedRatio);
 	}
 }

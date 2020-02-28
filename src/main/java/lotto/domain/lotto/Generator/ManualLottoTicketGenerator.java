@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottonumber.NumberLinesOfManualLotto;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.NumberLinesOfManualLotto;
 
-public class ManualLottoGenerator implements LottosGenerator {
+public class ManualLottoTicketGenerator implements LottoTicketGenerator {
 	public static final String DELIMITER = ",";
 
 	private List<String> numberLines;
 
-	public ManualLottoGenerator(NumberLinesOfManualLotto manualLottoNumbers) {
+	public ManualLottoTicketGenerator(NumberLinesOfManualLotto manualLottoNumbers) {
 		numberLines = manualLottoNumbers.getNumberLines();
 	}
 
@@ -28,11 +28,11 @@ public class ManualLottoGenerator implements LottosGenerator {
 	}
 
 	@Override
-	public Lottos generate() {
-		List<Lotto> lottos = new ArrayList<>();
+	public LottoTicket generate() {
+		List<Lotto> lottoTicket = new ArrayList<>();
 		for (String numberLine : numberLines) {
-			lottos.add(createLotto(numberLine));
+			lottoTicket.add(createLotto(numberLine));
 		}
-		return new Lottos(lottos);
+		return new LottoTicket(lottoTicket);
 	}
 }

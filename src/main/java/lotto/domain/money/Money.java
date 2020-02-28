@@ -1,18 +1,18 @@
-package lotto.domain.lottomoney;
+package lotto.domain.money;
 
 import java.util.Objects;
 
-public class LottoMoney {
+public class Money {
 	private static final long ZERO = 0;
 	private static final int PERCENT = 100;
 
 	private final long money;
 
-	public LottoMoney(long money) {
+	public Money(long money) {
 		this.money = money;
 	}
 
-	public LottoMoney(String money) {
+	public Money(String money) {
 		this.money = validate(money);
 	}
 
@@ -58,19 +58,19 @@ public class LottoMoney {
 		return money;
 	}
 
-	public LottoMoney add(LottoMoney addedLottoMoney) {
-		return new LottoMoney(this.money + addedLottoMoney.money);
+	public Money add(Money addedMoney) {
+		return new Money(this.money + addedMoney.money);
 	}
 
-	public LottoMoney multiply(int multiplyCount) {
-		return new LottoMoney(this.money * multiplyCount);
+	public Money multiply(int multiplyCount) {
+		return new Money(this.money * multiplyCount);
 	}
 
-	public int getWinningRate(LottoMoney inputLottoMoney) {
-		if (inputLottoMoney.money == 0) {
+	public int getWinningRate(Money inputMoney) {
+		if (inputMoney.money == 0) {
 			return 0;
 		}
-		return (int)((this.money * PERCENT) / inputLottoMoney.money);
+		return (int)((this.money * PERCENT) / inputMoney.money);
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class LottoMoney {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		LottoMoney that = (LottoMoney)o;
+		Money that = (Money)o;
 		return money == that.money;
 	}
 

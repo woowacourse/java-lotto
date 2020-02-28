@@ -1,40 +1,40 @@
 package lotto.domain;
 
-import lotto.domain.lotto.CountOfManualLotto;
-import lotto.domain.lotto.Generator.AutoLottoGenerator;
-import lotto.domain.lotto.Generator.ManualLottoGenerator;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lottonumber.NumberLinesOfManualLotto;
+import lotto.domain.lotto.CountOfManualLottoTicket;
+import lotto.domain.lotto.Generator.AutoLottoTicketGenerator;
+import lotto.domain.lotto.Generator.ManualLottoTicketGenerator;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.number.NumberLinesOfManualLotto;
 
 public class LottoMachine {
 	private static final int DEFAULT_COUNT = 0;
 
-	private Lottos allLottos;
-	private int countOfAutoLottos;
+	private LottoTicket allLottoTicket;
+	private int countOfAutoLottoTicket;
 
 	public LottoMachine() {
-		allLottos = new Lottos();
-		countOfAutoLottos = DEFAULT_COUNT;
+		allLottoTicket = new LottoTicket();
+		countOfAutoLottoTicket = DEFAULT_COUNT;
 	}
 
-	public Lottos buyLottoTicket(int countOfAllLotto, CountOfManualLotto countOfManualLotto,
+	public LottoTicket buyLottoTicket(int countOfAllLotto, CountOfManualLottoTicket countOfManualLottoTicket,
 		NumberLinesOfManualLotto manualLottoNumbers) {
-		int countOfAutoLottos = calculateCountOfAutoLottos(countOfAllLotto, countOfManualLotto);
+		int countOfAutoLottoTicket = calculateCountOfAutoLottoTicket(countOfAllLotto, countOfManualLottoTicket);
 
-		ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(manualLottoNumbers);
-		AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(countOfAutoLottos);
+		ManualLottoTicketGenerator manualLottoTicketGenerator = new ManualLottoTicketGenerator(manualLottoNumbers);
+		AutoLottoTicketGenerator autoLottoTicketGenerator = new AutoLottoTicketGenerator(countOfAutoLottoTicket);
 
-		allLottos.add(manualLottoGenerator.generate());
-		allLottos.add(autoLottoGenerator.generate());
+		allLottoTicket.add(manualLottoTicketGenerator.generate());
+		allLottoTicket.add(autoLottoTicketGenerator.generate());
 
-		return allLottos;
+		return allLottoTicket;
 	}
 
-	public int calculateCountOfAutoLottos(int countOfAllLotto, CountOfManualLotto countOfManualLotto) {
-		return countOfAllLotto - countOfManualLotto.getCountOfManualLotto();
+	public int calculateCountOfAutoLottoTicket(int countOfAllLotto, CountOfManualLottoTicket countOfManualLottoTicket) {
+		return countOfAllLotto - countOfManualLottoTicket.getCountOfManualLotto();
 	}
 
-	public int getCountOfAutoLottos() {
-		return countOfAutoLottos;
+	public int getCountOfAutoLottoTicket() {
+		return countOfAutoLottoTicket;
 	}
 }
