@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import lotto.domain.count.Count;
+
 public class LottoFactory {
 
     private static final List<LottoNumber> LOTTO_NUMBERS;
@@ -29,27 +31,45 @@ public class LottoFactory {
         }
     }
 
-    public static LottoTicket publishLottoTicketFrom(Set<Integer> numbers) {
+    public static LottoTickets publishLottoTicketsFrom(List<Set<Integer>> lottoTicketsNumbers) {
+        List<LottoTicket> lottoTickets = lottoTicketsNumbers.stream()
+                .map(LottoFactory::publishLottoTicketFrom)
+                .collect(Collectors.toList());
+        return new LottoTickets(lottoTickets);
+    }
+
+    static LottoTicket publishLottoTicketFrom(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoFactory::publishLottoNumberFrom)
                 .collect(Collectors.toSet());
         return new LottoTicket(lottoNumbers);
     }
 
-    public static LottoTicket publishLottoTicketOfRandom() {
+    public static LottoTickets publishAutoLottoTicketsFrom(Count count) {
+        int countOfAutoLottoTickets = count.getAutoCounts();
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        for (int i = 0; i < countOfAutoLottoTickets; i++) {
+            lottoTickets.add(publishLottoTicketOfRandom());
+        }
+
+        return new LottoTickets(lottoTickets);
+    }
+
+    static LottoTicket publishLottoTicketOfRandom() {
         Collections.shuffle(LOTTO_NUMBERS);
         List<LottoNumber> slicedLottoNumbers = LOTTO_NUMBERS.subList(START_INDEX, LOTTO_SIZE);
         return new LottoTicket(new HashSet<>(slicedLottoNumbers));
-    }
-
-    private static LottoNumber publishLottoNumberFrom(int number) {
-        return LOTTO_NUMBER_MATCHER.get(number);
     }
 
     public static WinningLotto publishWinningLotto(Set<Integer> lottoNumbers, Integer bonusNumber) {
         LottoTicket lottoTicket = publishLottoTicketFrom(lottoNumbers);
         LottoNumber lottoNumber = publishLottoNumberFrom(bonusNumber);
         return new WinningLotto(lottoTicket, lottoNumber);
+    }
+
+    static LottoNumber publishLottoNumberFrom(int number) {
+        return LOTTO_NUMBER_MATCHER.get(number);
     }
 }
 

@@ -45,7 +45,7 @@ public enum Rank {
 
     private static void validateCountOfMatches(int countOfMatches) {
         if (countOfMatches > FIRST.countOfMatches || countOfMatches < MISS.countOfMatches) {
-            throw new IllegalArgumentException("당첨 번호 일치 수는 0이상 6이하로만 가능합니다.");
+            throw new RankException();
         }
     }
 

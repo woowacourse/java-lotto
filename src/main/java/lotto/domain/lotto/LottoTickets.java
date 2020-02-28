@@ -1,11 +1,14 @@
 package lotto.domain.lotto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.Rank;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -23,13 +26,21 @@ public class LottoTickets {
     }
 
     public LottoResult getLottoResults(WinningLotto winningLotto) {
-        List<Rank> ranks = lottoTickets.stream()
+        Map<Rank, Integer> rankMap = new HashMap<>();
+
+        Arrays.stream(Rank.values())
+                .forEach(rank -> rankMap.put(rank, 0));
+
+        lottoTickets.stream()
                 .map(winningLotto::getRank)
-                .collect(Collectors.toList());
-        return new LottoResult(ranks);
+                .forEach(rank -> rankMap.computeIfPresent(rank, (key, value) -> value + 1));
+
+        return new LottoResult(rankMap);
     }
 
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+    public List<String> getLottoTickets() {
+        return lottoTickets.stream()
+                .map(LottoTicket::toString)
+                .collect(Collectors.toList());
     }
 }

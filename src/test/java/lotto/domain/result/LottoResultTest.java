@@ -1,36 +1,47 @@
 package lotto.domain.result;
 
-import lotto.domain.money.LottoMoney;
+import static org.assertj.core.api.Assertions.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static lotto.domain.result.RankTest.getRanksFixture;
-import static lotto.domain.result.RankTest.getRanksFromThirdToFifthFixture;
-import static org.assertj.core.api.Assertions.assertThat;
+import lotto.domain.money.LottoMoney;
 
 class LottoResultTest {
 
     @Test
-    void testLottoResult() {
-        List<Rank> ranks = getRanksFixture();
-        LottoResult lottoResult = new LottoResult(ranks);
+    @DisplayName("LottoResult 생성")
+    void createLottoResult() {
+        Map<Rank, Integer> rankMap = new HashMap<>();
+        rankMap.put(Rank.FIFTH, 1);
+        LottoResult lottoResult = new LottoResult(rankMap);
     }
 
     @Test
+    @DisplayName("LottoResult는 Rank를 받아서 해당 Rank가 몇개 있는지 반환")
     void countRanks() {
+        Map<Rank, Integer> rankMap = new HashMap<>();
         int count = 1000000;
-        List<Rank> ranks = getRanksFixture();
-        LottoResult lottoResult = new LottoResult(ranks);
+        rankMap.put(Rank.FIRST, count);
+
+        LottoResult lottoResult = new LottoResult(rankMap);
 
         assertThat(lottoResult.count(Rank.FIRST)).isEqualTo(count);
     }
 
     @Test
+    @DisplayName("LottoResult는 Money를 받아서 수익률을 계산")
     void getProfitRatio() {
-        List<Rank> ranks = getRanksFromThirdToFifthFixture();
+        Map<Rank, Integer> rankMap = new HashMap<>();
+        rankMap.put(Rank.THIRD, 1);
+        rankMap.put(Rank.FOURTH, 1);
+        rankMap.put(Rank.FIFTH, 1);
+
         LottoMoney lottoMoney = new LottoMoney(5000);
-        LottoResult lottoResult = new LottoResult(ranks);
+        LottoResult lottoResult = new LottoResult(rankMap);
 
         assertThat(lottoResult.getProfit(lottoMoney)).isEqualTo(31000);
     }

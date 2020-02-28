@@ -21,5 +21,4 @@ public class CountException extends IllegalArgumentException {
     static CountException negativeManualCount() {
         return new CountException(NEGATIVE_MANUAL_COUNT);
     }
-
 }

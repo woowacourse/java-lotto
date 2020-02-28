@@ -1,17 +1,15 @@
 package lotto.service;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import lotto.domain.count.Count;
 import lotto.domain.lotto.LottoFactory;
-import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.money.LottoMoney;
 import lotto.parser.GameParser;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoService {
 
@@ -28,20 +26,15 @@ public class LottoService {
     }
 
     public LottoTickets createManualLottoTickets(List<String> lottoTicketInput) {
-        List<LottoTicket> lottoTickets = lottoTicketInput.stream()
+        List<Set<Integer>> lottoTicketsNumbers  = lottoTicketInput.stream()
                 .map(gameParser::parseInputToNumbers)
-                .map(LottoFactory::publishLottoTicketFrom)
                 .collect(Collectors.toList());
 
-        return new LottoTickets(lottoTickets);
+        return LottoFactory.publishLottoTicketsFrom(lottoTicketsNumbers);
     }
 
     public LottoTickets createAutoLottoTickets(Count count) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < count.getAutoCounts(); i++) {
-            lottoTickets.add(LottoFactory.publishLottoTicketOfRandom());
-        }
-        return new LottoTickets(lottoTickets);
+        return LottoFactory.publishAutoLottoTicketsFrom(count);
     }
 
     public WinningLotto createWinningLotto(String inputNumbers, String inputBonusNumber) {

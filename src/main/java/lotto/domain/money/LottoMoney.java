@@ -13,18 +13,10 @@ public class LottoMoney {
     }
 
     private void validate(int money) {
-        validateNegative(money);
-        validateLottoMoney(money);
-    }
-
-    private void validateNegative(int lottoMoney) {
-        if (lottoMoney < ZERO) {
+        if (money < ZERO) {
             throw LottoMoneyException.negative();
         }
-    }
-
-    private void validateLottoMoney(int lottoMoney) {
-        if (lottoMoney % MINIMUM_COST != ZERO) {
+        if (money % MINIMUM_COST != ZERO) {
             throw LottoMoneyException.notByUnit();
         }
     }

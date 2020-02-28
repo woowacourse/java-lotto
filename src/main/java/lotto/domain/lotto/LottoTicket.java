@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class LottoTicket {
+class LottoTicket {
 
     private static final int LOTTO_TICKET_SIZE = 6;
 
     private Set<LottoNumber> lottoTicket;
 
-    public LottoTicket(Set<LottoNumber> lottoTicket) {
+    LottoTicket(Set<LottoNumber> lottoTicket) {
         validateSize(lottoTicket);
         this.lottoTicket = lottoTicket;
     }
@@ -22,7 +22,7 @@ public class LottoTicket {
         }
     }
 
-    public int countMatches(LottoTicket targetTicket) {
+    int countMatches(LottoTicket targetTicket) {
         return (int) lottoTicket.stream()
                 .filter(targetTicket::contains)
                 .count();
