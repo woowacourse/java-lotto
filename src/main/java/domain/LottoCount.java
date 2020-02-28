@@ -30,11 +30,7 @@ public class LottoCount {
         return this.manualLottoCount;
     }
 
-    public boolean canCreateAutoLotto() {
-        return this.autoLottoCount > MIN_AUTO_LOTTO_COUNT;
-    }
-
-    public void reduceAutoLottoCount() {
-        this.autoLottoCount--;
+    public int getAutoCount() {
+        return this.autoLottoCount;
     }
 }

@@ -15,10 +15,6 @@ public class OutputView {
         System.out.println("구매금액을 입력해 주세요");
     }
 
-    public static void printPurchaseCountMessage(int calculateCount) {
-        System.out.printf("%d개를 구매했습니다." + NEW_LINE, calculateCount);
-    }
-
     public static void printInputManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
     }
@@ -27,7 +23,9 @@ public class OutputView {
         System.out.println("수동으로 구매할 로또 번호를 입력해주세요.");
     }
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
+    public static void printLottoTickets(LottoTickets lottoTickets, LottoCount lottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoCount.getManualCount(), lottoCount.getAutoCount());
+        System.out.println();
         for (Lotto eachLotto : lottoTickets.getLottoTickets()){
             printEachLotto(eachLotto);
         }

@@ -28,8 +28,7 @@ public class LottoFactory {
     }
 
     private static void createAutoLottoTickets(LottoCount lottoCount, Generator randomGenerator, List<Lotto> lottoTickets) {
-        while (lottoCount.canCreateAutoLotto()) {
-            lottoCount.reduceAutoLottoCount();
+        for (int i = 0; i < lottoCount.getAutoCount(); i++) {
             lottoTickets.add(createAutoLotto(randomGenerator));
         }
     }

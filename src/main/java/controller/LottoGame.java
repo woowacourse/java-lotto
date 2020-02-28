@@ -21,7 +21,6 @@ public class LottoGame {
     private static int purchaseLotto() {
         PurchaseAmount amount = inputPurchaseAmount();
         int lottoCount = amount.getCount();
-        OutputView.printPurchaseCountMessage(lottoCount);
         return lottoCount;
     }
 
@@ -55,7 +54,7 @@ public class LottoGame {
     private static LottoTickets createLottoTickets(LottoCount lottoCount, ManualLottoTickets manualLottoTickets) {
         Generator randomGenerator = new RandomNumberGenerator();
         LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomGenerator, manualLottoTickets));
-        OutputView.printLottoTickets(lottoTickets);
+        OutputView.printLottoTickets(lottoTickets, lottoCount);
         return lottoTickets;
     }
 
