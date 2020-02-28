@@ -39,15 +39,15 @@ public class OutputView {
         System.out.println(NEW_LINE + INPUT_MANUAL_LOTTO_NUMBER_GUIDE_MESSAGE);
     }
 
+    public static void printLottos(final LottoCount lottoCount, Lottos lottos) {
+        printLottoCountMessage(lottoCount);
+        lottos.getLottos()
+                .forEach(OutputView::printEachLotto);
+    }
+
     public static void printLottoCountMessage(final LottoCount lottoCount) {
         System.out.println(NEW_LINE + String.format(PURCHASE_COUNT_RESULT_MESSAGE,
                 lottoCount.getManualCount(), lottoCount.getAutoCount()));
-    }
-
-    public static void printLottos(final LottoGame lottoGame) {
-        Lottos lottos = lottoGame.getLottos();
-        lottos.getLottos()
-                .forEach(OutputView::printEachLotto);
     }
 
     private static void printEachLotto(final Lotto eachLotto) {

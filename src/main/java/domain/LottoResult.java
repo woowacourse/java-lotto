@@ -15,14 +15,14 @@ public class LottoResult {
         }
     }
 
-//    public void countWinningLotto(final Lottos lottos, final WinningNumber winningNumber) {
-//        for (Lotto lotto : lottos.getLottos()) {
-//            addWinningRankCount(LottoRank
-//                    .findRank(winningNumber.countWinningMatch(lotto),
-//                            winningNumber.isBonusMatch(lotto))
-//            );
-//        }
-//    }
+    public void countWinningLotto(final Lottos lottos, final WinningNumber winningNumber) {
+        for (Lotto lotto : lottos.getLottos()) {
+            addWinningRankCount(LottoRank
+                    .findRank(winningNumber.countWinningMatch(lotto),
+                            winningNumber.isBonusMatch(lotto))
+            );
+        }
+    }
 
     private void addWinningRankCount(final LottoRank rank) {
         if (rank != null) {

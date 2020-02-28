@@ -1,5 +1,4 @@
-package controller;
-
+import controller.LottoGame;
 import domain.*;
 import view.InputView;
 import view.OutputView;
@@ -15,30 +14,14 @@ public class LottoGameApplication {
         LottoCount lottoCount = new LottoCount(money.getLottoCount(), manualCount.getManualCount());
         LottoGame lottoGame = new LottoGame(lottoCount);
 
-        // 구매 결과
-        OutputView.printLottoCountMessage(lottoCount);
-        OutputView.printLottos(lottoGame);
+        lottoGame.calculateResults();
 
-//        // 당첨 번호 및 보너스 번호 입력
-//        WinningNumber winningNumber = inputWinningNumberWithValidation();
-//
-//        // 당첨 결과 계산
-//        LottoResult lottoResult = new LottoResult();
-//        lottoResult.countWinningLotto(lottos, winningNumber);
 //
 //        // 결과 및 수익률 출력
 //        OutputView.printResult(lottoResult);
 //        OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult, lottoCount));
     }
 
-    //    private static WinningNumber inputWinningNumberWithValidation() {
-//        try {
-//            return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
-//        } catch (IllegalArgumentException | NullPointerException e) {
-//            OutputView.printExceptionMessage(e);
-//            return inputWinningNumberWithValidation();
-//        }
-//    }
 //
 //    private static Lottos createLottoBundleWithValidation(LottoCount lottoCount, ManualCount manualCount) {
 //        try {
