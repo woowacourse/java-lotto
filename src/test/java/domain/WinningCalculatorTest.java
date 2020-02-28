@@ -27,4 +27,15 @@ public class WinningCalculatorTest {
         Assertions.assertThat(winningCalculator.getPrizeTypeValue(PrizeType.FIVE_WITH_BONUS)).isEqualTo(1);
         Assertions.assertThat(winningCalculator.getPrizeTypeValue(PrizeType.SIX)).isEqualTo(1);
     }
+
+    @DisplayName("Money 를 받아서 수익률 계산하는 테스트")
+    @Test
+    void calculateProfitTest() {
+        Money money = new Money(14000);
+        LottoTickets lottoTickets = LottoTicketsFixture.getLottoTickets();
+        WinningCalculator winningCalculator = new WinningCalculator();
+        winningCalculator.calculateWinningCount(lottoTickets, winningLottoTicket);
+
+        Assertions.assertThat(winningCalculator.calculateProfit(money)).isEqualTo(14511107);
+    }
 }

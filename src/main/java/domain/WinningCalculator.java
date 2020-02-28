@@ -65,6 +65,19 @@ public class WinningCalculator {
         this.prizeInfo.put(prizeType, originalPrizeCount + 1);
     }
 
+    public int calculateProfit(Money money) {
+        int totalPrizeMoney = 0;
+        for (PrizeType prizeType : PrizeType.values()) {
+            totalPrizeMoney = totalPrizeMoney + prizeType.calculatePrizeMoney(getPrizeTypeValue(prizeType));
+        }
+        return castingInteger(totalPrizeMoney, money.getMoney());
+    }
+
+    private int castingInteger(int totalPrizeMoney, int money) {
+        Double profitPercent = Double.valueOf(totalPrizeMoney) / Double.valueOf(money) * 100;
+        return profitPercent.intValue();
+    }
+
     public int getPrizeTypeValue(PrizeType prizeType) {
         return this.prizeInfo.get(prizeType);
     }
