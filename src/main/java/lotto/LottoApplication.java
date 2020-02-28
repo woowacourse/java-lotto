@@ -47,7 +47,7 @@ public class LottoApplication {
 	private static WinningNumber produceWinningNumber() {
 		List<Integer> inputWinningNumbers = NumberParser.lottoNumberParse(InputView.inputAsWinningNumbers());
 		Lotto winningNumberLotto = new Lotto(inputWinningNumbers);
-		LottoNumber bonusNumber = new LottoNumber(NumberParser.parseNumber(InputView.inputAsBonusNumber()));
+		LottoNumber bonusNumber = LottoNumber.of(NumberParser.parseNumber(InputView.inputAsBonusNumber()));
 
 		return new WinningNumber(winningNumberLotto, bonusNumber);
 	}

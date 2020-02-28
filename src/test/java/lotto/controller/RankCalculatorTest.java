@@ -20,7 +20,7 @@ public class RankCalculatorTest {
 	@ParameterizedTest
 	@MethodSource("generateLottos")
 	public void calculateTest(List<Integer> lottoNumber, Rank expectedRank) {
-		WinningNumber winningNumber = new WinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+		WinningNumber winningNumber = new WinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
 		Lotto lotto = new Lotto(lottoNumber);
 		List<Rank> ranks = RankCalculator.calculateMultiple(Collections.singletonList(lotto), winningNumber);
 		assertThat(ranks).contains(expectedRank);

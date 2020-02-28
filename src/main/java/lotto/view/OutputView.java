@@ -55,7 +55,7 @@ public class OutputView {
 
 	public static void showPurchasedLottoCount(LottoAmount purchasedLottoAmount) {
 		System.out.printf(PURCHASED_LOTTO_MESSAGE, purchasedLottoAmount.getManualLottoAmount(),
-			purchasedLottoAmount.getManualLottoAmount());
+			purchasedLottoAmount.getAutoLottoAmount());
 	}
 
 	public static void showPurchasedLottoNumbers(List<Lotto> purchasedLottoNumbers) {
