@@ -25,4 +25,8 @@ public class LottoCount {
             throw new IllegalArgumentException("수동 로또 개수는 숫자로 입력해야합니다.");
         }
     }
+
+    public int getManualCount() {
+        return this.manualLottoCount;
+    }
 }

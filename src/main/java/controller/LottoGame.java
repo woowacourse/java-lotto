@@ -9,6 +9,7 @@ public class LottoGame {
     public static void main(String[] args) {
         int totalLottoCount = purchaseLotto();
         LottoCount lottoCount = createLottoCount(totalLottoCount);
+        ManualLottoTickets manualLottoTickets = createManualLottoTickets(lottoCount);
         LottoTickets lottoTickets = createLottoTickets(totalLottoCount);
         WinningNumber winningNumber = inputWinningNumber();
         LottoResult lottoResult = countWinningLottos(lottoTickets, winningNumber);
@@ -39,6 +40,15 @@ public class LottoGame {
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             return createLottoCount(totalLottoCount);
+        }
+    }
+
+    private static ManualLottoTickets createManualLottoTickets(LottoCount lottoCount) {
+        try {
+            return new ManualLottoTickets(InputView.inputManualLottoNumbers(lottoCount.getManualCount()));
+        } catch (IllegalArgumentException e) {
+            OutputView.printExceptionMessage(e);
+            return createManualLottoTickets(lottoCount);
         }
     }
 

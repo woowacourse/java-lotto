@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -24,5 +26,22 @@ public class InputView {
 
     public static String inputManualLottoCount() {
         return scanner.nextLine();
+    }
+
+    public static List<List<String>> inputManualLottoNumbers(int manualLottoCount) {
+        List<List<String>> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottoNumbers.add(inputOneManualLottoNumbers());
+        }
+        return manualLottoNumbers;
+    }
+
+    private static List<String> inputOneManualLottoNumbers() {
+        List<String> oneManualLottoNumber = new ArrayList<>();
+        String lottoNumbers = scanner.nextLine();
+        for (String number : lottoNumbers.split(COMMA)) {
+            oneManualLottoNumber.add(number);
+        }
+        return oneManualLottoNumber;
     }
 }
