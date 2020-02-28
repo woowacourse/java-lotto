@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ManualLottoTickets {
@@ -10,5 +11,9 @@ public class ManualLottoTickets {
             System.out.println(lottoNumbers.get(i));
             this.manualLottoTickets.add(LottoFactory.createManualLotto(lottoNumbers.get(i)));
         }
+    }
+
+    public void addManualLottoTickets(List<Lotto> lottoTickets) {
+        lottoTickets.addAll(Collections.unmodifiableList(manualLottoTickets));
     }
 }
