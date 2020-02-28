@@ -12,18 +12,14 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(final List<String> winningNumberString, final LottoNumber bonusNumber) {
-        validateWinningNumber(winningNumberString);
+        validateNullAndEmpty(winningNumberString);
         this.winningLotto = new Lotto(winningNumberString.stream()
                 .map(Integer::parseInt)
                 .map(LottoMachine.getInstance()::pickBall)
                 .collect(Collectors.toList()));
 
-        validateBonusNumber(bonusNumber);
+        validateBonusDuplicate(bonusNumber);
         this.bonusNumber = bonusNumber;
-    }
-
-    private void validateWinningNumber(List<String> winningNumber) {
-        validateNullAndEmpty(winningNumber);
     }
 
     private void validateNullAndEmpty(List<String> winningNumber) {
@@ -32,16 +28,11 @@ public class WinningLotto {
         }
     }
 
-    private void validateBonusNumber(LottoNumber bonusNumber) {
-        validateBonusDuplicate(bonusNumber);
-    }
-
     private void validateBonusDuplicate(LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_BONUSBALL_NUMBER);
         }
     }
-
 
     public Lotto getWinningLotto() {
         return winningLotto;

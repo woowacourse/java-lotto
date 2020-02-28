@@ -23,8 +23,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Integer.toString(lottoNumber);
     }
 
+    @Override
     public int compareTo(LottoNumber anotherLottoNumber) {
-        return anotherLottoNumber.lottoNumber - this.lottoNumber;
+        return this.lottoNumber - anotherLottoNumber.lottoNumber;
     }
 
 }
