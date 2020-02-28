@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.view.OutputView;
+import lotto.view.errors.InvalidInputException;
 
 class LottoService<V> {
     private LottoLogic<V> lottoLogic;
@@ -12,7 +13,7 @@ class LottoService<V> {
     V executeOrRepeatWithException() {
         try {
             return lottoLogic.work();
-        } catch (RuntimeException e) {
+        } catch (InvalidInputException e) {
             OutputView.printRetryRequestWithMessage(e.getMessage());
             return executeOrRepeatWithException();
         }

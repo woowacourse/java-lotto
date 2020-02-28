@@ -89,7 +89,7 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new InvalidInputException("숫자가 아닌 문자를 입력하였습니다.");
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException();
+            throw new InvalidInputException(e.getMessage());
         }
 
     }
