@@ -11,9 +11,9 @@ public class LottoParser {
 
 	public static Set<LottoNumber> parser(String inputWinningLotto) {
 		return Arrays.stream(inputWinningLotto.split(DELIMITER))
-				.map(String::trim)
-				.map(Integer::parseInt)
-				.map(LottoNumber::valueOf)
-				.collect(Collectors.toSet());
+			.map(String::trim)
+			.map(Integer::parseInt)
+			.map(LottoNumber::valueOf)
+			.collect(Collectors.toSet());
 	}
 }

@@ -19,10 +19,10 @@ public class LottoNumberCache {
 	}
 
 	public static LottoNumber getNumber(int number) {
-		if (LottoNumber.MIN_BOUND < number && LottoNumber.MAX_BOUND > number) {
-			return LOTTO_NUMBER_CACHE.get(number);
+		if (LottoNumber.MIN_BOUND > number || LottoNumber.MAX_BOUND < number) {
+			throw new InvalidLottoNumberException(InvalidLottoNumberException.OUT_OF_BOUND);
 		}
-		return new LottoNumber(number);
+		return LOTTO_NUMBER_CACHE.get(number);
 	}
 
 	public static List<LottoNumber> values() {

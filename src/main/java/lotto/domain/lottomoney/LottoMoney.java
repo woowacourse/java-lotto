@@ -4,17 +4,16 @@ import java.util.Objects;
 
 public class LottoMoney {
 	private static final long ZERO = 0;
-	private static final long LOTTO_PRICE = 1_000;
 	private static final int PERCENT = 100;
 
 	private final long money;
 
-	public LottoMoney(String money) {
-		this.money = validate(money);
-	}
-
 	public LottoMoney(long money) {
 		this.money = money;
+	}
+
+	public LottoMoney(String money) {
+		this.money = validate(money);
 	}
 
 	private long validate(String money) {
@@ -46,13 +45,13 @@ public class LottoMoney {
 	}
 
 	private void validateUnit(long parsedMoney) {
-		if (parsedMoney % LOTTO_PRICE != ZERO) {
+		if (parsedMoney % LottoPrice.UNIT != ZERO) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.INVALID_UNIT);
 		}
 	}
 
-	public int calculateCountOfLotto() {
-		return (int) (money / LOTTO_PRICE);
+	int calculateCountOfLotto(int unit) {
+		return (int)(money / unit);
 	}
 
 	public long getMoney() {
@@ -67,6 +66,13 @@ public class LottoMoney {
 		return new LottoMoney(this.money * multiplyCount);
 	}
 
+	public int getWinningRate(LottoMoney inputLottoMoney) {
+		if (inputLottoMoney.money == 0) {
+			return 0;
+		}
+		return (int)((this.money * PERCENT) / inputLottoMoney.money);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -75,19 +81,12 @@ public class LottoMoney {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		LottoMoney that = (LottoMoney) o;
+		LottoMoney that = (LottoMoney)o;
 		return money == that.money;
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(money);
-	}
-
-	public int getWinningRate(LottoMoney inputLottoMoney) {
-		if (inputLottoMoney.money == 0) {
-			return 0;
-		}
-		return (int) ((this.money * PERCENT) / inputLottoMoney.money);
 	}
 }

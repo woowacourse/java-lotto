@@ -8,6 +8,10 @@ import java.util.Objects;
 public class Lottos implements Iterable<Lotto> {
 	private List<Lotto> lottos;
 
+	public Lottos() {
+		lottos = new ArrayList<>();
+	}
+
 	public Lottos(List<Lotto> lottos) {
 		this.lottos = new ArrayList<>(lottos);
 	}

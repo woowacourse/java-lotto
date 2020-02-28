@@ -1,13 +1,14 @@
 package lotto.domain.lotto;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
 import lotto.domain.lottonumber.LottoNumber;
 
 public class Lotto {
-	static final int CORRECT_SIZE = 6;
+	public static final int CORRECT_SIZE = 6;
 
 	private final Set<LottoNumber> lottoNumbers;
 
@@ -18,7 +19,7 @@ public class Lotto {
 	}
 
 	private void validateNull(Set<LottoNumber> lottoNumbers) {
-		if (null == lottoNumbers) {
+		if (Objects.isNull(lottoNumbers)) {
 			throw new InvalidLottoException(InvalidLottoException.NULL);
 		}
 	}

@@ -3,6 +3,8 @@ package lotto.view;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lotto.domain.LottoMachine;
+import lotto.domain.lotto.CountOfManualLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottonumber.LottoNumber;
@@ -20,12 +22,8 @@ public class ConsoleOutputView {
 	private ConsoleOutputView() {
 	}
 
-	public static void printExceptionMessage(String exceptionMessage) {
-		System.out.println(exceptionMessage);
-	}
-
-	public static void printPurchaseCompleteMessage(int countOfManualLotto, int countOfAutoLotto) {
-		System.out.printf(PURCHASE_COMPLETE_MESSAGE, countOfManualLotto, countOfAutoLotto);
+	public static void printPurchaseCompleteMessage(CountOfManualLotto countOfManualLotto, LottoMachine countOfAutoLotto) {
+		System.out.printf(PURCHASE_COMPLETE_MESSAGE, countOfManualLotto.getCountOfManualLotto(), countOfAutoLotto.getCountOfAutoLottos());
 	}
 
 	public static void printPurchasedLotto(Lottos lottos) {
