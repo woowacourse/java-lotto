@@ -23,6 +23,19 @@ public class MoneyTest {
 			.isInstanceOf(InvalidMoneyException.class);
 	}
 
+	@Test
+	void canBuyLottoTest() {
+		Money money = new Money("1000");
+		assertThat(money.canBuyLotto(1)).isTrue();
+		assertThat(money.canBuyLotto(2)).isFalse();
+	}
+
+	@Test
+	void calculateLottoCountTest() {
+		Money money = new Money("10000");
+		assertThat(money.calculateLottoCount(1)).isEqualTo(9);
+	}
+
 	@DisplayName("수익률 계산")
 	@Test
 	void calculateIncomeRate() {
@@ -34,27 +47,5 @@ public class MoneyTest {
 
 		money = new Money("10000");
 		assertThat(money.calculateIncomeRate(5000)).isEqualTo(50);
-	}
-
-	@Test
-	void isBuyLottoTest() {
-		Money money = new Money("1000");
-		assertThat(money.isBuyLotto(1)).isTrue();
-		assertThat(money.isBuyLotto(2)).isFalse();
-	}
-
-	@Test
-	void hasNextTest() {
-		Money money = new Money("1000");
-		assertThat(money.hasNext()).isTrue();
-
-		money.next();
-		assertThat(money.hasNext()).isFalse();
-	}
-
-	@Test
-	void nextTest() {
-		Money money = new Money("1000");
-		assertThat(money.next()).isEqualTo(0);
 	}
 }

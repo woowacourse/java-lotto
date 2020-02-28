@@ -4,5 +4,5 @@ import lotto.domain.Lotto;
 
 public interface LottoMakeAble {
 
-	public abstract Lotto create();
+	Lotto create();
 }

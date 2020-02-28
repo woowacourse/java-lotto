@@ -30,25 +30,30 @@ public class LottoApplication {
 	}
 
 	private static List<Lotto> createLotteris(Money money, ManualLottoCount manualLottoCount) {
-		List<Lotto> manualLotteris = createManualLotto(manualLottoCount);
-		List<Lotto> automaticLotteris = createAutomaticLotto(money);
+		List<Lotto> manualLotteris = createManualLotteris(manualLottoCount);
+		int automaticLotterisCount = money.calculateLottoCount(manualLotteris.size());
+		List<Lotto> automaticLotteris = createAutomaticLotteris(automaticLotterisCount);
 		OutputView.printLottoCount(manualLotteris.size(), automaticLotteris.size());
 
 		manualLotteris.addAll(automaticLotteris);
 		return manualLotteris;
 	}
 
-	private static List<Lotto> createManualLotto(ManualLottoCount manualLottoCount) {
-		InputView.inputManualLotto();
+	private static List<Lotto> createManualLotteris(ManualLottoCount manualLottoCount) {
+		InputView.printManualLotto();
 		List<Lotto> lotteris = new ArrayList<>();
-		manualLottoCount.forEachRemaining(count -> lotteris.add(
-			new ManualLottoFactory(InputView.input()).create()));
+		while (manualLottoCount.hasNext()) {
+			String inputLottoNumbers = InputView.input();
+			lotteris.add(new ManualLottoFactory(inputLottoNumbers).create());
+		}
 		return lotteris;
 	}
 
-	private static List<Lotto> createAutomaticLotto(Money money) {
+	private static List<Lotto> createAutomaticLotteris(int count) {
 		List<Lotto> lotteris = new ArrayList<>();
-		money.forEachRemaining(count -> lotteris.add(new AutomaticLottoFactory().create()));
+		for (int i = 0; i < count; i++) {
+			lotteris.add(new AutomaticLottoFactory().create());
+		}
 		return lotteris;
 	}
 }
