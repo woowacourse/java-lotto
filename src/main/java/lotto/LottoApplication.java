@@ -7,6 +7,7 @@ import lotto.domain.LottoGenerator;
 import lotto.domain.LottoGeneratorAuto;
 import lotto.domain.LottoGeneratorManual;
 import lotto.domain.LottoManager;
+import lotto.domain.Lottos;
 import lotto.domain.WinLotto;
 import lotto.util.StringUtils;
 import lotto.view.InputView;
@@ -28,7 +29,7 @@ public class LottoApplication {
         String userLottoNumbers = InputView.inputManualLottoNumber(customer);
         customer.setManualLottoNumbers(userLottoNumbers);
 
-        List<Lotto> lottos = createUserLottos(customer);
+        Lottos lottos = new Lottos(createUserLottos(customer));
 
         OutputView.printLottoAmounts(customer);
         OutputView.printLottos(lottos);

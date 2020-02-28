@@ -1,23 +1,20 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoManager {
     private static final int MIN_WIN_COUNT = 3;
 
-    private final List<Lotto> lottos;
+    private final Lottos lottos;
     private WinLotto winLotto;
     private LottoResult lottoResult;
 
-    public LottoManager(List<Lotto> lottos, WinLotto winLotto) {
-        this.lottos = new ArrayList<>(lottos);
+    public LottoManager(Lottos lottos, WinLotto winLotto) {
+        this.lottos = lottos;
         this.winLotto = winLotto;
         this.lottoResult = new LottoResult();
     }
 
     public void checkLotto() {
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             int hitCount = winLotto.calculateHitCount(lotto);
             boolean bonus = winLotto.isMatchBonus(lotto);
             updateLottoResult(hitCount, bonus);

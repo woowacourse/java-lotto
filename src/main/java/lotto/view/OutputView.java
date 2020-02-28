@@ -3,8 +3,7 @@ package lotto.view;
 import lotto.domain.Customer;
 import lotto.domain.Lotto;
 import lotto.domain.LottoManager;
-
-import java.util.List;
+import lotto.domain.Lottos;
 
 public class OutputView {
     public static final String NEW_LINE = "\n";
@@ -12,9 +11,9 @@ public class OutputView {
     private static final String BUY_MESSAGE_FORMAT = "수동으로 %d개, 자동으로 %d개를 구매했습니다";
     private static final String PERCENT = "%";
 
-    public static void printLottos(List<Lotto> lottos) {
+    public static void printLottos(Lottos lottos) {
         StringBuilder builder = new StringBuilder();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             builder.append(lotto + NEW_LINE);
         }
         System.out.println(builder.toString());
