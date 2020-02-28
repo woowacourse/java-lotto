@@ -1,6 +1,10 @@
 package lotto.domain;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final String LOTTO_NUMBER_OUTOF_BOUND = "범위를 벗어난 로또 숫자입니다.";
+    public static final int MIN = 1;
+    public static final int MAX = 45;
+
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
@@ -9,8 +13,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validate(int lottoNumber) {
-        if (lottoNumber < 1 || lottoNumber > 45) {
-            throw new IllegalArgumentException("범위를 벗어난 로또 숫자입니다.");
+        if (lottoNumber < MIN || lottoNumber > MAX) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_OUTOF_BOUND);
         }
     }
 

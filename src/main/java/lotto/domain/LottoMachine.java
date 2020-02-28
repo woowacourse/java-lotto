@@ -47,7 +47,6 @@ public class LottoMachine {
 				.orElseThrow(() -> new IllegalArgumentException(LOTTO_NUMBER_OUTOF_BOUNDS));
 	}
 
-
 	private static class LottoMachineSingletonHolder {
 		private static final LottoMachine instance = new LottoMachine();
 	}
