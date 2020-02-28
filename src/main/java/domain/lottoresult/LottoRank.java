@@ -35,9 +35,14 @@ public enum LottoRank {
      */
     public static LottoRank calculateRank(int hitCount, boolean bonus) {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.hitCount == hitCount && (!rank.bonus || bonus))
+                .filter(rank -> rank.hitCount == hitCount && rank.checkBonusMatch(bonus))
                 .findAny()
                 .orElse(NOTHING);
+    }
+
+    private boolean checkBonusMatch(boolean bonus) {
+        boolean skipToCheck = !this.bonus;
+        return skipToCheck || bonus;
     }
 
     public int getHitCount() {
