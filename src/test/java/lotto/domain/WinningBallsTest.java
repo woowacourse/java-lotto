@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.Exception.DuplicationException;
 import lotto.util.InputValidationUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -31,5 +32,17 @@ public class WinningBallsTest {
         WinningBalls winningBalls = new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(bonusBall));
 
         Assertions.assertThat(winningBalls.hitBonusBall(new LottoTicket(lottoTicket))).isTrue();
+    }
+
+    @Test
+    @DisplayName("당첨 로또 볼과 보너스 번호가 중복인 경우 테스트")
+    void duplicate_winning_balls_and_bonus_ball() {
+        int bonusBall = InputValidationUtil.returnNumberWithNumberCheck("6");
+        String winningBallInputs = "1,2,3,4,5,6";
+        Set<LottoBall> winningBallValues = LottoBalls.generateLottoBalls(winningBallInputs);
+
+        Assertions.assertThatThrownBy(() -> new WinningBalls(winningBallValues, LottoBallFactory.findByLottoBall(bonusBall)))
+                .isInstanceOf(DuplicationException.class)
+                .hasMessage("보너스 볼이 중복입니다. 당첨 번호를 다시 입력해주세요.");
     }
 }
