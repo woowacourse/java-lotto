@@ -1,20 +1,16 @@
 package lotto.domain;
 
+import static lotto.util.NullValidator.validateNull;
+
 public class WinningLotto {
-    private final Lotto winningLottoLine;
+    private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto winningLottoLine, LottoNumber bonusNumber) {
-        validateNull(winningLottoLine, bonusNumber);
-        validateDuplicatedNumber(winningLottoLine, bonusNumber);
-        this.winningLottoLine = winningLottoLine;
+    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+        validateNull(lotto, bonusNumber);
+        validateDuplicatedNumber(lotto, bonusNumber);
+        this.lotto = lotto;
         this.bonusNumber = bonusNumber;
-    }
-
-    private static void validateNull(Lotto winningLottoLine, LottoNumber bonusNumber) {
-        if (winningLottoLine == null || bonusNumber == null) {
-            throw new RuntimeException("null이 들어왔습니다.");
-        }
     }
 
     private static void validateDuplicatedNumber(Lotto winningLottoLine, LottoNumber bonusNumber) {
@@ -23,11 +19,21 @@ public class WinningLotto {
         }
     }
 
-    public Lotto getWinningLottoLine() {
-        return winningLottoLine;
+    private int countSameNumbers(Lotto lotto) {
+        return (int) lotto.get()
+                .stream()
+                .filter(this.lotto::contains)
+                .count();
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public MatchResult createResult(Lotto lotto) {
+        int matchCount = countSameNumbers(lotto);
+        boolean containsBonusNumber = lotto.contains(bonusNumber);
+        return MatchResult.of(matchCount, containsBonusNumber);
+    }
+
+    public boolean hasMatchResult(Lotto lotto) {
+        int matchCount = countSameNumbers(lotto);
+        return MatchResult.hasMatchCount(matchCount);
     }
 }

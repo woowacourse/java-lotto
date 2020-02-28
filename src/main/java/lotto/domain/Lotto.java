@@ -51,19 +51,6 @@ public class Lotto {
         }
     }
 
-    public MatchResult createResult(Lotto winningLotto, LottoNumber bonusNumber) {
-        int sameNumbersCount = countSameNumbers(winningLotto);
-        boolean containsBonusNumber = lottoNumbers.contains(bonusNumber);
-        return MatchResult.of(sameNumbersCount, containsBonusNumber);
-    }
-
-    public int countSameNumbers(Lotto winningLotto) {
-        Set<LottoNumber> numbers = new HashSet<>(this.lottoNumbers);
-        return (int) winningLotto.get().stream()
-                .filter(numbers::contains)
-                .count();
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }

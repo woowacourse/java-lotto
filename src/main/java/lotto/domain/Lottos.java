@@ -21,10 +21,10 @@ public class Lottos {
         return new Lottos(totalElements);
     }
 
-    public MatchResults toMatchResults(Lotto winningLotto, LottoNumber bonusNumber) {
-        List<MatchResult> matchResults = lottos.stream()
-                .filter(lotto -> MatchResult.hasMatchCount(lotto.countSameNumbers(winningLotto)))
-                .map(lotto -> lotto.createResult(winningLotto, bonusNumber))
+    public MatchResults toMatchResults(WinningLotto winningLotto) {
+        List<MatchResult> matchResults = elements.stream()
+                .filter(winningLotto::hasMatchResult)
+                .map(winningLotto::createResult)
                 .collect(Collectors.toList());
         return new MatchResults(matchResults);
     }
