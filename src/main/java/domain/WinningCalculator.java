@@ -8,6 +8,7 @@ public class WinningCalculator {
     private static final int HAS_BONUS = 5;
 
     private Map<PrizeType, Integer> prizeInfo;
+    private ProfitPercent profitPercent;
 
     public WinningCalculator() {
         initializePrizeInfo();
@@ -65,20 +66,19 @@ public class WinningCalculator {
         this.prizeInfo.put(prizeType, originalPrizeCount + 1);
     }
 
-    public int calculateProfit(Money money) {
+    public void calculateProfitPercent(Money money) {
         int totalPrizeMoney = 0;
         for (PrizeType prizeType : PrizeType.values()) {
             totalPrizeMoney = totalPrizeMoney + prizeType.calculatePrizeMoney(getPrizeTypeValue(prizeType));
         }
-        return castingInteger(totalPrizeMoney, money.getMoney());
-    }
-
-    private int castingInteger(int totalPrizeMoney, int money) {
-        Double profitPercent = Double.valueOf(totalPrizeMoney) / Double.valueOf(money) * 100;
-        return profitPercent.intValue();
+        this.profitPercent = new ProfitPercent(money, totalPrizeMoney);
     }
 
     public int getPrizeTypeValue(PrizeType prizeType) {
         return this.prizeInfo.get(prizeType);
+    }
+
+    public int getProfitPercent() {
+        return this.profitPercent.getProfitPercent();
     }
 }

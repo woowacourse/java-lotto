@@ -35,7 +35,8 @@ public class WinningCalculatorTest {
         LottoTickets lottoTickets = LottoTicketsFixture.getLottoTickets();
         WinningCalculator winningCalculator = new WinningCalculator();
         winningCalculator.calculateWinningCount(lottoTickets, winningLottoTicket);
+        winningCalculator.calculateProfitPercent(money);
 
-        Assertions.assertThat(winningCalculator.calculateProfit(money)).isEqualTo(14511107);
+        Assertions.assertThat(winningCalculator.getProfitPercent()).isEqualTo(14511107);
     }
 }
