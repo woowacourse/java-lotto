@@ -5,6 +5,7 @@ import domain.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
     public static final String NEW_LINE = System.lineSeparator();
@@ -32,16 +33,10 @@ public class OutputView {
     }
 
     private static void printEachLotto(Lotto eachLotto) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        List<LottoNumber> lotto = eachLotto.getLotto();
-        for (LottoNumber number : lotto){
-            stringBuilder.append(number)
-                            .append(COMMA);
-        }
-        stringBuilder.setLength(stringBuilder.length()- LAST_COMMA_REMOVER);
-        stringBuilder.append("]");
-        System.out.println(stringBuilder);
+        String eachLottoNumbers = eachLotto.getLotto().stream()
+                    .map(o -> o.toString())
+                    .collect(Collectors.joining(COMMA, "[", "]"));
+        System.out.println(eachLottoNumbers);
     }
 
     public static void printInputWinningNumbersMessage() {
