@@ -2,18 +2,24 @@ package lotto.domain;
 
 import lotto.Exception.LottoTicketEmptyException;
 import lotto.Exception.NumberOutOfRangeException;
-import lotto.view.InputView;
+import lotto.domain.LottoTicketNumber.AutomaticLottoTicketNumber;
+import lotto.domain.LottoTicketNumber.ManualLottoTicketNumber;
 import lotto.view.OutputView;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoStore {
     private static final int MAX_LOTTO_BALL_COUNT = 6;
 
-    private LottoTicketNumber lottoTicketNumber;
+    private ManualLottoTicketNumber manualLottoTicketNumber;
+    private AutomaticLottoTicketNumber automaticLottoTicketNumber;
 
-    public LottoStore(LottoTicketNumber lottoTicketNumber) {
-        this.lottoTicketNumber = lottoTicketNumber;
+    public LottoStore(ManualLottoTicketNumber manualLottoTicketNumber, AutomaticLottoTicketNumber automaticLottoTicketNumber) {
+        this.manualLottoTicketNumber = manualLottoTicketNumber;
+        this.automaticLottoTicketNumber = automaticLottoTicketNumber;
     }
 
     private LottoTicket generateManualLottoTicket(String manualLottoBallsInput) {
@@ -38,15 +44,15 @@ public class LottoStore {
     }
 
     private void generateAutomaticLottoTickets(LottoTickets lottoTickets) {
-        for (int i = 0; i < lottoTicketNumber.getAutomaticLottoTicketNumber(); i++) {
+        for (int i = 0; i < automaticLottoTicketNumber.getLottoTicketNumber(); i++) {
             Collections.shuffle(LottoBallFactory.getInstance());
             lottoTickets.addLottoTicket(generateAutomaticLottoTicket());
         }
-        OutputView.printAnswerLottoTicketNumber(lottoTicketNumber);
     }
 
     public LottoTickets generateLottoTickets(List<String> inputManualLottoTickets) {
         LottoTickets lottoTickets = new LottoTickets();
+        OutputView.printAnswerLottoTicketNumber(manualLottoTicketNumber, automaticLottoTicketNumber);
         generateManualLottoTickets(inputManualLottoTickets, lottoTickets);
         generateAutomaticLottoTickets(lottoTickets);
         OutputView.printLottoTicket(lottoTickets);

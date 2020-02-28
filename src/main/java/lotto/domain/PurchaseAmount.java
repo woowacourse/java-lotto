@@ -22,7 +22,7 @@ public class PurchaseAmount {
         }
     }
 
-    public int giveLottoTicketNumber() {
+    public int giveTotalLottoTicketNumber() {
         return (int) (this.purchaseAmount / LOTTO_PURCHASE_UNIT);
     }
 

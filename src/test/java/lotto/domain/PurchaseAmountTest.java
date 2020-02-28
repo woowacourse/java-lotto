@@ -14,7 +14,7 @@ public class PurchaseAmountTest {
     void give_lotto_ticket_test() {
         PurchaseAmount purchaseAmount = new PurchaseAmount("1500");
 
-        assertThat(purchaseAmount.giveLottoTicketNumber()).isEqualTo(1);
+        assertThat(purchaseAmount.giveTotalLottoTicketNumber()).isEqualTo(1);
     }
 
     @Test

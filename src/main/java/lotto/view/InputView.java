@@ -5,6 +5,8 @@ import lotto.Exception.NotBuyLottoTicketException;
 import lotto.Exception.NotPositiveNumberException;
 import lotto.Exception.NumberOutOfRangeException;
 import lotto.domain.*;
+import lotto.domain.LottoTicketNumber.LottoTicketNumber;
+import lotto.domain.LottoTicketNumber.ManualLottoTicketNumber;
 import lotto.util.InputValidationUtil;
 
 import java.util.ArrayList;
@@ -21,30 +23,31 @@ public class InputView {
     public static PurchaseAmount inputPurchaseAmount() {
         try {
             OutputView.printStartGuide();
-            String purchaseAmount = scanner.nextLine();
-            return new PurchaseAmount(purchaseAmount);
+            PurchaseAmount purchaseAmount = new PurchaseAmount(scanner.nextLine());
+            OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
+            return purchaseAmount;
         } catch (NotBuyLottoTicketException | NumberFormatException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputPurchaseAmount();
         }
     }
 
-    public static LottoTicketNumber inputManualTicketNumber(PurchaseAmount purchaseAmount) {
+    public static ManualLottoTicketNumber inputManualTicketNumber(PurchaseAmount purchaseAmount) {
         try {
             OutputView.printManualTicketNumberGuide();
             int manualTicketNumber = InputValidationUtil.returnNumberWithNumberCheck(scanner.nextLine());
             InputValidationUtil.isPositiveNumber(manualTicketNumber);
-            return new LottoTicketNumber(purchaseAmount.giveLottoTicketNumber(), manualTicketNumber);
+            return new ManualLottoTicketNumber(manualTicketNumber, purchaseAmount.giveTotalLottoTicketNumber());
         } catch (NumberFormatException | NotPositiveNumberException | NumberOutOfRangeException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputManualTicketNumber(purchaseAmount);
         }
     }
 
-    public static List<String> inputManualLottoTickets(LottoTicketNumber lottoTicketNumber){
+    public static List<String> inputManualLottoTickets(ManualLottoTicketNumber manualLottoTicketNumber){
         List<String> manualLottoBallsInputs = new ArrayList<>();
         OutputView.printManualLottoBallsGuide();
-        for (int i = 0; i < lottoTicketNumber.getManualLottoTicketNumber(); i++){
+        for (int i = 0; i < manualLottoTicketNumber.getLottoTicketNumber(); i++){
             manualLottoBallsInputs.add(InputView.InputWinningBallsAndManualLottoBalls());
         }
         return manualLottoBallsInputs;

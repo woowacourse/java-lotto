@@ -1,6 +1,9 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.domain.LottoTicketNumber.AutomaticLottoTicketNumber;
+import lotto.domain.LottoTicketNumber.LottoTicketNumber;
+import lotto.domain.LottoTicketNumber.ManualLottoTicketNumber;
 
 import java.util.stream.Collectors;
 
@@ -25,8 +28,10 @@ public class OutputView {
         System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
     }
 
-    public static void printAnswerLottoTicketNumber(LottoTicketNumber lottoTicketNumber) {
-        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다. \n", lottoTicketNumber.getManualLottoTicketNumber(), lottoTicketNumber.getAutomaticLottoTicketNumber());
+    public static void printAnswerLottoTicketNumber(ManualLottoTicketNumber manualLottoTicketNumber,
+                                                    AutomaticLottoTicketNumber automaticLottoTicketNumber) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다. \n", manualLottoTicketNumber.getLottoTicketNumber(),
+                automaticLottoTicketNumber.getLottoTicketNumber());
     }
 
     public static void printChangeMoney(int changeMoney) {
