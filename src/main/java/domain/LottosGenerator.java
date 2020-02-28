@@ -6,7 +6,7 @@ import java.util.List;
 public interface LottosGenerator {
     int START_INDEX = 0;
 
-    static Lottos generateTotal(LottoCount lottoCount) {
+    static Lottos generateTotal(final LottoCount lottoCount) {
         LottosGenerator lottosGenerator = new ManualLottosGenerator();
         List<Lotto> lottos = new ArrayList<>(lottosGenerator.generateLottos(lottoCount));
 
@@ -15,5 +15,5 @@ public interface LottosGenerator {
         return new Lottos(lottos);
     }
 
-    List<Lotto> generateLottos(LottoCount lottoCount);
+    List<Lotto> generateLottos(final LottoCount lottoCount);
 }

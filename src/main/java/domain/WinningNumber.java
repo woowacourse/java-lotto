@@ -11,7 +11,6 @@ public class WinningNumber {
     public WinningNumber(final String[] winningNumbers, String bonusNumber) {
         LottoGenerator lottoGenerator = new ManualLottoGenerator(winningNumbers);
         this.winningNumbers = lottoGenerator.generateLotto();
-
         checkNotNumber(bonusNumber);
         bonusNumber = bonusNumber.trim();
         int bonusIntegerValue = Integer.parseInt(bonusNumber);

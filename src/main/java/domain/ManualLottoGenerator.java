@@ -7,7 +7,7 @@ import static java.util.stream.Collectors.toList;
 public class ManualLottoGenerator implements LottoGenerator {
     private String[] manualLotto;
 
-    public ManualLottoGenerator(String[] manualLotto) {
+    public ManualLottoGenerator(final String[] manualLotto) {
         this.manualLotto = manualLotto;
     }
 

@@ -53,7 +53,7 @@ public class WinningNumberTest {
 
     @Test
     @DisplayName("보너스 번호가 1~45까지 범위를 벗어났는지 확인")
-    void checkBonusBallLottoNumberRangeTest(){
+    void checkBonusBallLottoNumberRangeTest() {
         assertThatThrownBy(() -> {
             String[] numbers = {"1", "2", "3", "5", "4", "6"};
             String bonusNumber = "50";

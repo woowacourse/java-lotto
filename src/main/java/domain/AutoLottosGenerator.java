@@ -12,7 +12,7 @@ public class AutoLottosGenerator implements LottosGenerator {
     }
 
     @Override
-    public List<Lotto> generateLottos(LottoCount lottoCount) {
+    public List<Lotto> generateLottos(final LottoCount lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int index = START_INDEX; index < lottoCount.getAutoCount(); index++) {
             lottos.add(lottoGenerator.generateLotto());
