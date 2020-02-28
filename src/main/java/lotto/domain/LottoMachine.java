@@ -40,6 +40,12 @@ public class LottoMachine {
 				.collect(Collectors.toList());
 	}
 
+	public List<LottoNumber> pickDedicatedBalls(List<Integer> LottoNumbers) {
+		return LottoNumbers.stream()
+				.map(this::pickBall)
+				.collect(Collectors.toList());
+	}
+
 	public LottoNumber pickBall(int number) {
 		return lottoNumbers.stream()
 				.filter(l -> l.isEqualTo(number))
