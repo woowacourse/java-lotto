@@ -11,16 +11,14 @@ public class LottoGameApplication {
         Money money = inputPurchaseAmountWithValidation();
 
         // 수동 구매 및 로또 번들 생성
-        ManualCount manualCount = inputManualCountWithValidation(money.getLottoCount());
+        ManualCount manualCount = inputManualCountWithValidation(money);
         LottoCount lottoCount = new LottoCount(money.getLottoCount(), manualCount.getManualCount());
         LottoGame lottoGame = new LottoGame(lottoCount);
 
-//        Lottos lottos = createLottoBundleWithValidation(lottoCount, manualCount);
-//
-//        // 구매 결과
-//        OutputView.printLottoCountMessage(lottoCount, manualCount);
-//        OutputView.printLottoBundle(lottos);
-//
+        // 구매 결과
+        OutputView.printLottoCountMessage(lottoCount);
+        OutputView.printLottos(lottoGame);
+
 //        // 당첨 번호 및 보너스 번호 입력
 //        WinningNumber winningNumber = inputWinningNumberWithValidation();
 //
@@ -33,7 +31,7 @@ public class LottoGameApplication {
 //        OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult, lottoCount));
     }
 
-//    private static WinningNumber inputWinningNumberWithValidation() {
+    //    private static WinningNumber inputWinningNumberWithValidation() {
 //        try {
 //            return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 //        } catch (IllegalArgumentException | NullPointerException e) {
@@ -60,12 +58,12 @@ public class LottoGameApplication {
         }
     }
 
-    private static ManualCount inputManualCountWithValidation(final int lottoCount) {
+    private static ManualCount inputManualCountWithValidation(final Money money) {
         try {
-            return new ManualCount(InputView.inputManualCount(), lottoCount);
+            return new ManualCount(InputView.inputManualCount(), money.getLottoCount());
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
-            return inputManualCountWithValidation(lottoCount);
+            return inputManualCountWithValidation(money);
         }
     }
 

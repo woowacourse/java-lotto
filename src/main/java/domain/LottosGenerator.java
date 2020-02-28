@@ -8,8 +8,7 @@ public interface LottosGenerator {
 
     static Lottos generateTotal(LottoCount lottoCount) {
         LottosGenerator lottosGenerator = new ManualLottosGenerator();
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(lottosGenerator.generateLottos(lottoCount));
+        List<Lotto> lottos = new ArrayList<>(lottosGenerator.generateLottos(lottoCount));
 
         lottosGenerator = new AutoLottosGenerator();
         lottos.addAll(lottosGenerator.generateLottos(lottoCount));

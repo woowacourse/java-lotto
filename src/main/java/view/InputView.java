@@ -17,13 +17,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String[] inputManualLottoNumbers(final int manualCount) {
-        if (manualCount > MINIMUM_MANUAL_COUNT) {
-            OutputView.printInputManualLottoNumbersMessage();
-            return scanner.nextLine()
-                    .split(COMMA);
-        }
-        return null;
+    public static String[] inputManualLottoNumbers() {
+        OutputView.printInputManualLottoNumbersMessage();
+        return scanner.nextLine()
+                .split(COMMA);
     }
 
     public static String[] inputWinningNumbers() {

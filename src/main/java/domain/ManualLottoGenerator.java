@@ -17,7 +17,7 @@ public class ManualLottoGenerator implements LottoGenerator {
             return new Lotto(Arrays.stream(manualLotto)
                     .map(String::trim)
                     .mapToInt(Integer::parseInt)
-                    .mapToObj(LottoGenerator.allLottoNumbers::get)
+                    .mapToObj(AllLottoNumbers::get)
                     .collect(toList()));
         } catch (NumberFormatException e) {
             throw new NumberFormatException("로또 넘버는 숫자여야 합니다.");

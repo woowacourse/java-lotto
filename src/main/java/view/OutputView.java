@@ -1,5 +1,6 @@
 package view;
 
+import controller.LottoGame;
 import domain.*;
 
 import java.util.Arrays;
@@ -38,15 +39,15 @@ public class OutputView {
         System.out.println(NEW_LINE + INPUT_MANUAL_LOTTO_NUMBER_GUIDE_MESSAGE);
     }
 
-    public static void printLottoCountMessage(final LottoCount lottoCount, final ManualCount manualCount) {
+    public static void printLottoCountMessage(final LottoCount lottoCount) {
         System.out.println(NEW_LINE + String.format(PURCHASE_COUNT_RESULT_MESSAGE,
-                manualCount.getManualCount(), lottoCount.getAutoLottoCount(manualCount)));
+                lottoCount.getManualCount(), lottoCount.getAutoCount()));
     }
 
-    public static void printLottoBundle(final Lottos lottos) {
-        for (Lotto eachLotto : lottos.getLottos()) {
-            printEachLotto(eachLotto);
-        }
+    public static void printLottos(final LottoGame lottoGame) {
+        Lottos lottos = lottoGame.getLottos();
+        lottos.getLottos()
+                .forEach(OutputView::printEachLotto);
     }
 
     private static void printEachLotto(final Lotto eachLotto) {

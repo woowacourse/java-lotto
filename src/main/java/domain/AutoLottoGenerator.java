@@ -1,18 +1,22 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class AutoLottoGenerator implements LottoGenerator{
+public class AutoLottoGenerator implements LottoGenerator {
 
     @Override
     public Lotto generateLotto() {
-        List<LottoNumber> values = (List<LottoNumber>) allLottoNumbers.values();
-        Collections.shuffle(values);
-        return new Lotto(values.stream()
-                .limit(LOTTO_SIZE)
-                .collect(toList()));
+        List<Integer> lottoNumbers = new ArrayList<>(AllLottoNumbers.getLottoNumbersKeySet());
+        Collections.shuffle(lottoNumbers);
+        return new Lotto(
+                lottoNumbers.stream()
+                        .limit(LOTTO_SIZE)
+                        .map(AllLottoNumbers::get)
+                        .collect(toList())
+        );
     }
 }
