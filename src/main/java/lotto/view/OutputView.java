@@ -12,10 +12,6 @@ public class OutputView {
         System.out.println(String.format("다음과 같은 이유로 다시 시도해 주세요 - %s", message));
     }
 
-    public static void printLottosSize(int lottosSize) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottosSize));
-    }
-
     public static void printLottos(List<Lotto> lottosManual, List<Lotto> lottosAutomatic) {
         System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottosManual.size(), lottosAutomatic.size()));
         for (Lotto lottoManual : lottosManual) {
@@ -27,23 +23,14 @@ public class OutputView {
         }
     }
 
-    private static void printLoto(Lotto lotto) {
-        List<String> stringifiedLottoNumbers = lotto.getLottoNumbers().stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.toList());
-
-        System.out.println("[" + String.join(",", stringifiedLottoNumbers) + "]");
-
-    }
-
-    public static void printEarningRate(int earningRate) {
-        System.out.println(String.format("총 수익률은 %d%%입니다.", earningRate));
-    }
-
     public static void printResult(Result result) {
         System.out.println("당첨 통계\n---------");
         printStatistics(result.getWinningRanks());
         printEarningRate(result.getEarningRate());
+    }
+
+    private static void printEarningRate(int earningRate) {
+        System.out.println(String.format("총 수익률은 %d%%입니다.", earningRate));
     }
 
     private static void printStatistics(WinningRanks winningRanks) {
@@ -53,5 +40,14 @@ public class OutputView {
                     String.format("%d개 일치(%d원)- %d개", rank.getMatchNumber(), rank.calculateWinningMoney().getValue(),
                             winningResults.get(rank)));
         }
+    }
+
+    private static void printLoto(Lotto lotto) {
+        List<String> stringifiedLottoNumbers = lotto.getLottoNumbers().stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.toList());
+
+        System.out.println("[" + String.join(",", stringifiedLottoNumbers) + "]");
+
     }
 }

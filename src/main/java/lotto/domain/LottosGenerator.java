@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LottosGenerator {
+class LottosGenerator {
     private static final List<LottoNumber> lottoNumbersInBox = LottoNumberBox.get();
-    static final int LOTTO_NUMBER_SIZE = 6;
+    private static final int LOTTO_NUMBER_SIZE = 6;
     private static final int ONE = 1;
 
     static List<Lotto> generateAutomatically(int lottosSize) {
@@ -23,7 +23,7 @@ public class LottosGenerator {
     private static Set<LottoNumber> generateLottoNumbersAutomatically() {
         Collections.shuffle(lottoNumbersInBox);
         return new HashSet<>(
-            Collections.unmodifiableCollection(lottoNumbersInBox.subList(ONE, ONE + LOTTO_NUMBER_SIZE)));
+                Collections.unmodifiableCollection(lottoNumbersInBox.subList(ONE, ONE + LOTTO_NUMBER_SIZE)));
     }
 
     static List<Lotto> generateManually(List<Set<LottoNumber>> lottoNumbersBasket) {

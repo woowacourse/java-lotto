@@ -20,18 +20,16 @@ public class Money {
         return this.value / PRICE;
     }
 
-    private void validateMoney(int value) {
-        if (value <= 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다");
-        }
-    }
-
     Money add(Money money) {
         return new Money(this.value + money.value);
     }
 
     Money multiply(int size) {
         return new Money(this.value * size);
+    }
+
+    int toEarningRate(Money purchaseAmount) {
+        return (int) (((double) value / purchaseAmount.value) * PERCENT);
     }
 
     public int getValue() {
@@ -44,7 +42,7 @@ public class Money {
             return true;
         if (!(o instanceof Money))
             return false;
-        Money money = (Money)o;
+        Money money = (Money) o;
         return value == money.value;
     }
 
@@ -53,7 +51,9 @@ public class Money {
         return Objects.hash(value);
     }
 
-    int toEarningRate(Money purchaseAmount) {
-        return (int)(((double)value / purchaseAmount.value) * PERCENT);
+    private void validateMoney(int value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다");
+        }
     }
 }

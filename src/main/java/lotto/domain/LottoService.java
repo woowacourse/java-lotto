@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.view.OutputView;
 
-public class LottoService<V> {
+class LottoService<V> {
     private LottoLogic<V> lottoLogic;
 
     LottoService(LottoLogic<V> lottoLogic) {
