@@ -13,8 +13,6 @@ public class LottoFactory {
 
     private static final List<LottoNumber> LOTTO_NUMBERS;
     private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MATCHER;
-    private static final int MINIMUM_LOTTO_NUMBER = LottoNumber.MINIMUM_LOTTO_NUMBER;
-    private static final int MAXIMUM_LOTTO_NUMBER = LottoNumber.MAXIMUM_LOTTO_NUMBER;
     private static final int START_INDEX = 0;
     private static final int LOTTO_SIZE = 6;
 
@@ -22,7 +20,7 @@ public class LottoFactory {
         LOTTO_NUMBERS = new ArrayList<>();
         LOTTO_NUMBER_MATCHER = new HashMap<>();
 
-        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
+        for (int i = LottoNumber.MINIMUM_LOTTO_NUMBER; i <= LottoNumber.MAXIMUM_LOTTO_NUMBER; i++) {
             LottoNumber lottoNumber = new LottoNumber(i);
             LOTTO_NUMBERS.add(lottoNumber);
             LOTTO_NUMBER_MATCHER.put(i, lottoNumber);
