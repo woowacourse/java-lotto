@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import static lotto.domain.NumberValidator.validateNullAndEmptyValue;
-import static lotto.domain.NumberValidator.validateNumberFormat;
+import static lotto.util.NullValidator.validateNull;
+import static lotto.util.NumberValidator.validateNullAndEmptyValue;
+import static lotto.util.NumberValidator.validateNumberFormat;
 
 public class LottoCount {
     private static final int MIN_MANUAL_LOTTO_COUNT = 0;
@@ -15,12 +16,6 @@ public class LottoCount {
         validate(manualLottoCount, lottoCount);
         this.lottoCountValue = lottoCount;
         this.manualLottoCountValue = Integer.parseInt(manualLottoCount);
-    }
-
-    private static void validateNull(LottoMoney money) {
-        if (money == null) {
-            throw new RuntimeException("null이 들어왔습니다.");
-        }
     }
 
     private static void validate(String manualLottoCount, int lottoCount) {

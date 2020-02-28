@@ -2,8 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.domain.NumberValidator.validateNullAndEmptyValue;
-import static lotto.domain.NumberValidator.validateNumberFormat;
+import static lotto.util.NumberValidator.validateNullAndEmptyValue;
+import static lotto.util.NumberValidator.validateNumberFormat;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_VALUE = 1;
