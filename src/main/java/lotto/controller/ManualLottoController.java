@@ -18,6 +18,7 @@ public class ManualLottoController {
 
     private static void runWithoutExceptionCatch() {
         Money money = new Money(InputView.getMoneyForLotto());
+        LottosFactory.validateMoneyIsEnough(money);
         int amountOfManualLottos = getAmountOfManualLottos(money);
 
         Lottos lottos = LottosFactory.createLottosManual(

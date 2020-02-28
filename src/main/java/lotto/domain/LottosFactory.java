@@ -17,7 +17,7 @@ public class LottosFactory {
     }
 
     public static Lottos createLottosAuto(Money money) {
-        validateMoney(money);
+        validateMoneyIsEnough(money);
 
         int amountOfLottos = calculateAmountOfLottos(money);
         List<Lotto> paidLotto = new ArrayList<>();
@@ -29,7 +29,7 @@ public class LottosFactory {
     }
 
     public static Lottos createLottosManual(Money money, List<List<Integer>> lottosInput) {
-        validateMoney(money);
+        validateMoneyIsEnough(money);
 
         int amountOfLottos = calculateAmountOfLottos(money);
         int amountOfManualLottos = lottosInput.size();
@@ -69,7 +69,7 @@ public class LottosFactory {
         return lottos;
     }
 
-    private static void validateMoney(Money inputMoney) {
+    public static void validateMoneyIsEnough(Money inputMoney) {
         if (inputMoney.getMoney() < Lotto.LOTTO_PRICE) {
             throw new IllegalArgumentException(Lotto.LOTTO_PRICE + "원 이상 입력해주세요.");
         }
