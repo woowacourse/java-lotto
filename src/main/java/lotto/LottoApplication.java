@@ -26,7 +26,7 @@ public class LottoApplication {
         Customer customer = new Customer(inputMoney, inputUserLottoCount);
 
         String userLottoNumbers = InputView.inputManualLottoNumber(customer);
-        customer.setManualLottoNumber(userLottoNumbers);
+        customer.setManualLottoNumbers(userLottoNumbers);
 
         List<Lotto> lottos = createUserLottos(customer);
 

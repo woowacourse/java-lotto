@@ -12,9 +12,7 @@ public class LottoGeneratorManual implements LottoGenerator {
 
     @Override
     public List<Lotto> generator(Customer customer) {
-        String[] manualLottoNumbers = StringUtils.splitByLineSeparator(
-                customer.getManualLottoNumber());
-        return createManualLotto(manualLottoNumbers);
+        return createManualLotto(customer.getManualLottoNumbers());
     }
 
     private static List<Lotto> createManualLotto(String[] manualLottoNumbers) {

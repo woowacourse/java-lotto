@@ -13,7 +13,7 @@ public class LottoGeneratorManualTest {
     @Test
     void generator() {
         Customer customer = new Customer(5000, 2);
-        customer.setManualLottoNumber("1,2,3,4,5,6\n11,12,13,14,15,16");
+        customer.setManualLottoNumbers("1,2,3,4,5,6\n11,12,13,14,15,16");
 
         List<Lotto> result = new ArrayList<>();
         Lotto lotto1 = new Lotto(IntStream.range(1, 7)
