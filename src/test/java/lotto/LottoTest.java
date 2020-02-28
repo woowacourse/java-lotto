@@ -1,9 +1,6 @@
 package lotto;
 
-import domain.Lotto;
-import domain.LottoFactory;
-import domain.ManualLottoTickets;
-import domain.RandomNumberGenerator;
+import domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -21,7 +18,7 @@ public class LottoTest {
         List<List<String>> manualNumbers = new ArrayList<>();
         manualNumbers.add(numbers);
         ManualLottoTickets manualLottoTickets = new ManualLottoTickets(manualNumbers);
-        List<Lotto> lotto = LottoFactory.createLottoTickets(1, randomNumberGenerator, manualLottoTickets);
+        List<Lotto> lotto = LottoFactory.createLottoTickets(new LottoCount(2,"1"), randomNumberGenerator, manualLottoTickets);
         assertThat(lotto.get(0).getSize()).isEqualTo(6);
         assertThat(lotto.get(1).getSize()).isEqualTo(6);
 

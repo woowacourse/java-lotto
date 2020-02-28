@@ -25,6 +25,7 @@ public class InputView {
     }
 
     public static String inputManualLottoCount() {
+        OutputView.printInputManualLottoCount();
         return scanner.nextLine();
     }
 

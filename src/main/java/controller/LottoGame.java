@@ -10,7 +10,7 @@ public class LottoGame {
         int totalLottoCount = purchaseLotto();
         LottoCount lottoCount = createLottoCount(totalLottoCount);
         ManualLottoTickets manualLottoTickets = createManualLottoTickets(lottoCount);
-        LottoTickets lottoTickets = createLottoTickets(totalLottoCount, manualLottoTickets);
+        LottoTickets lottoTickets = createLottoTickets(lottoCount, manualLottoTickets);
         WinningNumber winningNumber = inputWinningNumber();
         LottoResult lottoResult = countWinningLottos(lottoTickets, winningNumber);
         int profitRatio = calculateProfitRatio(totalLottoCount, lottoResult);
@@ -52,7 +52,7 @@ public class LottoGame {
         }
     }
 
-    private static LottoTickets createLottoTickets(int lottoCount, ManualLottoTickets manualLottoTickets) {
+    private static LottoTickets createLottoTickets(LottoCount lottoCount, ManualLottoTickets manualLottoTickets) {
         Generator randomGenerator = new RandomNumberGenerator();
         LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomGenerator, manualLottoTickets));
         OutputView.printLottoTickets(lottoTickets);

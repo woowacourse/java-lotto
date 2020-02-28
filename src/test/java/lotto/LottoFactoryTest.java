@@ -16,7 +16,7 @@ public class LottoFactoryTest {
         List<List<String>> manualNumbers = new ArrayList<>();
         manualNumbers.add(numbers);
         ManualLottoTickets manualLottoTickets = new ManualLottoTickets(manualNumbers);
-        List<Lotto> myLotto = LottoFactory.createLottoTickets(1, randomNumberGenerator, manualLottoTickets);
+        List<Lotto> myLotto = LottoFactory.createLottoTickets(new LottoCount(1, "1"), randomNumberGenerator, manualLottoTickets);
         assertThat(myLotto.get(0).getSize()).isEqualTo(6);
     }
 
@@ -27,7 +27,7 @@ public class LottoFactoryTest {
         List<List<String>> manualNumbers = new ArrayList<>();
         manualNumbers.add(numbers);
         ManualLottoTickets manualLottoTickets = new ManualLottoTickets(manualNumbers);
-        List<Lotto> myLotto = LottoFactory.createLottoTickets(1, manualNumberGenerator, manualLottoTickets);
+        List<Lotto> myLotto = LottoFactory.createLottoTickets(new LottoCount(1, "1"), manualNumberGenerator, manualLottoTickets);
 
         List<LottoNumber> lotto = new ArrayList<>();
         lotto.add(LottoNumber.valueOf("1"));

@@ -19,6 +19,14 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다." + NEW_LINE, calculateCount);
     }
 
+    public static void printInputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+    }
+
+    public static void printInputManualLottoNumbers() {
+        System.out.println("수동으로 구매할 로또 번호를 입력해주세요.");
+    }
+
     public static void printLottoTickets(LottoTickets lottoTickets) {
         for (Lotto eachLotto : lottoTickets.getLottoTickets()){
             printEachLotto(eachLotto);
@@ -67,9 +75,5 @@ public class OutputView {
     public static void printExceptionMessage(RuntimeException e) {
         System.out.println(e.getMessage());
         System.out.println("다시 입력해 주세요.");
-    }
-
-    public static void printInputManualLottoNumbers() {
-        System.out.println("수동으로 구매할 로또 번호를 입력해주세요.");
     }
 }

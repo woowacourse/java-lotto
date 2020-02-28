@@ -29,4 +29,12 @@ public class LottoCount {
     public int getManualCount() {
         return this.manualLottoCount;
     }
+
+    public boolean canCreateAutoLotto() {
+        return this.autoLottoCount > MIN_AUTO_LOTTO_COUNT;
+    }
+
+    public void reduceAutoLottoCount() {
+        this.autoLottoCount--;
+    }
 }
