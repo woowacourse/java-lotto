@@ -1,12 +1,12 @@
 package lotto.domain.result;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import lotto.domain.money.MoneyForLotto;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 로또 결과를 Map 형태로 포함하는 객체
@@ -18,7 +18,6 @@ import java.util.Map;
  */
 public class ResultStatistic {
 	private static final Long DEFAULT_COUNT = 0L;
-	private static final Long COUNT_UP_UNIT = 1L;
 	private static final int RATE_UNIT = 100;
 
 	private Map<Rank, Long> results;
@@ -28,24 +27,11 @@ public class ResultStatistic {
 	}
 
 	public static ResultStatistic calculate(final Lottos lottos, final WinningLotto winningLotto) {
-		Map<Rank, Long> results = createInitialResult();
-
-		for (Lotto lotto : lottos.getLottos()) {
-			Rank rank = winningLotto.getRank(lotto);
-			results.merge(rank, results.get(rank), (keyRank, count) -> count + COUNT_UP_UNIT);
-		}
-
-		return new ResultStatistic(results);
-	}
-
-	private static Map<Rank, Long> createInitialResult() {
-		Map<Rank, Long> initialResult = new HashMap<>();
-
-		for (Rank rank : Rank.values()) {
-			initialResult.put(rank, DEFAULT_COUNT);
-		}
-
-		return initialResult;
+		return lottos.getLottos().stream()
+				.map(winningLotto::getRank)
+				.collect(Collectors.collectingAndThen(
+						Collectors.groupingBy(Function.identity(), Collectors.counting()), ResultStatistic::new)
+				);
 	}
 
 	public long calculateRevenueRate(MoneyForLotto moneyForLotto) {
@@ -56,13 +42,17 @@ public class ResultStatistic {
 		long totalRevenue = 0;
 
 		for (Rank rank : Rank.values()) {
-			totalRevenue += results.get(rank) * rank.getReward();
+			totalRevenue += results.getOrDefault(rank, DEFAULT_COUNT) * rank.getReward();
 		}
 
 		return totalRevenue;
 	}
 
-	public Map<Rank, Long> getResults() {
+	public Map<Rank, Long> getResult() {
 		return this.results;
+	}
+
+	public long getResultCount(Rank rank) {
+		return this.results.getOrDefault(rank, DEFAULT_COUNT);
 	}
 }

@@ -1,5 +1,9 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.Lottos;
@@ -7,10 +11,6 @@ import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.money.MoneyForLotto;
 import lotto.domain.result.Rank;
 import lotto.domain.result.ResultStatistic;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 콘솔로 출력한다
@@ -71,14 +71,10 @@ public class OutputView {
 
 	public static void printResultStatistic(ResultStatistic result, MoneyForLotto money) {
 		System.out.println(RESULT_STATISTIC_MESSAGE);
-		printEachRankResult(Rank.FIFTH, result);
-		printEachRankResult(Rank.FOURTH, result);
-		printEachRankResult(Rank.THIRD, result);
-		printEachRankResult(Rank.SECOND, result);
-		printEachRankResult(Rank.FIRST, result);
+		Rank.getReversedProfitableValues()
+				.forEach(rank -> printEachRankResult(rank, result));
 		System.out.printf(TOTAL_REVENUE_RATE_IS, result.calculateRevenueRate(money));
 	}
-
 
 	private static void printEachRankResult(Rank rank, ResultStatistic result) {
 		String resultMessage = WINNING_RESULT_MESSAGE;
@@ -86,9 +82,9 @@ public class OutputView {
 			resultMessage = SECOND_WINNING_RESULT_MESSAGE;
 		}
 		System.out.printf(resultMessage,
-				rank.getMatchCounts().get(0),
+				rank.getMatchCounts(),
 				rank.getReward(),
-				result.getResults().get(rank)
+				result.getResultCount(rank)
 		);
 	}
 
