@@ -10,13 +10,17 @@ public class LottoFactory {
 
     public static List<Lotto> createLottoTickets(int lottoCount, Generator randomGenerator) {
         List<Lotto> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(createLotto(randomGenerator));
-        }
+        createAutoLottoTickets(lottoCount, randomGenerator, lottoTickets);
         return lottoTickets;
     }
 
-    private static Lotto createLotto(Generator randomGenerator) {
+    private static void createAutoLottoTickets(int lottoCount, Generator randomGenerator, List<Lotto> lottoTickets) {
+        for (int i = 0; i < lottoCount; i++) {
+            lottoTickets.add(createAutoLotto(randomGenerator));
+        }
+    }
+
+    private static Lotto createAutoLotto(Generator randomGenerator) {
         Set<LottoNumber> lotto = new HashSet<>();
         while (lotto.size() < LOTTO_SIZE) {
             int number = randomGenerator.generate(RandomNumber.generateRandomNumber());
@@ -25,7 +29,7 @@ public class LottoFactory {
         return new Lotto(lotto);
     }
 
-    public static Lotto createManualLotto(String[] manualLottoNumbers) {
+    public static Lotto createManualLotto(List<String> manualLottoNumbers) {
         Set<LottoNumber> manualLottoSet = new HashSet<>();
         for (String manualLottoNumber : manualLottoNumbers) {
             manualLottoSet.add(LottoNumber.valueOf(manualLottoNumber));

@@ -42,7 +42,7 @@ public class LottoFactoryTest {
         testSet.add(LottoNumber.valueOf("5"));
         testSet.add(LottoNumber.valueOf("6"));
         Lotto manualLotto = new Lotto(testSet);
-        String[] manualLottoNumbers = {"1","2","3","4","5","6"};
+        List<String> manualLottoNumbers = Arrays.asList("1","2","3","4","5","6");
 
         assertThat(LottoFactory.createManualLotto(manualLottoNumbers)).isEqualTo(manualLotto);
     }
