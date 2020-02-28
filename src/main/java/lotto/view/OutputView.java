@@ -37,7 +37,7 @@ public class OutputView {
 						+ amount + "개"));
 	}
 
-	public static void printEarningRate(long earningRate) {
-		System.out.println("총 수익률: " + earningRate + "%");
+	public static void printEarningRate(double earningRate) {
+		System.out.printf("총 수익률: %.2f%%", earningRate);
 	}
 }

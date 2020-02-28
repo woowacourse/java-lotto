@@ -16,15 +16,15 @@ public class LottoResult {
         return winningInformation;
     }
 
-    public long calculateEarningRate() {
-        long totalEarning = 0;
+    public double calculateEarningRate() {
+        double totalEarning = 0;
         int totalCount = 0;
 
         for (WinningPrize winningPrize : WinningPrize.values()) {
             totalCount += winningInformation.get(winningPrize);
             totalEarning += (winningPrize.getPrize() * winningInformation.get(winningPrize));
         }
-        return totalEarning / (totalCount * 10);
+        return (totalEarning / (totalCount * 1000)) * 100;
     }
 
     public Map<WinningPrize, Integer> getWinningInformation() {
