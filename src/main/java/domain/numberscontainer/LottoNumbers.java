@@ -9,11 +9,6 @@ public class LottoNumbers {
     private static final int SIZE = 6;
 
     protected final Set<LottoNumber> lottoNumbers;
-/*
-    public LottoNumbers(LottoNumbersDto lottoNumbersDto) {
-        validateSize(lottoNumbersDto.getLottoNumbers());
-        this.lottoNumbers = lottoNumbersDto.getLottoNumbers();
-    }*/
 
     public LottoNumbers(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;

@@ -1,5 +1,7 @@
 package view;
 
+import domain.Tickets;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,8 +20,10 @@ public class InputView {
     }
 
     public static List<String> enterManualTickets(int ticketSize) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String> manualTicketsInput = new ArrayList<>();
+
+        if (ticketSize > Tickets.MIN_TICKET_SIZE)
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < ticketSize; i++) {
             manualTicketsInput.add(scanner.nextLine());
         }

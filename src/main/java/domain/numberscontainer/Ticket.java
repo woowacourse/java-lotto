@@ -9,10 +9,6 @@ public class Ticket extends LottoNumbers {
     private static final String STARTING_MARK = "[";
     private static final String ENDING_MARK = "]";
 
-//    public Ticket(LottoNumbersDto lottoNumbersDto) {
-//        super(lottoNumbersDto);
-//    }
-
     public Ticket(String lottoNumbers) {
         super(lottoNumbers);
     }
