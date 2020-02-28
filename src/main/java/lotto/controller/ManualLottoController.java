@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.Lottos;
 import lotto.domain.LottosFactory;
 import lotto.domain.Money;
 import lotto.view.IllegalUserInputException;
@@ -18,7 +19,14 @@ public class ManualLottoController {
     private static void runWithoutExceptionCatch() {
         Money money = new Money(InputView.getMoneyForLotto());
         int amountOfManualLottos = getAmountOfManualLottos(money);
-        // Todo: 수동생성 로또 번호 입력받기 구현
+
+        Lottos lottos = LottosFactory.createLottosManual(
+            money,
+            InputView.getManualLottos(amountOfManualLottos)
+        );
+
+        int amountOfAutoLottos = lottos.getAmountOfLottos() - amountOfManualLottos;
+        OutputView.printPurchasedLottos(amountOfManualLottos, amountOfAutoLottos, lottos);
     }
 
     private static int getAmountOfManualLottos(Money money) {

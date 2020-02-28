@@ -30,7 +30,7 @@ public class AutoLottoController {
     private static void runWithoutExceptionCatch() {
         Money money = new Money(InputView.getMoneyForLotto());
         Lottos lottos = LottosFactory.createLottosAuto(money);
-        OutputView.printPurchasedLottos(lottos.getAmountOfLottos(), lottos);
+        OutputView.printAutoPurchasedLottos(lottos.getAmountOfLottos(), lottos);
 
         WinningInformation winningInformation = getWinningInformation();
 
