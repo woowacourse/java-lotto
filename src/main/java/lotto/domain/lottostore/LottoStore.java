@@ -19,30 +19,30 @@ public class LottoStore {
 	private static final String COUNT_MISMATCH_EXCEPTION_MESSAGE = "구매하려는 수동 장수와 입력 수동 장수가 맞지 않습니다.";
 	private static final int MINIMUM_COUNT = 0;
 
-	public Lottos buy(LottoCount lottoCount, List<String> inputManualLottoNumbers) {
-		validate(lottoCount, inputManualLottoNumbers);
-		if (isManualAndAuto(lottoCount)) {
+	public Lottos buy(LottoCount totalLottoCount, LottoCount manualLottoCount, List<String> inputManualLottoNumbers) {
+		validate(manualLottoCount, inputManualLottoNumbers);
+		if (isManualAndAuto(totalLottoCount, manualLottoCount)) {
 			Lottos manualLottos = LottosFactory.createManualLottos(inputManualLottoNumbers);
-			Lottos autoLottos = LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount());
+			Lottos autoLottos = LottosFactory.createAutoLottos(totalLottoCount.getLottoCount() - manualLottoCount.getLottoCount());
 			return manualLottos.add(autoLottos);
 		}
-		if (isOnlyManual(lottoCount)) {
-			return LottosFactory.createManualLottos(inputManualLottoNumbers);
+		if (isOnlyAuto(manualLottoCount)) {
+			return LottosFactory.createAutoLottos(totalLottoCount.getLottoCount() - manualLottoCount.getLottoCount());
 		}
-		return LottosFactory.createAutoLottos(lottoCount.getAutoLottoCount());
+		return LottosFactory.createManualLottos(inputManualLottoNumbers);
 	}
 
-	private void validate(LottoCount lottoCount, List<String> inputManualLottoNumbers) {
-		if (lottoCount.getManualLottoCount() != inputManualLottoNumbers.size()) {
+	private void validate(LottoCount manualLottoCount, List<String> inputManualLottoNumbers) {
+		if (manualLottoCount.getLottoCount() != inputManualLottoNumbers.size()) {
 			throw new InvalidLottosException(COUNT_MISMATCH_EXCEPTION_MESSAGE);
 		}
 	}
 
-	private boolean isOnlyManual(LottoCount lottoCount) {
-		return lottoCount.getAutoLottoCount() == MINIMUM_COUNT;
+	private boolean isManualAndAuto(LottoCount totalLottoCount, LottoCount manualLottoCount) {
+		return totalLottoCount.getLottoCount() - manualLottoCount.getLottoCount() != MINIMUM_COUNT && manualLottoCount.getLottoCount() != MINIMUM_COUNT;
 	}
 
-	private boolean isManualAndAuto(LottoCount lottoCount) {
-		return lottoCount.getManualLottoCount() != MINIMUM_COUNT && lottoCount.getAutoLottoCount() != MINIMUM_COUNT;
+	private boolean isOnlyAuto(LottoCount manualLottoCount) {
+		return manualLottoCount.getLottoCount() == MINIMUM_COUNT;
 	}
 }

@@ -43,8 +43,8 @@ public class OutputView {
 		System.out.println(e.getMessage());
 	}
 
-	public static void printPurchasedLottos(LottoCount lottoCount, Lottos lottos) {
-		System.out.printf(PURCHASED_LOTTO_NUMBER_IS, lottoCount.getManualLottoCount(), lottoCount.getTotalLottoCount() - lottoCount.getManualLottoCount());
+	public static void printPurchasedLottos(LottoCount totalLottoCount, LottoCount manualLottoCount,Lottos lottos) {
+		System.out.printf(PURCHASED_LOTTO_NUMBER_IS, manualLottoCount.getLottoCount(), totalLottoCount.getLottoCount() - manualLottoCount.getLottoCount());
 
 		List<String> purchasedLottos = new ArrayList<>();
 		for (Lotto lotto : lottos.getLottos()) {

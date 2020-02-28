@@ -18,25 +18,27 @@ public class LottoCount {
 	private static final String MANUAL_LOTTO_COUNT_RANGE_EXCEPTION_MESSAGE = "수동 구매 장수는 0장에서 총 로또 구매 장수 사이여야합니다.";
 	private static final int MINIMUM_MANUAL_LOTTO_COUNT = 0;
 
-	private final int totalLottoCount;
-	private final int manualLottoCount;
+	private final int lottoCount;
 
-	public LottoCount(final int inputTotalLottoCount, final String inputManualLottoCount) {
-		this.totalLottoCount = inputTotalLottoCount;
-		this.manualLottoCount = validateManualLottoCount(inputManualLottoCount);
+	public LottoCount(final int inputLottoCount) {
+		this.lottoCount = inputLottoCount;
 	}
 
-	private int validateManualLottoCount(String inputManualLottoCount) {
-		Objects.requireNonNull(inputManualLottoCount, MANUAL_LOTTO_COUNT_CAN_NOT_BE_NULL_EXCEPTION_MESSAGE);
-		int integerManualLottoCount = parseToInteger(inputManualLottoCount);
-		if (isValidRange(integerManualLottoCount)) {
+	public LottoCount(final String inputLottoCount, final LottoCount totalLottoCount) {
+		this.lottoCount = validateStringLottoCount(inputLottoCount, totalLottoCount);
+	}
+
+	private int validateStringLottoCount(String inputLottoCount, final LottoCount totalLottoCount) {
+		Objects.requireNonNull(inputLottoCount, MANUAL_LOTTO_COUNT_CAN_NOT_BE_NULL_EXCEPTION_MESSAGE);
+		int integerManualLottoCount = parseToInteger(inputLottoCount);
+		if (isInvalidRange(integerManualLottoCount, totalLottoCount.getLottoCount())) {
 			throw new IllegalArgumentException(MANUAL_LOTTO_COUNT_RANGE_EXCEPTION_MESSAGE);
 		}
 		return integerManualLottoCount;
 	}
 
-	private boolean isValidRange(int integerManualLottoCount) {
-		return integerManualLottoCount > this.totalLottoCount || integerManualLottoCount < MINIMUM_MANUAL_LOTTO_COUNT;
+	private boolean isInvalidRange(final int manualLottoCount, final int totalLottoCount) {
+		return totalLottoCount < manualLottoCount || manualLottoCount < MINIMUM_MANUAL_LOTTO_COUNT;
 	}
 
 	private int parseToInteger(final String inputBonusLottoNumber) {
@@ -47,15 +49,7 @@ public class LottoCount {
 		}
 	}
 
-	public int getAutoLottoCount() {
-		return this.totalLottoCount - this.manualLottoCount;
-	}
-
-	public int getTotalLottoCount() {
-		return this.totalLottoCount;
-	}
-
-	public int getManualLottoCount() {
-		return this.manualLottoCount;
+	public int getLottoCount() {
+		return this.lottoCount;
 	}
 }
