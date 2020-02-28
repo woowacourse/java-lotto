@@ -17,8 +17,8 @@ public class LottoMachine {
 		countOfAutoLottoTicket = DEFAULT_COUNT;
 	}
 
-	public LottoTicket buyLottoTicket(int countOfAllLotto, CountOfManualLottoTicket countOfManualLottoTicket,
-		NumberLinesOfManualLotto manualLottoNumbers) {
+	public LottoTicket buyLottoTicket(int countOfAllLotto, NumberLinesOfManualLotto manualLottoNumbers) {
+		int countOfManualLottoTicket = manualLottoNumbers.size();
 		int countOfAutoLottoTicket = calculateCountOfAutoLottoTicket(countOfAllLotto, countOfManualLottoTicket);
 
 		ManualLottoTicketGenerator manualLottoTicketGenerator = new ManualLottoTicketGenerator(manualLottoNumbers);
@@ -30,8 +30,8 @@ public class LottoMachine {
 		return allLottoTicket;
 	}
 
-	public int calculateCountOfAutoLottoTicket(int countOfAllLotto, CountOfManualLottoTicket countOfManualLottoTicket) {
-		return countOfAllLotto - countOfManualLottoTicket.getCountOfManualLotto();
+	public int calculateCountOfAutoLottoTicket(int countOfAllLotto, int countOfManualLottoTicket) {
+		return countOfAllLotto - countOfManualLottoTicket;
 	}
 
 	public int getCountOfAutoLottoTicket() {

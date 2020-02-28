@@ -63,4 +63,8 @@ public class NumberLinesOfManualLotto {
 	public List<String> getNumberLines() {
 		return numberLines;
 	}
+
+	public int size() {
+		return numberLines.size();
+	}
 }

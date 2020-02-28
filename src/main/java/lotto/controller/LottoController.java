@@ -23,7 +23,7 @@ public class LottoController {
 		NumberLinesOfManualLotto numberLinesOfManualLotto = receiveManualLotto(countOfManualLottoTicket);
 
 		LottoMachine lottoMachine = new LottoMachine();
-		LottoTicket lottoTicket = lottoMachine.buyLottoTicket(countOfAllLotto, countOfManualLottoTicket, numberLinesOfManualLotto);
+		LottoTicket lottoTicket = lottoMachine.buyLottoTicket(countOfAllLotto, numberLinesOfManualLotto);
 		printPurchaseCompleteMessage(countOfManualLottoTicket, lottoMachine);
 		printPurchasedLotto(lottoTicket);
 
