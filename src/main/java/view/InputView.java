@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String COMMA = ",";
+    public static final int MIN_MANUAL_LOTTO_COUNT = 0;
 
     public static String inputPurchaseAmount(){
         OutputView.printInputPurchaseAmountMessage();
@@ -30,7 +31,9 @@ public class InputView {
     }
 
     public static List<List<String>> inputManualLottoNumbers(int manualLottoCount) {
-        OutputView.printInputManualLottoNumbers();
+        if (manualLottoCount > MIN_MANUAL_LOTTO_COUNT) {
+            OutputView.printInputManualLottoNumbers();
+        }
         List<List<String>> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             manualLottoNumbers.add(inputOneManualLottoNumbers());
