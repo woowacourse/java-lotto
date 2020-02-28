@@ -28,11 +28,11 @@ public class LottosFactory {
         return new Lottos(paidLotto);
     }
 
-    public static Lottos createLottosManual(Money money, List<Integer>... lottosInput) {
+    public static Lottos createLottosManual(Money money, List<List<Integer>> lottosInput) {
         validateMoney(money);
 
         int amountOfLottos = calculateAmountOfLottos(money);
-        int amountOfManualLottos = lottosInput.length;
+        int amountOfManualLottos = lottosInput.size();
         checkNumberOfManualLottosLegal(amountOfLottos, amountOfManualLottos);
 
         List<Lotto> paidLotto = new ArrayList<>();
@@ -49,7 +49,7 @@ public class LottosFactory {
         }
     }
 
-    private static List<Lotto> makeLottoListManual(List<Integer>... lottosInput) {
+    private static List<Lotto> makeLottoListManual(List<List<Integer>> lottosInput) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (List<Integer> lotto : lottosInput) {
