@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 public class WinningBallsTest {
-
     @Test
     @DisplayName("자동 생성된 로또볼과 당첨 로또볼과 비교하는 테스트")
     void compare_lotto_ball_and_winning_ball() {

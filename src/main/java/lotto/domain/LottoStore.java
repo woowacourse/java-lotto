@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.Exception.LottoTicketEmptyException;
-import lotto.Exception.NumberOutOfRangeException;
 import lotto.domain.LottoTicketNumber.AutomaticLottoTicketNumber;
 import lotto.domain.LottoTicketNumber.ManualLottoTicketNumber;
 import lotto.view.OutputView;
@@ -22,13 +20,8 @@ public class LottoStore {
         this.automaticLottoTicketNumber = automaticLottoTicketNumber;
     }
 
-    private LottoTicket generateManualLottoTicket(String manualLottoBallsInput) {
-        try {
-            return new LottoTicket(LottoBalls.generateLottoBalls(manualLottoBallsInput));
-        } catch (LottoTicketEmptyException | NumberOutOfRangeException | NumberFormatException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return generateManualLottoTicket(manualLottoBallsInput);
-        }
+    private LottoTicket generateManualLottoTicket(Set<LottoBall> manualLottoBallsInput) {
+        return new LottoTicket(manualLottoBallsInput);
     }
 
     private LottoTicket generateAutomaticLottoTicket() {
@@ -39,7 +32,7 @@ public class LottoStore {
         return new LottoTicket(lottoTicket);
     }
 
-    private void generateManualLottoTickets(List<String> manualLottoBallsInputs,LottoTickets lottoTickets) {
+    private void generateManualLottoTickets(List<Set<LottoBall>> manualLottoBallsInputs, LottoTickets lottoTickets) {
         manualLottoBallsInputs.stream().map(this::generateManualLottoTicket).forEach(lottoTickets::addLottoTicket);
     }
 
@@ -50,7 +43,7 @@ public class LottoStore {
         }
     }
 
-    public LottoTickets generateLottoTickets(List<String> inputManualLottoTickets) {
+    public LottoTickets generateLottoTickets(List<Set<LottoBall>> inputManualLottoTickets) {
         LottoTickets lottoTickets = new LottoTickets();
         OutputView.printAnswerLottoTicketNumber(manualLottoTicketNumber, automaticLottoTicketNumber);
         generateManualLottoTickets(inputManualLottoTickets, lottoTickets);

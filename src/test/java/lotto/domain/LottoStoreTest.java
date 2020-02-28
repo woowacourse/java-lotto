@@ -1,13 +1,13 @@
 package lotto.domain;
 
 import lotto.domain.LottoTicketNumber.AutomaticLottoTicketNumber;
-import lotto.domain.LottoTicketNumber.LottoTicketNumber;
 import lotto.domain.LottoTicketNumber.ManualLottoTicketNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,8 +27,8 @@ public class LottoStoreTest {
     @Test
     @DisplayName("로또가 수동으로 생성되는지 확인하는 테스트")
     void correct_manual_lotto_ticket_test() {
-        List<String> manualLottoBallsInputs = new ArrayList<>();
-        manualLottoBallsInputs.add("1,2,3,4,5,6");
+        List<Set<LottoBall>> manualLottoBallsInputs = new ArrayList<>();
+        manualLottoBallsInputs.add(LottoBalls.generateLottoBalls("1,2,3,4,5,6"));
         AutomaticLottoTicketNumber automaticLottoTicketNumber = new AutomaticLottoTicketNumber(1, TOTAL_LOTTO_TICKET_NUMBER);
         LottoStore lottoStore = new LottoStore(new ManualLottoTicketNumber(0, TOTAL_LOTTO_TICKET_NUMBER), automaticLottoTicketNumber);
         LottoTickets lottoTickets = lottoStore.generateLottoTickets(manualLottoBallsInputs);

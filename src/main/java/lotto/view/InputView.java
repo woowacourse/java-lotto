@@ -1,11 +1,7 @@
 package lotto.view;
 
-import lotto.Exception.DuplicationException;
-import lotto.Exception.NotBuyLottoTicketException;
-import lotto.Exception.NotPositiveNumberException;
-import lotto.Exception.NumberOutOfRangeException;
+import lotto.Exception.*;
 import lotto.domain.*;
-import lotto.domain.LottoTicketNumber.LottoTicketNumber;
 import lotto.domain.LottoTicketNumber.ManualLottoTicketNumber;
 import lotto.util.InputValidationUtil;
 
@@ -44,17 +40,22 @@ public class InputView {
         }
     }
 
-    public static List<String> inputManualLottoTickets(ManualLottoTicketNumber manualLottoTicketNumber){
-        List<String> manualLottoBallsInputs = new ArrayList<>();
+    public static List<Set<LottoBall>> inputManualLottoTickets(ManualLottoTicketNumber manualLottoTicketNumber) {
+        List<Set<LottoBall>> manualLottoBallsInputs = new ArrayList<>();
         OutputView.printManualLottoBallsGuide();
-        for (int i = 0; i < manualLottoTicketNumber.getLottoTicketNumber(); i++){
+        for (int i = 0; i < manualLottoTicketNumber.getLottoTicketNumber(); i++) {
             manualLottoBallsInputs.add(InputView.InputWinningBallsAndManualLottoBalls());
         }
         return manualLottoBallsInputs;
     }
 
-    private static String InputWinningBallsAndManualLottoBalls() {
-        return scanner.nextLine();
+    private static Set<LottoBall> InputWinningBallsAndManualLottoBalls() {
+        try {
+            return LottoBalls.generateLottoBalls(scanner.nextLine());
+        } catch (LottoTicketEmptyException | NumberOutOfRangeException | NumberFormatException | DuplicationException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return InputView.InputWinningBallsAndManualLottoBalls();
+        }
     }
 
     private static LottoBall InputBonusBall() {
@@ -71,7 +72,7 @@ public class InputView {
     public static WinningBalls generateWinningBalls() {
         try {
             OutputView.printAnswerWinningBalls();
-            Set<LottoBall> winningBalls = LottoBalls.generateLottoBalls(InputWinningBallsAndManualLottoBalls());
+            Set<LottoBall> winningBalls = InputWinningBallsAndManualLottoBalls();
             LottoBall bonusBall = InputBonusBall();
             return new WinningBalls(winningBalls, bonusBall);
         } catch (DuplicationException | NumberOutOfRangeException e) {
