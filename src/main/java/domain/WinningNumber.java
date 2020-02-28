@@ -5,6 +5,7 @@ import java.util.Objects;
 public class WinningNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD = 5;
     private Lotto winningNumbers;
     private LottoNumber bonusNumber;
 
@@ -26,7 +27,8 @@ public class WinningNumber {
 
     public boolean isBonusMatch(final Lotto targetLotto) {
         Objects.requireNonNull(targetLotto);
-        return targetLotto.contains(bonusNumber);
+        return countWinningMatch(targetLotto) == WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD
+                && targetLotto.contains(bonusNumber);
     }
 
     private void checkDuplicatedLottoNumber() {

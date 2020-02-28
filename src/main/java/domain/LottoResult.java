@@ -25,9 +25,7 @@ public class LottoResult {
     }
 
     private void addWinningRankCount(final LottoRank rank) {
-        if (rank != null) {
-            result.put(rank, result.get(rank) + RESULT_INCREMENT);
-        }
+        result.put(rank, result.get(rank) + RESULT_INCREMENT);
     }
 
     public int calculateTotalProfit() {

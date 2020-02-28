@@ -11,34 +11,27 @@ public enum LottoRank {
     FIFTH(3, false, 5_000),
     NONE(0, false, 0);
 
-    private static final int WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD = 5;
     private final int winningMatchCount;
-    private final boolean isBonusMatch;
+    private final boolean isBooleanMatch;
     private final int winningMoney;
 
-    LottoRank(int winningMatchCount, boolean isBonusMatch, int winningMoney) {
+    LottoRank(int winningMatchCount, boolean isBooleanMatch, int winningMoney) {
         this.winningMatchCount = winningMatchCount;
-        this.isBonusMatch = isBonusMatch;
+        this.isBooleanMatch = isBooleanMatch;
         this.winningMoney = winningMoney;
     }
 
-    public static LottoRank findRank(final int winningMatchCount, final boolean isBonusMatch) {
-        if (isSecondRank(winningMatchCount, isBonusMatch)) {
-            return SECOND;
-        }
+    public static LottoRank findRank(final int winningMatchCount, final boolean isBooleanMatch) {
         return Arrays.stream(LottoRank.values())
-                .filter(getLottoRankPredicate(winningMatchCount))
+                .filter(getLottoRankPredicate(winningMatchCount, isBooleanMatch))
                 .findFirst()
-                .orElse(null);
+                .orElse(NONE);
     }
 
-    private static Predicate<LottoRank> getLottoRankPredicate(final int winningMatchCount) {
-        return result -> result.winningMatchCount == winningMatchCount && !result.isBonusMatch;
+    private static Predicate<LottoRank> getLottoRankPredicate(int winningMatchCount, boolean isBooleanMatch) {
+        return result -> result.winningMatchCount == winningMatchCount && result.isBooleanMatch == isBooleanMatch;
     }
 
-    private static boolean isSecondRank(final int winningMatchCount, final boolean isBonusMatch) {
-        return winningMatchCount == WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD && isBonusMatch;
-    }
 
     public int getWinningMatchCount() {
         return winningMatchCount;

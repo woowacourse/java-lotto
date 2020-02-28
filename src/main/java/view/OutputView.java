@@ -79,13 +79,19 @@ public class OutputView {
         List<LottoRank> keys = Arrays.asList(LottoRank.values());
         Collections.reverse(keys);
         for (LottoRank rank : keys) {
+            resultMessageExceptNoneRank(lottoResult, stringBuilder, rank);
+        }
+        System.out.println(stringBuilder);
+    }
+
+    private static void resultMessageExceptNoneRank(LottoResult lottoResult, StringBuilder stringBuilder, LottoRank rank) {
+        if (rank != LottoRank.NONE){
             stringBuilder.append(rank.getWinningMatchCount());
             resultMessageByRank(stringBuilder, rank);
             stringBuilder.append(lottoResult.getRankCount(rank))
                     .append(COUNT_UNIT)
                     .append(NEW_LINE);
         }
-        System.out.println(stringBuilder);
     }
 
     private static void resultMessageByRank(final StringBuilder stringBuilder, final LottoRank rank) {
