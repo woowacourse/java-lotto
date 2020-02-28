@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import static lotto.domain.NumberValidator.validateNullAndEmptyValue;
-import static lotto.domain.NumberValidator.validateNumberFormat;
+import static lotto.util.NumberValidator.validateNullAndEmptyValue;
+import static lotto.util.NumberValidator.validateNumberFormat;
 
 public class LottoMoney {
     private static final int MONEY_PER_LOTTO = 1_000;
@@ -34,5 +34,9 @@ public class LottoMoney {
     public int calculateEarningsRate(int totalEarnings) {
         double ratio = totalEarnings / (double) value;
         return (int) Math.round(ratio * PERCENT);
+    }
+
+    public LottoCount toLottoCount(String lottoCount) {
+        return new LottoCount(this, lottoCount);
     }
 }
