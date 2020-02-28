@@ -15,10 +15,6 @@ import java.util.List;
 public class LottoGame {
     private List<LottoTicket> lottoTickets = new ArrayList<>();
 
-    public void add(LottoTicket lotto) {
-        lottoTickets.add(lotto);
-    }
-
     public LottoResult makeResult(LottoWinner lottoWinner) {
         LottoResult lottoResult = new LottoResult();
         for (LottoTicket lotto : lottoTickets) {
@@ -27,10 +23,14 @@ public class LottoGame {
         return lottoResult;
     }
 
-    public void makeLottoTickets(LottoGameRepeat autoGameRepeat, LottoGenerator randomLottoGenerator) {
-        for (int count = 0; autoGameRepeat.checkLoopTerminate(count); count++) {
-            lottoTickets.add(LottoTicketFactory.createLottoTicket(randomLottoGenerator));
+    public void makeLottoTickets(LottoGameRepeat gameRepeat, LottoGenerator lottoGenerator) {
+        for (int count = 0; gameRepeat.checkLoopTerminate(count); count++) {
+            lottoTickets.add(LottoTicketFactory.createLottoTicket(lottoGenerator));
         }
+    }
+
+    public void makeLottoTickets(LottoGenerator lottoGenerator) {
+        lottoTickets.add(LottoTicketFactory.createLottoTicket(lottoGenerator));
     }
 
     public List<LottoTicket> getLottoGame() {

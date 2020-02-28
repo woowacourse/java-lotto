@@ -18,7 +18,7 @@ public class LottoController {
 
     private LottoGame makeLottoGame(LottoGameRepeat autoGameRepeat) {
         LottoGame lottoGame = new LottoGame();
-        LottoGameRepeat userGameRepeat = autoGameRepeat.splitLottoGameRepeat(InputView.inputUserRepeat());
+        LottoGameRepeat userGameRepeat = autoGameRepeat.splitGame(InputView.inputUserRepeat());
 
         if (userGameRepeat.checkRepeatPositive()) {
             makeUserLottoTicket(lottoGame, userGameRepeat);
@@ -35,7 +35,7 @@ public class LottoController {
         OutputView.printUserLottoNumbersFormat();
         for (int count = 0; userGameRepeat.checkLoopTerminate(count); count++) {
             UserLottoGenerator userNumberGenerator = new UserLottoGenerator(InputView.inputUserLottoNumbers());
-            lottoGame.add(LottoTicketFactory.createLottoTicket(userNumberGenerator));
+            lottoGame.makeLottoTickets(userNumberGenerator);
         }
     }
 
