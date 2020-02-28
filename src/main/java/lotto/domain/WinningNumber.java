@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import lotto.exceptions.LottoNumberDuplicatedException;
 
 public class WinningNumber {
@@ -19,6 +22,16 @@ public class WinningNumber {
 
 	private boolean bonusNumberDuplicatedWithWinningNumber(LottoNumber bonusNumber) {
 		return winningNumber.contains(bonusNumber);
+	}
+
+	public List<Rank> matches(Lottos lottos) {
+		return lottos.stream()
+			.map(this::match)
+			.collect(Collectors.toList());
+	}
+
+	private Rank match(Lotto lotto) {
+		return Rank.getRank(countHitNumber(lotto), hasBonusNumber(lotto));
 	}
 
 	public int countHitNumber(Lotto lotto) {

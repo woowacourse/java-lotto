@@ -4,7 +4,6 @@ import static lotto.domain.LottoManager.*;
 
 import java.util.List;
 
-import lotto.controller.RankCalculator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoAmount;
 import lotto.domain.LottoNumber;
@@ -35,7 +34,7 @@ public class LottoApplication {
 	}
 
 	private static void showResultRanks(Money budget, Lottos totalLotto) {
-		List<Rank> resultRanks = RankCalculator.calculateMultiple(totalLotto, produceWinningNumber());
+		List<Rank> resultRanks = produceWinningNumber().matches(totalLotto);
 		OutputView.showResult(budget, resultRanks);
 	}
 
