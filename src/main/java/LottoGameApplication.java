@@ -6,32 +6,15 @@ import view.OutputView;
 public class LottoGameApplication {
 
     public static void main(String[] args) {
-        // 구매 금액
         Money money = inputPurchaseAmountWithValidation();
-
-        // 수동 구매 및 로또 번들 생성
         ManualCount manualCount = inputManualCountWithValidation(money);
         LottoCount lottoCount = new LottoCount(money.getLottoCount(), manualCount.getManualCount());
+
         LottoGame lottoGame = new LottoGame(lottoCount);
-
         lottoGame.calculateResults();
-
-//
-//        // 결과 및 수익률 출력
-//        OutputView.printResult(lottoResult);
-//        OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult, lottoCount));
+        lottoGame.showResult(money);
     }
 
-//
-//    private static Lottos createLottoBundleWithValidation(LottoCount lottoCount, ManualCount manualCount) {
-//        try {
-//            return LottoBundleFactory.generate(lottoCount, manualCount, InputView.inputManualLottoNumbers(manualCount.getManualCount()));
-//        } catch (IllegalArgumentException | NullPointerException e) {
-//            OutputView.printExceptionMessage(e);
-//            return createLottoBundleWithValidation(lottoCount, manualCount);
-//        }
-//    }
-//
     private static Money inputPurchaseAmountWithValidation() {
         try {
             return new Money(InputView.inputPurchaseAmount());

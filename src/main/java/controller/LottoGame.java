@@ -28,4 +28,9 @@ public class LottoGame {
     public void calculateResults() {
         lottoResult.countWinningLotto(lottos, winningNumber);
     }
+
+    public void showResult(Money money) {
+        OutputView.printResult(lottoResult);
+        OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult));
+    }
 }

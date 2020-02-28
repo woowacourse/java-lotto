@@ -42,26 +42,24 @@ public class MoneyTest {
         assertThat(money.getLottoCount()).isEqualTo(14);
     }
 
-//    @Test
-//    @DisplayName("로또 계산 결과를 바탕으로 수익률 계산 결과 확인")
-//    void calculateProfitRatioByLottoResultTest() {
-//        String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
-//        String bonusNumber = "7";
-//        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
-//
-//        String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
-//        LottoFactory lottoFactory = new ManualLottoFactory(inputLottoNumbers);
-//        Lotto lotto = lottoFactory.createOneLotto();
-//        Lottos lottos = new Lottos();
-//        lottos.addLotto(lotto);
-//
-//        Money money = new Money("1500");
-//        LottoCount lottoCount = new LottoCount(money.getLottoCount());
-//
-//        LottoResult lottoResult = new LottoResult();
-//        lottoResult.countWinningLotto(lottos, winningNumber);
-//        int profitRatio = money.calculateProfitRatio(lottoResult, lottoCount);
-//        assertThat(profitRatio).isEqualTo(3_000_000);
-//    }
+    @Test
+    @DisplayName("로또 계산 결과를 바탕으로 수익률 계산 결과 확인")
+    void calculateProfitRatioByLottoResultTest() {
+        String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
+        String bonusNumber = "7";
+        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
+
+        String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
+        LottoGenerator lottoGenerator = new ManualLottoGenerator(inputLottoNumbers);
+        Lotto lotto = lottoGenerator.generateLotto();
+        Lottos lottos = new Lottos();
+        lottos.addLotto(lotto);
+
+        Money money = new Money("1500");
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.countWinningLotto(lottos, winningNumber);
+        int profitRatio = money.calculateProfitRatio(lottoResult);
+        assertThat(profitRatio).isEqualTo(3_000_000);
+    }
 
 }

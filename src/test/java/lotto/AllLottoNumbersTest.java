@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AllLottoNumbersTest {
 
     @Test
-    @DisplayName("생성된 전체 로또 번호 길이가 45인지 확")
+    @DisplayName("생성된 전체 로또 번호 길이가 45인지 확인")
     void allLottoNumbersSizeTest() {
         List<Integer> allLottoNumbers = AllLottoNumbers.getLottoNumbersKeySet();
         assertThat(allLottoNumbers.size()).isEqualTo(45);

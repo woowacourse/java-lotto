@@ -45,7 +45,7 @@ public class OutputView {
                 .forEach(OutputView::printEachLotto);
     }
 
-    public static void printLottoCountMessage(final LottoCount lottoCount) {
+    private static void printLottoCountMessage(final LottoCount lottoCount) {
         System.out.println(NEW_LINE + String.format(PURCHASE_COUNT_RESULT_MESSAGE,
                 lottoCount.getManualCount(), lottoCount.getAutoCount()));
     }

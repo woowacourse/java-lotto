@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String COMMA = ",";
-    public static final int MINIMUM_MANUAL_COUNT = 0;
 
     public static String inputPurchaseAmount() {
         OutputView.printInputPurchaseAmountMessage();
