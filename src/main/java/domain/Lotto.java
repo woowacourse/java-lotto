@@ -8,15 +8,15 @@ public class Lotto {
 
     public Lotto(final List<LottoNumber> lotto) {
         checkLottoSizeSix(lotto.size());
-        checkLottoNumberRange(lotto);
+        checkLottoNumbersRightRange(lotto);
         checkDuplicatedLottoNumbers(lotto);
         Collections.sort(lotto);
         this.lotto = lotto;
     }
 
-    private void checkLottoNumberRange(final List<LottoNumber> lotto) {
+    private void checkLottoNumbersRightRange(final List<LottoNumber> lotto) {
         for (LottoNumber number : lotto) {
-            LottoNumber.checkLottoNumberNull(number);
+            LottoNumber.checkLottoNumberRange(number);
         }
     }
 

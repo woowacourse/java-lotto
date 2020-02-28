@@ -20,7 +20,7 @@ public class LottoNumber implements Comparable {
         this.number = number;
     }
 
-    public static void checkLottoNumberNull(LottoNumber number) {
+    public static void checkLottoNumberRange(LottoNumber number) {
         if (number == null) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지 수여야 합니다.");
         }
