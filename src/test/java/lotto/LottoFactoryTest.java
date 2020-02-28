@@ -12,14 +12,22 @@ public class LottoFactoryTest {
     @Test
     void 생성된_로또가_6개의_숫자로_이루어져있는지_테스트() {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-        List<Lotto> myLotto = LottoFactory.createLottoTickets(1, randomNumberGenerator);
+        List<String> numbers = Arrays.asList("1","2","3","4","5","6");
+        List<List<String>> manualNumbers = new ArrayList<>();
+        manualNumbers.add(numbers);
+        ManualLottoTickets manualLottoTickets = new ManualLottoTickets(manualNumbers);
+        List<Lotto> myLotto = LottoFactory.createLottoTickets(1, randomNumberGenerator, manualLottoTickets);
         assertThat(myLotto.get(0).getSize()).isEqualTo(6);
     }
 
     @Test
     void 생성된_로또가_입력한_값을_돌려주는지_테스트() {
         Generator manualNumberGenerator = new ManualNumberGenerator();
-        List<Lotto> myLotto = LottoFactory.createLottoTickets(1, manualNumberGenerator);
+        List<String> numbers = Arrays.asList("1","2","3","4","5","6");
+        List<List<String>> manualNumbers = new ArrayList<>();
+        manualNumbers.add(numbers);
+        ManualLottoTickets manualLottoTickets = new ManualLottoTickets(manualNumbers);
+        List<Lotto> myLotto = LottoFactory.createLottoTickets(1, manualNumberGenerator, manualLottoTickets);
 
         List<LottoNumber> lotto = new ArrayList<>();
         lotto.add(LottoNumber.valueOf("1"));

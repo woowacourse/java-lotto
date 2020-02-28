@@ -15,6 +15,18 @@ public class LottoFactory {
         return lottoTickets;
     }
 
+    public static Lotto createManualLotto(List<String> manualLottoNumbers) {
+        Set<LottoNumber> manualLottoSet = new HashSet<>();
+        for (String manualLottoNumber : manualLottoNumbers) {
+            manualLottoSet.add(LottoNumber.valueOf(manualLottoNumber));
+        }
+        return new Lotto(manualLottoSet);
+    }
+
+    private static void createManualLottoTickets(ManualLottoTickets manualLottoTickets, List<Lotto> lottoTickets) {
+        manualLottoTickets.addManualLottoTickets(lottoTickets);
+    }
+
     private static void createAutoLottoTickets(int lottoCount, Generator randomGenerator, List<Lotto> lottoTickets) {
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(createAutoLotto(randomGenerator));
@@ -28,17 +40,5 @@ public class LottoFactory {
             lotto.add(LottoNumber.valueOf(number));
         }
         return new Lotto(lotto);
-    }
-
-    public static Lotto createManualLotto(List<String> manualLottoNumbers) {
-        Set<LottoNumber> manualLottoSet = new HashSet<>();
-        for (String manualLottoNumber : manualLottoNumbers) {
-            manualLottoSet.add(LottoNumber.valueOf(manualLottoNumber));
-        }
-        return new Lotto(manualLottoSet);
-    }
-
-    private static void createManualLottoTickets(ManualLottoTickets manualLottoTickets, List<Lotto> lottoTickets) {
-        manualLottoTickets.addManualLottoTickets(lottoTickets);
     }
 }

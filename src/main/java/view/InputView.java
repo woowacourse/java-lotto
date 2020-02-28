@@ -29,6 +29,7 @@ public class InputView {
     }
 
     public static List<List<String>> inputManualLottoNumbers(int manualLottoCount) {
+        OutputView.printInputManualLottoNumbers();
         List<List<String>> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             manualLottoNumbers.add(inputOneManualLottoNumbers());

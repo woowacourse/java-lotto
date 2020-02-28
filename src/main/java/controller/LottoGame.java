@@ -10,7 +10,7 @@ public class LottoGame {
         int totalLottoCount = purchaseLotto();
         LottoCount lottoCount = createLottoCount(totalLottoCount);
         ManualLottoTickets manualLottoTickets = createManualLottoTickets(lottoCount);
-        LottoTickets lottoTickets = createLottoTickets(totalLottoCount);
+        LottoTickets lottoTickets = createLottoTickets(totalLottoCount, manualLottoTickets);
         WinningNumber winningNumber = inputWinningNumber();
         LottoResult lottoResult = countWinningLottos(lottoTickets, winningNumber);
         int profitRatio = calculateProfitRatio(totalLottoCount, lottoResult);
@@ -52,9 +52,9 @@ public class LottoGame {
         }
     }
 
-    private static LottoTickets createLottoTickets(int lottoCount) {
+    private static LottoTickets createLottoTickets(int lottoCount, ManualLottoTickets manualLottoTickets) {
         Generator randomGenerator = new RandomNumberGenerator();
-        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomGenerator));
+        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomGenerator, manualLottoTickets));
         OutputView.printLottoTickets(lottoTickets);
         return lottoTickets;
     }
@@ -62,7 +62,7 @@ public class LottoGame {
     private static WinningNumber inputWinningNumber() {
         try {
             return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
-        } catch(IllegalArgumentException | NullPointerException e){
+        } catch (IllegalArgumentException | NullPointerException e) {
             OutputView.printExceptionMessage(e);
             return inputWinningNumber();
         }

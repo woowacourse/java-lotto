@@ -1,14 +1,14 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class ManualLottoTickets {
-    private List<Lotto> manualLottoTickets;
+    private List<Lotto> manualLottoTickets = new ArrayList<>();
 
     public ManualLottoTickets(List<List<String>> lottoNumbers) {
         for (int i = 0; i < lottoNumbers.size(); i++) {
-            System.out.println(lottoNumbers.get(i));
             this.manualLottoTickets.add(LottoFactory.createManualLotto(lottoNumbers.get(i)));
         }
     }

@@ -15,7 +15,6 @@ public class ManualLottoTicketsTest {
     void 입력된_수동_로또_번호가_숫자가_아닌_경우_예외_처리() {
         List<List<String>> testNumbers = new ArrayList<>();
         List<String> a = Arrays.asList("1","2","3","4","5","a");
-        System.out.println(a);
         testNumbers.add(a);
 
         assertThatThrownBy(() -> {
@@ -27,7 +26,6 @@ public class ManualLottoTicketsTest {
     void 입력된_수동_로또_번호가_1이상_45이하가_아닌_경우_예외_처리() {
         List<List<String>> testNumbers = new ArrayList<>();
         List<String> a = Arrays.asList("1","2","3","4","5","46");
-        System.out.println(a);
         testNumbers.add(a);
 
         assertThatThrownBy(() -> {

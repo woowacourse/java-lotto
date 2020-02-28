@@ -2,9 +2,12 @@ package lotto;
 
 import domain.Lotto;
 import domain.LottoFactory;
+import domain.ManualLottoTickets;
 import domain.RandomNumberGenerator;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,8 +17,13 @@ public class LottoTest {
     @Test
     void 로또_번호_갯수_6개인지_확인(){
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-        List<Lotto> lotto = LottoFactory.createLottoTickets(1, randomNumberGenerator);
+        List<String> numbers = Arrays.asList("1","2","3","4","5","6");
+        List<List<String>> manualNumbers = new ArrayList<>();
+        manualNumbers.add(numbers);
+        ManualLottoTickets manualLottoTickets = new ManualLottoTickets(manualNumbers);
+        List<Lotto> lotto = LottoFactory.createLottoTickets(1, randomNumberGenerator, manualLottoTickets);
         assertThat(lotto.get(0).getSize()).isEqualTo(6);
+        assertThat(lotto.get(1).getSize()).isEqualTo(6);
 
         assertThatThrownBy(() -> {
             Lotto.checkLottoSizeSix(7);

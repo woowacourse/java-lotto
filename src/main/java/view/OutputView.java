@@ -68,4 +68,8 @@ public class OutputView {
         System.out.println(e.getMessage());
         System.out.println("다시 입력해 주세요.");
     }
+
+    public static void printInputManualLottoNumbers() {
+        System.out.println("수동으로 구매할 로또 번호를 입력해주세요.");
+    }
 }

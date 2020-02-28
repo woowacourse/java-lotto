@@ -10,11 +10,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTicketsTest {
 
     @Test
-    void 구매금액으로_로또더미의_사이즈_확인() {
+    void 구매금액으로_로또_Tickets의_사이즈_확인() {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
         PurchaseAmount amount = new PurchaseAmount("10800");
         int lottoCount = amount.getCount();
-        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomNumberGenerator));
+        List<String> numbers = Arrays.asList("1","2","3","4","5","6");
+        List<List<String>> manualNumbers = new ArrayList<>();
+        manualNumbers.add(numbers);
+        ManualLottoTickets manualLottoTickets = new ManualLottoTickets(manualNumbers);
+
+        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomNumberGenerator, manualLottoTickets));
         assertThat(lottoTickets.getTicketsSize()).isEqualTo(10);
     }
 
