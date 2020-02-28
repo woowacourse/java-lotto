@@ -2,7 +2,7 @@ package lotto.domain.factory;
 
 import lotto.domain.Lotto;
 
-public interface LottoMakeAble {
+public interface LottoMakeable {
 
 	Lotto create();
 }

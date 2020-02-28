@@ -9,7 +9,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
 import lotto.exception.NotIntegerException;
 
-public class ManualLottoFactory implements LottoMakeAble {
+public class ManualLottoFactory implements LottoMakeable {
 	private static final String COMMA = ",";
 
 	private final String[] inputNumbers;
