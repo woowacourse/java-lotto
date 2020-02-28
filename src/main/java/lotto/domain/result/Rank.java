@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  * 날짜 : 2020/02/19
  */
 public enum Rank {
-	FIRST(new ArrayList<>(Collections.singletonList(6)),2_000_000_000),
+	FIRST(new ArrayList<>(Collections.singletonList(6)), 2_000_000_000),
 	SECOND(new ArrayList<>(Collections.singletonList(5)), 30_000_000),
 	THIRD(new ArrayList<>(Collections.singletonList(5)), 1_500_000),
 	FOURTH(new ArrayList<>(Collections.singletonList(4)), 50_000),

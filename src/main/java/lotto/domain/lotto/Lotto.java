@@ -1,9 +1,9 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lottonumber.LottoNumber;
-
 import java.util.*;
 import java.util.stream.Collectors;
+
+import lotto.domain.lottonumber.LottoNumber;
 
 /**
  * 6개의 로또 번호를 가지고 있는 로또 클래스

@@ -23,7 +23,6 @@ public class StringUtils {
 	private static final String INVALID_INPUT_EXCEPTION_MESSAGE = "잘못된 형식으로 입력하셨습니다.";
 	private static final String NONE_INTEGER_INPUT_EXCEPTION_MESSAGE = "입력 로또 번호가 정수가 아닙니다.";
 
-
 	private StringUtils() {
 	}
 

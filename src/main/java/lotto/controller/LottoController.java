@@ -22,8 +22,9 @@ public class LottoController {
 		MoneyForLotto moneyForLotto = new MoneyForLotto(InputView.getMoneyForLotto());
 		LottoCount totalLottoCount = new LottoCount(moneyForLotto.calculateAmountOfLottos());
 		LottoCount manualLottoCount = new LottoCount(InputView.getManualLottoCount(), totalLottoCount);
-		LottoStore lottoStore = new LottoStore();
 		List<String> inputManualLottoNumbers = InputView.getManualLottoNumbers(manualLottoCount.getLottoCount());
+
+		LottoStore lottoStore = new LottoStore();
 		Lottos purchasedLottos = lottoStore.buy(totalLottoCount, manualLottoCount, inputManualLottoNumbers);
 		OutputView.printPurchasedLottos(totalLottoCount, manualLottoCount, purchasedLottos);
 

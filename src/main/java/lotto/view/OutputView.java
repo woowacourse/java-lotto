@@ -81,11 +81,7 @@ public class OutputView {
 		if (rank.equals(Rank.SECOND)) {
 			resultMessage = SECOND_WINNING_RESULT_MESSAGE;
 		}
-		System.out.printf(resultMessage,
-				rank.getMatchCounts(),
-				rank.getReward(),
-				result.getResultCount(rank)
-		);
+		System.out.printf(resultMessage, rank.getMatchCounts(), rank.getReward(), result.getResultCount(rank));
 	}
 
 	public static void askEnterManualLottoNumbers() {

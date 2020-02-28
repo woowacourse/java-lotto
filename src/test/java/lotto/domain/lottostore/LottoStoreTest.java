@@ -54,5 +54,4 @@ public class LottoStoreTest {
 		}).isInstanceOf(InvalidLottosException.class)
 				.hasMessage("구매하려는 수동 장수와 입력 수동 장수가 맞지 않습니다.");
 	}
-
 }
