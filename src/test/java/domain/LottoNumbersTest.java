@@ -8,15 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbersTest {
-    @DisplayName("shuffle 기능 테스트")
+    @DisplayName("static 으로 생성한 숫자 풀의 유효성 검증")
     @Test
-    void shuffleLottoNumbersTest() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    void validateLottoNumbersTest() {
+        List<LottoNumber> expected = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            expected.add(new LottoNumber(i));
         }
-        LottoNumbers.shuffleLottoNumbers();
-        boolean expected = lottoNumbers != LottoNumbers.getInstance();
-        Assertions.assertThat(expected).isTrue();
+
+        Assertions.assertThat(LottoNumbers.getInstance()).containsSequence(expected);
     }
 }
