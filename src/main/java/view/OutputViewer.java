@@ -38,8 +38,8 @@ public class OutputViewer {
         }
     }
 
-    private static void printProfitPercent(Money money, WinningCalculator winningCalculator) {
-        String profitPercent = Integer.toString(ProfitCalculator.calculateProfit(money, winningCalculator));
+    private static void printProfitPercent(WinningCalculator winningCalculator) {
+        String profitPercent = Integer.toString(winningCalculator.getProfitPercent());
         StringBuilder sb = new StringBuilder();
         sb.append("총 수익률은 ");
         sb.append(profitPercent);
@@ -47,8 +47,8 @@ public class OutputViewer {
         System.out.println(sb.toString());
     }
 
-    public static void printResult(Money money, WinningCalculator winningCalculator) {
+    public static void printResult(WinningCalculator winningCalculator) {
         printWinningResult(winningCalculator);
-        printProfitPercent(money, winningCalculator);
+        printProfitPercent(winningCalculator);
     }
 }

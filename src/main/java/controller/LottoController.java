@@ -44,4 +44,8 @@ public class LottoController {
         winningCalculator.calculateWinningCount(lottoTickets, winningLottoTicket);
         return winningCalculator;
     }
+
+    public static void calculateProfit(Money money, WinningCalculator winningCalculator) {
+        winningCalculator.calculateProfitPercent(money);
+    }
 }
