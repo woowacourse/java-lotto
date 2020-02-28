@@ -16,9 +16,8 @@ public class LottoApplication {
                 InputViewer.inputWinningLottoTicketNumber());
         LottoController.getBonusBall(winningLottoTicket, InputViewer.inputBonusBallNumber());
 
-        WinningCalculator winningCalculator = LottoController.calculateWinningLottoTicket(lottoTickets,
-                winningLottoTicket);
-        LottoController.calculateProfit(money, winningCalculator);
-        OutputViewer.printResult(winningCalculator);
+        LottoResult lottoResult = LottoController.calculateLottoResult(lottoTickets, winningLottoTicket);
+        LottoController.calculateProfit(money, lottoResult);
+        OutputViewer.printResult(lottoResult);
     }
 }

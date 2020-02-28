@@ -38,14 +38,14 @@ public class LottoController {
         }
     }
 
-    public static WinningCalculator calculateWinningLottoTicket(LottoTickets lottoTickets,
-                                                                WinningLottoTicket winningLottoTicket) {
-        WinningCalculator winningCalculator = new WinningCalculator();
-        winningCalculator.calculateWinningCount(lottoTickets, winningLottoTicket);
-        return winningCalculator;
+    public static LottoResult calculateLottoResult(LottoTickets lottoTickets,
+                                                   WinningLottoTicket winningLottoTicket) {
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.calculateWinningCount(lottoTickets, winningLottoTicket);
+        return lottoResult;
     }
 
-    public static void calculateProfit(Money money, WinningCalculator winningCalculator) {
-        winningCalculator.calculateProfitPercent(money);
+    public static void calculateProfit(Money money, LottoResult lottoResult) {
+        lottoResult.calculateProfitPercent(money);
     }
 }

@@ -29,17 +29,17 @@ public class OutputViewer {
         System.out.println();
     }
 
-    private static void printWinningResult(WinningCalculator winningCalculator) {
+    private static void printWinningResult(LottoResult lottoResult) {
         System.out.println();
         System.out.println("당첨 통계\n---------");
         for (PrizeType prizeType : PrizeType.values()) {
-            String winningResult = prizeType.getResultString(winningCalculator.getPrizeTypeValue(prizeType));
+            String winningResult = prizeType.getResultString(lottoResult.getPrizeTypeValue(prizeType));
             System.out.println(winningResult);
         }
     }
 
-    private static void printProfitPercent(WinningCalculator winningCalculator) {
-        String profitPercent = Integer.toString(winningCalculator.getProfitPercent());
+    private static void printProfitPercent(LottoResult lottoResult) {
+        String profitPercent = Integer.toString(lottoResult.getProfitPercent());
         StringBuilder sb = new StringBuilder();
         sb.append("총 수익률은 ");
         sb.append(profitPercent);
@@ -47,8 +47,8 @@ public class OutputViewer {
         System.out.println(sb.toString());
     }
 
-    public static void printResult(WinningCalculator winningCalculator) {
-        printWinningResult(winningCalculator);
-        printProfitPercent(winningCalculator);
+    public static void printResult(LottoResult lottoResult) {
+        printWinningResult(lottoResult);
+        printProfitPercent(lottoResult);
     }
 }

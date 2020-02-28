@@ -3,14 +3,14 @@ package domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WinningCalculator {
+public class LottoResult {
     private static final int INITIAL_COUNT = 0;
     private static final int HAS_BONUS = 5;
 
     private Map<PrizeType, Integer> prizeInfo;
     private ProfitPercent profitPercent;
 
-    public WinningCalculator() {
+    public LottoResult() {
         initializePrizeInfo();
     }
 
