@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.view.errors.InvalidInputException;
 
 public class LottoGame {
 
@@ -20,14 +19,7 @@ public class LottoGame {
     }
 
     private Money inputPurchaseAmount() {
-        try {
-            Money purchaseAmount = InputView.inputPurchaseAmount();
-            OutputView.printLottosSize(purchaseAmount.toLottosSize());
-            return purchaseAmount;
-        } catch (InvalidInputException e) {
-            OutputView.printRetryRequestWithMessage(e.getMessage());
-            return inputPurchaseAmount();
-        }
+        return execute(InputView::inputPurchaseAmount);
     }
 
     private List<Lotto> purchaseLottos(Money purchaseAmount) {
@@ -43,22 +35,12 @@ public class LottoGame {
         return LottosGenerator.generateManually(lottoNumbersBasket);
     }
 
-    private int inputNumberToBuyManually(int lottosSize) {
-        try {
-            return InputView.inputNumberToBuyManually(lottosSize);
-        } catch (InvalidInputException e) {
-            OutputView.printRetryRequestWithMessage(e.getMessage());
-            return inputNumberToBuyManually(lottosSize);
-        }
+    private Integer inputNumberToBuyManually(Integer lottosSize) {
+        return execute(() -> InputView.inputNumberToBuyManually(lottosSize));
     }
 
     private List<Set<LottoNumber>> inputLottoNumbersBasket(int numberToBuyManually) {
-        try {
-            return InputView.inputManualLottos(numberToBuyManually);
-        } catch (InvalidInputException e) {
-            OutputView.printRetryRequestWithMessage(e.getMessage());
-            return inputLottoNumbersBasket(numberToBuyManually);
-        }
+        return execute(() -> InputView.inputManualLottos(numberToBuyManually));
     }
 
     private List<Lotto> generateLottosAutomatically(int lottosSize) {
@@ -77,20 +59,11 @@ public class LottoGame {
     }
 
     private Lotto inputWinningLotto() {
-        try {
-            return InputView.inputLastWeekWinningNumbers();
-        } catch (InvalidInputException e) {
-            OutputView.printRetryRequestWithMessage(e.getMessage());
-            return inputWinningLotto();
-        }
+        return execute(InputView::inputLastWeekWinningNumbers);
     }
 
     private LottoNumber inputBonusNumber() {
-        try {
-            return InputView.inputBonusNumber();
-        } catch (InvalidInputException e) {
-            return inputBonusNumber();
-        }
+        return execute(InputView::inputBonusNumber);
     }
 
     private WinningRanks compareWithWinningNumbers(List<Lotto> lottos, Lotto winningLotto, LottoNumber bonusNumber) {
@@ -107,5 +80,10 @@ public class LottoGame {
             Rank rank = Rank.valueOf(matchingNumber, lotto.matchBonusNumber(bonusNumber));
             winningRanks.addWinningRanks(rank);
         }
+    }
+
+    private <T> T execute(LottoLogic<T> lottoLogic) {
+        LottoService<T> lottoService = new LottoService<>(lottoLogic);
+        return lottoService.executeOrRepeatWithException();
     }
 }
