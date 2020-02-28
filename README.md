@@ -41,6 +41,7 @@
     - int number
     - [예외 처리] checkLottoNumber 1부터 45까지 숫자인지 검증
     - [예외 처리] checkNotNumber  입력된 번호 중 숫자가 아닌 문자가 들어왔을 경우 검증
+    - [예외 처리] checkNegativeNumber 입력된 번호가 양수인지 검증
 - **Lotto**
     - List<LottoNumber> lotto
     - [예외 처리] checkLottoSizeSix 6개의 숫자가 만들어졌는 지 검증
@@ -92,7 +93,7 @@
     - inputManualLottoCount
         - String 으로 반환
     - inputManualLottoNumbers
-        - List<String[]> 으로 반환
+        - List<List<String>> 으로 반환
     - inputWinningNumbers
         - ","로 split 후 String[] 반환
     - inputBonusNumber
