@@ -38,7 +38,7 @@ public class LottoFactory {
         return new LottoTickets(lottoTickets);
     }
 
-    static LottoTicket publishLottoTicketFrom(Set<Integer> numbers) {
+    private static LottoTicket publishLottoTicketFrom(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoFactory::publishLottoNumberFrom)
                 .collect(Collectors.toSet());
@@ -56,7 +56,7 @@ public class LottoFactory {
         return new LottoTickets(lottoTickets);
     }
 
-    static LottoTicket publishLottoTicketOfRandom() {
+    private static LottoTicket publishLottoTicketOfRandom() {
         Collections.shuffle(LOTTO_NUMBERS);
         List<LottoNumber> slicedLottoNumbers = LOTTO_NUMBERS.subList(START_INDEX, LOTTO_SIZE);
         return new LottoTicket(new HashSet<>(slicedLottoNumbers));
@@ -68,7 +68,7 @@ public class LottoFactory {
         return new WinningLotto(lottoTicket, lottoNumber);
     }
 
-    static LottoNumber publishLottoNumberFrom(int number) {
+    private static LottoNumber publishLottoNumberFrom(int number) {
         return LOTTO_NUMBER_MATCHER.get(number);
     }
 }

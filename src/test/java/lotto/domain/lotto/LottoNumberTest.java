@@ -15,8 +15,7 @@ class LottoNumberTest {
     @Test
     @DisplayName("LottoNumber를 생성하는 테스트")
     void createLottoNumber() {
-        int expected = 3;
-        LottoNumber lottoNumber = new LottoNumber(expected);
+        LottoNumber lottoNumber = new LottoNumber(3);
     }
 
     @ParameterizedTest

@@ -37,8 +37,8 @@ public class Application {
     }
 
     private static LottoTickets createLottoTickets(Count count) {
-        List<String> lottoTicketDtoInput = InputView.inputManualNumber(count);
-        LottoTickets manualLottoTickets = lottoService.createManualLottoTickets(lottoTicketDtoInput);
+        List<String> manualLottoTicketsInput = InputView.inputManualNumber(count);
+        LottoTickets manualLottoTickets = lottoService.createManualLottoTickets(manualLottoTicketsInput);
         LottoTickets autoLottoTickets = lottoService.createAutoLottoTickets(count);
         return LottoTickets.createFrom(manualLottoTickets, autoLottoTickets);
     }
