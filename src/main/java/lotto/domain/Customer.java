@@ -59,6 +59,9 @@ public class Customer {
 
     public void setManualLottoNumbers(String manualLottoNumbers) {
         validateManualLottoNumbers(manualLottoNumbers);
+        if (this.manualLottoNumbers != null) {
+            return;
+        }
         this.manualLottoNumbers = StringUtils.splitByLineSeparator(manualLottoNumbers);
     }
 
