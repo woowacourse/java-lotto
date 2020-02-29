@@ -17,7 +17,7 @@ public class LottoGame {
         List<String> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoTicketCount);
 
         LottoTickets manualLottoTickets = LottoTickets.ofManualLottoTickets(manualLottoTicketCount, manualLottoNumbers);
-        LottoTickets randomLottoTickets = LottoTickets.ofRandomLottoTickets(allLottoTicketCount - manualLottoTicketCount);
+        LottoTickets randomLottoTickets = LottoTickets.ofAutoLottoTickets(allLottoTicketCount - manualLottoTicketCount);
 
         OutputView.printLottos(manualLottoTickets, randomLottoTickets);
 

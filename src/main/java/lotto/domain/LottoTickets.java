@@ -20,13 +20,13 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets ofRandomLottoTickets(int randomTicketCount) {
-        List<LottoTicket> randomLottoTicket = Stream.generate(LottoTickets::createRandomLottoTicket).limit(randomTicketCount)
+    public static LottoTickets ofAutoLottoTickets(int randomTicketCount) {
+        List<LottoTicket> randomLottoTicket = Stream.generate(LottoTickets::createAutoLottoTicket).limit(randomTicketCount)
                 .collect(toList());
         return new LottoTickets(randomLottoTicket);
     }
 
-    private static LottoTicket createRandomLottoTicket() {
+    private static LottoTicket createAutoLottoTicket() {
         List<LottoNumber> copiedNumbers = new ArrayList<>(LottoNumber.values());
         Collections.shuffle(copiedNumbers);
         List<LottoNumber> subNumbers = copiedNumbers.subList(SUBLIST_FROM_INDEX, SUBLIST_TO_INDEX);
@@ -43,8 +43,6 @@ public class LottoTickets {
                 .collect(Collectors.toList());
         return new LottoTickets(manualLottoTicket);
     }
-
-
 
     public static LottoTickets add(LottoTickets manualLottoTickets, LottoTickets randomLottoTickets) {
         List<LottoTicket> allLottoTickets = new ArrayList<>();
