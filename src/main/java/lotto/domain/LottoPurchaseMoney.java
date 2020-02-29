@@ -35,16 +35,14 @@ public class LottoPurchaseMoney {
 		return Integer.parseInt(lottoPurchaseMoney) < LOTTO_PRICE;
 	}
 
-	public LottoBuyCount getBuyCount(String manual) {
-		return getBuyCount(Integer.parseInt(manual));
-	}
-
-	public LottoBuyCount getBuyCount(int manual) {
-		int total = lottoPurchaseMoney / LOTTO_PRICE;
-		if (manual > total) {
+	public LottoBuyCount getBuyCount(String manual)
+	{
+		int totalCount = lottoPurchaseMoney / LOTTO_PRICE;
+		int manualCount = Integer.parseInt(manual);
+		if (manualCount > totalCount) {
 			throw new NotEnoughMoneyException();
 		}
-		return new LottoBuyCount(manual, total - manual);
+		return new LottoBuyCount(manualCount, totalCount - manualCount);
 	}
 
 	public int getValue() {
