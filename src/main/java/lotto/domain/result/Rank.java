@@ -15,6 +15,7 @@ public enum Rank {
     MISS(0, 0);
 
     private static final Map<Integer, Rank> RANK_MATCHER_WITHOUT_BONUS;
+    private static String COUNT_OF_MATCHES_UNDER_ZERO_OR_OVER_SIX = "당첨 번호 일치 수는 0이상 6이하로만 가능합니다.";
 
     static {
         RANK_MATCHER_WITHOUT_BONUS = new HashMap<>();
@@ -45,7 +46,7 @@ public enum Rank {
 
     private static void validateCountOfMatches(int countOfMatches) {
         if (countOfMatches > FIRST.countOfMatches || countOfMatches < MISS.countOfMatches) {
-            throw new RankException();
+            throw new IllegalArgumentException(COUNT_OF_MATCHES_UNDER_ZERO_OR_OVER_SIX);
         }
     }
 
@@ -59,5 +60,9 @@ public enum Rank {
 
     public int getWinningMoney() {
         return winningMoney;
+    }
+
+    public long getWinningMoneyByCount(int rankCount) {
+        return (long)winningMoney * rankCount;
     }
 }

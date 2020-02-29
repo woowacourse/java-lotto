@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class GameParser {
 
+    private static final String NOT_NUMBER_EXCEPTION = "숫자만 입력 가능합니다.";
     private static final String DELIMITER = ",";
 
     public Set<Integer> parseInputToNumbers(String winningLottoInput) {
@@ -19,7 +20,7 @@ public class GameParser {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException ne) {
-            throw new InvalidNumberInputException();
+            throw new IllegalArgumentException(NOT_NUMBER_EXCEPTION);
         }
     }
 }

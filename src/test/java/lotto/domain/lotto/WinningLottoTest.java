@@ -32,9 +32,8 @@ class WinningLottoTest {
     void createWinningLotto() {
         LottoTicket lottoTicket = firstLottoTicket;
         LottoNumber bonusNumber = numberSeven;
-        WinningLotto winningLotto = new WinningLotto(lottoTicket, bonusNumber);
+        assertThat(new WinningLotto(lottoTicket, bonusNumber)).isNotNull();
 
-        assertThat(winningLotto);
     }
 
     @Test

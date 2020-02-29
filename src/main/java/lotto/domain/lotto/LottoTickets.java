@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import lotto.domain.result.LottoResult;
@@ -26,10 +27,8 @@ public class LottoTickets {
     }
 
     public LottoResult getLottoResults(WinningLotto winningLotto) {
-        Map<Rank, Integer> rankMap = new HashMap<>();
-
-        Arrays.stream(Rank.values())
-                .forEach(rank -> rankMap.put(rank, 0));
+        Map<Rank, Integer> rankMap = Arrays.stream(Rank.values())
+                .collect(Collectors.toMap(Function.identity(), value -> 0));
 
         lottoTickets.stream()
                 .map(winningLotto::getRank)

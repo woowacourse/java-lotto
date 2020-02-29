@@ -17,7 +17,7 @@ class LottoResultTest {
     void createLottoResult() {
         Map<Rank, Integer> rankMap = new HashMap<>();
         rankMap.put(Rank.FIFTH, 1);
-        LottoResult lottoResult = new LottoResult(rankMap);
+        assertThat(new LottoResult(rankMap)).isNotNull();
     }
 
     @Test

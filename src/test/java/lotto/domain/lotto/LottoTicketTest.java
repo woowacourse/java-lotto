@@ -27,9 +27,7 @@ class LottoTicketTest {
         numbers.add(numberFour);
         numbers.add(numberFive);
         numbers.add(numberSix);
-        LottoTicket lottoTicket = new LottoTicket(numbers);
-
-        assertThat(lottoTicket);
+        assertThat(new LottoTicket(numbers)).isNotNull();
     }
 
     @Test
@@ -49,7 +47,7 @@ class LottoTicketTest {
 
     @Test
     @DisplayName("LottoTicket은 다른 LottoTicket을 받아서 일치하는 숫자의 개수를 반환")
-    void countMathcesWhenMachingFive() {
+    void countMatchesWhenMatchingFive() {
         Set<LottoNumber> numbers = new HashSet<>();
         numbers.add(numberOne);
         numbers.add(numberTwo);
