@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
     public static final String NULL_OR_EMPTY_VALUE_ERROR = "널이나 빈 값이 들어올 수 없습니다.";
@@ -11,19 +9,16 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(final List<String> winningNumberString, final LottoNumber bonusNumber) {
-        validateNullAndEmpty(winningNumberString);
-        this.winningLotto = new Lotto(winningNumberString.stream()
-                .map(Integer::parseInt)
-                .map(LottoMachine.getInstance()::pickBall)
-                .collect(Collectors.toList()));
+    public WinningLotto(final Lotto winningLotto, final LottoNumber bonusNumber) {
+        validateNullAndEmpty(winningLotto);
+        this.winningLotto = winningLotto;
 
         validateBonusDuplicate(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateNullAndEmpty(List<String> winningNumber) {
-        if (winningNumber == null || winningNumber.isEmpty()) {
+    private void validateNullAndEmpty(Lotto winningLotto) {
+        if (winningLotto == null) {
             throw new IllegalArgumentException(NULL_OR_EMPTY_VALUE_ERROR);
         }
     }

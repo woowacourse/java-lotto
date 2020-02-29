@@ -24,12 +24,25 @@ public class LottoTest {
 	}
 
 	static Stream<Arguments> generateInput_winningNumber() {
-		return Stream.of(Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), 7, "1등"),
-				Arguments.of(Arrays.asList("1", "3", "4", "5", "6", "7"), 2, "2등(보너스볼 일치)"),
-				Arguments.of(Arrays.asList("1", "3", "4", "5", "6", "7"), 14, "3등"),
-				Arguments.of(Arrays.asList("1", "4", "5", "6", "7", "8"), 12, "4등"),
-				Arguments.of(Arrays.asList("1", "5", "6", "7", "8", "9"), 43, "5등"),
-				Arguments.of(Arrays.asList("1", "6", "7", "8", "9", "10"), 34, "미당첨"));
+		return Stream.of(
+				Arguments.of(Stream.of(1, 2, 3, 4, 5, 6)
+						.map(LottoMachine.getInstance()::pickBall)
+						.collect(Collectors.toList()), 7, "1등"),
+				Arguments.of(Stream.of(1, 3, 4, 5, 6, 7)
+						.map(LottoMachine.getInstance()::pickBall)
+						.collect(Collectors.toList()), 2, "2등(보너스볼 일치)"),
+				Arguments.of(Stream.of(1, 3, 4, 5, 6, 7)
+						.map(LottoMachine.getInstance()::pickBall)
+						.collect(Collectors.toList()), 14, "3등"),
+				Arguments.of(Stream.of(1, 4, 5, 6, 7, 8)
+						.map(LottoMachine.getInstance()::pickBall)
+						.collect(Collectors.toList()), 12, "4등"),
+				Arguments.of(Stream.of(1, 5, 6, 7, 8, 9)
+						.map(LottoMachine.getInstance()::pickBall)
+						.collect(Collectors.toList()), 43, "5등"),
+				Arguments.of(Stream.of(1, 6, 7, 8, 9, 10)
+						.map(LottoMachine.getInstance()::pickBall)
+						.collect(Collectors.toList()), 34, "미당첨"));
 	}
 
 	@ParameterizedTest
@@ -65,7 +78,7 @@ public class LottoTest {
 	@ParameterizedTest
 	@MethodSource("generateInput_winningNumber")
 	@DisplayName("당첨 등수를 제대로 맞추는지 체크")
-	void checkWiningPrize(List<String> winningNumbers, int bonusNumber, String expectedPrize) {
+	void checkWiningPrize(List<LottoNumber> winningNumbers, int bonusNumber, String expectedPrize) {
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
 		LottoMachine lottoMachine = LottoMachine.getInstance();
 
@@ -73,7 +86,7 @@ public class LottoTest {
 			lottoNumbers.add(lottoMachine.pickBall(i));
 		}
 		Lotto lotto = new Lotto(lottoNumbers);
-		WinningLotto winningNumber = new WinningLotto(winningNumbers, lottoMachine.pickBall(bonusNumber));
+		WinningLotto winningNumber = new WinningLotto(new Lotto(winningNumbers), lottoMachine.pickBall(bonusNumber));
 		assertThat(lotto.findLottoPrize(winningNumber).getDescription()).isEqualTo(expectedPrize);
 	}
 }

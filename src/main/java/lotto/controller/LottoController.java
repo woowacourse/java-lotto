@@ -7,6 +7,7 @@ import lotto.view.OutputView;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
 	public static void run() {
@@ -21,8 +22,8 @@ public class LottoController {
 	private static Lottos buyLottos() {
 		try {
 			LottoCount lottoCount = new LottoCount(readMoney());
-
 			OutputView.printLottoCount(lottoCount.getLottoCount());
+
 			return new Lottos(LottoMachine.getInstance().makeRandomLottos(lottoCount.getLottoCount()));
 		} catch (IllegalArgumentException | LottoException e) {
 			OutputView.printExceptionMessage(e);
@@ -39,13 +40,11 @@ public class LottoController {
 		}
 	}
 
-	public static List<String> readLottoNumber() {
-		try {
-			return InputUtil.inputLottoNumber();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return readLottoNumber();
-		}
+	private static Lotto readLottoNumber(List<String> lottoNumberString) {
+		return new Lotto(lottoNumberString.stream()
+				.map(Integer::parseInt)
+				.map(LottoMachine.getInstance()::pickBall)
+				.collect(Collectors.toList()));
 	}
 
 	private static LottoNumber readBonusNumber() {
@@ -59,8 +58,8 @@ public class LottoController {
 
 	public static WinningLotto readWinningNumber() {
 		try {
-			return new WinningLotto(readLottoNumber(), readBonusNumber());
-		} catch (IllegalArgumentException e) {
+			return new WinningLotto(readLottoNumber(InputUtil.inputLottoNumber()), readBonusNumber());
+		} catch (IllegalArgumentException | IOException e) {
 			OutputView.printExceptionMessage(e);
 			return readWinningNumber();
 		}
