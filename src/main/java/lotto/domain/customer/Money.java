@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.customer;
 
 import java.util.Objects;
 
@@ -11,13 +11,13 @@ public class Money {
     private int numberOfManualTickets;
     private int numberOfLeftTickets;
 
-
     public Money(int amount, int numberOfManualTickets) {
         validateMoney(amount);
 
         numberOfLeftTickets = calculateAffordableTicketNumbers(amount);
 
         validateTicketNumber(numberOfManualTickets);
+
         this.numberOfManualTickets = numberOfManualTickets;
         this.numberOfLeftTickets -= numberOfManualTickets;
     }

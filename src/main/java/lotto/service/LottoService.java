@@ -1,37 +1,22 @@
 package lotto.service;
 
-import lotto.domain.Money;
+import lotto.domain.customer.Customer;
 import lotto.domain.result.LottoMatchResultBundle;
 import lotto.domain.result.OverallResult;
-import lotto.domain.ticket.*;
+import lotto.domain.ticket.LottoMachine;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTicketBundle;
+import lotto.domain.ticket.WinLottoTicket;
 import lotto.view.dto.WinLottoTicketDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
-    private final LottoMachine autoMachine;
-
-    public LottoService(LottoMachine autoMachine) {
-        this.autoMachine = autoMachine;
+    public List<LottoTicket> createLottoTickets(LottoMachine machine, Customer customer) {
+        return machine.buyTickets(customer);
     }
 
-    public List<LottoTicket> createManualTickets(Money money, List<List<Integer>> manualNumbers) {
-        LottoMachine manualMachine = new ManualLottoMachine(manualNumbers);
-
-        return manualMachine.buyTickets(money.getNumberOfManualTickets());
-    }
-
-    public List<LottoTicket> createAutoTickets(Money money) {
-
-        return autoMachine.buyTickets(money.getNumberOfLeftTickets());
-    }
-
-    public LottoTicketBundle createLottoTicketBundle(List<LottoTicket>... ticketsList) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (List<LottoTicket> tickets : ticketsList) {
-            lottoTickets.addAll(tickets);
-        }
+    public LottoTicketBundle createLottoTicketBundle(List<LottoTicket> lottoTickets) {
         return new LottoTicketBundle(lottoTickets);
     }
 

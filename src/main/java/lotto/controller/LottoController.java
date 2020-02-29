@@ -1,12 +1,10 @@
 package lotto.controller;
 
-import lotto.domain.Money;
+import lotto.domain.customer.Customer;
+import lotto.domain.customer.Money;
 import lotto.domain.result.OverallResult;
 import lotto.domain.result.rank.Rank;
-import lotto.domain.ticket.AutoLottoMachine;
-import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTicketBundle;
-import lotto.domain.ticket.WinLottoTicket;
+import lotto.domain.ticket.*;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -18,20 +16,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoController {
-    private LottoService service = new LottoService(new AutoLottoMachine());
+    private static final List<LottoMachine> lottoMachines = Arrays.asList(new AutoLottoMachine(), new ManualLottoMachine());
+    private LottoService service = new LottoService();
 
     public void run() {
-        Money money = createMoney();
+        Customer customer = createCustomer();
 
-        LottoTicketBundle ticketBundle = createLottoTicketBundle(money);
+        LottoTicketBundle ticketBundle = createLottoTicketBundle(customer);
 
         OutputView.printLottoTickets(convertToLottoTicketDTOS(ticketBundle));
+
+        OutputView.printPurchaseStatus(new PurchaseStatusDTO(customer.getMoney().getNumberOfManualTickets(), customer.getMoney().getNumberOfLeftTickets()));
 
         WinLottoTicket winLottoTicket = createWinLottoTicket();
 
         OverallResult overallResult = service.createOverallResult(winLottoTicket, ticketBundle);
 
         OutputView.printResult(convertToResultDTOS(overallResult), new StatisticsDTO(service.computeAnalysis(overallResult)));
+    }
+
+    private Customer createCustomer() {
+        Money money = createMoney();
+
+        ManualNumbersDTO manualNumbersDTO = new ManualNumbersDTO(InputView.inputManualNumbers(money.getNumberOfManualTickets()));
+        List<List<Integer>> manualNumbers = manualNumbersDTO.getManualNumbers();
+
+        return new Customer(money, manualNumbers);
     }
 
     private Money createMoney() {
@@ -44,24 +54,18 @@ public class LottoController {
         return new Money(amount, numberOfManualTicket);
     }
 
-    private LottoTicketBundle createLottoTicketBundle(Money money) {
-        List<LottoTicket> autoTickets = createAutoTickets(money);
-        List<LottoTicket> manualTickets = createManualTickets(money);
+    private LottoTicketBundle createLottoTicketBundle(Customer customer) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        OutputView.printPurchaseStatus(new PurchaseStatusDTO(money.getNumberOfManualTickets(), money.getNumberOfLeftTickets()));
+        for (LottoMachine machine : lottoMachines) {
+            lottoTickets.addAll(createLottoTickets(machine, customer));
+        }
 
-        return service.createLottoTicketBundle(manualTickets, autoTickets);
+        return service.createLottoTicketBundle(lottoTickets);
     }
 
-    private List<LottoTicket> createManualTickets(Money money) {
-        ManualNumbersDTO manualNumbersDTO = new ManualNumbersDTO(InputView.inputManualNumbers(money.getNumberOfManualTickets()));
-        List<List<Integer>> manualNumbers = manualNumbersDTO.getManualNumbers();
-
-        return service.createManualTickets(money, manualNumbers);
-    }
-
-    private List<LottoTicket> createAutoTickets(Money money) {
-        return service.createAutoTickets(money);
+    private List<LottoTicket> createLottoTickets(LottoMachine machine, Customer customer) {
+        return service.createLottoTickets(machine, customer);
     }
 
     private List<LottoTicketDTO> convertToLottoTicketDTOS(LottoTicketBundle lottoTicketBundle) {

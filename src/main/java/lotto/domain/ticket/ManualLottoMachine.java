@@ -1,32 +1,29 @@
 package lotto.domain.ticket;
 
+import lotto.domain.customer.Customer;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
 import lotto.util.NullOrEmptyValidator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ManualLottoMachine extends LottoMachine {
-    private final List<List<Integer>> manualNumbers;
-
-    public ManualLottoMachine(List<List<Integer>> manualNumbers) {
-        NullOrEmptyValidator.isNullOrEmpty(manualNumbers);
-        this.manualNumbers = manualNumbers;
-    }
+public class ManualLottoMachine implements LottoMachine {
 
     @Override
-    public List<LottoTicket> buyTickets(int numberOfTickets) {
-        validateSize(numberOfTickets, manualNumbers.size());
+    public List<LottoTicket> buyTickets(Customer customer) {
+        NullOrEmptyValidator.isNull(customer);
 
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < numberOfTickets; i++) {
-            lottoTickets.add(createOneTicket());
-        }
+        int numberOfManualTickets = customer.getMoney().getNumberOfManualTickets();
+        List<List<Integer>> manualNumbers = customer.getManualNumbers();
 
-        return lottoTickets;
+        NullOrEmptyValidator.isNullOrEmpty(manualNumbers);
+        validateSize(numberOfManualTickets, manualNumbers.size());
+
+        return manualNumbers.stream()
+                .map(this::createOneTicket)
+                .collect(Collectors.toList());
     }
 
     private void validateSize(int numberOfTickets, int sizeOfManualNumbers) {
@@ -35,9 +32,10 @@ public class ManualLottoMachine extends LottoMachine {
         }
     }
 
-    @Override
-    public LottoTicket createOneTicket() {
-        Set<LottoBall> manualBalls = manualNumbers.remove(0).stream()
+    private LottoTicket createOneTicket(List<Integer> manualNumbers) {
+        NullOrEmptyValidator.isNullOrEmpty(manualNumbers);
+
+        Set<LottoBall> manualBalls = manualNumbers.stream()
                 .map(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());
 
