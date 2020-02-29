@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,7 +13,7 @@ public class LottoCountTest {
 	@DisplayName("천원 단위가 아닌 경우")
 	void check1000WonUnit(int value) {
 		assertThatThrownBy(() -> new LottoCount(value))
-				.isInstanceOf(IllegalArgumentException.class)
+				.isInstanceOf(LottoCountException.class)
 				.hasMessageContaining("천 원 단위");
 	}
 
@@ -21,7 +22,7 @@ public class LottoCountTest {
 	@DisplayName("한 장도 살 수 없는 금액인 경우")
 	void checkNotEnoughMoney(int value) {
 		assertThatThrownBy(() -> new LottoCount(value))
-				.isInstanceOf(IllegalArgumentException.class)
+				.isInstanceOf(LottoCountException.class)
 				.hasMessageContaining("부족합니다");
 	}
 }

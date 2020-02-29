@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.WinningLottoException;
+
 import java.util.Objects;
 
 public class WinningLotto {
@@ -19,13 +21,13 @@ public class WinningLotto {
 
     private void validateNullAndEmpty(Lotto winningLotto) {
         if (winningLotto == null) {
-            throw new IllegalArgumentException(NULL_OR_EMPTY_VALUE_ERROR);
+            throw new WinningLottoException(NULL_OR_EMPTY_VALUE_ERROR);
         }
     }
 
     private void validateBonusDuplicate(LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException(DUPLICATE_BONUSBALL_NUMBER);
+            throw new WinningLottoException(DUPLICATE_BONUSBALL_NUMBER);
         }
     }
 

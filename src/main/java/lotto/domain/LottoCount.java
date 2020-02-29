@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoCountException;
+
 public class LottoCount {
 	private static final int MONEY_UNIT = 1000;
 	private static final int MINIMUM_MONEY = 1000;
@@ -20,13 +22,13 @@ public class LottoCount {
 
 	private void validateLackOf(int money) {
 		if (money < MINIMUM_MONEY) {
-			throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
+			throw new LottoCountException(NOT_ENOUGH_MONEY);
 		}
 	}
 
 	private void validateMoneyUnit(int money) {
 		if (money % MONEY_UNIT != 0) {
-			throw new IllegalArgumentException(MONEY_UNIT_ERROR);
+			throw new LottoCountException(MONEY_UNIT_ERROR);
 		}
 	}
 
