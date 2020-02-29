@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lotto.controller.LottoManager;
 import lotto.model.LottoResultCount;
 import lotto.model.ManualCount;
 import lotto.model.ManualTicketsGenerator;
@@ -25,7 +26,7 @@ public class LottoApplication {
             money.getTicketCount() - manualCount.getManualCount()));
         WinLottoNumbers winLottoNumbers = getWinNumbersAndBonusBallNumber();
 
-        LottoResultCount lottoResultCount = new LottoResultCount(tickets, winLottoNumbers);
+        LottoResultCount lottoResultCount = LottoManager.lotto(tickets, winLottoNumbers);
 
         printCorrectResults(lottoResultCount);
         OutputView.printYield(money.getYield(lottoResultCount));

@@ -13,13 +13,11 @@ public class LottoResultCount {
         }
     }
 
-    public LottoResultCount(Tickets tickets, WinLottoNumbers winLottoNumbers) {
-        for (Ticket ticket : tickets.getTickets()) {
-            int count = winLottoNumbers.matchCount(ticket);
-            RankType rankType = RankType.findLottoResult(count,
-                ticket.isCountFiveAndHasBonusBall(count, winLottoNumbers.getBonusBallNumber()));
-            lottoResultCount.put(rankType, lottoResultCount.get(rankType) + 1);
-        }
+    public void resultCount(Ticket ticket, WinLottoNumbers winLottoNumbers) {
+        int count = winLottoNumbers.matchCount(ticket);
+        RankType rankType = RankType.findLottoResult(count,
+            ticket.isCountFiveAndHasBonusBall(count, winLottoNumbers.getBonusBallNumber()));
+        lottoResultCount.put(rankType, lottoResultCount.get(rankType) + 1);
     }
 
     public int getResultCount(RankType rankType) {

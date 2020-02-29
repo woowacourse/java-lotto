@@ -12,12 +12,12 @@ public enum RankType {
 
     private final int matchCount;
     private final int prize;
-    private final boolean bonusBall;
+    private final boolean countFiveAndHasBonusBal;
 
-    RankType(int matchCount, int prize, boolean bonusBall) {
+    RankType(int matchCount, int prize, boolean countFiveAndHasBonusBal) {
         this.matchCount = matchCount;
         this.prize = prize;
-        this.bonusBall = bonusBall;
+        this.countFiveAndHasBonusBal = countFiveAndHasBonusBal;
     }
 
     public int getPrize() {
@@ -28,9 +28,10 @@ public enum RankType {
         return matchCount;
     }
 
-    public static RankType findLottoResult(int count, boolean bonusBall) {
+    public static RankType findLottoResult(int matchCount, boolean countFiveAndHasBonusBal) {
         return Arrays.stream(RankType.values())
-            .filter(rankType -> rankType.matchCount == count && rankType.bonusBall == bonusBall)
+            .filter(rankType -> rankType.matchCount == matchCount
+                && rankType.countFiveAndHasBonusBal == countFiveAndHasBonusBal)
             .findFirst()
             .orElse(NONE);
     }
