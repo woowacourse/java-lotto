@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,14 +21,14 @@ class LottoTicketBundleTest {
     @Test
     void createLottoResultBundle() {
         //given
-        Set<LottoBall> lottoBalls = Arrays.stream(new Integer[]{1, 2, 3, 4, 5, 6})
+        List<Integer> winNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        WinLottoTicket winLottoTicket = new WinLottoTicket(winNumbers, 7);
+
+        Set<LottoBall> lottoBalls = winNumbers.stream()
                 .map(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());
-        LottoBall bonusBall = LottoBallFactory.getLottoBallByNumber(7);
 
         LottoTicketBundle ticketBundle = new LottoTicketBundle(Arrays.asList(new LottoTicket(lottoBalls)));
-
-        WinLottoTicket winLottoTicket = new WinLottoTicket(new LottoTicket(lottoBalls), bonusBall);
 
         LottoMatchResultBundle expectedResultBundle = new LottoMatchResultBundle(Arrays.asList(new LottoMatchResult(Rank.FIRST)));
 

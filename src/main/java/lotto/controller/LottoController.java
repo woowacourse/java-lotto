@@ -78,9 +78,7 @@ public class LottoController {
         List<Integer> inputWinNumbers = InputView.inputWinningNumber();
         int inputBonusNumber = InputView.inputBonusNumber();
 
-        WinLottoTicketDTO winLottoTicketDTO = new WinLottoTicketDTO(inputWinNumbers, inputBonusNumber);
-
-        return service.createWinLottoTicket(winLottoTicketDTO.getWinNumbers(), winLottoTicketDTO.getBonusNumber());
+        return service.createWinLottoTicket(new WinLottoTicketDTO(inputWinNumbers, inputBonusNumber));
     }
 
     private List<ResultDTO> convertToResultDTOS(OverallResult overallResult) {

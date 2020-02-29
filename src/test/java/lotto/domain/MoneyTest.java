@@ -25,14 +25,14 @@ class MoneyTest {
     void test2() {
         assertThatThrownBy(() -> new Money(1000, 2))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format("구매 가능한 로또 수: %d, 구매 로또 수: %d - 잔액이 부족합니다.", 1000, 2));
+                .hasMessageContaining(String.format("구매 가능한 로또 수: %d, 구매 로또 수: %d - 잔액이 부족합니다.", 1, 2));
     }
 
     @DisplayName("자동 로또 구매 갯수 확인")
     @Test
     void test3() {
         Money money = new Money(10000, 2);
-        assertThat(money).isEqualTo(money.getNumberOfLeftTickets());
+        assertThat(money.getNumberOfLeftTickets()).isEqualTo(8);
     }
 
     @DisplayName("현재 금액으로 살 수 있는 티켓 수 확인")

@@ -39,28 +39,6 @@ class LottoMachineTest {
         assertThat(lottoTickets).hasSize(1);
     }
 
-
-    @DisplayName("우승 로또 만들기")
-    @Test
-    void makeWinLottoTicket() {
-        //given
-        LottoMachine autoMachine = new AutoLottoMachine();
-
-        Integer[] winNumbers = {1, 2, 3, 4, 5, 6};
-        Set<LottoBall> winBalls = Arrays.stream(winNumbers)
-                .map(LottoBallFactory::getLottoBallByNumber)
-                .collect(Collectors.toSet());
-        LottoBall bonusBall = LottoBallFactory.getLottoBallByNumber(7);
-
-        WinLottoTicket expectedLotto = new WinLottoTicket(new LottoTicket(winBalls), bonusBall);
-
-        //when
-        WinLottoTicket winLottoTicket = autoMachine.createWinLottoTicket(Arrays.asList(winNumbers), 7);
-
-        //then
-        assertThat(winLottoTicket).isEqualTo(expectedLotto);
-    }
-
     @DisplayName("수동 입력 번호로 로또 티켓 생성 테스트")
     @Test
     void name() {

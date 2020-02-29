@@ -3,9 +3,13 @@ package lotto.domain.ticket;
 import lotto.domain.result.LottoMatchResult;
 import lotto.domain.result.rank.Rank;
 import lotto.domain.ticket.ball.LottoBall;
+import lotto.domain.ticket.ball.LottoBallFactory;
 import lotto.util.NullOrEmptyValidator;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WinLottoTicket {
     private static final String MESSAGE_FOR_OVERLAP_NUMBERS = "로또 당첨 번호와 보너스 번호는 중복될 수 없습니다.";
@@ -13,17 +17,20 @@ public class WinLottoTicket {
     private final LottoTicket winningTicket;
     private final LottoBall bonusBall;
 
-    public WinLottoTicket(LottoTicket winningTicket, LottoBall bonusBall) {
-        NullOrEmptyValidator.isNull(winningTicket);
-        NullOrEmptyValidator.isNull(bonusBall);
-        validateBonusBall(winningTicket, bonusBall);
+    public WinLottoTicket(List<Integer> winNumbers, int bonusNumber) {
+        NullOrEmptyValidator.isNullOrEmpty(winNumbers);
+        validateBonusNumber(winNumbers, bonusNumber);
 
-        this.winningTicket = winningTicket;
-        this.bonusBall = bonusBall;
+        Set<LottoBall> winBalls = winNumbers.stream()
+                .map(LottoBallFactory::getLottoBallByNumber)
+                .collect(Collectors.toSet());
+
+        this.winningTicket = new LottoTicket(winBalls);
+        this.bonusBall = LottoBallFactory.getLottoBallByNumber(bonusNumber);
     }
 
-    private void validateBonusBall(LottoTicket winningTicket, LottoBall bonusBall) {
-        if (winningTicket.has(bonusBall)) {
+    private void validateBonusNumber(List<Integer> winNumbers, int bonusNumber) {
+        if (winNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(MESSAGE_FOR_OVERLAP_NUMBERS);
         }
     }

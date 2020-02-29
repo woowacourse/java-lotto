@@ -4,6 +4,7 @@ import lotto.domain.Money;
 import lotto.domain.result.LottoMatchResultBundle;
 import lotto.domain.result.OverallResult;
 import lotto.domain.ticket.*;
+import lotto.view.dto.WinLottoTicketDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,8 @@ public class LottoService {
         return new LottoTicketBundle(lottoTickets);
     }
 
-    public WinLottoTicket createWinLottoTicket(List<Integer> winNumbers, int bonusNumber) {
-        return autoMachine.createWinLottoTicket(winNumbers, bonusNumber);
+    public WinLottoTicket createWinLottoTicket(WinLottoTicketDTO winLottoTicketDTO) {
+        return new WinLottoTicket(winLottoTicketDTO.getWinNumbers(), winLottoTicketDTO.getBonusNumber());
     }
 
     public OverallResult createOverallResult(WinLottoTicket winLottoTicket, LottoTicketBundle lottoTicketBundle) {
