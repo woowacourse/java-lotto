@@ -7,7 +7,7 @@ public class LottoCount {
 	private static final int MINIMUM_MONEY = 1000;
 	public static final String NOT_ENOUGH_MONEY = "돈이 부족합니다.";
 	public static final String MONEY_UNIT_ERROR = "천 원 단위로 입력하셔야 합니다.";
-	public static final String MANUAL_AMOUNT_ERROR = "수동 구입 장수가 전체 장수를 넘을 수 없습니다.";
+	public static final String MANUAL_AMOUNT_ERROR = "수동 구입 장수가 올바르지 않습니다.";
 
 
 	private final int lottoCount;
@@ -38,7 +38,7 @@ public class LottoCount {
 	}
 
 	private void validateManualAmount(int money, int manualLottoCount) {
-		if (manualLottoCount > (money / 1000)) {
+		if (manualLottoCount > (money / 1000) || manualLottoCount < 0) {
 			throw new LottoCountException(MANUAL_AMOUNT_ERROR);
 		}
 	}

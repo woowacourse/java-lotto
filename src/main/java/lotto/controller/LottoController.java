@@ -31,7 +31,7 @@ public class LottoController {
 
 			OutputView.printManualInputGuide();
 			for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
-				lottos.add(readLottoNumber(InputUtil.inputLottoNumber()));
+				lottos.add(readLottoNumber());
 			}
 
 			OutputView.printLottoCount(lottoCount.getManualLottoCount(), lottoCount.getAutoLottoCount());
@@ -57,15 +57,20 @@ public class LottoController {
 			return InputUtil.inputManualLottoCount();
 		} catch (NumberFormatException | IOException e) {
 			OutputView.printWrongIntegerInput();
-			return readMoney();
+			return readManualLottoCount();
 		}
 	}
 
-	private static Lotto readLottoNumber(List<String> lottoNumberString) {
-		return new Lotto(lottoNumberString.stream()
-				.map(Integer::parseInt)
-				.map(LottoMachine.getInstance()::pickBall)
-				.collect(Collectors.toList()));
+	private static Lotto readLottoNumber() {
+		try {
+			return new Lotto(InputUtil.inputLottoNumber().stream()
+					.map(Integer::parseInt)
+					.map(LottoMachine.getInstance()::pickBall)
+					.collect(Collectors.toList()));
+		} catch (LottoException | IOException e) {
+			OutputView.printExceptionMessage(e);
+			return readLottoNumber();
+		}
 	}
 
 	private static LottoNumber readBonusNumber() {
@@ -79,9 +84,9 @@ public class LottoController {
 
 	public static WinningLotto readWinningNumber() {
 		try {
-
-			return new WinningLotto(readLottoNumber(InputUtil.inputLottoNumber()), readBonusNumber());
-		} catch (IllegalArgumentException | LottoException | WinningLottoException | IOException e) {
+			OutputView.printWinningNumberInputGuide();
+			return new WinningLotto(readLottoNumber(), readBonusNumber());
+		} catch (IllegalArgumentException | LottoException | WinningLottoException e) {
 			OutputView.printExceptionMessage(e);
 			return readWinningNumber();
 		}

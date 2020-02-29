@@ -33,6 +33,6 @@ public class LottoCountTest {
 	void checkManualAmountOverTheTotalAmount(int lottoMoney, int manualAmount) {
 		assertThatThrownBy(() -> new LottoCount(lottoMoney, manualAmount))
 				.isInstanceOf(LottoCountException.class)
-				.hasMessageContaining("전체 장수를 넘을 수 없습니다");
+				.hasMessageContaining("장수가 올바르지 않습니다");
 	}
 }
