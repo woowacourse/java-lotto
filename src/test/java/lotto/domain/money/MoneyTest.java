@@ -74,7 +74,7 @@ class MoneyTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"1000,10000,1000", "2000,1000,50","3000,900,30","4000,4000,100"})
+	@CsvSource(value = {"1000,10000,1000", "2000,1000,50", "3000,900,30", "4000,4000,100"})
 	void calculateProfitRate(int money, double totalProfit, double expected) {
 		// given
 		Money given = new Money(money);

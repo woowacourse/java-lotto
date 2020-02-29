@@ -7,6 +7,7 @@ import lotto.domain.number.SerialLottoNumberFactory;
 import lotto.domain.random.RandomLottoNumberGenerator;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.LottoTickets;
+import lotto.domain.result.LottoTicketsFactory;
 import lotto.domain.result.Winning;
 import lotto.exceptions.*;
 import lotto.view.InputView;
@@ -22,8 +23,9 @@ public class LottoController {
 		int manualTicketCount = validManualTicketCount(purchaseMoney);
 		int autoTicketCount = purchaseMoney.totalTicketCount() - manualTicketCount;
 
-		LottoTickets lottoTickets = new LottoTickets(createManualLottoTickets(manualTicketCount),
-				createAutoLottoTickets(autoTicketCount));
+		LottoTickets manualLottoTickets = validManualLottoTicket(manualTicketCount);
+		// TODO: autoLottoTicket의 팩토리 메서드 구현과 합치는 메서드 구현
+		LottoTickets lottoTickets = new LottoTickets(createAutoLottoTickets(autoTicketCount));
 		OutputView.printLottoTicketsCount(manualTicketCount, autoTicketCount);
 		OutputView.printLottoTickets(lottoTickets);
 
@@ -54,21 +56,12 @@ public class LottoController {
 		}
 	}
 
-	private static List<SerialLottoNumber> createManualLottoTickets(int manualTicketCount) {
-		List<SerialLottoNumber> manualLottoTickets = new ArrayList<>();
-
-		for (int i = 0; i < manualTicketCount; i++) {
-			manualLottoTickets.add(validManualLottoTicket());
-		}
-		return manualLottoTickets;
-	}
-
-	private static SerialLottoNumber validManualLottoTicket() {
+	private static LottoTickets validManualLottoTicket(int manualTicketCount) {
 		try {
-			return SerialLottoNumberFactory.of(InputView.inputManualLottoTicket());
+			return LottoTicketsFactory.of(InputView.inputManualLottoTicket(manualTicketCount));
 		} catch (NumberFormatException | NotSixSizeException | LottoNumberIllegalException e) {
 			OutputView.printExceptionMessage(e.getMessage());
-			return validManualLottoTicket();
+			return validManualLottoTicket(manualTicketCount);
 		}
 	}
 
