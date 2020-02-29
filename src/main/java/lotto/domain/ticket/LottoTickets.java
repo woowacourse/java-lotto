@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import lotto.domain.result.LottoRank;
+import lotto.domain.result.LottoRanks;
 import lotto.domain.result.WinningLotto;
 
 public class LottoTickets {
@@ -18,16 +18,16 @@ public class LottoTickets {
 		this.lottoTickets = Collections.unmodifiableList(new ArrayList<>(Objects.requireNonNull(lottoTickets)));
 	}
 
-	public LottoTickets concat(LottoTickets other) {
+	LottoTickets concat(LottoTickets other) {
 		return Stream.of(lottoTickets, other.lottoTickets)
 			.flatMap(List::stream)
 			.collect(collectingAndThen(toList(), LottoTickets::new));
 	}
 
-	public List<LottoRank> findLottoRanks(WinningLotto winningLotto) {
+	public LottoRanks findLottoRanks(WinningLotto winningLotto) {
 		return lottoTickets.stream()
 			.map(winningLotto::calculateRank)
-			.collect(toList());
+			.collect(collectingAndThen(toList(), LottoRanks::new));
 	}
 
 	public List<LottoTicket> getLottoTickets() {

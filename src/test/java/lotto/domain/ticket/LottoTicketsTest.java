@@ -6,7 +6,9 @@ import static lotto.domain.ticket.LottoBall.valueOf;
 import static lotto.domain.ticket.LottoTicket.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -17,6 +19,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.result.LottoRank;
+import lotto.domain.result.LottoRanks;
 import lotto.domain.result.WinningLotto;
 
 public class LottoTicketsTest {
@@ -36,7 +39,7 @@ public class LottoTicketsTest {
 	@DisplayName("가지고 있는 로또들을 당첨결과와 비교해 랭크 목록 반환 기능 확인")
 	@ParameterizedTest
 	@MethodSource("get_winningLotto_and_rankResults_test_set")
-	void name(WinningLotto winningLotto, LottoRank[] ranks) {
+	void calculateRankResultsTest2(WinningLotto winningLotto, List<LottoRank> ranks) {
 		LottoTickets lottos = new LottoTickets(asList(
 			of(1, 2, 3, 4, 5, 6),
 			of(1, 2, 3, 4, 5, 6),
@@ -45,17 +48,18 @@ public class LottoTicketsTest {
 			of(1, 2, 10, 11, 12, 13)
 		));
 
-		assertThat(lottos.findLottoRanks(winningLotto)).containsExactlyInAnyOrder(ranks);
+		LottoRanks lottoRanks = lottos.findLottoRanks(winningLotto);
+		assertThat(lottoRanks).extracting("lottoRanks").isEqualTo(ranks);
 	}
 
 	private static Stream<Arguments> get_winningLotto_and_rankResults_test_set() {
 		return Stream.of(
 			Arguments.of(new WinningLotto(of(1, 2, 3, 4, 5, 6), valueOf(7)),
-				new LottoRank[] {FIRST, FIRST, SECOND, FIFTH, MISSING}),
+				Arrays.asList(FIRST, FIRST, SECOND, FIFTH, MISSING)),
 			Arguments.of(new WinningLotto(of(1, 2, 3, 4, 5, 7), valueOf(8)),
-				new LottoRank[] {THIRD, THIRD, FIRST, FIFTH, MISSING}),
+				Arrays.asList(THIRD, THIRD, FIRST, FIFTH, MISSING)),
 			Arguments.of(new WinningLotto(of(1, 2, 10, 11, 5, 6), valueOf(7)),
-				new LottoRank[] {FOURTH, FOURTH, FIFTH, FIFTH, FOURTH})
+				Arrays.asList(FOURTH, FOURTH, FIFTH, FIFTH, FOURTH))
 		);
 	}
 }

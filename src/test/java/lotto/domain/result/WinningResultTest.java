@@ -3,9 +3,8 @@ package lotto.domain.result;
 import static lotto.domain.result.LottoRank.*;
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,13 +21,15 @@ public class WinningResultTest {
 
 	@BeforeEach
 	void setup() {
-		List<LottoRank> list = new ArrayList<>(Arrays.asList(MISSING, MISSING));
-		for (int i = 0; i < 10; i++) {
-			list.add(FIRST);
-			list.add(FOURTH);
-			list.add(FIFTH);
-		}
-		result = new WinningResult(list);
+		Map<LottoRank, Long> winningResults = new HashMap<>();
+		winningResults.put(MISSING, 2L);
+		winningResults.put(FIRST, 10L);
+		winningResults.put(SECOND, 0L);
+		winningResults.put(THIRD, 0L);
+		winningResults.put(FOURTH, 10L);
+		winningResults.put(FIFTH, 10L);
+
+		result = new WinningResult(winningResults);
 	}
 
 	@DisplayName("당첨 정보를 통해 수익률 계산 테스트")

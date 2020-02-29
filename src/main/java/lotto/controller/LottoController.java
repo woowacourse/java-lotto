@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.result.LottoRanks;
 import lotto.domain.result.WinningLotto;
 import lotto.domain.result.WinningResult;
 import lotto.domain.ticket.AutoLottoTicketsFactory;
@@ -20,7 +21,8 @@ public class LottoController {
 		LottoTickets lottoTickets = createLottoTickets(money);
 		OutputView.printPurchaseLottoTickets(lottoTickets);
 		WinningLotto winningLotto = createWinningLotto();
-		WinningResult winningResult = winningLotto.calculateResult(lottoTickets);
+		LottoRanks lottoRanks = lottoTickets.findLottoRanks(winningLotto);
+		WinningResult winningResult = lottoRanks.calculateWinningResult();
 		OutputView.printStatistics(winningResult);
 	}
 

@@ -6,8 +6,9 @@ import lotto.domain.ticket.PurchaseLottoCount;
 import lotto.util.PrintTextUtil;
 
 public class OutputView {
-	private static final String STATISTICS_MESSAGE = "\n당첨 통계\n---------";
-	private static final String LOTTO_COUNT_MESSAGE = "수동 %s개, 자동 %s개를 구매했습니다.\n";
+	private static final String LINE_SEPARATOR = System.lineSeparator();
+	private static final String STATISTICS_MESSAGE = String.format("%s당첨 통계%s---------", LINE_SEPARATOR, LINE_SEPARATOR);
+	private static final String LOTTO_COUNT_MESSAGE = String.format("수동 %%s개, 자동 %%s개를 구매했습니다.%s", LINE_SEPARATOR);
 	private static final String TOTAL_PROFIT_MESSAGE = "총 수익률은 %d%% 입니다.";
 
 	private OutputView() {

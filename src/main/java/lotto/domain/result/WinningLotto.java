@@ -1,11 +1,9 @@
 package lotto.domain.result;
 
-import java.util.List;
 import java.util.Objects;
 
 import lotto.domain.ticket.LottoBall;
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTickets;
 
 public class WinningLotto {
 	private static final String DUPLICATE_EXCEPTION_MESSAGE = "당첨 번호와 보너스 볼이 중복되었습니다.";
@@ -35,11 +33,6 @@ public class WinningLotto {
 		if (winningLottoTicket.contains(bonusLottoBall)) {
 			throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
 		}
-	}
-
-	public WinningResult calculateResult(LottoTickets lottoTickets) {
-		List<LottoRank> result = lottoTickets.findLottoRanks(this);
-		return new WinningResult(result);
 	}
 
 	public LottoRank calculateRank(LottoTicket lottoTicket) {

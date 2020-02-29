@@ -16,12 +16,11 @@ public class PrintTextUtil {
 	private static final String LOTTO_NUMBERS_DELIMITER = ", ";
 	private static final String LOTTO_NUMBER_PREFIX = "[";
 	private static final String LOTTO_NUMBER_SUFFIX = "]";
-	private static final String LOTTO_TICKETS_DELIMITER = lineSeparator();
-
+	private static final String LINE_SEPARATOR = lineSeparator();
 	private static final String SINGLE_RANK_STATISTIC_MESSAGE = String.format("%%s개 일치 (%%s원) - %%s개%s",
-		lineSeparator());
+		LINE_SEPARATOR);
 	private static final String SINGLE_RANK_STATISTIC_WITH_BONUS_BALL_MESSAGE = String.format(
-		"%%s개 일치, 보너스 볼 일치 (%%s원) - %%s개%s", lineSeparator());
+		"%%s개 일치, 보너스 볼 일치 (%%s원) - %%s개%s", LINE_SEPARATOR);
 	private static final String EMPTY_MESSAGE = "";
 
 	private PrintTextUtil() {
@@ -32,7 +31,7 @@ public class PrintTextUtil {
 			.map(LottoTicket::getLottoBalls)
 			.map(PrintTextUtil::parseLottoTicket)
 			.map(PrintTextUtil::joinLottoTicket)
-			.collect(joining(LOTTO_TICKETS_DELIMITER));
+			.collect(joining(LINE_SEPARATOR));
 	}
 
 	private static List<String> parseLottoTicket(Set<LottoBall> lottoBalls) {
@@ -48,11 +47,11 @@ public class PrintTextUtil {
 
 	public static String createLottosStatisticText(WinningResult winningResult) {
 		return LottoRank.valuesAscendingOrder().stream()
-			.map(rank -> parseSingleRankStatistic(rank, winningResult.findWinningCount(rank)))
+			.map(rank -> createSingleStatisticMessage(rank, winningResult.findWinningCount(rank)))
 			.collect(joining());
 	}
 
-	private static String parseSingleRankStatistic(LottoRank lottoRank, Long count) {
+	private static String createSingleStatisticMessage(LottoRank lottoRank, Long count) {
 		if (lottoRank == LottoRank.MISSING) {
 			return EMPTY_MESSAGE;
 		}
