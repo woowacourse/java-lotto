@@ -12,12 +12,16 @@ public class LottoGame {
 
     public static void main(String[] args) {
         Money purchaseMoney = InputView.inputPurchaseMoney();
-        int allLottoTicketCount = purchaseMoney.calculateQuotient(Money.ofTicketPrice());
-        int manualLottoTicketCount = InputView.inputManualLottoTicketCount();
-        List<String> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoTicketCount);
+        int manualTicketCount = InputView.inputManualLottoTicketCount();
+        int allTicketCount = purchaseMoney.calculateQuotient(Money.ofTicketPrice());
+        int autoTicketCount = allTicketCount - manualTicketCount;
 
-        LottoTickets manualLottoTickets = LottoTickets.ofManualLottoTickets(manualLottoTicketCount, manualLottoNumbers);
-        LottoTickets randomLottoTickets = LottoTickets.ofAutoLottoTickets(allLottoTicketCount - manualLottoTicketCount);
+        TicketCountsValidator.validateManualTicketCount(allTicketCount, manualTicketCount);
+
+        List<String> manualLottoNumbers = InputView.inputManualLottoNumbers(manualTicketCount);
+
+        LottoTickets manualLottoTickets = LottoTickets.ofManualLottoTickets(manualTicketCount, manualLottoNumbers);
+        LottoTickets randomLottoTickets = LottoTickets.ofAutoLottoTickets(autoTicketCount);
 
         OutputView.printLottos(manualLottoTickets, randomLottoTickets);
 
