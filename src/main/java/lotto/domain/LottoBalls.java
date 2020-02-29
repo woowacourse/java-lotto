@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.ValidationUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,9 +18,11 @@ public class LottoBalls {
     }
 
     static {
-        LOTTO_BALLS = IntStream.rangeClosed(START_BALL_NUMBER, END_BALL_NUMBER)
+        LOTTO_BALLS = Collections.unmodifiableList(
+                IntStream.rangeClosed(START_BALL_NUMBER, END_BALL_NUMBER)
                 .mapToObj(LottoBall::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+        );
     }
 
     public static void shuffle() {
@@ -35,4 +39,11 @@ public class LottoBalls {
         return Collections.unmodifiableList(lottoTicket);
     }
 
+    public static LottoBall findLottoBall(int findLottoBall){
+
+        return LOTTO_BALLS.stream()
+                .filter(Ball -> Ball.getLottoBall() == findLottoBall)
+                .findFirst()
+                .orElseThrow(()->new IllegalArgumentException("로또볼 범위를 벗어났습니다."));
+    }
 }

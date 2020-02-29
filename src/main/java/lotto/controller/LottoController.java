@@ -13,6 +13,7 @@ public class LottoController {
         Count TicketCount = new Count(money.generateLottoTicketCount());
         Count manualTicketCount = generateManualTicketCount(TicketCount);
 
+
     }
 
     private Money generateMoney() {
