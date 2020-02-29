@@ -14,7 +14,7 @@ public class TicketCounts {
     }
 
     public static TicketCounts fromMoneyAndManualTicketCount(Money purchaseMoney, int manualTicketCount) {
-        int allTicketCount = purchaseMoney.calculateQuotient(Money.ofTicketPrice());
+        int allTicketCount = purchaseMoney.calculateQuotient(Money.TICKET_PRICE);
         int autoTicketCount = allTicketCount - manualTicketCount;
 
         validateManualTicketCount(allTicketCount, manualTicketCount);
