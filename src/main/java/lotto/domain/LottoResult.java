@@ -17,14 +17,14 @@ public class LottoResult {
     }
 
     public double calculateEarningRate() {
-        double totalEarning = 0;
+        long totalEarning = 0;
         int totalCount = 0;
 
         for (WinningPrize winningPrize : WinningPrize.values()) {
             totalCount += winningInformation.get(winningPrize);
             totalEarning += (winningPrize.getPrize() * winningInformation.get(winningPrize));
         }
-        return (totalEarning / (totalCount * 1000)) * 100;
+        return ((double) totalEarning / (totalCount * 1000)) * 100;
     }
 
     public Map<WinningPrize, Integer> getWinningInformation() {
