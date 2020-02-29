@@ -78,14 +78,4 @@ class LottoTicketTest {
     void contains(int value, boolean expected) {
         assertThat(WINNING_TICKET_NUMBERS.contains(new LottoNumber(value))).isEqualTo(expected);
     }
-
-    @Test
-    @DisplayName("입력받은 수동로또 번호가 제대로 로또티켓 리스트로 반환되는지")
-    void createManualLottoTicket() {
-        List<String[]> manualNumbers = new ArrayList<>();
-        manualNumbers.add(MATCH_FIVE);
-        manualNumbers.add(MATCH_THREE);
-        manualNumbers.add(MATCH_BONUS);
-        assertThat(LottoTicket.createManualLottoTickets(manualNumbers).size()).isEqualTo(3);
-    }
 }

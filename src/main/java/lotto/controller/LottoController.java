@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.LottoResult;
@@ -36,7 +37,11 @@ public class LottoController {
         try {
             OutputView.inputManualNumbersInstruction(manualQuantity);
             List<String[]> manualNumbers = InputView.getManualNumbers(manualQuantity);
-            return LottoTicket.createManualLottoTickets(manualNumbers);
+            List<LottoTicket> manualTickets = new ArrayList<>();
+            for (String[] manualNumber : manualNumbers) {
+                manualTickets.add(new LottoTicket(manualNumber));
+            }
+            return manualTickets;
         } catch (InvalidLottoTicketException | InvalidLottoNumberException e) {
             OutputView.errorMessage(e.getMessage());
             return getManualTickets(manualQuantity);
