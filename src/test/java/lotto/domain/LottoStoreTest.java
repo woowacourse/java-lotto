@@ -46,7 +46,7 @@ public class LottoStoreTest {
 	@DisplayName("당첨 로또 생성 테스트")
 	void createWinningLotto() {
 		WinningLotto actual = LottoStore.createWinningLotto("1,2,3,4,5,6", "7");
-		WinningLotto expected = new WinningLotto(LottoFactory.createLotto("1,2,3,4,5,6"), LottoNumber.of(7));
+		WinningLotto expected = new WinningLotto(LottoFactory.create("1,2,3,4,5,6"), LottoNumber.of(7));
 		assertThat(actual).isEqualTo(expected);
 	}
 }

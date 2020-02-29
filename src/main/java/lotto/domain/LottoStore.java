@@ -19,7 +19,7 @@ public class LottoStore {
 	}
 
 	public static WinningLotto createWinningLotto(String lottoInput, String bonusInput) {
-		Lotto lotto = LottoFactory.createLotto(lottoInput);
+		Lotto lotto = LottoFactory.create(lottoInput);
 		LottoNumber bonus = LottoNumber.of(bonusInput);
 		return new WinningLotto(lotto, bonus);
 	}
@@ -32,7 +32,7 @@ public class LottoStore {
 	}
 
 	private static List<Lotto> buyManual(int buyCount, List<String> manual) {
-		return buy(buyCount, () -> LottoFactory.createLotto(manual.remove(0)));
+		return buy(buyCount, () -> LottoFactory.create(manual.remove(0)));
 	}
 
 	private static List<Lotto> buyAuto(int buyCount) {

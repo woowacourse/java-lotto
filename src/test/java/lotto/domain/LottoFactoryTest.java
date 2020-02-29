@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class LottoFactoryTest {
 	@Test
 	void createLotto() {
-		Lotto actual = LottoFactory.createLotto("1,2,3,4,5,6");
+		Lotto actual = LottoFactory.create("1,2,3,4,5,6");
 		Lotto expected = new Lotto(Arrays.asList(
 				LottoNumber.of(1),
 				LottoNumber.of(2),
