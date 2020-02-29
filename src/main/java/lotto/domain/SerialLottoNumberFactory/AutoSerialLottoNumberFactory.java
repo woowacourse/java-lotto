@@ -4,7 +4,7 @@ import lotto.domain.SerialLottoNumber;
 
 import java.util.Collections;
 
-public class RandomSerialLottoNumberFactory extends AbstractSerialLottoNumberFactory {
+public class AutoSerialLottoNumberFactory extends AbstractSerialLottoNumberFactory {
 	@Override
 	public SerialLottoNumber createSerialLottoNumber() {
 		Collections.shuffle(super.getAllLottoNumbers());

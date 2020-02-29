@@ -5,15 +5,15 @@ import lotto.domain.SerialLottoNumberFactory.SerialLottoNumberFactory;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class PurchasedSerialLottoNumber {
+public class PurchasedSerialLottoNumbers {
 	private final List<SerialLottoNumber> purchasedSerialLottoNumbers;
 
-	public PurchasedSerialLottoNumber(final List<SerialLottoNumber> purchasedSerialLottoNumbers) {
+	public PurchasedSerialLottoNumbers(final List<SerialLottoNumber> purchasedSerialLottoNumbers) {
 		this.purchasedSerialLottoNumbers = Collections.unmodifiableList(purchasedSerialLottoNumbers);
 	}
 
-	public static PurchasedSerialLottoNumber of(PurchaseMoney purchaseMoney,
-												SerialLottoNumberFactory SerialLottoNumberFactory) {
+	public static PurchasedSerialLottoNumbers of(PurchaseMoney purchaseMoney,
+												 SerialLottoNumberFactory SerialLottoNumberFactory) {
 		List<SerialLottoNumber> purchasedSerialLottoNumbers = new ArrayList<>();
 
 		int count = purchaseMoney.countPurchasedTickets();
@@ -21,7 +21,7 @@ public class PurchasedSerialLottoNumber {
 			purchasedSerialLottoNumbers.add(SerialLottoNumberFactory.createSerialLottoNumber());
 		}
 
-		return new PurchasedSerialLottoNumber(purchasedSerialLottoNumbers);
+		return new PurchasedSerialLottoNumbers(purchasedSerialLottoNumbers);
 	}
 
 	public List<SerialLottoNumber> getPurchasedSerialLottoNumbers() {
@@ -34,11 +34,11 @@ public class PurchasedSerialLottoNumber {
 				.collect(Collectors.toUnmodifiableList());
 	}
 
-	public PurchasedSerialLottoNumber addAll(PurchasedSerialLottoNumber other) {
+	public PurchasedSerialLottoNumbers addAll(PurchasedSerialLottoNumbers other) {
 		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>(purchasedSerialLottoNumbers);
 		serialLottoNumbers.addAll(other.purchasedSerialLottoNumbers);
 
-		return new PurchasedSerialLottoNumber(serialLottoNumbers);
+		return new PurchasedSerialLottoNumbers(serialLottoNumbers);
 	}
 
 	public int size() {
@@ -49,7 +49,7 @@ public class PurchasedSerialLottoNumber {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		PurchasedSerialLottoNumber that = (PurchasedSerialLottoNumber) o;
+		PurchasedSerialLottoNumbers that = (PurchasedSerialLottoNumbers) o;
 		return Objects.equals(purchasedSerialLottoNumbers, that.purchasedSerialLottoNumbers);
 	}
 

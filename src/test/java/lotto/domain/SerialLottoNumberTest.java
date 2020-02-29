@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 public class SerialLottoNumberTest {
 	@Test
-	void LottoTicket() {
+	void SerialLottoNumber() {
 		// given
 		int[] input = {1, 10, 3, 11, 5, 6};
 		List<LottoNumber> lottoNumbers = Arrays.stream(input)
@@ -22,7 +22,7 @@ public class SerialLottoNumberTest {
 				.collect(Collectors.toList());
 
 		// when
-		SerialLottoNumber lottoTicket = new SerialLottoNumber(lottoNumbers);
+		SerialLottoNumber serialLottoNumber = new SerialLottoNumber(lottoNumbers);
 
 		// then
 		int[] sortedInput = {1, 3, 5, 6, 10, 11};
@@ -30,13 +30,13 @@ public class SerialLottoNumberTest {
 				.mapToObj(LottoNumber::new)
 				.collect(Collectors.toList());
 
-		Assertions.assertThat(lottoTicket.getLottoNumbers())
+		Assertions.assertThat(serialLottoNumber.getLottoNumbers())
 				.isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@MethodSource("generateNotSizeSixInput")
-	void LottoTicket_NotSizeSix_ShouldThrowException(int[] input) {
+	void SerialLottoNumber_NotSizeSix_ShouldThrowException(int[] input) {
 		// given
 		List<LottoNumber> lottoNumbers = Arrays.stream(input)
 				.mapToObj(LottoNumber::new)
@@ -58,7 +58,7 @@ public class SerialLottoNumberTest {
 
 	@ParameterizedTest
 	@MethodSource("generateDuplicatedInput")
-	void LottoTicket_DuplicatedNumbers_ShouldThrowException(int[] input) {
+	void SerialLottoNumber_DuplicatedNumbers_ShouldThrowException(int[] input) {
 		// given
 		List<LottoNumber> lottoNumbers = Arrays.stream(input)
 				.mapToObj(LottoNumber::new)

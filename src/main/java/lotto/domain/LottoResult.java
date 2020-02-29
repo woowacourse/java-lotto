@@ -13,11 +13,11 @@ public class LottoResult {
 		this.lottoResult = lottoResult;
 	}
 
-	public static LottoResult of(PurchasedSerialLottoNumber purchasedSerialLottoNumber,
+	public static LottoResult of(PurchasedSerialLottoNumbers purchasedSerialLottoNumbers,
 								 WinningLottoNumbers winningLottoNumbers) {
 		Map<WinningType, Integer> lottoResult = createDefaultMap();
 		List<WinningType> winningTypes =
-				purchasedSerialLottoNumber.findMatchingWinningTypesWith(winningLottoNumbers);
+				purchasedSerialLottoNumbers.findMatchingWinningTypesWith(winningLottoNumbers);
 
 		lottoResult.replaceAll((key, value) -> Collections.frequency(winningTypes, key));
 

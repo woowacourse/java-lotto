@@ -56,8 +56,8 @@ public class LottoResultTest {
 	@Test
 	void of() {
 		// given
-		PurchasedSerialLottoNumber purchasedSerialLottoNumber
-				= PurchasedSerialLottoNumber.of(new PurchaseMoney(14000),
+		PurchasedSerialLottoNumbers purchasedSerialLottoNumbers
+				= PurchasedSerialLottoNumbers.of(new PurchaseMoney(14000),
 				new TestSerialLottoNumberFactory());
 		SerialLottoNumber serialLottoNumber = SerialLottoNumber.of("1, 2, 3, 4, 5, 6");
 		LottoNumber bonusNumber = new LottoNumber(7);
@@ -65,7 +65,7 @@ public class LottoResultTest {
 				= new WinningLottoNumbers(serialLottoNumber, bonusNumber);
 
 		// when
-		LottoResult result = LottoResult.of(purchasedSerialLottoNumber, winningLottoNumbers);
+		LottoResult result = LottoResult.of(purchasedSerialLottoNumbers, winningLottoNumbers);
 
 		// then
 		Assertions.assertThat(result.getLottoResult().get(WinningType.FIRST_PLACE))

@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.domain.SerialLottoNumberFactory.RandomSerialLottoNumberFactory;
+import lotto.domain.SerialLottoNumberFactory.AutoSerialLottoNumberFactory;
 import lotto.exceptions.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,12 +17,12 @@ public class LottoController {
 		PurchaseMoney autoTicketMoney
 				= createAutoTicketMoney(purchaseMoney, manualTicketMoney);
 
-		PurchasedSerialLottoNumber purchasedSerialLottoNumber
+		PurchasedSerialLottoNumbers purchasedSerialLottoNumbers
 				= purchaseSerialLottoNumber(manualTicketMoney, autoTicketMoney);
 
 		WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbers();
 
-		produceLottoResult(purchaseMoney, purchasedSerialLottoNumber, winningLottoNumbers);
+		produceLottoResult(purchaseMoney, purchasedSerialLottoNumbers, winningLottoNumbers);
 	}
 
 	private static PurchaseMoney createAutoTicketMoney(
@@ -46,11 +46,11 @@ public class LottoController {
 		}
 	}
 
-	private static PurchasedSerialLottoNumber purchaseSerialLottoNumber(
+	private static PurchasedSerialLottoNumbers purchaseSerialLottoNumber(
 			PurchaseMoney manualTicketMoney, PurchaseMoney autoTicketMoney) {
 
-		PurchasedSerialLottoNumber manualTickets = purchaseManualLotto(manualTicketMoney);
-		PurchasedSerialLottoNumber autoSerialLottoNumber = purchaseAutoLotto(autoTicketMoney);
+		PurchasedSerialLottoNumbers manualTickets = purchaseManualLotto(manualTicketMoney);
+		PurchasedSerialLottoNumbers autoSerialLottoNumber = purchaseAutoLotto(autoTicketMoney);
 		OutputView.printPurchasedSerialLottoNumber(manualTickets, autoSerialLottoNumber);
 		return manualTickets.addAll(autoSerialLottoNumber);
 	}
@@ -85,14 +85,14 @@ public class LottoController {
 
 	private static void produceLottoResult(
 			PurchaseMoney purchaseMoney,
-			PurchasedSerialLottoNumber purchasedSerialLottoNumber,
+			PurchasedSerialLottoNumbers purchasedSerialLottoNumbers,
 			WinningLottoNumbers winningLottoNumbers) {
-		LottoResult lottoResult = LottoResult.of(purchasedSerialLottoNumber, winningLottoNumbers);
+		LottoResult lottoResult = LottoResult.of(purchasedSerialLottoNumbers, winningLottoNumbers);
 		OutputView.printLottoResult(lottoResult);
 		OutputView.printEarningRate(lottoResult.calculateEarningPercentage(purchaseMoney));
 	}
 
-	private static PurchasedSerialLottoNumber purchaseManualLotto(
+	private static PurchasedSerialLottoNumbers purchaseManualLotto(
 			PurchaseMoney manualTicketMoney) {
 
 		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>();
@@ -101,7 +101,7 @@ public class LottoController {
 			serialLottoNumbers.add(prepareManualSerialLottoNumber());
 		}
 
-		return new PurchasedSerialLottoNumber(serialLottoNumbers);
+		return new PurchasedSerialLottoNumbers(serialLottoNumbers);
 	}
 
 	private static SerialLottoNumber prepareManualSerialLottoNumber() {
@@ -122,11 +122,11 @@ public class LottoController {
 		}
 	}
 
-	private static PurchasedSerialLottoNumber purchaseAutoLotto(
+	private static PurchasedSerialLottoNumbers purchaseAutoLotto(
 			PurchaseMoney purchaseMoney) {
 
-		return PurchasedSerialLottoNumber.of(purchaseMoney,
-				new RandomSerialLottoNumberFactory());
+		return PurchasedSerialLottoNumbers.of(purchaseMoney,
+				new AutoSerialLottoNumberFactory());
 	}
 
 	private static PurchaseMoney prepareLotto() {

@@ -65,10 +65,10 @@ public class WinningLottoNumbersTest {
 		List<LottoNumber> lottoNumbers = input.stream()
 				.map(LottoNumber::new)
 				.collect(Collectors.toUnmodifiableList());
-		SerialLottoNumber lottoTicket = new SerialLottoNumber(lottoNumbers);
+		SerialLottoNumber serialLottoNumber = new SerialLottoNumber(lottoNumbers);
 
 		// when
-		WinningType winningType = winningLottoNumbers.findMatchingWinningTypeWith(lottoTicket);
+		WinningType winningType = winningLottoNumbers.findMatchingWinningTypeWith(serialLottoNumber);
 
 		// then
 		Assertions.assertThat(winningType)
@@ -85,4 +85,3 @@ public class WinningLottoNumbersTest {
 				Arguments.of(Arrays.asList(8, 9, 10, 11, 12, 13), WinningType.NONE));
 	}
 }
-;

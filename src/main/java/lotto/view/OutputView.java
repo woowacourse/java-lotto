@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoResult;
 import lotto.domain.PurchaseMoney;
-import lotto.domain.PurchasedSerialLottoNumber;
+import lotto.domain.PurchasedSerialLottoNumbers;
 import lotto.domain.WinningType;
 
 public class OutputView {
@@ -21,7 +21,7 @@ public class OutputView {
 	}
 
 	public static void printPurchasedSerialLottoNumber(
-			PurchasedSerialLottoNumber manual, PurchasedSerialLottoNumber auto) {
+			PurchasedSerialLottoNumbers manual, PurchasedSerialLottoNumbers auto) {
 
 		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n",
 				manual.size(), auto.size());
