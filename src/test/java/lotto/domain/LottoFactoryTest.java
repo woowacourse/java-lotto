@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 public class LottoFactoryTest {
 	@Test
-	void create() {
-		Lotto actual = LottoFactory.create("1,2,3,4,5,6");
+	void createLotto() {
+		Lotto actual = LottoFactory.createLotto("1,2,3,4,5,6");
 		Lotto expected = new Lotto(Arrays.asList(
 				LottoNumber.of(1),
 				LottoNumber.of(2),
@@ -18,6 +18,13 @@ public class LottoFactoryTest {
 				LottoNumber.of(5),
 				LottoNumber.of(6)
 		));
+		assertThat(actual).isEqualTo(expected);
+	}
+
+	@Test
+	void createWinningLotto() {
+		WinningLotto actual = LottoFactory.createWinningLotto("1,2,3,4,5,6", "7");
+		WinningLotto expected = new WinningLotto(LottoFactory.createLotto("1,2,3,4,5,6"), LottoNumber.of(7));
 		assertThat(actual).isEqualTo(expected);
 	}
 }

@@ -15,8 +15,8 @@ public class LottosTest {
 	@DisplayName("로또 여러 장이 정상적으로 생성된 경우")
 	void constructor() {
 		assertThat(new Lottos(Arrays.asList(
-				LottoFactory.create("1,2,3,4,5,6"),
-				LottoFactory.create("2,3,4,5,6,7")
+				LottoFactory.createLotto("1,2,3,4,5,6"),
+				LottoFactory.createLotto("2,3,4,5,6,7")
 		))).isInstanceOf(Lottos.class);
 	}
 
@@ -33,10 +33,10 @@ public class LottosTest {
 	@DisplayName("로또들의 당첨 결과 확인")
 	void match() {
 		Lottos lottos = new Lottos(Arrays.asList(
-				LottoFactory.create("1,2,3,4,5,6"),
-				LottoFactory.create("2,3,4,5,6,7")
+				LottoFactory.createLotto("1,2,3,4,5,6"),
+				LottoFactory.createLotto("2,3,4,5,6,7")
 		));
-		WinningLotto winningLotto = new WinningLotto(LottoFactory.create("1,2,3,4,5,6"), LottoNumber.of(7));
+		WinningLotto winningLotto = new WinningLotto(LottoFactory.createLotto("1,2,3,4,5,6"), LottoNumber.of(7));
 		LottoResults expected = new LottoResults(Arrays.asList(
 				LottoRank.FIRST,
 				LottoRank.SECOND

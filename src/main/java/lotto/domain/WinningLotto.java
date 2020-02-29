@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 import lotto.domain.exception.InvalidWinningLottoException;
 
 public class WinningLotto {
@@ -25,5 +27,23 @@ public class WinningLotto {
 		int matchCount = lotto.countOfMatch(winningLotto);
 		boolean hasBonus = lotto.contains(bonus);
 		return LottoRank.of(matchCount, hasBonus);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		WinningLotto that = (WinningLotto)o;
+		return Objects.equals(winningLotto, that.winningLotto) &&
+				Objects.equals(bonus, that.bonus);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(winningLotto, bonus);
 	}
 }

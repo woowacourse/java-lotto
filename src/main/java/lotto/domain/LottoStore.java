@@ -23,7 +23,7 @@ public class LottoStore {
 	}
 
 	private static List<Lotto> buyManual(LottoBuyCount lottoBuyCount, List<String> manual) {
-		return buy(lottoBuyCount, () -> LottoFactory.create(manual.remove(0)));
+		return buy(lottoBuyCount, () -> LottoFactory.createLotto(manual.remove(0)));
 	}
 
 	public static List<Lotto> buyAutoAndManual(LottoBuyCount autoBuyCount, LottoBuyCount manualBuyCount,
