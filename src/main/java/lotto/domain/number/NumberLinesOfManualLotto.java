@@ -21,26 +21,22 @@ public class NumberLinesOfManualLotto {
 	}
 
 	private void validate(String rawLine) {
+		validateNull(rawLine);
 		List<String> numbers = Arrays.asList(rawLine.split(ManualLottoTicketGenerator.DELIMITER));
-		validateNull(numbers);
 		validateSize(numbers);
 		validateInteger(numbers);
 		validateLottoNumberType(numbers);
 	}
 
-	private void validateNull(List<String> numberLine) {
-		if (Objects.isNull(numberLine)) {
+	private void validateNull(String rawLine) {
+		if (Objects.isNull(rawLine)) {
 			throw new InvalidManualNumberLineException(InvalidManualNumberLineException.NULL);
 		}
 	}
 
-	private void validateLottoNumberType(List<String> numberLine) {
-		try {
-			numberLine.stream()
-				.map(String::trim)
-				.forEach(LottoNumber::valueOf);
-		} catch (InvalidLottoNumberException e) {
-			throw new InvalidManualNumberLineException(e.getMessage());
+	private void validateSize(List<String> numberLine) {
+		if (numberLine.size() != Lotto.CORRECT_SIZE) {
+			throw new InvalidManualNumberLineException(InvalidManualNumberLineException.WRONG_SIZE);
 		}
 	}
 
@@ -54,9 +50,13 @@ public class NumberLinesOfManualLotto {
 		}
 	}
 
-	private void validateSize(List<String> numberLine) {
-		if (numberLine.size() != Lotto.CORRECT_SIZE) {
-			throw new InvalidManualNumberLineException(InvalidManualNumberLineException.WRONG_SIZE);
+	private void validateLottoNumberType(List<String> numberLine) {
+		try {
+			numberLine.stream()
+				.map(String::trim)
+				.forEach(LottoNumber::valueOf);
+		} catch (InvalidLottoNumberException e) {
+			throw new InvalidManualNumberLineException(e.getMessage());
 		}
 	}
 
