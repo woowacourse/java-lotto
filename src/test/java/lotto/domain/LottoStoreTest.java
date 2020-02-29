@@ -16,6 +16,6 @@ public class LottoStoreTest {
 		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("5000");
 		LottoBuyCount lottoBuyCount = lottoPurchaseMoney.getBuyCount(2);
 		List<String> manualLottos = new ArrayList<>(Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7"));
-		assertThat(LottoStore.buyAutoAndManual(lottoBuyCount, manualLottos).size()).isEqualTo(5);
+		assertThat(LottoStore.buyManualAndAuto(lottoBuyCount, manualLottos).size()).isEqualTo(5);
 	}
 }

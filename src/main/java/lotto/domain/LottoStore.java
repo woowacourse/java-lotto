@@ -18,19 +18,19 @@ public class LottoStore {
 		return new Lotto(shuffledLottoNumbers.subList(0, Lotto.SIZE));
 	}
 
-	private static List<Lotto> buyAuto(int buyCount) {
-		return buy(buyCount, LottoStore::createRandomLotto);
+	public static List<Lotto> buyManualAndAuto(LottoBuyCount lottoBuyCount, List<String> manual) {
+		return Stream.concat(
+				buyManual(lottoBuyCount.getManual(), manual).stream(),
+				buyAuto(lottoBuyCount.getAuto()).stream()
+		).collect(Collectors.toList());
 	}
 
 	private static List<Lotto> buyManual(int buyCount, List<String> manual) {
 		return buy(buyCount, () -> LottoFactory.createLotto(manual.remove(0)));
 	}
 
-	public static List<Lotto> buyAutoAndManual(LottoBuyCount lottoBuyCount, List<String> manual) {
-		return Stream.concat(
-				buyManual(lottoBuyCount.getManual(), manual).stream(),
-				buyAuto(lottoBuyCount.getAuto()).stream()
-		).collect(Collectors.toList());
+	private static List<Lotto> buyAuto(int buyCount) {
+		return buy(buyCount, LottoStore::createRandomLotto);
 	}
 
 	private static List<Lotto> buy(int buyCount, Supplier<Lotto> creator) {
