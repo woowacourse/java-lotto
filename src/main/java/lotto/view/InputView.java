@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.Money;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -51,17 +48,20 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<String> inputManualLottoNumbers(int manualTicketCount) {
+    public static LottoTickets inputManualLottoTickets(int manualTicketCount) {
         try {
-            return inputManualLottoNumbersWithMessage(manualTicketCount);
+            List<String> inputsForNumbers = inputManualLottoNumbersWithMessage(manualTicketCount);
+            return LottoTickets.ofManualLottoTickets(manualTicketCount, inputsForNumbers);
         } catch (IllegalArgumentException e) {
-            return inputManualLottoNumbers(manualTicketCount);
+            System.err.println(e.getMessage());
+            return inputManualLottoTickets(manualTicketCount);
         }
     }
 
     private static List<String> inputManualLottoNumbersWithMessage(int manualTicketCount) {
         System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
-        return Stream.generate(scanner::nextLine).limit(manualTicketCount)
+        return Stream.generate(scanner::nextLine)
+                .limit(manualTicketCount)
                 .collect(toList());
     }
 

@@ -14,17 +14,16 @@ public class LottoGame {
         Money purchaseMoney = InputView.inputPurchaseMoney();
         int manualTicketCount = InputView.inputManualLottoTicketCount();
         TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, manualTicketCount);
+
+        LottoTickets manualLottoTickets = InputView.inputManualLottoTickets(manualTicketCount);
+
         int autoTicketCount = ticketCounts.getAutoTicketCount();
+        LottoTickets autoLottoTickets = LottoTickets.ofAutoLottoTickets(autoTicketCount);
 
-        List<String> manualLottoNumbers = InputView.inputManualLottoNumbers(manualTicketCount);
-
-        LottoTickets manualLottoTickets = LottoTickets.ofManualLottoTickets(manualTicketCount, manualLottoNumbers);
-        LottoTickets randomLottoTickets = LottoTickets.ofAutoLottoTickets(autoTicketCount);
-
-        OutputView.printLottos(manualLottoTickets, randomLottoTickets);
+        OutputView.printLottos(manualLottoTickets, autoLottoTickets);
 
         WinningNumbers winningNumbers = InputView.inputWinningNumbers();
-        LottoTickets allLottoTickets = LottoTickets.add(manualLottoTickets, randomLottoTickets);
+        LottoTickets allLottoTickets = LottoTickets.join(manualLottoTickets, autoLottoTickets);
 
         List<Rank> ranks = winningNumbers.checkOutLottos(allLottoTickets);
         Profit profit = new Profit(purchaseMoney, ranks);
