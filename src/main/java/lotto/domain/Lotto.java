@@ -24,6 +24,10 @@ public class Lotto {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
+    boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public String toString() {
         return "Lotto{" +

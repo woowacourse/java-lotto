@@ -5,9 +5,13 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.exception.InvalidLottoSizeException;
 
@@ -25,7 +29,7 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("유효하지_않은_로또번호로_로또_생성")
+    @DisplayName("유효하지 않은 로또 번호로 로또 생성")
     void createWithInvalidLottoNumbers() {
         //given
         Set<LottoNumber> lottoNumbers = new HashSet<>(
@@ -35,5 +39,32 @@ class LottoTest {
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
             .isInstanceOf(InvalidLottoSizeException.class)
             .hasMessage("로또 번호의 개수는 6개여야 합니다");
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideMatchOrNoneMatchLottoNumber")
+    @DisplayName("로또번호 일치 여부 체크")
+    void matchLottoNumber(int value, boolean expected) {
+        //given
+        Set<LottoNumber> lottoNumbers = new HashSet<>(
+            Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                new LottoNumber(5), new LottoNumber(6)));
+        //when
+        Lotto lotto = new Lotto(lottoNumbers);
+        //then
+        assertThat(lotto.contains(new LottoNumber(value))).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideMatchOrNoneMatchLottoNumber() {
+        return Stream.of(
+            Arguments.of(1, true),
+            Arguments.of(2, true),
+            Arguments.of(3, true),
+            Arguments.of(4, true),
+            Arguments.of(5, true),
+            Arguments.of(6, true),
+            Arguments.of(7, false),
+            Arguments.of(8, false)
+        );
     }
 }

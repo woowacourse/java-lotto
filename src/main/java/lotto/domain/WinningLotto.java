@@ -16,7 +16,7 @@ public class WinningLotto {
         Ranks ranks = new Ranks();
         for (Lotto lotto : lottos.getLottos()) {
             int matchNumber = (int)lottoNumbers.getLottoNumbers().stream()
-                .filter(lottoNumber -> lotto.getLottoNumbers().contains(lottoNumber))
+                .filter(lotto::contains)
                 .count();
             addNullIfNoRank(ranks, matchNumber);
             ranks.add(Rank.valueOf(matchNumber, matchBonusNumber(bonusNumber)));
@@ -31,6 +31,6 @@ public class WinningLotto {
     }
 
     private boolean matchBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.getLottoNumbers().contains(bonusNumber);
+        return lottoNumbers.contains(bonusNumber);
     }
 }
