@@ -21,9 +21,9 @@ public class WinningLottoNumbers {
 		}
 	}
 
-	public WinningType findMatchingWinningTypeWith(SerialLottoNumber lottoTicket) {
-		int sameNumberCount = lottoTicket.countMatching(winningLottoNumbers);
-		boolean isContainsBonus = lottoTicket.contains(bonus);
+	public WinningType findMatchingWinningTypeWith(SerialLottoNumber serialLottoNumber) {
+		int sameNumberCount = serialLottoNumber.countMatching(winningLottoNumbers);
+		boolean isContainsBonus = serialLottoNumber.contains(bonus);
 
 		return WinningType.getWinningType(sameNumberCount, isContainsBonus);
 	}

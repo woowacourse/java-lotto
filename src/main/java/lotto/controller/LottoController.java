@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.domain.LottoTicketFactory.RandomLottoTicketFactory;
+import lotto.domain.SerialLottoNumberFactory.RandomSerialLottoNumberFactory;
 import lotto.exceptions.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,12 +17,12 @@ public class LottoController {
 		PurchaseMoney autoTicketMoney
 				= createAutoTicketMoney(purchaseMoney, manualTicketMoney);
 
-		PurchasedLottoTickets purchasedLottoTickets
-				= purchaseLottoTickets(manualTicketMoney, autoTicketMoney);
+		PurchasedSerialLottoNumber purchasedSerialLottoNumber
+				= purchaseSerialLottoNumber(manualTicketMoney, autoTicketMoney);
 
 		WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbers();
 
-		produceLottoResult(purchaseMoney, purchasedLottoTickets, winningLottoNumbers);
+		produceLottoResult(purchaseMoney, purchasedSerialLottoNumber, winningLottoNumbers);
 	}
 
 	private static PurchaseMoney createAutoTicketMoney(
@@ -46,13 +46,13 @@ public class LottoController {
 		}
 	}
 
-	private static PurchasedLottoTickets purchaseLottoTickets(
+	private static PurchasedSerialLottoNumber purchaseSerialLottoNumber(
 			PurchaseMoney manualTicketMoney, PurchaseMoney autoTicketMoney) {
 
-		PurchasedLottoTickets manualTickets = purchaseManualLotto(manualTicketMoney);
-		PurchasedLottoTickets autoLottoTickets = purchaseAutoLotto(autoTicketMoney);
-		OutputView.printPurchasedLottoTickets(manualTickets, autoLottoTickets);
-		return manualTickets.addAll(autoLottoTickets);
+		PurchasedSerialLottoNumber manualTickets = purchaseManualLotto(manualTicketMoney);
+		PurchasedSerialLottoNumber autoSerialLottoNumber = purchaseAutoLotto(autoTicketMoney);
+		OutputView.printPurchasedSerialLottoNumber(manualTickets, autoSerialLottoNumber);
+		return manualTickets.addAll(autoSerialLottoNumber);
 	}
 
 	private static PurchaseMoney createManualTicketMoney(
@@ -70,7 +70,7 @@ public class LottoController {
 
 		int manualTicketNumber = InputView.inputManualTicketNumber();
 
-		if (purchaseMoney.isLessThan(manualTicketNumber)) {
+		if (purchaseMoney.canNotPurchase(manualTicketNumber)) {
 			OutputView.printWhenManualMoneyIsMoreThanTotalMoney();
 			return null;
 		}
@@ -85,54 +85,53 @@ public class LottoController {
 
 	private static void produceLottoResult(
 			PurchaseMoney purchaseMoney,
-			PurchasedLottoTickets purchasedLottoTickets,
+			PurchasedSerialLottoNumber purchasedSerialLottoNumber,
 			WinningLottoNumbers winningLottoNumbers) {
-		LottoResult lottoResult = LottoResult.of(purchasedLottoTickets, winningLottoNumbers);
+		LottoResult lottoResult = LottoResult.of(purchasedSerialLottoNumber, winningLottoNumbers);
 		OutputView.printLottoResult(lottoResult);
 		OutputView.printEarningRate(lottoResult.calculateEarningPercentage(purchaseMoney));
 	}
 
-	private static PurchasedLottoTickets purchaseManualLotto(
+	private static PurchasedSerialLottoNumber purchaseManualLotto(
 			PurchaseMoney manualTicketMoney) {
 
 		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>();
 		OutputView.printInputManualLottoNumbersMessage();
 		for (int i = 0; i < manualTicketMoney.countPurchasedTickets(); i++) {
-			SerialLottoNumber serialLottoNumber = prepareManualLottoTicket();
-			serialLottoNumbers.add(serialLottoNumber);
+			serialLottoNumbers.add(prepareManualSerialLottoNumber());
 		}
 
-		return new PurchasedLottoTickets(serialLottoNumbers);
+		return new PurchasedSerialLottoNumber(serialLottoNumbers);
 	}
 
-	private static SerialLottoNumber prepareManualLottoTicket() {
+	private static SerialLottoNumber prepareManualSerialLottoNumber() {
 		SerialLottoNumber serialLottoNumber;
 		do {
 			String input = InputView.inputManualLottoNumbers();
-			serialLottoNumber = prepareManualLottoTicketIfValid(input);
+			serialLottoNumber = prepareManualSerialLottoNumberIfValid(input);
 		} while (serialLottoNumber == null);
 		return serialLottoNumber;
 	}
 
-	private static SerialLottoNumber prepareManualLottoTicketIfValid(String input) {
+	private static SerialLottoNumber prepareManualSerialLottoNumberIfValid(String input) {
 		try {
 			return SerialLottoNumber.of(input);
-		} catch (LottoTicketIllegalArgumentException | LottoNumberIllegalArgumentException e) {
+		} catch (SerialLottoNumberIllegalArgumentException | LottoNumberIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
 		}
 	}
 
-	private static PurchasedLottoTickets purchaseAutoLotto(
+	private static PurchasedSerialLottoNumber purchaseAutoLotto(
 			PurchaseMoney purchaseMoney) {
 
-		return PurchasedLottoTickets.of(purchaseMoney,
-				new RandomLottoTicketFactory());
+		return PurchasedSerialLottoNumber.of(purchaseMoney,
+				new RandomSerialLottoNumberFactory());
 	}
 
 	private static PurchaseMoney prepareLotto() {
 		PurchaseMoney purchaseMoney = createPurchaseMoney();
-		OutputView.printPurchasedLottoTicketsCount(purchaseMoney);
+		OutputView.printCountOfPurchasedSerialLottoNumber(purchaseMoney);
 		return purchaseMoney;
 	}
 

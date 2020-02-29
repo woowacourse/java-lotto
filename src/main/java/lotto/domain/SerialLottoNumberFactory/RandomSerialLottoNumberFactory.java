@@ -1,12 +1,12 @@
-package lotto.domain.LottoTicketFactory;
+package lotto.domain.SerialLottoNumberFactory;
 
 import lotto.domain.SerialLottoNumber;
 
 import java.util.Collections;
 
-public class RandomLottoTicketFactory extends AbstractLottoTicketFactory {
+public class RandomSerialLottoNumberFactory extends AbstractSerialLottoNumberFactory {
 	@Override
-	public SerialLottoNumber createLottoTicket() {
+	public SerialLottoNumber createSerialLottoNumber() {
 		Collections.shuffle(super.getAllLottoNumbers());
 		return new SerialLottoNumber(super.getAllLottoNumbers().subList(ZERO_INDEX, SIX_INDEX));
 	}

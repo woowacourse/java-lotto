@@ -18,9 +18,9 @@ public class PurchaseMoney {
 		this.purchaseMoney = purchaseMoney;
 	}
 
-	public static PurchaseMoney of(int lottoTicketNumber) {
+	public static PurchaseMoney of(int CountOfSerialLottoNumber) {
 		try {
-			return new PurchaseMoney(LOTTO_PRICE * lottoTicketNumber);
+			return new PurchaseMoney(LOTTO_PRICE * CountOfSerialLottoNumber);
 		} catch (PurchaseMoneyIllegalArgumentException e) {
 			throw new PurchaseManualTicketIllegalArgumentException();
 		}
@@ -41,8 +41,7 @@ public class PurchaseMoney {
 	public PurchaseMoney subtract(PurchaseMoney other) {
 		try {
 			return new PurchaseMoney(purchaseMoney - other.purchaseMoney);
-		}
-		catch (PurchaseMoneyIllegalArgumentException e) {
+		} catch (PurchaseMoneyIllegalArgumentException e) {
 			throw new PurchaseManualTicketIllegalArgumentException();
 		}
 	}
@@ -55,8 +54,8 @@ public class PurchaseMoney {
 		return totalEarning / purchaseMoney;
 	}
 
-	public boolean isLessThan(int manualTicketNumber) {
-		return purchaseMoney < manualTicketNumber * LOTTO_PRICE;
+	public boolean canNotPurchase(int ticketNumber) {
+		return purchaseMoney < ticketNumber * LOTTO_PRICE;
 	}
 
 	public int getPurchaseMoney() {

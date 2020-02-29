@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import lotto.domain.LottoTicketFactory.TestLottoTicketFactory;
+import lotto.domain.SerialLottoNumberFactory.TestSerialLottoNumberFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-class PurchasedLottoTicketsTest {
+class PurchasedSerialLottoNumberTest {
 	@Test
 	void PurchasedLottoTickets() {
 		// given
@@ -22,10 +22,10 @@ class PurchasedLottoTicketsTest {
 		}
 
 		// when
-		PurchasedLottoTickets result = new PurchasedLottoTickets(purchasedLottoTickets);
+		PurchasedSerialLottoNumber result = new PurchasedSerialLottoNumber(purchasedLottoTickets);
 
 		// then
-		Assertions.assertThat(result.getPurchasedLottoTickets())
+		Assertions.assertThat(result.getPurchasedSerialLottoNumbers())
 				.isEqualTo(purchasedLottoTickets);
 	}
 
@@ -35,10 +35,10 @@ class PurchasedLottoTicketsTest {
 		WinningLottoNumbers winningLottoNumbers
 				= new WinningLottoNumbers(SerialLottoNumber.of("1,2,3,4,5,6"), new LottoNumber(7));
 
-		PurchasedLottoTickets purchasedLottoTickets = PurchasedLottoTickets.of(
-				new PurchaseMoney(14000), new TestLottoTicketFactory());
+		PurchasedSerialLottoNumber purchasedSerialLottoNumber = PurchasedSerialLottoNumber.of(
+				new PurchaseMoney(14000), new TestSerialLottoNumberFactory());
 
-		LottoResult result = LottoResult.of(purchasedLottoTickets, winningLottoNumbers);
+		LottoResult result = LottoResult.of(purchasedSerialLottoNumber, winningLottoNumbers);
 
 		// then
 		Map<WinningType, Integer> expected = new HashMap<>();
@@ -64,15 +64,15 @@ class PurchasedLottoTicketsTest {
 		serialLottoNumbers2.add(SerialLottoNumber.of("1,2,3,4,7,6"));
 		serialLottoNumbers2.add(SerialLottoNumber.of("1,2,3,4,5,7"));
 
-		PurchasedLottoTickets purchasedLottoTickets
-				= new PurchasedLottoTickets(serialLottoNumbers);
+		PurchasedSerialLottoNumber purchasedSerialLottoNumber
+				= new PurchasedSerialLottoNumber(serialLottoNumbers);
 
-		PurchasedLottoTickets purchasedLottoTickets2
-				= new PurchasedLottoTickets(serialLottoNumbers2);
+		PurchasedSerialLottoNumber purchasedSerialLottoNumber2
+				= new PurchasedSerialLottoNumber(serialLottoNumbers2);
 
 		// when
-		PurchasedLottoTickets result
-				= purchasedLottoTickets.addAll(purchasedLottoTickets2);
+		PurchasedSerialLottoNumber result
+				= purchasedSerialLottoNumber.addAll(purchasedSerialLottoNumber2);
 
 		// then
 		List<SerialLottoNumber> serialLottoNumbers3 = new ArrayList<>();
@@ -83,8 +83,8 @@ class PurchasedLottoTicketsTest {
 		serialLottoNumbers3.add(SerialLottoNumber.of("1,2,3,4,7,6"));
 		serialLottoNumbers3.add(SerialLottoNumber.of("1,2,3,4,5,7"));
 
-		PurchasedLottoTickets expected
-				= new PurchasedLottoTickets(serialLottoNumbers3);
+		PurchasedSerialLottoNumber expected
+				= new PurchasedSerialLottoNumber(serialLottoNumbers3);
 
 		Assertions.assertThat(result)
 				.isEqualTo(expected);

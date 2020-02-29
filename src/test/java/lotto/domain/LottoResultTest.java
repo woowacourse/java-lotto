@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.LottoTicketFactory.TestLottoTicketFactory;
+import lotto.domain.SerialLottoNumberFactory.TestSerialLottoNumberFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -56,16 +56,16 @@ public class LottoResultTest {
 	@Test
 	void of() {
 		// given
-		PurchasedLottoTickets purchasedLottoTickets
-				= PurchasedLottoTickets.of(new PurchaseMoney(14000),
-				new TestLottoTicketFactory());
+		PurchasedSerialLottoNumber purchasedSerialLottoNumber
+				= PurchasedSerialLottoNumber.of(new PurchaseMoney(14000),
+				new TestSerialLottoNumberFactory());
 		SerialLottoNumber serialLottoNumber = SerialLottoNumber.of("1, 2, 3, 4, 5, 6");
 		LottoNumber bonusNumber = new LottoNumber(7);
 		WinningLottoNumbers winningLottoNumbers
 				= new WinningLottoNumbers(serialLottoNumber, bonusNumber);
 
 		// when
-		LottoResult result = LottoResult.of(purchasedLottoTickets, winningLottoNumbers);
+		LottoResult result = LottoResult.of(purchasedSerialLottoNumber, winningLottoNumbers);
 
 		// then
 		Assertions.assertThat(result.getLottoResult().get(WinningType.FIRST_PLACE))
