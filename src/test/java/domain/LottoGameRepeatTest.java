@@ -25,7 +25,7 @@ public class LottoGameRepeatTest {
     @CsvSource(value = {"10,false", "5,false", "0,true"})
     void 생성_예외_테스트(int value, boolean exp) {
         LottoGameRepeat lottoGameRepeat = new LottoGameRepeat(5);
-        Assertions.assertThat(lottoGameRepeat.checkLoopTerminate(value)).isEqualTo(exp);
+        Assertions.assertThat(lottoGameRepeat.hasRepeat(value)).isEqualTo(exp);
     }
 
     @ParameterizedTest

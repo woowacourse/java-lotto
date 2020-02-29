@@ -24,7 +24,7 @@ public class LottoGame {
     }
 
     public void makeLottoTickets(LottoGameRepeat gameRepeat, LottoGenerator lottoGenerator) {
-        for (int count = 0; gameRepeat.checkLoopTerminate(count); count++) {
+        for (int count = 0; gameRepeat.hasRepeat(count); count++) {
             lottoTickets.add(LottoTicketFactory.createLottoTicket(lottoGenerator));
         }
     }

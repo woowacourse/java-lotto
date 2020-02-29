@@ -22,11 +22,11 @@ public class LottoGameRepeat {
         }
     }
 
-    public boolean checkRepeatPositive() {
-        return repeat > 0;
+    public boolean hasRepeat() {
+        return hasRepeat(0);
     }
 
-    public boolean checkLoopTerminate(int count) {
+    public boolean hasRepeat(int count) {
         return count < repeat;
     }
 
