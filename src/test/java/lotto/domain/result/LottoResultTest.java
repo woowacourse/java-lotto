@@ -14,25 +14,25 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 class LottoResultTest {
-	private Map<Rank, Integer> rankCount = new HashMap<>();
+	private Map<Rank, Integer> rankToCount = new HashMap<>();
 
 	@BeforeEach
 	void setUp() {
-		rankCount = Arrays.stream(Rank.values())
+		rankToCount = Arrays.stream(Rank.values())
 				.collect(Collectors.toMap(rank -> rank, rank -> 0));
-		rankCount.replace(Rank.FIRST_PLACE, 1);
-		rankCount.replace(Rank.SECOND_PLACE, 1);
-		rankCount.replace(Rank.THIRD_PLACE, 1);
-		rankCount.replace(Rank.NONE, 3);
+		rankToCount.replace(Rank.FIRST_PLACE, 1);
+		rankToCount.replace(Rank.SECOND_PLACE, 1);
+		rankToCount.replace(Rank.THIRD_PLACE, 1);
+		rankToCount.replace(Rank.NONE, 3);
 	}
 
 	@Test
 	void Results() {
 		// when
-		LottoResult lottoResult = new LottoResult(rankCount);
+		LottoResult lottoResult = new LottoResult(rankToCount);
 
 		// then
-		Assertions.assertThat(lottoResult).isEqualTo(new LottoResult(rankCount));
+		Assertions.assertThat(lottoResult).isEqualTo(new LottoResult(rankToCount));
 	}
 
 	@Test
@@ -55,7 +55,7 @@ class LottoResultTest {
 		LottoResult lottoResult = LottoResult.of(winning, lottoTickets);
 
 		// then
-		LottoResult expected = new LottoResult(rankCount);
+		LottoResult expected = new LottoResult(rankToCount);
 		Assertions.assertThat(lottoResult).isEqualTo(expected);
 	}
 
@@ -64,7 +64,7 @@ class LottoResultTest {
 	void calculateProfitRate(int moneyInput, double expected) {
 		// given
 		Money money = new Money(moneyInput);
-		LottoResult lottoResult = new LottoResult(rankCount);
+		LottoResult lottoResult = new LottoResult(rankToCount);
 
 		// when
 		double result = lottoResult.calculateProfitRate(money);
@@ -76,13 +76,13 @@ class LottoResultTest {
 	@Test
 	void getWinningRankCount() {
 		// given
-		LottoResult lottoResult = new LottoResult(rankCount);
+		LottoResult lottoResult = new LottoResult(rankToCount);
 
 		// when
 		Map<Rank, Integer> result = lottoResult.getWinningRankCount();
 
 		// then
-		rankCount.remove(Rank.NONE);
-		Assertions.assertThat(result).isEqualTo(rankCount);
+		rankToCount.remove(Rank.NONE);
+		Assertions.assertThat(result).isEqualTo(rankToCount);
 	}
 }
