@@ -13,12 +13,13 @@ public class Buyer {
     private List<Lotto> lottos = new ArrayList<>();
 
     public Buyer(List<String> manualLottos, LottoAmount lottoAmount) {
-        createManualLottos(manualLottos);
+        if (lottoAmount.getManualLottoAmount() != 0) {
+            createManualLottos(manualLottos);
+        }
         createAutoLottos(lottoAmount.getAutoLottoAmount());
     }
 
     private void createManualLottos(List<String> manualLottos) {
-        if (null == manualLottos) return;
         lottos.addAll(createManualLotto(manualLottos));
     }
 
