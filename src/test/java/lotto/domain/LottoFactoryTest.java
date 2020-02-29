@@ -4,11 +4,13 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoFactoryTest {
 	@Test
-	void createLotto() {
+	@DisplayName("문자열로 로또 생성 테스트")
+	void create() {
 		Lotto actual = LottoFactory.create("1,2,3,4,5,6");
 		Lotto expected = new Lotto(Arrays.asList(
 				LottoNumber.of(1),
