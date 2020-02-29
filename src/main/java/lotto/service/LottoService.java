@@ -9,26 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
-    private final LottoMachine defaultAutoMachine;
+    private final LottoMachine autoMachine;
 
-    public LottoService(LottoMachine defaultAutoMachine) {
-        this.defaultAutoMachine = defaultAutoMachine;
+    public LottoService(LottoMachine autoMachine) {
+        this.autoMachine = autoMachine;
     }
 
-    public List<LottoTicket> createManualTickets(Money money, int numberOfTicket, List<List<Integer>> manualNumbers) {
+    public List<LottoTicket> createManualTickets(Money money, List<List<Integer>> manualNumbers) {
         LottoMachine manualMachine = new ManualLottoMachine(manualNumbers);
 
-        money.spendOnManualLotto(numberOfTicket);
-
-        return manualMachine.buyTickets(numberOfTicket);
+        return manualMachine.buyTickets(money.getNumberOfManualTickets());
     }
 
     public List<LottoTicket> createAutoTickets(Money money) {
-        int numberOfAutoTickets = money.calculateAffordableTicketNumbers();
 
-        money.spendOnAutoLotto(numberOfAutoTickets);
-
-        return defaultAutoMachine.buyTickets(numberOfAutoTickets);
+        return autoMachine.buyTickets(money.getNumberOfLeftTickets());
     }
 
     public LottoTicketBundle createLottoTicketBundle(List<LottoTicket>... ticketsList) {
@@ -40,7 +35,7 @@ public class LottoService {
     }
 
     public WinLottoTicket createWinLottoTicket(List<Integer> winNumbers, int bonusNumber) {
-        return defaultAutoMachine.createWinLottoTicket(winNumbers, bonusNumber);
+        return autoMachine.createWinLottoTicket(winNumbers, bonusNumber);
     }
 
     public OverallResult createOverallResult(WinLottoTicket winLottoTicket, LottoTicketBundle lottoTicketBundle) {

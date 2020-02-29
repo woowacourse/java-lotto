@@ -36,26 +36,28 @@ public class LottoController {
 
     private Money createMoney() {
         BettingMoneyDTO bettingMoney = new BettingMoneyDTO(InputView.inputBettingMoney());
-        return new Money(bettingMoney.getBettingMoney());
+        int amount = bettingMoney.getBettingMoney();
+
+        NumberOfTicketDTO numberOfTicketDTO = new NumberOfTicketDTO(InputView.inputNumberOfManualLotto());
+        int numberOfManualTicket = numberOfTicketDTO.getNumberOfTicket();
+
+        return new Money(amount, numberOfManualTicket);
     }
 
     private LottoTicketBundle createLottoTicketBundle(Money money) {
-        List<LottoTicket> manualTickets = createManualTickets(money);
         List<LottoTicket> autoTickets = createAutoTickets(money);
+        List<LottoTicket> manualTickets = createManualTickets(money);
 
-        OutputView.printPurchaseStatus(new PurchaseStatusDTO(manualTickets.size(), autoTickets.size()));
+        OutputView.printPurchaseStatus(new PurchaseStatusDTO(money.getNumberOfManualTickets(), money.getNumberOfLeftTickets()));
 
         return service.createLottoTicketBundle(manualTickets, autoTickets);
     }
 
     private List<LottoTicket> createManualTickets(Money money) {
-        NumberOfTicketDTO numberOfTicketDTO = new NumberOfTicketDTO(InputView.inputNumberOfManualLotto());
-        int numberOfManualTicket = numberOfTicketDTO.getNumberOfTicket();
+        ManualNumbersDTO manualNumbersDTO = new ManualNumbersDTO(InputView.inputManualNumbers(money.getNumberOfManualTickets()));
+        List<List<Integer>> manualNumbers = manualNumbersDTO.getManualNumbers();
 
-        ManualNumbersDTO manualNumbersDTO = new ManualNumbersDTO(InputView.inputManualNumbers(numberOfManualTicket));
-        List<List<Integer>> manualNumbers = manualNumbersDTO.getLists();
-
-        return service.createManualTickets(money, numberOfManualTicket, manualNumbers);
+        return service.createManualTickets(money, manualNumbers);
     }
 
     private List<LottoTicket> createAutoTickets(Money money) {

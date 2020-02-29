@@ -13,12 +13,12 @@ public class ManualLottoMachine extends LottoMachine {
     private final List<List<Integer>> manualNumbers;
 
     public ManualLottoMachine(List<List<Integer>> manualNumbers) {
+        NullOrEmptyValidator.isNullOrEmpty(manualNumbers);
         this.manualNumbers = manualNumbers;
     }
 
     @Override
     public List<LottoTicket> buyTickets(int numberOfTickets) {
-        NullOrEmptyValidator.isNullOrEmpty(manualNumbers);
         validateSize(numberOfTickets, manualNumbers.size());
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
