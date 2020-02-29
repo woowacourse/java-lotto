@@ -14,11 +14,11 @@ public class LottoCount {
         this.autoLotto = totalLotto - this.manualLotto;
     }
 
-    private void validate(String input) {
-        StringUtil.checkNull(input);
-        StringUtil.checkBlank(input);
-        StringUtil.checkNumberFormat(input);
-        StringUtil.checkRange(input);
+    private void validate(String ManualLotto) {
+        StringUtil.checkNull(ManualLotto);
+        StringUtil.checkBlank(ManualLotto);
+        StringUtil.checkNumberFormat(ManualLotto);
+        StringUtil.checkRange(ManualLotto);
     }
 
     private void validateMoney(String input, int totalLotto) {
