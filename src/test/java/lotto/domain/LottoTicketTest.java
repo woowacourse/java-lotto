@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,5 +33,23 @@ public class LottoTicketTest {
 		MatchResult expected = new MatchResult(matchResult);
 
 		assertThat(lottoTicket.matchAll(winningLotto)).isEqualTo(expected);
+	}
+
+	@Test
+	@DisplayName("두 로또를 연결하여 새로운 로또 티켓을 발급한다")
+	void concat() {
+		LottoTicket lottoTicket1 = new LottoTicket(Collections.singletonList(Lotto.of(1, 2, 5, 43, 44, 45)));
+		LottoTicket lottoTicket2 = new LottoTicket(Collections.singletonList(Lotto.of(1, 2, 3, 4, 5, 6)));
+		assertThat(lottoTicket1.concat(lottoTicket2)).isInstanceOf(LottoTicket.class);
+	}
+
+	@Test
+	@DisplayName("로또 티켓에 포함된 로또의 개수를 반환한다")
+	void size() {
+		LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
+				Lotto.of(1, 2, 5, 43, 44, 45),
+				Lotto.of(1, 2, 5, 43, 44, 45),
+				Lotto.of(1, 2, 3, 43, 44, 45)));
+		assertThat(lottoTicket.size()).isEqualTo(3);
 	}
 }

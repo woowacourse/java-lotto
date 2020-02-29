@@ -26,7 +26,7 @@ public class PurchaseInformationTest {
 	@Test
 	@DisplayName("구입 금액이 null인 경우 예외 발생")
 	void constructor_PurchaseMoneyIsNull() {
-		assertThatThrownBy(() -> new PurchaseInformation(new PurchaseMoney(1000), -1))
+		assertThatThrownBy(() -> new PurchaseInformation(null, -1))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 

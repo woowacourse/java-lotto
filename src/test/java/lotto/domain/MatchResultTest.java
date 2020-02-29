@@ -41,6 +41,19 @@ public class MatchResultTest {
 	}
 
 	@Test
+	@DisplayName("생성자에 null 값을 입력한 경우 예외가 발생한다.")
+	void constructor_isNull() {
+		assertThatThrownBy(() -> new MatchResult(null)).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	@DisplayName("생성자에 빈 map을 입력한 경우 예외가 발생한다.")
+	void constructor_isEmpty() {
+		Map<LottoRank, Long> statistics = new HashMap<>();
+		assertThatThrownBy(() -> new MatchResult(statistics)).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
 	@DisplayName("총 수익률 연산 테스트")
 	void calculateTotalProfits() {
 		assertThat(matchResult.calculateTotalProfits()).isEqualTo(20045100L);

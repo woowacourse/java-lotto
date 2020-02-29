@@ -42,4 +42,20 @@ public class PurchaseMoneyTest {
 		PurchaseMoney purchaseMoney = new PurchaseMoney(money);
 		assertThat(purchaseMoney.canPayable(1_000L)).isEqualTo(expect);
 	}
+
+	@Test
+	@DisplayName("지불할 수 있는 금액을 지불하라고 요구하는 경우에는 가지고 있는 금액에서 차감한다")
+	void pay() {
+		PurchaseMoney purchaseMoney = new PurchaseMoney(10_000L);
+		purchaseMoney.pay(1_000L);
+		assertThat(purchaseMoney.get()).isEqualTo(9_000L);
+	}
+
+	@Test
+	@DisplayName("지불할 수 없는 금액을 지불하라고 요구하는 경우에는 예외가 발생한다")
+	void pay_NotPayableMoney() {
+		PurchaseMoney purchaseMoney = new PurchaseMoney(10_000L);
+		assertThatThrownBy(() -> purchaseMoney.pay(11_000L))
+				.isInstanceOf(IllegalArgumentException.class);
+	}
 }

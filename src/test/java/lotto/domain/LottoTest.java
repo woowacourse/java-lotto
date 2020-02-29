@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * 선택한 로또 하나를 테스트하는 클래스
@@ -85,6 +86,13 @@ public class LottoTest {
 				LottoNumber.of(44),
 				LottoNumber.of(45)));
 		assertThat(lotto).isEqualTo(expected);
+	}
+
+	@ParameterizedTest
+	@DisplayName("로또 숫자를 콤마 단위로 구분한 문자열로 받아 생성한다")
+	@ValueSource(strings = {"1, 2, 3, 4, 5, 6", "1,2,3,4,5,6", "  1, 2, 3,4,    5,  6   "})
+	void ofComma(String lottoNumbers) {
+		assertThat(Lotto.ofComma(lottoNumbers)).isInstanceOf(Lotto.class);
 	}
 
 	@Test
