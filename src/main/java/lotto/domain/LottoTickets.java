@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
@@ -9,18 +11,18 @@ public class LottoTickets {
 	private final List<LottoTicket> lottoTickets;
 
 	public LottoTickets(final List<LottoTicket> lottoTickets) {
-		this.lottoTickets = lottoTickets;
+		this.lottoTickets = new ArrayList<>(lottoTickets);
 	}
 
 	public Ranks getRanksBy(WinningNumbers winningNumbers) {
 		return new Ranks(
 			lottoTickets.stream()
-			.map(getRank(winningNumbers))
-			.collect(Collectors.toList())
+				.map(getRank(winningNumbers))
+				.collect(Collectors.toList())
 		);
 	}
 
-	private static Function<LottoTicket, Rank> getRank(WinningNumbers winningNumbers) {
+	private Function<LottoTicket, Rank> getRank(WinningNumbers winningNumbers) {
 		return lottoTicket -> Rank.of(
 			lottoTicket.getMatchCount(winningNumbers),
 			lottoTicket.isBonusNotMatch(winningNumbers)
@@ -31,10 +33,14 @@ public class LottoTickets {
 		return lottoTickets.size();
 	}
 
-	public List<String> getTicketLogs() {
-		return lottoTickets.stream()
-			.map(LottoTicket::toString)
-			.collect(Collectors.toList());
+	public List<LottoTicket> tickets() {
+		return Collections.unmodifiableList(lottoTickets);
+	}
+
+	public LottoTickets add(LottoTickets others) {
+		List<LottoTicket> result = new ArrayList<>(this.lottoTickets);
+		result.addAll(others.lottoTickets);
+		return new LottoTickets(result);
 	}
 
 	@Override
@@ -46,9 +52,9 @@ public class LottoTickets {
 		LottoTickets that = (LottoTickets)o;
 		return Objects.equals(lottoTickets, that.lottoTickets);
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoTickets);
 	}
-
 }

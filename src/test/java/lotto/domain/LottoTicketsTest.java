@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTicketsTest {
@@ -16,21 +17,22 @@ class LottoTicketsTest {
 	@BeforeEach
 	void init() {
 		lottoNumbers = Arrays.asList(
-			new LottoNumber(1),
-			new LottoNumber(2),
-			new LottoNumber(3),
-			new LottoNumber(4),
-			new LottoNumber(5),
-			new LottoNumber(6)
+			new LottoNumber("1"),
+			new LottoNumber("2"),
+			new LottoNumber("3"),
+			new LottoNumber("4"),
+			new LottoNumber("5"),
+			new LottoNumber("6")
 		);
 	}
 
+	@DisplayName("1등, getRanks 테스트")
 	@Test
 	void checkGetRanksByWhenFirstState() {
 		List<Rank> values = new ArrayList<>();
 		values.add(Rank.FIRST);
 
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		List<LottoTicket> tickets = new ArrayList<>();
 		tickets.add(lottoTicket);
 		LottoTickets lottoTickets = new LottoTickets(tickets);
@@ -42,9 +44,10 @@ class LottoTicketsTest {
 		assertEquals(expected, actual);
 	}
 
+	@DisplayName("size 테스트")
 	@Test
 	void checkSize() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		List<LottoTicket> tickets = new ArrayList<>();
 		tickets.add(lottoTicket);
 		tickets.add(lottoTicket);
@@ -56,16 +59,36 @@ class LottoTicketsTest {
 		assertEquals(expected, actual);
 	}
 
+	@DisplayName("getter 테스트")
 	@Test
-	void checkGetTicketLogs() {
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+	void checkGetTickets() {
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 		List<LottoTicket> tickets = new ArrayList<>();
 		tickets.add(lottoTicket);
 		LottoTickets lottoTickets = new LottoTickets(tickets);
 
-		List<String> expected = Collections.singletonList("[1, 2, 3, 4, 5, 6]");
-		List<String> actual = lottoTickets.getTicketLogs();
+		List<LottoTicket> expected = Collections.singletonList(lottoTicket);
+		List<LottoTicket> actual = lottoTickets.tickets();
 
+		assertEquals(expected, actual);
+	}
+
+	@DisplayName("add 테스트 (방어적 복사)")
+	@Test
+	void checkAdd() {
+		LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
+		List<LottoTicket> tickets = new ArrayList<>();
+		tickets.add(lottoTicket);
+		LottoTickets lottoTickets = new LottoTickets(tickets);
+
+		LottoTicket lottoTicket2 = LottoTicket.of(lottoNumbers);
+		List<LottoTicket> tickets2 = new ArrayList<>();
+		tickets2.add(lottoTicket2);
+		LottoTickets lottoTickets2 = new LottoTickets(tickets);
+
+		tickets.add(lottoTicket2);
+		LottoTickets expected = new LottoTickets(tickets);
+		LottoTickets actual = lottoTickets.add(lottoTickets2);
 		assertEquals(expected, actual);
 	}
 }

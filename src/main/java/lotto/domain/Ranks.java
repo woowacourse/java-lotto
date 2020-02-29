@@ -24,14 +24,14 @@ public class Ranks {
 			.collect(Collectors.toList());
 	}
 
-	private static Predicate<Rank> hasPrize() {
+	private Predicate<Rank> hasPrize() {
 		return rank -> !rank.equals(Rank.NONE);
 	}
 
 	public double getTotalProfitComparedTo(Money inputMoney) {
 		return (double)ranks.stream()
 			.mapToLong(Rank::getAmount)
-			.sum() / inputMoney.getLottoMoneyValue();
+			.sum() / inputMoney.getMoney();
 	}
 
 	@Override

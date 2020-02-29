@@ -6,15 +6,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class RanksTest {
+	@DisplayName("Ranks 개수 테스트")
 	@Test
 	void checkGetCountOfWhenGivenSameRanks() {
 		Ranks ranks = new Ranks(Arrays.asList(Rank.SECOND, Rank.SECOND));
 		assertThat(ranks.getCountOf(Rank.SECOND)).isEqualTo(2);
 	}
 
+	@DisplayName("수익 계산 테스트")
 	@Test
 	void checkGetTotalProfit() {
 		Money money = new Money("10000");
@@ -25,6 +28,7 @@ class RanksTest {
 		assertThat(ranks.getTotalProfitComparedTo(money)).isEqualTo(0.5);
 	}
 
+	@DisplayName("당첨 여부 확인 테스트")
 	@Test
 	void checkGetHavePrizes() {
 		List<Rank> values = new ArrayList<>();
