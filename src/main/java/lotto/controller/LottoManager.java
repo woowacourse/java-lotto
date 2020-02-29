@@ -17,12 +17,15 @@ public class LottoManager {
         Money money = new Money(InputView.inputMoney());
         LottoAmount lottoAmount = purchaseLotto(money);
         Buyer buyer = makeLottos(lottoAmount);
+
         OutputView.printLottoAmount(lottoAmount);
         OutputView.printLottoNumbers(buyer.getLottos());
+
         WinningLotto winningLotto = readWinningLotto();
-        LottoResult lottoResult = analyzeLotto(buyer, winningLotto);
+        LottoResult lottoResult = new LottoResult(buyer, winningLotto);
+
         OutputView.printLottoResults(lottoResult.getLottoResult());
-        OutputView.printRewardRate(analyzeRwardRate(lottoResult, money));
+        OutputView.printRewardRate(lottoResult.calculateRewardRate(money.getMoney()));
     }
 
     private static LottoAmount purchaseLotto(Money money) {
@@ -44,13 +47,5 @@ public class LottoManager {
         int bonusNumber = InputView.inputBonusNumber();
 
         return new WinningLotto(winningLottoNumbers, bonusNumber);
-    }
-
-    private static LottoResult analyzeLotto(Buyer buyer, WinningLotto winningLotto) {
-        return new LottoResult(buyer, winningLotto);
-    }
-
-    private static int analyzeRwardRate(LottoResult lottoResult, Money money) {
-        return lottoResult.calculateRewardRate(money.getMoney());
     }
 }
