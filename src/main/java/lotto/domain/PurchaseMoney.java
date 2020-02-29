@@ -7,14 +7,14 @@ package lotto.domain;
  * @author K.S.KIM
  * @since 2020/02/19
  */
-public class LottoPurchaseMoney {
+public class PurchaseMoney {
 	private static final long MONEY_UNIT = 1_000;
 	private static final String INVALID_PURCHASE_MONEY_MESSAGE = "잘못된 구입 금액을 입력하셨습니다.";
 	private static final String CAN_NOT_PAYABLE_MESSAGE = "지불할 수 없는 금액입니다.";
 
 	private long lottoMoney;
 
-	public LottoPurchaseMoney(long lottoMoney) {
+	public PurchaseMoney(long lottoMoney) {
 		validate(lottoMoney);
 		this.lottoMoney = lottoMoney;
 	}
@@ -34,7 +34,11 @@ public class LottoPurchaseMoney {
 	}
 
 	public boolean canPayable(long amount) {
-		return lottoMoney - amount >= 0;
+		return lottoMoney >= amount;
+	}
+
+	public boolean canNotPayable(long amount) {
+		return lottoMoney < amount;
 	}
 
 	public void pay(long amount) {

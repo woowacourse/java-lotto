@@ -1,11 +1,11 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * 여러 개의 로또를 가지는 클래스
@@ -24,10 +24,10 @@ public class LottoTicket {
 		this.lottoTicket = Collections.unmodifiableList(lottoTicket);
 	}
 
-	public static LottoTicket concat(LottoTicket... tickets) {
-		return Stream.of(tickets)
-				.flatMap(ticket -> ticket.lottoTicket.stream())
-				.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
+	public LottoTicket concat(LottoTicket concatTargetTicket) {
+		List<Lotto> concatenatedLottoTicket = new ArrayList<>(this.lottoTicket);
+		concatenatedLottoTicket.addAll(concatTargetTicket.lottoTicket);
+		return new LottoTicket(concatenatedLottoTicket);
 	}
 
 	private void validate(List<Lotto> lottos) {

@@ -15,15 +15,15 @@ import java.util.stream.Collectors;
 public class AutoLottoTicketFactory implements LottoGeneratable {
 	private final Random random;
 
-	public AutoLottoTicketFactory(Random random) {
-		this.random = random;
+	public AutoLottoTicketFactory() {
+		this.random = new Random();
 	}
 
 	@Override
-	public LottoTicket generate(LottoPurchaseMoney lottoPurchaseMoney) {
+	public LottoTicket generate(PurchaseMoney purchaseMoney) {
 		List<Lotto> lottos = new ArrayList<>();
-		while (lottoPurchaseMoney.canPayable(LOTTO_PRICE)) {
-			lottoPurchaseMoney.pay(LOTTO_PRICE);
+		while (purchaseMoney.canPayable(LOTTO_PRICE)) {
+			purchaseMoney.pay(LOTTO_PRICE);
 			lottos.add(generate());
 		}
 		return new LottoTicket(lottos);

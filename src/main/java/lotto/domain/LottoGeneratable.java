@@ -8,7 +8,7 @@ package lotto.domain;
  * @since 2020/02/19
  */
 public interface LottoGeneratable {
-	public static final long LOTTO_PRICE = 1_000;
+	long LOTTO_PRICE = 1_000;
 
-	LottoTicket generate(LottoPurchaseMoney lottoPurchaseMoney);
+	LottoTicket generate(PurchaseMoney purchaseMoney);
 }

@@ -18,12 +18,21 @@ public class ManualLottoTicketFactory implements LottoGeneratable {
 	}
 
 	@Override
-	public LottoTicket generate(LottoPurchaseMoney lottoPurchaseMoney) {
+	public LottoTicket generate(PurchaseMoney purchaseMoney) {
 		List<Lotto> lottoTicket = new ArrayList<>();
 		for (String lottoNumber : lottoTicketNumbers) {
-			lottoPurchaseMoney.pay(LOTTO_PRICE);
+			purchaseMoney.pay(LOTTO_PRICE);
 			lottoTicket.add(Lotto.ofComma(lottoNumber));
 		}
 		return new LottoTicket(lottoTicket);
+	}
+
+	boolean canNotPayable(PurchaseMoney lottoPurchaseMoney) {
+		long purchaseMoney = calculatePurchaseMoney();
+		return lottoPurchaseMoney.canNotPayable(purchaseMoney);
+	}
+
+	private long calculatePurchaseMoney() {
+		return lottoTicketNumbers.size() * LOTTO_PRICE;
 	}
 }
