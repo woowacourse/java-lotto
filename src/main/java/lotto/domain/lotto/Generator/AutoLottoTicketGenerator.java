@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoTicket;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumberCache;
 
@@ -26,11 +25,11 @@ public class AutoLottoTicketGenerator implements LottoTicketGenerator {
 	}
 
 	@Override
-	public LottoTicket generate() {
+	public List<Lotto> generate() {
 		List<Lotto> lottoTicket = new ArrayList<>();
 		for (int i = 0; i < countOfAutoLottoTicket; i++) {
 			lottoTicket.add(createLotto());
 		}
-		return new LottoTicket(lottoTicket);
+		return lottoTicket;
 	}
 }

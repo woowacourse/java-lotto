@@ -2,6 +2,8 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,7 @@ class LottoMachineTest {
 	void buyLottoTicket_ValidCountAndNumbers_CreateLottoTicket() {
 		assertThat(
 			LottoMachine.buyLottoTicket(countOfAllLotto, numberLinesOfManualLotto)).isInstanceOf(
-			LottoTicket.class);
+			ArrayList.class);
 	}
 
 	@DisplayName("전체 로또의 갯수와 수동 로또 번호 목록이 들어오면 자동 로또의 갯수를 반환")

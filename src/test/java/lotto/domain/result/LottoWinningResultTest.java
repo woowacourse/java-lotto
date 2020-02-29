@@ -2,8 +2,10 @@ package lotto.domain.result;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -11,11 +13,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoTicket;
 import lotto.domain.number.LottoNumber;
 
 class LottoWinningResultTest {
-	private static LottoTicket lottoTicket;
+	private static List<Lotto> lottoTicket;
 	private static WinningLotto winningLotto;
 
 	@BeforeAll
@@ -45,7 +46,7 @@ class LottoWinningResultTest {
 				LottoNumber.valueOf(5),
 				LottoNumber.valueOf(6)
 		));
-		lottoTicket = new LottoTicket(Arrays.asList(
+		lottoTicket = new ArrayList<>(Arrays.asList(
 				new Lotto(lottoNumbers),
 				new Lotto(lottoNumbers2)));
 		Lotto lotto = new Lotto(lottoNumbers3);

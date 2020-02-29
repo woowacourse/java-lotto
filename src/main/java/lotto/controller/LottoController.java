@@ -3,11 +3,12 @@ package lotto.controller;
 import static lotto.view.ConsoleInputView.*;
 import static lotto.view.ConsoleOutputView.*;
 
+import java.util.List;
+
 import lotto.domain.LottoMachine;
 import lotto.domain.lotto.CountOfManualLottoTicket;
 import lotto.domain.lotto.Generator.ManualLottoTicketGenerator;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoTicket;
 import lotto.domain.money.LottoPrice;
 import lotto.domain.money.Money;
 import lotto.domain.number.LottoNumber;
@@ -23,7 +24,7 @@ public class LottoController {
 			countOfAllLotto);
 		NumberLinesOfManualLotto numberLinesOfManualLotto = receiveManualLotto(countOfManualLottoTicket);
 
-		LottoTicket lottoTicket = LottoMachine.buyLottoTicket(countOfAllLotto, numberLinesOfManualLotto);
+		List<Lotto> lottoTicket = LottoMachine.buyLottoTicket(countOfAllLotto, numberLinesOfManualLotto);
 		printPurchaseCompleteMessage(countOfManualLottoTicket);
 		printPurchasedLotto(lottoTicket);
 
@@ -43,7 +44,8 @@ public class LottoController {
 	private static WinningLotto receiveWinningLotto() {
 		NumberLinesOfManualLotto numberLinesOfManualLotto = new NumberLinesOfManualLotto();
 		numberLinesOfManualLotto.add(inputWinningLottoNumber());
-		ManualLottoTicketGenerator manualLottoTicketGenerator = new ManualLottoTicketGenerator(numberLinesOfManualLotto);
+		ManualLottoTicketGenerator manualLottoTicketGenerator = new ManualLottoTicketGenerator(
+			numberLinesOfManualLotto);
 
 		Lotto inputWinningLotto = manualLottoTicketGenerator.generate().iterator().next();
 		LottoNumber inputBonusNumber = LottoNumber.valueOf(inputBonusLottoNumber());
