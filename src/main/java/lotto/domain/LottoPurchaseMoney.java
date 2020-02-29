@@ -5,15 +5,12 @@ import lotto.domain.exception.NotEnoughMoneyException;
 
 public class LottoPurchaseMoney {
 	private static final int LOTTO_PRICE = 1_000;
-	private static final int NO_SPEND = 0;
 
 	private final int lottoPurchaseMoney;
-	private int spendMoney;
 
 	public LottoPurchaseMoney(String lottoPurchaseMoney) {
 		validate(lottoPurchaseMoney);
 		this.lottoPurchaseMoney = Integer.parseInt(lottoPurchaseMoney);
-		this.spendMoney = NO_SPEND;
 	}
 
 	private void validate(String lottoPurchaseMoney) {
@@ -38,23 +35,19 @@ public class LottoPurchaseMoney {
 		return Integer.parseInt(lottoPurchaseMoney) < LOTTO_PRICE;
 	}
 
-	public int getRemainingBuyCount() {
-		return (lottoPurchaseMoney - spendMoney) / LOTTO_PRICE;
+	public LottoBuyCount getBuyCount(String manual) {
+		return getBuyCount(Integer.parseInt(manual));
 	}
 
-	public int getBuyCount() {
-		return lottoPurchaseMoney / LOTTO_PRICE;
+	public LottoBuyCount getBuyCount(int manual) {
+		int total = lottoPurchaseMoney / LOTTO_PRICE;
+		if (manual > total) {
+			throw new NotEnoughMoneyException();
+		}
+		return new LottoBuyCount(manual, total - manual);
 	}
 
 	public int getValue() {
 		return lottoPurchaseMoney;
-	}
-
-	public void spend(int lottoCount) {
-		final int price = LOTTO_PRICE * lottoCount;
-		if (spendMoney + price > lottoPurchaseMoney) {
-			throw new NotEnoughMoneyException();
-		}
-		spendMoney += price;
 	}
 }

@@ -18,23 +18,26 @@ public class LottoStore {
 		return new Lotto(shuffledLottoNumbers.subList(0, Lotto.SIZE));
 	}
 
-	private static List<Lotto> buyAuto(LottoBuyCount lottoBuyCount) {
-		return buy(lottoBuyCount, LottoStore::createRandomLotto);
+	private static List<Lotto> buyAuto(int buyCount) {
+		return buy(buyCount, LottoStore::createRandomLotto);
 	}
 
-	private static List<Lotto> buyManual(LottoBuyCount lottoBuyCount, List<String> manual) {
-		return buy(lottoBuyCount, () -> LottoFactory.createLotto(manual.remove(0)));
+	private static List<Lotto> buyManual(int buyCount, List<String> manual) {
+		return buy(buyCount, () -> LottoFactory.createLotto(manual.remove(0)));
 	}
 
-	public static List<Lotto> buyAutoAndManual(LottoBuyCount autoBuyCount, LottoBuyCount manualBuyCount,
-			List<String> manual) {
-		return Stream.concat(buyManual(manualBuyCount, manual).stream(), buyAuto(autoBuyCount).stream())
-				.collect(Collectors.toList());
+	public static List<Lotto> buyAutoAndManual(LottoBuyCount lottoBuyCount, List<String> manual) {
+		return Stream.concat(
+				buyManual(lottoBuyCount.getManual(), manual).stream(),
+				buyAuto(lottoBuyCount.getAuto()).stream()
+		).collect(Collectors.toList());
 	}
 
-	private static List<Lotto> buy(LottoBuyCount lottoBuyCount, Supplier<Lotto> creator) {
+	private static List<Lotto> buy(int buyCount, Supplier<Lotto> creator) {
 		List<Lotto> lottos = new ArrayList<>();
-		lottoBuyCount.forEachRemaining(count -> lottos.add(creator.get()));
+		for (int count = 0; count < buyCount; ++count) {
+			lottos.add(creator.get());
+		}
 		return lottos;
 	}
 }

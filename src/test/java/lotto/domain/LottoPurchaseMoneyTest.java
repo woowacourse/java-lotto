@@ -34,6 +34,7 @@ public class LottoPurchaseMoneyTest {
 	@DisplayName("구입할 수 있는 개수 테스트")
 	void getBuyCount() {
 		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("14000");
-		assertThat(lottoPurchaseMoney.getBuyCount()).isEqualTo(14);
+		LottoBuyCount lottoBuyCount = lottoPurchaseMoney.getBuyCount(0);
+		assertThat(lottoBuyCount.getManual() + lottoBuyCount.getAuto()).isEqualTo(14);
 	}
 }

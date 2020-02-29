@@ -14,9 +14,8 @@ public class LottoStoreTest {
 	@DisplayName("로또 수동 + 자동 구매 테스트")
 	void buyAutoAndManual() {
 		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("5000");
-		LottoBuyCount manualCount = new LottoBuyCount(lottoPurchaseMoney, 2);
-		LottoBuyCount autoCount = new LottoBuyCount(lottoPurchaseMoney);
+		LottoBuyCount lottoBuyCount = lottoPurchaseMoney.getBuyCount(2);
 		List<String> manualLottos = new ArrayList<>(Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7"));
-		assertThat(LottoStore.buyAutoAndManual(autoCount, manualCount, manualLottos).size()).isEqualTo(5);
+		assertThat(LottoStore.buyAutoAndManual(lottoBuyCount, manualLottos).size()).isEqualTo(5);
 	}
 }

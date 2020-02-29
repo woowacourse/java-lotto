@@ -3,16 +3,17 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.domain.exception.NotEnoughMoneyException;
+import lotto.domain.exception.InvalidLottoBuyCountException;
 
 public class LottoBuyCountTest {
-	@Test
-	@DisplayName("금액이 부족한 경우 예외 테스트")
-	void notEnoughMoney() {
-		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney("1000");
-		assertThatExceptionOfType(NotEnoughMoneyException.class).isThrownBy(
-				() -> new LottoBuyCount(lottoPurchaseMoney, 2));
+	@ParameterizedTest
+	@DisplayName("구매 개수가 0 미만인 경우 예외 테스트")
+	@CsvSource(value = {"0,-1", "-1, 0", "-1, -1"})
+	void validate(int manual, int auto) {
+		assertThatExceptionOfType(InvalidLottoBuyCountException.class).isThrownBy(
+				() -> new LottoBuyCount(manual, auto));
 	}
 }
