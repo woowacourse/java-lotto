@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 public class LottoTickets {
 	private final List<SerialLottoNumber> lottoTickets;
 
-	public LottoTickets(List<SerialLottoNumber> lottoTickets) {
+	LottoTickets(List<SerialLottoNumber> lottoTickets) {
 		this.lottoTickets = Collections.unmodifiableList(lottoTickets);
 	}
 
-	public LottoTickets(List<SerialLottoNumber> manualLottoTickets, List<SerialLottoNumber> autoLottoTickets) {
-		this(ListBuilder.merge(manualLottoTickets, autoLottoTickets));
+	public static LottoTickets merge(final LottoTickets manualLottoTickets, final LottoTickets autoLottoTickets) {
+		return new LottoTickets(ListBuilder.merge(manualLottoTickets.lottoTickets, autoLottoTickets.lottoTickets));
 	}
 
 	public List<Rank> findResult(Winning winning) {

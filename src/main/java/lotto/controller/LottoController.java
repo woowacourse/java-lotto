@@ -13,22 +13,11 @@ import lotto.exceptions.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoController {
 	public static void run() {
 		Money purchaseMoney = validPurchaseMoney();
 
-		int manualTicketCount = validManualTicketCount(purchaseMoney);
-		int autoTicketCount = purchaseMoney.totalTicketCount() - manualTicketCount;
-
-		LottoTickets manualLottoTickets = validManualLottoTicket(manualTicketCount);
-		LottoTickets autoLottoTickets = LottoTicketsFactory.of(autoTicketCount, new RandomLottoNumberGenerator());
-		// TODO: autoLottoTicket의 팩토리 메서드 구현과 합치는 메서드 구현
-		LottoTickets lottoTickets = new LottoTickets(createAutoLottoTickets(autoTicketCount));
-		OutputView.printLottoTicketsCount(manualTicketCount, autoTicketCount);
-		OutputView.printLottoTickets(lottoTickets);
+		LottoTickets lottoTickets = createLottoTickets(purchaseMoney);
 
 		Winning winning = validWinning();
 
@@ -44,6 +33,21 @@ public class LottoController {
 			OutputView.printExceptionMessage(e.getMessage());
 			return validPurchaseMoney();
 		}
+	}
+
+	private static LottoTickets createLottoTickets(Money purchaseMoney) {
+		int manualTicketCount = validManualTicketCount(purchaseMoney);
+		int autoTicketCount = purchaseMoney.totalTicketCount() - manualTicketCount;
+
+		LottoTickets manualLottoTickets = validManualLottoTicket(manualTicketCount);
+		LottoTickets autoLottoTickets = LottoTicketsFactory.of(autoTicketCount, new RandomLottoNumberGenerator());
+
+		LottoTickets lottoTickets = LottoTickets.merge(manualLottoTickets, autoLottoTickets);
+
+		OutputView.printLottoTicketsCount(manualTicketCount, autoTicketCount);
+		OutputView.printLottoTickets(lottoTickets);
+
+		return lottoTickets;
 	}
 
 	private static int validManualTicketCount(Money purchaseMoney) {
@@ -64,16 +68,6 @@ public class LottoController {
 			OutputView.printExceptionMessage(e.getMessage());
 			return validManualLottoTicket(manualTicketCount);
 		}
-	}
-
-	private static List<SerialLottoNumber> createAutoLottoTickets(int autoTicketCount) {
-		RandomLottoNumberGenerator randomLottoNumberGenerator = new RandomLottoNumberGenerator();
-		List<SerialLottoNumber> autoLottoTickets = new ArrayList<>();
-
-		for (int i = 0; i < autoTicketCount; i++) {
-			autoLottoTickets.add(SerialLottoNumberFactory.of(randomLottoNumberGenerator));
-		}
-		return autoLottoTickets;
 	}
 
 	private static Winning validWinning() {
