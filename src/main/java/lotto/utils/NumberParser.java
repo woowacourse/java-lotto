@@ -10,7 +10,7 @@ public class NumberParser {
 	private static final String DELIMITER = ",";
 	private static final String NOT_NUMBER_MESSAGE = "숫자만 입력하세요.";
 
-	public static List<Integer> winningNumberParse(String input) {
+	public static List<Integer> lottoNumberParse(String input) {
 		return Stream.of(input.split(DELIMITER))
 			.map(String::trim)
 			.map(NumberParser::parseNumber)

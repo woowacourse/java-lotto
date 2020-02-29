@@ -16,7 +16,7 @@ public class LottoNumberTest {
 	@MethodSource("generateLottoNumber")
 	@DisplayName("로또 넘버 생성 잘되는 테스트")
 	public void initTest(int number) {
-		LottoNumber bonusNumber = new LottoNumber(number);
+		LottoNumber bonusNumber = LottoNumber.of(number);
 		assertThat(bonusNumber).isNotNull();
 	}
 
@@ -30,7 +30,7 @@ public class LottoNumberTest {
 	@MethodSource("generateWrongLottoNumber")
 	@DisplayName("로또 넘버 생성 잘안되는 테스트")
 	public void wrongInitTest(int number) {
-		assertThatThrownBy(() -> new LottoNumber(number))
+		assertThatThrownBy(() -> LottoNumber.of(number))
 			.isInstanceOf(LottoNumberRangeException.class)
 			.hasMessageContaining("로또 번호");
 	}
