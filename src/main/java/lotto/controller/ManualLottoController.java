@@ -22,22 +22,22 @@ public class ManualLottoController {
     }
 
     private static void runWithoutExceptionCatch() {
-        Money money = new Money(InputView.getMoneyForLotto());
-        LottosFactory.validateMoneyIsEnough(money);
+        Money money = getMoney();
         int amountOfManualLottos = getAmountOfManualLottos(money);
+        Lottos lottos = getLottos(money, amountOfManualLottos);
 
-        Lottos lottos = LottosFactory.createLottosManual(
-            money,
-            InputView.getManualLottos(amountOfManualLottos)
-        );
-
-        int amountOfAutoLottos = lottos.getAmountOfLottos() - amountOfManualLottos;
-        OutputView.printPurchasedLottos(amountOfManualLottos, amountOfAutoLottos, lottos);
+        printPurchasedLottos(lottos, amountOfManualLottos);
 
         WinningInformation winningInformation = getWinningInformation();
 
         ResultStatistic result = ResultStatistic.calculate(lottos, winningInformation);
         OutputView.printResultStatistic(result, money);
+    }
+
+    private static Money getMoney() {
+        Money money = new Money(InputView.getMoneyForLotto());
+        LottosFactory.validateMoneyIsEnough(money);
+        return money;
     }
 
     private static int getAmountOfManualLottos(Money money) {
@@ -49,6 +49,18 @@ public class ManualLottoController {
             );
         }
         return amountOfManualLottos;
+    }
+
+    private static Lottos getLottos(Money money, int manualLottosAmount) {
+        return LottosFactory.createLottosManual(
+            money,
+            InputView.getManualLottos(manualLottosAmount)
+        );
+    }
+
+    private static void printPurchasedLottos(Lottos lottos, int amountOfManualLottos) {
+        int amountOfAutoLottos = lottos.getAmountOfLottos() - amountOfManualLottos;
+        OutputView.printPurchasedLottos(amountOfManualLottos, amountOfAutoLottos, lottos);
     }
 
     private static WinningInformation getWinningInformation() {
