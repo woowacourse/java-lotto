@@ -3,13 +3,13 @@ package lotto.controller;
 import static lotto.view.ConsoleInputView.*;
 import static lotto.view.ConsoleOutputView.*;
 
-import lotto.domain.lotto.CountOfManualLottoTicket;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.LottoMachine;
-import lotto.domain.lotto.LottoParser;
+import lotto.domain.lotto.CountOfManualLottoTicket;
+import lotto.domain.lotto.Generator.ManualLottoTicketGenerator;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoTicket;
-import lotto.domain.money.Money;
 import lotto.domain.money.LottoPrice;
+import lotto.domain.money.Money;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.NumberLinesOfManualLotto;
 import lotto.domain.result.LottoWinningResult;
@@ -19,7 +19,8 @@ public class LottoController {
 	public void run() {
 		Money inputMoney = new Money(inputMoney());
 		int countOfAllLotto = LottoPrice.calculateCountOfLotto(inputMoney);
-		CountOfManualLottoTicket countOfManualLottoTicket = new CountOfManualLottoTicket(inputCountOfManualLotto(), countOfAllLotto);
+		CountOfManualLottoTicket countOfManualLottoTicket = new CountOfManualLottoTicket(inputCountOfManualLotto(),
+			countOfAllLotto);
 		NumberLinesOfManualLotto numberLinesOfManualLotto = receiveManualLotto(countOfManualLottoTicket);
 
 		LottoTicket lottoTicket = LottoMachine.buyLottoTicket(countOfAllLotto, numberLinesOfManualLotto);
@@ -40,8 +41,13 @@ public class LottoController {
 	}
 
 	private static WinningLotto receiveWinningLotto() {
-		Lotto inputWinningLotto = new Lotto(LottoParser.parser(inputWinningLottoNumber()));
+		NumberLinesOfManualLotto numberLinesOfManualLotto = new NumberLinesOfManualLotto();
+		numberLinesOfManualLotto.add(inputWinningLottoNumber());
+		ManualLottoTicketGenerator manualLottoTicketGenerator = new ManualLottoTicketGenerator(numberLinesOfManualLotto);
+
+		Lotto inputWinningLotto = manualLottoTicketGenerator.generate().iterator().next();
 		LottoNumber inputBonusNumber = LottoNumber.valueOf(inputBonusLottoNumber());
+
 		return new WinningLotto(inputWinningLotto, inputBonusNumber);
 	}
 }
