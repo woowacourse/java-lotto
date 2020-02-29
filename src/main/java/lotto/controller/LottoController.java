@@ -3,91 +3,49 @@ package lotto.controller;
 import lotto.domain.customer.Customer;
 import lotto.domain.customer.Money;
 import lotto.domain.result.OverallResult;
-import lotto.domain.result.rank.Rank;
-import lotto.domain.ticket.*;
+import lotto.domain.ticket.LottoTicketBundle;
+import lotto.domain.ticket.WinLottoTicket;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.view.dto.*;
+import lotto.view.dto.BettingMoneyDTO;
+import lotto.view.dto.ManualNumbersDTO;
+import lotto.view.dto.NumberOfTicketDTO;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoController {
-    private static final List<LottoMachine> lottoMachines = Arrays.asList(new AutoLottoMachine(), new ManualLottoMachine());
     private LottoService service = new LottoService();
 
     public void run() {
         Customer customer = createCustomer();
 
-        LottoTicketBundle ticketBundle = createLottoTicketBundle(customer);
+        LottoTicketBundle ticketBundle = service.createLottoTicketBundle(customer);
+        OutputView.printPurchaseStatus(service.createPurchaseStatusDTO(customer));
+        OutputView.printLottoTickets(service.convertToLottoTicketDTOS(ticketBundle));
 
-        OutputView.printLottoTickets(convertToLottoTicketDTOS(ticketBundle));
-
-        OutputView.printPurchaseStatus(new PurchaseStatusDTO(customer.getMoney().getNumberOfManualTickets(), customer.getMoney().getNumberOfLeftTickets()));
-
-        WinLottoTicket winLottoTicket = createWinLottoTicket();
+        WinLottoTicket winLottoTicket = service.createWinLottoTicket(InputView.inputWinLottoInfo());
 
         OverallResult overallResult = service.createOverallResult(winLottoTicket, ticketBundle);
-
-        OutputView.printResult(convertToResultDTOS(overallResult), new StatisticsDTO(service.computeAnalysis(overallResult)));
+        OutputView.printResult(service.convertToResultDTOS(overallResult), service.createStatisticsDTO(overallResult));
     }
 
     private Customer createCustomer() {
         Money money = createMoney();
 
-        ManualNumbersDTO manualNumbersDTO = new ManualNumbersDTO(InputView.inputManualNumbers(money.getNumberOfManualTickets()));
+        ManualNumbersDTO manualNumbersDTO = InputView.inputManualNumbers(money.getNumberOfManualTickets());
         List<List<Integer>> manualNumbers = manualNumbersDTO.getManualNumbers();
 
         return new Customer(money, manualNumbers);
     }
 
     private Money createMoney() {
-        BettingMoneyDTO bettingMoney = new BettingMoneyDTO(InputView.inputBettingMoney());
+        BettingMoneyDTO bettingMoney = InputView.inputBettingMoney();
         int amount = bettingMoney.getBettingMoney();
 
-        NumberOfTicketDTO numberOfTicketDTO = new NumberOfTicketDTO(InputView.inputNumberOfManualLotto());
+        NumberOfTicketDTO numberOfTicketDTO = InputView.inputNumberOfManualLotto();
         int numberOfManualTicket = numberOfTicketDTO.getNumberOfTicket();
 
         return new Money(amount, numberOfManualTicket);
-    }
-
-    private LottoTicketBundle createLottoTicketBundle(Customer customer) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-
-        for (LottoMachine machine : lottoMachines) {
-            lottoTickets.addAll(createLottoTickets(machine, customer));
-        }
-
-        return service.createLottoTicketBundle(lottoTickets);
-    }
-
-    private List<LottoTicket> createLottoTickets(LottoMachine machine, Customer customer) {
-        return service.createLottoTickets(machine, customer);
-    }
-
-    private List<LottoTicketDTO> convertToLottoTicketDTOS(LottoTicketBundle lottoTicketBundle) {
-        List<LottoTicketDTO> lottoTicketDTOS = new ArrayList<>();
-
-        for (LottoTicket lottoTicket : lottoTicketBundle.getLottoTickets()) {
-            lottoTicketDTOS.add(new LottoTicketDTO(lottoTicket));
-        }
-
-        return lottoTicketDTOS;
-    }
-
-    private WinLottoTicket createWinLottoTicket() {
-        List<Integer> inputWinNumbers = InputView.inputWinningNumber();
-        int inputBonusNumber = InputView.inputBonusNumber();
-
-        return service.createWinLottoTicket(new WinLottoTicketDTO(inputWinNumbers, inputBonusNumber));
-    }
-
-    private List<ResultDTO> convertToResultDTOS(OverallResult overallResult) {
-        return Arrays.stream(Rank.values())
-                .map(aRank -> new ResultDTO(aRank, overallResult.getNumberOfMatchTickets(aRank)))
-                .collect(Collectors.toList());
     }
 }

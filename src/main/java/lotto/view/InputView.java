@@ -1,6 +1,10 @@
 package lotto.view;
 
 import lotto.exception.ConvertFailException;
+import lotto.view.dto.BettingMoneyDTO;
+import lotto.view.dto.ManualNumbersDTO;
+import lotto.view.dto.NumberOfTicketDTO;
+import lotto.view.dto.WinLottoTicketDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,23 +24,23 @@ public class InputView {
     private static final String INPUT_NUMBER_OF_MANUAL_LOTTO_MESSAGE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_NUMBERS_FOR_MANUAL_LOTTO = "\n수동으로 구매할 번호를 입력해 주세요.";
 
-    public static int inputBettingMoney() {
+    public static BettingMoneyDTO inputBettingMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String bettingMoney = scanner.nextLine();
         isNullOrEmpty(bettingMoney);
 
-        return convertToInteger(bettingMoney);
+        return new BettingMoneyDTO(convertToInteger(bettingMoney));
     }
 
-    public static int inputNumberOfManualLotto() {
+    public static NumberOfTicketDTO inputNumberOfManualLotto() {
         System.out.println(INPUT_NUMBER_OF_MANUAL_LOTTO_MESSAGE);
         String numberOfManualLotto = scanner.nextLine();
         isNullOrEmpty(numberOfManualLotto);
 
-        return convertToInteger(numberOfManualLotto);
+        return new NumberOfTicketDTO(convertToInteger(numberOfManualLotto));
     }
 
-    public static List<List<Integer>> inputManualNumbers(int numberOfManualLotto) {
+    public static ManualNumbersDTO inputManualNumbers(int numberOfManualLotto) {
         System.out.println(INPUT_NUMBERS_FOR_MANUAL_LOTTO);
 
         List<List<Integer>> manualNumbers = new ArrayList<>();
@@ -46,10 +50,16 @@ public class InputView {
             manualNumbers.add(collectNumber(numbers));
         }
 
-        return manualNumbers;
+        return new ManualNumbersDTO(manualNumbers);
     }
 
-    public static List<Integer> inputWinningNumber() {
+    public static WinLottoTicketDTO inputWinLottoInfo() {
+        List<Integer> winNumbers = inputWinningNumber();
+        int bonusNumber = inputBonusNumber();
+        return new WinLottoTicketDTO(winNumbers, bonusNumber);
+    }
+
+    private static List<Integer> inputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String winningNumber = scanner.nextLine();
         isNullOrEmpty(winningNumber);
@@ -57,7 +67,7 @@ public class InputView {
         return collectNumber(winningNumber);
     }
 
-    public static int inputBonusNumber() {
+    private static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         String bonusNumber = scanner.nextLine();
         isNullOrEmpty(bonusNumber);
