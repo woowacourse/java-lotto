@@ -1,12 +1,13 @@
 package lotto.domain.ticket;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
 	private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 갯수가 적절하지 않습니다.";
@@ -27,16 +28,15 @@ public class LottoTicket {
 
 	public static LottoTicket of(String... lottoNumbers) {
 		return Arrays.stream(lottoNumbers)
-			.map(String::trim)
 			.mapToInt(Integer::parseInt)
 			.mapToObj(LottoBall::valueOf)
-			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));
+			.collect(collectingAndThen(toSet(), LottoTicket::new));
 	}
 
 	public static LottoTicket of(int... lottoNumbers) {
 		return Arrays.stream(lottoNumbers)
 			.mapToObj(LottoBall::valueOf)
-			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoTicket::new));
+			.collect(collectingAndThen(toSet(), LottoTicket::new));
 	}
 
 	public boolean contains(LottoBall lottoBall) {

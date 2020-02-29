@@ -19,8 +19,7 @@ public class LottoController {
 		Money money = Money.valueOf(InputView.inputMoney());
 		PurchaseLottoCount purchaseCount = createPurchaseCount(money);
 		LottoTickets lottoTickets = createLottoTickets(purchaseCount);
-		OutputView.printLottoCount(purchaseCount);
-		OutputView.printLottos(lottoTickets);
+		OutputView.printPurchaseLottos(purchaseCount, lottoTickets);
 		WinningLotto winningLotto = createWinningLotto();
 		WinningResult winningResult = winningLotto.calculateResult(lottoTickets);
 		OutputView.printStatistics(winningResult);

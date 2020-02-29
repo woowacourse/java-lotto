@@ -25,8 +25,8 @@ public final class LottoCount {
 		return new LottoCount(lottoCount);
 	}
 
-	public LottoCount minus(LottoCount otherLottoCount) {
-		return LottoCount.valueOf(this.lottoCount - otherLottoCount.lottoCount);
+	public LottoCount minus(LottoCount other) {
+		return LottoCount.valueOf(this.lottoCount - other.lottoCount);
 	}
 
 	boolean isNonFullCount(int currentCount) {
@@ -34,10 +34,6 @@ public final class LottoCount {
 			throw new IllegalArgumentException(INVALID_CURRENT_COUNT_VALUE_EXCEPTION_MESSAGE);
 		}
 		return lottoCount > currentCount;
-	}
-
-	boolean isNonRightCount(int lottoCount) {
-		return this.lottoCount != lottoCount;
 	}
 
 	public boolean isLessThan(LottoCount otherLottoCount) {

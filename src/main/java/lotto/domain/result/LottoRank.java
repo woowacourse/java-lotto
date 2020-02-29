@@ -41,12 +41,8 @@ public enum LottoRank {
 		return true;
 	}
 
-	public boolean isMissing() {
-		return this == MISSING;
-	}
-
-	Money calculateTotalMoney(long count) {
-		return prize.multiply(count);
+	Money calculateTotalMoney(long multiplier) {
+		return prize.multiply(multiplier);
 	}
 
 	public int getMatchCount() {

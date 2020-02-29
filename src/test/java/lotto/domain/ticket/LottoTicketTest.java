@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.util.StringUtil;
+import lotto.util.StringSplitUtil;
 
 public class LottoTicketTest {
 	@DisplayName("로또 여섯개 볼 안받았을 경우 예외 테스트")
@@ -45,7 +45,7 @@ public class LottoTicketTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"1, 2, 3, 4, 5, ", "1, 2, 3, 4, 5, 6.", "1, 2, 3, 4, 5"})
 	void constructFailByRawNumber(String rawNumbers) {
-		assertThatThrownBy(() -> LottoTicket.of(StringUtil.splitRawLottoNumbers(rawNumbers)))
+		assertThatThrownBy(() -> LottoTicket.of(StringSplitUtil.splitRawLottoNumbers(rawNumbers)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 

@@ -1,34 +1,67 @@
 package lotto.util;
 
+import static java.lang.System.*;
+import static java.util.stream.Collectors.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import lotto.domain.result.LottoRank;
+import lotto.domain.result.WinningResult;
+import lotto.domain.ticket.LottoBall;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 
 public class PrintTextUtil {
-	private static final String ONE_RANK_MATCH_RESULT_MESSAGE = "%s %s %s";
-	private static final String MATCH_COUNT_MESSAGE = "%s개 일치";
-	private static final String BONUS_BALL_MESSAGE = ", 보너스 볼 일치";
-	private static final String TOTAL_PRIZE_AND_COUNT_MESSAGE = " (%s원) - %s개\n";
+	private static final String LOTTO_NUMBERS_DELIMITER = ", ";
+	private static final String LOTTO_NUMBER_PREFIX = "[";
+	private static final String LOTTO_NUMBER_SUFFIX = "]";
+	private static final String LOTTO_TICKETS_DELIMITER = lineSeparator();
+
+	private static final String SINGLE_RANK_STATISTIC_MESSAGE = String.format("%%s개 일치 (%%s원) - %%s개%s",
+		lineSeparator());
+	private static final String SINGLE_RANK_STATISTIC_WITH_BONUS_BALL_MESSAGE = String.format(
+		"%%s개 일치, 보너스 볼 일치 (%%s원) - %%s개%s", lineSeparator());
 	private static final String EMPTY_MESSAGE = "";
 
-	public static String parseLottoMatchingResult(LottoRank lottoRank, Long count) {
-		if (lottoRank.isMissing()) {
+	private PrintTextUtil() {
+	}
+
+	public static String createLottosText(LottoTickets lottoTickets) {
+		return lottoTickets.getLottoTickets().stream()
+			.map(LottoTicket::getLottoBalls)
+			.map(PrintTextUtil::parseLottoTicket)
+			.map(PrintTextUtil::joinLottoTicket)
+			.collect(joining(LOTTO_TICKETS_DELIMITER));
+	}
+
+	private static List<String> parseLottoTicket(Set<LottoBall> lottoBalls) {
+		return lottoBalls.stream()
+			.map(LottoBall::toString)
+			.collect(toList());
+	}
+
+	private static String joinLottoTicket(List<String> lottoTickets) {
+		return lottoTickets.stream()
+			.collect(joining(LOTTO_NUMBERS_DELIMITER, LOTTO_NUMBER_PREFIX, LOTTO_NUMBER_SUFFIX));
+	}
+
+	public static String createLottosStatisticText(WinningResult winningResult) {
+		Map<LottoRank, Long> result = winningResult.getWinningResult();
+		return result.keySet().stream()
+			.map(rank -> parseSingleRankStatistic(rank, result.get(rank)))
+			.collect(joining());
+	}
+
+	private static String parseSingleRankStatistic(LottoRank lottoRank, Long count) {
+		if (lottoRank == LottoRank.MISSING) {
 			return EMPTY_MESSAGE;
 		}
-		return String.format(ONE_RANK_MATCH_RESULT_MESSAGE, getMatchCountMessage(lottoRank),
-			getBonusBallMessageOrEmpty(lottoRank), getTotalPrizeAndCountMessage(lottoRank, count));
-	}
-
-	private static String getMatchCountMessage(LottoRank lottoRank) {
-		return String.format(MATCH_COUNT_MESSAGE, lottoRank.getMatchCount());
-	}
-
-	private static String getBonusBallMessageOrEmpty(LottoRank lottoRank) {
 		if (lottoRank == LottoRank.SECOND) {
-			return BONUS_BALL_MESSAGE;
+			return String.format(SINGLE_RANK_STATISTIC_WITH_BONUS_BALL_MESSAGE, lottoRank.getMatchCount(),
+				lottoRank.getPrize(), count);
 		}
-		return EMPTY_MESSAGE;
-	}
-
-	private static String getTotalPrizeAndCountMessage(LottoRank lottoRank, Long count) {
-		return String.format(TOTAL_PRIZE_AND_COUNT_MESSAGE, lottoRank.getPrize(), count);
+		return String.format(SINGLE_RANK_STATISTIC_MESSAGE, lottoRank.getMatchCount(), lottoRank.getPrize(), count);
 	}
 }

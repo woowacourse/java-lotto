@@ -1,12 +1,13 @@
 package lotto.domain.ticket;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-import lotto.util.StringUtil;
+import lotto.util.StringSplitUtil;
 
 public class ManualLottoTicketsFactory implements LottoTicketsFactory {
 	private final List<String> manualLottoNumbers;
@@ -19,8 +20,8 @@ public class ManualLottoTicketsFactory implements LottoTicketsFactory {
 	@Override
 	public LottoTickets create() {
 		return manualLottoNumbers.stream()
-			.map(StringUtil::splitRawLottoNumbers)
+			.map(StringSplitUtil::splitRawLottoNumbers)
 			.map(LottoTicket::of)
-			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
+			.collect(collectingAndThen(toList(), LottoTickets::new));
 	}
 }

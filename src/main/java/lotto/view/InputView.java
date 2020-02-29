@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import lotto.util.StringUtil;
+import lotto.util.StringSplitUtil;
 
 public class InputView {
 	private static final Scanner SCANNER = new Scanner(System.in);
@@ -23,6 +23,11 @@ public class InputView {
 		return Integer.parseInt(SCANNER.nextLine());
 	}
 
+	public static int inputManualTicketSize() {
+		System.out.println(INPUT_MANUAL_LOTTO_SIZE);
+		return Integer.parseInt(SCANNER.nextLine());
+	}
+
 	public static List<String> inputManualLotto(int count) {
 		List<String> result = new ArrayList<>();
 		if (count < MINIMUM_COUNT_ABLE_TO_INPUT_BY_CONSOLE) {
@@ -37,16 +42,11 @@ public class InputView {
 
 	public static String[] inputWinningLotto() {
 		System.out.println(WINNING_LOTTO_MESSAGE);
-		return StringUtil.splitRawLottoNumbers(SCANNER.nextLine());
+		return StringSplitUtil.splitRawLottoNumbers(SCANNER.nextLine());
 	}
 
 	public static int inputWinningBonusBall() {
 		System.out.println(WINNING_LOTTO_BONUS_BALL_MESSAGE);
-		return Integer.parseInt(SCANNER.nextLine());
-	}
-
-	public static int inputManualTicketSize() {
-		System.out.println(INPUT_MANUAL_LOTTO_SIZE);
 		return Integer.parseInt(SCANNER.nextLine());
 	}
 }
