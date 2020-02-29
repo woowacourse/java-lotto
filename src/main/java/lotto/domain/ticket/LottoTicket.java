@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
@@ -26,10 +27,9 @@ public class LottoTicket {
 		}
 	}
 
-	public static LottoTicket of(String... lottoNumbers) {
-		return Arrays.stream(lottoNumbers)
-			.mapToInt(Integer::parseInt)
-			.mapToObj(LottoBall::valueOf)
+	public static LottoTicket of(List<Integer> lottoNumbers) {
+		return lottoNumbers.stream()
+			.map(LottoBall::valueOf)
 			.collect(collectingAndThen(toSet(), LottoTicket::new));
 	}
 

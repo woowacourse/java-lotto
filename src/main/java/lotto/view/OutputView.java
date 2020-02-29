@@ -13,8 +13,11 @@ public class OutputView {
 	private OutputView() {
 	}
 
-	public static void printPurchaseLottos(PurchaseLottoCount purchaseCount, LottoTickets lottoTickets) {
+	public static void printPurchaseLottoInfo(PurchaseLottoCount purchaseCount) {
 		System.out.printf(LOTTO_COUNT_MESSAGE, purchaseCount.getManualCount(), purchaseCount.calculateAutoCount());
+	}
+
+	public static void printPurchaseLottoTickets(LottoTickets lottoTickets) {
 		System.out.println(PrintTextUtil.createLottosText(lottoTickets));
 	}
 

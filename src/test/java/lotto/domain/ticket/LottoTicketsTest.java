@@ -35,7 +35,7 @@ public class LottoTicketsTest {
 
 	@DisplayName("가지고 있는 로또들을 당첨결과와 비교해 랭크 목록 반환 기능 확인")
 	@ParameterizedTest
-	@MethodSource("getLottoRanksTestSet")
+	@MethodSource("get_winningLotto_and_rankResults_test_set")
 	void name(WinningLotto winningLotto, LottoRank[] ranks) {
 		LottoTickets lottos = new LottoTickets(asList(
 			of(1, 2, 3, 4, 5, 6),
@@ -48,7 +48,7 @@ public class LottoTicketsTest {
 		assertThat(lottos.findLottoRanks(winningLotto)).containsExactlyInAnyOrder(ranks);
 	}
 
-	private static Stream<Arguments> getLottoRanksTestSet() {
+	private static Stream<Arguments> get_winningLotto_and_rankResults_test_set() {
 		return Stream.of(
 			Arguments.of(new WinningLotto(of(1, 2, 3, 4, 5, 6), valueOf(7)),
 				new LottoRank[] {FIRST, FIRST, SECOND, FIFTH, MISSING}),

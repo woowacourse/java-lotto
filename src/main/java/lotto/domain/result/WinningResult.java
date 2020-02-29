@@ -46,7 +46,7 @@ public class WinningResult {
 	private Money calculateTotalMoney() {
 		return winningResult.keySet().stream()
 			.map(winningResult::get)
-			.map(val -> Money.valueOf(Money.UNIT * val))
+			.map(count -> Money.valueOf(Money.UNIT * count))
 			.reduce(Money.valueOf(0), Money::plus);
 	}
 

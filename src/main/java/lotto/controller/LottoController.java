@@ -17,31 +17,27 @@ import lotto.view.OutputView;
 public class LottoController {
 	public void run() {
 		Money money = Money.valueOf(InputView.inputMoney());
-		PurchaseLottoCount purchaseCount = createPurchaseCount(money);
-		LottoTickets lottoTickets = createLottoTickets(purchaseCount);
-		OutputView.printPurchaseLottos(purchaseCount, lottoTickets);
+		LottoTickets lottoTickets = createLottoTickets(money);
+		OutputView.printPurchaseLottoTickets(lottoTickets);
 		WinningLotto winningLotto = createWinningLotto();
 		WinningResult winningResult = winningLotto.calculateResult(lottoTickets);
 		OutputView.printStatistics(winningResult);
 	}
 
-	private PurchaseLottoCount createPurchaseCount(Money money) {
+	private LottoTickets createLottoTickets(Money money) {
 		LottoCount totalCount = money.calculatePurchaseCount();
 		LottoCount manualCount = LottoCount.valueOf(InputView.inputManualTicketSize());
-		return new PurchaseLottoCount(totalCount, manualCount);
-	}
-
-	private LottoTickets createLottoTickets(PurchaseLottoCount purchaseCount) {
-		LottoCount manualCount = purchaseCount.getManualCount();
+		PurchaseLottoCount purchaseCount = new PurchaseLottoCount(totalCount, manualCount);
 		CompositeLottoTicketsFactory compositeLottoFactory = new CompositeLottoTicketsFactory(
-			new ManualLottoTicketsFactory(InputView.inputManualLotto(manualCount.getCount())),
+			new ManualLottoTicketsFactory(InputView.inputManualLottos(manualCount.getCount())),
 			new AutoLottoTicketsFactory(purchaseCount.calculateAutoCount())
 		);
+		OutputView.printPurchaseLottoInfo(purchaseCount);
 		return compositeLottoFactory.create();
 	}
 
 	private WinningLotto createWinningLotto() {
-		LottoTicket winningLottoTicket = LottoTicket.of(InputView.inputWinningLotto());
+		LottoTicket winningLottoTicket = LottoTicket.of(InputView.inputWinningLotto2());
 		LottoBall bonusBall = LottoBall.valueOf(InputView.inputWinningBonusBall());
 		return new WinningLotto(winningLottoTicket, bonusBall);
 	}

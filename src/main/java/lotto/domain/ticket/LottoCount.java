@@ -4,8 +4,7 @@ import java.util.Objects;
 
 public final class LottoCount {
 	private static final int MINIMUM_LOTTO_COUNT = 0;
-	private static final String INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE = String.format("로또 구입 갯수는 최소 %d개 이상",
-		MINIMUM_LOTTO_COUNT);
+	private static final String INVALID_LOTTO_COUNT_EXCEPTION_MESSAGE = "로또 구입 갯수는 최소 %d개 이상";
 	private static final String INVALID_CURRENT_COUNT_VALUE_EXCEPTION_MESSAGE = "유효한 count 인자가 아닙니다.";
 
 	private final int lottoCount;
@@ -29,15 +28,15 @@ public final class LottoCount {
 		return LottoCount.valueOf(this.lottoCount - other.lottoCount);
 	}
 
+	public boolean isLessThan(LottoCount otherLottoCount) {
+		return this.lottoCount < otherLottoCount.lottoCount;
+	}
+
 	boolean isNonFullCount(int currentCount) {
 		if (lottoCount < currentCount) {
 			throw new IllegalArgumentException(INVALID_CURRENT_COUNT_VALUE_EXCEPTION_MESSAGE);
 		}
 		return lottoCount > currentCount;
-	}
-
-	public boolean isLessThan(LottoCount otherLottoCount) {
-		return this.lottoCount < otherLottoCount.lottoCount;
 	}
 
 	public int getCount() {

@@ -10,9 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
-
-import lotto.util.StringSplitUtil;
 
 public class LottoTicketTest {
 	@DisplayName("로또 여섯개 볼 안받았을 경우 예외 테스트")
@@ -23,6 +20,20 @@ public class LottoTicketTest {
 				LottoBall.valueOf(5)));
 		assertThatThrownBy(() -> new LottoTicket(balls)).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("로또 볼의 갯수가 적절하지 않습니다.");
+	}
+
+	@DisplayName("부족한 번호 갯수 정수 인자 입력시 로또 발급 실패")
+	@Test
+	void failToConstructByNotEnoughSizeNumbers() {
+		assertThatThrownBy(() -> LottoTicket.of(1, 2, 3, 4, 5))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("과도한 번호 갯수 정수 인자 입력시 로또 발급 실패")
+	@Test
+	void failToConstructByTooManySizeNumbers() {
+		assertThatThrownBy(() -> LottoTicket.of(1, 2, 3, 4, 5, 6, 7))
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("보내준 볼을 로또에서 가지고 있는지 확인")
@@ -41,54 +52,12 @@ public class LottoTicketTest {
 		assertThat(lottoTicket.countMatchingBall(lottoTicket2)).isEqualTo(4);
 	}
 
-	@DisplayName("부적합한 번호 자열 입력시 로또 발급 실패")
-	@ParameterizedTest
-	@ValueSource(strings = {"1, 2, 3, 4, 5, ", "1, 2, 3, 4, 5, 6.", "1, 2, 3, 4, 5"})
-	void constructFailByRawNumber(String rawNumbers) {
-		assertThatThrownBy(() -> LottoTicket.of(StringSplitUtil.splitRawLottoNumbers(rawNumbers)))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
-
-	@DisplayName("문자열 목록으 로또 발급 기능 테스트")
-	@Test
-	void constructByStrings() {
-		LottoTicket lottoTicket = LottoTicket.of("1", "2", "3", "4", "5", "6");
-		Set<LottoBall> balls = lottoTicket.getLottoBalls();
-		assertThat(balls).contains(LottoBall.valueOf(1), LottoBall.valueOf(2), LottoBall.valueOf(3),
-			LottoBall.valueOf(4), LottoBall
-				.valueOf(5),
-			LottoBall.valueOf(6));
-	}
-
-	@DisplayName("부족한 번호 갯수 정수 인자 입력시 로또 발급 실패")
-	@Test
-	void failToConstructByNotEnoughSizeNumbers() {
-		assertThatThrownBy(() -> LottoTicket.of(1, 2, 3, 4, 5))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
-
-	@DisplayName("과도한 번호 갯수 정수 인자 입력시 로또 발급 실패")
-	@Test
-	void failToConstructByTooManySizeNumbers() {
-		assertThatThrownBy(() -> LottoTicket.of(1, 2, 3, 4, 5, 6, 7))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
-
-	@DisplayName("과도한 번호 갯수 정수 인자 입력시 로또 발급 실패")
-	@Test
-	void failToConstructByDuplicatedNumbers() {
-		assertThatThrownBy(() -> LottoTicket.of(1, 2, 3, 4, 5, 6, 7))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
-
 	@DisplayName("정수형 목록으로 로또 발급 기능 테스트")
 	@Test
 	void constructByInts() {
 		LottoTicket lottoTicket = LottoTicket.of(1, 2, 3, 4, 5, 6);
 		Set<LottoBall> balls = lottoTicket.getLottoBalls();
 		assertThat(balls).contains(LottoBall.valueOf(1), LottoBall.valueOf(2), LottoBall.valueOf(3),
-			LottoBall.valueOf(4), LottoBall
-				.valueOf(5),
-			LottoBall.valueOf(6));
+			LottoBall.valueOf(4), LottoBall.valueOf(5), LottoBall.valueOf(6));
 	}
 }

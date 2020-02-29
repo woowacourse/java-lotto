@@ -7,12 +7,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import lotto.util.StringSplitUtil;
-
 public class ManualLottoTicketsFactory implements LottoTicketsFactory {
-	private final List<String> manualLottoNumbers;
+	private final List<List<Integer>> manualLottoNumbers;
 
-	public ManualLottoTicketsFactory(List<String> manualLottoNumbers) {
+	public ManualLottoTicketsFactory(List<List<Integer>> manualLottoNumbers) {
 		this.manualLottoNumbers = Collections.unmodifiableList(
 			new ArrayList<>(Objects.requireNonNull(manualLottoNumbers)));
 	}
@@ -20,7 +18,6 @@ public class ManualLottoTicketsFactory implements LottoTicketsFactory {
 	@Override
 	public LottoTickets create() {
 		return manualLottoNumbers.stream()
-			.map(StringSplitUtil::splitRawLottoNumbers)
 			.map(LottoTicket::of)
 			.collect(collectingAndThen(toList(), LottoTickets::new));
 	}
