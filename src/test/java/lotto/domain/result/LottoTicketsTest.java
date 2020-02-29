@@ -11,9 +11,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class LottoTicketsTest {
@@ -40,7 +39,7 @@ class LottoTicketsTest {
 
 	@ParameterizedTest
 	@MethodSource("generateWinningInput")
-	void findResults(String winningNumbersInput, int bonusNumberInput, List<Rank> expected) {
+	void findResult(String winningNumbersInput, int bonusNumberInput, List<Rank> ranks) {
 		// given
 		LottoTickets lottoTickets = new LottoTickets(serialLottoNumbers);
 
@@ -49,9 +48,11 @@ class LottoTicketsTest {
 		Winning winning = new Winning(winningNumbers, bonusNumber);
 
 		// when
-		List<Rank> result = lottoTickets.findResult(winning);
+		Map<Rank, Integer> result = lottoTickets.findResult(winning);
 
 		// then
+		Map<Rank, Integer> expected = Arrays.stream(Rank.values())
+				.collect(Collectors.toMap(rank -> rank, rank -> Collections.frequency(ranks, rank)));
 		Assertions.assertThat(result).isEqualTo(expected);
 	}
 

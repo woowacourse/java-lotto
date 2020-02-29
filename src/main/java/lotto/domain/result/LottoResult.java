@@ -2,7 +2,9 @@ package lotto.domain.result;
 
 import lotto.domain.money.Money;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoResult {
@@ -15,12 +17,7 @@ public class LottoResult {
 	}
 
 	public static LottoResult of(Winning winning, LottoTickets lottoTickets) {
-		List<Rank> result = lottoTickets.findResult(winning);
-
-		Map<Rank, Integer> rankToCount = Arrays.stream(Rank.values())
-				.collect(Collectors.toMap(rank -> rank, rank -> Collections.frequency(result, rank)));
-
-		return new LottoResult(rankToCount);
+		return new LottoResult(lottoTickets.findResult(winning));
 	}
 
 	public double calculateProfitRate(Money money) {

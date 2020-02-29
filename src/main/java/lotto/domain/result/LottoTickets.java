@@ -3,15 +3,13 @@ package lotto.domain.result;
 import lotto.domain.number.SerialLottoNumber;
 import lotto.util.ListBuilder;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
 	private final List<SerialLottoNumber> lottoTickets;
 
-	LottoTickets(List<SerialLottoNumber> lottoTickets) {
+	LottoTickets(final List<SerialLottoNumber> lottoTickets) {
 		this.lottoTickets = Collections.unmodifiableList(lottoTickets);
 	}
 
@@ -19,10 +17,13 @@ public class LottoTickets {
 		return new LottoTickets(ListBuilder.merge(manualLottoTickets.lottoTickets, autoLottoTickets.lottoTickets));
 	}
 
-	public List<Rank> findResult(Winning winning) {
-		return lottoTickets.stream()
+	public Map<Rank, Integer> findResult(Winning winning) {
+		List<Rank> ranks = lottoTickets.stream()
 				.map(winning::findMatchingRank)
-				.collect(Collectors.toUnmodifiableList());
+				.collect(Collectors.toList());
+
+		return Arrays.stream(Rank.values())
+				.collect(Collectors.toUnmodifiableMap(rank -> rank, rank -> Collections.frequency(ranks, rank)));
 	}
 
 	public List<SerialLottoNumber> getLottoTickets() {
