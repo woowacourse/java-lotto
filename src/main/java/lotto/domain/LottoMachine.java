@@ -12,7 +12,7 @@ public class LottoMachine {
 	private static LottoTicket allLottoTicket;
 	private static int countOfAutoLottoTicket;
 
-	public LottoMachine() {
+	static {
 		allLottoTicket = new LottoTicket();
 		countOfAutoLottoTicket = DEFAULT_COUNT;
 	}
