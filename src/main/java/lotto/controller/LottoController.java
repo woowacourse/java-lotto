@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
@@ -35,7 +34,7 @@ public class LottoController {
 		try {
 			LottoCount lottoCount = readLottoCount(readMoney());
 			OutputView.printLottoCount(LottoCountDto.from(lottoCount));
-			return new Lottos(makeLottos(lottoCount));
+			return new Lottos(lottoMachine.makeLottos(lottoCount, readAllManualLottoNumbersBy(lottoCount)));
 		} catch (IllegalArgumentException e) {
 			OutputView.printExceptionMessage(e);
 			return buyLottos();
@@ -71,17 +70,13 @@ public class LottoController {
 		}
 	}
 
-	private static List<Lotto> makeLottos(LottoCount lottoCount) {
-		List<Lotto> lottos = new ArrayList<>();
+	private static List<LottoNumbers> readAllManualLottoNumbersBy(LottoCount lottoCount) {
 		List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
 
 		for (int i = 1; i <= lottoCount.getManualLottoCount(); i++) {
 			manualLottoNumbers.add(readManualLottoNumbers(i));
 		}
-
-		lottos.addAll(lottoMachine.makeManualLottos(manualLottoNumbers));
-		lottos.addAll(lottoMachine.makeAutoLottos(lottoCount.getAutoLottoCount()));
-		return lottos;
+		return manualLottoNumbers;
 	}
 
 	private static LottoNumbers readManualLottoNumbers(int lottoIndex) {
