@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import lotto.domain.result.LottoRank;
-import lotto.domain.result.TotalResult;
+import lotto.domain.result.WinningResult;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.PurchaseLottoCount;
@@ -37,18 +37,18 @@ public class OutputView {
 		System.out.println(stringBuffer);
 	}
 
-	public static void printStatistics(TotalResult totalResult) {
+	public static void printStatistics(WinningResult winningResult) {
 		printResultIntro();
-		printMatchingResult(totalResult);
-		printProfitsResult(totalResult);
+		printMatchingResult(winningResult);
+		printProfitsResult(winningResult);
 	}
 
 	private static void printResultIntro() {
 		System.out.println(STATISTICS_MESSAGE);
 	}
 
-	private static void printMatchingResult(TotalResult totalResult) {
-		Map<LottoRank, Long> result = totalResult.getWinningResult();
+	private static void printMatchingResult(WinningResult winningResult) {
+		Map<LottoRank, Long> result = winningResult.getWinningResult();
 		Set<LottoRank> lottoRanks = result.keySet();
 
 		for (LottoRank lottoRank : lottoRanks) {
@@ -61,8 +61,8 @@ public class OutputView {
 		System.out.print(oneLineMatchingResult);
 	}
 
-	private static void printProfitsResult(TotalResult totalResult) {
-		System.out.printf(TOTAL_PROFIT_MESSAGE, totalResult.getProfitRate());
+	private static void printProfitsResult(WinningResult winningResult) {
+		System.out.printf(TOTAL_PROFIT_MESSAGE, winningResult.calculateProfitRate());
 	}
 
 	public static void printExceptionMessage(String message) {

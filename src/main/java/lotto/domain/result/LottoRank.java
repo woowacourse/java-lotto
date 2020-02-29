@@ -14,12 +14,12 @@ public enum LottoRank {
 	FIRST(6, false, Money.valueOf(2_000_000_000));
 
 	private final int matchCount;
-	private final boolean hasToHaveBonusBall;
+	private final boolean hasBonusBall;
 	private final Money prize;
 
-	LottoRank(int matchCount, boolean hasToHaveBonusBall, Money prize) {
+	LottoRank(int matchCount, boolean hasBonusBall, Money prize) {
 		this.matchCount = matchCount;
-		this.hasToHaveBonusBall = hasToHaveBonusBall;
+		this.hasBonusBall = hasBonusBall;
 		this.prize = Objects.requireNonNull(prize);
 	}
 
@@ -36,13 +36,13 @@ public enum LottoRank {
 
 	private boolean hasRightBonusCondition(boolean hasBonusBall) {
 		if (this == SECOND || this == THIRD) {
-			return this.hasToHaveBonusBall == hasBonusBall;
+			return this.hasBonusBall == hasBonusBall;
 		}
 		return true;
 	}
 
-	boolean isPrizingRank() {
-		return this != MISSING;
+	public boolean isMissing() {
+		return this == MISSING;
 	}
 
 	Money calculateTotalMoney(long count) {

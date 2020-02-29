@@ -21,7 +21,6 @@ public class WinningResult {
 
 	private Map<LottoRank, Long> initializeRankResult(List<LottoRank> lottoRanks) {
 		Map<LottoRank, Long> result = lottoRanks.stream()
-			.filter(LottoRank::isPrizingRank)
 			.collect(Collectors.groupingBy(Function.identity(), TreeMap::new, Collectors.counting()));
 		putRankResultIfAbsent(result);
 		return Collections.unmodifiableMap(result);
@@ -29,13 +28,25 @@ public class WinningResult {
 
 	private void putRankResultIfAbsent(Map<LottoRank, Long> result) {
 		Arrays.stream(LottoRank.values())
-			.filter(LottoRank::isPrizingRank)
 			.forEach(rank -> result.putIfAbsent(rank, 0L));
 	}
 
-	public Money calculateTotalMoney() {
+	public long calculateProfitRate() {
+		Money totalPrize = calculateTotalPrize();
+		Money totalMoney = calculateTotalMoney();
+		return totalPrize.calculateProfitRate(totalMoney);
+	}
+
+	private Money calculateTotalPrize() {
 		return winningResult.keySet().stream()
 			.map(rank -> rank.calculateTotalMoney(winningResult.get(rank)))
+			.reduce(Money.valueOf(0), Money::plus);
+	}
+
+	private Money calculateTotalMoney() {
+		return winningResult.keySet().stream()
+			.map(winningResult::get)
+			.map(val -> Money.valueOf(Money.UNIT * val))
 			.reduce(Money.valueOf(0), Money::plus);
 	}
 

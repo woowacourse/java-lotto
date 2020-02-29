@@ -7,9 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class MoneyTest {
-	@DisplayName("1_000원 단위의 금액이 아닌 경우 예외 발생 검증")
+	@DisplayName("최솟값 보다 작은 값으로 돈 객체 생성시 예외 발생 검증")
 	@ParameterizedTest
-	@ValueSource(ints = {1_001, 999, 10_010, -10, -1_000})
+	@ValueSource(ints = {-1_001, -999, -10_010, -10, -1_000})
 	void validDivideByThousand(int money) {
 		assertThatThrownBy(() -> Money.valueOf(money))
 			.isInstanceOf(IllegalArgumentException.class);

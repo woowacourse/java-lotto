@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.ticket.Money;
+
 public class WinningResultTest {
 	private WinningResult result;
 
@@ -25,10 +27,11 @@ public class WinningResultTest {
 		result = new WinningResult(list);
 	}
 
-	@DisplayName("당첨 결과에 포함되어있는 총 삼금 계산 확인")
+	@DisplayName("당첨 정보를 통해 수익률 계산 테스트")
 	@Test
-	void calculateTotalPrize() {
-		long expected = (2_000_000_000L + 5_000L + 50_000L) * 10L;
-		assertThat(result.calculateTotalMoney()).extracting("money").isEqualTo(expected);
+	void calculateProfitsRate() {
+		long expected = (2_000_000_000L + 5_000L + 50_000L) * 10L * 100 / (32 * Money.UNIT);
+		assertThat(result.calculateProfitRate()).isEqualTo(expected);
 	}
+
 }

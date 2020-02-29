@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoBallTest {
-	@DisplayName("로또 생성 범위 외 숫자 가져오면 예외 발생 확")
+	@DisplayName("로또 생성 범위 외 숫자 가져오면 예외 발생 확인")
 	@ParameterizedTest
 	@ValueSource(ints = {0, 46})
 	void getBallOutOfRangeTest(int number) {

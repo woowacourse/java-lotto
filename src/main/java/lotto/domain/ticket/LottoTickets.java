@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lotto.domain.result.LottoRank;
 import lotto.domain.result.WinningLotto;
@@ -25,6 +26,12 @@ public class LottoTickets implements Iterable<LottoTicket> {
 		return lottoTickets.stream()
 			.map(winningLotto::calculateRank)
 			.collect(Collectors.toList());
+	}
+
+	public LottoTickets concat(LottoTickets other) {
+		return Stream.of(lottoTickets, other.lottoTickets)
+			.flatMap(List::stream)
+			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
 	}
 
 	@Override

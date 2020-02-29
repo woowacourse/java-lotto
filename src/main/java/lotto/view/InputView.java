@@ -25,9 +25,10 @@ public class InputView {
 
 	public static List<String> inputManualLotto(int count) {
 		List<String> result = new ArrayList<>();
-		if (count >= MINIMUM_COUNT_ABLE_TO_INPUT_BY_CONSOLE) {
-			System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
+		if (count < MINIMUM_COUNT_ABLE_TO_INPUT_BY_CONSOLE) {
+			return result;
 		}
+		System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
 		for (int i = 0; i < count; i++) {
 			result.add(SCANNER.nextLine());
 		}
