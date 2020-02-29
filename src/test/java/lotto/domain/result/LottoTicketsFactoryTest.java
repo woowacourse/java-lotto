@@ -2,6 +2,7 @@ package lotto.domain.result;
 
 import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.number.SerialLottoNumberFactory;
+import lotto.domain.random.MockLottoNumberGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +23,20 @@ public class LottoTicketsFactoryTest {
 		// then
 		Assertions.assertThat(result).isEqualTo(LottoTicketsFactory.of(input));
 
+	}
+
+	@Test
+	void createByRandom() {
+		// given
+		int input = 3;
+		MockLottoNumberGenerator given = new MockLottoNumberGenerator();
+
+		// when
+		LottoTickets result = LottoTicketsFactory.of(input, given);
+
+		// then
+		String mockTicket = "1,2,3,4,5,6";
+		LottoTickets expected = LottoTicketsFactory.of(Arrays.asList(mockTicket, mockTicket, mockTicket));
+		Assertions.assertThat(result).isEqualTo(expected);
 	}
 }

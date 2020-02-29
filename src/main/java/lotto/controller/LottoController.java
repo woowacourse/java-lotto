@@ -24,6 +24,7 @@ public class LottoController {
 		int autoTicketCount = purchaseMoney.totalTicketCount() - manualTicketCount;
 
 		LottoTickets manualLottoTickets = validManualLottoTicket(manualTicketCount);
+		LottoTickets autoLottoTickets = LottoTicketsFactory.of(autoTicketCount, new RandomLottoNumberGenerator());
 		// TODO: autoLottoTicket의 팩토리 메서드 구현과 합치는 메서드 구현
 		LottoTickets lottoTickets = new LottoTickets(createAutoLottoTickets(autoTicketCount));
 		OutputView.printLottoTicketsCount(manualTicketCount, autoTicketCount);
