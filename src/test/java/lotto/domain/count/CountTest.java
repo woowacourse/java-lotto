@@ -22,7 +22,7 @@ public class CountTest {
 
     @Test
     void testNegativeTotalCount() {
-        assertThatThrownBy(() -> new Count(-1, 0))
+        assertThatThrownBy(() -> new Count(-1, -1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -30,9 +30,5 @@ public class CountTest {
     void testNegativeManualCount() {
         assertThatThrownBy(() -> new Count(1, -1))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    public static Count getCountFixture() {
-        return new Count(10, 1);
     }
 }

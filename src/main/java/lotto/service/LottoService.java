@@ -6,10 +6,15 @@ import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.money.LottoMoney;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.Rank;
 import lotto.parser.GameParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,8 +32,14 @@ public class LottoService {
         return new Count(lottoMoney.getLottoPurchaseCounts(), manualCount);
     }
 
-    public LottoTickets createManualLottoTickets(List<String> lottoTicketInput) {
-        List<LottoTicket> lottoTickets = lottoTicketInput.stream()
+    public LottoTickets createLottoTickets(List<String> lottoTicketInputs, Count count) {
+        LottoTickets manualLottoTickets = createManualLottoTickets(lottoTicketInputs);
+        LottoTickets autoLottoTickets = createAutoLottoTickets(count);
+        return LottoTickets.createFrom(manualLottoTickets, autoLottoTickets);
+    }
+
+    private LottoTickets createManualLottoTickets(List<String> lottoTicketInputs) {
+        List<LottoTicket> lottoTickets = lottoTicketInputs.stream()
                 .map(gameParser::parseInputToNumbers)
                 .map(LottoFactory::publishLottoTicketFrom)
                 .collect(Collectors.toList());
@@ -36,7 +47,7 @@ public class LottoService {
         return new LottoTickets(lottoTickets);
     }
 
-    public LottoTickets createAutoLottoTickets(Count count) {
+    private LottoTickets createAutoLottoTickets(Count count) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < count.getAutoCounts(); i++) {
             lottoTickets.add(LottoFactory.publishLottoTicketOfRandom());
@@ -48,5 +59,17 @@ public class LottoService {
         Set<Integer> winningLottoNumbers = gameParser.parseInputToNumbers(inputNumbers);
         Integer bonusNumber = gameParser.parseInputToInt(inputBonusNumber);
         return LottoFactory.publishWinningLotto(winningLottoNumbers, bonusNumber);
+    }
+
+    public LottoResult createLottoResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        Map<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
+        Arrays.stream(Rank.values()).forEach(rank -> rankMap.put(rank, 0));
+
+        lottoTickets.getLottoTickets()
+                .stream()
+                .map(winningLotto::getRank)
+                .forEach(rank -> rankMap.computeIfPresent(rank, (key, value) -> value + 1));
+
+        return new LottoResult(rankMap);
     }
 }

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
@@ -17,6 +18,15 @@ class LottoNumberTest {
     void createLottoNumber() {
         int expected = 3;
         LottoNumber lottoNumber = new LottoNumber(expected);
+        assertThat(lottoNumber).isEqualTo(lottoNumber);
+    }
+
+    @Test
+    @DisplayName("같은 숫자로 생성한 LottoNumber는 같은 LottoNumber")
+    void equals() {
+        int expected = 4;
+        LottoNumber lottoNumber = new LottoNumber(expected);
+        assertThat(lottoNumber).isNotEqualTo(null);
     }
 
     @ParameterizedTest

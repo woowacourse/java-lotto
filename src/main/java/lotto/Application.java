@@ -19,9 +19,12 @@ public class Application {
         LottoMoney lottoMoney = createLottoMoney();
         Count count = createCount(lottoMoney);
         LottoTickets lottoTickets = createLottoTickets(count);
+
         OutputView.printLottoTickets(lottoTickets);
+
         WinningLotto winningLotto = createWinningLotto();
-        LottoResult lottoResult = lottoTickets.getLottoResults(winningLotto);
+        LottoResult lottoResult = createLottoResult(lottoTickets, winningLotto);
+
         OutputView.printLottoResult(lottoResult);
         OutputView.printProfit(lottoResult, lottoMoney);
     }
@@ -37,10 +40,8 @@ public class Application {
     }
 
     private static LottoTickets createLottoTickets(Count count) {
-        List<String> lottoTicketDtoInput = InputView.inputManualNumber(count);
-        LottoTickets manualLottoTickets = lottoService.createManualLottoTickets(lottoTicketDtoInput);
-        LottoTickets autoLottoTickets = lottoService.createAutoLottoTickets(count);
-        return LottoTickets.createFrom(manualLottoTickets, autoLottoTickets);
+        List<String> lottoTicketDtoInputs = InputView.inputManualNumber(count.getManualCounts());
+        return lottoService.createLottoTickets(lottoTicketDtoInputs, count);
     }
 
     private static WinningLotto createWinningLotto() {
@@ -48,5 +49,9 @@ public class Application {
         String bonusNumber = InputView.inputBonusNumber();
         return lottoService.createWinningLotto(inputNumbers, bonusNumber);
 
+    }
+
+    private static LottoResult createLottoResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        return lottoService.createLottoResult(lottoTickets, winningLotto);
     }
 }
