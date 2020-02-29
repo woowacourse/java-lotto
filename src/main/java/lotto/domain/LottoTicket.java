@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class LottoTicket {
     private static final int COUNT_FOR_SECOND_RANK = 5;
     private static final int LOTTO_SIZE = 6;
+    private static final String DELIMITER = ",";
 
     private final List<LottoNumber> numbers;
 
@@ -56,7 +57,7 @@ public class LottoTicket {
     }
 
     private static List<LottoNumber> generateSixNumbersFromInput(String inputForNumbers) {
-        return Arrays.stream(inputForNumbers.split(","))
+        return Arrays.stream(inputForNumbers.split(DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
