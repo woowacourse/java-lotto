@@ -20,11 +20,11 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets ofAutoLottoTickets(int randomTicketCount) {
-        List<LottoTicket> randomLottoTicket = Stream.generate(LottoTickets::createAutoLottoTicket)
-                .limit(randomTicketCount)
+    public static LottoTickets ofAutoLottoTickets(int autoTicketCount) {
+        List<LottoTicket> autoLottoTicket = Stream.generate(LottoTickets::createAutoLottoTicket)
+                .limit(autoTicketCount)
                 .collect(toList());
-        return new LottoTickets(randomLottoTicket);
+        return new LottoTickets(autoLottoTicket);
     }
 
     private static LottoTicket createAutoLottoTicket() {
@@ -45,10 +45,10 @@ public class LottoTickets {
         return new LottoTickets(manualLottoTicket);
     }
 
-    public static LottoTickets join(LottoTickets manualLottoTickets, LottoTickets randomLottoTickets) {
+    public static LottoTickets join(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
         List<LottoTicket> allLottoTickets = new ArrayList<>();
         allLottoTickets.addAll(manualLottoTickets.lottoTickets);
-        allLottoTickets.addAll(randomLottoTickets.lottoTickets);
+        allLottoTickets.addAll(autoLottoTickets.lottoTickets);
 
         return new LottoTickets(allLottoTickets);
     }
