@@ -7,18 +7,18 @@ import lotto.dto.LottoDtos;
 import java.util.Map;
 
 public class OutputView {
-	public static void printWrongMoneyInput() {
+	public static void printWrongIntegerInput() {
 		System.out.println("금액이 정수가 아닙니다. 다시 입력해주세요.");
 	}
 
-	public static void printLottoCount(int lottoCount) {
-		System.out.println(lottoCount + "개를 구매했습니다.");
+	public static void printLottoCount(int manualLottoCount, int autoLottoCount) {
+		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualLottoCount, autoLottoCount);
 	}
 
 	public static void printLottos(LottoDtos lottoDtos) {
 		for (LottoDto lotto : lottoDtos.getLottoDtos()) {
-            System.out.println(lotto.toString());
-        }
+			System.out.println(lotto.toString());
+		}
 	}
 
 	public static void printWrongBonusNumberInput() {

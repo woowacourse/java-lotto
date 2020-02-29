@@ -24,21 +24,30 @@ public class LottoController {
 
 	private static Lottos buyLottos() {
 		try {
-			LottoCount lottoCount = new LottoCount(readMoney());
-			OutputView.printLottoCount(lottoCount.getLottoCount());
+			LottoCount lottoCount = new LottoCount(readMoney(), readManualLottoCount());
+			OutputView.printLottoCount(lottoCount.getManualLottoCount(), lottoCount.getAutoLottoCount());
 
-			return new Lottos(LottoMachine.getInstance().makeRandomLottos(lottoCount.getLottoCount()));
+			return new Lottos(LottoMachine.getInstance().makeRandomLottos(lottoCount.getTotalLottoCount()));
 		} catch (IllegalArgumentException | LottoCountException | LottoException | LottosException e) {
 			OutputView.printExceptionMessage(e);
 			return buyLottos();
 		}
 	}
 
-	public static int readMoney() {
+	private static int readMoney() {
 		try {
 			return InputUtil.inputMoney();
 		} catch (NumberFormatException | IOException e) {
-			OutputView.printWrongMoneyInput();
+			OutputView.printWrongIntegerInput();
+			return readMoney();
+		}
+	}
+
+	private static int readManualLottoCount() {
+		try {
+			return InputUtil.inputManualLottoCount();
+		} catch (NumberFormatException | IOException e) {
+			OutputView.printWrongIntegerInput();
 			return readMoney();
 		}
 	}
@@ -61,6 +70,7 @@ public class LottoController {
 
 	public static WinningLotto readWinningNumber() {
 		try {
+
 			return new WinningLotto(readLottoNumber(InputUtil.inputLottoNumber()), readBonusNumber());
 		} catch (IllegalArgumentException | LottoException | WinningLottoException | IOException e) {
 			OutputView.printExceptionMessage(e);

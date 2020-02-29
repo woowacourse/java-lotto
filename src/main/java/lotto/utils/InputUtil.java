@@ -12,6 +12,7 @@ public class InputUtil {
 	private static final String EMPTY = "";
 	private static final String SPACE = " ";
 	public static final String INPUT_MONEY = "구매 금액을 입력해 주세요.";
+	public static final String INPUT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
 	public static final String INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
 	public static final String INPUT_BONUS_NUMBER = "보너스 번호를 입력해 주세요.";
 
@@ -22,8 +23,12 @@ public class InputUtil {
 		return Integer.parseInt(bufferedReader.readLine());
 	}
 
+	public static int inputManualLottoCount() throws IOException {
+		System.out.println(INPUT_MANUAL_LOTTO_COUNT);
+		return Integer.parseInt(bufferedReader.readLine());
+	}
+
 	public static List<String> inputLottoNumber() throws IOException {
-		System.out.println(INPUT_WINNING_NUMBER);
 		return Arrays.asList(bufferedReader
 				.readLine()
 				.replace(SPACE, EMPTY)
@@ -34,4 +39,6 @@ public class InputUtil {
 		System.out.println(INPUT_BONUS_NUMBER);
 		return Integer.parseInt(bufferedReader.readLine());
 	}
+
+
 }
