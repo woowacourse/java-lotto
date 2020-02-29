@@ -35,7 +35,7 @@ public class LottoStore {
 
 	private static List<Lotto> buy(int buyCount, Supplier<Lotto> creator) {
 		List<Lotto> lottos = new ArrayList<>();
-		for (int count = 0; count < buyCount; ++count) {
+		for (int i = 0; i < buyCount; ++i) {
 			lottos.add(creator.get());
 		}
 		return lottos;

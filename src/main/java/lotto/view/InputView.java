@@ -30,7 +30,7 @@ public class InputView {
 	public static List<String> inputManualLotto(int manualLottoCount) {
 		List<String> lottos = new ArrayList<>();
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-		for (int count = 0; count < manualLottoCount; ++count) {
+		for (int i = 0; i < manualLottoCount; ++i) {
 			lottos.add(SCANNER.nextLine());
 		}
 		return lottos;
