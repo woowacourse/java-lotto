@@ -24,11 +24,11 @@ public class LottoStore {
 		return new WinningLotto(lotto, bonus);
 	}
 
-	public static List<Lotto> buyManualAndAuto(LottoBuyCount lottoBuyCount, List<String> manual) {
+	public static Lottos buyManualAndAuto(LottoBuyCount lottoBuyCount, List<String> manual) {
 		return Stream.concat(
 				buyManual(lottoBuyCount.getManual(), manual).stream(),
 				buyAuto(lottoBuyCount.getAuto()).stream()
-		).collect(Collectors.toList());
+		).collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 	}
 
 	private static List<Lotto> buyManual(int buyCount, List<String> manual) {

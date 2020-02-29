@@ -14,8 +14,8 @@ public class LottoApplication {
 		LottoPurchaseMoney lottoPurchaseMoney = new LottoPurchaseMoney(InputView.inputPurchaseMoney());
 
 		LottoBuyCount lottoBuyCount = lottoPurchaseMoney.getBuyCount(InputView.inputManualLottoCount());
-		Lottos lottos = new Lottos(
-				LottoStore.buyManualAndAuto(lottoBuyCount, InputView.inputManualLotto(lottoBuyCount.getManual())));
+		Lottos lottos = LottoStore.buyManualAndAuto(lottoBuyCount,
+				InputView.inputManualLotto(lottoBuyCount.getManual()));
 		OutputView.printBuyLottos(lottoBuyCount.getManual(), lottoBuyCount.getAuto(), lottos);
 
 		WinningLotto winningLotto = LottoStore.createWinningLotto(InputView.inputWinningLotto(),
