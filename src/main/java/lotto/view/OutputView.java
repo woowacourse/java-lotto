@@ -36,7 +36,7 @@ public class OutputView {
 		System.out.println("---------");
 		lottoStatistics.getLottoRanksCount()
 				.forEach(OutputView::printRankCount);
-		System.out.println("총 수익률은 " + lottoStatistics.getProfitRate() + "%입니다.");
+		System.out.printf("총 수익률은 %d%%입니다.\n", lottoStatistics.getProfitRate());
 	}
 
 	private static void printRankCount(LottoRank rank, Long count) {
