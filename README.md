@@ -177,4 +177,4 @@
 - [x] LottoController 클래스 내 ticketNumber를 지역 변수로 둬라.
 - [x] WinNumber 클래스의 LottoTicket 상속을 조합으로 변경하라.
 - [x] Payment 클래스의 countAutoTickets() 메서드 명을 변경하라.
-- [ ] LottoTicket 클래스에서 인터페이스를 활용해 자동, 수동 생성 클래스를 생성하라.
+- [x] LottoTicket 클래스에서 자동, 수동 생성 클래스를 나누어 생성하라.

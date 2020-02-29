@@ -10,14 +10,8 @@ public class LottoTickets {
         lottoTickets = new ArrayList<>();
     }
 
-    public void autoTickets(int tryCount) {
-        for (int i = 0; i < tryCount; i++) {
-            lottoTickets.add(new LottoTicket());
-        }
-    }
-
-    public void manualTickets(LottoTicket manualTicket) {
-        lottoTickets.add(manualTicket);
+    public void tickets(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
     }
 
     public List<LottoTicket> getLottoTickets() {

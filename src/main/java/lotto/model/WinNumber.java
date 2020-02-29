@@ -6,7 +6,8 @@ public class WinNumber {
     private LottoTicket winNumbers;
 
     public WinNumber(List<Integer> winningNumbers) {
-        winNumbers = new LottoTicket(winningNumbers);
+        ManualTicket manualTicket = new ManualTicket();
+        winNumbers = manualTicket.createManualTicket(winningNumbers);
         winNumbers.checkLottoLength(winningNumbers);
         for (int number : winningNumbers) {
             winNumbers.checkLottoNumberRange(number);

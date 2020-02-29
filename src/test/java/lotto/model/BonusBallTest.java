@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.exception.NotNumberException;
 import lotto.exception.OverlapWinNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

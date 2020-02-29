@@ -28,11 +28,14 @@ public class LottoController {
         TicketNumber ticketNumber = new TicketNumber(payment.countTickets(), InputView.inputManualCount());
         OutputView.printInputManualTicket();
         for (int i = 0; i < ticketNumber.getManualTicket(); i++) {
-            LottoTicket lottoTicket = new LottoTicket(InputView.inputLottoTicket());
-            lottoTickets.manualTickets(lottoTicket);
+            ManualTicket manualTicket = new ManualTicket();
+            lottoTickets.tickets(manualTicket.createManualTicket(InputView.inputLottoTicket()));
         }
         OutputView.printTicketCount(ticketNumber.getManualTicket(), ticketNumber.getAutoTicket());
-        lottoTickets.autoTickets(ticketNumber.getAutoTicket());
+        for (int i = 0; i < ticketNumber.getAutoTicket(); i++) {
+            AutoTicket autoTicket = new AutoTicket();
+            lottoTickets.tickets(autoTicket.createAutoTicket());
+        }
     }
 
     public void lottoGame() {
