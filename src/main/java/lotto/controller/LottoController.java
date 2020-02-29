@@ -1,7 +1,10 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.exception.LottoCountException;
 import lotto.exception.LottoException;
+import lotto.exception.LottosException;
+import lotto.exception.WinningLottoException;
 import lotto.utils.InputUtil;
 import lotto.view.OutputView;
 
@@ -25,7 +28,7 @@ public class LottoController {
 			OutputView.printLottoCount(lottoCount.getLottoCount());
 
 			return new Lottos(LottoMachine.getInstance().makeRandomLottos(lottoCount.getLottoCount()));
-		} catch (IllegalArgumentException | LottoException e) {
+		} catch (IllegalArgumentException | LottoCountException | LottoException | LottosException e) {
 			OutputView.printExceptionMessage(e);
 			return buyLottos();
 		}
@@ -59,7 +62,7 @@ public class LottoController {
 	public static WinningLotto readWinningNumber() {
 		try {
 			return new WinningLotto(readLottoNumber(InputUtil.inputLottoNumber()), readBonusNumber());
-		} catch (IllegalArgumentException | IOException e) {
+		} catch (IllegalArgumentException | LottoException | WinningLottoException | IOException e) {
 			OutputView.printExceptionMessage(e);
 			return readWinningNumber();
 		}

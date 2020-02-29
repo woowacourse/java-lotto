@@ -1,13 +1,13 @@
 package lotto.domain;
 
 import lotto.dto.LottoDtos;
+import lotto.exception.LottosException;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lottos {
-	public static final String NULL_OR_EMPTY_VALUE_WARNING = "null이나 빈 값이 들어올 수 없습니다.";
 	private final List<Lotto> lottos;
 
 	public Lottos(final List<Lotto> lottos) {
@@ -17,7 +17,7 @@ public class Lottos {
 
 	private void validateNullAndEmpty(List<Lotto> lottos) {
 		if (lottos == null || lottos.isEmpty()) {
-			throw new IllegalArgumentException(NULL_OR_EMPTY_VALUE_WARNING);
+			throw new LottosException();
 		}
 	}
 
