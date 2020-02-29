@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.LottoBuyCount;
-import lotto.domain.LottoFactory;
 import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoStore;
@@ -19,7 +18,7 @@ public class LottoApplication {
 				LottoStore.buyManualAndAuto(lottoBuyCount, InputView.inputManualLotto(lottoBuyCount.getManual())));
 		OutputView.printBuyLottos(lottoBuyCount.getManual(), lottoBuyCount.getAuto(), lottos);
 
-		WinningLotto winningLotto = LottoFactory.createWinningLotto(InputView.inputWinningLotto(),
+		WinningLotto winningLotto = LottoStore.createWinningLotto(InputView.inputWinningLotto(),
 				InputView.inputWinningLottoBonus());
 
 		LottoStatistics lottoStatistics = new LottoStatistics(lottoPurchaseMoney, lottos.match(winningLotto));

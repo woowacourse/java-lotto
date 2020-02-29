@@ -12,10 +12,4 @@ public class LottoFactory {
 				.map(LottoNumber::of)
 				.collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
 	}
-
-	public static WinningLotto createWinningLotto(String lottoInput, String bonusInput) {
-		Lotto lotto = createLotto(lottoInput);
-		LottoNumber bonus = LottoNumber.of(bonusInput);
-		return new WinningLotto(lotto, bonus);
-	}
 }

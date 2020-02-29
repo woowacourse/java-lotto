@@ -18,6 +18,12 @@ public class LottoStore {
 		return new Lotto(shuffledLottoNumbers.subList(0, Lotto.SIZE));
 	}
 
+	public static WinningLotto createWinningLotto(String lottoInput, String bonusInput) {
+		Lotto lotto = LottoFactory.createLotto(lottoInput);
+		LottoNumber bonus = LottoNumber.of(bonusInput);
+		return new WinningLotto(lotto, bonus);
+	}
+
 	public static List<Lotto> buyManualAndAuto(LottoBuyCount lottoBuyCount, List<String> manual) {
 		return Stream.concat(
 				buyManual(lottoBuyCount.getManual(), manual).stream(),

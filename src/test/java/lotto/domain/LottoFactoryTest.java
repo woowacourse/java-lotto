@@ -20,11 +20,4 @@ public class LottoFactoryTest {
 		));
 		assertThat(actual).isEqualTo(expected);
 	}
-
-	@Test
-	void createWinningLotto() {
-		WinningLotto actual = LottoFactory.createWinningLotto("1,2,3,4,5,6", "7");
-		WinningLotto expected = new WinningLotto(LottoFactory.createLotto("1,2,3,4,5,6"), LottoNumber.of(7));
-		assertThat(actual).isEqualTo(expected);
-	}
 }
