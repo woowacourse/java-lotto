@@ -16,7 +16,7 @@ public class LottoTicket {
 
 	private final Set<LottoBall> lottoBalls;
 
-	public LottoTicket(Set<LottoBall> lottoBalls) {
+	LottoTicket(Set<LottoBall> lottoBalls) {
 		validateBallCount(lottoBalls);
 		this.lottoBalls = Collections.unmodifiableSet(new TreeSet<>(Objects.requireNonNull(lottoBalls)));
 	}
@@ -33,7 +33,7 @@ public class LottoTicket {
 			.collect(collectingAndThen(toSet(), LottoTicket::new));
 	}
 
-	public static LottoTicket of(int... lottoNumbers) {
+	static LottoTicket of(int... lottoNumbers) {
 		return Arrays.stream(lottoNumbers)
 			.mapToObj(LottoBall::valueOf)
 			.collect(collectingAndThen(toSet(), LottoTicket::new));

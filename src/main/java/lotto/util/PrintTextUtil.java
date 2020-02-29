@@ -4,7 +4,6 @@ import static java.lang.System.*;
 import static java.util.stream.Collectors.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import lotto.domain.result.LottoRank;
@@ -48,9 +47,8 @@ public class PrintTextUtil {
 	}
 
 	public static String createLottosStatisticText(WinningResult winningResult) {
-		Map<LottoRank, Long> result = winningResult.getWinningResult();
-		return result.keySet().stream()
-			.map(rank -> parseSingleRankStatistic(rank, result.get(rank)))
+		return LottoRank.valuesAscendingOrder().stream()
+			.map(rank -> parseSingleRankStatistic(rank, winningResult.findWinningCount(rank)))
 			.collect(joining());
 	}
 

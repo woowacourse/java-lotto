@@ -57,7 +57,7 @@ public class InputView {
 		try {
 			return Integer.parseInt(inputValue);
 		} catch (NumberFormatException e) {
-			throw new NumberFormatException(ILLEGAL_NUMBER_FORMAT_EXCEPTION_MESSAGE);
+			throw new IllegalInputException(ILLEGAL_NUMBER_FORMAT_EXCEPTION_MESSAGE);
 		}
 	}
 
@@ -68,7 +68,7 @@ public class InputView {
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
 		} catch (NumberFormatException e) {
-			throw new NumberFormatException(ILLEGAL_NUMBER_FORMAT_EXCEPTION_MESSAGE);
+			throw new IllegalInputException(ILLEGAL_NUMBER_FORMAT_EXCEPTION_MESSAGE);
 		}
 	}
 }

@@ -2,6 +2,7 @@ package lotto.domain.result;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +22,7 @@ public class WinningLottoTicketTest {
 
 	@BeforeEach
 	void setup() {
-		lottoTicket = LottoTicket.of(1, 2, 3, 4, 5, 6);
+		lottoTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 	}
 
 	@DisplayName("당첨 번호와 보너스볼 중복시 예외")
@@ -54,8 +55,8 @@ public class WinningLottoTicketTest {
 	@DisplayName("입력받은 로또로부터 당첨 등수 반환 확인")
 	@Test
 	public void calculateRankTest() {
-		WinningLotto winningLotto = new WinningLotto(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoBall.valueOf(10));
-		LottoTicket lottoTicket = LottoTicket.of(1, 2, 3, 11, 12, 13);
+		WinningLotto winningLotto = new WinningLotto(LottoTicket.of(Arrays.asList(1, 2, 3, 11, 12, 13)),
+			LottoBall.valueOf(10));
 
 		LottoRank rank = winningLotto.calculateRank(lottoTicket);
 		assertThat(rank).isEqualTo(LottoRank.FIFTH);

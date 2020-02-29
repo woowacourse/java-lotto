@@ -50,6 +50,10 @@ public class WinningResult {
 			.reduce(Money.valueOf(0), Money::plus);
 	}
 
+	public long findWinningCount(LottoRank rank) {
+		return winningResult.get(rank);
+	}
+
 	public Map<LottoRank, Long> getWinningResult() {
 		return winningResult;
 	}

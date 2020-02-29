@@ -3,9 +3,11 @@ package lotto.domain.result;
 import static lotto.domain.result.LottoRank.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -48,5 +50,12 @@ public class LottoRankTest {
 			Arguments.of(SECOND, 10, 300_000_000L),
 			Arguments.of(FIRST, 10, 20_000_000_000L)
 		);
+	}
+
+	@DisplayName("상금 적은 순서대로 순위 리스트 가져오는 기능 테스트")
+	@Test
+	void getValuesOfRanksInAscendingOrder() {
+		List<LottoRank> lottoRanks = valuesAscendingOrder();
+		assertThat(lottoRanks).containsExactly(MISSING, FIFTH, FOURTH, THIRD, SECOND, FIRST);
 	}
 }

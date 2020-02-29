@@ -45,6 +45,10 @@ public final class Money {
 		return money * PROFIT_PERCENTAGE / lottoPrice.money;
 	}
 
+	public long getMoney() {
+		return money;
+	}
+
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {

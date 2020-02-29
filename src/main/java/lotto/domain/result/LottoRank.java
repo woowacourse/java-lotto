@@ -1,7 +1,11 @@
 package lotto.domain.result;
 
+import static java.util.Comparator.*;
+
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import lotto.domain.ticket.Money;
 
@@ -51,5 +55,11 @@ public enum LottoRank {
 
 	public Money getPrize() {
 		return prize;
+	}
+
+	public static List<LottoRank> valuesAscendingOrder() {
+		return Arrays.stream(values())
+			.sorted(comparing(LottoRank::getPrize, comparingLong(Money::getMoney)))
+			.collect(Collectors.toList());
 	}
 }
