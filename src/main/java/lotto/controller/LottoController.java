@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Count;
+import lotto.domain.LottoBalls;
 import lotto.domain.Money;
 import lotto.exception.UnderLottoUnitMoney;
 import lotto.view.InputView;
@@ -30,16 +31,14 @@ public class LottoController {
     }
 
     private Count generateManualTicketCount(Count allTicketCount){
-        Count manualTicketCount = new Count(InputView.inputManualLottoCount());
-
         try {
+            Count manualTicketCount = new Count(InputView.inputManualLottoCount());
+
             manualTicketCount.validateOverTicketCount(allTicketCount);
             return manualTicketCount;
         }catch (RuntimeException e){
             OutputView.printErrorMessage(e.getMessage());
-            generateManualTicketCount(allTicketCount);
+            return generateManualTicketCount(allTicketCount);
         }
-        return manualTicketCount;
     }
-
 }

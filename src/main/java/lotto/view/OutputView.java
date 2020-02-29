@@ -6,6 +6,6 @@ public class OutputView {
     }
 
     public static void printChangeMoney(String changeMoney){
-        System.out.printf("거스름돈은 %s 입니다.\n",changeMoney);
+        System.out.printf("거스름돈은 %s원 입니다.\n",changeMoney);
     }
 }
