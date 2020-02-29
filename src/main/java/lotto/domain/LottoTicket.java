@@ -59,14 +59,6 @@ public class LottoTicket {
         return new LottoTicket(randomNumbers);
     }
 
-    public static List<LottoTicket> createManualLottoTickets(List<String[]> manualNumbers) {
-        List<LottoTicket> manualTickets = new ArrayList<>();
-        for (String[] manualNumber : manualNumbers) {
-            manualTickets.add(new LottoTicket(manualNumber));
-        }
-        return manualTickets;
-    }
-
     int compare(LottoTicket other) {
         Set<LottoNumber> winnerSet = new HashSet<>(this.lottoTicket);
         Set<LottoNumber> otherSet = new HashSet<>(other.lottoTicket);
