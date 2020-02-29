@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.UnderLottoUnitMoney;
+
 public class Money {
     private static final int ZERO = 0;
     private static final int LOTTO_UNIT = 1000;
@@ -31,12 +33,12 @@ public class Money {
 
     private static void validateLottoUnit(String input) {
         if (Integer.parseInt(input) < LOTTO_UNIT) {
-            throw new IllegalArgumentException("한장도 구매할수 없습니다. 재입력 해주세요");
+            throw new UnderLottoUnitMoney("한장도 구매할수 없습니다. 재입력 해주세요");
         }
     }
 
-    public int changeMoney() {
-        return money % LOTTO_UNIT;
+    public String changeMoney() {
+        return String.valueOf(money % LOTTO_UNIT);
     }
 
     public String generateLottoTicketCount() {
