@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.LottoStoreException;
+import lotto.exception.LottoTicketsException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +36,7 @@ public class LottoTickets {
 
     public static LottoTickets ofManualLottoTickets(int manualTicketCount, List<String> inputsForNumbers) {
         if (manualTicketCount != inputsForNumbers.size()) {
-            throw new LottoStoreException("수동으로 구매할 로또 티켓의 개수와 로또 번호의 개수가 일치하지 않습니다.");
+            throw new LottoTicketsException("수동으로 구매할 로또 티켓의 개수와 로또 번호의 개수가 일치하지 않습니다.");
         }
 
         List<LottoTicket> manualLottoTicket = inputsForNumbers.stream()
