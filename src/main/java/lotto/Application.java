@@ -35,8 +35,6 @@ public class Application {
     private static WinningLotto initWinnerLotto() {
         String winningNumber = InputView.getWinningLottoNumbers();
         String bonusNumber = InputView.getBonusNumber();
-        WinningLotto winningLotto =
-                LottoGenerateManager.createWinningLotto(winningNumber, bonusNumber);
-        return winningLotto;
+        return LottoGenerateManager.createWinningLotto(winningNumber, bonusNumber);
     }
 }
