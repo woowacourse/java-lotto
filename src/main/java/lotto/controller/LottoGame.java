@@ -13,10 +13,8 @@ public class LottoGame {
     public static void main(String[] args) {
         Money purchaseMoney = InputView.inputPurchaseMoney();
         int manualTicketCount = InputView.inputManualLottoTicketCount();
-        int allTicketCount = purchaseMoney.calculateQuotient(Money.ofTicketPrice());
-        int autoTicketCount = allTicketCount - manualTicketCount;
-
-        TicketCountsValidator.validateManualTicketCount(allTicketCount, manualTicketCount);
+        TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, manualTicketCount);
+        int autoTicketCount = ticketCounts.getAutoTicketCount();
 
         List<String> manualLottoNumbers = InputView.inputManualLottoNumbers(manualTicketCount);
 
