@@ -1,23 +1,25 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.exception.LottoCountException;
 import lotto.exception.LottoException;
-import lotto.exception.LottosException;
 import lotto.exception.WinningLottoException;
 import lotto.utils.InputUtil;
 import lotto.view.OutputView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoController {
 	public static void run() {
 		Lottos lottos = buyLottos();
+
 		OutputView.printLottos(lottos.makeLottoDtos());
 		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(readWinningNumber());
+
 		LottoResult lottoResult = new LottoResult(winningPrizes);
+
 		OutputView.printLottoResult(lottoResult.getWinningInformation());
 		OutputView.printEarningRate(lottoResult.calculateEarningRate());
 	}
@@ -25,10 +27,17 @@ public class LottoController {
 	private static Lottos buyLottos() {
 		try {
 			LottoCount lottoCount = new LottoCount(readMoney(), readManualLottoCount());
-			OutputView.printLottoCount(lottoCount.getManualLottoCount(), lottoCount.getAutoLottoCount());
+			List<Lotto> lottos = new ArrayList<>();
 
-			return new Lottos(LottoMachine.getInstance().makeRandomLottos(lottoCount.getTotalLottoCount()));
-		} catch (IllegalArgumentException | LottoCountException | LottoException | LottosException e) {
+			OutputView.printManualInputGuide();
+			for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
+				lottos.add(readLottoNumber(InputUtil.inputLottoNumber()));
+			}
+
+			OutputView.printLottoCount(lottoCount.getManualLottoCount(), lottoCount.getAutoLottoCount());
+			lottos.addAll(LottoMachine.getInstance().makeRandomLottos(lottoCount.getAutoLottoCount()));
+			return new Lottos(lottos);
+		} catch (Exception e) {
 			OutputView.printExceptionMessage(e);
 			return buyLottos();
 		}

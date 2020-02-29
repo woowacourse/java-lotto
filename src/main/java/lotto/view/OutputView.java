@@ -40,4 +40,8 @@ public class OutputView {
 	public static void printEarningRate(double earningRate) {
 		System.out.printf("총 수익률: %.2f%%", earningRate);
 	}
+
+	public static void printManualInputGuide() {
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+	}
 }
