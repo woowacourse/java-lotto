@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Lottos {
+    private static final int LOTTO_PRICE = 1_000;
     private final Set<Lotto> lottos;
 
     public Lottos(Set<Lotto> lottos) {
@@ -18,6 +19,10 @@ public class Lottos {
         Set<Lotto> result = new HashSet<>(this.lottos);
         result.addAll(others.lottos);
         return new Lottos(result);
+    }
+
+    Money toPrice() {
+        return new Money(lottos.size() * LOTTO_PRICE);
     }
 
     @Override

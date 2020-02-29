@@ -15,14 +15,14 @@ public class LottoGame {
         Money manualLottosAmount = InputView.inputManualLottoAmount();
 
         Lottos lottos = purchaseLottos(purchaseAmount, manualLottosAmount);
-        Result result = produceResult(lottos, purchaseAmount);
+        Result result = produceResult(lottos);
         OutputView.printResult(result);
     }
 
-    private Result produceResult(Lottos lottos, Money purchaseMoney) {
+    private Result produceResult(Lottos lottos) {
         WinningLotto winningLotto = InputView.inputWinningLotto();
         WinningRanks winningRanks = compareWithWinningNumbers(lottos, winningLotto);
-        return new Result(winningRanks, purchaseMoney);
+        return new Result(winningRanks, lottos.toPrice());
     }
 
     private WinningRanks compareWithWinningNumbers(Lottos lottos, WinningLotto winningLotto) {
