@@ -12,13 +12,13 @@ public class Count {
         this.ticketCount = Integer.parseInt(ticketCount);
     }
 
-    private static void validatePositiveNumber(String input) {
+    private void validatePositiveNumber(String input) {
         if (Integer.parseInt(input) < ZERO) {
             throw new IllegalArgumentException("음수입니다. 재입력 해주세요");
         }
     }
 
-    private static void validateIntegerNumberFormat(String input) {
+    private void validateIntegerNumberFormat(String input) {
         try {
             Integer.parseInt(input);
         } catch (RuntimeException e) {
@@ -26,12 +26,17 @@ public class Count {
         }
     }
 
+    public void validateOverTicketCount(Count allTicketCount){
+        if(this.ticketCount > allTicketCount.ticketCount){
+            throw new IllegalArgumentException("구매 할 수 있는 티켓을 초과했습니다. 재입력 해주세요.");
+        }
+    }
 
     public int getTicketCount() {
         return ticketCount;
     }
 
-    public void calculateTicketCount(int manualTicketCount){
+    public void calculateAutoTicketCount(int manualTicketCount){
         this.ticketCount -= manualTicketCount;
     }
 }
