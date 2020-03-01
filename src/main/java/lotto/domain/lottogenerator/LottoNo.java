@@ -12,14 +12,14 @@ public class LottoNo implements Comparable<LottoNo> {
 
 	public static Map<Integer, LottoNo> lottoNoBox = new HashMap<>();
 
+	private LottoNo(int number) {
+		this.number = number;
+	}
+
 	static {
 		for (int number = LottoNo.MIN_LOTTO_NO; number <= LottoNo.MAX_LOTTO_NO; number++) {
 			lottoNoBox.put(number, valueOf(number));
 		}
-	}
-
-	private LottoNo(int number) {
-		this.number = number;
 	}
 
 	private static LottoNo valueOf(int number) {
