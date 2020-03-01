@@ -20,7 +20,7 @@ public class LottoFactory {
         return manualLottoTickets;
     }
 
-    public static Lotto createManualLotto(List<String> manualLottoNumbers) {
+    private static Lotto createManualLotto(List<String> manualLottoNumbers) {
         Set<LottoNumber> manualLotto = new HashSet<>();
         for (String manualLottoNumber : manualLottoNumbers) {
             manualLotto.add(LottoNumber.valueOf(manualLottoNumber));
