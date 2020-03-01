@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ManualPurchaseCountTest {
     @Test
-    void validatePositiveNumber_숫자가_음수일_때() {
+    void validatePositiveNumberTest_숫자가_음수일_때() {
         Payment payment = new Payment("1000");
         String negativePurchaseCount = "-1";
         assertThatThrownBy(() -> new ManualPurchaseCount(negativePurchaseCount, payment))
@@ -16,7 +16,7 @@ public class ManualPurchaseCountTest {
     }
 
     @Test
-    void validateLessThanLottoCount_수동_구매량이_총_구매_매수보다_클_때() {
+    void validateLessThanLottoCountTest_수동_구매량이_총_구매_매수보다_클_때() {
         Payment payment = new Payment("10000");
         String invalidPurchaseCount = "11";
         assertThatThrownBy(() -> new ManualPurchaseCount(invalidPurchaseCount, payment))
@@ -25,7 +25,7 @@ public class ManualPurchaseCountTest {
     }
 
     @Test
-    void validateLessThanLottoCount_올바른_구매_수량_일_때() {
+    void validateLessThanLottoCountTest_올바른_구매_수량_일_때() {
         Payment payment = new Payment("12000");
         String validPurchaseCount = "12";
         new ManualPurchaseCount(validPurchaseCount, payment);
