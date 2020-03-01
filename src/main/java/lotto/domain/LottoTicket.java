@@ -23,7 +23,7 @@ public class LottoTicket {
         ValidationUtils.validateIntegerNumberFormat(ticketNumber);
         ValidationUtils.validatePositiveNumber(ticketNumber);
         ValidationUtils.validateDuplicateNumber(ticketNumber);
-        ValidationUtils.validateLottoTicketSize(inputTicketNumber.length());
+        ValidationUtils.validateLottoTicketSize(ticketNumber.length);
 
         this.lottoTicket = Collections.unmodifiableList(
                 Arrays.stream(ticketNumber)

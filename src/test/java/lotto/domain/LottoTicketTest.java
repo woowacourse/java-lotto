@@ -27,4 +27,18 @@ class LottoTicketTest {
         String input = "1,2,3,4,6,46";
         Assertions.assertThatThrownBy(()->new LottoTicket(input)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("수동으로 티켓 생성할 경우 로또볼의 개수 오류 테스트")
+    void throw_validate_lotto_ball_count_test(){
+        String input = "1,2,3,4,5";
+        Assertions.assertThatThrownBy(()->new LottoTicket(input)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("수동으로 티켓 생성할 경우 로또볼의 개수 오류 테스트")
+    void validate_lotto_ball_count_test(){
+        String input = "1,2,3,4,5,6";
+        Assertions.assertThatCode(()->new LottoTicket(input)).doesNotThrowAnyException();
+    }
 }

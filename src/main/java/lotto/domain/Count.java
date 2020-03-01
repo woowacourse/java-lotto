@@ -20,10 +20,10 @@ public class Count {
     }
 
     public int getTicketCount() {
-        return ticketCount;
+        return this.ticketCount;
     }
 
-    public void calculateAutoTicketCount(int manualTicketCount) {
-        this.ticketCount -= manualTicketCount;
+    public void calculateAutoTicketCount(Count manualTicketCount) {
+        this.ticketCount -= manualTicketCount.getTicketCount();
     }
 }
