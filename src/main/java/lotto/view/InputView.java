@@ -1,10 +1,10 @@
 package lotto.view;
 
-import lotto.domain.LottoCount;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static lotto.domain.LottoCount.MIN_MANUAL_LOTTO_COUNT;
 
 public class InputView {
     public static final String LOTTO_NUMBERS_DELIMITER = ",";
@@ -23,13 +23,13 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static List<String[]> requestManualLottoInput(LottoCount lottoCount) {
-        if (lottoCount.hasMinManualLottoCount()) {
+    public static List<String[]> requestManualLottoInput(int manualLottoCount) {
+        if (manualLottoCount == MIN_MANUAL_LOTTO_COUNT) {
             return new ArrayList<>();
         }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String[]> manualLottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount.getManualLottoCountValue(); i++) {
+        for (int i = 0; i < manualLottoCount; i++) {
             String[] lotto = scanner.nextLine().split(LOTTO_NUMBERS_DELIMITER);
             manualLottos.add(lotto);
         }

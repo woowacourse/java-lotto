@@ -5,7 +5,7 @@ import static lotto.util.NumberValidator.validateNullAndEmptyValue;
 import static lotto.util.NumberValidator.validateNumberFormat;
 
 public class LottoCount {
-    private static final int MIN_MANUAL_LOTTO_COUNT = 0;
+    public static final int MIN_MANUAL_LOTTO_COUNT = 0;
 
     private final int lottoCountValue;
     private final int manualLottoCountValue;
@@ -34,10 +34,6 @@ public class LottoCount {
         if (manualLottoCountValue < MIN_MANUAL_LOTTO_COUNT || lottoCount < manualLottoCountValue) {
             throw new RuntimeException(message);
         }
-    }
-
-    public boolean hasMinManualLottoCount() {
-        return manualLottoCountValue == MIN_MANUAL_LOTTO_COUNT;
     }
 
     public int getManualLottoCountValue() {
