@@ -57,13 +57,6 @@ class RankTest {
 
         WinningTicket winningTicket = new WinningTicket(winningTicketInput.getLottoTicket(),bonusBall);
 
-        List<Rank> lottoTicketRank = LottoTickets.getLottoTickets()
-                .stream()
-                .map(lottoTicket->
-                        Rank.determineRank(winningTicket.hitLottoBall(lottoTicket)
-                                ,winningTicket.hitBonusBall(lottoTicket)))
-                .collect(Collectors.toList());
-
-        assertThat(Rank.calculateEachRankCount(lottoTicketRank).get(Rank.FIRST)).isEqualTo(3);
+        assertThat(Rank.calculateEachRankCount(winningTicket).get(Rank.FIRST)).isEqualTo(3);
     }
 }

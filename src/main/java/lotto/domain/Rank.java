@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIFTH(5_000,3,false),
@@ -34,13 +35,32 @@ public enum Rank {
         return rank.hitBonusBall == hitBonusBall;
     }
 
-    public static Map<Rank, Long> calculateEachRankCount(List<Rank> lottoTicketRank) {
+    public static Map<Rank, Long> calculateEachRankCount(WinningTicket winningTicket) {
         Map<Rank, Long> eachRankCount = new HashMap<>();
+        List<Rank> lottoTicketRank = generateTicketRank(winningTicket);
 
         for(Rank r : values()){
-            long rankCount = lottoTicketRank.stream().filter(lottoTicket -> lottoTicket == r).count();
+            long rankCount = lottoTicketRank.stream()
+                    .filter(lottoTicket -> lottoTicket == r && lottoTicket != Rank.NO_RANK)
+                    .count();
             eachRankCount.put(r, rankCount);
         }
         return eachRankCount;
+    }
+
+    private static List<Rank> generateTicketRank(WinningTicket winningTicket){
+        return LottoTickets.getLottoTickets()
+                .stream()
+                .map(lottoTicket-> determineRank(winningTicket.hitLottoBall(lottoTicket)
+                                ,winningTicket.hitBonusBall(lottoTicket)))
+                .collect(Collectors.toList());
+    }
+
+    public long getWinningMoney() {
+        return this.winningMoney;
+    }
+
+    public int getWinningCount() {
+        return this.winningCount;
     }
 }

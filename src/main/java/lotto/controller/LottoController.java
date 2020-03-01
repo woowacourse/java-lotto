@@ -23,9 +23,12 @@ public class LottoController {
         OutputView.printChangeMoney(money.changeMoney());
 
         WinningTicket winningTicket = getWinningTicket();
+
+        OutputView.printEachRankCount(Rank.calculateEachRankCount(winningTicket));
     }
 
     private WinningTicket getWinningTicket() {
+        OutputView.printWinningTicket();
         LottoTicket lottoTicket = generateManualLottoTicket();
 
         try {
@@ -47,7 +50,6 @@ public class LottoController {
     }
 
     private LottoTicket generateManualLottoTicket() {
-        OutputView.printWinningTicket();
         try {
             return new LottoTicket(InputView.inputLottoTicket());
         } catch (RuntimeException e) {
