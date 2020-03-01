@@ -11,14 +11,14 @@ import java.util.List;
 public class LottoController {
     public void play() {
         Money money = generateMoney();
-        Count autoTicketCount = new Count(money.generateLottoTicketCount());
-        Count manualTicketCount = generateManualTicketCount(autoTicketCount);
+        LottoTicketCount autoTicketLottoTicketCount = new LottoTicketCount(money.generateLottoTicketCount());
+        LottoTicketCount manualTicketLottoTicketCount = generateManualTicketCount(autoTicketLottoTicketCount);
 
-        OutputView.printInputManualLottoTicket(manualTicketCount.getTicketCount());
-        for (int i = 0; i < manualTicketCount.getTicketCount(); i++) {
+        OutputView.printInputManualLottoTicket(manualTicketLottoTicketCount.getTicketCount());
+        for (int i = 0; i < manualTicketLottoTicketCount.getTicketCount(); i++) {
             LottoTickets.insertLottoTicket(generateManualLottoTicket());
         }
-        generateAutoTicket(autoTicketCount, manualTicketCount);
+        generateAutoTicket(autoTicketLottoTicketCount, manualTicketLottoTicketCount);
         OutputView.printLottoTicket();
         OutputView.printChangeMoney(money.changeMoney());
 
@@ -56,10 +56,10 @@ public class LottoController {
         }
     }
 
-    private void generateAutoTicket(Count autoTicketCount, Count manualTicketCount) {
-        autoTicketCount.calculateAutoTicketCount(manualTicketCount);
-        OutputView.printLottoTicketCount(manualTicketCount, autoTicketCount);
-        for (int i = 0; i < autoTicketCount.getTicketCount(); i++) {
+    private void generateAutoTicket(LottoTicketCount autoTicketLottoTicketCount, LottoTicketCount manualTicketLottoTicketCount) {
+        autoTicketLottoTicketCount.calculateAutoTicketCount(manualTicketLottoTicketCount);
+        OutputView.printLottoTicketCount(manualTicketLottoTicketCount, autoTicketLottoTicketCount);
+        for (int i = 0; i < autoTicketLottoTicketCount.getTicketCount(); i++) {
             LottoBalls.shuffle();
             LottoTickets.insertLottoTicket(new LottoTicket(LottoBalls.generateLottoTicket()));
         }
@@ -79,15 +79,15 @@ public class LottoController {
         return generateMoney();
     }
 
-    private Count generateManualTicketCount(Count allTicketCount) {
+    private LottoTicketCount generateManualTicketCount(LottoTicketCount allTicketLottoTicketCount) {
         try {
-            Count manualTicketCount = new Count(InputView.inputManualLottoCount());
+            LottoTicketCount manualTicketLottoTicketCount = new LottoTicketCount(InputView.inputManualLottoCount());
 
-            manualTicketCount.validateOverTicketCount(allTicketCount);
-            return manualTicketCount;
+            manualTicketLottoTicketCount.validateOverTicketCount(allTicketLottoTicketCount);
+            return manualTicketLottoTicketCount;
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return generateManualTicketCount(allTicketCount);
+            return generateManualTicketCount(allTicketLottoTicketCount);
         }
     }
 }

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Count;
+import lotto.domain.LottoTicketCount;
 import lotto.domain.LottoBall;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -39,7 +39,7 @@ public class OutputView {
         System.out.printf("거스름돈은 %s원 입니다.\n", changeMoney);
     }
 
-    public static void printLottoTicketCount(Count manualTicket, Count autoTicket){
+    public static void printLottoTicketCount(LottoTicketCount manualTicket, LottoTicketCount autoTicket){
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n"
                 ,manualTicket.getTicketCount(),autoTicket.getTicketCount());
     }

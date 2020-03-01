@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
@@ -37,5 +38,32 @@ class RankTest {
         boolean hitBonus = winningTicket.hitBonusBall(lottoTicket);
 
         assertThat(Rank.determineRank(hitCount,hitBonus)).isEqualTo(winningExpected);
+    }
+
+    @Test
+    @DisplayName("랭크마다 몇명의 사람이 있는지 테스트")
+    void RankCount(){
+        String winningBallInput = "1,2,3,4,5,6";
+        LottoBall bonusBall = new LottoBall("7");
+        LottoTicket winningTicketInput = new LottoTicket(winningBallInput);
+
+        String input1 = "1,2,3,4,5,6";
+        String input2 = "1,2,3,4,5,6";
+        String input3 = "1,2,3,4,5,6";
+
+        LottoTickets.insertLottoTicket(new LottoTicket(input1));
+        LottoTickets.insertLottoTicket(new LottoTicket(input2));
+        LottoTickets.insertLottoTicket(new LottoTicket(input3));
+
+        WinningTicket winningTicket = new WinningTicket(winningTicketInput.getLottoTicket(),bonusBall);
+
+        List<Rank> lottoTicketRank = LottoTickets.getLottoTickets()
+                .stream()
+                .map(lottoTicket->
+                        Rank.determineRank(winningTicket.hitLottoBall(lottoTicket)
+                                ,winningTicket.hitBonusBall(lottoTicket)))
+                .collect(Collectors.toList());
+
+        assertThat(Rank.calculateEachRankCount(lottoTicketRank).get(Rank.FIRST)).isEqualTo(3);
     }
 }

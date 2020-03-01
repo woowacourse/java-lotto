@@ -2,19 +2,19 @@ package lotto.domain;
 
 import lotto.utils.ValidationUtils;
 
-public class Count {
+public class LottoTicketCount {
 
     private int ticketCount;
 
-    public Count(String ticketCount) {
+    public LottoTicketCount(String ticketCount) {
         ValidationUtils.validateIntegerNumberFormat(ticketCount);
         ValidationUtils.validatePositiveNumber(ticketCount);
 
         this.ticketCount = Integer.parseInt(ticketCount);
     }
 
-    public void validateOverTicketCount(Count allTicketCount) {
-        if (this.ticketCount > allTicketCount.ticketCount) {
+    public void validateOverTicketCount(LottoTicketCount allTicketLottoTicketCount) {
+        if (this.ticketCount > allTicketLottoTicketCount.ticketCount) {
             throw new IllegalArgumentException("구매 할 수 있는 티켓을 초과했습니다. 재입력 해주세요.");
         }
     }
@@ -23,7 +23,7 @@ public class Count {
         return this.ticketCount;
     }
 
-    public void calculateAutoTicketCount(Count manualTicketCount) {
-        this.ticketCount -= manualTicketCount.getTicketCount();
+    public void calculateAutoTicketCount(LottoTicketCount manualTicketLottoTicketCount) {
+        this.ticketCount -= manualTicketLottoTicketCount.getTicketCount();
     }
 }

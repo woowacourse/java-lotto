@@ -25,8 +25,22 @@ public enum Rank {
 
     public static Rank determineRank(long hitCount, boolean hitBonusBall){
         return Arrays.stream(values())
-                .filter(rank -> rank.winningCount == hitCount && rank.hitBonusBall == hitBonusBall)
+                .filter(rank -> rank.winningCount == hitCount && isHitBonusBall(hitBonusBall, rank))
                 .findFirst()
                 .orElse(Rank.NO_RANK);
+    }
+
+    private static boolean isHitBonusBall(boolean hitBonusBall, Rank rank) {
+        return rank.hitBonusBall == hitBonusBall;
+    }
+
+    public static Map<Rank, Long> calculateEachRankCount(List<Rank> lottoTicketRank) {
+        Map<Rank, Long> eachRankCount = new HashMap<>();
+
+        for(Rank r : values()){
+            long rankCount = lottoTicketRank.stream().filter(lottoTicket -> lottoTicket == r).count();
+            eachRankCount.put(r, rankCount);
+        }
+        return eachRankCount;
     }
 }
