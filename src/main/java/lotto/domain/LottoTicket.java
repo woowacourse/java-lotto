@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LottoTicket {
     private static final int LOTTO_NUMBER_SIZE = 6;
-    protected final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(final List<LottoNumber> lottoNumbers) {
         validateNumberCount(lottoNumbers);

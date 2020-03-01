@@ -4,12 +4,13 @@ import lotto.domain.errors.ErrorMessage;
 
 import java.util.List;
 
-public class WinningLottoTicket extends LottoTicket {
+public class WinningLottoTicket {
+    private LottoTicket lottoTicket;
     private LottoNumber bonusNumber;
 
     public WinningLottoTicket(final List<LottoNumber> winningNumbers, final LottoNumber bonusNumber) {
-        super(winningNumbers);
-        validateDistinctBonus(super.lottoNumbers, bonusNumber);
+        validateDistinctBonus(winningNumbers, bonusNumber);
+        this.lottoTicket = new LottoTicket(winningNumbers);
         this.bonusNumber = bonusNumber;
     }
 
@@ -37,6 +38,7 @@ public class WinningLottoTicket extends LottoTicket {
     }
 
     private boolean isMatched(final LottoNumber userLottoNumber) {
+        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
         return lottoNumbers.contains(userLottoNumber);
     }
 }
