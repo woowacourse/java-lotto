@@ -35,7 +35,7 @@ class LottoRankTest {
 	@EnumSource(value = LottoRank.class, names = {"SECOND", "THIRD", "FIFTH", "MISS"})
 	void calculateWinningLottoMoneyBy_lottoRankCount_multiplyWinningLottoMoneyByLottoRankCount(LottoRank value) {
 		int lottoRankCount = 3;
-		int winningLottoMoney = value.getWinningLottoMoney();
+		long winningLottoMoney = value.getWinningLottoMoney();
 
 		LottoMoney actual = value.calculateWinningLottoMoneyBy(lottoRankCount);
 

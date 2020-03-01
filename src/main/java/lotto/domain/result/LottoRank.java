@@ -48,7 +48,7 @@ public enum LottoRank {
 		return matchCount.getMatchCount();
 	}
 
-	public int getWinningLottoMoney() {
+	public long getWinningLottoMoney() {
 		return winningLottoMoney.getLottoMoney();
 	}
 

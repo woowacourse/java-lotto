@@ -4,13 +4,12 @@ import java.util.Objects;
 
 public class LottoMoney {
 
-	public static final LottoMoney ZERO = new LottoMoney(0);
+	public static final LottoMoney ZERO = new LottoMoney(0L);
+	private static final long UNIT = 1_000L;
 
-	private static final int UNIT = 1_000;
+	private final long lottoMoney;
 
-	private final int lottoMoney;
-
-	public LottoMoney(int lottoMoney) {
+	public LottoMoney(long lottoMoney) {
 		validate(lottoMoney);
 		this.lottoMoney = lottoMoney;
 	}
@@ -18,7 +17,7 @@ public class LottoMoney {
 	public static LottoMoney valueOf(String inputLottoMoney) {
 		try {
 			validateNullOrEmpty(inputLottoMoney);
-			return new LottoMoney(Integer.parseInt(inputLottoMoney));
+			return new LottoMoney(Long.parseLong(inputLottoMoney));
 		} catch (NumberFormatException e) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.NOT_INTEGER);
 		}
@@ -30,36 +29,36 @@ public class LottoMoney {
 		}
 	}
 
-	private void validate(int lottoMoney) {
+	private void validate(long lottoMoney) {
 		validateNegative(lottoMoney);
 		validateUnit(lottoMoney);
 	}
 
-	private void validateNegative(int lottoMoney) {
-		if (lottoMoney < 0) {
+	private void validateNegative(long lottoMoney) {
+		if (lottoMoney < 0L) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.NEGATIVE);
 		}
 	}
 
-	private void validateUnit(int lottoMoney) {
+	private void validateUnit(long lottoMoney) {
 		if (isDivideByUnit(lottoMoney)) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.INVALID_UNIT);
 		}
 	}
 
-	private boolean isDivideByUnit(int lottoMoney) {
-		return (lottoMoney % UNIT) != 0;
+	private boolean isDivideByUnit(long lottoMoney) {
+		return (lottoMoney % UNIT) != 0L;
 	}
 
 	public PurchasingCount generatePurchasingLottoTicketCount() {
-		return new PurchasingCount(lottoMoney / UNIT);
+		return new PurchasingCount((int)(lottoMoney / UNIT));
 	}
 
 	public LottoMoney addBy(LottoMoney addedLottoMoney) {
 		return new LottoMoney(this.lottoMoney + addedLottoMoney.lottoMoney);
 	}
 
-	public LottoMoney multiplyBy(int operand) {
+	public LottoMoney multiplyBy(long operand) {
 		return new LottoMoney(this.lottoMoney * operand);
 	}
 
@@ -67,10 +66,10 @@ public class LottoMoney {
 		if (inputLottoMoney.lottoMoney == 0) {
 			return 0;
 		}
-		return (this.lottoMoney * 100) / inputLottoMoney.lottoMoney;
+		return (int)((this.lottoMoney * 100) / inputLottoMoney.lottoMoney);
 	}
 
-	public int getLottoMoney() {
+	public long getLottoMoney() {
 		return lottoMoney;
 	}
 

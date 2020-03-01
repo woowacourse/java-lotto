@@ -22,7 +22,7 @@ public class StringUtil {
 
 	public static String generateFormOfLottoRank(LottoRank lottoRank, Long lottoRankCount) {
 		int matchCount = lottoRank.getMatchCount();
-		int winningLottoMoney = lottoRank.getWinningLottoMoney();
+		long winningLottoMoney = lottoRank.getWinningLottoMoney();
 		if (lottoRank.equals(LottoRank.SECOND)) {
 			return String.format(SECOND_WINNING_RANK_MESSAGE, matchCount, winningLottoMoney, lottoRankCount);
 		}
