@@ -14,7 +14,7 @@ public class InputParseUtil {
 		try {
 			return Integer.parseInt(inputValue);
 		} catch (NumberFormatException e) {
-			throw new NumberFormatException(ILLEGAL_NUMBER_FORMAT_EXCEPTION_MESSAGE);
+			throw new IllegalArgumentException(ILLEGAL_NUMBER_FORMAT_EXCEPTION_MESSAGE);
 		}
 	}
 
@@ -25,7 +25,7 @@ public class InputParseUtil {
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
 		} catch (NumberFormatException e) {
-			throw new NumberFormatException(ILLEGAL_NUMBER_FORMAT_EXCEPTION_MESSAGE);
+			throw new IllegalArgumentException(ILLEGAL_NUMBER_FORMAT_EXCEPTION_MESSAGE);
 		}
 	}
 }
