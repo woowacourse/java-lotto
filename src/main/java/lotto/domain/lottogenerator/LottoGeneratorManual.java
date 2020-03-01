@@ -22,7 +22,7 @@ public class LottoGeneratorManual implements LottoGenerator {
 		return lottos;
 	}
 
-	private static List<LottoNo> toLottoNos(String[] winLotto) {
+	public static List<LottoNo> toLottoNos(String[] winLotto) {
 		try {
 			return Arrays.stream(winLotto)
 					.map(Integer::parseInt)
@@ -35,6 +35,9 @@ public class LottoGeneratorManual implements LottoGenerator {
 
 	@Override
 	public List<Lotto> generator(Customer customer) {
+		if (!customer.isUserLottoCountOverZero()) {
+			return new ArrayList<>();
+		}
 		return createManualLotto(customer.getManualLottoNumbers());
 	}
 }

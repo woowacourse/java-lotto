@@ -5,7 +5,7 @@ import lotto.util.StringUtils;
 public class Customer {
 	private static final int LOTTO_PRICE = 1000;
 	private static final int TO_PERCENT_VALUE = 100;
-	private static final int MIN_MANUAL_LOTTO_COUNT = 0;
+	public static final int MIN_MANUAL_LOTTO_COUNT = 0;
 	private static final String ERROR_MESSAGE_MIN_MONEY = "천원 이상의 금액만 가능합니다.";
 	private static final String ERROR_MESSAGE_OVER_COUNT = "구입 가능한 수보다 큰 수를 입력하였습니다.";
 	private static final String ERROR_MESSAGE_NULL_POINT = "입력값이 비어있습니다.";

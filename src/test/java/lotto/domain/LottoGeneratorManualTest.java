@@ -13,9 +13,11 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoGeneratorManualTest {
+	Customer customer = new Customer(5000, 2);
+
+	@DisplayName("2개의 로또 번호 입력시 생성 테스트")
 	@Test
-	void generator() {
-		Customer customer = new Customer(5000, 2);
+	void generator1() {
 		customer.setManualLottoNumbers("1,2,3,4,5,6\n11,12,13,14,15,16");
 
 		List<Lotto> result = new ArrayList<>();
@@ -33,10 +35,20 @@ public class LottoGeneratorManualTest {
 		assertThat(new LottoGeneratorManual().generator(customer)).isEqualTo(result);
 	}
 
+	@DisplayName("공란의 로또 넘버가 입력되었을 경우 생성 테스트 확인")
+	@Test
+	void generator2() {
+		Customer customerManualCountZero = new Customer(4000, 0);
+		customerManualCountZero.setManualLottoNumbers("");
+
+		List<Lotto> result = new ArrayList<>();
+		assertThat(new LottoGeneratorManual().generator(customerManualCountZero))
+				.isEqualTo(result);
+	}
+
 	@DisplayName("수동로또번호 입력시 6개의 숫자가 아닐때")
 	@Test
 	void errorTest1() {
-		Customer customer = new Customer(5000, 2);
 		customer.setManualLottoNumbers("1,2,3,4,5\n11,12,13,14,15,16");
 
 		assertThatThrownBy(() -> new LottoGeneratorManual().generator(customer))
@@ -47,7 +59,6 @@ public class LottoGeneratorManualTest {
 	@DisplayName("수동로또번호 입력시 중복된 숫자가 있을 때")
 	@Test
 	void errorTest2() {
-		Customer customer = new Customer(5000, 2);
 		customer.setManualLottoNumbers("1,2,3,4,5,5\n11,12,13,14,15,16");
 
 		assertThatThrownBy(() -> new LottoGeneratorManual().generator(customer))
@@ -58,7 +69,6 @@ public class LottoGeneratorManualTest {
 	@DisplayName("수동로또번호 입력시 7개의 입력된 숫자 중 중복이 있을 때")
 	@Test
 	void errorTest3() {
-		Customer customer = new Customer(5000, 2);
 		customer.setManualLottoNumbers("1,2,3,4,5,6,6\n11,12,13,14,15,16");
 
 		assertThatThrownBy(() -> new LottoGeneratorManual().generator(customer))

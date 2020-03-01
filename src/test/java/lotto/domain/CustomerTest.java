@@ -3,7 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThatThrownBy;
 
 public class CustomerTest {
 	@DisplayName("1000원 미만의 금액을 입력한 경우")
@@ -50,5 +51,14 @@ public class CustomerTest {
 
 		assertThat(customer.getManualLottoNumbers())
 				.isEqualTo(new String[]{"1,2,3,4,5,6"});
+	}
+
+	@DisplayName("수동로또 셋팅시 공란 입력")
+	@Test
+	void zeroManualLotto() {
+		Customer customerZero = new Customer(5000, 0);
+		customerZero.setManualLottoNumbers("");
+
+		assertThat(customerZero.getManualLottoNumbers()).isEqualTo(new String[]{""});
 	}
 }
