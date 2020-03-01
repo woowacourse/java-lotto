@@ -13,14 +13,14 @@ public class WinningLottoTicket extends LottoTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public static void validateDistinctBonus(final List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
+    public void validateDistinctBonus(final List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
         if (isBonusNumberAlreadyExist(lottoNumbers, bonusNumber)) {
             ErrorMessage nowErrorMessage = ErrorMessage.DUPLICATE_NUMBER;
             throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 
-    private static boolean isBonusNumberAlreadyExist(final List<LottoNumber> lottoNumbers, final LottoNumber inputBonusNumber) {
+    private boolean isBonusNumberAlreadyExist(final List<LottoNumber> lottoNumbers, final LottoNumber inputBonusNumber) {
         return lottoNumbers.stream()
                 .anyMatch(inputBonusNumber::equals);
     }

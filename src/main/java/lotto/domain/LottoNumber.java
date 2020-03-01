@@ -19,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static void validateNumberScope(final int lottoNumber) {
+    public void validateNumberScope(final int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER
                 || lottoNumber > MAX_LOTTO_NUMBER) {
             ErrorMessage nowErrorMessage = ErrorMessage.OVER_SCOPE;

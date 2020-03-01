@@ -16,21 +16,21 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static void validateNumberCount(final List<LottoNumber> lottoNumbers) {
+    public void validateNumberCount(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             ErrorMessage nowErrorMessage = ErrorMessage.NUMBER_COUNT_NOT_SIX;
             throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 
-    public static void validateDistinctNumbers(final List<LottoNumber> inputNumbers) {
+    public void validateDistinctNumbers(final List<LottoNumber> inputNumbers) {
         if (getDistinctSize(inputNumbers) != LOTTO_NUMBER_SIZE) {
             ErrorMessage nowErrorMessage = ErrorMessage.DUPLICATE_NUMBER;
             throw new IllegalArgumentException(nowErrorMessage.getMessage());
         }
     }
 
-    private static long getDistinctSize(final List<LottoNumber> inputNumbers) {
+    private long getDistinctSize(final List<LottoNumber> inputNumbers) {
         return inputNumbers.stream()
                 .mapToInt(LottoNumber::getNumber)
                 .distinct()
