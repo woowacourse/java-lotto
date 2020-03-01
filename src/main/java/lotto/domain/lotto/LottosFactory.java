@@ -24,7 +24,7 @@ public class LottosFactory {
 
 		for (String inputManualLotto : inputManualLottos) {
 			List<LottoNumber> manualLotto = StringUtils.splitIntoLottoNumbers(inputManualLotto);
-			manualLottos.add(LottoFactory.createManualLotto(LottoType.MANUAL_LOTTO, manualLotto));
+			manualLottos.add(LottoFactory.createManualLotto(manualLotto));
 		}
 
 		return new Lottos(manualLottos);
@@ -33,7 +33,7 @@ public class LottosFactory {
 	public static Lottos createAutoLottos(final int amountOfLottos) {
 		List<Lotto> autoLottos = new ArrayList<>();
 		for (int i = 0; i < amountOfLottos; i++) {
-			autoLottos.add(LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO));
+			autoLottos.add(LottoFactory.createAutoLotto());
 		}
 		return new Lottos(autoLottos);
 	}

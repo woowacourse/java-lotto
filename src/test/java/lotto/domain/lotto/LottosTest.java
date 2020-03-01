@@ -24,9 +24,9 @@ public class LottosTest {
 	@Test
 	void Lottos_생성자_올바른_동작_확인() {
 		List<Lotto> inputLottos = Arrays.asList(
-				LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO),
-				LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO),
-				LottoFactory.createAutoLotto(LottoType.AUTO_LOTTO)
+				LottoFactory.createAutoLotto(),
+				LottoFactory.createAutoLotto(),
+				LottoFactory.createAutoLotto()
 		);
 		assertThat(new Lottos(inputLottos)).isInstanceOf(Lottos.class);
 	}

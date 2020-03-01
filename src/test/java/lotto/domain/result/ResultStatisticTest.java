@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoType;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lottonumber.LottoNumber;
@@ -59,9 +58,9 @@ public class ResultStatisticTest {
 				LottoNumber.of(9)
 		);
 		List<Lotto> tempLottos = new ArrayList<>();
-		tempLottos.add(LottoFactory.createManualLotto(LottoType.MANUAL_LOTTO, lottoNumbersFistPrize));
-		tempLottos.add(LottoFactory.createManualLotto(LottoType.MANUAL_LOTTO, lottoNumbersForthPrize));
-		tempLottos.add(LottoFactory.createManualLotto(LottoType.MANUAL_LOTTO, lottoNumbersSixthPrize));
+		tempLottos.add(LottoFactory.createManualLotto(lottoNumbersFistPrize));
+		tempLottos.add(LottoFactory.createManualLotto(lottoNumbersForthPrize));
+		tempLottos.add(LottoFactory.createManualLotto(lottoNumbersSixthPrize));
 		resultStatistic = ResultStatistic.calculate(new Lottos(tempLottos), winningLotto);
 	}
 
