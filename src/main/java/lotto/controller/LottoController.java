@@ -4,7 +4,7 @@ import lotto.domain.result.LottoRanks;
 import lotto.domain.result.WinningLotto;
 import lotto.domain.result.WinningResult;
 import lotto.domain.ticket.AutoLottoTicketsFactory;
-import lotto.domain.ticket.CompositeLottoTicketsFactory;
+import lotto.domain.ticket.LottoTicketsCompositor;
 import lotto.domain.ticket.LottoBall;
 import lotto.domain.ticket.LottoCount;
 import lotto.domain.ticket.LottoTicket;
@@ -30,12 +30,12 @@ public class LottoController {
 		LottoCount totalCount = money.calculatePurchaseCount();
 		LottoCount manualCount = LottoCount.valueOf(InputView.inputManualTicketSize());
 		PurchaseLottoCounts purchaseCounts = new PurchaseLottoCounts(totalCount, manualCount);
-		CompositeLottoTicketsFactory compositeLottoFactory = new CompositeLottoTicketsFactory(
+		LottoTicketsCompositor lottosCompositor = new LottoTicketsCompositor(
 			new ManualLottoTicketsFactory(InputView.inputManualLottos(manualCount.getCount())),
 			new AutoLottoTicketsFactory(purchaseCounts.calculateAutoCount())
 		);
 		OutputView.printPurchaseLottoInfo(purchaseCounts);
-		return compositeLottoFactory.create();
+		return lottosCompositor.composite();
 	}
 
 	private WinningLotto createWinningLotto() {
