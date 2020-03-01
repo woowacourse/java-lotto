@@ -1,19 +1,24 @@
 package lotto.domain;
 
+import lotto.utils.StringUtils;
 import lotto.utils.ValidationUtils;
 
 public class Money {
-    private static final int LOTTO_UNIT = 1000;
 
+    private static final int LOTTO_UNIT = 1000;
     private Long money;
 
 
     public Money(String money) {
+        validateMoney(money);
+
+        this.money = StringUtils.stringToLong(money);
+    }
+
+    private void validateMoney(String money) {
         ValidationUtils.validateIntegerNumberFormat(money);
         ValidationUtils.validatePositiveNumber(money);
         ValidationUtils.validateLottoUnit(money);
-
-        this.money = Long.parseLong(money);
     }
 
     public String changeMoney() {

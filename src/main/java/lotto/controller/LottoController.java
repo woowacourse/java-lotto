@@ -28,8 +28,11 @@ public class LottoController {
         Map<Rank,Long> eachRankCount = Rank.calculateEachRankCount(winningTicket);
         OutputView.printEachRankCount(eachRankCount);
 
-        EarningRate earningRate = new EarningRate();
-        OutputView.printEarningRate(earningRate.calculateEarningRate(eachRankCount,money));
+        try {
+            OutputView.printEarningRate(EarningRate.calculateEarningRate(eachRankCount, money));
+        }catch (RuntimeException e){
+            OutputView.printErrorMessage(e.getMessage());
+        }
     }
 
     private WinningTicket getWinningTicket() {

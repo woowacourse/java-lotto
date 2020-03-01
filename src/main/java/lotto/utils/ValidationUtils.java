@@ -70,4 +70,13 @@ public class ValidationUtils {
             throw new IllegalArgumentException("로또볼의 개수를 확인하세요. 재입력 해주세요");
         }
     }
+
+    public static void validateUnderFlowOrOverFlow(double totalMoney){
+        if(Double.isInfinite(totalMoney)){
+            throw new IllegalArgumentException("OverFlow 발생");
+        }
+        if(Double.isNaN(totalMoney)){
+            throw new IllegalArgumentException("UnderFlow 발생");
+        }
+    }
 }
