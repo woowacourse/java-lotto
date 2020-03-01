@@ -10,8 +10,8 @@ public class LottoNumberFactory {
     private static final int LOTTO_UPPER_BOUND = 45;
 
     static {
-        for (int i = LOTTO_UNDER_BOUND; i <= LOTTO_UPPER_BOUND; i++) {
-            cache.put(i, new LottoNumber(i));
+        for (int number = LOTTO_UNDER_BOUND; number <= LOTTO_UPPER_BOUND; number++) {
+            cache.put(number, new LottoNumber(number));
         }
     }
 

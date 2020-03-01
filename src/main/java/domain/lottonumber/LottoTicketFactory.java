@@ -7,7 +7,7 @@ public class LottoTicketFactory {
         throw new AssertionError();
     }
 
-    public static LottoTicket createLottoNumbers(LottoGenerator lottoGenerator) {
+    public static LottoTicket createLottoTicket(LottoGenerator lottoGenerator) {
         return new LottoTicket(lottoGenerator.create());
     }
 }
