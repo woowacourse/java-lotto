@@ -9,32 +9,36 @@ public class LottoTicket {
 
     private static final int LOTTO_TICKET_SIZE = 6;
 
-    private Set<LottoNumber> lottoTicket;
+    private Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(Set<LottoNumber> lottoTicket) {
-        validateSize(lottoTicket);
-        this.lottoTicket = lottoTicket;
+    private LottoTicket(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateSize(Set<LottoNumber> lottoTicket) {
+    static LottoTicket from(Set<LottoNumber> lottoNumbers) {
+        validateSize(lottoNumbers);
+        return new LottoTicket(lottoNumbers);
+    }
+
+    private static void validateSize(Set<LottoNumber> lottoTicket) {
         if (lottoTicket.size() != LOTTO_TICKET_SIZE) {
-            throw new LottoTicketException();
+            throw new IllegalArgumentException("로또는 중복되지 않는 6개의 숫자로 이뤄져야 합니다.");
         }
     }
 
     public int countMatches(LottoTicket targetTicket) {
-        return (int) lottoTicket.stream()
+        return (int) lottoNumbers.stream()
                 .filter(targetTicket::contains)
                 .count();
     }
 
     boolean contains(LottoNumber lottoNumber) {
-        return lottoTicket.contains(lottoNumber);
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
     public String toString() {
-        List<LottoNumber> lottoTicketList = new ArrayList<>(lottoTicket);
+        List<LottoNumber> lottoTicketList = new ArrayList<>(lottoNumbers);
         Collections.sort(lottoTicketList);
         return lottoTicketList.toString();
     }

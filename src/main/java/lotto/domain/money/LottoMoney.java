@@ -19,13 +19,13 @@ public class LottoMoney {
 
     private void validateNegative(int lottoMoney) {
         if (lottoMoney < ZERO) {
-            throw LottoMoneyException.negative();
+            throw new IllegalArgumentException("로또 구입 금액은 음수일 수 없습니다.");
         }
     }
 
     private void validateLottoMoney(int lottoMoney) {
         if (lottoMoney % MINIMUM_COST != ZERO) {
-            throw LottoMoneyException.notByUnit();
+            throw new IllegalArgumentException("로또 구입 금액은 1000원 단위로 입력해야 합니다.");
         }
     }
 

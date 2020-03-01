@@ -15,13 +15,13 @@ public class Count {
 
     private void validate(int totalCount, int manualCount) {
         if (totalCount < manualCount) {
-            throw CountException.manualCountOverTotal();
+            throw new IllegalArgumentException("총 구매 개수는 수동 구매 개수보다 작을 수 없습니다.");
         }
         if (totalCount < MINIMUM_COUNT) {
-            throw CountException.negativeTotalCount();
+            throw new IllegalArgumentException("총 구매 개수는 음수일 수 없습니다.");
         }
         if (manualCount < MINIMUM_COUNT) {
-            throw CountException.negativeManualCount();
+            throw new IllegalArgumentException("수동 구매 개수는 음수일 수 없습니다.");
         }
     }
 
