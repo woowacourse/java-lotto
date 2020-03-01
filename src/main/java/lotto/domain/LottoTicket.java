@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private final List<LottoBall> lottoTicket;
+    protected final List<LottoBall> lottoTicket;
 
     //자동생성
     public LottoTicket(List<LottoBall> lottoTicket) {
@@ -35,4 +35,5 @@ public class LottoTicket {
     public List<LottoBall> getLottoTicket() {
         return lottoTicket;
     }
+
 }

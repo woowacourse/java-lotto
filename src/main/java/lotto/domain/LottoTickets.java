@@ -17,4 +17,5 @@ public class LottoTickets {
     public static List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(LOTTO_TICKETS);
     }
+
 }

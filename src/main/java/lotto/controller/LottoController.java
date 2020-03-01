@@ -13,17 +13,31 @@ public class LottoController {
 
         OutputView.printInputManualLottoTicket();
         for (int i = 0; i < manualTicketCount.getTicketCount(); i++) {
-            LottoTickets.insertLottoTicket(new LottoTicket(InputView.inputManualLottoTicket()));
+            LottoTickets.insertLottoTicket(generateManualLottoTicket());
         }
+        generateAutoTicket(autoTicketCount, manualTicketCount);
+        OutputView.printLottoTicket();
+        OutputView.printChangeMoney(money.changeMoney());
 
+        OutputView.printWinningTicket();
+    }
+
+    private LottoTicket generateManualLottoTicket() {
+        try {
+            return new LottoTicket(InputView.inputManualLottoTicket());
+        } catch (RuntimeException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return generateManualLottoTicket();
+        }
+    }
+
+    private void generateAutoTicket(Count autoTicketCount, Count manualTicketCount) {
         autoTicketCount.calculateAutoTicketCount(manualTicketCount);
         OutputView.printLottoTicketCount(manualTicketCount, autoTicketCount);
         for (int i = 0; i < autoTicketCount.getTicketCount(); i++) {
             LottoBalls.shuffle();
             LottoTickets.insertLottoTicket(new LottoTicket(LottoBalls.generateLottoTicket()));
         }
-        OutputView.printLottoTicket();
-
     }
 
     private Money generateMoney() {

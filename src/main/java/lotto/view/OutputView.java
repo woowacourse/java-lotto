@@ -1,9 +1,13 @@
 package lotto.view;
 
 import lotto.domain.Count;
+import lotto.domain.LottoBall;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
 import java.sql.SQLOutput;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
     public static void printInputMoney() {
@@ -35,11 +39,21 @@ public class OutputView {
     }
 
     public static void printLottoTicketCount(Count manualTicket, Count autoTicket){
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다."
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n"
                 ,manualTicket.getTicketCount(),autoTicket.getTicketCount());
     }
 
     public static void printLottoTicket(){
-        LottoTickets.getLottoTickets().forEach(lottoTicket -> System.out.println(lottoTicket.getLottoTicket().toString()));
+        List<LottoTicket> lottoTickets = LottoTickets.getLottoTickets();
+
+        lottoTickets.forEach(lottoTicket ->
+                System.out.println(lottoTicket.getLottoTicket()
+                        .stream()
+                        .map(LottoBall::getLottoBall)
+                        .collect(Collectors.toList())));
+    }
+
+    public static void printWinningTicket(){
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 }

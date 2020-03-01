@@ -14,8 +14,8 @@ public class ValidationUtils {
     private static final int MAX_LOTTO_BALL = 45;
     private static final int LOTTO_TICKET_SIZE = 6;
 
-    public static void validateLottoBallOutOfRange(int lottoBall){
-        if(lottoBall< MIN_LOTTO_BALL || lottoBall > MAX_LOTTO_BALL){
+    public static void validateLottoBallOutOfRange(int lottoBall) {
+        if (lottoBall < MIN_LOTTO_BALL || lottoBall > MAX_LOTTO_BALL) {
             throw new IllegalArgumentException("로또 볼의 범위를 벗어났습니다.");
         }
     }
@@ -29,7 +29,7 @@ public class ValidationUtils {
     }
 
     public static void validateIntegerNumberFormat(String[] input) {
-        for(String balls: input) {
+        for (String balls : input) {
             validateIntegerNumberFormat(balls);
         }
     }
@@ -41,7 +41,7 @@ public class ValidationUtils {
     }
 
     public static void validatePositiveNumber(String[] input) {
-        for(String balls: input) {
+        for (String balls : input) {
             validatePositiveNumber(balls);
         }
     }
@@ -52,23 +52,17 @@ public class ValidationUtils {
         }
     }
 
-    public static void validateLottoBallRange(int lottoBall){
-        if(lottoBall< MIN_LOTTO_BALL || lottoBall > MAX_LOTTO_BALL){
-            throw new IllegalArgumentException("로또 볼의 범위를 벗어났습니다.");
-        }
-    }
-
-    public static void validateDuplicateNumber(String[] ticketNumber){
+    public static void validateDuplicateNumber(String[] ticketNumber) {
         Set<String> compare = new HashSet<>(Arrays.asList(ticketNumber));
 
-        if (compare.size() != ticketNumber.length){
+        if (compare.size() != ticketNumber.length) {
             throw new IllegalArgumentException("로또볼이 중복되었습니다. 재입력 해주세요.");
         }
     }
 
-    public static void validateLottoTicketSize(int lottoTicketSize){
-        if (lottoTicketSize != LOTTO_TICKET_SIZE){
-            throw new IllegalArgumentException("로또볼의 개수를 확인하세요.");
+    public static void validateLottoTicketSize(int lottoTicketSize) {
+        if (lottoTicketSize != LOTTO_TICKET_SIZE) {
+            throw new IllegalArgumentException("로또볼의 개수를 확인하세요. 재입력 해주세요");
         }
     }
 }
