@@ -23,7 +23,7 @@ class LottoTicketsTest {
     private LottoTicket missLottoTicket;
 
     @BeforeEach
-    void init() {
+    void setUp() {
         LottoNumber numberOne = new LottoNumber(1);
         LottoNumber numberTwo = new LottoNumber(2);
         LottoNumber numberThree = new LottoNumber(3);

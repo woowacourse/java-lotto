@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,16 +17,27 @@ import org.junit.jupiter.params.provider.MethodSource;
 import lotto.domain.result.Rank;
 
 class WinningLottoTest {
-    private LottoNumber numberOne = new LottoNumber(1);
-    private LottoNumber numberTwo = new LottoNumber(2);
-    private LottoNumber numberThree = new LottoNumber(3);
-    private LottoNumber numberFour = new LottoNumber(4);
-    private LottoNumber numberFive = new LottoNumber(5);
-    private LottoNumber numberSix = new LottoNumber(6);
-    private LottoNumber numberSeven = new LottoNumber(7);
-    private Set<LottoNumber> firstLottoNumbers = Arrays.stream(
-            new LottoNumber[] {numberOne, numberTwo, numberThree, numberFour, numberFive, numberSix}).collect(Collectors.toSet());
-    private LottoTicket firstLottoTicket = new LottoTicket(firstLottoNumbers);
+
+    private LottoNumber numberSix;
+    private LottoNumber numberSeven;
+    private LottoTicket firstLottoTicket;
+
+    @BeforeEach
+    void setUp() {
+        LottoNumber numberOne = new LottoNumber(1);
+        LottoNumber numberTwo = new LottoNumber(2);
+        LottoNumber numberThree = new LottoNumber(3);
+        LottoNumber numberFour = new LottoNumber(4);
+        LottoNumber numberFive = new LottoNumber(5);
+        numberSix = new LottoNumber(6);
+        numberSeven = new LottoNumber(7);
+        Set<LottoNumber> firstLottoNumbers = Arrays.stream(
+                new LottoNumber[] {numberOne, numberTwo, numberThree, numberFour, numberFive, numberSix}).collect(Collectors.toSet());
+        firstLottoTicket = new LottoTicket(firstLottoNumbers);
+    }
+
+
+
 
     @Test
     @DisplayName("WinningLotto는 LottoTicket과 LottoNumber로 생성")
@@ -82,9 +94,7 @@ class WinningLottoTest {
         LottoTicket fourthLottoTicket = new LottoTicket(fourthLottoNumbers);
         LottoTicket fifthLottoTicket = new LottoTicket(fifthLottoNumbers);
         LottoTicket missLottoTicket = new LottoTicket(missLottoNumbers);
-        LottoTicket lottoTicket = firstLottoTicket;
-        LottoNumber bonusNumber = numberSeven;
-        WinningLotto winningLotto = new WinningLotto(lottoTicket, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(firstLottoTicket, numberSeven);
 
         return Stream.of(
                 Arguments.of(winningLotto, missLottoTicket, Rank.MISS),
@@ -92,7 +102,7 @@ class WinningLottoTest {
                 Arguments.of(winningLotto, fourthLottoTicket, Rank.FOURTH),
                 Arguments.of(winningLotto, thirdLottoTicket, Rank.THIRD),
                 Arguments.of(winningLotto, secondLottoTicket, Rank.SECOND),
-                Arguments.of(winningLotto, lottoTicket, Rank.FIRST)
+                Arguments.of(winningLotto, firstLottoTicket, Rank.FIRST)
         );
     }
 }

@@ -5,17 +5,29 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTicketTest {
 
-    private LottoNumber numberOne = new LottoNumber(1);
-    private LottoNumber numberTwo = new LottoNumber(2);
-    private LottoNumber numberThree = new LottoNumber(3);
-    private LottoNumber numberFour = new LottoNumber(4);
-    private LottoNumber numberFive = new LottoNumber(5);
-    private LottoNumber numberSix = new LottoNumber(6);
+    private LottoNumber numberOne;
+    private LottoNumber numberTwo;
+    private LottoNumber numberThree;
+    private LottoNumber numberFour;
+    private LottoNumber numberFive;
+    private LottoNumber numberSix;
+
+    @BeforeEach
+    void setUp() {
+        numberOne = new LottoNumber(1);
+        numberTwo = new LottoNumber(2);
+        numberThree = new LottoNumber(3);
+        numberFour = new LottoNumber(4);
+        numberFive = new LottoNumber(5);
+        numberSix = new LottoNumber(6);
+    }
+
 
     @Test
     @DisplayName("LottoTicket을 생성")
