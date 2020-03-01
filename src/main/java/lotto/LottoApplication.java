@@ -18,7 +18,7 @@ public class LottoApplication {
 
 	public static void main(String[] args) {
 		Money money = new Money(InputView.inputBuyMoney());
-		ManualLottoCount manualLottoCount = new ManualLottoCount(InputView.inputManualLottoCount(), money);
+		ManualLottoCount manualLottoCount = new ManualLottoCount(InputView.inputManualLottoCount());
 
 		List<Lotto> lotteris = createLotteris(money, manualLottoCount);
 		OutputView.printLotteris(lotteris);
@@ -45,6 +45,7 @@ public class LottoApplication {
 		while (manualLottoCount.hasNext()) {
 			String inputLottoNumbers = InputView.input();
 			lotteris.add(new ManualLottoFactory(inputLottoNumbers).create());
+			manualLottoCount.use();
 		}
 		return lotteris;
 	}
