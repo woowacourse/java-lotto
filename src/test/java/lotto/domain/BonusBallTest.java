@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lottogenerator.LottoNo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ public class BonusBallTest {
 	void setUp() {
 		List<LottoNo> numbers = IntStream.range(1, 7)
 				.boxed()
-				.map(LottoNo::new)
+				.map(LottoNo::toLottoNo)
 				.collect(Collectors.toList());
 		lotto = new Lotto(numbers);
 	}

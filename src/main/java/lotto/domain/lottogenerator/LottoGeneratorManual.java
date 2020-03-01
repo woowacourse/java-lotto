@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.lottogenerator;
 
+import lotto.domain.Customer;
+import lotto.domain.Lotto;
 import lotto.util.StringUtils;
 
 import java.util.ArrayList;
@@ -14,17 +16,17 @@ public class LottoGeneratorManual implements LottoGenerator {
 		List<Lotto> lottos = new ArrayList<>();
 		for (String numbers : manualLottoNumbers) {
 			String[] winLottoNumbers = StringUtils.splitByComma(numbers);
-			List<LottoNo> lotto = toLottoNoList(winLottoNumbers);
+			List<LottoNo> lotto = toLottoNos(winLottoNumbers);
 			lottos.add(new Lotto(lotto));
 		}
 		return lottos;
 	}
 
-	private static List<LottoNo> toLottoNoList(String[] winLotto) {
+	private static List<LottoNo> toLottoNos(String[] winLotto) {
 		try {
 			return Arrays.stream(winLotto)
 					.map(Integer::parseInt)
-					.map(LottoNo::new)
+					.map(LottoNo::toLottoNo)
 					.collect(Collectors.toList());
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(ERROR_MESSAGE_NOT_INTEGER);

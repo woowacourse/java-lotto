@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.lottogenerator.LottoNo;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,15 +15,15 @@ public class WinLotto {
 
 	public WinLotto(String[] winLotto, String bonusBall) {
 		validate(winLotto, bonusBall);
-		this.winLotto = new Lotto(toLottoNoList(winLotto));
+		this.winLotto = new Lotto(toLottoNos(winLotto));
 		this.bonusBall = new BonusBall(bonusBall);
 	}
 
-	private static List<LottoNo> toLottoNoList(String[] winLotto) {
+	private static List<LottoNo> toLottoNos(String[] winLotto) {
 		try {
 			return Arrays.stream(winLotto)
 					.map(Integer::parseInt)
-					.map(LottoNo::new)
+					.map(LottoNo::toLottoNo)
 					.collect(Collectors.toList());
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(ERROR_MESSAGE_NOT_INTEGER);

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.lottogenerator.LottoGeneratorManual;
+import lotto.domain.lottogenerator.LottoNo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,11 +21,11 @@ public class LottoGeneratorManualTest {
 		List<Lotto> result = new ArrayList<>();
 		Lotto lotto1 = new Lotto(IntStream.range(1, 7)
 				.boxed()
-				.map(LottoNo::new)
+				.map(LottoNo::toLottoNo)
 				.collect(Collectors.toList()));
 		Lotto lotto2 = new Lotto(IntStream.range(11, 17)
 				.boxed()
-				.map(LottoNo::new)
+				.map(LottoNo::toLottoNo)
 				.collect(Collectors.toList()));
 		result.add(lotto1);
 		result.add(lotto2);

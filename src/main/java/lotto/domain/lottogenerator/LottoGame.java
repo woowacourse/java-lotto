@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.lottogenerator;
+
+import lotto.domain.Customer;
+import lotto.domain.Lotto;
 
 import java.util.List;
 

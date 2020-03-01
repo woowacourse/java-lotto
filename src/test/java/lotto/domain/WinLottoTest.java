@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lottogenerator.LottoNo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,14 +25,14 @@ public class WinLottoTest {
 	void compareTest() {
 		List<LottoNo> numbers = IntStream.range(1, 7)
 				.boxed()
-				.map(LottoNo::new)
+				.map(LottoNo::toLottoNo)
 				.collect(Collectors.toList());
 		Lotto lotto = new Lotto(numbers);
 		assertThat(winLotto.calculateHitCount(lotto)).isEqualTo(6);
 
 		numbers = IntStream.range(7, 13)
 				.boxed()
-				.map(LottoNo::new)
+				.map(LottoNo::toLottoNo)
 				.collect(Collectors.toList());
 		lotto = new Lotto(numbers);
 		assertThat(winLotto.calculateHitCount(lotto)).isEqualTo(0);
@@ -42,7 +43,7 @@ public class WinLottoTest {
 	void isMatchBonus() {
 		List<LottoNo> numbers = IntStream.range(7, 13)
 				.boxed()
-				.map(LottoNo::new)
+				.map(LottoNo::toLottoNo)
 				.collect(Collectors.toList());
 		Lotto lotto = new Lotto(numbers);
 		assertThat(winLotto.isMatchBonus(lotto)).isTrue();

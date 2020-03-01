@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lottogenerator.LottoNo;
 import lotto.validator.InputValidator;
 
 public class BonusBall {
@@ -7,7 +8,7 @@ public class BonusBall {
 
 	public BonusBall(String bonusBall) {
 		InputValidator.validateNumber(bonusBall);
-		this.bonusBall = new LottoNo(Integer.parseInt(bonusBall));
+		this.bonusBall = LottoNo.toLottoNo(Integer.parseInt(bonusBall));
 	}
 
 	public boolean contains(Lotto lotto) {
