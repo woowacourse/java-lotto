@@ -4,12 +4,18 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoApplication {
+    private static final List<LottosGenerator> lottosGenerators = Arrays.asList(new AutoLottos(), new ManualLottos());
+
     public static void main(String[] args) {
         LottoMoney lottoMoney = new LottoMoney(InputView.requestLottoMoneyInput());
-        LottoCount lottoCount = lottoMoney.toLottoCount(InputView.requestManualLottoCount());
+        String lottoCountInput = InputView.requestManualLottoCount();
+        List<String[]> manualLottos = InputView.requestManualLottoInput(Integer.parseInt(lottoCountInput));
+        LottoCount lottoCount = new LottoCount(lottoMoney, lottoCountInput, manualLottos);
 
         Lottos lottos = createLottos(lottoCount);
         OutputView.printLottoCountAndLottos(lottoCount, lottos);
@@ -22,10 +28,10 @@ public class LottoApplication {
     }
 
     private static Lottos createLottos(LottoCount lottoCount) {
-        List<String[]> manualLottoLines = InputView.requestManualLottoInput(lottoCount);
-        Lottos autoLottos = new AutoLottos(lottoCount).generate();
-        Lottos manualLottos = new ManualLottos(manualLottoLines).generate();
-        return Lottos.combine(autoLottos, manualLottos);
+        List<Lottos> lottos = lottosGenerators.stream()
+                .map(element -> element.generate(lottoCount))
+                .collect(Collectors.toList());
+        return Lottos.combineAll(lottos);
     }
 
     private static WinningLotto createWinningLotto() {
