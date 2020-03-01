@@ -25,9 +25,13 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputManualLottoCount() {
-        OutputView.printInputManualLottoCount();
-        return scanner.nextLine();
+    public static int inputManualLottoCount() {
+        try {
+            OutputView.printInputManualLottoCount();
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 개수는 숫자로만 입력해야합니다.");
+        }
     }
 
     public static List<List<String>> inputManualLottoNumbers(int manualLottoCount) {

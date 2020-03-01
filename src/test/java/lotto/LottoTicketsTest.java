@@ -14,7 +14,7 @@ public class LottoTicketsTest {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
         PurchaseAmount amount = new PurchaseAmount("10800");
         int totalLottoCount = amount.getCount();
-        LottoCount lottoCount = new LottoCount(totalLottoCount, "1");
+        LottoCount lottoCount = new LottoCount(totalLottoCount, 1);
         List<List<String>> manualLottoNumbers = new ArrayList<>();
         List<String> manualLottoNumber = Arrays.asList("1","2","3","4","5","6");
         manualLottoNumbers.add(manualLottoNumber);

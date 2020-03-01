@@ -7,19 +7,11 @@ public class LottoCount {
     private int autoLottoCount;
     private int manualLottoCount;
 
-    public LottoCount(int totalLottoCount, String manualLottoCount) {
-        this.manualLottoCount = checkNotNumber(manualLottoCount);
+    public LottoCount(int totalLottoCount, int manualLottoCount) {
+        this.manualLottoCount = manualLottoCount;
         this.autoLottoCount = totalLottoCount - this.manualLottoCount;
         checkOverAmountManualLottoCount();
         checkNegativeNumber();
-    }
-
-    private int checkNotNumber(String manualLottoCount) {
-        try {
-            return Integer.parseInt(manualLottoCount);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("수동 로또 개수는 숫자로 입력해야합니다.");
-        }
     }
 
     private void checkOverAmountManualLottoCount() {

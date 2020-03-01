@@ -16,7 +16,7 @@ public class LottoFactoryTest {
         List<String> manualLottoNumber = Arrays.asList("1","2","3","4","5","6");
         manualLottoNumbers.add(manualLottoNumber);
 
-        LottoTickets myLotto = LottoFactory.createLottoTickets(new LottoCount(1, "1"), randomNumberGenerator, manualLottoNumbers);
+        LottoTickets myLotto = LottoFactory.createLottoTickets(new LottoCount(1, 1), randomNumberGenerator, manualLottoNumbers);
         assertThat(myLotto.getLottoTickets().get(0).getSize()).isEqualTo(6);
     }
 
@@ -24,7 +24,7 @@ public class LottoFactoryTest {
     void 생성된_로또가_입력한_값을_돌려주는지_테스트() {
         Generator manualNumberGenerator = new ManualNumberGenerator();
         List<List<String>> numbers = new ArrayList<>();
-        LottoTickets myLotto = LottoFactory.createLottoTickets(new LottoCount(1, "0"), manualNumberGenerator, numbers);
+        LottoTickets myLotto = LottoFactory.createLottoTickets(new LottoCount(1, 0), manualNumberGenerator, numbers);
 
         List<LottoNumber> lotto = new ArrayList<>();
         lotto.add(LottoNumber.valueOf("1"));
@@ -71,7 +71,7 @@ public class LottoFactoryTest {
         testLottoTickets.add(manualLotto2);
         testLottoTickets.add(autoLotto1);
 
-        LottoCount lottoCount = new LottoCount(3, "2");
+        LottoCount lottoCount = new LottoCount(3, 2);
         Generator manualNumberGenreator = new ManualNumberGenerator();
         List<String> manualLottoNumber1 = Arrays.asList("11","12","13","14","15","16");
         List<String> manualLottoNumber2 = Arrays.asList("21","22","23","24","25","26");

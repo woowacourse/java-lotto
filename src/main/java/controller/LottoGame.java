@@ -37,7 +37,8 @@ public class LottoGame {
 
     private static LottoCount createLottoCount(int totalLottoCount) {
         try {
-            return new LottoCount(totalLottoCount, InputView.inputManualLottoCount());
+            int manualLottoCount = InputView.inputManualLottoCount();
+            return new LottoCount(totalLottoCount, manualLottoCount);
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             return createLottoCount(totalLottoCount);
