@@ -13,4 +13,10 @@ public class LottoTickets {
     public final List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
+
+    public LottoTickets addTickets(List<LottoTicket> manualTickets) {
+        manualTickets.addAll(lottoTickets);
+        lottoTickets = manualTickets;
+        return this;
+    }
 }

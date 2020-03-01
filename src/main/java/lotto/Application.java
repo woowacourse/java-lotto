@@ -16,7 +16,8 @@ public class Application {
         OutputView.printLottoCount(payment);
 
         final ManualPurchase manualPurchase = generateManualPurchase(generateManualPurchaseCount(payment));
-        final LottoTickets lottoTickets = LottoFactory.createLottoList(manualPurchase, payment);
+        final LottoTickets randomTickets = LottoFactory.createLottoList(manualPurchase.getManualPurchaseCount(), payment);
+        final LottoTickets lottoTickets = randomTickets.addTickets(manualPurchase.getManualTickets());
         OutputView.printLottoList(lottoTickets);
 
         final WinningLottoTicket winningLotto = generateWinningLotto();
