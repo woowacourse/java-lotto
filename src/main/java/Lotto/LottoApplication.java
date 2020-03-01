@@ -24,7 +24,7 @@ public class LottoApplication {
         LottoNumber bonusNumber = new LottoNumber(NumberParser.parseIntoOneNumber(InputView.inputAsBonusNumber()));
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
 
-        Ranks ranksOfAllLottos = allLottos.calculateMultipleRanks(winningNumber);
+        Ranks ranksOfAllLottos = new Ranks(winningNumber, allLottos);
         showFinalResult(purchaseAmount, ranksOfAllLottos);
     }
 

@@ -12,18 +12,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Ranks calculateMultipleRanks(WinningNumber winningNumber) {
-        return new Ranks(lottos.stream()
-                .map(t -> calculateSingleRank(t, winningNumber))
-                .collect(Collectors.toList()));
-    }
-
-    private Rank calculateSingleRank(Lotto lotto, WinningNumber winningNumber) {
-        int hitCount = winningNumber.countHit(lotto);
-        boolean bonusNumberExist = winningNumber.hasBonusNumber(lotto);
-        return Rank.getRank(hitCount, bonusNumberExist);
-    }
-
     public String getLottosInOneLine() {
         return lottos.stream()
                 .map(Lotto::getLotto)

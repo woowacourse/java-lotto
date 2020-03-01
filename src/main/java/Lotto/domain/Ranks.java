@@ -1,33 +1,43 @@
 package Lotto.domain;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Ranks {
-    private List<Rank> ranks;
+    private Map<Rank, Long> ranks = new HashMap<>();
 
-    public Ranks(List<Rank> ranks) {
-        this.ranks = ranks;
+    public Ranks(WinningNumber winningNumber, Lottos lottos) {
+        lottos.getLottos().stream()
+                .map(t -> calculateSingleRank(t, winningNumber))
+                .forEach(t -> {
+                    if (ranks.containsKey(t)) {
+                        Long val = ranks.get(t);
+                        val++;
+                        ranks.put(t, val);
+                    }
+                    ranks.putIfAbsent(t, 1L);
+                });
     }
 
-    int addAllRankReward() {
-        return ranks.stream()
-                .filter(Objects::nonNull)
-                .mapToInt(Rank::getRankReward)
+    private Rank calculateSingleRank(Lotto lotto, WinningNumber winningNumber) {
+        int hitCount = winningNumber.countHit(lotto);
+        boolean bonusNumberExist = winningNumber.hasBonusNumber(lotto);
+        return Rank.getRank(hitCount, bonusNumberExist);
+    }
+
+    public long addAllRankReward() {
+        return ranks.keySet()
+                .stream()
+                .mapToLong(rank -> ranks.get(rank) * rank.getRankReward())
                 .sum();
     }
 
-    public Map<Rank, Long> countRanks() {
-        Map<Rank, Long> rankCounts = ranks.stream()
-                .filter(Objects::nonNull)
-                .collect(Collectors.groupingBy(x -> x, Collectors.counting()));
-
+    public Map<Rank, Long> getRanks() {
         for (Rank rank : Rank.values()) {
-            rankCounts.putIfAbsent(rank, 0L);
+            ranks.putIfAbsent(rank, 0L);
         }
-        return rankCounts;
+        return ranks;
     }
 
     @Override

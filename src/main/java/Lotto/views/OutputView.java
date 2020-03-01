@@ -25,12 +25,11 @@ public class OutputView {
     }
 
     public static void showStatistics(Ranks ranks) {
-        Map<Rank, Long> rankCounts = ranks.countRanks();
-        rankCounts.keySet()
+        ranks.getRanks().keySet()
                 .stream()
                 .sorted()
                 .forEach(rank -> System.out.printf(STATISTICS_FORMAT, rank.getHitCount(), printBonus(rank),
-                        rank.getRankReward(), rankCounts.get(rank), NEW_LINE));
+                        rank.getRankReward(), ranks.getRanks().get(rank), NEW_LINE));
     }
 
     private static String printBonus(Rank rank) {

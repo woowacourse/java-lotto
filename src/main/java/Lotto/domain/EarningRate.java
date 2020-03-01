@@ -6,7 +6,7 @@ public class EarningRate {
     private int profit;
 
     public EarningRate(Ranks ranks, PurchaseAmount purchaseAmount) {
-        this.profit = ranks.addAllRankReward();
+        this.profit = (int)ranks.addAllRankReward();
         int invest = purchaseAmount.getPurchaseAmount();
         this.earningRate = (double) (this.profit) / invest * PERCENT;
     }
