@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.UnderLottoUnitMoney;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,7 +50,7 @@ class MoneyTest {
     void validate_lotto_unit() {
         String input = "999";
 
-        assertThatThrownBy(() -> new Money(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Money(input)).isInstanceOf(UnderLottoUnitMoney.class);
     }
 
     @Test
@@ -65,7 +66,7 @@ class MoneyTest {
     void changeMoney() {
         Money money = new Money("1100");
 
-        Assertions.assertThat(money.changeMoney()).isEqualTo(100);
+        Assertions.assertThat(money.changeMoney()).isEqualTo("100");
     }
 
     @Test

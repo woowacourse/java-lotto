@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class WinningTicket extends LottoTicket {
     private final LottoBall bonusBall;
 
-    public WinningTicket(String inputTicketNumber,int bonusBall) {
-        super(inputTicketNumber);
-        this.bonusBall = new LottoBall(bonusBall);
+    public WinningTicket(List<LottoBall> lottoTicket, LottoBall bonusBall) {
+        super(lottoTicket);
+        this.bonusBall = bonusBall;
     }
 
     public long hitLottoBall(LottoTicket lottoTicket){
@@ -18,6 +20,7 @@ public class WinningTicket extends LottoTicket {
     public boolean hitBonusBall(LottoTicket lottoTicket){
         return lottoTicket.getLottoTicket()
                 .stream()
-                .anyMatch(lottoBall -> lottoBall.getLottoBall() == this.bonusBall.getLottoBall());
+                .anyMatch(lottoBall ->
+                        lottoBall.getLottoBall() == this.bonusBall.getLottoBall());
     }
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ public class LottoBalls {
     static {
         LOTTO_BALLS =
                 IntStream.rangeClosed(START_BALL_NUMBER, END_BALL_NUMBER)
-                        .mapToObj(LottoBall::new)
+                        .mapToObj(lottoBall -> new LottoBall(String.valueOf(lottoBall)))
                         .collect(Collectors.toList());
     }
 

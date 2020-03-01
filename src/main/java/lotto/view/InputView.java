@@ -15,12 +15,7 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public static String inputManualLottoTicket(){
-        return SCANNER.nextLine();
-    }
-
-    public static String inputWinningLottoTicket(){
-        OutputView.printInputWinningLottoTicket();
+    public static String inputLottoTicket(){
         return SCANNER.nextLine();
     }
 

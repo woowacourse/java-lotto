@@ -13,15 +13,20 @@ class WinningTicketTest {
     @DisplayName("몇개 맞추는지 test")
     void hitLottoBallTest() {
         LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
-        WinningTicket winningTicket = new WinningTicket("1,2,3,4,5,6",6);
+        LottoBall lottoBall = new LottoBall("6");
+
+        WinningTicket winningTicket = new WinningTicket(lottoTicket.getLottoTicket(),lottoBall);
 
         Assertions.assertThat(winningTicket.hitLottoBall(lottoTicket)).isEqualTo(6);
     }
 
     @Test
+    @DisplayName("보너스볼을 판별하는지 테스")
     void hitBonusBall() {
         LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
-        WinningTicket winningTicket = new WinningTicket("1,2,3,4,5,6",6);
+        LottoBall lottoBall = new LottoBall("6");
+
+        WinningTicket winningTicket = new WinningTicket(lottoTicket.getLottoTicket(),lottoBall);
 
         Assertions.assertThat(winningTicket.hitBonusBall(lottoTicket)).isTrue();
     }

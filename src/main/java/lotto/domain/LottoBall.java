@@ -6,10 +6,12 @@ public class LottoBall implements Comparable<LottoBall> {
 
     private final int lottoBall;
 
-    public LottoBall(int lottoBall) {
+    public LottoBall(String lottoBall){
+        ValidationUtils.validateIntegerNumberFormat(lottoBall);
+        ValidationUtils.validatePositiveNumber(lottoBall);
         ValidationUtils.validateLottoBallOutOfRange(lottoBall);
 
-        this.lottoBall = lottoBall;
+        this.lottoBall = Integer.parseInt(lottoBall);
     }
 
     public int getLottoBall() {

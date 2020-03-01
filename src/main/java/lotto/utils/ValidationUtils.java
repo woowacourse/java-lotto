@@ -1,5 +1,6 @@
 package lotto.utils;
 
+import lotto.domain.LottoTicket;
 import lotto.exception.UnderLottoUnitMoney;
 
 import java.util.Arrays;
@@ -14,8 +15,8 @@ public class ValidationUtils {
     private static final int MAX_LOTTO_BALL = 45;
     private static final int LOTTO_TICKET_SIZE = 6;
 
-    public static void validateLottoBallOutOfRange(int lottoBall) {
-        if (lottoBall < MIN_LOTTO_BALL || lottoBall > MAX_LOTTO_BALL) {
+    public static void validateLottoBallOutOfRange(String lottoBall) {
+        if (Integer.parseInt(lottoBall) < MIN_LOTTO_BALL || Integer.parseInt(lottoBall) > MAX_LOTTO_BALL) {
             throw new IllegalArgumentException("로또 볼의 범위를 벗어났습니다.");
         }
     }
@@ -56,7 +57,13 @@ public class ValidationUtils {
         Set<String> compare = new HashSet<>(Arrays.asList(ticketNumber));
 
         if (compare.size() != ticketNumber.length) {
-            throw new IllegalArgumentException("로또볼이 중복되었습니다. 재입력 해주세요.");
+            throw new IllegalArgumentException("로또볼을 중복입력 하였습니다. 재입력 해주세요.");
+        }
+    }
+
+    public static void validateDuplicateNumber(int lottoBall,int bonusBall){
+        if(lottoBall == bonusBall){
+            throw new IllegalArgumentException("로또볼을 중복입력 하였습니다. 재입력 해주세요.");
         }
     }
 
