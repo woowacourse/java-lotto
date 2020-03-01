@@ -1,25 +1,6 @@
 # java-lotto
 로또 미션 진행을 위한 저장소
 
-## 클래스 목록
-- money
-  - 구입 금액 
-- Lotto
-
-- LottoFactory
-
-- LottoManager
-  - 당첨 복권과 비교, 당첨 통계
-- WinLotto
-
-- BonusBall
-
-- inputView
-
-- outputView
-
-- main <- controller
-
 ## 기능 구현 목록
 - [x] 구입 금액 입력
 
@@ -39,6 +20,13 @@
 
 - [x] 수익률 계산하기
 
+- [x] 수동으로 구매할 로또 수 입력 받기
+    
+- [x] 수동으로 구매할 로또 번호 입력 받기
+
+- [x] 수동으로 입력된 로또 번호를 로또 객체로 바꿔주는 기능
+   
+
 
 ## 프로그래밍 요구 사항
 * indent(인덴트, 들여쓰기) depth를 2단계에서 1단계로 줄여라.
@@ -57,3 +45,4 @@
 - [x] Lotto 에서 List 에 1 ~ 45의 숫자가 아닐 때
 - [x] 보너스볼에서 1 ~ 45의 숫자가 아닐 때
 - [x] 보너스볼과 Lotto 에서 숫자가 아닌 값일 때
+- [x] ManualLottoCount에서 양수를 입력하지 않거나 구매할 수 있는 양보다 많은 경우

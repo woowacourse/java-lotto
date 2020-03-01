@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.InvalidLottoCountException;
 import lotto.exception.InvalidMoneyException;
 import lotto.validator.Validator;
 
@@ -11,9 +12,8 @@ public class Money {
 
 	public Money(String inputMoney) {
 		Validator.validateInteger(inputMoney);
-		int money = Integer.parseInt(inputMoney);
-		validateOverThousand(money);
-		this.inputMoney = money;
+		this.inputMoney = Integer.parseInt(inputMoney);
+		validateOverThousand(this.inputMoney);
 	}
 
 	private void validateOverThousand(int inputMoney) {
@@ -22,11 +22,23 @@ public class Money {
 		}
 	}
 
-	public int divideThousand() {
-		return inputMoney / PRICE_ONE_LOTTO;
+	public int calculateLottoCount(int count) {
+		if (cannotBuyLotto(count)) {
+			throw new InvalidLottoCountException();
+		}
+		return divideOneLottoPrice() - count;
+	}
+
+	private boolean cannotBuyLotto(int count) {
+		return divideOneLottoPrice() < count;
+	}
+
+	private int divideOneLottoPrice() {
+		return this.inputMoney / PRICE_ONE_LOTTO;
 	}
 
 	public int calculateIncomeRate(long income) {
 		return (int)(income * TO_PERCENT_VALUE / inputMoney);
 	}
+
 }

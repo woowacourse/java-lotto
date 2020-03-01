@@ -23,11 +23,10 @@ public class MoneyTest {
 			.isInstanceOf(InvalidMoneyException.class);
 	}
 
-	@DisplayName("1000원으로 나누기")
 	@Test
-	void divideThousand() {
-		Money money = new Money("14000");
-		assertThat(money.divideThousand()).isEqualTo(14);
+	void calculateLottoCountTest() {
+		Money money = new Money("10000");
+		assertThat(money.calculateLottoCount(1)).isEqualTo(9);
 	}
 
 	@DisplayName("수익률 계산")
