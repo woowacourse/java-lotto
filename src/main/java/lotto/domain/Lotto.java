@@ -53,9 +53,7 @@ public class Lotto {
 	}
 
 	public boolean contains(LottoNumber lottoNumber) {
-		return lottoNumbers.stream()
-				.anyMatch(x -> x.equals(lottoNumber));
-
+		return lottoNumbers.contains(lottoNumber);
 	}
 
 	public LottoDto makeLottoDto() {
