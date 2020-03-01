@@ -3,6 +3,9 @@ package lotto.controller;
 import java.util.List;
 
 import lotto.domain.lotto.*;
+import lotto.domain.lottocount.AutoLottoCount;
+import lotto.domain.lottocount.LottoCount;
+import lotto.domain.lottocount.ManualLottoCount;
 import lotto.domain.lottostore.LottoStore;
 import lotto.domain.money.MoneyForLotto;
 import lotto.domain.result.ResultStatistic;
@@ -20,13 +23,15 @@ import lotto.view.OutputView;
 public class LottoController {
 	public void run() {
 		MoneyForLotto moneyForLotto = new MoneyForLotto(InputView.getMoneyForLotto());
-		LottoCount totalLottoCount = new LottoCount(moneyForLotto.calculateAmountOfLottos());
-		LottoCount manualLottoCount = new LottoCount(InputView.getManualLottoCount(), totalLottoCount);
+		String inputManualLottoCount = InputView.getManualLottoCount();
+		LottoCount manualLottoCount = new ManualLottoCount(inputManualLottoCount, moneyForLotto.calculateAmountOfLottos());
+		LottoCount autoLottoCount = new AutoLottoCount(inputManualLottoCount, moneyForLotto.calculateAmountOfLottos());
+
 		List<String> inputManualLottoNumbers = InputView.getManualLottoNumbers(manualLottoCount.getLottoCount());
 
 		LottoStore lottoStore = new LottoStore();
-		Lottos purchasedLottos = lottoStore.buy(totalLottoCount, manualLottoCount, inputManualLottoNumbers);
-		OutputView.printPurchasedLottos(totalLottoCount, manualLottoCount, purchasedLottos);
+		Lottos purchasedLottos = lottoStore.buy(manualLottoCount, autoLottoCount, inputManualLottoNumbers);
+		OutputView.printPurchasedLottos(manualLottoCount, autoLottoCount, purchasedLottos);
 
 		String inputWinningLottoNumbers = InputView.getWinningLotto();
 		String inputBonusLottoNumber = InputView.getBonusLottoNumber();

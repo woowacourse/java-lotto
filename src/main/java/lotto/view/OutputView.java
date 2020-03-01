@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lottocount.LottoCount;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.money.MoneyForLotto;
 import lotto.domain.result.Rank;
@@ -43,8 +43,8 @@ public class OutputView {
 		System.out.println(e.getMessage());
 	}
 
-	public static void printPurchasedLottos(LottoCount totalLottoCount, LottoCount manualLottoCount,Lottos lottos) {
-		System.out.printf(PURCHASED_LOTTO_NUMBER_IS, manualLottoCount.getLottoCount(), totalLottoCount.getLottoCount() - manualLottoCount.getLottoCount());
+	public static void printPurchasedLottos(LottoCount manualLottoCount, LottoCount autoLottoCount, Lottos lottos) {
+		System.out.printf(PURCHASED_LOTTO_NUMBER_IS, manualLottoCount.getLottoCount(), autoLottoCount.getLottoCount());
 
 		List<String> purchasedLottos = new ArrayList<>();
 		for (Lotto lotto : lottos.getLottos()) {

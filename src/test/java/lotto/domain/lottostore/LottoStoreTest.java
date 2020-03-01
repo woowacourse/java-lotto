@@ -1,5 +1,7 @@
 package lotto.domain.lottostore;
 
+import lotto.domain.lottocount.LottoCount;
+import lotto.domain.lottocount.ManualLottoCount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.domain.lotto.InvalidLottosException;
-import lotto.domain.lotto.LottoCount;
+import lotto.domain.lottocount.AutoLottoCount;
 import lotto.domain.lotto.Lottos;
 
 /**
@@ -23,34 +25,34 @@ import lotto.domain.lotto.Lottos;
  */
 public class LottoStoreTest {
 	private LottoStore lottoStore;
-	private LottoCount totalLottoCount;
+	private AutoLottoCount totalLottoCount;
 
 	@BeforeEach
 	void setUp() {
 		lottoStore = new LottoStore();
-		totalLottoCount = new LottoCount(4);
 	}
 
 	@Test
 	void buy_수동_2장_자동_2장_구매_성공() {
-		LottoCount manualLottoCount = new LottoCount("2", totalLottoCount);
+		LottoCount manualLottoCount = new ManualLottoCount("2", 4);
+		LottoCount autoLottoCount = new AutoLottoCount("2", 4);
 		List<String> inputManualLottoNumbers = Arrays.asList(
 				"1,2,3,4,5,6",
 				"7,8,9,42,12,31"
 		);
-		assertThat(lottoStore.buy(totalLottoCount, manualLottoCount, inputManualLottoNumbers)).isInstanceOf(Lottos.class);
+		assertThat(lottoStore.buy(manualLottoCount, autoLottoCount, inputManualLottoNumbers)).isInstanceOf(Lottos.class);
 	}
 
 	@Test
 	void buy_수동_구매_장수와_실제_수동_입력_장수_차이로_예외_발생() {
-		LottoCount totalLottoCount = new LottoCount(4);
-		LottoCount manualLottoCount = new LottoCount("3", totalLottoCount);
+		LottoCount manualLottoCount = new ManualLottoCount("3", 4);
+		LottoCount autoLottoCount = new AutoLottoCount("3", 4);
 		List<String> inputManualLottoNumbers = Arrays.asList(
 				"1,2,3,4,5,6",
 				"7,8,9,42,12,31"
 		);
 		assertThatThrownBy(() -> {
-			lottoStore.buy(totalLottoCount, manualLottoCount, inputManualLottoNumbers);
+			lottoStore.buy(manualLottoCount, autoLottoCount, inputManualLottoNumbers);
 		}).isInstanceOf(InvalidLottosException.class)
 				.hasMessage("구매하려는 수동 장수와 입력 수동 장수가 맞지 않습니다.");
 	}
