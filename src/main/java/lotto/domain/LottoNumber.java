@@ -28,17 +28,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    private static void validateNumberRange(int number) {
+    private void validateNumberRange(int number) {
         if (isLessThanMin(number) || isGreaterThanMax(number)) {
             throw new LottoNumberException();
         }
     }
 
-    private static boolean isLessThanMin(int number) {
+    private boolean isLessThanMin(int number) {
         return number < MIN_NUMBER;
     }
 
-    private static boolean isGreaterThanMax(int number) {
+    private boolean isGreaterThanMax(int number) {
         return number > MAX_NUMBER;
     }
 
