@@ -24,13 +24,6 @@ public class MoneyTest {
 	}
 
 	@Test
-	void canBuyLottoTest() {
-		Money money = new Money("1000");
-		assertThat(money.canBuyLotto(1)).isTrue();
-		assertThat(money.canBuyLotto(2)).isFalse();
-	}
-
-	@Test
 	void calculateLottoCountTest() {
 		Money money = new Money("10000");
 		assertThat(money.calculateLottoCount(1)).isEqualTo(9);

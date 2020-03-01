@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.InvalidLottoCountException;
 import lotto.exception.InvalidMoneyException;
 import lotto.validator.Validator;
 
@@ -21,12 +22,15 @@ public class Money {
 		}
 	}
 
-	public boolean canBuyLotto(int count) {
-		return divideOneLottoPrice() >= count;
+	public int calculateLottoCount(int count) {
+		if (cannotBuyLotto(count)) {
+			throw new InvalidLottoCountException();
+		}
+		return divideOneLottoPrice() - count;
 	}
 
-	public int calculateLottoCount(int count) {
-		return divideOneLottoPrice() - count;
+	private boolean cannotBuyLotto(int count) {
+		return divideOneLottoPrice() < count;
 	}
 
 	private int divideOneLottoPrice() {
