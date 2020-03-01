@@ -11,31 +11,31 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
 
 public class BonusBallTest {
-    private Lotto lotto;
+	private Lotto lotto;
 
-    @BeforeEach
-    void setUp() {
-        List<LottoNo> numbers = IntStream.range(1, 7)
-                .boxed()
-                .map(LottoNo::new)
-                .collect(Collectors.toList());
-        lotto = new Lotto(numbers);
-    }
+	@BeforeEach
+	void setUp() {
+		List<LottoNo> numbers = IntStream.range(1, 7)
+				.boxed()
+				.map(LottoNo::new)
+				.collect(Collectors.toList());
+		lotto = new Lotto(numbers);
+	}
 
-    @DisplayName("보너스 볼을 가지고 있는 경우")
-    @Test
-    void contains() {
-        BonusBall bonusBall = new BonusBall("3");
+	@DisplayName("보너스 볼을 가지고 있는 경우")
+	@Test
+	void contains() {
+		BonusBall bonusBall = new BonusBall("3");
 
-        assertThat(bonusBall.contains(lotto)).isTrue();
-    }
+		assertThat(bonusBall.contains(lotto)).isTrue();
+	}
 
-    @DisplayName("보너스 볼을 가지고 있지 않는 경우")
-    @Test
-    void contains2() {
-        BonusBall bonusBall = new BonusBall("9");
+	@DisplayName("보너스 볼을 가지고 있지 않는 경우")
+	@Test
+	void contains2() {
+		BonusBall bonusBall = new BonusBall("9");
 
-        assertThat(bonusBall.contains(lotto)).isFalse();
-        assertThat(bonusBall.contains(null)).isFalse();
-    }
+		assertThat(bonusBall.contains(lotto)).isFalse();
+		assertThat(bonusBall.contains(null)).isFalse();
+	}
 }

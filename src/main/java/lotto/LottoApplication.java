@@ -22,12 +22,12 @@ public class LottoApplication {
             Arrays.asList(new LottoGeneratorManual(), new LottoGeneratorAuto());
 
     public static void main(String[] args) {
-        int inputMoney = StringUtils.ToInt(InputView.inputMoney());
-        int inputUserLottoCount = StringUtils.ToInt(InputView.inputManualLottoCount());
-        Customer customer = new Customer(inputMoney, inputUserLottoCount);
+        int money = StringUtils.ToInt(InputView.inputMoney());
+        int manualLottoCount = StringUtils.ToInt(InputView.inputManualLottoCount());
+        Customer customer = new Customer(money, manualLottoCount);
 
-        String userLottoNumbers = InputView.inputManualLottoNumber(customer);
-        customer.setManualLottoNumbers(userLottoNumbers);
+        String manualLottoNumbers = InputView.inputManualLottoNumbers(customer);
+        customer.setManualLottoNumbers(manualLottoNumbers);
 
         Lottos lottos = new Lottos(createUserLottos(customer));
 
