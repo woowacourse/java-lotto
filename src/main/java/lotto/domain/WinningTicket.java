@@ -10,14 +10,14 @@ public class WinningTicket extends LottoTicket {
         this.bonusBall = bonusBall;
     }
 
-    public long hitLottoBall(LottoTicket lottoTicket){
+    public long hitLottoBall(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket()
                 .stream()
                 .filter(this.lottoTicket::contains)
                 .count();
     }
 
-    public boolean hitBonusBall(LottoTicket lottoTicket){
+    public boolean hitBonusBall(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket()
                 .stream()
                 .anyMatch(lottoBall ->

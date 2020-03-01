@@ -6,7 +6,7 @@ public class LottoBall implements Comparable<LottoBall> {
 
     private final int lottoBall;
 
-    public LottoBall(String lottoBall){
+    public LottoBall(String lottoBall) {
         ValidationUtils.validateIntegerNumberFormat(lottoBall);
         ValidationUtils.validatePositiveNumber(lottoBall);
         ValidationUtils.validateLottoBallOutOfRange(lottoBall);

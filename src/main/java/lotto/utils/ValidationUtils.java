@@ -1,6 +1,5 @@
 package lotto.utils;
 
-import lotto.domain.LottoTicket;
 import lotto.exception.UnderLottoUnitMoney;
 
 import java.util.Arrays;
@@ -8,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ValidationUtils {
-    public static final int T = 6;
     private static final int ZERO = 0;
     private static final int LOTTO_UNIT = 1000;
     private static final int MIN_LOTTO_BALL = 1;
@@ -61,8 +59,8 @@ public class ValidationUtils {
         }
     }
 
-    public static void validateDuplicateNumber(int lottoBall,int bonusBall){
-        if(lottoBall == bonusBall){
+    public static void validateDuplicateNumber(int lottoBall, int bonusBall) {
+        if (lottoBall == bonusBall) {
             throw new IllegalArgumentException("로또볼을 중복입력 하였습니다. 재입력 해주세요.");
         }
     }

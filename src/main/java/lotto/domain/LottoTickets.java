@@ -7,10 +7,10 @@ import java.util.List;
 public class LottoTickets {
     private static final List<LottoTicket> LOTTO_TICKETS = new ArrayList<>();
 
-    private LottoTickets(){
+    private LottoTickets() {
     }
 
-    public static void insertLottoTicket(LottoTicket lottoTicket){
+    public static void insertLottoTicket(LottoTicket lottoTicket) {
         LOTTO_TICKETS.add(lottoTicket);
     }
 
