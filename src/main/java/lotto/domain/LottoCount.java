@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 import static lotto.util.NullValidator.validateNull;
 import static lotto.util.NumberValidator.validateNullAndEmptyValue;
 import static lotto.util.NumberValidator.validateNumberFormat;
@@ -9,13 +11,15 @@ public class LottoCount {
 
     private final int lottoCountValue;
     private final int manualLottoCountValue;
+    private final List<String[]> manualLottos;
 
-    public LottoCount(LottoMoney lottoMoney, String manualLottoCount) {
-        validateNull(lottoMoney);
+    public LottoCount(LottoMoney lottoMoney, String manualLottoCount, List<String[]> manualLottos) {
+        validateNull(lottoMoney, manualLottos);
         int lottoCount = lottoMoney.calculateLottoCount();
         validate(manualLottoCount, lottoCount);
         this.lottoCountValue = lottoCount;
         this.manualLottoCountValue = Integer.parseInt(manualLottoCount);
+        this.manualLottos = manualLottos;
     }
 
     private static void validate(String manualLottoCount, int lottoCount) {
@@ -41,5 +45,9 @@ public class LottoCount {
 
     public int calculateAutoLottoCount() {
         return lottoCountValue - manualLottoCountValue;
+    }
+
+    public List<String[]> getManualLottos() {
+        return manualLottos;
     }
 }
