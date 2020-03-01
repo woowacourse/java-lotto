@@ -6,28 +6,36 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final String LOTTO_NUMBER_DUPLICATED_MESSAGE = "잘못된 로또 번호입니다. 중복 안됨, 갯수는 6개";
+    private static final String LOTTO_NUMBER_DUPLICATED_MESSAGE = "로또 번호 입력은 중복이 없어야 합니다.";
+    private static final String LOTTO_NUMBER_WRONG_COUNT_MESSAGE = "로또 번호 입력에는 6개의 숫자만 허용합니다.";
     private static final String COMMA = ", ";
-    private static final int LOTTO_NUMBER_AMOUNT = 6;
+    private static final int LOTTO_NUMBER_COUNT = 6;
     private static final String OPEN_BRACKET = "[";
     private static final String CLOSE_BRACKET = "]";
 
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> lottoNumberWithoutDuplication = new HashSet<LottoNumber>(lottoNumbers);
-        validate(lottoNumberWithoutDuplication);
+        validateDuplication(lottoNumbers);
+        validateAmountOfNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validate(Set<LottoNumber> lottoNumberWithoutDuplication) {
-        if (wrongAmountOfNumbers(lottoNumberWithoutDuplication)) {
+    private void validateDuplication(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> lottoNumberWithoutDuplication = new HashSet<LottoNumber>(lottoNumbers);
+        if (lottoNumberWithoutDuplication.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATED_MESSAGE);
         }
     }
 
+    private void validateAmountOfNumbers(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_WRONG_COUNT_MESSAGE);
+        }
+    }
+
     private boolean wrongAmountOfNumbers(Set<LottoNumber> lottoNumberWithoutDuplication) {
-        return lottoNumberWithoutDuplication.size() != LOTTO_NUMBER_AMOUNT;
+        return lottoNumberWithoutDuplication.size() != LOTTO_NUMBER_COUNT;
     }
 
     boolean hasBonusNumber(LottoNumber bonusNumber) {
