@@ -8,11 +8,8 @@ import java.util.Set;
 public class LottoFactory {
     public static final int LOTTO_SIZE = 6;
 
-    public static List<Lotto> createLottoTickets(LottoCount lottoCount, Generator randomGenerator, List<List<String>> manualLottoNumbers) {
-        List<Lotto> lottoTickets = new ArrayList<>();
-        lottoTickets.addAll(createManualLottoTickets(lottoCount, manualLottoNumbers));
-        lottoTickets.addAll(createAutoLottoTickets(lottoCount, randomGenerator));
-        return lottoTickets;
+    public static LottoTickets createLottoTickets(LottoCount lottoCount, Generator randomGenerator, List<List<String>> manualLottoNumbers) {
+        return new LottoTickets(createManualLottoTickets(lottoCount, manualLottoNumbers), createAutoLottoTickets(lottoCount, randomGenerator));
     }
 
     private static List<Lotto> createManualLottoTickets(LottoCount lottoCount, List<List<String>> manualLottoNumbers) {

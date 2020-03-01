@@ -3,10 +3,11 @@ package domain;
 import java.util.*;
 
 public class LottoTickets {
-    private final List<Lotto> lottoTickets;
+    private final List<Lotto> lottoTickets = new ArrayList<>();
 
-    public LottoTickets(List<Lotto> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public LottoTickets(List<Lotto> manualLottoTickets, List<Lotto> autoLottoTickets) {
+        this.lottoTickets.addAll(manualLottoTickets);
+        this.lottoTickets.addAll(autoLottoTickets);
     }
 
     public LottoResult countWinningLotto(WinningNumber winningNumber) {

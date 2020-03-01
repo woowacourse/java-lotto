@@ -16,15 +16,15 @@ public class LottoFactoryTest {
         List<String> manualLottoNumber = Arrays.asList("1","2","3","4","5","6");
         manualLottoNumbers.add(manualLottoNumber);
 
-        List<Lotto> myLotto = LottoFactory.createLottoTickets(new LottoCount(1, "1"), randomNumberGenerator, manualLottoNumbers);
-        assertThat(myLotto.get(0).getSize()).isEqualTo(6);
+        LottoTickets myLotto = LottoFactory.createLottoTickets(new LottoCount(1, "1"), randomNumberGenerator, manualLottoNumbers);
+        assertThat(myLotto.getLottoTickets().get(0).getSize()).isEqualTo(6);
     }
 
     @Test
     void 생성된_로또가_입력한_값을_돌려주는지_테스트() {
         Generator manualNumberGenerator = new ManualNumberGenerator();
         List<List<String>> numbers = new ArrayList<>();
-        List<Lotto> myLotto = LottoFactory.createLottoTickets(new LottoCount(1, "0"), manualNumberGenerator, numbers);
+        LottoTickets myLotto = LottoFactory.createLottoTickets(new LottoCount(1, "0"), manualNumberGenerator, numbers);
 
         List<LottoNumber> lotto = new ArrayList<>();
         lotto.add(LottoNumber.valueOf("1"));
@@ -34,7 +34,7 @@ public class LottoFactoryTest {
         lotto.add(LottoNumber.valueOf("5"));
         lotto.add(LottoNumber.valueOf("6"));
 
-        assertThat(myLotto.get(0).getLotto()).isEqualTo(lotto);
+        assertThat(myLotto.getLottoTickets().get(0).getLotto()).isEqualTo(lotto);
     }
 
     @Test
@@ -79,6 +79,6 @@ public class LottoFactoryTest {
         manualLottoNumbers.add(manualLottoNumber1);
         manualLottoNumbers.add(manualLottoNumber2);
 
-        assertThat(LottoFactory.createLottoTickets(lottoCount, manualNumberGenreator, manualLottoNumbers)).isEqualTo(testLottoTickets);
+        assertThat(LottoFactory.createLottoTickets(lottoCount, manualNumberGenreator, manualLottoNumbers).getLottoTickets()).isEqualTo(testLottoTickets);
     }
 }

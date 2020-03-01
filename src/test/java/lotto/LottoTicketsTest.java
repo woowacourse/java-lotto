@@ -19,7 +19,7 @@ public class LottoTicketsTest {
         List<String> manualLottoNumber = Arrays.asList("1","2","3","4","5","6");
         manualLottoNumbers.add(manualLottoNumber);
 
-        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomNumberGenerator, manualLottoNumbers));
+        LottoTickets lottoTickets = LottoFactory.createLottoTickets(lottoCount, randomNumberGenerator, manualLottoNumbers);
         assertThat(lottoTickets.getTicketsSize()).isEqualTo(10);
     }
 
@@ -46,11 +46,12 @@ public class LottoTicketsTest {
         List<Lotto> tempLottoTickets = new ArrayList<>();
         tempLottoTickets.add(lotto_1);
         tempLottoTickets.add(lotto_2);
+        List<Lotto> manualLottoTickets = new ArrayList<>();
 
         String[] winningNumber = {"1","2","3","4","5","6"};
         WinningNumber winningNumbers = new WinningNumber(winningNumber, "7");
 
-        LottoTickets lottoTickets = new LottoTickets(tempLottoTickets);
+        LottoTickets lottoTickets = new LottoTickets(tempLottoTickets, manualLottoTickets);
         LottoResult lottoResult = lottoTickets.countWinningLotto(winningNumbers);
 
         Map<LottoRank, Integer> testMap = new HashMap<>();

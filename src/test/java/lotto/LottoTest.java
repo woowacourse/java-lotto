@@ -17,9 +17,9 @@ public class LottoTest {
         List<List<String>> manualLottoNumbers = new ArrayList<>();
         List<String> manualLottoNumber = Arrays.asList("1","2","3","4","5","6");
         manualLottoNumbers.add(manualLottoNumber);
-        List<Lotto> lotto = LottoFactory.createLottoTickets(new LottoCount(2,"1"), randomNumberGenerator, manualLottoNumbers);
-        assertThat(lotto.get(0).getSize()).isEqualTo(6);
-        assertThat(lotto.get(1).getSize()).isEqualTo(6);
+        LottoTickets lotto = LottoFactory.createLottoTickets(new LottoCount(2,"1"), randomNumberGenerator, manualLottoNumbers);
+        assertThat(lotto.getLottoTickets().get(0).getSize()).isEqualTo(6);
+        assertThat(lotto.getLottoTickets().get(1).getSize()).isEqualTo(6);
 
         assertThatThrownBy(() -> {
             Lotto.checkLottoSizeSix(7);

@@ -56,7 +56,7 @@ public class LottoGame {
 
     private static LottoTickets createLottoTickets(LottoCount lottoCount, List<List<String>> manualLottoNumbers) {
         Generator randomGenerator = new RandomNumberGenerator();
-        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomGenerator, manualLottoNumbers));
+        LottoTickets lottoTickets = LottoFactory.createLottoTickets(lottoCount, randomGenerator, manualLottoNumbers);
         OutputView.printLottoTickets(lottoTickets, lottoCount);
         return lottoTickets;
     }
