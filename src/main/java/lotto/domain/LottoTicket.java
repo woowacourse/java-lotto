@@ -13,6 +13,7 @@ public class LottoTicket {
 
     //자동생성
     public LottoTicket(List<LottoBall> lottoTicket) {
+        ValidationUtils.validateLottoTicketSize(lottoTicket.size());
         this.lottoTicket = Collections.unmodifiableList(lottoTicket);
     }
 
@@ -22,6 +23,7 @@ public class LottoTicket {
         ValidationUtils.validateIntegerNumberFormat(ticketNumber);
         ValidationUtils.validatePositiveNumber(ticketNumber);
         ValidationUtils.validateDuplicateNumber(ticketNumber);
+        ValidationUtils.validateLottoTicketSize(inputTicketNumber.length());
 
         this.lottoTicket = Collections.unmodifiableList(
                 Arrays.stream(ticketNumber)
