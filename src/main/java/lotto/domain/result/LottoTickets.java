@@ -13,8 +13,14 @@ public class LottoTickets {
 		this.lottoTickets = Collections.unmodifiableList(lottoTickets);
 	}
 
-	public static LottoTickets merge(final LottoTickets manualLottoTickets, final LottoTickets autoLottoTickets) {
-		return new LottoTickets(ListBuilder.merge(manualLottoTickets.lottoTickets, autoLottoTickets.lottoTickets));
+	public static LottoTickets merge(final LottoTickets... someLottoTickets) {
+		return new LottoTickets(mergeLottoTickets(someLottoTickets));
+	}
+
+	private static List<SerialLottoNumber> mergeLottoTickets(final LottoTickets... someLottoTickets) {
+		return Arrays.stream(someLottoTickets)
+				.map(lottoTicket -> lottoTicket.lottoTickets)
+				.reduce(new ArrayList<>(), ListBuilder::merge);
 	}
 
 	public Map<Rank, Integer> findResult(Winning winning) {
