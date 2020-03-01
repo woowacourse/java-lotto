@@ -12,8 +12,7 @@ public class LottoGame {
     public static void main(String[] args) {
         int totalLottoCount = purchaseLotto();
         LottoCount lottoCount = createLottoCount(totalLottoCount);
-        ManualLottoTickets manualLottoTickets = createManualLottoTickets(lottoCount);
-        LottoTickets lottoTickets = createLottoTickets(lottoCount, manualLottoTickets);
+        LottoTickets lottoTickets = createLottoTickets(lottoCount, inputManualLottoNumbers(lottoCount));
         WinningNumber winningNumber = inputWinningNumber();
         LottoResult lottoResult = countWinningLottos(lottoTickets, winningNumber);
         int profitRatio = calculateProfitRatio(totalLottoCount, lottoResult);
@@ -45,19 +44,19 @@ public class LottoGame {
         }
     }
 
-    private static ManualLottoTickets createManualLottoTickets(LottoCount lottoCount) {
+    private static List<List<String>> inputManualLottoNumbers(LottoCount lottoCount) {
         try {
             int manualLottoCount = lottoCount.getManualCount();
-            return new ManualLottoTickets(InputView.inputManualLottoNumbers(manualLottoCount));
+            return InputView.inputManualLottoNumbers(manualLottoCount);
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
-            return createManualLottoTickets(lottoCount);
+            return inputManualLottoNumbers(lottoCount);
         }
     }
 
-    private static LottoTickets createLottoTickets(LottoCount lottoCount, ManualLottoTickets manualLottoTickets) {
+    private static LottoTickets createLottoTickets(LottoCount lottoCount, List<List<String>> manualLottoNumbers) {
         Generator randomGenerator = new RandomNumberGenerator();
-        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomGenerator, manualLottoTickets));
+        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomGenerator, manualLottoNumbers));
         OutputView.printLottoTickets(lottoTickets, lottoCount);
         return lottoTickets;
     }

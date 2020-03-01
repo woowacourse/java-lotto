@@ -14,11 +14,10 @@ public class LottoTest {
     @Test
     void 로또_번호_갯수_6개인지_확인(){
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-        List<String> numbers = Arrays.asList("1","2","3","4","5","6");
-        List<List<String>> manualNumbers = new ArrayList<>();
-        manualNumbers.add(numbers);
-        ManualLottoTickets manualLottoTickets = new ManualLottoTickets(manualNumbers);
-        List<Lotto> lotto = LottoFactory.createLottoTickets(new LottoCount(2,"1"), randomNumberGenerator, manualLottoTickets);
+        List<List<String>> manualLottoNumbers = new ArrayList<>();
+        List<String> manualLottoNumber = Arrays.asList("1","2","3","4","5","6");
+        manualLottoNumbers.add(manualLottoNumber);
+        List<Lotto> lotto = LottoFactory.createLottoTickets(new LottoCount(2,"1"), randomNumberGenerator, manualLottoNumbers);
         assertThat(lotto.get(0).getSize()).isEqualTo(6);
         assertThat(lotto.get(1).getSize()).isEqualTo(6);
 

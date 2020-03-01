@@ -8,37 +8,43 @@ import java.util.Set;
 public class LottoFactory {
     public static final int LOTTO_SIZE = 6;
 
-    public static List<Lotto> createLottoTickets(LottoCount lottoCount, Generator randomGenerator, ManualLottoTickets manualLottoTickets) {
+    public static List<Lotto> createLottoTickets(LottoCount lottoCount, Generator randomGenerator, List<List<String>> manualLottoNumbers) {
         List<Lotto> lottoTickets = new ArrayList<>();
-        createManualLottoTickets(manualLottoTickets, lottoTickets);
-        createAutoLottoTickets(lottoCount, randomGenerator, lottoTickets);
+        lottoTickets.addAll(createManualLottoTickets(lottoCount, manualLottoNumbers));
+        lottoTickets.addAll(createAutoLottoTickets(lottoCount, randomGenerator));
         return lottoTickets;
     }
 
+    private static List<Lotto> createManualLottoTickets(LottoCount lottoCount, List<List<String>> manualLottoNumbers) {
+        List<Lotto> manualLottoTickets = new ArrayList<>();
+        for (int i = 0; i < lottoCount.getManualCount(); i++) {
+            manualLottoTickets.add(createManualLotto(manualLottoNumbers.get(i)));
+        }
+        return manualLottoTickets;
+    }
+
     public static Lotto createManualLotto(List<String> manualLottoNumbers) {
-        Set<LottoNumber> manualLottoSet = new HashSet<>();
+        Set<LottoNumber> manualLotto = new HashSet<>();
         for (String manualLottoNumber : manualLottoNumbers) {
-            manualLottoSet.add(LottoNumber.valueOf(manualLottoNumber));
+            manualLotto.add(LottoNumber.valueOf(manualLottoNumber));
         }
-        return new Lotto(manualLottoSet);
+        return new Lotto(manualLotto);
     }
 
-    private static void createManualLottoTickets(ManualLottoTickets manualLottoTickets, List<Lotto> lottoTickets) {
-        manualLottoTickets.addManualLottoTickets(lottoTickets);
-    }
-
-    private static void createAutoLottoTickets(LottoCount lottoCount, Generator randomGenerator, List<Lotto> lottoTickets) {
+    private static List<Lotto> createAutoLottoTickets(LottoCount lottoCount, Generator randomGenerator) {
+        List<Lotto> autoLottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoCount.getAutoCount(); i++) {
-            lottoTickets.add(createAutoLotto(randomGenerator));
+            autoLottoTickets.add(createAutoLotto(randomGenerator));
         }
+        return autoLottoTickets;
     }
 
     private static Lotto createAutoLotto(Generator randomGenerator) {
-        Set<LottoNumber> lotto = new HashSet<>();
-        while (lotto.size() < LOTTO_SIZE) {
+        Set<LottoNumber> autoLotto = new HashSet<>();
+        while (autoLotto.size() < LOTTO_SIZE) {
             int number = randomGenerator.generate(RandomNumber.generateRandomNumber());
-            lotto.add(LottoNumber.valueOf(number));
+            autoLotto.add(LottoNumber.valueOf(number));
         }
-        return new Lotto(lotto);
+        return new Lotto(autoLotto);
     }
 }

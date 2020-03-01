@@ -14,13 +14,12 @@ public class LottoTicketsTest {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
         PurchaseAmount amount = new PurchaseAmount("10800");
         int totalLottoCount = amount.getCount();
-        List<String> numbers = Arrays.asList("1","2","3","4","5","6");
-        List<List<String>> manualNumbers = new ArrayList<>();
-        manualNumbers.add(numbers);
-        ManualLottoTickets manualLottoTickets = new ManualLottoTickets(manualNumbers);
         LottoCount lottoCount = new LottoCount(totalLottoCount, "1");
+        List<List<String>> manualLottoNumbers = new ArrayList<>();
+        List<String> manualLottoNumber = Arrays.asList("1","2","3","4","5","6");
+        manualLottoNumbers.add(manualLottoNumber);
 
-        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomNumberGenerator, manualLottoTickets));
+        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomNumberGenerator, manualLottoNumbers));
         assertThat(lottoTickets.getTicketsSize()).isEqualTo(10);
     }
 
@@ -53,7 +52,6 @@ public class LottoTicketsTest {
 
         LottoTickets lottoTickets = new LottoTickets(tempLottoTickets);
         LottoResult lottoResult = lottoTickets.countWinningLotto(winningNumbers);
-
 
         Map<LottoRank, Integer> testMap = new HashMap<>();
         testMap.put(LottoRank.FIRST, 0);
