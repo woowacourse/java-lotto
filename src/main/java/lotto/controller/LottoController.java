@@ -25,7 +25,7 @@ public class LottoController {
 
     private void result(Money money, Map<Rank, Long> eachRankCount) {
         try {
-            OutputView.printResult(eachRankCount,money.getMoney());
+            OutputView.printResult(eachRankCount,EarningRate.calculateEarningRate(eachRankCount,money));
         }catch (RuntimeException e){
             OutputView.printErrorMessage(e.getMessage());
         }
