@@ -28,19 +28,23 @@ public class LottoController {
 		try {
 			LottoCount lottoCount = new LottoCount(readMoney(), readManualLottoCount());
 			List<Lotto> lottos = new ArrayList<>();
-
-			OutputView.printManualInputGuide();
-			for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
-				lottos.add(readLottoNumber());
-			}
-
+			lottos.addAll(buyManualLottos(lottoCount));
+			lottos.addAll(LottoMachine.getInstance().makeRandomLottos(lottoCount));
 			OutputView.printLottoCount(lottoCount.getManualLottoCount(), lottoCount.getAutoLottoCount());
-			lottos.addAll(LottoMachine.getInstance().makeRandomLottos(lottoCount.getAutoLottoCount()));
 			return new Lottos(lottos);
 		} catch (Exception e) {
 			OutputView.printExceptionMessage(e);
 			return buyLottos();
 		}
+	}
+
+	private static List<Lotto> buyManualLottos(LottoCount lottoCount) {
+		List<Lotto> manualLottos = new ArrayList<>();
+		OutputView.printManualInputGuide();
+		for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
+			manualLottos.add(readLottoNumber());
+		}
+		return manualLottos;
 	}
 
 	private static int readMoney() {

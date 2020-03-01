@@ -23,10 +23,10 @@ public class LottoMachine {
 		return LottoMachineSingletonHolder.instance;
 	}
 
-	public List<Lotto> makeRandomLottos(int lottoCount) {
+	public List<Lotto> makeRandomLottos(LottoCount lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 
-		for (int i = 0; i < lottoCount; i++) {
+		for (int i = 0; i < lottoCount.getAutoLottoCount(); i++) {
 			lottos.add(new Lotto(pickRandomBalls()));
 		}
 		return lottos;
