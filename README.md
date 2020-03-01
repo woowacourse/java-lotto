@@ -34,6 +34,8 @@
         - checkNegativeNumber 음수인지 검증
         - checkUnderLottoPrice 로또 한 장 가격보다 낮은 금액인지 검증
 - **LottoFactory**
+    - 수동으로 구입한 로또 생성
+    - 자동으로 구입한 로또 생성
     - [예외 처리] 난수가 1~45까지 수 인지 검증
 - **RandomNumberGenerator**
     - 1부터 45 사이의 난수 생성
@@ -50,10 +52,6 @@
     - manualLottoCount
     - [예외처리] manualLottoCount가 숫자인지 검증
     - [예외처리] manualLottoCount가 전체 로또 개수 이하의 숫자인지 검증
-- **AutoLottoTickets**
-    - List<Lotto> autoLottoTickets
-- **ManualLottoTickets**
-    - List<Lotto> manualLottoTickets
 - **LottoTickets**
     - List<Lotto> lottoTickets
     - 모든 로또 당첨 결과 카운트
