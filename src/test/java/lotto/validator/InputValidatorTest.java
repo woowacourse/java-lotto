@@ -9,10 +9,13 @@ public class InputValidatorTest {
 	@DisplayName("입력받은 문자가 숫자인지 테스트")
 	@Test
 	void validateInteger() {
-		InputValidator.validateInteger("1");
-		InputValidator.validateInteger("45");
+		InputValidator.validateNumber("1");
+		InputValidator.validateNumber("45");
 
-		assertThatThrownBy(() -> InputValidator.validateInteger("a"))
-				.isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> InputValidator.validateNumber("a"))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("숫자가 아닌 문자를 입력하였습니다.");
 	}
+
+
 }

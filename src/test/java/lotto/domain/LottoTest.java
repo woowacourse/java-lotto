@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lottogenerator.LottoNo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,30 +18,21 @@ public class LottoTest {
 	void setUp() {
 		numbers = IntStream.range(1, 7)
 				.boxed()
-				.map(LottoNo::new)
+				.map(LottoNo::toLottoNo)
 				.collect(Collectors.toList());
 	}
 
 	@Test
 	void isContain() {
 		Lotto lotto = new Lotto(numbers);
-		assertThat(lotto.contains(new LottoNo(1))).isTrue();
-		assertThat(lotto.contains(new LottoNo(7))).isFalse();
+		assertThat(lotto.contains(LottoNo.toLottoNo(1))).isTrue();
+		assertThat(lotto.contains(LottoNo.toLottoNo(7))).isFalse();
 	}
 
-	@DisplayName("로또 번호의 개수가 6개인지 검사")
+	@DisplayName("로또 객체 생성시 null 전달 테스트")
 	@Test
-	void Lotto1() {
-		numbers.add(new LottoNo(8));
-		assertThatThrownBy(() -> new Lotto(numbers))
-				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("6개의 숫자가 아닙니다.");
+	void Lotto2() {
+		assertThatThrownBy(() -> new Lotto(null))
+				.isInstanceOf(IllegalArgumentException.class);
 	}
-
-//	@DisplayName("로또 객체 생성시 null 전달 테스트")
-//	@Test
-//	void Lotto2() {
-//		assertThatThrownBy(() -> new Lotto(null))
-//			.isInstanceOf(IllegalArgumentException.class);
-//	}
 }

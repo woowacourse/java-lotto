@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lottogenerator.LottoNo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,27 +25,37 @@ public class WinLottoTest {
 	void compareTest() {
 		List<LottoNo> numbers = IntStream.range(1, 7)
 				.boxed()
-				.map(LottoNo::new)
+				.map(LottoNo::toLottoNo)
 				.collect(Collectors.toList());
 		Lotto lotto = new Lotto(numbers);
-		assertThat(winLotto.findHitCount(lotto)).isEqualTo(6);
+		assertThat(winLotto.calculateHitCount(lotto)).isEqualTo(6);
 
 		numbers = IntStream.range(7, 13)
 				.boxed()
-				.map(LottoNo::new)
+				.map(LottoNo::toLottoNo)
 				.collect(Collectors.toList());
 		lotto = new Lotto(numbers);
-		assertThat(winLotto.findHitCount(lotto)).isEqualTo(0);
+		assertThat(winLotto.calculateHitCount(lotto)).isEqualTo(0);
 	}
 
 	@DisplayName("전달받은 로또에서 보너스볼과 일치하는게 있는지 테스트")
 	@Test
 	void isMatchBonus() {
 		List<LottoNo> numbers = IntStream.range(7, 13)
-			.boxed()
-			.map(LottoNo::new)
-			.collect(Collectors.toList());
+				.boxed()
+				.map(LottoNo::toLottoNo)
+				.collect(Collectors.toList());
 		Lotto lotto = new Lotto(numbers);
 		assertThat(winLotto.isMatchBonus(lotto)).isTrue();
+	}
+
+	@DisplayName("보너스볼과 당첨번호가 중복 예외처리")
+	@Test
+	void BonusBallInWinLotto() {
+		String[] winLotto = new String[]{"1", "2", "3", "4", "5", "6"};
+		String bonusBall = "4";
+		assertThatThrownBy(() -> new WinLotto(winLotto, bonusBall))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("당첨번호에 보너스볼이 포함되어 있습니다.");
 	}
 }
