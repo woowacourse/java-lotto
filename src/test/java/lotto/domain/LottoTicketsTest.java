@@ -42,7 +42,7 @@ class LottoTicketsTest {
         manualTickets.add(new LottoTicket(LottoTicketTest.MATCH_NONE));
         manualTickets.add(new LottoTicket(LottoTicketTest.MATCH_FIVE));
         manualTickets.add(new LottoTicket(LottoTicketTest.MATCH_THREE));
-        assertThat(LottoTickets.createAutoAndAdd(new Money("5000"), manualTickets).getLottoTickets()).hasSize(
-            5);
+        LottoTickets manualLottoTickets = new LottoTickets(manualTickets);
+        assertThat(LottoTickets.createAutoAndAdd(new Money("5000"), manualLottoTickets).getLottoTicketsSize()).isEqualTo(5);
     }
 }
