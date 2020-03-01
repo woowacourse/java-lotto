@@ -23,7 +23,7 @@ public class Lottos {
 		this.lottos = Collections.unmodifiableList(inputLottos);
 	}
 
-	public Lottos add(final Lottos tailLottos) {
+	public Lottos concat(final Lottos tailLottos) {
 		List<Lotto> lottos = new ArrayList<>(this.lottos);
 		lottos.addAll(tailLottos.lottos);
 		return new Lottos(lottos);

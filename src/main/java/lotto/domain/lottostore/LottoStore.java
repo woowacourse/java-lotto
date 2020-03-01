@@ -1,10 +1,9 @@
 package lotto.domain.lottostore;
 
 import java.util.List;
+import java.util.Objects;
 
-import lotto.domain.lottos.InvalidLottosException;
-import lotto.domain.lottos.Lottos;
-import lotto.domain.lottos.LottosFactory;
+import lotto.domain.lottos.*;
 import lotto.domain.lottocount.LottoCount;
 
 /**
@@ -16,16 +15,16 @@ import lotto.domain.lottocount.LottoCount;
  * 날짜 : 2020/02/28
  */
 public class LottoStore {
-	public Lottos buy(LottoCount manualLottoCount, LottoCount autoLottoCount, List<String> inputManualLottoNumbers) {
-		validate(manualLottoCount, inputManualLottoNumbers);
-		Lottos manualLottos = LottosFactory.createManualLottos(inputManualLottoNumbers);
-		Lottos autoLottos = LottosFactory.createAutoLottos(autoLottoCount.getLottoCount());
-		return manualLottos.add(autoLottos);
-	}
+	private static final String NULL_INPUT_EXCEPTION_MESSAGE = "입력이 null일 수 없습니다.";
 
-	private void validate(LottoCount manualLottoCount, List<String> inputManualLottoNumbers) {
-		if (manualLottoCount.getLottoCount() != inputManualLottoNumbers.size()) {
-			throw new InvalidLottosException("구매하려는 수동 장수와 입력 수동 장수가 맞지 않습니다.");
-		}
+	public Lottos purchase(LottoCount autoLottoCount, List<String> inputManualLottoNumbers) {
+		Objects.requireNonNull(autoLottoCount, NULL_INPUT_EXCEPTION_MESSAGE);
+		Objects.requireNonNull(inputManualLottoNumbers, NULL_INPUT_EXCEPTION_MESSAGE);
+		LottosGeneratable manualLottoMachine = new ManualLottosMachine(inputManualLottoNumbers);
+		LottosGeneratable autoLottoMachine = new AutoLottosMachine(autoLottoCount);
+
+		Lottos manualLottos = manualLottoMachine.create();
+		Lottos autoLottos = autoLottoMachine.create();
+		return manualLottos.concat(autoLottos);
 	}
 }
