@@ -2,11 +2,8 @@ package lotto.domain.lottos;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoFactory;
-import lotto.domain.lottos.InvalidLottosException;
-import lotto.domain.lottos.Lottos;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Arrays;
@@ -43,14 +40,5 @@ public class LottosTest {
 			new Lottos(nullInput);
 		}).isInstanceOf(NullPointerException.class)
 				.hasMessage("입력이 null일 수 없습니다.");
-	}
-
-	@ParameterizedTest
-	@EmptySource
-	void Lottos_빈_리스트_입력시_예외처리(List<Lotto> emptyInput) {
-		assertThatThrownBy(() -> {
-			new Lottos(emptyInput);
-		}).isInstanceOf(InvalidLottosException.class)
-				.hasMessage("로또는 한 장 이상 사야합니다.");
 	}
 }

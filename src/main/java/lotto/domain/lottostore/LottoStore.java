@@ -16,32 +16,16 @@ import lotto.domain.lottocount.LottoCount;
  * 날짜 : 2020/02/28
  */
 public class LottoStore {
-	private static final int MINIMUM_COUNT = 0;
-
 	public Lottos buy(LottoCount manualLottoCount, LottoCount autoLottoCount, List<String> inputManualLottoNumbers) {
 		validate(manualLottoCount, inputManualLottoNumbers);
-		if (isManualAndAuto(autoLottoCount, manualLottoCount)) {
-			Lottos manualLottos = LottosFactory.createManualLottos(inputManualLottoNumbers);
-			Lottos autoLottos = LottosFactory.createAutoLottos(autoLottoCount.getLottoCount());
-			return manualLottos.add(autoLottos);
-		}
-		if (isOnlyAuto(manualLottoCount)) {
-			return LottosFactory.createAutoLottos(autoLottoCount.getLottoCount());
-		}
-		return LottosFactory.createManualLottos(inputManualLottoNumbers);
+		Lottos manualLottos = LottosFactory.createManualLottos(inputManualLottoNumbers);
+		Lottos autoLottos = LottosFactory.createAutoLottos(autoLottoCount.getLottoCount());
+		return manualLottos.add(autoLottos);
 	}
 
 	private void validate(LottoCount manualLottoCount, List<String> inputManualLottoNumbers) {
 		if (manualLottoCount.getLottoCount() != inputManualLottoNumbers.size()) {
 			throw new InvalidLottosException("구매하려는 수동 장수와 입력 수동 장수가 맞지 않습니다.");
 		}
-	}
-
-	private boolean isManualAndAuto(LottoCount autoLottoCount, LottoCount manualLottoCount) {
-		return autoLottoCount.getLottoCount() != MINIMUM_COUNT && manualLottoCount.getLottoCount() != MINIMUM_COUNT;
-	}
-
-	private boolean isOnlyAuto(LottoCount manualLottoCount) {
-		return manualLottoCount.getLottoCount() == MINIMUM_COUNT;
 	}
 }
