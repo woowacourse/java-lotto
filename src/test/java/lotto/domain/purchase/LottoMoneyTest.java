@@ -10,14 +10,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoMoneyTest {
 	@ParameterizedTest
-	@ValueSource(longs = {1_000, 3_000, 5_000, 15_000})
-	void LottoMoney_validInputNumber_generateInstance(long value) {
+	@ValueSource(ints = {1_000, 3_000, 5_000, 15_000})
+	void LottoMoney_validInputNumber_generateInstance(int value) {
 		assertThat(new LottoMoney(value)).isInstanceOf(LottoMoney.class);
 	}
 
 	@Test
 	void validateNegative_NegativeNumber_InvalidLottoMoneyExceptionThrown() {
-		long value = -1L;
+		int value = -1;
 
 		assertThatThrownBy(() -> new LottoMoney(value))
 			.isInstanceOf(InvalidLottoMoneyException.class)
@@ -25,8 +25,8 @@ public class LottoMoneyTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(longs = {1_001, 1_010, 1_100})
-	void validateUnit_InvalidUnitNumber_InvalidLottoMoneyExceptionThrown(long value) {
+	@ValueSource(ints = {1_001, 1_010, 1_100})
+	void validateUnit_InvalidUnitNumber_InvalidLottoMoneyExceptionThrown(int value) {
 		assertThatThrownBy(() -> new LottoMoney(value))
 			.isInstanceOf(InvalidLottoMoneyException.class)
 			.hasMessage(InvalidLottoMoneyException.INVALID_UNIT);
@@ -42,7 +42,7 @@ public class LottoMoneyTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"abc", "124.1"})
-	void valueOf_NotLongTypeNumber_InvalidLottoMoneyExceptionThrown(String value) {
+	void valueOf_NotintTypeNumber_InvalidLottoMoneyExceptionThrown(String value) {
 		assertThatThrownBy(() -> LottoMoney.valueOf(value))
 			.isInstanceOf(InvalidLottoMoneyException.class)
 			.hasMessage(InvalidLottoMoneyException.NOT_INTEGER);
@@ -50,7 +50,7 @@ public class LottoMoneyTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {"10000,10", "15000,15", "37000,37"})
-	void countPurchasingLottoTicket_ValidUnitLottoMoney_DivideByUnit(long value, long value1) {
+	void countPurchasingLottoTicket_ValidUnitLottoMoney_DivideByUnit(int value, int value1) {
 		LottoMoney lottoMoney = new LottoMoney(value);
 
 		PurchasingCount actual = lottoMoney.generatePurchasingLottoTicketCount();
@@ -61,8 +61,8 @@ public class LottoMoneyTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(longs = {1_000, 2_000, 3_000})
-	void addBy_AddedLottoMoney_SumThisLottoMoneyAndInputAddedLottoMoney(long value) {
+	@ValueSource(ints = {1_000, 2_000, 3_000})
+	void addBy_AddedLottoMoney_SumThisLottoMoneyAndInputAddedLottoMoney(int value) {
 		int initLottoMoney = 1_000;
 		LottoMoney lottoMoney = new LottoMoney(initLottoMoney);
 		LottoMoney addedLottoMoney = new LottoMoney(value);
@@ -74,8 +74,8 @@ public class LottoMoneyTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(longs = {1, 2, 4})
-	void multiplyBy_MultiplyLottoMoney_MultiplyThisLottoMoneyByInputOperand(long value) {
+	@ValueSource(ints = {1, 2, 4})
+	void multiplyBy_MultiplyLottoMoney_MultiplyThisLottoMoneyByInputOperand(int value) {
 		int initLottoMoney = 1_000;
 		LottoMoney lottoMoney = new LottoMoney(initLottoMoney);
 
@@ -86,15 +86,15 @@ public class LottoMoneyTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(longs = {5_000, 15_000, 100_000})
-	void measureWinningRate_AmountOfPurchaseLottoMoney_WinningRateByPercentage(long value) {
-		long winningLottoMoney = 3_000_000L;
+	@ValueSource(ints = {5_000, 15_000, 100_000})
+	void measureWinningRate_AmountOfPurchaseLottoMoney_WinningRateByPercentage(int value) {
+		int winningLottoMoney = 3_000_000;
 		LottoMoney lottoMoney = new LottoMoney(winningLottoMoney);
 		LottoMoney amountOfPurchaseLottoMoney = new LottoMoney(value);
 
-		long actual = lottoMoney.measureWinningRate(amountOfPurchaseLottoMoney);
+		int actual = lottoMoney.measureWinningRate(amountOfPurchaseLottoMoney);
 
-		long expected = (winningLottoMoney / value) * 100L;
+		int expected = (winningLottoMoney / value) * 100;
 		assertThat(actual).isEqualTo(expected);
 	}
 }

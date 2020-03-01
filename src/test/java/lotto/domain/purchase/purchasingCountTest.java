@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 class purchasingCountTest {
 	@Test
 	void PurchasingCount_InputPurchasingCount_GenerateInstance() {
-		long value = 10;
+		int value = 10;
 
 		assertThat(new PurchasingCount(value)).isInstanceOf(PurchasingCount.class);
 	}
 
 	@Test
 	void validate_NegativeNumber_InvalidPurchasingCountExceptionThrown() {
-		long value = -1;
+		int value = -1;
 
 		assertThatThrownBy(() -> new PurchasingCount(value))
 			.isInstanceOf(InvalidPurchasingCountException.class)
@@ -24,7 +24,7 @@ class purchasingCountTest {
 	@Test
 	void isOverBy_BiggerNumberThanPurchasingCount_ReturnTrue() {
 		PurchasingCount purchasingCount = new PurchasingCount(10);
-		long compareValue = 15;
+		int compareValue = 15;
 
 		boolean actual = purchasingCount.isOverBy(compareValue);
 
@@ -33,7 +33,7 @@ class purchasingCountTest {
 
 	@Test
 	void purchaseFor_ManualLottoTicketCount_MinusManualLottoTicketCount() {
-		long purchasingCountValue = 10;
+		int purchasingCountValue = 10;
 		PurchasingCount purchasingCount = new PurchasingCount(purchasingCountValue);
 		ManualLottoTicketCount manualLottoTicketCount = new ManualLottoTicketCount("5", purchasingCount);
 

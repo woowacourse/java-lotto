@@ -18,9 +18,9 @@ public class LottoMachine {
 		purchasingCount.purchaseFor(manualLottoTicketCount);
 	}
 
-	public List<Long> getNumberOfManualAndAutoLottoTickets() {
+	public List<Integer> getNumberOfManualAndAutoLottoTickets() {
 		return Arrays.asList(
-			(long)manualLottoTicketCount.getManualLottoTicketCount(),
+			manualLottoTicketCount.getManualLottoTicketCount(),
 			purchasingCount.getPurchasingCount());
 	}
 

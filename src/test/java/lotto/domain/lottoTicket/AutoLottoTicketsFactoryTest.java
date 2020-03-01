@@ -9,8 +9,8 @@ import lotto.domain.purchase.PurchasingCount;
 
 class AutoLottoTicketsFactoryTest {
 	@ParameterizedTest
-	@ValueSource(longs = {1, 4, 7, 10})
-	void generate_NumberOfLottoTicket_ReturnLottoTickets(long value) {
+	@ValueSource(ints = {1, 4, 7, 10})
+	void generate_NumberOfLottoTicket_ReturnLottoTickets(int value) {
 		PurchasingCount purchasingCount = new PurchasingCount(value);
 
 		LottoTickets actual = AutoLottoTicketsFactory.generate(purchasingCount);

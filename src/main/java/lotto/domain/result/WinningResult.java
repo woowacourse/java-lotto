@@ -31,7 +31,7 @@ public class WinningResult {
 		return winningResult;
 	}
 
-	public long calculateWinningRate(LottoMoney lottoMoney) {
+	public int calculateWinningRate(LottoMoney lottoMoney) {
 		LottoMoney totalLottoMoney = calculateTotalWinningLottoMoney();
 		return totalLottoMoney.measureWinningRate(lottoMoney);
 	}
@@ -40,8 +40,8 @@ public class WinningResult {
 		return winningResult.entrySet().stream()
 			.map(entry -> {
 				LottoRank lottoRank = entry.getKey();
-				Long lottoRankCount = entry.getValue();
-				return lottoRank.calculateWinningLottoMoneyBy(lottoRankCount);
+				long lottoRankCount = entry.getValue();
+				return lottoRank.calculateWinningLottoMoneyBy((int)lottoRankCount);
 			})
 			.reduce(LottoMoney.ZERO, LottoMoney::addBy);
 	}

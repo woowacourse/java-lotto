@@ -5,20 +5,20 @@ import java.util.Objects;
 
 public class PurchasingCount implements Iterator<PurchasingCount> {
 
-	private long purchasingCount;
+	private int purchasingCount;
 
-	public PurchasingCount(long purchasingCount) {
+	public PurchasingCount(int purchasingCount) {
 		validate(purchasingCount);
 		this.purchasingCount = purchasingCount;
 	}
 
-	private void validate(long purchasingCount) {
+	private void validate(int purchasingCount) {
 		if (purchasingCount < 0L) {
 			throw new InvalidPurchasingCountException(InvalidPurchasingCountException.INVALID);
 		}
 	}
 
-	public boolean isOverBy(long comparePurchasingCount) {
+	public boolean isOverBy(int comparePurchasingCount) {
 		return purchasingCount < comparePurchasingCount;
 	}
 
@@ -26,7 +26,7 @@ public class PurchasingCount implements Iterator<PurchasingCount> {
 		purchasingCount -= manualLottoTicketCount.getManualLottoTicketCount();
 	}
 
-	public long getPurchasingCount() {
+	public int getPurchasingCount() {
 		return purchasingCount;
 	}
 
@@ -60,7 +60,7 @@ public class PurchasingCount implements Iterator<PurchasingCount> {
 
 	@Override
 	public String toString() {
-		return Long.toString(purchasingCount);
+		return Integer.toString(purchasingCount);
 	}
 
 }

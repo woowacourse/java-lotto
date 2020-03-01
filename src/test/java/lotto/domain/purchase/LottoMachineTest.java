@@ -27,14 +27,14 @@ class LottoMachineTest {
 		ManualLottoTicketCount manualLottoTicketCount = new ManualLottoTicketCount("5", purchasingCount);
 		LottoMachine lottoMachine = new LottoMachine(purchasingCount, manualLottoTicketCount);
 
-		List<Long> expected = Arrays.asList(5L, 5L);
+		List<Integer> expected = Arrays.asList(5, 5);
 
 		assertThat(lottoMachine.getNumberOfManualAndAutoLottoTickets()).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
-	@ValueSource(longs = {1, 5, 10})
-	void purchaseLottoTicketsManualAndAutoBy_InputManualLottoTickets_GenerateLottoTickets(long value) {
+	@ValueSource(ints = {1, 5, 10})
+	void purchaseLottoTicketsManualAndAutoBy_InputManualLottoTickets_GenerateLottoTickets(int value) {
 		PurchasingCount purchasingCount = new PurchasingCount(value);
 		ManualLottoTicketCount manualLottoTicketCount = new ManualLottoTicketCount("1", purchasingCount);
 		LottoMachine lottoMachine = new LottoMachine(purchasingCount, manualLottoTicketCount);

@@ -23,7 +23,7 @@ class StringUtilTest {
 	@ParameterizedTest
 	@EnumSource(value = LottoRank.class, names = {"SECOND"})
 	void generateFormOfLottoRank_SecondLottoRankAndLottoRankCount_generateResultMessage(LottoRank lottoRank) {
-		Long value = 3L;
+		long value = 3L;
 
 		String actual = StringUtil.generateFormOfLottoRank(lottoRank, value);
 
@@ -40,7 +40,7 @@ class StringUtilTest {
 		names = {"SECOND"},
 		mode = EnumSource.Mode.EXCLUDE)
 	void generateFormOfLottoRank_DefaultLottoRankAndLottoRankCount_generateResultMessage(LottoRank lottoRank) {
-		Long value = 3L;
+		long value = 3L;
 
 		String actual = StringUtil.generateFormOfLottoRank(lottoRank, value);
 

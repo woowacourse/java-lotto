@@ -21,9 +21,7 @@ public class LottoTickets {
 	public WinningResult produceWinningResultBy(WinningLotto winningLotto) {
 		return lottoTickets.stream()
 			.map(winningLotto::match)
-			.collect(collectingAndThen(
-				groupingBy(Function.identity(), counting()),
-				WinningResult::new));
+			.collect(collectingAndThen(groupingBy(Function.identity(), counting()), WinningResult::new));
 	}
 
 	public LottoTickets concat(LottoTickets concatenatedLottoTickets) {

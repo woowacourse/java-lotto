@@ -27,7 +27,7 @@ public class ConsoleOutputView {
 		System.out.println(INPUT_MANUAL_LOTTO_TICKETS_COUNT_MESSAGE);
 	}
 
-	public static void printPurchasedLottoTicketCount(List<Long> manualAndAutoLottoTicketsCount) {
+	public static void printPurchasedLottoTicketCount(List<Integer> manualAndAutoLottoTicketsCount) {
 		System.out.println(String.format(PURCHASE_LOTTO_COMPLETE_MESSAGE,
 			manualAndAutoLottoTicketsCount.get(MANUAL_LOTTO_TICKETS_COUNT_INDEX),
 			manualAndAutoLottoTicketsCount.get(AUTO_LOTTO_TICKETS_COUNT_INDEX)));
@@ -52,7 +52,7 @@ public class ConsoleOutputView {
 			System.out.println(StringUtil.generateFormOfLottoRank(lottoRank, lottoRankCount)));
 	}
 
-	public static void printWinningRate(long winningResult) {
+	public static void printWinningRate(int winningResult) {
 		System.out.println(String.format(TOTAL_WINNING_RATE_MESSAGE, winningResult));
 	}
 

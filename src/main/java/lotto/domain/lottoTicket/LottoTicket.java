@@ -51,7 +51,7 @@ public class LottoTicket {
 	}
 
 	private void validateDuplication(List<LottoNumber> lottoNumbers) {
-		long distinctSize = new HashSet<>(lottoNumbers).size();
+		int distinctSize = new HashSet<>(lottoNumbers).size();
 
 		if (distinctSize != lottoNumbers.size()) {
 			throw new InvalidLottoTicketException(InvalidLottoTicketException.DUPLICATION);

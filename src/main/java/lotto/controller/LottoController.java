@@ -33,11 +33,11 @@ public class LottoController {
 		WinningResult winningResult = lottoTickets.produceWinningResultBy(winningLotto);
 		ConsoleOutputView.printWinningLottoResult(winningResult);
 
-		long winningRate = winningResult.calculateWinningRate(lottoMoney);
+		int winningRate = winningResult.calculateWinningRate(lottoMoney);
 		ConsoleOutputView.printWinningRate(winningRate);
 	}
 
-	private static LottoMoney receiveInputLottoMoney() {
+	private LottoMoney receiveInputLottoMoney() {
 		try {
 			String inputLottoMoney = ConsoleInputView.inputLottoMoney();
 			return LottoMoney.valueOf(inputLottoMoney);
@@ -95,7 +95,7 @@ public class LottoController {
 		}
 	}
 
-	private static LottoTicket receiveInputWinningLottoTicket() {
+	private LottoTicket receiveInputWinningLottoTicket() {
 		try {
 			String inputWinningLottoNumbers = ConsoleInputView.inputWinningLottoNumbers();
 			return LottoTicket.valueOf(inputWinningLottoNumbers);
@@ -105,7 +105,7 @@ public class LottoController {
 		}
 	}
 
-	private static LottoNumber receiveInputBonusLottoNumber() {
+	private LottoNumber receiveInputBonusLottoNumber() {
 		try {
 			String inputBonusLottoNumber = ConsoleInputView.inputBonusLottoNumber();
 			return LottoNumber.valueOf(inputBonusLottoNumber);
