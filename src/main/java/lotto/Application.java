@@ -26,7 +26,7 @@ public class Application {
         LottoResult lottoResult = createLottoResult(lottoTickets, winningLotto);
 
         OutputView.printLottoResult(lottoResult);
-        OutputView.printProfit(lottoResult, lottoMoney);
+        OutputView.printProfit(lottoResult.getProfit(lottoMoney));
     }
 
     private static LottoMoney createLottoMoney() {

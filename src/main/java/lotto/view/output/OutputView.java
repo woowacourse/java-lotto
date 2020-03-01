@@ -2,7 +2,6 @@ package lotto.view.output;
 
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
-import lotto.domain.money.LottoMoney;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.Rank;
 
@@ -37,8 +36,7 @@ public class OutputView {
         return String.format(RANK_FORMATTED_STRING, rank.getCountOfMatches(), rank.getWinningMoney(), lottoResult.count(rank));
     }
 
-    public static void printProfit(LottoResult lottoResult, LottoMoney lottoMoney) {
-        double profit = lottoResult.getProfit(lottoMoney);
+    public static void printProfit(double profit) {
         System.out.println(String.format(PROFIT_FORMATTED_STRING, profit));
     }
 }
