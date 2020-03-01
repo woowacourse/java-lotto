@@ -14,16 +14,12 @@ import lotto.domain.lottonumber.LottoNumber;
  * 날짜 : 2020/02/19
  */
 public class Lotto {
-	private static final String NULL_INPUT_EXCEPTION_MESSAGE = "입력이 null 입니다.";
-	private static final String EMPTY_LOTTO_EXCEPTION_MESSAGE = "로또번호가 입력되지 않았습니다.";
-	private static final String LOTTO_OVERLAP_EXCEPTION_MESSAGE = "입력 로또번호에 중복이 있습니다.";
-	private static final String SIX_NUMBERS_FOR_ONT_LOTTO_EXCEPTION_MESSAGE = "입력 로또번호는 6개가 입력되어야 합니다.";
 	private static final int LOTTO_LENGTH = 6;
 
 	protected final Set<LottoNumber> lottoNumbers;
 
 	public Lotto(final List<LottoNumber> inputLottoNumbers) {
-		Objects.requireNonNull(inputLottoNumbers, NULL_INPUT_EXCEPTION_MESSAGE);
+		Objects.requireNonNull(inputLottoNumbers, "입력이 null 입니다.");
 		this.lottoNumbers = inputLottoNumbers.stream()
 				.collect(
 						Collectors.toCollection(
@@ -41,19 +37,19 @@ public class Lotto {
 
 	private void validateEmptyInput() {
 		if (lottoNumbers.isEmpty()) {
-			throw new InvalidLottoException(EMPTY_LOTTO_EXCEPTION_MESSAGE);
+			throw new InvalidLottoException("로또번호가 입력되지 않았습니다.");
 		}
 	}
 
 	private void validateDuplicatedInput(List<LottoNumber> inputLottoNumbers) {
 		if (lottoNumbers.size() != inputLottoNumbers.size()) {
-			throw new InvalidLottoException(LOTTO_OVERLAP_EXCEPTION_MESSAGE);
+			throw new InvalidLottoException("입력 로또번호에 중복이 있습니다.");
 		}
 	}
 
 	private void validateInputLength() {
 		if (lottoNumbers.size() != LOTTO_LENGTH) {
-			throw new InvalidLottoException(SIX_NUMBERS_FOR_ONT_LOTTO_EXCEPTION_MESSAGE);
+			throw new InvalidLottoException("입력 로또번호는 6개가 입력되어야 합니다.");
 		}
 	}
 

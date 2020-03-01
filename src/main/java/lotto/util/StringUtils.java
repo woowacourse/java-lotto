@@ -18,10 +18,6 @@ import lotto.domain.lottonumber.LottoNumber;
 public class StringUtils {
 	private static final String DELIMITER = ",";
 	private static final String INPUT_LOTTO_NUMBER_VALIDATION_PATTERN = "^((( *\\d* *, *){5})\\d+)";
-	private static final String NULL_INPUT_EXCEPTION_MESSAGE = "로또번호로 null 이 입력될 수 없습니다.";
-	private static final String EMPTY_INPUT_EXCEPTION_MESSAGE = "아무것도 입력하지 않으셨습니다.";
-	private static final String INVALID_INPUT_EXCEPTION_MESSAGE = "잘못된 형식으로 입력하셨습니다.";
-	private static final String NONE_INTEGER_INPUT_EXCEPTION_MESSAGE = "입력 로또 번호가 정수가 아닙니다.";
 
 	private StringUtils() {
 	}
@@ -30,7 +26,7 @@ public class StringUtils {
 		try {
 			return Integer.parseInt(inputBonusLottoNumber);
 		} catch (NumberFormatException nfe) {
-			throw new IllegalArgumentException(NONE_INTEGER_INPUT_EXCEPTION_MESSAGE);
+			throw new IllegalArgumentException("입력 로또 번호가 정수가 아닙니다.");
 		}
 	}
 
@@ -45,19 +41,19 @@ public class StringUtils {
 	}
 
 	private static void validateInputString(final String inputString) {
-		Objects.requireNonNull(inputString, NULL_INPUT_EXCEPTION_MESSAGE);
+		Objects.requireNonNull(inputString, "로또번호로 null 이 입력될 수 없습니다.");
 		validateInputStringEmpty(inputString);
 	}
 
 	private static void validateInputStringEmpty(final String inputLottoNumbers) {
 		if (inputLottoNumbers.isEmpty()) {
-			throw new IllegalArgumentException(EMPTY_INPUT_EXCEPTION_MESSAGE);
+			throw new IllegalArgumentException("아무것도 입력하지 않으셨습니다.");
 		}
 	}
 
 	private static void validateInputLottoNumber(final String inputLottoNumbers) {
 		if (!inputLottoNumbers.matches(INPUT_LOTTO_NUMBER_VALIDATION_PATTERN)) {
-			throw new IllegalArgumentException(INVALID_INPUT_EXCEPTION_MESSAGE);
+			throw new IllegalArgumentException("잘못된 형식으로 입력하셨습니다.");
 		}
 	}
 }

@@ -12,9 +12,6 @@ import java.util.Objects;
  */
 public class MoneyForLotto {
 	private static final int LOTTO_PRICE = 1000;
-	private static final String MIN_PRICE_EXCEPTION_MESSAGE = "1000원 이상 입력해주세요.";
-	private static final String NULL_INPUT_EXCEPTION_MESSAGE = "입력금액은 null일 수 업습니다.";
-	private static final String NONE_INTEGER_INPUT_EXCEPTION_MESSAGE = "입력금액이 정수가 아닙니다.";
 
 	private final int moneyForLotto;
 
@@ -26,18 +23,18 @@ public class MoneyForLotto {
 		try {
 			return Integer.parseInt(inputMoney);
 		} catch (NumberFormatException nfe) {
-			throw new InvalidMoneyForLottoException(NONE_INTEGER_INPUT_EXCEPTION_MESSAGE);
+			throw new InvalidMoneyForLottoException("입력금액이 정수가 아닙니다.");
 		}
 	}
 
 	private void validateMinPrice(int inputMoney) {
 		if (inputMoney < LOTTO_PRICE) {
-			throw new InvalidMoneyForLottoException(MIN_PRICE_EXCEPTION_MESSAGE);
+			throw new InvalidMoneyForLottoException("1000원 이상 입력해주세요.");
 		}
 	}
 
 	private int validateMoneyForLotto(final String inputMoney) {
-		Objects.requireNonNull(inputMoney, NULL_INPUT_EXCEPTION_MESSAGE);
+		Objects.requireNonNull(inputMoney, "입력금액은 null일 수 업습니다.");
 		int integerMoney = parseToInteger(inputMoney);
 		validateMinPrice(integerMoney);
 		return integerMoney;

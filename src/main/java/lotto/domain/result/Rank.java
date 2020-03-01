@@ -26,7 +26,6 @@ public enum Rank {
 	SIXTH(new ArrayList<>(Arrays.asList(0, 1, 2)), 0);
 
 	private static final int MATCH_COUNT_RELATED_TO_BONUS = 5;
-	private static final String CAN_NOT_GET_RANK_EXCEPTION_MESSAGE = "로또의 등수를 구할 수 없습니다.";
 
 	private List<Integer> matchCounts;
 	private int reward;
@@ -51,7 +50,7 @@ public enum Rank {
 		return Arrays.stream(Rank.values())
 				.filter(value -> value.matchCounts.contains(matchCount))
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException(CAN_NOT_GET_RANK_EXCEPTION_MESSAGE));
+				.orElseThrow(() -> new IllegalArgumentException("로또의 등수를 구할 수 없습니다."));
 	}
 
 	public static List<Rank> getReversedProfitableValues() {

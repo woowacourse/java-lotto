@@ -18,9 +18,6 @@ import lotto.util.StringUtils;
  * 날짜 : 2020/02/19
  */
 public class WinningLotto {
-	private static final String BONUS_NUMBER_OVERLAP_EXCEPTION_MESSAGE = "보너스 번호는 당첨번호와 중복될 수 없습니다.";
-	private static final String NULL_INPUT_EXCEPTION_MESSAGE = "매개변수가 null 입니다.";
-
 	private Lotto winningLotto;
 	private LottoNumber bonusLottoNumber;
 
@@ -29,7 +26,7 @@ public class WinningLotto {
 		this.winningLotto = LottoFactory.createManualLotto(LottoType.WINNING_LOTTO, winningLottoNumbers);
 		LottoNumber bonusLottoNumber = LottoNumber.of(StringUtils.parseToInteger(inputBonusLottoNumber));
 		if (this.winningLotto.isContain(bonusLottoNumber)) {
-			throw new InvalidLottoNumberException(BONUS_NUMBER_OVERLAP_EXCEPTION_MESSAGE);
+			throw new InvalidLottoNumberException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
 		}
 		this.bonusLottoNumber = bonusLottoNumber;
 	}
@@ -41,7 +38,7 @@ public class WinningLotto {
 	}
 
 	public int calculateMatchCount(Lotto lotto) {
-		Objects.requireNonNull(lotto, NULL_INPUT_EXCEPTION_MESSAGE);
+		Objects.requireNonNull(lotto, "매개변수가 null 입니다.");
 		return (int) lotto.getLottoNumbers()
 				.stream()
 				.filter(this::isContain)
