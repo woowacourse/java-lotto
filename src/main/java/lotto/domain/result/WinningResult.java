@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.Money;
 
 public class WinningResult {
@@ -16,7 +17,7 @@ public class WinningResult {
 	public long calculateProfitRate() {
 		Money totalPrize = calculateTotalPrize();
 		Money totalMoney = calculateTotalMoney();
-		return totalPrize.calculateProfitRate(totalMoney);
+		return totalPrize.calculatePercentage(totalMoney);
 	}
 
 	private Money calculateTotalPrize() {
@@ -28,7 +29,7 @@ public class WinningResult {
 	private Money calculateTotalMoney() {
 		return winningResult.keySet().stream()
 			.map(winningResult::get)
-			.map(count -> Money.valueOf(Money.UNIT * count))
+			.map(count -> Money.valueOf(LottoTicket.PRICE * count))
 			.reduce(Money.valueOf(0), Money::plus);
 	}
 

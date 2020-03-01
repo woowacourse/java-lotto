@@ -28,8 +28,8 @@ public final class LottoCount {
 		return LottoCount.valueOf(this.lottoCount - other.lottoCount);
 	}
 
-	public boolean isLessThan(LottoCount otherLottoCount) {
-		return this.lottoCount < otherLottoCount.lottoCount;
+	public boolean isLessThan(LottoCount other) {
+		return this.lottoCount < other.lottoCount;
 	}
 
 	boolean isNonFullCount(int currentCount) {

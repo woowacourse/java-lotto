@@ -14,7 +14,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.domain.ticket.Money;
+import lotto.domain.ticket.LottoTicket;
 
 public class WinningResultTest {
 	private WinningResult result;
@@ -35,7 +35,7 @@ public class WinningResultTest {
 	@DisplayName("당첨 정보를 통해 수익률 계산 테스트")
 	@Test
 	void calculateProfitsRate() {
-		long expected = (2_000_000_000L + 5_000L + 50_000L) * 10L * 100 / (32 * Money.UNIT);
+		long expected = (2_000_000_000L + 5_000L + 50_000L) * 10L * 100 / (32 * LottoTicket.PRICE);
 		assertThat(result.calculateProfitRate()).isEqualTo(expected);
 	}
 

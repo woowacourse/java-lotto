@@ -24,7 +24,7 @@ public class LottoTickets {
 			.collect(collectingAndThen(toList(), LottoTickets::new));
 	}
 
-	public LottoRanks findLottoRanks(WinningLotto winningLotto) {
+	public LottoRanks matchLottoRanks(WinningLotto winningLotto) {
 		return lottoTickets.stream()
 			.map(winningLotto::calculateRank)
 			.collect(collectingAndThen(toList(), LottoRanks::new));

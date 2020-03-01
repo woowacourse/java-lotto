@@ -12,7 +12,7 @@ import lotto.domain.ticket.LottoBall;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 
-public class PrintTextUtil {
+public class OutputTextUtil {
 	private static final String LOTTO_NUMBERS_DELIMITER = ", ";
 	private static final String LOTTO_NUMBER_PREFIX = "[";
 	private static final String LOTTO_NUMBER_SUFFIX = "]";
@@ -23,14 +23,14 @@ public class PrintTextUtil {
 		"%%s개 일치, 보너스 볼 일치 (%%s원) - %%s개%s", LINE_SEPARATOR);
 	private static final String EMPTY_MESSAGE = "";
 
-	private PrintTextUtil() {
+	private OutputTextUtil() {
 	}
 
 	public static String createLottosText(LottoTickets lottoTickets) {
 		return lottoTickets.getLottoTickets().stream()
 			.map(LottoTicket::getLottoBalls)
-			.map(PrintTextUtil::parseLottoTicket)
-			.map(PrintTextUtil::joinLottoTicket)
+			.map(OutputTextUtil::parseLottoTicket)
+			.map(OutputTextUtil::joinLottoTicket)
 			.collect(joining(LINE_SEPARATOR));
 	}
 

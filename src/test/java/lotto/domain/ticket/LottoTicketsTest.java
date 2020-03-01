@@ -48,7 +48,7 @@ public class LottoTicketsTest {
 			of(1, 2, 10, 11, 12, 13)
 		));
 
-		LottoRanks lottoRanks = lottos.findLottoRanks(winningLotto);
+		LottoRanks lottoRanks = lottos.matchLottoRanks(winningLotto);
 		assertThat(lottoRanks).extracting("lottoRanks").isEqualTo(ranks);
 	}
 

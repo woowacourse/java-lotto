@@ -5,9 +5,8 @@ import java.util.Objects;
 public final class Money {
 	private static final int PROFIT_PERCENTAGE = 100;
 	private static final int MINIMUM_MONEY = 0;
-	private static final String NOT_GREATER_THAN_MINIMUM_EXCEPTION_MESSAGE = String.format("%d 보다 작은 값은 받을 수 없습니다.",
-		MINIMUM_MONEY);
-	public static final long UNIT = 1000;
+	private static final int DEFAULT_PERCENTAGE = 0;
+	private static final String NOT_GREATER_THAN_MINIMUM_EXCEPTION_MESSAGE = "%d 보다 작은 값은 받을 수 없습니다.";
 
 	private final long money;
 
@@ -18,7 +17,8 @@ public final class Money {
 
 	private void validateGreaterThanMinimum(long money) {
 		if (money < MINIMUM_MONEY) {
-			throw new IllegalArgumentException(NOT_GREATER_THAN_MINIMUM_EXCEPTION_MESSAGE);
+			throw new IllegalArgumentException(
+				String.format(NOT_GREATER_THAN_MINIMUM_EXCEPTION_MESSAGE, MINIMUM_MONEY));
 		}
 	}
 
@@ -27,7 +27,7 @@ public final class Money {
 	}
 
 	public LottoCount calculatePurchaseCount() {
-		return LottoCount.valueOf((int)(money / UNIT));
+		return LottoCount.valueOf((int)(money / LottoTicket.PRICE));
 	}
 
 	public Money multiply(long multiplier) {
@@ -38,11 +38,11 @@ public final class Money {
 		return Money.valueOf(money + other.money);
 	}
 
-	public long calculateProfitRate(Money lottoPrice) {
-		if (lottoPrice.money == MINIMUM_MONEY) {
-			return 0;
+	public long calculatePercentage(Money other) {
+		if (other.money == MINIMUM_MONEY) {
+			return DEFAULT_PERCENTAGE;
 		}
-		return money * PROFIT_PERCENTAGE / lottoPrice.money;
+		return money * PROFIT_PERCENTAGE / other.money;
 	}
 
 	public long getMoney() {
