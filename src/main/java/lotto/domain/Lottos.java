@@ -15,9 +15,11 @@ public class Lottos {
         this.elements = elements;
     }
 
-    public static Lottos combine(Lottos lottos1, Lottos lottos2) {
-        List<Lotto> totalElements = new ArrayList<>(lottos1.elements);
-        totalElements.addAll(lottos2.elements);
+    public static Lottos combineAll(List<Lottos> lottos) {
+        List<Lotto> totalElements = new ArrayList<>();
+        for (Lottos lottosElement : lottos) {
+            totalElements.addAll(lottosElement.elements);
+        }
         return new Lottos(totalElements);
     }
 
