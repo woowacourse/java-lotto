@@ -20,15 +20,13 @@ import java.util.stream.Collectors;
 
 public class LottoService {
 
-    private GameParser gameParser = new GameParser();
-
     public LottoMoney createLottoMoney(String inputMoney) {
-        int money = gameParser.parseInputToInt(inputMoney);
+        int money = GameParser.parseInputToInt(inputMoney);
         return new LottoMoney(money);
     }
 
     public Count createCount(LottoMoney lottoMoney, String inputManualCount) {
-        int manualCount = gameParser.parseInputToInt(inputManualCount);
+        int manualCount = GameParser.parseInputToInt(inputManualCount);
         return new Count(lottoMoney.getLottoPurchaseCounts(), manualCount);
     }
 
@@ -40,7 +38,7 @@ public class LottoService {
 
     private LottoTickets createManualLottoTickets(List<String> lottoTicketInputs) {
         List<LottoTicket> lottoTickets = lottoTicketInputs.stream()
-                .map(gameParser::parseInputToNumbers)
+                .map(GameParser::parseInputToNumbers)
                 .map(LottoFactory::publishLottoTicketFrom)
                 .collect(Collectors.toList());
 
@@ -56,8 +54,8 @@ public class LottoService {
     }
 
     public WinningLotto createWinningLotto(String inputNumbers, String inputBonusNumber) {
-        Set<Integer> winningLottoNumbers = gameParser.parseInputToNumbers(inputNumbers);
-        Integer bonusNumber = gameParser.parseInputToInt(inputBonusNumber);
+        Set<Integer> winningLottoNumbers = GameParser.parseInputToNumbers(inputNumbers);
+        Integer bonusNumber = GameParser.parseInputToInt(inputBonusNumber);
         return LottoFactory.publishWinningLotto(winningLottoNumbers, bonusNumber);
     }
 
