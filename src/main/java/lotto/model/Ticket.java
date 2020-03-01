@@ -15,6 +15,7 @@ public class Ticket {
     public static final int LOTTO_NUMBER_LENGTH = 6;
     public static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "숫자 6개를 입력해주세요.";
     private static final String OVERLAP_SIZE_EXCEPTION = "중복된 숫자를 가지고 있습니다.";
+    public static final int MATCH_COUNT_FIVE = 5;
 
     private List<LottoNumber> ticket;
 
@@ -69,7 +70,7 @@ public class Ticket {
     }
 
     public boolean isCountFiveAndHasBonusBall(int count, LottoNumber bonusBall) {
-        return count == 5 && ticket.contains(bonusBall);
+        return count == MATCH_COUNT_FIVE && ticket.contains(bonusBall);
     }
 
     public List<LottoNumber> getTicket() {
