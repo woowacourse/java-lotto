@@ -1,6 +1,8 @@
 package domain;
 
 import Lotto.domain.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,37 +25,17 @@ public class RankTest {
     private static final LottoNumber TEN = new LottoNumber(10);
 
     @Test
-    @DisplayName("rank 계산하는 기능 테스트")
-    void getRankFromLotto() {
-        Lotto winningLotto = new Lotto(Arrays.asList(ONE, TWO, THREE, FOUR, FIVE, SIX));
-        LottoNumber bonusNumber = SEVEN;
-        WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
-
-        Lottos inputLotto = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(ONE, TWO, THREE, FOUR, FIVE, SIX)),
-                new Lotto(Arrays.asList(ONE, TWO, THREE, FOUR, FIVE, SEVEN)),
-                new Lotto(Arrays.asList(ONE, TWO, THREE, FOUR, FIVE, EIGHT)),
-                new Lotto(Arrays.asList(ONE, TWO, THREE, FOUR, EIGHT, NINE)),
-                new Lotto(Arrays.asList(ONE, TWO, THREE, EIGHT, NINE, TEN))
-        ));
-        Ranks ranks = inputLotto.calculateMultipleRanks(winningNumber);
-        Ranks expected = new Ranks(Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH));
-        assertThat(ranks).isEqualTo(expected);
-    }
-
-    @Test
-    @DisplayName("등수별 당첨 갯수 저장하는 기능 테스트")
+    @DisplayName("로또 당첨된 것 제대로 카운트 하는지 테스트")
     void countRanks() {
         Lotto winningLotto = new Lotto(Arrays.asList(ONE, TWO, THREE, FOUR, FIVE, SIX));
-        LottoNumber bonusNumber = SEVEN;
-        WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
+        WinningNumber winningNumber = new WinningNumber(winningLotto, SEVEN);
 
         Lottos inputLotto = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(ONE, TWO, THREE, FOUR, EIGHT, NINE)),
                 new Lotto(Arrays.asList(ONE, TWO, THREE, EIGHT, NINE, TEN)),
                 new Lotto(Arrays.asList(ONE, TWO, THREE, EIGHT, NINE, SEVEN))
         ));
-        Ranks ranks = inputLotto.calculateMultipleRanks(winningNumber);
+        Ranks ranks = new Ranks(winningNumber, inputLotto);
 
         Map<Rank, Long> expected = new HashMap<Rank, Long>();
         expected.put(Rank.FOURTH, 1L);
@@ -62,6 +44,20 @@ public class RankTest {
         expected.put(Rank.SECOND, 0L);
         expected.put(Rank.THIRD, 0L);
 
-        assertThat(ranks.countRanks()).isEqualTo(expected);
+        assertThat(ranks.getRanks()).isEqualTo(expected);
+    }
+    @Test
+    @DisplayName("전체 상금 계산하는 기능 테스트")
+    void calculateRankRewards() {
+        Lotto winningLotto = new Lotto(Arrays.asList(ONE, TWO, THREE, FOUR, FIVE, SIX));
+        WinningNumber winningNumber = new WinningNumber(winningLotto, SEVEN);
+
+        Lottos inputLotto = new Lottos(Arrays.asList(
+                new Lotto(Arrays.asList(ONE, TWO, THREE, FOUR, EIGHT, NINE)),
+                new Lotto(Arrays.asList(ONE, TWO, THREE, EIGHT, NINE, TEN))
+        ));
+        Ranks ranks = new Ranks(winningNumber, inputLotto);
+
+        assertThat(ranks.addAllRankReward()).isEqualTo(55000);
     }
 }
