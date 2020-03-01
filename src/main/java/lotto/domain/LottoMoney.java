@@ -35,8 +35,4 @@ public class LottoMoney {
         double ratio = totalEarnings / (double) value;
         return (int) Math.round(ratio * PERCENT);
     }
-
-    public LottoCount toLottoCount(String lottoCount) {
-        return new LottoCount(this, lottoCount);
-    }
 }
