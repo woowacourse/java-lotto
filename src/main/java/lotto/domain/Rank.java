@@ -25,9 +25,9 @@ public enum Rank {
         this.hitBonusBall = hitBonusBall;
     }
 
-    public static Map<Rank, Long> calculateEachRankCount(WinningTicket winningTicket) {
+    public static Map<Rank, Long> calculateEachRankCount(WinningTicket winningTicket,LottoTickets lottoTickets) {
         Map<Rank, Long> eachRankCount = new HashMap<>();
-        List<Rank> lottoTicketRank = generateTicketRank(winningTicket);
+        List<Rank> lottoTicketRank = generateTicketRank(winningTicket,lottoTickets);
 
         for (Rank r : values()) {
             long rankCount = lottoTicketRank.stream()
@@ -38,8 +38,8 @@ public enum Rank {
         return eachRankCount;
     }
 
-    private static List<Rank> generateTicketRank(WinningTicket winningTicket) {
-        return LottoTickets.getLottoTickets()
+    private static List<Rank> generateTicketRank(WinningTicket winningTicket,LottoTickets lottoTickets) {
+        return lottoTickets.getLottoTickets()
                 .stream()
                 .map(lottoTicket -> determineRank(winningTicket.hitLottoBall(lottoTicket)
                         , winningTicket.hitBonusBall(lottoTicket)))

@@ -6,7 +6,6 @@ import lotto.utils.ValidationUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoController {
@@ -15,29 +14,33 @@ public class LottoController {
         LottoTicketCount autoTicketLottoTicketCount = new LottoTicketCount(money.generateLottoTicketCount());
         LottoTicketCount manualTicketLottoTicketCount = generateManualTicketCount(autoTicketLottoTicketCount);
 
-        OutputView.printInputManualLottoTicket(manualTicketLottoTicketCount.getTicketCount());
-        for (int i = 0; i < manualTicketLottoTicketCount.getTicketCount(); i++) {
-            LottoTickets.insertLottoTicket(generateManualLottoTicket());
-        }
-        generateAutoTicket(autoTicketLottoTicketCount, manualTicketLottoTicketCount);
-        OutputView.printLottoTicket();
-        OutputView.printChangeMoney(money.changeMoney());
+        LottoTickets lottoTickets = new LottoTickets();
+        generateManualTicket(manualTicketLottoTicketCount,lottoTickets);
+        generateAutoTicket(autoTicketLottoTicketCount, manualTicketLottoTicketCount,lottoTickets);
+        OutputView.printLottoTicketAndChangeMoney(money.changeMoney(),lottoTickets);
 
-        WinningTicket winningTicket = getWinningTicket();
+        Map<Rank,Long> eachRankCount = Rank.calculateEachRankCount(getWinningTicket(),lottoTickets);
+        result(money, eachRankCount);
+    }
 
-        Map<Rank,Long> eachRankCount = Rank.calculateEachRankCount(winningTicket);
-        OutputView.printEachRankCount(eachRankCount);
-
+    private void result(Money money, Map<Rank, Long> eachRankCount) {
         try {
-            OutputView.printEarningRate(EarningRate.calculateEarningRate(eachRankCount, money));
+            OutputView.printResult(eachRankCount,money.getMoney());
         }catch (RuntimeException e){
             OutputView.printErrorMessage(e.getMessage());
         }
     }
 
+    private void generateManualTicket(LottoTicketCount manualTicketLottoTicketCount,LottoTickets lottoTickets) {
+        OutputView.printInputManualLottoTicket(manualTicketLottoTicketCount.getTicketCount());
+        for (int i = 0; i < manualTicketLottoTicketCount.getTicketCount(); i++) {
+            lottoTickets.insertLottoTicket(generateLottoTicket());
+        }
+    }
+
     private WinningTicket getWinningTicket() {
         OutputView.printWinningTicket();
-        LottoTicket lottoTicket = generateManualLottoTicket();
+        LottoTicket lottoTicket = generateLottoTicket();
 
         try {
             return new WinningTicket(lottoTicket.getLottoTicket(), generateBonusBall(lottoTicket));
@@ -49,29 +52,30 @@ public class LottoController {
 
     private LottoBall generateBonusBall(LottoTicket lottoTicket) {
         LottoBall bonusBall = new LottoBall(InputView.inputBonusBall());
-        List<LottoBall> winningTicket = lottoTicket.getLottoTicket();
 
-        winningTicket.forEach(winningLottoBall ->
+        lottoTicket.getLottoTicket()
+                .forEach(winningLottoBall ->
                 ValidationUtils.validateDuplicateNumber(winningLottoBall.getLottoBall(),bonusBall.getLottoBall()));
 
         return bonusBall;
     }
 
-    private LottoTicket generateManualLottoTicket() {
+    private LottoTicket generateLottoTicket() {
         try {
             return new LottoTicket(InputView.inputLottoTicket());
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return generateManualLottoTicket();
+            return generateLottoTicket();
         }
     }
 
-    private void generateAutoTicket(LottoTicketCount autoTicketLottoTicketCount, LottoTicketCount manualTicketLottoTicketCount) {
-        autoTicketLottoTicketCount.calculateAutoTicketCount(manualTicketLottoTicketCount);
-        OutputView.printLottoTicketCount(manualTicketLottoTicketCount, autoTicketLottoTicketCount);
-        for (int i = 0; i < autoTicketLottoTicketCount.getTicketCount(); i++) {
+    private void generateAutoTicket(LottoTicketCount autoLottoTicketCount, LottoTicketCount manualLottoTicketCount
+            ,LottoTickets lottoTickets) {
+        autoLottoTicketCount.calculateAutoTicketCount(manualLottoTicketCount);
+        OutputView.printLottoTicketCount(manualLottoTicketCount, autoLottoTicketCount);
+        for (int i = 0; i < autoLottoTicketCount.getTicketCount(); i++) {
             LottoBalls.shuffle();
-            LottoTickets.insertLottoTicket(new LottoTicket(LottoBalls.generateLottoTicket()));
+            lottoTickets.insertLottoTicket(new LottoTicket(LottoBalls.generateLottoTicket()));
         }
     }
 

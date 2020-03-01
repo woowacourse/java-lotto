@@ -21,20 +21,16 @@ class RankTest {
     @Test
     @DisplayName("랭크마다 몇명의 사람이 있는지 테스트")
     void RankCount(){
-        String winningBallInput = "1,2,3,4,5,6";
         LottoBall bonusBall = new LottoBall("7");
-        LottoTicket winningTicketInput = new LottoTicket(winningBallInput);
+        LottoTicket winningTicketInput = new LottoTicket("1,2,3,4,5,6");
+        LottoTickets lottoTickets = new LottoTickets();
 
-        String input1 = "1,2,3,4,5,6";
-        String input2 = "1,2,3,4,5,6";
-        String input3 = "1,2,3,4,5,6";
-
-        LottoTickets.insertLottoTicket(new LottoTicket(input1));
-        LottoTickets.insertLottoTicket(new LottoTicket(input2));
-        LottoTickets.insertLottoTicket(new LottoTicket(input3));
+        lottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
+        lottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
+        lottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
 
         WinningTicket winningTicket = new WinningTicket(winningTicketInput.getLottoTicket(),bonusBall);
 
-        assertThat(Rank.calculateEachRankCount(winningTicket).get(Rank.FIRST)).isEqualTo(3);
+        assertThat(Rank.calculateEachRankCount(winningTicket,lottoTickets).get(Rank.FIRST)).isEqualTo(3);
     }
 }

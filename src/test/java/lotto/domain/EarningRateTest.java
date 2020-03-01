@@ -15,15 +15,16 @@ class EarningRateTest {
     void calculate_total_money_test() {
         LottoBall bonusBall = new LottoBall("7");
         LottoTicket winningTicketInput = new LottoTicket("1,2,3,4,5,6");
+        LottoTickets lottoTickets = new LottoTickets();
 
-        LottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
-        LottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
-        LottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
+        lottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
+        lottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
+        lottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
 
         WinningTicket winningTicket = new WinningTicket(winningTicketInput.getLottoTicket(), bonusBall);
-        Map<Rank,Long> eachRankCount = Rank.calculateEachRankCount(winningTicket);
+        Map<Rank,Long> eachRankCount = Rank.calculateEachRankCount(winningTicket,lottoTickets);
 
         Assertions.assertThat(EarningRate.calculateEarningRate(eachRankCount, new Money("3000")))
-                .isEqualTo(400_000_000);
+                .isEqualTo(200_000_000);
     }
 }

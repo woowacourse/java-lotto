@@ -19,8 +19,9 @@ public class EarningRate {
         for (Rank r : rank) {
             totalMoney += r.getWinningMoney() * eachRankCount.get(r);
         }
+        System.out.println(totalMoney);
         ValidationUtils.validateUnderFlowOrOverFlow(totalMoney);
 
-        return totalMoney / money.getMoney() * RATE;
+        return (totalMoney / money.getMoney()) * RATE;
     }
 }
