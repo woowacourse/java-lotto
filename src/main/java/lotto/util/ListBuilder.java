@@ -5,8 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ListBuilder {
-	public static <T> List<T> merge(final List<T> first, final List<T> second) {
-		return Stream.concat(first.stream(), second.stream())
+	@SafeVarargs
+	public static <T> List<T> merge(final List<T>... lists) {
+		return Stream.of(lists)
+				.map(List::stream)
+				.reduce(Stream.empty(), Stream::concat)
 				.collect(Collectors.toUnmodifiableList());
 	}
 }
