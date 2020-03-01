@@ -6,13 +6,15 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoCountTest {
 
     private static void assertInvokeExceptionWithMessageWhenCreateLottoCount(String input, String message) {
-        assertThatThrownBy(() -> new LottoCount(new LottoMoney("10000"), input))
+        assertThatThrownBy(() -> new LottoCount(new LottoMoney("10000"), input, new ArrayList<String[]>()))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageEndingWith(message);
     }
@@ -43,7 +45,7 @@ public class LottoCountTest {
     @CsvSource(value = {"5000:0:5", "20000:20:0", "10000:3:7", "10000:5:5"}, delimiter = ':')
     void calculateAutoLottoCountValueTest(String money, String manualLottoCount, int expectedAutoLottoCount) {
         LottoMoney lottoMoney = new LottoMoney(money);
-        LottoCount lottoCount = new LottoCount(lottoMoney, manualLottoCount);
+        LottoCount lottoCount = new LottoCount(lottoMoney, manualLottoCount, new ArrayList<String[]>());
         int result = lottoCount.calculateAutoLottoCount();
         assertThat(result).isEqualTo(expectedAutoLottoCount);
     }
