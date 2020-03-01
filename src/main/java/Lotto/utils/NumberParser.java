@@ -13,8 +13,6 @@ public class NumberParser {
     private NumberParser() {
     }
 
-    ;
-
     public static int parseIntoOneNumber(String input) {
         return validate(input);
     }
