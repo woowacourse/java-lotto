@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-	private final LottoNumbers allLottoNumbers;
+	private final List<LottoNumber> lottoBalls;
 
 	private LottoMachine() {
 		List<LottoNumber> initialSetting = new ArrayList<>();
@@ -14,14 +14,26 @@ public class LottoMachine {
 		for (int i = LottoNumber.MINIMUM; i <= LottoNumber.MAXIMUM; i++) {
 			initialSetting.add(new LottoNumber(i));
 		}
-		this.allLottoNumbers = new LottoNumbers(initialSetting);
+		this.lottoBalls = initialSetting;
 	}
 
 	public static LottoMachine getInstance() {
 		return LottoMachineSingletonHolder.instance;
 	}
 
-	public List<Lotto> makeRandomLottos(int lottoCount) {
+	public List<Lotto> makeLottos(LottoCount lottoCount, List<LottoNumbers> manualLottoNumbers) {
+		List<Lotto> lottos = makeManualLottos(manualLottoNumbers);
+		lottos.addAll(makeAutoLottos(lottoCount.getAutoLottoCount()));
+		return lottos;
+	}
+
+	private List<Lotto> makeManualLottos(List<LottoNumbers> manualLottoNumbers) {
+		return manualLottoNumbers.stream()
+			.map(Lotto::new)
+			.collect(Collectors.toList());
+	}
+
+	private List<Lotto> makeAutoLottos(int lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 
 		for (int i = 0; i < lottoCount; i++) {
@@ -31,10 +43,9 @@ public class LottoMachine {
 	}
 
 	private List<LottoNumber> pickRandomNumbers() {
-		Collections.shuffle(allLottoNumbers.getLottoNumbers());
-		return allLottoNumbers.getLottoNumbers()
-			.stream()
-			.limit(Lotto.SIZE)
+		Collections.shuffle(lottoBalls);
+		return lottoBalls.stream()
+			.limit(LottoNumbers.SIZE)
 			.sorted()
 			.collect(Collectors.toList());
 	}

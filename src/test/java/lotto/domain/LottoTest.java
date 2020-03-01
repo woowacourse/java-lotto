@@ -13,27 +13,12 @@ import org.junit.jupiter.params.provider.NullSource;
 
 @SuppressWarnings("NonAsciiCharacters")
 public class LottoTest {
-	static Stream<Arguments> generateInput_잘못된_갯수() {
-		return Stream.of(Arguments.of(new LottoNumbers(Arrays.asList(new LottoNumber(1)))),
-			Arguments.of(new LottoNumbers(
-				Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-					new LottoNumber(5), new LottoNumber(6), new LottoNumber(7)))));
-	}
-
 	@ParameterizedTest
 	@NullSource
 	void 로또번호가_null인_경우(LottoNumbers lottoNumbers) {
 		assertThatThrownBy(() -> new Lotto(lottoNumbers))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("null");
-	}
-
-	@ParameterizedTest
-	@MethodSource("generateInput_잘못된_갯수")
-	void 로또_공_갯수가_맞지_않는_경우(LottoNumbers lottoNumbers) {
-		assertThatThrownBy(() -> new Lotto(lottoNumbers))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("개여야 합니다");
 	}
 
 	static Stream<Arguments> generateInput_당첨번호() {

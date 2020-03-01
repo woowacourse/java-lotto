@@ -32,8 +32,8 @@ public class WinningLotto {
 	}
 
 	private void validateNumberAmount(List<String> winningNumber) {
-		if (winningNumber.size() != Lotto.SIZE) {
-			throw new IllegalArgumentException(String.format("로또 번호는 %s개여야 합니다.", Lotto.SIZE));
+		if (winningNumber.size() != LottoNumbers.SIZE) {
+			throw new IllegalArgumentException(String.format("로또 번호는 %s개여야 합니다.", LottoNumbers.SIZE));
 		}
 	}
 

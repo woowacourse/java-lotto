@@ -18,6 +18,10 @@ public class InputUtil {
 		return Integer.parseInt(bufferedReader.readLine());
 	}
 
+	public static int inputManualLottoCount() throws IOException {
+		return Integer.parseInt(bufferedReader.readLine());
+	}
+
 	public static List<String> inputWinningNumber() throws IOException {
 		return Arrays.asList(bufferedReader.readLine()
 			.replace(SPACE, EMPTY)
@@ -26,5 +30,11 @@ public class InputUtil {
 
 	public static int inputBonusNumber() throws IOException {
 		return Integer.parseInt(bufferedReader.readLine());
+	}
+
+	public static List<String> inputManualLottoNumbers() throws IOException {
+		return Arrays.asList(bufferedReader.readLine()
+			.replace(SPACE, EMPTY)
+			.split(SPLIT_DELIMITER, SPLIT_LIMIT));
 	}
 }

@@ -8,18 +8,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 @SuppressWarnings("NonAsciiCharacters")
 public class LottoCountTest {
 	@ParameterizedTest
-	@ValueSource(ints = {1500, 4310, 3404, 7146, 10200})
-	void 천원_단위가_아닌_경우(int value) {
-		assertThatThrownBy(() -> new LottoCount(value))
+	@ValueSource(ints = {-1, 2})
+	void 수동_로또_수_범위(int manualLottoCount) {
+		assertThatThrownBy(() -> new LottoCount(new Money(1000), manualLottoCount))
 			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("천 원 단위");
-	}
-
-	@ParameterizedTest
-	@ValueSource(ints = {999, 0, -100})
-	void 한_장도_살_수_없는_경우(int value) {
-		assertThatThrownBy(() -> new LottoCount(value))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("부족합니다");
+			.hasMessageContaining("범위");
 	}
 }
