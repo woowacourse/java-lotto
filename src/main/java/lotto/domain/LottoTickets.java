@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
-    private final List<LottoTicket> LOTTO_TICKETS = new ArrayList<>();
+    private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
     public void insertLottoTicket(LottoTicket lottoTicket) {
-        LOTTO_TICKETS.add(lottoTicket);
+        lottoTickets.add(lottoTicket);
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return Collections.unmodifiableList(LOTTO_TICKETS);
+        return Collections.unmodifiableList(lottoTickets);
     }
 
 }
