@@ -4,6 +4,9 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoGame {
 
     public static void main(String[] args) {
@@ -44,7 +47,8 @@ public class LottoGame {
 
     private static ManualLottoTickets createManualLottoTickets(LottoCount lottoCount) {
         try {
-            return new ManualLottoTickets(InputView.inputManualLottoNumbers(lottoCount.getManualCount()));
+            int manualLottoCount = lottoCount.getManualCount();
+            return new ManualLottoTickets(InputView.inputManualLottoNumbers(manualLottoCount));
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             return createManualLottoTickets(lottoCount);
