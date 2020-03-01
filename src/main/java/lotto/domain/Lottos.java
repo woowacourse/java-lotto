@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static lotto.util.NullValidator.validateNull;
@@ -29,6 +30,19 @@ public class Lottos {
                 .map(winningLotto::createResult)
                 .collect(Collectors.toList());
         return new MatchResults(matchResults);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos = (Lottos) o;
+        return Objects.equals(elements, lottos.elements);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(elements);
     }
 
     public List<Lotto> get() {
