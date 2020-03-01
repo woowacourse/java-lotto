@@ -18,7 +18,7 @@ public class LottoApplication {
 
         showPurchasedLottos(manualLottoCount, manualLottos, autoLottoCount, autoLottos);
 
-        Lottos allLottos = LottoFactory.concatLottos(autoLottos, manualLottos);
+        Lottos allLottos = LottoConcat.concatLottos(autoLottos, manualLottos);
 
         Lotto winningLotto = new Lotto(NumberParser.parseIntoLottoNumbers(InputView.inputAsWinningLotto()));
         LottoNumber bonusNumber = new LottoNumber(NumberParser.parseIntoOneNumber(InputView.inputAsBonusNumber()));

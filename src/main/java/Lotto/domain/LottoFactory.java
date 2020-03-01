@@ -35,13 +35,5 @@ public class LottoFactory {
     private static Lotto generateAutoSingleLotto() {
         return new Lotto(autoLottoNumberGenerator.generate(NULL));
     }
-
-    public static Lottos concatLottos(Lottos autoLottos, Lottos manualLottos) {
-        List<Lotto> allLotto = autoLottos.getLottos();
-        if (manualLottos != null) {
-            allLotto.addAll(manualLottos.getLottos());
-        }
-        return new Lottos(allLotto);
-    }
 }
 
