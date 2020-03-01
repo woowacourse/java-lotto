@@ -1,6 +1,9 @@
-package lotto.domain.lotto;
+package lotto.domain.lottos;
 
-import lotto.domain.lottostrategy.LottoFactory;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoFactory;
+import lotto.domain.lottos.InvalidLottosException;
+import lotto.domain.lottos.Lottos;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;

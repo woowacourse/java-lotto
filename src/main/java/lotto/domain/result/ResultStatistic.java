@@ -5,8 +5,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import lotto.domain.money.MoneyForLotto;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lottos.Lottos;
 
 /**
  * 로또 결과를 Map 형태로 포함하는 객체

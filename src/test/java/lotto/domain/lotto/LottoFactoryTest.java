@@ -1,7 +1,5 @@
-package lotto.domain.lottostrategy;
+package lotto.domain.lotto;
 
-import lotto.domain.lotto.InvalidLottoException;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.api.Test;
 

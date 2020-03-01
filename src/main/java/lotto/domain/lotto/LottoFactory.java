@@ -1,9 +1,8 @@
-package lotto.domain.lottostrategy;
+package lotto.domain.lotto;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumber;
 
 /**

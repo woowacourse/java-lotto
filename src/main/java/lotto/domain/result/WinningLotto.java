@@ -1,12 +1,12 @@
-package lotto.domain.lotto;
+package lotto.domain.result;
 
 import java.util.List;
 import java.util.Objects;
 
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.InvalidLottoNumberException;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottostrategy.LottoFactory;
-import lotto.domain.result.Rank;
+import lotto.domain.lotto.LottoFactory;
 import lotto.util.StringUtils;
 
 /**

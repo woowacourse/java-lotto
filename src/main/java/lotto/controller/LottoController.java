@@ -2,13 +2,14 @@ package lotto.controller;
 
 import java.util.List;
 
-import lotto.domain.lotto.*;
 import lotto.domain.lottocount.AutoLottoCount;
 import lotto.domain.lottocount.LottoCount;
 import lotto.domain.lottocount.ManualLottoCount;
+import lotto.domain.lottos.Lottos;
 import lotto.domain.lottostore.LottoStore;
 import lotto.domain.money.MoneyForLotto;
 import lotto.domain.result.ResultStatistic;
+import lotto.domain.result.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

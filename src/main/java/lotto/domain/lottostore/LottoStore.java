@@ -2,9 +2,9 @@ package lotto.domain.lottostore;
 
 import java.util.List;
 
-import lotto.domain.lotto.InvalidLottosException;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.LottosFactory;
+import lotto.domain.lottos.InvalidLottosException;
+import lotto.domain.lottos.Lottos;
+import lotto.domain.lottos.LottosFactory;
 import lotto.domain.lottocount.LottoCount;
 
 /**

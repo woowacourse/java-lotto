@@ -11,10 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lottos.Lottos;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottostrategy.LottoFactory;
+import lotto.domain.lotto.LottoFactory;
 import lotto.domain.money.MoneyForLotto;
 
 /**

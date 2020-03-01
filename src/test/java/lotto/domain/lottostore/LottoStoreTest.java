@@ -11,9 +11,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.domain.lotto.InvalidLottosException;
+import lotto.domain.lottos.InvalidLottosException;
 import lotto.domain.lottocount.AutoLottoCount;
-import lotto.domain.lotto.Lottos;
+import lotto.domain.lottos.Lottos;
 
 /**
  * LottoStore 테스트

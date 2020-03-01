@@ -1,7 +1,7 @@
-package lotto.domain.lotto;
+package lotto.domain.result;
 
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.result.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

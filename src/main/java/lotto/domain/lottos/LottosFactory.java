@@ -1,10 +1,11 @@
-package lotto.domain.lotto;
+package lotto.domain.lottos;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottostrategy.LottoFactory;
+import lotto.domain.lotto.LottoFactory;
 import lotto.util.StringUtils;
 
 /**

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
+import lotto.domain.lottos.Lottos;
 import lotto.domain.lottocount.LottoCount;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.money.MoneyForLotto;
