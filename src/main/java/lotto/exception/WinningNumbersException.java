@@ -6,6 +6,6 @@ public class WinningNumbersException extends IllegalArgumentException {
     }
 
     public WinningNumbersException() {
-        this("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+        super("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 }

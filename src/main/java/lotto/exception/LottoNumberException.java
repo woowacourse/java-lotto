@@ -6,6 +6,6 @@ public class LottoNumberException extends IllegalArgumentException {
     }
 
     public LottoNumberException() {
-        this("로또 숫자는 1~45사이어야 합니다.");
+        super("로또 숫자는 1~45사이어야 합니다.");
     }
 }
