@@ -14,8 +14,7 @@ public class ManualLottoMachine implements LottoMachine {
     @Override
     public List<LottoTicket> buyTickets(Customer customer) {
         NullOrEmptyValidator.isNull(customer);
-
-        int numberOfManualTickets = customer.getMoney().getNumberOfManualTickets();
+        int numberOfManualTickets = customer.getPurchaseInfo().getNumberOfManualTickets();
         List<List<Integer>> manualNumbers = customer.getManualNumbers();
 
         NullOrEmptyValidator.isNullOrEmpty(manualNumbers);
@@ -34,7 +33,6 @@ public class ManualLottoMachine implements LottoMachine {
 
     private LottoTicket createOneTicket(List<Integer> manualNumbers) {
         NullOrEmptyValidator.isNullOrEmpty(manualNumbers);
-
         Set<LottoBall> manualBalls = manualNumbers.stream()
                 .map(LottoBallFactory::getLottoBallByNumber)
                 .collect(Collectors.toSet());

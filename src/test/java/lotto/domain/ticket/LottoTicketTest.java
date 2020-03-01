@@ -1,7 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.customer.Customer;
-import lotto.domain.customer.Money;
+import lotto.domain.customer.PurchaseInfo;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -39,7 +39,7 @@ class LottoTicketTest {
     void name(int number, boolean expectedResult) {
         LottoMachine manualMachine = new ManualLottoMachine();
         List<Integer> manualNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Customer customer = new Customer(new Money(1000, 1), Arrays.asList(manualNumbers));
+        Customer customer = new Customer(new PurchaseInfo(1000, 1), Arrays.asList(manualNumbers));
 
         List<LottoTicket> lottoTickets = manualMachine.buyTickets(customer);
 

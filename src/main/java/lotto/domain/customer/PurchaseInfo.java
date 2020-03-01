@@ -4,27 +4,25 @@ import java.util.Objects;
 
 import static lotto.domain.ticket.LottoTicket.LOTTO_PRICE;
 
-public class Money {
+public class PurchaseInfo {
     private static final String MESSAGE_FOR_NOT_ENOUGH_MONEY = "%d는 최소 구매 금액보다 작습니다.";
     private static final String MESSAGE_FOR_CANNOT_AFFORD = "구매 가능한 로또 수: %d, 구매 로또 수: %d - 잔액이 부족합니다.";
 
     private int numberOfManualTickets;
     private int numberOfLeftTickets;
 
-    public Money(int amount, int numberOfManualTickets) {
-        validateMoney(amount);
-
-        numberOfLeftTickets = calculateAffordableTicketNumbers(amount);
+    public PurchaseInfo(int money, int numberOfManualTickets) {
+        validateMoney(money);
+        numberOfLeftTickets = calculateAffordableTicketNumbers(money);
 
         validateTicketNumber(numberOfManualTickets);
-
         this.numberOfManualTickets = numberOfManualTickets;
         this.numberOfLeftTickets -= numberOfManualTickets;
     }
 
-    private void validateMoney(int bettingMoney) {
-        if (bettingMoney < LOTTO_PRICE) {
-            throw new IllegalArgumentException(String.format(MESSAGE_FOR_NOT_ENOUGH_MONEY, bettingMoney));
+    private void validateMoney(int money) {
+        if (money < LOTTO_PRICE) {
+            throw new IllegalArgumentException(String.format(MESSAGE_FOR_NOT_ENOUGH_MONEY, money));
         }
     }
 
@@ -54,9 +52,9 @@ public class Money {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Money money = (Money) o;
-        return numberOfLeftTickets == money.numberOfLeftTickets &&
-                numberOfManualTickets == money.numberOfManualTickets;
+        PurchaseInfo purchaseInfo = (PurchaseInfo) o;
+        return numberOfLeftTickets == purchaseInfo.numberOfLeftTickets &&
+                numberOfManualTickets == purchaseInfo.numberOfManualTickets;
     }
 
     @Override

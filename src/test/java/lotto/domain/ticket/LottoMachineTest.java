@@ -1,7 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.customer.Customer;
-import lotto.domain.customer.Money;
+import lotto.domain.customer.PurchaseInfo;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.domain.ticket.ball.LottoBallFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ class LottoMachineTest {
     @ValueSource(ints = {1000, 2000, 3000})
     void test1(int amount) {
         LottoMachine autoMachine = new AutoLottoMachine();
-        Customer customer = new Customer(new Money(amount, 0), new ArrayList<>(Collections.emptyList()));
+        Customer customer = new Customer(new PurchaseInfo(amount, 0), new ArrayList<>(Collections.emptyList()));
 
         List<LottoTicket> lottoTickets = autoMachine.buyTickets(customer);
 
@@ -32,7 +32,7 @@ class LottoMachineTest {
     @Test
     void test2() {
         LottoMachine manualMachine = new ManualLottoMachine();
-        Customer customer = new Customer(new Money(1000, 1), Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Customer customer = new Customer(new PurchaseInfo(1000, 1), Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         List<LottoTicket> lottoTickets = manualMachine.buyTickets(customer);
 
@@ -45,7 +45,7 @@ class LottoMachineTest {
         //given
         LottoMachine manualMachine = new ManualLottoMachine();
         List<Integer> manualNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Customer customer = new Customer(new Money(1000, 1), Arrays.asList(manualNumbers));
+        Customer customer = new Customer(new PurchaseInfo(1000, 1), Arrays.asList(manualNumbers));
 
         Set<LottoBall> manualBalls = manualNumbers.stream()
                 .map(LottoBallFactory::getLottoBallByNumber)

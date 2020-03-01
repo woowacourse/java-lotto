@@ -19,7 +19,7 @@ public class AutoLottoMachine implements LottoMachine {
         NullOrEmptyValidator.isNull(customer);
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < customer.getMoney().getNumberOfLeftTickets(); i++) {
+        for (int i = 0; i < customer.getPurchaseInfo().getNumberOfLeftTickets(); i++) {
             lottoTickets.add(createOneTicket());
         }
 

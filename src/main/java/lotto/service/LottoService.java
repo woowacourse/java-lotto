@@ -17,16 +17,14 @@ public class LottoService {
 
     public LottoTicketBundle createLottoTicketBundle(Customer customer) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-
         for (LottoMachine machine : lottoMachines) {
             lottoTickets.addAll(machine.buyTickets(customer));
         }
-
         return new LottoTicketBundle(lottoTickets);
     }
 
     public PurchaseStatusDTO createPurchaseStatusDTO(Customer customer) {
-        return new PurchaseStatusDTO(customer.getMoney().getNumberOfManualTickets(), customer.getMoney().getNumberOfLeftTickets());
+        return new PurchaseStatusDTO(customer.getPurchaseInfo().getNumberOfManualTickets(), customer.getPurchaseInfo().getNumberOfLeftTickets());
     }
 
     public List<LottoTicketDTO> convertToLottoTicketDTOS(LottoTicketBundle lottoTicketBundle) {
@@ -41,7 +39,6 @@ public class LottoService {
 
     public OverallResult createOverallResult(WinLottoTicket winLottoTicket, LottoTicketBundle lottoTicketBundle) {
         LottoMatchResultBundle lottoMatchResultBundle = lottoTicketBundle.createLottoMatchResultBundle(winLottoTicket);
-
         return lottoMatchResultBundle.createOverallResult();
     }
 

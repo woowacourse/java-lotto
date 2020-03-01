@@ -3,16 +3,16 @@ package lotto.domain.customer;
 import java.util.List;
 
 public class Customer {
-    private final Money money;
+    private final PurchaseInfo purchaseInfo;
     private final List<List<Integer>> manualNumbers;
 
-    public Customer(Money money, List<List<Integer>> manualNumbers) {
-        this.money = money;
+    public Customer(PurchaseInfo purchaseInfo, List<List<Integer>> manualNumbers) {
+        this.purchaseInfo = purchaseInfo;
         this.manualNumbers = manualNumbers;
     }
 
-    public Money getMoney() {
-        return money;
+    public PurchaseInfo getPurchaseInfo() {
+        return purchaseInfo;
     }
 
     public List<List<Integer>> getManualNumbers() {
