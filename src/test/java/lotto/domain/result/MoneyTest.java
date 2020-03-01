@@ -41,4 +41,13 @@ public class MoneyTest {
             money.validateManualLottoMoney(6);
         }).isInstanceOf(PurchaseMoneyLackException.class);
     }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 한_라운드마다_로또_티켓만큼의_값을_제거() {
+        double ticketPrice = 1000;
+        Money money = new Money(5000);
+        money.subtract(ticketPrice);
+        assertThat(money).extracting("money").isEqualTo(4000.0);
+    }
 }

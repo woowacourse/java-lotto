@@ -8,7 +8,7 @@ public class Money {
     static final int TICKET_PRICE = 1_000;
     private static final String INVALID_PURCHASE_NUMBER_EXCEPTION_MESSAGE = "최소 구매 금액 이하의 입력이 들어왔습니다.";
 
-    private final double money;
+    private double money;
 
     public Money(double money) {
         validateMinimumMoney(money);
@@ -46,6 +46,10 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(money);
+    }
+
+    public void subtract(double ticketPrice) {
+        this.money -= ticketPrice;
     }
 }
 
