@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -19,6 +19,18 @@ import static org.assertj.core.api.Assertions.*;
  * 날짜 : 2020/02/22
  */
 public class StringUtilsTest {
+
+	@Test
+	void parseToInteger_올바른_동작_확인() {
+		assertThat(StringUtils.parseToInteger("3")).isEqualTo(3);
+	}
+
+	@Test
+	void parseToInteger_문자_포함시_예외처리() {
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			StringUtils.parseToInteger("a");
+		}).withMessageContaining("입력 로또 번호가 정수가 아닙니다.");
+	}
 
 	@Test
 	void splitIntoLottoNumbers_올바른_동작_확인() {
