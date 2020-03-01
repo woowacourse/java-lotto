@@ -1,7 +1,12 @@
 package lotto.controller;
 
-import static lotto.view.InputView.*;
-import static lotto.view.OutputView.*;
+import static lotto.view.InputView.inputBonusBall;
+import static lotto.view.InputView.inputLottoMoney;
+import static lotto.view.InputView.inputManualCount;
+import static lotto.view.InputView.inputManualLottoTicketNumbers;
+import static lotto.view.OutputView.printLottoTicket;
+import static lotto.view.OutputView.printStatistics;
+import static lotto.view.OutputView.printTotalProfits;
 
 import java.util.List;
 

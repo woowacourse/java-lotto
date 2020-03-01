@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.LottoGeneratable.*;
+import static lotto.domain.LottoGeneratable.LOTTO_PRICE;
 
 import java.util.HashMap;
 import java.util.Map;
