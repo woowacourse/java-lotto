@@ -3,10 +3,11 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,82 +15,53 @@ import org.junit.jupiter.api.Test;
 
 class LottoTicketsTest {
 
-    private LottoNumber numberSeven;
-    private LottoTicket firstLottoTicket;
-    private LottoTicket secondLottoTicket;
-    private LottoTicket thirdLottoTicket;
-    private LottoTicket fourthLottoTicket;
-    private LottoTicket fifthLottoTicket;
-    private LottoTicket missLottoTicket;
+    private Set<Integer> firstLottoTicketNumbers;
+    private Set<Integer> secondLottoTicketNumbers;
+    private Set<Integer> thirdLottoTicketNumbers;
+    private Set<Integer> fourthLottoTicketNumbers;
+    private Set<Integer> fifthLottoTicketNumbers;
+    private Set<Integer> missLottoTicketNumbers;
 
     @BeforeEach
     void setUp() {
-        LottoNumber numberOne = new LottoNumber(1);
-        LottoNumber numberTwo = new LottoNumber(2);
-        LottoNumber numberThree = new LottoNumber(3);
-        LottoNumber numberFour = new LottoNumber(4);
-        LottoNumber numberFive = new LottoNumber(5);
-        LottoNumber numberSix = new LottoNumber(6);
-        numberSeven = new LottoNumber(7);
-        LottoNumber numberEight = new LottoNumber(8);
-        LottoNumber numberNine = new LottoNumber(9);
-        LottoNumber numberTen = new LottoNumber(10);
-        Set<LottoNumber> firstLottoNumbers = Arrays.stream(
-                new LottoNumber[] {numberOne, numberTwo, numberThree, numberFour, numberFive, numberSix}).collect(Collectors.toSet());
-        Set<LottoNumber> secondLottoNumbers = Arrays.stream(
-                new LottoNumber[] {numberOne, numberTwo, numberThree, numberFour, numberFive, numberSeven}).collect(Collectors.toSet());
-        Set<LottoNumber> thirdLottoNumbers = Arrays.stream(
-                new LottoNumber[] {numberTwo, numberThree, numberFour, numberFive, numberSix, numberEight}).collect(Collectors.toSet());
-        Set<LottoNumber> fourthLottoNumbers = Arrays.stream(
-                new LottoNumber[] {numberThree, numberFour, numberFive, numberSix, numberSeven, numberEight}).collect(Collectors.toSet());
-        Set<LottoNumber> fifthLottoNumbers = Arrays.stream(
-                new LottoNumber[] {numberFour, numberFive, numberSix, numberSeven, numberEight, numberNine}).collect(Collectors.toSet());
-        Set<LottoNumber> missLottoNumbers = Arrays.stream(
-                new LottoNumber[] {numberFive, numberSix, numberSeven, numberEight, numberNine, numberTen}).collect(Collectors.toSet());
-        firstLottoTicket = new LottoTicket(firstLottoNumbers);
-        secondLottoTicket = new LottoTicket(secondLottoNumbers);
-        thirdLottoTicket = new LottoTicket(thirdLottoNumbers);
-        fourthLottoTicket = new LottoTicket(fourthLottoNumbers);
-        fifthLottoTicket = new LottoTicket(fifthLottoNumbers);
-        missLottoTicket = new LottoTicket(missLottoNumbers);
+        firstLottoTicketNumbers = IntStream.of(1,2,3,4,5,6).boxed().collect(Collectors.toSet());
+        secondLottoTicketNumbers = IntStream.of(1,2,3,4,5,7).boxed().collect(Collectors.toSet());
+        thirdLottoTicketNumbers = IntStream.of(2,3,4,5,6,7).boxed().collect(Collectors.toSet());
+        fourthLottoTicketNumbers = IntStream.of(3,4,5,6,7,8).boxed().collect(Collectors.toSet());
+        fifthLottoTicketNumbers = IntStream.of(4,5,6,7,8,9).boxed().collect(Collectors.toSet());
+        missLottoTicketNumbers = IntStream.of(5,6,7,8,9,10).boxed().collect(Collectors.toSet());
     }
 
     @Test
     @DisplayName("LottoTicket들로부터 LottoTickets 생성")
     void createLottoTickets() {
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
-        lottoTicketList.add(firstLottoTicket);
-        lottoTicketList.add(secondLottoTicket);
-        lottoTicketList.add(thirdLottoTicket);
-        lottoTicketList.add(fourthLottoTicket);
-        lottoTicketList.add(fifthLottoTicket);
-        lottoTicketList.add(missLottoTicket);
-        assertThat(new LottoTickets(lottoTicketList)).isNotNull();
+        List<Set<Integer>> lottoTicketsNumbers = Collections.singletonList(firstLottoTicketNumbers);
+        assertThat(LottoTickets.publishLottoTickets(lottoTicketsNumbers)).isNotNull();
     }
 
     @Test
     @DisplayName("수동과 자동 개수에 맞게 생산되 LottoTickets를 합침")
     void createLottoTicketsBasedOnCount() {
-        List<LottoTicket> firstLottoTicketList = new ArrayList<>();
-        firstLottoTicketList.add(firstLottoTicket);
-        firstLottoTicketList.add(secondLottoTicket);
-        firstLottoTicketList.add(thirdLottoTicket);
-        LottoTickets firstLottoTickets = new LottoTickets(firstLottoTicketList);
+        List<Set<Integer>> firstLottoTicketList = new ArrayList<>();
+        firstLottoTicketList.add(firstLottoTicketNumbers);
+        firstLottoTicketList.add(secondLottoTicketNumbers);
+        firstLottoTicketList.add(thirdLottoTicketNumbers);
+        LottoTickets firstLottoTickets = LottoTickets.publishLottoTickets(firstLottoTicketList);
 
-        List<LottoTicket> secondLottoTicketList = new ArrayList<>();
-        secondLottoTicketList.add(fourthLottoTicket);
-        secondLottoTicketList.add(fifthLottoTicket);
-        secondLottoTicketList.add(missLottoTicket);
-        LottoTickets secondLottoTickets = new LottoTickets(secondLottoTicketList);
+        List<Set<Integer>> secondLottoTicketList = new ArrayList<>();
+        secondLottoTicketList.add(fourthLottoTicketNumbers);
+        secondLottoTicketList.add(fifthLottoTicketNumbers);
+        secondLottoTicketList.add(missLottoTicketNumbers);
+        LottoTickets secondLottoTickets = LottoTickets.publishLottoTickets(secondLottoTicketList);
 
-        List<LottoTicket> targetLottoTicketList = new ArrayList<>();
-        targetLottoTicketList.add(firstLottoTicket);
-        targetLottoTicketList.add(secondLottoTicket);
-        targetLottoTicketList.add(thirdLottoTicket);
-        targetLottoTicketList.add(fourthLottoTicket);
-        targetLottoTicketList.add(fifthLottoTicket);
-        targetLottoTicketList.add(missLottoTicket);
-        LottoTickets targetLottoTickets = new LottoTickets(targetLottoTicketList);
+        List<Set<Integer>> targetLottoTicketList = new ArrayList<>();
+        targetLottoTicketList.add(firstLottoTicketNumbers);
+        targetLottoTicketList.add(secondLottoTicketNumbers);
+        targetLottoTicketList.add(thirdLottoTicketNumbers);
+        targetLottoTicketList.add(fourthLottoTicketNumbers);
+        targetLottoTicketList.add(fifthLottoTicketNumbers);
+        targetLottoTicketList.add(missLottoTicketNumbers);
+        LottoTickets targetLottoTickets = LottoTickets.publishLottoTickets(targetLottoTicketList);
 
         LottoTickets totalLottoTickets = LottoTickets.createFrom(firstLottoTickets, secondLottoTickets);
 
@@ -99,18 +71,16 @@ class LottoTicketsTest {
     @Test
     @DisplayName("LottoTickets는 WinningLotto를 받아서 결과를 생성")
     void createLottoResultsWithWinningLotto() {
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
-        lottoTicketList.add(firstLottoTicket);
-        lottoTicketList.add(secondLottoTicket);
-        lottoTicketList.add(thirdLottoTicket);
-        lottoTicketList.add(fourthLottoTicket);
-        lottoTicketList.add(fifthLottoTicket);
-        lottoTicketList.add(missLottoTicket);
-        LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
+        List<Set<Integer>> lottoTicketList = new ArrayList<>();
+        lottoTicketList.add(firstLottoTicketNumbers);
+        lottoTicketList.add(secondLottoTicketNumbers);
+        lottoTicketList.add(thirdLottoTicketNumbers);
+        lottoTicketList.add(fourthLottoTicketNumbers);
+        lottoTicketList.add(fifthLottoTicketNumbers);
+        lottoTicketList.add(missLottoTicketNumbers);
+        LottoTickets lottoTickets = LottoTickets.publishLottoTickets(lottoTicketList);
 
-        LottoTicket winningLottoTicket = firstLottoTicket;
-        LottoNumber bonusLottoNumber = numberSeven;
-        WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusLottoNumber);
+        WinningLotto winningLotto = new WinningLotto(firstLottoTicketNumbers, 7);
         assertThat(lottoTickets.getLottoResults(winningLotto)).isNotNull();
     }
 }

@@ -15,14 +15,14 @@ class LottoNumberTest {
     @Test
     @DisplayName("LottoNumber를 생성하는 테스트")
     void createLottoNumber() {
-        assertThat(new LottoNumber(3)).isNotNull();
+        assertThat(LottoNumber.publishLottoNumber(3)).isNotNull();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {NUMBER_UNDER_MINIMUM, NUMBER_OVER_MAXIMUM})
     @DisplayName("LottoNumber가 가능한 숫자가 아니면 예외 발생")
     void createLottoNumberWithWrongNumberThrowsException(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.publishLottoNumber(number))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

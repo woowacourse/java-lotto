@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -14,8 +15,15 @@ public class LottoTickets {
 
     private List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
+    private LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
+    }
+
+    public static LottoTickets publishLottoTickets(List<Set<Integer>> lottoTicketsNumbers) {
+        List<LottoTicket> lottoTickets = lottoTicketsNumbers.stream()
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+        return new LottoTickets(lottoTickets);
     }
 
     public static LottoTickets createFrom(LottoTickets manual, LottoTickets auto) {
