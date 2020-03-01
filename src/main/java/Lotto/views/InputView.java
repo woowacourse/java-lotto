@@ -31,10 +31,8 @@ public class InputView {
         System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
 
         List<String> manualLottoInput = new ArrayList<>();
-        int roundCount = manualLottoAmount.getLottoAmount();
-        while (roundCount > ZERO) {
+        for(int i = ZERO; i < manualLottoAmount.getLottoAmount(); i++) {
             manualLottoInput.add(scanner.nextLine());
-            roundCount--;
         }
         return manualLottoInput;
     }
