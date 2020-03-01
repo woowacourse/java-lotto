@@ -40,4 +40,15 @@ public class CustomerTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("구입 가능한 수보다 큰 수를 입력하였습니다.");
 	}
+
+	@DisplayName("수동 로또 번호가 한번만 set 되는지 확인")
+	@Test
+	void setManualLottoNumbers() {
+		Customer customer = new Customer(4000, 1);
+		customer.setManualLottoNumbers("1,2,3,4,5,6");
+		customer.setManualLottoNumbers("11,12,13,14,15,16");
+
+		assertThat(customer.getManualLottoNumbers())
+				.isEqualTo(new String[]{"1,2,3,4,5,6"});
+	}
 }
