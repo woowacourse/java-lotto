@@ -5,7 +5,7 @@ import lotto.utils.ValidationUtils;
 public class Money {
     private static final int LOTTO_UNIT = 1000;
 
-    private int money;
+    private Long money;
 
 
     public Money(String money) {
@@ -13,7 +13,7 @@ public class Money {
         ValidationUtils.validatePositiveNumber(money);
         ValidationUtils.validateLottoUnit(money);
 
-        this.money = Integer.parseInt(money);
+        this.money = Long.parseLong(money);
     }
 
     public String changeMoney() {
@@ -22,5 +22,9 @@ public class Money {
 
     public String generateLottoTicketCount() {
         return String.valueOf(money / LOTTO_UNIT);
+    }
+
+    public Long getMoney() {
+        return money;
     }
 }

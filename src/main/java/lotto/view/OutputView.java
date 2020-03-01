@@ -64,7 +64,7 @@ public class OutputView {
         for(Rank r : rank){
             System.out.printf("%d개 일치 ",r.getWinningCount());
             printHitBonusBall(r);
-            System.out.printf("(%d원) - %d개\n",r.getWinningMoney(),eachRankCount.get(r));
+            System.out.printf("(%d원) - %d개\n",(long)r.getWinningMoney(),eachRankCount.get(r));
         }
     }
 
@@ -72,5 +72,9 @@ public class OutputView {
         if (r == Rank.SECOND){
             System.out.print("보너스 볼 일치");
         }
+    }
+
+    public static void printEarningRate(double earningRate){
+        System.out.printf("총 수익울은 %.1f%% 입니다.", earningRate);
     }
 }

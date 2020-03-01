@@ -14,7 +14,7 @@ public enum Rank {
     FIRST(2_000_000_000,6,false),
     NO_RANK(0,0,false);
 
-    private long winningMoney;
+    private double winningMoney;
     private int winningCount;
     private boolean hitBonusBall;
 
@@ -31,10 +31,6 @@ public enum Rank {
                 .orElse(Rank.NO_RANK);
     }
 
-    private static boolean isHitBonusBall(boolean hitBonusBall, Rank rank) {
-        return rank.hitBonusBall == hitBonusBall;
-    }
-
     public static Map<Rank, Long> calculateEachRankCount(WinningTicket winningTicket) {
         Map<Rank, Long> eachRankCount = new HashMap<>();
         List<Rank> lottoTicketRank = generateTicketRank(winningTicket);
@@ -48,19 +44,23 @@ public enum Rank {
         return eachRankCount;
     }
 
+    public double getWinningMoney() {
+        return this.winningMoney;
+    }
+
+    public int getWinningCount() {
+        return this.winningCount;
+    }
+
+    private static boolean isHitBonusBall(boolean hitBonusBall, Rank rank) {
+        return rank.hitBonusBall == hitBonusBall;
+    }
+
     private static List<Rank> generateTicketRank(WinningTicket winningTicket){
         return LottoTickets.getLottoTickets()
                 .stream()
                 .map(lottoTicket-> determineRank(winningTicket.hitLottoBall(lottoTicket)
                                 ,winningTicket.hitBonusBall(lottoTicket)))
                 .collect(Collectors.toList());
-    }
-
-    public long getWinningMoney() {
-        return this.winningMoney;
-    }
-
-    public int getWinningCount() {
-        return this.winningCount;
     }
 }

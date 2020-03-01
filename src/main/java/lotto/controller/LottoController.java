@@ -7,6 +7,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
     public void play() {
@@ -24,7 +25,11 @@ public class LottoController {
 
         WinningTicket winningTicket = getWinningTicket();
 
-        OutputView.printEachRankCount(Rank.calculateEachRankCount(winningTicket));
+        Map<Rank,Long> eachRankCount = Rank.calculateEachRankCount(winningTicket);
+        OutputView.printEachRankCount(eachRankCount);
+
+        EarningRate earningRate = new EarningRate();
+        OutputView.printEarningRate(earningRate.calculateEarningRate(eachRankCount,money));
     }
 
     private WinningTicket getWinningTicket() {
