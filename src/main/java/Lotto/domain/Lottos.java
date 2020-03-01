@@ -20,7 +20,7 @@ public class Lottos {
 
     private Rank calculateSingleRank(Lotto lotto, WinningNumber winningNumber) {
         int hitCount = winningNumber.countHit(lotto);
-        boolean bonusNumberExist = winningNumber.checkBonusNumber(lotto);
+        boolean bonusNumberExist = winningNumber.hasBonusNumber(lotto);
         return Rank.getRank(hitCount, bonusNumberExist);
     }
 

@@ -34,10 +34,6 @@ public class Lotto {
         }
     }
 
-    private boolean wrongAmountOfNumbers(Set<LottoNumber> lottoNumberWithoutDuplication) {
-        return lottoNumberWithoutDuplication.size() != LOTTO_NUMBER_COUNT;
-    }
-
     boolean hasBonusNumber(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }

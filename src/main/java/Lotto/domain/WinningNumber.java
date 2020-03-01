@@ -8,13 +8,13 @@ public class WinningNumber {
 
     public WinningNumber(Lotto winningLotto, LottoNumber bonusNumber) {
         this.winningLotto = winningLotto;
-        if (bonusNumberDuplicatedWithWinningNumber(winningLotto, bonusNumber)) {
+        if (isBonusNumberDuplicatedWithWinningNumber(winningLotto, bonusNumber)) {
             throw new IllegalArgumentException(BONUS_CANNOT_BE_DUPLICATE_WITH_WINNING_NUMBER);
         }
         this.bonusNumber = bonusNumber;
     }
 
-    private boolean bonusNumberDuplicatedWithWinningNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+    private boolean isBonusNumberDuplicatedWithWinningNumber(Lotto winningLotto, LottoNumber bonusNumber) {
         return winningLotto.hasBonusNumber(bonusNumber);
     }
 
@@ -22,7 +22,7 @@ public class WinningNumber {
         return winningLotto.countMatchingAmountWith(lotto);
     }
 
-    boolean checkBonusNumber(Lotto lotto) {
+    boolean hasBonusNumber(Lotto lotto) {
         return lotto.contains(bonusNumber);
     }
 }
