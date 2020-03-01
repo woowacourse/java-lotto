@@ -1,16 +1,16 @@
 package lotto.controller;
 
-import lotto.model.LottoResultCount;
+import lotto.model.LottoResult;
 import lotto.model.Ticket;
 import lotto.model.Tickets;
 import lotto.model.WinLottoNumbers;
 
 public class LottoManager {
-    public static LottoResultCount lotto(Tickets tickets, WinLottoNumbers winLottoNumbers) {
-        LottoResultCount lottoResultCount = new LottoResultCount();
+    public static LottoResult lotto(Tickets tickets, WinLottoNumbers winLottoNumbers) {
+        LottoResult lottoResult = new LottoResult();
         for (Ticket ticket : tickets.getTickets()) {
-            lottoResultCount.resultCount(ticket, winLottoNumbers);
+            lottoResult.resultCount(ticket, winLottoNumbers);
         }
-        return lottoResultCount;
+        return lottoResult;
     }
 }

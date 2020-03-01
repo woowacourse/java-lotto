@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoResultCount {
+public class LottoResult {
     private static final int INITIAL_VALUE = 0;
     private final Map<RankType, Integer> lottoResultCount = new HashMap<>();
 

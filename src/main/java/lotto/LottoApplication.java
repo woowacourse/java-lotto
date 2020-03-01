@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.controller.LottoManager;
-import lotto.model.LottoResultCount;
+import lotto.model.LottoResult;
 import lotto.model.ManualCount;
 import lotto.model.ManualTicketsGenerator;
 import lotto.model.Money;
@@ -26,10 +26,10 @@ public class LottoApplication {
             money.getTicketCount() - manualCount.getManualCount()));
         WinLottoNumbers winLottoNumbers = getWinNumbersAndBonusBallNumber();
 
-        LottoResultCount lottoResultCount = LottoManager.lotto(tickets, winLottoNumbers);
+        LottoResult lottoResult = LottoManager.lotto(tickets, winLottoNumbers);
 
-        printCorrectResults(lottoResultCount);
-        OutputView.printYield(money.getYield(lottoResultCount));
+        printCorrectResults(lottoResult);
+        OutputView.printYield(money.getYield(lottoResult));
     }
 
     private static Money getMoney() {
@@ -70,12 +70,12 @@ public class LottoApplication {
         return new WinLottoNumbers(winNumber, bonusBallNumber);
     }
 
-    private static void printCorrectResults(LottoResultCount lottoResultCount) {
+    private static void printCorrectResults(LottoResult lottoResult) {
         OutputView.printResult();
         Arrays.stream(RankType.values())
             .filter(rankType -> rankType != RankType.NONE)
             .forEach(rankType -> OutputView
                 .printCorrectResult(rankType.getMatchCount(), rankType.getPrize(),
-                    lottoResultCount.getResultCount(rankType)));
+                    lottoResult.getResultCount(rankType)));
     }
 }

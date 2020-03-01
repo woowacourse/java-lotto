@@ -32,9 +32,10 @@ public class MoneyTest {
     @DisplayName("수익률 계산")
     void getYield() {
         Money money = new Money("10000");
-        Tickets tickets = new Tickets(Arrays.asList(new Ticket("1, 2, 3, 4, 5, 6")));
+        Ticket ticket = new Ticket("1, 2, 3, 4, 5, 6");
         WinLottoNumbers winLottoNumbers = new WinLottoNumbers("1, 2, 3, 8, 9, 10", "7");
-        LottoResultCount lottoResultCount = new LottoResultCount(tickets, winLottoNumbers);
-        assertThat(money.getYield(lottoResultCount)).isEqualTo(50);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.resultCount(ticket, winLottoNumbers);
+        assertThat(money.getYield(lottoResult)).isEqualTo(50);
     }
 }

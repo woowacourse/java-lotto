@@ -39,13 +39,13 @@ public class Money {
         return money / PAYMENT_UNIT;
     }
 
-    private double getRevenue(LottoResultCount lottoResultCount) {
+    private double getRevenue(LottoResult lottoResult) {
         return Arrays.stream(RankType.values())
-            .mapToDouble(rankType -> rankType.getPrize() * lottoResultCount.getResultCount(rankType))
+            .mapToDouble(rankType -> rankType.getPrize() * lottoResult.getResultCount(rankType))
             .sum();
     }
 
-    public int getYield(LottoResultCount lottoResultCount) {
-        return (int) (getRevenue(lottoResultCount) / money * PERCENT);
+    public int getYield(LottoResult lottoResult) {
+        return (int) (getRevenue(lottoResult) / money * PERCENT);
     }
 }
