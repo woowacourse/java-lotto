@@ -1,4 +1,4 @@
-package lotto.domain.count;
+package lotto.domain.purchase_info;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

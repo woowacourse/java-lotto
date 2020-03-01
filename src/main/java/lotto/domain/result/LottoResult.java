@@ -1,6 +1,6 @@
 package lotto.domain.result;
 
-import lotto.domain.money.LottoMoney;
+import lotto.domain.purchase_info.LottoMoney;
 
 import java.util.Map;
 
@@ -24,13 +24,9 @@ public class LottoResult {
         return profitRatio * HUNDRED_PERCENTAGE;
     }
 
-    private double getTotalPrize() {
-        long totalPrize = 0;
-
-        for (Rank rank : rankMap.keySet()) {
-            totalPrize += rank.getWinningMoney() * rankMap.get(rank);
-        }
-
-        return totalPrize;
+    private long getTotalPrize() {
+        return rankMap.keySet().stream()
+                .mapToLong(rank -> rank.multiply(rankMap.get(rank)))
+                .sum();
     }
 }

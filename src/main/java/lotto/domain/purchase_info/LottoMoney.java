@@ -1,4 +1,4 @@
-package lotto.domain.money;
+package lotto.domain.purchase_info;
 
 public class LottoMoney {
 

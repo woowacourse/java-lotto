@@ -16,19 +16,15 @@ class LottoTicketsTest {
     @Test
     @DisplayName("LottoTicket들로부터 LottoTickets 생성")
     void createLottoTickets() {
-        List<LottoTicket> manualLottoTicketList = new ArrayList<>();
-        Set<Integer> firstLotto = IntStream.rangeClosed(2, 7).boxed().collect(Collectors.toSet());
-        manualLottoTicketList.add(LottoFactory.publishLottoTicketFrom(firstLotto));
-        LottoTickets manualLottoTickets = new LottoTickets(manualLottoTicketList);
+        List<LottoTicket> lottoTicketList = new ArrayList<>();
+        Set<LottoNumber> firstLotto = IntStream.rangeClosed(2, 7)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
+        lottoTicketList.add(LottoTicket.from(firstLotto));
 
-        List<LottoTicket> autoLottoTicketsList = new ArrayList<>();
-        autoLottoTicketsList.add(LottoFactory.publishLottoTicketOfRandom());
-        LottoTickets autoLottoTickets = new LottoTickets(autoLottoTicketsList);
+        LottoTickets lottoTickets = LottoTickets.from(lottoTicketList);
 
-        LottoTickets lottoTickets = LottoTickets.createFrom(manualLottoTickets, autoLottoTickets);
-
-        int expectedSize = manualLottoTickets.getLottoTickets().size() + autoLottoTickets.getLottoTickets().size();
-        assertThat(lottoTickets.getLottoTickets()).size().isEqualTo(expectedSize);
+        assertThat(lottoTickets.getLottoTickets()).size().isEqualTo(1);
 
     }
 }

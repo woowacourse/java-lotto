@@ -1,9 +1,9 @@
 package lotto;
 
-import lotto.domain.count.Count;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinningLotto;
-import lotto.domain.money.LottoMoney;
+import lotto.domain.purchase_info.Count;
+import lotto.domain.purchase_info.LottoMoney;
 import lotto.domain.result.LottoResult;
 import lotto.service.LottoService;
 import lotto.view.input.InputView;
@@ -48,7 +48,6 @@ public class Application {
         String inputNumbers = InputView.inputWinningLottoNumber();
         String bonusNumber = InputView.inputBonusNumber();
         return lottoService.createWinningLotto(inputNumbers, bonusNumber);
-
     }
 
     private static LottoResult createLottoResult(LottoTickets lottoTickets, WinningLotto winningLotto) {

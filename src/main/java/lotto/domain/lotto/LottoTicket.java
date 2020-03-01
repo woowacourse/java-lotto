@@ -15,7 +15,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    static LottoTicket from(Set<LottoNumber> lottoNumbers) {
+    public static LottoTicket from(Set<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         return new LottoTicket(lottoNumbers);
     }

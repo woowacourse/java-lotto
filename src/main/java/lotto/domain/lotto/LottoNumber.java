@@ -2,14 +2,13 @@ package lotto.domain.lotto;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
-class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MATCHER;
-    static final int MINIMUM_LOTTO_NUMBER = 1;
-    static final int MAXIMUM_LOTTO_NUMBER = 45;
+    private static final int MINIMUM_LOTTO_NUMBER = 1;
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
 
     private final int number;
 
@@ -26,24 +25,9 @@ class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    static LottoNumber from(int number) {
+    public static LottoNumber from(int number) {
         Optional<LottoNumber> lottoNumber = Optional.ofNullable(LOTTO_NUMBER_MATCHER.get(number));
         return lottoNumber.orElseThrow(() -> new IllegalArgumentException("로또는 1부터 45까지의 숫자만 가능합니다."));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        LottoNumber that = (LottoNumber) o;
-        return number == that.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
     }
 
     @Override

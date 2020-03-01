@@ -1,4 +1,4 @@
-package lotto.domain.count;
+package lotto.domain.purchase_info;
 
 public class Count {
 

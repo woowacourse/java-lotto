@@ -1,38 +1,28 @@
 package lotto.domain.lotto;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import lotto.domain.lotto.generator.AutoLottoGenerator;
+import lotto.domain.lotto.generator.LottoGenerator;
+import lotto.domain.lotto.generator.ManualLottoGenerator;
+import lotto.domain.purchase_info.PurchaseInfo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class LottoFactory {
 
-    private static final int LOTTO_SIZE = 6;
+    private static final List<LottoGenerator> lottoGenerators =
+            Arrays.asList(new AutoLottoGenerator(), new ManualLottoGenerator());
 
-    public static LottoTicket publishLottoTicketOfRandom() {
-        Set<LottoNumber> randomLottoNumbers =
-                IntStream.rangeClosed(LottoNumber.MINIMUM_LOTTO_NUMBER, LottoNumber.MAXIMUM_LOTTO_NUMBER)
-                        .distinct()
-                        .limit(LOTTO_SIZE)
-                        .mapToObj(LottoNumber::from)
-                        .collect(Collectors.toSet());
-        return LottoTicket.from(randomLottoNumbers);
+    private LottoFactory() {
     }
 
-    public static LottoTicket publishLottoTicketFrom(Set<Integer> numbers) {
-        Set<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoFactory::publishLottoNumberFrom)
-                .collect(Collectors.toSet());
-        return LottoTicket.from(lottoNumbers);
-    }
-
-    public static LottoNumber publishLottoNumberFrom(int number) {
-        return LottoNumber.from(number);
-    }
-
-    public static WinningLotto publishWinningLotto(Set<Integer> lottoNumbers, Integer bonusNumber) {
-        LottoTicket lottoTicket = publishLottoTicketFrom(lottoNumbers);
-        LottoNumber lottoNumber = publishLottoNumberFrom(bonusNumber);
-        return new WinningLotto(lottoTicket, lottoNumber);
+    public static LottoTickets publishLottoTickets(PurchaseInfo purchaseInfo) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (LottoGenerator lottoGenerator : lottoGenerators) {
+            lottoTickets.addAll(lottoGenerator.generateLottoTickets(purchaseInfo));
+        }
+        return LottoTickets.from(lottoTickets);
     }
 }
 

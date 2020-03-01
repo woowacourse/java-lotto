@@ -1,16 +1,17 @@
 package lotto.service;
 
-import lotto.domain.count.Count;
 import lotto.domain.lotto.LottoFactory;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinningLotto;
-import lotto.domain.money.LottoMoney;
+import lotto.domain.purchase_info.Count;
+import lotto.domain.purchase_info.LottoMoney;
+import lotto.domain.purchase_info.PurchaseInfo;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.Rank;
 import lotto.parser.GameParser;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
@@ -31,32 +32,27 @@ public class LottoService {
     }
 
     public LottoTickets createLottoTickets(List<String> lottoTicketInputs, Count count) {
-        LottoTickets manualLottoTickets = createManualLottoTickets(lottoTicketInputs);
-        LottoTickets autoLottoTickets = createAutoLottoTickets(count);
-        return LottoTickets.createFrom(manualLottoTickets, autoLottoTickets);
-    }
-
-    private LottoTickets createManualLottoTickets(List<String> lottoTicketInputs) {
-        List<LottoTicket> lottoTickets = lottoTicketInputs.stream()
-                .map(GameParser::parseInputToNumbers)
-                .map(LottoFactory::publishLottoTicketFrom)
-                .collect(Collectors.toList());
-
-        return new LottoTickets(lottoTickets);
-    }
-
-    private LottoTickets createAutoLottoTickets(Count count) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < count.getAutoCounts(); i++) {
-            lottoTickets.add(LottoFactory.publishLottoTicketOfRandom());
-        }
-        return new LottoTickets(lottoTickets);
+        PurchaseInfo purchaseInfo = new PurchaseInfo(lottoTicketInputs, count.getAutoCounts());
+        return LottoFactory.publishLottoTickets(purchaseInfo);
     }
 
     public WinningLotto createWinningLotto(String inputNumbers, String inputBonusNumber) {
-        Set<Integer> winningLottoNumbers = GameParser.parseInputToNumbers(inputNumbers);
-        Integer bonusNumber = GameParser.parseInputToInt(inputBonusNumber);
-        return LottoFactory.publishWinningLotto(winningLottoNumbers, bonusNumber);
+        LottoTicket winningLottoNumbers = createLottoTicket(inputNumbers);
+        LottoNumber bonusNumber = createLottoNumber(inputBonusNumber);
+        return WinningLotto.from(winningLottoNumbers, bonusNumber);
+    }
+
+    private LottoTicket createLottoTicket(String inputNumbers) {
+        Set<Integer> winningNumbers = GameParser.parseInputToNumbers(inputNumbers);
+        Set<LottoNumber> winningLottoNumbers = winningNumbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toSet());
+        return LottoTicket.from(winningLottoNumbers);
+    }
+
+    private LottoNumber createLottoNumber(String inputBonusNumber) {
+        int number = GameParser.parseInputToInt(inputBonusNumber);
+        return LottoNumber.from(number);
     }
 
     public LottoResult createLottoResult(LottoTickets lottoTickets, WinningLotto winningLotto) {

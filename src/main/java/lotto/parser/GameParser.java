@@ -8,6 +8,9 @@ public class GameParser {
 
     private static final String DELIMITER = ",";
 
+    private GameParser() {
+    }
+
     public static Set<Integer> parseInputToNumbers(String winningLottoInput) {
         return Arrays.stream(winningLottoInput.split(DELIMITER))
                 .map(String::trim)
