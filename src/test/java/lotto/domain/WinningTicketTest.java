@@ -30,4 +30,15 @@ class WinningTicketTest {
 
         Assertions.assertThat(winningTicket.hitBonusBall(lottoTicket)).isTrue();
     }
+
+    @Test
+    @DisplayName("보너스볼을 판별하는지 테스")
+    void false_hitBonusBall() {
+        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
+        LottoBall lottoBall = new LottoBall("7");
+
+        WinningTicket winningTicket = new WinningTicket(lottoTicket.getLottoTicket(),lottoBall);
+
+        Assertions.assertThat(winningTicket.hitBonusBall(lottoTicket)).isFalse();
+    }
 }
