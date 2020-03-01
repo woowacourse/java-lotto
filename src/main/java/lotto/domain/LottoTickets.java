@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.view.InputView;
-
 public class LottoTickets {
     private static final String DELIMITER = "\n";
     private List<LottoTicket> lottoTickets;

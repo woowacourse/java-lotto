@@ -1,9 +1,6 @@
 package lotto.view;
 
-import java.util.Map;
-
 import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.Rank;
