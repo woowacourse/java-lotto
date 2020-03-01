@@ -4,6 +4,7 @@
 ## 기능 요구사항
 
 - 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+- 로또를 원하는 만큼 수동 구매하고, 나머지는 자동 구매한다.
 - 로또 1장의 가격은 1000원이다.
 
 
@@ -33,6 +34,8 @@
         - checkNegativeNumber 음수인지 검증
         - checkUnderLottoPrice 로또 한 장 가격보다 낮은 금액인지 검증
 - **LottoFactory**
+    - 수동으로 구입한 로또 생성
+    - 자동으로 구입한 로또 생성
     - [예외 처리] 난수가 1~45까지 수 인지 검증
 - **RandomNumberGenerator**
     - 1부터 45 사이의 난수 생성
@@ -40,10 +43,16 @@
     - int number
     - [예외 처리] checkLottoNumber 1부터 45까지 숫자인지 검증
     - [예외 처리] checkNotNumber  입력된 번호 중 숫자가 아닌 문자가 들어왔을 경우 검증
+    - [예외 처리] checkNegativeNumber 입력된 번호가 양수인지 검증
 - **Lotto**
     - List<LottoNumber> lotto
     - [예외 처리] checkLottoSizeSix 6개의 숫자가 만들어졌는 지 검증
-- **LottoDummy**
+- **LottoCount**
+    - autoLottoCount
+    - manualLottoCount
+    - [예외처리] manualLottoCount가 숫자인지 검증
+    - [예외처리] manualLottoCount가 전체 로또 개수 이하의 숫자인지 검증
+- **LottoTickets**
     - List<Lotto> lottoTickets
     - 모든 로또 당첨 결과 카운트
 - **LottoRank**
@@ -79,12 +88,17 @@
 - InputView
     - inputPurchaseAmount
         - String 으로 반환
+    - inputManualLottoCount
+        - String 으로 반환
+    - inputManualLottoNumbers
+        - List<List<String>> 으로 반환
     - inputWinningNumbers
         - ","로 split 후 String[] 반환
     - inputBonusNumber
         - String 으로 반환
 - OutputView
     - 구매 금액 입력 메세지 출력
+    - 구매한 수동 로또 개수 출력
     - 로또 구매 확인 메세지 출력
     - 구매한 모든 로또 번호 출력
     - 당청 번호 입력 메세지 출력

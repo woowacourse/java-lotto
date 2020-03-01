@@ -10,11 +10,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTicketsTest {
 
     @Test
-    void 구매금액으로_로또더미의_사이즈_확인() {
+    void 구매금액으로_로또_Tickets의_사이즈_확인() {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
         PurchaseAmount amount = new PurchaseAmount("10800");
-        int lottoCount = amount.getCount();
-        LottoTickets lottoTickets = new LottoTickets(LottoFactory.createLottoTickets(lottoCount, randomNumberGenerator));
+        int totalLottoCount = amount.getCount();
+        LottoCount lottoCount = new LottoCount(totalLottoCount, 1);
+        List<List<String>> manualLottoNumbers = new ArrayList<>();
+        List<String> manualLottoNumber = Arrays.asList("1","2","3","4","5","6");
+        manualLottoNumbers.add(manualLottoNumber);
+
+        LottoTickets lottoTickets = LottoFactory.createLottoTickets(lottoCount, randomNumberGenerator, manualLottoNumbers);
         assertThat(lottoTickets.getTicketsSize()).isEqualTo(10);
     }
 
@@ -41,13 +46,13 @@ public class LottoTicketsTest {
         List<Lotto> tempLottoTickets = new ArrayList<>();
         tempLottoTickets.add(lotto_1);
         tempLottoTickets.add(lotto_2);
+        List<Lotto> manualLottoTickets = new ArrayList<>();
 
         String[] winningNumber = {"1","2","3","4","5","6"};
         WinningNumber winningNumbers = new WinningNumber(winningNumber, "7");
 
-        LottoTickets lottoTickets = new LottoTickets(tempLottoTickets);
+        LottoTickets lottoTickets = new LottoTickets(tempLottoTickets, manualLottoTickets);
         LottoResult lottoResult = lottoTickets.countWinningLotto(winningNumbers);
-
 
         Map<LottoRank, Integer> testMap = new HashMap<>();
         testMap.put(LottoRank.FIRST, 0);
