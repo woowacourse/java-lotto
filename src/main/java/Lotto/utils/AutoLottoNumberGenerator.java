@@ -17,7 +17,7 @@ public class AutoLottoNumberGenerator implements NumberGenerator {
                 .ints(MIN_LOTTO_NUMBER_START, MAX_LOTTO_NUMBER_END_EXCLUDED)
                 .distinct()
                 .limit(LOTTO_NUMBER_SIZE)
-                .mapToObj((t) -> new LottoNumber(t))
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

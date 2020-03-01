@@ -14,19 +14,19 @@ public class NumberParser {
     }
 
     public static int parseIntoOneNumber(String input) {
-        return validate(input);
+        return validateInputIsNumber(input);
     }
 
     public static List<LottoNumber> parseIntoLottoNumbers(String input) {
         return Stream.of(input.split(DELIMITER))
                 .map(String::trim)
                 .filter(t -> !t.isEmpty())
-                .map(NumberParser::validate)
+                .map(NumberParser::validateInputIsNumber)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    private static int validate(String parsed) {
+    private static int validateInputIsNumber(String parsed) {
         try {
             return Integer.parseInt(parsed);
         } catch (IllegalArgumentException e) {

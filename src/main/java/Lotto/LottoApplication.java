@@ -8,15 +8,15 @@ import Lotto.views.OutputView;
 public class LottoApplication {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = new PurchaseAmount(InputView.inputAsPurchaseAmount());
-        LottoAmount totalLottoAmount = new LottoAmount(purchaseAmount.calculateLottoAmount());
+        LottoCount totalLottoCount = new LottoCount(purchaseAmount.calculateLottoAmount());
 
-        LottoAmount manualLottoAmount = new LottoAmount(InputView.inputAsManualLottoAmount());
-        Lottos manualLottos = LottoFactory.generateManualLottos(InputView.inputAsManualLotto(manualLottoAmount));
+        LottoCount manualLottoCount = new LottoCount(InputView.inputAsManualLottoCount());
+        Lottos manualLottos = LottoFactory.generateManualLottos(InputView.inputAsManualLotto(manualLottoCount));
 
-        LottoAmount autoLottoAmount = new LottoAmount(totalLottoAmount.getLottoAmount() - manualLottoAmount.getLottoAmount());
-        Lottos autoLottos = LottoFactory.generateAutoLottos(autoLottoAmount);
+        LottoCount autoLottoCount = new LottoCount(totalLottoCount.getLottoCount() - manualLottoCount.getLottoCount());
+        Lottos autoLottos = LottoFactory.generateAutoLottos(autoLottoCount);
 
-        showPurchasedLottos(manualLottoAmount, manualLottos, autoLottoAmount, autoLottos);
+        showPurchasedLottos(manualLottoCount, manualLottos, autoLottoCount, autoLottos);
 
         Lottos allLottos = LottoFactory.concatLottos(autoLottos, manualLottos);
 
@@ -33,8 +33,8 @@ public class LottoApplication {
         OutputView.showEarningRate(ranksOfAllLottos, purchaseAmount);
     }
 
-    private static void showPurchasedLottos(LottoAmount manualLottoAmount, Lottos manualLottos, LottoAmount autoLottoAmount, Lottos autoLottos) {
-        OutputView.showPurchasedLottoCount(manualLottoAmount, autoLottoAmount);
+    private static void showPurchasedLottos(LottoCount manualLottoCount, Lottos manualLottos, LottoCount autoLottoCount, Lottos autoLottos) {
+        OutputView.showPurchasedLottoCount(manualLottoCount, autoLottoCount);
         OutputView.showAllLottos(manualLottos, autoLottos);
     }
 }

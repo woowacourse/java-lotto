@@ -26,8 +26,8 @@ public class LottoFactory {
         return new Lotto(manualLottoNumberGenerator.generate(manualInput));
     }
 
-    public static Lottos generateAutoLottos(LottoAmount amount) {
-        return new Lottos(IntStream.range(0, amount.getLottoAmount())
+    public static Lottos generateAutoLottos(LottoCount count) {
+        return new Lottos(IntStream.range(0, count.getLottoCount())
                 .mapToObj(t -> generateAutoSingleLotto())
                 .collect(Collectors.toList()));
     }

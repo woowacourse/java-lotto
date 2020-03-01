@@ -6,12 +6,11 @@ public class Reward {
     private int reward;
 
     public Reward(int reward) {
-        validate(reward);
+        validateRewardBiggerThanZero(reward);
         this.reward = reward;
-
     }
 
-    private void validate(int reward) {
+    private void validateRewardBiggerThanZero(int reward) {
         if (reward <= MIN) {
             throw new IllegalArgumentException(REWARD_BIGGER_THAN_ZERO_MESSAGE);
         }

@@ -13,8 +13,8 @@ public class OutputView {
     private static final String TOTAL_PROFIT_MESSAGE = "상금 총액은 %d원입니다.\n";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %.3f %%입니다.\n";
 
-    public static void showPurchasedLottoCount(LottoAmount manualLottoAmount, LottoAmount autoLottoAmount) {
-        System.out.printf(PURCHASED_LOTTO_MESSAGE, manualLottoAmount.getLottoAmount(), autoLottoAmount.getLottoAmount());
+    public static void showPurchasedLottoCount(LottoCount manualLottoCount, LottoCount autoLottoCount) {
+        System.out.printf(PURCHASED_LOTTO_MESSAGE, manualLottoCount.getLottoCount(), autoLottoCount.getLottoCount());
     }
 
     public static void showAllLottos(Lottos manualLottos, Lottos autoLottos) {

@@ -9,10 +9,10 @@ public class PurchaseAmount {
     private int purchaseAmount;
 
     public PurchaseAmount(String purchaseAmount) {
-        this.purchaseAmount = validate(purchaseAmount);
+        this.purchaseAmount = validatePurchaseAmountRange(purchaseAmount);
     }
 
-    private int validate(String purchaseAmount) {
+    private int validatePurchaseAmountRange(String purchaseAmount) {
         int purchaseNumber = NumberParser.parseIntoOneNumber(purchaseAmount);
         if (isLessThanMinPrice(purchaseNumber)) {
             throw new IllegalArgumentException(PURCHASE_AMOUNT_BIGGER_THAN_LOTTO_PRICE);
