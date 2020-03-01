@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.lottonumber.LottoNumber;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -18,9 +19,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * 날짜 : 2020/02/19
  */
 public class LottoFactoryTest {
+	LottoFactory lottoFactory;
+
+
+	@BeforeEach
+	void setUp() {
+		lottoFactory = new LottoFactory();
+	}
+
 	@Test
 	void createAutoLotto_올바른_동작_확인() {
-		assertThat(LottoFactory.createAutoLotto())
+		assertThat(lottoFactory.createAutoLotto())
 				.isInstanceOf(Lotto.class);
 	}
 
@@ -35,7 +44,7 @@ public class LottoFactoryTest {
 				LottoNumber.of(6)
 		);
 
-		assertThat(LottoFactory.createManualLotto(manualLottoNumber))
+		assertThat(lottoFactory.createManualLotto(manualLottoNumber))
 				.isInstanceOf(Lotto.class);
 	}
 
@@ -51,7 +60,7 @@ public class LottoFactoryTest {
 		);
 
 		assertThatThrownBy(() -> {
-			LottoFactory.createManualLotto(winningLottoNumbers);
+			lottoFactory.createManualLotto(winningLottoNumbers);
 		}).isInstanceOf(InvalidLottoException.class)
 				.hasMessage("입력 로또번호에 중복이 있습니다.");
 	}

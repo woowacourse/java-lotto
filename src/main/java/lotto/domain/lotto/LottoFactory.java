@@ -14,9 +14,13 @@ import lotto.domain.lottonumber.LottoNumber;
  * 날짜 : 2020/02/19
  */
 public class LottoFactory {
-	private static List<LottoNumber> allLottoNumbers = LottoNumber.getLottoNumberCache();
+	private List<LottoNumber> allLottoNumbers;
 
-	public static Lotto createAutoLotto() {
+	public LottoFactory() {
+		allLottoNumbers = LottoNumber.getLottoNumberCache();
+	}
+
+	public Lotto createAutoLotto() {
 		Collections.shuffle(allLottoNumbers);
 
 		List<LottoNumber> lottoNumbers = allLottoNumbers.stream()
@@ -26,7 +30,7 @@ public class LottoFactory {
 		return new Lotto(lottoNumbers);
 	}
 
-	public static Lotto createManualLotto(final List<LottoNumber> inputLottoNumbers) {
+	public Lotto createManualLotto(final List<LottoNumber> inputLottoNumbers) {
 		return new Lotto(inputLottoNumbers);
 	}
 }

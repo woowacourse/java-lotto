@@ -22,8 +22,9 @@ public class WinningLotto {
 	private LottoNumber bonusLottoNumber;
 
 	public WinningLotto(final String inputLottoNumbers, final String inputBonusLottoNumber) {
+		LottoFactory lottoFactory = new LottoFactory();
 		List<LottoNumber> winningLottoNumbers = StringUtils.splitIntoLottoNumbers(inputLottoNumbers);
-		this.winningLotto = LottoFactory.createManualLotto(winningLottoNumbers);
+		this.winningLotto = lottoFactory.createManualLotto(winningLottoNumbers);
 		LottoNumber bonusLottoNumber = LottoNumber.of(StringUtils.parseToInteger(inputBonusLottoNumber));
 		if (this.winningLotto.isContain(bonusLottoNumber)) {
 			throw new InvalidLottoNumberException("보너스 번호는 당첨번호와 중복될 수 없습니다.");

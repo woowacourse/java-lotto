@@ -29,6 +29,7 @@ public class ResultStatisticTest {
 
 	@BeforeEach
 	void setUp() {
+		LottoFactory lottoFactory = new LottoFactory();
 		WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
 
 		List<LottoNumber> lottoNumbersFistPrize = Arrays.asList(
@@ -57,9 +58,9 @@ public class ResultStatisticTest {
 				LottoNumber.of(9)
 		);
 		List<Lotto> tempLottos = new ArrayList<>();
-		tempLottos.add(LottoFactory.createManualLotto(lottoNumbersFistPrize));
-		tempLottos.add(LottoFactory.createManualLotto(lottoNumbersForthPrize));
-		tempLottos.add(LottoFactory.createManualLotto(lottoNumbersSixthPrize));
+		tempLottos.add(lottoFactory.createManualLotto(lottoNumbersFistPrize));
+		tempLottos.add(lottoFactory.createManualLotto(lottoNumbersForthPrize));
+		tempLottos.add(lottoFactory.createManualLotto(lottoNumbersSixthPrize));
 		resultStatistic = ResultStatistic.calculate(new Lottos(tempLottos), winningLotto);
 	}
 

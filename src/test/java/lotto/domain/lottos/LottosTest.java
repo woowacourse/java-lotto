@@ -26,10 +26,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottosTest {
 	@Test
 	void Lottos_생성자_올바른_동작_확인() {
+		LottoFactory lottoFactory = new LottoFactory();
+
 		List<Lotto> inputLottos = Arrays.asList(
-				LottoFactory.createAutoLotto(),
-				LottoFactory.createAutoLotto(),
-				LottoFactory.createAutoLotto()
+				lottoFactory.createAutoLotto(),
+				lottoFactory.createAutoLotto(),
+				lottoFactory.createAutoLotto()
 		);
 		assertThat(new Lottos(inputLottos)).isInstanceOf(Lottos.class);
 	}

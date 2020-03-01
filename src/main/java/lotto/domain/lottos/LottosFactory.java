@@ -21,20 +21,22 @@ public class LottosFactory {
 	}
 
 	public static Lottos createManualLottos(final List<String> inputManualLottos) {
+		LottoFactory lottoFactory = new LottoFactory();
 		List<Lotto> manualLottos = new ArrayList<>();
 
 		for (String inputManualLotto : inputManualLottos) {
 			List<LottoNumber> manualLotto = StringUtils.splitIntoLottoNumbers(inputManualLotto);
-			manualLottos.add(LottoFactory.createManualLotto(manualLotto));
+			manualLottos.add(lottoFactory.createManualLotto(manualLotto));
 		}
 
 		return new Lottos(manualLottos);
 	}
 
 	public static Lottos createAutoLottos(final int amountOfLottos) {
+		LottoFactory lottoFactory = new LottoFactory();
 		List<Lotto> autoLottos = new ArrayList<>();
 		for (int i = 0; i < amountOfLottos; i++) {
-			autoLottos.add(LottoFactory.createAutoLotto());
+			autoLottos.add(lottoFactory.createAutoLotto());
 		}
 		return new Lottos(autoLottos);
 	}
