@@ -4,29 +4,27 @@ import lotto.exception.InvalidLottoCountException;
 import lotto.validator.Validator;
 
 public class ManualLottoCount {
-	private static final int MIN_COUNT = 1;
+	private static final int MIN_COUNT = 0;
 
 	private int count;
-	private final Money money;
 
-	public ManualLottoCount(String count, Money money) {
+	public ManualLottoCount(String count) {
 		Validator.validateInteger(count);
 		this.count = Integer.parseInt(count);
-		this.money = money;
-		validProperCount(this.count);
+		validOverZero(this.count);
 	}
 
-	private void validProperCount(int lottoCount) {
-		if (isPositiveAndCanBuy(lottoCount) == false) {
+	public void validOverZero(int count) {
+		if (count < MIN_COUNT) {
 			throw new InvalidLottoCountException();
 		}
 	}
 
-	private boolean isPositiveAndCanBuy(int lottoCount) {
-		return lottoCount >= MIN_COUNT && this.money.canBuyLotto(lottoCount);
+	public boolean hasNext() {
+		return count > MIN_COUNT;
 	}
 
-	public boolean hasNext() {
-		return count-- >= MIN_COUNT;
+	public void use() {
+		count--;
 	}
 }
