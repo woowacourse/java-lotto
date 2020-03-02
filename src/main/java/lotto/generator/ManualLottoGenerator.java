@@ -26,7 +26,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     public static Lotto createLotto(List<String> lottoNumbersInput) {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
         for (String lottoNumberInput : lottoNumbersInput) {
-            lottoNumbers.add(new LottoNumber(lottoNumberInput));
+            lottoNumbers.add(LottoNumber.valueOf(lottoNumberInput));
         }
         return new Lotto(lottoNumbers);
     }

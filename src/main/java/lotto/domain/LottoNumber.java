@@ -20,6 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
             lottoNumbers.put(i, new LottoNumber(i));
         }
     }
+
     public LottoNumber(String number) {
         this(validateNumber(number));
     }
@@ -42,11 +43,20 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    private void validateNumberScope(int lottoNumber) {
+    private static void validateNumberScope(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER
                 || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(NOT_IN_SCOPE_NUMBERS_MSG);
         }
+    }
+
+    public static LottoNumber valueOf(String number) {
+        return valueOf(Integer.parseInt(number));
+    }
+
+    public static LottoNumber valueOf(int number) {
+        validateNumberScope((number));
+        return lottoNumbers.get(number);
     }
 
     @Override
