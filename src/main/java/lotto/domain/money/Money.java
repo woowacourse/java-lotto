@@ -34,7 +34,7 @@ public class Money {
 
 	public void checkCanBuy(int ticketCount) {
 		if (ticketCount < POSITIVE_THRESHOLD || ticketCount > totalTicketCount()) {
-			throw new TicketCountIllegalException(money, ticketCount, totalTicketCount());
+			throw new TicketCountIllegalException();
 		}
 	}
 

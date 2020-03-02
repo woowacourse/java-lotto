@@ -1,8 +1,11 @@
 package lotto.domain.money;
 
+import lotto.exceptions.TicketCountIllegalException;
+
 import java.util.Objects;
 
 public class TicketCount {
+	private static final int POSITIVE_THRESHOLD = 0;
 	private final int manualTicketCount;
 	private final int autoTicketCount;
 
@@ -12,7 +15,15 @@ public class TicketCount {
 	}
 
 	public static TicketCount of(int totalTicketCount, int manualTicketCount) {
+		checkCanBuy(totalTicketCount, manualTicketCount);
+
 		return new TicketCount(manualTicketCount, totalTicketCount - manualTicketCount);
+	}
+
+	private static void checkCanBuy(int totalTicketCount, int manualTicketCount) {
+		if (totalTicketCount < manualTicketCount || totalTicketCount < POSITIVE_THRESHOLD || manualTicketCount < POSITIVE_THRESHOLD) {
+			throw new TicketCountIllegalException();
+		}
 	}
 
 	@Override
