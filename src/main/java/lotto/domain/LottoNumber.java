@@ -5,9 +5,9 @@ import java.util.Objects;
 import lotto.exception.InvalidLottoNumberException;
 
 public class LottoNumber {
-    private int value;
     static final int MAX = 45;
     static final int MIN = 1;
+    private int value;
 
     public LottoNumber(int value) {
         validateValue(value);
